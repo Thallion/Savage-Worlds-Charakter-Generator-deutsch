@@ -1,0 +1,832 @@
+# main.kv
+<RootWidget>:
+    orientation: 'vertical'  # Setze die Orientierung auf vertikal
+
+    GenerationPointsBar:  # Füge die GenerationPointsBar oben hinzu
+        size_hint_y: None
+        height: 180
+        charakter: app.controller.charakter  # Binde die charakter-Property
+
+    TabbedPanel:  # Erstelle ein TabbedPanel innerhalb des BoxLayout
+        id: main_tabbed_panel
+        do_default_tab: False
+
+        TabbedPanelItem:
+            text: 'Eigenschaften'
+            EigenschaftenScreen:
+
+        TabbedPanelItem:
+            text: 'Handicaps'
+            HandicapsScreen:
+
+        TabbedPanelItem:
+            text: 'Talente'
+            TalenteScreen:
+
+        TabbedPanelItem:
+            text: 'Mächte'
+            MaechteScreen: 
+
+        TabbedPanelItem:
+            text: 'Ausrüstung'
+            AusruestungWidget:
+                id: ausruestung_widget 
+
+        TabbedPanelItem:
+            text: 'Charakter'
+            CharakterbogenWidget:
+                id: charakterbogen_widget
+
+<EigenschaftenScreen>:
+    EigenschaftenWidget:
+
+<HandicapsScreen>:
+    HandicapsWidget:
+
+<TalenteScreen>:
+    TalenteWidget:
+
+<MaechteScreen>:
+    MaechteWidget:
+
+<AusruestungScreen>:
+    AusruestungWidget:
+
+<CharakterbogenScreen>:
+    CharakterbogenWidget:
+
+<GenerationPointsBar>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: 180  # Angepasst für mehr Labels
+    padding: [10, 10, 10, 10]
+    spacing: 10
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1  # Dunkelgrauer Hintergrund
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        cols: 2
+        size_hint_y: None
+        height: 150  # Höhe angepasst für 10 Zeilen mit 2 Labels
+        spacing: 10
+
+        Label:
+            text: root.attribut_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.faehigkeiten_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.maechte_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.machtpunkte_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.zusaetzliche_talente_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.gesamt_handicap_punkte_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.aufstiege_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.gewicht_text  # Kombiniertes Gewicht-Label
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            text: root.vermoegen_text
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: '16sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Widget:  # Platzhalter für das GridLayout, falls benötigt
+            size_hint_x: 1  # Nimmt den verbleibenden Platz ein
+
+
+<EigenschaftenWidget>:
+    eigenschaften_layout: eigenschaften_layout  # Referenz zur ID unten
+
+    ScrollView:  # ScrollView für großen Inhalt
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            id: eigenschaften_layout  # ID für das Layout
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height  # Höhe passt sich dem Inhalt an
+            padding: [20, 10, 20, 10]  # Padding wie in main.py definiert
+
+            # Überschrift für Attribute
+            Label:
+                text: 'Attribute'
+                size_hint: (1, None)
+                height: 40
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            # Layout für Attribute
+            BoxLayout:
+                id: attribute_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+            # Überschrift für Fertigkeiten
+            Label:
+                text: 'Fertigkeiten'
+                size_hint: (1, None)
+                height: 40
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            # Layout für Fertigkeiten
+            BoxLayout:
+                id: fertigkeiten_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+
+<EigenschaftenItemRow@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint: (1, None)
+    height: 40
+    spacing: 5
+
+    Label:
+        text: root.item_name
+        size_hint: (None, 1)
+        width: 200
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+
+    Label:
+        # Zeigt den Würfelwert und den Modifikator an, falls der Modifikator nicht 0 ist
+        text: 'W' + str(root.item_obj.wuerfel.value) + (f" {'+' if root.item_obj.wuerfel.modifier > 0 else '-'}{abs(root.item_obj.wuerfel.modifier)}" if root.item_obj.wuerfel.modifier != 0 else "")
+        size_hint: (None, 1)
+        width: 100
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    Button:
+        text: '+'
+        size_hint: (None, None)
+        size: (30, 30)
+        on_release: root.steigere_eigenschaft()
+
+    Button:
+        text: '-'
+        size_hint: (None, None)
+        size: (30, 30)
+        on_release: root.senke_eigenschaft()
+
+
+<HandicapsWidget>:
+    orientation: 'vertical'
+
+    ScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            id: handicaps_layout
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [20, 10, 20, 10]
+            spacing: 10
+
+            BoxLayout:
+                size_hint_y: None
+                height: 40
+                spacing: 10
+
+                Button:
+                    text: 'Sortieren'
+                    size_hint: (None, None)
+                    size: (100, 40)
+                    on_release: root.sortiere_handicaps()
+
+                TextInput:
+                    id: search_input
+                    hint_text: 'Suche...'
+                    size_hint_x: 0.4
+                    height: 40
+                    on_text: root.filter_handicaps()
+
+                Spinner:
+                    id: category_spinner
+                    text: 'Alle Kategorien'
+                    values: ['Alle Kategorien'] + root.stufe
+                    size_hint_x: 0.4
+                    height: 40
+                    on_text: root.filter_handicaps()
+
+            Label:
+                text: 'Handicaps'
+                size_hint: (1, None)
+                height: 40
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            BoxLayout:
+                id: handicaps_items_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+<HandicapItemRow>:
+    canvas.before:
+        Color:
+            rgba: 0.25, 0.25, 0.25, 1  # Even lighter gray background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+
+<TalenteWidget>:
+    talente_layout: talente_layout
+    talente_items_layout: talente_items_layout
+
+    orientation: 'vertical'
+
+    ScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True  # Ermöglicht vertikales Scrollen
+
+        BoxLayout:
+            id: talente_layout
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [20, 10, 20, 10]  # Gesamt-Padding des Talente-Layouts
+            spacing: 10
+
+            BoxLayout:
+                size_hint_y: None
+                height: 40
+                spacing: 10
+
+                Button:
+                    text: 'Sortieren'
+                    size_hint: (None, None)
+                    size: (100, 40)
+                    on_release: root.sortiere_talente()
+
+                TextInput:
+                    id: search_input
+                    hint_text: 'Suche...'
+                    size_hint_x: 0.4
+                    height: 40
+                    on_text: root.filter_talente()
+
+                Spinner:
+                    id: category_spinner
+                    text: 'Alle Kategorien'
+                    values: ['Alle Kategorien'] + root.kategorien
+                    size_hint_x: 0.4
+                    height: 40
+                    on_text: root.filter_talente()
+
+            Label:
+                text: 'Talente'
+                size_hint: (1, None)
+                height: 40
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            BoxLayout:
+                id: talente_items_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+                padding: [10, 0, 10, 0]  # Optional: Padding links und rechts
+
+<TalentItemRow>:
+    canvas.before:
+        Color:
+            rgba: 0.25, 0.25, 0.25, 1  # Hellgrauer Hintergrund
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    orientation: 'horizontal'
+    size_hint: (1, None)
+    height: 60  # Erhöht von 40 auf 60, um Platz für Padding zu schaffen
+    spacing: 20
+
+    BoxLayout:
+        orientation: 'horizontal'
+        padding: [30, 10]  # Padding [links/rechts, oben/unten]
+        spacing: 10
+        size_hint: 1, 1
+
+        Label:
+            text: root.talent_name
+            size_hint_x: 0.3
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+            padding_x: 5  # Optional: zusätzlicher horizontaler Abstand innerhalb des Labels
+
+        Label:
+            text: root.talent.kategorie.capitalize() if root.talent and root.talent.kategorie else "Unbekannt"
+            size_hint_x: 0.2
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+            padding_x: 5  # Optional
+
+        Label:
+            text: root.beschreibung
+            size_hint_x: 0.5
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+            padding_x: 5  # Optional
+
+        BoxLayout:
+            size_hint_x: 0.2
+            spacing: 5
+
+            Button:
+                text: '+'
+                size_hint: (None, None)
+                size: (30, 30)
+                on_release: root.waehle_talent()
+
+            Button:
+                text: '-'
+                size_hint: (None, None)
+                size: (30, 30)
+                on_release: root.entferne_talent()
+
+<MaechteWidget>:
+    maechte_layout: maechte_layout
+    maechte_items_layout: maechte_items_layout
+
+    orientation: 'vertical'
+
+    ScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True  # Ermöglicht vertikales Scrollen
+
+        BoxLayout:
+            id: maechte_layout
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [20, 10, 20, 10]  # Gesamt-Padding des Mächte-Layouts
+            spacing: 10
+
+            BoxLayout:
+                size_hint_y: None
+                height: 40
+                spacing: 10
+
+                Button:
+                    text: 'Sortieren nach Name'
+                    size_hint: (None, None)
+                    size: (150, 40)
+                    on_release: root.sortiere_maechte_nach_name()
+
+                Button:
+                    text: 'Sortieren nach Rang'
+                    size_hint: (None, None)
+                    size: (150, 40)
+                    on_release: root.sortiere_maechte_nach_rang()
+
+                TextInput:
+                    id: maechte_search_input
+                    hint_text: 'Suche Mächte...'
+                    size_hint_x: 0.4
+                    height: 40
+                    on_text: root.filter_maechte()
+
+            Label:
+                text: 'Mächte'
+                size_hint: (1, None)
+                height: 40
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            BoxLayout:
+                id: maechte_items_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+<MachtItemRow>:
+    canvas.before:
+        Color:
+            rgba: 0.25, 0.25, 0.25, 1  # Hellgrauer Hintergrund
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # Zeichnen des Rahmens nach dem Hintergrund
+    canvas.after:
+        Color:
+            rgba: (0, 1, 0, 1) if self.macht and self.macht.ausgewaehlt else (0, 0, 0, 0)  # Grün, wenn ausgewählt
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+
+    orientation: 'horizontal'
+    size_hint: (1, None)
+    height: 60  # Angepasst für Padding und Rahmen
+    spacing: 10
+
+    BoxLayout:
+        orientation: 'horizontal'
+        padding: [10, 10]  # Padding [links/rechts, oben/unten]
+        spacing: 10
+        size_hint: 1, 1
+
+        Label:
+            text: root.macht_name
+            size_hint_x: 0.25  # Angepasst, um die Summe auf 1 zu bringen
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.width, None
+            height: self.texture_size[1]
+            padding_x: 5  # Optional: zusätzlicher horizontaler Abstand innerhalb des Labels
+
+        Label:
+            text: root.rang
+            size_hint_x: 0.15  # Angepasst
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.width, None
+            height: self.texture_size[1]
+            padding_x: 5  # Optional
+
+        Label:
+            text: "Punkte: {} / Reichweite: {} / Dauer: {} / Effekt: {} {}".format(root.machtpunkte, root.reichweite, root.dauer, root.effekt, root.anmerkungen)
+            size_hint_x: 0.25  # Angepasst
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.width, None
+            height: self.texture_size[1]
+            padding_x: 5  # Optional
+
+        BoxLayout:
+            size_hint_x: 0.15  # Angepasst
+            spacing: 5
+            height: self.minimum_height
+
+            Button:
+                text: '+'
+                size_hint: (None, None)
+                size: (30, 30)
+                on_release: root.waehle_macht()
+
+            Button:
+                text: '-'
+                size_hint: (None, None)
+                size: (30, 30)
+                on_release: root.entferne_macht()
+
+# views/main.kv
+
+<AusruestungWidget>:
+    ausruestung_items_layout: ausruestung_items_layout
+    search_input: search_input
+    category_spinner: category_spinner  # Verbindet den Spinner mit der Property
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        spacing: 10
+
+        TextInput:
+            id: search_input
+            hint_text: "Suche Ausrüstung..."
+            on_text: root.filter_ausruestung()
+
+        Spinner:
+            id: category_spinner
+            text: "Alle Kategorien"
+            values: ["Alle Kategorien", "Allgemein", "Waffe", "Rüstung", "Schild"]
+            size_hint_x: 0.4
+            on_text: root.filter_ausruestung()
+
+        Button:
+            text: "Sortiere nach Name"
+            on_press: root.sortiere_ausruestung_nach_name()
+
+        Button:
+            text: "Sortiere nach Gewicht"
+            on_press: root.sortiere_ausruestung_nach_gewicht()
+
+        Button:
+            text: "Sortiere nach Kosten"
+            on_press: root.sortiere_ausruestung_nach_kosten()
+
+        Button:
+            text: "Sortiere nach Menge"
+            on_press: root.sortiere_ausruestung_nach_menge()
+
+    ScrollView:
+        GridLayout:
+            id: ausruestung_items_layout
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+
+<AusruestungItemRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 40
+    spacing: 10
+
+    Label:
+        text: root.name
+        size_hint_x: 0.3
+
+    Label:
+        text: root.kategorie
+        size_hint_x: 0.2
+        color: (1, 1, 1, 1)
+
+    Label:
+        text: f"{root.gewicht} kg"
+        size_hint_x: 0.15
+
+    Label:
+        text: f"{root.kosten} G"
+        size_hint_x: 0.15
+
+    Label:
+        text: str(root.menge)
+        size_hint_x: 0.15
+
+    Button:
+        text: "+"
+        size_hint_x: 0.05
+        on_press: root.kaufen_ausruestung()
+
+    Button:
+        text: "-"
+        size_hint_x: 0.05
+        on_press: root.verkaufen_ausruestung()
+
+
+<CharakterbogenWidget>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: 10
+
+            # Name des Charakters
+            LeftAlignedLabel:
+                text: "Name: " + root.controller.charakter.name
+                font_size: '20sp'
+                bold: True
+                size_hint_y: None
+                height: 40
+
+            GridLayout:
+                id: attribut_grid
+                cols: 1  # Einspaltig
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 30
+                spacing: 5
+
+            GridLayout:
+                id: fertigkeit_grid
+                cols: 1  # Einspaltig
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 30
+                spacing: 5
+
+            # Handicaps Abschnitt
+            LeftAlignedLabel:
+                text: "Handicaps:"
+                font_size: '18sp'
+                bold: True
+                size_hint_y: None
+                height: 30
+
+            BoxLayout:
+                id: handicaps_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+            # Talente Abschnitt
+            LeftAlignedLabel:
+                text: "Talente:"
+                font_size: '18sp'
+                bold: True
+                size_hint_y: None
+                height: 30
+
+            BoxLayout:
+                id: talente_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+            # Mächte Abschnitt
+            LeftAlignedLabel:
+                text: "Mächte:"
+                font_size: '18sp'
+                bold: True
+                size_hint_y: None
+                height: 30
+
+            BoxLayout:
+                id: maechte_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+            # Ausrüstung Abschnitt
+            LeftAlignedLabel:
+                text: "Ausrüstung:"
+                font_size: '18sp'
+                bold: True
+                size_hint_y: None
+                height: 30
+
+            BoxLayout:
+                id: ausruestung_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+            # Waffen Abschnitt
+            LeftAlignedLabel:
+                text: "Waffen:"
+                font_size: '18sp'
+                bold: True
+                size_hint_y: None
+                height: 30
+
+            BoxLayout:
+                id: waffen_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+            # Rüstungen Abschnitt
+            LeftAlignedLabel:
+                text: "Rüstungen:"
+                font_size: '18sp'
+                bold: True
+                size_hint_y: None
+                height: 30
+
+            BoxLayout:
+                id: ruestungen_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 5
+
+<WeaponItem@BoxLayout>:
+    weapon: None
+    weapon_text: ''
+    button_text: ''
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 30
+    Label:
+        text: root.weapon_text
+        size_hint_x: 0.8
+    Button:
+        text: root.button_text
+        size_hint_x: 0.2
+        on_press: root.on_button_press()
+
+<ArmorItem@BoxLayout>:
+    armor: None
+    armor_text: ''
+    button_text: ''
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 30
+    Label:
+        text: root.armor_text
+        size_hint_x: 0.8
+    Button:
+        text: root.button_text
+        size_hint_x: 0.2
+        on_press: root.on_button_press()
+
+<EquipmentItem@BoxLayout>:
+    item: None
+    item_text: ''
+    button_text: ''
+    root_widget: None
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 30
+
+    Label:
+        text: root.item_text
+        size_hint_x: 0.8
+
+    Button:
+        text: root.button_text
+        size_hint_x: 0.2
+        on_press: root.on_button_press()
+
+
