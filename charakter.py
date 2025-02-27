@@ -8,7 +8,10 @@ from pathlib import Path
 import json, os, sys, copy
 from kivy.clock import Clock
 from manager.volk_manager import VolkManager
-from functions import fertigkeiten_funktionen
+import functions.ausruestung_funktionen as ausruestung_funktionen
+import functions.charakter_speicher as charakter_speicher
+import functions.abgeleitete_werte as abgeleitete_werte
+import functions.character_advancement as character_advancement
 from models.wuerfel import Wuerfel
 from models.attribut import Attribut
 from models.fertigkeit import Fertigkeit
@@ -144,8 +147,6 @@ class Charakter(EventDispatcher):
         self.volk_manager = VolkManager(self)
         self.volk_manager.bind(on_volk_change=self.on_charakter_change)
 
-        self.fertigkeiten_funktionen = fertigkeiten_funktionen
-
         # Profil-Daten setzen
         self.profil_daten = {
             "Name": char_name,
@@ -188,6 +189,10 @@ class Charakter(EventDispatcher):
 
         # Attribute initialisieren
         self.initialisiere_attribute()
+
+        # Fertigkeiten initialisieren (Daten wurden aus dem Setting geladen)
+        self.initialisiere_fertigkeiten()
+        self.bind(fertigkeiten=self.on_fertigkeiten_changed)
 
         # Überwachung bestimmter Eigenschaften
         self.bind(
@@ -236,7 +241,7 @@ class Charakter(EventDispatcher):
         # Fertigkeiten-Daten laden
         fertigkeiten_daten_loaded = active_setting.get('fertigkeiten_daten', {})
         self.fertigkeiten_daten = {name: set(attribut_list) for name, attribut_list in fertigkeiten_daten_loaded.items()}
-        self.fertigkeiten_funktionen.initialisiere_fertigkeiten(self)
+        self.initialisiere_fertigkeiten()
         Logger.info("Fertigkeiten aktualisiert und geladen.")
 
         # Talente laden
@@ -716,11 +721,196 @@ class Charakter(EventDispatcher):
         else:
             Logger.info("Keine benutzerdefinierten Fertigkeiten zum Laden gefunden.")
 
+    def initialisiere_fertigkeiten(self):
+        """Initialisiert die Fertigkeiten des Charakters."""
+
+        self.initialisiere_attribute()
+
+        grundfertigkeiten = [
+            "Allgemeinwissen",
+            "Athletik",
+            "Heimlichkeit",
+            "Überreden",
+            "Wahrnehmung",
+        ]
+        
+        # Erstellen einer Menge der Fertigkeitenamen aus fertigkeiten_daten
+        fertigkeiten_namen_in_daten = set(self.fertigkeiten_daten.keys())
+        # Erstellen einer Liste der aktuellen Fertigkeitenamen
+        fertigkeiten_namen_aktuell = set(self.fertigkeiten.keys())
+
+        # Aktualisieren oder Erstellen von Fertigkeiten
+        for fertigkeit_name, attribut_set in self.fertigkeiten_daten.items():
+            if isinstance(attribut_set, set) and len(attribut_set) == 1:
+                attribut_name = next(iter(attribut_set))
+            else:
+                Logger.error(f"Fertigkeit '{fertigkeit_name}' hat eine ungültige Attribut-Zuweisung.")
+                continue
+
+            attribut_obj = self.attribute.get(attribut_name)
+            if attribut_obj is None:
+                Logger.error(f"Attribut '{attribut_name}' für Fertigkeit '{fertigkeit_name}' nicht gefunden.")
+                continue
+
+            ist_grundfertigkeit = fertigkeit_name in grundfertigkeiten
+
+            if fertigkeit_name in self.fertigkeiten:
+                # Bestehende Fertigkeit aktualisieren
+                fertigkeit = self.fertigkeiten[fertigkeit_name]
+                fertigkeit.attribut = attribut_obj
+                fertigkeit.grundfertigkeit = ist_grundfertigkeit
+            else:
+                # Neue Fertigkeit erstellen
+                fertigkeit = Fertigkeit(
+                    fertigkeit_name=fertigkeit_name,
+                    attribut=attribut_obj,
+                    grundfertigkeit=ist_grundfertigkeit,
+                )
+                fertigkeit.bind(wert=self.on_fertigkeit_wert_change)
+                fertigkeit.bind(wert=self.on_fertigkeit_modifier_change)
+                self.fertigkeiten[fertigkeit_name] = fertigkeit
+
+        # Entfernen von Fertigkeiten, die nicht mehr in fertigkeiten_daten vorhanden sind
+        fertigkeiten_zu_entfernen = fertigkeiten_namen_aktuell - fertigkeiten_namen_in_daten
+        for fertigkeit_name in fertigkeiten_zu_entfernen:
+            del self.fertigkeiten[fertigkeit_name]
+            Logger.info(f"Fertigkeit '{fertigkeit_name}' wurde entfernt, da sie nicht im geladenen Setting vorhanden ist.")
+
+    def on_fertigkeiten_changed(self, instance, value):
+        pass
+        # Logger.info("Fertigkeiten haben sich geändert, UI wird aktualisiert.")
+        # # Hier lösen wir ein Ereignis aus oder informieren den Controller
+        # self.dispatch('on_charakter_change')
+
     def steigere_fertigkeit(self, fertigkeit_name):
-        self.fertigkeiten_funktionen.senke_fertigkeit(self, fertigkeit_name):
+        fertigkeit = self.fertigkeiten.get(fertigkeit_name)
+        if fertigkeit:
+            zugehoeriges_attribut = fertigkeit.attribut
+            aktueller_total_value = fertigkeit.wuerfel.value + fertigkeit.wuerfel.modifier
+            attribut_total_value = zugehoeriges_attribut.wuerfel.value + zugehoeriges_attribut.wuerfel.modifier
+
+            # Bestimme den neuen Wert und Modifier nach der Steigerung
+            if fertigkeit.wuerfel.value == 4 and fertigkeit.wuerfel.modifier == -2:
+                neuer_wert = fertigkeit.wuerfel.value
+                neuer_modifier = fertigkeit.wuerfel.modifier + 2
+            elif fertigkeit.wuerfel.value < 12:
+                neuer_wert = fertigkeit.wuerfel.value + 2
+                neuer_modifier = fertigkeit.wuerfel.modifier
+            elif fertigkeit.wuerfel.value == 12 and fertigkeit.wuerfel.modifier < 2:
+                neuer_wert = fertigkeit.wuerfel.value
+                neuer_modifier = fertigkeit.wuerfel.modifier + 1
+            else:
+                Logger.warning(f"Fertigkeit '{fertigkeit_name}' kann nicht weiter gesteigert werden.")
+                return False
+
+            neuer_total_value = neuer_wert + neuer_modifier
+
+        # Bestimme die Kosten
+        if self.char_gen_completed:
+            if neuer_total_value > attribut_total_value:
+                kosten = 1
+            else:
+                kosten = 0.5
+        else:            
+            if neuer_total_value > attribut_total_value:
+                kosten = 2
+            else:
+                kosten = 1
+
+        def steigern():
+            erfolg = fertigkeit.wuerfel.increase()
+            if erfolg:
+                fertigkeit.ausgewaehlt = True
+                Logger.debug(f"Fertigkeit '{fertigkeit_name}' gesteigert auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier}")
+                self.rang = self.get_rang(self.aufstiege_gesamt)                
+                return True                
+            else:
+                Logger.warning(f"Fertigkeit '{fertigkeit_name}' kann nicht weiter gesteigert werden.")
+                return False            
+
+        if self.char_gen_completed:
+            if self.verbleibende_aufstiege >= kosten:
+                self.verbleibende_aufstiege -= kosten
+                steigern()
+            else:
+                Logger.warning("Nicht genügend verbleibende Aufstiege.")
+                return False
+        else:
+            if self.verbleibende_fertigkeitssteigerungen >= kosten:
+                self.verbleibende_fertigkeitssteigerungen -= kosten
+                steigern()
+            else:
+                if self.verbleibende_handicap_punkte > 0.5:
+                    steigern()
+                    self.verbleibende_handicap_punkte -= 1
+                    Logger.info("Fertigkeit mit Handicap-Punkten gesteigert.")
+                else:
+                    Logger.warning("Nicht genügend verbleibende Fertigkeitssteigerungen.")
+                    return False
 
     def senke_fertigkeit(self, fertigkeit_name):
-        self.fertigkeiten_funktionen.senke_fertigkeit(self, fertigkeit_name):
+        """
+        Senkt eine Fertigkeit um eine Stufe und gibt die entsprechenden Steigerungen zurück.
+        Grundfertigkeiten dürfen nicht von W4+0 auf W4-2 gesenkt werden.
+        """
+        grundfertigkeiten = [
+            "Allgemeinwissen",
+            "Athletik",
+            "Heimlichkeit",
+            "Überreden",
+            "Wahrnehmung",
+        ]
+
+        def senken():
+            fertigkeit.wuerfel.decrease()
+            Logger.debug(f"Fertigkeit '{fertigkeit_name}' gesenkt auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier}")
+            self.update_char_gen_status()  # Aktualisiere den Status
+            self.rang = self.get_rang(self.aufstiege_gesamt)
+
+        fertigkeit = self.fertigkeiten.get(fertigkeit_name)
+        if fertigkeit:
+            # Überprüfung, ob die Fertigkeit eine Grundfertigkeit ist und ob sie bereits den Mindestmodifier hat
+            if fertigkeit_name in grundfertigkeiten and fertigkeit.wuerfel.value == 4 and fertigkeit.wuerfel.modifier == 0:
+                Logger.warning(f"Grundfertigkeit '{fertigkeit_name}' kann nicht von W4+0 auf W4-2 gesenkt werden.")
+                return False
+
+            zugehoeriges_attribut = fertigkeit.attribut
+
+        # Bestimme die Kosten
+        if self.char_gen_completed: 
+            kosten = 0.5
+            if fertigkeit.wuerfel.value > zugehoeriges_attribut.wuerfel.value:
+                kosten = 1
+        else:
+            kosten = 1
+            if fertigkeit.wuerfel.value > zugehoeriges_attribut.wuerfel.value:
+                kosten = 2                 
+
+        vorheriger_wert = fertigkeit.wuerfel.value
+        vorheriger_modifier = fertigkeit.wuerfel.modifier
+
+        if self.char_gen_completed:
+            if self.verbleibende_aufstiege < self.aufstiege_gesamt:
+                #Logger.debug(f"Verbleibende Aufstiege vor Gutschrift: {self.verbleibende_aufstiege}")
+                self.verbleibende_aufstiege += kosten
+                #Logger.debug(f"{kosten} `verbleibende_aufstiege` gutgeschrieben. Neuer Wert: {self.verbleibende_aufstiege}")
+                senken()
+            else:
+                Logger.debug("Maximum Aufstiege erreicht.")
+                return False
+        else:
+            if self.verbleibende_handicap_punkte < self.gesamt_handicap_punkte:
+                self.verbleibende_handicap_punkte += kosten
+                senken()
+            else:
+                if self.verbleibende_fertigkeitssteigerungen < self.maximale_fertigkeitssteigerungen:
+                    #Logger.debug(f"Verbleibende Fertigkeitssteigerungen vor Gutschrift: {self.verbleibende_fertigkeitssteigerungen}")
+                    self.verbleibende_fertigkeitssteigerungen += kosten
+                    #Logger.debug(f"{kosten} `Verbleibende Fertigkeitssteigerungen` gutgeschrieben. Neuer Wert: {self.verbleibende_fertigkeitssteigerungen}")
+                    senken()
+                else:
+                    Logger.warning("Maximum Fertigkeitspunkte erreicht.")
+                    return False
 
     def initialisiere_ausruestung(self, ausruestung):
         self.ausruestung = {}
@@ -895,129 +1085,25 @@ class Charakter(EventDispatcher):
         return output
 
     def steigere_attribut(self, attribut_name):
-        Logger.debug(f"Steigere Attribut '{attribut_name}'")
+        return character_advancement.steigere_attribut(self, attribut_name)
 
-        kosten = 1
-        Logger.debug(f"Kosten für das Steigern des Attributs: {kosten}")
-
-        Logger.debug(f"Charaktergenerierung abgeschlossen: {self.char_gen_completed}")
-
-        def steigern():
-            attribut = self.attribute.get(attribut_name)
-            if attribut:
-                #Logger.debug(f"Attribut '{attribut_name}' gefunden: {attribut}")
-                attribut.wuerfel.increase()
-                Logger.debug(f"Attribut '{attribut_name}' gesteigert auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier}")
-                self.update_char_gen_status()  # Aktualisiere den Status
-                self.rang = self.get_rang(self.aufstiege_gesamt)
-            else:
-                Logger.warning(f"Attribut '{attribut_name}' nicht gefunden im Charakterobjekt mit ID {id(self)}.")
-            return False
-
-        if self.char_gen_completed:
-            if self.verbleibende_aufstiege >= kosten:
-                #Logger.debug(f"Verbleibende Aufstiege vor Abzug: {self.verbleibende_aufstiege}")
-                self.verbleibende_aufstiege -= kosten
-                #Logger.debug(f"{kosten} `verbleibende_aufstiege` abgezogen. Neuer Wert: {self.verbleibende_aufstiege}")
-                self.verbleibende_aufstiege = max(self.verbleibende_aufstiege, 0)  # Sicherstellen, dass nicht negativ
-                #Logger.debug(f"`verbleibende_aufstiege` nach Sicherstellung nicht negativ: {self.verbleibende_aufstiege}")
-                steigern()  # Direkter Aufruf der inneren Funktion
-            else:
-                Logger.debug("Nicht genügend `verbleibende_aufstiege`. Wechsel zu `verbleibende_attributsteigerungen`.")
-                return False
-        else:
-            if self.verbleibende_attributsteigerungen > 0:
-                #Logger.debug(f"Verbleibende Attributsteigerungen vor Abzug: {self.verbleibende_attributsteigerungen}")
-                self.verbleibende_attributsteigerungen -= kosten
-                #Logger.debug(f"{kosten} `verbleibende_attributsteigerungen` abgezogen. Neuer Wert: {self.verbleibende_attributsteigerungen}")
-                self.verbleibende_attributsteigerungen = max(self.verbleibende_attributsteigerungen, 0)  # Sicherstellen, dass nicht negativ
-                #Logger.debug(f"`verbleibende_attributsteigerungen` nach Sicherstellung nicht negativ: {self.verbleibende_attributsteigerungen}")
-                steigern()  # Direkter Aufruf der inneren Funktion
-            else:
-                if self.verbleibende_handicap_punkte > 1.5:
-                    steigern()
-                    self.verbleibende_handicap_punkte -= 2
-                    Logger.info("Attribut mit Handicap-Punkten gesteigert.")
-                else:
-                    Logger.warning("Keine Attributsteigerungen mehr verfügbar.")
-                    return False
-                
     def senke_attribut(self, attribut_name):
-        Logger.debug(f"Senke Attribut '{attribut_name}'")
-
-        kosten = 1
-        Logger.debug(f"Gutschrift für das Senken des Attributs: {kosten}")
-
-        Logger.debug(f"Charaktergenerierung abgeschlossen: {self.char_gen_completed}")
-
-        def senken():
-            attribut = self.attribute.get(attribut_name)
-            if attribut:
-                #Logger.debug(f"Attribut '{attribut_name}' gefunden: {attribut}")
-                attribut.wuerfel.decrease()
-                Logger.debug(f"Attribut '{attribut_name}' gesenkt auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier}")
-                self.update_char_gen_status()  # Aktualisiere den Status
-                self.rang = self.get_rang(self.aufstiege_gesamt)
-            else:
-                Logger.warning(f"Attribut '{attribut_name}' nicht gefunden im Charakterobjekt mit ID {id(self)}.")
-            return False
-
-        if self.char_gen_completed:
-            if self.verbleibende_aufstiege < self.aufstiege_gesamt:
-                #Logger.debug(f"Verbleibende Aufstiege vor Gutschrift: {self.verbleibende_aufstiege}")
-                self.verbleibende_aufstiege += 1
-                #Logger.debug(f"{kosten} `verbleibende_aufstiege` gutgeschrieben. Neuer Wert: {self.verbleibende_aufstiege}")
-                senken()  # Direkter Aufruf der inneren Funktion
-            else:
-                Logger.debug("Maximum Aufstiege erreicht.")
-                return False
-        else:
-            if self.verbleibende_handicap_punkte < self.gesamt_handicap_punkte:
-                self.verbleibende_handicap_punkte += kosten                
-                senken()
-            else:
-                if self.verbleibende_attributsteigerungen < self.maximale_attributsteigerungen:
-                    #Logger.debug(f"Verbleibende Attributsteigerungen vor Gutschrift: {self.verbleibende_attributsteigerungen}")
-                    self.verbleibende_attributsteigerungen += kosten
-                    #Logger.debug(f"{kosten} `Verbleibende Attributsteigerungen gutgeschrieben. Neuer Wert: {self.verbleibende_attributsteigerungen}")
-                    senken()  # Direkter Aufruf der inneren Funktion
-                else:
-                    Logger.warning("Maximum Attributspunkte erreicht.")
-                    return False
+        return character_advancement.senke_attribut(self, attribut_name)
 
     def update_rang(self):
-        self.rang = self.get_rang(self.aufstiege_gesamt)
-        Logger.info(f"Rang aktualisiert: {self.rang} (Aufstiege gesamt: {self.aufstiege_gesamt})")
+        character_advancement.update_rang(self)
 
     def get_rang(self, aufstiege_gesamt):
-        for min_val, max_val, rank_name, rank_num in self.rang_mapping:
-            if min_val <= aufstiege_gesamt < max_val:
-                return rank_name
-        return "Unbekannter Rang"
+        return character_advancement.get_rang(self, aufstiege_gesamt)
 
     def increase_aufstiege(self):
-        self.aufstiege_gesamt += 1
-        self.verbleibende_aufstiege += 1
-        Logger.debug(f"Aufstiege erhöht: Aufstiege gesamt = {self.aufstiege_gesamt}, Verbleibende Aufstiege = {self.verbleibende_aufstiege}")
-        # Rang neu setzen und speichern
-        self.rang = self.get_rang(self.aufstiege_gesamt)
+        character_advancement.increase_aufstiege(self)
 
     def erhoehe_startkapital(self):
-        if self.verbleibende_handicap_punkte > 0:
-            self.vermoegen += self.startkapital
-            self.verbleibende_handicap_punkte -= 1
-        else:
-            Logger.warning("Keine Handicap-Punkte mehr verfügbar.")
+        character_advancement.erhoehe_startkapital(self)
 
     def decrease_aufstiege(self):
-        self.aufstiege_gesamt -= 1
-        self.aufstiege_gesamt = max(self.aufstiege_gesamt, 0)  # Sicherstellen, dass nicht negativ
-        self.verbleibende_aufstiege -= 1
-        self.verbleibende_aufstiege = max(self.verbleibende_aufstiege, 0)  # Sicherstellen, dass nicht negativ
-        #Logger.debug(f"`Verbleibende Aufstiege nach Sicherstellung nicht negativ: {self.verbleibende_aufstiege}")
-        Logger.debug(f"Aufstiege verringert: Aufstiege gesamt = {self.aufstiege_gesamt}, Verbleibende Aufstiege = {self.verbleibende_aufstiege}")
-        # Rang neu setzen und speichern
-        self.rang = self.get_rang(self.aufstiege_gesamt)     
+        character_advancement.decrease_aufstiege(self)  
 
     def initialisiere_handicaps(self, handicap_daten):
         """
@@ -1289,149 +1375,16 @@ class Charakter(EventDispatcher):
         return [macht for macht in self.maechte.values() if macht.ausgewaehlt]
 
     def berechne_abgeleitete_werte(self):
-        """
-        Berechnet die abgeleiteten Werte des Charakters, wie Parade, Robustheit usw.
-        Berücksichtigt die Erschöpfung.
-        """
-        try:
-            # Standardwerte
-            bewegungsweite = 6
-            bennys = 3
-            entschlossenheit = 0
-            machtpunkte = self.machtpunkte  # Machtpunkte aus dem Charakter übernehmen
-            wunden = 0  # Kann später durch Spielereignisse verändert werden
-            erschoepfung = self.erschoepfung  # Aktuelle Erschöpfung
-
-            # Berechnung der Parade
-            kaempfen_fertigkeit = self.fertigkeiten.get('Kämpfen')
-            if kaempfen_fertigkeit:
-                kaempfen_wert = kaempfen_fertigkeit.wert
-            else:
-                kaempfen_wert = 4  # Standardwert, wenn Kämpfen nicht vorhanden
-                
-            self.parade = 2 + kaempfen_wert // 2
-
-            # Berechnung der Robustheit
-            konstitution_attribut = self.attribute.get('Konstitution')
-            if konstitution_attribut:
-                konstitution_wert = konstitution_attribut.wert
-            else:
-                konstitution_wert = 4  # Standardwert, wenn Konstitution nicht vorhanden
-
-            # Basis-Robustheit ohne Rüstung
-            self.robustheit_basis = (konstitution_wert // 2) + 2
-
-            # Gesamtrüstungsschutz berechnen
-            gesamt_ruestungsschutz = self.berechne_gesamt_ruestungsschutz()
-            gesamt_torso = gesamt_ruestungsschutz.get('Torso', 0)
-
-            # Gesamte Robustheit (Basis + Rüstung)
-            self.robustheit = self.robustheit_basis + gesamt_torso
-
-            # String für die Anzeige
-            self.robustheit_mit_ruestung = f"{self.robustheit} ({gesamt_torso})"
-
-            # Maximale Traglast berechnen
-            maximale_traglast = self.berechne_traglast()
-
-            # Gesamtgewicht berechnen
-            gesamtgewicht = self.berechne_gesamtgewicht()
-
-            # Zusammenstellen der abgeleiteten Werte
-            abgeleitete_werte = {
-                'Bewegungsweite': bewegungsweite,
-                'Parade': self.parade,
-                'Robustheit': f"{self.robustheit} ({gesamt_torso})",
-                'Machtpunkte': machtpunkte,
-                'Wunden': wunden,
-                'Erschöpfung': erschoepfung,
-                'Bennys': bennys,
-                'Entschlossenheit': entschlossenheit,
-                'Maximale Traglast': maximale_traglast,
-                'Gesamtgewicht': gesamtgewicht
-            }
-
-            #Logger.debug(f"Abgeleitete Werte berechnet: {abgeleitete_werte}")
-            return abgeleitete_werte
-
-        except Exception as e:
-            Logger.error(f"Fehler bei der Berechnung der abgeleiteten Werte: {e}")
-            return {}
+        return abgeleitete_werte.berechne_abgeleitete_werte(self)
 
     def berechne_traglast(self):
-        """
-        Berechnet die maximale Traglast des Charakters basierend auf Stärke.
-        """
-        try:
-            staerke_attribut = self.attribute.get('Stärke')
-            if staerke_attribut:
-                staerke_wert = staerke_attribut.wert
-            else:
-                staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
-
-            maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
-            #Logger.debug(f"Maximale Traglast berechnet: {maximale_traglast} kg")
-            return maximale_traglast
-
-        except Exception as e:
-            Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
-            return 0
+        return ausruestung_funktionen.berechne_traglast(self)
 
     def berechne_gesamtgewicht(self):
-        """
-        Berechnet das Gesamtgewicht aller ausgewählten Ausrüstungsgegenstände.
-        Berücksichtigt die Menge und ob Gegenstände angelegt sind (halbes Gewicht).
-        """
-        gesamtgewicht = 0
-
-        # Normale Ausrüstung
-        for item in self.ausruestung.values():
-            if item.menge > 0:
-                gesamtgewicht += item.gewicht * item.menge
-
-        # Waffen
-        for waffe in self.waffen.values():
-            if waffe.menge > 0:
-                gewicht = waffe.berechne_gewicht() * waffe.menge
-                gesamtgewicht += gewicht
-
-        # Rüstungen
-        for ruestung in self.ruestungen.values():
-            if ruestung.menge > 0:
-                gewicht = ruestung.berechne_gewicht() * ruestung.menge
-                gesamtgewicht += gewicht
-
-        # Schilde
-        for schild in self.schilde.values():
-            if schild.menge > 0:
-                gewicht = schild.berechne_gewicht() * schild.menge
-                gesamtgewicht += gewicht
-
-        self.gesamtgewicht = gesamtgewicht  # Optional: Speichern des Gesamtgewichts
-        #Logger.debug(f"Gesamtgewicht berechnet: {gesamtgewicht} kg")
-        return gesamtgewicht
+        return ausruestung_funktionen.berechne_gesamtgewicht(self)
 
     def berechne_gesamt_ruestungsschutz(self):
-        gesamt_torso = 0
-        gesamt_arme = 0
-        gesamt_beine = 0
-        gesamt_kopf = 0
-
-        for ruestung in self.selected_allgemeine_ausruestung:
-            if isinstance(ruestung, Ruestung) and ruestung.angelegt:
-                gesamt_torso += ruestung.torso
-                gesamt_arme += ruestung.arme
-                gesamt_beine += ruestung.beine
-                gesamt_kopf += ruestung.kopf
-
-        ruestungsschutz = {
-            'Torso': gesamt_torso,
-            'Arme': gesamt_arme,
-            'Beine': gesamt_beine,
-            'Kopf': gesamt_kopf
-        }
-        #Logger.debug(f"Gesamter Rüstungsschutz berechnet: {ruestungsschutz}")
-        return ruestungsschutz
+        return ausruestung_funktionen.berechne_gesamt_ruestungsschutz(self)
 
     def ausruestung_nach_setting(self, setting):
         """
@@ -1442,127 +1395,16 @@ class Charakter(EventDispatcher):
         return [ausr for ausr in self.ausruestung.values() if ausr.setting == setting.lower()]
     
     def kaufen(self, item, anzahl=1, preis_pro_stueck=None):
-        preis_pro_stueck = preis_pro_stueck or item.kosten
-        gesamtpreis = preis_pro_stueck * anzahl
-
-        if self.vermoegen < gesamtpreis:
-            Logger.warning(f"Nicht genügend Vermögen, um {anzahl}x {item.name} zu kaufen.")
-            return False
-
-        self.vermoegen -= gesamtpreis
-        item.erhoehe_menge(anzahl)
-        Logger.debug(f"{anzahl}x {item.name} gekauft für insgesamt {gesamtpreis}. Neues Vermögen: {self.vermoegen}.")
-
-        self.berechne_gesamtgewicht()
-
-        maximale_traglast = self.berechne_traglast()
-        if self.gesamtgewicht > maximale_traglast:
-            if self.erschoepfung < 3:
-                self.erschoepfung += 1
-                Logger.warning(f"Traglast überschritten! Erschöpfung steigt auf {self.erschoepfung}.")
-            else:
-                Logger.warning("Traglast überschritten, Erschöpfung ist bereits maximal.")
-
-        # Hinzufügen zur Ausrüstungsliste, falls nicht bereits vorhanden
-        if item.name not in self.ausruestung:
-            self.ausruestung[item.name] = item
-            #Logger.debug(f"{item.name} zur Charakterausrüstung hinzugefügt.")
-
-        # Hinzufügen zur allgemeinen Ausrüstungsliste
-        if item not in self.selected_allgemeine_ausruestung:
-            self.selected_allgemeine_ausruestung.append(item)
-            #Logger.debug(f"{item.name} zur ausgewählten allgemeinen Ausrüstungsliste hinzugefügt.")
-
-        # Hinzufügen zur spezifischen Liste basierend auf der Kategorie
-        if item.kategorie == 'Waffe':
-            if item not in self.selected_waffen:
-                self.selected_waffen.append(item)
-                Logger.debug(f"{item.name} zur ausgewählten Waffenliste hinzugefügt.")
-        elif item.kategorie == 'Rüstung':
-            if item not in self.selected_ruestungen:
-                self.selected_ruestungen.append(item)
-                Logger.debug(f"{item.name} zur ausgewählten Rüstungenliste hinzugefügt.")
-        elif item.kategorie == 'Schild':
-            if item not in self.selected_schilde:
-                self.selected_schilde.append(item)
-                Logger.debug(f"{item.name} zur ausgewählten Schildeliste hinzugefügt.")
-
-        self.berechne_abgeleitete_werte()
-        return True
+        return ausruestung_funktionen.kaufen(self, item, anzahl, preis_pro_stueck)
 
     def verkaufen(self, item, anzahl=1, preis_pro_stueck=None):
-        if item.menge < anzahl:
-            Logger.warning(f"Nicht genügend Menge von '{item.name}' zum Verkaufen.")
-            return False
-
-        preis_pro_stueck = preis_pro_stueck or item.kosten
-        gesamtpreis = preis_pro_stueck * anzahl
-
-        self.vermoegen += gesamtpreis
-        item.verringere_menge(anzahl)
-        Logger.debug(f"{anzahl}x {item.name} verkauft für insgesamt {gesamtpreis}. Neues Vermögen: {self.vermoegen}.")
-
-        self.berechne_gesamtgewicht()
-
-        # Entfernen aus der Ausrüstungsliste, wenn Menge 0 ist
-        if item.menge <= 0:
-            del self.ausruestung[item.name]
-            Logger.debug(f"{item.name} aus der Charakterausrüstung entfernt.")
-
-            # Entfernen aus spezifischen Listen
-            if item in self.selected_waffen:
-                self.selected_waffen.remove(item)
-                Logger.debug(f"{item.name} von der ausgewählten Waffenliste entfernt.")
-            if item in self.selected_ruestungen:
-                self.selected_ruestungen.remove(item)
-                Logger.debug(f"{item.name} von der ausgewählten Rüstungenliste entfernt.")
-            if item in self.selected_schilde:
-                self.selected_schilde.remove(item)
-                Logger.debug(f"{item.name} von der ausgewählten Schildeliste entfernt.")
-            if item in self.selected_allgemeine_ausruestung:
-                self.selected_allgemeine_ausruestung.remove(item)
-                Logger.debug(f"{item.name} von der ausgewählten allgemeinen Ausrüstungsliste entfernt.")
-
-        self.berechne_abgeleitete_werte()
-        return True
+        return ausruestung_funktionen.verkaufen(self, item, anzahl, preis_pro_stueck)
 
     def get_item_by_name(self, item_name):
-        # Prüfen in Waffen
-        for item in self.selected_waffen:
-            if item.name == item_name:
-                return item
-        # Prüfen in Schilde
-        for item in self.selected_schilde:
-            if item.name == item_name:
-                return item                
-        # Prüfen in Rüstungen
-        for item in self.selected_ruestungen:
-            if item.name == item_name:
-                return item
-        # Prüfen in allgemeiner Ausrüstung
-        for item in self.selected_allgemeine_ausruestung:
-            if item.name == item_name:
-                return item
-        return None
+        return ausruestung_funktionen.get_item_by_name(self, item_name)
 
     def berechne_gesamtkosten(self):
-        """
-        Berechnet die Gesamtkosten der ausgewählten Ausrüstung.
-        """
-        gesamtkosten = 0
-        for ausr in self.ausruestung.values():
-            if ausr.ausgewaehlt:
-                gesamtkosten += ausr.kosten * ausr.menge
-        for waffe in self.waffen.values():
-            if waffe.ausgewaehlt:
-                gesamtkosten += waffe.kosten * waffe.menge
-        for ruestung in self.ruestungen.values():
-            if ruestung.ausgewaehlt:
-                gesamtkosten += ruestung.kosten * ruestung.menge
-        for schild in self.schilde.values():
-            if schild.ausgewaehlt:
-                gesamtkosten += schild.kosten * schild.menge
-        return gesamtkosten
+        return ausruestung_funktionen.berechne_gesamtkosten(self)
 
     def update_eigenschaften_tab(self, dt):
         app = App.get_running_app()
