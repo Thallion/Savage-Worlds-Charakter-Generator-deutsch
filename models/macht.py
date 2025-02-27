@@ -1,6 +1,7 @@
-import logging, unittest, json
+import unittest, json
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty, DictProperty, ListProperty
 from kivy.event import EventDispatcher
+from kivy.logger import Logger, LOG_LEVELS
 
 class Macht(EventDispatcher):
     name = StringProperty("")
@@ -9,12 +10,13 @@ class Macht(EventDispatcher):
     reichweite = StringProperty("")
     dauer = StringProperty("")
     effekt = StringProperty("")
-    anmerkungen = StringProperty("")
+    beschreibung = StringProperty("")
     ausgewaehlt = BooleanProperty(False)
     aktiv = BooleanProperty(True)
     voraussetzungen = ListProperty([])
+    custom = BooleanProperty(False) 
 
-    def __init__(self, name, rang, machtpunkte, reichweite, dauer, effekt='', anmerkungen='', voraussetzungen=None, **kwargs):
+    def __init__(self, name, rang, machtpunkte, reichweite, dauer, effekt='', beschreibung='', voraussetzungen=None, custom=False, **kwargs):
         super().__init__(**kwargs)
         self.name = name
         self.rang = rang
@@ -22,10 +24,11 @@ class Macht(EventDispatcher):
         self.reichweite = reichweite
         self.dauer = dauer
         self.effekt = effekt
-        self.anmerkungen = anmerkungen
+        self.beschreibung = beschreibung
         self.ausgewaehlt = False
         self.aktiv = True
         self.voraussetzungen = voraussetzungen or []
+        self.custom = custom
 
     def __str__(self):
         return f"{self.name} (Rang: {self.rang}, Machtpunkte: {self.machtpunkte}, Reichweite: {self.reichweite}, Dauer: {self.dauer})"
@@ -33,19 +36,19 @@ class Macht(EventDispatcher):
     def auswaehlen(self):
         if not self.ausgewaehlt:
             self.ausgewaehlt = True
-            logging.debug(f"Macht '{self.name}' wurde ausgewählt.")
+            Logger.debug(f"Macht '{self.name}' wurde ausgewählt.")
             return True
         else:
-            logging.warning(f"Macht '{self.name}' ist bereits ausgewählt.")
+            Logger.warning(f"Macht '{self.name}' ist bereits ausgewählt.")
             return False
 
     def abwaehlen(self):
         if self.ausgewaehlt:
             self.ausgewaehlt = False
-            logging.debug(f"Macht '{self.name}' wurde abgewählt.")
+            Logger.debug(f"Macht '{self.name}' wurde abgewählt.")
             return True
         else:
-            logging.warning(f"Macht '{self.name}' ist nicht ausgewählt.")
+            Logger.warning(f"Macht '{self.name}' ist nicht ausgewählt.")
             return False
 
 
@@ -55,3 +58,35 @@ class Macht(EventDispatcher):
         Da wir die Voraussetzungen vorerst ignorieren, geben wir immer True zurück.
         """
         return True  # Vorläufiger Rückgabewert
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'rang': self.rang,
+            'machtpunkte': self.machtpunkte,
+            'reichweite': self.reichweite,
+            'dauer': self.dauer,
+            'effekt': self.effekt,
+            'beschreibung': self.beschreibung,
+            'voraussetzungen': self.voraussetzungen,
+            'ausgewaehlt': self.ausgewaehlt,
+            'aktiv': self.aktiv,
+            'custom': self.custom
+        }
+
+    @classmethod
+    def from_dict_static(cls, data):
+        macht = cls(
+            name=data.get('name', ''),
+            rang=data.get('rang', ''),
+            machtpunkte=data.get('machtpunkte', 0),
+            reichweite=data.get('reichweite', ''),
+            dauer=data.get('dauer', ''),
+            effekt=data.get('effekt', ''),
+            beschreibung=data.get('beschreibung', ''),
+            voraussetzungen=data.get('voraussetzungen', []),
+            custom=data.get('custom', False)
+        )
+        macht.ausgewaehlt = data.get('ausgewaehlt', False)
+        macht.aktiv = data.get('aktiv', True)
+        return macht

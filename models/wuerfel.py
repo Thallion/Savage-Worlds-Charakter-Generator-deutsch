@@ -1,6 +1,6 @@
-import logging, unittest, json
-from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty, DictProperty, ListProperty
+from kivy.properties import NumericProperty, StringProperty
 from kivy.event import EventDispatcher
+from kivy.logger import Logger, LOG_LEVELS
 
 class Wuerfel(EventDispatcher):
     """
@@ -46,73 +46,64 @@ class Wuerfel(EventDispatcher):
     def increase(self):
         if self.value == 12 and self.modifier < 2:
             self.modifier += 1
-            logging.debug(f"Würfel erhöht: {self}")
+            #Logger.debug(f"Würfel erhöht: {self}")
             self.dispatch('on_change')
             return True
         elif self.value == 4 and self.modifier == -2:
             self.modifier += 2
-            logging.debug(f"Würfel erhöht: {self}")
+            #Logger.debug(f"Würfel erhöht: {self}")
             self.dispatch('on_change')
             return True
         elif self.value < 12:
             next_value = self.value + 2
             if next_value in self.VALID_VALUES:
                 self.value = next_value
-                logging.debug(f"Würfel erhöht: {self}")
+                #Logger.debug(f"Würfel erhöht: {self}")
                 self.dispatch('on_change')
                 return True
-        logging.warning(f"Der Würfel kann nicht weiter gesteigert werden: {self}")
+        Logger.warning(f"Der Würfel kann nicht weiter gesteigert werden: {self}")
         return False
 
     def decrease(self):
         if self.value == 12 and self.modifier > 0:
             self.modifier -= 1
-            logging.debug(f"Würfel gesenkt: {self}")
+            #Logger.debug(f"Würfel gesenkt: {self}")
             self.dispatch('on_change')
             return True
         elif self.value > 4:
             previous_value = self.value - 2
             if previous_value in self.VALID_VALUES:
                 self.value = previous_value
-                logging.debug(f"Würfel gesenkt: {self}")
+                #Logger.debug(f"Würfel gesenkt: {self}")
                 self.dispatch('on_change')
                 return True
         elif self.value == 4:
             if self.typ == "fertigkeit" and self.modifier > -2:
                 self.modifier -= 2
-                logging.debug(f"Würfel gesenkt: {self}")
+                #Logger.debug(f"Würfel gesenkt: {self}")
                 self.dispatch('on_change')
                 return True
             else:
-                logging.warning(f"Der Würfel kann nicht weiter gesenkt werden: {self}")
+                Logger.warning(f"Der Würfel kann nicht weiter gesenkt werden: {self}")
                 return False
         else:
-            logging.warning(f"Der Würfel kann nicht weiter gesenkt werden: {self}")
+            Logger.warning(f"Der Würfel kann nicht weiter gesenkt werden: {self}")
             return False
 
     def on_change(self, *args):
         pass
 
     def to_dict(self):
-        """
-        Konvertiert den Würfel in ein Dictionary.
-        """
-        return {"value": self.value, "modifier": self.modifier}
+        return {
+            'value': self.value,
+            'modifier': self.modifier,
+            'typ': self.typ
+        }
 
     @classmethod
     def from_dict(cls, data):
-        """
-        Erstellt einen Würfel aus einem Dictionary.
-
-        :param data: Dictionary mit 'value' und optional 'modifier'
-        """
-        if "value" not in data:
-            raise KeyError("Der Schlüssel 'value' ist im Dictionary nicht vorhanden.")
-        value = data["value"]
-        modifier = data.get("modifier", 0)
-        if not isinstance(value, int) or not isinstance(modifier, int):
-            raise TypeError("Die Werte für 'value' und 'modifier' müssen Ganzzahlen sein.")
-
-        instance = cls(value=value, modifier=modifier)
-        logging.debug(f"Würfel aus Dictionary erstellt: {instance}")
-        return instance
+        return cls(
+            value=data.get('value', 0),
+            modifier=data.get('modifier', 0),
+            typ=data.get('typ', '')
+        )

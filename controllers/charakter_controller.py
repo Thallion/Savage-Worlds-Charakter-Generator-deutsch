@@ -1,288 +1,217 @@
+# -*- coding: utf-8 -*-
 # controllers/charakter_controller.py
 from kivy.app import App
 from kivy.clock import Clock
-from kivy.logger import Logger, LOG_LEVELS
-from models.charakter import Charakter
-from data.handicap_daten import handicap_liste
-from data.talent_daten import talent_daten
-from data.ausruestung_daten import ausruestung_daten
-from data.maechte_daten import maechte_daten
-#from models.handicap import Handicap
+from kivy.event import EventDispatcher
+from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty
+from kivy.logger import Logger
+from charakter import Charakter
 from models.talent import Talent
 from models.macht import Macht
-#from models.ausruestung import Ausruestung
-from data.waffen_daten import waffen_daten
-from data.schilde_daten import schilde_daten
-from data.ruestung_daten import ruestung_daten
 import logging
+from kivy.config import Config
 
-from kivy.logger import Logger, LOG_LEVELS
+import functions.fertigkeiten_funktionen
 
-# Import der initialisiere_ausruestung-Funktion
-from data.initialisiere_ausruestung import initialisiere_ausruestung
+# Logger einrichten
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
-# Setze Kivy Logger-Level auf DEBUG
-Logger.setLevel(LOG_LEVELS['info'])
-Logger.info("Kivy Logger auf DEBUG-Level gesetzt.")
+class CharakterController(EventDispatcher):
+    """
+    Der CharakterController ist für die Steuerung und Aktualisierung
+    des Charakterobjekts zuständig und kommuniziert mit der UI.
+    """
+    charakter = ObjectProperty(None)  # Kivy-Property für den Charakter
+    current_character_file_path = StringProperty(None)  # Pfad der aktuellen Charakterdatei
 
+    def __init__(self, char_name="", alter="", geschlecht="", konzept="", sprachen="",
+                 bennys="3", entschlossenheit="0", beschreibung="", hintergrund=""):
+        super().__init__()  # EventDispatcher initialisieren
 
-class CharakterController:
-    def __init__(self, name):
-        self.charakter = Charakter(name)
-        
-        # Initialisiere Talente und Mächte
-        self.initialisiere_talente(talent_daten)  # Initialize talents
-        self.initialisiere_maechte(maechte_daten)  # Initialize powers
-        self.initialisiere_waffen(waffen_daten)
-        self.initialisiere_schilde(schilde_daten)
-        self.initialisiere_ruestungen(ruestung_daten)
-        # Initialisiere Ausrüstung und weise sie dem Charakter zu
-        self.initialisiere_ausruestung_daten()
+        # Registrieren von Events
+        self.register_event_type('on_charakter_changed')
+        self.register_event_type('on_charakter_updated')
 
-        Logger.info(f"CharakterController initialisiert für Charakter: {name}")
+        # Erzeuge den Charakter mit allen Profildaten
+        # Der Charakter lädt selbständig alle Daten aus dem aktiven Setting (JSON)
+        self.charakter = Charakter(
+            char_name=char_name,
+            alter=alter,
+            geschlecht=geschlecht,
+            konzept=konzept,
+            sprachen=sprachen,
+            bennys=bennys,
+            entschlossenheit=entschlossenheit,
+            beschreibung=beschreibung,
+            hintergrund=hintergrund
+        )
 
-    def initialisiere_ausruestung_daten(self):
-        try:
-            ausruestung = initialisiere_ausruestung()
-            self.charakter.ausruestung_daten = ausruestung
-            Logger.info(f"Ausrüstungsdaten initialisiert und dem Charakter zugewiesen: {len(ausruestung)} Gegenstände.")
-        except Exception as e:
-            Logger.error(f"Fehler bei der Initialisierung der Ausrüstung: {e}")
+        logging.debug(f"CharakterController initialisiert mit Charakterobjekt ID {id(self.charakter)}")
 
-    # def print_character(self):
-    #     charakter = self.charakter
-    #     print("\nCharakterübersicht:")
+        # Binde die update_ui Methode an das on_charakter_change Event des Charakters
+        self.charakter.bind(on_charakter_change=self.update_ui)
 
-    #     print("Attribute:")
-    #     for attribut in charakter.attribute.values():
-    #         print(f"{attribut.name}: W{attribut.wert}")
+        Logger.info("CharakterController initialisiert")
 
-    #     print("\nFertigkeiten:")
-    #     for fertigkeit in charakter.fertigkeiten.values():
-    #         if fertigkeit.wert > 4:
-    #             print(f"{fertigkeit.name}: W{fertigkeit.wert}")
+    def update_ui(self, *args):
+        # Diese Methode wird aufgerufen, wenn sich der Charakter ändert
+        self.update_eigenschaften()
+        self.dispatch('on_charakter_changed', self.charakter)
 
-    #     print("\nHandicaps:")
-    #     for handicap in charakter.ausgewaehlte_handicaps():
-    #         print(f"{handicap.name} ({handicap.stufe}): {handicap.beschreibung}")
-
-    #     print("\nTalente:")
-    #     for talent in charakter.ausgewaehlte_talente():
-    #         print(f"{talent.name}: {talent.beschreibung}")
-
-    #     print("\nMächte:")
-    #     for macht in charakter.ausgewaehlte_maechte():
-    #         print(f"{macht.name}, Rang: {macht.rang}, 'Machtpunkte' {macht.machtpunkte}, 'Reichweite': {macht.reichweite}, 'Dauer': {macht.dauer}, Effekt: {macht.effekt}")
-
-    #     print("\nAusrüstung:")
-    #     for item in charakter.ausruestung_daten.values():
-    #         if item.menge > 0:
-    #             print(f"{item.name} x{item.menge}")
-
-    #     print("\nWaffen:") 
-    #     for waffe in charakter.waffen_daten.values():
-    #         if waffe.menge > 0:
-    #             status = "Angelegt" if waffe.angelegt else "Nicht angelegt"
-    #             # Formatieren der Eigenschaften als Schlüssel=Wert
-    #             eigenschaften = ', '.join(f"{k}={v}" for k, v in waffe.eigenschaften.items()) if waffe.eigenschaften else 'Keine'
-    #             print(f"{waffe.name}: {eigenschaften}")
-
-    #     print("\nRüstungen:")
-    #     for ruestung in charakter.ruestungen.values():
-    #         if ruestung.angelegt:
-    #             status = "Angelegt"
-    #             print(f"{ruestung.name}: Torso={ruestung.torso}, Arme={ruestung.arme}, Beine={ruestung.beine}, Kopf={ruestung.kopf}, Status={status}")
-    #         else:
-    #             status = "Nicht angelegt"
-    #             print(f"{ruestung.name}: Status={status}")
-
+    # Methoden zur Attributsteigerung
     def steigere_attribut(self, attribut_name):
-        Logger.info(f"[Increasing attribute] {attribut_name} (attribute)")
         success = self.charakter.steigere_attribut(attribut_name)
-        if success:
-            Logger.info(f"Attribut '{attribut_name}' gesteigert. Verbleibende Attributsteigerungen: {self.charakter.verbleibende_attributsteigerungen}")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Attribut '{attribut_name}' konnte nicht gesteigert werden.")
+        self.charakter.berechne_abgeleitete_werte()
+        self.update_charakterbogen()
+        self.dispatch('on_charakter_updated')
         return success
-    
+
     def senke_attribut(self, attribut_name):
         success = self.charakter.senke_attribut(attribut_name)
-        if success:
-            Logger.info(f"Attribut '{attribut_name}' gesenkt.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Attribut '{attribut_name}' konnte nicht gesenkt werden.")
+        self.charakter.berechne_abgeleitete_werte()
+        self.update_charakterbogen()
+        self.dispatch('on_charakter_updated')
         return success
-    
+
+    # Methoden zur Fertigkeitssteigerung
     def steigere_fertigkeit(self, fertigkeit_name):
         success = self.charakter.steigere_fertigkeit(fertigkeit_name)
-        if success:
-            Logger.info(f"Fertigkeit '{fertigkeit_name}' gesteigert.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Fertigkeit '{fertigkeit_name}' konnte nicht gesteigert werden.")
+        self.charakter.berechne_abgeleitete_werte()
+        self.update_charakterbogen()
+        self.dispatch('on_charakter_updated')
         return success
-    
+
     def senke_fertigkeit(self, fertigkeit_name):
         success = self.charakter.senke_fertigkeit(fertigkeit_name)
-        if success:
-            Logger.info(f"Fertigkeit '{fertigkeit_name}' gesenkt.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Fertigkeit '{fertigkeit_name}' konnte nicht gesenkt werden.")
+        self.charakter.berechne_abgeleitete_werte()
+        self.update_charakterbogen()
+        self.dispatch('on_charakter_updated')
         return success
-       
+
+    def on_charakter_updated(self, *args):
+        pass
+
     # Methoden für Handicaps
     def initialisiere_handicaps(self, handicap_liste):
         self.charakter.initialisiere_handicaps(handicap_liste)
         Logger.info("Handicaps initialisiert.")
         self.update_charakterbogen()
 
-    def initialisiere_waffen(self, waffen_daten):
-        self.charakter.initialisiere_waffen(waffen_daten)
-        Logger.info("Waffen initialisiert.")
-        self.update_charakterbogen()
-
-    def initialisiere_schilde(self, schild_daten):
-        self.charakter.initialisiere_schilde(schild_daten)
-        Logger.info("Schilde initialisiert.")
-        self.update_charakterbogen()
-
-    def initialisiere_ruestungen(self, ruestung_daten):
-        self.charakter.initialisiere_ruestungen(ruestung_daten)
-        Logger.info("Rüstungen initialisiert.")
-        self.update_charakterbogen()
-
     def waehle_handicap(self, handicap_name):
         success = self.charakter.waehle_handicap(handicap_name)
-        if success:
-            Logger.info(f"Handicap '{handicap_name}' wurde ausgewählt.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Handicap '{handicap_name}' konnte nicht ausgewählt werden.")
+        self.update_charakterbogen()
         return success
-    
+
     def entferne_handicap(self, handicap_name):
         success = self.charakter.entferne_handicap(handicap_name)
-        if success:
-            Logger.info(f"Handicap '{handicap_name}' wurde entfernt.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Handicap '{handicap_name}' konnte nicht entfernt werden.")
+        self.update_charakterbogen()
         return success
-    
+
     def aktive_handicaps(self):
         return self.charakter.aktive_handicaps()
-    
+
     def ausgewaehlte_handicaps(self):
         return self.charakter.ausgewaehlte_handicaps()
-       
+
     # Methoden für Talente
-    def initialisiere_talente(self, talent_daten):
-        for kategorie, talents_in_category in talent_daten.items():
-            for talent_name, talent_data in talents_in_category.items():
-                talent = Talent(
-                    name=talent_name,
-                    kategorie=kategorie,
-                    rang=talent_data.get('Rang', ''),
-                    voraussetzungen=talent_data.get('Voraussetzungen', []),
-                    beschreibung=talent_data.get('Beschreibung', ''),
-                    neue_maechte=talent_data.get('neue_maechte', 0),
-                    machtpunkte=talent_data.get('machtpunkte', 0)
-                )
-                self.charakter.talente[talent_name] = talent
-        Logger.info("Talente initialisiert.")
-        self.update_charakterbogen()
-    
+    # Die Initialisierung der Talente erfolgt nun über den Charakter selbst, basierend auf dem aktiven Setting.
+    # Daher wird hier keine externe Methode initialisiere_talente() mehr benötigt.
+
     def waehle_talent(self, talent_name):
         success = self.charakter.waehle_talent(talent_name)
-        if success:
-            Logger.info(f"Talent '{talent_name}' wurde ausgewählt.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Talent '{talent_name}' konnte nicht ausgewählt werden.")
+        self.update_charakterbogen()
         return success
-    
+
     def entferne_talent(self, talent_name):
         success = self.charakter.entferne_talent(talent_name)
-        if success:
-            Logger.info(f"Talent '{talent_name}' wurde entfernt.")
-            self.update_charakterbogen()
-        else:
-            Logger.info(f"Talent '{talent_name}' konnte nicht entfernt werden.")
+        self.update_charakterbogen()
         return success
-    
+
     def aktive_talente(self):
         return self.charakter.aktive_talente()
-    
+
     def ausgewaehlte_talente(self):
         return self.charakter.ausgewaehlte_talente()
-    
-    def initialisiere_maechte(self, macht_daten):
-        for name, daten in macht_daten.items():
-            if name not in self.charakter.maechte:
-                self.charakter.maechte[name] = Macht(
-                    name=name,
-                    rang=daten.get('rang', ''),
-                    machtpunkte=daten.get('machtpunkte', 0),
-                    reichweite=daten.get('reichweite', ''),
-                    dauer=daten.get('dauer', ''),
-                    effekt=daten.get('effekt', ''),
-                    anmerkungen=daten.get('anmerkungen', ''),
-                    voraussetzungen=daten.get('voraussetzungen', [])
-                )
-        Logger.info("Mächte initialisiert.")
-        self.update_charakterbogen()
-    
+
+    # Methoden für Mächte
+    # Die Initialisierung der Mächte erfolgt nun über den Charakter selbst, basierend auf dem aktiven Setting.
+    # Daher wird hier keine externe Methode initialisiere_maechte() mehr benötigt.
+
     def waehle_macht(self, macht_name):
         success = self.charakter.waehle_macht(macht_name)
-        if success:
-            Logger.info(f"Macht '{macht_name}' wurde ausgewählt.")
-            self.update_charakterbogen()
-            return True
-        else:
-            Logger.info(f"Macht '{macht_name}' konnte nicht ausgewählt werden.")
-            return False
+        self.update_charakterbogen()
+        return success
 
-    
     def entferne_macht(self, macht_name):
         success = self.charakter.entferne_macht(macht_name)
-        if success:
-            Logger.info(f"Macht '{macht_name}' wurde abgewählt.")
-            self.update_charakterbogen()
-            return True
+        self.update_charakterbogen()
+        return success
+
+    # Methoden für Ausrüstung
+    def kaufen_ausruestung(self, item_name, anzahl=1, preis_pro_stueck=None):
+        # Prüfen, ob der Gegenstand existiert
+        if item_name in self.charakter.ausruestung:
+            item = self.charakter.ausruestung[item_name]
         else:
-            Logger.info(f"Macht '{macht_name}' konnte nicht abgewählt werden.")
+            Logger.warning(f"Ausrüstungsgegenstand '{item_name}' nicht gefunden.")
             return False
 
-
-    # Methoden für Ausrüstung (bereits angepasst)
-    def kaufen_ausruestung(self, ausruestung_name, anzahl=1, preis_pro_stueck=None):
-        ausruestung = self.charakter.ausruestung_daten.get(ausruestung_name)
-        if not ausruestung:
-            Logger.warning(f"Ausrüstung '{ausruestung_name}' nicht gefunden.")
-            return False
-        success = self.charakter.kaufen(ausruestung, anzahl, preis_pro_stueck)
+        success = self.charakter.kaufen(item, anzahl=anzahl, preis_pro_stueck=preis_pro_stueck)
         if success:
+            Logger.debug(f"Ausrüstung '{item.name}' gekauft.")
             self.update_charakterbogen()
         return success
 
-    def verkaufen_ausruestung(self, ausruestung_name, anzahl=1, preis_pro_stueck=None):
-        ausruestung = self.charakter.ausruestung_daten.get(ausruestung_name)
-        if not ausruestung:
-            Logger.warning(f"Ausrüstung '{ausruestung_name}' nicht gefunden.")
+    def verkaufen_ausruestung(self, item_name, anzahl=1, preis_pro_stueck=None):
+        # Prüfen, ob der Gegenstand existiert
+        if item_name in self.charakter.ausruestung:
+            item = self.charakter.ausruestung[item_name]
+        else:
+            Logger.warning(f"Ausrüstungsgegenstand '{item_name}' nicht gefunden.")
             return False
-        success = self.charakter.verkaufen(ausruestung, anzahl, preis_pro_stueck)
-        if success:
+
+        erfolg = self.charakter.verkaufen(item, anzahl, preis_pro_stueck)
+        if erfolg:
+            Logger.debug(f"Ausrüstung '{item.name}' verkauft.")
             self.update_charakterbogen()
-        return success
+        return erfolg
 
     def update_charakterbogen(self):
         try:
-            # Zugriff auf das Charakterbogen-Widget über die ID
+            # Zugriff auf das Charakterbogen-Widget
             charakterbogen_widget = App.get_running_app().root.ids.charakterbogen_widget
-            charakterbogen_widget.update_overview(0)  # Parameter dt benötigt
-            Logger.info("Charakterbogen aktualisiert.")
+            charakterbogen_widget.update_overview()
         except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren des Charakterbogens: {e}")
+            pass  # Wenn kein Charakterbogen-Widget vorhanden ist, einfach ignorieren.
+
+    def lade_charakter_von_json(self, dateipfad):
+        self.charakter.laden_von_json(dateipfad)
+        self.update_charakterbogen()
+        self.dispatch('on_charakter_changed', self.charakter)
+        self.dispatch('on_charakter_loaded')   
+        app = App.get_running_app()
+        app.ausruestung_widget.aktualisiere_ausruestung()
+
+    def neuer_charakter(self):
+        self.charakter = Charakter()
+        self.dispatch('on_charakter_changed', self.charakter)
+
+    def on_charakter_loaded(self):
+        pass
+
+    def on_charakter_changed(self, *args):
+        self.update_eigenschaften()
+        self.update_charakterbogen()
+
+    def update_eigenschaften(self):
+        app = App.get_running_app()
+        if app:
+            eigenschaften_widget = app.get_widget_by_tab_text('Eigenschaften', 'eigenschaften_widget')
+            if eigenschaften_widget:
+                eigenschaften_widget.update_eigenschaften()
+            else:
+                Logger.warning("Eigenschaften-Widget nicht gefunden.")
+        else:
+            Logger.warning("Keine laufende App gefunden.")

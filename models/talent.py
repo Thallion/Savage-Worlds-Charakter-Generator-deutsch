@@ -12,8 +12,9 @@ class Talent(EventDispatcher):
     machtpunkte = NumericProperty(0)
     ausgewaehlt = BooleanProperty(False)
     aktiv = BooleanProperty(True)
+    custom = BooleanProperty(False)  # Neue Eigenschaft
 
-    def __init__(self, name, kategorie, rang, voraussetzungen, beschreibung='', neue_maechte=0, machtpunkte=0, **kwargs):
+    def __init__(self, name, kategorie, rang, voraussetzungen, beschreibung='', neue_maechte=0, machtpunkte=0, custom=False, **kwargs):
         super().__init__(**kwargs)
         self.name = name
         self.kategorie = kategorie
@@ -24,6 +25,7 @@ class Talent(EventDispatcher):
         self.machtpunkte = machtpunkte
         self.ausgewaehlt = False
         self.aktiv = True
+        self.custom = custom
 
     def __str__(self):
         return f"{self.name} ({self.kategorie}, Rang: {self.rang})"
@@ -60,3 +62,32 @@ class Talent(EventDispatcher):
 
     def setze_beschreibung(self, beschreibung):
         self.beschreibung = beschreibung
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'kategorie': self.kategorie,
+            'rang': self.rang,
+            'voraussetzungen': self.voraussetzungen,
+            'beschreibung': self.beschreibung,
+            'neue_maechte': self.neue_maechte,
+            'machtpunkte': self.machtpunkte,
+            'ausgewaehlt': self.ausgewaehlt,
+            'aktiv': self.aktiv
+        }
+    
+    @classmethod
+    def from_dict_static(cls, data):
+        talent = cls(
+            name=data.get('name', ''),
+            kategorie=data.get('kategorie', ''),
+            rang=data.get('rang', ''),
+            voraussetzungen=data.get('voraussetzungen', []),
+            beschreibung=data.get('beschreibung', ''),
+            neue_maechte=data.get('neue_maechte', 0),
+            machtpunkte=data.get('machtpunkte', 0),
+            custom=data.get('custom', False)
+        )
+        talent.ausgewaehlt = data.get('ausgewaehlt', False)
+        talent.aktiv = data.get('aktiv', True)
+        return talent

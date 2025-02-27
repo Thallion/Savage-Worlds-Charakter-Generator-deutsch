@@ -13,22 +13,46 @@ class Waffe(Ausruestung):
     mindeststaerke = StringProperty("")
     angelegt = BooleanProperty(False)
     eigenschaften = DictProperty({})  # Um Eigenschaften zu speichern
+    ausgewaehlt = BooleanProperty(False)
+    custom = BooleanProperty(False)
 
-    def __init__(self, name, gewicht, kosten, setting, typ, mindeststaerke='W4', beschreibung='', eigenschaften=None, **kwargs):
+    def __init__(
+        self,
+        name,
+        gewicht,
+        kosten,
+        setting,
+        typ,
+        mindeststaerke='W4',
+        beschreibung='',
+        eigenschaften=None,
+        menge=0,
+        ausgewaehlt=False,
+        aktiv=True,
+        angelegt=False,
+        kategorie='Waffe',
+        **kwargs
+    ):
         super().__init__(
             name=name,
             gewicht=gewicht,
             kosten=kosten,
             setting=setting,
             beschreibung=beschreibung,
-            **kwargs  # 'kategorie' wird über kwargs übergeben
+            menge=menge,
+            ausgewaehlt=ausgewaehlt,
+            aktiv=aktiv,
+            angelegt=angelegt,
+            kategorie=kategorie,
+            **kwargs  # Weitere zusätzliche Keyword-Argumente
         )
         self.typ = typ
         self.mindeststaerke = mindeststaerke
-        self.angelegt = False
         self.eigenschaften = eigenschaften or {}
+        self.custom = kwargs.get('custom', False)
         self.bind(angelegt=self.on_angelegt_changed)
-        Logger.debug(f"Waffe '{self.name}' initialisiert mit Typ: {self.typ}, Mindeststärke: {self.mindeststaerke}.")
+        # Logger.debug(f"Waffe '{self.name}' initialisiert mit Typ: {self.typ}, Mindeststärke: {self.mindeststaerke}.")
+
     
     def berechne_gewicht(self):
         if self.angelegt:
@@ -36,18 +60,9 @@ class Waffe(Ausruestung):
         return self.gewicht
     
     def kann_angelegt_werden(self, charakter):
-        mindeststaerke_wert = self.mindeststaerke
-        charakter_staerke_wert = charakter.attribute['Stärke'].wert
-
-        # Mapping von Würfelwerten zu numerischen Werten
-        staerke_mapping = {'W4': 4, 'W6': 6, 'W8': 8, 'W10': 10, 'W12': 12, '-': 0}
-
-        mindeststaerke_num = staerke_mapping.get(mindeststaerke_wert, 4)
-
-        if charakter_staerke_wert >= mindeststaerke_num:
-            return True
-        else:
-            return False
+        mindeststaerke_num = self.convert_staerke_to_num(self.mindeststaerke)
+        charakter_staerke_num = self.convert_staerke_to_num(charakter.attribute['Stärke'].wert)
+        return charakter_staerke_num >= mindeststaerke_num
 
     def anlegen(self, charakter):
         if self.kann_angelegt_werden(charakter):
@@ -66,3 +81,62 @@ class Waffe(Ausruestung):
     def on_angelegt_changed(self, instance, value):
         # Hier können Sie weitere Aktionen durchführen, wenn der Anlege-Status sich ändert
         pass        
+
+    def convert_staerke_to_num(self, staerke_wert):
+        staerke_mapping = {'W4': 4, 'W6': 6, 'W8': 8, 'W10': 10, 'W12': 12, '-': 0}
+        return staerke_mapping.get(staerke_wert, 0)    
+    
+    @classmethod
+    def from_dict_static(cls, data):
+        return cls(
+            name=data.get('name', ''),
+            gewicht=data.get('gewicht', 0),
+            kosten=data.get('kosten', 0),
+            setting=data.get('setting', ''),
+            typ=data.get('typ', ''),
+            mindeststaerke=data.get('mindeststaerke', 'W4'),
+            beschreibung=data.get('beschreibung', ''),
+            eigenschaften=data.get('eigenschaften', {}),
+            menge=data.get('menge', 0),
+            ausgewaehlt=data.get('ausgewaehlt', False),
+            aktiv=data.get('aktiv', True),
+            angelegt=data.get('angelegt', False),
+            kategorie=data.get('kategorie', 'Waffe')
+        )
+
+    def to_dict(self):
+        data = super().to_dict()
+        data.update({
+            'typ': self.typ,
+            'menge': self.menge,
+            'mindeststaerke': self.mindeststaerke,
+            'eigenschaften': self.eigenschaften,
+            'angelegt': self.angelegt
+        })
+        return data
+
+    def to_setting_dict(self):
+        """Speichert die Waffe-spezifischen Basisdaten für das Setting."""
+        data = super().to_setting_dict()
+        data.update({
+            'typ': self.typ,
+            'mindeststaerke': self.mindeststaerke,
+            'eigenschaften': self.eigenschaften,
+            # Fügen Sie weitere waffenrelevante Attribute hinzu
+        })
+        return data
+
+    @classmethod
+    def from_setting_dict(cls, data):
+        return cls(
+            name=data.get('name', ''),
+            gewicht=data.get('gewicht', 0),
+            kosten=data.get('kosten', 0),
+            setting=data.get('setting', ''),
+            typ=data.get('typ', ''),
+            mindeststaerke=data.get('mindeststaerke', 'W4'),
+            beschreibung=data.get('beschreibung', ''),
+            eigenschaften=data.get('eigenschaften', {}),
+            kategorie=data.get('kategorie', 'Waffe'),
+            # Charakterbezogene Daten werden nicht geladen
+        )

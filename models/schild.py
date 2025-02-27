@@ -13,6 +13,7 @@ class Schild(Ausruestung):
     parade = NumericProperty(0)
     deckung = NumericProperty(0)
     mindeststaerke = StringProperty("")
+    ausgewaehlt = BooleanProperty(False)
 
     def __init__(self, name, gewicht, kosten, setting, parade, deckung, mindeststaerke, beschreibung='', menge=0, ausgewaehlt=False, aktiv=True, kategorie='Schild', **kwargs):
         super().__init__(
@@ -30,9 +31,7 @@ class Schild(Ausruestung):
         self.parade = parade
         self.deckung = deckung
         self.mindeststaerke = mindeststaerke
-        Logger.debug(f"Schild '{self.name}' initialisiert.")
-
-
+        #Logger.debug(f"Schild '{self.name}' initialisiert.")
 
     def berechne_gewicht(self):
         if self.angelegt:
@@ -63,3 +62,59 @@ class Schild(Ausruestung):
     def ablegen(self):
         self.angelegt = False
         logging.debug(f"{self.name} wurde abgelegt.")
+
+    def to_dict(self):
+        data = super().to_setting_dict()
+        data.update({
+            'menge': self.menge,
+            'parade': self.parade,
+            'deckung': self.deckung,
+            'mindeststaerke': self.mindeststaerke,
+            'angelegt': self.angelegt,
+            'ausgewaehlt': self.ausgewaehlt, 
+        })
+        return data
+
+    def to_setting_dict(self):
+        """Speichert die Schild-spezifischen Basisdaten für das Setting."""
+        data = super().to_setting_dict()
+        data.update({
+            'parade': self.parade,
+            'deckung': self.deckung,
+            'mindeststaerke': self.mindeststaerke,
+            # 'angelegt' ist charakter-spezifisch und wird nicht gespeichert
+        })
+        return data
+
+    @classmethod
+    def from_setting_dict(cls, data):
+        return cls(
+            name=data.get('name', ''),
+            gewicht=data.get('gewicht', 0),
+            kosten=data.get('kosten', 0),
+            setting=data.get('setting', ''),
+            parade=data.get('parade', 0),
+            deckung=data.get('deckung', 0),
+            mindeststaerke=data.get('mindeststaerke', 'W4'),
+            beschreibung=data.get('beschreibung', ''),
+            kategorie=data.get('kategorie', 'Schild'),
+            # Charakterbezogene Daten werden nicht geladen
+        )
+
+    @classmethod
+    def from_dict_static(cls, data):
+        return cls(
+            name=data.get('name', ''),
+            gewicht=data.get('gewicht', 0),
+            kosten=data.get('kosten', 0),
+            setting=data.get('setting', ''),
+            parade=data.get('parade', 0),
+            deckung=data.get('deckung', 0),
+            mindeststaerke=data.get('mindeststaerke', 'W4'),
+            beschreibung=data.get('beschreibung', ''),
+            kategorie=data.get('kategorie', 'Schild'),
+            menge=data.get('menge', 0),
+            ausgewaehlt=data.get('ausgewaehlt', False),
+            aktiv=data.get('aktiv', True),
+            angelegt=data.get('angelegt', False)
+        )
