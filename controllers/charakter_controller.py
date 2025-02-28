@@ -11,8 +11,6 @@ from models.macht import Macht
 import logging
 from kivy.config import Config
 
-import functions.fertigkeiten_funktionen
-
 # Logger einrichten
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)

@@ -4,6 +4,7 @@ from kivy.logger import Logger
 from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
+from models.ausruestung import Ausruestung
 
 def kaufen(charakter, item, anzahl=1, preis_pro_stueck=None):
     """
