@@ -2,27 +2,40 @@
 
 from kivy.lang import Builder
 from kivy.app import App
-from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty, DictProperty, ListProperty
-from kivy.event import EventDispatcher
-from kivy.clock import Clock
-import logging
-from kivy.logger import Logger, LOG_LEVELS
+from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty, DictProperty
+from kivy.clock import Clock, mainthread
+from kivy.logger import Logger
 from kivy.metrics import dp
-from kivy.factory import Factory
+from kivy.cache import Cache
+from threading import Thread
+from kivy.uix.modalview import ModalView
 
 # KivyMD Imports
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.scrollview import MDScrollView
+from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDIconButton
-from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.progressindicator.progressindicator import MDCircularProgressIndicator  # Aktualisierter Import für 2.0.1
 
-# Importieren der benutzerdefinierten Module
-from controllers.decorators import Fehlerbehandlung
-from controllers.charakter_controller import CharakterController
+# Cache für Würfel-Icons einrichten
+Cache.register('wuerfel_icons', limit=20)
 
-kv = '''
+# Domänen-spezifische Konstanten
+SORTIER_OPTIONEN = {
+    "NAME_ASC": "Name (aufsteigend)",
+    "NAME_DESC": "Name (absteigend)",
+    "WERT_ASC": "Wert (aufsteigend)",
+    "WERT_DESC": "Wert (absteigend)"
+}
+
+FILTER_OPTIONEN = {
+    "ALLE": "Alle Fertigkeiten",
+    "AKTIV": "Aktiviert",
+    "INAKTIV": "Nicht Aktiviert"
+}
+
+# KV-String für UI-Definition
+KV_STRING = '''
 <EigenschaftenWidget>:
     attribute_layout: attribute_layout
     fertigkeiten_layout: fertigkeiten_layout
@@ -99,29 +112,42 @@ kv = '''
         halign: 'left'
         valign: 'middle'
 
-    # Würfel-Icon-Gruppe
+    # Würfel-Icon-Gruppe mit originalem Farbschema
     MDBoxLayout:
         size_hint_x: None
         width: "120dp"
         spacing: "2dp"
         padding: ["10dp", "0dp"]
         
+        # Würfel-Icon mit Theme-Farbe
         MDIconButton:
             icon: root.dice_icon
             style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
             
+        # Modifier-Vorzeichen wenn vorhanden
         MDIconButton:
             icon: root.modifier_sign
             style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
             opacity: 1 if root.has_modifier else 0
             disabled: not root.has_modifier
             
+        # Modifier-Wert wenn vorhanden
         MDIconButton:
             icon: root.modifier_value_icon
             style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
             opacity: 1 if root.has_modifier else 0
             disabled: not root.has_modifier
 
+    # Steigern/Senken Buttons
     MDBoxLayout:
         size_hint_x: None
         width: "50dp"
@@ -131,57 +157,260 @@ kv = '''
             icon: "arrow-up-thick"
             style: "standard"
             on_release: root.steigere_eigenschaft()
+            size_hint: None, None
+            size: dp(28), dp(28)
 
         MDIconButton:
             icon: "arrow-down-thick"
             style: "standard"
             on_release: root.senke_eigenschaft()
+            size_hint: None, None
+            size: dp(28), dp(28)
 '''
 
-Builder.load_string(kv)
+# KV-String laden
+Builder.load_string(KV_STRING)
+
+# Kein Dialog mehr benötigt, stattdessen nur der Indicator
+
+
+class IconCache:
+    """
+    Cache für häufig verwendete Icons, um wiederholtes Laden zu vermeiden.
+    Implements Singleton-Pattern für effizientes Resource-Management.
+    """
+    # Vorberechnete Icons für häufige Werte 
+    _DICE_ICONS = {
+        4: "dice-d4", 
+        6: "dice-d6", 
+        8: "dice-d8", 
+        10: "dice-d10", 
+        12: "dice-d12"
+    }
+    
+    _MODIFIER_ICONS = {
+        1: "numeric-1",
+        2: "numeric-2",
+        3: "numeric-3",
+        4: "numeric-4",
+        5: "numeric-5"
+    }
+    
+    _MODIFIER_SIGNS = {
+        True: "plus",  # positiver Modifier
+        False: "minus"  # negativer Modifier
+    }
+    
+    @classmethod
+    def get_dice_icon(cls, wert):
+        """Gibt ein gecachtes Würfel-Icon für einen Würfelwert zurück"""
+        cache_key = f"dice_{wert}"
+        
+        icon = Cache.get('wuerfel_icons', cache_key)
+        if icon:
+            return icon
+        
+        icon = cls._DICE_ICONS.get(wert, f"dice-d{wert}")
+        Cache.append('wuerfel_icons', cache_key, icon)
+        return icon
+
+    @classmethod
+    def get_modifier_icon(cls, modifier):
+        """Gibt ein gecachtes numerisches Icon für einen Modifier zurück"""
+        abs_mod = abs(modifier)
+        cache_key = f"mod_{abs_mod}"
+        
+        icon = Cache.get('wuerfel_icons', cache_key)
+        if icon:
+            return icon
+            
+        icon = cls._MODIFIER_ICONS.get(abs_mod, f"numeric-{abs_mod}")
+        Cache.append('wuerfel_icons', cache_key, icon)
+        return icon
+        
+    @classmethod
+    def get_modifier_sign(cls, is_positive):
+        """Gibt das entsprechende Vorzeichen-Icon zurück"""
+        return cls._MODIFIER_SIGNS[is_positive]
+
 
 class EigenschaftenWidget(MDBoxLayout):
+    """
+    Widget zur Anzeige und Bearbeitung von Attributen und Fertigkeiten eines Charakters.
+    Optimiert für schnellere Render-Performance mit Threading und UI-Feedback.
+    """
+    _update_ausstehend = False
+    _thread = None
+    
     def __init__(self, **kwargs):
+        """Initialisiert das EigenschaftenWidget mit verzögertem Setup"""
         super().__init__(**kwargs)
+        # Initialisierung verzögern und Loading-Indicator anzeigen
+        self._zeige_lade_indicator()
+        Clock.schedule_once(self._verzoegerte_initialisierung, 0.1)
+
+    def _zeige_lade_indicator(self):
+        """Zeigt den Ladeindikator direkt im Layout an"""
+        if not hasattr(self, '_lade_indicator') or not self._lade_indicator:
+            self._lade_indicator = MDCircularProgressIndicator(
+                size_hint=(None, None),
+                size=(dp(46), dp(46)),
+                active=True,
+                pos_hint={'center_x': 0.5, 'center_y': 0.5}
+            )
+            self.add_widget(self._lade_indicator)
+
+    def _verzoegerte_initialisierung(self, dt):
+        """Führt die Initialisierung in einem separaten Thread aus"""
+        self._initialisiere_controller()
+        self._initialisiere_sortieroptionen()
+        self._initialisiere_menues()
+        
+        # Starte Thread für das Laden der Daten
+        self._thread = Thread(target=self._lade_daten_im_hintergrund)
+        self._thread.daemon = True
+        self._thread.start()
+
+    def _initialisiere_controller(self):
+        """Initialisiert die Controller-Verbindung gemäß MVC-Pattern"""
         app = App.get_running_app()
         self.controller = app.controller
-        # Binde an den Charakter-Änderung
-        self.controller.bind(on_charakter_changed=self.on_charakter_changed)
+        # Binde an den Charakter-Änderung-Event mit Verzögerung
+        self.controller.bind(on_charakter_changed=self._plane_update)
 
-        # Initialisiere Sorting und Filtering Optionen
+    def _initialisiere_sortieroptionen(self):
+        """Initialisiert Sortier- und Filteroptionen"""
         self.sort_order = 'asc'
         self.current_sort_field = 'item_name'
-        self.filter_aktiviert = 'Alle Fertigkeiten'
-        
-        # Dropdown Menüs erstellen
+        self.filter_aktiviert = FILTER_OPTIONEN["ALLE"]
+
+    def _initialisiere_menues(self):
+        """Initialisiert Dropdown-Menüs (lazy loading)"""
         self.sort_menu = None
         self.filter_menu = None
 
-    def create_sort_menu(self):
-        """Erstellt das Sortier-Menü"""
+    def _lade_daten_im_hintergrund(self):
+        """Thread-Methode zum Laden und Vorverarbeiten der Daten"""
+        try:
+            # Zugriff auf Charakterdaten
+            charakter = self.controller.charakter
+            
+            # Attribut-Daten vorverarbeiten
+            attribute_liste = list(charakter.attribute.values())
+            attribute_widgets = []
+            
+            # Vorbereite Attribute-Widgets
+            for attribut in attribute_liste:
+                item = {
+                    'item_name': attribut.attribut_name,
+                    'item_obj': attribut,
+                    'item_type': 'attribute',
+                    'controller': self.controller,
+                    'dice_icon': IconCache.get_dice_icon(attribut.wert),
+                    'modifier_sign': IconCache.get_modifier_sign(attribut.modifier > 0),
+                    'modifier_value_icon': IconCache.get_modifier_icon(attribut.modifier),
+                    'has_modifier': attribut.modifier != 0
+                }
+                attribute_widgets.append(item)
+            
+            # Fertigkeiten vorverarbeiten
+            fertigkeiten_liste = self._hole_gefilterte_fertigkeiten(charakter)
+            fertigkeiten_liste = self._sortiere_fertigkeiten(fertigkeiten_liste)
+            
+            # Fertigkeiten-Widgets vorbereiten
+            fertigkeiten_widgets = []
+            for fertigkeit in fertigkeiten_liste:
+                item = {
+                    'item_name': fertigkeit.fertigkeit_name,
+                    'item_obj': fertigkeit,
+                    'item_type': 'fertigkeit',
+                    'controller': self.controller,
+                    'dice_icon': IconCache.get_dice_icon(fertigkeit.wert),
+                    'modifier_sign': IconCache.get_modifier_sign(fertigkeit.modifier > 0),
+                    'modifier_value_icon': IconCache.get_modifier_icon(fertigkeit.modifier),
+                    'has_modifier': fertigkeit.modifier != 0
+                }
+                fertigkeiten_widgets.append(item)
+            
+            # Aufbereitet Daten an den Hauptthread senden
+            self._aktualisiere_ui_im_hauptthread(attribute_widgets, fertigkeiten_widgets)
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden der Daten im Hintergrund: {e}")
+            # Fehler behandeln und Indicator entfernen
+            self._entferne_lade_indicator()
+    
+    @mainthread
+    def _aktualisiere_ui_im_hauptthread(self, attribute_widgets, fertigkeiten_widgets):
+        """Aktualisiert die UI im Hauptthread mit den vorbereiteten Daten"""
+        # Entferne Lade-Indicator
+        self._entferne_lade_indicator()
+        
+        # Füge Attribute-Widgets hinzu
+        if hasattr(self, 'attribute_layout'):
+            self.attribute_layout.clear_widgets()
+            for widget_data in attribute_widgets:
+                item = EigenschaftenItemRow(**widget_data)
+                self.attribute_layout.add_widget(item)
+        
+        # Füge Fertigkeiten-Widgets hinzu (mit Lazy-Loading)
+        if hasattr(self, 'fertigkeiten_layout'):
+            self.fertigkeiten_layout.clear_widgets()
+            self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(fertigkeiten_widgets)
+    
+    def _fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(self, fertigkeiten_widgets):
+        """Fügt Fertigkeiten-Widgets stufenweise hinzu, um UI-Ruckler zu vermeiden"""
+        BATCH_SIZE = 30  # Anzahl der Widgets pro Batch
+        
+        if not fertigkeiten_widgets:
+            return
+            
+        batch = fertigkeiten_widgets[:BATCH_SIZE]
+        rest = fertigkeiten_widgets[BATCH_SIZE:]
+        
+        # Aktuellen Batch hinzufügen
+        for widget_data in batch:
+            item = EigenschaftenItemRow(**widget_data)
+            self.fertigkeiten_layout.add_widget(item)
+        
+        # Rest verzögert laden
+        if rest:
+            Clock.schedule_once(
+                lambda dt: self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(rest), 
+                0.05
+            )
+    
+    @mainthread
+    def _entferne_lade_indicator(self):
+        """Entfernt den Ladeindikator aus dem Layout"""
+        if hasattr(self, '_lade_indicator') and self._lade_indicator:
+            self.remove_widget(self._lade_indicator)
+            self._lade_indicator = None
+
+    def _erstelle_sort_menu(self):
+        """Erstellt das Sortier-Menü mit allen Optionen"""
         menu_items = [
             {
-                "text": item,
-                "on_release": lambda x=item: self.set_sort_option(x),
-            } for item in ["Name (aufsteigend)", "Name (absteigend)", 
-                         "Wert (aufsteigend)", "Wert (absteigend)"]
+                "text": option,
+                "on_release": lambda x=option: self._setze_sort_option(x),
+            } for option in SORTIER_OPTIONEN.values()
         ]
-        
+
         self.sort_menu = MDDropdownMenu(
             caller=self.ids.sort_spinner,
             items=menu_items,
             width_mult=4,
         )
 
-    def create_filter_menu(self):
-        """Erstellt das Filter-Menü"""
+    def _erstelle_filter_menu(self):
+        """Erstellt das Filter-Menü mit allen Optionen"""
         menu_items = [
             {
-                "text": item,
-                "on_release": lambda x=item: self.set_filter_option(x),
-            } for item in ["Alle Fertigkeiten", "Aktiviert", "Nicht Aktiviert"]
+                "text": option,
+                "on_release": lambda x=option: self._setze_filter_option(x),
+            } for option in FILTER_OPTIONEN.values()
         ]
-        
+
         self.filter_menu = MDDropdownMenu(
             caller=self.ids.aktiv_spinner,
             items=menu_items,
@@ -191,37 +420,61 @@ class EigenschaftenWidget(MDBoxLayout):
     def show_sort_menu(self, *args):
         """Zeigt das Sortier-Menü an"""
         if not self.sort_menu:
-            self.create_sort_menu()
+            self._erstelle_sort_menu()
         self.sort_menu.open()
 
     def show_filter_menu(self, *args):
         """Zeigt das Filter-Menü an"""
         if not self.filter_menu:
-            self.create_filter_menu()
+            self._erstelle_filter_menu()
         self.filter_menu.open()
 
-    def set_sort_option(self, text):
+    def _setze_sort_option(self, text):
         """Setzt die Sortieroption und aktualisiert die Anzeige"""
         self.ids.sort_spinner.text = text
         self.sort_menu.dismiss()
-        self.update_sort_option()
+        self._aktualisiere_sort_option()
 
-    def set_filter_option(self, text):
+    def _setze_filter_option(self, text):
         """Setzt die Filteroption und aktualisiert die Anzeige"""
         self.ids.aktiv_spinner.text = text
         self.filter_menu.dismiss()
-        self.update_filter_option()
+        self._aktualisiere_filter_option()
 
     def on_kv_post(self, base_widget):
-        # Diese Methode wird aufgerufen, nachdem die .kv-Datei geladen wurde
-        self.update_eigenschaften()
+        """Wird aufgerufen, nachdem die .kv-Datei geladen wurde"""
+        pass  # Nicht mehr benötigt, da Initialisierung bereits in __init__ erfolgt
 
-    def on_charakter_changed(self, instance, *args):
-        # Aktualisiere die Eigenschaften, wenn der Charakter im Controller geändert wird
-        self.update_eigenschaften()
+    def _plane_update(self, instance, *args):
+        """
+        Plant ein Update des Widgets zu einem späteren Zeitpunkt.
+        Zeigt den Lade-Indicator an, wenn ein vollständiges Update angefordert wird.
+        """
+        if not self._update_ausstehend:
+            self._update_ausstehend = True
+            self._zeige_lade_indicator()
+            # Verzögert ausführen
+            Clock.schedule_once(self._starte_update_thread, 0.05)
 
-    def update_sort_option(self):
+    def _starte_update_thread(self, dt):
+        """Startet einen Thread für das Daten-Update"""
+        self._update_ausstehend = False
+        
+        # Sicherstellen, dass kein anderer Thread läuft
+        if self._thread and self._thread.is_alive():
+            # Warten, bis der Thread beendet ist - sollte normalerweise nicht vorkommen
+            self._thread.join(0.5) 
+        
+        # Neuen Thread starten
+        self._thread = Thread(target=self._lade_daten_im_hintergrund)
+        self._thread.daemon = True
+        self._thread.start()
+
+    def _aktualisiere_sort_option(self):
+        """Aktualisiert die Sortieroptionen basierend auf der Auswahl"""
         selected_text = self.ids.sort_spinner.text
+        
+        # Parse die ausgewählte Option
         if ' (aufsteigend)' in selected_text:
             sort_option = selected_text.replace(' (aufsteigend)', '')
             sort_order = 'asc'
@@ -232,7 +485,7 @@ class EigenschaftenWidget(MDBoxLayout):
             sort_option = selected_text
             sort_order = 'asc'
 
-        # Map the sort option to the field name
+        # Mapping der Sortieroption zum Feldnamen
         sort_field_mapping = {
             'Name': 'item_name',
             'Wert': 'wert'
@@ -241,122 +494,148 @@ class EigenschaftenWidget(MDBoxLayout):
         self.current_sort_field = sort_field_mapping.get(sort_option, 'item_name')
         self.sort_order = sort_order
 
-        Logger.debug(f"Sortieroption aktualisiert: Feld={self.current_sort_field}, Reihenfolge={self.sort_order}")
+        # Plane ein Update mit Thread
+        self._plane_update(None)
 
-        # Aktualisieren der Fertigkeiten
-        self.update_eigenschaften()
-
-    def update_filter_option(self):
+    def _aktualisiere_filter_option(self):
+        """Aktualisiert die Filteroptionen basierend auf der Auswahl"""
         self.filter_aktiviert = self.ids.aktiv_spinner.text
-        Logger.debug(f"Filteroption aktualisiert: Aktiviert={self.filter_aktiviert}")
-        # Aktualisieren der Fertigkeiten
-        self.update_eigenschaften()
+
+        # Plane ein Update mit Thread
+        self._plane_update(None)
 
     def update_eigenschaften(self):
-        charakter = self.controller.charakter  # Direkt aus dem Controller beziehen
-
-        # Überprüfe, ob attribute_layout initialisiert ist
-        if self.attribute_layout is None or self.fertigkeiten_layout is None:
-            Logger.error("EigenschaftenWidget: attribute_layout oder fertigkeiten_layout ist None")
-            return
-
-        # Zuerst leeren wir die Layouts
-        self.attribute_layout.clear_widgets()
-        self.fertigkeiten_layout.clear_widgets()
-
-        # Attribute hinzufügen
-        for attribut in charakter.attribute.values():
-            item = EigenschaftenItemRow(
-                item_name=attribut.attribut_name,
-                item_obj=attribut,
-                item_type='attribute',
-                controller=self.controller
-            )
-            self.attribute_layout.add_widget(item)
-
-        # Fertigkeiten hinzufügen
-
-        # Fertigkeiten sammeln
+        """Öffentliche API-Methode für den Controller"""
+        self._plane_update(None)
+    
+    def _hole_gefilterte_fertigkeiten(self, charakter):
+        """Wendet Filter auf die Fertigkeiten-Liste an (Thread-sicher)"""
         fertigkeiten_liste = list(charakter.fertigkeiten.values())
-
-        # Filtern nach 'filter_aktiviert'
-        if self.filter_aktiviert == 'Aktiviert':
-            fertigkeiten_liste = [f for f in fertigkeiten_liste if f.modifier != -2]
-        elif self.filter_aktiviert == 'Nicht Aktiviert':
-            fertigkeiten_liste = [f for f in fertigkeiten_liste if f.modifier == -2]
-        # else 'Alle Fertigkeiten', keine Filterung
-
-        # Sortieren
+        
+        # Filterung anwenden
+        if self.filter_aktiviert == FILTER_OPTIONEN["AKTIV"]:
+            return [f for f in fertigkeiten_liste if f.modifier != -2]
+        elif self.filter_aktiviert == FILTER_OPTIONEN["INAKTIV"]:
+            return [f for f in fertigkeiten_liste if f.modifier == -2]
+        
+        # Keine Filterung für "Alle Fertigkeiten"
+        return fertigkeiten_liste
+    
+    def _sortiere_fertigkeiten(self, fertigkeiten_liste):
+        """Sortiert die Fertigkeiten-Liste (Thread-sicher)"""
         reverse = (self.sort_order == 'desc')
+        
         if self.current_sort_field == 'item_name':
-            fertigkeiten_liste.sort(key=lambda f: f.fertigkeit_name.lower(), reverse=reverse)
+            return sorted(fertigkeiten_liste, 
+                         key=lambda f: f.fertigkeit_name.lower(), 
+                         reverse=reverse)
         elif self.current_sort_field == 'wert':
-            # Sortieren nach dem numerischen Wert des Attributs 'wert'
-            fertigkeiten_liste.sort(key=lambda f: (f.wert if f.wert is not None else 0), reverse=reverse)
+            return sorted(fertigkeiten_liste,
+                         key=lambda f: (f.wert if f.wert is not None else 0), 
+                         reverse=reverse)
         else:
             # Standardmäßig nach Name sortieren
-            fertigkeiten_liste.sort(key=lambda f: f.fertigkeit_name.lower(), reverse=reverse)
+            return sorted(fertigkeiten_liste, 
+                         key=lambda f: f.fertigkeit_name.lower(), 
+                         reverse=reverse)
 
-        # Jetzt die sortierten und gefilterten Fertigkeiten hinzufügen
-        for fertigkeit in fertigkeiten_liste:
-            item = EigenschaftenItemRow(
-                item_name=fertigkeit.fertigkeit_name,
-                item_obj=fertigkeit,
-                item_type='fertigkeit',
-                controller=self.controller
-            )
-            self.fertigkeiten_layout.add_widget(item)
-
-        Logger.info("EigenschaftenWidget: Eigenschaften aktualisiert.")
 
 class EigenschaftenItemRow(MDBoxLayout):
+    """
+    Einzelne Zeile für ein Attribut oder eine Fertigkeit.
+    Optimiert für Rendering-Performance.
+    """
+    # Properties für Datenbindung
     item_name = StringProperty('')
     item_obj = ObjectProperty(None)
     item_type = StringProperty('')
     controller = ObjectProperty(None)
-    dice_icon = StringProperty('dice-d6')  # Standard-Icon
+    
+    # Icons (voroptimiert in der __init__)
+    dice_icon = StringProperty('dice-d6')
     modifier_sign = StringProperty('minus')
     modifier_value_icon = StringProperty('numeric-1')
     has_modifier = BooleanProperty(False)
+    
+    # Dictionary zum Cachen von eigenschaften
+    eigenschaften_cache = DictProperty({})
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.update_dice_display()
+        
+        # Werte sofort bei der Initialisierung vorberechnen
         if self.item_obj:
-            self.item_obj.bind(wert=self.on_item_obj_changed)
-            self.item_obj.bind(modifier=self.on_item_obj_changed)
-
-    def on_item_obj_changed(self, instance, value):
+            self._update_eigenschaften_cache()
+            # Bindings mit Verzögerung einrichten
+            self.item_obj.bind(wert=self._plane_update)
+            self.item_obj.bind(modifier=self._plane_update)
+    
+    def _update_eigenschaften_cache(self):
+        """Aktualisiert den Cache der Eigenschaften"""
+        if not self.item_obj:
+            return
+            
+        self.eigenschaften_cache.update({
+            'wert': self.item_obj.wert,
+            'modifier': self.item_obj.modifier,
+        })
+        
+    def _plane_update(self, instance, value):
+        """Plant ein Update mit Verzögerung"""
+        # Prüfen, ob sich relevante Werte tatsächlich geändert haben
+        if (self.eigenschaften_cache.get('wert') != self.item_obj.wert or
+            self.eigenschaften_cache.get('modifier') != self.item_obj.modifier):
+            # Nur bei Änderung aktualisieren
+            Clock.schedule_once(self._verzoeges_update, 0.05)
+    
+    def _verzoeges_update(self, dt):
+        """Führt ein verzögertes Update der Anzeige aus"""
+        self._update_eigenschaften_cache()
         self.update_dice_display()
 
     def update_dice_display(self):
-        """Aktualisiert die Würfel-Icons basierend auf dem Wert"""
-        if self.item_obj:
-            # Würfel-Icon setzen
-            self.dice_icon = f"dice-d{self.item_obj.wert}"
+        """Aktualisiert die Würfel-Icons effizient aus dem Cache"""
+        if not self.item_obj:
+            return
             
-            # Modifier-Anzeige aktualisieren
-            if self.item_obj.modifier != 0:
-                self.has_modifier = True
-                self.modifier_sign = "plus" if self.item_obj.modifier > 0 else "minus"
-                # Setze das numerische Icon basierend auf dem Modifier-Wert
-                abs_modifier = abs(self.item_obj.modifier)
-                self.modifier_value_icon = f"numeric-{abs_modifier}"
-            else:
-                self.has_modifier = False
+        # Werte aus dem Cache oder direkt aus dem Objekt holen
+        wert = self.eigenschaften_cache.get('wert', self.item_obj.wert)
+        modifier = self.eigenschaften_cache.get('modifier', self.item_obj.modifier)
+        
+        # Optimierte Icon-Zuweisung
+        self.dice_icon = IconCache.get_dice_icon(wert)
+        
+        # Modifier-Anzeige
+        if modifier != 0:
+            self.has_modifier = True
+            is_positive = modifier > 0
+            self.modifier_sign = IconCache.get_modifier_sign(is_positive)
+            self.modifier_value_icon = IconCache.get_modifier_icon(modifier)
+        else:
+            self.has_modifier = False
 
     def steigere_eigenschaft(self):
+        """Erhöht den Wert einer Eigenschaft über den Controller."""
+        if not self.controller:
+            Logger.error("EigenschaftenItemRow: controller ist nicht gesetzt")
+            return
+            
         if self.item_type == 'attribute':
             self.controller.steigere_attribut(self.item_name)
         elif self.item_type == 'fertigkeit':
             self.controller.steigere_fertigkeit(self.item_name)
         else:
-            Logger.warning(f"Unbekannter Typ: {self.item_type}")
+            Logger.warning(f"Unbekannter Eigenschaftstyp: {self.item_type}")
 
     def senke_eigenschaft(self):
+        """Verringert den Wert einer Eigenschaft über den Controller."""
+        if not self.controller:
+            Logger.error("EigenschaftenItemRow: controller ist nicht gesetzt")
+            return
+            
         if self.item_type == 'attribute':
             self.controller.senke_attribut(self.item_name)
         elif self.item_type == 'fertigkeit':
             self.controller.senke_fertigkeit(self.item_name)
         else:
-            Logger.warning(f"Unbekannter Typ: {self.item_type}")
+            Logger.warning(f"Unbekannter Eigenschaftstyp: {self.item_type}")

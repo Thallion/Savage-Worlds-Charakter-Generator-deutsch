@@ -46,6 +46,8 @@ from views.talente_view import TalenteWidget
 from views.eigenschaften_view import EigenschaftenWidget
 from views.charakterbogen_view import CharakterbogenWidget
 
+from kivy.config import Config
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
 class Charakter:
     def speichern_als_json(self, path):

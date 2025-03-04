@@ -1,4 +1,8 @@
 # views/charakterbogen_view.py
+"""
+View-Komponente für den Charakterbogen nach dem MVC-Pattern.
+Stellt die Benutzerschnittstelle zur Anzeige der Charakterdaten bereit.
+"""
 
 from kivy.lang import Builder
 from kivy.app import App
@@ -18,14 +22,26 @@ from kivymd.uix.button import MDButton, MDIconButton, MDButtonText
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.gridlayout import MDGridLayout
 
-# Importieren der benutzerdefinierten Module
+# Domänenspezifische Imports
 from controllers.decorators import Fehlerbehandlung
 from controllers.charakter_controller import CharakterController
 from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
 
-kv = '''
+# Konstanten für bessere Lesbarkeit und Wartbarkeit
+LABEL_FONT_SIZE = '16sp'
+HEADER_FONT_SIZE = '18sp'
+SUBHEADER_FONT_SIZE = '15sp'
+ROW_HEIGHT = 20
+GRID_WIDTH = dp(250)
+LABEL_WIDTH = 250
+GRID_HEIGHT = dp(30)
+DICE_LAYOUT_WIDTH = dp(120)
+INFO_PADDING = 5
+
+# KV-String - könnte später in eine separate Datei ausgelagert werden
+KV_STRING = '''
 <CharakterbogenWidget>:
     orientation: 'vertical'
     padding: 10
@@ -116,18 +132,18 @@ kv = '''
             # Abgeleitete Werte Abschnitt
             LeftAlignedLabel:
                 text: "Abgeleitete Werte:"
-                font_size: '18sp'
+                font_size: '16sp'
                 bold: True
                 size_hint_y: None
-                height: 30
-                spacing: 10
+                height: 10
+                spacing: 5
                 padding: 10 
 
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
-                spacing: 10
+                spacing: 5
                 padding: 10   
 
                 MDGridLayout:
@@ -135,8 +151,8 @@ kv = '''
                     cols: 2
                     size_hint_y: None
                     height: self.minimum_height
-                    row_default_height: 30
-                    spacing: 10
+                    row_default_height: 20
+                    spacing: 5
                     padding: 10 
 
             # Volk Abschnitt
@@ -324,11 +340,13 @@ kv = '''
         on_press: root.on_button_press()
 '''
 
-Builder.load_string(kv)
+Builder.load_string(KV_STRING)
 
-# Definition der LeftAlignedLabel-Klasse
 class LeftAlignedLabel(MDLabel):
+    """Spezielles Label mit linksbündiger Ausrichtung."""
+    
     def __init__(self, **kwargs):
+        """Initialisiert das LeftAlignedLabel mit linksbündiger Ausrichtung."""
         super().__init__(**kwargs)
         self.halign = 'left'
         self.valign = 'middle'
@@ -336,9 +354,15 @@ class LeftAlignedLabel(MDLabel):
         self.bind(width=self._update_text_size)
 
     def _update_text_size(self, *args):
+        """Aktualisiert die Textgröße basierend auf der Breite."""
         self.text_size = (self.width, None)
 
+
 class CharakterbogenWidget(MDBoxLayout):
+    """
+    Widget zur Anzeige des vollständigen Charakterbogens.
+    Stellt alle Charakterdaten in einer übersichtlichen Form dar.
+    """
     # ObjectProperties für die Widgets
     attribut_grid = ObjectProperty(None)
     fertigkeit_grid = ObjectProperty(None)
@@ -355,37 +379,55 @@ class CharakterbogenWidget(MDBoxLayout):
 
     # Speichern des aktuellen Charakters
     charakter = ObjectProperty(None)
-    bindings_established = False  # Um zu wissen, ob die Bindings bereits eingerichtet wurden
 
     def __init__(self, **kwargs):
+        """Initialisiert das CharakterbogenWidget und lädt die Daten."""
         super().__init__(**kwargs)
-        self.controller = App.get_running_app().controller
-        self.charakter = self.controller.charakter
-
+        self._initialize_controller()
+        
         # Initiale Übersicht erstellen
         Clock.schedule_once(self.update_overview, 0)
-
+        
         Logger.info("CharakterbogenWidget initialisiert.")
 
-    def create_dice_layout(self, wert, modifier=0):
+    def _initialize_controller(self):
+        """Initialisiert die Verbindung zum Controller und holt den Charakter."""
+        app = App.get_running_app()
+        self.controller = app.controller if hasattr(app, 'controller') else None
+        
+        if not self.controller:
+            Logger.error("CharakterbogenWidget: Controller nicht gefunden")
+            return
+            
+        self.charakter = self.controller.charakter
+
+    def _create_dice_layout(self, wert, modifier=0):
         """
-        Erstellt ein BoxLayout mit Würfel-Icons und Modifikatoren
+        Erstellt ein BoxLayout mit Würfel-Icons und Modifikatoren.
+        
+        Args:
+            wert: Der Würfelwert (4, 6, 8, etc.)
+            modifier: Der Modifikator (+1, -2, etc.)
+            
+        Returns:
+            MDBoxLayout: Layout mit den Würfel-Icons
         """
         layout = MDBoxLayout(
             orientation='horizontal', 
             size_hint_x=None,
-            width=dp(120),
+            width=DICE_LAYOUT_WIDTH,
             spacing=dp(2),
             padding=["10dp", "0dp"]
         )
-        
+
         # Würfel Icon
         dice_button = MDIconButton(
             icon=f"dice-d{wert}",
             style="standard"
         )
         layout.add_widget(dice_button)
-        
+
+        # Modifikator-Icons nur anzeigen, wenn ein Modifikator vorhanden ist
         if modifier != 0:
             # Vorzeichen Icon
             sign_button = MDIconButton(
@@ -393,280 +435,46 @@ class CharakterbogenWidget(MDBoxLayout):
                 style="standard"
             )
             layout.add_widget(sign_button)
-            
+
             # Zahlenwert Icon
             value_button = MDIconButton(
                 icon=f"numeric-{abs(modifier)}",
                 style="standard"
             )
             layout.add_widget(value_button)
-            
+
         return layout
 
     def update_overview(self, *args):
-        # Aktualisieren Sie die Übersicht basierend auf dem aktuellen Charakter
+        """
+        Aktualisiert die gesamte Charakterübersicht.
+        Ruft die spezialisierten Update-Methoden für jeden Abschnitt auf.
+        """
         Logger.debug("Aktualisiere die Charakterübersicht.")
-        charakter = self.charakter
-        if not charakter:
+        if not self.charakter:
             Logger.warning("CharakterbogenWidget: Kein Charakter zum Aktualisieren der Übersicht.")
             return
 
-        # Zugriff auf die GridLayouts via IDs
-        attribut_grid = self.ids.attribut_grid
-        fertigkeit_grid = self.ids.fertigkeit_grid
+        # Aktualisierung der einzelnen Sektionen
+        self._update_profil_section()
+        self._update_volk_section()
+        self._update_attribute_section()
+        self._update_fertigkeiten_section()
+        self._update_abgeleitete_werte_section()
+        self._update_handicaps_section()
+        self._update_talente_section()
+        self._update_maechte_section()
+        self._update_ausruestung_section()
+        self._update_waffen_section()
+        self._update_schilde_section()
+        self._update_ruestungen_section()
 
-        # Profil-Abschnitt aktualisieren
-        self.update_profil_section()
-        self.update_volk_section()
-
-        # Leeren der bestehenden Einträge (nur die dynamischen)
-        attribut_grid.clear_widgets()
-        fertigkeit_grid.clear_widgets()
-
-        # Attribute aktualisieren
-        for attribut in charakter.attribute.values():
-            if attribut.modifier == -2:
-                continue  # Item ausblenden
-
-            attribut_grid.add_widget(MDLabel(
-                text=attribut.attribut_name,
-                font_size="16sp",  # Statt font_style
-                size_hint_x=None,
-                width=dp(250),
-                size_hint_y=None,
-                height=dp(40),
-                halign='left'
-            ))
-
-            dice_layout = self.create_dice_layout(attribut.wert, attribut.modifier)
-            attribut_grid.add_widget(dice_layout)
-
-        # Fertigkeiten aktualisieren
-        for fertigkeit in charakter.fertigkeiten.values():
-            if fertigkeit.modifier == -2:
-                continue
-
-            if fertigkeit.modifier == 0 and fertigkeit.wert not in [4, 6, 8, 10, 12]:
-                continue
-
-            fertigkeit_grid.add_widget(MDLabel(
-                text=fertigkeit.fertigkeit_name,
-                font_size="16sp",  # Statt font_style
-                size_hint_x=None,
-                width=dp(250),
-                size_hint_y=None,
-                height=dp(40),
-                halign='left'
-            ))
-
-            dice_layout = self.create_dice_layout(fertigkeit.wert, fertigkeit.modifier)
-            fertigkeit_grid.add_widget(dice_layout)
-
-        # Handicaps Abschnitt
-        handicaps_section = self.ids.handicaps_section
-        handicaps_section.clear_widgets()
-        handicaps = charakter.selected_handicaps
-        for handicap_name_key in handicaps:
-            handicap = charakter.handicaps.get(handicap_name_key)
-            if handicap:
-                handicaps_section.add_widget(LeftAlignedLabel(
-                    text=f"{handicap.name} ({handicap.stufe})",
-                    font_size='16sp',
-                    size_hint_y=None,
-                    height=30
-                ))
-            else:
-                Logger.warning(f"Handicap '{handicap_name_key}' nicht in charakter.handicaps gefunden.")
-
-        # Talente Abschnitt
-        talente_section = self.ids.talente_section
-        talente_section.clear_widgets()
-        talente = charakter.selected_talente
-        for talent_name_key in talente:
-            talent = charakter.talente.get(talent_name_key)
-            if talent:
-                talente_section.add_widget(LeftAlignedLabel(
-                    text=f"{talent.name}",
-                    font_size='16sp',
-                    size_hint_y=None,
-                    height=30
-                ))
-            else:
-                Logger.warning(f"Talent '{talent_name_key}' nicht in charakter.talente gefunden.")
-
-        # Mächte Abschnitt
-        maechte_section = self.ids.maechte_section
-        maechte_section.clear_widgets()
-        maechte = charakter.selected_maechte
-        for macht_name_key in maechte:
-            macht = charakter.maechte.get(macht_name_key)
-            if macht:
-                maechte_section.add_widget(LeftAlignedLabel(
-                    text=f"{macht.name}, Rang: {macht.rang}, Machtpunkte: {macht.machtpunkte}, "
-                        f"Reichweite: {macht.reichweite}, Dauer: {macht.dauer}, Effekt: {macht.effekt}",
-                    font_size='16sp',
-                    size_hint_y=None,
-                    height=30
-                ))
-            else:
-                Logger.warning(f"Macht '{macht_name_key}' nicht in charakter.maechte gefunden.")
-
-        # Ausrüstung Abschnitt
-        ausruestung_section = self.ids.ausruestung_section
-        ausruestung_section.clear_widgets()
-
-        alle_ausruestung = [item for item in charakter.ausruestung.values() if item.ausgewaehlt]
-
-        for item in alle_ausruestung:
-            item_text = f"{item.name} x{item.menge}"
-            item_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=45)
-            item_label = LeftAlignedLabel(
-                text=item_text,
-                font_size='16sp',
-                size_hint_x=0.8
-            )
-
-            if isinstance(item, Waffe) or isinstance(item, Ruestung) or isinstance(item, Schild):
-                button_text = "Anlegen" if not item.angelegt else "Ablegen"
-                toggle_button = MDButton(style="filled")
-                toggle_button.add_widget(MDButtonText(
-                    text=button_text
-                ))
-                toggle_button.bind(on_press=partial(self.toggle_item, item))
-                item_layout.add_widget(item_label)
-                item_layout.add_widget(toggle_button)
-            else:
-                # Keine Möglichkeit zum Anlegen für allgemeine Ausrüstung -> kein Button
-                item_layout.add_widget(item_label)
-
-            ausruestung_section.add_widget(item_layout)
-
-        # Waffen Abschnitt
-        waffen_section = self.ids.waffen_section
-        waffen_section.clear_widgets()
-        # Filtere alle angelegten Waffen aus ausruestung
-        waffen = [w for w in charakter.ausruestung.values() if isinstance(w, Waffe) and w.angelegt]
-
-        for waffe in waffen:
-            waffe_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=30)
-            eigenschaften = waffe.eigenschaften
-            eigenschaften_text = (
-                f"Schaden: {eigenschaften.get('Schaden', '-')}, "
-                f"Reichweite: {eigenschaften.get('Reichweite', '-')}, "
-                f"FR: {eigenschaften.get('FR', '-')}, "
-                f"Schuss: {eigenschaften.get('Schuss', '-')}, "
-                f"PB: {eigenschaften.get('PB', '-')}"
-            )
-
-            weapon_label = LeftAlignedLabel(
-                text=f"{waffe.name}, {eigenschaften_text}",
-                font_size='16sp',
-                size_hint_x=0.8
-            )
-
-            waffe_layout.add_widget(weapon_label)
-            waffen_section.add_widget(waffe_layout)
-
-        # Schilde Abschnitt
-        schilde_section = self.ids.schilde_section
-        schilde_section.clear_widgets()
-        schilde = [s for s in charakter.ausruestung.values() if isinstance(s, Schild) and s.angelegt]
-
-        for schild in schilde:
-            schild_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=30)
-
-            schild_label = LeftAlignedLabel(
-                text=f"{schild.name}, Parade={schild.parade}, Deckung={schild.deckung}, Mindeststärke={schild.mindeststaerke}",
-                font_size='16sp',
-                size_hint_x=0.8
-            )
-
-            schild_layout.add_widget(schild_label)
-            schilde_section.add_widget(schild_layout)
-
-        # Rüstungen Abschnitt
-        ruestungen_section = self.ids.ruestungen_section
-        ruestungen_section.clear_widgets()
-        ruestungen = [r for r in charakter.ausruestung.values() if isinstance(r, Ruestung) and r.angelegt]
-
-        for ruestung in ruestungen:
-            ruestung_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=30)
-
-            armor_label = LeftAlignedLabel(
-                text=(
-                    f"{ruestung.name}, Schutz: "
-                    f"Torso={ruestung.torso}, Arme={ruestung.arme}, "
-                    f"Beine={ruestung.beine}, Kopf={ruestung.kopf}"
-                ),
-                font_size='16sp',
-                size_hint_x=0.8
-            )
-
-            ruestung_layout.add_widget(armor_label)
-            ruestungen_section.add_widget(ruestung_layout)
-
-        # Gesamten Rüstungsschutz berechnen
-        gesamt_ruestungsschutz = charakter.berechne_gesamt_ruestungsschutz()
-
-        # Text für den Gesamt-Rüstungsschutz erstellen
-        gesamt_schutz_text = (
-            f"Gesamter Rüstungsschutz: "
-            f"Torso={gesamt_ruestungsschutz['Torso']}, "
-            f"Arme={gesamt_ruestungsschutz['Arme']}, "
-            f"Beine={gesamt_ruestungsschutz['Beine']}, "
-            f"Kopf={gesamt_ruestungsschutz['Kopf']}"
-        )
-
-        # Label für den Gesamt-Rüstungsschutz erstellen
-        gesamt_schutz_label = LeftAlignedLabel(
-            text=gesamt_schutz_text,
-            font_size='16sp',
-            bold=True,
-            size_hint_y=None,
-            height=30
-        )
-
-        ruestungen_section.add_widget(gesamt_schutz_label)
-
-        # Abgeleitete Werte Abschnitt
-        abgeleitete_werte_grid = self.ids.abgeleitete_werte_grid
-        abgeleitete_werte_grid.clear_widgets()
-
-        abgeleitete_werte = {
-            'Bewegungsweite': charakter.bewegungsweite,
-            'Parade': charakter.parade,
-            'Robustheit': charakter.robustheit_mit_ruestung,
-            'Machtpunkte': charakter.machtpunkte,
-            'Wunden': charakter.wunden,
-            'Erschöpfung': charakter.erschoepfung,
-            'Bennys': charakter.bennys,
-            'Entschlossenheit': charakter.entschlossenheit,
-            'Maximale Traglast': f"{charakter.gesamtgewicht} / {charakter.maximale_traglast} kg",
-        }
-
-        for key, value in abgeleitete_werte.items():
-            abgeleitet_label = LeftAlignedLabel(
-                text=f"{key}:",
-                size_hint_x=None,
-                width=250,
-                size_hint_y=None,
-                height=30
-            )
-            wert_label = LeftAlignedLabel(
-                text=str(value),
-                size_hint_x=None,
-                width=250,
-                size_hint_y=None,
-                height=30
-            )
-            abgeleitete_werte_grid.add_widget(abgeleitet_label)
-            abgeleitete_werte_grid.add_widget(wert_label)
-
-
-    def update_profil_section(self):
-        """Zeigt die Profildaten des Charakters als Label ohne Eingabefelder an."""
-        charakter = self.charakter
-        profil_data = charakter.profil_daten
+    def _update_profil_section(self):
+        """
+        Aktualisiert den Profil-Abschnitt des Charakterbogens.
+        Zeigt die grundlegenden Charakterdaten an.
+        """
+        profil_data = self.charakter.profil_daten
 
         # Lösche vorhandene Widgets im Profil-Abschnitt
         profil_section = self.ids.profil_section
@@ -676,21 +484,23 @@ class CharakterbogenWidget(MDBoxLayout):
         for key, value in profil_data.items():
             profil_section.add_widget(LeftAlignedLabel(
                 text=f"{key}: {value}",
-                font_size='15sp',
+                font_size=SUBHEADER_FONT_SIZE,
                 size_hint_y=None,
-                padding=10,
-                height=30
+                padding=INFO_PADDING,
+                height=ROW_HEIGHT
             ))
 
-    def update_volk_section(self):
-        """Zeigt die Informationen zum ausgewählten Volk im Charakterbogen an."""
-        charakter = self.charakter
+    def _update_volk_section(self):
+        """
+        Aktualisiert den Volks-Abschnitt des Charakterbogens.
+        Zeigt Informationen zum gewählten Volk an.
+        """
         volk_section = self.ids.volk_section
         volk_section.clear_widgets()
 
         # Finde den Namen des ausgewählten Volkes
         selected_volk_name = None
-        for volk_name, aktiv in charakter.voelker_selected.items():
+        for volk_name, aktiv in self.charakter.voelker_selected.items():
             if aktiv:
                 selected_volk_name = volk_name
                 break
@@ -699,117 +509,439 @@ class CharakterbogenWidget(MDBoxLayout):
             # Kein Volk ausgewählt
             volk_section.add_widget(LeftAlignedLabel(
                 text="Kein Volk ausgewählt.",
-                font_size='16sp',
+                font_size=LABEL_FONT_SIZE,
                 size_hint_y=None,
-                height=30
+                height=ROW_HEIGHT
             ))
             return
 
         # Füge den Namen des Volkes hinzu
         volk_name_label = LeftAlignedLabel(
             text=f"Volk: {selected_volk_name}",
-            font_size='18sp',
+            font_size=HEADER_FONT_SIZE,
             bold=True,
             size_hint_y=None,
-            height=30
+            height=ROW_HEIGHT
         )
         volk_section.add_widget(volk_name_label)
 
         # Holen der Volk-Daten aus charakter.voelker
-        selected_volk = charakter.voelker.get(selected_volk_name)
+        selected_volk = self.charakter.voelker.get(selected_volk_name)
         if not selected_volk:
             Logger.warning(f"Keine Daten für Volk '{selected_volk_name}' gefunden.")
             volk_section.add_widget(LeftAlignedLabel(
                 text="Keine Daten für das ausgewählte Volk vorhanden.",
-                font_size='15sp',
+                font_size=SUBHEADER_FONT_SIZE,
                 size_hint_y=None,
-                padding=10,
-                height=30
+                padding=INFO_PADDING,
+                height=ROW_HEIGHT
             ))
             return
 
-        # Talente anzeigen
-        talente = selected_volk.talente
-        if talente:
-            talente_label = LeftAlignedLabel(
-                text="Talente:",
-                font_size='15sp',
-                bold=True,
+        # Volkseigenschaften anzeigen
+        self._add_volk_eigenschaften(volk_section, "Talente", selected_volk.talente)
+        self._add_volk_eigenschaften(volk_section, "Handicaps", selected_volk.handicaps)
+        self._add_volk_eigenschaften(volk_section, "Besonderheiten", selected_volk.besonderheiten)
+
+    def _add_volk_eigenschaften(self, container, titel, eigenschaften_liste):
+        """
+        Fügt eine Liste von Volk-Eigenschaften zum Container hinzu.
+        
+        Args:
+            container: Der Container, zu dem die Eigenschaften hinzugefügt werden sollen
+            titel: Die Überschrift für die Eigenschaften
+            eigenschaften_liste: Liste der anzuzeigenden Eigenschaften
+        """
+        if not eigenschaften_liste:
+            return
+            
+        # Überschrift
+        container.add_widget(LeftAlignedLabel(
+            text=f"{titel}:",
+            font_size=SUBHEADER_FONT_SIZE,
+            bold=True,
+            size_hint_y=None,
+            height=ROW_HEIGHT
+        ))
+        
+        # Eigenschaften
+        for eigenschaft in eigenschaften_liste:
+            container.add_widget(LeftAlignedLabel(
+                text=f"- {eigenschaft}",
+                font_size=SUBHEADER_FONT_SIZE,
                 size_hint_y=None,
-                height=30
-            )
-            volk_section.add_widget(talente_label)
-            for talent in talente:
-                volk_section.add_widget(LeftAlignedLabel(
-                    text=f"- {talent}",
-                    font_size='15sp',
-                    size_hint_y=None,
-                    padding=10,
-                    height=30
-                ))
+                padding=INFO_PADDING,
+                height=ROW_HEIGHT
+            ))
 
-        # Handicaps anzeigen
-        handicaps = selected_volk.handicaps
-        if handicaps:
-            handicaps_label = LeftAlignedLabel(
-                text="Handicaps:",
-                font_size='15sp',
-                bold=True,
+    def _update_attribute_section(self):
+        """
+        Aktualisiert den Attribut-Abschnitt des Charakterbogens.
+        Zeigt alle Attribute mit ihren Werten und Modifikatoren an.
+        """
+        attribut_grid = self.ids.attribut_grid
+        attribut_grid.clear_widgets()
+
+        # Attribute anzeigen
+        for attribut in self.charakter.attribute.values():
+            # Überspringe deaktivierte Attribute
+            if attribut.modifier == -2:
+                continue
+
+            attribut_grid.add_widget(MDLabel(
+                text=attribut.attribut_name,
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=None,
+                width=GRID_WIDTH,
                 size_hint_y=None,
-                height=30
-            )
-            volk_section.add_widget(handicaps_label)
-            for handicap in handicaps:
-                volk_section.add_widget(LeftAlignedLabel(
-                    text=f"- {handicap}",
-                    font_size='15sp',
-                    size_hint_y=None,
-                    padding=10,
-                    height=30
-                ))
+                height=GRID_HEIGHT,
+                halign='left'
+            ))
 
-        # Besonderheiten anzeigen
-        besonderheiten = selected_volk.besonderheiten
-        if besonderheiten:
-            besonderheiten_label = LeftAlignedLabel(
-                text="Besonderheiten:",
-                font_size='15sp',
-                bold=True,
+            dice_layout = self._create_dice_layout(attribut.wert, attribut.modifier)
+            attribut_grid.add_widget(dice_layout)
+
+    def _update_fertigkeiten_section(self):
+        """
+        Aktualisiert den Fertigkeiten-Abschnitt des Charakterbogens.
+        Zeigt alle aktiven Fertigkeiten mit ihren Werten und Modifikatoren an.
+        """
+        fertigkeit_grid = self.ids.fertigkeit_grid
+        fertigkeit_grid.clear_widgets()
+
+        # Fertigkeiten anzeigen
+        for fertigkeit in self.charakter.fertigkeiten.values():
+            # Überspringe deaktivierte oder nicht relevante Fertigkeiten
+            if fertigkeit.modifier == -2:
+                continue
+
+            if fertigkeit.modifier == 0 and fertigkeit.wert not in [4, 6, 8, 10, 12]:
+                continue
+
+            fertigkeit_grid.add_widget(MDLabel(
+                text=fertigkeit.fertigkeit_name,
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=None,
+                width=GRID_WIDTH,
                 size_hint_y=None,
-                height=30
-            )
-            volk_section.add_widget(besonderheiten_label)
-            for besonderheit in besonderheiten:
-                volk_section.add_widget(LeftAlignedLabel(
-                    text=f"- {besonderheit}",
-                    font_size='15sp',
+                height=GRID_HEIGHT,
+                halign='left'
+            ))
+
+            dice_layout = self._create_dice_layout(fertigkeit.wert, fertigkeit.modifier)
+            fertigkeit_grid.add_widget(dice_layout)
+
+    def _update_handicaps_section(self):
+        """
+        Aktualisiert den Handicaps-Abschnitt des Charakterbogens.
+        Zeigt alle ausgewählten Handicaps an.
+        """
+        handicaps_section = self.ids.handicaps_section
+        handicaps_section.clear_widgets()
+        
+        # Ausgewählte Handicaps anzeigen
+        for handicap_name_key in self.charakter.selected_handicaps:
+            handicap = self.charakter.handicaps.get(handicap_name_key)
+            if handicap:
+                handicaps_section.add_widget(LeftAlignedLabel(
+                    text=f"{handicap.name} ({handicap.stufe})",
+                    font_size=LABEL_FONT_SIZE,
                     size_hint_y=None,
-                    padding=10,
-                    height=30
+                    height=ROW_HEIGHT
                 ))
+            else:
+                Logger.warning(f"Handicap '{handicap_name_key}' nicht in charakter.handicaps gefunden.")
 
-    def toggle_item(self, item, instance):
-        # Finden des entsprechenden Objekts in den Charakterdatenstrukturen
-        charakter = self.charakter
+    def _update_talente_section(self):
+        """
+        Aktualisiert den Talente-Abschnitt des Charakterbogens.
+        Zeigt alle ausgewählten Talente an.
+        """
+        talente_section = self.ids.talente_section
+        talente_section.clear_widgets()
+        
+        # Ausgewählte Talente anzeigen
+        for talent_name_key in self.charakter.selected_talente:
+            talent = self.charakter.talente.get(talent_name_key)
+            if talent:
+                talente_section.add_widget(LeftAlignedLabel(
+                    text=f"{talent.name}",
+                    font_size=LABEL_FONT_SIZE,
+                    size_hint_y=None,
+                    height=ROW_HEIGHT
+                ))
+            else:
+                Logger.warning(f"Talent '{talent_name_key}' nicht in charakter.talente gefunden.")
 
-        # Prüfen, ob das Item eine Waffe, Rüstung oder Schild ist
-        if isinstance(item, Waffe):
-            item_list = charakter.selected_waffen
-        elif isinstance(item, Ruestung):
-            item_list = charakter.selected_ruestungen
-        elif isinstance(item, Schild):
-            item_list = charakter.selected_schilde
+    def _update_maechte_section(self):
+        """
+        Aktualisiert den Mächte-Abschnitt des Charakterbogens.
+        Zeigt alle ausgewählten Mächte mit ihren Eigenschaften an.
+        """
+        maechte_section = self.ids.maechte_section
+        maechte_section.clear_widgets()
+        
+        # Ausgewählte Mächte anzeigen
+        for macht_name_key in self.charakter.selected_maechte:
+            macht = self.charakter.maechte.get(macht_name_key)
+            if macht:
+                maechte_section.add_widget(LeftAlignedLabel(
+                    text=(f"{macht.name}, Rang: {macht.rang}, Machtpunkte: {macht.machtpunkte}, "
+                          f"Reichweite: {macht.reichweite}, Dauer: {macht.dauer}, Effekt: {macht.effekt}"),
+                    font_size=LABEL_FONT_SIZE,
+                    size_hint_y=None,
+                    height=ROW_HEIGHT
+                ))
+            else:
+                Logger.warning(f"Macht '{macht_name_key}' nicht in charakter.maechte gefunden.")
+
+    def _update_ausruestung_section(self):
+        """
+        Aktualisiert den Ausrüstungs-Abschnitt des Charakterbogens.
+        Zeigt alle ausgewählten Ausrüstungsgegenstände an.
+        """
+        ausruestung_section = self.ids.ausruestung_section
+        ausruestung_section.clear_widgets()
+
+        # Alle ausgewählte Ausrüstung anzeigen
+        alle_ausruestung = [item for item in self.charakter.ausruestung.values() if item.ausgewaehlt]
+
+        for item in alle_ausruestung:
+            item_text = f"{item.name} x{item.menge}"
+            item_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=45)
+            item_label = LeftAlignedLabel(
+                text=item_text,
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=0.8
+            )
+
+            # Spezielle Behandlung für anlegbare Gegenstände
+            if self._is_equippable_item(item):
+                button_text = "Ablegen" if item.angelegt else "Anlegen"
+                toggle_button = MDButton(style="filled")
+                toggle_button.add_widget(MDButtonText(
+                    text=button_text
+                ))
+                toggle_button.bind(on_press=partial(self._toggle_item, item))
+                item_layout.add_widget(item_label)
+                item_layout.add_widget(toggle_button)
+            else:
+                # Keine Möglichkeit zum Anlegen für allgemeine Ausrüstung -> kein Button
+                item_layout.add_widget(item_label)
+
+            ausruestung_section.add_widget(item_layout)
+
+    def _is_equippable_item(self, item):
+        """
+        Prüft, ob ein Gegenstand anlegbar ist.
+        
+        Args:
+            item: Der zu prüfende Gegenstand
+            
+        Returns:
+            bool: True wenn anlegbar, sonst False
+        """
+        return (isinstance(item, Waffe) or 
+                isinstance(item, Ruestung) or 
+                isinstance(item, Schild))
+
+    def _update_waffen_section(self):
+        """
+        Aktualisiert den Waffen-Abschnitt des Charakterbogens.
+        Zeigt alle angelegten Waffen mit ihren Eigenschaften an.
+        """
+        waffen_section = self.ids.waffen_section
+        waffen_section.clear_widgets()
+        
+        # Angelegte Waffen anzeigen
+        waffen = self._get_equipped_items_of_type(Waffe)
+
+        for waffe in waffen:
+            eigenschaften = waffe.eigenschaften
+            eigenschaften_text = self._format_waffen_eigenschaften(eigenschaften)
+
+            waffe_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
+            weapon_label = LeftAlignedLabel(
+                text=f"{waffe.name}, {eigenschaften_text}",
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=0.8
+            )
+
+            waffe_layout.add_widget(weapon_label)
+            waffen_section.add_widget(waffe_layout)
+
+    def _format_waffen_eigenschaften(self, eigenschaften):
+        """
+        Formatiert die Eigenschaften einer Waffe als Text.
+        
+        Args:
+            eigenschaften: Dictionary mit den Waffeneigenschaften
+            
+        Returns:
+            str: Formatierter Text
+        """
+        return (
+            f"Schaden: {eigenschaften.get('Schaden', '-')}, "
+            f"Reichweite: {eigenschaften.get('Reichweite', '-')}, "
+            f"FR: {eigenschaften.get('FR', '-')}, "
+            f"Schuss: {eigenschaften.get('Schuss', '-')}, "
+            f"PB: {eigenschaften.get('PB', '-')}"
+        )
+
+    def _update_schilde_section(self):
+        """
+        Aktualisiert den Schilde-Abschnitt des Charakterbogens.
+        Zeigt alle angelegten Schilde mit ihren Eigenschaften an.
+        """
+        schilde_section = self.ids.schilde_section
+        schilde_section.clear_widgets()
+        
+        # Angelegte Schilde anzeigen
+        schilde = self._get_equipped_items_of_type(Schild)
+
+        for schild in schilde:
+            schild_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
+            schild_label = LeftAlignedLabel(
+                text=(f"{schild.name}, Parade={schild.parade}, Deckung={schild.deckung}, "
+                      f"Mindeststärke={schild.mindeststaerke}"),
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=0.8
+            )
+
+            schild_layout.add_widget(schild_label)
+            schilde_section.add_widget(schild_layout)
+
+    def _update_ruestungen_section(self):
+        """
+        Aktualisiert den Rüstungs-Abschnitt des Charakterbogens.
+        Zeigt alle angelegten Rüstungen und den Gesamtrüstungsschutz an.
+        """
+        ruestungen_section = self.ids.ruestungen_section
+        ruestungen_section.clear_widgets()
+        
+        # Angelegte Rüstungen anzeigen
+        ruestungen = self._get_equipped_items_of_type(Ruestung)
+
+        for ruestung in ruestungen:
+            ruestung_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
+            armor_label = LeftAlignedLabel(
+                text=self._format_ruestung_text(ruestung),
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=0.8
+            )
+
+            ruestung_layout.add_widget(armor_label)
+            ruestungen_section.add_widget(ruestung_layout)
+        
+        # Gesamtrüstungsschutz anzeigen
+        gesamt_rs = self.charakter.berechne_gesamt_ruestungsschutz()
+        gesamt_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
+        
+        gesamt_text = (
+            f"Gesamtrüstung: Torso={gesamt_rs['Torso']}, Arme={gesamt_rs['Arme']}, "
+            f"Beine={gesamt_rs['Beine']}, Kopf={gesamt_rs['Kopf']}"
+        )
+        
+        gesamt_label = LeftAlignedLabel(
+            text=gesamt_text,
+            font_size=LABEL_FONT_SIZE,
+            bold=True,
+            size_hint_x=0.8
+        )
+        
+        gesamt_layout.add_widget(gesamt_label)
+        ruestungen_section.add_widget(gesamt_layout)
+
+    def _format_ruestung_text(self, ruestung):
+        """
+        Formatiert die Informationen einer Rüstung als Text.
+        
+        Args:
+            ruestung: Das Rüstungs-Objekt
+            
+        Returns:
+            str: Formatierter Text
+        """
+        return (
+            f"{ruestung.name}, Torso={ruestung.torso}, Arme={ruestung.arme}, "
+            f"Beine={ruestung.beine}, Kopf={ruestung.kopf}, "
+            f"Mindeststärke={ruestung.mindeststaerke}"
+        )
+
+    def _get_equipped_items_of_type(self, item_type):
+        """
+        Sammelt alle angelegten Gegenstände eines bestimmten Typs.
+        
+        Args:
+            item_type: Der zu suchende Typ (Waffe, Ruestung, Schild)
+            
+        Returns:
+            list: Liste der angelegten Gegenstände des angegebenen Typs
+        """
+        return [
+            item for item in self.charakter.ausruestung.values()
+            if isinstance(item, item_type) and item.angelegt
+        ]
+
+    def _toggle_item(self, item, instance):
+        """
+        Wechselt zwischen Anlegen und Ablegen eines Gegenstands.
+        
+        Args:
+            item: Der betroffene Gegenstand
+            instance: Die Button-Instanz, die das Event ausgelöst hat
+        """
+        if item.angelegt:
+            item.ablegen()
         else:
-            item_list = charakter.selected_allgemeine_ausruestung
-
-        # Suchen des entsprechenden Objekts in der Liste
-        for charakter_item in item_list:
-            if charakter_item.name == item.name:
-                # Toggle 'angelegt' Status
-                charakter_item.toggle_angelegt()
-                break
-        else:
-            Logger.warning(f"Item '{item.name}' nicht in den Charakterdaten gefunden.")
-
-        charakter.berechne_abgeleitete_werte()
+            item.anlegen(self.charakter)
+            
+        # UI aktualisieren
         self.update_overview(0)
+        
+        # Abgeleitete Werte neu berechnen
+        self.charakter.berechne_abgeleitete_werte()
+        
+    def _update_abgeleitete_werte_section(self):
+        """
+        Aktualisiert den Abschnitt mit den abgeleiteten Werten.
+        Zeigt Parade, Robustheit, Bewegungsweite etc. an.
+        """
+        abgeleitete_werte_grid = self.ids.abgeleitete_werte_grid
+        abgeleitete_werte_grid.clear_widgets()
+        
+        # Liste der anzuzeigenden abgeleiteten Werte
+        werte = [
+            ("Bewegungsweite", str(self.charakter.bewegungsweite)),
+            ("Parade", str(self.charakter.parade)),
+            ("Robustheit", self.charakter.robustheit_mit_ruestung),
+            ("Machtpunkte", str(self.charakter.machtpunkte)),
+            ("Wunden", str(self.charakter.wunden)),
+            ("Erschöpfung", str(self.charakter.erschoepfung)),
+            ("Bennys", str(self.charakter.bennys)),
+            ("Entschlossenheit", str(self.charakter.entschlossenheit)),
+            ("Vermögen", f"{self.charakter.vermoegen} {self.charakter.waehrungseinheit}"),
+            ("Traglast", f"{self.charakter.gesamtgewicht}/{self.charakter.maximale_traglast} kg")
+        ]
+        
+        # Werte anzeigen
+        for name, wert in werte:
+            abgeleitete_werte_grid.add_widget(MDLabel(
+                text=name,
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=None,
+                width=GRID_WIDTH,
+                size_hint_y=None,
+                height=GRID_HEIGHT,
+                halign='left'
+            ))
+            
+            abgeleitete_werte_grid.add_widget(MDLabel(
+                text=wert,
+                font_size=LABEL_FONT_SIZE,
+                size_hint_x=None,
+                width=GRID_WIDTH,
+                size_hint_y=None,
+                height=GRID_HEIGHT,
+                halign='left'
+            ))

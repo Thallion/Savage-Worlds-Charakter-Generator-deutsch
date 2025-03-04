@@ -1,7 +1,12 @@
 # handicaps_view.py
+"""
+View-Komponente für Handicaps nach dem MVC-Pattern.
+Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Handicaps bereit.
+"""
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty
+from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty, BooleanProperty
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.menu import MDDropdownMenu
@@ -9,7 +14,21 @@ from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
 
-kv = '''
+
+# Konstanten für bessere Lesbarkeit und Wartbarkeit
+DEFAULT_SORT_ORDER = 'name_asc'
+ALL_CATEGORIES_TEXT = 'Alle Stufen'
+RECYCLEVIEW_ITEM_HEIGHT = dp(60)
+DARK_EVEN_COLOR = [0.2, 0.2, 0.2, 1]
+DARK_ODD_COLOR = [0.15, 0.15, 0.15, 1]
+LIGHT_EVEN_COLOR = [1, 1, 1, 1]
+LIGHT_ODD_COLOR = [0.85, 0.85, 0.85, 1]
+SELECTED_LINE_COLOR = [1, 0.65, 0, 1]
+UNSELECTED_LINE_COLOR = [0, 0, 0, 0]
+
+
+# KV-String - könnte in eine separate Datei ausgelagert werden
+KV_STRING = '''
 <HandicapsWidget>:
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor  
@@ -21,9 +40,10 @@ kv = '''
         spacing: 5
 
         MDIconButton:
-            icon: "sort-alphabetical-ascending"
+            icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
             size_hint_y: 1
-            on_release: root.sortiere_handicaps()
+            on_release: root.toggle_sort_order()
+            tooltip_text: "Namen aufsteigend sortieren" if root.sort_order != 'name_asc' else "Namen absteigend sortieren"
 
         MDTextField:
             id: search_input
@@ -35,6 +55,7 @@ kv = '''
             icon: "filter"
             size_hint_y: 1
             on_release: root.open_category_menu()
+            tooltip_text: "Nach Stufe filtern"
 
         MDLabel:
             id: category_label
@@ -48,7 +69,6 @@ kv = '''
         height: dp(48)
         padding: [20, 10]
 
-    # RecycleView mit expliziter Größe
     HandicapsRecycleView:
         id: recycleview
         viewclass: 'HandicapItemRow'
@@ -68,10 +88,8 @@ kv = '''
     orientation: 'horizontal'
     size_hint_y: None
     height: dp(60)
-    # Farblogik
-    md_bg_color: ([0.2, 0.2, 0.2, 1]) if root.index % 2 == 0 \
-        else ([0.15, 0.15, 0.15, 1])
-    line_color: [1, 0.65, 0, 1] if self.ausgewaehlt else (0, 0, 0, 0)    
+    md_bg_color: self._get_background_color()
+    line_color: self._get_line_color()
     line_width: 2
     spacing: dp(10)
     padding: dp(10)
@@ -97,6 +115,7 @@ kv = '''
         size: dp(40), dp(40)
         pos_hint: {"center_y": 0.5}
         on_release: root.waehle_handicap()
+        disabled: root.ausgewaehlt
 
     MDFabButton:
         icon: "minus"
@@ -105,6 +124,7 @@ kv = '''
         size: dp(40), dp(40)
         pos_hint: {"center_y": 0.5}
         on_release: root.entferne_handicap()
+        disabled: not root.ausgewaehlt
 
     MDLabel:
         text: root.beschreibung
@@ -114,31 +134,44 @@ kv = '''
         valign: 'middle'
 '''
 
-Builder.load_string(kv)
+Builder.load_string(KV_STRING)
+
 
 class HandicapsRecycleView(MDRecycleView):
-    """RecycleView für die effiziente Darstellung der Handicap-Liste"""
+    """
+    RecycleView für die effiziente Darstellung der Handicap-Liste.
+    Implementiert eine virtualisierte Listenansicht für bessere Performance.
+    """
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.data = []
         Logger.debug("HandicapsRecycleView: Initialisiert")
 
+
 class HandicapItemRow(MDBoxLayout):
-    """Einzelne Zeile in der Handicap-Liste"""
+    """
+    Einzelne Zeile in der Handicap-Liste.
+    Repräsentiert ein einzelnes Handicap mit seinen Eigenschaften und Interaktionsmöglichkeiten.
+    """
     index = NumericProperty(0)
     name_key = StringProperty("")
     handicap_name = StringProperty("")
     stufe = StringProperty("")
     beschreibung = StringProperty("")
-    ausgewaehlt = ObjectProperty(False)
+    ausgewaehlt = BooleanProperty(False)
 
     def __init__(self, **kwargs):
+        """Initialisiert die HandicapItemRow und bindet Property-Änderungen an entsprechende Handler."""
         super().__init__(**kwargs)
-        self.bind(index=self.update_color)
         self.bind(ausgewaehlt=self.on_ausgewaehlt_changed)
-        
-    def _aktualisiere_widget(self):
-        """Aktualisiert das HandicapsWidget"""
+
+    def _get_controller(self):
+        """Hilfsmethode, um auf den Controller zuzugreifen."""
+        app = MDApp.get_running_app()
+        return app.controller if hasattr(app, 'controller') else None
+
+    def _refresh_ui(self):
+        """Aktualisiert die UI nach einer Änderung am Handicap-Status."""
         Logger.debug(f"HandicapItemRow: Starte Widget-Aktualisierung")
         app = MDApp.get_running_app()
         widget = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
@@ -149,104 +182,193 @@ class HandicapItemRow(MDBoxLayout):
             Logger.error("HandicapItemRow: HandicapsWidget nicht gefunden")
 
     def waehle_handicap(self):
-        """Wählt ein Handicap aus"""
+        """
+        Wählt ein Handicap aus.
+        Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
+        """
         Logger.debug(f"HandicapItemRow: Start waehle_handicap für {self.handicap_name}")
-        app = MDApp.get_running_app()
+        controller = self._get_controller()
+        if not controller:
+            Logger.error("HandicapItemRow: Controller nicht gefunden")
+            return
+
         try:
-            app.controller.waehle_handicap(self.name_key)
+            controller.waehle_handicap(self.name_key)
             # Wenn keine Exception geworfen wurde, war die Aktion erfolgreich
             self.ausgewaehlt = True
             Logger.debug(f"HandicapItemRow: {self.handicap_name} erfolgreich ausgewählt")
-            self._aktualisiere_widget()
+            self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Handicaps: {str(e)}")
 
     def entferne_handicap(self):
-        """Entfernt ein ausgewähltes Handicap"""
+        """
+        Entfernt ein ausgewähltes Handicap.
+        Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
+        """
         Logger.debug(f"HandicapItemRow: Start entferne_handicap für {self.handicap_name}")
-        app = MDApp.get_running_app()
+        controller = self._get_controller()
+        if not controller:
+            Logger.error("HandicapItemRow: Controller nicht gefunden")
+            return
+
         try:
-            app.controller.entferne_handicap(self.name_key)
+            controller.entferne_handicap(self.name_key)
             # Wenn keine Exception geworfen wurde, war die Aktion erfolgreich
             self.ausgewaehlt = False
             Logger.debug(f"HandicapItemRow: {self.handicap_name} erfolgreich entfernt")
-            self._aktualisiere_widget()
+            self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen des Handicaps: {str(e)}")
 
-    def update_color(self, *args):
-            """Aktualisiert die Hintergrundfarbe der Zeile"""
-            is_dark = self.theme_cls.theme_style == "Dark"
-            is_even = self.index % 2 == 0
-            
-            if is_dark:
-                # Dunkles Theme bleibt unverändert
-                self.md_bg_color = [0.2, 0.2, 0.2, 1] if is_even else [0.15, 0.15, 0.15, 1]
-            else:
-                # Helles Theme mit erhöhtem Kontrast
-                self.md_bg_color = [1, 1, 1, 1] if is_even else [0.85, 0.85, 0.85, 1]  # Weiß vs. Hellgrau
-
-    def get_row_colors(self):
-        """Berechnet die Zeilenfarben basierend auf dem Theme und Auswahlstatus"""
+    def _get_background_color(self):
+        """Berechnet die Hintergrundfarbe basierend auf Theme und Index."""
         is_dark = self.theme_cls.theme_style == "Dark"
         is_even = self.index % 2 == 0
-        
+
         if is_dark:
-            # Dunkles Theme bleibt unverändert
-            base_color = [0.2, 0.2, 0.2, 1] if is_even else [0.15, 0.15, 0.15, 1]
+            return DARK_EVEN_COLOR if is_even else DARK_ODD_COLOR
         else:
-            # Helles Theme mit erhöhtem Kontrast
-            base_color = [1, 1, 1, 1] if is_even else [0.85, 0.85, 0.85, 1]  # Weiß vs. Hellgrau
+            return LIGHT_EVEN_COLOR if is_even else LIGHT_ODD_COLOR
+
+    def _get_line_color(self):
+        """Berechnet die Rahmenfarbe basierend auf dem Auswahlstatus."""
+        return SELECTED_LINE_COLOR if self.ausgewaehlt else UNSELECTED_LINE_COLOR
 
     def on_ausgewaehlt_changed(self, instance, value):
-        """Debug-Methode um Änderungen am ausgewaehlt-Status zu verfolgen"""
+        """Event-Handler für Änderungen am ausgewaehlt-Status."""
         Logger.debug(f"HandicapItemRow: ausgewaehlt changed to {value} for {self.handicap_name}")
-            
+
+
 class HandicapsWidget(MDBoxLayout):
-    """Widget zur Anzeige und Verwaltung von Handicaps"""
+    """
+    Widget zur Anzeige und Verwaltung von Handicaps.
+    Hauptkomponente der View im MVC-Pattern.
+    """
     stufen = ListProperty([])
+    sort_order = StringProperty(DEFAULT_SORT_ORDER)
 
     def __init__(self, **kwargs):
+        """Initialisiert das HandicapsWidget und setzt Grundkonfiguration."""
         super().__init__(**kwargs)
-        self.sort_order = 'name_asc'
-        self.controller = MDApp.get_running_app().controller
+        self._initialize_controller()
         self.menu = None
         Clock.schedule_once(self.post_init, 0)
 
+    def _initialize_controller(self):
+        """Initialisiert die Verbindung zum Controller."""
+        app = MDApp.get_running_app()
+        self.controller = app.controller if hasattr(app, 'controller') else None
+        
+        if not self.controller:
+            Logger.error("HandicapsWidget: Controller nicht gefunden")
+
     def post_init(self, dt):
-        """Initialisierung nach dem Laden des Widgets"""
+        """
+        Initialisierung nach dem Laden des Widgets.
+        Lädt Daten vom Modell und bereitet die Anzeige vor.
+        """
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("HandicapsWidget: Controller oder Charakter nicht verfügbar")
+            return
+            
         alle_handicaps = self.controller.charakter.handicaps
         Logger.debug(f"HandicapsWidget: Lade {len(alle_handicaps)} Handicaps")
-        self.stufen = sorted(list(set(handicap.stufe for handicap in alle_handicaps.values() if handicap.stufe)))
-        Logger.debug(f"HandicapsWidget: Gefundene Stufen: {self.stufen}")
+        
+        # Stufen extrahieren und sortieren
+        self._update_stufen(alle_handicaps)
+        
+        # Handicaps filtern und anzeigen
         self.filter_handicaps()
 
+    def _update_stufen(self, handicaps_dict):
+        """Aktualisiert die Liste der verfügbaren Handicap-Stufen."""
+        self.stufen = sorted(list(set(
+            handicap.stufe for handicap in handicaps_dict.values() 
+            if handicap.stufe
+        )))
+        Logger.debug(f"HandicapsWidget: Gefundene Stufen: {self.stufen}")
+
     def refresh_widget(self):
-        """Leert das Widget und lädt die Daten neu"""
+        """
+        Leert das Widget und lädt die Daten neu.
+        Wird aufgerufen, wenn sich die Handicaps ändern.
+        """
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("HandicapsWidget: Controller oder Charakter nicht verfügbar")
+            return
+            
         # RecycleView leeren
         self.ids.recycleview.data = []
+        
         # Stufen neu laden
         alle_handicaps = self.controller.charakter.handicaps
-        self.stufen = sorted(list(set(handicap.stufe for handicap in alle_handicaps.values() if handicap.stufe)))
+        self._update_stufen(alle_handicaps)
+        
         # Filter neu anwenden
         self.filter_handicaps()
 
+    def toggle_sort_order(self):
+        """
+        Ändert die Sortierreihenfolge und aktualisiert die Anzeige.
+        Event-Handler für den Sortierbutton.
+        """
+        self.sort_order = 'name_desc' if self.sort_order == 'name_asc' else 'name_asc'
+        self.filter_handicaps()
+
     def filter_handicaps(self, *args):
-        """Filtert die Handicaps basierend auf Suchtext und Kategorie"""
+        """
+        Filtert die Handicaps basierend auf Suchtext und Kategorie.
+        Event-Handler für Änderungen an Suchtext oder Kategorie.
+        """
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("HandicapsWidget: Controller oder Charakter nicht verfügbar")
+            return
+            
         search_term = self.ids.search_input.text.lower()
         selected_stufe = self.ids.category_label.text.lower()
-        
+
+        # Handicaps vom Modell abrufen
         alle_handicaps = self.controller.charakter.handicaps
+        
+        # Gefilterte Liste erstellen
+        filtered_data = self._filter_handicaps_data(
+            alle_handicaps,
+            search_term, 
+            selected_stufe
+        )
+        
+        # Sortieren
+        filtered_data = self._sort_handicaps_data(filtered_data)
+        
+        # Index nach Sortierung aktualisieren
+        for i, item in enumerate(filtered_data):
+            item['index'] = i
+
+        # An RecycleView übergeben
+        self.ids.recycleview.data = filtered_data
+        Logger.debug(f"HandicapsWidget: {len(filtered_data)} Handicaps gefiltert und sortiert")
+
+    def _filter_handicaps_data(self, alle_handicaps, search_term, selected_stufe):
+        """
+        Filtert die Handicap-Daten nach Suchbegriff und Stufe.
+        Extrahiert die Filterlogik aus filter_handicaps.
+        """
         filtered_data = []
         
         Logger.debug(f"HandicapsWidget: Filtere Handicaps - Suchterm: {search_term}, Stufe: {selected_stufe}")
         
         for key, handicap in alle_handicaps.items():
-            if selected_stufe != 'alle stufen' and (handicap.stufe is None or handicap.stufe.lower() != selected_stufe):
+            # Stufen-Filter
+            if (selected_stufe != ALL_CATEGORIES_TEXT.lower() and 
+                (handicap.stufe is None or handicap.stufe.lower() != selected_stufe)):
                 continue
-            if search_term in handicap.name.lower() or search_term in handicap.beschreibung.lower():
-                #Logger.debug(f"HandicapsWidget: Füge Handicap hinzu - {handicap.name}")
-                filtered_data.append({
+                
+            # Suchtext-Filter
+            if (search_term in handicap.name.lower() or 
+                search_term in handicap.beschreibung.lower()):
+                
+                handicap_data = {
                     'viewclass': 'HandicapItemRow',
                     'index': len(filtered_data),
                     'name_key': key,
@@ -254,23 +376,30 @@ class HandicapsWidget(MDBoxLayout):
                     'stufe': handicap.stufe,
                     'beschreibung': handicap.beschreibung,
                     'ausgewaehlt': handicap.ausgewaehlt
-                })
-        
-        Logger.debug(f"HandicapsWidget: {len(filtered_data)} Handicaps gefiltert")
-        self.ids.recycleview.data = filtered_data
+                }
+                filtered_data.append(handicap_data)
+                
+        return filtered_data
 
-    def sortiere_handicaps(self):
-        """Ändert die Sortierreihenfolge und aktualisiert die Anzeige"""
-        self.sort_order = 'name_desc' if self.sort_order == 'name_asc' else 'name_asc'
-        self.filter_handicaps()
+    def _sort_handicaps_data(self, data):
+        """
+        Sortiert die Handicap-Daten nach der aktuellen Sortierreihenfolge.
+        Extrahiert die Sortierlogik aus filter_handicaps.
+        """
+        is_ascending = self.sort_order == 'name_asc'
+        data.sort(key=lambda x: x['handicap_name'].lower(), reverse=not is_ascending)
+        return data
 
     def open_category_menu(self):
-        """Öffnet das Kategorie-Auswahlmenü"""
+        """
+        Öffnet das Kategorie-Auswahlmenü.
+        Event-Handler für den Kategorie-Filter-Button.
+        """
         menu_items = [
             {
                 "text": f"{i}",
                 "on_release": lambda x=f"{i}": self.set_category(x),
-            } for i in ['Alle Stufen'] + self.stufen
+            } for i in [ALL_CATEGORIES_TEXT] + self.stufen
         ]
         self.menu = MDDropdownMenu(
             caller=self.ids.category_label,
@@ -280,8 +409,10 @@ class HandicapsWidget(MDBoxLayout):
         self.menu.open()
 
     def set_category(self, text):
-        """Setzt die ausgewählte Kategorie und aktualisiert die Anzeige"""
+        """
+        Setzt die ausgewählte Kategorie und aktualisiert die Anzeige.
+        Event-Handler für die Kategorie-Auswahl im Menü.
+        """
         self.ids.category_label.text = text
         self.menu.dismiss()
         self.filter_handicaps()
-     
