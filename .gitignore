@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage reports
+htmlcov/
+test_units/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Log Dateien
+*.log
+
+# Lokale Konfigurationsdateien
+config.local.ini
+settings.local.json
+custom_fertigkeiten.json
+custom_handicaps.json
+custom_maechte.json
+cxfreeze.txt
+setup.py
