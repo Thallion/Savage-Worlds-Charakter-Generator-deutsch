@@ -15,12 +15,14 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.chip import MDChip, MDChipText
+from kivymd.uix.selectioncontrol import MDCheckbox
 from pathlib import Path
 
 from kivymd.uix.dialog import (
     MDDialog,
     MDDialogHeadlineText,
-    MDDialogButtonContainer
+    MDDialogButtonContainer,
+    MDDialogContentContainer
 )
 
 from kivy.lang import Builder
@@ -49,6 +51,7 @@ from functools import partial
 from kivy.logger import Logger, LOG_LEVELS
 from pathlib import Path
 from kivy.config import Config
+from kivy.metrics import dp
 
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
@@ -339,11 +342,21 @@ kv = '''
                                 bold: True
 
                             MDGridLayout:
-                                cols: 2
+                                cols: 3
                                 spacing: dp(8)
                                 size_hint_y: None
                                 height: dp(48)
 
+                                MDButton:
+                                    style: "elevated"
+                                    size_hint_x: 1
+                                    on_release: root.create_new_character()  # Hinzugefügt
+
+                                    MDButtonIcon:
+                                        icon: "plus"
+
+                                    MDButtonText:
+                                        text: "Neu"
 
                                 MDButton:
                                     style: "elevated"
@@ -950,34 +963,342 @@ class EinstellungenWidget(MDScreen):
         self.create_color_chips()  
 
     def create_new_character(self):
-        # Bestätigungsdialog anzeigen
-        content = BoxLayout(orientation='vertical', spacing=10)
-        content.add_widget(Label(text='Bist du sicher, dass du einen neuen Charakter erstellen möchtest? Der aktuelle Charakter wird verworfen.'))
-        buttons = BoxLayout(size_hint_y=None, height=40, spacing=10)
-        btn_yes = Button(text='Ja')
-        btn_no = Button(text='Nein')
-        buttons.add_widget(btn_yes)
-        buttons.add_widget(btn_no)
+        """
+        Erstellt einen neuen Charakter mit einem Eingabedialog für den Namen,
+        bevor der Speicherort ausgewählt wird.
+        """
+        # Dialog für die Namenseingabe erstellen
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=10,
+            padding=20,
+            adaptive_height=True
+        )
+        
+        content.add_widget(MDLabel(
+            text="Bitte gib einen Namen für den neuen Charakter ein:",
+            size_hint_y=None,
+            height=40
+        ))
+        
+        # Textfeld für Charakternamen
+        charname_input = MDTextField(
+            text="",
+            hint_text="Charaktername",
+            size_hint_y=None,
+            height=50
+        )
+        content.add_widget(charname_input)
+        
+        # Buttons-Container
+        buttons = MDBoxLayout(
+            orientation='horizontal',
+            spacing=10,
+            size_hint_y=None,
+            height=50,
+            pos_hint={'right': 1}
+        )
+        
+        # Abbrechen-Button
+        cancel_button = MDButton(
+            on_release=lambda x: self.close_name_dialog(),
+            style="elevated",
+            size_hint_x=None,
+            width=120
+        )
+        cancel_button.add_widget(MDButtonText(text="Abbrechen"))
+        
+        # Weiter-Button
+        continue_button = MDButton(
+            on_release=lambda x: self.proceed_with_new_character(charname_input.text),
+            style="elevated",
+            size_hint_x=None,
+            width=120
+        )
+        continue_button.add_widget(MDButtonText(text="Weiter"))
+        
+        buttons.add_widget(cancel_button)
+        buttons.add_widget(continue_button)
         content.add_widget(buttons)
-        popup = Popup(title='Bestätigung', content=content, size_hint=(0.5, 0.5))
+        
+        # Dialog erstellen
+        headline = MDDialogHeadlineText(text="Neuen Charakter erstellen")
+        
+        self.name_dialog = MDDialog(
+            md_bg_color=self.theme_cls.surfaceColor
+        )
+        self.name_dialog.add_widget(headline)
+        self.name_dialog.add_widget(content)
+        self.name_dialog.open()
 
-        def confirm_new_character(instance):
-            popup.dismiss()
-            # Aktives Setting vom aktuellen Charakter abrufen
-            active_setting = self.controller.charakter.active_setting_name
-            # Neuen Charakter mit dem aktiven Setting erstellen
-            self.controller.charakter = Charakter(active_setting_name=active_setting)
-            # Elemente aus dem aktiven Setting laden
-            self.controller.charakter.load_elements_from_active_setting()
-            # Benutzeroberfläche aktualisieren
-            self.aktualisiere_ui()
+    def close_name_dialog(self):
+        """Schließt den Namen-Eingabedialog"""
+        if hasattr(self, 'name_dialog') and self.name_dialog:
+            self.name_dialog.dismiss()
 
-        btn_yes.bind(on_release=confirm_new_character)
-        btn_no.bind(on_release=popup.dismiss)
-        popup.open()
+    def proceed_with_new_character(self, character_name):
+        """
+        Setzt den Prozess zur Erstellung eines neuen Charakters fort
+        nachdem der Name eingegeben wurde.
+        
+        Args:
+            character_name (str): Der eingebebene Charaktername
+        """
+        # Dialog schließen
+        self.close_name_dialog()
+        
+        if not character_name.strip():
+            # Wenn kein Name eingegeben wurde
+            self._show_error_dialog("Bitte gib einen Namen für den Charakter ein.")
+            return
+        
+        # Bestätigungsdialog für das Verwerfen des aktuellen Charakters
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=10,
+            padding=20,
+            adaptive_height=True
+        )
+        
+        content.add_widget(MDLabel(
+            text=f"Bist du sicher, dass du einen neuen Charakter '{character_name}' erstellen möchtest? Der aktuelle Charakter wird verworfen.",
+            size_hint_y=None,
+            height=60
+        ))
+        
+        # Buttons-Container
+        buttons = MDBoxLayout(
+            orientation='horizontal',
+            spacing=10,
+            size_hint_y=None,
+            height=50,
+            pos_hint={'right': 1}
+        )
+        
+        # Nein-Button
+        no_button = MDButton(
+            on_release=lambda x: self.close_confirm_dialog(),
+            style="elevated",
+            size_hint_x=None,
+            width=100
+        )
+        no_button.add_widget(MDButtonText(text="Nein"))
+        
+        # Ja-Button
+        yes_button = MDButton(
+            on_release=lambda x: self.create_character_with_name(character_name),
+            style="elevated",
+            size_hint_x=None,
+            width=100
+        )
+        yes_button.add_widget(MDButtonText(text="Ja"))
+        
+        buttons.add_widget(no_button)
+        buttons.add_widget(yes_button)
+        content.add_widget(buttons)
+        
+        # Dialog erstellen
+        headline = MDDialogHeadlineText(text="Bestätigung")
+        
+        self.confirm_dialog = MDDialog(
+            md_bg_color=self.theme_cls.surfaceColor
+        )
+        self.confirm_dialog.add_widget(headline)
+        self.confirm_dialog.add_widget(content)
+        self.confirm_dialog.open()
+
+    def close_confirm_dialog(self):
+        """Schließt den Bestätigungsdialog"""
+        if hasattr(self, 'confirm_dialog') and self.confirm_dialog:
+            self.confirm_dialog.dismiss()
+
+    def create_character_with_name(self, character_name):
+        """
+        Erstellt einen neuen Charakter mit dem angegebenen Namen
+        und aktiviert die aktuelle Setting-Einstellung.
+        
+        Args:
+            character_name (str): Der Name des neuen Charakters
+        """
+        self.close_confirm_dialog()
+        
+        # Aktives Setting vom aktuellen Charakter abrufen
+        active_setting = self.controller.charakter.active_setting_name
+        
+        # Neuen Charakter mit dem aktiven Setting erstellen
+        self.controller.charakter = Charakter(active_setting_name=active_setting)
+        
+        # Namen setzen
+        self.controller.charakter.char_name = character_name
+        
+        # Profildaten aktualisieren
+        self.controller.charakter.profil_daten["Name"] = character_name
+        
+        # Elemente aus dem aktiven Setting laden
+        self.controller.charakter.load_elements_from_active_setting()
+        
+        # Benutzeroberfläche aktualisieren
+        self.aktualisiere_ui()
+        
+        # Erfolgsmeldung anzeigen
+        self._show_success_dialog(
+            "Neuer Charakter erstellt", 
+            f"Der Charakter '{character_name}' wurde erfolgreich erstellt."
+        )
+
+    def exit_manager(self, *args):
+        """Schließt den MDFileManager."""
+        self.manager_open = False
+        self.file_manager.close()
 
     def speichere_charakter(self):
-        """Öffnet den MDFileManager im Speichern-Modus."""
+        """
+        Zeigt einen Dialog mit Optionen zum Speichern des Charakters.
+        """
+        # Prüfen, ob bereits ein Dateipfad existiert
+        hat_bereits_datei = hasattr(self.controller, 'current_character_file_path') and self.controller.current_character_file_path
+        
+        buttons_container = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(16),
+            adaptive_height=True
+        )
+        
+        # Wenn eine Datei existiert, zeige den Überschreiben-Button
+        if hat_bereits_datei:
+            filepath = self.controller.current_character_file_path
+            filename = os.path.basename(filepath)
+            
+            info_label = MDLabel(
+                text=f"Bestehende Datei: {filename}",
+                size_hint_y=None,
+                height=dp(40)
+            )
+            buttons_container.add_widget(info_label)
+            
+            # Button zum Überschreiben
+            ueberschreiben_button = MDButton(
+                style="elevated",
+                size_hint=(1, None),
+                height=dp(50),
+                on_release=lambda x: self._ueberschreibe_existierende_datei()
+            )
+            ueberschreiben_button.add_widget(MDButtonText(text="Bestehende Datei überschreiben"))
+            buttons_container.add_widget(ueberschreiben_button)
+            
+            # Abstandshalter
+            spacer = Widget(size_hint_y=None, height=dp(20))
+            buttons_container.add_widget(spacer)
+        
+        # Button für "Als neue Datei speichern"
+        new_file_button = MDButton(
+            style="elevated",
+            size_hint=(1, None),
+            height=dp(50),
+            on_release=lambda x: self._als_neue_datei_speichern()
+        )
+        new_file_button.add_widget(MDButtonText(text="Als neue Datei speichern..."))
+        buttons_container.add_widget(new_file_button)
+        
+        # Dialog erstellen
+        self.save_options_dialog = MDDialog(
+            MDDialogHeadlineText(text="Charakter speichern"),
+            MDDialogContentContainer(
+                buttons_container,
+                orientation="vertical",
+                padding="16dp"
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.save_options_dialog.dismiss()
+                )
+            )
+        )
+        self.save_options_dialog.open()
+
+    def _ueberschreibe_existierende_datei(self):
+        """Überschreibt die existierende Datei direkt"""
+        self.save_options_dialog.dismiss()
+        
+        filepath = self.controller.current_character_file_path
+        try:
+            self.controller.charakter.speichern_als_json(filepath)
+            Logger.info(f"Charakter gespeichert in: {filepath}")
+            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde in bestehender Datei gespeichert.")
+        except Exception as e:
+            self._show_error_dialog(f"Fehler beim Speichern: {str(e)}")
+
+    def _als_neue_datei_speichern(self):
+        """Zeigt einen Dialog zum Eingeben eines Dateinamens"""
+        self.save_options_dialog.dismiss()
+        
+        # Standardname basierend auf Charakternamen
+        default_filename = self.controller.charakter.char_name if self.controller.charakter.char_name else "charakter"
+        default_filename = default_filename.strip().replace(" ", "_")  # Leerzeichen durch Unterstriche ersetzen
+        
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(16),
+            padding=dp(16),
+            adaptive_height=True
+        )
+        
+        content.add_widget(MDLabel(
+            text="Dateiname für neue Datei:",
+            size_hint_y=None,
+            height=dp(30)
+        ))
+        
+        filename_input = MDTextField(
+            text=f"{default_filename}.json",
+            hint_text="Dateiname.json",
+            mode="outlined"
+        )
+        content.add_widget(filename_input)
+        
+        # Dialog zum Eingeben des Dateinamens
+        self.filename_dialog = MDDialog(
+            MDDialogHeadlineText(text="Als neue Datei speichern"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.filename_dialog.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Speicherort wählen"),
+                    style="text",
+                    on_release=lambda x: self._continue_save_new_file(filename_input.text)
+                )
+            )
+        )
+        self.filename_dialog.open()
+
+    def _continue_save_new_file(self, filename):
+        """Setzt den Speicherprozess mit Dateiauswahl fort"""
+        self.filename_dialog.dismiss()
+        
+        # Prüfe, ob ein gültiger Dateiname eingegeben wurde
+        if not filename or not filename.strip():
+            self._show_error_dialog("Bitte gib einen Dateinamen ein.")
+            return
+        
+        # Stellt sicher, dass die Dateiendung .json ist
+        if not filename.lower().endswith('.json'):
+            filename += '.json'
+        
+        # Merke den Dateinamen und gehe zum Dateibrowser
+        self.temp_filename = filename
+        self._open_directory_browser_for_save()
+
+    def _open_directory_browser_for_save(self):
+        """
+        Öffnet den Dateibrowser um das Zielverzeichnis zum Speichern auszuwählen.
+        Der Dateiname wurde bereits in self.temp_filename gespeichert.
+        """
         # Verzeichnis für Charaktere bestimmen
         if getattr(sys, 'frozen', False):
             base_dir = os.path.dirname(sys.executable)
@@ -988,12 +1309,75 @@ class EinstellungenWidget(MDScreen):
         if not os.path.exists(chars_dir):
             os.makedirs(chars_dir)
         
-        # Setze aktuellen Aktionstyp auf Speichern
-        self.current_action = "save"
+        # Setze aktuellen Aktionstyp auf Verzeichnisauswahl für Speichern
+        self.current_action = "save_dir"
         
-        # MDFileManager anzeigen
+        # MDFileManager anzeigen - nur für Verzeichnisauswahl
         self.file_manager.show(chars_dir)
         self.manager_open = True
+
+    def select_path(self, path):
+        """
+        Wird aufgerufen, wenn eine Datei oder ein Verzeichnis ausgewählt wird.
+        
+        Args:
+            path (str): Pfad zum ausgewählten Verzeichnis oder zur Datei
+        """
+        self.exit_manager()
+        
+        if self.current_action == "save_dir":
+            # Hier wird nur die Verzeichnisauswahl behandelt, der Dateiname ist bereits bekannt
+            if os.path.isdir(path):
+                # Vollständigen Pfad zusammensetzen
+                full_path = os.path.join(path, self.temp_filename)
+                
+                # Prüfen, ob die Datei bereits existiert
+                if os.path.exists(full_path):
+                    self.confirm_overwrite(full_path)
+                else:
+                    # Direkt speichern
+                    self.save_character_to_path(full_path)
+            else:
+                # Wenn eine Datei statt eines Verzeichnisses ausgewählt wurde
+                self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
+        
+        elif self.current_action == "load":
+            # Hier bleibt die Logik unverändert - nur JSON-Dateien laden
+            if os.path.isfile(path) and path.endswith('.json'):
+                try:
+                    self.controller.charakter.laden_von_json(path)
+                    Logger.debug(f"Charakter aus Datei geladen: {path}")
+                    self.controller.current_character_file_path = path
+                    self.aktualisiere_ui()
+                    
+                    # Erfolgsmeldung anzeigen
+                    self._show_success_dialog("Charakter erfolgreich geladen", f"Der Charakter wurde aus {path} geladen.")
+                except Exception as e:
+                    # Fehler beim Laden
+                    self._show_error_dialog(f"Fehler beim Laden des Charakters: {str(e)}")
+            else:
+                # Wenn ein Verzeichnis oder keine JSON-Datei ausgewählt wurde
+                if os.path.isdir(path):
+                    self._show_error_dialog("Bitte wähle eine .json Charakterdatei aus.")
+                else:
+                    self._show_error_dialog(f"Die ausgewählte Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
+
+    def save_character_to_path(self, full_path):
+        """
+        Speichert den Charakter an den angegebenen Pfad.
+        
+        Args:
+            full_path (str): Vollständiger Pfad inkl. Dateiname
+        """
+        try:
+            self.controller.charakter.speichern_als_json(full_path)
+            self.controller.current_character_file_path = full_path
+            Logger.info(f"Charakter gespeichert in: {full_path}")
+            
+            # Erfolgsbestätigung anzeigen
+            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{full_path}")
+        except Exception as e:
+            self._show_error_dialog(f"Fehler beim Speichern des Charakters: {str(e)}")
 
     def lade_charakter(self):
         """Öffnet den MDFileManager im Laden-Modus."""
@@ -1014,36 +1398,145 @@ class EinstellungenWidget(MDScreen):
         self.file_manager.show(chars_dir)
         self.manager_open = True
 
-    def select_path(self, path):
+    def _show_error_dialog(self, message):
+        """Zeigt einen Fehlerdialog mit der angegebenen Nachricht an."""
+        error_dialog = MDDialog(
+            MDDialogHeadlineText(text="Fehler"),
+            MDBoxLayout(
+                orientation="vertical",
+                spacing=10,
+                padding=20,
+                adaptive_height=True,
+                children=[
+                    MDLabel(
+                        text=message,
+                        size_hint_y=None,
+                        height=60
+                    )
+                ]
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    style="text",
+                    on_release=lambda x: error_dialog.dismiss(),
+                    children=[
+                        MDButtonText(text="OK")
+                    ]
+                ),
+                spacing="8dp",
+            ),
+        )
+        error_dialog.open()
+
+    def _show_success_dialog(self, title, message):
+        """Zeigt einen Erfolgsdialog mit der angegebenen Nachricht an."""
+        success_dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDBoxLayout(
+                orientation="vertical",
+                spacing=10,
+                padding=20,
+                adaptive_height=True,
+                children=[
+                    MDLabel(
+                        text=message,
+                        size_hint_y=None,
+                        height=60
+                    )
+                ]
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    style="text",
+                    on_release=lambda x: success_dialog.dismiss(),
+                    children=[
+                        MDButtonText(text="OK")
+                    ]
+                ),
+                spacing="8dp",
+            ),
+        )
+        success_dialog.open()
+
+    def confirm_overwrite(self, filepath):
         """
-        Wird aufgerufen, wenn eine Datei oder ein Verzeichnis ausgewählt wird.
+        Fragt nach Bestätigung zum Überschreiben einer vorhandenen Datei.
         
         Args:
-            path (str): Pfad zum ausgewählten Verzeichnis oder zur Datei
+            filepath (str): Vollständiger Pfad zur Datei
         """
-        self.exit_manager()
+        content = MDBoxLayout(orientation='vertical', spacing=10, padding=20, adaptive_height=True)
         
-        if self.current_action == "save":
-            # Für den Speichern-Modus immer Dateiname abfragen, egal ob
-            # eine Datei oder ein Verzeichnis ausgewählt wurde
-            if os.path.isdir(path):
-                # Wenn ein Verzeichnis ausgewählt wurde
-                self.ask_filename_for_save(path)
-            else:
-                # Wenn eine Datei ausgewählt wurde, nimm das übergeordnete Verzeichnis
-                # und verwende den Dateinamen als Vorschlag
-                directory = os.path.dirname(path)
-                filename = os.path.basename(path)
-                self.ask_filename_for_save(directory, filename)
-        elif self.current_action == "load":
-            # Direkt laden, wenn es eine .json-Datei ist
-            if path.endswith('.json'):
-                self.controller.charakter.laden_von_json(path)
-                Logger.debug(f"Charakter aus Datei geladen: {path}")
-                self.controller.current_character_file_path = path
-                self.aktualisiere_ui()
-            else:
-                Logger.warning(f"Keine JSON-Datei ausgewählt: {path}")
+        content.add_widget(MDLabel(
+            text=f"Die Datei '{os.path.basename(filepath)}' existiert bereits. Überschreiben?",
+            size_hint_y=None,
+            height=30
+        ))
+        
+        # Buttons-Container
+        buttons = MDBoxLayout(
+            orientation='horizontal',
+            spacing=10,
+            size_hint_y=None,
+            height=50,
+            pos_hint={'right': 1}
+        )
+        
+        # Nein-Button
+        no_button = MDButton(
+            on_release=lambda x: self.close_overwrite_dialog(),
+            style="elevated",
+            size_hint_x=None,
+            width=100
+        )
+        no_button.add_widget(MDButtonText(text="Nein"))
+        
+        # Ja-Button
+        yes_button = MDButton(
+            on_release=lambda x: self.do_overwrite(filepath),
+            style="elevated",
+            size_hint_x=None,
+            width=100
+        )
+        yes_button.add_widget(MDButtonText(text="Ja"))
+        
+        buttons.add_widget(no_button)
+        buttons.add_widget(yes_button)
+        content.add_widget(buttons)
+        
+        headline = MDDialogHeadlineText(text="Bestätigung")
+        
+        self.overwrite_dialog = MDDialog(
+            md_bg_color=self.theme_cls.surfaceColor
+        )
+        self.overwrite_dialog.add_widget(headline)
+        self.overwrite_dialog.add_widget(content)
+        self.overwrite_dialog.open()
+
+    def close_overwrite_dialog(self):
+        """Schließt den Überschreiben-Dialog"""
+        if hasattr(self, 'overwrite_dialog') and self.overwrite_dialog:
+            self.overwrite_dialog.dismiss()
+
+    def do_overwrite(self, filepath):
+        """
+        Überschreibt die Datei direkt ohne weitere Bestätigung.
+        
+        Args:
+            filepath (str): Vollständiger Pfad zur Datei
+        """
+        if hasattr(self, 'save_dialog') and self.save_dialog:
+            self.save_dialog.dismiss()
+        
+        try:
+            self.controller.charakter.speichern_als_json(filepath)
+            self.controller.current_character_file_path = filepath
+            Logger.info(f"Charakter gespeichert (überschrieben) in: {filepath}")
+            
+            # Erfolgsbestätigung anzeigen
+            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{filepath}")
+        except Exception as e:
+            self._show_error_dialog(f"Fehler beim Speichern des Charakters: {str(e)}")
 
     def ask_filename_for_save(self, directory_path, default_filename="charakter.json"):
         """
@@ -1110,7 +1603,7 @@ class EinstellungenWidget(MDScreen):
         self.filename_dialog.open()
 
     def close_filename_dialog(self):
-        """Close the filename dialog"""
+        """Schließt den Dateiname-Dialog"""
         if hasattr(self, 'filename_dialog') and self.filename_dialog:
             self.filename_dialog.dismiss()
 
@@ -1136,85 +1629,11 @@ class EinstellungenWidget(MDScreen):
             self.confirm_overwrite(full_path)
         else:
             self.controller.charakter.speichern_als_json(full_path)
+            self.controller.current_character_file_path = full_path
             Logger.info(f"Charakter gespeichert in: {full_path}")
-
-    def confirm_overwrite(self, filepath):
-        """
-        Fragt nach Bestätigung zum Überschreiben einer vorhandenen Datei.
-        
-        Args:
-            filepath (str): Vollständiger Pfad zur Datei
-        """
-        content = MDBoxLayout(orientation='vertical', spacing=10, padding=20, adaptive_height=True)
-        
-        content.add_widget(MDLabel(
-            text=f"Die Datei '{os.path.basename(filepath)}' existiert bereits. Überschreiben?",
-            size_hint_y=None,
-            height=30
-        ))
-        
-        # Buttons-Container
-        buttons = MDBoxLayout(
-            orientation='horizontal',
-            spacing=10,
-            size_hint_y=None,
-            height=50,
-            pos_hint={'right': 1}
-        )
-        
-        # Nein-Button
-        no_button = MDButton(
-            on_release=lambda x: self.close_overwrite_dialog(),
-            style="elevated",
-            size_hint_x=None,
-            width=100
-        )
-        no_button.add_widget(MDButtonText(text="Nein"))
-        
-        # Ja-Button
-        yes_button = MDButton(
-            on_release=lambda x: self.do_overwrite(filepath),  # Direct call to do_overwrite
-            style="elevated",
-            size_hint_x=None,
-            width=100
-        )
-        yes_button.add_widget(MDButtonText(text="Ja"))
-        
-        buttons.add_widget(no_button)
-        buttons.add_widget(yes_button)
-        content.add_widget(buttons)
-        
-        headline = MDDialogHeadlineText(text="Bestätigung")
-        
-        self.overwrite_dialog = MDDialog(
-            md_bg_color=self.theme_cls.surfaceColor
-        )
-        self.overwrite_dialog.add_widget(headline)
-        self.overwrite_dialog.add_widget(content)
-        self.overwrite_dialog.open()
-
-    def close_overwrite_dialog(self):
-        """Close the overwrite dialog"""
-        if hasattr(self, 'overwrite_dialog') and self.overwrite_dialog:
-            self.overwrite_dialog.dismiss()
-
-    def do_overwrite(self, filepath):
-        """
-        Überschreibt die Datei nach Bestätigung.
-        
-        Args:
-            filepath (str): Vollständiger Pfad zur Datei
-        """
-        if hasattr(self, 'overwrite_dialog') and self.overwrite_dialog:
-            self.overwrite_dialog.dismiss()
-        
-        self.controller.charakter.speichern_als_json(filepath)
-        Logger.info(f"Charakter gespeichert (überschrieben) in: {filepath}")
-    
-    def exit_manager(self, *args):
-        """Schließt den MDFileManager."""
-        self.manager_open = False
-        self.file_manager.close()
+            
+            # Erfolgsbestätigung anzeigen
+            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{full_path}")
 
     def erhoehe_Auftstiege(self):
         self.controller.charakter.increase_aufstiege()
@@ -1489,4 +1908,3 @@ class EinstellungenWidget(MDScreen):
 
     def open_delete_schild_popup(self):
         self.schild_dialog_handler.show_delete_dialog()
-

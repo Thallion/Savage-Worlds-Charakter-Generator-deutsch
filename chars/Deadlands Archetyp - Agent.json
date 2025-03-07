@@ -19,24 +19,24 @@
         }
     },
     "attribute": {
-        "Geschicklichkeit": {
-            "attribut_name": "Geschicklichkeit",
-            "wert": 8,
-            "modifier": 0
-        },
-        "Verstand": {
-            "attribut_name": "Verstand",
-            "wert": 8,
-            "modifier": 0
-        },
         "Stärke": {
             "attribut_name": "Stärke",
             "wert": 4,
             "modifier": 0
         },
+        "Geschicklichkeit": {
+            "attribut_name": "Geschicklichkeit",
+            "wert": 8,
+            "modifier": 0
+        },
         "Konstitution": {
             "attribut_name": "Konstitution",
             "wert": 6,
+            "modifier": 0
+        },
+        "Verstand": {
+            "attribut_name": "Verstand",
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -5460,10 +5460,12 @@
             "setting": "Deadlands",
             "beschreibung": "+1 Parade, –1 Deckung, Mindeststärke W4, Härte 7.",
             "aktiv": true,
+            "menge": 0,
             "parade": 1,
             "deckung": -1,
             "mindeststaerke": "W4",
-            "angelegt": false
+            "angelegt": false,
+            "ausgewaehlt": false
         },
         "Eingeborenenschild (Mittel)": {
             "name": "Eingeborenenschild (Mittel)",
@@ -5473,10 +5475,12 @@
             "setting": "Deadlands",
             "beschreibung": "+2 Parade, –2 Deckung, Mindeststärke W4, Härte 8.",
             "aktiv": true,
+            "menge": 0,
             "parade": 2,
             "deckung": -2,
             "mindeststaerke": "W4",
-            "angelegt": false
+            "angelegt": false,
+            "ausgewaehlt": false
         },
         "Hemd, einfach": {
             "name": "Hemd, einfach",
@@ -7146,7 +7150,14 @@
         "schnelle_genesung": false,
         "schwere_entscheidungen": false,
         "ungepanzerter_held": false,
-        "wundobergrenze": false
+        "wundobergrenze": false,
+        "strahlschablone": false,
+        "große_hoehen": false,
+        "verrat": false,
+        "schwierige_heilung": false,
+        "freizeit": false,
+        "riesige_feinde,": false,
+        "schurkische_entschlossenheit": false
     },
     "active_setting_name": "Deadlands"
 }
