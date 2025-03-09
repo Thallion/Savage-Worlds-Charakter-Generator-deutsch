@@ -304,8 +304,6 @@ def create_default_setting(charakter):
     return default_setting
 
 
-# Modifiziere die load_elements_from_active_setting Funktion in functions/setting_funktionen.py
-
 def load_elements_from_active_setting(self, skip_equipment=False):
     """
     Lädt alle Elemente aus dem aktiven Setting.
@@ -328,9 +326,10 @@ def load_elements_from_active_setting(self, skip_equipment=False):
         # Farben laden
         self.settingregeln.farbschema = active_setting.get('farbschema', 'Blue')
         
-        # Völker laden
+        # Völker laden (komplett ersetzen)
         voelker_data = active_setting.get('voelker', {})
         if voelker_data:
+            # Völker zurücksetzen
             self.voelker = {}
             for name, volk_dict in voelker_data.items():
                 try:
@@ -339,71 +338,79 @@ def load_elements_from_active_setting(self, skip_equipment=False):
                     Logger.warning(f"Fehler beim Laden des Volkes '{name}': {e}")
             Logger.info(f"{len(self.voelker)} Völker geladen.")
         
-        # Fertigkeiten laden
-        fertigkeiten_data = active_setting.get('fertigkeiten', {})
-        if fertigkeiten_data:
-            # Fertigkeiten initialisieren
+        # Fertigkeiten_daten direkt aus dem Setting laden
+        fertigkeiten_daten = active_setting.get('fertigkeiten_daten', {})
+        if fertigkeiten_daten:
+            # Fertigkeiten_daten setzen
+            self.fertigkeiten_daten = {}
+            for name, attribut_set in fertigkeiten_daten.items():
+                if isinstance(attribut_set, list):
+                    # Konvertiere Listen zurück zu Sets
+                    self.fertigkeiten_daten[name] = set(attribut_set)
+                else:
+                    self.fertigkeiten_daten[name] = attribut_set
+            # Fertigkeiten neu initialisieren
             self.initialisiere_fertigkeiten()
+            Logger.info(f"{len(self.fertigkeiten_daten)} Fertigkeiten-Daten geladen, {len(self.fertigkeiten)} Fertigkeiten initialisiert.")
         
-        # Handicaps laden, keine bestehenden Handicaps überschreiben
+        # Handicaps laden (komplett ersetzen)
         handicaps_data = active_setting.get('handicaps', {})
         if handicaps_data:
-            existing_handicaps = set(self.handicaps.keys())
+            # Handicaps zurücksetzen
+            self.handicaps = {}
             for name, handicap_dict in handicaps_data.items():
-                if name not in existing_handicaps:  # Nur laden, wenn es nicht existiert
-                    try:
-                        self.handicaps[name] = Handicap.from_dict(handicap_dict)
-                    except Exception as e:
-                        Logger.warning(f"Fehler beim Laden des Handicaps '{name}': {e}")
-            Logger.info(f"{len(self.handicaps)} Handicaps im Setting gefunden.")
+                try:
+                    self.handicaps[name] = Handicap.from_dict_static(handicap_dict)
+                except Exception as e:
+                    Logger.warning(f"Fehler beim Laden des Handicaps '{name}': {e}")
+            Logger.info(f"{len(self.handicaps)} Handicaps geladen.")
         
-        # Talente laden, keine bestehenden Talente überschreiben
+        # Talente laden (komplett ersetzen)
         talente_data = active_setting.get('talente', {})
         if talente_data:
-            existing_talente = set(self.talente.keys())
+            # Talente zurücksetzen
+            self.talente = {}
             for name, talent_dict in talente_data.items():
-                if name not in existing_talente:  # Nur laden, wenn es nicht existiert
-                    try:
-                        self.talente[name] = Talent.from_dict(talent_dict)
-                    except Exception as e:
-                        Logger.warning(f"Fehler beim Laden des Talents '{name}': {e}")
-            Logger.info(f"{len(self.talente)} Talente im Setting gefunden.")
+                try:
+                    self.talente[name] = Talent.from_dict_static(talent_dict)
+                except Exception as e:
+                    Logger.warning(f"Fehler beim Laden des Talents '{name}': {e}")
+            Logger.info(f"{len(self.talente)} Talente geladen.")
         
-        # Mächte laden, keine bestehenden Mächte überschreiben
+        # Mächte laden (komplett ersetzen)
         maechte_data = active_setting.get('maechte', {})
         if maechte_data:
-            existing_maechte = set(self.maechte.keys())
+            # Mächte zurücksetzen
+            self.maechte = {}
             for name, macht_dict in maechte_data.items():
-                if name not in existing_maechte:  # Nur laden, wenn es nicht existiert
-                    try:
-                        self.maechte[name] = Macht.from_dict(macht_dict)
-                    except Exception as e:
-                        Logger.warning(f"Fehler beim Laden der Macht '{name}': {e}")
-            Logger.info(f"{len(self.maechte)} Mächte im Setting gefunden.")
+                try:
+                    self.maechte[name] = Macht.from_dict_static(macht_dict)
+                except Exception as e:
+                    Logger.warning(f"Fehler beim Laden der Macht '{name}': {e}")
+            Logger.info(f"{len(self.maechte)} Mächte geladen.")
         
         # Ausrüstung laden, wenn nicht übersprungen
         if not skip_equipment:
             ausruestung_data = active_setting.get('ausruestung', {})
             if ausruestung_data:
-                # Ausrüstung initialisieren (ggf. vorhandene löschen)
-                existing_equipment = set(self.ausruestung.keys())
+                # Ausrüstung zurücksetzen
+                self.ausruestung = {}
                 for name, item_dict in ausruestung_data.items():
-                    if name not in existing_equipment:  # Nur laden, wenn es nicht existiert
-                        try:
-                            kategorie = item_dict.get('kategorie', 'Allgemein')
-                            if kategorie == 'Waffe':
-                                item = Waffe.from_dict(item_dict)
-                            elif kategorie == 'Rüstung':
-                                item = Ruestung.from_dict(item_dict)
-                            elif kategorie == 'Schild':
-                                item = Schild.from_dict(item_dict)
-                            else:
-                                item = Ausruestung.from_dict(item_dict)
-                            
-                            self.ausruestung[name] = item
-                        except Exception as e:
-                            Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
-                Logger.info(f"{len(self.ausruestung)} Ausrüstungsgegenstände im Setting gefunden.")
+                    try:
+                        kategorie = item_dict.get('kategorie', 'Allgemein')
+                        if kategorie == 'Waffe':
+                            item = Waffe.from_setting_dict(item_dict)
+                        elif kategorie == 'Rüstung':
+                            item = Ruestung.from_setting_dict(item_dict)
+                        elif kategorie == 'Schild':
+                            item = Schild.from_setting_dict(item_dict)
+                        else:
+                            item = Ausruestung.from_setting_dict(item_dict)
+                        
+                        self.ausruestung[name] = item
+                    except Exception as e:
+                        Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
+                Logger.info(f"{len(self.ausruestung)} Ausrüstungsgegenstände geladen.")
         
         # Settingregeln laden
         settingregeln_data = active_setting.get('settingregeln', {})
