@@ -17,6 +17,7 @@ from kivymd.theming import ThemableBehavior
 from kivymd.uix.chip import MDChip, MDChipText
 from kivymd.uix.selectioncontrol import MDCheckbox
 from pathlib import Path
+from utils.pdf_utils import generiere_pdf
 
 from kivymd.uix.dialog import (
     MDDialog,
@@ -1316,6 +1317,26 @@ class EinstellungenWidget(MDScreen):
         self.file_manager.show(chars_dir)
         self.manager_open = True
 
+    def save_character_to_path(self, full_path):
+        """
+        Speichert den Charakter an den angegebenen Pfad.
+        
+        Args:
+            full_path (str): Vollständiger Pfad inkl. Dateiname
+        """
+        try:
+            # Controller zum Speichern verwenden statt direkt auf dem Charakter
+            success = self.controller.speichere_charakter_als_json(full_path)
+            if success:
+                Logger.info(f"Charakter gespeichert in: {full_path}")
+                
+                # Erfolgsbestätigung anzeigen
+                self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{full_path}")
+            else:
+                self._show_error_dialog(f"Fehler beim Speichern des Charakters")
+        except Exception as e:
+            self._show_error_dialog(f"Fehler beim Speichern des Charakters: {str(e)}")
+
     def select_path(self, path):
         """
         Wird aufgerufen, wenn eine Datei oder ein Verzeichnis ausgewählt wird.
@@ -1326,7 +1347,7 @@ class EinstellungenWidget(MDScreen):
         self.exit_manager()
         
         if self.current_action == "save_dir":
-            # Hier wird nur die Verzeichnisauswahl behandelt, der Dateiname ist bereits bekannt
+            # Logik für Verzeichnisauswahl zum Speichern
             if os.path.isdir(path):
                 # Vollständigen Pfad zusammensetzen
                 full_path = os.path.join(path, self.temp_filename)
@@ -1342,42 +1363,54 @@ class EinstellungenWidget(MDScreen):
                 self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
         
         elif self.current_action == "load":
-            # Hier bleibt die Logik unverändert - nur JSON-Dateien laden
+            # Verbesserte Fehlerbehandlung beim Laden eines Charakters
             if os.path.isfile(path) and path.endswith('.json'):
                 try:
-                    self.controller.charakter.laden_von_json(path)
-                    Logger.debug(f"Charakter aus Datei geladen: {path}")
-                    self.controller.current_character_file_path = path
-                    self.aktualisiere_ui()
+                    # Verwende den Controller zum Laden
+                    success = self.controller.lade_charakter_von_json(path)
                     
-                    # Erfolgsmeldung anzeigen
-                    self._show_success_dialog("Charakter erfolgreich geladen", f"Der Charakter wurde aus {path} geladen.")
+                    if success:
+                        # Bei Erfolg: Dateipfad bereits im Controller gespeichert, UI aktualisieren
+                        Logger.info(f"Charakter aus Datei geladen: {path}")
+                        self.aktualisiere_ui()
+                        
+                        # Erfolgsmeldung anzeigen
+                        self._show_success_dialog(
+                            "Charakter erfolgreich geladen", 
+                            f"Der Charakter wurde aus der Datei geladen."
+                        )
+                    else:
+                        self._show_error_dialog(
+                            "Fehler beim Laden des Charakters. Prüfe die Konsole für Details."
+                        )
                 except Exception as e:
-                    # Fehler beim Laden
-                    self._show_error_dialog(f"Fehler beim Laden des Charakters: {str(e)}")
+                    Logger.error(f"Unbehandelter Fehler beim Laden des Charakters: {str(e)}", exc_info=True)
+                    self._show_error_dialog(
+                        f"Kritischer Fehler beim Laden des Charakters: {str(e)}\n"
+                        "Der Charakter konnte nicht geladen werden."
+                    )
             else:
                 # Wenn ein Verzeichnis oder keine JSON-Datei ausgewählt wurde
                 if os.path.isdir(path):
                     self._show_error_dialog("Bitte wähle eine .json Charakterdatei aus.")
                 else:
                     self._show_error_dialog(f"Die ausgewählte Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
-
-    def save_character_to_path(self, full_path):
-        """
-        Speichert den Charakter an den angegebenen Pfad.
         
-        Args:
-            full_path (str): Vollständiger Pfad inkl. Dateiname
-        """
-        try:
-            self.controller.charakter.speichern_als_json(full_path)
-            self.controller.current_character_file_path = full_path
-            Logger.info(f"Charakter gespeichert in: {full_path}")
-            
-            # Erfolgsbestätigung anzeigen
-            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{full_path}")
-        except Exception as e:
-            self._show_error_dialog(f"Fehler beim Speichern des Charakters: {str(e)}")
+        elif self.current_action == "save_pdf_dir":
+            # Logik für das Speichern von PDFs
+            if os.path.isdir(path):
+                # Vollständigen Pfad zusammensetzen
+                full_path = os.path.join(path, self.temp_pdf_filename)
+                
+                # Prüfen, ob die Datei bereits existiert
+                if os.path.exists(full_path):
+                    self.confirm_pdf_overwrite(full_path)
+                else:
+                    # Direkt PDF erstellen
+                    self.save_pdf_to_path(full_path)
+            else:
+                # Wenn eine Datei statt eines Verzeichnisses ausgewählt wurde
+                self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
 
     def lade_charakter(self):
         """Öffnet den MDFileManager im Laden-Modus."""
@@ -1525,18 +1558,33 @@ class EinstellungenWidget(MDScreen):
         Args:
             filepath (str): Vollständiger Pfad zur Datei
         """
-        if hasattr(self, 'save_dialog') and self.save_dialog:
-            self.save_dialog.dismiss()
+        if hasattr(self, 'overwrite_dialog') and self.overwrite_dialog:
+            self.overwrite_dialog.dismiss()
         
-        try:
-            self.controller.charakter.speichern_als_json(filepath)
-            self.controller.current_character_file_path = filepath
-            Logger.info(f"Charakter gespeichert (überschrieben) in: {filepath}")
-            
-            # Erfolgsbestätigung anzeigen
-            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{filepath}")
-        except Exception as e:
-            self._show_error_dialog(f"Fehler beim Speichern des Charakters: {str(e)}")
+        self.save_character_to_path(filepath)
+
+    def save_file_with_name(self, directory, filename):
+        """
+        Speichert den Charakter mit dem angegebenen Dateinamen.
+        
+        Args:
+            directory (str): Verzeichnispfad
+            filename (str): Dateiname
+        """
+        if hasattr(self, 'filename_dialog') and self.filename_dialog:
+            self.filename_dialog.dismiss()
+        
+        # Dateiendung hinzufügen, falls nicht vorhanden
+        if not filename.endswith('.json'):
+            filename += '.json'
+        
+        full_path = os.path.join(directory, filename)
+        
+        # Existiert die Datei bereits?
+        if os.path.exists(full_path):
+            self.confirm_overwrite(full_path)
+        else:
+            self.save_character_to_path(full_path)
 
     def ask_filename_for_save(self, directory_path, default_filename="charakter.json"):
         """
@@ -1606,34 +1654,6 @@ class EinstellungenWidget(MDScreen):
         """Schließt den Dateiname-Dialog"""
         if hasattr(self, 'filename_dialog') and self.filename_dialog:
             self.filename_dialog.dismiss()
-
-    def save_file_with_name(self, directory, filename):
-        """
-        Speichert den Charakter mit dem angegebenen Dateinamen.
-        
-        Args:
-            directory (str): Verzeichnispfad
-            filename (str): Dateiname
-        """
-        if hasattr(self, 'filename_dialog') and self.filename_dialog:
-            self.filename_dialog.dismiss()
-        
-        # Dateiendung hinzufügen, falls nicht vorhanden
-        if not filename.endswith('.json'):
-            filename += '.json'
-        
-        full_path = os.path.join(directory, filename)
-        
-        # Existiert die Datei bereits?
-        if os.path.exists(full_path):
-            self.confirm_overwrite(full_path)
-        else:
-            self.controller.charakter.speichern_als_json(full_path)
-            self.controller.current_character_file_path = full_path
-            Logger.info(f"Charakter gespeichert in: {full_path}")
-            
-            # Erfolgsbestätigung anzeigen
-            self._show_success_dialog("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{full_path}")
 
     def erhoehe_Auftstiege(self):
         self.controller.charakter.increase_aufstiege()
@@ -1792,42 +1812,315 @@ class EinstellungenWidget(MDScreen):
             raise
 
     def erzeuge_charakterbogen_pdf(self):
-        # Versuche, das Verzeichnis relativ zur ausführbaren Datei zu finden
+        """
+        Zeigt einen Dialog mit Optionen zum Speichern des Charakters als PDF.
+        Verwendet die gleiche Dialog-Struktur wie beim Speichern von Charakteren.
+        """
+        # Prüfen, ob bereits eine PDF-Datei existiert (gleicher Name wie Charakter)
+        hat_bereits_pdf = False
+        default_pdf_name = ""
+        
+        if hasattr(self.controller, 'current_character_file_path') and self.controller.current_character_file_path:
+            # Aus dem aktuellen Charakter-Pfad einen PDF-Pfad ableiten
+            char_path = self.controller.current_character_file_path
+            default_pdf_name = os.path.splitext(os.path.basename(char_path))[0] + ".pdf"
+            default_pdf_path = os.path.join(os.path.dirname(char_path), default_pdf_name)
+            hat_bereits_pdf = os.path.exists(default_pdf_path)
+        else:
+            # Wenn kein Charakter-Pfad existiert, leite Namen vom Charakternamen ab
+            character_name = self.controller.charakter.char_name if self.controller.charakter.char_name else "charakter"
+            default_pdf_name = f"{character_name.strip().replace(' ', '_')}.pdf"
+        
+        buttons_container = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(16),
+            adaptive_height=True
+        )
+        
+        # Checkbox für druckerfreundliche Version
+        checkbox_container = MDBoxLayout(
+            orientation='horizontal',
+            spacing=dp(16),
+            size_hint_y=None,
+            height=dp(48)
+        )
+        
+        self.printer_friendly_checkbox = MDCheckbox(
+            size_hint=(None, None),
+            size=(dp(48), dp(48)),
+            pos_hint={"center_y": .5}
+        )
+        
+        checkbox_container.add_widget(self.printer_friendly_checkbox)
+        checkbox_container.add_widget(MDLabel(
+            text="Druckerfreundliche Version (ohne Hintergrund)",
+            size_hint_x=1,
+            pos_hint={"center_y": .5}
+        ))
+        
+        buttons_container.add_widget(checkbox_container)
+        
+        # Wenn eine PDF existiert, zeige den Überschreiben-Button
+        if hat_bereits_pdf:
+            info_label = MDLabel(
+                text=f"Bestehende PDF-Datei: {default_pdf_name}",
+                size_hint_y=None,
+                height=dp(40)
+            )
+            buttons_container.add_widget(info_label)
+            
+            # Button zum Überschreiben
+            ueberschreiben_button = MDButton(
+                style="elevated",
+                size_hint=(1, None),
+                height=dp(50),
+                on_release=lambda x: self._ueberschreibe_existierende_pdf(default_pdf_path)
+            )
+            ueberschreiben_button.add_widget(MDButtonText(text="Bestehende PDF-Datei überschreiben"))
+            buttons_container.add_widget(ueberschreiben_button)
+            
+            # Abstandshalter
+            spacer = Widget(size_hint_y=None, height=dp(20))
+            buttons_container.add_widget(spacer)
+        
+        # Button für "Als neue PDF-Datei speichern"
+        new_file_button = MDButton(
+            style="elevated",
+            size_hint=(1, None),
+            height=dp(50),
+            on_release=lambda x: self._als_neue_pdf_speichern(default_pdf_name)
+        )
+        new_file_button.add_widget(MDButtonText(text="Als neue PDF-Datei speichern..."))
+        buttons_container.add_widget(new_file_button)
+        
+        # Dialog erstellen
+        self.pdf_options_dialog = MDDialog(
+            MDDialogHeadlineText(text="PDF erstellen"),
+            MDDialogContentContainer(
+                buttons_container,
+                orientation="vertical",
+                padding="16dp"
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.pdf_options_dialog.dismiss()
+                )
+            )
+        )
+        self.pdf_options_dialog.open()
+
+    def _ueberschreibe_existierende_pdf(self, pdf_path):
+        """
+        Überschreibt eine bestehende PDF-Datei direkt.
+        
+        Args:
+            pdf_path (str): Vollständiger Pfad zur vorhandenen PDF-Datei
+        """
+        self.pdf_options_dialog.dismiss()
+        
+        # PDF generieren mit dem ausgewählten Pfad
+        printer_friendly = self.printer_friendly_checkbox.active
+        success = generiere_pdf(self.controller.charakter, pdf_path, printer_friendly)
+        
+        if success:
+            self._show_success_dialog("PDF erstellen erfolgreich", f"PDF wurde gespeichert als:\n{pdf_path}")
+        else:
+            self._show_error_dialog(f"Fehler beim Erstellen der PDF-Datei: {pdf_path}")
+
+    def _als_neue_pdf_speichern(self, default_filename):
+        """
+        Zeigt einen Dialog zum Eingeben eines Dateinamens für die neue PDF.
+        
+        Args:
+            default_filename (str): Vorgeschlagener Dateiname für die PDF
+        """
+        self.pdf_options_dialog.dismiss()
+        
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(16),
+            padding=dp(16),
+            adaptive_height=True
+        )
+        
+        content.add_widget(MDLabel(
+            text="Dateiname für neue PDF-Datei:",
+            size_hint_y=None,
+            height=dp(30)
+        ))
+        
+        filename_input = MDTextField(
+            text=default_filename,
+            hint_text="Dateiname.pdf",
+            mode="outlined"
+        )
+        content.add_widget(filename_input)
+        
+        # Dialog zum Eingeben des Dateinamens
+        self.pdf_filename_dialog = MDDialog(
+            MDDialogHeadlineText(text="Als neue PDF-Datei speichern"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.pdf_filename_dialog.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Speicherort wählen"),
+                    style="text",
+                    on_release=lambda x: self._continue_save_new_pdf(filename_input.text)
+                )
+            )
+        )
+        self.pdf_filename_dialog.open()
+
+    def _continue_save_new_pdf(self, filename):
+        """
+        Setzt den Speicherprozess für die PDF mit Dateiauswahl fort.
+        
+        Args:
+            filename (str): Der vom Benutzer eingegebene Dateiname für die PDF
+        """
+        self.pdf_filename_dialog.dismiss()
+        
+        # Prüfe, ob ein gültiger Dateiname eingegeben wurde
+        if not filename or not filename.strip():
+            self._show_error_dialog("Bitte gib einen Dateinamen ein.")
+            return
+        
+        # Stellt sicher, dass die Dateiendung .pdf ist
+        if not filename.lower().endswith('.pdf'):
+            filename += '.pdf'
+        
+        # Speichern des Druckerfreundlich-Status und Dateinamens
+        self.temp_pdf_filename = filename
+        self.temp_printer_friendly = self.printer_friendly_checkbox.active
+        
+        # Öffne den Dateibrowser für die Verzeichnisauswahl
+        self._open_directory_browser_for_pdf_save()
+
+    def _open_directory_browser_for_pdf_save(self):
+        """
+        Öffnet den Dateibrowser um das Zielverzeichnis für die PDF zum Speichern auszuwählen.
+        Der Dateiname und die PDF-Einstellungen wurden bereits gespeichert.
+        """
+        # Verzeichnis für Charaktere bestimmen
         if getattr(sys, 'frozen', False):
-            # Wenn das Programm durch cx_Freeze gepackt ist, nutze den Ordner der ausführbaren Datei
             base_dir = os.path.dirname(sys.executable)
         else:
-            # Bei normalem Python-Skript nutze den Pfad des aktuellen Skripts
             base_dir = os.path.dirname(os.path.abspath(__file__))
         
-        # chars-Verzeichnis im Basisverzeichnis anlegen
         chars_dir = os.path.join(base_dir, 'chars')
         if not os.path.exists(chars_dir):
             os.makedirs(chars_dir)
         
-        # Öffne das FileChooser-Popup und setze das Standardverzeichnis
-        content = FileChooserPopup(
-            save=True,
-            load=self.speichere_pdf_datei_ausgewaehlt,
-            cancel=self.dismiss_popup,
-            file_filters=['*.pdf'],
-            default_filename='charakter.pdf',
-            default_path=chars_dir,  # Standardpfad auf chars_dir setzen
-            show_printer_friendly_option=True  # Option aktivieren
+        # Setze aktuellen Aktionstyp auf Verzeichnisauswahl für PDF-Speichern
+        self.current_action = "save_pdf_dir"
+        
+        # MDFileManager anzeigen - nur für Verzeichnisauswahl
+        self.file_manager.show(chars_dir)
+        self.manager_open = True
+
+    def confirm_pdf_overwrite(self, filepath):
+        """
+        Fragt nach Bestätigung zum Überschreiben einer vorhandenen PDF-Datei.
+        
+        Args:
+            filepath (str): Vollständiger Pfad zur PDF-Datei
+        """
+        content = MDBoxLayout(orientation='vertical', spacing=10, padding=20, adaptive_height=True)
+        
+        content.add_widget(MDLabel(
+            text=f"Die PDF-Datei '{os.path.basename(filepath)}' existiert bereits. Überschreiben?",
+            size_hint_y=None,
+            height=30
+        ))
+        
+        # Buttons-Container
+        buttons = MDBoxLayout(
+            orientation='horizontal',
+            spacing=10,
+            size_hint_y=None,
+            height=50,
+            pos_hint={'right': 1}
         )
-        self._popup = Popup(title="PDF speichern", content=content, size_hint=(0.9, 0.9))
-        self._popup.open()
+        
+        # Nein-Button
+        no_button = MDButton(
+            on_release=lambda x: self.close_pdf_overwrite_dialog(),
+            style="elevated",
+            size_hint_x=None,
+            width=100
+        )
+        no_button.add_widget(MDButtonText(text="Nein"))
+        
+        # Ja-Button
+        yes_button = MDButton(
+            on_release=lambda x: self.do_pdf_overwrite(filepath),
+            style="elevated",
+            size_hint_x=None,
+            width=100
+        )
+        yes_button.add_widget(MDButtonText(text="Ja"))
+        
+        buttons.add_widget(no_button)
+        buttons.add_widget(yes_button)
+        content.add_widget(buttons)
+        
+        headline = MDDialogHeadlineText(text="Bestätigung")
+        
+        self.pdf_overwrite_dialog = MDDialog(
+            md_bg_color=self.theme_cls.surfaceColor
+        )
+        self.pdf_overwrite_dialog.add_widget(headline)
+        self.pdf_overwrite_dialog.add_widget(content)
+        self.pdf_overwrite_dialog.open()
 
-    def speichere_pdf_datei_ausgewaehlt(self, pfad, dateiname):
-        if dateiname:
-            vollstaendiger_pfad = os.path.join(pfad, dateiname)
-            printer_friendly = self._popup.content.printer_friendly  # Wert der Checkbox abrufen
-            self.generiere_pdf(vollstaendiger_pfad, printer_friendly)
-        self.dismiss_popup()
+    def close_pdf_overwrite_dialog(self):
+        """Schließt den PDF-Überschreiben-Dialog"""
+        if hasattr(self, 'pdf_overwrite_dialog') and self.pdf_overwrite_dialog:
+            self.pdf_overwrite_dialog.dismiss()
 
-    def dismiss_popup(self):
-        if self._popup:
-            self._popup.dismiss()
+    def do_pdf_overwrite(self, filepath):
+        """
+        Überschreibt die PDF-Datei direkt ohne weitere Bestätigung.
+        
+        Args:
+            filepath (str): Vollständiger Pfad zur PDF-Datei
+        """
+        if hasattr(self, 'pdf_overwrite_dialog') and self.pdf_overwrite_dialog:
+            self.pdf_overwrite_dialog.dismiss()
+        
+        # PDF generieren
+        printer_friendly = self.temp_printer_friendly
+        success = generiere_pdf(self.controller.charakter, filepath, printer_friendly)
+        
+        if success:
+            self._show_success_dialog("PDF erstellen erfolgreich", f"PDF wurde gespeichert als:\n{filepath}")
+        else:
+            self._show_error_dialog(f"Fehler beim Erstellen der PDF-Datei: {filepath}")
+
+    def save_pdf_to_path(self, full_path):
+        """
+        Erstellt die PDF an dem angegebenen Pfad.
+        
+        Args:
+            full_path (str): Vollständiger Pfad inkl. Dateiname für die PDF
+        """
+        try:
+            # PDF generieren
+            printer_friendly = self.temp_printer_friendly
+            success = generiere_pdf(self.controller.charakter, full_path, printer_friendly)
+            
+            if success:
+                self._show_success_dialog("PDF erstellen erfolgreich", f"PDF wurde gespeichert als:\n{full_path}")
+            else:
+                self._show_error_dialog(f"Fehler beim Erstellen der PDF-Datei.")
+        except Exception as e:
+            self._show_error_dialog(f"Fehler beim Erstellen der PDF-Datei: {str(e)}")
 
     def change_active_setting(self, setting_name):
         if self.controller and self.controller.charakter:

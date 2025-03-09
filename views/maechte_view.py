@@ -77,6 +77,27 @@ KV_STRING = '''
             hint_text: 'Suche...'
             size_hint_x: 1
             on_text: root.filter_maechte()
+            
+        # Checkbox für "Nur ausgewählte" hinzufügen
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: dp(200)
+            spacing: dp(5)
+            
+            MDCheckbox:
+                id: only_selected_checkbox
+                size_hint: None, None
+                size: dp(40), dp(40)
+                active: root.only_selected_items
+                on_active: root.toggle_only_selected_items(self.active)
+                pos_hint: {"center_y": .5}
+                
+            MDLabel:
+                text: "Nur ausgewählte"
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_y": .5}
 
     MDLabel:
         text: 'Mächte'
@@ -191,6 +212,7 @@ class MachtItemRow(MDBoxLayout):
         """Initialisiert die MachtItemRow und holt den Controller-Zugriff."""
         self._initialize_controller()
         super().__init__(**kwargs)
+        self.bind(index=self.update_color)  # Wichtig: Farbaktualisierung bei Indexänderung
 
     def _initialize_controller(self):
         """Initialisiert die Verbindung zum Controller."""
@@ -225,6 +247,7 @@ class MachtItemRow(MDBoxLayout):
             Logger.debug(f"Macht '{self.macht_name}' ausgewählt.")
             if self.macht:
                 self.macht.ausgewaehlt = True
+                self.line_color = self._get_line_color()  # Umrandung aktualisieren
                 self.canvas.ask_update()
             self._refresh_ui()
         else:
@@ -244,10 +267,17 @@ class MachtItemRow(MDBoxLayout):
             Logger.debug(f"Macht '{self.macht_name}' entfernt.")
             if self.macht:
                 self.macht.ausgewaehlt = False
+                self.line_color = self._get_line_color()  # Umrandung aktualisieren
                 self.canvas.ask_update()
             self._refresh_ui()
         else:
             Logger.warning(f"Entfernen der Macht '{self.macht_name}' fehlgeschlagen.")
+
+    def update_color(self, *args):
+        """Aktualisiert die Hintergrundfarbe bei Indexänderung."""
+        # Die Canvas-Farben aktualisieren
+        self.md_bg_color = self._get_background_color()
+        self.line_color = self._get_line_color()
 
     def _get_background_color(self):
         """Berechnet die Hintergrundfarbe basierend auf Theme und Index."""
@@ -273,6 +303,7 @@ class MaechteWidget(MDBoxLayout):
     """
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
+    only_selected_items = BooleanProperty(False)  # Neue Property für den Filter
 
     # Mapping für Ränge, um numerische Sortierung zu ermöglichen
     RANG_MAPPING = {
@@ -289,6 +320,15 @@ class MaechteWidget(MDBoxLayout):
         super().__init__(**kwargs)
         self._initialize_controller()
         Clock.schedule_once(self.post_init, 0)
+
+    def toggle_only_selected_items(self, value):
+        """
+        Schaltet den Filter für 'Nur ausgewählte Elemente' um.
+        Event-Handler für die Checkbox.
+        """
+        self.only_selected_items = value
+        self.filter_maechte()
+        Logger.debug(f"Filter 'Nur ausgewählte Mächte' gesetzt auf: {value}")
 
     def _initialize_controller(self):
         """Initialisiert die Verbindung zum Controller."""
@@ -317,7 +357,7 @@ class MaechteWidget(MDBoxLayout):
     def filter_maechte(self, *args):
         """
         Filtert und sortiert die Mächte.
-        Event-Handler für Änderungen am Suchtext.
+        Event-Handler für Änderungen am Suchtext oder Filter.
         """
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("MaechteWidget: Controller oder Charakter nicht verfügbar")
@@ -344,15 +384,20 @@ class MaechteWidget(MDBoxLayout):
 
     def _filter_maechte_data(self, alle_maechte, search_term):
         """
-        Filtert die Macht-Daten nach Suchbegriff.
-        Extrahiert die Filterlogik aus filter_maechte.
+        Filtert die Macht-Daten nach Suchbegriff und Auswahlstatus.
         """
         filtered_data = []
         
+        Logger.debug(f"MaechteWidget: Filtere Mächte - Suchterm: {search_term}, Nur ausgewählte: {self.only_selected_items}")
+        
         for macht in alle_maechte.values():
+            # Filter für "Nur ausgewählte Elemente"
+            if self.only_selected_items and not macht.ausgewaehlt:
+                continue
+                
             # Suchtext-Filter
             if search_term and not (search_term in macht.name.lower() or 
-                                    search_term in macht.beschreibung.lower()):
+                                   search_term in macht.beschreibung.lower()):
                 continue
                 
             macht_data = {

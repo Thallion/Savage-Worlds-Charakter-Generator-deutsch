@@ -97,6 +97,27 @@ KV_STRING = '''
             size_hint_x: 1
             on_text: root.filter_talente()
 
+        # Checkbox für "Nur ausgewählte" hinzufügen
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: dp(200)
+            spacing: dp(5)
+            
+            MDCheckbox:
+                id: only_selected_checkbox
+                size_hint: None, None
+                size: dp(40), dp(40)
+                active: root.only_selected_items
+                on_active: root.toggle_only_selected_items(self.active)
+                pos_hint: {"center_y": .5}
+                
+            MDLabel:
+                text: "Nur ausgewählte"
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_y": .5}
+
         TooltipIconButton:
             icon: "filter"
             tooltip_text: "Nach Kategorie filtern"
@@ -218,6 +239,7 @@ class TalentItemRow(MDBoxLayout):
         """Initialisiert die TalentItemRow und bindet Property-Änderungen an entsprechende Handler."""
         super().__init__(**kwargs)
         self.bind(ausgewaehlt=self.on_ausgewaehlt_changed)
+        self.bind(index=self.update_color)  # Wichtig: Farbaktualisierung bei Indexänderung
 
     def _get_controller(self):
         """Hilfsmethode, um auf den Controller zuzugreifen."""
@@ -273,6 +295,12 @@ class TalentItemRow(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen des Talents: {str(e)}")
 
+    def update_color(self, *args):
+        """Aktualisiert die Hintergrundfarbe bei Indexänderung."""
+        # Die Canvas-Farben aktualisieren
+        self.md_bg_color = self._get_background_color()
+        self.line_color = self._get_line_color()
+
     def _get_background_color(self):
         """Berechnet die Hintergrundfarbe basierend auf Theme und Index."""
         is_dark = self.theme_cls.theme_style == "Dark"
@@ -290,6 +318,8 @@ class TalentItemRow(MDBoxLayout):
     def on_ausgewaehlt_changed(self, instance, value):
         """Event-Handler für Änderungen am ausgewaehlt-Status."""
         Logger.debug(f"TalentItemRow: ausgewaehlt changed to {value} for {self.talent_name}")
+        # Bei Änderung des Auswahlstatus auch die Umrandung aktualisieren
+        self.line_color = self._get_line_color()
 
 
 class TalenteWidget(MDBoxLayout):
@@ -300,6 +330,7 @@ class TalenteWidget(MDBoxLayout):
     kategorien = ListProperty([])
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
+    only_selected_items = BooleanProperty(False)  # Neue Property für den Filter
 
     def __init__(self, **kwargs):
         """Initialisiert das TalenteWidget und setzt Grundkonfiguration."""
@@ -307,6 +338,49 @@ class TalenteWidget(MDBoxLayout):
         self._initialize_controller()
         self.menu = None
         Clock.schedule_once(self.post_init, 0)
+
+    def toggle_only_selected_items(self, value):
+        """
+        Schaltet den Filter für 'Nur ausgewählte Elemente' um.
+        Event-Handler für die Checkbox.
+        """
+        self.only_selected_items = value
+        self.filter_talente()
+        Logger.debug(f"Filter 'Nur ausgewählte Talente' gesetzt auf: {value}")
+
+    def _filter_talente_data(self, alle_talente, search_term, selected_kategorie):
+        """
+        Filtert die Talent-Daten nach Suchbegriff, Kategorie und ggf. Auswahlstatus.
+        Extrahiert die Filterlogik aus filter_talente.
+        """
+        filtered_data = []
+        
+        for key, talent in alle_talente.items():
+            # Filter für "Nur ausgewählte Elemente"
+            if self.only_selected_items and not talent.ausgewaehlt:
+                continue
+                
+            # Kategorie-Filter
+            if (selected_kategorie != ALL_CATEGORIES_TEXT.lower() and 
+                (talent.kategorie is None or talent.kategorie.lower() != selected_kategorie)):
+                continue
+                
+            # Suchtext-Filter
+            if (search_term in talent.name.lower() or 
+                search_term in talent.beschreibung.lower()):
+                
+                talent_data = {
+                    'viewclass': 'TalentItemRow',
+                    'name_key': key,
+                    'talent_name': talent.name,
+                    'kategorie': talent.kategorie,
+                    'rang': talent.rang,
+                    'beschreibung': talent.beschreibung,
+                    'ausgewaehlt': talent.ausgewaehlt
+                }
+                filtered_data.append(talent_data)
+                
+        return filtered_data
 
     def _initialize_controller(self):
         """Initialisiert die Verbindung zum Controller."""
@@ -364,36 +438,6 @@ class TalenteWidget(MDBoxLayout):
         # An RecycleView übergeben
         self.ids.recycleview.data = filtered_data
         Logger.debug(f"Talente gefiltert und sortiert: {len(filtered_data)} Einträge")
-
-    def _filter_talente_data(self, alle_talente, search_term, selected_kategorie):
-        """
-        Filtert die Talent-Daten nach Suchbegriff und Kategorie.
-        Extrahiert die Filterlogik aus filter_talente.
-        """
-        filtered_data = []
-        
-        for key, talent in alle_talente.items():
-            # Kategorie-Filter
-            if (selected_kategorie != ALL_CATEGORIES_TEXT.lower() and 
-                (talent.kategorie is None or talent.kategorie.lower() != selected_kategorie)):
-                continue
-                
-            # Suchtext-Filter
-            if (search_term in talent.name.lower() or 
-                search_term in talent.beschreibung.lower()):
-                
-                talent_data = {
-                    'viewclass': 'TalentItemRow',
-                    'name_key': key,
-                    'talent_name': talent.name,
-                    'kategorie': talent.kategorie,
-                    'rang': talent.rang,
-                    'beschreibung': talent.beschreibung,
-                    'ausgewaehlt': talent.ausgewaehlt
-                }
-                filtered_data.append(talent_data)
-                
-        return filtered_data
 
     def _sort_talente_data(self, data):
         """

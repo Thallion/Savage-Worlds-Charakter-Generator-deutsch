@@ -12,6 +12,7 @@ import functions.ausruestung_funktionen as ausruestung_funktionen
 import functions.charakter_speicher as charakter_speicher
 import functions.abgeleitete_werte as abgeleitete_werte
 import functions.character_advancement as character_advancement
+import functions.charakter_speicher as charakter_speicher
 import functions.talent_funktionen as talent_funktionen
 import functions.macht_funktionen as macht_funktionen
 import functions.handicap_funktionen as handicap_funktionen
@@ -228,274 +229,135 @@ class Charakter(EventDispatcher):
         # UI-Event auslösen
         self.dispatch('on_charakter_change')
 
+    def speichern_als_json(self, dateipfad):
+        """
+        Speichert den Charakter als JSON-Datei.
+        
+        Args:
+            dateipfad (str): Der Pfad zur Zieldatei
+            
+        Returns:
+            bool: True bei Erfolg, False bei Fehler
+        """
+        import functions.charakter_speicher as charakter_speicher
+        try:
+            charakter_speicher.speichern_als_json(self, dateipfad)
+            Logger.info(f"Charakter erfolgreich in {dateipfad} gespeichert.")
+            return True
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern des Charakters: {e}")
+            return False
+
+
+    def laden_von_json(self, dateipfad):
+        """
+        Lädt einen Charakter aus einer JSON-Datei.
+        
+        Args:
+            dateipfad (str): Der Pfad zur JSON-Datei
+            
+        Returns:
+            bool: True, wenn das Laden erfolgreich war, sonst False
+        """
+        try:
+            with open(dateipfad, 'r', encoding='utf-8') as f:
+                daten = json.load(f)
+            
+            # Wichtige Informationen vorübergehend speichern
+            altes_setting = self.active_setting_name
+            
+            # Backup der aktiven Ausrüstung erstellen
+            temp_ausruestung = {}
+            for name, item in self.ausruestung.items():
+                temp_ausruestung[name] = item
+            
+            # Backup der ausgewählten Ausrüstung
+            temp_selected_waffen = list(self.selected_waffen)
+            temp_selected_ruestungen = list(self.selected_ruestungen)
+            temp_selected_schilde = list(self.selected_schilde)
+            temp_selected_allgemeine_ausruestung = list(self.selected_allgemeine_ausruestung)
+            
+            # Alle Daten aus der JSON in dieses Charakterobjekt laden (von charakter_speicher.from_dict)
+            import functions.charakter_speicher as charakter_speicher
+            charakter_speicher.from_dict(self, daten)
+            Logger.info(f"Charakter erfolgreich von {dateipfad} geladen.")
+            
+            # Verhindern, dass load_elements_from_active_setting die Ausrüstung überschreibt
+            # Wir laden die Elemente aus dem Setting mit Ausnahme der Ausrüstung
+            if "voelker" in daten and "handicaps" in daten and "talente" in daten and "maechte" in daten:
+                Logger.info("Ausrüstung aus der gespeicherten Datei verwenden, nicht aus dem Setting")
+                # Wir laden KEINE Elemente aus dem Setting, da die Elemente bereits geladen wurden
+                # Prüfen, ob das Setting erfolgreich aktiviert werden konnte
+                if self.active_setting_name != altes_setting:
+                    if not self.custom_element_manager.set_active_setting(self.active_setting_name):
+                        Logger.warning(f"Das Setting '{self.active_setting_name}' konnte nicht aktiviert werden.")
+                        # Fallback auf Standard-Setting
+                        if "SWAE" in self.custom_element_manager.get_all_settings():
+                            Logger.warning("Wechsle zurück zum Standard-Setting 'SWAE'.")
+                            self.active_setting_name = "SWAE"
+                            self.custom_element_manager.set_active_setting(self.active_setting_name)
+                        else:
+                            # Standard-Setting erstellen, wenn es nicht existiert
+                            Logger.warning("Standard-Setting 'SWAE' nicht gefunden. Erstelle es neu.")
+                            default_setting = self.create_default_setting()
+                            self.custom_element_manager.add_setting("SWAE", default_setting, overwrite=True)
+                            self.active_setting_name = "SWAE"
+                            self.custom_element_manager.set_active_setting("SWAE")
+            else:
+                Logger.warning("Unvollständige Charakterdaten, lade Elemente aus dem aktiven Setting")
+                # Für den Fall, dass wir unvollständige Daten haben, laden wir die Elemente aus dem Setting
+                if "ausruestung" in daten:
+                    # Ausrüstung aus den Daten wiederherstellen
+                    self.ausruestung = temp_ausruestung
+                    self.selected_waffen = temp_selected_waffen
+                    self.selected_ruestungen = temp_selected_ruestungen
+                    self.selected_schilde = temp_selected_schilde
+                    self.selected_allgemeine_ausruestung = temp_selected_allgemeine_ausruestung
+                
+                # Aktiviere das Setting, ohne die Ausrüstung zu laden
+                self.load_elements_from_active_setting()
+            
+            # Abgeleitete Werte berechnen
+            self.berechne_abgeleitete_werte()
+            
+            # UI aktualisieren
+            self.dispatch('on_charakter_change')
+            
+            return True
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden des Charakters: {e}", exc_info=True)
+            return False
+
+    def to_dict(self):
+        """
+        Konvertiert diesen Charakter in ein Dictionary.
+        
+        Returns:
+            dict: Dictionary mit den Charakterdaten
+        """
+        import functions.charakter_speicher as charakter_speicher
+        return charakter_speicher.to_dict(self)
+
+    def from_dict(self, data):
+        """
+        Lädt Daten aus einem Dictionary in diesen Charakter.
+        
+        Args:
+            data (dict): Dictionary mit Charakterdaten
+        """
+        import functions.charakter_speicher as charakter_speicher
+        charakter_speicher.from_dict(self, data)
+
     def create_default_setting(self):
         return setting_funktionen.create_default_setting(self)
 
     def load_elements_from_active_setting(self):
         return setting_funktionen.load_elements_from_active_setting(self)
 
-    def speichern_als_json(self, dateipfad):
-        try:
-            charakter_daten = self.to_dict()
-            with open(dateipfad, 'w', encoding='utf-8') as f:
-                json.dump(charakter_daten, f, ensure_ascii=False, indent=4)
-            Logger.info(f"Charakter erfolgreich in {dateipfad} gespeichert.")
-        except Exception as e:
-            Logger.error(f"Fehler beim Speichern des Charakters: {e}")
-
-    def laden_von_json(self, dateipfad):
-        try:
-            with open(dateipfad, 'r', encoding='utf-8') as f:
-                daten = json.load(f)
-
-            self.from_dict(daten)
-            Logger.info(f"Charakter erfolgreich von {dateipfad} geladen.")
-
-            self.voelker_selected = daten.get('voelker_selected', self.voelker_selected)
-            self.active_setting_name = daten.get('active_setting_name', self.active_setting_name)
-
-            # Setting aktivieren
-            if self.custom_element_manager:
-                success = self.custom_element_manager.set_active_setting(self.active_setting_name)
-                if not success:
-                    Logger.warning(f"Das Setting '{self.active_setting_name}' konnte nicht aktiviert werden. Verwende Standard-Setting.")
-                    self.active_setting_name = "SWAE"
-                    self.custom_element_manager.set_active_setting(self.active_setting_name)
-
-        except Exception as e:
-            Logger.error(f"Fehler beim Laden des Charakters: {e}")
-
-
     def reload_character_data(self):
         """Aktualisiert den Charakter, um nach dem Laden eines neuen Settings alle Elemente korrekt zu laden."""
         data = self.to_dict()
         self.from_dict(data)
-
-
-    def to_dict(self):
-        # Sicherstellen, dass selected_handicaps aktualisiert sind
-        # alle Handicaps, die ausgewaehlt sind, in selected_handicaps aufnehmen
-        self.selected_handicaps = [name for name, handicap in self.handicaps.items() if handicap.ausgewaehlt]
-
-        return {
-            'profil_daten': self.profil_daten,
-            "voelker": {name: volk.to_setting_dict() for name, volk in self.voelker.items()},
-            'attribute': {name: attribut.to_dict() for name, attribut in self.attribute.items()},
-            'fertigkeiten': {name: fertigkeit.to_dict() for name, fertigkeit in self.fertigkeiten.items()},
-            'handicaps': {name: handicap.to_dict() for name, handicap in self.handicaps.items()},
-            'talente': {name: talent.to_dict() for name, talent in self.talente.items()},
-            'maechte': {name: macht.to_dict() for name, macht in self.maechte.items()},
-            "ausruestung": {name: ausruestung.to_dict() for name, ausruestung in self.ausruestung.items()},
-            'selected_handicaps': self.selected_handicaps,
-            'selected_talente': self.selected_talente,
-            'selected_maechte': self.selected_maechte,
-            'selected_allgemeine_ausruestung': [item.name for item in self.selected_allgemeine_ausruestung],
-            'selected_waffen': [item.name for item in self.selected_waffen],
-            'selected_ruestungen': [item.name for item in self.selected_ruestungen],
-            'selected_schilde': [item.name for item in self.selected_schilde],
-            'voelker_selected': self.voelker_selected,
-            'verbleibende_attributsteigerungen': self.verbleibende_attributsteigerungen,
-            'verbleibende_fertigkeitssteigerungen': self.verbleibende_fertigkeitssteigerungen,
-            'maximale_attributsteigerungen': self.maximale_attributsteigerungen,
-            'maximale_fertigkeitssteigerungen': self.maximale_fertigkeitssteigerungen,
-            'verbleibende_aufstiege': self.verbleibende_aufstiege,
-            'aufstiege_gesamt': self.aufstiege_gesamt,
-            'verfuegbare_maechte': self.verfuegbare_maechte,
-            'machtpunkte': self.machtpunkte,
-            'vermoegen': self.vermoegen,
-            'erschoepfung': self.erschoepfung,
-            'zusaetzliche_talente': self.zusaetzliche_talente,
-            'gesamt_handicap_punkte': self.gesamt_handicap_punkte,
-            'settingregeln': self.settingregeln.to_dict(),
-            'active_setting_name': self.custom_element_manager.active_setting_name
-        }
-
-
-    def from_dict(self, data):
-        # Profildaten setzen
-        for key, value in data.get('profil_daten', {}).items():
-            self.set_profil_daten(key, value)
-
-        # Völker laden
-        voelker_data = data.get('voelker', {})
-        self.voelker = {}
-        for name, volk_dict in voelker_data.items():
-            self.voelker[name] = Volk.from_dict(volk_dict)
-        Logger.info("Völker geladen.")
-
-        # Völker-Auswahl laden
-        self.voelker_selected = data.get('voelker_selected', {})
-        for name, selected in self.voelker_selected.items():
-            if name in self.voelker:
-                self.voelker[name].ausgewaehlt = selected
-            else:
-                Logger.warning(f"Volk '{name}' existiert nicht in den geladenen Völkern.")
-
-        # Attribute laden
-        attribute_data = data.get('attribute', {})
-        for name, attr_data in attribute_data.items():
-            self.attribute[name] = Attribut.from_dict_static(attr_data)
-
-        # Fertigkeiten laden
-        fertigkeiten_data = data.get('fertigkeiten', {})
-        for name, fert_data in fertigkeiten_data.items():
-            self.fertigkeiten[name] = Fertigkeit.from_dict_static(fert_data, self.attribute)
-
-        # Handicaps laden
-        handicaps_data = data.get('handicaps', {})
-        for name_key, handicap_data in handicaps_data.items():
-            # Prüfen ob es schon ein Handicap mit diesem Namen gibt
-            if name_key in self.handicaps:
-                # Existierendes Handicap aktualisieren
-                self.handicaps[name_key].update_from_dict(handicap_data)
-            else:
-                # Handicap neu erzeugen, falls es noch nicht existiert
-                self.handicaps[name_key] = Handicap.from_dict_static(handicap_data)
-
-        self.selected_handicaps = [name for name, handicap in self.handicaps.items() if handicap.ausgewaehlt]
-
-        # Talente laden
-        talente_data = data.get('talente', {})
-        for name_key, talent_data in talente_data.items():
-            self.talente[name_key] = Talent.from_dict_static(talent_data)
-            if name_key not in self.custom_element_manager.active_setting['talente']:
-                self.custom_element_manager.active_setting['talente'][name_key] = talent_data
-
-        # Mächte laden
-        maechte_data = data.get('maechte', {})
-        for name_key, macht_data in maechte_data.items():
-            self.maechte[name_key] = Macht.from_dict_static(macht_data)
-            if name_key not in self.custom_element_manager.active_setting['maechte']:
-                self.custom_element_manager.active_setting['maechte'][name_key] = macht_data
-
-        # Ausrüstung laden
-        ausruestung_data = data.get('ausruestung', {})
-        self.ausruestung = {}
-        for name, item_data in ausruestung_data.items():
-            kategorie = item_data.get('kategorie', 'Allgemein')
-            if kategorie == 'Waffe':
-                item = Waffe.from_dict_static(item_data)
-            elif kategorie == 'Rüstung':
-                item = Ruestung.from_dict_static(item_data)
-            elif kategorie == 'Schild':
-                item = Schild.from_dict_static(item_data)
-            else:
-                item = Ausruestung.from_dict_static(item_data)
-
-            item.menge = item_data.get('menge', 0)
-            item.ausgewaehlt = item_data.get('ausgewaehlt', False)
-            item.aktiv = item_data.get('aktiv', True)
-            item.angelegt = item_data.get('angelegt', False)
-
-            self.ausruestung[name] = item
-
-            if name not in self.custom_element_manager.active_setting['ausruestung']:
-                self.custom_element_manager.active_setting['ausruestung'][name] = item_data
-                #Logger.info(f"Ausrüstungsgegenstand '{name}' wurde dem Setting hinzugefügt.")
-
-        # Ausgewählte Talente wiederherstellen
-        self.selected_talente = data.get('selected_talente', [])
-        for name_key in self.selected_talente:
-            if name_key in self.talente:
-                self.talente[name_key].ausgewaehlt = True
-            else:
-                Logger.warning(f"Talent '{name_key}' nicht in self.talente gefunden.")
-
-        # Ausgewählte Mächte wiederherstellen
-        self.selected_maechte = data.get('selected_maechte', [])
-        for name_key in self.selected_maechte:
-            if name_key in self.maechte:
-                self.maechte[name_key].ausgewaehlt = True
-            else:
-                Logger.warning(f"Macht '{name_key}' nicht in self.maechte gefunden.")
-
-        # Ausgewählte Waffen wiederherstellen
-        selected_waffen_names = data.get('selected_waffen', [])
-        self.selected_waffen = []
-        for name in selected_waffen_names:
-            if name in self.ausruestung:
-                waffe = self.ausruestung[name]
-                waffe.angelegt = True
-                self.selected_waffen.append(waffe)
-                Logger.debug(f"Waffe '{waffe.name}' als angelegt markiert.")
-            else:
-                Logger.warning(f"Waffe '{name}' nicht in self.ausruestung gefunden.")
-
-        # Setze angelegt=False für andere Waffen
-        for waffe in self.ausruestung.values():
-            if isinstance(waffe, Waffe) and waffe.name not in selected_waffen_names:
-                if waffe.angelegt:
-                    waffe.angelegt = False
-                    Logger.debug(f"Waffe '{waffe.name}' als nicht angelegt markiert.")
-
-        # Ausgewählte Schilde wiederherstellen
-        selected_schilde_names = data.get('selected_schilde', [])
-        self.selected_schilde = []
-        for name in selected_schilde_names:
-            if name in self.ausruestung:
-                schild = self.ausruestung[name]
-                schild.angelegt = True
-                self.selected_schilde.append(schild)
-                Logger.debug(f"Schild '{schild.name}' als angelegt markiert.")
-            else:
-                Logger.warning(f"Schild '{name}' nicht in self.ausruestung gefunden.")
-
-        # Setze angelegt=False für andere Schilde
-        for schild in self.ausruestung.values():
-            if isinstance(schild, Schild) and schild.name not in selected_schilde_names:
-                if schild.angelegt:
-                    schild.angelegt = False
-                    Logger.debug(f"Schild '{schild.name}' als nicht angelegt markiert.")
-
-        # Ausgewählte Rüstungen wiederherstellen
-        selected_ruestungen_names = data.get('selected_ruestungen', [])
-        self.selected_ruestungen = []
-        for name in selected_ruestungen_names:
-            if name in self.ausruestung:
-                ruestung = self.ausruestung[name]
-                ruestung.angelegt = True
-                self.selected_ruestungen.append(ruestung)
-                Logger.debug(f"Rüstung '{ruestung.name}' als angelegt markiert.")
-            else:
-                Logger.warning(f"Rüstung '{name}' nicht in self.ausruestung gefunden.")
-
-        # Setze angelegt=False für andere Rüstungen
-        for ruestung in self.ausruestung.values():
-            if isinstance(ruestung, Ruestung) and ruestung.name not in selected_ruestungen_names:
-                if ruestung.angelegt:
-                    ruestung.angelegt = False
-                    Logger.debug(f"Rüstung '{ruestung.name}' als nicht angelegt markiert.")
-
-        # Ausgewählte allgemeine Ausrüstung wiederherstellen
-        selected_allgemeine_ausruestung_names = data.get('selected_allgemeine_ausruestung', [])
-        self.selected_allgemeine_ausruestung = [self.ausruestung[name] for name in selected_allgemeine_ausruestung_names if name in self.ausruestung]
-
-        # Zuweisungen der anderen Werte
-        self.verbleibende_attributsteigerungen = data.get('verbleibende_attributsteigerungen', self.verbleibende_attributsteigerungen)
-        self.verbleibende_fertigkeitssteigerungen = data.get('verbleibende_fertigkeitssteigerungen', self.verbleibende_fertigkeitssteigerungen)
-        self.maximale_attributsteigerungen = data.get('maximale_attributsteigerungen', self.maximale_attributsteigerungen)
-        self.maximale_fertigkeitssteigerungen = data.get('maximale_fertigkeitssteigerungen', self.maximale_fertigkeitssteigerungen)
-        self.verbleibende_aufstiege = data.get('verbleibende_aufstiege', self.verbleibende_aufstiege)
-        self.aufstiege_gesamt = data.get('aufstiege_gesamt', self.aufstiege_gesamt)
-        self.verfuegbare_maechte = data.get('verfuegbare_maechte', self.verfuegbare_maechte)
-        self.machtpunkte = data.get('machtpunkte', self.machtpunkte)
-        self.vermoegen = data.get('vermoegen', self.vermoegen)
-        self.erschoepfung = data.get('erschoepfung', self.erschoepfung)
-        self.zusaetzliche_talente = data.get('zusaetzliche_talente', self.zusaetzliche_talente)
-        self.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', self.gesamt_handicap_punkte)
-
-        # Aktiven Setting-Namen setzen und Setting aktivieren
-        self.active_setting_name = data.get('active_setting_name', self.active_setting_name)
-        Logger.debug(f"Active Setting Name gesetzt auf: {self.active_setting_name}")
-
-        success = self.custom_element_manager.set_active_setting(self.active_setting_name)
-        if success:
-            Logger.debug(f"Setting '{self.active_setting_name}' erfolgreich aktiviert.")
-        else:
-            Logger.error(f"Setting '{self.active_setting_name}' konnte nicht aktiviert werden.")
-
-        # UI aktualisieren
-        self.dispatch('on_charakter_change')
 
     def initialisiere_attribute(self):
         eigenschaften_funktionen.initialisiere_attribute(self)

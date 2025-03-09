@@ -850,47 +850,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Elektronik": {
-            "fertigkeit_name": "Elektronik",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Hacken": {
-            "fertigkeit_name": "Hacken",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
         "Zaubern": {
             "fertigkeit_name": "Zaubern",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Psionik": {
-            "fertigkeit_name": "Psionik",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -930,6 +891,195 @@
         }
     },
     "handicaps": {
+        "Blind": {
+            "name": "Blind",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "–6 auf alle Aufgaben, die Sicht erfordern (freies Talent als Ausgleich).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Blutrünstig": {
+            "name": "Blutrünstig",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Nimmt niemals Gefangene.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Dünnhäutig": {
+            "name": "Dünnhäutig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Abzug von –2 beim Widerstand gegen Provozieren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Amorös_leicht": {
+            "name": "Amorös",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "-2 um Herausforderungen von Gegnern mit dem Talent Attraktiv oder Sehr Attraktiv zu widerstehen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Arkane_Empfindlichkeit_leicht": {
+            "name": "Arkane Empfindlichkeit",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Ziehe -2 ab, wenn du einer Macht widerstehst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Arkane_Empfindlichkeit_schwer": {
+            "name": "Arkane Empfindlichkeit",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Ziehe -4 ab, wenn du einer Macht widerstehst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Aufopferungsvoll_leicht": {
+            "name": "Aufopferungsvoll",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Held stellt andere vor sich selbst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Aufopferungsvoll_schwer": {
+            "name": "Aufopferungsvoll",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Held stellt andere vor sich selbst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Behindernde_Rüstung_leicht": {
+            "name": "Behindernde Rüstung",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Mittelschwere Rüstung / Schilde benutzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Behindernde_Rüstung_schwer": {
+            "name": "Behindernde Rüstung",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Leichte Rüstung / Schilde als schweres Handicap benutzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Chauvinistisch_leicht": {
+            "name": "Chauvinistisch",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -2 und sie dürfen nicht von seinen Anführertalenten profitieren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Chauvinistisch_schwer": {
+            "name": "Chauvinistisch",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -4 und sie dürfen nicht von seinen Anführertalenten profitieren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Grimmig": {
+            "name": "Grimmig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Held ist ein düsterer Geselle und wird Erzürnt, wenn er erfolgreich Provoziert wird.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Idealistisch": {
+            "name": "Idealistisch",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Held sieht die Dinge in einer vereinfachten, schwarz-weißen Weltsicht.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Materialkomponenten": {
+            "name": "Materialkomponenten",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Zauberwirker benötigt materielle Gegenstände, um zu zaubern. Wenn er einen Kritischen Fehlschlag würfelt, zieht er -4 von Proben für arkane Fertigkeiten ab, bis er sie aufgefüllt hat.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Talisman_leicht": {
+            "name": "Talisman",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -1 von Proben auf seine arkane Fertigkeiten ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Talisman_schwer": {
+            "name": "Talisman",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -2 von Proben auf seine arkane Fertigkeiten ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Tölpel": {
+            "name": "Tölpel",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Ein Wurf von 1 auf den Fertigkeitswürfel ist ein Kritischer Fehlschlag, wenn du eine für den Charakter wichtige Fertigkeit einsetzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verdammt": {
+            "name": "Verdammt",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "-2 auf Würfe, um Schaden wegzustecken.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verderbnis": {
+            "name": "Verderbnis",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Erhalte ein neues leichtes Handicap (oder erhöhe auf schwer), wenn bei einer arkanen Fertigkeit ein Kritischer Fehlschlag gewürfelt wird, bis zum nächsten Aufstieg des Charakters.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verflucht": {
+            "name": "Verflucht",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Zauberwirken erleiden -2, wenn sie versuchen, den Helden mit nützlicher Magie zu beeinflussen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Alt": {
             "name": "Alt",
             "stufe": "schwer",
@@ -953,7 +1103,7 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Die Handlungen des Helden werden von einem wichtigen Ziel oder einer Überzeugung angetrieben.",
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
         },
@@ -998,33 +1148,6 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Der Charakter wird von einem tragischen Ereignis aus seiner Vergangenheit heimgesucht.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Blind": {
-            "name": "Blind",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "–6 auf alle Aufgaben, die Sicht erfordern (freies Talent als Ausgleich).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Blutrünstig": {
-            "name": "Blutrünstig",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Nimmt niemals Gefangene.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Dünnhäutig": {
-            "name": "Dünnhäutig",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Abzug von –2 beim Widerstand gegen Provozieren.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -1295,7 +1418,7 @@
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "Der Held glaubt, dass er alles kann.",
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
         },
@@ -1307,171 +1430,1152 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },
-        "Amorös_leicht": {
-            "name": "Amorös",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-2 um Herausforderungen von Gegnern mit dem Talent Attraktiv oder Sehr Attraktiv zu widerstehen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Arkane_Empfindlichkeit_leicht": {
-            "name": "Arkane Empfindlichkeit",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Ziehe -2 ab, wenn du einer Macht widerstehst.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Arkane_Empfindlichkeit_schwer": {
-            "name": "Arkane Empfindlichkeit",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Ziehe -4 ab, wenn du einer Macht widerstehst.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Aufopferungsvoll_leicht": {
-            "name": "Aufopferungsvoll",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Held stellt andere vor sich selbst.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Aufopferungsvoll_schwer": {
-            "name": "Aufopferungsvoll",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Der Held stellt andere vor sich selbst.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Behindernde_Rüstung_leicht": {
-            "name": "Behindernde Rüstung",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Mittelschwere Rüstung / Schilde benutzt.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Behindernde_Rüstung_schwer": {
-            "name": "Behindernde Rüstung",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Leichte Rüstung / Schilde als schweres Handicap benutzt.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Chauvinistisch_leicht": {
-            "name": "Chauvinistisch",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -2 und sie dürfen nicht von seinen Anführertalenten profitieren.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Chauvinistisch_schwer": {
-            "name": "Chauvinistisch",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -4 und sie dürfen nicht von seinen Anführertalenten profitieren.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Grimmig": {
-            "name": "Grimmig",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Held ist ein düsterer Geselle und wird Erzürnt, wenn er erfolgreich Provoziert wird.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Idealistisch": {
-            "name": "Idealistisch",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Held sieht die Dinge in einer vereinfachten, schwarz-weißen Weltsicht.",
-            "ausgewaehlt": true,
-            "aktiv": true,
-            "custom": false
-        },
-        "Materialkomponenten": {
-            "name": "Materialkomponenten",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Zauberwirker benötigt materielle Gegenstände, um zu zaubern. Wenn er einen Kritischen Fehlschlag würfelt, zieht er -4 von Proben für arkane Fertigkeiten ab, bis er sie aufgefüllt hat.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Talisman_leicht": {
-            "name": "Talisman",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -1 von Proben auf seine arkane Fertigkeiten ab.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Talisman_schwer": {
-            "name": "Talisman",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -2 von Proben auf seine arkane Fertigkeiten ab.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Tölpel": {
-            "name": "Tölpel",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Ein Wurf von 1 auf den Fertigkeitswürfel ist ein Kritischer Fehlschlag, wenn du eine für den Charakter wichtige Fertigkeit einsetzt.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verdammt": {
-            "name": "Verdammt",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "-2 auf Würfe, um Schaden wegzustecken.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verderbnis": {
-            "name": "Verderbnis",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Benötigt einen Arkanen Hintergrund. Erhalte ein neues leichtes Handicap (oder erhöhe auf schwer), wenn bei einer arkanen Fertigkeit ein Kritischer Fehlschlag gewürfelt wird, bis zum nächsten Aufstieg des Charakters.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verflucht": {
-            "name": "Verflucht",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Zauberwirken erleiden -2, wenn sie versuchen, den Helden mit nützlicher Magie zu beeinflussen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
         }
     },
     "talente": {
+        "Arkaner Hintergrund (Alchemist)": {
+            "name": "Arkaner Hintergrund (Alchemist)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkane Fertigkeit: Alchemie (Verstand)",
+            "neue_maechte": 3,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Chemiker": {
+            "name": "Chemiker",
+            "kategorie": "Alchemist",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Alchemist)",
+                "Alchemie W8+"
+            ],
+            "beschreibung": "Die Gebräue des Alchemisten halten eine Woche statt 48 Stunden, wenn sie an andere weitergegeben werden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Meisterlicher Alchemist": {
+            "name": "Meisterlicher Alchemist",
+            "kategorie": "Alchemist",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Alchemist)",
+                "Alchemie W10+"
+            ],
+            "beschreibung": "Erlaubt die Herstellung permanenter Tränke zu halb so hohen Kosten mit improvisierten Vorräten oder einer Alchemistentasche.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Barde)": {
+            "name": "Arkaner Hintergrund (Barde)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkane Fertigkeit: Darbietung (Willenskraft)",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Grabgesang": {
+            "name": "Grabgesang",
+            "kategorie": "Barde",
+            "rang": "H",
+            "voraussetzungen": [
+                "Heroisch",
+                "Arkaner Hintergrund (Barde)"
+            ],
+            "beschreibung": "Löst Furcht aus und reduziert Proben von Feinden um -2, wenn sie Bennys verwenden. Der Barde muss singen oder ein Instrument spielen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Heldentum inspirieren": {
+            "name": "Heldentum inspirieren",
+            "kategorie": "Barde",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Barde)",
+                "Darbietung W8+"
+            ],
+            "beschreibung": "Erlaubt es, fünf Inspirations-Marker zu generieren, die Kameraden Boni auf Proben oder Schadenswürfe geben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Instrument": {
+            "name": "Instrument",
+            "kategorie": "Barde",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Barde)"
+            ],
+            "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Beschwörer)": {
+            "name": "Arkaner Hintergrund (Beschwörer)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 5,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Diabolist)": {
+            "name": "Arkaner Hintergrund (Diabolist)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Druide)": {
+            "name": "Arkaner Hintergrund (Druide)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Willenskraft W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Elementarist)": {
+            "name": "Arkaner Hintergrund (Elementarist)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Illusionist)": {
+            "name": "Arkaner Hintergrund (Illusionist)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Kleriker)": {
+            "name": "Arkaner Hintergrund (Kleriker)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Willenskraft W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Magier)": {
+            "name": "Arkaner Hintergrund (Magier)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 6,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Nekromant)": {
+            "name": "Arkaner Hintergrund (Nekromant)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Schamane)": {
+            "name": "Arkaner Hintergrund (Schamane)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Willenskraft W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Tüftler)": {
+            "name": "Arkaner Hintergrund (Tüftler)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Reparieren (Verstand)",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Zauberer)": {
+            "name": "Arkaner Hintergrund (Zauberer)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Verstand W6+"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 3,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkane Stärkung": {
+            "name": "Arkane Stärkung",
+            "kategorie": "Beschwörer",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Beschwörer)",
+                "Tier beschwören"
+            ],
+            "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Ungezügelte Beschwörung": {
+            "name": "Ungezügelte Beschwörung",
+            "kategorie": "Beschwörer",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Beschwörer)",
+                "Monster beschwören"
+            ],
+            "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Höhere Beschwörung": {
+            "name": "Höhere Beschwörung",
+            "kategorie": "Beschwörer",
+            "rang": "H",
+            "voraussetzungen": [
+                "Heroisch",
+                "Arkaner Hintergrund (Beschwörer)",
+                "Tier beschwören",
+                "Monster beschwören"
+            ],
+            "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Zorn der Hölle": {
+            "name": "Zorn der Hölle",
+            "kategorie": "Diabolist",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Diabolist)"
+            ],
+            "beschreibung": "Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Infernale Rüstung": {
+            "name": "Infernale Rüstung",
+            "kategorie": "Diabolist",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Diabolist)"
+            ],
+            "beschreibung": "Verleiht +2 Rüstung durch eine höllische Aura, macht Heimlichkeit jedoch nahezu unmöglich.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Herzholzstab": {
+            "name": "Herzholzstab",
+            "kategorie": "Druide",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Druide)"
+            ],
+            "beschreibung": "Ein Kampfstab, der zusätzlichen Schaden verursacht und bei Verlust durch ein Ritual ersetzt werden kann.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Wahre Form": {
+            "name": "Wahre Form",
+            "kategorie": "Druide",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Druide)"
+            ],
+            "beschreibung": "Ermöglicht Druiden, in Tierform zu sprechen und Mächte zu wirken, mit Risiken bei längerem Verweilen in Tiergestalt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Elementare Absorption": {
+            "name": "Elementare Absorption",
+            "kategorie": "Elementarmagier",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Elementarmagier)"
+            ],
+            "beschreibung": "Erhöht Robustheit um +2 während der Nutzung von Elementarsynergie.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Elementarer Meister": {
+            "name": "Elementarer Meister",
+            "kategorie": "Elementarmagier",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Elementarist)"
+            ],
+            "beschreibung": "Erlaubt die Beherrschung eines zusätzlichen Elements, Mächte können zwischen Elementen gewechselt werden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Böser Blick": {
+            "name": "Böser Blick",
+            "kategorie": "Hexer/Hexe",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Hexer/Hexe)"
+            ],
+            "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Hexenzeit": {
+            "name": "Hexenzeit",
+            "kategorie": "Hexer/Hexe",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Hexer/Hexe)"
+            ],
+            "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Tödliche Illusion": {
+            "name": "Tödliche Illusion",
+            "kategorie": "Illusionist",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Illusionist)",
+                "Zaubern W10+"
+            ],
+            "beschreibung": "Erlaubt den Einsatz des Machtmodifikators Tödliche Illusion ohne zusätzliche Machtpunkte.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Meisterlicher Illusionist": {
+            "name": "Meisterlicher Illusionist",
+            "kategorie": "Illusionist",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Illusionist)",
+                "Zaubern W8+"
+            ],
+            "beschreibung": "Illusionen erhalten die Machtmodifikatoren Beweglich und Geräusch ohne zusätzliche Machtpunkte.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Untote zerstören": {
+            "name": "Untote zerstören",
+            "kategorie": "Kleriker",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Kleriker)"
+            ],
+            "beschreibung": "Kanalisierung positiver Energie, um Untote mit 2W6 (oder 3W6 für 2 Machtpunkte) Schaden zu treffen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Gnade": {
+            "name": "Gnade",
+            "kategorie": "Kleriker",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Kleriker)",
+                "Glaube W8+"
+            ],
+            "beschreibung": "Hebt Abgelenkt, Angeschlagen oder Verwundbar durch Einsatz von 1 Machtpunkt auf.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Unheimliche Inspiration": {
+            "name": "Unheimliche Inspiration",
+            "kategorie": "Magier",
+            "rang": "H",
+            "voraussetzungen": [
+                "Heroisch",
+                "Arkaner Hintergrund (Magier)"
+            ],
+            "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht mit einem Benny, solange Zugang zu Zauberbüchern besteht.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Zauberbücher": {
+            "name": "Zauberbücher",
+            "kategorie": "Magier",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Magie)"
+            ],
+            "beschreibung": "Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Seelengefäß": {
+            "name": "Seelengefäß",
+            "kategorie": "Nekromant",
+            "rang": "L",
+            "voraussetzungen": [
+                "Legendär",
+                "Arkaner Hintergrund (Nekromant)",
+                "Okkultismus W10+"
+            ],
+            "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Untoter Vertrauter": {
+            "name": "Untoter Vertrauter",
+            "kategorie": "Nekromant",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Nekromant)"
+            ],
+            "beschreibung": "Erhält einen untoten Tiergefährten mit speziellen Boni, ähnlich wie das Talent Vertrauter.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Urtümliche Magie": {
+            "name": "Urtümliche Magie",
+            "kategorie": "Schamane",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Schamane)"
+            ],
+            "beschreibung": "Erhöht Schaden von Mächten um +2, verursacht jedoch bei Kritischen Fehlschlägen Betäubung im Umkreis.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Geweihter Fetisch": {
+            "name": "Geweihter Fetisch",
+            "kategorie": "Schamane",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Schamane)",
+                "Glaube W8+"
+            ],
+            "beschreibung": "Verleiht eine Freie Wurfwiederholung bei Glaubensproben, wenn ein geweihter Fetisch genutzt wird.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Konstrukt-Vertrauter": {
+            "name": "Konstrukt-Vertrauter",
+            "kategorie": "Tüftler",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Tüftler)"
+            ],
+            "beschreibung": "Erhält einen mechanischen Tiergefährten mit speziellen Vorteilen, ähnlich wie das Talent Vertrauter.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Tüftlerrüstung": {
+            "name": "Tüftlerrüstung",
+            "kategorie": "Tüftler",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Tüftler)"
+            ],
+            "beschreibung": "Ermöglicht modifizierte Rüstung mit Boni auf Arme, Rumpf oder Beine, unterliegt jedoch Ausfällen bei Wunden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Große Macht": {
+            "name": "Große Macht",
+            "kategorie": "Zauberer",
+            "rang": "V",
+            "voraussetzungen": [
+                "Veteran",
+                "Arkaner Hintergrund (Zauberer)"
+            ],
+            "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Phänomenale Macht": {
+            "name": "Phänomenale Macht",
+            "kategorie": "Zauberer",
+            "rang": "H",
+            "voraussetzungen": [
+                "Heroisch",
+                "Arkaner Hintergrund (Zauberer)",
+                "Große Macht"
+            ],
+            "beschreibung": "Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Auserkoren": {
+            "name": "Auserkoren",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Wildcard"
+            ],
+            "beschreibung": "Entschlossenheit hält bis zum Ende der Begegnung an, ohne dass sie mit Bennys aufrechterhalten werden muss. Der Charakter hat ein unverkennbares Mal und wird von mächtigen Feinden verfolgt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Bevorzugtes Gelände": {
+            "name": "Bevorzugtes Gelände",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Überleben W6+"
+            ],
+            "beschreibung": "Wähle ein Geländetyp. In diesem Gelände erhält der Charakter eine freie Wiederholung bei Überlebens- und Wahrnehmungsproben sowie eine zusätzliche Aktionskarte zur Initiative.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Erbstück": {
+            "name": "Erbstück",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger"
+            ],
+            "beschreibung": "Gewährt einen magischen Gegenstand im Wert von bis zu 10.000 Goldmünzen. Der Gegenstand muss bei Verlust durch ein Abenteuer wiedergefunden werden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Erzfeind": {
+            "name": "Erzfeind",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Athletik",
+                "Kämpfen oder Schießen W6+"
+            ],
+            "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Feenblütig": {
+            "name": "Feenblütig",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger"
+            ],
+            "beschreibung": "Gewährt eine freie Wiederholung, um feindlichen Mächten und zauberähnlichen Effekten zu widerstehen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Betäubungsschlag": {
+            "name": "Betäubungsschlag",
+            "kategorie": "Kampf",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Stärke W8+"
+            ],
+            "beschreibung": "Schläge mit stumpfen Waffen zwingen Gegner zu Konstitutionsproben. Bei einem Misserfolg wird der Gegner Betäubt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Böe": {
+            "name": "Böe",
+            "kategorie": "Kampf",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Flügel"
+            ],
+            "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Doppelschuss": {
+            "name": "Doppelschuss",
+            "kategorie": "Kampf",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Athletik W8+ für Wurfwaffen oder Schießen W8+ für Bögen"
+            ],
+            "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Vierfachschuss": {
+            "name": "Vierfachschuss",
+            "kategorie": "Kampf",
+            "rang": "H",
+            "voraussetzungen": [
+                "Heroisch",
+                "Doppelschuss",
+                "Athletik W10+ für Wurfwaffen oder Schießen W10+ für Bögen"
+            ],
+            "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Unglaubliche Reflexe": {
+            "name": "Unglaubliche Reflexe",
+            "kategorie": "Kampf",
+            "rang": "V",
+            "voraussetzungen": [
+                "Veteran",
+                "Geschicklichkeit W8+",
+                "Athletik W8+"
+            ],
+            "beschreibung": "Der Charakter ignoriert den üblichen -2 Geschicklichkeits-Abzug beim Wegspringen und kann bei Flächeneffekten oder Angriffen wie Strahl oder Verwirrung Wegspringen anwenden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Versengen": {
+            "name": "Versengen",
+            "kategorie": "Kampf",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Konstitution W8+",
+                "Odemwaffe"
+            ],
+            "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Verteidiger": {
+            "name": "Verteidiger",
+            "kategorie": "Kampf",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Kämpfen W6+"
+            ],
+            "beschreibung": "Erlaubt das Teilen des Parade- und Deckungsbonus eines Schildes mit einem Verbündeten in der Nähe als freie Aktion.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Wildling": {
+            "name": "Wildling",
+            "kategorie": "Kampf",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Kämpfen W6+"
+            ],
+            "beschreibung": "Ein Rücksichtsloser Angriff verursacht +4 Schaden statt +2.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Zerschmettern": {
+            "name": "Zerschmettern",
+            "kategorie": "Kampf",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Stärke W8+"
+            ],
+            "beschreibung": "Fügt bei Angriffen auf Objekte +W6 Schaden hinzu, wobei die Schadenswürfel nicht explodieren können.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Artefakterschaffer": {
+            "name": "Artefakterschaffer",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (beliebig)"
+            ],
+            "beschreibung": "Erlaubt die Herstellung von temporären Arkane Apparaturen und permanenter magischer Gegenstände.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Meisterlicher Artefakterschaffer": {
+            "name": "Meisterlicher Artefakterschaffer",
+            "kategorie": "Macht",
+            "rang": "H",
+            "voraussetzungen": [
+                "Heroisch",
+                "Artefakterschaffer",
+                "Okkultismus W10+"
+            ],
+            "beschreibung": "Erhöht die Belohnung für Okkultismusproben bei der Herstellung magischer Gegenstände auf 1000 G pro Erfolg oder Steigerung.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Bevorzugte Macht": {
+            "name": "Bevorzugte Macht",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W8+"
+            ],
+            "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Blutmagie": {
+            "name": "Blutmagie",
+            "kategorie": "Macht",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (beliebig)",
+                "eine böse Gesinnung"
+            ],
+            "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Epische Meisterschaft": {
+            "name": "Epische Meisterschaft",
+            "kategorie": "Macht",
+            "rang": "V",
+            "voraussetzungen": [
+                "Veteran",
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W6+"
+            ],
+            "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Mystische Kräfte": {
+            "name": "Mystische Kräfte",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten"
+            ],
+            "beschreibung": "Erlaubt das Erlernen von 10 dedizierten Machtpunkten mit ausgewählten Mächten, die automatisch aktiviert werden können. Die Mächte und Einschränkungen sind abhängig vom gewählten Paket (z. B. Barbar, Kämpfer, Mönch, etc.).",
+            "neue_maechte": 0,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Schlachtenmagie": {
+            "name": "Schlachtenmagie",
+            "kategorie": "Macht",
+            "rang": "V",
+            "voraussetzungen": [
+                "Veteran",
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W10+"
+            ],
+            "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Stillzauberer": {
+            "name": "Stillzauberer",
+            "kategorie": "Macht",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (jeder außer Barde)",
+                "Okkultismus W8+"
+            ],
+            "beschreibung": "Erlaubt das Wirken von Zaubern ohne zu sprechen. Funktioniert auch unter Wasser, in einem Vakuum, oder innerhalb der Macht Stille.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Übertragung": {
+            "name": "Übertragung",
+            "kategorie": "Macht",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (beliebig)"
+            ],
+            "beschreibung": "Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Vertrauter": {
+            "name": "Vertrauter",
+            "kategorie": "Macht",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
+            ],
+            "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
+            "neue_maechte": 0,
+            "machtpunkte": 5,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Entdecker": {
+            "name": "Entdecker",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Konstitution W6+",
+                "Überleben W8+"
+            ],
+            "beschreibung": "Ermöglicht eine zusätzliche Aktionskarte bei Reisen und verkürzt die Reisezeit der Gruppe um 10%.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Fallengespür": {
+            "name": "Fallengespür",
+            "kategorie": "Experte",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Reparieren W6+"
+            ],
+            "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Giftmischer": {
+            "name": "Giftmischer",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Alchemie, Heilen oder Überleben W6+"
+            ],
+            "beschreibung": "Erstellt Gifte in der Hälfte der Zeit, die Kontaktgifte halten 12 statt 4 Stunden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Im Sattel geboren": {
+            "name": "Im Sattel geboren",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Geschicklichkeit W8+",
+                "Reiten W6+"
+            ],
+            "beschreibung": "Verleiht eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Reittiers um 2 und den Sprintwürfel um einen Würfeltyp.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Kundschafter": {
+            "name": "Kundschafter",
+            "kategorie": "Experte",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Überleben W6+"
+            ],
+            "beschreibung": "Ermöglicht Wahrnehmungsproben zum frühzeitigen Erkennen von Gefahren, verbessert Wachsamkeit und gibt Boni auf Allgemeinwissen über bereiste Orte.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Reittier": {
+            "name": "Reittier",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Reiten W6+"
+            ],
+            "beschreibung": "Gewährt ein treues, aufsteigbares Reittier mit besonderen Fähigkeiten. Ermöglicht die Wahl eines mächtigen Reittiers auf höheren Rängen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Ritter": {
+            "name": "Ritter",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Willenskraft W6+",
+                "Stärke W8+",
+                "Konstitution W8+",
+                "Kämpfen W8+",
+                "Reiten W6+",
+                "Verpflichtung (schwer)"
+            ],
+            "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Schatzjäger": {
+            "name": "Schatzjäger",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Wahrnehmung W8+",
+                "Okkultismus W8+"
+            ],
+            "beschreibung": "Erlaubt Verstandsproben zur Einschätzung von Schätzen und magischen Gegenständen. Ermöglicht das Neuwürfeln von magischen Gegenstandseffekten mit einem Benny.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Steingespür": {
+            "name": "Steingespür",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Reparieren W6+"
+            ],
+            "beschreibung": "Erhöht Wahrnehmungsproben um +2, um Fallen oder versteckte Türen in Stein zu entdecken.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Troubadour": {
+            "name": "Troubadour",
+            "kategorie": "Experte",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Allgemeinwissen W6+",
+                "Darbietung W8+"
+            ],
+            "beschreibung": "Gewährt +2 auf Allgemeinwissenproben und erlaubt die Nutzung von Darbietung statt Kriegskunst für Anführertalente.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Täuscher": {
+            "name": "Täuscher",
+            "kategorie": "Sozial",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Verstand W8+"
+            ],
+            "beschreibung": "Erlaubt das Ziel, bei Herausforderungen entweder mit Verstand oder Willenskraft zu widerstehen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Aura der Tapferkeit": {
+            "name": "Aura der Tapferkeit",
+            "kategorie": "Übersinnlich",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Willenskraft W8+"
+            ],
+            "beschreibung": "Verbündete im Umkreis von 20 Metern erhalten +1 auf Furchtproben und -1 auf der Furchttabelle.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Bestienflüsterer": {
+            "name": "Bestienflüsterer",
+            "kategorie": "Übersinnlich",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger"
+            ],
+            "beschreibung": "Erlaubt es, mit einer Tiergattung zu kommunizieren und Informationen von ihnen zu erhalten, abhängig von ihrer Intelligenz.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Schnelle Verwandlung": {
+            "name": "Schnelle Verwandlung",
+            "kategorie": "Übersinnlich",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Lykanthropie"
+            ],
+            "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
         "Aristokrat": {
             "name": "Aristokrat",
             "kategorie": "Hintergrund",
@@ -1506,17 +2610,6 @@
             "beschreibung": "Arkane Fertigkeiten, die den Helden als Ziel haben, erleiden einen Abzug von –2 (gilt auch für Verbündete); magischer Schaden wird um –4 verringert.",
             "neue_maechte": 0,
             "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund": {
-            "name": "Arkaner Hintergrund",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Erlaubt Zugriff auf die arkanen Hintergründe in Kapitel 5.",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1858,20 +2951,6 @@
                 "Block"
             ],
             "beschreibung": "+2 Parade, ignoriere 2 Punkt Überzahlbonus.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Doppelschuss": {
-            "name": "Doppelschuss",
-            "kategorie": "Kampf",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Athletik W8+ für Wurfwaffen oder Schießen W8+ für Bögen"
-            ],
-            "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2463,20 +3542,6 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Artefakterschaffer": {
-            "name": "Artefakterschaffer",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (beliebig)"
-            ],
-            "beschreibung": "Erlaubt die Herstellung von temporären Arkane Apparaturen und permanenter magischer Gegenstände.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Bastler": {
             "name": "Bastler",
             "kategorie": "Macht",
@@ -2517,7 +3582,7 @@
             "beschreibung": "Addiere +1 bis +4 auf Schaden wegstecken für jeden Machtpunkt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true
         },
         "Kanalisieren": {
@@ -3010,7 +4075,7 @@
             "beschreibung": "+2 Schaden gegen übernatürlich böse (oder gute) Kreaturen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true
         },
         "Chi": {
@@ -3218,1124 +4283,217 @@
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },
-        "Arkaner Hintergrund (Diabolist)": {
-            "name": "Arkaner Hintergrund (Diabolist)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Druide)": {
-            "name": "Arkaner Hintergrund (Druide)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Willenskraft W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Elementarist)": {
-            "name": "Arkaner Hintergrund (Elementarist)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Illusionist)": {
-            "name": "Arkaner Hintergrund (Illusionist)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Kleriker)": {
-            "name": "Arkaner Hintergrund (Kleriker)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Willenskraft W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": true,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Magier)": {
-            "name": "Arkaner Hintergrund (Magier)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 6,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Nekromant)": {
-            "name": "Arkaner Hintergrund (Nekromant)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Schamane)": {
-            "name": "Arkaner Hintergrund (Schamane)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Willenskraft W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
-            "neue_maechte": 5,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Tüftler)": {
-            "name": "Arkaner Hintergrund (Tüftler)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Reparieren (Verstand)",
-            "neue_maechte": 2,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Zauberer)": {
-            "name": "Arkaner Hintergrund (Zauberer)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Verstand W6+"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 3,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Alchemist)": {
-            "name": "Arkaner Hintergrund (Alchemist)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Arkane Fertigkeit: Alchemie (Verstand)",
-            "neue_maechte": 3,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Chemiker": {
-            "name": "Chemiker",
-            "kategorie": "Alchemist",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Alchemist)",
-                "Alchemie W8+"
-            ],
-            "beschreibung": "Die Gebräue des Alchemisten halten eine Woche statt 48 Stunden, wenn sie an andere weitergegeben werden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Meisterlicher Alchemist": {
-            "name": "Meisterlicher Alchemist",
-            "kategorie": "Alchemist",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Alchemist)",
-                "Alchemie W10+"
-            ],
-            "beschreibung": "Erlaubt die Herstellung permanenter Tränke zu halb so hohen Kosten mit improvisierten Vorräten oder einer Alchemistentasche.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Barde)": {
-            "name": "Arkaner Hintergrund (Barde)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Arkane Fertigkeit: Darbietung (Willenskraft)",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Grabgesang": {
-            "name": "Grabgesang",
-            "kategorie": "Barde",
-            "rang": "H",
-            "voraussetzungen": [
-                "Heroisch",
-                "Arkaner Hintergrund (Barde)"
-            ],
-            "beschreibung": "Löst Furcht aus und reduziert Proben von Feinden um -2, wenn sie Bennys verwenden. Der Barde muss singen oder ein Instrument spielen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Heldentum inspirieren": {
-            "name": "Heldentum inspirieren",
-            "kategorie": "Barde",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Barde)",
-                "Darbietung W8+"
-            ],
-            "beschreibung": "Erlaubt es, fünf Inspirations-Marker zu generieren, die Kameraden Boni auf Proben oder Schadenswürfe geben.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Instrument": {
-            "name": "Instrument",
-            "kategorie": "Barde",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Barde)"
-            ],
-            "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkaner Hintergrund (Beschwörer)": {
-            "name": "Arkaner Hintergrund (Beschwörer)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 5,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Arkane Stärkung": {
-            "name": "Arkane Stärkung",
-            "kategorie": "Beschwörer",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Beschwörer)",
-                "Tier beschwören"
-            ],
-            "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Ungezügelte Beschwörung": {
-            "name": "Ungezügelte Beschwörung",
-            "kategorie": "Beschwörer",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Beschwörer)",
-                "Monster beschwören"
-            ],
-            "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Höhere Beschwörung": {
-            "name": "Höhere Beschwörung",
-            "kategorie": "Beschwörer",
-            "rang": "H",
-            "voraussetzungen": [
-                "Heroisch",
-                "Arkaner Hintergrund (Beschwörer)",
-                "Tier beschwören",
-                "Monster beschwören"
-            ],
-            "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Zorn der Hölle": {
-            "name": "Zorn der Hölle",
-            "kategorie": "Diabolist",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Diabolist)"
-            ],
-            "beschreibung": "Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Infernale Rüstung": {
-            "name": "Infernale Rüstung",
-            "kategorie": "Diabolist",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Diabolist)"
-            ],
-            "beschreibung": "Verleiht +2 Rüstung durch eine höllische Aura, macht Heimlichkeit jedoch nahezu unmöglich.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Herzholzstab": {
-            "name": "Herzholzstab",
-            "kategorie": "Druide",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Druide)"
-            ],
-            "beschreibung": "Ein Kampfstab, der zusätzlichen Schaden verursacht und bei Verlust durch ein Ritual ersetzt werden kann.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Wahre Form": {
-            "name": "Wahre Form",
-            "kategorie": "Druide",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Druide)"
-            ],
-            "beschreibung": "Ermöglicht Druiden, in Tierform zu sprechen und Mächte zu wirken, mit Risiken bei längerem Verweilen in Tiergestalt.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Elementare Absorption": {
-            "name": "Elementare Absorption",
-            "kategorie": "Elementarmagier",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Elementarmagier)"
-            ],
-            "beschreibung": "Erhöht Robustheit um +2 während der Nutzung von Elementarsynergie.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Elementarer Meister": {
-            "name": "Elementarer Meister",
-            "kategorie": "Elementarmagier",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Elementarist)"
-            ],
-            "beschreibung": "Erlaubt die Beherrschung eines zusätzlichen Elements, Mächte können zwischen Elementen gewechselt werden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Böser Blick": {
-            "name": "Böser Blick",
-            "kategorie": "Hexer/Hexe",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Hexer/Hexe)"
-            ],
-            "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hexenzeit": {
-            "name": "Hexenzeit",
-            "kategorie": "Hexer/Hexe",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Hexer/Hexe)"
-            ],
-            "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Tödliche Illusion": {
-            "name": "Tödliche Illusion",
-            "kategorie": "Illusionist",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Illusionist)",
-                "Zaubern W10+"
-            ],
-            "beschreibung": "Erlaubt den Einsatz des Machtmodifikators Tödliche Illusion ohne zusätzliche Machtpunkte.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Meisterlicher Illusionist": {
-            "name": "Meisterlicher Illusionist",
-            "kategorie": "Illusionist",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Illusionist)",
-                "Zaubern W8+"
-            ],
-            "beschreibung": "Illusionen erhalten die Machtmodifikatoren Beweglich und Geräusch ohne zusätzliche Machtpunkte.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Untote zerstören": {
-            "name": "Untote zerstören",
-            "kategorie": "Kleriker",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Kleriker)"
-            ],
-            "beschreibung": "Kanalisierung positiver Energie, um Untote mit 2W6 (oder 3W6 für 2 Machtpunkte) Schaden zu treffen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Gnade": {
-            "name": "Gnade",
-            "kategorie": "Kleriker",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Kleriker)",
-                "Glaube W8+"
-            ],
-            "beschreibung": "Hebt Abgelenkt, Angeschlagen oder Verwundbar durch Einsatz von 1 Machtpunkt auf.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Unheimliche Inspiration": {
-            "name": "Unheimliche Inspiration",
-            "kategorie": "Magier",
-            "rang": "H",
-            "voraussetzungen": [
-                "Heroisch",
-                "Arkaner Hintergrund (Magier)"
-            ],
-            "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht mit einem Benny, solange Zugang zu Zauberbüchern besteht.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Zauberbücher": {
-            "name": "Zauberbücher",
-            "kategorie": "Magier",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Magie)"
-            ],
-            "beschreibung": "Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Seelengefäß": {
-            "name": "Seelengefäß",
-            "kategorie": "Nekromant",
-            "rang": "L",
-            "voraussetzungen": [
-                "Legendär",
-                "Arkaner Hintergrund (Nekromant)",
-                "Okkultismus W10+"
-            ],
-            "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Untoter Vertrauter": {
-            "name": "Untoter Vertrauter",
-            "kategorie": "Nekromant",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Nekromant)"
-            ],
-            "beschreibung": "Erhält einen untoten Tiergefährten mit speziellen Boni, ähnlich wie das Talent Vertrauter.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Urtümliche Magie": {
-            "name": "Urtümliche Magie",
-            "kategorie": "Schamane",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Schamane)"
-            ],
-            "beschreibung": "Erhöht Schaden von Mächten um +2, verursacht jedoch bei Kritischen Fehlschlägen Betäubung im Umkreis.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Geweihter Fetisch": {
-            "name": "Geweihter Fetisch",
-            "kategorie": "Schamane",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Schamane)",
-                "Glaube W8+"
-            ],
-            "beschreibung": "Verleiht eine Freie Wurfwiederholung bei Glaubensproben, wenn ein geweihter Fetisch genutzt wird.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Konstrukt-Vertrauter": {
-            "name": "Konstrukt-Vertrauter",
-            "kategorie": "Tüftler",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Tüftler)"
-            ],
-            "beschreibung": "Erhält einen mechanischen Tiergefährten mit speziellen Vorteilen, ähnlich wie das Talent Vertrauter.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Tüftlerrüstung": {
-            "name": "Tüftlerrüstung",
-            "kategorie": "Tüftler",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (Tüftler)"
-            ],
-            "beschreibung": "Ermöglicht modifizierte Rüstung mit Boni auf Arme, Rumpf oder Beine, unterliegt jedoch Ausfällen bei Wunden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Große Macht": {
-            "name": "Große Macht",
-            "kategorie": "Zauberer",
-            "rang": "V",
-            "voraussetzungen": [
-                "Veteran",
-                "Arkaner Hintergrund (Zauberer)"
-            ],
-            "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Phänomenale Macht": {
-            "name": "Phänomenale Macht",
-            "kategorie": "Zauberer",
-            "rang": "H",
-            "voraussetzungen": [
-                "Heroisch",
-                "Arkaner Hintergrund (Zauberer)",
-                "Große Macht"
-            ],
-            "beschreibung": "Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Auserkoren": {
-            "name": "Auserkoren",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Wildcard"
-            ],
-            "beschreibung": "Entschlossenheit hält bis zum Ende der Begegnung an, ohne dass sie mit Bennys aufrechterhalten werden muss. Der Charakter hat ein unverkennbares Mal und wird von mächtigen Feinden verfolgt.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Bevorzugtes Gelände": {
-            "name": "Bevorzugtes Gelände",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Überleben W6+"
-            ],
-            "beschreibung": "Wähle ein Geländetyp. In diesem Gelände erhält der Charakter eine freie Wiederholung bei Überlebens- und Wahrnehmungsproben sowie eine zusätzliche Aktionskarte zur Initiative.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Erbstück": {
-            "name": "Erbstück",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger"
-            ],
-            "beschreibung": "Gewährt einen magischen Gegenstand im Wert von bis zu 10.000 Goldmünzen. Der Gegenstand muss bei Verlust durch ein Abenteuer wiedergefunden werden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Erzfeind": {
-            "name": "Erzfeind",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Athletik",
-                "Kämpfen oder Schießen W6+"
-            ],
-            "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Feenblütig": {
-            "name": "Feenblütig",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger"
-            ],
-            "beschreibung": "Gewährt eine freie Wiederholung, um feindlichen Mächten und zauberähnlichen Effekten zu widerstehen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Betäubungsschlag": {
-            "name": "Betäubungsschlag",
-            "kategorie": "Kampf",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Stärke W8+"
-            ],
-            "beschreibung": "Schläge mit stumpfen Waffen zwingen Gegner zu Konstitutionsproben. Bei einem Misserfolg wird der Gegner Betäubt.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Böe": {
-            "name": "Böe",
-            "kategorie": "Kampf",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Flügel"
-            ],
-            "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Vierfachschuss": {
-            "name": "Vierfachschuss",
-            "kategorie": "Kampf",
-            "rang": "H",
-            "voraussetzungen": [
-                "Heroisch",
-                "Doppelschuss",
-                "Athletik W10+ für Wurfwaffen oder Schießen W10+ für Bögen"
-            ],
-            "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Unglaubliche Reflexe": {
-            "name": "Unglaubliche Reflexe",
-            "kategorie": "Kampf",
-            "rang": "V",
-            "voraussetzungen": [
-                "Veteran",
-                "Geschicklichkeit W8+",
-                "Athletik W8+"
-            ],
-            "beschreibung": "Der Charakter ignoriert den üblichen -2 Geschicklichkeits-Abzug beim Wegspringen und kann bei Flächeneffekten oder Angriffen wie Strahl oder Verwirrung Wegspringen anwenden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Versengen": {
-            "name": "Versengen",
-            "kategorie": "Kampf",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Konstitution W8+",
-                "Odemwaffe"
-            ],
-            "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Verteidiger": {
-            "name": "Verteidiger",
-            "kategorie": "Kampf",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Kämpfen W6+"
-            ],
-            "beschreibung": "Erlaubt das Teilen des Parade- und Deckungsbonus eines Schildes mit einem Verbündeten in der Nähe als freie Aktion.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Wildling": {
-            "name": "Wildling",
-            "kategorie": "Kampf",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Kämpfen W6+"
-            ],
-            "beschreibung": "Ein Rücksichtsloser Angriff verursacht +4 Schaden statt +2.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Zerschmettern": {
-            "name": "Zerschmettern",
-            "kategorie": "Kampf",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Stärke W8+"
-            ],
-            "beschreibung": "Fügt bei Angriffen auf Objekte +W6 Schaden hinzu, wobei die Schadenswürfel nicht explodieren können.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Meisterlicher Artefakterschaffer": {
-            "name": "Meisterlicher Artefakterschaffer",
-            "kategorie": "Macht",
-            "rang": "H",
-            "voraussetzungen": [
-                "Heroisch",
-                "Artefakterschaffer",
-                "Okkultismus W10+"
-            ],
-            "beschreibung": "Erhöht die Belohnung für Okkultismusproben bei der Herstellung magischer Gegenstände auf 1000 G pro Erfolg oder Steigerung.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Bevorzugte Macht": {
-            "name": "Bevorzugte Macht",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Arkaner Hintergrund (beliebig)",
-                "Arkane Fertigkeit W8+"
-            ],
-            "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Blutmagie": {
-            "name": "Blutmagie",
-            "kategorie": "Macht",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (beliebig)",
-                "eine böse Gesinnung"
-            ],
-            "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Epische Meisterschaft": {
-            "name": "Epische Meisterschaft",
-            "kategorie": "Macht",
-            "rang": "V",
-            "voraussetzungen": [
-                "Veteran",
-                "Arkaner Hintergrund (beliebig)",
-                "Arkane Fertigkeit W6+"
-            ],
-            "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Mystische Kräfte": {
-            "name": "Mystische Kräfte",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten"
-            ],
-            "beschreibung": "Erlaubt das Erlernen von 10 dedizierten Machtpunkten mit ausgewählten Mächten, die automatisch aktiviert werden können. Die Mächte und Einschränkungen sind abhängig vom gewählten Paket (z. B. Barbar, Kämpfer, Mönch, etc.).",
-            "neue_maechte": 0,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Schlachtenmagie": {
-            "name": "Schlachtenmagie",
-            "kategorie": "Macht",
-            "rang": "V",
-            "voraussetzungen": [
-                "Veteran",
-                "Arkaner Hintergrund (beliebig)",
-                "Arkane Fertigkeit W10+"
-            ],
-            "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Stillzauberer": {
-            "name": "Stillzauberer",
-            "kategorie": "Macht",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (jeder außer Barde)",
-                "Okkultismus W8+"
-            ],
-            "beschreibung": "Erlaubt das Wirken von Zaubern ohne zu sprechen. Funktioniert auch unter Wasser, in einem Vakuum, oder innerhalb der Macht Stille.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Übertragung": {
-            "name": "Übertragung",
-            "kategorie": "Macht",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (beliebig)"
-            ],
-            "beschreibung": "Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Vertrauter": {
-            "name": "Vertrauter",
-            "kategorie": "Macht",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
-            ],
-            "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
-            "neue_maechte": 0,
-            "machtpunkte": 5,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Entdecker": {
-            "name": "Entdecker",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Konstitution W6+",
-                "Überleben W8+"
-            ],
-            "beschreibung": "Ermöglicht eine zusätzliche Aktionskarte bei Reisen und verkürzt die Reisezeit der Gruppe um 10%.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Fallengespür": {
-            "name": "Fallengespür",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Reparieren W6+"
-            ],
-            "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Giftmischer": {
-            "name": "Giftmischer",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Alchemie, Heilen oder Überleben W6+"
-            ],
-            "beschreibung": "Erstellt Gifte in der Hälfte der Zeit, die Kontaktgifte halten 12 statt 4 Stunden.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Im Sattel geboren": {
-            "name": "Im Sattel geboren",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Geschicklichkeit W8+",
-                "Reiten W6+"
-            ],
-            "beschreibung": "Verleiht eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Reittiers um 2 und den Sprintwürfel um einen Würfeltyp.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Kundschafter": {
-            "name": "Kundschafter",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Überleben W6+"
-            ],
-            "beschreibung": "Ermöglicht Wahrnehmungsproben zum frühzeitigen Erkennen von Gefahren, verbessert Wachsamkeit und gibt Boni auf Allgemeinwissen über bereiste Orte.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Reittier": {
-            "name": "Reittier",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Reiten W6+"
-            ],
-            "beschreibung": "Gewährt ein treues, aufsteigbares Reittier mit besonderen Fähigkeiten. Ermöglicht die Wahl eines mächtigen Reittiers auf höheren Rängen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Ritter": {
-            "name": "Ritter",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Willenskraft W6+",
-                "Stärke W8+",
-                "Konstitution W8+",
-                "Kämpfen W8+",
-                "Reiten W6+",
-                "Verpflichtung (schwer)"
-            ],
-            "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Schatzjäger": {
-            "name": "Schatzjäger",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Wahrnehmung W8+",
-                "Okkultismus W8+"
-            ],
-            "beschreibung": "Erlaubt Verstandsproben zur Einschätzung von Schätzen und magischen Gegenständen. Ermöglicht das Neuwürfeln von magischen Gegenstandseffekten mit einem Benny.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Steingespür": {
-            "name": "Steingespür",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Reparieren W6+"
-            ],
-            "beschreibung": "Erhöht Wahrnehmungsproben um +2, um Fallen oder versteckte Türen in Stein zu entdecken.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Troubadour": {
-            "name": "Troubadour",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Allgemeinwissen W6+",
-                "Darbietung W8+"
-            ],
-            "beschreibung": "Gewährt +2 auf Allgemeinwissenproben und erlaubt die Nutzung von Darbietung statt Kriegskunst für Anführertalente.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Täuscher": {
-            "name": "Täuscher",
-            "kategorie": "Sozial",
-            "rang": "F",
-            "voraussetzungen": [
-                "Fortgeschritten",
-                "Verstand W8+"
-            ],
-            "beschreibung": "Erlaubt das Ziel, bei Herausforderungen entweder mit Verstand oder Willenskraft zu widerstehen.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Aura der Tapferkeit": {
-            "name": "Aura der Tapferkeit",
-            "kategorie": "Übersinnlich",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Willenskraft W8+"
-            ],
-            "beschreibung": "Verbündete im Umkreis von 20 Metern erhalten +1 auf Furchtproben und -1 auf der Furchttabelle.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": true,
-            "aktiv": true
-        },
-        "Bestienflüsterer": {
-            "name": "Bestienflüsterer",
-            "kategorie": "Übersinnlich",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger"
-            ],
-            "beschreibung": "Erlaubt es, mit einer Tiergattung zu kommunizieren und Informationen von ihnen zu erhalten, abhängig von ihrer Intelligenz.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Schnelle Verwandlung": {
-            "name": "Schnelle Verwandlung",
-            "kategorie": "Übersinnlich",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anfänger",
-                "Lykanthropie"
-            ],
-            "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
         }
     },
     "maechte": {
+        "Aufspüren": {
+            "name": "Aufspüren",
+            "rang": "Anfänger",
+            "machtpunkte": 3,
+            "reichweite": "Selbst",
+            "dauer": "10 Minuten",
+            "effekt": "",
+            "beschreibung": "Findet verborgene Dinge.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Ausspähung": {
+            "name": "Ausspähung",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Selbst",
+            "dauer": "5",
+            "effekt": "",
+            "beschreibung": "Spioniert ein entferntes Ziel aus.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Bindender Ruf": {
+            "name": "Bindender Ruf",
+            "rang": "Veteran",
+            "machtpunkte": 8,
+            "reichweite": "Verstand",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Beschwört und hält eine Kreatur gefangen.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Chaos": {
+            "name": "Chaos",
+            "rang": "Anfänger",
+            "machtpunkte": 2,
+            "reichweite": "Verstand",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Ziele in der Flächenschablone sind Abgelenkt und können durch Stürze Schaden erleiden.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Ebenenwechsel": {
+            "name": "Ebenenwechsel",
+            "rang": "Veteran",
+            "machtpunkte": 4,
+            "reichweite": "Verstand",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Wechselt in eine andere Existenzebene.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Fluch": {
+            "name": "Fluch",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 5,
+            "reichweite": "Berührung",
+            "dauer": "Speziell",
+            "effekt": "",
+            "beschreibung": "Fügt Feinden Krankheiten zu.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Gegenstand Beschwören": {
+            "name": "Gegenstand Beschwören",
+            "rang": "Anfänger",
+            "machtpunkte": 2,
+            "reichweite": "Verstand",
+            "dauer": "Eine Stunde",
+            "effekt": "",
+            "beschreibung": "Erschafft einen Gegenstand bis 0,5 kg pro 2 Machtpunkte.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Monster Beschwören": {
+            "name": "Monster Beschwören",
+            "rang": "Anfänger",
+            "machtpunkte": 1.0,
+            "reichweite": "Verstand",
+            "dauer": "5",
+            "effekt": "",
+            "beschreibung": "Beschwört ein mächtiges Monster.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Mystisches Eingreifen": {
+            "name": "Mystisches Eingreifen",
+            "rang": "Legendär",
+            "machtpunkte": 20,
+            "reichweite": "Speziell",
+            "dauer": "Speziell",
+            "effekt": "",
+            "beschreibung": "Bittet um Hilfe von größeren Mächten.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Segen": {
+            "name": "Segen",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 10,
+            "reichweite": "Eine Stadt/Gemeinde",
+            "dauer": "Ein Jahr",
+            "effekt": "",
+            "beschreibung": "Segnet Gemeinschaften und Ressourcen.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Tier Beschwören": {
+            "name": "Tier Beschwören",
+            "rang": "Anfänger",
+            "machtpunkte": 1.0,
+            "reichweite": "Verstand",
+            "dauer": "5",
+            "effekt": "",
+            "beschreibung": "Beschwört Tiere zur Unterstützung.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Untoten Beschwören": {
+            "name": "Untoten Beschwören",
+            "rang": "Anfänger",
+            "machtpunkte": 1.0,
+            "reichweite": "Verstand",
+            "dauer": "5",
+            "effekt": "",
+            "beschreibung": "Beschwört einfache Untote.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verriegeln/Entriegeln": {
+            "name": "Verriegeln/Entriegeln",
+            "rang": "Anfänger",
+            "machtpunkte": 1,
+            "reichweite": "Verstand",
+            "dauer": "Permanent (Verriegeln); Sofort (Entriegeln)",
+            "effekt": "",
+            "beschreibung": "Verriegelt oder entriegelt magisch.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Wunsch": {
+            "name": "Wunsch",
+            "rang": "Legendär",
+            "machtpunkte": 20,
+            "reichweite": "Verstand",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Beugt die Realität nach dem Willen des Wirkers.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Zeitstopp": {
+            "name": "Zeitstopp",
+            "rang": "Heroisch",
+            "machtpunkte": 10,
+            "reichweite": "Selbst",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Hält die Zeit an, gewährt 1W4+1 neue Züge.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Zuflucht": {
+            "name": "Zuflucht",
+            "rang": "Anfänger",
+            "machtpunkte": 2,
+            "reichweite": "Berührung",
+            "dauer": "5",
+            "effekt": "",
+            "beschreibung": "Schützt vor Angriffen und Flächeneffekten; erfordert Willenskraftprobe bei bösen Kreaturen.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Abwehren": {
             "name": "Abwehren",
             "rang": "A",
@@ -4631,7 +4789,7 @@
             "effekt": "",
             "beschreibung": "Stellt Wunden wieder her, die weniger als eine Stunde alt sind.",
             "voraussetzungen": [],
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
         },
@@ -4670,7 +4828,7 @@
             "effekt": "",
             "beschreibung": "Erschafft oder verbannt Beleuchtung.",
             "voraussetzungen": [],
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
         },
@@ -4748,7 +4906,7 @@
             "effekt": "",
             "beschreibung": "Gewährt Panzerung +2/+4.",
             "voraussetzungen": [],
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
         },
@@ -4878,7 +5036,7 @@
             "effekt": "",
             "beschreibung": "Vergleichender Wurf gegen Willenskraft, um Wesenheiten zu verbannen.",
             "voraussetzungen": [],
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
         },
@@ -5009,214 +5167,6 @@
             "beschreibung": "Wirker kann andersweltlichen Wesenheit Fragen stellen.",
             "voraussetzungen": [],
             "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Aufspüren": {
-            "name": "Aufspüren",
-            "rang": "Anfänger",
-            "machtpunkte": 3,
-            "reichweite": "Selbst",
-            "dauer": "10 Minuten",
-            "effekt": "",
-            "beschreibung": "Findet verborgene Dinge.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Ausspähung": {
-            "name": "Ausspähung",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 3,
-            "reichweite": "Selbst",
-            "dauer": "5",
-            "effekt": "",
-            "beschreibung": "Spioniert ein entferntes Ziel aus.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Bindender Ruf": {
-            "name": "Bindender Ruf",
-            "rang": "Veteran",
-            "machtpunkte": 8,
-            "reichweite": "Verstand",
-            "dauer": "Sofort",
-            "effekt": "",
-            "beschreibung": "Beschwört und hält eine Kreatur gefangen.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Chaos": {
-            "name": "Chaos",
-            "rang": "Anfänger",
-            "machtpunkte": 2,
-            "reichweite": "Verstand",
-            "dauer": "Sofort",
-            "effekt": "",
-            "beschreibung": "Ziele in der Flächenschablone sind Abgelenkt und können durch Stürze Schaden erleiden.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Ebenenwechsel": {
-            "name": "Ebenenwechsel",
-            "rang": "Veteran",
-            "machtpunkte": 4,
-            "reichweite": "Verstand",
-            "dauer": "Sofort",
-            "effekt": "",
-            "beschreibung": "Wechselt in eine andere Existenzebene.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Fluch": {
-            "name": "Fluch",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 5,
-            "reichweite": "Berührung",
-            "dauer": "Speziell",
-            "effekt": "",
-            "beschreibung": "Fügt Feinden Krankheiten zu.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Gegenstand Beschwören": {
-            "name": "Gegenstand Beschwören",
-            "rang": "Anfänger",
-            "machtpunkte": 2,
-            "reichweite": "Verstand",
-            "dauer": "Eine Stunde",
-            "effekt": "",
-            "beschreibung": "Erschafft einen Gegenstand bis 0,5 kg pro 2 Machtpunkte.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Monster Beschwören": {
-            "name": "Monster Beschwören",
-            "rang": "Anfänger",
-            "machtpunkte": 1.0,
-            "reichweite": "Verstand",
-            "dauer": "5",
-            "effekt": "",
-            "beschreibung": "Beschwört ein mächtiges Monster.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Mystisches Eingreifen": {
-            "name": "Mystisches Eingreifen",
-            "rang": "Legendär",
-            "machtpunkte": 20,
-            "reichweite": "Speziell",
-            "dauer": "Speziell",
-            "effekt": "",
-            "beschreibung": "Bittet um Hilfe von größeren Mächten.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Segen": {
-            "name": "Segen",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 10,
-            "reichweite": "Eine Stadt/Gemeinde",
-            "dauer": "Ein Jahr",
-            "effekt": "",
-            "beschreibung": "Segnet Gemeinschaften und Ressourcen.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Tier Beschwören": {
-            "name": "Tier Beschwören",
-            "rang": "Anfänger",
-            "machtpunkte": 1.0,
-            "reichweite": "Verstand",
-            "dauer": "5",
-            "effekt": "",
-            "beschreibung": "Beschwört Tiere zur Unterstützung.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Untoten Beschwören": {
-            "name": "Untoten Beschwören",
-            "rang": "Anfänger",
-            "machtpunkte": 1.0,
-            "reichweite": "Verstand",
-            "dauer": "5",
-            "effekt": "",
-            "beschreibung": "Beschwört einfache Untote.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verriegeln/Entriegeln": {
-            "name": "Verriegeln/Entriegeln",
-            "rang": "Anfänger",
-            "machtpunkte": 1,
-            "reichweite": "Verstand",
-            "dauer": "Permanent (Verriegeln); Sofort (Entriegeln)",
-            "effekt": "",
-            "beschreibung": "Verriegelt oder entriegelt magisch.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Wunsch": {
-            "name": "Wunsch",
-            "rang": "Legendär",
-            "machtpunkte": 20,
-            "reichweite": "Verstand",
-            "dauer": "Sofort",
-            "effekt": "",
-            "beschreibung": "Beugt die Realität nach dem Willen des Wirkers.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Zeitstopp": {
-            "name": "Zeitstopp",
-            "rang": "Heroisch",
-            "machtpunkte": 10,
-            "reichweite": "Selbst",
-            "dauer": "Sofort",
-            "effekt": "",
-            "beschreibung": "Hält die Zeit an, gewährt 1W4+1 neue Züge.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Zuflucht": {
-            "name": "Zuflucht",
-            "rang": "Anfänger",
-            "machtpunkte": 2,
-            "reichweite": "Berührung",
-            "dauer": "5",
-            "effekt": "",
-            "beschreibung": "Schützt vor Angriffen und Flächeneffekten; erfordert Willenskraftprobe bei bösen Kreaturen.",
-            "voraussetzungen": [],
-            "ausgewaehlt": true,
             "aktiv": true,
             "custom": false
         }
@@ -6141,8 +6091,8 @@
             "kosten": 100,
             "setting": "fantasy",
             "beschreibung": "Heiliges Symbol, Schlafsack, Feuerstein und Stahl, Kerze, Heilertasche, Laterne, Öl, Pergament, Tinte, Feder, Rucksack, Wasserschlauch, Verpflegung für 1 Woche.",
-            "menge": 1,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
             "angelegt": false
         },
@@ -6213,8 +6163,8 @@
             "kosten": 1,
             "setting": "fantasy",
             "beschreibung": "Für alle Arten von Armbrüsten. Enthält 10 Bolzen.",
-            "menge": 2,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
             "angelegt": false
         },
@@ -6460,10 +6410,10 @@
             "kosten": 500,
             "setting": "mittelalterlich",
             "beschreibung": "Schwerer Plattenharnisch schützt den Torso",
-            "menge": 1,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
-            "angelegt": true,
+            "angelegt": false,
             "torso": 4,
             "arme": 0,
             "beine": 0,
@@ -6477,10 +6427,10 @@
             "kosten": 250,
             "setting": "mittelalterlich",
             "beschreibung": "Schwere Armschienen aus Metall",
-            "menge": 1,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
-            "angelegt": true,
+            "angelegt": false,
             "torso": 0,
             "arme": 4,
             "beine": 0,
@@ -6494,10 +6444,10 @@
             "kosten": 500,
             "setting": "mittelalterlich",
             "beschreibung": "Schwere Beinschienen aus Metall",
-            "menge": 1,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
-            "angelegt": true,
+            "angelegt": false,
             "torso": 0,
             "arme": 0,
             "beine": 4,
@@ -6650,6 +6600,384 @@
             "mindeststaerke": "W10",
             "angelegt": false,
             "ausgewaehlt": false
+        },
+        "Handaxt": {
+            "name": "Handaxt",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 6,
+            "setting": "mittelalterlich",
+            "beschreibung": "",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Streitaxt": {
+            "name": "Streitaxt",
+            "kategorie": "Waffe",
+            "gewicht": 3,
+            "kosten": 10,
+            "setting": "mittelalterlich",
+            "beschreibung": "",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Zweihandaxt": {
+            "name": "Zweihandaxt",
+            "kategorie": "Waffe",
+            "gewicht": 6,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Chakram": {
+            "name": "Chakram",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 1,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Dolch": {
+            "name": "Dolch",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 2,
+            "setting": "mittelalterlich",
+            "beschreibung": "",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Dreizack": {
+            "name": "Dreizack",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 15,
+            "setting": "mittelalterlich",
+            "beschreibung": "Reichweite 1",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Glefe": {
+            "name": "Glefe",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 8,
+            "setting": "mittelalterlich",
+            "beschreibung": "Reichweite 1, Zweihändig",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Katana": {
+            "name": "Katana",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 50,
+            "setting": "mittelalterlich",
+            "beschreibung": "Zweihändig",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6+1",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Peitsche": {
+            "name": "Peitsche",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 5,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade -1, Reichweite 2. Festhalten bei Steigerung.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "2",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Pike": {
+            "name": "Pike",
+            "kategorie": "Waffe",
+            "gewicht": 9,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "Aufgesetzt, Reichweite 2, Zweihändig.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "2",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
+            }
+        },
+        "Ranseur": {
+            "name": "Ranseur",
+            "kategorie": "Waffe",
+            "gewicht": 6,
+            "kosten": 10,
+            "setting": "mittelalterlich",
+            "beschreibung": "PB 1, Reichweite 1.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
+            }
+        },
+        "Rapier": {
+            "name": "Rapier",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Bastardschwert": {
+            "name": "Bastardschwert",
+            "kategorie": "Waffe",
+            "gewicht": 3,
+            "kosten": 35,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kann zweihändig verwendet werden (+1 Schaden).",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
+            }
+        },
+        "Haken-Schwert": {
+            "name": "Haken-Schwert",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "+1 zum Entwaffnen.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Zweihandschwert": {
+            "name": "Zweihandschwert",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 50,
+            "setting": "mittelalterlich",
+            "beschreibung": "PB 2, Zweihändig.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Sense": {
+            "name": "Sense",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 18,
+            "setting": "mittelalterlich",
+            "beschreibung": "Zweihändig.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Spalthammer": {
+            "name": "Spalthammer",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 12,
+            "setting": "mittelalterlich",
+            "beschreibung": "PB 2, Zweihändig, +2 Schaden gegen Gegenstände.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Stab": {
+            "name": "Stab",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 0,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1, Reichweite 1, Zweihändig.",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
         },
         "Entermesser": {
             "name": "Entermesser",
@@ -7036,10 +7364,10 @@
             "kosten": 12,
             "setting": "mittelalterlich",
             "beschreibung": "PB 1",
-            "menge": 1,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
-            "angelegt": true,
+            "angelegt": false,
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
@@ -7050,97 +7378,13 @@
                 "PB": "1"
             }
         },
-        "Handaxt": {
-            "name": "Handaxt",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 6,
-            "setting": "mittelalterlich",
-            "beschreibung": "",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Streitaxt": {
-            "name": "Streitaxt",
-            "kategorie": "Waffe",
-            "gewicht": 3,
-            "kosten": 10,
-            "setting": "mittelalterlich",
-            "beschreibung": "",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Zweihandaxt": {
-            "name": "Zweihandaxt",
-            "kategorie": "Waffe",
-            "gewicht": 6,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "Stä+W10",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 2
-            }
-        },
-        "Chakram": {
-            "name": "Chakram",
-            "kategorie": "Waffe",
-            "gewicht": 0.5,
-            "kosten": 1,
-            "setting": "mittelalterlich",
-            "beschreibung": "Parade +1",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Dolch": {
-            "name": "Dolch",
+        "Totschläger": {
+            "name": "Totschläger",
             "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 2,
             "setting": "mittelalterlich",
-            "beschreibung": "",
+            "beschreibung": "Verursacht Betäubungsschaden.",
             "menge": 0,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -7150,279 +7394,6 @@
             "eigenschaften": {
                 "Schaden": "Stä+W4",
                 "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Dreizack": {
-            "name": "Dreizack",
-            "kategorie": "Waffe",
-            "gewicht": 2,
-            "kosten": 15,
-            "setting": "mittelalterlich",
-            "beschreibung": "Reichweite 1",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "1",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Glefe": {
-            "name": "Glefe",
-            "kategorie": "Waffe",
-            "gewicht": 5,
-            "kosten": 8,
-            "setting": "mittelalterlich",
-            "beschreibung": "Reichweite 1, Zweihändig",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "1",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Katana": {
-            "name": "Katana",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 50,
-            "setting": "mittelalterlich",
-            "beschreibung": "Zweihändig",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6+1",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Peitsche": {
-            "name": "Peitsche",
-            "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 5,
-            "setting": "mittelalterlich",
-            "beschreibung": "Parade -1, Reichweite 2. Festhalten bei Steigerung.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "2",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Pike": {
-            "name": "Pike",
-            "kategorie": "Waffe",
-            "gewicht": 9,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "Aufgesetzt, Reichweite 2, Zweihändig.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "2",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 1
-            }
-        },
-        "Ranseur": {
-            "name": "Ranseur",
-            "kategorie": "Waffe",
-            "gewicht": 6,
-            "kosten": 10,
-            "setting": "mittelalterlich",
-            "beschreibung": "PB 1, Reichweite 1.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "1",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 1
-            }
-        },
-        "Rapier": {
-            "name": "Rapier",
-            "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "Parade +1.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Bastardschwert": {
-            "name": "Bastardschwert",
-            "kategorie": "Waffe",
-            "gewicht": 3,
-            "kosten": 35,
-            "setting": "mittelalterlich",
-            "beschreibung": "Kann zweihändig verwendet werden (+1 Schaden).",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 1
-            }
-        },
-        "Haken-Schwert": {
-            "name": "Haken-Schwert",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "+1 zum Entwaffnen.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Zweihandschwert": {
-            "name": "Zweihandschwert",
-            "kategorie": "Waffe",
-            "gewicht": 4,
-            "kosten": 50,
-            "setting": "mittelalterlich",
-            "beschreibung": "PB 2, Zweihändig.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "Stä+W10",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 2
-            }
-        },
-        "Sense": {
-            "name": "Sense",
-            "kategorie": "Waffe",
-            "gewicht": 5,
-            "kosten": 18,
-            "setting": "mittelalterlich",
-            "beschreibung": "Zweihändig.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Spalthammer": {
-            "name": "Spalthammer",
-            "kategorie": "Waffe",
-            "gewicht": 5,
-            "kosten": 12,
-            "setting": "mittelalterlich",
-            "beschreibung": "PB 2, Zweihändig, +2 Schaden gegen Gegenstände.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "Stä+W10",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 2
-            }
-        },
-        "Stab": {
-            "name": "Stab",
-            "kategorie": "Waffe",
-            "gewicht": 2,
-            "kosten": 0,
-            "setting": "mittelalterlich",
-            "beschreibung": "Parade +1, Reichweite 1, Zweihändig.",
-            "menge": 0,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "angelegt": false,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "1",
                 "FR": "-",
                 "Schuss": "-",
                 "PB": "-"
@@ -7477,10 +7448,10 @@
             "kosten": 35,
             "setting": "mittelalterlich",
             "beschreibung": "Handgespannt, Nachladen 1.",
-            "menge": 1,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
-            "angelegt": true,
+            "angelegt": false,
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
@@ -7531,6 +7502,27 @@
                 "FR": "-",
                 "Schuss": "-",
                 "PB": "-"
+            }
+        },
+        "Kompositbogen": {
+            "name": "Kompositbogen",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "",
+            "menge": 0,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "angelegt": false,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Langbogen": {
@@ -7620,8 +7612,8 @@
             "aktiv": true,
             "angelegt": false
         },
-        "Wurf-Axt": {
-            "name": "Wurf-Axt",
+        "Axt, Hand-": {
+            "name": "Axt, Hand-",
             "kategorie": "Fernkampfwaffe",
             "gewicht": 1.5,
             "kosten": 6,
@@ -7680,8 +7672,8 @@
             "aktiv": true,
             "angelegt": false
         },
-        "Wurf-Dolch/Messer": {
-            "name": "Wurf-Dolch/Messer",
+        "Dolch/Messer": {
+            "name": "Dolch/Messer",
             "kategorie": "Fernkampfwaffe",
             "gewicht": 0.5,
             "kosten": 2,
@@ -7839,10 +7831,10 @@
             "kosten": 25,
             "setting": "mittelalterlich",
             "beschreibung": "KFS, Kann geworfen oder auf eine angrenzende Kreatur gespritzt werden. Untote und bestimmte böse Kreaturen erleiden 2W4 Schaden sowie 2W4–2 Schaden zu Beginn ihres nächsten Zuges.",
-            "menge": 3,
-            "ausgewaehlt": true,
+            "menge": 0,
+            "ausgewaehlt": false,
             "aktiv": true,
-            "angelegt": true,
+            "angelegt": false,
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
@@ -7922,11 +7914,7 @@
             "angelegt": false
         }
     },
-    "selected_handicaps": [
-        "Angetrieben",
-        "Übermütig",
-        "Idealistisch"
-    ],
+    "selected_handicaps": [],
     "selected_talente": [
         "Aura der Tapferkeit",
         "Auserwählter",
@@ -7940,26 +7928,9 @@
         "Schutz",
         "Zuflucht"
     ],
-    "selected_allgemeine_ausruestung": [
-        "Plattenbrustharnisch",
-        "Klerikerpaket",
-        "Leichte Armbrust",
-        "Streitkolben, schwer",
-        "Plattenarmschienen",
-        "Plattenbeinschienen",
-        "Bolzen (10)",
-        "Heiliges Wasser"
-    ],
-    "selected_waffen": [
-        "Leichte Armbrust",
-        "Streitkolben, schwer",
-        "Heiliges Wasser"
-    ],
-    "selected_ruestungen": [
-        "Plattenbrustharnisch",
-        "Plattenarmschienen",
-        "Plattenbeinschienen"
-    ],
+    "selected_allgemeine_ausruestung": [],
+    "selected_waffen": [],
+    "selected_ruestungen": [],
     "selected_schilde": [],
     "voelker_selected": {
         "Android": false,

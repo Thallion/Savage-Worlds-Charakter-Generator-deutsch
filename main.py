@@ -15,11 +15,14 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.widget import Widget
+import re
+import webbrowser
 
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDButton, MDIconButton
+from kivymd.uix.button import MDButton, MDIconButton, MDButtonText
 from kivymd.uix.textfield import MDTextField
 from kivymd.theming import ThemableBehavior
 
@@ -108,6 +111,98 @@ class CustomTabsItem(MDTabsItem):
                 self.title = child.text
                 break
 
+# Benutzerdefinierte Label-Klasse für Hyperlinks
+class HyperlinkLabel(MDLabel):
+    """
+    Eine benutzerdefinierte MDLabel, die Hyperlinks erkennt und öffnet.
+    """
+    def __init__(self, **kwargs):
+        # Aktiviere Markup
+        kwargs['markup'] = True
+        super().__init__(**kwargs)
+        
+        # Speicherung für URL-Informationen
+        self.url_pattern = re.compile(r'https?://[^\s]+')
+        self.urls = []
+        self.original_text = ""  # Speichert den Text ohne Markup
+        self.hover_cursor = 'hand'
+        
+        # Einmalige Verarbeitung des Texts
+        Clock.schedule_once(self.process_text, 0)
+    
+    def process_text(self, dt):
+        """Verarbeitet den initialen Text, um URLs zu erkennen und zu formatieren."""
+        # Originaltext speichern
+        self.original_text = self.text
+        
+        # Wenn kein Text da ist, nichts tun
+        if not self.original_text:
+            return
+        
+        # URLs im Text finden
+        self.urls = []
+        formatted_text = self.original_text
+        offset = 0  # Versatz durch hinzugefügte Markup-Tags
+        
+        for match in self.url_pattern.finditer(self.original_text):
+            start, end = match.span()
+            url = match.group(0)
+            
+            # URL in der Liste speichern
+            self.urls.append((start, end, url))
+            
+            # URL im Text formatieren
+            markup = f'[color=#3498db][u]{url}[/u][/color]'
+            formatted_text = (
+                formatted_text[:start+offset] + 
+                markup + 
+                formatted_text[end+offset:]
+            )
+            
+            # Offset für nächste URL anpassen
+            offset += len(markup) - len(url)
+        
+        # Text mit markierten Links setzen
+        if self.urls:
+            Logger.info(f"HyperlinkLabel: {len(self.urls)} URLs formatiert")
+            self.text = formatted_text
+    
+    def on_touch_down(self, touch):
+        """Erkennt Klicks auf Links und öffnet sie im Browser."""
+        if self.collide_point(*touch.pos) and self.urls:
+            # Berechne Position im Text
+            x_rel = (touch.x - self.x) / self.width
+            pos = int(x_rel * len(self.original_text))
+            
+            # Prüfe, ob auf eine URL geklickt wurde
+            for start, end, url in self.urls:
+                if start - 5 <= pos <= end + 5:  # Etwas Toleranz für die Klickposition
+                    Logger.info(f"Link angeklickt: {url}")
+                    webbrowser.open(url)
+                    return True
+                    
+        return super().on_touch_down(touch)
+    
+    def on_touch_move(self, touch):
+        """Ändert den Cursor über Links."""
+        if self.collide_point(*touch.pos) and self.urls:
+            x_rel = (touch.x - self.x) / self.width
+            pos = int(x_rel * len(self.original_text))
+            
+            for start, end, url in self.urls:
+                if start - 5 <= pos <= end + 5:
+                    Window.set_system_cursor(self.hover_cursor)
+                    return True
+            
+            Window.set_system_cursor('arrow')
+        
+        return super().on_touch_move(touch)
+    
+    def on_touch_up(self, touch):
+        """Setzt den Cursor zurück."""
+        Window.set_system_cursor('arrow')
+        return super().on_touch_up(touch)
+
 # -----------------------------
 # Screen-Klassen
 # -----------------------------
@@ -139,6 +234,7 @@ class AusruestungScreen(MDScreen):
 class CharakterbogenScreen(MDScreen):
     pass
 
+  
 class InfoScreen(MDScreen):
     info_text = StringProperty("""
     Lizenz- und Urheberrechtsinformationen
@@ -152,14 +248,14 @@ class InfoScreen(MDScreen):
     Begrifflichkeiten von Ulisses Spiele darf verwendet werden. 
     Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder 
     Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder 
-    Eignung dieses Produkts für einen bestimmten Zweck.“
+    Eignung dieses Produkts für einen bestimmten Zweck."
 
     „This game references the Savage Worlds game system, 
     available from Pinnacle Entertainment Group at www.peginc.com. 
     Savage Worlds and all associated logos and trademarks are copyrights 
     of Pinnacle Entertainment Group. Used with permission.
     Pinnacle makes no representation or warranty as to the quality, 
-    viability, or suitability for purpose of this product.“
+    viability, or suitability for purpose of this product."
 
     Danksagungen: 
     Vielen Dank an Ulisses Spiele für die Genehmigung der App.
@@ -170,13 +266,56 @@ class InfoScreen(MDScreen):
     Danke an alle Savage-Fans, die dem Spiel Leben einhauchen.
 
     Links:
-    Ulisses E-Book-Store https://www.ulisses-ebooks.de/browse.php?sort=4a&src=fid45795&filters=45795_0_0
-
-    Haftungsausschluss:
-    Alle Urheberrechte an Charakteren, Fahrzeugen und anderen Regeln und Settings 
-    liegen bei den jeweiligen Rechteinhabern. 
-    Diese Anwendung erhebt keinen Anspruch auf diese Inhalte.
     """)
+    
+    # Liste der Links und deren Beschreibungen
+    links = [
+        ("Ulisses E-Book-Store", "https://www.ulisses-ebooks.de/browse.php?sort=4a&src=fid45795&filters=45795_0_0"),
+        ("Pinnacle Entertainment Group", "https://www.peginc.com"),
+        ("Savage Worlds Deutschland", "https://ulisses-spiele.de/game-system/savage-worlds/")
+    ]
+
+    def on_kv_post(self, base_widget):
+        """Fügt die Link-Buttons hinzu, nachdem das KV geladen wurde."""
+        # Container für Links finden
+        container = self.ids.link_container
+        
+        # Container für linksbündige Ausrichtung konfigurieren
+        container.spacing = dp(4)
+        container.padding = [dp(10), dp(4), dp(10), dp(4)]  # links, oben, rechts, unten
+        
+        # Für jeden Link einen Button erstellen
+        for label, url in self.links:
+            btn = MDButton(
+                style="elevated",
+                size_hint_x=None,  # Keine horizontale Größenbindung
+                size_hint_y=None,
+                height=dp(50),
+                pos_hint={"x": 0},  # Linksbündige Positionierung
+                on_release=lambda x, u=url: self.open_link(u)
+            )
+            # Text als Kind-Widget hinzufügen
+            btn_text = MDButtonText(
+                text=label,
+                padding=[dp(20), 0]  # Seitenpolsterung für den Text
+            )
+            btn.add_widget(btn_text)
+            container.add_widget(btn)
+            
+            # Nach dem Hinzufügen die Breite des Buttons berechnen
+            Clock.schedule_once(lambda dt, btn=btn, lbl=label: self._adjust_button_width(btn, lbl), 0)
+        
+    def _adjust_button_width(self, button, text):
+        """Passt die Breite des Buttons basierend auf der Textlänge an."""
+        min_width = dp(200)  # Mindestbreite
+        # Ungefähre Berechnung der Textbreite (kann verfeinert werden)
+        estimated_width = len(text) * dp(10) + dp(40)  # 10dp pro Zeichen + Padding
+        button.width = max(min_width, estimated_width)
+            
+    def open_link(self, url):
+        """Öffnet einen Link im Browser."""
+        Logger.info(f"Öffne Link: {url}")
+        webbrowser.open(url)
 
 # -----------------------------
 # Logger-Handler
@@ -263,7 +402,15 @@ kv = '''
                 height: self.texture_size[1]
                 text_size: self.width, None
                 halign: 'left'
-                valign: 'top'
+                valign: 'top'            
+          
+            # Linktasten
+            MDBoxLayout:
+                id: link_container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
 
 MDScreen:
     # Wir packen alles in eine einzige vertikale MDBoxLayout-Struktur
@@ -405,12 +552,70 @@ class SW_Charakter_GeneratorApp(MDApp):
                 # Setze den Carousel-Index entsprechend
                 carousel.index = 0
 
+    def refresh_current_tab(self):
+        """
+        Aktualisiert den aktuellen Tab explizit.
+        Wird aufgerufen, wenn ein Tab-Inhalt aktualisiert werden muss,
+        ohne den Tab zu wechseln.
+        """
+        try:
+            # Finde den Index des aktuellen Tabs
+            carousel = self.root.ids.tabs_carousel
+            index = carousel.index
+            
+            # Finde den Tab-Titel basierend auf dem Index
+            if 0 <= index < len(self.tab_definitions):
+                tab_title = self.tab_definitions[index][1]
+                
+                # Aktualisiere den Tab basierend auf dem Titel
+                if tab_title == 'Eigenschaften':
+                    widget = self.get_widget_by_tab_text('Eigenschaften', 'eigenschaften_widget')
+                    if widget:
+                        widget.update_eigenschaften()
+                elif tab_title == 'Ausrüstung':
+                    widget = self.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                    if widget:
+                        widget.refresh_widget()
+                elif tab_title == 'Profil':
+                    widget = self.get_widget_by_tab_text('Profil', 'profil_widget')
+                    if widget:
+                        widget.load_profil()
+                elif tab_title == 'Völker':
+                    widget = self.get_widget_by_tab_text('Völker', 'voelker_widget')
+                    if widget:
+                        widget.aktualisiere_ui()
+                elif tab_title == 'Talente':
+                    widget = self.get_widget_by_tab_text('Talente', 'talente_widget')
+                    if widget:
+                        widget.refresh_widget()
+                elif tab_title == 'Mächte':
+                    widget = self.get_widget_by_tab_text('Mächte', 'maechte_widget')
+                    if widget:
+                        widget.refresh_widget()
+                elif tab_title == 'Handicaps':
+                    widget = self.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
+                    if widget:
+                        widget.refresh_widget()
+                elif tab_title == 'Charakter':
+                    widget = self.get_widget_by_tab_text('Charakter', 'charakterbogen_widget')
+                    if widget:
+                        widget.update_overview(0)
+                
+                Logger.info(f"UI-Aktualisierung für aktuellen Tab '{tab_title}' abgeschlossen")
+            else:
+                Logger.error(f"Ungültiger Carousel-Index: {index}")
+        except Exception as e:
+            Logger.error(f"Fehler bei der Aktualisierung des aktuellen Tabs: {str(e)}", exc_info=True)
+
     def get_widget_by_tab_text(self, tab_text, widget_id):
         """Retrieve widget by tab text and widget ID."""
+        Logger.debug(f"get_widget_by_tab_text aufgerufen mit tab_text = {tab_text}, widget_id = {widget_id}")
         screen = self.screens.get(tab_text)
         if screen:
+            Logger.debug(f"Screen {tab_text} gefunden, IDs: {screen.ids.keys()}")
             widget = screen.ids.get(widget_id)
             if widget:
+                Logger.debug(f"Widget {widget_id} gefunden")
                 return widget
             else:
                 Logger.error(f"Widget {widget_id} not found in screen {tab_text}.")
@@ -418,17 +623,11 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.error(f"Screen {tab_text} not found.")
         return None
 
-    # ------- Tab-Wechsel => Aktualisiere Screen und Carousel
     def on_tab_switch(self, instance_tabs, instance_tab, instance_tab_label):
         """
         Wird aufgerufen, wenn ein Tab gewechselt wird.
         - Aktualisiert den Carousel-Index
         - Aktualisiert die UI-Elemente des aktiven Tabs
-        
-        Args:
-            instance_tabs: MDTabsPrimary
-            instance_tab: CustomTabsItem 
-            instance_tab_label: MDTabsItemLabel
         """
         # Zugriff auf den Tab-Titel
         tab_title = getattr(instance_tab, 'title', 'Unbekannt')
@@ -471,9 +670,13 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if widget:
                     widget.refresh_widget()
             elif tab_title == 'Charakter':
+                Logger.debug("Charakterbogen-Tab erkannt")
                 widget = self.get_widget_by_tab_text('Charakter', 'charakterbogen_widget')
                 if widget:
+                    Logger.debug("Charakterbogen-Widget gefunden, rufe update_overview auf")
                     widget.update_overview(0)
+                else:
+                    Logger.error("Charakterbogen-Widget nicht gefunden")
                     
             Logger.info(f"UI-Aktualisierung für Tab {tab_title} erfolgreich")
                     
@@ -507,28 +710,6 @@ class SW_Charakter_GeneratorApp(MDApp):
                         tab.active = True
                         Logger.info(f"Tab '{tab.title}' aktiviert via Pfeiltaste.")
                         break
-
-    # ------- Beispiel: Speichern / Laden
-    def speichere_charakter(self):
-        content = FileChooserPopup(save=True)
-        content.bind(on_dismiss=self.dismiss_popup)
-        self._popup = Popup(title="Speichere Charakter", content=content, size_hint=(0.9, 0.9))
-        self._popup.open()
-
-    def speichern_datei_ausgewaehlt(self, path, filename):
-        if path and filename:
-            full_path = os.path.join(path, filename)
-            self.charakter.speichern_als_json(full_path)
-            Logger.info(f"Charakter gespeichert unter: {full_path}")
-        self.dismiss_popup()
-
-    def dismiss_popup(self, *args):
-        if hasattr(self, '_popup') and self._popup:
-            self._popup.dismiss()
-
-# -----------------------------
-# Starte die App
-# -----------------------------
 
 if __name__ == "__main__":
     Logger.info("Starte SW_Charakter_GeneratorApp")

@@ -304,102 +304,117 @@ def create_default_setting(charakter):
     return default_setting
 
 
-def load_elements_from_active_setting(charakter):
+# Modifiziere die load_elements_from_active_setting Funktion in functions/setting_funktionen.py
+
+def load_elements_from_active_setting(self, skip_equipment=False):
     """
-    Lädt alle Elemente aus der aktiven Einstellung.
+    Lädt alle Elemente aus dem aktiven Setting.
     
     Args:
-        charakter: Das Charakter-Objekt
+        skip_equipment (bool): Wenn True, wird die Ausrüstung nicht geladen (hilfreich beim Laden eines Charakters)
         
     Returns:
-        bool: True bei Erfolg, False bei Misserfolg
+        bool: True bei Erfolg, sonst False
     """
-    active_setting = charakter.custom_element_manager.get_active_setting()
-    if not active_setting:
-        Logger.error("Keine aktive Einstellung zum Laden der Elemente.")
-        return False
-
-    # Völker laden
-    voelker_data = active_setting.get('voelker', {})
-    charakter.voelker = {}
-    for name, volk_dict in voelker_data.items():
-        charakter.voelker[name] = Volk.from_dict(volk_dict)
-    Logger.info("Völker geladen.")
-
-    # Fertigkeiten-Daten laden
-    fertigkeiten_daten_loaded = active_setting.get('fertigkeiten_daten', {})
-    charakter.fertigkeiten_daten = {name: set(attribut_list) for name, attribut_list in fertigkeiten_daten_loaded.items()}
-    charakter.initialisiere_fertigkeiten()
-    Logger.info("Fertigkeiten aktualisiert und geladen.")
-
-    # Talente laden
-    talente_data = active_setting.get('talente', {})
-    charakter.talente = {}
-    if isinstance(talente_data, dict):
-        for name, data in talente_data.items():
-            talent = Talent.from_dict_static(data)
-            if talent:
-                charakter.talente[name] = talent
-    Logger.info("Talente geladen.")
-
-    # Handicaps laden
-    charakter.handicaps = {}
-    handicaps_data = active_setting.get('handicaps', {})
-    if isinstance(handicaps_data, dict):
-        for name, data in handicaps_data.items():
-            handicap = Handicap.from_dict_static(data)
-            if handicap:
-                charakter.handicaps[name] = handicap
-    Logger.info("Handicaps geladen.")
-
-    # Mächte laden
-    charakter.maechte = {}
-    maechte_data = active_setting.get('maechte', {})
-    if isinstance(maechte_data, dict):
-        for name, data in maechte_data.items():
-            macht = Macht.from_dict_static(data)
-            if macht:
-                charakter.maechte[name] = macht
-    Logger.info("Mächte geladen.")
-
-    # Ausrüstung laden
-    Logger.debug("Beginne mit dem Laden der Ausrüstung.")
     try:
-        charakter.ausruestung = {}
-        ausruestung_data = active_setting.get('ausruestung', {})
-        if isinstance(ausruestung_data, dict):
-            for name, data in ausruestung_data.items():
-                kategorie = data.get('kategorie', 'Allgemein')
-                if kategorie == 'Waffe':
-                    obj = Waffe.from_setting_dict(data)
-                elif kategorie == 'Rüstung':
-                    obj = Ruestung.from_setting_dict(data)
-                elif kategorie == 'Schild':
-                    obj = Schild.from_setting_dict(data)
-                else:
-                    obj = Ausruestung.from_setting_dict(data)
-
-                if obj:
-                    charakter.ausruestung[name] = obj
-        Logger.info("Ausrüstung geladen.")
+        Logger.info(f"Lade Elemente aus dem aktiven Setting '{self.active_setting_name}'")
+        
+        # Aktives Setting abrufen
+        active_setting = self.custom_element_manager.get_active_setting()
+        if not active_setting:
+            Logger.error(f"Aktives Setting '{self.active_setting_name}' konnte nicht geladen werden.")
+            return False
+        
+        # Farben laden
+        self.settingregeln.farbschema = active_setting.get('farbschema', 'Blue')
+        
+        # Völker laden
+        voelker_data = active_setting.get('voelker', {})
+        if voelker_data:
+            self.voelker = {}
+            for name, volk_dict in voelker_data.items():
+                try:
+                    self.voelker[name] = Volk.from_dict(volk_dict)
+                except Exception as e:
+                    Logger.warning(f"Fehler beim Laden des Volkes '{name}': {e}")
+            Logger.info(f"{len(self.voelker)} Völker geladen.")
+        
+        # Fertigkeiten laden
+        fertigkeiten_data = active_setting.get('fertigkeiten', {})
+        if fertigkeiten_data:
+            # Fertigkeiten initialisieren
+            self.initialisiere_fertigkeiten()
+        
+        # Handicaps laden, keine bestehenden Handicaps überschreiben
+        handicaps_data = active_setting.get('handicaps', {})
+        if handicaps_data:
+            existing_handicaps = set(self.handicaps.keys())
+            for name, handicap_dict in handicaps_data.items():
+                if name not in existing_handicaps:  # Nur laden, wenn es nicht existiert
+                    try:
+                        self.handicaps[name] = Handicap.from_dict(handicap_dict)
+                    except Exception as e:
+                        Logger.warning(f"Fehler beim Laden des Handicaps '{name}': {e}")
+            Logger.info(f"{len(self.handicaps)} Handicaps im Setting gefunden.")
+        
+        # Talente laden, keine bestehenden Talente überschreiben
+        talente_data = active_setting.get('talente', {})
+        if talente_data:
+            existing_talente = set(self.talente.keys())
+            for name, talent_dict in talente_data.items():
+                if name not in existing_talente:  # Nur laden, wenn es nicht existiert
+                    try:
+                        self.talente[name] = Talent.from_dict(talent_dict)
+                    except Exception as e:
+                        Logger.warning(f"Fehler beim Laden des Talents '{name}': {e}")
+            Logger.info(f"{len(self.talente)} Talente im Setting gefunden.")
+        
+        # Mächte laden, keine bestehenden Mächte überschreiben
+        maechte_data = active_setting.get('maechte', {})
+        if maechte_data:
+            existing_maechte = set(self.maechte.keys())
+            for name, macht_dict in maechte_data.items():
+                if name not in existing_maechte:  # Nur laden, wenn es nicht existiert
+                    try:
+                        self.maechte[name] = Macht.from_dict(macht_dict)
+                    except Exception as e:
+                        Logger.warning(f"Fehler beim Laden der Macht '{name}': {e}")
+            Logger.info(f"{len(self.maechte)} Mächte im Setting gefunden.")
+        
+        # Ausrüstung laden, wenn nicht übersprungen
+        if not skip_equipment:
+            ausruestung_data = active_setting.get('ausruestung', {})
+            if ausruestung_data:
+                # Ausrüstung initialisieren (ggf. vorhandene löschen)
+                existing_equipment = set(self.ausruestung.keys())
+                for name, item_dict in ausruestung_data.items():
+                    if name not in existing_equipment:  # Nur laden, wenn es nicht existiert
+                        try:
+                            kategorie = item_dict.get('kategorie', 'Allgemein')
+                            if kategorie == 'Waffe':
+                                item = Waffe.from_dict(item_dict)
+                            elif kategorie == 'Rüstung':
+                                item = Ruestung.from_dict(item_dict)
+                            elif kategorie == 'Schild':
+                                item = Schild.from_dict(item_dict)
+                            else:
+                                item = Ausruestung.from_dict(item_dict)
+                            
+                            self.ausruestung[name] = item
+                        except Exception as e:
+                            Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
+                Logger.info(f"{len(self.ausruestung)} Ausrüstungsgegenstände im Setting gefunden.")
+        
+        # Settingregeln laden
+        settingregeln_data = active_setting.get('settingregeln', {})
+        if settingregeln_data:
+            try:
+                self.settingregeln.from_dict(settingregeln_data)
+                Logger.info("Settingregeln geladen.")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
+        
+        return True
     except Exception as e:
-        Logger.error(f"Fehler beim Laden der Ausrüstung: {e}")
-
-    # Settingregeln laden
-    settingregeln_data = active_setting.get('settingregeln', {})
-    charakter.settingregeln.from_dict(settingregeln_data)
-    Logger.info("Settingregeln geladen.")
-
-    # Listen für ausgewählte Gegenstände neu erstellen, falls benötigt
-    charakter.selected_allgemeine_ausruestung = [item for item in charakter.ausruestung.values() 
-                                               if item.ausgewaehlt and not isinstance(item, (Waffe, Ruestung, Schild))]
-    charakter.selected_waffen = [item for item in charakter.ausruestung.values() 
-                               if isinstance(item, Waffe) and item.ausgewaehlt]
-    charakter.selected_ruestungen = [item for item in charakter.ausruestung.values() 
-                                   if isinstance(item, Ruestung) and item.ausgewaehlt]
-    charakter.selected_schilde = [item for item in charakter.ausruestung.values() 
-                                if isinstance(item, Schild) and item.ausgewaehlt]
-
-    # UI-Event auslösen
-    charakter.dispatch('on_charakter_change')
-    return True
+        Logger.error(f"Fehler beim Laden der Elemente aus dem aktiven Setting: {e}", exc_info=True)
+        return False
