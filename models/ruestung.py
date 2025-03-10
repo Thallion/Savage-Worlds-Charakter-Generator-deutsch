@@ -47,11 +47,20 @@ class Ruestung(Ausruestung):
         return effektives_gewicht
 
     def anlegen(self, charakter):
-        if self.kann_angelegt_werden(charakter):
-            self.angelegt = True
-            logging.debug(f"{self.name} wurde angelegt.")
+        """
+        Legt die Rüstung an, unabhängig von der Mindeststärke.
+        Gibt nur eine Warnung aus, wenn die Mindeststärke nicht erfüllt ist.
+        
+        Args:
+            charakter: Das Charakterobjekt, dem die Rüstung angelegt werden soll
+        """
+        self.angelegt = True
+        
+        # Nur zur Information prüfen, ob die Mindeststärke erfüllt ist
+        if not self.kann_angelegt_werden(charakter):
+            Logger.debug(f"Warnung: {self.name} wurde angelegt, obwohl Mindeststärke nicht erfüllt ist.")
         else:
-            logging.warning(f"{self.name} kann nicht angelegt werden, Mindeststärke nicht erfüllt.")
+            Logger.debug(f"{self.name} wurde angelegt.")
 
     def ablegen(self):
         self.angelegt = False
@@ -71,9 +80,24 @@ class Ruestung(Ausruestung):
         else:
             return False
 
-    def toggle_angelegt(self):
-        self.angelegt = not self.angelegt
-        logging.debug(f"Rüstung '{self.name}' angelegt: {self.angelegt}")
+    def toggle_angelegt(self, charakter=None):
+        """
+        Schaltet den Anlege-Status der Rüstung um, prüft bei Bedarf die Mindeststärke.
+        
+        Args:
+            charakter: Optional - Der Charakter, für den die Rüstung angelegt werden soll
+        """
+        if charakter:
+            # Mit Charakter: Verwende anlegen/ablegen mit korrekter Prüfung
+            if not self.angelegt:
+                self.anlegen(charakter)
+            else:
+                self.ablegen()
+        else:
+            # Ohne Charakter: Altes Verhalten (direkt umschalten)
+            self.angelegt = not self.angelegt
+            # Event-Handler trotzdem auslösen
+            self.on_angelegt_changed(self, self.angelegt)
 
 
     def on_angelegt_changed(self, instance, value):

@@ -52,12 +52,40 @@ class Schild(Ausruestung):
         else:
             return False
 
-    def anlegen(self, charakter):
-        if self.kann_angelegt_werden(charakter):
-            self.angelegt = True
-            logging.debug(f"{self.name} wurde angelegt.")
+    def toggle_angelegt(self, charakter=None):
+        """
+        Schaltet den Anlege-Status des Schilds um, prüft bei Bedarf die Mindeststärke.
+        
+        Args:
+            charakter: Optional - Der Charakter, für den das Schild angelegt werden soll
+        """
+        if charakter:
+            # Mit Charakter: Verwende anlegen/ablegen mit korrekter Prüfung
+            if not self.angelegt:
+                self.anlegen(charakter)
+            else:
+                self.ablegen()
         else:
-            logging.warning(f"{self.name} kann nicht angelegt werden, Mindeststärke nicht erfüllt.")
+            # Ohne Charakter: Altes Verhalten (direkt umschalten)
+            self.angelegt = not self.angelegt
+            # Event-Handler trotzdem auslösen
+            self.on_angelegt_changed(self, self.angelegt)
+
+    def anlegen(self, charakter):
+        """
+        Legt das Schild an, unabhängig von der Mindeststärke.
+        Gibt nur eine Warnung aus, wenn die Mindeststärke nicht erfüllt ist.
+        
+        Args:
+            charakter: Das Charakterobjekt, dem das Schild angelegt werden soll
+        """
+        self.angelegt = True
+        
+        # Nur zur Information prüfen, ob die Mindeststärke erfüllt ist
+        if not self.kann_angelegt_werden(charakter):
+            Logger.debug(f"Warnung: {self.name} wurde angelegt, obwohl Mindeststärke nicht erfüllt ist.")
+        else:
+            Logger.debug(f"{self.name} wurde angelegt.")
 
     def ablegen(self):
         self.angelegt = False

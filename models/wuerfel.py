@@ -44,25 +44,34 @@ class Wuerfel(EventDispatcher):
         return self.value + self.modifier if self.value == 12 else self.value
 
     def increase(self):
-        if self.value == 12 and self.modifier < 2:
+        """
+        Erhöht den Würfelwert um eine Stufe.
+        Bei W12+2 wird eine Warnung geloggt, aber die Steigerung wird trotzdem durchgeführt.
+        """
+        if self.value == 12 and self.modifier >= 2:
+            # Warnung ausgeben, aber trotzdem erhöhen
             self.modifier += 1
-            #Logger.debug(f"Würfel erhöht: {self}")
+            Logger.warning(f"Maximaler Würfelwert (W12+2) überschritten. Neuer Wert: W{self.value}+{self.modifier}")
+            self.dispatch('on_change')
+            return True
+        elif self.value == 12 and self.modifier < 2:
+            self.modifier += 1
             self.dispatch('on_change')
             return True
         elif self.value == 4 and self.modifier == -2:
             self.modifier += 2
-            #Logger.debug(f"Würfel erhöht: {self}")
             self.dispatch('on_change')
             return True
         elif self.value < 12:
             next_value = self.value + 2
             if next_value in self.VALID_VALUES:
                 self.value = next_value
-                #Logger.debug(f"Würfel erhöht: {self}")
                 self.dispatch('on_change')
                 return True
-        Logger.warning(f"Der Würfel kann nicht weiter gesteigert werden: {self}")
-        return False
+        
+        # Dieser Fall sollte eigentlich nicht erreicht werden
+        Logger.warning(f"Unerwarteter Fall beim Steigern des Würfels: {self}")
+        return True
 
     def decrease(self):
         if self.value == 12 and self.modifier > 0:

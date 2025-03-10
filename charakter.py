@@ -480,16 +480,18 @@ class Charakter(EventDispatcher):
         Logger.info(f"Vermögen: {self.vermoegen} {self.waehrungseinheit} aktualisiert")
 
     def update_char_gen_status(self, *args):
+        """
+        Überprüft den Status der Charaktergenerierung, löst aber keine automatische Änderung mehr aus.
+        Dient jetzt hauptsächlich zu Informationszwecken.
+        """
         if (self.verbleibende_attributsteigerungen == 0 and 
             self.verbleibende_fertigkeitssteigerungen == 0 and
             self.verbleibende_handicap_punkte == 0):
             if not self.char_gen_completed:
-                self.char_gen_completed = True
-                Logger.debug("Charaktergenerierung abgeschlossen.")
+                Logger.debug("Charaktergenerierung könnte abgeschlossen werden (alle Punkte verbraucht).")
         else:
             if self.char_gen_completed:
-                self.char_gen_completed = False
-                Logger.debug("Charaktergenerierung noch nicht abgeschlossen.")
+                Logger.debug("Hinweis: Charaktergenerierung ist als abgeschlossen markiert, aber es sind noch Punkte übrig.")
 
     def on_char_gen_completed(self, instance, value):
         if value:

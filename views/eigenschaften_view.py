@@ -9,10 +9,12 @@ from kivy.metrics import dp
 from kivy.cache import Cache
 from threading import Thread
 from kivy.uix.modalview import ModalView
+from kivymd.uix.selectioncontrol import MDCheckbox
 
 # KivyMD Imports
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDIconButton
 from kivymd.uix.progressindicator.progressindicator import MDCircularProgressIndicator  # Aktualisierter Import für 2.0.1
@@ -51,6 +53,31 @@ KV_STRING = '''
             height: self.minimum_height
             padding: "20dp"
             spacing: "10dp"
+
+            # Hinzugefügte Checkbox für die manuelle Steuerung des char_gen_completed-Status
+            # MDBoxLayout für die feste Positionierung
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: dp(48)
+                spacing: dp(10)
+                size_hint_x: None
+                width: dp(300)  # Feste Breite statt dynamischer Berechnung
+
+                MDCheckbox:
+                    id: checkbox
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    active: root.char_gen_completed
+                    on_active: root.toggle_char_gen_completed(self.active)
+                    pos_hint: {"center_y": .5}
+                
+                MDLabel:
+                    text: "Charaktergenerierung abgeschlossen"
+                    size_hint_x: 1  # Füllt den verfügbaren Platz
+                    halign: 'left'
+                    valign: 'middle'
+                    pos_hint: {"center_y": .5}
 
             MDLabel:
                 text: 'Attribute'
@@ -101,23 +128,23 @@ KV_STRING = '''
     orientation: 'horizontal'
     size_hint_y: None
     height: "40dp"
-    spacing: "5dp"
+    spacing: dp(5)
     adaptive_height: True
 
     MDLabel:
         text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut \
               and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
         size_hint_x: None
-        width: "350dp"
+        width: dp(350)
         halign: 'left'
         valign: 'middle'
 
     # Würfel-Icon-Gruppe mit originalem Farbschema
     MDBoxLayout:
         size_hint_x: None
-        width: "120dp"
-        spacing: "2dp"
-        padding: ["10dp", "0dp"]
+        width: dp(160)  # Breiter für zwei Ziffern
+        spacing: dp(2)
+        padding: [dp(10), 0]
         
         # Würfel-Icon mit Theme-Farbe
         MDIconButton:
@@ -137,7 +164,7 @@ KV_STRING = '''
             opacity: 1 if root.has_modifier else 0
             disabled: not root.has_modifier
             
-        # Modifier-Wert wenn vorhanden
+        # Erste Ziffer des Modifiers
         MDIconButton:
             icon: root.modifier_value_icon
             style: "standard"
@@ -147,11 +174,21 @@ KV_STRING = '''
             opacity: 1 if root.has_modifier else 0
             disabled: not root.has_modifier
 
+        # Zweite Ziffer des Modifiers (für zweistellige Zahlen)
+        MDIconButton:
+            icon: root.second_digit_icon
+            style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
+            opacity: 1 if root.has_second_digit else 0
+            disabled: not root.has_second_digit
+
     # Steigern/Senken Buttons
     MDBoxLayout:
         size_hint_x: None
-        width: "50dp"
-        padding: ["30dp", "0dp"]
+        width: dp(50)
+        padding: [dp(30), 0]
 
         MDIconButton:
             icon: "arrow-up-thick"
@@ -174,6 +211,8 @@ Builder.load_string(KV_STRING)
 # Kein Dialog mehr benötigt, stattdessen nur der Indicator
 
 
+# Modifikation in der IconCache-Klasse
+
 class IconCache:
     """
     Cache für häufig verwendete Icons, um wiederholtes Laden zu vermeiden.
@@ -189,11 +228,17 @@ class IconCache:
     }
     
     _MODIFIER_ICONS = {
+        0: "numeric-0",
         1: "numeric-1",
         2: "numeric-2",
         3: "numeric-3",
         4: "numeric-4",
-        5: "numeric-5"
+        5: "numeric-5",
+        6: "numeric-6",
+        7: "numeric-7",
+        8: "numeric-8",
+        9: "numeric-9",
+        10: "numeric-10"
     }
     
     _MODIFIER_SIGNS = {
@@ -216,15 +261,60 @@ class IconCache:
 
     @classmethod
     def get_modifier_icon(cls, modifier):
-        """Gibt ein gecachtes numerisches Icon für einen Modifier zurück"""
+        """
+        Gibt ein gecachtes numerisches Icon für einen Modifier zurück.
+        Bei zweistelligen Zahlen wird nur die erste Ziffer zurückgegeben.
+        
+        Returns:
+            str: Der Icon-Name für den Modifikator
+        """
         abs_mod = abs(modifier)
-        cache_key = f"mod_{abs_mod}"
+        
+        # Für einstellige und 10 direkt zurückgeben
+        if abs_mod <= 10:
+            cache_key = f"mod_{abs_mod}"
+            icon = Cache.get('wuerfel_icons', cache_key)
+            if icon:
+                return icon
+                
+            icon = cls._MODIFIER_ICONS.get(abs_mod, f"numeric-{abs_mod}")
+            Cache.append('wuerfel_icons', cache_key, icon)
+            return icon
+        
+        # Bei zweistelligen Zahlen die erste Ziffer zurückgeben
+        first_digit = abs_mod // 10
+        cache_key = f"mod_{first_digit}"
+        icon = Cache.get('wuerfel_icons', cache_key)
+        if icon:
+            return icon
+            
+        icon = cls._MODIFIER_ICONS.get(first_digit, f"numeric-{first_digit}")
+        Cache.append('wuerfel_icons', cache_key, icon)
+        return icon
+    
+    @classmethod
+    def get_second_digit_icon(cls, modifier):
+        """
+        Gibt ein gecachtes numerisches Icon für die zweite Ziffer eines zweistelligen Modifikators zurück.
+        
+        Returns:
+            str: Der Icon-Name für die zweite Ziffer, oder None wenn einstellig
+        """
+        abs_mod = abs(modifier)
+        
+        # Wenn einstellig oder genau 10, keine zweite Ziffer
+        if abs_mod <= 10:
+            return None
+            
+        # Bei zweistelligen Zahlen die zweite Ziffer zurückgeben
+        second_digit = abs_mod % 10
+        cache_key = f"mod_{second_digit}"
         
         icon = Cache.get('wuerfel_icons', cache_key)
         if icon:
             return icon
             
-        icon = cls._MODIFIER_ICONS.get(abs_mod, f"numeric-{abs_mod}")
+        icon = cls._MODIFIER_ICONS.get(second_digit, f"numeric-{second_digit}")
         Cache.append('wuerfel_icons', cache_key, icon)
         return icon
         
@@ -241,10 +331,19 @@ class EigenschaftenWidget(MDBoxLayout):
     """
     _update_ausstehend = False
     _thread = None
-    
+    char_gen_completed = BooleanProperty(False)
+
+
     def __init__(self, **kwargs):
         """Initialisiert das EigenschaftenWidget mit verzögertem Setup"""
         super().__init__(**kwargs)
+        # Initialisiere den Controller aus der App
+        app = MDApp.get_running_app()
+        self.controller = app.controller if hasattr(app, 'controller') else None
+
+        # Status einmal initial setzen (keine Bindung)
+        Clock.schedule_once(self._update_char_gen_status, 0.1)
+
         # Initialisierung verzögern und Loading-Indicator anzeigen
         self._zeige_lade_indicator()
         Clock.schedule_once(self._verzoegerte_initialisierung, 0.1)
@@ -539,6 +638,15 @@ class EigenschaftenWidget(MDBoxLayout):
                          key=lambda f: f.fertigkeit_name.lower(), 
                          reverse=reverse)
 
+    def toggle_char_gen_completed(self, value):
+        """Umschaltet den Charakter-Generierungsstatus."""
+        if self.controller and self.controller.charakter:
+            self.controller.charakter.char_gen_completed = value
+            Logger.debug(f"Charakter-Generierungsstatus geändert: {value}")
+
+    def _update_char_gen_status(self, *args):
+        if self.controller and self.controller.charakter:
+            self.char_gen_completed = self.controller.charakter.char_gen_completed
 
 class EigenschaftenItemRow(MDBoxLayout):
     """
@@ -555,7 +663,9 @@ class EigenschaftenItemRow(MDBoxLayout):
     dice_icon = StringProperty('dice-d6')
     modifier_sign = StringProperty('minus')
     modifier_value_icon = StringProperty('numeric-1')
+    second_digit_icon = StringProperty('numeric-0')  # Neu: Icon für die zweite Ziffer
     has_modifier = BooleanProperty(False)
+    has_second_digit = BooleanProperty(False)  # Neu: Zeigt an, ob eine zweite Ziffer vorhanden ist
     
     # Dictionary zum Cachen von eigenschaften
     eigenschaften_cache = DictProperty({})
@@ -611,8 +721,17 @@ class EigenschaftenItemRow(MDBoxLayout):
             is_positive = modifier > 0
             self.modifier_sign = IconCache.get_modifier_sign(is_positive)
             self.modifier_value_icon = IconCache.get_modifier_icon(modifier)
+            
+            # Prüfen, ob zweistellig und zweites Icon setzen
+            second_digit_icon = IconCache.get_second_digit_icon(modifier)
+            if second_digit_icon:
+                self.second_digit_icon = second_digit_icon
+                self.has_second_digit = True
+            else:
+                self.has_second_digit = False
         else:
             self.has_modifier = False
+            self.has_second_digit = False
 
     def steigere_eigenschaft(self):
         """Erhöht den Wert einer Eigenschaft über den Controller."""
