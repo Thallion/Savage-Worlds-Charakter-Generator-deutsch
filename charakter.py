@@ -374,8 +374,18 @@ class Charakter(EventDispatcher):
     def initialisiere_fertigkeiten(self):
         eigenschaften_funktionen.initialisiere_fertigkeiten(self)
 
-    def steigere_fertigkeit(self, fertigkeit_name):
-        return eigenschaften_funktionen.steigere_fertigkeit(self, fertigkeit_name)
+    def steigere_fertigkeit(self, fertigkeit_name, confirm_double_cost=False):
+        """
+        Steigert eine Fertigkeit um eine Stufe.
+        
+        Args:
+            fertigkeit_name: Der Name der zu steigernden Fertigkeit
+            confirm_double_cost: Bestätigung für doppelte Kosten, wenn der Fertigkeitswert das Attribut übersteigt
+            
+        Returns:
+            str oder bool: "needs_confirmation" wenn Bestätigung erforderlich ist, True bei Erfolg, False bei Misserfolg
+        """
+        return eigenschaften_funktionen.steigere_fertigkeit(self, fertigkeit_name, confirm_double_cost)
 
     def senke_fertigkeit(self, fertigkeit_name):
         return eigenschaften_funktionen.senke_fertigkeit(self, fertigkeit_name)

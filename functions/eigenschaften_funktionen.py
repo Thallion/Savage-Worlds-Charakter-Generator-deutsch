@@ -216,16 +216,17 @@ def initialisiere_fertigkeiten(charakter):
         Logger.info(f"Fertigkeit '{fertigkeit_name}' wurde entfernt, da sie nicht im geladenen Setting vorhanden ist.")
 
 
-def steigere_fertigkeit(charakter, fertigkeit_name):
+def steigere_fertigkeit(charakter, fertigkeit_name, confirm_double_cost=False):
     """
     Steigert eine Fertigkeit um eine Stufe.
     
     Args:
         charakter: Das Charakter-Objekt
         fertigkeit_name: Der Name der zu steigernden Fertigkeit
+        confirm_double_cost: Bestätigung für doppelte Kosten, wenn der Fertigkeitswert das Attribut übersteigt
         
     Returns:
-        True bei Erfolg, False bei Misserfolg
+        str oder bool: "needs_confirmation" wenn Bestätigung erforderlich ist, True bei Erfolg, False bei Misserfolg
     """
     fertigkeit = charakter.fertigkeiten.get(fertigkeit_name)
     if not fertigkeit:
@@ -263,6 +264,10 @@ def steigere_fertigkeit(charakter, fertigkeit_name):
             kosten = 2
         else:
             kosten = 1
+
+    # Prüfe, ob doppelte Kosten anfallen und ob der Benutzer bestätigt hat
+    if neuer_total_value > attribut_total_value and not confirm_double_cost:
+        return "needs_confirmation"
 
     def steigern():
         """Führt die eigentliche Steigerung der Fertigkeit durch."""

@@ -128,19 +128,22 @@ class CharakterController(EventDispatcher):
     # ============================
     # Operationen auf Fertigkeiten
     # ============================
-    def steigere_fertigkeit(self, fertigkeit_name):
+    def steigere_fertigkeit(self, fertigkeit_name, confirm_double_cost=False):
         """
         Steigert eine Fertigkeit des Charakters
         
         Args:
             fertigkeit_name (str): Name der Fertigkeit
+            confirm_double_cost (bool): Ob die doppelten Kosten bestätigt wurden
             
         Returns:
-            bool: True bei Erfolg, False bei Fehler
+            bool oder str: True bei Erfolg, False bei Fehler, "needs_confirmation" wenn Bestätigung erforderlich
         """
         try:
-            success = self.charakter.steigere_fertigkeit(fertigkeit_name)
-            if success:
+            success = self.charakter.steigere_fertigkeit(fertigkeit_name, confirm_double_cost)
+            if success == "needs_confirmation":
+                return "needs_confirmation"
+            elif success:
                 self.charakter.berechne_abgeleitete_werte()
                 self.dispatch('on_charakter_updated')
             return success

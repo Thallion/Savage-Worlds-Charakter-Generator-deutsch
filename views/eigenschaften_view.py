@@ -10,14 +10,22 @@ from kivy.cache import Cache
 from threading import Thread
 from kivy.uix.modalview import ModalView
 from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.widget import Widget
 
 # KivyMD Imports
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDIconButton
 from kivymd.uix.progressindicator.progressindicator import MDCircularProgressIndicator  # Aktualisierter Import für 2.0.1
+
+from kivymd.uix.dialog import (
+    MDDialog,
+    MDDialogHeadlineText,
+    MDDialogButtonContainer,
+    MDDialogContentContainer
+)
 
 # Cache für Würfel-Icons einrichten
 Cache.register('wuerfel_icons', limit=20)
@@ -738,13 +746,70 @@ class EigenschaftenItemRow(MDBoxLayout):
         if not self.controller:
             Logger.error("EigenschaftenItemRow: controller ist nicht gesetzt")
             return
-            
+                
         if self.item_type == 'attribute':
             self.controller.steigere_attribut(self.item_name)
         elif self.item_type == 'fertigkeit':
-            self.controller.steigere_fertigkeit(self.item_name)
+            result = self.controller.steigere_fertigkeit(self.item_name)
+            if result == "needs_confirmation":
+                self._show_double_cost_dialog()
         else:
             Logger.warning(f"Unbekannter Eigenschaftstyp: {self.item_type}")
+
+    def _show_double_cost_dialog(self):
+        """Zeigt einen Dialog zur Bestätigung der doppelten Kosten an."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Label mit ausreichender Höhe und ohne Größenbeschränkung
+        warning_label = MDLabel(
+            text="Vorsicht doppelte Kosten, wenn die Fertigkeit das zugehörige Attribut übersteigt! Trotzdem steigern?",
+            size_hint_y=None,
+            height=dp(80),  # Mehr Höhe für den Text
+            theme_text_color="Secondary",  # Sicherstellen, dass der Text gut sichtbar ist
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Kosten-Warnung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),  # Weniger Padding im Container
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.close_dialog(),
+                ),
+                MDButton(
+                    MDButtonText(text="Ja"),
+                    style="text",
+                    on_release=lambda x: self._confirm_double_cost(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def close_dialog(self):
+        """Schließt den Dialog."""
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
+
+    def _confirm_double_cost(self):
+        """Führt die Steigerung mit bestätigten doppelten Kosten durch."""
+        self.close_dialog()
+        self.controller.steigere_fertigkeit(self.item_name, confirm_double_cost=True)
 
     def senke_eigenschaft(self):
         """Verringert den Wert einer Eigenschaft über den Controller."""
