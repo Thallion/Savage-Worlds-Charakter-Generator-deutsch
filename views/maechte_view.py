@@ -10,7 +10,16 @@ from kivy.properties import StringProperty, ObjectProperty, NumericProperty, Boo
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.tooltip import MDTooltip
-from kivymd.uix.button import MDIconButton
+from kivymd.uix.label import MDLabel
+from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
+
+from kivymd.uix.dialog import (
+    MDDialog,
+    MDDialogHeadlineText,
+    MDDialogButtonContainer,
+    MDDialogContentContainer
+)
+
 from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
@@ -236,10 +245,16 @@ class MachtItemRow(MDBoxLayout):
     def waehle_macht(self):
         """
         Wählt eine Macht aus.
-        Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
+        Prüft vorher, ob genügend verfügbare Mächte vorhanden sind und zeigt ggf. einen Warnhinweis.
         """
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
+            return
+
+        # Prüfen, ob genügend verfügbare Mächte vorhanden sind
+        charakter = self.controller.charakter
+        if charakter.verfuegbare_maechte <= 0:
+            self._show_no_powers_dialog()
             return
 
         success = self.controller.waehle_macht(self.macht_name)
@@ -252,6 +267,50 @@ class MachtItemRow(MDBoxLayout):
             self._refresh_ui()
         else:
             Logger.warning(f"Auswahl der Macht '{self.macht_name}' fehlgeschlagen.")
+
+    def _show_no_powers_dialog(self):
+        """Zeigt einen Dialog an, wenn keine verfügbaren Mächte mehr vorhanden sind."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text="Keine verfügbaren Mächte mehr zum Auswählen! Du musst erst weitere Mächte durch Talente oder Aufstiege erwerben.",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Keine Mächte verfügbar",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: self.close_dialog(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def close_dialog(self):
+        """Schließt den Dialog."""
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
 
     def entferne_macht(self):
         """

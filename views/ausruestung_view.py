@@ -509,7 +509,10 @@ class AusruestungItemRow(MDBoxLayout):
                 self.dialog.dismiss()
                 self._refresh_ui()
             else:
-                self.show_error("Der Kauf konnte nicht durchgeführt werden.")
+                self.show_error(
+                    f"Nicht genügend Geld vorhanden für den Kauf von {anzahl}x {self.name}.",
+                    "Nicht genügend Geld"
+                )
 
         except ValueError as e:
             self.show_error(str(e))
@@ -555,23 +558,29 @@ class AusruestungItemRow(MDBoxLayout):
             Logger.error(f"Fehler beim Verarbeiten des Verkaufs: {str(e)}")
             self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
 
-    def show_error(self, message):
+    def show_error(self, message, title=ERROR_DIALOG_TITLE):
         """Zeigt eine Fehlermeldung in einem Dialog an"""
         content = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
             padding="12dp",
-            children=[
-                MDLabel(
-                    text=message,
-                    theme_text_color="Error"
-                )
-            ]
+            adaptive_height=True
         )
+        
+        # Label mit ausreichender Höhe und klar definierten Eigenschaften
+        error_label = MDLabel(
+            text=message,
+            theme_text_color="Error",
+            size_hint_y=None,
+            height=dp(80),  # Ausreichende Höhe für den Text
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(error_label)
 
         error_dialog = MDDialog(
             MDDialogHeadlineText(
-                text=ERROR_DIALOG_TITLE,
+                text=title,
             ),
             MDDialogContentContainer(
                 content,
@@ -579,11 +588,9 @@ class AusruestungItemRow(MDBoxLayout):
             ),
             MDDialogButtonContainer(
                 MDButton(
+                    MDButtonText(text="Schließen"),
                     style="text",
                     on_release=lambda x: error_dialog.dismiss(),
-                    children=[
-                        MDButtonText(text="Schließen")
-                    ]
                 ),
                 spacing="8dp",
             ),

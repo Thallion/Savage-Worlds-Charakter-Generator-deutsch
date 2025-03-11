@@ -11,7 +11,16 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.tooltip import MDTooltip
-from kivymd.uix.button import MDIconButton
+from kivymd.uix.label import MDLabel
+from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
+
+from kivymd.uix.dialog import (
+    MDDialog,
+    MDDialogHeadlineText,
+    MDDialogButtonContainer,
+    MDDialogContentContainer
+)
+
 from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
@@ -260,12 +269,20 @@ class TalentItemRow(MDBoxLayout):
     def waehle_talent(self):
         """
         Wählt ein Talent aus.
-        Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
+        Prüft vorher, ob genügend Punkte verfügbar sind und zeigt ggf. einen Warnhinweis.
         """
         Logger.debug(f"TalentItemRow: Start waehle_talent für {self.talent_name}")
         controller = self._get_controller()
         if not controller:
             Logger.error("TalentItemRow: Controller nicht gefunden")
+            return
+
+        # Prüfen, ob genügend Punkte verfügbar sind
+        charakter = controller.charakter
+        genug_punkte = (charakter.verbleibende_aufstiege > 0 or charakter.verbleibende_handicap_punkte > 1.5)
+        
+        if not genug_punkte:
+            self._show_no_points_dialog()
             return
 
         try:
@@ -275,6 +292,50 @@ class TalentItemRow(MDBoxLayout):
             self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Talents: {str(e)}")
+
+    def _show_no_points_dialog(self):
+        """Zeigt einen Dialog an, wenn nicht genügend Punkte verfügbar sind."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text="Nicht genügend Punkte verfügbar! Entweder Aufstiegspunkte oder Handicap-Punkte werden für Talente benötigt.",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Nicht genügend Punkte",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: self.close_dialog(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def close_dialog(self):
+        """Schließt den Dialog."""
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
 
     def entferne_talent(self):
         """

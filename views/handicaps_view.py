@@ -10,6 +10,16 @@ from kivy.properties import StringProperty, ObjectProperty, ListProperty, Numeri
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.label import MDLabel
+from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
+
+from kivymd.uix.dialog import (
+    MDDialog,
+    MDDialogHeadlineText,
+    MDDialogButtonContainer,
+    MDDialogContentContainer
+)
+
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
@@ -206,12 +216,18 @@ class HandicapItemRow(MDBoxLayout):
     def waehle_handicap(self):
         """
         Wählt ein Handicap aus.
-        Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
+        Prüft vorher, ob das Limit von 4 Punkten bereits erreicht ist und zeigt ggf. einen Warnhinweis.
         """
         Logger.debug(f"HandicapItemRow: Start waehle_handicap für {self.handicap_name}")
         controller = self._get_controller()
         if not controller:
             Logger.error("HandicapItemRow: Controller nicht gefunden")
+            return
+
+        # Prüfen, ob bereits das Maximum an Handicap-Punkten erreicht ist
+        charakter = controller.charakter
+        if charakter.gesamt_handicap_punkte >= 4:
+            self._show_max_points_dialog()
             return
 
         try:
@@ -222,6 +238,64 @@ class HandicapItemRow(MDBoxLayout):
             self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Handicaps: {str(e)}")
+
+    def _show_max_points_dialog(self):
+        """Zeigt einen Dialog an, wenn das Maximum an Handicap-Punkten erreicht ist."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text="Das Maximum von 4 Handicap-Punkten ist bereits erreicht! Die Auswirkungen des Handicaps werden angewendet, aber keine weiteren Punkte werden gutgeschrieben.",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Maximum erreicht",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.close_dialog(),
+                ),
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_handicap_selection(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def close_dialog(self):
+        """Schließt den Dialog."""
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
+
+    def _confirm_handicap_selection(self):
+        """Führt die Handicap-Auswahl trotz voller Punktezahl durch."""
+        self.close_dialog()
+        controller = self._get_controller()
+        if controller:
+            controller.waehle_handicap(self.name_key)
+            self.ausgewaehlt = True
+            self._refresh_ui()
 
     def entferne_handicap(self):
         """
