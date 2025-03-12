@@ -5721,5 +5721,6 @@
         "riesige_feinde,": false,
         "schurkische_entschlossenheit": false
     },
-    "active_setting_name": "SWAE"
+    "active_setting_name": "SWAE",
+    "char_gen_completed": false
 }

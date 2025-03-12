@@ -102,6 +102,7 @@ from views.talent_popup import TalentDialogContent, DeleteTalentDialogContent, T
 from views.setting_popup import AddSettingPopup, LoadSettingPopup, DeleteSettingPopup, SettingDialogHandler
 
 from utils.pdf_utils import generiere_pdf, create_mod_text
+from utils.custom_filemanager import CustomFileManager
 
 kv = '''
 <EinstellungenWidget>:
@@ -906,10 +907,10 @@ class EinstellungenWidget(MDScreen):
         self.manager_open = False
         
         # Erweiterten FileManager mit Laufwerksauswahl erstellen
-        self.file_manager = MDFileManager(
+        self.file_manager = CustomFileManager(
             exit_manager=self.exit_manager,
             select_path=self.select_path,
-            preview=False,  # Disable preview to make directory navigation clearer
+            preview=False,  # Keine Vorschau für bessere Kompatibilität
         )
         
         # Laufwerksauswahl-Dialog
@@ -1216,13 +1217,13 @@ class EinstellungenWidget(MDScreen):
             padding=dp(20)
         )
         
-        # Überschrift
+        # Überschrift 
         content.add_widget(MDLabel(
             text="Laufwerk auswählen",
-            font_style="H6",
+            font_size=dp(20),
             halign="center"
         ))
-        
+            
         # Grid für Laufwerksbuttons
         from kivymd.uix.gridlayout import MDGridLayout
         drive_grid = MDGridLayout(
