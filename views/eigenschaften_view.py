@@ -384,6 +384,8 @@ class EigenschaftenWidget(MDBoxLayout):
         self.controller = app.controller
         # Binde an den Charakter-Änderung-Event mit Verzögerung
         self.controller.bind(on_charakter_changed=self._plane_update)
+        # Bei Charakter-Laden: Status der Checkbox aktualisieren
+        self.controller.bind(on_charakter_loaded=self._update_char_gen_status)
 
     def _initialisiere_sortieroptionen(self):
         """Initialisiert Sortier- und Filteroptionen"""

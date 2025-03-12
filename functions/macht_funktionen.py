@@ -73,13 +73,14 @@ def waehle_macht(charakter, macht_name_key):
     return False
 
 
-def entferne_macht(charakter, macht_name_key):
+def entferne_macht(charakter, macht_name_key, adjust_verfuegbare_maechte=True):
     """
-    Entfernt eine Macht und erhöht die verfügbaren Mächte des Charakters.
+    Entfernt eine Macht und erhöht optional die verfügbaren Mächte des Charakters.
     
     Args:
         charakter: Das Charakter-Objekt
         macht_name_key: Der Name der Macht
+        adjust_verfuegbare_maechte: Ob die verfügbaren Mächte angepasst werden sollen (default: True)
         
     Returns:
         True bei Erfolg, False bei Misserfolg
@@ -88,7 +89,9 @@ def entferne_macht(charakter, macht_name_key):
         macht = charakter.maechte[macht_name_key]
         if macht.ausgewaehlt:
             macht.abwaehlen()
-            charakter.verfuegbare_maechte += 1
+            # Nur wenn der Parameter gesetzt ist, verfügbare Mächte anpassen
+            if adjust_verfuegbare_maechte:
+                charakter.verfuegbare_maechte += 1
             if macht_name_key in charakter.selected_maechte:
                 charakter.selected_maechte.remove(macht_name_key)
                 charakter.selected_maechte = charakter.selected_maechte  # Neu zuweisen

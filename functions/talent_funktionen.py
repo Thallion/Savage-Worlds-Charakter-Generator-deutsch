@@ -6,6 +6,7 @@ des Auswahlens, Abwählens und Überprüfens der Voraussetzungen.
 
 from kivy.logger import Logger
 from models.talent import Talent
+from functions.macht_funktionen import entferne_macht
 
 
 def initialisiere_talente(charakter, talent_daten):
@@ -156,6 +157,16 @@ def entferne_talent(charakter, talent_name_key):
         if talent_name_key in charakter.selected_talente:
             charakter.selected_talente.remove(talent_name_key)
         Logger.debug(f"Talent '{talent_name_key}' entfernt.")
+        
+        # Wenn der Arkane Hintergrund abgewählt wird, müssen auch alle Mächte abgewählt werden
+        if talent.neue_maechte > 0:
+            # Kopie der Liste erstellen, da sich diese während der Iteration ändert
+            selected_maechte_copy = charakter.selected_maechte.copy()
+            for macht_name in selected_maechte_copy:
+                # Jede Macht abwählen ohne verfuegbare_maechte anzupassen
+                entferne_macht(charakter, macht_name, adjust_verfuegbare_maechte=False)
+            Logger.info(f"Alle Mächte durch Abwahl des Arkanen Hintergrunds '{talent_name_key}' entfernt.")
+        
         return True
 
     if talent_name_key in charakter.talente:
@@ -177,7 +188,7 @@ def entferne_talent(charakter, talent_name_key):
             Logger.warning(f"Talent '{talent_name_key}' ist nicht ausgewählt.")
     else:
         Logger.error(f"Talent '{talent_name_key}' existiert nicht.")  
-    return False          
+    return False        
 
 
 def add_talent(charakter, talent):

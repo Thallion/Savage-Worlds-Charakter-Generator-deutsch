@@ -460,7 +460,7 @@
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
-            "custom": true
+            "custom": false
         }
     },
     "handicaps": {
@@ -5058,10 +5058,12 @@
             "setting": "Deadlands",
             "beschreibung": "+1 Parade, –1 Deckung, Mindeststärke W4, Härte 7.",
             "aktiv": true,
+            "menge": 0,
             "parade": 1,
             "deckung": -1,
             "mindeststaerke": "W4",
-            "angelegt": false
+            "angelegt": false,
+            "ausgewaehlt": false
         },
         "Eingeborenenschild (Mittel)": {
             "name": "Eingeborenenschild (Mittel)",
@@ -5071,10 +5073,12 @@
             "setting": "Deadlands",
             "beschreibung": "+2 Parade, –2 Deckung, Mindeststärke W4, Härte 8.",
             "aktiv": true,
+            "menge": 0,
             "parade": 2,
             "deckung": -2,
             "mindeststaerke": "W4",
-            "angelegt": false
+            "angelegt": false,
+            "ausgewaehlt": false
         },
         "Hemd, einfach": {
             "name": "Hemd, einfach",
@@ -6741,7 +6745,7 @@
                 "Schuss": 1,
                 "PB": 2
             }
-        }        
+        }
     },
     "selected_handicaps": [
         "Arm (leicht)",
@@ -6762,8 +6766,7 @@
     "selected_allgemeine_ausruestung": [
         "Umhängetasche",
         "Seidenfächer",
-        "Mantel",
-        "Fäuste"
+        "Mantel"
     ],
     "selected_waffen": [
         "Fäuste"
@@ -6786,7 +6789,7 @@
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 0.0,
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
     "verfuegbare_maechte": 0,
     "machtpunkte": 15,
@@ -6811,7 +6814,15 @@
         "schnelle_genesung": false,
         "schwere_entscheidungen": false,
         "ungepanzerter_held": false,
-        "wundobergrenze": false
+        "wundobergrenze": false,
+        "strahlschablone": false,
+        "große_hoehen": false,
+        "verrat": false,
+        "schwierige_heilung": false,
+        "freizeit": false,
+        "riesige_feinde,": false,
+        "schurkische_entschlossenheit": false
     },
-    "active_setting_name": "Deadlands"
+    "active_setting_name": "Deadlands",
+    "char_gen_completed": true
 }

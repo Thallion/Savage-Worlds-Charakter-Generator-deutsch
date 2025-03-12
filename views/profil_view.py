@@ -70,7 +70,7 @@ kv = '''
                     on_text: root.alter = self.text
                     multiline: False
                     size_hint_x: None
-                    width: 50
+                    width: 300
                     mode: "outlined"
 
             MDBoxLayout:
@@ -93,7 +93,7 @@ kv = '''
                     on_text: root.geschlecht = self.text
                     multiline: False
                     size_hint_x: None
-                    width: 100
+                    width: 300
                     mode: "outlined"
 
             MDBoxLayout:
@@ -142,22 +142,22 @@ kv = '''
                     width: 300
                     mode: "outlined"
 
-            MDLabel:
-                text: "Settingregeln"
-                size_hint_y: None
-                height: 30
-                halign: 'left'
-                theme_text_color: "Primary"
+            # MDLabel:
+            #     text: "Settingregeln"
+            #     size_hint_y: None
+            #     height: 30
+            #     halign: 'left'
+            #     theme_text_color: "Primary"
 
-            MDGridLayout:
-                id: checkbox_container
-                cols: 1
-                size_hint_y: None
-                size_hint_x: None
-                width: self.minimum_width
-                height: self.minimum_height
-                spacing: 5
-                padding: (0, 10, 0, 10)                    
+            # MDGridLayout:
+            #     id: checkbox_container
+            #     cols: 1
+            #     size_hint_y: None
+            #     size_hint_x: None
+            #     width: self.minimum_width
+            #     height: self.minimum_height
+            #     spacing: 5
+            #     padding: (0, 10, 0, 10)                    
 '''
 
 Builder.load_string(kv)
@@ -187,51 +187,51 @@ class ProfilWidget(MDBoxLayout):
 
         self.load_profil()
         Logger.info("ProfilWidget initialisiert und an Charakteränderungen gebunden.")
-        self.settingregeln = SettingRegeln()
-        Clock.schedule_once(self.setup_checkboxes)
+        # self.settingregeln = SettingRegeln()
+        # Clock.schedule_once(self.setup_checkboxes)
 
-    def setup_checkboxes(self, dt):
-        try:
-            self.ids.checkbox_container.clear_widgets()
-        except KeyError:
-            Logger.error("Fehler: 'checkbox_container' ID nicht im KV-File gefunden.")
-            return
+    # def setup_checkboxes(self, dt):
+    #     try:
+    #         self.ids.checkbox_container.clear_widgets()
+    #     except KeyError:
+    #         Logger.error("Fehler: 'checkbox_container' ID nicht im KV-File gefunden.")
+    #         return
 
-        for attr, prop in self.settingregeln.__class__.__dict__.items():
-            if isinstance(prop, BooleanProperty):
-                regel_label = attr.replace('_', ' ').title()
-                h_layout = MDBoxLayout(
-                    orientation='horizontal',
-                    size_hint_y=None,
-                    height=40,
-                    padding=(5, 0),
-                    spacing=10,
-                    adaptive_height=True
-                )
+    #     for attr, prop in self.settingregeln.__class__.__dict__.items():
+    #         if isinstance(prop, BooleanProperty):
+    #             regel_label = attr.replace('_', ' ').title()
+    #             h_layout = MDBoxLayout(
+    #                 orientation='horizontal',
+    #                 size_hint_y=None,
+    #                 height=40,
+    #                 padding=(5, 0),
+    #                 spacing=10,
+    #                 adaptive_height=True
+    #             )
 
-                label = MDLabel(
-                    text=regel_label,
-                    halign='left',
-                    theme_text_color="Primary",
-                    size_hint_x=None,
-                    width=300
-                )
+    #             label = MDLabel(
+    #                 text=regel_label,
+    #                 halign='left',
+    #                 theme_text_color="Primary",
+    #                 size_hint_x=None,
+    #                 width=300
+    #             )
 
-                checkbox = MDCheckbox(
-                    active=getattr(self.settingregeln, attr),
-                    size_hint_x=None,
-                    width=50,
-                    selected_color=self.theme_cls.primary_color
-                )
+    #             checkbox = MDCheckbox(
+    #                 active=getattr(self.settingregeln, attr),
+    #                 size_hint_x=None,
+    #                 width=50,
+    #                 selected_color=self.theme_cls.primary_color
+    #             )
 
-                def callback(instance, value, attr=attr):
-                    setattr(self.settingregeln, attr, value)
-                    Logger.info(f"Settingregel '{attr}' gesetzt auf {value}")
+    #             def callback(instance, value, attr=attr):
+    #                 setattr(self.settingregeln, attr, value)
+    #                 Logger.info(f"Settingregel '{attr}' gesetzt auf {value}")
 
-                checkbox.bind(active=callback)
-                h_layout.add_widget(label)
-                h_layout.add_widget(checkbox)
-                self.ids.checkbox_container.add_widget(h_layout)
+    #             checkbox.bind(active=callback)
+    #             h_layout.add_widget(label)
+    #             h_layout.add_widget(checkbox)
+    #             self.ids.checkbox_container.add_widget(h_layout)
 
     # Die restlichen Methoden bleiben unverändert
     def on_charakter_changed(self, instance, value):

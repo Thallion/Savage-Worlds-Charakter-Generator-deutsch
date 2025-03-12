@@ -83,7 +83,8 @@ def to_dict(charakter):
         'zusaetzliche_talente': charakter.zusaetzliche_talente,
         'gesamt_handicap_punkte': charakter.gesamt_handicap_punkte,
         'settingregeln': charakter.settingregeln.to_dict(),
-        'active_setting_name': charakter.custom_element_manager.active_setting_name
+        'active_setting_name': charakter.custom_element_manager.active_setting_name,
+        'char_gen_completed': charakter.char_gen_completed  # Hinzugefügt
     }
 
 def from_dict(self, data):
@@ -282,6 +283,7 @@ def from_dict(self, data):
         self.erschoepfung = data.get('erschoepfung', self.erschoepfung)
         self.zusaetzliche_talente = data.get('zusaetzliche_talente', self.zusaetzliche_talente)
         self.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', self.gesamt_handicap_punkte)
+        self.char_gen_completed = data.get('char_gen_completed', self.char_gen_completed) 
 
         # Setting-Einstellungen
         if 'settingregeln' in data:

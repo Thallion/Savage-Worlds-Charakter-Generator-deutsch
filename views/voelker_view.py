@@ -182,8 +182,16 @@ class VoelkerWidget(MDBoxLayout):
             container = self.ids.voelker_content_container
             container.clear_widgets()
 
+            # Synchronisiere voelker_selected mit den verfügbaren Völkern
+            charakter = self.controller.charakter
+            
+            # Sicherstellen, dass alle Völker in voelker_selected existieren
+            for volk_name in charakter.voelker:
+                if volk_name not in charakter.voelker_selected:
+                    charakter.voelker_selected[volk_name] = False
+            
             # Völker anzeigen
-            for volk_name, volk in self.controller.charakter.voelker.items():
+            for volk_name, volk in charakter.voelker.items():
                 self._add_volk_row(container, volk_name, volk)
                 self._add_volk_details(container, volk)
 
@@ -217,8 +225,10 @@ class VoelkerWidget(MDBoxLayout):
             theme_text_color="Primary"
         )
 
-        # Checkbox für die Auswahl
-        is_active = volk.ausgewaehlt
+        # Checkbox für die Auswahl - WICHTIG: Zustand aus voelker_selected nehmen, nicht aus volk.ausgewaehlt
+        charakter = self.controller.charakter
+        is_active = charakter.voelker_selected.get(volk_name, False)
+        
         checkbox = MDCheckbox(
             active=is_active,
             size_hint_x=None,
@@ -342,20 +352,49 @@ class VoelkerWidget(MDBoxLayout):
             
         charakter = self.controller.charakter
         
+        # Hier liegt das Problem: Wir müssen das Umschalten verhindern, um UI-Rückkopplungen zu vermeiden
+        # Nur Ereignisse verarbeiten, die eine Aktivierung sind
+        if not value:
+            # Verhindern, dass alle Völker abgewählt werden
+            aktive_voelker = [k for k, v in charakter.voelker_selected.items() if v]
+            if len(aktive_voelker) <= 1 and selected_volk_name in aktive_voelker:
+                # Wenn der Benutzer versucht, das letzte aktive Volk abzuwählen, abbrechen
+                Logger.debug(f"Abwählen des letzten Volks '{selected_volk_name}' verhindert")
+                
+                # UI neu laden, um den Checkbox-Zustand zurückzusetzen
+                Clock.schedule_once(lambda dt: self.aktualisiere_ui(), 0.1)
+                return
+        
+        # Wenn ein Volk aktiviert wird, alle anderen deaktivieren
         if value:
-            # Aktivierung eines Volks
-            self._deactivate_other_voelker(instance)
-            self._activate_volk(selected_volk_name)
-        else:
-            # Deaktivierung eines Volks
-            self._deactivate_volk(selected_volk_name)
+            # Alle Völker in beiden Dictionaries deaktivieren
+            for volk_name in charakter.voelker_selected:
+                charakter.voelker_selected[volk_name] = False
+                if volk_name in charakter.voelker:
+                    charakter.voelker[volk_name].ausgewaehlt = False
             
-            # Wenn kein Volk ausgewählt ist, setze Mensch als Standard
-            if not any(charakter.voelker_selected.values()):
-                self._set_default_volk()
-
-        Logger.info(f"Volk '{selected_volk_name}' gesetzt auf {value}")
+            # Das ausgewählte Volk aktivieren
+            charakter.voelker_selected[selected_volk_name] = True
+            if selected_volk_name in charakter.voelker:
+                charakter.voelker[selected_volk_name].ausgewaehlt = True
+        else:
+            # Das Volk deaktivieren
+            charakter.voelker_selected[selected_volk_name] = False
+            if selected_volk_name in charakter.voelker:
+                charakter.voelker[selected_volk_name].ausgewaehlt = False
+                
+            # Mensch als Standard setzen
+            charakter.voelker_selected["Mensch"] = True
+            if "Mensch" in charakter.voelker:
+                charakter.voelker["Mensch"].ausgewaehlt = True
+        
+        # Event auslösen, um andere Module zu informieren
         charakter.dispatch('on_charakter_change')
+        
+        # UI aktualisieren
+        Logger.info(f"Volk '{selected_volk_name}' gesetzt auf {value}")
+        # Verzögerte UI-Aktualisierung, um Rückkopplungseffekte zu vermeiden
+        Clock.schedule_once(lambda dt: self.aktualisiere_ui(), 0.1)
 
     def _deactivate_other_voelker(self, active_checkbox):
         """
@@ -409,9 +448,9 @@ class VoelkerWidget(MDBoxLayout):
     def _set_default_volk(self):
         """Setzt das Standard-Volk (Mensch) als ausgewählt."""
         charakter = self.controller.charakter
-        charakter.voelker_selected[DEFAULT_VOLK] = True
         
-        if DEFAULT_VOLK in charakter.voelker:
-            charakter.voelker[DEFAULT_VOLK].auswaehlen()
-            
+        # Verwende die Manager-Methode, die sicherstellt, dass nur ein Volk aktiv ist
+        charakter.set_selected_volk(DEFAULT_VOLK)
+        
+        # UI aktualisieren
         self.aktualisiere_ui()

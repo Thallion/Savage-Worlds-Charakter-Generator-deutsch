@@ -883,7 +883,7 @@ class EinstellungenWidget(MDScreen):
         'Purple', 'Red', 'Saddlebrown', 
         'Orange', 'Gold', 'Olive'
     ])
-
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller
@@ -904,11 +904,19 @@ class EinstellungenWidget(MDScreen):
         
         # File Manager für Speichern/Laden initialisieren
         self.manager_open = False
+        
+        # Erweiterten FileManager mit Laufwerksauswahl erstellen
         self.file_manager = MDFileManager(
             exit_manager=self.exit_manager,
             select_path=self.select_path,
             preview=False,  # Disable preview to make directory navigation clearer
         )
+        
+        # Laufwerksauswahl-Dialog
+        self.drive_dialog = None
+        
+        # Plattform identifizieren (für Laufwerke)
+        self.is_windows = os.name == 'nt'
         
         # Variable für den aktuellen Aktionstyp (Speichern/Laden)
         self.current_action = None
@@ -1152,6 +1160,151 @@ class EinstellungenWidget(MDScreen):
         self.manager_open = False
         self.file_manager.close()
 
+    def show_file_manager(self, path, action_type):
+        """
+        Zeigt den FileManager mit zusätzlicher Laufwerksauswahl an.
+        
+        Args:
+            path (str): Startpfad für den FileManager
+            action_type (str): Art der Aktion ("load", "save_dir", etc.)
+        """
+        # Überprüfe, ob der Pfad existiert
+        if not os.path.exists(path):
+            Logger.warning(f"Der angegebene Pfad existiert nicht: {path}")
+            path = os.path.expanduser("~")  # Auf den Home-Ordner zurückfallen
+            
+        # Setze aktuellen Aktionstyp
+        self.current_action = action_type
+        
+        # Unter Windows: Zeige erst den Drive-Selector
+        if self.is_windows:
+            self.show_drive_selector(path, action_type)
+        else:
+            # Unter anderen Betriebssystemen direkt den Filemanager zeigen
+            self.file_manager.show(path)
+            self.manager_open = True
+
+    def show_drive_selector(self, default_path, action_type):
+        """
+        Zeigt einen Dialog zur Auswahl des Laufwerks (nur für Windows).
+        
+        Args:
+            default_path (str): Standardpfad (falls Laufwerksauswahl abgebrochen wird)
+            action_type (str): Art der Aktion (wird gespeichert für späteren Gebrauch)
+        """
+        import string
+        
+        # Laufwerke identifizieren
+        available_drives = []
+        for letter in string.ascii_uppercase:
+            drive = f"{letter}:\\"
+            if os.path.exists(drive):
+                available_drives.append((letter, drive))
+        
+        if not available_drives:
+            # Keine Laufwerke gefunden (unwahrscheinlich) - direkt zum Standard gehen
+            self.file_manager.show(default_path)
+            self.manager_open = True
+            return
+        
+        # Dialog-Inhalt erstellen
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(20),
+            size_hint_y=None,
+            height=dp(300),
+            padding=dp(20)
+        )
+        
+        # Überschrift
+        content.add_widget(MDLabel(
+            text="Laufwerk auswählen",
+            font_style="H6",
+            halign="center"
+        ))
+        
+        # Grid für Laufwerksbuttons
+        from kivymd.uix.gridlayout import MDGridLayout
+        drive_grid = MDGridLayout(
+            cols=4, 
+            spacing=dp(10),
+            adaptive_height=True
+        )
+        
+        # Laufwerksbuttons erstellen
+        for letter, drive_path in available_drives:
+            drive_button = MDButton(
+                style="elevated",
+                size_hint=(None, None),
+                size=(dp(80), dp(50)),
+                on_release=lambda x, p=drive_path: self.select_drive(p)
+            )
+            drive_button.add_widget(MDButtonText(text=f"{letter}:"))
+            drive_grid.add_widget(drive_button)
+        
+        content.add_widget(drive_grid)
+        
+        # Aktuelles Laufwerk bestimmen
+        current_drive = os.path.splitdrive(default_path)[0] + "\\"
+        
+        # Info-Label
+        info_label = MDLabel(
+            text=f"Aktuelles Laufwerk: {current_drive}",
+            halign="center"
+        )
+        content.add_widget(info_label)
+        
+        # Abbrechen-Button (verwendet bestehenden Pfad)
+        cancel_button = MDButton(
+            style="elevated",
+            size_hint=(None, None),
+            size=(dp(200), dp(50)),
+            pos_hint={"center_x": 0.5},
+            on_release=lambda x: self._continue_with_path(default_path)
+        )
+        cancel_button.add_widget(MDButtonText(text="Aktuelles Laufwerk verwenden"))
+        content.add_widget(cancel_button)
+        
+        # Dialog erstellen und anzeigen
+        self.drive_dialog = MDDialog(
+            MDDialogHeadlineText(text="Laufwerksauswahl"),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+            ),
+        )
+        self.drive_dialog.open()
+
+    def select_drive(self, path):
+        """
+        Wählt ein Laufwerk aus und öffnet den FileManager.
+        
+        Args:
+            path (str): Pfad zum ausgewählten Laufwerk
+        """
+        if self.drive_dialog:
+            self.drive_dialog.dismiss()
+            self.drive_dialog = None
+        
+        # FileManager mit dem ausgewählten Laufwerk öffnen
+        self.file_manager.show(path)
+        self.manager_open = True
+
+    def _continue_with_path(self, path):
+        """
+        Setzt den FileManager-Prozess mit dem gegebenen Pfad fort.
+        
+        Args:
+            path (str): Der zu verwendende Pfad
+        """
+        if self.drive_dialog:
+            self.drive_dialog.dismiss()
+            self.drive_dialog = None
+        
+        # FileManager öffnen
+        self.file_manager.show(path)
+        self.manager_open = True
+
     def speichere_charakter(self):
         """
         Zeigt einen Dialog mit Optionen zum Speichern des Charakters.
@@ -1346,71 +1499,84 @@ class EinstellungenWidget(MDScreen):
         """
         self.exit_manager()
         
-        if self.current_action == "save_dir":
-            # Logik für Verzeichnisauswahl zum Speichern
-            if os.path.isdir(path):
-                # Vollständigen Pfad zusammensetzen
-                full_path = os.path.join(path, self.temp_filename)
-                
-                # Prüfen, ob die Datei bereits existiert
-                if os.path.exists(full_path):
-                    self.confirm_overwrite(full_path)
-                else:
-                    # Direkt speichern
-                    self.save_character_to_path(full_path)
-            else:
-                # Wenn eine Datei statt eines Verzeichnisses ausgewählt wurde
-                self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
-        
-        elif self.current_action == "load":
-            # Verbesserte Fehlerbehandlung beim Laden eines Charakters
-            if os.path.isfile(path) and path.endswith('.json'):
-                try:
-                    # Verwende den Controller zum Laden
-                    success = self.controller.lade_charakter_von_json(path)
-                    
-                    if success:
-                        # Bei Erfolg: Dateipfad bereits im Controller gespeichert, UI aktualisieren
-                        Logger.info(f"Charakter aus Datei geladen: {path}")
-                        self.aktualisiere_ui()
-                        
-                        # Erfolgsmeldung anzeigen
-                        self._show_success_dialog(
-                            "Charakter erfolgreich geladen", 
-                            f"Der Charakter wurde aus der Datei geladen."
-                        )
-                    else:
-                        self._show_error_dialog(
-                            "Fehler beim Laden des Charakters. Prüfe die Konsole für Details."
-                        )
-                except Exception as e:
-                    Logger.error(f"Unbehandelter Fehler beim Laden des Charakters: {str(e)}", exc_info=True)
-                    self._show_error_dialog(
-                        f"Kritischer Fehler beim Laden des Charakters: {str(e)}\n"
-                        "Der Charakter konnte nicht geladen werden."
-                    )
-            else:
-                # Wenn ein Verzeichnis oder keine JSON-Datei ausgewählt wurde
+        try:
+            if self.current_action == "save_dir":
+                # Logik für Verzeichnisauswahl zum Speichern
                 if os.path.isdir(path):
-                    self._show_error_dialog("Bitte wähle eine .json Charakterdatei aus.")
+                    # Vollständigen Pfad zusammensetzen
+                    full_path = os.path.join(path, self.temp_filename)
+                    
+                    # Prüfen, ob die Datei bereits existiert
+                    if os.path.exists(full_path):
+                        self.confirm_overwrite(full_path)
+                    else:
+                        # Direkt speichern
+                        self.save_character_to_path(full_path)
                 else:
-                    self._show_error_dialog(f"Die ausgewählte Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
-        
-        elif self.current_action == "save_pdf_dir":
-            # Logik für das Speichern von PDFs
-            if os.path.isdir(path):
-                # Vollständigen Pfad zusammensetzen
-                full_path = os.path.join(path, self.temp_pdf_filename)
-                
-                # Prüfen, ob die Datei bereits existiert
-                if os.path.exists(full_path):
-                    self.confirm_pdf_overwrite(full_path)
+                    # Wenn eine Datei statt eines Verzeichnisses ausgewählt wurde
+                    self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
+            
+            elif self.current_action == "load":
+                # Verbesserte Fehlerbehandlung beim Laden eines Charakters
+                if not os.path.exists(path):
+                    self._show_error_dialog(f"Der Pfad existiert nicht: {path}")
+                    return
+                    
+                if os.path.isfile(path) and path.endswith('.json'):
+                    try:
+                        # Verwende den Controller zum Laden
+                        success = self.controller.lade_charakter_von_json(path)
+                        
+                        if success:
+                            # Bei Erfolg: Dateipfad bereits im Controller gespeichert, UI aktualisieren
+                            Logger.info(f"Charakter aus Datei geladen: {path}")
+                            self.aktualisiere_ui()
+                            
+                            # Erfolgsmeldung anzeigen
+                            self._show_success_dialog(
+                                "Charakter erfolgreich geladen", 
+                                f"Der Charakter wurde aus der Datei geladen."
+                            )
+                        else:
+                            self._show_error_dialog(
+                                "Fehler beim Laden des Charakters. Prüfe die Konsole für Details."
+                            )
+                    except Exception as e:
+                        Logger.error(f"Unbehandelter Fehler beim Laden des Charakters: {str(e)}", exc_info=True)
+                        self._show_error_dialog(
+                            f"Kritischer Fehler beim Laden des Charakters: {str(e)}\n"
+                            "Der Charakter konnte nicht geladen werden."
+                        )
                 else:
-                    # Direkt PDF erstellen
-                    self.save_pdf_to_path(full_path)
+                    # Wenn ein Verzeichnis oder keine JSON-Datei ausgewählt wurde
+                    if os.path.isdir(path):
+                        self._show_error_dialog("Bitte wähle eine .json Charakterdatei aus.")
+                    else:
+                        self._show_error_dialog(f"Die ausgewählte Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
+            
+            elif self.current_action == "save_pdf_dir":
+                # Logik für das Speichern von PDFs
+                if os.path.isdir(path):
+                    # Vollständigen Pfad zusammensetzen
+                    full_path = os.path.join(path, self.temp_pdf_filename)
+                    
+                    # Prüfen, ob die Datei bereits existiert
+                    if os.path.exists(full_path):
+                        self.confirm_pdf_overwrite(full_path)
+                    else:
+                        # Direkt PDF erstellen
+                        self.save_pdf_to_path(full_path)
+                else:
+                    # Wenn eine Datei statt eines Verzeichnisses ausgewählt wurde
+                    self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
+
             else:
-                # Wenn eine Datei statt eines Verzeichnisses ausgewählt wurde
-                self._show_error_dialog("Bitte wähle ein Verzeichnis für die Speicherung aus.")
+                # Unbekannter Aktionstyp - Warnung loggen
+                Logger.warning(f"Unbekannter Aktionstyp in select_path: {self.current_action}")
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei der Verarbeitung des ausgewählten Pfads: {str(e)}", exc_info=True)
+            self._show_error_dialog(f"Fehler bei der Verarbeitung: {str(e)}")
 
     def lade_charakter(self):
         """Öffnet den MDFileManager im Laden-Modus."""
@@ -1424,12 +1590,27 @@ class EinstellungenWidget(MDScreen):
         if not os.path.exists(chars_dir):
             os.makedirs(chars_dir)
         
-        # Setze aktuellen Aktionstyp auf Laden
-        self.current_action = "load"
+        # Erweiterten FileManager mit Laufwerksauswahl anzeigen
+        self.show_file_manager(chars_dir, "load")
+
+       
+    def _open_directory_browser_for_save(self):
+        """
+        Öffnet den Dateibrowser um das Zielverzeichnis zum Speichern auszuwählen.
+        Der Dateiname wurde bereits in self.temp_filename gespeichert.
+        """
+        # Verzeichnis für Charaktere bestimmen
+        if getattr(sys, 'frozen', False):
+            base_dir = os.path.dirname(sys.executable)
+        else:
+            base_dir = os.path.dirname(os.path.abspath(__file__))
         
-        # MDFileManager anzeigen
-        self.file_manager.show(chars_dir)
-        self.manager_open = True
+        chars_dir = os.path.join(base_dir, 'chars')
+        if not os.path.exists(chars_dir):
+            os.makedirs(chars_dir)
+        
+        # Erweiterten FileManager mit Laufwerksauswahl anzeigen
+        self.show_file_manager(chars_dir, "save_dir")
 
     def _show_error_dialog(self, message):
         """Zeigt einen Fehlerdialog mit der angegebenen Nachricht an."""
