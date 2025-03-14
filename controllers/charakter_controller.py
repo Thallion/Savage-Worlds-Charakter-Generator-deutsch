@@ -237,21 +237,23 @@ class CharakterController(EventDispatcher):
     # ============================
     # Operationen auf Talenten
     # ============================
-    def waehle_talent(self, talent_name):
+    def waehle_talent(self, talent_name, ignore_rang_check=False):
         """
         Wählt ein Talent für den Charakter aus
         
         Args:
             talent_name (str): Name des Talents
+            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung (für UI-Bestätigung)
             
         Returns:
-            bool: True bei Erfolg, False bei Fehler
+            bool oder str: "needs_rang_confirmation" wenn Rang-Bestätigung benötigt wird,
+                        True bei Erfolg, False bei Fehler
         """
         try:
-            success = self.charakter.waehle_talent(talent_name)
-            if success:
+            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
+            if result is True:  # Nur bei True-Wert, nicht bei "needs_rang_confirmation"
                 self.dispatch('on_charakter_updated')
-            return success
+            return result
         except Exception as e:
             Logger.error(f"Fehler bei Auswahl von Talent {talent_name}: {str(e)}")
             self.dispatch('on_charakter_error', f"Talent-Auswahl fehlgeschlagen: {str(e)}")

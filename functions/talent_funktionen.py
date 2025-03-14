@@ -110,17 +110,62 @@ def talent_auswaehlen(charakter, talent_name_key):
     return False
 
 
-def waehle_talent(charakter, talent_name_key):
+def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
+    """
+    Prüft, ob der Rang des Talents höher ist als der des Charakters.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        talent_rang: Der Rang des Talents als String
+        
+    Returns:
+        bool: True, wenn der Talent-Rang höher ist, sonst False
+    """
+    # Rangordnung definieren (Kleinbuchstaben für besseren Vergleich)
+    rang_werte = {
+        "anfänger": 1,
+        "fortgeschritten": 2,
+        "veteran": 3,
+        "heroisch": 4,
+        "legendär": 5
+    }
+    
+    # Normalisieren (Kleinbuchstaben)
+    charakter_rang = charakter.rang.lower()
+    talent_rang = talent_rang.lower()
+    
+    # Rang-Werte abrufen (mit Fallback auf -1 für unbekannte Ränge)
+    charakter_rang_wert = rang_werte.get(charakter_rang, -1)
+    talent_rang_wert = rang_werte.get(talent_rang, -1)
+    
+    # Vergleich durchführen
+    return talent_rang_wert > charakter_rang_wert
+
+
+def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
     """
     Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
     
     Args:
         charakter: Das Charakter-Objekt
         talent_name_key: Der Name des auszuwählenden Talents
+        ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
         
     Returns:
-        True bei Erfolg, False bei Misserfolg
+        str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
+                       True bei Erfolg, False bei Misserfolg
     """
+    # Prüfen, ob das Talent existiert
+    if talent_name_key not in charakter.talente:
+        Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
+        return False
+        
+    talent = charakter.talente[talent_name_key]
+    
+    # Rang-Prüfung
+    if not ignore_rang_check and is_talent_rang_hoeher_als_charakter(charakter, talent.rang):
+        return "needs_rang_confirmation"
+    
     if charakter.verbleibende_handicap_punkte > 1.5:
         erfolg = talent_auswaehlen(charakter, talent_name_key)
         if erfolg:
@@ -136,7 +181,6 @@ def waehle_talent(charakter, talent_name_key):
         else:    
             Logger.warning(f"Keine verbleibenden Aufstiege übrig.")
     return False
-
 
 def entferne_talent(charakter, talent_name_key):
     """

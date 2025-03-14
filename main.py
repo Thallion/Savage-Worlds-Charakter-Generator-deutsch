@@ -39,7 +39,6 @@ from controllers.charakter_controller import CharakterController
 from charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
 from einstellungen import EinstellungenWidget
-from views.filechooser_popup import FileChooserPopup
 from views.voelker_view import VoelkerWidget
 from views.profil_view import ProfilWidget
 from views.maechte_view import MaechteWidget
