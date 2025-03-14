@@ -147,6 +147,47 @@ class TalentDialogHandler:
         self.selected_talent = None
         self.dialog_content = None
 
+    def add_talent(self, talent_daten):
+        """
+        Fügt ein neues Talent auf Basis der übergebenen Daten hinzu.
+        
+        Args:
+            talent_daten (dict): Die Talentdaten aus dem Dialog
+        
+        Returns:
+            bool: True bei Erfolg, False bei Fehler
+        """
+        try:
+            voraussetzungen = []
+            # Voraussetzungen verarbeiten
+            if talent_daten.get('voraussetzungen_text'):
+                voraussetzungen_text = talent_daten['voraussetzungen_text']
+                # Voraussetzungen an Kommas trennen
+                voraussetzungen = [voraussetzung.strip() for voraussetzung in voraussetzungen_text.split(',') if voraussetzung.strip()]
+            
+            # Neues Talent erstellen
+            talent = Talent(
+                name=talent_daten['name'],
+                kategorie=talent_daten['kategorie'],
+                rang=talent_daten['rang'],
+                voraussetzungen=voraussetzungen,
+                beschreibung=talent_daten.get('beschreibung', ''),
+                neue_maechte=int(talent_daten.get('neue_maechte', 0)),
+                machtpunkte=int(talent_daten.get('machtpunkte', 0)),
+                custom=True  # Als benutzerdefiniert markieren
+            )
+            
+            success = self.controller.charakter.add_talent(talent)
+            if success:
+                Logger.info(f"Talent '{talent.name}' erfolgreich hinzugefügt.")
+                return True
+            else:
+                Logger.warning(f"Talent '{talent.name}' konnte nicht hinzugefügt werden.")
+                return False
+        except Exception as e:
+            Logger.error(f"Fehler beim Hinzufügen des Talents: {e}")
+            return False
+
     def show_add_dialog(self):
         """Zeigt den Dialog zum Hinzufügen eines neuen Talents"""
         dialog_content = TalentDialogContent()

@@ -7,6 +7,7 @@ des Auswahlens, Abwählens und Überprüfens der Voraussetzungen.
 from kivy.logger import Logger
 from models.talent import Talent
 from functions.macht_funktionen import entferne_macht
+import re
 
 
 def initialisiere_talente(charakter, talent_daten):
@@ -109,7 +110,130 @@ def talent_auswaehlen(charakter, talent_name_key):
         Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
     return False
 
+def pruefe_voraussetzungen(charakter, talent):
+    """
+    Prüft alle Voraussetzungen eines Talents und gibt eine Liste von Fehlermeldungen zurück.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        talent: Das Talent-Objekt
+        
+    Returns:
+        list: Liste von Fehlermeldungen, leer wenn alle Voraussetzungen erfüllt sind
+    """
+    fehlermeldungen = []
+    
+    for voraussetzung in talent.voraussetzungen:
+        # Attributvoraussetzung (z.B. "STÄ W8")
+        attribut_match = re.match(r'^([A-ZÄÖÜ]+)\s+W(\d+)$', voraussetzung)
+        if attribut_match:
+            attribut_kuerzel = attribut_match.group(1)
+            wuerfel_wert = int(attribut_match.group(2))
+            
+            # Attributkürzel zu vollständigem Namen umwandeln
+            attribut_mapping = {
+                'STÄ': 'Stärke',
+                'GES': 'Geschicklichkeit',
+                'KON': 'Konstitution',
+                'VER': 'Verstand',
+                'WIL': 'Willenskraft'
+            }
+            attribut_name = attribut_mapping.get(attribut_kuerzel, attribut_kuerzel)
+            
+            attribut = charakter.attribute.get(attribut_name)
+            if not attribut:
+                fehlermeldungen.append(f"Attribut '{attribut_name}' nicht gefunden.")
+                continue
+            
+            if attribut.wert < wuerfel_wert:
+                fehlermeldungen.append(f"Attribut '{attribut_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{attribut.wert}).")
+            
+            continue
+        
+        # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8")
+        fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)$', voraussetzung)
+        if fertigkeit_match and not attribut_match:  # Nicht bereits als Attribut erkannt
+            fertigkeit_name = fertigkeit_match.group(1)
+            wuerfel_wert = int(fertigkeit_match.group(2))
+            
+            fertigkeit = charakter.fertigkeiten.get(fertigkeit_name)
+            if not fertigkeit:
+                fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' nicht gefunden.")
+                continue
+            
+            if fertigkeit.wert < wuerfel_wert:
+                fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
+            
+            continue
+        
+        # Talentvoraussetzung (z.B. "Glück")
+        talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
+        
+        talent_obj = charakter.talente.get(talent_name)
+        if not talent_obj:
+            fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' wurde nicht gefunden.")
+            continue
+        
+        if not talent_obj.ausgewaehlt:
+            fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' muss ausgewählt sein.")
+    
+    return fehlermeldungen
 
+def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
+    """
+    Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        talent_name_key: Der Name des auszuwählenden Talents
+        ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
+        
+    Returns:
+        str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
+                       "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
+                       True bei Erfolg, False bei Misserfolg
+    """
+    # Prüfen, ob das Talent existiert
+    if talent_name_key not in charakter.talente:
+        Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
+        return False
+        
+    talent = charakter.talente[talent_name_key]
+    
+    # Rang-Prüfung
+    if not ignore_rang_check and is_talent_rang_hoeher_als_charakter(charakter, talent.rang):
+        return "needs_rang_confirmation"
+    
+    # Voraussetzungsprüfung, nur wenn Rangprüfung bestanden oder ignoriert
+    if not hasattr(charakter, 'ignore_voraussetzungen') or not charakter.ignore_voraussetzungen:
+        fehlermeldungen = pruefe_voraussetzungen(charakter, talent)
+        if fehlermeldungen:
+            # Fehlermeldungen als Attribut speichern für UI-Dialog
+            charakter.temp_voraussetzungs_fehler = fehlermeldungen
+            return "needs_voraussetzungen_confirmation"
+    
+    # Kosten überprüfen und Talent auswählen, wenn genügend Punkte vorhanden
+    if charakter.verbleibende_handicap_punkte > 1.5:
+        erfolg = talent_auswaehlen(charakter, talent_name_key)
+        if erfolg:
+            charakter.verbleibende_handicap_punkte -= 2
+            # Reset für zukünftige Prüfungen
+            if hasattr(charakter, 'ignore_voraussetzungen'):
+                charakter.ignore_voraussetzungen = False
+            return True
+    else:
+        if charakter.verbleibende_aufstiege > 0:
+            erfolg = talent_auswaehlen(charakter, talent_name_key)
+            if erfolg:
+                charakter.verbleibende_aufstiege -= 1
+                charakter.update_char_gen_status()
+                # Reset für zukünftige Prüfungen
+                if hasattr(charakter, 'ignore_voraussetzungen'):
+                    charakter.ignore_voraussetzungen = False
+                return True
+        else:    
+            Logger.warning(f"Keine verbleibenden Aufstiege übrig.")
+    return False
 def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     """
     Prüft, ob der Rang des Talents höher ist als der des Charakters.
@@ -173,47 +297,6 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     Logger.debug(f"Rangprüfung - Ergebnis: {is_higher} (Talent-Rang {'>' if is_higher else '<='} Charakter-Rang)")
     
     return is_higher
-
-
-def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
-    """
-    Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
-    
-    Args:
-        charakter: Das Charakter-Objekt
-        talent_name_key: Der Name des auszuwählenden Talents
-        ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
-        
-    Returns:
-        str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
-                       True bei Erfolg, False bei Misserfolg
-    """
-    # Prüfen, ob das Talent existiert
-    if talent_name_key not in charakter.talente:
-        Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
-        return False
-        
-    talent = charakter.talente[talent_name_key]
-    
-    # Rang-Prüfung
-    if not ignore_rang_check and is_talent_rang_hoeher_als_charakter(charakter, talent.rang):
-        return "needs_rang_confirmation"
-    
-    if charakter.verbleibende_handicap_punkte > 1.5:
-        erfolg = talent_auswaehlen(charakter, talent_name_key)
-        if erfolg:
-            charakter.verbleibende_handicap_punkte -= 2
-            return True
-    else:
-        if charakter.verbleibende_aufstiege > 0:
-            erfolg = talent_auswaehlen(charakter, talent_name_key)
-            if erfolg:
-                charakter.verbleibende_aufstiege -= 1
-                charakter.update_char_gen_status()
-                return True
-        else:    
-            Logger.warning(f"Keine verbleibenden Aufstiege übrig.")
-    return False
 
 def entferne_talent(charakter, talent_name_key):
     """

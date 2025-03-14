@@ -91,3 +91,17 @@ class Talent(EventDispatcher):
         talent.ausgewaehlt = data.get('ausgewaehlt', False)
         talent.aktiv = data.get('aktiv', True)
         return talent
+
+    def voraussetzungen_erfuellt(self, charakter):
+        """
+        Prüft, ob der Charakter die Voraussetzungen für das Talent erfüllt.
+        
+        Args:
+            charakter: Das Charakter-Objekt
+            
+        Returns:
+            bool: True wenn alle Voraussetzungen erfüllt sind, sonst False
+        """
+        from functions.talent_funktionen import pruefe_voraussetzungen
+        fehlermeldungen = pruefe_voraussetzungen(charakter, self)
+        return len(fehlermeldungen) == 0

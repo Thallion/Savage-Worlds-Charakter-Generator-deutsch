@@ -129,6 +129,10 @@ class Charakter(EventDispatcher):
         # Superklasse initialisieren
         super().__init__(**kwargs)
 
+        # Temporäres Attribut für Voraussetzungsfehlermeldungen
+        self.temp_voraussetzungs_fehler = []
+        self.ignore_voraussetzungen = False
+
         # Initialisierungen
         self.handicaps = {}
         self.gesamt_handicap_punkte = 0
@@ -591,17 +595,17 @@ class Charakter(EventDispatcher):
 
     def waehle_talent(self, talent_name_key, ignore_rang_check=False):
         """
-        Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
+        Wrapper für talent_funktionen.waehle_talent, mit Unterstützung für ignore_voraussetzungen.
         
         Args:
             talent_name_key: Der Name des auszuwählenden Talents
-            ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
+            ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen
             
         Returns:
-            str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
-                        True bei Erfolg, False bei Misserfolg
+            str oder bool: Wie in talent_funktionen.waehle_talent
         """
-        return talent_funktionen.waehle_talent(self, talent_name_key, ignore_rang_check=ignore_rang_check)
+        # Bestehender Aufruf beibehalten
+        return talent_funktionen.waehle_talent(self, talent_name_key, ignore_rang_check)
 
     def entferne_talent(self, talent_name_key):
         return talent_funktionen.entferne_talent(self, talent_name_key)
