@@ -121,25 +121,58 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     Returns:
         bool: True, wenn der Talent-Rang höher ist, sonst False
     """
-    # Rangordnung definieren (Kleinbuchstaben für besseren Vergleich)
+    # Verbesserte Rangordnung mit verschiedenen Schreibweisen
     rang_werte = {
+        # Vollständige Namen (Kleinbuchstaben)
         "anfänger": 1,
-        "fortgeschritten": 2,
+        "fortgeschritten": 2, 
         "veteran": 3,
         "heroisch": 4,
-        "legendär": 5
+        "legendär": 5,
+        
+        # Abkürzungen
+        "a": 1,
+        "f": 2,
+        "v": 3, 
+        "h": 4,
+        "l": 5,
+        
+        # Englische Bezeichnungen (falls verwendet)
+        "novice": 1,
+        "seasoned": 2,
+        "veteran": 3,
+        "heroic": 4,
+        "legendary": 5
     }
     
-    # Normalisieren (Kleinbuchstaben)
-    charakter_rang = charakter.rang.lower()
-    talent_rang = talent_rang.lower()
+    # Debug-Ausgaben für bessere Fehlerdiagnose
+    Logger.debug(f"Rangprüfung - Charakter-Rang: '{charakter.rang}', Talent-Rang: '{talent_rang}'")
     
-    # Rang-Werte abrufen (mit Fallback auf -1 für unbekannte Ränge)
+    # Normalisieren und besser extrahieren
+    # 1. Auf Kleinbuchstaben konvertieren
+    # 2. Nur den ersten Buchstaben verwenden, wenn keine Übereinstimmung gefunden wird
+    charakter_rang = charakter.rang.lower()
+    talent_rang = talent_rang.lower() if talent_rang else "a"  # Fallback auf Anfänger
+    
+    # Rang-Werte abrufen
     charakter_rang_wert = rang_werte.get(charakter_rang, -1)
     talent_rang_wert = rang_werte.get(talent_rang, -1)
     
-    # Vergleich durchführen
-    return talent_rang_wert > charakter_rang_wert
+    # Wenn keine direkte Übereinstimmung, versuche ersten Buchstaben
+    if charakter_rang_wert == -1:
+        charakter_rang_wert = rang_werte.get(charakter_rang[0] if charakter_rang else "a", 1)
+        
+    if talent_rang_wert == -1:
+        talent_rang_wert = rang_werte.get(talent_rang[0] if talent_rang else "a", 1)
+    
+    # Debug-Ausgaben der numerischen Werte
+    Logger.debug(f"Rangprüfung - Charakter-Wert: {charakter_rang_wert}, Talent-Wert: {talent_rang_wert}")
+    
+    # Vergleich durchführen und Ergebnis loggen
+    is_higher = talent_rang_wert > charakter_rang_wert
+    Logger.debug(f"Rangprüfung - Ergebnis: {is_higher} (Talent-Rang {'>' if is_higher else '<='} Charakter-Rang)")
+    
+    return is_higher
 
 
 def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):

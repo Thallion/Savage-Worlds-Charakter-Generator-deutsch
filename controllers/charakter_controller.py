@@ -300,21 +300,23 @@ class CharakterController(EventDispatcher):
     # ============================
     # Operationen auf Mächten
     # ============================
-    def waehle_macht(self, macht_name):
+    def waehle_macht(self, macht_name, ignore_rang_check=False):
         """
         Wählt eine Macht für den Charakter aus
         
         Args:
             macht_name (str): Name der Macht
+            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung (für UI-Bestätigung)
             
         Returns:
-            bool: True bei Erfolg, False bei Fehler
+            bool oder str: "needs_rang_confirmation" wenn Rang-Bestätigung benötigt wird,
+                        True bei Erfolg, False bei Fehler
         """
         try:
-            success = self.charakter.waehle_macht(macht_name)
-            if success:
+            result = self.charakter.waehle_macht(macht_name, ignore_rang_check=ignore_rang_check)
+            if result is True:  # Nur bei True-Wert, nicht bei "needs_rang_confirmation"
                 self.dispatch('on_charakter_updated')
-            return success
+            return result
         except Exception as e:
             Logger.error(f"Fehler bei Auswahl von Macht {macht_name}: {str(e)}")
             self.dispatch('on_charakter_error', f"Macht-Auswahl fehlgeschlagen: {str(e)}")

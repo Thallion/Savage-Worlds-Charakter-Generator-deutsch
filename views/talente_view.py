@@ -249,17 +249,22 @@ class TalentItemRow(MDBoxLayout):
         super().__init__(**kwargs)
         self.bind(ausgewaehlt=self.on_ausgewaehlt_changed)
         self.bind(index=self.update_color)  # Wichtig: Farbaktualisierung bei Indexänderung
+        self.dialog = None
 
     def _get_controller(self):
         """Hilfsmethode, um auf den Controller zuzugreifen."""
         app = MDApp.get_running_app()
         return app.controller if hasattr(app, 'controller') else None
+        
+    def _get_talente_widget(self):
+        """Hilfsmethode, um auf das TalenteWidget zuzugreifen."""
+        app = MDApp.get_running_app()
+        return app.get_widget_by_tab_text('Talente', 'talente_widget')
 
     def _refresh_ui(self):
         """Aktualisiert die UI nach einer Änderung am Talent-Status."""
         Logger.debug(f"TalentItemRow: Starte Widget-Aktualisierung")
-        app = MDApp.get_running_app()
-        widget = app.get_widget_by_tab_text('Talente', 'talente_widget')
+        widget = self._get_talente_widget()
         if widget:
             Logger.debug("TalentItemRow: TalenteWidget gefunden, führe refresh aus")
             Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
@@ -269,7 +274,7 @@ class TalentItemRow(MDBoxLayout):
     def waehle_talent(self):
         """
         Wählt ein Talent aus.
-        Prüft vorher, ob genügend Punkte verfügbar sind und zeigt ggf. einen Warnhinweis.
+        Prüft vorher, ob genügend Punkte verfügbar sind und leitet Auswahl an TalenteWidget weiter.
         """
         Logger.debug(f"TalentItemRow: Start waehle_talent für {self.talent_name}")
         controller = self._get_controller()
@@ -285,13 +290,12 @@ class TalentItemRow(MDBoxLayout):
             self._show_no_points_dialog()
             return
 
-        try:
-            controller.waehle_talent(self.name_key)
-            self.ausgewaehlt = True
-            Logger.debug(f"TalentItemRow: {self.talent_name} erfolgreich ausgewählt")
-            self._refresh_ui()
-        except Exception as e:
-            Logger.error(f"Fehler beim Auswählen des Talents: {str(e)}")
+        # Delegieren der Rangprüfung und Talentauswahl an TalenteWidget
+        talente_widget = self._get_talente_widget()
+        if talente_widget:
+            talente_widget._on_talent_selected(self.name_key)
+        else:
+            Logger.error("TalentItemRow: Konnte TalenteWidget nicht finden")
 
     def _show_no_points_dialog(self):
         """Zeigt einen Dialog an, wenn nicht genügend Punkte verfügbar sind."""
@@ -382,89 +386,6 @@ class TalentItemRow(MDBoxLayout):
         # Bei Änderung des Auswahlstatus auch die Umrandung aktualisieren
         self.line_color = self._get_line_color()
 
-    def _on_talent_selected(self, talent_name):
-        """
-        Wird aufgerufen, wenn ein Talent ausgewählt wird.
-        Prüft den Rang und zeigt ggf. einen Warnhinweis an.
-        
-        Args:
-            talent_name (str): Der Name des ausgewählten Talents
-        """
-        result = self.controller.waehle_talent(talent_name)
-        if result == "needs_rang_confirmation":
-            self._show_rang_warning_dialog(talent_name)
-        elif result:
-            # Talent erfolgreich ausgewählt
-            self.refresh_widget()
-        else:
-            # Fehler beim Auswählen des Talents
-            Logger.warning(f"Fehler beim Auswählen des Talents '{talent_name}'")
-
-    def _show_rang_warning_dialog(self, talent_name):
-        """Zeigt einen Dialog zur Warnung vor der Auswahl eines Talents mit höherem Rang an."""
-        talent = self.controller.charakter.talente.get(talent_name)
-        if not talent:
-            Logger.error(f"Talent '{talent_name}' für Dialog nicht gefunden.")
-            return
-            
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
-        )
-        
-        warning_label = MDLabel(
-            text=f"Das Talent '{talent_name}' (Rang: {talent.rang}) erfordert einen höheren Rang als deinen aktuellen ({self.controller.charakter.rang}). Möchtest du es trotzdem auswählen?",
-            size_hint_y=None,
-            height=dp(80),
-            theme_text_color="Secondary",
-            halign="left",
-            valign="middle"
-        )
-        content.add_widget(warning_label)
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Rang-Warnung",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.close_dialog(),
-                ),
-                MDButton(
-                    MDButtonText(text="Trotzdem auswählen"),
-                    style="text",
-                    on_release=lambda x: self._confirm_talent_selection(talent_name),
-                ),
-                spacing="8dp",
-            ),
-        )
-        self.dialog.open()
-        
-    def close_dialog(self):
-        """Schließt den Dialog."""
-        if hasattr(self, 'dialog') and self.dialog:
-            self.dialog.dismiss()
-            
-    def _confirm_talent_selection(self, talent_name):
-        """Führt die Talentauswahl mit ignorierter Rangprüfung durch."""
-        self.close_dialog()
-        # Den Controller mit dem ignore_rang_check Flag aufrufen
-        result = self.controller.waehle_talent(talent_name, ignore_rang_check=True)
-        if result:
-            # Talent erfolgreich ausgewählt
-            self.refresh_widget()
-        else:
-            # Fehler beim Auswählen des Talents
-            Logger.warning(f"Fehler beim Auswählen des Talents '{talent_name}' trotz ignorierter Rangprüfung.")
 
 class TalenteWidget(MDBoxLayout):
     """
@@ -481,6 +402,7 @@ class TalenteWidget(MDBoxLayout):
         super().__init__(**kwargs)
         self._initialize_controller()
         self.menu = None
+        self.dialog = None  # Für die Rangprüfungs-Dialoge
         Clock.schedule_once(self.post_init, 0)
 
     def toggle_only_selected_items(self, value):
@@ -509,9 +431,11 @@ class TalenteWidget(MDBoxLayout):
                 (talent.kategorie is None or talent.kategorie.lower() != selected_kategorie)):
                 continue
                 
-            # Suchtext-Filter
-            if (search_term in talent.name.lower() or 
-                search_term in talent.beschreibung.lower()):
+            # Suchtext-Filter (verarbeite auch leeren Suchtext)
+            if not search_term or (
+                search_term in talent.name.lower() or 
+                search_term in talent.beschreibung.lower()
+            ):
                 
                 talent_data = {
                     'viewclass': 'TalentItemRow',
@@ -594,7 +518,8 @@ class TalenteWidget(MDBoxLayout):
         if self.current_sort_option == 'Name':
             data.sort(key=lambda x: x['talent_name'].lower(), reverse=reverse_order)
         elif self.current_sort_option == 'Rang':
-            data.sort(key=lambda x: RANG_MAPPING.get(x['rang'], float('inf')), reverse=reverse_order)
+            # Für erste Zeichenbasierte Sortierung
+            data.sort(key=lambda x: RANG_MAPPING.get(x['rang'][0] if x['rang'] else 'A', float('inf')), reverse=reverse_order)
         elif self.current_sort_option == 'Kategorie':
             data.sort(key=lambda x: (x['kategorie'] or '').lower(), reverse=reverse_order)
             
@@ -671,3 +596,90 @@ class TalenteWidget(MDBoxLayout):
         self.ids.category_label.text = text
         self.menu.dismiss()
         self.filter_talente()
+        
+    def _on_talent_selected(self, talent_name):
+        """
+        Wird aufgerufen, wenn ein Talent ausgewählt wird.
+        Prüft den Rang und zeigt ggf. einen Warnhinweis an.
+        
+        Args:
+            talent_name (str): Der Name des ausgewählten Talents
+        """
+        result = self.controller.waehle_talent(talent_name)
+        if result == "needs_rang_confirmation":
+            self._show_rang_warning_dialog(talent_name)
+        elif result:
+            # Talent erfolgreich ausgewählt
+            self.refresh_widget()
+        else:
+            # Fehler beim Auswählen des Talents
+            Logger.warning(f"Fehler beim Auswählen des Talents '{talent_name}'")
+            self.refresh_widget()  # UI aktualisieren
+
+    def _show_rang_warning_dialog(self, talent_name):
+        """Zeigt einen Dialog zur Warnung vor der Auswahl eines Talents mit höherem Rang an."""
+        talent = self.controller.charakter.talente.get(talent_name)
+        if not talent:
+            Logger.error(f"Talent '{talent_name}' für Dialog nicht gefunden.")
+            return
+            
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text=f"Das Talent '{talent_name}' (Rang: {talent.rang}) erfordert einen höheren Rang als deinen aktuellen ({self.controller.charakter.rang}). Möchtest du es trotzdem auswählen?",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Rang-Warnung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.close_dialog(),
+                ),
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_talent_selection(talent_name),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+    
+    def close_dialog(self):
+        """Schließt den Dialog und aktualisiert die UI."""
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
+            self.refresh_widget()  # UI aktualisieren
+            
+    def _confirm_talent_selection(self, talent_name):
+        """Führt die Talentauswahl mit ignorierter Rangprüfung durch."""
+        self.close_dialog()
+        # Den Controller mit dem ignore_rang_check Flag aufrufen
+        result = self.controller.waehle_talent(talent_name, ignore_rang_check=True)
+        if result:
+            # Talent erfolgreich ausgewählt
+            self.refresh_widget()
+        else:
+            # Fehler beim Auswählen des Talents
+            Logger.warning(f"Fehler beim Auswählen des Talents '{talent_name}' trotz ignorierter Rangprüfung.")
+            self.refresh_widget()  # UI aktualisieren

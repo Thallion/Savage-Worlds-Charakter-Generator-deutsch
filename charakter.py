@@ -589,8 +589,19 @@ class Charakter(EventDispatcher):
     def talent_auswaehlen(self, talent_name_key):
         return talent_funktionen.talent_auswaehlen(self, talent_name_key)
 
-    def waehle_talent(self, talent_name_key):
-        return talent_funktionen.waehle_talent(self, talent_name_key)
+    def waehle_talent(self, talent_name_key, ignore_rang_check=False):
+        """
+        Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
+        
+        Args:
+            talent_name_key: Der Name des auszuwählenden Talents
+            ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
+            
+        Returns:
+            str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
+                        True bei Erfolg, False bei Misserfolg
+        """
+        return talent_funktionen.waehle_talent(self, talent_name_key, ignore_rang_check=ignore_rang_check)
 
     def entferne_talent(self, talent_name_key):
         return talent_funktionen.entferne_talent(self, talent_name_key)
@@ -617,8 +628,19 @@ class Charakter(EventDispatcher):
     def initialisiere_maechte(self, maechte_daten):
         macht_funktionen.initialisiere_maechte(self, maechte_daten)
 
-    def waehle_macht(self, macht_name_key):
-        return macht_funktionen.waehle_macht(self, macht_name_key)
+    def waehle_macht(self, macht_name_key, ignore_rang_check=False):
+        """
+        Wählt eine Macht aus und aktualisiert die verfügbaren Mächte des Charakters.
+        
+        Args:
+            macht_name_key: Der Name der Macht
+            ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
+            
+        Returns:
+            str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
+                        True bei Erfolg, False bei Misserfolg
+        """
+        return macht_funktionen.waehle_macht(self, macht_name_key, ignore_rang_check=ignore_rang_check)
 
     def entferne_macht(self, macht_name_key):
         return macht_funktionen.entferne_macht(self, macht_name_key)

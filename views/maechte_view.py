@@ -6,7 +6,7 @@ Stellt die Benutzeroberfläche zur Anzeige und Verwaltung von Mächten bereit.
 
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ObjectProperty, NumericProperty, BooleanProperty
+from kivy.properties import StringProperty, ObjectProperty, NumericProperty, BooleanProperty, ListProperty
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.tooltip import MDTooltip
@@ -245,7 +245,8 @@ class MachtItemRow(MDBoxLayout):
     def waehle_macht(self):
         """
         Wählt eine Macht aus.
-        Prüft vorher, ob genügend verfügbare Mächte vorhanden sind und zeigt ggf. einen Warnhinweis.
+        Prüft vorher, ob genügend verfügbare Mächte vorhanden sind und leitet die Auswahl 
+        an das Hauptwidget zur Rangprüfung weiter.
         """
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
@@ -257,16 +258,22 @@ class MachtItemRow(MDBoxLayout):
             self._show_no_powers_dialog()
             return
 
-        success = self.controller.waehle_macht(self.macht_name)
-        if success:
-            Logger.debug(f"Macht '{self.macht_name}' ausgewählt.")
-            if self.macht:
-                self.macht.ausgewaehlt = True
-                self.line_color = self._get_line_color()  # Umrandung aktualisieren
-                self.canvas.ask_update()
-            self._refresh_ui()
+        # Delegation an das MaechteWidget für Rangprüfung
+        if self.maechte_widget:
+            self.maechte_widget._on_macht_selected(self.macht_name)
         else:
-            Logger.warning(f"Auswahl der Macht '{self.macht_name}' fehlgeschlagen.")
+            Logger.error("MachtItemRow: MaechteWidget nicht verfügbar für Rangprüfung")
+            # Fallback zur direkten Kontrollernutzung
+            success = self.controller.waehle_macht(self.macht_name)
+            if success:
+                Logger.debug(f"Macht '{self.macht_name}' ausgewählt.")
+                if self.macht:
+                    self.macht.ausgewaehlt = True
+                    self.line_color = self._get_line_color()  # Umrandung aktualisieren
+                    self.canvas.ask_update()
+                self._refresh_ui()
+            else:
+                Logger.warning(f"Auswahl der Macht '{self.macht_name}' fehlgeschlagen.")
 
     def _show_no_powers_dialog(self):
         """Zeigt einen Dialog an, wenn keine verfügbaren Mächte mehr vorhanden sind."""
@@ -362,7 +369,7 @@ class MaechteWidget(MDBoxLayout):
     """
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
-    only_selected_items = BooleanProperty(False)  # Neue Property für den Filter
+    only_selected_items = BooleanProperty(False)  # Property für den Filter
 
     # Mapping für Ränge, um numerische Sortierung zu ermöglichen
     RANG_MAPPING = {
@@ -378,6 +385,7 @@ class MaechteWidget(MDBoxLayout):
         """Initialisiert das MaechteWidget und setzt Grundkonfiguration."""
         super().__init__(**kwargs)
         self._initialize_controller()
+        self.dialog = None  # Dialog-Referenz für Rangprüfung
         Clock.schedule_once(self.post_init, 0)
 
     def toggle_only_selected_items(self, value):
@@ -509,3 +517,105 @@ class MaechteWidget(MDBoxLayout):
         # Neu filtern und anzeigen
         self.filter_maechte()
         Logger.debug("MaechteWidget: Widget aktualisiert")
+        
+    # NEU HINZUGEFÜGTE METHODEN FÜR DIE RANGPRÜFUNG
+
+    def _on_macht_selected(self, macht_name):
+        """
+        Wird aufgerufen, wenn eine Macht ausgewählt wird.
+        Prüft den Rang und zeigt ggf. einen Warnhinweis an.
+        
+        Args:
+            macht_name (str): Name der auszuwählenden Macht
+        """
+        result = self.controller.waehle_macht(macht_name)
+        if result == "needs_rang_confirmation":
+            self._show_rang_warning_dialog(macht_name)
+        elif result:
+            # Macht erfolgreich ausgewählt
+            Logger.debug(f"Macht '{macht_name}' erfolgreich ausgewählt")
+            self.refresh_widget()
+        else:
+            # Fehler beim Auswählen der Macht
+            Logger.warning(f"Fehler beim Auswählen der Macht '{macht_name}'")
+            self.refresh_widget()  # UI trotzdem aktualisieren
+
+    def _show_rang_warning_dialog(self, macht_name):
+        """
+        Zeigt einen Dialog zur Warnung vor der Auswahl einer Macht mit höherem Rang an.
+        
+        Args:
+            macht_name (str): Name der Macht mit Rangprüfungswarnung
+        """
+        macht = self.controller.charakter.maechte.get(macht_name)
+        if not macht:
+            Logger.error(f"Macht '{macht_name}' für Dialog nicht gefunden.")
+            return
+            
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text=f"Die Macht '{macht_name}' (Rang: {macht.rang}) erfordert einen höheren Rang als deinen aktuellen ({self.controller.charakter.rang}). Möchtest du sie trotzdem auswählen?",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Rang-Warnung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.close_dialog(),
+                ),
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_macht_selection(macht_name),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def close_dialog(self):
+        """Schließt den Dialog und aktualisiert die UI."""
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
+            self.dialog = None
+            self.refresh_widget()
+            
+    def _confirm_macht_selection(self, macht_name):
+        """
+        Führt die Machtauswahl mit ignorierter Rangprüfung durch.
+        
+        Args:
+            macht_name (str): Name der Macht, die trotz Rangunterschied ausgewählt werden soll
+        """
+        self.close_dialog()
+        # Den Controller mit dem ignore_rang_check Flag aufrufen
+        result = self.controller.waehle_macht(macht_name, ignore_rang_check=True)
+        if result:
+            # Macht erfolgreich ausgewählt
+            Logger.info(f"Macht '{macht_name}' trotz Rangunterschied ausgewählt")
+            self.refresh_widget()
+        else:
+            # Fehler beim Auswählen der Macht
+            Logger.warning(f"Fehler beim Auswählen der Macht '{macht_name}' trotz ignorierter Rangprüfung.")
+            self.refresh_widget()

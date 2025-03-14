@@ -40,21 +40,91 @@ def initialisiere_maechte(charakter, maechte_daten):
         Logger.error(f"Fehler bei der Initialisierung der Mächte: {e}")
 
 
-def waehle_macht(charakter, macht_name_key):
+def is_macht_rang_hoeher_als_charakter(charakter, macht_rang):
+    """
+    Prüft, ob der Rang der Macht höher ist als der des Charakters.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        macht_rang: Der Rang der Macht als String
+        
+    Returns:
+        bool: True, wenn der Macht-Rang höher ist, sonst False
+    """
+    # Verbesserte Rangordnung mit verschiedenen Schreibweisen
+    rang_werte = {
+        # Vollständige Namen (Kleinbuchstaben)
+        "anfänger": 1,
+        "fortgeschritten": 2, 
+        "veteran": 3,
+        "heroisch": 4,
+        "legendär": 5,
+        
+        # Abkürzungen
+        "a": 1,
+        "f": 2,
+        "v": 3, 
+        "h": 4,
+        "l": 5,
+        
+        # Englische Bezeichnungen (falls verwendet)
+        "novice": 1,
+        "seasoned": 2,
+        "veteran": 3,
+        "heroic": 4,
+        "legendary": 5
+    }
+    
+    # Debug-Ausgaben für bessere Fehlerdiagnose
+    Logger.debug(f"Rangprüfung - Charakter-Rang: '{charakter.rang}', Macht-Rang: '{macht_rang}'")
+    
+    # Normalisieren und besser extrahieren
+    # 1. Auf Kleinbuchstaben konvertieren
+    # 2. Nur den ersten Buchstaben verwenden, wenn keine Übereinstimmung gefunden wird
+    charakter_rang = charakter.rang.lower()
+    macht_rang = macht_rang.lower() if macht_rang else "a"  # Fallback auf Anfänger
+    
+    # Rang-Werte abrufen
+    charakter_rang_wert = rang_werte.get(charakter_rang, -1)
+    macht_rang_wert = rang_werte.get(macht_rang, -1)
+    
+    # Wenn keine direkte Übereinstimmung, versuche ersten Buchstaben
+    if charakter_rang_wert == -1:
+        charakter_rang_wert = rang_werte.get(charakter_rang[0] if charakter_rang else "a", 1)
+        
+    if macht_rang_wert == -1:
+        macht_rang_wert = rang_werte.get(macht_rang[0] if macht_rang else "a", 1)
+    
+    # Debug-Ausgaben der numerischen Werte
+    Logger.debug(f"Rangprüfung - Charakter-Wert: {charakter_rang_wert}, Macht-Wert: {macht_rang_wert}")
+    
+    # Vergleich durchführen und Ergebnis loggen
+    is_higher = macht_rang_wert > charakter_rang_wert
+    Logger.debug(f"Rangprüfung - Ergebnis: {is_higher} (Macht-Rang {'>' if is_higher else '<='} Charakter-Rang)")
+    
+    return is_higher
+
+def waehle_macht(charakter, macht_name_key, ignore_rang_check=False):
     """
     Wählt eine Macht aus und aktualisiert die verfügbaren Mächte des Charakters.
     
     Args:
         charakter: Das Charakter-Objekt
         macht_name_key: Der Name der Macht
+        ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
         
     Returns:
-        True bei Erfolg, False bei Misserfolg
+        str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
+                       True bei Erfolg, False bei Misserfolg
     """
     if charakter.verfuegbare_maechte > 0:
         if macht_name_key in charakter.maechte:
             macht = charakter.maechte[macht_name_key]
             if not macht.ausgewaehlt:
+                # Rangprüfung
+                if not ignore_rang_check and is_macht_rang_hoeher_als_charakter(charakter, macht.rang):
+                    return "needs_rang_confirmation"
+                
                 if macht.voraussetzungen_erfuellt(charakter):
                     macht.auswaehlen()
                     charakter.verfuegbare_maechte -= 1
@@ -71,7 +141,6 @@ def waehle_macht(charakter, macht_name_key):
     else:
         Logger.warning("Keine verfügbaren Mächte mehr zum Auswählen.")
     return False
-
 
 def entferne_macht(charakter, macht_name_key, adjust_verfuegbare_maechte=True):
     """
