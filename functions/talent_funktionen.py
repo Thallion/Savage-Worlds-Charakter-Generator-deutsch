@@ -81,13 +81,14 @@ def get_freie_talente(charakter):
     return frei_talente
 
 
-def talent_auswaehlen(charakter, talent_name_key):
+def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
     """
     Wählt ein Talent aus und führt die entsprechenden Anpassungen am Charakter durch.
     
     Args:
         charakter: Das Charakter-Objekt
         talent_name_key: Der Name des auszuwählenden Talents
+        skip_prereq_check: Voraussetzungsprüfung überspringen (default: False)
         
     Returns:
         True bei Erfolg, False bei Misserfolg
@@ -95,11 +96,15 @@ def talent_auswaehlen(charakter, talent_name_key):
     talent = charakter.talente.get(talent_name_key)
     if talent:
         if not talent.ausgewaehlt:
-            if talent.voraussetzungen_erfuellt(charakter):
-                talent.auswaehlen(charakter)
+            # WICHTIG: Hier die Bedingung anpassen
+            # Wenn skip_prereq_check True ist, überspringen wir die Voraussetzungsprüfung vollständig
+            if skip_prereq_check or talent.voraussetzungen_erfuellt(charakter):
+                # Talent auswählen und Anpassungen vornehmen
+                talent.ausgewaehlt = True
                 charakter.verfuegbare_maechte += talent.neue_maechte
                 charakter.erhoehe_machtpunkte(talent.machtpunkte)
-                charakter.selected_talente.append(talent_name_key)
+                if talent_name_key not in charakter.selected_talente:
+                    charakter.selected_talente.append(talent_name_key)
                 Logger.info(f"Talent '{talent_name_key}' ausgewählt.")
                 return True
             else:
@@ -109,6 +114,18 @@ def talent_auswaehlen(charakter, talent_name_key):
     else:
         Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
     return False
+
+"""
+Modul für die Verwaltung von Talenten im Charakter.
+Dieses Modul enthält Funktionen zur Verwaltung von Talenten, einschließlich
+des Auswahlens, Abwählens und Überprüfens der Voraussetzungen.
+"""
+
+from kivy.logger import Logger
+from models.talent import Talent
+from functions.macht_funktionen import entferne_macht
+import re  # Wichtig für die Regex-Muster
+
 
 def pruefe_voraussetzungen(charakter, talent):
     """
@@ -122,6 +139,9 @@ def pruefe_voraussetzungen(charakter, talent):
         list: Liste von Fehlermeldungen, leer wenn alle Voraussetzungen erfüllt sind
     """
     fehlermeldungen = []
+    
+    # Debug-Ausgabe der Voraussetzungen
+    Logger.debug(f"Prüfe Voraussetzungen für Talent '{talent.name}': {talent.voraussetzungen}")
     
     for voraussetzung in talent.voraussetzungen:
         # Attributvoraussetzung (z.B. "STÄ W8")
@@ -177,7 +197,12 @@ def pruefe_voraussetzungen(charakter, talent):
         if not talent_obj.ausgewaehlt:
             fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' muss ausgewählt sein.")
     
+    # Debug-Ausgabe der gefundenen Fehlermeldungen
+    if fehlermeldungen:
+        Logger.debug(f"Voraussetzungen für Talent '{talent.name}' nicht erfüllt: {fehlermeldungen}")
+    
     return fehlermeldungen
+
 
 def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
     """
@@ -204,36 +229,49 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
     if not ignore_rang_check and is_talent_rang_hoeher_als_charakter(charakter, talent.rang):
         return "needs_rang_confirmation"
     
-    # Voraussetzungsprüfung, nur wenn Rangprüfung bestanden oder ignoriert
+    # Voraussetzungsprüfung, nur wenn das ignore_voraussetzungen-Flag nicht gesetzt ist
     if not hasattr(charakter, 'ignore_voraussetzungen') or not charakter.ignore_voraussetzungen:
         fehlermeldungen = pruefe_voraussetzungen(charakter, talent)
         if fehlermeldungen:
             # Fehlermeldungen als Attribut speichern für UI-Dialog
             charakter.temp_voraussetzungs_fehler = fehlermeldungen
+            Logger.debug(f"Rückgabe 'needs_voraussetzungen_confirmation' für {talent_name_key}")
             return "needs_voraussetzungen_confirmation"
     
-    # Kosten überprüfen und Talent auswählen, wenn genügend Punkte vorhanden
+    # Hier wird das Talent ausgewählt, entweder mit Handicap-Punkten oder Aufstiegen
+    # Option 1: Auswahl mit Handicap-Punkten
     if charakter.verbleibende_handicap_punkte > 1.5:
-        erfolg = talent_auswaehlen(charakter, talent_name_key)
+        # Wenn das ignore_voraussetzungen-Flag gesetzt ist, übergeben wir True für skip_prereq_check
+        skip_prereq = hasattr(charakter, 'ignore_voraussetzungen') and charakter.ignore_voraussetzungen
+        erfolg = talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=skip_prereq)
+        
         if erfolg:
             charakter.verbleibende_handicap_punkte -= 2
             # Reset für zukünftige Prüfungen
             if hasattr(charakter, 'ignore_voraussetzungen'):
                 charakter.ignore_voraussetzungen = False
+                Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
             return True
+    # Option 2: Auswahl mit Aufstiegen
     else:
         if charakter.verbleibende_aufstiege > 0:
-            erfolg = talent_auswaehlen(charakter, talent_name_key)
+            # Wenn das ignore_voraussetzungen-Flag gesetzt ist, übergeben wir True für skip_prereq_check
+            skip_prereq = hasattr(charakter, 'ignore_voraussetzungen') and charakter.ignore_voraussetzungen
+            erfolg = talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=skip_prereq)
+            
             if erfolg:
                 charakter.verbleibende_aufstiege -= 1
                 charakter.update_char_gen_status()
                 # Reset für zukünftige Prüfungen
                 if hasattr(charakter, 'ignore_voraussetzungen'):
                     charakter.ignore_voraussetzungen = False
+                    Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
                 return True
         else:    
             Logger.warning(f"Keine verbleibenden Aufstiege übrig.")
+    
     return False
+
 def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     """
     Prüft, ob der Rang des Talents höher ist als der des Charakters.

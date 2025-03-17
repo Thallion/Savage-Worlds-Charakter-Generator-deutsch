@@ -244,22 +244,22 @@ class CharakterController(EventDispatcher):
         
         Args:
             talent_name (str): Name des Talents
-            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung (für UI-Bestätigung)
-            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungsprüfung
+            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung
+            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
             
         Returns:
-            bool oder str: "needs_rang_confirmation" wenn Rang-Bestätigung benötigt wird,
-                        "needs_voraussetzungen_confirmation" wenn Voraussetzungs-Bestätigung benötigt wird,
-                        True bei Erfolg, False bei Fehler
+            bool oder str: Ergebniscode oder Erfolgsstatus
         """
         try:
-            # Wenn Voraussetzungen ignoriert werden sollen, setzen wir das Flag direkt im Charakter
+            # Flag nur setzen, wenn es angefordert wurde
             if ignore_voraussetzungen:
                 self.charakter.ignore_voraussetzungen = True
+                Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
                 
+            # Talent auswählen
             result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
             
-            if result is True:  # Nur bei True-Wert, nicht bei Bestätigungsanfragen
+            if result is True:
                 self.dispatch('on_charakter_updated')
             return result
         except Exception as e:
