@@ -256,7 +256,7 @@ class CharakterController(EventDispatcher):
                 self.charakter.ignore_voraussetzungen = True
                 Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
                 
-            # Talent auswählen
+            # Parameter weitergeben
             result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
             
             if result is True:

@@ -26,6 +26,9 @@ from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
 
+# Import der Funktionen für Voraussetzungsprüfung
+from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
+
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
@@ -123,6 +126,27 @@ KV_STRING = '''
                 
             MDLabel:
                 text: "Nur ausgewählte"
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_y": .5}
+
+        # Neue Checkbox für Voraussetzungen-Filter
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: dp(240)
+            spacing: dp(5)
+            
+            MDCheckbox:
+                id: only_available_checkbox
+                size_hint: None, None
+                size: dp(40), dp(40)
+                active: root.only_available_talents
+                on_active: root.toggle_only_available_talents(self.active)
+                pos_hint: {"center_y": .5}
+                
+            MDLabel:
+                text: "Voraussetzung erfüllt"
                 size_hint_y: None
                 height: dp(40)
                 pos_hint: {"center_y": .5}
@@ -330,7 +354,8 @@ class TalentItemRow(MDBoxLayout):
             # Verschiedene Ergebnisse verarbeiten
             if result == "needs_rang_confirmation":
                 Logger.debug(f"[TalentItemRow] Zeige Rang-Bestätigungsdialog für {self.talent_name}")
-                self.show_rang_confirmation_dialog()
+                # Hier den talent_name Parameter mitgeben
+                self.show_rang_confirmation_dialog(self.talent_name)
             elif result == "needs_voraussetzungen_confirmation":
                 Logger.debug(f"[TalentItemRow] Zeige Voraussetzungs-Bestätigungsdialog für {self.talent_name}")
                 self.show_voraussetzungen_confirmation_dialog()
@@ -431,7 +456,7 @@ class TalentItemRow(MDBoxLayout):
             result = self.controller.waehle_talent(self.talent_name, ignore_voraussetzungen=True)
             
             if result == "needs_rang_confirmation":
-                self.show_rang_confirmation_dialog()
+                self.show_rang_confirmation_dialog(self.talent_name)
             elif result:
                 Logger.info(f"Talent '{self.talent_name}' trotz fehlender Voraussetzungen ausgewählt")
                 self._aktualisiere_talente_widget()
@@ -528,69 +553,88 @@ class TalentItemRow(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Anzeigen des Fehlerdialogs: {e}")
 
-    def show_rang_confirmation_dialog(self):
+    def show_rang_confirmation_dialog(self, talent_name):
         """
-        Zeigt einen Dialog zur Bestätigung der Auswahl trotz niedrigem Rang.
+        Zeigt einen Dialog zur Bestätigung der Auswahl eines Talents trotz niedrigem Rang.
+        
+        Args:
+            talent_name (str): Name des Talents mit Rangprüfungswarnung
         """
-        try:
-            self.rang_dialog = MDDialog(
-                MDDialogHeadlineText(text="Rang nicht ausreichend"),
-                MDBoxLayout(
-                    orientation="vertical",
-                    spacing=dp(10),
-                    padding=dp(20),
-                    adaptive_height=True,
-                    children=[
-                        MDLabel(
-                            text="Dein Charakter hat nicht den erforderlichen Rang für dieses Talent.",
-                            theme_text_color="Secondary",
-                            size_hint_y=None,
-                            height=dp(30)
-                        ),
-                        MDLabel(
-                            text="Möchtest du es trotzdem auswählen?",
-                            size_hint_y=None,
-                            height=dp(30),
-                            theme_text_color="Secondary",
-                            bold=True
-                        )
-                    ]
+        talent = self.controller.charakter.talente.get(talent_name)
+        if not talent:
+            Logger.error(f"Talent '{talent_name}' für Dialog nicht gefunden.")
+            return
+            
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text=f"Das Talent '{talent_name}' (Rang: {talent.rang}) erfordert einen höheren Rang als deinen aktuellen ({self.controller.charakter.rang}). Möchtest du es trotzdem auswählen?",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.rang_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Rang-Warnung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.rang_dialog.dismiss(),
                 ),
-                MDDialogButtonContainer(
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=lambda x: self.rang_dialog.dismiss(),
-                    ),
-                    MDButton(
-                        MDButtonText(text="Trotzdem auswählen"),
-                        style="text",
-                        on_release=lambda x: self._confirm_trotz_rang(),
-                    ),
-                    spacing="8dp",
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_trotz_rang(),
                 ),
-            )
-            self.rang_dialog.open()
-        except Exception as e:
-            Logger.error(f"Fehler beim Anzeigen des Rang-Dialogs: {e}")            
+                spacing="8dp",
+            ),
+        )
+        self.rang_dialog.open()      
 
     def _confirm_trotz_rang(self):
         """
-        Führt die Auswahl des Talents trotz niedrigem Rang durch.
+        Bestätigt die Auswahl eines Talents trotz niedrigem Rang.
+        Führt einen zweiten Aufruf mit ignore_rang_check=True durch.
         """
         try:
+            # Dialog schließen
             self.rang_dialog.dismiss()
+            
+            # Erneuter Aufruf mit ignore_rang_check=True
             result = self.controller.waehle_talent(self.talent_name, ignore_rang_check=True)
             
+            # Ergebnis des zweiten Aufrufs verarbeiten
             if result == "needs_voraussetzungen_confirmation":
+                # Wenn Voraussetzungen nicht erfüllt, zeige diesen Dialog an
+                Logger.debug(f"Nach Rang-Bestätigung: Zeige Voraussetzungs-Dialog für {self.talent_name}")
                 self.show_voraussetzungen_confirmation_dialog()
             elif result:
-                Logger.info(f"Talent '{self.talent_name}' trotz Rangunterschied ausgewählt")
+                # Erfolgreich
+                Logger.debug(f"Talent '{self.talent_name}' erfolgreich ausgewählt")
                 self._aktualisiere_talente_widget()
             else:
-                Logger.warning(f"Talent '{self.talent_name}' konnte nicht ausgewählt werden.")
+                # Fehlgeschlagen
+                Logger.warning(f"Fehler beim Auswählen des Talents nach Rang-Bestätigung")
+                
         except Exception as e:
-            Logger.error(f"Fehler bei der Bestätigung des Talents: {e}")   
+            Logger.error(f"Fehler bei Bestätigung trotz Rang: {e}")
+            self.show_error_dialog(f"Fehler: {str(e)}")
 
 class TalenteWidget(MDBoxLayout):
     """
@@ -601,6 +645,7 @@ class TalenteWidget(MDBoxLayout):
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
     only_selected_items = BooleanProperty(False)  # Property für den Filter
+    only_available_talents = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         """Initialisiert das TalenteWidget und setzt Grundkonfiguration."""
@@ -619,6 +664,17 @@ class TalenteWidget(MDBoxLayout):
         self.filter_talente()
         Logger.debug(f"Filter 'Nur ausgewählte Talente' gesetzt auf: {value}")
 
+    def toggle_only_available_talents(self, value):
+        """
+        Schaltet den Filter für 'Nur Talente mit erfüllten Voraussetzungen' um.
+        
+        Args:
+            value (bool): Neuer Status der Checkbox
+        """
+        self.only_available_talents = value
+        self.refresh_widget()
+        Logger.debug(f"Filter 'Nur verfügbare Talente' gesetzt auf: {value}")
+
     def _filter_talente_data(self, alle_talente, search_term, selected_kategorie):
         """
         Filtert die Talent-Daten nach Suchbegriff, Kategorie und ggf. Auswahlstatus.
@@ -630,6 +686,21 @@ class TalenteWidget(MDBoxLayout):
             # Filter für "Nur ausgewählte Elemente"
             if self.only_selected_items and not talent.ausgewaehlt:
                 continue
+            
+            # Filter für "Nur verfügbare Talente anzeigen"
+            if self.only_available_talents and not talent.ausgewaehlt:
+                # Prüfe Voraussetzungen
+                fehlermeldungen = pruefe_voraussetzungen(self.controller.charakter, talent)
+                
+                # Prüfe Rang
+                rang_zu_hoch = is_talent_rang_hoeher_als_charakter(
+                    self.controller.charakter, 
+                    talent.rang
+                )
+                
+                # Wenn Voraussetzungen nicht erfüllt oder Rang zu hoch, überspringen
+                if fehlermeldungen or rang_zu_hoch:
+                    continue
                 
             # Kategorie-Filter
             if (selected_kategorie != ALL_CATEGORIES_TEXT.lower() and 

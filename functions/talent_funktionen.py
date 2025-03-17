@@ -144,6 +144,20 @@ def pruefe_voraussetzungen(charakter, talent):
     Logger.debug(f"Prüfe Voraussetzungen für Talent '{talent.name}': {talent.voraussetzungen}")
     
     for voraussetzung in talent.voraussetzungen:
+        # Spezialfall: AH (Arkaner Hintergrund)
+        if voraussetzung == "AH":
+            # Prüfe, ob ein Arkaner Hintergrund vorhanden ist
+            hat_arkanen_hintergrund = False
+            for talent_name, talent_obj in charakter.talente.items():
+                if "Arkaner Hintergrund" in talent_name and talent_obj.ausgewaehlt:
+                    hat_arkanen_hintergrund = True
+                    break
+                    
+            if not hat_arkanen_hintergrund:
+                fehlermeldungen.append("Ein beliebiger Arkaner Hintergrund (AH) wird vorausgesetzt.")
+            
+            continue
+            
         # Attributvoraussetzung (z.B. "STÄ W8")
         attribut_match = re.match(r'^([A-ZÄÖÜ]+)\s+W(\d+)$', voraussetzung)
         if attribut_match:
@@ -225,11 +239,13 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
         
     talent = charakter.talente[talent_name_key]
     
+    # WICHTIG: Prüfe erst Rang, dann Voraussetzungen - priorisiere Rangwarnung
     # Rang-Prüfung
     if not ignore_rang_check and is_talent_rang_hoeher_als_charakter(charakter, talent.rang):
+        # Wenn Rang nicht passt, nur Rangwarnung zurückgeben, weitere Prüfungen überspringen
         return "needs_rang_confirmation"
     
-    # Voraussetzungsprüfung, nur wenn das ignore_voraussetzungen-Flag nicht gesetzt ist
+    # Voraussetzungsprüfung, nur wenn Rang ok ist und ignore_voraussetzungen-Flag nicht gesetzt ist
     if not hasattr(charakter, 'ignore_voraussetzungen') or not charakter.ignore_voraussetzungen:
         fehlermeldungen = pruefe_voraussetzungen(charakter, talent)
         if fehlermeldungen:
@@ -252,6 +268,7 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
                 charakter.ignore_voraussetzungen = False
                 Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
             return True
+
     # Option 2: Auswahl mit Aufstiegen
     else:
         if charakter.verbleibende_aufstiege > 0:
