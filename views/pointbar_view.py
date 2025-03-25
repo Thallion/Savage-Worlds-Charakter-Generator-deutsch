@@ -2,12 +2,15 @@
 # Änderungen:
 # - Klasse LabelValuePair als Python-Klasse definiert mit StringProperty.
 # - Im KV ist jetzt <LabelValuePair> statt <LabelValuePair@BoxLayout>.
+# - Korrigierte Vererbungshierarchie für KivyMD 2.0.1
+# - Theme-abhängige Textfarben für bessere Lesbarkeit im hellen Theme
 
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import StringProperty, ObjectProperty
+from kivy.properties import StringProperty, ObjectProperty, BooleanProperty
 from kivy.logger import Logger
+from kivy.clock import Clock
 
 # KivyMD-Imports
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -20,6 +23,7 @@ from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
 from kivymd.theming import ThemableBehavior
 
 class LabelValuePair(MDBoxLayout):
+    """Label-Wert-Paar mit theme-abhängigen Farben."""
     key_text = StringProperty("")
     value_text = StringProperty("")
 
@@ -37,7 +41,8 @@ kv = '''
     MDLabel:
         text: root.key_text
         theme_text_color: "Custom"
-        text_color: [1, 0.65, 0, 1]  # Orange
+        # Angepasste Farbe für Schlüssel - dunkler im hellen Theme
+        text_color: [1, 0.65, 0, 1] if app.theme_cls.theme_style == "Dark" else [0.8, 0.4, 0, 1]
         halign: 'left'
         valign: 'middle'
         size_hint_x: None
@@ -50,7 +55,8 @@ kv = '''
     MDLabel:
         text: root.value_text
         theme_text_color: "Custom"
-        text_color: [1, 1, 1, 1]  # Weiß
+        # Angepasste Farbe für Werte - dunkel im hellen Theme
+        text_color: [1, 1, 1, 1] if app.theme_cls.theme_style == "Dark" else [0.1, 0.1, 0.1, 1]
         halign: 'left'
         valign: 'middle'
         size_hint_x: None

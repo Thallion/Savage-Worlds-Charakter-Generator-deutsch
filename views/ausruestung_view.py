@@ -1,12 +1,8 @@
 # ausruestung_view.py
-"""
-View-Komponente für die Ausrüstung nach dem MVC-Pattern.
-Bietet Darstellung und Interaktion mit der Ausrüstung des Charakters.
-"""
 
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty, BooleanProperty
+from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty, BooleanProperty, DictProperty
 from kivy.uix.widget import Widget
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
@@ -27,11 +23,16 @@ from kivymd.uix.dialog import (
     MDDialogContentContainer,
 )
 
-# Konstanten für bessere Wartbarkeit
+# Wichtig: Importe für die Typprüfung
+from models.waffe import Waffe
+from models.ruestung import Ruestung
+from models.schild import Schild
+
+# Konstanten
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
 ALL_CATEGORIES_TEXT = 'Alle Kategorien'
-DEFAULT_ROW_HEIGHT = dp(60)
+DEFAULT_ROW_HEIGHT = dp(70)
 DIALOG_HEIGHT = "200dp"
 BUTTON_SIZE = (dp(40), dp(40))
 ERROR_DIALOG_TITLE = "Fehler"
@@ -54,11 +55,594 @@ class TooltipIconButton(AusruestungTooltip, MDButton):
         self.size = BUTTON_SIZE
 
 
+class AusruestungItemRow(MDBoxLayout):
+    """
+    Einzelne Zeile in der Ausrüstungs-Liste.
+    Teil der View-Komponente des MVC-Patterns.
+    """
+    index = NumericProperty(0)
+    name = StringProperty("")
+    kategorie = StringProperty("")
+    gewicht = NumericProperty(0)
+    kosten = NumericProperty(0)
+    menge = NumericProperty(0)
+    waehrungseinheit = StringProperty("")
+    beschreibung = StringProperty("")
+    details = StringProperty("")  # Weitere Details
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.dialog = None
+
+    def _get_controller(self):
+        """Hilfsmethode zum Abrufen des Controllers"""
+        app = MDApp.get_running_app()
+        return app.controller if hasattr(app, 'controller') else None
+
+    def _refresh_ui(self):
+        """Aktualisiert die UI nach einer Transaktion"""
+        parent_widget = self.get_root_ausruestung_widget()
+        if parent_widget:
+            Clock.schedule_once(lambda dt: parent_widget.refresh_widget(), 0)
+            return
+            
+        # Fallbacks
+        app = MDApp.get_running_app()
+        if hasattr(app, 'root') and hasattr(app.root, 'refresh_current_tab'):
+            app.root.refresh_current_tab()
+        elif hasattr(app, 'get_widget_by_tab_text'):
+            widget = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+            if widget:
+                Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
+
+    def get_root_ausruestung_widget(self):
+        """Findet das übergeordnete AusruestungWidget"""
+        current = self.parent
+        while current:
+            if isinstance(current, AusruestungWidget):
+                return current
+                
+            if hasattr(current, 'parent_view') and current.parent_view:
+                return current.parent_view
+                
+            current = current.parent
+        
+        # Alternative Suche
+        app = MDApp.get_running_app()
+        if hasattr(app, 'root') and hasattr(app.root, 'ids'):
+            if hasattr(app.root.ids, 'ausruestung_widget'):
+                return app.root.ids.ausruestung_widget
+        
+        return None
+        
+    def kaufen_ausruestung(self):
+        """Zeigt einen Dialog zum Kaufen an"""
+        try:
+            dialog_content = KaufDialogContent(name=self.name, preis=self.kosten)
+            self._show_transaction_dialog(
+                title=f"Kaufen von {self.name}",
+                content=dialog_content,
+                action_text="Kaufen",
+                action_handler=self._handle_kauf_dialog
+            )
+        except Exception as e:
+            Logger.error(f"Fehler beim Kaufen der Ausrüstung: {str(e)}")
+            self.show_error(f"Ein Fehler ist aufgetreten: {str(e)}")
+
+    def verkaufen_ausruestung(self):
+        """Zeigt einen Dialog zum Verkaufen an"""
+        try:
+            dialog_content = VerkaufDialogContent(name=self.name, preis=self.kosten)
+            self._show_transaction_dialog(
+                title=f"Verkaufen von {self.name}",
+                content=dialog_content,
+                action_text="Verkaufen",
+                action_handler=self._handle_verkauf_dialog
+            )
+        except Exception as e:
+            Logger.error(f"Fehler beim Verkaufen der Ausrüstung: {str(e)}")
+            self.show_error(f"Ein Fehler ist aufgetreten: {str(e)}")
+
+    def _show_transaction_dialog(self, title, content, action_text, action_handler):
+        """Zeigt einen Transaktionsdialog an"""
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(content, orientation="vertical"),
+            MDDialogButtonContainer(
+                Widget(),
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text=action_text),
+                    style="text",
+                    on_release=lambda x: action_handler(content),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def _handle_kauf_dialog(self, content):
+        """Verarbeitet den Kauf"""
+        try:
+            is_valid, error_message = content.validate()
+            if not is_valid:
+                self.show_error(error_message)
+                return
+
+            anzahl, preis = content.get_values()
+            
+            controller = self._get_controller()
+            if not controller:
+                self.show_error("Controller nicht gefunden.")
+                return
+                
+            success = controller.kaufen_ausruestung(
+                self.name,
+                anzahl=anzahl,
+                preis_pro_stueck=preis
+            )
+
+            if success:
+                self.dialog.dismiss()
+                self._refresh_ui()
+            else:
+                self.show_error(
+                    f"Nicht genügend Geld vorhanden für den Kauf von {anzahl}x {self.name}.",
+                    "Nicht genügend Geld"
+                )
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des Kaufs: {str(e)}")
+            self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
+
+    def _handle_verkauf_dialog(self, content):
+        """Verarbeitet den Verkauf"""
+        try:
+            is_valid, error_message = content.validate()
+            if not is_valid:
+                self.show_error(error_message)
+                return
+
+            anzahl, preis = content.get_values()
+            
+            controller = self._get_controller()
+            if not controller:
+                self.show_error("Controller nicht gefunden.")
+                return
+                
+            success = controller.verkaufen_ausruestung(
+                self.name,
+                anzahl=anzahl,
+                preis_pro_stueck=preis
+            )
+
+            if success:
+                self.dialog.dismiss()
+                self._refresh_ui()
+            else:
+                self.show_error("Der Verkauf konnte nicht durchgeführt werden.")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des Verkaufs: {str(e)}")
+            self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
+
+    def show_error(self, message, title=ERROR_DIALOG_TITLE):
+        """Zeigt einen Fehlerdialog an"""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing="12dp",
+            padding="12dp",
+            adaptive_height=True
+        )
+        
+        error_label = MDLabel(
+            text=message,
+            theme_text_color="Error",
+            size_hint_y=None,
+            height=dp(80),
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(error_label)
+
+        error_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text=title,
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: error_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        error_dialog.open()
+
+
+class DialogContentBase(MDBoxLayout):
+    """Basis-Klasse für Dialog-Inhalte"""
+    def __init__(self, name, preis, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = 'vertical'
+        self.spacing = "12dp"
+        self.padding = "12dp"
+        self.size_hint_y = None
+        self.height = DIALOG_HEIGHT
+        
+        self.anzahl_field = MDTextField(
+            mode="outlined",
+            text="1",
+            input_filter="int",
+            children=[
+                MDTextFieldHintText(
+                    text="Anzahl"
+                )
+            ]
+        )
+        self.add_widget(self.anzahl_field)
+
+        self.preis_field = MDTextField(
+            mode="outlined",
+            text=str(preis),
+            input_filter="float",
+            children=[
+                MDTextFieldHintText(
+                    text="Preis pro Stück (optional)"
+                )
+            ]
+        )
+        self.add_widget(self.preis_field)
+
+    def get_values(self):
+        """Gibt die eingegebenen Werte zurück"""
+        try:
+            anzahl = int(self.anzahl_field.text)
+            preis = float(self.preis_field.text) if self.preis_field.text else None
+            return anzahl, preis
+        except ValueError:
+            return None, None
+
+    def validate(self):
+        """Validiert die Eingaben"""
+        anzahl, preis = self.get_values()
+        
+        if anzahl is None:
+            return False, "Bitte geben Sie eine gültige Anzahl ein."
+        
+        if anzahl < MIN_AMOUNT:
+            return False, f"Die Anzahl muss mindestens {MIN_AMOUNT} sein."
+            
+        if preis is not None and preis < 0:
+            return False, "Der Preis darf nicht negativ sein."
+            
+        return True, None
+
+
+class KaufDialogContent(DialogContentBase):
+    """Content-Widget für den Kauf-Dialog"""
+    pass
+
+
+class VerkaufDialogContent(DialogContentBase):
+    """Content-Widget für den Verkauf-Dialog"""
+    pass
+
+
+class AusruestungWidget(MDBoxLayout):
+    """
+    Widget zur Anzeige und Verwaltung von Ausrüstung.
+    """
+    kategorien = ListProperty([])
+    current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
+    sort_order = StringProperty(DEFAULT_SORT_ORDER)
+    only_owned_items = BooleanProperty(False)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._initialize_controller()
+        self.menu = None
+        Clock.schedule_once(self.post_init, 0)
+
+    def _initialize_controller(self):
+        """Initialisiert die Verbindung zum Controller"""
+        app = MDApp.get_running_app()
+        self.controller = app.controller if hasattr(app, 'controller') else None
+        if not self.controller:
+            Logger.error("AusruestungWidget: Controller nicht gefunden")
+
+    def toggle_only_owned_items(self, value):
+        """Schaltet den Filter für vorhandene Gegenstände um"""
+        self.only_owned_items = value
+        self.filter_ausruestung()
+
+    def update_sort_option(self, option):
+        """Aktualisiert die Sortieroptionen"""
+        if self.current_sort_option == option:
+            self.sort_order = 'desc' if self.sort_order == 'asc' else 'asc'
+        else:
+            self.current_sort_option = option
+            self.sort_order = 'asc'
+
+        self.filter_ausruestung()
+
+    def filter_ausruestung(self, *args):
+        """Filtert und sortiert die Ausrüstungsgegenstände"""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            self.set_debug_message("Controller oder Charakter nicht verfügbar")
+            return
+            
+        search_term = self.ids.search_input.text.lower()
+        selected_kategorie = self.ids.category_label.text.lower()
+
+        # Ausrüstung vom Modell abrufen
+        alle_ausruestung = self.controller.charakter.ausruestung
+        
+        # Logging für Debugging
+        Logger.debug(f"Ausrüstung filtern: {len(alle_ausruestung)} Gegenstände insgesamt")
+        
+        if not alle_ausruestung:
+            self.set_debug_message("Keine Ausrüstungsgegenstände vorhanden!")
+            self.ids.recycleview.data = []
+            return
+
+        try:
+            # Daten filtern
+            filtered_items = []
+            
+            for name, item in alle_ausruestung.items():
+                # Debug-Ausgabe für jedes Item
+                Logger.debug(f"Verarbeite Item: {name}, Typ: {type(item).__name__}")
+                
+                # Filter: Nur vorhandene Gegenstände
+                if self.only_owned_items and getattr(item, 'menge', 0) <= 0:
+                    continue
+                    
+                # Filter: Kategorie
+                if selected_kategorie != ALL_CATEGORIES_TEXT.lower():
+                    item_kategorie = getattr(item, 'kategorie', '').lower()
+                    if not item_kategorie or item_kategorie != selected_kategorie:
+                        continue
+                    
+                # Filter: Suchbegriff
+                if search_term:
+                    name_match = search_term in name.lower()
+                    beschreibung = getattr(item, 'beschreibung', '')
+                    beschreibung_match = search_term in beschreibung.lower() if beschreibung else False
+                    if not (name_match or beschreibung_match):
+                        continue
+                
+                # Extrahiere detaillierte Informationen je nach Ausrüstungstyp
+                details = self._get_detail_text(item)
+                
+                # RecycleView-Zeilendaten erstellen
+                item_data = {
+                    'viewclass': 'AusruestungItemRow',
+                    'index': len(filtered_items),
+                    'name': name,
+                    'kategorie': getattr(item, 'kategorie', 'Unbekannt'),
+                    'gewicht': getattr(item, 'gewicht', 0),
+                    'kosten': getattr(item, 'kosten', 0),
+                    'menge': getattr(item, 'menge', 0),
+                    'waehrungseinheit': self.controller.charakter.waehrungseinheit,
+                    'beschreibung': getattr(item, 'beschreibung', ''),
+                    'details': details
+                }
+                
+                filtered_items.append(item_data)
+                
+                # Debug-Ausgabe für gefilterte Items
+                if len(filtered_items) < 5:  # Nur die ersten paar für bessere Übersicht
+                    Logger.debug(f"Gefiltert: {item_data['name']}, Kategorie: {item_data['kategorie']}")
+            
+            # Sortieren
+            self._sort_items(filtered_items)
+            
+            # Index neu setzen (wichtig für Streifenmuster)
+            for i, item in enumerate(filtered_items):
+                item['index'] = i
+            
+            # Debug-Ausgabe vor dem Setzen der Daten
+            Logger.debug(f"Setze {len(filtered_items)} Gegenstände in die RecycleView")
+            
+            # RecycleView vollständig leeren und neu befüllen
+            self.ids.recycleview.data = []
+            self.ids.recycleview.data = filtered_items
+            
+            # Debug-Info
+            if not filtered_items:
+                self.set_debug_message(f"Keine Ergebnisse für Suche: '{search_term}', Kategorie: '{selected_kategorie}'")
+            else:
+                self.clear_debug_message()
+                
+            Logger.debug(f"Ausrüstung gefiltert: {len(filtered_items)} Ergebnisse")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Filtern der Ausrüstung: {str(e)}", exc_info=True)
+            self.set_debug_message(f"Fehler beim Filtern: {str(e)}")
+
+    def _get_detail_text(self, ausruestung):
+        """Extrahiert spezifische Details je nach Ausrüstungstyp"""
+        details = []
+        
+        try:
+            # Sicherere Typprüfung
+            is_waffe = 'typ' in dir(ausruestung) and 'mindeststaerke' in dir(ausruestung) and not ('torso' in dir(ausruestung))
+            is_ruestung = 'torso' in dir(ausruestung) and 'arme' in dir(ausruestung)
+            is_schild = 'parade' in dir(ausruestung) and 'deckung' in dir(ausruestung)
+            
+            # Spezifische Details je nach Typ
+            if is_waffe:
+                typ = getattr(ausruestung, 'typ', '')
+                if typ:
+                    details.append(f"Typ: {typ}")
+                
+                mindeststaerke = getattr(ausruestung, 'mindeststaerke', '')
+                if mindeststaerke:
+                    details.append(f"Mindeststärke: {mindeststaerke}")
+                
+                if hasattr(ausruestung, 'eigenschaften'):
+                    eigenschaften = getattr(ausruestung, 'eigenschaften', {})
+                    for key, value in eigenschaften.items():
+                        if value and value != "-":
+                            details.append(f"{key}: {value}")
+            
+            elif is_ruestung:
+                schutz_details = []
+                if getattr(ausruestung, 'torso', 0) > 0:
+                    schutz_details.append(f"Torso: {ausruestung.torso}")
+                if getattr(ausruestung, 'arme', 0) > 0:
+                    schutz_details.append(f"Arme: {ausruestung.arme}")
+                if getattr(ausruestung, 'beine', 0) > 0:
+                    schutz_details.append(f"Beine: {ausruestung.beine}")
+                if getattr(ausruestung, 'kopf', 0) > 0:
+                    schutz_details.append(f"Kopf: {ausruestung.kopf}")
+                if schutz_details:
+                    details.append(" | ".join(schutz_details))
+                
+                mindeststaerke = getattr(ausruestung, 'mindeststaerke', '')
+                if mindeststaerke:
+                    details.append(f"Mindeststärke: {mindeststaerke}")
+            
+            elif is_schild:
+                parade = getattr(ausruestung, 'parade', 0)
+                if parade:
+                    details.append(f"Parade: {parade}")
+                
+                deckung = getattr(ausruestung, 'deckung', 0)
+                if deckung:
+                    details.append(f"Deckung: {deckung}")
+                
+                mindeststaerke = getattr(ausruestung, 'mindeststaerke', '')
+                if mindeststaerke:
+                    details.append(f"Mindeststärke: {mindeststaerke}")
+        
+        except Exception as e:
+            Logger.error(f"Fehler bei der Extraktion von Details: {str(e)}")
+        
+        return " | ".join(details)
+
+    def _sort_items(self, data):
+        """Sortiert die Ausrüstungsdaten nach aktuellem Kriterium"""
+        reverse_order = (self.sort_order == 'desc')
+        
+        sort_key_mapping = {
+            'Name': lambda x: x['name'].lower(),
+            'Gewicht': lambda x: float(x['gewicht']),
+            'Kosten': lambda x: float(x['kosten']),
+            'Menge': lambda x: int(x['menge']),
+            'Kategorie': lambda x: x['kategorie'].lower()
+        }
+        
+        sort_key = sort_key_mapping.get(self.current_sort_option)
+        if sort_key:
+            data.sort(key=sort_key, reverse=reverse_order)
+
+    def _debug_ausruestung(self):
+        """Zeigt Debug-Informationen über alle Ausrüstungsgegenstände"""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.debug("Debug: Kein Controller oder Charakter verfügbar")
+            return
+            
+        ausruestung = self.controller.charakter.ausruestung
+        Logger.debug(f"Debug: {len(ausruestung)} Ausrüstungsgegenstände insgesamt")
+        
+        for name, item in ausruestung.items():
+            Logger.debug(f"Debug Item: '{name}', Typ: {type(item).__name__}, Attribute: {dir(item)[:10]}...")
+
+    def post_init(self, dt):
+        """Initialisierung nach dem Laden des Widgets"""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            self.set_debug_message("Controller oder Charakter nicht verfügbar")
+            return
+            
+        # Debug-Ausgabe für Ausrüstung
+        self._debug_ausruestung()
+        
+        # Ausrüstung abrufen und Kategorien aktualisieren
+        alle_ausruestung = self.controller.charakter.ausruestung
+        self._update_kategorien(alle_ausruestung)
+        
+        # Initiale Filterung
+        self.filter_ausruestung()
+
+    def _update_kategorien(self, ausruestung_dict):
+        """Aktualisiert die Liste der verfügbaren Kategorien"""
+        unique_kategorien = set()
+        
+        for ausruestung in ausruestung_dict.values():
+            if hasattr(ausruestung, 'kategorie') and ausruestung.kategorie:
+                unique_kategorien.add(ausruestung.kategorie)
+        
+        self.kategorien = sorted(list(unique_kategorien))
+        Logger.debug(f"Gefundene Kategorien: {self.kategorien}")
+
+    def refresh_widget(self):
+        """Aktualisiert das Widget vollständig"""
+        Logger.debug("AusruestungWidget: Starte refresh_widget")
+        
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            self.set_debug_message("Controller oder Charakter nicht verfügbar")
+            return
+            
+        # RecycleView-Daten komplett zurücksetzen
+        if hasattr(self.ids, 'recycleview'):
+            self.ids.recycleview.data = []
+        
+        # Ausrüstung abrufen und Kategorien aktualisieren
+        alle_ausruestung = self.controller.charakter.ausruestung
+        self._update_kategorien(alle_ausruestung)
+        
+        # Filterung erneut anwenden
+        self.filter_ausruestung()
+
+    def open_category_menu(self):
+        """Öffnet das Kategorie-Auswahlmenü"""
+        menu_items = [
+            {
+                "text": f"{i}",
+                "on_release": lambda x=f"{i}": self.set_category(x),
+            } for i in [ALL_CATEGORIES_TEXT] + self.kategorien
+        ]
+        self.menu = MDDropdownMenu(
+            caller=self.ids.category_label,
+            items=menu_items,
+            width_mult=4,
+        )
+        self.menu.open()
+
+    def set_category(self, text):
+        """Setzt die ausgewählte Kategorie und aktualisiert die Anzeige"""
+        self.ids.category_label.text = text
+        self.menu.dismiss()
+        self.filter_ausruestung()
+
+    def set_debug_message(self, message):
+        """Setzt eine Debug-Nachricht im UI"""
+        if hasattr(self.ids, 'debug_label'):
+            self.ids.debug_label.text = message
+            Logger.debug(f"Debug-Nachricht: {message}")
+
+    def clear_debug_message(self):
+        """Löscht die Debug-Nachricht"""
+        if hasattr(self.ids, 'debug_label'):
+            self.ids.debug_label.text = ""
+
+
 # Bei der Factory registrieren
 Factory.register('TooltipIconButton', TooltipIconButton)
+Factory.register('AusruestungItemRow', AusruestungItemRow)
 
-
-# KV-String in eine Konstante, könnte später in eine separate Datei ausgelagert werden
+# KV-String mit einer definierten Darstellung der Ausrüstungszeilen
 KV_STRING = '''
 <TooltipIconButton>:
     style: "filled"
@@ -71,7 +655,7 @@ KV_STRING = '''
 
 <AusruestungWidget>:
     orientation: 'vertical'
-    md_bg_color: self.theme_cls.backgroundColor
+    md_bg_color: app.theme_cls.backgroundColor
     
     MDBoxLayout:
         size_hint_y: None
@@ -158,675 +742,146 @@ KV_STRING = '''
         height: dp(48)
         padding: [20, 10]
 
-    AusruestungRecycleView:
+    # Diagnostische Information anzeigen
+    MDLabel:
+        id: debug_label
+        text: ''
+        size_hint_y: None
+        height: dp(30) if self.text else 0
+        color: 1, 0, 0, 1
+        halign: 'center'
+
+    # Verbesserte RecycleView
+    MDRecycleView:
         id: recycleview
         viewclass: 'AusruestungItemRow'
         size_hint_y: 1
         
         RecycleBoxLayout:
             id: layout
-            default_size: None, dp(60)
+            default_size: None, dp(120)  # Größere Standardhöhe
             default_size_hint: 1, None
             size_hint_y: None
             height: self.minimum_height
             orientation: 'vertical'
-            spacing: dp(5)
-            padding: dp(20)
+            spacing: dp(10)  # Mehr Abstand zwischen Zeilen
+            padding: [dp(5), dp(10), dp(15), dp(10)]  # Mehr Padding rechts
 
 <AusruestungItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(60)
-    md_bg_color: ([0.2, 0.2, 0.2, 1]) if root.index % 2 == 0 else ([0.15, 0.15, 0.15, 1])
-    spacing: dp(10)
-    padding: dp(10)
-
-    MDLabel:
-        text: root.name
-        font_size: dp(16)
-        size_hint_x: 0.2
-        halign: 'left'
-        valign: 'middle'
-
+    height: dp(100)
+    spacing: dp(5)
+    padding: [dp(5), dp(5), dp(60), dp(5)]
+    md_bg_color: [0.2, 0.2, 0.2, 1] if self.index % 2 == 0 else [0.15, 0.15, 0.15, 1]
+    
+    # Hauptcontainer für Name und Beschreibung - Sehr vereinfacht
+    RelativeLayout:  # Verwendung von RelativeLayout für absolute Positionierung
+        size_hint_x: 0.35
+        
+        # Name-Label - VERTIKAL ZENTRIERT wenn keine Beschreibung vorhanden
+        MDLabel:
+            text: root.name
+            font_size: dp(14)
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos_hint: {'center_y': 0.5} if not root.beschreibung and not root.details else {'y': 0.6}
+            text_size: self.width, None
+        
+        # Beschreibung - NUR wenn vorhanden
+        MDLabel:
+            text: root.beschreibung
+            font_size: dp(12)
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: self.texture_size[1] if root.beschreibung else 0
+            pos_hint: {'y': 0.3}
+            opacity: 1 if root.beschreibung else 0
+            disabled: not root.beschreibung
+            text_size: self.width, None
+        
+        # Details - NUR wenn vorhanden
+        MDLabel:
+            text: root.details
+            font_size: dp(12)
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: self.texture_size[1] if root.details else 0
+            pos_hint: {'y': 0.1}
+            opacity: 1 if root.details else 0
+            disabled: not root.details
+            text_size: self.width, None
+    
+    # Kategorie
     MDLabel:
         text: root.kategorie.capitalize() if root.kategorie else "Unbekannt"
-        font_size: dp(16)
-        size_hint_x: 0.1
+        font_size: dp(14)
+        size_hint_x: 0.12
         halign: 'left'
         valign: 'middle'
-
+        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+        text_size: self.width, None
+        shorten: True
+    
+    # Gewicht - AUCH ZENTRIERT
     MDLabel:
         text: f"{root.gewicht} kg"
-        font_size: dp(16)
-        size_hint_x: 0.1
+        font_size: dp(14)
+        size_hint_x: 0.08
         halign: 'left'
         valign: 'middle'
-
+        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+    
+    # Kosten - AUCH ZENTRIERT
     MDLabel:
         text: f"{root.kosten} {root.waehrungseinheit}"
-        font_size: dp(16)
-        size_hint_x: 0.1
+        font_size: dp(14)
+        size_hint_x: 0.12
         halign: 'left'
         valign: 'middle'
-
+        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+        text_size: self.width, None
+        shorten: True
+    
+    # Menge - AUCH ZENTRIERT
     MDLabel:
         text: str(root.menge)
-        font_size: dp(16)
-        size_hint_x: 0.1
-        halign: 'left'
+        font_size: dp(14)
+        size_hint_x: 0.04
+        halign: 'center'
         valign: 'middle'
-
-    MDButton:
-        style: "filled"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.kaufen_ausruestung()
-        MDButtonIcon:
-            icon: "plus"
-
-    MDButton:
-        style: "filled"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.verkaufen_ausruestung()
-        MDButtonIcon:
-            icon: "minus"
+        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+    
+    # Buttons - Bleiben wie vorher
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'center'
+        size_hint_x: None
+        width: dp(90)
+        
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: dp(35), dp(80)
+            spacing: dp(5)
+            
+            MDButton:
+                style: "filled"
+                size_hint: None, None
+                size: dp(35), dp(35)
+                on_release: root.kaufen_ausruestung()
+                MDButtonIcon:
+                    icon: "plus"
+            
+            MDButton:
+                style: "filled"
+                size_hint: None, None
+                size: dp(35), dp(35)
+                on_release: root.verkaufen_ausruestung()
+                MDButtonIcon:
+                    icon: "minus"
 '''
 
+# KV-String laden
 Builder.load_string(KV_STRING)
-
-
-class AusruestungRecycleView(MDRecycleView):
-    """
-    RecycleView für die effiziente Darstellung der Ausruestung-Liste.
-    Implementiert die View-Komponente des MVC-Patterns.
-    """
-    parent_view = ObjectProperty(None)  # Referenz auf das übergeordnete AusruestungWidget
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.data = []
-        Logger.debug("AusruestungRecycleView: Initialisiert")
-        # Warten bis Widget fertig geladen ist, dann parent_view setzen
-        Clock.schedule_once(self._find_parent_view, 0)
-    
-    def _find_parent_view(self, dt):
-        """Findet und speichert Referenz auf das übergeordnete AusruestungWidget"""
-        current = self.parent
-        while current:
-            if isinstance(current, AusruestungWidget):
-                self.parent_view = current
-                Logger.debug("AusruestungRecycleView: parent_view gesetzt")
-                break
-            current = current.parent
-
-
-class DialogContentBase(MDBoxLayout):
-    """Basis-Klasse für Dialog-Inhalte"""
-    def __init__(self, name, preis, **kwargs):
-        super().__init__(**kwargs)
-        self.orientation = 'vertical'
-        self.spacing = "12dp"
-        self.padding = "12dp"
-        self.size_hint_y = None
-        self.height = DIALOG_HEIGHT
-        
-        self._setup_fields(preis)
-
-    def _setup_fields(self, preis):
-        """Erstellt die Eingabefelder für den Dialog"""
-        self.anzahl_field = MDTextField(
-            mode="outlined",
-            text="1",
-            input_filter="int",
-            children=[
-                MDTextFieldHintText(
-                    text="Anzahl"
-                )
-            ]
-        )
-        self.add_widget(self.anzahl_field)
-
-        self.preis_field = MDTextField(
-            mode="outlined",
-            text=str(preis),
-            input_filter="float",
-            children=[
-                MDTextFieldHintText(
-                    text="Preis pro Stück (optional)"
-                )
-            ]
-        )
-        self.add_widget(self.preis_field)
-
-    def get_values(self):
-        """Gibt die eingegebenen Werte zurück"""
-        try:
-            anzahl = int(self.anzahl_field.text)
-            preis = float(self.preis_field.text) if self.preis_field.text else None
-            return anzahl, preis
-        except ValueError:
-            return None, None
-
-    def validate(self):
-        """Validiert die Eingaben"""
-        anzahl, preis = self.get_values()
-        
-        if anzahl is None:
-            return False, "Bitte geben Sie eine gültige Anzahl ein."
-        
-        if anzahl < MIN_AMOUNT:
-            return False, f"Die Anzahl muss mindestens {MIN_AMOUNT} sein."
-            
-        if preis is not None and preis < 0:
-            return False, "Der Preis darf nicht negativ sein."
-            
-        return True, None
-
-
-class KaufDialogContent(DialogContentBase):
-    """Content-Widget für den Kauf-Dialog"""
-    pass
-
-
-class VerkaufDialogContent(DialogContentBase):
-    """Content-Widget für den Verkauf-Dialog"""
-    pass
-
-
-class AusruestungItemRow(MDBoxLayout):
-    """
-    Einzelne Zeile in der Ausrüstungs-Liste.
-    Teil der View-Komponente des MVC-Patterns.
-    """
-    index = NumericProperty(0)
-    name = StringProperty("")
-    kategorie = StringProperty("")
-    gewicht = NumericProperty(0)
-    kosten = NumericProperty(0)
-    menge = NumericProperty(0)
-    waehrungseinheit = StringProperty("")
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.bind(index=self.update_color)
-        self.dialog = None
-
-    def _get_controller(self):
-        """Hilfsmethode zum Abrufen des Controllers"""
-        app = MDApp.get_running_app()
-        return app.controller if hasattr(app, 'controller') else None
-
-    def _refresh_ui(self):
-        """
-        Aktualisiert die UI nach einer Transaktion.
-        Findet das übergeordnete AusruestungWidget und aktualisiert es direkt.
-        """
-        # Versuche zuerst, das übergeordnete AusruestungWidget zu finden
-        parent_widget = self.get_root_ausruestung_widget()
-        if parent_widget:
-            Logger.debug(f"AusruestungItemRow: Aktualisiere übergeordnetes AusruestungWidget")
-            Clock.schedule_once(lambda dt: parent_widget.refresh_widget(), 0)
-            return
-            
-        # Fallback: Versuche, über das Root-Widget der App zu aktualisieren
-        app = MDApp.get_running_app()
-        if hasattr(app, 'root') and hasattr(app.root, 'refresh_current_tab'):
-            Logger.debug(f"AusruestungItemRow: Aktualisiere über app.root.refresh_current_tab()")
-            app.root.refresh_current_tab()
-        else:
-            # Letzte Option: Suche über app.get_widget_by_tab_text
-            Logger.debug(f"AusruestungItemRow: Versuche Aktualisierung über app.get_widget_by_tab_text()")
-            if hasattr(app, 'get_widget_by_tab_text'):
-                widget = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
-                if widget:
-                    Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
-                else:
-                    Logger.error("AusruestungItemRow: Konnte kein AusruestungWidget finden")
-
-    def get_root_ausruestung_widget(self):
-        """
-        Findet das übergeordnete AusruestungWidget in der Widget-Hierarchie.
-        
-        Returns:
-            AusruestungWidget oder None, wenn keines gefunden wurde
-        """
-        current = self.parent
-        while current:
-            if isinstance(current, AusruestungWidget):
-                return current
-                
-            # Bei RecycleView ist der eigentliche Parent nicht direkt parent
-            if hasattr(current, 'parent_view') and current.parent_view:
-                return current.parent_view
-                
-            current = current.parent
-        
-        # Alternativ versuchen wir, vom Controller her zu finden
-        app = MDApp.get_running_app()
-        if hasattr(app, 'root') and hasattr(app.root, 'ids'):
-            # Prüfe, ob ausruestung_widget direkt in den IDs vorhanden ist
-            if hasattr(app.root.ids, 'ausruestung_widget'):
-                return app.root.ids.ausruestung_widget
-        
-        return None
-        
-    def kaufen_ausruestung(self):
-        """
-        Zeigt einen Dialog an, um eine Ausrüstung zu kaufen.
-        Event-Handler für den Plus-Button.
-        """
-        Logger.debug(f"AusruestungItemRow: Start kaufen_ausruestung für {self.name}")
-        try:
-            dialog_content = KaufDialogContent(name=self.name, preis=self.kosten)
-            self._show_transaction_dialog(
-                title=f"Kaufen von {self.name}",
-                content=dialog_content,
-                action_text="Kaufen",
-                action_handler=self._handle_kauf_dialog
-            )
-        except Exception as e:
-            Logger.error(f"Fehler beim Kaufen der Ausrüstung: {str(e)}")
-            self.show_error(f"Ein Fehler ist aufgetreten: {str(e)}")
-
-    def verkaufen_ausruestung(self):
-        """
-        Zeigt einen Dialog an, um eine Ausrüstung zu verkaufen.
-        Event-Handler für den Minus-Button.
-        """
-        Logger.debug(f"AusruestungItemRow: Start verkaufen_ausruestung für {self.name}")
-        try:
-            dialog_content = VerkaufDialogContent(name=self.name, preis=self.kosten)
-            self._show_transaction_dialog(
-                title=f"Verkaufen von {self.name}",
-                content=dialog_content,
-                action_text="Verkaufen",
-                action_handler=self._handle_verkauf_dialog
-            )
-        except Exception as e:
-            Logger.error(f"Fehler beim Verkaufen der Ausrüstung: {str(e)}")
-            self.show_error(f"Ein Fehler ist aufgetreten: {str(e)}")
-
-    def _show_transaction_dialog(self, title, content, action_text, action_handler):
-        """
-        Zeigt einen Dialog für eine Transaktion an.
-        Extrahiert gemeinsamen Code aus kaufen_ausruestung und verkaufen_ausruestung.
-        """
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text=title,
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.dialog.dismiss(),
-                ),
-                MDButton(
-                    MDButtonText(text=action_text),
-                    style="text",
-                    on_release=lambda x: action_handler(content),
-                ),
-                spacing="8dp",
-            ),
-        )
-        self.dialog.open()
-
-    def _handle_kauf_dialog(self, content):
-        """
-        Verarbeitet den Kauf nach Dialog-Bestätigung.
-        Ruft die entsprechende Controller-Methode auf.
-        """
-        try:
-            # Validiere Eingaben
-            is_valid, error_message = content.validate()
-            if not is_valid:
-                self.show_error(error_message)
-                return
-
-            anzahl, preis = content.get_values()
-            
-            # Controller-Operation ausführen
-            controller = self._get_controller()
-            if not controller:
-                self.show_error("Controller nicht gefunden.")
-                return
-                
-            success = controller.kaufen_ausruestung(
-                self.name,
-                anzahl=anzahl,
-                preis_pro_stueck=preis
-            )
-
-            if success:
-                self.dialog.dismiss()
-                self._refresh_ui()
-            else:
-                self.show_error(
-                    f"Nicht genügend Geld vorhanden für den Kauf von {anzahl}x {self.name}.",
-                    "Nicht genügend Geld"
-                )
-
-        except ValueError as e:
-            self.show_error(str(e))
-        except Exception as e:
-            Logger.error(f"Fehler beim Verarbeiten des Kaufs: {str(e)}")
-            self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
-
-    def _handle_verkauf_dialog(self, content):
-        """
-        Verarbeitet den Verkauf nach Dialog-Bestätigung.
-        Ruft die entsprechende Controller-Methode auf.
-        """
-        try:
-            # Validiere Eingaben
-            is_valid, error_message = content.validate()
-            if not is_valid:
-                self.show_error(error_message)
-                return
-
-            anzahl, preis = content.get_values()
-            
-            # Controller-Operation ausführen
-            controller = self._get_controller()
-            if not controller:
-                self.show_error("Controller nicht gefunden.")
-                return
-                
-            success = controller.verkaufen_ausruestung(
-                self.name,
-                anzahl=anzahl,
-                preis_pro_stueck=preis
-            )
-
-            if success:
-                self.dialog.dismiss()
-                self._refresh_ui()
-            else:
-                self.show_error("Der Verkauf konnte nicht durchgeführt werden.")
-
-        except ValueError as e:
-            self.show_error(str(e))
-        except Exception as e:
-            Logger.error(f"Fehler beim Verarbeiten des Verkaufs: {str(e)}")
-            self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
-
-    def show_error(self, message, title=ERROR_DIALOG_TITLE):
-        """Zeigt eine Fehlermeldung in einem Dialog an"""
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing="12dp",
-            padding="12dp",
-            adaptive_height=True
-        )
-        
-        # Label mit ausreichender Höhe und klar definierten Eigenschaften
-        error_label = MDLabel(
-            text=message,
-            theme_text_color="Error",
-            size_hint_y=None,
-            height=dp(80),  # Ausreichende Höhe für den Text
-            halign="left",
-            valign="middle"
-        )
-        content.add_widget(error_label)
-
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text=title,
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-        )
-        error_dialog.open()
-
-    def update_color(self, *args):
-        """Aktualisiert die Hintergrundfarbe der Zeile basierend auf Index und Theme"""
-        is_dark = self.theme_cls.theme_style == "Dark"
-        is_even = self.index % 2 == 0
-
-        if is_dark:
-            self.md_bg_color = [0.2, 0.2, 0.2, 1] if is_even else [0.15, 0.15, 0.15, 1]
-        else:
-            self.md_bg_color = [1, 1, 1, 1] if is_even else [0.85, 0.85, 0.85, 1]
-
-
-class AusruestungWidget(MDBoxLayout):
-    """
-    Widget zur Anzeige und Verwaltung von Ausrüstung.
-    Hauptkomponente der View im MVC-Pattern.
-    """
-    kategorien = ListProperty([])
-    current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
-    sort_order = StringProperty(DEFAULT_SORT_ORDER)
-    only_owned_items = BooleanProperty(False)  # Neue Property für den Filter "Nur vorhandene"
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self._initialize_controller()
-        self.menu = None
-        Clock.schedule_once(self.post_init, 0)
-
-    def _initialize_controller(self):
-        """Initialisiert die Verbindung zum Controller"""
-        app = MDApp.get_running_app()
-        self.controller = app.controller if hasattr(app, 'controller') else None
-        if not self.controller:
-            Logger.error("AusruestungWidget: Controller nicht gefunden")
-
-    def toggle_only_owned_items(self, value):
-        """
-        Schaltet den Filter für 'Nur vorhandene Gegenstände' um.
-        Event-Handler für die Checkbox.
-        """
-        self.only_owned_items = value
-        self.filter_ausruestung()
-        Logger.debug(f"Filter 'Nur vorhandene Gegenstände' gesetzt auf: {value}")
-
-    def update_sort_option(self, option):
-        """
-        Aktualisiert die Sortieroptionen und -reihenfolge.
-        Event-Handler für die Sortier-Buttons.
-        """
-        if self.current_sort_option == option:
-            # Wenn die gleiche Option nochmal geklickt wird, Reihenfolge umkehren
-            self.sort_order = 'desc' if self.sort_order == 'asc' else 'asc'
-        else:
-            # Bei neuer Option immer aufsteigend beginnen
-            self.current_sort_option = option
-            self.sort_order = 'asc'
-
-        Logger.debug(f"Sortierung aktualisiert: {self.current_sort_option}, {self.sort_order}")
-        self.filter_ausruestung()
-
-    def filter_ausruestung(self, *args):
-        """
-        Filtert und sortiert die Ausrüstung.
-        Event-Handler für Änderungen an Filterkriterien.
-        """
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            Logger.warning("AusruestungWidget: Controller oder Charakter nicht verfügbar")
-            return
-            
-        search_term = self.ids.search_input.text.lower()
-        selected_kategorie = self.ids.category_label.text.lower()
-
-        # Ausrüstung vom Modell abrufen
-        alle_ausruestung = self.controller.charakter.ausruestung
-        
-        # Filterliste erstellen
-        filtered_data = self._filter_ausruestung_data(
-            alle_ausruestung, 
-            search_term, 
-            selected_kategorie
-        )
-        
-        # Sortieren
-        filtered_data = self._sort_ausruestung_data(filtered_data)
-        
-        # Index nach Sortierung aktualisieren
-        for i, item in enumerate(filtered_data):
-            item['index'] = i
-
-        # Daten an RecycleView übergeben
-        self.ids.recycleview.data = filtered_data
-        Logger.debug(f"Ausrüstung gefiltert und sortiert: {len(filtered_data)} Einträge")
-
-    def _filter_ausruestung_data(self, alle_ausruestung, search_term, selected_kategorie):
-        """
-        Filtert die Ausrüstungsdaten nach Suchbegriff, Kategorie und ggf. Mengenflag.
-        Extrahiert die Filterlogik aus filter_ausruestung.
-        """
-        filtered_data = []
-        
-        for key, ausruestung in alle_ausruestung.items():
-            # Filter für "Nur vorhandene Gegenstände"
-            if self.only_owned_items and ausruestung.menge <= 0:
-                continue
-                
-            # Kategorie-Filter
-            if (selected_kategorie != ALL_CATEGORIES_TEXT.lower() and 
-                (ausruestung.kategorie is None or ausruestung.kategorie.lower() != selected_kategorie)):
-                continue
-                
-            # Suchbegriff-Filter
-            if search_term and not (search_term in ausruestung.name.lower() or 
-                search_term in ausruestung.beschreibung.lower()):
-                continue
-                
-            # Gegenstand zur gefilterten Liste hinzufügen
-            ausruestung_data = {
-                'viewclass': 'AusruestungItemRow',
-                'index': len(filtered_data),
-                'name': ausruestung.name,
-                'kategorie': ausruestung.kategorie or "Unbekannt",
-                'gewicht': ausruestung.gewicht,
-                'kosten': ausruestung.kosten,
-                'menge': ausruestung.menge,
-                'waehrungseinheit': self.controller.charakter.waehrungseinheit
-            }
-            filtered_data.append(ausruestung_data)
-                
-        return filtered_data
-
-    def _sort_ausruestung_data(self, data):
-        """
-        Sortiert die Ausrüstungsdaten nach den aktuellen Sortierkriterien.
-        Extrahiert die Sortierlogik aus filter_ausruestung.
-        """
-        reverse_order = (self.sort_order == 'desc')
-        
-        # Definiere ein Mapping von Sortieroptionen zu Schlüsselfunktionen
-        sort_key_mapping = {
-            'Name': lambda x: x['name'].lower(),
-            'Gewicht': lambda x: x['gewicht'],
-            'Kosten': lambda x: x['kosten'],
-            'Menge': lambda x: x['menge'],
-            'Kategorie': lambda x: x['kategorie'].lower()
-        }
-        
-        # Wähle die passende Schlüsselfunktion und sortiere
-        sort_key = sort_key_mapping.get(self.current_sort_option)
-        if sort_key:
-            data.sort(key=sort_key, reverse=reverse_order)
-            
-        return data
-
-    def post_init(self, dt):
-        """
-        Initialisierung nach dem Laden des Widgets.
-        Wird einmalig durch Clock.schedule_once aufgerufen.
-        """
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            Logger.warning("AusruestungWidget: Controller oder Charakter nicht verfügbar")
-            return
-            
-        # Ausrüstung vom Modell abrufen
-        alle_ausruestung = self.controller.charakter.ausruestung
-        Logger.debug(f"AusruestungWidget: Lade {len(alle_ausruestung)} Ausrüstungsteile")
-        
-        # Kategorien extrahieren
-        self._update_kategorien(alle_ausruestung)
-        
-        # Initiale Filterung und Anzeige
-        self.filter_ausruestung()
-
-    def _update_kategorien(self, ausruestung_dict):
-        """
-        Aktualisiert die Liste der verfügbaren Kategorien.
-        Extrahiert die Kategorie-Logik aus post_init und refresh_widget.
-        """
-        self.kategorien = sorted(list(set(
-            ausruestung.kategorie 
-            for ausruestung in ausruestung_dict.values() 
-            if ausruestung.kategorie
-        )))
-        Logger.debug(f"AusruestungWidget: Gefundene Kategorien: {self.kategorien}")
-
-    def refresh_widget(self):
-        """
-        Leert das Widget und lädt die Daten neu.
-        Wird aufgerufen, wenn sich die Ausrüstung ändert.
-        """
-        Logger.debug("AusruestungWidget: Start refresh_widget")
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            Logger.warning("AusruestungWidget: Controller oder Charakter nicht verfügbar")
-            return
-            
-        # Daten zurücksetzen
-        self.ids.recycleview.data = []
-        
-        # Ausrüstung vom Modell abrufen
-        alle_ausruestung = self.controller.charakter.ausruestung
-        
-        # Kategorien aktualisieren
-        self._update_kategorien(alle_ausruestung)
-        
-        # Neu filtern und anzeigen
-        self.filter_ausruestung()
-        
-        Logger.debug("AusruestungWidget: refresh_widget abgeschlossen")
-
-    def open_category_menu(self):
-        """
-        Öffnet das Kategorie-Auswahlmenü.
-        Event-Handler für den Kategorie-Filter-Button.
-        """
-        menu_items = [
-            {
-                "text": f"{i}",
-                "on_release": lambda x=f"{i}": self.set_category(x),
-            } for i in [ALL_CATEGORIES_TEXT] + self.kategorien
-        ]
-        self.menu = MDDropdownMenu(
-            caller=self.ids.category_label,
-            items=menu_items,
-            width_mult=4,
-        )
-        self.menu.open()
-
-    def set_category(self, text):
-        """
-        Setzt die ausgewählte Kategorie und aktualisiert die Anzeige.
-        Event-Handler für die Kategorie-Auswahl im Menü.
-        """
-        self.ids.category_label.text = text
-        self.menu.dismiss()
-        self.filter_ausruestung()
