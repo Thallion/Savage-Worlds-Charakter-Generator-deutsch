@@ -12,8 +12,16 @@ from kivymd.uix.label import MDLabel
 from kivy.uix.scrollview import ScrollView
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.list import MDListItem
-from kivymd.uix.button import MDIconButton
+from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
+from kivymd.uix.button import MDIconButton, MDButton, MDButtonText
+from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+from kivymd.uix.scrollview import MDScrollView
+from kivymd.uix.dialog import (
+    MDDialog,
+    MDDialogHeadlineText,
+    MDDialogButtonContainer,
+    MDDialogContentContainer
+)
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.metrics import dp
@@ -79,12 +87,14 @@ class VoelkerWidget(MDBoxLayout):
     """
     controller = ObjectProperty()
     aktuelles_talent = StringProperty(DEFAULT_TALENT_TEXT)
+    mensch_freies_talent = StringProperty("")  # Property für das freie Talent des Menschen
 
     def __init__(self, **kwargs):
         """Initialisiert das VoelkerWidget und setzt Grundkonfiguration."""
         super().__init__(**kwargs)
         self._initialize_controller()
         self.dropdown_menu = None
+        self.voraussetzungs_dialog = None
         Clock.schedule_once(self._setup_ui)
 
     def _initialize_controller(self):
@@ -107,65 +117,239 @@ class VoelkerWidget(MDBoxLayout):
         Logger.debug("VoelkerWidget: Setup UI gestartet")
         self.aktualisiere_ui()
 
-    def _create_menu_items(self):
+    def _get_freie_talente(self):
         """
-        Erstellt die Menüeinträge für das Dropdown-Menü zur Talentauswahl.
+        Gibt eine alphabetisch sortierte Liste von freien Talenten zurück.
+        Filtert bereits ausgewählte Talente heraus.
         
         Returns:
-            list: Liste mit Menüeinträgen
+            list: Liste der verfügbaren Talente
         """
-        talente = self._get_freie_talente()
-        return [
-            {
-                "text": talent,
-                "height": dp(56),
-                "on_release": lambda x=talent: self._on_talent_select(x),
-            } for talent in talente
-        ]
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
+            return [NO_TALENT_AVAILABLE_TEXT]
+                
+        # Aktive Talente abrufen und bereits ausgewählte ausfiltern
+        frei_talente = []
+        for name, talent in self.controller.charakter.talente.items():
+            if talent.aktiv and not talent.ausgewaehlt:
+                frei_talente.append(name)
+        
+        # Alphabetisch sortieren
+        frei_talente.sort()
+        
+        if not frei_talente:
+            frei_talente = [NO_TALENT_AVAILABLE_TEXT]
+            
+        return frei_talente
 
-    def show_talent_menu(self, button):
+    def show_talent_search_dialog(self, button):
         """
-        Zeigt das Dropdown-Menü für Talente an.
+        Zeigt einen Dialog mit Suchfunktion für die Talentauswahl an.
         
         Args:
             button: Button, der das Menü aufruft
         """
-        # Menü neu erstellen, um die aktuelle Liste der Talente zu haben
-        self.dropdown_menu = MDDropdownMenu(
-            caller=button,
-            items=self._create_menu_items(),
-            width_mult=4,
-            max_height=dp(200),
+        # Dialog-Content erstellen
+        content = MDBoxLayout(
+            orientation='vertical', 
+            size_hint_y=None,
+            height="400dp",
+            spacing="12dp",
+            padding="24dp"
         )
-        self.dropdown_menu.open()
+        
+        # Suchfeld erstellen
+        search_field = MDTextField(
+            mode="outlined",
+            children=[
+                MDTextFieldHintText(text="Talent suchen...")
+            ]
+        )
+        content.add_widget(search_field)
+        
+        # ScrollView für die Talentliste erstellen
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height="300dp"
+        )
+        
+        # Liste für Talente erstellen
+        talent_list = MDList()
+        scroll.add_widget(talent_list)
+        content.add_widget(scroll)
+        
+        # Talente holen
+        freie_talente = self._get_freie_talente()
+        all_talents = freie_talente.copy()  # Für die Suche
+        
+        # Dialog erstellen
+        dialog = MDDialog()
+        dialog.add_widget(MDDialogHeadlineText(text="Talent auswählen"))
+        dialog.add_widget(MDDialogContentContainer(
+            content,
+            orientation="vertical",
+        ))
+        dialog.add_widget(MDDialogButtonContainer(
+            MDButton(
+                style="text",
+                on_release=lambda x: dialog.dismiss(),
+                children=[
+                    MDButtonText(text="Abbrechen")
+                ]
+            ),
+            spacing="8dp",
+        ))
+        
+        # Funktion zum Hinzufügen eines Talents zur Liste
+        def add_talent_to_list(talent_name):
+            item = MDListItem(
+                on_release=lambda x: select_talent(talent_name)
+            )
+            item.add_widget(MDListItemHeadlineText(
+                text=talent_name
+            ))
+            talent_list.add_widget(item)
+        
+        # Funktion zum Auswählen eines Talents
+        def select_talent(talent_name):
+            if talent_name != NO_TALENT_AVAILABLE_TEXT and talent_name != "Keine Treffer gefunden":
+                self._on_talent_select(talent_name)
+            dialog.dismiss()
+        
+        # Funktion zum Filtern der Talente basierend auf der Sucheingabe
+        def filter_talents(instance, value):
+            talent_list.clear_widgets()
+            search_text = value.lower().strip()
+            
+            filtered_talents = []
+            if search_text:
+                # Filtern nach Suchtext
+                filtered_talents = [t for t in all_talents if search_text in t.lower()]
+            else:
+                # Ohne Suchtext alle anzeigen
+                filtered_talents = all_talents
+            
+            # Sortierte Ergebnisse anzeigen
+            filtered_talents.sort()
+            
+            if filtered_talents:
+                for talent in filtered_talents:
+                    add_talent_to_list(talent)
+            else:
+                # Wenn keine Ergebnisse gefunden wurden
+                add_talent_to_list("Keine Treffer gefunden")
+        
+        # Binding für Texteingabe
+        search_field.bind(text=filter_talents)
+        
+        # Initial alle Talente anzeigen
+        for talent in freie_talente:
+            add_talent_to_list(talent)
+        
+        dialog.open()
+
+    def _show_voraussetzungen_dialog(self, talent_name, fehlermeldungen):
+        """
+        Zeigt einen Dialog an, der vor der Auswahl eines Talents warnt, 
+        dessen Voraussetzungen nicht erfüllt sind.
+        
+        Args:
+            talent_name: Name des Talents
+            fehlermeldungen: Liste von Fehlermeldungen
+        """
+        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.button import MDFlatButton
+        
+        # Warnungstext erstellen
+        warning_text = f"Talent '{talent_name}' erfüllt nicht alle Voraussetzungen:\n\n"
+        for error in fehlermeldungen:
+            warning_text += f"• {error}\n"
+        warning_text += "\nTrotzdem auswählen?"
+        
+        # MDDialog erstellen
+        self.voraussetzungs_dialog = MDDialog(
+            title="Voraussetzungen nicht erfüllt",
+            text=warning_text,
+            buttons=[
+                MDFlatButton(
+                    text="Abbrechen",
+                    on_release=lambda x: self._dismiss_voraussetzungs_dialog()
+                ),
+                MDFlatButton(
+                    text="Trotzdem auswählen",
+                    on_release=lambda x: self._confirm_talent_selection(talent_name)
+                ),
+            ],
+        )
+        
+        self.voraussetzungs_dialog.open()
+    
+    def _dismiss_voraussetzungs_dialog(self):
+        """Schließt den Voraussetzungen-Dialog."""
+        if self.voraussetzungs_dialog:
+            self.voraussetzungs_dialog.dismiss()
+            self.voraussetzungs_dialog = None
+    
+    def _confirm_talent_selection(self, talent_name):
+        """
+        Bestätigt die Auswahl eines Talents, auch wenn die Voraussetzungen nicht erfüllt sind.
+        
+        Args:
+            talent_name: Name des ausgewählten Talents
+        """
+        self._dismiss_voraussetzungs_dialog()
+        
+        charakter = self.controller.charakter
+        # Wichtig: Flag setzen, um Voraussetzungen zu ignorieren
+        charakter.ignore_voraussetzungen = True
+        
+        # Erneut versuchen, das Talent auszuwählen
+        erfolg = self.controller.waehle_talent(talent_name, ignore_rang_check=True)
+        
+        if erfolg:
+            self.aktuelles_talent = talent_name
+            self.mensch_freies_talent = talent_name
+            Logger.info(f"Freies Talent '{talent_name}' für Mensch ausgewählt, trotz nicht erfüllter Voraussetzungen.")
+            charakter.dispatch('on_charakter_change')
 
     def _on_talent_select(self, talent_name):
         """
-        Wird aufgerufen, wenn ein Talent aus dem Dropdown ausgewählt wird.
+        Wird aufgerufen, wenn ein Talent aus dem Dialog ausgewählt wird.
+        Speichert das ausgewählte Talent als freies Talent des Menschen.
         
         Args:
             talent_name: Name des ausgewählten Talents
         """
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
-            self.dropdown_menu.dismiss()
             return
-            
+                
         if talent_name == NO_TALENT_AVAILABLE_TEXT:
             Logger.info("Keine freien Talente ausgewählt.")
-            self.dropdown_menu.dismiss()
             return
 
         charakter = self.controller.charakter
         if hasattr(charakter, 'selected_talente') and talent_name in charakter.selected_talente:
             Logger.warning(f"Talent '{talent_name}' ist bereits ausgewählt.")
-            self.dropdown_menu.dismiss()
             return
 
-        self.aktuelles_talent = talent_name
-        charakter.talent_auswaehlen(talent_name)
-        charakter.dispatch('on_charakter_change')
-        self.dropdown_menu.dismiss()
+        # Talent auswählen
+        result = self.controller.waehle_talent(talent_name)
+        
+        # Prüfen, ob Voraussetzungen bestätigt werden müssen
+        if result == "needs_voraussetzungen_confirmation":
+            # Dialog anzeigen mit den Fehlermeldungen
+            fehlermeldungen = charakter.temp_voraussetzungs_fehler
+            self._show_voraussetzungen_dialog(talent_name, fehlermeldungen)
+            return
+        
+        # Bei Erfolg das Talent merken
+        if result is True:
+            self.aktuelles_talent = talent_name
+            self.mensch_freies_talent = talent_name
+            Logger.info(f"Freies Talent '{talent_name}' für Mensch ausgewählt.")
+            charakter.dispatch('on_charakter_change')
 
     def aktualisiere_ui(self, *args):
         """
@@ -262,12 +446,12 @@ class VoelkerWidget(MDBoxLayout):
             width=TALENT_LABEL_WIDTH
         )
 
-        # Talent-Auswahlbutton
+        # Talent-Auswahlbutton - jetzt mit neuem Suchfenster
         talent_button = MDIconButton(
             icon="menu-down",
             size_hint=(None, None),
             size=(dp(48), dp(48)),
-            on_release=self.show_talent_menu
+            on_release=self.show_talent_search_dialog  # Verwende neuen Dialog
         )
 
         row_layout.add_widget(talent_label)
@@ -320,22 +504,14 @@ class VoelkerWidget(MDBoxLayout):
             detail_row.add_widget(detail_label)
             container.add_widget(detail_row)
 
-    def _get_freie_talente(self):
-        """
-        Gibt eine Liste von freien Talenten zurück.
-        
-        Returns:
-            list: Liste der verfügbaren Talente
-        """
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
-            return [NO_TALENT_AVAILABLE_TEXT]
-            
-        frei_talente = self.controller.charakter.get_freie_talente()
-        if not frei_talente:
-            frei_talente = [NO_TALENT_AVAILABLE_TEXT]
-            
-        return frei_talente
+    def _remove_mensch_talent(self):
+        """Entfernt das ausgewählte Talent des Menschen."""
+        if self.mensch_freies_talent:
+            # Talent entfernen
+            self.controller.entferne_talent(self.mensch_freies_talent)
+            Logger.info(f"Freies Talent '{self.mensch_freies_talent}' von 'Mensch' entfernt.")
+            self.mensch_freies_talent = ""  # Zurücksetzen
+            self.aktuelles_talent = DEFAULT_TALENT_TEXT  # Label zurücksetzen
 
     def _on_checkbox_active(self, instance, value, selected_volk_name):
         """
@@ -367,6 +543,10 @@ class VoelkerWidget(MDBoxLayout):
         
         # Wenn ein Volk aktiviert wird, alle anderen deaktivieren
         if value:
+            # Wenn ein anderes Volk als "Mensch" aktiviert wird, das freie Talent von "Mensch" entfernen
+            if selected_volk_name != DEFAULT_VOLK and charakter.voelker_selected.get(DEFAULT_VOLK, False):
+                self._remove_mensch_talent()
+            
             # Alle Völker in beiden Dictionaries deaktivieren
             for volk_name in charakter.voelker_selected:
                 charakter.voelker_selected[volk_name] = False
@@ -378,6 +558,10 @@ class VoelkerWidget(MDBoxLayout):
             if selected_volk_name in charakter.voelker:
                 charakter.voelker[selected_volk_name].ausgewaehlt = True
         else:
+            # Wenn "Mensch" abgewählt wird, das freie Talent entfernen
+            if selected_volk_name == DEFAULT_VOLK:
+                self._remove_mensch_talent()
+            
             # Das Volk deaktivieren
             charakter.voelker_selected[selected_volk_name] = False
             if selected_volk_name in charakter.voelker:
@@ -395,62 +579,3 @@ class VoelkerWidget(MDBoxLayout):
         Logger.info(f"Volk '{selected_volk_name}' gesetzt auf {value}")
         # Verzögerte UI-Aktualisierung, um Rückkopplungseffekte zu vermeiden
         Clock.schedule_once(lambda dt: self.aktualisiere_ui(), 0.1)
-
-    def _deactivate_other_voelker(self, active_checkbox):
-        """
-        Deaktiviert alle anderen Völker-Checkboxen.
-        
-        Args:
-            active_checkbox: Die aktive Checkbox, die nicht deaktiviert werden soll
-        """
-        charakter = self.controller.charakter
-        container = self.ids.voelker_content_container
-        
-        for child in container.children:
-            if isinstance(child, MDBoxLayout):
-                for widget in child.children:
-                    if isinstance(widget, MDCheckbox) and widget != active_checkbox:
-                        widget.active = False
-                        volk_name = widget.voelker_name
-                        charakter.voelker_selected[volk_name] = False
-                        volk_obj = charakter.voelker.get(volk_name)
-                        if volk_obj:
-                            volk_obj.abwaehlen()
-
-    def _activate_volk(self, volk_name):
-        """
-        Aktiviert ein Volk.
-        
-        Args:
-            volk_name: Name des zu aktivierenden Volks
-        """
-        charakter = self.controller.charakter
-        charakter.voelker_selected[volk_name] = True
-        
-        volk_obj = charakter.voelker.get(volk_name)
-        if volk_obj:
-            volk_obj.auswaehlen()
-
-    def _deactivate_volk(self, volk_name):
-        """
-        Deaktiviert ein Volk.
-        
-        Args:
-            volk_name: Name des zu deaktivierenden Volks
-        """
-        charakter = self.controller.charakter
-        charakter.voelker_selected[volk_name] = False
-        
-        volk_obj = charakter.voelker.get(volk_name)
-        if volk_obj:
-            volk_obj.abwaehlen()
-
-    def _set_default_volk(self):
-        """Setzt das Standard-Volk (Mensch) als ausgewählt."""
-        charakter = self.controller.charakter
-        
-        # Verwende die Manager-Methode, die sicherstellt, dass nur ein Volk aktiv ist
-        charakter.set_selected_volk(DEFAULT_VOLK)
-        
-        # UI aktualisieren
-        self.aktualisiere_ui()

@@ -60,6 +60,52 @@ def aktive_talente(charakter):
     """
     return [talent for talent in charakter.talente.values() if talent.aktiv]
 
+def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=False):
+    """
+    Wählt ein Talent als freies Talent ohne Kosten (Aufstiege oder Handicap-Punkte) aus.
+    Speziell für Rasseneigenschaften wie das freie Talent der Menschen.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        talent_name_key: Der Name des auszuwählenden Talents
+        ignore_voraussetzungen: Flag zum Ignorieren der Voraussetzungsprüfung
+        
+    Returns:
+        str oder bool: "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
+                       True bei Erfolg, False bei Misserfolg
+    """
+    Logger.info(f"Wähle freies Talent: {talent_name_key}")
+    
+    # Prüfen, ob das Talent existiert
+    if talent_name_key not in charakter.talente:
+        Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
+        return False
+        
+    talent = charakter.talente[talent_name_key]
+    
+    # Prüfen, ob das Talent bereits ausgewählt ist
+    if talent.ausgewaehlt:
+        Logger.warning(f"Talent '{talent_name_key}' ist bereits ausgewählt.")
+        return False
+        
+    # Voraussetzungsprüfung, nur wenn ignore_voraussetzungen nicht gesetzt ist
+    if not ignore_voraussetzungen:
+        fehlermeldungen = pruefe_voraussetzungen(charakter, talent)
+        if fehlermeldungen:
+            # Fehlermeldungen als Attribut speichern für UI-Dialog
+            charakter.temp_voraussetzungs_fehler = fehlermeldungen
+            Logger.debug(f"Rückgabe 'needs_voraussetzungen_confirmation' für freies Talent {talent_name_key}")
+            return "needs_voraussetzungen_confirmation"
+    
+    # Direkt das Talent auswählen, ohne Kosten
+    talent.ausgewaehlt = True
+    
+    # Zur Liste der ausgewählten Talente hinzufügen
+    if talent_name_key not in charakter.selected_talente:
+        charakter.selected_talente.append(talent_name_key)
+        
+    Logger.info(f"Freies Talent '{talent_name_key}' ohne Kosten ausgewählt.")
+    return True
 
 def get_freie_talente(charakter):
     """
