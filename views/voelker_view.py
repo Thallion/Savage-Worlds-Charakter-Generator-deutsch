@@ -258,8 +258,14 @@ class VoelkerWidget(MDBoxLayout):
             talent_name: Name des Talents
             fehlermeldungen: Liste von Fehlermeldungen
         """
-        from kivymd.uix.dialog import MDDialog
-        from kivymd.uix.button import MDFlatButton
+        # Dialog-Inhalt erstellen
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing="12dp",
+            padding="12dp",
+            size_hint_y=None,
+            height="200dp"
+        )
         
         # Warnungstext erstellen
         warning_text = f"Talent '{talent_name}' erfüllt nicht alle Voraussetzungen:\n\n"
@@ -267,20 +273,36 @@ class VoelkerWidget(MDBoxLayout):
             warning_text += f"• {error}\n"
         warning_text += "\nTrotzdem auswählen?"
         
-        # MDDialog erstellen
-        self.voraussetzungs_dialog = MDDialog(
-            title="Voraussetzungen nicht erfüllt",
+        warning_label = MDLabel(
             text=warning_text,
-            buttons=[
-                MDFlatButton(
-                    text="Abbrechen",
-                    on_release=lambda x: self._dismiss_voraussetzungs_dialog()
+            halign="left",
+            valign="top",
+            theme_text_color="Error"
+        )
+        content.add_widget(warning_label)
+        
+        # MDDialog mit korrekter KivyMD 2.0.1 Syntax erstellen
+        self.voraussetzungs_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Voraussetzungen nicht erfüllt",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._dismiss_voraussetzungs_dialog(),
                 ),
-                MDFlatButton(
-                    text="Trotzdem auswählen",
-                    on_release=lambda x: self._confirm_talent_selection(talent_name)
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_talent_selection(talent_name),
                 ),
-            ],
+                spacing="8dp",
+            ),
         )
         
         self.voraussetzungs_dialog.open()
@@ -304,8 +326,18 @@ class VoelkerWidget(MDBoxLayout):
         # Wichtig: Flag setzen, um Voraussetzungen zu ignorieren
         charakter.ignore_voraussetzungen = True
         
-        # Erneut versuchen, das Talent auszuwählen
-        erfolg = self.controller.waehle_talent(talent_name, ignore_rang_check=True)
+        # Erneut versuchen, das freie Talent auszuwählen
+        # Verwende waehle_freies_talent statt waehle_talent, mit ignore_voraussetzungen=True
+        if hasattr(charakter, 'waehle_freies_talent'):
+            # Direkte Methode im Charakter
+            erfolg = charakter.waehle_freies_talent(talent_name, ignore_voraussetzungen=True)
+        elif hasattr(self.controller, 'waehle_freies_talent'):
+            # Methode im Controller
+            erfolg = self.controller.waehle_freies_talent(talent_name, ignore_voraussetzungen=True)
+        else:
+            # Fallback auf talent_funktionen
+            from functions.talent_funktionen import waehle_freies_talent
+            erfolg = waehle_freies_talent(charakter, talent_name, ignore_voraussetzungen=True)
         
         if erfolg:
             self.aktuelles_talent = talent_name
@@ -334,8 +366,18 @@ class VoelkerWidget(MDBoxLayout):
             Logger.warning(f"Talent '{talent_name}' ist bereits ausgewählt.")
             return
 
-        # Talent auswählen
-        result = self.controller.waehle_talent(talent_name)
+        # Freies Talent für Menschen auswählen - ohne Kosten
+        # Verwende waehle_freies_talent statt waehle_talent
+        if hasattr(charakter, 'waehle_freies_talent'):
+            # Direkte Methode im Charakter
+            result = charakter.waehle_freies_talent(talent_name)
+        elif hasattr(self.controller, 'waehle_freies_talent'):
+            # Methode im Controller
+            result = self.controller.waehle_freies_talent(talent_name)
+        else:
+            # Fallback auf talent_funktionen
+            from functions.talent_funktionen import waehle_freies_talent
+            result = waehle_freies_talent(charakter, talent_name)
         
         # Prüfen, ob Voraussetzungen bestätigt werden müssen
         if result == "needs_voraussetzungen_confirmation":
@@ -368,6 +410,24 @@ class VoelkerWidget(MDBoxLayout):
 
             # Synchronisiere voelker_selected mit den verfügbaren Völkern
             charakter = self.controller.charakter
+            
+            # Debug-Ausgabe für Völker
+            Logger.debug(f"Völker im Charakter: {list(charakter.voelker.keys())}")
+            Logger.debug(f"Ausgewählte Völker: {charakter.voelker_selected}")
+            
+            # Sicherstellen, dass "Mensch" existiert
+            if "Mensch" not in charakter.voelker:
+                Logger.warning("ACHTUNG: Volk 'Mensch' fehlt in der Völkerliste des Charakters!")
+                # Mensch temporär hinzufügen
+                from models.volk import Volk
+                mensch_volk = Volk(
+                    name="Mensch",
+                    handicaps=[],
+                    talente=["Freies Talent"],
+                    besonderheiten=["Menschen erhalten ein freies Talent ihrer Wahl"]
+                )
+                charakter.voelker["Mensch"] = mensch_volk
+                Logger.info("Volk 'Mensch' wurde temporär hinzugefügt")
             
             # Sicherstellen, dass alle Völker in voelker_selected existieren
             for volk_name in charakter.voelker:

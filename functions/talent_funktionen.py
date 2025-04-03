@@ -100,6 +100,10 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     # Direkt das Talent auswählen, ohne Kosten
     talent.ausgewaehlt = True
     
+    # Machtpunkte und verfügbare Mächte erhöhen, falls das Talent diese gewährt
+    charakter.verfuegbare_maechte += talent.neue_maechte
+    charakter.erhoehe_machtpunkte(talent.machtpunkte)
+    
     # Zur Liste der ausgewählten Talente hinzufügen
     if talent_name_key not in charakter.selected_talente:
         charakter.selected_talente.append(talent_name_key)
@@ -398,6 +402,8 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     Logger.debug(f"Rangprüfung - Ergebnis: {is_higher} (Talent-Rang {'>' if is_higher else '<='} Charakter-Rang)")
     
     return is_higher
+
+
 
 def entferne_talent(charakter, talent_name_key):
     """
