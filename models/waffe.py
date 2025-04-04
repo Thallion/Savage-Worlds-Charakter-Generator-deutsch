@@ -60,8 +60,37 @@ class Waffe(Ausruestung):
         return self.gewicht
     
     def kann_angelegt_werden(self, charakter):
+        """
+        Prüft, ob der Charakter die Mindeststärke für die Waffe erfüllt.
+        Berücksichtigt das Talent "Kräftig".
+        
+        Args:
+            charakter: Das Charakter-Objekt
+            
+        Returns:
+            bool: True wenn die Mindeststärke erfüllt ist, sonst False
+        """
         mindeststaerke_num = self.convert_staerke_to_num(self.mindeststaerke)
-        charakter_staerke_num = self.convert_staerke_to_num(charakter.attribute['Stärke'].wert)
+        
+        # Effektive Stärke mit Berücksichtigung von "Kräftig"
+        if hasattr(charakter, 'get_effektive_staerke'):
+            charakter_staerke_num = charakter.get_effektive_staerke(fuer_ausruestung=True)
+        else:
+            # Fallback für Abwärtskompatibilität
+            charakter_staerke_num = self.convert_staerke_to_num(charakter.attribute['Stärke'].wert)
+            
+            # Prüfen, ob der Charakter das Talent "Kräftig" hat
+            if "Kräftig" in charakter.selected_talente:
+                # Einen Würfeltyp höher für Ausrüstung
+                if charakter_staerke_num == 4:
+                    charakter_staerke_num = 6
+                elif charakter_staerke_num == 6:
+                    charakter_staerke_num = 8
+                elif charakter_staerke_num == 8:
+                    charakter_staerke_num = 10
+                elif charakter_staerke_num == 10:
+                    charakter_staerke_num = 12
+        
         return charakter_staerke_num >= mindeststaerke_num
 
     def anlegen(self, charakter):

@@ -8,7 +8,7 @@ from models.schild import Schild
 def berechne_abgeleitete_werte(charakter):
     """
     Berechnet die abgeleiteten Werte des Charakters, wie Parade, Robustheit usw.
-    Berücksichtigt die Erschöpfung.
+    Berücksichtigt die Erschöpfung und Talente.
     
     Args:
         charakter: Das Charakterobjekt, dessen Werte berechnet werden sollen
@@ -19,7 +19,7 @@ def berechne_abgeleitete_werte(charakter):
     try:
         # Standardwerte
         bewegungsweite = 6
-        bennys = 3
+        bennys = 3  # Basis-Bennys
         entschlossenheit = 0
         machtpunkte = charakter.machtpunkte  # Machtpunkte aus dem Charakter übernehmen
         wunden = 0  # Kann später durch Spielereignisse verändert werden
@@ -32,7 +32,24 @@ def berechne_abgeleitete_werte(charakter):
         else:
             kaempfen_wert = 4  # Standardwert, wenn Kämpfen nicht vorhanden
             
-        charakter.parade = 2 + kaempfen_wert // 2
+        parade_basis = 2 + kaempfen_wert // 2
+        parade_bonus = 0
+        
+        # Talent-Boni für Parade
+        if "Block" in charakter.selected_talente:
+            parade_bonus += 1  # Block: +1 Parade
+        
+        if "Harter Block" in charakter.selected_talente:
+            # Harter Block ersetzt Block (nicht kumulativ)
+            parade_bonus += 1  # Harter Block: +1 Parade
+        
+        if "Meister aller Waffen" in charakter.selected_talente:
+            parade_bonus += 1  # Meister aller Waffen: +1 Parade
+        
+        if "Waffenmeister" in charakter.selected_talente:
+            parade_bonus += 1  # Waffenmeister: +1 Parade
+            
+        charakter.parade = parade_basis + parade_bonus
 
         # Berechnung der Robustheit
         konstitution_attribut = charakter.attribute.get('Konstitution')
@@ -41,8 +58,20 @@ def berechne_abgeleitete_werte(charakter):
         else:
             konstitution_wert = 4  # Standardwert, wenn Konstitution nicht vorhanden
 
-        # Basis-Robustheit ohne Rüstung
-        charakter.robustheit_basis = (konstitution_wert // 2) + 2
+        # Talent-Boni für Robustheit/Größe
+        robustheit_bonus = 0
+        
+        if "Kräftig" in charakter.selected_talente:
+            robustheit_bonus += 1  # Kräftig: +1 Robustheit durch erhöhte Größe
+        
+        if "Raufbold" in charakter.selected_talente:
+            robustheit_bonus += 1  # Raufbold: +1 Robustheit
+
+        if "Schläger" in charakter.selected_talente:
+            robustheit_bonus += 1  # Schläger: +1 Robustheit            
+        
+        # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Boni
+        charakter.robustheit_basis = (konstitution_wert // 2) + 2 + robustheit_bonus
 
         # Gesamtrüstungsschutz berechnen
         from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
@@ -54,6 +83,15 @@ def berechne_abgeleitete_werte(charakter):
 
         # String für die Anzeige
         charakter.robustheit_mit_ruestung = f"{charakter.robustheit} ({gesamt_torso})"
+        
+        # Talente für Bennys
+        if "Glück" in charakter.selected_talente:
+            bennys += 1  # Glück: +1 Benny
+        
+        if "Großes Glück" in charakter.selected_talente:
+            bennys += 1  # Großes Glück: +1 Bennys
+            
+        charakter.bennys = bennys  # Aktualisiere Bennys im Charakter-Objekt
 
         # Maximale Traglast berechnen
         from functions.ausruestung_funktionen import berechne_traglast

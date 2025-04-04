@@ -67,18 +67,42 @@ class Ruestung(Ausruestung):
         logging.debug(f"{self.name} wurde abgelegt.")
 
     def kann_angelegt_werden(self, charakter):
+        """
+        Prüft, ob der Charakter die Mindeststärke für die Rüstung erfüllt.
+        Berücksichtigt das Talent "Kräftig".
+        
+        Args:
+            charakter: Das Charakter-Objekt
+            
+        Returns:
+            bool: True wenn die Mindeststärke erfüllt ist, sonst False
+        """
         mindeststaerke_wert = self.mindeststaerke
-        charakter_staerke_wert = charakter.attribute['Stärke'].wert
-
+        
+        # Effektive Stärke mit Berücksichtigung von "Kräftig"
+        if hasattr(charakter, 'get_effektive_staerke'):
+            charakter_staerke_wert = charakter.get_effektive_staerke(fuer_ausruestung=True)
+        else:
+            charakter_staerke_wert = charakter.attribute['Stärke'].wert
+            
+            # Prüfen, ob der Charakter das Talent "Kräftig" hat
+            if "Kräftig" in charakter.selected_talente:
+                # Stärke um einen Würfeltyp erhöhen
+                if charakter_staerke_wert == 4:
+                    charakter_staerke_wert = 6
+                elif charakter_staerke_wert == 6:
+                    charakter_staerke_wert = 8
+                elif charakter_staerke_wert == 8:
+                    charakter_staerke_wert = 10
+                elif charakter_staerke_wert == 10:
+                    charakter_staerke_wert = 12
+        
         # Mapping von Würfelwerten zu numerischen Werten
         staerke_mapping = {'W4': 4, 'W6': 6, 'W8': 8, 'W10': 10, 'W12': 12, '-': 0}
-
-        mindeststaerke_num = staerke_mapping.get(mindeststaerke_wert, 4)
-
-        if charakter_staerke_wert >= mindeststaerke_num:
-            return True
-        else:
-            return False
+        
+        mindeststaerke_num = staerke_mapping.get(mindeststaerke_wert, 0)
+        
+        return charakter_staerke_wert >= mindeststaerke_num
 
     def toggle_angelegt(self, charakter=None):
         """

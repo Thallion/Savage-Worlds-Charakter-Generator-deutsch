@@ -108,6 +108,9 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     if talent_name_key not in charakter.selected_talente:
         charakter.selected_talente.append(talent_name_key)
         
+    # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+    charakter.berechne_abgeleitete_werte()
+        
     Logger.info(f"Freies Talent '{talent_name_key}' ohne Kosten ausgewählt.")
     return True
 
@@ -156,6 +159,10 @@ def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
                 if talent_name_key not in charakter.selected_talente:
                     charakter.selected_talente.append(talent_name_key)
                 Logger.info(f"Talent '{talent_name_key}' ausgewählt.")
+                
+                # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+                charakter.berechne_abgeleitete_werte()
+                
                 return True
             else:
                 Logger.warning(f"Voraussetzungen für Talent '{talent_name_key}' nicht erfüllt.")
@@ -317,6 +324,10 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
             if hasattr(charakter, 'ignore_voraussetzungen'):
                 charakter.ignore_voraussetzungen = False
                 Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
+            
+            # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+            charakter.berechne_abgeleitete_werte()
+            
             return True
 
     # Option 2: Auswahl mit Aufstiegen
@@ -333,6 +344,10 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
                 if hasattr(charakter, 'ignore_voraussetzungen'):
                     charakter.ignore_voraussetzungen = False
                     Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
+                
+                # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+                charakter.berechne_abgeleitete_werte()
+                
                 return True
         else:    
             Logger.warning(f"Keine verbleibenden Aufstiege übrig.")

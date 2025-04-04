@@ -116,6 +116,7 @@ def verkaufen(charakter, item, anzahl=1, preis_pro_stueck=None):
 def berechne_traglast(charakter):
     """
     Berechnet die maximale Traglast des Charakters basierend auf Stärke.
+    Beim Talent "Kräftig" wird die Traglast um 20 kg erhöht.
     
     Args:
         charakter: Das Charakterobjekt, dessen Traglast berechnet werden soll
@@ -131,6 +132,11 @@ def berechne_traglast(charakter):
             staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
 
         maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
+        
+        # Bonus für das Talent "Kräftig" hinzufügen
+        if "Kräftig" in charakter.selected_talente:
+            maximale_traglast += 20  # +20 kg Traglast bei Kräftig
+        
         return maximale_traglast
 
     except Exception as e:

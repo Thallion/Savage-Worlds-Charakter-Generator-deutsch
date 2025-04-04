@@ -705,6 +705,40 @@ class Charakter(EventDispatcher):
     def berechne_gesamtkosten(self):
         return ausruestung_funktionen.berechne_gesamtkosten(self)
 
+    def get_effektive_staerke(self, fuer_ausruestung=False):
+        """
+        Berechnet die effektive Stärke des Charakters.
+        Berücksichtigt das Talent "Kräftig" für Mindeststärke und Traglast.
+        
+        Args:
+            fuer_ausruestung: Ob die Stärke für Mindeststärke/Traglast (True) oder normal (False) berechnet werden soll
+            
+        Returns:
+            int: Der effektive Stärkewert
+        """
+        # Basiswert der Stärke
+        staerke_attribut = self.attribute.get('Stärke')
+        if not staerke_attribut:
+            Logger.warning("Stärke-Attribut nicht gefunden.")
+            return 4  # Standardwert
+        
+        staerke_wert = staerke_attribut.wert
+        
+        # Prüfen, ob der Charakter das Talent "Kräftig" hat und ob es für Ausrüstung/Traglast verwendet wird
+        if fuer_ausruestung and "Kräftig" in self.selected_talente:
+            # Stärke um einen Würfeltyp erhöhen
+            if staerke_wert == 4:
+                staerke_wert = 6
+            elif staerke_wert == 6:
+                staerke_wert = 8
+            elif staerke_wert == 8:
+                staerke_wert = 10
+            elif staerke_wert == 10:
+                staerke_wert = 12
+            # W12 bleibt W12
+        
+        return staerke_wert
+
     def update_eigenschaften_tab(self, dt):
         app = App.get_running_app()
         try:
