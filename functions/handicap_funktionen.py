@@ -62,13 +62,25 @@ def waehle_handicap(charakter, handicap_name_key):
                 charakter.verbleibende_handicap_punkte += handicap.punkte  
                 charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4) 
                 charakter.selected_handicaps.append(handicap_name_key)
+                
+                # Handicap-spezifische Effekte anwenden
+                _apply_handicap_effects(charakter, handicap)
+                
                 Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
                 Logger.info(f"verbleibend '{charakter.verbleibende_handicap_punkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
                 charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen
+                
+                # Abgeleitete Werte neu berechnen
+                charakter.berechne_abgeleitete_werte()
+                
                 return True
             else:
                 handicap.auswaehlen()
                 charakter.selected_handicaps.append(handicap_name_key)
+                
+                # Handicap-spezifische Effekte anwenden
+                _apply_handicap_effects(charakter, handicap)
+                
                 if neue_gesamtpunkte == 5:
                     charakter.gesamt_handicap_punkte = 4
                     charakter.verbleibende_handicap_punkte += handicap.punkte 
@@ -77,18 +89,61 @@ def waehle_handicap(charakter, handicap_name_key):
                     charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen 
                     Logger.warning(f"Handicap '{handicap_name_key}' ausgewählt. Handicap-punkte nicht erhöht, da Maximum von 4 erreicht.")
                     Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
+                    
+                    # Abgeleitete Werte neu berechnen
+                    charakter.berechne_abgeleitete_werte()
+                    
                     return True
                 else:
                     Logger.warning(f"Handicap '{handicap_name_key}' ausgewählt. Handicap-punkte nicht erhöht, da Maximum von 4 erreicht.")
                     charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen  
                     Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
                     charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
+                    
+                    # Abgeleitete Werte neu berechnen
+                    charakter.berechne_abgeleitete_werte()
+                    
                     return True                  
         else:
             Logger.warning(f"Handicap '{handicap_name_key}' ist bereits ausgewählt.")
     else:
         Logger.error(f"Handicap '{handicap_name_key}' existiert nicht.")
     return False
+
+def _apply_handicap_effects(charakter, handicap):
+    """
+    Wendet die Effekte eines Handicaps auf den Charakter an.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        handicap: Das Handicap-Objekt
+    """
+    # Alt (schwer) - Mehr Fertigkeitspunkte
+    if "Alt" in handicap.name and handicap.stufe == "schwer":
+        charakter.verbleibende_fertigkeitssteigerungen += 5
+        charakter.maximale_fertigkeitssteigerungen += 5
+        Logger.info(f"Handicap 'Alt (schwer)': +5 Fertigkeitssteigerungen")
+    
+    # Arm (leicht) - Halbiertes Vermögen
+    elif "Arm" in handicap.name and handicap.stufe == "leicht":
+        # Anstatt direkt das Vermögen zu ändern, verwenden wir die neue Funktion
+        from functions.ausruestung_funktionen import anpassen_vermoegen_bei_handicap_arm
+        anpassen_vermoegen_bei_handicap_arm(charakter, True)  # True = wird ausgewählt
+    
+    # Jung (leicht/schwer) - Anpassung der Steigerungen
+    elif "Jung" in handicap.name:
+        if handicap.stufe == "leicht":
+            charakter.verbleibende_attributsteigerungen = 4
+            charakter.maximale_attributsteigerungen = 4
+            charakter.verbleibende_fertigkeitssteigerungen = 10
+            charakter.maximale_fertigkeitssteigerungen = 10
+            Logger.info(f"Handicap 'Jung (leicht)': Attributsteigerungen=4, Fertigkeitssteigerungen=10")
+        elif handicap.stufe == "schwer":
+            charakter.verbleibende_attributsteigerungen = 3
+            charakter.maximale_attributsteigerungen = 3
+            charakter.verbleibende_fertigkeitssteigerungen = 10
+            charakter.maximale_fertigkeitssteigerungen = 10
+            Logger.info(f"Handicap 'Jung (schwer)': Attributsteigerungen=3, Fertigkeitssteigerungen=10")
 
 
 def entferne_handicap(charakter, handicap_name_key):
@@ -110,10 +165,18 @@ def entferne_handicap(charakter, handicap_name_key):
             charakter.gesamt_handicap_punkte = max(charakter.gesamt_handicap_punkte, 0)
             charakter.verbleibende_handicap_punkte -= handicap.punkte
             charakter.verbleibende_handicap_punkte = max(charakter.verbleibende_handicap_punkte, 0)
+            
+            # Handicap-spezifische Effekte rückgängig machen
+            _remove_handicap_effects(charakter, handicap)
+            
             Logger.info(f"Handicap '{handicap_name_key}' entfernt.")
             if handicap_name_key in charakter.selected_handicaps:
                 charakter.selected_handicaps.remove(handicap_name_key)
                 charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen
+            
+            # Abgeleitete Werte neu berechnen
+            charakter.berechne_abgeleitete_werte()
+            
             return True
         else:
             Logger.warning(f"Handicap '{handicap_name_key}' ist nicht ausgewählt.")
@@ -121,6 +184,35 @@ def entferne_handicap(charakter, handicap_name_key):
         Logger.error(f"Handicap '{handicap_name_key}' existiert nicht.")
     return False
 
+def _remove_handicap_effects(charakter, handicap):
+    """
+    Macht die Effekte eines Handicaps rückgängig.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        handicap: Das Handicap-Objekt
+    """
+    # Alt (schwer) - Mehr Fertigkeitspunkte
+    if "Alt" in handicap.name and handicap.stufe == "schwer":
+        charakter.verbleibende_fertigkeitssteigerungen -= 5
+        charakter.maximale_fertigkeitssteigerungen -= 5
+        charakter.verbleibende_fertigkeitssteigerungen = max(charakter.verbleibende_fertigkeitssteigerungen, 0)
+        Logger.info(f"Handicap 'Alt (schwer)' entfernt: -5 Fertigkeitssteigerungen")
+    
+    # Arm (leicht) - Halbiertes Vermögen
+    elif "Arm" in handicap.name and handicap.stufe == "leicht":
+        # Anstatt direkt das Vermögen zu ändern, verwenden wir die neue Funktion
+        from functions.ausruestung_funktionen import anpassen_vermoegen_bei_handicap_arm
+        anpassen_vermoegen_bei_handicap_arm(charakter, False)  # False = wird abgewählt
+    
+    # Jung (leicht/schwer) - Anpassung der Steigerungen
+    elif "Jung" in handicap.name:
+        # Zurück zu den Standardwerten
+        charakter.verbleibende_attributsteigerungen = 5
+        charakter.maximale_attributsteigerungen = 5
+        charakter.verbleibende_fertigkeitssteigerungen = 12
+        charakter.maximale_fertigkeitssteigerungen = 12
+        Logger.info(f"Handicap 'Jung' entfernt: Steigerungen auf Standardwerte zurückgesetzt")
 
 def aktive_handicaps(charakter):
     """

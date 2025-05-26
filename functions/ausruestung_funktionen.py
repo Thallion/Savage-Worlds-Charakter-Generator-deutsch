@@ -265,3 +265,58 @@ def berechne_gesamtkosten(charakter):
         if schild.ausgewaehlt:
             gesamtkosten += schild.kosten * schild.menge
     return gesamtkosten
+
+def anpassen_vermoegen_bei_handicap_arm(charakter, wird_ausgewaehlt):
+    """
+    Passt das Vermögen bei Auswahl/Abwahl des Handicaps "Arm" an.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        wird_ausgewaehlt: True, wenn das Handicap ausgewählt wird, False, wenn es abgewählt wird
+    """
+    if wird_ausgewaehlt:
+        # Arm wird ausgewählt -> Vermögen halbieren
+        charakter.vermoegen = charakter.vermoegen // 2
+        Logger.info(f"Handicap 'Arm' ausgewählt: Vermögen halbiert auf {charakter.vermoegen}")
+    else:
+        # Arm wird abgewählt -> Vermögen ist wieder normal
+        # Prüfen, ob "Reich" oder "Stinkreich" aktiv ist
+        multiplikator = 1
+        if "Stinkreich" in charakter.selected_talente:
+            multiplikator = 5
+        elif "Reich" in charakter.selected_talente:
+            multiplikator = 3
+        
+        # Setze Vermögen auf den korrekten Wert mit Multiplikator
+        charakter.vermoegen = charakter.startkapital * multiplikator
+        Logger.info(f"Handicap 'Arm' abgewählt: Vermögen wiederhergestellt auf {charakter.vermoegen}")
+
+def anpassen_vermoegen_bei_talent_reich(charakter, talent_name, wird_ausgewaehlt):
+    """
+    Passt das Vermögen bei Auswahl/Abwahl der Talente "Reich" oder "Stinkreich" an.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        talent_name: "Reich" oder "Stinkreich"
+        wird_ausgewaehlt: True, wenn das Talent ausgewählt wird, False, wenn es abgewählt wird
+    """
+    # Aktuelles Basisvermögen berechnen (ohne bisherige Multiplikatoren)
+    basis_vermoegen = charakter.startkapital
+    
+    # Prüfen, ob "Arm" aktiv ist
+    for handicap_key in charakter.selected_handicaps:
+        if handicap_key in charakter.handicaps:
+            handicap = charakter.handicaps[handicap_key]
+            if handicap.name == "Arm" and handicap.stufe == "leicht":
+                basis_vermoegen //= 2
+                break
+    
+    if wird_ausgewaehlt:
+        # Reich/Stinkreich wird ausgewählt
+        multiplikator = 5 if talent_name == "Stinkreich" else 3
+        charakter.vermoegen = basis_vermoegen * multiplikator
+        Logger.info(f"Talent '{talent_name}' ausgewählt: Vermögen angepasst auf {charakter.vermoegen}")
+    else:
+        # Reich/Stinkreich wird abgewählt
+        charakter.vermoegen = basis_vermoegen
+        Logger.info(f"Talent '{talent_name}' abgewählt: Vermögen wiederhergestellt auf {charakter.vermoegen}")    

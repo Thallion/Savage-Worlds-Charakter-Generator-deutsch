@@ -158,9 +158,15 @@ def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
                 charakter.erhoehe_machtpunkte(talent.machtpunkte)
                 if talent_name_key not in charakter.selected_talente:
                     charakter.selected_talente.append(talent_name_key)
+                
+                # Spezielle Anpassungen für Reich/Stinkreich
+                if talent_name_key in ["Reich", "Stinkreich"]:
+                    from functions.ausruestung_funktionen import anpassen_vermoegen_bei_talent_reich
+                    anpassen_vermoegen_bei_talent_reich(charakter, talent_name_key, True)  # True = wird ausgewählt
+                
                 Logger.info(f"Talent '{talent_name_key}' ausgewählt.")
                 
-                # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+                # Abgeleitete Werte neu berechnen (ohne Vermögensberechnung)
                 charakter.berechne_abgeleitete_werte()
                 
                 return True
@@ -436,18 +442,18 @@ def entferne_talent(charakter, talent_name_key):
         charakter.verfuegbare_maechte -= talent.neue_maechte
         charakter.verfuegbare_maechte = max(charakter.verfuegbare_maechte, 0)  # Nicht negativ
         charakter.senke_machtpunkte(talent.machtpunkte)
+        
+        # Spezielle Anpassungen für Reich/Stinkreich
+        if talent_name_key in ["Reich", "Stinkreich"]:
+            from functions.ausruestung_funktionen import anpassen_vermoegen_bei_talent_reich
+            anpassen_vermoegen_bei_talent_reich(charakter, talent_name_key, False)  # False = wird abgewählt
+        
         if talent_name_key in charakter.selected_talente:
             charakter.selected_talente.remove(talent_name_key)
         Logger.debug(f"Talent '{talent_name_key}' entfernt.")
         
-        # Wenn der Arkane Hintergrund abgewählt wird, müssen auch alle Mächte abgewählt werden
-        if talent.neue_maechte > 0:
-            # Kopie der Liste erstellen, da sich diese während der Iteration ändert
-            selected_maechte_copy = charakter.selected_maechte.copy()
-            for macht_name in selected_maechte_copy:
-                # Jede Macht abwählen ohne verfuegbare_maechte anzupassen
-                entferne_macht(charakter, macht_name, adjust_verfuegbare_maechte=False)
-            Logger.info(f"Alle Mächte durch Abwahl des Arkanen Hintergrunds '{talent_name_key}' entfernt.")
+        # Abgeleitete Werte neu berechnen (ohne Vermögensberechnung)
+        charakter.berechne_abgeleitete_werte()
         
         return True
 
@@ -470,8 +476,7 @@ def entferne_talent(charakter, talent_name_key):
             Logger.warning(f"Talent '{talent_name_key}' ist nicht ausgewählt.")
     else:
         Logger.error(f"Talent '{talent_name_key}' existiert nicht.")  
-    return False        
-
+    return False   
 
 def add_talent(charakter, talent):
     """

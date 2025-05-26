@@ -708,7 +708,7 @@ class Charakter(EventDispatcher):
     def get_effektive_staerke(self, fuer_ausruestung=False):
         """
         Berechnet die effektive Stärke des Charakters.
-        Berücksichtigt das Talent "Kräftig" für Mindeststärke und Traglast.
+        Berücksichtigt das Talent "Kräftig" und das Handicap "Fettleibig" für Mindeststärke und Traglast.
         
         Args:
             fuer_ausruestung: Ob die Stärke für Mindeststärke/Traglast (True) oder normal (False) berechnet werden soll
@@ -724,18 +724,35 @@ class Charakter(EventDispatcher):
         
         staerke_wert = staerke_attribut.wert
         
-        # Prüfen, ob der Charakter das Talent "Kräftig" hat und ob es für Ausrüstung/Traglast verwendet wird
-        if fuer_ausruestung and "Kräftig" in self.selected_talente:
-            # Stärke um einen Würfeltyp erhöhen
-            if staerke_wert == 4:
-                staerke_wert = 6
-            elif staerke_wert == 6:
-                staerke_wert = 8
-            elif staerke_wert == 8:
-                staerke_wert = 10
-            elif staerke_wert == 10:
-                staerke_wert = 12
-            # W12 bleibt W12
+        # Für Mindeststärke und Traglast
+        if fuer_ausruestung:
+            # Prüfen, ob der Charakter das Talent "Kräftig" hat
+            if "Kräftig" in self.selected_talente:
+                # Stärke um einen Würfeltyp erhöhen
+                if staerke_wert == 4:
+                    staerke_wert = 6
+                elif staerke_wert == 6:
+                    staerke_wert = 8
+                elif staerke_wert == 8:
+                    staerke_wert = 10
+                elif staerke_wert == 10:
+                    staerke_wert = 12
+            
+            # Prüfen, ob der Charakter das Handicap "Fettleibig" hat
+            for handicap_name in self.selected_handicaps:
+                if handicap_name in self.handicaps:
+                    handicap = self.handicaps[handicap_name]
+                    if "Fettleibig" in handicap.name and handicap.stufe == "leicht":
+                        # Stärke um einen Würfeltyp reduzieren für Mindeststärke
+                        if staerke_wert == 12:
+                            staerke_wert = 10
+                        elif staerke_wert == 10:
+                            staerke_wert = 8
+                        elif staerke_wert == 8:
+                            staerke_wert = 6
+                        elif staerke_wert == 6:
+                            staerke_wert = 4
+                        # W4 bleibt W4
         
         return staerke_wert
 

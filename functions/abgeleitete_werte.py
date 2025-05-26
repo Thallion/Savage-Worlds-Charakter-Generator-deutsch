@@ -25,6 +25,9 @@ def berechne_abgeleitete_werte(charakter):
         wunden = 0  # Kann später durch Spielereignisse verändert werden
         erschoepfung = charakter.erschoepfung  # Aktuelle Erschöpfung
 
+        # Vermögen wird nicht mehr hier berechnet, nur angezeigt
+        vermoegen_text = f"{charakter.vermoegen} {charakter.waehrungseinheit}"
+
         # Berechnung der Parade
         kaempfen_fertigkeit = charakter.fertigkeiten.get('Kämpfen')
         if kaempfen_fertigkeit:
@@ -50,6 +53,47 @@ def berechne_abgeleitete_werte(charakter):
             parade_bonus += 1  # Waffenmeister: +1 Parade
             
         charakter.parade = parade_basis + parade_bonus
+      
+        # Debug-Ausgaben zur Fehleridentifikation
+        Logger.debug("=== Berechne abgeleitete Werte ===")
+        Logger.debug(f"Ausgewählte Handicaps: {charakter.selected_handicaps}")
+        for hcap_key in charakter.selected_handicaps:
+            if hcap_key in charakter.handicaps:
+                hcap = charakter.handicaps[hcap_key]
+                Logger.debug(f"- {hcap_key}: Name={hcap.name}, Stufe={hcap.stufe}")
+        
+        # Handicap-Effekte für Bewegungsweite
+        bewegungsweite_malus = 0
+        
+        # Prüfe auf ausgewählte Handicaps, die Bewegungsweite beeinflussen
+        for handicap_key in charakter.selected_handicaps:
+            if handicap_key in charakter.handicaps:
+                handicap = charakter.handicaps[handicap_key]
+                
+                # Explizite Abfragen für jeden Handicap-Typ
+                if handicap.name == "Langsam":
+                    if handicap.stufe == "leicht":
+                        bewegungsweite_malus += 1
+                        Logger.debug(f"Bewegungsweite -1 durch Langsam (leicht)")
+                    elif handicap.stufe == "schwer":
+                        bewegungsweite_malus += 2
+                        Logger.debug(f"Bewegungsweite -2 durch Langsam (schwer)")
+                
+                elif handicap.name == "Fettleibig" and handicap.stufe == "leicht":
+                    bewegungsweite_malus += 1
+                    Logger.debug(f"Bewegungsweite -1 durch Fettleibig (leicht)")
+                
+                elif handicap.name == "Alt" and handicap.stufe == "schwer":
+                    bewegungsweite_malus += 1
+                    Logger.debug(f"Bewegungsweite -1 durch Alt (schwer)")
+        
+        # Bewegungsweite anpassen (nicht unter 1)
+        Logger.debug(f"Bewegungsweite-Malus: {bewegungsweite_malus}")
+        bewegungsweite = max(1, bewegungsweite - bewegungsweite_malus)
+        Logger.debug(f"Resultierende Bewegungsweite: {bewegungsweite}")
+
+        # Sicherstellen, dass bewegungsweite im Charakter-Objekt aktualisiert wird
+        charakter.bewegungsweite = bewegungsweite
 
         # Berechnung der Robustheit
         konstitution_attribut = charakter.attribute.get('Konstitution')
@@ -68,7 +112,20 @@ def berechne_abgeleitete_werte(charakter):
             robustheit_bonus += 1  # Raufbold: +1 Robustheit
 
         if "Schläger" in charakter.selected_talente:
-            robustheit_bonus += 1  # Schläger: +1 Robustheit            
+            robustheit_bonus += 1  # Schläger: +1 Robustheit      
+            
+        # Handicap-Effekte für Robustheit
+        for handicap_name in charakter.selected_handicaps:
+            if handicap_name in charakter.handicaps:
+                handicap = charakter.handicaps[handicap_name]
+                
+                # Fettleibig (leicht)
+                if "Fettleibig" in handicap.name and handicap.stufe == "leicht":
+                    robustheit_bonus += 1  # Fettleibig: +1 Robustheit
+                
+                # Klein (leicht)
+                elif "Klein" in handicap.name and handicap.stufe == "leicht":
+                    robustheit_bonus -= 1  # Klein: -1 Robustheit
         
         # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Boni
         charakter.robustheit_basis = (konstitution_wert // 2) + 2 + robustheit_bonus
@@ -90,6 +147,18 @@ def berechne_abgeleitete_werte(charakter):
         
         if "Großes Glück" in charakter.selected_talente:
             bennys += 1  # Großes Glück: +1 Bennys
+            
+        # Handicap-Effekte für Bennys
+        for handicap_name in charakter.selected_handicaps:
+            if handicap_name in charakter.handicaps:
+                handicap = charakter.handicaps[handicap_name]
+                
+                # Jung (leicht oder schwer)
+                if "Jung" in handicap.name:
+                    if handicap.stufe == "leicht":
+                        bennys += 1  # Jung (leicht): +1 Benny
+                    elif handicap.stufe == "schwer":
+                        bennys += 2  # Jung (schwer): +2 Bennys
             
         charakter.bennys = bennys  # Aktualisiere Bennys im Charakter-Objekt
 
