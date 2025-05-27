@@ -251,6 +251,9 @@ def from_dict(self, data):
                 if isinstance(ruestung, Ruestung):
                     ruestung.angelegt = True
                     self.selected_ruestungen.append(ruestung)
+                    # WICHTIG: Auch zur allgemeinen Ausrüstung hinzufügen
+                    if ruestung not in self.selected_allgemeine_ausruestung:
+                        self.selected_allgemeine_ausruestung.append(ruestung)
                     Logger.debug(f"Rüstung '{ruestung.name}' als angelegt markiert.")
                 else:
                     Logger.warning(f"'{name}' ist keine Rüstung, sondern {type(ruestung).__name__}")

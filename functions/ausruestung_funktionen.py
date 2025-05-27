@@ -197,12 +197,14 @@ def berechne_gesamt_ruestungsschutz(charakter):
     gesamt_beine = 0
     gesamt_kopf = 0
 
-    for ruestung in charakter.selected_allgemeine_ausruestung:
-        if isinstance(ruestung, Ruestung) and ruestung.angelegt:
-            gesamt_torso += ruestung.torso
-            gesamt_arme += ruestung.arme
-            gesamt_beine += ruestung.beine
-            gesamt_kopf += ruestung.kopf
+    # Durchsuche alle Ausrüstungsgegenstände
+    for item in charakter.ausruestung.values():
+        if isinstance(item, Ruestung) and item.angelegt and item.ausgewaehlt:
+            gesamt_torso += item.torso
+            gesamt_arme += item.arme
+            gesamt_beine += item.beine
+            gesamt_kopf += item.kopf
+            Logger.debug(f"Rüstung '{item.name}' wird zur Gesamtrüstung gezählt: Torso={item.torso}, Arme={item.arme}, Beine={item.beine}, Kopf={item.kopf}")
 
     ruestungsschutz = {
         'Torso': gesamt_torso,
@@ -210,6 +212,8 @@ def berechne_gesamt_ruestungsschutz(charakter):
         'Beine': gesamt_beine,
         'Kopf': gesamt_kopf
     }
+    
+    Logger.debug(f"Gesamtrüstungsschutz berechnet: {ruestungsschutz}")
     return ruestungsschutz
 
 def get_item_by_name(charakter, item_name):
