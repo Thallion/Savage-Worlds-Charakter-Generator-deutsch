@@ -198,22 +198,50 @@ class CharakterController(EventDispatcher):
 
     def entferne_handicap(self, handicap_name):
         """
-        Entfernt ein Handicap vom Charakter
+        Entfernt ein Handicap vom Charakter.
+        Nach der Charaktergenerierung kostet dies Aufstiege.
         
         Args:
             handicap_name (str): Name des Handicaps
             
         Returns:
-            bool: True bei Erfolg, False bei Fehler
+            bool oder str: True bei Erfolg, False bei Fehler, 
+                          "needs_advancement_X" wenn X Aufstiege benötigt werden,
+                          "can_reduce" wenn Reduzierung möglich ist
         """
         try:
             success = self.charakter.entferne_handicap(handicap_name)
-            if success:
+            if isinstance(success, str) and (success.startswith("needs_advancement_") or success == "can_reduce"):
+                return success
+            elif success:
                 self.dispatch('on_charakter_updated')
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Entfernung von Handicap {handicap_name}: {str(e)}")
             self.dispatch('on_charakter_error', f"Handicap-Entfernung fehlgeschlagen: {str(e)}")
+            return False
+    
+    def reduziere_handicap(self, handicap_name):
+        """
+        Reduziert ein schweres Handicap zu einem leichten Handicap.
+        
+        Args:
+            handicap_name (str): Name des schweren Handicaps
+            
+        Returns:
+            bool oder str: True bei Erfolg, False bei Fehler,
+                          "needs_advancement" wenn Aufstieg fehlt
+        """
+        try:
+            success = self.charakter.reduziere_handicap(handicap_name)
+            if success == "needs_advancement":
+                return "needs_advancement"
+            elif success:
+                self.dispatch('on_charakter_updated')
+            return success
+        except Exception as e:
+            Logger.error(f"Fehler bei Reduzierung von Handicap {handicap_name}: {str(e)}")
+            self.dispatch('on_charakter_error', f"Handicap-Reduzierung fehlgeschlagen: {str(e)}")
             return False
 
     def aktive_handicaps(self):

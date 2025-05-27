@@ -148,23 +148,58 @@ def _apply_handicap_effects(charakter, handicap):
 
 def entferne_handicap(charakter, handicap_name_key):
     """
-    Entfernt ein Handicap und erstattet die Handicap-Punkte zurück.
+    Entfernt ein Handicap. Nach der Charaktergenerierung kostet dies Aufstiege.
+    Leichte Handicaps kosten 1 Aufstieg, schwere 2 Aufstiege.
+    Schwere Handicaps können für 1 Aufstieg zu leichten reduziert werden.
     
     Args:
         charakter: Das Charakter-Objekt
         handicap_name_key: Der Schlüssel des Handicaps in der handicaps-Dictionary
         
     Returns:
-        True bei Erfolg, False bei Misserfolg
+        True bei Erfolg, False bei Misserfolg, 
+        "needs_advancement_X" wenn X Aufstiege benötigt werden,
+        "can_reduce" wenn das Handicap reduziert werden kann
     """
     if handicap_name_key in charakter.handicaps:
         handicap = charakter.handicaps[handicap_name_key]
         if handicap.ausgewaehlt:
+            # Prüfen ob Charaktergenerierung abgeschlossen ist
+            if charakter.char_gen_completed:
+                # Bestimme Kosten basierend auf Handicap-Stufe
+                kosten = 1 if handicap.stufe == "leicht" else 2
+                
+                # Prüfe ob ein leichtes Handicap mit gleichem Namen existiert
+                kann_reduziert_werden = False
+                if handicap.stufe == "schwer":
+                    # Suche nach einem leichten Handicap mit gleichem Namen
+                    leichtes_handicap_key = f"{handicap.name} (leicht)"
+                    if leichtes_handicap_key in charakter.handicaps:
+                        kann_reduziert_werden = True
+                
+                # Nach der Charaktergenerierung kostet das Entfernen Aufstiege
+                if charakter.verbleibende_aufstiege >= kosten:
+                    # Aufstieg abziehen
+                    charakter.verbleibende_aufstiege -= kosten
+                    Logger.info(f"Handicap '{handicap_name_key}' mit {kosten} Aufstieg(en) entfernt. Verbleibende Aufstiege: {charakter.verbleibende_aufstiege}")
+                else:
+                    # Nicht genug Aufstiege
+                    if kann_reduziert_werden and charakter.verbleibende_aufstiege >= 1:
+                        # Kann auf leicht reduziert werden
+                        Logger.info(f"Handicap '{handicap_name_key}' kann für 1 Aufstieg auf leicht reduziert werden.")
+                        return "can_reduce"
+                    else:
+                        Logger.warning(f"Nicht genügend Aufstiege verfügbar. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_aufstiege}")
+                        return f"needs_advancement_{kosten}"
+            else:
+                # Während der Charaktergenerierung normale Behandlung
+                charakter.gesamt_handicap_punkte -= handicap.punkte
+                charakter.gesamt_handicap_punkte = max(charakter.gesamt_handicap_punkte, 0)
+                charakter.verbleibende_handicap_punkte -= handicap.punkte
+                charakter.verbleibende_handicap_punkte = max(charakter.verbleibende_handicap_punkte, 0)
+            
+            # Handicap abwählen
             handicap.abwaehlen()
-            charakter.gesamt_handicap_punkte -= handicap.punkte
-            charakter.gesamt_handicap_punkte = max(charakter.gesamt_handicap_punkte, 0)
-            charakter.verbleibende_handicap_punkte -= handicap.punkte
-            charakter.verbleibende_handicap_punkte = max(charakter.verbleibende_handicap_punkte, 0)
             
             # Handicap-spezifische Effekte rückgängig machen
             _remove_handicap_effects(charakter, handicap)
@@ -183,6 +218,79 @@ def entferne_handicap(charakter, handicap_name_key):
     else:
         Logger.error(f"Handicap '{handicap_name_key}' existiert nicht.")
     return False
+
+
+def reduziere_handicap(charakter, handicap_name_key):
+    """
+    Reduziert ein schweres Handicap zu einem leichten Handicap.
+    Kostet 1 Aufstieg nach der Charaktergenerierung.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        handicap_name_key: Der Schlüssel des schweren Handicaps
+        
+    Returns:
+        True bei Erfolg, False bei Misserfolg, "needs_advancement" wenn Aufstieg fehlt
+    """
+    if handicap_name_key not in charakter.handicaps:
+        Logger.error(f"Handicap '{handicap_name_key}' existiert nicht.")
+        return False
+        
+    handicap = charakter.handicaps[handicap_name_key]
+    
+    if not handicap.ausgewaehlt:
+        Logger.warning(f"Handicap '{handicap_name_key}' ist nicht ausgewählt.")
+        return False
+        
+    if handicap.stufe != "schwer":
+        Logger.warning(f"Handicap '{handicap_name_key}' ist nicht schwer und kann nicht reduziert werden.")
+        return False
+    
+    # Prüfe ob leichtes Handicap existiert
+    leichtes_handicap_key = f"{handicap.name} (leicht)"
+    if leichtes_handicap_key not in charakter.handicaps:
+        Logger.error(f"Kein leichtes Handicap '{leichtes_handicap_key}' gefunden.")
+        return False
+    
+    leichtes_handicap = charakter.handicaps[leichtes_handicap_key]
+    
+    # Nach Charaktergenerierung kostet es 1 Aufstieg
+    if charakter.char_gen_completed:
+        if charakter.verbleibende_aufstiege < 1:
+            Logger.warning("Nicht genügend Aufstiege für Handicap-Reduzierung.")
+            return "needs_advancement"
+        charakter.verbleibende_aufstiege -= 1
+    else:
+        # Während der Charaktergenerierung: Punkte anpassen
+        # Schweres Handicap gibt 2 Punkte, leichtes 1 Punkt
+        # Differenz = 1 Punkt weniger
+        charakter.gesamt_handicap_punkte -= 1
+        charakter.gesamt_handicap_punkte = max(charakter.gesamt_handicap_punkte, 0)
+        charakter.verbleibende_handicap_punkte -= 1
+        charakter.verbleibende_handicap_punkte = max(charakter.verbleibende_handicap_punkte, 0)
+    
+    # Schweres Handicap entfernen
+    handicap.abwaehlen()
+    _remove_handicap_effects(charakter, handicap)
+    if handicap_name_key in charakter.selected_handicaps:
+        charakter.selected_handicaps.remove(handicap_name_key)
+    
+    # Leichtes Handicap aktivieren
+    leichtes_handicap.auswaehlen()
+    _apply_handicap_effects(charakter, leichtes_handicap)
+    if leichtes_handicap_key not in charakter.selected_handicaps:
+        charakter.selected_handicaps.append(leichtes_handicap_key)
+    
+    # Listen neu zuweisen für UI-Update
+    charakter.selected_handicaps = charakter.selected_handicaps
+    
+    # Abgeleitete Werte neu berechnen
+    charakter.berechne_abgeleitete_werte()
+    
+    Logger.info(f"Handicap '{handicap.name}' von schwer auf leicht reduziert.")
+    
+    return True
+
 
 def _remove_handicap_effects(charakter, handicap):
     """

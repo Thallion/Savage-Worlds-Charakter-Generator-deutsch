@@ -300,7 +300,7 @@ class HandicapItemRow(MDBoxLayout):
     def entferne_handicap(self):
         """
         Entfernt ein ausgewähltes Handicap.
-        Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
+        Nach der Charaktergenerierung kostet dies Aufstiege.
         """
         Logger.debug(f"HandicapItemRow: Start entferne_handicap für {self.handicap_name}")
         controller = self._get_controller()
@@ -309,13 +309,137 @@ class HandicapItemRow(MDBoxLayout):
             return
 
         try:
-            controller.entferne_handicap(self.name_key)
-            # Wenn keine Exception geworfen wurde, war die Aktion erfolgreich
-            self.ausgewaehlt = False
-            Logger.debug(f"HandicapItemRow: {self.handicap_name} erfolgreich entfernt")
-            self._refresh_ui()
+            result = controller.entferne_handicap(self.name_key)
+            
+            if isinstance(result, str) and result.startswith("needs_advancement_"):
+                # Extrahiere die benötigten Aufstiege
+                kosten = int(result.split("_")[2])
+                self._show_no_advancement_dialog(kosten)
+            elif result == "can_reduce":
+                # Zeige Dialog für Reduzierungsoption
+                self._show_reduce_dialog()
+            elif result:
+                # Erfolgreich entfernt
+                self.ausgewaehlt = False
+                Logger.debug(f"HandicapItemRow: {self.handicap_name} erfolgreich entfernt")
+                self._refresh_ui()
+            else:
+                Logger.error(f"Handicap konnte nicht entfernt werden")
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen des Handicaps: {str(e)}")
+
+    def _show_no_advancement_dialog(self, kosten):
+        """Zeigt einen Dialog an, wenn nicht genügend Aufstiege verfügbar sind."""
+        charakter = self._get_controller().charakter
+        
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        kosten_text = f"{kosten} Aufstieg" if kosten == 1 else f"{kosten} Aufstiege"
+        
+        warning_label = MDLabel(
+            text=f"Du benötigst {kosten_text}, um das Handicap '{self.handicap_name}' zu entfernen.\n\nVerbleibende Aufstiege: {charakter.verbleibende_aufstiege}",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.advancement_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Aufstiege erforderlich",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: self.close_advancement_dialog(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.advancement_dialog.open()
+    
+    def _show_reduce_dialog(self):
+        """Zeigt einen Dialog für die Option, ein schweres Handicap zu reduzieren."""
+        charakter = self._get_controller().charakter
+        
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        info_label = MDLabel(
+            text=f"Du hast nicht genügend Aufstiege, um das schwere Handicap '{self.handicap_name}' komplett zu entfernen.\n\nDu kannst es aber für 1 Aufstieg auf ein leichtes Handicap reduzieren.\n\nVerbleibende Aufstiege: {charakter.verbleibende_aufstiege}",
+            size_hint_y=None,
+            height=dp(100),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(info_label)
+        
+        self.reduce_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Handicap reduzieren?",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.close_reduce_dialog(),
+                ),
+                MDButton(
+                    MDButtonText(text="Auf leicht reduzieren"),
+                    style="text",
+                    on_release=lambda x: self._confirm_reduce_handicap(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.reduce_dialog.open()
+    
+    def close_reduce_dialog(self):
+        """Schließt den Reduzierungs-Dialog."""
+        if hasattr(self, 'reduce_dialog') and self.reduce_dialog:
+            self.reduce_dialog.dismiss()
+    
+    def _confirm_reduce_handicap(self):
+        """Führt die Reduzierung des Handicaps durch."""
+        self.close_reduce_dialog()
+        controller = self._get_controller()
+        if controller:
+            result = controller.reduziere_handicap(self.name_key)
+            if result == "needs_advancement":
+                self._show_no_advancement_dialog(1)
+            elif result:
+                Logger.debug(f"Handicap '{self.handicap_name}' erfolgreich reduziert")
+                self._refresh_ui()
+            else:
+                Logger.error("Fehler beim Reduzieren des Handicaps")
+    
+    def close_advancement_dialog(self):
+        """Schließt den Aufstiegs-Dialog."""
+        if hasattr(self, 'advancement_dialog') and self.advancement_dialog:
+            self.advancement_dialog.dismiss()
 
     def update_color(self, *args):
         """Aktualisiert die Hintergrundfarbe bei Indexänderung."""
