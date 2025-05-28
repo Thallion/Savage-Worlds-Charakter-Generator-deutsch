@@ -159,7 +159,8 @@ def entferne_handicap(charakter, handicap_name_key):
     Returns:
         True bei Erfolg, False bei Misserfolg, 
         "needs_advancement_X" wenn X Aufstiege benötigt werden,
-        "can_reduce" wenn das Handicap reduziert werden kann
+        "can_reduce" wenn das Handicap reduziert werden kann,
+        "has_both_options" wenn sowohl Entfernen als auch Reduzieren möglich ist
     """
     if handicap_name_key in charakter.handicaps:
         handicap = charakter.handicaps[handicap_name_key]
@@ -177,6 +178,11 @@ def entferne_handicap(charakter, handicap_name_key):
                     if leichtes_handicap_key in charakter.handicaps:
                         kann_reduziert_werden = True
                 
+                # NEU: Bei schweren Handicaps mit leichter Version immer beide Optionen anbieten
+                if kann_reduziert_werden:
+                    # Signalisiere, dass beide Optionen verfügbar sind
+                    return "has_both_options"
+                
                 # Nach der Charaktergenerierung kostet das Entfernen Aufstiege
                 if charakter.verbleibende_aufstiege >= kosten:
                     # Aufstieg abziehen
@@ -184,13 +190,8 @@ def entferne_handicap(charakter, handicap_name_key):
                     Logger.info(f"Handicap '{handicap_name_key}' mit {kosten} Aufstieg(en) entfernt. Verbleibende Aufstiege: {charakter.verbleibende_aufstiege}")
                 else:
                     # Nicht genug Aufstiege
-                    if kann_reduziert_werden and charakter.verbleibende_aufstiege >= 1:
-                        # Kann auf leicht reduziert werden
-                        Logger.info(f"Handicap '{handicap_name_key}' kann für 1 Aufstieg auf leicht reduziert werden.")
-                        return "can_reduce"
-                    else:
-                        Logger.warning(f"Nicht genügend Aufstiege verfügbar. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_aufstiege}")
-                        return f"needs_advancement_{kosten}"
+                    Logger.warning(f"Nicht genügend Aufstiege verfügbar. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_aufstiege}")
+                    return f"needs_advancement_{kosten}"
             else:
                 # Während der Charaktergenerierung normale Behandlung
                 charakter.gesamt_handicap_punkte -= handicap.punkte
