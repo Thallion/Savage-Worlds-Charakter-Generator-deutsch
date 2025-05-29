@@ -312,112 +312,112 @@ class HandicapItemRow(MDBoxLayout):
         # Direkt versuchen zu entfernen - die Logik entscheidet, ob ein Dialog angezeigt wird
         self._try_remove_handicap()
 
-        def _show_remove_or_reduce_dialog(self):
-            """Zeigt einen Dialog mit Optionen zum kompletten Entfernen oder Reduzieren."""
-            charakter = self._get_controller().charakter
-            
-            content = MDBoxLayout(
-                orientation="vertical",
-                spacing=dp(15),
-                padding=dp(20),
-                adaptive_height=True
+    def _show_remove_or_reduce_dialog(self):
+        """Zeigt einen Dialog mit Optionen zum kompletten Entfernen oder Reduzieren."""
+        charakter = self._get_controller().charakter
+        
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(15),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        info_label = MDLabel(
+            text=f"Wähle eine Option für das Handicap '{self.handicap_name} (schwer)':",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(info_label)
+        
+        # Option 1: Komplett entfernen
+        remove_text = f"• Komplett entfernen für 2 Aufstiege"
+        if charakter.verbleibende_aufstiege < 2:
+            remove_text += " (nicht genug Aufstiege)"
+        
+        remove_label = MDLabel(
+            text=remove_text,
+            size_hint_y=None,
+            height=dp(30),
+            theme_text_color="Secondary" if charakter.verbleibende_aufstiege >= 2 else "Error",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(remove_label)
+        
+        # Option 2: Auf leicht reduzieren
+        reduce_text = f"• Auf leicht reduzieren für 1 Aufstieg"
+        if charakter.verbleibende_aufstiege < 1:
+            reduce_text += " (nicht genug Aufstiege)"
+        
+        reduce_label = MDLabel(
+            text=reduce_text,
+            size_hint_y=None,
+            height=dp(30),
+            theme_text_color="Secondary" if charakter.verbleibende_aufstiege >= 1 else "Error",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(reduce_label)
+        
+        # Verfügbare Aufstiege anzeigen
+        aufstiege_label = MDLabel(
+            text=f"\nVerbleibende Aufstiege: {charakter.verbleibende_aufstiege}",
+            size_hint_y=None,
+            height=dp(30),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(aufstiege_label)
+        
+        # Button-Container
+        button_container = MDDialogButtonContainer(spacing="8dp")
+        
+        # Abbrechen-Button
+        button_container.add_widget(
+            MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: self.close_remove_reduce_dialog(),
             )
-            
-            info_label = MDLabel(
-                text=f"Wähle eine Option für das Handicap '{self.handicap_name} (schwer)':",
-                size_hint_y=None,
-                height=dp(40),
-                theme_text_color="Secondary",
-                halign="left",
-                valign="middle"
-            )
-            content.add_widget(info_label)
-            
-            # Option 1: Komplett entfernen
-            remove_text = f"• Komplett entfernen für 2 Aufstiege"
-            if charakter.verbleibende_aufstiege < 2:
-                remove_text += " (nicht genug Aufstiege)"
-            
-            remove_label = MDLabel(
-                text=remove_text,
-                size_hint_y=None,
-                height=dp(30),
-                theme_text_color="Secondary" if charakter.verbleibende_aufstiege >= 2 else "Error",
-                halign="left",
-                valign="middle"
-            )
-            content.add_widget(remove_label)
-            
-            # Option 2: Auf leicht reduzieren
-            reduce_text = f"• Auf leicht reduzieren für 1 Aufstieg"
-            if charakter.verbleibende_aufstiege < 1:
-                reduce_text += " (nicht genug Aufstiege)"
-            
-            reduce_label = MDLabel(
-                text=reduce_text,
-                size_hint_y=None,
-                height=dp(30),
-                theme_text_color="Secondary" if charakter.verbleibende_aufstiege >= 1 else "Error",
-                halign="left",
-                valign="middle"
-            )
-            content.add_widget(reduce_label)
-            
-            # Verfügbare Aufstiege anzeigen
-            aufstiege_label = MDLabel(
-                text=f"\nVerbleibende Aufstiege: {charakter.verbleibende_aufstiege}",
-                size_hint_y=None,
-                height=dp(30),
-                theme_text_color="Primary",
-                halign="left",
-                valign="middle"
-            )
-            content.add_widget(aufstiege_label)
-            
-            # Button-Container
-            button_container = MDDialogButtonContainer(spacing="8dp")
-            
-            # Abbrechen-Button
+        )
+        
+        # Reduzieren-Button (nur wenn genug Aufstiege)
+        if charakter.verbleibende_aufstiege >= 1:
             button_container.add_widget(
                 MDButton(
-                    MDButtonText(text="Abbrechen"),
+                    MDButtonText(text="Auf leicht reduzieren"),
                     style="text",
-                    on_release=lambda x: self.close_remove_reduce_dialog(),
+                    on_release=lambda x: self._confirm_reduce_handicap_from_dialog(),
                 )
             )
-            
-            # Reduzieren-Button (nur wenn genug Aufstiege)
-            if charakter.verbleibende_aufstiege >= 1:
-                button_container.add_widget(
-                    MDButton(
-                        MDButtonText(text="Auf leicht reduzieren"),
-                        style="text",
-                        on_release=lambda x: self._confirm_reduce_handicap_from_dialog(),
-                    )
+        
+        # Entfernen-Button (nur wenn genug Aufstiege)
+        if charakter.verbleibende_aufstiege >= 2:
+            button_container.add_widget(
+                MDButton(
+                    MDButtonText(text="Komplett entfernen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_remove_handicap_from_dialog(),
                 )
-            
-            # Entfernen-Button (nur wenn genug Aufstiege)
-            if charakter.verbleibende_aufstiege >= 2:
-                button_container.add_widget(
-                    MDButton(
-                        MDButtonText(text="Komplett entfernen"),
-                        style="text",
-                        on_release=lambda x: self._confirm_remove_handicap_from_dialog(),
-                    )
-                )
-            
-            self.remove_reduce_dialog = MDDialog(
-                MDDialogHeadlineText(
-                    text="Handicap entfernen oder reduzieren?",
-                ),
-                MDDialogContentContainer(
-                    content,
-                    orientation="vertical",
-                    padding=dp(0),
-                ),
-                button_container
             )
-            self.remove_reduce_dialog.open()
+        
+        self.remove_reduce_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Handicap entfernen oder reduzieren?",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            button_container
+        )
+        self.remove_reduce_dialog.open()
 
     def close_remove_reduce_dialog(self):
         """Schließt den Entfernen/Reduzieren-Dialog."""
@@ -427,7 +427,22 @@ class HandicapItemRow(MDBoxLayout):
     def _confirm_remove_handicap_from_dialog(self):
         """Bestätigt das komplette Entfernen des Handicaps aus dem Dialog."""
         self.close_remove_reduce_dialog()
-        self._try_remove_handicap()
+        controller = self._get_controller()
+        if controller:
+            # NEU: force_remove=True übergeben
+            result = controller.entferne_handicap(self.name_key, force_remove=True)
+            
+            if isinstance(result, str) and result.startswith("needs_advancement_"):
+                # Extrahiere die benötigten Aufstiege
+                kosten = int(result.split("_")[2])
+                self._show_no_advancement_dialog(kosten)
+            elif result:
+                # Erfolgreich entfernt
+                self.ausgewaehlt = False
+                Logger.debug(f"HandicapItemRow: {self.handicap_name} erfolgreich entfernt")
+                self._refresh_ui()
+            else:
+                Logger.error(f"Handicap konnte nicht entfernt werden")
 
     def _confirm_reduce_handicap_from_dialog(self):
         """Bestätigt das Reduzieren des Handicaps aus dem Dialog."""

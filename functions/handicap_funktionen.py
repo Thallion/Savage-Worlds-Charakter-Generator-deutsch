@@ -145,8 +145,7 @@ def _apply_handicap_effects(charakter, handicap):
             charakter.maximale_fertigkeitssteigerungen = 10
             Logger.info(f"Handicap 'Jung (schwer)': Attributsteigerungen=3, Fertigkeitssteigerungen=10")
 
-
-def entferne_handicap(charakter, handicap_name_key):
+def entferne_handicap(charakter, handicap_name_key, force_remove=False):
     """
     Entfernt ein Handicap. Nach der Charaktergenerierung kostet dies Aufstiege.
     Leichte Handicaps kosten 1 Aufstieg, schwere 2 Aufstiege.
@@ -155,6 +154,7 @@ def entferne_handicap(charakter, handicap_name_key):
     Args:
         charakter: Das Charakter-Objekt
         handicap_name_key: Der Schlüssel des Handicaps in der handicaps-Dictionary
+        force_remove: Wenn True, wird das Handicap direkt entfernt ohne Dialog-Option
         
     Returns:
         True bei Erfolg, False bei Misserfolg, 
@@ -172,15 +172,18 @@ def entferne_handicap(charakter, handicap_name_key):
                 
                 # Prüfe ob ein leichtes Handicap mit gleichem Namen existiert
                 kann_reduziert_werden = False
-                if handicap.stufe == "schwer":
-                    # Suche nach einem leichten Handicap mit gleichem Namen
-                    leichtes_handicap_key = f"{handicap.name} (leicht)"
-                    if leichtes_handicap_key in charakter.handicaps:
-                        kann_reduziert_werden = True
+                if handicap.stufe == "schwer" and not force_remove:  # NEU: force_remove prüfen
+                    # Suche nach einem Handicap mit gleichem Namen aber Stufe "leicht"
+                    for key, other_handicap in charakter.handicaps.items():
+                        if (other_handicap.name == handicap.name and 
+                            other_handicap.stufe == "leicht"):
+                            kann_reduziert_werden = True
+                            Logger.debug(f"Leichtes Handicap '{other_handicap.name}' mit Key '{key}' gefunden")
+                            break
                 
                 # NEU: Bei schweren Handicaps mit leichter Version immer beide Optionen anbieten
-                if kann_reduziert_werden:
-                    # Signalisiere, dass beide Optionen verfügbar sind
+                # AUSSER wenn force_remove=True
+                if kann_reduziert_werden and not force_remove:
                     return "has_both_options"
                 
                 # Nach der Charaktergenerierung kostet das Entfernen Aufstiege
@@ -220,7 +223,6 @@ def entferne_handicap(charakter, handicap_name_key):
         Logger.error(f"Handicap '{handicap_name_key}' existiert nicht.")
     return False
 
-
 def reduziere_handicap(charakter, handicap_name_key):
     """
     Reduziert ein schweres Handicap zu einem leichten Handicap.
@@ -247,13 +249,21 @@ def reduziere_handicap(charakter, handicap_name_key):
         Logger.warning(f"Handicap '{handicap_name_key}' ist nicht schwer und kann nicht reduziert werden.")
         return False
     
-    # Prüfe ob leichtes Handicap existiert
-    leichtes_handicap_key = f"{handicap.name} (leicht)"
-    if leichtes_handicap_key not in charakter.handicaps:
-        Logger.error(f"Kein leichtes Handicap '{leichtes_handicap_key}' gefunden.")
-        return False
+    # Suche das leichte Handicap mit gleichem Namen
+    leichtes_handicap_key = None
+    leichtes_handicap = None
     
-    leichtes_handicap = charakter.handicaps[leichtes_handicap_key]
+    for key, other_handicap in charakter.handicaps.items():
+        if (other_handicap.name == handicap.name and 
+            other_handicap.stufe == "leicht"):
+            leichtes_handicap_key = key
+            leichtes_handicap = other_handicap
+            Logger.debug(f"Leichtes Handicap gefunden: '{key}'")
+            break
+    
+    if not leichtes_handicap:
+        Logger.error(f"Kein leichtes Handicap für '{handicap.name}' gefunden.")
+        return False
     
     # Nach Charaktergenerierung kostet es 1 Aufstieg
     if charakter.char_gen_completed:

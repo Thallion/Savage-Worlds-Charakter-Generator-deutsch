@@ -557,9 +557,8 @@ class Charakter(EventDispatcher):
     def waehle_handicap(self, handicap_name_key):
         return handicap_funktionen.waehle_handicap(self, handicap_name_key)
 
-
-    def entferne_handicap(self, handicap_name_key):
-        return handicap_funktionen.entferne_handicap(self, handicap_name_key)
+    def entferne_handicap(self, handicap_name_key, force_remove=False):
+        return handicap_funktionen.entferne_handicap(self, handicap_name_key, force_remove)
     
     def reduziere_handicap(self, handicap_name_key):
         return handicap_funktionen.reduziere_handicap(self, handicap_name_key)

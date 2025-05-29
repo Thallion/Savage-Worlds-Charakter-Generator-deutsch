@@ -196,22 +196,24 @@ class CharakterController(EventDispatcher):
             self.dispatch('on_charakter_error', f"Handicap-Auswahl fehlgeschlagen: {str(e)}")
             return False
 
-    def entferne_handicap(self, handicap_name):
+    def entferne_handicap(self, handicap_name, force_remove=False):
         """
         Entfernt ein Handicap vom Charakter.
         Nach der Charaktergenerierung kostet dies Aufstiege.
         
         Args:
             handicap_name (str): Name des Handicaps
+            force_remove (bool): Wenn True, wird direkt entfernt ohne Dialog-Option
             
         Returns:
             bool oder str: True bei Erfolg, False bei Fehler, 
-                          "needs_advancement_X" wenn X Aufstiege benötigt werden,
-                          "can_reduce" wenn Reduzierung möglich ist
+                        "needs_advancement_X" wenn X Aufstiege benötigt werden,
+                        "can_reduce" wenn Reduzierung möglich ist,
+                        "has_both_options" wenn beide Optionen verfügbar sind
         """
         try:
-            success = self.charakter.entferne_handicap(handicap_name)
-            if isinstance(success, str) and (success.startswith("needs_advancement_") or success == "can_reduce"):
+            success = self.charakter.entferne_handicap(handicap_name, force_remove)
+            if isinstance(success, str) and (success.startswith("needs_advancement_") or success == "can_reduce" or success == "has_both_options"):
                 return success
             elif success:
                 self.dispatch('on_charakter_updated')
@@ -220,7 +222,7 @@ class CharakterController(EventDispatcher):
             Logger.error(f"Fehler bei Entfernung von Handicap {handicap_name}: {str(e)}")
             self.dispatch('on_charakter_error', f"Handicap-Entfernung fehlgeschlagen: {str(e)}")
             return False
-    
+        
     def reduziere_handicap(self, handicap_name):
         """
         Reduziert ein schweres Handicap zu einem leichten Handicap.
