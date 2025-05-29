@@ -42,6 +42,20 @@ class Handicap(EventDispatcher):
     def setze_beschreibung(self, beschreibung):
         self.beschreibung = beschreibung
 
+    def clone(self):
+        """
+        Erstellt eine Kopie dieses Handicaps.
+        
+        Returns:
+            Handicap: Eine neue Instanz mit den gleichen Werten
+        """
+        return Handicap(
+            name=self.name,
+            stufe=self.stufe,
+            beschreibung=self.beschreibung,
+            custom=self.custom
+        )
+
     def to_dict(self):
         return {
             'name': self.name,

@@ -38,6 +38,7 @@ UNSELECTED_LINE_COLOR = [0, 0, 0, 0]
 
 
 # KV-String - könnte in eine separate Datei ausgelagert werden
+# KV-String - könnte in eine separate Datei ausgelagert werden
 KV_STRING = '''
 <HandicapsWidget>:
     orientation: 'vertical'
@@ -146,7 +147,7 @@ KV_STRING = '''
         size: dp(40), dp(40)
         pos_hint: {"center_y": 0.5}
         on_release: root.waehle_handicap()
-        disabled: root.ausgewaehlt
+        disabled: False  # GEÄNDERT: War vorher root.ausgewaehlt
 
     MDFabButton:
         icon: "minus"
@@ -191,6 +192,11 @@ class HandicapItemRow(MDBoxLayout):
     beschreibung = StringProperty("")
     ausgewaehlt = BooleanProperty(False)
 
+    NICHT_DUPLIZIERBARE_HANDICAPS = [
+    "Alt", "Jung", "Blind", "Einarmig", "Einäugig", "Stumm", 
+    "Analphabet", "Klein", "Fettleibig", "Langsam"
+]
+
     def __init__(self, **kwargs):
         """Initialisiert die HandicapItemRow und bindet Property-Änderungen an entsprechende Handler."""
         super().__init__(**kwargs)
@@ -224,6 +230,11 @@ class HandicapItemRow(MDBoxLayout):
             Logger.error("HandicapItemRow: Controller nicht gefunden")
             return
 
+        # Prüfen, ob das Handicap bereits ausgewählt ist und nicht duplizierbar
+        if self.ausgewaehlt and self.handicap_name in self.NICHT_DUPLIZIERBARE_HANDICAPS:
+            self._show_not_duplicatable_dialog()
+            return
+
         # Prüfen, ob bereits das Maximum an Handicap-Punkten erreicht ist
         charakter = controller.charakter
         if charakter.gesamt_handicap_punkte >= 4:
@@ -233,11 +244,51 @@ class HandicapItemRow(MDBoxLayout):
         try:
             controller.waehle_handicap(self.name_key)
             # Wenn keine Exception geworfen wurde, war die Aktion erfolgreich
-            self.ausgewaehlt = True
+            if not self.ausgewaehlt:  # Nur wenn es noch nicht ausgewählt war
+                self.ausgewaehlt = True
             Logger.debug(f"HandicapItemRow: {self.handicap_name} erfolgreich ausgewählt")
             self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Handicaps: {str(e)}")
+
+    def _show_not_duplicatable_dialog(self):
+        """Zeigt einen Dialog an, wenn ein Handicap nicht mehrfach ausgewählt werden kann."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text=f"Das Handicap '{self.handicap_name}' kann nicht mehrfach ausgewählt werden.",
+            size_hint_y=None,
+            height=dp(60),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Handicap nicht duplizierbar",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        dialog.open()
 
     def _show_max_points_dialog(self):
         """Zeigt einen Dialog an, wenn das Maximum an Handicap-Punkten erreicht ist."""
@@ -674,11 +725,17 @@ class HandicapsWidget(MDBoxLayout):
             if (search_term in handicap.name.lower() or 
                 search_term in handicap.beschreibung.lower()):
                 
+                # Anzeigename anpassen für mehrfache Instanzen
+                display_name = handicap.name
+                if '_' in key and key.split('_')[-1].isdigit():
+                    instance_num = key.split('_')[-1]
+                    display_name = f"{handicap.name} (#{instance_num})"
+                
                 handicap_data = {
                     'viewclass': 'HandicapItemRow',
                     'index': len(filtered_data),
                     'name_key': key,
-                    'handicap_name': handicap.name,
+                    'handicap_name': display_name,  # Verwende den angepassten Namen
                     'stufe': handicap.stufe,
                     'beschreibung': handicap.beschreibung,
                     'ausgewaehlt': handicap.ausgewaehlt

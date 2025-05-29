@@ -43,6 +43,7 @@ def initialisiere_handicaps(charakter, handicap_daten):
 def waehle_handicap(charakter, handicap_name_key):
     """
     Wählt ein Handicap aus und verrechnet die Handicap-Punkte.
+    Wenn das Handicap bereits ausgewählt ist, wird eine neue Instanz mit Suffix erstellt.
     
     Args:
         charakter: Das Charakter-Objekt
@@ -53,59 +54,81 @@ def waehle_handicap(charakter, handicap_name_key):
     """
     if handicap_name_key in charakter.handicaps:
         handicap = charakter.handicaps[handicap_name_key]
-        if not handicap.ausgewaehlt:
-            neue_gesamtpunkte = charakter.gesamt_handicap_punkte + handicap.punkte     
-            Logger.info(f"neue_gesamtpunkte '{neue_gesamtpunkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
-            if neue_gesamtpunkte <= 4:           
-                handicap.auswaehlen()
-                charakter.gesamt_handicap_punkte = neue_gesamtpunkte
-                charakter.verbleibende_handicap_punkte += handicap.punkte  
-                charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4) 
-                charakter.selected_handicaps.append(handicap_name_key)
-                
-                # Handicap-spezifische Effekte anwenden
-                _apply_handicap_effects(charakter, handicap)
-                
-                Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
+        
+        # Prüfe ob dieses spezifische Handicap bereits ausgewählt ist
+        if handicap.ausgewaehlt:
+            # Finde einen freien Suffix für eine neue Instanz
+            base_key = handicap_name_key.split('_')[0] if '_' in handicap_name_key and handicap_name_key.split('_')[-1].isdigit() else handicap_name_key
+            suffix = 2
+            new_key = f"{base_key}_{suffix}"
+            
+            # Finde den nächsten freien Suffix
+            while new_key in charakter.handicaps:
+                suffix += 1
+                new_key = f"{base_key}_{suffix}"
+            
+            # Erstelle eine Kopie des Handicaps mit der clone() Methode
+            new_handicap = handicap.clone()  # GEÄNDERT: Verwende clone() statt deepcopy
+            new_handicap.ausgewaehlt = False  # Zurücksetzen für die neue Instanz
+            
+            # Füge das neue Handicap hinzu
+            charakter.handicaps[new_key] = new_handicap
+            Logger.info(f"Neue Instanz von Handicap '{handicap.name}' mit Key '{new_key}' erstellt")
+            
+            # Wähle die neue Instanz aus
+            return waehle_handicap(charakter, new_key)
+        
+        # Normale Verarbeitung für noch nicht ausgewählte Handicaps
+        neue_gesamtpunkte = charakter.gesamt_handicap_punkte + handicap.punkte     
+        Logger.info(f"neue_gesamtpunkte '{neue_gesamtpunkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
+        if neue_gesamtpunkte <= 4:           
+            handicap.auswaehlen()
+            charakter.gesamt_handicap_punkte = neue_gesamtpunkte
+            charakter.verbleibende_handicap_punkte += handicap.punkte  
+            charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4) 
+            charakter.selected_handicaps.append(handicap_name_key)
+            
+            # Handicap-spezifische Effekte anwenden
+            _apply_handicap_effects(charakter, handicap)
+            
+            Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
+            Logger.info(f"verbleibend '{charakter.verbleibende_handicap_punkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
+            charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen
+            
+            # Abgeleitete Werte neu berechnen
+            charakter.berechne_abgeleitete_werte()
+            
+            return True
+        else:
+            handicap.auswaehlen()
+            charakter.selected_handicaps.append(handicap_name_key)
+            
+            # Handicap-spezifische Effekte anwenden
+            _apply_handicap_effects(charakter, handicap)
+            
+            if neue_gesamtpunkte == 5:
+                charakter.gesamt_handicap_punkte = 4
+                charakter.verbleibende_handicap_punkte += handicap.punkte 
+                charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
                 Logger.info(f"verbleibend '{charakter.verbleibende_handicap_punkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
-                charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen
+                charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen 
+                Logger.warning(f"Handicap '{handicap_name_key}' ausgewählt. Handicap-punkte nicht erhöht, da Maximum von 4 erreicht.")
+                Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
                 
                 # Abgeleitete Werte neu berechnen
                 charakter.berechne_abgeleitete_werte()
                 
                 return True
             else:
-                handicap.auswaehlen()
-                charakter.selected_handicaps.append(handicap_name_key)
+                Logger.warning(f"Handicap '{handicap_name_key}' ausgewählt. Handicap-punkte nicht erhöht, da Maximum von 4 erreicht.")
+                charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen  
+                Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
+                charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
                 
-                # Handicap-spezifische Effekte anwenden
-                _apply_handicap_effects(charakter, handicap)
+                # Abgeleitete Werte neu berechnen
+                charakter.berechne_abgeleitete_werte()
                 
-                if neue_gesamtpunkte == 5:
-                    charakter.gesamt_handicap_punkte = 4
-                    charakter.verbleibende_handicap_punkte += handicap.punkte 
-                    charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
-                    Logger.info(f"verbleibend '{charakter.verbleibende_handicap_punkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
-                    charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen 
-                    Logger.warning(f"Handicap '{handicap_name_key}' ausgewählt. Handicap-punkte nicht erhöht, da Maximum von 4 erreicht.")
-                    Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
-                    
-                    # Abgeleitete Werte neu berechnen
-                    charakter.berechne_abgeleitete_werte()
-                    
-                    return True
-                else:
-                    Logger.warning(f"Handicap '{handicap_name_key}' ausgewählt. Handicap-punkte nicht erhöht, da Maximum von 4 erreicht.")
-                    charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen  
-                    Logger.info(f"Handicap '{handicap_name_key}' ausgewählt.")
-                    charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
-                    
-                    # Abgeleitete Werte neu berechnen
-                    charakter.berechne_abgeleitete_werte()
-                    
-                    return True                  
-        else:
-            Logger.warning(f"Handicap '{handicap_name_key}' ist bereits ausgewählt.")
+                return True                  
     else:
         Logger.error(f"Handicap '{handicap_name_key}' existiert nicht.")
     return False
