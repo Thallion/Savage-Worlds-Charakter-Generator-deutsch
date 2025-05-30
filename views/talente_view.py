@@ -1,7 +1,8 @@
-# talente_view.py
+# views/talente_view.py
 """
 View-Komponente für Talente nach dem MVC-Pattern.
-Stellt die Benutzeroberfläche zur Anzeige und Verwaltung von Talenten bereit.
+Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Talenten bereit.
+Mit Unterstützung für Mehrfachauswahl von Talenten.
 """
 
 from kivymd.app import MDApp
@@ -27,7 +28,7 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 
 # Import der Funktionen für Voraussetzungsprüfung
-from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
+from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter, NICHT_DUPLIZIERBARE_TALENTE
 
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_OPTION = 'Name'
@@ -201,39 +202,23 @@ KV_STRING = '''
     MDLabel:
         text: root.talent_name
         font_size: dp(16)
-        size_hint_x: 0.15
+        size_hint_x: 0.2
         halign: 'left'
         valign: 'middle'
 
     MDLabel:
-        text: root.kategorie.capitalize() if root.kategorie else "Unbekannt"
+        text: root.kategorie
         font_size: dp(16)
-        size_hint_x: 0.1
+        size_hint_x: 0.15
         halign: 'left'
         valign: 'middle'
 
     MDLabel:
         text: root.rang
         font_size: dp(16)
-        size_hint_x: 0.05
+        size_hint_x: 0.1
         halign: 'left'
         valign: 'middle'
-        
-    MDBoxLayout:
-        orientation: 'vertical'
-        size_hint_x: 0.2
-        padding: [0, 2]
-        
-        MDLabel:
-            text: root.voraussetzungen
-            font_size: dp(14)
-            size_hint_y: None
-            height: dp(56)  # etwas kleiner als die Gesamthöhe, um Platz zu lassen
-            halign: 'left'
-            valign: 'middle'
-            text_size: self.width, None
-            shorten: False  # Erlaubt Textwrap
-            markup: True
 
     MDFabButton:
         icon: "plus"
@@ -242,7 +227,7 @@ KV_STRING = '''
         size: dp(40), dp(40)
         pos_hint: {"center_y": 0.5}
         on_release: root.waehle_talent()
-        disabled: root.ausgewaehlt
+        disabled: False
 
     MDFabButton:
         icon: "minus"
@@ -256,7 +241,7 @@ KV_STRING = '''
     MDLabel:
         text: root.beschreibung
         font_size: dp(16)
-        size_hint_x: 0.35
+        size_hint_x: 0.45
         halign: 'left'
         valign: 'middle'
 '''
@@ -319,7 +304,7 @@ class TalentItemRow(MDBoxLayout):
         app = MDApp.get_running_app()
         return app.get_widget_by_tab_text('Talente', 'talente_widget')
 
-    def _aktualisiere_talente_widget(self):
+    def _refresh_ui(self):
         """
         Aktualisiert das TalenteWidget nach einer Änderung.
         Vereinheitlichte Methode zum Aufrufen der Widget-Aktualisierung.
@@ -332,145 +317,219 @@ class TalentItemRow(MDBoxLayout):
             Logger.error("TalentItemRow: TalenteWidget nicht gefunden")
 
     def waehle_talent(self):
-        """Wählt ein Talent aus und behandelt verschiedene Rückgabewerte vom Controller."""
-        try:
-            # Prüfen, dass controller und talent_name existieren
-            if not hasattr(self, 'controller') or not self.controller:
-                Logger.error("TalentItemRow: Controller ist nicht gesetzt")
-                return
-                
-            if not hasattr(self, 'talent_name') or not self.talent_name:
-                Logger.error("TalentItemRow: talent_name ist nicht gesetzt")
-                return
-                
-            Logger.debug(f"[TalentItemRow] Start waehle_talent für {self.talent_name}")
-            
-            # Talent auswählen
-            result = self.controller.waehle_talent(self.talent_name)
-            
-            # Debug-Ausgabe für Rückgabewert
-            Logger.debug(f"[TalentItemRow] Ergebnis von waehle_talent: {result}")
-            
-            # Verschiedene Ergebnisse verarbeiten
-            if result == "needs_rang_confirmation":
-                Logger.debug(f"[TalentItemRow] Zeige Rang-Bestätigungsdialog für {self.talent_name}")
-                # Hier den talent_name Parameter mitgeben
-                self.show_rang_confirmation_dialog(self.talent_name)
-            elif result == "needs_voraussetzungen_confirmation":
-                Logger.debug(f"[TalentItemRow] Zeige Voraussetzungs-Bestätigungsdialog für {self.talent_name}")
-                self.show_voraussetzungen_confirmation_dialog()
-            elif result:
-                # Erfolgreich
-                Logger.debug(f"Talent '{self.talent_name}' erfolgreich ausgewählt")
-                self._aktualisiere_talente_widget()
-            else:
-                # Fehlgeschlagen
-                Logger.warning(f"Fehler beim Auswählen des Talents '{self.talent_name}'")
-                
-        except Exception as e:
-            Logger.error(f"Fehler beim Auswählen des Talents: {e}")
-            self.show_error_dialog(f"Fehler: {str(e)}")
-            
-    def show_voraussetzungen_confirmation_dialog(self):
         """
-        Zeigt einen Dialog zur Bestätigung der Auswahl trotz fehlender Voraussetzungen.
+        Wählt ein Talent aus.
+        Prüft, ob das Talent duplizierbar ist und zeigt ggf. einen Dialog.
         """
-        try:
-            # Fehlermeldungen aus dem Charakter abrufen
-            fehlermeldungen = self.controller.charakter.temp_voraussetzungs_fehler
-            
-            # Dialog-Inhalt erstellen
-            content = MDBoxLayout(
-                orientation="vertical",
-                spacing=dp(10),
-                padding=dp(20),
-                adaptive_height=True
-            )
-            
-            # Titel
-            content.add_widget(MDLabel(
-                text="Fehlende Voraussetzungen:",
-                theme_text_color="Secondary",
-                font_size=dp(18),
-                bold=True,
-                size_hint_y=None,
-                height=dp(30)
-            ))
-            
-            # Fehlermeldungen als Liste anzeigen
-            for meldung in fehlermeldungen:
-                content.add_widget(MDLabel(
-                    text=f"• {meldung}",
-                    theme_text_color="Secondary",
-                    size_hint_y=None,
-                    height=dp(30)
-                ))
-            
-            # Frage am Ende
-            content.add_widget(MDLabel(
-                text="Möchtest du das Talent trotzdem auswählen?",
-                size_hint_y=None,
-                height=dp(50),
-                theme_text_color="Secondary",
-                bold=True
-            ))
-            
-            # Dialog erstellen
-            self.voraussetzungen_dialog = MDDialog(
-                MDDialogHeadlineText(text="Voraussetzungen nicht erfüllt"),
-                MDDialogContentContainer(
-                    content,
-                    orientation="vertical",
-                ),
-                MDDialogButtonContainer(
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=lambda x: self.voraussetzungen_dialog.dismiss(),
-                    ),
-                    MDButton(
-                        MDButtonText(text="Trotzdem auswählen"),
-                        style="text",
-                        on_release=lambda x: self._confirm_trotz_voraussetzungen(),
-                    ),
-                    spacing="8dp",
-                ),
-            )
-            self.voraussetzungen_dialog.open()
-        except Exception as e:
-            Logger.error(f"Fehler beim Anzeigen des Voraussetzungs-Dialogs: {e}")
-            
-    def _confirm_trotz_voraussetzungen(self):
-        """
-        Führt die Auswahl des Talents trotz fehlender Voraussetzungen durch.
-        """
-        try:
-            # Dialog schließen
-            self.voraussetzungen_dialog.dismiss()
-            
-            # WICHTIG: Direktes Setzen des Flags im Charakter
-            self.controller.charakter.ignore_voraussetzungen = True
-            Logger.debug(f"Flag ignore_voraussetzungen gesetzt für '{self.talent_name}'")
-            
-            # Talent auswählen mit dem ignoreVoraussetzungen Parameter
-            result = self.controller.waehle_talent(self.talent_name, ignore_voraussetzungen=True)
-            
-            if result == "needs_rang_confirmation":
-                self.show_rang_confirmation_dialog(self.talent_name)
-            elif result:
-                Logger.info(f"Talent '{self.talent_name}' trotz fehlender Voraussetzungen ausgewählt")
-                self._aktualisiere_talente_widget()
-            else:
-                Logger.warning(f"Talent '{self.talent_name}' konnte nicht ausgewählt werden.")
-                self.show_error_dialog("Talent konnte nicht ausgewählt werden.")
-        except Exception as e:
-            Logger.error(f"Fehler bei der Bestätigung des Talents: {e}")
+        Logger.debug(f"TalentItemRow: Start waehle_talent für {self.talent_name}")
+        controller = self._get_controller()
+        if not controller:
+            Logger.error("TalentItemRow: Controller nicht gefunden")
+            return
 
-    def close_dialog(self):
-        """Schließt aktive Dialoge."""
-        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog']:
-            if hasattr(self, dialog_attr) and getattr(self, dialog_attr):
-                getattr(self, dialog_attr).dismiss()
+        # Extrahiere den Basis-Namen des Talents (ohne Suffix)
+        base_name = self.talent_name.split(' (#')[0] if ' (#' in self.talent_name else self.talent_name
+
+        # Prüfen, ob das Talent bereits ausgewählt ist und nicht duplizierbar
+        if self.ausgewaehlt and base_name in NICHT_DUPLIZIERBARE_TALENTE:
+            self._show_not_duplicatable_dialog()
+            return
+
+        try:
+            result = controller.waehle_talent(self.name_key, ignore_rang_check=False)
+            
+            if result == "not_duplicatable":
+                self._show_not_duplicatable_dialog()
+            elif result == "needs_rang_confirmation":
+                self._show_rang_confirmation_dialog()
+            elif result == "needs_voraussetzungen_confirmation":
+                self._show_voraussetzungen_confirmation_dialog()
+            elif result:
+                self.ausgewaehlt = True
+                Logger.debug(f"TalentItemRow: {self.talent_name} erfolgreich ausgewählt")
+                self._refresh_ui()
+        except Exception as e:
+            Logger.error(f"Fehler beim Auswählen des Talents: {str(e)}")
+
+    def _show_not_duplicatable_dialog(self):
+        """Zeigt einen Dialog an, wenn ein Talent nicht mehrfach ausgewählt werden kann."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text=f"Das Talent '{self.talent_name}' kann nicht mehrfach ausgewählt werden.",
+            size_hint_y=None,
+            height=dp(60),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Talent nicht duplizierbar",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        dialog.open()
+
+    def _show_rang_confirmation_dialog(self):
+        """Zeigt einen Dialog für Rang-Bestätigung."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        warning_label = MDLabel(
+            text=f"Das Talent '{self.talent_name}' hat einen höheren Rang als dein Charakter. Trotzdem auswählen?",
+            size_hint_y=None,
+            height=dp(60),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(warning_label)
+        
+        self.rang_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Rang-Warnung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.rang_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_talent_with_higher_rang(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.rang_dialog.open()
+
+    def _show_voraussetzungen_confirmation_dialog(self):
+        """Zeigt einen Dialog für nicht erfüllte Voraussetzungen."""
+        controller = self._get_controller()
+        if not controller:
+            return
+            
+        # Hole die Fehlermeldungen aus dem temporären Attribut
+        fehlermeldungen = getattr(controller.charakter, 'temp_voraussetzungs_fehler', [])
+        
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Haupttext
+        main_label = MDLabel(
+            text="Die Voraussetzungen für dieses Talent sind nicht erfüllt:",
+            size_hint_y=None,
+            height=dp(30),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(main_label)
+        
+        # Fehlermeldungen
+        for fehler in fehlermeldungen:
+            fehler_label = MDLabel(
+                text=f"• {fehler}",
+                size_hint_y=None,
+                height=dp(25),
+                theme_text_color="Error",
+                halign="left",
+                valign="middle"
+            )
+            content.add_widget(fehler_label)
+        
+        # Frage
+        frage_label = MDLabel(
+            text="\nTrotzdem auswählen?",
+            size_hint_y=None,
+            height=dp(30),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(frage_label)
+        
+        self.voraussetzungen_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Voraussetzungen nicht erfüllt",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.voraussetzungen_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_talent_without_voraussetzungen(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.voraussetzungen_dialog.open()
+
+    def _confirm_talent_with_higher_rang(self):
+        """Bestätigt die Auswahl eines Talents mit höherem Rang."""
+        self.rang_dialog.dismiss()
+        controller = self._get_controller()
+        if controller:
+            result = controller.waehle_talent(self.name_key, ignore_rang_check=True)
+            if result == "needs_voraussetzungen_confirmation":
+                self._show_voraussetzungen_confirmation_dialog()
+            elif result:
+                self.ausgewaehlt = True
+                self._refresh_ui()
+
+    def _confirm_talent_without_voraussetzungen(self):
+        """Bestätigt die Auswahl eines Talents ohne erfüllte Voraussetzungen."""
+        self.voraussetzungen_dialog.dismiss()
+        controller = self._get_controller()
+        if controller:
+            result = controller.waehle_talent(self.name_key, ignore_rang_check=True, ignore_voraussetzungen=True)
+            if result:
+                self.ausgewaehlt = True
+                self._refresh_ui()
 
     def entferne_talent(self):
         """
@@ -487,7 +546,7 @@ class TalentItemRow(MDBoxLayout):
             controller.entferne_talent(self.name_key)
             self.ausgewaehlt = False
             Logger.debug(f"TalentItemRow: {self.talent_name} erfolgreich entfernt")
-            self._aktualisiere_talente_widget()
+            self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen des Talents: {str(e)}")
 
@@ -553,88 +612,12 @@ class TalentItemRow(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Anzeigen des Fehlerdialogs: {e}")
 
-    def show_rang_confirmation_dialog(self, talent_name):
-        """
-        Zeigt einen Dialog zur Bestätigung der Auswahl eines Talents trotz niedrigem Rang.
-        
-        Args:
-            talent_name (str): Name des Talents mit Rangprüfungswarnung
-        """
-        talent = self.controller.charakter.talente.get(talent_name)
-        if not talent:
-            Logger.error(f"Talent '{talent_name}' für Dialog nicht gefunden.")
-            return
-            
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
-        )
-        
-        warning_label = MDLabel(
-            text=f"Das Talent '{talent_name}' (Rang: {talent.rang}) erfordert einen höheren Rang als deinen aktuellen ({self.controller.charakter.rang}). Möchtest du es trotzdem auswählen?",
-            size_hint_y=None,
-            height=dp(80),
-            theme_text_color="Secondary",
-            halign="left",
-            valign="middle"
-        )
-        content.add_widget(warning_label)
-        
-        self.rang_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Rang-Warnung",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.rang_dialog.dismiss(),
-                ),
-                MDButton(
-                    MDButtonText(text="Trotzdem auswählen"),
-                    style="text",
-                    on_release=lambda x: self._confirm_trotz_rang(),
-                ),
-                spacing="8dp",
-            ),
-        )
-        self.rang_dialog.open()      
+    def close_dialog(self):
+        """Schließt aktive Dialoge."""
+        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog']:
+            if hasattr(self, dialog_attr) and getattr(self, dialog_attr):
+                getattr(self, dialog_attr).dismiss()
 
-    def _confirm_trotz_rang(self):
-        """
-        Bestätigt die Auswahl eines Talents trotz niedrigem Rang.
-        Führt einen zweiten Aufruf mit ignore_rang_check=True durch.
-        """
-        try:
-            # Dialog schließen
-            self.rang_dialog.dismiss()
-            
-            # Erneuter Aufruf mit ignore_rang_check=True
-            result = self.controller.waehle_talent(self.talent_name, ignore_rang_check=True)
-            
-            # Ergebnis des zweiten Aufrufs verarbeiten
-            if result == "needs_voraussetzungen_confirmation":
-                # Wenn Voraussetzungen nicht erfüllt, zeige diesen Dialog an
-                Logger.debug(f"Nach Rang-Bestätigung: Zeige Voraussetzungs-Dialog für {self.talent_name}")
-                self.show_voraussetzungen_confirmation_dialog()
-            elif result:
-                # Erfolgreich
-                Logger.debug(f"Talent '{self.talent_name}' erfolgreich ausgewählt")
-                self._aktualisiere_talente_widget()
-            else:
-                # Fehlgeschlagen
-                Logger.warning(f"Fehler beim Auswählen des Talents nach Rang-Bestätigung")
-                
-        except Exception as e:
-            Logger.error(f"Fehler bei Bestätigung trotz Rang: {e}")
-            self.show_error_dialog(f"Fehler: {str(e)}")
 
 class TalenteWidget(MDBoxLayout):
     """
@@ -712,13 +695,20 @@ class TalenteWidget(MDBoxLayout):
                 search_term in talent.name.lower() or 
                 search_term in talent.beschreibung.lower()
             ):
+                # Anzeigename anpassen für mehrfache Instanzen
+                display_name = talent.name
+                if '_' in key and key.split('_')[-1].isdigit():
+                    instance_num = key.split('_')[-1]
+                    display_name = f"{talent.name} (#{instance_num})"
+                
                 # Voraussetzungen formatieren
                 voraussetzungen_text = self._formatiere_voraussetzungen(talent)
                 
                 talent_data = {
                     'viewclass': 'TalentItemRow',
+                    'index': len(filtered_data),
                     'name_key': key,
-                    'talent_name': talent.name,
+                    'talent_name': display_name,
                     'kategorie': talent.kategorie,
                     'rang': talent.rang,
                     'beschreibung': talent.beschreibung,

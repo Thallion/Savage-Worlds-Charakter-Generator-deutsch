@@ -653,25 +653,31 @@ class CharakterbogenWidget(MDBoxLayout):
                 Logger.warning(f"Handicap '{handicap_name_key}' nicht in charakter.handicaps gefunden.")
 
     def _update_talente_section(self):
-        """
-        Aktualisiert den Talente-Abschnitt des Charakterbogens.
-        Zeigt alle ausgewählten Talente an.
-        """
-        talente_section = self.ids.talente_section
-        talente_section.clear_widgets()
-        
-        # Ausgewählte Talente anzeigen
-        for talent_name_key in self.charakter.selected_talente:
-            talent = self.charakter.talente.get(talent_name_key)
-            if talent:
-                talente_section.add_widget(LeftAlignedLabel(
-                    text=f"{talent.name}",
-                    font_size=LABEL_FONT_SIZE,
-                    size_hint_y=None,
-                    height=ROW_HEIGHT
-                ))
-            else:
-                Logger.warning(f"Talent '{talent_name_key}' nicht in charakter.talente gefunden.")
+            """
+            Aktualisiert den Talente-Abschnitt des Charakterbogens.
+            Zeigt alle ausgewählten Talente an, inklusive mehrfacher Instanzen.
+            """
+            talente_section = self.ids.talente_section
+            talente_section.clear_widgets()
+            
+            # Ausgewählte Talente anzeigen
+            for talent_name_key in self.charakter.selected_talente:
+                talent = self.charakter.talente.get(talent_name_key)
+                if talent:
+                    # Anzeigename für mehrfache Instanzen anpassen
+                    display_name = talent.name
+                    if '_' in talent_name_key and talent_name_key.split('_')[-1].isdigit():
+                        instance_num = talent_name_key.split('_')[-1]
+                        display_name = f"{talent.name} (#{instance_num})"
+                    
+                    talente_section.add_widget(LeftAlignedLabel(
+                        text=display_name,
+                        font_size=LABEL_FONT_SIZE,
+                        size_hint_y=None,
+                        height=ROW_HEIGHT
+                    ))
+                else:
+                    Logger.warning(f"Talent '{talent_name_key}' nicht in charakter.talente gefunden.")
 
     def _update_maechte_section(self):
         """

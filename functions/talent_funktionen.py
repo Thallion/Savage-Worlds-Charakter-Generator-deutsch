@@ -9,6 +9,18 @@ from models.talent import Talent
 from functions.macht_funktionen import entferne_macht
 import re
 
+# Liste der Talente, die nicht mehrfach ausgewählt werden können
+NICHT_DUPLIZIERBARE_TALENTE = [
+    "Glück", "Großes Glück", "Reich", "Stinkreich", 
+    "Kräftig", "Riesenwuchs", "Klein", "Zäh", "Sehr zäh",
+    "Arkaner Hintergrund: Gaben", "Arkaner Hintergrund: Magie", 
+    "Arkaner Hintergrund: Psionik", "Arkaner Hintergrund: Wunder",
+    "Arkaner Widerstand", "Verbesserte Arkane Resistenz",
+    "Meister aller Waffen", "Waffenmeister", "Block", "Harter Block",
+    "Schwer zu töten", "Schwerer zu töten", "Schnell", "Flink",
+    "Raufbold", "Schläger", "Attraktiv", "Sehr attraktiv"
+]
+
 
 def initialisiere_talente(charakter, talent_daten):
     """
@@ -60,10 +72,12 @@ def aktive_talente(charakter):
     """
     return [talent for talent in charakter.talente.values() if talent.aktiv]
 
+
 def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=False):
     """
     Wählt ein Talent als freies Talent ohne Kosten (Aufstiege oder Handicap-Punkte) aus.
     Speziell für Rasseneigenschaften wie das freie Talent der Menschen.
+    Wenn das Talent bereits ausgewählt ist, wird eine neue Instanz mit Suffix erstellt.
     
     Args:
         charakter: Das Charakter-Objekt
@@ -72,6 +86,7 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
         
     Returns:
         str oder bool: "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
+                       "not_duplicatable" wenn Talent nicht duplizierbar ist,
                        True bei Erfolg, False bei Misserfolg
     """
     Logger.info(f"Wähle freies Talent: {talent_name_key}")
@@ -83,10 +98,33 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
         
     talent = charakter.talente[talent_name_key]
     
-    # Prüfen, ob das Talent bereits ausgewählt ist
+    # Prüfe ob dieses spezifische Talent bereits ausgewählt ist (für Mehrfachauswahl)
     if talent.ausgewaehlt:
-        Logger.warning(f"Talent '{talent_name_key}' ist bereits ausgewählt.")
-        return False
+        # Prüfe ob das Talent duplizierbar ist
+        if talent.name in NICHT_DUPLIZIERBARE_TALENTE:
+            Logger.warning(f"Talent '{talent.name}' kann nicht mehrfach ausgewählt werden.")
+            return "not_duplicatable"
+        
+        # Erstelle eine neue Instanz für Mehrfachauswahl
+        base_key = talent_name_key.split('_')[0] if '_' in talent_name_key and talent_name_key.split('_')[-1].isdigit() else talent_name_key
+        suffix = 2
+        new_key = f"{base_key}_{suffix}"
+        
+        # Finde den nächsten freien Suffix
+        while new_key in charakter.talente:
+            suffix += 1
+            new_key = f"{base_key}_{suffix}"
+        
+        # Erstelle eine Kopie des Talents mit der clone() Methode
+        new_talent = talent.clone()
+        new_talent.ausgewaehlt = False  # Zurücksetzen für die neue Instanz
+        
+        # Füge das neue Talent hinzu
+        charakter.talente[new_key] = new_talent
+        Logger.info(f"Neue Instanz von Talent '{talent.name}' mit Key '{new_key}' erstellt")
+        
+        # Wähle die neue Instanz aus
+        return waehle_freies_talent(charakter, new_key, ignore_voraussetzungen)
         
     # Voraussetzungsprüfung, nur wenn ignore_voraussetzungen nicht gesetzt ist
     if not ignore_voraussetzungen:
@@ -108,11 +146,12 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     if talent_name_key not in charakter.selected_talente:
         charakter.selected_talente.append(talent_name_key)
         
-    # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+    # Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
     charakter.berechne_abgeleitete_werte()
         
     Logger.info(f"Freies Talent '{talent_name_key}' ohne Kosten ausgewählt.")
     return True
+
 
 def get_freie_talente(charakter):
     """
@@ -177,17 +216,6 @@ def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
     else:
         Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
     return False
-
-"""
-Modul für die Verwaltung von Talenten im Charakter.
-Dieses Modul enthält Funktionen zur Verwaltung von Talenten, einschließlich
-des Auswahlens, Abwählens und Überprüfens der Voraussetzungen.
-"""
-
-from kivy.logger import Logger
-from models.talent import Talent
-from functions.macht_funktionen import entferne_macht
-import re  # Wichtig für die Regex-Muster
 
 
 def pruefe_voraussetzungen(charakter, talent):
@@ -284,6 +312,7 @@ def pruefe_voraussetzungen(charakter, talent):
 def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
     """
     Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
+    Wenn das Talent bereits ausgewählt ist, wird eine neue Instanz mit Suffix erstellt.
     
     Args:
         charakter: Das Charakter-Objekt
@@ -293,6 +322,7 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
     Returns:
         str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
                        "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
+                       "not_duplicatable" wenn Talent nicht duplizierbar ist,
                        True bei Erfolg, False bei Misserfolg
     """
     # Prüfen, ob das Talent existiert
@@ -301,6 +331,34 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
         return False
         
     talent = charakter.talente[talent_name_key]
+    
+    # Prüfe ob dieses spezifische Talent bereits ausgewählt ist (für Mehrfachauswahl)
+    if talent.ausgewaehlt:
+        # Prüfe ob das Talent duplizierbar ist
+        if talent.name in NICHT_DUPLIZIERBARE_TALENTE:
+            Logger.warning(f"Talent '{talent.name}' kann nicht mehrfach ausgewählt werden.")
+            return "not_duplicatable"
+
+        # Erstelle eine neue Instanz für Mehrfachauswahl
+        base_key = talent_name_key.split('_')[0] if '_' in talent_name_key and talent_name_key.split('_')[-1].isdigit() else talent_name_key
+        suffix = 2
+        new_key = f"{base_key}_{suffix}"
+        
+        # Finde den nächsten freien Suffix
+        while new_key in charakter.talente:
+            suffix += 1
+            new_key = f"{base_key}_{suffix}"
+        
+        # Erstelle eine Kopie des Talents mit der clone() Methode
+        new_talent = talent.clone()
+        new_talent.ausgewaehlt = False  # Zurücksetzen für die neue Instanz
+        
+        # Füge das neue Talent hinzu
+        charakter.talente[new_key] = new_talent
+        Logger.info(f"Neue Instanz von Talent '{talent.name}' mit Key '{new_key}' erstellt")
+        
+        # Wähle die neue Instanz aus
+        return waehle_talent(charakter, new_key, ignore_rang_check)
     
     # WICHTIG: Prüfe erst Rang, dann Voraussetzungen - priorisiere Rangwarnung
     # Rang-Prüfung
@@ -331,7 +389,7 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
                 charakter.ignore_voraussetzungen = False
                 Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
             
-            # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+            # Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
             charakter.berechne_abgeleitete_werte()
             
             return True
@@ -351,7 +409,7 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
                     charakter.ignore_voraussetzungen = False
                     Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
                 
-                # Neu: Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
+                # Abgeleitete Werte neu berechnen (besonders wichtig für Talent "Kräftig")
                 charakter.berechne_abgeleitete_werte()
                 
                 return True
@@ -359,6 +417,7 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
             Logger.warning(f"Keine verbleibenden Aufstiege übrig.")
     
     return False
+
 
 def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     """
@@ -425,7 +484,6 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     return is_higher
 
 
-
 def entferne_talent(charakter, talent_name_key):
     """
     Entfernt ein ausgewähltes Talent und führt die entsprechenden Anpassungen am Charakter durch.
@@ -477,6 +535,7 @@ def entferne_talent(charakter, talent_name_key):
     else:
         Logger.error(f"Talent '{talent_name_key}' existiert nicht.")  
     return False   
+
 
 def add_talent(charakter, talent):
     """

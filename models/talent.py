@@ -54,11 +54,36 @@ class Talent(EventDispatcher):
             logging.warning(f"Talent '{self.name}' ist nicht ausgewählt.")
 
     def voraussetzungen_erfuellt(self, charakter):
-        # Hier implementieren wir die Logik zur Überprüfung der Voraussetzungen
-        for voraussetzung in self.voraussetzungen:
-            if not charakter.erfuellt_voraussetzung(voraussetzung):
-                return False
-        return True
+        """
+        Prüft, ob der Charakter die Voraussetzungen für das Talent erfüllt.
+        
+        Args:
+            charakter: Das Charakter-Objekt
+            
+        Returns:
+            bool: True wenn alle Voraussetzungen erfüllt sind, sonst False
+        """
+        from functions.talent_funktionen import pruefe_voraussetzungen
+        fehlermeldungen = pruefe_voraussetzungen(charakter, self)
+        return len(fehlermeldungen) == 0
+    
+    def clone(self):
+        """
+        Erstellt eine Kopie dieses Talents.
+        
+        Returns:
+            Talent: Eine neue Instanz mit den gleichen Werten
+        """
+        return Talent(
+            name=self.name,
+            kategorie=self.kategorie,
+            rang=self.rang,
+            voraussetzungen=list(self.voraussetzungen),  # Kopie der Liste
+            beschreibung=self.beschreibung,
+            neue_maechte=self.neue_maechte,
+            machtpunkte=self.machtpunkte,
+            custom=self.custom
+        )
 
     def setze_beschreibung(self, beschreibung):
         self.beschreibung = beschreibung
@@ -91,17 +116,3 @@ class Talent(EventDispatcher):
         talent.ausgewaehlt = data.get('ausgewaehlt', False)
         talent.aktiv = data.get('aktiv', True)
         return talent
-
-    def voraussetzungen_erfuellt(self, charakter):
-        """
-        Prüft, ob der Charakter die Voraussetzungen für das Talent erfüllt.
-        
-        Args:
-            charakter: Das Charakter-Objekt
-            
-        Returns:
-            bool: True wenn alle Voraussetzungen erfüllt sind, sonst False
-        """
-        from functions.talent_funktionen import pruefe_voraussetzungen
-        fehlermeldungen = pruefe_voraussetzungen(charakter, self)
-        return len(fehlermeldungen) == 0
