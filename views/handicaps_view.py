@@ -38,7 +38,6 @@ UNSELECTED_LINE_COLOR = [0, 0, 0, 0]
 
 
 # KV-String - könnte in eine separate Datei ausgelagert werden
-# KV-String - könnte in eine separate Datei ausgelagert werden
 KV_STRING = '''
 <HandicapsWidget>:
     orientation: 'vertical'
@@ -147,7 +146,7 @@ KV_STRING = '''
         size: dp(40), dp(40)
         pos_hint: {"center_y": 0.5}
         on_release: root.waehle_handicap()
-        disabled: False  # GEÄNDERT: War vorher root.ausgewaehlt
+        disabled: False
 
     MDFabButton:
         icon: "minus"
@@ -158,10 +157,19 @@ KV_STRING = '''
         on_release: root.entferne_handicap()
         disabled: not root.ausgewaehlt
 
+    # Neuer Bearbeiten-Button
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_handicap()
+
     MDLabel:
         text: root.beschreibung
         font_size: dp(16)
-        size_hint_x: 0.6
+        size_hint_x: 0.5
         halign: 'left'
         valign: 'middle'
 '''
@@ -193,9 +201,9 @@ class HandicapItemRow(MDBoxLayout):
     ausgewaehlt = BooleanProperty(False)
 
     NICHT_DUPLIZIERBARE_HANDICAPS = [
-    "Alt", "Jung", "Blind", "Einarmig", "Einäugig", "Stumm", 
-    "Analphabet", "Klein", "Fettleibig", "Langsam"
-]
+        "Alt", "Jung", "Blind", "Einarmig", "Einäugig", "Stumm", 
+        "Analphabet", "Klein", "Fettleibig", "Langsam"
+    ]
 
     def __init__(self, **kwargs):
         """Initialisiert die HandicapItemRow und bindet Property-Änderungen an entsprechende Handler."""
@@ -218,6 +226,20 @@ class HandicapItemRow(MDBoxLayout):
             Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
         else:
             Logger.error("HandicapItemRow: HandicapsWidget nicht gefunden")
+
+    def bearbeite_handicap(self):
+        """Öffnet den Bearbeitungsdialog für das Handicap."""
+        Logger.debug(f"HandicapItemRow: Bearbeite Handicap '{self.handicap_name}' mit Key '{self.name_key}'")
+        
+        app = MDApp.get_running_app()
+        if hasattr(app, 'einstellungen_widget'):
+            einstellungen_widget = app.einstellungen_widget
+            if hasattr(einstellungen_widget, 'handicap_dialog_handler'):
+                einstellungen_widget.handicap_dialog_handler.show_edit_dialog(self.name_key)
+            else:
+                Logger.error("HandicapItemRow: handicap_dialog_handler nicht gefunden")
+        else:
+            Logger.error("HandicapItemRow: einstellungen_widget nicht gefunden")
 
     def waehle_handicap(self):
         """

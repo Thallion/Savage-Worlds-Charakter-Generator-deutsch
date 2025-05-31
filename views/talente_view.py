@@ -2,7 +2,7 @@
 """
 View-Komponente für Talente nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Talenten bereit.
-Mit Unterstützung für Mehrfachauswahl von Talenten.
+Mit Unterstützung für Mehrfachauswahl von Talenten und Bearbeitungsfunktion.
 """
 
 from kivymd.app import MDApp
@@ -238,10 +238,19 @@ KV_STRING = '''
         on_release: root.entferne_talent()
         disabled: not root.ausgewaehlt
 
+    # Neuer Bearbeiten-Button
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_talent()
+
     MDLabel:
         text: root.beschreibung
         font_size: dp(16)
-        size_hint_x: 0.45
+        size_hint_x: 0.4
         halign: 'left'
         valign: 'middle'
 '''
@@ -315,6 +324,20 @@ class TalentItemRow(MDBoxLayout):
             Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
         else:
             Logger.error("TalentItemRow: TalenteWidget nicht gefunden")
+
+    def bearbeite_talent(self):
+        """Öffnet den Bearbeitungsdialog für das Talent."""
+        Logger.debug(f"TalentItemRow: Bearbeite Talent '{self.talent_name}' mit Key '{self.name_key}'")
+        
+        app = MDApp.get_running_app()
+        if hasattr(app, 'einstellungen_widget'):
+            einstellungen_widget = app.einstellungen_widget
+            if hasattr(einstellungen_widget, 'talent_dialog_handler'):
+                einstellungen_widget.talent_dialog_handler.show_edit_dialog(self.name_key)
+            else:
+                Logger.error("TalentItemRow: talent_dialog_handler nicht gefunden")
+        else:
+            Logger.error("TalentItemRow: einstellungen_widget nicht gefunden")
 
     def waehle_talent(self):
         """

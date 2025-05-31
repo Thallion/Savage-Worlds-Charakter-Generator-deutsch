@@ -4,6 +4,7 @@ from kivy.logger import Logger
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.app import App
+from kivy.clock import Clock
 from kivymd.uix.dialog import (
     MDDialog,
     MDDialogHeadlineText,
@@ -74,10 +75,31 @@ kv = '''
 Builder.load_string(kv)
 
 class HandicapDialogContent(MDBoxLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, handicap_data=None, **kwargs):
         super().__init__(**kwargs)
         self.dialog = None
         self.selected_stufe = None
+        self.edit_mode = False
+        self.original_name = None
+        
+        # Wenn Handicap-Daten übergeben wurden, befülle die Felder
+        if handicap_data:
+            self.edit_mode = True
+            self.original_name = handicap_data.get('name', '')
+            Clock.schedule_once(lambda dt: self._fill_fields(handicap_data), 0.1)
+    
+    def _fill_fields(self, handicap_data):
+        """Befüllt die Felder mit den Handicap-Daten beim Bearbeiten"""
+        if hasattr(self.ids, 'name_input'):
+            self.ids.name_input.text = handicap_data.get('name', '')
+        
+        if hasattr(self.ids, 'selected_stufe_text'):
+            stufe = handicap_data.get('stufe', 'leicht')
+            self.ids.selected_stufe_text.text = stufe
+            self.selected_stufe = stufe
+        
+        if hasattr(self.ids, 'beschreibung_input'):
+            self.ids.beschreibung_input.text = handicap_data.get('beschreibung', '')
 
     def open_stufen_menu(self, instance_item):
         menu_items = [
@@ -169,6 +191,134 @@ class HandicapDialogHandler:
             ),
         )
         self.dialog.open()
+
+    def show_edit_dialog(self, handicap_name_key):
+        """Zeigt den Dialog zum Bearbeiten eines bestehenden Handicaps"""
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
+            
+            # Hole das Handicap
+            handicap = charakter.handicaps.get(handicap_name_key)
+            if not handicap:
+                self.show_error(f"Handicap '{handicap_name_key}' nicht gefunden.")
+                return
+            
+            # Erstelle Dialog-Content mit Handicap-Daten
+            handicap_data = {
+                'name': handicap.name,
+                'stufe': handicap.stufe,
+                'beschreibung': handicap.beschreibung
+            }
+            
+            dialog_content = HandicapDialogContent(handicap_data=handicap_data)
+            dialog_content.dialog = self.dialog
+            self.dialog_content = dialog_content
+            self.selected_handicap = handicap_name_key  # Speichere den Key für Updates
+            
+            self.dialog = MDDialog(
+                MDDialogHeadlineText(
+                    text="Handicap bearbeiten",
+                ),
+                MDDialogContentContainer(
+                    dialog_content,
+                    orientation="vertical",
+                ),
+                MDDialogButtonContainer(
+                    Widget(),
+                    MDButton(
+                        MDButtonText(text="Abbrechen"),
+                        style="text",
+                        on_release=self.dismiss_dialog,
+                    ),
+                    MDButton(
+                        MDButtonText(text="Speichern"),
+                        style="text",
+                        on_release=self.update_handicap,
+                    ),
+                    spacing="8dp",
+                ),
+            )
+            self.dialog.open()
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
+            self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
+
+    def update_handicap(self, *args):
+        """Aktualisiert ein bestehendes Handicap"""
+        if not self.dialog_content or not self.selected_handicap:
+            Logger.error("Dialog-Content oder ausgewähltes Handicap nicht gefunden")
+            return
+            
+        name = self.dialog_content.ids.name_input.text.strip()
+        
+        if not name:
+            self.show_error("Der Name des Handicaps darf nicht leer sein.")
+            return
+
+        # Validiere Stufe
+        if not hasattr(self.dialog_content, 'selected_stufe') or not self.dialog_content.selected_stufe:
+            self.show_error("Bitte wähle eine Stufe aus.")
+            return
+
+        stufe = self.dialog_content.selected_stufe
+        beschreibung = self.dialog_content.ids.beschreibung_input.text.strip()
+
+        if not beschreibung:
+            self.show_error("Die Beschreibung darf nicht leer sein.")
+            return
+
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
+            
+            # Hole das bestehende Handicap
+            handicap = charakter.handicaps.get(self.selected_handicap)
+            if not handicap:
+                self.show_error(f"Handicap '{self.selected_handicap}' nicht mehr gefunden.")
+                return
+            
+            # Wenn der Name geändert wurde und bereits existiert
+            if name != handicap.name and name in charakter.handicaps:
+                self.show_error(f"Ein Handicap mit dem Namen '{name}' existiert bereits.")
+                return
+            
+            # Aktualisiere das Handicap
+            handicap.name = name
+            handicap.stufe = stufe
+            handicap.beschreibung = beschreibung
+            handicap.update_punkte()  # Punkte neu berechnen
+            
+            # Bei Namensänderung: Key im Dictionary ändern
+            if name != self.dialog_content.original_name and self.dialog_content.original_name:
+                # Neuen Key erstellen
+                new_key = f"{name} ({stufe})"
+                old_key = self.selected_handicap
+                
+                # Handicap unter neuem Key speichern und alten löschen
+                charakter.handicaps[new_key] = handicap
+                if old_key != new_key and old_key in charakter.handicaps:
+                    del charakter.handicaps[old_key]
+                    
+                    # Auch in selected_handicaps aktualisieren
+                    if old_key in charakter.selected_handicaps:
+                        idx = charakter.selected_handicaps.index(old_key)
+                        charakter.selected_handicaps[idx] = new_key
+            
+            # Speichere die Custom Handicaps
+            charakter.save_custom_handicaps()
+            
+            # Aktualisiere die UI
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            
+            self.dismiss_dialog()
+            Logger.info(f"Handicap '{name}' wurde aktualisiert.")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren des Handicaps: {e}")
+            self.show_error("Fehler beim Aktualisieren des Handicaps")
 
     def show_delete_dialog(self):
         """Zeigt den Dialog zum Löschen eines Handicaps"""
