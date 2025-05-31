@@ -1,7 +1,7 @@
-# maechte_view.py
+# views/maechte_view.py
 """
 View-Komponente für Mächte nach dem MVC-Pattern.
-Stellt die Benutzeroberfläche zur Anzeige und Verwaltung von Mächten bereit.
+Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Mächten bereit.
 """
 
 from kivymd.app import MDApp
@@ -179,10 +179,19 @@ KV_STRING = '''
         on_release: root.entferne_macht()
         disabled: not root.macht or not root.macht.ausgewaehlt
 
+    # Neuer Bearbeiten-Button
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_macht()
+
     MDLabel:
         text: root.beschreibung
         font_size: dp(14)
-        size_hint_x: 0.6
+        size_hint_x: 0.55
         halign: 'left'
         valign: 'middle'
 '''
@@ -241,6 +250,20 @@ class MachtItemRow(MDBoxLayout):
             Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
         else:
             Logger.error("MachtItemRow: MaechteWidget nicht gefunden")
+
+    def bearbeite_macht(self):
+        """Öffnet den Bearbeitungsdialog für die Macht."""
+        Logger.debug(f"MachtItemRow: Bearbeite Macht '{self.macht_name}'")
+        
+        app = MDApp.get_running_app()
+        if hasattr(app, 'einstellungen_widget'):
+            einstellungen_widget = app.einstellungen_widget
+            if hasattr(einstellungen_widget, 'macht_dialog_handler'):
+                einstellungen_widget.macht_dialog_handler.show_edit_dialog(self.macht_name)
+            else:
+                Logger.error("MachtItemRow: macht_dialog_handler nicht gefunden")
+        else:
+            Logger.error("MachtItemRow: einstellungen_widget nicht gefunden")
 
     def waehle_macht(self):
         """
@@ -369,7 +392,7 @@ class MaechteWidget(MDBoxLayout):
     """
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
-    only_selected_items = BooleanProperty(False)  # Property für den Filter
+    only_selected_items = BooleanProperty(False)  # Property för den Filter
 
     # Mapping für Ränge, um numerische Sortierung zu ermöglichen
     RANG_MAPPING = {
