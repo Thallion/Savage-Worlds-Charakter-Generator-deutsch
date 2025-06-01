@@ -203,37 +203,144 @@ class HyperlinkLabel(MDLabel):
         return super().on_touch_up(touch)
 
 # -----------------------------
-# Screen-Klassen
+# Screen-Klassen mit Delegationsmethoden
 # -----------------------------
 
 class EinstellungenScreen(MDScreen):
-    pass
+    def aktualisiere_ui(self):
+        """Delegiert an das EinstellungenWidget"""
+        try:
+            if hasattr(self.ids, 'einstellungen_widget'):
+                widget = self.ids.einstellungen_widget
+                if widget and hasattr(widget, 'aktualisiere_ui'):
+                    widget.aktualisiere_ui()
+                    return True
+            Logger.warning("EinstellungenWidget oder aktualisiere_ui nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei EinstellungenScreen.aktualisiere_ui: {str(e)}")
+            return False
 
 class VoelkerScreen(MDScreen):
-    pass
+    def aktualisiere_ui(self):
+        """Delegiert an das VoelkerWidget"""
+        try:
+            if hasattr(self.ids, 'voelker_widget'):
+                widget = self.ids.voelker_widget
+                if widget and hasattr(widget, 'aktualisiere_ui'):
+                    widget.aktualisiere_ui()
+                    return True
+            Logger.warning("VoelkerWidget oder aktualisiere_ui nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei VoelkerScreen.aktualisiere_ui: {str(e)}")
+            return False
 
 class ProfilScreen(MDScreen):
-    pass
+    def load_profil(self):
+        """Delegiert an das ProfilWidget"""
+        try:
+            if hasattr(self.ids, 'profil_widget'):
+                widget = self.ids.profil_widget
+                if widget and hasattr(widget, 'load_profil'):
+                    widget.load_profil()
+                    return True
+            Logger.warning("ProfilWidget oder load_profil nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei ProfilScreen.load_profil: {str(e)}")
+            return False
 
 class EigenschaftenScreen(MDScreen):
-    pass
+    def update_eigenschaften(self):
+        """Delegiert an das EigenschaftenWidget"""
+        try:
+            if hasattr(self.ids, 'eigenschaften_widget'):
+                widget = self.ids.eigenschaften_widget
+                if widget and hasattr(widget, 'update_eigenschaften'):
+                    widget.update_eigenschaften()
+                    return True
+            Logger.warning("EigenschaftenWidget oder update_eigenschaften nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei EigenschaftenScreen.update_eigenschaften: {str(e)}")
+            return False
 
 class HandicapsScreen(MDScreen):
-    pass
+    def refresh_widget(self):
+        """Delegiert an das HandicapsWidget"""
+        try:
+            if hasattr(self.ids, 'handicaps_widget'):
+                widget = self.ids.handicaps_widget
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                    return True
+            Logger.warning("HandicapsWidget oder refresh_widget nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei HandicapsScreen.refresh_widget: {str(e)}")
+            return False
 
 class TalenteScreen(MDScreen):
-    pass
+    def refresh_widget(self):
+        """Delegiert an das TalenteWidget"""
+        try:
+            if hasattr(self.ids, 'talente_widget'):
+                widget = self.ids.talente_widget
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                    return True
+            Logger.warning("TalenteWidget oder refresh_widget nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei TalenteScreen.refresh_widget: {str(e)}")
+            return False
 
 class MaechteScreen(MDScreen):
-    pass
+    def refresh_widget(self):
+        """Delegiert an das MaechteWidget"""
+        try:
+            if hasattr(self.ids, 'maechte_widget'):
+                widget = self.ids.maechte_widget
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                    return True
+            Logger.warning("MaechteWidget oder refresh_widget nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei MaechteScreen.refresh_widget: {str(e)}")
+            return False
 
 class AusruestungScreen(MDScreen):
-    pass
+    def refresh_widget(self):
+        """Delegiert an das AusruestungWidget"""
+        try:
+            if hasattr(self.ids, 'ausruestung_widget'):
+                widget = self.ids.ausruestung_widget
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                    return True
+            Logger.warning("AusruestungWidget oder refresh_widget nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei AusruestungScreen.refresh_widget: {str(e)}")
+            return False
 
 class CharakterbogenScreen(MDScreen):
-    pass
+    def update_overview(self, *args):
+        """Delegiert an das CharakterbogenWidget"""
+        try:
+            if hasattr(self.ids, 'charakterbogen_widget'):
+                widget = self.ids.charakterbogen_widget
+                if widget and hasattr(widget, 'update_overview'):
+                    widget.update_overview(*args)
+                    return True
+            Logger.warning("CharakterbogenWidget oder update_overview nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei CharakterbogenScreen.update_overview: {str(e)}")
+            return False
 
-  
 class InfoScreen(MDScreen):
     info_text = StringProperty("""
     Lizenz- und Urheberrechtsinformationen
@@ -714,39 +821,27 @@ class SW_Charakter_GeneratorApp(MDApp):
             if 0 <= index < len(self.tab_definitions):
                 tab_title = self.tab_definitions[index][1]
                 
-                # Sichere Tab-Updates mit neuen Methoden
-                if tab_title == 'Eigenschaften':
-                    self.safe_widget_call(self.get_eigenschaften_widget, 'update_eigenschaften')
-                elif tab_title == 'Ausrüstung':
-                    self.safe_widget_call(self.get_ausruestung_widget, 'refresh_widget')
-                elif tab_title == 'Profil':
-                    widget = self.get_widget_by_tab_text('Profil', 'profil_widget')
-                    if widget:
-                        self.safe_widget_call(lambda: widget, 'load_profil')
-                elif tab_title == 'Völker':
-                    widget = self.get_widget_by_tab_text('Völker', 'voelker_widget')
-                    if widget:
-                        self.safe_widget_call(lambda: widget, 'aktualisiere_ui')
-                elif tab_title == 'Talente':
-                    widget = self.get_widget_by_tab_text('Talente', 'talente_widget')
-                    if widget:
-                        self.safe_widget_call(lambda: widget, 'refresh_widget')
-                elif tab_title == 'Mächte':
-                    widget = self.get_widget_by_tab_text('Mächte', 'maechte_widget')
-                    if widget:
-                        self.safe_widget_call(lambda: widget, 'refresh_widget')
-                elif tab_title == 'Handicaps':
-                    widget = self.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
-                    if widget:
-                        self.safe_widget_call(lambda: widget, 'refresh_widget')
-                elif tab_title == 'Charakter':
-                    widget = self.get_widget_by_tab_text('Charakter', 'charakterbogen_widget')
-                    if widget:
-                        self.safe_widget_call(lambda: widget, 'update_overview', 0)
-                elif tab_title == 'Einstellungen':
-                    einstellungen = self.get_einstellungen_widget()
-                    if einstellungen:
-                        self.safe_widget_call(lambda: einstellungen, 'aktualisiere_ui')
+                # Sichere Tab-Updates direkt über die Screen-Instanzen
+                screen = self.screens.get(tab_title)
+                if screen:
+                    if tab_title == 'Eigenschaften' and hasattr(screen, 'update_eigenschaften'):
+                        screen.update_eigenschaften()
+                    elif tab_title == 'Ausrüstung' and hasattr(screen, 'refresh_widget'):
+                        screen.refresh_widget()
+                    elif tab_title == 'Profil' and hasattr(screen, 'load_profil'):
+                        screen.load_profil()
+                    elif tab_title == 'Völker' and hasattr(screen, 'aktualisiere_ui'):
+                        screen.aktualisiere_ui()
+                    elif tab_title == 'Talente' and hasattr(screen, 'refresh_widget'):
+                        screen.refresh_widget()
+                    elif tab_title == 'Mächte' and hasattr(screen, 'refresh_widget'):
+                        screen.refresh_widget()
+                    elif tab_title == 'Handicaps' and hasattr(screen, 'refresh_widget'):
+                        screen.refresh_widget()
+                    elif tab_title == 'Charakter' and hasattr(screen, 'update_overview'):
+                        screen.update_overview(0)
+                    elif tab_title == 'Einstellungen' and hasattr(screen, 'aktualisiere_ui'):
+                        screen.aktualisiere_ui()
                 
                 Logger.info(f"UI-Aktualisierung für aktuellen Tab '{tab_title}' abgeschlossen")
             else:
@@ -787,43 +882,28 @@ class SW_Charakter_GeneratorApp(MDApp):
         self.root.ids.tabs_carousel.index = index
         
         try:
-            # Tab-spezifische Aktualisierungen
-            if tab_title == 'Eigenschaften':
-                widget = self.get_widget_by_tab_text('Eigenschaften', 'eigenschaften_widget')
-                if widget:
-                    widget.update_eigenschaften()
-            elif tab_title == 'Ausrüstung':
-                widget = self.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
-                if widget:
-                    widget.refresh_widget()
-            elif tab_title == 'Profil':
-                widget = self.get_widget_by_tab_text('Profil', 'profil_widget')
-                if widget:
-                    widget.load_profil()
-            elif tab_title == 'Völker':
-                widget = self.get_widget_by_tab_text('Völker', 'voelker_widget')
-                if widget:
-                    widget.aktualisiere_ui()
-            elif tab_title == 'Talente':
-                widget = self.get_widget_by_tab_text('Talente', 'talente_widget')
-                if widget:
-                    widget.refresh_widget()
-            elif tab_title == 'Mächte':
-                widget = self.get_widget_by_tab_text('Mächte', 'maechte_widget')
-                if widget:
-                    widget.refresh_widget()
-            elif tab_title == 'Handicaps':
-                widget = self.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
-                if widget:
-                    widget.refresh_widget()
-            elif tab_title == 'Charakter':
-                Logger.debug("Charakterbogen-Tab erkannt")
-                widget = self.get_widget_by_tab_text('Charakter', 'charakterbogen_widget')
-                if widget:
-                    Logger.debug("Charakterbogen-Widget gefunden, rufe update_overview auf")
-                    widget.update_overview(0)
-                else:
-                    Logger.error("Charakterbogen-Widget nicht gefunden")
+            # Tab-spezifische Aktualisierungen direkt über Screen-Instanzen
+            screen = self.screens.get(tab_title)
+            if screen:
+                if tab_title == 'Eigenschaften' and hasattr(screen, 'update_eigenschaften'):
+                    screen.update_eigenschaften()
+                elif tab_title == 'Ausrüstung' and hasattr(screen, 'refresh_widget'):
+                    screen.refresh_widget()
+                elif tab_title == 'Profil' and hasattr(screen, 'load_profil'):
+                    screen.load_profil()
+                elif tab_title == 'Völker' and hasattr(screen, 'aktualisiere_ui'):
+                    screen.aktualisiere_ui()
+                elif tab_title == 'Talente' and hasattr(screen, 'refresh_widget'):
+                    screen.refresh_widget()
+                elif tab_title == 'Mächte' and hasattr(screen, 'refresh_widget'):
+                    screen.refresh_widget()
+                elif tab_title == 'Handicaps' and hasattr(screen, 'refresh_widget'):
+                    screen.refresh_widget()
+                elif tab_title == 'Charakter' and hasattr(screen, 'update_overview'):
+                    Logger.debug("Charakterbogen-Tab erkannt")
+                    screen.update_overview(0)
+                elif tab_title == 'Einstellungen' and hasattr(screen, 'aktualisiere_ui'):
+                    screen.aktualisiere_ui()
                     
             Logger.info(f"UI-Aktualisierung für Tab {tab_title} erfolgreich")
                     
