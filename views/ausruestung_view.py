@@ -143,6 +143,50 @@ class AusruestungItemRow(MDBoxLayout):
             Logger.error(f"Fehler beim Verkaufen der Ausrüstung: {str(e)}")
             self.show_error(f"Ein Fehler ist aufgetreten: {str(e)}")
 
+    def bearbeite_ausruestung(self):
+        """Öffnet den Bearbeitungsdialog für das Ausrüstungsteil."""
+        Logger.debug(f"AusruestungItemRow: Bearbeite Ausrüstung '{self.name}'")
+        
+        app = MDApp.get_running_app()
+        if hasattr(app, 'einstellungen_widget'):
+            einstellungen_widget = app.einstellungen_widget
+            
+            # Bestimme den Typ der Ausrüstung und rufe den entsprechenden Handler auf
+            controller = self._get_controller()
+            if controller and self.name in controller.charakter.ausruestung:
+                item = controller.charakter.ausruestung[self.name]
+                
+                # Typ-spezifische Bearbeitung
+                from models.waffe import Waffe
+                from models.ruestung import Ruestung
+                from models.schild import Schild
+                
+                if isinstance(item, Waffe):
+                    if hasattr(einstellungen_widget, 'waffe_dialog_handler'):
+                        einstellungen_widget.waffe_dialog_handler.show_edit_dialog(self.name)
+                    else:
+                        Logger.error("AusruestungItemRow: waffe_dialog_handler nicht gefunden")
+                elif isinstance(item, Ruestung):
+                    if hasattr(einstellungen_widget, 'ruestung_dialog_handler'):
+                        einstellungen_widget.ruestung_dialog_handler.show_edit_dialog(self.name)
+                    else:
+                        Logger.error("AusruestungItemRow: ruestung_dialog_handler nicht gefunden")
+                elif isinstance(item, Schild):
+                    if hasattr(einstellungen_widget, 'schild_dialog_handler'):
+                        einstellungen_widget.schild_dialog_handler.show_edit_dialog(self.name)
+                    else:
+                        Logger.error("AusruestungItemRow: schild_dialog_handler nicht gefunden")
+                else:
+                    # Allgemeine Ausrüstung
+                    if hasattr(einstellungen_widget, 'ausruestung_dialog_handler'):
+                        einstellungen_widget.ausruestung_dialog_handler.show_edit_dialog(self.name)
+                    else:
+                        Logger.error("AusruestungItemRow: ausruestung_dialog_handler nicht gefunden")
+            else:
+                Logger.error(f"AusruestungItemRow: Ausrüstung '{self.name}' nicht gefunden")
+        else:
+            Logger.error("AusruestungItemRow: einstellungen_widget nicht gefunden")
+
     def _show_transaction_dialog(self, title, content, action_text, action_handler):
         """Zeigt einen Transaktionsdialog an"""
         self.dialog = MDDialog(
@@ -853,17 +897,17 @@ KV_STRING = '''
         valign: 'middle'
         pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
     
-    # Buttons - Bleiben wie vorher
+    # Buttons - Erweitert um Bearbeiten-Button
     AnchorLayout:
         anchor_x: 'right'
         anchor_y: 'center'
         size_hint_x: None
-        width: dp(90)
+        width: dp(140)  # Erweitert für dritten Button
         
         MDBoxLayout:
-            orientation: 'vertical'
+            orientation: 'horizontal'
             size_hint: None, None
-            size: dp(35), dp(80)
+            size: dp(140), dp(35)
             spacing: dp(5)
             
             MDButton:
@@ -881,6 +925,14 @@ KV_STRING = '''
                 on_release: root.verkaufen_ausruestung()
                 MDButtonIcon:
                     icon: "minus"
+            
+            MDButton:
+                style: "filled"
+                size_hint: None, None
+                size: dp(35), dp(35)
+                on_release: root.bearbeite_ausruestung()
+                MDButtonIcon:
+                    icon: "pencil"
 '''
 
 # KV-String laden

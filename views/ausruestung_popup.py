@@ -2,6 +2,7 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.uix.widget import Widget
 from kivy.app import App
+from kivy.clock import Clock
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import (
     MDDialog,
@@ -92,9 +93,37 @@ kv = '''
 Builder.load_string(kv)
 
 class AusruestungDialogContent(MDBoxLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, ausruestung_data=None, **kwargs):
         super().__init__(**kwargs)
         self.dialog = None
+        self.edit_mode = False
+        self.original_name = None
+        
+        # Wenn Ausrüstungs-Daten übergeben wurden, befülle die Felder
+        if ausruestung_data:
+            self.edit_mode = True
+            self.original_name = ausruestung_data.get('name', '')
+            Clock.schedule_once(lambda dt: self._fill_fields(ausruestung_data), 0.1)
+    
+    def _fill_fields(self, ausruestung_data):
+        """Befüllt die Felder mit den Ausrüstungs-Daten beim Bearbeiten"""
+        if hasattr(self.ids, 'name_input'):
+            self.ids.name_input.text = ausruestung_data.get('name', '')
+        
+        if hasattr(self.ids, 'kategorie_input'):
+            self.ids.kategorie_input.text = ausruestung_data.get('kategorie', '')
+        
+        if hasattr(self.ids, 'gewicht_input'):
+            self.ids.gewicht_input.text = str(ausruestung_data.get('gewicht', 0))
+        
+        if hasattr(self.ids, 'kosten_input'):
+            self.ids.kosten_input.text = str(ausruestung_data.get('kosten', 0))
+        
+        if hasattr(self.ids, 'setting_input'):
+            self.ids.setting_input.text = ausruestung_data.get('setting', '')
+        
+        if hasattr(self.ids, 'beschreibung_input'):
+            self.ids.beschreibung_input.text = ausruestung_data.get('beschreibung', '')
 
 class DeleteAusruestungDialogContent(MDBoxLayout):
     def __init__(self, ausruestung_callback=None, menu_callback=None, **kwargs):
@@ -107,8 +136,8 @@ class DeleteAusruestungDialogContent(MDBoxLayout):
         if not self.ausruestung_callback:
             return
             
-        ausruestungen = self.ausruestung_callback()
-        if not ausruestungen:
+        ausruestung = self.ausruestung_callback()
+        if not ausruestung:
             return
             
         menu_items = [
@@ -116,7 +145,7 @@ class DeleteAusruestungDialogContent(MDBoxLayout):
                 "text": name,
                 "on_release": lambda x=name: self.select_item(x),
             }
-            for name in ausruestungen
+            for name in ausruestung
         ]
         
         MDDropdownMenu(
@@ -167,6 +196,134 @@ class AusruestungDialogHandler:
             ),
         )
         self.dialog.open()
+
+    def show_edit_dialog(self, ausruestung_name):
+        """Zeigt den Dialog zum Bearbeiten einer bestehenden Ausrüstung"""
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
+            
+            # Hole die Ausrüstung
+            ausruestung = charakter.ausruestung.get(ausruestung_name)
+            if not ausruestung:
+                self.show_error(f"Ausrüstung '{ausruestung_name}' nicht gefunden.")
+                return
+            
+            # Erstelle Dialog-Content mit Ausrüstungs-Daten
+            ausruestung_data = {
+                'name': ausruestung.name,
+                'kategorie': getattr(ausruestung, 'kategorie', 'Allgemein'),
+                'gewicht': ausruestung.gewicht,
+                'kosten': ausruestung.kosten,
+                'setting': ausruestung.setting,
+                'beschreibung': ausruestung.beschreibung
+            }
+            
+            dialog_content = AusruestungDialogContent(ausruestung_data=ausruestung_data)
+            dialog_content.dialog = self.dialog
+            self.dialog_content = dialog_content
+            self.selected_ausruestung = ausruestung_name  # Speichere den Key für Updates
+            
+            self.dialog = MDDialog(
+                MDDialogHeadlineText(
+                    text="Ausrüstung bearbeiten",
+                ),
+                MDDialogContentContainer(
+                    dialog_content,
+                    orientation="vertical",
+                ),
+                MDDialogButtonContainer(
+                    Widget(),
+                    MDButton(
+                        MDButtonText(text="Abbrechen"),
+                        style="text",
+                        on_release=self.dismiss_dialog,
+                    ),
+                    MDButton(
+                        MDButtonText(text="Speichern"),
+                        style="text",
+                        on_release=self.update_ausruestung,
+                    ),
+                    spacing="8dp",
+                ),
+            )
+            self.dialog.open()
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
+            self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
+
+    def update_ausruestung(self, *args):
+        """Aktualisiert eine bestehende Ausrüstung"""
+        if not self.dialog_content or not self.selected_ausruestung:
+            Logger.error("Dialog-Content oder ausgewählte Ausrüstung nicht gefunden")
+            return
+            
+        # Grunddaten sammeln
+        name = self.dialog_content.ids.name_input.text.strip()
+        kategorie = self.dialog_content.ids.kategorie_input.text.strip()
+        gewicht_text = self.dialog_content.ids.gewicht_input.text.strip()
+        kosten_text = self.dialog_content.ids.kosten_input.text.strip()
+        setting = self.dialog_content.ids.setting_input.text.strip()
+        beschreibung = self.dialog_content.ids.beschreibung_input.text.strip()
+
+        # Validierungen
+        if not name:
+            self.show_error("Der Name der Ausrüstung darf nicht leer sein.")
+            return
+            
+        if not kategorie:
+            self.show_error("Bitte geben Sie eine Kategorie an.")
+            return
+
+        try:
+            gewicht = float(gewicht_text) if gewicht_text else 0
+            kosten = float(kosten_text) if kosten_text else 0
+        except ValueError:
+            self.show_error("Bitte geben Sie gültige Zahlen für Gewicht und Kosten ein.")
+            return
+
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
+            
+            # Hole die bestehende Ausrüstung
+            ausruestung = charakter.ausruestung.get(self.selected_ausruestung)
+            if not ausruestung:
+                self.show_error(f"Ausrüstung '{self.selected_ausruestung}' nicht mehr gefunden.")
+                return
+            
+            # Wenn der Name geändert wurde und bereits existiert
+            if name != ausruestung.name and name in charakter.ausruestung:
+                self.show_error(f"Ausrüstung mit dem Namen '{name}' existiert bereits.")
+                return
+            
+            # Aktualisiere die Ausrüstung
+            old_name = ausruestung.name
+            ausruestung.name = name
+            ausruestung.kategorie = kategorie
+            ausruestung.gewicht = gewicht
+            ausruestung.kosten = kosten
+            ausruestung.setting = setting
+            ausruestung.beschreibung = beschreibung
+            
+            # Bei Namensänderung: Key im Dictionary ändern
+            if name != old_name:
+                # Neuen Key erstellen
+                charakter.ausruestung[name] = ausruestung
+                if old_name in charakter.ausruestung:
+                    del charakter.ausruestung[old_name]
+            
+            # Aktualisiere die UI
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            
+            self.dismiss_dialog()
+            Logger.info(f"Ausrüstung '{name}' wurde aktualisiert.")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren der Ausrüstung: {e}")
+            self.show_error("Fehler beim Aktualisieren der Ausrüstung")
 
     def show_delete_dialog(self):
         """Zeigt den Dialog zum Löschen einer Ausrüstung"""
