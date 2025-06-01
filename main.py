@@ -530,12 +530,12 @@ class SW_Charakter_GeneratorApp(MDApp):
             screen_instance = ScreenClass()
             carousel.add_widget(screen_instance)
             self.screens[tab_text] = screen_instance  # Store screen in dictionary
+            
+            # WICHTIG: Widget-Registrierung für Kompatibilität
+            self._register_widget_for_compatibility(screen_instance, tab_text)
 
         # Binde Mausklick => on_tab_switch
         tabs_bar.bind(on_tab_switch=self.on_tab_switch)
-
-        # Binde Pfeiltasten
-        Window.bind(on_key_down=self.on_key_down)
 
         # Optional: Ersten Tab aktivieren
         if self.tab_definitions:
@@ -551,6 +551,154 @@ class SW_Charakter_GeneratorApp(MDApp):
                 # Setze den Carousel-Index entsprechend
                 carousel.index = 0
 
+    def _register_widget_for_compatibility(self, widget, tab_name):
+        """
+        Registriert Widgets bei der App für Legacy-Kompatibilität
+        
+        Args:
+            widget: Das Widget
+            tab_name (str): Name des Tabs
+        """
+        try:
+            # Spezielle Registrierung für wichtige Widgets
+            if tab_name == 'Einstellungen':
+                self.einstellungen_widget = widget
+                Logger.debug("EinstellungenWidget bei App registriert")
+            
+            elif tab_name == 'Eigenschaften':
+                self.eigenschaften_widget = widget
+                Logger.debug("EigenschaftenWidget bei App registriert")
+            
+            elif tab_name == 'Ausrüstung':
+                self.ausruestung_widget = widget
+                Logger.debug("AusrüstungWidget bei App registriert")
+            
+            elif tab_name == 'Profil':
+                self.profil_widget = widget
+                Logger.debug("ProfilWidget bei App registriert")
+            
+            elif tab_name == 'Völker':
+                self.voelker_widget = widget
+                Logger.debug("VölkerWidget bei App registriert")
+            
+            elif tab_name == 'Talente':
+                self.talente_widget = widget
+                Logger.debug("TalenteWidget bei App registriert")
+            
+            elif tab_name == 'Mächte':
+                self.maechte_widget = widget
+                Logger.debug("MächteWidget bei App registriert")
+            
+            elif tab_name == 'Handicaps':
+                self.handicaps_widget = widget
+                Logger.debug("HandicapsWidget bei App registriert")
+            
+            elif tab_name == 'Charakter':
+                self.charakterbogen_widget = widget
+                Logger.debug("CharakterbogenWidget bei App registriert")
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Widget-Registrierung für {tab_name}: {str(e)}")
+
+    def get_widget_by_tab_text(self, tab_text, widget_id):
+        """Retrieve widget by tab text and widget ID."""
+        Logger.debug(f"get_widget_by_tab_text aufgerufen mit tab_text = {tab_text}, widget_id = {widget_id}")
+        
+        # Zuerst im screens Dictionary suchen
+        screen = self.screens.get(tab_text)
+        if screen:
+            Logger.debug(f"Screen {tab_text} gefunden, IDs: {screen.ids.keys()}")
+            widget = screen.ids.get(widget_id)
+            if widget:
+                Logger.debug(f"Widget {widget_id} gefunden")
+                return widget
+            else:
+                Logger.error(f"Widget {widget_id} not found in screen {tab_text}.")
+        else:
+            Logger.error(f"Screen {tab_text} not found.")
+        
+        # Fallback: Direkt bei der App suchen
+        try:
+            widget_attr_name = f"{tab_text.lower()}_widget"
+            if hasattr(self, widget_attr_name):
+                app_widget = getattr(self, widget_attr_name)
+                if app_widget and hasattr(app_widget, 'ids'):
+                    widget = app_widget.ids.get(widget_id)
+                    if widget:
+                        Logger.debug(f"Widget {widget_id} über App-Attribut gefunden")
+                        return widget
+        except Exception as e:
+            Logger.error(f"Fehler beim Fallback-Widget-Zugriff: {str(e)}")
+        
+        return None
+
+    # Neue Hilfsmethoden für sichere Widget-Zugriffe
+    def get_einstellungen_widget(self):
+        """Sichere Methode zum Abrufen des Einstellungen-Widgets"""
+        return getattr(self, 'einstellungen_widget', None)
+
+    def get_eigenschaften_widget(self):
+        """Sichere Methode zum Abrufen des Eigenschaften-Widgets"""
+        return getattr(self, 'eigenschaften_widget', None)
+
+    def get_ausruestung_widget(self):
+        """Sichere Methode zum Abrufen des Ausrüstung-Widgets"""
+        return getattr(self, 'ausruestung_widget', None)
+
+    def safe_widget_call(self, widget_getter, method_name, *args, **kwargs):
+        """
+        Sichere Methode zum Aufrufen von Widget-Methoden
+        
+        Args:
+            widget_getter: Funktion zum Abrufen des Widgets
+            method_name (str): Name der aufzurufenden Methode
+            *args, **kwargs: Argumente für die Methode
+            
+        Returns:
+            bool: True bei Erfolg, False bei Fehler
+        """
+        try:
+            widget = widget_getter()
+            if widget and hasattr(widget, method_name):
+                method = getattr(widget, method_name)
+                if callable(method):
+                    method(*args, **kwargs)
+                    return True
+                else:
+                    Logger.warning(f"'{method_name}' ist nicht aufrufbar")
+            else:
+                Logger.warning(f"Widget oder Methode '{method_name}' nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler beim Widget-Methodenaufruf '{method_name}': {str(e)}")
+            return False
+
+    def on_stop(self):
+        """Wird beim Beenden der App aufgerufen"""
+        try:
+            # Cleanup für alle registrierten Widgets
+            widgets_to_cleanup = [
+                'einstellungen_widget', 'eigenschaften_widget', 'ausruestung_widget',
+                'profil_widget', 'voelker_widget', 'talente_widget', 'maechte_widget',
+                'handicaps_widget', 'charakterbogen_widget'
+            ]
+            
+            for widget_name in widgets_to_cleanup:
+                if hasattr(self, widget_name):
+                    widget = getattr(self, widget_name)
+                    if widget and hasattr(widget, 'cleanup'):
+                        try:
+                            widget.cleanup()
+                            Logger.debug(f"Widget {widget_name} bereinigt")
+                        except Exception as e:
+                            Logger.error(f"Fehler beim Bereinigen von {widget_name}: {str(e)}")
+            
+            Logger.info("App-Cleanup abgeschlossen")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim App-Cleanup: {str(e)}")
+
+    # Aktualisierte refresh_current_tab Methode
     def refresh_current_tab(self):
         """
         Aktualisiert den aktuellen Tab explizit.
@@ -566,39 +714,39 @@ class SW_Charakter_GeneratorApp(MDApp):
             if 0 <= index < len(self.tab_definitions):
                 tab_title = self.tab_definitions[index][1]
                 
-                # Aktualisiere den Tab basierend auf dem Titel
+                # Sichere Tab-Updates mit neuen Methoden
                 if tab_title == 'Eigenschaften':
-                    widget = self.get_widget_by_tab_text('Eigenschaften', 'eigenschaften_widget')
-                    if widget:
-                        widget.update_eigenschaften()
+                    self.safe_widget_call(self.get_eigenschaften_widget, 'update_eigenschaften')
                 elif tab_title == 'Ausrüstung':
-                    widget = self.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
-                    if widget:
-                        widget.refresh_widget()
+                    self.safe_widget_call(self.get_ausruestung_widget, 'refresh_widget')
                 elif tab_title == 'Profil':
                     widget = self.get_widget_by_tab_text('Profil', 'profil_widget')
                     if widget:
-                        widget.load_profil()
+                        self.safe_widget_call(lambda: widget, 'load_profil')
                 elif tab_title == 'Völker':
                     widget = self.get_widget_by_tab_text('Völker', 'voelker_widget')
                     if widget:
-                        widget.aktualisiere_ui()
+                        self.safe_widget_call(lambda: widget, 'aktualisiere_ui')
                 elif tab_title == 'Talente':
                     widget = self.get_widget_by_tab_text('Talente', 'talente_widget')
                     if widget:
-                        widget.refresh_widget()
+                        self.safe_widget_call(lambda: widget, 'refresh_widget')
                 elif tab_title == 'Mächte':
                     widget = self.get_widget_by_tab_text('Mächte', 'maechte_widget')
                     if widget:
-                        widget.refresh_widget()
+                        self.safe_widget_call(lambda: widget, 'refresh_widget')
                 elif tab_title == 'Handicaps':
                     widget = self.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
                     if widget:
-                        widget.refresh_widget()
+                        self.safe_widget_call(lambda: widget, 'refresh_widget')
                 elif tab_title == 'Charakter':
                     widget = self.get_widget_by_tab_text('Charakter', 'charakterbogen_widget')
                     if widget:
-                        widget.update_overview(0)
+                        self.safe_widget_call(lambda: widget, 'update_overview', 0)
+                elif tab_title == 'Einstellungen':
+                    einstellungen = self.get_einstellungen_widget()
+                    if einstellungen:
+                        self.safe_widget_call(lambda: einstellungen, 'aktualisiere_ui')
                 
                 Logger.info(f"UI-Aktualisierung für aktuellen Tab '{tab_title}' abgeschlossen")
             else:
@@ -681,34 +829,6 @@ class SW_Charakter_GeneratorApp(MDApp):
                     
         except Exception as e:
             Logger.error(f"Fehler bei UI-Aktualisierung für Tab {tab_title}: {str(e)}", exc_info=True)
-
-    # ------- Pfeiltasten => tabs wechseln
-    def on_key_down(self, window, key, scancode, codepoint, modifiers):
-        if key == 276:  # Links Pfeil
-            self.switch_tab_relative(-1)
-        elif key == 275:  # Rechts Pfeil
-            self.switch_tab_relative(1)
-        return False  # Weitergabe des Events
-
-    def switch_tab_relative(self, direction):
-        """
-        Wechselt den Tab im Carousel um +1 oder -1.
-        """
-        carousel = self.root.ids.tabs_carousel
-        new_idx = carousel.index + direction
-        if 0 <= new_idx < len(carousel.slides):
-            carousel.index = new_idx
-            Logger.info(f"Carousel-Index geändert auf: {new_idx}")
-            # Auch Tab oben markieren (optional)
-            tabs_bar = self.root.ids.tabs_bar
-            if 0 <= new_idx < len(self.tab_definitions):
-                tab_title = self.tab_definitions[new_idx][1]
-                # Suche das Tab mit dem entsprechenden Titel
-                for tab in reversed(tabs_bar.children):
-                    if isinstance(tab, CustomTabsItem) and tab.title == tab_title:
-                        tab.active = True
-                        Logger.info(f"Tab '{tab.title}' aktiviert via Pfeiltaste.")
-                        break
 
 if __name__ == "__main__":
     Logger.info("Starte SW_Charakter_GeneratorApp")

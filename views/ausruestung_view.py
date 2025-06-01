@@ -686,7 +686,7 @@ class AusruestungWidget(MDBoxLayout):
 Factory.register('TooltipIconButton', TooltipIconButton)
 Factory.register('AusruestungItemRow', AusruestungItemRow)
 
-# KV-String mit einer definierten Darstellung der Ausrüstungszeilen
+# KV-String mit korrigiertem Layout - Hauptänderung hier!
 KV_STRING = '''
 <TooltipIconButton>:
     style: "filled"
@@ -803,59 +803,64 @@ KV_STRING = '''
         
         RecycleBoxLayout:
             id: layout
-            default_size: None, dp(120)  # Größere Standardhöhe
+            default_size: None, dp(120)
             default_size_hint: 1, None
             size_hint_y: None
             height: self.minimum_height
             orientation: 'vertical'
-            spacing: dp(10)  # Mehr Abstand zwischen Zeilen
-            padding: [dp(5), dp(10), dp(15), dp(10)]  # Mehr Padding rechts
+            spacing: dp(10)
+            padding: [dp(5), dp(10), dp(15), dp(10)]
 
 <AusruestungItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(100)
+    height: dp(120)  # Etwas höher für bessere Darstellung
     spacing: dp(5)
     padding: [dp(5), dp(5), dp(60), dp(5)]
     md_bg_color: [0.2, 0.2, 0.2, 1] if self.index % 2 == 0 else [0.15, 0.15, 0.15, 1]
     
-    # Hauptcontainer für Name und Beschreibung - Sehr vereinfacht
-    RelativeLayout:  # Verwendung von RelativeLayout für absolute Positionierung
+    # Hauptcontainer für Name, Beschreibung und Details - KORRIGIERT!
+    MDBoxLayout:
+        orientation: 'vertical'
         size_hint_x: 0.35
+        spacing: dp(2)
+        padding: [0, dp(5), 0, dp(5)]
         
-        # Name-Label - VERTIKAL ZENTRIERT wenn keine Beschreibung vorhanden
+        # Name - größer und fett
         MDLabel:
             text: root.name
             font_size: dp(14)
             bold: True
             size_hint_y: None
-            height: self.texture_size[1]
-            pos_hint: {'center_y': 0.5} if not root.beschreibung and not root.details else {'y': 0.6}
+            height: dp(20)
+            halign: 'left'
+            valign: 'middle'
             text_size: self.width, None
-        
-        # Beschreibung - NUR wenn vorhanden
+            
+        # Beschreibung - nur wenn vorhanden
         MDLabel:
-            text: root.beschreibung
-            font_size: dp(12)
+            text: root.beschreibung if root.beschreibung else ""
+            font_size: dp(11)
             theme_text_color: "Secondary"
             size_hint_y: None
-            height: self.texture_size[1] if root.beschreibung else 0
-            pos_hint: {'y': 0.3}
+            height: dp(16) if root.beschreibung else 0
             opacity: 1 if root.beschreibung else 0
-            disabled: not root.beschreibung
+            halign: 'left'
+            valign: 'middle'
             text_size: self.width, None
-        
-        # Details - NUR wenn vorhanden
+            
+        # Details - nur wenn vorhanden  
         MDLabel:
-            text: root.details
-            font_size: dp(12)
+            text: root.details if root.details else ""
+            font_size: dp(11)
             theme_text_color: "Secondary"
             size_hint_y: None
-            height: self.texture_size[1] if root.details else 0
-            pos_hint: {'y': 0.1}
+            height: dp(40) if root.details else 0  # Mehr Platz für Details
             opacity: 1 if root.details else 0
-            disabled: not root.details
+            halign: 'left'
+            valign: 'top'
             text_size: self.width, None
+            text_color: [0.8, 0.8, 0.8, 1]  # Etwas heller für bessere Lesbarkeit
     
     # Kategorie
     MDLabel:
@@ -864,45 +869,45 @@ KV_STRING = '''
         size_hint_x: 0.12
         halign: 'left'
         valign: 'middle'
-        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+        pos_hint: {'center_y': 0.5}
         text_size: self.width, None
         shorten: True
     
-    # Gewicht - AUCH ZENTRIERT
+    # Gewicht
     MDLabel:
         text: f"{root.gewicht} kg"
         font_size: dp(14)
         size_hint_x: 0.08
         halign: 'left'
         valign: 'middle'
-        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+        pos_hint: {'center_y': 0.5}
     
-    # Kosten - AUCH ZENTRIERT
+    # Kosten
     MDLabel:
         text: f"{root.kosten} {root.waehrungseinheit}"
         font_size: dp(14)
         size_hint_x: 0.12
         halign: 'left'
         valign: 'middle'
-        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+        pos_hint: {'center_y': 0.5}
         text_size: self.width, None
         shorten: True
     
-    # Menge - AUCH ZENTRIERT
+    # Menge
     MDLabel:
         text: str(root.menge)
         font_size: dp(14)
         size_hint_x: 0.04
         halign: 'center'
         valign: 'middle'
-        pos_hint: {'center_y': 0.5}  # Vertikale Zentrierung!
+        pos_hint: {'center_y': 0.5}
     
-    # Buttons - Erweitert um Bearbeiten-Button
+    # Buttons
     AnchorLayout:
         anchor_x: 'right'
         anchor_y: 'center'
         size_hint_x: None
-        width: dp(140)  # Erweitert für dritten Button
+        width: dp(140)
         
         MDBoxLayout:
             orientation: 'horizontal'

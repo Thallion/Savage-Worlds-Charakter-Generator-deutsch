@@ -168,13 +168,13 @@ class WaffeDialogContent(MDBoxLayout):
     def _fill_fields(self, waffe_data):
         """Befüllt die Felder mit den Waffen-Daten beim Bearbeiten"""
         if hasattr(self.ids, 'name_input'):
-            self.ids.name_input.text = waffe_data.get('name', '')
+            self.ids.name_input.text = str(waffe_data.get('name', ''))
         
         if hasattr(self.ids, 'typ_segment'):
             self.select_typ(waffe_data.get('typ', 'Nahkampf'))
         
         if hasattr(self.ids, 'mindeststaerke_input'):
-            self.ids.mindeststaerke_input.text = waffe_data.get('mindeststaerke', '')
+            self.ids.mindeststaerke_input.text = str(waffe_data.get('mindeststaerke', ''))
         
         if hasattr(self.ids, 'gewicht_input'):
             self.ids.gewicht_input.text = str(waffe_data.get('gewicht', 0))
@@ -183,27 +183,32 @@ class WaffeDialogContent(MDBoxLayout):
             self.ids.kosten_input.text = str(waffe_data.get('kosten', 0))
         
         if hasattr(self.ids, 'setting_input'):
-            self.ids.setting_input.text = waffe_data.get('setting', '')
+            self.ids.setting_input.text = str(waffe_data.get('setting', ''))
         
         if hasattr(self.ids, 'beschreibung_input'):
-            self.ids.beschreibung_input.text = waffe_data.get('beschreibung', '')
+            self.ids.beschreibung_input.text = str(waffe_data.get('beschreibung', ''))
         
-        # Eigenschaften
+        # Eigenschaften - Explizite String-Konvertierung für alle Werte
         eigenschaften = waffe_data.get('eigenschaften', {})
         if hasattr(self.ids, 'schaden_input'):
-            self.ids.schaden_input.text = eigenschaften.get('Schaden', '')
+            schaden_wert = eigenschaften.get('Schaden', '')
+            self.ids.schaden_input.text = str(schaden_wert) if schaden_wert is not None else ''
         
         if hasattr(self.ids, 'reichweite_input'):
-            self.ids.reichweite_input.text = eigenschaften.get('Reichweite', '')
+            reichweite_wert = eigenschaften.get('Reichweite', '')
+            self.ids.reichweite_input.text = str(reichweite_wert) if reichweite_wert is not None else ''
         
         if hasattr(self.ids, 'fr_input'):
-            self.ids.fr_input.text = eigenschaften.get('FR', '')
+            fr_wert = eigenschaften.get('FR', '')
+            self.ids.fr_input.text = str(fr_wert) if fr_wert is not None else ''
         
         if hasattr(self.ids, 'schuss_input'):
-            self.ids.schuss_input.text = eigenschaften.get('Schuss', '')
+            schuss_wert = eigenschaften.get('Schuss', '')
+            self.ids.schuss_input.text = str(schuss_wert) if schuss_wert is not None else ''
         
         if hasattr(self.ids, 'pb_input'):
-            self.ids.pb_input.text = eigenschaften.get('PB', '')
+            pb_wert = eigenschaften.get('PB', '')
+            self.ids.pb_input.text = str(pb_wert) if pb_wert is not None else ''
 
     def select_typ(self, typ):
         """Wählt den Waffentyp aus und aktualisiert die Button-Zustände"""
