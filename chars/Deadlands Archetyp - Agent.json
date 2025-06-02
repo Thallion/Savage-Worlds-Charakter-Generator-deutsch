@@ -7095,9 +7095,6 @@
     ],
     "selected_maechte": [],
     "selected_allgemeine_ausruestung": [
-        "Colt Rainmaker (.32)",
-        "Gatling-Pistole (.36)",
-        "Messer",
         "Verkleidungszubehör",
         "Munition Pistolen (klein) .22-.38 (50 Stück)",
         "Ersatz-Gatling-Trommel"
@@ -7159,5 +7156,6 @@
         "riesige_feinde,": false,
         "schurkische_entschlossenheit": false
     },
-    "active_setting_name": "Deadlands"
+    "active_setting_name": "Deadlands",
+    "char_gen_completed": false
 }

@@ -539,7 +539,7 @@ MDScreen:
         MDBoxLayout:
             orientation: 'vertical'
             size_hint_y: None
-            height: dp(100)
+            height: dp(130)
             md_bg_color: app.theme_cls.backgroundColor
 
             GenerationPointsBar:
@@ -550,7 +550,7 @@ MDScreen:
         MDBoxLayout:
             orientation: 'vertical'
             id: tab_content_box
-            padding: [30, 30, 30, 30]
+            padding: [30, 0, 30, 30]
             size_hint_y: 1  # Füllt den restlichen Platz
             md_bg_color: app.theme_cls.backgroundColor
 

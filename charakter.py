@@ -69,6 +69,7 @@ class Charakter(EventDispatcher):
     rang = StringProperty("Anfänger")
     char_gen_completed = BooleanProperty(False)
     verfuegbare_maechte = NumericProperty(0)
+    anzahl_maechte = NumericProperty(0)
     machtpunkte = NumericProperty(0)
     vermoegen = NumericProperty(500)
     waehrungseinheit = StringProperty("Gold")
@@ -145,6 +146,7 @@ class Charakter(EventDispatcher):
         self.schilde = {}
         self.voelker = {}
         self.verfuegbare_maechte = 0
+        self.anzahl_maechte = 0
         self.machtpunkte = 0
         self.selected_allgemeine_ausruestung = []
         self.selected_waffen = []

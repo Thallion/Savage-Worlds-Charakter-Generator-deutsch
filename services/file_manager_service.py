@@ -1,6 +1,7 @@
 # services/file_manager_service.py
 """
 Service für Datei-Management und File-Browser-Operationen
+Korrigierte Version mit richtiger Pfad-Behandlung
 """
 
 import os
@@ -50,14 +51,22 @@ class FileManagerService:
             str: Pfad zum Standard-Verzeichnis
         """
         if getattr(sys, 'frozen', False):
+            # Ausführbare Version
             base_dir = os.path.dirname(sys.executable)
         else:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
+            # Entwicklungsversion: Gehe vom services/ Ordner zum parent directory
+            services_dir = os.path.dirname(os.path.abspath(__file__))
+            base_dir = os.path.dirname(services_dir)  # parent directory (build/)
         
         target_dir = os.path.join(base_dir, dir_type)
         if not os.path.exists(target_dir):
-            os.makedirs(target_dir)
+            try:
+                os.makedirs(target_dir)
+                Logger.info(f"Verzeichnis erstellt: {target_dir}")
+            except Exception as e:
+                Logger.error(f"Fehler beim Erstellen des Verzeichnisses {target_dir}: {str(e)}")
         
+        Logger.debug(f"Standard-Verzeichnis für '{dir_type}': {target_dir}")
         return target_dir
     
     def show_file_manager(self, path, action_type):
@@ -294,8 +303,10 @@ class FileManagerService:
     def set_temp_filename(self, filename):
         """Setzt den temporären Dateinamen"""
         self.temp_filename = filename
+        Logger.debug(f"Temp filename gesetzt: {filename}")
     
     def set_temp_pdf_settings(self, filename, printer_friendly=False):
         """Setzt die temporären PDF-Einstellungen"""
         self.temp_pdf_filename = filename
         self.temp_printer_friendly = printer_friendly
+        Logger.debug(f"Temp PDF settings gesetzt: {filename}, printer_friendly: {printer_friendly}")

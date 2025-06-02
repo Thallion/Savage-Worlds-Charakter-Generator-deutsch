@@ -140,6 +140,7 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     
     # Machtpunkte und verfügbare Mächte erhöhen, falls das Talent diese gewährt
     charakter.verfuegbare_maechte += talent.neue_maechte
+    charakter.anzahl_maechte += talent.neue_maechte
     charakter.erhoehe_machtpunkte(talent.machtpunkte)
     
     # Zur Liste der ausgewählten Talente hinzufügen
@@ -194,6 +195,7 @@ def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
                 # Talent auswählen und Anpassungen vornehmen
                 talent.ausgewaehlt = True
                 charakter.verfuegbare_maechte += talent.neue_maechte
+                charakter.anzahl_maechte += talent.neue_maechte
                 charakter.erhoehe_machtpunkte(talent.machtpunkte)
                 if talent_name_key not in charakter.selected_talente:
                     charakter.selected_talente.append(talent_name_key)
@@ -498,6 +500,7 @@ def entferne_talent(charakter, talent_name_key):
     def talent_abwaehlen():
         talent.abwaehlen(charakter)
         charakter.verfuegbare_maechte -= talent.neue_maechte
+        charakter.anzahl_maechte -= talent.neue_maechte
         charakter.verfuegbare_maechte = max(charakter.verfuegbare_maechte, 0)  # Nicht negativ
         charakter.senke_machtpunkte(talent.machtpunkte)
         
