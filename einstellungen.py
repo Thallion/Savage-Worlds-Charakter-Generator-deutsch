@@ -20,7 +20,6 @@ from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentCon
 # Service Container Import
 from services.service_container import service_container, get_dialog_service, get_theme_service
 from services.event_service import EventTypes
-from controllers.einstellungen_controller import EinstellungenController
 
 # KV-String direkt eingebettet für bessere Kontrolle
 kv_string = '''
@@ -133,13 +132,12 @@ kv_string = '''
 
                         MDTextField:
                             id: attributsteigerungen_field
-                            text: root.get_controller_value('maximale_attributsteigerungen_input', '5')
+                            text: root.get_charakter_value('maximale_attributsteigerungen', '5')
                             size_hint: None, None
                             size: dp(100), dp(30)
                             input_filter: 'int'
                             pos_hint: {"center_y": .5}
                             on_focus: if not self.focus: root.update_maximale_attributsteigerungen()
-                            on_text: root.set_controller_value('maximale_attributsteigerungen_input', self.text)
 
                     # Startfertigkeiten
                     MDBoxLayout:
@@ -156,13 +154,12 @@ kv_string = '''
 
                         MDTextField:
                             id: fertigkeitssteigerungen_field
-                            text: root.get_controller_value('maximale_fertigkeitssteigerungen_input', '12')
+                            text: root.get_charakter_value('maximale_fertigkeitssteigerungen', '12')
                             size_hint: None, None
                             size: dp(100), dp(30)
                             pos_hint: {"center_y": .5}
                             input_filter: 'int'
                             on_focus: if not self.focus: root.update_maximale_fertigkeitssteigerungen()
-                            on_text: root.set_controller_value('maximale_fertigkeitssteigerungen_input', self.text)
 
                     # Vermögen Einstellungen
                     MDBoxLayout:
@@ -179,21 +176,19 @@ kv_string = '''
 
                         MDTextField:
                             id: vermoegen_field
-                            text: root.get_controller_value('vermoegen_input', '500')
+                            text: root.get_charakter_value('vermoegen', '500')
                             size_hint: None, None
                             size: dp(120), dp(30)
                             input_filter: 'int'
                             on_focus: if not self.focus: root.update_vermoegen()
-                            on_text: root.set_controller_value('vermoegen_input', self.text)
                             pos_hint: {"center_y": .5}
 
                         MDTextField:
                             id: waehrung_field
-                            text: root.get_controller_value('waehrung_input', 'Gold')
+                            text: root.get_charakter_value('waehrungseinheit', 'Gold')
                             size_hint: None, None
                             size: dp(100), dp(40)
                             on_focus: if not self.focus: root.update_waehrung()
-                            on_text: root.set_controller_value('waehrung_input', self.text)
                             pos_hint: {"center_y": .5}
 
                     MDButton:
@@ -730,9 +725,9 @@ class EinstellungenWidget(MDScreen):
     controller = ObjectProperty(None, allownone=True)
     
     def __init__(self, **kwargs):
-        # Controller sofort initialisieren, bevor das Widget aufgebaut wird
+        # App und Controller-Initialisierung
         self.app = App.get_running_app()
-        self.einstellungen_controller = None
+        self.charakter_controller = None
         
         # Controller-Initialisierung versuchen
         self._initialize_controller()
@@ -750,8 +745,8 @@ class EinstellungenWidget(MDScreen):
         """Initialisiert den Controller früh"""
         try:
             if hasattr(self.app, 'controller') and self.app.controller:
-                self.einstellungen_controller = EinstellungenController(self.app.controller)
-                self.controller = self.einstellungen_controller
+                self.charakter_controller = self.app.controller
+                self.controller = self.charakter_controller
                 
                 # Service Container initialisieren
                 service_container.initialize(self.app.controller)
@@ -762,38 +757,26 @@ class EinstellungenWidget(MDScreen):
         except Exception as e:
             Logger.error(f"Fehler bei Controller-Initialisierung: {str(e)}", exc_info=True)
     
-    def get_controller_value(self, attr_name, default=''):
+    def get_charakter_value(self, attr_name, default=''):
         """
-        Sichere Methode zum Abrufen von Controller-Werten
+        Sichere Methode zum Abrufen von Charakter-Werten
         
         Args:
             attr_name (str): Name des Attributs
-            default (str): Standardwert falls Controller nicht verfügbar
+            default (str): Standardwert falls Charakter nicht verfügbar
             
         Returns:
             str: Wert oder Standardwert
         """
         try:
-            if self.einstellungen_controller and hasattr(self.einstellungen_controller, attr_name):
-                return str(getattr(self.einstellungen_controller, attr_name))
+            if self.charakter_controller and hasattr(self.charakter_controller, 'charakter'):
+                charakter = self.charakter_controller.charakter
+                if charakter and hasattr(charakter, attr_name):
+                    return str(getattr(charakter, attr_name))
             return str(default)
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen von {attr_name}: {str(e)}")
             return str(default)
-    
-    def set_controller_value(self, attr_name, value):
-        """
-        Sichere Methode zum Setzen von Controller-Werten
-        
-        Args:
-            attr_name (str): Name des Attributs
-            value: Neuer Wert
-        """
-        try:
-            if self.einstellungen_controller and hasattr(self.einstellungen_controller, attr_name):
-                setattr(self.einstellungen_controller, attr_name, value)
-        except Exception as e:
-            Logger.error(f"Fehler beim Setzen von {attr_name}: {str(e)}")
     
     def _register_event_handlers(self):
         """Registriert Event-Handler für verschiedene Events"""
@@ -878,7 +861,7 @@ class EinstellungenWidget(MDScreen):
             if event_service:
                 event_service.publish(EventTypes.THEME_CHANGED, {'color': color_name})
     
-    # Charakter-Verwaltung (vereinfacht für Stabilität)
+    # Charakter-Verwaltung (direkter Zugriff auf CharakterController)
     def create_new_character(self):
         """Startet den Prozess zur Erstellung eines neuen Charakters"""
         dialog_service = service_container.get_dialog_service()
@@ -901,8 +884,9 @@ class EinstellungenWidget(MDScreen):
                 dialog_service.show_error_dialog("Bitte gib einen Namen für den Charakter ein.")
             return
         
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.create_new_character(character_name)
+        if self.charakter_controller:
+            # Direkte Verwendung des CharakterController aus main.py
+            success = self.charakter_controller.neuer_charakter(character_name)
             dialog_service = service_container.get_dialog_service()
             
             if success and dialog_service:
@@ -915,17 +899,36 @@ class EinstellungenWidget(MDScreen):
                     f"Der Charakter '{character_name}' wurde erfolgreich erstellt.",
                     "Neuer Charakter erstellt"
                 )
+                
+                # Aktualisiere alle UIs
+                self._trigger_ui_refresh()
+                
             elif dialog_service:
                 dialog_service.show_error_dialog("Fehler beim Erstellen des Charakters.")
+        else:
+            Logger.error("CharakterController nicht verfügbar")
+    
+    def _trigger_ui_refresh(self):
+        """Löst eine Aktualisierung aller UI-Komponenten aus"""
+        try:
+            # Aktualisiere alle Widget-Tabs über die App
+            if hasattr(self.app, 'refresh_current_tab'):
+                Clock.schedule_once(lambda dt: self.app.refresh_current_tab(), 0.1)
+            
+            # Aktualisiere eigene UI-Felder
+            Clock.schedule_once(lambda dt: self._update_ui_fields(), 0.1)
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei UI-Refresh: {str(e)}")
     
     def speichere_charakter(self):
         """Zeigt einen Dialog mit Optionen zum Speichern des Charakters"""
-        if not self.einstellungen_controller:
+        if not self.charakter_controller:
             Logger.error("Controller nicht verfügbar")
             return
         
         # Prüfen, ob bereits ein Dateipfad existiert
-        current_path = self.einstellungen_controller.get_current_file_path()
+        current_path = getattr(self.charakter_controller, 'current_character_file_path', None)
         
         # Dialog-Inhalt für Speicher-Optionen erstellen
         from kivymd.uix.boxlayout import MDBoxLayout
@@ -994,8 +997,8 @@ class EinstellungenWidget(MDScreen):
         """Überschreibt die existierende Datei direkt"""
         self.save_options_dialog.dismiss()
         
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.save_character(filepath)
+        if self.charakter_controller:
+            success = self.charakter_controller.speichere_charakter_als_json(filepath)
             dialog_service = service_container.get_dialog_service()
             
             if success and dialog_service:
@@ -1015,8 +1018,10 @@ class EinstellungenWidget(MDScreen):
         self.save_options_dialog.dismiss()
         
         # Standardname basierend auf Charakternamen
-        character_info = self.einstellungen_controller.get_character_info()
-        character_name = character_info.get('name', 'charakter')
+        character_name = "charakter"
+        if self.charakter_controller and self.charakter_controller.charakter:
+            character_name = self.charakter_controller.charakter.char_name or "charakter"
+        
         default_filename = f"{character_name.strip().replace(' ', '_')}.json"
         
         dialog_service = service_container.get_dialog_service()
@@ -1063,53 +1068,58 @@ class EinstellungenWidget(MDScreen):
     # Charakterwerte-Updates
     def update_vermoegen(self):
         """Aktualisiert das Vermögen"""
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.update_vermoegen()
-            if not success:
-                dialog_service = service_container.get_dialog_service()
-                if dialog_service:
-                    dialog_service.show_error_dialog(self.einstellungen_controller.fehler_meldung)
+        if self.charakter_controller and self.charakter_controller.charakter:
+            try:
+                new_value = int(self.ids.vermoegen_field.text)
+                self.charakter_controller.charakter.vermoegen = new_value
+                Logger.info(f"Vermögen auf {new_value} aktualisiert")
+            except ValueError:
+                Logger.error("Ungültiger Wert für Vermögen eingegeben")
     
     def update_waehrung(self):
         """Aktualisiert die Währung"""
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.update_waehrung()
-            if success:
-                self._update_ui_after_character_change()
+        if self.charakter_controller and self.charakter_controller.charakter:
+            new_value = self.ids.waehrung_field.text
+            self.charakter_controller.charakter.waehrungseinheit = new_value
+            Logger.info(f"Währung auf '{new_value}' aktualisiert")
     
     def update_maximale_attributsteigerungen(self):
         """Aktualisiert die maximalen Attributsteigerungen"""
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.update_maximale_attributsteigerungen()
-            if not success:
-                dialog_service = service_container.get_dialog_service()
-                if dialog_service:
-                    dialog_service.show_error_dialog(self.einstellungen_controller.fehler_meldung)
+        if self.charakter_controller and self.charakter_controller.charakter:
+            try:
+                new_value = int(self.ids.attributsteigerungen_field.text)
+                self.charakter_controller.charakter.maximale_attributsteigerungen = new_value
+                self.charakter_controller.charakter.verbleibende_attributsteigerungen = new_value
+                Logger.info(f"Maximale Attributsteigerungen auf {new_value} aktualisiert")
+            except ValueError:
+                Logger.error("Ungültiger Wert für Attributsteigerungen eingegeben")
     
     def update_maximale_fertigkeitssteigerungen(self):
         """Aktualisiert die maximalen Fertigkeitssteigerungen"""
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.update_maximale_fertigkeitssteigerungen()
-            if not success:
-                dialog_service = service_container.get_dialog_service()
-                if dialog_service:
-                    dialog_service.show_error_dialog(self.einstellungen_controller.fehler_meldung)
+        if self.charakter_controller and self.charakter_controller.charakter:
+            try:
+                new_value = int(self.ids.fertigkeitssteigerungen_field.text)
+                self.charakter_controller.charakter.maximale_fertigkeitssteigerungen = new_value
+                self.charakter_controller.charakter.verbleibende_fertigkeitssteigerungen = new_value
+                Logger.info(f"Maximale Fertigkeitssteigerungen auf {new_value} aktualisiert")
+            except ValueError:
+                Logger.error("Ungültiger Wert für Fertigkeitssteigerungen eingegeben")
     
     # Charakter-Operationen
     def erhoehe_aufstieg(self):
         """Erhöht die Aufstiege"""
-        if self.einstellungen_controller:
-            self.einstellungen_controller.erhoehe_aufstieg()
+        if self.charakter_controller and self.charakter_controller.charakter:
+            self.charakter_controller.charakter.increase_aufstiege()
     
     def senke_aufstieg(self):
         """Senkt die Aufstiege"""
-        if self.einstellungen_controller:
-            self.einstellungen_controller.senke_aufstieg()
+        if self.charakter_controller and self.charakter_controller.charakter:
+            self.charakter_controller.charakter.decrease_aufstiege()
     
     def erhoehe_startkapital(self):
         """Erhöht das Startkapital"""
-        if self.einstellungen_controller:
-            success = self.einstellungen_controller.erhoehe_startkapital()
+        if self.charakter_controller and self.charakter_controller.charakter:
+            success = self.charakter_controller.charakter.erhoehe_startkapital()
             if success:
                 self._update_ui_fields()
     
@@ -1393,34 +1403,33 @@ class EinstellungenWidget(MDScreen):
     # UI-Update-Methoden
     def _update_ui_fields(self):
         """Aktualisiert die UI-Felder mit aktuellen Werten"""
-        if not self.einstellungen_controller:
+        if not self.charakter_controller or not self.charakter_controller.charakter:
             return
         
         try:
+            charakter = self.charakter_controller.charakter
+            
             # Vermögen-Feld aktualisieren
             if hasattr(self.ids, 'vermoegen_field'):
-                self.ids.vermoegen_field.text = self.einstellungen_controller.vermoegen_input
+                self.ids.vermoegen_field.text = str(charakter.vermoegen)
             
             # Währung-Feld aktualisieren  
             if hasattr(self.ids, 'waehrung_field'):
-                self.ids.waehrung_field.text = self.einstellungen_controller.waehrung_input
+                self.ids.waehrung_field.text = str(charakter.waehrungseinheit)
             
             # Attributsteigerungen-Feld aktualisieren
             if hasattr(self.ids, 'attributsteigerungen_field'):
-                self.ids.attributsteigerungen_field.text = self.einstellungen_controller.maximale_attributsteigerungen_input
+                self.ids.attributsteigerungen_field.text = str(charakter.maximale_attributsteigerungen)
             
             # Fertigkeitssteigerungen-Feld aktualisieren
             if hasattr(self.ids, 'fertigkeitssteigerungen_field'):
-                self.ids.fertigkeitssteigerungen_field.text = self.einstellungen_controller.maximale_fertigkeitssteigerungen_input
+                self.ids.fertigkeitssteigerungen_field.text = str(charakter.maximale_fertigkeitssteigerungen)
                 
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der UI-Felder: {str(e)}")
     
     def _update_ui_after_character_change(self):
         """Aktualisiert die UI nach Änderungen am Charakter"""
-        if self.einstellungen_controller:
-            self.einstellungen_controller.update_ui()
-        
         # Event senden
         event_service = service_container.get_event_service()
         if event_service:

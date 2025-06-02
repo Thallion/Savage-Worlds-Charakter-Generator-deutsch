@@ -6,6 +6,7 @@
 # - Moderne KivyMD 2.0.1 Komponenten
 # - Bessere visuelle Hierarchie mit Cards
 # - Adaptive Textgrößen und Spacing
+# - KORREKTUR: Robustheit-Anzeige in Pointbar
 
 from kivy.lang import Builder
 from kivy.app import App
@@ -266,6 +267,8 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.unbind(active_setting_name=self.update_setting_name)
             self.charakter.unbind(parade=self.update_parade_robustheit_text)
             self.charakter.unbind(robustheit=self.update_parade_robustheit_text)
+            # KORREKTUR: Auch auf robustheit_mit_ruestung binden
+            self.charakter.unbind(robustheit_mit_ruestung=self.update_parade_robustheit_text)
             Logger.debug("Charakter-Bindings erfolgreich entfernt")
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen der Charakter-Bindings: {str(e)}")
@@ -311,9 +314,10 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.bind(char_name=self.update_charakter_name)
             self.charakter.bind(active_setting_name=self.update_setting_name)
 
-            # Parade & Robustheit
+            # Parade & Robustheit - KORREKTUR: Auch auf robustheit_mit_ruestung binden
             self.charakter.bind(parade=self.update_parade_robustheit_text)
             self.charakter.bind(robustheit=self.update_parade_robustheit_text)
+            self.charakter.bind(robustheit_mit_ruestung=self.update_parade_robustheit_text)
             
             Logger.info("GenerationPointsBar erfolgreich mit Charakter-Properties verbunden")
         except Exception as e:
@@ -402,14 +406,23 @@ class GenerationPointsBar(MDBoxLayout):
             Logger.debug(f"Rang aktualisiert: {self.rang_text}")
 
     def update_parade_robustheit_text(self, instance, value):
-        """Aktualisiert die Parade-Robustheit-Anzeige"""
+        """Aktualisiert die Parade-Robustheit-Anzeige - KORRIGIERT"""
         if self.charakter:
-            # Robustheit kann als String mit Rüstungsinfo oder als Zahl vorliegen
-            robustheit = getattr(self.charakter, 'robustheit_mit_ruestung', None)
-            if not robustheit:
-                robustheit = str(getattr(self.charakter, 'robustheit', 2))
+            # KORREKTUR: Prüfe zuerst robustheit_mit_ruestung (enthält formatierte Rüstungsinfo)
+            robustheit_text = getattr(self.charakter, 'robustheit_mit_ruestung', '')
+            
+            # Wenn robustheit_mit_ruestung leer oder nicht verfügbar ist, verwende robustheit als Fallback
+            if not robustheit_text:
+                robustheit_wert = getattr(self.charakter, 'robustheit', 2)
+                robustheit_text = str(robustheit_wert)
+                Logger.debug(f"Fallback auf robustheit: {robustheit_text}")
+            else:
+                Logger.debug(f"Verwende robustheit_mit_ruestung: {robustheit_text}")
 
-            self.parade_robustheit_text = f"{getattr(self.charakter, 'parade', 2)} / {robustheit}"
+            parade_wert = getattr(self.charakter, 'parade', 2)
+            self.parade_robustheit_text = f"{parade_wert} / {robustheit_text}"
+            
+            Logger.debug(f"Parade/Robustheit aktualisiert: {self.parade_robustheit_text}")
 
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""

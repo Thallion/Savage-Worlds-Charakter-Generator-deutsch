@@ -379,6 +379,7 @@ class CharakterbogenWidget(MDBoxLayout):
 
     # Speichern des aktuellen Charakters
     charakter = ObjectProperty(None)
+    controller = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         """Initialisiert das CharakterbogenWidget und lädt die Daten."""
@@ -399,7 +400,39 @@ class CharakterbogenWidget(MDBoxLayout):
             Logger.error("CharakterbogenWidget: Controller nicht gefunden")
             return
             
+        # Binde an Controller-Events für Charakteränderungen
+        self.controller.bind(charakter=self._on_controller_charakter_changed)
+        
+        # Setze initialen Charakter
         self.charakter = self.controller.charakter
+
+    def _on_controller_charakter_changed(self, instance, new_charakter):
+        """
+        Wird aufgerufen, wenn sich der Charakter im Controller ändert.
+        Aktualisiert die lokale Referenz und das UI.
+        """
+        Logger.info("CharakterbogenWidget: Neuer Charakter vom Controller erhalten")
+        
+        # Alte Charakter-Bindings entfernen, falls vorhanden
+        if self.charakter:
+            try:
+                self.charakter.unbind(on_charakter_change=self._on_charakter_change)
+            except:
+                pass  # Ignoriere Fehler beim Unbind
+        
+        # Neuen Charakter setzen
+        self.charakter = new_charakter
+        
+        # An neue Charakter-Events binden
+        if self.charakter:
+            self.charakter.bind(on_charakter_change=self._on_charakter_change)
+        
+        # UI vollständig aktualisieren
+        Clock.schedule_once(self.update_overview, 0.1)
+
+    def _on_charakter_change(self, *args):
+        """Wird aufgerufen, wenn sich Charakterdaten ändern."""
+        Clock.schedule_once(self.update_overview, 0.1)
 
     def _create_dice_layout(self, wert, modifier=0):
         """
@@ -951,3 +984,18 @@ class CharakterbogenWidget(MDBoxLayout):
                 height=GRID_HEIGHT,
                 halign='left'
             ))
+
+    def cleanup(self):
+        """Bereinigt das Widget beim Beenden"""
+        try:
+            # Controller-Bindings entfernen
+            if self.controller:
+                self.controller.unbind(charakter=self._on_controller_charakter_changed)
+            
+            # Charakter-Bindings entfernen
+            if self.charakter:
+                self.charakter.unbind(on_charakter_change=self._on_charakter_change)
+            
+            Logger.info("CharakterbogenWidget bereinigt")
+        except Exception as e:
+            Logger.error(f"Fehler beim Bereinigen des CharakterbogenWidgets: {str(e)}")

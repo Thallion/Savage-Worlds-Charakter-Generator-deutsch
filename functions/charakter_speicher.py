@@ -77,6 +77,7 @@ def to_dict(charakter):
         'verbleibende_aufstiege': charakter.verbleibende_aufstiege,
         'aufstiege_gesamt': charakter.aufstiege_gesamt,
         'verfuegbare_maechte': charakter.verfuegbare_maechte,
+        'anzahl_maechte': charakter.anzahl_maechte,  # HINZUGEFÜGT: anzahl_maechte wird jetzt gespeichert
         'machtpunkte': charakter.machtpunkte,
         'vermoegen': charakter.vermoegen,
         'erschoepfung': charakter.erschoepfung,
@@ -281,6 +282,7 @@ def from_dict(self, data):
         self.verbleibende_aufstiege = data.get('verbleibende_aufstiege', self.verbleibende_aufstiege)
         self.aufstiege_gesamt = data.get('aufstiege_gesamt', self.aufstiege_gesamt)
         self.verfuegbare_maechte = data.get('verfuegbare_maechte', self.verfuegbare_maechte)
+        self.anzahl_maechte = data.get('anzahl_maechte', self.anzahl_maechte)  # HINZUGEFÜGT: anzahl_maechte wird jetzt geladen
         self.machtpunkte = data.get('machtpunkte', self.machtpunkte)
         self.vermoegen = data.get('vermoegen', self.vermoegen)
         self.erschoepfung = data.get('erschoepfung', self.erschoepfung)
@@ -306,4 +308,3 @@ def from_dict(self, data):
     except Exception as e:
         Logger.error(f"Kritischer Fehler in from_dict: {e}", exc_info=True)
         raise
-

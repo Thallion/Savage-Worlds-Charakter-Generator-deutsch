@@ -900,7 +900,7 @@
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
-            "custom": true
+            "custom": false
         },
         "Wissen (Götter & Kulte)": {
             "fertigkeit_name": "Wissen (Götter & Kulte)",
@@ -913,7 +913,7 @@
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
-            "custom": true
+            "custom": false
         }
     },
     "handicaps": {
@@ -8037,9 +8037,10 @@
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 1.0,
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 10,
     "verfuegbare_maechte": 0,
+    "anzahl_maechte": 5,
     "machtpunkte": 10,
     "vermoegen": 271.0,
     "erschoepfung": 0,
