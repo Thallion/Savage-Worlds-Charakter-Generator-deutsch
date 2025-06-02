@@ -362,6 +362,17 @@ kv_string = '''
                             MDButtonText:
                                 text: "PDF erstellen"
 
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.zeige_statblock()
+
+                            MDButtonIcon:
+                                icon: "card-text"
+
+                            MDButtonText:
+                                text: "Statblock anzeigen"
+
             # Spielelemente Card - Vollständige Version
             MDCard:
                 padding: dp(16)
@@ -1122,6 +1133,15 @@ class EinstellungenWidget(MDScreen):
             success = self.charakter_controller.charakter.erhoehe_startkapital()
             if success:
                 self._update_ui_fields()
+    
+    # Statblock-Funktionalität
+    def zeige_statblock(self):
+        """Zeigt den Charakterstatblock in einem Dialog an"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_statblock_dialog()
+        else:
+            Logger.error("Dialog-Service nicht verfügbar")
     
     # PDF-Erstellung mit vollständigen Optionen
     def erzeuge_charakterbogen_pdf(self):

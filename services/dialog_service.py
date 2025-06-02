@@ -23,6 +23,8 @@ from views.handicap_popup import HandicapDialogHandler
 from views.talent_popup import TalentDialogHandler
 from views.setting_popup import SettingDialogHandler
 
+# Funktionen
+from functions.statblock_generator import generate_character_statblock, copy_statblock_to_clipboard
 
 class DialogService:
     """Service für Dialog-Management und Benutzer-Feedback"""
@@ -355,3 +357,93 @@ class DialogService:
     def open_delete_setting_popup(self):
         """Öffnet Dialog zum Löschen eines Settings"""
         self.setting_dialog_handler.open_delete_setting_popup()
+
+    def show_statblock_dialog(self):
+        """
+        Zeigt einen Dialog mit dem Charakterstatblock
+        """
+        if not self.controller or not self.controller.charakter:
+            self.show_error_dialog("Kein Charakter verfügbar")
+            return
+        
+        # Statblock generieren
+        statblock_text = generate_character_statblock(self.controller.charakter)
+        
+        self._dismiss_dialog('statblock')
+        
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(16),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Scrollbarer Text für den Statblock
+        from kivymd.uix.textfield import MDTextField
+        text_field = MDTextField(
+            text=statblock_text,
+            multiline=True,
+            readonly=True,
+            mode="outlined",
+            size_hint_y=None,
+            height=dp(300),
+            md_bg_color=self.theme_cls.surfaceColor
+        )
+        content.add_widget(text_field)
+        
+        # Button-Container
+        button_container = MDBoxLayout(
+            orientation="horizontal",
+            spacing=dp(16),
+            size_hint_y=None,
+            height=dp(48)
+        )
+        
+        # Kopieren-Button
+        copy_button = MDButton(
+            style="elevated",
+            size_hint_x=0.5,
+            on_release=lambda x: self._copy_statblock(statblock_text)
+        )
+        copy_button.add_widget(MDButtonText(text="Kopieren"))
+        button_container.add_widget(copy_button)
+        
+        # Schließen-Button
+        close_button = MDButton(
+            style="text",
+            size_hint_x=0.5,
+            on_release=lambda x: self._dismiss_dialog('statblock')
+        )
+        close_button.add_widget(MDButtonText(text="Schließen"))
+        button_container.add_widget(close_button)
+        
+        content.add_widget(button_container)
+        
+        statblock_dialog = MDDialog(
+            MDDialogHeadlineText(text="Charakterstatblock"),
+            MDDialogContentContainer(content),
+            md_bg_color=self.theme_cls.surfaceColor
+        )
+        
+        self.active_dialogs['statblock'] = statblock_dialog
+        statblock_dialog.open()
+
+    def _copy_statblock(self, statblock_text):
+        """
+        Kopiert den Statblock in die Zwischenablage
+        
+        Args:
+            statblock_text (str): Der zu kopierende Text
+        """
+        success = copy_statblock_to_clipboard(statblock_text)
+        
+        if success:
+            self.show_success_dialog(
+                "Der Statblock wurde in die Zwischenablage kopiert.",
+                "Kopiert"
+            )
+        else:
+            self.show_error_dialog(
+                "Fehler beim Kopieren in die Zwischenablage.\n"
+                "Bitte markiere den Text manuell und kopiere ihn."
+            )        
