@@ -265,7 +265,7 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.unbind(char_name=self.update_charakter_name)
             self.charakter.unbind(active_setting_name=self.update_setting_name)
             self.charakter.unbind(parade=self.update_parade_robustheit_text)
-            self.charakter.unbind(robustheit=self.update_robustheit_text)
+            self.charakter.unbind(robustheit=self.update_parade_robustheit_text)
             Logger.debug("Charakter-Bindings erfolgreich entfernt")
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen der Charakter-Bindings: {str(e)}")

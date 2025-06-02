@@ -21,7 +21,7 @@ class CharakterController(EventDispatcher):
     und implementiert das Model-View-Controller-Muster.
     """
     charakter = ObjectProperty(None)  # Kivy-Property für den Charakter
-    current_character_file_path = StringProperty(None)  # Pfad der aktuellen Charakterdatei
+    current_character_file_path = StringProperty(None, allownone=True)  # Pfad der aktuellen Charakterdatei - erlaubt None
 
     def __init__(self, char_name="", alter="", geschlecht="", konzept="", sprachen="",
                  bennys="3", entschlossenheit="0", beschreibung="", hintergrund=""):
@@ -561,7 +561,7 @@ class CharakterController(EventDispatcher):
             
             # Neuen Charakter erstellen
             self.charakter = Charakter(char_name=char_name, active_setting_name=setting_name)
-            self.current_character_file_path = None  # Zurücksetzen des Dateipfads
+            self.current_character_file_path = None  # Zurücksetzen des Dateipfads (jetzt erlaubt)
             
             # UI-Updates auslösen
             self.dispatch('on_charakter_changed', self.charakter)
