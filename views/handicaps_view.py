@@ -24,6 +24,9 @@ from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
 
+# Import für Dialog Service
+from services.service_container import get_dialog_service
+
 
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_ORDER = 'name_asc'
@@ -231,15 +234,19 @@ class HandicapItemRow(MDBoxLayout):
         """Öffnet den Bearbeitungsdialog für das Handicap."""
         Logger.debug(f"HandicapItemRow: Bearbeite Handicap '{self.handicap_name}' mit Key '{self.name_key}'")
         
-        app = MDApp.get_running_app()
-        if hasattr(app, 'einstellungen_widget'):
-            einstellungen_widget = app.einstellungen_widget
-            if hasattr(einstellungen_widget, 'handicap_dialog_handler'):
-                einstellungen_widget.handicap_dialog_handler.show_edit_dialog(self.name_key)
-            else:
-                Logger.error("HandicapItemRow: handicap_dialog_handler nicht gefunden")
+        # Dialog Service über Service Container holen
+        dialog_service = get_dialog_service()
+        if dialog_service and hasattr(dialog_service, 'handicap_dialog_handler'):
+            dialog_service.handicap_dialog_handler.show_edit_dialog(self.name_key)
+            Logger.debug("HandicapItemRow: Bearbeitungsdialog erfolgreich geöffnet")
         else:
-            Logger.error("HandicapItemRow: einstellungen_widget nicht gefunden")
+            Logger.error("HandicapItemRow: Dialog Service oder handicap_dialog_handler nicht verfügbar")
+            # Fallback-Fehlermeldung für den Benutzer
+            if dialog_service:
+                dialog_service.show_error_dialog(
+                    "Der Bearbeitungsdialog konnte nicht geöffnet werden. "
+                    "Bitte versuchen Sie es später erneut."
+                )
 
     def waehle_handicap(self):
         """

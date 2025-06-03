@@ -28,6 +28,9 @@ from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
 
+# Import für Dialog Service
+from services.service_container import get_dialog_service
+
 # Konstanten
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
@@ -147,45 +150,49 @@ class AusruestungItemRow(MDBoxLayout):
         """Öffnet den Bearbeitungsdialog für das Ausrüstungsteil."""
         Logger.debug(f"AusruestungItemRow: Bearbeite Ausrüstung '{self.name}'")
         
-        app = MDApp.get_running_app()
-        if hasattr(app, 'einstellungen_widget'):
-            einstellungen_widget = app.einstellungen_widget
-            
+        # Dialog Service über Service Container holen
+        dialog_service = get_dialog_service()
+        
+        if dialog_service:
             # Bestimme den Typ der Ausrüstung und rufe den entsprechenden Handler auf
             controller = self._get_controller()
             if controller and self.name in controller.charakter.ausruestung:
                 item = controller.charakter.ausruestung[self.name]
                 
                 # Typ-spezifische Bearbeitung
-                from models.waffe import Waffe
-                from models.ruestung import Ruestung
-                from models.schild import Schild
-                
                 if isinstance(item, Waffe):
-                    if hasattr(einstellungen_widget, 'waffe_dialog_handler'):
-                        einstellungen_widget.waffe_dialog_handler.show_edit_dialog(self.name)
+                    if hasattr(dialog_service, 'waffe_dialog_handler'):
+                        dialog_service.waffe_dialog_handler.show_edit_dialog(self.name)
+                        Logger.debug("AusruestungItemRow: Waffe-Bearbeitungsdialog erfolgreich geöffnet")
                     else:
                         Logger.error("AusruestungItemRow: waffe_dialog_handler nicht gefunden")
                 elif isinstance(item, Ruestung):
-                    if hasattr(einstellungen_widget, 'ruestung_dialog_handler'):
-                        einstellungen_widget.ruestung_dialog_handler.show_edit_dialog(self.name)
+                    if hasattr(dialog_service, 'ruestung_dialog_handler'):
+                        dialog_service.ruestung_dialog_handler.show_edit_dialog(self.name)
+                        Logger.debug("AusruestungItemRow: Rüstung-Bearbeitungsdialog erfolgreich geöffnet")
                     else:
                         Logger.error("AusruestungItemRow: ruestung_dialog_handler nicht gefunden")
                 elif isinstance(item, Schild):
-                    if hasattr(einstellungen_widget, 'schild_dialog_handler'):
-                        einstellungen_widget.schild_dialog_handler.show_edit_dialog(self.name)
+                    if hasattr(dialog_service, 'schild_dialog_handler'):
+                        dialog_service.schild_dialog_handler.show_edit_dialog(self.name)
+                        Logger.debug("AusruestungItemRow: Schild-Bearbeitungsdialog erfolgreich geöffnet")
                     else:
                         Logger.error("AusruestungItemRow: schild_dialog_handler nicht gefunden")
                 else:
                     # Allgemeine Ausrüstung
-                    if hasattr(einstellungen_widget, 'ausruestung_dialog_handler'):
-                        einstellungen_widget.ausruestung_dialog_handler.show_edit_dialog(self.name)
+                    if hasattr(dialog_service, 'ausruestung_dialog_handler'):
+                        dialog_service.ausruestung_dialog_handler.show_edit_dialog(self.name)
+                        Logger.debug("AusruestungItemRow: Ausrüstung-Bearbeitungsdialog erfolgreich geöffnet")
                     else:
                         Logger.error("AusruestungItemRow: ausruestung_dialog_handler nicht gefunden")
             else:
                 Logger.error(f"AusruestungItemRow: Ausrüstung '{self.name}' nicht gefunden")
+                if dialog_service:
+                    dialog_service.show_error_dialog(f"Ausrüstung '{self.name}' nicht gefunden.")
         else:
-            Logger.error("AusruestungItemRow: einstellungen_widget nicht gefunden")
+            Logger.error("AusruestungItemRow: Dialog Service nicht verfügbar")
+            # Fallback-Fehlermeldung
+            self.show_error("Der Bearbeitungsdialog konnte nicht geöffnet werden.")
 
     def _show_transaction_dialog(self, title, content, action_text, action_handler):
         """Zeigt einen Transaktionsdialog an"""

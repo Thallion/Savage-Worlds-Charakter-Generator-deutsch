@@ -25,6 +25,9 @@ from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
 
+# Import für Dialog Service
+from services.service_container import get_dialog_service
+
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
@@ -255,15 +258,20 @@ class MachtItemRow(MDBoxLayout):
         """Öffnet den Bearbeitungsdialog für die Macht."""
         Logger.debug(f"MachtItemRow: Bearbeite Macht '{self.macht_name}'")
         
-        app = MDApp.get_running_app()
-        if hasattr(app, 'einstellungen_widget'):
-            einstellungen_widget = app.einstellungen_widget
-            if hasattr(einstellungen_widget, 'macht_dialog_handler'):
-                einstellungen_widget.macht_dialog_handler.show_edit_dialog(self.macht_name)
-            else:
-                Logger.error("MachtItemRow: macht_dialog_handler nicht gefunden")
+        # Dialog Service über Service Container holen
+        dialog_service = get_dialog_service()
+        
+        if dialog_service and hasattr(dialog_service, 'macht_dialog_handler'):
+            dialog_service.macht_dialog_handler.show_edit_dialog(self.macht_name)
+            Logger.debug("MachtItemRow: Bearbeitungsdialog erfolgreich geöffnet")
         else:
-            Logger.error("MachtItemRow: einstellungen_widget nicht gefunden")
+            Logger.error("MachtItemRow: Dialog Service oder macht_dialog_handler nicht verfügbar")
+            # Fallback-Fehlermeldung für den Benutzer
+            if dialog_service:
+                dialog_service.show_error_dialog(
+                    "Der Bearbeitungsdialog konnte nicht geöffnet werden. "
+                    "Bitte versuchen Sie es später erneut."
+                )
 
     def waehle_macht(self):
         """

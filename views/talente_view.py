@@ -30,6 +30,9 @@ from kivy.metrics import dp
 # Import der Funktionen für Voraussetzungsprüfung
 from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter, NICHT_DUPLIZIERBARE_TALENTE
 
+# Import für Dialog Service
+from services.service_container import get_dialog_service
+
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
@@ -329,15 +332,19 @@ class TalentItemRow(MDBoxLayout):
         """Öffnet den Bearbeitungsdialog für das Talent."""
         Logger.debug(f"TalentItemRow: Bearbeite Talent '{self.talent_name}' mit Key '{self.name_key}'")
         
-        app = MDApp.get_running_app()
-        if hasattr(app, 'einstellungen_widget'):
-            einstellungen_widget = app.einstellungen_widget
-            if hasattr(einstellungen_widget, 'talent_dialog_handler'):
-                einstellungen_widget.talent_dialog_handler.show_edit_dialog(self.name_key)
-            else:
-                Logger.error("TalentItemRow: talent_dialog_handler nicht gefunden")
+        # Dialog Service über Service Container holen
+        dialog_service = get_dialog_service()
+        if dialog_service and hasattr(dialog_service, 'talent_dialog_handler'):
+            dialog_service.talent_dialog_handler.show_edit_dialog(self.name_key)
+            Logger.debug("TalentItemRow: Bearbeitungsdialog erfolgreich geöffnet")
         else:
-            Logger.error("TalentItemRow: einstellungen_widget nicht gefunden")
+            Logger.error("TalentItemRow: Dialog Service oder talent_dialog_handler nicht verfügbar")
+            # Fallback-Fehlermeldung für den Benutzer
+            if dialog_service:
+                dialog_service.show_error_dialog(
+                    "Der Bearbeitungsdialog konnte nicht geöffnet werden. "
+                    "Bitte versuchen Sie es später erneut."
+                )
 
     def waehle_talent(self):
         """
