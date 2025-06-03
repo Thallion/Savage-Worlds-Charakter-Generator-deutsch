@@ -1247,15 +1247,93 @@ class EinstellungenWidget(MDScreen):
         else:
             Logger.error("Dialog-Service nicht verfügbar")
     
-    # Element-Statistiken
+    # Element-Statistiken 
+
     def zeige_element_statistiken(self):
         """Zeigt Element-Statistiken in einem Dialog an"""
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
+        try:
+            Logger.info("Element-Statistiken angefordert")
+            
+            # Prüfe verfügbare Services
+            dialog_service = service_container.get_dialog_service()
+            if not dialog_service:
+                Logger.error("Dialog-Service nicht verfügbar")
+                self._show_fallback_error("Dialog-Service nicht verfügbar.")
+                return
+            
+            # Prüfe Controller
+            if not self.charakter_controller:
+                Logger.error("CharakterController nicht verfügbar")
+                dialog_service.show_error_dialog("CharakterController nicht verfügbar.")
+                return
+            
+            # Prüfe Charakter
+            if not hasattr(self.charakter_controller, 'charakter') or not self.charakter_controller.charakter:
+                Logger.error("Charakter nicht verfügbar")
+                dialog_service.show_error_dialog("Kein Charakter geladen. Bitte erstelle oder lade einen Charakter.")
+                return
+            
+            # Debug-Informationen ausgeben
+            char = self.charakter_controller.charakter
+            Logger.info(f"Zeige Element-Statistiken für Charakter: {getattr(char, 'char_name', 'Unbenannt')}")
+            
+            # Optional: Debug-Daten ausgeben
+            if hasattr(dialog_service, 'debug_character_data'):
+                dialog_service.debug_character_data()
+            
+            # Dialog anzeigen
             dialog_service.show_element_statistics_dialog()
-        else:
-            Logger.error("Dialog-Service nicht verfügbar")
-    
+            
+        except Exception as e:
+            Logger.error(f"Unerwarteter Fehler bei Element-Statistiken: {str(e)}", exc_info=True)
+            self._show_fallback_error(f"Fehler beim Anzeigen der Element-Statistiken: {str(e)}")
+
+    def _show_fallback_error(self, message):
+        """
+        Fallback-Fehlermeldung wenn Dialog-Service nicht verfügbar ist
+        
+        Args:
+            message (str): Fehlermeldung
+        """
+        try:
+            # Versuche einen einfachen Dialog
+            from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+            from kivymd.uix.boxlayout import MDBoxLayout
+            from kivymd.uix.label import MDLabel
+            from kivymd.uix.button import MDButton, MDButtonText
+            
+            content = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(16),
+                padding=dp(20),
+                size_hint_y=None,
+                height=dp(100)
+            )
+            
+            content.add_widget(MDLabel(
+                text=message,
+                size_hint_y=None,
+                height=dp(60),
+                halign="center"
+            ))
+            
+            error_dialog = MDDialog(
+                MDDialogHeadlineText(text="Fehler"),
+                MDDialogContentContainer(content),
+                MDDialogButtonContainer(
+                    MDButton(
+                        MDButtonText(text="OK"),
+                        style="text",
+                        on_release=lambda x: error_dialog.dismiss()
+                    )
+                )
+            )
+            
+            error_dialog.open()
+            
+        except Exception as e:
+            Logger.error(f"Kritischer Fehler: Kann keine Dialoge anzeigen: {str(e)}")
+
     def _get_element_counts(self):
         """Hilfsmethode zur Ermittlung der Element-Statistiken"""
         try:
@@ -1269,58 +1347,111 @@ class EinstellungenWidget(MDScreen):
             # Sichere Attributzugriffe mit Fallbacks
             counts = {}
             
-            # Handicaps
-            handicaps = getattr(char, 'handicaps', {})
-            selected_handicaps = getattr(char, 'selected_handicaps', [])
-            counts['handicaps_total'] = len(handicaps)
-            counts['handicaps_selected'] = len(selected_handicaps)
+            try:
+                # Handicaps
+                handicaps = getattr(char, 'handicaps', {})
+                selected_handicaps = getattr(char, 'selected_handicaps', [])
+                counts['handicaps_total'] = len(handicaps)
+                counts['handicaps_selected'] = len(selected_handicaps)
+                Logger.debug(f"Handicaps: {counts['handicaps_total']} total, {counts['handicaps_selected']} selected")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen der Handicap-Daten: {str(e)}")
+                counts['handicaps_total'] = 0
+                counts['handicaps_selected'] = 0
             
-            # Talente
-            talente = getattr(char, 'talente', {})
-            selected_talente = getattr(char, 'selected_talente', [])
-            counts['talente_total'] = len(talente)
-            counts['talente_selected'] = len(selected_talente)
+            try:
+                # Talente
+                talente = getattr(char, 'talente', {})
+                selected_talente = getattr(char, 'selected_talente', [])
+                counts['talente_total'] = len(talente)
+                counts['talente_selected'] = len(selected_talente)
+                Logger.debug(f"Talente: {counts['talente_total']} total, {counts['talente_selected']} selected")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen der Talent-Daten: {str(e)}")
+                counts['talente_total'] = 0
+                counts['talente_selected'] = 0
             
-            # Mächte
-            maechte = getattr(char, 'maechte', {})
-            selected_maechte = getattr(char, 'selected_maechte', [])
-            counts['maechte_total'] = len(maechte)
-            counts['maechte_selected'] = len(selected_maechte)
+            try:
+                # Mächte
+                maechte = getattr(char, 'maechte', {})
+                selected_maechte = getattr(char, 'selected_maechte', [])
+                counts['maechte_total'] = len(maechte)
+                counts['maechte_selected'] = len(selected_maechte)
+                Logger.debug(f"Mächte: {counts['maechte_total']} total, {counts['maechte_selected']} selected")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen der Macht-Daten: {str(e)}")
+                counts['maechte_total'] = 0
+                counts['maechte_selected'] = 0
             
-            # Völker
-            voelker = getattr(char, 'voelker', {})
-            voelker_selected = getattr(char, 'voelker_selected', {})
-            counts['voelker_total'] = len(voelker)
-            counts['voelker_selected'] = sum(1 for selected in voelker_selected.values() if selected) if voelker_selected else 0
+            try:
+                # Völker
+                voelker = getattr(char, 'voelker', {})
+                voelker_selected = getattr(char, 'voelker_selected', {})
+                counts['voelker_total'] = len(voelker)
+                counts['voelker_selected'] = sum(1 for selected in voelker_selected.values() if selected) if voelker_selected else 0
+                Logger.debug(f"Völker: {counts['voelker_total']} total, {counts['voelker_selected']} selected")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen der Völker-Daten: {str(e)}")
+                counts['voelker_total'] = 0
+                counts['voelker_selected'] = 0
             
-            # Ausrüstung
-            ausruestung = getattr(char, 'ausruestung', {})
-            counts['ausruestung_total'] = len(ausruestung)
+            try:
+                # Ausrüstung
+                ausruestung = getattr(char, 'ausruestung', {})
+                counts['ausruestung_total'] = len(ausruestung)
+                Logger.debug(f"Ausrüstung: {counts['ausruestung_total']} total")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen der Ausrüstung-Daten: {str(e)}")
+                counts['ausruestung_total'] = 0
             
-            # Fertigkeiten
-            fertigkeiten = getattr(char, 'fertigkeiten', {})
-            counts['fertigkeiten_total'] = len(fertigkeiten)
+            try:
+                # Fertigkeiten
+                fertigkeiten = getattr(char, 'fertigkeiten', {})
+                counts['fertigkeiten_total'] = len(fertigkeiten)
+                Logger.debug(f"Fertigkeiten: {counts['fertigkeiten_total']} total")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen der Fertigkeiten-Daten: {str(e)}")
+                counts['fertigkeiten_total'] = 0
             
-            # Aktives Setting
-            active_setting = getattr(char, 'active_setting_name', 'Unbekannt')
-            counts['active_setting'] = active_setting
+            try:
+                # Aktives Setting
+                active_setting = getattr(char, 'active_setting_name', 'Unbekannt')
+                counts['active_setting'] = active_setting
+                Logger.debug(f"Aktives Setting: {active_setting}")
+            except Exception as e:
+                Logger.warning(f"Fehler beim Abrufen des aktiven Settings: {str(e)}")
+                counts['active_setting'] = 'Unbekannt'
             
+            Logger.info(f"Element-Counts erfolgreich ermittelt: {counts}")
             return counts
             
         except Exception as e:
-            Logger.error(f"Fehler beim Abrufen der Element-Statistiken: {str(e)}", exc_info=True)
+            Logger.error(f"Kritischer Fehler beim Abrufen der Element-Statistiken: {str(e)}", exc_info=True)
             return {}
-    
+
     def _update_element_statistics(self):
         """Aktualisiert die Element-Statistiken in der UI"""
         try:
             if not hasattr(self.ids, 'element_stats_box'):
+                Logger.warning("element_stats_box nicht in IDs gefunden")
                 return
             
             stats_box = self.ids.element_stats_box
             stats_box.clear_widgets()
             
             element_counts = self._get_element_counts()
+            
+            if not element_counts:
+                # Wenn keine Daten verfügbar sind, zeige Platzhalter
+                placeholder_label = MDLabel(
+                    text="Keine Charakterdaten verfügbar",
+                    size_hint_y=None,
+                    height=dp(30),
+                    font_size="12sp",
+                    italic=True
+                )
+                stats_box.add_widget(placeholder_label)
+                return
             
             if element_counts and any(element_counts.values()):
                 # Kompakte Statistik-Anzeige
@@ -1353,8 +1484,74 @@ class EinstellungenWidget(MDScreen):
                 )
                 stats_box.add_widget(elements_label)
                 
+                Logger.debug(f"Element-Statistiken UI aktualisiert: {stats_text}, {elements_text}")
+            else:
+                # Keine gültigen Daten
+                no_data_label = MDLabel(
+                    text="Daten werden geladen...",
+                    size_hint_y=None,
+                    height=dp(25),
+                    font_size="11sp",
+                    italic=True
+                )
+                stats_box.add_widget(no_data_label)
+                
         except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren der Element-Statistiken: {str(e)}", exc_info=True)
+            Logger.error(f"Fehler beim Aktualisieren der Element-Statistiken UI: {str(e)}", exc_info=True)
+            
+            # Fehler-Label hinzufügen
+            try:
+                if hasattr(self.ids, 'element_stats_box'):
+                    stats_box = self.ids.element_stats_box
+                    stats_box.clear_widgets()
+                    error_label = MDLabel(
+                        text="Fehler beim Laden der Statistiken",
+                        size_hint_y=None,
+                        height=dp(25),
+                        font_size="11sp",
+                        theme_text_color="Error"
+                    )
+                    stats_box.add_widget(error_label)
+            except Exception as e2:
+                Logger.error(f"Kritischer Fehler beim Anzeigen der Fehler-UI: {str(e2)}")
+
+    # Test-Methode für Element-Statistiken
+    def test_element_statistiken(self):
+        """Test-Methode zur Überprüfung der Element-Statistiken"""
+        try:
+            Logger.info("=== TESTE ELEMENT-STATISTIKEN ===")
+            
+            # Controller prüfen
+            if not self.charakter_controller:
+                Logger.error("TEST: CharakterController nicht verfügbar")
+                return
+            
+            # Charakter prüfen
+            if not hasattr(self.charakter_controller, 'charakter') or not self.charakter_controller.charakter:
+                Logger.error("TEST: Charakter nicht verfügbar")
+                return
+            
+            char = self.charakter_controller.charakter
+            Logger.info(f"TEST: Charakter gefunden: {getattr(char, 'char_name', 'Unbenannt')}")
+            
+            # Element-Counts testen
+            counts = self._get_element_counts()
+            Logger.info(f"TEST: Element-Counts: {counts}")
+            
+            # Dialog-Service testen
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                Logger.info("TEST: Dialog-Service verfügbar")
+                # Hier könnten wir debug_character_data aufrufen
+                if hasattr(dialog_service, 'debug_character_data'):
+                    dialog_service.debug_character_data()
+            else:
+                Logger.error("TEST: Dialog-Service nicht verfügbar")
+            
+            Logger.info("=== TEST ABGESCHLOSSEN ===")
+            
+        except Exception as e:
+            Logger.error(f"TEST-FEHLER: {str(e)}", exc_info=True)
     
     # Charakterwerte-Updates
     def update_vermoegen(self):

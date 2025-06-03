@@ -2,6 +2,7 @@
 """
 Service für Dialog-Management und UI-Feedback
 ERWEITERT: Zusätzliche Dialog-Typen, Element-Merging, Statistiken und Statblock-Funktionalität
+REPARIERT: Element-Statistiken funktionieren jetzt korrekt
 """
 
 from kivy.logger import Logger
@@ -651,46 +652,218 @@ class DialogService:
     
     def show_element_statistics_dialog(self):
         """
-        Zeigt Statistiken über die verfügbaren Elemente
+        Zeigt Statistiken über die verfügbaren Elemente - REPARIERT
         """
-        if not self.controller or not self.controller.charakter:
-            self.show_error_dialog("Kein Charakter verfügbar")
-            return
-        
-        char = self.controller.charakter
-        
-        # Statistiken sammeln
-        stats_text = f"""Aktives Setting: {char.active_setting_name}
+        try:
+            # Bessere Verfügbarkeitsprüfung
+            if not self.controller:
+                self.show_error_dialog("Controller nicht verfügbar")
+                Logger.error("Controller nicht verfügbar für Element-Statistiken")
+                return
+            
+            if not hasattr(self.controller, 'charakter') or not self.controller.charakter:
+                self.show_error_dialog("Kein Charakter verfügbar")
+                Logger.error("Charakter nicht verfügbar für Element-Statistiken")
+                return
+            
+            char = self.controller.charakter
+            Logger.info(f"Erstelle Element-Statistiken für Charakter: {getattr(char, 'char_name', 'Unbenannt')}")
+            
+            # Statistiken sammeln mit Fehlerbehandlung
+            try:
+                # Sichere Zugriffe auf Charakterattribute
+                active_setting = getattr(char, 'active_setting_name', 'Unbekannt')
+                char_name = getattr(char, 'char_name', 'Unbenannt')
+                rang = getattr(char, 'rang', 'Unbekannt')
+                aufstiege = getattr(char, 'aufstiege_gesamt', 0)
+                vermoegen = getattr(char, 'vermoegen', 0)
+                waehrung = getattr(char, 'waehrungseinheit', 'Gold')
+                machtpunkte = getattr(char, 'machtpunkte', 0)
+                
+                # Völker
+                voelker = getattr(char, 'voelker', {})
+                voelker_selected = getattr(char, 'voelker_selected', {})
+                voelker_count = len(voelker)
+                voelker_selected_count = sum(1 for selected in voelker_selected.values() if selected) if voelker_selected else 0
+                
+                # Handicaps
+                handicaps = getattr(char, 'handicaps', {})
+                selected_handicaps = getattr(char, 'selected_handicaps', [])
+                handicaps_count = len(handicaps)
+                handicaps_selected_count = len(selected_handicaps)
+                
+                # Talente
+                talente = getattr(char, 'talente', {})
+                selected_talente = getattr(char, 'selected_talente', [])
+                talente_count = len(talente)
+                talente_selected_count = len(selected_talente)
+                
+                # Mächte
+                maechte = getattr(char, 'maechte', {})
+                selected_maechte = getattr(char, 'selected_maechte', [])
+                maechte_count = len(maechte)
+                maechte_selected_count = len(selected_maechte)
+                
+                # Fertigkeiten
+                fertigkeiten = getattr(char, 'fertigkeiten', {})
+                fertigkeiten_count = len(fertigkeiten)
+                
+                # Ausrüstung
+                ausruestung = getattr(char, 'ausruestung', {})
+                selected_waffen = getattr(char, 'selected_waffen', [])
+                selected_ruestungen = getattr(char, 'selected_ruestungen', [])
+                selected_schilde = getattr(char, 'selected_schilde', [])
+                selected_allgemeine = getattr(char, 'selected_allgemeine_ausruestung', [])
+                
+                ausruestung_count = len(ausruestung)
+                waffen_selected_count = len(selected_waffen)
+                ruestungen_selected_count = len(selected_ruestungen)
+                schilde_selected_count = len(selected_schilde)
+                allgemeine_selected_count = len(selected_allgemeine)
+                
+                # Statistiken-Text erstellen
+                stats_text = f"""Aktives Setting: {active_setting}
 
 ELEMENTE-ÜBERSICHT:
 
-Völker: {len(char.voelker)} verfügbar
-• Ausgewählt: {sum(1 for selected in char.voelker_selected.values() if selected)}
+Völker: {voelker_count} verfügbar
+• Ausgewählt: {voelker_selected_count}
 
-Handicaps: {len(char.handicaps)} verfügbar
-• Ausgewählt: {len(char.selected_handicaps)}
+Handicaps: {handicaps_count} verfügbar
+• Ausgewählt: {handicaps_selected_count}
 
-Talente: {len(char.talente)} verfügbar
-• Ausgewählt: {len(char.selected_talente)}
+Talente: {talente_count} verfügbar
+• Ausgewählt: {talente_selected_count}
 
-Mächte: {len(char.maechte)} verfügbar
-• Ausgewählt: {len(char.selected_maechte)}
-• Machtpunkte: {char.machtpunkte}
+Mächte: {maechte_count} verfügbar
+• Ausgewählt: {maechte_selected_count}
+• Machtpunkte: {machtpunkte}
 
-Fertigkeiten: {len(char.fertigkeiten)} verfügbar
+Fertigkeiten: {fertigkeiten_count} verfügbar
 
-Ausrüstung: {len(char.ausruestung)} verfügbar
-• Waffen: {len(char.selected_waffen)} angelegt
-• Rüstungen: {len(char.selected_ruestungen)} angelegt
-• Schilde: {len(char.selected_schilde)} angelegt
-• Gegenstände: {len(char.selected_allgemeine_ausruestung)} ausgewählt
+Ausrüstung: {ausruestung_count} verfügbar
+• Waffen: {waffen_selected_count} angelegt
+• Rüstungen: {ruestungen_selected_count} angelegt
+• Schilde: {schilde_selected_count} angelegt
+• Gegenstände: {allgemeine_selected_count} ausgewählt
 
 CHARAKTER-STATUS:
-• Name: {char.char_name}
-• Rang: {char.rang} (Aufstiege: {char.aufstiege_gesamt})
-• Vermögen: {char.vermoegen} {char.waehrungseinheit}"""
+• Name: {char_name}
+• Rang: {rang} (Aufstiege: {aufstiege})
+• Vermögen: {vermoegen} {waehrung}"""
+                
+                Logger.info(f"Element-Statistiken erstellt: {len(stats_text)} Zeichen")
+                
+            except Exception as e:
+                Logger.error(f"Fehler beim Sammeln der Statistiken: {str(e)}", exc_info=True)
+                stats_text = f"Fehler beim Sammeln der Charakterstatistiken: {str(e)}"
+            
+            # Verbesserten Dialog erstellen
+            self._show_improved_info_dialog(stats_text, "Element-Statistiken")
+            
+        except Exception as e:
+            Logger.error(f"Kritischer Fehler bei Element-Statistiken: {str(e)}", exc_info=True)
+            self.show_error_dialog(f"Unerwarteter Fehler: {str(e)}")
+
+    def _show_improved_info_dialog(self, message, title="Information"):
+        """
+        Verbesserte Version des Info-Dialogs mit besserer Textanzeige
         
-        self.show_info_dialog(stats_text, "Element-Statistiken")
+        Args:
+            message (str): Informationstext
+            title (str): Dialog-Titel
+        """
+        self._dismiss_dialog('info')
+        
+        # Container für den Dialog-Inhalt
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(16),
+            padding=dp(20),
+            size_hint_y=None,
+            height=dp(500)  # Ausreichend Höhe für den Inhalt
+        )
+        
+        # Scrollbarer Textbereich
+        scroll_view = MDScrollView(
+            size_hint=(1, 1),
+            do_scroll_x=False,
+            do_scroll_y=True
+        )
+        
+        # Text-Container
+        text_container = MDBoxLayout(
+            orientation="vertical",
+            size_hint_y=None,
+            padding=dp(16),
+            spacing=dp(8)
+        )
+        text_container.bind(minimum_height=text_container.setter('height'))
+        
+        # Text-Label mit fester Breite und adaptiver Höhe
+        info_label = MDLabel(
+            text=message,
+            size_hint_y=None,
+            text_size=(dp(450), None),  # Feste Textbreite für Umbrüche
+            halign="left",
+            valign="top",
+            markup=False,  # Kein Markup für bessere Darstellung
+            font_size="14sp"
+        )
+        
+        # Höhe basierend auf Textinhalt automatisch anpassen
+        def update_label_height(instance, texture_size):
+            instance.height = texture_size[1]
+        
+        info_label.bind(texture_size=update_label_height)
+        
+        # Komponenten zusammenfügen
+        text_container.add_widget(info_label)
+        scroll_view.add_widget(text_container)
+        content.add_widget(scroll_view)
+        
+        # Dialog erstellen
+        info_dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: self._dismiss_dialog('info')
+                )
+            ),
+            md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.9, 0.8),  # Größerer Dialog
+            auto_dismiss=False  # Verhindert versehentliches Schließen
+        )
+        
+        self.active_dialogs['info'] = info_dialog
+        info_dialog.open()
+        Logger.info(f"Verbesserter Info-Dialog '{title}' geöffnet")
+
+    def debug_character_data(self):
+        """
+        Debug-Methode zur Überprüfung der Charakter-Daten
+        """
+        try:
+            if not self.controller or not self.controller.charakter:
+                Logger.error("Debug: Kein Controller oder Charakter verfügbar")
+                return
+            
+            char = self.controller.charakter
+            Logger.debug("=== CHARAKTER DEBUG-INFO ===")
+            Logger.debug(f"Charakter-Name: {getattr(char, 'char_name', 'NICHT VERFÜGBAR')}")
+            Logger.debug(f"Aktives Setting: {getattr(char, 'active_setting_name', 'NICHT VERFÜGBAR')}")
+            Logger.debug(f"Völker verfügbar: {len(getattr(char, 'voelker', {}))}")
+            Logger.debug(f"Handicaps verfügbar: {len(getattr(char, 'handicaps', {}))}")
+            Logger.debug(f"Talente verfügbar: {len(getattr(char, 'talente', {}))}")
+            Logger.debug(f"Mächte verfügbar: {len(getattr(char, 'maechte', {}))}")
+            Logger.debug(f"Ausrüstung verfügbar: {len(getattr(char, 'ausruestung', {}))}")
+            Logger.debug("=== END DEBUG-INFO ===")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Debug: {str(e)}", exc_info=True)
     
     def _dismiss_dialog(self, dialog_key):
         """
