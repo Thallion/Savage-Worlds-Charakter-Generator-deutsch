@@ -304,119 +304,141 @@ def create_default_setting(charakter):
     return default_setting
 
 
-def load_elements_from_active_setting(self, skip_equipment=False):
+def load_elements_from_active_setting(charakter, skip_equipment=False, merge_elements=True, replace_mode=False):
     """
     Lädt alle Elemente aus dem aktiven Setting.
     
     Args:
+        charakter: Das Charakter-Objekt
         skip_equipment (bool): Wenn True, wird die Ausrüstung nicht geladen (hilfreich beim Laden eines Charakters)
+        merge_elements (bool): Wenn True, werden Elemente gemerged statt ersetzt
+        replace_mode (bool): Wenn True, werden alle Elemente komplett ersetzt (überschreibt merge_elements)
         
     Returns:
         bool: True bei Erfolg, sonst False
     """
     try:
-        Logger.info(f"Lade Elemente aus dem aktiven Setting '{self.active_setting_name}'")
+        Logger.info(f"Lade Elemente aus dem aktiven Setting '{charakter.active_setting_name}'")
         
         # Aktives Setting abrufen
-        active_setting = self.custom_element_manager.get_active_setting()
+        active_setting = charakter.custom_element_manager.get_active_setting()
         if not active_setting:
-            Logger.error(f"Aktives Setting '{self.active_setting_name}' konnte nicht geladen werden.")
+            Logger.error(f"Aktives Setting '{charakter.active_setting_name}' konnte nicht geladen werden.")
             return False
         
-        # Farben laden
-        self.settingregeln.farbschema = active_setting.get('farbschema', 'Blue')
+        # Wenn replace_mode, dann merge_elements auf False setzen
+        if replace_mode:
+            merge_elements = False
+            Logger.info("Replace-Modus aktiviert: Alle Elemente werden komplett ersetzt")
         
-        # Völker laden (komplett ersetzen)
+        # Farben laden
+        charakter.settingregeln.farbschema = active_setting.get('farbschema', 'Blue')
+        
+        # Völker laden
         voelker_data = active_setting.get('voelker', {})
         if voelker_data:
-            # Völker zurücksetzen
-            self.voelker = {}
+            if not merge_elements:
+                # Völker zurücksetzen bei Replace-Modus
+                charakter.voelker = {}
             for name, volk_dict in voelker_data.items():
                 try:
-                    self.voelker[name] = Volk.from_dict(volk_dict)
+                    charakter.voelker[name] = Volk.from_dict(volk_dict)
                 except Exception as e:
                     Logger.warning(f"Fehler beim Laden des Volkes '{name}': {e}")
-            Logger.info(f"{len(self.voelker)} Völker geladen.")
+            Logger.info(f"{len(charakter.voelker)} Völker geladen.")
         
         # Fertigkeiten_daten direkt aus dem Setting laden
         fertigkeiten_daten = active_setting.get('fertigkeiten_daten', {})
         if fertigkeiten_daten:
-            # Fertigkeiten_daten setzen
-            self.fertigkeiten_daten = {}
+            if not merge_elements:
+                # Fertigkeiten_daten zurücksetzen bei Replace-Modus
+                charakter.fertigkeiten_daten = {}
             for name, attribut_set in fertigkeiten_daten.items():
                 if isinstance(attribut_set, list):
                     # Konvertiere Listen zurück zu Sets
-                    self.fertigkeiten_daten[name] = set(attribut_set)
+                    charakter.fertigkeiten_daten[name] = set(attribut_set)
                 else:
-                    self.fertigkeiten_daten[name] = attribut_set
+                    charakter.fertigkeiten_daten[name] = attribut_set
             # Fertigkeiten neu initialisieren
-            self.initialisiere_fertigkeiten()
-            Logger.info(f"{len(self.fertigkeiten_daten)} Fertigkeiten-Daten geladen, {len(self.fertigkeiten)} Fertigkeiten initialisiert.")
+            charakter.initialisiere_fertigkeiten()
+            Logger.info(f"{len(charakter.fertigkeiten_daten)} Fertigkeiten-Daten geladen, {len(charakter.fertigkeiten)} Fertigkeiten initialisiert.")
         
-        # Handicaps laden (komplett ersetzen)
+        # Handicaps laden
         handicaps_data = active_setting.get('handicaps', {})
         if handicaps_data:
-            # Handicaps zurücksetzen
-            self.handicaps = {}
+            if not merge_elements:
+                # Handicaps zurücksetzen bei Replace-Modus
+                charakter.handicaps = {}
             for name, handicap_dict in handicaps_data.items():
                 try:
-                    self.handicaps[name] = Handicap.from_dict_static(handicap_dict)
+                    # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
+                    if not merge_elements or name not in charakter.handicaps:
+                        charakter.handicaps[name] = Handicap.from_dict_static(handicap_dict)
                 except Exception as e:
                     Logger.warning(f"Fehler beim Laden des Handicaps '{name}': {e}")
-            Logger.info(f"{len(self.handicaps)} Handicaps geladen.")
+            Logger.info(f"{len(charakter.handicaps)} Handicaps geladen.")
         
-        # Talente laden (komplett ersetzen)
+        # Talente laden
         talente_data = active_setting.get('talente', {})
         if talente_data:
-            # Talente zurücksetzen
-            self.talente = {}
+            if not merge_elements:
+                # Talente zurücksetzen bei Replace-Modus
+                charakter.talente = {}
             for name, talent_dict in talente_data.items():
                 try:
-                    self.talente[name] = Talent.from_dict_static(talent_dict)
+                    # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
+                    if not merge_elements or name not in charakter.talente:
+                        charakter.talente[name] = Talent.from_dict_static(talent_dict)
                 except Exception as e:
                     Logger.warning(f"Fehler beim Laden des Talents '{name}': {e}")
-            Logger.info(f"{len(self.talente)} Talente geladen.")
+            Logger.info(f"{len(charakter.talente)} Talente geladen.")
         
-        # Mächte laden (komplett ersetzen)
+        # Mächte laden
         maechte_data = active_setting.get('maechte', {})
         if maechte_data:
-            # Mächte zurücksetzen
-            self.maechte = {}
+            if not merge_elements:
+                # Mächte zurücksetzen bei Replace-Modus
+                charakter.maechte = {}
             for name, macht_dict in maechte_data.items():
                 try:
-                    self.maechte[name] = Macht.from_dict_static(macht_dict)
+                    # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
+                    if not merge_elements or name not in charakter.maechte:
+                        charakter.maechte[name] = Macht.from_dict_static(macht_dict)
                 except Exception as e:
                     Logger.warning(f"Fehler beim Laden der Macht '{name}': {e}")
-            Logger.info(f"{len(self.maechte)} Mächte geladen.")
+            Logger.info(f"{len(charakter.maechte)} Mächte geladen.")
         
         # Ausrüstung laden, wenn nicht übersprungen
         if not skip_equipment:
             ausruestung_data = active_setting.get('ausruestung', {})
             if ausruestung_data:
-                # Ausrüstung zurücksetzen
-                self.ausruestung = {}
+                if not merge_elements:
+                    # Ausrüstung zurücksetzen bei Replace-Modus
+                    charakter.ausruestung = {}
                 for name, item_dict in ausruestung_data.items():
                     try:
-                        kategorie = item_dict.get('kategorie', 'Allgemein')
-                        if kategorie == 'Waffe':
-                            item = Waffe.from_setting_dict(item_dict)
-                        elif kategorie == 'Rüstung':
-                            item = Ruestung.from_setting_dict(item_dict)
-                        elif kategorie == 'Schild':
-                            item = Schild.from_setting_dict(item_dict)
-                        else:
-                            item = Ausruestung.from_setting_dict(item_dict)
-                        
-                        self.ausruestung[name] = item
+                        # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
+                        if not merge_elements or name not in charakter.ausruestung:
+                            kategorie = item_dict.get('kategorie', 'Allgemein')
+                            if kategorie == 'Waffe':
+                                item = Waffe.from_setting_dict(item_dict)
+                            elif kategorie == 'Rüstung':
+                                item = Ruestung.from_setting_dict(item_dict)
+                            elif kategorie == 'Schild':
+                                item = Schild.from_setting_dict(item_dict)
+                            else:
+                                item = Ausruestung.from_setting_dict(item_dict)
+                            
+                            charakter.ausruestung[name] = item
                     except Exception as e:
                         Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
-                Logger.info(f"{len(self.ausruestung)} Ausrüstungsgegenstände geladen.")
+                Logger.info(f"{len(charakter.ausruestung)} Ausrüstungsgegenstände geladen.")
         
         # Settingregeln laden
         settingregeln_data = active_setting.get('settingregeln', {})
         if settingregeln_data:
             try:
-                self.settingregeln.from_dict(settingregeln_data)
+                charakter.settingregeln.from_dict(settingregeln_data)
                 Logger.info("Settingregeln geladen.")
             except Exception as e:
                 Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
