@@ -55,6 +55,7 @@ class SetEncoder(json.JSONEncoder):
 class Charakter(EventDispatcher):
     """
     Klasse zur Darstellung eines Charakters.
+    VOLLSTÄNDIG: Mit Setting-Merging und Element-Verwaltung
     """
     __events__ = ('on_charakter_change',)
 
@@ -194,8 +195,8 @@ class Charakter(EventDispatcher):
         self.initialisiere_fertigkeiten()
         self.bind(fertigkeiten=self.on_fertigkeiten_changed)
 
-        # Lade nun alle Elemente aus dem aktiven Setting
-        self.load_elements_from_active_setting()
+        # Lade nun alle Elemente aus dem aktiven Setting (für neuen Charakter: replace_mode=True)
+        self.load_elements_from_active_setting(replace_mode=True)
 
         # Beispiel: Standardvolk auswählen, wenn vorhanden
         if "Mensch" in self.voelker:
@@ -312,6 +313,7 @@ class Charakter(EventDispatcher):
             else:
                 Logger.warning("Unvollständige Charakterdaten, lade Elemente aus dem aktiven Setting")
                 # Für den Fall, dass wir unvollständige Daten haben, laden wir die Elemente aus dem Setting
+                # WICHTIG: merge_elements=True verwenden, um bestehende Auswahl zu erhalten
                 if "ausruestung" in daten:
                     # Ausrüstung aus den Daten wiederherstellen
                     self.ausruestung = temp_ausruestung
@@ -320,8 +322,8 @@ class Charakter(EventDispatcher):
                     self.selected_schilde = temp_selected_schilde
                     self.selected_allgemeine_ausruestung = temp_selected_allgemeine_ausruestung
                 
-                # Aktiviere das Setting, ohne die Ausrüstung zu laden
-                self.load_elements_from_active_setting()
+                # Aktiviere das Setting mit Merging, ohne die Ausrüstung zu laden
+                self.load_elements_from_active_setting(skip_equipment=True, merge_elements=True)
             
             # Abgeleitete Werte berechnen
             self.berechne_abgeleitete_werte()
@@ -357,8 +359,63 @@ class Charakter(EventDispatcher):
     def create_default_setting(self):
         return setting_funktionen.create_default_setting(self)
 
-    def load_elements_from_active_setting(self):
-        return setting_funktionen.load_elements_from_active_setting(self)
+    def load_elements_from_active_setting(self, skip_equipment=False, merge_elements=True, replace_mode=False):
+        """
+        Lädt alle Elemente aus dem aktiven Setting.
+        
+        Args:
+            skip_equipment (bool): Wenn True, wird die Ausrüstung nicht geladen
+            merge_elements (bool): Wenn True, werden Elemente gemerged statt ersetzt
+            replace_mode (bool): Wenn True, werden alle Elemente komplett ersetzt
+            
+        Returns:
+            bool: True bei Erfolg, sonst False
+        """
+        return setting_funktionen.load_elements_from_active_setting(
+            self, skip_equipment, merge_elements, replace_mode
+        )
+
+    def change_active_setting(self, setting_name, merge_elements=True):
+        """
+        Wechselt das aktive Setting und lädt die entsprechenden Elemente.
+        
+        Args:
+            setting_name (str): Name des neuen Settings
+            merge_elements (bool): Wenn True, werden Elemente gemerged statt ersetzt
+            
+        Returns:
+            bool: True bei Erfolg, False bei Fehler
+        """
+        try:
+            old_setting = self.active_setting_name
+            
+            # Setting wechseln
+            if self.custom_element_manager.set_active_setting(setting_name):
+                Logger.info(f"Setting von '{old_setting}' zu '{setting_name}' gewechselt")
+                
+                # Elemente aus dem neuen Setting laden (mit Merging)
+                success = self.load_elements_from_active_setting(merge_elements=merge_elements)
+                
+                if success:
+                    self.active_setting_name = setting_name
+                    # Abgeleitete Werte neu berechnen
+                    self.berechne_abgeleitete_werte()
+                    # UI aktualisieren
+                    self.dispatch('on_charakter_change')
+                    Logger.info(f"Setting-Wechsel zu '{setting_name}' erfolgreich abgeschlossen")
+                    return True
+                else:
+                    Logger.error(f"Fehler beim Laden der Elemente für Setting '{setting_name}'")
+                    # Zurück zum alten Setting wechseln
+                    self.custom_element_manager.set_active_setting(old_setting)
+                    return False
+            else:
+                Logger.error(f"Setting '{setting_name}' konnte nicht aktiviert werden")
+                return False
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Setting-Wechsel zu '{setting_name}': {e}", exc_info=True)
+            return False
 
     def reload_character_data(self):
         """Aktualisiert den Charakter, um nach dem Laden eines neuen Settings alle Elemente korrekt zu laden."""

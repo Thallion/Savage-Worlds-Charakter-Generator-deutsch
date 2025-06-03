@@ -1,6 +1,6 @@
 """
 einstellungen.py - Service-basierte Architektur mit vollständigen Spielelementen
-ERWEITERT: Statblock, Element-Statistiken, Setting-Merging und erweiterte Dialoge
+VOLLSTÄNDIG: Statblock, Element-Statistiken, Setting-Merging und erweiterte Dialoge
 """
 
 import os
@@ -330,11 +330,11 @@ kv_string = '''
                                 MDButton:
                                     style: "elevated"
                                     size_hint_x: 1
-                                    on_release: root.open_load_setting_popup()
+                                    on_release: root.open_setting_switch_options()
                                     MDButtonIcon:
-                                        icon: "folder-open"
+                                        icon: "swap-horizontal"
                                     MDButtonText:
-                                        text: "Laden"
+                                        text: "Wechseln"
 
                                 MDButton:
                                     style: "outlined"
@@ -403,6 +403,14 @@ kv_string = '''
                         bold: True
                         size_hint_y: None
                         height: dp(40)
+
+                    # Kompakte Statistik-Anzeige
+                    MDBoxLayout:
+                        id: element_stats_box
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(4)
 
                     # Volk
                     MDBoxLayout:
@@ -743,7 +751,7 @@ class EinstellungenWidget(MDScreen):
     """
     Hauptwidget für Einstellungen
     Nutzt Service Container für Dependency Injection
-    ERWEITERT: Statblock, Element-Statistiken, Setting-Merging
+    VOLLSTÄNDIG: Statblock, Element-Statistiken, Setting-Merging und erweiterte Dialoge
     """
     
     controller = ObjectProperty(None, allownone=True)
@@ -834,6 +842,9 @@ class EinstellungenWidget(MDScreen):
             # UI-Felder mit aktuellen Werten aktualisieren
             self._update_ui_fields()
             
+            # Element-Statistiken anzeigen
+            self._update_element_statistics()
+            
             # Event senden
             event_service = service_container.get_event_service()
             if event_service:
@@ -847,11 +858,13 @@ class EinstellungenWidget(MDScreen):
         """Wird aufgerufen, wenn ein neuer Charakter erstellt wurde"""
         Logger.info(f"Neuer Charakter erstellt: {data}")
         self._update_ui_fields()
+        self._update_element_statistics()
     
     def _on_character_loaded(self, data):
         """Wird aufgerufen, wenn ein Charakter geladen wurde"""
         Logger.info(f"Charakter geladen: {data}")
         self._update_ui_fields()
+        self._update_element_statistics()
     
     def _on_theme_changed(self, data):
         """Wird aufgerufen, wenn das Theme geändert wurde"""
@@ -941,6 +954,7 @@ class EinstellungenWidget(MDScreen):
             
             # Aktualisiere eigene UI-Felder
             Clock.schedule_once(lambda dt: self._update_ui_fields(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_element_statistics(), 0.1)
             
         except Exception as e:
             Logger.error(f"Fehler bei UI-Refresh: {str(e)}")
@@ -963,10 +977,10 @@ class EinstellungenWidget(MDScreen):
         
         buttons_container = MDBoxLayout(
             orientation='vertical',
-            spacing=dp(20),  # Mehr Abstand zwischen Elementen
+            spacing=dp(20),
             size_hint_y=None,
-            height=dp(200),  # Mehr Höhe für bessere Darstellung
-            padding=dp(20)   # Mehr Padding
+            height=dp(200),
+            padding=dp(20)
         )
         
         # Wenn eine Datei existiert, zeige den Überschreiben-Button
@@ -974,12 +988,12 @@ class EinstellungenWidget(MDScreen):
             filename = os.path.basename(current_path)
             
             info_label = MDLabel(
-                text=f"Bestehende Datei:\n{filename}",  # Zeilenumbruch für längere Namen
+                text=f"Bestehende Datei:\n{filename}",
                 size_hint_y=None,
-                height=dp(60),  # Mehr Höhe für mehrzeiligen Text
+                height=dp(60),
                 halign="center",
                 valign="middle",
-                text_size=(None, None)  # Automatische Textgröße
+                text_size=(None, None)
             )
             buttons_container.add_widget(info_label)
             
@@ -987,17 +1001,17 @@ class EinstellungenWidget(MDScreen):
             ueberschreiben_button = MDButton(
                 style="elevated",
                 size_hint=(1, None),
-                height=dp(48),  # Standard-Button-Höhe
+                height=dp(48),
                 on_release=lambda x: self._ueberschreibe_existierende_datei(current_path)
             )
             ueberschreiben_button.add_widget(MDButtonText(text="Bestehende Datei überschreiben"))
             buttons_container.add_widget(ueberschreiben_button)
         
-        # Button für "Als neue Datei speichern" (ohne Spacer)
+        # Button für "Als neue Datei speichern"
         new_file_button = MDButton(
             style="elevated",
             size_hint=(1, None),
-            height=dp(48),  # Standard-Button-Höhe
+            height=dp(48),
             on_release=lambda x: self._als_neue_datei_speichern()
         )
         new_file_button.add_widget(MDButtonText(text="Als neue Datei speichern..."))
@@ -1073,7 +1087,6 @@ class EinstellungenWidget(MDScreen):
         file_service = service_container.get_file_manager_service()
         if file_service:
             file_service.set_temp_filename(filename)
-            # chars ist ein Hauptordner, kein Unterordner
             chars_dir = file_service.get_default_directory('chars')
             file_service.show_file_manager(chars_dir, "save_dir")
     
@@ -1081,13 +1094,267 @@ class EinstellungenWidget(MDScreen):
         """Öffnet den Lade-Dialog für Charaktere"""
         file_service = service_container.get_file_manager_service()
         if file_service:
-            # chars ist ein Hauptordner, kein Unterordner
             chars_dir = file_service.get_default_directory('chars')
             file_service.show_file_manager(chars_dir, "load")
         else:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_error_dialog("File-Manager-Service nicht verfügbar.")
+    
+    # Setting-Wechsel-Funktionalität
+    def open_setting_switch_options(self):
+        """Öffnet einen Dialog für Setting-Wechsel-Optionen"""
+        if not self.charakter_controller or not self.charakter_controller.charakter:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Kein Charakter verfügbar.")
+            return
+        
+        # Verfügbare Settings abrufen
+        available_settings = self.charakter_controller.charakter.custom_element_manager.get_all_settings()
+        current_setting = self.charakter_controller.charakter.active_setting_name
+        
+        if not available_settings:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Keine Settings verfügbar.")
+            return
+        
+        # Verfügbare Settings (außer aktuellem) als Choices vorbereiten
+        setting_choices = []
+        for setting_name in available_settings:
+            if setting_name != current_setting:
+                setting_choices.append((setting_name, setting_name))
+        
+        if not setting_choices:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_info_dialog(
+                    f"Nur ein Setting verfügbar: '{current_setting}'",
+                    "Kein Setting-Wechsel möglich"
+                )
+            return
+        
+        # Dialog Service verwenden für einfache Auswahl
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            message = f"Aktuelles Setting: {current_setting}\n\nWähle ein neues Setting:"
+            dialog_service.show_choice_dialog(
+                message,
+                "Setting wechseln", 
+                setting_choices,
+                self._on_setting_choice_made
+            )
+    
+    def _on_setting_choice_made(self, chosen_setting):
+        """Verarbeitet die Setting-Auswahl"""
+        if not chosen_setting or chosen_setting == self.charakter_controller.charakter.active_setting_name:
+            return
+        
+        self.selected_setting = chosen_setting
+        
+        # Merge-Option-Dialog anzeigen
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            merge_choices = [
+                ("Ja, Elemente beibehalten (empfohlen)", True),
+                ("Nein, komplett ersetzen", False)
+            ]
+            
+            message = f"Setting zu '{chosen_setting}' wechseln.\n\n"
+            message += "Sollen bereits ausgewählte Charakterelemente beibehalten werden?"
+            
+            dialog_service.show_choice_dialog(
+                message,
+                "Element-Verhalten",
+                merge_choices,
+                self._on_merge_choice_made
+            )
+    
+    def _on_merge_choice_made(self, merge_elements):
+        """Verarbeitet die Merge-Auswahl und führt den Setting-Wechsel durch"""
+        if not hasattr(self, 'selected_setting'):
+            return
+        
+        Logger.info(f"Führe Setting-Wechsel zu '{self.selected_setting}' durch (merge: {merge_elements})")
+        
+        # Fortschrittsdialog anzeigen
+        dialog_service = service_container.get_dialog_service()
+        progress_key = None
+        if dialog_service:
+            progress_key = dialog_service.show_progress_dialog(
+                "Setting wird gewechselt...",
+                f"Wechsle zu '{self.selected_setting}'..."
+            )
+        
+        # Setting-Wechsel in einem verzögerten Callback durchführen
+        Clock.schedule_once(
+            lambda dt: self._perform_setting_switch_delayed(merge_elements, progress_key), 
+            0.1
+        )
+    
+    def _perform_setting_switch_delayed(self, merge_elements, progress_key):
+        """Führt den Setting-Wechsel verzögert durch"""
+        try:
+            # Setting wechseln
+            success = self.charakter_controller.charakter.change_active_setting(
+                self.selected_setting, 
+                merge_elements=merge_elements
+            )
+            
+            # Fortschrittsdialog schließen
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service and progress_key:
+                dialog_service.dismiss_dialog(progress_key)
+            
+            if success and dialog_service:
+                # Statistiken nach dem Wechsel abrufen
+                element_counts = self._get_element_counts()
+                
+                message = f"Setting erfolgreich zu '{self.selected_setting}' gewechselt.\n\n"
+                message += f"Verfügbare Elemente:\n"
+                message += f"• Handicaps: {element_counts.get('handicaps_total', 0)} ({element_counts.get('handicaps_selected', 0)} ausgewählt)\n"
+                message += f"• Talente: {element_counts.get('talente_total', 0)} ({element_counts.get('talente_selected', 0)} ausgewählt)\n"
+                message += f"• Mächte: {element_counts.get('maechte_total', 0)} ({element_counts.get('maechte_selected', 0)} ausgewählt)"
+                
+                dialog_service.show_success_dialog(
+                    message,
+                    "Setting gewechselt"
+                )
+                
+                # UI aktualisieren
+                self._trigger_ui_refresh()
+                
+            elif dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{self.selected_setting}'.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Setting-Wechsel: {str(e)}", exc_info=True)
+            
+            # Fortschrittsdialog schließen
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                if progress_key:
+                    dialog_service.dismiss_dialog(progress_key)
+                dialog_service.show_error_dialog(f"Unerwarteter Fehler beim Setting-Wechsel: {str(e)}")
+    
+    # Statblock-Funktionalität
+    def zeige_statblock(self):
+        """Zeigt den Charakterstatblock in einem Dialog an"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_statblock_dialog()
+        else:
+            Logger.error("Dialog-Service nicht verfügbar")
+    
+    # Element-Statistiken
+    def zeige_element_statistiken(self):
+        """Zeigt Element-Statistiken in einem Dialog an"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_element_statistics_dialog()
+        else:
+            Logger.error("Dialog-Service nicht verfügbar")
+    
+    def _get_element_counts(self):
+        """Hilfsmethode zur Ermittlung der Element-Statistiken"""
+        try:
+            if not self.charakter_controller or not self.charakter_controller.charakter:
+                Logger.warning("Kein Charakter-Controller oder Charakter verfügbar")
+                return {}
+            
+            char = self.charakter_controller.charakter
+            Logger.debug(f"Ermittle Element-Counts für Charakter: {getattr(char, 'char_name', 'Unbenannt')}")
+            
+            # Sichere Attributzugriffe mit Fallbacks
+            counts = {}
+            
+            # Handicaps
+            handicaps = getattr(char, 'handicaps', {})
+            selected_handicaps = getattr(char, 'selected_handicaps', [])
+            counts['handicaps_total'] = len(handicaps)
+            counts['handicaps_selected'] = len(selected_handicaps)
+            
+            # Talente
+            talente = getattr(char, 'talente', {})
+            selected_talente = getattr(char, 'selected_talente', [])
+            counts['talente_total'] = len(talente)
+            counts['talente_selected'] = len(selected_talente)
+            
+            # Mächte
+            maechte = getattr(char, 'maechte', {})
+            selected_maechte = getattr(char, 'selected_maechte', [])
+            counts['maechte_total'] = len(maechte)
+            counts['maechte_selected'] = len(selected_maechte)
+            
+            # Völker
+            voelker = getattr(char, 'voelker', {})
+            voelker_selected = getattr(char, 'voelker_selected', {})
+            counts['voelker_total'] = len(voelker)
+            counts['voelker_selected'] = sum(1 for selected in voelker_selected.values() if selected) if voelker_selected else 0
+            
+            # Ausrüstung
+            ausruestung = getattr(char, 'ausruestung', {})
+            counts['ausruestung_total'] = len(ausruestung)
+            
+            # Fertigkeiten
+            fertigkeiten = getattr(char, 'fertigkeiten', {})
+            counts['fertigkeiten_total'] = len(fertigkeiten)
+            
+            # Aktives Setting
+            active_setting = getattr(char, 'active_setting_name', 'Unbekannt')
+            counts['active_setting'] = active_setting
+            
+            return counts
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Abrufen der Element-Statistiken: {str(e)}", exc_info=True)
+            return {}
+    
+    def _update_element_statistics(self):
+        """Aktualisiert die Element-Statistiken in der UI"""
+        try:
+            if not hasattr(self.ids, 'element_stats_box'):
+                return
+            
+            stats_box = self.ids.element_stats_box
+            stats_box.clear_widgets()
+            
+            element_counts = self._get_element_counts()
+            
+            if element_counts and any(element_counts.values()):
+                # Kompakte Statistik-Anzeige
+                setting_name = element_counts.get('active_setting', 'Unbekannt')
+                h_selected = element_counts.get('handicaps_selected', 0)
+                h_total = element_counts.get('handicaps_total', 0)
+                t_selected = element_counts.get('talente_selected', 0)
+                t_total = element_counts.get('talente_total', 0)
+                m_selected = element_counts.get('maechte_selected', 0)
+                m_total = element_counts.get('maechte_total', 0)
+                
+                # Erste Zeile: Setting
+                stats_text = f"Setting: {setting_name}"
+                stats_label = MDLabel(
+                    text=stats_text,
+                    size_hint_y=None,
+                    height=dp(25),
+                    font_size="12sp",
+                    bold=True
+                )
+                stats_box.add_widget(stats_label)
+                
+                # Zweite Zeile: Kompakte Element-Counts  
+                elements_text = f"H: {h_selected}/{h_total} | T: {t_selected}/{t_total} | M: {m_selected}/{m_total}"
+                elements_label = MDLabel(
+                    text=elements_text,
+                    size_hint_y=None,
+                    height=dp(25),
+                    font_size="11sp"
+                )
+                stats_box.add_widget(elements_label)
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren der Element-Statistiken: {str(e)}", exc_info=True)
     
     # Charakterwerte-Updates
     def update_vermoegen(self):
@@ -1147,150 +1414,6 @@ class EinstellungenWidget(MDScreen):
             if success:
                 self._update_ui_fields()
     
-    # Statblock-Funktionalität
-    def zeige_statblock(self):
-        """Zeigt den Charakterstatblock in einem Dialog an"""
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
-            dialog_service.show_statblock_dialog()
-        else:
-            Logger.error("Dialog-Service nicht verfügbar")
-    
-    # Element-Statistiken
-    def zeige_element_statistiken(self):
-        """Zeigt Element-Statistiken in einem Dialog an"""
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
-            dialog_service.show_element_statistics_dialog()
-        else:
-            Logger.error("Dialog-Service nicht verfügbar")
-    
-    # Setting-Wechsel mit Merge-Dialog
-    def open_load_setting_popup(self):
-        """Öffnet erweiterten Setting-Dialog mit Merge-Option"""
-        if not self.charakter_controller or not self.charakter_controller.charakter:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_error_dialog("Kein Charakter verfügbar")
-            return
-        
-        # Verfügbare Settings abrufen
-        available_settings = []
-        try:
-            char = self.charakter_controller.charakter
-            settings = char.custom_element_manager.get_all_settings()
-            current_setting = char.active_setting_name
-            
-            for setting_name in settings:
-                if setting_name != current_setting:
-                    available_settings.append((setting_name, setting_name))
-            
-            if not available_settings:
-                dialog_service = service_container.get_dialog_service()
-                if dialog_service:
-                    dialog_service.show_info_dialog(
-                        "Keine anderen Settings verfügbar.\n"
-                        f"Aktuelles Setting: {current_setting}",
-                        "Settings"
-                    )
-                return
-            
-            # Setting-Auswahl-Dialog
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_choice_dialog(
-                    f"Wähle ein Setting zum Laden:\n(Aktuell: {current_setting})",
-                    "Setting laden",
-                    available_settings,
-                    self._on_setting_selected
-                )
-                
-        except Exception as e:
-            Logger.error(f"Fehler beim Setting-Dialog: {str(e)}")
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_error_dialog("Fehler beim Laden der Settings.")
-    
-    def _on_setting_selected(self, setting_name):
-        """Verarbeitet die Setting-Auswahl"""
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
-            dialog_service.show_setting_merge_dialog(
-                setting_name,
-                lambda choice: self._on_merge_choice(setting_name, choice)
-            )
-    
-    def _on_merge_choice(self, setting_name, merge_choice):
-        """Verarbeitet die Merge-Wahl und wechselt das Setting"""
-        if not self.charakter_controller or not self.charakter_controller.charakter:
-            return
-        
-        try:
-            char = self.charakter_controller.charakter
-            merge_elements = (merge_choice == "merge")
-            
-            # Progress Dialog anzeigen
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                progress_key = dialog_service.show_progress_dialog(
-                    "Setting wird gewechselt...",
-                    f"Lade Setting '{setting_name}' ({'Merge' if merge_elements else 'Ersetzung'})"
-                )
-            
-            # Setting wechseln
-            success = char.change_active_setting(setting_name, merge_elements=merge_elements)
-            
-            # Progress Dialog schließen
-            if dialog_service:
-                dialog_service.dismiss_dialog(progress_key)
-            
-            if success:
-                # Statistiken nach dem Wechsel
-                stats = self._get_element_statistics()
-                
-                message = f"Setting '{setting_name}' erfolgreich geladen!\n\n"
-                message += f"Verfügbare Elemente:\n"
-                message += f"• Handicaps: {stats['handicaps_total']} ({stats['handicaps_selected']} ausgewählt)\n"
-                message += f"• Talente: {stats['talente_total']} ({stats['talente_selected']} ausgewählt)\n"
-                message += f"• Mächte: {stats['maechte_total']} ({stats['maechte_selected']} ausgewählt)\n"
-                message += f"• Völker: {stats['voelker_total']} ({stats['voelker_selected']} ausgewählt)\n"
-                
-                if dialog_service:
-                    dialog_service.show_success_dialog(message, "Setting gewechselt")
-                
-                # UI aktualisieren
-                self._trigger_ui_refresh()
-                
-            else:
-                if dialog_service:
-                    dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{setting_name}'.")
-                
-        except Exception as e:
-            Logger.error(f"Fehler beim Setting-Wechsel: {str(e)}", exc_info=True)
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_error_dialog(f"Kritischer Fehler beim Setting-Wechsel: {str(e)}")
-    
-    def _get_element_statistics(self):
-        """Gibt aktuelle Element-Statistiken zurück"""
-        if not self.charakter_controller or not self.charakter_controller.charakter:
-            return {}
-        
-        char = self.charakter_controller.charakter
-        return {
-            'handicaps_total': len(char.handicaps),
-            'handicaps_selected': len(char.selected_handicaps),
-            'talente_total': len(char.talente),
-            'talente_selected': len(char.selected_talente),
-            'maechte_total': len(char.maechte),
-            'maechte_selected': len(char.selected_maechte),
-            'voelker_total': len(char.voelker),
-            'voelker_selected': sum(1 for selected in char.voelker_selected.values() if selected),
-            'ausruestung_total': len(char.ausruestung),
-            'fertigkeiten_total': len(char.fertigkeiten),
-            'active_setting': char.active_setting_name
-        }
-    
     # PDF-Erstellung mit vollständigen Optionen
     def erzeuge_charakterbogen_pdf(self):
         """Startet den PDF-Erstellungsprozess mit Optionen"""
@@ -1315,7 +1438,7 @@ class EinstellungenWidget(MDScreen):
             orientation='vertical',
             spacing=dp(16),
             size_hint_y=None,
-            height=dp(200),  # Feste Höhe statt adaptive_height
+            height=dp(200),
             padding=dp(16)
         )
         
@@ -1347,7 +1470,7 @@ class EinstellungenWidget(MDScreen):
             orientation='vertical',
             spacing=dp(12),
             size_hint_y=None,
-            height=dp(100)  # Feste Höhe statt self.minimum_height
+            height=dp(100)
         )
         
         # Wenn bestehende PDF vorhanden
@@ -1458,7 +1581,6 @@ class EinstellungenWidget(MDScreen):
         file_service = service_container.get_file_manager_service()
         if file_service:
             file_service.set_temp_pdf_settings(filename, self.temp_printer_friendly)
-            # chars ist ein Hauptordner, kein Unterordner
             chars_dir = file_service.get_default_directory('chars')
             file_service.show_file_manager(chars_dir, "save_pdf_dir")
     
@@ -1602,6 +1724,7 @@ class EinstellungenWidget(MDScreen):
         """Öffentliche Methode zur UI-Aktualisierung"""
         self._update_ui_after_character_change()
         self._update_ui_fields()
+        self._update_element_statistics()
     
     def cleanup(self):
         """Bereinigt das Widget beim Beenden"""
