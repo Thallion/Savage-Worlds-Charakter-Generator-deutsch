@@ -38,7 +38,6 @@ from kivymd.uix.tab import (
 from controllers.charakter_controller import CharakterController
 from charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
-from einstellungen import EinstellungenWidget
 from views.voelker_view import VoelkerWidget
 from views.profil_view import ProfilWidget
 from views.maechte_view import MaechteWidget
@@ -47,6 +46,7 @@ from views.handicaps_view import HandicapsWidget
 from views.talente_view import TalenteWidget
 from views.eigenschaften_view import EigenschaftenWidget
 from views.charakterbogen_view import CharakterbogenWidget
+from views.einstellungen_widget import EinstellungenWidget
 
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
