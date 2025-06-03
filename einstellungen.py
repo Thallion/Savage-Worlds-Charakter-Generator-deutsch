@@ -1,5 +1,6 @@
 """
 einstellungen.py - Service-basierte Architektur mit vollständigen Spielelementen
+ERWEITERT: Statblock, Element-Statistiken, Setting-Merging und erweiterte Dialoge
 """
 
 import os
@@ -344,7 +345,7 @@ kv_string = '''
                                     MDButtonText:
                                         text: "Löschen"
 
-                    # Rechte Spalte - PDF und weitere Funktionen
+                    # Rechte Spalte - PDF, Statblock und Statistiken
                     MDBoxLayout:
                         orientation: 'vertical'
                         spacing: dp(16)
@@ -372,6 +373,17 @@ kv_string = '''
 
                             MDButtonText:
                                 text: "Statblock anzeigen"
+
+                        MDButton:
+                            style: "tonal"
+                            size_hint_x: 1
+                            on_release: root.zeige_element_statistiken()
+
+                            MDButtonIcon:
+                                icon: "chart-bar"
+
+                            MDButtonText:
+                                text: "Element-Statistiken"
 
             # Spielelemente Card - Vollständige Version
             MDCard:
@@ -731,6 +743,7 @@ class EinstellungenWidget(MDScreen):
     """
     Hauptwidget für Einstellungen
     Nutzt Service Container für Dependency Injection
+    ERWEITERT: Statblock, Element-Statistiken, Setting-Merging
     """
     
     controller = ObjectProperty(None, allownone=True)
@@ -1143,6 +1156,141 @@ class EinstellungenWidget(MDScreen):
         else:
             Logger.error("Dialog-Service nicht verfügbar")
     
+    # Element-Statistiken
+    def zeige_element_statistiken(self):
+        """Zeigt Element-Statistiken in einem Dialog an"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_element_statistics_dialog()
+        else:
+            Logger.error("Dialog-Service nicht verfügbar")
+    
+    # Setting-Wechsel mit Merge-Dialog
+    def open_load_setting_popup(self):
+        """Öffnet erweiterten Setting-Dialog mit Merge-Option"""
+        if not self.charakter_controller or not self.charakter_controller.charakter:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Kein Charakter verfügbar")
+            return
+        
+        # Verfügbare Settings abrufen
+        available_settings = []
+        try:
+            char = self.charakter_controller.charakter
+            settings = char.custom_element_manager.get_all_settings()
+            current_setting = char.active_setting_name
+            
+            for setting_name in settings:
+                if setting_name != current_setting:
+                    available_settings.append((setting_name, setting_name))
+            
+            if not available_settings:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_info_dialog(
+                        "Keine anderen Settings verfügbar.\n"
+                        f"Aktuelles Setting: {current_setting}",
+                        "Settings"
+                    )
+                return
+            
+            # Setting-Auswahl-Dialog
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_choice_dialog(
+                    f"Wähle ein Setting zum Laden:\n(Aktuell: {current_setting})",
+                    "Setting laden",
+                    available_settings,
+                    self._on_setting_selected
+                )
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Setting-Dialog: {str(e)}")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Fehler beim Laden der Settings.")
+    
+    def _on_setting_selected(self, setting_name):
+        """Verarbeitet die Setting-Auswahl"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_setting_merge_dialog(
+                setting_name,
+                lambda choice: self._on_merge_choice(setting_name, choice)
+            )
+    
+    def _on_merge_choice(self, setting_name, merge_choice):
+        """Verarbeitet die Merge-Wahl und wechselt das Setting"""
+        if not self.charakter_controller or not self.charakter_controller.charakter:
+            return
+        
+        try:
+            char = self.charakter_controller.charakter
+            merge_elements = (merge_choice == "merge")
+            
+            # Progress Dialog anzeigen
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                progress_key = dialog_service.show_progress_dialog(
+                    "Setting wird gewechselt...",
+                    f"Lade Setting '{setting_name}' ({'Merge' if merge_elements else 'Ersetzung'})"
+                )
+            
+            # Setting wechseln
+            success = char.change_active_setting(setting_name, merge_elements=merge_elements)
+            
+            # Progress Dialog schließen
+            if dialog_service:
+                dialog_service.dismiss_dialog(progress_key)
+            
+            if success:
+                # Statistiken nach dem Wechsel
+                stats = self._get_element_statistics()
+                
+                message = f"Setting '{setting_name}' erfolgreich geladen!\n\n"
+                message += f"Verfügbare Elemente:\n"
+                message += f"• Handicaps: {stats['handicaps_total']} ({stats['handicaps_selected']} ausgewählt)\n"
+                message += f"• Talente: {stats['talente_total']} ({stats['talente_selected']} ausgewählt)\n"
+                message += f"• Mächte: {stats['maechte_total']} ({stats['maechte_selected']} ausgewählt)\n"
+                message += f"• Völker: {stats['voelker_total']} ({stats['voelker_selected']} ausgewählt)\n"
+                
+                if dialog_service:
+                    dialog_service.show_success_dialog(message, "Setting gewechselt")
+                
+                # UI aktualisieren
+                self._trigger_ui_refresh()
+                
+            else:
+                if dialog_service:
+                    dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{setting_name}'.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Setting-Wechsel: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Kritischer Fehler beim Setting-Wechsel: {str(e)}")
+    
+    def _get_element_statistics(self):
+        """Gibt aktuelle Element-Statistiken zurück"""
+        if not self.charakter_controller or not self.charakter_controller.charakter:
+            return {}
+        
+        char = self.charakter_controller.charakter
+        return {
+            'handicaps_total': len(char.handicaps),
+            'handicaps_selected': len(char.selected_handicaps),
+            'talente_total': len(char.talente),
+            'talente_selected': len(char.selected_talente),
+            'maechte_total': len(char.maechte),
+            'maechte_selected': len(char.selected_maechte),
+            'voelker_total': len(char.voelker),
+            'voelker_selected': sum(1 for selected in char.voelker_selected.values() if selected),
+            'ausruestung_total': len(char.ausruestung),
+            'fertigkeiten_total': len(char.fertigkeiten),
+            'active_setting': char.active_setting_name
+        }
+    
     # PDF-Erstellung mit vollständigen Optionen
     def erzeuge_charakterbogen_pdf(self):
         """Startet den PDF-Erstellungsprozess mit Optionen"""
@@ -1319,11 +1467,6 @@ class EinstellungenWidget(MDScreen):
         dialog_service = service_container.get_dialog_service()
         if dialog_service:
             dialog_service.open_add_setting_popup()
-    
-    def open_load_setting_popup(self):
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
-            dialog_service.open_load_setting_popup()
     
     def open_delete_setting_popup(self):
         dialog_service = service_container.get_dialog_service()
