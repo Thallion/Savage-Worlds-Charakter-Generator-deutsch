@@ -12,11 +12,16 @@ from kivy.logger import Logger
 from kivy.properties import ObjectProperty
 from kivymd.uix.screen import MDScreen
 
-# Manager Imports
-from .theme_manager import ThemeManager
-from .pdf_manager import PDFManager
-from .element_dialog_manager import ElementDialogManager
-from .statistics_manager import StatisticsManager
+# Manager Imports (falls vorhanden)
+try:
+    from .theme_manager import ThemeManager
+    from .pdf_manager import PDFManager
+    from .element_dialog_manager import ElementDialogManager
+    from .statistics_manager import StatisticsManager
+    MANAGERS_AVAILABLE = True
+except ImportError:
+    Logger.warning("Manager-Klassen nicht verfügbar, verwende vereinfachte Implementation")
+    MANAGERS_AVAILABLE = False
 
 # Service Container Import
 from services.service_container import service_container
@@ -43,7 +48,8 @@ class EinstellungenWidget(MDScreen):
         super().__init__(**kwargs)
         
         # Manager initialisieren
-        self._initialize_managers()
+        if MANAGERS_AVAILABLE:
+            self._initialize_managers()
         
         # Event-Handler registrieren
         self._register_event_handlers()
@@ -119,14 +125,16 @@ class EinstellungenWidget(MDScreen):
     def _post_init(self, dt):
         """Post-Initialisierung nach dem UI-Aufbau"""
         try:
-            # Theme initialisieren
-            self.theme_manager.initialize_theme()
+            # Theme initialisieren (falls Manager verfügbar)
+            if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+                self.theme_manager.initialize_theme()
             
             # UI-Felder mit aktuellen Werten aktualisieren
             self._update_ui_fields()
             
-            # Element-Statistiken anzeigen
-            self.statistics_manager.update_element_statistics_ui()
+            # Element-Statistiken anzeigen (falls Manager verfügbar)
+            if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+                self.statistics_manager.update_element_statistics_ui()
             
             # Event senden
             event_service = service_container.get_event_service()
@@ -142,28 +150,55 @@ class EinstellungenWidget(MDScreen):
         """Wird aufgerufen, wenn ein neuer Charakter erstellt wurde"""
         Logger.info(f"Neuer Charakter erstellt: {data}")
         self._update_ui_fields()
-        self.statistics_manager.update_element_statistics_ui()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.update_element_statistics_ui()
     
     def _on_character_loaded(self, data):
         """Wird aufgerufen, wenn ein Charakter geladen wurde"""
         Logger.info(f"Charakter geladen: {data}")
         self._update_ui_fields()
-        self.statistics_manager.update_element_statistics_ui()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.update_element_statistics_ui()
     
     def _on_theme_changed(self, data):
         """Wird aufgerufen, wenn das Theme geändert wurde"""
         Logger.info(f"Theme geändert: {data}")
-        self.theme_manager.update_color_chips()
+        if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+            self.theme_manager.update_color_chips()
     
     # ==================== THEME MANAGEMENT ====================
     
     def switch_theme_style(self, style):
-        """Delegiert an ThemeManager"""
-        self.theme_manager.switch_theme_style(style)
+        """Delegiert an ThemeManager oder direkt an App"""
+        try:
+            Logger.info(f"Theme-Stil-Wechsel angefordert: {style}")
+            if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+                self.theme_manager.switch_theme_style(style)
+            else:
+                # Direkte App-Integration
+                if self.app and hasattr(self.app, 'update_theme'):
+                    self.app.update_theme(theme_style=style)
+                    Logger.info(f"Theme-Stil gewechselt zu: {style}")
+                else:
+                    Logger.error("App oder update_theme Methode nicht verfügbar")
+        except Exception as e:
+            Logger.error(f"Fehler beim Theme-Wechsel: {str(e)}")
     
     def on_color_selected(self, color_name):
-        """Delegiert an ThemeManager"""
-        self.theme_manager.on_color_selected(color_name)
+        """Delegiert an ThemeManager oder direkt an App"""
+        try:
+            Logger.info(f"Farb-Wechsel angefordert: {color_name}")
+            if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+                self.theme_manager.on_color_selected(color_name)
+            else:
+                # Direkte App-Integration
+                if self.app and hasattr(self.app, 'update_theme'):
+                    self.app.update_theme(primary_palette=color_name)
+                    Logger.info(f"Primärfarbe gewechselt zu: {color_name}")
+                else:
+                    Logger.error("App oder update_theme Methode nicht verfügbar")
+        except Exception as e:
+            Logger.error(f"Fehler beim Farb-Wechsel: {str(e)}")
     
     # ==================== CHARAKTER MANAGEMENT ====================
     
@@ -356,87 +391,156 @@ class EinstellungenWidget(MDScreen):
     
     def erzeuge_charakterbogen_pdf(self):
         """Delegiert an PDFManager"""
-        self.pdf_manager.create_character_pdf()
+        if MANAGERS_AVAILABLE and hasattr(self, 'pdf_manager'):
+            self.pdf_manager.create_character_pdf()
+        else:
+            Logger.info("PDF-Erstellung - Manager nicht verfügbar")
     
     def zeige_statblock(self):
         """Delegiert an StatisticsManager"""
-        self.statistics_manager.show_statblock()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.show_statblock()
+        else:
+            Logger.info("Statblock anzeigen - Manager nicht verfügbar")
     
     def zeige_element_statistiken(self):
         """Delegiert an StatisticsManager"""
-        self.statistics_manager.show_element_statistics()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.show_element_statistics()
+        else:
+            Logger.info("Element-Statistiken anzeigen - Manager nicht verfügbar")
     
     # ==================== ELEMENT DIALOGE ====================
     
     # Setting-Dialoge
     def open_add_setting_popup(self):
-        self.element_dialog_manager.open_add_setting_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_setting_popup()
+        else:
+            Logger.info("Setting hinzufügen - Manager nicht verfügbar")
     
     def open_delete_setting_popup(self):
-        self.element_dialog_manager.open_delete_setting_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_setting_popup()
+        else:
+            Logger.info("Setting löschen - Manager nicht verfügbar")
     
     # Volk-Dialoge
     def open_add_volk_dialog(self):
-        self.element_dialog_manager.open_add_volk_dialog()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_volk_dialog()
+        else:
+            Logger.info("Volk hinzufügen - Manager nicht verfügbar")
     
     def open_delete_volk_dialog(self):
-        self.element_dialog_manager.open_delete_volk_dialog()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_volk_dialog()
+        else:
+            Logger.info("Volk löschen - Manager nicht verfügbar")
     
     # Talent-Dialoge
     def open_add_talent_popup(self):
-        self.element_dialog_manager.open_add_talent_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_talent_popup()
+        else:
+            Logger.info("Talent hinzufügen - Manager nicht verfügbar")
     
     def open_delete_talent_popup(self):
-        self.element_dialog_manager.open_delete_talent_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_talent_popup()
+        else:
+            Logger.info("Talent löschen - Manager nicht verfügbar")
     
     # Macht-Dialoge
     def open_add_macht_popup(self):
-        self.element_dialog_manager.open_add_macht_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_macht_popup()
+        else:
+            Logger.info("Macht hinzufügen - Manager nicht verfügbar")
     
     def open_delete_macht_popup(self):
-        self.element_dialog_manager.open_delete_macht_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_macht_popup()
+        else:
+            Logger.info("Macht löschen - Manager nicht verfügbar")
     
     # Fertigkeit-Dialoge
     def open_add_fertigkeit_popup(self):
-        self.element_dialog_manager.open_add_fertigkeit_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_fertigkeit_popup()
+        else:
+            Logger.info("Fertigkeit hinzufügen - Manager nicht verfügbar")
     
     def open_delete_fertigkeit_popup(self):
-        self.element_dialog_manager.open_delete_fertigkeit_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_fertigkeit_popup()
+        else:
+            Logger.info("Fertigkeit löschen - Manager nicht verfügbar")
     
     # Handicap-Dialoge
     def open_add_handicap_popup(self):
-        self.element_dialog_manager.open_add_handicap_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_handicap_popup()
+        else:
+            Logger.info("Handicap hinzufügen - Manager nicht verfügbar")
     
     def open_delete_handicap_popup(self):
-        self.element_dialog_manager.open_delete_handicap_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_handicap_popup()
+        else:
+            Logger.info("Handicap löschen - Manager nicht verfügbar")
     
     # Ausrüstung-Dialoge
     def open_add_ausruestung_popup(self):
-        self.element_dialog_manager.open_add_ausruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_ausruestung_popup()
+        else:
+            Logger.info("Ausrüstung hinzufügen - Manager nicht verfügbar")
     
     def open_delete_ausruestung_popup(self):
-        self.element_dialog_manager.open_delete_ausruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_ausruestung_popup()
+        else:
+            Logger.info("Ausrüstung löschen - Manager nicht verfügbar")
     
     # Waffen-Dialoge
     def open_add_waffe_popup(self):
-        self.element_dialog_manager.open_add_waffe_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_waffe_popup()
+        else:
+            Logger.info("Waffe hinzufügen - Manager nicht verfügbar")
     
     def open_delete_waffe_popup(self):
-        self.element_dialog_manager.open_delete_waffe_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_waffe_popup()
+        else:
+            Logger.info("Waffe löschen - Manager nicht verfügbar")
     
     # Rüstung-Dialoge
     def open_add_ruestung_popup(self):
-        self.element_dialog_manager.open_add_ruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_ruestung_popup()
+        else:
+            Logger.info("Rüstung hinzufügen - Manager nicht verfügbar")
     
     def open_delete_ruestung_popup(self):
-        self.element_dialog_manager.open_delete_ruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_ruestung_popup()
+        else:
+            Logger.info("Rüstung löschen - Manager nicht verfügbar")
     
     # Schild-Dialoge
     def open_add_schild_popup(self):
-        self.element_dialog_manager.open_add_schild_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_schild_popup()
+        else:
+            Logger.info("Schild hinzufügen - Manager nicht verfügbar")
     
     def open_delete_schild_popup(self):
-        self.element_dialog_manager.open_delete_schild_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_schild_popup()
+        else:
+            Logger.info("Schild löschen - Manager nicht verfügbar")
     
     # ==================== UI UPDATES ====================
     
@@ -478,7 +582,10 @@ class EinstellungenWidget(MDScreen):
             
             # Aktualisiere eigene UI-Felder
             Clock.schedule_once(lambda dt: self._update_ui_fields(), 0.1)
-            Clock.schedule_once(lambda dt: self.statistics_manager.update_element_statistics_ui(), 0.1)
+            
+            # Element-Statistiken aktualisieren (falls Manager verfügbar)
+            if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+                Clock.schedule_once(lambda dt: self.statistics_manager.update_element_statistics_ui(), 0.1)
             
         except Exception as e:
             Logger.error(f"Fehler bei UI-Refresh: {str(e)}")
@@ -486,7 +593,8 @@ class EinstellungenWidget(MDScreen):
     def aktualisiere_ui(self):
         """Öffentliche Methode zur UI-Aktualisierung"""
         self._update_ui_fields()
-        self.statistics_manager.update_element_statistics_ui()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.update_element_statistics_ui()
     
     def cleanup(self):
         """Bereinigt das Widget beim Beenden"""
@@ -551,7 +659,6 @@ kv_string = '''
                                 size_hint: None, None
                                 size: dp(100), dp(40)
                                 on_release: root.switch_theme_style('Light')
-                                selected: app.theme_cls.theme_style == 'Light'
 
                                 MDSegmentButtonLabel:
                                     text: "Hell"
@@ -560,7 +667,6 @@ kv_string = '''
                                 size_hint: None, None
                                 size: dp(100), dp(40)
                                 on_release: root.switch_theme_style('Dark')
-                                selected: app.theme_cls.theme_style == 'Dark'
 
                                 MDSegmentButtonLabel:
                                     text: "Dunkel"
@@ -580,12 +686,76 @@ kv_string = '''
 
                         MDGridLayout:
                             id: colors_box
-                            cols: 3
+                            cols: 4
                             size_hint_y: None
                             height: self.minimum_height
                             spacing: dp(8)
                             padding: 0
                             pos_hint: {"center_y": .5}
+                            
+                            # Farb-Chips - nur gültige KivyMD-Paletten
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Orange")
+                                MDChipText:
+                                    text: "Orange"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Blue")
+                                MDChipText:
+                                    text: "Blau"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Red")
+                                MDChipText:
+                                    text: "Rot"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Green")
+                                MDChipText:
+                                    text: "Grün"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Purple")
+                                MDChipText:
+                                    text: "Lila"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Teal")
+                                MDChipText:
+                                    text: "Türkis"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Amber")
+                                MDChipText:
+                                    text: "Bernstein"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Brown")
+                                MDChipText:
+                                    text: "Braun"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Gray")
+                                MDChipText:
+                                    text: "Grau"
 
             # Charakter-Einstellungen Card
             MDCard:
@@ -868,7 +1038,7 @@ kv_string = '''
                             MDButtonText:
                                 text: "Element-Statistiken"
 
-            # Spielelemente Card - Vollständige Version
+            # Spielelemente Card - Kompakte Version
             MDCard:
                 padding: dp(16)
                 spacing: dp(16)
@@ -895,338 +1065,34 @@ kv_string = '''
                         height: self.minimum_height
                         spacing: dp(4)
 
-                    # Volk
-                    MDBoxLayout:
-                        orientation: 'horizontal'
+                    # Vereinfachte Element-Verwaltung - nur wichtigste Buttons
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(8)
                         size_hint_y: None
                         height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "account-group"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Volk"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
 
                         MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_volk_dialog()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_volk_dialog()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Fertigkeiten
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "fencing"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Fertigkeiten"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_fertigkeit_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_fertigkeit_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Handicaps
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "account-alert"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Handicaps"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_handicap_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_handicap_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Talente
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "star-circle"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Talente"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
+                            style: "elevated"
+                            size_hint_x: 1
                             on_release: root.open_add_talent_popup()
-
+                            
                             MDButtonIcon:
-                                icon: "plus"
+                                icon: "star-circle"
+                            
+                            MDButtonText:
+                                text: "Talente"
 
                         MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_talent_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Mächte
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "creation-outline"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Mächte"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
+                            style: "elevated"
+                            size_hint_x: 1
                             on_release: root.open_add_macht_popup()
-
+                            
                             MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_macht_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Ausrüstung
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "sack"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Ausrüstung"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_ausruestung_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_ausruestung_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Rüstung
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "shield"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Rüstung"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_ruestung_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_ruestung_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Waffen
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "sword"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Waffe"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_waffe_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_waffe_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Schild
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "shield"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Schild"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_schild_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_schild_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
+                                icon: "creation-outline"
+                            
+                            MDButtonText:
+                                text: "Mächte"
 '''
 
 # KV-Layout laden
