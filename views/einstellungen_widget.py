@@ -2,6 +2,7 @@
 """
 Refactored Einstellungen Widget - Nur UI-Logik und Delegation
 Verwendet Manager-Klassen für verschiedene Funktionalitätsbereiche
+KORRIGIERT: Setting-Merge-Dialog wird jetzt richtig verwendet
 """
 
 import os
@@ -267,7 +268,7 @@ class EinstellungenWidget(MDScreen):
     # ==================== SETTING MANAGEMENT ====================
     
     def open_setting_switch_options(self):
-        """Vereinfachte Setting-Wechsel-Logik"""
+        """KORRIGIERT: Setting-Wechsel mit Merge-Dialog"""
         if not self.charakter_controller or not self.charakter_controller.charakter:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
@@ -288,7 +289,7 @@ class EinstellungenWidget(MDScreen):
                 )
             return
         
-        # Einfache Setting-Auswahl
+        # Setting-Auswahl
         setting_choices = []
         for setting_name in available_settings:
             if setting_name != current_setting:
@@ -305,7 +306,7 @@ class EinstellungenWidget(MDScreen):
             )
     
     def _on_setting_choice_made(self, chosen_setting):
-        """Verarbeitet die Setting-Auswahl"""
+        """KORRIGIERT: Verarbeitet die Setting-Auswahl mit Merge-Dialog"""
         if not chosen_setting or not self.charakter_controller or not self.charakter_controller.charakter:
             return
         
@@ -313,18 +314,44 @@ class EinstellungenWidget(MDScreen):
         if chosen_setting == char.active_setting_name:
             return
         
-        # Einfacher Setting-Wechsel mit Merge (Standard)
-        success = char.change_active_setting(chosen_setting, merge_elements=True)
+        # HIER IST DIE KORREKTUR: Jetzt wird der Setting-Merge-Dialog verwendet
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            # Verwende die show_setting_merge_dialog Methode
+            dialog_service.show_setting_merge_dialog(
+                chosen_setting,
+                lambda merge_choice: self._apply_setting_change(chosen_setting, merge_choice)
+            )
+    
+    def _apply_setting_change(self, setting_name, merge_choice):
+        """
+        Wendet den Setting-Wechsel mit der gewählten Merge-Option an
+        
+        Args:
+            setting_name (str): Name des neuen Settings
+            merge_choice (str): 'merge' oder 'replace'
+        """
+        if not self.charakter_controller or not self.charakter_controller.charakter:
+            return
+        
+        char = self.charakter_controller.charakter
+        merge_elements = (merge_choice == "merge")
+        
+        Logger.info(f"Setting-Wechsel zu '{setting_name}' mit Merge-Option: {merge_elements}")
+        
+        # Setting wechseln mit der gewählten Option
+        success = char.change_active_setting(setting_name, merge_elements=merge_elements)
         
         dialog_service = service_container.get_dialog_service()
         if success and dialog_service:
+            merge_text = "zusammengeführt" if merge_elements else "komplett ersetzt"
             dialog_service.show_success_dialog(
-                f"Setting erfolgreich zu '{chosen_setting}' gewechselt.",
+                f"Setting erfolgreich zu '{setting_name}' gewechselt.\nElemente wurden {merge_text}.",
                 "Setting gewechselt"
             )
             self._trigger_ui_refresh()
         elif dialog_service:
-            dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{chosen_setting}'.")
+            dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{setting_name}'.")
     
     # ==================== CHARAKTERWERTE UPDATES ====================
     
@@ -417,130 +444,210 @@ class EinstellungenWidget(MDScreen):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_setting_popup()
         else:
-            Logger.info("Setting hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_setting_popup()
+            else:
+                Logger.info("Setting hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_setting_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_setting_popup()
         else:
-            Logger.info("Setting löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_setting_popup()
+            else:
+                Logger.info("Setting löschen - Manager und Service nicht verfügbar")
     
     # Volk-Dialoge
     def open_add_volk_dialog(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_volk_dialog()
         else:
-            Logger.info("Volk hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_volk_dialog()
+            else:
+                Logger.info("Volk hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_volk_dialog(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_volk_dialog()
         else:
-            Logger.info("Volk löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_volk_dialog()
+            else:
+                Logger.info("Volk löschen - Manager und Service nicht verfügbar")
     
     # Talent-Dialoge
     def open_add_talent_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_talent_popup()
         else:
-            Logger.info("Talent hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_talent_popup()
+            else:
+                Logger.info("Talent hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_talent_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_talent_popup()
         else:
-            Logger.info("Talent löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_talent_popup()
+            else:
+                Logger.info("Talent löschen - Manager und Service nicht verfügbar")
     
     # Macht-Dialoge
     def open_add_macht_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_macht_popup()
         else:
-            Logger.info("Macht hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_macht_popup()
+            else:
+                Logger.info("Macht hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_macht_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_macht_popup()
         else:
-            Logger.info("Macht löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_macht_popup()
+            else:
+                Logger.info("Macht löschen - Manager und Service nicht verfügbar")
     
     # Fertigkeit-Dialoge
     def open_add_fertigkeit_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_fertigkeit_popup()
         else:
-            Logger.info("Fertigkeit hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_fertigkeit_popup()
+            else:
+                Logger.info("Fertigkeit hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_fertigkeit_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_fertigkeit_popup()
         else:
-            Logger.info("Fertigkeit löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_fertigkeit_popup()
+            else:
+                Logger.info("Fertigkeit löschen - Manager und Service nicht verfügbar")
     
     # Handicap-Dialoge
     def open_add_handicap_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_handicap_popup()
         else:
-            Logger.info("Handicap hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_handicap_popup()
+            else:
+                Logger.info("Handicap hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_handicap_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_handicap_popup()
         else:
-            Logger.info("Handicap löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_handicap_popup()
+            else:
+                Logger.info("Handicap löschen - Manager und Service nicht verfügbar")
     
     # Ausrüstung-Dialoge
     def open_add_ausruestung_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_ausruestung_popup()
         else:
-            Logger.info("Ausrüstung hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_ausruestung_popup()
+            else:
+                Logger.info("Ausrüstung hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_ausruestung_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_ausruestung_popup()
         else:
-            Logger.info("Ausrüstung löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_ausruestung_popup()
+            else:
+                Logger.info("Ausrüstung löschen - Manager und Service nicht verfügbar")
     
     # Waffen-Dialoge
     def open_add_waffe_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_waffe_popup()
         else:
-            Logger.info("Waffe hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_waffe_popup()
+            else:
+                Logger.info("Waffe hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_waffe_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_waffe_popup()
         else:
-            Logger.info("Waffe löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_waffe_popup()
+            else:
+                Logger.info("Waffe löschen - Manager und Service nicht verfügbar")
     
     # Rüstung-Dialoge
     def open_add_ruestung_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_ruestung_popup()
         else:
-            Logger.info("Rüstung hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_ruestung_popup()
+            else:
+                Logger.info("Rüstung hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_ruestung_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_ruestung_popup()
         else:
-            Logger.info("Rüstung löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_ruestung_popup()
+            else:
+                Logger.info("Rüstung löschen - Manager und Service nicht verfügbar")
     
     # Schild-Dialoge
     def open_add_schild_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_add_schild_popup()
         else:
-            Logger.info("Schild hinzufügen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_schild_popup()
+            else:
+                Logger.info("Schild hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_schild_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
             self.element_dialog_manager.open_delete_schild_popup()
         else:
-            Logger.info("Schild löschen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_schild_popup()
+            else:
+                Logger.info("Schild löschen - Manager und Service nicht verfügbar")
     
     # ==================== UI UPDATES ====================
     
@@ -1038,7 +1145,7 @@ kv_string = '''
                             MDButtonText:
                                 text: "Element-Statistiken"
 
-            # Spielelemente Card - Kompakte Version
+            # Spielelemente Card - Vollständige Version
             MDCard:
                 padding: dp(16)
                 spacing: dp(16)
@@ -1065,34 +1172,324 @@ kv_string = '''
                         height: self.minimum_height
                         spacing: dp(4)
 
-                    # Vereinfachte Element-Verwaltung - nur wichtigste Buttons
-                    MDGridLayout:
-                        cols: 2
-                        spacing: dp(8)
+                    # Völker-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(48)
+                        height: self.minimum_height
+                        spacing: dp(8)
 
-                        MDButton:
-                            style: "elevated"
-                            size_hint_x: 1
-                            on_release: root.open_add_talent_popup()
-                            
-                            MDButtonIcon:
-                                icon: "star-circle"
-                            
-                            MDButtonText:
-                                text: "Talente"
+                        MDLabel:
+                            text: "Völker"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
 
-                        MDButton:
-                            style: "elevated"
-                            size_hint_x: 1
-                            on_release: root.open_add_macht_popup()
-                            
-                            MDButtonIcon:
-                                icon: "creation-outline"
-                            
-                            MDButtonText:
-                                text: "Mächte"
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_volk_dialog()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_volk_dialog()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Talente-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Talente"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_talent_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_talent_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Mächte-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Mächte"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_macht_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_macht_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Fertigkeiten-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Fertigkeiten"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_fertigkeit_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_fertigkeit_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Handicaps-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Handicaps"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_handicap_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_handicap_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Ausrüstung-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Ausrüstung"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 4
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_ausruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "package-variant"
+                                
+                                MDButtonText:
+                                    text: "Allgemein"
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_waffe_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "sword"
+                                
+                                MDButtonText:
+                                    text: "Waffen"
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_ruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "shield"
+                                
+                                MDButtonText:
+                                    text: "Rüstungen"
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_schild_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "shield-outline"
+                                
+                                MDButtonText:
+                                    text: "Schilde"
+
+                        # Lösch-Buttons für Ausrüstung
+                        MDGridLayout:
+                            cols: 4
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_ausruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_waffe_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_ruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_schild_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 '''
 
 # KV-Layout laden

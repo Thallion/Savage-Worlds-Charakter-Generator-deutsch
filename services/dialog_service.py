@@ -3,6 +3,7 @@
 Service für Dialog-Management und UI-Feedback
 ERWEITERT: Zusätzliche Dialog-Typen, Element-Merging, Statistiken und Statblock-Funktionalität
 REPARIERT: Element-Statistiken funktionieren jetzt korrekt
+KORRIGIERT: MDButton width=None Fehler für KivyMD 2.0.1
 """
 
 from kivy.logger import Logger
@@ -338,12 +339,23 @@ class DialogService:
         
         # Buttons für jede Auswahl erstellen
         for text, value in choices:
-            choice_button = MDButton(
-                style="elevated",
-                size_hint_x=1 if len(choices) > 3 else None,
-                width=dp(120) if len(choices) <= 3 else None,
-                on_release=lambda x, v=value: handle_choice(v)
-            )
+            # KORREKTUR: Korrekte Button-Erstellung für KivyMD 2.0.1
+            if len(choices) > 3:
+                # Vertikale Anordnung - size_hint_x verwenden
+                choice_button = MDButton(
+                    style="elevated",
+                    size_hint_x=1,
+                    on_release=lambda x, v=value: handle_choice(v)
+                )
+            else:
+                # Horizontale Anordnung - feste Breite verwenden
+                choice_button = MDButton(
+                    style="elevated",
+                    size_hint_x=None,
+                    width=dp(120),
+                    on_release=lambda x, v=value: handle_choice(v)
+                )
+            
             choice_button.add_widget(MDButtonText(text=text))
             button_container.add_widget(choice_button)
         

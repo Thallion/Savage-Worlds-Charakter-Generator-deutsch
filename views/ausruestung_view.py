@@ -452,7 +452,7 @@ class AusruestungWidget(MDBoxLayout):
             
             for name, item in alle_ausruestung.items():
                 # Debug-Ausgabe für jedes Item
-                Logger.debug(f"Verarbeite Item: {name}, Typ: {type(item).__name__}")
+                #Logger.debug(f"Verarbeite Item: {name}, Typ: {type(item).__name__}")
                 
                 # Filter: Nur vorhandene Gegenstände
                 if self.only_owned_items and getattr(item, 'menge', 0) <= 0:
