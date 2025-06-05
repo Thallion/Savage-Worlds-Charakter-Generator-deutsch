@@ -1,5 +1,6 @@
 """
 main.py: SW_Charakter_GeneratorApp mit KivyMD Tabs, Carousel, GenerationPointsBar und Logger.
+KORRIGIERT: Service Container Timing und KV-Datei-Loading
 """
 
 import sys
@@ -591,11 +592,13 @@ class SW_Charakter_GeneratorApp(MDApp):
         super().__init__(**kwargs)
         Logger.info("Init SW_Charakter_GeneratorApp")
         
-        # Config Service früh initialisieren für Theme-Laden
-        self._early_config_service = ConfigService()
-        
+        # KORRIGIERT: Frühe Controller-Initialisierung für Service Container
         self.charakter = Charakter()
         self.controller = CharakterController()
+        
+        # Service Container früh initialisieren
+        service_container.initialize(self.controller)
+        Logger.info("Service Container früh initialisiert")
         
         # Deine Icons + Tab-Texte + zugehörige Screens
         self.tab_definitions = [
@@ -612,7 +615,7 @@ class SW_Charakter_GeneratorApp(MDApp):
         ]
 
     def build(self):
-        # Theme aus Config laden
+        # KORRIGIERT: Theme aus Config laden (Service Container ist bereits initialisiert)
         self.load_theme_from_config()
         return Builder.load_string(kv)
 
@@ -621,14 +624,9 @@ class SW_Charakter_GeneratorApp(MDApp):
         try:
             Logger.info("=== Theme-Laden gestartet ===")
             
-            # Zuerst versuchen, Config Service aus Service Container zu holen
+            # Config Service aus Service Container holen
             from services.service_container import get_config_service
             config_service = get_config_service()
-            
-            # Falls Service Container noch nicht initialisiert, frühe Instanz verwenden
-            if not config_service and hasattr(self, '_early_config_service'):
-                config_service = self._early_config_service
-                Logger.info("Verwende frühe ConfigService-Instanz für Theme-Laden")
             
             if not config_service:
                 Logger.warning("ConfigService nicht verfügbar, verwende Standard-Theme")
@@ -737,10 +735,18 @@ class SW_Charakter_GeneratorApp(MDApp):
             
             # Änderungen in der Konfiguration speichern
             if changes and config_service:
+                Logger.info(f"Speichere Theme-Änderungen: {changes}")
                 config_service.update_multiple(changes, save_immediately=True)
                 Logger.info(f"Theme-Einstellungen in Konfiguration gespeichert: {changes}")
+                
+                # Debug: Verifikation der gespeicherten Werte
+                saved_style = config_service.get('theme_style', 'Unknown')
+                saved_palette = config_service.get('primary_palette', 'Unknown')
+                Logger.info(f"Verifikation - Gespeicherte Werte: Style={saved_style}, Palette={saved_palette}")
             elif not config_service:
                 Logger.warning("ConfigService nicht verfügbar, Theme-Änderungen werden nicht gespeichert")
+            elif not changes:
+                Logger.debug("Keine Theme-Änderungen zu speichern")
             
             Logger.info(f"=== Theme-Update abgeschlossen ===")
                 
@@ -758,17 +764,8 @@ class SW_Charakter_GeneratorApp(MDApp):
     def on_start(self):
         Logger.info("=== App-Start gestartet ===")
         
-        # Service Container mit Controller initialisieren (muss vor Theme-Laden passieren)
-        service_container.initialize(self.controller)
-        
-        # Frühe Config Service Instanz bereinigen, da Service Container jetzt verfügbar ist
-        if hasattr(self, '_early_config_service'):
-            delattr(self, '_early_config_service')
-            Logger.debug("Frühe ConfigService-Instanz bereinigt")
-        
-        # Theme nach Service-Initialisierung nochmal laden/überprüfen
-        Logger.info("Theme nach Service-Initialisierung neu laden...")
-        self.load_theme_from_config()
+        # KORRIGIERT: Service Container ist bereits in __init__ initialisiert
+        Logger.info("Service Container bereits initialisiert")
         
         # Fenster maximieren
         Window.maximize()

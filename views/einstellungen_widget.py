@@ -4,6 +4,7 @@ Refactored Einstellungen Widget - Nur UI-Logik und Delegation
 Verwendet Manager-Klassen für verschiedene Funktionalitätsbereiche
 KORRIGIERT: Setting-Merge-Dialog wird jetzt richtig verwendet
 KORRIGIERT: Dateiname-Generierung für Speichern/Laden
+KORRIGIERT: Theme-Verwaltung mit Validierung und Fallback
 """
 
 import os
@@ -169,35 +170,50 @@ class EinstellungenWidget(MDScreen):
         if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
             self.theme_manager.update_color_chips()
     
-    # ==================== THEME MANAGEMENT ====================
+    # ==================== THEME MANAGEMENT - KORRIGIERT ====================
     
     def switch_theme_style(self, style):
-        """Delegiert an ThemeManager oder direkt an App"""
+        """Delegiert an ThemeManager oder direkt an App - KORRIGIERT mit Validierung"""
         try:
             Logger.info(f"Theme-Stil-Wechsel angefordert: {style}")
             if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
                 self.theme_manager.switch_theme_style(style)
             else:
-                # Direkte App-Integration
+                # Direkte App-Integration mit Validierung
                 if self.app and hasattr(self.app, 'update_theme'):
-                    self.app.update_theme(theme_style=style)
-                    Logger.info(f"Theme-Stil gewechselt zu: {style}")
+                    if style in ['Light', 'Dark']:
+                        self.app.update_theme(theme_style=style)
+                        Logger.info(f"Theme-Stil gewechselt zu: {style}")
+                    else:
+                        Logger.warning(f"Ungültiger Theme-Stil: {style}")
                 else:
                     Logger.error("App oder update_theme Methode nicht verfügbar")
         except Exception as e:
             Logger.error(f"Fehler beim Theme-Wechsel: {str(e)}")
     
     def on_color_selected(self, color_name):
-        """Delegiert an ThemeManager oder direkt an App"""
+        """Delegiert an ThemeManager oder direkt an App - KORRIGIERT mit Palette-Validierung"""
         try:
             Logger.info(f"Farb-Wechsel angefordert: {color_name}")
+            
+            # Gültige KivyMD-Paletten definieren
+            valid_palettes = [
+                'Red', 'Pink', 'Purple', 'Deeprurple', 'Indigo', 'Blue', 
+                'Lightblue', 'Cyan', 'Teal', 'Green', 'Lightgreen', 'Lime',
+                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 'Gray', 'Bluegray'
+            ]
+            
             if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
                 self.theme_manager.on_color_selected(color_name)
             else:
-                # Direkte App-Integration
+                # Direkte App-Integration mit Validierung
                 if self.app and hasattr(self.app, 'update_theme'):
-                    self.app.update_theme(primary_palette=color_name)
-                    Logger.info(f"Primärfarbe gewechselt zu: {color_name}")
+                    if color_name in valid_palettes:
+                        self.app.update_theme(primary_palette=color_name)
+                        Logger.info(f"Primärfarbe gewechselt zu: {color_name}")
+                    else:
+                        Logger.warning(f"Ungültige Palette '{color_name}' ignoriert. Verwende 'Orange' als Fallback.")
+                        self.app.update_theme(primary_palette='Orange')
                 else:
                     Logger.error("App oder update_theme Methode nicht verfügbar")
         except Exception as e:
@@ -926,14 +942,22 @@ class EinstellungenWidget(MDScreen):
         if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
             self.statistics_manager.show_statblock()
         else:
-            Logger.info("Statblock anzeigen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_statblock_dialog()
+            else:
+                Logger.info("Statblock anzeigen - Manager und Service nicht verfügbar")
     
     def zeige_element_statistiken(self):
         """Delegiert an StatisticsManager"""
         if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
             self.statistics_manager.show_element_statistics()
         else:
-            Logger.info("Element-Statistiken anzeigen - Manager nicht verfügbar")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_element_statistics_dialog()
+            else:
+                Logger.info("Element-Statistiken anzeigen - Manager und Service nicht verfügbar")
     
     # ==================== ELEMENT DIALOGE ====================
     
