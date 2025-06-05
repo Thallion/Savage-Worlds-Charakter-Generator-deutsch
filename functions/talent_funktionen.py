@@ -212,7 +212,8 @@ def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
                 
                 return True
             else:
-                Logger.warning(f"Voraussetzungen für Talent '{talent_name_key}' nicht erfüllt.")
+                pass
+                #Logger.warning(f"Voraussetzungen für Talent '{talent_name_key}' nicht erfüllt.")
         else:
             Logger.warning(f"Talent '{talent_name_key}' ist bereits ausgewählt.")
     else:
@@ -234,7 +235,7 @@ def pruefe_voraussetzungen(charakter, talent):
     fehlermeldungen = []
     
     # Debug-Ausgabe der Voraussetzungen
-    Logger.debug(f"Prüfe Voraussetzungen für Talent '{talent.name}': {talent.voraussetzungen}")
+    #Logger.debug(f"Prüfe Voraussetzungen für Talent '{talent.name}': {talent.voraussetzungen}")
     
     for voraussetzung in talent.voraussetzungen:
         # Spezialfall: AH (Arkaner Hintergrund)
@@ -304,9 +305,9 @@ def pruefe_voraussetzungen(charakter, talent):
         if not talent_obj.ausgewaehlt:
             fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' muss ausgewählt sein.")
     
-    # Debug-Ausgabe der gefundenen Fehlermeldungen
-    if fehlermeldungen:
-        Logger.debug(f"Voraussetzungen für Talent '{talent.name}' nicht erfüllt: {fehlermeldungen}")
+    # # Debug-Ausgabe der gefundenen Fehlermeldungen
+    # if fehlermeldungen:
+    #     Logger.debug(f"Voraussetzungen für Talent '{talent.name}' nicht erfüllt: {fehlermeldungen}")
     
     return fehlermeldungen
 
@@ -457,7 +458,7 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
     }
     
     # Debug-Ausgaben für bessere Fehlerdiagnose
-    Logger.debug(f"Rangprüfung - Charakter-Rang: '{charakter.rang}', Talent-Rang: '{talent_rang}'")
+    #Logger.debug(f"Rangprüfung - Charakter-Rang: '{charakter.rang}', Talent-Rang: '{talent_rang}'")
     
     # Normalisieren und besser extrahieren
     # 1. Auf Kleinbuchstaben konvertieren
@@ -477,11 +478,11 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
         talent_rang_wert = rang_werte.get(talent_rang[0] if talent_rang else "a", 1)
     
     # Debug-Ausgaben der numerischen Werte
-    Logger.debug(f"Rangprüfung - Charakter-Wert: {charakter_rang_wert}, Talent-Wert: {talent_rang_wert}")
+    #Logger.debug(f"Rangprüfung - Charakter-Wert: {charakter_rang_wert}, Talent-Wert: {talent_rang_wert}")
     
     # Vergleich durchführen und Ergebnis loggen
     is_higher = talent_rang_wert > charakter_rang_wert
-    Logger.debug(f"Rangprüfung - Ergebnis: {is_higher} (Talent-Rang {'>' if is_higher else '<='} Charakter-Rang)")
+    #Logger.debug(f"Rangprüfung - Ergebnis: {is_higher} (Talent-Rang {'>' if is_higher else '<='} Charakter-Rang)")
     
     return is_higher
 

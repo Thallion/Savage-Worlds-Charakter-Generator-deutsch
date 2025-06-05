@@ -491,9 +491,9 @@ class AusruestungWidget(MDBoxLayout):
                 
                 filtered_items.append(item_data)
                 
-                # Debug-Ausgabe für gefilterte Items
-                if len(filtered_items) < 5:  # Nur die ersten paar für bessere Übersicht
-                    Logger.debug(f"Gefiltert: {item_data['name']}, Kategorie: {item_data['kategorie']}")
+                # # Debug-Ausgabe für gefilterte Items
+                # if len(filtered_items) < 5:  # Nur die ersten paar für bessere Übersicht
+                #     Logger.debug(f"Gefiltert: {item_data['name']}, Kategorie: {item_data['kategorie']}")
             
             # Sortieren
             self._sort_items(filtered_items)
@@ -617,7 +617,7 @@ class AusruestungWidget(MDBoxLayout):
             return
             
         # Debug-Ausgabe für Ausrüstung
-        self._debug_ausruestung()
+        #self._debug_ausruestung()
         
         # Ausrüstung abrufen und Kategorien aktualisieren
         alle_ausruestung = self.controller.charakter.ausruestung
