@@ -2,6 +2,7 @@
 """
 View-Komponente für Völker nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Völkern bereit.
+ERWEITERT: Mit Savage Pathfinder Attribut-Auswahl für Menschen
 """
 
 from kivy.lang import Builder
@@ -32,11 +33,14 @@ Logger = logging.getLogger(__name__)
 
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_TALENT_TEXT = 'Wähle ein freies Talent'
+DEFAULT_ATTRIBUT_TEXT = 'Wähle ein Attribut'
 DEFAULT_VOLK = 'Mensch'
 NO_TALENT_AVAILABLE_TEXT = 'Keine freien Talente verfügbar'
+NO_ATTRIBUT_AVAILABLE_TEXT = 'Keine Attribute verfügbar'
 CHECKBOX_WIDTH = 50
-VOLK_LABEL_WIDTH = 300
-TALENT_LABEL_WIDTH = dp(200)
+VOLK_LABEL_WIDTH = 250  # Reduziert, um Platz für Attribut-Auswahl zu schaffen
+TALENT_LABEL_WIDTH = dp(180)  # Reduziert
+ATTRIBUT_LABEL_WIDTH = dp(180)  # Neu hinzugefügt
 ROW_HEIGHT = 40
 INFO_ROW_HEIGHT = 25
 PADDING_LEFT = 40
@@ -84,10 +88,13 @@ class VoelkerWidget(MDBoxLayout):
     """
     Widget zur Anzeige und Verwaltung von Völkern.
     Hauptkomponente der View im MVC-Pattern.
+    ERWEITERT: Mit Savage Pathfinder Attribut-Auswahl
     """
     controller = ObjectProperty()
     aktuelles_talent = StringProperty(DEFAULT_TALENT_TEXT)
+    aktuelles_attribut = StringProperty(DEFAULT_ATTRIBUT_TEXT)
     mensch_freies_talent = StringProperty("")  # Property für das freie Talent des Menschen
+    mensch_erhoehtes_attribut = StringProperty("")  # Property für das erhöhte Attribut des Menschen
 
     def __init__(self, **kwargs):
         """Initialisiert das VoelkerWidget und setzt Grundkonfiguration."""
@@ -142,6 +149,59 @@ class VoelkerWidget(MDBoxLayout):
             frei_talente = [NO_TALENT_AVAILABLE_TEXT]
             
         return frei_talente
+
+    def _get_verfuegbare_attribute(self):
+        """
+        Gibt eine Liste der verfügbaren Attribute für die Erhöhung zurück.
+        Alle Standard-Attribute können von W4 auf W6 erhöht werden.
+        
+        Returns:
+            list: Liste der verfügbaren Attribute
+        """
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
+            return [NO_ATTRIBUT_AVAILABLE_TEXT]
+        
+        # Standard-Attribute für Savage Worlds
+        standard_attribute = [
+            "Stärke", 
+            "Geschicklichkeit", 
+            "Konstitution", 
+            "Verstand", 
+            "Willenskraft"
+        ]
+        
+        # Prüfen, welche Attribute auf W4 stehen und erhöht werden können
+        verfuegbare_attribute = []
+        charakter = self.controller.charakter
+        
+        for attribut_name in standard_attribute:
+            if attribut_name in charakter.attribute:
+                attribut = charakter.attribute[attribut_name]
+                # Nur Attribute mit W4 können auf W6 erhöht werden
+                if attribut.wert == 4 and attribut.modifier == 0:
+                    verfuegbare_attribute.append(attribut_name)
+        
+        if not verfuegbare_attribute:
+            verfuegbare_attribute = [NO_ATTRIBUT_AVAILABLE_TEXT]
+        
+        return verfuegbare_attribute
+
+    def _ist_savage_pathfinder_aktiv(self):
+        """
+        Prüft, ob das aktuelle Setting Savage Pathfinder ist.
+        
+        Returns:
+            bool: True wenn Savage Pathfinder aktiv ist
+        """
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            return False
+        
+        try:
+            return self.controller.charakter.ist_savage_pathfinder_setting()
+        except Exception as e:
+            Logger.error(f"Fehler bei Savage Pathfinder-Prüfung: {e}")
+            return False
 
     def show_talent_search_dialog(self, button):
         """
@@ -246,6 +306,76 @@ class VoelkerWidget(MDBoxLayout):
         # Initial alle Talente anzeigen
         for talent in freie_talente:
             add_talent_to_list(talent)
+        
+        dialog.open()
+
+    def show_attribut_search_dialog(self, button):
+        """
+        Zeigt einen Dialog für die Attributauswahl an.
+        
+        Args:
+            button: Button, der das Menü aufruft
+        """
+        # Dialog-Content erstellen
+        content = MDBoxLayout(
+            orientation='vertical', 
+            size_hint_y=None,
+            height="300dp",
+            spacing="12dp",
+            padding="24dp"
+        )
+        
+        # ScrollView für die Attributliste erstellen
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height="250dp"
+        )
+        
+        # Liste für Attribute erstellen
+        attribut_list = MDList()
+        scroll.add_widget(attribut_list)
+        content.add_widget(scroll)
+        
+        # Attribute holen
+        verfuegbare_attribute = self._get_verfuegbare_attribute()
+        
+        # Dialog erstellen
+        dialog = MDDialog()
+        dialog.add_widget(MDDialogHeadlineText(text="Attribut auswählen (W4 → W6)"))
+        dialog.add_widget(MDDialogContentContainer(
+            content,
+            orientation="vertical",
+        ))
+        dialog.add_widget(MDDialogButtonContainer(
+            MDButton(
+                style="text",
+                on_release=lambda x: dialog.dismiss(),
+                children=[
+                    MDButtonText(text="Abbrechen")
+                ]
+            ),
+            spacing="8dp",
+        ))
+        
+        # Funktion zum Hinzufügen eines Attributs zur Liste
+        def add_attribut_to_list(attribut_name):
+            item = MDListItem(
+                on_release=lambda x: select_attribut(attribut_name)
+            )
+            item.add_widget(MDListItemHeadlineText(
+                text=attribut_name
+            ))
+            attribut_list.add_widget(item)
+        
+        # Funktion zum Auswählen eines Attributs
+        def select_attribut(attribut_name):
+            if attribut_name != NO_ATTRIBUT_AVAILABLE_TEXT:
+                self._on_attribut_select(attribut_name)
+            dialog.dismiss()
+        
+        # Alle verfügbaren Attribute anzeigen
+        for attribut in verfuegbare_attribute:
+            add_attribut_to_list(attribut)
         
         dialog.open()
 
@@ -393,6 +523,43 @@ class VoelkerWidget(MDBoxLayout):
             Logger.info(f"Freies Talent '{talent_name}' für Mensch ausgewählt.")
             charakter.dispatch('on_charakter_change')
 
+    def _on_attribut_select(self, attribut_name):
+        """
+        Wird aufgerufen, wenn ein Attribut aus dem Dialog ausgewählt wird.
+        Erhöht das ausgewählte Attribut von W4 auf W6.
+        
+        Args:
+            attribut_name: Name des ausgewählten Attributs
+        """
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
+            return
+                
+        if attribut_name == NO_ATTRIBUT_AVAILABLE_TEXT:
+            Logger.info("Kein Attribut ausgewählt.")
+            return
+
+        charakter = self.controller.charakter
+        
+        # Prüfen, ob das Attribut tatsächlich auf W4 steht
+        if attribut_name in charakter.attribute:
+            attribut = charakter.attribute[attribut_name]
+            if attribut.wert == 4 and attribut.modifier == 0:
+                # Attribut von W4 auf W6 erhöhen
+                attribut.wuerfel.value = 6
+                
+                # Aktuelles Attribut speichern
+                self.aktuelles_attribut = attribut_name
+                self.mensch_erhoehtes_attribut = attribut_name
+                
+                Logger.info(f"Attribut '{attribut_name}' für Mensch von W4 auf W6 erhöht.")
+                charakter.berechne_abgeleitete_werte()
+                charakter.dispatch('on_charakter_change')
+            else:
+                Logger.warning(f"Attribut '{attribut_name}' steht nicht auf W4+0, aktuelle Werte: W{attribut.wert}+{attribut.modifier}")
+        else:
+            Logger.error(f"Attribut '{attribut_name}' nicht gefunden.")
+
     def aktualisiere_ui(self, *args):
         """
         Aktualisiert die UI basierend auf dem aktuellen Zustand des Charakters.
@@ -495,6 +662,7 @@ class VoelkerWidget(MDBoxLayout):
     def _add_mensch_specific_ui(self, row_layout):
         """
         Fügt spezielle UI-Elemente für Menschen hinzu.
+        ERWEITERT: Mit Attribut-Auswahl für Savage Pathfinder
         
         Args:
             row_layout: Layout, zu dem die Elemente hinzugefügt werden
@@ -506,16 +674,36 @@ class VoelkerWidget(MDBoxLayout):
             width=TALENT_LABEL_WIDTH
         )
 
-        # Talent-Auswahlbutton - jetzt mit neuem Suchfenster
+        # Talent-Auswahlbutton
         talent_button = MDIconButton(
             icon="menu-down",
             size_hint=(None, None),
             size=(dp(48), dp(48)),
-            on_release=self.show_talent_search_dialog  # Verwende neuen Dialog
+            on_release=self.show_talent_search_dialog
         )
 
         row_layout.add_widget(talent_label)
         row_layout.add_widget(talent_button)
+
+        # Nur für Savage Pathfinder: Attribut-Auswahl hinzufügen
+        if self._ist_savage_pathfinder_aktiv():
+            # Attribut-Label
+            attribut_label = MDLabel(
+                text=self.aktuelles_attribut,
+                size_hint_x=None,
+                width=ATTRIBUT_LABEL_WIDTH
+            )
+
+            # Attribut-Auswahlbutton
+            attribut_button = MDIconButton(
+                icon="menu-down",
+                size_hint=(None, None),
+                size=(dp(48), dp(48)),
+                on_release=self.show_attribut_search_dialog
+            )
+
+            row_layout.add_widget(attribut_label)
+            row_layout.add_widget(attribut_button)
 
     def _add_volk_details(self, container, volk):
         """
@@ -573,6 +761,21 @@ class VoelkerWidget(MDBoxLayout):
             self.mensch_freies_talent = ""  # Zurücksetzen
             self.aktuelles_talent = DEFAULT_TALENT_TEXT  # Label zurücksetzen
 
+    def _remove_mensch_attribut(self):
+        """Setzt das erhöhte Attribut des Menschen zurück."""
+        if self.mensch_erhoehtes_attribut:
+            charakter = self.controller.charakter
+            if self.mensch_erhoehtes_attribut in charakter.attribute:
+                attribut = charakter.attribute[self.mensch_erhoehtes_attribut]
+                # Attribut von W6 zurück auf W4 setzen
+                if attribut.wert == 6 and attribut.modifier == 0:
+                    attribut.wuerfel.value = 4
+                    Logger.info(f"Attribut '{self.mensch_erhoehtes_attribut}' von 'Mensch' von W6 auf W4 zurückgesetzt.")
+                    charakter.berechne_abgeleitete_werte()
+            
+            self.mensch_erhoehtes_attribut = ""  # Zurücksetzen
+            self.aktuelles_attribut = DEFAULT_ATTRIBUT_TEXT  # Label zurücksetzen
+
     def _on_checkbox_active(self, instance, value, selected_volk_name):
         """
         Ereignishandler für Checkbox-Änderungen.
@@ -603,9 +806,11 @@ class VoelkerWidget(MDBoxLayout):
         
         # Wenn ein Volk aktiviert wird, alle anderen deaktivieren
         if value:
-            # Wenn ein anderes Volk als "Mensch" aktiviert wird, das freie Talent von "Mensch" entfernen
+            # Wenn ein anderes Volk als "Mensch" aktiviert wird, das freie Talent und Attribut von "Mensch" entfernen
             if selected_volk_name != DEFAULT_VOLK and charakter.voelker_selected.get(DEFAULT_VOLK, False):
                 self._remove_mensch_talent()
+                if self._ist_savage_pathfinder_aktiv():
+                    self._remove_mensch_attribut()
             
             # Alle Völker in beiden Dictionaries deaktivieren
             for volk_name in charakter.voelker_selected:
@@ -618,9 +823,11 @@ class VoelkerWidget(MDBoxLayout):
             if selected_volk_name in charakter.voelker:
                 charakter.voelker[selected_volk_name].ausgewaehlt = True
         else:
-            # Wenn "Mensch" abgewählt wird, das freie Talent entfernen
+            # Wenn "Mensch" abgewählt wird, das freie Talent und Attribut entfernen
             if selected_volk_name == DEFAULT_VOLK:
                 self._remove_mensch_talent()
+                if self._ist_savage_pathfinder_aktiv():
+                    self._remove_mensch_attribut()
             
             # Das Volk deaktivieren
             charakter.voelker_selected[selected_volk_name] = False
