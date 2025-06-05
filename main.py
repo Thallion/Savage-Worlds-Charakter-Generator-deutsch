@@ -48,6 +48,10 @@ from views.eigenschaften_view import EigenschaftenWidget
 from views.charakterbogen_view import CharakterbogenWidget
 from views.einstellungen_widget import EinstellungenWidget
 
+# Config Service für Theme-Speicherung importieren
+from services.config_service import ConfigService
+from services.service_container import service_container
+
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
@@ -586,8 +590,13 @@ class SW_Charakter_GeneratorApp(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Logger.info("Init SW_Charakter_GeneratorApp")
+        
+        # Config Service früh initialisieren für Theme-Laden
+        self._early_config_service = ConfigService()
+        
         self.charakter = Charakter()
         self.controller = CharakterController()
+        
         # Deine Icons + Tab-Texte + zugehörige Screens
         self.tab_definitions = [
             ("cog",              "Einstellungen",  EinstellungenScreen),
@@ -603,12 +612,164 @@ class SW_Charakter_GeneratorApp(MDApp):
         ]
 
     def build(self):
-        self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Orange"
-        self.theme_cls.primary_color = (1.0, 0.596, 0.0, 1.0)  # Orange
+        # Theme aus Config laden
+        self.load_theme_from_config()
         return Builder.load_string(kv)
 
+    def load_theme_from_config(self):
+        """Lädt die Theme-Einstellungen aus der Konfiguration"""
+        try:
+            Logger.info("=== Theme-Laden gestartet ===")
+            
+            # Zuerst versuchen, Config Service aus Service Container zu holen
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+            
+            # Falls Service Container noch nicht initialisiert, frühe Instanz verwenden
+            if not config_service and hasattr(self, '_early_config_service'):
+                config_service = self._early_config_service
+                Logger.info("Verwende frühe ConfigService-Instanz für Theme-Laden")
+            
+            if not config_service:
+                Logger.warning("ConfigService nicht verfügbar, verwende Standard-Theme")
+                self.theme_cls.theme_style = "Dark"
+                self.theme_cls.primary_palette = "Orange"
+                self.theme_cls.primary_color = (1.0, 0.596, 0.0, 1.0)
+                return
+            
+            # Config-Status prüfen
+            config_dict = config_service.get_config_dict()
+            Logger.info(f"Geladene Config-Daten: {config_dict}")
+            
+            theme_style = config_service.get('theme_style', 'Dark')
+            primary_palette = config_service.get('primary_palette', 'Orange')
+            
+            Logger.info(f"Gelesene Werte: Style={theme_style}, Palette={primary_palette}")
+            
+            # Gültige KivyMD-Paletten definieren
+            valid_palettes = [
+                'Red', 'Pink', 'Purple', 'Deeprurple', 'Indigo', 'Blue', 
+                'Lightblue', 'Cyan', 'Teal', 'Green', 'Lightgreen', 'Lime',
+                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 'Gray', 'Bluegray'
+            ]
+            
+            # Palette validieren
+            if primary_palette not in valid_palettes:
+                Logger.warning(f"Ungültige Palette '{primary_palette}' gefunden, verwende 'Orange'")
+                primary_palette = 'Orange'
+                # Korrigierte Palette speichern
+                config_service.set('primary_palette', primary_palette)
+            
+            # Theme-Style validieren
+            if theme_style not in ['Light', 'Dark']:
+                Logger.warning(f"Ungültiger Theme-Style '{theme_style}' gefunden, verwende 'Dark'")
+                theme_style = 'Dark'
+                config_service.set('theme_style', theme_style)
+            
+            Logger.info(f"Angewandte Werte: Style={theme_style}, Palette={primary_palette}")
+            
+            # Theme anwenden
+            self.theme_cls.theme_style = theme_style
+            self.theme_cls.primary_palette = primary_palette
+            
+            # Orange-spezifische Farbe setzen, falls Orange gewählt wurde
+            if primary_palette == "Orange":
+                self.theme_cls.primary_color = (1.0, 0.596, 0.0, 1.0)
+                Logger.debug("Orange-spezifische Farbe gesetzt")
+                
+            Logger.info(f"=== Theme erfolgreich geladen: {theme_style}, {primary_palette} ===")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden der Theme-Einstellungen: {str(e)}", exc_info=True)
+            # Fallback auf Standard-Werte
+            self.theme_cls.theme_style = "Dark"
+            self.theme_cls.primary_palette = "Orange"
+            self.theme_cls.primary_color = (1.0, 0.596, 0.0, 1.0)
+            Logger.info("Fallback-Theme angewendet")
+
+    def update_theme(self, theme_style=None, primary_palette=None):
+        """
+        Aktualisiert das Theme und speichert die Änderungen in der Konfiguration
+        
+        Args:
+            theme_style (str): 'Light' oder 'Dark'
+            primary_palette (str): Name der primären Farbpalette
+        """
+        try:
+            Logger.info(f"=== Theme-Update gestartet: Style={theme_style}, Palette={primary_palette} ===")
+            
+            # Config Service aus Service Container holen
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+            
+            # Gültige KivyMD-Paletten definieren
+            valid_palettes = [
+                'Red', 'Pink', 'Purple', 'Deeprurple', 'Indigo', 'Blue', 
+                'Lightblue', 'Cyan', 'Teal', 'Green', 'Lightgreen', 'Lime',
+                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 'Gray', 'Bluegray'
+            ]
+            
+            changes = {}
+            
+            if theme_style:
+                if theme_style in ['Light', 'Dark']:
+                    self.theme_cls.theme_style = theme_style
+                    changes['theme_style'] = theme_style
+                    Logger.info(f"Theme-Stil geändert zu: {theme_style}")
+                else:
+                    Logger.warning(f"Ungültiger Theme-Stil: {theme_style}")
+            
+            if primary_palette:
+                # Palette validieren
+                if primary_palette in valid_palettes:
+                    self.theme_cls.primary_palette = primary_palette
+                    changes['primary_palette'] = primary_palette
+                    
+                    # Spezielle Farbe für Orange setzen
+                    if primary_palette == "Orange":
+                        self.theme_cls.primary_color = (1.0, 0.596, 0.0, 1.0)
+                        Logger.debug("Orange-spezifische Farbe gesetzt")
+                    
+                    Logger.info(f"Primäre Palette geändert zu: {primary_palette}")
+                else:
+                    Logger.warning(f"Ungültige Palette '{primary_palette}' ignoriert. Gültige Paletten: {valid_palettes}")
+                    return  # Abbrechen wenn ungültige Palette
+            
+            # Änderungen in der Konfiguration speichern
+            if changes and config_service:
+                config_service.update_multiple(changes, save_immediately=True)
+                Logger.info(f"Theme-Einstellungen in Konfiguration gespeichert: {changes}")
+            elif not config_service:
+                Logger.warning("ConfigService nicht verfügbar, Theme-Änderungen werden nicht gespeichert")
+            
+            Logger.info(f"=== Theme-Update abgeschlossen ===")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren des Themes: {str(e)}", exc_info=True)
+
+    def get_current_theme_style(self):
+        """Gibt den aktuellen Theme-Stil zurück"""
+        return self.theme_cls.theme_style
+
+    def get_current_primary_palette(self):
+        """Gibt die aktuelle primäre Farbpalette zurück"""
+        return self.theme_cls.primary_palette
+
     def on_start(self):
+        Logger.info("=== App-Start gestartet ===")
+        
+        # Service Container mit Controller initialisieren (muss vor Theme-Laden passieren)
+        service_container.initialize(self.controller)
+        
+        # Frühe Config Service Instanz bereinigen, da Service Container jetzt verfügbar ist
+        if hasattr(self, '_early_config_service'):
+            delattr(self, '_early_config_service')
+            Logger.debug("Frühe ConfigService-Instanz bereinigt")
+        
+        # Theme nach Service-Initialisierung nochmal laden/überprüfen
+        Logger.info("Theme nach Service-Initialisierung neu laden...")
+        self.load_theme_from_config()
+        
         # Fenster maximieren
         Window.maximize()
 
@@ -657,6 +818,46 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Logger.info(f"Erster Tab '{first_tab.title}' aktiviert.")
                 # Setze den Carousel-Index entsprechend
                 carousel.index = 0
+        
+    def debug_config_info(self):
+        """Debug-Methode um Config-Informationen anzuzeigen"""
+        try:
+            Logger.info("=== CONFIG DEBUG INFO ===")
+            
+            # Config Service holen
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+            
+            if config_service:
+                # Config-Pfad anzeigen
+                config_path = getattr(config_service, '_config_path', 'Unbekannt')
+                Logger.info(f"Config-Pfad: {config_path}")
+                
+                # Config-Inhalt anzeigen
+                config_dict = config_service.get_config_dict()
+                Logger.info(f"Config-Inhalt: {config_dict}")
+                
+                # Prüfen ob Datei existiert
+                import os
+                if hasattr(config_service, '_config_path') and os.path.exists(config_service._config_path):
+                    Logger.info(f"Config-Datei existiert: JA")
+                    
+                    # Datei-Inhalt direkt lesen
+                    try:
+                        with open(config_service._config_path, 'r', encoding='utf-8') as f:
+                            file_content = f.read()
+                        Logger.info(f"Datei-Inhalt direkt: {file_content}")
+                    except Exception as read_error:
+                        Logger.error(f"Fehler beim Lesen der Config-Datei: {read_error}")
+                else:
+                    Logger.warning("Config-Datei existiert: NEIN")
+            else:
+                Logger.error("Config-Service nicht verfügbar")
+            
+            Logger.info("=== CONFIG DEBUG INFO ENDE ===")
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Config-Debug: {str(e)}", exc_info=True)
 
     def _register_widget_for_compatibility(self, widget, tab_name):
         """
@@ -783,6 +984,9 @@ class SW_Charakter_GeneratorApp(MDApp):
     def on_stop(self):
         """Wird beim Beenden der App aufgerufen"""
         try:
+            # Service Container bereinigen
+            service_container.shutdown()
+            
             # Cleanup für alle registrierten Widgets
             widgets_to_cleanup = [
                 'einstellungen_widget', 'eigenschaften_widget', 'ausruestung_widget',
@@ -848,22 +1052,6 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Logger.error(f"Ungültiger Carousel-Index: {index}")
         except Exception as e:
             Logger.error(f"Fehler bei der Aktualisierung des aktuellen Tabs: {str(e)}", exc_info=True)
-
-    def get_widget_by_tab_text(self, tab_text, widget_id):
-        """Retrieve widget by tab text and widget ID."""
-        Logger.debug(f"get_widget_by_tab_text aufgerufen mit tab_text = {tab_text}, widget_id = {widget_id}")
-        screen = self.screens.get(tab_text)
-        if screen:
-            Logger.debug(f"Screen {tab_text} gefunden, IDs: {screen.ids.keys()}")
-            widget = screen.ids.get(widget_id)
-            if widget:
-                Logger.debug(f"Widget {widget_id} gefunden")
-                return widget
-            else:
-                Logger.error(f"Widget {widget_id} not found in screen {tab_text}.")
-        else:
-            Logger.error(f"Screen {tab_text} not found.")
-        return None
 
     def on_tab_switch(self, instance_tabs, instance_tab, instance_tab_label):
         """

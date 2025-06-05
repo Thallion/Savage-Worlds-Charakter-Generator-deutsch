@@ -2,9 +2,12 @@
 """
 Refactored Einstellungen Widget - Nur UI-Logik und Delegation
 Verwendet Manager-Klassen für verschiedene Funktionalitätsbereiche
+KORRIGIERT: Setting-Merge-Dialog wird jetzt richtig verwendet
+KORRIGIERT: Dateiname-Generierung für Speichern/Laden
 """
 
 import os
+from datetime import datetime
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.clock import Clock
@@ -12,11 +15,16 @@ from kivy.logger import Logger
 from kivy.properties import ObjectProperty
 from kivymd.uix.screen import MDScreen
 
-# Manager Imports
-from .theme_manager import ThemeManager
-from .pdf_manager import PDFManager
-from .element_dialog_manager import ElementDialogManager
-from .statistics_manager import StatisticsManager
+# Manager Imports (falls vorhanden)
+try:
+    from .theme_manager import ThemeManager
+    from .pdf_manager import PDFManager
+    from .element_dialog_manager import ElementDialogManager
+    from .statistics_manager import StatisticsManager
+    MANAGERS_AVAILABLE = True
+except ImportError:
+    Logger.warning("Manager-Klassen nicht verfügbar, verwende vereinfachte Implementation")
+    MANAGERS_AVAILABLE = False
 
 # Service Container Import
 from services.service_container import service_container
@@ -43,7 +51,8 @@ class EinstellungenWidget(MDScreen):
         super().__init__(**kwargs)
         
         # Manager initialisieren
-        self._initialize_managers()
+        if MANAGERS_AVAILABLE:
+            self._initialize_managers()
         
         # Event-Handler registrieren
         self._register_event_handlers()
@@ -119,14 +128,16 @@ class EinstellungenWidget(MDScreen):
     def _post_init(self, dt):
         """Post-Initialisierung nach dem UI-Aufbau"""
         try:
-            # Theme initialisieren
-            self.theme_manager.initialize_theme()
+            # Theme initialisieren (falls Manager verfügbar)
+            if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+                self.theme_manager.initialize_theme()
             
             # UI-Felder mit aktuellen Werten aktualisieren
             self._update_ui_fields()
             
-            # Element-Statistiken anzeigen
-            self.statistics_manager.update_element_statistics_ui()
+            # Element-Statistiken anzeigen (falls Manager verfügbar)
+            if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+                self.statistics_manager.update_element_statistics_ui()
             
             # Event senden
             event_service = service_container.get_event_service()
@@ -142,28 +153,55 @@ class EinstellungenWidget(MDScreen):
         """Wird aufgerufen, wenn ein neuer Charakter erstellt wurde"""
         Logger.info(f"Neuer Charakter erstellt: {data}")
         self._update_ui_fields()
-        self.statistics_manager.update_element_statistics_ui()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.update_element_statistics_ui()
     
     def _on_character_loaded(self, data):
         """Wird aufgerufen, wenn ein Charakter geladen wurde"""
         Logger.info(f"Charakter geladen: {data}")
         self._update_ui_fields()
-        self.statistics_manager.update_element_statistics_ui()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.update_element_statistics_ui()
     
     def _on_theme_changed(self, data):
         """Wird aufgerufen, wenn das Theme geändert wurde"""
         Logger.info(f"Theme geändert: {data}")
-        self.theme_manager.update_color_chips()
+        if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+            self.theme_manager.update_color_chips()
     
     # ==================== THEME MANAGEMENT ====================
     
     def switch_theme_style(self, style):
-        """Delegiert an ThemeManager"""
-        self.theme_manager.switch_theme_style(style)
+        """Delegiert an ThemeManager oder direkt an App"""
+        try:
+            Logger.info(f"Theme-Stil-Wechsel angefordert: {style}")
+            if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+                self.theme_manager.switch_theme_style(style)
+            else:
+                # Direkte App-Integration
+                if self.app and hasattr(self.app, 'update_theme'):
+                    self.app.update_theme(theme_style=style)
+                    Logger.info(f"Theme-Stil gewechselt zu: {style}")
+                else:
+                    Logger.error("App oder update_theme Methode nicht verfügbar")
+        except Exception as e:
+            Logger.error(f"Fehler beim Theme-Wechsel: {str(e)}")
     
     def on_color_selected(self, color_name):
-        """Delegiert an ThemeManager"""
-        self.theme_manager.on_color_selected(color_name)
+        """Delegiert an ThemeManager oder direkt an App"""
+        try:
+            Logger.info(f"Farb-Wechsel angefordert: {color_name}")
+            if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
+                self.theme_manager.on_color_selected(color_name)
+            else:
+                # Direkte App-Integration
+                if self.app and hasattr(self.app, 'update_theme'):
+                    self.app.update_theme(primary_palette=color_name)
+                    Logger.info(f"Primärfarbe gewechselt zu: {color_name}")
+                else:
+                    Logger.error("App oder update_theme Methode nicht verfügbar")
+        except Exception as e:
+            Logger.error(f"Fehler beim Farb-Wechsel: {str(e)}")
     
     # ==================== CHARAKTER MANAGEMENT ====================
     
@@ -213,26 +251,312 @@ class EinstellungenWidget(MDScreen):
         else:
             Logger.error("CharakterController nicht verfügbar")
     
+    def _generate_character_filename(self):
+        """
+        Generiert einen Dateinamen basierend auf dem Charakternamen
+        
+        Returns:
+            str: Generierter Dateiname
+        """
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                if char_name:
+                    # Ungültige Zeichen für Dateinamen entfernen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                else:
+                    safe_name = "Charakter"
+            else:
+                safe_name = "Charakter"
+            
+            # Zeitstempel hinzufügen
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"{safe_name}_{timestamp}.json"
+            
+            Logger.debug(f"Generierter Charakter-Dateiname: {filename}")
+            return filename
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Dateiname-Generierung: {str(e)}")
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            return f"Charakter_{timestamp}.json"
+    
+    def schnellspeichern_charakter(self):
+        """
+        Schnellspeichern: Speichert direkt in die aktuelle Datei, falls vorhanden
+        Andernfalls zeigt den normalen Speichern-Dialog
+        """
+        try:
+            if not self.charakter_controller or not self.charakter_controller.charakter:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")
+                return
+            
+            # Prüfen ob der Charakter bereits einen Dateipfad hat
+            if (hasattr(self.charakter_controller, 'current_character_file_path') and 
+                self.charakter_controller.current_character_file_path and
+                os.path.exists(self.charakter_controller.current_character_file_path)):
+                
+                # Direkt in die aktuelle Datei speichern
+                file_path = self.charakter_controller.current_character_file_path
+                success = self.charakter_controller.speichere_charakter_als_json(file_path)
+                
+                dialog_service = service_container.get_dialog_service()
+                if success and dialog_service:
+                    dialog_service.show_success_dialog(
+                        f"Charakter wurde schnell gespeichert:\n{os.path.basename(file_path)}",
+                        "Schnellspeichern erfolgreich"
+                    )
+                    Logger.info(f"Charakter schnell gespeichert: {file_path}")
+                elif dialog_service:
+                    dialog_service.show_error_dialog("Fehler beim Schnellspeichern des Charakters.")
+            else:
+                # Keine aktuelle Datei - normalen Speichern-Dialog verwenden
+                Logger.info("Keine aktuelle Datei gefunden, verwende normalen Speichern-Dialog")
+                self.speichere_charakter()
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Schnellspeichern: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Schnellspeichern: {str(e)}")
+    
     def speichere_charakter(self):
-        """Delegiert Speicher-Logik"""
-        # Hier könnte man eine vereinfachte Version implementieren
-        # oder direkt an den FileManager delegieren
-        file_service = service_container.get_file_manager_service()
-        if file_service:
+        """KORRIGIERT: Delegiert Speicher-Logik mit Überschreiben/Neu-Dialog"""
+        try:
+            if not self.charakter_controller or not self.charakter_controller.charakter:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")
+                return
+            
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar")
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("FileManager-Service nicht verfügbar.")
+                return
+            
+            # Prüfen ob bereits eine Datei für diesen Charakter existiert
+            existing_file_info = self._check_existing_character_file()
+            
+            if existing_file_info['exists']:
+                # Bestehende Datei gefunden - Überschreiben/Neu-Dialog anzeigen
+                self._show_save_options_dialog(existing_file_info)
+            else:
+                # Keine bestehende Datei - direkt Dateiname-Dialog anzeigen
+                self._show_save_filename_dialog()
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Speichervorgangs: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Speichern: {str(e)}")
+    
+    def _check_existing_character_file(self):
+        """
+        Prüft ob bereits eine Charakterdatei existiert
+        
+        Returns:
+            dict: Information über existierende Datei
+        """
+        try:
+            # Erst prüfen ob der Charakter bereits einen Dateipfad hat
+            if (hasattr(self.charakter_controller, 'current_character_file_path') and 
+                self.charakter_controller.current_character_file_path and
+                os.path.exists(self.charakter_controller.current_character_file_path)):
+                
+                file_path = self.charakter_controller.current_character_file_path
+                return {
+                    'exists': True,
+                    'path': file_path,
+                    'name': os.path.basename(file_path),
+                    'directory': os.path.dirname(file_path)
+                }
+            
+            # Andernfalls prüfen ob eine Datei mit dem Charakternamen existiert
+            file_service = service_container.get_file_manager_service()
+            if file_service:
+                chars_dir = file_service.get_default_directory('chars')
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                
+                if char_name:
+                    # Sichere Dateiname-Varianten prüfen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                    
+                    potential_filename = f"{safe_name}.json"
+                    potential_path = os.path.join(chars_dir, potential_filename)
+                    
+                    if os.path.exists(potential_path):
+                        return {
+                            'exists': True,
+                            'path': potential_path,
+                            'name': potential_filename,
+                            'directory': chars_dir
+                        }
+            
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Prüfen der existierenden Datei: {str(e)}")
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+    
+    def _show_save_options_dialog(self, existing_file_info):
+        """
+        Zeigt Dialog mit Optionen zum Überschreiben oder Neu-Speichern
+        
+        Args:
+            existing_file_info (dict): Information über die existierende Datei
+        """
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if not dialog_service:
+                Logger.error("Dialog-Service nicht verfügbar")
+                return
+            
+            message = f"Bestehende Datei: {existing_file_info['name']}"
+            choices = [
+                ("Bestehende Datei überschreiben", "overwrite"),
+                ("Als neue Datei speichern...", "save_new")
+            ]
+            
+            def handle_save_choice(choice):
+                if choice == "overwrite":
+                    self._save_to_existing_file(existing_file_info)
+                elif choice == "save_new":
+                    self._show_save_filename_dialog()
+            
+            dialog_service.show_choice_dialog(
+                message=message,
+                title="Charakter speichern",
+                choices=choices,
+                on_choice=handle_save_choice
+            )
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Anzeigen des Speicher-Options-Dialogs: {str(e)}")
+    
+    def _save_to_existing_file(self, existing_file_info):
+        """
+        Speichert direkt in die existierende Datei
+        
+        Args:
+            existing_file_info (dict): Information über die existierende Datei
+        """
+        try:
+            file_path = existing_file_info['path']
+            success = self.charakter_controller.speichere_charakter_als_json(file_path)
+            
+            dialog_service = service_container.get_dialog_service()
+            if success and dialog_service:
+                dialog_service.show_success_dialog(
+                    f"Charakter wurde erfolgreich gespeichert:\n{file_path}",
+                    "Speichern erfolgreich"
+                )
+                Logger.info(f"Charakter erfolgreich überschrieben: {file_path}")
+            elif dialog_service:
+                dialog_service.show_error_dialog("Fehler beim Speichern des Charakters.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern in existierende Datei: {str(e)}")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Speichern: {str(e)}")
+    
+    def _show_save_filename_dialog(self):
+        """Zeigt Dialog für neuen Dateinamen"""
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                # Vorgeschlagenen Dateinamen generieren
+                suggested_filename = self._generate_character_filename()
+                
+                dialog_service.show_input_dialog(
+                    "Gib einen Dateinamen für den Charakter ein:\n(.json wird automatisch hinzugefügt)",
+                    "Charakter speichern",
+                    suggested_filename.replace('.json', ''),  # .json Extension entfernen für Eingabe
+                    self._on_save_filename_entered
+                )
+            else:
+                Logger.error("Dialog-Service nicht verfügbar")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Dateiname-Dialog: {str(e)}")
+    
+    def _on_save_filename_entered(self, filename):
+        """
+        Verarbeitet den eingegebenen Dateinamen und öffnet den FileManager
+        
+        Args:
+            filename (str): Eingegebener Dateiname
+        """
+        if not filename.strip():
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Bitte gib einen Dateinamen ein.")
+            return
+        
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar")
+                return
+            
+            # Dateiname bereinigen und .json hinzufügen falls nötig
+            clean_filename = "".join(c for c in filename if c.isalnum() or c in (' ', '-', '_', '.')).strip()
+            if not clean_filename.endswith('.json'):
+                clean_filename += '.json'
+            
+            # Verzeichnis für Charaktere holen
             chars_dir = file_service.get_default_directory('chars')
+            Logger.info(f"Verwende Charakter-Verzeichnis: {chars_dir}")
+            
+            # Dateinamen setzen
+            file_service.set_temp_filename(clean_filename)
+            Logger.info(f"Dateiname für Speichern gesetzt: {clean_filename}")
+            
+            # FileManager öffnen
             file_service.show_file_manager(chars_dir, "save_dir")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des Dateinamens: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Verarbeiten des Dateinamens: {str(e)}")
     
     def lade_charakter(self):
         """Delegiert Lade-Logik"""
-        file_service = service_container.get_file_manager_service()
-        if file_service:
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar")
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("FileManager-Service nicht verfügbar.")
+                return
+            
             chars_dir = file_service.get_default_directory('chars')
+            Logger.info(f"Verwende Charakter-Verzeichnis für Laden: {chars_dir}")
+            
+            # Temporäre Einstellungen löschen für Laden
+            file_service.clear_temp_settings()
+            
             file_service.show_file_manager(chars_dir, "load")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Ladevorgangs: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Laden: {str(e)}")
     
     # ==================== SETTING MANAGEMENT ====================
     
     def open_setting_switch_options(self):
-        """Vereinfachte Setting-Wechsel-Logik"""
+        """KORRIGIERT: Setting-Wechsel mit Merge-Dialog"""
         if not self.charakter_controller or not self.charakter_controller.charakter:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
@@ -253,7 +577,7 @@ class EinstellungenWidget(MDScreen):
                 )
             return
         
-        # Einfache Setting-Auswahl
+        # Setting-Auswahl
         setting_choices = []
         for setting_name in available_settings:
             if setting_name != current_setting:
@@ -270,7 +594,7 @@ class EinstellungenWidget(MDScreen):
             )
     
     def _on_setting_choice_made(self, chosen_setting):
-        """Verarbeitet die Setting-Auswahl"""
+        """KORRIGIERT: Verarbeitet die Setting-Auswahl mit Merge-Dialog"""
         if not chosen_setting or not self.charakter_controller or not self.charakter_controller.charakter:
             return
         
@@ -278,18 +602,44 @@ class EinstellungenWidget(MDScreen):
         if chosen_setting == char.active_setting_name:
             return
         
-        # Einfacher Setting-Wechsel mit Merge (Standard)
-        success = char.change_active_setting(chosen_setting, merge_elements=True)
+        # HIER IST DIE KORREKTUR: Jetzt wird der Setting-Merge-Dialog verwendet
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            # Verwende die show_setting_merge_dialog Methode
+            dialog_service.show_setting_merge_dialog(
+                chosen_setting,
+                lambda merge_choice: self._apply_setting_change(chosen_setting, merge_choice)
+            )
+    
+    def _apply_setting_change(self, setting_name, merge_choice):
+        """
+        Wendet den Setting-Wechsel mit der gewählten Merge-Option an
+        
+        Args:
+            setting_name (str): Name des neuen Settings
+            merge_choice (str): 'merge' oder 'replace'
+        """
+        if not self.charakter_controller or not self.charakter_controller.charakter:
+            return
+        
+        char = self.charakter_controller.charakter
+        merge_elements = (merge_choice == "merge")
+        
+        Logger.info(f"Setting-Wechsel zu '{setting_name}' mit Merge-Option: {merge_elements}")
+        
+        # Setting wechseln mit der gewählten Option
+        success = char.change_active_setting(setting_name, merge_elements=merge_elements)
         
         dialog_service = service_container.get_dialog_service()
         if success and dialog_service:
+            merge_text = "zusammengeführt" if merge_elements else "komplett ersetzt"
             dialog_service.show_success_dialog(
-                f"Setting erfolgreich zu '{chosen_setting}' gewechselt.",
+                f"Setting erfolgreich zu '{setting_name}' gewechselt.\nElemente wurden {merge_text}.",
                 "Setting gewechselt"
             )
             self._trigger_ui_refresh()
         elif dialog_service:
-            dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{chosen_setting}'.")
+            dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{setting_name}'.")
     
     # ==================== CHARAKTERWERTE UPDATES ====================
     
@@ -355,88 +705,447 @@ class EinstellungenWidget(MDScreen):
     # ==================== PDF & STATISTIKEN ====================
     
     def erzeuge_charakterbogen_pdf(self):
-        """Delegiert an PDFManager"""
-        self.pdf_manager.create_character_pdf()
+        """Delegiert an PDFManager oder zeigt Überschreiben/Neu-Dialog"""
+        if MANAGERS_AVAILABLE and hasattr(self, 'pdf_manager'):
+            self.pdf_manager.create_character_pdf()
+        else:
+            # Vereinfachte PDF-Erstellung mit Überschreiben/Neu-Dialog
+            try:
+                if not self.charakter_controller or not self.charakter_controller.charakter:
+                    dialog_service = service_container.get_dialog_service()
+                    if dialog_service:
+                        dialog_service.show_error_dialog("Kein Charakter verfügbar für PDF-Erstellung.")
+                    return
+                
+                # Prüfen ob bereits eine PDF für diesen Charakter existiert
+                existing_pdf_info = self._check_existing_pdf_file()
+                
+                if existing_pdf_info['exists']:
+                    # Bestehende PDF gefunden - Überschreiben/Neu-Dialog anzeigen
+                    self._show_pdf_save_options_dialog(existing_pdf_info)
+                else:
+                    # Keine bestehende PDF - direkt Dateiname-Dialog anzeigen
+                    self._show_pdf_filename_dialog()
+                    
+            except Exception as e:
+                Logger.error(f"Fehler bei PDF-Erstellung: {str(e)}", exc_info=True)
+    
+    def _check_existing_pdf_file(self):
+        """
+        Prüft ob bereits eine PDF-Datei für den Charakter existiert
+        
+        Returns:
+            dict: Information über existierende PDF-Datei
+        """
+        try:
+            file_service = service_container.get_file_manager_service()
+            if file_service:
+                pdfs_dir = file_service.get_default_directory('pdfs')
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                
+                if char_name:
+                    # Sichere Dateiname-Varianten prüfen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                    
+                    potential_filename = f"{safe_name}.pdf"
+                    potential_path = os.path.join(pdfs_dir, potential_filename)
+                    
+                    if os.path.exists(potential_path):
+                        return {
+                            'exists': True,
+                            'path': potential_path,
+                            'name': potential_filename,
+                            'directory': pdfs_dir
+                        }
+            
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Prüfen der existierenden PDF: {str(e)}")
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+    
+    def _show_pdf_save_options_dialog(self, existing_pdf_info):
+        """
+        Zeigt Dialog mit Optionen zum Überschreiben oder Neu-Erstellen der PDF
+        
+        Args:
+            existing_pdf_info (dict): Information über die existierende PDF-Datei
+        """
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if not dialog_service:
+                Logger.error("Dialog-Service nicht verfügbar")
+                return
+            
+            message = f"Bestehende PDF: {existing_pdf_info['name']}"
+            choices = [
+                ("Bestehende PDF überschreiben", "overwrite"),
+                ("Als neue PDF speichern...", "save_new")
+            ]
+            
+            def handle_pdf_save_choice(choice):
+                if choice == "overwrite":
+                    self._save_pdf_to_existing_file(existing_pdf_info)
+                elif choice == "save_new":
+                    self._show_pdf_filename_dialog()
+            
+            dialog_service.show_choice_dialog(
+                message=message,
+                title="PDF erstellen",
+                choices=choices,
+                on_choice=handle_pdf_save_choice
+            )
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Anzeigen des PDF-Options-Dialogs: {str(e)}")
+    
+    def _save_pdf_to_existing_file(self, existing_pdf_info):
+        """
+        Erstellt PDF direkt in die existierende Datei
+        
+        Args:
+            existing_pdf_info (dict): Information über die existierende PDF-Datei
+        """
+        try:
+            from utils.pdf_utils import generiere_pdf
+            file_path = existing_pdf_info['path']
+            
+            success = generiere_pdf(self.charakter_controller.charakter, file_path, printer_friendly=False)
+            
+            dialog_service = service_container.get_dialog_service()
+            if success and dialog_service:
+                dialog_service.show_success_dialog(
+                    f"PDF wurde erfolgreich erstellt:\n{file_path}",
+                    "PDF erstellen erfolgreich"
+                )
+                Logger.info(f"PDF erfolgreich überschrieben: {file_path}")
+            elif dialog_service:
+                dialog_service.show_error_dialog("Fehler beim Erstellen der PDF-Datei.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der PDF in existierende Datei: {str(e)}")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Erstellen der PDF: {str(e)}")
+    
+    def _show_pdf_filename_dialog(self):
+        """Zeigt Dialog für PDF-Dateiname-Eingabe"""
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                # Vorgeschlagenen PDF-Dateinamen generieren
+                suggested_filename = self._generate_pdf_filename()
+                
+                dialog_service.show_input_dialog(
+                    "Gib einen Dateinamen für die PDF ein:\n(.pdf wird automatisch hinzugefügt)",
+                    "PDF erstellen",
+                    suggested_filename.replace('.pdf', ''),  # .pdf Extension entfernen für Eingabe
+                    self._on_pdf_filename_entered
+                )
+            else:
+                Logger.error("Dialog-Service nicht verfügbar für PDF-Dialog")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim PDF-Dialog: {str(e)}", exc_info=True)
+    
+    def _generate_pdf_filename(self):
+        """
+        Generiert einen PDF-Dateinamen basierend auf dem Charakternamen
+        
+        Returns:
+            str: Generierter PDF-Dateiname
+        """
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                if char_name:
+                    # Ungültige Zeichen für Dateinamen entfernen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                else:
+                    safe_name = "Charakterbogen"
+            else:
+                safe_name = "Charakterbogen"
+            
+            # Zeitstempel hinzufügen
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"{safe_name}_{timestamp}.pdf"
+            
+            Logger.debug(f"Generierter PDF-Dateiname: {filename}")
+            return filename
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei PDF-Dateiname-Generierung: {str(e)}")
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            return f"Charakterbogen_{timestamp}.pdf"
+    
+    def _on_pdf_filename_entered(self, filename):
+        """
+        Verarbeitet den eingegebenen PDF-Dateinamen und öffnet den FileManager
+        
+        Args:
+            filename (str): Eingegebener Dateiname
+        """
+        if not filename.strip():
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Bitte gib einen Dateinamen ein.")
+            return
+        
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar für PDF")
+                return
+            
+            # Dateiname bereinigen und .pdf hinzufügen falls nötig
+            clean_filename = "".join(c for c in filename if c.isalnum() or c in (' ', '-', '_', '.')).strip()
+            if not clean_filename.endswith('.pdf'):
+                clean_filename += '.pdf'
+            
+            # Verzeichnis für PDFs holen
+            pdfs_dir = file_service.get_default_directory('pdfs')
+            Logger.info(f"Verwende PDF-Verzeichnis: {pdfs_dir}")
+            
+            # PDF-Einstellungen setzen (ohne printer_friendly für Einfachheit)
+            file_service.set_temp_pdf_settings(clean_filename, printer_friendly=False)
+            Logger.info(f"PDF-Dateiname für Speichern gesetzt: {clean_filename}")
+            
+            # FileManager öffnen
+            file_service.show_file_manager(pdfs_dir, "save_pdf_dir")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des PDF-Dateinamens: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Verarbeiten des PDF-Dateinamens: {str(e)}")
     
     def zeige_statblock(self):
         """Delegiert an StatisticsManager"""
-        self.statistics_manager.show_statblock()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.show_statblock()
+        else:
+            Logger.info("Statblock anzeigen - Manager nicht verfügbar")
     
     def zeige_element_statistiken(self):
         """Delegiert an StatisticsManager"""
-        self.statistics_manager.show_element_statistics()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.show_element_statistics()
+        else:
+            Logger.info("Element-Statistiken anzeigen - Manager nicht verfügbar")
     
     # ==================== ELEMENT DIALOGE ====================
     
     # Setting-Dialoge
     def open_add_setting_popup(self):
-        self.element_dialog_manager.open_add_setting_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_setting_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_setting_popup()
+            else:
+                Logger.info("Setting hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_setting_popup(self):
-        self.element_dialog_manager.open_delete_setting_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_setting_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_setting_popup()
+            else:
+                Logger.info("Setting löschen - Manager und Service nicht verfügbar")
     
     # Volk-Dialoge
     def open_add_volk_dialog(self):
-        self.element_dialog_manager.open_add_volk_dialog()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_volk_dialog()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_volk_dialog()
+            else:
+                Logger.info("Volk hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_volk_dialog(self):
-        self.element_dialog_manager.open_delete_volk_dialog()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_volk_dialog()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_volk_dialog()
+            else:
+                Logger.info("Volk löschen - Manager und Service nicht verfügbar")
     
     # Talent-Dialoge
     def open_add_talent_popup(self):
-        self.element_dialog_manager.open_add_talent_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_talent_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_talent_popup()
+            else:
+                Logger.info("Talent hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_talent_popup(self):
-        self.element_dialog_manager.open_delete_talent_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_talent_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_talent_popup()
+            else:
+                Logger.info("Talent löschen - Manager und Service nicht verfügbar")
     
     # Macht-Dialoge
     def open_add_macht_popup(self):
-        self.element_dialog_manager.open_add_macht_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_macht_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_macht_popup()
+            else:
+                Logger.info("Macht hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_macht_popup(self):
-        self.element_dialog_manager.open_delete_macht_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_macht_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_macht_popup()
+            else:
+                Logger.info("Macht löschen - Manager und Service nicht verfügbar")
     
     # Fertigkeit-Dialoge
     def open_add_fertigkeit_popup(self):
-        self.element_dialog_manager.open_add_fertigkeit_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_fertigkeit_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_fertigkeit_popup()
+            else:
+                Logger.info("Fertigkeit hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_fertigkeit_popup(self):
-        self.element_dialog_manager.open_delete_fertigkeit_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_fertigkeit_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_fertigkeit_popup()
+            else:
+                Logger.info("Fertigkeit löschen - Manager und Service nicht verfügbar")
     
     # Handicap-Dialoge
     def open_add_handicap_popup(self):
-        self.element_dialog_manager.open_add_handicap_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_handicap_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_handicap_popup()
+            else:
+                Logger.info("Handicap hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_handicap_popup(self):
-        self.element_dialog_manager.open_delete_handicap_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_handicap_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_handicap_popup()
+            else:
+                Logger.info("Handicap löschen - Manager und Service nicht verfügbar")
     
     # Ausrüstung-Dialoge
     def open_add_ausruestung_popup(self):
-        self.element_dialog_manager.open_add_ausruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_ausruestung_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_ausruestung_popup()
+            else:
+                Logger.info("Ausrüstung hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_ausruestung_popup(self):
-        self.element_dialog_manager.open_delete_ausruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_ausruestung_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_ausruestung_popup()
+            else:
+                Logger.info("Ausrüstung löschen - Manager und Service nicht verfügbar")
     
     # Waffen-Dialoge
     def open_add_waffe_popup(self):
-        self.element_dialog_manager.open_add_waffe_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_waffe_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_waffe_popup()
+            else:
+                Logger.info("Waffe hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_waffe_popup(self):
-        self.element_dialog_manager.open_delete_waffe_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_waffe_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_waffe_popup()
+            else:
+                Logger.info("Waffe löschen - Manager und Service nicht verfügbar")
     
     # Rüstung-Dialoge
     def open_add_ruestung_popup(self):
-        self.element_dialog_manager.open_add_ruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_ruestung_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_ruestung_popup()
+            else:
+                Logger.info("Rüstung hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_ruestung_popup(self):
-        self.element_dialog_manager.open_delete_ruestung_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_ruestung_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_ruestung_popup()
+            else:
+                Logger.info("Rüstung löschen - Manager und Service nicht verfügbar")
     
     # Schild-Dialoge
     def open_add_schild_popup(self):
-        self.element_dialog_manager.open_add_schild_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_add_schild_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_add_schild_popup()
+            else:
+                Logger.info("Schild hinzufügen - Manager und Service nicht verfügbar")
     
     def open_delete_schild_popup(self):
-        self.element_dialog_manager.open_delete_schild_popup()
+        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
+            self.element_dialog_manager.open_delete_schild_popup()
+        else:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.open_delete_schild_popup()
+            else:
+                Logger.info("Schild löschen - Manager und Service nicht verfügbar")
     
     # ==================== UI UPDATES ====================
     
@@ -478,7 +1187,10 @@ class EinstellungenWidget(MDScreen):
             
             # Aktualisiere eigene UI-Felder
             Clock.schedule_once(lambda dt: self._update_ui_fields(), 0.1)
-            Clock.schedule_once(lambda dt: self.statistics_manager.update_element_statistics_ui(), 0.1)
+            
+            # Element-Statistiken aktualisieren (falls Manager verfügbar)
+            if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+                Clock.schedule_once(lambda dt: self.statistics_manager.update_element_statistics_ui(), 0.1)
             
         except Exception as e:
             Logger.error(f"Fehler bei UI-Refresh: {str(e)}")
@@ -486,7 +1198,8 @@ class EinstellungenWidget(MDScreen):
     def aktualisiere_ui(self):
         """Öffentliche Methode zur UI-Aktualisierung"""
         self._update_ui_fields()
-        self.statistics_manager.update_element_statistics_ui()
+        if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager'):
+            self.statistics_manager.update_element_statistics_ui()
     
     def cleanup(self):
         """Bereinigt das Widget beim Beenden"""
@@ -551,7 +1264,6 @@ kv_string = '''
                                 size_hint: None, None
                                 size: dp(100), dp(40)
                                 on_release: root.switch_theme_style('Light')
-                                selected: app.theme_cls.theme_style == 'Light'
 
                                 MDSegmentButtonLabel:
                                     text: "Hell"
@@ -560,7 +1272,6 @@ kv_string = '''
                                 size_hint: None, None
                                 size: dp(100), dp(40)
                                 on_release: root.switch_theme_style('Dark')
-                                selected: app.theme_cls.theme_style == 'Dark'
 
                                 MDSegmentButtonLabel:
                                     text: "Dunkel"
@@ -580,12 +1291,76 @@ kv_string = '''
 
                         MDGridLayout:
                             id: colors_box
-                            cols: 3
+                            cols: 4
                             size_hint_y: None
                             height: self.minimum_height
                             spacing: dp(8)
                             padding: 0
                             pos_hint: {"center_y": .5}
+                            
+                            # Farb-Chips - nur gültige KivyMD-Paletten
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Orange")
+                                MDChipText:
+                                    text: "Orange"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Blue")
+                                MDChipText:
+                                    text: "Blau"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Red")
+                                MDChipText:
+                                    text: "Rot"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Green")
+                                MDChipText:
+                                    text: "Grün"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Purple")
+                                MDChipText:
+                                    text: "Lila"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Teal")
+                                MDChipText:
+                                    text: "Türkis"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Amber")
+                                MDChipText:
+                                    text: "Bernstein"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Brown")
+                                MDChipText:
+                                    text: "Braun"
+                            
+                            MDChip:
+                                size_hint_y: None
+                                height: dp(32)
+                                on_release: root.on_color_selected("Gray")
+                                MDChipText:
+                                    text: "Grau"
 
             # Charakter-Einstellungen Card
             MDCard:
@@ -746,7 +1521,7 @@ kv_string = '''
                                 bold: True
 
                             MDGridLayout:
-                                cols: 3
+                                cols: 4
                                 spacing: dp(8)
                                 size_hint_y: None
                                 height: dp(48)
@@ -761,6 +1536,17 @@ kv_string = '''
 
                                     MDButtonText:
                                         text: "Neu"
+
+                                MDButton:
+                                    style: "elevated"
+                                    size_hint_x: 1
+                                    on_release: root.schnellspeichern_charakter()
+
+                                    MDButtonIcon:
+                                        icon: "content-save-outline"
+
+                                    MDButtonText:
+                                        text: "Schnell"
 
                                 MDButton:
                                     style: "elevated"
@@ -895,338 +1681,324 @@ kv_string = '''
                         height: self.minimum_height
                         spacing: dp(4)
 
-                    # Volk
+                    # Völker-Verwaltung
                     MDBoxLayout:
-                        orientation: 'horizontal'
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "account-group"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
+                        height: self.minimum_height
+                        spacing: dp(8)
 
                         MDLabel:
-                            text: "Volk"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
+                            text: "Völker"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_volk_dialog()
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
 
-                            MDButtonIcon:
-                                icon: "plus"
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_volk_dialog()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_volk_dialog()
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_volk_dialog()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Fertigkeiten
+                    # Talente-Verwaltung
                     MDBoxLayout:
-                        orientation: 'horizontal'
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "fencing"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Fertigkeiten"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_fertigkeit_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_fertigkeit_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Handicaps
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "account-alert"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Handicaps"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_handicap_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_handicap_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Talente
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "star-circle"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
+                        height: self.minimum_height
+                        spacing: dp(8)
 
                         MDLabel:
                             text: "Talente"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_talent_popup()
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
 
-                            MDButtonIcon:
-                                icon: "plus"
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_talent_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_talent_popup()
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_talent_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Mächte
+                    # Mächte-Verwaltung
                     MDBoxLayout:
-                        orientation: 'horizontal'
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "creation-outline"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
+                        height: self.minimum_height
+                        spacing: dp(8)
 
                         MDLabel:
                             text: "Mächte"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_macht_popup()
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
 
-                            MDButtonIcon:
-                                icon: "plus"
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_macht_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_macht_popup()
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_macht_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Ausrüstung
+                    # Fertigkeiten-Verwaltung
                     MDBoxLayout:
-                        orientation: 'horizontal'
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
+                        height: self.minimum_height
+                        spacing: dp(8)
 
-                        MDIcon:
-                            icon: "sack"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
+                        MDLabel:
+                            text: "Fertigkeiten"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_fertigkeit_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_fertigkeit_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Handicaps-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Handicaps"
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
+
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
+
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_handicap_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "plus"
+                                
+                                MDButtonText:
+                                    text: "Hinzufügen"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_handicap_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
+
+                    # Ausrüstung-Verwaltung
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
 
                         MDLabel:
                             text: "Ausrüstung"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
+                            bold: True
+                            size_hint_y: None
+                            height: dp(30)
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_ausruestung_popup()
+                        MDGridLayout:
+                            cols: 4
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
 
-                            MDButtonIcon:
-                                icon: "plus"
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_ausruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "package-variant"
+                                
+                                MDButtonText:
+                                    text: "Allgemein"
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_ausruestung_popup()
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_waffe_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "sword"
+                                
+                                MDButtonText:
+                                    text: "Waffen"
 
-                            MDButtonIcon:
-                                icon: "minus"
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_ruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "shield"
+                                
+                                MDButtonText:
+                                    text: "Rüstungen"
 
-                    # Rüstung
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
+                            MDButton:
+                                style: "elevated"
+                                size_hint_x: 1
+                                on_release: root.open_add_schild_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "shield-outline"
+                                
+                                MDButtonText:
+                                    text: "Schilde"
 
-                        MDIcon:
-                            icon: "shield"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
+                        # Lösch-Buttons für Ausrüstung
+                        MDGridLayout:
+                            cols: 4
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
 
-                        MDLabel:
-                            text: "Rüstung"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_ausruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_ruestung_popup()
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_waffe_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 
-                            MDButtonIcon:
-                                icon: "plus"
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_ruestung_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_ruestung_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Waffen
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "sword"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Waffe"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_waffe_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_waffe_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
-
-                    # Schild
-                    MDBoxLayout:
-                        orientation: 'horizontal'
-                        size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(16)
-
-                        MDIcon:
-                            icon: "shield"
-                            size_hint: None, None
-                            size: dp(24), dp(24)
-                            pos_hint: {"center_y": .5}
-
-                        MDLabel:
-                            text: "Schild"
-                            size_hint_x: None
-                            width: dp(100)
-                            pos_hint: {"center_y": .5}
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_add_schild_popup()
-
-                            MDButtonIcon:
-                                icon: "plus"
-
-                        MDButton:
-                            style: "text"
-                            size_hint: None, None
-                            size: dp(48), dp(48)
-                            on_release: root.open_delete_schild_popup()
-
-                            MDButtonIcon:
-                                icon: "minus"
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.open_delete_schild_popup()
+                                
+                                MDButtonIcon:
+                                    icon: "delete"
+                                
+                                MDButtonText:
+                                    text: "Löschen"
 '''
 
 # KV-Layout laden
