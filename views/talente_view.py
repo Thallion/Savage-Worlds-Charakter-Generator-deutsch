@@ -3,6 +3,7 @@
 View-Komponente für Talente nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Talenten bereit.
 Mit Unterstützung für Mehrfachauswahl von Talenten und Bearbeitungsfunktion.
+ERWEITERT: Mit Savage Pathfinder Support für kostenlose Klassen-/Hintergrund-/Experte-Talente
 """
 
 from kivymd.app import MDApp
@@ -28,7 +29,15 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 
 # Import der Funktionen für Voraussetzungsprüfung
-from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter, NICHT_DUPLIZIERBARE_TALENTE
+from functions.talent_funktionen import (
+    pruefe_voraussetzungen, 
+    is_talent_rang_hoeher_als_charakter, 
+    NICHT_DUPLIZIERBARE_TALENTE,
+    ist_savage_pathfinder_setting,
+    ist_pathfinder_kostenloses_talent,
+    hat_bereits_kostenloses_pathfinder_talent,
+    waehle_pathfinder_kostenloses_talent
+)
 
 # Import für Dialog Service
 from services.service_container import get_dialog_service
@@ -285,6 +294,7 @@ class TalentItemRow(MDBoxLayout):
     """
     Einzelne Zeile in der Talente-Liste.
     Repräsentiert ein einzelnes Talent mit seinen Eigenschaften und Interaktionsmöglichkeiten.
+    ERWEITERT: Mit Savage Pathfinder Support für kostenlose Talente
     """
     index = NumericProperty(0)
     name_key = StringProperty("")
@@ -304,6 +314,7 @@ class TalentItemRow(MDBoxLayout):
         self.dialog = None
         self.voraussetzungen_dialog = None
         self.rang_dialog = None
+        self.pathfinder_dialog = None  # NEU: Dialog für kostenlose Pathfinder-Talente
         Logger.debug(f"TalentItemRow.__init__: Controller gesetzt: {self.controller is not None}")
 
     def _get_controller(self):
@@ -350,6 +361,7 @@ class TalentItemRow(MDBoxLayout):
         """
         Wählt ein Talent aus.
         Prüft, ob das Talent duplizierbar ist und zeigt ggf. einen Dialog.
+        ERWEITERT: Unterstützt kostenlose Pathfinder-Talente.
         """
         Logger.debug(f"TalentItemRow: Start waehle_talent für {self.talent_name}")
         controller = self._get_controller()
@@ -374,12 +386,140 @@ class TalentItemRow(MDBoxLayout):
                 self._show_rang_confirmation_dialog()
             elif result == "needs_voraussetzungen_confirmation":
                 self._show_voraussetzungen_confirmation_dialog()
+            elif result == "pathfinder_kostenlos_angeboten":  # NEU: Pathfinder kostenlos
+                self._show_pathfinder_kostenlos_dialog()
             elif result:
                 self.ausgewaehlt = True
                 Logger.debug(f"TalentItemRow: {self.talent_name} erfolgreich ausgewählt")
                 self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Talents: {str(e)}")
+
+    def _show_pathfinder_kostenlos_dialog(self):
+        """
+        NEU: Zeigt einen Dialog für kostenlose Pathfinder-Talente an.
+        """
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Haupttext
+        info_label = MDLabel(
+            text=f"Das Talent '{self.talent_name}' ist ein Klassen-, Hintergrund- oder Experte-Talent und kann in Savage Pathfinder während der Charaktererstellung kostenlos gewählt werden.",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(info_label)
+        
+        # Frage
+        question_label = MDLabel(
+            text="Möchten Sie dieses Talent kostenlos wählen oder mit den normalen Kosten (2 Handicap-Punkte oder 1 Aufstieg)?",
+            size_hint_y=None,
+            height=dp(60),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(question_label)
+        
+        self.pathfinder_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Kostenloses Pathfinder-Talent",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.pathfinder_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Normale Kosten"),
+                    style="text",
+                    on_release=lambda x: self._waehle_talent_mit_kosten(),
+                ),
+                MDButton(
+                    MDButtonText(text="Kostenlos wählen"),
+                    style="text",
+                    on_release=lambda x: self._waehle_talent_kostenlos(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.pathfinder_dialog.open()
+
+    def _waehle_talent_kostenlos(self):
+        """
+        NEU: Wählt das Talent kostenlos als Pathfinder-Talent aus.
+        """
+        self.pathfinder_dialog.dismiss()
+        controller = self._get_controller()
+        if controller:
+            # Verwende die spezielle Pathfinder-Funktion
+            result = waehle_pathfinder_kostenloses_talent(
+                controller.charakter, 
+                self.name_key, 
+                ignore_voraussetzungen=True  # Voraussetzungen können ignoriert werden
+            )
+            
+            if result == "needs_voraussetzungen_confirmation":
+                self._show_voraussetzungen_confirmation_dialog()
+            elif result == "already_used":
+                self._show_error_dialog("Es wurde bereits ein kostenloses Pathfinder-Talent gewählt.")
+            elif result == "not_pathfinder_category":
+                self._show_error_dialog("Dieses Talent gehört nicht zu den kostenlosen Kategorien.")
+            elif result:
+                self.ausgewaehlt = True
+                Logger.info(f"TalentItemRow: {self.talent_name} kostenlos als Pathfinder-Talent ausgewählt")
+                self._refresh_ui()
+            else:
+                self._show_error_dialog("Das Talent konnte nicht kostenlos ausgewählt werden.")
+
+    def _waehle_talent_mit_kosten(self):
+        """
+        NEU: Wählt das Talent mit normalen Kosten aus (bypassed die kostenlose Option).
+        """
+        self.pathfinder_dialog.dismiss()
+        controller = self._get_controller()
+        if controller:
+            # Normale Talent-Auswahl durchführen, aber Rang-Check ignorieren da bereits geprüft
+            if controller.charakter.verbleibende_handicap_punkte > 1.5:
+                # Mit Handicap-Punkten
+                from functions.talent_funktionen import talent_auswaehlen
+                erfolg = talent_auswaehlen(controller.charakter, self.name_key, skip_prereq_check=False)
+                if erfolg:
+                    controller.charakter.verbleibende_handicap_punkte -= 2
+                    self.ausgewaehlt = True
+                    controller.charakter.berechne_abgeleitete_werte()
+                    self._refresh_ui()
+                    Logger.info(f"TalentItemRow: {self.talent_name} mit Handicap-Punkten ausgewählt")
+                else:
+                    self._show_error_dialog("Das Talent konnte nicht mit Handicap-Punkten ausgewählt werden.")
+            elif controller.charakter.verbleibende_aufstiege > 0:
+                # Mit Aufstiegen
+                from functions.talent_funktionen import talent_auswaehlen
+                erfolg = talent_auswaehlen(controller.charakter, self.name_key, skip_prereq_check=False)
+                if erfolg:
+                    controller.charakter.verbleibende_aufstiege -= 1
+                    controller.charakter.update_char_gen_status()
+                    self.ausgewaehlt = True
+                    controller.charakter.berechne_abgeleitete_werte()
+                    self._refresh_ui()
+                    Logger.info(f"TalentItemRow: {self.talent_name} mit Aufstiegen ausgewählt")
+                else:
+                    self._show_error_dialog("Das Talent konnte nicht mit Aufstiegen ausgewählt werden.")
+            else:
+                self._show_error_dialog("Keine Handicap-Punkte oder Aufstiege verfügbar.")
 
     def _show_not_duplicatable_dialog(self):
         """Zeigt einen Dialog an, wenn ein Talent nicht mehrfach ausgewählt werden kann."""
@@ -547,6 +687,8 @@ class TalentItemRow(MDBoxLayout):
             result = controller.waehle_talent(self.name_key, ignore_rang_check=True)
             if result == "needs_voraussetzungen_confirmation":
                 self._show_voraussetzungen_confirmation_dialog()
+            elif result == "pathfinder_kostenlos_angeboten":  # NEU: Kann auch nach Rang-Bestätigung auftreten
+                self._show_pathfinder_kostenlos_dialog()
             elif result:
                 self.ausgewaehlt = True
                 self._refresh_ui()
@@ -613,6 +755,15 @@ class TalentItemRow(MDBoxLayout):
         Args:
             message (str): Die anzuzeigende Fehlermeldung
         """
+        self._show_error_dialog(message)
+
+    def _show_error_dialog(self, message):
+        """
+        Zeigt einen Fehlerdialog mit der angegebenen Nachricht an.
+        
+        Args:
+            message (str): Die anzuzeigende Fehlermeldung
+        """
         try:
             error_dialog = MDDialog(
                 MDDialogHeadlineText(text="Fehler"),
@@ -644,7 +795,7 @@ class TalentItemRow(MDBoxLayout):
 
     def close_dialog(self):
         """Schließt aktive Dialoge."""
-        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog']:
+        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog', 'pathfinder_dialog']:
             if hasattr(self, dialog_attr) and getattr(self, dialog_attr):
                 getattr(self, dialog_attr).dismiss()
 

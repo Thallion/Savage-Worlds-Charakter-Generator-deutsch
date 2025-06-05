@@ -584,3 +584,141 @@ class CharakterController(EventDispatcher):
         """
         # Löse Events aus, die von UI-Widgets abgefangen werden können
         self.dispatch('on_charakter_updated')
+
+
+    # Pathfinder Methoden
+
+    def waehle_pathfinder_kostenloses_talent(self, talent_name, ignore_voraussetzungen=False):
+        """
+        NEU: Wählt ein Klassen-, Hintergrund- oder Experte-Talent in Savage Pathfinder kostenlos aus.
+        
+        Args:
+            talent_name (str): Name des Talents
+            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
+            
+        Returns:
+            bool oder str: True bei Erfolg, False bei Fehler, oder Fehlercodes
+        """
+        try:
+            result = self.charakter.waehle_pathfinder_kostenloses_talent(talent_name, ignore_voraussetzungen)
+            
+            if result is True:
+                self.dispatch('on_charakter_updated')
+                Logger.info(f"Kostenloses Pathfinder-Talent '{talent_name}' erfolgreich ausgewählt")
+            
+            return result
+        except Exception as e:
+            Logger.error(f"Fehler bei kostenloser Pathfinder-Talent-Auswahl {talent_name}: {str(e)}")
+            self.dispatch('on_charakter_error', f"Pathfinder-Talent-Auswahl fehlgeschlagen: {str(e)}")
+            return False
+
+    def ist_savage_pathfinder_setting(self):
+        """
+        NEU: Prüft, ob das aktuelle Setting Savage Pathfinder ist.
+        
+        Returns:
+            bool: True wenn Savage Pathfinder, sonst False
+        """
+        try:
+            return self.charakter.ist_savage_pathfinder_setting()
+        except Exception as e:
+            Logger.error(f"Fehler bei Pathfinder-Setting-Prüfung: {str(e)}")
+            return False
+
+    def hat_bereits_kostenloses_pathfinder_talent(self):
+        """
+        NEU: Prüft, ob bereits ein kostenloses Pathfinder-Talent gewählt wurde.
+        
+        Returns:
+            bool: True wenn bereits ein kostenloses Talent gewählt wurde
+        """
+        try:
+            return self.charakter.hat_bereits_kostenloses_pathfinder_talent()
+        except Exception as e:
+            Logger.error(f"Fehler bei Pathfinder-Talent-Prüfung: {str(e)}")
+            return False
+
+    def ist_pathfinder_kostenloses_talent(self, talent_name):
+        """
+        NEU: Prüft, ob ein Talent zu den Kategorien gehört, die in Savage Pathfinder 
+        während der Charaktererstellung kostenlos gewählt werden können.
+        
+        Args:
+            talent_name (str): Name des Talents
+            
+        Returns:
+            bool: True wenn Klassen-, Hintergrund- oder Experte-Talent, sonst False
+        """
+        try:
+            if talent_name in self.charakter.talente:
+                talent = self.charakter.talente[talent_name]
+                return self.charakter.ist_pathfinder_kostenloses_talent(talent)
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei Pathfinder-Kategorie-Prüfung für {talent_name}: {str(e)}")
+            return False
+
+    def get_pathfinder_info(self):
+        """
+        NEU: Gibt Informationen über den Pathfinder-Status des Charakters zurück.
+        
+        Returns:
+            dict: Dictionary mit Pathfinder-Informationen
+        """
+        try:
+            return {
+                'ist_pathfinder_setting': self.ist_savage_pathfinder_setting(),
+                'kostenlose_talente_gewaehlt': getattr(self.charakter, 'pathfinder_kostenlose_talente_gewaehlt', 0),
+                'kann_kostenloses_talent_waehlen': (
+                    self.ist_savage_pathfinder_setting() and 
+                    not self.charakter.char_gen_completed and
+                    not self.hat_bereits_kostenloses_pathfinder_talent()
+                ),
+                'char_gen_completed': self.charakter.char_gen_completed
+            }
+        except Exception as e:
+            Logger.error(f"Fehler beim Abrufen der Pathfinder-Informationen: {str(e)}")
+            return {
+                'ist_pathfinder_setting': False,
+                'kostenlose_talente_gewaehlt': 0,
+                'kann_kostenloses_talent_waehlen': False,
+                'char_gen_completed': True
+            }
+
+    # Zusätzlich sollte in der bestehenden waehle_talent Methode 
+    # ein Log-Eintrag hinzugefügt werden, wenn Pathfinder-spezifische Rückgabewerte auftreten:
+
+    def waehle_talent(self, talent_name, ignore_rang_check=False, ignore_voraussetzungen=False):
+        """
+        Wählt ein Talent für den Charakter aus
+        ERWEITERT: Mit verbessertem Logging für Pathfinder-Features
+        
+        Args:
+            talent_name (str): Name des Talents
+            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung
+            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
+            
+        Returns:
+            bool oder str: Ergebniscode oder Erfolgsstatus
+        """
+        try:
+            # Flag nur setzen, wenn es angefordert wurde
+            if ignore_voraussetzungen:
+                self.charakter.ignore_voraussetzungen = True
+                Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
+                
+            # Parameter weitergeben
+            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
+            
+            # Pathfinder-spezifische Behandlung
+            if result == "pathfinder_kostenlos_angeboten":
+                Logger.info(f"Pathfinder-Talent '{talent_name}' kann kostenlos gewählt werden")
+            elif result is True:
+                self.dispatch('on_charakter_updated')
+                Logger.debug(f"Talent '{talent_name}' erfolgreich ausgewählt")
+            
+            return result
+        except Exception as e:
+            Logger.error(f"Fehler bei Auswahl von Talent {talent_name}: {str(e)}")
+            self.dispatch('on_charakter_error', f"Talent-Auswahl fehlgeschlagen: {str(e)}")
+            return False        

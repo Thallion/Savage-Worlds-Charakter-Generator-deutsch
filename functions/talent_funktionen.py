@@ -2,6 +2,7 @@
 Modul für die Verwaltung von Talenten im Charakter.
 Dieses Modul enthält Funktionen zur Verwaltung von Talenten, einschließlich
 des Auswahlens, Abwählens und Überprüfens der Voraussetzungen.
+ERWEITERT: Mit Savage Pathfinder Support für kostenlose Klassen-/Hintergrund-/Experte-Talente
 """
 
 from kivy.logger import Logger
@@ -20,6 +21,59 @@ NICHT_DUPLIZIERBARE_TALENTE = [
     "Schwer zu töten", "Schwerer zu töten", "Schnell", "Flink",
     "Raufbold", "Schläger", "Attraktiv", "Sehr attraktiv"
 ]
+
+# Savage Pathfinder: Kategorien für kostenlose Talente während Charaktererstellung
+PATHFINDER_KOSTENLOSE_KATEGORIEN = [
+    "Klasse", "Hintergrund", "Experte", "Class", "Background", "Expert"
+]
+
+
+def ist_savage_pathfinder_setting(charakter):
+    """
+    Prüft, ob das aktuelle Setting Savage Pathfinder ist.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        bool: True wenn Savage Pathfinder, sonst False
+    """
+    setting_name = getattr(charakter, 'active_setting_name', '').lower()
+    return 'pathfinder' in setting_name or setting_name == 'savage pathfinder'
+
+
+def ist_pathfinder_kostenloses_talent(talent):
+    """
+    Prüft, ob ein Talent zu den Kategorien gehört, die in Savage Pathfinder 
+    während der Charaktererstellung kostenlos gewählt werden können.
+    
+    Args:
+        talent: Das Talent-Objekt
+        
+    Returns:
+        bool: True wenn Klassen-, Hintergrund- oder Experte-Talent, sonst False
+    """
+    if not hasattr(talent, 'kategorie') or not talent.kategorie:
+        return False
+        
+    return talent.kategorie in PATHFINDER_KOSTENLOSE_KATEGORIEN
+
+
+def hat_bereits_kostenloses_pathfinder_talent(charakter):
+    """
+    Prüft, ob bereits ein kostenloses Pathfinder-Talent gewählt wurde.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        bool: True wenn bereits ein kostenloses Talent gewählt wurde
+    """
+    # Prüfe, ob es ein Attribut gibt, das die Anzahl verfolgt
+    if not hasattr(charakter, 'pathfinder_kostenlose_talente_gewaehlt'):
+        charakter.pathfinder_kostenlose_talente_gewaehlt = 0
+        
+    return charakter.pathfinder_kostenlose_talente_gewaehlt >= 1
 
 
 def initialisiere_talente(charakter, talent_daten):
@@ -151,6 +205,103 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     charakter.berechne_abgeleitete_werte()
         
     Logger.info(f"Freies Talent '{talent_name_key}' ohne Kosten ausgewählt.")
+    return True
+
+
+def waehle_pathfinder_kostenloses_talent(charakter, talent_name_key, ignore_voraussetzungen=False):
+    """
+    Wählt ein Klassen-, Hintergrund- oder Experte-Talent in Savage Pathfinder kostenlos aus.
+    Nur während der Charaktererstellung (char_gen_completed = False) und nur einmal möglich.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        talent_name_key: Der Name des auszuwählenden Talents
+        ignore_voraussetzungen: Flag zum Ignorieren der Voraussetzungsprüfung
+        
+    Returns:
+        str oder bool: "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
+                       "not_duplicatable" wenn Talent nicht duplizierbar ist,
+                       "already_used" wenn bereits ein kostenloses Talent gewählt wurde,
+                       "not_pathfinder_category" wenn falsche Kategorie,
+                       True bei Erfolg, False bei Misserfolg
+    """
+    Logger.info(f"Wähle kostenloses Pathfinder-Talent: {talent_name_key}")
+    
+    # Prüfen, ob das Talent existiert
+    if talent_name_key not in charakter.talente:
+        Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
+        return False
+        
+    talent = charakter.talente[talent_name_key]
+    
+    # Prüfen, ob es sich um die richtige Kategorie handelt
+    if not ist_pathfinder_kostenloses_talent(talent):
+        Logger.warning(f"Talent '{talent.name}' gehört nicht zu den kostenlosen Kategorien (Klasse/Hintergrund/Experte).")
+        return "not_pathfinder_category"
+    
+    # Prüfen, ob bereits ein kostenloses Talent gewählt wurde
+    if hat_bereits_kostenloses_pathfinder_talent(charakter):
+        Logger.warning("Es wurde bereits ein kostenloses Pathfinder-Talent gewählt.")
+        return "already_used"
+    
+    # Prüfe ob dieses spezifische Talent bereits ausgewählt ist (für Mehrfachauswahl)
+    if talent.ausgewaehlt:
+        # Prüfe ob das Talent duplizierbar ist
+        if talent.name in NICHT_DUPLIZIERBARE_TALENTE:
+            Logger.warning(f"Talent '{talent.name}' kann nicht mehrfach ausgewählt werden.")
+            return "not_duplicatable"
+        
+        # Erstelle eine neue Instanz für Mehrfachauswahl
+        base_key = talent_name_key.split('_')[0] if '_' in talent_name_key and talent_name_key.split('_')[-1].isdigit() else talent_name_key
+        suffix = 2
+        new_key = f"{base_key}_{suffix}"
+        
+        # Finde den nächsten freien Suffix
+        while new_key in charakter.talente:
+            suffix += 1
+            new_key = f"{base_key}_{suffix}"
+        
+        # Erstelle eine Kopie des Talents mit der clone() Methode
+        new_talent = talent.clone()
+        new_talent.ausgewaehlt = False  # Zurücksetzen für die neue Instanz
+        
+        # Füge das neue Talent hinzu
+        charakter.talente[new_key] = new_talent
+        Logger.info(f"Neue Instanz von Talent '{talent.name}' mit Key '{new_key}' erstellt")
+        
+        # Wähle die neue Instanz aus
+        return waehle_pathfinder_kostenloses_talent(charakter, new_key, ignore_voraussetzungen)
+        
+    # Voraussetzungsprüfung, nur wenn ignore_voraussetzungen nicht gesetzt ist
+    if not ignore_voraussetzungen:
+        fehlermeldungen = pruefe_voraussetzungen(charakter, talent)
+        if fehlermeldungen:
+            # Fehlermeldungen als Attribut speichern für UI-Dialog
+            charakter.temp_voraussetzungs_fehler = fehlermeldungen
+            Logger.debug(f"Rückgabe 'needs_voraussetzungen_confirmation' für kostenloses Pathfinder-Talent {talent_name_key}")
+            return "needs_voraussetzungen_confirmation"
+    
+    # Direkt das Talent auswählen, ohne Kosten
+    talent.ausgewaehlt = True
+    
+    # Machtpunkte und verfügbare Mächte erhöhen, falls das Talent diese gewährt
+    charakter.verfuegbare_maechte += talent.neue_maechte
+    charakter.anzahl_maechte += talent.neue_maechte
+    charakter.erhoehe_machtpunkte(talent.machtpunkte)
+    
+    # Zur Liste der ausgewählten Talente hinzufügen
+    if talent_name_key not in charakter.selected_talente:
+        charakter.selected_talente.append(talent_name_key)
+    
+    # Zähler für kostenlose Pathfinder-Talente erhöhen
+    if not hasattr(charakter, 'pathfinder_kostenlose_talente_gewaehlt'):
+        charakter.pathfinder_kostenlose_talente_gewaehlt = 0
+    charakter.pathfinder_kostenlose_talente_gewaehlt += 1
+        
+    # Abgeleitete Werte neu berechnen
+    charakter.berechne_abgeleitete_werte()
+        
+    Logger.info(f"Kostenloses Pathfinder-Talent '{talent_name_key}' ausgewählt.")
     return True
 
 
@@ -315,6 +466,7 @@ def pruefe_voraussetzungen(charakter, talent):
 def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
     """
     Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
+    ERWEITERT: Unterstützt kostenlose Pathfinder-Talente während der Charaktererstellung.
     Wenn das Talent bereits ausgewählt ist, wird eine neue Instanz mit Suffix erstellt.
     
     Args:
@@ -326,6 +478,7 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
         str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
                        "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
                        "not_duplicatable" wenn Talent nicht duplizierbar ist,
+                       "pathfinder_kostenlos_angeboten" wenn kostenloses Pathfinder-Talent möglich ist,
                        True bei Erfolg, False bei Misserfolg
     """
     # Prüfen, ob das Talent existiert
@@ -334,6 +487,15 @@ def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
         return False
         
     talent = charakter.talente[talent_name_key]
+    
+    # NEUE LOGIK: Savage Pathfinder kostenlose Talente während Charaktererstellung
+    if (ist_savage_pathfinder_setting(charakter) and 
+        not charakter.char_gen_completed and 
+        ist_pathfinder_kostenloses_talent(talent) and 
+        not hat_bereits_kostenloses_pathfinder_talent(charakter)):
+        
+        Logger.info(f"Pathfinder-Talent '{talent_name_key}' kann kostenlos gewählt werden.")
+        return "pathfinder_kostenlos_angeboten"
     
     # Prüfe ob dieses spezifische Talent bereits ausgewählt ist (für Mehrfachauswahl)
     if talent.ausgewaehlt:
@@ -490,6 +652,7 @@ def is_talent_rang_hoeher_als_charakter(charakter, talent_rang):
 def entferne_talent(charakter, talent_name_key):
     """
     Entfernt ein ausgewähltes Talent und führt die entsprechenden Anpassungen am Charakter durch.
+    ERWEITERT: Berücksichtigt kostenlose Pathfinder-Talente.
     
     Args:
         charakter: Das Charakter-Objekt
@@ -523,16 +686,40 @@ def entferne_talent(charakter, talent_name_key):
         talent = charakter.talente[talent_name_key]
         Logger.info(f"talent ausgewaehlt {talent.ausgewaehlt}")
         if talent.ausgewaehlt:
+            
+            # NEUE LOGIK: Prüfe, ob es ein kostenloses Pathfinder-Talent war
+            war_kostenloses_pathfinder_talent = (
+                ist_savage_pathfinder_setting(charakter) and 
+                ist_pathfinder_kostenloses_talent(talent) and
+                hasattr(charakter, 'pathfinder_kostenlose_talente_gewaehlt') and
+                charakter.pathfinder_kostenlose_talente_gewaehlt > 0
+            )
+            
             if charakter.char_gen_completed:
                 talent_abwaehlen()
-                charakter.verbleibende_aufstiege += 1  # Rückerstattung der Aufstiegs-Punkte                    
+                # Bei kostenlosen Pathfinder-Talenten keine Rückerstattung
+                if not war_kostenloses_pathfinder_talent:
+                    charakter.verbleibende_aufstiege += 1  # Rückerstattung der Aufstiegs-Punkte                    
                 charakter.update_char_gen_status()  # Aktualisiere den Status
+                
+                # Pathfinder-Zähler verringern, falls es ein kostenloses war
+                if war_kostenloses_pathfinder_talent:
+                    charakter.pathfinder_kostenlose_talente_gewaehlt -= 1
+                    
                 return True
             else:
                 talent_abwaehlen() 
-                charakter.verbleibende_handicap_punkte += 2
-                # Nicht mehr als 4 Handicap-Punkte
-                charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
+                
+                # Bei kostenlosen Pathfinder-Talenten keine Handicap-Punkte-Rückerstattung
+                if not war_kostenloses_pathfinder_talent:
+                    charakter.verbleibende_handicap_punkte += 2
+                    # Nicht mehr als 4 Handicap-Punkte
+                    charakter.verbleibende_handicap_punkte = min(charakter.verbleibende_handicap_punkte, 4)
+                
+                # Pathfinder-Zähler verringern, falls es ein kostenloses war
+                if war_kostenloses_pathfinder_talent:
+                    charakter.pathfinder_kostenlose_talente_gewaehlt -= 1
+                    
                 return True                                  
         else:
             Logger.warning(f"Talent '{talent_name_key}' ist nicht ausgewählt.")

@@ -42,6 +42,7 @@ def speichern_als_json(charakter, dateipfad):
 def to_dict(charakter):
     """
     Konvertiert ein Charakterobjekt in ein Dictionary.
+    ERWEITERT: Mit Savage Pathfinder Support für kostenlose Talente
     
     Args:
         charakter: Das zu konvertierende Charakterobjekt
@@ -52,6 +53,9 @@ def to_dict(charakter):
     # Sicherstellen, dass selected_handicaps aktualisiert sind
     # alle Handicaps, die ausgewaehlt sind, in selected_handicaps aufnehmen
     charakter.selected_handicaps = [name for name, handicap in charakter.handicaps.items() if handicap.ausgewaehlt]
+
+    # NEU: Pathfinder-spezifische Attribute mit Standardwerten
+    pathfinder_kostenlose_talente_gewaehlt = getattr(charakter, 'pathfinder_kostenlose_talente_gewaehlt', 0)
 
     return {
         'profil_daten': charakter.profil_daten,
@@ -85,12 +89,15 @@ def to_dict(charakter):
         'gesamt_handicap_punkte': charakter.gesamt_handicap_punkte,
         'settingregeln': charakter.settingregeln.to_dict(),
         'active_setting_name': charakter.custom_element_manager.active_setting_name,
-        'char_gen_completed': charakter.char_gen_completed  # Hinzugefügt
+        'char_gen_completed': charakter.char_gen_completed,  # Hinzugefügt
+        # NEU: Savage Pathfinder Support
+        'pathfinder_kostenlose_talente_gewaehlt': pathfinder_kostenlose_talente_gewaehlt
     }
 
 def from_dict(self, data):
     """
     Lädt Daten aus einem Dictionary in das Charakterobjekt.
+    ERWEITERT: Mit Savage Pathfinder Support für kostenlose Talente
     
     Args:
         data (dict): Ein Dictionary mit Charakterdaten
@@ -289,6 +296,10 @@ def from_dict(self, data):
         self.zusaetzliche_talente = data.get('zusaetzliche_talente', self.zusaetzliche_talente)
         self.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', self.gesamt_handicap_punkte)
         self.char_gen_completed = data.get('char_gen_completed', self.char_gen_completed) 
+
+        # NEU: Savage Pathfinder Support
+        self.pathfinder_kostenlose_talente_gewaehlt = data.get('pathfinder_kostenlose_talente_gewaehlt', 0)
+        Logger.debug(f"Pathfinder kostenlose Talente geladen: {self.pathfinder_kostenlose_talente_gewaehlt}")
 
         # Setting-Einstellungen
         if 'settingregeln' in data:

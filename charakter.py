@@ -160,6 +160,8 @@ class Charakter(EventDispatcher):
         self.volk_manager = VolkManager(self)
         self.volk_manager.bind(on_volk_change=self.on_charakter_change)
 
+        self.pathfinder_kostenlose_talente_gewaehlt = 0  # Zähler für kostenlose Pathfinder-Talente
+    
         # Profil-Daten setzen
         self.profil_daten = {
             "Name": char_name,
@@ -834,3 +836,49 @@ class Charakter(EventDispatcher):
         # Wenn der Name in profil_daten geändert wird, aktualisiere char_name Property.
         if key == "Name":
             self.char_name = value
+
+    # Pthfinder-Methoden
+
+    def waehle_pathfinder_kostenloses_talent(self, talent_name_key, ignore_voraussetzungen=False):
+        """
+        NEU: Wählt ein Klassen-, Hintergrund- oder Experte-Talent in Savage Pathfinder kostenlos aus.
+        
+        Args:
+            talent_name_key: Der Name des auszuwählenden Talents
+            ignore_voraussetzungen: Flag zum Ignorieren der Voraussetzungsprüfung
+            
+        Returns:
+            str oder bool: Wie in talent_funktionen.waehle_pathfinder_kostenloses_talent
+        """
+        return talent_funktionen.waehle_pathfinder_kostenloses_talent(self, talent_name_key, ignore_voraussetzungen)
+
+    def ist_savage_pathfinder_setting(self):
+        """
+        NEU: Prüft, ob das aktuelle Setting Savage Pathfinder ist.
+        
+        Returns:
+            bool: True wenn Savage Pathfinder, sonst False
+        """
+        return talent_funktionen.ist_savage_pathfinder_setting(self)
+
+    def hat_bereits_kostenloses_pathfinder_talent(self):
+        """
+        NEU: Prüft, ob bereits ein kostenloses Pathfinder-Talent gewählt wurde.
+        
+        Returns:
+            bool: True wenn bereits ein kostenloses Talent gewählt wurde
+        """
+        return talent_funktionen.hat_bereits_kostenloses_pathfinder_talent(self)
+
+    def ist_pathfinder_kostenloses_talent(self, talent):
+        """
+        NEU: Prüft, ob ein Talent zu den Kategorien gehört, die in Savage Pathfinder 
+        während der Charaktererstellung kostenlos gewählt werden können.
+        
+        Args:
+            talent: Das Talent-Objekt
+            
+        Returns:
+            bool: True wenn Klassen-, Hintergrund- oder Experte-Talent, sonst False
+        """
+        return talent_funktionen.ist_pathfinder_kostenloses_talent(talent)            
