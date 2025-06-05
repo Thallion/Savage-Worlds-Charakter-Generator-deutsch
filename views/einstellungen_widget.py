@@ -3,9 +3,11 @@
 Refactored Einstellungen Widget - Nur UI-Logik und Delegation
 Verwendet Manager-Klassen für verschiedene Funktionalitätsbereiche
 KORRIGIERT: Setting-Merge-Dialog wird jetzt richtig verwendet
+KORRIGIERT: Dateiname-Generierung für Speichern/Laden
 """
 
 import os
+from datetime import datetime
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.clock import Clock
@@ -249,21 +251,307 @@ class EinstellungenWidget(MDScreen):
         else:
             Logger.error("CharakterController nicht verfügbar")
     
+    def _generate_character_filename(self):
+        """
+        Generiert einen Dateinamen basierend auf dem Charakternamen
+        
+        Returns:
+            str: Generierter Dateiname
+        """
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                if char_name:
+                    # Ungültige Zeichen für Dateinamen entfernen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                else:
+                    safe_name = "Charakter"
+            else:
+                safe_name = "Charakter"
+            
+            # Zeitstempel hinzufügen
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"{safe_name}_{timestamp}.json"
+            
+            Logger.debug(f"Generierter Charakter-Dateiname: {filename}")
+            return filename
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Dateiname-Generierung: {str(e)}")
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            return f"Charakter_{timestamp}.json"
+    
+    def schnellspeichern_charakter(self):
+        """
+        Schnellspeichern: Speichert direkt in die aktuelle Datei, falls vorhanden
+        Andernfalls zeigt den normalen Speichern-Dialog
+        """
+        try:
+            if not self.charakter_controller or not self.charakter_controller.charakter:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")
+                return
+            
+            # Prüfen ob der Charakter bereits einen Dateipfad hat
+            if (hasattr(self.charakter_controller, 'current_character_file_path') and 
+                self.charakter_controller.current_character_file_path and
+                os.path.exists(self.charakter_controller.current_character_file_path)):
+                
+                # Direkt in die aktuelle Datei speichern
+                file_path = self.charakter_controller.current_character_file_path
+                success = self.charakter_controller.speichere_charakter_als_json(file_path)
+                
+                dialog_service = service_container.get_dialog_service()
+                if success and dialog_service:
+                    dialog_service.show_success_dialog(
+                        f"Charakter wurde schnell gespeichert:\n{os.path.basename(file_path)}",
+                        "Schnellspeichern erfolgreich"
+                    )
+                    Logger.info(f"Charakter schnell gespeichert: {file_path}")
+                elif dialog_service:
+                    dialog_service.show_error_dialog("Fehler beim Schnellspeichern des Charakters.")
+            else:
+                # Keine aktuelle Datei - normalen Speichern-Dialog verwenden
+                Logger.info("Keine aktuelle Datei gefunden, verwende normalen Speichern-Dialog")
+                self.speichere_charakter()
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Schnellspeichern: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Schnellspeichern: {str(e)}")
+    
     def speichere_charakter(self):
-        """Delegiert Speicher-Logik"""
-        # Hier könnte man eine vereinfachte Version implementieren
-        # oder direkt an den FileManager delegieren
-        file_service = service_container.get_file_manager_service()
-        if file_service:
+        """KORRIGIERT: Delegiert Speicher-Logik mit Überschreiben/Neu-Dialog"""
+        try:
+            if not self.charakter_controller or not self.charakter_controller.charakter:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")
+                return
+            
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar")
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("FileManager-Service nicht verfügbar.")
+                return
+            
+            # Prüfen ob bereits eine Datei für diesen Charakter existiert
+            existing_file_info = self._check_existing_character_file()
+            
+            if existing_file_info['exists']:
+                # Bestehende Datei gefunden - Überschreiben/Neu-Dialog anzeigen
+                self._show_save_options_dialog(existing_file_info)
+            else:
+                # Keine bestehende Datei - direkt Dateiname-Dialog anzeigen
+                self._show_save_filename_dialog()
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Speichervorgangs: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Speichern: {str(e)}")
+    
+    def _check_existing_character_file(self):
+        """
+        Prüft ob bereits eine Charakterdatei existiert
+        
+        Returns:
+            dict: Information über existierende Datei
+        """
+        try:
+            # Erst prüfen ob der Charakter bereits einen Dateipfad hat
+            if (hasattr(self.charakter_controller, 'current_character_file_path') and 
+                self.charakter_controller.current_character_file_path and
+                os.path.exists(self.charakter_controller.current_character_file_path)):
+                
+                file_path = self.charakter_controller.current_character_file_path
+                return {
+                    'exists': True,
+                    'path': file_path,
+                    'name': os.path.basename(file_path),
+                    'directory': os.path.dirname(file_path)
+                }
+            
+            # Andernfalls prüfen ob eine Datei mit dem Charakternamen existiert
+            file_service = service_container.get_file_manager_service()
+            if file_service:
+                chars_dir = file_service.get_default_directory('chars')
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                
+                if char_name:
+                    # Sichere Dateiname-Varianten prüfen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                    
+                    potential_filename = f"{safe_name}.json"
+                    potential_path = os.path.join(chars_dir, potential_filename)
+                    
+                    if os.path.exists(potential_path):
+                        return {
+                            'exists': True,
+                            'path': potential_path,
+                            'name': potential_filename,
+                            'directory': chars_dir
+                        }
+            
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Prüfen der existierenden Datei: {str(e)}")
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+    
+    def _show_save_options_dialog(self, existing_file_info):
+        """
+        Zeigt Dialog mit Optionen zum Überschreiben oder Neu-Speichern
+        
+        Args:
+            existing_file_info (dict): Information über die existierende Datei
+        """
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if not dialog_service:
+                Logger.error("Dialog-Service nicht verfügbar")
+                return
+            
+            message = f"Bestehende Datei: {existing_file_info['name']}"
+            choices = [
+                ("Bestehende Datei überschreiben", "overwrite"),
+                ("Als neue Datei speichern...", "save_new")
+            ]
+            
+            def handle_save_choice(choice):
+                if choice == "overwrite":
+                    self._save_to_existing_file(existing_file_info)
+                elif choice == "save_new":
+                    self._show_save_filename_dialog()
+            
+            dialog_service.show_choice_dialog(
+                message=message,
+                title="Charakter speichern",
+                choices=choices,
+                on_choice=handle_save_choice
+            )
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Anzeigen des Speicher-Options-Dialogs: {str(e)}")
+    
+    def _save_to_existing_file(self, existing_file_info):
+        """
+        Speichert direkt in die existierende Datei
+        
+        Args:
+            existing_file_info (dict): Information über die existierende Datei
+        """
+        try:
+            file_path = existing_file_info['path']
+            success = self.charakter_controller.speichere_charakter_als_json(file_path)
+            
+            dialog_service = service_container.get_dialog_service()
+            if success and dialog_service:
+                dialog_service.show_success_dialog(
+                    f"Charakter wurde erfolgreich gespeichert:\n{file_path}",
+                    "Speichern erfolgreich"
+                )
+                Logger.info(f"Charakter erfolgreich überschrieben: {file_path}")
+            elif dialog_service:
+                dialog_service.show_error_dialog("Fehler beim Speichern des Charakters.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern in existierende Datei: {str(e)}")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Speichern: {str(e)}")
+    
+    def _show_save_filename_dialog(self):
+        """Zeigt Dialog für neuen Dateinamen"""
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                # Vorgeschlagenen Dateinamen generieren
+                suggested_filename = self._generate_character_filename()
+                
+                dialog_service.show_input_dialog(
+                    "Gib einen Dateinamen für den Charakter ein:\n(.json wird automatisch hinzugefügt)",
+                    "Charakter speichern",
+                    suggested_filename.replace('.json', ''),  # .json Extension entfernen für Eingabe
+                    self._on_save_filename_entered
+                )
+            else:
+                Logger.error("Dialog-Service nicht verfügbar")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Dateiname-Dialog: {str(e)}")
+    
+    def _on_save_filename_entered(self, filename):
+        """
+        Verarbeitet den eingegebenen Dateinamen und öffnet den FileManager
+        
+        Args:
+            filename (str): Eingegebener Dateiname
+        """
+        if not filename.strip():
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Bitte gib einen Dateinamen ein.")
+            return
+        
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar")
+                return
+            
+            # Dateiname bereinigen und .json hinzufügen falls nötig
+            clean_filename = "".join(c for c in filename if c.isalnum() or c in (' ', '-', '_', '.')).strip()
+            if not clean_filename.endswith('.json'):
+                clean_filename += '.json'
+            
+            # Verzeichnis für Charaktere holen
             chars_dir = file_service.get_default_directory('chars')
+            Logger.info(f"Verwende Charakter-Verzeichnis: {chars_dir}")
+            
+            # Dateinamen setzen
+            file_service.set_temp_filename(clean_filename)
+            Logger.info(f"Dateiname für Speichern gesetzt: {clean_filename}")
+            
+            # FileManager öffnen
             file_service.show_file_manager(chars_dir, "save_dir")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des Dateinamens: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Verarbeiten des Dateinamens: {str(e)}")
     
     def lade_charakter(self):
         """Delegiert Lade-Logik"""
-        file_service = service_container.get_file_manager_service()
-        if file_service:
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar")
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("FileManager-Service nicht verfügbar.")
+                return
+            
             chars_dir = file_service.get_default_directory('chars')
+            Logger.info(f"Verwende Charakter-Verzeichnis für Laden: {chars_dir}")
+            
+            # Temporäre Einstellungen löschen für Laden
+            file_service.clear_temp_settings()
+            
             file_service.show_file_manager(chars_dir, "load")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Ladevorgangs: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Laden: {str(e)}")
     
     # ==================== SETTING MANAGEMENT ====================
     
@@ -417,11 +705,221 @@ class EinstellungenWidget(MDScreen):
     # ==================== PDF & STATISTIKEN ====================
     
     def erzeuge_charakterbogen_pdf(self):
-        """Delegiert an PDFManager"""
+        """Delegiert an PDFManager oder zeigt Überschreiben/Neu-Dialog"""
         if MANAGERS_AVAILABLE and hasattr(self, 'pdf_manager'):
             self.pdf_manager.create_character_pdf()
         else:
-            Logger.info("PDF-Erstellung - Manager nicht verfügbar")
+            # Vereinfachte PDF-Erstellung mit Überschreiben/Neu-Dialog
+            try:
+                if not self.charakter_controller or not self.charakter_controller.charakter:
+                    dialog_service = service_container.get_dialog_service()
+                    if dialog_service:
+                        dialog_service.show_error_dialog("Kein Charakter verfügbar für PDF-Erstellung.")
+                    return
+                
+                # Prüfen ob bereits eine PDF für diesen Charakter existiert
+                existing_pdf_info = self._check_existing_pdf_file()
+                
+                if existing_pdf_info['exists']:
+                    # Bestehende PDF gefunden - Überschreiben/Neu-Dialog anzeigen
+                    self._show_pdf_save_options_dialog(existing_pdf_info)
+                else:
+                    # Keine bestehende PDF - direkt Dateiname-Dialog anzeigen
+                    self._show_pdf_filename_dialog()
+                    
+            except Exception as e:
+                Logger.error(f"Fehler bei PDF-Erstellung: {str(e)}", exc_info=True)
+    
+    def _check_existing_pdf_file(self):
+        """
+        Prüft ob bereits eine PDF-Datei für den Charakter existiert
+        
+        Returns:
+            dict: Information über existierende PDF-Datei
+        """
+        try:
+            file_service = service_container.get_file_manager_service()
+            if file_service:
+                pdfs_dir = file_service.get_default_directory('pdfs')
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                
+                if char_name:
+                    # Sichere Dateiname-Varianten prüfen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                    
+                    potential_filename = f"{safe_name}.pdf"
+                    potential_path = os.path.join(pdfs_dir, potential_filename)
+                    
+                    if os.path.exists(potential_path):
+                        return {
+                            'exists': True,
+                            'path': potential_path,
+                            'name': potential_filename,
+                            'directory': pdfs_dir
+                        }
+            
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Prüfen der existierenden PDF: {str(e)}")
+            return {'exists': False, 'path': '', 'name': '', 'directory': ''}
+    
+    def _show_pdf_save_options_dialog(self, existing_pdf_info):
+        """
+        Zeigt Dialog mit Optionen zum Überschreiben oder Neu-Erstellen der PDF
+        
+        Args:
+            existing_pdf_info (dict): Information über die existierende PDF-Datei
+        """
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if not dialog_service:
+                Logger.error("Dialog-Service nicht verfügbar")
+                return
+            
+            message = f"Bestehende PDF: {existing_pdf_info['name']}"
+            choices = [
+                ("Bestehende PDF überschreiben", "overwrite"),
+                ("Als neue PDF speichern...", "save_new")
+            ]
+            
+            def handle_pdf_save_choice(choice):
+                if choice == "overwrite":
+                    self._save_pdf_to_existing_file(existing_pdf_info)
+                elif choice == "save_new":
+                    self._show_pdf_filename_dialog()
+            
+            dialog_service.show_choice_dialog(
+                message=message,
+                title="PDF erstellen",
+                choices=choices,
+                on_choice=handle_pdf_save_choice
+            )
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Anzeigen des PDF-Options-Dialogs: {str(e)}")
+    
+    def _save_pdf_to_existing_file(self, existing_pdf_info):
+        """
+        Erstellt PDF direkt in die existierende Datei
+        
+        Args:
+            existing_pdf_info (dict): Information über die existierende PDF-Datei
+        """
+        try:
+            from utils.pdf_utils import generiere_pdf
+            file_path = existing_pdf_info['path']
+            
+            success = generiere_pdf(self.charakter_controller.charakter, file_path, printer_friendly=False)
+            
+            dialog_service = service_container.get_dialog_service()
+            if success and dialog_service:
+                dialog_service.show_success_dialog(
+                    f"PDF wurde erfolgreich erstellt:\n{file_path}",
+                    "PDF erstellen erfolgreich"
+                )
+                Logger.info(f"PDF erfolgreich überschrieben: {file_path}")
+            elif dialog_service:
+                dialog_service.show_error_dialog("Fehler beim Erstellen der PDF-Datei.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der PDF in existierende Datei: {str(e)}")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Erstellen der PDF: {str(e)}")
+    
+    def _show_pdf_filename_dialog(self):
+        """Zeigt Dialog für PDF-Dateiname-Eingabe"""
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                # Vorgeschlagenen PDF-Dateinamen generieren
+                suggested_filename = self._generate_pdf_filename()
+                
+                dialog_service.show_input_dialog(
+                    "Gib einen Dateinamen für die PDF ein:\n(.pdf wird automatisch hinzugefügt)",
+                    "PDF erstellen",
+                    suggested_filename.replace('.pdf', ''),  # .pdf Extension entfernen für Eingabe
+                    self._on_pdf_filename_entered
+                )
+            else:
+                Logger.error("Dialog-Service nicht verfügbar für PDF-Dialog")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim PDF-Dialog: {str(e)}", exc_info=True)
+    
+    def _generate_pdf_filename(self):
+        """
+        Generiert einen PDF-Dateinamen basierend auf dem Charakternamen
+        
+        Returns:
+            str: Generierter PDF-Dateiname
+        """
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', '')
+                if char_name:
+                    # Ungültige Zeichen für Dateinamen entfernen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                else:
+                    safe_name = "Charakterbogen"
+            else:
+                safe_name = "Charakterbogen"
+            
+            # Zeitstempel hinzufügen
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"{safe_name}_{timestamp}.pdf"
+            
+            Logger.debug(f"Generierter PDF-Dateiname: {filename}")
+            return filename
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei PDF-Dateiname-Generierung: {str(e)}")
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            return f"Charakterbogen_{timestamp}.pdf"
+    
+    def _on_pdf_filename_entered(self, filename):
+        """
+        Verarbeitet den eingegebenen PDF-Dateinamen und öffnet den FileManager
+        
+        Args:
+            filename (str): Eingegebener Dateiname
+        """
+        if not filename.strip():
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog("Bitte gib einen Dateinamen ein.")
+            return
+        
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManager-Service nicht verfügbar für PDF")
+                return
+            
+            # Dateiname bereinigen und .pdf hinzufügen falls nötig
+            clean_filename = "".join(c for c in filename if c.isalnum() or c in (' ', '-', '_', '.')).strip()
+            if not clean_filename.endswith('.pdf'):
+                clean_filename += '.pdf'
+            
+            # Verzeichnis für PDFs holen
+            pdfs_dir = file_service.get_default_directory('pdfs')
+            Logger.info(f"Verwende PDF-Verzeichnis: {pdfs_dir}")
+            
+            # PDF-Einstellungen setzen (ohne printer_friendly für Einfachheit)
+            file_service.set_temp_pdf_settings(clean_filename, printer_friendly=False)
+            Logger.info(f"PDF-Dateiname für Speichern gesetzt: {clean_filename}")
+            
+            # FileManager öffnen
+            file_service.show_file_manager(pdfs_dir, "save_pdf_dir")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des PDF-Dateinamens: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Verarbeiten des PDF-Dateinamens: {str(e)}")
     
     def zeige_statblock(self):
         """Delegiert an StatisticsManager"""
@@ -1023,7 +1521,7 @@ kv_string = '''
                                 bold: True
 
                             MDGridLayout:
-                                cols: 3
+                                cols: 4
                                 spacing: dp(8)
                                 size_hint_y: None
                                 height: dp(48)
@@ -1038,6 +1536,17 @@ kv_string = '''
 
                                     MDButtonText:
                                         text: "Neu"
+
+                                MDButton:
+                                    style: "elevated"
+                                    size_hint_x: 1
+                                    on_release: root.schnellspeichern_charakter()
+
+                                    MDButtonIcon:
+                                        icon: "content-save-outline"
+
+                                    MDButtonText:
+                                        text: "Schnell"
 
                                 MDButton:
                                     style: "elevated"

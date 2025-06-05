@@ -1,13 +1,14 @@
 # services/file_manager_service.py
 """
 Service für Datei-Management und File-Browser-Operationen
-Korrigierte Version mit richtiger Pfad-Behandlung
+KORRIGIERT: Bessere Pfad-Behandlung und Dateiname-Generierung
 """
 
 import os
 import sys
 import string
 from pathlib import Path
+from datetime import datetime
 from kivy.logger import Logger
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -59,15 +60,67 @@ class FileManagerService:
             base_dir = os.path.dirname(services_dir)  # parent directory (build/)
         
         target_dir = os.path.join(base_dir, dir_type)
+        
+        # KORRIGIERT: Bessere Verzeichniserstellung mit Fehlerbehandlung
         if not os.path.exists(target_dir):
             try:
-                os.makedirs(target_dir)
+                os.makedirs(target_dir, exist_ok=True)
                 Logger.info(f"Verzeichnis erstellt: {target_dir}")
             except Exception as e:
                 Logger.error(f"Fehler beim Erstellen des Verzeichnisses {target_dir}: {str(e)}")
+                # Fallback auf Home-Verzeichnis
+                fallback_dir = os.path.join(os.path.expanduser("~"), dir_type)
+                try:
+                    os.makedirs(fallback_dir, exist_ok=True)
+                    target_dir = fallback_dir
+                    Logger.warning(f"Fallback-Verzeichnis verwendet: {target_dir}")
+                except Exception as e2:
+                    Logger.error(f"Auch Fallback-Verzeichnis konnte nicht erstellt werden: {str(e2)}")
+                    # Letzter Fallback: Home-Verzeichnis
+                    target_dir = os.path.expanduser("~")
         
         Logger.debug(f"Standard-Verzeichnis für '{dir_type}': {target_dir}")
         return target_dir
+    
+    def generate_default_filename(self, file_type='character'):
+        """
+        Generiert einen Standard-Dateinamen basierend auf dem Charakternamen und Typ
+        
+        Args:
+            file_type (str): Typ der Datei ('character', 'pdf')
+            
+        Returns:
+            str: Generierter Dateiname
+        """
+        try:
+            if self.controller and self.controller.charakter:
+                char_name = getattr(self.controller.charakter, 'char_name', '')
+                if char_name:
+                    # Ungültige Zeichen für Dateinamen entfernen
+                    safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                    safe_name = safe_name.replace(' ', '_')
+                else:
+                    safe_name = "Charakter"
+            else:
+                safe_name = "Charakter"
+            
+            # Zeitstempel hinzufügen
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            
+            if file_type == 'character':
+                filename = f"{safe_name}_{timestamp}.json"
+            elif file_type == 'pdf':
+                filename = f"{safe_name}_{timestamp}.pdf"
+            else:
+                filename = f"{safe_name}_{timestamp}.{file_type}"
+            
+            Logger.debug(f"Generierter Dateiname: {filename}")
+            return filename
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Dateiname-Generierung: {str(e)}")
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            return f"Charakter_{timestamp}.json"
     
     def show_file_manager(self, path, action_type):
         """
@@ -77,9 +130,18 @@ class FileManagerService:
             path (str): Startpfad
             action_type (str): Art der Aktion
         """
+        # KORRIGIERT: Automatische Dateiname-Generierung für Speicher-Aktionen
+        if action_type == "save_dir" and not self.temp_filename:
+            self.temp_filename = self.generate_default_filename('character')
+            Logger.info(f"Automatisch generierter Dateiname: {self.temp_filename}")
+        elif action_type == "save_pdf_dir" and not self.temp_pdf_filename:
+            self.temp_pdf_filename = self.generate_default_filename('pdf')
+            Logger.info(f"Automatisch generierter PDF-Dateiname: {self.temp_pdf_filename}")
+        
         if not os.path.exists(path):
             Logger.warning(f"Pfad existiert nicht: {path}")
-            path = os.path.expanduser("~")
+            # KORRIGIERT: Besserer Fallback
+            path = self.get_default_directory('chars') if action_type in ['save_dir', 'load'] else os.path.expanduser("~")
         
         self.current_action = action_type
         
@@ -204,6 +266,9 @@ class FileManagerService:
         self.exit_manager()
         
         try:
+            Logger.info(f"Ausgewählter Pfad: {path}")
+            Logger.info(f"Aktuelle Aktion: {self.current_action}")
+            
             if self.current_action == "save_dir":
                 self._handle_save_directory(path)
             elif self.current_action == "load":
@@ -217,16 +282,56 @@ class FileManagerService:
             self._show_error(f"Fehler bei der Verarbeitung: {str(e)}")
     
     def _handle_save_directory(self, path):
-        """Behandelt Verzeichnisauswahl zum Speichern"""
-        if os.path.isdir(path):
-            full_path = os.path.join(path, self.temp_filename)
+        """KORRIGIERT: Behandelt Verzeichnisauswahl zum Speichern"""
+        try:
+            # Überprüfen ob ein Dateiname gesetzt ist
+            if not self.temp_filename:
+                self.temp_filename = self.generate_default_filename('character')
+                Logger.warning(f"Kein temp_filename gesetzt, generiere automatisch: {self.temp_filename}")
             
+            if os.path.isdir(path):
+                # Verzeichnis ausgewählt - Dateiname anhängen
+                full_path = os.path.join(path, self.temp_filename)
+            elif os.path.isfile(path):
+                # Datei ausgewählt - verwende den Pfad direkt
+                full_path = path
+            else:
+                # Pfad existiert nicht - erstelle Verzeichnis falls nötig
+                parent_dir = os.path.dirname(path)
+                if not os.path.exists(parent_dir):
+                    try:
+                        os.makedirs(parent_dir, exist_ok=True)
+                        Logger.info(f"Verzeichnis erstellt: {parent_dir}")
+                    except Exception as e:
+                        Logger.error(f"Konnte Verzeichnis nicht erstellen: {str(e)}")
+                        self._show_error(f"Konnte Verzeichnis nicht erstellen: {str(e)}")
+                        return
+                
+                # Wenn der Pfad eine Dateiendung hat, verwende ihn direkt
+                if path.endswith('.json'):
+                    full_path = path
+                else:
+                    # Andernfalls als Verzeichnis behandeln
+                    full_path = os.path.join(path, self.temp_filename)
+            
+            # Sicherstellen dass der Pfad mit .json endet
+            if not full_path.endswith('.json'):
+                if full_path.endswith('\\') or full_path.endswith('/'):
+                    full_path = full_path + self.temp_filename
+                else:
+                    full_path = full_path + '.json'
+            
+            Logger.info(f"Vollständiger Speicherpfad: {full_path}")
+            
+            # Überprüfen ob Datei bereits existiert
             if os.path.exists(full_path):
                 self._request_overwrite_confirmation(full_path, self._save_character)
             else:
                 self._save_character(full_path)
-        else:
-            self._show_error("Bitte wähle ein Verzeichnis für die Speicherung aus.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des Speicherpfads: {str(e)}", exc_info=True)
+            self._show_error(f"Fehler beim Verarbeiten des Speicherpfads: {str(e)}")
     
     def _handle_load_file(self, path):
         """Behandelt Dateiauswahl zum Laden"""
@@ -249,45 +354,83 @@ class FileManagerService:
                 self._show_error(f"Die Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
     
     def _handle_save_pdf_directory(self, path):
-        """Behandelt Verzeichnisauswahl für PDF-Speicherung"""
-        if os.path.isdir(path):
-            full_path = os.path.join(path, self.temp_pdf_filename)
+        """KORRIGIERT: Behandelt Verzeichnisauswahl für PDF-Speicherung"""
+        try:
+            # Überprüfen ob ein PDF-Dateiname gesetzt ist
+            if not self.temp_pdf_filename:
+                self.temp_pdf_filename = self.generate_default_filename('pdf')
+                Logger.warning(f"Kein temp_pdf_filename gesetzt, generiere automatisch: {self.temp_pdf_filename}")
+            
+            if os.path.isdir(path):
+                full_path = os.path.join(path, self.temp_pdf_filename)
+            elif path.endswith('.pdf'):
+                full_path = path
+            else:
+                full_path = path + '.pdf'
+            
+            Logger.info(f"Vollständiger PDF-Speicherpfad: {full_path}")
             
             if os.path.exists(full_path):
                 self._request_overwrite_confirmation(full_path, self._save_pdf)
             else:
                 self._save_pdf(full_path)
-        else:
-            self._show_error("Bitte wähle ein Verzeichnis für die Speicherung aus.")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des PDF-Speicherpfads: {str(e)}", exc_info=True)
+            self._show_error(f"Fehler beim Verarbeiten des PDF-Speicherpfads: {str(e)}")
     
     def _save_character(self, filepath):
         """Speichert den Charakter"""
         try:
+            Logger.info(f"Versuche Charakter zu speichern unter: {filepath}")
+            
+            # Verzeichnis erstellen falls nötig
+            directory = os.path.dirname(filepath)
+            if directory and not os.path.exists(directory):
+                os.makedirs(directory, exist_ok=True)
+                Logger.info(f"Verzeichnis erstellt: {directory}")
+            
             success = self.controller.speichere_charakter_als_json(filepath)
             if success:
                 self._show_success("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{filepath}")
+                # Reset temp filename
+                self.temp_filename = ""
             else:
                 self._show_error("Fehler beim Speichern des Charakters")
         except Exception as e:
+            Logger.error(f"Fehler beim Speichern: {str(e)}", exc_info=True)
             self._show_error(f"Fehler beim Speichern: {str(e)}")
     
     def _save_pdf(self, filepath):
         """Speichert die PDF"""
         try:
+            Logger.info(f"Versuche PDF zu speichern unter: {filepath}")
+            
+            # Verzeichnis erstellen falls nötig
+            directory = os.path.dirname(filepath)
+            if directory and not os.path.exists(directory):
+                os.makedirs(directory, exist_ok=True)
+                Logger.info(f"Verzeichnis erstellt: {directory}")
+            
             from utils.pdf_utils import generiere_pdf
             success = generiere_pdf(self.controller.charakter, filepath, self.temp_printer_friendly)
             
             if success:
                 self._show_success("PDF erstellen erfolgreich", f"PDF wurde gespeichert als:\n{filepath}")
+                # Reset temp settings
+                self.temp_pdf_filename = ""
+                self.temp_printer_friendly = False
             else:
                 self._show_error("Fehler beim Erstellen der PDF-Datei.")
         except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der PDF: {str(e)}", exc_info=True)
             self._show_error(f"Fehler beim Erstellen der PDF: {str(e)}")
     
     def _request_overwrite_confirmation(self, filepath, callback):
         """Fragt nach Bestätigung zum Überschreiben"""
         # Hier würde normalerweise ein Dialog gezeigt werden
         # Für Einfachheit direkt überschreiben
+        Logger.info(f"Datei existiert bereits, überschreibe: {filepath}")
         callback(filepath)
     
     def _show_error(self, message):
@@ -310,3 +453,10 @@ class FileManagerService:
         self.temp_pdf_filename = filename
         self.temp_printer_friendly = printer_friendly
         Logger.debug(f"Temp PDF settings gesetzt: {filename}, printer_friendly: {printer_friendly}")
+    
+    def clear_temp_settings(self):
+        """Löscht alle temporären Einstellungen"""
+        self.temp_filename = ""
+        self.temp_pdf_filename = ""
+        self.temp_printer_friendly = False
+        Logger.debug("Temporäre Einstellungen gelöscht")
