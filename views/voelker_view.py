@@ -1,8 +1,8 @@
-# views/voelker_view.py
+# views/voelker_view.py - Erweiterte Version für alle Völker-Wahlmöglichkeiten
 """
 View-Komponente für Völker nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Völkern bereit.
-ERWEITERT: Mit Savage Pathfinder Attribut-Auswahl für Menschen
+VOLLSTÄNDIG ERWEITERT: Mit allen Völker-spezifischen Wahlmöglichkeiten
 """
 
 from kivy.lang import Builder
@@ -24,7 +24,7 @@ from kivymd.uix.dialog import (
     MDDialogContentContainer
 )
 from kivy.clock import Clock
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty, DictProperty
 from kivy.metrics import dp
 import logging
 
@@ -34,18 +34,20 @@ Logger = logging.getLogger(__name__)
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_TALENT_TEXT = 'Wähle ein freies Talent'
 DEFAULT_ATTRIBUT_TEXT = 'Wähle ein Attribut'
-DEFAULT_VOLK = 'Mensch'
+DEFAULT_FERTIGKEIT_TEXT = 'Wähle eine Fertigkeit'
 NO_TALENT_AVAILABLE_TEXT = 'Keine freien Talente verfügbar'
 NO_ATTRIBUT_AVAILABLE_TEXT = 'Keine Attribute verfügbar'
+NO_FERTIGKEIT_AVAILABLE_TEXT = 'Keine Fertigkeiten verfügbar'
 CHECKBOX_WIDTH = 50
-VOLK_LABEL_WIDTH = 250  # Reduziert, um Platz für Attribut-Auswahl zu schaffen
-TALENT_LABEL_WIDTH = dp(180)  # Reduziert
-ATTRIBUT_LABEL_WIDTH = dp(180)  # Neu hinzugefügt
+VOLK_LABEL_WIDTH = 200  # Reduziert für mehr Platz
+TALENT_LABEL_WIDTH = dp(150)  
+ATTRIBUT_LABEL_WIDTH = dp(150)  
+FERTIGKEIT_LABEL_WIDTH = dp(150)  # Neu für Fertigkeiten
 ROW_HEIGHT = 40
 INFO_ROW_HEIGHT = 25
 PADDING_LEFT = 40
 
-# KV-String - könnte später in eine separate Datei ausgelagert werden
+# KV-String
 KV_STRING = '''
 <VoelkerWidget>:
     orientation: 'vertical'
@@ -87,14 +89,12 @@ Builder.load_string(KV_STRING)
 class VoelkerWidget(MDBoxLayout):
     """
     Widget zur Anzeige und Verwaltung von Völkern.
-    Hauptkomponente der View im MVC-Pattern.
-    ERWEITERT: Mit Savage Pathfinder Attribut-Auswahl
+    VOLLSTÄNDIG ERWEITERT: Mit allen Völker-spezifischen Wahlmöglichkeiten
     """
     controller = ObjectProperty()
-    aktuelles_talent = StringProperty(DEFAULT_TALENT_TEXT)
-    aktuelles_attribut = StringProperty(DEFAULT_ATTRIBUT_TEXT)
-    mensch_freies_talent = StringProperty("")  # Property für das freie Talent des Menschen
-    mensch_erhoehtes_attribut = StringProperty("")  # Property für das erhöhte Attribut des Menschen
+    
+    # Properties für die verschiedenen Wahlmöglichkeiten der Völker
+    voelker_auswahlen = DictProperty({})  # Speichert alle Auswahlen pro Volk
 
     def __init__(self, **kwargs):
         """Initialisiert das VoelkerWidget und setzt Grundkonfiguration."""
@@ -102,6 +102,10 @@ class VoelkerWidget(MDBoxLayout):
         self._initialize_controller()
         self.dropdown_menu = None
         self.voraussetzungs_dialog = None
+        
+        # Initialisiere Völker-Auswahlen
+        self.voelker_auswahlen = {}
+        
         Clock.schedule_once(self._setup_ui)
 
     def _initialize_controller(self):
@@ -125,24 +129,16 @@ class VoelkerWidget(MDBoxLayout):
         self.aktualisiere_ui()
 
     def _get_freie_talente(self):
-        """
-        Gibt eine alphabetisch sortierte Liste von freien Talenten zurück.
-        Filtert bereits ausgewählte Talente heraus.
-        
-        Returns:
-            list: Liste der verfügbaren Talente
-        """
+        """Gibt eine alphabetisch sortierte Liste von freien Talenten zurück."""
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
             return [NO_TALENT_AVAILABLE_TEXT]
                 
-        # Aktive Talente abrufen und bereits ausgewählte ausfiltern
         frei_talente = []
         for name, talent in self.controller.charakter.talente.items():
             if talent.aktiv and not talent.ausgewaehlt:
                 frei_talente.append(name)
         
-        # Alphabetisch sortieren
         frei_talente.sort()
         
         if not frei_talente:
@@ -151,34 +147,21 @@ class VoelkerWidget(MDBoxLayout):
         return frei_talente
 
     def _get_verfuegbare_attribute(self):
-        """
-        Gibt eine Liste der verfügbaren Attribute für die Erhöhung zurück.
-        Alle Standard-Attribute können von W4 auf W6 erhöht werden.
-        
-        Returns:
-            list: Liste der verfügbaren Attribute
-        """
+        """Gibt eine Liste der verfügbaren Attribute für die Erhöhung zurück."""
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
             return [NO_ATTRIBUT_AVAILABLE_TEXT]
         
-        # Standard-Attribute für Savage Worlds
         standard_attribute = [
-            "Stärke", 
-            "Geschicklichkeit", 
-            "Konstitution", 
-            "Verstand", 
-            "Willenskraft"
+            "Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"
         ]
         
-        # Prüfen, welche Attribute auf W4 stehen und erhöht werden können
         verfuegbare_attribute = []
         charakter = self.controller.charakter
         
         for attribut_name in standard_attribute:
             if attribut_name in charakter.attribute:
                 attribut = charakter.attribute[attribut_name]
-                # Nur Attribute mit W4 können auf W6 erhöht werden
                 if attribut.wert == 4 and attribut.modifier == 0:
                     verfuegbare_attribute.append(attribut_name)
         
@@ -187,13 +170,30 @@ class VoelkerWidget(MDBoxLayout):
         
         return verfuegbare_attribute
 
-    def _ist_savage_pathfinder_aktiv(self):
-        """
-        Prüft, ob das aktuelle Setting Savage Pathfinder ist.
+    def _get_verstandsbasierte_fertigkeiten(self):
+        """Gibt eine Liste der verstandsbasierten Fertigkeiten zurück."""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            return [NO_FERTIGKEIT_AVAILABLE_TEXT]
         
-        Returns:
-            bool: True wenn Savage Pathfinder aktiv ist
-        """
+        charakter = self.controller.charakter
+        verstandsbasierte_fertigkeiten = []
+        
+        # Alle Fertigkeiten durchgehen und prüfen, ob sie verstandsbasiert sind
+        for fert_name, fertigkeit in charakter.fertigkeiten.items():
+            if (hasattr(fertigkeit, 'attribut') and 
+                fertigkeit.attribut and 
+                fertigkeit.attribut.attribut_name == 'Verstand'):
+                verstandsbasierte_fertigkeiten.append(fert_name)
+        
+        verstandsbasierte_fertigkeiten.sort()
+        
+        if not verstandsbasierte_fertigkeiten:
+            verstandsbasierte_fertigkeiten = [NO_FERTIGKEIT_AVAILABLE_TEXT]
+        
+        return verstandsbasierte_fertigkeiten
+
+    def _ist_savage_pathfinder_aktiv(self):
+        """Prüft, ob das aktuelle Setting Savage Pathfinder ist."""
         if not self.controller or not hasattr(self.controller, 'charakter'):
             return False
         
@@ -203,192 +203,221 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Savage Pathfinder-Prüfung: {e}")
             return False
 
-    def show_talent_search_dialog(self, button):
+    def show_talent_search_dialog(self, button, volk_name):
+        """Zeigt einen Dialog mit Suchfunktion für die Talentauswahl an."""
+        self._show_auswahl_dialog(
+            titel="Talent auswählen",
+            items=self._get_freie_talente(),
+            callback=lambda talent: self._on_talent_select(talent, volk_name),
+            search_hint="Talent suchen..."
+        )
+
+    def show_attribut_search_dialog(self, button, volk_name):
+        """Zeigt einen Dialog für die Attributauswahl an."""
+        self._show_auswahl_dialog(
+            titel="Attribut auswählen (W4 auf W6 erhöhen)",
+            items=self._get_verfuegbare_attribute(),
+            callback=lambda attribut: self._on_attribut_select(attribut, volk_name),
+            search_hint=None  # Kein Suchfeld für Attribute nötig
+        )
+
+    def show_fertigkeit_search_dialog(self, button, volk_name):
+        """Zeigt einen Dialog für die Fertigkeitauswahl an."""
+        self._show_auswahl_dialog(
+            titel="Verstandsbasierte Fertigkeit auswählen",
+            items=self._get_verstandsbasierte_fertigkeiten(),
+            callback=lambda fertigkeit: self._on_fertigkeit_select(fertigkeit, volk_name),
+            search_hint="Fertigkeit suchen..."
+        )
+
+    def _show_auswahl_dialog(self, titel, items, callback, search_hint=None):
         """
-        Zeigt einen Dialog mit Suchfunktion für die Talentauswahl an.
+        Universeller Dialog für Auswahlen mit optionaler Suchfunktion.
         
         Args:
-            button: Button, der das Menü aufruft
+            titel: Titel des Dialogs
+            items: Liste der verfügbaren Optionen
+            callback: Callback-Funktion für die Auswahl
+            search_hint: Hinweistext für Suchfeld (None = kein Suchfeld)
         """
         # Dialog-Content erstellen
         content = MDBoxLayout(
             orientation='vertical', 
             size_hint_y=None,
-            height="400dp",
+            height="400dp" if search_hint else "300dp",
             spacing="12dp",
             padding="24dp"
         )
         
-        # Suchfeld erstellen
-        search_field = MDTextField(
-            mode="outlined",
-            children=[
-                MDTextFieldHintText(text="Talent suchen...")
-            ]
-        )
-        content.add_widget(search_field)
+        # Optional: Suchfeld erstellen
+        search_field = None
+        if search_hint:
+            search_field = MDTextField(
+                mode="outlined",
+                children=[MDTextFieldHintText(text=search_hint)]
+            )
+            content.add_widget(search_field)
         
-        # ScrollView für die Talentliste erstellen
+        # ScrollView für die Liste erstellen
         scroll = MDScrollView(
             size_hint=(1, None),
-            height="300dp"
+            height="300dp" if search_hint else "250dp"
         )
         
-        # Liste für Talente erstellen
-        talent_list = MDList()
-        scroll.add_widget(talent_list)
+        # Liste erstellen
+        item_list = MDList()
+        scroll.add_widget(item_list)
         content.add_widget(scroll)
-        
-        # Talente holen
-        freie_talente = self._get_freie_talente()
-        all_talents = freie_talente.copy()  # Für die Suche
         
         # Dialog erstellen
         dialog = MDDialog()
-        dialog.add_widget(MDDialogHeadlineText(text="Talent auswählen"))
-        dialog.add_widget(MDDialogContentContainer(
-            content,
-            orientation="vertical",
-        ))
+        dialog.add_widget(MDDialogHeadlineText(text=titel))
+        dialog.add_widget(MDDialogContentContainer(content, orientation="vertical"))
         dialog.add_widget(MDDialogButtonContainer(
             MDButton(
                 style="text",
                 on_release=lambda x: dialog.dismiss(),
-                children=[
-                    MDButtonText(text="Abbrechen")
-                ]
+                children=[MDButtonText(text="Abbrechen")]
             ),
             spacing="8dp",
         ))
         
-        # Funktion zum Hinzufügen eines Talents zur Liste
-        def add_talent_to_list(talent_name):
-            item = MDListItem(
-                on_release=lambda x: select_talent(talent_name)
-            )
-            item.add_widget(MDListItemHeadlineText(
-                text=talent_name
-            ))
-            talent_list.add_widget(item)
+        all_items = items.copy()  # Für die Suche
         
-        # Funktion zum Auswählen eines Talents
-        def select_talent(talent_name):
-            if talent_name != NO_TALENT_AVAILABLE_TEXT and talent_name != "Keine Treffer gefunden":
-                self._on_talent_select(talent_name)
+        # Funktion zum Hinzufügen eines Items zur Liste
+        def add_item_to_list(item_name):
+            item = MDListItem(on_release=lambda x: select_item(item_name))
+            item.add_widget(MDListItemHeadlineText(text=item_name))
+            item_list.add_widget(item)
+        
+        # Funktion zum Auswählen eines Items
+        def select_item(item_name):
+            invalid_items = [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, 
+                           NO_FERTIGKEIT_AVAILABLE_TEXT, "Keine Treffer gefunden"]
+            if item_name not in invalid_items:
+                callback(item_name)
             dialog.dismiss()
         
-        # Funktion zum Filtern der Talente basierend auf der Sucheingabe
-        def filter_talents(instance, value):
-            talent_list.clear_widgets()
-            search_text = value.lower().strip()
+        # Optional: Funktion zum Filtern basierend auf der Sucheingabe
+        if search_field:
+            def filter_items(instance, value):
+                item_list.clear_widgets()
+                search_text = value.lower().strip()
+                
+                filtered_items = []
+                if search_text:
+                    filtered_items = [t for t in all_items if search_text in t.lower()]
+                else:
+                    filtered_items = all_items
+                
+                filtered_items.sort()
+                
+                if filtered_items:
+                    for item in filtered_items:
+                        add_item_to_list(item)
+                else:
+                    add_item_to_list("Keine Treffer gefunden")
             
-            filtered_talents = []
-            if search_text:
-                # Filtern nach Suchtext
-                filtered_talents = [t for t in all_talents if search_text in t.lower()]
-            else:
-                # Ohne Suchtext alle anzeigen
-                filtered_talents = all_talents
-            
-            # Sortierte Ergebnisse anzeigen
-            filtered_talents.sort()
-            
-            if filtered_talents:
-                for talent in filtered_talents:
-                    add_talent_to_list(talent)
-            else:
-                # Wenn keine Ergebnisse gefunden wurden
-                add_talent_to_list("Keine Treffer gefunden")
+            search_field.bind(text=filter_items)
         
-        # Binding für Texteingabe
-        search_field.bind(text=filter_talents)
-        
-        # Initial alle Talente anzeigen
-        for talent in freie_talente:
-            add_talent_to_list(talent)
+        # Initial alle Items anzeigen
+        for item in items:
+            add_item_to_list(item)
         
         dialog.open()
 
-    def show_attribut_search_dialog(self, button):
-        """
-        Zeigt einen Dialog für die Attributauswahl an.
-        
-        Args:
-            button: Button, der das Menü aufruft
-        """
-        # Dialog-Content erstellen
-        content = MDBoxLayout(
-            orientation='vertical', 
-            size_hint_y=None,
-            height="300dp",
-            spacing="12dp",
-            padding="24dp"
-        )
-        
-        # ScrollView für die Attributliste erstellen
-        scroll = MDScrollView(
-            size_hint=(1, None),
-            height="250dp"
-        )
-        
-        # Liste für Attribute erstellen
-        attribut_list = MDList()
-        scroll.add_widget(attribut_list)
-        content.add_widget(scroll)
-        
-        # Attribute holen
-        verfuegbare_attribute = self._get_verfuegbare_attribute()
-        
-        # Dialog erstellen
-        dialog = MDDialog()
-        dialog.add_widget(MDDialogHeadlineText(text="Attribut auswählen (W4 auf W6 erhöhen)"))
-        dialog.add_widget(MDDialogContentContainer(
-            content,
-            orientation="vertical",
-        ))
-        dialog.add_widget(MDDialogButtonContainer(
-            MDButton(
-                style="text",
-                on_release=lambda x: dialog.dismiss(),
-                children=[
-                    MDButtonText(text="Abbrechen")
-                ]
-            ),
-            spacing="8dp",
-        ))
-        
-        # Funktion zum Hinzufügen eines Attributs zur Liste
-        def add_attribut_to_list(attribut_name):
-            item = MDListItem(
-                on_release=lambda x: select_attribut(attribut_name)
-            )
-            item.add_widget(MDListItemHeadlineText(
-                text=attribut_name
-            ))
-            attribut_list.add_widget(item)
-        
-        # Funktion zum Auswählen eines Attributs
-        def select_attribut(attribut_name):
-            if attribut_name != NO_ATTRIBUT_AVAILABLE_TEXT:
-                self._on_attribut_select(attribut_name)
-            dialog.dismiss()
-        
-        # Alle verfügbaren Attribute anzeigen
-        for attribut in verfuegbare_attribute:
-            add_attribut_to_list(attribut)
-        
-        dialog.open()
+    def _on_talent_select(self, talent_name, volk_name):
+        """Wird aufgerufen, wenn ein Talent ausgewählt wird."""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
+            return
+                
+        if talent_name == NO_TALENT_AVAILABLE_TEXT:
+            return
 
-    def _show_voraussetzungen_dialog(self, talent_name, fehlermeldungen):
-        """
-        Zeigt einen Dialog an, der vor der Auswahl eines Talents warnt, 
-        dessen Voraussetzungen nicht erfüllt sind.
+        charakter = self.controller.charakter
         
-        Args:
-            talent_name: Name des Talents
-            fehlermeldungen: Liste von Fehlermeldungen
-        """
-        # Dialog-Inhalt erstellen
+        # Freies Talent für das spezifische Volk auswählen
+        result = self._waehle_freies_talent(talent_name)
+        
+        if result == "needs_voraussetzungen_confirmation":
+            fehlermeldungen = charakter.temp_voraussetzungs_fehler
+            self._show_voraussetzungen_dialog(talent_name, fehlermeldungen, volk_name)
+            return
+        
+        if result is True:
+            # Speichere die Auswahl für das Volk
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            self.voelker_auswahlen[volk_name]['talent'] = talent_name
+            
+            Logger.info(f"Freies Talent '{talent_name}' für {volk_name} ausgewählt.")
+            charakter.dispatch('on_charakter_change')
+
+    def _on_attribut_select(self, attribut_name, volk_name):
+        """Wird aufgerufen, wenn ein Attribut ausgewählt wird."""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            return
+                
+        if attribut_name == NO_ATTRIBUT_AVAILABLE_TEXT:
+            return
+
+        charakter = self.controller.charakter
+        
+        # Prüfen, ob das Attribut auf W4 steht und erhöhen
+        if attribut_name in charakter.attribute:
+            attribut = charakter.attribute[attribut_name]
+            if attribut.wert == 4 and attribut.modifier == 0:
+                attribut.wuerfel.value = 6
+                
+                # Speichere die Auswahl für das Volk
+                if volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[volk_name] = {}
+                self.voelker_auswahlen[volk_name]['attribut'] = attribut_name
+                
+                Logger.info(f"Attribut '{attribut_name}' für {volk_name} von W4 auf W6 erhöht.")
+                charakter.berechne_abgeleitete_werte()
+                charakter.dispatch('on_charakter_change')
+
+    def _on_fertigkeit_select(self, fertigkeits_name, volk_name):
+        """Wird aufgerufen, wenn eine Fertigkeit ausgewählt wird."""
+        if not self.controller or not hasattr(self.controller, 'charakter'):
+            return
+                
+        if fertigkeits_name == NO_FERTIGKEIT_AVAILABLE_TEXT:
+            return
+
+        charakter = self.controller.charakter
+        
+        # Fertigkeit von W4-2 auf W4+0 setzen
+        if fertigkeits_name in charakter.fertigkeiten:
+            fertigkeit = charakter.fertigkeiten[fertigkeits_name]
+            if fertigkeit.wert == 4 and fertigkeit.modifier == -2:
+                fertigkeit.wuerfel.modifier = 0
+                
+                # Speichere die Auswahl für das Volk
+                if volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[volk_name] = {}
+                self.voelker_auswahlen[volk_name]['fertigkeit'] = fertigkeits_name
+                
+                Logger.info(f"Fertigkeit '{fertigkeits_name}' für {volk_name} auf W4 gesetzt.")
+                charakter.dispatch('on_charakter_change')
+
+    def _waehle_freies_talent(self, talent_name):
+        """Hilfsmethode zum Auswählen eines freien Talents."""
+        charakter = self.controller.charakter
+        
+        if hasattr(charakter, 'waehle_freies_talent'):
+            return charakter.waehle_freies_talent(talent_name)
+        elif hasattr(self.controller, 'waehle_freies_talent'):
+            return self.controller.waehle_freies_talent(talent_name)
+        else:
+            # Fallback auf talent_funktionen
+            from functions.talent_funktionen import waehle_freies_talent
+            return waehle_freies_talent(charakter, talent_name)
+
+    def _show_voraussetzungen_dialog(self, talent_name, fehlermeldungen, volk_name):
+        """Zeigt einen Dialog für nicht erfüllte Voraussetzungen an."""
         content = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
@@ -397,7 +426,6 @@ class VoelkerWidget(MDBoxLayout):
             height="200dp"
         )
         
-        # Warnungstext erstellen
         warning_text = f"Talent '{talent_name}' erfüllt nicht alle Voraussetzungen:\n\n"
         for error in fehlermeldungen:
             warning_text += f"• {error}\n"
@@ -411,15 +439,9 @@ class VoelkerWidget(MDBoxLayout):
         )
         content.add_widget(warning_label)
         
-        # MDDialog mit korrekter KivyMD 2.0.1 Syntax erstellen
         self.voraussetzungs_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Voraussetzungen nicht erfüllt",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-            ),
+            MDDialogHeadlineText(text="Voraussetzungen nicht erfüllt"),
+            MDDialogContentContainer(content, orientation="vertical"),
             MDDialogButtonContainer(
                 MDButton(
                     MDButtonText(text="Abbrechen"),
@@ -429,142 +451,39 @@ class VoelkerWidget(MDBoxLayout):
                 MDButton(
                     MDButtonText(text="Trotzdem auswählen"),
                     style="text",
-                    on_release=lambda x: self._confirm_talent_selection(talent_name),
+                    on_release=lambda x: self._confirm_talent_selection(talent_name, volk_name),
                 ),
                 spacing="8dp",
             ),
         )
         
         self.voraussetzungs_dialog.open()
-    
+
     def _dismiss_voraussetzungs_dialog(self):
         """Schließt den Voraussetzungen-Dialog."""
         if self.voraussetzungs_dialog:
             self.voraussetzungs_dialog.dismiss()
             self.voraussetzungs_dialog = None
-    
-    def _confirm_talent_selection(self, talent_name):
-        """
-        Bestätigt die Auswahl eines Talents, auch wenn die Voraussetzungen nicht erfüllt sind.
-        
-        Args:
-            talent_name: Name des ausgewählten Talents
-        """
+
+    def _confirm_talent_selection(self, talent_name, volk_name):
+        """Bestätigt die Auswahl eines Talents trotz nicht erfüllter Voraussetzungen."""
         self._dismiss_voraussetzungs_dialog()
         
         charakter = self.controller.charakter
-        # Wichtig: Flag setzen, um Voraussetzungen zu ignorieren
         charakter.ignore_voraussetzungen = True
         
-        # Erneut versuchen, das freie Talent auszuwählen
-        # Verwende waehle_freies_talent statt waehle_talent, mit ignore_voraussetzungen=True
-        if hasattr(charakter, 'waehle_freies_talent'):
-            # Direkte Methode im Charakter
-            erfolg = charakter.waehle_freies_talent(talent_name, ignore_voraussetzungen=True)
-        elif hasattr(self.controller, 'waehle_freies_talent'):
-            # Methode im Controller
-            erfolg = self.controller.waehle_freies_talent(talent_name, ignore_voraussetzungen=True)
-        else:
-            # Fallback auf talent_funktionen
-            from functions.talent_funktionen import waehle_freies_talent
-            erfolg = waehle_freies_talent(charakter, talent_name, ignore_voraussetzungen=True)
+        erfolg = self._waehle_freies_talent(talent_name)
         
         if erfolg:
-            self.aktuelles_talent = talent_name
-            self.mensch_freies_talent = talent_name
-            Logger.info(f"Freies Talent '{talent_name}' für Mensch ausgewählt, trotz nicht erfüllter Voraussetzungen.")
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            self.voelker_auswahlen[volk_name]['talent'] = talent_name
+            
+            Logger.info(f"Freies Talent '{talent_name}' für {volk_name} ausgewählt (Voraussetzungen ignoriert).")
             charakter.dispatch('on_charakter_change')
-
-    def _on_talent_select(self, talent_name):
-        """
-        Wird aufgerufen, wenn ein Talent aus dem Dialog ausgewählt wird.
-        Speichert das ausgewählte Talent als freies Talent des Menschen.
-        
-        Args:
-            talent_name: Name des ausgewählten Talents
-        """
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
-            return
-                
-        if talent_name == NO_TALENT_AVAILABLE_TEXT:
-            Logger.info("Keine freien Talente ausgewählt.")
-            return
-
-        charakter = self.controller.charakter
-        if hasattr(charakter, 'selected_talente') and talent_name in charakter.selected_talente:
-            Logger.warning(f"Talent '{talent_name}' ist bereits ausgewählt.")
-            return
-
-        # Freies Talent für Menschen auswählen - ohne Kosten
-        # Verwende waehle_freies_talent statt waehle_talent
-        if hasattr(charakter, 'waehle_freies_talent'):
-            # Direkte Methode im Charakter
-            result = charakter.waehle_freies_talent(talent_name)
-        elif hasattr(self.controller, 'waehle_freies_talent'):
-            # Methode im Controller
-            result = self.controller.waehle_freies_talent(talent_name)
-        else:
-            # Fallback auf talent_funktionen
-            from functions.talent_funktionen import waehle_freies_talent
-            result = waehle_freies_talent(charakter, talent_name)
-        
-        # Prüfen, ob Voraussetzungen bestätigt werden müssen
-        if result == "needs_voraussetzungen_confirmation":
-            # Dialog anzeigen mit den Fehlermeldungen
-            fehlermeldungen = charakter.temp_voraussetzungs_fehler
-            self._show_voraussetzungen_dialog(talent_name, fehlermeldungen)
-            return
-        
-        # Bei Erfolg das Talent merken
-        if result is True:
-            self.aktuelles_talent = talent_name
-            self.mensch_freies_talent = talent_name
-            Logger.info(f"Freies Talent '{talent_name}' für Mensch ausgewählt.")
-            charakter.dispatch('on_charakter_change')
-
-    def _on_attribut_select(self, attribut_name):
-        """
-        Wird aufgerufen, wenn ein Attribut aus dem Dialog ausgewählt wird.
-        Erhöht das ausgewählte Attribut von W4 auf W6.
-        
-        Args:
-            attribut_name: Name des ausgewählten Attributs
-        """
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
-            return
-                
-        if attribut_name == NO_ATTRIBUT_AVAILABLE_TEXT:
-            Logger.info("Kein Attribut ausgewählt.")
-            return
-
-        charakter = self.controller.charakter
-        
-        # Prüfen, ob das Attribut tatsächlich auf W4 steht
-        if attribut_name in charakter.attribute:
-            attribut = charakter.attribute[attribut_name]
-            if attribut.wert == 4 and attribut.modifier == 0:
-                # Attribut von W4 auf W6 erhöhen
-                attribut.wuerfel.value = 6
-                
-                # Aktuelles Attribut speichern
-                self.aktuelles_attribut = attribut_name
-                self.mensch_erhoehtes_attribut = attribut_name
-                
-                Logger.info(f"Attribut '{attribut_name}' für Mensch von W4 auf W6 erhöht.")
-                charakter.berechne_abgeleitete_werte()
-                charakter.dispatch('on_charakter_change')
-            else:
-                Logger.warning(f"Attribut '{attribut_name}' steht nicht auf W4+0, aktuelle Werte: W{attribut.wert}+{attribut.modifier}")
-        else:
-            Logger.error(f"Attribut '{attribut_name}' nicht gefunden.")
 
     def aktualisiere_ui(self, *args):
-        """
-        Aktualisiert die UI basierend auf dem aktuellen Zustand des Charakters.
-        Wird bei Änderungen am Charakter aufgerufen.
-        """
+        """Aktualisiert die UI basierend auf dem aktuellen Zustand des Charakters."""
         Logger.debug("VoelkerWidget: aktualisiere_ui aufgerufen")
         
         if not self.controller or not hasattr(self.controller, 'charakter'):
@@ -575,26 +494,7 @@ class VoelkerWidget(MDBoxLayout):
             container = self.ids.voelker_content_container
             container.clear_widgets()
 
-            # Synchronisiere voelker_selected mit den verfügbaren Völkern
             charakter = self.controller.charakter
-            
-            # Debug-Ausgabe für Völker
-            Logger.debug(f"Völker im Charakter: {list(charakter.voelker.keys())}")
-            Logger.debug(f"Ausgewählte Völker: {charakter.voelker_selected}")
-            
-            # Sicherstellen, dass "Mensch" existiert
-            if "Mensch" not in charakter.voelker:
-                Logger.warning("ACHTUNG: Volk 'Mensch' fehlt in der Völkerliste des Charakters!")
-                # Mensch temporär hinzufügen
-                from models.volk import Volk
-                mensch_volk = Volk(
-                    name="Mensch",
-                    handicaps=[],
-                    talente=["Freies Talent"],
-                    besonderheiten=["Menschen erhalten ein freies Talent ihrer Wahl"]
-                )
-                charakter.voelker["Mensch"] = mensch_volk
-                Logger.info("Volk 'Mensch' wurde temporär hinzugefügt")
             
             # Sicherstellen, dass alle Völker in voelker_selected existieren
             for volk_name in charakter.voelker:
@@ -610,14 +510,7 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler in aktualisiere_ui: {e}", exc_info=True)
 
     def _add_volk_row(self, container, volk_name, volk):
-        """
-        Fügt eine Zeile für ein Volk zum Container hinzu.
-        
-        Args:
-            container: Container, zu dem die Zeile hinzugefügt wird
-            volk_name: Name des Volks
-            volk: Volk-Objekt
-        """
+        """Fügt eine Zeile für ein Volk zum Container hinzu."""
         # Hauptzeile für das Volk erstellen
         row_layout = MDBoxLayout(
             orientation='horizontal',
@@ -636,7 +529,7 @@ class VoelkerWidget(MDBoxLayout):
             theme_text_color="Primary"
         )
 
-        # Checkbox für die Auswahl - WICHTIG: Zustand aus voelker_selected nehmen, nicht aus volk.ausgewaehlt
+        # Checkbox für die Auswahl
         charakter = self.controller.charakter
         is_active = charakter.voelker_selected.get(volk_name, False)
         
@@ -653,67 +546,92 @@ class VoelkerWidget(MDBoxLayout):
         row_layout.add_widget(label)
         row_layout.add_widget(checkbox)
 
-        # Spezielle UI-Elemente für Menschen
-        if volk_name == DEFAULT_VOLK:
-            self._add_mensch_specific_ui(row_layout)
+        # Völker-spezifische UI-Elemente hinzufügen
+        self._add_volk_specific_ui(row_layout, volk_name, volk, is_active)
 
         container.add_widget(row_layout)
 
-    def _add_mensch_specific_ui(self, row_layout):
+    def _add_volk_specific_ui(self, row_layout, volk_name, volk, is_active):
         """
-        Fügt spezielle UI-Elemente für Menschen hinzu.
-        ERWEITERT: Mit Attribut-Auswahl für Savage Pathfinder
+        Fügt völker-spezifische UI-Elemente hinzu basierend auf den Wahlmöglichkeiten.
         
         Args:
             row_layout: Layout, zu dem die Elemente hinzugefügt werden
+            volk_name: Name des Volks
+            volk: Volk-Objekt
+            is_active: Ob das Volk aktuell ausgewählt ist
         """
-        # Talent-Label
-        talent_label = MDLabel(
-            text=self.aktuelles_talent,
-            size_hint_x=None,
-            width=TALENT_LABEL_WIDTH
-        )
+        auswahl = self.voelker_auswahlen.get(volk_name, {})
+        
+        # Freies Talent (Menschen, Halbelfen haben das nicht über effects)
+        if (volk_name == "Mensch" or 
+            (hasattr(volk, 'has_wahlmoeglichkeit') and volk.has_wahlmoeglichkeit('freies_talent'))):
+            
+            talent_text = auswahl.get('talent', DEFAULT_TALENT_TEXT)
+            talent_label = MDLabel(
+                text=talent_text,
+                size_hint_x=None,
+                width=TALENT_LABEL_WIDTH
+            )
+            
+            talent_button = MDIconButton(
+                icon="menu-down",
+                size_hint=(None, None),
+                size=(dp(48), dp(48)),
+                on_release=lambda x, vn=volk_name: self.show_talent_search_dialog(x, vn),
+                disabled=not is_active
+            )
+            
+            row_layout.add_widget(talent_label)
+            row_layout.add_widget(talent_button)
 
-        # Talent-Auswahlbutton
-        talent_button = MDIconButton(
-            icon="menu-down",
-            size_hint=(None, None),
-            size=(dp(48), dp(48)),
-            on_release=self.show_talent_search_dialog
-        )
-
-        row_layout.add_widget(talent_label)
-        row_layout.add_widget(talent_button)
-
-        # Nur für Savage Pathfinder: Attribut-Auswahl hinzufügen
-        if self._ist_savage_pathfinder_aktiv():
-            # Attribut-Label
+        # Freies Attribut (Menschen in Savage Pathfinder, Halbelfen)
+        if ((volk_name == "Mensch" and self._ist_savage_pathfinder_aktiv()) or
+            volk_name == "Halbelf" or
+            (hasattr(volk, 'has_wahlmoeglichkeit') and volk.has_wahlmoeglichkeit('freies_attribut'))):
+            
+            attribut_text = auswahl.get('attribut', DEFAULT_ATTRIBUT_TEXT)
             attribut_label = MDLabel(
-                text=self.aktuelles_attribut,
+                text=attribut_text,
                 size_hint_x=None,
                 width=ATTRIBUT_LABEL_WIDTH
             )
-
-            # Attribut-Auswahlbutton
+            
             attribut_button = MDIconButton(
                 icon="menu-down",
                 size_hint=(None, None),
                 size=(dp(48), dp(48)),
-                on_release=self.show_attribut_search_dialog
+                on_release=lambda x, vn=volk_name: self.show_attribut_search_dialog(x, vn),
+                disabled=not is_active
             )
-
+            
             row_layout.add_widget(attribut_label)
             row_layout.add_widget(attribut_button)
 
+        # Freie verstandsbasierte Fertigkeit (Gnome)
+        if (volk_name == "Gnom" or
+            (hasattr(volk, 'has_wahlmoeglichkeit') and volk.has_wahlmoeglichkeit('freie_verstandsfertigkeit'))):
+            
+            fertigkeit_text = auswahl.get('fertigkeit', DEFAULT_FERTIGKEIT_TEXT)
+            fertigkeit_label = MDLabel(
+                text=fertigkeit_text,
+                size_hint_x=None,
+                width=FERTIGKEIT_LABEL_WIDTH
+            )
+            
+            fertigkeit_button = MDIconButton(
+                icon="menu-down",
+                size_hint=(None, None),
+                size=(dp(48), dp(48)),
+                on_release=lambda x, vn=volk_name: self.show_fertigkeit_search_dialog(x, vn),
+                disabled=not is_active
+            )
+            
+            row_layout.add_widget(fertigkeit_label)
+            row_layout.add_widget(fertigkeit_button)
+
     def _add_volk_details(self, container, volk):
-        """
-        Fügt Detailinformationen für ein Volk zum Container hinzu.
-        
-        Args:
-            container: Container, zu dem die Details hinzugefügt werden
-            volk: Volk-Objekt
-        """
-        # Hinzufügen von Zusatzinformationen (Handicaps, Talente, Besonderheiten)
+        """Fügt Detailinformationen für ein Volk zum Container hinzu."""
         detail_categories = [
             ('Handicaps', volk.handicaps),
             ('Talente', volk.talente),
@@ -725,13 +643,7 @@ class VoelkerWidget(MDBoxLayout):
                 self._add_detail_items(container, items)
 
     def _add_detail_items(self, container, items):
-        """
-        Fügt Detaileinträge zum Container hinzu.
-        
-        Args:
-            container: Container, zu dem die Einträge hinzugefügt werden
-            items: Liste der Einträge
-        """
+        """Fügt Detaileinträge zum Container hinzu."""
         for item in items:
             detail_row = MDBoxLayout(
                 orientation='horizontal',
@@ -752,67 +664,66 @@ class VoelkerWidget(MDBoxLayout):
             detail_row.add_widget(detail_label)
             container.add_widget(detail_row)
 
-    def _remove_mensch_talent(self):
-        """Entfernt das ausgewählte Talent des Menschen."""
-        if self.mensch_freies_talent:
-            # Talent entfernen
-            self.controller.entferne_talent(self.mensch_freies_talent)
-            Logger.info(f"Freies Talent '{self.mensch_freies_talent}' von 'Mensch' entfernt.")
-            self.mensch_freies_talent = ""  # Zurücksetzen
-            self.aktuelles_talent = DEFAULT_TALENT_TEXT  # Label zurücksetzen
-
-    def _remove_mensch_attribut(self):
-        """Setzt das erhöhte Attribut des Menschen zurück."""
-        if self.mensch_erhoehtes_attribut:
-            charakter = self.controller.charakter
-            if self.mensch_erhoehtes_attribut in charakter.attribute:
-                attribut = charakter.attribute[self.mensch_erhoehtes_attribut]
-                # Attribut von W6 zurück auf W4 setzen
+    def _remove_volk_auswahl(self, volk_name):
+        """Entfernt alle Auswahlen für ein bestimmtes Volk."""
+        if volk_name not in self.voelker_auswahlen:
+            return
+            
+        charakter = self.controller.charakter
+        auswahl = self.voelker_auswahlen[volk_name]
+        
+        # Talent entfernen
+        if 'talent' in auswahl:
+            talent_name = auswahl['talent']
+            if talent_name in charakter.selected_talente:
+                charakter.selected_talente.remove(talent_name)
+                if talent_name in charakter.talente:
+                    charakter.talente[talent_name].ausgewaehlt = False
+                Logger.info(f"Freies Talent '{talent_name}' von '{volk_name}' entfernt.")
+        
+        # Attribut zurücksetzen
+        if 'attribut' in auswahl:
+            attribut_name = auswahl['attribut']
+            if attribut_name in charakter.attribute:
+                attribut = charakter.attribute[attribut_name]
                 if attribut.wert == 6 and attribut.modifier == 0:
                     attribut.wuerfel.value = 4
-                    Logger.info(f"Attribut '{self.mensch_erhoehtes_attribut}' von 'Mensch' von W6 auf W4 zurückgesetzt.")
-                    charakter.berechne_abgeleitete_werte()
-            
-            self.mensch_erhoehtes_attribut = ""  # Zurücksetzen
-            self.aktuelles_attribut = DEFAULT_ATTRIBUT_TEXT  # Label zurücksetzen
+                    Logger.info(f"Attribut '{attribut_name}' von '{volk_name}' auf W4 zurückgesetzt.")
+        
+        # Fertigkeit zurücksetzen
+        if 'fertigkeit' in auswahl:
+            fertigkeit_name = auswahl['fertigkeit']
+            if fertigkeit_name in charakter.fertigkeiten:
+                fertigkeit = charakter.fertigkeiten[fertigkeit_name]
+                fertigkeit.wuerfel.modifier = -2  # Zurück auf W4-2
+                Logger.info(f"Fertigkeit '{fertigkeit_name}' von '{volk_name}' auf W4-2 zurückgesetzt.")
+        
+        # Auswahl aus Dictionary entfernen
+        del self.voelker_auswahlen[volk_name]
 
     def _on_checkbox_active(self, instance, value, selected_volk_name):
-        """
-        Ereignishandler für Checkbox-Änderungen.
-        
-        Args:
-            instance: Checkbox-Instance, die das Ereignis ausgelöst hat
-            value: Neuer Wert der Checkbox (True/False)
-            selected_volk_name: Name des Volks, das mit der Checkbox verknüpft ist
-        """
+        """Ereignishandler für Checkbox-Änderungen."""
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
             return
             
         charakter = self.controller.charakter
         
-        # Hier liegt das Problem: Wir müssen das Umschalten verhindern, um UI-Rückkopplungen zu vermeiden
-        # Nur Ereignisse verarbeiten, die eine Aktivierung sind
+        # Verhindern, dass alle Völker abgewählt werden
         if not value:
-            # Verhindern, dass alle Völker abgewählt werden
             aktive_voelker = [k for k, v in charakter.voelker_selected.items() if v]
             if len(aktive_voelker) <= 1 and selected_volk_name in aktive_voelker:
-                # Wenn der Benutzer versucht, das letzte aktive Volk abzuwählen, abbrechen
                 Logger.debug(f"Abwählen des letzten Volks '{selected_volk_name}' verhindert")
-                
-                # UI neu laden, um den Checkbox-Zustand zurückzusetzen
                 Clock.schedule_once(lambda dt: self.aktualisiere_ui(), 0.1)
                 return
         
-        # Wenn ein Volk aktiviert wird, alle anderen deaktivieren
         if value:
-            # Wenn ein anderes Volk als "Mensch" aktiviert wird, das freie Talent und Attribut von "Mensch" entfernen
-            if selected_volk_name != DEFAULT_VOLK and charakter.voelker_selected.get(DEFAULT_VOLK, False):
-                self._remove_mensch_talent()
-                if self._ist_savage_pathfinder_aktiv():
-                    self._remove_mensch_attribut()
+            # Entferne Auswahlen aller anderen Völker
+            for volk_name in list(self.voelker_auswahlen.keys()):
+                if volk_name != selected_volk_name:
+                    self._remove_volk_auswahl(volk_name)
             
-            # Alle Völker in beiden Dictionaries deaktivieren
+            # Alle Völker deaktivieren
             for volk_name in charakter.voelker_selected:
                 charakter.voelker_selected[volk_name] = False
                 if volk_name in charakter.voelker:
@@ -822,27 +733,34 @@ class VoelkerWidget(MDBoxLayout):
             charakter.voelker_selected[selected_volk_name] = True
             if selected_volk_name in charakter.voelker:
                 charakter.voelker[selected_volk_name].ausgewaehlt = True
+                
+                # Völker-Effekte anwenden
+                volk = charakter.voelker[selected_volk_name]
+                if hasattr(volk, 'apply_effects_to_charakter'):
+                    volk.apply_effects_to_charakter(charakter)
+                    
         else:
-            # Wenn "Mensch" abgewählt wird, das freie Talent und Attribut entfernen
-            if selected_volk_name == DEFAULT_VOLK:
-                self._remove_mensch_talent()
-                if self._ist_savage_pathfinder_aktiv():
-                    self._remove_mensch_attribut()
+            # Auswahlen für das abgewählte Volk entfernen
+            self._remove_volk_auswahl(selected_volk_name)
             
             # Das Volk deaktivieren
             charakter.voelker_selected[selected_volk_name] = False
             if selected_volk_name in charakter.voelker:
                 charakter.voelker[selected_volk_name].ausgewaehlt = False
                 
+                # Völker-Effekte entfernen
+                volk = charakter.voelker[selected_volk_name]
+                if hasattr(volk, 'remove_effects_from_charakter'):
+                    volk.remove_effects_from_charakter(charakter)
+                
             # Mensch als Standard setzen
             charakter.voelker_selected["Mensch"] = True
             if "Mensch" in charakter.voelker:
                 charakter.voelker["Mensch"].ausgewaehlt = True
         
-        # Event auslösen, um andere Module zu informieren
+        # Event auslösen und UI aktualisieren
+        charakter.berechne_abgeleitete_werte()
         charakter.dispatch('on_charakter_change')
         
-        # UI aktualisieren
         Logger.info(f"Volk '{selected_volk_name}' gesetzt auf {value}")
-        # Verzögerte UI-Aktualisierung, um Rückkopplungseffekte zu vermeiden
         Clock.schedule_once(lambda dt: self.aktualisiere_ui(), 0.1)
