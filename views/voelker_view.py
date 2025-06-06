@@ -341,7 +341,7 @@ class VoelkerWidget(MDBoxLayout):
         
         # Dialog erstellen
         dialog = MDDialog()
-        dialog.add_widget(MDDialogHeadlineText(text="Attribut auswählen (W4 → W6)"))
+        dialog.add_widget(MDDialogHeadlineText(text="Attribut auswählen (W4 auf W6 erhöhen)"))
         dialog.add_widget(MDDialogContentContainer(
             content,
             orientation="vertical",
