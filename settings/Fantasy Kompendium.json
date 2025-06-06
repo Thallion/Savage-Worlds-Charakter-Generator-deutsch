@@ -2,472 +2,1116 @@
     "name": "Fantasy Kompendium",
     "description": "Fantasy Kompendium",
     "voelker": {
-
         "Aquarianer": {
-            "name": "Aquarianer",
-            "handicaps": [
-                "Abhängigkeit (Wasser)"
-            ],
-            "talente": [
-                "Gebrüll",
-                "Arkaner Hintergrund (Begabt)",
-                "Elementarmanipulation",
-                "Flächenschlag"
-            ],
-            "besonderheiten": [
-                "Nachtsicht",
-                "Robustheit",
-                "Wasserwesen"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Aquarianer",
+        "handicaps": [
+            "Abhängigkeit (Wasser: 1 Stunde pro 24 Stunden, sonst Erschöpfung bis Ausgeschaltet, dann Tod)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+            "Robustheit (+1 Robustheit durch zähes Fleisch der Tiefen)",
+            "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)"
+        ],
+        "sprachen": ["Gemeinsprache", "Aquarianisch"],
+        "altersspanne": "Erwachsen mit 25, Alt mit 80, maximales Alter 120-200",
+        "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
+        "groesse_weiblich": "1,65-2,00m, 70-110kg (Durchschnitt 1,85m, 90kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "nachtsicht": true,
+            "wasserwesen": true,
+            "abhaengigkeit_wasser": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Avionen": {
-            "name": "Avionen",
-            "handicaps": [
-                "Nichtschwimmer",
-                "Verringerte Bewegungsweite",
-                "Zerbrechlich"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Fliegen",
-                "Scharfe Sinne"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Avionen",
+        "handicaps": [
+            "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser kostet)",
+            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)",
+            "Zerbrechlich (-1 Robustheit durch hohle Knochen)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)",
+            "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
+        ],
+        "sprachen": ["Gemeinsprache", "Avionisch"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 50, maximales Alter 70-90",
+        "groesse_maennlich": "1,60-1,90m, 40-60kg (Durchschnitt 1,75m, 50kg)",
+        "groesse_weiblich": "1,55-1,85m, 35-55kg (Durchschnitt 1,70m, 45kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {
+            "Wahrnehmung": 2
+            },
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "fliegen": true,
+            "nichtschwimmer": true,
+            "geschaerfte_sinne": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Drachenvolk": {
-            "name": "Drachenvolk",
-            "handicaps": [
-                "Anfälligkeit für Naturgewalten (Kälte)",
-                "Arrogant"
-            ],
-            "talente": [
-                "Biss",
-                "Krallen"
-            ],
-            "besonderheiten": [
-                "Kaltblütig",
-                "Odemwaffe",
-                "Panzerung +2",
-                "Widerstand gegen Naturgewalten (Hitze)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Drachenvolk",
+        "handicaps": [
+            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+            "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)",
+            "Schlecht gelaunt (Handicap Arrogant)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Biss/Klauen (Stä+W4, PB 2)",
+            "Odemwaffe (2W6 Schaden, Kegelschablone oder 12'' Linie, Athletikprobe)",
+            "Panzerung +2 (Dicke schuppige Haut)",
+            "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Drakonisch"],
+        "altersspanne": "Erwachsen mit 30, Alt mit 200, maximales Alter 300-500",
+        "groesse_maennlich": "1,80-2,20m, 90-130kg (Durchschnitt 2,00m, 110kg)",
+        "groesse_weiblich": "1,75-2,15m, 85-125kg (Durchschnitt 1,95m, 105kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "biss_klauen": true,
+            "odemwaffe": true,
+            "panzerung_2": true,
+            "widerstand_hitze": true,
+            "anfaelligkeit_kaelte": true,
+            "kaltblutig": true,
+            "arrogant": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "ElementareAbkoemmlinge": {
-            "name": "Elementare Abkömmlinge",
-            "handicaps": [
-                "Außenseiter (leicht)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Widerstand gegen Naturgewalten",
-                "Elementenspezifische Fähigkeiten"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Elementarer_Abkoemmling_Erde": {
+        "name": "Elementarer Abkömmling (Erde)",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Felsenfest (Konstitution W6 statt W4, Maximum W12+1)",
+            "Widerstand gegen Naturgewalten (Erde: +4 Resistenz, -4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Terranisch"],
+        "altersspanne": "Erwachsen mit 20, Alt mit 100, maximales Alter 150-300",
+        "groesse_maennlich": "1,65-1,95m, 70-100kg (Durchschnitt 1,80m, 85kg)",
+        "groesse_weiblich": "1,60-1,90m, 60-90kg (Durchschnitt 1,75m, 75kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Konstitution": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "widerstand_erde": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Elementarer_Abkoemmling_Feuer": {
+        "name": "Elementarer Abkömmling (Feuer)",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+        ],
+        "talente": [
+            "Schnell"
+        ],
+        "besonderheiten": [
+            "Schnell (Talent Schnell durch frenetische Natur)",
+            "Widerstand gegen Naturgewalten (Feuer: +4 Resistenz, -4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Ignisch"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+        "groesse_maennlich": "1,65-1,95m, 60-85kg (Durchschnitt 1,80m, 72kg)",
+        "groesse_weiblich": "1,60-1,90m, 55-80kg (Durchschnitt 1,75m, 67kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Schnell"],
+            "spezielle_effekte": {
+            "widerstand_feuer": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Elementarer_Abkoemmling_Luft": {
+        "name": "Elementarer Abkömmling (Luft)",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Innere Luft (Müssen nicht atmen, immun gegen eingeatmete Gifte, ertrinken/ersticken nicht)",
+            "Widerstand gegen Naturgewalten (Luft: +4 Resistenz, -4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Auranisch"],
+        "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 120-200",
+        "groesse_maennlich": "1,65-1,95m, 55-75kg (Durchschnitt 1,80m, 65kg)",
+        "groesse_weiblich": "1,60-1,90m, 50-70kg (Durchschnitt 1,75m, 60kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "innere_luft": true,
+            "widerstand_luft": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Elementarer_Abkoemmling_Wasser": {
+        "name": "Elementarer Abkömmling (Wasser)",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)",
+            "Widerstand gegen Naturgewalten (Wasser: +4 Resistenz, -4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Aquatisch"],
+        "altersspanne": "Erwachsen mit 20, Alt mit 90, maximales Alter 130-250",
+        "groesse_maennlich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
+        "groesse_weiblich": "1,60-1,90m, 60-85kg (Durchschnitt 1,75m, 72kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "wasserwesen": true,
+            "widerstand_wasser": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Elf": {
-            "name": "Elf",
-            "handicaps": [
-                "Zwei linke Hände"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Geschickt",
-                "Nachtsicht"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Elf",
+        "handicaps": [
+            "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+        ],
+        "sprachen": ["Gemeinsprache", "Elfisch"],
+        "altersspanne": "Erwachsen mit 115, Alt mit 263, maximales Alter 350-750",
+        "groesse_maennlich": "1,65-2,05m, 52-72kg (Durchschnitt 1,85m, 58kg)",
+        "groesse_weiblich": "1,65-1,95m, 44-57kg (Durchschnitt 1,85m, 53kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Geschicklichkeit": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "nachtsicht": true,
+            "zwei_linke_haende": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-
-        "Feen": {
-            "name": "Feen",
-            "handicaps": [
-                "Große Klappe",
-                "Impulsiv",
-                "Neugierig",
-                "Zwei linke Hände"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Fliegen (Bewegungsweite 6)",
-                "Winzig (Größenkategorie reduziert, -4 Robustheit und Schadenswürfe, maximale Stärke W4)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Fee": {
+        "name": "Fee",
+        "handicaps": [
+            "Große Klappe (Können Geheimnisse nicht für sich behalten)",
+            "Impulsiv (Zurückhaltung ist selten)",
+            "Neugierig (Unendlich viele Fragen)",
+            "Winzig (Größe -4, -4 Robustheit, maximale Stärke W4)",
+            "Zwei linke Hände (Verachtung für mechanische Gegenstände)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Fliegen (Bewegungsweite 6'')"
+        ],
+        "sprachen": ["Gemeinsprache", "Sylvanisch"],
+        "altersspanne": "Erwachsen mit 50, Alt mit 200, maximales Alter 300-600",
+        "groesse_maennlich": "15-25cm, 0,5-1kg (Durchschnitt 20cm, 0,7kg)",
+        "groesse_weiblich": "15-25cm, 0,4-0,9kg (Durchschnitt 20cm, 0,6kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": -4,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "fliegen": true,
+            "winzig": true,
+            "grosse_klappe": true,
+            "impulsiv": true,
+            "neugierig": true,
+            "zwei_linke_haende": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Gestaltwandler": {
-            "name": "Gestaltwandler",
-            "handicaps": [
-                "Geheimnis (schwer)"
-            ],
-            "talente": [
-                "Charismatisch",
-                "Arkaner Hintergrund (Begabt)"
-            ],
-            "besonderheiten": [
-                "Gestaltwandeln (Verkleiden mit der Einschränkung Persönlich)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Gestaltwandler",
+        "handicaps": [
+            "Geheimnis (schwer: Wahre Natur muss geheim gehalten werden)"
+        ],
+        "talente": [
+            "Charismatisch",
+            "Arkaner Hintergrund (Begabt)"
+        ],
+        "besonderheiten": [
+            "Charismatisch (Talent kostenlos erhalten)",
+            "Gestaltwandeln (Arkaner Hintergrund Begabt + Macht Verkleiden mit Einschränkung Persönlich)"
+        ],
+        "sprachen": ["Gemeinsprache", "Variable"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+        "groesse_maennlich": "1,60-1,90m, 60-90kg (Durchschnitt 1,75m, 75kg)",
+        "groesse_weiblich": "1,55-1,85m, 50-80kg (Durchschnitt 1,70m, 65kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Charismatisch", "Arkaner Hintergrund (Begabt)"],
+            "spezielle_effekte": {
+            "gestaltwandeln": true,
+            "geheimnis_schwer": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "Gnome": {
-            "name": "Gnome",
-            "handicaps": [
-                "Verringerte Bewegungsweite"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Größe -1 (Reduzierte Robustheit um 1)",
-                "List (Verstand W6 statt W4, Maximum W12+1)",
-                "Nachtsicht",
-                "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },        
-        "Goblins": {
-            "name": "Goblins",
-            "handicaps": [
-                "Fies (-1 Überredenproben)"
-            ],
-            "talente": [
-                "Anfänger-Talent (Kostenlos, wenn Voraussetzungen erfüllt sind)"
-            ],
-            "besonderheiten": [
-                "Geschickt (Heimlichkeit W6 statt W4, Maximum W12+1)",
-                "Größe -1 (Reduzierte Robustheit um 1)",
-                "Überlebenskünstler",
-                "Wärmesicht (Halbiert Abzüge bei schlechter Beleuchtung für Ziele mit Hitze/Kälte)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Gnom": {
+        "name": "Gnom",
+        "handicaps": [
+            "Größe -1 (Reduzierte Robustheit um 1)",
+            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ reduziert)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "List (Verstand W6 statt W4, Maximum W12+1)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+            "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
+        ],
+        "sprachen": ["Gemeinsprache", "Gnomisch"],
+        "altersspanne": "Erwachsen mit 45, Alt mit 150, maximales Alter 200-500",
+        "groesse_maennlich": "110-130cm, 18-22kg (Durchschnitt 120cm, 20kg)",
+        "groesse_weiblich": "105-125cm, 16-20kg (Durchschnitt 115cm, 18kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Verstand": 2
+            },
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {
+            "Wahrnehmung": 2
+            },
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "nachtsicht": true,
+            "geschaerfte_sinne": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "Golems": {
-            "name": "Golems",
-            "handicaps": [
-                "Tollpatschig (-2 auf Athletik- und Heimlichkeitsproben)",
-                "Verpeilt (-1 auf Allgemeinwissen- und Wahrnehmungsproben)",
-                "Verringerte Bewegungsweite (Bewegung 5, Sprintwürfel W4)",
-                "Weniger Grundfertigkeiten (Starten ohne Allgemeinwissen, Überreden oder Heimlichkeit)",
-                "Wuchtig (-2 auf Eigenschaftsproben bei Ausrüstung für normale Humanoide)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Größe +2 (Erhöht Robustheit um +2)",
-                "Keine lebenswichtigen Organe (keinen zusätzlichen Schaden durch angesagte Ziele)",
-                "Konstrukt (+2 auf Erholungsproben, ignoriert 1 Punkt Wundabzüge, atmet nicht, keine Gifte/Krankheiten, Wunden mit Reparieren heilen)",
-                "Panzerung +2 (aus Stein)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Goblin": {
+        "name": "Goblin",
+        "handicaps": [
+            "Fies (-1 Überredenproben)",
+            "Größe -1 (Reduzierte Robustheit um 1)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Geschickt (Heimlichkeit W6 statt W4, Maximum W12+1)",
+            "Überlebenskünstler (Kostenloses Anfänger-Talent nach Wahl)",
+            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+        ],
+        "sprachen": ["Goblinisch", "Orkisch"],
+        "altersspanne": "Erwachsen mit 12, Alt mit 25, maximales Alter 30-50",
+        "groesse_maennlich": "110-130cm, 15-25kg (Durchschnitt 120cm, 20kg)",
+        "groesse_weiblich": "105-125cm, 12-22kg (Durchschnitt 115cm, 17kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {
+            "Heimlichkeit": 2
+            },
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "waermesicht": true,
+            "fies": true,
+            "ueberlebenskuenstler": true
+            },
+            "wahlmoeglichkeiten": {
+            "freies_anfaenger_talent": true
+            }
+        }
         },
-        "Grabgeborene": {
-            "name": "Grabgeborene",
-            "handicaps": [
-                "Außenseiter (schwer)",
-                "Sonnenlichtempfindlichkeit (Ablenkung durch Sonnenlicht oder magische Äquivalente)",
-                "Tierschreck (-2 auf Proben, um Tiere zu kontrollieren, ausgenommen bestimmte Tiere wie Wölfe oder Ratten)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Biss (Stä+W4 Schaden)",
-                "Bluttrinker (Einmal pro Spielsitzung, Heilung durch Blut trinken)",
-                "Kälteresistenz (+4 Resistenz gegen Kälte und -4 auf Kälteschaden)",
-                "Nachtsicht (Ignoriert Abzüge für düstere und dunkle Beleuchtung)",
-                "Unnatürliche Stärke (Start mit Stärke W6, Maximale Stärke W12+1)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Golem": {
+        "name": "Golem",
+        "handicaps": [
+            "Tollpatschig (-2 Athletik und Heimlichkeit)",
+            "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
+            "Verringerte Bewegungsweite (5, Sprintwürfel W4)",
+            "Weniger Grundfertigkeiten (Keine Allgemeinwissen, Überreden, Heimlichkeit)",
+            "Wuchtig (-2 bei normaler Ausrüstung)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Größe +2 (+2 Robustheit durch wuchtige Gestalt)",
+            "Keine lebenswichtigen Organe (Angesagte Ziele richten keinen zusätzlichen Schaden an)",
+            "Konstrukt (+2 Erholungsproben, ignoriert 1 Punkt Wundabzüge, atmet nicht, immun gegen Gift/Krankheiten)",
+            "Panzerung +2 (Steingolem)"
+        ],
+        "sprachen": ["Gemeinsprache"],
+        "altersspanne": "Erschaffen als Erwachsener, kein natürliches Altern",
+        "groesse_maennlich": "2,50-3,00m, 400-600kg (Durchschnitt 2,75m, 500kg)",
+        "groesse_weiblich": "2,50-3,00m, 400-600kg (Durchschnitt 2,75m, 500kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 2,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "konstrukt": true,
+            "keine_lebenswichtigen_organe": true,
+            "panzerung_2": true,
+            "tollpatschig": true,
+            "verpeilt": true,
+            "weniger_grundfertigkeiten": true,
+            "wuchtig": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-
-        "Halbelfen": {
-            "name": "Halbelfen",
-            "handicaps": [
-                "Außenseiter (leicht, -2 auf Überredenproben gegen andere außer Halbelfen)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Erbe (Entweder ein freies Anfängertalent oder Geschicklichkeit W6 statt W4)",
-                "Nachtsicht (Ignoriert Abzüge für düstere und dunkle Beleuchtung)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Grabgeborener": {
+        "name": "Grabgeborener",
+        "handicaps": [
+            "Außenseiter (schwer: -2 Überreden, Furcht/Jagd durch andere)",
+            "Sonnenlichtempfindlichkeit (Abgelenkt im Sonnenlicht)",
+            "Tierschreck (Tiere nähern sich nicht bis auf 5'', -2 auf Tierproben)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Biss (Stä+W4 Schaden durch Reißzähne)",
+            "Bluttrinker (Einmal pro Sitzung natürliche Heilung durch Bluttrinken)",
+            "Kälteresistenz (+4 Resistenz gegen Kälte, -4 Kälteschaden)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+            "Unnatürliche Stärke (Stärke W6 statt W4, Maximum W12+1)"
+        ],
+        "sprachen": ["Gemeinsprache", "Abyssal"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 80, maximales Alter 100-150",
+        "groesse_maennlich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
+        "groesse_weiblich": "1,60-1,90m, 55-80kg (Durchschnitt 1,75m, 67kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Stärke": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "biss": true,
+            "bluttrinker": true,
+            "kaelteresistenz": true,
+            "nachtsicht": true,
+            "aussenseiter_schwer": true,
+            "sonnenlichtempfindlichkeit": true,
+            "tierschreck": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "Halblinge": {
-            "name": "Halblinge",
-            "handicaps": [
-                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ reduziert)"
-            ],
-            "talente": [
-                "Glück (Zusätzlicher Benny pro Spielsitzung)"
-            ],
-            "besonderheiten": [
-                "Beherzt (Willenskraft W6 statt W4, Maximum W12+1)",
-                "Größe -1 (Robustheit um 1 reduziert)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Halbelf": {
+        "name": "Halbelf",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+        ],
+        "sprachen": ["Gemeinsprache", "Elfisch"],
+        "altersspanne": "Erwachsen mit 20, Alt mit 65, maximales Alter 80-120",
+        "groesse_maennlich": "1,60-1,95m, 60-85kg (Durchschnitt 1,77m, 72kg)",
+        "groesse_weiblich": "1,55-1,90m, 50-75kg (Durchschnitt 1,72m, 62kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "nachtsicht": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {
+            "freies_talent_oder_attribut": true
+            }
+        }
         },
-        "Halborks": {
-            "name": "Halborks",
-            "handicaps": [
-                "Außenseiter (leicht, -2 auf Überredenproben außer gegen andere Halborks)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Abgehärtet (Start mit Stärke W6 oder Konstitution W6 statt W4, Maximum W12+1)",
-                "Wärmesicht (Halbiert Abzüge bei schlechter Beleuchtung für Ziele, die Hitze ausstrahlen)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },    
-        "Halbriesen": {
-            "name": "Halbriesen",
-            "handicaps": [
-                "Analphabet (Kann nicht lesen oder schreiben, mit Aufstieg entfernbar)",
-                "Außenseiter (schwer, -2 auf Überredenproben)",
-                "Dumm (-1 auf Verstandsproben)",
-                "Verpeilt (-1 auf Allgemeinwissen- und Wahrnehmungsproben)",
-                "Wuchtig (-2 auf Eigenschaftsproben bei Ausrüstung für normale Humanoide, Ausrüstung kostet doppelt)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Größe +3 (Erhöht Robustheit um +3)",
-                "Sehr Stark (Start mit Stärke W8, Maximum W12+2)",
-                "Sehr Widerstandsfähig (Start mit Konstitution W8, Maximum W12+2)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Halbling": {
+        "name": "Halbling",
+        "handicaps": [
+            "Größe -1 (Reduzierte Robustheit um 1)",
+            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
+        ],
+        "talente": [
+            "Glück"
+        ],
+        "besonderheiten": [
+            "Beherzt (Willenskraft W6 statt W4, Maximum W12+1)",
+            "Glück (Zusätzlicher Benny pro Spielsitzung)"
+        ],
+        "sprachen": ["Gemeinsprache", "Halblingisch"],
+        "altersspanne": "Erwachsen mit 33, Alt mit 85, maximales Alter 110-150",
+        "groesse_maennlich": "110-130cm, 18-25kg (Durchschnitt 120cm, 21kg)",
+        "groesse_weiblich": "105-125cm, 16-23kg (Durchschnitt 115cm, 19kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Willenskraft": 2
+            },
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Glück"],
+            "spezielle_effekte": {},
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "Himmlische": {
-            "name": "Himmlische",
-            "handicaps": [
-                "Schwur (schwer, Pflicht zur Dienerschaft einer Gottheit)"
-            ],
-            "talente": [
-                "Attraktiv (Talent)"
-            ],
-            "besonderheiten": [
-                "Ehrenkodex (Moralische Verpflichtung, Schwache zu schützen und Unrecht zu sühnen)",
-                "Fliegen (Bewegungsweite 12, Manöver erfordern Athletik)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Halbork": {
+        "name": "Halbork",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Abgehärtet (Stärke W6 ODER Konstitution W6 statt W4, Maximum W12+1)",
+            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+        ],
+        "sprachen": ["Gemeinsprache", "Orkisch"],
+        "altersspanne": "Erwachsen mit 14, Alt mit 45, maximales Alter 60-80",
+        "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
+        "groesse_weiblich": "1,65-2,05m, 70-110kg (Durchschnitt 1,85m, 90kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "waermesicht": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {
+            "attribut_staerke_oder_konstitution": true
+            }
+        }
         },
-        "Infernale": {
-            "name": "Infernale",
-            "handicaps": [
-                "Anfälligkeit für Naturgewalten (Kälte, -4 auf Widerstandsproben, +4 Schaden durch Kälteangriffe)",
-                "Außenseiter (leicht)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Dunkelsicht (Ignoriert Beleuchtungsabzüge bis zu 10\")",
-                "Hörner (W4 Schaden, +4 Schaden bei Angriff nach mindestens 5\" Lauf)",
-                "Teuflische Natur (+1 auf Einschüchterungsproben)",
-                "Widerstand gegen Naturgewalten (Hitze, +4 auf Resistenz gegen Hitze und -4 Schaden durch Feuer)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },        
-        "Insektoide": {
-            "name": "Insektoide",
-            "handicaps": [
-                "Außenseiter (leicht)",
-                "Schwarmbewusstsein (Handicaps: Angetrieben (schwer) und Loyal zur Kolonie)",
-                "Ungewöhnliche Körperform (Kleidung, Rüstungen und Möbel für Humanoide ungeeignet)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Biss oder Klaue (Stä+W4 Schaden)",
-                "Panzerung +2 (dickes Exoskelett)",
-                "Wandkrabbler (Normale Bewegung an Wänden, kopfüber mit halber Bewegungsweite)",
-                "Zusätzliche Aktionen (Vier Arme, reduziert Abzüge für Mehrfachaktionen um 2)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Halbriese": {
+        "name": "Halbriese",
+        "handicaps": [
+            "Analphabet (Kann nicht lesen oder schreiben)",
+            "Außenseiter (schwer: -2 Überreden, keine Grundrechte außerhalb eigener Clans)",
+            "Dumm (-1 Verstandsproben)",
+            "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
+            "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Größe +3 (+3 Robustheit durch überragende Größe)",
+            "Sehr stark (Stärke W8, Maximum W12+2)",
+            "Sehr widerstandsfähig (Konstitution W8, Maximum W12+2)"
+        ],
+        "sprachen": ["Riesisch"],
+        "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 100-150",
+        "groesse_maennlich": "2,80-3,20m, 300-500kg (Durchschnitt 3,00m, 400kg)",
+        "groesse_weiblich": "2,70-3,10m, 280-480kg (Durchschnitt 2,90m, 380kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Stärke": 4,
+            "Konstitution": 4
+            },
+            "robustheit_bonus": 3,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "analphabet": true,
+            "aussenseiter_schwer": true,
+            "dumm": true,
+            "verpeilt": true,
+            "wuchtig": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "Mauslinge": {
-            "name": "Mauslinge",
-            "handicaps": [
-                "Außenseiter (schwer, -2 auf Überredenproben)",
-                "Phobie (leicht, Katzen)",
-                "Unsichtbar (Sanftmütig)",
-                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel W4)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-                "Winzig (Größe -4, -4 Robustheit, Stärke W4)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },    
+        "Himmlischer": {
+        "name": "Himmlischer",
+        "handicaps": [
+            "Ehrenkodex (Moralisch, verabscheut Lügen, schützt Schwache)",
+            "Schwur (schwer: Dient der erschaffenden Gottheit)"
+        ],
+        "talente": [
+            "Attraktiv"
+        ],
+        "besonderheiten": [
+            "Attraktiv (Talent kostenlos erhalten)",
+            "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)"
+        ],
+        "sprachen": ["Gemeinsprache", "Celestial"],
+        "altersspanne": "Erschaffen als Erwachsener, unsterblich außer durch Gewalt",
+        "groesse_maennlich": "1,70-2,00m, 70-90kg (Durchschnitt 1,85m, 80kg)",
+        "groesse_weiblich": "1,65-1,95m, 60-80kg (Durchschnitt 1,80m, 70kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Attraktiv"],
+            "spezielle_effekte": {
+            "fliegen": true,
+            "ehrenkodex": true,
+            "schwur_schwer": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Infernaler": {
+        "name": "Infernaler",
+        "handicaps": [
+            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+            "Außenseiter (leicht: -2 Überreden durch teuflisches Erbe)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Dunkelsicht (Ignoriert Beleuchtungsabzüge bis zu 10'' / 20 Meter)",
+            "Hörner (W4 Schaden, +4 bei Sturmangriff ab 5'' Lauf)",
+            "Teuflische Natur (+1 Einschüchterungsproben)",
+            "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Infernal"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 90, maximales Alter 120-200",
+        "groesse_maennlich": "1,70-2,00m, 75-100kg (Durchschnitt 1,85m, 87kg)",
+        "groesse_weiblich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "dunkelsicht": true,
+            "hoerner": true,
+            "teuflische_natur": true,
+            "widerstand_hitze": true,
+            "anfaelligkeit_kaelte": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Insektoid": {
+        "name": "Insektoid",
+        "handicaps": [
+            "Außenseiter (leicht: -2 Überreden durch fremdartige Natur)",
+            "Schwarmbewusstsein (Angetrieben schwer und Loyal gegenüber Kolonie)",
+            "Ungewöhnliche Körperform (Keine normale Kleidung/Rüstung/Möbel)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Biss oder Klaue (Stä+W4 Schaden durch Mandibeln/Zangen)",
+            "Panzerung +2 (Dickes Exoskelett)",
+            "Wandkrabbler (Normal auf vertikalen Oberflächen, halbe Geschwindigkeit kopfüber)",
+            "Zusätzliche Aktionen (4 Arme, -2 Abzug für Mehrfachaktionen reduziert)"
+        ],
+        "sprachen": ["Gemeinsprache", "Insektoid"],
+        "altersspanne": "Erwachsen mit 5, Alt mit 20, maximales Alter 25-40",
+        "groesse_maennlich": "1,60-1,90m, 70-100kg (Durchschnitt 1,75m, 85kg)",
+        "groesse_weiblich": "1,55-1,85m, 65-95kg (Durchschnitt 1,70m, 80kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "biss_klaue": true,
+            "panzerung_2": true,
+            "wandkrabbler": true,
+            "zusaetzliche_aktionen": true,
+            "aussenseiter_leicht": true,
+            "schwarmbewusstsein": true,
+            "ungewoehnliche_koerperform": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Mausling": {
+        "name": "Mausling",
+        "handicaps": [
+            "Außenseiter (schwer: -2 Überreden, keine Grundrechte)",
+            "Phobie (leicht) Katzen",
+            "Unscheinbar (Handicap Sanftmütig)",
+            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel W4)",
+            "Winzig (Größe -4, -4 Robustheit, Stärke W4)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+        ],
+        "sprachen": ["Gemeinsprache", "Mausling"],
+        "altersspanne": "Erwachsen mit 2, Alt mit 8, maximales Alter 10-15",
+        "groesse_maennlich": "8-12cm, 0,1-0,2kg (Durchschnitt 10cm, 0,15kg)",
+        "groesse_weiblich": "8-12cm, 0,1-0,2kg (Durchschnitt 10cm, 0,15kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": -4,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "nachtsicht": true,
+            "aussenseiter_schwer": true,
+            "phobie_katzen": true,
+            "sanftmuetig": true,
+            "winzig": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
         "Mensch": {
-            "name": "Mensch",
-            "handicaps": [],
-            "talente": [
-                "Anpassungsfähig"
-            ],
-            "besonderheiten": [],
-            "aktiv": true,
-            "custom": false
-        },        
-        "Minotauren": {
-            "name": "Minotauren",
-            "handicaps": [
-                "Dünnhäutig (schwer)",
-                "Fies (Schwierigkeiten mit Diplomatie und Taktgefühl)",
-                "Ungebildet (-1 auf Verstandsproben)",
-                "Wuchtig (-2 auf Eigenschaftsproben mit humanoider Ausrüstung, keine humanoide Rüstung tragbar, Ausrüstung kostet doppelt)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Größe +1 (Robustheit +1)",
-                "Hörner (Stä+W6 Schaden, +4 Schaden nach mindestens 5\" Lauf)",
-                "Sehr Stark (Start mit Stärke W8, Maximum W12+2)",
-                "Widerstandsfähig (Start mit Konstitution W6, Maximum W12+1)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Mensch",
+        "handicaps": [],
+        "talente": [],
+        "besonderheiten": [
+            "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
+        ],
+        "sprachen": ["Gemeinsprache"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 55, maximales Alter 70-110",
+        "groesse_maennlich": "1,60-1,95m, 60-100kg (Durchschnitt 1,77m, 80kg)",
+        "groesse_weiblich": "1,50-1,85m, 45-85kg (Durchschnitt 1,67m, 65kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {},
+            "wahlmoeglichkeiten": {
+            "freies_talent": true
+            }
+        }
+        },
+        "Minotaur": {
+        "name": "Minotaur",
+        "handicaps": [
+            "Dünnhäutig (schwer: Verliert schnell Beherrschung)",
+            "Fies (Schwierigkeiten mit Diplomatie und Taktgefühl)",
+            "Ungebildet (-1 Verstandsproben)",
+            "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Größe +1 (+1 Robustheit)",
+            "Hörner (Stä+W6 Schaden, +4 bei Sturmangriff ab 5'' Lauf)",
+            "Sehr stark (Stärke W8, Maximum W12+2)",
+            "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
+        ],
+        "sprachen": ["Gemeinsprache", "Minotaurisch"],
+        "altersspanne": "Erwachsen mit 15, Alt mit 40, maximales Alter 50-80",
+        "groesse_maennlich": "2,00-2,40m, 150-250kg (Durchschnitt 2,20m, 200kg)",
+        "groesse_weiblich": "1,90-2,30m, 130-230kg (Durchschnitt 2,10m, 180kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Stärke": 4,
+            "Konstitution": 2
+            },
+            "robustheit_bonus": 1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "hoerner": true,
+            "duennhaeutig_schwer": true,
+            "fies": true,
+            "ungebildet": true,
+            "wuchtig": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Oger": {
-            "name": "Oger",
-            "handicaps": [
-                "Arrogant",
-                "Außenseiter (leicht, -2 auf Überredenproben)",
-                "Tollpatschig (-2 auf Athletik- und Heimlichkeitsproben)",
-                "Verpeilt (-1 auf Allgemeinwissen- und Wahrnehmungsproben)",
-                "Wuchtig (-2 auf Eigenschaftsproben mit humanoider Ausrüstung, keine humanoide Rüstung tragbar, Ausrüstung kostet doppelt)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Größe +1 (Robustheit +1)",
-                "Sehr Stark (Stärke W8, Maximum W12+2)",
-                "Sehr Widerstandsfähig (Konstitution W8, Maximum W12+2)",
-                "Zäh (Erleidet keine Wunde, wenn zweimal Angeschlagen durch Schaden)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },        
-        "Orks": {
-            "name": "Orks",
-            "handicaps": [
-                "Außenseiter (schwer, -2 auf Überredenproben, möglicherweise als Monster behandelt)",
-                "Brutal (-1 auf Verstandsproben)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Größe +1 (Robustheit +1)",
-                "Stark (Stärke W6, Maximum W12+1)",
-                "Wärmesicht (Halbiert Abzüge bei schlechter Beleuchtung für Ziele, die Hitze ausstrahlen)",
-                "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },        
-        "Rakashaner": {
-            "name": "Rakashaner",
-            "handicaps": [
-                "Blutrünstig",
-                "Nichtschwimmer (-2 auf Athletik (Schwimmen), Bewegung im Wasser kostet 3\")",
-                "Volksfeind (-2 auf Überreden mit Mitgliedern eines bestimmten anderen Volks)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Biss (Stä+W4 Schaden, kann gegen gepackte Feinde eingesetzt werden)",
-                "Geschicklichkeit (Geschicklichkeit W6, Maximum W12+1)",
-                "Klauen (Stä+W4 Schaden, PB 2, +2 auf Athletikproben für Klettern)",
-                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Oger",
+        "handicaps": [
+            "Arrogant (Hochmütig und distanziert)",
+            "Außenseiter (leicht: -2 Überreden durch imposante Größe)",
+            "Tollpatschig (-2 Athletik und Heimlichkeit)",
+            "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
+            "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
+        ],
+        "talente": [
+            "Zäh"
+        ],
+        "besonderheiten": [
+            "Größe +1 (+1 Robustheit)",
+            "Sehr stark (Stärke W8, Maximum W12+2)",
+            "Sehr widerstandsfähig (Konstitution W8, Maximum W12+2)",
+            "Zäh (Keine Wunde bei zweimal Angeschlagen)"
+        ],
+        "sprachen": ["Gemeinsprache", "Ogerisch"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+        "groesse_maennlich": "2,30-2,70m, 200-300kg (Durchschnitt 2,50m, 250kg)",
+        "groesse_weiblich": "2,20-2,60m, 180-280kg (Durchschnitt 2,40m, 230kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Stärke": 4,
+            "Konstitution": 4
+            },
+            "robustheit_bonus": 1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Zäh"],
+            "spezielle_effekte": {
+            "arrogant": true,
+            "aussenseiter_leicht": true,
+            "tollpatschig": true,
+            "verpeilt": true,
+            "wuchtig": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
-        "Rattlinge": {
-            "name": "Rattlinge",
-            "handicaps": [
-                "Außenseiter (schwer, -2 auf Überredenproben, als monströses Ungeziefer angesehen)",
-                "Feige",
-                "Gierig (leicht)"
-            ],
-            "talente": [
-                "Sammler"
-            ],
-            "besonderheiten": [
-                "Biss (Stä+W4 Schaden, kann gegen gepackte Feinde eingesetzt werden)",
-                "Klauen (Stä+W4 Schaden, PB 2, +2 auf Athletikproben für Klettern)",
-                "Größe -1 (Reduzierte Robustheit um 1)",
-                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-                "Natürliche Resistenz (Immun gegen Gifte und Krankheiten)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "Ork": {
+        "name": "Ork",
+        "handicaps": [
+            "Außenseiter (schwer: -2 Überreden, können als Monster behandelt werden)",
+            "Brutal (-1 Verstandsproben)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Größe +1 (+1 Robustheit)",
+            "Stark (Stärke W6, Maximum W12+1)",
+            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)",
+            "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
+        ],
+        "sprachen": ["Orkisch"],
+        "altersspanne": "Erwachsen mit 12, Alt mit 35, maximales Alter 45-65",
+        "groesse_maennlich": "1,90-2,30m, 100-150kg (Durchschnitt 2,10m, 125kg)",
+        "groesse_weiblich": "1,80-2,20m, 85-135kg (Durchschnitt 2,00m, 110kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Stärke": 2,
+            "Konstitution": 2
+            },
+            "robustheit_bonus": 1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "waermesicht": true,
+            "aussenseiter_schwer": true,
+            "brutal": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Rakashaner": {
+        "name": "Rakashaner",
+        "handicaps": [
+            "Blutrünstig (Grausam zu Feinen, spielen mit ihnen)",
+            "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser)",
+            "Volksfeind (-2 Überreden mit einem anderen Volk)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+            "Geschicklichkeit (W6 statt W4, Maximum W12+1)",
+            "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+        ],
+        "sprachen": ["Gemeinsprache", "Rakashanisch"],
+        "altersspanne": "Erwachsen mit 16, Alt mit 45, maximales Alter 60-90",
+        "groesse_maennlich": "1,70-2,00m, 70-100kg (Durchschnitt 1,85m, 85kg)",
+        "groesse_weiblich": "1,65-1,95m, 60-90kg (Durchschnitt 1,80m, 75kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Geschicklichkeit": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "biss": true,
+            "klauen": true,
+            "nachtsicht": true,
+            "blutrünstig": true,
+            "nichtschwimmer": true,
+            "volksfeind": true
+            },
+            "wahlmoeglichkeiten": {}
+        }        
+        },
+        "Rattling": {
+        "name": "Rattling",
+        "handicaps": [
+            "Außenseiter (schwer: -2 Überreden, als Ungeziefer behandelt)",
+            "Feige (Diskretion ist der bessere Teil der Tapferkeit)",
+            "Gierig (leicht: Besessenheit, neue Schätze zu erwerben)",
+            "Größe -1 (Reduzierte Robustheit um 1)"
+        ],
+        "talente": [
+            "Sammler"
+        ],
+        "besonderheiten": [
+            "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+            "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+            "Natürliche Resistenz (Immun gegen Gift und Krankheiten)",
+            "Sammler (Talent kostenlos erhalten)"
+        ],
+        "sprachen": ["Gemeinsprache", "Rattlingisch"],
+        "altersspanne": "Erwachsen mit 8, Alt mit 20, maximales Alter 25-35",
+        "groesse_maennlich": "90-110cm, 12-18kg (Durchschnitt 100cm, 15kg)",
+        "groesse_weiblich": "85-105cm, 10-16kg (Durchschnitt 95cm, 13kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Sammler"],
+            "spezielle_effekte": {
+            "biss": true,
+            "klauen": true,
+            "nachtsicht": true,
+            "natuerliche_resistenz": true,
+            "aussenseiter_schwer": true,
+            "feige": true,
+            "gierig_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Saurianer": {
-            "name": "Saurianer",
-            "handicaps": [
-                "Anfälligkeit für Naturgewalten (Kälte, -4 auf Widerstandsproben, +4 Schaden durch Kälteangriffe)",
-                "Außenseiter (leicht, -2 auf Überredenproben)"
-            ],
-            "talente": [
-                "Aufmerksamkeit"
-            ],
-            "besonderheiten": [
-                "Biss (Stä+W4 Schaden, kann gegen gepackte Feinde eingesetzt werden)",
-                "Panzerung +2 (Schuppige Haut wie Lederrüstung)"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Saurianer",
+        "handicaps": [
+            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+            "Außenseiter (leicht: -2 Überreden durch seltsame Sitten/Erscheinung)"
+        ],
+        "talente": [
+            "Aufmerksamkeit"
+        ],
+        "besonderheiten": [
+            "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+            "Geschärfte Sinne (Talent Aufmerksamkeit)",
+            "Panzerung +2 (Schuppige Haut wie Lederrüstung)"
+        ],
+        "sprachen": ["Gemeinsprache", "Saurianisch"],
+        "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 100-150",
+        "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
+        "groesse_weiblich": "1,65-2,05m, 70-110kg (Durchschnitt 1,85m, 90kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": ["Aufmerksamkeit"],
+            "spezielle_effekte": {
+            "biss": true,
+            "panzerung_2": true,
+            "anfaelligkeit_kaelte": true,
+            "aussenseiter_leicht": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
         },
         "Schlangenvolk": {
-            "name": "Schlangenvolk",
-            "handicaps": [
-                "Anfälligkeit für Naturgewalten (Kälte, -4 auf Widerstandsproben, +4 Schaden durch Kälteangriffe)",
-                "Außenseiter (leicht, -2 auf Überredenproben außerhalb ihres Clans)",
-                "Kaltblütig (-1 auf Geschicklichkeit, Stärke und Konstitution bei Temperaturen unter 18°)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Biss (Stä+W4 Schaden)",
-                "Giftiger Biss (Leichtes Gift bei Angeschlagen oder Wunde, Konstitutionsprobe erforderlich)",
-                "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Zielen mit Hitze)",
-                "Bewegungsweite 10 (Sprintwürfel W10)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Zentauren": {
-            "name": "Zentauren",
-            "handicaps": [
-                "Abhängigkeit (Müssen mindestens eine Stunde pro 24 Stunden unter freiem Himmel galoppieren, sonst erleiden sie Erschöpfung)",
-                "Ungewöhnliche Form (Können keine Reittiere nutzen und nur speziell angepasste Rüstungen und Ausrüstung verwenden)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Bewegungsweite +4 (Bewegungsweite 10, Sprintwürfel W10)",
-                "Größe +1 (Robustheit +1)",
-                "Hufe (Stä+W4 Schaden, Talente für Natürliche Waffen gelten auch für Hufangriffe)"
-            ],
-            "aktiv": true,
-            "custom": false
-        },     
-        "Zwerg": {
-            "name": "Zwerg",
-            "handicaps": [
-                "Verringerte Bewegungsweite"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Nachtsicht",
-                "Widerstandsfähig"
-            ],
-            "aktiv": true,
-            "custom": false
+        "name": "Schlangenvolk",
+        "handicaps": [
+            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+            "Außenseiter (schwer: -2 Überreden außerhalb eigener Clans)",
+            "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Bewegungsweite (10, Sprintwürfel W10)",
+            "Biss (Stä+W4 Schaden)",
+            "Giftiger Biss (Leichtes Gift bei Angeschlagen/Wunde)",
+            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+        ],
+        "sprachen": ["Gemeinsprache", "Schlangisch"],
+        "altersspanne": "Erwachsen mit 15, Alt mit 60, maximales Alter 80-120",
+        "groesse_maennlich": "1,80-2,20m, 70-100kg (Durchschnitt 2,00m, 85kg)",
+        "groesse_weiblich": "1,75-2,15m, 65-95kg (Durchschnitt 1,95m, 80kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 4,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "biss": true,
+            "giftiger_biss": true,
+            "waermesicht": true,
+            "anfaelligkeit_kaelte": true,
+            "aussenseiter_schwer": true,
+            "kaltblutig": true
+            },
+            "wahlmoeglichkeiten": {}
         }
+        },
+        "Zentaur": {
+        "name": "Zentaur",
+        "handicaps": [
+            "Abhängigkeit (Mindestens 1 Stunde von 24 unter freiem Himmel galoppieren)",
+            "Ungewöhnliche Form (Keine Reittiere, eingeschränkte Ausrüstung)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Bewegungsweite +4 (10, Sprintwürfel W10)",
+            "Größe +1 (+1 Robustheit)",
+            "Hufe (Stä+W4 Schaden)"
+        ],
+        "sprachen": ["Gemeinsprache", "Sylvanisch"],
+        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+        "groesse_maennlich": "2,00-2,40m, 180-250kg (Durchschnitt 2,20m, 215kg)",
+        "groesse_weiblich": "1,95-2,35m, 170-240kg (Durchschnitt 2,15m, 205kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {},
+            "robustheit_bonus": 1,
+            "bewegungsweite_bonus": 4,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "hufe": true,
+            "abhaengigkeit_freier_himmel": true,
+            "ungewoehnliche_form": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+        },
+        "Zwerg": {
+        "name": "Zwerg",
+        "handicaps": [
+            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+            "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)"
+        ],
+        "sprachen": ["Gemeinsprache", "Zwergisch"],
+        "altersspanne": "Erwachsen mit 40, Alt mit 150, maximales Alter 200-350",
+        "groesse_maennlich": "110-140cm, 60-90kg (Durchschnitt 125cm, 75kg)",
+        "groesse_weiblich": "105-135cm, 55-85kg (Durchschnitt 120cm, 70kg)",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+            "Konstitution": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "spezielle_effekte": {
+            "nachtsicht": true
+            },
+            "wahlmoeglichkeiten": {}
+            }
+        }  
     },
     "voelker_selected": {
         "Android": false,

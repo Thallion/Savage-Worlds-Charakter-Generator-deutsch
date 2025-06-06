@@ -8,7 +8,7 @@ from models.schild import Schild
 def berechne_abgeleitete_werte(charakter):
     """
     Berechnet die abgeleiteten Werte des Charakters, wie Parade, Robustheit usw.
-    ERWEITERT: Berücksichtigt Völker-Effekte, Erschöpfung und Talente.
+    ERWEITERT: Berücksichtigt Völker-Effekte, Erschöpfung, Talente und natürliche Panzerung.
     
     Args:
         charakter: Das Charakterobjekt, dessen Werte berechnet werden sollen
@@ -131,17 +131,23 @@ def berechne_abgeleitete_werte(charakter):
                 elif "Klein" in handicap.name and handicap.stufe == "leicht":
                     robustheit_bonus -= 1  # Klein: -1 Robustheit
 
-        # 3. Völker-Effekte für Robustheit
+        # 3. Völker-Effekte für Robustheit (Größe/Basis-Modifikationen)
         voelker_robustheit_bonus = _berechne_voelker_robustheit_bonus(charakter)
         robustheit_bonus += voelker_robustheit_bonus
         
         # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Boni
         charakter.robustheit_basis = (konstitution_wert // 2) + 2 + robustheit_bonus
 
-        # Gesamtrüstungsschutz berechnen
+        # Gesamtrüstungsschutz berechnen (inklusive natürlicher Panzerung)
         from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
         gesamt_ruestungsschutz = berechne_gesamt_ruestungsschutz(charakter)
         gesamt_torso = gesamt_ruestungsschutz.get('Torso', 0)
+        
+        # 4. Natürliche Panzerung aus Völker-Effekten hinzufügen
+        natuerliche_panzerung = _berechne_voelker_natuerliche_panzerung(charakter)
+        gesamt_torso += natuerliche_panzerung
+        
+        Logger.debug(f"Rüstungsschutz: Normal={gesamt_ruestungsschutz.get('Torso', 0)}, Natürlich={natuerliche_panzerung}, Gesamt={gesamt_torso}")
 
         # Gesamte Robustheit (Basis + Rüstung)
         charakter.robustheit = charakter.robustheit_basis + gesamt_torso
@@ -238,7 +244,7 @@ def _berechne_voelker_bewegungsweite_bonus(charakter):
 
 def _berechne_voelker_robustheit_bonus(charakter):
     """
-    Berechnet den Robustheit-Bonus durch das ausgewählte Volk.
+    Berechnet den Robustheit-Bonus durch das ausgewählte Volk (nur Basis-Modifikationen wie Größe).
     
     Args:
         charakter: Das Charakterobjekt
@@ -264,6 +270,44 @@ def _berechne_voelker_robustheit_bonus(charakter):
         Logger.error(f"Fehler bei Völker-Robustheit-Berechnung: {e}")
     
     return robustheit_bonus
+
+
+def _berechne_voelker_natuerliche_panzerung(charakter):
+    """
+    NEU: Berechnet die natürliche Panzerung durch das ausgewählte Volk.
+    Diese wird zum Rüstungsschutz addiert, nicht zur Basis-Robustheit.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        int: Natürliche Panzerung (immer >= 0)
+    """
+    natuerliche_panzerung = 0
+    
+    try:
+        # Finde das ausgewählte Volk
+        ausgewaehltes_volk = None
+        for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+            if ist_ausgewaehlt and volk_name in charakter.voelker:
+                ausgewaehltes_volk = charakter.voelker[volk_name]
+                break
+        
+        if ausgewaehltes_volk:
+            # Prüfe auf natürliche Panzerung in den speziellen Effekten
+            spezielle_effekte = ausgewaehltes_volk.effects.get('spezielle_effekte', {})
+            
+            if spezielle_effekte.get('panzerung_2', False):
+                natuerliche_panzerung = 2
+                Logger.debug(f"Natürliche Panzerung +2 von {ausgewaehltes_volk.name}")
+            elif spezielle_effekte.get('panzerung_1', False):
+                natuerliche_panzerung = 1
+                Logger.debug(f"Natürliche Panzerung +1 von {ausgewaehltes_volk.name}")
+    
+    except Exception as e:
+        Logger.error(f"Fehler bei Berechnung natürlicher Panzerung: {e}")
+    
+    return natuerliche_panzerung
 
 
 def _berechne_voelker_benny_bonus(charakter):
