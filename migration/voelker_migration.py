@@ -149,6 +149,7 @@ def _migrate_single_volk(volk_name, volk_data):
 def _parse_generic_effects(text, effects):
     """
     Parst generische Effekte aus Textbeschreibungen.
+    VERBESSERT: Robustere Erkennung von Effekten in verschiedenen Formulierungen.
     
     Args:
         text: Textbeschreibung
@@ -156,14 +157,14 @@ def _parse_generic_effects(text, effects):
     """
     text_lower = text.lower()
     
-    # Attribut-Boni erkennen
+    # Attribut-Boni erkennen (auch in Klammern)
     attribute = ['stärke', 'geschicklichkeit', 'konstitution', 'verstand', 'willenskraft']
     for attr in attribute:
         if f"{attr} w6 statt w4" in text_lower:
             attr_name = attr.capitalize()
             effects['attribute_bonuses'][attr_name] = 2
     
-    # Fertigkeits-Boni erkennen
+    # Fertigkeits-Boni erkennen (auch in Klammern)
     fertigkeiten = ['wahrnehmung', 'athletik', 'einschüchtern', 'kämpfen']
     for fert in fertigkeiten:
         if f"{fert} w6 statt w4" in text_lower:
@@ -173,47 +174,58 @@ def _parse_generic_effects(text, effects):
             fert_name = fert.capitalize()
             effects['fertigkeits_startboni'][fert_name] = 0
     
-    # Robustheit-Effekte
-    if "robustheit um 1" in text_lower or "größe -1" in text_lower:
-        if "reduzierte" in text_lower or "-1" in text:
+    # Robustheit-Effekte (verschiedene Formulierungen)
+    if any(phrase in text_lower for phrase in [
+        "robustheit um 1", "-1 robustheit", "(-1 robustheit", 
+        "reduzierte robustheit um 1", "größe -1", "schlank"
+    ]):
+        # Prüfe, ob es ein Malus ist
+        if any(neg in text_lower for neg in ["-1", "reduzierte", "schlank", "größe -1"]):
             effects['robustheit_bonus'] -= 1
-        elif "+1" in text:
+        else:
             effects['robustheit_bonus'] += 1
-    elif "+1 robustheit" in text_lower or "orkische wildheit" in text_lower:
+    elif any(phrase in text_lower for phrase in ["+1 robustheit", "orkische wildheit"]):
         effects['robustheit_bonus'] += 1
     
-    # Bewegungsweite-Effekte
-    if "bewegungsweite" in text_lower and ("-1" in text or "verringerte" in text_lower):
+    # Bewegungsweite-Effekte (verschiedene Formulierungen)
+    if any(phrase in text_lower for phrase in [
+        "verringerte bewegungsweite", "-1 bewegungsweite", "bewegungsweite -1"
+    ]):
         effects['bewegungsweite_bonus'] -= 1
     
     # Wahlmöglichkeiten erkennen
-    if "freies talent" in text_lower or "anpassungsfähigkeit" in text_lower:
+    if any(phrase in text_lower for phrase in ["freies talent", "anpassungsfähigkeit"]):
         effects['wahlmoeglichkeiten']['freies_talent'] = True
     
-    if "w6 in einem attribut statt w4" in text_lower or "flexibilität" in text_lower:
+    if any(phrase in text_lower for phrase in [
+        "w6 in einem attribut statt w4", "flexibilität"
+    ]):
         effects['wahlmoeglichkeiten']['freies_attribut'] = True
     
-    if "verstandsbasierten fertigkeit auf w4" in text_lower or "zwanghaft" in text_lower:
+    if any(phrase in text_lower for phrase in [
+        "verstandsbasierten fertigkeit auf w4", "zwanghaft"
+    ]):
         effects['wahlmoeglichkeiten']['freie_verstandsfertigkeit'] = True
     
     # Spezielle Effekte
     spezial_mapping = {
-        'elfenmagie': 'elfenmagie',
-        'nachtsicht': 'nachtsicht',
-        'dunkelsicht': 'dunkelsicht',
-        'steingespür': 'steingespür',
-        'gnomenmagie': 'gnomenmagie',
-        'eiserne konstitution': 'eiserne_konstitution',
-        'geschärfte sinne': 'geschaerfte_sinne',
-        'orkische wildheit': 'orkische_wildheit'
+        'elfenmagie': ['elfenmagie'],
+        'nachtsicht': ['nachtsicht', 'dunkelsicht'],
+        'steingespür': ['steingespür'],
+        'gnomenmagie': ['gnomenmagie'],
+        'eiserne_konstitution': ['eiserne konstitution'],
+        'geschaerfte_sinne': ['geschärfte sinne'],
+        'orkische_wildheit': ['orkische wildheit']
     }
     
-    for key, effect_name in spezial_mapping.items():
-        if key in text_lower:
+    for effect_name, keywords in spezial_mapping.items():
+        if any(keyword in text_lower for keyword in keywords):
             effects['spezielle_effekte'][effect_name] = True
     
     # Automatische Talente erkennen
-    if "glück" in text_lower and "zusätzlicher benny" in text_lower:
+    if "glück" in text_lower and any(phrase in text_lower for phrase in [
+        "zusätzlicher benny", "benny pro spielsitzung"
+    ]):
         if "Glück" not in effects['auto_talente']:
             effects['auto_talente'].append("Glück")
 

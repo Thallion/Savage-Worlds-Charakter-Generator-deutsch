@@ -20,7 +20,25 @@
             "groesse_maennlich": "1,65-2,05m, 52-72kg (Durchschnitt 1,85m, 58kg)",
             "groesse_weiblich": "1,65-1,95m, 44-57kg (Durchschnitt 1,85m, 53kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2,
+                    "Verstand": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {
+                    "Wahrnehmung": 2
+                },
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "elfenmagie": true,
+                    "nachtsicht": true,
+                    "geschaerfte_sinne": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Gnom": {
             "name": "Gnom",
@@ -41,7 +59,26 @@
             "groesse_maennlich": "95-110cm, 17-19kg (Durchschnitt 100cm, 18kg)",
             "groesse_weiblich": "90-105cm, 14-17kg (Durchschnitt 95cm, 16kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {
+                    "Wahrnehmung": 2
+                },
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "gnomenmagie": true,
+                    "nachtsicht": true,
+                    "geschaerfte_sinne": true
+                },
+                "wahlmoeglichkeiten": {
+                    "freie_verstandsfertigkeit": true
+                }
+            }
         },
         "Halbelf": {
             "name": "Halbelf",
@@ -57,7 +94,21 @@
             "groesse_maennlich": "1,60-2,00m, 50-82kg (Durchschnitt 1,80m, 70kg)",
             "groesse_weiblich": "1,55-1,90m, 45-77kg (Durchschnitt 1,75m, 61kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "elfenmagie": true,
+                    "nachtsicht": true
+                },
+                "wahlmoeglichkeiten": {
+                    "freies_attribut": true
+                }
+            }
         },
         "Halbling": {
             "name": "Halbling",
@@ -78,7 +129,23 @@
             "groesse_maennlich": "95-100cm, 14-17kg (Durchschnitt 95cm, 16kg)",
             "groesse_weiblich": "85-95cm, 12-15kg (Durchschnitt 98cm, 14kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {
+                    "Wahrnehmung": 2,
+                    "Athletik": 2
+                },
+                "auto_talente": ["Glück"],
+                "spezielle_effekte": {
+                    "geschaerfte_sinne": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Halbork": {
             "name": "Halbork",
@@ -97,7 +164,22 @@
             "groesse_maennlich": "1,50-2,05m, 74-144kg (Durchschnitt 1,80m, 109kg)",
             "groesse_weiblich": "1,40-1,95m, 56-126kg (Durchschnitt 1,70m, 91kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2
+                },
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {
+                    "Einschüchtern": 2
+                },
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Mensch": {
             "name": "Mensch",
@@ -111,7 +193,19 @@
             "groesse_maennlich": "1,50-1,95m, 54-100kg (Durchschnitt 1,70m, 79kg)",
             "groesse_weiblich": "1,50-1,85m, 43-84kg (Durchschnitt 1,60m, 64kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true,
+                    "freies_attribut": true
+                }
+            }
         },
         "Zwerg": {
             "name": "Zwerg",
@@ -130,7 +224,23 @@
             "groesse_maennlich": "1,20-1,35m, 74-93kg (Durchschnitt 1,30m, 84kg)",
             "groesse_weiblich": "1,15-1,30m, 61-80kg (Durchschnitt 1,20m, 75kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "eiserne_konstitution": true,
+                    "steingespür": true,
+                    "staerke_bonus_traglast": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {

@@ -27,9 +27,16 @@ class Volk(EventDispatcher):
         self.aktiv = True
         self.custom = custom
         
-        # Strukturierte Effekte setzen
-        self.effects = effects or {}
-        self._parse_effects_from_text()
+        # Strukturierte Effekte direkt setzen (kein Text-Parsing mehr nötig)
+        self.effects = effects or {
+            'attribute_bonuses': {},      # {'Stärke': 2} = W4 -> W6
+            'robustheit_bonus': 0,        # +1 oder -1
+            'bewegungsweite_bonus': 0,    # +1 oder -1
+            'fertigkeits_startboni': {},  # {'Wahrnehmung': 2} = W4-2 -> W4+0
+            'auto_talente': [],           # Automatisch erhaltene Talente
+            'spezielle_effekte': {},      # Für komplexere Effekte
+            'wahlmoeglichkeiten': {}      # Für Dropdown-Auswahl
+        }
 
     def _parse_effects_from_text(self):
         """
@@ -59,15 +66,15 @@ class Volk(EventDispatcher):
         """Parst einen einzelnen Effekt aus dem Text."""
         text_lower = text.lower()
         
-        # Attribut-Boni erkennen
+        # Attribut-Boni erkennen (auch in Klammern)
         attribute = ['stärke', 'geschicklichkeit', 'konstitution', 'verstand', 'willenskraft']
         for attr in attribute:
             if f"{attr} w6 statt w4" in text_lower:
                 attr_name = attr.capitalize()
                 self.effects['attribute_bonuses'][attr_name] = 2
                 
-        # Fertigkeits-Boni erkennen
-        fertigkeiten = ['wahrnehmung', 'athletik', 'einschüchtern']
+        # Fertigkeits-Boni erkennen (auch in Klammern)
+        fertigkeiten = ['wahrnehmung', 'athletik', 'einschüchtern', 'kämpfen']
         for fert in fertigkeiten:
             if f"{fert} w6 statt w4" in text_lower:
                 fert_name = fert.capitalize()
@@ -76,38 +83,51 @@ class Volk(EventDispatcher):
                 fert_name = fert.capitalize()
                 self.effects['fertigkeits_startboni'][fert_name] = 0  # W4-2 -> W4
 
-        # Robustheit-Effekte
-        if "robustheit um 1" in text_lower:
-            if ist_handicap or "reduzierte robustheit" in text_lower:
+        # Robustheit-Effekte (verschiedene Formulierungen)
+        if any(phrase in text_lower for phrase in [
+            "robustheit um 1", "-1 robustheit", "(-1 robustheit", 
+            "reduzierte robustheit um 1", "größe -1"
+        ]):
+            if ist_handicap or any(neg in text_lower for neg in ["-1", "reduzierte", "schlank"]):
                 self.effects['robustheit_bonus'] -= 1
             else:
                 self.effects['robustheit_bonus'] += 1
-        elif "+1 robustheit" in text_lower:
+        elif any(phrase in text_lower for phrase in ["+1 robustheit", "orkische wildheit"]):
             self.effects['robustheit_bonus'] += 1
 
-        # Bewegungsweite-Effekte
-        if "bewegungsweite" in text_lower and ("-1" in text or "verringerte" in text_lower):
+        # Bewegungsweite-Effekte (verschiedene Formulierungen)
+        if any(phrase in text_lower for phrase in [
+            "verringerte bewegungsweite", "-1 bewegungsweite", "bewegungsweite -1"
+        ]):
             self.effects['bewegungsweite_bonus'] -= 1
 
         # Wahlmöglichkeiten erkennen
-        if "freies talent" in text_lower:
+        if any(phrase in text_lower for phrase in ["freies talent", "anpassungsfähigkeit"]):
             self.effects['wahlmoeglichkeiten']['freies_talent'] = True
             
-        if "w6 in einem attribut statt w4" in text_lower:
+        if any(phrase in text_lower for phrase in [
+            "w6 in einem attribut statt w4", "flexibilität"
+        ]):
             self.effects['wahlmoeglichkeiten']['freies_attribut'] = True
             
-        if "verstandsbasierten fertigkeit auf w4" in text_lower:
+        if any(phrase in text_lower for phrase in [
+            "verstandsbasierten fertigkeit auf w4", "zwanghaft"
+        ]):
             self.effects['wahlmoeglichkeiten']['freie_verstandsfertigkeit'] = True
 
         # Spezielle Effekte für komplexere Fälle
-        if "elfenmagie" in text_lower:
-            self.effects['spezielle_effekte']['elfenmagie'] = True
-            
-        if "nachtsicht" in text_lower or "dunkelsicht" in text_lower:
-            self.effects['spezielle_effekte']['nachtsicht'] = True
-            
-        if "steingespür" in text_lower:
-            self.effects['spezielle_effekte']['steingespür'] = True
+        spezial_effects_mapping = {
+            'elfenmagie': ['elfenmagie'],
+            'nachtsicht': ['nachtsicht', 'dunkelsicht'],
+            'steingespür': ['steingespür'],
+            'gnomenmagie': ['gnomenmagie'],
+            'eiserne_konstitution': ['eiserne konstitution'],
+            'geschaerfte_sinne': ['geschärfte sinne']
+        }
+        
+        for effect_key, keywords in spezial_effects_mapping.items():
+            if any(keyword in text_lower for keyword in keywords):
+                self.effects['spezielle_effekte'][effect_key] = True
 
     def get_attribut_bonus(self, attribut_name):
         """Gibt den Bonus für ein spezifisches Attribut zurück."""
@@ -136,24 +156,52 @@ class Volk(EventDispatcher):
     def apply_effects_to_charakter(self, charakter):
         """
         Wendet die Völker-Effekte auf einen Charakter an.
+        KORRIGIERT: Unterscheidet zwischen Grundfertigkeiten (W4→W6) und Nicht-Grundfertigkeiten (W4-2→W4+0).
         """
         try:
+            Logger.info(f"=== Anwenden der Völker-Effekte für {self.name} ===")
+            
+            # Liste der Grundfertigkeiten (starten mit W4+0)
+            grundfertigkeiten = [
+                "Allgemeinwissen",
+                "Athletik", 
+                "Heimlichkeit",
+                "Überreden",
+                "Wahrnehmung",
+            ]
+            
             # Attribut-Boni anwenden
             for attr_name, bonus in self.effects.get('attribute_bonuses', {}).items():
                 if attr_name in charakter.attribute:
                     attribut = charakter.attribute[attr_name]
                     if attribut.wert == 4 and attribut.modifier == 0:  # Nur von W4 auf W6
+                        alter_wert = attribut.wert
                         attribut.wuerfel.value = 4 + bonus  # +2 = W6
-                        Logger.info(f"Volk {self.name}: {attr_name} von W4 auf W{4+bonus} erhöht")
+                        Logger.info(f"Volk {self.name}: {attr_name} von W{alter_wert} auf W{attribut.wert} erhöht")
+                    else:
+                        Logger.debug(f"Volk {self.name}: {attr_name} nicht angepasst (aktuell: W{attribut.wert}+{attribut.modifier})")
 
-            # Fertigkeits-Startboni anwenden
+            # Fertigkeits-Startboni anwenden (unterschiedlich für Grund- und Nicht-Grundfertigkeiten)
             for fert_name, bonus in self.effects.get('fertigkeits_startboni', {}).items():
                 if fert_name in charakter.fertigkeiten:
                     fertigkeit = charakter.fertigkeiten[fert_name]
-                    if fertigkeit.wert == 4 and fertigkeit.modifier == -2:  # Standard W4-2
-                        fertigkeit.wuerfel.value = 4
-                        fertigkeit.wuerfel.modifier = fertigkeit.modifier + bonus
-                        Logger.info(f"Volk {self.name}: {fert_name} Startbonus +{bonus}")
+                    
+                    if fert_name in grundfertigkeiten:
+                        # GRUNDFERTIGKEIT: W4+0 → W6+0 (Würfelwert erhöhen)
+                        if fertigkeit.wert == 4 and fertigkeit.modifier == 0:
+                            alter_wert = fertigkeit.wert
+                            fertigkeit.wuerfel.value = 4 + bonus  # +2 = W6
+                            Logger.info(f"Volk {self.name}: {fert_name} (Grundfertigkeit) von W{alter_wert} auf W{fertigkeit.wert} erhöht")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {fert_name} (Grundfertigkeit) nicht angepasst (aktuell: W{fertigkeit.wert}{fertigkeit.modifier:+d})")
+                    else:
+                        # NICHT-GRUNDFERTIGKEIT: W4-2 → W4+0 (Modifier erhöhen)
+                        if fertigkeit.wert == 4 and fertigkeit.modifier == -2:
+                            alter_modifier = fertigkeit.modifier
+                            fertigkeit.wuerfel.modifier = -2 + bonus  # -2 + 2 = 0
+                            Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W4{alter_modifier:+d} auf W4{fertigkeit.modifier:+d}")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) nicht angepasst (aktuell: W{fertigkeit.wert}{fertigkeit.modifier:+d})")
 
             # Automatische Talente hinzufügen
             for talent_name in self.effects.get('auto_talente', []):
@@ -161,9 +209,18 @@ class Volk(EventDispatcher):
                     charakter.talente[talent_name].ausgewaehlt = True
                     if talent_name not in charakter.selected_talente:
                         charakter.selected_talente.append(talent_name)
-                    Logger.info(f"Volk {self.name}: Automatisches Talent {talent_name} erhalten")
+                    Logger.info(f"Volk {self.name}: Automatisches Talent '{talent_name}' erhalten")
 
-            Logger.debug(f"Völker-Effekte für {self.name} angewendet")
+            # Robustheit und Bewegungsweite werden in abgeleitete_werte.py berechnet
+            robustheit_bonus = self.effects.get('robustheit_bonus', 0)
+            bewegungsweite_bonus = self.effects.get('bewegungsweite_bonus', 0)
+            
+            if robustheit_bonus != 0:
+                Logger.info(f"Volk {self.name}: Robustheit-Bonus {robustheit_bonus:+d}")
+            if bewegungsweite_bonus != 0:
+                Logger.info(f"Volk {self.name}: Bewegungsweite-Bonus {bewegungsweite_bonus:+d}")
+
+            Logger.info(f"=== Völker-Effekte für {self.name} erfolgreich angewendet ===")
             return True
             
         except Exception as e:
@@ -173,33 +230,88 @@ class Volk(EventDispatcher):
     def remove_effects_from_charakter(self, charakter):
         """
         Entfernt die Völker-Effekte von einem Charakter.
+        ROBUST: Behandelt Edge Cases und unerwartete Zustände.
         """
         try:
+            Logger.info(f"=== Entfernen der Völker-Effekte für {self.name} ===")
+            
+            # Liste der Grundfertigkeiten (starten mit W4+0)
+            grundfertigkeiten = [
+                "Allgemeinwissen",
+                "Athletik", 
+                "Heimlichkeit",
+                "Überreden",
+                "Wahrnehmung",
+            ]
+            
             # Attribut-Boni rückgängig machen
             for attr_name, bonus in self.effects.get('attribute_bonuses', {}).items():
                 if attr_name in charakter.attribute:
                     attribut = charakter.attribute[attr_name]
-                    if attribut.wert == 4 + bonus:  # Nur wenn der Bonus aktiv war
+                    expected_boosted_value = 4 + bonus
+                    
+                    # Prüfe verschiedene mögliche Zustände
+                    if attribut.wert == expected_boosted_value:
+                        # Standard Fall: Attribut hat den erwarteten Bonus-Wert
                         attribut.wuerfel.value = 4
-                        Logger.info(f"Volk {self.name}: {attr_name} auf W4 zurückgesetzt")
+                        Logger.info(f"Volk {self.name}: {attr_name} von W{expected_boosted_value} auf W4 zurückgesetzt")
+                    elif attribut.wert > 4:
+                        # Edge Case: Attribut wurde über den Basis-Bonus hinaus erhöht
+                        # Nur den Völker-Bonus entfernen
+                        new_value = max(4, attribut.wert - bonus)
+                        attribut.wuerfel.value = new_value
+                        Logger.info(f"Volk {self.name}: {attr_name} von W{attribut.wert} auf W{new_value} reduziert (Völker-Bonus entfernt)")
+                    else:
+                        # Attribut ist bereits W4 oder niedriger - nichts zu tun
+                        Logger.debug(f"Volk {self.name}: {attr_name} bereits auf Basis-Niveau (W{attribut.wert})")
 
             # Fertigkeits-Boni rückgängig machen
             for fert_name, bonus in self.effects.get('fertigkeits_startboni', {}).items():
                 if fert_name in charakter.fertigkeiten:
                     fertigkeit = charakter.fertigkeiten[fert_name]
-                    fertigkeit.wuerfel.value = 4
-                    fertigkeit.wuerfel.modifier = -2  # Standard zurücksetzen
-                    Logger.info(f"Volk {self.name}: {fert_name} auf Standard zurückgesetzt")
+                    
+                    if fert_name in grundfertigkeiten:
+                        # GRUNDFERTIGKEIT: Zurück auf W4+0
+                        expected_boosted_value = 4 + bonus
+                        
+                        if fertigkeit.wert == expected_boosted_value and fertigkeit.modifier == 0:
+                            # Standard Fall: Fertigkeit hat den erwarteten Bonus-Wert
+                            fertigkeit.wuerfel.value = 4
+                            Logger.info(f"Volk {self.name}: {fert_name} (Grundfertigkeit) von W{expected_boosted_value} auf W4 zurückgesetzt")
+                        elif fertigkeit.wert > 4:
+                            # Edge Case: Fertigkeit wurde über den Basis-Bonus hinaus erhöht
+                            new_value = max(4, fertigkeit.wert - bonus)
+                            fertigkeit.wuerfel.value = new_value
+                            Logger.info(f"Volk {self.name}: {fert_name} (Grundfertigkeit) von W{fertigkeit.wert} auf W{new_value} reduziert")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {fert_name} (Grundfertigkeit) bereits auf Basis-Niveau")
+                    else:
+                        # NICHT-GRUNDFERTIGKEIT: Zurück auf W4-2
+                        expected_boosted_modifier = -2 + bonus  # Sollte 0 sein bei bonus=2
+                        
+                        if fertigkeit.wert == 4 and fertigkeit.modifier == expected_boosted_modifier:
+                            # Standard Fall: Fertigkeit hat den erwarteten Bonus-Modifier
+                            fertigkeit.wuerfel.modifier = -2
+                            Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W4{expected_boosted_modifier:+d} auf W4-2 zurückgesetzt")
+                        elif fertigkeit.modifier > -2:
+                            # Edge Case: Modifier wurde über den Basis-Bonus hinaus erhöht
+                            new_modifier = max(-2, fertigkeit.modifier - bonus)
+                            fertigkeit.wuerfel.modifier = new_modifier
+                            Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) Modifier von {fertigkeit.modifier:+d} auf {new_modifier:+d} reduziert")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) bereits auf Basis-Niveau")
 
-            # Automatische Talente entfernen
+            # Automatische Talente entfernen (nur die von diesem Volk hinzugefügten)
             for talent_name in self.effects.get('auto_talente', []):
                 if talent_name in charakter.selected_talente:
                     charakter.selected_talente.remove(talent_name)
-                    if talent_name in charakter.talente:
-                        charakter.talente[talent_name].ausgewaehlt = False
-                    Logger.info(f"Volk {self.name}: Automatisches Talent {talent_name} entfernt")
+                    Logger.info(f"Volk {self.name}: '{talent_name}' aus selected_talente entfernt")
+                    
+                if talent_name in charakter.talente and charakter.talente[talent_name].ausgewaehlt:
+                    charakter.talente[talent_name].ausgewaehlt = False
+                    Logger.info(f"Volk {self.name}: Automatisches Talent '{talent_name}' deaktiviert")
 
-            Logger.debug(f"Völker-Effekte für {self.name} entfernt")
+            Logger.info(f"=== Völker-Effekte für {self.name} erfolgreich entfernt ===")
             return True
             
         except Exception as e:

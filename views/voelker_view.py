@@ -702,7 +702,7 @@ class VoelkerWidget(MDBoxLayout):
         del self.voelker_auswahlen[volk_name]
 
     def _on_checkbox_active(self, instance, value, selected_volk_name):
-        """Ereignishandler für Checkbox-Änderungen."""
+        """Ereignishandler für Checkbox-Änderungen mit korrekter Effekte-Verwaltung."""
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("VoelkerWidget: Controller oder Charakter nicht verfügbar")
             return
@@ -718,49 +718,69 @@ class VoelkerWidget(MDBoxLayout):
                 return
         
         if value:
-            # Entferne Auswahlen aller anderen Völker
+            # SCHRITT 1: Effekte des aktuell ausgewählten Volks entfernen
+            aktuell_ausgewaehltes_volk = None
+            for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+                if ist_ausgewaehlt and volk_name in charakter.voelker:
+                    aktuell_ausgewaehltes_volk = charakter.voelker[volk_name]
+                    Logger.info(f"Entferne Effekte von aktuellem Volk: {volk_name}")
+                    break
+            
+            if aktuell_ausgewaehltes_volk and hasattr(aktuell_ausgewaehltes_volk, 'remove_effects_from_charakter'):
+                aktuell_ausgewaehltes_volk.remove_effects_from_charakter(charakter)
+            
+            # SCHRITT 2: Auswahlen aller anderen Völker entfernen
             for volk_name in list(self.voelker_auswahlen.keys()):
                 if volk_name != selected_volk_name:
                     self._remove_volk_auswahl(volk_name)
             
-            # Alle Völker deaktivieren
+            # SCHRITT 3: Alle Völker deaktivieren
             for volk_name in charakter.voelker_selected:
                 charakter.voelker_selected[volk_name] = False
                 if volk_name in charakter.voelker:
                     charakter.voelker[volk_name].ausgewaehlt = False
             
-            # Das ausgewählte Volk aktivieren
+            # SCHRITT 4: Das neue Volk aktivieren und dessen Effekte anwenden
             charakter.voelker_selected[selected_volk_name] = True
             if selected_volk_name in charakter.voelker:
                 charakter.voelker[selected_volk_name].ausgewaehlt = True
                 
-                # Völker-Effekte anwenden
+                # Neue Völker-Effekte anwenden
                 volk = charakter.voelker[selected_volk_name]
                 if hasattr(volk, 'apply_effects_to_charakter'):
+                    Logger.info(f"Wende Effekte von neuem Volk an: {selected_volk_name}")
                     volk.apply_effects_to_charakter(charakter)
                     
         else:
-            # Auswahlen für das abgewählte Volk entfernen
+            # SCHRITT 1: Effekte des abgewählten Volks entfernen
+            if selected_volk_name in charakter.voelker:
+                volk = charakter.voelker[selected_volk_name]
+                if hasattr(volk, 'remove_effects_from_charakter'):
+                    Logger.info(f"Entferne Effekte von abgewähltem Volk: {selected_volk_name}")
+                    volk.remove_effects_from_charakter(charakter)
+            
+            # SCHRITT 2: Auswahlen für das abgewählte Volk entfernen
             self._remove_volk_auswahl(selected_volk_name)
             
-            # Das Volk deaktivieren
+            # SCHRITT 3: Das Volk deaktivieren
             charakter.voelker_selected[selected_volk_name] = False
             if selected_volk_name in charakter.voelker:
                 charakter.voelker[selected_volk_name].ausgewaehlt = False
                 
-                # Völker-Effekte entfernen
-                volk = charakter.voelker[selected_volk_name]
-                if hasattr(volk, 'remove_effects_from_charakter'):
-                    volk.remove_effects_from_charakter(charakter)
-                
-            # Mensch als Standard setzen
-            charakter.voelker_selected["Mensch"] = True
+            # SCHRITT 4: Mensch als Standard setzen und dessen Effekte anwenden
             if "Mensch" in charakter.voelker:
+                charakter.voelker_selected["Mensch"] = True
                 charakter.voelker["Mensch"].ausgewaehlt = True
+                
+                # Menschen-Effekte anwenden
+                mensch_volk = charakter.voelker["Mensch"]
+                if hasattr(mensch_volk, 'apply_effects_to_charakter'):
+                    Logger.info("Wende Menschen-Effekte als Standard an")
+                    mensch_volk.apply_effects_to_charakter(charakter)
         
         # Event auslösen und UI aktualisieren
         charakter.berechne_abgeleitete_werte()
         charakter.dispatch('on_charakter_change')
         
-        Logger.info(f"Volk '{selected_volk_name}' gesetzt auf {value}")
+        Logger.info(f"Volk-Wechsel abgeschlossen: '{selected_volk_name}' = {value}")
         Clock.schedule_once(lambda dt: self.aktualisiere_ui(), 0.1)
