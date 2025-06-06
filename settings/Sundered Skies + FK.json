@@ -5,15 +5,31 @@
         "Drakin": {
             "name": "Drakin",
             "handicaps": [
-                "Klein"
+                "Klein (Robustheit -1 aufgrund der geringen Körpergröße von etwa 1,20m)"
             ],
             "talente": [],
             "besonderheiten": [
                 "Arkanes Gespür (Kann übernatürliche Wesen und Effekte wahrnehmen. Willenskraftprobe mit -2 oder erleidet Erschöpfungsstufe.)",
                 "Drachenblut (Bei AH (Magie) beginnt der Charakter mit 15 statt 10 Machtpunkten.)"
             ],
+            "sprachen": ["Drakin", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 15, Alt mit 60, maximales Alter 80-100 (Drachen-Verwandlung verlängert das Leben erheblich)",
+            "groesse_maennlich": "1,10-1,20m, 25-35kg (Durchschnitt 1,15m, 30kg)",
+            "groesse_weiblich": "1,05-1,20m, 22-32kg (Durchschnitt 1,12m, 27kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "arkanes_gespuer": true,
+                    "drachenblut_machtpunkte": 5
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Elf": {
             "name": "Elf",
@@ -23,52 +39,127 @@
                 "Geschickt (Beginnt mit Geschicklichkeit W6 statt W4.)",
                 "Pflanzenerbe (Elfen haben eines von acht verschiedenen Pflanzenerben: Blutrose, Dornen, Efeuranken, Nesselgriff, Parfüm, Rindenhaut, Sporen, Weidenschatten.)"
             ],
+            "sprachen": ["Elfisch", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 110, Alt mit 275, maximales Alter 300+",
+            "groesse_maennlich": "1,80-1,95m, 60-75kg (Durchschnitt 1,85m, 65kg)",
+            "groesse_weiblich": "1,75-1,90m, 55-70kg (Durchschnitt 1,82m, 60kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "pflanzenerbe": true
+                },
+                "wahlmoeglichkeiten": {
+                    "pflanzenerbe_auswahl": true
+                }
+            }
         },
         "Glühblüter": {
             "name": "Glühblüter",
             "handicaps": [],
-            "talente": [
-                "Bonustalent"
-            ],
+            "talente": [],
             "besonderheiten": [
-                "Abgestumpft (Beginnt mit Mumm W6.)",
+                "Abgestumpft (Beginnt mit Mumm W6 aufgrund der Erinnerungen an das frühere Leben als Goblin.)",
+                "Bonustalent (Beginnt das Spiel mit einem freien Talent nach Wahl.)",
                 "Loyal (Entwickelt starke Bindungen zu denen, die als Familie betrachtet werden.)"
             ],
+            "sprachen": ["Goblin", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 12, Alt mit 40, maximales Alter 50-80",
+            "groesse_maennlich": "1,65-1,80m, 65-85kg (Durchschnitt 1,72m, 75kg)",
+            "groesse_weiblich": "1,60-1,75m, 55-75kg (Durchschnitt 1,67m, 65kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Willenskraft": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "loyalty": true
+                },
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true
+                }
+            }
         },
         "Mensch": {
             "name": "Mensch",
             "handicaps": [],
-            "talente": [
-                "Anpassungsfähig"
+            "talente": [],
+            "besonderheiten": [
+                "Anpassungsfähig (Menschen beginnen das Spiel mit 17 statt 15 Fertigkeitspunkten) ODER Bonustalent (Menschen beginnen das Spiel mit einem freien Talent nach Wahl.)"
             ],
-            "besonderheiten": [],
+            "sprachen": ["Gemeinsprache", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 17, Alt mit 53, maximales Alter 70",
+            "groesse_maennlich": "1,60-1,85m, 65-90kg (Durchschnitt 1,72m, 77kg)",
+            "groesse_weiblich": "1,55-1,75m, 50-75kg (Durchschnitt 1,65m, 62kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "zusaetzliche_fertigkeitspunkte": 2
+                },
+                "wahlmoeglichkeiten": {
+                    "anpassungsfaehigkeit_oder_talent": true
+                }
+            }
         },
         "Ork": {
             "name": "Ork",
             "handicaps": [
-                "Außenseiter (Leicht)",
-                "Dumm"
+                "Außenseiter (Leicht) (-2 Charisma bei Nicht-Orks aufgrund des schlechten Rufs)",
+                "Dumm (Verstand-Steigerung kostet 2 Punkte während Charaktererschaffung, nur alle 2 Ränge steigerbar)"
             ],
             "talente": [],
             "besonderheiten": [
-                "Berüchtigt (Beginnt mit Einschüchtern W6.)",
+                "Berüchtigt (Beginnt mit Einschüchtern W6 aufgrund des furchteinflößenden Rufs.)",
                 "Groß (Robustheit +1, kann keine Kleidung oder Rüstung für kleinere Rassen tragen.)",
-                "Stark (Beginnt mit Stärke W6 statt W4.)"
+                "Stark (Beginnt mit Stärke W6 statt W4 aufgrund des muskulösen Körperbaus.)"
             ],
+            "sprachen": ["Orkisch", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 14, Alt mit 55, maximales Alter 70-90",
+            "groesse_maennlich": "1,95-2,10m, 90-120kg (Durchschnitt 2,02m, 105kg)",
+            "groesse_weiblich": "1,85-2,00m, 80-110kg (Durchschnitt 1,92m, 95kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2
+                },
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {
+                    "Einschüchtern": 2
+                },
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "ausruestungs_einschraenkung": true,
+                    "verstand_steigerung_erschwert": true,
+                    "charisma_malus_nicht_orks": -2
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Wildling": {
             "name": "Wildling",
             "handicaps": [
-                "Flüchtling",
-                "Klein"
+                "Flüchtling (Werden gnadenlos von elfischen Hirten gejagt)",
+                "Klein (Robustheit -1 aufgrund der geringen Körpergröße von etwa 90cm)"
             ],
             "talente": [],
             "besonderheiten": [
@@ -76,13 +167,34 @@
                 "Fleischgeschmiedet (Wildlinge sind aus Tieren erschaffen worden und erhalten entsprechende Fähigkeiten und Handicaps basierend auf ihrer Tierart.)",
                 "Glühwahnimmunität (Immun gegen Glühwahn. Wirft keinen Schatten.)"
             ],
+            "sprachen": ["Elfisch (Dialekt)", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 5, Alt mit 35, maximales Alter 50 (wenige sterben an Altersschwäche)",
+            "groesse_maennlich": "85-95cm, 15-25kg (Durchschnitt 90cm, 20kg)",
+            "groesse_weiblich": "80-90cm, 12-22kg (Durchschnitt 85cm, 17kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Willenskraft": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "gluehwahn_immunitaet": true,
+                    "kein_schatten": true,
+                    "fluechtling_status": true
+                },
+                "wahlmoeglichkeiten": {
+                    "tierart_auswahl": true
+                }
+            }
         },
         "Zwerg": {
             "name": "Zwerg",
             "handicaps": [
-                "Langsam"
+                "Langsam (Bewegungsweite -1, aber dies wird nicht durch Erschöpfung oder Verwundung weiter reduziert)"
             ],
             "talente": [],
             "besonderheiten": [
@@ -91,8 +203,29 @@
                 "Nachtsicht (Ignoriert Abzüge durch schlechte Beleuchtung im Düsteren und im Dunkeln.)",
                 "Widerstandsfähig (Beginnt mit Konstitution W6 statt W4.)"
             ],
+            "sprachen": ["Zwergisch", "Himmelssprech"],
+            "altersspanne": "Erwachsen mit 40, Alt mit 200, maximales Alter 250+",
+            "groesse_maennlich": "1,35-1,50m, 70-90kg (Durchschnitt 1,42m, 80kg)",
+            "groesse_weiblich": "1,30-1,45m, 60-80kg (Durchschnitt 1,37m, 70kg)",
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "loyalty": true,
+                    "bewegungsweite_immun_weitere_reduktion": true
+                },
+                "wahlmoeglichkeiten": {
+                    "handwerks_wissen": true
+                }
+            }
         }
     },
     "voelker_selected": {

@@ -1,92 +1,7 @@
 {
-    "name": "SWAE",
-    "description": "Savage-Worlds Abenteuer Edition.",
+    "name": "HeXXen 1773",
+    "description": "HeXXen 1773",
     "voelker": {
-        "Android": {
-            "name": "Android",
-            "handicaps": [
-                "Außenseiter (Schwer)",
-                "Pazifist (Schwer)",
-                "Schwur (Schwer)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Konstrukt"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Aquarianer": {
-            "name": "Aquarianer",
-            "handicaps": [
-                "Abhängigkeit"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Nachtsicht",
-                "Robustheit",
-                "Wasserwesen"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Avionen": {
-            "name": "Avionen",
-            "handicaps": [
-                "Nichtschwimmer",
-                "Verringerte Bewegungsweite",
-                "Zerbrechlich"
-            ],
-            "talente": [
-                "Scharfe Sinne"
-            ],
-            "besonderheiten": [
-                "Fliegen"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Halbelfe": {
-            "name": "Halbelfe",
-            "handicaps": [
-                "Außenseiter (Leicht)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Erbe",
-                "Nachtsicht"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Elf": {
-            "name": "Elf",
-            "handicaps": [
-                "Zwei linke Hände"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Geschickt",
-                "Nachtsicht"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Halbling": {
-            "name": "Halbling",
-            "handicaps": [
-                "Verringerte Bewegungsweite"
-            ],
-            "talente": [
-                "Glück"
-            ],
-            "besonderheiten": [
-                "Beherzt",
-                "Größe -1"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
         "Mensch": {
             "name": "Mensch",
             "handicaps": [],
@@ -96,65 +11,10 @@
             "besonderheiten": [],
             "aktiv": true,
             "custom": false
-        },
-        "Rakashaner": {
-            "name": "Rakashaner",
-            "handicaps": [
-                "Blutrünstig",
-                "Nichtschwimmer",
-                "Volksfeind"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Geschickt",
-                "Nachtsicht",
-                "Zähne und Krallen"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Saurianer": {
-            "name": "Saurianer",
-            "handicaps": [
-                "Außenseiter (Leicht)",
-                "Kälteempfindlichkeit"
-            ],
-            "talente": [
-                "Biss"
-            ],
-            "besonderheiten": [
-                "Biss",
-                "Panzerung +2",
-                "Scharfe Sinne"
-            ],
-            "aktiv": true,
-            "custom": false
-        },
-        "Zwerg": {
-            "name": "Zwerg",
-            "handicaps": [
-                "Verringerte Bewegungsweite"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Nachtsicht",
-                "Widerstandsfähig"
-            ],
-            "aktiv": true,
-            "custom": false
         }
     },
     "voelker_selected": {
-        "Android": false,
-        "Aquarianer": false,
-        "Avionen": false,
-        "Halbelfe": false,
-        "Elf": false,
-        "Halbling": false,
-        "Mensch": true,
-        "Rakashaner": false,
-        "Saurianer": false,
-        "Zwerg": false
+        "Mensch": true
     },
     "attribute": {
         "Geschicklichkeit": {
@@ -214,13 +74,7 @@
         "Reiten": [
             "Geschicklichkeit"
         ],
-        "Fahren": [
-            "Geschicklichkeit"
-        ],
         "Seefahrt": [
-            "Geschicklichkeit"
-        ],
-        "Pilot": [
             "Geschicklichkeit"
         ],
         "Darbietung": [
@@ -265,19 +119,10 @@
         "Sprache": [
             "Verstand"
         ],
-        "Elektronik": [
-            "Verstand"
-        ],
-        "Hacken": [
-            "Verstand"
-        ],
         "Zaubern": [
             "Verstand"
         ],
-        "Psionik": [
-            "Verstand"
-        ],
-        "Verrückte Wissenschaft": [
+        "Alchemie": [
             "Verstand"
         ]
     },
@@ -655,10 +500,7 @@
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },                
-
-
-
+        },              
         "Aristokrat": {
             "name": "Aristokrat",
             "kategorie": "Hintergrund",
@@ -1877,19 +1719,6 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Ass am Steuer": {
-            "name": "Ass am Steuer",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "GES W8"
-            ],
-            "beschreibung": "Charakter kann Bennys ausgeben, um für sein Fahrzeug Schaden wegstecken anzuwenden und ignoriert bis zu 2 Punkte Abzüge.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Assassine": {
             "name": "Assassine",
             "kategorie": "Experte",
@@ -2400,6 +2229,42 @@
         }
     },
     "handicaps": {
+        "Einschüchternd": {
+            "name": "Einschüchternd",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "–2 auf alle Überredenproben, allerdings neigen schwache Gemüter dazu, dir Sachen zu erzählen, für die andere die Daumenschrauben hätten anlegen müssen. Erfüllt alle Voraussetzungen für Bedrohlich.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Glamourös": {
+            "name": "Glamourös",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du musst immer im Mittelpunkt stehen und hervorragend aussehen. Durch die Ausgaben, die dein glamouröser Lebensstil erfordert, wird dein Unterhalt um –1 modifiziert.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Hexenfeind": {
+            "name": "Hexenfeind",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Du erfüllt ein unbezähmbarer Hass auf alle Hexen. Wenn eine Hexe in einem Kampf anwesend ist, musst du alles tun, um sie in einen Nahkampf zu verwickeln und zu töten. Für Weiße Hexen kannst du unter bestimmten Umständen eine Ausnahme machen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Wahrheitssuchend": {
+            "name": "Wahrheitssuchend",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du siehst dich als sorgfältiger Ermittler und akribischer Forscher, der die Wahrheit ans Licht bringen will. Deine Wahrheitsliebe und dein Wunsch, wirklich allem auf den Grund zu gehen, bringen dich oft genug in Schwierigkeiten.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },        
         "Alt": {
             "name": "Alt",
             "stufe": "schwer",
@@ -2993,9 +2858,142 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
+        },
+        "Abergläubisch_leicht": {
+            "name": "Abergläubisch",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du hast alle Geschichten über die Kreaturen der Nacht gehört und glaubst jedes Wort. Jedes Mal, wenn du einem widernatürlichen Wesen begegnest, musst du eine Furchtprobe ablegen. Bei Kreaturen, die an sich schon Furchterregend sind, ist die Probe um zusätzliche –2 erschwert.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Abergläubisch_schwer": {
+            "name": "Abergläubisch",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Du hast alle Geschichten über die Kreaturen der Nacht gehört und glaubst jedes Wort. Jedes Mal, wenn du einem widernatürlichen Wesen begegnest, musst du eine Furchtprobe um –2 erschwert ablegen. Bei Kreaturen, die an sich schon Furchterregend sind, ist die Probe um zusätzliche –4 erschwert.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Abtrünnig": {
+            "name": "Abtrünnig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Einst dientest du einer mächtigen Person, die dem Bösen verfiel. Du warst gezwungen, deinen Herrn zu verraten und zu fliehen. Der Verrat lastet schwer auf deiner Seele. Deine Verderbnis steigt um +1, du kannst also eine Segnung weniger erhalten als andere Jäger.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Aufopferungsvoll": {
+            "name": "Aufopferungsvoll",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du glaubst, dass du im Kampf gegen die Kreaturen der Nacht letzten Endes deinen Tod finden wirst. Es wird jedoch ein gerechter und sinnvoller Tod sein. Wenn es eine Gelegenheit gibt, dich für deine Kameraden zu opfern, wirst du sie auf jeden Fall ergreifen!",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Gebeutelt": {
+            "name": "Gebeutelt",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du hast das Grauen des Krieges und die zerstörerischen Einflüsse der Kreaturen der Nacht miterlebt. Du hast die Hoffnung auf ein gutes Ende aufgegeben, aber siehst die Notwendigkeit, das Vorrücken der Kreaturen der Nacht wenigstens zu erschweren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Gottesfürchtig": {
+            "name": "Gottesfürchtig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Gott oder einer der Erzengel ist dir erschienen und hat dir aufgetragen, die Kreaturen der Nacht zu bekämpfen. Du stehst der Kirche nahe und befolgst die Regeln des christlichen Lebens. Du würdest dich nur sehr selten über die Anweisung einer hohen Kirchenpersönlichkeit hinwegsetzen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Heimatvertrieben": {
+            "name": "Heimatvertrieben",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du musstest aus deiner Heimat flüchten und konntest bisher nicht zurückkehren. Du hast dich anpassen müssen und musst flexibel sein, während du nach einem Weg suchst, um das dir zugefallene Unrecht wiedergutzumachen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Neuling": {
+            "name": "Neuling",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Du bist der Neue in deinem Jägertrupp. Niedere Aufgaben bleiben an dir hängen. Dein Jäger beginnt als Anfänger, nicht Fortgeschritten. Als Ausgleich erhältst du zu Beginn jeder Spielsitzung eine Segnung.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verbissen": {
+            "name": "Verbissen",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Du hast dich in eine Sache verbissen, die dich nicht mehr loslässt. Möglicherweise die Suche nach dem Stein der Weisen oder der Herkunft der Dämonen. Du bist gezwungen, immer weiter danach zu suchen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
         }
     },
     "maechte": {
+        "Fluch": {
+            "name": "Fluch",
+            "rang": "F",
+            "machtpunkte": 5,
+            "reichweite": "B",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Vergleichender Wurf gegen Willenskraft. Bei Erfolg erhält das Opfer sofort und täglich bei Sonnenuntergang eine Stufe Erschöpfung. Kann vom Wirker aufgehoben werden oder endet bei dessen Tod. Aufheben entfernt den Fluch ebenfalls.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Gift": {
+            "name": "Gift",
+            "rang": "F",
+            "machtpunkte": 3,
+            "reichweite": "VER×2",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Ziel erhält Status Vergiftet mit Giftstärke 0 (Steigerung +2). Modifikatoren: Flächeneffekt (+2/+3), Stark (+2), Wundgift (+4).",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Heiliges Symbol": {
+            "name": "Heiliges Symbol",
+            "rang": "A",
+            "machtpunkte": 3,
+            "reichweite": "Selbst",
+            "dauer": "5",
+            "effekt": "",
+            "beschreibung": "Widernatürliche Kreaturen müssen Willenskraftprobe ablegen (–2 bei Steigerung), um Nahkampfangriffe gegen den Wirker auszuführen. Benötigt echtes heiliges Symbol. Modifikator: Flächeneffekt (+2/+3).",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Untote verbannen": {
+            "name": "Untote verbannen",
+            "rang": "A",
+            "machtpunkte": 3,
+            "reichweite": "B",
+            "dauer": "Sofort",
+            "effekt": "",
+            "beschreibung": "Wirkt nur gegen Untote. Vergleichender Wurf mit arkaner Fertigkeit gegen Konstitution des Ziels. Erfolg = Angeschlagen, jede Steigerung = eine Wunde. Funktioniert auch als Waffengift gegen Untote.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },        
         "Abwehren": {
             "name": "Abwehren",
             "rang": "A",
@@ -3700,103 +3698,446 @@
         }
     },
     "ausruestung": {
-        "Axt, Handbeil": {
-            "name": "Axt, Handbeil",
-            "kategorie": "Waffe",
-            "gewicht": 1,
+        "Gegengift": {
+            "name": "Gegengift",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
+            "kosten": 200,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Heilung W8, Gift neutralisieren. Seltenheitsmodifikator –2",
+            "aktiv": true
+        },
+        "Ausweich-Elixier": {
+            "name": "Ausweich-Elixier",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
             "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Handliche Axt für allgemeine Zwecke",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
+            "setting": "HeXXen 1773",
+            "beschreibung": "Abwehren. Seltenheitsmodifikator –2",
+            "aktiv": true
         },
-        "Axt, Kriegsbeil": {
-            "name": "Axt, Kriegsbeil",
-            "kategorie": "Waffe",
+        "Genesungstrunk": {
+            "name": "Genesungstrunk",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
+            "kosten": 50,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Linderung. Seltenheitsmodifikator –2",
+            "aktiv": true
+        },
+        "Heiltrank": {
+            "name": "Heiltrank",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
+            "kosten": 150,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Heilung. Seltenheitsmodifikator –2",
+            "aktiv": true
+        },
+        "Kampfeswut-Elixier": {
+            "name": "Kampfeswut-Elixier",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
+            "kosten": 200,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Kriegersegen, Schneller Angriff, Wirkungsdauer 10. Seltenheitsmodifikator –4",
+            "aktiv": true
+        },
+        "Panzer-Elixier": {
+            "name": "Panzer-Elixier",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
+            "kosten": 100,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Schutz, Wirkungsdauer 10. Seltenheitsmodifikator –2",
+            "aktiv": true
+        },
+        "Schnelligkeits-Elixier": {
+            "name": "Schnelligkeits-Elixier",
+            "kategorie": "Trank",
+            "gewicht": 0.1,
+            "kosten": 200,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Beschleunigung W8, Schnelligkeit, Wirkungsdauer 10. Seltenheitsmodifikator –4",
+            "aktiv": true
+        },
+        "Schutzamulett (Hexen)": {
+            "name": "Schutzamulett (Hexen)",
+            "kategorie": "Amulett",
+            "gewicht": 0.1,
+            "kosten": 15,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Erlaubt Benny-Ausgabe für Arkane Resistenz gegen einen Hexenzauber. Wird kraftlos bis zur nächsten Freizeitaktion. Nur in Regionen erhältlich, die sich vor Hexen fürchten.",
+            "aktiv": true
+        },
+        "Fackel": {
+            "name": "Fackel",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 1,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Brennt eine Stunde, 4\" (8m) Lichtradius",
+            "aktiv": true
+        },
+        "Fernrohr": {
+            "name": "Fernrohr",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 70,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Ermöglicht das Betrachten entfernter Objekte",
+            "aktiv": true
+        },
+        "Kletterhaken": {
+            "name": "Kletterhaken",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 10,
+            "setting": "HeXXen 1773",
+            "beschreibung": "+1 auf Athletik (Klettern)",
+            "aktiv": true
+        },
+        "Kompass": {
+            "name": "Kompass",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 25,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Zeigt die Himmelsrichtungen an",
+            "aktiv": true
+        },
+        "Landkarte": {
+            "name": "Landkarte für ca. 50 x 50 km",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 15,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Detaillierte Karte eines Gebiets von etwa 50 x 50 km",
+            "aktiv": true
+        },
+        "Öllampe": {
+            "name": "Öllampe",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 10,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Brennt 4 Stunden, 4\" (8m) Lichtradius",
+            "aktiv": true
+        },
+        "Rückentrage": {
+            "name": "Rückentrage",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 8,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Kann +1 Beutegut-Paket tragen",
+            "aktiv": true
+        },
+        "Schlafsack": {
+            "name": "Schlafsack (1 Person)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 7,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Für eine Person, bietet Schutz beim Schlafen",
+            "aktiv": true
+        },
+        "Seil": {
+            "name": "Seil (5 Meter)",
+            "kategorie": "Allgemein",
+            "gewicht": 4,
+            "kosten": 10,
+            "setting": "HeXXen 1773",
+            "beschreibung": "5 Meter starkes Seil",
+            "aktiv": true
+        },
+        "Schreibutensilien": {
+            "name": "Schreibutensilien",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 15,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Feder, Tinte, Papier zum Schreiben",
+            "aktiv": true
+        },
+        "Vorrat an Alkohol": {
+            "name": "Vorrat an Alkohol",
+            "kategorie": "Allgemein",
+            "gewicht": 3,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Schnaps, Wein, Liköre",
+            "aktiv": true
+        },
+        "Zelt": {
+            "name": "Zelt (2 Personen)",
+            "kategorie": "Allgemein",
+            "gewicht": 7.5,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Bietet Schutz für zwei Personen",
+            "aktiv": true
+        },
+        "Handschellen": {
+            "name": "Handschellen (mit Schlüssel)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 22,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Zum Fesseln von Personen, inklusive Schlüssel",
+            "aktiv": true
+        },
+        "Vorhängeschloss": {
+            "name": "Vorhängeschloss (mit Schlüssel)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 17,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Schloss mit zugehörigem Schlüssel",
+            "aktiv": true
+        },
+        "Transportables Laboratorium": {
+            "name": "Transportables Laboratorium",
+            "kategorie": "Allgemein",
+            "gewicht": 4,
+            "kosten": 60,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Tragbare Ausrüstung für alchemistische Arbeiten",
+            "aktiv": true
+        },
+        "Truhe mit Schloss": {
+            "name": "Truhe mit Schloss (mit Schlüssel)",
+            "kategorie": "Allgemein",
+            "gewicht": 6,
+            "kosten": 33,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Verschließbare Truhe mit Schlüssel",
+            "aktiv": true
+        },
+        "Werkzeugkiste": {
+            "name": "Werkzeugkiste",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 25,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Grundlegende Werkzeuge für Reparaturen",
+            "aktiv": true
+        },
+        "Aristokratische Kleidung": {
+            "name": "Aristokratische Kleidung",
+            "kategorie": "Kleidung",
             "gewicht": 2,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "Speziell für den Kampf konzipierte Axt",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
+            "kosten": 150,
+            "setting": "HeXXen 1773",
+            "beschreibung": "+1 auf Überreden und Einschüchtern gegenüber Bauern, Handwerkern und Bürgerlichen",
+            "aktiv": true
         },
-        "Axt, Zweihandaxt": {
-            "name": "Axt, Zweihandaxt",
-            "kategorie": "Waffe",
-            "gewicht": 3.5,
-            "kosten": 400,
-            "setting": "mittelalterlich",
-            "beschreibung": "PB 2, Parade -1, Zweihändig",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "Stä+W10",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 2
-            }
+        "Bürgerliche Kleidung": {
+            "name": "Bürgerliche Kleidung",
+            "kategorie": "Kleidung",
+            "gewicht": 1.5,
+            "kosten": 50,
+            "setting": "HeXXen 1773",
+            "beschreibung": "+1 auf Darbietung und Überreden gegenüber Bürgerlichen und Aristokraten",
+            "aktiv": true
         },
-        "Dolch/Messer": {
-            "name": "Dolch/Messer",
+        "Gardeuniform": {
+            "name": "Gardeuniform",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 50,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Parade +1",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Gelehrtenkleidung": {
+            "name": "Gelehrtenkleidung",
+            "kategorie": "Kleidung",
+            "gewicht": 1.5,
+            "kosten": 35,
+            "setting": "HeXXen 1773",
+            "beschreibung": "–1 freier Angriff bei Rückzug",
+            "aktiv": true
+        },
+        "Handwerkerkleidung": {
+            "name": "Handwerkerkleidung",
+            "kategorie": "Kleidung",
+            "gewicht": 2,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "+1 Reparieren und Verrückte Wissenschaften",
+            "aktiv": true
+        },
+        "Kriegeruntergewand": {
+            "name": "Kriegeruntergewand",
+            "kategorie": "Rüstung",
+            "gewicht": 1.5,
+            "kosten": 25,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Freie Wiederholung beim Schaden wegstecken",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Landsknechtkleidung": {
+            "name": "Landsknechtkleidung",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "–1 Überzahlbonus",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Liturgisches Gewand": {
+            "name": "Liturgisches Gewand",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 70,
+            "setting": "HeXXen 1773",
+            "beschreibung": "+2 Parade gegen menschliche Gegner, +1 Überreden gegenüber Kirchentreuen",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Mönchs-/Nonnenkleidung": {
+            "name": "Mönchs-/Nonnenkleidung",
+            "kategorie": "Rüstung",
+            "gewicht": 1.5,
+            "kosten": 5,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Können Segnungen für Andere ausgeben",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Musketierkleidung": {
+            "name": "Musketierkleidung",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 30,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Eine Nachladenaktion für Schwarzpulverwaffen ohne Mehrfachaktionsabzug",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Reisekleidung": {
+            "name": "Reisekleidung",
+            "kategorie": "Rüstung",
+            "gewicht": 1.5,
+            "kosten": 25,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Freie Wiederholung gegen Umweltgefahren und +1 BW",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Söldnerkleidung": {
+            "name": "Söldnerkleidung",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Mehrfachaktionsabzug um 1 verringert",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Lederkoller": {
+            "name": "Lederkoller (mittlere Panzerung)",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 30,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Mittlere Lederrüstung",
+            "aktiv": true,
+            "torso": 2,
+            "arme": 2,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Kürass oder Brigantine": {
+            "name": "Kürass oder Brigantine (schwere Panzerung)",
+            "kategorie": "Rüstung",
+            "gewicht": 6.5,
+            "kosten": 70,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Schwere Metallrüstung",
+            "aktiv": true,
+            "torso": 3,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Geschlossener Helm": {
+            "name": "Geschlossener Helm",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 30,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Vollständiger Kopfschutz",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 3,
+            "mindeststaerke": "W8"
+        },
+        "Aufgesetztes Bajonett": {
+            "name": "Aufgesetztes Bajonett",
             "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 25,
-            "setting": "mittelalterlich",
-            "beschreibung": "Kleine Klinge für vielseitige Anwendung",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Hellebarde": {
-            "name": "Hellebarde",
-            "kategorie": "Waffe",
-            "gewicht": 3,
-            "kosten": 250,
-            "setting": "mittelalterlich",
+            "setting": "HeXXen 1773",
             "beschreibung": "Reichweite 1, Zweihändig",
             "aktiv": true,
             "typ": "Nahkampf",
-            "mindeststaerke": "W8",
+            "mindeststaerke": "W6",
             "eigenschaften": {
-                "Schaden": "Stä+W8",
+                "Schaden": "Stä+W6",
                 "Reichweite": "nah",
                 "FR": "-",
                 "Schuss": "-",
                 "PB": "-"
             }
         },
-        "Kampfstab": {
-            "name": "Kampfstab",
+        "Dolche und Messer": {
+            "name": "Dolche und Messer",
             "kategorie": "Waffe",
-            "gewicht": 2,
+            "gewicht": 0.5,
             "kosten": 10,
-            "setting": "mittelalterlich",
-            "beschreibung": "Parade +1, Reichweite 1, Zweihändig",
+            "setting": "HeXXen 1773",
+            "beschreibung": "Giftverwendung möglich, auch abgenommenes Bajonett",
             "aktiv": true,
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
@@ -3808,120 +4149,12 @@
                 "PB": "-"
             }
         },
-        "Katana": {
-            "name": "Katana",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 1000,
-            "setting": "mittelalterlich",
-            "beschreibung": "Zweihändig",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6+1",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Keule, Leicht": {
-            "name": "Keule, Leicht",
+        "Fechtwaffen/Parierdolch": {
+            "name": "Fechtwaffen/Parierdolch",
             "kategorie": "Waffe",
             "gewicht": 1,
-            "kosten": 25,
-            "setting": "mittelalterlich",
-            "beschreibung": "Für arme Schlucker und Kriminelle",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Keule, Schwer": {
-            "name": "Keule, Schwer",
-            "kategorie": "Waffe",
-            "gewicht": 2.5,
-            "kosten": 50,
-            "setting": "mittelalterlich",
-            "beschreibung": "Für arme Schlucker und Kriminelle",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Kriegshammer": {
-            "name": "Kriegshammer",
-            "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 250,
-            "setting": "mittelalterlich",
-            "beschreibung": "Mit Schlagdorn, PB 1",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": 1
-            }
-        },
-        "Lanze": {
-            "name": "Lanze",
-            "kategorie": "Waffe",
-            "gewicht": 3,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "PB 2 bei Sturmangriff, Reichweite 2, nur einsetzbar im berittenen Kampf",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Morgenstern": {
-            "name": "Morgenstern",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 200,
-            "setting": "mittelalterlich",
-            "beschreibung": "Ignoriert Boni durch Schilde",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Rapier": {
-            "name": "Rapier",
-            "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 150,
-            "setting": "mittelalterlich",
+            "kosten": 75,
+            "setting": "HeXXen 1773",
             "beschreibung": "Parade +1",
             "aktiv": true,
             "typ": "Nahkampf",
@@ -3934,85 +4167,13 @@
                 "PB": "-"
             }
         },
-        "Schwert, Kurzschwert": {
-            "name": "Schwert, Kurzschwert",
-            "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Beinhaltet Reitersäbel",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Schwert, Langschwert": {
-            "name": "Schwert, Langschwert",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "Standardschwerter und Krummschwerter",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "Stä+W8",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Schwert, Zweihandschwert": {
-            "name": "Schwert, Zweihandschwert",
+        "Lanze": {
+            "name": "Lanze",
             "kategorie": "Waffe",
             "gewicht": 3,
-            "kosten": 400,
-            "setting": "mittelalterlich",
-            "beschreibung": "Zweihändig",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "Stä+W10",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Speer": {
-            "name": "Speer",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Reichweite 1, Parade +1 bei Verwendung mit zwei Händen",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Spieß": {
-            "name": "Spieß",
-            "kategorie": "Waffe",
-            "gewicht": 9,
-            "kosten": 400,
-            "setting": "mittelalterlich",
-            "beschreibung": "Reichweite 2, Zweihändig",
+            "kosten": 30,
+            "setting": "HeXXen 1773",
+            "beschreibung": "PB 2 bei Sturmangriffen, Reichweite 2, nur einsetzbar im berittenen Kampf",
             "aktiv": true,
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
@@ -4024,103 +4185,31 @@
                 "PB": "-"
             }
         },
-        "Streitkolben": {
-            "name": "Streitkolben",
-            "kategorie": "Waffe",
-            "gewicht": 2,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Schwere Metallkeule für Kriegszwecke",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Zweihandhammer": {
-            "name": "Zweihandhammer",
-            "kategorie": "Waffe",
-            "gewicht": 5,
-            "kosten": 400,
-            "setting": "mittelalterlich",
-            "beschreibung": "Zweihändig, +2 Schaden gegen Gegenstände",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "Stä+W10",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Bangstick": {
-            "name": "Bangstick",
+        "Säbel": {
+            "name": "Säbel",
             "kategorie": "Waffe",
             "gewicht": 1,
-            "kosten": 5,
-            "setting": "modern",
-            "beschreibung": "Eine Schrotpatrone an einem Stock, der im Nahkampf verwendet wird; muss mit einer neuen Patrone nachgeladen werden (eine Aktion)",
+            "kosten": 60,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Parade –1, +1 Schaden bei berittenen Sturmangriffen",
             "aktiv": true,
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-                "Schaden": "3W6",
+                "Schaden": "Stä+W6+1",
                 "Reichweite": "nah",
                 "FR": "-",
                 "Schuss": "-",
                 "PB": "-"
             }
         },
-        "Bajonett": {
-            "name": "Bajonett",
+        "Schild (Parierschild)": {
+            "name": "Schild (Parierschild)",
             "kategorie": "Waffe",
-            "gewicht": 0.5,
-            "kosten": 25,
-            "setting": "modern",
-            "beschreibung": "Stä+W6 und Parade +1 wenn an einem Gewehr befestigt, Reichweite 1, Zweihändig",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Kettensäge": {
-            "name": "Kettensäge",
-            "kategorie": "Waffe",
-            "gewicht": 10,
-            "kosten": 200,
-            "setting": "modern",
-            "beschreibung": "Kritischer Fehlschlag trifft den Angreifer",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W6+4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Schlagring": {
-            "name": "Schlagring",
-            "kategorie": "Waffe",
-            "gewicht": 0.5,
+            "gewicht": 2,
             "kosten": 20,
-            "setting": "modern",
-            "beschreibung": "Zählt nicht als Waffe für die Regel Unbewaffneter Verteidiger",
+            "setting": "HeXXen 1773",
+            "beschreibung": "Parade +1",
             "aktiv": true,
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
@@ -4132,121 +4221,67 @@
                 "PB": "-"
             }
         },
-        "Schlagstock": {
-            "name": "Schlagstock",
+        "Schlagwaffe": {
+            "name": "Schlagwaffe",
             "kategorie": "Waffe",
-            "gewicht": 0.5,
-            "kosten": 10,
-            "setting": "modern",
-            "beschreibung": "Oft die Waffe von Gesetzeshütern",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Springmesser": {
-            "name": "Springmesser",
-            "kategorie": "Waffe",
-            "gewicht": 0.25,
-            "kosten": 10,
-            "setting": "modern",
-            "beschreibung": "-2 auf Wahrnehmungsprobe wenn versteckt",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Überlebensmesser": {
-            "name": "Überlebensmesser",
-            "kategorie": "Waffe",
-            "gewicht": 0.5,
+            "gewicht": 2,
             "kosten": 50,
-            "setting": "modern",
-            "beschreibung": "Einfache Werkzeuge im Griff, +1 auf Überlebensproben",
+            "setting": "HeXXen 1773",
+            "beschreibung": "Parade –1, PB 2",
             "aktiv": true,
             "typ": "Nahkampf",
-            "mindeststaerke": "W4",
+            "mindeststaerke": "W8",
             "eigenschaften": {
-                "Schaden": "Stä+W4",
-                "Reichweite": "nah",
-                "FR": "-",
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Molekularmesser": {
-            "name": "Molekularmesser",
-            "kategorie": "Waffe",
-            "gewicht": 0.25,
-            "kosten": 250,
-            "setting": "futuristisch",
-            "beschreibung": "PB 2, kann nicht geworfen werden",
-            "aktiv": true,
-            "typ": "Nahkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "Stä+W4+2",
+                "Schaden": "Stä+W8",
                 "Reichweite": "nah",
                 "FR": "-",
                 "Schuss": "-",
                 "PB": 2
             }
         },
-        "Molekularschwert": {
-            "name": "Molekularschwert",
+        "Schwert": {
+            "name": "Schwert",
             "kategorie": "Waffe",
             "gewicht": 1,
-            "kosten": 500,
-            "setting": "futuristisch",
-            "beschreibung": "PB 4",
+            "kosten": 45,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Klassisches Schwert",
             "aktiv": true,
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-                "Schaden": "Stä+W8+2",
+                "Schaden": "Stä+W6",
                 "Reichweite": "nah",
                 "FR": "-",
                 "Schuss": "-",
-                "PB": 4
+                "PB": "-"
             }
         },
-        "Laserschwert": {
-            "name": "Laserschwert",
+        "Stangenwaffe": {
+            "name": "Stangenwaffe",
             "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 1000,
-            "setting": "futuristisch",
-            "beschreibung": "PB 12",
+            "gewicht": 3,
+            "kosten": 35,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Parade –1, Reichweite",
             "aktiv": true,
             "typ": "Nahkampf",
-            "mindeststaerke": "W4",
+            "mindeststaerke": "W8",
             "eigenschaften": {
-                "Schaden": "Stä+W6+8",
+                "Schaden": "Stä+W8",
                 "Reichweite": "nah",
                 "FR": "-",
                 "Schuss": "-",
-                "PB": 12
+                "PB": "-"
             }
         },
-        "Armbrust handgespannt": {
-            "name": "Armbrust (handgespannt)",
+        "Armbrust": {
+            "name": "Armbrust",
             "kategorie": "Waffe",
             "gewicht": 2.5,
-            "kosten": 250,
-            "setting": "mittelalterlich",
-            "beschreibung": "Handgespannt",
+            "kosten": 50,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Handgespannt, Nachladen 1",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
@@ -4258,13 +4293,13 @@
                 "PB": 2
             }
         },
-        "Armbrust schwer": {
+        "Armbrust, Schwer": {
             "name": "Armbrust, Schwer",
             "kategorie": "Waffe",
             "gewicht": 4,
-            "kosten": 400,
-            "setting": "mittelalterlich",
-            "beschreibung": "Wird mit Kurbel gespannt. Nachladen 2",
+            "kosten": 40,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Mit Kurbel gespannt, Nachladen 2",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
@@ -4276,31 +4311,13 @@
                 "PB": 2
             }
         },
-        "Wurfaxt": {
-            "name": "Axt, Wurfaxt",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Für Wurfangriffe konzipierte Axt",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "3/6/12",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
         "Bogen": {
             "name": "Bogen",
             "kategorie": "Waffe",
             "gewicht": 1.5,
-            "kosten": 250,
-            "setting": "mittelalterlich",
-            "beschreibung": "Standard Jagd- und Kriegsbogen",
+            "kosten": 40,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Klassischer Bogen",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
@@ -4312,103 +4329,49 @@
                 "PB": "-"
             }
         },
-        "Langbogen": {
-            "name": "Langbogen",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 300,
-            "setting": "mittelalterlich", 
-            "beschreibung": "Längerer und stärkerer Bogen als der normale Bogen",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "2W6",
-                "Reichweite": "15/30/60",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": 1
-            }
-        },
-        "Netz beschwert": {
-            "name": "Netz (beschwert)",
-            "kategorie": "Waffe",
-            "gewicht": 4,
-            "kosten": 50,
-            "setting": "mittelalterlich",
-            "beschreibung": "Bei einem erfolgreichen Treffer ist das Ziel Festgehalten. Das Netz hat Härte 10 und ist nur durch Schnittangriffe zu zerstören",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "-",
-                "Reichweite": "3/6/12",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Schleuder": {
-            "name": "Schleuder",
+        "Dolche und Messer Fernkampf": {
+            "name": "Dolche und Messer (Fernkampf)",
             "kategorie": "Waffe",
             "gewicht": 0.5,
-            "kosten": 10,
-            "setting": "mittelalterlich",
-            "beschreibung": "Verwendet Athletik (Werfen)",
+            "kosten": 5,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Giftverwendung möglich",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
                 "Schaden": "Stä+W4",
-                "Reichweite": "4/8/16",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Wurfspeer": {
-            "name": "Speer/Wurfspeer",
-            "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Als Wurf- oder Nahkampfwaffe verwendbar",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "Stä+W6",
                 "Reichweite": "3/6/12",
                 "FR": 1,
                 "Schuss": "-",
                 "PB": "-"
             }
         },
-        "Kompositbogen": {
-            "name": "Kompositbogen",
+        "Muskete": {
+            "name": "Muskete",
             "kategorie": "Waffe",
-            "gewicht": 1.5,
-            "kosten": 200,
-            "setting": "modern",
-            "beschreibung": "Moderner Bogen aus verschiedenen Materialien",
+            "gewicht": 7.5,
+            "kosten": 100,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Nachladen 2",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-                "Schaden": "Stä+W6",
-                "Reichweite": "12/24/48",
+                "Schaden": "2W8",
+                "Reichweite": "10/20/40",
                 "FR": 1,
                 "Schuss": "-",
-                "PB": 1
+                "PB": "-"
             }
         },
-        "Steinschlosspistole": {
-            "name": "Steinschlosspistole",
+        "Pistole": {
+            "name": "Pistole",
             "kategorie": "Waffe",
             "gewicht": 1.5,
-            "kosten": 150,
-            "setting": "mittelalterlich",
-            "beschreibung": "Nachladen 3",
+            "kosten": 90,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Nachladen 2",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
@@ -4420,992 +4383,105 @@
                 "PB": "-"
             }
         },
-        "Brown Bess": {
-            "name": "Brown Bess oder ähnliche Musketen",
-            "kategorie": "Waffe",
-            "gewicht": 7.5,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "Nachladen 3",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "10/20/40",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Donnerbüchse": {
-            "name": "Donnerbüchse",
-            "kategorie": "Waffe",
-            "gewicht": 6,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "Regeln wie Schrotflinte, Nachladen 3",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "1-3W6",
-                "Reichweite": "10/20/40",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Kentucky Rifle": {
-            "name": "Kentucky Rifle",
-            "kategorie": "Waffe",
-            "gewicht": 4,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "Nachladen 4. Der gezogene Lauf erfordert vier Aktionen zum Nachladen statt der üblichen drei",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "15/30/60",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": 2
-            }
-        },
-        "Springfield Model 1861": {
-            "name": "Springfield Model 1861 Glattlauf-Muskete",
-            "kategorie": "Waffe",
-            "gewicht": 5.5,
-            "kosten": 250,
-            "setting": "mittelalterlich",
-            "beschreibung": "Nachladen 3",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "15/30/60",
-                "FR": 1,
-                "Schuss": "-",
-                "PB": "-"
-            }
-        },
-        "Derringer": {
-            "name": "Derringer (.41)",
+        "Schleuder": {
+            "name": "Schleuder",
             "kategorie": "Waffe",
             "gewicht": 0.5,
-            "kosten": 100,
-            "setting": "modern",
-            "beschreibung": "-2 auf Wahrnehmungsprobe wenn verborgen",
+            "kosten": 1,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Verwendet Athletik (Werfen)",
             "aktiv": true,
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-                "Schaden": "2W4",
-                "Reichweite": "3/6/12",
+                "Schaden": "Stä+W4",
+                "Reichweite": "4/8/12",
                 "FR": 1,
-                "Schuss": 2,
+                "Schuss": "-",
                 "PB": "-"
             }
-        },
-        "Desert Eagle": {
-            "name": "Desert Eagle (.50)",
-            "kategorie": "Waffe",
-            "gewicht": 4,
-            "kosten": 300,
-            "setting": "modern",
-            "beschreibung": "Schwere halbautomatische Pistole",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "15/30/60",
-                "FR": 1,
-                "Schuss": 7,
-                "PB": 2
-            }
-        },
-        "Pistole": {
-            "name": "Pistole",
-            "kategorie": "Waffe",
-            "gewicht": 1,
-            "kosten": 250,
-            "setting": "modern",
-            "beschreibung": "Standard-Handfeuerwaffe",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "2W6",
-                "Reichweite": "15/30/60",
-                "FR": 1,
-                "Schuss": 50,
-                "PB": 2
-            }
-        },
-        "MP5": {
-            "name": "H&K MP5 (9mm)",
-            "kategorie": "Waffe",
-            "gewicht": 5,
-            "kosten": 300,
-            "setting": "modern",
-            "beschreibung": "Weit verbreitete Maschinenpistole",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W6",
-                "Reichweite": "12/24/48",
-                "FR": 3,
-                "Schuss": 30,
-                "PB": 1
-            }
-        },
-        "Tommy Gun": {
-            "name": "Tommy Gun (.45)",
-            "kategorie": "Waffe",
-            "gewicht": 6.5,
-            "kosten": 350,
-            "setting": "modern",
-            "beschreibung": "Kann auch eine Trommel mit 50 Schuss verwenden (+1 kg, $50)",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W6+1",
-                "Reichweite": "12/24/48",
-                "FR": 3,
-                "Schuss": 20,
-                "PB": 1
-            }
-        },
-        "Maschinenpistole": {
-            "name": "Maschinenpistole",
-            "kategorie": "Waffe",
-            "gewicht": 2,
-            "kosten": 500,
-            "setting": "modern",
-            "beschreibung": "Vollautomatische Waffe für kurze Entfernungen",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W4",
-            "eigenschaften": {
-                "Schaden": "2W6",
-                "Reichweite": "15/30/60",
-                "FR": 4,
-                "Schuss": 100,
-                "PB": 2
-            }
-        },
-        "Doppelflinte": {
-            "name": "Doppelflinte",
-            "kategorie": "Waffe",
-            "gewicht": 5.5,
-            "kosten": 150,
-            "setting": "modern",
-            "beschreibung": "Regeln für Schrotflinten gelten",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "1-3W6",
-                "Reichweite": "12/24/48",
-                "FR": 1,
-                "Schuss": 2,
-                "PB": "-"
-            }
-        },
-        "AK47": {
-            "name": "AK47 (7.62mm)",
-            "kategorie": "Waffe",
-            "gewicht": 5,
-            "kosten": 450,
-            "setting": "modern",
-            "beschreibung": "Robustes Sturmgewehr",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W8+1",
-                "Reichweite": "24/48/96",
-                "FR": 3,
-                "Schuss": 30,
-                "PB": 2
-            }
-        },
-        "M-16": {
-            "name": "M-16 (5.56mm)",
-            "kategorie": "Waffe",
-            "gewicht": 4,
-            "kosten": 400,
-            "setting": "modern",
-            "beschreibung": "Die Version A-2 kann auch 3-Schuss-Feuerstöße abgeben",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "24/48/96",
-                "FR": 3,
-                "Schuss": 30,
-                "PB": 2
-            }
-        },
-        "Gewehr": {
-            "name": "Gewehr",
-            "kategorie": "Waffe",
-            "gewicht": 4,
-            "kosten": 700,
-            "setting": "modern",
-            "beschreibung": "Standard-Gewehr mit hoher Durchschlagskraft",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W6",
-            "eigenschaften": {
-                "Schaden": "3W6",
-                "Reichweite": "30/60/120",
-                "FR": 3,
-                "Schuss": 100,
-                "PB": 2
-            }
-        },
-        "BAR": {
-            "name": "Browning Automatic Rifle (BAR) (.30-06)",
-            "kategorie": "Waffe",
-            "gewicht": 8.5,
-            "kosten": 300,
-            "setting": "modern",
-            "beschreibung": "Feuerrate 1 bis 3. Verwendet Magazine (eine Aktion zum Nachladen statt der üblichen 2)",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "20/40/60",
-                "FR": 3,
-                "Schuss": 20,
-                "PB": 2
-            }
-        },
-        "Gatling (.45)": {
-            "name": "Gatling (.45)",
-            "kategorie": "Waffe",
-            "gewicht": 85,
-            "kosten": 500,
-            "setting": "modern",
-            "beschreibung": "Schwere, montierte Waffe mit hoher Feuerrate",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "-",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "24/48/96",
-                "FR": 3,
-                "Schuss": 100,
-                "PB": 2
-            }
-        },
-        "Minigun (7.62mm)": {
-            "name": "Minigun (7.62mm)",
-            "kategorie": "Waffe",
-            "gewicht": 42.5,
-            "kosten": 100000,
-            "setting": "modern",
-            "beschreibung": "Feuerrate von mindestens 3, erfordert Rucksackgeschirr mit Munition, das zusätzliche 42,5 kg wiegt, wenn es voll ist (enthält 4000 Schuss im Gurt)",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "2W8+1",
-                "Reichweite": "30/60/120",
-                "FR": 5,
-                "Schuss": 4000,
-                "PB": 2
-            }
-        },
-        "M2 Browning (.50 Cal)": {
-            "name": "M2 Browning (.50 Cal)",
-            "kategorie": "Waffe",
-            "gewicht": 42,
-            "kosten": 1500,
-            "setting": "modern",
-            "beschreibung": "Schwere Waffe",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "-",
-            "eigenschaften": {
-                "Schaden": "2W10",
-                "Reichweite": "50/100/200",
-                "FR": 3,
-                "Schuss": 200,
-                "PB": 4
-            }
-        },
-        "M60 (7.62mm)": {
-            "name": "M60 (7.62mm)",
-            "kategorie": "Waffe",
-            "gewicht": 16.5,
-            "kosten": 6000,
-            "setting": "modern",
-            "beschreibung": "Schweres Maschinengewehr",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "2W8+1",
-                "Reichweite": "30/60/120",
-                "FR": 3,
-                "Schuss": 100,
-                "PB": 2
-            }
-        },
-        "MG42 (7.92mm)": {
-            "name": "MG42 (7.92mm)",
-            "kategorie": "Waffe",
-            "gewicht": 13,
-            "kosten": 750,
-            "setting": "modern",
-            "beschreibung": "Deutsches Maschinengewehr mit sehr hoher Feuerrate",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W10",
-            "eigenschaften": {
-                "Schaden": "2W8+1",
-                "Reichweite": "30/60/120",
-                "FR": 4,
-                "Schuss": 200,
-                "PB": 2
-            }
-        },
-        "SAW (5.56mm)": {
-            "name": "SAW (5.56mm)",
-            "kategorie": "Waffe",
-            "gewicht": 10,
-            "kosten": 4000,
-            "setting": "modern",
-            "beschreibung": "Squad Automatic Weapon, leichtes Maschinengewehr",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "2W8",
-                "Reichweite": "30/60/120",
-                "FR": 4,
-                "Schuss": 200,
-                "PB": 2
-            }
-        },
-        "Gatling-Laser": {
-            "name": "Gatling-Laser",
-            "kategorie": "Waffe",
-            "gewicht": 10,
-            "kosten": 1000,
-            "setting": "futuristisch",
-            "beschreibung": "Schwere Laserwaffe mit hoher Feuerrate",
-            "aktiv": true,
-            "typ": "Fernkampf",
-            "mindeststaerke": "W8",
-            "eigenschaften": {
-                "Schaden": "3W6+4",
-                "Reichweite": "50/100/200",
-                "FR": 4,
-                "Schuss": 800,
-                "PB": 2
-            }
-        },
-        "Jacke (dünn)": {
-            "name": "Jacke (dünn)",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "Schwere Winterkleidung, geschmeidige Lederrüstungen, weiche Felle",
-            "aktiv": true,
-            "torso": 1,
-            "arme": 1,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Robe (dünn)": {
-            "name": "Robe (dünn)",
-            "kategorie": "Rüstung",
-            "gewicht": 4,
-            "kosten": 30,
-            "setting": "mittelalterlich",
-            "beschreibung": "Leichte Schutzkleidung, die den ganzen Körper bedeckt",
-            "aktiv": true,
-            "torso": 1,
-            "arme": 1,
-            "beine": 1,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Beinlinge (dünn)": {
-            "name": "Beinlinge (dünn)",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "Leichte Beinbekleidung aus Leder oder Fell",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 1,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Kappe (dünn)": {
-            "name": "Kappe (dünn)",
-            "kategorie": "Rüstung",
-            "gewicht": 0.5,
-            "kosten": 5,
-            "setting": "mittelalterlich",
-            "beschreibung": "Leichter Kopfschutz aus weichem Material",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 1,
-            "mindeststaerke": "W4"
-        },
-        "Jacke (dick)": {
-            "name": "Jacke (dick)",
-            "kategorie": "Rüstung",
-            "gewicht": 4,
-            "kosten": 80,
-            "setting": "mittelalterlich",
-            "beschreibung": "Gehärtetes Leder, Lederrüstung, Alligatorenhaut",
-            "aktiv": true,
-            "torso": 2,
-            "arme": 2,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W6"
-        },
-        "Beinlinge (dick)": {
-            "name": "Beinlinge (dick)",
-            "kategorie": "Rüstung",
-            "gewicht": 3.5,
-            "kosten": 40,
-            "setting": "mittelalterlich",
-            "beschreibung": "Robuste Beinbekleidung aus gehärtetem Leder",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 2,
-            "kopf": 0,
-            "mindeststaerke": "W6"
-        },
-        "Kappe (dick)": {
-            "name": "Kappe (dick)",
-            "kategorie": "Rüstung",
-            "gewicht": 0.5,
-            "kosten": 20,
-            "setting": "mittelalterlich",
-            "beschreibung": "Robuster Kopfschutz aus gehärtetem Leder",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 2,
-            "mindeststaerke": "W6"
-        },
-        "Hemd (Kette)": {
-            "name": "Hemd (Kette)",
-            "kategorie": "Rüstung",
-            "gewicht": 12.5,
-            "kosten": 300,
-            "setting": "mittelalterlich",
-            "beschreibung": "Kettenhemd, Schienenpanzer, Ringpanzer, Samurairüstung",
-            "aktiv": true,
-            "torso": 3,
-            "arme": 3,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W8"
-        },
-        "Beinlinge (Kette)": {
-            "name": "Beinlinge (Kette)",
-            "kategorie": "Rüstung",
-            "gewicht": 5,
-            "kosten": 150,
-            "setting": "mittelalterlich",
-            "beschreibung": "Kettenhose für den Schutz der Beine",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 3,
-            "kopf": 0,
-            "mindeststaerke": "W8"
-        },
-        "Helm (Kette)": {
-            "name": "Helm (Kette)",
-            "kategorie": "Rüstung",
-            "gewicht": 2,
-            "kosten": 25,
-            "setting": "mittelalterlich",
-            "beschreibung": "Kettenhaube zum Kopfschutz",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 3,
-            "mindeststaerke": "W8"
-        },
-        "Bronze-Rossharnisch": {
-            "name": "Bronze-Rossharnisch",
-            "kategorie": "Rüstung",
-            "gewicht": 25,
-            "kosten": 1500,
-            "setting": "antike",
-            "beschreibung": "Rüstung für Pferde in antiken Zivilisationen",
-            "aktiv": true,
-            "torso": 3,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W10"
-        },
-        "Brustharnisch (Bronze)": {
-            "name": "Brustharnisch (Bronze)",
-            "kategorie": "Rüstung",
-            "gewicht": 6.5,
-            "kosten": 80,
-            "setting": "antike",
-            "beschreibung": "Bronzener Brustharnisch für Krieger",
-            "aktiv": true,
-            "torso": 3,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W8"
-        },
-        "Armschienen (Bronze)": {
-            "name": "Armschienen (Bronze)",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 40,
-            "setting": "antike",
-            "beschreibung": "Bronzene Armschienen",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 3,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W8"
-        },
-        "Beinschienen (Bronze)": {
-            "name": "Beinschienen (Bronze)",
-            "kategorie": "Rüstung",
-            "gewicht": 3,
-            "kosten": 50,
-            "setting": "antike",
-            "beschreibung": "Bronzene Beinschienen",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 3,
-            "kopf": 0,
-            "mindeststaerke": "W8"
-        },
-        "Helm (Bronze)": {
-            "name": "Helm (Bronze)",
-            "kategorie": "Rüstung",
-            "gewicht": 3,
-            "kosten": 25,
-            "setting": "antike",
-            "beschreibung": "Bronzener Helm",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 3,
-            "mindeststaerke": "W8"
-        },
-        "Platten-Rossharnisch": {
-            "name": "Platten-Rossharnisch",
-            "kategorie": "Rüstung",
-            "gewicht": 25,
-            "kosten": 1500,
-            "setting": "mittelalterlich",
-            "beschreibung": "Schwere Rüstung für Pferde",
-            "aktiv": true,
-            "torso": 4,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W10"
-        },
-        "Brustharnisch (Platte)": {
-            "name": "Brustharnisch (Platte)",
-            "kategorie": "Rüstung",
-            "gewicht": 15,
-            "kosten": 500,
-            "setting": "mittelalterlich",
-            "beschreibung": "Schwerer Plattenpanzer für den Torso",
-            "aktiv": true,
-            "torso": 4,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W10"
-        },
-        "Armschienen (Platte)": {
-            "name": "Armschienen (Platte)",
-            "kategorie": "Rüstung",
-            "gewicht": 5,
-            "kosten": 200,
-            "setting": "mittelalterlich",
-            "beschreibung": "Schwere Plattenarmschienen",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 4,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W10"
-        },
-        "Beinschienen (Platte)": {
-            "name": "Beinschienen (Platte)",
-            "kategorie": "Rüstung",
-            "gewicht": 5,
-            "kosten": 200,
-            "setting": "mittelalterlich",
-            "beschreibung": "Schwere Plattenbeinschienen",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 4,
-            "kopf": 0,
-            "mindeststaerke": "W10"
-        },
-        "Schwerer Helm": {
-            "name": "Schwerer Helm",
-            "kategorie": "Rüstung",
-            "gewicht": 2,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Offener schwerer Helm",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 4,
-            "mindeststaerke": "W10"
-        },
-        "Schwerer Helm, geschlossen": {
-            "name": "Schwerer Helm, geschlossen",
-            "kategorie": "Rüstung",
-            "gewicht": 4,
-            "kosten": 200,
-            "setting": "mittelalterlich",
-            "beschreibung": "Geschlossener schwerer Helm mit Visier. –1 auf Sicht-basierte Wahrnehmungsproben",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 4,
-            "mindeststaerke": "W10"
-        },
-        "Dicker Mantel": {
-            "name": "Dicker Mantel, Lederjacke",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 100,
-            "setting": "modern",
-            "beschreibung": "Schwere Winterkleidung, Lederjacke",
-            "aktiv": true,
-            "torso": 1,
-            "arme": 1,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Reitchaps": {
-            "name": "Reitchaps aus Leder",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 70,
-            "setting": "modern",
-            "beschreibung": "Schützen die Beine beim Reiten",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 1,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Motorradjacke": {
-            "name": "Motorradjacke aus Kevlar",
-            "kategorie": "Rüstung",
-            "gewicht": 4,
-            "kosten": 350,
-            "setting": "modern",
-            "beschreibung": "Schützt bei Motorradunfällen",
-            "aktiv": true,
-            "torso": 2,
-            "arme": 2,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Motorradhose": {
-            "name": "Motorradhose aus Kevlar",
-            "kategorie": "Rüstung",
-            "gewicht": 2,
-            "kosten": 175,
-            "setting": "modern",
-            "beschreibung": "Schützt die Beine bei Motorradunfällen",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 2,
-            "kopf": 0,
-            "mindeststaerke": "W4"
-        },
-        "Fahrradhelm": {
-            "name": "Fahrradhelm",
-            "kategorie": "Rüstung",
-            "gewicht": 0.5,
-            "kosten": 50,
-            "setting": "modern",
-            "beschreibung": "Schützt den Kopf bei Fahrradunfällen",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 2,
-            "mindeststaerke": "W4"
-        },
-        "Motorradhelm": {
-            "name": "Motorradhelm",
-            "kategorie": "Rüstung",
-            "gewicht": 1.5,
-            "kosten": 100,
-            "setting": "modern",
-            "beschreibung": "Bietet umfassenden Schutz für den Kopf",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 3,
-            "mindeststaerke": "W4"
-        },
-        "Splitterschutzjacke": {
-            "name": "Splitterschutzjacke",
-            "kategorie": "Rüstung",
-            "gewicht": 5,
-            "kosten": 40,
-            "setting": "modern",
-            "beschreibung": "Vietnam-Ära Torso-Schutz gegen Granatsplitter",
-            "aktiv": true,
-            "torso": 2,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W6"
-        },
-        "Kevlarweste": {
-            "name": "Kevlarweste",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 200,
-            "setting": "modern",
-            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
-            "aktiv": true,
-            "torso": 2,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W6"
-        },
-        "Kevlarweste mit Keramikplatten": {
-            "name": "Kevlarweste mit Keramikplatten",
-            "kategorie": "Rüstung",
-            "gewicht": 8.5,
-            "kosten": 500,
-            "setting": "modern",
-            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
-            "aktiv": true,
-            "torso": 4,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 0,
-            "mindeststaerke": "W8"
-        },
-        "Kevlarhelm": {
-            "name": "Kevlarhelm",
-            "kategorie": "Rüstung",
-            "gewicht": 2.5,
-            "kosten": 80,
-            "setting": "modern",
-            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 4,
-            "mindeststaerke": "W4"
-        },
-        "Bombenschutzanzug": {
-            "name": "Bombenschutzanzug",
-            "kategorie": "Rüstung",
-            "gewicht": 40,
-            "kosten": 25000,
-            "setting": "modern",
-            "beschreibung": "Bombenschutzanzüge sind mit Ausnahme der Hände nicht für Beweglichkeit gebaut. Geschicklichkeit und verknüpfte Fertigkeiten können nicht höher sein als W6, Bewegungsweite -2",
-            "aktiv": true,
-            "torso": 10,
-            "arme": 10,
-            "beine": 10,
-            "kopf": 10,
-            "mindeststaerke": "W12"
-        },
-        "Infanteriekampfanzug": {
-            "name": "Infanteriekampfanzug",
-            "kategorie": "Rüstung",
-            "gewicht": 6,
-            "kosten": 800,
-            "setting": "futuristisch",
-            "beschreibung": "Ein Ganzkörperanzug mit Stiefeln und Handschuhen. Kann mit Energieüberzug behandelt werden (-4 Schaden von Lasern, +50% Kosten, -2 Heimlichkeit)",
-            "aktiv": true,
-            "torso": 6,
-            "arme": 6,
-            "beine": 6,
-            "kopf": 0,
-            "mindeststaerke": "W6"
-        },
-        "Kampfhelm": {
-            "name": "Kampfhelm",
-            "kategorie": "Rüstung",
-            "gewicht": 1,
-            "kosten": 100,
-            "setting": "futuristisch",
-            "beschreibung": "Vollgesichtshelm mit fortschrittlicher Technologie. Kann mit Energieüberzug behandelt werden (-4 Schaden von Lasern, +50% Kosten, -2 Heimlichkeit)",
-            "aktiv": true,
-            "torso": 0,
-            "arme": 0,
-            "beine": 0,
-            "kopf": 6,
-            "mindeststaerke": "W6"
-        },
-        "Kleiner Schild": {
-            "name": "Kleiner Schild",
-            "kategorie": "Schild",
-            "gewicht": 2,
-            "kosten": 50,
-            "setting": "mittelalterlich",
-            "beschreibung": "Härte 10, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 1,
-            "deckung": 0,
-            "mindeststaerke": "W4"
-        },
-        "Mittelerer Schild": {
-            "name": "Mittelerer Schild",
-            "kategorie": "Schild",
-            "gewicht": 4,
-            "kosten": 100,
-            "setting": "mittelalterlich",
-            "beschreibung": "Härte 10, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 2,
-            "deckung": -2,
-            "mindeststaerke": "W6"
-        },
-        "Großer Schild": {
-            "name": "Großer Schild",
-            "kategorie": "Schild",
-            "gewicht": 6,
-            "kosten": 200,
-            "setting": "mittelalterlich",
-            "beschreibung": "Härte 10, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 3,
-            "deckung": -4,
-            "mindeststaerke": "W8"
-        },
-        "Einsatzschild": {
-            "name": "Einsatzschild",
-            "kategorie": "Schild",
-            "gewicht": 2.5,
-            "kosten": 80,
-            "setting": "modern",
-            "beschreibung": "Härte 12, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 3,
-            "deckung": -4,
-            "mindeststaerke": "W4"
-        },
-        "Ballistischer Schild": {
-            "name": "Ballistischer Schild",
-            "kategorie": "Schild",
-            "gewicht": 4.5,
-            "kosten": 250,
-            "setting": "modern",
-            "beschreibung": "Härte 12, +2 Panzerung. Verringert den Schaden von Feuerwaffen um -4. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 3,
-            "deckung": -4,
-            "mindeststaerke": "W6"
-        },
-        "Polymerschild, Klein": {
-            "name": "Polymerschild, Klein",
-            "kategorie": "Schild",
-            "gewicht": 1,
-            "kosten": 200,
-            "setting": "futuristisch",
-            "beschreibung": "Härte 10, +4 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 1,
-            "deckung": 0,
-            "mindeststaerke": "W4"
-        },
-        "Polymerschild, Mittel": {
-            "name": "Polymerschild, Mittel",
-            "kategorie": "Schild",
-            "gewicht": 2,
-            "kosten": 300,
-            "setting": "futuristisch",
-            "beschreibung": "Härte 10, +4 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 2,
-            "deckung": -2,
-            "mindeststaerke": "W4"
-        },
-        "Polymerschild, Groß": {
-            "name": "Polymerschild, Groß",
-            "kategorie": "Schild",
-            "gewicht": 3,
-            "kosten": 400,
-            "setting": "futuristisch",
-            "beschreibung": "Härte 10, +4 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
-            "aktiv": true,
-            "parade": 3,
-            "deckung": -4,
-            "mindeststaerke": "W6"
         },
         "Pferd": {
             "name": "Pferd",
-            "kategorie": "Allgemein",
+            "kategorie": "Tier",
             "gewicht": 0,
-            "kosten": 300,
-            "setting": "",
-            "beschreibung": "Normales Reitpferd für Transport und leichte Lasten",
+            "kosten": 90,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Verwendet Werte für Pferd aus SWAE, 2 Beutegut-Pakete",
             "aktiv": true
         },
         "Streitross": {
             "name": "Streitross",
-            "kategorie": "Allgemein",
+            "kategorie": "Tier",
             "gewicht": 0,
-            "kosten": 750,
-            "setting": "",
-            "beschreibung": "Für den Kampf ausgebildetes Pferd mit besseren Kampfeigenschaften",
+            "kosten": 200,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Verwendet Werte für Pferd, Streitross aus SWAE, 2 Beutegut-Pakete",
             "aktiv": true
         },
+        "Esel oder Maultier": {
+            "name": "Esel oder Maultier",
+            "kategorie": "Tier",
+            "gewicht": 0,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Verwendet Werte für Maultier aus SWAE, 4 Beutegut-Pakete",
+            "aktiv": true
+        },
+        "Ochse": {
+            "name": "Ochse",
+            "kategorie": "Tier",
+            "gewicht": 0,
+            "kosten": 20,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Verwendet Werte für Stier aus SWAE, 4 Beutegut-Pakete",
+            "aktiv": true
+        },
+        "Kutsche, 1-Achser": {
+            "name": "Kutsche, 1-Achser",
+            "kategorie": "Fahrzeug",
+            "gewicht": 0,
+            "kosten": 250,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Größe 3, Manövrierfähigkeit –1, Höchstgeschwindigkeit 25 km/h, Robustheit 6, Besatzung 1+3, 10 Beutegut-Pakete",
+            "aktiv": true
+        },
+        "Kutsche, 2-Achser": {
+            "name": "Kutsche, 2-Achser",
+            "kategorie": "Fahrzeug",
+            "gewicht": 0,
+            "kosten": 500,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Größe 4 (Groß), Manövrierfähigkeit –2, Höchstgeschwindigkeit 25 km/h, Robustheit 8, Besatzung 1+7, 15 Beutegut-Pakete",
+            "aktiv": true
+        },
+        "Karren, 1-Achser": {
+            "name": "Karren, 1-Achser",
+            "kategorie": "Fahrzeug",
+            "gewicht": 0,
+            "kosten": 30,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Größe 3, Manövrierfähigkeit –2, Höchstgeschwindigkeit 15 km/h, Robustheit 5, Besatzung 1+5, 20 Beutegut-Pakete",
+            "aktiv": true
+        },
+        "Wagen, 2-Achser": {
+            "name": "Wagen, 2-Achser",
+            "kategorie": "Fahrzeug",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Größe 4 (Groß), Manövrierfähigkeit –3, Höchstgeschwindigkeit 15 km/h, Robustheit 9, Besatzung 1+9, 40 Beutegut-Pakete",
+            "aktiv": true
+        },
+        "Flussschiff": {
+            "name": "Flussschiff",
+            "kategorie": "Fahrzeug",
+            "gewicht": 0,
+            "kosten": 610,
+            "setting": "HeXXen 1773",
+            "beschreibung": "Größe 12 (Gigantisch), Manövrierfähigkeit –1, Höchstgeschwindigkeit 15 km/h, Robustheit 14 (2), Besatzung 12+30, 100 Beutegut-Pakete",
+            "aktiv": true
+        },        
         "Sattel": {
             "name": "Sattel",
             "kategorie": "Allgemein",
@@ -5451,15 +4527,6 @@
             "beschreibung": "Drei Anwendungen, siehe Heilung auf Seite 96",
             "aktiv": true
         },
-        "Fackel": {
-            "name": "Fackel",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 5,
-            "setting": "",
-            "beschreibung": "Brennt eine Stunde, 4\" (8m) Lichtradius",
-            "aktiv": true
-        },
         "Feuerstein und Stahl": {
             "name": "Feuerstein und Stahl",
             "kategorie": "Allgemein",
@@ -5494,42 +4561,6 @@
             "kosten": 10,
             "setting": "",
             "beschreibung": "Werkzeug zum Hämmern und Nageln",
-            "aktiv": true
-        },
-        "Handschellen": {
-            "name": "Handschellen",
-            "kategorie": "Allgemein",
-            "gewicht": 1,
-            "kosten": 15,
-            "setting": "",
-            "beschreibung": "Zum Fesseln von Personen, Stärke gegen 8 zum Ausbrechen",
-            "aktiv": true
-        },
-        "Kamera (Einweg)": {
-            "name": "Kamera (Einweg)",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 10,
-            "setting": "",
-            "beschreibung": "Einfache Kamera für etwa 24 Bilder",
-            "aktiv": true
-        },
-        "Kamera (normal)": {
-            "name": "Kamera (normal)",
-            "kategorie": "Allgemein",
-            "gewicht": 1,
-            "kosten": 75,
-            "setting": "",
-            "beschreibung": "Standard-Fotokamera",
-            "aktiv": true
-        },
-        "Kamera (digital)": {
-            "name": "Kamera (digital)",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 300,
-            "setting": "",
-            "beschreibung": "Digitale Kamera mit Speicherkarte",
             "aktiv": true
         },
         "Kerze (eine Stunde, 2\" Radius)": {
@@ -5613,15 +4644,6 @@
             "beschreibung": "Hält auch bei niedrigen Temperaturen warm",
             "aktiv": true
         },
-        "Schutzbrille": {
-            "name": "Schutzbrille",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 20,
-            "setting": "",
-            "beschreibung": "Schützt die Augen vor Splittern und Staub",
-            "aktiv": true
-        },
         "Seife": {
             "name": "Seife",
             "kategorie": "Allgemein",
@@ -5647,24 +4669,6 @@
             "kosten": 10,
             "setting": "",
             "beschreibung": "20 Meter modernes Nylonseil, hält bis zu 500 kg",
-            "aktiv": true
-        },
-        "Taschenlampe (10\" Strahl)": {
-            "name": "Taschenlampe (10\" Strahl)",
-            "kategorie": "Allgemein",
-            "gewicht": 1.5,
-            "kosten": 20,
-            "setting": "",
-            "beschreibung": "Leuchtreichweite von 10\" (20m) in gerader Linie",
-            "aktiv": true
-        },
-        "Trillerpfeife": {
-            "name": "Trillerpfeife",
-            "kategorie": "Allgemein",
-            "gewicht": 0,
-            "kosten": 2,
-            "setting": "",
-            "beschreibung": "Lautes Signal über große Entfernung hörbar",
             "aktiv": true
         },
         "Wasserflasche (Wasserschlauch)": {
@@ -5710,33 +4714,6 @@
             "kosten": 100,
             "setting": "",
             "beschreibung": "Haken mit Seil zum Werfen und Klettern",
-            "aktiv": true
-        },
-        "Laser-/Rotpunktvisier": {
-            "name": "Laser-/Rotpunktvisier",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 150,
-            "setting": "",
-            "beschreibung": "+1 auf Schießen auf kurze und mittlere Entfernung",
-            "aktiv": true
-        },
-        "Zielfernrohr": {
-            "name": "Zielfernrohr",
-            "kategorie": "Allgemein",
-            "gewicht": 1,
-            "kosten": 100,
-            "setting": "",
-            "beschreibung": "Negiert beim Zielen 2 Punkte zusätzliche Abzüge",
-            "aktiv": true
-        },
-        "Zweibein/Dreibein": {
-            "name": "Zweibein/Dreibein",
-            "kategorie": "Allgemein",
-            "gewicht": 1,
-            "kosten": 100,
-            "setting": "",
-            "beschreibung": "Eine Aktion zum Ausklappen. Negiert Abzüge für Rückstoß und Mindeststärke",
             "aktiv": true
         },
         "Kleidung, Alltag": {
@@ -5793,60 +4770,6 @@
             "beschreibung": "Isolierte Stiefel für kalte Umgebungen",
             "aktiv": true
         },
-        "Desktop": {
-            "name": "Desktop",
-            "kategorie": "Allgemein",
-            "gewicht": 10,
-            "kosten": 800,
-            "setting": "",
-            "beschreibung": "Stationärer Computer",
-            "aktiv": true
-        },
-        "GPS": {
-            "name": "GPS",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 250,
-            "setting": "",
-            "beschreibung": "Satellitengestütztes Navigationssystem",
-            "aktiv": true
-        },
-        "Laptop": {
-            "name": "Laptop",
-            "kategorie": "Allgemein",
-            "gewicht": 2.5,
-            "kosten": 1200,
-            "setting": "",
-            "beschreibung": "Tragbarer Computer",
-            "aktiv": true
-        },
-        "Taschencomputer": {
-            "name": "Taschencomputer",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 250,
-            "setting": "",
-            "beschreibung": "Kleinerer tragbarer Computer/PDA",
-            "aktiv": true
-        },
-        "EPA (Einmannpackung)": {
-            "name": "EPA (Einmannpackung)",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 10,
-            "setting": "",
-            "beschreibung": "Militärische Notration für einen Tag",
-            "aktiv": true
-        },
-        "Fastfood-Mahlzeit": {
-            "name": "Fastfood-Mahlzeit",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 8,
-            "setting": "",
-            "beschreibung": "Schnelle Mahlzeit zum Mitnehmen",
-            "aktiv": true
-        },
         "Gute Mahlzeit (Restaurant)": {
             "name": "Gute Mahlzeit (Restaurant)",
             "kategorie": "Allgemein",
@@ -5865,96 +4788,6 @@
             "beschreibung": "5 Mahlzeiten; hält sich eine Woche",
             "aktiv": true
         },
-        "Pfefferspray": {
-            "name": "Pfefferspray",
-            "kategorie": "Allgemein",
-            "gewicht": 0.25,
-            "kosten": 15,
-            "setting": "",
-            "beschreibung": "Verwende Schießen (oder Kämpfen im Nahkampf). Kein Entfernungsabzug, maximale Reichweite 2\", 5 Schuss, Opfer muss Konstitutionsprobe mit -2 ablegen, um nicht Betäubt zu werden",
-            "aktiv": true
-        },
-        "Taser": {
-            "name": "Taser",
-            "kategorie": "Allgemein",
-            "gewicht": 0.25,
-            "kosten": 25,
-            "setting": "",
-            "beschreibung": "Verwendet Schießen. FRW 1/2/4. 3 Schuss, dann muss die Waffe mindestens zwei Stunden lang aufgeladen werden. Opfer muss eine Konstitutionsprobe mit -2 ablegen, um nicht Betäubt zu werden",
-            "aktiv": true
-        },
-        "Handy-Abhörer": {
-            "name": "Handy-Abhörer",
-            "kategorie": "Allgemein",
-            "gewicht": 2.5,
-            "kosten": 650,
-            "setting": "",
-            "beschreibung": "Gerät zum Abhören von Mobiltelefongesprächen",
-            "aktiv": true
-        },
-        "Knopfkamera": {
-            "name": "Knopfkamera",
-            "kategorie": "Allgemein",
-            "gewicht": 0,
-            "kosten": 50,
-            "setting": "",
-            "beschreibung": "12 Stunden durchgehender Betrieb, verborgen in einem Knopf",
-            "aktiv": true
-        },
-        "Nachtsichtbrille": {
-            "name": "Nachtsichtbrille",
-            "kategorie": "Allgemein",
-            "gewicht": 1.5,
-            "kosten": 500,
-            "setting": "",
-            "beschreibung": "Kein Abzug für Düstere oder Dunkle Beleuchtung. Für den doppelten Preis ist die Brille 'aktiv' und ignoriert alle Abzüge durch Beleuchtung",
-            "aktiv": true
-        },
-        "Parabolmikrofon": {
-            "name": "Parabolmikrofon",
-            "kategorie": "Allgemein",
-            "gewicht": 2,
-            "kosten": 750,
-            "setting": "",
-            "beschreibung": "Flüstern auf 200 m Entfernung hören",
-            "aktiv": true
-        },
-        "Senderdetektor": {
-            "name": "Senderdetektor",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 525,
-            "setting": "",
-            "beschreibung": "Entdeckt versteckte Wanzen und Sender",
-            "aktiv": true
-        },
-        "Störtelefon": {
-            "name": "Störtelefon",
-            "kategorie": "Allgemein",
-            "gewicht": 1,
-            "kosten": 150,
-            "setting": "",
-            "beschreibung": "Reparierenprobe, um sich in Telefonleitung einzuklinken",
-            "aktiv": true
-        },
-        "Telefonanzapfung": {
-            "name": "Telefonanzapfung",
-            "kategorie": "Allgemein",
-            "gewicht": 0,
-            "kosten": 250,
-            "setting": "",
-            "beschreibung": "Ermöglicht das Abhören von Telefongesprächen",
-            "aktiv": true
-        },
-        "Wanze (Mikrotransmitter)": {
-            "name": "Wanze (Mikrotransmitter)",
-            "kategorie": "Allgemein",
-            "gewicht": 0,
-            "kosten": 30,
-            "setting": "",
-            "beschreibung": "12 Stunden durchgehender Betrieb, überträgt Gespräche",
-            "aktiv": true
-        },
         "Pfeile/Bolzen": {
             "name": "Pfeile/Bolzen",
             "kategorie": "Allgemein",
@@ -5964,60 +4797,6 @@
             "beschreibung": "Pfeile für Bögen, Bolzen für Armbrüste. Gewicht für 10 Stück",
             "aktiv": true
         },
-        "Patronen (Klein)": {
-            "name": "Patronen (Klein)",
-            "kategorie": "Allgemein",
-            "gewicht": 0.5,
-            "kosten": 10,
-            "setting": "",
-            "beschreibung": "Kaliber .22 bis .32, Preis und Gewicht für 50 Stück",
-            "aktiv": true
-        },
-        "Patronen (Mittel)": {
-            "name": "Patronen (Mittel)",
-            "kategorie": "Allgemein",
-            "gewicht": 1,
-            "kosten": 20,
-            "setting": "",
-            "beschreibung": "Kaliber 9mm bis .45, Preis und Gewicht für 50 Stück",
-            "aktiv": true
-        },
-        "Patronen (Groß)": {
-            "name": "Patronen (Groß)",
-            "kategorie": "Allgemein",
-            "gewicht": 7.5,
-            "kosten": 50,
-            "setting": "",
-            "beschreibung": "Kaliber .50 und größer, Preis und Gewicht für 50 Stück",
-            "aktiv": true
-        },
-        "Laserbatterien (Pistole)": {
-            "name": "Laserbatterien (Pistole)",
-            "kategorie": "Allgemein",
-            "gewicht": 0.1,
-            "kosten": 20,
-            "setting": "",
-            "beschreibung": "Bietet ein volles Magazin für eine Laserpistole",
-            "aktiv": true
-        },
-        "Laserbatterien (Gewehr, Maschinenpistole)": {
-            "name": "Laserbatterien (Gewehr, Maschinenpistole)",
-            "kategorie": "Allgemein",
-            "gewicht": 0.25,
-            "kosten": 20,
-            "setting": "",
-            "beschreibung": "Bietet ein volles Magazin für ein Lasergewehr oder eine Lasermaschinenpistole",
-            "aktiv": true
-        },
-        "Gattling": {
-            "name": "Gattling",
-            "kategorie": "Allgemein",
-            "gewicht": 2,
-            "kosten": 50,
-            "setting": "",
-            "beschreibung": "Batterie für einen Gattling-Laser",
-            "aktiv": true
-        },
         "Kugel (mit Schwarzpulver)": {
             "name": "Kugel (mit Schwarzpulver)",
             "kategorie": "Allgemein",
@@ -6025,24 +4804,6 @@
             "kosten": 1,
             "setting": "",
             "beschreibung": "Für Schwarzpulverwaffen, Gewicht für 10 Stück",
-            "aktiv": true
-        },
-        "Schrotflinte": {
-            "name": "Schrotflinte",
-            "kategorie": "Allgemein",
-            "gewicht": 1.5,
-            "kosten": 15,
-            "setting": "",
-            "beschreibung": "Normale Schrotladung, Preis für 25 Patronen, Gewicht für 50 Stück",
-            "aktiv": true
-        },
-        "Flintenlaufgschosse": {
-            "name": "Flintenlaufgschosse",
-            "kategorie": "Allgemein",
-            "gewicht": 1.5,
-            "kosten": 20,
-            "setting": "",
-            "beschreibung": "Einzelgeschoss für Schrotflinten, Preis für 25 Stück, Gewicht für 50 Stück",
             "aktiv": true
         },
         "Schleudersteine": {
