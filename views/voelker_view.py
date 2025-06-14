@@ -1,15 +1,16 @@
-# views/voelker_view.py - MDCard Lösung gegen Textüberschneidung
+# views/voelker_view.py - UI-Komponente mit ausgelagerter Geschäftslogik
 """
 View-Komponente für Völker nach dem MVC-Pattern.
-MDCard-LÖSUNG: Jedes Volk in eigener Card mit strukturiertem Layout
+ÜBERARBEITET: UI-Darstellung getrennt von Geschäftslogik (volk_funktionen.py)
 """
 
 from kivy.lang import Builder
 from kivy.app import App
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.card import MDCard
+from kivymd.uix.chip import MDChip, MDChipText
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.button import MDIconButton
 from kivy.clock import Clock
@@ -17,23 +18,26 @@ from kivy.properties import ObjectProperty, DictProperty
 from kivy.metrics import dp
 import logging
 
+# Import der ausgelagerten Geschäftslogik
+from functions.volk_funktionen import (
+    waehle_volk, abwaehlen_volk, get_selected_volk,
+    hat_volk_wahlmoeglichkeit, get_volk_zusatzelemente, get_volk_attribut_optionen,
+    get_freie_talente, get_verfuegbare_attribute, get_verfuegbare_fertigkeiten,
+    waehle_freies_talent, waehle_freies_attribut, waehle_freie_fertigkeit,
+    reset_volk_auswahlen, initialisiere_voelker_system, get_voelker_status_info,
+    DEFAULT_TALENT_TEXT, DEFAULT_ATTRIBUT_TEXT, DEFAULT_FERTIGKEIT_TEXT,
+    NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT
+)
+
 # Logger konfigurieren
 Logger = logging.getLogger(__name__)
 
-# Konstanten
-DEFAULT_TALENT_TEXT = 'Wähle ein freies Talent'
-DEFAULT_ATTRIBUT_TEXT = 'Wähle ein Attribut'  
-DEFAULT_FERTIGKEIT_TEXT = 'Wähle eine Fertigkeit'
-NO_TALENT_AVAILABLE_TEXT = 'Keine freien Talente verfügbar'
-NO_ATTRIBUT_AVAILABLE_TEXT = 'Keine Attribute verfügbar'
-NO_FERTIGKEIT_AVAILABLE_TEXT = 'Keine Fertigkeiten verfügbar'
-
-# KV-String mit MDCard-Layout
+# KV-String mit noch mehr Padding für Scrollleisten
 KV_STRING = '''
 <VoelkerWidget>:
     orientation: 'vertical'
     padding: [dp(20), dp(15), dp(20), dp(15)]
-    spacing: dp(15)
+    spacing: dp(20)
     md_bg_color: self.theme_cls.backgroundColor
 
     MDLabel:
@@ -44,19 +48,57 @@ KV_STRING = '''
         font_style: "Headline"
         theme_text_color: "Primary"
 
+    # Völker-Chips Container - Noch mehr Padding für Scrollleisten
+    MDCard:
+        size_hint_y: None
+        height: dp(160)
+        padding: [dp(25), dp(20), dp(50), dp(20)]  # Noch mehr Padding rechts
+        elevation: 2
+        radius: [10]
+        md_bg_color: self.theme_cls.surfaceContainerLowColor
+        style: "elevated"
+
+        ScrollView:
+            size_hint: (1, 1)
+            do_scroll_x: True
+            do_scroll_y: False
+            bar_width: dp(10)  # Schmalere Scrollleiste
+            bar_margin: dp(15)  # Mehr Abstand
+            scroll_type: ['bars']
+
+            MDGridLayout:
+                id: chips_layout
+                cols: 1  # Wird dynamisch angepasst
+                size_hint_x: None
+                width: self.minimum_width
+                spacing: dp(15)
+                padding: [dp(15), dp(20), dp(40), dp(20)]  # Noch mehr Padding rechts
+                adaptive_height: True
+
+    # Zusatzelemente Container
+    MDBoxLayout:
+        id: zusatzelemente_container
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+        spacing: dp(20)
+
+    # Ausgewähltes Volk Details Container - Mehr Padding für Scrollleisten
     ScrollView:
         size_hint: (1, 1)
         do_scroll_x: False
         do_scroll_y: True
-        bar_width: dp(12)
+        bar_width: dp(10)  # Schmalere Scrollleiste
+        bar_margin: dp(20)  # Noch mehr Abstand
+        scroll_type: ['bars']
 
         MDBoxLayout:
-            id: voelker_content_container
+            id: selected_volk_container
             orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
-            spacing: dp(20)
-            padding: [0, dp(10), 0, dp(20)]
+            spacing: dp(25)
+            padding: [0, dp(20), dp(50), dp(30)]  # Noch mehr Padding rechts
 '''
 
 Builder.load_string(KV_STRING)
@@ -65,14 +107,16 @@ Builder.load_string(KV_STRING)
 class VoelkerWidget(MDBoxLayout):
     """
     Widget zur Anzeige und Verwaltung von Völkern.
-    Verwendet MDCard für saubere Struktur ohne Textüberschneidung.
+    ÜBERARBEITET: Reine UI-Komponente, Geschäftslogik in volk_funktionen.py
     """
     controller = ObjectProperty(None)
     voelker_auswahlen = DictProperty({})
+    selected_volk_name = ObjectProperty(None, allownone=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.voelker_auswahlen = {}
+        self.selected_volk_name = None
         self.dropdown_menu = None
         
         # Controller aus der App initialisieren
@@ -90,300 +134,285 @@ class VoelkerWidget(MDBoxLayout):
         """Initialisiert die Verbindung zum Controller aus der App."""
         try:
             app = App.get_running_app()
-            if hasattr(app, 'controller') and app.controller:
+            if hasattr(app, 'controller'):
                 self.controller = app.controller
-                Logger.debug(f"VoelkerWidget: Controller erfolgreich initialisiert")
-                
-                # Event-Bindung für Charakteränderungen
                 if hasattr(self.controller, 'charakter'):
                     self.controller.charakter.bind(on_charakter_change=self.aktualisiere_ui)
-                    Logger.debug("VoelkerWidget: Event-Bindung erstellt")
+                Logger.debug("VoelkerWidget: Controller erfolgreich initialisiert")
             else:
-                Logger.error("VoelkerWidget: App-Controller nicht verfügbar")
-                
+                Logger.warning("VoelkerWidget: Kein Controller in der App gefunden")
+                Clock.schedule_once(self._initialize_controller, 1.0)
         except Exception as e:
-            Logger.error(f"VoelkerWidget: Controller-Initialisierung fehlgeschlagen: {e}")
+            Logger.error(f"VoelkerWidget: Fehler bei Controller-Initialisierung: {e}")
+            Clock.schedule_once(self._initialize_controller, 1.0)
 
     def aktualisiere_ui(self, *args):
-        """Aktualisiert die UI basierend auf dem aktuellen Zustand des Charakters."""
+        """Aktualisiert die gesamte UI basierend auf den aktuellen Charakterdaten."""
         Logger.debug("VoelkerWidget: aktualisiere_ui aufgerufen")
         
         try:
             # Controller-Verfügbarkeit prüfen
-            if not self.controller:
-                self._initialize_controller()
-                
             if not self.controller or not hasattr(self.controller, 'charakter'):
                 Logger.warning("VoelkerWidget: Controller nicht verfügbar - Retry in 1s")
                 Clock.schedule_once(self.aktualisiere_ui, 1.0)
                 return
                 
             # UI-Container prüfen
-            if not hasattr(self, 'ids') or 'voelker_content_container' not in self.ids:
+            if not hasattr(self, 'ids') or 'chips_layout' not in self.ids:
                 Logger.debug("VoelkerWidget: UI-Container noch nicht verfügbar")
                 Clock.schedule_once(self.aktualisiere_ui, 0.5)
                 return
-                
-            container = self.ids.voelker_content_container
-            container.clear_widgets()
 
             charakter = self.controller.charakter
             
             # Völker-Daten prüfen
             if not hasattr(charakter, 'voelker') or not charakter.voelker:
-                placeholder = MDLabel(
-                    text="Keine Völker-Daten verfügbar",
-                    halign='center',
-                    theme_text_color="Secondary",
-                    font_style="Body",
-                    size_hint_y=None,
-                    height=dp(100)
-                )
-                container.add_widget(placeholder)
+                self._show_no_data_message()
                 return
             
-            # Sicherstellen, dass voelker_selected existiert
-            if not hasattr(charakter, 'voelker_selected'):
-                charakter.voelker_selected = {}
-                
-            for volk_name in charakter.voelker:
-                if volk_name not in charakter.voelker_selected:
-                    charakter.voelker_selected[volk_name] = False
+            # Völker-System initialisieren und bereinigen
+            initialisiere_voelker_system(charakter)
             
-            # Völker als Cards anzeigen
-            for volk_name, volk in charakter.voelker.items():
-                volk_card = self._create_volk_card(volk_name, volk)
-                container.add_widget(volk_card)
+            # Debug-Informationen ausgeben
+            status = get_voelker_status_info(charakter)
+            Logger.debug(f"Völker-Status: {status}")
+
+            # Aktuell ausgewähltes Volk ermitteln
+            selected_volk = get_selected_volk(charakter)
+            self.selected_volk_name = selected_volk.name if selected_volk else None
+
+            # UI-Komponenten aktualisieren
+            self._update_voelker_chips()
+            self._update_zusatzelemente()
+            self._update_selected_volk_details()
                 
             Logger.debug(f"VoelkerWidget: UI erfolgreich aktualisiert mit {len(charakter.voelker)} Völkern")
 
         except Exception as e:
             Logger.error(f"Fehler in aktualisiere_ui: {e}", exc_info=True)
 
-    def _create_volk_card(self, volk_name, volk):
-        """Erstellt eine MDCard für ein Volk - verhindert Textüberschneidung komplett."""
+    def _show_no_data_message(self):
+        """Zeigt eine Nachricht an, wenn keine Völker-Daten verfügbar sind."""
+        for container_id in ['chips_layout', 'zusatzelemente_container', 'selected_volk_container']:
+            if container_id in self.ids:
+                self.ids[container_id].clear_widgets()
         
-        # Höhe der Card basierend auf Inhalt berechnen
-        card_height = self._calculate_card_height(volk_name, volk)
+        if 'selected_volk_container' in self.ids:
+            placeholder = MDLabel(
+                text="Keine Völker-Daten verfügbar",
+                halign='center',
+                theme_text_color="Secondary",
+                font_style="Body",
+                size_hint_y=None,
+                height=dp(100)
+            )
+            self.ids.selected_volk_container.add_widget(placeholder)
+
+    def _update_voelker_chips(self):
+        """Aktualisiert die MDChips für die Völker-Auswahl."""
+        chips_layout = self.ids.chips_layout
+        chips_layout.clear_widgets()
         
-        # Hauptcard für das Volk
-        card = MDCard(
+        charakter = self.controller.charakter
+        voelker_count = len(charakter.voelker)
+        
+        # Optimale Anzahl Spalten für Grid-Layout berechnen
+        if voelker_count <= 8:
+            cols = min(voelker_count, 8)  # Eine Zeile für wenige Völker
+        else:
+            cols = max(6, (voelker_count + 1) // 2)  # Zwei Zeilen für viele Völker
+        
+        chips_layout.cols = cols
+        
+        # Einheitliche Chip-Breite berechnen
+        max_chip_width = dp(140)  # Feste Breite für bessere Anordnung
+        total_width = (max_chip_width * cols) + (dp(15) * (cols - 1)) + dp(60)
+        chips_layout.width = total_width
+        
+        for volk_name in sorted(charakter.voelker.keys()):  # Alphabetisch sortiert
+            ist_ausgewaehlt = charakter.voelker_selected.get(volk_name, False)
+            
+            # Chip erstellen
+            chip = MDChip(
+                size_hint_x=None,
+                size_hint_y=None,
+                width=max_chip_width,
+                height=dp(45),
+                radius=dp(22),
+                elevation=4 if ist_ausgewaehlt else 2,
+                md_bg_color=self.theme_cls.primaryColor if ist_ausgewaehlt else self.theme_cls.surfaceContainerColor,
+                on_release=lambda x, name=volk_name: self._on_volk_chip_selected(name)
+            )
+            
+            # Chip-Text
+            chip_text = MDChipText(
+                text=volk_name,
+                theme_text_color="Custom" if ist_ausgewaehlt else "Primary",
+                text_color=(1, 1, 1, 1) if ist_ausgewaehlt else None
+            )
+            
+            chip.add_widget(chip_text)
+            chips_layout.add_widget(chip)
+
+    def _on_volk_chip_selected(self, volk_name):
+        """Behandelt die Auswahl eines Völker-Chips."""
+        try:
+            charakter = self.controller.charakter
+            
+            # Prüfen ob bereits ausgewählt
+            current_selection = charakter.voelker_selected.get(volk_name, False)
+            
+            if current_selection:
+                # Bereits ausgewählt - abwählen
+                success = abwaehlen_volk(charakter, volk_name)
+                if success:
+                    self.selected_volk_name = None
+                    # Auswahlen zurücksetzen
+                    reset_volk_auswahlen(charakter, volk_name, self.voelker_auswahlen)
+                    Logger.info(f"Volk '{volk_name}' abgewählt")
+                else:
+                    Logger.error(f"Fehler beim Abwählen von Volk '{volk_name}'")
+                    return
+            else:
+                # Nicht ausgewählt - auswählen
+                success = waehle_volk(charakter, volk_name)
+                if success:
+                    self.selected_volk_name = volk_name
+                    Logger.info(f"Volk '{volk_name}' ausgewählt")
+                else:
+                    Logger.error(f"Fehler beim Auswählen von Volk '{volk_name}'")
+                    return
+            
+            # UI-Updates mit leichter Verzögerung für bessere Performance
+            Clock.schedule_once(lambda dt: self._update_voelker_chips(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Volk-Auswahl: {e}", exc_info=True)
+
+    def _update_zusatzelemente(self):
+        """Aktualisiert die Zusatzelemente-Bereiche."""
+        zusatzelemente_container = self.ids.zusatzelemente_container
+        zusatzelemente_container.clear_widgets()
+        
+        if not self.selected_volk_name:
+            return
+            
+        charakter = self.controller.charakter
+        
+        # Verfügbare Zusatzelemente von der Geschäftslogik abrufen
+        zusatzelemente = get_volk_zusatzelemente(charakter, self.selected_volk_name)
+        
+        sections_added = 0
+        
+        # Freie Talente Sektion
+        if zusatzelemente.get('freie_talente', False):
+            talent_section = self._create_zusatzelement_section(
+                "Freies Anfängertalent",
+                self.selected_volk_name,
+                'talent',
+                lambda: get_freie_talente(charakter),
+                lambda talent: self._select_talent(self.selected_volk_name, talent),
+                "Wähle ein freies Anfängertalent"
+            )
+            zusatzelemente_container.add_widget(talent_section)
+            sections_added += 1
+
+        # Erhöhte Attribute Sektion - verwende spezifische Attribut-Optionen
+        if zusatzelemente.get('freie_attribute', False):
+            attribut_optionen = zusatzelemente.get('attribut_optionen', [])
+            
+            # Bestimme den Titel basierend auf der Anzahl der Optionen
+            if len(attribut_optionen) == 2:
+                titel = f"Attribut wählen ({' oder '.join(attribut_optionen)})"
+            elif len(attribut_optionen) > 2:
+                titel = "Freies Attribut"
+            else:
+                titel = "Freies Attribut"
+            
+            attribut_section = self._create_zusatzelement_section(
+                titel,
+                self.selected_volk_name,
+                'attribut',
+                lambda: attribut_optionen,  # Verwende spezifische Optionen
+                lambda attribut: self._select_attribut(self.selected_volk_name, attribut),
+                "Wähle ein Attribut"
+            )
+            zusatzelemente_container.add_widget(attribut_section)
+            sections_added += 1
+
+        # Verstandsbasierte Fertigkeiten Sektion
+        if zusatzelemente.get('freie_fertigkeiten', False):
+            fertigkeit_section = self._create_zusatzelement_section(
+                "Verstandsbasierte Fertigkeit",
+                self.selected_volk_name,
+                'fertigkeit',
+                lambda: get_verfuegbare_fertigkeiten(charakter, nur_verstand=True),
+                lambda fertigkeit: self._select_fertigkeit(self.selected_volk_name, fertigkeit),
+                "Wähle eine Fertigkeit"
+            )
+            zusatzelemente_container.add_widget(fertigkeit_section)
+            sections_added += 1
+            
+        Logger.debug(f"Zusatzelemente für Volk '{self.selected_volk_name}' aktualisiert - {sections_added} Sektionen")
+        
+        # Debug-Info für Attribut-Optionen ausgeben
+        if zusatzelemente.get('freie_attribute', False):
+            Logger.info(f"Volk '{self.selected_volk_name}' hat Attribut-Optionen: {zusatzelemente.get('attribut_optionen', [])}")
+
+    def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text):
+        """Erstellt eine Sektion für Zusatzelemente."""
+        
+        # Hauptcontainer für die Sektion
+        section_card = MDCard(
             size_hint_y=None,
-            height=card_height,
-            padding=dp(20),
-            spacing=dp(12),
+            height=dp(140),
+            padding=dp(25),
+            spacing=dp(15),
             elevation=3,
-            radius=[8],
-            md_bg_color=self.theme_cls.surfaceContainerColor,
+            radius=[12],
+            md_bg_color=self.theme_cls.surfaceContainerHighColor,
             style="elevated"
         )
         
-        # Hauptcontainer innerhalb der Card
-        card_content = MDBoxLayout(
+        section_content = MDBoxLayout(
             orientation='vertical',
             size_hint_y=None,
-            height=card_height - dp(60),  # Mehr Abzug für Card-Padding + Sicherheitspuffer
-            spacing=dp(12)
-        )
-        
-        # 1. Header-Bereich (Name + Checkbox)
-        header_section = self._create_header_section(volk_name)
-        card_content.add_widget(header_section)
-        
-        # 2. Auswahl-Bereich (falls vorhanden)
-        auswahl_section = self._create_auswahl_section(volk_name, volk)
-        if auswahl_section:
-            card_content.add_widget(auswahl_section)
-        
-        # 3. Detail-Bereich (Handicaps, Talente, etc.)
-        detail_section = self._create_detail_section(volk)
-        if detail_section:
-            card_content.add_widget(detail_section)
-        
-        # Content zur Card hinzufügen
-        card.add_widget(card_content)
-        
-        return card
-
-    def _calculate_card_height(self, volk_name, volk):
-        """Berechnet die notwendige Höhe für eine Volk-Card basierend auf dem Inhalt."""
-        
-        base_height = dp(120)  # Grundhöhe (Header + Padding) - erhöht
-        
-        # Auswahl-Optionen zählen
-        auswahl_count = 0
-        if self._hat_freies_talent(volk_name, volk):
-            auswahl_count += 1
-        if self._hat_freies_attribut(volk_name, volk):
-            auswahl_count += 1
-        if self._hat_freie_fertigkeit(volk_name, volk):
-            auswahl_count += 1
-        
-        auswahl_height = auswahl_count * dp(85)  # Jede Auswahl braucht 85dp - erhöht
-        
-        # Detail-Items zählen und Textlänge berücksichtigen
-        detail_height = 0
-        kategorien = [
-            ('Handicaps', getattr(volk, 'handicaps', [])),
-            ('Talente', getattr(volk, 'talente', [])),
-            ('Besonderheiten', getattr(volk, 'besonderheiten', []))
-        ]
-        
-        for kategorie, items in kategorien:
-            if items:
-                detail_height += dp(35)  # Kategorie-Header
-                for item in items:
-                    # Geschätzte Höhe basierend auf Textlänge
-                    text_length = len(item)
-                    if text_length > 100:  # Sehr langer Text
-                        detail_height += dp(70)  # Doppelte Höhe
-                    elif text_length > 50:  # Mittellanger Text
-                        detail_height += dp(50)  # 1.5x Höhe
-                    else:  # Kurzer Text
-                        detail_height += dp(35)  # Normale Höhe
-        
-        # Gesamthöhe berechnen
-        total_height = base_height + auswahl_height + detail_height + dp(80)  # Größerer Buffer
-        
-        # Mindesthöhe sicherstellen
-        return max(total_height, dp(250))  # Mindesthöhe erhöht
-
-    def _create_header_section(self, volk_name):
-        """Erstellt den Header-Bereich mit Name und Checkbox."""
-        header = MDBoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-            height=dp(60),  # Feste Höhe für Header
+            height=dp(90),
             spacing=dp(15)
         )
         
-        # Volk-Name Label - mit ausreichend Platz
-        name_label = MDLabel(
-            text=volk_name,
-            font_style="Title",
-            theme_text_color="Primary",
-            size_hint_x=0.85,
-            size_hint_y=None,
-            height=dp(60),  # Feste Höhe für bessere Lesbarkeit
-            halign='left',
-            valign='center'
-        )
-        # Wichtig: Text-Wrapping aktivieren
-        name_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-        
-        # Checkbox
-        is_active = self.controller.charakter.voelker_selected.get(volk_name, False)
-        checkbox = MDCheckbox(
-            active=is_active,
-            size_hint_x=None,
-            width=dp(50),
-            selected_color=self.theme_cls.primary_color
-        )
-        checkbox.bind(active=lambda instance, value, volk_name=volk_name: 
-                    self._on_checkbox_active(instance, value, volk_name))
-        
-        header.add_widget(name_label)
-        header.add_widget(checkbox)
-        
-        return header
-
-    def _create_auswahl_section(self, volk_name, volk):
-        """Erstellt den Auswahl-Bereich für völker-spezifische Optionen."""
-        is_active = self.controller.charakter.voelker_selected.get(volk_name, False)
-        auswahl = self.voelker_auswahlen.get(volk_name, {})
-        
-        # Anzahl der Auswahl-Optionen zählen
-        auswahl_count = 0
-        if self._hat_freies_talent(volk_name, volk):
-            auswahl_count += 1
-        if self._hat_freies_attribut(volk_name, volk):
-            auswahl_count += 1
-        if self._hat_freie_fertigkeit(volk_name, volk):
-            auswahl_count += 1
-        
-        if auswahl_count == 0:
-            return None
-        
-        # Container für alle Auswahl-Optionen mit berechneter Höhe
-        auswahl_container = MDBoxLayout(
-            orientation='vertical',
-            size_hint_y=None,
-            height=auswahl_count * dp(85),  # Feste Höhe basierend auf Anzahl - erhöht
-            spacing=dp(10)
-        )
-        
-        # Freies Talent
-        if self._hat_freies_talent(volk_name, volk):
-            talent_section = self._create_single_auswahl(
-                "Freies Talent",
-                auswahl.get('talent', DEFAULT_TALENT_TEXT),
-                lambda: self.show_talent_search_dialog(None, volk_name),
-                is_active
-            )
-            auswahl_container.add_widget(talent_section)
-        
-        # Freies Attribut
-        if self._hat_freies_attribut(volk_name, volk):
-            attribut_section = self._create_single_auswahl(
-                "Freies Attribut",
-                auswahl.get('attribut', DEFAULT_ATTRIBUT_TEXT),
-                lambda: self.show_attribut_search_dialog(None, volk_name),
-                is_active
-            )
-            auswahl_container.add_widget(attribut_section)
-        
-        # Freie Fertigkeit
-        if self._hat_freie_fertigkeit(volk_name, volk):
-            fertigkeit_section = self._create_single_auswahl(
-                "Freie Fertigkeit",
-                auswahl.get('fertigkeit', DEFAULT_FERTIGKEIT_TEXT),
-                lambda: self.show_fertigkeit_search_dialog(None, volk_name),
-                is_active
-            )
-            auswahl_container.add_widget(fertigkeit_section)
-        
-        return auswahl_container
-
-    def _create_single_auswahl(self, titel, auswahl_text, callback, is_active):
-        """Erstellt eine einzelne Auswahl-Option innerhalb der Card."""
-        
-        # Container für eine Auswahl-Option mit fester Höhe
-        auswahl_box = MDBoxLayout(
-            orientation='vertical',
-            size_hint_y=None,
-            height=dp(80),  # Feste Höhe für jede Auswahl - angepasst an Berechnung
-            spacing=dp(5)
-        )
-        
-        # Titel der Auswahl
+        # Titel der Sektion
         titel_label = MDLabel(
             text=f"{titel}:",
-            font_style="Body",
-            theme_text_color="Secondary",
+            font_style="Title",
+            theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(30),  # Erhöht für bessere Lesbarkeit
+            height=dp(35),
             halign='left',
-            valign='center'
+            valign='center',
+            bold=True
         )
-        titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
         
-        # Auswahl-Zeile mit Text und Button
+        # Auswahl-Bereich
         auswahl_row = MDBoxLayout(
             orientation='horizontal',
             size_hint_y=None,
-            height=dp(40),  # Erhöht für bessere Lesbarkeit
-            spacing=dp(10)
+            height=dp(55),
+            spacing=dp(20)
         )
         
+        # Aktuell ausgewählten Text ermitteln
+        current_selection = self.voelker_auswahlen.get(volk_name, {}).get(auswahl_typ, placeholder_text)
+        text_color = "Primary" if current_selection != placeholder_text else "Secondary"
+        
         # Auswahl-Text
-        text_color = "Primary" if auswahl_text not in [DEFAULT_TALENT_TEXT, DEFAULT_ATTRIBUT_TEXT, DEFAULT_FERTIGKEIT_TEXT] else "Secondary"
         auswahl_label = MDLabel(
-            text=auswahl_text,
+            text=current_selection,
             font_style="Body",
             theme_text_color=text_color,
-            size_hint_x=0.8,
-            size_hint_y=None,
-            height=dp(40),  # Feste Höhe für bessere Lesbarkeit
+            size_hint_x=0.7,
             halign='left',
             valign='center'
         )
@@ -393,385 +422,511 @@ class VoelkerWidget(MDBoxLayout):
         dropdown_button = MDIconButton(
             icon="chevron-down",
             size_hint=(None, None),
-            size=(dp(40), dp(40)),
-            on_release=lambda x: callback(),
-            disabled=not is_active
+            size=(dp(55), dp(55)),
+            on_release=lambda x: self._show_dropdown_menu(
+                get_options_func(),
+                select_func,
+                dropdown_button
+            )
         )
         
         auswahl_row.add_widget(auswahl_label)
         auswahl_row.add_widget(dropdown_button)
         
-        auswahl_box.add_widget(titel_label)
-        auswahl_box.add_widget(auswahl_row)
+        section_content.add_widget(titel_label)
+        section_content.add_widget(auswahl_row)
         
-        return auswahl_box
+        section_card.add_widget(section_content)
+        
+        return section_card
 
-    def _create_detail_section(self, volk):
-        """Erstellt den Detail-Bereich für Völker-Informationen."""
+    def _show_dropdown_menu(self, items, callback, caller):
+        """Zeigt ein verbessertes Dialog-Menü mit Suchfeld."""
+        if hasattr(self, 'dropdown_menu') and self.dropdown_menu:
+            self.dropdown_menu.dismiss()
         
-        # Kategorien definieren
-        kategorien = [
-            ('Handicaps', getattr(volk, 'handicaps', [])),
-            ('Talente', getattr(volk, 'talente', [])),
-            ('Besonderheiten', getattr(volk, 'besonderheiten', []))
-        ]
+        # Items validieren
+        Logger.debug(f"Dialog-Items: {items}")
         
-        # Höhe basierend auf Textlänge berechnen
-        detail_height = 0
-        for kategorie, items in kategorien:
-            if items:
-                detail_height += dp(35)  # Kategorie-Header
-                for item in items:
-                    # Geschätzte Höhe basierend auf Textlänge
-                    text_length = len(item)
-                    if text_length > 100:  # Sehr langer Text
-                        detail_height += dp(70)  # Doppelte Höhe
-                    elif text_length > 50:  # Mittellanger Text
-                        detail_height += dp(50)  # 1.5x Höhe
-                    else:  # Kurzer Text
-                        detail_height += dp(35)  # Normale Höhe
-        
-        if detail_height == 0:
-            return None
-        
-        # Container für alle Detail-Kategorien mit berechneter Höhe
-        detail_container = MDBoxLayout(
-            orientation='vertical',
-            size_hint_y=None,
-            height=detail_height,  # Dynamische Höhe basierend auf Textlänge
-            spacing=dp(5)
+        if not items:
+            Logger.warning("Keine Items für Dialog verfügbar")
+            return
+            
+        if len(items) == 1 and items[0] in [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT]:
+            Logger.warning(f"Nur Fehlermeldung verfügbar: {items[0]}")
+            return
+
+        try:
+            # Erstelle Search-Dialog statt Dropdown
+            self._show_search_dialog(items, callback, caller)
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen des Dialog-Menüs: {e}", exc_info=True)
+
+    def _show_search_dialog(self, items, callback, caller):
+        """Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
+        from kivymd.uix.dialog import (
+            MDDialog, MDDialogHeadlineText, MDDialogButtonContainer, 
+            MDDialogContentContainer
         )
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
+        from kivymd.uix.scrollview import MDScrollView
         
-        for kategorie, items in kategorien:
-            if items:
-                # Kategorie-Überschrift
-                kategorie_label = MDLabel(
-                    text=f"{kategorie}:",
-                    font_style="Body",
-                    theme_text_color="Secondary",
-                    size_hint_y=None,
-                    height=dp(35),  # Einheitliche Höhe für Kategorie-Header
-                    halign='left',
-                    valign='top'  # Top-Alignment für bessere Lesbarkeit
-                )
-                kategorie_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-                detail_container.add_widget(kategorie_label)
-                
-                # Items der Kategorie
-                for item in items:
-                    # Höhe basierend auf Textlänge
-                    text_length = len(item)
-                    if text_length > 100:  # Sehr langer Text
-                        item_height = dp(70)
-                    elif text_length > 50:  # Mittellanger Text
-                        item_height = dp(50)
-                    else:  # Kurzer Text
-                        item_height = dp(35)
-                    
-                    item_label = MDLabel(
-                        text=f"  • {item}",
-                        font_style="Body",
-                        theme_text_color="Secondary",
-                        size_hint_y=None,
-                        height=item_height,  # Dynamische Höhe
-                        halign='left',
-                        valign='top'  # Top-Alignment für bessere Lesbarkeit
+        try:
+            # Hauptcontainer für den Dialog
+            dialog_content = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(15),
+                padding=dp(20),
+                adaptive_height=True
+            )
+            
+            # Suchfeld
+            search_field = MDTextField(
+                mode="outlined",
+                size_hint_y=None,
+                height=dp(56)
+            )
+            search_hint = MDTextFieldHintText(text="Suchen...")
+            search_field.add_widget(search_hint)
+            
+            # Scrollbare Liste
+            scroll_view = MDScrollView(
+                size_hint_y=None,
+                height=dp(300)
+            )
+            
+            items_list = MDList(
+                adaptive_height=True
+            )
+            
+            # Items zur Liste hinzufügen
+            for item in sorted(items):
+                if item and str(item).strip():
+                    list_item = MDListItem(
+                        adaptive_height=True,
+                        on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
                     )
-                    # Wichtig: Text-Wrapping für lange Beschreibungen
-                    item_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-                    detail_container.add_widget(item_label)
-        
-        return detail_container
+                    list_item.add_widget(MDListItemHeadlineText(text=str(item)))
+                    items_list.add_widget(list_item)
+            
+            scroll_view.add_widget(items_list)
+            
+            # Such-Funktionalität
+            def filter_items(instance, text):
+                items_list.clear_widgets()
+                search_text = text.lower()
+                
+                filtered_items = [item for item in sorted(items) 
+                                if item and search_text in str(item).lower()]
+                
+                for item in filtered_items:
+                    list_item = MDListItem(
+                        adaptive_height=True,
+                        on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
+                    )
+                    list_item.add_widget(MDListItemHeadlineText(text=str(item)))
+                    items_list.add_widget(list_item)
+            
+            search_field.bind(text=filter_items)
+            
+            # Container zusammenbauen
+            dialog_content.add_widget(search_field)
+            dialog_content.add_widget(scroll_view)
+            
+            # Dialog erstellen
+            self.search_dialog = MDDialog(
+                MDDialogHeadlineText(text="Auswahl treffen"),
+                MDDialogContentContainer(
+                    dialog_content,
+                    orientation="vertical",
+                    padding=dp(0),
+                ),
+                MDDialogButtonContainer(
+                    MDButton(
+                        MDButtonText(text="Abbrechen"),
+                        style="text",
+                        on_release=lambda x: self.search_dialog.dismiss(),
+                    ),
+                    spacing="8dp",
+                ),
+            )
+            
+            self.search_dialog.open()
+            Logger.debug(f"Search-Dialog erfolgreich geöffnet mit {len(items)} Items")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Search-Dialog: {e}", exc_info=True)
 
-    def _on_checkbox_active(self, checkbox, value, volk_name):
-        """Event-Handler für Checkbox-Änderungen."""
+    def _on_search_dialog_item_selected(self, callback, item):
+        """Behandelt die Auswahl eines Items im Search-Dialog."""
+        try:
+            Logger.debug(f"Search-Dialog-Item ausgewählt: {item}")
+            
+            if hasattr(self, 'search_dialog'):
+                self.search_dialog.dismiss()
+                
+            # Überprüfen ob es sich um eine Fehlermeldung handelt
+            if item in [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT]:
+                Logger.warning(f"Fehlermeldung ausgewählt: {item}")
+                return
+                
+            # Callback ausführen
+            if callback:
+                callback(item)
+                Logger.debug(f"Callback für Item '{item}' ausgeführt")
+            else:
+                Logger.warning("Kein Callback für Dialog-Auswahl definiert")
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Search-Dialog-Auswahl: {e}", exc_info=True)
+
+    def _on_dropdown_item_selected(self, callback, item):
+        """Behandelt die Auswahl eines Dropdown-Items."""
+        try:
+            Logger.debug(f"Dropdown-Item ausgewählt: {item}")
+            
+            if self.dropdown_menu:
+                self.dropdown_menu.dismiss()
+                
+            # Überprüfen ob es sich um eine Fehlermeldung handelt
+            if item in [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT]:
+                Logger.warning(f"Fehlermeldung ausgewählt: {item}")
+                return
+                
+            # Callback ausführen
+            if callback:
+                callback(item)
+                Logger.debug(f"Callback für Item '{item}' ausgeführt")
+            else:
+                Logger.warning("Kein Callback für Dropdown-Auswahl definiert")
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Dropdown-Auswahl: {e}", exc_info=True)
+
+    # === AUSWAHL-FUNKTIONEN (rufen jetzt volk_funktionen.py auf) ===
+    
+    def _select_talent(self, volk_name, talent_name):
+        """Wählt ein Talent aus (UI-Wrapper für Geschäftslogik)."""
         try:
             charakter = self.controller.charakter
-            charakter.voelker_selected[volk_name] = value
             
-            if not value:
-                self._remove_volk_auswahl(volk_name)
+            # Geschäftslogik aufrufen
+            success = waehle_freies_talent(charakter, volk_name, talent_name)
             
-            # UI aktualisieren
-            Clock.schedule_once(self.aktualisiere_ui, 0.1)
-            charakter.dispatch('on_charakter_change')
-
+            if success:
+                # UI-lokale Auswahl speichern für Anzeige
+                if volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[volk_name] = {}
+                self.voelker_auswahlen[volk_name]['talent'] = talent_name
+                
+                # UI aktualisieren
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                
         except Exception as e:
-            Logger.error(f"Fehler in _on_checkbox_active: {e}")
+            Logger.error(f"Fehler bei Talent-Auswahl (UI): {e}", exc_info=True)
 
-    def _hat_freies_talent(self, volk_name, volk):
-        return (volk_name == "Mensch" or 
-                (hasattr(volk, 'has_wahlmoeglichkeit') and volk.has_wahlmoeglichkeit('freies_talent')))
+    def _select_attribut(self, volk_name, attribut_name):
+        """Wählt ein Attribut aus (UI-Wrapper für Geschäftslogik)."""
+        try:
+            charakter = self.controller.charakter
+            
+            # Geschäftslogik aufrufen
+            success = waehle_freies_attribut(charakter, volk_name, attribut_name)
+            
+            if success:
+                # UI-lokale Auswahl speichern für Anzeige
+                if volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[volk_name] = {}
+                self.voelker_auswahlen[volk_name]['attribut'] = attribut_name
+                
+                # UI aktualisieren
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Attribut-Auswahl (UI): {e}", exc_info=True)
 
-    def _hat_freies_attribut(self, volk_name, volk):
-        return ((volk_name == "Mensch" and self._ist_savage_pathfinder_aktiv()) or
-                volk_name == "Halbelf" or
-                (hasattr(volk, 'has_wahlmoeglichkeit') and volk.has_wahlmoeglichkeit('freies_attribut')))
+    def _select_fertigkeit(self, volk_name, fertigkeit_name):
+        """Wählt eine Fertigkeit aus (UI-Wrapper für Geschäftslogik)."""
+        try:
+            charakter = self.controller.charakter
+            
+            # Geschäftslogik aufrufen
+            success = waehle_freie_fertigkeit(charakter, volk_name, fertigkeit_name)
+            
+            if success:
+                # UI-lokale Auswahl speichern für Anzeige
+                if volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[volk_name] = {}
+                self.voelker_auswahlen[volk_name]['fertigkeit'] = fertigkeit_name
+                
+                # UI aktualisieren  
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Fertigkeiten-Auswahl (UI): {e}", exc_info=True)
 
-    def _hat_freie_fertigkeit(self, volk_name, volk):
-        return (volk_name == "Gnom" or
-                (hasattr(volk, 'has_wahlmoeglichkeit') and volk.has_wahlmoeglichkeit('freie_verstandsfertigkeit')))
-
-    def _ist_savage_pathfinder_aktiv(self):
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            return False
-        charakter = self.controller.charakter
-        if hasattr(charakter, 'setting_regeln') and charakter.setting_regeln:
-            return charakter.setting_regeln.savage_pathfinder
-        return False
-
-    def _remove_volk_auswahl(self, volk_name):
-        """Entfernt alle Auswahlen für ein bestimmtes Volk."""
-        if volk_name not in self.voelker_auswahlen:
+    def _update_selected_volk_details(self):
+        """Aktualisiert die Details des ausgewählten Volks."""
+        selected_volk_container = self.ids.selected_volk_container
+        selected_volk_container.clear_widgets()
+        
+        if not self.selected_volk_name:
+            placeholder = MDLabel(
+                text="Wähle ein Volk aus den Chips oben aus",
+                halign='center',
+                theme_text_color="Secondary",
+                font_style="Body",
+                size_hint_y=None,
+                height=dp(60)
+            )
+            selected_volk_container.add_widget(placeholder)
             return
             
         charakter = self.controller.charakter
-        auswahl = self.voelker_auswahlen[volk_name]
+        volk = charakter.voelker.get(self.selected_volk_name)
         
-        # Alle Auswahlen zurücksetzen
-        for auswahl_typ in ['talent', 'attribut', 'fertigkeit']:
-            if auswahl_typ in auswahl:
-                if auswahl_typ == 'talent':
-                    talent_name = auswahl[auswahl_typ]
-                    if hasattr(charakter, 'selected_talente') and talent_name in charakter.selected_talente:
-                        charakter.selected_talente.remove(talent_name)
-                    if hasattr(charakter, 'talente') and talent_name in charakter.talente:
-                        charakter.talente[talent_name].ausgewaehlt = False
-                elif auswahl_typ == 'attribut':
-                    attribut_name = auswahl[auswahl_typ]
-                    if hasattr(charakter, 'attribute') and attribut_name in charakter.attribute:
-                        charakter.attribute[attribut_name].wert -= 1
-                elif auswahl_typ == 'fertigkeit':
-                    fertigkeit_name = auswahl[auswahl_typ]
-                    if hasattr(charakter, 'fertigkeiten') and fertigkeit_name in charakter.fertigkeiten:
-                        charakter.fertigkeiten[fertigkeit_name].wert -= 1
+        if not volk:
+            error_label = MDLabel(
+                text=f"Fehler: Volk '{self.selected_volk_name}' nicht gefunden",
+                halign='center',
+                theme_text_color="Error",
+                font_style="Body",
+                size_hint_y=None,
+                height=dp(60)
+            )
+            selected_volk_container.add_widget(error_label)
+            return
+
+        try:
+            # Volk-Details Cards erstellen
+            volk_details = self._create_volk_details_cards(self.selected_volk_name, volk)
+            for card in volk_details:
+                selected_volk_container.add_widget(card)
+                
+            Logger.debug(f"Volk-Details für '{self.selected_volk_name}' erfolgreich angezeigt")
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Volk-Details-Erstellung: {e}", exc_info=True)
+            error_label = MDLabel(
+                text=f"Fehler beim Laden der Volk-Details: {str(e)}",
+                halign='center',
+                theme_text_color="Error",
+                font_style="Body",
+                size_hint_y=None,
+                height=dp(60)
+            )
+            selected_volk_container.add_widget(error_label)
+
+    def _create_volk_details_cards(self, volk_name, volk):
+        """Erstellt Cards mit den Details des ausgewählten Volks."""
+        cards = []
         
-        # Auswahl zurücksetzen
-        del self.voelker_auswahlen[volk_name]
-
-    # Erweiterte Dialog-Methoden mit verbesserter UX  
-    def show_talent_search_dialog(self, button, volk_name):
-        """Zeigt erweiterten Dialog für Talent-Auswahl."""
         try:
-            freie_talente = self._get_freie_talente()
-            if not freie_talente or freie_talente == [NO_TALENT_AVAILABLE_TEXT]:
-                return
+            # Header-Card
+            header_card = self._create_header_card(volk_name)
+            cards.append(header_card)
             
-            self._show_improved_dropdown(
-                title="Freies Talent auswählen:",
-                items=freie_talente,
-                callback=lambda talent: self._select_talent(volk_name, talent),
-                caller=button if button else self
-            )
-            
-        except Exception as e:
-            Logger.error(f"Fehler beim Talent-Dialog: {e}")
-
-    def show_attribut_search_dialog(self, button, volk_name):
-        """Zeigt erweiterten Dialog für Attribut-Auswahl."""
-        try:
-            verfuegbare_attribute = self._get_verfuegbare_attribute()
-            if not verfuegbare_attribute:
-                return
-            
-            self._show_improved_dropdown(
-                title="Freies Attribut auswählen:",
-                items=verfuegbare_attribute,
-                callback=lambda attribut: self._select_attribut(volk_name, attribut),
-                caller=button if button else self
-            )
-            
-        except Exception as e:
-            Logger.error(f"Fehler beim Attribut-Dialog: {e}")
-
-    def show_fertigkeit_search_dialog(self, button, volk_name):
-        """Zeigt erweiterten Dialog für Fertigkeiten-Auswahl."""
-        try:
-            verfuegbare_fertigkeiten = self._get_verfuegbare_fertigkeiten()
-            if not verfuegbare_fertigkeiten:
-                return
-            
-            self._show_improved_dropdown(
-                title="Freie Fertigkeit auswählen:",
-                items=verfuegbare_fertigkeiten,
-                callback=lambda fertigkeit: self._select_fertigkeit(volk_name, fertigkeit),
-                caller=button if button else self
-            )
-            
-        except Exception as e:
-            Logger.error(f"Fehler beim Fertigkeiten-Dialog: {e}")
-
-    def _show_improved_dropdown(self, title, items, callback, caller):
-        """Zeigt ein verbessertes Dropdown-Menü mit Titel."""
-        try:
-            # Titel und Items kombinieren
-            menu_items = []
-            
-            # Titel als erstes Element (leer on_release = nicht klickbar)
-            menu_items.append({
-                "text": f"🔍 {title}",
-                "on_release": lambda: None,  # Leer = nicht klickbar
-            })
-            
-            # Trennlinie
-            menu_items.append({
-                "text": "─" * 25,
-                "on_release": lambda: None,  # Leer = nicht klickbar
-            })
-            
-            # Eigentliche Items hinzufügen
-            for item in items:
-                menu_items.append({
-                    "text": f"  {item}",
-                    "on_release": lambda x=item: self._handle_dropdown_selection(callback, x),
-                })
-            
-            # Dropdown-Menü erstellen und anzeigen
-            self.dropdown_menu = MDDropdownMenu(
-                caller=caller,
-                items=menu_items,
-                width=dp(350),  # Breiter für bessere Lesbarkeit
-                max_height=dp(400)  # Maximale Höhe für Scrolling
-            )
-            self.dropdown_menu.open()
-            
-        except Exception as e:
-            Logger.error(f"Fehler beim Erstellen des Dropdown-Menüs: {e}")
-            # Fallback: Einfaches Dropdown ohne Titel
-            self._show_simple_dropdown(items, callback, caller)
-
-    def _show_simple_dropdown(self, items, callback, caller):
-        """Fallback: Einfaches Dropdown ohne spezielle Features."""
-        try:
-            menu_items = [
-                {
-                    "text": item,
-                    "on_release": lambda x=item: self._handle_dropdown_selection(callback, x),
-                } for item in items
+            # Detail-Cards für verfügbare Eigenschaften
+            properties = [
+                ('handicaps', 'Handicaps', 'error'),
+                ('talente', 'Talente', 'success'),
+                ('besonderheiten', 'Besonderheiten', 'info')
             ]
             
-            self.dropdown_menu = MDDropdownMenu(
-                caller=caller,
-                items=menu_items,
-                width=dp(300)
+            for prop_name, title, card_type in properties:
+                content = getattr(volk, prop_name, None)
+                if content and self._is_valid_content(content):
+                    detail_card = self._create_detail_card(title, content, card_type)
+                    cards.append(detail_card)
+            
+            # Falls keine Detail-Cards erstellt wurden
+            if len(cards) == 1:  # Nur Header-Card
+                info_card = self._create_info_card()
+                cards.append(info_card)
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Card-Erstellung für '{volk_name}': {e}")
+            # Minimal-Fallback
+            fallback_card = MDLabel(
+                text=f"Fehler beim Laden der Details für {volk_name}",
+                halign='center',
+                theme_text_color="Error",
+                size_hint_y=None,
+                height=dp(60)
             )
-            self.dropdown_menu.open()
-            
-        except Exception as e:
-            Logger.error(f"Fehler beim Fallback-Dropdown: {e}")
+            cards = [fallback_card]
+        
+        return cards
 
-    def _handle_dropdown_selection(self, callback, item):
-        """Behandelt die Auswahl aus dem Dropdown-Menü."""
-        try:
-            if self.dropdown_menu:
-                self.dropdown_menu.dismiss()
-            callback(item)
-        except Exception as e:
-            Logger.error(f"Fehler bei Dropdown-Auswahl: {e}")
+    def _create_header_card(self, volk_name):
+        """Erstellt die Header-Card für das Volk."""
+        header_card = MDCard(
+            size_hint_y=None,
+            height=dp(90),
+            padding=dp(25),
+            elevation=4,
+            radius=[12],
+            md_bg_color=self.theme_cls.primaryColor,
+            style="elevated"
+        )
+        
+        header_label = MDLabel(
+            text=volk_name,
+            font_style="Headline",
+            theme_text_color="Custom",
+            text_color=(1, 1, 1, 1),
+            size_hint_y=None,
+            height=dp(40),
+            halign='center',
+            valign='center'
+        )
+        
+        header_card.add_widget(header_label)
+        return header_card
 
-    def _get_freie_talente(self):
-        """Gibt freie Talente zurück."""
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            return [NO_TALENT_AVAILABLE_TEXT]
-        try:
-            charakter = self.controller.charakter
-            frei_talente = []
-            if hasattr(charakter, 'talente') and charakter.talente:
-                for name, talent in charakter.talente.items():
-                    if hasattr(talent, 'aktiv') and hasattr(talent, 'ausgewaehlt'):
-                        if talent.aktiv and not talent.ausgewaehlt:
-                            frei_talente.append(name)
-            frei_talente.sort()
-            return frei_talente if frei_talente else [NO_TALENT_AVAILABLE_TEXT]
-        except Exception as e:
-            Logger.error(f"Fehler beim Abrufen freier Talente: {e}")
-            return [NO_TALENT_AVAILABLE_TEXT]
+    def _create_detail_card(self, titel, content, card_type="info"):
+        """Erstellt eine Detail-Card für Volk-Eigenschaften."""
+        
+        # Card-Farben
+        color_mapping = {
+            "error": self.theme_cls.errorContainerColor,
+            "success": self.theme_cls.surfaceContainerHighColor,
+            "info": self.theme_cls.surfaceContainerColor
+        }
+        bg_color = color_mapping.get(card_type, self.theme_cls.surfaceContainerColor)
+        
+        # Text formatieren
+        formatted_text = self._format_content(content)
+        
+        # Höhe berechnen
+        estimated_lines = max(formatted_text.count('\n') + 1, len(formatted_text) // 50 + 1, 2)
+        card_height = dp(80) + (estimated_lines * dp(30))
+        card_height = max(card_height, dp(130))
+        card_height = min(card_height, dp(450))
+        
+        # Card erstellen
+        detail_card = MDCard(
+            size_hint_y=None,
+            height=card_height,
+            padding=dp(30),
+            spacing=dp(20),
+            elevation=3,
+            radius=[12],
+            md_bg_color=bg_color,
+            style="elevated"
+        )
+        
+        card_content = MDBoxLayout(
+            orientation='vertical',
+            size_hint_y=None,
+            height=card_height - dp(60),
+            spacing=dp(20)
+        )
+        
+        # Titel
+        title_label = MDLabel(
+            text=f"{titel}:",
+            font_style="Title",
+            theme_text_color="Primary",
+            size_hint_y=None,
+            height=dp(35),
+            halign='left',
+            bold=True
+        )
+        
+        # Inhalt
+        content_label = MDLabel(
+            text=formatted_text,
+            font_style="Body",
+            theme_text_color="Primary",
+            size_hint_y=None,
+            height=card_height - dp(95),
+            halign='left',
+            valign='top',
+            text_size=(None, None)
+        )
+        
+        # Text-Wrapping
+        content_label.bind(size=lambda instance, size: setattr(
+            instance, 'text_size', (max(size[0] - dp(60), dp(200)), None)
+        ))
+        
+        card_content.add_widget(title_label)
+        card_content.add_widget(content_label)
+        detail_card.add_widget(card_content)
+        
+        return detail_card
 
-    def _get_verfuegbare_attribute(self):
-        """Gibt verfügbare Attribute zurück."""
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            return []
-        try:
-            charakter = self.controller.charakter
-            if hasattr(charakter, 'attribute') and charakter.attribute:
-                return list(charakter.attribute.keys())
-            return []
-        except Exception as e:
-            Logger.error(f"Fehler beim Abrufen der Attribute: {e}")
-            return []
+    def _create_info_card(self):
+        """Erstellt eine Info-Card für fehlende Details."""
+        info_card = MDCard(
+            size_hint_y=None,
+            height=dp(100),
+            padding=dp(25),
+            elevation=2,
+            radius=[12],
+            md_bg_color=self.theme_cls.surfaceContainerLowColor,
+            style="elevated"
+        )
+        
+        info_label = MDLabel(
+            text="Keine weiteren Details verfügbar",
+            font_style="Body",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=dp(50),
+            halign='center',
+            valign='center'
+        )
+        
+        info_card.add_widget(info_label)
+        return info_card
 
-    def _get_verfuegbare_fertigkeiten(self):
-        """Gibt verfügbare verstandsbasierte Fertigkeiten zurück."""
-        if not self.controller or not hasattr(self.controller, 'charakter'):
-            return []
-        try:
-            charakter = self.controller.charakter
-            verstandsfertigkeiten = []
-            if hasattr(charakter, 'fertigkeiten') and charakter.fertigkeiten:
-                for name, fertigkeit in charakter.fertigkeiten.items():
-                    if hasattr(fertigkeit, 'attribut') and fertigkeit.attribut == 'Verstand':
-                        verstandsfertigkeiten.append(name)
-            verstandsfertigkeiten.sort()
-            return verstandsfertigkeiten
-        except Exception as e:
-            Logger.error(f"Fehler beim Abrufen der Fertigkeiten: {e}")
-            return []
+    def _is_valid_content(self, content):
+        """Prüft ob der Inhalt gültig und nicht leer ist."""
+        if content is None:
+            return False
+        if isinstance(content, list):
+            return len(content) > 0 and any(item and str(item).strip() for item in content)
+        if isinstance(content, str):
+            return content.strip() != ""
+        return bool(content)
 
-    def _select_talent(self, volk_name, talent_name):
-        """Wählt ein Talent aus."""
+    def _format_content(self, content):
+        """Formatiert den Inhalt für bessere Darstellung."""
         try:
-            if hasattr(self, 'dropdown_menu') and self.dropdown_menu:
-                self.dropdown_menu.dismiss()
-            if talent_name == NO_TALENT_AVAILABLE_TEXT:
-                return
-            if volk_name not in self.voelker_auswahlen:
-                self.voelker_auswahlen[volk_name] = {}
-            self.voelker_auswahlen[volk_name]['talent'] = talent_name
-            
-            charakter = self.controller.charakter
-            if hasattr(charakter, 'talente') and talent_name in charakter.talente:
-                charakter.talente[talent_name].ausgewaehlt = True
-                if hasattr(charakter, 'selected_talente'):
-                    if talent_name not in charakter.selected_talente:
-                        charakter.selected_talente.append(talent_name)
-            
-            Logger.info(f"Talent '{talent_name}' für '{volk_name}' ausgewählt")
-            self.aktualisiere_ui()
+            if isinstance(content, list):
+                valid_items = [str(item).strip() for item in content if item and str(item).strip()]
+                if not valid_items:
+                    return "Keine Details verfügbar"
+                return "\n".join([f"• {item}" for item in valid_items])
+            else:
+                text = str(content).strip()
+                if not text:
+                    return "Keine Details verfügbar"
+                
+                # Lange kommaseparierte Listen formatieren
+                if ", " in text and len(text) > 80:
+                    parts = [part.strip() for part in text.split(", ") if part.strip()]
+                    return "\n".join([f"• {part}" for part in parts])
+                
+                # Lange Texte bei Satzzeichen umbrechen
+                if len(text) > 100:
+                    sentences = []
+                    current = ""
+                    for char in text:
+                        current += char
+                        if char in '.!?' and len(current) > 40:
+                            sentences.append(current.strip())
+                            current = ""
+                    if current.strip():
+                        sentences.append(current.strip())
+                    return "\n".join(sentences) if len(sentences) > 1 else text
+                
+                return text
         except Exception as e:
-            Logger.error(f"Fehler bei Talent-Auswahl: {e}")
-
-    def _select_attribut(self, volk_name, attribut_name):
-        """Wählt ein Attribut aus."""
-        try:
-            if hasattr(self, 'dropdown_menu') and self.dropdown_menu:
-                self.dropdown_menu.dismiss()
-            if volk_name not in self.voelker_auswahlen:
-                self.voelker_auswahlen[volk_name] = {}
-            self.voelker_auswahlen[volk_name]['attribut'] = attribut_name
-            
-            charakter = self.controller.charakter
-            if hasattr(charakter, 'attribute') and attribut_name in charakter.attribute:
-                charakter.attribute[attribut_name].wert += 1
-            
-            Logger.info(f"Attribut '{attribut_name}' für '{volk_name}' ausgewählt")
-            self.aktualisiere_ui()
-        except Exception as e:
-            Logger.error(f"Fehler bei Attribut-Auswahl: {e}")
-
-    def _select_fertigkeit(self, volk_name, fertigkeit_name):
-        """Wählt eine Fertigkeit aus."""
-        try:
-            if hasattr(self, 'dropdown_menu') and self.dropdown_menu:
-                self.dropdown_menu.dismiss()
-            if volk_name not in self.voelker_auswahlen:
-                self.voelker_auswahlen[volk_name] = {}
-            self.voelker_auswahlen[volk_name]['fertigkeit'] = fertigkeit_name
-            
-            charakter = self.controller.charakter
-            if hasattr(charakter, 'fertigkeiten') and fertigkeit_name in charakter.fertigkeiten:
-                charakter.fertigkeiten[fertigkeit_name].wert += 1
-            
-            Logger.info(f"Fertigkeit '{fertigkeit_name}' für '{volk_name}' ausgewählt")
-            self.aktualisiere_ui()
-        except Exception as e:
-            Logger.error(f"Fehler bei Fertigkeiten-Auswahl: {e}")
+            Logger.error(f"Fehler beim Formatieren des Inhalts: {e}")
+            return "Fehler beim Anzeigen der Details"
