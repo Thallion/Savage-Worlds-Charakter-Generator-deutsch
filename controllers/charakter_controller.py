@@ -12,6 +12,18 @@ import logging
 import traceback
 import copy
 
+# Einfacher Filter für FocusBehavior-Warnungen
+class WarningFilter(logging.Filter):
+    def filter(self, record):
+        if (record.levelno == logging.WARNING and 
+            'FocusBehavior' in str(record.getMessage()) and
+            'deprecated' in str(record.getMessage())):
+            return False
+        return True
+
+# Filter anwenden
+logging.getLogger().addFilter(WarningFilter())
+
 class CharakterController(EventDispatcher):
     """
     Der CharakterController ist für die Steuerung und Aktualisierung
