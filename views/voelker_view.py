@@ -2,6 +2,7 @@
 """
 View-Komponente für Völker nach dem MVC-Pattern.
 ÜBERARBEITET: UI-Darstellung getrennt von Geschäftslogik (volk_funktionen.py)
+KORRIGIERT: KivyMD 2.0.1 Kompatibilität (adaptive_height entfernt)
 """
 
 from kivy.lang import Builder
@@ -32,7 +33,7 @@ from functions.volk_funktionen import (
 # Logger konfigurieren
 Logger = logging.getLogger(__name__)
 
-# KV-String mit noch mehr Padding für Scrollleisten
+# KV-String KORRIGIERT für KivyMD 2.0.1 (adaptive_height entfernt)
 KV_STRING = '''
 <VoelkerWidget>:
     orientation: 'vertical'
@@ -73,7 +74,8 @@ KV_STRING = '''
                 width: self.minimum_width
                 spacing: dp(15)
                 padding: [dp(15), dp(20), dp(40), dp(20)]  # Noch mehr Padding rechts
-                adaptive_height: True
+                size_hint_y: None
+                height: self.minimum_height
 
     # Zusatzelemente Container
     MDBoxLayout:
@@ -135,19 +137,15 @@ class VoelkerWidget(MDBoxLayout):
         try:
             app = App.get_running_app()
             if hasattr(app, 'controller'):
-                self.controller = app.controller
-                if hasattr(self.controller, 'charakter'):
-                    self.controller.charakter.bind(on_charakter_change=self.aktualisiere_ui)
-                Logger.debug("VoelkerWidget: Controller erfolgreich initialisiert")
+                self.set_controller(app.controller)
             else:
-                Logger.warning("VoelkerWidget: Kein Controller in der App gefunden")
+                Logger.warning("VoelkerWidget: App-Controller noch nicht verfügbar")
                 Clock.schedule_once(self._initialize_controller, 1.0)
         except Exception as e:
-            Logger.error(f"VoelkerWidget: Fehler bei Controller-Initialisierung: {e}")
-            Clock.schedule_once(self._initialize_controller, 1.0)
+            Logger.error(f"Fehler bei Controller-Initialisierung: {e}")
 
-    def aktualisiere_ui(self, *args):
-        """Aktualisiert die gesamte UI basierend auf den aktuellen Charakterdaten."""
+    def aktualisiere_ui(self, dt=None):
+        """Aktualisiert die gesamte UI basierend auf den aktuellen Charakter-Daten."""
         Logger.debug("VoelkerWidget: aktualisiere_ui aufgerufen")
         
         try:
@@ -363,7 +361,6 @@ class VoelkerWidget(MDBoxLayout):
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text):
         """Erstellt eine Sektion für Zusatzelemente."""
-        
         # Hauptcontainer für die Sektion
         section_card = MDCard(
             size_hint_y=None,
@@ -442,6 +439,7 @@ class VoelkerWidget(MDBoxLayout):
 
     def _show_dropdown_menu(self, items, callback, caller):
         """Zeigt ein verbessertes Dialog-Menü mit Suchfeld."""
+        # Bestehende Menüs schließen
         if hasattr(self, 'dropdown_menu') and self.dropdown_menu:
             self.dropdown_menu.dismiss()
         
@@ -464,7 +462,7 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Erstellen des Dialog-Menüs: {e}", exc_info=True)
 
     def _show_search_dialog(self, items, callback, caller):
-        """Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
+        """KORRIGIERT: Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
         from kivymd.uix.dialog import (
             MDDialog, MDDialogHeadlineText, MDDialogButtonContainer, 
             MDDialogContentContainer
@@ -475,12 +473,13 @@ class VoelkerWidget(MDBoxLayout):
         from kivymd.uix.scrollview import MDScrollView
         
         try:
-            # Hauptcontainer für den Dialog
+            # Hauptcontainer für den Dialog - KORRIGIERT: Feste Höhe statt adaptive_height
             dialog_content = MDBoxLayout(
                 orientation="vertical",
                 spacing=dp(15),
                 padding=dp(20),
-                adaptive_height=True
+                size_hint_y=None,
+                height=dp(400)  # Feste Höhe statt adaptive_height
             )
             
             # Suchfeld
@@ -498,15 +497,19 @@ class VoelkerWidget(MDBoxLayout):
                 height=dp(300)
             )
             
+            # KORRIGIERT: size_hint_y statt adaptive_height
             items_list = MDList(
-                adaptive_height=True
+                size_hint_y=None
             )
+            # Höhe der Liste berechnen basierend auf Items
+            items_list.bind(minimum_height=items_list.setter('height'))
             
-            # Items zur Liste hinzufügen
+            # Items zur Liste hinzufügen - KORRIGIERT: Feste Höhe für MDListItem
             for item in sorted(items):
                 if item and str(item).strip():
                     list_item = MDListItem(
-                        adaptive_height=True,
+                        size_hint_y=None,
+                        height=dp(48),  # Feste Höhe statt adaptive_height
                         on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
                     )
                     list_item.add_widget(MDListItemHeadlineText(text=str(item)))
@@ -524,7 +527,8 @@ class VoelkerWidget(MDBoxLayout):
                 
                 for item in filtered_items:
                     list_item = MDListItem(
-                        adaptive_height=True,
+                        size_hint_y=None,
+                        height=dp(48),  # Feste Höhe statt adaptive_height
                         on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
                     )
                     list_item.add_widget(MDListItemHeadlineText(text=str(item)))
@@ -674,219 +678,85 @@ class VoelkerWidget(MDBoxLayout):
         selected_volk_container.clear_widgets()
         
         if not self.selected_volk_name:
-            placeholder = MDLabel(
-                text="Wähle ein Volk aus den Chips oben aus",
-                halign='center',
-                theme_text_color="Secondary",
-                font_style="Body",
-                size_hint_y=None,
-                height=dp(60)
-            )
-            selected_volk_container.add_widget(placeholder)
             return
-            
+        
         charakter = self.controller.charakter
-        volk = charakter.voelker.get(self.selected_volk_name)
         
-        if not volk:
-            error_label = MDLabel(
-                text=f"Fehler: Volk '{self.selected_volk_name}' nicht gefunden",
-                halign='center',
-                theme_text_color="Error",
-                font_style="Body",
-                size_hint_y=None,
-                height=dp(60)
-            )
-            selected_volk_container.add_widget(error_label)
+        if self.selected_volk_name not in charakter.voelker:
+            Logger.warning(f"Volk '{self.selected_volk_name}' nicht in voelker gefunden")
             return
-
-        try:
-            # Volk-Details Cards erstellen
-            volk_details = self._create_volk_details_cards(self.selected_volk_name, volk)
-            for card in volk_details:
-                selected_volk_container.add_widget(card)
-                
-            Logger.debug(f"Volk-Details für '{self.selected_volk_name}' erfolgreich angezeigt")
-            
-        except Exception as e:
-            Logger.error(f"Fehler bei Volk-Details-Erstellung: {e}", exc_info=True)
-            error_label = MDLabel(
-                text=f"Fehler beim Laden der Volk-Details: {str(e)}",
-                halign='center',
-                theme_text_color="Error",
-                font_style="Body",
-                size_hint_y=None,
-                height=dp(60)
-            )
-            selected_volk_container.add_widget(error_label)
-
-    def _create_volk_details_cards(self, volk_name, volk):
-        """Erstellt Cards mit den Details des ausgewählten Volks."""
-        cards = []
         
-        try:
-            # Header-Card
-            header_card = self._create_header_card(volk_name)
-            cards.append(header_card)
-            
-            # Detail-Cards für verfügbare Eigenschaften
-            properties = [
-                ('handicaps', 'Handicaps', 'error'),
-                ('talente', 'Talente', 'success'),
-                ('besonderheiten', 'Besonderheiten', 'info')
-            ]
-            
-            for prop_name, title, card_type in properties:
-                content = getattr(volk, prop_name, None)
-                if content and self._is_valid_content(content):
-                    detail_card = self._create_detail_card(title, content, card_type)
-                    cards.append(detail_card)
-            
-            # Falls keine Detail-Cards erstellt wurden
-            if len(cards) == 1:  # Nur Header-Card
-                info_card = self._create_info_card()
-                cards.append(info_card)
-                
-        except Exception as e:
-            Logger.error(f"Fehler bei Card-Erstellung für '{volk_name}': {e}")
-            # Minimal-Fallback
-            fallback_card = MDLabel(
-                text=f"Fehler beim Laden der Details für {volk_name}",
-                halign='center',
-                theme_text_color="Error",
-                size_hint_y=None,
-                height=dp(60)
-            )
-            cards = [fallback_card]
-        
-        return cards
-
-    def _create_header_card(self, volk_name):
-        """Erstellt die Header-Card für das Volk."""
-        header_card = MDCard(
-            size_hint_y=None,
-            height=dp(90),
-            padding=dp(25),
-            elevation=4,
-            radius=[12],
-            md_bg_color=self.theme_cls.primaryColor,
-            style="elevated"
-        )
-        
-        header_label = MDLabel(
-            text=volk_name,
-            font_style="Headline",
-            theme_text_color="Custom",
-            text_color=(1, 1, 1, 1),
-            size_hint_y=None,
-            height=dp(40),
-            halign='center',
-            valign='center'
-        )
-        
-        header_card.add_widget(header_label)
-        return header_card
-
-    def _create_detail_card(self, titel, content, card_type="info"):
-        """Erstellt eine Detail-Card für Volk-Eigenschaften."""
-        
-        # Card-Farben
-        color_mapping = {
-            "error": self.theme_cls.errorContainerColor,
-            "success": self.theme_cls.surfaceContainerHighColor,
-            "info": self.theme_cls.surfaceContainerColor
-        }
-        bg_color = color_mapping.get(card_type, self.theme_cls.surfaceContainerColor)
-        
-        # Text formatieren
-        formatted_text = self._format_content(content)
-        
-        # Höhe berechnen
-        estimated_lines = max(formatted_text.count('\n') + 1, len(formatted_text) // 50 + 1, 2)
-        card_height = dp(80) + (estimated_lines * dp(30))
-        card_height = max(card_height, dp(130))
-        card_height = min(card_height, dp(450))
-        
-        # Card erstellen
-        detail_card = MDCard(
-            size_hint_y=None,
-            height=card_height,
-            padding=dp(30),
-            spacing=dp(20),
-            elevation=3,
-            radius=[12],
-            md_bg_color=bg_color,
-            style="elevated"
-        )
-        
-        card_content = MDBoxLayout(
-            orientation='vertical',
-            size_hint_y=None,
-            height=card_height - dp(60),
-            spacing=dp(20)
-        )
+        volk_obj = charakter.voelker[self.selected_volk_name]  # Das ist ein Volk-Objekt
         
         # Titel
         title_label = MDLabel(
-            text=f"{titel}:",
-            font_style="Title",
+            text=self.selected_volk_name,
+            font_style="Headline",
             theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(35),
+            height=dp(60),
             halign='left',
+            valign='center',
             bold=True
         )
+        selected_volk_container.add_widget(title_label)
         
-        # Inhalt
-        content_label = MDLabel(
-            text=formatted_text,
-            font_style="Body",
-            theme_text_color="Primary",
-            size_hint_y=None,
-            height=card_height - dp(95),
-            halign='left',
-            valign='top',
-            text_size=(None, None)
-        )
+        # Details strukturiert anzeigen - KORRIGIERT: Direkter Zugriff auf Objekt-Attribute
+        detail_sections = [
+            ('Handicaps', getattr(volk_obj, 'handicaps', [])),
+            ('Besonderheiten', getattr(volk_obj, 'besonderheiten', [])),
+            ('Talente', getattr(volk_obj, 'talente', [])),
+        ]
         
-        # Text-Wrapping
-        content_label.bind(size=lambda instance, size: setattr(
-            instance, 'text_size', (max(size[0] - dp(60), dp(200)), None)
-        ))
+        # Beschreibung nur hinzufügen, wenn sie existiert
+        if hasattr(volk_obj, 'beschreibung'):
+            detail_sections.append(('Beschreibung', getattr(volk_obj, 'beschreibung', '')))
         
-        card_content.add_widget(title_label)
-        card_content.add_widget(content_label)
-        detail_card.add_widget(card_content)
-        
-        return detail_card
+        for section_title, content in detail_sections:
+            if self._has_valid_content(content):
+                # Sektion-Titel
+                section_label = MDLabel(
+                    text=f"{section_title}:",
+                    font_style="Title",
+                    theme_text_color="Primary",
+                    size_hint_y=None,
+                    height=dp(40),
+                    halign='left',
+                    valign='center',
+                    bold=True
+                )
+                selected_volk_container.add_widget(section_label)
+                
+                # Sektion-Inhalt
+                content_label = MDLabel(
+                    text=self._format_content(content),
+                    font_style="Body",
+                    theme_text_color="Secondary",
+                    size_hint_y=None,
+                    halign='left',
+                    valign='top',
+                    text_size=(None, None),
+                    markup=True
+                )
+                content_label.bind(
+                    size=lambda instance, size: setattr(instance, 'text_size', (size[0], None))
+                )
+                content_label.bind(
+                    text_size=lambda instance, size: setattr(instance, 'height', instance.texture_size[1])
+                )
+                
+                selected_volk_container.add_widget(content_label)
+                
+                # Abstand zwischen Sektionen
+                spacer = MDLabel(
+                    text="",
+                    size_hint_y=None,
+                    height=dp(10)
+                )
+                selected_volk_container.add_widget(spacer)
 
-    def _create_info_card(self):
-        """Erstellt eine Info-Card für fehlende Details."""
-        info_card = MDCard(
-            size_hint_y=None,
-            height=dp(100),
-            padding=dp(25),
-            elevation=2,
-            radius=[12],
-            md_bg_color=self.theme_cls.surfaceContainerLowColor,
-            style="elevated"
-        )
-        
-        info_label = MDLabel(
-            text="Keine weiteren Details verfügbar",
-            font_style="Body",
-            theme_text_color="Secondary",
-            size_hint_y=None,
-            height=dp(50),
-            halign='center',
-            valign='center'
-        )
-        
-        info_card.add_widget(info_label)
-        return info_card
-
-    def _is_valid_content(self, content):
-        """Prüft ob der Inhalt gültig und nicht leer ist."""
+    def _has_valid_content(self, content):
+        """Prüft, ob Content valid und nicht leer ist."""
         if content is None:
             return False
         if isinstance(content, list):
