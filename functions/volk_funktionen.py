@@ -753,3 +753,290 @@ def get_voelker_status_info(charakter):
     except Exception as e:
         Logger.error(f"Fehler bei Status-Abfrage: {e}")
         return {}
+    
+# KORRIGIERTE functions/volk_funktionen.py - Goblin-Fix
+
+def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
+    """
+    KORRIGIERT: Bessere Goblin-Erkennung
+    """
+    try:
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Wahlmöglichkeits-Prüfung")
+            return False
+        
+        # Bereinigung durchführen
+        _cleanup_voelker_selected(charakter)
+            
+        volk = charakter.voelker[volk_name]
+        
+        # DEBUG: Volk-Struktur ausgeben
+        Logger.debug(f"=== DEBUG: Volk '{volk_name}' Wahlmöglichkeits-Prüfung ===")
+        if hasattr(volk, 'effects'):
+            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            Logger.debug(f"Wahlmöglichkeiten für '{volk_name}': {wahlmoeglichkeiten}")
+        else:
+            Logger.debug(f"Volk '{volk_name}' hat keine effects")
+        
+        # ERWEITERT: Goblin-spezifische Behandlung ZUERST
+        if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
+            # Direkte Goblin-Prüfung
+            if volk_name.lower() in ["goblin", "goblins"]:
+                Logger.debug(f"GOBLIN CHECK: Prüfe freies Talent für '{volk_name}'")
+                
+                if hasattr(volk, 'effects'):
+                    wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+                    
+                    # ERWEITERT: Mehrere Varianten prüfen
+                    if (wahlmoeglichkeiten.get('freies_anfaenger_talent', False) or 
+                        wahlmoeglichkeiten.get('freies_talent', False) or
+                        wahlmoeglichkeiten.get('freies_anfaengertalent', False)):
+                        Logger.info(f"✅ GOBLIN: Freies Talent verfügbar für '{volk_name}'")
+                        return True
+                    else:
+                        Logger.warning(f"❌ GOBLIN: Keine Talent-Wahlmöglichkeit gefunden für '{volk_name}'. Wahlmöglichkeiten: {wahlmoeglichkeiten}")
+                else:
+                    Logger.warning(f"❌ GOBLIN: Keine effects für '{volk_name}'")
+                return False  # Expliziter Return für Goblin
+        
+        # Spezifische Völker-Wahlmöglichkeiten prüfen
+        if wahlmoeglichkeit_typ == 'freies_attribut':
+            # Halborks haben Attribut-Wahlmöglichkeiten (Stärke oder Konstitution)
+            if volk_name.lower() in ["halbork", "halborks"]:
+                Logger.debug(f"Halbork-Spezialbehandlung: freies Attribut für '{volk_name}'")
+                return True
+            
+            # Halbelfen haben freie Attribut-Wahlmöglichkeiten (als Teil der ENTWEDER/ODER Wahl)
+            if volk_name.lower() in ["halbelf", "halbelfen"]:
+                Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
+                return True
+        
+        # Direkte Prüfung über Volk-Methode
+        if hasattr(volk, 'has_wahlmoeglichkeit'):
+            result = volk.has_wahlmoeglichkeit(wahlmoeglichkeit_typ)
+            Logger.debug(f"Volk-Methode has_wahlmoeglichkeit für '{volk_name}': {result}")
+            return result
+        
+        # Fallback: Prüfung über effects
+        if hasattr(volk, 'effects'):
+            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            
+            # Standard-Checks
+            if wahlmoeglichkeiten.get(wahlmoeglichkeit_typ, False):
+                Logger.debug(f"Standard-Check erfolgreich für '{volk_name}': {wahlmoeglichkeit_typ}")
+                return True
+            
+            # ERWEITERT: Halbork-spezifische Checks  
+            if wahlmoeglichkeit_typ == 'freies_attribut':
+                if wahlmoeglichkeiten.get('attribut_staerke_oder_konstitution', False):
+                    Logger.debug(f"Halbork-Spezialbehandlung: Attribut-Wahl für '{volk_name}'")
+                    return True
+                    
+                # Halbelf hat freies_talent_oder_attribut (kann Attribut wählen)
+                if wahlmoeglichkeiten.get('freies_talent_oder_attribut', False):
+                    Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
+                    return True
+        
+        # Spezialbehandlung für Menschen (NUR freies Anfängertalent)
+        if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
+            if volk_name.lower() in ["mensch", "menschen", "human"]:
+                Logger.debug(f"Menschen-Spezialbehandlung: freies Talent für '{volk_name}'")
+                return True
+        
+        Logger.debug(f"Keine Wahlmöglichkeit '{wahlmoeglichkeit_typ}' für '{volk_name}' gefunden")
+        return False
+        
+    except Exception as e:
+        Logger.error(f"Fehler bei Wahlmöglichkeits-Prüfung für '{volk_name}': {e}")
+        return False
+
+
+def get_volk_zusatzelemente(charakter, volk_name):
+    """
+    ERWEITERT: Bessere Debug-Ausgabe für Goblin
+    """
+    try:
+        zusatzelemente = {
+            'freie_talente': False,
+            'freie_attribute': False,
+            'freie_fertigkeiten': False,
+            'attribut_optionen': [],
+            'halbelf_entweder_oder': False
+        }
+        
+        # Prüfen ob Volk existiert
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Zusatzelemente-Abfrage")
+            return zusatzelemente
+        
+        # Bereinigung durchführen
+        _cleanup_voelker_selected(charakter)
+        
+        Logger.debug(f"=== ZUSATZELEMENTE DEBUG für '{volk_name}' ===")
+        
+        # ERWEITERT: Spezielle Halbelf-Behandlung
+        if volk_name.lower() in ["halbelf", "halbelfen"]:
+            zusatzelemente['halbelf_entweder_oder'] = True
+            Logger.debug(f"Halbelf ENTWEDER/ODER Wahlmöglichkeit verfügbar für '{volk_name}'")
+            return zusatzelemente  # Früher Return für Halbelf
+        
+        # ERWEITERT: Goblin-spezifische Debug-Ausgabe
+        if volk_name.lower() in ["goblin", "goblins"]:
+            Logger.debug(f"🔍 GOBLIN SPEZIAL-CHECK für '{volk_name}'")
+            
+            # Alle Wahlmöglichkeiten-Varianten prüfen
+            freies_talent_check1 = hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent')
+            freies_talent_check2 = hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_anfaengertalent')
+            
+            Logger.debug(f"GOBLIN freies_talent: {freies_talent_check1}")
+            Logger.debug(f"GOBLIN freies_anfaengertalent: {freies_talent_check2}")
+            
+            if freies_talent_check1 or freies_talent_check2:
+                zusatzelemente['freie_talente'] = True
+                Logger.info(f"✅ GOBLIN: Freie Talente aktiviert für '{volk_name}'")
+            else:
+                Logger.warning(f"❌ GOBLIN: Keine freien Talente erkannt für '{volk_name}'")
+        
+        # Standard-Wahlmöglichkeiten prüfen
+        if not zusatzelemente['freie_talente']:  # Nur wenn nicht bereits durch Goblin gesetzt
+            if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent') or \
+               hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_anfaengertalent'):
+                zusatzelemente['freie_talente'] = True
+                Logger.debug(f"Standard: Freie Talente verfügbar für '{volk_name}'")
+        
+        # Attribut-Optionen abrufen
+        attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
+        if attribut_optionen and attribut_optionen != [NO_ATTRIBUT_AVAILABLE_TEXT]:
+            zusatzelemente['freie_attribute'] = True
+            zusatzelemente['attribut_optionen'] = attribut_optionen
+            Logger.debug(f"Attribut-Optionen verfügbar für '{volk_name}': {attribut_optionen}")
+            
+        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_verstandsfertigkeit'):
+            zusatzelemente['freie_fertigkeiten'] = True
+            Logger.debug(f"Freie Fertigkeiten verfügbar für '{volk_name}'")
+        
+        Logger.debug(f"=== FINALE Zusatzelemente für '{volk_name}': {zusatzelemente} ===")
+        return zusatzelemente
+        
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen der Zusatzelemente für '{volk_name}': {e}")
+        return {
+            'freie_talente': False, 
+            'freie_attribute': False, 
+            'freie_fertigkeiten': False, 
+            'attribut_optionen': [],
+            'halbelf_entweder_oder': False
+        }
+
+
+def get_volk_attribut_optionen(charakter, volk_name):
+    """
+    Gibt die verfügbaren Attribut-Optionen für ein Volk zurück.
+    ERWEITERT: Support für Halbork und Halbelf
+    
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks
+        
+    Returns:
+        list: Liste der verfügbaren Attribut-Optionen
+    """
+    try:
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Attribut-Optionen-Abfrage")
+            return [NO_ATTRIBUT_AVAILABLE_TEXT]
+        
+        volk = charakter.voelker[volk_name]
+        
+        # ERWEITERT: Spezifische Völker-Wahlmöglichkeiten prüfen
+        if volk_name.lower() in ["halbork", "halborks"]:
+            # Halborks können zwischen Stärke und Konstitution wählen
+            Logger.debug(f"Halbork Attribut-Optionen: Stärke oder Konstitution")
+            return ["Stärke", "Konstitution"]
+        
+        elif volk_name.lower() in ["halbelf", "halbelfen"]:
+            # ERWEITERT: Halbelfen können Geschicklichkeit wählen (als Teil der ENTWEDER/ODER Wahl)
+            Logger.debug(f"Halbelf Attribut-Option: Geschicklichkeit")
+            return ["Geschicklichkeit"]
+        
+        # Prüfe ob das Volk generell freie Attribut-Wahlmöglichkeiten hat
+        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_attribut'):
+            return get_verfuegbare_attribute(charakter)
+        
+        # Fallback: keine Attribut-Wahlmöglichkeiten
+        return [NO_ATTRIBUT_AVAILABLE_TEXT]
+        
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen der Attribut-Optionen für '{volk_name}': {e}")
+        return [NO_ATTRIBUT_AVAILABLE_TEXT]
+
+
+# NEUE FUNKTIONEN für Halbelf ENTWEDER/ODER Logik
+
+def waehle_halbelf_talent(charakter, volk_name, talent_name):
+    """
+    Wählt ein freies Talent für Halbelf aus (ENTWEDER-Teil der Wahl).
+    
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks (sollte Halbelf sein)
+        talent_name: Name des zu wählenden Talents
+        
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.debug(f"Halbelf wählt freies Talent '{talent_name}' für Volk '{volk_name}'")
+        
+        if volk_name.lower() not in ["halbelf", "halbelfen"]:
+            Logger.error(f"Halbelf-Talent-Wahl nur für Halbelfen, nicht für '{volk_name}'")
+            return False
+        
+        # Standard Talent-Auswahl durchführen
+        success = waehle_freies_talent(charakter, volk_name, talent_name)
+        
+        if success:
+            # Markiere, dass Halbelf die Talent-Option gewählt hat
+            # TODO: Persistierung der Wahl implementieren
+            Logger.info(f"Halbelf '{volk_name}' hat freies Talent '{talent_name}' gewählt")
+            return True
+        
+        return False
+        
+    except Exception as e:
+        Logger.error(f"Fehler bei Halbelf-Talent-Auswahl: {e}", exc_info=True)
+        return False
+
+
+def waehle_halbelf_attribut(charakter, volk_name):
+    """
+    Wählt den Geschicklichkeits-Bonus für Halbelf aus (ODER-Teil der Wahl).
+    
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks (sollte Halbelf sein)
+        
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.debug(f"Halbelf wählt Geschicklichkeits-Bonus für Volk '{volk_name}'")
+        
+        if volk_name.lower() not in ["halbelf", "halbelfen"]:
+            Logger.error(f"Halbelf-Attribut-Wahl nur für Halbelfen, nicht für '{volk_name}'")
+            return False
+        
+        # Geschicklichkeits-Bonus anwenden
+        success = waehle_freies_attribut(charakter, volk_name, "Geschicklichkeit")
+        
+        if success:
+            # Markiere, dass Halbelf die Attribut-Option gewählt hat
+            # TODO: Persistierung der Wahl implementieren
+            Logger.info(f"Halbelf '{volk_name}' hat Geschicklichkeits-Bonus gewählt")
+            return True
+        
+        return False
+        
+    except Exception as e:
+        Logger.error(f"Fehler bei Halbelf-Attribut-Auswahl: {e}", exc_info=True)
+        return False    

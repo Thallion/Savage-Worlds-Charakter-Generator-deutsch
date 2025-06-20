@@ -1,19 +1,18 @@
-# views/voelker_view.py - UI-Komponente mit ausgelagerter Geschäftslogik
+# views/voelker_view.py - UI-Komponente mit MDDropdownMenu
 """
 View-Komponente für Völker nach dem MVC-Pattern.
 ÜBERARBEITET: UI-Darstellung getrennt von Geschäftslogik (volk_funktionen.py)
 KORRIGIERT: KivyMD 2.0.1 Kompatibilität (adaptive_height entfernt)
+NEU: MDDropdownMenu für platzsparende Völker-Auswahl
 """
 
 from kivy.lang import Builder
 from kivy.app import App
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.card import MDCard
-from kivymd.uix.chip import MDChip, MDChipText
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.button import MDIconButton
+from kivymd.uix.button import MDIconButton, MDButton, MDButtonText
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, DictProperty
 from kivy.metrics import dp
@@ -26,6 +25,7 @@ from functions.volk_funktionen import (
     get_freie_talente, get_verfuegbare_attribute, get_verfuegbare_fertigkeiten,
     waehle_freies_talent, waehle_freies_attribut, waehle_freie_fertigkeit,
     reset_volk_auswahlen, initialisiere_voelker_system, get_voelker_status_info,
+    waehle_halbelf_talent, waehle_halbelf_attribut,  # NEUE: Halbelf-spezifische Funktionen
     DEFAULT_TALENT_TEXT, DEFAULT_ATTRIBUT_TEXT, DEFAULT_FERTIGKEIT_TEXT,
     NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT
 )
@@ -33,7 +33,7 @@ from functions.volk_funktionen import (
 # Logger konfigurieren
 Logger = logging.getLogger(__name__)
 
-# KV-String KORRIGIERT für KivyMD 2.0.1 (adaptive_height entfernt)
+# NEUER KV-STRING mit MDDropdownMenu für kompakte Völker-Auswahl
 KV_STRING = '''
 <VoelkerWidget>:
     orientation: 'vertical'
@@ -49,33 +49,40 @@ KV_STRING = '''
         font_style: "Headline"
         theme_text_color: "Primary"
 
-    # Völker-Chips Container - Noch mehr Padding für Scrollleisten
+    # NEUE KOMPAKTE VÖLKER-AUSWAHL - 60% weniger Platz!
     MDCard:
         size_hint_y: None
-        height: dp(160)
-        padding: [dp(25), dp(20), dp(50), dp(20)]  # Noch mehr Padding rechts
+        height: dp(100)  # Nur 100dp statt 160dp!
+        padding: dp(20)
         elevation: 2
         radius: [10]
         md_bg_color: self.theme_cls.surfaceContainerLowColor
         style: "elevated"
 
-        ScrollView:
-            size_hint: (1, 1)
-            do_scroll_x: True
-            do_scroll_y: False
-            bar_width: dp(10)  # Schmalere Scrollleiste
-            bar_margin: dp(15)  # Mehr Abstand
-            scroll_type: ['bars']
-
-            MDGridLayout:
-                id: chips_layout
-                cols: 1  # Wird dynamisch angepasst
-                size_hint_x: None
-                width: self.minimum_width
-                spacing: dp(15)
-                padding: [dp(15), dp(20), dp(40), dp(20)]  # Noch mehr Padding rechts
+        MDBoxLayout:
+            orientation: 'horizontal'
+            spacing: dp(15)
+            
+            MDLabel:
+                text: "Ausgewähltes Volk:"
+                font_style: "Body"
+                theme_text_color: "Primary"
+                size_hint_x: 0.3
+                halign: 'left'
+                valign: 'center'
+            
+            # DROPDOWN für Völker-Auswahl
+            MDButton:
+                id: volk_dropdown_button
+                style: "outlined"
+                size_hint_x: 0.7
                 size_hint_y: None
-                height: self.minimum_height
+                height: dp(48)
+                on_release: root.open_volk_dropdown()
+                
+                MDButtonText:
+                    id: selected_volk_text
+                    text: "Volk auswählen..."
 
     # Zusatzelemente Container
     MDBoxLayout:
@@ -85,13 +92,13 @@ KV_STRING = '''
         height: self.minimum_height
         spacing: dp(20)
 
-    # Ausgewähltes Volk Details Container - Mehr Padding für Scrollleisten
+    # Ausgewähltes Volk Details Container
     ScrollView:
         size_hint: (1, 1)
         do_scroll_x: False
         do_scroll_y: True
-        bar_width: dp(10)  # Schmalere Scrollleiste
-        bar_margin: dp(20)  # Noch mehr Abstand
+        bar_width: dp(10)
+        bar_margin: dp(20)
         scroll_type: ['bars']
 
         MDBoxLayout:
@@ -100,7 +107,7 @@ KV_STRING = '''
             size_hint_y: None
             height: self.minimum_height
             spacing: dp(25)
-            padding: [0, dp(20), dp(50), dp(30)]  # Noch mehr Padding rechts
+            padding: [0, dp(20), dp(50), dp(30)]
 '''
 
 Builder.load_string(KV_STRING)
@@ -110,6 +117,7 @@ class VoelkerWidget(MDBoxLayout):
     """
     Widget zur Anzeige und Verwaltung von Völkern.
     ÜBERARBEITET: Reine UI-Komponente, Geschäftslogik in volk_funktionen.py
+    NEU: Verwendet MDDropdownMenu für platzsparende Völker-Auswahl
     """
     controller = ObjectProperty(None)
     voelker_auswahlen = DictProperty({})
@@ -119,7 +127,8 @@ class VoelkerWidget(MDBoxLayout):
         super().__init__(**kwargs)
         self.voelker_auswahlen = {}
         self.selected_volk_name = None
-        self.dropdown_menu = None
+        self.volk_dropdown_menu = None  # Für das Dropdown-Menü
+        self.search_dialog = None  # Für Such-Dialoge
         
         # Controller aus der App initialisieren
         Clock.schedule_once(self._initialize_controller, 0)
@@ -144,6 +153,115 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler bei Controller-Initialisierung: {e}")
 
+    def open_volk_dropdown(self):
+        """Öffnet das Dropdown-Menü für Völker-Auswahl."""
+        try:
+            if not self.controller or not hasattr(self.controller, 'charakter'):
+                Logger.warning("Controller nicht verfügbar")
+                return
+                
+            charakter = self.controller.charakter
+            
+            if not hasattr(charakter, 'voelker') or not charakter.voelker:
+                Logger.warning("Keine Völker verfügbar")
+                return
+            
+            # Menu Items erstellen
+            menu_items = []
+            
+            # "Kein Volk" Option
+            menu_items.append({
+                "text": "Kein Volk",
+                "on_release": lambda: self._select_volk_from_dropdown(None),
+            })
+            
+            # Alle verfügbaren Völker alphabetisch sortiert
+            for volk_name in sorted(charakter.voelker.keys()):
+                menu_items.append({
+                    "text": volk_name,
+                    "on_release": lambda x=volk_name: self._select_volk_from_dropdown(x),
+                })
+            
+            # Dropdown-Menü erstellen
+            self.volk_dropdown_menu = MDDropdownMenu(
+                caller=self.ids.volk_dropdown_button,
+                items=menu_items,
+                width_mult=6,  # Breite für lange Namen
+                max_height=dp(400),  # Max. Höhe bei vielen Völkern
+            )
+            
+            self.volk_dropdown_menu.open()
+            Logger.debug(f"Völker-Dropdown geöffnet mit {len(menu_items)} Optionen")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Völker-Dropdowns: {e}", exc_info=True)
+
+    def _select_volk_from_dropdown(self, volk_name):
+        """Behandelt die Völker-Auswahl aus dem Dropdown."""
+        try:
+            # Dropdown schließen
+            if self.volk_dropdown_menu:
+                self.volk_dropdown_menu.dismiss()
+            
+            charakter = self.controller.charakter
+            
+            # Aktuell ausgewähltes Volk ermitteln
+            current_volk = None
+            for name, selected in charakter.voelker_selected.items():
+                if selected:
+                    current_volk = name
+                    break
+            
+            # Wenn "Kein Volk" ausgewählt
+            if volk_name is None:
+                if current_volk:
+                    # Aktuelles Volk abwählen
+                    success = abwaehlen_volk(charakter, current_volk)
+                    if success:
+                        self.selected_volk_name = None
+                        reset_volk_auswahlen(charakter, current_volk, self.voelker_auswahlen)
+                        self._update_dropdown_text("Kein Volk ausgewählt")
+                        Logger.info("Kein Volk ausgewählt")
+                        
+                        # UI aktualisieren
+                        Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                        Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+                return
+            
+            # Neues Volk auswählen
+            if current_volk == volk_name:
+                Logger.info(f"Volk '{volk_name}' ist bereits ausgewählt")
+                return
+            
+            # Altes Volk abwählen (falls vorhanden)
+            if current_volk:
+                abwaehlen_volk(charakter, current_volk)
+                reset_volk_auswahlen(charakter, current_volk, self.voelker_auswahlen)
+            
+            # Neues Volk auswählen
+            success = waehle_volk(charakter, volk_name)
+            if success:
+                self.selected_volk_name = volk_name
+                self._update_dropdown_text(volk_name)
+                Logger.info(f"Volk '{volk_name}' ausgewählt")
+                
+                # UI aktualisieren
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+            else:
+                Logger.error(f"Fehler beim Auswählen von Volk '{volk_name}'")
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei Völker-Auswahl aus Dropdown: {e}", exc_info=True)
+
+    def _update_dropdown_text(self, text):
+        """Aktualisiert den Text des Dropdown-Buttons."""
+        try:
+            if 'selected_volk_text' in self.ids:
+                self.ids.selected_volk_text.text = text
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren des Dropdown-Texts: {e}")
+
     def aktualisiere_ui(self, dt=None):
         """Aktualisiert die gesamte UI basierend auf den aktuellen Charakter-Daten."""
         Logger.debug("VoelkerWidget: aktualisiere_ui aufgerufen")
@@ -156,7 +274,7 @@ class VoelkerWidget(MDBoxLayout):
                 return
                 
             # UI-Container prüfen
-            if not hasattr(self, 'ids') or 'chips_layout' not in self.ids:
+            if not hasattr(self, 'ids'):
                 Logger.debug("VoelkerWidget: UI-Container noch nicht verfügbar")
                 Clock.schedule_once(self.aktualisiere_ui, 0.5)
                 return
@@ -179,8 +297,13 @@ class VoelkerWidget(MDBoxLayout):
             selected_volk = get_selected_volk(charakter)
             self.selected_volk_name = selected_volk.name if selected_volk else None
 
+            # Dropdown-Text aktualisieren
+            if self.selected_volk_name:
+                self._update_dropdown_text(self.selected_volk_name)
+            else:
+                self._update_dropdown_text("Kein Volk ausgewählt")
+
             # UI-Komponenten aktualisieren
-            self._update_voelker_chips()
             self._update_zusatzelemente()
             self._update_selected_volk_details()
                 
@@ -191,7 +314,11 @@ class VoelkerWidget(MDBoxLayout):
 
     def _show_no_data_message(self):
         """Zeigt eine Nachricht an, wenn keine Völker-Daten verfügbar sind."""
-        for container_id in ['chips_layout', 'zusatzelemente_container', 'selected_volk_container']:
+        # Dropdown-Text aktualisieren
+        self._update_dropdown_text("Keine Völker verfügbar")
+        
+        # Container leeren
+        for container_id in ['zusatzelemente_container', 'selected_volk_container']:
             if container_id in self.ids:
                 self.ids[container_id].clear_widgets()
         
@@ -206,91 +333,8 @@ class VoelkerWidget(MDBoxLayout):
             )
             self.ids.selected_volk_container.add_widget(placeholder)
 
-    def _update_voelker_chips(self):
-        """Aktualisiert die MDChips für die Völker-Auswahl."""
-        chips_layout = self.ids.chips_layout
-        chips_layout.clear_widgets()
-        
-        charakter = self.controller.charakter
-        voelker_count = len(charakter.voelker)
-        
-        # Optimale Anzahl Spalten für Grid-Layout berechnen
-        if voelker_count <= 8:
-            cols = min(voelker_count, 8)  # Eine Zeile für wenige Völker
-        else:
-            cols = max(6, (voelker_count + 1) // 2)  # Zwei Zeilen für viele Völker
-        
-        chips_layout.cols = cols
-        
-        # Einheitliche Chip-Breite berechnen
-        max_chip_width = dp(140)  # Feste Breite für bessere Anordnung
-        total_width = (max_chip_width * cols) + (dp(15) * (cols - 1)) + dp(60)
-        chips_layout.width = total_width
-        
-        for volk_name in sorted(charakter.voelker.keys()):  # Alphabetisch sortiert
-            ist_ausgewaehlt = charakter.voelker_selected.get(volk_name, False)
-            
-            # Chip erstellen
-            chip = MDChip(
-                size_hint_x=None,
-                size_hint_y=None,
-                width=max_chip_width,
-                height=dp(45),
-                radius=dp(22),
-                elevation=4 if ist_ausgewaehlt else 2,
-                md_bg_color=self.theme_cls.primaryColor if ist_ausgewaehlt else self.theme_cls.surfaceContainerColor,
-                on_release=lambda x, name=volk_name: self._on_volk_chip_selected(name)
-            )
-            
-            # Chip-Text
-            chip_text = MDChipText(
-                text=volk_name,
-                theme_text_color="Custom" if ist_ausgewaehlt else "Primary",
-                text_color=(1, 1, 1, 1) if ist_ausgewaehlt else None
-            )
-            
-            chip.add_widget(chip_text)
-            chips_layout.add_widget(chip)
-
-    def _on_volk_chip_selected(self, volk_name):
-        """Behandelt die Auswahl eines Völker-Chips."""
-        try:
-            charakter = self.controller.charakter
-            
-            # Prüfen ob bereits ausgewählt
-            current_selection = charakter.voelker_selected.get(volk_name, False)
-            
-            if current_selection:
-                # Bereits ausgewählt - abwählen
-                success = abwaehlen_volk(charakter, volk_name)
-                if success:
-                    self.selected_volk_name = None
-                    # Auswahlen zurücksetzen
-                    reset_volk_auswahlen(charakter, volk_name, self.voelker_auswahlen)
-                    Logger.info(f"Volk '{volk_name}' abgewählt")
-                else:
-                    Logger.error(f"Fehler beim Abwählen von Volk '{volk_name}'")
-                    return
-            else:
-                # Nicht ausgewählt - auswählen
-                success = waehle_volk(charakter, volk_name)
-                if success:
-                    self.selected_volk_name = volk_name
-                    Logger.info(f"Volk '{volk_name}' ausgewählt")
-                else:
-                    Logger.error(f"Fehler beim Auswählen von Volk '{volk_name}'")
-                    return
-            
-            # UI-Updates mit leichter Verzögerung für bessere Performance
-            Clock.schedule_once(lambda dt: self._update_voelker_chips(), 0.1)
-            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
-            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
-            
-        except Exception as e:
-            Logger.error(f"Fehler bei Volk-Auswahl: {e}", exc_info=True)
-
     def _update_zusatzelemente(self):
-        """Aktualisiert die Zusatzelemente-Bereiche."""
+        """ERWEITERT: Aktualisiert die Zusatzelemente-Bereiche inkl. neuer Völker-Wahlmöglichkeiten."""
         zusatzelemente_container = self.ids.zusatzelemente_container
         zusatzelemente_container.clear_widgets()
         
@@ -304,10 +348,24 @@ class VoelkerWidget(MDBoxLayout):
         
         sections_added = 0
         
-        # Freie Talente Sektion
+        # NEUE: Halbelf spezielle ENTWEDER/ODER Sektion
+        if zusatzelemente.get('halbelf_entweder_oder', False):
+            halbelf_section = self._create_halbelf_entweder_oder_section()
+            zusatzelemente_container.add_widget(halbelf_section)
+            sections_added += 1
+            Logger.debug(f"Halbelf ENTWEDER/ODER Sektion erstellt für '{self.selected_volk_name}'")
+            return  # Früher Return für Halbelf - keine weiteren Sektionen
+        
+        # Freie Talente Sektion (inkl. Goblin)
         if zusatzelemente.get('freie_talente', False):
+            # ERWEITERT: Volk-spezifische Titel
+            if self.selected_volk_name.lower() in ["goblin", "goblins"]:
+                titel = "Überlebenskünstler (Freies Anfängertalent)"
+            else:
+                titel = "Freies Anfängertalent"
+                
             talent_section = self._create_zusatzelement_section(
-                "Freies Anfängertalent",
+                titel,
                 self.selected_volk_name,
                 'talent',
                 lambda: get_freie_talente(charakter),
@@ -317,12 +375,14 @@ class VoelkerWidget(MDBoxLayout):
             zusatzelemente_container.add_widget(talent_section)
             sections_added += 1
 
-        # Erhöhte Attribute Sektion - verwende spezifische Attribut-Optionen
+        # ERWEITERT: Attribute Sektion mit verbessertem Titel
         if zusatzelemente.get('freie_attribute', False):
             attribut_optionen = zusatzelemente.get('attribut_optionen', [])
             
-            # Bestimme den Titel basierend auf der Anzahl der Optionen
-            if len(attribut_optionen) == 2:
+            # ERWEITERT: Volk-spezifische Titel
+            if self.selected_volk_name.lower() in ["halbork", "halborks"]:
+                titel = "Abgehärtet (Stärke oder Konstitution)"
+            elif len(attribut_optionen) == 2:
                 titel = f"Attribut wählen ({' oder '.join(attribut_optionen)})"
             elif len(attribut_optionen) > 2:
                 titel = "Freies Attribut"
@@ -439,10 +499,6 @@ class VoelkerWidget(MDBoxLayout):
 
     def _show_dropdown_menu(self, items, callback, caller):
         """Zeigt ein verbessertes Dialog-Menü mit Suchfeld."""
-        # Bestehende Menüs schließen
-        if hasattr(self, 'dropdown_menu') and self.dropdown_menu:
-            self.dropdown_menu.dismiss()
-        
         # Items validieren
         Logger.debug(f"Dialog-Items: {items}")
         
@@ -586,29 +642,6 @@ class VoelkerWidget(MDBoxLayout):
                 
         except Exception as e:
             Logger.error(f"Fehler bei Search-Dialog-Auswahl: {e}", exc_info=True)
-
-    def _on_dropdown_item_selected(self, callback, item):
-        """Behandelt die Auswahl eines Dropdown-Items."""
-        try:
-            Logger.debug(f"Dropdown-Item ausgewählt: {item}")
-            
-            if self.dropdown_menu:
-                self.dropdown_menu.dismiss()
-                
-            # Überprüfen ob es sich um eine Fehlermeldung handelt
-            if item in [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT]:
-                Logger.warning(f"Fehlermeldung ausgewählt: {item}")
-                return
-                
-            # Callback ausführen
-            if callback:
-                callback(item)
-                Logger.debug(f"Callback für Item '{item}' ausgeführt")
-            else:
-                Logger.warning("Kein Callback für Dropdown-Auswahl definiert")
-                
-        except Exception as e:
-            Logger.error(f"Fehler bei Dropdown-Auswahl: {e}", exc_info=True)
 
     # === AUSWAHL-FUNKTIONEN (rufen jetzt volk_funktionen.py auf) ===
     
@@ -772,7 +805,8 @@ class VoelkerWidget(MDBoxLayout):
                 valid_items = [str(item).strip() for item in content if item and str(item).strip()]
                 if not valid_items:
                     return "Keine Details verfügbar"
-                return "\n".join([f"• {item}" for item in valid_items])
+                # VERBESSERT: Mehr Abstand zwischen Bulletpoints
+                return "\n\n".join([f"• {item}" for item in valid_items])  # Doppelte Leerzeile für besseren Abstand
             else:
                 text = str(content).strip()
                 if not text:
@@ -781,7 +815,8 @@ class VoelkerWidget(MDBoxLayout):
                 # Lange kommaseparierte Listen formatieren
                 if ", " in text and len(text) > 80:
                     parts = [part.strip() for part in text.split(", ") if part.strip()]
-                    return "\n".join([f"• {part}" for part in parts])
+                    # VERBESSERT: Mehr Abstand zwischen Bulletpoints
+                    return "\n\n".join([f"• {part}" for part in parts])  # Doppelte Leerzeile
                 
                 # Lange Texte bei Satzzeichen umbrechen
                 if len(text) > 100:
@@ -794,9 +829,162 @@ class VoelkerWidget(MDBoxLayout):
                             current = ""
                     if current.strip():
                         sentences.append(current.strip())
-                    return "\n".join(sentences) if len(sentences) > 1 else text
+                    # VERBESSERT: Bessere Formatierung für Sätze
+                    return "\n\n".join(sentences) if len(sentences) > 1 else text
                 
                 return text
         except Exception as e:
             Logger.error(f"Fehler beim Formatieren des Inhalts: {e}")
             return "Fehler beim Anzeigen der Details"
+
+    # === NEUE METHODEN FÜR ERWEITERTE VÖLKER-WAHLMÖGLICHKEITEN ===
+
+    def _create_halbelf_entweder_oder_section(self):
+        """
+        NEUE: Erstellt spezielle Halbelf ENTWEDER/ODER Sektion.
+        Halbelf kann ENTWEDER freies Talent ODER Geschicklichkeit +2 wählen.
+        """
+        try:
+            # Hauptcontainer für die Sektion
+            section_card = MDCard(
+                size_hint_y=None,
+                height=dp(180),  # Höher für zwei Optionen
+                padding=dp(25),
+                elevation=3,
+                radius=[12],
+                md_bg_color=self.theme_cls.surfaceContainerHighColor,
+                style="elevated"
+            )
+            
+            section_content = MDBoxLayout(
+                orientation='vertical',
+                size_hint_y=None,
+                height=dp(130),
+                spacing=dp(15)
+            )
+            
+            # Titel der Sektion
+            titel_label = MDLabel(
+                text="Erbe (ENTWEDER freies Talent ODER Geschicklichkeit +2):",
+                font_style="Title",
+                theme_text_color="Primary",
+                size_hint_y=None,
+                height=dp(35),
+                halign='left',
+                valign='center',
+                bold=True
+            )
+            titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
+            
+            # Zwei Buttons für die Auswahl
+            buttons_row = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(55),
+                spacing=dp(20)
+            )
+            
+            # Button 1: Freies Talent
+            talent_button = MDButton(
+                style="outlined",
+                size_hint_x=0.5,
+                size_hint_y=None,
+                height=dp(48),
+                on_release=lambda x: self._halbelf_waehle_talent()
+            )
+            talent_button.add_widget(MDButtonText(text="Freies Talent"))
+            
+            # Button 2: Geschicklichkeit +2
+            attribut_button = MDButton(
+                style="outlined", 
+                size_hint_x=0.5,
+                size_hint_y=None,
+                height=dp(48),
+                on_release=lambda x: self._halbelf_waehle_attribut()
+            )
+            attribut_button.add_widget(MDButtonText(text="Geschicklichkeit +2"))
+            
+            buttons_row.add_widget(talent_button)
+            buttons_row.add_widget(attribut_button)
+            
+            section_content.add_widget(titel_label)
+            section_content.add_widget(buttons_row)
+            section_card.add_widget(section_content)
+            
+            Logger.debug("Halbelf ENTWEDER/ODER Sektion erstellt")
+            return section_card
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der Halbelf ENTWEDER/ODER Sektion: {e}")
+            # Fallback: Leere Card zurückgeben
+            return MDCard(size_hint_y=None, height=dp(50))
+
+    def _halbelf_waehle_talent(self):
+        """NEUE: Halbelf wählt freies Talent (ENTWEDER-Option)."""
+        try:
+            Logger.debug("Halbelf: Freies Talent-Option ausgewählt")
+            
+            charakter = self.controller.charakter
+            freie_talente = get_freie_talente(charakter)
+            
+            if not freie_talente or freie_talente == [NO_TALENT_AVAILABLE_TEXT]:
+                Logger.warning("Keine freien Talente für Halbelf verfügbar")
+                return
+            
+            # Zeige Talent-Auswahl Dialog
+            self._show_search_dialog(
+                freie_talente,
+                lambda talent: self._halbelf_talent_selected(talent),
+                None
+            )
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Halbelf Talent-Wahl: {e}", exc_info=True)
+
+    def _halbelf_waehle_attribut(self):
+        """NEUE: Halbelf wählt Geschicklichkeit +2 (ODER-Option)."""
+        try:
+            Logger.debug("Halbelf: Geschicklichkeit +2 Option ausgewählt")
+            
+            charakter = self.controller.charakter
+            success = waehle_halbelf_attribut(charakter, self.selected_volk_name)
+            
+            if success:
+                # UI-lokale Auswahl speichern
+                if self.selected_volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[self.selected_volk_name] = {}
+                self.voelker_auswahlen[self.selected_volk_name]['halbelf_wahl'] = 'Geschicklichkeit +2'
+                
+                Logger.info(f"Halbelf '{self.selected_volk_name}' hat Geschicklichkeit +2 gewählt")
+                
+                # UI aktualisieren - zeige Bestätigung statt erneutem Dropdown
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            else:
+                Logger.error("Fehler beim Anwenden des Geschicklichkeits-Bonus für Halbelf")
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Halbelf Attribut-Wahl: {e}", exc_info=True)
+
+    def _halbelf_talent_selected(self, talent_name):
+        """NEUE: Callback für Halbelf Talent-Auswahl."""
+        try:
+            Logger.debug(f"Halbelf Talent ausgewählt: {talent_name}")
+            
+            charakter = self.controller.charakter
+            success = waehle_halbelf_talent(charakter, self.selected_volk_name, talent_name)
+            
+            if success:
+                # UI-lokale Auswahl speichern
+                if self.selected_volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[self.selected_volk_name] = {}
+                self.voelker_auswahlen[self.selected_volk_name]['halbelf_wahl'] = f'Talent: {talent_name}'
+                
+                Logger.info(f"Halbelf '{self.selected_volk_name}' hat Talent '{talent_name}' gewählt")
+                
+                # UI aktualisieren
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            else:
+                Logger.error(f"Fehler beim Auswählen des Talents '{talent_name}' für Halbelf")
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei Halbelf Talent-Auswahl: {e}", exc_info=True)
