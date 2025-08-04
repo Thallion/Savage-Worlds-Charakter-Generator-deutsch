@@ -2,6 +2,7 @@
 """
 Volk-Funktionen zur Trennung von Geschäftslogik und UI.
 Enthält alle Volk-spezifischen Operationen und Berechnungen.
+ERWEITERT: Spezielle Behandlung für Menschen - nur ein freies Attribut gleichzeitig
 """
 
 import logging
@@ -46,6 +47,16 @@ def waehle_volk(charakter, volk_name):
         altes_volk = get_selected_volk(charakter)
         if altes_volk:
             Logger.info(f"Entferne Effekte von vorherigem Volk: {altes_volk.name}")
+            
+            # NEUE LOGIK: Spezielle Behandlung für Menschen beim Volk-Wechsel
+            if altes_volk.name.lower() in ["mensch", "menschen", "human"]:
+                # Nur resetten wenn das Volk die entsprechenden Wahlmöglichkeiten hat
+                if hasattr(altes_volk, 'effects') and altes_volk.effects.get('wahlmoeglichkeiten', {}).get('freies_attribut', False):
+                    _reset_menschen_freies_attribut(charakter)
+                if hasattr(altes_volk, 'effects') and (altes_volk.effects.get('wahlmoeglichkeiten', {}).get('freies_talent', False) or 
+                                                        altes_volk.effects.get('wahlmoeglichkeiten', {}).get('freies_anfaengertalent', False)):
+                    _reset_menschen_freies_talent(charakter)
+                
             altes_volk.remove_effects_from_charakter(charakter)
             altes_volk.ausgewaehlt = False
             charakter.voelker_selected[altes_volk.name] = False
@@ -122,6 +133,7 @@ def _cleanup_voelker_selected(charakter):
 def abwaehlen_volk(charakter, volk_name):
     """
     Wählt ein Volk ab und entfernt alle Effekte.
+    ERWEITERT: Spezielle Behandlung für Menschen-Attribut-Reset.
     
     Args:
         charakter: Das Charakterobjekt
@@ -139,8 +151,17 @@ def abwaehlen_volk(charakter, volk_name):
         
         # Bereinigung durchführen
         _cleanup_voelker_selected(charakter)
-            
+        
         volk = charakter.voelker[volk_name]
+        
+        # NEUE LOGIK: Spezielle Behandlung für Menschen
+        if volk_name.lower() in ["mensch", "menschen", "human"]:
+            # Nur resetten wenn das Volk die entsprechenden Wahlmöglichkeiten hat
+            if hasattr(volk, 'effects') and volk.effects.get('wahlmoeglichkeiten', {}).get('freies_attribut', False):
+                _reset_menschen_freies_attribut(charakter)
+            if hasattr(volk, 'effects') and (volk.effects.get('wahlmoeglichkeiten', {}).get('freies_talent', False) or 
+                                             volk.effects.get('wahlmoeglichkeiten', {}).get('freies_anfaengertalent', False)):
+                _reset_menschen_freies_talent(charakter)
         
         # Effekte entfernen
         success = volk.remove_effects_from_charakter(charakter)
@@ -196,6 +217,7 @@ def get_selected_volk(charakter):
 def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
     """
     Prüft ob ein Volk eine bestimmte Wahlmöglichkeit hat.
+    ERWEITERT: Bessere Goblin-Erkennung und Menschen-Attribut-Support.
     
     Args:
         charakter: Das Charakterobjekt
@@ -215,32 +237,80 @@ def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
             
         volk = charakter.voelker[volk_name]
         
+        # DEBUG: Volk-Struktur ausgeben
+        Logger.debug(f"=== DEBUG: Volk '{volk_name}' Wahlmöglichkeits-Prüfung ===")
+        if hasattr(volk, 'effects'):
+            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            Logger.debug(f"Wahlmöglichkeiten für '{volk_name}': {wahlmoeglichkeiten}")
+        else:
+            Logger.debug(f"Volk '{volk_name}' hat keine effects")
+        
+        # ERWEITERT: Goblin-spezifische Behandlung ZUERST
+        if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
+            # Direkte Goblin-Prüfung
+            if volk_name.lower() in ["goblin", "goblins"]:
+                Logger.debug(f"GOBLIN CHECK: Prüfe freies Talent für '{volk_name}'")
+                
+                if hasattr(volk, 'effects'):
+                    wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+                    
+                    # ERWEITERT: Mehrere Varianten prüfen
+                    if (wahlmoeglichkeiten.get('freies_anfaenger_talent', False) or 
+                        wahlmoeglichkeiten.get('freies_talent', False) or
+                        wahlmoeglichkeiten.get('freies_anfaengertalent', False)):
+                        Logger.info(f"✅ GOBLIN: Freies Talent verfügbar für '{volk_name}'")
+                        return True
+                    else:
+                        Logger.warning(f"❌ GOBLIN: Keine Talent-Wahlmöglichkeit gefunden für '{volk_name}'. Wahlmöglichkeiten: {wahlmoeglichkeiten}")
+                else:
+                    Logger.warning(f"❌ GOBLIN: Keine effects für '{volk_name}'")
+                return False  # Expliziter Return für Goblin
+        
         # Spezifische Völker-Wahlmöglichkeiten prüfen
         if wahlmoeglichkeit_typ == 'freies_attribut':
-            # Halborks haben immer Attribut-Wahlmöglichkeiten (Stärke oder Konstitution)
+            # Halborks haben Attribut-Wahlmöglichkeiten (Stärke oder Konstitution)
             if volk_name.lower() in ["halbork", "halborks"]:
                 Logger.debug(f"Halbork-Spezialbehandlung: freies Attribut für '{volk_name}'")
                 return True
             
-            # Halbelfen haben oft freie Attribut-Wahlmöglichkeiten
+            # Halbelfen haben freie Attribut-Wahlmöglichkeiten (als Teil der ENTWEDER/ODER Wahl)
             if volk_name.lower() in ["halbelf", "halbelfen"]:
                 Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
                 return True
         
         # Direkte Prüfung über Volk-Methode
         if hasattr(volk, 'has_wahlmoeglichkeit'):
-            return volk.has_wahlmoeglichkeit(wahlmoeglichkeit_typ)
+            result = volk.has_wahlmoeglichkeit(wahlmoeglichkeit_typ)
+            Logger.debug(f"Volk-Methode has_wahlmoeglichkeit für '{volk_name}': {result}")
+            return result
         
         # Fallback: Prüfung über effects
         if hasattr(volk, 'effects'):
-            return volk.effects.get('wahlmoeglichkeiten', {}).get(wahlmoeglichkeit_typ, False)
+            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            
+            # Standard-Checks
+            if wahlmoeglichkeiten.get(wahlmoeglichkeit_typ, False):
+                Logger.debug(f"Standard-Check erfolgreich für '{volk_name}': {wahlmoeglichkeit_typ}")
+                return True
+            
+            # ERWEITERT: Halbork-spezifische Checks  
+            if wahlmoeglichkeit_typ == 'freies_attribut':
+                if wahlmoeglichkeiten.get('attribut_staerke_oder_konstitution', False):
+                    Logger.debug(f"Halbork-Spezialbehandlung: Attribut-Wahl für '{volk_name}'")
+                    return True
+                    
+                # Halbelf hat freies_talent_oder_attribut (kann Attribut wählen)
+                if wahlmoeglichkeiten.get('freies_talent_oder_attribut', False):
+                    Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
+                    return True
         
-        # Spezialbehandlung für Menschen (freies Anfängertalent)
+        # Spezialbehandlung für Menschen (NUR freies Anfängertalent)
         if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
             if volk_name.lower() in ["mensch", "menschen", "human"]:
                 Logger.debug(f"Menschen-Spezialbehandlung: freies Talent für '{volk_name}'")
                 return True
         
+        Logger.debug(f"Keine Wahlmöglichkeit '{wahlmoeglichkeit_typ}' für '{volk_name}' gefunden")
         return False
         
     except Exception as e:
@@ -361,6 +431,7 @@ def get_verfuegbare_fertigkeiten(charakter, nur_verstand=True):
 def waehle_freies_talent(charakter, volk_name, talent_name):
     """
     Wählt ein freies Talent für ein Volk aus.
+    ERWEITERT: Spezielle Behandlung für Menschen - nur ein Talent gleichzeitig.
     
     Args:
         charakter: Das Charakterobjekt
@@ -392,6 +463,28 @@ def waehle_freies_talent(charakter, volk_name, talent_name):
             Logger.warning(f"Talent '{talent_name}' ist bereits ausgewählt")
             return False
         
+        # NEUE LOGIK: Spezielle Behandlung für Menschen (nur wenn sie freie Talent-Wahlmöglichkeit haben)
+        if (volk_name.lower() in ["mensch", "menschen", "human"] and 
+            (hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent') or 
+             hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_anfaengertalent'))):
+            # Prüfen ob bereits ein anderes freies Talent gewählt wurde
+            aktuelles_freies_talent = _get_menschen_freies_talent(charakter)
+            
+            if aktuelles_freies_talent and aktuelles_freies_talent != talent_name:
+                Logger.info(f"Menschen: Setze vorheriges freies Talent '{aktuelles_freies_talent}' zurück")
+                # Vorheriges Talent abwählen
+                if aktuelles_freies_talent in charakter.talente:
+                    vorheriges_talent = charakter.talente[aktuelles_freies_talent]
+                    vorheriges_talent.ausgewaehlt = False
+                    
+                    # Aus selected_talente entfernen
+                    if hasattr(charakter, 'selected_talente') and aktuelles_freies_talent in charakter.selected_talente:
+                        charakter.selected_talente.remove(aktuelles_freies_talent)
+                        Logger.debug(f"Talent '{aktuelles_freies_talent}' aus selected_talente entfernt")
+            
+            # Neues freies Talent setzen
+            _set_menschen_freies_talent(charakter, talent_name)
+        
         # Talent auswählen
         talent.ausgewaehlt = True
         
@@ -412,6 +505,7 @@ def waehle_freies_talent(charakter, volk_name, talent_name):
 def waehle_freies_attribut(charakter, volk_name, attribut_name):
     """
     Wählt ein freies Attribut für ein Volk aus und erhöht es.
+    ERWEITERT: Spezielle Behandlung für Menschen - nur ein Attribut gleichzeitig.
     
     Args:
         charakter: Das Charakterobjekt
@@ -432,6 +526,23 @@ def waehle_freies_attribut(charakter, volk_name, attribut_name):
         if not hasattr(charakter, 'attribute') or attribut_name not in charakter.attribute:
             Logger.error(f"Attribut '{attribut_name}' nicht gefunden")
             return False
+        
+        # NEUE LOGIK: Spezielle Behandlung für Menschen (nur wenn sie freie Attribut-Wahlmöglichkeit haben)
+        if (volk_name.lower() in ["mensch", "menschen", "human"] and 
+            hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_attribut')):
+            # Prüfen ob bereits ein anderes freies Attribut gewählt wurde
+            aktuelles_freies_attribut = _get_menschen_freies_attribut(charakter)
+            
+            if aktuelles_freies_attribut and aktuelles_freies_attribut != attribut_name:
+                Logger.info(f"Menschen: Setze vorheriges freies Attribut '{aktuelles_freies_attribut}' zurück")
+                # Vorheriges Attribut von W6 auf W4 zurücksetzen
+                vorheriges_attribut = charakter.attribute[aktuelles_freies_attribut]
+                if vorheriges_attribut.wert == 6:  # Nur wenn es durch freies Attribut erhöht wurde
+                    vorheriges_attribut.wert = 4
+                    Logger.debug(f"Attribut '{aktuelles_freies_attribut}' von W6 auf W4 zurückgesetzt")
+            
+            # Neues freies Attribut setzen
+            _set_menschen_freies_attribut(charakter, attribut_name)
         
         attribut = charakter.attribute[attribut_name]
         alter_wert = attribut.wert
@@ -521,6 +632,7 @@ def get_volk_attribut_optionen(charakter, volk_name):
     """
     Gibt die verfügbaren Attribut-Optionen für ein Volk zurück.
     Manche Völker haben Wahlmöglichkeiten zwischen verschiedenen Attributen.
+    ERWEITERT: Support für Halbork, Halbelf und Menschen.
     
     Args:
         charakter: Das Charakterobjekt
@@ -536,18 +648,16 @@ def get_volk_attribut_optionen(charakter, volk_name):
         
         volk = charakter.voelker[volk_name]
         
-        # Spezifische Völker-Wahlmöglichkeiten prüfen
+        # ERWEITERT: Spezifische Völker-Wahlmöglichkeiten prüfen
         if volk_name.lower() in ["halbork", "halborks"]:
             # Halborks können zwischen Stärke und Konstitution wählen
+            Logger.debug(f"Halbork Attribut-Optionen: Stärke oder Konstitution")
             return ["Stärke", "Konstitution"]
         
         elif volk_name.lower() in ["halbelf", "halbelfen"]:
-            # Halbelfen können oft ein freies Attribut wählen
-            return get_verfuegbare_attribute(charakter)
-            
-        elif volk_name.lower() in ["mensch", "menschen", "human"]:
-            # Menschen können oft ein freies Attribut wählen (abhängig vom Setting)
-            return get_verfuegbare_attribute(charakter)
+            # ERWEITERT: Halbelfen können Geschicklichkeit wählen (als Teil der ENTWEDER/ODER Wahl)
+            Logger.debug(f"Halbelf Attribut-Option: Geschicklichkeit")
+            return ["Geschicklichkeit"]
         
         # Prüfe ob das Volk generell freie Attribut-Wahlmöglichkeiten hat
         if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_attribut'):
@@ -564,6 +674,7 @@ def get_volk_attribut_optionen(charakter, volk_name):
 def get_volk_zusatzelemente(charakter, volk_name):
     """
     Gibt eine Liste der verfügbaren Zusatzelemente für ein Volk zurück.
+    ERWEITERT: Bessere Debug-Ausgabe für Goblin und Menschen-Support.
     
     Args:
         charakter: Das Charakterobjekt
@@ -571,289 +682,6 @@ def get_volk_zusatzelemente(charakter, volk_name):
         
     Returns:
         dict: Dictionary mit verfügbaren Zusatzelementen
-    """
-    try:
-        zusatzelemente = {
-            'freie_talente': False,
-            'freie_attribute': False,
-            'freie_fertigkeiten': False,
-            'attribut_optionen': []
-        }
-        
-        # Prüfen ob Volk existiert
-        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
-            Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Zusatzelemente-Abfrage")
-            return zusatzelemente
-        
-        # Bereinigung durchführen
-        _cleanup_voelker_selected(charakter)
-        
-        # Verschiedene Wahlmöglichkeiten prüfen
-        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent') or \
-           hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_anfaengertalent'):
-            zusatzelemente['freie_talente'] = True
-            Logger.debug(f"Freie Talente verfügbar für '{volk_name}'")
-        
-        # Attribut-Optionen abrufen
-        attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
-        if attribut_optionen and attribut_optionen != [NO_ATTRIBUT_AVAILABLE_TEXT]:
-            zusatzelemente['freie_attribute'] = True
-            zusatzelemente['attribut_optionen'] = attribut_optionen
-            Logger.debug(f"Attribut-Optionen verfügbar für '{volk_name}': {attribut_optionen}")
-            
-        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_verstandsfertigkeit'):
-            zusatzelemente['freie_fertigkeiten'] = True
-            Logger.debug(f"Freie Fertigkeiten verfügbar für '{volk_name}'")
-        
-        Logger.debug(f"Zusatzelemente für Volk '{volk_name}': {zusatzelemente}")
-        return zusatzelemente
-        
-    except Exception as e:
-        Logger.error(f"Fehler beim Abrufen der Zusatzelemente für '{volk_name}': {e}")
-        return {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': []}
-
-
-def reset_volk_auswahlen(charakter, volk_name, auswahlen_dict):
-    """
-    Setzt alle Auswahlen für ein Volk zurück.
-    
-    Args:
-        charakter: Das Charakterobjekt
-        volk_name: Name des Volks
-        auswahlen_dict: Dictionary mit den aktuellen Auswahlen
-        
-    Returns:
-        bool: True bei Erfolg, False bei Fehler
-    """
-    try:
-        if volk_name not in auswahlen_dict:
-            return True
-        
-        # Bereinigung durchführen
-        _cleanup_voelker_selected(charakter)
-            
-        auswahl = auswahlen_dict[volk_name]
-        
-        # Alle Auswahlen zurücksetzen
-        for auswahl_typ, auswahl_wert in auswahl.items():
-            if auswahl_typ == 'talent':
-                # Talent abwählen
-                if hasattr(charakter, 'selected_talente') and auswahl_wert in charakter.selected_talente:
-                    charakter.selected_talente.remove(auswahl_wert)
-                    
-                if hasattr(charakter, 'talente') and auswahl_wert in charakter.talente:
-                    charakter.talente[auswahl_wert].ausgewaehlt = False
-                    
-            elif auswahl_typ == 'attribut':
-                # Attribut-Erhöhung rückgängig machen
-                if hasattr(charakter, 'attribute') and auswahl_wert in charakter.attribute:
-                    charakter.attribute[auswahl_wert].wert -= 1
-                    
-            elif auswahl_typ == 'fertigkeit':
-                # Fertigkeits-Erhöhung rückgängig machen
-                if hasattr(charakter, 'fertigkeiten') and auswahl_wert in charakter.fertigkeiten:
-                    charakter.fertigkeiten[auswahl_wert].wert -= 1
-        
-        # Auswahl aus Dictionary entfernen
-        del auswahlen_dict[volk_name]
-        
-        Logger.debug(f"Auswahlen für Volk '{volk_name}' zurückgesetzt")
-        return True
-        
-    except Exception as e:
-        Logger.error(f"Fehler beim Zurücksetzen der Auswahlen für '{volk_name}': {e}")
-        return False
-
-
-def initialisiere_voelker_system(charakter):
-    """
-    Initialisiert und bereinigt das Völker-System für einen Charakter.
-    Sollte nach dem Laden eines Charakters oder Wechseln des Settings aufgerufen werden.
-    
-    Args:
-        charakter: Das Charakterobjekt
-        
-    Returns:
-        bool: True bei Erfolg, False bei Fehler
-    """
-    try:
-        Logger.info("=== Initialisiere Völker-System ===")
-        
-        # Sicherstellen, dass voelker_selected existiert
-        if not hasattr(charakter, 'voelker_selected'):
-            charakter.voelker_selected = {}
-        
-        # Bereinigung durchführen
-        _cleanup_voelker_selected(charakter)
-        
-        # Aktuell ausgewähltes Volk finden und validieren
-        selected_volk = get_selected_volk(charakter)
-        if selected_volk:
-            Logger.info(f"Aktuell ausgewähltes Volk: {selected_volk.name}")
-            
-            # Prüfen ob Volk-Effekte korrekt angewendet sind
-            if not selected_volk.ausgewaehlt:
-                Logger.warning(f"Volk {selected_volk.name} ist ausgewählt aber nicht als ausgewaehlt markiert - korrigiere")
-                selected_volk.ausgewaehlt = True
-        else:
-            Logger.info("Kein Volk aktuell ausgewählt")
-        
-        Logger.info("=== Völker-System erfolgreich initialisiert ===")
-        return True
-        
-    except Exception as e:
-        Logger.error(f"Fehler bei Völker-System-Initialisierung: {e}")
-        return False
-
-
-def get_voelker_status_info(charakter):
-    """
-    Gibt detaillierte Status-Informationen über das Völker-System zurück.
-    Hilfreich für Debugging.
-    
-    Args:
-        charakter: Das Charakterobjekt
-        
-    Returns:
-        dict: Status-Informationen
-    """
-    try:
-        status = {
-            'voelker_gesamt': 0,
-            'voelker_selected_gesamt': 0,
-            'ausgewaehltes_volk': None,
-            'verwaiste_eintraege': [],
-            'fehlende_eintraege': []
-        }
-        
-        if hasattr(charakter, 'voelker'):
-            status['voelker_gesamt'] = len(charakter.voelker)
-        
-        if hasattr(charakter, 'voelker_selected'):
-            status['voelker_selected_gesamt'] = len(charakter.voelker_selected)
-            
-            # Verwaiste Einträge finden
-            for volk_name in charakter.voelker_selected:
-                if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
-                    status['verwaiste_eintraege'].append(volk_name)
-        
-        # Fehlende Einträge finden
-        if hasattr(charakter, 'voelker') and hasattr(charakter, 'voelker_selected'):
-            for volk_name in charakter.voelker:
-                if volk_name not in charakter.voelker_selected:
-                    status['fehlende_eintraege'].append(volk_name)
-        
-        # Ausgewähltes Volk
-        selected_volk = get_selected_volk(charakter)
-        if selected_volk:
-            status['ausgewaehltes_volk'] = selected_volk.name
-        
-        return status
-        
-    except Exception as e:
-        Logger.error(f"Fehler bei Status-Abfrage: {e}")
-        return {}
-    
-# KORRIGIERTE functions/volk_funktionen.py - Goblin-Fix
-
-def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
-    """
-    KORRIGIERT: Bessere Goblin-Erkennung
-    """
-    try:
-        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
-            Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Wahlmöglichkeits-Prüfung")
-            return False
-        
-        # Bereinigung durchführen
-        _cleanup_voelker_selected(charakter)
-            
-        volk = charakter.voelker[volk_name]
-        
-        # DEBUG: Volk-Struktur ausgeben
-        Logger.debug(f"=== DEBUG: Volk '{volk_name}' Wahlmöglichkeits-Prüfung ===")
-        if hasattr(volk, 'effects'):
-            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
-            Logger.debug(f"Wahlmöglichkeiten für '{volk_name}': {wahlmoeglichkeiten}")
-        else:
-            Logger.debug(f"Volk '{volk_name}' hat keine effects")
-        
-        # ERWEITERT: Goblin-spezifische Behandlung ZUERST
-        if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
-            # Direkte Goblin-Prüfung
-            if volk_name.lower() in ["goblin", "goblins"]:
-                Logger.debug(f"GOBLIN CHECK: Prüfe freies Talent für '{volk_name}'")
-                
-                if hasattr(volk, 'effects'):
-                    wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
-                    
-                    # ERWEITERT: Mehrere Varianten prüfen
-                    if (wahlmoeglichkeiten.get('freies_anfaenger_talent', False) or 
-                        wahlmoeglichkeiten.get('freies_talent', False) or
-                        wahlmoeglichkeiten.get('freies_anfaengertalent', False)):
-                        Logger.info(f"✅ GOBLIN: Freies Talent verfügbar für '{volk_name}'")
-                        return True
-                    else:
-                        Logger.warning(f"❌ GOBLIN: Keine Talent-Wahlmöglichkeit gefunden für '{volk_name}'. Wahlmöglichkeiten: {wahlmoeglichkeiten}")
-                else:
-                    Logger.warning(f"❌ GOBLIN: Keine effects für '{volk_name}'")
-                return False  # Expliziter Return für Goblin
-        
-        # Spezifische Völker-Wahlmöglichkeiten prüfen
-        if wahlmoeglichkeit_typ == 'freies_attribut':
-            # Halborks haben Attribut-Wahlmöglichkeiten (Stärke oder Konstitution)
-            if volk_name.lower() in ["halbork", "halborks"]:
-                Logger.debug(f"Halbork-Spezialbehandlung: freies Attribut für '{volk_name}'")
-                return True
-            
-            # Halbelfen haben freie Attribut-Wahlmöglichkeiten (als Teil der ENTWEDER/ODER Wahl)
-            if volk_name.lower() in ["halbelf", "halbelfen"]:
-                Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
-                return True
-        
-        # Direkte Prüfung über Volk-Methode
-        if hasattr(volk, 'has_wahlmoeglichkeit'):
-            result = volk.has_wahlmoeglichkeit(wahlmoeglichkeit_typ)
-            Logger.debug(f"Volk-Methode has_wahlmoeglichkeit für '{volk_name}': {result}")
-            return result
-        
-        # Fallback: Prüfung über effects
-        if hasattr(volk, 'effects'):
-            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
-            
-            # Standard-Checks
-            if wahlmoeglichkeiten.get(wahlmoeglichkeit_typ, False):
-                Logger.debug(f"Standard-Check erfolgreich für '{volk_name}': {wahlmoeglichkeit_typ}")
-                return True
-            
-            # ERWEITERT: Halbork-spezifische Checks  
-            if wahlmoeglichkeit_typ == 'freies_attribut':
-                if wahlmoeglichkeiten.get('attribut_staerke_oder_konstitution', False):
-                    Logger.debug(f"Halbork-Spezialbehandlung: Attribut-Wahl für '{volk_name}'")
-                    return True
-                    
-                # Halbelf hat freies_talent_oder_attribut (kann Attribut wählen)
-                if wahlmoeglichkeiten.get('freies_talent_oder_attribut', False):
-                    Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
-                    return True
-        
-        # Spezialbehandlung für Menschen (NUR freies Anfängertalent)
-        if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
-            if volk_name.lower() in ["mensch", "menschen", "human"]:
-                Logger.debug(f"Menschen-Spezialbehandlung: freies Talent für '{volk_name}'")
-                return True
-        
-        Logger.debug(f"Keine Wahlmöglichkeit '{wahlmoeglichkeit_typ}' für '{volk_name}' gefunden")
-        return False
-        
-    except Exception as e:
-        Logger.error(f"Fehler bei Wahlmöglichkeits-Prüfung für '{volk_name}': {e}")
-        return False
-
-
-def get_volk_zusatzelemente(charakter, volk_name):
-    """
-    ERWEITERT: Bessere Debug-Ausgabe für Goblin
     """
     try:
         zusatzelemente = {
@@ -929,46 +757,154 @@ def get_volk_zusatzelemente(charakter, volk_name):
         }
 
 
-def get_volk_attribut_optionen(charakter, volk_name):
+def reset_volk_auswahlen(charakter, volk_name, auswahlen_dict):
     """
-    Gibt die verfügbaren Attribut-Optionen für ein Volk zurück.
-    ERWEITERT: Support für Halbork und Halbelf
+    Setzt alle Auswahlen für ein Volk zurück.
     
     Args:
         charakter: Das Charakterobjekt
         volk_name: Name des Volks
+        auswahlen_dict: Dictionary mit den aktuellen Auswahlen
         
     Returns:
-        list: Liste der verfügbaren Attribut-Optionen
+        bool: True bei Erfolg, False bei Fehler
     """
     try:
-        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
-            Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Attribut-Optionen-Abfrage")
-            return [NO_ATTRIBUT_AVAILABLE_TEXT]
+        if volk_name not in auswahlen_dict:
+            return True
         
-        volk = charakter.voelker[volk_name]
+        # Bereinigung durchführen
+        _cleanup_voelker_selected(charakter)
+            
+        auswahl = auswahlen_dict[volk_name]
         
-        # ERWEITERT: Spezifische Völker-Wahlmöglichkeiten prüfen
-        if volk_name.lower() in ["halbork", "halborks"]:
-            # Halborks können zwischen Stärke und Konstitution wählen
-            Logger.debug(f"Halbork Attribut-Optionen: Stärke oder Konstitution")
-            return ["Stärke", "Konstitution"]
+        # Alle Auswahlen zurücksetzen
+        for auswahl_typ, auswahl_wert in auswahl.items():
+            if auswahl_typ == 'talent':
+                # Talent abwählen
+                if hasattr(charakter, 'selected_talente') and auswahl_wert in charakter.selected_talente:
+                    charakter.selected_talente.remove(auswahl_wert)
+                    
+                if hasattr(charakter, 'talente') and auswahl_wert in charakter.talente:
+                    charakter.talente[auswahl_wert].ausgewaehlt = False
+                    
+            elif auswahl_typ == 'attribut':
+                # Attribut-Erhöhung rückgängig machen
+                if hasattr(charakter, 'attribute') and auswahl_wert in charakter.attribute:
+                    charakter.attribute[auswahl_wert].wert -= 1
+                    
+            elif auswahl_typ == 'fertigkeit':
+                # Fertigkeits-Erhöhung rückgängig machen
+                if hasattr(charakter, 'fertigkeiten') and auswahl_wert in charakter.fertigkeiten:
+                    charakter.fertigkeiten[auswahl_wert].wert -= 1
         
-        elif volk_name.lower() in ["halbelf", "halbelfen"]:
-            # ERWEITERT: Halbelfen können Geschicklichkeit wählen (als Teil der ENTWEDER/ODER Wahl)
-            Logger.debug(f"Halbelf Attribut-Option: Geschicklichkeit")
-            return ["Geschicklichkeit"]
+        # Auswahl aus Dictionary entfernen
+        del auswahlen_dict[volk_name]
         
-        # Prüfe ob das Volk generell freie Attribut-Wahlmöglichkeiten hat
-        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_attribut'):
-            return get_verfuegbare_attribute(charakter)
-        
-        # Fallback: keine Attribut-Wahlmöglichkeiten
-        return [NO_ATTRIBUT_AVAILABLE_TEXT]
+        Logger.debug(f"Auswahlen für Volk '{volk_name}' zurückgesetzt")
+        return True
         
     except Exception as e:
-        Logger.error(f"Fehler beim Abrufen der Attribut-Optionen für '{volk_name}': {e}")
-        return [NO_ATTRIBUT_AVAILABLE_TEXT]
+        Logger.error(f"Fehler beim Zurücksetzen der Auswahlen für '{volk_name}': {e}")
+        return False
+
+
+def initialisiere_voelker_system(charakter):
+    """
+    Initialisiert und bereinigt das Völker-System für einen Charakter.
+    Sollte nach dem Laden eines Charakters oder Wechseln des Settings aufgerufen werden.
+    ERWEITERT: Menschen-spezifisches Attribut-Tracking initialisieren.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.info("=== Initialisiere Völker-System ===")
+        
+        # Sicherstellen, dass voelker_selected existiert
+        if not hasattr(charakter, 'voelker_selected'):
+            charakter.voelker_selected = {}
+        
+        # NEUE LOGIK: Menschen-spezifisches Tracking initialisieren
+        if not hasattr(charakter, '_menschen_freies_attribut'):
+            charakter._menschen_freies_attribut = None
+            
+        if not hasattr(charakter, '_menschen_freies_talent'):
+            charakter._menschen_freies_talent = None
+        
+        # Bereinigung durchführen
+        _cleanup_voelker_selected(charakter)
+        
+        # Aktuell ausgewähltes Volk finden und validieren
+        selected_volk = get_selected_volk(charakter)
+        if selected_volk:
+            Logger.info(f"Aktuell ausgewähltes Volk: {selected_volk.name}")
+            
+            # Prüfen ob Volk-Effekte korrekt angewendet sind
+            if not selected_volk.ausgewaehlt:
+                Logger.warning(f"Volk {selected_volk.name} ist ausgewählt aber nicht als ausgewaehlt markiert - korrigiere")
+                selected_volk.ausgewaehlt = True
+        else:
+            Logger.info("Kein Volk aktuell ausgewählt")
+        
+        Logger.info("=== Völker-System erfolgreich initialisiert ===")
+        return True
+        
+    except Exception as e:
+        Logger.error(f"Fehler bei Völker-System-Initialisierung: {e}")
+        return False
+
+
+def get_voelker_status_info(charakter):
+    """
+    Gibt detaillierte Status-Informationen über das Völker-System zurück.
+    Hilfreich für Debugging.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        dict: Status-Informationen
+    """
+    try:
+        status = {
+            'voelker_gesamt': 0,
+            'voelker_selected_gesamt': 0,
+            'ausgewaehltes_volk': None,
+            'verwaiste_eintraege': [],
+            'fehlende_eintraege': []
+        }
+        
+        if hasattr(charakter, 'voelker'):
+            status['voelker_gesamt'] = len(charakter.voelker)
+        
+        if hasattr(charakter, 'voelker_selected'):
+            status['voelker_selected_gesamt'] = len(charakter.voelker_selected)
+            
+            # Verwaiste Einträge finden
+            for volk_name in charakter.voelker_selected:
+                if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+                    status['verwaiste_eintraege'].append(volk_name)
+        
+        # Fehlende Einträge finden
+        if hasattr(charakter, 'voelker') and hasattr(charakter, 'voelker_selected'):
+            for volk_name in charakter.voelker:
+                if volk_name not in charakter.voelker_selected:
+                    status['fehlende_eintraege'].append(volk_name)
+        
+        # Ausgewähltes Volk
+        selected_volk = get_selected_volk(charakter)
+        if selected_volk:
+            status['ausgewaehltes_volk'] = selected_volk.name
+        
+        return status
+        
+    except Exception as e:
+        Logger.error(f"Fehler bei Status-Abfrage: {e}")
+        return {}
 
 
 # NEUE FUNKTIONEN für Halbelf ENTWEDER/ODER Logik
@@ -1039,4 +975,134 @@ def waehle_halbelf_attribut(charakter, volk_name):
         
     except Exception as e:
         Logger.error(f"Fehler bei Halbelf-Attribut-Auswahl: {e}", exc_info=True)
-        return False    
+        return False
+
+
+# NEUE HILFSFUNKTIONEN FÜR MENSCHEN-SPEZIFISCHES ATTRIBUT-TRACKING
+
+def _get_menschen_freies_attribut(charakter):
+    """
+    Gibt das aktuell gewählte freie Attribut für Menschen zurück.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        str oder None: Name des freien Attributs oder None
+    """
+    try:
+        if hasattr(charakter, '_menschen_freies_attribut'):
+            return charakter._menschen_freies_attribut
+        return None
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen des Menschen-freien-Attributs: {e}")
+        return None
+
+
+def _set_menschen_freies_attribut(charakter, attribut_name):
+    """
+    Setzt das freie Attribut für Menschen.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        attribut_name: Name des freien Attributs
+    """
+    try:
+        charakter._menschen_freies_attribut = attribut_name
+        Logger.debug(f"Menschen freies Attribut auf '{attribut_name}' gesetzt")
+    except Exception as e:
+        Logger.error(f"Fehler beim Setzen des Menschen-freien-Attributs: {e}")
+
+
+def _reset_menschen_freies_attribut(charakter):
+    """
+    Setzt das freie Attribut für Menschen zurück.
+    
+    Args:
+        charakter: Das Charakterobjekt
+    """
+    try:
+        aktuelles_attribut = _get_menschen_freies_attribut(charakter)
+        
+        if aktuelles_attribut and hasattr(charakter, 'attribute'):
+            if aktuelles_attribut in charakter.attribute:
+                attribut = charakter.attribute[aktuelles_attribut]
+                # Nur zurücksetzen wenn es auf W6 erhöht wurde (Standard freier Attribut-Bonus)
+                if attribut.wert == 6:
+                    attribut.wert = 4
+                    Logger.info(f"Menschen freies Attribut '{aktuelles_attribut}' von W6 auf W4 zurückgesetzt")
+        
+        # Tracking zurücksetzen
+        charakter._menschen_freies_attribut = None
+        Logger.debug("Menschen freies Attribut-Tracking zurückgesetzt")
+        
+        # Abgeleitete Werte neu berechnen
+        if hasattr(charakter, 'berechne_abgeleitete_werte'):
+            charakter.berechne_abgeleitete_werte()
+            
+    except Exception as e:
+        Logger.error(f"Fehler beim Zurücksetzen des Menschen-freien-Attributs: {e}")
+
+
+def _get_menschen_freies_talent(charakter):
+    """
+    Gibt das aktuell gewählte freie Talent für Menschen zurück.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        str oder None: Name des freien Talents oder None
+    """
+    try:
+        if hasattr(charakter, '_menschen_freies_talent'):
+            return charakter._menschen_freies_talent
+        return None
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen des Menschen-freien-Talents: {e}")
+        return None
+
+
+def _set_menschen_freies_talent(charakter, talent_name):
+    """
+    Setzt das freie Talent für Menschen.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        talent_name: Name des freien Talents
+    """
+    try:
+        charakter._menschen_freies_talent = talent_name
+        Logger.debug(f"Menschen freies Talent auf '{talent_name}' gesetzt")
+    except Exception as e:
+        Logger.error(f"Fehler beim Setzen des Menschen-freien-Talents: {e}")
+
+
+def _reset_menschen_freies_talent(charakter):
+    """
+    Setzt das freie Talent für Menschen zurück.
+    
+    Args:
+        charakter: Das Charakterobjekt
+    """
+    try:
+        aktuelles_talent = _get_menschen_freies_talent(charakter)
+        
+        if aktuelles_talent and hasattr(charakter, 'talente'):
+            if aktuelles_talent in charakter.talente:
+                talent = charakter.talente[aktuelles_talent]
+                # Talent abwählen
+                talent.ausgewaehlt = False
+                Logger.info(f"Menschen freies Talent '{aktuelles_talent}' abgewählt")
+                
+                # Aus selected_talente entfernen
+                if hasattr(charakter, 'selected_talente') and aktuelles_talent in charakter.selected_talente:
+                    charakter.selected_talente.remove(aktuelles_talent)
+                    Logger.debug(f"Talent '{aktuelles_talent}' aus selected_talente entfernt")
+        
+        # Tracking zurücksetzen
+        charakter._menschen_freies_talent = None
+        Logger.debug("Menschen freies Talent-Tracking zurückgesetzt")
+            
+    except Exception as e:
+        Logger.error(f"Fehler beim Zurücksetzen des Menschen-freien-Talents: {e}")
