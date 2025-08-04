@@ -35,7 +35,9 @@ SORTIER_OPTIONEN = {
     "NAME_ASC": "Name (aufsteigend)",
     "NAME_DESC": "Name (absteigend)",
     "WERT_ASC": "Wert (aufsteigend)",
-    "WERT_DESC": "Wert (absteigend)"
+    "WERT_DESC": "Wert (absteigend)",
+    "ATTRIBUT_ASC": "Attribut (aufsteigend)",
+    "ATTRIBUT_DESC": "Attribut (absteigend)"
 }
 
 FILTER_OPTIONEN = {
@@ -597,7 +599,8 @@ class EigenschaftenWidget(MDBoxLayout):
         # Mapping der Sortieroption zum Feldnamen
         sort_field_mapping = {
             'Name': 'item_name',
-            'Wert': 'wert'
+            'Wert': 'wert',
+            'Attribut': 'attribut'
         }
 
         self.current_sort_field = sort_field_mapping.get(sort_option, 'item_name')
@@ -641,6 +644,10 @@ class EigenschaftenWidget(MDBoxLayout):
         elif self.current_sort_field == 'wert':
             return sorted(fertigkeiten_liste,
                          key=lambda f: (f.wert if f.wert is not None else 0), 
+                         reverse=reverse)
+        elif self.current_sort_field == 'attribut':
+            return sorted(fertigkeiten_liste,
+                         key=lambda f: (f.attribut.attribut_name.lower() if f.attribut and f.attribut.attribut_name else 'zzz'), 
                          reverse=reverse)
         else:
             # Standardmäßig nach Name sortieren
