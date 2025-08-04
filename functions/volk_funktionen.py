@@ -56,6 +56,10 @@ def waehle_volk(charakter, volk_name):
                 if hasattr(altes_volk, 'effects') and (altes_volk.effects.get('wahlmoeglichkeiten', {}).get('freies_talent', False) or 
                                                         altes_volk.effects.get('wahlmoeglichkeiten', {}).get('freies_anfaengertalent', False)):
                     _reset_menschen_freies_talent(charakter)
+                    
+            # NEUE LOGIK: Spezielle Behandlung für Halbelfen beim Volk-Wechsel
+            if altes_volk.name.lower() in ["halbelf", "halbelfen"]:
+                _reset_halbelf_auswahlen(charakter)
                 
             altes_volk.remove_effects_from_charakter(charakter)
             altes_volk.ausgewaehlt = False
@@ -162,6 +166,10 @@ def abwaehlen_volk(charakter, volk_name):
             if hasattr(volk, 'effects') and (volk.effects.get('wahlmoeglichkeiten', {}).get('freies_talent', False) or 
                                              volk.effects.get('wahlmoeglichkeiten', {}).get('freies_anfaengertalent', False)):
                 _reset_menschen_freies_talent(charakter)
+                
+        # NEUE LOGIK: Spezielle Behandlung für Halbelfen
+        if volk_name.lower() in ["halbelf", "halbelfen"]:
+            _reset_halbelf_auswahlen(charakter)
         
         # Effekte entfernen
         success = volk.remove_effects_from_charakter(charakter)
@@ -834,6 +842,13 @@ def initialisiere_voelker_system(charakter):
             
         if not hasattr(charakter, '_menschen_freies_talent'):
             charakter._menschen_freies_talent = None
+            
+        # NEUE LOGIK: Halbelf-spezifisches Tracking initialisieren
+        if not hasattr(charakter, '_halbelf_freies_talent'):
+            charakter._halbelf_freies_talent = None
+            
+        if not hasattr(charakter, '_halbelf_attribut_gewaehlt'):
+            charakter._halbelf_attribut_gewaehlt = False
         
         # Bereinigung durchführen
         _cleanup_voelker_selected(charakter)
@@ -912,6 +927,7 @@ def get_voelker_status_info(charakter):
 def waehle_halbelf_talent(charakter, volk_name, talent_name):
     """
     Wählt ein freies Talent für Halbelf aus (ENTWEDER-Teil der Wahl).
+    ERWEITERT: Verhindert Mehrfachauswahl und setzt Attribut-Wahl zurück.
     
     Args:
         charakter: Das Charakterobjekt
@@ -928,12 +944,36 @@ def waehle_halbelf_talent(charakter, volk_name, talent_name):
             Logger.error(f"Halbelf-Talent-Wahl nur für Halbelfen, nicht für '{volk_name}'")
             return False
         
+        # NEUE LOGIK: Prüfen ob bereits ein Talent gewählt wurde
+        aktuelles_talent = _get_halbelf_freies_talent(charakter)
+        if aktuelles_talent and aktuelles_talent != talent_name:
+            Logger.info(f"Halbelf: Setze vorheriges freies Talent '{aktuelles_talent}' zurück")
+            # Vorheriges Talent abwählen
+            if aktuelles_talent in charakter.talente:
+                vorheriges_talent = charakter.talente[aktuelles_talent]
+                vorheriges_talent.ausgewaehlt = False
+                
+                # Aus selected_talente entfernen
+                if hasattr(charakter, 'selected_talente') and aktuelles_talent in charakter.selected_talente:
+                    charakter.selected_talente.remove(aktuelles_talent)
+                    Logger.debug(f"Talent '{aktuelles_talent}' aus selected_talente entfernt")
+        
+        # NEUE LOGIK: Wenn Attribut bereits gewählt wurde, zurücksetzen (ENTWEDER/ODER)
+        if _get_halbelf_attribut_gewaehlt(charakter):
+            Logger.info("Halbelf: Setze Geschicklichkeits-Bonus zurück (ENTWEDER/ODER)")
+            if hasattr(charakter, 'attribute') and 'Geschicklichkeit' in charakter.attribute:
+                geschicklichkeit = charakter.attribute['Geschicklichkeit']
+                if geschicklichkeit.wert == 6:  # Von W6 auf W4 zurücksetzen
+                    geschicklichkeit.wert = 4
+                    Logger.debug("Geschicklichkeit von W6 auf W4 zurückgesetzt")
+            _set_halbelf_attribut_gewaehlt(charakter, False)
+        
         # Standard Talent-Auswahl durchführen
         success = waehle_freies_talent(charakter, volk_name, talent_name)
         
         if success:
             # Markiere, dass Halbelf die Talent-Option gewählt hat
-            # TODO: Persistierung der Wahl implementieren
+            _set_halbelf_freies_talent(charakter, talent_name)
             Logger.info(f"Halbelf '{volk_name}' hat freies Talent '{talent_name}' gewählt")
             return True
         
@@ -947,6 +987,7 @@ def waehle_halbelf_talent(charakter, volk_name, talent_name):
 def waehle_halbelf_attribut(charakter, volk_name):
     """
     Wählt den Geschicklichkeits-Bonus für Halbelf aus (ODER-Teil der Wahl).
+    ERWEITERT: Verhindert Mehrfachauswahl und setzt Talent-Wahl zurück.
     
     Args:
         charakter: Das Charakterobjekt
@@ -962,12 +1003,32 @@ def waehle_halbelf_attribut(charakter, volk_name):
             Logger.error(f"Halbelf-Attribut-Wahl nur für Halbelfen, nicht für '{volk_name}'")
             return False
         
+        # NEUE LOGIK: Prüfen ob bereits Attribut gewählt wurde
+        if _get_halbelf_attribut_gewaehlt(charakter):
+            Logger.info("Halbelf: Geschicklichkeits-Bonus bereits gewählt")
+            return True  # Bereits gewählt, nichts zu tun
+        
+        # NEUE LOGIK: Wenn Talent bereits gewählt wurde, zurücksetzen (ENTWEDER/ODER)
+        aktuelles_talent = _get_halbelf_freies_talent(charakter)
+        if aktuelles_talent:
+            Logger.info(f"Halbelf: Setze vorheriges freies Talent '{aktuelles_talent}' zurück (ENTWEDER/ODER)")
+            # Talent abwählen
+            if aktuelles_talent in charakter.talente:
+                talent = charakter.talente[aktuelles_talent]
+                talent.ausgewaehlt = False
+                
+                # Aus selected_talente entfernen
+                if hasattr(charakter, 'selected_talente') and aktuelles_talent in charakter.selected_talente:
+                    charakter.selected_talente.remove(aktuelles_talent)
+                    Logger.debug(f"Talent '{aktuelles_talent}' aus selected_talente entfernt")
+            _set_halbelf_freies_talent(charakter, None)
+        
         # Geschicklichkeits-Bonus anwenden
         success = waehle_freies_attribut(charakter, volk_name, "Geschicklichkeit")
         
         if success:
             # Markiere, dass Halbelf die Attribut-Option gewählt hat
-            # TODO: Persistierung der Wahl implementieren
+            _set_halbelf_attribut_gewaehlt(charakter, True)
             Logger.info(f"Halbelf '{volk_name}' hat Geschicklichkeits-Bonus gewählt")
             return True
         
@@ -1106,3 +1167,113 @@ def _reset_menschen_freies_talent(charakter):
             
     except Exception as e:
         Logger.error(f"Fehler beim Zurücksetzen des Menschen-freien-Talents: {e}")
+
+
+def _get_halbelf_freies_talent(charakter):
+    """
+    Gibt das aktuell gewählte freie Talent für Halbelfen zurück.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        str oder None: Name des freien Talents oder None
+    """
+    try:
+        if hasattr(charakter, '_halbelf_freies_talent'):
+            return charakter._halbelf_freies_talent
+        return None
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen des Halbelf-freien-Talents: {e}")
+        return None
+
+
+def _set_halbelf_freies_talent(charakter, talent_name):
+    """
+    Setzt das freie Talent für Halbelfen.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        talent_name: Name des freien Talents oder None
+    """
+    try:
+        charakter._halbelf_freies_talent = talent_name
+        Logger.debug(f"Halbelf freies Talent auf '{talent_name}' gesetzt")
+    except Exception as e:
+        Logger.error(f"Fehler beim Setzen des Halbelf-freien-Talents: {e}")
+
+
+def _get_halbelf_attribut_gewaehlt(charakter):
+    """
+    Gibt zurück ob der Halbelf bereits das Geschicklichkeits-Attribut gewählt hat.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        bool: True wenn Attribut gewählt wurde
+    """
+    try:
+        if hasattr(charakter, '_halbelf_attribut_gewaehlt'):
+            return charakter._halbelf_attribut_gewaehlt
+        return False
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen des Halbelf-Attribut-Status: {e}")
+        return False
+
+
+def _set_halbelf_attribut_gewaehlt(charakter, gewaehlt):
+    """
+    Setzt den Status ob der Halbelf das Geschicklichkeits-Attribut gewählt hat.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        gewaehlt: bool - True wenn gewählt
+    """
+    try:
+        charakter._halbelf_attribut_gewaehlt = gewaehlt
+        Logger.debug(f"Halbelf Attribut-Status auf '{gewaehlt}' gesetzt")
+    except Exception as e:
+        Logger.error(f"Fehler beim Setzen des Halbelf-Attribut-Status: {e}")
+
+
+def _reset_halbelf_auswahlen(charakter):
+    """
+    Setzt alle Halbelf-Auswahlen zurück (sowohl Talent als auch Attribut).
+    
+    Args:
+        charakter: Das Charakterobjekt
+    """
+    try:
+        # Freies Talent zurücksetzen
+        aktuelles_talent = _get_halbelf_freies_talent(charakter)
+        if aktuelles_talent and hasattr(charakter, 'talente'):
+            if aktuelles_talent in charakter.talente:
+                talent = charakter.talente[aktuelles_talent]
+                talent.ausgewaehlt = False
+                Logger.info(f"Halbelf freies Talent '{aktuelles_talent}' abgewählt")
+                
+                # Aus selected_talente entfernen
+                if hasattr(charakter, 'selected_talente') and aktuelles_talent in charakter.selected_talente:
+                    charakter.selected_talente.remove(aktuelles_talent)
+                    Logger.debug(f"Talent '{aktuelles_talent}' aus selected_talente entfernt")
+        
+        # Geschicklichkeits-Attribut zurücksetzen
+        if _get_halbelf_attribut_gewaehlt(charakter) and hasattr(charakter, 'attribute'):
+            if 'Geschicklichkeit' in charakter.attribute:
+                geschicklichkeit = charakter.attribute['Geschicklichkeit']
+                if geschicklichkeit.wert == 6:  # Von W6 auf W4 zurücksetzen
+                    geschicklichkeit.wert = 4
+                    Logger.info("Halbelf Geschicklichkeits-Bonus von W6 auf W4 zurückgesetzt")
+        
+        # Tracking zurücksetzen
+        charakter._halbelf_freies_talent = None
+        charakter._halbelf_attribut_gewaehlt = False
+        Logger.debug("Halbelf ENTWEDER/ODER-Auswahlen zurückgesetzt")
+        
+        # Abgeleitete Werte neu berechnen
+        if hasattr(charakter, 'berechne_abgeleitete_werte'):
+            charakter.berechne_abgeleitete_werte()
+            
+    except Exception as e:
+        Logger.error(f"Fehler beim Zurücksetzen der Halbelf-Auswahlen: {e}")

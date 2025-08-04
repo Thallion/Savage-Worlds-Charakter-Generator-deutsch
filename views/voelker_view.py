@@ -865,7 +865,7 @@ class VoelkerWidget(MDBoxLayout):
             
             # Titel der Sektion
             titel_label = MDLabel(
-                text="Erbe (ENTWEDER freies Talent ODER Geschicklichkeit +2):",
+                text="Erbe (ENTWEDER freies Talent ODER Geschicklichkeit W4 -> W6):",
                 font_style="Title",
                 theme_text_color="Primary",
                 size_hint_y=None,
@@ -902,7 +902,7 @@ class VoelkerWidget(MDBoxLayout):
                 height=dp(48),
                 on_release=lambda x: self._halbelf_waehle_attribut()
             )
-            attribut_button.add_widget(MDButtonText(text="Geschicklichkeit +2"))
+            attribut_button.add_widget(MDButtonText(text="Geschicklichkeit W6"))
             
             buttons_row.add_widget(talent_button)
             buttons_row.add_widget(attribut_button)
