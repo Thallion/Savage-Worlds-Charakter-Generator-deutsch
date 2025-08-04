@@ -76,6 +76,31 @@ class AusruestungItemRow(MDBoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.dialog = None
+        self._set_background_color()  # THEME-FIX: Hintergrundfarbe setzen
+
+    def _set_background_color(self):
+        """Setzt die Hintergrundfarbe basierend auf dem aktuellen Theme"""
+        app = MDApp.get_running_app()
+        if app and hasattr(app, 'theme_cls'):
+            theme_cls = app.theme_cls
+            
+            # Theme-abhängige Farben für alternierende Zeilen
+            if theme_cls.theme_style == "Light":
+                # Helle Theme-Farben
+                if self.index % 2 == 0:
+                    self.md_bg_color = [0.95, 0.95, 0.95, 1]  # Sehr helles Grau
+                else:
+                    self.md_bg_color = [0.98, 0.98, 0.98, 1]  # Noch heller
+            else:
+                # Dunkle Theme-Farben (bisherige Farben)
+                if self.index % 2 == 0:
+                    self.md_bg_color = [0.2, 0.2, 0.2, 1]
+                else:
+                    self.md_bg_color = [0.15, 0.15, 0.15, 1]
+    
+    def on_index(self, instance, value):
+        """Wird aufgerufen wenn sich der Index ändert - THEME-FIX"""
+        self._set_background_color()
 
     def _get_controller(self):
         """Hilfsmethode zum Abrufen des Controllers"""
@@ -693,7 +718,7 @@ class AusruestungWidget(MDBoxLayout):
 Factory.register('TooltipIconButton', TooltipIconButton)
 Factory.register('AusruestungItemRow', AusruestungItemRow)
 
-# KV-String mit korrigiertem Layout - Hauptänderung hier!
+# KV-String mit Theme-Fix - HAUPTÄNDERUNG: md_bg_color entfernt und theme_text_color hinzugefügt!
 KV_STRING = '''
 <TooltipIconButton>:
     style: "filled"
@@ -821,12 +846,12 @@ KV_STRING = '''
 <AusruestungItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(120)  # Etwas höher für bessere Darstellung
+    height: dp(120)
     spacing: dp(5)
     padding: [dp(5), dp(5), dp(60), dp(5)]
-    md_bg_color: [0.2, 0.2, 0.2, 1] if self.index % 2 == 0 else [0.15, 0.15, 0.15, 1]
+    # THEME-FIX: md_bg_color entfernt - wird jetzt im Python-Code gesetzt
     
-    # Hauptcontainer für Name, Beschreibung und Details - KORRIGIERT!
+    # Hauptcontainer für Name, Beschreibung und Details
     MDBoxLayout:
         orientation: 'vertical'
         size_hint_x: 0.35
@@ -843,6 +868,7 @@ KV_STRING = '''
             halign: 'left'
             valign: 'middle'
             text_size: self.width, None
+            theme_text_color: "Primary"  # THEME-FIX: Automatische Textfarbe
             
         # Beschreibung - nur wenn vorhanden
         MDLabel:
@@ -862,12 +888,11 @@ KV_STRING = '''
             font_size: dp(11)
             theme_text_color: "Secondary"
             size_hint_y: None
-            height: dp(40) if root.details else 0  # Mehr Platz für Details
+            height: dp(40) if root.details else 0
             opacity: 1 if root.details else 0
             halign: 'left'
             valign: 'top'
             text_size: self.width, None
-            text_color: [0.8, 0.8, 0.8, 1]  # Etwas heller für bessere Lesbarkeit
     
     # Kategorie
     MDLabel:
@@ -879,6 +904,7 @@ KV_STRING = '''
         pos_hint: {'center_y': 0.5}
         text_size: self.width, None
         shorten: True
+        theme_text_color: "Primary"  # THEME-FIX
     
     # Gewicht
     MDLabel:
@@ -888,6 +914,7 @@ KV_STRING = '''
         halign: 'left'
         valign: 'middle'
         pos_hint: {'center_y': 0.5}
+        theme_text_color: "Primary"  # THEME-FIX
     
     # Kosten
     MDLabel:
@@ -899,6 +926,7 @@ KV_STRING = '''
         pos_hint: {'center_y': 0.5}
         text_size: self.width, None
         shorten: True
+        theme_text_color: "Primary"  # THEME-FIX
     
     # Menge
     MDLabel:
@@ -908,6 +936,7 @@ KV_STRING = '''
         halign: 'center'
         valign: 'middle'
         pos_hint: {'center_y': 0.5}
+        theme_text_color: "Primary"  # THEME-FIX
     
     # Buttons
     AnchorLayout:
