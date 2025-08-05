@@ -1,0 +1,270 @@
+# Savage Worlds Charakter-Generator - Projekt-Konfiguration
+# pyproject.toml - Moderne Python Paket-Definition (PEP 518/621)
+
+[build-system]
+requires = ["setuptools>=65.0", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+# =============================================================================
+# PROJEKT-METADATEN
+# =============================================================================
+
+[project]
+name = "savage-worlds-character-generator"
+version = "0.5.4.0"
+description = "Moderner Charakter-Generator für das Savage Worlds Rollenspielsystem"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Savage Worlds Generator Team"},
+]
+maintainers = [
+    {name = "Savage Worlds Generator Team"},
+]
+keywords = [
+    "savage worlds",
+    "rpg",
+    "character generator",
+    "tabletop",
+    "gaming",
+    "kivymd",
+    "python"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Games/Entertainment :: Role-Playing",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Environment :: X11 Applications",
+    "Environment :: Win32 (MS Windows)",
+    "Environment :: MacOS X",
+]
+requires-python = ">=3.8"
+
+# Haupt-Dependencies
+dependencies = [
+    "kivymd==2.0.1",
+    "kivy>=2.1.0,<2.3.0",
+    "reportlab>=3.6.0,<4.1.0",
+    "Pillow>=8.0.0,<10.1.0",
+    "python-dateutil>=2.8.0,<2.9.0",
+    "psutil>=5.8.0,<6.0.0",
+    "chardet>=4.0.0,<6.0.0",
+    "pypiwin32>=223; sys_platform=='win32'",
+]
+
+# Optionale Dependency-Gruppen
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0,<8.0.0",
+    "pytest-cov>=4.0.0,<5.0.0",
+    "pytest-mock>=3.10.0,<4.0.0",
+    "pytest-xdist>=3.0.0,<4.0.0",
+    "black>=22.0.0,<24.0.0",
+    "isort>=5.10.0,<6.0.0",
+    "flake8>=4.0.0,<7.0.0",
+    "flake8-docstrings>=1.6.0,<2.0.0",
+    "mypy>=1.0.0,<2.0.0",
+    "pre-commit>=2.20.0,<4.0.0",
+]
+docs = [
+    "sphinx>=4.5.0,<6.0.0",
+    "sphinx-rtd-theme>=1.0.0,<2.0.0",
+]
+profiling = [
+    "memory-profiler>=0.60.0,<1.0.0",
+    "line-profiler>=4.0.0,<5.0.0",
+    "py-spy>=0.3.0,<1.0.0",
+]
+security = [
+    "safety>=2.0.0,<3.0.0",
+    "bandit>=1.7.0,<2.0.0",
+]
+build = [
+    "build>=0.8.0,<1.0.0",
+    "twine>=4.0.0,<5.0.0",
+    "setuptools>=65.0.0,<69.0.0",
+    "wheel>=0.37.0,<1.0.0",
+]
+all = [
+    "savage-worlds-character-generator[dev,docs,profiling,security,build]"
+]
+
+# URLs für das Projekt
+[project.urls]
+Repository = "https://github.com/Thallion/Savage-Worlds-Charakter-Generator-deutsch"
+
+# GUI Entry Point
+[project.gui-scripts]
+savage-worlds-generator = "main:main"
+
+# Console Entry Point (optional)
+[project.scripts]
+swgen = "main:main"
+
+# =============================================================================
+# SETUPTOOLS KONFIGURATION
+# =============================================================================
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "controllers*",
+    "views*", 
+    "models*",
+    "services*",
+    "functions*",
+    "utils*",
+    "assets*",
+    "settings*",
+]
+exclude = [
+    "tests*",
+    "build*",
+    "dist*",
+    "*.egg-info*",
+]
+
+[tool.setuptools.package-data]
+"*" = [
+    "*.kv",
+    "*.json", 
+    "*.png",
+    "*.jpg",
+    "*.svg",
+    "*.ico",
+    "assets/*",
+    "settings/*",
+]
+
+# =============================================================================
+# TOOL-KONFIGURATIONEN
+# =============================================================================
+
+# Black Code Formatter
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # Directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+# isort Import Sorter
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["controllers", "views", "models", "services", "functions", "utils"]
+known_third_party = ["kivy", "kivymd", "reportlab", "PIL"]
+
+# pytest Test Runner
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=.",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "ui: marks tests as UI tests",
+]
+
+# Coverage.py
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "tests/*",
+    "build/*",
+    "dist/*",
+    "venv/*",
+    "*.egg-info/*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "@abstract",
+]
+
+# MyPy Type Checker
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+# MyPy per-module Optionen
+[[tool.mypy.overrides]]
+module = [
+    "kivy.*",
+    "kivymd.*",
+    "reportlab.*",
+]
+ignore_missing_imports = true
+
+# Bandit Security Linter
+[tool.bandit]
+exclude_dirs = ["tests", "build", "dist"]
+skips = ["B101", "B601"]  # Skip assert und shell usage tests
+
+# =============================================================================
+# INSTALLATION COMMANDS
+# =============================================================================
+
+# Standard Installation:
+# pip install .
+
+# Entwicklungs-Installation:
+# pip install -e ".[dev]"
+
+# Alle optionalen Dependencies:
+# pip install -e ".[all]"
+
+# Build Package:
+# python -m build
+
+# Upload zu PyPI:
+# python -m twine upload dist/*

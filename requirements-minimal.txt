@@ -1,0 +1,102 @@
+# Savage Worlds Charakter-Generator - Minimal Requirements
+# Installation: pip install -r requirements-minimal.txt
+#
+# Diese Datei enthält nur die absolut notwendigen Dependencies
+# für die Grundfunktionalität der Anwendung.
+
+# =============================================================================
+# KERN-DEPENDENCIES (OBLIGATORISCH)
+# =============================================================================
+
+# KivyMD 2.0.1 - UI Framework (zieht Kivy automatisch mit)
+kivymd==2.0.1
+
+# Kivy - GUI Framework (explizit spezifiziert für Version Control)
+kivy>=2.1.0,<2.3.0
+
+# =============================================================================
+# WICHTIGE FUNKTIONALITÄTEN
+# =============================================================================
+
+# ReportLab - PDF-Export (ohne diese funktioniert PDF-Export nicht)
+reportlab>=3.6.0
+
+# Pillow - Bildverarbeitung (für Icons und Assets)
+Pillow>=8.0.0
+
+# =============================================================================
+# OPTIONALE ABER EMPFOHLENE DEPENDENCIES
+# =============================================================================
+
+# python-dateutil - Bessere Datums-Funktionen (empfohlen für File-Timestamps)
+python-dateutil>=2.8.0
+
+# =============================================================================
+# NOTIZEN
+# =============================================================================
+
+# Diese minimale Installation bietet:
+# ✅ Vollständige Charaktererstellung
+# ✅ Alle UI-Funktionen
+# ✅ Speichern/Laden von Charakteren
+# ✅ PDF-Export
+# ✅ Theme-Support
+# ✅ Völker-, Talente-, Handicaps-System
+# ✅ Ausrüstungs-Verwaltung
+
+# Nicht enthalten:
+# ❌ Entwicklungstools (Testing, Linting)
+# ❌ Erweiterte Profiling-Tools
+# ❌ Dokumentations-Tools
+
+# =============================================================================
+# INSTALLATION
+# =============================================================================
+
+# Minimale Installation:
+# pip install -r requirements-minimal.txt
+
+# Upgrade auf vollständige Installation:
+# pip install -r requirements.txt
+
+# =============================================================================
+# SYSTEM-ANFORDERUNGEN
+# =============================================================================
+
+# Python: 3.8 oder höher
+# RAM: Minimum 2GB, empfohlen 4GB+
+# Speicher: ~100MB für Dependencies + ~50MB für Anwendung
+# Display: Minimum 1024x768, empfohlen 1920x1080+
+
+# =============================================================================
+# PLATTFORM-KOMPATIBILITÄT
+# =============================================================================
+
+# Windows: Windows 10/11 (x64)
+# macOS: macOS 10.14+ (Intel/Apple Silicon)
+# Linux: Ubuntu 18.04+, Debian 10+, Fedora 30+ (x64/ARM64)
+
+# =============================================================================
+# TROUBLESHOOTING
+# =============================================================================
+
+# Bei Problemen mit Kivy-Installation auf Linux:
+# sudo apt-get install python3-dev libffi-dev
+
+# Bei Problemen mit Pillow auf Linux:
+# sudo apt-get install libjpeg-dev zlib1g-dev
+
+# Bei Problemen mit ReportLab:
+# pip install --upgrade setuptools wheel
+
+# =============================================================================
+# PERFORMANCE-TIPPS
+# =============================================================================
+
+# Für bessere Performance:
+# pip install --upgrade pip setuptools wheel
+# pip install -r requirements-minimal.txt --no-cache-dir
+
+# Für langsamere Systeme:
+# Verwenden Sie Python 3.9+ für bessere Performance
+# Stellen Sie sicher, dass mindestens 4GB RAM verfügbar sind

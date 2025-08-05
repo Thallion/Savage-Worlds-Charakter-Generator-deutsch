@@ -1,0 +1,113 @@
+# Savage Worlds Charakter-Generator - Requirements
+# Python 3.8+ erforderlich
+# 
+# Installation: pip install -r requirements.txt
+
+# =============================================================================
+# KERN-DEPENDENCIES
+# =============================================================================
+
+# KivyMD 2.0.1 - Modernes Material Design UI Framework
+kivymd==2.0.1
+
+# Kivy - Cross-Platform GUI Framework (Basis für KivyMD)
+kivy>=2.1.0,<2.3.0
+
+# =============================================================================
+# PDF & DOKUMENTEN-GENERIERUNG
+# =============================================================================
+
+# ReportLab - PDF-Generierung für Charakterbögen
+reportlab>=3.6.0,<4.1.0
+
+# =============================================================================
+# BILD- & MEDIENVERARBEITUNG
+# =============================================================================
+
+# Pillow - Python Imaging Library für Bildverarbeitung
+Pillow>=8.0.0,<10.1.0
+
+# =============================================================================
+# DATUM & ZEIT-FUNKTIONEN
+# =============================================================================
+
+# Python-dateutil - Erweiterte Datums- und Zeitfunktionen
+python-dateutil>=2.8.0,<2.9.0
+
+# =============================================================================
+# ENTWICKLUNGS-DEPENDENCIES (Optional)
+# =============================================================================
+
+# pytest - Testing Framework (nur für Entwicklung)
+pytest>=7.0.0,<8.0.0
+
+# pytest-cov - Coverage Reports (nur für Entwicklung)
+pytest-cov>=4.0.0,<5.0.0
+
+# black - Code Formatter (nur für Entwicklung)
+black>=22.0.0,<24.0.0
+
+# flake8 - Linting (nur für Entwicklung)
+flake8>=4.0.0,<7.0.0
+
+# =============================================================================
+# PLATFORM-SPEZIFISCHE DEPENDENCIES
+# =============================================================================
+
+# Windows-spezifische Dependencies
+pypiwin32>=223; sys_platform == "win32"
+
+# =============================================================================
+# OPTIONALE DEPENDENCIES
+# =============================================================================
+
+# psutil - System- und Prozessinformationen (für Performance-Monitoring)
+psutil>=5.8.0,<6.0.0
+
+# chardet - Automatische Zeichensatz-Erkennung (für Dateien)
+chardet>=4.0.0,<6.0.0
+
+# =============================================================================
+# NOTIZEN
+# =============================================================================
+
+# Die folgenden Python Standard-Bibliotheken werden verwendet, 
+# sind aber bereits im Python-Standard enthalten:
+# - json (JSON-Serialisierung)
+# - os, sys (Betriebssystem-Interface)
+# - pathlib (Objektorientierte Dateipfade)
+# - datetime (Datum- und Zeitfunktionen)
+# - threading (Multi-Threading)
+# - functools (Funktionale Programmierung)
+# - dataclasses (Python 3.7+ Data Classes)
+# - logging (Logging-Framework)
+# - copy (Objekt-Kopierung)
+# - string (String-Konstanten und -Funktionen)
+
+# =============================================================================
+# INSTALLATION
+# =============================================================================
+
+# Für Produktions-Installation:
+# pip install -r requirements.txt
+
+# Für Entwicklungs-Installation (mit Dev-Dependencies):
+# pip install -r requirements.txt pytest pytest-cov black flake8
+
+# Für minimale Installation (nur Kern-Dependencies):
+# pip install kivymd==2.0.1 kivy>=2.1.0 reportlab>=3.6.0 Pillow>=8.0.0 python-dateutil>=2.8.0
+
+# =============================================================================
+# KOMPATIBILITÄT
+# =============================================================================
+
+# Python Version: 3.8+
+# Betriebssysteme: Windows 10+, macOS 10.14+, Linux (Ubuntu 18.04+)
+# Architektur: x64, ARM64 (M1/M2 Macs)
+
+# =============================================================================
+# VERSION HISTORY
+# =============================================================================
+
+# v2.0.1 - Aktualisierung auf KivyMD 2.0.1
+# v1.0.0 - Erste stabile Version
