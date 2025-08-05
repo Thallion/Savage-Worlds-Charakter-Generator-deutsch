@@ -1,116 +1,47 @@
-# Savage Worlds Charakter-Generator
+# 🎲 Savage Worlds Charakter-Generator
 
-Ein moderner, plattformübergreifender Charakter-Generator für das Savage Worlds Rollenspielsystem, entwickelt mit Python und KivyMD 2.0.1.
-
-## 📋 Überblick
-
-Diese Anwendung ermöglicht es Spielern und Spielleitern, schnell und einfach Charaktere für Savage Worlds zu erstellen und zu verwalten. Das Projekt folgt modernen Softwareentwicklungsprinzipien wie Clean Code, Domain-Driven Design (DDD) und dem Model-View-Controller (MVC) Pattern.
+Moderner, benutzerfreundlicher Charakter-Generator für das Savage Worlds Rollenspielsystem. Entwickelt mit Python und KivyMD 2.0.1 für eine zeitgemäße Material Design Oberfläche.
 
 ## ✨ Features
 
-### Kern-Features
+### 🎯 Kern-Funktionalitäten
 - **Vollständige Charaktererstellung** nach Savage Worlds Regeln
-- **Multi-Setting Support** (SWAE, Savage Pathfinder, etc.)
-- **Völker-System** mit automatischen Attributs- und Talentboni
-- **Attribute & Fertigkeiten** mit Würfel-System (W4-W12+)
-- **Talente & Handicaps** mit Voraussetzungsprüfung
-- **Mächte-System** für arkane Charaktere
-- **Ausrüstung-Verwaltung** (Waffen, Rüstungen, Schilde, Gegenstände)
-- **PDF-Export** für Charakterbögen
-- **Statblock-Generator** für schnelle Referenz
+- **Interaktive Benutzeroberfläche** mit Material Design
+- **PDF-Export** für professionelle Charakterbögen
+- **Speichern/Laden** von Charakteren im JSON-Format
+- **Multi-Setting Support** (Deadlands, 50 Fathoms, etc.)
 
-### UI/UX Features
-- **Moderne KivyMD 2.0.1 Oberfläche** mit Material Design
+### 🎨 UI/UX Features
 - **Dark/Light Theme** Support
 - **Responsive Design** für verschiedene Bildschirmgrößen
-- **Tab-Navigation** mit intuitiver Benutzerführung
-- **Tooltips & Hilfe-Texte** für bessere Benutzerführung
+- **Intuitive Navigation** mit Tab-System
+- **Real-time Validation** bei Eingaben
+- **Tooltips und Hilfe-Texte** für Anfänger
 
-### Technische Features
-- **MVC-Architektur** für saubere Trennung der Verantwortlichkeiten
-- **Service Container** für Dependency Injection
-- **Event-System** für lose Kopplung
-- **Config-Service** für persistente Einstellungen
-- **Dialog-Service** für einheitliche Benutzerinteraktion
-- **Threading** für bessere Performance
-- **Caching** für optimierte Render-Performance
+### 🔧 Technische Features
+- **Automatische Punkteverteilung** mit Regelvalidierung
+- **Vollständige Talente-Datenbank** mit Voraussetzungen
+- **Handicaps-System** mit Punkteberechnung
+- **Ausrüstungsmanager** mit Gewichts- und Kostenkalkulation
+- **Backup-System** für Charakterdateien
 
-## 🏗️ Projekt-Struktur
+## 🚀 Installation & Start
 
-```
-savage-worlds-generator/
-├── main.py                     # Hauptanwendung
-├── charakter.py               # Charakter-Kernmodell
-├── controllers/               # Controller-Schicht (MVC)
-│   └── charakter_controller.py
-├── models/                    # Datenmodelle
-│   ├── attribut.py
-│   ├── fertigkeit.py
-│   ├── talent.py
-│   ├── handicap.py
-│   ├── macht.py
-│   ├── ausruestung.py
-│   ├── waffe.py
-│   ├── ruestung.py
-│   ├── schild.py
-│   ├── volk.py
-│   └── wuerfel.py
-├── views/                     # UI-Komponenten (MVC)
-│   ├── eigenschaften_view.py
-│   ├── voelker_view.py
-│   ├── profil_view.py
-│   ├── talente_view.py
-│   ├── handicaps_view.py
-│   ├── maechte_view.py
-│   ├── ausruestung_view.py
-│   ├── charakterbogen_view.py
-│   ├── pointbar_view.py
-│   └── einstellungen_widget.py
-├── services/                  # Hilfsdienste
-│   ├── service_container.py
-│   ├── config_service.py
-│   ├── theme_service.py
-│   ├── dialog_service.py
-│   ├── event_service.py
-│   ├── file_manager_service.py
-│   └── pdf_service.py
-├── functions/                 # Domänen-spezifische Funktionen
-│   ├── eigenschaften_funktionen.py
-│   ├── volk_funktionen.py
-│   ├── setting_funktionen.py
-│   ├── charakter_speicher.py
-│   └── statblock_generator.py
-├── settings/                  # Spiel-Settings und Regeln
-├── assets/                    # Bilder und Ressourcen
-└── config/                    # Anwendungskonfiguration
-```
+### Systemanforderungen
+- **Python**: 3.8 oder höher
+- **RAM**: Minimum 2GB, empfohlen 4GB+
+- **Speicher**: ~100MB für Dependencies + ~50MB für Anwendung
+- **Display**: Minimum 1024x768, empfohlen 1920x1080+
 
-## 🚀 Installation
+### Quick Setup
 
-### Voraussetzungen
-- Python 3.8 oder höher
-- Git (für Entwicklung)
-
-### Dependencies
-```python
-# Core Dependencies
-kivy>=2.1.0
-kivymd==2.0.1
-python-dateutil>=2.8.0
-
-# Optional Dependencies
-reportlab>=3.6.0      # PDF-Export
-pillow>=8.0.0         # Bildverarbeitung
-```
-
-### Setup
-1. Repository klonen:
+1. **Repository klonen:**
 ```bash
-git clone [repository-url]
-cd savage-worlds-generator
+git clone https://github.com/Thallion/Savage-Worlds-Charakter-Generator-deutsch.git
+cd Savage-Worlds-Charakter-Generator-deutsch
 ```
 
-2. Virtuelle Umgebung erstellen (empfohlen):
+2. **Virtuelle Umgebung erstellen (empfohlen):**
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
@@ -118,14 +49,29 @@ source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 ```
 
-3. Dependencies installieren:
+3. **Dependencies installieren:**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Anwendung starten:
+**Hinweis zu KivyMD:** Die aktuelle KivyMD 2.0.1 Version wird direkt von GitHub installiert, da sie noch nicht offiziell auf PyPI verfügbar ist.
+
+4. **Anwendung starten:**
 ```bash
 python main.py
+```
+
+### Alternative Installation (bei Problemen)
+
+Falls die requirements.txt Installation fehlschlägt:
+
+```bash
+# Manuell installieren:
+pip install https://github.com/kivymd/KivyMD/archive/master.zip
+pip install kivy>=2.1.0
+pip install reportlab>=3.6.0
+pip install Pillow>=8.0.0
+pip install python-dateutil>=2.8.0
 ```
 
 ## 🎮 Verwendung
@@ -134,7 +80,7 @@ python main.py
 1. **Profil**: Name, Alter, Geschlecht und Konzept eingeben
 2. **Volk**: Gewünschtes Volk auswählen (Menschen, Elfen, Zwerge, etc.)
 3. **Attribute**: Fünf Punkte auf Attribute verteilen
-4. **Fertigkeiten**: 15 Punkte auf Fertigkeiten verteilen
+4. **Fertigkeiten**: 15 Punkte auf Fertigkeiten verteilen  
 5. **Handicaps**: Optional Handicaps für zusätzliche Punkte wählen
 6. **Talente**: Talente mit erworbenen Punkten auswählen
 7. **Ausrüstung**: Waffen, Rüstung und Gegenstände auswählen
@@ -143,168 +89,120 @@ python main.py
 - **Speichern**: `Datei > Speichern` oder `Strg+S`
 - **Laden**: `Datei > Öffnen` oder `Strg+O`
 - **PDF-Export**: `Datei > Als PDF exportieren`
+- **Neuer Charakter**: `Datei > Neu` oder `Strg+N`
 
 ### Settings wechseln
 1. In den Einstellungen das gewünschte Setting auswählen
 2. Anwendung neu starten für vollständige Aktivierung
+3. Neue Talente und Handicaps werden automatisch geladen
 
-## 🛠️ Entwicklung
+## 🛠️ Projekt-Struktur
 
-### Code-Standards
-- **Clean Code**: Saubere, lesbare und wartbare Code-Basis
-- **DDD**: Domain-Driven Design für fachliche Klarheit
-- **MVC**: Strikte Trennung von Model, View und Controller
-- **SOLID**: Befolgen der SOLID-Prinzipien
-- **PEP 8**: Python Style Guide Konformität
-
-### Architektur-Prinzipien
-```python
-# Model: Datenstruktur und Geschäftslogik
-class Attribut:
-    def __init__(self, attribut_name, wert=4, modifier=0):
-        self.name = attribut_name
-        self.wuerfel = Wuerfel(wert, modifier)
-
-# View: UI-Komponente ohne Geschäftslogik
-class EigenschaftenWidget(MDBoxLayout):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.controller = App.get_running_app().controller
-
-# Controller: Vermittler zwischen Model und View
-class CharakterController:
-    def steigere_attribut(self, attribut_name):
-        return self.charakter.steigere_attribut(attribut_name)
+```
+Savage-Worlds-Charakter-Generator-deutsch/
+├── main.py                 # Einstiegspunkt der Anwendung
+├── models/                 # Datenmodelle (Charakter, Attribute, etc.)
+├── views/                  # UI-Komponenten und Layouts
+├── controllers/            # Geschäftslogik und App-Steuerung
+├── functions/              # Hilfsfunktionen (PDF-Export, Dateien, etc.)
+├── data/                   # Spieldaten (Talente, Handicaps, Settings)
+├── assets/                 # Ressourcen (Bilder, Fonts, Icons)
+├── requirements.txt        # Python-Dependencies
+└── README.md              # Diese Datei
 ```
 
-### Neue Features hinzufügen
-1. **Model**: Datenstruktur in `models/` erstellen
-2. **Function**: Geschäftslogik in `functions/` implementieren
-3. **View**: UI-Komponente in `views/` entwickeln
-4. **Controller**: Integration über Controller-Schicht
-5. **Service**: Bei Bedarf Service für übergreifende Funktionalität
+## 🐛 Troubleshooting
 
-### Testing
-- Unit Tests für Geschäftslogik in `functions/`
-- Integration Tests für Controller-Schicht
-- UI Tests für kritische Benutzerinteraktionen
+### Häufige Probleme
 
-## 📚 API-Dokumentation
-
-### Charakter-API
-```python
-# Charakter erstellen
-charakter = Charakter()
-
-# Attribut steigern
-result = charakter.steigere_attribut("Stärke")
-
-# Talent auswählen
-result = charakter.waehle_talent("Kämpfer")
-
-# Charakter speichern
-charakter.speichern_als_json("mein_held.json")
+**"ModuleNotFoundError: No module named 'kivymd'"**
+```bash
+# KivyMD von GitHub installieren (nicht von PyPI)
+pip install https://github.com/kivymd/KivyMD/archive/master.zip
 ```
 
-### Service-API
-```python
-# Theme ändern
-theme_service = get_theme_service()
-theme_service.switch_theme("dark")
-
-# Dialog anzeigen
-dialog_service = get_dialog_service()
-dialog_service.show_info("Charakter gespeichert!")
+**KivyMD Installation schlägt fehl:**
+```bash
+# Zuerst Kivy installieren, dann KivyMD
+pip install kivy>=2.1.0
+pip install https://github.com/kivymd/KivyMD/archive/master.zip
 ```
 
-## 🎨 KivyMD 2.0.1 Kompatibilität
-
-Das Projekt verwendet die neueste KivyMD Version mit folgenden wichtigen Änderungen:
-
-### Buttons
-```python
-# Neu in 2.0.1
-button = MDButton(style="elevated")
-button.add_widget(MDButtonText(text="Klick mich"))
-
-# Alt (nicht mehr verfügbar)
-# MDFlatButton, MDRaisedButton - entfernt
+**Linux: "command 'gcc' failed"**
+```bash
+sudo apt-get install python3-dev libffi-dev
+sudo apt-get install libjpeg-dev zlib1g-dev  # für Pillow
 ```
 
-### Typography
-```python
-# Neu in 2.0.1
-MDLabel(font_style="Headline")  # Statt H1, H2, etc.
+**Windows: "Microsoft Visual C++ 14.0 is required"**
+- Visual Studio Build Tools installieren oder
+- Vorkompilierte Wheels verwenden: `pip install --only-binary=all kivymd`
 
-# Alt
-# font_style="H6" - entfernt
+**Performance Probleme:**
+- Mindestens Python 3.9+ verwenden
+- 4GB+ RAM sicherstellen  
+- SSD für bessere Ladezeiten nutzen
+
+**PDF-Export funktioniert nicht:**
+```bash
+pip install --upgrade reportlab
 ```
 
-### Dialogs
-```python
-# Neu in 2.0.1
-dialog = MDDialog(
-    MDDialogHeadlineText(text="Titel"),
-    MDDialogContentContainer(content),
-    MDDialogButtonContainer(buttons)
-)
+## 📦 Executable erstellen (Optional)
+
+Für Benutzer ohne Python-Installation:
+
+```bash
+# PyInstaller installieren
+pip install pyinstaller
+
+# Executable erstellen
+pyinstaller --windowed --onefile main.py
+
+# Executable findet sich dann in dist/
 ```
 
-## 🌟 Besondere Features
+## 🔄 Updates
 
-### Völker-System
-- Automatische Attributs-/Talentboni
-- Wahlmöglichkeiten für flexible Völker
-- Halbelf-Unterstützung mit mehreren Optionen
+```bash
+# Repository aktualisieren
+git pull
 
-### Savage Pathfinder Integration
-- Kostenlose Anfänger-Talente
-- Erweiterte Attributs-Steigerungen
-- Spezielle Pathfinder-Regeln
+# Dependencies aktualisieren
+pip install --upgrade -r requirements.txt
 
-### Performance-Optimierungen
-- Threading für UI-Updates
-- Caching für Würfel-Icons
-- Lazy Loading für große Datensätze
+# Anwendung neu starten
+python main.py
+```
 
-## 📄 Lizenz
+## 📄 Lizenz & Rechtliches
 
-Dieses Produkt bezieht sich auf das Regelsystem Savage Worlds, erhältlich bei der Pinnacle Entertainment Group unter www.peginc.com. Savage Worlds und alle zugehörigen Logos und Warenzeichen sind urheberrechtlich geschützt durch die Pinnacle Entertainment Group. Verwendung mit Genehmigung.
+### Creative Commons Lizenz
+Dieses Projekt ist lizenziert unter der **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License** - siehe [LICENSE.md](LICENSE.md) für Details.
 
-Die deutsche Übersetzung der Begrifflichkeiten von Ulisses Spiele darf verwendet werden. Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder Eignung dieses Produkts für einen bestimmten Zweck.
+**Kurz gesagt:**
+- ✅ Freie Nutzung für private und Bildungszwecke
+- ✅ Modifikationen und Weitergabe erlaubt
+- ❌ Keine kommerzielle Nutzung
+- 📋 Namensnennung erforderlich
+- 🔄 Weitergabe unter gleichen Bedingungen
 
-## 🤝 Danksagungen
+### Savage Worlds Fan-Produkt
+„Dieses Produkt bezieht sich auf das Regelsystem Savage Worlds, erhältlich bei der Pinnacle Entertainment Group unter www.peginc.com. Savage Worlds und alle zugehörigen Logos und Warenzeichen sind urheberrechtlich geschützt durch die Pinnacle Entertainment Group. Verwendung mit Genehmigung. Die deutsche Übersetzung der Begrifflichkeiten von Ulisses Spiele darf verwendet werden. Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder Eignung dieses Produkts für einen bestimmten Zweck."
+
+### Copyright
+Copyright (c) 2025 Jean-Michel Fenske (Thallion)
+
+## 🤝 Beitragen
+
+Verbesserungsvorschläge und Bug-Reports sind willkommen:
+1. [Issue erstellen](https://github.com/Thallion/Savage-Worlds-Charakter-Generator-deutsch/issues) für Bug-Reports oder Feature-Requests
+2. Fork & Pull Request für Code-Beiträge
+
+## 🙏 Danksagungen
 
 - **Pinnacle Entertainment Group** für das großartige Savage Worlds System
-- **Ulisses Spiele** für die deutsche Übersetzung und Genehmigung
-- **KivyMD Team** für das ausgezeichnete UI-Framework
+- **Ulisses Spiele** für die deutsche Übersetzung und Lokalisierung
+- **KivyMD Team** für das exzellente UI Framework
+- **Python Community** für die fantastischen Libraries
 - **Community** für Feedback und Bug-Reports
-
-## 📞 Support
-
-Bei Fragen oder Problemen:
-1. Issues im Repository erstellen
-2. Dokumentation prüfen
-3. Ulisses Discord: Kanal Savage Worlds
-
-## 🔄 Roadmap
-
-### Geplante Features
-- [ ] Kampagnen-Verwaltung
-- [ ] Gruppen-Features
-- [ ] Mobile App (Android)
-- [ ] Linux App (Debian/Ubuntu)
-- [ ] Erweitertes Setting-System
-
-### Known Issues
-- Siehe Issues im Repository
-
----
-
-**Version**: 0.5.4.0  
-**Letzte Aktualisierung**: August 2025  
-**Entwickelt mit**: Python 3.12, KivyMD 2.0.1
-
-## Lizenz
-Dieses Projekt ist lizenziert unter der Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-Siehe [LICENSE](LICENSE) für Details.
