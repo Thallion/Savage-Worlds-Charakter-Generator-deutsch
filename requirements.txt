@@ -10,8 +10,8 @@
 # KivyMD 2.0.1 - Material Design UI Framework (aktuelle Entwicklungsversion von GitHub)
 https://github.com/kivymd/KivyMD/archive/master.zip
 
-# Kivy - Cross-Platform GUI Framework (wird automatisch mit KivyMD installiert)
-kivy>=2.1.0,<2.3.0
+# Kivy - Cross-Platform GUI Framework (kompatibel mit KivyMD 2.0.1+)
+kivy>=2.3.0
 
 # =============================================================================
 # FUNKTIONALE DEPENDENCIES
@@ -40,9 +40,8 @@ pypiwin32>=223; sys_platform == "win32"
 # Einfache Installation:
 # pip install -r requirements.txt
 
-# Alternative: KivyMD manuell installieren (falls requirements.txt Probleme macht):
-# pip install https://github.com/kivymd/KivyMD/archive/master.zip
-# pip install kivy>=2.1.0 reportlab>=3.6.0 Pillow>=8.0.0 python-dateutil>=2.8.0
+# Alternative: Stabile Version für Produktionsumgebung
+# pip install kivymd==1.2.0 kivy>=2.1.0,<2.3.0 reportlab>=3.6.0 Pillow>=8.0.0 python-dateutil>=2.8.0
 
 # Upgrade bestehender Installation:
 # pip install --upgrade -r requirements.txt
@@ -57,35 +56,19 @@ pypiwin32>=223; sys_platform == "win32"
 # Speicher: ~100MB für Dependencies + ~50MB für Anwendung
 
 # =============================================================================
-# TROUBLESHOOTING
+# ALTERNATIVE KONFIGURATIONEN
 # =============================================================================
 
-# Bei Problemen mit KivyMD GitHub-Installation:
-# 1. Versuchen Sie eine spezifische Version/Tag:
-# pip install https://github.com/kivymd/KivyMD/archive/refs/tags/1.2.0.zip
-# 
-# 2. Oder einen spezifischen Commit (falls Master instabil):
-# pip install https://github.com/kivymd/KivyMD/archive/COMMIT_HASH.zip
+# Für stabile Produktion (empfohlen für kritische Anwendungen):
+# kivymd==1.2.0
+# kivy>=2.1.0,<2.3.0
+# reportlab>=3.6.0
+# Pillow>=8.0.0
+# python-dateutil>=2.8.0
 
-# Bei Problemen mit Kivy-Installation auf Linux:
-# sudo apt-get install python3-dev libffi-dev
-
-# Bei Problemen mit Pillow auf Linux:
-# sudo apt-get install libjpeg-dev zlib1g-dev
-
-# Bei Problemen mit ReportLab:
-# pip install --upgrade setuptools wheel
-
-# =============================================================================
-# OPTIONALE ERWEITERUNGEN (bei Bedarf später hinzufügen)
-# =============================================================================
-
-# Für Entwicklung/Testing:
-# pytest>=7.0.0
-# black>=22.0.0
-
-# Für Performance-Monitoring:
-# psutil>=5.8.0
-
-# Für erweiterte Datei-Unterstützung:
-# chardet>=4.0.0
+# Für neueste Features (aktuell):
+# https://github.com/kivymd/KivyMD/archive/master.zip
+# kivy>=2.3.0
+# reportlab>=3.6.0
+# Pillow>=8.0.0
+# python-dateutil>=2.8.0

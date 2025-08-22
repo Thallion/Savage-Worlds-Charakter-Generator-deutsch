@@ -1,0 +1,25 @@
+{
+  "grundfertigkeiten": [
+    "Allgemeinwissen",
+    "Athletik",
+    "Heimlichkeit",
+    "Überreden",
+    "Wahrnehmung"
+  ],
+  "standard_attribute": {
+    "Stärke": {"wert": 4, "modifier": 0},
+    "Geschicklichkeit": {"wert": 4, "modifier": 0},
+    "Konstitution": {"wert": 4, "modifier": 0},
+    "Verstand": {"wert": 4, "modifier": 0},
+    "Willenskraft": {"wert": 4, "modifier": 0}
+  },
+  "start_attributsteigerungen": 5,
+  "max_wuerfel_wert": 12,
+  "kosten": {
+    "attribut_chargen": 1,
+    "attribut_spiel": 2,
+    "fertigkeit_chargen": 1,
+    "fertigkeit_spiel": 1,
+    "fertigkeit_ueber_attribut": 2
+  }
+}

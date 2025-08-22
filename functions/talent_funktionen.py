@@ -76,6 +76,128 @@ def hat_bereits_kostenloses_pathfinder_talent(charakter):
     return charakter.pathfinder_kostenlose_talente_gewaehlt >= 1
 
 
+def get_pathfinder_klassen_talente(charakter):
+    """
+    Gibt eine Liste der verfügbaren Pathfinder-Klassen-Talente zurück.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        list: Liste der verfügbaren Klassen-Talente
+    """
+    klassen_talente = []
+    for talent_name, talent in charakter.talente.items():
+        if talent_name.startswith("Class:") and not talent.ausgewaehlt:
+            klassen_talente.append(talent_name)
+    return sorted(klassen_talente)
+
+
+def get_pathfinder_ancestry_talente(charakter):
+    """
+    Gibt eine Liste der verfügbaren Pathfinder-Ancestry-Talente zurück.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        list: Liste der verfügbaren Ancestry-Talente
+    """
+    ancestry_talente = []
+    for talent_name, talent in charakter.talente.items():
+        if talent_name.startswith("Ancestry:") and not talent.ausgewaehlt:
+            ancestry_talente.append(talent_name)
+    return sorted(ancestry_talente)
+
+
+def hat_ausgewaehlte_klasse(charakter):
+    """
+    Prüft, ob der Charakter bereits eine Pathfinder-Klasse ausgewählt hat.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        bool: True, wenn eine Klasse ausgewählt wurde, sonst False
+    """
+    for talent_name in charakter.selected_talente:
+        if talent_name.startswith("Class:"):
+            return True
+    return False
+
+
+def hat_ausgewaehlte_ancestry(charakter):
+    """
+    Prüft, ob der Charakter bereits eine Pathfinder-Ancestry ausgewählt hat.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        bool: True, wenn eine Ancestry ausgewählt wurde, sonst False
+    """
+    for talent_name in charakter.selected_talente:
+        if talent_name.startswith("Ancestry:"):
+            return True
+    return False
+
+
+def get_talente_by_kategorie(charakter, kategorie):
+    """
+    Gibt eine Liste von Talenten einer bestimmten Kategorie zurück.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        kategorie: Die Kategorie der Talente
+        
+    Returns:
+        list: Liste der Talente in der angegebenen Kategorie
+    """
+    talente = []
+    for talent_name, talent in charakter.talente.items():
+        if talent.kategorie == kategorie and not talent.ausgewaehlt:
+            talente.append(talent_name)
+    return sorted(talente)
+
+
+def get_ausgewaehlte_pathfinder_talente(charakter):
+    """
+    Gibt eine Liste der ausgewählten Pathfinder-Talente (Ancestry und Class) zurück.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        list: Liste der ausgewählten Pathfinder-Talente
+    """
+    pathfinder_talente = []
+    for talent_name in charakter.selected_talente:
+        if talent_name.startswith("Ancestry:") or talent_name.startswith("Class:"):
+            pathfinder_talente.append(talent_name)
+    return pathfinder_talente
+
+
+def kann_pathfinder_talent_waehlen(charakter):
+    """
+    Prüft, ob der Charakter noch ein kostenloses Pathfinder-Talent wählen kann.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        
+    Returns:
+        bool: True, wenn noch ein Pathfinder-Talent gewählt werden kann, sonst False
+    """
+    # Prüfe ob es ein Pathfinder-Setting ist
+    if not ist_savage_pathfinder_setting(charakter):
+        return False
+    
+    # Man kann eine Ancestry und eine Class wählen
+    hat_ancestry = hat_ausgewaehlte_ancestry(charakter)
+    hat_klasse = hat_ausgewaehlte_klasse(charakter)
+    
+    return not hat_ancestry or not hat_klasse
+
+
 def initialisiere_talente(charakter, talent_daten):
     """
     Initialisiert die Talente des Charakters basierend auf der bereitgestellten Liste.
@@ -87,7 +209,8 @@ def initialisiere_talente(charakter, talent_daten):
     try:
         for kategorie, talente in talent_daten.items():
             for name, daten in talente.items():
-                talent = charakter.Talent(
+                # WICHTIG: Hier Talent direkt verwenden, nicht charakter.Talent
+                talent = Talent(
                     name=name,
                     kategorie=kategorie,
                     rang=daten.get('Rang', ''),
@@ -97,6 +220,11 @@ def initialisiere_talente(charakter, talent_daten):
                     machtpunkte=daten.get('machtpunkte', 0)
                 )
                 charakter.talente[name] = talent
+                
+                # Debug-Ausgabe für Arkane Hintergründe
+                if "Arkaner Hintergrund" in name:
+                    Logger.debug(f"Initialisiere Talent '{name}' mit neue_maechte={talent.neue_maechte}, machtpunkte={talent.machtpunkte}")
+                    
     except Exception as e:
         Logger.error(f"Fehler bei der Initialisierung der Talente: {e}")
 
@@ -152,6 +280,10 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
         
     talent = charakter.talente[talent_name_key]
     
+    # Debug-Ausgabe für Arkane Hintergründe
+    if "Arkaner Hintergrund" in talent_name_key:
+        Logger.debug(f"Freies Talent '{talent_name_key}' hat neue_maechte={talent.neue_maechte}, machtpunkte={talent.machtpunkte}")
+    
     # Prüfe ob dieses spezifische Talent bereits ausgewählt ist (für Mehrfachauswahl)
     if talent.ausgewaehlt:
         # Prüfe ob das Talent duplizierbar ist
@@ -193,9 +325,13 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     talent.ausgewaehlt = True
     
     # Machtpunkte und verfügbare Mächte erhöhen, falls das Talent diese gewährt
+    Logger.info(f"Vor Auswahl: verfuegbare_maechte={charakter.verfuegbare_maechte}, anzahl_maechte={charakter.anzahl_maechte}, machtpunkte={charakter.machtpunkte}")
+    
     charakter.verfuegbare_maechte += talent.neue_maechte
     charakter.anzahl_maechte += talent.neue_maechte
     charakter.erhoehe_machtpunkte(talent.machtpunkte)
+    
+    Logger.info(f"Nach Auswahl: verfuegbare_maechte={charakter.verfuegbare_maechte}, anzahl_maechte={charakter.anzahl_maechte}, machtpunkte={charakter.machtpunkte}")
     
     # Zur Liste der ausgewählten Talente hinzufügen
     if talent_name_key not in charakter.selected_talente:
@@ -345,6 +481,11 @@ def talent_auswaehlen(charakter, talent_name_key, skip_prereq_check=False):
             if skip_prereq_check or talent.voraussetzungen_erfuellt(charakter):
                 # Talent auswählen und Anpassungen vornehmen
                 talent.ausgewaehlt = True
+                
+                # Debug-Ausgabe für Arkane Hintergründe
+                if "Arkaner Hintergrund" in talent_name_key:
+                    Logger.debug(f"Auswahl Talent '{talent_name_key}': neue_maechte={talent.neue_maechte}, machtpunkte={talent.machtpunkte}")
+                
                 charakter.verfuegbare_maechte += talent.neue_maechte
                 charakter.anzahl_maechte += talent.neue_maechte
                 charakter.erhoehe_machtpunkte(talent.machtpunkte)
@@ -663,6 +804,11 @@ def entferne_talent(charakter, talent_name_key):
     """
     def talent_abwaehlen():
         talent.abwaehlen(charakter)
+        
+        # Debug-Ausgabe für Arkane Hintergründe
+        if "Arkaner Hintergrund" in talent_name_key:
+            Logger.debug(f"Entferne Talent '{talent_name_key}': neue_maechte={talent.neue_maechte}, machtpunkte={talent.machtpunkte}")
+        
         charakter.verfuegbare_maechte -= talent.neue_maechte
         charakter.anzahl_maechte -= talent.neue_maechte
         charakter.verfuegbare_maechte = max(charakter.verfuegbare_maechte, 0)  # Nicht negativ

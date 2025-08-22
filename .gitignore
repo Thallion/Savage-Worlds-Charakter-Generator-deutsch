@@ -21,6 +21,7 @@ test_units/
 # Environments
 .env
 .venv
+.idea
 env/
 venv/
 ENV/
