@@ -12,6 +12,7 @@ build/
 # Unit test / coverage reports
 htmlcov/
 test_units/
+debug/
 .tox/
 .coverage
 .coverage.*

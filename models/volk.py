@@ -375,3 +375,8 @@ class Volk(EventDispatcher):
         volk.ausgewaehlt = data.get('ausgewaehlt', False)
         volk.aktiv = data.get('aktiv', True)
         return volk
+
+    @classmethod
+    def from_setting_dict(cls, data):
+        """Factory method für Setting-Daten (entspricht from_dict)."""
+        return cls.from_dict(data)

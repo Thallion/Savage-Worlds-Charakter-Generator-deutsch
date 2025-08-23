@@ -1,12 +1,25 @@
 # functions/ausruestung_funktionen.py
 
 from kivy.logger import Logger
+from typing import Optional, Dict, List, Any
+
+# Import der Konfiguration
+from config.ausruestung_config import (
+    AusruestungKategorien,
+    RuestungsKoerperteile,
+    TraglastKonstanten,
+    LogMessages,
+    StaerkeWerte
+)
+
+# Import der Models
 from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
 from models.ausruestung import Ausruestung
 
-def kaufen(charakter, item, anzahl=1, preis_pro_stueck=None):
+
+def kaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Optional[float] = None) -> bool:
     """
     Kauft einen Ausrüstungsgegenstand für einen Charakter.
     
@@ -22,50 +35,34 @@ def kaufen(charakter, item, anzahl=1, preis_pro_stueck=None):
     preis_pro_stueck = preis_pro_stueck or item.kosten
     gesamtpreis = preis_pro_stueck * anzahl
 
+    # Vermögensprüfung
     if charakter.vermoegen < gesamtpreis:
-        Logger.warning(f"Nicht genügend Vermögen, um {anzahl}x {item.name} zu kaufen.")
+        Logger.warning(LogMessages.NICHT_GENUEGEND_VERMOEGEN.format(
+            anzahl=anzahl, name=item.name
+        ))
         return False
 
+    # Transaktion durchführen
     charakter.vermoegen -= gesamtpreis
     item.erhoehe_menge(anzahl)
-    Logger.debug(f"{anzahl}x {item.name} gekauft für insgesamt {gesamtpreis}. Neues Vermögen: {charakter.vermoegen}.")
+    Logger.debug(LogMessages.KAUF_ERFOLGREICH.format(
+        anzahl=anzahl, 
+        name=item.name, 
+        preis=gesamtpreis, 
+        vermoegen=charakter.vermoegen
+    ))
 
-    charakter.berechne_gesamtgewicht()
+    # Gewicht und Traglast berechnen
+    _pruefe_traglast(charakter)
 
-    maximale_traglast = charakter.berechne_traglast()
-    if charakter.gesamtgewicht > maximale_traglast:
-        if charakter.erschoepfung < 3:
-            charakter.erschoepfung += 1
-            Logger.warning(f"Traglast überschritten! Erschöpfung steigt auf {charakter.erschoepfung}.")
-        else:
-            Logger.warning("Traglast überschritten, Erschöpfung ist bereits maximal.")
-
-    # Hinzufügen zur Ausrüstungsliste, falls nicht bereits vorhanden
-    if item.name not in charakter.ausruestung:
-        charakter.ausruestung[item.name] = item
-
-    # Hinzufügen zur allgemeinen Ausrüstungsliste
-    if item not in charakter.selected_allgemeine_ausruestung:
-        charakter.selected_allgemeine_ausruestung.append(item)
-
-    # Hinzufügen zur spezifischen Liste basierend auf der Kategorie
-    if item.kategorie == 'Waffe':
-        if item not in charakter.selected_waffen:
-            charakter.selected_waffen.append(item)
-            Logger.debug(f"{item.name} zur ausgewählten Waffenliste hinzugefügt.")
-    elif item.kategorie == 'Rüstung':
-        if item not in charakter.selected_ruestungen:
-            charakter.selected_ruestungen.append(item)
-            Logger.debug(f"{item.name} zur ausgewählten Rüstungenliste hinzugefügt.")
-    elif item.kategorie == 'Schild':
-        if item not in charakter.selected_schilde:
-            charakter.selected_schilde.append(item)
-            Logger.debug(f"{item.name} zur ausgewählten Schildeliste hinzugefügt.")
+    # Item zu Ausrüstung hinzufügen
+    _item_zu_ausruestung_hinzufuegen(charakter, item)
 
     charakter.berechne_abgeleitete_werte()
     return True
 
-def verkaufen(charakter, item, anzahl=1, preis_pro_stueck=None):
+
+def verkaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Optional[float] = None) -> bool:
     """
     Verkauft einen Ausrüstungsgegenstand eines Charakters.
     
@@ -78,113 +75,42 @@ def verkaufen(charakter, item, anzahl=1, preis_pro_stueck=None):
     Returns:
         bool: True bei Erfolg, False bei Fehlschlag
     """
+    # Verfügbarkeitsprüfung
     if item.menge < anzahl:
-        Logger.warning(f"Nicht genügend Menge von '{item.name}' zum Verkaufen.")
+        Logger.warning(LogMessages.NICHT_GENUEGEND_MENGE.format(
+            name=item.name,
+            verfuegbar=item.menge,
+            angefordert=anzahl
+        ))
         return False
 
-    preis_pro_stueck = preis_pro_stueck or item.kosten
+    # Transaktion durchführen
+    preis_pro_stueck = preis_pro_stueck or (item.kosten * 0.5)  # 50% des Kaufpreises
     gesamtpreis = preis_pro_stueck * anzahl
-
     charakter.vermoegen += gesamtpreis
     item.verringere_menge(anzahl)
-    Logger.debug(f"{anzahl}x {item.name} verkauft für insgesamt {gesamtpreis}. Neues Vermögen: {charakter.vermoegen}.")
+    
+    Logger.debug(LogMessages.VERKAUF_ERFOLGREICH.format(
+        anzahl=anzahl,
+        name=item.name,
+        preis=gesamtpreis,
+        vermoegen=charakter.vermoegen
+    ))
 
-    charakter.berechne_gesamtgewicht()
-
-    # Entfernen aus der Ausrüstungsliste, wenn Menge 0 ist
+    # Item entfernen wenn Menge 0
     if item.menge <= 0:
-        del charakter.ausruestung[item.name]
-        Logger.debug(f"{item.name} aus der Charakterausrüstung entfernt.")
+        _item_aus_ausruestung_entfernen(charakter, item)
 
-        # Entfernen aus spezifischen Listen
-        if item in charakter.selected_waffen:
-            charakter.selected_waffen.remove(item)
-            Logger.debug(f"{item.name} von der ausgewählten Waffenliste entfernt.")
-        if item in charakter.selected_ruestungen:
-            charakter.selected_ruestungen.remove(item)
-            Logger.debug(f"{item.name} von der ausgewählten Rüstungenliste entfernt.")
-        if item in charakter.selected_schilde:
-            charakter.selected_schilde.remove(item)
-            Logger.debug(f"{item.name} von der ausgewählten Schildeliste entfernt.")
-        if item in charakter.selected_allgemeine_ausruestung:
-            charakter.selected_allgemeine_ausruestung.remove(item)
-            Logger.debug(f"{item.name} von der ausgewählten allgemeinen Ausrüstungsliste entfernt.")
-
+    # Gewicht und abgeleitete Werte neu berechnen
+    charakter.berechne_gesamtgewicht()
     charakter.berechne_abgeleitete_werte()
+    
     return True
 
-def berechne_traglast(charakter):
+
+def berechne_gesamt_ruestungsschutz(charakter) -> Dict[str, int]:
     """
-    Berechnet die maximale Traglast des Charakters basierend auf Stärke.
-    Beim Talent "Kräftig" wird die Traglast um 20 kg erhöht.
-    
-    Args:
-        charakter: Das Charakterobjekt, dessen Traglast berechnet werden soll
-        
-    Returns:
-        int: Die maximale Traglast in kg
-    """
-    try:
-        staerke_attribut = charakter.attribute.get('Stärke')
-        if staerke_attribut:
-            staerke_wert = staerke_attribut.wert
-        else:
-            staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
-
-        maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
-        
-        # Bonus für das Talent "Kräftig" hinzufügen
-        if "Kräftig" in charakter.selected_talente:
-            maximale_traglast += 20  # +20 kg Traglast bei Kräftig
-        
-        return maximale_traglast
-
-    except Exception as e:
-        Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
-        return 0
-
-def berechne_gesamtgewicht(charakter):
-    """
-    Berechnet das Gesamtgewicht aller ausgewählten Ausrüstungsgegenstände.
-    Berücksichtigt die Menge und ob Gegenstände angelegt sind (halbes Gewicht).
-    
-    Args:
-        charakter: Das Charakterobjekt, dessen Ausrüstungsgewicht berechnet werden soll
-        
-    Returns:
-        float: Das Gesamtgewicht in kg
-    """
-    gesamtgewicht = 0
-
-    # Normale Ausrüstung
-    for item in charakter.ausruestung.values():
-        if item.menge > 0:
-            gesamtgewicht += item.gewicht * item.menge
-
-    # Waffen
-    for waffe in charakter.waffen.values() if hasattr(charakter, 'waffen') else []:
-        if waffe.menge > 0:
-            gewicht = waffe.berechne_gewicht() * waffe.menge
-            gesamtgewicht += gewicht
-
-    # Rüstungen
-    for ruestung in charakter.ruestungen.values() if hasattr(charakter, 'ruestungen') else []:
-        if ruestung.menge > 0:
-            gewicht = ruestung.berechne_gewicht() * ruestung.menge
-            gesamtgewicht += gewicht
-
-    # Schilde
-    for schild in charakter.schilde.values() if hasattr(charakter, 'schilde') else []:
-        if schild.menge > 0:
-            gewicht = schild.berechne_gewicht() * schild.menge
-            gesamtgewicht += gewicht
-
-    charakter.gesamtgewicht = gesamtgewicht
-    return gesamtgewicht
-
-def berechne_gesamt_ruestungsschutz(charakter):
-    """
-    Berechnet den Gesamtrüstungsschutz des Charakters.
+    Berechnet den Gesamtrüstungsschutz für jede Körperregion.
     
     Args:
         charakter: Das Charakterobjekt, dessen Rüstungsschutz berechnet werden soll
@@ -192,31 +118,30 @@ def berechne_gesamt_ruestungsschutz(charakter):
     Returns:
         dict: Ein Dictionary mit dem Gesamtrüstungsschutz für jede Körperregion
     """
-    gesamt_torso = 0
-    gesamt_arme = 0
-    gesamt_beine = 0
-    gesamt_kopf = 0
+    # Initialisiere mit Standard-Schutzwerten
+    gesamt_schutz = RuestungsKoerperteile.standard_schutz()
 
     # Durchsuche alle Ausrüstungsgegenstände
     for item in charakter.ausruestung.values():
         if isinstance(item, Ruestung) and item.angelegt and item.ausgewaehlt:
-            gesamt_torso += item.torso
-            gesamt_arme += item.arme
-            gesamt_beine += item.beine
-            gesamt_kopf += item.kopf
-            Logger.debug(f"Rüstung '{item.name}' wird zur Gesamtrüstung gezählt: Torso={item.torso}, Arme={item.arme}, Beine={item.beine}, Kopf={item.kopf}")
-
-    ruestungsschutz = {
-        'Torso': gesamt_torso,
-        'Arme': gesamt_arme,
-        'Beine': gesamt_beine,
-        'Kopf': gesamt_kopf
-    }
+            gesamt_schutz[RuestungsKoerperteile.TORSO] += item.torso
+            gesamt_schutz[RuestungsKoerperteile.ARME] += item.arme
+            gesamt_schutz[RuestungsKoerperteile.BEINE] += item.beine
+            gesamt_schutz[RuestungsKoerperteile.KOPF] += item.kopf
+            
+            Logger.debug(LogMessages.RUESTUNG_ZU_GESAMT.format(
+                name=item.name,
+                torso=item.torso,
+                arme=item.arme,
+                beine=item.beine,
+                kopf=item.kopf
+            ))
     
-    Logger.debug(f"Gesamtrüstungsschutz berechnet: {ruestungsschutz}")
-    return ruestungsschutz
+    Logger.debug(LogMessages.GESAMTRUESTUNG_BERECHNET.format(schutz=gesamt_schutz))
+    return gesamt_schutz
 
-def get_item_by_name(charakter, item_name):
+
+def get_item_by_name(charakter, item_name: str) -> Optional[Ausruestung]:
     """
     Findet ein Ausrüstungsteil anhand des Namens.
     
@@ -227,25 +152,21 @@ def get_item_by_name(charakter, item_name):
     Returns:
         object or None: Das gefundene Item oder None wenn nicht gefunden
     """
-    # Prüfen in Waffen
-    for item in charakter.selected_waffen:
-        if item.name == item_name:
-            return item
-    # Prüfen in Schilde
-    for item in charakter.selected_schilde:
-        if item.name == item_name:
-            return item                
-    # Prüfen in Rüstungen
-    for item in charakter.selected_ruestungen:
-        if item.name == item_name:
-            return item
-    # Prüfen in allgemeiner Ausrüstung
-    for item in charakter.selected_allgemeine_ausruestung:
-        if item.name == item_name:
-            return item
+    # Durchsuche alle ausgewählten Kategorien
+    for item_liste in [
+        charakter.selected_waffen,
+        charakter.selected_schilde,
+        charakter.selected_ruestungen,
+        charakter.selected_allgemeine_ausruestung
+    ]:
+        for item in item_liste:
+            if item.name == item_name:
+                return item
+    
     return None
 
-def berechne_gesamtkosten(charakter):
+
+def berechne_gesamtkosten(charakter) -> float:
     """
     Berechnet die Gesamtkosten der ausgewählten Ausrüstung.
     
@@ -255,22 +176,25 @@ def berechne_gesamtkosten(charakter):
     Returns:
         float: Die Gesamtkosten der Ausrüstung
     """
-    gesamtkosten = 0
+    gesamtkosten = 0.0
+    
+    # Alle Ausrüstungsgegenstände durchgehen
     for ausr in charakter.ausruestung.values():
         if ausr.ausgewaehlt:
             gesamtkosten += ausr.kosten * ausr.menge
-    for waffe in charakter.waffen.values() if hasattr(charakter, 'waffen') else []:
-        if waffe.ausgewaehlt:
-            gesamtkosten += waffe.kosten * waffe.menge
-    for ruestung in charakter.ruestungen.values() if hasattr(charakter, 'ruestungen') else []:
-        if ruestung.ausgewaehlt:
-            gesamtkosten += ruestung.kosten * ruestung.menge
-    for schild in charakter.schilde.values() if hasattr(charakter, 'schilde') else []:
-        if schild.ausgewaehlt:
-            gesamtkosten += schild.kosten * schild.menge
+    
+    # Falls separate Listen existieren (für Rückwärtskompatibilität)
+    for liste_name in ['waffen', 'ruestungen', 'schilde']:
+        if hasattr(charakter, liste_name):
+            liste = getattr(charakter, liste_name)
+            for item_name, item in liste.items():
+                if item.ausgewaehlt:
+                    gesamtkosten += item.kosten * item.menge
+    
     return gesamtkosten
 
-def anpassen_vermoegen_bei_handicap_arm(charakter, wird_ausgewaehlt):
+
+def anpassen_vermoegen_bei_handicap_arm(charakter, wird_ausgewaehlt: bool) -> None:
     """
     Passt das Vermögen bei Auswahl/Abwahl des Handicaps "Arm" an.
     
@@ -281,46 +205,221 @@ def anpassen_vermoegen_bei_handicap_arm(charakter, wird_ausgewaehlt):
     if wird_ausgewaehlt:
         # Arm wird ausgewählt -> Vermögen halbieren
         charakter.vermoegen = charakter.vermoegen // 2
-        Logger.info(f"Handicap 'Arm' ausgewählt: Vermögen halbiert auf {charakter.vermoegen}")
+        Logger.info(LogMessages.HANDICAP_ARM_AKTIVIERT.format(
+            vermoegen=charakter.vermoegen
+        ))
     else:
-        # Arm wird abgewählt -> Vermögen ist wieder normal
-        # Prüfen, ob "Reich" oder "Stinkreich" aktiv ist
-        multiplikator = 1
-        if "Stinkreich" in charakter.selected_talente:
-            multiplikator = 5
-        elif "Reich" in charakter.selected_talente:
-            multiplikator = 3
-        
-        # Setze Vermögen auf den korrekten Wert mit Multiplikator
+        # Arm wird abgewählt -> Vermögen wiederherstellen
+        multiplikator = _berechne_vermoegen_multiplikator(charakter)
         charakter.vermoegen = charakter.startkapital * multiplikator
-        Logger.info(f"Handicap 'Arm' abgewählt: Vermögen wiederhergestellt auf {charakter.vermoegen}")
+        Logger.info(LogMessages.HANDICAP_ARM_DEAKTIVIERT.format(
+            vermoegen=charakter.vermoegen
+        ))
 
-def anpassen_vermoegen_bei_talent_reich(charakter, talent_name, wird_ausgewaehlt):
+
+def anpassen_vermoegen_bei_talent_reich(charakter, talent_name: str, wird_ausgewaehlt: bool) -> None:
     """
     Passt das Vermögen bei Auswahl/Abwahl der Talente "Reich" oder "Stinkreich" an.
     
     Args:
         charakter: Das Charakter-Objekt
-        talent_name: "Reich" oder "Stinkreich"
+        talent_name: Name des Talents ("Reich" oder "Stinkreich")
         wird_ausgewaehlt: True, wenn das Talent ausgewählt wird, False, wenn es abgewählt wird
     """
-    # Aktuelles Basisvermögen berechnen (ohne bisherige Multiplikatoren)
-    basis_vermoegen = charakter.startkapital
-    
-    # Prüfen, ob "Arm" aktiv ist
-    for handicap_key in charakter.selected_handicaps:
-        if handicap_key in charakter.handicaps:
-            handicap = charakter.handicaps[handicap_key]
-            if handicap.name == "Arm" and handicap.stufe == "leicht":
-                basis_vermoegen //= 2
-                break
+    # Prüfen ob "Arm" aktiv ist
+    if "Arm" in charakter.selected_handicaps:
+        return  # Keine Änderung bei aktivem "Arm" Handicap
     
     if wird_ausgewaehlt:
-        # Reich/Stinkreich wird ausgewählt
-        multiplikator = 5 if talent_name == "Stinkreich" else 3
-        charakter.vermoegen = basis_vermoegen * multiplikator
-        Logger.info(f"Talent '{talent_name}' ausgewählt: Vermögen angepasst auf {charakter.vermoegen}")
+        # Talent wird ausgewählt
+        multiplikator = TraglastKonstanten.TALENT_MULTIPLIKATOREN.get(
+            talent_name, 
+            TraglastKonstanten.STANDARD_MULTIPLIKATOR
+        )
+        charakter.vermoegen = charakter.startkapital * multiplikator
+        Logger.info(LogMessages.TALENT_REICH_AKTIVIERT.format(
+            name=talent_name,
+            vermoegen=charakter.vermoegen
+        ))
     else:
-        # Reich/Stinkreich wird abgewählt
-        charakter.vermoegen = basis_vermoegen
-        Logger.info(f"Talent '{talent_name}' abgewählt: Vermögen wiederhergestellt auf {charakter.vermoegen}")    
+        # Talent wird abgewählt
+        multiplikator = _berechne_vermoegen_multiplikator(charakter, exclude_talent=talent_name)
+        charakter.vermoegen = charakter.startkapital * multiplikator
+        Logger.info(LogMessages.TALENT_REICH_DEAKTIVIERT.format(
+            name=talent_name,
+            vermoegen=charakter.vermoegen
+        ))
+
+
+def erstelle_item_nach_kategorie(item_dict: Dict[str, Any]) -> Ausruestung:
+    """
+    Erstellt ein Item-Objekt basierend auf der Kategorie.
+    
+    Args:
+        item_dict: Dictionary mit Item-Daten
+        
+    Returns:
+        Ausruestung: Das erstellte Item-Objekt
+    """
+    kategorie = item_dict.get('kategorie', AusruestungKategorien.ALLGEMEIN)
+    
+    kategorie_zu_klasse = {
+        AusruestungKategorien.WAFFE: Waffe,
+        AusruestungKategorien.RUESTUNG: Ruestung,
+        AusruestungKategorien.SCHILD: Schild,
+        AusruestungKategorien.ALLGEMEIN: Ausruestung
+    }
+    
+    klasse = kategorie_zu_klasse.get(kategorie, Ausruestung)
+    return klasse.from_setting_dict(item_dict)
+
+
+# --- Private Hilfsfunktionen ---
+
+def _pruefe_traglast(charakter) -> None:
+    """
+    Prüft die Traglast und passt Erschöpfung an.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+    """
+    charakter.berechne_gesamtgewicht()
+    maximale_traglast = charakter.berechne_traglast()
+    
+    if charakter.gesamtgewicht > maximale_traglast:
+        if charakter.erschoepfung < TraglastKonstanten.MAX_ERSCHOEPFUNG:
+            charakter.erschoepfung += 1
+            Logger.warning(LogMessages.TRAGLAST_UEBERSCHRITTEN.format(
+                erschoepfung=charakter.erschoepfung
+            ))
+        else:
+            Logger.warning(LogMessages.TRAGLAST_MAXIMAL)
+
+
+def _item_zu_ausruestung_hinzufuegen(charakter, item: Ausruestung) -> None:
+    """
+    Fügt ein Item zur Ausrüstung und den entsprechenden Listen hinzu.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        item: Das hinzuzufügende Item
+    """
+    # Zur Hauptausrüstungsliste hinzufügen
+    if item.name not in charakter.ausruestung:
+        charakter.ausruestung[item.name] = item
+
+    # Zur allgemeinen Ausrüstungsliste hinzufügen
+    if item not in charakter.selected_allgemeine_ausruestung:
+        charakter.selected_allgemeine_ausruestung.append(item)
+
+    # Zur spezifischen Liste basierend auf der Kategorie hinzufügen
+    _item_zu_kategorie_liste_hinzufuegen(charakter, item)
+
+
+def _item_zu_kategorie_liste_hinzufuegen(charakter, item: Ausruestung) -> None:
+    """
+    Fügt ein Item zur entsprechenden Kategorie-Liste hinzu.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        item: Das hinzuzufügende Item
+    """
+    kategorie_zu_liste = {
+        AusruestungKategorien.WAFFE: ('selected_waffen', 'Waffenliste'),
+        AusruestungKategorien.RUESTUNG: ('selected_ruestungen', 'Rüstungenliste'),
+        AusruestungKategorien.SCHILD: ('selected_schilde', 'Schildeliste')
+    }
+    
+    if item.kategorie in kategorie_zu_liste:
+        liste_name, liste_beschreibung = kategorie_zu_liste[item.kategorie]
+        liste = getattr(charakter, liste_name)
+        
+        if item not in liste:
+            liste.append(item)
+            Logger.debug(LogMessages.ITEM_ZU_LISTE_HINZUGEFUEGT.format(
+                name=item.name,
+                liste=liste_beschreibung
+            ))
+
+
+def _item_aus_ausruestung_entfernen(charakter, item: Ausruestung) -> None:
+    """
+    Entfernt ein Item aus der Ausrüstung und allen Listen.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        item: Das zu entfernende Item
+    """
+    # Aus Hauptausrüstung entfernen
+    if item.name in charakter.ausruestung:
+        del charakter.ausruestung[item.name]
+    
+    # Aus allgemeiner Liste entfernen
+    if item in charakter.selected_allgemeine_ausruestung:
+        charakter.selected_allgemeine_ausruestung.remove(item)
+    
+    # Aus kategoriespezifischen Listen entfernen
+    kategorie_listen = {
+        AusruestungKategorien.WAFFE: 'selected_waffen',
+        AusruestungKategorien.RUESTUNG: 'selected_ruestungen',
+        AusruestungKategorien.SCHILD: 'selected_schilde'
+    }
+    
+    if item.kategorie in kategorie_listen:
+        liste_name = kategorie_listen[item.kategorie]
+        liste = getattr(charakter, liste_name)
+        if item in liste:
+            liste.remove(item)
+
+
+def _berechne_vermoegen_multiplikator(charakter, exclude_talent: Optional[str] = None) -> int:
+    """
+    Berechnet den Vermögens-Multiplikator basierend auf aktiven Talenten.
+    
+    Args:
+        charakter: Das Charakter-Objekt
+        exclude_talent: Optional - Talent das bei der Berechnung ignoriert werden soll
+        
+    Returns:
+        int: Der berechnete Multiplikator
+    """
+    multiplikator = TraglastKonstanten.STANDARD_MULTIPLIKATOR
+    
+    for talent_name, talent_mult in TraglastKonstanten.TALENT_MULTIPLIKATOREN.items():
+        if talent_name != exclude_talent and talent_name in charakter.selected_talente:
+            multiplikator = max(multiplikator, talent_mult)
+    
+    return multiplikator
+
+
+def berechne_gesamtgewicht(charakter):
+    """
+    DEPRECATED: Diese Funktion existiert für Rückwärtskompatibilität.
+    Nutze stattdessen charakter.berechne_gesamtgewicht().
+    """
+    Logger.warning("berechne_gesamtgewicht ist deprecated. Nutze charakter.berechne_gesamtgewicht()")
+    return charakter.berechne_gesamtgewicht() if hasattr(charakter, 'berechne_gesamtgewicht') else 0
+
+
+def berechne_traglast(charakter):
+    """
+    DEPRECATED: Diese Funktion existiert für Rückwärtskompatibilität.  
+    Nutze stattdessen charakter.berechne_traglast().
+    """
+    Logger.warning("berechne_traglast ist deprecated. Nutze charakter.berechne_traglast()")
+    return charakter.berechne_traglast() if hasattr(charakter, 'berechne_traglast') else 100
+
+
+# Export der öffentlichen Funktionen
+__all__ = [
+    'kaufen',
+    'verkaufen',
+    'berechne_gesamt_ruestungsschutz',
+    'get_item_by_name',
+    'berechne_gesamtkosten',
+    'anpassen_vermoegen_bei_handicap_arm',
+    'anpassen_vermoegen_bei_talent_reich',
+    'erstelle_item_nach_kategorie',
+    'berechne_gesamtgewicht',  # Deprecated
+    'berechne_traglast'        # Deprecated
+]

@@ -255,17 +255,27 @@ class AusruestungItemRow(MDBoxLayout):
             if not controller:
                 self.show_error("Controller nicht gefunden.")
                 return
-                
+            
+            # Vermögen vor dem Kauf speichern für Verifikation
+            vermoegen_vorher = controller.charakter.vermoegen
+            
             success = controller.kaufen_ausruestung(
                 self.name,
                 anzahl=anzahl,
                 preis_pro_stueck=preis
             )
+            
+            # Vermögen nach dem Kauf prüfen
+            vermoegen_nachher = controller.charakter.vermoegen
+            expected_cost = (preis or self.kosten) * anzahl
+            tatsaechlich_gekauft = (vermoegen_vorher - vermoegen_nachher) == expected_cost
 
-            if success:
+            if success or tatsaechlich_gekauft:
+                # Kauf war erfolgreich (entweder Controller sagt ja, oder Vermögen hat sich korrekt geändert)
                 self.dialog.dismiss()
                 self._refresh_ui()
             else:
+                # Kauf ist wirklich fehlgeschlagen - Vermögen unverändert
                 self.show_error(
                     f"Nicht genügend Geld vorhanden für den Kauf von {anzahl}x {self.name}.",
                     "Nicht genügend Geld"
@@ -289,17 +299,28 @@ class AusruestungItemRow(MDBoxLayout):
             if not controller:
                 self.show_error("Controller nicht gefunden.")
                 return
-                
+            
+            # Vermögen vor dem Verkauf speichern für Verifikation
+            vermoegen_vorher = controller.charakter.vermoegen
+            
             success = controller.verkaufen_ausruestung(
                 self.name,
                 anzahl=anzahl,
                 preis_pro_stueck=preis
             )
+            
+            # Vermögen nach dem Verkauf prüfen
+            vermoegen_nachher = controller.charakter.vermoegen
+            default_verkaufspreis = (self.kosten * 0.5) if hasattr(self, 'kosten') else 0
+            expected_income = (preis or default_verkaufspreis) * anzahl
+            tatsaechlich_verkauft = (vermoegen_nachher - vermoegen_vorher) == expected_income
 
-            if success:
+            if success or tatsaechlich_verkauft:
+                # Verkauf war erfolgreich (entweder Controller sagt ja, oder Vermögen hat sich korrekt geändert)
                 self.dialog.dismiss()
                 self._refresh_ui()
             else:
+                # Verkauf ist wirklich fehlgeschlagen
                 self.show_error("Der Verkauf konnte nicht durchgeführt werden.")
 
         except Exception as e:

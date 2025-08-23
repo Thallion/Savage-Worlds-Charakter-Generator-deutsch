@@ -186,6 +186,7 @@ class StatisticsManager:
                 t_total = element_counts.get('talente_total', 0)
                 m_selected = element_counts.get('maechte_selected', 0)
                 m_total = element_counts.get('maechte_total', 0)
+                f_total = element_counts.get('fertigkeiten_total', 0)  # Fertigkeiten hinzugefügt
                 
                 # Erste Zeile: Setting
                 stats_text = f"Setting: {setting_name}"
@@ -198,8 +199,8 @@ class StatisticsManager:
                 )
                 stats_box.add_widget(stats_label)
                 
-                # Zweite Zeile: Kompakte Element-Counts  
-                elements_text = f"H: {h_selected}/{h_total} | T: {t_selected}/{t_total} | M: {m_selected}/{m_total}"
+                # Zweite Zeile: Kompakte Element-Counts mit Fertigkeiten
+                elements_text = f"H: {h_selected}/{h_total} | T: {t_selected}/{t_total} | M: {m_selected}/{m_total} | F: {f_total}"
                 elements_label = MDLabel(
                     text=elements_text,
                     size_hint_y=None,

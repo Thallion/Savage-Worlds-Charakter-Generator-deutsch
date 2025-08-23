@@ -154,7 +154,6 @@ class SettingsRepository:
                 if success:
                     Logger.info(f"Setting '{setting_name}' gelöscht.")
                     MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
-                    os.remove(filepath)
                     return True
                 else:
                     Logger.error(f"Löschen fehlgeschlagen für: {setting_name}")

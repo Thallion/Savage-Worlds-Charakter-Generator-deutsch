@@ -127,12 +127,12 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         # Attribute initialisieren
         self.initialisiere_attribute()
 
+        # Lade nun alle Elemente aus dem aktiven Setting (für neuen Charakter: replace_mode=True)
+        self.load_elements_from_active_setting(replace_mode=True)
+
         # Fertigkeiten initialisieren (Daten wurden aus dem Setting geladen)
         self.initialisiere_fertigkeiten()
         self.bind(fertigkeiten=self.on_fertigkeiten_changed)
-
-        # Lade nun alle Elemente aus dem aktiven Setting (für neuen Charakter: replace_mode=True)
-        self.load_elements_from_active_setting(replace_mode=True)
 
         # Beispiel: Standardvolk auswählen, wenn vorhanden
         if "Mensch" in self.voelker:
