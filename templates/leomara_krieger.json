@@ -1,0 +1,50 @@
+{
+  "name": "Leomara",
+  "description": "Eine tapfere Kriegerin mit dem Ehrenkodex eines Ritters. Kämpft für Gerechtigkeit und Ehre.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "25",
+    "gender": "Weiblich", 
+    "concept": "Kriegerin",
+    "languages": "Garethi"
+  },
+  "attributes": {
+    "Stärke": 6,
+    "Geschicklichkeit": 6,
+    "Konstitution": 6,
+    "Verstand": 8,
+    "Willenskraft": 8
+  },
+  "skills": {
+    "Kämpfen": 6,
+    "Athletik": 4,
+    "Einschüchtern": 6,
+    "Heilen": 4,
+    "Schießen": 6,
+    "Überreden": 6,
+    "Kriegskunst": 6,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Ehrenkodex",
+    "Loyal",
+    "Phobie"
+  ],
+  "edges": [
+    "Anführer"
+  ],
+  "equipment": [
+    "Langschwert",
+    "Gambeson", 
+    "Mittlerer Schild",
+    "Kriegerbrief",
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": true,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "warriors"
+  }
+}

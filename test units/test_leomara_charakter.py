@@ -408,6 +408,7 @@ class TestLeomaraCharakter(unittest.TestCase):
         ausruestung_kosten = 0
         verfuegbare_items = list(self.charakter.ausruestung.keys())[:3]
         for item_name in verfuegbare_items:
+            # Ausrüstung hat keine komplexe API - direkte Setzung ist korrekt
             self.charakter.ausruestung[item_name].ausgewaehlt = True
             print(f"  ✅ {item_name} ausgewählt")
         print(f"📊 AUSRÜSTUNG: {len(verfuegbare_items)} Items ausgewählt")

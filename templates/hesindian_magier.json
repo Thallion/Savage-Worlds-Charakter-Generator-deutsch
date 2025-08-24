@@ -1,0 +1,76 @@
+{
+  "name": "Hesindian",
+  "description": "Wie überaus ungewöhnlich. Wir sollten dies unbedingt näher untersuchen.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "35",
+    "gender": "Männlich",
+    "concept": "Gelehrter Magier", 
+    "languages": "Garethi, Alte Sprachen"
+  },
+  "attributes": {
+    "Stärke": 4,
+    "Geschicklichkeit": 4,
+    "Konstitution": 6,
+    "Verstand": 10,
+    "Willenskraft": 8
+  },
+  "skills": {
+    "Zaubern": 10,
+    "Allgemeinwissen": 8,
+    "Heimlichkeit": 6,
+    "Recherche": 6,
+    "Überreden": 6,
+    "Überleben": 4,
+    "Kämpfen": 4,
+    "Wahrnehmung": 4
+  },
+  "handicaps": [
+    "Neugierig",
+    "Schlechte Augen", 
+    "Tick"
+  ],
+  "edges": [
+    "Machtpunkte"
+  ],
+  "free_race_edge": "Arkaner Hintergrund",
+  "powers": [
+    "Geschoss",
+    "Heilung", 
+    "Blenden"
+  ],
+  "power_points": 15,
+  "equipment": [
+    {
+      "name": "Magierstab",
+      "type": "weapon",
+      "weight": 2,
+      "cost": 50,
+      "description": "Magischer Kampfstab mit Parade-Bonus",
+      "category": "Magische Waffe",
+      "properties": {
+        "damage": "Stärke+W4",
+        "parry_bonus": 1,
+        "range": "1",
+        "two_handed": true,
+        "min_strength": "W4"
+      }
+    },
+    {
+      "name": "Reisrobe",
+      "type": "equipment", 
+      "weight": 2,
+      "cost": 20,
+      "description": "Einfache Reisekleidung für Gelehrte",
+      "category": "Kleidung"
+    },
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": true,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "mages"
+  }
+}
