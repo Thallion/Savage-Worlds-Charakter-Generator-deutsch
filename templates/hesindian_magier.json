@@ -3,74 +3,82 @@
   "description": "Wie überaus ungewöhnlich. Wir sollten dies unbedingt näher untersuchen.",
   "setting": "SWAE",
   "race": "Mensch",
+  "free_race_edge": "Arkaner Hintergrund",
   "profile": {
-    "age": "35",
-    "gender": "Männlich",
-    "concept": "Gelehrter Magier", 
-    "languages": "Garethi, Alte Sprachen"
+    "age": "",
+    "gender": "",
+    "concept": "Magier",
+    "languages": ""
   },
   "attributes": {
-    "Stärke": 4,
     "Geschicklichkeit": 4,
     "Konstitution": 6,
+    "Stärke": 4,
     "Verstand": 10,
     "Willenskraft": 8
   },
   "skills": {
-    "Zaubern": 10,
     "Allgemeinwissen": 8,
+    "Athletik": 4,
     "Heimlichkeit": 6,
-    "Recherche": 6,
-    "Überreden": 6,
-    "Überleben": 4,
     "Kämpfen": 4,
-    "Wahrnehmung": 4
+    "Recherche": 6,
+    "Überleben": 4,
+    "Überreden": 6,
+    "Wahrnehmung": 4,
+    "Zaubern": 10
   },
   "handicaps": [
     "Neugierig",
-    "Schlechte Augen", 
+    "Schlechte Augen",
     "Tick"
   ],
   "edges": [
     "Machtpunkte"
   ],
-  "free_race_edge": "Arkaner Hintergrund",
   "powers": [
     "Geschoss",
-    "Heilung", 
+    "Heilung",
     "Blenden"
   ],
   "power_points": 15,
   "equipment": [
+    "Magierstab",
+    "Reisrobe",
+    "Abenteuerpaket"
+  ],
+  "custom_equipment": [
     {
       "name": "Magierstab",
-      "type": "weapon",
+      "type": "Waffe",
       "weight": 2,
-      "cost": 50,
-      "description": "Magischer Kampfstab mit Parade-Bonus",
-      "category": "Magische Waffe",
+      "cost": 10,
+      "description": "Fokus für Zauber und Nahkampfwaffe",
+      "category": "Waffe",
       "properties": {
-        "damage": "Stärke+W4",
+        "damage": "Stä+W4",
         "parry_bonus": 1,
-        "range": "1",
-        "two_handed": true,
-        "min_strength": "W4"
+        "range": 1,
+        "two_handed": true
       }
     },
     {
       "name": "Reisrobe",
-      "type": "equipment", 
-      "weight": 2,
-      "cost": 20,
-      "description": "Einfache Reisekleidung für Gelehrte",
-      "category": "Kleidung"
-    },
-    "Abenteurerpaket"
+      "type": "Kleidung",
+      "weight": 1,
+      "cost": 5,
+      "description": "Leichte Magierkleidung",
+      "category": "Kleidung",
+      "properties": {
+        "armor_bonus": 0,
+        "special": "Magische Symbole eingestickt"
+      }
+    }
   ],
   "generation_options": {
-    "strict_point_allocation": true,
+    "strict_point_allocation": false,
     "allow_over_attribute": true,
     "auto_save": true,
-    "save_path": "mages"
+    "save_path": "auto_generated/magier"
   }
 }
