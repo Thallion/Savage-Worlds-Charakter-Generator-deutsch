@@ -48,6 +48,7 @@ from views.talente_view import TalenteWidget
 from views.eigenschaften_view import EigenschaftenWidget
 from views.charakterbogen_view import CharakterbogenWidget
 from views.einstellungen_widget import EinstellungenWidget
+from views.historie_view import HistorieWidget  # NEU: Import des Historie-Widgets
 
 # Config Service für Theme-Speicherung importieren
 from services.config_service import ConfigService
@@ -428,6 +429,22 @@ class InfoScreen(MDScreen):
         Logger.info(f"Öffne Link: {url}")
         webbrowser.open(url)
 
+# NEU: HistorieScreen Klasse
+class HistorieScreen(MDScreen):
+    def refresh_widget(self):
+        """Delegiert an das HistorieWidget"""
+        try:
+            if hasattr(self.ids, 'historie_widget'):
+                widget = self.ids.historie_widget
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                    return True
+            Logger.warning("HistorieWidget oder refresh_widget nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei HistorieScreen.refresh_widget: {str(e)}")
+            return False
+
 # -----------------------------
 # Logger-Handler
 # -----------------------------
@@ -489,6 +506,10 @@ kv = '''
 <CharakterbogenScreen>:
     CharakterbogenWidget:
         id: charakterbogen_widget
+
+<HistorieScreen>:
+    HistorieWidget:
+        id: historie_widget
 
 <InfoScreen>:
     orientation: 'vertical'
@@ -601,17 +622,18 @@ class SW_Charakter_GeneratorApp(MDApp):
         Logger.info("Service Container früh initialisiert")
         
         # Deine Icons + Tab-Texte + zugehörige Screens
+        # NEU: Historie-Tab hinzugefügt
         self.tab_definitions = [
             ("cog",              "Einstellungen",  EinstellungenScreen),
             ("account-group",    "Völker",         VoelkerScreen),
-            ("account-details",          "Profil",         ProfilScreen),
+            ("account-details",  "Profil",         ProfilScreen),
             ("arm-flex",         "Eigenschaften",  EigenschaftenScreen),
             ("account-alert",    "Handicaps",      HandicapsScreen),
             ("star-circle",      "Talente",        TalenteScreen),
             ("creation-outline", "Mächte",         MaechteScreen),
             ("shield-sword",     "Ausrüstung",     AusruestungScreen),
-            ("account",  "Charakter",      CharakterbogenScreen),
-            ("information",      "Info",           InfoScreen),
+            ("account",          "Charakter",      CharakterbogenScreen),
+            ("history",          "Historie",       HistorieScreen),  # NEU: Historie-Tab
         ]
 
     def build(self):
@@ -901,7 +923,11 @@ class SW_Charakter_GeneratorApp(MDApp):
             elif tab_name == 'Charakter':
                 self.charakterbogen_widget = widget
                 Logger.debug("CharakterbogenWidget bei App registriert")
-                
+
+            elif tab_name == 'Historie':
+                self.historie_widget = widget
+                Logger.debug("HistorieWidget bei App registriert")
+
         except Exception as e:
             Logger.error(f"Fehler bei Widget-Registrierung für {tab_name}: {str(e)}")
 
@@ -1043,7 +1069,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                         screen.update_overview(0)
                     elif tab_title == 'Einstellungen' and hasattr(screen, 'aktualisiere_ui'):
                         screen.aktualisiere_ui()
-                
+                    elif tab_title == 'Historie' and hasattr(screen, 'refresh_widget'):
+                        screen.refresh_widget()
+
                 Logger.info(f"UI-Aktualisierung für aktuellen Tab '{tab_title}' abgeschlossen")
             else:
                 Logger.error(f"Ungültiger Carousel-Index: {index}")
@@ -1087,8 +1115,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 elif tab_title == 'Charakter' and hasattr(screen, 'update_overview'):
                     Logger.debug("Charakterbogen-Tab erkannt")
                     screen.update_overview(0)
-                elif tab_title == 'Einstellungen' and hasattr(screen, 'aktualisiere_ui'):
-                    screen.aktualisiere_ui()
+                elif tab_title == 'Historie' and hasattr(screen, 'refresh_widget'):
+                    Logger.debug("Historie-Tab erkannt")
+                    screen.refresh_widget()
                     
             Logger.info(f"UI-Aktualisierung für Tab {tab_title} erfolgreich")
                     
