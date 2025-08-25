@@ -396,18 +396,36 @@ def berechne_gesamtgewicht(charakter):
     """
     DEPRECATED: Diese Funktion existiert für Rückwärtskompatibilität.
     Nutze stattdessen charakter.berechne_gesamtgewicht().
+    
+    Direkte Implementierung um Rekursion zu vermeiden.
     """
-    Logger.warning("berechne_gesamtgewicht ist deprecated. Nutze charakter.berechne_gesamtgewicht()")
-    return charakter.berechne_gesamtgewicht() if hasattr(charakter, 'berechne_gesamtgewicht') else 0
+    try:
+        gesamtgewicht = 0
+        if hasattr(charakter, 'ausruestung') and charakter.ausruestung:
+            for item in charakter.ausruestung.values():
+                if hasattr(item, 'gewicht') and hasattr(item, 'menge'):
+                    gesamtgewicht += (item.gewicht or 0) * (item.menge or 1)
+        return gesamtgewicht
+    except (AttributeError, TypeError):
+        return 0
 
 
 def berechne_traglast(charakter):
     """
     DEPRECATED: Diese Funktion existiert für Rückwärtskompatibilität.  
     Nutze stattdessen charakter.berechne_traglast().
+    
+    Direkte Implementierung um Rekursion zu vermeiden.
     """
-    Logger.warning("berechne_traglast ist deprecated. Nutze charakter.berechne_traglast()")
-    return charakter.berechne_traglast() if hasattr(charakter, 'berechne_traglast') else 100
+    try:
+        staerke_wert = getattr(charakter, 'staerke', 4)
+        if hasattr(staerke_wert, 'wert'):
+            staerke_wert = staerke_wert.wert
+        
+        # Savage Worlds Traglast-Berechnung: Stärke x 10
+        return int(staerke_wert) * 10
+    except (AttributeError, ValueError, TypeError):
+        return 100  # Fallback-Wert
 
 
 # Export der öffentlichen Funktionen

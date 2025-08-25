@@ -157,10 +157,18 @@ class EigenschaftenManager:
             charakter.verbleibende_aufstiege -= kosten
         else:
             kosten = self.kosten.get('attribut_chargen', 1)
-            if charakter.verbleibende_attributsteigerungen < kosten:
-                Logger.warning(f"Nicht genügend Attributsteigerungen verfügbar. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_attributsteigerungen}")
+            # Prüfe zuerst normale Attributspunkte
+            if charakter.verbleibende_attributsteigerungen >= kosten:
+                charakter.verbleibende_attributsteigerungen -= kosten
+            # Falls keine normalen Punkte verfügbar, prüfe Handicap-Punkte (2 HP = 1 Attr)
+            elif hasattr(charakter, 'verbleibende_handicap_punkte') and charakter.verbleibende_handicap_punkte >= 2:
+                charakter.verbleibende_handicap_punkte -= 2
+                Logger.info(f"Attributsteigerung mit 2 Handicap-Punkten bezahlt.")
+            else:
+                verfügbare_attr = charakter.verbleibende_attributsteigerungen
+                verfügbare_hp = getattr(charakter, 'verbleibende_handicap_punkte', 0)
+                Logger.warning(f"Nicht genügend Punkte verfügbar. Benötigt: {kosten} Attributspunkte ODER 2 Handicap-Punkte. Verfügbar: {verfügbare_attr} Attributspunkte, {verfügbare_hp} Handicap-Punkte")
                 return False
-            charakter.verbleibende_attributsteigerungen -= kosten
         
         # Führe die Steigerung durch
         attribut.wuerfel.increase()
@@ -304,19 +312,21 @@ class EigenschaftenManager:
             # Verwende das richtige Attribut für Fertigkeitspunkte
             verfuegbare_punkte = getattr(charakter, 'verbleibende_fertigkeitspunkte', 
                                        getattr(charakter, 'verbleibende_fertigkeitssteigerungen', 0))
-            if verfuegbare_punkte < kosten:
-                # Prüfe ob Handicap-Punkte verwendet werden können
-                if hasattr(charakter, 'verbleibende_handicap_punkte') and charakter.verbleibende_handicap_punkte >= 1:
-                    charakter.verbleibende_handicap_punkte -= 1
-                    Logger.info("Fertigkeit mit Handicap-Punkten gesteigert.")
-                else:
-                    Logger.warning(f"Nicht genügend Fertigkeitspunkte. Benötigt: {kosten}, Verfügbar: {verfuegbare_punkte}")
-                    return False
-            else:
+            
+            # Prüfe zuerst normale Fertigkeitspunkte
+            if verfuegbare_punkte >= kosten:
                 if hasattr(charakter, 'verbleibende_fertigkeitspunkte'):
                     charakter.verbleibende_fertigkeitspunkte -= kosten
                 elif hasattr(charakter, 'verbleibende_fertigkeitssteigerungen'):
                     charakter.verbleibende_fertigkeitssteigerungen -= kosten
+            # Falls keine normalen Punkte verfügbar, prüfe Handicap-Punkte (1 HP = 1 Fertigkeitssteigerung)
+            elif hasattr(charakter, 'verbleibende_handicap_punkte') and charakter.verbleibende_handicap_punkte >= kosten:
+                charakter.verbleibende_handicap_punkte -= kosten
+                Logger.info(f"Fertigkeitssteigerung mit {kosten} Handicap-Punkt(en) bezahlt.")
+            else:
+                verfügbare_hp = getattr(charakter, 'verbleibende_handicap_punkte', 0)
+                Logger.warning(f"Nicht genügend Punkte verfügbar. Benötigt: {kosten} Fertigkeitspunkte ODER {kosten} Handicap-Punkte. Verfügbar: {verfuegbare_punkte} Fertigkeitspunkte, {verfügbare_hp} Handicap-Punkte")
+                return False
         
         # Steigere die Fertigkeit
         fertigkeit.wuerfel.increase()

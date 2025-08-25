@@ -83,6 +83,9 @@ class AutoCharacterGenerator:
             # Template laden und validieren
             template_data = self._load_template(template)
             self._validate_template(template_data)
+            
+            # Template für späteren Zugriff speichern
+            self.current_template = template_data
 
             # Generierungsoptionen
             options = template_data.get('generation_options', {})
@@ -134,6 +137,9 @@ class AutoCharacterGenerator:
                 charakter.berechne_abgeleitete_werte()
             except RecursionError:
                 self.log("⚠️ Warnung: Rekursionsproblem bei abgeleiteten Werten übersprungen")
+
+            # SELECTED_ LISTEN AKTUALISIEREN
+            self._update_selected_lists(charakter)
 
             # CHARAKTERZUSAMMENFASSUNG
             self._print_character_summary_with_costs(charakter, attr_costs, skill_costs,
@@ -763,13 +769,56 @@ class AutoCharacterGenerator:
 
         self.log(f"📊 MÄCHTE GESAMT: {powers_added} Mächte hinzugefügt")
 
+    def _update_selected_lists(self, charakter: Charakter) -> None:
+        """Aktualisiert die selected_ Listen basierend auf ausgewählten Items"""
+        self.log("--- SELECTED_ LISTEN AKTUALISIEREN ---")
+        
+        # selected_talente aktualisieren
+        selected_talente = []
+        for talent_name, talent in charakter.talente.items():
+            if getattr(talent, 'ausgewaehlt', False):
+                selected_talente.append(talent_name)
+        charakter.selected_talente = selected_talente
+        self.log(f"  📋 selected_talente: {len(selected_talente)} Items")
+        
+        # selected_maechte aktualisieren  
+        selected_maechte = []
+        if hasattr(charakter, 'maechte') and charakter.maechte:
+            for macht_name, macht in charakter.maechte.items():
+                if getattr(macht, 'ausgewaehlt', False):
+                    selected_maechte.append(macht_name)
+        charakter.selected_maechte = selected_maechte
+        self.log(f"  🔮 selected_maechte: {len(selected_maechte)} Items")
+        
+        # Fix für doppelte Menge
+        self._fix_duplicate_items(charakter)
+        
+        self.log("  ✅ selected_ Listen aktualisiert")
+
+    def _fix_duplicate_items(self, charakter: Charakter) -> None:
+        """Behebt das Problem mit doppelten Items (menge=2)"""
+        if hasattr(charakter, 'ausruestung') and charakter.ausruestung:
+            for item_name, item in charakter.ausruestung.items():
+                if hasattr(item, 'menge') and item.menge > 1:
+                    item.menge = 1
+                    self.log(f"    🔧 {item_name}: Menge korrigiert von {item.menge} zu 1")
+
     def _add_equipment(self, charakter: Charakter, equipment: List[Union[str, Dict]]) -> None:
         """Fügt Ausrüstung hinzu"""
         self.log("--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---")
 
         items_added = 0
+        
+        # Erstelle Liste der Custom Equipment Namen um Duplikate zu vermeiden
+        custom_equipment = self.current_template.get('custom_equipment', [])
+        custom_names = {item.get('name', '').lower() for item in custom_equipment}
+        
         for item in equipment:
             if isinstance(item, str):
+                # Überspringe String-Items wenn sie als Custom Equipment existieren
+                if item.lower() in custom_names:
+                    self.log(f"  ⏭️ {item} übersprungen - wird als Custom Equipment hinzugefügt")
+                    continue
                 # Einfacher Gegenstandsname
                 success = self._add_simple_equipment(charakter, item)
                 if success:
@@ -777,6 +826,14 @@ class AutoCharacterGenerator:
             elif isinstance(item, dict):
                 # Custom Equipment-Objekt
                 success = self._add_custom_equipment(charakter, item)
+                if success:
+                    items_added += 1
+
+        # WICHTIG: Auch custom_equipment aus Template verarbeiten 
+        if custom_equipment:
+            self.log("  🔧 Verarbeite custom_equipment aus Template...")
+            for item_data in custom_equipment:
+                success = self._add_custom_equipment(charakter, item_data)
                 if success:
                     items_added += 1
 
@@ -826,37 +883,123 @@ class AutoCharacterGenerator:
             return False
 
     def _add_custom_equipment(self, charakter: Charakter, item_data: Dict) -> bool:
-        """Fügt Custom Equipment hinzu"""
+        """Fügt Custom Equipment mit den korrekten spezifischen Modellen hinzu"""
         item_name = item_data.get('name', 'Unbekannt')
         item_type = item_data.get('type', 'item')
 
         self.log(f"  🔧 Custom {item_type}: {item_name}")
 
         try:
-            from models.ausruestung import Ausruestung
-
-            custom_item = Ausruestung(
-                name=item_name,
-                gewicht=item_data.get('weight', 1),
-                kosten=item_data.get('cost', 0),
-                setting="custom",
-                beschreibung=item_data.get('description', ''),
-                menge=1,
-                ausgewaehlt=True,
-                aktiv=True,
-                kategorie=item_data.get('category', 'Custom'),
-                custom=True
-            )
-
-            # Zusätzliche Properties für Waffen/Rüstungen
-            if 'properties' in item_data:
-                for key, value in item_data['properties'].items():
-                    if hasattr(custom_item, key):
-                        setattr(custom_item, key, value)
+            # Verwende die spezifischen Modelle basierend auf dem type
+            if item_type in ["Waffe", "weapon"]:
+                from models.waffe import Waffe
+                
+                # Standard-Properties für Waffen
+                eigenschaften = item_data.get('properties', {})
+                default_properties = {
+                    "Schaden": eigenschaften.get("Schaden", "Stä+W4"),
+                    "Reichweite": eigenschaften.get("Reichweite", "nah"),
+                    "FR": eigenschaften.get("FR", "-"),
+                    "Schuss": eigenschaften.get("Schuss", "-"),
+                    "PB": eigenschaften.get("PB", "-")
+                }
+                
+                custom_item = Waffe(
+                    name=item_name,
+                    gewicht=item_data.get('weight', 1),
+                    kosten=item_data.get('cost', 0),
+                    setting="custom",
+                    typ=eigenschaften.get("typ", "Nahkampf"),
+                    mindeststaerke=eigenschaften.get("mindeststaerke", "W4"),
+                    beschreibung=item_data.get('description', f"Custom {item_name}"),
+                    eigenschaften=default_properties,
+                    menge=1,
+                    ausgewaehlt=True,
+                    aktiv=True,
+                    angelegt=False,
+                    kategorie="Waffe",
+                    custom=True
+                )
+                
+            elif item_type in ["Rüstung", "armor"]:
+                from models.ruestung import Ruestung
+                
+                # Standard-Properties für Rüstungen
+                eigenschaften = item_data.get('properties', {})
+                
+                custom_item = Ruestung(
+                    name=item_name,
+                    gewicht=item_data.get('weight', 2),
+                    kosten=item_data.get('cost', 20),
+                    setting="custom",
+                    beschreibung=item_data.get('description', f"Custom {item_name}"),
+                    menge=1,
+                    ausgewaehlt=True,
+                    aktiv=True,
+                    angelegt=False,
+                    kategorie="Rüstung",
+                    torso=eigenschaften.get("torso", 2),
+                    arme=eigenschaften.get("arme", 0),
+                    beine=eigenschaften.get("beine", 0),
+                    kopf=eigenschaften.get("kopf", 0),
+                    mindeststaerke=eigenschaften.get("mindeststaerke", "W6"),
+                    custom=True
+                )
+                
+            elif item_type in ["Schild", "shield"]:
+                from models.schild import Schild
+                
+                # Standard-Properties für Schilde
+                eigenschaften = item_data.get('properties', {})
+                
+                custom_item = Schild(
+                    name=item_name,
+                    gewicht=item_data.get('weight', 2),
+                    kosten=item_data.get('cost', 10),
+                    setting="custom",
+                    beschreibung=item_data.get('description', f"Custom {item_name}"),
+                    menge=1,
+                    ausgewaehlt=True,
+                    aktiv=True,
+                    angelegt=False,
+                    kategorie="Schild",
+                    deckung=eigenschaften.get("deckung", 1),
+                    parade=eigenschaften.get("parade", 1),
+                    mindeststaerke=eigenschaften.get("mindeststaerke", "W4"),
+                    custom=True
+                )
+                
+            else:
+                # Fallback für allgemeine Ausrüstung
+                from models.ausruestung import Ausruestung
+                
+                custom_item = Ausruestung(
+                    name=item_name,
+                    gewicht=item_data.get('weight', 1),
+                    kosten=item_data.get('cost', 0),
+                    setting="custom",
+                    beschreibung=item_data.get('description', f"Custom {item_name}"),
+                    menge=1,
+                    ausgewaehlt=True,
+                    aktiv=True,
+                    kategorie=item_data.get('category', 'Ausrüstung'),
+                    custom=True
+                )
 
             success = charakter.add_ausruestung(custom_item)
             if success:
-                self.log(f"    ✅ {item_name} erfolgreich hinzugefügt")
+                # Je nach type auch zu spezialisierten Listen hinzufügen
+                if item_type in ["Waffe", "weapon"]:
+                    charakter.selected_waffen.append(custom_item)
+                    self.log(f"    ⚔️ {item_name} zu selected_waffen hinzugefügt")
+                elif item_type in ["Rüstung", "armor"]:
+                    charakter.selected_ruestungen.append(custom_item)
+                    self.log(f"    🛡️ {item_name} zu selected_ruestungen hinzugefügt")
+                elif item_type in ["Schild", "shield"]:
+                    charakter.selected_schilde.append(custom_item)
+                    self.log(f"    🛡️ {item_name} zu selected_schilde hinzugefügt")
+                
+                self.log(f"    ✅ {item_name} erfolgreich hinzugefügt (Kategorie: {custom_item.kategorie})")
                 return True
             else:
                 self.log(f"    ❌ FEHLER: {item_name} konnte nicht hinzugefügt werden")
@@ -864,6 +1007,8 @@ class AutoCharacterGenerator:
 
         except Exception as e:
             self.log(f"    ❌ FEHLER beim Anlegen von {item_name}: {e}")
+            import traceback
+            self.log(f"    📋 Traceback: {traceback.format_exc()}")
             return False
 
     def _calculate_attribute_points_needed(self, charakter: Charakter, target_attrs: Dict[str, int]) -> int:

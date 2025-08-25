@@ -105,7 +105,7 @@
             "required": ["name", "type"],
             "properties": {
               "name": {"type": "string"},
-              "type": {"type": "string", "enum": ["weapon", "armor", "shield", "equipment"]},
+              "type": {"type": "string", "enum": ["Waffe", "Rüstung", "Schild", "Ausrüstung", "weapon", "armor", "shield", "equipment"]},
               "weight": {"type": "number", "default": 1},
               "cost": {"type": "number", "default": 0},
               "description": {"type": "string", "default": ""},

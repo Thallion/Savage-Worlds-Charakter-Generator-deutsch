@@ -54,7 +54,7 @@
       "weight": 2,
       "cost": 10,
       "description": "Fokus für Zauber und Nahkampfwaffe",
-      "category": "Waffe",
+      "category": "Nahkampfwaffe",
       "properties": {
         "damage": "Stä+W4",
         "parry_bonus": 1,

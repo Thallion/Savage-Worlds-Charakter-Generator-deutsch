@@ -52,10 +52,28 @@ class CharakterEquipment:
         return ausruestung_funktionen.berechne_gesamtkosten(self)
     
     def berechne_traglast(self):
-        return ausruestung_funktionen.berechne_traglast(self)
+        """Berechnet die maximale Traglast basierend auf Stärke-Attribut"""
+        try:
+            staerke_wert = getattr(self, 'staerke', 4)
+            if hasattr(staerke_wert, 'wert'):
+                staerke_wert = staerke_wert.wert
+            
+            # Savage Worlds Traglast-Berechnung: Stärke x 10
+            return int(staerke_wert) * 10
+        except (AttributeError, ValueError, TypeError):
+            return 100  # Fallback-Wert
     
     def berechne_gesamtgewicht(self):
-        return ausruestung_funktionen.berechne_gesamtgewicht(self)
+        """Berechnet das Gesamtgewicht der Ausrüstung"""
+        try:
+            gesamtgewicht = 0
+            if hasattr(self, 'ausruestung') and self.ausruestung:
+                for item in self.ausruestung.values():
+                    if hasattr(item, 'gewicht') and hasattr(item, 'menge'):
+                        gesamtgewicht += (item.gewicht or 0) * (item.menge or 1)
+            return gesamtgewicht
+        except (AttributeError, TypeError):
+            return 0
     
     def berechne_gesamt_ruestungsschutz(self):
         return ausruestung_funktionen.berechne_gesamt_ruestungsschutz(self)

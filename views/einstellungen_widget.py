@@ -1045,6 +1045,177 @@ class EinstellungenWidget(MDScreen):
             else:
                 Logger.info("Macht löschen - Manager und Service nicht verfügbar")
     
+    # Template-Funktionen
+    def open_template_selection_dialog(self):
+        """Öffnet Dialog zur Auswahl von Templates für Auto Character Generator"""
+        try:
+            import os
+            import json
+            from pathlib import Path
+            from kivymd.uix.dialog import MDDialog
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText
+            from kivymd.uix.boxlayout import MDBoxLayout
+            from kivymd.uix.label import MDLabel
+            from kivymd.uix.scrollview import MDScrollView
+
+            # Templates aus dem templates/ Ordner laden
+            templates_dir = Path(__file__).parent.parent / 'templates'
+            template_files = []
+            
+            if templates_dir.exists():
+                for template_file in templates_dir.glob('*.json'):
+                    # Überspringe schema und example dateien
+                    if not any(skip in template_file.name.lower() for skip in ['schema', 'example']):
+                        try:
+                            with open(template_file, 'r', encoding='utf-8') as f:
+                                template_data = json.load(f)
+                                character_name = template_data.get('character_name', template_file.stem)
+                                template_files.append({
+                                    'file': template_file,
+                                    'name': character_name,
+                                    'description': template_data.get('description', 'Kein Beschreibung verfügbar')
+                                })
+                        except Exception as e:
+                            Logger.warning(f"Template {template_file} konnte nicht geladen werden: {e}")
+                            continue
+            
+            if not template_files:
+                # Kein Templates gefunden Dialog
+                no_templates_dialog = MDDialog(
+                    MDLabel(text="Keine Templates gefunden!\n\nLegen Sie Templates im 'templates/' Ordner ab."),
+                    MDButton(
+                        MDButtonText(text="OK"),
+                        style="text",
+                        on_release=lambda x: no_templates_dialog.dismiss()
+                    )
+                )
+                no_templates_dialog.open()
+                return
+            
+            # Template-Auswahl Dialog erstellen
+            content = MDBoxLayout(
+                orientation='vertical',
+                spacing="12dp",
+                size_hint_y=None,
+                height="400dp"
+            )
+            
+            content.add_widget(MDLabel(
+                text="Wählen Sie ein Template für die Charaktergenerierung:",
+                size_hint_y=None,
+                height="40dp",
+                theme_text_color="Primary"
+            ))
+            
+            # Scrollbare Liste
+            scroll = MDScrollView()
+            template_list = MDList()
+            
+            for template_info in template_files:
+                item = MDListItem(
+                    MDListItemSupportingText(
+                        text=f"{template_info['name']}"
+                    ),
+                    on_release=lambda x, template=template_info: self._generate_character_from_template(template, dialog)
+                )
+                template_list.add_widget(item)
+            
+            scroll.add_widget(template_list)
+            content.add_widget(scroll)
+            
+            dialog = MDDialog(
+                content,
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss()
+                )
+            )
+            dialog.open()
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen der Template-Auswahl: {e}")
+    
+    def _generate_character_from_template(self, template_info, dialog):
+        """Generiert Charakter aus gewähltem Template"""
+        try:
+            from functions.auto_character_generator import generate_character_from_json
+            
+            dialog.dismiss()
+            
+            Logger.info(f"Generiere Charakter aus Template: {template_info['name']}")
+            
+            # Character Generator ausführen
+            output_path = generate_character_from_json(str(template_info['file']))
+            
+            if output_path and os.path.exists(output_path):
+                Logger.info(f"Charakter erfolgreich generiert: {output_path}")
+                
+                # Generierten Charakter in das Tool laden über CharakterController
+                if self.charakter_controller:
+                    # Sicherstellen, dass output_path ein String ist
+                    output_path_str = str(output_path) if output_path else ""
+                    erfolg = self.charakter_controller.lade_charakter_von_json(output_path_str)
+                    if erfolg:
+                        Logger.info("Generierter Charakter erfolgreich geladen")
+                        
+                        # UI aktualisieren
+                        if hasattr(self.app, 'refresh_ui'):
+                            self.app.refresh_ui()
+                        
+                        # Event senden
+                        event_service = service_container.get_event_service()
+                        if event_service:
+                            event_service.publish(EventTypes.CHARACTER_LOADED, {'file': output_path})
+                        
+                        # Success Dialog
+                        from kivymd.uix.dialog import MDDialog
+                        from kivymd.uix.button import MDButton, MDButtonText
+                        from kivymd.uix.label import MDLabel
+                        
+                        success_dialog = MDDialog(
+                            MDLabel(text=f"Charakter '{template_info['name']}' wurde erfolgreich generiert und geladen!"),
+                            MDButton(
+                                MDButtonText(text="OK"),
+                                style="text", 
+                                on_release=lambda x: success_dialog.dismiss()
+                            )
+                        )
+                        success_dialog.open()
+                    else:
+                        Logger.error("Fehler beim Laden des generierten Charakters")
+                        self._show_error_dialog("Fehler beim Laden des generierten Charakters")
+                else:
+                    Logger.error("Charakter-Controller nicht verfügbar")
+                    self._show_error_dialog("Charakter-Controller nicht verfügbar")
+            else:
+                Logger.error("Charaktergenerierung fehlgeschlagen")
+                self._show_error_dialog("Charaktergenerierung fehlgeschlagen")
+                
+        except Exception as e:
+            Logger.error(f"Fehler bei der Charaktergenerierung: {e}")
+            self._show_error_dialog(f"Fehler bei der Charaktergenerierung: {str(e)}")
+    
+    def _show_error_dialog(self, message):
+        """Zeigt einen Fehler-Dialog"""
+        try:
+            from kivymd.uix.dialog import MDDialog
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.label import MDLabel
+            
+            error_dialog = MDDialog(
+                MDLabel(text=f"Fehler:\n{message}"),
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: error_dialog.dismiss()
+                )
+            )
+            error_dialog.open()
+        except Exception as e:
+            Logger.error(f"Fehler beim Anzeigen des Fehler-Dialogs: {e}")
+
     # Fertigkeit-Dialoge
     def open_add_fertigkeit_popup(self):
         if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
@@ -1511,6 +1682,46 @@ kv_string = '''
 
                             MDButtonText:
                                 text: "Abstieg"
+
+            # Template-Funktionen Card
+            MDCard:
+                style: "elevated"
+                padding: dp(16)
+                size_hint_y: None
+                height: self.minimum_height
+                md_bg_color: app.theme_cls.surfaceColor
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(16)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    MDLabel:
+                        text: "Auto Character Generator"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(30)
+                        theme_text_color: "Primary"
+
+                    MDLabel:
+                        text: "Generiere einen vollständigen Charakter aus einem Template"
+                        size_hint_y: None
+                        height: dp(20)
+                        theme_text_color: "Secondary"
+
+                    MDButton:
+                        style: "filled"
+                        size_hint: None, None
+                        size: dp(250), dp(48)
+                        pos_hint: {"center_x": .5}
+                        on_release: root.open_template_selection_dialog()
+                        
+                        MDButtonIcon:
+                            icon: "account-plus"
+                        
+                        MDButtonText:
+                            text: "Charakter aus Template generieren"
 
             # Verwaltungs Card
             MDCard:

@@ -1,0 +1,70 @@
+{
+  "name": "Jeanne",
+  "description": "Gespräche sind wie Gefechte. Man sollte seine Ziele und Mittel sowie den Zeitpunkt gut wählen.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "free_race_edge": "Aufmerksamkeit",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Schützin",
+    "languages": ""
+  },
+  "attributes": {
+    "Geschicklichkeit": 10,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 6,
+    "Heimlichkeit": 8,
+    "Kämpfen": 6,
+    "Provozieren": 6,
+    "Schießen": 10,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Loyal",
+    "Schwerzüngig",
+    "Stur"
+  ],
+  "edges": [],
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    {
+      "name": "Lederjacke",
+      "type": "Rüstung",
+      "properties": {
+        "armor_torso": 2,
+        "armor_arms": 2
+      }
+    },
+    {
+      "name": "Muskete",
+      "type": "Waffe",
+      "properties": {
+        "damage": "2W8",
+        "range": "10/20/40"
+      }
+    },
+    {
+      "name": "Langschwert",
+      "type": "Waffe",
+      "properties": {
+        "damage": "Stä+W8"
+      }
+    },
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/jeanne_die_schuetzin"
+  }
+}
