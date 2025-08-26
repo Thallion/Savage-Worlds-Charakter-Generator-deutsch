@@ -27,6 +27,9 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
 from kivymd.theming import ThemableBehavior
 
+# Path utilities import
+from utils.path_utils import get_assets_path
+
 class LabelValuePair(MDBoxLayout):
     """Theme-adaptive Label-Wert-Paar mit flexibler Skalierung."""
     key_text = StringProperty("")
@@ -85,7 +88,7 @@ kv = '''
         padding: dp(4)
         
         Image:
-            source: 'assets/Savage-Worlds-Fanprodukt-Logo.png'
+            source: root.get_logo_path()
             size_hint: 1, 1
             allow_stretch: True
             keep_ratio: True
@@ -231,6 +234,10 @@ class GenerationPointsBar(MDBoxLayout):
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
         self.on_charakter_changed(self.controller, self.controller.charakter)
+        
+        # Timer für regelmäßige Gewichts-Updates
+        self._weight_update_event = Clock.schedule_interval(self._update_weight_periodically, 2.0)
+        
         Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
 
     def on_charakter_changed(self, instance, value):
@@ -306,9 +313,8 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.bind(verbleibende_handicap_punkte=self.update_handicaps_text)
             self.charakter.bind(gesamt_handicap_punkte=self.update_handicaps_text)
             
-            # Gewicht und Traglast
-            self.charakter.bind(gesamtgewicht=self.update_gewicht_text)
-            self.charakter.bind(maximale_traglast=self.update_gewicht_text)
+            # Gewicht und Traglast - keine direkten Property-Bindings mehr
+            # Stattdessen auf Events hören, die Gewichtsänderungen verursachen können
             
             # Charakterdaten
             self.charakter.bind(char_name=self.update_charakter_name)
@@ -397,7 +403,9 @@ class GenerationPointsBar(MDBoxLayout):
     def update_gewicht_text(self, instance, value):
         """Aktualisiert die Gewichts-Anzeige"""
         if self.charakter:
-            self.gewicht_text = f"{self.charakter.gesamtgewicht} / {self.charakter.maximale_traglast} kg"
+            gewicht = self.charakter.berechne_gesamtgewicht()
+            traglast = self.charakter.maximale_traglast
+            self.gewicht_text = f"{gewicht} / {traglast} kg"
 
     def update_rang_text(self, instance, value):
         """Aktualisiert die Rang-Anzeige"""
@@ -424,9 +432,23 @@ class GenerationPointsBar(MDBoxLayout):
             
             Logger.debug(f"Parade/Robustheit aktualisiert: {self.parade_robustheit_text}")
 
+    def _update_weight_periodically(self, dt):
+        """Timer-Callback für regelmäßige Gewichts-Updates"""
+        if self.charakter:
+            self.update_gewicht_text(None, None)
+        return True  # Timer weiterlaufen lassen
+
+    def get_logo_path(self):
+        """Gibt den korrekten Pfad zum Logo zurück (PyInstaller-kompatibel)"""
+        return get_assets_path("Savage-Worlds-Fanprodukt-Logo.png")
+
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""
         try:
+            # Timer stoppen
+            if hasattr(self, '_weight_update_event'):
+                Clock.unschedule(self._weight_update_event)
+                
             if self.charakter:
                 self.unbind_charakter_properties()
             if self.controller:

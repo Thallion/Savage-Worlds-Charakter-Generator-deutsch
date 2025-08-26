@@ -10,6 +10,9 @@ import string
 from pathlib import Path
 from datetime import datetime
 from kivy.logger import Logger
+
+# Import centralized path utilities
+from utils.path_utils import get_chars_path, get_application_root
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText
@@ -43,7 +46,7 @@ class FileManagerService:
     
     def get_default_directory(self, dir_type='chars'):
         """
-        Bestimmt das Standard-Verzeichnis basierend auf dem Typ
+        Bestimmt das Standard-Verzeichnis basierend auf dem Typ (PyInstaller-kompatibel)
         
         Args:
             dir_type (str): Typ des Verzeichnisses ('chars', 'pdfs', etc.)
@@ -51,36 +54,40 @@ class FileManagerService:
         Returns:
             str: Pfad zum Standard-Verzeichnis
         """
-        if getattr(sys, 'frozen', False):
-            # Ausführbare Version
-            base_dir = os.path.dirname(sys.executable)
-        else:
-            # Entwicklungsversion: Gehe vom services/ Ordner zum parent directory
-            services_dir = os.path.dirname(os.path.abspath(__file__))
-            base_dir = os.path.dirname(services_dir)  # parent directory (build/)
-        
-        target_dir = os.path.join(base_dir, dir_type)
-        
-        # KORRIGIERT: Bessere Verzeichniserstellung mit Fehlerbehandlung
-        if not os.path.exists(target_dir):
-            try:
-                os.makedirs(target_dir, exist_ok=True)
-                Logger.info(f"Verzeichnis erstellt: {target_dir}")
-            except Exception as e:
-                Logger.error(f"Fehler beim Erstellen des Verzeichnisses {target_dir}: {str(e)}")
-                # Fallback auf Home-Verzeichnis
-                fallback_dir = os.path.join(os.path.expanduser("~"), dir_type)
+        try:
+            # Verwende die zentrale path_utils für PyInstaller-Kompatibilität
+            if dir_type == 'chars':
+                target_dir = get_chars_path()
+            else:
+                # Für andere Verzeichnisse verwende application root
+                app_root = get_application_root()
+                target_dir = str(app_root / dir_type)
+            
+            # KORRIGIERT: Bessere Verzeichniserstellung mit Fehlerbehandlung
+            if not os.path.exists(target_dir):
                 try:
-                    os.makedirs(fallback_dir, exist_ok=True)
-                    target_dir = fallback_dir
-                    Logger.warning(f"Fallback-Verzeichnis verwendet: {target_dir}")
-                except Exception as e2:
-                    Logger.error(f"Auch Fallback-Verzeichnis konnte nicht erstellt werden: {str(e2)}")
-                    # Letzter Fallback: Home-Verzeichnis
-                    target_dir = os.path.expanduser("~")
-        
-        Logger.debug(f"Standard-Verzeichnis für '{dir_type}': {target_dir}")
-        return target_dir
+                    os.makedirs(target_dir, exist_ok=True)
+                    Logger.info(f"Verzeichnis erstellt: {target_dir}")
+                except Exception as e:
+                    Logger.error(f"Fehler beim Erstellen des Verzeichnisses {target_dir}: {str(e)}")
+                    # Fallback auf Home-Verzeichnis
+                    fallback_dir = os.path.join(os.path.expanduser("~"), dir_type)
+                    try:
+                        os.makedirs(fallback_dir, exist_ok=True)
+                        target_dir = fallback_dir
+                        Logger.warning(f"Fallback-Verzeichnis verwendet: {target_dir}")
+                    except Exception as e2:
+                        Logger.error(f"Auch Fallback-Verzeichnis konnte nicht erstellt werden: {str(e2)}")
+                        # Letzter Fallback: Home-Verzeichnis
+                        target_dir = os.path.expanduser("~")
+            
+            Logger.debug(f"Standard-Verzeichnis für '{dir_type}': {target_dir}")
+            return target_dir
+            
+        except Exception as e:
+            Logger.error(f"Fehler bei get_default_directory: {str(e)}")
+            # Final fallback
+            return os.path.expanduser("~")
     
     def generate_default_filename(self, file_type='character'):
         """

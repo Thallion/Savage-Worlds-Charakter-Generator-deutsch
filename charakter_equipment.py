@@ -52,28 +52,130 @@ class CharakterEquipment:
         return ausruestung_funktionen.berechne_gesamtkosten(self)
     
     def berechne_traglast(self):
-        """Berechnet die maximale Traglast basierend auf Stärke-Attribut"""
+        """
+        Berechnet die maximale Traglast basierend auf Stärke-Attribut.
+        Beim Talent "Kräftig" wird die Traglast um 20 kg erhöht.
+        """
         try:
-            staerke_wert = getattr(self, 'staerke', 4)
-            if hasattr(staerke_wert, 'wert'):
-                staerke_wert = staerke_wert.wert
+            staerke_attribut = self.attribute.get('Stärke')
+            if staerke_attribut:
+                staerke_wert = staerke_attribut.wert
+            else:
+                staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
+
+            maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
             
-            # Savage Worlds Traglast-Berechnung: Stärke x 10
-            return int(staerke_wert) * 10
-        except (AttributeError, ValueError, TypeError):
-            return 100  # Fallback-Wert
+            # Bonus für das Talent "Kräftig" hinzufügen
+            if "Kräftig" in self.selected_talente:
+                maximale_traglast += 20  # +20 kg Traglast bei Kräftig
+            
+            return maximale_traglast
+
+        except Exception as e:
+            Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
+            return 40  # Fallback-Wert (Stärke W4 * 10)
     
     def berechne_gesamtgewicht(self):
-        """Berechnet das Gesamtgewicht der Ausrüstung"""
+        """
+        Berechnet das Gesamtgewicht aller ausgewählten Ausrüstungsgegenstände.
+        Berücksichtigt nur ausgewählte Items mit Menge > 0.
+        
+        KORREKTUR: Verwendet nur die Hauptausrüstungsliste um Doppelzählung zu vermeiden,
+        da Items beim Kauf sowohl in ausruestung als auch in kategoriespezifischen Listen 
+        gespeichert werden.
+        """
+        gesamtgewicht = 0
+
+        # Nur die Hauptausrüstungsliste verwenden - verhindert Doppelzählung
+        if hasattr(self, 'ausruestung') and self.ausruestung:
+            for item in self.ausruestung.values():
+                if (hasattr(item, 'menge') and item.menge > 0 and 
+                    hasattr(item, 'ausgewaehlt') and item.ausgewaehlt):
+                    
+                    # Spezielle Gewichtsberechnung für verschiedene Item-Typen
+                    if hasattr(item, 'berechne_gewicht'):
+                        # Waffen, Rüstungen, Schilde können eigene Gewichtsberechnungen haben
+                        gewicht = item.berechne_gewicht() * item.menge
+                    else:
+                        # Standard-Gewicht für normale Ausrüstung
+                        gewicht = (getattr(item, 'gewicht', 0) or 0) * item.menge
+                    
+                    gesamtgewicht += gewicht
+
+        return gesamtgewicht
+    
+    @property
+    def gesamtgewicht(self):
+        """
+        Property für das Gesamtgewicht - wird dynamisch berechnet.
+        Berücksichtigt nur ausgewählte Ausrüstung mit Menge > 0.
+        """
+        gesamtgewicht = 0
+
+        # Normale Ausrüstung - nur ausgewählte Items zählen
+        if hasattr(self, 'ausruestung') and self.ausruestung:
+            for item in self.ausruestung.values():
+                if (hasattr(item, 'menge') and item.menge > 0 and 
+                    hasattr(item, 'ausgewaehlt') and item.ausgewaehlt):
+                    gewicht = getattr(item, 'gewicht', 0) or 0
+                    gesamtgewicht += gewicht * item.menge
+
+        # Waffen - nur ausgewählte Items zählen
+        if hasattr(self, 'waffen') and self.waffen:
+            for waffe in self.waffen.values():
+                if (hasattr(waffe, 'menge') and waffe.menge > 0 and
+                    hasattr(waffe, 'ausgewaehlt') and waffe.ausgewaehlt):
+                    if hasattr(waffe, 'berechne_gewicht'):
+                        gewicht = waffe.berechne_gewicht() * waffe.menge
+                    else:
+                        gewicht = (getattr(waffe, 'gewicht', 0) or 0) * waffe.menge
+                    gesamtgewicht += gewicht
+
+        # Rüstungen - nur ausgewählte Items zählen
+        if hasattr(self, 'ruestungen') and self.ruestungen:
+            for ruestung in self.ruestungen.values():
+                if (hasattr(ruestung, 'menge') and ruestung.menge > 0 and
+                    hasattr(ruestung, 'ausgewaehlt') and ruestung.ausgewaehlt):
+                    if hasattr(ruestung, 'berechne_gewicht'):
+                        gewicht = ruestung.berechne_gewicht() * ruestung.menge
+                    else:
+                        gewicht = (getattr(ruestung, 'gewicht', 0) or 0) * ruestung.menge
+                    gesamtgewicht += gewicht
+
+        # Schilde - nur ausgewählte Items zählen
+        if hasattr(self, 'schilde') and self.schilde:
+            for schild in self.schilde.values():
+                if (hasattr(schild, 'menge') and schild.menge > 0 and
+                    hasattr(schild, 'ausgewaehlt') and schild.ausgewaehlt):
+                    if hasattr(schild, 'berechne_gewicht'):
+                        gewicht = schild.berechne_gewicht() * schild.menge
+                    else:
+                        gewicht = (getattr(schild, 'gewicht', 0) or 0) * schild.menge
+                    gesamtgewicht += gewicht
+
+        return gesamtgewicht
+    
+    @property
+    def maximale_traglast(self):
+        """Property für die maximale Traglast - wird dynamisch berechnet"""
         try:
-            gesamtgewicht = 0
-            if hasattr(self, 'ausruestung') and self.ausruestung:
-                for item in self.ausruestung.values():
-                    if hasattr(item, 'gewicht') and hasattr(item, 'menge'):
-                        gesamtgewicht += (item.gewicht or 0) * (item.menge or 1)
-            return gesamtgewicht
-        except (AttributeError, TypeError):
-            return 0
+            staerke_attribut = self.attribute.get('Stärke')
+            if staerke_attribut:
+                staerke_wert = staerke_attribut.wert
+            else:
+                staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
+
+            maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
+            
+            # Bonus für das Talent "Kräftig" hinzufügen
+            if "Kräftig" in self.selected_talente:
+                maximale_traglast += 20  # +20 kg Traglast bei Kräftig
+            
+            return maximale_traglast
+
+        except Exception as e:
+            Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
+            return 40  # Fallback-Wert (Stärke W4 * 10)
     
     def berechne_gesamt_ruestungsschutz(self):
         return ausruestung_funktionen.berechne_gesamt_ruestungsschutz(self)

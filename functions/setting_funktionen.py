@@ -35,21 +35,8 @@ from models.schild import Schild
 import functions.ausruestung_funktionen as ausruestung_funktionen
 
 
-def get_application_root() -> Path:
-    """
-    Ermittelt das Hauptverzeichnis der Anwendung.
-    
-    Returns:
-        Path: Das Hauptverzeichnis der Anwendung
-    """
-    if getattr(sys, 'frozen', False):
-        # Wenn die Anwendung gepackt ist (z.B. mit cx_Freeze)
-        app_root = Path(sys.executable).parent
-    else:
-        # Bei normalem Python-Skript
-        app_root = Path(__file__).parent.parent.resolve()
-
-    return app_root
+# Import centralized path utilities
+from utils.path_utils import get_application_root
 
 
 class SetEncoder(json.JSONEncoder):

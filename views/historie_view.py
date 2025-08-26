@@ -108,15 +108,25 @@ class CharakterHistorie:
                 timestamp = entry['timestamp']
                 
                 if entry_type == 'attribut_steigerung':
-                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} (Kosten: {details['kosten']})")
+                    kosten_typ = details.get('kosten_typ', 'Punkte')
+                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({details['kosten']} {kosten_typ})")
                 elif entry_type == 'fertigkeit_steigerung':
-                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} (Kosten: {details['kosten']})")
+                    kosten_typ = details.get('kosten_typ', 'Punkte')
+                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({details['kosten']} {kosten_typ})")
                 elif entry_type == 'talent_hinzugefuegt':
                     log_lines.append(f"  [{timestamp}] {details['name']} (Kosten: {details.get('kosten', 0)})")
+                elif entry_type == 'talent_entfernt':
+                    log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
                 elif entry_type == 'handicap_hinzugefuegt':
                     log_lines.append(f"  [{timestamp}] {details['name']} ({details.get('stufe', '')} - Punkte: {details.get('punkte', 0)})")
+                elif entry_type == 'handicap_entfernt':
+                    log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
+                elif entry_type == 'handicap_reduziert':
+                    log_lines.append(f"  [{timestamp}] {details['name']} von schwer zu leicht reduziert")
                 elif entry_type == 'macht_hinzugefuegt':
                     log_lines.append(f"  [{timestamp}] {details['name']} (Rang: {details.get('rang', 'Anfänger')})")
+                elif entry_type == 'macht_entfernt':
+                    log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
                 else:
                     log_lines.append(f"  [{timestamp}] {details}")
         
@@ -235,8 +245,12 @@ class HistorieWidget(MDBoxLayout):
                 event_service.subscribe('attribute_changed', self._on_attribute_changed)
                 event_service.subscribe('skill_changed', self._on_skill_changed)
                 event_service.subscribe('talent_added', self._on_talent_added)
+                event_service.subscribe('talent_removed', self._on_talent_removed)
                 event_service.subscribe('handicap_added', self._on_handicap_added)
+                event_service.subscribe('handicap_removed', self._on_handicap_removed)
+                event_service.subscribe('handicap_reduced', self._on_handicap_reduced)
                 event_service.subscribe('macht_added', self._on_macht_added)
+                event_service.subscribe('macht_removed', self._on_macht_removed)
                 event_service.subscribe('character_loaded', self._on_character_loaded)
                 event_service.subscribe('character_saved', self._on_character_saved)
                 Logger.info("Historie Event-Listener registriert")
@@ -262,12 +276,9 @@ class HistorieWidget(MDBoxLayout):
         )
         header_box.add_widget(header_label)
         
-        # Auto-Log Switch
-        self.auto_log_switch = MDSwitch(
-            active=True,
-            size_hint_x=None,
-            width=dp(60)
-        )
+        # Auto-Log Switch  
+        self.auto_log_switch = MDSwitch()
+        self.auto_log_switch.active = True
         header_box.add_widget(MDLabel(
             text="Auto-Log:",
             size_hint_x=None,
@@ -397,11 +408,22 @@ class HistorieWidget(MDBoxLayout):
             return
             
         try:
+            # Handle sowohl dict als auch Event-Objekt
+            if hasattr(event_data, 'data'):
+                data = event_data.data
+            else:
+                data = event_data
+                
+            if not isinstance(data, dict):
+                Logger.warning(f"Unerwarteter Datentyp für Attribut-Event: {type(data)}")
+                return
+                
             details = {
-                'name': event_data.get('attribute_name', 'Unbekannt'),
-                'von': event_data.get('old_value', 4),
-                'nach': event_data.get('new_value', 6),
-                'kosten': event_data.get('cost', 1)
+                'name': data.get('attribute_name', 'Unbekannt'),
+                'von': data.get('old_value', 4),
+                'nach': data.get('new_value', 6),
+                'kosten': data.get('cost', 1),
+                'kosten_typ': data.get('cost_type', 'Attributspunkte')
             }
             self.historie.add_entry('attribut_steigerung', details)
             self._update_display()
@@ -414,11 +436,22 @@ class HistorieWidget(MDBoxLayout):
             return
             
         try:
+            # Handle sowohl dict als auch Event-Objekt
+            if hasattr(event_data, 'data'):
+                data = event_data.data
+            else:
+                data = event_data
+                
+            if not isinstance(data, dict):
+                Logger.warning(f"Unerwarteter Datentyp für Fertigkeits-Event: {type(data)}")
+                return
+                
             details = {
-                'name': event_data.get('skill_name', 'Unbekannt'),
-                'von': event_data.get('old_value', 0),
-                'nach': event_data.get('new_value', 4),
-                'kosten': event_data.get('cost', 1)
+                'name': data.get('skill_name', 'Unbekannt'),
+                'von': data.get('old_value', 0),
+                'nach': data.get('new_value', 4),
+                'kosten': data.get('cost', 1),
+                'kosten_typ': data.get('cost_type', 'Fertigkeitspunkte')
             }
             self.historie.add_entry('fertigkeit_steigerung', details)
             self._update_display()
@@ -431,10 +464,20 @@ class HistorieWidget(MDBoxLayout):
             return
             
         try:
+            # Handle sowohl dict als auch Event-Objekt
+            if hasattr(event_data, 'data'):
+                data = event_data.data
+            else:
+                data = event_data
+                
+            if not isinstance(data, dict):
+                Logger.warning(f"Unerwarteter Datentyp für Talent-Event: {type(data)}")
+                return
+                
             details = {
-                'name': event_data.get('talent_name', 'Unbekannt'),
-                'kosten': event_data.get('cost', 1),
-                'voraussetzungen': event_data.get('requirements', '')
+                'name': data.get('talent_name', 'Unbekannt'),
+                'kosten': data.get('cost', 1),
+                'voraussetzungen': data.get('requirements', '')
             }
             self.historie.add_entry('talent_hinzugefuegt', details)
             self._update_display()
@@ -447,10 +490,20 @@ class HistorieWidget(MDBoxLayout):
             return
             
         try:
+            # Handle sowohl dict als auch Event-Objekt
+            if hasattr(event_data, 'data'):
+                data = event_data.data
+            else:
+                data = event_data
+                
+            if not isinstance(data, dict):
+                Logger.warning(f"Unerwarteter Datentyp für Handicap-Event: {type(data)}")
+                return
+                
             details = {
-                'name': event_data.get('handicap_name', 'Unbekannt'),
-                'stufe': event_data.get('stufe', 'Leicht'),
-                'punkte': event_data.get('points', 1)
+                'name': data.get('handicap_name', 'Unbekannt'),
+                'stufe': data.get('stufe', 'Leicht'),
+                'punkte': data.get('points', 1)
             }
             self.historie.add_entry('handicap_hinzugefuegt', details)
             self._update_display()
@@ -463,15 +516,85 @@ class HistorieWidget(MDBoxLayout):
             return
             
         try:
+            # Handle sowohl dict als auch Event-Objekt
+            if hasattr(event_data, 'data'):
+                data = event_data.data
+            else:
+                data = event_data
+                
+            if not isinstance(data, dict):
+                Logger.warning(f"Unerwarteter Datentyp für Macht-Event: {type(data)}")
+                return
+                
             details = {
-                'name': event_data.get('macht_name', 'Unbekannt'),
-                'rang': event_data.get('rang', 'Anfänger'),
-                'kosten': event_data.get('cost', 1)
+                'name': data.get('macht_name', 'Unbekannt'),
+                'rang': data.get('rang', 'Anfänger'),
+                'kosten': data.get('cost', 1)
             }
             self.historie.add_entry('macht_hinzugefuegt', details)
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Macht-Logging: {str(e)}")
+    
+    def _on_talent_removed(self, event_data):
+        """Handler für entfernte Talente."""
+        if not self.auto_log_switch.active:
+            return
+            
+        try:
+            details = {
+                'name': event_data.get('talent_name', 'Unbekannt'),
+                'action': event_data.get('action', 'removed')
+            }
+            self.historie.add_entry('talent_entfernt', details)
+            self._update_display()
+        except Exception as e:
+            Logger.error(f"Fehler bei Talent-Entfernung-Logging: {str(e)}")
+    
+    def _on_handicap_removed(self, event_data):
+        """Handler für entfernte Handicaps."""
+        if not self.auto_log_switch.active:
+            return
+            
+        try:
+            details = {
+                'name': event_data.get('handicap_name', 'Unbekannt'),
+                'action': event_data.get('action', 'removed')
+            }
+            self.historie.add_entry('handicap_entfernt', details)
+            self._update_display()
+        except Exception as e:
+            Logger.error(f"Fehler bei Handicap-Entfernung-Logging: {str(e)}")
+    
+    def _on_handicap_reduced(self, event_data):
+        """Handler für reduzierte Handicaps."""
+        if not self.auto_log_switch.active:
+            return
+            
+        try:
+            details = {
+                'name': event_data.get('handicap_name', 'Unbekannt'),
+                'action': event_data.get('action', 'reduced')
+            }
+            self.historie.add_entry('handicap_reduziert', details)
+            self._update_display()
+        except Exception as e:
+            Logger.error(f"Fehler bei Handicap-Reduzierung-Logging: {str(e)}")
+    
+    def _on_macht_removed(self, event_data):
+        """Handler für entfernte Mächte."""
+        if not self.auto_log_switch.active:
+            return
+            
+        try:
+            details = {
+                'name': event_data.get('macht_name', 'Unbekannt'),
+                'action': event_data.get('action', 'removed')
+            }
+            self.historie.add_entry('macht_entfernt', details)
+            self._update_display()
+        except Exception as e:
+            Logger.error(f"Fehler bei Macht-Entfernung-Logging: {str(e)}")
     
     def _on_character_loaded(self, event_data):
         """Handler für geladene Charaktere."""
@@ -596,10 +719,12 @@ class HistorieWidget(MDBoxLayout):
             
             # Suche nach existierenden Log-Dateien
             from pathlib import Path
-            project_root = Path(__file__).parent.parent
+            from utils.path_utils import get_chars_path
+            
+            chars_root = Path(get_chars_path())
             log_dirs = [
-                project_root / "chars" / "manual_logs",
-                project_root / "chars" / "auto_generated" / "logs"
+                chars_root / "manual_logs",
+                chars_root / "auto_generated" / "logs"
             ]
             
             found_logs = []

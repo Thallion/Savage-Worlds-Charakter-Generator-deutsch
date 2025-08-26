@@ -193,6 +193,19 @@ class HandicapManager:
             Logger.info(f"verbleibend '{charakter.verbleibende_handicap_punkte} Kosten: {handicap.punkte} Gesamt {charakter.gesamt_handicap_punkte}")
             charakter.selected_handicaps = charakter.selected_handicaps  # Neu zuweisen
             
+            # Event für Historie-System senden
+            try:
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('handicap_added', {
+                        'handicap_name': handicap_name_key,
+                        'stufe': handicap.stufe,
+                        'points': handicap.punkte
+                    })
+            except Exception as e:
+                Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
+            
             # Abgeleitete Werte neu berechnen
             charakter.berechne_abgeleitete_werte()
             

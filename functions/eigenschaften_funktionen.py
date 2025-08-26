@@ -81,7 +81,7 @@ class EigenschaftenManager:
             "start_attributsteigerungen": 5,
             "kosten": {
                 "attribut_chargen": 1,
-                "attribut_spiel": 2,
+                "attribut_spiel": 1,
                 "fertigkeit_chargen": 1,
                 "fertigkeit_spiel": 1,
                 "fertigkeit_ueber_attribut": 2
@@ -150,7 +150,7 @@ class EigenschaftenManager:
         
         # Bestimme die Kosten
         if charakter.char_gen_completed:
-            kosten = self.kosten.get('attribut_spiel', 2)
+            kosten = self.kosten.get('attribut_spiel', 1)
             if charakter.verbleibende_aufstiege < kosten:
                 Logger.warning(f"Nicht genügend Aufstiege verfügbar. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_aufstiege}")
                 return False
@@ -170,9 +170,34 @@ class EigenschaftenManager:
                 Logger.warning(f"Nicht genügend Punkte verfügbar. Benötigt: {kosten} Attributspunkte ODER 2 Handicap-Punkte. Verfügbar: {verfügbare_attr} Attributspunkte, {verfügbare_hp} Handicap-Punkte")
                 return False
         
+        # Alte Werte für Event merken
+        old_value = attribut.wuerfel.value
+        
         # Führe die Steigerung durch
         attribut.wuerfel.increase()
         Logger.debug(f"Attribut '{attribut_name}' wurde auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier} gesteigert.")
+        
+        # Event für Historie-System senden
+        new_value = attribut.wuerfel.value
+        cost_type = "Aufstiege" if charakter.char_gen_completed else (
+            "Handicap-Punkte" if hasattr(charakter, 'verbleibende_handicap_punkte') and 
+            charakter.verbleibende_attributsteigerungen < kosten and
+            charakter.verbleibende_handicap_punkte >= 2 else "Attributspunkte"
+        )
+        
+        try:
+            from services.service_container import service_container
+            event_service = service_container.get_event_service()
+            if event_service:
+                event_service.publish('attribute_changed', {
+                    'attribute_name': attribut_name,
+                    'old_value': old_value,
+                    'new_value': new_value,
+                    'cost': kosten,
+                    'cost_type': cost_type
+                })
+        except Exception as e:
+            Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
         
         # Aktualisiere abgeleitete Werte
         charakter.rang = charakter.get_rang(charakter.aufstiege_gesamt)
@@ -207,7 +232,7 @@ class EigenschaftenManager:
         
         # Gib Punkte zurück
         if charakter.char_gen_completed:
-            kosten = self.kosten.get('attribut_spiel', 2)
+            kosten = self.kosten.get('attribut_spiel', 1)
             charakter.verbleibende_aufstiege += kosten
         else:
             kosten = self.kosten.get('attribut_chargen', 1)
@@ -310,15 +335,11 @@ class EigenschaftenManager:
             charakter.verbleibende_aufstiege -= kosten
         else:
             # Verwende das richtige Attribut für Fertigkeitspunkte
-            verfuegbare_punkte = getattr(charakter, 'verbleibende_fertigkeitspunkte', 
-                                       getattr(charakter, 'verbleibende_fertigkeitssteigerungen', 0))
+            verfuegbare_punkte = charakter.verbleibende_fertigkeitssteigerungen
             
             # Prüfe zuerst normale Fertigkeitspunkte
             if verfuegbare_punkte >= kosten:
-                if hasattr(charakter, 'verbleibende_fertigkeitspunkte'):
-                    charakter.verbleibende_fertigkeitspunkte -= kosten
-                elif hasattr(charakter, 'verbleibende_fertigkeitssteigerungen'):
-                    charakter.verbleibende_fertigkeitssteigerungen -= kosten
+                charakter.verbleibende_fertigkeitssteigerungen -= kosten
             # Falls keine normalen Punkte verfügbar, prüfe Handicap-Punkte (1 HP = 1 Fertigkeitssteigerung)
             elif hasattr(charakter, 'verbleibende_handicap_punkte') and charakter.verbleibende_handicap_punkte >= kosten:
                 charakter.verbleibende_handicap_punkte -= kosten
@@ -328,9 +349,34 @@ class EigenschaftenManager:
                 Logger.warning(f"Nicht genügend Punkte verfügbar. Benötigt: {kosten} Fertigkeitspunkte ODER {kosten} Handicap-Punkte. Verfügbar: {verfuegbare_punkte} Fertigkeitspunkte, {verfügbare_hp} Handicap-Punkte")
                 return False
         
+        # Alte Werte für Event merken
+        old_value = fertigkeit.wuerfel.value
+        
         # Steigere die Fertigkeit
         fertigkeit.wuerfel.increase()
         Logger.debug(f"Fertigkeit '{fertigkeit_name}' wurde auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier} gesteigert.")
+        
+        # Event für Historie-System senden
+        new_value = fertigkeit.wuerfel.value
+        cost_type = "Aufstiege" if charakter.char_gen_completed else (
+            "Handicap-Punkte" if hasattr(charakter, 'verbleibende_handicap_punkte') and 
+            charakter.verbleibende_fertigkeitssteigerungen < kosten and
+            charakter.verbleibende_handicap_punkte >= kosten else "Fertigkeitspunkte"
+        )
+        
+        try:
+            from services.service_container import service_container
+            event_service = service_container.get_event_service()
+            if event_service:
+                event_service.publish('skill_changed', {
+                    'skill_name': fertigkeit_name,
+                    'old_value': old_value,
+                    'new_value': new_value,
+                    'cost': kosten,
+                    'cost_type': cost_type
+                })
+        except Exception as e:
+            Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
         
         return True
     
@@ -390,10 +436,7 @@ class EigenschaftenManager:
         if charakter.char_gen_completed:
             charakter.verbleibende_aufstiege += kosten
         else:
-            if hasattr(charakter, 'verbleibende_fertigkeitspunkte'):
-                charakter.verbleibende_fertigkeitspunkte += kosten
-            elif hasattr(charakter, 'verbleibende_fertigkeitssteigerungen'):
-                charakter.verbleibende_fertigkeitssteigerungen += kosten
+            charakter.verbleibende_fertigkeitssteigerungen += kosten
         
         return True
     

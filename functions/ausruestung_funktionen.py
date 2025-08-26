@@ -395,17 +395,13 @@ def _berechne_vermoegen_multiplikator(charakter, exclude_talent: Optional[str] =
 def berechne_gesamtgewicht(charakter):
     """
     DEPRECATED: Diese Funktion existiert für Rückwärtskompatibilität.
-    Nutze stattdessen charakter.berechne_gesamtgewicht().
+    Nutze stattdessen charakter.berechne_gesamtgewicht() Methode.
     
-    Direkte Implementierung um Rekursion zu vermeiden.
+    Berücksichtigt nur ausgewählte Ausrüstung mit Menge > 0.
     """
     try:
-        gesamtgewicht = 0
-        if hasattr(charakter, 'ausruestung') and charakter.ausruestung:
-            for item in charakter.ausruestung.values():
-                if hasattr(item, 'gewicht') and hasattr(item, 'menge'):
-                    gesamtgewicht += (item.gewicht or 0) * (item.menge or 1)
-        return gesamtgewicht
+        # Verwende die korrigierte Methode für konsistente Berechnung
+        return charakter.berechne_gesamtgewicht()
     except (AttributeError, TypeError):
         return 0
 
@@ -415,17 +411,27 @@ def berechne_traglast(charakter):
     DEPRECATED: Diese Funktion existiert für Rückwärtskompatibilität.  
     Nutze stattdessen charakter.berechne_traglast().
     
-    Direkte Implementierung um Rekursion zu vermeiden.
+    Berechnet die maximale Traglast basierend auf Stärke-Attribut.
+    Beim Talent "Kräftig" wird die Traglast um 20 kg erhöht.
     """
     try:
-        staerke_wert = getattr(charakter, 'staerke', 4)
-        if hasattr(staerke_wert, 'wert'):
-            staerke_wert = staerke_wert.wert
+        staerke_attribut = charakter.attribute.get('Stärke')
+        if staerke_attribut:
+            staerke_wert = staerke_attribut.wert
+        else:
+            staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
+
+        maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
         
-        # Savage Worlds Traglast-Berechnung: Stärke x 10
-        return int(staerke_wert) * 10
-    except (AttributeError, ValueError, TypeError):
-        return 100  # Fallback-Wert
+        # Bonus für das Talent "Kräftig" hinzufügen
+        if "Kräftig" in charakter.selected_talente:
+            maximale_traglast += 20  # +20 kg Traglast bei Kräftig
+        
+        return maximale_traglast
+
+    except Exception as e:
+        Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
+        return 40  # Fallback-Wert (Stärke W4 * 10)
 
 
 # Export der öffentlichen Funktionen

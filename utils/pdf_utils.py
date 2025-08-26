@@ -25,13 +25,10 @@ from reportlab.platypus import (
 from reportlab.lib import colors
 from PIL import Image
 
-def get_application_root():
-    """Ermittelt das Basisverzeichnis der Anwendung."""
-    if getattr(sys, "frozen", False):
-        app_root = Path(sys.executable).parent
-    else:
-        app_root = Path(__file__).parent.parent.resolve()
-    return app_root
+# Import path utilities
+from utils.path_utils import get_assets_path, get_application_root as get_app_root
+
+# Removed - using centralized path utilities instead
 
 def generiere_pdf(charakter, output_pdf, printer_friendly=False):
     """
@@ -42,11 +39,8 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
         output_pdf: Pfad für die zu erstellende PDF-Datei
         printer_friendly: Bool, ob eine druckerfreundliche Version ohne Hintergrund erstellt werden soll
     """
-    # Versuche, das Verzeichnis relativ zur ausführbaren Datei zu finden
-    app_root = get_application_root()
-
-    # Datei-Pfad für das Hintergrundbild relativ zum Basisverzeichnis
-    background_img = os.path.join(app_root, "assets", "charbogen_hintergrund.jpg")
+    # Verwende die neue path_utils Funktion für PyInstaller-kompatible Pfade
+    background_img = get_assets_path("charbogen_hintergrund.jpg")
 
     # Dokument erstellen mit konsistenten Seitenrändern
     doc = SimpleDocTemplate(

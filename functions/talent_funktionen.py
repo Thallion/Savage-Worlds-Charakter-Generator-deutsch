@@ -588,6 +588,20 @@ class TalentManager:
             kosten = TalentConfig.get('kosten.handicap_punkte', 2)
             self.charakter.verbleibende_handicap_punkte -= kosten
             self._reset_ignore_voraussetzungen_flag(talent_name_key)
+            
+            # Event für Historie-System senden
+            try:
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('talent_added', {
+                        'talent_name': talent_name_key,
+                        'cost': kosten,
+                        'cost_type': 'Handicap-Punkte'
+                    })
+            except Exception as e:
+                Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
+            
             self.charakter.berechne_abgeleitete_werte()
             return True
         return False
@@ -610,6 +624,20 @@ class TalentManager:
             self.charakter.verbleibende_aufstiege -= kosten
             self.charakter.update_char_gen_status()
             self._reset_ignore_voraussetzungen_flag(talent_name_key)
+            
+            # Event für Historie-System senden
+            try:
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('talent_added', {
+                        'talent_name': talent_name_key,
+                        'cost': kosten,
+                        'cost_type': 'Aufstiege'
+                    })
+            except Exception as e:
+                Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
+            
             self.charakter.berechne_abgeleitete_werte()
             return True
         return False

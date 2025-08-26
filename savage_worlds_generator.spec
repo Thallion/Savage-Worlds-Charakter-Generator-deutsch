@@ -1,0 +1,100 @@
+# -*- mode: python ; coding: utf-8 -*-
+
+import os
+from pathlib import Path
+
+# Bestimme das Projektverzeichnis
+project_dir = Path.cwd()
+
+# Sammle alle Daten-Dateien
+datas = [
+    # Assets Ordner
+    (str(project_dir / 'assets'), 'assets'),
+    
+    # Config Dateien
+    (str(project_dir / 'config'), 'config'),
+    
+    # Settings Dateien - KORRIGIERT
+    (str(project_dir / 'settings'), 'settings'),
+    
+    # Templates
+    (str(project_dir / 'templates'), 'templates'),
+    
+    # Chars Ordner - NEU HINZUGEFÜGT
+    (str(project_dir / 'chars'), 'chars'),
+    
+    # KivyMD Daten
+    ('venv/lib/python3.12/site-packages/kivymd', 'kivymd') if os.path.exists('venv/lib/python3.12/site-packages/kivymd') else None,
+]
+
+# Filtere None-Werte heraus
+datas = [item for item in datas if item is not None]
+
+# Hidden imports für KivyMD und andere Dependencies
+hiddenimports = [
+    'kivymd',
+    'kivymd.app',
+    'kivymd.uix.screen',
+    'kivymd.uix.boxlayout',
+    'kivymd.uix.label',
+    'kivymd.uix.button',
+    'kivymd.uix.textfield',
+    'kivymd.uix.tab',
+    'kivymd.theming',
+    'kivy',
+    'kivy.app',
+    'kivy.lang',
+    'kivy.clock',
+    'kivy.properties',
+    'kivy.core.window',
+    'kivy.logger',
+    'kivy.metrics',
+    'kivy.uix.popup',
+    'kivy.uix.scrollview',
+    'kivy.uix.widget',
+    'PIL',
+    'PIL.Image',
+    'PIL.ImageTk',
+    'reportlab',
+    'reportlab.pdfgen',
+    'reportlab.lib',
+    'json',
+    'logging',
+    'functools',
+    'webbrowser',
+    're',
+    'sys',
+    'os'
+]
+
+a = Analysis(
+    ['main.py'],
+    pathex=[str(project_dir)],
+    binaries=[],
+    datas=datas,
+    hiddenimports=hiddenimports,
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    noarchive=False,
+)
+
+pyz = PYZ(a.pure)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    a.binaries,
+    a.datas,
+    [],
+    name='SavageWorldsCharakterGenerator',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
+    console=False,  # Für GUI-Anwendung auf False setzen
+    icon=str(project_dir / 'assets' / 'bowman.png') if (project_dir / 'assets' / 'bowman.png').exists() else None,
+)

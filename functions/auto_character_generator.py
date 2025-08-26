@@ -1158,8 +1158,13 @@ class AutoCharacterGenerator:
         """Erstellt detailliertes Kosten-Log als Datei"""
         self.log("\n--- ERSTELLE KOSTEN-LOG-DATEI ---")
 
-        # Log-Ordner bestimmen
-        log_dir = Path(output_dir) if output_dir else project_root / "chars" / "auto_generated" / "logs"
+        # Log-Ordner bestimmen (PyInstaller-kompatibel)
+        if output_dir:
+            log_dir = Path(output_dir)
+        else:
+            from utils.path_utils import get_chars_path
+            chars_root = Path(get_chars_path())
+            log_dir = chars_root / "auto_generated" / "logs"
         log_dir.mkdir(parents=True, exist_ok=True)
 
         # Dateiname

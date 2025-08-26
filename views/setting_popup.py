@@ -76,12 +76,8 @@ KV = '''
 Builder.load_string(KV)
 
 # Hilfsfunktion zur Bestimmung des Applikations‑Rootpfads
-def get_application_root():
-    if getattr(sys, "frozen", False):
-        app_root = Path(sys.executable).parent.parent
-    else:
-        app_root = Path(__file__).parent.parent.resolve()
-    return app_root
+# Import centralized path utilities
+from utils.path_utils import get_application_root
 
 # Erstellen des Ordners "settings", falls nicht existent
 app_root = get_application_root()
