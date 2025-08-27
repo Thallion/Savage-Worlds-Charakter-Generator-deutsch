@@ -14,6 +14,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.properties import ObjectProperty
+from kivy.metrics import dp
 from kivymd.uix.screen import MDScreen
 
 # Manager Imports (falls vorhanden)
@@ -45,6 +46,12 @@ class EinstellungenWidget(MDScreen):
         self.app = App.get_running_app()
         self.charakter_controller = None
         
+        # Template-Variablen initialisieren
+        self.available_templates = []
+        self.filtered_templates = []
+        self.selected_template = None
+        self.template_menu = None
+        
         # Controller-Initialisierung versuchen
         self._initialize_controller()
         
@@ -60,6 +67,9 @@ class EinstellungenWidget(MDScreen):
         
         # UI nach vollständiger Initialisierung aufbauen
         Clock.schedule_once(self._post_init, 0)
+        
+        # Templates nach Post-Init laden
+        Clock.schedule_once(self._load_available_templates, 0.2)
     
     def _initialize_controller(self):
         """Initialisiert den Controller früh"""
@@ -1137,12 +1147,14 @@ class EinstellungenWidget(MDScreen):
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen der Template-Auswahl: {e}")
     
-    def _generate_character_from_template(self, template_info, dialog):
+    def _generate_character_from_template(self, template_info, dialog=None):
         """Generiert Charakter aus gewähltem Template"""
         try:
             from functions.auto_character_generator import generate_character_from_json
             
-            dialog.dismiss()
+            # Dialog nur schließen wenn vorhanden
+            if dialog:
+                dialog.dismiss()
             
             Logger.info(f"Generiere Charakter aus Template: {template_info['name']}")
             
@@ -1215,6 +1227,221 @@ class EinstellungenWidget(MDScreen):
             error_dialog.open()
         except Exception as e:
             Logger.error(f"Fehler beim Anzeigen des Fehler-Dialogs: {e}")
+    
+    # ==================== TEMPLATE FUNCTIONALITY ====================
+    def _load_available_templates(self, dt):
+        """Lädt verfügbare Templates aus dem templates/ Ordner"""
+        try:
+            import json
+            from pathlib import Path
+            
+            templates_dir = Path(__file__).parent.parent / 'templates'
+            self.available_templates = []
+            
+            if templates_dir.exists():
+                for template_file in templates_dir.glob('*.json'):
+                    # Überspringe schema und example dateien
+                    if not any(skip in template_file.name.lower() for skip in ['schema', 'example']):
+                        try:
+                            with open(template_file, 'r', encoding='utf-8') as f:
+                                template_data = json.load(f)
+                                character_name = template_data.get('character_name', template_file.stem)
+                                self.available_templates.append({
+                                    'file': template_file,
+                                    'name': character_name,
+                                    'description': template_data.get('description', 'Keine Beschreibung verfügbar')
+                                })
+                        except Exception as e:
+                            Logger.warning(f"Template {template_file} konnte nicht geladen werden: {e}")
+                            continue
+            
+            # Alphabetisch sortieren
+            self.available_templates.sort(key=lambda x: x['name'])
+            self.filtered_templates = self.available_templates.copy()
+            
+            Logger.info(f"{len(self.available_templates)} Templates geladen")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden der Templates: {e}")
+
+    def show_template_selection_dialog(self):
+        """Zeigt Template-Auswahl Dialog mit Suchfeld (nach Vorbild von voelker_view)"""
+        if not self.available_templates:
+            # Keine Templates verfügbar
+            from kivymd.uix.dialog import MDDialog
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.label import MDLabel
+            
+            dialog = MDDialog(
+                MDLabel(text="Keine Templates verfügbar!\n\nLegen Sie Templates im 'templates/' Ordner ab."),
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss()
+                )
+            )
+            dialog.open()
+            return
+
+        self._show_template_search_dialog(
+            self.available_templates,
+            lambda template: self._on_template_selected_from_dialog(template)
+        )
+
+    def _show_template_search_dialog(self, templates, callback):
+        """Template-Auswahl Dialog mit Suchfeld (nach Vorbild von voelker_view._show_search_dialog)"""
+        from kivymd.uix.dialog import (
+            MDDialog, MDDialogHeadlineText, MDDialogButtonContainer, 
+            MDDialogContentContainer
+        )
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText
+        from kivymd.uix.scrollview import MDScrollView
+        from kivymd.uix.boxlayout import MDBoxLayout
+        
+        try:
+            # Hauptcontainer für den Dialog - Feste Höhe
+            dialog_content = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(15),
+                padding=dp(20),
+                size_hint_y=None,
+                height=dp(450)  # Etwas größer für Template-Beschreibungen
+            )
+            
+            # Suchfeld
+            search_field = MDTextField(
+                mode="outlined",
+                size_hint_y=None,
+                height=dp(56)
+            )
+            search_hint = MDTextFieldHintText(text="Template suchen...")
+            search_field.add_widget(search_hint)
+            
+            # Scrollbare Liste
+            scroll_view = MDScrollView(
+                size_hint_y=None,
+                height=dp(350)
+            )
+            
+            templates_list = MDList(
+                size_hint_y=None
+            )
+            # Höhe der Liste berechnen basierend auf Items
+            templates_list.bind(minimum_height=templates_list.setter('height'))
+            
+            # Templates zur Liste hinzufügen
+            def update_list(filtered_templates):
+                templates_list.clear_widgets()
+                for template in sorted(filtered_templates, key=lambda x: x['name']):
+                    list_item = MDListItem(
+                        MDListItemHeadlineText(text=template['name']),
+                        MDListItemSupportingText(text=template['description']),
+                        size_hint_y=None,
+                        height=dp(72),  # Größer für Beschreibung
+                        on_release=lambda x, selected_template=template: self._on_template_dialog_item_selected(callback, selected_template)
+                    )
+                    templates_list.add_widget(list_item)
+            
+            # Initial alle Templates anzeigen
+            update_list(templates)
+            
+            # Suchfunktion
+            def on_search_text(instance, text):
+                if not text:
+                    filtered = templates
+                else:
+                    search_text = text.lower()
+                    filtered = [
+                        template for template in templates
+                        if search_text in template['name'].lower() or 
+                           search_text in template['description'].lower()
+                    ]
+                update_list(filtered)
+            
+            search_field.bind(text=on_search_text)
+            
+            # Widgets hinzufügen
+            dialog_content.add_widget(search_field)
+            scroll_view.add_widget(templates_list)
+            dialog_content.add_widget(scroll_view)
+            
+            # Dialog erstellen
+            self.template_dialog = MDDialog(
+                MDDialogHeadlineText(text="Template auswählen"),
+                MDDialogContentContainer(
+                    dialog_content,
+                    orientation="vertical",
+                ),
+                MDDialogButtonContainer(
+                    MDButton(
+                        MDButtonText(text="Abbrechen"),
+                        style="text",
+                        on_release=self._dismiss_template_dialog
+                    ),
+                )
+            )
+            
+            self.template_dialog.open()
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen des Template-Dialogs: {e}", exc_info=True)
+
+    def _on_template_dialog_item_selected(self, callback, template):
+        """Callback wenn Template im Dialog ausgewählt wird"""
+        try:
+            self._dismiss_template_dialog()
+            if callback:
+                callback(template)
+        except Exception as e:
+            Logger.error(f"Fehler bei Template-Auswahl: {e}")
+
+    def _dismiss_template_dialog(self, *args):
+        """Schließt den Template-Dialog"""
+        if hasattr(self, 'template_dialog') and self.template_dialog:
+            self.template_dialog.dismiss()
+            self.template_dialog = None
+
+    def _on_template_selected_from_dialog(self, template):
+        """Callback wenn Template aus Dialog ausgewählt wurde"""
+        try:
+            self.selected_template = template
+            
+            # Button-Text aktualisieren
+            if hasattr(self.ids, 'selected_template_text'):
+                self.ids.selected_template_text.text = template['name']
+            
+            # Generierungs-Button aktivieren
+            if hasattr(self.ids, 'generate_button'):
+                self.ids.generate_button.disabled = False
+            
+            Logger.info(f"Template ausgewählt: {template['name']}")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten der Template-Auswahl: {e}")
+    
+    
+    def generate_character_from_selected_template(self):
+        """Generiert Charakter aus dem ausgewählten Template"""
+        if not self.selected_template:
+            from kivymd.uix.dialog import MDDialog
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.label import MDLabel
+            
+            dialog = MDDialog(
+                MDLabel(text="Bitte wählen Sie zuerst ein Template aus!"),
+                MDButton(
+                    MDButtonText(text="OK"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss()
+                )
+            )
+            dialog.open()
+            return
+        
+        # Verwende die bestehende Generierungslogik
+        self._generate_character_from_template(self.selected_template, None)
 
     # Fertigkeit-Dialoge
     def open_add_fertigkeit_popup(self):
@@ -1710,18 +1937,32 @@ kv_string = '''
                         height: dp(20)
                         theme_text_color: "Secondary"
 
+                    # Template Auswahl Button
                     MDButton:
+                        id: template_selection_button
+                        style: "outlined"
+                        size_hint_y: None
+                        height: dp(56)
+                        on_release: root.show_template_selection_dialog()
+                        
+                        MDButtonText:
+                            id: selected_template_text
+                            text: "Template auswählen..."
+
+                    MDButton:
+                        id: generate_button
                         style: "filled"
                         size_hint: None, None
                         size: dp(250), dp(48)
                         pos_hint: {"center_x": .5}
-                        on_release: root.open_template_selection_dialog()
+                        disabled: True
+                        on_release: root.generate_character_from_selected_template()
                         
                         MDButtonIcon:
                             icon: "account-plus"
                         
                         MDButtonText:
-                            text: "Charakter aus Template generieren"
+                            text: "Charakter generieren"
 
             # Verwaltungs Card
             MDCard:

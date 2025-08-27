@@ -186,10 +186,7 @@ def berechne_abgeleitete_werte(charakter):
         maximale_traglast = berechne_traglast(charakter)
         charakter.maximale_traglast = maximale_traglast
 
-        # Gesamtgewicht berechnen
-        from functions.ausruestung_funktionen import berechne_gesamtgewicht
-        gesamtgewicht = berechne_gesamtgewicht(charakter)
-        charakter.gesamtgewicht = gesamtgewicht
+        # Gesamtgewicht wird automatisch über die Property berechnet - keine manuelle Zuweisung nötig
 
         # Zusammenstellen der abgeleiteten Werte
         abgeleitete_werte = {
@@ -202,7 +199,7 @@ def berechne_abgeleitete_werte(charakter):
             'Bennys': bennys,
             'Entschlossenheit': entschlossenheit,
             'Maximale Traglast': maximale_traglast,
-            'Gesamtgewicht': gesamtgewicht
+            'Gesamtgewicht': charakter.gesamtgewicht
         }
 
         return abgeleitete_werte

@@ -62,7 +62,7 @@ class CharakterProperties:
     
     # Traglast
     maximale_traglast = NumericProperty(40)
-    gesamtgewicht = NumericProperty(0)
+    # gesamtgewicht wird als Property in CharakterEquipment definiert
     
     # Ausgewählte Elemente
     selected_handicaps = ListProperty([])

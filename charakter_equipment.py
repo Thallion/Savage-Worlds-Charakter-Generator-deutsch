@@ -77,21 +77,15 @@ class CharakterEquipment:
     
     def berechne_gesamtgewicht(self):
         """
-        Berechnet das Gesamtgewicht aller ausgewählten Ausrüstungsgegenstände.
-        Berücksichtigt nur ausgewählte Items mit Menge > 0.
-        
-        KORREKTUR: Verwendet nur die Hauptausrüstungsliste um Doppelzählung zu vermeiden,
-        da Items beim Kauf sowohl in ausruestung als auch in kategoriespezifischen Listen 
-        gespeichert werden.
+        Berechnet das Gesamtgewicht aller Ausrüstungsgegenstände mit Menge > 0.
+        Verwendet nur das ausruestung Dictionary um Doppelzählung zu vermeiden.
         """
         gesamtgewicht = 0
 
-        # Nur die Hauptausrüstungsliste verwenden - verhindert Doppelzählung
+        # Nur die Hauptausrüstungsliste verwenden - alle Items sind hier gespeichert
         if hasattr(self, 'ausruestung') and self.ausruestung:
             for item in self.ausruestung.values():
-                if (hasattr(item, 'menge') and item.menge > 0 and 
-                    hasattr(item, 'ausgewaehlt') and item.ausgewaehlt):
-                    
+                if hasattr(item, 'menge') and item.menge > 0:
                     # Spezielle Gewichtsberechnung für verschiedene Item-Typen
                     if hasattr(item, 'berechne_gewicht'):
                         # Waffen, Rüstungen, Schilde können eigene Gewichtsberechnungen haben
@@ -99,7 +93,6 @@ class CharakterEquipment:
                     else:
                         # Standard-Gewicht für normale Ausrüstung
                         gewicht = (getattr(item, 'gewicht', 0) or 0) * item.menge
-                    
                     gesamtgewicht += gewicht
 
         return gesamtgewicht
@@ -108,52 +101,9 @@ class CharakterEquipment:
     def gesamtgewicht(self):
         """
         Property für das Gesamtgewicht - wird dynamisch berechnet.
-        Berücksichtigt nur ausgewählte Ausrüstung mit Menge > 0.
+        Verwendet die berechne_gesamtgewicht() Methode um Doppelzählung zu vermeiden.
         """
-        gesamtgewicht = 0
-
-        # Normale Ausrüstung - nur ausgewählte Items zählen
-        if hasattr(self, 'ausruestung') and self.ausruestung:
-            for item in self.ausruestung.values():
-                if (hasattr(item, 'menge') and item.menge > 0 and 
-                    hasattr(item, 'ausgewaehlt') and item.ausgewaehlt):
-                    gewicht = getattr(item, 'gewicht', 0) or 0
-                    gesamtgewicht += gewicht * item.menge
-
-        # Waffen - nur ausgewählte Items zählen
-        if hasattr(self, 'waffen') and self.waffen:
-            for waffe in self.waffen.values():
-                if (hasattr(waffe, 'menge') and waffe.menge > 0 and
-                    hasattr(waffe, 'ausgewaehlt') and waffe.ausgewaehlt):
-                    if hasattr(waffe, 'berechne_gewicht'):
-                        gewicht = waffe.berechne_gewicht() * waffe.menge
-                    else:
-                        gewicht = (getattr(waffe, 'gewicht', 0) or 0) * waffe.menge
-                    gesamtgewicht += gewicht
-
-        # Rüstungen - nur ausgewählte Items zählen
-        if hasattr(self, 'ruestungen') and self.ruestungen:
-            for ruestung in self.ruestungen.values():
-                if (hasattr(ruestung, 'menge') and ruestung.menge > 0 and
-                    hasattr(ruestung, 'ausgewaehlt') and ruestung.ausgewaehlt):
-                    if hasattr(ruestung, 'berechne_gewicht'):
-                        gewicht = ruestung.berechne_gewicht() * ruestung.menge
-                    else:
-                        gewicht = (getattr(ruestung, 'gewicht', 0) or 0) * ruestung.menge
-                    gesamtgewicht += gewicht
-
-        # Schilde - nur ausgewählte Items zählen
-        if hasattr(self, 'schilde') and self.schilde:
-            for schild in self.schilde.values():
-                if (hasattr(schild, 'menge') and schild.menge > 0 and
-                    hasattr(schild, 'ausgewaehlt') and schild.ausgewaehlt):
-                    if hasattr(schild, 'berechne_gewicht'):
-                        gewicht = schild.berechne_gewicht() * schild.menge
-                    else:
-                        gewicht = (getattr(schild, 'gewicht', 0) or 0) * schild.menge
-                    gesamtgewicht += gewicht
-
-        return gesamtgewicht
+        return self.berechne_gesamtgewicht()
     
     @property
     def maximale_traglast(self):
