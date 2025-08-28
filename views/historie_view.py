@@ -366,11 +366,19 @@ class HistorieWidget(MDBoxLayout):
     
     def _build_ui(self):
         """Erstellt die Benutzeroberfläche."""
-        # Header mit Titel und Aktionen
-        header_box = MDBoxLayout(
+        # Header mit Titel und Aktionen - aufgeteilt in zwei Zeilen
+        header_container = MDBoxLayout(
+            orientation='vertical',
+            size_hint_y=None,
+            height=dp(120),
+            spacing=dp(10)
+        )
+        
+        # Erste Zeile: Titel
+        title_box = MDBoxLayout(
             orientation='horizontal',
             size_hint_y=None,
-            height=dp(60),
+            height=dp(40),
             spacing=dp(10)
         )
         
@@ -379,36 +387,78 @@ class HistorieWidget(MDBoxLayout):
             text="[b]Charakter-Historie[/b]",
             markup=True,
             font_size="20sp",
-            size_hint_x=0.6
+            size_hint_x=1
         )
-        header_box.add_widget(header_label)
+        title_box.add_widget(header_label)
+        header_container.add_widget(title_box)
         
-        # Auto-Log Switch  
-        self.auto_log_switch = MDSwitch()
-        self.auto_log_switch.active = True
-        header_box.add_widget(MDLabel(
+        # Zweite Zeile: Controls in separaten Cards
+        controls_box = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(60),
+            spacing=dp(15)
+        )
+        
+        # Auto-Log Switch in Card
+        switch_card = MDCard(
+            orientation='horizontal',
+            size_hint_x=None,
+            width=dp(180),
+            height=dp(50),
+            padding=dp(10),
+            spacing=dp(10),
+            md_bg_color=(0.2, 0.2, 0.2, 1)
+        )
+        switch_card.add_widget(MDLabel(
             text="Auto-Log:",
             size_hint_x=None,
-            width=dp(80)
+            width=dp(70)
         ))
-        header_box.add_widget(self.auto_log_switch)
+        self.auto_log_switch = MDSwitch()
+        self.auto_log_switch.active = True
+        switch_card.add_widget(self.auto_log_switch)
+        controls_box.add_widget(switch_card)
         
-        # Buttons
+        # Spacer
+        controls_box.add_widget(MDLabel(text="", size_hint_x=0.2))
+        
+        # Save Button in Card
+        save_card = MDCard(
+            size_hint_x=None,
+            width=dp(220),
+            height=dp(50),
+            padding=dp(5),
+            md_bg_color=(0.1, 0.1, 0.1, 0.5)
+        )
         save_button = MDButton(
-            style="filled",
+            style="tonal",
+            size_hint_x=1,
             on_release=self._save_history
         )
         save_button.add_widget(MDButtonText(text="Log speichern"))
-        header_box.add_widget(save_button)
+        save_card.add_widget(save_button)
+        controls_box.add_widget(save_card)
         
+        # Clear Button in Card  
+        clear_card = MDCard(
+            size_hint_x=None,
+            width=dp(240),
+            height=dp(50),
+            padding=dp(5),
+            md_bg_color=(0.1, 0.1, 0.1, 0.5)
+        )
         clear_button = MDButton(
-            style="outlined",
+            style="tonal",
+            size_hint_x=1,
             on_release=self._clear_history
         )
         clear_button.add_widget(MDButtonText(text="Historie löschen"))
-        header_box.add_widget(clear_button)
+        clear_card.add_widget(clear_button)
+        controls_box.add_widget(clear_card)
         
-        self.add_widget(header_box)
+        header_container.add_widget(controls_box)
+        self.add_widget(header_container)
         
         # Divider
         self.add_widget(MDDivider())
@@ -481,13 +531,22 @@ class HistorieWidget(MDBoxLayout):
         self.filter_input.bind(text=self._apply_filter)
         filter_box.add_widget(self.filter_input)
         
-        # Export-Button
+        # Export-Button in Card
+        export_card = MDCard(
+            size_hint_x=None,
+            width=dp(340),
+            height=dp(40),
+            padding=dp(3),
+            md_bg_color=(0.1, 0.1, 0.1, 0.5)
+        )
         export_button = MDButton(
             style="tonal",
+            size_hint_x=1,
             on_release=self._export_full_history
         )
         export_button.add_widget(MDButtonText(text="Vollständige Historie exportieren"))
-        filter_box.add_widget(export_button)
+        export_card.add_widget(export_button)
+        filter_box.add_widget(export_card)
         
         self.add_widget(filter_box)
     

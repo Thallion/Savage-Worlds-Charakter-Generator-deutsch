@@ -613,6 +613,11 @@ class SW_Charakter_GeneratorApp(MDApp):
         super().__init__(**kwargs)
         Logger.info("Init SW_Charakter_GeneratorApp")
         
+        # Ressourcen-Extraktion für PyInstaller EXE
+        from utils.resource_extractor import resource_extractor
+        if not resource_extractor.extract_resources():
+            Logger.error("Fehler bei Ressourcen-Extraktion")
+        
         # KORRIGIERT: Frühe Controller-Initialisierung für Service Container
         self.charakter = Charakter()
         self.controller = CharakterController()

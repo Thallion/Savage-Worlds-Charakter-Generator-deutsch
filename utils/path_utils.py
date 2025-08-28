@@ -16,12 +16,8 @@ def get_resource_path(relative_path: str) -> str:
         str: Absoluter Pfad zur Ressource
     """
     if getattr(sys, 'frozen', False):
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        if hasattr(sys, '_MEIPASS'):
-            base_path = Path(sys._MEIPASS)
-        else:
-            # Fallback für andere Packer wie cx_Freeze
-            base_path = Path(sys.executable).parent
+        # Use executable's directory instead of temp folder
+        base_path = Path(sys.executable).parent
     else:
         # Development-Modus: Verwende das Projektverzeichnis
         base_path = Path(__file__).parent.parent.resolve()
@@ -37,12 +33,8 @@ def get_application_root() -> Path:
         Path: Das Hauptverzeichnis der Anwendung
     """
     if getattr(sys, 'frozen', False):
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        if hasattr(sys, '_MEIPASS'):
-            app_root = Path(sys._MEIPASS)
-        else:
-            # Fallback für andere Packer wie cx_Freeze
-            app_root = Path(sys.executable).parent
+        # Use executable's directory instead of temp folder
+        app_root = Path(sys.executable).parent
     else:
         # Development-Modus
         app_root = Path(__file__).parent.parent.resolve()
