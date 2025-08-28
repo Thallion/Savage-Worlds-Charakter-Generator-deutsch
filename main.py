@@ -634,6 +634,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             ("shield-sword",     "Ausrüstung",     AusruestungScreen),
             ("account",          "Charakter",      CharakterbogenScreen),
             ("history",          "Historie",       HistorieScreen),  # NEU: Historie-Tab
+            ("information",      "Info",           InfoScreen),      # INFO-Tab hinzugefügt
         ]
 
     def build(self):

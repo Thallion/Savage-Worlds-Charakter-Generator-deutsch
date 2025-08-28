@@ -54,25 +54,72 @@ class CharakterHistorie:
             entry_type: Art der Änderung (attribut_steigerung, fertigkeit_steigerung, etc.)
             details: Details zur Änderung
         """
+        current_time = datetime.now()
+        timestamp_str = current_time.strftime('%Y-%m-%d %H:%M:%S')
+        
+        # Prüfe auf Duplikate (gleicher Typ, Name und Zeitstempel innerhalb von 2 Sekunden)
+        for existing_entry in reversed(self.entries[-5:]):  # Prüfe nur die letzten 5 Einträge
+            if (existing_entry['type'] == entry_type and 
+                existing_entry['details'].get('name') == details.get('name')):
+                
+                # Parse existierenden Zeitstempel
+                existing_time = datetime.strptime(existing_entry['timestamp'], '%Y-%m-%d %H:%M:%S')
+                time_diff = abs((current_time - existing_time).total_seconds())
+                
+                # Wenn innerhalb von 2 Sekunden und gleiche Werte, ignoriere als Duplikat
+                if time_diff <= 2:
+                    if entry_type in ['attribut_steigerung', 'fertigkeit_steigerung']:
+                        if (existing_entry['details'].get('von') == details.get('von') and
+                            existing_entry['details'].get('nach') == details.get('nach')):
+                            Logger.debug(f"Duplikat ignoriert: {entry_type} - {details.get('name')} (Zeitdiff: {time_diff}s)")
+                            return
+                    elif entry_type in ['talent_hinzugefuegt', 'handicap_hinzugefuegt', 'macht_hinzugefuegt']:
+                        Logger.debug(f"Duplikat ignoriert: {entry_type} - {details.get('name')} (Zeitdiff: {time_diff}s)")
+                        return
+        
         entry = {
-            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'timestamp': timestamp_str,
             'type': entry_type,
             'details': details
         }
         self.entries.append(entry)
         
-        # Kosten aktualisieren
+        # Kosten aktualisieren - korrekte Aufstiegs-Berechnung
         if 'kosten' in details:
+            cost_type = details.get('kosten_typ', '')
+            kosten = details['kosten']
+            
             if 'attribut' in entry_type.lower():
-                self.total_kosten['attribute'] += details['kosten']
+                if 'aufstieg' in cost_type.lower():
+                    # 1 Aufstieg = 1 Attributsteigerung  
+                    self.total_kosten['aufstiege'] += kosten
+                else:
+                    self.total_kosten['attribute'] += kosten
+                    
             elif 'fertigkeit' in entry_type.lower():
-                self.total_kosten['fertigkeiten'] += details['kosten']
+                if 'aufstieg' in cost_type.lower():
+                    # Fertigkeiten: Normale = 0.5, über Attribut = 1 Aufstieg
+                    self.total_kosten['aufstiege'] += kosten  
+                else:
+                    self.total_kosten['fertigkeiten'] += kosten
+                    
             elif 'talent' in entry_type.lower():
-                self.total_kosten['talente'] += details['kosten']
+                if 'aufstieg' in cost_type.lower():
+                    # 1 Aufstieg = 1 Talent
+                    self.total_kosten['aufstiege'] += kosten
+                else:
+                    self.total_kosten['talente'] += kosten
+                    
             elif 'handicap' in entry_type.lower():
                 self.total_kosten['handicaps'] += details.get('punkte', 0)
+                
             elif 'macht' in entry_type.lower():
-                self.total_kosten['maechte'] += details['kosten']
+                if 'aufstieg' in cost_type.lower():
+                    # 1 Aufstieg = 1 Macht
+                    self.total_kosten['aufstiege'] += kosten
+                else:
+                    self.total_kosten['maechte'] += kosten
+                    
             elif 'aufstieg' in entry_type.lower():
                 self.total_kosten['aufstiege'] += 1
     
@@ -109,10 +156,32 @@ class CharakterHistorie:
                 
                 if entry_type == 'attribut_steigerung':
                     kosten_typ = details.get('kosten_typ', 'Punkte')
-                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({details['kosten']} {kosten_typ})")
+                    kosten = details['kosten']
+                    
+                    # Korrekte Aufstiegs-Darstellung: 1 Attributsteigerung = 1 Aufstieg
+                    if 'aufstieg' in kosten_typ.lower():
+                        kosten_text = f"1 Aufstieg"
+                    elif 'handicap' in kosten_typ.lower():
+                        kosten_text = f"2 Handicap-Punkte"  # Attribut kostet immer 2 Handicap-Punkte
+                    else:
+                        kosten_text = f"{kosten} {kosten_typ}"
+                        
+                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({kosten_text})")
+                    
                 elif entry_type == 'fertigkeit_steigerung':
                     kosten_typ = details.get('kosten_typ', 'Punkte')
-                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({details['kosten']} {kosten_typ})")
+                    kosten = details['kosten']
+                    
+                    # Korrekte Aufstiegs-Darstellung basierend auf tatsächlichen Kosten
+                    if 'aufstieg' in kosten_typ.lower():
+                        if kosten == 1:
+                            kosten_text = f"1 Aufstieg"  # Fertigkeit über Attribut
+                        else:
+                            kosten_text = f"0.5 Aufstiege"  # Normale Fertigkeit
+                    else:
+                        kosten_text = f"{kosten} {kosten_typ}"
+                        
+                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({kosten_text})")
                 elif entry_type == 'talent_hinzugefuegt':
                     log_lines.append(f"  [{timestamp}] {details['name']} (Kosten: {details.get('kosten', 0)})")
                 elif entry_type == 'talent_entfernt':
@@ -127,19 +196,57 @@ class CharakterHistorie:
                     log_lines.append(f"  [{timestamp}] {details['name']} (Rang: {details.get('rang', 'Anfänger')})")
                 elif entry_type == 'macht_entfernt':
                     log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
+                elif entry_type == 'ausruestung_hinzugefuegt':
+                    custom_marker = " [Custom]" if details.get('custom', False) else ""
+                    auto_marker = " [Auto-Gen]" if details.get('auto_generated', False) else ""
+                    log_lines.append(f"  [{timestamp}] {details['name']} hinzugefügt{custom_marker}{auto_marker}")
+                elif entry_type == 'auto_character_generated':
+                    template_name = details.get('template', 'Unbekannt')
+                    setting = details.get('setting', 'SWAE')
+                    auto_points = details.get('total_auto_points', 0)
+                    log_lines.append(f"  [{timestamp}] Auto-Generierung abgeschlossen:")
+                    log_lines.append(f"    Template: {template_name} (Setting: {setting})")
+                    if auto_points > 0:
+                        log_lines.append(f"    Zusätzliche Punkte: {auto_points}")
                 else:
                     log_lines.append(f"  [{timestamp}] {details}")
         
-        # Zeige Gesamtkosten
+        # Zeige Gesamtkosten und Statistiken
         log_lines.append("")
         log_lines.append("=" * 80)
         log_lines.append("GESAMTKOSTEN:")
         log_lines.append("-" * 40)
-        log_lines.append(f"  Attribute:     {self.total_kosten['attribute']} Punkte")
-        log_lines.append(f"  Fertigkeiten:  {self.total_kosten['fertigkeiten']} Punkte")
-        log_lines.append(f"  Talente:       {self.total_kosten['talente']} Punkte")
-        log_lines.append(f"  Handicaps:     +{self.total_kosten['handicaps']} Punkte")
-        log_lines.append(f"  Mächte:        {self.total_kosten['maechte']} Punkte")
+        
+        # Zähle Steigerungen
+        attribut_steigerungen = len([e for e in self.entries if e['type'] == 'attribut_steigerung'])
+        fertigkeits_steigerungen = len([e for e in self.entries if e['type'] == 'fertigkeit_steigerung'])
+        talente_hinzugefuegt = len([e for e in self.entries if e['type'] == 'talent_hinzugefuegt'])
+        talente_entfernt = len([e for e in self.entries if e['type'] == 'talent_entfernt'])
+        handicaps_hinzugefuegt = len([e for e in self.entries if e['type'] == 'handicap_hinzugefuegt'])
+        handicaps_entfernt = len([e for e in self.entries if e['type'] == 'handicap_entfernt'])
+        maechte_hinzugefuegt = len([e for e in self.entries if e['type'] == 'macht_hinzugefuegt'])
+        maechte_entfernt = len([e for e in self.entries if e['type'] == 'macht_entfernt'])
+        
+        # Berechne Handicap-Punkte korrekt
+        handicap_punkte_erhalten = sum(e['details'].get('punkte', 0) for e in self.entries if e['type'] == 'handicap_hinzugefuegt')
+        handicap_punkte_entfernt = sum(e['details'].get('punkte', 0) for e in self.entries if e['type'] == 'handicap_entfernt')
+        
+        # Berechne verwendete Punkte korrekt für Savage Worlds Regeln
+        handicap_punkte_fuer_attribute = sum(2 for e in self.entries 
+                                           if e['type'] == 'attribut_steigerung' and 'handicap' in e['details'].get('kosten_typ', '').lower())
+        handicap_punkte_fuer_fertigkeiten = sum(e['details'].get('kosten', 0) for e in self.entries 
+                                               if e['type'] == 'fertigkeit_steigerung' and 'handicap' in e['details'].get('kosten_typ', '').lower())
+        handicap_punkte_fuer_talente = sum(2 for e in self.entries 
+                                         if e['type'] == 'talent_hinzugefuegt' and 'handicap' in e['details'].get('kosten_typ', '').lower())
+        
+        handicap_punkte_verwendet = handicap_punkte_fuer_attribute + handicap_punkte_fuer_fertigkeiten + handicap_punkte_fuer_talente
+        handicap_punkte_verfuegbar = handicap_punkte_erhalten - handicap_punkte_entfernt - handicap_punkte_verwendet
+        
+        log_lines.append(f"  Attribute:     {self.total_kosten['attribute']} Punkte ({attribut_steigerungen} Steigerungen)")
+        log_lines.append(f"  Fertigkeiten:  {self.total_kosten['fertigkeiten']} Punkte ({fertigkeits_steigerungen} Steigerungen)")
+        log_lines.append(f"  Talente:       {self.total_kosten['talente']} Punkte ({talente_hinzugefuegt} hinzugefügt, {talente_entfernt} entfernt)")
+        log_lines.append(f"  Handicaps:     +{handicap_punkte_erhalten} erhalten, {handicap_punkte_verwendet} verwendet, {handicap_punkte_verfuegbar} verfügbar ({handicaps_hinzugefuegt} hinzugefügt, {handicaps_entfernt} entfernt)")
+        log_lines.append(f"  Mächte:        {self.total_kosten['maechte']} Punkte ({maechte_hinzugefuegt} hinzugefügt, {maechte_entfernt} entfernt)")
         log_lines.append(f"  Aufstiege:     {self.total_kosten['aufstiege']} verwendet")
         log_lines.append("=" * 80)
         
@@ -206,7 +313,7 @@ class HistorieWidget(MDBoxLayout):
         self.padding = dp(10)
         self.spacing = dp(10)
         
-        # Historie-Manager
+        # Historie-Manager - wird bei App-Start als neue Session gestartet
         self.historie = CharakterHistorie()
         
         # Service References
@@ -228,11 +335,10 @@ class HistorieWidget(MDBoxLayout):
             self.charakter_controller = service_container.get_charakter_controller()
             self._dialog_service = service_container.get_dialog_service()
             
-            if self.charakter_controller:
-                # Initial-Historie laden, falls vorhanden
-                self._load_existing_history()
+            # Bei App-Start KEINE existierende Historie laden - immer mit leerer Historie starten
+            # Historie wird nur geladen wenn ein Charakter explizit geladen wird (character_loaded event)
             
-            Logger.info("HistorieWidget Services initialisiert")
+            Logger.info("HistorieWidget Services initialisiert - Historie bleibt leer bei App-Start")
         except Exception as e:
             Logger.error(f"Fehler bei Service-Initialisierung: {str(e)}")
     
@@ -253,6 +359,7 @@ class HistorieWidget(MDBoxLayout):
                 event_service.subscribe('macht_removed', self._on_macht_removed)
                 event_service.subscribe('character_loaded', self._on_character_loaded)
                 event_service.subscribe('character_saved', self._on_character_saved)
+                event_service.subscribe('character_created', self._on_character_created)
                 Logger.info("Historie Event-Listener registriert")
         except Exception as e:
             Logger.error(f"Fehler bei Event-Registrierung: {str(e)}")
@@ -614,6 +721,18 @@ class HistorieWidget(MDBoxLayout):
                 self._save_history(None)
         except Exception as e:
             Logger.error(f"Fehler beim Auto-Speichern der Historie: {str(e)}")
+    
+    def _on_character_created(self, event_data):
+        """Handler für neu erstellte Charaktere."""
+        try:
+            char_name = event_data.get('character_name', 'Neuer Charakter')
+            # Leere Historie bei neuem Charakter
+            self.historie = CharakterHistorie()  
+            self.historie.add_entry('charakter_erstellt', {'name': char_name})
+            self._update_display()
+            Logger.info(f"Historie zurückgesetzt für neuen Charakter: {char_name}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Zurücksetzen der Historie: {str(e)}")
     
     def _save_history(self, instance):
         """Speichert die aktuelle Historie in einer Datei."""

@@ -3,13 +3,26 @@
   "description": "Wie überaus ungewöhnlich. Wir sollten dies unbedingt näher untersuchen.",
   "setting": "SWAE",
   "race": "Mensch",
-  "free_race_edge": "Arkaner Hintergrund",
   "profile": {
     "age": "",
     "gender": "",
     "concept": "Magier",
     "languages": ""
   },
+  "starting_capital": 600,
+  "starting_attribute_points": 5,
+  "starting_skill_points": 12,
+  "starting_advances": 2,
+  "advances_to_apply": [
+    {
+      "type": "attribute",
+      "name": "Verstand"
+    },
+    {
+      "type": "skill", 
+      "name": "Zaubern"
+    }
+  ],
   "attributes": {
     "Geschicklichkeit": 4,
     "Konstitution": 6,
@@ -79,6 +92,7 @@
     "strict_point_allocation": false,
     "allow_over_attribute": true,
     "auto_save": true,
-    "save_path": "auto_generated/magier"
+    "save_path": "auto_generated/magier",
+    "complete_character_generation": true
   }
 }

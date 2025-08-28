@@ -20,9 +20,5 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "config_version": "1.0",
-<<<<<<< Updated upstream
-  "last_updated": "2025-08-22T07:36:01.394680"
-=======
-  "last_updated": "2025-08-06T10:40:35.937458"
->>>>>>> Stashed changes
+  "last_updated": "2025-08-28T08:57:20.060096"
 }

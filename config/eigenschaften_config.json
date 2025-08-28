@@ -17,9 +17,9 @@
   "max_wuerfel_wert": 12,
   "kosten": {
     "attribut_chargen": 1,
-    "attribut_spiel": 2,
+    "attribut_spiel": 1,
     "fertigkeit_chargen": 1,
-    "fertigkeit_spiel": 1,
+    "fertigkeit_spiel": 0.5,
     "fertigkeit_ueber_attribut": 2
   }
 }

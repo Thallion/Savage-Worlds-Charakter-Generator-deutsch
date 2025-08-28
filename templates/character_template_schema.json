@@ -133,6 +133,55 @@
       },
       "default": []
     },
+    "starting_capital": {
+      "type": "integer",
+      "description": "Startkapital in Dollarn/Talern",
+      "minimum": 0,
+      "default": 500
+    },
+    "starting_attribute_points": {
+      "type": "integer",
+      "description": "Verfügbare Attributspunkte am Start (Standard SWAE: 5)",
+      "minimum": 0,
+      "default": 5
+    },
+    "starting_skill_points": {
+      "type": "integer",
+      "description": "Verfügbare Fertigkeitspunkte am Start (Standard SWAE: 12)",
+      "minimum": 0,
+      "default": 12
+    },
+    "starting_advances": {
+      "type": "integer",
+      "description": "Anzahl der bereits erfolgten Aufstiege bei der Charaktergenerierung",
+      "minimum": 0,
+      "default": 0
+    },
+    "advances_to_apply": {
+      "type": "array",
+      "description": "Liste der anzuwendenden Aufstiege nach der Grundcharaktererstellung",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["attribute", "skill", "edge", "power"],
+            "description": "Art der Steigerung"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name des zu steigernden Elements"
+          },
+          "value": {
+            "type": "integer",
+            "description": "Zielwert (nur bei Attributen/Fertigkeiten)",
+            "minimum": 2
+          }
+        }
+      },
+      "default": []
+    },
     "generation_options": {
       "type": "object",
       "description": "Optionen für die Generierung",
@@ -156,6 +205,11 @@
           "type": "string",
           "description": "Pfad zum Speichern (relativ zu chars/)",
           "default": "auto_generated"
+        },
+        "complete_character_generation": {
+          "type": "boolean",
+          "description": "Charaktergenerierung automatisch abschließen (char_gen_completed = true)",
+          "default": false
         }
       }
     }
