@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*pycache*
 *.py[cod]
 *$py.class
 *.so
@@ -7,6 +8,7 @@ __pycache__/
 # Distribution / packaging
 dist/
 build/
+.buildozer/
 *.egg-info/
 
 # Unit test / coverage reports

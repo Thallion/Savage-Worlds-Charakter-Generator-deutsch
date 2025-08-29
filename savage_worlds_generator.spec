@@ -67,6 +67,25 @@ hiddenimports = [
     'os'
 ]
 
+# Module die oft False-Positives auslösen ausschließen
+excludes = [
+    'tkinter',
+    'matplotlib',
+    'numpy',
+    'scipy',
+    'pandas',
+    'jupyter',
+    'IPython',
+    'notebook',
+    'tornado',
+    'zmq',
+    'sqlite3',
+    'distutils',
+    'setuptools',
+    'pip',
+    'wheel'
+]
+
 a = Analysis(
     ['main.py'],
     pathex=[str(project_dir)],
@@ -76,7 +95,10 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=excludes,
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=None,
     noarchive=False,
 )
 
@@ -92,9 +114,14 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,  # UPX oft False-Positive Auslöser
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,  # Für GUI-Anwendung auf False setzen
+    disable_windowed_traceback=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+    version='version_info.txt',  # Version Info für weniger False-Positives
     icon=str(project_dir / 'assets' / 'bowman.png') if (project_dir / 'assets' / 'bowman.png').exists() else None,
 )
