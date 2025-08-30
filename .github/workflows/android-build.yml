@@ -84,15 +84,20 @@ jobs:
         export ANDROID_HOME=~/.buildozer/android/sdk
         export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
         
+        # Create legacy tools directory structure that buildozer expects
+        mkdir -p ~/.buildozer/android/sdk/tools/bin
+        ln -sf ~/.buildozer/android/sdk/cmdline-tools/latest/bin/sdkmanager ~/.buildozer/android/sdk/tools/bin/sdkmanager
+        ln -sf ~/.buildozer/android/sdk/cmdline-tools/latest/bin/avdmanager ~/.buildozer/android/sdk/tools/bin/avdmanager
+        
         # Accept licenses and install necessary packages
         yes | sdkmanager --licenses
-        sdkmanager "platform-tools" "build-tools;34.0.0" "platforms;android-35"
+        sdkmanager "platform-tools" "build-tools;34.0.0" "platforms;android-34"
 
     - name: Build with Buildozer
       run: |
         # Set environment variables
         export ANDROID_HOME=~/.buildozer/android/sdk
-        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$PATH
         
         # Build the APK
         buildozer android debug
