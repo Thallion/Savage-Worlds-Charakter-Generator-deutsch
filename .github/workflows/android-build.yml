@@ -74,6 +74,16 @@ jobs:
           ${{ runner.os }}-buildozer-build-${{ hashFiles('buildozer.spec') }}-
           ${{ runner.os }}-buildozer-build-
 
+    - name: Setup Java 17 for Android SDK
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-17-jdk
+        sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+        sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+        echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+        java -version
+
     - name: Setup Android SDK
       run: |
         # Create Android SDK directory structure
@@ -88,6 +98,7 @@ jobs:
         # Setup environment
         export ANDROID_HOME=~/.buildozer/android/sdk
         export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
         
         # Create legacy tools directory structure that buildozer expects
         mkdir -p ~/.buildozer/android/sdk/tools/bin
@@ -103,10 +114,12 @@ jobs:
         # Set environment variables
         export ANDROID_HOME=~/.buildozer/android/sdk
         export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$PATH
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
         
         # Build the APK
         buildozer android debug
       env:
+        JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
         ANDROID_HOME: ~/.buildozer/android/sdk
         ANDROID_SDK_HOME: ~/.buildozer/android/sdk
         ANDROID_NDK_HOME: ~/.buildozer/android/ndk
