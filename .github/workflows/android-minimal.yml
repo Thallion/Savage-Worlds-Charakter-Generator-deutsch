@@ -2,8 +2,8 @@ name: Build Android APK (Minimal)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ dev_unstable ]
+  # push:
+  #   branches: [ dev_unstable ]
 
 jobs:
   build:

@@ -1,11 +1,11 @@
 name: Build Android APK
 
 on:
-  push:
-    branches: [ main, dev_unstable ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
+  # push:
+  #   branches: [ main, dev_unstable ]
+  # pull_request:
+  #   branches: [ main ]
 
 jobs:
   build:
