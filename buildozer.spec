@@ -8,7 +8,7 @@ title = Savage Worlds Generator
 package.name = savageworlds
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.github.jean
+package.domain = com.github.thallion
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -30,7 +30,7 @@ source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.5.5.7
+version = 0.5.5.8
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -38,7 +38,7 @@ version = 0.5.5.7
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,pillow,python-dateutil,cython==0.29.36
+requirements = python3,kivy,kivymd,pillow,reportlab,python-dateutil
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -120,10 +120,10 @@ android.minapi = 21
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+android.ndk_path = ~/.buildozer/android/ndk
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+android.sdk_path = ~/.buildozer/android/sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
@@ -131,7 +131,7 @@ android.minapi = 21
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
 # when an update is due and you just want to test/build your package
-# android.skip_update = False
+android.skip_update = True
 
 # (bool) If True, then automatically accept SDK license
 # agreements. This is intended for automation only. If set to False,
@@ -284,7 +284,7 @@ android.accept_sdk_license = True
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
@@ -337,7 +337,7 @@ android.allow_backup = True
 #p4a.hook =
 
 # (str) Bootstrap to use for android builds
-# p4a.bootstrap = sdl2
+p4a.bootstrap = sdl2
 
 # (int) port number to specify an explicit --port= p4a argument (eg for bootstrap flask)
 #p4a.port =
