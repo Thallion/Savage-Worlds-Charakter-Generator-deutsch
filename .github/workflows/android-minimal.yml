@@ -1,0 +1,33 @@
+name: Build Android APK (Minimal)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ dev_unstable ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build with Buildozer (Minimal Setup)
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
+      with:
+        command: buildozer -f buildozer-minimal.spec android debug
+        buildozer_version: stable
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: savage-worlds-minimal-apk
+        path: ${{ steps.buildozer.outputs.filename }}
+
+    - name: Show build result
+      run: |
+        echo "Build finished!"
+        echo "APK: ${{ steps.buildozer.outputs.filename }}"
+        ls -la bin/
