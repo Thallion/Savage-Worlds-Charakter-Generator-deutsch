@@ -44,7 +44,12 @@ jobs:
           libxcb1-dev \
           openjdk-17-jdk \
           unzip \
-          zip
+          zip \
+          autotools-dev \
+          automake \
+          autoconf \
+          libtool \
+          pkg-config
 
     - name: Install Python dependencies
       run: |
