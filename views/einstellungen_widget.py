@@ -1412,9 +1412,9 @@ class EinstellungenWidget(MDScreen):
             if hasattr(self.ids, 'selected_template_text'):
                 self.ids.selected_template_text.text = template['name']
             
-            # Generierungs-Button aktivieren
-            if hasattr(self.ids, 'generate_button'):
-                self.ids.generate_button.disabled = False
+            # Button-Text auf "Charakter generieren" ändern
+            if hasattr(self.ids, 'generate_button_text'):
+                self.ids.generate_button_text.text = "Charakter generieren"
             
             Logger.info(f"Template ausgewählt: {template['name']}")
             
@@ -1955,14 +1955,14 @@ kv_string = '''
                         size_hint: None, None
                         size: dp(250), dp(48)
                         pos_hint: {"center_x": .5}
-                        disabled: True
-                        on_release: root.generate_character_from_selected_template()
+                        on_release: root.show_template_selection_dialog() if not root.selected_template else root.generate_character_from_selected_template()
                         
                         MDButtonIcon:
                             icon: "account-plus"
                         
                         MDButtonText:
-                            text: "Charakter generieren"
+                            id: generate_button_text
+                            text: "Template auswählen"
 
             # Verwaltungs Card
             MDCard:
