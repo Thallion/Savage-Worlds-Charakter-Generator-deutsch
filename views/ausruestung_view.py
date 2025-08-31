@@ -35,7 +35,7 @@ from services.service_container import get_dialog_service
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
 ALL_CATEGORIES_TEXT = 'Alle Kategorien'
-DEFAULT_ROW_HEIGHT = dp(70)
+DEFAULT_ROW_HEIGHT = dp(100)
 DIALOG_HEIGHT = "200dp"
 BUTTON_SIZE = (dp(40), dp(40))
 ERROR_DIALOG_TITLE = "Fehler"
@@ -364,6 +364,63 @@ class AusruestungItemRow(MDBoxLayout):
             ),
         )
         error_dialog.open()
+
+    def show_full_description(self):
+        """Zeigt die vollständige Beschreibung der Ausrüstung in einem Dialog an."""
+        if not self.beschreibung:
+            return
+            
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Ausrüstungs-Name als Überschrift
+        title_label = MDLabel(
+            text=f"[b]{self.name}[/b]",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle",
+            markup=True
+        )
+        content.add_widget(title_label)
+        
+        # Vollständige Beschreibung
+        desc_label = MDLabel(
+            text=self.beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(dp(400), None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+        
+        description_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Ausrüstung-Beschreibung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: description_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        description_dialog.open()
 
 
 class DialogContentBase(MDBoxLayout):
@@ -856,7 +913,7 @@ KV_STRING = '''
         
         RecycleBoxLayout:
             id: layout
-            default_size: None, dp(120)
+            default_size: None, dp(100)
             default_size_hint: 1, None
             size_hint_y: None
             height: self.minimum_height
@@ -867,7 +924,7 @@ KV_STRING = '''
 <AusruestungItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(120)
+    height: dp(100)
     spacing: dp(5)
     padding: [dp(5), dp(5), dp(60), dp(5)]
     # THEME-FIX: md_bg_color entfernt - wird jetzt im Python-Code gesetzt
@@ -876,7 +933,7 @@ KV_STRING = '''
     MDBoxLayout:
         orientation: 'vertical'
         size_hint_x: 0.35
-        spacing: dp(2)
+        spacing: dp(8)
         padding: [0, dp(5), 0, dp(5)]
         
         # Name - größer und fett
@@ -897,11 +954,13 @@ KV_STRING = '''
             font_size: dp(11)
             theme_text_color: "Secondary"
             size_hint_y: None
-            height: dp(16) if root.beschreibung else 0
+            height: dp(20) if root.beschreibung else 0
             opacity: 1 if root.beschreibung else 0
             halign: 'left'
-            valign: 'middle'
+            valign: 'top'
             text_size: self.width, None
+            markup: True
+            max_lines: 1
             
         # Details - nur wenn vorhanden  
         MDLabel:
@@ -909,11 +968,22 @@ KV_STRING = '''
             font_size: dp(11)
             theme_text_color: "Secondary"
             size_hint_y: None
-            height: dp(40) if root.details else 0
+            height: dp(16) if root.details else 0
             opacity: 1 if root.details else 0
             halign: 'left'
-            valign: 'top'
+            valign: 'middle'
             text_size: self.width, None
+    
+    # Info-Button als eigene Spalte
+    MDIconButton:
+        icon: "information-outline"
+        size_hint: None, None
+        size: dp(24), dp(24)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.show_full_description()
+        theme_icon_color: "Primary"
+        opacity: 1 if root.beschreibung else 0
+        disabled: not root.beschreibung
     
     # Kategorie
     MDLabel:
