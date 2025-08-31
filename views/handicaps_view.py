@@ -31,7 +31,7 @@ from services.service_container import get_dialog_service
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_ORDER = 'name_asc'
 ALL_CATEGORIES_TEXT = 'Alle Stufen'
-RECYCLEVIEW_ITEM_HEIGHT = dp(60)
+RECYCLEVIEW_ITEM_HEIGHT = dp(80)
 DARK_EVEN_COLOR = [0.2, 0.2, 0.2, 1]
 DARK_ODD_COLOR = [0.15, 0.15, 0.15, 1]
 LIGHT_EVEN_COLOR = [1, 1, 1, 1]
@@ -110,7 +110,7 @@ KV_STRING = '''
         
         RecycleBoxLayout:
             id: layout
-            default_size: None, dp(60)
+            default_size: None, dp(80)
             default_size_hint: 1, None
             size_hint_y: None
             height: self.minimum_height
@@ -121,7 +121,7 @@ KV_STRING = '''
 <HandicapItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(60)
+    height: dp(80)
     md_bg_color: self._get_background_color()
     line_color: self._get_line_color()
     line_width: 2
@@ -169,12 +169,27 @@ KV_STRING = '''
         pos_hint: {"center_y": 0.5}
         on_release: root.bearbeite_handicap()
 
-    MDLabel:
-        text: root.beschreibung
-        font_size: dp(16)
+    MDBoxLayout:
+        orientation: 'horizontal'
         size_hint_x: 0.5
-        halign: 'left'
-        valign: 'middle'
+        spacing: dp(5)
+        
+        MDLabel:
+            text: root.beschreibung
+            font_size: dp(14)
+            halign: 'left'
+            valign: 'top'
+            text_size: self.width, None
+            markup: True
+            max_lines: 2
+            
+        MDIconButton:
+            icon: "information-outline"
+            size_hint: None, None
+            size: dp(24), dp(24)
+            pos_hint: {"center_y": 0.5}
+            on_release: root.show_full_description()
+            theme_icon_color: "Primary"
 '''
 
 Builder.load_string(KV_STRING)
@@ -677,6 +692,60 @@ class HandicapItemRow(MDBoxLayout):
         """Schließt den Aufstiegs-Dialog."""
         if hasattr(self, 'advancement_dialog') and self.advancement_dialog:
             self.advancement_dialog.dismiss()
+
+    def show_full_description(self):
+        """Zeigt die vollständige Beschreibung des Handicaps in einem Dialog an."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Handicap-Name als Überschrift
+        title_label = MDLabel(
+            text=f"[b]{self.handicap_name}[/b]",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle",
+            markup=True
+        )
+        content.add_widget(title_label)
+        
+        # Vollständige Beschreibung
+        desc_label = MDLabel(
+            text=self.beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(dp(400), None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+        
+        description_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Handicap-Beschreibung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: description_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        description_dialog.open()
 
     def update_color(self, *args):
         """Aktualisiert die Hintergrundfarbe bei Indexänderung."""
