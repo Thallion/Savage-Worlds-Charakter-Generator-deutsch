@@ -206,11 +206,12 @@ class EinstellungenWidget(MDScreen):
         try:
             Logger.info(f"Farb-Wechsel angefordert: {color_name}")
             
-            # Gültige KivyMD-Paletten definieren
+            # Gültige KivyMD-Paletten definieren - angepasst an ThemeService
             valid_palettes = [
                 'Red', 'Pink', 'Purple', 'Deeprurple', 'Indigo', 'Blue', 
                 'Lightblue', 'Cyan', 'Teal', 'Green', 'Lightgreen', 'Lime',
-                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 'Gray', 'Bluegray'
+                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 
+                'Gray', 'Bluegray'
             ]
             
             if MANAGERS_AVAILABLE and hasattr(self, 'theme_manager'):
@@ -1713,11 +1714,11 @@ kv_string = '''
 
                         MDGridLayout:
                             id: colors_box
-                            cols: 4
+                            cols: 5
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: dp(8)
-                            padding: 0
+                            spacing: dp(6)
+                            padding: dp(8)
                             pos_hint: {"center_y": .5}
                             
                             # Farb-Chips - nur gültige KivyMD-Paletten

@@ -57,11 +57,12 @@ class ThemeManager:
     def on_color_selected(self, color_name):
         """KORRIGIERT: Callback für Farbauswahl über App für Persistierung"""
         try:
-            # Gültige KivyMD-Paletten definieren
+            # Gültige KivyMD-Paletten definieren - angepasst an ThemeService
             valid_palettes = [
                 'Red', 'Pink', 'Purple', 'Deeprurple', 'Indigo', 'Blue', 
                 'Lightblue', 'Cyan', 'Teal', 'Green', 'Lightgreen', 'Lime',
-                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 'Gray', 'Bluegray'
+                'Yellow', 'Amber', 'Orange', 'Deeporange', 'Brown', 
+                'Gray', 'Bluegray'
             ]
             
             if self.app and hasattr(self.app, 'update_theme'):
