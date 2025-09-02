@@ -20,59 +20,7 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.handicap import Handicap
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<HandicapDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "320dp"
-
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name des Handicaps'
-
-    MDDropDownItem:
-        id: stufe_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_stufen_menu(self)
-
-        MDDropDownItemText:
-            id: selected_stufe_text
-            text: "Stufe wählen"
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        multiline: True
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-<DeleteHandicapDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: handicap_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_handicap_text
-            text: "Handicap auswählen"
-'''
-
-Builder.load_string(kv)
+Builder.load_file('views/handicap_popup.kv')
 
 class HandicapDialogContent(MDBoxLayout):
     def __init__(self, handicap_data=None, **kwargs):

@@ -34,83 +34,8 @@ from functions.volk_funktionen import (
 Logger = logging.getLogger(__name__)
 
 # NEUER KV-STRING mit MDDropdownMenu für kompakte Völker-Auswahl
-KV_STRING = '''
-<VoelkerWidget>:
-    orientation: 'vertical'
-    padding: [dp(20), dp(15), dp(20), dp(15)]
-    spacing: dp(20)
-    md_bg_color: self.theme_cls.backgroundColor
-
-    MDLabel:
-        text: "Völker"
-        size_hint_y: None
-        height: dp(50)
-        halign: 'left'
-        font_style: "Headline"
-        theme_text_color: "Primary"
-
-    # NEUE KOMPAKTE VÖLKER-AUSWAHL - 60% weniger Platz!
-    MDCard:
-        size_hint_y: None
-        height: dp(100)  # Nur 100dp statt 160dp!
-        padding: dp(20)
-        elevation: 2
-        radius: [10]
-        md_bg_color: self.theme_cls.surfaceContainerLowColor
-        style: "elevated"
-
-        MDBoxLayout:
-            orientation: 'horizontal'
-            spacing: dp(15)
-            
-            MDLabel:
-                text: "Ausgewähltes Volk:"
-                font_style: "Body"
-                theme_text_color: "Primary"
-                size_hint_x: 0.3
-                halign: 'left'
-                valign: 'center'
-            
-            # DROPDOWN für Völker-Auswahl
-            MDButton:
-                id: volk_dropdown_button
-                style: "outlined"
-                size_hint_x: 0.7
-                size_hint_y: None
-                height: dp(48)
-                on_release: root.open_volk_dropdown()
-                
-                MDButtonText:
-                    id: selected_volk_text
-                    text: "Volk auswählen..."
-
-    # Zusatzelemente Container
-    MDBoxLayout:
-        id: zusatzelemente_container
-        orientation: 'vertical'
-        size_hint_y: None
-        height: self.minimum_height
-        spacing: dp(20)
-
-    # Ausgewähltes Volk Details Container
-    ScrollView:
-        size_hint: (1, 1)
-        do_scroll_x: False
-        do_scroll_y: True
-        bar_width: dp(10)
-        bar_margin: dp(20)
-        scroll_type: ['bars']
-
-        MDBoxLayout:
-            id: selected_volk_container
-            orientation: 'vertical'
-            size_hint_y: None
-            height: self.minimum_height
-            spacing: dp(25)
-            padding: [0, dp(20), dp(50), dp(30)]
-'''
-
-Builder.load_string(KV_STRING)
+# KV-Datei laden
+Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/voelker_view.kv')
 
 
 class VoelkerWidget(MDBoxLayout):

@@ -236,6 +236,37 @@ class CustomElementManager:
             ))
             return False
 
+    def update_element(self, element_type: str, element_name: str, element_data: dict) -> bool:
+        """
+        Fügt ein Element zum aktiven Setting hinzu oder aktualisiert es.
+        
+        Args:
+            element_type: Typ des Elements (z.B. 'talente', 'attribute', etc.)
+            element_name: Name des Elements
+            element_data: Element-Daten als Dictionary
+            
+        Returns:
+            bool: True bei Erfolg, sonst False
+        """
+        try:
+            if not self.active_setting:
+                Logger.error("Kein aktives Setting vorhanden.")
+                return False
+            
+            # Element-Typ-Dictionary erstellen falls nicht vorhanden
+            if element_type not in self.active_setting:
+                self.active_setting[element_type] = {}
+            
+            # Element hinzufügen/aktualisieren
+            self.active_setting[element_type][element_name] = element_data
+            Logger.info(f"Element '{element_name}' vom Typ '{element_type}' aktualisiert.")
+            
+            return True
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren von Element '{element_name}' (Typ: {element_type}): {e}")
+            return False
+
 
 def create_default_setting(charakter) -> Dict[str, Any]:
     """

@@ -21,68 +21,7 @@ from kivymd.uix.label import MDLabel
 
 from models.fertigkeit import Fertigkeit
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<FertigkeitDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "280dp"
-
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name der Fertigkeit'
-
-    MDDropDownItem:
-        id: attribut_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_attribut_menu(self)
-
-        MDDropDownItemText:
-            id: selected_attribut_text
-            text: "Attribut wählen"
-
-    MDBoxLayout:
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: "48dp"
-        spacing: "8dp"
-        padding: ["4dp", "0dp", "0dp", "0dp"]
-
-        MDCheckbox:
-            id: grundfertigkeit_checkbox
-            active: False
-            size_hint: None, None
-            size: "48dp", "48dp"
-
-        MDLabel:
-            text: 'Grundfertigkeit'
-            adaptive_size: True
-
-<DeleteFertigkeitDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: fertigkeit_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_fertigkeit_text
-            text: "Fertigkeit auswählen"
-'''
-
-Builder.load_string(kv)
+Builder.load_file('views/fertigkeit_popup.kv')
 
 class FertigkeitDialogContent(MDBoxLayout):
     def __init__(self, **kwargs):

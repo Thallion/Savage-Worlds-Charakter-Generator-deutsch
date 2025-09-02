@@ -28,20 +28,21 @@ class StatisticsManager:
                 self._show_fallback_error("Dialog-Service nicht verfügbar.")
                 return
             
-            # Prüfe Controller
-            if not self.widget.charakter_controller:
+            # Prüfe Controller über App
+            controller = getattr(self.widget.app, 'controller', None)
+            if not controller:
                 Logger.error("CharakterController nicht verfügbar")
                 self.dialog_service.show_error_dialog("CharakterController nicht verfügbar.")
                 return
             
             # Prüfe Charakter
-            if not hasattr(self.widget.charakter_controller, 'charakter') or not self.widget.charakter_controller.charakter:
+            if not hasattr(controller, 'charakter') or not controller.charakter:
                 Logger.error("Charakter nicht verfügbar")
                 self.dialog_service.show_error_dialog("Kein Charakter geladen. Bitte erstelle oder lade einen Charakter.")
                 return
             
             # Debug-Informationen ausgeben
-            char = self.widget.charakter_controller.charakter
+            char = controller.charakter
             Logger.info(f"Zeige Element-Statistiken für Charakter: {getattr(char, 'char_name', 'Unbenannt')}")
             
             # Dialog anzeigen
@@ -61,11 +62,12 @@ class StatisticsManager:
     def get_element_counts(self):
         """Hilfsmethode zur Ermittlung der Element-Statistiken"""
         try:
-            if not self.widget.charakter_controller or not self.widget.charakter_controller.charakter:
+            controller = getattr(self.widget.app, 'controller', None)
+            if not controller or not controller.charakter:
                 Logger.warning("Kein Charakter-Controller oder Charakter verfügbar")
                 return {}
             
-            char = self.widget.charakter_controller.charakter
+            char = controller.charakter
             Logger.debug(f"Ermittle Element-Counts für Charakter: {getattr(char, 'char_name', 'Unbenannt')}")
             
             # Sichere Attributzugriffe mit Fallbacks

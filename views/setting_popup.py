@@ -37,43 +37,9 @@ def create_text_button(button_text, on_release):
     return btn
 
 # KV-Definition: Alle UI-Komponenten werden hier deklariert (Popups, Textfelder, Labels)
-KV = '''
-<AddSettingPopup>:
-    orientation: "vertical"
-    spacing: "12dp"
-    padding: "12dp"
-    MDTextField:
-        id: setting_name_input
-        mode: "outlined"
-        hint_text: "Name des neuen Settings"
-        max_text_length: 50
-        font_size: "16sp"
-        required: True
-    MDTextField:
-        id: setting_description_input
-        mode: "outlined"
-        hint_text: "Beschreibung des neuen Settings"
-        multiline: True
-        max_text_length: 200
-        font_size: "16sp"
-
-<LoadSettingPopup>:
-    orientation: "vertical"
-    spacing: "12dp"
-    padding: "12dp"
-    MDLabel:
-        text: "Bitte wähle eine Datei aus:"
-        halign: "center"
-
-<DeleteSettingPopup>:
-    orientation: "vertical"
-    spacing: "12dp"
-    padding: "12dp"
-    MDLabel:
-        text: "Bitte wähle eine Datei zum Löschen aus:"
-        halign: "center"
-'''
-Builder.load_string(KV)
+import os
+kv_file = os.path.join(os.path.dirname(__file__), 'setting_popup.kv')
+Builder.load_file(kv_file)
 
 # Hilfsfunktion zur Bestimmung des Applikations‑Rootpfads
 # Import centralized path utilities

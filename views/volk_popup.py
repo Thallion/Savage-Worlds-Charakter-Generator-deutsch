@@ -21,63 +21,7 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.volk import Volk
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<VolkDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "320dp"
-
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name des Volkes'
-
-    MDTextField:
-        id: handicaps_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Handicaps (durch Komma getrennt)'
-
-    MDTextField:
-        id: talente_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Talente (durch Komma getrennt)'
-
-    MDTextField:
-        id: besonderheiten_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Besonderheiten (durch Komma getrennt)'
-
-<DeleteVolkDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: volk_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_volk_text
-            text: "Volk auswählen"
-'''
-
-Builder.load_string(kv)
+Builder.load_file('views/volk_popup.kv')
 
 class VolkDialogContent(MDBoxLayout):
     def __init__(self, **kwargs):
