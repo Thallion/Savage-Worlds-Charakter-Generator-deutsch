@@ -1,4 +1,4 @@
-# views/handlers/template_handler.py
+# controllers/template_handler.py
 """
 Template-Management Handler für EinstellungenWidget
 ORIGINAL Implementation aus einstellungen_widget_backup.py - 1:1 repliziert
@@ -7,6 +7,7 @@ ORIGINAL Implementation aus einstellungen_widget_backup.py - 1:1 repliziert
 import os
 import json
 from pathlib import Path
+from utils.path_utils import get_templates_path
 from kivy.logger import Logger
 from kivy.clock import Clock
 from kivymd.uix.dialog import MDDialog
@@ -39,7 +40,7 @@ class TemplateHandler:
         """Öffnet Dialog zur Auswahl von Templates für Auto Character Generator - ORIGINAL"""
         try:
             # Templates aus dem templates/ Ordner laden
-            templates_dir = Path(__file__).parent.parent.parent / 'templates'
+            templates_dir = Path(get_templates_path())
             template_files = []
             
             if templates_dir.exists():
@@ -366,7 +367,7 @@ class TemplateHandler:
     def _load_available_templates(self, dt):
         """Lädt verfügbare Templates aus dem templates/ Ordner - ORIGINAL"""
         try:
-            templates_dir = Path(__file__).parent.parent.parent / 'templates'
+            templates_dir = Path(get_templates_path())
             self.available_templates = []
             
             if templates_dir.exists():

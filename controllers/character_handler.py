@@ -1,4 +1,4 @@
-# views/handlers/character_handler.py
+# controllers/character_handler.py
 """
 Character-Management Handler für EinstellungenWidget
 Ausgegliedert für bessere Code-Organisation

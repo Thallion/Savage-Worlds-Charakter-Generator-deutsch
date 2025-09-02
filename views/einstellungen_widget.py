@@ -11,12 +11,10 @@ from kivy.logger import Logger
 from kivy.clock import Clock
 
 # Handler imports
-from .handlers import (
-    ThemeHandler, 
-    CharacterHandler, 
-    TemplateHandler, 
-    GameElementsHandler
-)
+from controllers.theme_handler import ThemeHandler
+from controllers.character_handler import CharacterHandler
+from controllers.template_handler import TemplateHandler
+from controllers.game_elements_handler import GameElementsHandler
 
 # Service imports
 from services.service_container import service_container, get_event_service

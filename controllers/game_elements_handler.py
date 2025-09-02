@@ -1,4 +1,4 @@
-# views/handlers/game_elements_handler.py
+# controllers/game_elements_handler.py
 """
 Game Elements Handler für EinstellungenWidget
 Behandelt Setting-Management und Element-Dialoge

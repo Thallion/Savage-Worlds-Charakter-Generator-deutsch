@@ -10,10 +10,10 @@ from kivy.logger import Logger
 import json
 
 # Import der Mixin-Klassen
-from charakter_properties import CharakterProperties
-from charakter_persistence import CharakterPersistence
-from charakter_equipment import CharakterEquipment
-from charakter_elements import CharakterElements
+from models.charakter_properties import CharakterProperties
+from models.charakter_persistence import CharakterPersistence
+from models.charakter_equipment import CharakterEquipment
+from models.charakter_elements import CharakterElements
 
 # Import der Manager und Funktionen
 from manager.volk_manager import VolkManager

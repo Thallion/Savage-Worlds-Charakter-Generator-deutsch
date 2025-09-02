@@ -1,4 +1,4 @@
-# views/handlers/theme_handler.py
+# controllers/theme_handler.py
 """
 Theme-Management Handler für EinstellungenWidget
 Ausgegliedert für bessere Code-Organisation
