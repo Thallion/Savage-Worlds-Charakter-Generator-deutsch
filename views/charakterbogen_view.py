@@ -686,6 +686,11 @@ class CharakterbogenWidget(MDBoxLayout):
                 halign='left'
             ))
 
+    def refresh_widget(self):
+        """Methode zum Aktualisieren des Widgets beim Tab-Wechsel"""
+        Logger.info("CharakterbogenWidget: refresh_widget aufgerufen")
+        self.update_overview()
+
     def cleanup(self):
         """Bereinigt das Widget beim Beenden"""
         try:
