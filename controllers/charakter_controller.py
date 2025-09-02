@@ -5,7 +5,7 @@ from kivy.clock import Clock
 from kivy.event import EventDispatcher
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty
 from kivy.logger import Logger
-from charakter import Charakter
+from models.charakter import Charakter
 from models.talent import Talent
 from models.macht import Macht
 import logging

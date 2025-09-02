@@ -14,7 +14,7 @@ project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 # Imports
-from charakter import Charakter
+from models.charakter import Charakter
 from functions.setting_funktionen import CustomElementManager
 from functions.charakter_speicher import speichern_als_json
 from functions.talent_funktionen import waehle_talent, waehle_freies_talent

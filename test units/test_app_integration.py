@@ -41,7 +41,7 @@ class TestAppIntegration(unittest.TestCase):
             from functions.talent_funktionen import get_talent_manager, TalentConfig
             
             # Test Hauptkomponenten
-            from charakter import Charakter
+            from models.charakter import Charakter
             import main
             
             self.assertTrue(True, "Alle kritischen Imports erfolgreich")
@@ -82,7 +82,7 @@ class TestAppIntegration(unittest.TestCase):
     def test_charakter_creation_with_managers(self):
         """Test Charakter-Erstellung mit neuen Manager-Klassen"""
         try:
-            from charakter import Charakter
+            from models.charakter import Charakter
             from functions import eigenschaften_funktionen, talent_funktionen
             
             # Erstelle Charakter
@@ -115,7 +115,7 @@ class TestAppIntegration(unittest.TestCase):
     def test_legacy_functions_still_work(self):
         """Test dass alle alten Funktionen noch funktionieren"""
         try:
-            from charakter import Charakter
+            from models.charakter import Charakter
             from functions import eigenschaften_funktionen, talent_funktionen
             
             charakter = Charakter()
@@ -146,7 +146,7 @@ class TestAppIntegration(unittest.TestCase):
         try:
             from functions.eigenschaften_funktionen import EigenschaftenManager
             from functions.talent_funktionen import TalentManager, TalentConfig
-            from charakter import Charakter
+            from models.charakter import Charakter
             
             # Test EigenschaftenManager Config
             eigenschaften_manager = EigenschaftenManager()
@@ -215,7 +215,7 @@ class TestAppIntegration(unittest.TestCase):
         """Test Robustheit der Fehlerbehandlung"""
         try:
             from functions import eigenschaften_funktionen, talent_funktionen
-            from charakter import Charakter
+            from models.charakter import Charakter
             
             charakter = Charakter()
             

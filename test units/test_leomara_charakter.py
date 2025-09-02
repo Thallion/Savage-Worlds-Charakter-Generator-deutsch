@@ -15,7 +15,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 # Imports
-from charakter import Charakter
+from models.charakter import Charakter
 from models.wuerfel import Wuerfel
 from models.talent import Talent
 from models.handicap import Handicap

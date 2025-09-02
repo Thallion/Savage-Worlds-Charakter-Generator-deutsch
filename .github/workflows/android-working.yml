@@ -46,14 +46,8 @@ jobs:
         requirements = python3==3.9.19,kivy==2.1.0
         presplash.filename = %(source.dir)s/assets/charbogen_hintergrund.jpg
         icon.filename = %(source.dir)s/assets/Savage-Worlds-Fanprodukt-Logo.png
-
-        [buildozer]
-        log_level = 1
-
-        [app]
         orientation = landscape
         fullscreen = 0
-
         android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
         android.api = 30
         android.minapi = 21
@@ -61,6 +55,9 @@ jobs:
         android.accept_sdk_license = True
         android.skip_update = True
         p4a.branch = master
+
+        [buildozer]
+        log_level = 1
         EOF
 
     - name: Build with Buildozer

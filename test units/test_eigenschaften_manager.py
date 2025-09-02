@@ -33,7 +33,7 @@ def test_eigenschaften_manager():
         
         from functions import eigenschaften_funktionen
         from functions.eigenschaften_funktionen import EigenschaftenManager, get_eigenschaften_manager
-        from charakter import Charakter
+        from models.charakter import Charakter
         
         print("✓ Alle Module erfolgreich importiert")
         
@@ -192,7 +192,7 @@ def test_integration_with_real_charakter():
     print("="*60)
     
     try:
-        from charakter import Charakter
+        from models.charakter import Charakter
         from functions import eigenschaften_funktionen
         
         print("\n1. TESTING: Echte Charakter-Instanz")

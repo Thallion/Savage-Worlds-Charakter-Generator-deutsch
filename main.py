@@ -35,7 +35,7 @@ from kivymd.uix.tab import (
 )
 
 from controllers.charakter_controller import CharakterController
-from charakter import Charakter
+from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
 from views.voelker_view import VoelkerWidget
 from views.profil_view import ProfilWidget
