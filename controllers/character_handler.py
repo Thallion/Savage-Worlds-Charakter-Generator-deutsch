@@ -12,21 +12,22 @@ from services.service_container import service_container
 
 
 class CharacterHandler:
-    """Handler für Character-Management Funktionalitäten"""
+    """
+    UI-Adapter für Character-Management im EinstellungenWidget.
+    Stellt Widget-spezifische Operationen bereit und delegiert an CharakterController.
+    """
     
     def __init__(self, widget):
         self.widget = widget
         self.app = widget.app
+        # Direkte Controller-Referenz für bessere Performance
+        self.controller = self.app.controller if hasattr(self.app, 'controller') else None
         
     def get_charakter_value(self, attribute, default_value=''):
         """Hilfsmethode zum sicheren Abrufen von Charakter-Attributen"""
         try:
-            if (hasattr(self.app, 'controller') and 
-                self.app.controller and 
-                hasattr(self.app.controller, 'charakter') and 
-                self.app.controller.charakter):
-                
-                return str(getattr(self.app.controller.charakter, attribute, default_value))
+            if self.controller and self.controller.charakter:
+                return str(getattr(self.controller.charakter, attribute, default_value))
             return default_value
         except Exception as e:
             Logger.warning(f"Fehler beim Abrufen von {attribute}: {e}")
@@ -35,14 +36,14 @@ class CharacterHandler:
     def update_maximale_attributsteigerungen(self):
         """Aktualisiert die maximalen Attributsteigerungen"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller):
+            if not self.controller:
                 Logger.warning("Controller nicht verfügbar für Attributsteigerungen-Update")
                 return
                 
             field_value = self.widget.ids.attributsteigerungen_field.text
             try:
                 new_value = int(field_value)
-                self.app.controller.charakter.maximale_attributsteigerungen = new_value
+                self.controller.charakter.maximale_attributsteigerungen = new_value
                 Logger.info(f"Maximale Attributsteigerungen aktualisiert auf: {new_value}")
             except ValueError:
                 Logger.warning(f"Ungültiger Wert für Attributsteigerungen: {field_value}")
@@ -52,14 +53,14 @@ class CharacterHandler:
     def update_maximale_fertigkeitssteigerungen(self):
         """Aktualisiert die maximalen Fertigkeitssteigerungen"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller):
+            if not self.controller:
                 Logger.warning("Controller nicht verfügbar für Fertigkeitssteigerungen-Update")
                 return
                 
             field_value = self.widget.ids.fertigkeitssteigerungen_field.text
             try:
                 new_value = int(field_value)
-                self.app.controller.charakter.maximale_fertigkeitssteigerungen = new_value
+                self.controller.charakter.maximale_fertigkeitssteigerungen = new_value
                 Logger.info(f"Maximale Fertigkeitssteigerungen aktualisiert auf: {new_value}")
             except ValueError:
                 Logger.warning(f"Ungültiger Wert für Fertigkeitssteigerungen: {field_value}")
@@ -69,14 +70,14 @@ class CharacterHandler:
     def update_vermoegen(self):
         """Aktualisiert das Vermögen"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller):
+            if not self.controller:
                 Logger.warning("Controller nicht verfügbar für Vermögen-Update")
                 return
                 
             field_value = self.widget.ids.vermoegen_field.text
             try:
                 new_value = int(field_value)
-                self.app.controller.charakter.vermoegen = new_value
+                self.controller.charakter.vermoegen = new_value
                 Logger.info(f"Vermögen aktualisiert auf: {new_value}")
             except ValueError:
                 Logger.warning(f"Ungültiger Wert für Vermögen: {field_value}")
@@ -86,12 +87,12 @@ class CharacterHandler:
     def update_waehrung(self):
         """Aktualisiert die Währungseinheit"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller):
+            if not self.controller:
                 Logger.warning("Controller nicht verfügbar für Währung-Update")
                 return
                 
             new_value = self.widget.ids.waehrung_field.text
-            self.app.controller.charakter.waehrungseinheit = new_value
+            self.controller.charakter.waehrungseinheit = new_value
             Logger.info(f"Währungseinheit aktualisiert auf: {new_value}")
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der Währung: {e}")
@@ -99,11 +100,11 @@ class CharacterHandler:
     def erhoehe_startkapital(self):
         """Erhöht das Startkapital mit Handicap-Punkten"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller):
+            if not self.controller:
                 Logger.warning("Controller nicht verfügbar für Startkapital-Erhöhung")
                 return
                 
-            self.app.controller.erhoehe_startkapital_mit_handicap()
+            self.controller.erhoehe_startkapital_mit_handicap()
             self._update_ui_fields()
             Logger.info("Startkapital mit Handicap-Punkten erhöht")
         except Exception as e:
@@ -112,12 +113,12 @@ class CharacterHandler:
     def erhoehe_aufstieg(self):
         """Erhöht die Aufstiege"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller and self.app.controller.charakter):
+            if not (self.controller and self.controller.charakter):
                 Logger.warning("Controller oder Charakter nicht verfügbar für Aufstieg-Erhöhung")
                 return
                 
             # Verwende die character_advancement Funktion direkt
-            increase_aufstiege(self.app.controller.charakter)
+            increase_aufstiege(self.controller.charakter)
             self._update_ui_fields()
             Logger.info("Aufstieg erhöht")
         except Exception as e:
@@ -126,12 +127,12 @@ class CharacterHandler:
     def senke_aufstieg(self):
         """Senkt die Aufstiege"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller and self.app.controller.charakter):
+            if not (self.controller and self.controller.charakter):
                 Logger.warning("Controller oder Charakter nicht verfügbar für Aufstieg-Senkung")
                 return
                 
             # Verwende die character_advancement Funktion direkt
-            decrease_aufstiege(self.app.controller.charakter)
+            decrease_aufstiege(self.controller.charakter)
             self._update_ui_fields()
             Logger.info("Aufstieg gesenkt")
         except Exception as e:
@@ -140,34 +141,33 @@ class CharacterHandler:
     def create_new_character(self):
         """Erstellt einen neuen Charakter"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller):
+            if not self.controller:
                 Logger.warning("Controller nicht verfügbar für neuen Charakter")
                 return
                 
-            self.app.controller.neuer_charakter()
+            self.controller.neuer_charakter()
             self._update_ui_fields()
             Logger.info("Neuer Charakter erstellt")
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen eines neuen Charakters: {e}")
 
     def schnellspeichern_charakter(self):
-        """Schnellspeicherung: Original-Implementation from backup"""
+        """Schnellspeicherung mit UI-Feedback"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller and self.app.controller.charakter):
+            if not (self.controller and self.controller.charakter):
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
                     dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")
                 return
             
             # Prüfen ob der Charakter bereits einen Dateipfad hat
-            controller = self.app.controller
-            if (hasattr(controller, 'current_character_file_path') and 
-                controller.current_character_file_path and
-                os.path.exists(controller.current_character_file_path)):
+            if (hasattr(self.controller, 'current_character_file_path') and 
+                self.controller.current_character_file_path and
+                os.path.exists(self.controller.current_character_file_path)):
                 
                 # Direkt in die aktuelle Datei speichern
-                file_path = controller.current_character_file_path
-                success = controller.speichere_charakter_als_json(file_path)
+                file_path = self.controller.current_character_file_path
+                success = self.controller.speichere_charakter_als_json(file_path)
                 
                 dialog_service = service_container.get_dialog_service()
                 if success and dialog_service:
@@ -190,9 +190,9 @@ class CharacterHandler:
                 dialog_service.show_error_dialog(f"Fehler beim Schnellspeichern: {str(e)}")
 
     def speichere_charakter(self):
-        """Speichern-Dialog: Original-Implementation from backup"""
+        """Speichern-Dialog mit FileManager-Integration"""
         try:
-            if not (hasattr(self.app, 'controller') and self.app.controller and self.app.controller.charakter):
+            if not (self.controller and self.controller.charakter):
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
                     dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")

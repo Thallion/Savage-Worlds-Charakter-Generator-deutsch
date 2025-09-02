@@ -10,8 +10,7 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.clock import Clock
 
-# Handler imports
-from controllers.theme_handler import ThemeHandler
+# Handler imports (excluding redundant theme_handler)
 from controllers.character_handler import CharacterHandler
 from controllers.template_handler import TemplateHandler
 from controllers.game_elements_handler import GameElementsHandler
@@ -20,16 +19,10 @@ from controllers.game_elements_handler import GameElementsHandler
 from services.service_container import service_container, get_event_service
 from services.event_service import EventTypes
 
-# Manager availability check
-try:
-    from manager.theme_manager import ThemeManager
-    from manager.statistics_manager import StatisticsManager
-    from manager.pdf_manager import PDFManager
-    from manager.element_dialog_manager import ElementDialogManager
-    MANAGERS_AVAILABLE = True
-except ImportError:
-    MANAGERS_AVAILABLE = False
-    Logger.warning("Manager nicht verfügbar")
+# Manager imports - these are the primary implementations
+from manager.theme_manager import ThemeManager
+from manager.statistics_manager import StatisticsManager
+from manager.pdf_manager import PDFManager
 
 # KV-Datei laden
 Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/einstellungen_widget.kv')
@@ -58,9 +51,8 @@ class EinstellungenWidget(MDBoxLayout):
         Clock.schedule_once(self._post_init, 0)
     
     def _initialize_handlers(self):
-        """Initialisiert alle Handler"""
+        """Initialisiert alle Handler (excluding theme - handled by manager)"""
         try:
-            self.theme_handler = ThemeHandler(self)
             self.character_handler = CharacterHandler(self)
             self.template_handler = TemplateHandler(self)
             self.game_elements_handler = GameElementsHandler(self)
@@ -70,26 +62,19 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Handler-Initialisierung: {e}")
     
     def _initialize_managers(self):
-        """Initialisiert Manager (falls verfügbar)"""
+        """Initialisiert Manager - diese sind die primären Implementierungen"""
         try:
-            if MANAGERS_AVAILABLE:
-                self.theme_manager = ThemeManager(self)
-                self.statistics_manager = StatisticsManager(self)
-                self.pdf_manager = PDFManager(self)
-                self.element_dialog_manager = ElementDialogManager(self)
-                Logger.info("Manager erfolgreich initialisiert")
-            else:
-                self.theme_manager = None
-                self.statistics_manager = None
-                self.pdf_manager = None
-                self.element_dialog_manager = None
-                Logger.info("Manager nicht verfügbar - Handler-Only Modus")
+            self.theme_manager = ThemeManager(self)
+            self.statistics_manager = StatisticsManager(self)
+            self.pdf_manager = PDFManager(self)
+            # DialogService wird direkt über service_container verwendet (keine redundante Zwischenschicht)
+            Logger.info("Manager erfolgreich initialisiert")
         except Exception as e:
             Logger.error(f"Fehler bei Manager-Initialisierung: {e}")
+            # Set defaults to prevent attribute errors
             self.theme_manager = None
             self.statistics_manager = None
             self.pdf_manager = None
-            self.element_dialog_manager = None
 
     def _register_event_handlers(self):
         """Registriert Event-Handler"""
@@ -100,7 +85,7 @@ class EinstellungenWidget(MDBoxLayout):
                 # Character-Events
                 event_service.subscribe(EventTypes.CHARACTER_CREATED, self.character_handler.on_character_created)
                 event_service.subscribe(EventTypes.CHARACTER_LOADED, self.character_handler.on_character_loaded)
-                event_service.subscribe(EventTypes.THEME_CHANGED, self.theme_handler.on_theme_changed)
+                event_service.subscribe(EventTypes.THEME_CHANGED, self._on_theme_changed)
                 
                 Logger.debug("Event-Handler für Einstellungen registriert")
         except Exception as e:
@@ -109,14 +94,15 @@ class EinstellungenWidget(MDBoxLayout):
     def _post_init(self, dt):
         """Post-Initialisierung nach dem UI-Aufbau"""
         try:
-            # Theme initialisieren
-            self.theme_handler.initialize_theme()
+            # Theme initialisieren (directly via manager)
+            if self.theme_manager:
+                self.theme_manager.initialize_theme()
             
             # UI-Felder aktualisieren  
             self.character_handler._update_ui_fields()
             
-            # Statistiken aktualisieren (falls Manager verfügbar)
-            if MANAGERS_AVAILABLE and hasattr(self, 'statistics_manager') and self.statistics_manager:
+            # Statistiken aktualisieren
+            if self.statistics_manager:
                 self.statistics_manager.update_element_statistics_ui()
             
             Logger.info("Post-Initialisierung erfolgreich abgeschlossen")
@@ -124,16 +110,29 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Post-Initialisierung: {e}")
 
     # ==================== DELEGIERTE METHODEN ====================
-    # Alle Methoden delegieren an die entsprechenden Handler
+    # Alle Methoden delegieren an die entsprechenden Manager/Handler
     
-    # Theme-Management (delegiert an ThemeHandler)
+    # Theme-Management (direct delegation to ThemeManager)
     def switch_theme_style(self, style):
-        """Delegiert Theme-Stil-Wechsel an ThemeHandler"""
-        return self.theme_handler.switch_theme_style(style)
+        """Delegiert Theme-Stil-Wechsel an ThemeManager"""
+        if self.theme_manager:
+            return self.theme_manager.switch_theme_style(style)
+        else:
+            Logger.warning("ThemeManager nicht verfügbar")
     
     def on_color_selected(self, color_name):
-        """Delegiert Farbauswahl an ThemeHandler"""
-        return self.theme_handler.on_color_selected(color_name)
+        """Delegiert Farbauswahl an ThemeManager"""
+        if self.theme_manager:
+            return self.theme_manager.on_color_selected(color_name)
+        else:
+            Logger.warning("ThemeManager nicht verfügbar")
+            
+    def _on_theme_changed(self, data):
+        """Callback für Theme-Änderungen"""
+        if self.theme_manager:
+            self.theme_manager.update_color_chips()
+        else:
+            Logger.warning("ThemeManager nicht verfügbar für Theme-Update")
     
     # Character-Management (delegiert an CharacterHandler)
     def get_charakter_value(self, attribute, default_value=''):
@@ -290,217 +289,177 @@ class EinstellungenWidget(MDBoxLayout):
         return self.game_elements_handler.open_delete_schild_popup()
     
     def open_add_setting_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_setting_popup()
+        """Öffnet Dialog zum Hinzufügen von Settings"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_setting_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_setting_popup()
-            else:
-                Logger.info("Setting hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Setting hinzufügen nicht möglich")
     
     def open_setting_switch_options(self):
         """Delegiert Setting-Wechsel-Dialog an GameElementsHandler"""
         return self.game_elements_handler.open_setting_switch_options()
     
     def open_delete_setting_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_setting_popup()
+        """Öffnet Dialog zum Löschen von Settings"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_setting_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_setting_popup()
-            else:
-                Logger.info("Setting löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Setting löschen nicht möglich")
     
     # Volk-Dialoge
     def open_add_volk_dialog(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_volk_dialog()
+        """Öffnet Dialog zum Hinzufügen von Völkern"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_volk_dialog()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_volk_dialog()
-            else:
-                Logger.info("Volk hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Volk hinzufügen nicht möglich")
     
     def open_delete_volk_dialog(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_volk_dialog()
+        """Öffnet Dialog zum Löschen von Völkern"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_volk_dialog()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_volk_dialog()
-            else:
-                Logger.info("Volk löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Volk löschen nicht möglich")
     
     # Talent-Dialoge
     def open_add_talent_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_talent_popup()
+        """Öffnet Dialog zum Hinzufügen von Talenten"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_talent_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_talent_popup()
-            else:
-                Logger.info("Talent hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Talent hinzufügen nicht möglich")
     
     def open_delete_talent_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_talent_popup()
+        """Öffnet Dialog zum Löschen von Talenten"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_talent_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_talent_popup()
-            else:
-                Logger.info("Talent löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Talent löschen nicht möglich")
     
     # Macht-Dialoge
     def open_add_macht_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_macht_popup()
+        """Öffnet Dialog zum Hinzufügen von Mächten"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_macht_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_macht_popup()
-            else:
-                Logger.info("Macht hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Macht hinzufügen nicht möglich")
     
     def open_delete_macht_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_macht_popup()
+        """Öffnet Dialog zum Löschen von Mächten"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_macht_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_macht_popup()
-            else:
-                Logger.info("Macht löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Macht löschen nicht möglich")
     
     # Fertigkeit-Dialoge
     def open_add_fertigkeit_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_fertigkeit_popup()
+        """Öffnet Dialog zum Hinzufügen von Fertigkeiten"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_fertigkeit_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_fertigkeit_popup()
-            else:
-                Logger.info("Fertigkeit hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Fertigkeit hinzufügen nicht möglich")
     
     def open_delete_fertigkeit_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_fertigkeit_popup()
+        """Öffnet Dialog zum Löschen von Fertigkeiten"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_fertigkeit_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_fertigkeit_popup()
-            else:
-                Logger.info("Fertigkeit löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Fertigkeit löschen nicht möglich")
     
     # Handicap-Dialoge
     def open_add_handicap_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_handicap_popup()
+        """Öffnet Dialog zum Hinzufügen von Handicaps"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_handicap_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_handicap_popup()
-            else:
-                Logger.info("Handicap hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Handicap hinzufügen nicht möglich")
     
     def open_delete_handicap_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_handicap_popup()
+        """Öffnet Dialog zum Löschen von Handicaps"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_handicap_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_handicap_popup()
-            else:
-                Logger.info("Handicap löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Handicap löschen nicht möglich")
     
     # Ausrüstung-Dialoge
     def open_add_ausruestung_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_ausruestung_popup()
+        """Öffnet Dialog zum Hinzufügen von Ausrüstung"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_ausruestung_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_ausruestung_popup()
-            else:
-                Logger.info("Ausrüstung hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Ausrüstung hinzufügen nicht möglich")
     
     def open_delete_ausruestung_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_ausruestung_popup()
+        """Öffnet Dialog zum Löschen von Ausrüstung"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_ausruestung_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_ausruestung_popup()
-            else:
-                Logger.info("Ausrüstung löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Ausrüstung löschen nicht möglich")
     
     # Waffen-Dialoge
     def open_add_waffe_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_waffe_popup()
+        """Öffnet Dialog zum Hinzufügen von Waffen"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_waffe_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_waffe_popup()
-            else:
-                Logger.info("Waffe hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Waffe hinzufügen nicht möglich")
     
     def open_delete_waffe_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_waffe_popup()
+        """Öffnet Dialog zum Löschen von Waffen"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_waffe_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_waffe_popup()
-            else:
-                Logger.info("Waffe löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Waffe löschen nicht möglich")
     
     # Rüstung-Dialoge
     def open_add_ruestung_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_ruestung_popup()
+        """Öffnet Dialog zum Hinzufügen von Rüstungen"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_ruestung_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_ruestung_popup()
-            else:
-                Logger.info("Rüstung hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Rüstung hinzufügen nicht möglich")
     
     def open_delete_ruestung_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_ruestung_popup()
+        """Öffnet Dialog zum Löschen von Rüstungen"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_ruestung_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_ruestung_popup()
-            else:
-                Logger.info("Rüstung löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Rüstung löschen nicht möglich")
     
     # Schild-Dialoge
     def open_add_schild_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_add_schild_popup()
+        """Öffnet Dialog zum Hinzufügen von Schilden"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_add_schild_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_add_schild_popup()
-            else:
-                Logger.info("Schild hinzufügen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Schild hinzufügen nicht möglich")
     
     def open_delete_schild_popup(self):
-        if MANAGERS_AVAILABLE and hasattr(self, 'element_dialog_manager'):
-            self.element_dialog_manager.open_delete_schild_popup()
+        """Öffnet Dialog zum Löschen von Schilden"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.open_delete_schild_popup()
         else:
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.open_delete_schild_popup()
-            else:
-                Logger.info("Schild löschen - Manager und Service nicht verfügbar")
+            Logger.warning("DialogService nicht verfügbar - Schild löschen nicht möglich")
 
     # ==================== CLEANUP ====================
     
@@ -513,7 +472,7 @@ class EinstellungenWidget(MDBoxLayout):
             if event_service:
                 event_service.unsubscribe(EventTypes.CHARACTER_CREATED, self.character_handler.on_character_created)
                 event_service.unsubscribe(EventTypes.CHARACTER_LOADED, self.character_handler.on_character_loaded)
-                event_service.unsubscribe(EventTypes.THEME_CHANGED, self.theme_handler.on_theme_changed)
+                event_service.unsubscribe(EventTypes.THEME_CHANGED, self._on_theme_changed)
             
             Logger.info("EinstellungenWidget bereinigt")
         except Exception as e:

@@ -32,9 +32,9 @@ jobs:
             SavageWorldsApp().run()
         EOF
 
-    - name: Create working buildozer.spec
+    - name: Create simple test buildozer.spec (overwrites existing)
       run: |
-        cat > buildozer-working.spec << 'EOF'
+        cat > buildozer.spec << 'EOF'
         [app]
         title = Savage Worlds Test
         package.name = savageworlds
@@ -64,7 +64,9 @@ jobs:
       uses: ArtemSBulgakov/buildozer-action@v1
       id: buildozer
       with:
-        command: buildozer -f buildozer-working.spec android debug
+        command: buildozer android debug
+        repository_root: .
+        workdir: .
         buildozer_version: 1.4.0
 
     - name: Upload APK
