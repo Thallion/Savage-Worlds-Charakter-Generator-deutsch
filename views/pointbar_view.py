@@ -36,7 +36,26 @@ class LabelValuePair(MDBoxLayout):
     value_text = StringProperty("")
     key_width_ratio = NumericProperty(0.6)  # Anteil für den Schlüssel
 
-Builder.load_file('views/pointbar_view.kv')
+import os
+import sys
+
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'pointbar_view.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'pointbar_view.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"PointbarView: KV-Datei nicht gefunden: {kv_path}")
+
+load_kv_file()
 
 class GenerationPointsBar(MDBoxLayout):
     charakter = ObjectProperty(None)  

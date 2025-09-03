@@ -14,14 +14,42 @@ datas = [
     # Config Dateien
     (str(project_dir / 'config'), 'config'),
     
-    # Settings Dateien - KORRIGIERT
+    # Settings Dateien
     (str(project_dir / 'settings'), 'settings'),
     
     # Templates
     (str(project_dir / 'templates'), 'templates'),
     
-    # Chars Ordner - NEU HINZUGEFÜGT
+    # Views (Python-Dateien)
+    (str(project_dir / 'views'), 'views'),
+    
+    # Chars Ordner
     (str(project_dir / 'chars'), 'chars'),
+    
+    # Main KV-Datei
+    (str(project_dir / 'main.kv'), '.'),
+    
+    # Alle KV-Dateien einzeln hinzufügen für bessere Erkennung
+    (str(project_dir / 'views' / 'ausruestung_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'ausruestung_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'charakterbogen_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'eigenschaften_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'einstellungen_widget.kv'), 'views'),
+    (str(project_dir / 'views' / 'fertigkeit_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'handicap_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'handicaps_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'macht_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'maechte_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'pointbar_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'profil_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'ruestung_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'schild_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'setting_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'talente_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'talent_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'voelker_view.kv'), 'views'),
+    (str(project_dir / 'views' / 'volk_popup.kv'), 'views'),
+    (str(project_dir / 'views' / 'waffe_popup.kv'), 'views'),
     
     # KivyMD Daten
     ('venv/lib/python3.12/site-packages/kivymd', 'kivymd') if os.path.exists('venv/lib/python3.12/site-packages/kivymd') else None,
@@ -40,7 +68,25 @@ hiddenimports = [
     'kivymd.uix.button',
     'kivymd.uix.textfield',
     'kivymd.uix.tab',
+    'kivymd.uix.tab.tab',
+    'kivymd.uix.scrollview',
+    'kivymd.uix.card',
+    'kivymd.uix.list',
+    'kivymd.uix.dialog',
+    'kivymd.uix.menu',
+    'kivymd.uix.navigationbar',
+    'kivymd.uix.navigationdrawer',
+    'kivymd.uix.selectioncontrol',
+    'kivymd.uix.slider',
+    'kivymd.uix.snackbar',
+    'kivymd.uix.appbar',
+    'kivymd.uix.tooltip',
+    'kivymd.uix.progressindicator',
     'kivymd.theming',
+    'kivymd.material_resources',
+    'materialyoucolor',
+    'materialyoucolor.utils',
+    'materialyoucolor.quantize',
     'kivy',
     'kivy.app',
     'kivy.lang',
@@ -52,12 +98,25 @@ hiddenimports = [
     'kivy.uix.popup',
     'kivy.uix.scrollview',
     'kivy.uix.widget',
+    'kivy.uix.screenmanager',
+    'kivy.uix.recycleview',
+    'kivy.uix.recycleboxlayout',
+    'kivy.uix.behaviors',
+    'kivy.config',
     'PIL',
     'PIL.Image',
     'PIL.ImageTk',
     'reportlab',
     'reportlab.pdfgen',
     'reportlab.lib',
+    'reportlab.lib.pagesizes',
+    'reportlab.lib.units',
+    'reportlab.lib.colors',
+    'reportlab.platypus',
+    'requests',
+    'requests.adapters',
+    'requests.auth',
+    'requests.cookies',
     'json',
     'logging',
     'functools',
@@ -110,7 +169,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='SavageWorldsCharakterGenerator',
+    name='SavageWorldsCharakterGenerator.exe',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -123,5 +182,5 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     version='version_info.txt',  # Version Info für weniger False-Positives
-    icon=str(project_dir / 'assets' / 'bowman.png') if (project_dir / 'assets' / 'bowman.png').exists() else None,
+    icon=str(project_dir / 'assets' / 'Savage-Worlds-Fanprodukt-Logo.png') if (project_dir / 'assets' / 'Savage-Worlds-Fanprodukt-Logo.png').exists() else None,
 )

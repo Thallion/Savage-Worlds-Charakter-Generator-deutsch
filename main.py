@@ -105,7 +105,23 @@ class SW_Charakter_GeneratorApp(MDApp):
     def build(self):
         # KORRIGIERT: Theme aus Config laden (Service Container ist bereits initialisiert)
         self.load_theme_from_config()
-        return Builder.load_file('main.kv')
+        return self.load_main_kv()
+    
+    def load_main_kv(self):
+        """PyInstaller-kompatibles Laden der main.kv Datei"""
+        if getattr(sys, 'frozen', False):
+            # PyInstaller Bundle
+            base_path = sys._MEIPASS
+            kv_path = os.path.join(base_path, 'main.kv')
+        else:
+            # Normale Ausführung
+            kv_path = 'main.kv'
+        
+        if os.path.exists(kv_path):
+            return Builder.load_file(kv_path)
+        else:
+            Logger.error(f"Main KV-Datei nicht gefunden: {kv_path}")
+            return None
 
     def load_theme_from_config(self):
         """Lädt die Theme-Einstellungen aus der Konfiguration"""

@@ -1,0 +1,257 @@
+name: Build Android APK - Full App
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        description: 'Build mode'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+        - debug
+        - release
+      architecture:
+        description: 'Target architectures'
+        required: true
+        default: 'arm64-v8a,armeabi-v7a'
+        type: choice
+        options:
+        - armeabi-v7a
+        - arm64-v8a
+        - arm64-v8a,armeabi-v7a
+        - x86_64
+  push:
+    branches: [ main, dev_unstable ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+
+jobs:
+  build-android:
+    runs-on: ubuntu-22.04
+    
+    env:
+      ANDROID_API: 35
+      ANDROID_MIN_API: 21
+      NDK_VERSION: 25b
+      BUILDOZER_VERSION: 1.5.0
+      
+    steps:
+    - name: 📱 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: 🐍 Setup Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: 🔧 Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          git \
+          ffmpeg \
+          libsdl2-dev \
+          libsdl2-image-dev \
+          libsdl2-mixer-dev \
+          libsdl2-ttf-dev \
+          libportmidi-dev \
+          libswscale-dev \
+          libavformat-dev \
+          libavcodec-dev \
+          zlib1g-dev \
+          libgstreamer1.0 \
+          gstreamer1.0-plugins-base \
+          gstreamer1.0-plugins-good \
+          openjdk-11-jdk \
+          unzip
+
+    - name: ⚙️ Configure environment
+      run: |
+        echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $GITHUB_ENV
+        echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
+        echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+        echo "PATH=$PATH:$HOME/android-sdk/tools:$HOME/android-sdk/platform-tools" >> $GITHUB_ENV
+
+    - name: 📂 Cache Android SDK and buildozer
+      uses: actions/cache@v3
+      id: cache-android
+      with:
+        path: |
+          ~/.android
+          ~/.buildozer
+          ~/android-sdk
+        key: ${{ runner.os }}-android-${{ env.ANDROID_API }}-${{ env.NDK_VERSION }}-${{ env.BUILDOZER_VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-android-${{ env.ANDROID_API }}-
+          ${{ runner.os }}-android-
+
+    - name: 📦 Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip wheel setuptools
+        pip install \
+          buildozer==${{ env.BUILDOZER_VERSION }} \
+          cython \
+          kivy \
+          kivymd \
+          pillow \
+          reportlab \
+          requests
+
+    - name: 📋 Validate buildozer.spec
+      run: |
+        if [ ! -f buildozer.spec ]; then
+          echo "❌ buildozer.spec not found!"
+          exit 1
+        fi
+        
+        echo "📋 Checking buildozer.spec configuration..."
+        
+        # Prüfe wichtige Konfigurationen
+        if ! grep -q "android.api = ${{ env.ANDROID_API }}" buildozer.spec; then
+          echo "⚠️  Updating Android API to ${{ env.ANDROID_API }}"
+          sed -i "s/android.api = .*/android.api = ${{ env.ANDROID_API }}/" buildozer.spec
+        fi
+        
+        if ! grep -q "android.minapi = ${{ env.ANDROID_MIN_API }}" buildozer.spec; then
+          echo "⚠️  Updating Android Min API to ${{ env.ANDROID_MIN_API }}"
+          sed -i "s/android.minapi = .*/android.minapi = ${{ env.ANDROID_MIN_API }}/" buildozer.spec
+        fi
+        
+        if ! grep -q "android.ndk = ${{ env.NDK_VERSION }}" buildozer.spec; then
+          echo "⚠️  Updating NDK version to ${{ env.NDK_VERSION }}"
+          sed -i "s/android.ndk = .*/android.ndk = ${{ env.NDK_VERSION }}/" buildozer.spec
+        fi
+        
+        # Setze Architekturen basierend auf Input
+        ARCHS="${{ github.event.inputs.architecture || 'arm64-v8a,armeabi-v7a' }}"
+        sed -i "s/android.archs = .*/android.archs = $ARCHS/" buildozer.spec
+        
+        echo "✅ buildozer.spec validated and updated"
+
+    - name: 🔍 Check assets and dependencies
+      run: |
+        echo "📁 Project structure:"
+        ls -la
+        
+        echo "🎨 Assets:"
+        if [ -d assets ]; then
+          ls -la assets/
+        else
+          echo "⚠️  Assets directory not found"
+        fi
+        
+        echo "📱 KV files:"
+        find . -name "*.kv" -type f | head -10
+        
+        echo "🐍 Python files:"
+        find . -name "*.py" -type f | grep -v __pycache__ | head -10
+
+    - name: 🛠️ Initialize buildozer
+      run: |
+        # Erstelle .buildozer Verzeichnis falls nicht vorhanden
+        mkdir -p ~/.buildozer
+        
+        # Initialisiere buildozer
+        buildozer init || echo "Buildozer already initialized"
+        
+        # Akzeptiere Android SDK Lizenzen
+        yes | buildozer android update || echo "SDK update completed with warnings"
+
+    - name: 🚀 Build APK with Docker fallback
+      run: |
+        BUILD_MODE="${{ github.event.inputs.build_mode || 'debug' }}"
+        echo "Building in $BUILD_MODE mode..."
+        
+        # Primärer Build-Versuch
+        if buildozer android $BUILD_MODE --verbose; then
+          echo "✅ Direct buildozer build successful!"
+        else
+          echo "⚠️  Direct build failed, trying Docker approach..."
+          
+          # Docker-basierter Build als Fallback
+          docker run --rm \
+            -v "$(pwd)":/app \
+            -w /app \
+            kivy/buildozer:latest \
+            buildozer android $BUILD_MODE --verbose || {
+              echo "❌ Both build methods failed"
+              exit 1
+            }
+        fi
+
+    - name: 📊 Analyze build results
+      run: |
+        echo "📋 Build results:"
+        
+        if [ -d bin ]; then
+          echo "📱 APK files in bin/:"
+          ls -lah bin/*.apk || echo "No APK files found"
+          
+          # Prüfe APK Größe und Details
+          for apk in bin/*.apk; do
+            if [ -f "$apk" ]; then
+              echo "📱 APK: $(basename "$apk")"
+              echo "   Size: $(du -h "$apk" | cut -f1)"
+              echo "   Type: $(file "$apk")"
+            fi
+          done
+        else
+          echo "❌ bin/ directory not found"
+          ls -la
+        fi
+
+    - name: ✅ Upload APK Artifacts
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: savage-worlds-android-${{ github.event.inputs.build_mode || 'debug' }}-${{ github.run_number }}
+        path: |
+          bin/*.apk
+          bin/*.aab
+        retention-days: 30
+
+    - name: 📋 Upload build logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: buildozer-logs-${{ github.run_number }}
+        path: |
+          .buildozer/logs/
+          buildozer.log
+        retention-days: 7
+
+    - name: 🎯 Build Summary
+      if: always()
+      run: |
+        echo "## 📱 Android Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f bin/*.apk ]; then
+          echo "✅ **Build Status:** Success" >> $GITHUB_STEP_SUMMARY
+          echo "📱 **APK Created:** Yes" >> $GITHUB_STEP_SUMMARY
+          
+          for apk in bin/*.apk; do
+            if [ -f "$apk" ]; then
+              APK_SIZE=$(du -h "$apk" | cut -f1)
+              APK_NAME=$(basename "$apk")
+              echo "📦 **APK:** $APK_NAME ($APK_SIZE)" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+        else
+          echo "❌ **Build Status:** Failed" >> $GITHUB_STEP_SUMMARY
+          echo "📱 **APK Created:** No" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "🔧 **Build Configuration:**" >> $GITHUB_STEP_SUMMARY
+        echo "- Mode: ${{ github.event.inputs.build_mode || 'debug' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Architecture: ${{ github.event.inputs.architecture || 'arm64-v8a,armeabi-v7a' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Android API: ${{ env.ANDROID_API }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Min API: ${{ env.ANDROID_MIN_API }}" >> $GITHUB_STEP_SUMMARY
+        echo "- NDK: ${{ env.NDK_VERSION }}" >> $GITHUB_STEP_SUMMARY

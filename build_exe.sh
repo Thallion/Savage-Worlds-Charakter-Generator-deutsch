@@ -98,75 +98,151 @@ check_wine() {
 build_wine_exe() {
     print_step "${WINE_EMOJI} Baue Windows EXE mit Wine..."
     
-    # Optimierte spec für Wine erstellen
+    # Basierend auf dem funktionierenden savage_worlds_generator.spec
     cat > wine_build_temp.spec << 'EOF'
 # -*- mode: python ; coding: utf-8 -*-
 
 import os
 from pathlib import Path
 
-# KivyMD Daten sammeln
-kivymd_datas = []
-try:
-    import kivymd
-    kivymd_path = Path(kivymd.__file__).parent
-    data_dirs = ['fonts', 'images', 'icon_definitions']
-    for data_dir in data_dirs:
-        src_path = kivymd_path / data_dir
-        if src_path.exists():
-            kivymd_datas.append((str(src_path), f'kivymd/{data_dir}'))
-except:
-    pass
+# Bestimme das Projektverzeichnis
+project_dir = Path.cwd()
+
+# Sammle alle Daten-Dateien (EXAKT wie im originalen savage_worlds_generator.spec)
+datas = [
+    # Assets Ordner
+    (str(project_dir / 'assets'), 'assets'),
+    
+    # Config Dateien
+    (str(project_dir / 'config'), 'config'),
+    
+    # Settings Dateien
+    (str(project_dir / 'settings'), 'settings'),
+    
+    # Templates
+    (str(project_dir / 'templates'), 'templates'),
+    
+    # Views (KV-Dateien) - WICHTIG für pointbar_view.kv!
+    (str(project_dir / 'views'), 'views'),
+    
+    # Chars Ordner
+    (str(project_dir / 'chars'), 'chars'),
+    
+    # Main KV-Datei
+    (str(project_dir / 'main.kv'), '.'),
+    
+    # KivyMD Daten
+    ('venv/lib/python3.12/site-packages/kivymd', 'kivymd') if os.path.exists('venv/lib/python3.12/site-packages/kivymd') else None,
+]
+
+# Filtere None-Werte heraus
+datas = [item for item in datas if item is not None]
+
+# Hidden imports (EXAKT wie im originalen savage_worlds_generator.spec)
+hiddenimports = [
+    'kivymd',
+    'kivymd.app',
+    'kivymd.uix.screen',
+    'kivymd.uix.boxlayout',
+    'kivymd.uix.label',
+    'kivymd.uix.button',
+    'kivymd.uix.textfield',
+    'kivymd.uix.tab',
+    'kivymd.theming',
+    'kivy',
+    'kivy.app',
+    'kivy.lang',
+    'kivy.clock',
+    'kivy.properties',
+    'kivy.core.window',
+    'kivy.logger',
+    'kivy.metrics',
+    'kivy.uix.popup',
+    'kivy.uix.scrollview',
+    'kivy.uix.widget',
+    'PIL',
+    'PIL.Image',
+    'PIL.ImageTk',
+    'reportlab',
+    'reportlab.pdfgen',
+    'reportlab.lib',
+    'json',
+    'logging',
+    'functools',
+    'webbrowser',
+    're',
+    'sys',
+    'os'
+]
+
+# Module die oft False-Positives auslösen ausschließen
+excludes = [
+    'tkinter',
+    'matplotlib',
+    'numpy',
+    'scipy',
+    'pandas',
+    'jupyter',
+    'IPython',
+    'notebook',
+    'tornado',
+    'zmq',
+    'sqlite3',
+    'distutils',
+    'setuptools',
+    'pip',
+    'wheel'
+]
 
 a = Analysis(
     ['main.py'],
-    pathex=[],
+    pathex=[str(project_dir)],
     binaries=[],
-    datas=[
-        ('assets', 'assets'),
-        ('config', 'config'),
-        ('settings', 'settings'),
-        ('templates', 'templates'),
-        ('chars', 'chars'),
-    ] + kivymd_datas,
-    hiddenimports=[
-        'kivy', 'kivy.app', 'kivy.lang', 'kivy.clock', 'kivy.properties',
-        'kivy.core.window', 'kivy.logger', 'kivy.metrics', 'kivy.uix.popup',
-        'kivy.uix.scrollview', 'kivy.uix.widget',
-        'kivymd', 'kivymd.app', 'kivymd.theming', 'kivymd.material_resources',
-        'kivymd.uix.screen', 'kivymd.uix.boxlayout', 'kivymd.uix.label', 
-        'kivymd.uix.button', 'kivymd.uix.textfield', 'kivymd.uix.tab',
-        'kivymd.uix.divider', 'kivymd.icon_definitions', 'kivymd.font_definitions',
-        'PIL', 'PIL.Image', 'reportlab', 'reportlab.pdfgen', 'reportlab.lib',
-        'json', 'logging', 'functools', 'webbrowser', 're', 'sys', 'os'
-    ],
+    datas=datas,
+    hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[
-        'tkinter', 'matplotlib', 'numpy', 'scipy', 'pandas', 'jupyter', 'IPython'
-    ],
+    excludes=excludes,
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=None,
     noarchive=False,
 )
 
 pyz = PYZ(a.pure)
 
 exe = EXE(
-    pyz, a.scripts, a.binaries, a.datas, [],
+    pyz,
+    a.scripts,
+    a.binaries,
+    a.datas,
+    [],
     name='SavageWorldsCharakterGenerator',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=False,  # Anti-Virus Optimierung
-    console=False,
+    upx=False,  # UPX oft False-Positive Auslöser
+    upx_exclude=[],
+    runtime_tmpdir=None,
+    console=False,  # Für GUI-Anwendung auf False setzen
     disable_windowed_traceback=False,
-    version='version_info.txt',
-    icon='assets/bowman.png' if os.path.exists('assets/bowman.png') else None,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+    version='version_info.txt' if os.path.exists('version_info.txt') else None,
+    icon=str(project_dir / 'assets' / 'bowman.png') if (project_dir / 'assets' / 'bowman.png').exists() else None,
 )
 EOF
 
     # Wine Build ausführen
     print_step "Starte Wine PyInstaller..."
+    
+    # Kivy-Config für Wine setzen - Mock GL für bessere Kompatibilität
+    export KIVY_NO_CONFIG=1
+    export KIVY_WINDOW=sdl2
+    export KIVY_GL_BACKEND=mock
+    export USE_OPENGL_MOCK=1
     
     if WINEDEBUG=-all wine python -m PyInstaller --clean --noconfirm wine_build_temp.spec; then
         # Prüfe Ergebnis

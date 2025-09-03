@@ -38,8 +38,26 @@ def create_text_button(button_text, on_release):
 
 # KV-Definition: Alle UI-Komponenten werden hier deklariert (Popups, Textfelder, Labels)
 import os
-kv_file = os.path.join(os.path.dirname(__file__), 'setting_popup.kv')
-Builder.load_file(kv_file)
+import os
+import sys
+
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'setting_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'setting_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"setting_popup: KV-Datei nicht gefunden: {kv_path}")
+
+load_kv_file()
 
 # Hilfsfunktion zur Bestimmung des Applikations‑Rootpfads
 # Import centralized path utilities

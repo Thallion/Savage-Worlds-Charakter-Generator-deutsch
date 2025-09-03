@@ -21,7 +21,26 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.volk import Volk
 
-Builder.load_file('views/volk_popup.kv')
+import os
+import sys
+
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'volk_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'volk_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"volk_popup: KV-Datei nicht gefunden: {kv_path}")
+
+load_kv_file()
 
 class VolkDialogContent(MDBoxLayout):
     def __init__(self, **kwargs):
