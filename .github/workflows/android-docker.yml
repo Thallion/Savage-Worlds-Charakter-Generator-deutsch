@@ -61,20 +61,34 @@ jobs:
 
     - name: 📋 Update buildozer.spec for Docker build
       run: |
-        # Optimierungen für Docker-Build - Verwende robuste sed-Syntax
-        sed -i 's|android\.accept_sdk_license = .*|android.accept_sdk_license = True|' buildozer.spec
-        sed -i 's|android\.skip_update = .*|android.skip_update = False|' buildozer.spec
-        
-        # KivyMD ist bereits als GitHub-URL in requirements enthalten
-        echo "📋 KivyMD wird als GitHub master.zip geladen"
-        
-        # Aktualisiere Version mit Timestamp für eindeutige Builds
-        VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3 | tr -d ' ')
-        NEW_VERSION="${VERSION}.$(date +%m%d%H%M)"
-        sed -i "s|version = .*|version = ${NEW_VERSION}|" buildozer.spec
-        
-        echo "📋 buildozer.spec updated for Docker build"
-        echo "📋 New version: ${NEW_VERSION}"
+        # Optimierungen für Docker-Build - Verwende Python statt sed
+        python3 -c "
+import re
+import datetime
+
+# Read buildozer.spec
+with open('buildozer.spec', 'r') as f:
+    content = f.read()
+
+# Update android settings
+content = re.sub(r'^android\.accept_sdk_license = .*', 'android.accept_sdk_license = True', content, flags=re.MULTILINE)
+content = re.sub(r'^android\.skip_update = .*', 'android.skip_update = False', content, flags=re.MULTILINE)
+
+# Update version with timestamp
+version_match = re.search(r'^version = (.+)', content, re.MULTILINE)
+if version_match:
+    old_version = version_match.group(1).strip()
+    timestamp = datetime.datetime.now().strftime('%m%d%H%M')
+    new_version = f'{old_version}.{timestamp}'
+    content = re.sub(r'^version = .*', f'version = {new_version}', content, flags=re.MULTILINE)
+    print(f'📋 Version updated: {old_version} → {new_version}')
+
+# Write back
+with open('buildozer.spec', 'w') as f:
+    f.write(content)
+
+print('📋 buildozer.spec updated for Docker build')
+"
 
     - name: 🐋 Build APK with Official Kivy/Buildozer Docker
       run: |

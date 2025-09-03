@@ -76,14 +76,37 @@ prepare_build() {
     # Update buildozer.spec für Docker Build
     print_step "Aktualisiere buildozer.spec..."
     
-    # Setze Android-optimierte Konfiguration
-    sed -i.tmp "s|android\.accept_sdk_license = .*|android.accept_sdk_license = True|" buildozer.spec
-    sed -i.tmp "s|android\.skip_update = .*|android.skip_update = False|" buildozer.spec
-    
-    # Aktualisiere Version mit Timestamp
-    VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3 | tr -d ' ')
-    NEW_VERSION="${VERSION}.$(date +%m%d)"
-    sed -i.tmp "s|version = .*|version = ${NEW_VERSION}|" buildozer.spec
+    # Setze Android-optimierte Konfiguration mit Python (robuster als sed)
+    python3 -c "
+import re
+import datetime
+
+# Read buildozer.spec
+with open('buildozer.spec', 'r') as f:
+    content = f.read()
+
+# Update android settings
+content = re.sub(r'^android\.accept_sdk_license = .*', 'android.accept_sdk_license = True', content, flags=re.MULTILINE)
+content = re.sub(r'^android\.skip_update = .*', 'android.skip_update = False', content, flags=re.MULTILINE)
+
+# Update version with timestamp
+version_match = re.search(r'^version = (.+)', content, re.MULTILINE)
+if version_match:
+    old_version = version_match.group(1).strip()
+    timestamp = datetime.datetime.now().strftime('%m%d')
+    new_version = f'{old_version}.{timestamp}'
+    content = re.sub(r'^version = .*', f'version = {new_version}', content, flags=re.MULTILINE)
+    print(f'📋 Version updated: {old_version} → {new_version}')
+
+# Create backup and write
+import shutil
+shutil.copy2('buildozer.spec', 'buildozer.spec.tmp')
+
+with open('buildozer.spec', 'w') as f:
+    f.write(content)
+
+print('📋 buildozer.spec updated for build')
+"
     
     print_success "Build-Vorbereitung abgeschlossen"
 }

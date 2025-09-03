@@ -130,25 +130,54 @@ jobs:
         
         echo "📋 Checking buildozer.spec configuration..."
         
-        # Prüfe wichtige Konfigurationen
-        if ! grep -q "android.api = ${{ env.ANDROID_API }}" buildozer.spec; then
-          echo "⚠️  Updating Android API to ${{ env.ANDROID_API }}"
-          sed -i "s|android\.api = .*|android.api = ${{ env.ANDROID_API }}|" buildozer.spec
-        fi
-        
-        if ! grep -q "android.minapi = ${{ env.ANDROID_MIN_API }}" buildozer.spec; then
-          echo "⚠️  Updating Android Min API to ${{ env.ANDROID_MIN_API }}"
-          sed -i "s|android\.minapi = .*|android.minapi = ${{ env.ANDROID_MIN_API }}|" buildozer.spec
-        fi
-        
-        if ! grep -q "android.ndk = ${{ env.NDK_VERSION }}" buildozer.spec; then
-          echo "⚠️  Updating NDK version to ${{ env.NDK_VERSION }}"
-          sed -i "s|android\.ndk = .*|android.ndk = ${{ env.NDK_VERSION }}|" buildozer.spec
-        fi
-        
-        # Setze Architekturen basierend auf Input
-        ARCHS="${{ github.event.inputs.architecture || 'arm64-v8a,armeabi-v7a' }}"
-        sed -i "s|android\.archs = .*|android.archs = $ARCHS|" buildozer.spec
+        # Prüfe und aktualisiere Konfigurationen mit Python (robuster als sed)
+        python3 -c "
+import re
+
+# Read buildozer.spec
+with open('buildozer.spec', 'r') as f:
+    content = f.read()
+
+# Update Android API settings
+api_version = '${{ env.ANDROID_API }}'
+minapi_version = '${{ env.ANDROID_MIN_API }}'
+ndk_version = '${{ env.NDK_VERSION }}'
+archs = '${{ github.event.inputs.architecture || \"arm64-v8a,armeabi-v7a\" }}'
+
+# Check and update each setting
+if not re.search(f'^android\.api = {api_version}$', content, re.MULTILINE):
+    print(f'⚠️  Updating Android API to {api_version}')
+    if re.search(r'^android\.api = ', content, re.MULTILINE):
+        content = re.sub(r'^android\.api = .*', f'android.api = {api_version}', content, flags=re.MULTILINE)
+    else:
+        content += f'\nandroid.api = {api_version}\n'
+
+if not re.search(f'^android\.minapi = {minapi_version}$', content, re.MULTILINE):
+    print(f'⚠️  Updating Android Min API to {minapi_version}')
+    if re.search(r'^android\.minapi = ', content, re.MULTILINE):
+        content = re.sub(r'^android\.minapi = .*', f'android.minapi = {minapi_version}', content, flags=re.MULTILINE)
+    else:
+        content += f'\nandroid.minapi = {minapi_version}\n'
+
+if not re.search(f'^android\.ndk = {ndk_version}$', content, re.MULTILINE):
+    print(f'⚠️  Updating NDK version to {ndk_version}')
+    if re.search(r'^android\.ndk = ', content, re.MULTILINE):
+        content = re.sub(r'^android\.ndk = .*', f'android.ndk = {ndk_version}', content, flags=re.MULTILINE)
+    else:
+        content += f'\nandroid.ndk = {ndk_version}\n'
+
+# Update architectures
+if re.search(r'^android\.archs = ', content, re.MULTILINE):
+    content = re.sub(r'^android\.archs = .*', f'android.archs = {archs}', content, flags=re.MULTILINE)
+else:
+    content += f'\nandroid.archs = {archs}\n'
+
+# Write back
+with open('buildozer.spec', 'w') as f:
+    f.write(content)
+
+print('✅ buildozer.spec configuration updated')
+"
         
         echo "✅ buildozer.spec validated and updated"
 
