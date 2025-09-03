@@ -124,15 +124,20 @@ jobs:
         
         # Erstelle eigenes Dockerfile für Build
         cat > Dockerfile.android << 'EOF'
-        FROM python:3.11-slim
+        FROM ubuntu:22.04
         
         # System dependencies
-        RUN apt-get update && apt-get install -y \
+        RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            python3 \
+            python3-pip \
+            python3-venv \
             build-essential \
             git \
             unzip \
             openjdk-11-jdk \
             wget \
+            libffi-dev \
+            libssl-dev \
             && rm -rf /var/lib/apt/lists/*
         
         # Environment
@@ -141,7 +146,8 @@ jobs:
         ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
         
         # Install buildozer
-        RUN pip install buildozer cython
+        RUN python3 -m pip install --upgrade pip wheel setuptools
+        RUN python3 -m pip install buildozer cython
         
         # Create working directory
         WORKDIR /app
@@ -150,7 +156,7 @@ jobs:
         COPY . .
         
         # Build command
-        CMD ["buildozer", "android", "debug"]
+        CMD ["python3", "-m", "buildozer", "android", "debug"]
         EOF
         
         # Build mit eigenem Dockerfile

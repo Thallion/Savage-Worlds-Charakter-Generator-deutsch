@@ -68,12 +68,12 @@ jobs:
           libgstreamer1.0 \
           gstreamer1.0-plugins-base \
           gstreamer1.0-plugins-good \
-          openjdk-11-jdk \
+          openjdk-17-jdk \
           unzip
 
     - name: ⚙️ Configure environment
       run: |
-        echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $GITHUB_ENV
+        echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
         echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
         echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
         echo "PATH=$PATH:$HOME/android-sdk/tools:$HOME/android-sdk/platform-tools" >> $GITHUB_ENV
