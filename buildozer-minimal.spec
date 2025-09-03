@@ -6,7 +6,7 @@ source.dir = .
 source.include_exts = py,png,jpg,jpeg,json
 source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git, .github
 version = 0.5.5.8
-requirements = python3,kivy
+requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,pillow,reportlab,android
 
 [buildozer]
 log_level = 2

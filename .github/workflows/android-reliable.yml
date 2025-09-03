@@ -1,0 +1,90 @@
+name: Build Android APK - Reliable
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        description: 'Build mode'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+        - debug
+        - release
+
+jobs:
+  build-reliable:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📱 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 🔧 Install essential dependencies only
+      run: |
+        sudo apt-get update
+        
+        # Install essential packages first
+        sudo apt-get install -f
+        sudo apt-get install -y \
+          libunwind-dev \
+          build-essential \
+          git \
+          unzip \
+          openjdk-11-jdk \
+          python3-pip \
+          python3-venv
+
+    - name: 🔨 Build with Buildozer Action (Most Reliable)
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
+      with:
+        command: buildozer android ${{ github.event.inputs.build_mode || 'debug' }}
+        repository_root: .
+        workdir: .
+        buildozer_version: 1.5.0
+
+    - name: ✅ Upload APK
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: savage-worlds-reliable-${{ github.event.inputs.build_mode || 'debug' }}-${{ github.run_number }}
+        path: ${{ steps.buildozer.outputs.filename }}
+        retention-days: 30
+
+    - name: 📋 Upload build logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: reliable-build-logs-${{ github.run_number }}
+        path: |
+          .buildozer/logs/
+          buildozer.log
+        retention-days: 7
+        if-no-files-found: ignore
+
+    - name: 📊 Build Summary
+      if: always()
+      run: |
+        echo "## 🔨 Reliable Android Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "${{ steps.buildozer.outputs.filename }}" ]; then
+          APK_SIZE=$(du -h "${{ steps.buildozer.outputs.filename }}" | cut -f1)
+          APK_NAME=$(basename "${{ steps.buildozer.outputs.filename }}")
+          echo "✅ **Build Status:** Success" >> $GITHUB_STEP_SUMMARY
+          echo "📱 **APK:** $APK_NAME ($APK_SIZE)" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ **Build Status:** Failed" >> $GITHUB_STEP_SUMMARY
+          echo "📱 **APK Created:** No" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "🔧 **Build Method:** ArtemSBulgakov/buildozer-action@v1" >> $GITHUB_STEP_SUMMARY
+        echo "📋 **Mode:** ${{ github.event.inputs.build_mode || 'debug' }}" >> $GITHUB_STEP_SUMMARY
+        echo "🏗️ **Buildozer:** 1.5.0" >> $GITHUB_STEP_SUMMARY

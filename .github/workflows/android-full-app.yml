@@ -52,9 +52,18 @@ jobs:
     - name: 🔧 Install system dependencies
       run: |
         sudo apt-get update
+        # Fix broken packages and install base dependencies first
+        sudo apt-get install -f
         sudo apt-get install -y \
+          libunwind-dev \
           build-essential \
           git \
+          unzip \
+          openjdk-17-jdk \
+          dbus
+        
+        # Install multimedia dependencies  
+        sudo apt-get install -y \
           ffmpeg \
           libsdl2-dev \
           libsdl2-image-dev \
@@ -65,18 +74,27 @@ jobs:
           libavformat-dev \
           libavcodec-dev \
           zlib1g-dev \
-          libgstreamer1.0 \
+          libgstreamer1.0-dev \
           gstreamer1.0-plugins-base \
-          gstreamer1.0-plugins-good \
-          openjdk-17-jdk \
-          unzip
+          gstreamer1.0-plugins-good
 
-    - name: ⚙️ Configure environment
+    - name: ⚙️ Configure environment and setup Android SDK
       run: |
         echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
         echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
         echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
-        echo "PATH=$PATH:$HOME/android-sdk/tools:$HOME/android-sdk/platform-tools" >> $GITHUB_ENV
+        echo "PATH=$PATH:$HOME/android-sdk/cmdline-tools/bin:$HOME/android-sdk/platform-tools" >> $GITHUB_ENV
+        
+        # Download and setup Android SDK command line tools
+        mkdir -p $HOME/android-sdk
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O cmdline-tools.zip
+        unzip -q cmdline-tools.zip -d $HOME/android-sdk/
+        mkdir -p $HOME/android-sdk/cmdline-tools/latest
+        mv $HOME/android-sdk/cmdline-tools/* $HOME/android-sdk/cmdline-tools/latest/ 2>/dev/null || true
+        
+        # Fix permissions for git
+        sudo chown -R $USER:$USER .
+        sudo chown -R $USER:$USER $HOME/android-sdk
 
     - name: 📂 Cache Android SDK and buildozer
       uses: actions/cache@v3
@@ -152,15 +170,30 @@ jobs:
         echo "🐍 Python files:"
         find . -name "*.py" -type f | grep -v __pycache__ | head -10
 
-    - name: 🛠️ Initialize buildozer
+    - name: 🛠️ Initialize buildozer and setup Android SDK
       run: |
-        # Erstelle .buildozer Verzeichnis falls nicht vorhanden
+        # Ensure we're not running as root
+        if [ "$EUID" -eq 0 ]; then
+          echo "⚠️  Running as root - this may cause issues"
+        fi
+        
+        # Create buildozer directories with proper ownership
         mkdir -p ~/.buildozer
+        sudo chown -R $USER:$USER ~/.buildozer
         
-        # Initialisiere buildozer
-        buildozer init || echo "Buildozer already initialized"
+        # Initialize buildozer (only if needed)
+        if [ ! -f buildozer.spec ]; then
+          buildozer init
+        else
+          echo "✅ buildozer.spec already exists"
+        fi
         
-        # Akzeptiere Android SDK Lizenzen
+        # Clean any previous builds
+        buildozer android clean || echo "Clean completed"
+        
+        # Accept Android SDK licenses and update
+        export ANDROID_HOME=$HOME/android-sdk
+        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
         yes | buildozer android update || echo "SDK update completed with warnings"
 
     - name: 🚀 Build APK with Docker fallback
@@ -168,18 +201,29 @@ jobs:
         BUILD_MODE="${{ github.event.inputs.build_mode || 'debug' }}"
         echo "Building in $BUILD_MODE mode..."
         
-        # Primärer Build-Versuch
-        if buildozer android $BUILD_MODE --verbose; then
+        # Ensure environment is set up
+        export ANDROID_HOME=$HOME/android-sdk
+        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+        
+        # Primärer Build-Versuch mit besserer Konfiguration
+        if timeout 1800 buildozer android $BUILD_MODE --verbose; then
           echo "✅ Direct buildozer build successful!"
         else
           echo "⚠️  Direct build failed, trying Docker approach..."
           
-          # Docker-basierter Build als Fallback
+          # Docker-basierter Build als Fallback mit non-root user
           docker run --rm \
-            -v "$(pwd)":/app \
-            -w /app \
+            -v "$(pwd)":/home/user/hostcwd \
+            -v ~/.buildozer:/home/user/.buildozer \
+            -w /home/user/hostcwd \
+            -u $(id -u):$(id -g) \
+            -e HOME=/home/user \
             kivy/buildozer:latest \
-            buildozer android $BUILD_MODE --verbose || {
+            bash -c "
+              sudo chown -R user:user /home/user/hostcwd /home/user/.buildozer 2>/dev/null || true
+              buildozer android clean
+              buildozer android $BUILD_MODE --verbose
+            " || {
               echo "❌ Both build methods failed"
               exit 1
             }
