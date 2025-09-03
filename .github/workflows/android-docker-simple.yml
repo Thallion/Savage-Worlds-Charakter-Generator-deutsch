@@ -1,0 +1,87 @@
+name: Build Android APK - Docker Simple
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        description: 'Build mode'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+        - debug
+        - release
+
+jobs:
+  build-docker-simple:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📱 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🐋 Build APK with Official Kivy Docker
+      run: |
+        echo "🚀 Starting simple Docker build..."
+        
+        # Verwende das offizielle Kivy Buildozer Docker Image
+        docker run --rm \
+          --volume "$(pwd)":/home/user/hostcwd \
+          --volume ~/.buildozer:/home/user/.buildozer \
+          --workdir /home/user/hostcwd \
+          kivy/buildozer:latest \
+          bash -c "
+            set -e
+            echo '🔧 Container setup...'
+            
+            # Fix permissions
+            sudo chown -R user:user /home/user/hostcwd || true
+            sudo chown -R user:user /home/user/.buildozer || true
+            
+            # Clean previous builds (important for KivyMD master.zip)
+            echo '🧹 Cleaning previous builds...'
+            buildozer android clean || echo 'Clean completed'
+            
+            # Update Android SDK
+            echo '📱 Updating Android SDK...'
+            yes | buildozer android update 2>/dev/null || echo 'SDK update completed'
+            
+            # Build APK
+            echo '🔨 Building APK...'
+            buildozer android ${{ github.event.inputs.build_mode || 'debug' }} --verbose
+            
+            # Show results
+            echo '📋 Build completed!'
+            ls -la bin/ || echo 'No bin directory found'
+          "
+
+    - name: ✅ Upload APK
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: savage-worlds-docker-simple-${{ github.event.inputs.build_mode || 'debug' }}-${{ github.run_number }}
+        path: bin/*.apk
+        retention-days: 30
+        if-no-files-found: warn
+
+    - name: 📋 Build Summary
+      if: always()
+      run: |
+        echo "## 🐋 Simple Docker Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if ls bin/*.apk >/dev/null 2>&1; then
+          echo "✅ **Build Status:** Success" >> $GITHUB_STEP_SUMMARY
+          for apk in bin/*.apk; do
+            APK_SIZE=$(du -h "$apk" | cut -f1)
+            APK_NAME=$(basename "$apk")
+            echo "📱 **APK:** $APK_NAME ($APK_SIZE)" >> $GITHUB_STEP_SUMMARY
+          done
+        else
+          echo "❌ **Build Status:** Failed" >> $GITHUB_STEP_SUMMARY
+          echo "📱 **APK Created:** No" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "🐋 **Docker Build:** kivy/buildozer:latest" >> $GITHUB_STEP_SUMMARY
+        echo "🔧 **Mode:** ${{ github.event.inputs.build_mode || 'debug' }}" >> $GITHUB_STEP_SUMMARY

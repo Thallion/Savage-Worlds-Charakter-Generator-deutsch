@@ -61,21 +61,20 @@ jobs:
 
     - name: 📋 Update buildozer.spec for Docker build
       run: |
-        # Optimierungen für Docker-Build
-        sed -i 's/android.accept_sdk_license = .*/android.accept_sdk_license = True/' buildozer.spec
-        sed -i 's/android.skip_update = .*/android.skip_update = False/' buildozer.spec
+        # Optimierungen für Docker-Build - Verwende robuste sed-Syntax
+        sed -i 's|android\.accept_sdk_license = .*|android.accept_sdk_license = True|' buildozer.spec
+        sed -i 's|android\.skip_update = .*|android.skip_update = False|' buildozer.spec
         
-        # Stelle sicher, dass KivyMD in den Requirements ist
-        if ! grep -q "kivymd" buildozer.spec; then
-          sed -i 's/requirements = \(.*\)/requirements = kivymd,\1/' buildozer.spec
-        fi
+        # KivyMD ist bereits als GitHub-URL in requirements enthalten
+        echo "📋 KivyMD wird als GitHub master.zip geladen"
         
         # Aktualisiere Version mit Timestamp für eindeutige Builds
-        VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3)
+        VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3 | tr -d ' ')
         NEW_VERSION="${VERSION}.$(date +%m%d%H%M)"
-        sed -i "s|version = .*|version = $NEW_VERSION|" buildozer.spec
+        sed -i "s|version = .*|version = ${NEW_VERSION}|" buildozer.spec
         
         echo "📋 buildozer.spec updated for Docker build"
+        echo "📋 New version: ${NEW_VERSION}"
 
     - name: 🐋 Build APK with Official Kivy/Buildozer Docker
       run: |
@@ -83,9 +82,9 @@ jobs:
         
         # Verwende den offiziellen Kivy Buildozer Docker Container
         docker run --rm \
-          --volume "$(pwd)":/home/user/app \
+          --volume "$(pwd)":/home/user/hostcwd \
           --volume ~/.buildozer:/home/user/.buildozer \
-          --workdir /home/user/app \
+          --workdir /home/user/hostcwd \
           --env USER=user \
           --env HOME=/home/user \
           kivy/buildozer:latest \
@@ -93,12 +92,13 @@ jobs:
             set -e
             echo '🔧 Container setup...'
             
-            # Benutzer-Setup
-            sudo chown -R user:user /home/user/app
+            # Benutzer-Setup (korrekte Pfade für offizielles Docker Image)
+            sudo chown -R user:user /home/user/hostcwd || true
             sudo chown -R user:user /home/user/.buildozer || true
             
-            # Buildozer initialisieren
-            buildozer init || echo 'Already initialized'
+            # Buildozer Clean für frischen Build (wichtig bei KivyMD master.zip)
+            echo '🧹 Cleaning previous builds...'
+            buildozer android clean || echo 'Clean completed'
             
             # Android SDK aktualisieren
             echo '📱 Updating Android SDK...'
@@ -107,10 +107,6 @@ jobs:
             # APK Build
             echo '🔨 Building APK...'
             buildozer android ${{ env.BUILD_MODE }} --verbose
-            
-            # Ergebnisse kopieren
-            echo '📦 Copying results...'
-            cp -r bin/* /home/user/app/build-output/ 2>/dev/null || echo 'No bin files to copy'
             
             # Build-Info
             echo '📋 Build completed!'

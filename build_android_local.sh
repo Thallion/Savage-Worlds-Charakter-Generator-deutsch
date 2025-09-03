@@ -77,13 +77,13 @@ prepare_build() {
     print_step "Aktualisiere buildozer.spec..."
     
     # Setze Android-optimierte Konfiguration
-    sed -i.tmp "s|android.accept_sdk_license = .*|android.accept_sdk_license = True|" buildozer.spec
-    sed -i.tmp "s|android.skip_update = .*|android.skip_update = False|" buildozer.spec
+    sed -i.tmp "s|android\.accept_sdk_license = .*|android.accept_sdk_license = True|" buildozer.spec
+    sed -i.tmp "s|android\.skip_update = .*|android.skip_update = False|" buildozer.spec
     
     # Aktualisiere Version mit Timestamp
-    VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3)
+    VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3 | tr -d ' ')
     NEW_VERSION="${VERSION}.$(date +%m%d)"
-    sed -i.tmp "s|version = .*|version = $NEW_VERSION|" buildozer.spec
+    sed -i.tmp "s|version = .*|version = ${NEW_VERSION}|" buildozer.spec
     
     print_success "Build-Vorbereitung abgeschlossen"
 }
@@ -99,9 +99,9 @@ build_with_official_docker() {
     print_step "Starte Android Build..."
     
     if docker run --rm \
-        --volume "$(pwd)":/home/user/app \
+        --volume "$(pwd)":/home/user/hostcwd \
         --volume ~/.buildozer:/home/user/.buildozer \
-        --workdir /home/user/app \
+        --workdir /home/user/hostcwd \
         --env USER=user \
         --env HOME=/home/user \
         kivy/buildozer:latest \
@@ -109,12 +109,13 @@ build_with_official_docker() {
             set -e
             echo '${DOCKER_EMOJI} Container Setup...'
             
-            # Berechtigungen korrigieren
-            sudo chown -R user:user /home/user/app
+            # Berechtigungen korrigieren (korrekte Pfade für offizielles Docker Image)
+            sudo chown -R user:user /home/user/hostcwd || true
             sudo chown -R user:user /home/user/.buildozer 2>/dev/null || true
             
-            # Buildozer initialisieren
-            buildozer init 2>/dev/null || echo 'Buildozer bereits initialisiert'
+            # Buildozer Clean für frischen Build (wichtig bei KivyMD master.zip)
+            echo '🧹 Bereinige vorherige Builds...'
+            buildozer android clean || echo 'Bereinigung abgeschlossen'
             
             # SDK aktualisieren
             echo '${ANDROID_EMOJI} Aktualisiere Android SDK...'

@@ -115,22 +115,22 @@ jobs:
         # Prüfe wichtige Konfigurationen
         if ! grep -q "android.api = ${{ env.ANDROID_API }}" buildozer.spec; then
           echo "⚠️  Updating Android API to ${{ env.ANDROID_API }}"
-          sed -i "s|android.api = .*|android.api = ${{ env.ANDROID_API }}|" buildozer.spec
+          sed -i "s|android\.api = .*|android.api = ${{ env.ANDROID_API }}|" buildozer.spec
         fi
         
         if ! grep -q "android.minapi = ${{ env.ANDROID_MIN_API }}" buildozer.spec; then
           echo "⚠️  Updating Android Min API to ${{ env.ANDROID_MIN_API }}"
-          sed -i "s|android.minapi = .*|android.minapi = ${{ env.ANDROID_MIN_API }}|" buildozer.spec
+          sed -i "s|android\.minapi = .*|android.minapi = ${{ env.ANDROID_MIN_API }}|" buildozer.spec
         fi
         
         if ! grep -q "android.ndk = ${{ env.NDK_VERSION }}" buildozer.spec; then
           echo "⚠️  Updating NDK version to ${{ env.NDK_VERSION }}"
-          sed -i "s|android.ndk = .*|android.ndk = ${{ env.NDK_VERSION }}|" buildozer.spec
+          sed -i "s|android\.ndk = .*|android.ndk = ${{ env.NDK_VERSION }}|" buildozer.spec
         fi
         
         # Setze Architekturen basierend auf Input
         ARCHS="${{ github.event.inputs.architecture || 'arm64-v8a,armeabi-v7a' }}"
-        sed -i "s|android.archs = .*|android.archs = $ARCHS|" buildozer.spec
+        sed -i "s|android\.archs = .*|android.archs = $ARCHS|" buildozer.spec
         
         echo "✅ buildozer.spec validated and updated"
 
