@@ -77,13 +77,13 @@ prepare_build() {
     print_step "Aktualisiere buildozer.spec..."
     
     # Setze Android-optimierte Konfiguration
-    sed -i.tmp "s/android.accept_sdk_license = .*/android.accept_sdk_license = True/" buildozer.spec
-    sed -i.tmp "s/android.skip_update = .*/android.skip_update = False/" buildozer.spec
+    sed -i.tmp "s|android.accept_sdk_license = .*|android.accept_sdk_license = True|" buildozer.spec
+    sed -i.tmp "s|android.skip_update = .*|android.skip_update = False|" buildozer.spec
     
     # Aktualisiere Version mit Timestamp
     VERSION=$(grep "version = " buildozer.spec | cut -d' ' -f3)
     NEW_VERSION="${VERSION}.$(date +%m%d)"
-    sed -i.tmp "s/version = .*/version = $NEW_VERSION/" buildozer.spec
+    sed -i.tmp "s|version = .*|version = $NEW_VERSION|" buildozer.spec
     
     print_success "Build-Vorbereitung abgeschlossen"
 }
