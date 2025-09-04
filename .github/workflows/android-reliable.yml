@@ -1,6 +1,13 @@
 name: Build Android APK - Reliable
 
 on:
+  push:
+    branches: [ dev_unstable ]
+    paths:
+      - 'buildozer.spec'
+      - 'buildozer-minimal.spec'
+      - '**.py'
+      - '.github/workflows/android-reliable.yml'
   workflow_dispatch:
     inputs:
       build_mode:
