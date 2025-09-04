@@ -1,0 +1,621 @@
+# Check configuration tokens
+# Ensure build layout
+# Check configuration tokens
+# Preparing build
+# Check requirements for android
+# Search for Git (git)
+#  -> found at /usr/bin/git
+# Search for Cython (cython)
+#  -> found at /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin/cython
+# Search for Java compiler (javac)
+#  -> found at /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+# Search for Java keytool (keytool)
+#  -> found at /usr/lib/jvm/java-17-openjdk-amd64/bin/keytool
+# Install platform
+# Run ['git', 'config', '--get', 'remote.origin.url']
+# Cwd /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android
+https://github.com/kivy/python-for-android.git
+# Run ['git', 'branch', '-vv']
+# Cwd /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android
+* master 957a3e5f [origin/master] Merge pull request #2959 from kivy/release-2024.01.21
+# Run ['/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin/python3.12', '-m', 'pip', 'install', '-q', 'appdirs', 'colorama>=0.3.3', 'jinja2', 'sh>=1.10, <2.0; sys_platform!="win32"', 'build', 'toml', 'packaging', 'setuptools']
+# Cwd None
+# Apache ANT found at /home/jean/.buildozer/android/platform/apache-ant-1.9.4
+# Android SDK found at /home/jean/Android/Sdk
+# Android NDK found at /home/jean/Android/Sdk/ndk/25.2.9519653
+# Recommended android's NDK version by p4a is: 25b
+# Run ['/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin/python3.12', '-m', 'pythonforandroid.toolchain', 'aab', '-h', '--color=always', '--storage-dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a', '--ndk-api=21', '--ignore-setup-py', '--debug']
+# Cwd /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android
+[WARNING]: prerequisites.py is experimental and does not support all prerequisites yet.
+[WARNING]: Please report any issues to the python-for-android issue tracker.
+[WARNING]: prerequisites.py is experimental and does not support all prerequisites yet.
+[WARNING]: Please report any issues to the python-for-android issue tracker.
+usage: toolchain.py aab [-h] [--debug] [--color {always,never,auto}]
+                        [--sdk-dir SDK_DIR] [--ndk-dir NDK_DIR]
+                        [--android-api ANDROID_API]
+                        [--ndk-version NDK_VERSION] [--ndk-api NDK_API]
+                        [--symlink-bootstrap-files]
+                        [--storage-dir STORAGE_DIR] [--arch ARCH]
+                        [--dist-name DIST_NAME] [--requirements REQUIREMENTS]
+                        [--recipe-blacklist RECIPE_BLACKLIST]
+                        [--blacklist-requirements BLACKLIST_REQUIREMENTS]
+                        [--bootstrap BOOTSTRAP] [--hook HOOK] [--force-build]
+                        [--no-force-build] [--require-perfect-match]
+                        [--no-require-perfect-match] [--allow-replace-dist]
+                        [--no-allow-replace-dist]
+                        [--local-recipes LOCAL_RECIPES]
+                        [--activity-class-name ACTIVITY_CLASS_NAME]
+                        [--service-class-name SERVICE_CLASS_NAME]
+                        [--java-build-tool {auto,ant,gradle}] [--copy-libs]
+                        [--no-copy-libs] [--add-asset ASSETS]
+                        [--add-resource RESOURCES] [--private PRIVATE]
+                        [--use-setup-py] [--ignore-setup-py] [--release]
+                        [--with-debug-symbols] [--keystore KEYSTORE]
+                        [--signkey SIGNKEY] [--keystorepw KEYSTOREPW]
+                        [--signkeypw SIGNKEYPW]
+
+options:
+  -h, --help            show this help message and exit
+  --debug               Display debug output and all build info
+  --color {always,never,auto}
+                        Enable or disable color output (default enabled on
+                        tty)
+  --sdk-dir SDK_DIR, --sdk_dir SDK_DIR
+                        The filepath where the Android SDK is installed
+  --ndk-dir NDK_DIR, --ndk_dir NDK_DIR
+                        The filepath where the Android NDK is installed
+  --android-api ANDROID_API, --android_api ANDROID_API
+                        The Android API level to build against defaults to 33
+                        if not specified.
+  --ndk-version NDK_VERSION, --ndk_version NDK_VERSION
+                        DEPRECATED: the NDK version is now found automatically
+                        or not at all.
+  --ndk-api NDK_API     The Android API level to compile against. This should
+                        be your *minimal supported* API, not normally the same
+                        as your --android-api. Defaults to min(ANDROID_API,
+                        21) if not specified.
+  --symlink-bootstrap-files, --ssymlink_bootstrap_files
+                        If True, symlinks the bootstrap files creation. This
+                        is useful for development only, it could also cause
+                        weird problems.
+  --storage-dir STORAGE_DIR
+                        Primary storage directory for downloads and builds
+                        (default: /home/jean/.local/share/python-for-android)
+  --arch ARCH           The archs to build for.
+  --dist-name DIST_NAME, --dist_name DIST_NAME
+                        The name of the distribution to use or create
+  --requirements REQUIREMENTS
+                        Dependencies of your app, should be recipe names or
+                        Python modules. NOT NECESSARY if you are using Python
+                        3 with --use-setup-py
+  --recipe-blacklist RECIPE_BLACKLIST
+                        Blacklist an internal recipe from use. Allows
+                        disabling Python 3 core modules to save size
+  --blacklist-requirements BLACKLIST_REQUIREMENTS
+                        Blacklist an internal recipe from use. Allows
+                        disabling Python 3 core modules to save size
+  --bootstrap BOOTSTRAP
+                        The bootstrap to build with. Leave unset to choose
+                        automatically.
+  --hook HOOK           Filename to a module that contains python-for-android
+                        hooks
+  --local-recipes LOCAL_RECIPES, --local_recipes LOCAL_RECIPES
+                        Directory to look for local recipes
+  --activity-class-name ACTIVITY_CLASS_NAME
+                        The full java class name of the main activity
+  --service-class-name SERVICE_CLASS_NAME
+                        Full java package name of the PythonService class
+  --java-build-tool {auto,ant,gradle}
+                        The java build tool to use when packaging the APK,
+                        defaults to automatically selecting an appropriate
+                        tool.
+  --add-asset ASSETS    Put this in the assets folder in the apk.
+  --add-resource RESOURCES
+                        Put this in the res folder in the apk.
+  --private PRIVATE     the directory with the app source code files
+                        (containing your main.py entrypoint)
+  --use-setup-py        Process the setup.py of a project if present.
+                        (Experimental!
+  --ignore-setup-py     Don't run the setup.py of a project if present. This
+                        may be required if the setup.py is not designed to
+                        work inside p4a (e.g. by installing dependencies that
+                        won't work or aren't desired on Android
+  --release             Build your app as a non-debug release build. (Disables
+                        gdb debugging among other things)
+  --with-debug-symbols  Will keep debug symbols from `.so` files.
+  --keystore KEYSTORE   Keystore for JAR signing key, will use jarsigner
+                        default if not specified (release build only)
+  --signkey SIGNKEY     Key alias to sign PARSER_APK. with (release build
+                        only)
+  --keystorepw KEYSTOREPW
+                        Password for keystore
+  --signkeypw SIGNKEYPW
+                        Password for key alias
+
+  Whether to force compilation of a new distribution
+
+  --force-build
+  --no-force-build      (this is the default)
+  --require-perfect-match
+  --no-require-perfect-match
+                        (this is the default)
+  --allow-replace-dist  (this is the default)
+  --no-allow-replace-dist
+  --copy-libs
+  --no-copy-libs        (this is the default)
+# Check application requirements
+# Compile platform
+# Run ['/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin/python3.12', '-m', 'pythonforandroid.toolchain', 'create', '--dist_name=savageworlds', '--bootstrap=sdl2', '--requirements=python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow,reportlab,android', '--arch=arm64-v8a', '--copy-libs', '--color=always', '--storage-dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a', '--ndk-api=21', '--ignore-setup-py', '--debug']
+# Cwd /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android
+[WARNING]: prerequisites.py is experimental and does not support all prerequisites yet.
+[WARNING]: Please report any issues to the python-for-android issue tracker.
+[WARNING]: prerequisites.py is experimental and does not support all prerequisites yet.
+[WARNING]: Please report any issues to the python-for-android issue tracker.
+[1m[INFO][0m:    Recipe python3: version "3.11.13" requested
+[1m[INFO][0m:    Recipe kivy: version "2.3.0" requested
+[1m[INFO][0m:    Will compile for the following archs: arm64-v8a
+[1m[INFO][0m:    Found Android API target in $ANDROIDAPI: 33
+[1m[INFO][0m:    Available Android APIs are (33, 35)
+[1m[INFO][0m:    Requested API target 33 is available, continuing.
+[1m[INFO][0m:    Found NDK dir in $ANDROIDNDK: /home/jean/Android/Sdk/ndk/25.2.9519653
+[1m[INFO][0m:    Could not determine NDK version, no source.properties in the NDK dir.
+[1m[31m[WARNING][39m[0m: Unable to read the NDK version from the given directory /home/jean/Android/Sdk/ndk/25.2.9519653.
+[1m[31m[WARNING][39m[0m: Make sure your NDK version is greater than 25. If you get build errors, download the recommended NDK 25b from https://developer.android.com/ndk/downloads/.
+[1m[INFO][0m:    Getting NDK API version (i.e. minimum supported API) from user argument
+[1m[INFO][0m:    ccache is missing, the build will not be optimized in the future.
+[1m[90m[DEBUG][39m[0m:   All possible dists: []
+[1m[90m[DEBUG][39m[0m:   Dist matching name and arch: []
+[1m[90m[DEBUG][39m[0m:   Dist matching ndk_api and recipe: []
+[1m[INFO][0m:    No existing dists meet the given requirements!
+[1m[90m[DEBUG][39m[0m:   Remove directory and subdirectory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/dists/savageworlds
+[1m[INFO][0m:    [1m[94mNo dist exists that meets your requirements, so one will be built.[0m
+[1m[INFO][0m:    Found a single valid recipe set: ['asyncgui', 'asynckivy', 'exceptiongroup', 'freetype', 'hostpython3', 'https://github.com/kivymd/kivymd/archive/master.zip', 'jpeg', 'libffi', 'materialyoucolor', 'openssl', 'png', 'sdl2_image', 'sdl2_mixer', 'sdl2_ttf', 'sqlite3', 'python3', 'sdl2', 'reportlab', 'setuptools', 'pillow', 'six', 'pyjnius', 'android', 'kivy']
+[1m[INFO][0m:    The selected bootstrap is sdl2
+[1m[INFO][0m:    [1m[32m# Creating dist with sdl2 bootstrap[0m[39m
+[1m[INFO][0m:    [1m[94mDist will have name savageworlds and requirements (python3, kivy, https://github.com/kivymd/KivyMD/archive/master.zip, materialyoucolor, exceptiongroup, asyncgui, asynckivy, pillow, reportlab, android)[0m
+[1m[INFO][0m:    Dist contains the following requirements as recipes: ['freetype', 'hostpython3', 'jpeg', 'libffi', 'openssl', 'png', 'sdl2_image', 'sdl2_mixer', 'sdl2_ttf', 'sqlite3', 'python3', 'sdl2', 'reportlab', 'setuptools', 'pillow', 'six', 'pyjnius', 'android', 'kivy']
+[1m[INFO][0m:    Dist will also contain modules (chardet, idna, https://github.com/kivymd/kivymd/archive/master.zip, exceptiongroup, requests, asyncgui, certifi, asynckivy, urllib3, materialyoucolor) installed from pip
+[1m[INFO][0m:    Dist will be build in mode debug
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2[39m
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[90m[DEBUG][39m[0m:   Create directory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/dists/savageworlds
+[1m[INFO][0m:    [1m[94mRecipe build order is ['freetype', 'hostpython3', 'jpeg', 'libffi', 'openssl', 'png', 'sdl2_image', 'sdl2_mixer', 'sdl2_ttf', 'sqlite3', 'python3', 'sdl2', 'reportlab', 'setuptools', 'pillow', 'six', 'pyjnius', 'android', 'kivy'][0m
+[1m[INFO][0m:    [1m[94mThe requirements (asyncgui, asynckivy, certifi, chardet, exceptiongroup, https://github.com/kivymd/kivymd/archive/master.zip, idna, materialyoucolor, requests, urllib3) were not found as recipes, they will be installed with pip.[0m
+[1m[INFO][0m:    [1m[32m# Downloading recipes [0m[39m
+[1m[INFO][0m:    [1m[32mDownloading freetype[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/freetype[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://download.savannah.gnu.org/releases/freetype/freetype-2.10.1.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	freetype-2.10.1.tar.gz
+[1m[INFO][0m:    freetype download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading hostpython3[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/hostpython3[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz[0m
+[1m[90m[DEBUG][39m[0m:   	Python-3.11.5.tgz
+[1m[INFO][0m:    hostpython3 download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading jpeg[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/jpeg[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.1.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	2.0.1.tar.gz
+[1m[INFO][0m:    jpeg download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading libffi[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/libffi[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libffi/libffi/archive/v3.4.2.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	v3.4.2.tar.gz
+[1m[INFO][0m:    libffi download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading openssl[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/openssl[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.openssl.org/source/openssl-1.1.1w.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	openssl-1.1.1w.tar.gz
+[1m[INFO][0m:    openssl download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading png[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/png[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/glennrp/libpng/archive/v1.6.37.zip[0m
+[1m[90m[DEBUG][39m[0m:   	v1.6.37.zip
+[1m[INFO][0m:    png download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading sdl2_image[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/sdl2_image[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.0/SDL2_image-2.8.0.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2_image-2.8.0.tar.gz
+[1m[INFO][0m:    sdl2_image download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading sdl2_mixer[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/sdl2_mixer[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.6.3/SDL2_mixer-2.6.3.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2_mixer-2.6.3.tar.gz
+[1m[INFO][0m:    sdl2_mixer download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading sdl2_ttf[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/sdl2_ttf[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.20.2/SDL2_ttf-2.20.2.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2_ttf-2.20.2.tar.gz
+[1m[INFO][0m:    sdl2_ttf download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading sqlite3[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/sqlite3[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.sqlite.org/2021/sqlite-amalgamation-3350500.zip[0m
+[1m[90m[DEBUG][39m[0m:   	sqlite-amalgamation-3350500.zip
+[1m[INFO][0m:    sqlite3 download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading python3[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/python3[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.python.org/ftp/python/3.11.13/Python-3.11.13.tgz[0m
+[1m[90m[DEBUG][39m[0m:   	Python-3.11.13.tgz
+[1m[INFO][0m:    python3 download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading sdl2[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/sdl2[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL/releases/download/release-2.28.5/SDL2-2.28.5.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2-2.28.5.tar.gz
+[1m[INFO][0m:    sdl2 download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading reportlab[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/reportlab[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://hg.reportlab.com/hg-public/reportlab/archive/fe660f227cac.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	fe660f227cac.tar.gz
+[1m[INFO][0m:    reportlab download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading setuptools[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/setuptools[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://pypi.python.org/packages/source/s/setuptools/setuptools-51.3.3.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	setuptools-51.3.3.tar.gz
+[1m[INFO][0m:    setuptools download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading Pillow[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/Pillow[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/python-pillow/Pillow/archive/8.4.0.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	8.4.0.tar.gz
+[1m[INFO][0m:    Pillow download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading six[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/six[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://pypi.python.org/packages/source/s/six/six-1.15.0.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	six-1.15.0.tar.gz
+[1m[INFO][0m:    six download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading pyjnius[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/pyjnius[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/kivy/pyjnius/archive/1.6.1.zip[0m
+[1m[90m[DEBUG][39m[0m:   	1.6.1.zip
+[1m[INFO][0m:    pyjnius download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mDownloading android[0m[39m
+[1m[INFO][0m:    Skipping android download as no URL is set
+[1m[INFO][0m:    [1m[32mDownloading kivy[0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/packages/kivy[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/kivy/kivy/archive/2.3.0.zip[0m
+[1m[90m[DEBUG][39m[0m:   	2.3.0.zip
+[1m[INFO][0m:    kivy download already cached, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32m# Building all recipes for arch arm64-v8a[0m[39m
+[1m[INFO][0m:    [1m[32m# Unpacking recipes[0m[39m
+[1m[INFO][0m:    [1m[32mUnpacking freetype for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://download.savannah.gnu.org/releases/freetype/freetype-2.10.1.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	freetype-2.10.1.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/freetype/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    freetype is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking hostpython3 for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz[0m
+[1m[90m[DEBUG][39m[0m:   	Python-3.11.5.tgz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/hostpython3/desktop[39m
+[1m[INFO][0m:    hostpython3 is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking jpeg for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.1.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	2.0.1.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/jpeg/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    jpeg is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking libffi for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libffi/libffi/archive/v3.4.2.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	v3.4.2.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/libffi/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    libffi is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking openssl for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.openssl.org/source/openssl-1.1.1w.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	openssl-1.1.1w.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/openssl/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    openssl is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking png for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/glennrp/libpng/archive/v1.6.37.zip[0m
+[1m[90m[DEBUG][39m[0m:   	v1.6.37.zip
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/png/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    png is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking sdl2_image for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.0/SDL2_image-2.8.0.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2_image-2.8.0.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2/jni[39m
+[1m[INFO][0m:    sdl2_image is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking sdl2_mixer for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.6.3/SDL2_mixer-2.6.3.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2_mixer-2.6.3.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2/jni[39m
+[1m[INFO][0m:    sdl2_mixer is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking sdl2_ttf for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.20.2/SDL2_ttf-2.20.2.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2_ttf-2.20.2.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2/jni[39m
+[1m[INFO][0m:    sdl2_ttf is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking sqlite3 for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.sqlite.org/2021/sqlite-amalgamation-3350500.zip[0m
+[1m[90m[DEBUG][39m[0m:   	sqlite-amalgamation-3350500.zip
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/sqlite3/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    sqlite3 is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking python3 for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://www.python.org/ftp/python/3.11.13/Python-3.11.13.tgz[0m
+[1m[90m[DEBUG][39m[0m:   	Python-3.11.13.tgz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    python3 is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking sdl2 for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/libsdl-org/SDL/releases/download/release-2.28.5/SDL2-2.28.5.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	SDL2-2.28.5.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2/jni[39m
+[1m[INFO][0m:    sdl2 is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking reportlab for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://hg.reportlab.com/hg-public/reportlab/archive/fe660f227cac.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	fe660f227cac.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/reportlab/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    reportlab is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking setuptools for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://pypi.python.org/packages/source/s/setuptools/setuptools-51.3.3.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	setuptools-51.3.3.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/setuptools/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    setuptools is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking Pillow for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/python-pillow/Pillow/archive/8.4.0.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	8.4.0.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/Pillow/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    Pillow is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking six for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://pypi.python.org/packages/source/s/six/six-1.15.0.tar.gz[0m
+[1m[90m[DEBUG][39m[0m:   	six-1.15.0.tar.gz
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/six/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    six is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mUnpacking pyjnius for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/kivy/pyjnius/archive/1.6.1.zip[0m
+[1m[90m[DEBUG][39m[0m:   	1.6.1.zip
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/pyjnius-sdl2/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    pyjnius is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[90m[DEBUG][39m[0m:   Remove directory and subdirectory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/android-sdl2/arm64-v8a__ndk_target_21/android
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running cp -a /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/android/src /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/android-sdl2/arm64-v8a__ndk_target_21/android[0m
+[1m[INFO][0m:    [1m[32mUnpacking kivy for arm64-v8a[0m[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running basename https://github.com/kivy/kivy/archive/2.3.0.zip[0m
+[1m[90m[DEBUG][39m[0m:   	2.3.0.zip
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/kivy/arm64-v8a__ndk_target_21[39m
+[1m[INFO][0m:    kivy is already unpacked, skipping
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32m# Prebuilding recipes[0m[39m
+[1m[INFO][0m:    [1m[32mPrebuilding freetype for arm64-v8a[0m[39m
+[1m[INFO][0m:    freetype has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding hostpython3 for arm64-v8a[0m[39m
+[1m[INFO][0m:    hostpython3 has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for hostpython3[arm64-v8a][0m[39m
+[1m[INFO][0m:    [1m[32mhostpython3 already patched, skipping[0m[39m
+[1m[INFO][0m:    [1m[32mPrebuilding jpeg for arm64-v8a[0m[39m
+[1m[INFO][0m:    jpeg has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding libffi for arm64-v8a[0m[39m
+[1m[INFO][0m:    libffi has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for libffi[arm64-v8a][0m[39m
+[1m[INFO][0m:    [1m[32mlibffi already patched, skipping[0m[39m
+[1m[INFO][0m:    [1m[32mPrebuilding openssl for arm64-v8a[0m[39m
+[1m[INFO][0m:    openssl has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding png for arm64-v8a[0m[39m
+[1m[INFO][0m:    png has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding sdl2_image for arm64-v8a[0m[39m
+[1m[INFO][0m:    sdl2_image has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for sdl2_image[arm64-v8a][0m[39m
+[1m[INFO][0m:    Applying patch enable-webp.patch
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running patch -t -d /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2/jni/SDL2_image -p1 -i /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/sdl2_image/enable-webp.patch[0m
+[1m[90m[DEBUG][39m[0m:   	patching file Android.mk
+[1m[INFO][0m:    [1m[32mPrebuilding sdl2_mixer for arm64-v8a[0m[39m
+[1m[INFO][0m:    sdl2_mixer has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding sdl2_ttf for arm64-v8a[0m[39m
+[1m[INFO][0m:    sdl2_ttf has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding sqlite3 for arm64-v8a[0m[39m
+[1m[INFO][0m:    sqlite3 has no prebuild_arm64_v8a, skipping
+[1m[90m[DEBUG][39m[0m:   Create directory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/sqlite3/arm64-v8a__ndk_target_21/sqlite3/jni
+[1m[INFO][0m:    [1m[32mPrebuilding python3 for arm64-v8a[0m[39m
+[1m[INFO][0m:    python3 has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for python3[arm64-v8a][0m[39m
+[1m[INFO][0m:    Applying patch patches/pyconfig_detection.patch
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running patch -t -d /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_21/python3 -p1 -i /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/python3/patches/pyconfig_detection.patch[0m
+[1m[90m[DEBUG][39m[0m:   	patching file Lib/site.py
+[1m[90m[DEBUG][39m[0m:   	Hunk #1 succeeded at 533 (offset 46 lines).
+[1m[INFO][0m:    Applying patch patches/reproducible-buildinfo.diff
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running patch -t -d /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_21/python3 -p1 -i /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/python3/patches/reproducible-buildinfo.diff[0m
+[1m[90m[DEBUG][39m[0m:   	patching file Makefile.pre.in
+[1m[90m[DEBUG][39m[0m:   	Hunk #1 succeeded at 1243 with fuzz 1 (offset 458 lines).
+[1m[INFO][0m:    Applying patch patches/cpython-311-ctypes-find-library.patch
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running patch -t -d /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_21/python3 -p1 -i /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/python3/patches/cpython-311-ctypes-find-library.patch[0m
+[1m[90m[DEBUG][39m[0m:   	patching file Lib/ctypes/util.py
+[1m[INFO][0m:    [1m[32mPrebuilding sdl2 for arm64-v8a[0m[39m
+[1m[INFO][0m:    sdl2 has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding reportlab for arm64-v8a[0m[39m
+[1m[INFO][0m:    reportlab has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    Applying patch patches/fix-setup.patch
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running patch -t -d /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/reportlab/arm64-v8a__ndk_target_21/reportlab -p1 -i /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/reportlab/patches/fix-setup.patch[0m
+[1m[90m[DEBUG][39m[0m:   	patching file setup.py
+[1m[INFO][0m:    reportlab recipe: recipe_dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/reportlab/arm64-v8a__ndk_target_21/reportlab
+[1m[INFO][0m:    reportlab recipe: tmp_dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/reportlab/tmp
+[1m[INFO][0m:    reportlab recipe: ft_dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/freetype/arm64-v8a__ndk_target_21/freetype
+[1m[INFO][0m:    reportlab recipe: ft_lib_dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/freetype/arm64-v8a__ndk_target_21/freetype/objs/.libs
+[1m[INFO][0m:    reportlab recipe: ft_inc_dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/freetype/arm64-v8a__ndk_target_21/freetype/include
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/reportlab/arm64-v8a__ndk_target_21/reportlab[39m
+[1m[90m[DEBUG][39m[0m:   Create directory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/reportlab/tmp
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mPrebuilding setuptools for arm64-v8a[0m[39m
+[1m[INFO][0m:    setuptools has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding Pillow for arm64-v8a[0m[39m
+[1m[INFO][0m:    Pillow has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for Pillow[arm64-v8a][0m[39m
+[1m[INFO][0m:    Applying patch patches/fix-setup.patch
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running patch -t -d /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/Pillow/arm64-v8a__ndk_target_21/Pillow -p1 -i /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android/pythonforandroid/recipes/Pillow/patches/fix-setup.patch[0m
+[1m[90m[DEBUG][39m[0m:   	patching file setup.py
+[1m[90m[DEBUG][39m[0m:   	patch unexpectedly ends in middle of line
+[1m[90m[DEBUG][39m[0m:   	Hunk #3 succeeded at 431 with fuzz 1.
+[1m[INFO][0m:    [1m[32mPrebuilding six for arm64-v8a[0m[39m
+[1m[INFO][0m:    six has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mPrebuilding pyjnius for arm64-v8a[0m[39m
+[1m[INFO][0m:    pyjnius has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for pyjnius[arm64-v8a][0m[39m
+[1m[INFO][0m:    [1m[32mPrebuilding android for arm64-v8a[0m[39m
+[1m[INFO][0m:    android has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/android-sdl2/arm64-v8a__ndk_target_21/android[39m
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32mPrebuilding kivy for arm64-v8a[0m[39m
+[1m[INFO][0m:    kivy has no prebuild_arm64_v8a, skipping
+[1m[INFO][0m:    [1m[32mApplying patches for kivy[arm64-v8a][0m[39m
+[1m[INFO][0m:    [36m-> directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/other_builds/kivy/arm64-v8a__ndk_target_21/kivy/kivy[39m
+stty: Standardeingabe: Unpassender IOCTL (I/O-Control) für das Gerät
+[1m[90m[DEBUG][39m[0m:   [90m->[0m running python3.12 -c import _version; print(_version.__version__)[0m
+[1m[90m[DEBUG][39m[0m:   	2.3.0
+[1m[INFO][0m:    [36m<- directory context /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/python-for-android[39m
+[1m[INFO][0m:    [1m[32m# Building recipes[0m[39m
+[1m[INFO][0m:    [1m[32mBuilding freetype for arm64-v8a[0m[39m
+[1m[90m[DEBUG][39m[0m:   Create directory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/python-installs
+[1m[90m[DEBUG][39m[0m:   Create directory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/libs_collections/savageworlds
+[1m[90m[DEBUG][39m[0m:   Create directory /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a/build/libs_collections/savageworlds/arm64-v8a
+[1m[31m[ERROR][39m[0m:   Build failed: Couldn't find executable for CC. This indicates a problem locating the /home/jean/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/clang executable in the Android NDK, not that you don't have a normal compiler installed. Exiting.
+Searching path are: '/home/jean/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin:/home/jean/Android/Sdk/ndk/25.2.9519653:/home/jean/Android/Sdk/tools:/home/jean/.buildozer/android/platform/apache-ant-1.9.4/bin:/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin:/home/jean/.npm-global/bin:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/jean/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/jean/.local/share/JetBrains/Toolbox/scripts:/home/jean/Android/Sdk/cmdline-tools/latest/bin:/home/jean/Android/Sdk/platform-tools'
+# Command failed: ['/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin/python3.12', '-m', 'pythonforandroid.toolchain', 'create', '--dist_name=savageworlds', '--bootstrap=sdl2', '--requirements=python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow,reportlab,android', '--arch=arm64-v8a', '--copy-libs', '--color=always', '--storage-dir=/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/.buildozer/android/platform/build-arm64-v8a', '--ndk-api=21', '--ignore-setup-py', '--debug']
+# ENVIRONMENT:
+#     SHELL = '/bin/bash'
+#     COREPACK_ENABLE_AUTO_PIN = '0'
+#     SESSION_MANAGER = 'local/jean-system:@/tmp/.ICE-unix/1601,unix/jean-system:/tmp/.ICE-unix/1601'
+#     QT_ACCESSIBILITY = '1'
+#     XDG_CONFIG_DIRS = '/etc/xdg/xdg-cinnamon:/etc/xdg'
+#     XDG_SESSION_PATH = '/org/freedesktop/DisplayManager/Session0'
+#     GNOME_DESKTOP_SESSION_ID = 'this-is-deprecated'
+#     TERMINAL_EMULATOR = 'JetBrains-JediTerm'
+#     GNOME_KEYRING_CONTROL = '/run/user/1000/keyring'
+#     LANGUAGE = 'de_DE'
+#     PROCESS_LAUNCHED_BY_Q = '1'
+#     JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+#     SSH_AUTH_SOCK = '/run/user/1000/keyring/ssh'
+#     CINNAMON_VERSION = '6.4.8'
+#     TERM_SESSION_ID = '64fdefab-5371-4512-9ea2-9e3140190045'
+#     DESKTOP_SESSION = 'cinnamon'
+#     GTK_MODULES = 'gail:atk-bridge'
+#     XDG_SEAT = 'seat0'
+#     PWD = '/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch'
+#     LOGNAME = 'jean'
+#     XDG_SESSION_DESKTOP = 'cinnamon'
+#     XDG_SESSION_TYPE = 'x11'
+#     PROCESS_LAUNCHED_BY_CW = '1'
+#     GPG_AGENT_INFO = '/run/user/1000/gnupg/S.gpg-agent:0:1'
+#     XAUTHORITY = '/home/jean/.Xauthority'
+#     DESKTOP_STARTUP_ID = 'cinnamon/PyCharm 2025.2.0.1/2053-0-jean-system_TIME69917'
+#     ENABLE_IDE_INTEGRATION = 'true'
+#     XDG_GREETER_DATA_DIR = '/var/lib/lightdm-data/jean'
+#     CLAUDECODE = '1'
+#     GJS_DEBUG_TOPICS = 'JS ERROR;JS LOG'
+#     GDM_LANG = 'de_DE'
+#     HOME = '/home/jean'
+#     LANG = 'de_DE.UTF-8'
+#     LS_COLORS = 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:'
+#     XDG_CURRENT_DESKTOP = 'X-Cinnamon'
+#     VIRTUAL_ENV = '/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv'
+#     XDG_SEAT_PATH = '/org/freedesktop/DisplayManager/Seat0'
+#     FIG_TERM = '1'
+#     GJS_DEBUG_OUTPUT = 'stderr'
+#     XDG_ACTIVATION_TOKEN = 'cinnamon/PyCharm 2025.2.0.1/2053-0-jean-system_TIME69917'
+#     LESSCLOSE = '/usr/bin/lesspipe %s %s'
+#     XDG_SESSION_CLASS = 'user'
+#     ANDROID_HOME = '/home/jean/Android/Sdk'
+#     TERM = 'xterm-256color'
+#     LESSOPEN = '| /usr/bin/lesspipe %s'
+#     LIBVIRT_DEFAULT_URI = 'qemu:///system'
+#     USER = 'jean'
+#     DISPLAY = ':0'
+#     SHLVL = '1'
+#     GIT_EDITOR = 'true'
+#     ANTHROPIC_MODEL = 'claude-sonnet-4-20250514'
+#     XDG_VTNR = '7'
+#     XDG_SESSION_ID = 'c1'
+#     VIRTUAL_ENV_PROMPT = '(venv) '
+#     INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED = '1'
+#     OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE = 'delta'
+#     XDG_RUNTIME_DIR = '/run/user/1000'
+#     CLAUDE_CODE_ENTRYPOINT = 'cli'
+#     GTK3_MODULES = 'xapp-gtk3-module'
+#     XDG_DATA_DIRS = '/usr/share/cinnamon:/usr/share/gnome:/home/jean/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share'
+#     PATH = '/home/jean/.buildozer/android/platform/apache-ant-1.9.4/bin:/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin:/home/jean/.npm-global/bin:/usr/lib/jvm/java-17-openjdk-amd64/bin:/home/jean/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/jean/.local/share/JetBrains/Toolbox/scripts:/home/jean/Android/Sdk/cmdline-tools/latest/bin:/home/jean/Android/Sdk/platform-tools'
+#     GDMSESSION = 'cinnamon'
+#     DBUS_SESSION_BUS_ADDRESS = 'unix:path=/run/user/1000/bus'
+#     GIO_LAUNCHED_DESKTOP_FILE_PID = '2931'
+#     GIO_LAUNCHED_DESKTOP_FILE = '/home/jean/.local/share/applications/jetbrains-pycharm-b8cc990d-7baf-4907-8ad5-b223eade58d2.desktop'
+#     _ = '/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/venv/bin/buildozer'
+#     PACKAGES_PATH = '/home/jean/.buildozer/android/packages'
+#     ANDROIDSDK = '/home/jean/Android/Sdk'
+#     ANDROIDNDK = '/home/jean/Android/Sdk/ndk/25.2.9519653'
+#     ANDROIDAPI = '33'
+#     ANDROIDMINAPI = '21'
+# 
+# Buildozer failed to execute the last command
+# The error might be hidden in the log above this error
+# Please read the full log, and search for it before
+# raising an issue with buildozer itself.
+# In case of a bug report, please add a full log with log_level = 2
