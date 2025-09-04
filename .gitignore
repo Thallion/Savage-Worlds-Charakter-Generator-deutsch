@@ -50,6 +50,7 @@ build*.log
 
 # Android NDK downloads and build files
 android-ndk-*.zip
+buildozer-local.spec
 
 # Lokale Konfigurationsdateien
 config/

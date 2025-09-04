@@ -121,10 +121,10 @@ android.ndk_api = 21
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-android.ndk_path = /home/jean/Android/Sdk/ndk/28.2.13676358
+#android.ndk_path = /home/jean/Android/Sdk/ndk/28.2.13676358
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-android.sdk_path = /home/jean/Android/Sdk
+#android.sdk_path = /home/jean/Android/Sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
