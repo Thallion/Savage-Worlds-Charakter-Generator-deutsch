@@ -45,6 +45,11 @@ Desktop.ini
 
 # Log Dateien
 *.log
+build_*.txt
+build*.log
+
+# Android NDK downloads and build files
+android-ndk-*.zip
 
 # Lokale Konfigurationsdateien
 config/
