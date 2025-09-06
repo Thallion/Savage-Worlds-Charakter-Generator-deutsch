@@ -36,6 +36,12 @@ class PDFManager:
             Logger.error("Erforderliche Services nicht verfügbar")
             return
         
+        # Prüfe ob PDF-Erstellung auf der aktuellen Plattform unterstützt wird
+        if not self.pdf_service.is_pdf_supported():
+            platform_info = self.pdf_service.get_platform_info()
+            self._show_platform_not_supported_dialog(platform_info)
+            return
+        
         # Prüfen, ob bereits eine PDF-Datei existiert
         exists, existing_path, existing_name = self.pdf_service.check_existing_pdf()
         
@@ -184,3 +190,17 @@ class PDFManager:
             self.file_service.set_temp_pdf_settings(filename, self.temp_printer_friendly)
             chars_dir = self.file_service.get_default_directory('chars')
             self.file_service.show_file_manager(chars_dir, "save_pdf_dir")
+    
+    def _show_platform_not_supported_dialog(self, platform_info):
+        """Zeigt Dialog für nicht unterstützte Plattform"""
+        if not self.dialog_service:
+            Logger.error("Dialog-Service nicht verfügbar für Plattform-Warnung")
+            return
+        
+        platform_name = "Android" if platform_info.get('is_android') else "Unbekannte Plattform"
+        reason = platform_info.get('reason', 'PDF-Generierung nicht verfügbar')
+        
+        title = "PDF-Erstellung nicht verfügbar"
+        message = f"PDF-Erstellung ist auf {platform_name} nicht verfügbar.\n\n{reason}\n\nDiese Funktion ist nur auf Desktop-Systemen (Windows/Linux/macOS) verfügbar."
+        
+        self.dialog_service.show_info_dialog(message, title)

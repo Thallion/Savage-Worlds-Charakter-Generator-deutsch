@@ -5,7 +5,7 @@ Service für PDF-Erstellung und -Verwaltung
 
 import os
 from kivy.logger import Logger
-from utils.pdf_utils import generiere_pdf
+from utils.pdf_utils import generiere_pdf, REPORTLAB_AVAILABLE, is_android
 
 
 class PDFService:
@@ -13,6 +13,28 @@ class PDFService:
     
     def __init__(self, controller):
         self.controller = controller
+    
+    def is_pdf_supported(self):
+        """
+        Prüft ob PDF-Erstellung auf der aktuellen Plattform unterstützt wird
+        
+        Returns:
+            bool: True wenn PDF-Erstellung verfügbar ist
+        """
+        return REPORTLAB_AVAILABLE
+    
+    def get_platform_info(self):
+        """
+        Gibt Informationen über die Plattform-Unterstützung zurück
+        
+        Returns:
+            dict: Plattform-Informationen
+        """
+        return {
+            'is_android': is_android(),
+            'pdf_supported': REPORTLAB_AVAILABLE,
+            'reason': "PDF-Generierung ist auf Android nicht verfügbar" if is_android() and not REPORTLAB_AVAILABLE else None
+        }
     
     def create_character_pdf(self, output_path, printer_friendly=False):
         """
@@ -25,6 +47,13 @@ class PDFService:
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
+        # Prüfe ob PDF-Erstellung verfügbar ist
+        if not self.is_pdf_supported():
+            platform_info = self.get_platform_info()
+            error_msg = f"PDF-Erstellung nicht verfügbar: {platform_info.get('reason', 'Unbekannter Grund')}"
+            Logger.error(error_msg)
+            return False
+        
         try:
             success = generiere_pdf(self.controller.charakter, output_path, printer_friendly)
             

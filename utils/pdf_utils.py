@@ -1,5 +1,6 @@
 """
 PDF-Hilfsfunktionen für den Charakterbogen-Generator
+Unterstützt plattformspezifische PDF-Generierung (Desktop only)
 """
 
 import os
@@ -7,26 +8,52 @@ import sys
 from pathlib import Path
 from kivy.logger import Logger
 
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import mm
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import (
-    KeepTogether,
-    Paragraph,
-    Table,
-    TableStyle,
-    Spacer,
-    SimpleDocTemplate,
-    PageBreak,
-    ListFlowable,
-    ListItem,
-)
-from reportlab.lib import colors
-from PIL import Image
-
 # Import path utilities
 from utils.path_utils import get_assets_path, get_application_root as get_app_root
+
+# Platform detection
+def is_android():
+    """Prüft ob die App auf Android läuft"""
+    try:
+        from jnius import autoclass
+        return True
+    except ImportError:
+        return False
+
+def is_desktop():
+    """Prüft ob die App auf Desktop (Windows/Linux/macOS) läuft"""
+    return not is_android()
+
+# Conditional reportlab imports - nur auf Desktop
+REPORTLAB_AVAILABLE = False
+if is_desktop():
+    try:
+        from reportlab.lib.pagesizes import A4
+        from reportlab.pdfgen import canvas
+        from reportlab.lib.units import mm
+        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+        from reportlab.platypus import (
+            KeepTogether,
+            Paragraph,
+            Table,
+            TableStyle,
+            Spacer,
+            SimpleDocTemplate,
+            PageBreak,
+            ListFlowable,
+            ListItem,
+        )
+        from reportlab.lib import colors
+        from PIL import Image
+        
+        REPORTLAB_AVAILABLE = True
+        Logger.info("PDF-Utils: Reportlab erfolgreich geladen (Desktop-Modus)")
+        
+    except ImportError as e:
+        Logger.warning(f"PDF-Utils: Reportlab nicht verfügbar auf Desktop: {e}")
+        REPORTLAB_AVAILABLE = False
+else:
+    Logger.info("PDF-Utils: Android-Modus erkannt - PDF-Funktionalität deaktiviert")
 
 # Removed - using centralized path utilities instead
 
@@ -38,7 +65,20 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
         charakter: Das Charakterobjekt mit allen Daten
         output_pdf: Pfad für die zu erstellende PDF-Datei
         printer_friendly: Bool, ob eine druckerfreundliche Version ohne Hintergrund erstellt werden soll
+    
+    Returns:
+        bool: True wenn erfolgreich, False wenn PDF-Generierung nicht verfügbar
+    
+    Raises:
+        RuntimeError: Wenn PDF-Generierung auf aktueller Plattform nicht unterstützt wird
     """
+    # Prüfe ob PDF-Generierung verfügbar ist
+    if not REPORTLAB_AVAILABLE:
+        error_msg = "PDF-Generierung ist auf dieser Plattform nicht verfügbar"
+        if is_android():
+            error_msg += " (Android wird nicht unterstützt)"
+        Logger.error(error_msg)
+        raise RuntimeError(error_msg)
     # Verwende die neue path_utils Funktion für PyInstaller-kompatible Pfade
     background_img = get_assets_path("charbogen_hintergrund.jpg")
 
