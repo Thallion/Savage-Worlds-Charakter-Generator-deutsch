@@ -351,15 +351,10 @@ class SW_Charakter_GeneratorApp(MDApp):
 
                 # Create screen instance and add to screen manager  
                 try:
-                    # Create the widget instance
-                    widget_instance = ScreenClass()
-                    # Create a simple Screen wrapper
-                    screen_instance = Screen()
+                    # Create the screen instance directly (ScreenClass is already a Screen)
+                    screen_instance = ScreenClass()
                     clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
                     screen_instance.name = f"screen_{i}_{clean_name}"
-                    
-                    # Add the widget to the screen
-                    screen_instance.add_widget(widget_instance)
                     
                     # Add to ScreenManager
                     screen_manager.add_widget(screen_instance)
@@ -471,19 +466,46 @@ class SW_Charakter_GeneratorApp(MDApp):
             tab_text = self.tab_definitions[tab_index][1]
             
             screen = self.screens.get(tab_text)
-            if screen and screen.children:
-                # Das eigentliche Widget ist das erste (und einzige) Kind des Screen
-                widget = screen.children[0]
-                
-                if hasattr(widget, 'refresh_widget'):
-                    Clock.schedule_once(lambda dt: widget.refresh_widget(), 0.1)
+            if screen:
+                # Try to call the screen's own methods first (delegated to underlying widgets)
+                if hasattr(screen, 'refresh_widget'):
+                    Clock.schedule_once(lambda dt: screen.refresh_widget(), 0.1)
                     Logger.debug(f"Screen '{tab_text}' refresh getriggert")
-                elif hasattr(widget, 'aktualisiere_ui'):
-                    Clock.schedule_once(lambda dt: widget.aktualisiere_ui(), 0.1)
+                elif hasattr(screen, 'aktualisiere_ui'):
+                    Clock.schedule_once(lambda dt: screen.aktualisiere_ui(), 0.1)
                     Logger.debug(f"Screen '{tab_text}' UI-Update getriggert")
-                elif hasattr(widget, 'update_overview'):
-                    Clock.schedule_once(lambda dt: widget.update_overview(), 0.1)
+                elif hasattr(screen, 'update_overview'):
+                    Clock.schedule_once(lambda dt: screen.update_overview(), 0.1)
                     Logger.debug(f"Screen '{tab_text}' overview-Update getriggert")
+                    
+                # If screen doesn't have the method, try to find the underlying widget
+                elif hasattr(screen, 'ids'):
+                    # Map tab names to their widget IDs as defined in main.kv
+                    widget_id_map = {
+                        'Einstellungen': 'einstellungen_widget',
+                        'Völker': 'voelker_widget',
+                        'Profil': 'profil_widget', 
+                        'Eigenschaften': 'eigenschaften_widget',
+                        'Handicaps': 'handicaps_widget',
+                        'Talente': 'talente_widget',
+                        'Mächte': 'maechte_widget',
+                        'Ausrüstung': 'ausruestung_widget',
+                        'Charakter': 'charakterbogen_widget',
+                        'Historie': 'historie_widget'
+                    }
+                    
+                    widget_id = widget_id_map.get(tab_text)
+                    if widget_id and widget_id in screen.ids:
+                        widget = screen.ids[widget_id]
+                        if hasattr(widget, 'refresh_widget'):
+                            Clock.schedule_once(lambda dt: widget.refresh_widget(), 0.1)
+                            Logger.debug(f"Widget '{widget_id}' refresh getriggert")
+                        elif hasattr(widget, 'aktualisiere_ui'):
+                            Clock.schedule_once(lambda dt: widget.aktualisiere_ui(), 0.1)
+                            Logger.debug(f"Widget '{widget_id}' UI-Update getriggert")
+                        elif hasattr(widget, 'update_overview'):
+                            Clock.schedule_once(lambda dt: widget.update_overview(), 0.1)
+                            Logger.debug(f"Widget '{widget_id}' overview-Update getriggert")
                 
         except Exception as e:
             Logger.error(f"Fehler beim Screen-Update: {str(e)}")
