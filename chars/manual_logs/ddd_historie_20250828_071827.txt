@@ -1,0 +1,60 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-08-28 07:16:48
+================================================================================
+
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-08-28 07:16:56] Geschicklichkeit: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:16:56] Verstand: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:16:57] Stärke: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:16:57] Konstitution: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:16:58] Willenskraft: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:17:37] Geschicklichkeit: W6 → W8 (2 Aufstiege)
+  [2025-08-28 07:17:59] Willenskraft: W6 → W8 (2 Aufstiege)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-08-28 07:16:59] Allgemeinwissen: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:00] Athletik: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:00] Darbietung: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:01] Darbietung: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:02] Diebeskunst: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:03] Diebeskunst: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:03] Einschüchtern: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:04] Einschüchtern: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:05] Elektronik: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:06] Elektronik: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:06] Fahren: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:17:07] Fahren: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:18:09] Fokus: W4 → W4 (1 Aufstiege)
+  [2025-08-28 07:18:11] Geisteswissenschaften: W4 → W4 (1 Aufstiege)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 07:17:12] Angetrieben_schwer (schwer - Punkte: 2)
+  [2025-08-28 07:17:13] Angetrieben_leicht (leicht - Punkte: 1)
+  [2025-08-28 07:17:14] Angewohnheit_leicht (leicht - Punkte: 1)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 07:17:17] Arkaner Hintergrund (Kosten: 2)
+  [2025-08-28 07:17:21] Arkane Resistenz (Kosten: 2)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 07:17:24] Abwehren (Rang: A)
+  [2025-08-28 07:17:25] Arkaner Schutz (Rang: A)
+  [2025-08-28 07:17:25] Arkanes entdecken/verbergen (Rang: A)
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     9 Punkte
+  Fertigkeiten:  14 Punkte
+  Talente:       4 Punkte
+  Handicaps:     +0 Punkte
+  Mächte:        3 Punkte
+  Aufstiege:     0 verwendet
+================================================================================

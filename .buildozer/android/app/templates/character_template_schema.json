@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Savage Worlds Character Template",
+  "description": "JSON Schema für automatische Savage Worlds Charaktergenerierung",
+  "type": "object",
+  "required": ["name", "description", "race", "attributes", "skills", "handicaps", "edges"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name des Charakters"
+    },
+    "description": {
+      "type": "string",
+      "description": "Beschreibung oder Hintergrund des Charakters"
+    },
+    "setting": {
+      "type": "string",
+      "description": "Setting-Name (Standard: SWAE)",
+      "default": "SWAE"
+    },
+    "race": {
+      "type": "string",
+      "description": "Volk des Charakters",
+      "default": "Mensch"
+    },
+    "profile": {
+      "type": "object",
+      "description": "Profildaten des Charakters",
+      "properties": {
+        "age": {"type": "string", "default": ""},
+        "gender": {"type": "string", "default": ""},
+        "concept": {"type": "string", "default": ""},
+        "languages": {"type": "string", "default": ""}
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Ziel-Attributswerte (W4=4, W6=6, W8=8, W10=10, W12=12)",
+      "properties": {
+        "Stärke": {"type": "integer", "minimum": 4, "maximum": 12, "default": 4},
+        "Geschicklichkeit": {"type": "integer", "minimum": 4, "maximum": 12, "default": 4},
+        "Konstitution": {"type": "integer", "minimum": 4, "maximum": 12, "default": 4},
+        "Verstand": {"type": "integer", "minimum": 4, "maximum": 12, "default": 4},
+        "Willenskraft": {"type": "integer", "minimum": 4, "maximum": 12, "default": 4}
+      },
+      "additionalProperties": false
+    },
+    "skills": {
+      "type": "object",
+      "description": "Ziel-Fertigkeitswerte (W4=4, W6=6, W8=8, W10=10, W12=12, W4-2=2)",
+      "patternProperties": {
+        "^[A-Za-zÄÖÜäöüß ]+$": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 12
+        }
+      },
+      "additionalProperties": false
+    },
+    "handicaps": {
+      "type": "array",
+      "description": "Liste der Handicaps",
+      "items": {
+        "type": "string"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "Liste der Talente (nach dem kostenlosen Völker-Talent)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "free_race_edge": {
+      "type": "string",
+      "description": "Kostenloses Völker-Talent (falls nicht Mensch)",
+      "default": ""
+    },
+    "powers": {
+      "type": "array",
+      "description": "Liste der Mächte (nur bei arkanen Charakteren)",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "power_points": {
+      "type": "integer",
+      "description": "Anzahl der Machtpunkte",
+      "minimum": 0,
+      "default": 0
+    },
+    "equipment": {
+      "type": "array",
+      "description": "Liste der Ausrüstung",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Name des Ausrüstungsgegenstands"
+          },
+          {
+            "type": "object",
+            "description": "Custom Ausrüstungsgegenstand",
+            "required": ["name", "type"],
+            "properties": {
+              "name": {"type": "string"},
+              "type": {"type": "string", "enum": ["Waffe", "Rüstung", "Schild", "Ausrüstung", "weapon", "armor", "shield", "equipment"]},
+              "weight": {"type": "number", "default": 1},
+              "cost": {"type": "number", "default": 0},
+              "description": {"type": "string", "default": ""},
+              "category": {"type": "string", "default": "Allgemein"},
+              "properties": {
+                "type": "object",
+                "description": "Spezielle Eigenschaften je nach Typ",
+                "properties": {
+                  "damage": {"type": "string"},
+                  "ap": {"type": "integer"},
+                  "range": {"type": "string"},
+                  "min_strength": {"type": "string"},
+                  "parry_bonus": {"type": "integer"},
+                  "armor_torso": {"type": "integer"},
+                  "armor_arms": {"type": "integer"},
+                  "armor_legs": {"type": "integer"},
+                  "armor_head": {"type": "integer"},
+                  "cover": {"type": "integer"},
+                  "two_handed": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        ]
+      },
+      "default": []
+    },
+    "starting_capital": {
+      "type": "integer",
+      "description": "Startkapital in Dollarn/Talern",
+      "minimum": 0,
+      "default": 500
+    },
+    "starting_attribute_points": {
+      "type": "integer",
+      "description": "Verfügbare Attributspunkte am Start (Standard SWAE: 5)",
+      "minimum": 0,
+      "default": 5
+    },
+    "starting_skill_points": {
+      "type": "integer",
+      "description": "Verfügbare Fertigkeitspunkte am Start (Standard SWAE: 12)",
+      "minimum": 0,
+      "default": 12
+    },
+    "starting_advances": {
+      "type": "integer",
+      "description": "Anzahl der bereits erfolgten Aufstiege bei der Charaktergenerierung",
+      "minimum": 0,
+      "default": 0
+    },
+    "advances_to_apply": {
+      "type": "array",
+      "description": "Liste der anzuwendenden Aufstiege nach der Grundcharaktererstellung",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["attribute", "skill", "edge", "power"],
+            "description": "Art der Steigerung"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name des zu steigernden Elements"
+          },
+          "value": {
+            "type": "integer",
+            "description": "Zielwert (nur bei Attributen/Fertigkeiten)",
+            "minimum": 2
+          }
+        }
+      },
+      "default": []
+    },
+    "generation_options": {
+      "type": "object",
+      "description": "Optionen für die Generierung",
+      "properties": {
+        "strict_point_allocation": {
+          "type": "boolean",
+          "description": "Strenge Punkteverteilung (muss exakt aufgehen)",
+          "default": true
+        },
+        "allow_over_attribute": {
+          "type": "boolean", 
+          "description": "Fertigkeiten über Attributswerte erlauben (doppelte Kosten)",
+          "default": true
+        },
+        "auto_save": {
+          "type": "boolean",
+          "description": "Automatisch als JSON speichern",
+          "default": true
+        },
+        "save_path": {
+          "type": "string",
+          "description": "Pfad zum Speichern (relativ zu chars/)",
+          "default": "auto_generated"
+        },
+        "complete_character_generation": {
+          "type": "boolean",
+          "description": "Charaktergenerierung automatisch abschließen (char_gen_completed = true)",
+          "default": false
+        }
+      }
+    }
+  }
+}

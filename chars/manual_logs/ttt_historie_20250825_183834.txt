@@ -1,0 +1,36 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-08-25 18:36:17
+================================================================================
+
+
+CHARAKTER GELADEN:
+----------------------------------------
+  [2025-08-25 18:36:17] {'name': 'Unbekannt'}
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-08-25 18:36:38] Geschicklichkeit: W4 → W6 (Kosten: 1)
+  [2025-08-25 18:36:42] Willenskraft: W4 → W6 (Kosten: 1)
+  [2025-08-25 18:36:45] Konstitution: W4 → W6 (Kosten: 1)
+  [2025-08-25 18:36:54] Geschicklichkeit: W6 → W8 (Kosten: 1)
+  [2025-08-25 18:36:54] Geschicklichkeit: W8 → W10 (Kosten: 1)
+  [2025-08-25 18:37:08] Geschicklichkeit: W10 → W12 (Kosten: 1)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-08-25 18:36:41] Athletik: W4 → W6 (Kosten: 1)
+  [2025-08-25 18:36:46] Darbietung: W4 → W4 (Kosten: 1)
+  [2025-08-25 18:36:47] Darbietung: W4 → W6 (Kosten: 1)
+  [2025-08-25 18:36:49] Allgemeinwissen: W4 → W6 (Kosten: 1)
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte
+  Fertigkeiten:  4 Punkte
+  Talente:       0 Punkte
+  Handicaps:     +0 Punkte
+  Mächte:        0 Punkte
+  Aufstiege:     0 verwendet
+================================================================================

@@ -1,0 +1,499 @@
+{
+  "session_start": "2025-08-25T18:36:17.325179",
+  "entries": [
+    {
+      "timestamp": "2025-08-25 18:36:17",
+      "type": "charakter_geladen",
+      "details": {
+        "name": "Unbekannt"
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:41",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Athletik",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:42",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:45",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:46",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 4,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:47",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:49",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:54",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:36:54",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-25 18:37:08",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 10,
+        "nach": 12,
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:08",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:08",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:10",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:10",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:11",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Stärke",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:11",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Stärke",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:12",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Fertigkeitspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:12",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Fertigkeitspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:13",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Athletik",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Fertigkeitspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:13",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Athletik",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Fertigkeitspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:16",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 4,
+        "kosten": 2,
+        "kosten_typ": "Fertigkeitspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:16",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 4,
+        "kosten": 2,
+        "kosten_typ": "Fertigkeitspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:21",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angetrieben_schwer",
+        "stufe": "schwer",
+        "punkte": 2
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:21",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angetrieben_schwer",
+        "stufe": "schwer",
+        "punkte": 2
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:22",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angewohnheit_leicht",
+        "stufe": "leicht",
+        "punkte": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:22",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angewohnheit_leicht",
+        "stufe": "leicht",
+        "punkte": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:23",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angetrieben_leicht",
+        "stufe": "leicht",
+        "punkte": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:23",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angetrieben_leicht",
+        "stufe": "leicht",
+        "punkte": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:30",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Absolute Lieblingswaffe",
+        "kosten": 2,
+        "voraussetzungen": ""
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Handicap-Punkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:39",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Attributspunkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:39",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 6,
+        "nach": 8,
+        "kosten": 2,
+        "kosten_typ": "Handicap-Punkte"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:45",
+      "type": "talent_entfernt",
+      "details": {
+        "name": "Absolute Lieblingswaffe",
+        "action": "removed"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:47",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Arkaner Hintergrund",
+        "kosten": 1,
+        "voraussetzungen": ""
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:50",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Abwehren",
+        "rang": "A",
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:50",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Arkaner Schutz",
+        "rang": "A",
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:10:51",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Arkanes entdecken/verbergen",
+        "rang": "A",
+        "kosten": 1
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:11:25",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Stärke",
+        "von": 6,
+        "nach": 8,
+        "kosten": 2,
+        "kosten_typ": "Aufstiege"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:11:25",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Stärke",
+        "von": 6,
+        "nach": 8,
+        "kosten": 2,
+        "kosten_typ": "Aufstiege"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:11:27",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 2,
+        "kosten_typ": "Aufstiege"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:11:27",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 2,
+        "kosten_typ": "Aufstiege"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:11:36",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Aufstiege"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:11:36",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Aufstiege"
+      }
+    },
+    {
+      "timestamp": "2025-08-26 07:12:17",
+      "type": "macht_entfernt",
+      "details": {
+        "name": "Arkanes entdecken/verbergen",
+        "action": "removed"
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 27,
+    "fertigkeiten": 14,
+    "talente": 3,
+    "handicaps": 0,
+    "maechte": 3,
+    "aufstiege": 0
+  }
+}

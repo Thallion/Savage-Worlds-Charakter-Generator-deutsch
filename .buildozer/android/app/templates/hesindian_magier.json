@@ -1,0 +1,98 @@
+{
+  "name": "Hesindian",
+  "description": "Wie überaus ungewöhnlich. Wir sollten dies unbedingt näher untersuchen.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "",
+    "concept": "Magier",
+    "languages": ""
+  },
+  "starting_capital": 600,
+  "starting_attribute_points": 5,
+  "starting_skill_points": 12,
+  "starting_advances": 2,
+  "advances_to_apply": [
+    {
+      "type": "attribute",
+      "name": "Verstand"
+    },
+    {
+      "type": "skill", 
+      "name": "Zaubern"
+    }
+  ],
+  "attributes": {
+    "Geschicklichkeit": 4,
+    "Konstitution": 6,
+    "Stärke": 4,
+    "Verstand": 10,
+    "Willenskraft": 8
+  },
+  "skills": {
+    "Allgemeinwissen": 8,
+    "Athletik": 4,
+    "Heimlichkeit": 6,
+    "Kämpfen": 4,
+    "Recherche": 6,
+    "Überleben": 4,
+    "Überreden": 6,
+    "Wahrnehmung": 4,
+    "Zaubern": 10
+  },
+  "handicaps": [
+    "Neugierig",
+    "Schlechte Augen",
+    "Tick"
+  ],
+  "edges": [
+    "Machtpunkte"
+  ],
+  "powers": [
+    "Geschoss",
+    "Heilung",
+    "Blenden"
+  ],
+  "power_points": 15,
+  "equipment": [
+    "Magierstab",
+    "Reisrobe",
+    "Abenteuerpaket"
+  ],
+  "custom_equipment": [
+    {
+      "name": "Magierstab",
+      "type": "Waffe",
+      "weight": 2,
+      "cost": 10,
+      "description": "Fokus für Zauber und Nahkampfwaffe",
+      "category": "Nahkampfwaffe",
+      "properties": {
+        "damage": "Stä+W4",
+        "parry_bonus": 1,
+        "range": 1,
+        "two_handed": true
+      }
+    },
+    {
+      "name": "Reisrobe",
+      "type": "Kleidung",
+      "weight": 1,
+      "cost": 5,
+      "description": "Leichte Magierkleidung",
+      "category": "Kleidung",
+      "properties": {
+        "armor_bonus": 0,
+        "special": "Magische Symbole eingestickt"
+      }
+    }
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/magier",
+    "complete_character_generation": true
+  }
+}

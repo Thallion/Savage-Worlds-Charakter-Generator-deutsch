@@ -1,0 +1,64 @@
+Metadata-Version: 2.3
+Name: asyncgui
+Version: 0.9.3
+Summary: A minimalistic async library that focuses on fast responsiveness
+License: MIT
+Keywords: async
+Author: Nattōsai Mitō
+Author-email: flow4re2c@gmail.com
+Requires-Python: >=3.9,<4.0
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries
+Requires-Dist: exceptiongroup (>=1.0.4,<2.0.0) ; python_version < "3.11"
+Project-URL: Homepage, https://github.com/asyncgui/asyncgui
+Project-URL: Repository, https://github.com/asyncgui/asyncgui
+Description-Content-Type: text/markdown
+
+# AsyncGui
+
+...is a minimalistic async library that:
+
+- does not provide features involving system calls, such as I/O.
+- has no external dependencies when using Python 3.11 or later.
+- does not own a main loop, but is designed to integrate with an existing one.
+- avoids global state.
+- focuses on fast responsiveness, allowing immediate task start and resumption.
+- offers powerful "structured concurrency" features inspired by [Trio](https://trio.readthedocs.io/en/stable/) and [trio-util](https://trio-util.readthedocs.io/en/latest/).
+- has nothing to do with GUIs, even though it has 'gui' in its name. (I should rename it at some point.)
+
+[Documentation](https://asyncgui.github.io/asyncgui/)
+
+## Installation
+
+Pin the minor version.
+
+```text
+poetry add asyncgui@~0.9
+pip install "asyncgui>=0.9,<0.10"
+```
+
+## Tested on
+
+- CPython 3.9
+- CPython 3.10
+- CPython 3.11
+- CPython 3.12
+- CPython 3.13
+- PyPy 3.10
+
+## Async libraries that rely on this
+
+- [asynckivy](https://github.com/asyncgui/asynckivy)
+- [asynctkinter](https://github.com/asyncgui/asynctkinter)
+- [asyncpygame](https://github.com/asyncgui/asyncpygame)
+

@@ -1,0 +1,77 @@
+================================================================================
+KOSTEN-LOG FÜR: Leomara
+ERSTELLT: 2025-08-31 18:07:16
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Geschicklichkeit: W4 → W6 = 1 Punkte
+  Konstitution: W4 → W6 = 1 Punkte
+  Stärke: W4 → W6 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Verstand: W6 → W8 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+  Willenskraft: W6 → W8 = 1 Punkte
+GESAMT: 7 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+  Einschüchtern: W2 → W4 = 1 Punkte
+  Einschüchtern: W4 → W6 = 1 Punkte
+  Heilen: W2 → W4 = 1 Punkte
+  Kriegskunst: W2 → W4 = 1 Punkte
+  Kriegskunst: W4 → W6 = 1 Punkte
+  Schießen: W2 → W4 = 1 Punkte
+  Schießen: W4 → W6 = 1 Punkte
+  Überreden: W4 → W6 = 1 Punkte
+  Kämpfen: W2 → W4 = 1 Punkte
+  Kämpfen: W4 → W6 = 1 Punkte
+  Wahrnehmung: W4 → W6 = 1 Punkte
+GESAMT: 11 Punkte
+
+HANDICAPS:
+----------------------------------------
+  Ehrenkodex: +2 Punkte
+  Loyal: +1 Punkte
+  Phobie: +1 Punkte
+GESAMT: +4 Punkte (Bonus)
+
+HANDICAP-PUNKTE VERWENDUNG:
+----------------------------------------
+Handicap-Punkte können verwendet werden für:
+  • 1 Punkt = 2 Attributsteigerungen
+  • 1 Punkt = 1 Anfänger-Talent
+  • 1 Punkt = 2 Fertigkeitssteigerungen
+  • 1 Punkt = Startgeld erhöhen
+→ 4 Handicap-Punkte entsprechen:
+  - Bis zu 8 Attribut-/Fertigkeitssteigerungen ODER
+  - Bis zu 4 Talente ODER
+  - Kombination aus beidem
+
+TALENTE:
+----------------------------------------
+  Anführer: GRATIS (Völker-Bonus)
+  Anführer: 1 Punkte [Voraussetzungen ignoriert]
+GESAMT: 1 Punkte
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +4
+Verfügbare Punkte gesamt: 21
+
+Ausgegeben für Attribute: 7
+Ausgegeben für Fertigkeiten: 11
+Ausgegeben für Talente: 1
+Ausgegeben gesamt: 19
+
+ÜBERSCHUSS: 2 Punkte nicht verwendet
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================

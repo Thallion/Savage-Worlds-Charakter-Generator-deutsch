@@ -1,0 +1,87 @@
+================================================================================
+KOSTEN-LOG FÜR: Jester
+ERSTELLT: 2025-08-28 10:29:05
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Geschicklichkeit: W4 → W6 = 1 Punkte
+  Konstitution: W4 → W6 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Verstand: W6 → W8 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+  Willenskraft: W6 → W8 = 1 Punkte
+GESAMT: 6 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+  Athletik: W4 → W6 = 1 Punkte
+  Allgemeinwissen: W4 → W6 = 1 Punkte
+  Kämpfen: W2 → W4 = 1 Punkte
+  Einschüchtern: W2 → W4 = 1 Punkte
+  Einschüchtern: W4 → W6 = 1 Punkte
+  Wahrnehmung: W4 → W6 = 1 Punkte
+  Darbietung: W2 → W4 = 1 Punkte
+  Darbietung: W4 → W6 = 1 Punkte
+  Darbietung: W6 → W8 = 1 Punkte
+  Darbietung: W8 → W10 = 1 Punkte
+  Überreden: W4 → W6 = 1 Punkte
+GESAMT: 11 Punkte
+
+HANDICAPS:
+----------------------------------------
+  Behindernde_Rüstung_leicht: +1 Punkte
+  Große Klappe: +1 Punkte
+  Außenseiter: +1 Punkte
+  Arrogant: +2 Punkte
+  Tick: +1 Punkte
+GESAMT: +6 Punkte (Bonus)
+
+HANDICAP-PUNKTE VERWENDUNG:
+----------------------------------------
+Handicap-Punkte können verwendet werden für:
+  • 1 Punkt = 2 Attributsteigerungen
+  • 1 Punkt = 1 Anfänger-Talent
+  • 1 Punkt = 2 Fertigkeitssteigerungen
+  • 1 Punkt = Startgeld erhöhen
+→ 6 Handicap-Punkte entsprechen:
+  - Bis zu 12 Attribut-/Fertigkeitssteigerungen ODER
+  - Bis zu 6 Talente ODER
+  - Kombination aus beidem
+
+TALENTE:
+----------------------------------------
+  Arkaner Hintergrund (Barde): 1 Punkte [Voraussetzungen ignoriert]
+  Ermutigen: 1 Punkte [Voraussetzungen ignoriert]
+  Täuscher: 1 Punkte [Voraussetzungen ignoriert]
+  Erniedrigen: 1 Punkte [Voraussetzungen ignoriert]
+  Konter: 1 Punkte [Voraussetzungen ignoriert]
+GESAMT: 5 Punkte
+
+MÄCHTE:
+----------------------------------------
+  Eigenschaft erhöhen/senken [Voraussetzungen ignoriert]
+  Verwirrung [Voraussetzungen ignoriert]
+  Geräusch/Stille [Voraussetzungen ignoriert]
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +6
+Verfügbare Punkte gesamt: 23
+
+Ausgegeben für Attribute: 6
+Ausgegeben für Fertigkeiten: 11
+Ausgegeben für Talente: 5
+Ausgegeben gesamt: 22
+
+ÜBERSCHUSS: 1 Punkte nicht verwendet
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================

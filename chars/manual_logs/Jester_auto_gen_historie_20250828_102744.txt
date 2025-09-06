@@ -1,0 +1,81 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-08-28 10:27:44
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2025-08-28 10:27:44] Auto-Generierung abgeschlossen:
+    Template: Jester (Setting: Fantasy Kompendium)
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-08-28 10:27:44] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Konstitution: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Verstand: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Verstand: W6 → W8 (1 Standard)
+  [2025-08-28 10:27:44] Willenskraft: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Willenskraft: W6 → W8 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-08-28 10:27:44] Athletik: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Allgemeinwissen: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Kämpfen: W2 → W4 (1 Standard)
+  [2025-08-28 10:27:44] Einschüchtern: W2 → W4 (1 Standard)
+  [2025-08-28 10:27:44] Einschüchtern: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Wahrnehmung: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Darbietung: W2 → W4 (1 Standard)
+  [2025-08-28 10:27:44] Darbietung: W4 → W6 (1 Standard)
+  [2025-08-28 10:27:44] Darbietung: W6 → W8 (1 Standard)
+  [2025-08-28 10:27:44] Darbietung: W8 → W10 (1 Standard)
+  [2025-08-28 10:27:44] Überreden: W4 → W6 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 10:27:44] Arkaner Hintergrund (Barde) (Kosten: 1)
+  [2025-08-28 10:27:44] Ermutigen (Kosten: 1)
+  [2025-08-28 10:27:44] Täuscher (Kosten: 1)
+  [2025-08-28 10:27:44] Erniedrigen (Kosten: 1)
+  [2025-08-28 10:27:44] Konter (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 10:27:44] Behindernde_Rüstung_leicht ( - Punkte: 1)
+  [2025-08-28 10:27:44] Große Klappe ( - Punkte: 1)
+  [2025-08-28 10:27:44] Außenseiter ( - Punkte: 1)
+  [2025-08-28 10:27:44] Arrogant ( - Punkte: 2)
+  [2025-08-28 10:27:44] Tick ( - Punkte: 1)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 10:27:44] Eigenschaft erhöhen/senken (Rang: Anfänger)
+  [2025-08-28 10:27:44] Verwirrung (Rang: Anfänger)
+  [2025-08-28 10:27:44] Geräusch/Stille (Rang: Anfänger)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 10:27:44] Meistermesser (Reichweite 3/6/12, Schaden Stärke+d4, AP 1, RoF 1, Parade +1) hinzugefügt [Auto-Gen]
+  [2025-08-28 10:27:44] Sap (Stärke+d4, nicht tödlich) hinzugefügt [Auto-Gen]
+  [2025-08-28 10:27:44] Ledertunika (+2 Rüstung) hinzugefügt [Auto-Gen]
+  [2025-08-28 10:27:44] Entertainer-Paket hinzugefügt [Auto-Gen]
+  [2025-08-28 10:27:44] Trank der Unsichtbarkeit hinzugefügt [Auto-Gen]
+  [2025-08-28 10:27:44] Trank: Boost Eigenschaft (Konstitution) hinzugefügt [Auto-Gen]
+  [2025-08-28 10:27:44] Meistermesser hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-28 10:27:44] Sap hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-28 10:27:44] Ledertunika hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-28 10:27:44] Entertainer-Paket hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-28 10:27:44] Trank der Unsichtbarkeit hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-28 10:27:44] Trank: Boost Eigenschaft (Konstitution) hinzugefügt [Custom] [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte (6 Steigerungen)
+  Fertigkeiten:  11 Punkte (11 Steigerungen)
+  Talente:       5 Punkte (5 hinzugefügt, 0 entfernt)
+  Handicaps:     +6 erhalten, 2 verwendet, 4 verfügbar (5 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (3 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

@@ -1,0 +1,67 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-08-31 18:07:16
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2025-08-31 18:07:16] Auto-Generierung abgeschlossen:
+    Template: Leomara (Setting: SWAE)
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-08-31 18:07:16] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Konstitution: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Stärke: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Verstand: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Verstand: W6 → W8 (1 Standard)
+  [2025-08-31 18:07:16] Willenskraft: W4 → W6 (2 Handicap-Punkte)
+  [2025-08-31 18:07:16] Willenskraft: W6 → W8 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-08-31 18:07:16] Einschüchtern: W2 → W4 (1 Standard)
+  [2025-08-31 18:07:16] Einschüchtern: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Heilen: W2 → W4 (1 Standard)
+  [2025-08-31 18:07:16] Kriegskunst: W2 → W4 (1 Standard)
+  [2025-08-31 18:07:16] Kriegskunst: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Schießen: W2 → W4 (1 Standard)
+  [2025-08-31 18:07:16] Schießen: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Überreden: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Kämpfen: W2 → W4 (1 Standard)
+  [2025-08-31 18:07:16] Kämpfen: W4 → W6 (1 Standard)
+  [2025-08-31 18:07:16] Wahrnehmung: W4 → W6 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-31 18:07:16] Anführer (Kosten: 0)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-31 18:07:16] Ehrenkodex ( - Punkte: 2)
+  [2025-08-31 18:07:16] Loyal ( - Punkte: 1)
+  [2025-08-31 18:07:16] Phobie ( - Punkte: 1)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-31 18:07:16] Gambeson hinzugefügt [Auto-Gen]
+  [2025-08-31 18:07:16] Langschwert hinzugefügt [Auto-Gen]
+  [2025-08-31 18:07:16] Mittlerer Schild hinzugefügt [Auto-Gen]
+  [2025-08-31 18:07:16] Kriegerbrief hinzugefügt [Auto-Gen]
+  [2025-08-31 18:07:16] Abenteurerpaket hinzugefügt [Auto-Gen]
+  [2025-08-31 18:07:16] Gambeson hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-31 18:07:16] Langschwert hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-31 18:07:16] Mittlerer Schild hinzugefügt [Custom] [Auto-Gen]
+  [2025-08-31 18:07:16] Kriegerbrief hinzugefügt [Custom] [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     7 Punkte (7 Steigerungen)
+  Fertigkeiten:  11 Punkte (11 Steigerungen)
+  Talente:       0 Punkte (1 hinzugefügt, 0 entfernt)
+  Handicaps:     +4 erhalten, 4 verwendet, 0 verfügbar (3 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

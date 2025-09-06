@@ -1,0 +1,130 @@
+#:import MDDivider kivymd.uix.divider.MDDivider
+
+<EinstellungenScreen>:
+    EinstellungenWidget:
+        id: einstellungen_widget
+
+<VoelkerScreen>:
+    VoelkerWidget:
+        id: voelker_widget
+
+<ProfilScreen>:
+    ProfilWidget:
+        id: profil_widget
+
+<EigenschaftenScreen>:
+    EigenschaftenWidget:
+        id: eigenschaften_widget
+
+<HandicapsScreen>:
+    HandicapsWidget:
+        id: handicaps_widget
+
+<TalenteScreen>:
+    TalenteWidget:
+        id: talente_widget
+
+<MaechteScreen>:
+    MaechteWidget:
+        id: maechte_widget
+
+<AusruestungScreen>:
+    AusruestungWidget:
+        id: ausruestung_widget
+
+<CharakterbogenScreen>:
+    CharakterbogenWidget:
+        id: charakterbogen_widget
+
+<HistorieScreen>:
+    HistorieWidget:
+        id: historie_widget
+
+<InfoScreen>:
+    orientation: 'vertical'
+    padding: dp(10)
+    spacing: dp(10)
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            md_bg_color: app.theme_cls.backgroundColor
+            height: self.minimum_height
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDLabel:
+                text: root.info_text
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'top'            
+          
+            # Linktasten
+            MDBoxLayout:
+                id: link_container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
+
+MDScreen:
+    # Wir packen alles in eine einzige vertikale MDBoxLayout-Struktur
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: app.theme_cls.backgroundColor
+
+        # ----------------- (1) OBERE MENÜLEISTE (TABS) -----------------
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(60)  # Höhe der Tabbar
+            padding: [30, 0, 0, 0]
+            md_bg_color: app.theme_cls.backgroundColor
+            MDTabsPrimary:
+                id: tabs_bar
+                # In "on_start" füllen wir hier MDTabsItem rein.
+
+        # ----------------- (2) POINTBAR -------------------
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(130)
+            md_bg_color: app.theme_cls.backgroundColor
+
+            GenerationPointsBar:
+                id: generation_points
+                charakter: app.controller.charakter
+
+        # ----------------- (3) TAB-INHALT (CAROUSEL) -------------------
+        MDBoxLayout:
+            orientation: 'vertical'
+            id: tab_content_box
+            padding: [30, 0, 30, 30]
+            size_hint_y: 1  # Füllt den restlichen Platz
+            md_bg_color: app.theme_cls.backgroundColor
+
+            ScreenManager:
+                id: tabs_carousel
+                size_hint: (1, 1)
+                # Screens werden dynamisch hinzugefügt.
+
+        # ----------------- (4) LOGGER (unten) -------------------
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(60)
+            md_bg_color: app.theme_cls.backgroundColor
+
+            TextInput:
+                id: logger_label
+                text: "Logger: Keine neuen Nachrichten"
+                readonly: True
+                multiline: True
+                background_color: (0, 0, 0, 0)
+                foreground_color: (1, 1, 1, 1)

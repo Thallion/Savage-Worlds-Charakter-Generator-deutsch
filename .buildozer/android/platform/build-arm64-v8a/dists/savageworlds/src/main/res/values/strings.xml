@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Savage Worlds Char Generator</string>
+    <string name="private_version">cf9349d3fabf1cc6ca8f56ff0aad9a3273817a45</string>
+    <string name="presplash_color">#000000</string>
+    <string name="urlScheme">kivy</string>
+</resources>

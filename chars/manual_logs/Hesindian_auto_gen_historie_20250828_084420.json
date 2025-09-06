@@ -1,0 +1,364 @@
+{
+  "session_start": "2025-08-28T08:44:20.867754",
+  "entries": [
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "auto_character_generated",
+      "details": {
+        "name": "Hesindian",
+        "template": "Hesindian",
+        "setting": "SWAE",
+        "total_auto_points": 0,
+        "cost_log_file": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Hesindian_kosten_20250828_084420.txt"
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Heimlichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überleben",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überreden",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "1 Handicap-Punkt",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "1 Handicap-Punkt",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Arkaner Hintergrund",
+        "kosten": 0,
+        "auto_generated": true,
+        "gratis": true,
+        "voraussetzungen_ignoriert": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Machtpunkte",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Neugierig",
+        "punkte": 2,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Schlechte Augen",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Tick",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Geschoss",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Heilung",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Blenden",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Magierstab",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Reisrobe",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Abenteuerpaket",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Magierstab",
+        "auto_generated": true,
+        "custom": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 08:44:20",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Reisrobe",
+        "auto_generated": true,
+        "custom": true
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 6,
+    "fertigkeiten": 12,
+    "talente": 1,
+    "handicaps": 0,
+    "maechte": 0,
+    "aufstiege": 0
+  }
+}

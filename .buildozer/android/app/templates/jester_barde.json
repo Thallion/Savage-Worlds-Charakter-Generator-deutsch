@@ -1,0 +1,147 @@
+{
+  "name": "Jester",
+  "description": "What do you call a king with two brain cells? Married! Ha ha ha!",
+  "setting": "Fantasy Kompendium",
+  "race": "Infernaler",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Gaukler / Barde",
+    "languages": "",
+    "rank": "Erfahren"
+  },
+  "starting_capital": 500,
+  "starting_attribute_points": 5,
+  "starting_skill_points": 12,
+  "starting_advances": 4,
+  "advances_to_apply": [],
+  "attributes": {
+    "Geschicklichkeit": 6,
+    "Konstitution": 6,
+    "Stärke": 4,
+    "Verstand": 8,
+    "Willenskraft": 8
+  },
+  "skills": {
+    "Athletik": 6,
+    "Allgemeinwissen": 6,
+    "Kämpfen": 4,
+    "Einschüchtern": 6,
+    "Wahrnehmung": 6,
+    "Darbietung": 10,
+    "Überreden": 6,
+    "Heimlichkeit": 4
+  },
+  "handicaps": [
+    "Behindernde_Rüstung_leicht",
+    "Große Klappe",
+    "Außenseiter",
+    "Arrogant",
+    "Tick"
+  ],
+  "edges": [
+    "Arkaner Hintergrund (Barde)",
+    "Ermutigen",
+    "Täuscher",
+    "Erniedrigen",
+    "Konter"
+  ],
+  "powers": [
+    "Eigenschaft erhöhen/senken",
+    "Verwirrung",
+    "Geräusch/Stille"
+  ],
+  "power_points": 10,
+  "equipment": [
+    "Meistermesser (Reichweite 3/6/12, Schaden Stärke+d4, AP 1, RoF 1, Parade +1)",
+    "Sap (Stärke+d4, nicht tödlich)",
+    "Ledertunika (+2 Rüstung)",
+    "Entertainer-Paket",
+    "Trank der Unsichtbarkeit",
+    "Trank: Boost Eigenschaft (Konstitution)"
+  ],
+  "custom_equipment": [
+    {
+      "name": "Meistermesser",
+      "type": "weapon",
+      "weight": 1,
+      "cost": 80,
+      "description": "Meisterhaftes Stich-/Wurfmesser",
+      "category": "Wurf-/Stichwaffe",
+      "properties": {
+        "damage": "STÄ+W4",
+        "range": "3/6/12",
+        "ap": 1,
+        "rof": 1,
+        "parry_bonus": 1,
+        "nonlethal": false
+      }
+    },
+    {
+      "name": "Sap",
+      "type": "weapon",
+      "weight": 2,
+      "cost": 10,
+      "description": "Schwerer Schlagstock (nicht tödlich)",
+      "category": "Improvisierte Waffe",
+      "properties": {
+        "damage": "STÄ+W4",
+        "nonlethal": true,
+        "parry_bonus": 0
+      }
+    },
+    {
+      "name": "Ledertunika",
+      "type": "armor",
+      "weight": 5,
+      "cost": 35,
+      "description": "Leichte Lederrüstung",
+      "category": "Rüstung",
+      "properties": {
+        "armor_torso": 2,
+        "armor_arms": 0,
+        "armor_legs": 0
+      }
+    },
+    {
+      "name": "Entertainer-Paket",
+      "type": "equipment",
+      "weight": 4,
+      "cost": 15,
+      "description": "Requisiten und Utensilien für Auftritte",
+      "category": "Ausrüstung",
+      "properties": {}
+    },
+    {
+      "name": "Trank der Unsichtbarkeit",
+      "type": "equipment",
+      "weight": 0.5,
+      "cost": 120,
+      "description": "Kurzzeitige Unsichtbarkeit (Einmalgebrauch)",
+      "category": "Trank",
+      "properties": {
+        "effect": "Unsichtbarkeit",
+        "duration": "kurz"
+      }
+    },
+    {
+      "name": "Trank: Boost Eigenschaft (Konstitution)",
+      "type": "equipment",
+      "weight": 0.5,
+      "cost": 40,
+      "description": "Erhöht kurzzeitig Konstitution",
+      "category": "Trank",
+      "properties": {
+        "effect": "Boost (Konstitution)",
+        "duration": "kurz"
+      }
+    }
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/jester",
+    "complete_character_generation": true
+  }
+}

@@ -1,0 +1,468 @@
+{
+  "session_start": "2025-08-28T10:29:05.466065",
+  "entries": [
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "auto_character_generated",
+      "details": {
+        "name": "Jester",
+        "template": "Jester",
+        "setting": "Fantasy Kompendium",
+        "total_auto_points": 0,
+        "cost_log_file": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Jester_kosten_20250828_102905.txt"
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Athletik",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Einschüchtern",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Einschüchtern",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Wahrnehmung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Darbietung",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überreden",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Arkaner Hintergrund (Barde)",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Ermutigen",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Täuscher",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Erniedrigen",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Konter",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Behindernde_Rüstung_leicht",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Große Klappe",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Außenseiter",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Arrogant",
+        "punkte": 2,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Tick",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Eigenschaft erhöhen/senken",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Verwirrung",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Geräusch/Stille",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Meistermesser (Reichweite 3/6/12, Schaden Stärke+d4, AP 1, RoF 1, Parade +1)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Sap (Stärke+d4, nicht tödlich)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Ledertunika (+2 Rüstung)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Entertainer-Paket",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Trank der Unsichtbarkeit",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Trank: Boost Eigenschaft (Konstitution)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Meistermesser",
+        "auto_generated": true,
+        "custom": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Sap",
+        "auto_generated": true,
+        "custom": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Ledertunika",
+        "auto_generated": true,
+        "custom": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Entertainer-Paket",
+        "auto_generated": true,
+        "custom": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Trank der Unsichtbarkeit",
+        "auto_generated": true,
+        "custom": true
+      }
+    },
+    {
+      "timestamp": "2025-08-28 10:29:05",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Trank: Boost Eigenschaft (Konstitution)",
+        "auto_generated": true,
+        "custom": true
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 6,
+    "fertigkeiten": 11,
+    "talente": 5,
+    "handicaps": 0,
+    "maechte": 0,
+    "aufstiege": 0
+  }
+}

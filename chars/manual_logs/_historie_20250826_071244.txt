@@ -1,0 +1,88 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-08-25 18:36:17
+================================================================================
+
+
+CHARAKTER GELADEN:
+----------------------------------------
+  [2025-08-25 18:36:17] {'name': 'Unbekannt'}
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-08-25 18:36:38] Geschicklichkeit: W4 → W6 (1 Punkte)
+  [2025-08-25 18:36:42] Willenskraft: W4 → W6 (1 Punkte)
+  [2025-08-25 18:36:45] Konstitution: W4 → W6 (1 Punkte)
+  [2025-08-25 18:36:54] Geschicklichkeit: W6 → W8 (1 Punkte)
+  [2025-08-25 18:36:54] Geschicklichkeit: W8 → W10 (1 Punkte)
+  [2025-08-25 18:37:08] Geschicklichkeit: W10 → W12 (1 Punkte)
+  [2025-08-26 07:10:08] Geschicklichkeit: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:08] Geschicklichkeit: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:10] Verstand: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:10] Verstand: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:11] Stärke: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:11] Stärke: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:37] Konstitution: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:37] Konstitution: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:38] Willenskraft: W4 → W6 (1 Handicap-Punkte)
+  [2025-08-26 07:10:38] Willenskraft: W4 → W6 (1 Attributspunkte)
+  [2025-08-26 07:10:39] Willenskraft: W6 → W8 (1 Attributspunkte)
+  [2025-08-26 07:10:39] Willenskraft: W6 → W8 (2 Handicap-Punkte)
+  [2025-08-26 07:11:25] Stärke: W6 → W8 (2 Aufstiege)
+  [2025-08-26 07:11:25] Stärke: W6 → W8 (2 Aufstiege)
+  [2025-08-26 07:11:27] Verstand: W6 → W8 (2 Aufstiege)
+  [2025-08-26 07:11:27] Verstand: W6 → W8 (2 Aufstiege)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-08-25 18:36:41] Athletik: W4 → W6 (1 Punkte)
+  [2025-08-25 18:36:46] Darbietung: W4 → W4 (1 Punkte)
+  [2025-08-25 18:36:47] Darbietung: W4 → W6 (1 Punkte)
+  [2025-08-25 18:36:49] Allgemeinwissen: W4 → W6 (1 Punkte)
+  [2025-08-26 07:10:12] Allgemeinwissen: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-26 07:10:12] Allgemeinwissen: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-26 07:10:13] Athletik: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-26 07:10:13] Athletik: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-26 07:10:16] Darbietung: W4 → W4 (2 Fertigkeitspunkte)
+  [2025-08-26 07:10:16] Darbietung: W4 → W4 (2 Fertigkeitspunkte)
+  [2025-08-26 07:11:36] Darbietung: W4 → W6 (1 Aufstiege)
+  [2025-08-26 07:11:36] Darbietung: W4 → W6 (1 Aufstiege)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-26 07:10:21] Angetrieben_schwer (schwer - Punkte: 2)
+  [2025-08-26 07:10:21] Angetrieben_schwer (schwer - Punkte: 2)
+  [2025-08-26 07:10:22] Angewohnheit_leicht (leicht - Punkte: 1)
+  [2025-08-26 07:10:22] Angewohnheit_leicht (leicht - Punkte: 1)
+  [2025-08-26 07:10:23] Angetrieben_leicht (leicht - Punkte: 1)
+  [2025-08-26 07:10:23] Angetrieben_leicht (leicht - Punkte: 1)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-26 07:10:30] Absolute Lieblingswaffe (Kosten: 2)
+  [2025-08-26 07:10:47] Arkaner Hintergrund (Kosten: 1)
+
+TALENT ENTFERNT:
+----------------------------------------
+  [2025-08-26 07:10:45] Absolute Lieblingswaffe entfernt
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-26 07:10:50] Abwehren (Rang: A)
+  [2025-08-26 07:10:50] Arkaner Schutz (Rang: A)
+  [2025-08-26 07:10:51] Arkanes entdecken/verbergen (Rang: A)
+
+MACHT ENTFERNT:
+----------------------------------------
+  [2025-08-26 07:12:17] Arkanes entdecken/verbergen entfernt
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     27 Punkte
+  Fertigkeiten:  14 Punkte
+  Talente:       3 Punkte
+  Handicaps:     +0 Punkte
+  Mächte:        3 Punkte
+  Aufstiege:     0 verwendet
+================================================================================

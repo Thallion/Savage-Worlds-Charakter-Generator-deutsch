@@ -1,0 +1,145 @@
+🎯 STARTE CHARAKTERGENERIERUNG: LEOMARA
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Leomara' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Völker-Talent festgelegt: Anführer
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Ehrenkodex hinzugefügt (+2 Punkte)
+  ✅ Loyal hinzugefügt (+1 Punkte)
+  ✅ Phobie hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  ✅ Athletik bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Einschüchtern: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Heilen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Kriegskunst: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Schießen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überreden: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 11 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Völker-Talent wird hinzugefügt: Anführer
+  ✅ Anführer hinzugefügt (GRATIS - Völker-Bonus)
+  ⚠️ Anführer direkt gesetzt (Fallback) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  ⏭️ Gambeson übersprungen - wird als Custom Equipment hinzugefügt
+  ⏭️ Langschwert übersprungen - wird als Custom Equipment hinzugefügt
+  ⏭️ Mittlerer Schild übersprungen - wird als Custom Equipment hinzugefügt
+  ⏭️ Kriegerbrief übersprungen - wird als Custom Equipment hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+  🔧 Verarbeite custom_equipment aus Template...
+  🔧 Custom Rüstung: Gambeson
+    🛡️ Gambeson zu selected_ruestungen hinzugefügt
+    ✅ Gambeson erfolgreich hinzugefügt (Kategorie: Rüstung)
+  🔧 Custom Waffe: Langschwert
+    ⚔️ Langschwert zu selected_waffen hinzugefügt
+    ✅ Langschwert erfolgreich hinzugefügt (Kategorie: Waffe)
+  🔧 Custom Schild: Mittlerer Schild
+    🛡️ Mittlerer Schild zu selected_schilde hinzugefügt
+    ✅ Mittlerer Schild erfolgreich hinzugefügt (Kategorie: Schild)
+  🔧 Custom item: Kriegerbrief
+    ✅ Kriegerbrief erfolgreich hinzugefügt (Kategorie: Dokument)
+📊 AUSRÜSTUNG GESAMT: 5 Gegenstände hinzugefügt
+  📊 Punktestand - Attr: 0, Skill: 1, Handicap: 0
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Leomara
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 11 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 19
+Differenz: 2
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W8
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W6
+  Wahrnehmung: W6
+  Kämpfen: W6
+  Schießen: W6
+  Einschüchtern: W6
+  Heilen: W4
+  Kriegskunst: W6
+
+⭐ TALENTE:
+  Anführer [!]
+
+⚠️ HANDICAPS:
+  Ehrenkodex (2 Punkte)
+  Loyal (1 Punkte)
+  Phobie_leicht (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Leomara_kosten_20250831_180716.txt

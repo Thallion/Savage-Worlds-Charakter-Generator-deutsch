@@ -1,0 +1,79 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+       google()
+       jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'com.android.application'
+
+
+android {
+    namespace 'com.github.thallion.savageworlds'
+    compileSdkVersion 35
+    buildToolsVersion '36.0.0'
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 35
+        versionCode 102150703
+        versionName '0.5.7.3'
+        manifestPlaceholders = [:]
+    }
+
+	
+	packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+        doNotStrip '**/*.so'
+        
+	}
+	
+
+	
+
+    
+
+    buildTypes {
+        debug {
+        }
+        release {
+            
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+            java {}
+        }
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.core:core:1.6.0'
+    
+}

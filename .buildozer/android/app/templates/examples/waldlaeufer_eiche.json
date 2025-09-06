@@ -1,0 +1,75 @@
+{
+  "name": "Eiche",
+  "description": "Ein erfahrener Waldläufer, der die Geheimnisse der Wildnis kennt.",
+  "setting": "SWAE",
+  "race": "Elf",
+  "profile": {
+    "age": "120", 
+    "gender": "Männlich",
+    "concept": "Waldläufer",
+    "languages": "Gemeinsam, Elfisch, Druidisch"
+  },
+  "attributes": {
+    "Stärke": 6,
+    "Geschicklichkeit": 8,
+    "Konstitution": 6,
+    "Verstand": 8,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Schießen": 10,
+    "Überleben": 10,
+    "Wahrnehmung": 8,
+    "Heimlichkeit": 8,
+    "Athletik": 6,
+    "Kämpfen": 6,
+    "Reiten": 6
+  },
+  "handicaps": [
+    "Feind (Orkhorde)",
+    "Verpflichtung (Waldschutz)"
+  ],
+  "edges": [
+    "Bogenschütze",
+    "Waldläufer",
+    "Marksman"
+  ],
+  "equipment": [
+    {
+      "name": "Elfenbogen",
+      "type": "weapon",
+      "weight": 2,
+      "cost": 300,
+      "description": "Meisterlich gearbeiteter Elfenbogen", 
+      "category": "Fernkampfwaffe",
+      "properties": {
+        "damage": "2W6",
+        "range": "15/30/60",
+        "min_strength": "W6"
+      }
+    },
+    {
+      "name": "Elfenkettenhemd", 
+      "type": "armor",
+      "weight": 4,
+      "cost": 500,
+      "description": "Leichtes aber starkes Elfenkettenhemd",
+      "category": "Elfenrüstung",
+      "properties": {
+        "armor_torso": 2,
+        "armor_arms": 2,
+        "min_strength": "W4"
+      }
+    },
+    "Köcher mit 30 Pfeilen",
+    "Waldläuferpaket",
+    "Langdolch",
+    "Elfenumhang"
+  ],
+  "generation_options": {
+    "strict_point_allocation": true,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "rangers"
+  }
+}

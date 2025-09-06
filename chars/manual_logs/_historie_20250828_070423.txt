@@ -1,0 +1,63 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-08-28 07:01:04
+================================================================================
+
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-08-28 07:01:11] Geschicklichkeit: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:11] Geschicklichkeit: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:13] Stärke: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:13] Stärke: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:17] Verstand: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:17] Verstand: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:18] Konstitution: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:18] Konstitution: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:19] Willenskraft: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:19] Willenskraft: W4 → W6 (1 Attributspunkte)
+  [2025-08-28 07:01:46] Geschicklichkeit: W6 → W8 (1 Attributspunkte)
+  [2025-08-28 07:01:46] Geschicklichkeit: W6 → W8 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-08-28 07:01:20] Allgemeinwissen: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:20] Allgemeinwissen: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:21] Athletik: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:21] Athletik: W4 → W6 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:22] Darbietung: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:22] Darbietung: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:23] Diebeskunst: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:23] Diebeskunst: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:24] Einschüchtern: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:01:24] Einschüchtern: W4 → W4 (1 Fertigkeitspunkte)
+  [2025-08-28 07:02:19] Allgemeinwissen: W6 → W8 (2 Fertigkeitspunkte)
+  [2025-08-28 07:02:19] Allgemeinwissen: W6 → W8 (2 Fertigkeitspunkte)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 07:01:39] Angetrieben_schwer (schwer - Punkte: 2)
+  [2025-08-28 07:01:39] Angetrieben_schwer (schwer - Punkte: 2)
+  [2025-08-28 07:02:44] Angewohnheit_schwer (schwer - Punkte: 2)
+  [2025-08-28 07:02:44] Angewohnheit_schwer (schwer - Punkte: 2)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 07:02:48] Arkaner Hintergrund (Kosten: 2)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2025-08-28 07:02:51] Abwehren (Rang: A)
+  [2025-08-28 07:02:51] Arkaner Schutz (Rang: A)
+  [2025-08-28 07:02:52] Arkanes entdecken/verbergen (Rang: A)
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     13 Punkte
+  Fertigkeiten:  14 Punkte
+  Talente:       2 Punkte
+  Handicaps:     +0 Punkte
+  Mächte:        3 Punkte
+  Aufstiege:     0 verwendet
+================================================================================

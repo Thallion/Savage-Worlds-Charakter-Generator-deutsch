@@ -1,0 +1,77 @@
+================================================================================
+KOSTEN-LOG FÜR: Jeanne
+ERSTELLT: 2025-09-02 20:17:29
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Geschicklichkeit: W4 → W6 = 1 Punkte
+  Geschicklichkeit: W6 → W8 = 1 Punkte
+  Geschicklichkeit: W8 → W10 = 1 Punkte
+  Konstitution: W4 → W6 = 1 Punkte
+  Stärke: W4 → W6 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+GESAMT: 7 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+  Athletik: W4 → W6 = 1 Punkte
+  Heimlichkeit: W4 → W6 = 1 Punkte
+  Heimlichkeit: W6 → W8 = 1 Punkte
+  Kämpfen: W2 → W4 = 1 Punkte
+  Kämpfen: W4 → W6 = 1 Punkte
+  Provozieren: W2 → W4 = 1 Punkte
+  Provozieren: W4 → W6 = 1 Punkte
+  Schießen: W2 → W4 = 1 Punkte
+  Schießen: W4 → W6 = 1 Punkte
+  Schießen: W6 → W8 = 1 Punkte
+  Schießen: W8 → W10 = 1 Punkte
+  Wahrnehmung: W4 → W6 = 1 Punkte
+GESAMT: 12 Punkte
+
+HANDICAPS:
+----------------------------------------
+  Loyal: +1 Punkte
+  Schwerzüngig: +2 Punkte
+  Stur: +1 Punkte
+GESAMT: +4 Punkte (Bonus)
+
+HANDICAP-PUNKTE VERWENDUNG:
+----------------------------------------
+Handicap-Punkte können verwendet werden für:
+  • 1 Punkt = 2 Attributsteigerungen
+  • 1 Punkt = 1 Anfänger-Talent
+  • 1 Punkt = 2 Fertigkeitssteigerungen
+  • 1 Punkt = Startgeld erhöhen
+→ 4 Handicap-Punkte entsprechen:
+  - Bis zu 8 Attribut-/Fertigkeitssteigerungen ODER
+  - Bis zu 4 Talente ODER
+  - Kombination aus beidem
+
+TALENTE:
+----------------------------------------
+  Aufmerksamkeit: GRATIS (Völker-Bonus)
+GESAMT: 0 Punkte
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +4
+Verfügbare Punkte gesamt: 21
+
+Ausgegeben für Attribute: 7
+Ausgegeben für Fertigkeiten: 12
+Ausgegeben für Talente: 0
+Ausgegeben gesamt: 19
+
+ÜBERSCHUSS: 2 Punkte nicht verwendet
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================

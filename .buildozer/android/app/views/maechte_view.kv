@@ -1,0 +1,156 @@
+<TooltipIconButton>
+    MDTooltipPlain:
+        text: root.tooltip_text
+
+<MaechteWidget>:
+    orientation: 'vertical'
+    md_bg_color: self.theme_cls.backgroundColor
+    
+    MDBoxLayout:
+        size_hint_y: None
+        height: 100
+        padding: [20, 5]
+        spacing: 5
+
+        TooltipIconButton:
+            id: sort_name_btn
+            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
+            on_release: root.update_sort_option('Name')
+            pos_hint: {"center_y": .5}
+
+        TooltipIconButton:
+            id: sort_rank_btn
+            icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
+            tooltip_text: "Nach Rang sortieren" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "Rang absteigend sortieren"
+            on_release: root.update_sort_option('Rang')
+            pos_hint: {"center_y": .5}
+
+        MDTextField:
+            id: search_input
+            hint_text: 'Suche...'
+            size_hint_x: 1
+            on_text: root.filter_maechte()
+            
+        # Checkbox für "Nur ausgewählte" hinzufügen
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: dp(200)
+            spacing: dp(5)
+            
+            MDCheckbox:
+                id: only_selected_checkbox
+                size_hint: None, None
+                size: dp(40), dp(40)
+                active: root.only_selected_items
+                on_active: root.toggle_only_selected_items(self.active)
+                pos_hint: {"center_y": .5}
+                
+            MDLabel:
+                text: "Nur ausgewählte"
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_y": .5}
+
+    MDLabel:
+        text: 'Mächte'
+        font_size: dp(24)
+        size_hint_y: None
+        height: dp(48)
+        padding: [20, 10]
+
+    MaechteRecycleView:
+        id: recycleview
+        viewclass: 'MachtItemRow'
+        size_hint_y: 1
+        
+        RecycleBoxLayout:
+            id: layout
+            default_size: None, dp(60)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            spacing: dp(5)
+            padding: dp(20)
+
+<MachtItemRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(60)
+    md_bg_color: self._get_background_color()
+    line_color: self._get_line_color()
+    line_width: 2
+    spacing: dp(10)
+    padding: dp(10)
+
+    MDLabel:
+        text: root.macht_name
+        font_size: dp(16)
+        size_hint_x: 0.2
+        halign: 'left'
+        valign: 'middle'
+
+    MDLabel:
+        text: root.rang
+        font_size: dp(16)
+        size_hint_x: 0.05
+        halign: 'left'
+        valign: 'middle'
+
+    MDLabel:
+        text: f"MP: {root.machtpunkte} / RW: {root.reichweite} / Dauer: {root.dauer}"
+        font_size: dp(14)
+        size_hint_x: 0.15
+        halign: 'left'
+        valign: 'middle'
+
+    MDFabButton:
+        icon: "plus"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.waehle_macht()
+        disabled: root.macht and root.macht.ausgewaehlt
+
+    MDFabButton:
+        icon: "minus"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.entferne_macht()
+        disabled: not root.macht or not root.macht.ausgewaehlt
+
+    # Neuer Bearbeiten-Button
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_macht()
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_x: 0.55
+        spacing: dp(5)
+        
+        MDLabel:
+            text: root.beschreibung
+            font_size: dp(14)
+            halign: 'left'
+            valign: 'top'
+            text_size: self.width, None
+            markup: True
+            max_lines: 2
+            
+        MDIconButton:
+            icon: "information-outline"
+            size_hint: None, None
+            size: dp(24), dp(24)
+            pos_hint: {"center_y": 0.5}
+            on_release: root.show_full_description()
+            theme_icon_color: "Primary"

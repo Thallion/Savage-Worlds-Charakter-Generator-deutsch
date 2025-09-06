@@ -1,0 +1,200 @@
+<TooltipIconButton>
+    MDTooltipPlain:
+        text: root.tooltip_text
+
+<TalenteWidget>:
+    orientation: 'vertical'
+    md_bg_color: self.theme_cls.backgroundColor  
+    
+    MDBoxLayout:
+        size_hint_y: None
+        height: 100
+        padding: [20, 5]
+        spacing: 5
+
+        TooltipIconButton:
+            id: sort_name_btn
+            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
+            on_release: root.update_sort_option('Name')
+            pos_hint: {"center_y": .5}
+
+        TooltipIconButton:
+            id: sort_rank_btn
+            icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
+            tooltip_text: "Nach Rang sortieren" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "Rang absteigend sortieren"
+            on_release: root.update_sort_option('Rang')
+            pos_hint: {"center_y": .5}
+
+        TooltipIconButton:
+            id: sort_category_btn
+            icon: "sort-reverse-variant" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-variant"
+            tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
+            on_release: root.update_sort_option('Kategorie')
+            pos_hint: {"center_y": .5}
+
+        MDTextField:
+            id: search_input
+            hint_text: 'Suche...'
+            size_hint_x: 1
+            on_text: root.filter_talente()
+
+        # Checkbox für "Nur ausgewählte" hinzufügen
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: dp(200)
+            spacing: dp(5)
+            
+            MDCheckbox:
+                id: only_selected_checkbox
+                size_hint: None, None
+                size: dp(40), dp(40)
+                active: root.only_selected_items
+                on_active: root.toggle_only_selected_items(self.active)
+                pos_hint: {"center_y": .5}
+                
+            MDLabel:
+                text: "Nur ausgewählte"
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_y": .5}
+
+        # Neue Checkbox für Voraussetzungen-Filter
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: dp(240)
+            spacing: dp(5)
+            
+            MDCheckbox:
+                id: only_available_checkbox
+                size_hint: None, None
+                size: dp(40), dp(40)
+                active: root.only_available_talents
+                on_active: root.toggle_only_available_talents(self.active)
+                pos_hint: {"center_y": .5}
+                
+            MDLabel:
+                text: "Voraussetzung erfüllt"
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_y": .5}
+
+        TooltipIconButton:
+            icon: "filter"
+            tooltip_text: "Nach Kategorie filtern"
+            on_release: root.open_category_menu()
+            pos_hint: {"center_y": .5}
+
+        MDLabel:
+            id: category_label
+            text: 'Alle Kategorien'
+            size_hint_x: 1
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(48)
+        padding: [20, 10, 20, 0]
+        
+        MDLabel:
+            text: 'Talente'
+            font_size: dp(24)
+            halign: 'left'
+            
+    TalenteRecycleView:
+        id: recycleview
+        viewclass: 'TalentItemRow'
+        size_hint_y: 1
+        
+        RecycleBoxLayout:
+            id: layout
+            default_size: None, dp(60)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            spacing: dp(5)
+            padding: dp(20)
+
+<TalentItemRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(60)
+    md_bg_color: self._get_background_color()
+    line_color: self._get_line_color()
+    line_width: 2
+    spacing: dp(10)
+    padding: dp(10)
+
+    MDLabel:
+        text: root.talent_name
+        font_size: dp(16)
+        size_hint_x: 0.2
+        halign: 'left'
+        valign: 'middle'
+
+    MDLabel:
+        text: root.kategorie
+        font_size: dp(16)
+        size_hint_x: 0.15
+        halign: 'left'
+        valign: 'middle'
+
+    MDLabel:
+        text: root.rang
+        font_size: dp(16)
+        size_hint_x: 0.1
+        halign: 'left'
+        valign: 'middle'
+
+    MDFabButton:
+        icon: "plus"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.waehle_talent()
+        disabled: False
+
+    MDFabButton:
+        icon: "minus"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.entferne_talent()
+        disabled: not root.ausgewaehlt
+
+    # Neuer Bearbeiten-Button
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(40), dp(40)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_talent()
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_x: 0.4
+        spacing: dp(5)
+        
+        MDLabel:
+            id: beschreibung_label
+            text: root.beschreibung
+            font_size: dp(14)
+            halign: 'left'
+            valign: 'top'
+            text_size: self.width, None
+            markup: True
+            max_lines: 2
+            
+        MDIconButton:
+            icon: "information-outline"
+            size_hint: None, None
+            size: dp(24), dp(24)
+            pos_hint: {"center_y": 0.5}
+            on_release: root.show_full_description()
+            theme_icon_color: "Primary"

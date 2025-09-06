@@ -1,0 +1,98 @@
+{
+  "name": "Arthan",
+  "description": "Die Dunkelheit ist über das Land gekommen, aber du bist hier, um das Leid zu lindern und die Schwachen zu schützen.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "free_race_edge": "Arkaner Hintergrund",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Priester",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 6,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 6,
+    "Willenskraft": 8
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 4,
+    "Glaube": 8,
+    "Heilen": 8,
+    "Heimlichkeit": 4,
+    "Kämpfen": 6,
+    "Überreden": 8,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Ehrenkodex",
+    "Pazifist",
+    "Sanftmütig"
+  ],
+  "edges": [
+    "Heiler"
+  ],
+  "powers": [
+    "Heilung",
+    "Linderung",
+    "Waffe Verbessern"
+  ],
+  "power_points": 10,
+  "equipment": [
+    "Kettenhemd",
+    "Kriegshammer",
+    "Abenteuerpaket"
+  ],
+  "custom_equipment": [
+    {
+      "name": "Kettenhemd",
+      "type": "Rüstung",
+      "weight": 8,
+      "cost": 500,
+      "description": "Schwere Kettenrüstung",
+      "category": "Rüstung",
+      "properties": {
+        "armor_bonus": 3,
+        "coverage": "Torso, Arme und Beine",
+        "special": "Priesterliche Rüstung"
+      }
+    },
+    {
+      "name": "Kriegshammer",
+      "type": "Waffe",
+      "weight": 4,
+      "cost": 250,
+      "description": "Geheiligter Kriegshammer",
+      "category": "Nahkampfwaffe",
+      "properties": {
+        "damage": "Stä+W6",
+        "parry_bonus": 0,
+        "range": 0,
+        "two_handed": false,
+        "special": "Kann als heiliges Symbol dienen"
+      }
+    }
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/priester",
+    "create_missing_equipment": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 5 + Kämpfen(W6)/2 = 5",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 = 5, mit Kettenhemd +3 = 8",
+    "bewegung": 6,
+    "machtpunkte_info": "10 Machtpunkte durch Arkaner Hintergrund (Wunder)"
+  },
+  "power_descriptions": {
+    "Heilung": "3 Machtpunkte, Reichweite: Berührung, Wirkungsdauer: Sofort; Heilung entfernt Wunden, die weniger als eine Stunde alt sind. Ein Erfolg entfernt eine Wunde, eine Steigerung zwei.",
+    "Linderung": "1 Machtpunkt, Reichweite: Verstand, Wirkungsdauer: Sofort; Linderung entfernt eine Stufe Erschöpfung oder zwei mit einer Steigerung. Die Macht kann auch den Zustand Angeschlagen aufheben, und den Zustand Betäubt mit einer Steigerung.",
+    "Waffe Verbessern": "2 Machtpunkte, Reichweite: Verstand, Wirkungsdauer: 5; Diese Macht kann auf jede Art von Waffe gewirkt werden. Solange die Macht wirkt, steigt der Schaden der Waffe um +2, oder +4 mit einer Steigerung."
+  }
+}

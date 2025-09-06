@@ -1,0 +1,132 @@
+🎯 STARTE CHARAKTERGENERIERUNG: JEANNE
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Jeanne' initialisiert (Setting: SWAE)
+  💰 Standard-Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Völker-Talent festgelegt: Aufmerksamkeit
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Loyal hinzugefügt (+1 Punkte)
+  ✅ Schwerzüngig hinzugefügt (+2 Punkte)
+  ✅ Stur hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Heimlichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Provozieren: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Schießen: W2 → W10 (4 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Völker-Talent wird hinzugefügt: Aufmerksamkeit
+  ✅ Aufmerksamkeit hinzugefügt (GRATIS - Völker-Bonus)
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  🔧 Custom Rüstung: Lederjacke
+    🛡️ Lederjacke zu selected_ruestungen hinzugefügt
+    ✅ Lederjacke erfolgreich hinzugefügt (Kategorie: Rüstung)
+  🔧 Custom Waffe: Muskete
+    ⚔️ Muskete zu selected_waffen hinzugefügt
+    ✅ Muskete erfolgreich hinzugefügt (Kategorie: Waffe)
+  🔧 Custom Waffe: Langschwert
+    ⚔️ Langschwert zu selected_waffen hinzugefügt
+    ✅ Langschwert erfolgreich hinzugefügt (Kategorie: Waffe)
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 4 Gegenstände hinzugefügt
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Jeanne
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 19
+Differenz: 2
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W10
+  Verstand: W6
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W6
+  Heimlichkeit: W8
+  Überreden: W4
+  Wahrnehmung: W6
+  Kämpfen: W6
+  Schießen: W10
+  Provozieren: W6
+
+⭐ TALENTE:
+  Aufmerksamkeit
+
+⚠️ HANDICAPS:
+  Loyal (1 Punkte)
+  Schwerzüngig (2 Punkte)
+  Stur (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Jeanne_kosten_20250827_172149.txt
