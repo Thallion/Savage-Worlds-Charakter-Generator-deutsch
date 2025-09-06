@@ -25,7 +25,7 @@ from manager.statistics_manager import StatisticsManager
 from manager.pdf_manager import PDFManager
 
 # KV-Datei laden
-Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/einstellungen_widget.kv')
+Builder.load_file('views/einstellungen_widget.kv')
 
 
 class EinstellungenWidget(MDBoxLayout):

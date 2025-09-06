@@ -80,7 +80,7 @@ Factory.register('TooltipIconButton', TooltipIconButton)
 
 
 # KV-Datei laden
-Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/talente_view.kv')
+Builder.load_file('views/talente_view.kv')
 
 class TalenteRecycleView(MDRecycleView):
     """RecycleView für Talente"""

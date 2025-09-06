@@ -38,7 +38,7 @@ version = 0.5.6.9
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow,reportlab,android
+requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -103,7 +103,7 @@ android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTE
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 33
+android.api = 35
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
@@ -112,7 +112,7 @@ android.minapi = 21
 #android.sdk = 20
 
 # (str) Android NDK version to use
-android.ndk = 28c
+android.ndk = 25b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 android.ndk_api = 21
@@ -121,10 +121,10 @@ android.ndk_api = 21
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path = /home/jean/Android/Sdk/ndk/28.2.13676358
+# android.ndk_path = /home/jean/Android/Sdk/ndk/28.2.13676358
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path = /home/jean/Android/Sdk
+android.sdk_path = /home/jean/Android/Sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
@@ -323,19 +323,19 @@ android.allow_backup = True
 #p4a.fork = kivy
 
 # (str) python-for-android branch to use, defaults to master
-#p4a.branch = develop
+p4a.branch = master
 
 # (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
-#p4a.commit = HEAD
+#p4a.commit = 957a3e5f
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 #p4a.source_dir =
 
 # (str) The directory in which python-for-android should look for your own build recipes (if any)
-#p4a.local_recipes =
+# p4a.local_recipes = ./p4a-recipes
 
 # (str) Filename to the hook for p4a
-#p4a.hook =
+# p4a.hook = ./p4a_hook.py
 
 # (str) Bootstrap to use for android builds
 p4a.bootstrap = sdl2

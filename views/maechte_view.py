@@ -55,7 +55,7 @@ Factory.register('TooltipIconButton', TooltipIconButton)
 
 
 # KV-Datei laden
-Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/maechte_view.kv')
+Builder.load_file('views/maechte_view.kv')
 
 
 class MaechteRecycleView(MDRecycleView):

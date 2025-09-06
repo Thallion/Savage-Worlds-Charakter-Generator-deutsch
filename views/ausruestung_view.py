@@ -798,4 +798,4 @@ Factory.register('AusruestungItemRow', AusruestungItemRow)
 
 # KV-String mit Theme-Fix - HAUPTÄNDERUNG: md_bg_color entfernt und theme_text_color hinzugefügt!
 # KV-Datei laden
-Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/ausruestung_view.kv')
+Builder.load_file('views/ausruestung_view.kv')

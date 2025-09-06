@@ -35,7 +35,7 @@ Logger = logging.getLogger(__name__)
 
 # NEUER KV-STRING mit MDDropdownMenu für kompakte Völker-Auswahl
 # KV-Datei laden
-Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/voelker_view.kv')
+Builder.load_file('views/voelker_view.kv')
 
 
 class VoelkerWidget(MDBoxLayout):

@@ -41,7 +41,7 @@ DICE_LAYOUT_WIDTH = dp(120)
 INFO_PADDING = 5
 
 # KV-Datei laden
-Builder.load_file('/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/views/charakterbogen_view.kv')
+Builder.load_file('views/charakterbogen_view.kv')
 
 class LeftAlignedLabel(MDLabel):
     """Spezielles Label mit linksbündiger Ausrichtung."""
