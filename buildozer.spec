@@ -2,7 +2,7 @@
 [app]
 
 # (str) Title of your application
-title = Savage Worlds Generator
+title = Savage Worlds Char Generator
 
 # (str) Package name
 package.name = savageworlds
@@ -30,7 +30,7 @@ source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.5.6.9
+version = 0.5.7.3
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]

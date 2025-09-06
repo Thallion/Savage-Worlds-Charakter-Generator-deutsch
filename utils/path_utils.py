@@ -16,8 +16,18 @@ def get_resource_path(relative_path: str) -> str:
         str: Absoluter Pfad zur Ressource
     """
     if getattr(sys, 'frozen', False):
-        # Use executable's directory instead of temp folder
-        base_path = Path(sys.executable).parent
+        # PyInstaller: Prüfe ob one-directory oder one-file Modus
+        if hasattr(sys, '_MEIPASS'):
+            # one-file Modus - verwende temporären Pfad
+            base_path = Path(sys._MEIPASS)
+        else:
+            # one-directory Modus - verwende _internal Verzeichnis
+            exe_dir = Path(sys.executable).parent
+            internal_dir = exe_dir / '_internal'
+            if internal_dir.exists():
+                base_path = internal_dir
+            else:
+                base_path = exe_dir
     else:
         # Development-Modus: Verwende das Projektverzeichnis
         base_path = Path(__file__).parent.parent.resolve()
@@ -33,8 +43,18 @@ def get_application_root() -> Path:
         Path: Das Hauptverzeichnis der Anwendung
     """
     if getattr(sys, 'frozen', False):
-        # Use executable's directory instead of temp folder
-        app_root = Path(sys.executable).parent
+        # PyInstaller: Prüfe ob one-directory oder one-file Modus
+        if hasattr(sys, '_MEIPASS'):
+            # one-file Modus - verwende temporären Pfad
+            app_root = Path(sys._MEIPASS)
+        else:
+            # one-directory Modus - verwende _internal Verzeichnis
+            exe_dir = Path(sys.executable).parent
+            internal_dir = exe_dir / '_internal'
+            if internal_dir.exists():
+                app_root = internal_dir
+            else:
+                app_root = exe_dir
     else:
         # Development-Modus
         app_root = Path(__file__).parent.parent.resolve()

@@ -50,10 +50,37 @@ datas = [
     (str(project_dir / 'views' / 'voelker_view.kv'), 'views'),
     (str(project_dir / 'views' / 'volk_popup.kv'), 'views'),
     (str(project_dir / 'views' / 'waffe_popup.kv'), 'views'),
-    
-    # KivyMD Daten
-    ('venv/lib/python3.12/site-packages/kivymd', 'kivymd') if os.path.exists('venv/lib/python3.12/site-packages/kivymd') else None,
 ]
+
+# KivyMD Daten dynamisch hinzufügen
+kivymd_base_path = project_dir / 'venv' / 'lib' / 'python3.12' / 'site-packages' / 'kivymd'
+if kivymd_base_path.exists():
+    # Icon definitions
+    icon_defs = kivymd_base_path / 'icon_definitions.py'
+    if icon_defs.exists():
+        datas.append((str(icon_defs), 'kivymd'))
+    
+    # Fonts (Material Design Icons + Roboto)
+    fonts_path = kivymd_base_path / 'fonts'
+    if fonts_path.exists():
+        datas.append((str(fonts_path), 'kivymd/fonts'))
+    
+    # UI KV-Dateien
+    uix_path = kivymd_base_path / 'uix'
+    if uix_path.exists():
+        datas.append((str(uix_path), 'kivymd/uix'))
+    
+    # Bilder
+    images_path = kivymd_base_path / 'images'
+    if images_path.exists():
+        datas.append((str(images_path), 'kivymd/images'))
+    
+    # Material resources
+    material_res = kivymd_base_path / 'material_resources.py'
+    if material_res.exists():
+        datas.append((str(material_res), 'kivymd'))
+else:
+    print("Warnung: KivyMD nicht in erwartetem Pfad gefunden")
 
 # Filtere None-Werte heraus
 datas = [item for item in datas if item is not None]
@@ -82,8 +109,13 @@ hiddenimports = [
     'kivymd.uix.appbar',
     'kivymd.uix.tooltip',
     'kivymd.uix.progressindicator',
+    'kivymd.uix.filemanager',
     'kivymd.theming',
     'kivymd.material_resources',
+    'kivymd.icon_definitions',
+    'kivymd.icon_definitions.md_icons',
+    'kivymd.fonts',
+    'kivymd.fonts.Roboto',
     'materialyoucolor',
     'materialyoucolor.utils',
     'materialyoucolor.quantize',
@@ -163,13 +195,13 @@ a = Analysis(
 
 pyz = PYZ(a.pure)
 
+# One-Directory Modus: EXE nur mit Scripts, Rest separat als COLLECT
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.datas,
-    [],
-    name='SavageWorldsCharakterGenerator.exe',
+    [],  # Keine Binaries in EXE (für one-directory)
+    exclude_binaries=True,  # Wichtig für one-directory Modus
+    name='SavageWorldsCharakterGenerator',  # Ohne .exe für one-directory
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -183,4 +215,15 @@ exe = EXE(
     entitlements_file=None,
     version='version_info.txt',  # Version Info für weniger False-Positives
     icon=str(project_dir / 'assets' / 'Savage-Worlds-Fanprodukt-Logo.png') if (project_dir / 'assets' / 'Savage-Worlds-Fanprodukt-Logo.png').exists() else None,
+)
+
+# COLLECT für one-directory Distribution
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.datas,
+    strip=False,
+    upx=False,  # UPX deaktiviert für weniger False-Positives
+    upx_exclude=[],
+    name='SavageWorldsCharakterGenerator'
 )

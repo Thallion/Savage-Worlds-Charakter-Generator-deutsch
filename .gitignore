@@ -7,6 +7,7 @@ __pycache__/
 
 # Distribution / packaging
 dist/
+bin/
 build/
 .buildozer/
 *.egg-info/
