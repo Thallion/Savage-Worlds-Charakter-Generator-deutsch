@@ -54,152 +54,12 @@ class TooltipIconButton(MaechteTooltip, MDIconButton):
 Factory.register('TooltipIconButton', TooltipIconButton)
 
 
-# KV-String in eine Konstante - könnte später in eine separate Datei ausgelagert werden
-KV_STRING = '''
-<TooltipIconButton>
-    MDTooltipPlain:
-        text: root.tooltip_text
-
-<MaechteWidget>:
-    orientation: 'vertical'
-    md_bg_color: self.theme_cls.backgroundColor
-    
-    MDBoxLayout:
-        size_hint_y: None
-        height: 100
-        padding: [20, 5]
-        spacing: 5
-
-        TooltipIconButton:
-            id: sort_name_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
-            on_release: root.update_sort_option('Name')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_rank_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Rang sortieren" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "Rang absteigend sortieren"
-            on_release: root.update_sort_option('Rang')
-            pos_hint: {"center_y": .5}
-
-        MDTextField:
-            id: search_input
-            hint_text: 'Suche...'
-            size_hint_x: 1
-            on_text: root.filter_maechte()
-            
-        # Checkbox für "Nur ausgewählte" hinzufügen
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(200)
-            spacing: dp(5)
-            
-            MDCheckbox:
-                id: only_selected_checkbox
-                size_hint: None, None
-                size: dp(40), dp(40)
-                active: root.only_selected_items
-                on_active: root.toggle_only_selected_items(self.active)
-                pos_hint: {"center_y": .5}
-                
-            MDLabel:
-                text: "Nur ausgewählte"
-                size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
-
-    MDLabel:
-        text: 'Mächte'
-        font_size: dp(24)
-        size_hint_y: None
-        height: dp(48)
-        padding: [20, 10]
-
-    MaechteRecycleView:
-        id: recycleview
-        viewclass: 'MachtItemRow'
-        size_hint_y: 1
-        
-        RecycleBoxLayout:
-            id: layout
-            default_size: None, dp(80)
-            default_size_hint: 1, None
-            size_hint_y: None
-            height: self.minimum_height
-            orientation: 'vertical'
-            spacing: dp(5)
-            padding: dp(20)
-
-<MachtItemRow>:
-    orientation: 'horizontal'
-    size_hint_y: None
-    height: dp(80)
-    md_bg_color: self._get_background_color()
-    line_color: self._get_line_color()
-    line_width: 2
-    spacing: dp(10)
-    padding: dp(10)
-
-    MDLabel:
-        text: root.macht_name
-        font_size: dp(16)
-        size_hint_x: 0.2
-        halign: 'left'
-        valign: 'middle'
-
-    MDLabel:
-        text: root.rang
-        font_size: dp(16)
-        size_hint_x: 0.05
-        halign: 'left'
-        valign: 'middle'
-
-    MDLabel:
-        text: f"MP: {root.machtpunkte} / RW: {root.reichweite} / Dauer: {root.dauer}"
-        font_size: dp(14)
-        size_hint_x: 0.15
-        halign: 'left'
-        valign: 'middle'
-
-    MDFabButton:
-        icon: "plus"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.waehle_macht()
-        disabled: root.macht and root.macht.ausgewaehlt
-
-    MDFabButton:
-        icon: "minus"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.entferne_macht()
-        disabled: not root.macht or not root.macht.ausgewaehlt
-
-    # Neuer Bearbeiten-Button
-    MDFabButton:
-        icon: "pencil"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.bearbeite_macht()
-
-    MDLabel:
-        text: root.beschreibung
-        font_size: dp(14)
-        size_hint_x: 0.55
-        halign: 'left'
-        valign: 'middle'
-'''
-
-Builder.load_string(KV_STRING)
+# KV-Datei laden
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'maechte_view.kv')
+Builder.load_file(kv_path)
 
 
 class MaechteRecycleView(MDRecycleView):
@@ -349,6 +209,60 @@ class MachtItemRow(MDBoxLayout):
         """Schließt den Dialog."""
         if hasattr(self, 'dialog') and self.dialog:
             self.dialog.dismiss()
+
+    def show_full_description(self):
+        """Zeigt die vollständige Beschreibung der Macht in einem Dialog an."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Macht-Name als Überschrift
+        title_label = MDLabel(
+            text=f"[b]{self.macht_name}[/b]",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle",
+            markup=True
+        )
+        content.add_widget(title_label)
+        
+        # Vollständige Beschreibung
+        desc_label = MDLabel(
+            text=self.beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(dp(400), None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+        
+        description_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Macht-Beschreibung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: description_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        description_dialog.open()
 
     def entferne_macht(self):
         """

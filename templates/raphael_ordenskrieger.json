@@ -1,0 +1,90 @@
+{
+  "name": "Raphael",
+  "description": "Der Orden nahm mich auf und gab mir eine Bestimmung. Ich werde ihn ehren, indem ich das Widernatürliche ausmerze.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "free_race_edge": "Aristokrat",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Ordenskrieger",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 6,
+    "Konstitution": 6,
+    "Stärke": 8,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 6,
+    "Einschüchtern": 6,
+    "Heimlichkeit": 4,
+    "Kämpfen": 8,
+    "Reiten": 8,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Ehrenkodex",
+    "Schwur"
+  ],
+  "edges": [
+    "Kräftig"
+  ],
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Plattenrüstung mit Helm",
+    "Pferd",
+    "Langschwert",
+    "Abenteurerpaket"
+  ],
+  "custom_equipment": [
+    {
+      "name": "Plattenrüstung mit Helm",
+      "type": "Rüstung",
+      "weight": 20,
+      "cost": 1000,
+      "description": "Schwere Plattenrüstung inklusive Helm für vollen Schutz.",
+      "category": "Rüstung",
+      "properties": {
+        "armor_bonus": 4,
+        "coverage": "Komplett",
+        "special": ""
+      }
+    },
+    {
+      "name": "Langschwert",
+      "type": "Waffe",
+      "weight": 3,
+      "cost": 300,
+      "description": "Eine vielseitige und zuverlässige Klinge.",
+      "category": "Nahkampfwaffe",
+      "properties": {
+        "damage": "Stä+W8",
+        "parry_bonus": 0,
+        "range": 0,
+        "two_handed": false,
+        "special": ""
+      }
+    }
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/ordenskrieger",
+    "create_missing_equipment": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W8)/2 = 6",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + 1 (Talent: Kräftig) = 6. Gesamt mit Rüstung (+4) = 10.",
+    "bewegung": 6,
+    "machtpunkte_info": "Kein arkaner Hintergrund."
+  },
+  "power_descriptions": {}
+}

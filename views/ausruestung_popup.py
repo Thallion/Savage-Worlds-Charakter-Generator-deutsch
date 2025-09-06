@@ -18,79 +18,26 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.ausruestung import Ausruestung
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<AusruestungDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "480dp"
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name der Ausrüstung'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'ausruestung_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'ausruestung_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"ausruestung_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDTextField:
-        id: kategorie_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Kategorie'
-
-    MDTextField:
-        id: gewicht_input
-        mode: "outlined"
-        input_filter: 'float'
-        
-        MDTextFieldHintText:
-            text: 'Gewicht'
-
-    MDTextField:
-        id: kosten_input
-        mode: "outlined"
-        input_filter: 'float'
-        
-        MDTextFieldHintText:
-            text: 'Kosten'
-
-    MDTextField:
-        id: setting_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Setting'
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-<DeleteAusruestungDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: ausruestung_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_ausruestung_text
-            text: "Ausrüstung auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class AusruestungDialogContent(MDBoxLayout):
     def __init__(self, ausruestung_data=None, **kwargs):

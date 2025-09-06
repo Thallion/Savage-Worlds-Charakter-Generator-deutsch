@@ -5,12 +5,24 @@ from kivy.clock import Clock
 from kivy.event import EventDispatcher
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty
 from kivy.logger import Logger
-from charakter import Charakter
+from models.charakter import Charakter
 from models.talent import Talent
 from models.macht import Macht
 import logging
 import traceback
 import copy
+
+# Einfacher Filter für FocusBehavior-Warnungen
+class WarningFilter(logging.Filter):
+    def filter(self, record):
+        if (record.levelno == logging.WARNING and 
+            'FocusBehavior' in str(record.getMessage()) and
+            'deprecated' in str(record.getMessage())):
+            return False
+        return True
+
+# Filter anwenden
+logging.getLogger().addFilter(WarningFilter())
 
 class CharakterController(EventDispatcher):
     """
@@ -94,10 +106,57 @@ class CharakterController(EventDispatcher):
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            # Alte Werte und verfügbare Punkte für Historie merken
+            old_value = getattr(self.charakter.attribute.get(attribut_name), 'wuerfel', None)
+            old_value = old_value.value if old_value else 4
+            
+            # Merke verfügbare Punkte vor der Steigerung
+            old_attr_punkte = self.charakter.verbleibende_attributsteigerungen
+            old_handicap_punkte = self.charakter.verbleibende_handicap_punkte
+            old_aufstiege = self.charakter.verbleibende_aufstiege
+            
             success = self.charakter.steigere_attribut(attribut_name)
             if success:
+                # Neue Werte abrufen
+                new_value = getattr(self.charakter.attribute.get(attribut_name), 'wuerfel', None)
+                new_value = new_value.value if new_value else 4
+                
+                # Ermittle welche Punkte verwendet wurden
+                new_attr_punkte = self.charakter.verbleibende_attributsteigerungen
+                new_handicap_punkte = self.charakter.verbleibende_handicap_punkte
+                new_aufstiege = self.charakter.verbleibende_aufstiege
+                
+                cost = 1  # Standard-Kosten
+                cost_type = "Attributspunkte"
+                
+                if self.charakter.char_gen_completed:
+                    # Im Spiel: Aufstiege verwendet
+                    cost = old_aufstiege - new_aufstiege
+                    cost_type = "Aufstiege"
+                else:
+                    # Charaktergenerierung: Prüfe welche Punkte verwendet wurden
+                    if old_attr_punkte > new_attr_punkte:
+                        cost = old_attr_punkte - new_attr_punkte
+                        cost_type = "Attributspunkte"
+                    elif old_handicap_punkte > new_handicap_punkte:
+                        cost = old_handicap_punkte - new_handicap_punkte
+                        cost_type = "Handicap-Punkte"
+                
                 self.charakter.berechne_abgeleitete_werte()
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('attribute_changed', {
+                        'attribute_name': attribut_name,
+                        'old_value': old_value,
+                        'new_value': new_value,
+                        'cost': cost,
+                        'cost_type': cost_type
+                    })
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Steigerung von Attribut {attribut_name}: {str(e)}")
@@ -140,12 +199,59 @@ class CharakterController(EventDispatcher):
             bool oder str: True bei Erfolg, False bei Fehler, "needs_confirmation" wenn Bestätigung erforderlich
         """
         try:
+            # Alte Werte und verfügbare Punkte für Historie merken
+            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+            old_value = fertigkeit.wuerfel.value if fertigkeit else 0
+            
+            # Merke verfügbare Punkte vor der Steigerung
+            old_skill_punkte = self.charakter.verbleibende_fertigkeitssteigerungen
+            old_handicap_punkte = self.charakter.verbleibende_handicap_punkte
+            old_aufstiege = self.charakter.verbleibende_aufstiege
+            
             success = self.charakter.steigere_fertigkeit(fertigkeit_name, confirm_double_cost)
             if success == "needs_confirmation":
                 return "needs_confirmation"
             elif success:
+                # Neue Werte abrufen
+                fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+                new_value = fertigkeit.wuerfel.value if fertigkeit else 0
+                
+                # Ermittle welche Punkte verwendet wurden
+                new_skill_punkte = self.charakter.verbleibende_fertigkeitssteigerungen
+                new_handicap_punkte = self.charakter.verbleibende_handicap_punkte
+                new_aufstiege = self.charakter.verbleibende_aufstiege
+                
+                cost = 1  # Standard-Kosten
+                cost_type = "Fertigkeitspunkte"
+                
+                if self.charakter.char_gen_completed:
+                    # Im Spiel: Aufstiege verwendet
+                    cost = old_aufstiege - new_aufstiege
+                    cost_type = "Aufstiege"
+                else:
+                    # Charaktergenerierung: Prüfe welche Punkte verwendet wurden
+                    if old_skill_punkte > new_skill_punkte:
+                        cost = old_skill_punkte - new_skill_punkte
+                        cost_type = "Fertigkeitspunkte"
+                    elif old_handicap_punkte > new_handicap_punkte:
+                        cost = old_handicap_punkte - new_handicap_punkte
+                        cost_type = "Handicap-Punkte"
+                
                 self.charakter.berechne_abgeleitete_werte()
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('skill_changed', {
+                        'skill_name': fertigkeit_name,
+                        'old_value': old_value,
+                        'new_value': new_value,
+                        'cost': cost,
+                        'cost_type': cost_type
+                    })
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Steigerung von Fertigkeit {fertigkeit_name}: {str(e)}")
@@ -190,6 +296,25 @@ class CharakterController(EventDispatcher):
             success = self.charakter.waehle_handicap(handicap_name)
             if success:
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    # Handicap-Stufe und Punkte aus dem Charakter-Objekt bestimmen
+                    handicap = self.charakter.handicaps.get(handicap_name)
+                    if handicap:
+                        Logger.info(f"Publishing handicap_added event for {handicap_name}")
+                        event_service.publish('handicap_added', {
+                            'handicap_name': handicap_name,
+                            'stufe': handicap.stufe,
+                            'points': handicap.punkte
+                        })
+                    else:
+                        Logger.warning(f"Handicap {handicap_name} nicht im Charakter gefunden")
+                else:
+                    Logger.error("Event-Service nicht verfügbar für Handicap-Event")
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Auswahl von Handicap {handicap_name}: {str(e)}")
@@ -217,6 +342,16 @@ class CharakterController(EventDispatcher):
                 return success
             elif success:
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden (Handicap entfernt)
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('handicap_removed', {
+                        'handicap_name': handicap_name,
+                        'action': 'removed'
+                    })
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Entfernung von Handicap {handicap_name}: {str(e)}")
@@ -240,6 +375,16 @@ class CharakterController(EventDispatcher):
                 return "needs_advancement"
             elif success:
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden (Handicap reduziert)
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('handicap_reduced', {
+                        'handicap_name': handicap_name,
+                        'action': 'reduced'
+                    })
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Reduzierung von Handicap {handicap_name}: {str(e)}")
@@ -291,6 +436,17 @@ class CharakterController(EventDispatcher):
             
             if result is True:
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('talent_added', {
+                        'talent_name': talent_name,
+                        'cost': 1,
+                        'requirements': ''
+                    })
+                
             return result
         except Exception as e:
             Logger.error(f"Fehler bei Auswahl von Talent {talent_name}: {str(e)}")
@@ -311,6 +467,16 @@ class CharakterController(EventDispatcher):
             success = self.charakter.entferne_talent(talent_name)
             if success:
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden (Talent entfernt)
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('talent_removed', {
+                        'talent_name': talent_name,
+                        'action': 'removed'
+                    })
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Entfernung von Talent {talent_name}: {str(e)}")
@@ -354,6 +520,22 @@ class CharakterController(EventDispatcher):
             result = self.charakter.waehle_macht(macht_name, ignore_rang_check=ignore_rang_check)
             if result is True:  # Nur bei True-Wert, nicht bei "needs_rang_confirmation"
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    # Macht-Rang aus dem Charakter-Objekt bestimmen
+                    macht = self.charakter.maechte.get(macht_name)
+                    if macht:
+                        event_service.publish('macht_added', {
+                            'macht_name': macht_name,
+                            'rang': macht.rang,
+                            'cost': 1
+                        })
+                    else:
+                        Logger.warning(f"Macht {macht_name} nicht im Charakter gefunden")
+                
             return result
         except Exception as e:
             Logger.error(f"Fehler bei Auswahl von Macht {macht_name}: {str(e)}")
@@ -374,6 +556,16 @@ class CharakterController(EventDispatcher):
             success = self.charakter.entferne_macht(macht_name)
             if success:
                 self.dispatch('on_charakter_updated')
+                
+                # Event für Historie-System senden (Macht entfernt)
+                from services.service_container import service_container
+                event_service = service_container.get_event_service()
+                if event_service:
+                    event_service.publish('macht_removed', {
+                        'macht_name': macht_name,
+                        'action': 'removed'
+                    })
+                
             return success
         except Exception as e:
             Logger.error(f"Fehler bei Entfernung von Macht {macht_name}: {str(e)}")
@@ -584,3 +776,141 @@ class CharakterController(EventDispatcher):
         """
         # Löse Events aus, die von UI-Widgets abgefangen werden können
         self.dispatch('on_charakter_updated')
+
+
+    # Pathfinder Methoden
+
+    def waehle_pathfinder_kostenloses_talent(self, talent_name, ignore_voraussetzungen=False):
+        """
+        NEU: Wählt ein Klassen-, Hintergrund- oder Experte-Talent in Savage Pathfinder kostenlos aus.
+        
+        Args:
+            talent_name (str): Name des Talents
+            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
+            
+        Returns:
+            bool oder str: True bei Erfolg, False bei Fehler, oder Fehlercodes
+        """
+        try:
+            result = self.charakter.waehle_pathfinder_kostenloses_talent(talent_name, ignore_voraussetzungen)
+            
+            if result is True:
+                self.dispatch('on_charakter_updated')
+                Logger.info(f"Kostenloses Pathfinder-Talent '{talent_name}' erfolgreich ausgewählt")
+            
+            return result
+        except Exception as e:
+            Logger.error(f"Fehler bei kostenloser Pathfinder-Talent-Auswahl {talent_name}: {str(e)}")
+            self.dispatch('on_charakter_error', f"Pathfinder-Talent-Auswahl fehlgeschlagen: {str(e)}")
+            return False
+
+    def ist_savage_pathfinder_setting(self):
+        """
+        NEU: Prüft, ob das aktuelle Setting Savage Pathfinder ist.
+        
+        Returns:
+            bool: True wenn Savage Pathfinder, sonst False
+        """
+        try:
+            return self.charakter.ist_savage_pathfinder_setting()
+        except Exception as e:
+            Logger.error(f"Fehler bei Pathfinder-Setting-Prüfung: {str(e)}")
+            return False
+
+    def hat_bereits_kostenloses_pathfinder_talent(self):
+        """
+        NEU: Prüft, ob bereits ein kostenloses Pathfinder-Talent gewählt wurde.
+        
+        Returns:
+            bool: True wenn bereits ein kostenloses Talent gewählt wurde
+        """
+        try:
+            return self.charakter.hat_bereits_kostenloses_pathfinder_talent()
+        except Exception as e:
+            Logger.error(f"Fehler bei Pathfinder-Talent-Prüfung: {str(e)}")
+            return False
+
+    def ist_pathfinder_kostenloses_talent(self, talent_name):
+        """
+        NEU: Prüft, ob ein Talent zu den Kategorien gehört, die in Savage Pathfinder 
+        während der Charaktererstellung kostenlos gewählt werden können.
+        
+        Args:
+            talent_name (str): Name des Talents
+            
+        Returns:
+            bool: True wenn Klassen-, Hintergrund- oder Experte-Talent, sonst False
+        """
+        try:
+            if talent_name in self.charakter.talente:
+                talent = self.charakter.talente[talent_name]
+                return self.charakter.ist_pathfinder_kostenloses_talent(talent)
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei Pathfinder-Kategorie-Prüfung für {talent_name}: {str(e)}")
+            return False
+
+    def get_pathfinder_info(self):
+        """
+        NEU: Gibt Informationen über den Pathfinder-Status des Charakters zurück.
+        
+        Returns:
+            dict: Dictionary mit Pathfinder-Informationen
+        """
+        try:
+            return {
+                'ist_pathfinder_setting': self.ist_savage_pathfinder_setting(),
+                'kostenlose_talente_gewaehlt': getattr(self.charakter, 'pathfinder_kostenlose_talente_gewaehlt', 0),
+                'kann_kostenloses_talent_waehlen': (
+                    self.ist_savage_pathfinder_setting() and 
+                    not self.charakter.char_gen_completed and
+                    not self.hat_bereits_kostenloses_pathfinder_talent()
+                ),
+                'char_gen_completed': self.charakter.char_gen_completed
+            }
+        except Exception as e:
+            Logger.error(f"Fehler beim Abrufen der Pathfinder-Informationen: {str(e)}")
+            return {
+                'ist_pathfinder_setting': False,
+                'kostenlose_talente_gewaehlt': 0,
+                'kann_kostenloses_talent_waehlen': False,
+                'char_gen_completed': True
+            }
+
+    # Zusätzlich sollte in der bestehenden waehle_talent Methode 
+    # ein Log-Eintrag hinzugefügt werden, wenn Pathfinder-spezifische Rückgabewerte auftreten:
+
+    def waehle_talent(self, talent_name, ignore_rang_check=False, ignore_voraussetzungen=False):
+        """
+        Wählt ein Talent für den Charakter aus
+        ERWEITERT: Mit verbessertem Logging für Pathfinder-Features
+        
+        Args:
+            talent_name (str): Name des Talents
+            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung
+            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
+            
+        Returns:
+            bool oder str: Ergebniscode oder Erfolgsstatus
+        """
+        try:
+            # Flag nur setzen, wenn es angefordert wurde
+            if ignore_voraussetzungen:
+                self.charakter.ignore_voraussetzungen = True
+                Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
+                
+            # Parameter weitergeben
+            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
+            
+            # Pathfinder-spezifische Behandlung
+            if result == "pathfinder_kostenlos_angeboten":
+                Logger.info(f"Pathfinder-Talent '{talent_name}' kann kostenlos gewählt werden")
+            elif result is True:
+                self.dispatch('on_charakter_updated')
+                Logger.debug(f"Talent '{talent_name}' erfolgreich ausgewählt")
+            
+            return result
+        except Exception as e:
+            Logger.error(f"Fehler bei Auswahl von Talent {talent_name}: {str(e)}")
+            self.dispatch('on_charakter_error', f"Talent-Auswahl fehlgeschlagen: {str(e)}")
+            return False        

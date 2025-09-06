@@ -31,7 +31,7 @@ from services.service_container import get_dialog_service
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 DEFAULT_SORT_ORDER = 'name_asc'
 ALL_CATEGORIES_TEXT = 'Alle Stufen'
-RECYCLEVIEW_ITEM_HEIGHT = dp(60)
+RECYCLEVIEW_ITEM_HEIGHT = dp(80)
 DARK_EVEN_COLOR = [0.2, 0.2, 0.2, 1]
 DARK_ODD_COLOR = [0.15, 0.15, 0.15, 1]
 LIGHT_EVEN_COLOR = [1, 1, 1, 1]
@@ -40,144 +40,26 @@ SELECTED_LINE_COLOR = [1, 0.65, 0, 1]
 UNSELECTED_LINE_COLOR = [0, 0, 0, 0]
 
 
-# KV-String - könnte in eine separate Datei ausgelagert werden
-KV_STRING = '''
-<HandicapsWidget>:
-    orientation: 'vertical'
-    md_bg_color: self.theme_cls.backgroundColor  
+import os
+import sys
+
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'handicaps_view.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'handicaps_view.kv')
     
-    MDBoxLayout:
-        size_hint_y: None
-        height: 100
-        padding: [20, 5]
-        spacing: 5
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"handicaps_view: KV-Datei nicht gefunden: {kv_path}")
 
-        MDIconButton:
-            icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
-            size_hint_y: 1
-            on_release: root.toggle_sort_order()
-            tooltip_text: "Namen aufsteigend sortieren" if root.sort_order != 'name_asc' else "Namen absteigend sortieren"
-
-        MDTextField:
-            id: search_input
-            hint_text: 'Suche...'
-            size_hint_x: 1
-            on_text: root.filter_handicaps()
-
-        # Checkbox für "Nur ausgewählte" hinzufügen
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(200)
-            spacing: dp(5)
-            
-            MDCheckbox:
-                id: only_selected_checkbox
-                size_hint: None, None
-                size: dp(40), dp(40)
-                active: root.only_selected_items
-                on_active: root.toggle_only_selected_items(self.active)
-                pos_hint: {"center_y": .5}
-                
-            MDLabel:
-                text: "Nur ausgewählte"
-                size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
-
-        MDIconButton:
-            icon: "filter"
-            size_hint_y: 1
-            on_release: root.open_category_menu()
-            tooltip_text: "Nach Stufe filtern"
-
-        MDLabel:
-            id: category_label
-            text: 'Alle Stufen'
-            size_hint_x: 1
-
-    MDLabel:
-        text: 'Handicaps'
-        font_size: dp(24)
-        size_hint_y: None
-        height: dp(48)
-        padding: [20, 10]
-
-    HandicapsRecycleView:
-        id: recycleview
-        viewclass: 'HandicapItemRow'
-        size_hint_y: 1
-        
-        RecycleBoxLayout:
-            id: layout
-            default_size: None, dp(60)
-            default_size_hint: 1, None
-            size_hint_y: None
-            height: self.minimum_height
-            orientation: 'vertical'
-            spacing: dp(5)
-            padding: dp(20)
-
-<HandicapItemRow>:
-    orientation: 'horizontal'
-    size_hint_y: None
-    height: dp(60)
-    md_bg_color: self._get_background_color()
-    line_color: self._get_line_color()
-    line_width: 2
-    spacing: dp(10)
-    padding: dp(10)
-
-    MDLabel:
-        text: root.handicap_name
-        font_size: dp(16)
-        size_hint_x: 0.2
-        halign: 'left'
-        valign: 'middle'
-
-    MDLabel:
-        text: root.stufe.capitalize() if root.stufe else "Unbekannt"
-        font_size: dp(16)
-        size_hint_x: 0.1
-        halign: 'left'
-        valign: 'middle'
-
-    MDFabButton:
-        icon: "plus"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.waehle_handicap()
-        disabled: False
-
-    MDFabButton:
-        icon: "minus"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.entferne_handicap()
-        disabled: not root.ausgewaehlt
-
-    # Neuer Bearbeiten-Button
-    MDFabButton:
-        icon: "pencil"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.bearbeite_handicap()
-
-    MDLabel:
-        text: root.beschreibung
-        font_size: dp(16)
-        size_hint_x: 0.5
-        halign: 'left'
-        valign: 'middle'
-'''
-
-Builder.load_string(KV_STRING)
+load_kv_file()
 
 
 class HandicapsRecycleView(MDRecycleView):
@@ -677,6 +559,60 @@ class HandicapItemRow(MDBoxLayout):
         """Schließt den Aufstiegs-Dialog."""
         if hasattr(self, 'advancement_dialog') and self.advancement_dialog:
             self.advancement_dialog.dismiss()
+
+    def show_full_description(self):
+        """Zeigt die vollständige Beschreibung des Handicaps in einem Dialog an."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Handicap-Name als Überschrift
+        title_label = MDLabel(
+            text=f"[b]{self.handicap_name}[/b]",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle",
+            markup=True
+        )
+        content.add_widget(title_label)
+        
+        # Vollständige Beschreibung
+        desc_label = MDLabel(
+            text=self.beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(dp(400), None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+        
+        description_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Handicap-Beschreibung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: description_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        description_dialog.open()
 
     def update_color(self, *args):
         """Aktualisiert die Hintergrundfarbe bei Indexänderung."""

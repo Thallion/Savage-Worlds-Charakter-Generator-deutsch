@@ -3,6 +3,7 @@
 View-Komponente für Talente nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Talenten bereit.
 Mit Unterstützung für Mehrfachauswahl von Talenten und Bearbeitungsfunktion.
+ERWEITERT: Mit Savage Pathfinder Support für kostenlose Klassen-/Hintergrund-/Experte-Talente
 """
 
 from kivymd.app import MDApp
@@ -28,7 +29,15 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 
 # Import der Funktionen für Voraussetzungsprüfung
-from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter, NICHT_DUPLIZIERBARE_TALENTE
+from functions.talent_funktionen import (
+    pruefe_voraussetzungen, 
+    is_talent_rang_hoeher_als_charakter, 
+    NICHT_DUPLIZIERBARE_TALENTE,
+    ist_savage_pathfinder_setting,
+    ist_pathfinder_kostenloses_talent,
+    hat_bereits_kostenloses_pathfinder_talent,
+    waehle_pathfinder_kostenloses_talent
+)
 
 # Import für Dialog Service
 from services.service_container import get_dialog_service
@@ -37,7 +46,7 @@ from services.service_container import get_dialog_service
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
 ALL_CATEGORIES_TEXT = 'Alle Kategorien'
-DEFAULT_ROW_HEIGHT = dp(60)
+DEFAULT_ROW_HEIGHT = dp(120)
 DARK_EVEN_COLOR = [0.2, 0.2, 0.2, 1]
 DARK_ODD_COLOR = [0.15, 0.15, 0.15, 1]
 LIGHT_EVEN_COLOR = [1, 1, 1, 1]
@@ -70,195 +79,12 @@ class TooltipIconButton(TalenteTooltip, MDIconButton):
 Factory.register('TooltipIconButton', TooltipIconButton)
 
 
-# KV-String in eine Konstante - könnte später in eine separate Datei ausgelagert werden
-KV_STRING = '''
-<TooltipIconButton>
-    MDTooltipPlain:
-        text: root.tooltip_text
-
-<TalenteWidget>:
-    orientation: 'vertical'
-    md_bg_color: self.theme_cls.backgroundColor  
-    
-    MDBoxLayout:
-        size_hint_y: None
-        height: 100
-        padding: [20, 5]
-        spacing: 5
-
-        TooltipIconButton:
-            id: sort_name_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
-            on_release: root.update_sort_option('Name')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_rank_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Rang sortieren" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "Rang absteigend sortieren"
-            on_release: root.update_sort_option('Rang')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_category_btn
-            icon: "sort-reverse-variant" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-variant"
-            tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
-            on_release: root.update_sort_option('Kategorie')
-            pos_hint: {"center_y": .5}
-
-        MDTextField:
-            id: search_input
-            hint_text: 'Suche...'
-            size_hint_x: 1
-            on_text: root.filter_talente()
-
-        # Checkbox für "Nur ausgewählte" hinzufügen
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(200)
-            spacing: dp(5)
-            
-            MDCheckbox:
-                id: only_selected_checkbox
-                size_hint: None, None
-                size: dp(40), dp(40)
-                active: root.only_selected_items
-                on_active: root.toggle_only_selected_items(self.active)
-                pos_hint: {"center_y": .5}
-                
-            MDLabel:
-                text: "Nur ausgewählte"
-                size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
-
-        # Neue Checkbox für Voraussetzungen-Filter
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(240)
-            spacing: dp(5)
-            
-            MDCheckbox:
-                id: only_available_checkbox
-                size_hint: None, None
-                size: dp(40), dp(40)
-                active: root.only_available_talents
-                on_active: root.toggle_only_available_talents(self.active)
-                pos_hint: {"center_y": .5}
-                
-            MDLabel:
-                text: "Voraussetzung erfüllt"
-                size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            icon: "filter"
-            tooltip_text: "Nach Kategorie filtern"
-            on_release: root.open_category_menu()
-            pos_hint: {"center_y": .5}
-
-        MDLabel:
-            id: category_label
-            text: 'Alle Kategorien'
-            size_hint_x: 1
-
-    MDBoxLayout:
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: dp(48)
-        padding: [20, 10, 20, 0]
-        
-        MDLabel:
-            text: 'Talente'
-            font_size: dp(24)
-            halign: 'left'
-            
-    TalenteRecycleView:
-        id: recycleview
-        viewclass: 'TalentItemRow'
-        size_hint_y: 1
-        
-        RecycleBoxLayout:
-            id: layout
-            default_size: None, dp(60)
-            default_size_hint: 1, None
-            size_hint_y: None
-            height: self.minimum_height
-            orientation: 'vertical'
-            spacing: dp(5)
-            padding: dp(20)
-
-<TalentItemRow>:
-    orientation: 'horizontal'
-    size_hint_y: None
-    height: dp(60)
-    md_bg_color: self._get_background_color()
-    line_color: self._get_line_color()
-    line_width: 2
-    spacing: dp(10)
-    padding: dp(10)
-
-    MDLabel:
-        text: root.talent_name
-        font_size: dp(16)
-        size_hint_x: 0.2
-        halign: 'left'
-        valign: 'middle'
-
-    MDLabel:
-        text: root.kategorie
-        font_size: dp(16)
-        size_hint_x: 0.15
-        halign: 'left'
-        valign: 'middle'
-
-    MDLabel:
-        text: root.rang
-        font_size: dp(16)
-        size_hint_x: 0.1
-        halign: 'left'
-        valign: 'middle'
-
-    MDFabButton:
-        icon: "plus"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.waehle_talent()
-        disabled: False
-
-    MDFabButton:
-        icon: "minus"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.entferne_talent()
-        disabled: not root.ausgewaehlt
-
-    # Neuer Bearbeiten-Button
-    MDFabButton:
-        icon: "pencil"
-        style: "small"
-        size_hint: None, None
-        size: dp(40), dp(40)
-        pos_hint: {"center_y": 0.5}
-        on_release: root.bearbeite_talent()
-
-    MDLabel:
-        text: root.beschreibung
-        font_size: dp(16)
-        size_hint_x: 0.4
-        halign: 'left'
-        valign: 'middle'
-'''
-
-Builder.load_string(KV_STRING)
+# KV-Datei laden
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'talente_view.kv')
+Builder.load_file(kv_path)
 
 class TalenteRecycleView(MDRecycleView):
     """RecycleView für Talente"""
@@ -285,6 +111,7 @@ class TalentItemRow(MDBoxLayout):
     """
     Einzelne Zeile in der Talente-Liste.
     Repräsentiert ein einzelnes Talent mit seinen Eigenschaften und Interaktionsmöglichkeiten.
+    ERWEITERT: Mit Savage Pathfinder Support für kostenlose Talente
     """
     index = NumericProperty(0)
     name_key = StringProperty("")
@@ -304,6 +131,7 @@ class TalentItemRow(MDBoxLayout):
         self.dialog = None
         self.voraussetzungen_dialog = None
         self.rang_dialog = None
+        self.pathfinder_dialog = None  # NEU: Dialog für kostenlose Pathfinder-Talente
         Logger.debug(f"TalentItemRow.__init__: Controller gesetzt: {self.controller is not None}")
 
     def _get_controller(self):
@@ -350,6 +178,7 @@ class TalentItemRow(MDBoxLayout):
         """
         Wählt ein Talent aus.
         Prüft, ob das Talent duplizierbar ist und zeigt ggf. einen Dialog.
+        ERWEITERT: Unterstützt kostenlose Pathfinder-Talente.
         """
         Logger.debug(f"TalentItemRow: Start waehle_talent für {self.talent_name}")
         controller = self._get_controller()
@@ -374,12 +203,140 @@ class TalentItemRow(MDBoxLayout):
                 self._show_rang_confirmation_dialog()
             elif result == "needs_voraussetzungen_confirmation":
                 self._show_voraussetzungen_confirmation_dialog()
+            elif result == "pathfinder_kostenlos_angeboten":  # NEU: Pathfinder kostenlos
+                self._show_pathfinder_kostenlos_dialog()
             elif result:
                 self.ausgewaehlt = True
                 Logger.debug(f"TalentItemRow: {self.talent_name} erfolgreich ausgewählt")
                 self._refresh_ui()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Talents: {str(e)}")
+
+    def _show_pathfinder_kostenlos_dialog(self):
+        """
+        NEU: Zeigt einen Dialog für kostenlose Pathfinder-Talente an.
+        """
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Haupttext
+        info_label = MDLabel(
+            text=f"Das Talent '{self.talent_name}' ist ein Klassen-, Hintergrund- oder Experte-Talent und kann in Savage Pathfinder während der Charaktererstellung kostenlos gewählt werden.",
+            size_hint_y=None,
+            height=dp(80),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(info_label)
+        
+        # Frage
+        question_label = MDLabel(
+            text="Möchten Sie dieses Talent kostenlos wählen oder mit den normalen Kosten (2 Handicap-Punkte oder 1 Aufstieg)?",
+            size_hint_y=None,
+            height=dp(60),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(question_label)
+        
+        self.pathfinder_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Kostenloses Pathfinder-Talent",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.pathfinder_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Normale Kosten"),
+                    style="text",
+                    on_release=lambda x: self._waehle_talent_mit_kosten(),
+                ),
+                MDButton(
+                    MDButtonText(text="Kostenlos wählen"),
+                    style="text",
+                    on_release=lambda x: self._waehle_talent_kostenlos(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.pathfinder_dialog.open()
+
+    def _waehle_talent_kostenlos(self):
+        """
+        NEU: Wählt das Talent kostenlos als Pathfinder-Talent aus.
+        """
+        self.pathfinder_dialog.dismiss()
+        controller = self._get_controller()
+        if controller:
+            # Verwende die spezielle Pathfinder-Funktion
+            result = waehle_pathfinder_kostenloses_talent(
+                controller.charakter, 
+                self.name_key, 
+                ignore_voraussetzungen=True  # Voraussetzungen können ignoriert werden
+            )
+            
+            if result == "needs_voraussetzungen_confirmation":
+                self._show_voraussetzungen_confirmation_dialog()
+            elif result == "already_used":
+                self._show_error_dialog("Es wurde bereits ein kostenloses Pathfinder-Talent gewählt.")
+            elif result == "not_pathfinder_category":
+                self._show_error_dialog("Dieses Talent gehört nicht zu den kostenlosen Kategorien.")
+            elif result:
+                self.ausgewaehlt = True
+                Logger.info(f"TalentItemRow: {self.talent_name} kostenlos als Pathfinder-Talent ausgewählt")
+                self._refresh_ui()
+            else:
+                self._show_error_dialog("Das Talent konnte nicht kostenlos ausgewählt werden.")
+
+    def _waehle_talent_mit_kosten(self):
+        """
+        NEU: Wählt das Talent mit normalen Kosten aus (bypassed die kostenlose Option).
+        """
+        self.pathfinder_dialog.dismiss()
+        controller = self._get_controller()
+        if controller:
+            # Normale Talent-Auswahl durchführen, aber Rang-Check ignorieren da bereits geprüft
+            if controller.charakter.verbleibende_handicap_punkte > 1.5:
+                # Mit Handicap-Punkten
+                from functions.talent_funktionen import talent_auswaehlen
+                erfolg = talent_auswaehlen(controller.charakter, self.name_key, skip_prereq_check=False)
+                if erfolg:
+                    controller.charakter.verbleibende_handicap_punkte -= 2
+                    self.ausgewaehlt = True
+                    controller.charakter.berechne_abgeleitete_werte()
+                    self._refresh_ui()
+                    Logger.info(f"TalentItemRow: {self.talent_name} mit Handicap-Punkten ausgewählt")
+                else:
+                    self._show_error_dialog("Das Talent konnte nicht mit Handicap-Punkten ausgewählt werden.")
+            elif controller.charakter.verbleibende_aufstiege > 0:
+                # Mit Aufstiegen
+                from functions.talent_funktionen import talent_auswaehlen
+                erfolg = talent_auswaehlen(controller.charakter, self.name_key, skip_prereq_check=False)
+                if erfolg:
+                    controller.charakter.verbleibende_aufstiege -= 1
+                    controller.charakter.update_char_gen_status()
+                    self.ausgewaehlt = True
+                    controller.charakter.berechne_abgeleitete_werte()
+                    self._refresh_ui()
+                    Logger.info(f"TalentItemRow: {self.talent_name} mit Aufstiegen ausgewählt")
+                else:
+                    self._show_error_dialog("Das Talent konnte nicht mit Aufstiegen ausgewählt werden.")
+            else:
+                self._show_error_dialog("Keine Handicap-Punkte oder Aufstiege verfügbar.")
 
     def _show_not_duplicatable_dialog(self):
         """Zeigt einen Dialog an, wenn ein Talent nicht mehrfach ausgewählt werden kann."""
@@ -547,6 +504,8 @@ class TalentItemRow(MDBoxLayout):
             result = controller.waehle_talent(self.name_key, ignore_rang_check=True)
             if result == "needs_voraussetzungen_confirmation":
                 self._show_voraussetzungen_confirmation_dialog()
+            elif result == "pathfinder_kostenlos_angeboten":  # NEU: Kann auch nach Rang-Bestätigung auftreten
+                self._show_pathfinder_kostenlos_dialog()
             elif result:
                 self.ausgewaehlt = True
                 self._refresh_ui()
@@ -613,6 +572,15 @@ class TalentItemRow(MDBoxLayout):
         Args:
             message (str): Die anzuzeigende Fehlermeldung
         """
+        self._show_error_dialog(message)
+
+    def _show_error_dialog(self, message):
+        """
+        Zeigt einen Fehlerdialog mit der angegebenen Nachricht an.
+        
+        Args:
+            message (str): Die anzuzeigende Fehlermeldung
+        """
         try:
             error_dialog = MDDialog(
                 MDDialogHeadlineText(text="Fehler"),
@@ -642,9 +610,63 @@ class TalentItemRow(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Anzeigen des Fehlerdialogs: {e}")
 
+    def show_full_description(self):
+        """Zeigt die vollständige Beschreibung in einem Dialog an."""
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Talent-Name als Überschrift
+        title_label = MDLabel(
+            text=f"[b]{self.talent_name}[/b]",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle",
+            markup=True
+        )
+        content.add_widget(title_label)
+        
+        # Vollständige Beschreibung
+        desc_label = MDLabel(
+            text=self.beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(dp(400), None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+        
+        description_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Talent-Beschreibung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: description_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        description_dialog.open()
+
     def close_dialog(self):
         """Schließt aktive Dialoge."""
-        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog']:
+        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog', 'pathfinder_dialog']:
             if hasattr(self, dialog_attr) and getattr(self, dialog_attr):
                 getattr(self, dialog_attr).dismiss()
 

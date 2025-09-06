@@ -1,17 +1,23 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*pycache*
 *.py[cod]
 *$py.class
 *.so
 
 # Distribution / packaging
 dist/
+bin/
 build/
+.buildozer/
 *.egg-info/
 
 # Unit test / coverage reports
 htmlcov/
 test_units/
+debug/
+chars/
+config/app_config.json
 .tox/
 .coverage
 .coverage.*
@@ -21,6 +27,7 @@ test_units/
 # Environments
 .env
 .venv
+.idea
 env/
 venv/
 ENV/
@@ -39,8 +46,16 @@ Desktop.ini
 
 # Log Dateien
 *.log
+build_*.txt
+build*.log
+
+# Android NDK downloads and build files
+android-ndk-*.zip
+buildozer-local.spec
 
 # Lokale Konfigurationsdateien
+config/
+*config*
 config.local.ini
 settings.local.json
 custom_fertigkeiten.json
@@ -48,3 +63,4 @@ custom_handicaps.json
 custom_maechte.json
 cxfreeze.txt
 setup.py
+app_config.json

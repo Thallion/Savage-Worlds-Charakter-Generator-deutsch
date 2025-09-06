@@ -1,11 +1,14 @@
 """
 main.py: SW_Charakter_GeneratorApp mit KivyMD Tabs, Carousel, GenerationPointsBar und Logger.
+REFACTORED: Screen-Klassen nach views/screens.py extrahiert
 """
 
 import sys
 import os
 import logging
 from functools import partial
+import re
+import webbrowser
 
 from kivy.lang import Builder
 from kivy.clock import Clock
@@ -16,13 +19,9 @@ from kivy.metrics import dp
 from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
-import re
-import webbrowser
+from kivy.uix.screenmanager import ScreenManager, Screen
 
-from kivymd.uix.screen import MDScreen
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDButton, MDIconButton, MDButtonText
 from kivymd.uix.textfield import MDTextField
 from kivymd.theming import ThemableBehavior
 
@@ -36,17 +35,27 @@ from kivymd.uix.tab import (
 )
 
 from controllers.charakter_controller import CharakterController
-from charakter import Charakter
+from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
+from views.einstellungen_widget import EinstellungenWidget
+from views.historie_view import HistorieWidget
 from views.voelker_view import VoelkerWidget
 from views.profil_view import ProfilWidget
-from views.maechte_view import MaechteWidget
-from views.ausruestung_view import AusruestungWidget
+from views.eigenschaften_view import EigenschaftenWidget
 from views.handicaps_view import HandicapsWidget
 from views.talente_view import TalenteWidget
-from views.eigenschaften_view import EigenschaftenWidget
+from views.maechte_view import MaechteWidget
+from views.ausruestung_view import AusruestungWidget
 from views.charakterbogen_view import CharakterbogenWidget
-from views.einstellungen_widget import EinstellungenWidget
+
+# Extrahierte Screen-Klassen
+from views.screens import (
+    EinstellungenScreen, VoelkerScreen, ProfilScreen, EigenschaftenScreen,
+    HandicapsScreen, TalenteScreen, MaechteScreen, AusruestungScreen, 
+    CharakterbogenScreen, HistorieScreen, InfoScreen, HyperlinkLabel
+)
+from views.ui_components import CustomTabsItem
+from utils.logging_utils import GUIHandler
 
 # Config Service für Theme-Speicherung importieren
 from services.config_service import ConfigService
@@ -55,533 +64,6 @@ from services.service_container import service_container
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
-class Charakter:
-    def speichern_als_json(self, path):
-        Logger.info(f"Charakter gespeichert unter: {path}")
-
-class GenerationPointsBar(MDBoxLayout):
-    charakter = ObjectProperty(None)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.orientation = 'vertical'
-        self.add_widget(MDLabel(text="Generation Points: 100", halign="center"))
-
-class EinstellungenWidget(MDBoxLayout):
-    pass
-
-class VoelkerWidget(MDBoxLayout):
-    pass
-
-class ProfilWidget(MDBoxLayout):
-    pass
-
-class MaechteWidget(MDBoxLayout):
-    pass
-
-class AusruestungWidget(MDBoxLayout):
-    pass
-
-class HandicapsWidget(MDBoxLayout):
-    pass
-
-class TalenteWidget(MDBoxLayout):
-    pass
-
-class EigenschaftenWidget(MDBoxLayout):
-    pass
-
-class CharakterbogenWidget(MDBoxLayout):
-    pass
-
-# -----------------------------
-# CustomTabsItem mit 'title' Property
-# -----------------------------
-
-class CustomTabsItem(MDTabsItem):
-    """
-    Eine benutzerdefinierte MDTabsItem-Klasse, die ein 'title'-Attribut hinzufügt.
-    """
-    title = StringProperty("")
-
-    def __init__(self, **kwargs):
-        # Pop 'title' aus kwargs, um es nicht an die Basisklasse weiterzugeben
-        self.title = kwargs.pop('title', "")
-        super().__init__(**kwargs)
-        # Setze das 'title' Attribut basierend auf 'MDTabsItemText'
-        for child in self.children:
-            if isinstance(child, MDTabsItemText):
-                self.title = child.text
-                break
-
-# Benutzerdefinierte Label-Klasse für Hyperlinks
-class HyperlinkLabel(MDLabel):
-    """
-    Eine benutzerdefinierte MDLabel, die Hyperlinks erkennt und öffnet.
-    """
-    def __init__(self, **kwargs):
-        # Aktiviere Markup
-        kwargs['markup'] = True
-        super().__init__(**kwargs)
-        
-        # Speicherung für URL-Informationen
-        self.url_pattern = re.compile(r'https?://[^\s]+')
-        self.urls = []
-        self.original_text = ""  # Speichert den Text ohne Markup
-        self.hover_cursor = 'hand'
-        
-        # Einmalige Verarbeitung des Texts
-        Clock.schedule_once(self.process_text, 0)
-    
-    def process_text(self, dt):
-        """Verarbeitet den initialen Text, um URLs zu erkennen und zu formatieren."""
-        # Originaltext speichern
-        self.original_text = self.text
-        
-        # Wenn kein Text da ist, nichts tun
-        if not self.original_text:
-            return
-        
-        # URLs im Text finden
-        self.urls = []
-        formatted_text = self.original_text
-        offset = 0  # Versatz durch hinzugefügte Markup-Tags
-        
-        for match in self.url_pattern.finditer(self.original_text):
-            start, end = match.span()
-            url = match.group(0)
-            
-            # URL in der Liste speichern
-            self.urls.append((start, end, url))
-            
-            # URL im Text formatieren
-            markup = f'[color=#3498db][u]{url}[/u][/color]'
-            formatted_text = (
-                formatted_text[:start+offset] + 
-                markup + 
-                formatted_text[end+offset:]
-            )
-            
-            # Offset für nächste URL anpassen
-            offset += len(markup) - len(url)
-        
-        # Text mit markierten Links setzen
-        if self.urls:
-            Logger.info(f"HyperlinkLabel: {len(self.urls)} URLs formatiert")
-            self.text = formatted_text
-    
-    def on_touch_down(self, touch):
-        """Erkennt Klicks auf Links und öffnet sie im Browser."""
-        if self.collide_point(*touch.pos) and self.urls:
-            # Berechne Position im Text
-            x_rel = (touch.x - self.x) / self.width
-            pos = int(x_rel * len(self.original_text))
-            
-            # Prüfe, ob auf eine URL geklickt wurde
-            for start, end, url in self.urls:
-                if start - 5 <= pos <= end + 5:  # Etwas Toleranz für die Klickposition
-                    Logger.info(f"Link angeklickt: {url}")
-                    webbrowser.open(url)
-                    return True
-                    
-        return super().on_touch_down(touch)
-    
-    def on_touch_move(self, touch):
-        """Ändert den Cursor über Links."""
-        if self.collide_point(*touch.pos) and self.urls:
-            x_rel = (touch.x - self.x) / self.width
-            pos = int(x_rel * len(self.original_text))
-            
-            for start, end, url in self.urls:
-                if start - 5 <= pos <= end + 5:
-                    Window.set_system_cursor(self.hover_cursor)
-                    return True
-            
-            Window.set_system_cursor('arrow')
-        
-        return super().on_touch_move(touch)
-    
-    def on_touch_up(self, touch):
-        """Setzt den Cursor zurück."""
-        Window.set_system_cursor('arrow')
-        return super().on_touch_up(touch)
-
-# -----------------------------
-# Screen-Klassen mit Delegationsmethoden
-# -----------------------------
-
-class EinstellungenScreen(MDScreen):
-    def aktualisiere_ui(self):
-        """Delegiert an das EinstellungenWidget"""
-        try:
-            if hasattr(self.ids, 'einstellungen_widget'):
-                widget = self.ids.einstellungen_widget
-                if widget and hasattr(widget, 'aktualisiere_ui'):
-                    widget.aktualisiere_ui()
-                    return True
-            Logger.warning("EinstellungenWidget oder aktualisiere_ui nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei EinstellungenScreen.aktualisiere_ui: {str(e)}")
-            return False
-
-class VoelkerScreen(MDScreen):
-    def aktualisiere_ui(self):
-        """Delegiert an das VoelkerWidget"""
-        try:
-            if hasattr(self.ids, 'voelker_widget'):
-                widget = self.ids.voelker_widget
-                if widget and hasattr(widget, 'aktualisiere_ui'):
-                    widget.aktualisiere_ui()
-                    return True
-            Logger.warning("VoelkerWidget oder aktualisiere_ui nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei VoelkerScreen.aktualisiere_ui: {str(e)}")
-            return False
-
-class ProfilScreen(MDScreen):
-    def load_profil(self):
-        """Delegiert an das ProfilWidget"""
-        try:
-            if hasattr(self.ids, 'profil_widget'):
-                widget = self.ids.profil_widget
-                if widget and hasattr(widget, 'load_profil'):
-                    widget.load_profil()
-                    return True
-            Logger.warning("ProfilWidget oder load_profil nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei ProfilScreen.load_profil: {str(e)}")
-            return False
-
-class EigenschaftenScreen(MDScreen):
-    def update_eigenschaften(self):
-        """Delegiert an das EigenschaftenWidget"""
-        try:
-            if hasattr(self.ids, 'eigenschaften_widget'):
-                widget = self.ids.eigenschaften_widget
-                if widget and hasattr(widget, 'update_eigenschaften'):
-                    widget.update_eigenschaften()
-                    return True
-            Logger.warning("EigenschaftenWidget oder update_eigenschaften nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei EigenschaftenScreen.update_eigenschaften: {str(e)}")
-            return False
-
-class HandicapsScreen(MDScreen):
-    def refresh_widget(self):
-        """Delegiert an das HandicapsWidget"""
-        try:
-            if hasattr(self.ids, 'handicaps_widget'):
-                widget = self.ids.handicaps_widget
-                if widget and hasattr(widget, 'refresh_widget'):
-                    widget.refresh_widget()
-                    return True
-            Logger.warning("HandicapsWidget oder refresh_widget nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei HandicapsScreen.refresh_widget: {str(e)}")
-            return False
-
-class TalenteScreen(MDScreen):
-    def refresh_widget(self):
-        """Delegiert an das TalenteWidget"""
-        try:
-            if hasattr(self.ids, 'talente_widget'):
-                widget = self.ids.talente_widget
-                if widget and hasattr(widget, 'refresh_widget'):
-                    widget.refresh_widget()
-                    return True
-            Logger.warning("TalenteWidget oder refresh_widget nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei TalenteScreen.refresh_widget: {str(e)}")
-            return False
-
-class MaechteScreen(MDScreen):
-    def refresh_widget(self):
-        """Delegiert an das MaechteWidget"""
-        try:
-            if hasattr(self.ids, 'maechte_widget'):
-                widget = self.ids.maechte_widget
-                if widget and hasattr(widget, 'refresh_widget'):
-                    widget.refresh_widget()
-                    return True
-            Logger.warning("MaechteWidget oder refresh_widget nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei MaechteScreen.refresh_widget: {str(e)}")
-            return False
-
-class AusruestungScreen(MDScreen):
-    def refresh_widget(self):
-        """Delegiert an das AusruestungWidget"""
-        try:
-            if hasattr(self.ids, 'ausruestung_widget'):
-                widget = self.ids.ausruestung_widget
-                if widget and hasattr(widget, 'refresh_widget'):
-                    widget.refresh_widget()
-                    return True
-            Logger.warning("AusruestungWidget oder refresh_widget nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei AusruestungScreen.refresh_widget: {str(e)}")
-            return False
-
-class CharakterbogenScreen(MDScreen):
-    def update_overview(self, *args):
-        """Delegiert an das CharakterbogenWidget"""
-        try:
-            if hasattr(self.ids, 'charakterbogen_widget'):
-                widget = self.ids.charakterbogen_widget
-                if widget and hasattr(widget, 'update_overview'):
-                    widget.update_overview(*args)
-                    return True
-            Logger.warning("CharakterbogenWidget oder update_overview nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler bei CharakterbogenScreen.update_overview: {str(e)}")
-            return False
-
-class InfoScreen(MDScreen):
-    info_text = StringProperty("""
-    Lizenz- und Urheberrechtsinformationen
-    Savage Worlds Fan-Produkt
-
-    „Dieses Produkt bezieht sich auf das Regelsystem Savage Worlds, 
-    erhältlich bei der Pinnacle Entertainment Group unter www.peginc.com. 
-    Savage Worlds und alle zugehörigen Logos und Warenzeichen sind 
-    urheberrechtlich geschützt durch die Pinnacle Entertainment Group. 
-    Verwendung mit Genehmigung. Die deutsche Übersetzung der 
-    Begrifflichkeiten von Ulisses Spiele darf verwendet werden. 
-    Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder 
-    Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder 
-    Eignung dieses Produkts für einen bestimmten Zweck."
-
-    „This game references the Savage Worlds game system, 
-    available from Pinnacle Entertainment Group at www.peginc.com. 
-    Savage Worlds and all associated logos and trademarks are copyrights 
-    of Pinnacle Entertainment Group. Used with permission.
-    Pinnacle makes no representation or warranty as to the quality, 
-    viability, or suitability for purpose of this product."
-
-    Danksagungen: 
-    Vielen Dank an Ulisses Spiele für die Genehmigung der App.
-    Danke an die Pinnacle Entertainment Group für dieses großartige Rollenspiel
-    und an Ulisses Spiele für die Übersetzung ins Deutsche.
-    Besonderer Dank gilt allen Testusern, die fleißig Bugs gesammelt und 
-    tolle Anregungen geliefert haben. 
-    Danke an alle Savage-Fans, die dem Spiel Leben einhauchen.
-
-    Links:
-    """)
-    
-    # Liste der Links und deren Beschreibungen
-    links = [
-        ("Ulisses E-Book-Store", "https://www.ulisses-ebooks.de/browse.php?sort=4a&src=fid45795&filters=45795_0_0"),
-        ("Pinnacle Entertainment Group", "https://www.peginc.com"),
-        ("Savage Worlds Deutschland", "https://ulisses-spiele.de/game-system/savage-worlds/")
-    ]
-
-    def on_kv_post(self, base_widget):
-        """Fügt die Link-Buttons hinzu, nachdem das KV geladen wurde."""
-        # Container für Links finden
-        container = self.ids.link_container
-        
-        # Container für linksbündige Ausrichtung konfigurieren
-        container.spacing = dp(4)
-        container.padding = [dp(10), dp(4), dp(10), dp(4)]  # links, oben, rechts, unten
-        
-        # Für jeden Link einen Button erstellen
-        for label, url in self.links:
-            btn = MDButton(
-                style="elevated",
-                size_hint_x=None,  # Keine horizontale Größenbindung
-                size_hint_y=None,
-                height=dp(50),
-                pos_hint={"x": 0},  # Linksbündige Positionierung
-                on_release=lambda x, u=url: self.open_link(u)
-            )
-            # Text als Kind-Widget hinzufügen
-            btn_text = MDButtonText(
-                text=label,
-                padding=[dp(20), 0]  # Seitenpolsterung für den Text
-            )
-            btn.add_widget(btn_text)
-            container.add_widget(btn)
-            
-            # Nach dem Hinzufügen die Breite des Buttons berechnen
-            Clock.schedule_once(lambda dt, btn=btn, lbl=label: self._adjust_button_width(btn, lbl), 0)
-        
-    def _adjust_button_width(self, button, text):
-        """Passt die Breite des Buttons basierend auf der Textlänge an."""
-        min_width = dp(200)  # Mindestbreite
-        # Ungefähre Berechnung der Textbreite (kann verfeinert werden)
-        estimated_width = len(text) * dp(10) + dp(40)  # 10dp pro Zeichen + Padding
-        button.width = max(min_width, estimated_width)
-            
-    def open_link(self, url):
-        """Öffnet einen Link im Browser."""
-        Logger.info(f"Öffne Link: {url}")
-        webbrowser.open(url)
-
-# -----------------------------
-# Logger-Handler
-# -----------------------------
-
-class GUIHandler(logging.Handler):
-    def __init__(self, logger_widget, **kwargs):
-        super().__init__(**kwargs)
-        self.logger_widget = logger_widget
-        self.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-
-    def emit(self, record):
-        msg = self.format(record)
-        Clock.schedule_once(lambda dt: self.update_gui(msg), 0)
-
-    def update_gui(self, msg):
-        lines = self.logger_widget.text.splitlines()
-        lines.append(msg)
-        self.logger_widget.text = "\n".join(lines[-15:])  # Letzte 10 Zeilen anzeigen
-
-# -----------------------------
-# KV-Layout
-# -----------------------------
-
-kv = '''
-#:import MDDivider kivymd.uix.divider.MDDivider
-
-<EinstellungenScreen>:
-    EinstellungenWidget:
-        id: einstellungen_widget
-
-<VoelkerScreen>:
-    VoelkerWidget:
-        id: voelker_widget
-
-<ProfilScreen>:
-    ProfilWidget:
-        id: profil_widget
-
-<EigenschaftenScreen>:
-    EigenschaftenWidget:
-        id: eigenschaften_widget
-
-<HandicapsScreen>:
-    HandicapsWidget:
-        id: handicaps_widget
-
-<TalenteScreen>:
-    TalenteWidget:
-        id: talente_widget
-
-<MaechteScreen>:
-    MaechteWidget:
-        id: maechte_widget
-
-<AusruestungScreen>:
-    AusruestungWidget:
-        id: ausruestung_widget
-
-<CharakterbogenScreen>:
-    CharakterbogenWidget:
-        id: charakterbogen_widget
-
-<InfoScreen>:
-    orientation: 'vertical'
-    padding: dp(10)
-    spacing: dp(10)
-
-    ScrollView:
-        do_scroll_x: False
-        do_scroll_y: True
-
-        MDBoxLayout:
-            orientation: 'vertical'
-            size_hint_y: None
-            md_bg_color: app.theme_cls.backgroundColor
-            height: self.minimum_height
-            padding: dp(10)
-            spacing: dp(10)
-
-            MDLabel:
-                text: root.info_text
-                size_hint_y: None
-                height: self.texture_size[1]
-                text_size: self.width, None
-                halign: 'left'
-                valign: 'top'            
-          
-            # Linktasten
-            MDBoxLayout:
-                id: link_container
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(8)
-
-MDScreen:
-    # Wir packen alles in eine einzige vertikale MDBoxLayout-Struktur
-    MDBoxLayout:
-        orientation: 'vertical'
-        md_bg_color: app.theme_cls.backgroundColor
-
-        # ----------------- (1) OBERE MENÜLEISTE (TABS) -----------------
-        MDBoxLayout:
-            orientation: 'vertical'
-            size_hint_y: None
-            height: dp(60)  # Höhe der Tabbar
-            padding: [30, 0, 0, 0]
-            md_bg_color: app.theme_cls.backgroundColor
-            MDTabsPrimary:
-                id: tabs_bar
-                # In "on_start" füllen wir hier MDTabsItem rein.
-
-        # ----------------- (2) POINTBAR -------------------
-        MDBoxLayout:
-            orientation: 'vertical'
-            size_hint_y: None
-            height: dp(130)
-            md_bg_color: app.theme_cls.backgroundColor
-
-            GenerationPointsBar:
-                id: generation_points
-                charakter: app.controller.charakter
-
-        # ----------------- (3) TAB-INHALT (CAROUSEL) -------------------
-        MDBoxLayout:
-            orientation: 'vertical'
-            id: tab_content_box
-            padding: [30, 0, 30, 30]
-            size_hint_y: 1  # Füllt den restlichen Platz
-            md_bg_color: app.theme_cls.backgroundColor
-
-            MDTabsCarousel:
-                id: tabs_carousel
-                size_hint: (1, 1)
-                # Screens werden dynamisch hinzugefügt.
-
-        # ----------------- (4) LOGGER (unten) -------------------
-        MDBoxLayout:
-            orientation: 'vertical'
-            size_hint_y: None
-            height: dp(60)
-            md_bg_color: app.theme_cls.backgroundColor
-
-            TextInput:
-                id: logger_label
-                text: "Logger: Keine neuen Nachrichten"
-                readonly: True
-                multiline: True
-                background_color: (0, 0, 0, 0)
-                foreground_color: (1, 1, 1, 1)
-'''
-
-# -----------------------------
-# Haupt-App
-# -----------------------------
 
 class SW_Charakter_GeneratorApp(MDApp):
     controller = ObjectProperty(None)
@@ -591,44 +73,64 @@ class SW_Charakter_GeneratorApp(MDApp):
         super().__init__(**kwargs)
         Logger.info("Init SW_Charakter_GeneratorApp")
         
-        # Config Service früh initialisieren für Theme-Laden
-        self._early_config_service = ConfigService()
+        # Ressourcen-Extraktion für PyInstaller EXE
+        from utils.resource_extractor import resource_extractor
+        if not resource_extractor.extract_resources():
+            Logger.error("Fehler bei Ressourcen-Extraktion")
         
+        # KORRIGIERT: Frühe Controller-Initialisierung für Service Container
         self.charakter = Charakter()
         self.controller = CharakterController()
         
+        # Service Container früh initialisieren
+        service_container.initialize(self.controller)
+        Logger.info("Service Container früh initialisiert")
+        
         # Deine Icons + Tab-Texte + zugehörige Screens
+        # NEU: Historie-Tab hinzugefügt
         self.tab_definitions = [
             ("cog",              "Einstellungen",  EinstellungenScreen),
             ("account-group",    "Völker",         VoelkerScreen),
-            ("account-details",          "Profil",         ProfilScreen),
+            ("account-details",  "Profil",         ProfilScreen),
             ("arm-flex",         "Eigenschaften",  EigenschaftenScreen),
             ("account-alert",    "Handicaps",      HandicapsScreen),
             ("star-circle",      "Talente",        TalenteScreen),
             ("creation-outline", "Mächte",         MaechteScreen),
             ("shield-sword",     "Ausrüstung",     AusruestungScreen),
-            ("account",  "Charakter",      CharakterbogenScreen),
+            ("account",          "Charakter",      CharakterbogenScreen),
+            ("history",          "Historie",       HistorieScreen),
             ("information",      "Info",           InfoScreen),
         ]
 
     def build(self):
-        # Theme aus Config laden
+        # KORRIGIERT: Theme aus Config laden (Service Container ist bereits initialisiert)
         self.load_theme_from_config()
-        return Builder.load_string(kv)
+        return self.load_main_kv()
+    
+    def load_main_kv(self):
+        """PyInstaller-kompatibles Laden der main.kv Datei"""
+        if getattr(sys, 'frozen', False):
+            # PyInstaller Bundle
+            base_path = sys._MEIPASS
+            kv_path = os.path.join(base_path, 'main.kv')
+        else:
+            # Normale Ausführung
+            kv_path = 'main.kv'
+        
+        if os.path.exists(kv_path):
+            return Builder.load_file(kv_path)
+        else:
+            Logger.error(f"Main KV-Datei nicht gefunden: {kv_path}")
+            return None
 
     def load_theme_from_config(self):
         """Lädt die Theme-Einstellungen aus der Konfiguration"""
         try:
             Logger.info("=== Theme-Laden gestartet ===")
             
-            # Zuerst versuchen, Config Service aus Service Container zu holen
+            # Config Service aus Service Container holen
             from services.service_container import get_config_service
             config_service = get_config_service()
-            
-            # Falls Service Container noch nicht initialisiert, frühe Instanz verwenden
-            if not config_service and hasattr(self, '_early_config_service'):
-                config_service = self._early_config_service
-                Logger.info("Verwende frühe ConfigService-Instanz für Theme-Laden")
             
             if not config_service:
                 Logger.warning("ConfigService nicht verfügbar, verwende Standard-Theme")
@@ -730,374 +232,380 @@ class SW_Charakter_GeneratorApp(MDApp):
                         self.theme_cls.primary_color = (1.0, 0.596, 0.0, 1.0)
                         Logger.debug("Orange-spezifische Farbe gesetzt")
                     
-                    Logger.info(f"Primäre Palette geändert zu: {primary_palette}")
+                    Logger.info(f"Primärpalette geändert zu: {primary_palette}")
                 else:
-                    Logger.warning(f"Ungültige Palette '{primary_palette}' ignoriert. Gültige Paletten: {valid_palettes}")
-                    return  # Abbrechen wenn ungültige Palette
+                    Logger.warning(f"Ungültige Palette: {primary_palette}")
             
-            # Änderungen in der Konfiguration speichern
+            # Änderungen in Config speichern
             if changes and config_service:
-                config_service.update_multiple(changes, save_immediately=True)
-                Logger.info(f"Theme-Einstellungen in Konfiguration gespeichert: {changes}")
-            elif not config_service:
-                Logger.warning("ConfigService nicht verfügbar, Theme-Änderungen werden nicht gespeichert")
-            
-            Logger.info(f"=== Theme-Update abgeschlossen ===")
+                for key, value in changes.items():
+                    config_service.set(key, value)
+                    Logger.info(f"Config gespeichert: {key} = {value}")
                 
+                Logger.info("=== Theme-Update erfolgreich abgeschlossen ===")
+            
         except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren des Themes: {str(e)}", exc_info=True)
-
-    def get_current_theme_style(self):
-        """Gibt den aktuellen Theme-Stil zurück"""
-        return self.theme_cls.theme_style
-
-    def get_current_primary_palette(self):
-        """Gibt die aktuelle primäre Farbpalette zurück"""
-        return self.theme_cls.primary_palette
+            Logger.error(f"Fehler beim Update des Themes: {str(e)}", exc_info=True)
 
     def on_start(self):
+        """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""
         Logger.info("=== App-Start gestartet ===")
-        
-        # Service Container mit Controller initialisieren (muss vor Theme-Laden passieren)
-        service_container.initialize(self.controller)
-        
-        # Frühe Config Service Instanz bereinigen, da Service Container jetzt verfügbar ist
-        if hasattr(self, '_early_config_service'):
-            delattr(self, '_early_config_service')
-            Logger.debug("Frühe ConfigService-Instanz bereinigt")
-        
-        # Theme nach Service-Initialisierung nochmal laden/überprüfen
-        Logger.info("Theme nach Service-Initialisierung neu laden...")
-        self.load_theme_from_config()
         
         # Fenster maximieren
         Window.maximize()
-
-        # Logger binden
-        logger_widget = self.root.ids.logger_label
-        log_handler = GUIHandler(logger_widget)
-        Logger.addHandler(log_handler)
-        Logger.info("Logger eingerichtet.")
-
-        # Tabbar & Carousel referenzieren
-        tabs_bar = self.root.ids.tabs_bar
-        carousel = self.root.ids.tabs_carousel
-
-        # Initialize screens dictionary
-        self.screens = {}
-
-        # Build tabs and screens
-        for icon_str, tab_text, ScreenClass in self.tab_definitions:
-            # Create Tab Item
-            tab_item = CustomTabsItem(title=tab_text)
-            tab_item.add_widget(MDTabsItemIcon(icon=icon_str))
-            tab_item.add_widget(MDTabsItemText(text=tab_text))
-            tabs_bar.add_widget(tab_item)
-
-            # Create screen instance and add to carousel
-            screen_instance = ScreenClass()
-            carousel.add_widget(screen_instance)
-            self.screens[tab_text] = screen_instance  # Store screen in dictionary
-            
-            # WICHTIG: Widget-Registrierung für Kompatibilität
-            self._register_widget_for_compatibility(screen_instance, tab_text)
-
-        # Binde Mausklick => on_tab_switch
-        tabs_bar.bind(on_tab_switch=self.on_tab_switch)
-
-        # Optional: Ersten Tab aktivieren
-        if self.tab_definitions:
-            # Suche das erste CustomTabsItem
-            first_tab = None
-            for tab in reversed(tabs_bar.children):  # Da children in Kivy reversed sind
-                if isinstance(tab, CustomTabsItem):
-                    first_tab = tab
-                    break
-            if first_tab:
-                first_tab.active = True
-                Logger.info(f"Erster Tab '{first_tab.title}' aktiviert.")
-                # Setze den Carousel-Index entsprechend
-                carousel.index = 0
         
-    def debug_config_info(self):
-        """Debug-Methode um Config-Informationen anzuzeigen"""
-        try:
-            Logger.info("=== CONFIG DEBUG INFO ===")
-            
-            # Config Service holen
-            from services.service_container import get_config_service
-            config_service = get_config_service()
-            
-            if config_service:
-                # Config-Pfad anzeigen
-                config_path = getattr(config_service, '_config_path', 'Unbekannt')
-                Logger.info(f"Config-Pfad: {config_path}")
-                
-                # Config-Inhalt anzeigen
-                config_dict = config_service.get_config_dict()
-                Logger.info(f"Config-Inhalt: {config_dict}")
-                
-                # Prüfen ob Datei existiert
-                import os
-                if hasattr(config_service, '_config_path') and os.path.exists(config_service._config_path):
-                    Logger.info(f"Config-Datei existiert: JA")
-                    
-                    # Datei-Inhalt direkt lesen
-                    try:
-                        with open(config_service._config_path, 'r', encoding='utf-8') as f:
-                            file_content = f.read()
-                        Logger.info(f"Datei-Inhalt direkt: {file_content}")
-                    except Exception as read_error:
-                        Logger.error(f"Fehler beim Lesen der Config-Datei: {read_error}")
-                else:
-                    Logger.warning("Config-Datei existiert: NEIN")
-            else:
-                Logger.error("Config-Service nicht verfügbar")
-            
-            Logger.info("=== CONFIG DEBUG INFO ENDE ===")
-            
-        except Exception as e:
-            Logger.error(f"Fehler bei Config-Debug: {str(e)}", exc_info=True)
+        # Controller mit der App verbinden
+        if self.controller:
+            self.controller.app = self
+            # Charakter an Controller übergeben
+            self.controller.charakter = self.charakter
 
-    def _register_widget_for_compatibility(self, widget, tab_name):
+        root = self.root
+        if not root:
+            Logger.error("Root-Widget nicht verfügbar")
+            return
+
+        # Logger-Widget konfigurieren  
+        logger_widget = root.ids.get('logger_label') if root else None
+        if logger_widget:
+            log_handler = GUIHandler(logger_widget)
+            Logger.addHandler(log_handler)
+            Logger.info("Logger-Handler hinzugefügt")
+        else:
+            Logger.warning("Logger-Widget nicht gefunden")
+
+        # KORRIGIERT: Tabs und Screens mit mehr Verzögerung für vollständige UI-Initialisierung
+        Clock.schedule_once(lambda dt: self.build_tabs_and_screens_immediate(), 0.5)
+
+    def build_tabs_and_screens_immediate(self):
+        """Erstellt die Tabs und Screen-Inhalte sofort (wie in main_backup.py)"""
+        try:
+            Logger.info("=== Tabs und Screens werden erstellt ===")
+            root = self.root
+            if not root:
+                Logger.error("Root-Widget nicht verfügbar")
+                return
+
+            # Tabbar & ScreenManager referenzieren
+            tabs_bar = root.ids.get('tabs_bar')
+            screen_manager = root.ids.get('tabs_carousel')  # Keeping the same ID
+
+            if not tabs_bar or not screen_manager:
+                Logger.error(f"Tabs_bar ({tabs_bar}) oder ScreenManager ({screen_manager}) nicht verfügbar")
+                return
+
+            # Finde das MDTabsScrollView-Kind und das interne Container-Widget  
+            scroll_view = None
+            for child in tabs_bar.children:
+                if 'MDTabsScrollView' in str(type(child)):
+                    scroll_view = child
+                    break
+            
+            if not scroll_view:
+                Logger.error("KRITISCH: MDTabsScrollView nicht gefunden!")
+                return
+            
+            # MDTabsScrollView hat normalerweise ein internes Layout-Widget
+            container = None
+            if scroll_view.children:
+                container = scroll_view.children[0]  # Das erste (und einzige) Kind sollte der Container sein
+            
+            if not container:
+                Logger.error("KRITISCH: Container-Widget im MDTabsScrollView nicht gefunden!")
+                return
+            
+            # Leere den Container und ScreenManager
+            container.clear_widgets()
+            screen_manager.clear_widgets()
+
+            # Initialize screens dictionary
+            self.screens = {}
+            # WICHTIG: Tab-Items-Liste behalten um WeakReference-Probleme zu vermeiden
+            self.tab_items = []
+            # WICHTIG: Screen-Instances-Liste behalten um WeakReference-Probleme zu vermeiden  
+            self.screen_instances = []
+
+            # Build tabs and screens SOFORT
+            for i, (icon_str, tab_text, ScreenClass) in enumerate(self.tab_definitions):
+                Logger.info(f"Erstelle Tab {i+1}/{len(self.tab_definitions)}: '{tab_text}' mit Icon '{icon_str}'")
+                
+                # Create Tab Item
+                tab_item = MDTabsItem()
+                icon_widget = MDTabsItemIcon(icon=icon_str)
+                text_widget = MDTabsItemText(text=tab_text)
+                
+                # Setze parent-Referenzen für KivyMD's interne Logik
+                if hasattr(icon_widget, '_tabs'):
+                    icon_widget._tabs = tabs_bar
+                if hasattr(text_widget, '_tabs'):
+                    text_widget._tabs = tabs_bar
+                if hasattr(tab_item, '_tabs'):
+                    tab_item._tabs = tabs_bar
+                
+                tab_item.add_widget(icon_widget)
+                tab_item.add_widget(text_widget)
+                
+                # Füge Tab zum Container hinzu
+                container.add_widget(tab_item)
+                
+                # WICHTIG: Referenz behalten um WeakReference-Problem zu vermeiden
+                self.tab_items.append(tab_item)
+
+                # Create screen instance and add to screen manager  
+                try:
+                    # Create the screen instance directly (ScreenClass is already a Screen)
+                    screen_instance = ScreenClass()
+                    clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+                    screen_instance.name = f"screen_{i}_{clean_name}"
+                    
+                    # Add to ScreenManager
+                    screen_manager.add_widget(screen_instance)
+                    
+                    # Setze den ersten Screen als aktuellen Screen
+                    if i == 0:
+                        screen_manager.current = screen_instance.name
+                        
+                except Exception as e:
+                    Logger.error(f"Fehler beim Erstellen von {ScreenClass.__name__}: {str(e)}")
+                    screen_instance = None
+                
+                # Store screen with tab_text as key (like in original)
+                if screen_instance:
+                    self.screens[tab_text] = screen_instance
+                    # WICHTIG: Starke Referenz behalten um Garbage Collection zu verhindern
+                    self.screen_instances.append(screen_instance)
+                    
+                    # WICHTIG: Widget-Registrierung für Kompatibilität
+                    self._register_widget_for_compatibility(screen_instance, tab_text)
+                else:
+                    Logger.error(f"DEBUG: Screen {tab_text} konnte nicht erstellt werden!")
+                
+                Logger.info(f"✓ Tab '{tab_text}' erfolgreich erstellt und registriert")
+
+            # Stelle sicher dass tabs_bar seine Tab-Updates verarbeitet
+            if hasattr(tabs_bar, '_trigger_update_tab_width'):
+                tabs_bar._trigger_update_tab_width()
+            
+            # SOFORT: Tab-Event-Binding
+            tabs_bar.bind(on_tab_switch=self.on_tab_switch)
+            
+            # Debug: Alle Screen-Namen ausgeben
+            Logger.info(f"DEBUG: ScreenManager enthält {len(screen_manager.screen_names)} Screens:")
+            for screen_name in screen_manager.screen_names:
+                Logger.info(f"  - {screen_name}")
+                
+            Logger.info(f"DEBUG: Starke Referenzen: {len(self.screen_instances)} Screen-Instanzen behalten")
+            Logger.info(f"DEBUG: self.screens Dictionary: {len(self.screens)} Einträge")
+
+            # SOFORT: Ersten Tab aktivieren (mit sicherer Referenz)
+            if self.tab_items:
+                # Verzögere die Aktivierung etwas, damit die Widgets vollständig initialisiert sind
+                Clock.schedule_once(lambda dt: self._activate_first_tab(screen_manager), 0.1)
+
+            Logger.info(f"=== {len(self.tab_definitions)} Tabs und Screens erfolgreich erstellt ===")
+            
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der Tabs und Screens: {str(e)}", exc_info=True)
+
+    def _activate_first_tab(self, screen_manager):
+        """Aktiviert den ersten Tab mit Verzögerung um KivyMD-Initialisierung abzuwarten"""
+        try:
+            if self.tab_items:
+                first_tab = self.tab_items[0]
+                first_tab.active = True
+                Logger.info(f"Erster Tab verzögert aktiviert.")
+                # ScreenManager braucht kein Index-Setting - wird bereits beim add_widget gesetzt
+        except Exception as e:
+            Logger.error(f"Fehler bei verzögerter Tab-Aktivierung: {str(e)}")
+
+
+    def on_tab_switch(self, tabs_instance, tab_item, tab_content=None):
+        """Handle tab switching mit verbessertem Logging und Error Handling"""
+        try:
+            # KORRIGIERT: Suche in self.tab_items statt tabs_instance.children
+            tab_index = None
+            for i, stored_tab in enumerate(self.tab_items):
+                if stored_tab == tab_item:
+                    tab_index = i
+                    break
+
+            if tab_index is None:
+                Logger.warning("Tab-Index konnte nicht ermittelt werden")
+                return
+
+            # Tab-Namen für Logging
+            tab_name = self.tab_definitions[tab_index][1] if tab_index < len(self.tab_definitions) else "Unknown"
+            Logger.info(f"Tab-Wechsel zu Index {tab_index}: {tab_name}")
+
+            # ScreenManager-Screen setzen
+            root = self.root
+            if root and root.ids.get('tabs_carousel'):
+                screen_manager = root.ids['tabs_carousel']
+                
+                # Get screen name from tab index
+                if 0 <= tab_index < len(self.tab_definitions):
+                    tab_text = self.tab_definitions[tab_index][1]
+                    clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+                    screen_name = f"screen_{tab_index}_{clean_name}"
+                    
+                    # Check if screen exists, create if needed
+                    if hasattr(screen_manager, 'get_screen'):
+                        try:
+                            screen = screen_manager.get_screen(screen_name)
+                            screen_manager.current = screen_name
+                        except Exception as e:
+                            Logger.warning(f"Screen '{screen_name}' nicht gefunden, erstelle neu...")
+                            # Try to create screen dynamically
+                            if 0 <= tab_index < len(self.tab_definitions):
+                                ScreenClass = self.tab_definitions[tab_index][2]
+                                try:
+                                    new_screen = ScreenClass()
+                                    new_screen.name = screen_name
+                                    screen_manager.add_widget(new_screen)
+                                    # Keep strong reference
+                                    if not hasattr(self, 'screen_instances'):
+                                        self.screen_instances = []
+                                    self.screen_instances.append(new_screen)
+                                    self.screens[tab_text] = new_screen
+                                    screen_manager.current = screen_name
+                                    Logger.info(f"Screen '{screen_name}' dynamisch erstellt")
+                                except Exception as create_error:
+                                    Logger.error(f"Dynamische Erstellung von '{screen_name}' fehlgeschlagen: {create_error}")
+                    else:
+                        Logger.error("ScreenManager hat keine get_screen Methode")
+                else:
+                    Logger.error(f"Ungültiger Tab-Index: {tab_index}")
+
+            # Screen-spezifische Updates
+            self.update_active_screen(tab_index)
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Tab-Wechsel: {str(e)}", exc_info=True)
+
+    def update_active_screen(self, tab_index):
+        """Aktualisiert den aktiven Screen basierend auf dem Tab-Index"""
+        try:
+            if tab_index >= len(self.tab_definitions):
+                return
+                
+            # Hole tab_text (wie in der ursprünglichen Version)
+            tab_text = self.tab_definitions[tab_index][1]
+            
+            screen = self.screens.get(tab_text)
+            if screen:
+                # Try to call the screen's own methods first (delegated to underlying widgets)
+                if hasattr(screen, 'refresh_widget'):
+                    Clock.schedule_once(lambda dt: screen.refresh_widget(), 0.1)
+                    Logger.debug(f"Screen '{tab_text}' refresh getriggert")
+                elif hasattr(screen, 'aktualisiere_ui'):
+                    Clock.schedule_once(lambda dt: screen.aktualisiere_ui(), 0.1)
+                    Logger.debug(f"Screen '{tab_text}' UI-Update getriggert")
+                elif hasattr(screen, 'update_overview'):
+                    Clock.schedule_once(lambda dt: screen.update_overview(), 0.1)
+                    Logger.debug(f"Screen '{tab_text}' overview-Update getriggert")
+                    
+                # If screen doesn't have the method, try to find the underlying widget
+                elif hasattr(screen, 'ids'):
+                    # Map tab names to their widget IDs as defined in main.kv
+                    widget_id_map = {
+                        'Einstellungen': 'einstellungen_widget',
+                        'Völker': 'voelker_widget',
+                        'Profil': 'profil_widget', 
+                        'Eigenschaften': 'eigenschaften_widget',
+                        'Handicaps': 'handicaps_widget',
+                        'Talente': 'talente_widget',
+                        'Mächte': 'maechte_widget',
+                        'Ausrüstung': 'ausruestung_widget',
+                        'Charakter': 'charakterbogen_widget',
+                        'Historie': 'historie_widget'
+                    }
+                    
+                    widget_id = widget_id_map.get(tab_text)
+                    if widget_id and widget_id in screen.ids:
+                        widget = screen.ids[widget_id]
+                        if hasattr(widget, 'refresh_widget'):
+                            Clock.schedule_once(lambda dt: widget.refresh_widget(), 0.1)
+                            Logger.debug(f"Widget '{widget_id}' refresh getriggert")
+                        elif hasattr(widget, 'aktualisiere_ui'):
+                            Clock.schedule_once(lambda dt: widget.aktualisiere_ui(), 0.1)
+                            Logger.debug(f"Widget '{widget_id}' UI-Update getriggert")
+                        elif hasattr(widget, 'update_overview'):
+                            Clock.schedule_once(lambda dt: widget.update_overview(), 0.1)
+                            Logger.debug(f"Widget '{widget_id}' overview-Update getriggert")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Screen-Update: {str(e)}")
+
+    def get_screen(self, screen_name):
+        """Hilfsmethode zum Abrufen von Screen-Objekten"""
+        return self.screens.get(screen_name)
+
+    def _register_widget_for_compatibility(self, screen_instance, tab_name):
         """
-        Registriert Widgets bei der App für Legacy-Kompatibilität
+        Registriert Screen-Widgets bei der App für Legacy-Kompatibilität
         
         Args:
-            widget: Das Widget
+            screen_instance: Das Screen-Widget
             tab_name (str): Name des Tabs
         """
         try:
-            # Spezielle Registrierung für wichtige Widgets
-            if tab_name == 'Einstellungen':
-                self.einstellungen_widget = widget
-                Logger.debug("EinstellungenWidget bei App registriert")
-            
-            elif tab_name == 'Eigenschaften':
-                self.eigenschaften_widget = widget
-                Logger.debug("EigenschaftenWidget bei App registriert")
-            
-            elif tab_name == 'Ausrüstung':
-                self.ausruestung_widget = widget
-                Logger.debug("AusrüstungWidget bei App registriert")
-            
-            elif tab_name == 'Profil':
-                self.profil_widget = widget
-                Logger.debug("ProfilWidget bei App registriert")
-            
-            elif tab_name == 'Völker':
-                self.voelker_widget = widget
-                Logger.debug("VölkerWidget bei App registriert")
-            
-            elif tab_name == 'Talente':
-                self.talente_widget = widget
-                Logger.debug("TalenteWidget bei App registriert")
-            
-            elif tab_name == 'Mächte':
-                self.maechte_widget = widget
-                Logger.debug("MächteWidget bei App registriert")
-            
-            elif tab_name == 'Handicaps':
-                self.handicaps_widget = widget
-                Logger.debug("HandicapsWidget bei App registriert")
-            
-            elif tab_name == 'Charakter':
-                self.charakterbogen_widget = widget
-                Logger.debug("CharakterbogenWidget bei App registriert")
+            # Hole das tatsächliche Widget aus dem Screen
+            widget = None
+            if hasattr(screen_instance, 'ids'):
+                if tab_name == 'Einstellungen' and 'einstellungen_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.einstellungen_widget
+                    self.einstellungen_widget = widget
+                    Logger.debug("EinstellungenWidget bei App registriert")
                 
-        except Exception as e:
-            Logger.error(f"Fehler bei Widget-Registrierung für {tab_name}: {str(e)}")
-
-    def get_widget_by_tab_text(self, tab_text, widget_id):
-        """Retrieve widget by tab text and widget ID."""
-        Logger.debug(f"get_widget_by_tab_text aufgerufen mit tab_text = {tab_text}, widget_id = {widget_id}")
-        
-        # Zuerst im screens Dictionary suchen
-        screen = self.screens.get(tab_text)
-        if screen:
-            Logger.debug(f"Screen {tab_text} gefunden, IDs: {screen.ids.keys()}")
-            widget = screen.ids.get(widget_id)
-            if widget:
-                Logger.debug(f"Widget {widget_id} gefunden")
-                return widget
-            else:
-                Logger.error(f"Widget {widget_id} not found in screen {tab_text}.")
-        else:
-            Logger.error(f"Screen {tab_text} not found.")
-        
-        # Fallback: Direkt bei der App suchen
-        try:
-            widget_attr_name = f"{tab_text.lower()}_widget"
-            if hasattr(self, widget_attr_name):
-                app_widget = getattr(self, widget_attr_name)
-                if app_widget and hasattr(app_widget, 'ids'):
-                    widget = app_widget.ids.get(widget_id)
-                    if widget:
-                        Logger.debug(f"Widget {widget_id} über App-Attribut gefunden")
-                        return widget
-        except Exception as e:
-            Logger.error(f"Fehler beim Fallback-Widget-Zugriff: {str(e)}")
-        
-        return None
-
-    # Neue Hilfsmethoden für sichere Widget-Zugriffe
-    def get_einstellungen_widget(self):
-        """Sichere Methode zum Abrufen des Einstellungen-Widgets"""
-        return getattr(self, 'einstellungen_widget', None)
-
-    def get_eigenschaften_widget(self):
-        """Sichere Methode zum Abrufen des Eigenschaften-Widgets"""
-        return getattr(self, 'eigenschaften_widget', None)
-
-    def get_ausruestung_widget(self):
-        """Sichere Methode zum Abrufen des Ausrüstung-Widgets"""
-        return getattr(self, 'ausruestung_widget', None)
-
-    def safe_widget_call(self, widget_getter, method_name, *args, **kwargs):
-        """
-        Sichere Methode zum Aufrufen von Widget-Methoden
-        
-        Args:
-            widget_getter: Funktion zum Abrufen des Widgets
-            method_name (str): Name der aufzurufenden Methode
-            *args, **kwargs: Argumente für die Methode
-            
-        Returns:
-            bool: True bei Erfolg, False bei Fehler
-        """
-        try:
-            widget = widget_getter()
-            if widget and hasattr(widget, method_name):
-                method = getattr(widget, method_name)
-                if callable(method):
-                    method(*args, **kwargs)
-                    return True
-                else:
-                    Logger.warning(f"'{method_name}' ist nicht aufrufbar")
-            else:
-                Logger.warning(f"Widget oder Methode '{method_name}' nicht gefunden")
-            return False
-        except Exception as e:
-            Logger.error(f"Fehler beim Widget-Methodenaufruf '{method_name}': {str(e)}")
-            return False
-
-    def on_stop(self):
-        """Wird beim Beenden der App aufgerufen"""
-        try:
-            # Service Container bereinigen
-            service_container.shutdown()
-            
-            # Cleanup für alle registrierten Widgets
-            widgets_to_cleanup = [
-                'einstellungen_widget', 'eigenschaften_widget', 'ausruestung_widget',
-                'profil_widget', 'voelker_widget', 'talente_widget', 'maechte_widget',
-                'handicaps_widget', 'charakterbogen_widget'
-            ]
-            
-            for widget_name in widgets_to_cleanup:
-                if hasattr(self, widget_name):
-                    widget = getattr(self, widget_name)
-                    if widget and hasattr(widget, 'cleanup'):
-                        try:
-                            widget.cleanup()
-                            Logger.debug(f"Widget {widget_name} bereinigt")
-                        except Exception as e:
-                            Logger.error(f"Fehler beim Bereinigen von {widget_name}: {str(e)}")
-            
-            Logger.info("App-Cleanup abgeschlossen")
-            
-        except Exception as e:
-            Logger.error(f"Fehler beim App-Cleanup: {str(e)}")
-
-    # Aktualisierte refresh_current_tab Methode
-    def refresh_current_tab(self):
-        """
-        Aktualisiert den aktuellen Tab explizit.
-        Wird aufgerufen, wenn ein Tab-Inhalt aktualisiert werden muss,
-        ohne den Tab zu wechseln.
-        """
-        try:
-            # Finde den Index des aktuellen Tabs
-            carousel = self.root.ids.tabs_carousel
-            index = carousel.index
-            
-            # Finde den Tab-Titel basierend auf dem Index
-            if 0 <= index < len(self.tab_definitions):
-                tab_title = self.tab_definitions[index][1]
+                elif tab_name == 'Eigenschaften' and 'eigenschaften_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.eigenschaften_widget
+                    self.eigenschaften_widget = widget
+                    Logger.debug("EigenschaftenWidget bei App registriert")
                 
-                # Sichere Tab-Updates direkt über die Screen-Instanzen
-                screen = self.screens.get(tab_title)
-                if screen:
-                    if tab_title == 'Eigenschaften' and hasattr(screen, 'update_eigenschaften'):
-                        screen.update_eigenschaften()
-                    elif tab_title == 'Ausrüstung' and hasattr(screen, 'refresh_widget'):
-                        screen.refresh_widget()
-                    elif tab_title == 'Profil' and hasattr(screen, 'load_profil'):
-                        screen.load_profil()
-                    elif tab_title == 'Völker' and hasattr(screen, 'aktualisiere_ui'):
-                        screen.aktualisiere_ui()
-                    elif tab_title == 'Talente' and hasattr(screen, 'refresh_widget'):
-                        screen.refresh_widget()
-                    elif tab_title == 'Mächte' and hasattr(screen, 'refresh_widget'):
-                        screen.refresh_widget()
-                    elif tab_title == 'Handicaps' and hasattr(screen, 'refresh_widget'):
-                        screen.refresh_widget()
-                    elif tab_title == 'Charakter' and hasattr(screen, 'update_overview'):
-                        screen.update_overview(0)
-                    elif tab_title == 'Einstellungen' and hasattr(screen, 'aktualisiere_ui'):
-                        screen.aktualisiere_ui()
+                elif tab_name == 'Ausrüstung' and 'ausruestung_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.ausruestung_widget
+                    self.ausruestung_widget = widget
+                    Logger.debug("AusrüstungWidget bei App registriert")
                 
-                Logger.info(f"UI-Aktualisierung für aktuellen Tab '{tab_title}' abgeschlossen")
-            else:
-                Logger.error(f"Ungültiger Carousel-Index: {index}")
+                elif tab_name == 'Profil' and 'profil_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.profil_widget
+                    self.profil_widget = widget
+                    Logger.debug("ProfilWidget bei App registriert")
+                
+                elif tab_name == 'Völker' and 'voelker_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.voelker_widget
+                    self.voelker_widget = widget
+                    Logger.debug("VölkerWidget bei App registriert")
+                
+                elif tab_name == 'Talente' and 'talente_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.talente_widget
+                    self.talente_widget = widget
+                    Logger.debug("TalenteWidget bei App registriert")
+                
+                elif tab_name == 'Mächte' and 'maechte_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.maechte_widget
+                    self.maechte_widget = widget
+                    Logger.debug("MächteWidget bei App registriert")
+                
+                elif tab_name == 'Handicaps' and 'handicaps_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.handicaps_widget
+                    self.handicaps_widget = widget
+                    Logger.debug("HandicapsWidget bei App registriert")
+                
+                elif tab_name == 'Charakter' and 'charakterbogen_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.charakterbogen_widget
+                    self.charakterbogen_widget = widget
+                    Logger.debug("CharakterbogenWidget bei App registriert")
+                
+                elif tab_name == 'Historie' and 'historie_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.historie_widget
+                    self.historie_widget = widget
+                    Logger.debug("HistorieWidget bei App registriert")
+            
         except Exception as e:
-            Logger.error(f"Fehler bei der Aktualisierung des aktuellen Tabs: {str(e)}", exc_info=True)
+            Logger.error(f"Fehler bei Widget-Registrierung für '{tab_name}': {str(e)}")
 
-    def on_tab_switch(self, instance_tabs, instance_tab, instance_tab_label):
-        """
-        Wird aufgerufen, wenn ein Tab gewechselt wird.
-        - Aktualisiert den Carousel-Index
-        - Aktualisiert die UI-Elemente des aktiven Tabs
-        """
-        # Zugriff auf den Tab-Titel
-        tab_title = getattr(instance_tab, 'title', 'Unbekannt')
-        Logger.info(f"Tab-Wechsel zu: {tab_title}")
-
-        # Finde den Index des aktiven Tabs
-        index = next((i for i, tab in enumerate(self.tab_definitions) if tab[1] == tab_title), 0)
-
-        # Setze den Carousel-Index
-        self.root.ids.tabs_carousel.index = index
-        
-        try:
-            # Tab-spezifische Aktualisierungen direkt über Screen-Instanzen
-            screen = self.screens.get(tab_title)
-            if screen:
-                if tab_title == 'Eigenschaften' and hasattr(screen, 'update_eigenschaften'):
-                    screen.update_eigenschaften()
-                elif tab_title == 'Ausrüstung' and hasattr(screen, 'refresh_widget'):
-                    screen.refresh_widget()
-                elif tab_title == 'Profil' and hasattr(screen, 'load_profil'):
-                    screen.load_profil()
-                elif tab_title == 'Völker' and hasattr(screen, 'aktualisiere_ui'):
-                    screen.aktualisiere_ui()
-                elif tab_title == 'Talente' and hasattr(screen, 'refresh_widget'):
-                    screen.refresh_widget()
-                elif tab_title == 'Mächte' and hasattr(screen, 'refresh_widget'):
-                    screen.refresh_widget()
-                elif tab_title == 'Handicaps' and hasattr(screen, 'refresh_widget'):
-                    screen.refresh_widget()
-                elif tab_title == 'Charakter' and hasattr(screen, 'update_overview'):
-                    Logger.debug("Charakterbogen-Tab erkannt")
-                    screen.update_overview(0)
-                elif tab_title == 'Einstellungen' and hasattr(screen, 'aktualisiere_ui'):
-                    screen.aktualisiere_ui()
-                    
-            Logger.info(f"UI-Aktualisierung für Tab {tab_title} erfolgreich")
-                    
-        except Exception as e:
-            Logger.error(f"Fehler bei UI-Aktualisierung für Tab {tab_title}: {str(e)}", exc_info=True)
 
 if __name__ == "__main__":
-    Logger.info("Starte SW_Charakter_GeneratorApp")
     SW_Charakter_GeneratorApp().run()

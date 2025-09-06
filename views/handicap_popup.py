@@ -20,59 +20,26 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.handicap import Handicap
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<HandicapDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "320dp"
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name des Handicaps'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'handicap_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'handicap_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"handicap_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDDropDownItem:
-        id: stufe_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_stufen_menu(self)
-
-        MDDropDownItemText:
-            id: selected_stufe_text
-            text: "Stufe wählen"
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        multiline: True
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-<DeleteHandicapDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: handicap_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_handicap_text
-            text: "Handicap auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class HandicapDialogContent(MDBoxLayout):
     def __init__(self, handicap_data=None, **kwargs):

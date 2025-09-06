@@ -1,0 +1,33 @@
+{
+  "rang_werte": {
+    "vollstaendige_namen": {
+      "anfänger": 1,
+      "fortgeschritten": 2,
+      "veteran": 3,
+      "heroisch": 4,
+      "legendär": 5
+    },
+    "abkuerzungen": {
+      "a": 1,
+      "f": 2,
+      "v": 3,
+      "h": 4,
+      "l": 5
+    },
+    "englische_bezeichnungen": {
+      "novice": 1,
+      "seasoned": 2,
+      "veteran": 3,
+      "heroic": 4,
+      "legendary": 5
+    }
+  },
+  "dateipfade": {
+    "custom_maechte_file": "custom_maechte.json"
+  },
+  "standard_werte": {
+    "fallback_rang": "a",
+    "fallback_rang_wert": 1,
+    "debug_logging": true
+  }
+}

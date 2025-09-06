@@ -14,9 +14,10 @@ class ThemeService:
     
     def __init__(self):
         self.available_colors = [
-            'Blue', 'Green', 'Teal', 
-            'Purple', 'Red', 'Saddlebrown', 
-            'Orange', 'Gold', 'Olive'
+            'Blau', 'Grün', 'Lila', 
+            'Rot', 'Orange', 'Rosa',
+            'Indigo', 'Limette', 'Gelb',
+            'Blaugrün'
         ]
         self.current_color = ""
         
@@ -54,6 +55,17 @@ class ThemeService:
             return True
         return False
     
+    def update_color_chips(self, colors_container, on_color_selected):
+        """
+        Aktualisiert die Farb-Chips nach einer Farbänderung
+        
+        Args:
+            colors_container: Container-Widget für die Chips
+            on_color_selected: Callback-Funktion für Farbauswahl
+        """
+        # Einfach die Chips neu erstellen
+        self.create_color_chips(colors_container, on_color_selected)
+    
     def create_color_chips(self, colors_container, on_color_selected):
         """
         Erstellt Farb-Chips für die UI
@@ -66,18 +78,38 @@ class ThemeService:
             Logger.warning("Kein Container für Farb-Chips verfügbar")
             return
             
+        # Aktuelle Farbe vor der Erstellung der Chips synchronisieren
+        app = App.get_running_app()
+        if app:
+            self.current_color = app.theme_cls.primary_palette
+            
         colors_container.clear_widgets()
         
+        # Mapping von deutschen Namen zu KivyMD-Paletten
+        color_mapping = {
+            'Blau': 'Blue',
+            'Grün': 'Green', 
+            'Lila': 'Purple',
+            'Rot': 'Red',
+            'Orange': 'Orange',
+            'Rosa': 'Pink',
+            'Indigo': 'Indigo',
+            'Limette': 'Lime',
+            'Gelb': 'Yellow',
+            'Blaugrün': 'Teal'
+        }
+        
         for farbe in self.available_colors:
+            kivymd_palette = color_mapping.get(farbe, farbe)
             chip = MDChip(
                 MDChipText(
                     text=farbe,
                     theme_text_color="Secondary",
                 ),
                 type="filter",
-                active=farbe == self.current_color,
-                md_bg_color=self._get_chip_background_color(farbe),
-                on_release=lambda x, f=farbe: on_color_selected(f)
+                active=kivymd_palette == self.current_color,
+                md_bg_color=self._get_chip_background_color(kivymd_palette),
+                on_release=lambda x, german=farbe, english=kivymd_palette: on_color_selected(english)
             )
             colors_container.add_widget(chip)
     

@@ -22,92 +22,26 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.macht import Macht
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<MachtDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "520dp"
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name der Macht'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'macht_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'macht_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"macht_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDTextField:
-        id: rang_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Rang'
-
-    MDTextField:
-        id: machtpunkte_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Machtpunkte'
-
-    MDTextField:
-        id: reichweite_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Reichweite'
-
-    MDTextField:
-        id: dauer_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Dauer'
-
-    MDTextField:
-        id: effekt_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Effekt'
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-    MDTextField:
-        id: voraussetzungen_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Voraussetzungen (durch Komma getrennt)'
-
-<DeleteMachtDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: macht_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_macht_text
-            text: "Macht auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class MachtDialogContent(MDBoxLayout):
     def __init__(self, macht_data=None, **kwargs):

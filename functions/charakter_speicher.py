@@ -42,34 +42,48 @@ def speichern_als_json(charakter, dateipfad):
 def to_dict(charakter):
     """
     Konvertiert ein Charakterobjekt in ein Dictionary.
+    OPTIMIERT: Speichert nur die tatsächlichen Charakterdaten, nicht die kompletten Setting-Elemente
     
     Args:
         charakter: Das zu konvertierende Charakterobjekt
         
     Returns:
-        dict: Ein Dictionary mit den Charakterdaten
+        dict: Ein Dictionary mit den Charakterdaten (ohne komplette Setting-Daten)
     """
     # Sicherstellen, dass selected_handicaps aktualisiert sind
-    # alle Handicaps, die ausgewaehlt sind, in selected_handicaps aufnehmen
     charakter.selected_handicaps = [name for name, handicap in charakter.handicaps.items() if handicap.ausgewaehlt]
 
+    # Pathfinder-spezifische Attribute mit Standardwerten
+    pathfinder_kostenlose_talente_gewaehlt = getattr(charakter, 'pathfinder_kostenlose_talente_gewaehlt', 0)
+
+    # Nur die ausgewählten/gekauften Elemente mit ihren individuellen Daten speichern
+    selected_elements = _get_selected_elements_with_data(charakter)
+    
     return {
+        # === GRUNDDATEN ===
         'profil_daten': charakter.profil_daten,
-        "voelker": {name: volk.to_setting_dict() for name, volk in charakter.voelker.items()},
+        'active_setting_name': charakter.custom_element_manager.active_setting_name,
+        'char_gen_completed': charakter.char_gen_completed,
+        'settingregeln': charakter.settingregeln.to_dict(),
+        
+        # === ATTRIBUTE UND FERTIGKEITEN ===
         'attribute': {name: attribut.to_dict() for name, attribut in charakter.attribute.items()},
         'fertigkeiten': {name: fertigkeit.to_dict() for name, fertigkeit in charakter.fertigkeiten.items()},
-        'handicaps': {name: handicap.to_dict() for name, handicap in charakter.handicaps.items()},
-        'talente': {name: talent.to_dict() for name, talent in charakter.talente.items()},
-        'maechte': {name: macht.to_dict() for name, macht in charakter.maechte.items()},
-        "ausruestung": {name: ausruestung.to_dict() for name, ausruestung in charakter.ausruestung.items()},
+        
+        # === NUR AUSGEWÄHLTE ELEMENTE MIT INDIVIDUELLEN DATEN ===
+        'selected_elements': selected_elements,
+        
+        # === AUSWAHL-LISTEN (nur Namen/IDs) ===
         'selected_handicaps': charakter.selected_handicaps,
         'selected_talente': charakter.selected_talente,
         'selected_maechte': charakter.selected_maechte,
+        'voelker_selected': charakter.voelker_selected,
         'selected_allgemeine_ausruestung': [item.name for item in charakter.selected_allgemeine_ausruestung],
         'selected_waffen': [item.name for item in charakter.selected_waffen],
         'selected_ruestungen': [item.name for item in charakter.selected_ruestungen],
         'selected_schilde': [item.name for item in charakter.selected_schilde],
-        'voelker_selected': charakter.voelker_selected,
+        
+        # === CHARAKTER-STATUS ===
         'verbleibende_attributsteigerungen': charakter.verbleibende_attributsteigerungen,
         'verbleibende_fertigkeitssteigerungen': charakter.verbleibende_fertigkeitssteigerungen,
         'maximale_attributsteigerungen': charakter.maximale_attributsteigerungen,
@@ -77,20 +91,99 @@ def to_dict(charakter):
         'verbleibende_aufstiege': charakter.verbleibende_aufstiege,
         'aufstiege_gesamt': charakter.aufstiege_gesamt,
         'verfuegbare_maechte': charakter.verfuegbare_maechte,
-        'anzahl_maechte': charakter.anzahl_maechte,  # HINZUGEFÜGT: anzahl_maechte wird jetzt gespeichert
+        'anzahl_maechte': charakter.anzahl_maechte,
         'machtpunkte': charakter.machtpunkte,
         'vermoegen': charakter.vermoegen,
         'erschoepfung': charakter.erschoepfung,
         'zusaetzliche_talente': charakter.zusaetzliche_talente,
         'gesamt_handicap_punkte': charakter.gesamt_handicap_punkte,
-        'settingregeln': charakter.settingregeln.to_dict(),
-        'active_setting_name': charakter.custom_element_manager.active_setting_name,
-        'char_gen_completed': charakter.char_gen_completed  # Hinzugefügt
+        'pathfinder_kostenlose_talente_gewaehlt': pathfinder_kostenlose_talente_gewaehlt
     }
+
+def _get_selected_elements_with_data(charakter):
+    """
+    Extrahiert nur die ausgewählten Elemente mit ihren individuellen Charakterdaten
+    
+    Returns:
+        dict: Dictionary mit nur den ausgewählten Elementen und deren individuellen Daten
+    """
+    selected_elements = {
+        'voelker': {},
+        'handicaps': {},  
+        'talente': {},
+        'maechte': {},
+        'ausruestung': {}
+    }
+    
+    # Nur ausgewählte Völker mit individuellen Daten
+    if hasattr(charakter, 'voelker_selected'):
+        for name, selected in charakter.voelker_selected.items():
+            if selected and name in charakter.voelker:
+                # Nur individuelle Charakterdaten, nicht die komplette Setting-Definition
+                selected_elements['voelker'][name] = {
+                    'ausgewaehlt': True,
+                    # Hier könnten weitere individuelle Daten hinzugefügt werden
+                }
+    
+    # Nur ausgewählte Handicaps mit individuellen Daten  
+    for name, handicap in charakter.handicaps.items():
+        if handicap.ausgewaehlt:
+            selected_elements['handicaps'][name] = {
+                'ausgewaehlt': True,
+                'stufe': handicap.stufe,
+                'punkte': handicap.punkte,
+                # Weitere individuelle Daten falls vorhanden
+            }
+    
+    # Nur ausgewählte Talente mit individuellen Daten
+    for talent_name in charakter.selected_talente:
+        if talent_name in charakter.talente:
+            talent = charakter.talente[talent_name]
+            selected_elements['talente'][talent_name] = {
+                'ausgewaehlt': True,
+                'rang': talent.rang,
+                'neue_maechte': talent.neue_maechte,
+                'machtpunkte': talent.machtpunkte,
+                # Weitere individuelle Daten falls vorhanden
+            }
+    
+    # Nur ausgewählte Mächte mit individuellen Daten
+    for macht_name in charakter.selected_maechte:
+        if macht_name in charakter.maechte:
+            macht = charakter.maechte[macht_name]
+            selected_elements['maechte'][macht_name] = {
+                'ausgewaehlt': True,
+                'rang': macht.rang,
+                'machtpunkte': macht.machtpunkte,
+                'reichweite': macht.reichweite,
+                'dauer': macht.dauer,
+                # Weitere individuelle Daten falls vorhanden
+            }
+    
+    # Nur ausgewählte Ausrüstung mit individuellen Daten
+    all_selected_equipment = (
+        charakter.selected_allgemeine_ausruestung + 
+        charakter.selected_waffen + 
+        charakter.selected_ruestungen + 
+        charakter.selected_schilde
+    )
+    
+    for item in all_selected_equipment:
+        if hasattr(item, 'name') and item.name in charakter.ausruestung:
+            selected_elements['ausruestung'][item.name] = {
+                'ausgewaehlt': True,
+                'anzahl': getattr(item, 'anzahl', 1),
+                'zustand': getattr(item, 'zustand', 'neu'),
+                # Weitere individuelle Daten falls vorhanden
+            }
+    
+    return selected_elements
 
 def from_dict(self, data):
     """
     Lädt Daten aus einem Dictionary in das Charakterobjekt.
+    ÜBERARBEITET: Unterstützt sowohl altes Format (mit kompletten Setting-Daten) 
+    als auch neues Format (nur mit ausgewählten Elementen + Setting-Referenz)
     
     Args:
         data (dict): Ein Dictionary mit Charakterdaten
@@ -102,209 +195,325 @@ def from_dict(self, data):
             if key == "Name":
                 self.char_name = value
 
-        # Völker laden
-        voelker_data = data.get('voelker', {})
-        self.voelker = {}
-        for name, volk_dict in voelker_data.items():
-            try:
-                self.voelker[name] = Volk.from_dict(volk_dict)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden des Volkes '{name}': {e}")
-        Logger.info("Völker geladen.")
+        # Setting-Name setzen
+        setting_name = data.get('active_setting_name', 'SWAE')
+        self.active_setting_name = setting_name
 
-        # Völker-Auswahl laden
-        self.voelker_selected = data.get('voelker_selected', {})
-        for name, selected in self.voelker_selected.items():
-            if name in self.voelker:
-                self.voelker[name].ausgewaehlt = selected
-            else:
-                Logger.warning(f"Volk '{name}' existiert nicht in den geladenen Völkern.")
+        # Prüfen ob neues Format (nur selected_elements) oder altes Format (komplette Daten)
+        if 'selected_elements' in data:
+            # NEUES FORMAT: Nur ausgewählte Elemente laden
+            Logger.info("Lade Charakter mit neuem Format (nur ausgewählte Elemente)")
+            _load_new_format(self, data)
+        else:
+            # ALTES FORMAT: Komplette Setting-Daten in Charakter-Datei
+            Logger.info("Lade Charakter mit altem Format (komplette Setting-Daten)")
+            _load_old_format(self, data)
 
-        # Attribute laden
-        attribute_data = data.get('attribute', {})
-        self.attribute = {}  # Zurücksetzen um Duplikate zu vermeiden
-        for name, attr_data in attribute_data.items():
-            try:
-                self.attribute[name] = Attribut.from_dict_static(attr_data)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden des Attributs '{name}': {e}")
-
-        # Fertigkeiten laden
-        fertigkeiten_data = data.get('fertigkeiten', {})
-        self.fertigkeiten = {}  # Zurücksetzen um Duplikate zu vermeiden
-        for name, fert_data in fertigkeiten_data.items():
-            try:
-                self.fertigkeiten[name] = Fertigkeit.from_dict_static(fert_data, self.attribute)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden der Fertigkeit '{name}': {e}")
-
-        # Handicaps laden und zurücksetzen
-        self.handicaps = {}
-        handicaps_data = data.get('handicaps', {})
-        for name_key, handicap_data in handicaps_data.items():
-            try:
-                self.handicaps[name_key] = Handicap.from_dict_static(handicap_data)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden des Handicaps '{name_key}': {e}")
-
-        self.selected_handicaps = data.get('selected_handicaps', [])
-        # Synchronisiere die ausgewählt-Eigenschaft in den handicaps mit selected_handicaps
-        for name, handicap in self.handicaps.items():
-            handicap.ausgewaehlt = name in self.selected_handicaps
-
-        # Talente laden und zurücksetzen
-        self.talente = {}
-        talente_data = data.get('talente', {})
-        for name_key, talent_data in talente_data.items():
-            try:
-                self.talente[name_key] = Talent.from_dict_static(talent_data)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden des Talents '{name_key}': {e}")
-
-        # Mächte laden und zurücksetzen
-        self.maechte = {}
-        maechte_data = data.get('maechte', {})
-        for name_key, macht_data in maechte_data.items():
-            try:
-                self.maechte[name_key] = Macht.from_dict_static(macht_data)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden der Macht '{name_key}': {e}")
-
-        # Ausrüstung laden und zurücksetzen
-        self.ausruestung = {}
-        ausruestung_data = data.get('ausruestung', {})
-        for name, item_data in ausruestung_data.items():
-            try:
-                kategorie = item_data.get('kategorie', 'Allgemein')
-                if kategorie == 'Waffe':
-                    item = Waffe.from_dict_static(item_data)
-                elif kategorie == 'Rüstung':
-                    item = Ruestung.from_dict_static(item_data)
-                elif kategorie == 'Schild':
-                    item = Schild.from_dict_static(item_data)
-                else:
-                    item = Ausruestung.from_dict_static(item_data)
-
-                item.menge = item_data.get('menge', 0)
-                item.ausgewaehlt = item_data.get('ausgewaehlt', False)
-                item.aktiv = item_data.get('aktiv', True)
-                item.angelegt = item_data.get('angelegt', False)
-
-                self.ausruestung[name] = item
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
-
-        # Ausgewählte Talente wiederherstellen
-        self.selected_talente = data.get('selected_talente', [])
-        for name_key in self.selected_talente:
-            if name_key in self.talente:
-                self.talente[name_key].ausgewaehlt = True
-            else:
-                Logger.warning(f"Talent '{name_key}' nicht in self.talente gefunden.")
-
-        # Ausgewählte Mächte wiederherstellen
-        self.selected_maechte = data.get('selected_maechte', [])
-        for name_key in self.selected_maechte:
-            if name_key in self.maechte:
-                self.maechte[name_key].ausgewaehlt = True
-            else:
-                Logger.warning(f"Macht '{name_key}' nicht in self.maechte gefunden.")
-
-        # Ausrüstungslisten zurücksetzen
-        self.selected_waffen = []
-        self.selected_schilde = []
-        self.selected_ruestungen = []
-        self.selected_allgemeine_ausruestung = []
-
-        # Ausgewählte Waffen wiederherstellen
-        selected_waffen_names = data.get('selected_waffen', [])
-        for name in selected_waffen_names:
-            if name in self.ausruestung:
-                waffe = self.ausruestung[name]
-                if isinstance(waffe, Waffe):
-                    waffe.angelegt = True
-                    self.selected_waffen.append(waffe)
-                    Logger.debug(f"Waffe '{waffe.name}' als angelegt markiert.")
-                else:
-                    Logger.warning(f"'{name}' ist keine Waffe, sondern {type(waffe).__name__}")
-            else:
-                Logger.warning(f"Waffe '{name}' nicht in self.ausruestung gefunden.")
-
-        # Ausgewählte Schilde wiederherstellen
-        selected_schilde_names = data.get('selected_schilde', [])
-        for name in selected_schilde_names:
-            if name in self.ausruestung:
-                schild = self.ausruestung[name]
-                if isinstance(schild, Schild):
-                    schild.angelegt = True
-                    self.selected_schilde.append(schild)
-                    Logger.debug(f"Schild '{schild.name}' als angelegt markiert.")
-                else:
-                    Logger.warning(f"'{name}' ist kein Schild, sondern {type(schild).__name__}")
-            else:
-                Logger.warning(f"Schild '{name}' nicht in self.ausruestung gefunden.")
-
-        # Ausgewählte Rüstungen wiederherstellen
-        selected_ruestungen_names = data.get('selected_ruestungen', [])
-        for name in selected_ruestungen_names:
-            if name in self.ausruestung:
-                ruestung = self.ausruestung[name]
-                if isinstance(ruestung, Ruestung):
-                    ruestung.angelegt = True
-                    self.selected_ruestungen.append(ruestung)
-                    # WICHTIG: Auch zur allgemeinen Ausrüstung hinzufügen
-                    if ruestung not in self.selected_allgemeine_ausruestung:
-                        self.selected_allgemeine_ausruestung.append(ruestung)
-                    Logger.debug(f"Rüstung '{ruestung.name}' als angelegt markiert.")
-                else:
-                    Logger.warning(f"'{name}' ist keine Rüstung, sondern {type(ruestung).__name__}")
-            else:
-                Logger.warning(f"Rüstung '{name}' nicht in self.ausruestung gefunden.")
-
-        # Ausgewählte allgemeine Ausrüstung wiederherstellen
-        selected_allgemeine_ausruestung_names = data.get('selected_allgemeine_ausruestung', [])
-        for name in selected_allgemeine_ausruestung_names:
-            if name in self.ausruestung:
-                item = self.ausruestung[name]
-                if not isinstance(item, (Waffe, Ruestung, Schild)):
-                    self.selected_allgemeine_ausruestung.append(item)
-                    Logger.debug(f"Allgemeiner Ausrüstungsgegenstand '{item.name}' ausgewählt.")
-                else:
-                    Logger.warning(f"'{name}' ist kein allgemeiner Ausrüstungsgegenstand.")
-            else:
-                Logger.warning(f"Ausrüstungsgegenstand '{name}' nicht in self.ausruestung gefunden.")
-
-        # Zuweisungen der anderen Werte
-        self.verbleibende_attributsteigerungen = data.get('verbleibende_attributsteigerungen', self.verbleibende_attributsteigerungen)
-        self.verbleibende_fertigkeitssteigerungen = data.get('verbleibende_fertigkeitssteigerungen', self.verbleibende_fertigkeitssteigerungen)
-        self.maximale_attributsteigerungen = data.get('maximale_attributsteigerungen', self.maximale_attributsteigerungen)
-        self.maximale_fertigkeitssteigerungen = data.get('maximale_fertigkeitssteigerungen', self.maximale_fertigkeitssteigerungen)
-        self.verbleibende_aufstiege = data.get('verbleibende_aufstiege', self.verbleibende_aufstiege)
-        self.aufstiege_gesamt = data.get('aufstiege_gesamt', self.aufstiege_gesamt)
-        self.verfuegbare_maechte = data.get('verfuegbare_maechte', self.verfuegbare_maechte)
-        self.anzahl_maechte = data.get('anzahl_maechte', self.anzahl_maechte)  # HINZUGEFÜGT: anzahl_maechte wird jetzt geladen
-        self.machtpunkte = data.get('machtpunkte', self.machtpunkte)
-        self.vermoegen = data.get('vermoegen', self.vermoegen)
-        self.erschoepfung = data.get('erschoepfung', self.erschoepfung)
-        self.zusaetzliche_talente = data.get('zusaetzliche_talente', self.zusaetzliche_talente)
-        self.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', self.gesamt_handicap_punkte)
-        self.char_gen_completed = data.get('char_gen_completed', self.char_gen_completed) 
-
-        # Setting-Einstellungen
-        if 'settingregeln' in data:
-            try:
-                settingregeln_data = data.get('settingregeln', {})
-                if self.settingregeln:
-                    self.settingregeln.from_dict(settingregeln_data)
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
-
-        # Aktives Setting setzen
-        self.active_setting_name = data.get('active_setting_name', "SWAE")
-        Logger.info(f"Active Setting Name aus Datei: {self.active_setting_name}")
-
-        # UI aktualisieren (optional hier - wird auch im laden_von_json aufgerufen)
-        self.dispatch('on_charakter_change')
+        # Gemeinsame Nachbearbeitung für beide Formate
+        _finalize_character_loading(self, data)
+        
     except Exception as e:
-        Logger.error(f"Kritischer Fehler in from_dict: {e}", exc_info=True)
+        Logger.error(f"Fehler beim Laden der Charakterdaten: {e}")
         raise
+
+
+def _load_new_format(charakter, data):
+    """
+    Lädt Charakter im neuen Format (nur ausgewählte Elemente + Setting-Referenz)
+    """
+    # Setting aktivieren und alle verfügbaren Elemente laden
+    charakter.custom_element_manager.set_active_setting(charakter.active_setting_name)
+    charakter.load_elements_from_active_setting(replace_mode=True)
+    
+    # Attribute und Fertigkeiten laden (werden immer vollständig gespeichert)
+    _load_attributes_and_skills(charakter, data)
+    
+    # Nur die ausgewählten Elemente mit ihren individuellen Daten laden
+    selected_elements = data.get('selected_elements', {})
+    
+    # Auswahl-Listen laden
+    charakter.selected_handicaps = data.get('selected_handicaps', [])
+    charakter.selected_talente = data.get('selected_talente', [])
+    charakter.selected_maechte = data.get('selected_maechte', [])
+    charakter.voelker_selected = data.get('voelker_selected', {})
+    
+    # Individuelle Daten auf die Setting-Elemente anwenden
+    _apply_individual_element_data(charakter, selected_elements)
+    
+    # Ausrüstungslisten laden
+    _load_equipment_selections(charakter, data)
+
+
+def _load_old_format(charakter, data):
+    """
+    Lädt Charakter im alten Format (komplette Setting-Daten in Charakter-Datei)
+    """
+    # Attribute und Fertigkeiten laden
+    _load_attributes_and_skills(charakter, data)
+    
+    # Völker laden
+    voelker_data = data.get('voelker', {})
+    charakter.voelker = {}
+    for name, volk_dict in voelker_data.items():
+        try:
+            charakter.voelker[name] = Volk.from_dict(volk_dict)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden des Volkes '{name}': {e}")
+
+    # Völker-Auswahl laden
+    charakter.voelker_selected = data.get('voelker_selected', {})
+    for name, selected in charakter.voelker_selected.items():
+        if name in charakter.voelker:
+            charakter.voelker[name].ausgewaehlt = selected
+
+    # Handicaps laden
+    charakter.handicaps = {}
+    handicaps_data = data.get('handicaps', {})
+    for name_key, handicap_data in handicaps_data.items():
+        try:
+            charakter.handicaps[name_key] = Handicap.from_dict_static(handicap_data)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden des Handicaps '{name_key}': {e}")
+
+    charakter.selected_handicaps = data.get('selected_handicaps', [])
+    for name, handicap in charakter.handicaps.items():
+        handicap.ausgewaehlt = name in charakter.selected_handicaps
+
+    # Talente laden
+    charakter.talente = {}
+    talente_data = data.get('talente', {})
+    for name_key, talent_data in talente_data.items():
+        try:
+            charakter.talente[name_key] = Talent.from_dict_static(talent_data)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden des Talents '{name_key}': {e}")
+
+    charakter.selected_talente = data.get('selected_talente', [])
+    for name_key in charakter.selected_talente:
+        if name_key in charakter.talente:
+            charakter.talente[name_key].ausgewaehlt = True
+
+    # Mächte laden
+    charakter.maechte = {}
+    maechte_data = data.get('maechte', {})
+    for name_key, macht_data in maechte_data.items():
+        try:
+            charakter.maechte[name_key] = Macht.from_dict_static(macht_data)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden der Macht '{name_key}': {e}")
+
+    charakter.selected_maechte = data.get('selected_maechte', [])
+    for name_key in charakter.selected_maechte:
+        if name_key in charakter.maechte:
+            charakter.maechte[name_key].ausgewaehlt = True
+
+    # Ausrüstung laden
+    charakter.ausruestung = {}
+    ausruestung_data = data.get('ausruestung', {})
+    for name, item_data in ausruestung_data.items():
+        try:
+            kategorie = item_data.get('kategorie', 'Allgemein')
+            if kategorie == 'Waffe':
+                item = Waffe.from_dict_static(item_data)
+            elif kategorie == 'Rüstung':
+                item = Ruestung.from_dict_static(item_data)
+            elif kategorie == 'Schild':
+                item = Schild.from_dict_static(item_data)
+            else:
+                item = Ausruestung.from_dict_static(item_data)
+
+            item.menge = item_data.get('menge', 0)
+            item.ausgewaehlt = item_data.get('ausgewaehlt', False)
+            item.aktiv = item_data.get('aktiv', True)
+            item.angelegt = item_data.get('angelegt', False)
+            charakter.ausruestung[name] = item
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
+
+    # Auswahllisten für altes Format laden
+    _load_old_format_selections(charakter, data)
+
+
+def _load_attributes_and_skills(charakter, data):
+    """
+    Lädt Attribute und Fertigkeiten (beide Formate verwenden diese Daten vollständig)
+    """
+    # Attribute laden
+    attribute_data = data.get('attribute', {})
+    charakter.attribute = {}
+    for name, attr_data in attribute_data.items():
+        try:
+            charakter.attribute[name] = Attribut.from_dict_static(attr_data)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden des Attributs '{name}': {e}")
+
+    # Fertigkeiten laden
+    fertigkeiten_data = data.get('fertigkeiten', {})
+    charakter.fertigkeiten = {}
+    for name, fert_data in fertigkeiten_data.items():
+        try:
+            charakter.fertigkeiten[name] = Fertigkeit.from_dict_static(fert_data, charakter.attribute)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden der Fertigkeit '{name}': {e}")
+
+
+def _apply_individual_element_data(charakter, selected_elements):
+    """
+    Wendet individuelle Charakterdaten auf die vom Setting geladenen Elemente an
+    """
+    # Völker-Auswahlen anwenden
+    voelker_data = selected_elements.get('voelker', {})
+    for name, data in voelker_data.items():
+        if name in charakter.voelker:
+            charakter.voelker[name].ausgewaehlt = data.get('ausgewaehlt', False)
+
+    # Handicap-Daten anwenden
+    handicaps_data = selected_elements.get('handicaps', {})
+    for name, data in handicaps_data.items():
+        if name in charakter.handicaps:
+            charakter.handicaps[name].ausgewaehlt = data.get('ausgewaehlt', False)
+            if 'stufe' in data:
+                charakter.handicaps[name].stufe = data['stufe']
+            if 'punkte' in data:
+                charakter.handicaps[name].punkte = data['punkte']
+
+    # Talent-Daten anwenden
+    talente_data = selected_elements.get('talente', {})
+    for name, data in talente_data.items():
+        if name in charakter.talente:
+            charakter.talente[name].ausgewaehlt = data.get('ausgewaehlt', False)
+            if 'rang' in data:
+                charakter.talente[name].rang = data['rang']
+            if 'neue_maechte' in data:
+                charakter.talente[name].neue_maechte = data['neue_maechte']
+            if 'machtpunkte' in data:
+                charakter.talente[name].machtpunkte = data['machtpunkte']
+
+    # Macht-Daten anwenden
+    maechte_data = selected_elements.get('maechte', {})
+    for name, data in maechte_data.items():
+        if name in charakter.maechte:
+            charakter.maechte[name].ausgewaehlt = data.get('ausgewaehlt', False)
+            if 'rang' in data:
+                charakter.maechte[name].rang = data['rang']
+            if 'machtpunkte' in data:
+                charakter.maechte[name].machtpunkte = data['machtpunkte']
+            if 'reichweite' in data:
+                charakter.maechte[name].reichweite = data['reichweite']
+            if 'dauer' in data:
+                charakter.maechte[name].dauer = data['dauer']
+
+    # Ausrüstungs-Daten anwenden
+    ausruestung_data = selected_elements.get('ausruestung', {})
+    for name, data in ausruestung_data.items():
+        if name in charakter.ausruestung:
+            item = charakter.ausruestung[name]
+            item.ausgewaehlt = data.get('ausgewaehlt', False)
+            if 'anzahl' in data:
+                item.menge = data['anzahl']
+            if 'zustand' in data:
+                item.zustand = data['zustand']
+
+
+def _load_equipment_selections(charakter, data):
+    """
+    Lädt die Ausrüstungsauswahllisten
+    """
+    # Listen zurücksetzen
+    charakter.selected_waffen = []
+    charakter.selected_schilde = []
+    charakter.selected_ruestungen = []
+    charakter.selected_allgemeine_ausruestung = []
+
+    # Ausgewählte Waffen
+    selected_waffen_names = data.get('selected_waffen', [])
+    for name in selected_waffen_names:
+        if name in charakter.ausruestung:
+            waffe = charakter.ausruestung[name]
+            if isinstance(waffe, Waffe):
+                waffe.angelegt = True
+                charakter.selected_waffen.append(waffe)
+
+    # Ausgewählte Schilde
+    selected_schilde_names = data.get('selected_schilde', [])
+    for name in selected_schilde_names:
+        if name in charakter.ausruestung:
+            schild = charakter.ausruestung[name]
+            if isinstance(schild, Schild):
+                schild.angelegt = True
+                charakter.selected_schilde.append(schild)
+
+    # Ausgewählte Rüstungen
+    selected_ruestungen_names = data.get('selected_ruestungen', [])
+    for name in selected_ruestungen_names:
+        if name in charakter.ausruestung:
+            ruestung = charakter.ausruestung[name]
+            if isinstance(ruestung, Ruestung):
+                ruestung.angelegt = True
+                charakter.selected_ruestungen.append(ruestung)
+                if ruestung not in charakter.selected_allgemeine_ausruestung:
+                    charakter.selected_allgemeine_ausruestung.append(ruestung)
+
+    # Ausgewählte allgemeine Ausrüstung
+    selected_allgemeine_ausruestung_names = data.get('selected_allgemeine_ausruestung', [])
+    for name in selected_allgemeine_ausruestung_names:
+        if name in charakter.ausruestung:
+            item = charakter.ausruestung[name]
+            if not isinstance(item, (Waffe, Ruestung, Schild)):
+                charakter.selected_allgemeine_ausruestung.append(item)
+
+
+def _load_old_format_selections(charakter, data):
+    """
+    Lädt die Auswahllisten für das alte Format
+    """
+    # Ausgewählte Talente wiederherstellen
+    charakter.selected_talente = data.get('selected_talente', [])
+    for name_key in charakter.selected_talente:
+        if name_key in charakter.talente:
+            charakter.talente[name_key].ausgewaehlt = True
+
+    # Ausgewählte Mächte wiederherstellen
+    charakter.selected_maechte = data.get('selected_maechte', [])
+    for name_key in charakter.selected_maechte:
+        if name_key in charakter.maechte:
+            charakter.maechte[name_key].ausgewaehlt = True
+
+    # Ausrüstungsauswahlen laden
+    _load_equipment_selections(charakter, data)
+
+
+def _finalize_character_loading(charakter, data):
+    """
+    Gemeinsame Nachbearbeitung für beide Lade-Formate
+    """
+    # Charakter-Status-Werte setzen
+    charakter.verbleibende_attributsteigerungen = data.get('verbleibende_attributsteigerungen', charakter.verbleibende_attributsteigerungen)
+    charakter.verbleibende_fertigkeitssteigerungen = data.get('verbleibende_fertigkeitssteigerungen', charakter.verbleibende_fertigkeitssteigerungen)
+    charakter.maximale_attributsteigerungen = data.get('maximale_attributsteigerungen', charakter.maximale_attributsteigerungen)
+    charakter.maximale_fertigkeitssteigerungen = data.get('maximale_fertigkeitssteigerungen', charakter.maximale_fertigkeitssteigerungen)
+    charakter.verbleibende_aufstiege = data.get('verbleibende_aufstiege', charakter.verbleibende_aufstiege)
+    charakter.aufstiege_gesamt = data.get('aufstiege_gesamt', charakter.aufstiege_gesamt)
+    charakter.verfuegbare_maechte = data.get('verfuegbare_maechte', charakter.verfuegbare_maechte)
+    charakter.anzahl_maechte = data.get('anzahl_maechte', charakter.anzahl_maechte)
+    charakter.machtpunkte = data.get('machtpunkte', charakter.machtpunkte)
+    charakter.vermoegen = data.get('vermoegen', charakter.vermoegen)
+    charakter.erschoepfung = data.get('erschoepfung', charakter.erschoepfung)
+    charakter.zusaetzliche_talente = data.get('zusaetzliche_talente', charakter.zusaetzliche_talente)
+    charakter.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', charakter.gesamt_handicap_punkte)
+    charakter.char_gen_completed = data.get('char_gen_completed', charakter.char_gen_completed)
+
+    # Savage Pathfinder Support
+    charakter.pathfinder_kostenlose_talente_gewaehlt = data.get('pathfinder_kostenlose_talente_gewaehlt', 0)
+
+    # Setting-Einstellungen
+    if 'settingregeln' in data:
+        try:
+            settingregeln_data = data.get('settingregeln', {})
+            if charakter.settingregeln:
+                charakter.settingregeln.from_dict(settingregeln_data)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
+
+    # UI aktualisieren
+    charakter.dispatch('on_charakter_change')

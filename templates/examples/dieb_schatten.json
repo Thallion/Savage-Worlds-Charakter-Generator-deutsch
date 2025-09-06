@@ -1,0 +1,83 @@
+{
+  "name": "Schatten",
+  "description": "Ein meisterhafter Dieb, der sich lautlos durch die Nacht bewegt.",
+  "setting": "SWAE", 
+  "race": "Halbelf",
+  "profile": {
+    "age": "28",
+    "gender": "Unbekannt",
+    "concept": "Meisterdieb",
+    "languages": "Gemeinsam, Diebessprache"
+  },
+  "attributes": {
+    "Stärke": 4,
+    "Geschicklichkeit": 10,
+    "Konstitution": 6,
+    "Verstand": 8,
+    "Willenskraft": 4
+  },
+  "skills": {
+    "Diebeskunst": 10,
+    "Heimlichkeit": 10,
+    "Athletik": 8,
+    "Kämpfen": 6,
+    "Wahrnehmung": 8,
+    "Schießen": 6
+  },
+  "handicaps": [
+    "Gierig",
+    "Geheimnisse"
+  ],
+  "edges": [
+    "Akrobat",
+    "Dieb"
+  ],
+  "free_race_edge": "Glück",
+  "equipment": [
+    {
+      "name": "Meisterdiebeswerkzeug",
+      "type": "equipment",
+      "weight": 1,
+      "cost": 200,
+      "description": "Professionelles Diebeswerkzeug (+2 Diebeskunst)",
+      "category": "Werkzeuge"
+    },
+    {
+      "name": "Kurzschwert",
+      "type": "weapon", 
+      "weight": 2,
+      "cost": 100,
+      "description": "Leichte, wendige Klinge",
+      "category": "Nahkampfwaffe",
+      "properties": {
+        "damage": "Stärke+W6",
+        "parry_bonus": 1,
+        "range": "0",
+        "min_strength": "W4"
+      }
+    },
+    {
+      "name": "Lederrüstung",
+      "type": "armor",
+      "weight": 3,
+      "cost": 50,
+      "description": "Flexible Lederrüstung",
+      "category": "Leichte Rüstung",
+      "properties": {
+        "armor_torso": 1,
+        "armor_arms": 1,
+        "armor_legs": 1,
+        "min_strength": "W4"
+      }
+    },
+    "Diebespaket",
+    "Seil (50')",
+    "Enterhaken"
+  ],
+  "generation_options": {
+    "strict_point_allocation": true,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "rogues"
+  }
+}

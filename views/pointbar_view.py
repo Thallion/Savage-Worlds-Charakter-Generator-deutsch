@@ -27,189 +27,35 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
 from kivymd.theming import ThemableBehavior
 
+# Path utilities import
+from utils.path_utils import get_assets_path
+
 class LabelValuePair(MDBoxLayout):
     """Theme-adaptive Label-Wert-Paar mit flexibler Skalierung."""
     key_text = StringProperty("")
     value_text = StringProperty("")
     key_width_ratio = NumericProperty(0.6)  # Anteil für den Schlüssel
 
-kv = '''
-<LabelValuePair>:
-    orientation: 'horizontal'
-    size_hint_y: None
-    height: dp(24)
-    spacing: dp(8)
-    adaptive_height: True
+import os
+import sys
 
-    MDLabel:
-        text: root.key_text
-        theme_text_color: "Primary"
-        halign: 'left'
-        valign: 'center'
-        size_hint_x: root.key_width_ratio
-        font_size: dp(11)
-        shorten: True
-        shorten_from: 'right'
-        text_size: self.size
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'pointbar_view.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'pointbar_view.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"PointbarView: KV-Datei nicht gefunden: {kv_path}")
 
-    MDLabel:
-        text: root.value_text
-        theme_text_color: "Secondary" 
-        halign: 'left'
-        valign: 'center'
-        size_hint_x: 1 - root.key_width_ratio
-        font_size: dp(11)
-        bold: True
-        shorten: True
-        shorten_from: 'right'
-        text_size: self.size
-
-<GenerationPointsBar>:
-    orientation: 'horizontal'
-    spacing: dp(12)
-    size_hint_y: None
-    height: dp(100)
-    padding: [dp(12), dp(8), dp(12), dp(8)]
-    md_bg_color: app.theme_cls.backgroundColor
-
-    # Logo-Container
-    MDCard:
-        style: "elevated"
-        size_hint_x: None
-        width: dp(130)
-        size_hint_y: None
-        height: dp(116)  # Etwas höher als die anderen Cards
-        md_bg_color: app.theme_cls.surfaceColor
-        elevation: 1
-        radius: [dp(6)]
-        padding: dp(4)
-        
-        Image:
-            source: 'assets/Savage-Worlds-Fanprodukt-Logo.png'
-            size_hint: 1, 1
-            allow_stretch: True
-            keep_ratio: True
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-    # Hauptinformations-Container
-    MDBoxLayout:
-        orientation: 'horizontal'
-        spacing: dp(10)
-        size_hint_x: 1
-
-        # Erste Spalte: Charakterdaten
-        MDCard:
-            style: "elevated"
-            padding: dp(8)
-            spacing: dp(2)
-            size_hint_x: 0.28
-            size_hint_y: None
-            height: self.minimum_height
-            md_bg_color: app.theme_cls.surfaceColor
-            elevation: 1
-            radius: [dp(6)]
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                spacing: dp(1)
-                adaptive_height: True
-            
-                LabelValuePair:
-                    key_text: "Name:"
-                    value_text: root.char_name_text
-                    key_width_ratio: 0.32
-                
-                LabelValuePair:
-                    key_text: "Setting:"
-                    value_text: root.active_setting_name_text
-                    key_width_ratio: 0.32
-                
-                LabelValuePair:
-                    key_text: "Rang:"
-                    value_text: root.rang_text
-                    key_width_ratio: 0.32
-                    
-                LabelValuePair:
-                    key_text: "Aufstiege:"
-                    value_text: root.aufstiege_text
-                    key_width_ratio: 0.32
-
-        # Zweite Spalte: Generierungspunkte
-        MDCard:
-            style: "elevated"
-            padding: dp(8)
-            spacing: dp(2)
-            size_hint_x: 0.36
-            size_hint_y: None
-            height: self.minimum_height
-            md_bg_color: app.theme_cls.surfaceColor
-            elevation: 1
-            radius: [dp(6)]
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                spacing: dp(1)
-                adaptive_height: True
-            
-                LabelValuePair:
-                    key_text: "Attribute-Punkte:"
-                    value_text: root.attribut_text
-                    key_width_ratio: 0.65
-                
-                LabelValuePair:
-                    key_text: "Fähigkeiten-Punkte:"
-                    value_text: root.faehigkeiten_text
-                    key_width_ratio: 0.65
-                
-                LabelValuePair:
-                    key_text: "Handicap-Punkte:"
-                    value_text: root.handicaps_text
-                    key_width_ratio: 0.65
-                    
-                LabelValuePair:
-                    key_text: "Anzahl Mächte:"
-                    value_text: root.maechte_text
-                    key_width_ratio: 0.65
-
-        # Dritte Spalte: Ressourcen
-        MDCard:
-            style: "elevated"
-            padding: dp(8)
-            spacing: dp(2)
-            size_hint_x: 0.36
-            size_hint_y: None
-            height: self.minimum_height
-            md_bg_color: app.theme_cls.surfaceColor
-            elevation: 1
-            radius: [dp(6)]
-
-            MDBoxLayout:
-                orientation: 'vertical'
-                spacing: dp(1)
-                adaptive_height: True
-            
-                LabelValuePair:
-                    key_text: "Machtpunkte:"
-                    value_text: root.machtpunkte_text
-                    key_width_ratio: 0.55
-
-                LabelValuePair:
-                    key_text: "Parade / Robustheit:"
-                    value_text: root.parade_robustheit_text
-                    key_width_ratio: 0.55
-                
-                LabelValuePair:
-                    key_text: "Gewicht / Traglast:"
-                    value_text: root.gewicht_text
-                    key_width_ratio: 0.55
-                
-                LabelValuePair:
-                    key_text: "Vermögen:"
-                    value_text: root.vermoegen_text
-                    key_width_ratio: 0.55
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class GenerationPointsBar(MDBoxLayout):
     charakter = ObjectProperty(None)  
@@ -231,6 +77,10 @@ class GenerationPointsBar(MDBoxLayout):
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
         self.on_charakter_changed(self.controller, self.controller.charakter)
+        
+        # Timer für regelmäßige Gewichts-Updates
+        self._weight_update_event = Clock.schedule_interval(self._update_weight_periodically, 2.0)
+        
         Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
 
     def on_charakter_changed(self, instance, value):
@@ -306,9 +156,8 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.bind(verbleibende_handicap_punkte=self.update_handicaps_text)
             self.charakter.bind(gesamt_handicap_punkte=self.update_handicaps_text)
             
-            # Gewicht und Traglast
-            self.charakter.bind(gesamtgewicht=self.update_gewicht_text)
-            self.charakter.bind(maximale_traglast=self.update_gewicht_text)
+            # Gewicht und Traglast - keine direkten Property-Bindings mehr
+            # Stattdessen auf Events hören, die Gewichtsänderungen verursachen können
             
             # Charakterdaten
             self.charakter.bind(char_name=self.update_charakter_name)
@@ -397,7 +246,9 @@ class GenerationPointsBar(MDBoxLayout):
     def update_gewicht_text(self, instance, value):
         """Aktualisiert die Gewichts-Anzeige"""
         if self.charakter:
-            self.gewicht_text = f"{self.charakter.gesamtgewicht} / {self.charakter.maximale_traglast} kg"
+            gewicht = self.charakter.berechne_gesamtgewicht()
+            traglast = self.charakter.maximale_traglast
+            self.gewicht_text = f"{gewicht} / {traglast} kg"
 
     def update_rang_text(self, instance, value):
         """Aktualisiert die Rang-Anzeige"""
@@ -424,9 +275,23 @@ class GenerationPointsBar(MDBoxLayout):
             
             Logger.debug(f"Parade/Robustheit aktualisiert: {self.parade_robustheit_text}")
 
+    def _update_weight_periodically(self, dt):
+        """Timer-Callback für regelmäßige Gewichts-Updates"""
+        if self.charakter:
+            self.update_gewicht_text(None, None)
+        return True  # Timer weiterlaufen lassen
+
+    def get_logo_path(self):
+        """Gibt den korrekten Pfad zum Logo zurück (PyInstaller-kompatibel)"""
+        return get_assets_path("Savage-Worlds-Fanprodukt-Logo.png")
+
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""
         try:
+            # Timer stoppen
+            if hasattr(self, '_weight_update_event'):
+                Clock.unschedule(self._weight_update_event)
+                
             if self.charakter:
                 self.unbind_charakter_properties()
             if self.controller:

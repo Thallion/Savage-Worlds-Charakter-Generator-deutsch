@@ -116,3 +116,13 @@ class Talent(EventDispatcher):
         talent.ausgewaehlt = data.get('ausgewaehlt', False)
         talent.aktiv = data.get('aktiv', True)
         return talent
+
+    @classmethod
+    def from_dict(cls, data):
+        """Alias für from_dict_static zur Kompatibilität."""
+        return cls.from_dict_static(data)
+
+    @classmethod
+    def from_setting_dict(cls, data):
+        """Factory method für Setting-Daten (entspricht from_dict_static)."""
+        return cls.from_dict_static(data)

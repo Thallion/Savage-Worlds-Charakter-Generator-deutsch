@@ -1,0 +1,151 @@
+<ProfilWidget>:
+    orientation: 'vertical'
+    padding: [10, 10, 10, 10]
+    spacing: 10
+    md_bg_color: self.theme_cls.backgroundColor
+
+    ScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
+        scroll_wheel_distance: dp(114)
+        MDGridLayout:
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [10, 10, 10, 10]
+            spacing: 10
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '60dp'
+                spacing: 10
+                adaptive_height: True
+
+                MDLabel:
+                    text: "Name:"
+                    size_hint_x: None
+                    width: 150
+                    halign: 'left'
+                    theme_text_color: "Primary"
+
+                MDTextField:
+                    id: name_input
+                    text: root.char_name
+                    on_text: root.char_name = self.text
+                    multiline: False
+                    size_hint_x: None
+                    width: 300
+                    mode: "outlined"
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '60dp'
+                spacing: 10
+                adaptive_height: True
+
+                MDLabel:
+                    text: "Alter:"
+                    size_hint_x: None
+                    width: 150
+                    halign: 'left'
+                    theme_text_color: "Primary"
+
+                MDTextField:
+                    id: alter_input
+                    text: root.alter
+                    on_text: root.alter = self.text
+                    multiline: False
+                    size_hint_x: None
+                    width: 300
+                    mode: "outlined"
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '60dp'
+                spacing: 10
+                adaptive_height: True
+
+                MDLabel:
+                    text: "Geschlecht:"
+                    size_hint_x: None
+                    width: 150
+                    halign: 'left'
+                    theme_text_color: "Primary"
+
+                MDTextField:
+                    id: geschlecht_input
+                    text: root.geschlecht
+                    on_text: root.geschlecht = self.text
+                    multiline: False
+                    size_hint_x: None
+                    width: 300
+                    mode: "outlined"
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '60dp'
+                spacing: 10
+                adaptive_height: True
+
+                MDLabel:
+                    text: "Konzept:"
+                    size_hint_x: None
+                    width: 150
+                    halign: 'left'
+                    theme_text_color: "Primary"
+
+                MDTextField:
+                    id: konzept_input
+                    text: root.konzept
+                    on_text: root.konzept = self.text
+                    multiline: False
+                    size_hint_x: None
+                    width: 300
+                    mode: "outlined"
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '60dp'
+                spacing: 10
+                adaptive_height: True
+
+                MDLabel:
+                    text: "Sprachen:"
+                    size_hint_x: None
+                    width: 150
+                    halign: 'left'
+                    theme_text_color: "Primary"
+
+                MDTextField:
+                    id: sprachen_input
+                    text: root.sprachen
+                    on_text: root.sprachen = self.text
+                    multiline: False
+                    size_hint_x: None
+                    width: 300
+                    mode: "outlined"
+
+            # MDLabel:
+            #     text: "Settingregeln"
+            #     size_hint_y: None
+            #     height: 30
+            #     halign: 'left'
+            #     theme_text_color: "Primary"
+
+            # MDGridLayout:
+            #     id: checkbox_container
+            #     cols: 1
+            #     size_hint_y: None
+            #     size_hint_x: None
+            #     width: self.minimum_width
+            #     height: self.minimum_height
+            #     spacing: 5
+            #     padding: (0, 10, 0, 10)

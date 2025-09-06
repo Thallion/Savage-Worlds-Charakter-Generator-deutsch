@@ -1,0 +1,167 @@
+<EigenschaftenWidget>:
+    attribute_layout: attribute_layout
+    fertigkeiten_layout: fertigkeiten_layout
+
+    MDScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
+        scroll_wheel_distance: dp(114)
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: "20dp"
+            spacing: "10dp"
+
+            # Hinzugefügte Checkbox für die manuelle Steuerung des char_gen_completed-Status
+            # MDBoxLayout für die feste Positionierung
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: dp(48)
+                spacing: dp(10)
+                size_hint_x: None
+                width: dp(300)  # Feste Breite statt dynamischer Berechnung
+
+                MDCheckbox:
+                    id: checkbox
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    active: root.char_gen_completed
+                    on_active: root.toggle_char_gen_completed(self.active)
+                    pos_hint: {"center_y": .5}
+                
+                MDLabel:
+                    text: "Charaktergenerierung abgeschlossen"
+                    size_hint_x: 1  # Füllt den verfügbaren Platz
+                    halign: 'left'
+                    valign: 'middle'
+                    pos_hint: {"center_y": .5}
+
+            MDLabel:
+                text: 'Attribute'
+                size_hint: (1, None)
+                height: "40dp"
+                halign: 'left'
+                valign: 'middle'
+
+            MDBoxLayout:
+                id: attribute_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+            MDLabel:
+                text: 'Fertigkeiten'
+                size_hint: (1, None)
+                height: "40dp"
+                halign: 'left'
+                valign: 'middle'
+
+            MDBoxLayout:
+                size_hint_y: None
+                height: "40dp"
+                spacing: "10dp"
+
+                MDLabel:
+                    id: sort_spinner
+                    text: 'Sortieren nach'
+                    size_hint_x: 0.4
+                    on_touch_down: 
+                        if self.collide_point(*args[1].pos): root.show_sort_menu()
+
+                MDLabel:
+                    id: aktiv_spinner
+                    text: 'Alle Fertigkeiten'
+                    size_hint_x: 0.4
+                    on_touch_down:
+                        if self.collide_point(*args[1].pos): root.show_filter_menu()
+
+            MDBoxLayout:
+                id: fertigkeiten_layout
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+<EigenschaftenItemRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: "40dp"
+    spacing: dp(5)
+    adaptive_height: True
+
+    MDLabel:
+        text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
+        size_hint_x: None
+        width: dp(350)
+        halign: 'left'
+        valign: 'middle'
+
+    # Würfel-Icon-Gruppe mit originalem Farbschema
+    MDBoxLayout:
+        size_hint_x: None
+        width: dp(160)  # Breiter für zwei Ziffern
+        spacing: dp(2)
+        padding: [dp(10), 0]
+        
+        # Würfel-Icon mit Theme-Farbe
+        MDIconButton:
+            icon: root.dice_icon
+            style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
+            
+        # Modifier-Vorzeichen wenn vorhanden
+        MDIconButton:
+            icon: root.modifier_sign
+            style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
+            opacity: 1 if root.has_modifier else 0
+            disabled: not root.has_modifier
+            
+        # Erste Ziffer des Modifiers
+        MDIconButton:
+            icon: root.modifier_value_icon
+            style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
+            opacity: 1 if root.has_modifier else 0
+            disabled: not root.has_modifier
+
+        # Zweite Ziffer des Modifiers (für zweistellige Zahlen)
+        MDIconButton:
+            icon: root.second_digit_icon
+            style: "standard"
+            theme_icon_color: "Primary"
+            size_hint: None, None
+            size: dp(28), dp(28)
+            opacity: 1 if root.has_second_digit else 0
+            disabled: not root.has_second_digit
+
+    # Steigern/Senken Buttons
+    MDBoxLayout:
+        size_hint_x: None
+        width: dp(50)
+        padding: [dp(30), 0]
+
+        MDIconButton:
+            icon: "arrow-up-thick"
+            style: "standard"
+            on_release: root.steigere_eigenschaft()
+            size_hint: None, None
+            size: dp(28), dp(28)
+
+        MDIconButton:
+            icon: "arrow-down-thick"
+            style: "standard"
+            on_release: root.senke_eigenschaft()
+            size_hint: None, None
+            size: dp(28), dp(28)

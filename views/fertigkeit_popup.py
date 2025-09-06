@@ -21,68 +21,26 @@ from kivymd.uix.label import MDLabel
 
 from models.fertigkeit import Fertigkeit
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<FertigkeitDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "280dp"
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name der Fertigkeit'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'fertigkeit_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'fertigkeit_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"fertigkeit_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDDropDownItem:
-        id: attribut_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_attribut_menu(self)
-
-        MDDropDownItemText:
-            id: selected_attribut_text
-            text: "Attribut wählen"
-
-    MDBoxLayout:
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: "48dp"
-        spacing: "8dp"
-        padding: ["4dp", "0dp", "0dp", "0dp"]
-
-        MDCheckbox:
-            id: grundfertigkeit_checkbox
-            active: False
-            size_hint: None, None
-            size: "48dp", "48dp"
-
-        MDLabel:
-            text: 'Grundfertigkeit'
-            adaptive_size: True
-
-<DeleteFertigkeitDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: fertigkeit_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_fertigkeit_text
-            text: "Fertigkeit auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class FertigkeitDialogContent(MDBoxLayout):
     def __init__(self, **kwargs):

@@ -1,3 +1,4 @@
+# functions/setting_funktionen.py
 """
 Modul für die Verwaltung von Settings und benutzerdefinierten Elementen im Charakter.
 Dieses Modul enthält Funktionen zum Laden, Speichern und Verwalten von Settings
@@ -8,7 +9,16 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import Dict, Any, Optional, List
 from kivy.logger import Logger
+
+# Import der Konfiguration
+from config.ausruestung_config import (
+    AusruestungKategorien,
+    LogMessages
+)
+
+# Import der Models
 from models.wuerfel import Wuerfel
 from models.attribut import Attribut
 from models.fertigkeit import Fertigkeit
@@ -21,21 +31,12 @@ from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
 
-def get_application_root():
-    """
-    Ermittelt das Hauptverzeichnis der Anwendung.
-    
-    Returns:
-        Path: Das Hauptverzeichnis der Anwendung
-    """
-    if getattr(sys, 'frozen', False):
-        # Wenn die Anwendung gepackt ist (z.B. mit cx_Freeze), verwende das Verzeichnis der ausführbaren Datei
-        app_root = Path(sys.executable).parent
-    else:
-        # Bei normalem Python-Skript verwende das Verzeichnis der Skriptdatei
-        app_root = Path(__file__).parent.parent.resolve()
+# Import der Hilfsfunktionen
+import functions.ausruestung_funktionen as ausruestung_funktionen
 
-    return app_root
+
+# Import centralized path utilities
+from utils.path_utils import get_application_root
 
 
 class SetEncoder(json.JSONEncoder):
@@ -49,7 +50,7 @@ class SetEncoder(json.JSONEncoder):
 class CustomElementManager:
     """Verwaltet benutzerdefinierte Elemente und Settings."""
     
-    def __init__(self, charakter, settings_dir=None, setting_name='SWAE'):
+    def __init__(self, charakter, settings_dir: Optional[Path] = None, setting_name: str = 'SWAE'):
         """
         Initialisiert den CustomElementManager.
         
@@ -76,209 +77,198 @@ class CustomElementManager:
         self.active_setting_name = setting_name
         self.set_active_setting(self.active_setting_name)
 
-    def load_all_settings(self):
+    def load_all_settings(self) -> None:
         """Lädt alle Einstellungen aus dem settings-Verzeichnis."""
-        if not self.settings_dir.exists():
-            try:
-                self.settings_dir.mkdir(parents=True, exist_ok=True)
-                Logger.info(f"Settingverzeichnis erstellt: {self.settings_dir}")
-            except OSError as e:
-                Logger.error(f"Fehler beim Erstellen des Settingsverzeichnisses '{self.settings_dir}': {e}")
+        try:
+            if not self.settings_dir.exists():
+                Logger.warning(f"Settings-Verzeichnis {self.settings_dir} existiert nicht.")
                 return
 
-        for filename in self.settings_dir.iterdir():
-            if filename.suffix == '.json':
+            for setting_file in self.settings_dir.glob('*.json'):
                 try:
-                    with filename.open('r', encoding='utf-8') as f:
+                    with open(setting_file, 'r', encoding='utf-8') as f:
                         setting_data = json.load(f)
-
-                    # Konvertiere 'fertigkeiten_daten' von Listen zurück zu Sets
-                    if 'fertigkeiten_daten' in setting_data:
-                        fertigkeiten_daten_loaded = setting_data['fertigkeiten_daten']
-                        if isinstance(fertigkeiten_daten_loaded, dict):
-                            for fertigkeit, attribut_list in fertigkeiten_daten_loaded.items():
-                                if isinstance(attribut_list, list):
-                                    setting_data['fertigkeiten_daten'][fertigkeit] = set(attribut_list)
-
-                    setting_name = setting_data.get('name', filename.stem)
-                    self.settings[setting_name] = setting_data
-                    Logger.info(f"Einstellung '{setting_name}' aus {filename.name} geladen.")
+                        setting_name = setting_file.stem
+                        self.settings[setting_name] = setting_data
+                        Logger.info(f"Setting '{setting_name}' geladen.")
                 except Exception as e:
-                    Logger.error(f"Fehler beim Laden des Settings '{filename.name}': {e}")
+                    Logger.error(f"Fehler beim Laden von Setting {setting_file}: {e}")
 
-    def get_all_settings(self):
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden der Settings: {e}")
+
+    def save_setting(self, name: str, setting_data: Dict[str, Any]) -> bool:
         """
-        Gibt eine Liste aller verfügbaren Settings zurück.
+        Speichert ein Setting in eine JSON-Datei.
         
+        Args:
+            name: Name des Settings
+            setting_data: Die Setting-Daten als Dictionary
+            
         Returns:
-            List: Liste aller Settings-Namen
+            bool: True bei Erfolg, sonst False
         """
-        return list(self.settings.keys())
+        try:
+            if not self.settings_dir.exists():
+                self.settings_dir.mkdir(parents=True, exist_ok=True)
 
-    def get_active_setting(self):
-        """
-        Gibt das aktive Setting zurück.
-        
-        Returns:
-            Dict: Das aktive Setting als Dictionary
-        """
-        return self.active_setting
+            file_path = self.settings_dir / f"{name}.json"
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(setting_data, f, ensure_ascii=False, indent=4, cls=SetEncoder)
+            
+            # Setting auch zum internen Dictionary hinzufügen
+            self.settings[name] = setting_data
+            
+            Logger.info(f"Setting '{name}' gespeichert unter {file_path}")
+            return True
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern von Setting '{name}': {e}")
+            return False
 
-    def set_active_setting(self, setting_name):
+    def set_active_setting(self, name: str) -> bool:
         """
         Setzt das aktive Setting.
         
         Args:
-            setting_name: Der Name des zu aktivierenden Settings
+            name: Name des zu aktivierenden Settings
             
         Returns:
-            bool: True bei Erfolg, False bei Misserfolg
+            bool: True bei Erfolg, sonst False
         """
-        if setting_name in self.settings:
-            self.active_setting = self.settings[setting_name]
-            self.active_setting_name = setting_name
-            Logger.info(f"Aktives Setting auf '{setting_name}' gesetzt.")
+        if name in self.settings:
+            self.active_setting = self.settings[name]
+            self.active_setting_name = name
+            Logger.info(f"Aktives Setting geändert zu '{name}'.")
             return True
         else:
-            Logger.warning(f"Setting '{setting_name}' existiert nicht.")
+            Logger.warning(f"Setting '{name}' existiert nicht.")
             return False
 
-    def add_setting(self, name, setting_data, overwrite=False):
+    def get_active_setting(self) -> Optional[Dict[str, Any]]:
         """
-        Fügt ein neues Setting hinzu oder überschreibt ein bestehendes.
+        Gibt das aktive Setting zurück.
+        
+        Returns:
+            Dict oder None: Das aktive Setting oder None
+        """
+        return self.active_setting
+
+    def get_all_settings(self) -> List[str]:
+        """
+        Gibt eine Liste aller verfügbaren Settings zurück.
+        
+        Returns:
+            List[str]: Liste aller Settings-Namen
+        """
+        return list(self.settings.keys())
+
+    def add_setting(self, name: str, setting_data: Dict[str, Any], overwrite: bool = False) -> bool:
+        """
+        Fügt ein neues Setting hinzu.
         
         Args:
-            name: Der Name des Settings
-            setting_data: Die Setting-Daten als Dictionary
-            overwrite: Ob ein bestehendes Setting überschrieben werden soll (default: False)
+            name: Name des Settings
+            setting_data: Die Setting-Daten
+            overwrite: Überschreibt existierendes Setting wenn True
             
         Returns:
-            bool: True bei Erfolg, False bei Misserfolg
+            bool: True bei Erfolg, sonst False
         """
-        settings_path = self.settings_dir / f"{name}.json"
-        if settings_path.exists() and not overwrite:
-            Logger.warning(f"Setting '{name}' existiert bereits und wird nicht überschrieben.")
+        if name in self.settings and not overwrite:
+            Logger.warning(f"Setting '{name}' existiert bereits. Verwende overwrite=True zum Überschreiben.")
             return False
+        
+        self.settings[name] = setting_data
+        return self.save_setting(name, setting_data)
+
+    def delete_setting(self, name: str) -> bool:
+        """
+        Löscht ein Setting.
+        
+        Args:
+            name: Name des zu löschenden Settings
+            
+        Returns:
+            bool: True bei Erfolg, sonst False
+        """
+        if name not in self.settings:
+            Logger.warning(f"Setting '{name}' existiert nicht.")
+            return False
+        
         try:
-            with settings_path.open('w', encoding='utf-8') as f:
-                json.dump(setting_data, f, ensure_ascii=False, indent=4)
-            self.settings[name] = setting_data
-            Logger.info(f"Setting '{name}' erfolgreich gespeichert.")
+            # Datei löschen
+            file_path = self.settings_dir / f"{name}.json"
+            if file_path.exists():
+                file_path.unlink()
+                Logger.info(f"Setting-Datei '{file_path}' gelöscht.")
+            
+            # Aus Dictionary entfernen
+            del self.settings[name]
+            Logger.info(f"Setting '{name}' erfolgreich gelöscht.")
             return True
         except Exception as e:
-            Logger.error(f"Fehler beim Speichern des Settings '{name}': {e}")
+            Logger.error(f"Fehler beim Löschen von Setting '{name}': {e}")
             return False
 
-    def save_setting(self, setting_name):
+    def remove_element_from_active_setting(self, element_type: str, element_name: str) -> bool:
         """
-        Speichert das aktuelle Setting unter dem angegebenen Namen.
+        Entfernt ein Element aus dem aktiven Setting.
         
         Args:
-            setting_name: Der Name, unter dem das Setting gespeichert werden soll
+            element_type: Typ des Elements
+            element_name: Name des Elements
             
         Returns:
-            bool: True bei Erfolg, False bei Misserfolg
+            bool: True bei Erfolg, sonst False
         """
-        if self.active_setting is None:
-            Logger.error("Keine aktives Setting zum Speichern.")
+        if not self.active_setting:
+            Logger.error("Kein aktives Setting vorhanden.")
             return False
-
-        setting_data = self.active_setting.copy()
-
-        # Konvertiere 'fertigkeiten_daten' von Sets zu Listen
-        if 'fertigkeiten_daten' in setting_data:
-            fertigkeiten_daten = setting_data['fertigkeiten_daten']
-            if isinstance(fertigkeiten_daten, dict):
-                setting_data['fertigkeiten_daten'] = {k: list(v) for k, v in fertigkeiten_daten.items()}
-
-        # Füge 'fertigkeiten' hinzu, indem du auf self.charakter.fertigkeiten zugreifst
-        setting_data['fertigkeiten'] = {
-            name: fertigkeit.to_dict_with_reset_wuerfel()
-            for name, fertigkeit in self.charakter.fertigkeiten.items()
-        }
-
-        # Speichere die Daten
-        filename = f"{setting_name}.json"
-        filepath = self.settings_dir / filename
-        try:
-            with filepath.open('w', encoding='utf-8') as f:
-                json.dump(setting_data, f, cls=SetEncoder, ensure_ascii=False, indent=4)
-            self.settings[setting_name] = setting_data
-            Logger.info(f"Einstellung '{setting_name}' in {filename} gespeichert.")
-            return True
-        except Exception as e:
-            Logger.error(f"Fehler beim Speichern der Einstellung '{setting_name}': {e}")
-            return False
-
-    def delete_setting(self, setting_name):
-        """
-        Löscht eine Einstellung.
-        
-        Args:
-            setting_name: Der Name des zu löschenden Settings
             
-        Returns:
-            bool: True bei Erfolg, False bei Misserfolg
-        """
-        if setting_name not in self.settings:
-            Logger.warning(f"Einstellung '{setting_name}' existiert nicht.")
-            return False
-        filename = f"{setting_name}.json"
-        filepath = self.settings_dir / filename
-        try:
-            filepath.unlink()
-            del self.settings[setting_name]
-            Logger.info(f"Einstellung '{setting_name}' aus {filename} gelöscht.")
-            return True
-        except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Einstellung '{setting_name}': {e}")
-            return False
-
-    def update_element(self, element_type, element_name, element_data):
-        """
-        Aktualisiert oder fügt ein Element zur aktiven Einstellung hinzu.
-        
-        Args:
-            element_type: Der Typ des Elements (z.B. 'talente', 'handicaps', etc.)
-            element_name: Der Name des Elements
-            element_data: Die Daten des Elements
-            
-        Returns:
-            bool: True bei Erfolg, False bei Misserfolg
-        """
-        if self.active_setting is None:
-            Logger.error("Keine aktive Einstellung zum Aktualisieren.")
-            return False
-        if element_type not in self.active_setting:
-            self.active_setting[element_type] = {}
-        self.active_setting[element_type][element_name] = element_data
-        Logger.info(f"Element '{element_name}' zum Typ '{element_type}' hinzugefügt/aktualisiert.")
-        return True
-
-    def remove_element(self, element_type, element_name):
-        """
-        Entfernt ein Element aus der aktiven Einstellung.
-        
-        Args:
-            element_type: Der Typ des Elements (z.B. 'talente', 'handicaps', etc.)
-            element_name: Der Name des Elements
-            
-        Returns:
-            bool: True bei Erfolg, False bei Misserfolg
-        """
-        if self.active_setting is None:
-            Logger.error("Keine aktive Einstellung zum Entfernen von Elementen.")
-            return False
         if element_type in self.active_setting and element_name in self.active_setting[element_type]:
             del self.active_setting[element_type][element_name]
             Logger.info(f"Element '{element_name}' vom Typ '{element_type}' entfernt.")
             return True
         else:
-            Logger.warning(f"Element '{element_name}' vom Typ '{element_type}' existiert nicht.")
+            Logger.warning(LogMessages.ELEMENT_EXISTIERT_NICHT.format(
+                name=element_name,
+                typ=element_type
+            ))
+            return False
+
+    def update_element(self, element_type: str, element_name: str, element_data: dict) -> bool:
+        """
+        Fügt ein Element zum aktiven Setting hinzu oder aktualisiert es.
+        
+        Args:
+            element_type: Typ des Elements (z.B. 'talente', 'attribute', etc.)
+            element_name: Name des Elements
+            element_data: Element-Daten als Dictionary
+            
+        Returns:
+            bool: True bei Erfolg, sonst False
+        """
+        try:
+            if not self.active_setting:
+                Logger.error("Kein aktives Setting vorhanden.")
+                return False
+            
+            # Element-Typ-Dictionary erstellen falls nicht vorhanden
+            if element_type not in self.active_setting:
+                self.active_setting[element_type] = {}
+            
+            # Element hinzufügen/aktualisieren
+            self.active_setting[element_type][element_name] = element_data
+            Logger.info(f"Element '{element_name}' vom Typ '{element_type}' aktualisiert.")
+            
+            return True
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren von Element '{element_name}' (Typ: {element_type}): {e}")
             return False
 
 
-def create_default_setting(charakter):
+def create_default_setting(charakter) -> Dict[str, Any]:
     """
     Erstellt eine Standard-Einstellung.
     
@@ -304,15 +294,17 @@ def create_default_setting(charakter):
     return default_setting
 
 
-def load_elements_from_active_setting(charakter, skip_equipment=False, merge_elements=True, replace_mode=False):
+def load_elements_from_active_setting(charakter, skip_equipment: bool = False, 
+                                     merge_elements: bool = True, 
+                                     replace_mode: bool = False) -> bool:
     """
     Lädt alle Elemente aus dem aktiven Setting.
     
     Args:
         charakter: Das Charakter-Objekt
-        skip_equipment (bool): Wenn True, wird die Ausrüstung nicht geladen (hilfreich beim Laden eines Charakters)
-        merge_elements (bool): Wenn True, werden Elemente gemerged statt ersetzt
-        replace_mode (bool): Wenn True, werden alle Elemente komplett ersetzt (überschreibt merge_elements)
+        skip_equipment: Wenn True, wird die Ausrüstung nicht geladen
+        merge_elements: Wenn True, werden Elemente gemerged statt ersetzt
+        replace_mode: Wenn True, werden alle Elemente komplett ersetzt
         
     Returns:
         bool: True bei Erfolg, sonst False
@@ -326,124 +318,200 @@ def load_elements_from_active_setting(charakter, skip_equipment=False, merge_ele
             Logger.error(f"Aktives Setting '{charakter.active_setting_name}' konnte nicht geladen werden.")
             return False
         
-        # Wenn replace_mode, dann merge_elements auf False setzen
+        # Replace-Modus überschreibt merge_elements
         if replace_mode:
             merge_elements = False
-            Logger.info("Replace-Modus aktiviert: Alle Elemente werden komplett ersetzt")
-        
-        # Farben laden
-        charakter.settingregeln.farbschema = active_setting.get('farbschema', 'Blue')
         
         # Völker laden
-        voelker_data = active_setting.get('voelker', {})
-        if voelker_data:
-            if not merge_elements:
-                # Völker zurücksetzen bei Replace-Modus
-                charakter.voelker = {}
-            for name, volk_dict in voelker_data.items():
-                try:
-                    charakter.voelker[name] = Volk.from_dict(volk_dict)
-                except Exception as e:
-                    Logger.warning(f"Fehler beim Laden des Volkes '{name}': {e}")
-            Logger.info(f"{len(charakter.voelker)} Völker geladen.")
+        _lade_voelker(charakter, active_setting, merge_elements)
         
-        # Fertigkeiten_daten direkt aus dem Setting laden
-        fertigkeiten_daten = active_setting.get('fertigkeiten_daten', {})
-        if fertigkeiten_daten:
-            if not merge_elements:
-                # Fertigkeiten_daten zurücksetzen bei Replace-Modus
-                charakter.fertigkeiten_daten = {}
-            for name, attribut_set in fertigkeiten_daten.items():
-                if isinstance(attribut_set, list):
-                    # Konvertiere Listen zurück zu Sets
-                    charakter.fertigkeiten_daten[name] = set(attribut_set)
-                else:
-                    charakter.fertigkeiten_daten[name] = attribut_set
-            # Fertigkeiten neu initialisieren
-            charakter.initialisiere_fertigkeiten()
-            Logger.info(f"{len(charakter.fertigkeiten_daten)} Fertigkeiten-Daten geladen, {len(charakter.fertigkeiten)} Fertigkeiten initialisiert.")
+        # Attribute laden
+        _lade_attribute(charakter, active_setting, merge_elements)
         
-        # Handicaps laden
-        handicaps_data = active_setting.get('handicaps', {})
-        if handicaps_data:
-            if not merge_elements:
-                # Handicaps zurücksetzen bei Replace-Modus
-                charakter.handicaps = {}
-            for name, handicap_dict in handicaps_data.items():
-                try:
-                    # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
-                    if not merge_elements or name not in charakter.handicaps:
-                        charakter.handicaps[name] = Handicap.from_dict_static(handicap_dict)
-                except Exception as e:
-                    Logger.warning(f"Fehler beim Laden des Handicaps '{name}': {e}")
-            Logger.info(f"{len(charakter.handicaps)} Handicaps geladen.")
+        # Fertigkeiten laden
+        _lade_fertigkeiten(charakter, active_setting, merge_elements)
         
         # Talente laden
-        talente_data = active_setting.get('talente', {})
-        if talente_data:
-            if not merge_elements:
-                # Talente zurücksetzen bei Replace-Modus
-                charakter.talente = {}
-            for name, talent_dict in talente_data.items():
-                try:
-                    # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
-                    if not merge_elements or name not in charakter.talente:
-                        charakter.talente[name] = Talent.from_dict_static(talent_dict)
-                except Exception as e:
-                    Logger.warning(f"Fehler beim Laden des Talents '{name}': {e}")
-            Logger.info(f"{len(charakter.talente)} Talente geladen.")
+        _lade_talente(charakter, active_setting, merge_elements)
+        
+        # Handicaps laden
+        _lade_handicaps(charakter, active_setting, merge_elements)
         
         # Mächte laden
-        maechte_data = active_setting.get('maechte', {})
-        if maechte_data:
-            if not merge_elements:
-                # Mächte zurücksetzen bei Replace-Modus
-                charakter.maechte = {}
-            for name, macht_dict in maechte_data.items():
-                try:
-                    # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
-                    if not merge_elements or name not in charakter.maechte:
-                        charakter.maechte[name] = Macht.from_dict_static(macht_dict)
-                except Exception as e:
-                    Logger.warning(f"Fehler beim Laden der Macht '{name}': {e}")
-            Logger.info(f"{len(charakter.maechte)} Mächte geladen.")
+        _lade_maechte(charakter, active_setting, merge_elements)
         
         # Ausrüstung laden, wenn nicht übersprungen
         if not skip_equipment:
-            ausruestung_data = active_setting.get('ausruestung', {})
-            if ausruestung_data:
-                if not merge_elements:
-                    # Ausrüstung zurücksetzen bei Replace-Modus
-                    charakter.ausruestung = {}
-                for name, item_dict in ausruestung_data.items():
-                    try:
-                        # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
-                        if not merge_elements or name not in charakter.ausruestung:
-                            kategorie = item_dict.get('kategorie', 'Allgemein')
-                            if kategorie == 'Waffe':
-                                item = Waffe.from_setting_dict(item_dict)
-                            elif kategorie == 'Rüstung':
-                                item = Ruestung.from_setting_dict(item_dict)
-                            elif kategorie == 'Schild':
-                                item = Schild.from_setting_dict(item_dict)
-                            else:
-                                item = Ausruestung.from_setting_dict(item_dict)
-                            
-                            charakter.ausruestung[name] = item
-                    except Exception as e:
-                        Logger.warning(f"Fehler beim Laden des Ausrüstungsgegenstands '{name}': {e}")
-                Logger.info(f"{len(charakter.ausruestung)} Ausrüstungsgegenstände geladen.")
+            _lade_ausruestung(charakter, active_setting, merge_elements)
         
         # Settingregeln laden
-        settingregeln_data = active_setting.get('settingregeln', {})
-        if settingregeln_data:
-            try:
-                charakter.settingregeln.from_dict(settingregeln_data)
-                Logger.info("Settingregeln geladen.")
-            except Exception as e:
-                Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
+        _lade_settingregeln(charakter, active_setting)
         
         return True
+        
     except Exception as e:
         Logger.error(f"Fehler beim Laden der Elemente aus dem aktiven Setting: {e}", exc_info=True)
         return False
+
+
+# --- Private Hilfsfunktionen für das Laden von Elementen ---
+
+def _lade_voelker(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Völker aus dem Setting."""
+    voelker_data = active_setting.get('voelker', {})
+    if voelker_data:
+        if not merge_elements:
+            charakter.voelker = {}
+        for name, volk_dict in voelker_data.items():
+            try:
+                if not merge_elements or name not in charakter.voelker:
+                    volk = Volk.from_setting_dict(volk_dict)
+                    charakter.voelker[name] = volk
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden des Volks '{name}': {e}")
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.voelker),
+            typ="Völker"
+        ))
+
+
+def _lade_attribute(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Attribute aus dem Setting."""
+    attribute_data = active_setting.get('attribute', {})
+    if attribute_data:
+        if not merge_elements:
+            charakter.attribute = {}
+        for name, attr_dict in attribute_data.items():
+            try:
+                if not merge_elements or name not in charakter.attribute:
+                    attribut = Attribut.from_dict(attr_dict)
+                    charakter.attribute[name] = attribut
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden des Attributs '{name}': {e}")
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.attribute),
+            typ="Attribute"
+        ))
+
+
+def _lade_fertigkeiten(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Fertigkeiten aus dem Setting."""
+    fertigkeiten_daten = active_setting.get('fertigkeiten_daten', {})
+    if fertigkeiten_daten:
+        if not merge_elements:
+            charakter.fertigkeiten_daten = {}
+        for name, attribut_list in fertigkeiten_daten.items():
+            try:
+                if not merge_elements or name not in charakter.fertigkeiten_daten:
+                    charakter.fertigkeiten_daten[name] = set(attribut_list)
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden der Fertigkeitsdaten '{name}': {e}")
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.fertigkeiten_daten),
+            typ="Fertigkeiten"
+        ))
+
+
+def _lade_talente(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Talente aus dem Setting."""
+    talente_data = active_setting.get('talente', {})
+    if talente_data:
+        if not merge_elements:
+            charakter.talente = {}
+        for name, talent_dict in talente_data.items():
+            try:
+                if not merge_elements or name not in charakter.talente:
+                    talent = Talent.from_dict(talent_dict)
+                    charakter.talente[name] = talent
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden des Talents '{name}': {e}")
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.talente),
+            typ="Talente"
+        ))
+
+
+def _lade_handicaps(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Handicaps aus dem Setting."""
+    handicaps_data = active_setting.get('handicaps', {})
+    if handicaps_data:
+        if not merge_elements:
+            charakter.handicaps = {}
+        for name, handicap_dict in handicaps_data.items():
+            try:
+                if not merge_elements or name not in charakter.handicaps:
+                    handicap = Handicap.from_dict(handicap_dict)
+                    charakter.handicaps[name] = handicap
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden des Handicaps '{name}': {e}")
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.handicaps),
+            typ="Handicaps"
+        ))
+
+
+def _lade_maechte(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Mächte aus dem Setting."""
+    maechte_data = active_setting.get('maechte', {})
+    if maechte_data:
+        if not merge_elements:
+            charakter.maechte = {}
+        for name, macht_dict in maechte_data.items():
+            try:
+                if not merge_elements or name not in charakter.maechte:
+                    macht = Macht.from_dict(macht_dict)
+                    charakter.maechte[name] = macht
+            except Exception as e:
+                Logger.warning(f"Fehler beim Laden der Macht '{name}': {e}")
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.maechte),
+            typ="Mächte"
+        ))
+
+
+def _lade_ausruestung(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Ausrüstung aus dem Setting."""
+    ausruestung_data = active_setting.get('ausruestung', {})
+    if ausruestung_data:
+        if not merge_elements:
+            # Ausrüstung zurücksetzen bei Replace-Modus
+            charakter.ausruestung = {}
+        
+        for name, item_dict in ausruestung_data.items():
+            try:
+                # Nur hinzufügen wenn nicht bereits vorhanden (bei Merge) oder immer (bei Replace)
+                if not merge_elements or name not in charakter.ausruestung:
+                    # Verwende die zentrale Funktion zum Erstellen des Items
+                    item = ausruestung_funktionen.erstelle_item_nach_kategorie(item_dict)
+                    charakter.ausruestung[name] = item
+            except Exception as e:
+                Logger.warning(LogMessages.FEHLER_BEIM_LADEN.format(
+                    name=name,
+                    error=e
+                ))
+        
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.ausruestung),
+            typ="Ausrüstungsgegenstände"
+        ))
+
+
+def _lade_settingregeln(charakter, active_setting: Dict[str, Any]) -> None:
+    """Lädt Settingregeln aus dem Setting."""
+    settingregeln_data = active_setting.get('settingregeln', {})
+    if settingregeln_data:
+        try:
+            charakter.settingregeln.from_dict(settingregeln_data)
+            Logger.info("Settingregeln geladen.")
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
+
+
+# Export der öffentlichen Funktionen und Klassen
+__all__ = [
+    'get_application_root',
+    'SetEncoder',
+    'CustomElementManager',
+    'create_default_setting',
+    'load_elements_from_active_setting'
+]

@@ -11,156 +11,26 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.selectioncontrol import MDCheckbox
 
-kv = '''
-<ProfilWidget>:
-    orientation: 'vertical'
-    padding: [10, 10, 10, 10]
-    spacing: 10
-    md_bg_color: self.theme_cls.backgroundColor
+import os
+import sys
 
-    ScrollView:
-        do_scroll_x: False
-        MDGridLayout:
-            cols: 1
-            size_hint_y: None
-            height: self.minimum_height
-            padding: [10, 10, 10, 10]
-            spacing: 10
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'profil_view.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'profil_view.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"profil_view: KV-Datei nicht gefunden: {kv_path}")
 
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: '60dp'
-                spacing: 10
-                adaptive_height: True
-
-                MDLabel:
-                    text: "Name:"
-                    size_hint_x: None
-                    width: 150
-                    halign: 'left'
-                    theme_text_color: "Primary"
-
-                MDTextField:
-                    id: name_input
-                    text: root.char_name
-                    on_text: root.char_name = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
-
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: '60dp'
-                spacing: 10
-                adaptive_height: True
-
-                MDLabel:
-                    text: "Alter:"
-                    size_hint_x: None
-                    width: 150
-                    halign: 'left'
-                    theme_text_color: "Primary"
-
-                MDTextField:
-                    id: alter_input
-                    text: root.alter
-                    on_text: root.alter = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
-
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: '60dp'
-                spacing: 10
-                adaptive_height: True
-
-                MDLabel:
-                    text: "Geschlecht:"
-                    size_hint_x: None
-                    width: 150
-                    halign: 'left'
-                    theme_text_color: "Primary"
-
-                MDTextField:
-                    id: geschlecht_input
-                    text: root.geschlecht
-                    on_text: root.geschlecht = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
-
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: '60dp'
-                spacing: 10
-                adaptive_height: True
-
-                MDLabel:
-                    text: "Konzept:"
-                    size_hint_x: None
-                    width: 150
-                    halign: 'left'
-                    theme_text_color: "Primary"
-
-                MDTextField:
-                    id: konzept_input
-                    text: root.konzept
-                    on_text: root.konzept = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
-
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: '60dp'
-                spacing: 10
-                adaptive_height: True
-
-                MDLabel:
-                    text: "Sprachen:"
-                    size_hint_x: None
-                    width: 150
-                    halign: 'left'
-                    theme_text_color: "Primary"
-
-                MDTextField:
-                    id: sprachen_input
-                    text: root.sprachen
-                    on_text: root.sprachen = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
-
-            # MDLabel:
-            #     text: "Settingregeln"
-            #     size_hint_y: None
-            #     height: 30
-            #     halign: 'left'
-            #     theme_text_color: "Primary"
-
-            # MDGridLayout:
-            #     id: checkbox_container
-            #     cols: 1
-            #     size_hint_y: None
-            #     size_hint_x: None
-            #     width: self.minimum_width
-            #     height: self.minimum_height
-            #     spacing: 5
-            #     padding: (0, 10, 0, 10)                    
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class ProfilWidget(MDBoxLayout):
     char_name = StringProperty('')

@@ -21,108 +21,27 @@ from models.ruestung import Ruestung
 # ------------------------------------------------------------------------
 # KV-Layout-Definition
 # ------------------------------------------------------------------------
-kv = '''
-<RuestungDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "720dp"
+import os
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name der Rüstung'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'ruestung_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'ruestung_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"ruestung_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDTextField:
-        id: torso_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Schutzwert Torso'
-
-    MDTextField:
-        id: arme_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Schutzwert Arme'
-
-    MDTextField:
-        id: beine_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Schutzwert Beine'
-
-    MDTextField:
-        id: kopf_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Schutzwert Kopf'
-
-    MDTextField:
-        id: mindeststaerke_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Mindeststärke (z.B. W4, W6)'
-
-    MDTextField:
-        id: gewicht_input
-        mode: "outlined"
-        input_filter: 'float'
-        
-        MDTextFieldHintText:
-            text: 'Gewicht'
-
-    MDTextField:
-        id: kosten_input
-        mode: "outlined"
-        input_filter: 'float'
-        
-        MDTextFieldHintText:
-            text: 'Kosten'
-
-    MDTextField:
-        id: setting_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Setting'
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-<DeleteRuestungDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: ruestung_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_ruestung_text
-            text: "Rüstung auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 # RuestungDialogContent
 class RuestungDialogContent(MDBoxLayout):

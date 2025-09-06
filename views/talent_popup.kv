@@ -1,0 +1,74 @@
+<TalentDialogContent>:
+    orientation: 'vertical'
+    spacing: "12dp"
+    padding: "12dp"
+    size_hint_y: None
+    height: "520dp"
+
+    MDTextField:
+        id: name_input
+        mode: "outlined"
+        
+        MDTextFieldHintText:
+            text: 'Name des Talents'
+
+    MDTextField:
+        id: kategorie_input
+        mode: "outlined"
+        
+        MDTextFieldHintText:
+            text: 'Kategorie'
+
+    MDTextField:
+        id: rang_input
+        mode: "outlined"
+        
+        MDTextFieldHintText:
+            text: 'Rang'
+
+    MDTextField:
+        id: beschreibung_input
+        mode: "outlined"
+        multiline: True
+        
+        MDTextFieldHintText:
+            text: 'Beschreibung'
+
+    MDTextField:
+        id: voraussetzungen_input
+        mode: "outlined"
+        
+        MDTextFieldHintText:
+            text: 'Voraussetzungen (durch Komma getrennt)'
+
+    MDTextField:
+        id: neue_maechte_input
+        mode: "outlined"
+        input_filter: 'int'
+        
+        MDTextFieldHintText:
+            text: 'Neue Mächte (Anzahl)'
+
+    MDTextField:
+        id: machtpunkte_input
+        mode: "outlined"
+        input_filter: 'int'
+        
+        MDTextFieldHintText:
+            text: 'Machtpunkte'
+
+<DeleteTalentDialogContent>:
+    orientation: 'vertical'
+    spacing: "12dp"
+    padding: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    MDDropDownItem:
+        id: talent_dropdown
+        pos_hint: {"center_x": .5, "center_y": .5}
+        on_release: root.open_menu(self)
+
+        MDDropDownItemText:
+            id: selected_talent_text
+            text: "Talent auswählen"

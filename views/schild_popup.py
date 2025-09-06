@@ -22,92 +22,27 @@ from models.schild import Schild
 # ------------------------------------------------------------------------
 # KV-Layout-Definition
 # ------------------------------------------------------------------------
-kv = '''
-<SchildDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "520dp"
+import os
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name des Schildes'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'schild_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'schild_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"schild_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDTextField:
-        id: parade_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Paradebonus'
-
-    MDTextField:
-        id: deckung_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Deckung'
-
-    MDTextField:
-        id: mindeststaerke_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Mindeststärke (z.B. W4, W6)'
-
-    MDTextField:
-        id: gewicht_input
-        mode: "outlined"
-        input_filter: 'float'
-        
-        MDTextFieldHintText:
-            text: 'Gewicht'
-
-    MDTextField:
-        id: kosten_input
-        mode: "outlined"
-        input_filter: 'float'
-        
-        MDTextFieldHintText:
-            text: 'Kosten'
-
-    MDTextField:
-        id: setting_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Setting'
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-<DeleteSchildDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: schild_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_schild_text
-            text: "Schild auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 # SchildDialogContent
 class SchildDialogContent(MDBoxLayout):

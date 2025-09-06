@@ -20,87 +20,26 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from models.talent import Talent
 
-# ------------------------------------------------------------------------
-# KV-Layout-Definition
-# ------------------------------------------------------------------------
-kv = '''
-<TalentDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "520dp"
+import os
+import sys
 
-    MDTextField:
-        id: name_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Name des Talents'
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'talent_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'talent_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"talent_popup: KV-Datei nicht gefunden: {kv_path}")
 
-    MDTextField:
-        id: kategorie_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Kategorie'
-
-    MDTextField:
-        id: rang_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Rang'
-
-    MDTextField:
-        id: beschreibung_input
-        mode: "outlined"
-        multiline: True
-        
-        MDTextFieldHintText:
-            text: 'Beschreibung'
-
-    MDTextField:
-        id: voraussetzungen_input
-        mode: "outlined"
-        
-        MDTextFieldHintText:
-            text: 'Voraussetzungen (durch Komma getrennt)'
-
-    MDTextField:
-        id: neue_maechte_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Neue Mächte (Anzahl)'
-
-    MDTextField:
-        id: machtpunkte_input
-        mode: "outlined"
-        input_filter: 'int'
-        
-        MDTextFieldHintText:
-            text: 'Machtpunkte'
-
-<DeleteTalentDialogContent>:
-    orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
-    size_hint_y: None
-    height: "120dp"
-
-    MDDropDownItem:
-        id: talent_dropdown
-        pos_hint: {"center_x": .5, "center_y": .5}
-        on_release: root.open_menu(self)
-
-        MDDropDownItemText:
-            id: selected_talent_text
-            text: "Talent auswählen"
-'''
-
-Builder.load_string(kv)
+load_kv_file()
 
 class TalentDialogContent(MDBoxLayout):
     def __init__(self, talent_data=None, **kwargs):

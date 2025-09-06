@@ -1,4 +1,4 @@
-# functions/abgeleitete_werte.py
+# functions/abgeleitete_werte.py - Erweiterte Version mit Völker-Effekten
 
 from kivy.logger import Logger
 from models.waffe import Waffe
@@ -8,7 +8,7 @@ from models.schild import Schild
 def berechne_abgeleitete_werte(charakter):
     """
     Berechnet die abgeleiteten Werte des Charakters, wie Parade, Robustheit usw.
-    Berücksichtigt die Erschöpfung und Talente.
+    ERWEITERT: Berücksichtigt Völker-Effekte, Erschöpfung, Talente und natürliche Panzerung.
     
     Args:
         charakter: Das Charakterobjekt, dessen Werte berechnet werden sollen
@@ -62,10 +62,10 @@ def berechne_abgeleitete_werte(charakter):
                 hcap = charakter.handicaps[hcap_key]
                 Logger.debug(f"- {hcap_key}: Name={hcap.name}, Stufe={hcap.stufe}")
         
-        # Handicap-Effekte für Bewegungsweite
+        # === BEWEGUNGSWEITE BERECHNUNG ===
         bewegungsweite_malus = 0
         
-        # Prüfe auf ausgewählte Handicaps, die Bewegungsweite beeinflussen
+        # 1. Handicap-Effekte für Bewegungsweite
         for handicap_key in charakter.selected_handicaps:
             if handicap_key in charakter.handicaps:
                 handicap = charakter.handicaps[handicap_key]
@@ -86,16 +86,20 @@ def berechne_abgeleitete_werte(charakter):
                 elif handicap.name == "Alt" and handicap.stufe == "schwer":
                     bewegungsweite_malus += 1
                     Logger.debug(f"Bewegungsweite -1 durch Alt (schwer)")
+
+        # 2. Völker-Effekte für Bewegungsweite
+        voelker_bewegungsweite_bonus = _berechne_voelker_bewegungsweite_bonus(charakter)
+        bewegungsweite_malus -= voelker_bewegungsweite_bonus  # Bonus ist negativ bei Malus
         
         # Bewegungsweite anpassen (nicht unter 1)
-        Logger.debug(f"Bewegungsweite-Malus: {bewegungsweite_malus}")
+        Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
         bewegungsweite = max(1, bewegungsweite - bewegungsweite_malus)
         Logger.debug(f"Resultierende Bewegungsweite: {bewegungsweite}")
 
         # Sicherstellen, dass bewegungsweite im Charakter-Objekt aktualisiert wird
         charakter.bewegungsweite = bewegungsweite
 
-        # Berechnung der Robustheit
+        # === ROBUSTHEIT BERECHNUNG ===
         konstitution_attribut = charakter.attribute.get('Konstitution')
         if konstitution_attribut:
             konstitution_wert = konstitution_attribut.wert
@@ -126,14 +130,24 @@ def berechne_abgeleitete_werte(charakter):
                 # Klein (leicht)
                 elif "Klein" in handicap.name and handicap.stufe == "leicht":
                     robustheit_bonus -= 1  # Klein: -1 Robustheit
+
+        # 3. Völker-Effekte für Robustheit (Größe/Basis-Modifikationen)
+        voelker_robustheit_bonus = _berechne_voelker_robustheit_bonus(charakter)
+        robustheit_bonus += voelker_robustheit_bonus
         
         # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Boni
         charakter.robustheit_basis = (konstitution_wert // 2) + 2 + robustheit_bonus
 
-        # Gesamtrüstungsschutz berechnen
+        # Gesamtrüstungsschutz berechnen (inklusive natürlicher Panzerung)
         from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
         gesamt_ruestungsschutz = berechne_gesamt_ruestungsschutz(charakter)
         gesamt_torso = gesamt_ruestungsschutz.get('Torso', 0)
+        
+        # 4. Natürliche Panzerung aus Völker-Effekten hinzufügen
+        natuerliche_panzerung = _berechne_voelker_natuerliche_panzerung(charakter)
+        gesamt_torso += natuerliche_panzerung
+        
+        Logger.debug(f"Rüstungsschutz: Normal={gesamt_ruestungsschutz.get('Torso', 0)}, Natürlich={natuerliche_panzerung}, Gesamt={gesamt_torso}")
 
         # Gesamte Robustheit (Basis + Rüstung)
         charakter.robustheit = charakter.robustheit_basis + gesamt_torso
@@ -141,6 +155,7 @@ def berechne_abgeleitete_werte(charakter):
         # String für die Anzeige
         charakter.robustheit_mit_ruestung = f"{charakter.robustheit} ({gesamt_torso})"
         
+        # === BENNYS BERECHNUNG ===
         # Talente für Bennys
         if "Glück" in charakter.selected_talente:
             bennys += 1  # Glück: +1 Benny
@@ -159,6 +174,10 @@ def berechne_abgeleitete_werte(charakter):
                         bennys += 1  # Jung (leicht): +1 Benny
                     elif handicap.stufe == "schwer":
                         bennys += 2  # Jung (schwer): +2 Bennys
+
+        # Völker-Effekte für Bennys (z.B. Halbling Glück)
+        voelker_benny_bonus = _berechne_voelker_benny_bonus(charakter)
+        bennys += voelker_benny_bonus
             
         charakter.bennys = bennys  # Aktualisiere Bennys im Charakter-Objekt
 
@@ -167,10 +186,7 @@ def berechne_abgeleitete_werte(charakter):
         maximale_traglast = berechne_traglast(charakter)
         charakter.maximale_traglast = maximale_traglast
 
-        # Gesamtgewicht berechnen
-        from functions.ausruestung_funktionen import berechne_gesamtgewicht
-        gesamtgewicht = berechne_gesamtgewicht(charakter)
-        charakter.gesamtgewicht = gesamtgewicht
+        # Gesamtgewicht wird automatisch über die Property berechnet - keine manuelle Zuweisung nötig
 
         # Zusammenstellen der abgeleiteten Werte
         abgeleitete_werte = {
@@ -183,7 +199,7 @@ def berechne_abgeleitete_werte(charakter):
             'Bennys': bennys,
             'Entschlossenheit': entschlossenheit,
             'Maximale Traglast': maximale_traglast,
-            'Gesamtgewicht': gesamtgewicht
+            'Gesamtgewicht': charakter.gesamtgewicht
         }
 
         return abgeleitete_werte
@@ -191,3 +207,134 @@ def berechne_abgeleitete_werte(charakter):
     except Exception as e:
         Logger.error(f"Fehler bei der Berechnung der abgeleiteten Werte: {e}")
         return {}
+
+
+def _berechne_voelker_bewegungsweite_bonus(charakter):
+    """
+    Berechnet den Bewegungsweite-Bonus durch das ausgewählte Volk.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        int: Bewegungsweite-Bonus (kann negativ sein)
+    """
+    bewegungsweite_bonus = 0
+    
+    try:
+        # Finde das ausgewählte Volk
+        ausgewaehltes_volk = None
+        for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+            if ist_ausgewaehlt and volk_name in charakter.voelker:
+                ausgewaehltes_volk = charakter.voelker[volk_name]
+                break
+        
+        if ausgewaehltes_volk:
+            bewegungsweite_bonus = ausgewaehltes_volk.get_bewegungsweite_bonus()
+            Logger.debug(f"Völker-Bewegungsweite-Bonus von {ausgewaehltes_volk.name}: {bewegungsweite_bonus}")
+    
+    except Exception as e:
+        Logger.error(f"Fehler bei Völker-Bewegungsweite-Berechnung: {e}")
+    
+    return bewegungsweite_bonus
+
+
+def _berechne_voelker_robustheit_bonus(charakter):
+    """
+    Berechnet den Robustheit-Bonus durch das ausgewählte Volk (nur Basis-Modifikationen wie Größe).
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        int: Robustheit-Bonus (kann negativ sein)
+    """
+    robustheit_bonus = 0
+    
+    try:
+        # Finde das ausgewählte Volk
+        ausgewaehltes_volk = None
+        for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+            if ist_ausgewaehlt and volk_name in charakter.voelker:
+                ausgewaehltes_volk = charakter.voelker[volk_name]
+                break
+        
+        if ausgewaehltes_volk:
+            robustheit_bonus = ausgewaehltes_volk.get_robustheit_bonus()
+            Logger.debug(f"Völker-Robustheit-Bonus von {ausgewaehltes_volk.name}: {robustheit_bonus}")
+    
+    except Exception as e:
+        Logger.error(f"Fehler bei Völker-Robustheit-Berechnung: {e}")
+    
+    return robustheit_bonus
+
+
+def _berechne_voelker_natuerliche_panzerung(charakter):
+    """
+    NEU: Berechnet die natürliche Panzerung durch das ausgewählte Volk.
+    Diese wird zum Rüstungsschutz addiert, nicht zur Basis-Robustheit.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        int: Natürliche Panzerung (immer >= 0)
+    """
+    natuerliche_panzerung = 0
+    
+    try:
+        # Finde das ausgewählte Volk
+        ausgewaehltes_volk = None
+        for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+            if ist_ausgewaehlt and volk_name in charakter.voelker:
+                ausgewaehltes_volk = charakter.voelker[volk_name]
+                break
+        
+        if ausgewaehltes_volk:
+            # Prüfe auf natürliche Panzerung in den speziellen Effekten
+            spezielle_effekte = ausgewaehltes_volk.effects.get('spezielle_effekte', {})
+            
+            if spezielle_effekte.get('panzerung_2', False):
+                natuerliche_panzerung = 2
+                Logger.debug(f"Natürliche Panzerung +2 von {ausgewaehltes_volk.name}")
+            elif spezielle_effekte.get('panzerung_1', False):
+                natuerliche_panzerung = 1
+                Logger.debug(f"Natürliche Panzerung +1 von {ausgewaehltes_volk.name}")
+    
+    except Exception as e:
+        Logger.error(f"Fehler bei Berechnung natürlicher Panzerung: {e}")
+    
+    return natuerliche_panzerung
+
+
+def _berechne_voelker_benny_bonus(charakter):
+    """
+    Berechnet den Benny-Bonus durch das ausgewählte Volk (z.B. Halbling mit Glück-Talent).
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        int: Benny-Bonus
+    """
+    benny_bonus = 0
+    
+    try:
+        # Finde das ausgewählte Volk
+        ausgewaehltes_volk = None
+        for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+            if ist_ausgewaehlt and volk_name in charakter.voelker:
+                ausgewaehltes_volk = charakter.voelker[volk_name]
+                break
+        
+        if ausgewaehltes_volk:
+            # Prüfe auf automatische Talente, die Bennys geben
+            auto_talente = ausgewaehltes_volk.effects.get('auto_talente', [])
+            if 'Glück' in auto_talente:
+                benny_bonus += 1
+                Logger.debug(f"Völker-Benny-Bonus von {ausgewaehltes_volk.name}: +1 (Glück)")
+    
+    except Exception as e:
+        Logger.error(f"Fehler bei Völker-Benny-Berechnung: {e}")
+    
+    return benny_bonus

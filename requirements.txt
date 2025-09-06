@@ -1,0 +1,74 @@
+# Savage Worlds Charakter-Generator - Requirements
+# Python 3.8+ erforderlich
+# 
+# Installation: pip install -r requirements.txt
+
+# =============================================================================
+# KERN-DEPENDENCIES
+# =============================================================================
+
+# KivyMD 2.0.1 - Material Design UI Framework (aktuelle Entwicklungsversion von GitHub)
+https://github.com/kivymd/KivyMD/archive/master.zip
+
+# Kivy - Cross-Platform GUI Framework (kompatibel mit KivyMD 2.0.1+)
+kivy>=2.3.0
+
+# =============================================================================
+# FUNKTIONALE DEPENDENCIES
+# =============================================================================
+
+# ReportLab - PDF-Export für Charakterbögen
+reportlab>=3.6.0
+
+# Pillow - Bildverarbeitung (für UI-Icons und Assets)
+Pillow>=8.0.0
+
+# Python-dateutil - Erweiterte Datums- und Zeitfunktionen (für Datei-Timestamps)
+python-dateutil>=2.8.0
+
+# =============================================================================
+# PLATFORM-SPEZIFISCHE DEPENDENCIES
+# =============================================================================
+
+# Windows-spezifische Dependencies (nur auf Windows)
+pypiwin32>=223; sys_platform == "win32"
+
+# =============================================================================
+# INSTALLATION
+# =============================================================================
+
+# Einfache Installation:
+# pip install -r requirements.txt
+
+# Alternative: Stabile Version für Produktionsumgebung
+# pip install kivymd==1.2.0 kivy>=2.1.0,<2.3.0 reportlab>=3.6.0 Pillow>=8.0.0 python-dateutil>=2.8.0
+
+# Upgrade bestehender Installation:
+# pip install --upgrade -r requirements.txt
+
+# =============================================================================
+# KOMPATIBILITÄT
+# =============================================================================
+
+# Python Version: 3.8+
+# Betriebssysteme: Windows 10+, macOS 10.14+, Linux (Ubuntu 18.04+)
+# RAM: Minimum 2GB, empfohlen 4GB+
+# Speicher: ~100MB für Dependencies + ~50MB für Anwendung
+
+# =============================================================================
+# ALTERNATIVE KONFIGURATIONEN
+# =============================================================================
+
+# Für stabile Produktion (empfohlen für kritische Anwendungen):
+# kivymd==1.2.0
+# kivy>=2.1.0,<2.3.0
+# reportlab>=3.6.0
+# Pillow>=8.0.0
+# python-dateutil>=2.8.0
+
+# Für neueste Features (aktuell):
+# https://github.com/kivymd/KivyMD/archive/master.zip
+# kivy>=2.3.0
+# reportlab>=3.6.0
+# Pillow>=8.0.0
+# python-dateutil>=2.8.0

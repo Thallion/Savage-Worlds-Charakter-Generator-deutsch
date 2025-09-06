@@ -53,15 +53,16 @@ def steigere_attribut(charakter, attribut_name):
             Logger.debug(f"Attribut '{attribut_name}' gesteigert auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier}")
             charakter.update_char_gen_status()  # Aktualisiere den Status
             charakter.rang = get_rang(charakter, charakter.aufstiege_gesamt)
+            return True
         else:
             Logger.warning(f"Attribut '{attribut_name}' nicht gefunden im Charakterobjekt mit ID {id(charakter)}.")
-        return False
+            return False
 
     if charakter.char_gen_completed:
         if charakter.verbleibende_aufstiege >= kosten:
             charakter.verbleibende_aufstiege -= kosten
             charakter.verbleibende_aufstiege = max(charakter.verbleibende_aufstiege, 0)  # Sicherstellen, dass nicht negativ
-            steigern()  # Direkter Aufruf der inneren Funktion
+            return steigern()  # Rückgabe des steigern() Ergebnisses
         else:
             Logger.debug("Nicht genügend `verbleibende_aufstiege`. Wechsel zu `verbleibende_attributsteigerungen`.")
             return False
@@ -69,12 +70,16 @@ def steigere_attribut(charakter, attribut_name):
         if charakter.verbleibende_attributsteigerungen > 0:
             charakter.verbleibende_attributsteigerungen -= kosten
             charakter.verbleibende_attributsteigerungen = max(charakter.verbleibende_attributsteigerungen, 0)  # Sicherstellen, dass nicht negativ
-            steigern()  # Direkter Aufruf der inneren Funktion
+            return steigern()  # Rückgabe des steigern() Ergebnisses
         else:
             if charakter.verbleibende_handicap_punkte > 1.5:
-                steigern()
-                charakter.verbleibende_handicap_punkte -= 2
-                Logger.info("Attribut mit Handicap-Punkten gesteigert.")
+                success = steigern()
+                if success:
+                    charakter.verbleibende_handicap_punkte -= 2
+                    Logger.info("Attribut mit Handicap-Punkten gesteigert.")
+                    return True
+                else:
+                    return False
             else:
                 Logger.warning("Keine Attributsteigerungen mehr verfügbar.")
                 return False

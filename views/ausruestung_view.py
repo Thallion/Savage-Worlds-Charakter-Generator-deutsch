@@ -35,7 +35,7 @@ from services.service_container import get_dialog_service
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
 ALL_CATEGORIES_TEXT = 'Alle Kategorien'
-DEFAULT_ROW_HEIGHT = dp(70)
+DEFAULT_ROW_HEIGHT = dp(100)
 DIALOG_HEIGHT = "200dp"
 BUTTON_SIZE = (dp(40), dp(40))
 ERROR_DIALOG_TITLE = "Fehler"
@@ -76,6 +76,31 @@ class AusruestungItemRow(MDBoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.dialog = None
+        self._set_background_color()  # THEME-FIX: Hintergrundfarbe setzen
+
+    def _set_background_color(self):
+        """Setzt die Hintergrundfarbe basierend auf dem aktuellen Theme"""
+        app = MDApp.get_running_app()
+        if app and hasattr(app, 'theme_cls'):
+            theme_cls = app.theme_cls
+            
+            # Theme-abhängige Farben für alternierende Zeilen
+            if theme_cls.theme_style == "Light":
+                # Helle Theme-Farben
+                if self.index % 2 == 0:
+                    self.md_bg_color = [0.95, 0.95, 0.95, 1]  # Sehr helles Grau
+                else:
+                    self.md_bg_color = [0.98, 0.98, 0.98, 1]  # Noch heller
+            else:
+                # Dunkle Theme-Farben (bisherige Farben)
+                if self.index % 2 == 0:
+                    self.md_bg_color = [0.2, 0.2, 0.2, 1]
+                else:
+                    self.md_bg_color = [0.15, 0.15, 0.15, 1]
+    
+    def on_index(self, instance, value):
+        """Wird aufgerufen wenn sich der Index ändert - THEME-FIX"""
+        self._set_background_color()
 
     def _get_controller(self):
         """Hilfsmethode zum Abrufen des Controllers"""
@@ -230,17 +255,27 @@ class AusruestungItemRow(MDBoxLayout):
             if not controller:
                 self.show_error("Controller nicht gefunden.")
                 return
-                
+            
+            # Vermögen vor dem Kauf speichern für Verifikation
+            vermoegen_vorher = controller.charakter.vermoegen
+            
             success = controller.kaufen_ausruestung(
                 self.name,
                 anzahl=anzahl,
                 preis_pro_stueck=preis
             )
+            
+            # Vermögen nach dem Kauf prüfen
+            vermoegen_nachher = controller.charakter.vermoegen
+            expected_cost = (preis or self.kosten) * anzahl
+            tatsaechlich_gekauft = (vermoegen_vorher - vermoegen_nachher) == expected_cost
 
-            if success:
+            if success or tatsaechlich_gekauft:
+                # Kauf war erfolgreich (entweder Controller sagt ja, oder Vermögen hat sich korrekt geändert)
                 self.dialog.dismiss()
                 self._refresh_ui()
             else:
+                # Kauf ist wirklich fehlgeschlagen - Vermögen unverändert
                 self.show_error(
                     f"Nicht genügend Geld vorhanden für den Kauf von {anzahl}x {self.name}.",
                     "Nicht genügend Geld"
@@ -264,17 +299,28 @@ class AusruestungItemRow(MDBoxLayout):
             if not controller:
                 self.show_error("Controller nicht gefunden.")
                 return
-                
+            
+            # Vermögen vor dem Verkauf speichern für Verifikation
+            vermoegen_vorher = controller.charakter.vermoegen
+            
             success = controller.verkaufen_ausruestung(
                 self.name,
                 anzahl=anzahl,
                 preis_pro_stueck=preis
             )
+            
+            # Vermögen nach dem Verkauf prüfen
+            vermoegen_nachher = controller.charakter.vermoegen
+            default_verkaufspreis = (self.kosten * 0.5) if hasattr(self, 'kosten') else 0
+            expected_income = (preis or default_verkaufspreis) * anzahl
+            tatsaechlich_verkauft = (vermoegen_nachher - vermoegen_vorher) == expected_income
 
-            if success:
+            if success or tatsaechlich_verkauft:
+                # Verkauf war erfolgreich (entweder Controller sagt ja, oder Vermögen hat sich korrekt geändert)
                 self.dialog.dismiss()
                 self._refresh_ui()
             else:
+                # Verkauf ist wirklich fehlgeschlagen
                 self.show_error("Der Verkauf konnte nicht durchgeführt werden.")
 
         except Exception as e:
@@ -318,6 +364,63 @@ class AusruestungItemRow(MDBoxLayout):
             ),
         )
         error_dialog.open()
+
+    def show_full_description(self):
+        """Zeigt die vollständige Beschreibung der Ausrüstung in einem Dialog an."""
+        if not self.beschreibung:
+            return
+            
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+        
+        # Ausrüstungs-Name als Überschrift
+        title_label = MDLabel(
+            text=f"[b]{self.name}[/b]",
+            size_hint_y=None,
+            height=dp(40),
+            theme_text_color="Primary",
+            halign="left",
+            valign="middle",
+            markup=True
+        )
+        content.add_widget(title_label)
+        
+        # Vollständige Beschreibung
+        desc_label = MDLabel(
+            text=self.beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(dp(400), None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+        
+        description_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Ausrüstung-Beschreibung",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: description_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        description_dialog.open()
 
 
 class DialogContentBase(MDBoxLayout):
@@ -693,259 +796,10 @@ class AusruestungWidget(MDBoxLayout):
 Factory.register('TooltipIconButton', TooltipIconButton)
 Factory.register('AusruestungItemRow', AusruestungItemRow)
 
-# KV-String mit korrigiertem Layout - Hauptänderung hier!
-KV_STRING = '''
-<TooltipIconButton>:
-    style: "filled"
-    size_hint: None, None
-    size: dp(40), dp(40)
-    MDButtonIcon:
-        icon: root.icon
-    MDTooltipPlain:
-        text: root.tooltip_text
-
-<AusruestungWidget>:
-    orientation: 'vertical'
-    md_bg_color: app.theme_cls.backgroundColor
-    
-    MDBoxLayout:
-        size_hint_y: None
-        height: 100
-        padding: [20, 5]
-        spacing: 5
-
-        TooltipIconButton:
-            id: sort_name_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
-            on_release: root.update_sort_option('Name')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_weight_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Gewicht sortieren" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "Gewicht absteigend sortieren"
-            on_release: root.update_sort_option('Gewicht')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_costs_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Kosten sortieren" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "Kosten absteigend sortieren"
-            on_release: root.update_sort_option('Kosten')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_amount_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Menge sortieren" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "Menge absteigend sortieren"
-            on_release: root.update_sort_option('Menge')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_category_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
-            on_release: root.update_sort_option('Kategorie')
-            pos_hint: {"center_y": .5}
-
-        MDTextField:
-            id: search_input
-            hint_text: 'Suche...'
-            size_hint_x: 1
-            on_text: root.filter_ausruestung()
-
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(200)
-            spacing: dp(5)
-            
-            MDCheckbox:
-                id: only_owned_checkbox
-                size_hint: None, None
-                size: dp(40), dp(40)
-                active: root.only_owned_items
-                on_active: root.toggle_only_owned_items(self.active)
-                pos_hint: {"center_y": .5}
-                
-            MDLabel:
-                text: "Nur vorhandene"
-                size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            icon: "filter"
-            tooltip_text: "Nach Kategorie filtern"
-            on_release: root.open_category_menu()
-            pos_hint: {"center_y": .5}
-
-        MDLabel:
-            id: category_label
-            text: 'Alle Kategorien'
-            size_hint_x: 1
-
-    MDLabel:
-        text: 'Ausrüstung'
-        font_size: dp(24)
-        size_hint_y: None
-        height: dp(48)
-        padding: [20, 10]
-
-    # Diagnostische Information anzeigen
-    MDLabel:
-        id: debug_label
-        text: ''
-        size_hint_y: None
-        height: dp(30) if self.text else 0
-        color: 1, 0, 0, 1
-        halign: 'center'
-
-    # Verbesserte RecycleView
-    MDRecycleView:
-        id: recycleview
-        viewclass: 'AusruestungItemRow'
-        size_hint_y: 1
-        
-        RecycleBoxLayout:
-            id: layout
-            default_size: None, dp(120)
-            default_size_hint: 1, None
-            size_hint_y: None
-            height: self.minimum_height
-            orientation: 'vertical'
-            spacing: dp(10)
-            padding: [dp(5), dp(10), dp(15), dp(10)]
-
-<AusruestungItemRow>:
-    orientation: 'horizontal'
-    size_hint_y: None
-    height: dp(120)  # Etwas höher für bessere Darstellung
-    spacing: dp(5)
-    padding: [dp(5), dp(5), dp(60), dp(5)]
-    md_bg_color: [0.2, 0.2, 0.2, 1] if self.index % 2 == 0 else [0.15, 0.15, 0.15, 1]
-    
-    # Hauptcontainer für Name, Beschreibung und Details - KORRIGIERT!
-    MDBoxLayout:
-        orientation: 'vertical'
-        size_hint_x: 0.35
-        spacing: dp(2)
-        padding: [0, dp(5), 0, dp(5)]
-        
-        # Name - größer und fett
-        MDLabel:
-            text: root.name
-            font_size: dp(14)
-            bold: True
-            size_hint_y: None
-            height: dp(20)
-            halign: 'left'
-            valign: 'middle'
-            text_size: self.width, None
-            
-        # Beschreibung - nur wenn vorhanden
-        MDLabel:
-            text: root.beschreibung if root.beschreibung else ""
-            font_size: dp(11)
-            theme_text_color: "Secondary"
-            size_hint_y: None
-            height: dp(16) if root.beschreibung else 0
-            opacity: 1 if root.beschreibung else 0
-            halign: 'left'
-            valign: 'middle'
-            text_size: self.width, None
-            
-        # Details - nur wenn vorhanden  
-        MDLabel:
-            text: root.details if root.details else ""
-            font_size: dp(11)
-            theme_text_color: "Secondary"
-            size_hint_y: None
-            height: dp(40) if root.details else 0  # Mehr Platz für Details
-            opacity: 1 if root.details else 0
-            halign: 'left'
-            valign: 'top'
-            text_size: self.width, None
-            text_color: [0.8, 0.8, 0.8, 1]  # Etwas heller für bessere Lesbarkeit
-    
-    # Kategorie
-    MDLabel:
-        text: root.kategorie.capitalize() if root.kategorie else "Unbekannt"
-        font_size: dp(14)
-        size_hint_x: 0.12
-        halign: 'left'
-        valign: 'middle'
-        pos_hint: {'center_y': 0.5}
-        text_size: self.width, None
-        shorten: True
-    
-    # Gewicht
-    MDLabel:
-        text: f"{root.gewicht} kg"
-        font_size: dp(14)
-        size_hint_x: 0.08
-        halign: 'left'
-        valign: 'middle'
-        pos_hint: {'center_y': 0.5}
-    
-    # Kosten
-    MDLabel:
-        text: f"{root.kosten} {root.waehrungseinheit}"
-        font_size: dp(14)
-        size_hint_x: 0.12
-        halign: 'left'
-        valign: 'middle'
-        pos_hint: {'center_y': 0.5}
-        text_size: self.width, None
-        shorten: True
-    
-    # Menge
-    MDLabel:
-        text: str(root.menge)
-        font_size: dp(14)
-        size_hint_x: 0.04
-        halign: 'center'
-        valign: 'middle'
-        pos_hint: {'center_y': 0.5}
-    
-    # Buttons
-    AnchorLayout:
-        anchor_x: 'right'
-        anchor_y: 'center'
-        size_hint_x: None
-        width: dp(140)
-        
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint: None, None
-            size: dp(140), dp(35)
-            spacing: dp(5)
-            
-            MDButton:
-                style: "filled"
-                size_hint: None, None
-                size: dp(35), dp(35)
-                on_release: root.kaufen_ausruestung()
-                MDButtonIcon:
-                    icon: "plus"
-            
-            MDButton:
-                style: "filled"
-                size_hint: None, None
-                size: dp(35), dp(35)
-                on_release: root.verkaufen_ausruestung()
-                MDButtonIcon:
-                    icon: "minus"
-            
-            MDButton:
-                style: "filled"
-                size_hint: None, None
-                size: dp(35), dp(35)
-                on_release: root.bearbeite_ausruestung()
-                MDButtonIcon:
-                    icon: "pencil"
-'''
-
-# KV-String laden
-Builder.load_string(KV_STRING)
+# KV-String mit Theme-Fix - HAUPTÄNDERUNG: md_bg_color entfernt und theme_text_color hinzugefügt!
+# KV-Datei laden
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'ausruestung_view.kv')
+Builder.load_file(kv_path)

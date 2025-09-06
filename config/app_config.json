@@ -1,6 +1,6 @@
 {
   "theme_style": "Dark",
-  "primary_palette": "Orange",
+  "primary_palette": "Lime",
   "default_attribute_points": 5,
   "default_skill_points": 12,
   "default_money": 500,
@@ -20,5 +20,5 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "config_version": "1.0",
-  "last_updated": "2025-06-05T10:10:59.051074"
+  "last_updated": "2025-09-02T20:02:01.784761"
 }

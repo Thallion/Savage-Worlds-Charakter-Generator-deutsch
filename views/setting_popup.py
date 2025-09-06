@@ -37,51 +37,31 @@ def create_text_button(button_text, on_release):
     return btn
 
 # KV-Definition: Alle UI-Komponenten werden hier deklariert (Popups, Textfelder, Labels)
-KV = '''
-<AddSettingPopup>:
-    orientation: "vertical"
-    spacing: "12dp"
-    padding: "12dp"
-    MDTextField:
-        id: setting_name_input
-        mode: "outlined"
-        hint_text: "Name des neuen Settings"
-        max_text_length: 50
-        font_size: "16sp"
-        required: True
-    MDTextField:
-        id: setting_description_input
-        mode: "outlined"
-        hint_text: "Beschreibung des neuen Settings"
-        multiline: True
-        max_text_length: 200
-        font_size: "16sp"
+import os
+import os
+import sys
 
-<LoadSettingPopup>:
-    orientation: "vertical"
-    spacing: "12dp"
-    padding: "12dp"
-    MDLabel:
-        text: "Bitte wähle eine Datei aus:"
-        halign: "center"
+# PyInstaller-kompatibles Laden der KV-Datei
+def load_kv_file():
+    if getattr(sys, 'frozen', False):
+        # PyInstaller Bundle
+        base_path = sys._MEIPASS
+        kv_path = os.path.join(base_path, 'views', 'setting_popup.kv')
+    else:
+        # Normale Ausführung
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        kv_path = os.path.join(base_path, 'views', 'setting_popup.kv')
+    
+    if os.path.exists(kv_path):
+        Builder.load_file(kv_path)
+    else:
+        Logger.error(f"setting_popup: KV-Datei nicht gefunden: {kv_path}")
 
-<DeleteSettingPopup>:
-    orientation: "vertical"
-    spacing: "12dp"
-    padding: "12dp"
-    MDLabel:
-        text: "Bitte wähle eine Datei zum Löschen aus:"
-        halign: "center"
-'''
-Builder.load_string(KV)
+load_kv_file()
 
 # Hilfsfunktion zur Bestimmung des Applikations‑Rootpfads
-def get_application_root():
-    if getattr(sys, "frozen", False):
-        app_root = Path(sys.executable).parent.parent
-    else:
-        app_root = Path(__file__).parent.parent.resolve()
-    return app_root
+# Import centralized path utilities
+from utils.path_utils import get_application_root
 
 # Erstellen des Ordners "settings", falls nicht existent
 app_root = get_application_root()
@@ -154,7 +134,6 @@ class SettingsRepository:
                 if success:
                     Logger.info(f"Setting '{setting_name}' gelöscht.")
                     MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
-                    os.remove(filepath)
                     return True
                 else:
                     Logger.error(f"Löschen fehlgeschlagen für: {setting_name}")

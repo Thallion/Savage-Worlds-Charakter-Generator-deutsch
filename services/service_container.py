@@ -55,6 +55,9 @@ class ServiceContainer:
             
             # Controller-abhängige Services
             if charakter_controller:
+                # Controller selbst registrieren
+                self._services['charakter_controller'] = charakter_controller
+                
                 self._services['file_manager'] = FileManagerService(charakter_controller)
                 self._services['pdf'] = PDFService(charakter_controller)
                 
@@ -108,6 +111,10 @@ class ServiceContainer:
     def get_config_service(self) -> Optional[ConfigService]:
         """Gibt den Config-Service zurück"""
         return self.get_service('config')
+    
+    def get_charakter_controller(self):
+        """Gibt den Charakter-Controller zurück"""
+        return self.get_service('charakter_controller')
     
     def register_service(self, name: str, service: Any):
         """
