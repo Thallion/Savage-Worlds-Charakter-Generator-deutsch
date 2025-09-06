@@ -41,7 +41,11 @@ DICE_LAYOUT_WIDTH = dp(120)
 INFO_PADDING = 5
 
 # KV-Datei laden
-Builder.load_file('views/charakterbogen_view.kv')
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'charakterbogen_view.kv')
+Builder.load_file(kv_path)
 
 class LeftAlignedLabel(MDLabel):
     """Spezielles Label mit linksbündiger Ausrichtung."""

@@ -80,7 +80,11 @@ Factory.register('TooltipIconButton', TooltipIconButton)
 
 
 # KV-Datei laden
-Builder.load_file('views/talente_view.kv')
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'talente_view.kv')
+Builder.load_file(kv_path)
 
 class TalenteRecycleView(MDRecycleView):
     """RecycleView für Talente"""

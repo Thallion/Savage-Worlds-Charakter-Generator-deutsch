@@ -491,7 +491,13 @@ class HistorieWidget(MDBoxLayout):
         
         # Log-Anzeige (ScrollView mit TextInput)
         log_scroll = MDScrollView(
-            size_hint=(1, 1)
+            size_hint=(1, 1),
+            do_scroll_x=False,
+            do_scroll_y=True,
+            bar_width="15dp",
+            bar_margin="8dp",
+            scroll_type=['bars', 'content'],
+            scroll_wheel_distance="114dp"
         )
         
         self.log_display = TextInput(

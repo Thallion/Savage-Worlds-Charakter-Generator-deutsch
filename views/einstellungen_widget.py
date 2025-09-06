@@ -25,7 +25,11 @@ from manager.statistics_manager import StatisticsManager
 from manager.pdf_manager import PDFManager
 
 # KV-Datei laden
-Builder.load_file('views/einstellungen_widget.kv')
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'einstellungen_widget.kv')
+Builder.load_file(kv_path)
 
 
 class EinstellungenWidget(MDBoxLayout):

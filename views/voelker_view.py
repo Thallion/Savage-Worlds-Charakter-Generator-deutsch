@@ -34,8 +34,11 @@ from functions.volk_funktionen import (
 Logger = logging.getLogger(__name__)
 
 # NEUER KV-STRING mit MDDropdownMenu für kompakte Völker-Auswahl
-# KV-Datei laden
-Builder.load_file('views/voelker_view.kv')
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+from utils.path_utils import get_application_root
+import os
+kv_path = os.path.join(get_application_root(), 'views', 'voelker_view.kv')
+Builder.load_file(kv_path)
 
 
 class VoelkerWidget(MDBoxLayout):

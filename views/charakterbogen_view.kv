@@ -4,8 +4,15 @@
     spacing: 10
 
     MDScrollView:
+        size_hint: (1, 1)
         do_scroll_x: False
         do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
+        scroll_type: ['bars', 'content']
+        scroll_wheel_distance: dp(114)
+        bar_color: app.theme_cls.primary_color
+        bar_inactive_color: app.theme_cls.disabled_hint_text_color
 
         MDBoxLayout:
             orientation: 'vertical'
