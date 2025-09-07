@@ -20,9 +20,12 @@
             MDCard:
                 style: "elevated"
                 padding: dp(16)
+                size_hint_x: None
+                width: dp(750)
                 size_hint_y: None
                 height: self.minimum_height
                 md_bg_color: app.theme_cls.surfaceColor
+                pos_hint: {"x": 0}
 
                 MDBoxLayout:
                     orientation: 'vertical'
@@ -86,9 +89,12 @@
             MDCard:
                 style: "elevated"
                 padding: dp(16)
+                size_hint_x: None
+                width: dp(750)
                 size_hint_y: None
                 height: self.minimum_height
                 md_bg_color: app.theme_cls.surfaceColor
+                pos_hint: {"x": 0}
 
                 MDBoxLayout:
                     orientation: 'vertical'
@@ -208,13 +214,17 @@
                             MDButtonText:
                                 text: "Abstieg"
 
+
             # Template-Funktionen Card
             MDCard:
                 style: "elevated"
                 padding: dp(16)
+                size_hint_x: None
+                width: dp(750)
                 size_hint_y: None
                 height: self.minimum_height
                 md_bg_color: app.theme_cls.surfaceColor
+                pos_hint: {"x": 0}
 
                 MDBoxLayout:
                     orientation: 'vertical'
@@ -235,39 +245,45 @@
                         height: dp(20)
                         theme_text_color: "Secondary"
 
-                    # Template Auswahl Button
-                    MDButton:
-                        id: template_selection_button
-                        style: "outlined"
+                    # Template Buttons nebeneinander
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(16)
                         size_hint_y: None
                         height: dp(56)
-                        on_release: root.show_template_selection_dialog()
-                        
-                        MDButtonText:
-                            id: selected_template_text
-                            text: "Template auswählen..."
 
-                    MDButton:
-                        id: generate_button
-                        style: "filled"
-                        size_hint: None, None
-                        size: dp(250), dp(48)
-                        pos_hint: {"center_x": .5}
-                        on_release: root.show_template_selection_dialog() if not root.selected_template else root.generate_character_from_selected_template()
-                        
-                        MDButtonIcon:
-                            icon: "account-plus"
-                        
-                        MDButtonText:
-                            id: generate_button_text
-                            text: "Template auswählen"
+                        MDButton:
+                            id: template_selection_button
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.show_template_selection_dialog()
+
+                            MDButtonText:
+                                id: selected_template_text
+                                text: "Template auswählen..."
+
+                        MDButton:
+                            id: generate_button
+                            style: "filled"
+                            size_hint_x: 1
+                            on_release: root.show_template_selection_dialog() if not root.selected_template else root.generate_character_from_selected_template()
+                            
+                            MDButtonIcon:
+                                icon: "account-plus"
+                            
+                            MDButtonText:
+                                id: generate_button_text
+                                text: "Template auswählen"
 
             # Verwaltungs Card
             MDCard:
                 padding: dp(16)
                 spacing: dp(16)
+                size_hint_x: None
+                width: dp(750)
                 size_hint_y: None
                 height: self.minimum_height
+                pos_hint: {"x": 0}
 
                 MDGridLayout:
                     cols: 2
@@ -288,15 +304,18 @@
                             orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: dp(8)
+                            spacing: dp(16)
 
                             MDLabel:
                                 text: "Charakter"
                                 bold: True
+                                size_hint_y: None
+                                height: dp(40)
+                                padding: [0, 0, 0, dp(8)]
 
                             MDGridLayout:
                                 cols: 4
-                                spacing: dp(8)
+                                spacing: dp(12)
                                 size_hint_y: None
                                 height: dp(48)
 
@@ -349,15 +368,18 @@
                             orientation: 'vertical'
                             size_hint_y: None
                             height: self.minimum_height
-                            spacing: dp(8)
+                            spacing: dp(16)
 
                             MDLabel:
                                 text: "Setting"
                                 bold: True
+                                size_hint_y: None
+                                height: dp(40)
+                                padding: [0, 0, 0, dp(8)]
 
                             MDGridLayout:
                                 cols: 3
-                                spacing: dp(8)
+                                spacing: dp(12)
                                 size_hint_y: None
                                 height: dp(48)
 
@@ -388,52 +410,69 @@
                                     MDButtonText:
                                         text: "Löschen"
 
-                    # Rechte Spalte - PDF, Statblock und Statistiken
-                    MDBoxLayout:
-                        orientation: 'vertical'
-                        spacing: dp(16)
-                        size_hint_y: None
-                        height: self.minimum_height
+                        # Rechte Spalte - PDF, Statblock und Statistiken
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            spacing: dp(16)
+                            size_hint_y: None
+                            height: self.minimum_height
 
-                        MDButton:
-                            style: "filled"
-                            size_hint_x: 1
-                            on_release: root.erzeuge_charakterbogen_pdf()
+                            MDLabel:
+                                text: "Export"
+                                bold: True
+                                size_hint_y: None
+                                height: dp(40)
+                                padding: [0, 0, 0, dp(8)]
 
-                            MDButtonIcon:
-                                icon: "file-pdf-box"
+                            # Export und Anzeige Funktionen in einer Zeile
+                            MDGridLayout:
+                                cols: 3
+                                spacing: dp(12)
+                                size_hint_y: None
+                                height: dp(48)
 
-                            MDButtonText:
-                                text: "PDF erstellen"
+                                MDButton:
+                                    style: "filled"
+                                    size_hint_x: 1
+                                    on_release: root.erzeuge_charakterbogen_pdf()
 
-                        MDButton:
-                            style: "elevated"
-                            size_hint_x: 1
-                            on_release: root.zeige_statblock()
+                                    MDButtonIcon:
+                                        icon: "file-pdf-box"
 
-                            MDButtonIcon:
-                                icon: "card-text"
+                                    MDButtonText:
+                                        text: "PDF erstellen"
 
-                            MDButtonText:
-                                text: "Statblock anzeigen"
+                                MDButton:
+                                    style: "elevated"
+                                    size_hint_x: 1
+                                    on_release: root.zeige_statblock()
 
-                        MDButton:
-                            style: "tonal"
-                            size_hint_x: 1
-                            on_release: root.zeige_element_statistiken()
+                                    MDButtonIcon:
+                                        icon: "card-text"
 
-                            MDButtonIcon:
-                                icon: "chart-bar"
+                                    MDButtonText:
+                                        text: "Statblock anzeigen"
 
-                            MDButtonText:
-                                text: "Element-Statistiken"
+                                MDButton:
+                                    style: "tonal"
+                                    size_hint_x: 1
+                                    on_release: root.zeige_element_statistiken()
+
+                                    MDButtonIcon:
+                                        icon: "chart-bar"
+
+                                    MDButtonText:
+                                        text: "Element-Statistiken"
 
             # Spielelemente Card - Vollständige Version
             MDCard:
                 padding: dp(16)
                 spacing: dp(16)
+                size_hint_x: None
+                width: dp(750)
                 size_hint_y: None
                 height: self.minimum_height
+                pos_hint: {"x": 0}
 
                 MDBoxLayout:
                     orientation: 'vertical'

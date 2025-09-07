@@ -37,9 +37,11 @@
                     text: root.char_name
                     on_text: root.char_name = self.text
                     multiline: False
-                    size_hint_x: None
-                    width: 300
+                    size_hint_x: 1
                     mode: "outlined"
+                    
+                    MDTextFieldHintText:
+                        text: "Name eingeben"
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -60,9 +62,11 @@
                     text: root.alter
                     on_text: root.alter = self.text
                     multiline: False
-                    size_hint_x: None
-                    width: 300
+                    size_hint_x: 1
                     mode: "outlined"
+                    
+                    MDTextFieldHintText:
+                        text: "Alter eingeben"
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -83,9 +87,11 @@
                     text: root.geschlecht
                     on_text: root.geschlecht = self.text
                     multiline: False
-                    size_hint_x: None
-                    width: 300
+                    size_hint_x: 1
                     mode: "outlined"
+                    
+                    MDTextFieldHintText:
+                        text: "Geschlecht eingeben"
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -106,9 +112,11 @@
                     text: root.konzept
                     on_text: root.konzept = self.text
                     multiline: False
-                    size_hint_x: None
-                    width: 300
+                    size_hint_x: 1
                     mode: "outlined"
+                    
+                    MDTextFieldHintText:
+                        text: "Konzept eingeben"
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -129,9 +137,11 @@
                     text: root.sprachen
                     on_text: root.sprachen = self.text
                     multiline: False
-                    size_hint_x: None
-                    width: 300
+                    size_hint_x: 1
                     mode: "outlined"
+                    
+                    MDTextFieldHintText:
+                        text: "Sprachen eingeben"
 
             # MDLabel:
             #     text: "Settingregeln"

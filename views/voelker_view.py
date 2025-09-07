@@ -351,6 +351,8 @@ class VoelkerWidget(MDBoxLayout):
         """Erstellt eine Sektion für Zusatzelemente."""
         # Hauptcontainer für die Sektion
         section_card = MDCard(
+            size_hint_x=None,
+            width=dp(800),
             size_hint_y=None,
             height=dp(140),
             padding=dp(25),
@@ -358,7 +360,8 @@ class VoelkerWidget(MDBoxLayout):
             elevation=3,
             radius=[12],
             md_bg_color=self.theme_cls.surfaceContainerHighColor,
-            style="elevated"
+            style="elevated",
+            pos_hint={"x": 0}
         )
         
         section_content = MDBoxLayout(
@@ -775,13 +778,16 @@ class VoelkerWidget(MDBoxLayout):
         try:
             # Hauptcontainer für die Sektion
             section_card = MDCard(
+                size_hint_x=None,
+                width=dp(800),
                 size_hint_y=None,
                 height=dp(180),  # Höher für zwei Optionen
                 padding=dp(25),
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
-                style="elevated"
+                style="elevated",
+                pos_hint={"x": 0}
             )
             
             section_content = MDBoxLayout(
@@ -845,7 +851,7 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Halbelf ENTWEDER/ODER Sektion: {e}")
             # Fallback: Leere Card zurückgeben
-            return MDCard(size_hint_y=None, height=dp(50))
+            return MDCard(size_hint_x=None, width=dp(800), size_hint_y=None, height=dp(50), pos_hint={"x": 0})
 
     def _halbelf_waehle_talent(self):
         """NEUE: Halbelf wählt freies Talent (ENTWEDER-Option)."""
