@@ -46,6 +46,10 @@ def prepare_wine_build():
     for dir_name in dirs_to_clean:
         dir_path = project_dir / dir_name
         if dir_path.exists():
+            # Respektiere SKIP_DIST_CLEANUP Umgebungsvariable für dist-Verzeichnis
+            if dir_name == 'dist' and os.environ.get("SKIP_DIST_CLEANUP"):
+                print(f"   ⏭️  {dir_name}/ übersprungen (SKIP_DIST_CLEANUP gesetzt)")
+                continue
             try:
                 shutil.rmtree(dir_path)
                 print(f"   ✅ {dir_name}/ gelöscht")

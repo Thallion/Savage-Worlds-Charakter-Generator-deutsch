@@ -38,8 +38,11 @@ def build_linux(dist_dir):
     print("="*50)
     
     try:
+        # Setze Umgebungsvariable, damit build_linux.py das dist/ nicht löscht
+        env = os.environ.copy()
+        env["SKIP_DIST_CLEANUP"] = "1"
         result = subprocess.run([sys.executable, "build_linux.py"], 
-                              check=True, cwd=Path.cwd())
+                              check=True, cwd=Path.cwd(), env=env)
         
         if result.returncode == 0:
             # Verschiebe Linux Build nach dist/linux/ SOFORT
@@ -69,8 +72,11 @@ def build_windows(dist_dir):
     print("="*50)
     
     try:
+        # Setze Umgebungsvariable, damit build_windows_wine.py das dist/ nicht löscht
+        env = os.environ.copy()
+        env["SKIP_DIST_CLEANUP"] = "1"
         result = subprocess.run([sys.executable, "build_windows_wine.py"], 
-                              check=True, cwd=Path.cwd())
+                              check=True, cwd=Path.cwd(), env=env)
         
         if result.returncode == 0:
             # Verschiebe Windows Build nach dist/windows/ SOFORT
