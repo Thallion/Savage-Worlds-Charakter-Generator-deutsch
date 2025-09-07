@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Unified Build Script für Savage Worlds Charakter Generator

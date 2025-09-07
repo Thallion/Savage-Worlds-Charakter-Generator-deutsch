@@ -9,7 +9,7 @@ from kivy.metrics import dp
 from kivy.cache import Cache
 from threading import Thread
 from kivy.uix.modalview import ModalView
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.checkbox import CheckBox
 from kivy.uix.widget import Widget
 
 # KivyMD Imports

@@ -16,7 +16,7 @@ from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.checkbox import CheckBox
 from kivymd.uix.label import MDLabel
 
 from models.fertigkeit import Fertigkeit

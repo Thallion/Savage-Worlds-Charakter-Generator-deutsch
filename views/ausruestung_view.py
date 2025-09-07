@@ -11,7 +11,7 @@ from kivymd.uix.tooltip import MDTooltip
 from kivymd.uix.button import MDButton, MDButtonIcon, MDButtonText
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.label import MDLabel
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.checkbox import CheckBox
 from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger

@@ -9,7 +9,7 @@ from kivy.logger import Logger
 from models.settingregeln import SettingRegeln
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.checkbox import CheckBox
 
 import os
 import sys
@@ -87,7 +87,7 @@ class ProfilWidget(MDBoxLayout):
     #                 width=300
     #             )
 
-    #             checkbox = MDCheckbox(
+    #             checkbox = CheckBox(
     #                 active=getattr(self.settingregeln, attr),
     #                 size_hint_x=None,
     #                 width=50,
