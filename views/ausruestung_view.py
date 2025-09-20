@@ -514,9 +514,12 @@ class AusruestungWidget(MDBoxLayout):
         if not self.controller:
             Logger.error("AusruestungWidget: Controller nicht gefunden")
 
-    def toggle_only_owned_items(self, value):
-        """Schaltet den Filter für vorhandene Gegenstände um"""
-        self.only_owned_items = value
+    def toggle_only_owned_items(self):
+        """
+        Schaltet den Filter für vorhandene Gegenstände um.
+        Event-Handler für den Button (Android Checkbox Workaround).
+        """
+        self.only_owned_items = not self.only_owned_items
         self.filter_ausruestung()
 
     def update_sort_option(self, option):

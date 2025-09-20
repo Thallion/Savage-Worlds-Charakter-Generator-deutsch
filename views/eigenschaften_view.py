@@ -501,11 +501,18 @@ class EigenschaftenWidget(MDBoxLayout):
                           key=lambda f: f.fertigkeit_name.lower(),
                           reverse=reverse)
 
-    def toggle_char_gen_completed(self, value):
-        """Umschaltet den Charakter-Generierungsstatus."""
+    def toggle_char_gen_completed(self):
+        """
+        Umschaltet den Charakter-Generierungsstatus.
+        Event-Handler für den Button (Android Checkbox Workaround).
+        """
         if self.controller and self.controller.charakter:
-            self.controller.charakter.char_gen_completed = value
-            Logger.debug(f"Charakter-Generierungsstatus geändert: {value}")
+            current_value = self.controller.charakter.char_gen_completed
+            new_value = not current_value
+            self.controller.charakter.char_gen_completed = new_value
+            # Lokale Property auch aktualisieren für UI-Update
+            self.char_gen_completed = new_value
+            Logger.debug(f"Charakter-Generierungsstatus geändert: {new_value}")
 
     def _update_char_gen_status(self, *args):
         if self.controller and self.controller.charakter:

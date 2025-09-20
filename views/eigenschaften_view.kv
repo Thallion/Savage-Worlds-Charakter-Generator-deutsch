@@ -27,20 +27,17 @@
                 size_hint_x: None
                 width: dp(300)  # Feste Breite statt dynamischer Berechnung
 
-                CheckBox:
-                    id: checkbox
-                    size_hint: None, None
-                    size: dp(48), dp(48)
-                    active: root.char_gen_completed
-                    on_active: root.toggle_char_gen_completed(self.active)
+                # Button für "Charaktergenerierung abgeschlossen" (Android Checkbox Workaround)
+                MDButton:
+                    id: char_gen_button
+                    size_hint_x: 1
+                    on_release: root.toggle_char_gen_completed()
                     pos_hint: {"center_y": .5}
-                
-                MDLabel:
-                    text: "Charaktergenerierung abgeschlossen"
-                    size_hint_x: 1  # Füllt den verfügbaren Platz
-                    halign: 'left'
-                    valign: 'middle'
-                    pos_hint: {"center_y": .5}
+                    
+                    MDButtonText:
+                        text: "Charaktergenerierung abschließen" if not root.char_gen_completed else "Charaktergenerierung aktivieren"
+                        theme_text_color: "Primary" if not root.char_gen_completed else "Custom"
+                        text_color: self.theme_cls.primaryColor if root.char_gen_completed else self.theme_cls.onSurfaceColor
 
             MDLabel:
                 text: 'Attribute'

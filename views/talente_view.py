@@ -691,25 +691,23 @@ class TalenteWidget(MDBoxLayout):
         self.dialog = None
         Clock.schedule_once(self.post_init, 0)
 
-    def toggle_only_selected_items(self, value):
+    def toggle_only_selected_items(self):
         """
         Schaltet den Filter für 'Nur ausgewählte Elemente' um.
-        Event-Handler für die Checkbox.
+        Event-Handler für den Button (Android Checkbox Workaround).
         """
-        self.only_selected_items = value
+        self.only_selected_items = not self.only_selected_items
         self.filter_talente()
-        Logger.debug(f"Filter 'Nur ausgewählte Talente' gesetzt auf: {value}")
+        Logger.debug(f"Filter 'Nur ausgewählte Talente' gesetzt auf: {self.only_selected_items}")
 
-    def toggle_only_available_talents(self, value):
+    def toggle_only_available_talents(self):
         """
         Schaltet den Filter für 'Nur Talente mit erfüllten Voraussetzungen' um.
-        
-        Args:
-            value (bool): Neuer Status der Checkbox
+        Event-Handler für den Button (Android Checkbox Workaround).
         """
-        self.only_available_talents = value
+        self.only_available_talents = not self.only_available_talents
         self.refresh_widget()
-        Logger.debug(f"Filter 'Nur verfügbare Talente' gesetzt auf: {value}")
+        Logger.debug(f"Filter 'Nur verfügbare Talente' gesetzt auf: {self.only_available_talents}")
 
     def _filter_talente_data(self, alle_talente, search_term, selected_kategorie):
         """

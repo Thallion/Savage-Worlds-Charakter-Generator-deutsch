@@ -11,83 +11,84 @@
     orientation: 'vertical'
     md_bg_color: app.theme_cls.backgroundColor
     
-    MDBoxLayout:
+    MDScrollView:
         size_hint_y: None
         height: 100
-        padding: [20, 5]
-        spacing: 5
-
-        TooltipIconButton:
-            id: sort_name_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
-            on_release: root.update_sort_option('Name')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_weight_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Gewicht sortieren" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "Gewicht absteigend sortieren"
-            on_release: root.update_sort_option('Gewicht')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_costs_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Kosten sortieren" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "Kosten absteigend sortieren"
-            on_release: root.update_sort_option('Kosten')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_amount_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Menge sortieren" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "Menge absteigend sortieren"
-            on_release: root.update_sort_option('Menge')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_category_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
-            on_release: root.update_sort_option('Kategorie')
-            pos_hint: {"center_y": .5}
-
-        MDTextField:
-            id: search_input
-            hint_text: 'Suche...'
-            size_hint_x: 1
-            on_text: root.filter_ausruestung()
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
 
         MDBoxLayout:
             orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(250)
-            spacing: dp(10)
-            
-            CheckBox:
-                id: only_owned_checkbox
-                size_hint: None, None
-                size: dp(48), dp(48)
-                active: root.only_owned_items
-                on_active: root.toggle_only_owned_items(self.active)
+            size_hint_y: None
+            height: dp(100)
+            padding: [20, 5]
+            spacing: 5
+
+            TooltipIconButton:
+                id: sort_name_btn
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
+                on_release: root.update_sort_option('Name')
                 pos_hint: {"center_y": .5}
+
+            TooltipIconButton:
+                id: sort_weight_btn
+                icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
+                tooltip_text: "Nach Gewicht sortieren" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "Gewicht absteigend sortieren"
+                on_release: root.update_sort_option('Gewicht')
+                pos_hint: {"center_y": .5}
+
+            TooltipIconButton:
+                id: sort_costs_btn
+                icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
+                tooltip_text: "Nach Kosten sortieren" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "Kosten absteigend sortieren"
+                on_release: root.update_sort_option('Kosten')
+                pos_hint: {"center_y": .5}
+
+            TooltipIconButton:
+                id: sort_amount_btn
+                icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
+                tooltip_text: "Nach Menge sortieren" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "Menge absteigend sortieren"
+                on_release: root.update_sort_option('Menge')
+                pos_hint: {"center_y": .5}
+
+            TooltipIconButton:
+                id: sort_category_btn
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
+                on_release: root.update_sort_option('Kategorie')
+                pos_hint: {"center_y": .5}
+
+            MDTextField:
+                id: search_input
+                hint_text: 'Suche...'
+                size_hint_x: 1
+                on_text: root.filter_ausruestung()
+
+            # Button für "Nur vorhandene" (Android Checkbox Workaround)
+            MDButton:
+                id: only_owned_button
+                size_hint_x: None
+                width: dp(180)
+                on_release: root.toggle_only_owned_items()
                 
-            MDLabel:
-                text: "Nur vorhandene"
-                size_hint_y: None
-                height: dp(40)
+                MDButtonText:
+                    text: "Nur vorhandene" if not root.only_owned_items else "Alle"
+                    theme_text_color: "Primary" if not root.only_owned_items else "Custom"
+                    text_color: self.theme_cls.primaryColor if root.only_owned_items else self.theme_cls.onSurfaceColor
+
+            TooltipIconButton:
+                icon: "filter"
+                tooltip_text: "Nach Kategorie filtern"
+                on_release: root.open_category_menu()
                 pos_hint: {"center_y": .5}
 
-        TooltipIconButton:
-            icon: "filter"
-            tooltip_text: "Nach Kategorie filtern"
-            on_release: root.open_category_menu()
-            pos_hint: {"center_y": .5}
-
-        MDLabel:
-            id: category_label
-            text: 'Alle Kategorien'
-            size_hint_x: 1
+            MDLabel:
+                id: category_label
+                text: 'Alle Kategorien'
+                size_hint_x: 1
 
     MDLabel:
         text: 'Ausrüstung'

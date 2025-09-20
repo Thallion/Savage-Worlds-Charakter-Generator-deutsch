@@ -6,91 +6,82 @@
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor  
     
-    MDBoxLayout:
+    MDScrollView:
         size_hint_y: None
         height: 100
-        padding: [20, 5]
-        spacing: 5
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
 
-        TooltipIconButton:
-            id: sort_name_btn
-            icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-            tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
-            on_release: root.update_sort_option('Name')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_rank_btn
-            icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
-            tooltip_text: "Nach Rang sortieren" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "Rang absteigend sortieren"
-            on_release: root.update_sort_option('Rang')
-            pos_hint: {"center_y": .5}
-
-        TooltipIconButton:
-            id: sort_category_btn
-            icon: "sort-reverse-variant" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-variant"
-            tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
-            on_release: root.update_sort_option('Kategorie')
-            pos_hint: {"center_y": .5}
-
-        MDTextField:
-            id: search_input
-            hint_text: 'Suche...'
-            size_hint_x: 1
-            on_text: root.filter_talente()
-
-        # Checkbox für "Nur ausgewählte" hinzufügen
         MDBoxLayout:
             orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(250)
-            spacing: dp(10)
-            
-            MDCheckbox:
-                id: only_selected_checkbox
-                size_hint: None, None
-                size: dp(48), dp(48)
-                active: root.only_selected_items
-                on_active: root.toggle_only_selected_items(self.active)
+            size_hint_y: None
+            height: dp(100)
+            padding: [20, 5]
+            spacing: 5
+
+            TooltipIconButton:
+                id: sort_name_btn
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
+                on_release: root.update_sort_option('Name')
                 pos_hint: {"center_y": .5}
+
+            TooltipIconButton:
+                id: sort_rank_btn
+                icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
+                tooltip_text: "Nach Rang sortieren" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "Rang absteigend sortieren"
+                on_release: root.update_sort_option('Rang')
+                pos_hint: {"center_y": .5}
+
+            TooltipIconButton:
+                id: sort_category_btn
+                icon: "sort-reverse-variant" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-variant"
+                tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
+                on_release: root.update_sort_option('Kategorie')
+                pos_hint: {"center_y": .5}
+
+            MDTextField:
+                id: search_input
+                hint_text: 'Suche...'
+                size_hint_x: 1
+                on_text: root.filter_talente()
+
+            # Button für "Nur ausgewählte" (Android Checkbox Workaround)
+            MDButton:
+                id: only_selected_button
+                size_hint_x: None
+                width: dp(180)
+                on_release: root.toggle_only_selected_items()
                 
-            MDLabel:
-                text: "Nur ausgewählte"
-                size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
+                MDButtonText:
+                    text: "Nur ausgewählte" if not root.only_selected_items else "Alle"
+                    theme_text_color: "Primary" if not root.only_selected_items else "Custom"
+                    text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
 
-        # Neue Checkbox für Voraussetzungen-Filter
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(290)
-            spacing: dp(10)
-            
-            MDCheckbox:
-                id: only_available_checkbox
-                size_hint: None, None
-                size: dp(48), dp(48)
-                active: root.only_available_talents
-                on_active: root.toggle_only_available_talents(self.active)
-                pos_hint: {"center_y": .5}
+            # Button für Voraussetzungen-Filter
+            MDButton:
+                id: only_available_button
+                size_hint_x: None
+                width: dp(200)
+                on_release: root.toggle_only_available_talents()
                 
-            MDLabel:
-                text: "Voraussetzung erfüllt"
-                size_hint_y: None
-                height: dp(40)
+                MDButtonText:
+                    text: "Voraussetzung erfüllt" if not root.only_available_talents else "Alle Talente"
+                    theme_text_color: "Primary" if not root.only_available_talents else "Custom"
+                    text_color: self.theme_cls.primaryColor if root.only_available_talents else self.theme_cls.onSurfaceColor
+
+            TooltipIconButton:
+                icon: "filter"
+                tooltip_text: "Nach Kategorie filtern"
+                on_release: root.open_category_menu()
                 pos_hint: {"center_y": .5}
 
-        TooltipIconButton:
-            icon: "filter"
-            tooltip_text: "Nach Kategorie filtern"
-            on_release: root.open_category_menu()
-            pos_hint: {"center_y": .5}
-
-        MDLabel:
-            id: category_label
-            text: 'Alle Kategorien'
-            size_hint_x: 1
+            MDLabel:
+                id: category_label
+                text: 'Alle Kategorien'
+                size_hint_x: 1
 
     MDBoxLayout:
         orientation: 'horizontal'

@@ -659,16 +659,15 @@ class HandicapsWidget(MDBoxLayout):
         Clock.schedule_once(self.post_init, 0)
 
 
-    def toggle_only_selected_items(self, checkbox, value):
+    def toggle_only_selected_items(self):
         """
         Schaltet den Filter für 'Nur ausgewählte Elemente' um.
-        Event-Handler für die Checkbox.
+        Event-Handler für den Button (Android Checkbox Workaround).
         """
-        if value:
-            self.only_selected_items = True
+        self.only_selected_items = not self.only_selected_items
+        if self.only_selected_items:
             Logger.debug(f"Filter 'Nur ausgewählte Handicaps' aktiviert")
         else:
-            self.only_selected_items = False
             Logger.debug(f"Filter 'Nur ausgewählte Handicaps' deaktiviert")
         
         self.filter_handicaps()
