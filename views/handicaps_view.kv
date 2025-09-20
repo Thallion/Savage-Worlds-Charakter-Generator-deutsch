@@ -24,15 +24,15 @@
         MDBoxLayout:
             orientation: 'horizontal'
             size_hint_x: None
-            width: dp(200)
-            spacing: dp(5)
+            width: dp(250)
+            spacing: dp(10)
             
-            CheckBox:
+            MDCheckbox:
                 id: only_selected_checkbox
                 size_hint: None, None
-                size: dp(40), dp(40)
+                size: dp(48), dp(48)
                 active: root.only_selected_items
-                on_active: root.toggle_only_selected_items(self.active)
+                on_active: root.toggle_only_selected_items(*args)
                 pos_hint: {"center_y": .5}
                 
             MDLabel:

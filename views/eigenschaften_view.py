@@ -18,7 +18,8 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
-from kivymd.uix.progressindicator.progressindicator import MDCircularProgressIndicator  # Aktualisierter Import für 2.0.1
+from kivymd.uix.progressindicator.progressindicator import \
+    MDCircularProgressIndicator  # Aktualisierter Import für 2.0.1
 
 from kivymd.uix.dialog import (
     MDDialog,
@@ -48,6 +49,7 @@ FILTER_OPTIONEN = {
 import os
 import sys
 
+
 # PyInstaller-kompatibles Laden der KV-Datei
 def load_kv_file():
     if getattr(sys, 'frozen', False):
@@ -58,13 +60,15 @@ def load_kv_file():
         # Normale Ausführung
         base_path = os.path.dirname(os.path.dirname(__file__))
         kv_path = os.path.join(base_path, 'views', 'eigenschaften_view.kv')
-    
+
     if os.path.exists(kv_path):
         Builder.load_file(kv_path)
     else:
         Logger.error(f"eigenschaften_view: KV-Datei nicht gefunden: {kv_path}")
 
+
 load_kv_file()
+
 
 # Kein Dialog mehr benötigt, stattdessen nur der Indicator
 
@@ -76,15 +80,15 @@ class IconCache:
     Cache für häufig verwendete Icons, um wiederholtes Laden zu vermeiden.
     Implements Singleton-Pattern für effizientes Resource-Management.
     """
-    # Vorberechnete Icons für häufige Werte 
+    # Vorberechnete Icons für häufige Werte
     _DICE_ICONS = {
-        4: "dice-d4", 
-        6: "dice-d6", 
-        8: "dice-d8", 
-        10: "dice-d10", 
+        4: "dice-d4",
+        6: "dice-d6",
+        8: "dice-d8",
+        10: "dice-d10",
         12: "dice-d12"
     }
-    
+
     _MODIFIER_ICONS = {
         0: "numeric-0",
         1: "numeric-1",
@@ -98,21 +102,21 @@ class IconCache:
         9: "numeric-9",
         10: "numeric-10"
     }
-    
+
     _MODIFIER_SIGNS = {
         True: "plus",  # positiver Modifier
         False: "minus"  # negativer Modifier
     }
-    
+
     @classmethod
     def get_dice_icon(cls, wert):
         """Gibt ein gecachtes Würfel-Icon für einen Würfelwert zurück"""
         cache_key = f"dice_{wert}"
-        
+
         icon = Cache.get('wuerfel_icons', cache_key)
         if icon:
             return icon
-        
+
         icon = cls._DICE_ICONS.get(wert, f"dice-d{wert}")
         Cache.append('wuerfel_icons', cache_key, icon)
         return icon
@@ -122,60 +126,60 @@ class IconCache:
         """
         Gibt ein gecachtes numerisches Icon für einen Modifier zurück.
         Bei zweistelligen Zahlen wird nur die erste Ziffer zurückgegeben.
-        
+
         Returns:
             str: Der Icon-Name für den Modifikator
         """
         abs_mod = abs(modifier)
-        
+
         # Für einstellige und 10 direkt zurückgeben
         if abs_mod <= 10:
             cache_key = f"mod_{abs_mod}"
             icon = Cache.get('wuerfel_icons', cache_key)
             if icon:
                 return icon
-                
+
             icon = cls._MODIFIER_ICONS.get(abs_mod, f"numeric-{abs_mod}")
             Cache.append('wuerfel_icons', cache_key, icon)
             return icon
-        
+
         # Bei zweistelligen Zahlen die erste Ziffer zurückgeben
         first_digit = abs_mod // 10
         cache_key = f"mod_{first_digit}"
         icon = Cache.get('wuerfel_icons', cache_key)
         if icon:
             return icon
-            
+
         icon = cls._MODIFIER_ICONS.get(first_digit, f"numeric-{first_digit}")
         Cache.append('wuerfel_icons', cache_key, icon)
         return icon
-    
+
     @classmethod
     def get_second_digit_icon(cls, modifier):
         """
         Gibt ein gecachtes numerisches Icon für die zweite Ziffer eines zweistelligen Modifikators zurück.
-        
+
         Returns:
             str: Der Icon-Name für die zweite Ziffer, oder None wenn einstellig
         """
         abs_mod = abs(modifier)
-        
+
         # Wenn einstellig oder genau 10, keine zweite Ziffer
         if abs_mod <= 10:
             return None
-            
+
         # Bei zweistelligen Zahlen die zweite Ziffer zurückgeben
         second_digit = abs_mod % 10
         cache_key = f"mod_{second_digit}"
-        
+
         icon = Cache.get('wuerfel_icons', cache_key)
         if icon:
             return icon
-            
+
         icon = cls._MODIFIER_ICONS.get(second_digit, f"numeric-{second_digit}")
         Cache.append('wuerfel_icons', cache_key, icon)
         return icon
-        
+
     @classmethod
     def get_modifier_sign(cls, is_positive):
         """Gibt das entsprechende Vorzeichen-Icon zurück"""
@@ -190,7 +194,6 @@ class EigenschaftenWidget(MDBoxLayout):
     _update_ausstehend = False
     _thread = None
     char_gen_completed = BooleanProperty(False)
-
 
     def __init__(self, **kwargs):
         """Initialisiert das EigenschaftenWidget mit verzögertem Setup"""
@@ -222,7 +225,7 @@ class EigenschaftenWidget(MDBoxLayout):
         self._initialisiere_controller()
         self._initialisiere_sortieroptionen()
         self._initialisiere_menues()
-        
+
         # Starte Thread für das Laden der Daten
         self._thread = Thread(target=self._lade_daten_im_hintergrund)
         self._thread.daemon = True
@@ -253,11 +256,11 @@ class EigenschaftenWidget(MDBoxLayout):
         try:
             # Zugriff auf Charakterdaten
             charakter = self.controller.charakter
-            
+
             # Attribut-Daten vorverarbeiten
             attribute_liste = list(charakter.attribute.values())
             attribute_widgets = []
-            
+
             # Vorbereite Attribute-Widgets
             for attribut in attribute_liste:
                 item = {
@@ -271,11 +274,11 @@ class EigenschaftenWidget(MDBoxLayout):
                     'has_modifier': attribut.modifier != 0
                 }
                 attribute_widgets.append(item)
-            
+
             # Fertigkeiten vorverarbeiten
             fertigkeiten_liste = self._hole_gefilterte_fertigkeiten(charakter)
             fertigkeiten_liste = self._sortiere_fertigkeiten(fertigkeiten_liste)
-            
+
             # Fertigkeiten-Widgets vorbereiten
             fertigkeiten_widgets = []
             for fertigkeit in fertigkeiten_liste:
@@ -290,55 +293,55 @@ class EigenschaftenWidget(MDBoxLayout):
                     'has_modifier': fertigkeit.modifier != 0
                 }
                 fertigkeiten_widgets.append(item)
-            
+
             # Aufbereitet Daten an den Hauptthread senden
             self._aktualisiere_ui_im_hauptthread(attribute_widgets, fertigkeiten_widgets)
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Laden der Daten im Hintergrund: {e}")
             # Fehler behandeln und Indicator entfernen
             self._entferne_lade_indicator()
-    
+
     @mainthread
     def _aktualisiere_ui_im_hauptthread(self, attribute_widgets, fertigkeiten_widgets):
         """Aktualisiert die UI im Hauptthread mit den vorbereiteten Daten"""
         # Entferne Lade-Indicator
         self._entferne_lade_indicator()
-        
+
         # Füge Attribute-Widgets hinzu
         if hasattr(self, 'attribute_layout'):
             self.attribute_layout.clear_widgets()
             for widget_data in attribute_widgets:
                 item = EigenschaftenItemRow(**widget_data)
                 self.attribute_layout.add_widget(item)
-        
+
         # Füge Fertigkeiten-Widgets hinzu (mit Lazy-Loading)
         if hasattr(self, 'fertigkeiten_layout'):
             self.fertigkeiten_layout.clear_widgets()
             self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(fertigkeiten_widgets)
-    
+
     def _fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(self, fertigkeiten_widgets):
         """Fügt Fertigkeiten-Widgets stufenweise hinzu, um UI-Ruckler zu vermeiden"""
         BATCH_SIZE = 30  # Anzahl der Widgets pro Batch
-        
+
         if not fertigkeiten_widgets:
             return
-            
+
         batch = fertigkeiten_widgets[:BATCH_SIZE]
         rest = fertigkeiten_widgets[BATCH_SIZE:]
-        
+
         # Aktuellen Batch hinzufügen
         for widget_data in batch:
             item = EigenschaftenItemRow(**widget_data)
             self.fertigkeiten_layout.add_widget(item)
-        
+
         # Rest verzögert laden
         if rest:
             Clock.schedule_once(
-                lambda dt: self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(rest), 
+                lambda dt: self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(rest),
                 0.05
             )
-    
+
     @mainthread
     def _entferne_lade_indicator(self):
         """Entfernt den Ladeindikator aus dem Layout"""
@@ -418,13 +421,13 @@ class EigenschaftenWidget(MDBoxLayout):
     def _starte_update_thread(self, dt):
         """Startet einen Thread für das Daten-Update"""
         self._update_ausstehend = False
-        
+
         # Sicherstellen, dass kein anderer Thread läuft
         if self._thread and self._thread.is_alive():
             # Warten, bis der Thread beendet ist - sollte normalerweise nicht vorkommen
-            self._thread.join(0.5) 
-        
-        # Neuen Thread starten
+            self._thread.join(0.5)
+
+            # Neuen Thread starten
         self._thread = Thread(target=self._lade_daten_im_hintergrund)
         self._thread.daemon = True
         self._thread.start()
@@ -432,7 +435,7 @@ class EigenschaftenWidget(MDBoxLayout):
     def _aktualisiere_sort_option(self):
         """Aktualisiert die Sortieroptionen basierend auf der Auswahl"""
         selected_text = self.ids.sort_spinner.text
-        
+
         # Parse die ausgewählte Option
         if ' (aufsteigend)' in selected_text:
             sort_option = selected_text.replace(' (aufsteigend)', '')
@@ -466,37 +469,37 @@ class EigenschaftenWidget(MDBoxLayout):
     def update_eigenschaften(self):
         """Öffentliche API-Methode für den Controller"""
         self._plane_update(None)
-    
+
     def _hole_gefilterte_fertigkeiten(self, charakter):
         """Wendet Filter auf die Fertigkeiten-Liste an (Thread-sicher)"""
         fertigkeiten_liste = list(charakter.fertigkeiten.values())
-        
+
         # Filterung anwenden
         if self.filter_aktiviert == FILTER_OPTIONEN["AKTIV"]:
             return [f for f in fertigkeiten_liste if f.modifier != -2]
         elif self.filter_aktiviert == FILTER_OPTIONEN["INAKTIV"]:
             return [f for f in fertigkeiten_liste if f.modifier == -2]
-        
+
         # Keine Filterung für "Alle Fertigkeiten"
         return fertigkeiten_liste
-    
+
     def _sortiere_fertigkeiten(self, fertigkeiten_liste):
         """Sortiert die Fertigkeiten-Liste (Thread-sicher)"""
         reverse = (self.sort_order == 'desc')
-        
+
         if self.current_sort_field == 'item_name':
-            return sorted(fertigkeiten_liste, 
-                         key=lambda f: f.fertigkeit_name.lower(), 
-                         reverse=reverse)
+            return sorted(fertigkeiten_liste,
+                          key=lambda f: f.fertigkeit_name.lower(),
+                          reverse=reverse)
         elif self.current_sort_field == 'wert':
             return sorted(fertigkeiten_liste,
-                         key=lambda f: (f.wert if f.wert is not None else 0), 
-                         reverse=reverse)
+                          key=lambda f: (f.wert if f.wert is not None else 0),
+                          reverse=reverse)
         else:
             # Standardmäßig nach Name sortieren
-            return sorted(fertigkeiten_liste, 
-                         key=lambda f: f.fertigkeit_name.lower(), 
-                         reverse=reverse)
+            return sorted(fertigkeiten_liste,
+                          key=lambda f: f.fertigkeit_name.lower(),
+                          reverse=reverse)
 
     def toggle_char_gen_completed(self, value):
         """Umschaltet den Charakter-Generierungsstatus."""
@@ -508,6 +511,7 @@ class EigenschaftenWidget(MDBoxLayout):
         if self.controller and self.controller.charakter:
             self.char_gen_completed = self.controller.charakter.char_gen_completed
 
+
 class EigenschaftenItemRow(MDBoxLayout):
     """
     Einzelne Zeile für ein Attribut oder eine Fertigkeit.
@@ -518,7 +522,7 @@ class EigenschaftenItemRow(MDBoxLayout):
     item_obj = ObjectProperty(None)
     item_type = StringProperty('')
     controller = ObjectProperty(None)
-    
+
     # Icons (voroptimiert in der __init__)
     dice_icon = StringProperty('dice-d6')
     modifier_sign = StringProperty('minus')
@@ -526,38 +530,38 @@ class EigenschaftenItemRow(MDBoxLayout):
     second_digit_icon = StringProperty('numeric-0')  # Neu: Icon für die zweite Ziffer
     has_modifier = BooleanProperty(False)
     has_second_digit = BooleanProperty(False)  # Neu: Zeigt an, ob eine zweite Ziffer vorhanden ist
-    
+
     # Dictionary zum Cachen von eigenschaften
     eigenschaften_cache = DictProperty({})
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        
+
         # Werte sofort bei der Initialisierung vorberechnen
         if self.item_obj:
             self._update_eigenschaften_cache()
             # Bindings mit Verzögerung einrichten
             self.item_obj.bind(wert=self._plane_update)
             self.item_obj.bind(modifier=self._plane_update)
-    
+
     def _update_eigenschaften_cache(self):
         """Aktualisiert den Cache der Eigenschaften"""
         if not self.item_obj:
             return
-            
+
         self.eigenschaften_cache.update({
             'wert': self.item_obj.wert,
             'modifier': self.item_obj.modifier,
         })
-        
+
     def _plane_update(self, instance, value):
         """Plant ein Update mit Verzögerung"""
         # Prüfen, ob sich relevante Werte tatsächlich geändert haben
         if (self.eigenschaften_cache.get('wert') != self.item_obj.wert or
-            self.eigenschaften_cache.get('modifier') != self.item_obj.modifier):
+                self.eigenschaften_cache.get('modifier') != self.item_obj.modifier):
             # Nur bei Änderung aktualisieren
             Clock.schedule_once(self._verzoeges_update, 0.05)
-    
+
     def _verzoeges_update(self, dt):
         """Führt ein verzögertes Update der Anzeige aus"""
         self._update_eigenschaften_cache()
@@ -567,21 +571,21 @@ class EigenschaftenItemRow(MDBoxLayout):
         """Aktualisiert die Würfel-Icons effizient aus dem Cache"""
         if not self.item_obj:
             return
-            
+
         # Werte aus dem Cache oder direkt aus dem Objekt holen
         wert = self.eigenschaften_cache.get('wert', self.item_obj.wert)
         modifier = self.eigenschaften_cache.get('modifier', self.item_obj.modifier)
-        
+
         # Optimierte Icon-Zuweisung
         self.dice_icon = IconCache.get_dice_icon(wert)
-        
+
         # Modifier-Anzeige
         if modifier != 0:
             self.has_modifier = True
             is_positive = modifier > 0
             self.modifier_sign = IconCache.get_modifier_sign(is_positive)
             self.modifier_value_icon = IconCache.get_modifier_icon(modifier)
-            
+
             # Prüfen, ob zweistellig und zweites Icon setzen
             second_digit_icon = IconCache.get_second_digit_icon(modifier)
             if second_digit_icon:
@@ -598,7 +602,7 @@ class EigenschaftenItemRow(MDBoxLayout):
         if not self.controller:
             Logger.error("EigenschaftenItemRow: controller ist nicht gesetzt")
             return
-                
+
         if self.item_type == 'attribute':
             self.controller.steigere_attribut(self.item_name)
         elif self.item_type == 'fertigkeit':
@@ -616,7 +620,7 @@ class EigenschaftenItemRow(MDBoxLayout):
             padding=dp(20),
             adaptive_height=True
         )
-        
+
         # Label mit ausreichender Höhe und ohne Größenbeschränkung
         warning_label = MDLabel(
             text="Vorsicht doppelte Kosten, wenn die Fertigkeit das zugehörige Attribut übersteigt! Trotzdem steigern?",
@@ -627,7 +631,7 @@ class EigenschaftenItemRow(MDBoxLayout):
             valign="middle"
         )
         content.add_widget(warning_label)
-        
+
         self.dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Kosten-Warnung",
@@ -668,7 +672,7 @@ class EigenschaftenItemRow(MDBoxLayout):
         if not self.controller:
             Logger.error("EigenschaftenItemRow: controller ist nicht gesetzt")
             return
-            
+
         if self.item_type == 'attribute':
             self.controller.senke_attribut(self.item_name)
         elif self.item_type == 'fertigkeit':

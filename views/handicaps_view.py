@@ -23,6 +23,7 @@ from kivymd.uix.dialog import (
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
+from kivymd.uix.selectioncontrol import MDCheckbox
 
 # Import für Dialog Service
 from services.service_container import get_dialog_service
@@ -658,14 +659,19 @@ class HandicapsWidget(MDBoxLayout):
         Clock.schedule_once(self.post_init, 0)
 
 
-    def toggle_only_selected_items(self, value):
+    def toggle_only_selected_items(self, checkbox, value):
         """
         Schaltet den Filter für 'Nur ausgewählte Elemente' um.
         Event-Handler für die Checkbox.
         """
-        self.only_selected_items = value
+        if value:
+            self.only_selected_items = True
+            Logger.debug(f"Filter 'Nur ausgewählte Handicaps' aktiviert")
+        else:
+            self.only_selected_items = False
+            Logger.debug(f"Filter 'Nur ausgewählte Handicaps' deaktiviert")
+        
         self.filter_handicaps()
-        Logger.debug(f"Filter 'Nur ausgewählte Handicaps' gesetzt auf: {value}")
 
     def _filter_handicaps_data(self, alle_handicaps, search_term, selected_stufe):
         """

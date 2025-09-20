@@ -24,6 +24,7 @@ from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
+from kivymd.uix.selectioncontrol import MDCheckbox
 
 # Import für Dialog Service
 from services.service_container import get_dialog_service

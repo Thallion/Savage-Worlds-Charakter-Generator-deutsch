@@ -27,6 +27,7 @@ from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
+from kivymd.uix.selectioncontrol import MDCheckbox
 
 # Import der Funktionen für Voraussetzungsprüfung
 from functions.talent_funktionen import (
