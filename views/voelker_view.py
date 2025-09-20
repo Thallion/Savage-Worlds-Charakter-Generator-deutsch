@@ -478,18 +478,37 @@ class VoelkerWidget(MDBoxLayout):
             search_hint = MDTextFieldHintText(text="Suchen...")
             search_field.add_widget(search_hint)
             
-            # Scrollbare Liste
+            # Scrollbare Liste mit breiterem Scroll-Bereich für Android
             scroll_view = MDScrollView(
                 size_hint_y=None,
-                height=dp(300)
+                height=dp(300),
+                bar_width=dp(30),
+                bar_margin=dp(0),
+                bar_color=self.theme_cls.primaryColor,
+                bar_inactive_color=self.theme_cls.onSurfaceColor
             )
+            
+            # Container für Liste mit Padding rechts für Scroll-Bereich
+            list_container = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None
+            )
+            list_container.bind(minimum_height=list_container.setter('height'))
             
             # KORRIGIERT: size_hint_y statt adaptive_height
             items_list = MDList(
-                size_hint_y=None
+                size_hint_y=None,
+                size_hint_x=1
             )
             # Höhe der Liste berechnen basierend auf Items
             items_list.bind(minimum_height=items_list.setter('height'))
+            
+            # Rechter Bereich für besseres Scrolling (nicht anklickbar)
+            scroll_zone = MDBoxLayout(
+                size_hint_x=None,
+                width=dp(40),
+                size_hint_y=1
+            )
             
             # Items zur Liste hinzufügen - KORRIGIERT: Feste Höhe für MDListItem
             for item in sorted(items):
@@ -502,7 +521,10 @@ class VoelkerWidget(MDBoxLayout):
                     list_item.add_widget(MDListItemHeadlineText(text=str(item)))
                     items_list.add_widget(list_item)
             
-            scroll_view.add_widget(items_list)
+            # Container zusammenbauen
+            list_container.add_widget(items_list)
+            list_container.add_widget(scroll_zone)
+            scroll_view.add_widget(list_container)
             
             # Such-Funktionalität
             def filter_items(instance, text):
