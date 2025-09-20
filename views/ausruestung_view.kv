@@ -11,9 +11,24 @@
     orientation: 'vertical'
     md_bg_color: app.theme_cls.backgroundColor
     
+    # Suchfeld separat außerhalb des ScrollView für besseren Keyboard-Fokus
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(100)
+        padding: [20, 10]
+        spacing: 10
+        
+        MDTextField:
+            id: search_input
+            hint_text: 'Suche...'
+            size_hint_x: 1
+            on_text: root.filter_ausruestung()
+    
+    # Toggle-Buttons in ScrollView für Android-Kompatibilität  
     MDScrollView:
         size_hint_y: None
-        height: 100
+        height: dp(120)
         do_scroll_x: False
         do_scroll_y: True
         bar_width: dp(15)
@@ -22,56 +37,63 @@
         MDBoxLayout:
             orientation: 'horizontal'
             size_hint_y: None
-            height: dp(100)
-            padding: [20, 5]
-            spacing: 5
+            height: dp(120)
+            padding: [20, 10]
+            spacing: 10
 
-            TooltipIconButton:
+            MDFabButton:
                 id: sort_name_btn
                 icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-                tooltip_text: "Nach Namen sortieren" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "Namen absteigend sortieren"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Name')
-                pos_hint: {"center_y": .5}
 
-            TooltipIconButton:
+            MDFabButton:
                 id: sort_weight_btn
                 icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
-                tooltip_text: "Nach Gewicht sortieren" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "Gewicht absteigend sortieren"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Gewicht')
-                pos_hint: {"center_y": .5}
 
-            TooltipIconButton:
+            MDFabButton:
                 id: sort_costs_btn
                 icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
-                tooltip_text: "Nach Kosten sortieren" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "Kosten absteigend sortieren"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Kosten')
-                pos_hint: {"center_y": .5}
 
-            TooltipIconButton:
+            MDFabButton:
                 id: sort_amount_btn
                 icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
-                tooltip_text: "Nach Menge sortieren" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "Menge absteigend sortieren"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Menge')
-                pos_hint: {"center_y": .5}
 
-            TooltipIconButton:
+            MDFabButton:
                 id: sort_category_btn
                 icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-                tooltip_text: "Nach Kategorie sortieren" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "Kategorie absteigend sortieren"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Kategorie')
-                pos_hint: {"center_y": .5}
-
-            MDTextField:
-                id: search_input
-                hint_text: 'Suche...'
-                size_hint_x: 1
-                on_text: root.filter_ausruestung()
 
             # Button für "Nur vorhandene" (Android Checkbox Workaround)
             MDButton:
                 id: only_owned_button
                 size_hint_x: None
+                size_hint_y: None
                 width: dp(180)
+                height: dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.toggle_only_owned_items()
                 
                 MDButtonText:
@@ -79,11 +101,13 @@
                     theme_text_color: "Primary" if not root.only_owned_items else "Custom"
                     text_color: self.theme_cls.primaryColor if root.only_owned_items else self.theme_cls.onSurfaceColor
 
-            TooltipIconButton:
+            MDFabButton:
                 icon: "filter"
-                tooltip_text: "Nach Kategorie filtern"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
                 on_release: root.open_category_menu()
-                pos_hint: {"center_y": .5}
 
             MDLabel:
                 id: category_label
@@ -176,13 +200,13 @@
             text_size: self.width, None
     
     # Info-Button als eigene Spalte
-    MDIconButton:
+    MDFabButton:
         icon: "information-outline"
+        style: "small"
         size_hint: None, None
-        size: dp(24), dp(24)
+        size: dp(32), dp(32)
         pos_hint: {"center_y": 0.5}
         on_release: root.show_full_description()
-        theme_icon_color: "Primary"
         opacity: 1 if root.beschreibung else 0
         disabled: not root.beschreibung
     
