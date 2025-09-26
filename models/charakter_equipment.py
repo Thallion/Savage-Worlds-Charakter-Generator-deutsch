@@ -1,4 +1,4 @@
-#charakter_equipment.py
+ #charakter_equipment.py
 """
 Ausrüstungsverwaltung für die Charakter-Klasse.
 """

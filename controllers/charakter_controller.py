@@ -11,6 +11,7 @@ from models.macht import Macht
 import logging
 import traceback
 import copy
+import time
 
 # Einfacher Filter für FocusBehavior-Warnungen
 class WarningFilter(logging.Filter):
@@ -60,6 +61,9 @@ class CharakterController(EventDispatcher):
 
         # Charakter-Ereignisse mit Controller-Methoden verbinden
         self.charakter.bind(on_charakter_change=self.on_model_change)
+        
+        # Android Double-Touch Protection - Verhindert echte Doppelklicks
+        self._last_transaction_time = {}
 
         Logger.info("CharakterController initialisiert")
 
@@ -605,6 +609,18 @@ class CharakterController(EventDispatcher):
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
+        # Android Double-Touch Protection: Verhindert Dialog-Doppelaufrufe
+        transaction_key = f"buy_{item_name}"
+        current_time = time.time() * 1000  # Millisekunden
+        
+        if transaction_key in self._last_transaction_time:
+            last_time = self._last_transaction_time[transaction_key]
+            if current_time - last_time < 500:  # 500ms für Android-Dialog-Doppelaufrufe
+                Logger.debug(f"Kauf von {item_name} ignoriert - Android Dialog-Doppelaufruf verhindert")
+                return False
+        
+        self._last_transaction_time[transaction_key] = current_time
+        
         try:
             # Prüfen, ob der Gegenstand existiert
             if item_name in self.charakter.ausruestung:
@@ -635,6 +651,18 @@ class CharakterController(EventDispatcher):
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
+        # Android Double-Touch Protection: Verhindert Dialog-Doppelaufrufe  
+        transaction_key = f"sell_{item_name}"
+        current_time = time.time() * 1000  # Millisekunden
+        
+        if transaction_key in self._last_transaction_time:
+            last_time = self._last_transaction_time[transaction_key]
+            if current_time - last_time < 500:  # 500ms für Android-Dialog-Doppelaufrufe
+                Logger.debug(f"Verkauf von {item_name} ignoriert - Android Dialog-Doppelaufruf verhindert")
+                return False
+        
+        self._last_transaction_time[transaction_key] = current_time
+        
         try:
             # Prüfen, ob der Gegenstand existiert
             if item_name in self.charakter.ausruestung:

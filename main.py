@@ -10,6 +10,9 @@ from functools import partial
 import re
 import webbrowser
 
+# Logging-Setup als erstes importieren und initialisieren
+from utils.logging_setup import setup_file_logging, cleanup_old_logs, log_system_info
+
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
@@ -73,10 +76,32 @@ class SW_Charakter_GeneratorApp(MDApp):
         super().__init__(**kwargs)
         Logger.info("Init SW_Charakter_GeneratorApp")
         
+        # File-Logging als erstes initialisieren
+        try:
+            self.log_filepath = setup_file_logging("SavageWorldsCharakterGenerator")
+            cleanup_old_logs()  # Alte Logs bereinigen
+            log_system_info()   # System-Info loggen
+            Logger.info(f"Session-Logging aktiviert: {self.log_filepath}")
+            logging.info("=== App-Initialisierung gestartet ===")
+            
+            # Log-Pfad für einfache Anzeige speichern
+            if self.log_filepath:
+                self.log_directory = os.path.dirname(self.log_filepath)
+            else:
+                self.log_directory = None
+                
+        except Exception as e:
+            Logger.error(f"Konnte File-Logging nicht initialisieren: {str(e)}")
+            self.log_filepath = None
+            self.log_directory = None
+        
         # Ressourcen-Extraktion für PyInstaller EXE
         from utils.resource_extractor import resource_extractor
         if not resource_extractor.extract_resources():
             Logger.error("Fehler bei Ressourcen-Extraktion")
+            logging.error("Ressourcen-Extraktion fehlgeschlagen")
+        else:
+            logging.info("Ressourcen erfolgreich extrahiert")
         
         # KORRIGIERT: Frühe Controller-Initialisierung für Service Container
         self.charakter = Charakter()
@@ -85,6 +110,7 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Service Container früh initialisieren
         service_container.initialize(self.controller)
         Logger.info("Service Container früh initialisiert")
+        logging.info("Service Container erfolgreich initialisiert")
         
         # Deine Icons + Tab-Texte + zugehörige Screens
         # NEU: Historie-Tab hinzugefügt
@@ -605,6 +631,59 @@ class SW_Charakter_GeneratorApp(MDApp):
             
         except Exception as e:
             Logger.error(f"Fehler bei Widget-Registrierung für '{tab_name}': {str(e)}")
+    
+    def show_log_info(self):
+        """Zeigt Informationen über die Log-Dateien in einem Dialog."""
+        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.boxlayout import MDBoxLayout
+        
+        content = MDBoxLayout(orientation="vertical", spacing="12dp", adaptive_height=True)
+        
+        if self.log_filepath:
+            # Log-Datei-Info
+            info_label = MDLabel(
+                text=f"Aktuelle Log-Datei:\n{self.log_filepath}\n\nLog-Ordner:\n{self.log_directory}",
+                size_hint_y=None,
+                theme_text_color="Primary",
+                halign="left"
+            )
+            info_label.bind(texture_size=info_label.setter('size'))
+            content.add_widget(info_label)
+            
+            # Android-spezifische Hilfe
+            from kivy.utils import platform
+            if platform == 'android':
+                help_label = MDLabel(
+                    text="Auf Android findest du die Logs hier:\n• Dateimanager → Interner Speicher → SavageWorldsCharGen → logs\n• Oder: /sdcard/SavageWorldsCharGen/logs/",
+                    size_hint_y=None,
+                    theme_text_color="Secondary",
+                    halign="left"
+                )
+                help_label.bind(texture_size=help_label.setter('size'))
+                content.add_widget(help_label)
+        else:
+            error_label = MDLabel(
+                text="Logging ist nicht aktiv oder fehlgeschlagen.",
+                size_hint_y=None,
+                theme_text_color="Error",
+                halign="left"
+            )
+            error_label.bind(texture_size=error_label.setter('size'))
+            content.add_widget(error_label)
+        
+        dialog = MDDialog(
+            title="Log-Dateien Information",
+            content_cls=content,
+            buttons=[
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    on_release=lambda x: dialog.dismiss()
+                )
+            ]
+        )
+        dialog.open()
 
 
 if __name__ == "__main__":

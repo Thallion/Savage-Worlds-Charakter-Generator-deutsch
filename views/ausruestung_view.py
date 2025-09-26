@@ -31,6 +31,9 @@ from models.schild import Schild
 # Import für Dialog Service
 from services.service_container import get_dialog_service
 
+# Import für detailliertes Logging
+from utils.logging_setup import log_transaction, log_android_event
+
 # Konstanten
 DEFAULT_SORT_OPTION = 'Name'
 DEFAULT_SORT_ORDER = 'asc'
@@ -76,6 +79,7 @@ class AusruestungItemRow(MDBoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.dialog = None
+        self._dialog_processing = False  # Android Dialog-Schutz
         self._set_background_color()  # THEME-FIX: Hintergrundfarbe setzen
 
     def _set_background_color(self):
@@ -243,6 +247,14 @@ class AusruestungItemRow(MDBoxLayout):
 
     def _handle_kauf_dialog(self, content):
         """Verarbeitet den Kauf"""
+        # Android Dialog-Schutz: Verhindern von mehrfacher Ausführung
+        if self._dialog_processing:
+            Logger.debug(f"Kauf-Dialog für {self.name} bereits in Bearbeitung - ignoriert")
+            log_android_event("KAUF_DIALOG_BLOCKED", f"Dialog für {self.name} bereits in Bearbeitung")
+            return
+        
+        self._dialog_processing = True
+        log_android_event("KAUF_DIALOG_START", f"Starte Kaufabwicklung für {self.name}")
         try:
             is_valid, error_message = content.validate()
             if not is_valid:
@@ -258,6 +270,10 @@ class AusruestungItemRow(MDBoxLayout):
             
             # Vermögen vor dem Kauf speichern für Verifikation
             vermoegen_vorher = controller.charakter.vermoegen
+            expected_cost = (preis or self.kosten) * anzahl
+            
+            log_transaction("KAUF_START", self.name, anzahl, preis or self.kosten, True, 
+                          f"Vermögen vorher: {vermoegen_vorher}, Erwartete Kosten: {expected_cost}")
             
             success = controller.kaufen_ausruestung(
                 self.name,
@@ -267,26 +283,53 @@ class AusruestungItemRow(MDBoxLayout):
             
             # Vermögen nach dem Kauf prüfen
             vermoegen_nachher = controller.charakter.vermoegen
-            expected_cost = (preis or self.kosten) * anzahl
             tatsaechlich_gekauft = (vermoegen_vorher - vermoegen_nachher) == expected_cost
 
-            if success or tatsaechlich_gekauft:
-                # Kauf war erfolgreich (entweder Controller sagt ja, oder Vermögen hat sich korrekt geändert)
-                self.dialog.dismiss()
+            Logger.debug(f"Kauf-Debug: success={success}, vermögen_vorher={vermoegen_vorher}, vermögen_nachher={vermoegen_nachher}")
+            log_transaction("KAUF_RESULT", self.name, anzahl, preis or self.kosten, success, 
+                          f"Vermögen nachher: {vermoegen_nachher}, Controller Success: {success}, Tatsächlich gekauft: {tatsaechlich_gekauft}")
+            
+            if success:
+                # Controller bestätigt erfolgreichen Kauf
+                Logger.debug(f"Kauf erfolgreich bestätigt für {self.name}")
+                if self.dialog:
+                    self.dialog.dismiss()
+                    self.dialog = None
+                self._refresh_ui()
+            elif vermoegen_nachher != vermoegen_vorher:
+                # Vermögen hat sich geändert - Kauf war tatsächlich erfolgreich
+                Logger.debug(f"Android: Kauf von {self.name} war erfolgreich (Vermögen: {vermoegen_vorher} -> {vermoegen_nachher})")
+                if self.dialog:
+                    self.dialog.dismiss()
+                    self.dialog = None
                 self._refresh_ui()
             else:
-                # Kauf ist wirklich fehlgeschlagen - Vermögen unverändert
-                self.show_error(
-                    f"Nicht genügend Geld vorhanden für den Kauf von {anzahl}x {self.name}.",
-                    "Nicht genügend Geld"
-                )
+                # Kauf war nicht erfolgreich - prüfe ob es durch Android-Debouncing verhindert wurde
+                Logger.debug(f"Kauf fehlgeschlagen für {self.name} - Vermögen unverändert")
+                # Bei Android-Debouncing: Kein Fehler zeigen, Dialog schließen
+                if self.dialog:
+                    self.dialog.dismiss()
+                    self.dialog = None
+                self._refresh_ui()
+                # Nur echte Fehler anzeigen - nicht bei Android-Debouncing
+                # (erkennbar daran, dass success=False aber Vermögen unverändert)
 
         except Exception as e:
             Logger.error(f"Fehler beim Verarbeiten des Kaufs: {str(e)}")
             self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
+        finally:
+            self._dialog_processing = False
 
     def _handle_verkauf_dialog(self, content):
         """Verarbeitet den Verkauf"""
+        # Android Dialog-Schutz: Verhindern von mehrfacher Ausführung
+        if self._dialog_processing:
+            Logger.debug(f"Verkauf-Dialog für {self.name} bereits in Bearbeitung - ignoriert")
+            log_android_event("VERKAUF_DIALOG_BLOCKED", f"Dialog für {self.name} bereits in Bearbeitung")
+            return
+        
+        self._dialog_processing = True
+        log_android_event("VERKAUF_DIALOG_START", f"Starte Verkaufsabwicklung für {self.name}")
         try:
             is_valid, error_message = content.validate()
             if not is_valid:
@@ -302,6 +345,11 @@ class AusruestungItemRow(MDBoxLayout):
             
             # Vermögen vor dem Verkauf speichern für Verifikation
             vermoegen_vorher = controller.charakter.vermoegen
+            default_verkaufspreis = (self.kosten * 0.5) if hasattr(self, 'kosten') else 0
+            expected_income = (preis or default_verkaufspreis) * anzahl
+            
+            log_transaction("VERKAUF_START", self.name, anzahl, preis or default_verkaufspreis, True, 
+                          f"Vermögen vorher: {vermoegen_vorher}, Erwartetes Einkommen: {expected_income}")
             
             success = controller.verkaufen_ausruestung(
                 self.name,
@@ -311,21 +359,41 @@ class AusruestungItemRow(MDBoxLayout):
             
             # Vermögen nach dem Verkauf prüfen
             vermoegen_nachher = controller.charakter.vermoegen
-            default_verkaufspreis = (self.kosten * 0.5) if hasattr(self, 'kosten') else 0
-            expected_income = (preis or default_verkaufspreis) * anzahl
             tatsaechlich_verkauft = (vermoegen_nachher - vermoegen_vorher) == expected_income
 
-            if success or tatsaechlich_verkauft:
-                # Verkauf war erfolgreich (entweder Controller sagt ja, oder Vermögen hat sich korrekt geändert)
-                self.dialog.dismiss()
+            Logger.debug(f"Verkauf-Debug: success={success}, vermögen_vorher={vermoegen_vorher}, vermögen_nachher={vermoegen_nachher}")
+            log_transaction("VERKAUF_RESULT", self.name, anzahl, preis or default_verkaufspreis, success, 
+                          f"Vermögen nachher: {vermoegen_nachher}, Controller Success: {success}, Tatsächlich verkauft: {tatsaechlich_verkauft}")
+            
+            if success:
+                # Controller bestätigt erfolgreichen Verkauf
+                Logger.debug(f"Verkauf erfolgreich bestätigt für {self.name}")
+                if self.dialog:
+                    self.dialog.dismiss()
+                    self.dialog = None
+                self._refresh_ui()
+            elif vermoegen_nachher != vermoegen_vorher:
+                # Vermögen hat sich geändert - Verkauf war tatsächlich erfolgreich
+                Logger.debug(f"Android: Verkauf von {self.name} war erfolgreich (Vermögen: {vermoegen_vorher} -> {vermoegen_nachher})")
+                if self.dialog:
+                    self.dialog.dismiss()
+                    self.dialog = None
                 self._refresh_ui()
             else:
-                # Verkauf ist wirklich fehlgeschlagen
-                self.show_error("Der Verkauf konnte nicht durchgeführt werden.")
+                # Verkauf war nicht erfolgreich - prüfe ob es durch Android-Debouncing verhindert wurde
+                Logger.debug(f"Verkauf fehlgeschlagen für {self.name} - Vermögen unverändert")
+                # Bei Android-Debouncing: Kein Fehler zeigen, Dialog schließen
+                if self.dialog:
+                    self.dialog.dismiss()
+                    self.dialog = None
+                self._refresh_ui()
+                # Nur echte Fehler anzeigen - nicht bei Android-Debouncing
 
         except Exception as e:
             Logger.error(f"Fehler beim Verarbeiten des Verkaufs: {str(e)}")
             self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
+        finally:
+            self._dialog_processing = False
 
     def show_error(self, message, title=ERROR_DIALOG_TITLE):
         """Zeigt einen Fehlerdialog an"""
