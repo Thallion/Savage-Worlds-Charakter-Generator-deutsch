@@ -235,10 +235,20 @@ class EigenschaftenWidget(MDBoxLayout):
         """Initialisiert die Controller-Verbindung gemäß MVC-Pattern"""
         app = App.get_running_app()
         self.controller = app.controller
+        Logger.debug(f"EIGENSCHAFTEN_VIEW: Binding to controller {id(self.controller)} events")
+        Logger.debug(f"EIGENSCHAFTEN_VIEW: Controller.charakter ID: {id(self.controller.charakter) if self.controller else 'No controller'}")
+        
         # Binde an den Charakter-Änderung-Event mit Verzögerung
-        self.controller.bind(on_charakter_changed=self._plane_update)
-        # Bei Charakter-Laden: Status der Checkbox aktualisieren
-        self.controller.bind(on_charakter_loaded=self._update_char_gen_status)
+        self.controller.bind(on_charakter_updated=self._plane_update)
+        
+        # ZUSÄTZLICHE BINDUNG: Auch direkt an das Charakter-Model binden als Fallback
+        if self.controller and self.controller.charakter:
+            Logger.debug("EIGENSCHAFTEN_VIEW: Zusätzliche Bindung an Charakter-Model Events")
+            self.controller.charakter.bind(on_charakter_change=self._plane_update)
+        
+        # Bei Charakter-Laden: Status der Checkbox aktualisieren und Re-Binding
+        self.controller.bind(on_charakter_loaded=self._on_charakter_loaded)
+        self.controller.bind(on_charakter_changed=self._on_charakter_changed)
 
     def _initialisiere_sortieroptionen(self):
         """Initialisiert Sortier- und Filteroptionen"""
@@ -412,11 +422,14 @@ class EigenschaftenWidget(MDBoxLayout):
         Plant ein Update des Widgets zu einem späteren Zeitpunkt.
         Zeigt den Lade-Indicator an, wenn ein vollständiges Update angefordert wird.
         """
+        Logger.debug(f"EIGENSCHAFTEN_VIEW: _plane_update aufgerufen mit instance: {instance}, args: {args}")
         if not self._update_ausstehend:
             self._update_ausstehend = True
             self._zeige_lade_indicator()
             # Verzögert ausführen
             Clock.schedule_once(self._starte_update_thread, 0.05)
+        else:
+            Logger.debug("EIGENSCHAFTEN_VIEW: Update bereits ausstehend, überspringe")
 
     def _starte_update_thread(self, dt):
         """Startet einen Thread für das Daten-Update"""
@@ -517,6 +530,30 @@ class EigenschaftenWidget(MDBoxLayout):
     def _update_char_gen_status(self, *args):
         if self.controller and self.controller.charakter:
             self.char_gen_completed = self.controller.charakter.char_gen_completed
+    
+    def _on_charakter_loaded(self, *args):
+        """Wird aufgerufen, wenn ein neuer Charakter geladen wird"""
+        Logger.debug("EIGENSCHAFTEN_VIEW: Charakter geladen - Re-Binding Events")
+        self._update_char_gen_status()
+        self._rebind_charakter_events()
+        self._plane_update(None)
+        
+    def _on_charakter_changed(self, *args):
+        """Wird aufgerufen, wenn der Charakter gewechselt wird"""
+        Logger.debug("EIGENSCHAFTEN_VIEW: Charakter gewechselt - Re-Binding Events")
+        self._rebind_charakter_events()
+        self._plane_update(None)
+        
+    def _rebind_charakter_events(self):
+        """Bindet die Events an das aktuelle Charakter-Objekt neu"""
+        if self.controller and self.controller.charakter:
+            Logger.debug(f"EIGENSCHAFTEN_VIEW: Re-Binding an Charakter {id(self.controller.charakter)}")
+            try:
+                # Alte Bindings entfernen ist bei Kivy nicht nötig, neue überschreiben alte
+                self.controller.charakter.bind(on_charakter_change=self._plane_update)
+                Logger.debug("EIGENSCHAFTEN_VIEW: Re-Binding erfolgreich")
+            except Exception as e:
+                Logger.warning(f"EIGENSCHAFTEN_VIEW: Re-Binding fehlgeschlagen: {e}")
 
 
 class EigenschaftenItemRow(MDBoxLayout):

@@ -167,6 +167,7 @@ class VoelkerWidget(MDBoxLayout):
                 reset_volk_auswahlen(charakter, current_volk, self.voelker_auswahlen)
             
             # Neues Volk auswählen
+            Logger.debug(f"VOELKER_VIEW: Using charakter {id(charakter)} to select volk {volk_name}")
             success = waehle_volk(charakter, volk_name)
             if success:
                 self.selected_volk_name = volk_name

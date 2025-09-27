@@ -90,6 +90,30 @@ def waehle_volk(charakter, volk_name):
             if hasattr(charakter, 'berechne_abgeleitete_werte'):
                 charakter.berechne_abgeleitete_werte()
             
+            # Event für UI-Update auslösen
+            if hasattr(charakter, 'dispatch'):
+                Logger.debug(f"VOLK_FUNKTIONEN: Dispatching on_charakter_change event for charakter {id(charakter)}")
+                charakter.dispatch('on_charakter_change')
+                
+                # ZUSÄTZLICHE SICHERSTELLUNG: Explizites Update über Clock
+                from kivy.clock import Clock
+                from kivy.app import App
+                
+                def trigger_ui_update(dt):
+                    """Explizite UI-Aktualisierung als Fallback"""
+                    try:
+                        app = App.get_running_app()
+                        if hasattr(app, 'controller') and app.controller:
+                            Logger.debug("VOLK_FUNKTIONEN: Triggering explicit UI update")
+                            app.controller.dispatch('on_charakter_updated')
+                    except Exception as e:
+                        Logger.error(f"Fehler bei explizitem UI-Update: {e}")
+                
+                # Kurze Verzögerung um sicherzustellen dass alle Events processed sind
+                Clock.schedule_once(trigger_ui_update, 0.1)
+            else:
+                Logger.error("VOLK_FUNKTIONEN: Charakter hat keine dispatch-Methode!")
+            
             Logger.info(f"Volk '{volk_name}' erfolgreich ausgewählt")
             return True
         else:
@@ -567,6 +591,23 @@ def waehle_freies_attribut(charakter, volk_name, attribut_name):
         # Abgeleitete Werte neu berechnen
         if hasattr(charakter, 'berechne_abgeleitete_werte'):
             charakter.berechne_abgeleitete_werte()
+        
+        # Event für UI-Update auslösen
+        if hasattr(charakter, 'dispatch'):
+            charakter.dispatch('on_charakter_change')
+        
+        # Zusätzlich direkte Eigenschaften-View-Update erzwingen
+        try:
+            from kivy.app import App
+            from kivy.clock import Clock
+            app = App.get_running_app()
+            if hasattr(app, 'controller') and hasattr(app.controller, 'charakter'):
+                # MEHRFACH-STRATEGIE für robustes Update
+                Clock.schedule_once(lambda dt: _force_eigenschaften_update(app), 0.05)  # Sofort
+                Clock.schedule_once(lambda dt: _force_eigenschaften_update(app), 0.2)   # Verzögert
+                Clock.schedule_once(lambda dt: _force_trigger_ui_refresh(app), 0.1)     # UI-Refresh
+        except Exception as e:
+            Logger.warning(f"Direktes Eigenschaften-Update fehlgeschlagen: {e}")
         
         return True
         
@@ -1100,6 +1141,10 @@ def _reset_menschen_freies_attribut(charakter):
         # Abgeleitete Werte neu berechnen
         if hasattr(charakter, 'berechne_abgeleitete_werte'):
             charakter.berechne_abgeleitete_werte()
+        
+        # Event für UI-Update auslösen
+        if hasattr(charakter, 'dispatch'):
+            charakter.dispatch('on_charakter_change')
             
     except Exception as e:
         Logger.error(f"Fehler beim Zurücksetzen des Menschen-freien-Attributs: {e}")
@@ -1274,6 +1319,129 @@ def _reset_halbelf_auswahlen(charakter):
         # Abgeleitete Werte neu berechnen
         if hasattr(charakter, 'berechne_abgeleitete_werte'):
             charakter.berechne_abgeleitete_werte()
+        
+        # Event für UI-Update auslösen
+        if hasattr(charakter, 'dispatch'):
+            charakter.dispatch('on_charakter_change')
             
     except Exception as e:
         Logger.error(f"Fehler beim Zurücksetzen der Halbelf-Auswahlen: {e}")
+
+
+def _force_eigenschaften_update(app):
+    """
+    Erzwingt ein sofortiges Update der Eigenschaften View.
+    Verbesserte Methode mit korrektem Zugriff und Event-System.
+    
+    Args:
+        app: Die Kivy App-Instanz
+    """
+    try:
+        Logger.debug("=== FORCE EIGENSCHAFTEN UPDATE START ===")
+        
+        # METHODE 1: Direkter Controller-Event (bevorzugt)
+        if hasattr(app, 'controller') and app.controller:
+            Logger.debug("Verwende Controller-Event für Eigenschaften-Update...")
+            app.controller.dispatch('on_charakter_updated')
+            Logger.info("✅ Eigenschaften-View via Controller Event aktualisiert")
+            return True
+        
+        # METHODE 2: Direkter Zugriff über app.screens Dictionary
+        if hasattr(app, 'screens') and 'Eigenschaften' in app.screens:
+            eigenschaften_screen = app.screens['Eigenschaften']
+            Logger.debug(f"Eigenschaften Screen gefunden: {type(eigenschaften_screen)}")
+            
+            # Screen hat ein EigenschaftenWidget
+            if hasattr(eigenschaften_screen, 'ids') and hasattr(eigenschaften_screen.ids, 'eigenschaften_widget'):
+                eigenschaften_widget = eigenschaften_screen.ids.eigenschaften_widget
+                Logger.debug(f"Eigenschaften Widget gefunden: {type(eigenschaften_widget)}")
+                
+                # Verfügbare Update-Methoden prüfen
+                update_methods = [
+                    ('update_eigenschaften', 'update_eigenschaften'),
+                    ('_plane_update', '_plane_update mit None-Argument'),
+                    ('aktualisiere_ui', 'aktualisiere_ui'),
+                    ('refresh_widget', 'refresh_widget')
+                ]
+                
+                for method_name, description in update_methods:
+                    if hasattr(eigenschaften_widget, method_name):
+                        try:
+                            method = getattr(eigenschaften_widget, method_name)
+                            if method_name == '_plane_update':
+                                method(None)  # _plane_update erwartet ein instance-Argument
+                            else:
+                                method()
+                            Logger.info(f"✅ Eigenschaften-View via {description} aktualisiert")
+                            return True
+                        except Exception as e:
+                            Logger.warning(f"⚠️ Fehler bei {method_name}: {e}")
+                            continue
+                
+                Logger.warning("❌ Keine funktionierende Update-Methode für Eigenschaften-Widget gefunden")
+                # Debug: Verfügbare Methoden auflisten
+                methods = [method for method in dir(eigenschaften_widget) if 'update' in method.lower() or 'aktualis' in method.lower()]
+                Logger.debug(f"Verfügbare Update-ähnliche Methoden: {methods}")
+                
+            else:
+                Logger.warning("❌ Eigenschaften-Widget nicht in Screen.ids gefunden")
+                if hasattr(eigenschaften_screen, 'ids'):
+                    Logger.debug(f"Verfügbare IDs: {list(eigenschaften_screen.ids.keys())}")
+        
+        # METHODE 3: Fallback über registrierte Widgets in der App
+        elif hasattr(app, 'eigenschaften_widget'):
+            eigenschaften_widget = app.eigenschaften_widget
+            Logger.debug(f"Eigenschaften Widget über App-Attribut gefunden: {type(eigenschaften_widget)}")
+            
+            if hasattr(eigenschaften_widget, 'update_eigenschaften'):
+                eigenschaften_widget.update_eigenschaften()
+                Logger.info("✅ Eigenschaften-View via App-Attribut aktualisiert")
+                return True
+            else:
+                Logger.warning("❌ aktualisiere_ui Methode nicht verfügbar über App-Attribut")
+        
+        else:
+            Logger.error("❌ Eigenschaften Screen/Widget nicht gefunden")
+            Logger.debug(f"App hat screens: {hasattr(app, 'screens')}")
+            if hasattr(app, 'screens'):
+                Logger.debug(f"Verfügbare Screens: {list(app.screens.keys())}")
+        
+        Logger.debug("=== FORCE EIGENSCHAFTEN UPDATE END ===")
+        
+    except Exception as e:
+        Logger.error(f"❌ Fehler beim direkten Eigenschaften-Update: {e}", exc_info=True)
+
+
+def _force_trigger_ui_refresh(app):
+    """
+    Triggert ein komplettes UI-Refresh der Eigenschaften View.
+    Notfall-Strategie für hartnäckige Update-Probleme.
+    
+    Args:
+        app: Die Kivy App-Instanz
+    """
+    try:
+        Logger.debug("=== FORCE UI REFRESH START ===")
+        
+        # Direkte Event-Triggerung am Controller
+        if hasattr(app, 'controller'):
+            controller = app.controller
+            
+            # Controller-Events direkt dispatchen
+            if hasattr(controller, 'dispatch'):
+                controller.dispatch('on_charakter_updated')
+                Logger.debug("Controller on_charakter_updated Event dispatched")
+            
+            # Alle registrierten Eigenschaften-Widgets finden und aktualisieren
+            if hasattr(app, 'eigenschaften_widget'):
+                widget = app.eigenschaften_widget
+                if hasattr(widget, '_update_ausstehend'):
+                    widget._update_ausstehend = False  # Reset Update-Flag
+                if hasattr(widget, '_plane_update'):
+                    widget._plane_update(controller)
+                    Logger.debug("Direktes _plane_update auf registriertem Widget")
+        
+        Logger.debug("UI-Refresh abgeschlossen")
+        
+    except Exception as e:
+        Logger.warning(f"UI-Refresh fehlgeschlagen: {e}")

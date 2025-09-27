@@ -60,6 +60,7 @@ class CharakterController(EventDispatcher):
         )
 
         # Charakter-Ereignisse mit Controller-Methoden verbinden
+        Logger.debug(f"CONTROLLER: Binding to charakter {id(self.charakter)} events")
         self.charakter.bind(on_charakter_change=self.on_model_change)
         
         # Android Double-Touch Protection - Verhindert echte Doppelklicks
@@ -70,13 +71,39 @@ class CharakterController(EventDispatcher):
     # Event-Handler für Änderungen im Charakter-Modell
     def on_model_change(self, *args):
         """Wird aufgerufen, wenn sich das Charakter-Modell ändert"""
-        Logger.debug("Modell-Änderung erkannt")
+        Logger.debug(f"CONTROLLER: on_model_change aufgerufen mit args: {args}")
+        Logger.debug(f"CONTROLLER: Charakter-ID: {id(self.charakter)}")
         try:
             # Event zur Benachrichtigung der UI auslösen
+            Logger.debug("CONTROLLER: Dispatching on_charakter_updated event")
             self.dispatch('on_charakter_updated')
+            
+            # ZUSÄTZLICHE SICHERSTELLUNG: Direktes Update der Eigenschaften-View erzwingen
+            Logger.debug("CONTROLLER: Zusätzliches direktes Update der Eigenschaften-View")
+            Clock.schedule_once(self._force_eigenschaften_view_update, 0.1)
+            
         except Exception as e:
             Logger.error(f"Fehler bei Verarbeitung von Modell-Änderung: {str(e)}")
             self.dispatch('on_charakter_error', f"UI-Update fehlgeschlagen: {str(e)}")
+    
+    def _force_eigenschaften_view_update(self, dt):
+        """Erzwingt ein direktes Update der Eigenschaften-View"""
+        try:
+            from kivy.app import App
+            app = App.get_running_app()
+            if app and hasattr(app, 'screens') and 'Eigenschaften' in app.screens:
+                eigenschaften_screen = app.screens['Eigenschaften']
+                if (hasattr(eigenschaften_screen, 'ids') and 
+                    hasattr(eigenschaften_screen.ids, 'eigenschaften_widget')):
+                    eigenschaften_widget = eigenschaften_screen.ids.eigenschaften_widget
+                    if hasattr(eigenschaften_widget, 'update_eigenschaften'):
+                        eigenschaften_widget.update_eigenschaften()
+                        Logger.debug("CONTROLLER: Direktes Eigenschaften-View-Update erfolgreich")
+                    elif hasattr(eigenschaften_widget, '_plane_update'):
+                        eigenschaften_widget._plane_update(None)
+                        Logger.debug("CONTROLLER: _plane_update für Eigenschaften-View ausgeführt")
+        except Exception as e:
+            Logger.warning(f"CONTROLLER: Direktes Eigenschaften-View-Update fehlgeschlagen: {e}")
 
     # Ereignis-Handler (Platzhalter, werden von Verbrauchern überschrieben)
     def on_charakter_updated(self, *args):
