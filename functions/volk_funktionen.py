@@ -444,8 +444,14 @@ def get_verfuegbare_fertigkeiten(charakter, nur_verstand=True):
             
             if nur_verstand:
                 # Nur verstandsbasierte Fertigkeiten
-                if attribut and attribut.lower() in ['verstand', 'intelligence', 'smarts']:
-                    fertigkeiten_liste.append(name)
+                if attribut and hasattr(attribut, 'attribut_name'):
+                    attribut_name = attribut.attribut_name.lower()
+                    if attribut_name in ['verstand', 'intelligence', 'smarts']:
+                        fertigkeiten_liste.append(name)
+                elif attribut and isinstance(attribut, str):
+                    # Fallback für String-Attribute
+                    if attribut.lower() in ['verstand', 'intelligence', 'smarts']:
+                        fertigkeiten_liste.append(name)
             else:
                 # Alle Fertigkeiten
                 fertigkeiten_liste.append(name)
