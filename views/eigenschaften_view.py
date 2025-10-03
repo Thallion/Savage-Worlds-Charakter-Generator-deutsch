@@ -194,6 +194,9 @@ class EigenschaftenWidget(MDBoxLayout):
     _update_ausstehend = False
     _thread = None
     char_gen_completed = BooleanProperty(False)
+    sort_order = StringProperty('name_asc')
+    aktiv_spinner_text = StringProperty('Alle Fertigkeiten')
+    sort_text = StringProperty('Name aufsteigend')
 
     def __init__(self, **kwargs):
         """Initialisiert das EigenschaftenWidget mit verzögertem Setup"""
@@ -252,9 +255,10 @@ class EigenschaftenWidget(MDBoxLayout):
 
     def _initialisiere_sortieroptionen(self):
         """Initialisiert Sortier- und Filteroptionen"""
-        self.sort_order = 'asc'
+        self.sort_order = 'name_asc'
         self.current_sort_field = 'item_name'
         self.filter_aktiviert = FILTER_OPTIONEN["ALLE"]
+        self.sort_text = self.get_sort_text()
 
     def _initialisiere_menues(self):
         """Initialisiert Dropdown-Menüs (lazy loading)"""
@@ -368,8 +372,10 @@ class EigenschaftenWidget(MDBoxLayout):
             } for option in SORTIER_OPTIONEN.values()
         ]
 
+        # Verwende den Filter-Button als Caller, da sort_spinner nicht mehr existiert
+        caller_widget = self.ids.get('only_selected_button', self)
         self.sort_menu = MDDropdownMenu(
-            caller=self.ids.sort_spinner,
+            caller=caller_widget,
             items=menu_items,
             width_mult=4,
         )
@@ -383,8 +389,10 @@ class EigenschaftenWidget(MDBoxLayout):
             } for option in FILTER_OPTIONEN.values()
         ]
 
+        # Verwende den Filter-Button als Caller, da aktiv_spinner nicht mehr existiert
+        caller_widget = self.ids.get('only_selected_button', self)
         self.filter_menu = MDDropdownMenu(
-            caller=self.ids.aktiv_spinner,
+            caller=caller_widget,
             items=menu_items,
             width_mult=4,
         )
@@ -403,13 +411,21 @@ class EigenschaftenWidget(MDBoxLayout):
 
     def _setze_sort_option(self, text):
         """Setzt die Sortieroption und aktualisiert die Anzeige"""
-        self.ids.sort_spinner.text = text
+        # Parse die Sortieroption direkt ohne UI-Element
+        if ' (aufsteigend)' in text:
+            sort_option = text.replace(' (aufsteigend)', '')
+            self.sort_order = 'name_asc' if sort_option == 'Name' else 'wert_asc'
+        elif ' (absteigend)' in text:
+            sort_option = text.replace(' (absteigend)', '')
+            self.sort_order = 'name_desc' if sort_option == 'Name' else 'wert_desc'
+        
         self.sort_menu.dismiss()
         self._aktualisiere_sort_option()
 
     def _setze_filter_option(self, text):
         """Setzt die Filteroption und aktualisiert die Anzeige"""
-        self.ids.aktiv_spinner.text = text
+        self.filter_aktiviert = text
+        self.aktiv_spinner_text = text
         self.filter_menu.dismiss()
         self._aktualisiere_filter_option()
 
@@ -447,7 +463,7 @@ class EigenschaftenWidget(MDBoxLayout):
 
     def _aktualisiere_sort_option(self):
         """Aktualisiert die Sortieroptionen basierend auf der Auswahl"""
-        selected_text = self.ids.sort_spinner.text
+        selected_text = self.ids.sort_spinner.text if hasattr(self, 'ids') and 'sort_spinner' in self.ids else 'Name (aufsteigend)'
 
         # Parse die ausgewählte Option
         if ' (aufsteigend)' in selected_text:
@@ -467,16 +483,67 @@ class EigenschaftenWidget(MDBoxLayout):
         }
 
         self.current_sort_field = sort_field_mapping.get(sort_option, 'item_name')
-        self.sort_order = sort_order
+        self.sort_order = 'name_asc' if sort_order == 'asc' and sort_option == 'Name' else 'name_desc' if sort_option == 'Name' else f'wert_{sort_order}'
 
         # Plane ein Update mit Thread
         self._plane_update(None)
 
+    def toggle_sort_order(self):
+        """Wechselt zyklisch durch die Sortieroptionen: Name aufsteigend → Name absteigend → Wert aufsteigend → Wert absteigend → Name aufsteigend"""
+        if self.sort_order == 'name_asc':
+            self.sort_order = 'name_desc'
+            self.current_sort_field = 'item_name'
+        elif self.sort_order == 'name_desc':
+            self.sort_order = 'wert_asc'
+            self.current_sort_field = 'wert'
+        elif self.sort_order == 'wert_asc':
+            self.sort_order = 'wert_desc'
+            self.current_sort_field = 'wert'
+        else:
+            self.sort_order = 'name_asc'
+            self.current_sort_field = 'item_name'
+        
+        # Update sort_text property
+        self.sort_text = self.get_sort_text()
+        
+        # Update UI und Daten
+        self._plane_update(None)
+
+    def get_sort_text(self):
+        """Gibt den aktuellen Sortier-Text für den Button zurück"""
+        sort_texts = {
+            'name_asc': 'Name aufsteigend',
+            'name_desc': 'Name absteigend',
+            'wert_asc': 'Wert aufsteigend',
+            'wert_desc': 'Wert absteigend'
+        }
+        return sort_texts.get(self.sort_order, 'Name aufsteigend')
+
     def _aktualisiere_filter_option(self):
         """Aktualisiert die Filteroptionen basierend auf der Auswahl"""
-        self.filter_aktiviert = self.ids.aktiv_spinner.text
+        self.filter_aktiviert = self.ids.aktiv_spinner.text if hasattr(self, 'ids') and 'aktiv_spinner' in self.ids else FILTER_OPTIONEN["ALLE"]
+
+        # Update aktiv_spinner_text für Button-Anzeige
+        self.aktiv_spinner_text = self.filter_aktiviert
 
         # Plane ein Update mit Thread
+        self._plane_update(None)
+
+    def toggle_filter_option(self):
+        """Wechselt zwischen den Filter-Optionen"""
+        current_filter = getattr(self, 'filter_aktiviert', FILTER_OPTIONEN["ALLE"])
+        
+        if current_filter == FILTER_OPTIONEN["ALLE"]:
+            self.filter_aktiviert = FILTER_OPTIONEN["AKTIV"]
+        elif current_filter == FILTER_OPTIONEN["AKTIV"]:
+            self.filter_aktiviert = FILTER_OPTIONEN["INAKTIV"]
+        else:
+            self.filter_aktiviert = FILTER_OPTIONEN["ALLE"]
+        
+        # Update aktiv_spinner_text für Button-Anzeige
+        self.aktiv_spinner_text = self.filter_aktiviert
+        
+        # Update UI und Daten
         self._plane_update(None)
 
     def update_eigenschaften(self):
@@ -498,21 +565,22 @@ class EigenschaftenWidget(MDBoxLayout):
 
     def _sortiere_fertigkeiten(self, fertigkeiten_liste):
         """Sortiert die Fertigkeiten-Liste (Thread-sicher)"""
-        reverse = (self.sort_order == 'desc')
+        # Bestimme Sortierrichtung basierend auf sort_order
+        reverse = self.sort_order.endswith('_desc')
 
-        if self.current_sort_field == 'item_name':
+        if self.sort_order.startswith('name_'):
             return sorted(fertigkeiten_liste,
                           key=lambda f: f.fertigkeit_name.lower(),
                           reverse=reverse)
-        elif self.current_sort_field == 'wert':
+        elif self.sort_order.startswith('wert_'):
             return sorted(fertigkeiten_liste,
                           key=lambda f: (f.wert if f.wert is not None else 0),
                           reverse=reverse)
         else:
-            # Standardmäßig nach Name sortieren
+            # Standardmäßig nach Name aufsteigend sortieren
             return sorted(fertigkeiten_liste,
                           key=lambda f: f.fertigkeit_name.lower(),
-                          reverse=reverse)
+                          reverse=False)
 
     def toggle_char_gen_completed(self):
         """
