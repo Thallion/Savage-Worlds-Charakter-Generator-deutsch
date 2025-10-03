@@ -735,6 +735,42 @@ class SW_Charakter_GeneratorApp(MDApp):
         )
         dialog.open()
 
+    def get_widget_by_tab_text(self, tab_text, widget_id):
+        """
+        Holt ein Widget basierend auf Tab-Text und Widget-ID
+        
+        Args:
+            tab_text (str): Text des Tabs (z.B. 'Handicaps')
+            widget_id (str): ID des Widgets (z.B. 'handicaps_widget')
+            
+        Returns:
+            Widget oder None: Das gefundene Widget oder None
+        """
+        try:
+            # Direkte Zuordnung zu den registrierten Widgets
+            widget_map = {
+                'Einstellungen': getattr(self, 'einstellungen_widget', None),
+                'Eigenschaften': getattr(self, 'eigenschaften_widget', None),
+                'Ausrüstung': getattr(self, 'ausruestung_widget', None),
+                'Profil': getattr(self, 'profil_widget', None),
+                'Völker': getattr(self, 'voelker_widget', None),
+                'Talente': getattr(self, 'talente_widget', None),
+                'Mächte': getattr(self, 'maechte_widget', None),
+                'Handicaps': getattr(self, 'handicaps_widget', None),
+            }
+            
+            widget = widget_map.get(tab_text)
+            if widget:
+                Logger.debug(f"Widget für Tab '{tab_text}' gefunden: {type(widget).__name__}")
+                return widget
+            else:
+                Logger.warning(f"Widget für Tab '{tab_text}' nicht gefunden")
+                return None
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Abrufen des Widgets für Tab '{tab_text}': {e}")
+            return None
+
 
 if __name__ == "__main__":
     SW_Charakter_GeneratorApp().run()

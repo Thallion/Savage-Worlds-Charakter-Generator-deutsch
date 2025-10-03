@@ -822,6 +822,35 @@ class CharakterController(EventDispatcher):
             return False
 
     # ============================
+    # Charakter-Erstellung und Entwicklung
+    # ============================
+    def erhoehe_startkapital_mit_handicap(self):
+        """
+        Erhöht das Startkapital des Charakters mit Handicap-Punkten
+        
+        Returns:
+            bool: True bei Erfolg, False bei Fehler
+        """
+        try:
+            # Prüfen ob genügend Handicap-Punkte verfügbar sind
+            if self.charakter.verbleibende_handicap_punkte <= 0:
+                Logger.warning("Keine Handicap-Punkte mehr verfügbar für Startkapital-Erhöhung")
+                return False
+                
+            # Delegiere an das Charakter-Modell
+            self.charakter.erhoehe_startkapital()
+            
+            # UI aktualisieren
+            self.dispatch('on_charakter_updated')
+            Logger.info(f"Startkapital mit Handicap-Punkten erhöht. Neues Vermögen: {self.charakter.vermoegen}")
+            return True
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Erhöhen des Startkapitals: {str(e)}")
+            self.dispatch('on_charakter_error', f"Startkapital-Erhöhung fehlgeschlagen: {str(e)}")
+            return False
+
+    # ============================
     # UI-Update-Methoden
     # ============================
     def update_ui(self):
