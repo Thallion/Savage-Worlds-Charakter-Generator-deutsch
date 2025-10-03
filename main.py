@@ -104,13 +104,22 @@ class SW_Charakter_GeneratorApp(MDApp):
             logging.info("Ressourcen erfolgreich extrahiert")
         
         # KORRIGIERT: Frühe Controller-Initialisierung für Service Container
-        self.charakter = Charakter()
-        self.controller = CharakterController()
-        
-        # Service Container früh initialisieren
-        service_container.initialize(self.controller)
+        # Zuerst Service Container mit temporärem Controller initialisieren um Config Service zu erhalten
+        temp_controller = CharakterController()
+        service_container.initialize(temp_controller)
         Logger.info("Service Container früh initialisiert")
         logging.info("Service Container erfolgreich initialisiert")
+        
+        # Letztes Setting aus Config laden
+        last_setting = self._load_last_setting_from_config()
+        Logger.info(f"Geladenes letztes Setting: {last_setting}")
+        
+        # Charakter mit dem geladenen Setting initialisieren
+        self.charakter = Charakter(active_setting_name=last_setting)
+        self.controller = CharakterController()
+        
+        # Service Container mit dem finalen Controller aktualisieren
+        service_container.initialize(self.controller)
         
         # Deine Icons + Tab-Texte + zugehörige Screens
         # NEU: Historie-Tab hinzugefügt
@@ -272,6 +281,47 @@ class SW_Charakter_GeneratorApp(MDApp):
             
         except Exception as e:
             Logger.error(f"Fehler beim Update des Themes: {str(e)}", exc_info=True)
+    
+    def _load_last_setting_from_config(self):
+        """
+        Lädt das zuletzt verwendete Setting aus der Konfiguration
+        
+        Returns:
+            str: Name des letzten Settings oder "SWAE" als Fallback
+        """
+        try:
+            Logger.info("=== Lade letztes Setting aus Config ===")
+            
+            # Config Service aus Service Container holen
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+            
+            if not config_service:
+                Logger.warning("ConfigService nicht verfügbar, verwende Standard-Setting")
+                return "SWAE"
+            
+            # Letztes Setting aus Config laden
+            last_setting = config_service.get('last_setting', 'SWAE')
+            
+            Logger.info(f"Letztes Setting aus Config geladen: {last_setting}")
+            
+            # Validierung: Prüfen ob das Setting existiert
+            from utils.path_utils import get_application_root
+            settings_dir = get_application_root() / 'settings'
+            setting_file = settings_dir / f"{last_setting}.json"
+            
+            if setting_file.exists():
+                Logger.info(f"Setting-Datei gefunden: {setting_file}")
+                return last_setting
+            else:
+                Logger.warning(f"Setting-Datei '{setting_file}' nicht gefunden, verwende Standard-Setting 'SWAE'")
+                # Standard-Setting in Config speichern
+                config_service.set('last_setting', 'SWAE')
+                return "SWAE"
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden des letzten Settings: {str(e)}", exc_info=True)
+            return "SWAE"
 
     def on_start(self):
         """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""

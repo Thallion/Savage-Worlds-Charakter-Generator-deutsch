@@ -119,6 +119,10 @@ class SettingsRepository:
             if controller and controller.charakter:
                 controller.charakter.custom_element_manager.set_active_setting(setting_name)
                 controller.charakter.load_elements_from_active_setting()
+                
+                # Speichere das geladene Setting als letztes Setting in der Config
+                self._save_last_setting_to_config(setting_name)
+                
                 MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
             Logger.info(f"Setting '{setting_name}' geladen.")
             return setting_data
@@ -141,6 +145,26 @@ class SettingsRepository:
         except Exception as e:
             Logger.error(f"Fehler beim Löschen: {e}")
             raise e
+    
+    def _save_last_setting_to_config(self, setting_name):
+        """
+        Speichert das Setting als letztes verwendetes Setting in der Konfiguration
+        
+        Args:
+            setting_name (str): Name des Settings
+        """
+        try:
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+            
+            if config_service:
+                config_service.set('last_setting', setting_name)
+                Logger.info(f"Letztes Setting in Config gespeichert: {setting_name}")
+            else:
+                Logger.warning("ConfigService nicht verfügbar - letztes Setting konnte nicht gespeichert werden")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern des letzten Settings in Config: {str(e)}")
 
 # Basisklasse für MDFileManager-Handling (wiederverwendbare Logik)
 class BaseFileManagerMixin:

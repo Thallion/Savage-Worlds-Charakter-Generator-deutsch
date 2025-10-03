@@ -215,6 +215,10 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
                 
                 if success:
                     self.active_setting_name = setting_name
+                    
+                    # Speichere das neue Setting als letztes Setting in der Config
+                    self._save_last_setting_to_config(setting_name)
+                    
                     # Abgeleitete Werte neu berechnen
                     self.berechne_abgeleitete_werte()
                     # UI aktualisieren
@@ -233,6 +237,26 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         except Exception as e:
             Logger.error(f"Fehler beim Setting-Wechsel zu '{setting_name}': {e}", exc_info=True)
             return False
+    
+    def _save_last_setting_to_config(self, setting_name):
+        """
+        Speichert das Setting als letztes verwendetes Setting in der Konfiguration
+        
+        Args:
+            setting_name (str): Name des Settings
+        """
+        try:
+            from services.service_container import service_container
+            config_service = service_container.get_config_service()
+            
+            if config_service:
+                config_service.set('last_setting', setting_name)
+                Logger.info(f"Letztes Setting in Config gespeichert: {setting_name}")
+            else:
+                Logger.warning("ConfigService nicht verfügbar - letztes Setting konnte nicht gespeichert werden")
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern des letzten Settings in Config: {str(e)}")
 
     # === EIGENSCHAFTEN-FUNKTIONEN ===
     def initialisiere_attribute(self):

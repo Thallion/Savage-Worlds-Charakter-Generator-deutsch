@@ -64,6 +64,10 @@ class CharakterPersistence:
             # Setting-Verwaltung nach dem Laden
             if "voelker" in daten and "handicaps" in daten and "talente" in daten and "maechte" in daten:
                 Logger.info("Ausrüstung aus der gespeicherten Datei verwenden, nicht aus dem Setting")
+                
+                # Speichere das geladene Setting als letztes Setting in der Config (auch bei gleichem Setting)
+                self._save_last_setting_to_config(self.active_setting_name)
+                
                 if self.active_setting_name != altes_setting:
                     if not self.custom_element_manager.set_active_setting(self.active_setting_name):
                         Logger.warning(f"Das Setting '{self.active_setting_name}' konnte nicht aktiviert werden.")
@@ -72,6 +76,8 @@ class CharakterPersistence:
                             Logger.warning("Wechsle zurück zum Standard-Setting 'SWAE'.")
                             self.active_setting_name = "SWAE"
                             self.custom_element_manager.set_active_setting(self.active_setting_name)
+                            # Speichere das Fallback-Setting in der Config
+                            self._save_last_setting_to_config("SWAE")
                         else:
                             # Standard-Setting erstellen, wenn es nicht existiert
                             Logger.warning("Standard-Setting 'SWAE' nicht gefunden. Erstelle es neu.")
@@ -79,6 +85,11 @@ class CharakterPersistence:
                             self.custom_element_manager.add_setting("SWAE", default_setting, overwrite=True)
                             self.active_setting_name = "SWAE"
                             self.custom_element_manager.set_active_setting("SWAE")
+                            # Speichere das neu erstellte Standard-Setting in der Config
+                            self._save_last_setting_to_config("SWAE")
+                    else:
+                        # Setting wurde erfolgreich aktiviert, speichere es in der Config
+                        self._save_last_setting_to_config(self.active_setting_name)
             else:
                 Logger.warning("Unvollständige Charakterdaten, lade Elemente aus dem aktiven Setting")
                 if "ausruestung" in daten:
