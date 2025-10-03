@@ -9177,5 +9177,7 @@
         "schwere_entscheidungen": false,
         "ungepanzerter_held": false,
         "wundobergrenze": false
-    }
+    },
+    "startgeld": 300,
+    "waehrung": "GM"
 }

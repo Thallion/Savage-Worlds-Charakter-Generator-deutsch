@@ -347,6 +347,9 @@ def load_elements_from_active_setting(charakter, skip_equipment: bool = False,
         # Settingregeln laden
         _lade_settingregeln(charakter, active_setting)
         
+        # Währung und Startgeld laden
+        _lade_currency(charakter, active_setting)
+        
         return True
         
     except Exception as e:
@@ -505,6 +508,25 @@ def _lade_settingregeln(charakter, active_setting: Dict[str, Any]) -> None:
             Logger.info("Settingregeln geladen.")
         except Exception as e:
             Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
+
+
+def _lade_currency(charakter, active_setting: Dict[str, Any]) -> None:
+    """Lädt Währung und Startgeld aus dem Setting."""
+    try:
+        # Startgeld laden
+        startgeld = active_setting.get('startgeld')
+        if startgeld is not None:
+            charakter.vermoegen = startgeld
+            Logger.info(f"Startgeld auf {startgeld} gesetzt.")
+        
+        # Währung laden
+        waehrung = active_setting.get('waehrung')
+        if waehrung:
+            charakter.waehrungseinheit = waehrung
+            Logger.info(f"Währungseinheit auf '{waehrung}' gesetzt.")
+            
+    except Exception as e:
+        Logger.warning(f"Fehler beim Laden der Währungseinstellungen: {e}")
 
 
 # Export der öffentlichen Funktionen und Klassen
