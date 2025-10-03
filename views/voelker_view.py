@@ -375,10 +375,10 @@ class VoelkerWidget(MDBoxLayout):
         # Titel der Sektion
         titel_label = MDLabel(
             text=f"{titel}:",
-            font_style="Title",
+            font_style="Body",
             theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(35),
+            height=dp(30),
             halign='left',
             valign='center',
             bold=True
@@ -396,16 +396,18 @@ class VoelkerWidget(MDBoxLayout):
         current_selection = self.voelker_auswahlen.get(volk_name, {}).get(auswahl_typ, placeholder_text)
         text_color = "Primary" if current_selection != placeholder_text else "Secondary"
         
-        # Auswahl-Text
+        # Auswahl-Text mit dynamischer Höhe
         auswahl_label = MDLabel(
             text=current_selection,
             font_style="Body",
             theme_text_color=text_color,
             size_hint_x=0.7,
+            size_hint_y=None,
             halign='left',
-            valign='center'
+            valign='top'
         )
         auswahl_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
+        auswahl_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(30), instance.texture_size[1])))
         
         # Dropdown-Button
         dropdown_button = MDIconButton(
@@ -675,13 +677,13 @@ class VoelkerWidget(MDBoxLayout):
         
         volk_obj = charakter.voelker[self.selected_volk_name]  # Das ist ein Volk-Objekt
         
-        # Titel
+        # Titel mit reduzierter Schriftgröße
         title_label = MDLabel(
             text=self.selected_volk_name,
-            font_style="Headline",
+            font_style="Title",
             theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(60),
+            height=dp(50),
             halign='left',
             valign='center',
             bold=True
@@ -701,20 +703,28 @@ class VoelkerWidget(MDBoxLayout):
         
         for section_title, content in detail_sections:
             if self._has_valid_content(content):
-                # Sektion-Titel
+                # Sektion-Titel mit reduzierter Schriftgröße
                 section_label = MDLabel(
                     text=f"{section_title}:",
-                    font_style="Title",
+                    font_style="Body",
                     theme_text_color="Primary",
                     size_hint_y=None,
-                    height=dp(40),
+                    height=dp(35),
                     halign='left',
                     valign='center',
                     bold=True
                 )
                 selected_volk_container.add_widget(section_label)
                 
-                # Sektion-Inhalt
+                # Abstandshalter zwischen Überschrift und Inhalt
+                spacer_top = MDLabel(
+                    text="",
+                    size_hint_y=None,
+                    height=dp(15)
+                )
+                selected_volk_container.add_widget(spacer_top)
+                
+                # Sektion-Inhalt mit dynamischer Höhe
                 content_label = MDLabel(
                     text=self._format_content(content),
                     font_style="Body",
@@ -726,10 +736,10 @@ class VoelkerWidget(MDBoxLayout):
                     markup=True
                 )
                 content_label.bind(
-                    size=lambda instance, size: setattr(instance, 'text_size', (size[0], None))
+                    size=lambda instance, size: setattr(instance, 'text_size', (size[0] - dp(40), None))
                 )
                 content_label.bind(
-                    text_size=lambda instance, size: setattr(instance, 'height', instance.texture_size[1])
+                    text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10)))
                 )
                 
                 selected_volk_container.add_widget(content_label)
@@ -820,18 +830,19 @@ class VoelkerWidget(MDBoxLayout):
                 spacing=dp(15)
             )
             
-            # Titel der Sektion
+            # Titel der Sektion mit reduzierter Schriftgröße
             titel_label = MDLabel(
                 text="Erbe (ENTWEDER freies Talent ODER Geschicklichkeit W4 -> W6):",
-                font_style="Title",
+                font_style="Body",
                 theme_text_color="Primary",
                 size_hint_y=None,
-                height=dp(35),
+                height=dp(40),
                 halign='left',
-                valign='center',
+                valign='top',
                 bold=True
             )
             titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
+            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
             
             # Zwei Buttons für die Auswahl
             buttons_row = MDBoxLayout(

@@ -21,9 +21,9 @@
             MDLabel:
                 text: "Völker"
                 size_hint_y: None
-                height: dp(50)
+                height: dp(45)
                 halign: 'left'
-                font_style: "Headline"
+                font_style: "Title"
                 theme_text_color: "Primary"
 
             # NEUE KOMPAKTE VÖLKER-AUSWAHL - 60% weniger Platz!
@@ -72,11 +72,20 @@
                 height: self.minimum_height
                 spacing: dp(20)
 
-            # Ausgewähltes Volk Details Container - integriert in Haupt-Scrollview
-            MDBoxLayout:
-                id: selected_volk_container
-                orientation: 'vertical'
+            # Ausgewähltes Volk Details in eigenem ScrollView
+            MDScrollView:
                 size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(25)
-                padding: [0, dp(20), dp(50), dp(30)]
+                height: dp(400)
+                do_scroll_x: False
+                do_scroll_y: True
+                bar_width: dp(15)
+                bar_margin: dp(8)
+                scroll_wheel_distance: dp(114)
+
+                MDBoxLayout:
+                    id: selected_volk_container
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(25)
+                    padding: [dp(20), dp(20), dp(50), dp(30)]
