@@ -500,24 +500,6 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 10
-            },
-            "Machtpunkte_3": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 10
-            },
-            "Neue Mächte (2)": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 2,
-                "machtpunkte": 0
-            },
-            "Neue Mächte_5": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 2,
-                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -606,32 +588,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Kette mit Amaron-Smaragd": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Spitzhut": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schuhe": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Stab": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Alchemistenfeuer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Messer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -666,50 +628,46 @@
     "voelker_selected": {
         "Aquarianer": false,
         "Avionen": false,
-        "Halbelf": false,
-        "Elf": false,
-        "Halbling": false,
-        "Mensch": true,
-        "Rakashaner": false,
-        "Saurianer": false,
-        "Zwerg": false,
         "Drachenvolk": false,
         "Elementarer_Abkoemmling_Erde": false,
         "Elementarer_Abkoemmling_Feuer": false,
         "Elementarer_Abkoemmling_Luft": false,
         "Elementarer_Abkoemmling_Wasser": false,
+        "Elf": false,
         "Fee": false,
         "Gestaltwandler": false,
         "Gnom": false,
         "Goblin": false,
         "Golem": false,
         "Grabgeborener": false,
+        "Halbelf": false,
+        "Halbling": false,
         "Halbork": false,
         "Halbriese": false,
         "Himmlischer": false,
         "Infernaler": false,
         "Insektoid": false,
         "Mausling": false,
+        "Mensch": true,
         "Minotaur": false,
         "Oger": false,
         "Ork": false,
+        "Rakashaner": false,
         "Rattling": false,
+        "Saurianer": false,
         "Schlangenvolk": false,
-        "Zentaur": false
+        "Zentaur": false,
+        "Zwerg": false
     },
     "selected_allgemeine_ausruestung": [
         "Tunika",
         "Abenteurerpaket",
         "Alchemistenpaket",
-        "Alchemistentasche",
-        "Kette mit Amaron-Smaragd",
-        "Spitzhut",
-        "Schuhe"
+        "Alchemistentasche"
     ],
     "selected_waffen": [
         "Stab",
-        "Alchemistenfeuer",
-        "Messer"
+        "Alchemistenfeuer"
     ],
     "selected_ruestungen": [
         "Tunika"

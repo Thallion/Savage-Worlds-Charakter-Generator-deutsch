@@ -123,7 +123,20 @@ class SettingsRepository:
                 # Speichere das geladene Setting als letztes Setting in der Config
                 self._save_last_setting_to_config(setting_name)
                 
-                MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
+                app = MDApp.get_running_app()
+                # Aktualisiere alle relevanten Widgets
+                widgets_to_update = [
+                    ('Handicaps', 'handicaps_widget'),
+                    ('Fertigkeiten', 'fertigkeiten_widget'),
+                    ('Ausrüstung', 'ausruestung_widget'),
+                    ('Völker', 'voelker_widget'),
+                    ('Talente', 'talente_widget'),
+                    ('Mächte', 'maechte_widget')
+                ]
+                for tab_text, widget_name in widgets_to_update:
+                    widget = app.get_widget_by_tab_text(tab_text, widget_name)
+                    if widget and hasattr(widget, 'refresh_widget'):
+                        widget.refresh_widget()
             Logger.info(f"Setting '{setting_name}' geladen.")
             return setting_data
         except Exception as e:
@@ -137,7 +150,20 @@ class SettingsRepository:
                 success = controller.charakter.custom_element_manager.delete_setting(setting_name)
                 if success:
                     Logger.info(f"Setting '{setting_name}' gelöscht.")
-                    MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
+                    app = MDApp.get_running_app()
+                    # Aktualisiere alle relevanten Widgets
+                    widgets_to_update = [
+                        ('Handicaps', 'handicaps_widget'),
+                        ('Fertigkeiten', 'fertigkeiten_widget'),
+                        ('Ausrüstung', 'ausruestung_widget'),
+                        ('Völker', 'voelker_widget'),
+                        ('Talente', 'talente_widget'),
+                        ('Mächte', 'maechte_widget')
+                    ]
+                    for tab_text, widget_name in widgets_to_update:
+                        widget = app.get_widget_by_tab_text(tab_text, widget_name)
+                        if widget and hasattr(widget, 'refresh_widget'):
+                            widget.refresh_widget()
                     return True
                 else:
                     Logger.error(f"Löschen fehlgeschlagen für: {setting_name}")

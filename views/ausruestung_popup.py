@@ -262,8 +262,9 @@ class AusruestungDialogHandler:
                     del charakter.ausruestung[old_name]
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Ausrüstung '{name}' wurde aktualisiert.")
@@ -368,8 +369,9 @@ class AusruestungDialogHandler:
             success = charakter.add_ausruestung(new_ausruestung)
             
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 self.dismiss_dialog()
                 Logger.info(f"Ausrüstung '{name}' wurde hinzugefügt.")
@@ -394,8 +396,9 @@ class AusruestungDialogHandler:
             success = charakter.remove_ausruestung(ausruestung_name)
 
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 Logger.info(f"Ausrüstung '{ausruestung_name}' wurde gelöscht.")
                 self.dismiss_dialog()

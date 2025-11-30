@@ -325,8 +325,9 @@ class TalentDialogHandler:
             charakter.save_custom_talents()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            talente_widget = app.get_widget_by_tab_text('Talente', 'talente_widget')
+            if talente_widget and hasattr(talente_widget, 'refresh_widget'):
+                talente_widget.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Talent '{name}' wurde aktualisiert.")
@@ -428,8 +429,9 @@ class TalentDialogHandler:
             charakter.add_talent(new_talent)
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            talente_widget = app.get_widget_by_tab_text('Talente', 'talente_widget')
+            if talente_widget and hasattr(talente_widget, 'refresh_widget'):
+                talente_widget.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Talent '{name}' wurde hinzugefügt.")
@@ -454,8 +456,9 @@ class TalentDialogHandler:
             charakter.remove_talent(talent_name)
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            talente_widget = app.get_widget_by_tab_text('Talente', 'talente_widget')
+            if talente_widget and hasattr(talente_widget, 'refresh_widget'):
+                talente_widget.refresh_widget()
             
             Logger.info(f"Talent '{talent_name}' wurde gelöscht.")
             self.dismiss_dialog()

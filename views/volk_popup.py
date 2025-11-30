@@ -194,8 +194,9 @@ class VolkDialogHandler:
             
             charakter.voelker[name] = new_volk
             
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Völker', 'voelker_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Volk '{name}' wurde hinzugefügt.")
@@ -224,8 +225,9 @@ class VolkDialogHandler:
 
                 del charakter.voelker[volk_name]
 
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Völker', 'voelker_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 Logger.info(f"Volk '{volk_name}' wurde gelöscht.")
                 self.dismiss_dialog()

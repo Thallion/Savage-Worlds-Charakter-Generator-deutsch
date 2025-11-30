@@ -370,8 +370,9 @@ class WaffeDialogHandler:
                     del charakter.ausruestung[old_name]
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Waffe '{name}' wurde aktualisiert.")
@@ -459,8 +460,9 @@ class WaffeDialogHandler:
             success = charakter.add_ausruestung(new_waffe)
             
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 self.dismiss_dialog()
                 Logger.info(f"Waffe '{name}' wurde hinzugefügt.")
@@ -485,8 +487,9 @@ class WaffeDialogHandler:
             success = charakter.remove_ausruestung(waffe_name)
 
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 Logger.info(f"Waffe '{waffe_name}' wurde gelöscht.")
                 self.dismiss_dialog()

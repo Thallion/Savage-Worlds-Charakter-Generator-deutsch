@@ -40,6 +40,7 @@ class ServiceContainer:
     def initialize(self, charakter_controller):
         """
         Initialisiert alle Services mit den erforderlichen Abhängigkeiten
+        Prüft ob bereits initialisierte Services überschrieben werden
         
         Args:
             charakter_controller: Der Hauptcontroller für Charakterverwaltung
@@ -48,21 +49,53 @@ class ServiceContainer:
             app = App.get_running_app()
             theme_cls = app.theme_cls if app else None
             
-            # Core Services
-            self._services['config'] = ConfigService()
-            self._services['event'] = EventService()
-            self._services['theme'] = ThemeService()
+            # Core Services nur erstellen wenn noch nicht vorhanden
+            if 'config' not in self._services or self._services['config'] is None:
+                self._services['config'] = ConfigService()
+                Logger.debug("ConfigService initialisiert")
+            
+            if 'event' not in self._services or self._services['event'] is None:
+                self._services['event'] = EventService()
+                Logger.debug("EventService initialisiert")
+                
+            if 'theme' not in self._services or self._services['theme'] is None:
+                self._services['theme'] = ThemeService()
+                Logger.debug("ThemeService initialisiert")
             
             # Controller-abhängige Services
             if charakter_controller:
-                # Controller selbst registrieren
+                # Controller immer aktualisieren
                 self._services['charakter_controller'] = charakter_controller
+                Logger.debug("CharakterController aktualisiert")
                 
-                self._services['file_manager'] = FileManagerService(charakter_controller)
-                self._services['pdf'] = PDFService(charakter_controller)
+                # Controller-abhängige Services nur erstellen wenn nicht vorhanden
+                if 'file_manager' not in self._services or self._services['file_manager'] is None:
+                    self._services['file_manager'] = FileManagerService(charakter_controller)
+                    Logger.debug("FileManagerService initialisiert")
+                else:
+                    # Bestehenden Service mit neuem Controller aktualisieren
+                    if hasattr(self._services['file_manager'], 'controller'):
+                        self._services['file_manager'].controller = charakter_controller
+                        Logger.debug("FileManagerService Controller aktualisiert")
+                
+                if 'pdf' not in self._services or self._services['pdf'] is None:
+                    self._services['pdf'] = PDFService(charakter_controller)
+                    Logger.debug("PDFService initialisiert")
+                else:
+                    # Bestehenden Service mit neuem Controller aktualisieren
+                    if hasattr(self._services['pdf'], 'controller'):
+                        self._services['pdf'].controller = charakter_controller
+                        Logger.debug("PDFService Controller aktualisiert")
                 
                 if theme_cls:
-                    self._services['dialog'] = DialogService(charakter_controller, theme_cls)
+                    if 'dialog' not in self._services or self._services['dialog'] is None:
+                        self._services['dialog'] = DialogService(charakter_controller, theme_cls)
+                        Logger.debug("DialogService initialisiert")
+                    else:
+                        # Bestehenden Service mit neuem Controller aktualisieren
+                        if hasattr(self._services['dialog'], 'controller'):
+                            self._services['dialog'].controller = charakter_controller
+                            Logger.debug("DialogService Controller aktualisiert")
             
             Logger.info("Alle Services erfolgreich initialisiert")
             

@@ -277,8 +277,9 @@ class HandicapDialogHandler:
             charakter.save_custom_handicaps()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Handicap '{name}' wurde aktualisiert.")
@@ -375,8 +376,9 @@ class HandicapDialogHandler:
             charakter.save_custom_handicaps()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Handicap '{name}' wurde hinzugefügt.")
@@ -404,8 +406,9 @@ class HandicapDialogHandler:
             charakter.save_custom_handicaps()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
             self.dismiss_dialog()

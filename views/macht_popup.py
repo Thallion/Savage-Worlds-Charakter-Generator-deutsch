@@ -287,8 +287,9 @@ class MachtDialogHandler:
             charakter.save_custom_maechte()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            maechte_widget = app.get_widget_by_tab_text('Mächte', 'maechte_widget')
+            if maechte_widget and hasattr(maechte_widget, 'refresh_widget'):
+                maechte_widget.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Macht '{name}' wurde aktualisiert.")
@@ -386,8 +387,10 @@ class MachtDialogHandler:
             success = charakter.add_macht(new_macht)
             
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                # Aktualisiere die UI
+                maechte_widget = app.get_widget_by_tab_text('Mächte', 'maechte_widget')
+                if maechte_widget and hasattr(maechte_widget, 'refresh_widget'):
+                    maechte_widget.refresh_widget()
                 
                 self.dismiss_dialog()
                 Logger.info(f"Macht '{name}' wurde hinzugefügt.")
@@ -414,8 +417,10 @@ class MachtDialogHandler:
             success = charakter.remove_macht(macht_name)
 
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                # Aktualisiere die UI
+                maechte_widget = app.get_widget_by_tab_text('Mächte', 'maechte_widget')
+                if maechte_widget and hasattr(maechte_widget, 'refresh_widget'):
+                    maechte_widget.refresh_widget()
                 
                 Logger.info(f"Macht '{macht_name}' wurde gelöscht.")
                 self.dismiss_dialog()

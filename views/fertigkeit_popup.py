@@ -231,8 +231,9 @@ class FertigkeitDialogHandler:
             charakter.save_custom_fertigkeiten()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Fertigkeiten', 'fertigkeiten_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Fertigkeit '{name}' wurde hinzugefügt.")
@@ -260,8 +261,9 @@ class FertigkeitDialogHandler:
             charakter.save_custom_fertigkeiten()
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Fertigkeiten', 'fertigkeiten_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             Logger.info(f"Fertigkeit '{fertigkeit_name}' wurde gelöscht.")
             self.dismiss_dialog()

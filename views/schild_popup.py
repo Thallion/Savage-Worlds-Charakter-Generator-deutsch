@@ -324,8 +324,9 @@ class SchildDialogHandler:
                     del charakter.ausruestung[old_name]
             
             # Aktualisiere die UI
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
+            widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+            if widget_name and hasattr(widget_name, 'refresh_widget'):
+                widget_name.refresh_widget()
             
             self.dismiss_dialog()
             Logger.info(f"Schild '{name}' wurde aktualisiert.")
@@ -398,8 +399,9 @@ class SchildDialogHandler:
             success = charakter.add_ausruestung(new_schild)
             
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 self.dismiss_dialog()
                 Logger.info(f"Schild '{name}' wurde hinzugefügt.")
@@ -424,8 +426,9 @@ class SchildDialogHandler:
             success = charakter.remove_ausruestung(schild_name)
 
             if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+                widget_name = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget_name and hasattr(widget_name, 'refresh_widget'):
+                    widget_name.refresh_widget()
                 
                 Logger.info(f"Schild '{schild_name}' wurde gelöscht.")
                 self.dismiss_dialog()
