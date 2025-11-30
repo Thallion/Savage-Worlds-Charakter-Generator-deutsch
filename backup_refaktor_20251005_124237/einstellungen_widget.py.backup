@@ -10,7 +10,9 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.clock import Clock
 
-# Handler imports (excluding redundant theme_handler and character_handler)
+# Handler imports (excluding redundant theme_handler)
+from controllers.character_handler import CharacterHandler
+from controllers.template_handler import TemplateHandler
 from controllers.game_elements_handler import GameElementsHandler
 
 # Service imports
@@ -53,11 +55,13 @@ class EinstellungenWidget(MDBoxLayout):
         Clock.schedule_once(self._post_init, 0)
     
     def _initialize_handlers(self):
-        """Initialisiert Handler (excluding theme - handled by manager)"""
+        """Initialisiert alle Handler (excluding theme - handled by manager)"""
         try:
+            self.character_handler = CharacterHandler(self)
+            self.template_handler = TemplateHandler(self)
             self.game_elements_handler = GameElementsHandler(self)
             
-            Logger.info("Handler erfolgreich initialisiert")
+            Logger.info("Alle Handler erfolgreich initialisiert")
         except Exception as e:
             Logger.error(f"Fehler bei Handler-Initialisierung: {e}")
     
@@ -82,6 +86,9 @@ class EinstellungenWidget(MDBoxLayout):
             event_service = service_container.get_event_service()
             
             if event_service:
+                # Character-Events
+                event_service.subscribe(EventTypes.CHARACTER_CREATED, self.character_handler.on_character_created)
+                event_service.subscribe(EventTypes.CHARACTER_LOADED, self.character_handler.on_character_loaded)
                 event_service.subscribe(EventTypes.THEME_CHANGED, self._on_theme_changed)
                 
                 Logger.debug("Event-Handler für Einstellungen registriert")
@@ -95,7 +102,8 @@ class EinstellungenWidget(MDBoxLayout):
             if self.theme_manager:
                 self.theme_manager.initialize_theme()
             
-            # UI-Felder aktualisierung ausgelagert
+            # UI-Felder aktualisieren  
+            self.character_handler._update_ui_fields()
             
             # Statistiken aktualisieren
             if self.statistics_manager:
@@ -130,33 +138,14 @@ class EinstellungenWidget(MDBoxLayout):
         else:
             Logger.warning("ThemeManager nicht verfügbar für Theme-Update")
     
-    # Character-Management - Basis-Operationen bleiben hier
+    # Character-Management (delegiert an CharacterHandler)
     def get_charakter_value(self, attribute, default_value=''):
-        """Hilfsmethode zum sicheren Abrufen von Charakter-Attributen"""
-        try:
-            if self.app.controller and self.app.controller.charakter:
-                return str(getattr(self.app.controller.charakter, attribute, default_value))
-            return default_value
-        except Exception as e:
-            Logger.warning(f"Fehler beim Abrufen von {attribute}: {e}")
-            return default_value
+        """Delegiert Charakter-Wert-Abruf an CharacterHandler"""
+        return self.character_handler.get_charakter_value(attribute, default_value)
     
     def update_maximale_attributsteigerungen(self):
-        """Aktualisiert die maximalen Attributsteigerungen"""
-        try:
-            if not self.app.controller:
-                Logger.warning("Controller nicht verfügbar für Attributsteigerungen-Update")
-                return
-                
-            field_value = self.ids.attributsteigerungen_field.text
-            try:
-                new_value = int(field_value)
-                self.app.controller.charakter.maximale_attributsteigerungen = new_value
-                Logger.info(f"Maximale Attributsteigerungen aktualisiert auf: {new_value}")
-            except ValueError:
-                Logger.warning(f"Ungültiger Wert für Attributsteigerungen: {field_value}")
-        except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren der Attributsteigerungen: {e}")
+        """Delegiert Attributsteigerungen-Update an CharacterHandler"""
+        return self.character_handler.update_maximale_attributsteigerungen()
     
     def open_log_file(self):
         """Kopiert den Log-Inhalt in die Zwischenablage"""
@@ -431,91 +420,76 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.error(f"Dialog-Error: {e}")
     
     def update_maximale_fertigkeitssteigerungen(self):
-        """Aktualisiert die maximalen Fertigkeitssteigerungen"""
-        try:
-            if not self.app.controller:
-                Logger.warning("Controller nicht verfügbar für Fertigkeitssteigerungen-Update")
-                return
-                
-            field_value = self.ids.fertigkeitssteigerungen_field.text
-            try:
-                new_value = int(field_value)
-                self.app.controller.charakter.maximale_fertigkeitssteigerungen = new_value
-                Logger.info(f"Maximale Fertigkeitssteigerungen aktualisiert auf: {new_value}")
-            except ValueError:
-                Logger.warning(f"Ungültiger Wert für Fertigkeitssteigerungen: {field_value}")
-        except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren der Fertigkeitssteigerungen: {e}")
+        """Delegiert Fertigkeitssteigerungen-Update an CharacterHandler"""
+        return self.character_handler.update_maximale_fertigkeitssteigerungen()
     
     def update_vermoegen(self):
-        """Aktualisiert das Vermögen"""
-        try:
-            if not self.app.controller:
-                Logger.warning("Controller nicht verfügbar für Vermögen-Update")
-                return
-                
-            field_value = self.ids.vermoegen_field.text
-            try:
-                new_value = int(field_value)
-                self.app.controller.charakter.vermoegen = new_value
-                Logger.info(f"Vermögen aktualisiert auf: {new_value}")
-            except ValueError:
-                Logger.warning(f"Ungültiger Wert für Vermögen: {field_value}")
-        except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren des Vermögens: {e}")
+        """Delegiert Vermögen-Update an CharacterHandler"""
+        return self.character_handler.update_vermoegen()
     
     def update_waehrung(self):
-        """Aktualisiert die Währungseinheit"""
-        try:
-            if not self.app.controller:
-                Logger.warning("Controller nicht verfügbar für Währung-Update")
-                return
-                
-            new_value = self.ids.waehrung_field.text
-            self.app.controller.charakter.waehrungseinheit = new_value
-            Logger.info(f"Währungseinheit aktualisiert auf: {new_value}")
-        except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren der Währung: {e}")
+        """Delegiert Währung-Update an CharacterHandler"""
+        return self.character_handler.update_waehrung()
     
     def erhoehe_startkapital(self):
-        """Erhöht das Startkapital mit Handicap-Punkten"""
-        try:
-            if not self.app.controller:
-                Logger.warning("Controller nicht verfügbar für Startkapital-Erhöhung")
-                return
-                
-            self.app.controller.erhoehe_startkapital_mit_handicap()
-            Logger.info("Startkapital mit Handicap-Punkten erhöht")
-        except Exception as e:
-            Logger.error(f"Fehler beim Erhöhen des Startkapitals: {e}")
+        """Delegiert Startkapital-Erhöhung an CharacterHandler"""
+        return self.character_handler.erhoehe_startkapital()
     
     def erhoehe_aufstieg(self):
-        """Erhöht die Aufstiege"""
-        try:
-            if not (self.app.controller and self.app.controller.charakter):
-                Logger.warning("Controller oder Charakter nicht verfügbar für Aufstieg-Erhöhung")
-                return
-                
-            from functions.character_advancement import increase_aufstiege
-            increase_aufstiege(self.app.controller.charakter)
-            Logger.info("Aufstieg erhöht")
-        except Exception as e:
-            Logger.error(f"Fehler beim Erhöhen des Aufstiegs: {e}")
+        """Delegiert Aufstieg-Erhöhung an CharacterHandler"""
+        return self.character_handler.erhoehe_aufstieg()
     
     def senke_aufstieg(self):
-        """Senkt die Aufstiege"""
-        try:
-            if not (self.app.controller and self.app.controller.charakter):
-                Logger.warning("Controller oder Charakter nicht verfügbar für Aufstieg-Senkung")
-                return
-                
-            from functions.character_advancement import decrease_aufstiege
-            decrease_aufstiege(self.app.controller.charakter)
-            Logger.info("Aufstieg gesenkt")
-        except Exception as e:
-            Logger.error(f"Fehler beim Senken des Aufstiegs: {e}")
+        """Delegiert Aufstieg-Senkung an CharacterHandler"""
+        return self.character_handler.senke_aufstieg()
     
+    def create_new_character(self):
+        """Delegiert Charakter-Erstellung an CharacterHandler"""
+        return self.character_handler.create_new_character()
     
+    def schnellspeichern_charakter(self):
+        """Delegiert Schnellspeicherung an CharacterHandler"""
+        return self.character_handler.schnellspeichern_charakter()
+    
+    def speichere_charakter(self):
+        """Delegiert Charakterspeicherung an CharacterHandler"""
+        return self.character_handler.speichere_charakter()
+    
+    def lade_charakter(self):
+        """Delegiert Charakterladen an CharacterHandler"""
+        return self.character_handler.lade_charakter()
+    
+    def erzeuge_charakterbogen_pdf(self):
+        """Delegiert PDF-Erzeugung an CharacterHandler"""
+        return self.character_handler.erzeuge_charakterbogen_pdf()
+    
+    def zeige_statblock(self):
+        """Delegiert Statblock-Anzeige an CharacterHandler"""
+        return self.character_handler.zeige_statblock()
+    
+    def zeige_element_statistiken(self):
+        """Delegiert Element-Statistiken an CharacterHandler"""
+        return self.character_handler.zeige_element_statistiken()
+    
+    # Template-Management (delegiert an TemplateHandler)
+    def open_template_selection_dialog(self):
+        """Delegiert Template-Dialog an TemplateHandler"""
+        return self.template_handler.open_template_selection_dialog()
+        
+    def show_template_selection_dialog(self):
+        """Delegiert Template-Dialog an TemplateHandler"""
+        return self.template_handler.show_template_selection_dialog()
+    
+    def generate_character_from_selected_template(self):
+        """Delegiert Template-Generierung an TemplateHandler"""
+        return self.template_handler.generate_character_from_selected_template()
+    
+    @property
+    def selected_template(self):
+        """Property für ausgewähltes Template (für KV-Zugriff)"""
+        if hasattr(self, 'template_handler') and self.template_handler:
+            return getattr(self.template_handler, 'selected_template', None)
+        return None
     
     # Game Elements Management (delegiert an GameElementsHandler)
     def open_add_volk_dialog(self):
@@ -772,6 +746,8 @@ class EinstellungenWidget(MDBoxLayout):
             event_service = service_container.get_event_service()
             
             if event_service:
+                event_service.unsubscribe(EventTypes.CHARACTER_CREATED, self.character_handler.on_character_created)
+                event_service.unsubscribe(EventTypes.CHARACTER_LOADED, self.character_handler.on_character_loaded)
                 event_service.unsubscribe(EventTypes.THEME_CHANGED, self._on_theme_changed)
             
             Logger.info("EinstellungenWidget bereinigt")

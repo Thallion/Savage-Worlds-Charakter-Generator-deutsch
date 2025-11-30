@@ -9154,5 +9154,7 @@
         "schwere_entscheidungen": false,
         "ungepanzerter_held": false,
         "wundobergrenze": false
-    }
+    },
+    "startgeld": 500,
+    "waehrung": "Räder
 }

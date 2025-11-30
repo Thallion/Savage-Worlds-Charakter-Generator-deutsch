@@ -1,0 +1,242 @@
+# charakter_verwaltung_widget.kv
+
+<CharakterVerwaltungWidget>:
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "12dp"
+            padding: "16dp"
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDCard:
+                style: "elevated"
+                md_bg_color: app.theme_cls.surfaceContainerColor
+                size_hint_y: None
+                height: "60dp"
+                padding: "12dp"
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    spacing: "8dp"
+
+                    MDIcon:
+                        icon: "account-multiple"
+                        size_hint_x: None
+                        width: "40dp"
+                        theme_icon_color: "Primary"
+
+                    MDLabel:
+                        text: "Charakterverwaltung"
+                        theme_text_color: "Primary"
+                        font_style: "Headline"
+                        adaptive_height: True
+
+            # Charakterverwaltung Bereich
+            MDCard:
+                style: "elevated"
+                md_bg_color: app.theme_cls.surfaceContainerColor
+                padding: "16dp"
+                size_hint_y: None
+                adaptive_height: True
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: "12dp"
+                    adaptive_height: True
+
+                    MDLabel:
+                        text: "Charakter-Aktionen"
+                        theme_text_color: "Primary"
+                        font_style: "Title"
+                        size_hint_y: None
+                        height: "40dp"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "50dp"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.create_new_character()
+                            
+                            MDButtonIcon:
+                                icon: "account-plus"
+                            
+                            MDButtonText:
+                                text: "Neuer Charakter"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.lade_charakter()
+                            
+                            MDButtonIcon:
+                                icon: "folder-open"
+                            
+                            MDButtonText:
+                                text: "Laden"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "50dp"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.schnellspeichern_charakter()
+                            
+                            MDButtonIcon:
+                                icon: "content-save"
+                            
+                            MDButtonText:
+                                text: "Schnellspeichern"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.speichere_charakter()
+                            
+                            MDButtonIcon:
+                                icon: "content-save-outline"
+                            
+                            MDButtonText:
+                                text: "Speichern als..."
+
+            # PDF Export Bereich
+            MDCard:
+                style: "elevated"
+                md_bg_color: app.theme_cls.surfaceContainerColor
+                padding: "16dp"
+                size_hint_y: None
+                adaptive_height: True
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: "12dp"
+                    adaptive_height: True
+
+                    MDLabel:
+                        text: "Export & Anzeige"
+                        theme_text_color: "Primary"
+                        font_style: "Title"
+                        size_hint_y: None
+                        height: "40dp"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "50dp"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.erzeuge_charakterbogen_pdf()
+                            
+                            MDButtonIcon:
+                                icon: "file-pdf-box"
+                            
+                            MDButtonText:
+                                text: "PDF erstellen"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.zeige_statblock()
+                            
+                            MDButtonIcon:
+                                icon: "view-list"
+                            
+                            MDButtonText:
+                                text: "Statblock"
+
+                    MDButton:
+                        style: "elevated"
+                        on_release: root.zeige_element_statistiken()
+                        size_hint_y: None
+                        height: "50dp"
+                        
+                        MDButtonIcon:
+                            icon: "chart-bar"
+                        
+                        MDButtonText:
+                            text: "Element-Statistiken"
+
+            # Template Management Bereich
+            MDCard:
+                style: "elevated"
+                md_bg_color: app.theme_cls.surfaceContainerColor
+                padding: "16dp"
+                size_hint_y: None
+                adaptive_height: True
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: "12dp"
+                    adaptive_height: True
+
+                    MDLabel:
+                        text: "Template-Management"
+                        theme_text_color: "Primary"
+                        font_style: "Title"
+                        size_hint_y: None
+                        height: "40dp"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "50dp"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.open_template_selection_dialog()
+                            
+                            MDButtonIcon:
+                                icon: "file-document-multiple"
+                            
+                            MDButtonText:
+                                text: "Template auswählen"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.generate_character_from_selected_template()
+                            disabled: not root.selected_template
+                            
+                            MDButtonIcon:
+                                icon: "auto-fix"
+                            
+                            MDButtonText:
+                                text: "Charakter generieren"
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "50dp"
+
+                        MDButton:
+                            style: "filled"
+                            on_release: root.create_template_wizard()
+                            
+                            MDButtonIcon:
+                                icon: "file-document-plus"
+                            
+                            MDButtonText:
+                                text: "Neues Template erstellen"
+
+                    # Template Info
+                    MDCard:
+                        style: "outlined"
+                        size_hint_y: None
+                        height: "60dp" if root.selected_template else "40dp"
+                        padding: "8dp"
+
+                        MDLabel:
+                            text: f"Ausgewählt: {root.selected_template['name'] if root.selected_template else 'Kein Template'}"
+                            theme_text_color: "Secondary"
+                            font_style: "Body"
+                            halign: "center"

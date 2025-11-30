@@ -398,12 +398,4 @@ class TemplateHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Laden der Templates: {e}")
     
-    def _load_templates(self):
-        """Lädt Templates neu (für Template-Wizard Integration)"""
-        try:
-            self._load_available_templates(None)
-            Logger.info("Templates erfolgreich neu geladen")
-        except Exception as e:
-            Logger.error(f"Fehler beim Neuladen der Templates: {e}")
-    
     

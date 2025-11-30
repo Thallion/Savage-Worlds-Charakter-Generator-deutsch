@@ -24,7 +24,6 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.textfield import MDTextField
 from kivymd.theming import ThemableBehavior
@@ -41,7 +40,6 @@ from kivymd.uix.tab import (
 from controllers.charakter_controller import CharakterController
 from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
-from views.charakter_verwaltung_widget import CharakterVerwaltungWidget
 from views.einstellungen_widget import EinstellungenWidget
 from views.historie_view import HistorieWidget
 from views.voelker_view import VoelkerWidget
@@ -55,7 +53,7 @@ from views.charakterbogen_view import CharakterbogenWidget
 
 # Extrahierte Screen-Klassen
 from views.screens import (
-    CharakterVerwaltungScreen, EinstellungenScreen, VoelkerScreen, ProfilScreen, EigenschaftenScreen,
+    EinstellungenScreen, VoelkerScreen, ProfilScreen, EigenschaftenScreen,
     HandicapsScreen, TalenteScreen, MaechteScreen, AusruestungScreen, 
     CharakterbogenScreen, HistorieScreen, InfoScreen, HyperlinkLabel
 )
@@ -124,20 +122,19 @@ class SW_Charakter_GeneratorApp(MDApp):
         service_container.initialize(self.controller)
         
         # Deine Icons + Tab-Texte + zugehörige Screens
-        # NEU: CharakterVerwaltung-Tab hinzugefügt
+        # NEU: Historie-Tab hinzugefügt
         self.tab_definitions = [
-            ("account-multiple", "Charakterverwaltung", CharakterVerwaltungScreen),
-            ("cog",              "Einstellungen",        EinstellungenScreen),
-            ("account-group",    "Völker",               VoelkerScreen),
-            ("account-details",  "Profil",               ProfilScreen),
-            ("arm-flex",         "Eigenschaften",        EigenschaftenScreen),
-            ("account-alert",    "Handicaps",            HandicapsScreen),
-            ("star-circle",      "Talente",              TalenteScreen),
-            ("creation-outline", "Mächte",               MaechteScreen),
-            ("shield-sword",     "Ausrüstung",           AusruestungScreen),
-            ("account",          "Charakter",            CharakterbogenScreen),
-            ("history",          "Historie",             HistorieScreen),
-            ("information",      "Info",                 InfoScreen),
+            ("cog",              "Einstellungen",  EinstellungenScreen),
+            ("account-group",    "Völker",         VoelkerScreen),
+            ("account-details",  "Profil",         ProfilScreen),
+            ("arm-flex",         "Eigenschaften",  EigenschaftenScreen),
+            ("account-alert",    "Handicaps",      HandicapsScreen),
+            ("star-circle",      "Talente",        TalenteScreen),
+            ("creation-outline", "Mächte",         MaechteScreen),
+            ("shield-sword",     "Ausrüstung",     AusruestungScreen),
+            ("account",          "Charakter",      CharakterbogenScreen),
+            ("history",          "Historie",       HistorieScreen),
+            ("information",      "Info",           InfoScreen),
         ]
 
     def build(self):
@@ -588,7 +585,6 @@ class SW_Charakter_GeneratorApp(MDApp):
                 elif hasattr(screen, 'ids'):
                     # Map tab names to their widget IDs as defined in main.kv
                     widget_id_map = {
-                        'Charakterverwaltung': 'charakter_verwaltung_widget',
                         'Einstellungen': 'einstellungen_widget',
                         'Völker': 'voelker_widget',
                         'Profil': 'profil_widget', 
@@ -633,12 +629,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             # Hole das tatsächliche Widget aus dem Screen
             widget = None
             if hasattr(screen_instance, 'ids'):
-                if tab_name == 'Charakterverwaltung' and 'charakter_verwaltung_widget' in screen_instance.ids:
-                    widget = screen_instance.ids.charakter_verwaltung_widget
-                    self.charakter_verwaltung_widget = widget
-                    Logger.debug("CharakterVerwaltungWidget bei App registriert")
-                
-                elif tab_name == 'Einstellungen' and 'einstellungen_widget' in screen_instance.ids:
+                if tab_name == 'Einstellungen' and 'einstellungen_widget' in screen_instance.ids:
                     widget = screen_instance.ids.einstellungen_widget
                     self.einstellungen_widget = widget
                     Logger.debug("EinstellungenWidget bei App registriert")
@@ -758,7 +749,6 @@ class SW_Charakter_GeneratorApp(MDApp):
         try:
             # Direkte Zuordnung zu den registrierten Widgets
             widget_map = {
-                'Charakterverwaltung': getattr(self, 'charakter_verwaltung_widget', None),
                 'Einstellungen': getattr(self, 'einstellungen_widget', None),
                 'Eigenschaften': getattr(self, 'eigenschaften_widget', None),
                 'Ausrüstung': getattr(self, 'ausruestung_widget', None),
