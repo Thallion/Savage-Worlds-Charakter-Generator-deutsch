@@ -132,6 +132,7 @@ def _get_selected_elements_with_data(charakter):
                 'ausgewaehlt': True,
                 'stufe': handicap.stufe,
                 'punkte': handicap.punkte,
+                'beschreibung': handicap.beschreibung,
                 # Weitere individuelle Daten falls vorhanden
             }
     
@@ -144,6 +145,7 @@ def _get_selected_elements_with_data(charakter):
                 'rang': talent.rang,
                 'neue_maechte': talent.neue_maechte,
                 'machtpunkte': talent.machtpunkte,
+                'beschreibung': talent.beschreibung,
                 # Weitere individuelle Daten falls vorhanden
             }
     
@@ -157,6 +159,7 @@ def _get_selected_elements_with_data(charakter):
                 'machtpunkte': macht.machtpunkte,
                 'reichweite': macht.reichweite,
                 'dauer': macht.dauer,
+                'beschreibung': macht.beschreibung,
                 # Weitere individuelle Daten falls vorhanden
             }
     
@@ -174,6 +177,9 @@ def _get_selected_elements_with_data(charakter):
                 'ausgewaehlt': True,
                 'anzahl': getattr(item, 'anzahl', 1),
                 'zustand': getattr(item, 'zustand', 'neu'),
+                'beschreibung': getattr(item, 'beschreibung', ''),
+                'angelegt': getattr(item, 'angelegt', False),
+                'menge': getattr(item, 'menge', 0),
                 # Weitere individuelle Daten falls vorhanden
             }
     
@@ -376,6 +382,8 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.handicaps[name].stufe = data['stufe']
             if 'punkte' in data:
                 charakter.handicaps[name].punkte = data['punkte']
+            if 'beschreibung' in data:
+                charakter.handicaps[name].beschreibung = data['beschreibung']
 
     # Talent-Daten anwenden
     talente_data = selected_elements.get('talente', {})
@@ -388,6 +396,8 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.talente[name].neue_maechte = data['neue_maechte']
             if 'machtpunkte' in data:
                 charakter.talente[name].machtpunkte = data['machtpunkte']
+            if 'beschreibung' in data:
+                charakter.talente[name].beschreibung = data['beschreibung']
 
     # Macht-Daten anwenden
     maechte_data = selected_elements.get('maechte', {})
@@ -402,6 +412,8 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.maechte[name].reichweite = data['reichweite']
             if 'dauer' in data:
                 charakter.maechte[name].dauer = data['dauer']
+            if 'beschreibung' in data:
+                charakter.maechte[name].beschreibung = data['beschreibung']
 
     # Ausrüstungs-Daten anwenden
     ausruestung_data = selected_elements.get('ausruestung', {})
@@ -413,6 +425,12 @@ def _apply_individual_element_data(charakter, selected_elements):
                 item.menge = data['anzahl']
             if 'zustand' in data:
                 item.zustand = data['zustand']
+            if 'beschreibung' in data:
+                item.beschreibung = data['beschreibung']
+            if 'angelegt' in data:
+                item.angelegt = data['angelegt']
+            if 'menge' in data:
+                item.menge = data['menge']
 
 
 def _load_equipment_selections(charakter, data):
