@@ -136,10 +136,9 @@ def _get_selected_elements_with_data(charakter):
                 # Weitere individuelle Daten falls vorhanden
             }
     
-    # Nur ausgewählte Talente mit individuellen Daten
-    for talent_name in charakter.selected_talente:
-        if talent_name in charakter.talente:
-            talent = charakter.talente[talent_name]
+    # Nur ausgewählte Talente mit individuellen Daten (inkl. duplizierte Talente)
+    for talent_name, talent in charakter.talente.items():
+        if talent.ausgewaehlt:
             selected_elements['talente'][talent_name] = {
                 'ausgewaehlt': True,
                 'rang': talent.rang,
@@ -245,6 +244,9 @@ def _load_new_format(charakter, data):
     
     # Individuelle Daten auf die Setting-Elemente anwenden
     _apply_individual_element_data(charakter, selected_elements)
+    
+    # Wiederherstellung der selected_talente Liste nach dem Laden aller Talente
+    charakter.selected_talente = [name for name, talent in charakter.talente.items() if talent.ausgewaehlt]
     
     # Ausrüstungslisten laden
     _load_equipment_selections(charakter, data)
@@ -385,10 +387,11 @@ def _apply_individual_element_data(charakter, selected_elements):
             if 'beschreibung' in data:
                 charakter.handicaps[name].beschreibung = data['beschreibung']
 
-    # Talent-Daten anwenden
+    # Talent-Daten anwenden (inkl. Wiederherstellung duplizierter Talente)
     talente_data = selected_elements.get('talente', {})
     for name, data in talente_data.items():
         if name in charakter.talente:
+            # Existierendes Talent laden
             charakter.talente[name].ausgewaehlt = data.get('ausgewaehlt', False)
             if 'rang' in data:
                 charakter.talente[name].rang = data['rang']
@@ -398,6 +401,24 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.talente[name].machtpunkte = data['machtpunkte']
             if 'beschreibung' in data:
                 charakter.talente[name].beschreibung = data['beschreibung']
+        else:
+            # Dupliziertes Talent wiederherstellen (z.B. "Neue Mächte_2")
+            base_name = name.split('_')[0] if '_' in name and name.split('_')[-1].isdigit() else name
+            if base_name in charakter.talente:
+                # Erstelle Kopie des Basis-Talents
+                base_talent = charakter.talente[base_name]
+                new_talent = base_talent.clone()
+                new_talent.ausgewaehlt = data.get('ausgewaehlt', False)
+                if 'rang' in data:
+                    new_talent.rang = data['rang']
+                if 'neue_maechte' in data:
+                    new_talent.neue_maechte = data['neue_maechte']
+                if 'machtpunkte' in data:
+                    new_talent.machtpunkte = data['machtpunkte']
+                if 'beschreibung' in data:
+                    new_talent.beschreibung = data['beschreibung']
+                charakter.talente[name] = new_talent
+                Logger.info(f"Dupliziertes Talent '{name}' wiederhergestellt")
 
     # Macht-Daten anwenden
     maechte_data = selected_elements.get('maechte', {})

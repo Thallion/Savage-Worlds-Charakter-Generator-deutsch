@@ -113,6 +113,29 @@ class EinstellungenWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler bei Post-Initialisierung: {e}")
 
+    # ==================== UI UPDATE METHODEN ====================
+    
+    def aktualisiere_ui(self):
+        """Aktualisiert die UI-Elemente des Einstellungen-Widgets"""
+        try:
+            # UI-Felder über CharacterHandler aktualisieren
+            if hasattr(self, 'character_handler') and self.character_handler:
+                self.character_handler._update_ui_fields()
+            
+            # Statistiken über StatisticsManager aktualisieren
+            if hasattr(self, 'statistics_manager') and self.statistics_manager:
+                self.statistics_manager.update_element_statistics_ui()
+            
+            # Theme-Updates über ThemeManager
+            if hasattr(self, 'theme_manager') and self.theme_manager:
+                self.theme_manager.update_color_chips()
+            
+            Logger.debug("EinstellungenWidget UI erfolgreich aktualisiert")
+            return True
+        except Exception as e:
+            Logger.error(f"Fehler bei EinstellungenWidget.aktualisiere_ui: {e}")
+            return False
+    
     # ==================== DELEGIERTE METHODEN ====================
     # Alle Methoden delegieren an die entsprechenden Manager/Handler
     
