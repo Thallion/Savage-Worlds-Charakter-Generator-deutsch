@@ -319,10 +319,13 @@ class EigenschaftenManager:
             Logger.warning(f"Fertigkeit '{fertigkeit_name}' hat bereits den Maximalwert W{max_wert}.")
             return False
         
-        # Prüfe ob Fertigkeit über Attribut steigt
-        if fertigkeit.attribut and fertigkeit.wuerfel.value >= fertigkeit.attribut.wuerfel.value:
-            if not confirm_double_cost:
-                return "needs_confirmation"
+        # Prüfe ob Fertigkeit über Attribut steigt (Berücksichtige effektive Werte)
+        if fertigkeit.attribut:
+            fertigkeit_eff = fertigkeit.wuerfel.value + (fertigkeit.wuerfel.modifier if fertigkeit.wuerfel.value == 4 else 0)
+            attribut_eff = fertigkeit.attribut.wuerfel.value + (fertigkeit.attribut.wuerfel.modifier if fertigkeit.attribut.wuerfel.value == 4 else 0)
+            if fertigkeit_eff >= attribut_eff:
+                if not confirm_double_cost:
+                    return "needs_confirmation"
         
         # Berechne Kosten
         kosten = self._berechne_fertigkeit_kosten(charakter, fertigkeit, fertigkeit.attribut)
@@ -397,9 +400,12 @@ class EigenschaftenManager:
         else:
             base_kosten = self.kosten.get('fertigkeit_chargen', 1)
         
-        # Doppelte Kosten wenn Fertigkeit über Attribut
-        if attribut and fertigkeit.wuerfel.value >= attribut.wuerfel.value:
-            return base_kosten * self.kosten.get('fertigkeit_ueber_attribut', 2)
+        # Doppelte Kosten wenn Fertigkeit über Attribut (Berücksichtige effektive Werte)
+        if attribut:
+            fertigkeit_eff = fertigkeit.wuerfel.value + (fertigkeit.wuerfel.modifier if fertigkeit.wuerfel.value == 4 else 0)
+            attribut_eff = attribut.wuerfel.value + (attribut.wuerfel.modifier if attribut.wuerfel.value == 4 else 0)
+            if fertigkeit_eff > attribut_eff:
+                return base_kosten * self.kosten.get('fertigkeit_ueber_attribut', 2)
         
         return base_kosten
     
