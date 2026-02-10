@@ -275,6 +275,9 @@ class TalentManager:
                 from functions.ausruestung_funktionen import anpassen_vermoegen_bei_talent_reich
                 anpassen_vermoegen_bei_talent_reich(self.charakter, talent_name_key, False)  # False = wird abgewählt
             
+            # Auto-Handicaps und Auto-Talente für Arkane Hintergründe entfernen
+            self._remove_ah_auto_effects(talent_name_key)
+
             if talent_name_key in self.charakter.selected_talente:
                 self.charakter.selected_talente.remove(talent_name_key)
             Logger.debug(f"Talent '{talent_name_key}' entfernt.")
@@ -304,8 +307,9 @@ class TalentManager:
         
         # Mächte entfernen wenn ein Arkaner Hintergrund abgewählt wird
         if talent.name.startswith("Arkaner Hintergrund"):
-            while self.charakter.maechte:
-                macht_name = next(iter(self.charakter.maechte))
+            # Kopie der Liste, da sie während der Iteration modifiziert wird
+            selected_copy = list(self.charakter.selected_maechte)
+            for macht_name in selected_copy:
                 entferne_macht(self.charakter, macht_name)
         
         talent_abwaehlen_intern()
@@ -349,10 +353,13 @@ class TalentManager:
                         anpassen_vermoegen_bei_talent_reich(self.charakter, talent_name_key, True)  # True = wird ausgewählt
                     
                     Logger.info(f"Talent '{talent_name_key}' ausgewählt.")
-                    
+
+                    # Auto-Handicaps und Auto-Talente für Arkane Hintergründe anwenden
+                    self._apply_ah_auto_effects(talent_name_key)
+
                     # Abgeleitete Werte neu berechnen (ohne Vermögensberechnung)
                     self.charakter.berechne_abgeleitete_werte()
-                    
+
                     return True
                 else:
                     pass
@@ -362,11 +369,74 @@ class TalentManager:
         else:
             Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
         return False
-    
+
+    def _apply_ah_auto_effects(self, talent_name_key):
+        """
+        Wendet automatische Handicaps und Talente an, wenn ein Arkaner Hintergrund ausgewählt wird.
+        Die Handicaps werden als auto_applied markiert und geben KEINE Handicap-Punkte.
+        """
+        talent = self.charakter.talente.get(talent_name_key)
+        if not talent:
+            return
+
+        # Auto-Handicaps anwenden
+        for handicap_key in talent.auto_handicaps:
+            if handicap_key in self.charakter.handicaps:
+                handicap = self.charakter.handicaps[handicap_key]
+                if not handicap.ausgewaehlt:
+                    handicap.ausgewaehlt = True
+                    handicap.auto_applied = True
+                    if handicap_key not in self.charakter.selected_handicaps:
+                        self.charakter.selected_handicaps.append(handicap_key)
+                    Logger.info(f"AH Auto-Handicap '{handicap.name} ({handicap.stufe})' angewendet für '{talent_name_key}'")
+            else:
+                Logger.warning(f"AH Auto-Handicap '{handicap_key}' nicht im Charakter gefunden")
+
+        # Auto-Talente anwenden
+        for auto_talent_name in talent.auto_talente:
+            if auto_talent_name in self.charakter.talente:
+                auto_talent = self.charakter.talente[auto_talent_name]
+                if not auto_talent.ausgewaehlt:
+                    auto_talent.ausgewaehlt = True
+                    if auto_talent_name not in self.charakter.selected_talente:
+                        self.charakter.selected_talente.append(auto_talent_name)
+                    Logger.info(f"AH Auto-Talent '{auto_talent_name}' angewendet für '{talent_name_key}'")
+            else:
+                Logger.warning(f"AH Auto-Talent '{auto_talent_name}' nicht im Charakter gefunden")
+
+    def _remove_ah_auto_effects(self, talent_name_key):
+        """
+        Entfernt automatische Handicaps und Talente, wenn ein Arkaner Hintergrund abgewählt wird.
+        """
+        talent = self.charakter.talente.get(talent_name_key)
+        if not talent:
+            return
+
+        # Auto-Handicaps entfernen
+        for handicap_key in talent.auto_handicaps:
+            if handicap_key in self.charakter.handicaps:
+                handicap = self.charakter.handicaps[handicap_key]
+                if handicap.ausgewaehlt and handicap.auto_applied:
+                    handicap.ausgewaehlt = False
+                    handicap.auto_applied = False
+                    if handicap_key in self.charakter.selected_handicaps:
+                        self.charakter.selected_handicaps.remove(handicap_key)
+                    Logger.info(f"AH Auto-Handicap '{handicap.name} ({handicap.stufe})' entfernt für '{talent_name_key}'")
+
+        # Auto-Talente entfernen
+        for auto_talent_name in talent.auto_talente:
+            if auto_talent_name in self.charakter.talente:
+                auto_talent = self.charakter.talente[auto_talent_name]
+                if auto_talent.ausgewaehlt:
+                    auto_talent.ausgewaehlt = False
+                    if auto_talent_name in self.charakter.selected_talente:
+                        self.charakter.selected_talente.remove(auto_talent_name)
+                    Logger.info(f"AH Auto-Talent '{auto_talent_name}' entfernt für '{talent_name_key}'")
+
     def pruefe_voraussetzungen(self, talent):
         """
         Prüft alle Voraussetzungen eines Talents und gibt eine Liste von Fehlermeldungen zurück.
-        
+
         Args:
             talent: Das zu prüfende Talent-Objekt
             
@@ -839,7 +909,9 @@ def initialisiere_talente(charakter, talent_daten):
                     voraussetzungen=daten.get('Voraussetzungen', []),
                     beschreibung=daten.get('Beschreibung', ''),
                     neue_maechte=daten.get('neue_maechte', 0),
-                    machtpunkte=daten.get('machtpunkte', 0)
+                    machtpunkte=daten.get('machtpunkte', 0),
+                    auto_handicaps=daten.get('auto_handicaps', []),
+                    auto_talente=daten.get('auto_talente', [])
                 )
                 charakter.talente[name] = talent
     except Exception as e:

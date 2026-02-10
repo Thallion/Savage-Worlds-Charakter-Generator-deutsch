@@ -13,8 +13,10 @@ class Talent(EventDispatcher):
     ausgewaehlt = BooleanProperty(False)
     aktiv = BooleanProperty(True)
     custom = BooleanProperty(False)  # Neue Eigenschaft
+    auto_handicaps = ListProperty([])
+    auto_talente = ListProperty([])
 
-    def __init__(self, name, kategorie, rang, voraussetzungen, beschreibung='', neue_maechte=0, machtpunkte=0, custom=False, **kwargs):
+    def __init__(self, name, kategorie, rang, voraussetzungen, beschreibung='', neue_maechte=0, machtpunkte=0, custom=False, auto_handicaps=None, auto_talente=None, **kwargs):
         super().__init__(**kwargs)
         self.name = name
         self.kategorie = kategorie
@@ -26,6 +28,8 @@ class Talent(EventDispatcher):
         self.ausgewaehlt = False
         self.aktiv = True
         self.custom = custom
+        self.auto_handicaps = auto_handicaps or []
+        self.auto_talente = auto_talente or []
 
     def __str__(self):
         return f"{self.name} ({self.kategorie}, Rang: {self.rang})"
@@ -82,14 +86,16 @@ class Talent(EventDispatcher):
             beschreibung=self.beschreibung,
             neue_maechte=self.neue_maechte,
             machtpunkte=self.machtpunkte,
-            custom=self.custom
+            custom=self.custom,
+            auto_handicaps=list(self.auto_handicaps),
+            auto_talente=list(self.auto_talente)
         )
 
     def setze_beschreibung(self, beschreibung):
         self.beschreibung = beschreibung
 
     def to_dict(self):
-        return {
+        result = {
             'name': self.name,
             'kategorie': self.kategorie,
             'rang': self.rang,
@@ -100,6 +106,11 @@ class Talent(EventDispatcher):
             'ausgewaehlt': self.ausgewaehlt,
             'aktiv': self.aktiv
         }
+        if self.auto_handicaps:
+            result['auto_handicaps'] = list(self.auto_handicaps)
+        if self.auto_talente:
+            result['auto_talente'] = list(self.auto_talente)
+        return result
     
     @classmethod
     def from_dict_static(cls, data):
@@ -111,7 +122,9 @@ class Talent(EventDispatcher):
             beschreibung=data.get('beschreibung', ''),
             neue_maechte=data.get('neue_maechte', 0),
             machtpunkte=data.get('machtpunkte', 0),
-            custom=data.get('custom', False)
+            custom=data.get('custom', False),
+            auto_handicaps=data.get('auto_handicaps', []),
+            auto_talente=data.get('auto_talente', [])
         )
         talent.ausgewaehlt = data.get('ausgewaehlt', False)
         talent.aktiv = data.get('aktiv', True)

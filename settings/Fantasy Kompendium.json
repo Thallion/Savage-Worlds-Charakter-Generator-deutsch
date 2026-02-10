@@ -1253,6 +1253,7 @@
             "beschreibung": "Arkane Fertigkeit: Alchemie (Verstand)",
             "neue_maechte": 3,
             "machtpunkte": 15,
+            "auto_handicaps": ["Materialkomponenten"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1286,6 +1287,7 @@
             "beschreibung": "Arkane Fertigkeit: Darbietung (Willenskraft)",
             "neue_maechte": 3,
             "machtpunkte": 10,
+            "auto_handicaps": ["Behindernde_Rüstung_leicht"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1330,6 +1332,7 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 15,
+            "auto_handicaps": ["Behindernde_Rüstung_leicht"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1341,6 +1344,8 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Verderbnis", "Behindernde_Rüstung_schwer"],
+            "auto_talente": ["Beschwörung"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1352,6 +1357,7 @@
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Behindernde_Rüstung_leicht", "Materialkomponenten", "Schwur_schwer"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1363,6 +1369,7 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Behindernde_Rüstung_schwer"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1374,6 +1381,7 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Behindernde_Rüstung_schwer"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1385,6 +1393,7 @@
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Schwur_schwer"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1396,6 +1405,7 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 6,
             "machtpunkte": 15,
+            "auto_handicaps": ["Behindernde_Rüstung_schwer", "Materialkomponenten"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1407,6 +1417,7 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Verderbnis"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1418,6 +1429,7 @@
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_handicaps": ["Behindernde_Rüstung_leicht", "Tick", "Materialkomponenten"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1440,6 +1452,31 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 3,
             "machtpunkte": 15,
+            "auto_handicaps": ["Behindernde_Rüstung_leicht", "Verderbnis"],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Hexer/Hexe)": {
+            "name": "Arkaner Hintergrund (Hexer/Hexe)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": ["VER W6"],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "auto_handicaps": ["Behindernde_Rüstung_schwer", "Materialkomponenten", "Verderbnis"],
+            "auto_talente": ["Vertrauter"],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Beschwörung": {
+            "name": "Beschwörung",
+            "kategorie": "Diabolist",
+            "rang": "A",
+            "voraussetzungen": ["Arkaner Hintergrund (Diabolist)"],
+            "beschreibung": "Ermöglicht die Beschwörung von Dämonen, Geistern und bösartigen Kreaturen. Diener können als Aktion mit Machtpunkten beschworen werden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
         },

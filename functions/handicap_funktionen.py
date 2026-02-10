@@ -359,7 +359,12 @@ class HandicapManager:
         if not handicap.ausgewaehlt:
             Logger.warning(f"Handicap '{handicap_name_key}' ist nicht ausgewählt.")
             return False
-        
+
+        # Prüfe ob das Handicap automatisch durch einen Arkanen Hintergrund gesetzt wurde
+        if handicap.auto_applied and not force_remove:
+            Logger.warning(f"Handicap '{handicap_name_key}' ist automatisch durch einen Arkanen Hintergrund gesetzt und kann nicht manuell entfernt werden.")
+            return False
+
         # Prüfe ob genug Aufstiege vorhanden sind (wenn nicht force_remove)
         if not force_remove and getattr(charakter, 'char_gen_completed', False):
             kosten = self.config.get('kosten_entfernung', {}).get(handicap.stufe, 1)

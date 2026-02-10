@@ -11,6 +11,7 @@ class Handicap(EventDispatcher):
     ausgewaehlt = BooleanProperty(False)
     aktiv = BooleanProperty(True)
     custom = BooleanProperty(False)
+    auto_applied = BooleanProperty(False)
 
     def __init__(self, name, stufe, beschreibung='', custom=False, **kwargs):
         super().__init__(**kwargs)
@@ -20,6 +21,7 @@ class Handicap(EventDispatcher):
         self.ausgewaehlt = False
         self.aktiv = True
         self.custom = custom
+        self.auto_applied = False
         self.update_punkte()
 
     def update_punkte(self):
@@ -49,15 +51,17 @@ class Handicap(EventDispatcher):
         Returns:
             Handicap: Eine neue Instanz mit den gleichen Werten
         """
-        return Handicap(
+        h = Handicap(
             name=self.name,
             stufe=self.stufe,
             beschreibung=self.beschreibung,
             custom=self.custom
         )
+        h.auto_applied = self.auto_applied
+        return h
 
     def to_dict(self):
-        return {
+        result = {
             'name': self.name,
             'stufe': self.stufe,
             'punkte': self.punkte,
@@ -66,6 +70,9 @@ class Handicap(EventDispatcher):
             'aktiv': self.aktiv,
             'custom': self.custom
         }
+        if self.auto_applied:
+            result['auto_applied'] = True
+        return result
 
     @classmethod
     def from_dict_static(cls, data):
@@ -77,6 +84,7 @@ class Handicap(EventDispatcher):
         handicap.punkte = data.get('punkte', handicap.punkte)
         handicap.ausgewaehlt = data.get('ausgewaehlt', False)
         handicap.aktiv = data.get('aktiv', True)
+        handicap.auto_applied = data.get('auto_applied', False)
         return handicap
 
     @classmethod
