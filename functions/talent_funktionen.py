@@ -302,9 +302,8 @@ class TalentManager:
             Logger.info(f"Kostenloses Pathfinder-Talent '{talent_name_key}' abgewählt.")
             return True
         
-        # Mächte entfernen
-        arkane_hintergruende = TalentConfig.get('spezial_talente.arkane_hintergruende', [])
-        if any(talent.name.startswith(ah) for ah in arkane_hintergruende):
+        # Mächte entfernen wenn ein Arkaner Hintergrund abgewählt wird
+        if talent.name.startswith("Arkaner Hintergrund"):
             while self.charakter.maechte:
                 macht_name = next(iter(self.charakter.maechte))
                 entferne_macht(self.charakter, macht_name)
@@ -380,25 +379,68 @@ class TalentManager:
             return fehlermeldungen
         
         for voraussetzung in talent.voraussetzungen:
-            # Spezialfall: AH (Arkaner Hintergrund)
-            if voraussetzung == "AH":
+            # Spezialfall: "AH" oder "Arkaner Hintergrund (beliebig)" - beliebiger Arkaner Hintergrund
+            if voraussetzung == "AH" or voraussetzung == "Arkaner Hintergrund (beliebig)":
                 hat_arkanen_hintergrund = False
-                arkane_hintergruende = TalentConfig.get('spezial_talente.arkane_hintergruende', [])
                 for talent_name, talent_obj in self.charakter.talente.items():
-                    if any(talent_name.startswith(ah) for ah in arkane_hintergruende) and talent_obj.ausgewaehlt:
+                    if talent_name.startswith("Arkaner Hintergrund") and talent_obj.ausgewaehlt:
                         hat_arkanen_hintergrund = True
                         break
-                        
+
                 if not hat_arkanen_hintergrund:
                     fehlermeldungen.append("Ein beliebiger Arkaner Hintergrund (AH) wird vorausgesetzt.")
                 continue
-            
+
+            # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
+            ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
+            if ah_kurz_match:
+                ah_name = ah_kurz_match.group(1)
+                full_name = f"Arkaner Hintergrund ({ah_name})"
+                talent_obj = self.charakter.talente.get(full_name)
+                if not talent_obj or not talent_obj.ausgewaehlt:
+                    fehlermeldungen.append(f"'{full_name}' muss ausgewählt sein.")
+                continue
+
+            # Spezialfall: "Arkaner Hintergrund (jeder außer X)" - beliebiger AH außer einem bestimmten
+            ausser_match = re.match(r'^Arkaner Hintergrund \(jeder außer (.+)\)$', voraussetzung)
+            if ausser_match:
+                ausgeschlossener_ah = ausser_match.group(1).strip()
+                hat_passenden_ah = False
+                for talent_name, talent_obj in self.charakter.talente.items():
+                    if (talent_name.startswith("Arkaner Hintergrund") and
+                            talent_obj.ausgewaehlt and
+                            talent_name != f"Arkaner Hintergrund ({ausgeschlossener_ah})"):
+                        hat_passenden_ah = True
+                        break
+                if not hat_passenden_ah:
+                    fehlermeldungen.append(
+                        f"Ein beliebiger Arkaner Hintergrund außer {ausgeschlossener_ah} wird vorausgesetzt."
+                    )
+                continue
+
+            # Spezialfall: "Arkaner Hintergrund (X, Y, Z)" - einer aus einer Liste von AHs
+            if voraussetzung.startswith("Arkaner Hintergrund (") and "," in voraussetzung:
+                inner = voraussetzung[len("Arkaner Hintergrund ("):-1]
+                ah_namen = [name.strip() for name in inner.split(",")]
+                hat_passenden_ah = False
+                for ah_name in ah_namen:
+                    full_name = f"Arkaner Hintergrund ({ah_name})"
+                    talent_obj = self.charakter.talente.get(full_name)
+                    if talent_obj and talent_obj.ausgewaehlt:
+                        hat_passenden_ah = True
+                        break
+                if not hat_passenden_ah:
+                    fehlermeldungen.append(
+                        f"Einer der folgenden Arkanen Hintergründe wird vorausgesetzt: {', '.join(ah_namen)}"
+                    )
+                continue
+
             # Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8")
             attribut_match = re.match(r'^(Geschicklichkeit|Stärke|Konstitution|Verstand|Willenskraft|STÄ|GES|KON|VER|WIL)\s+W(\d+)$', voraussetzung)
             if attribut_match:
                 attribut_name_or_kuerzel = attribut_match.group(1)
                 wuerfel_wert = int(attribut_match.group(2))
-                
+
                 # Attributkürzel zu vollständigem Namen umwandeln
                 attribut_mapping = {
                     'STÄ': 'Stärke',
@@ -408,41 +450,41 @@ class TalentManager:
                     'WIL': 'Willenskraft'
                 }
                 attribut_name = attribut_mapping.get(attribut_name_or_kuerzel, attribut_name_or_kuerzel)
-                
+
                 attribut = self.charakter.attribute.get(attribut_name)
                 if not attribut:
                     fehlermeldungen.append(f"Attribut '{attribut_name}' nicht gefunden.")
                     continue
-                
+
                 if attribut.wert < wuerfel_wert:
                     fehlermeldungen.append(f"Attribut '{attribut_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{attribut.wert}).")
-                
+
                 continue
-            
+
             # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8")
             fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)$', voraussetzung)
             if fertigkeit_match and not attribut_match:  # Nicht bereits als Attribut erkannt
                 fertigkeit_name = fertigkeit_match.group(1)
                 wuerfel_wert = int(fertigkeit_match.group(2))
-                
+
                 fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
                 if not fertigkeit:
                     fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' nicht gefunden.")
                     continue
-                
+
                 if fertigkeit.wert < wuerfel_wert:
                     fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
-                
+
                 continue
-            
+
             # Talentvoraussetzung (z.B. "Glück")
             talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
-            
+
             talent_obj = self.charakter.talente.get(talent_name)
             if not talent_obj:
                 fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' wurde nicht gefunden.")
                 continue
-            
+
             if not talent_obj.ausgewaehlt:
                 fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' muss ausgewählt sein.")
         
