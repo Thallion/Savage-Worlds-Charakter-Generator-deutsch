@@ -296,6 +296,157 @@ class TestTalentManager(unittest.TestCase):
         self.assertTrue(self.charakter.talente["Kämpfer_2"].ausgewaehlt)
 
 
+class TestOderVoraussetzungen(unittest.TestCase):
+    """Tests für Entweder-Oder-Voraussetzungen"""
+
+    def setUp(self):
+        """Setup für jeden Test"""
+        self.charakter = MockCharakter()
+        # Zusätzliche Fertigkeiten für oder-Tests
+        self.charakter.fertigkeiten["Athletik"] = Fertigkeit("Athletik", self.charakter.attribute["Geschicklichkeit"], False)
+        self.charakter.fertigkeiten["Schießen"] = Fertigkeit("Schießen", self.charakter.attribute["Geschicklichkeit"], False)
+        self.charakter.fertigkeiten["Heilen"] = Fertigkeit("Heilen", self.charakter.attribute["Verstand"], False)
+        self.charakter.fertigkeiten["Überleben"] = Fertigkeit("Überleben", self.charakter.attribute["Verstand"], False)
+        self.charakter.fertigkeiten["Alchemie"] = Fertigkeit("Alchemie", self.charakter.attribute["Verstand"], False)
+        self.manager = TalentManager(self.charakter)
+
+    def test_hat_oder_ausserhalb_klammern_einfach(self):
+        """Test: ' oder ' wird außerhalb von Klammern erkannt"""
+        self.assertTrue(self.manager._hat_oder_ausserhalb_klammern("Kämpfen oder Schießen W6"))
+        self.assertTrue(self.manager._hat_oder_ausserhalb_klammern("Athletik oder Schießen W8"))
+
+    def test_hat_oder_innerhalb_klammern(self):
+        """Test: ' oder ' innerhalb von Klammern wird ignoriert"""
+        self.assertFalse(self.manager._hat_oder_ausserhalb_klammern("Schwur (leicht oder schwer)"))
+
+    def test_hat_oder_gemischt(self):
+        """Test: ' oder ' außerhalb wird erkannt, auch wenn es auch innerhalb vorkommt"""
+        self.assertTrue(self.manager._hat_oder_ausserhalb_klammern("AH (Priester) oder AH (Eiferer)"))
+
+    def test_kein_oder(self):
+        """Test: String ohne ' oder ' gibt False"""
+        self.assertFalse(self.manager._hat_oder_ausserhalb_klammern("Kämpfen W8"))
+        self.assertFalse(self.manager._hat_oder_ausserhalb_klammern("Glück"))
+
+    def test_oder_fertigkeit_erste_erfuellt(self):
+        """Test: 'Kämpfen oder Schießen W6' - erste Alternative erfüllt"""
+        # Setze Kämpfen auf W6
+        self.charakter.fertigkeiten["Kämpfen"].wuerfel.value = 6
+        talent = Talent("Test", "Kampf", "A", ["Kämpfen oder Schießen W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_oder_fertigkeit_zweite_erfuellt(self):
+        """Test: 'Kämpfen oder Schießen W6' - zweite Alternative erfüllt"""
+        # Setze Schießen auf W6
+        self.charakter.fertigkeiten["Schießen"].wuerfel.value = 6
+        talent = Talent("Test", "Kampf", "A", ["Kämpfen oder Schießen W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_oder_fertigkeit_keine_erfuellt(self):
+        """Test: 'Kämpfen oder Schießen W6' - keine Alternative erfüllt"""
+        # Beide Fertigkeiten auf W4 (Standard)
+        talent = Talent("Test", "Kampf", "A", ["Kämpfen oder Schießen W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 1)
+        self.assertIn("oder", fehlermeldungen[0])
+
+    def test_oder_athletik_oder_schiessen_w8(self):
+        """Test: 'Athletik oder Schießen W8' (Volltreffer/Scharfschütze)"""
+        # Setze Athletik auf W8
+        self.charakter.fertigkeiten["Athletik"].wuerfel.value = 8
+        talent = Talent("Volltreffer", "Kampf", "A", ["Athletik oder Schießen W8"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_oder_mit_fuer_qualifizierer(self):
+        """Test: 'Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen' (Doppelschuss)"""
+        # Setze Schießen auf W8
+        self.charakter.fertigkeiten["Schießen"].wuerfel.value = 8
+        talent = Talent("Doppelschuss", "Kampf", "F",
+                        ["Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_oder_mit_fuer_keine_erfuellt(self):
+        """Test: 'Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen' - keine erfüllt"""
+        talent = Talent("Doppelschuss", "Kampf", "F",
+                        ["Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 1)
+
+    def test_oder_komma_und_oder(self):
+        """Test: 'Alchemie, Heilen oder Überleben W6' (Giftmischer)"""
+        # Setze Heilen auf W6
+        self.charakter.fertigkeiten["Heilen"].wuerfel.value = 6
+        talent = Talent("Giftmischer", "Experte", "A",
+                        ["Alchemie, Heilen oder Überleben W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_oder_komma_dritte_alternative(self):
+        """Test: 'Alchemie, Heilen oder Überleben W6' - dritte Alternative erfüllt"""
+        self.charakter.fertigkeiten["Überleben"].wuerfel.value = 6
+        talent = Talent("Giftmischer", "Experte", "A",
+                        ["Alchemie, Heilen oder Überleben W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_oder_komma_keine_erfuellt(self):
+        """Test: 'Alchemie, Heilen oder Überleben W6' - keine Alternative erfüllt"""
+        talent = Talent("Giftmischer", "Experte", "A",
+                        ["Alchemie, Heilen oder Überleben W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 1)
+
+    def test_oder_mit_weiteren_voraussetzungen(self):
+        """Test: Oder-Voraussetzung kombiniert mit normaler Voraussetzung"""
+        self.charakter.fertigkeiten["Schießen"].wuerfel.value = 6
+        talent = Talent("Erzfeind", "Hintergrund", "A",
+                        ["Athletik", "Kämpfen oder Schießen W6"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        # Athletik ist da aber W4 (kein Würfelwert gefordert → Talentvoraussetzung-Fallback),
+        # Schießen W6 ist erfüllt
+        # "Athletik" wird als Talent gesucht → nicht gefunden → Fehler
+        # Aber die oder-Voraussetzung sollte erfüllt sein
+        oder_fehler = [f for f in fehlermeldungen if "oder" in f.lower()]
+        self.assertEqual(len(oder_fehler), 0)
+
+    def test_oder_ah_alternativen(self):
+        """Test: 'AH (Priester) oder AH (Eiferer)' - AH-Alternativen"""
+        # Erstelle AH-Talente
+        self.charakter.talente["Arkaner Hintergrund (Priester)"] = Talent(
+            "Arkaner Hintergrund (Priester)", "Macht", "A", [], "", 3, 10)
+        self.charakter.talente["Arkaner Hintergrund (Eiferer)"] = Talent(
+            "Arkaner Hintergrund (Eiferer)", "Macht", "A", [], "", 3, 10)
+
+        # Wähle Priester aus
+        self.charakter.talente["Arkaner Hintergrund (Priester)"].ausgewaehlt = True
+
+        talent = Talent("Test", "Macht", "A",
+                        ["AH (Priester) oder AH (Eiferer)"], "", 0, 0)
+        fehlermeldungen = self.manager.pruefe_voraussetzungen(talent)
+        self.assertEqual(len(fehlermeldungen), 0)
+
+    def test_bestehende_voraussetzungen_funktionieren_noch(self):
+        """Sicherheitstest: Bestehende nicht-oder Voraussetzungen funktionieren weiterhin"""
+        # Attribut-Voraussetzung
+        talent_attr = Talent("Test", "Kampf", "A", ["GES W8"], "", 0, 0)
+        fehler = self.manager.pruefe_voraussetzungen(talent_attr)
+        self.assertEqual(len(fehler), 1)
+
+        # Fertigkeit-Voraussetzung
+        talent_fert = Talent("Test", "Kampf", "A", ["Kämpfen W8"], "", 0, 0)
+        fehler = self.manager.pruefe_voraussetzungen(talent_fert)
+        self.assertEqual(len(fehler), 1)
+
+        # Talent-Voraussetzung
+        talent_tal = Talent("Test", "Kampf", "A", ["Glück"], "", 0, 0)
+        fehler = self.manager.pruefe_voraussetzungen(talent_tal)
+        self.assertEqual(len(fehler), 1)
+
+
 class TestTalentManagerCompatibility(unittest.TestCase):
     """Tests für Rückwärtskompatibilität"""
     
@@ -363,6 +514,7 @@ def run_talent_manager_tests():
     
     # Füge alle Test-Klassen hinzu
     suite.addTest(unittest.makeSuite(TestTalentManager))
+    suite.addTest(unittest.makeSuite(TestOderVoraussetzungen))
     suite.addTest(unittest.makeSuite(TestTalentManagerCompatibility))
     suite.addTest(unittest.makeSuite(TestTalentConfigIntegration))
     

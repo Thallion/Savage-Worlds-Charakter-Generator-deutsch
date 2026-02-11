@@ -439,125 +439,231 @@ class TalentManager:
 
         Args:
             talent: Das zu prüfende Talent-Objekt
-            
+
         Returns:
             Liste von Fehlermeldungen (leer wenn alle Voraussetzungen erfüllt sind)
         """
         fehlermeldungen = []
-        
+
         if not talent.voraussetzungen:
             return fehlermeldungen
-        
+
         for voraussetzung in talent.voraussetzungen:
-            # Spezialfall: "AH" oder "Arkaner Hintergrund (beliebig)" - beliebiger Arkaner Hintergrund
-            if voraussetzung == "AH" or voraussetzung == "Arkaner Hintergrund (beliebig)":
-                hat_arkanen_hintergrund = False
-                for talent_name, talent_obj in self.charakter.talente.items():
-                    if talent_name.startswith("Arkaner Hintergrund") and talent_obj.ausgewaehlt:
-                        hat_arkanen_hintergrund = True
-                        break
+            # Entweder-Oder Voraussetzung (z.B. "Kämpfen oder Schießen W6", "Athletik oder Schießen W8")
+            if self._hat_oder_ausserhalb_klammern(voraussetzung):
+                fehler = self._pruefe_oder_voraussetzung(voraussetzung)
+                if fehler:
+                    fehlermeldungen.append(fehler)
+            else:
+                fehler = self._pruefe_einzelne_voraussetzung(voraussetzung)
+                fehlermeldungen.extend(fehler)
 
-                if not hat_arkanen_hintergrund:
-                    fehlermeldungen.append("Ein beliebiger Arkaner Hintergrund (AH) wird vorausgesetzt.")
-                continue
+        return fehlermeldungen
 
-            # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
-            ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
-            if ah_kurz_match:
-                ah_name = ah_kurz_match.group(1)
+    def _hat_oder_ausserhalb_klammern(self, text):
+        """
+        Prüft ob ' oder ' außerhalb von Klammern im Text vorkommt.
+
+        Z.B. "Schwur (leicht oder schwer)" → False (oder ist innerhalb von Klammern)
+        Z.B. "Kämpfen oder Schießen W6" → True (oder ist außerhalb von Klammern)
+
+        Args:
+            text: Der zu prüfende Text
+
+        Returns:
+            bool: True wenn ' oder ' außerhalb von Klammern vorkommt
+        """
+        tiefe = 0
+        suche = " oder "
+        for i in range(len(text)):
+            if text[i] == '(':
+                tiefe += 1
+            elif text[i] == ')':
+                tiefe -= 1
+            elif tiefe == 0 and text[i:i + len(suche)] == suche:
+                return True
+        return False
+
+    def _pruefe_oder_voraussetzung(self, voraussetzung):
+        """
+        Prüft eine Entweder-Oder-Voraussetzung.
+
+        Unterstützte Formate:
+        - "Kämpfen oder Schießen W6" (gemeinsamer Würfelwert für alle Alternativen)
+        - "Athletik oder Schießen W8" (gemeinsamer Würfelwert)
+        - "Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen" (eigener Würfelwert pro Alternative)
+        - "Alchemie, Heilen oder Überleben W6" (Komma + oder mit gemeinsamen Würfelwert)
+        - "AH (Priester) oder AH (Eiferer)" (Talent-Alternativen)
+
+        Args:
+            voraussetzung: Der Voraussetzungstext mit ' oder '
+
+        Returns:
+            str oder None: Fehlermeldung wenn keine Alternative erfüllt, sonst None
+        """
+        # Teile auf " oder " auf
+        oder_teile = voraussetzung.split(' oder ')
+
+        # Dann jeden Teil auf ", " splitten (für "Alchemie, Heilen oder Überleben W6")
+        alternativen = []
+        for teil in oder_teile:
+            sub_teile = [t.strip() for t in teil.split(',')]
+            alternativen.extend(sub_teile)
+
+        # Entferne leere Einträge
+        alternativen = [a.strip() for a in alternativen if a.strip()]
+
+        # Entferne "für ..."-Qualifizierer aus jeder Alternative (nur informativer Text)
+        # z.B. "Athletik W8 für Wurfwaffen" → "Athletik W8"
+        alternativen = [re.sub(r'\s+für\s+.*$', '', a) for a in alternativen]
+
+        # Prüfe ob der letzte Eintrag einen Würfelwert hat (gemeinsamer Wert für alle)
+        letzter = alternativen[-1]
+        wuerfel_match = re.search(r'\s+W(\d+)\+?$', letzter)
+
+        if wuerfel_match:
+            wuerfel_suffix = ' W' + wuerfel_match.group(1)
+            # Füge Würfelwert zu allen Alternativen ohne eigenen hinzu
+            for i in range(len(alternativen)):
+                if not re.search(r'W\d+\+?\s*$', alternativen[i]):
+                    alternativen[i] = alternativen[i] + wuerfel_suffix
+
+        # Entferne optionales "+" Suffix von Würfelwerten (W6+ → W6)
+        alternativen = [re.sub(r'W(\d+)\+', r'W\1', a) for a in alternativen]
+
+        # Prüfe jede Alternative - wenn eine erfüllt ist, reicht das
+        for alternative in alternativen:
+            fehler = self._pruefe_einzelne_voraussetzung(alternative)
+            if not fehler:
+                return None  # Eine Alternative ist erfüllt
+
+        # Keine Alternative erfüllt
+        return f"Eine der folgenden Voraussetzungen muss erfüllt sein: {voraussetzung}"
+
+    def _pruefe_einzelne_voraussetzung(self, voraussetzung):
+        """
+        Prüft eine einzelne Voraussetzung und gibt eine Liste von Fehlermeldungen zurück.
+
+        Wird sowohl direkt von pruefe_voraussetzungen als auch von
+        _pruefe_oder_voraussetzung für einzelne Alternativen verwendet.
+
+        Args:
+            voraussetzung: Der Voraussetzungstext (z.B. "Kämpfen W8", "Glück", "AH")
+
+        Returns:
+            Liste von Fehlermeldungen (leer wenn erfüllt)
+        """
+        fehlermeldungen = []
+
+        # Spezialfall: "AH" oder "Arkaner Hintergrund (beliebig)" - beliebiger Arkaner Hintergrund
+        if voraussetzung == "AH" or voraussetzung == "Arkaner Hintergrund (beliebig)":
+            hat_arkanen_hintergrund = False
+            for talent_name, talent_obj in self.charakter.talente.items():
+                if talent_name.startswith("Arkaner Hintergrund") and talent_obj.ausgewaehlt:
+                    hat_arkanen_hintergrund = True
+                    break
+
+            if not hat_arkanen_hintergrund:
+                fehlermeldungen.append("Ein beliebiger Arkaner Hintergrund (AH) wird vorausgesetzt.")
+            return fehlermeldungen
+
+        # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
+        ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
+        if ah_kurz_match:
+            ah_name = ah_kurz_match.group(1)
+            full_name = f"Arkaner Hintergrund ({ah_name})"
+            talent_obj = self.charakter.talente.get(full_name)
+            if not talent_obj or not talent_obj.ausgewaehlt:
+                fehlermeldungen.append(f"'{full_name}' muss ausgewählt sein.")
+            return fehlermeldungen
+
+        # Spezialfall: "Arkaner Hintergrund (jeder außer X)" - beliebiger AH außer einem bestimmten
+        ausser_match = re.match(r'^Arkaner Hintergrund \(jeder außer (.+)\)$', voraussetzung)
+        if ausser_match:
+            ausgeschlossener_ah = ausser_match.group(1).strip()
+            hat_passenden_ah = False
+            for talent_name, talent_obj in self.charakter.talente.items():
+                if (talent_name.startswith("Arkaner Hintergrund") and
+                        talent_obj.ausgewaehlt and
+                        talent_name != f"Arkaner Hintergrund ({ausgeschlossener_ah})"):
+                    hat_passenden_ah = True
+                    break
+            if not hat_passenden_ah:
+                fehlermeldungen.append(
+                    f"Ein beliebiger Arkaner Hintergrund außer {ausgeschlossener_ah} wird vorausgesetzt."
+                )
+            return fehlermeldungen
+
+        # Spezialfall: "Arkaner Hintergrund (X, Y, Z)" - einer aus einer Liste von AHs
+        if voraussetzung.startswith("Arkaner Hintergrund (") and "," in voraussetzung:
+            inner = voraussetzung[len("Arkaner Hintergrund ("):-1]
+            ah_namen = [name.strip() for name in inner.split(",")]
+            hat_passenden_ah = False
+            for ah_name in ah_namen:
                 full_name = f"Arkaner Hintergrund ({ah_name})"
                 talent_obj = self.charakter.talente.get(full_name)
-                if not talent_obj or not talent_obj.ausgewaehlt:
-                    fehlermeldungen.append(f"'{full_name}' muss ausgewählt sein.")
-                continue
+                if talent_obj and talent_obj.ausgewaehlt:
+                    hat_passenden_ah = True
+                    break
+            if not hat_passenden_ah:
+                fehlermeldungen.append(
+                    f"Einer der folgenden Arkanen Hintergründe wird vorausgesetzt: {', '.join(ah_namen)}"
+                )
+            return fehlermeldungen
 
-            # Spezialfall: "Arkaner Hintergrund (jeder außer X)" - beliebiger AH außer einem bestimmten
-            ausser_match = re.match(r'^Arkaner Hintergrund \(jeder außer (.+)\)$', voraussetzung)
-            if ausser_match:
-                ausgeschlossener_ah = ausser_match.group(1).strip()
-                hat_passenden_ah = False
-                for talent_name, talent_obj in self.charakter.talente.items():
-                    if (talent_name.startswith("Arkaner Hintergrund") and
-                            talent_obj.ausgewaehlt and
-                            talent_name != f"Arkaner Hintergrund ({ausgeschlossener_ah})"):
-                        hat_passenden_ah = True
-                        break
-                if not hat_passenden_ah:
-                    fehlermeldungen.append(
-                        f"Ein beliebiger Arkaner Hintergrund außer {ausgeschlossener_ah} wird vorausgesetzt."
-                    )
-                continue
+        # Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8")
+        attribut_match = re.match(r'^(Geschicklichkeit|Stärke|Konstitution|Verstand|Willenskraft|STÄ|GES|KON|VER|WIL)\s+W(\d+)$', voraussetzung)
+        if attribut_match:
+            attribut_name_or_kuerzel = attribut_match.group(1)
+            wuerfel_wert = int(attribut_match.group(2))
 
-            # Spezialfall: "Arkaner Hintergrund (X, Y, Z)" - einer aus einer Liste von AHs
-            if voraussetzung.startswith("Arkaner Hintergrund (") and "," in voraussetzung:
-                inner = voraussetzung[len("Arkaner Hintergrund ("):-1]
-                ah_namen = [name.strip() for name in inner.split(",")]
-                hat_passenden_ah = False
-                for ah_name in ah_namen:
-                    full_name = f"Arkaner Hintergrund ({ah_name})"
-                    talent_obj = self.charakter.talente.get(full_name)
-                    if talent_obj and talent_obj.ausgewaehlt:
-                        hat_passenden_ah = True
-                        break
-                if not hat_passenden_ah:
-                    fehlermeldungen.append(
-                        f"Einer der folgenden Arkanen Hintergründe wird vorausgesetzt: {', '.join(ah_namen)}"
-                    )
-                continue
+            # Attributkürzel zu vollständigem Namen umwandeln
+            attribut_mapping = {
+                'STÄ': 'Stärke',
+                'GES': 'Geschicklichkeit',
+                'KON': 'Konstitution',
+                'VER': 'Verstand',
+                'WIL': 'Willenskraft'
+            }
+            attribut_name = attribut_mapping.get(attribut_name_or_kuerzel, attribut_name_or_kuerzel)
 
-            # Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8")
-            attribut_match = re.match(r'^(Geschicklichkeit|Stärke|Konstitution|Verstand|Willenskraft|STÄ|GES|KON|VER|WIL)\s+W(\d+)$', voraussetzung)
-            if attribut_match:
-                attribut_name_or_kuerzel = attribut_match.group(1)
-                wuerfel_wert = int(attribut_match.group(2))
+            attribut = self.charakter.attribute.get(attribut_name)
+            if not attribut:
+                fehlermeldungen.append(f"Attribut '{attribut_name}' nicht gefunden.")
+                return fehlermeldungen
 
-                # Attributkürzel zu vollständigem Namen umwandeln
-                attribut_mapping = {
-                    'STÄ': 'Stärke',
-                    'GES': 'Geschicklichkeit',
-                    'KON': 'Konstitution',
-                    'VER': 'Verstand',
-                    'WIL': 'Willenskraft'
-                }
-                attribut_name = attribut_mapping.get(attribut_name_or_kuerzel, attribut_name_or_kuerzel)
+            if attribut.wert < wuerfel_wert:
+                fehlermeldungen.append(f"Attribut '{attribut_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{attribut.wert}).")
 
-                attribut = self.charakter.attribute.get(attribut_name)
-                if not attribut:
-                    fehlermeldungen.append(f"Attribut '{attribut_name}' nicht gefunden.")
-                    continue
+            return fehlermeldungen
 
-                if attribut.wert < wuerfel_wert:
-                    fehlermeldungen.append(f"Attribut '{attribut_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{attribut.wert}).")
+        # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8")
+        fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)$', voraussetzung)
+        if fertigkeit_match:
+            fertigkeit_name = fertigkeit_match.group(1)
+            wuerfel_wert = int(fertigkeit_match.group(2))
 
-                continue
+            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+            if not fertigkeit:
+                fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' nicht gefunden.")
+                return fehlermeldungen
 
-            # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8")
-            fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)$', voraussetzung)
-            if fertigkeit_match and not attribut_match:  # Nicht bereits als Attribut erkannt
-                fertigkeit_name = fertigkeit_match.group(1)
-                wuerfel_wert = int(fertigkeit_match.group(2))
+            if fertigkeit.wert < wuerfel_wert:
+                fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
 
-                fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
-                if not fertigkeit:
-                    fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' nicht gefunden.")
-                    continue
+            return fehlermeldungen
 
-                if fertigkeit.wert < wuerfel_wert:
-                    fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
+        # Talentvoraussetzung (z.B. "Glück")
+        talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
 
-                continue
+        talent_obj = self.charakter.talente.get(talent_name)
+        if not talent_obj:
+            fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' wurde nicht gefunden.")
+            return fehlermeldungen
 
-            # Talentvoraussetzung (z.B. "Glück")
-            talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
+        if not talent_obj.ausgewaehlt:
+            fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' muss ausgewählt sein.")
 
-            talent_obj = self.charakter.talente.get(talent_name)
-            if not talent_obj:
-                fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' wurde nicht gefunden.")
-                continue
-
-            if not talent_obj.ausgewaehlt:
-                fehlermeldungen.append(f"Vorausgesetztes Talent '{talent_name}' muss ausgewählt sein.")
-        
         return fehlermeldungen
     
     #-----------------------------------------------
