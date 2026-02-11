@@ -278,6 +278,9 @@ class TalentManager:
             # Auto-Handicaps und Auto-Talente für Arkane Hintergründe entfernen
             self._remove_ah_auto_effects(talent_name_key)
 
+            # Spezial-Effekte von Talenten rückgängig machen (z.B. Rohling → Athletik-Link)
+            self._remove_talent_spezial_effekte(talent_name_key)
+
             if talent_name_key in self.charakter.selected_talente:
                 self.charakter.selected_talente.remove(talent_name_key)
             Logger.debug(f"Talent '{talent_name_key}' entfernt.")
@@ -357,6 +360,9 @@ class TalentManager:
                     # Auto-Handicaps und Auto-Talente für Arkane Hintergründe anwenden
                     self._apply_ah_auto_effects(talent_name_key)
 
+                    # Spezial-Effekte von Talenten anwenden (z.B. Rohling → Athletik-Link)
+                    self._apply_talent_spezial_effekte(talent_name_key)
+
                     # Abgeleitete Werte neu berechnen (ohne Vermögensberechnung)
                     self.charakter.berechne_abgeleitete_werte()
 
@@ -433,13 +439,67 @@ class TalentManager:
                         self.charakter.selected_talente.remove(auto_talent_name)
                     Logger.info(f"AH Auto-Talent '{auto_talent_name}' entfernt für '{talent_name_key}'")
 
+    # ------------------------------------------------------------------
+    # Spezial-Effekte bestimmter Talente auf Fertigkeiten
+    # ------------------------------------------------------------------
+
+    # Mapping: Talent → Liste von (Fertigkeit, neues_Attribut)
+    TALENT_FERTIGKEITS_EFFEKTE = {
+        "Rohling": [("Athletik", "Stärke")],
+    }
+
+    # Umkehr-Mapping: Talent → Liste von (Fertigkeit, ursprüngliches_Attribut)
+    TALENT_FERTIGKEITS_EFFEKTE_ORIGINAL = {
+        "Rohling": [("Athletik", "Geschicklichkeit")],
+    }
+
+    def _apply_talent_spezial_effekte(self, talent_name_key):
+        """
+        Wendet Spezial-Effekte bestimmter Talente an.
+        Z.B. Rohling: Verknüpft Athletik mit Stärke statt Geschicklichkeit.
+        """
+        effekte = self.TALENT_FERTIGKEITS_EFFEKTE.get(talent_name_key)
+        if not effekte:
+            return
+
+        for fertigkeit_name, neues_attribut_name in effekte:
+            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+            neues_attribut = self.charakter.attribute.get(neues_attribut_name)
+            if fertigkeit and neues_attribut:
+                altes_attribut_name = (fertigkeit.attribut.attribut_name
+                                       if fertigkeit.attribut else "?")
+                fertigkeit.attribut = neues_attribut
+                Logger.info(
+                    f"Talent '{talent_name_key}': {fertigkeit_name} "
+                    f"verknüpft mit {neues_attribut_name} (vorher {altes_attribut_name})"
+                )
+
+    def _remove_talent_spezial_effekte(self, talent_name_key):
+        """
+        Macht Spezial-Effekte bestimmter Talente rückgängig.
+        Z.B. Rohling abgewählt: Athletik zurück auf Geschicklichkeit.
+        """
+        original = self.TALENT_FERTIGKEITS_EFFEKTE_ORIGINAL.get(talent_name_key)
+        if not original:
+            return
+
+        for fertigkeit_name, original_attribut_name in original:
+            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+            original_attribut = self.charakter.attribute.get(original_attribut_name)
+            if fertigkeit and original_attribut:
+                fertigkeit.attribut = original_attribut
+                Logger.info(
+                    f"Talent '{talent_name_key}' abgewählt: {fertigkeit_name} "
+                    f"zurück auf {original_attribut_name}"
+                )
+
     def pruefe_voraussetzungen(self, talent):
         """
         Prüft alle Voraussetzungen eines Talents und gibt eine Liste von Fehlermeldungen zurück.
 
         Args:
             talent: Das zu prüfende Talent-Objekt
-            
+
         Returns:
             Liste von Fehlermeldungen (leer wenn alle Voraussetzungen erfüllt sind)
         """

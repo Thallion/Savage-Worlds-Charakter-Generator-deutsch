@@ -4458,6 +4458,15 @@
             "aktiv": true,
             "custom": false
         },
+        "Zwei linke Hände": {
+            "name": "Zwei linke Hände",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "–2 bei der Verwendung von mechanischen oder elektrischen Geräten.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Beschämt": {
             "name": "Beschämt",
             "stufe": "leicht",
