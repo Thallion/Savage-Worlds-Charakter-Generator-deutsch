@@ -1802,7 +1802,7 @@
             "name": "Erzfeind",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Athletik", "Kämpfen oder Schießen W6"],
+            "voraussetzungen": ["Athletik, Kämpfen oder Schießen W6"],
             "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3543,7 +3543,7 @@
             "kategorie": "Sozial",
             "rang": "A",
             "voraussetzungen": [
-                "Provozieren W8"
+                "Provozieren oder Darbietung W8"
             ],
             "beschreibung": "Freie Wiederholung bei Provozieren.",
             "neue_maechte": 0,

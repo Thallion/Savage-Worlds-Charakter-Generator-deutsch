@@ -1,0 +1,1495 @@
+{
+    "name": "Horror Kompendium",
+    "description": "Horror Kompendium",
+    "voelker": {
+        "Engel": {
+            "name": "Engel",
+            "handicaps": [
+                "Schwur (schwer: Muss das Böse bekämpfen und die Unschuldigen beschützen)",
+                "Auffällig (Himmlische Aura, die übernatürliche Wesen wahrnehmen können)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Göttliche Stärke (+2 Stärke-Stufen, max. W12+2)",
+                "Göttliche Konstitution (+2 Konstitution-Stufen, max. W12+2)",
+                "Flügel (Bewegungsweite 12'', Steigrate 6'')",
+                "Heilige Waffe (Verursacht +2 Schaden gegen übernatürlich Böses)",
+                "Resistenz gegen Dunkelheit (+4 auf Proben gegen böse Mächte)",
+                "Regeneration (Natürliche Heilung alle 4 Stunden statt 5 Tage)",
+                "Schwäche: Unheiliges Wasser und Symbole (Verursacht +4 Schaden)"
+            ],
+            "sprachen": [
+                "Alle"
+            ],
+            "altersspanne": "Unsterblich",
+            "groesse_maennlich": "1,75-2,10m",
+            "groesse_weiblich": "1,70-2,00m",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2,
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "fliegen": true,
+                    "goettliche_waffe": true,
+                    "regeneration": true,
+                    "resistenz_dunkelheit": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Dämon": {
+            "name": "Dämon",
+            "handicaps": [
+                "Böse/Verdorben (Der Charakter hat eine inhärent böse Natur)",
+                "Schwäche: Geweihtes Wasser und heilige Symbole (Verursacht +4 Schaden)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Infrarotsicht (Ignoriert Abzüge für Beleuchtung komplett)",
+                "Natürliche Waffen (Klauen/Biss: Stä+W6)",
+                "Panzerung +2 (Dämonische Haut)",
+                "Resistenz gegen Feuer (+4 Resistenz, -4 Schaden durch Feuer)",
+                "Furchteinflößend (-2 auf Furchtproben von Gegnern)",
+                "Schwäche: Kaltes Eisen (+4 Schaden)"
+            ],
+            "sprachen": [
+                "Alle"
+            ],
+            "altersspanne": "Unsterblich",
+            "groesse_maennlich": "1,80-2,30m",
+            "groesse_weiblich": "1,70-2,20m",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "infrarotsicht": true,
+                    "natuerliche_waffen": true,
+                    "panzerung_2": true,
+                    "resistenz_feuer": true,
+                    "furchteinflössend": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Mumie": {
+            "name": "Mumie",
+            "handicaps": [
+                "Hässlich (schwer: Vertrocknetes, bandagiertes Äußeres)",
+                "Langsam (Verringerte Bewegungsweite)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Untot (+2 Robustheit, +2 um sich von Schütteln zu erholen, kein Bonusschaden durch gezielten Schuss)",
+                "Furchteinflößend (-2 auf Furchtproben von Gegnern)",
+                "Panzerung +2 (Bandagierte, uralte Haut)",
+                "Regeneration (Natürliche Heilung alle 4 Stunden statt 5 Tage)",
+                "Schwäche: Feuer (+4 Schaden)"
+            ],
+            "sprachen": [
+                "Alte Sprache",
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Unsterblich",
+            "groesse_maennlich": "1,70-1,90m",
+            "groesse_weiblich": "1,60-1,80m",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 2,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "untot": true,
+                    "furchteinflössend": true,
+                    "panzerung_2": true,
+                    "regeneration": true,
+                    "schwaeche_feuer": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Flickenmonster": {
+            "name": "Flickenmonster",
+            "handicaps": [
+                "Hässlich (schwer: Zusammengenähte Leiche)",
+                "Außenseiter (schwer: Wird von der Gesellschaft gefürchtet und verstoßen)",
+                "Schwerfällig (Keine Geschicklichkeit über W8)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Untot (+2 Robustheit, +2 um sich von Schütteln zu erholen, kein Bonusschaden durch gezielten Schuss)",
+                "Kräftig (+2 Stärke-Stufen, max. W12+2)",
+                "Zäh (+2 Konstitution-Stufen, max. W12+2)",
+                "Panzerung +2 (Dicke, vernähte Haut)",
+                "Groß (Größe +1)",
+                "Schwäche: Feuer (+4 Schaden)",
+                "Schwäche: Elektrizität (+4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Unsterblich (sofern gewartet)",
+            "groesse_maennlich": "1,90-2,30m, 120-180kg",
+            "groesse_weiblich": "1,85-2,20m, 110-170kg",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2,
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 2,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "untot": true,
+                    "panzerung_2": true,
+                    "gross": true,
+                    "schwaeche_feuer": true,
+                    "schwaeche_elektrizitaet": true,
+                    "max_geschicklichkeit_w8": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Phantom": {
+            "name": "Phantom",
+            "handicaps": [
+                "Schwäche: Kann keine physischen Gegenstände berühren ohne Macht",
+                "Schwäche: Salz (Kann Salzlinien nicht überqueren)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Ätherisch (Kann durch feste Objekte hindurchgehen)",
+                "Unsichtbar (Kann sich nach Belieben unsichtbar machen)",
+                "Fliegen (Bewegungsweite 6'')",
+                "Immunität gegen normale Waffen (Nur magische Waffen verursachen Schaden)",
+                "Furchteinflößend (-2 auf Furchtproben von Gegnern)",
+                "Schwäche: Kann nicht physisch angreifen ohne Mächte"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Unsterblich",
+            "groesse_maennlich": "Variabel",
+            "groesse_weiblich": "Variabel",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "aetherisch": true,
+                    "unsichtbar": true,
+                    "fliegen": true,
+                    "immun_normale_waffen": true,
+                    "furchteinflössend": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Wiedergänger": {
+            "name": "Wiedergänger",
+            "handicaps": [
+                "Schwur (schwer: Muss seine Aufgabe erfüllen, die ihn zurückgebracht hat)",
+                "Hässlich (leicht: Leichenhafte Blässe, sichtbare Wunden)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Untot (+2 Robustheit, +2 um sich von Schütteln zu erholen, kein Bonusschaden durch gezielten Schuss)",
+                "Regeneration (Natürliche Heilung alle 4 Stunden statt 5 Tage)",
+                "Unaufhaltbar (Erleidet keinen Tod durch Wunden, wird nach 1W4 Runden wieder aktiv wenn Ausgeschaltet)",
+                "Furchteinflößend (in wahrer Form: -2 auf Furchtproben)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Unsterblich (bis Aufgabe erfüllt)",
+            "groesse_maennlich": "Wie zu Lebzeiten",
+            "groesse_weiblich": "Wie zu Lebzeiten",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 2,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "untot": true,
+                    "regeneration": true,
+                    "unaufhaltbar": true,
+                    "furchteinflössend": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Vampir": {
+            "name": "Vampir",
+            "handicaps": [
+                "Schwäche: Sonnenlicht (2W6 Schaden pro Runde bei direktem Sonnenlicht)",
+                "Schwäche: Pfahl durchs Herz (Sofortiger Tod bei gezieltem Schuss mit Holzpfahl)",
+                "Abhängigkeit (Blut: Muss einmal pro 24 Stunden Blut trinken, sonst Erschöpfung)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Untot (+2 Robustheit, +2 um sich von Schütteln zu erholen, kein Bonusschaden durch gezielten Schuss)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Stärke der Nacht (+2 Stärke-Stufen nachts)",
+                "Geschwindigkeit der Nacht (+2 Bewegungsweite nachts)",
+                "Natürliche Waffen (Biss: Stä+W4)",
+                "Betörender Blick (Kann Opfer mit Willenskraft-Probe betören)",
+                "Regeneration (Natürliche Heilung alle 4 Stunden statt 5 Tage)",
+                "Schwäche: Geweihtes Wasser/Symbole (+4 Schaden)",
+                "Schwäche: Knoblauch (Abgestoßen)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Unsterblich",
+            "groesse_maennlich": "Wie zu Lebzeiten",
+            "groesse_weiblich": "Wie zu Lebzeiten",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2
+                },
+                "robustheit_bonus": 2,
+                "bewegungsweite_bonus": 2,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "untot": true,
+                    "nachtsicht": true,
+                    "betorender_blick": true,
+                    "regeneration": true,
+                    "schwaeche_sonnenlicht": true,
+                    "schwaeche_pfahl": true,
+                    "abhaengigkeit_blut": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Werwolf": {
+            "name": "Werwolf",
+            "handicaps": [
+                "Blutdurst (Der Werwolf muss bei Vollmond um die Kontrolle kämpfen)",
+                "Schwäche: Silber (+4 Schaden durch Silberwaffen)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Gestaltwandel (Kann sich in Wolf- oder Hybridform verwandeln)",
+                "Hybridform: Stärke +2 Stufen, Konstitution +2 Stufen, Natürliche Waffen (Klauen/Biss: Stä+W6)",
+                "Wolfsform: Stärke +1 Stufe, Bewegungsweite 10'', Biss Stä+W4",
+                "Infrarotsicht in Tier-/Hybridform",
+                "Regeneration (Natürliche Heilung alle 4 Stunden, außer bei Silberwunden)",
+                "Panzerung +2 in Hybridform (Dichtes Fell)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Normal (altert langsamer nach Verwandlung)",
+            "groesse_maennlich": "Menschenform normal, Hybridform +30cm",
+            "groesse_weiblich": "Menschenform normal, Hybridform +30cm",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "gestaltwandel": true,
+                    "infrarotsicht_tierform": true,
+                    "regeneration": true,
+                    "schwaeche_silber": true,
+                    "panzerung_2_hybridform": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        }
+    },
+    "voelker_selected": {
+        "Engel": false,
+        "Dämon": false,
+        "Mumie": false,
+        "Flickenmonster": false,
+        "Phantom": false,
+        "Wiedergänger": false,
+        "Vampir": false,
+        "Werwolf": false
+    },
+    "attribute": {
+        "Geschicklichkeit": {
+            "attribut_name": "Geschicklichkeit",
+            "wert": 4,
+            "modifier": 0
+        },
+        "Verstand": {
+            "attribut_name": "Verstand",
+            "wert": 4,
+            "modifier": 0
+        },
+        "Stärke": {
+            "attribut_name": "Stärke",
+            "wert": 4,
+            "modifier": 0
+        },
+        "Konstitution": {
+            "attribut_name": "Konstitution",
+            "wert": 4,
+            "modifier": 0
+        },
+        "Willenskraft": {
+            "attribut_name": "Willenskraft",
+            "wert": 4,
+            "modifier": 0
+        }
+    },
+    "fertigkeiten_daten": {
+        "Allgemeinwissen": [
+            "Verstand"
+        ],
+        "Athletik": [
+            "Geschicklichkeit"
+        ],
+        "Heimlichkeit": [
+            "Geschicklichkeit"
+        ],
+        "Überreden": [
+            "Willenskraft"
+        ],
+        "Wahrnehmung": [
+            "Verstand"
+        ],
+        "Kämpfen": [
+            "Geschicklichkeit"
+        ],
+        "Schießen": [
+            "Geschicklichkeit"
+        ],
+        "Diebeskunst": [
+            "Geschicklichkeit"
+        ],
+        "Überleben": [
+            "Verstand"
+        ],
+        "Reiten": [
+            "Geschicklichkeit"
+        ],
+        "Fahren": [
+            "Geschicklichkeit"
+        ],
+        "Seefahrt": [
+            "Geschicklichkeit"
+        ],
+        "Pilot": [
+            "Geschicklichkeit"
+        ],
+        "Darbietung": [
+            "Willenskraft"
+        ],
+        "Einschüchtern": [
+            "Willenskraft"
+        ],
+        "Fokus": [
+            "Willenskraft"
+        ],
+        "Glaube": [
+            "Willenskraft"
+        ],
+        "Heilen": [
+            "Verstand"
+        ],
+        "Provozieren": [
+            "Verstand"
+        ],
+        "Recherche": [
+            "Verstand"
+        ],
+        "Reparieren": [
+            "Verstand"
+        ],
+        "Glücksspiel": [
+            "Verstand"
+        ],
+        "Kriegskunst": [
+            "Verstand"
+        ],
+        "Okkultismus": [
+            "Verstand"
+        ],
+        "Geisteswissenschaften": [
+            "Verstand"
+        ],
+        "Naturwissenschaften": [
+            "Verstand"
+        ],
+        "Sprache": [
+            "Verstand"
+        ],
+        "Elektronik": [
+            "Verstand"
+        ],
+        "Hacken": [
+            "Verstand"
+        ],
+        "Zaubern": [
+            "Verstand"
+        ],
+        "Psionik": [
+            "Willenskraft"
+        ],
+        "Verrückte Wissenschaft": [
+            "Verstand"
+        ],
+        "Wahrsagen": [
+            "Willenskraft"
+        ]
+    },
+    "talente": {
+        "Arkaner Hintergrund (Verdorbener)": {
+            "name": "Arkaner Hintergrund (Verdorbener)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Der Charakter wurde von einer dunklen Macht berührt oder verflucht.",
+            "neue_maechte": 3,
+            "machtpunkte": 15,
+            "auto_handicaps": [
+                "Verderbnis"
+            ],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Dämonologe)": {
+            "name": "Arkaner Hintergrund (Dämonologe)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Okkultismus (Verstand). Beschwört und verhandelt mit dämonischen Wesen.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "auto_handicaps": [
+                "Verderbnis"
+            ],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Wahrsager)": {
+            "name": "Arkaner Hintergrund (Wahrsager)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkane Fertigkeit: Wahrsagen (Willenskraft). Liest die Zukunft aus Karten, Kristallkugeln oder anderen Medien.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Medium)": {
+            "name": "Arkaner Hintergrund (Medium)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "WIL W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Kommuniziert mit Geistern und der Geisterwelt.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Okkultist)": {
+            "name": "Arkaner Hintergrund (Okkultist)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Okkultismus (Verstand). Gelehrter der verborgenen Künste.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "auto_handicaps": [
+                "Materialkomponenten"
+            ],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Priester)": {
+            "name": "Arkaner Hintergrund (Priester)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "WIL W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Diener einer höheren Macht.",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "auto_handicaps": [
+                "Schwur_leicht"
+            ],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Psionischer Ermittler)": {
+            "name": "Arkaner Hintergrund (Psionischer Ermittler)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Psionik (Willenskraft). Nutzt übersinnliche Fähigkeiten zur Aufklärung.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Voodooist)": {
+            "name": "Arkaner Hintergrund (Voodooist)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "WIL W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Praktiziert Voodoo-Rituale und kommuniziert mit den Loa.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "auto_handicaps": [
+                "Materialkomponenten"
+            ],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Hexenmeister/Hexe)": {
+            "name": "Arkaner Hintergrund (Hexenmeister/Hexe)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "WIL W6"
+            ],
+            "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Wirkt Hexenkunst durch Pakte mit übernatürlichen Kräften.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkaner Hintergrund (Alchemist, Horror)": {
+            "name": "Arkaner Hintergrund (Alchemist, Horror)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkane Fertigkeit: Okkultismus (Verstand). Horror-Variante des Alchemisten mit dunkleren Gebräuen.",
+            "neue_maechte": 3,
+            "machtpunkte": 15,
+            "auto_handicaps": [
+                "Materialkomponenten"
+            ],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Galgenhumor": {
+            "name": "Galgenhumor",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Provozieren W6"
+            ],
+            "beschreibung": "Kann Provozieren statt Willenskraft für Furchtproben verwenden. Bei Steigerung erhalten Verbündete +1 Unterstützung auf ihre Furchtprobe.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Unerschütterlich": {
+            "name": "Unerschütterlich",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "WIL W8"
+            ],
+            "beschreibung": "Wird vom Drang angetrieben, das Böse zu besiegen. Kann auch im Zustand Geschüttelt eine einzelne Aktion mit -2 Abzug durchführen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Visionen": {
+            "name": "Visionen",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Dunkle Träume oder blitzartige Bilder von Unheil. Einmal pro Spielsitzung erhält der Charakter eine Vision (nutzt das Zeichen-und-Omen-System).",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Veteran der Dunklen Welt": {
+            "name": "Veteran der Dunklen Welt",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W8"
+            ],
+            "beschreibung": "Beginnt als Erfahren (einen Rang höher). Muss auf der Veteranentabelle würfeln, um vergangene Missgeschicke zu bestimmen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Mut": {
+            "name": "Mut",
+            "kategorie": "Anführer",
+            "rang": "F",
+            "voraussetzungen": [
+                "Kommandeur",
+                "Überreden W8"
+            ],
+            "beschreibung": "Verbündete innerhalb von 5'' (10 Metern) dürfen eine fehlgeschlagene Furchtprobe kostenlos wiederholen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Bevorzugte Macht": {
+            "name": "Bevorzugte Macht",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": [
+                {
+                    "oder": [
+                        "Arkaner Hintergrund (Verdorbener)",
+                        "Arkaner Hintergrund (Okkultist)",
+                        "Arkaner Hintergrund (Hexenmeister/Hexe)"
+                    ]
+                },
+                "Arkane Fertigkeit W8"
+            ],
+            "beschreibung": "Wähle eine deiner Mächte. Du kannst bis zu 2 Punkte an Abzügen (Mehrfachaktion, Wunden, Erschöpfung usw.) beim Aktivieren dieser Macht ignorieren.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Stiller Wirker": {
+            "name": "Stiller Wirker",
+            "kategorie": "Macht",
+            "rang": "A",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Okkultismus W8"
+            ],
+            "beschreibung": "Der Charakter kann Zauber wirken oder Wunder anrufen, ohne zu sprechen – unter Wasser, im Vakuum, geknebelt, innerhalb eines Stillezaubers usw.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Monsterjäger": {
+            "name": "Monsterjäger",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "WIL W6"
+            ],
+            "beschreibung": "Immun gegen Furchtproben durch eine allgemeine Kreaturenart (z.B. Geister, Werwölfe, Vampire, Zombies, Konstrukte). Kann mehrfach gewählt werden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Schreikönigin/Schreikönig": {
+            "name": "Schreikönigin/Schreikönig",
+            "kategorie": "Profi",
+            "rang": "V",
+            "voraussetzungen": [],
+            "beschreibung": "Darf das erste Ergebnis auf der Furchteffekt-Tabelle neu würfeln (muss das zweite Ergebnis akzeptieren).",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Geisterfreund": {
+            "name": "Geisterfreund",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "WIL W8"
+            ],
+            "beschreibung": "Der Charakter kann übernatürliche Wesenheiten wahrnehmen und mit Geistern kommunizieren.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Turm des Willens": {
+            "name": "Turm des Willens",
+            "kategorie": "Profi",
+            "rang": "V",
+            "voraussetzungen": [
+                "WIL W10"
+            ],
+            "beschreibung": "+2 auf alle Furchtproben und Proben gegen übernatürliche Beeinflussung.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Gesunder Verstand": {
+            "name": "Gesunder Verstand",
+            "kategorie": "Profi",
+            "rang": "A",
+            "voraussetzungen": [
+                "WIL W6"
+            ],
+            "beschreibung": "+2 auf Furchtproben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Abgehärtet": {
+            "name": "Abgehärtet",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "WIL W8",
+                "Gesunder Verstand"
+            ],
+            "beschreibung": "+4 auf Furchtproben (ersetzt den Bonus von Gesunder Verstand).",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Exorzist": {
+            "name": "Exorzist",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "WIL W8",
+                "Glaube W8"
+            ],
+            "beschreibung": "+2 auf Proben zum Verbannen oder Bannen übernatürlicher Wesen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Talismanhersteller": {
+            "name": "Talismanhersteller",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W8",
+                "Okkultismus W6"
+            ],
+            "beschreibung": "Kann schützende Talismane und Amulette herstellen, die Schutz gegen übernatürliche Kräfte bieten.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Fanatismus": {
+            "name": "Fanatismus",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "WIL W8"
+            ],
+            "beschreibung": "Erhält +2 auf Willenskraft-Proben gegen übernatürliche Einflüsse und Furcht. Kann Bennies für Verbündete in Reichweite ausgeben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Der/Die Auserwählte": {
+            "name": "Der/Die Auserwählte",
+            "kategorie": "Profi",
+            "rang": "H",
+            "voraussetzungen": [
+                "WIL W10"
+            ],
+            "beschreibung": "Das Schicksal hat diesen Charakter auserwählt. Einmal pro Sitzung kann er einen Fehlschlag bei einer dramatischen Aufgabe automatisch in einen Erfolg verwandeln.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Dieses Haus ist rein": {
+            "name": "Dieses Haus ist rein",
+            "kategorie": "Profi",
+            "rang": "V",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Priester)",
+                "Glaube W8"
+            ],
+            "beschreibung": "Der Charakter kann einen Ort weihen und gegen übernatürliche Wesen schützen. Übernatürliche Kreaturen erleiden -2 auf alle Proben im geweihten Bereich.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Eldrische Inspiration": {
+            "name": "Eldrische Inspiration",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W6"
+            ],
+            "beschreibung": "Einmal pro Begegnung kann der Charakter 2 Machtpunkte ohne Kosten regenerieren, indem er sich von einer düsteren Quelle inspirieren lässt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Höllenfeuer": {
+            "name": "Höllenfeuer",
+            "kategorie": "Macht",
+            "rang": "V",
+            "voraussetzungen": [
+                {
+                    "oder": [
+                        "Arkaner Hintergrund (Dämonologe)",
+                        "Arkaner Hintergrund (Verdorbener)",
+                        "Arkaner Hintergrund (Hexenmeister/Hexe)"
+                    ]
+                },
+                "Arkane Fertigkeit W10"
+            ],
+            "beschreibung": "Schadensmächte verursachen +2 Schaden gegen Ziele, die das Gute repräsentieren.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Nekromant": {
+            "name": "Nekromant",
+            "kategorie": "Profi",
+            "rang": "F",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Okkultismus W8"
+            ],
+            "beschreibung": "Kann mit der Macht Zombie die doppelte Anzahl an Untoten kontrollieren.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Meisternekromant": {
+            "name": "Meisternekromant",
+            "kategorie": "Profi",
+            "rang": "V",
+            "voraussetzungen": [
+                "Nekromant",
+                "Okkultismus W10"
+            ],
+            "beschreibung": "Untote unter der Kontrolle des Nekromanten erhalten +1 auf Kämpfen und Schaden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Am Kreuzweg gewesen": {
+            "name": "Am Kreuzweg gewesen",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)"
+            ],
+            "beschreibung": "Der Charakter hat einen Pakt an einem Kreuzweg geschlossen. Beginnt mit einer zusätzlichen Macht, leidet aber unter einem vom SL bestimmten Nachteil.",
+            "neue_maechte": 1,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Gefolge": {
+            "name": "Gefolge",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Voodooist)",
+                "Glaube W8"
+            ],
+            "beschreibung": "Der Voodooist hat einen engen Kontakt zu einem bestimmten Loa, der zusätzliche Unterstützung gewährt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Mystische Kräfte": {
+            "name": "Mystische Kräfte",
+            "kategorie": "Monströs",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Für monströse Helden. 10 dedizierte Machtpunkte, aktiviert automatisch mit Erfolg als limitierte freie Aktion. Nutzt Willenskraft als arkane Fertigkeit.",
+            "neue_maechte": 0,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Wildheit": {
+            "name": "Wildheit",
+            "kategorie": "Monströs",
+            "rang": "F",
+            "voraussetzungen": [
+                "STÄ W10"
+            ],
+            "beschreibung": "Wilder Angriff verursacht +4 Schaden statt +2.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        }
+    },
+    "handicaps": {
+        "Verliebt_leicht": {
+            "name": "Verliebt",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Leicht zu bezirzen. -2 auf Proben gegen Provozieren/Überreden durch Personen mit dem Talent Attraktiv.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Bluter_schwer": {
+            "name": "Bluter",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Blutet stark bei Verletzungen. Jede Runde nach einer Wunde muss eine Konstitutionsprobe bestanden werden oder der Charakter erleidet Erschöpfung (bis zum Tod). Heilungsprobe stoppt die Blutung.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Kugelmagnet_leicht": {
+            "name": "Kugelmagnet",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Wird bei Zufallstreffern (Unschuldiger Zuschauer) auf 1-2 (Einzelschuss) bzw. 1-3 (Schrotflinte/Dauerfeuer) getroffen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Tyrann_leicht": {
+            "name": "Tyrann",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Schikaniert andere, die er nicht mag oder die anders sind. Beleidigt und bedroht sie häufig.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Tyrann_schwer": {
+            "name": "Tyrann",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Wird auch physisch gegen andere. Ist bereit, Konfrontationen eskalieren zu lassen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verderbnis_schwer": {
+            "name": "Verderbnis",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Nur mit Arkanem Hintergrund. Bei Kritischem Fehlschlag auf der arkanen Fertigkeit erhält der Charakter ein neues leichtes Handicap (oder wertet ein leichtes zu einem schweren auf). Verschwindet bei der nächsten Steigerung.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verflucht_schwer": {
+            "name": "Verflucht",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Nur in Settings mit Wundern. Hilfreiche magische Effekte erleiden -2 auf die arkane Fertigkeitsprobe. Bei Kritischem Fehlschlag wird der Wirker Betäubt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verdammt_schwer": {
+            "name": "Verdammt",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Tod wartet auf den Helden. -2 auf Widerstandsproben gegen Schaden (Soak-Würfe).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Düsternis_leicht": {
+            "name": "Düsternis",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Pessimist, der immer das Schlimmste erwartet. +2 auf die Ergebnisse fehlgeschlagener Furchtproben.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Tiefschläfer_leicht": {
+            "name": "Tiefschläfer",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Schwer zu wecken. Wahrnehmungsprobe (-4) nötig, um aufzuwachen. -4 auf Konstitutionsproben, um wach zu bleiben.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schreckhaft_leicht": {
+            "name": "Schreckhaft",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Muss bei jedem plötzlichen Geräusch, Schock oder Überraschung eine Furchtprobe ablegen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Materialkomponenten_schwer": {
+            "name": "Materialkomponenten",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Nur mit Arkanem Hintergrund. Die Mächte benötigen Materialien. Ohne Materialien -4 auf alle arkanen Fertigkeitsproben. Nachschub: 50$ × Rang.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Nachtschrecken_schwer": {
+            "name": "Nachtschrecken",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Ständige Alpträume. -1 auf alle Willenskraft-Proben. Personen in der Nähe werden wahrscheinlich ebenfalls wach gehalten.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schreihals_leicht": {
+            "name": "Schreihals",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Schreit bei fehlgeschlagenen Furchtproben los und alarmiert möglicherweise Feinde.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schreihals_schwer": {
+            "name": "Schreihals",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Schreit ununterbrochen und ist Abgelenkt, bis eine Verstandsprobe gelingt. Verbündete in der Großen Explosionsschablone sind ebenfalls Abgelenkt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Abergläubisch_leicht": {
+            "name": "Abergläubisch",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Braucht ein Ritual oder Objekt als Fokus. Wenn der Fokus gestört wird, -1 auf alle Eigenschaftsproben.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Unnatürlicher_Appetit_leicht": {
+            "name": "Unnatürlicher Appetit",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Isst etwas Ekelhaftes (Insekten, Papier, verfaultes Essen). -2 auf Überreden bei Personen, die davon erfahren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Opfer_schwer": {
+            "name": "Opfer",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Bei zufälliger Zielauswahl durch den SL wird dieses Ziel bevorzugt gewählt. Überzählige Gegner greifen ebenfalls das Opfer an.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        }
+    },
+    "maechte": {
+        "Bannung": {
+            "name": "Bannung",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Willenskraft",
+            "dauer": "Sofort",
+            "beschreibung": "Verbannt ein übernatürliches Wesen an seinen Ursprungsort.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Bindung": {
+            "name": "Bindung",
+            "rang": "Veteran",
+            "machtpunkte": 5,
+            "reichweite": "Berührung",
+            "dauer": "Permanent (bis gebrochen)",
+            "beschreibung": "Bindet eine übernatürliche Kreatur an einen Ort oder Gegenstand.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Seele entziehen": {
+            "name": "Seele entziehen",
+            "rang": "Veteran",
+            "machtpunkte": 5,
+            "reichweite": "Berührung",
+            "dauer": "Sofort",
+            "beschreibung": "Entzieht dem Ziel einen Teil seiner Lebenskraft. Das Ziel erleidet Erschöpfung, der Wirker regeneriert Machtpunkte.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Geistersicht": {
+            "name": "Geistersicht",
+            "rang": "Anfänger",
+            "machtpunkte": 2,
+            "reichweite": "Selbst",
+            "dauer": "5",
+            "beschreibung": "Erlaubt das Sehen von Geistern, unsichtbaren Wesen und übernatürlichen Auren.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Wahnsinn": {
+            "name": "Wahnsinn",
+            "rang": "Veteran",
+            "machtpunkte": 3,
+            "reichweite": "Verstand",
+            "dauer": "Sofort",
+            "beschreibung": "Treibt das Ziel vorübergehend in den Wahnsinn. Das Ziel muss eine Willenskraftprobe bestehen oder erhält einen vorübergehenden Wahnsinnszustand.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Geisterkontrolle": {
+            "name": "Geisterkontrolle",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Willenskraft",
+            "dauer": "5",
+            "beschreibung": "Kontrolliert oder befiehlt einen Geist oder eine ätherische Kreatur.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Düstere Beschwörung": {
+            "name": "Düstere Beschwörung",
+            "rang": "Veteran",
+            "machtpunkte": 5,
+            "reichweite": "Verstand",
+            "dauer": "5",
+            "beschreibung": "Beschwört eine dunkle Kreatur aus der Geisterwelt oder Hölle.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schutzkreis": {
+            "name": "Schutzkreis",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Selbst",
+            "dauer": "10 Minuten",
+            "beschreibung": "Erzeugt einen Schutzkreis, den übernatürliche Wesen nicht betreten können, ohne eine Willenskraftprobe zu bestehen.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Grabeskälte": {
+            "name": "Grabeskälte",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 2,
+            "reichweite": "Verstand",
+            "dauer": "Sofort",
+            "beschreibung": "Übernatürliche Kälte, die 2W6 Schaden verursacht und das Ziel bei Erfolg Verlangsamt.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Fluchwort": {
+            "name": "Fluchwort",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Verstand",
+            "dauer": "Bis zur nächsten Steigerung",
+            "beschreibung": "Belegt das Ziel mit einem Fluch, der ihm auf bestimmte Proben -2 gibt.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Zombiemeister": {
+            "name": "Zombiemeister",
+            "rang": "Veteran",
+            "machtpunkte": 3,
+            "reichweite": "Berührung",
+            "dauer": "1 Stunde",
+            "beschreibung": "Erweckt eine Leiche als untoten Diener unter der Kontrolle des Wirkers.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Blutmagie": {
+            "name": "Blutmagie",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 0,
+            "reichweite": "Selbst",
+            "dauer": "Sofort",
+            "beschreibung": "Der Wirker opfert eigene Trefferpunkte, um Machtpunkte zu regenerieren. Jede Wunde gibt 5 Machtpunkte.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Letzte Ruhe": {
+            "name": "Letzte Ruhe",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Berührung",
+            "dauer": "Permanent",
+            "beschreibung": "Legt eine unruhige Seele oder einen Untoten endgültig zur Ruhe.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Geisterruf": {
+            "name": "Geisterruf",
+            "rang": "Fortgeschritten",
+            "machtpunkte": 3,
+            "reichweite": "Verstand",
+            "dauer": "5",
+            "beschreibung": "Ruft den Geist eines Verstorbenen herbei, um Fragen zu stellen.",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        }
+    },
+    "ausruestung": {
+        "Silberkugeln (10)": {
+            "name": "Silberkugeln (10)",
+            "kategorie": "Munition",
+            "gewicht": 0.5,
+            "kosten": 50,
+            "setting": "horror",
+            "beschreibung": "Verursacht +4 Schaden gegen Werwölfe und andere silberempfindliche Kreaturen.",
+            "aktiv": true
+        },
+        "Silbernitratkugeln (10)": {
+            "name": "Silbernitratkugeln (10)",
+            "kategorie": "Munition",
+            "gewicht": 0.5,
+            "kosten": 100,
+            "setting": "horror",
+            "beschreibung": "Verursacht +4 Schaden gegen Vampire und Werwölfe.",
+            "aktiv": true
+        },
+        "Knoblauchkugeln (10)": {
+            "name": "Knoblauchkugeln (10)",
+            "kategorie": "Munition",
+            "gewicht": 0.5,
+            "kosten": 25,
+            "setting": "horror",
+            "beschreibung": "Verursacht +2 Schaden gegen Vampire.",
+            "aktiv": true
+        },
+        "UV-Kugeln (10)": {
+            "name": "UV-Kugeln (10)",
+            "kategorie": "Munition",
+            "gewicht": 0.5,
+            "kosten": 75,
+            "setting": "horror",
+            "beschreibung": "Simulieren Sonnenlicht. Verursacht +4 Schaden gegen lichtempfindliche Kreaturen.",
+            "aktiv": true
+        },
+        "Kaltes-Eisen-Kugeln (10)": {
+            "name": "Kaltes-Eisen-Kugeln (10)",
+            "kategorie": "Munition",
+            "gewicht": 0.5,
+            "kosten": 50,
+            "setting": "horror",
+            "beschreibung": "Verursacht +4 Schaden gegen Feen und Dämonen.",
+            "aktiv": true
+        },
+        "Geisterjägerpaket": {
+            "name": "Geisterjägerpaket",
+            "kategorie": "Ausrüstung",
+            "gewicht": 10,
+            "kosten": 500,
+            "setting": "horror",
+            "beschreibung": "Enthält EMF-Detektor, Infrarotkamera, Salzvorräte, Eisenstaub und Aufnahmegerät.",
+            "aktiv": true
+        },
+        "Geisterfalle": {
+            "name": "Geisterfalle",
+            "kategorie": "Ausrüstung",
+            "gewicht": 5,
+            "kosten": 1000,
+            "setting": "horror",
+            "beschreibung": "Kann einen Geist oder ätherische Kreatur einfangen. Erfordert eine Okkultismus-Probe.",
+            "aktiv": true
+        },
+        "Bewegungsmelder": {
+            "name": "Bewegungsmelder",
+            "kategorie": "Ausrüstung",
+            "gewicht": 2,
+            "kosten": 200,
+            "setting": "horror",
+            "beschreibung": "Erfasst Bewegungen im Umkreis von 20''. +2 auf Wahrnehmung in der Dunkelheit.",
+            "aktiv": true
+        },
+        "UV-Granate": {
+            "name": "UV-Granate",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 100,
+            "setting": "horror",
+            "beschreibung": "Erzeugt helles UV-Licht in der Mittleren Explosionsschablone. 3W6 Schaden gegen lichtempfindliche Kreaturen.",
+            "aktiv": true
+        },
+        "Holzpfähle (5)": {
+            "name": "Holzpfähle (5)",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 5,
+            "setting": "horror",
+            "beschreibung": "Stä+W4 Schaden. Gezielter Schuss ins Herz eines Vampirs: Sofortiger Tod bei Treffer.",
+            "aktiv": true
+        },
+        "Weihwasser (Flasche)": {
+            "name": "Weihwasser (Flasche)",
+            "kategorie": "Ausrüstung",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "horror",
+            "beschreibung": "2W4 Schaden gegen Dämonen, Vampire und andere unheilige Kreaturen. Wurfwaffe, Reichweite 3/6/12.",
+            "aktiv": true
+        },
+        "Knoblauch (Bund)": {
+            "name": "Knoblauch (Bund)",
+            "kategorie": "Ausrüstung",
+            "gewicht": 0.5,
+            "kosten": 2,
+            "setting": "horror",
+            "beschreibung": "Hält Vampire auf Distanz. Vampir muss Willenskraftprobe (-2) bestehen, um sich zu nähern.",
+            "aktiv": true
+        },
+        "Heiliges Symbol": {
+            "name": "Heiliges Symbol",
+            "kategorie": "Ausrüstung",
+            "gewicht": 0.5,
+            "kosten": 25,
+            "setting": "horror",
+            "beschreibung": "Kann gegen Vampire und Dämonen eingesetzt werden. Der Träger macht eine Glaubensprobe; das Wesen muss mit Willenskraft dagegen bestehen oder ist Abgeschreckt.",
+            "aktiv": true
+        },
+        "Silberdolch": {
+            "name": "Silberdolch",
+            "kategorie": "Nahkampfwaffe",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "horror",
+            "beschreibung": "Stä+W4. Verursacht +4 Schaden gegen silberempfindliche Kreaturen.",
+            "aktiv": true
+        },
+        "Salz (5kg Sack)": {
+            "name": "Salz (5kg Sack)",
+            "kategorie": "Ausrüstung",
+            "gewicht": 5,
+            "kosten": 5,
+            "setting": "horror",
+            "beschreibung": "Kann als Schutzkreis gegen Geister und bestimmte übernatürliche Wesen gelegt werden.",
+            "aktiv": true
+        },
+        "EMF-Detektor": {
+            "name": "EMF-Detektor",
+            "kategorie": "Ausrüstung",
+            "gewicht": 1,
+            "kosten": 150,
+            "setting": "horror",
+            "beschreibung": "Erkennt elektromagnetische Felder, die auf übernatürliche Aktivität hindeuten. +2 auf Wahrnehmung für Geistererkennung.",
+            "aktiv": true
+        },
+        "Kaltes-Eisen-Schwert": {
+            "name": "Kaltes-Eisen-Schwert",
+            "kategorie": "Nahkampfwaffe",
+            "gewicht": 4,
+            "kosten": 500,
+            "setting": "horror",
+            "beschreibung": "Stä+W8. Verursacht +4 Schaden gegen Feen und Dämonen.",
+            "aktiv": true
+        },
+        "Vampirjäger-Armbrust": {
+            "name": "Vampirjäger-Armbrust",
+            "kategorie": "Fernkampfwaffe",
+            "gewicht": 4,
+            "kosten": 350,
+            "setting": "horror",
+            "beschreibung": "2W6 Schaden, Reichweite 15/30/60. Verschießt Holzpfähle mit Seilzug.",
+            "aktiv": true
+        }
+    },
+    "settingregeln": {
+        "eimerweise_blut": false,
+        "erweiterte_furchteffekte": false,
+        "geistige_stabilitaet": false,
+        "ritualmagie": false,
+        "zeichen_und_omen": false,
+        "schlachtregeln": false,
+        "schurken_entschlossenheit": false,
+        "bannkreise_und_bindungen": false,
+        "umweltphaenomene": false,
+        "schwierige_heilung": false,
+        "freizeit": false,
+        "logen": false,
+        "kosmischer_horror": false,
+        "gothischer_horror": false,
+        "action_horror": false,
+        "slasher": false,
+        "pulp_horror": false,
+        "superheldenhafter_horror": false,
+        "survival_horror": false,
+        "dynamischer_rueckschlag": false,
+        "entschlossenheit": false,
+        "fanatiker": false,
+        "helden_sterben_nie": false,
+        "narrenglueck": false
+    }
+}

@@ -126,7 +126,7 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Deine Icons + Tab-Texte + zugehörige Screens
         # NEU: CharakterVerwaltung-Tab hinzugefügt
         self.tab_definitions = [
-            ("account-multiple", "Charakterverwaltung", CharakterVerwaltungScreen),
+            ("content-save",     "Speichern/Laden",      CharakterVerwaltungScreen),
             ("cog",              "Einstellungen",        EinstellungenScreen),
             ("account-group",    "Völker",               VoelkerScreen),
             ("account-details",  "Profil",               ProfilScreen),
