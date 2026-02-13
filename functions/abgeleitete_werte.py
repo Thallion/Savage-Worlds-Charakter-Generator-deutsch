@@ -116,8 +116,11 @@ def berechne_abgeleitete_werte(charakter):
             robustheit_bonus += 1  # Raufbold: +1 Robustheit
 
         if "Schläger" in charakter.selected_talente:
-            robustheit_bonus += 1  # Schläger: +1 Robustheit      
-            
+            robustheit_bonus += 1  # Schläger: +1 Robustheit
+
+        if "Himmlische Symphonie (Planeten)" in charakter.selected_talente:
+            robustheit_bonus += 2  # Himmlische Symphonie (Planeten): +2 Robustheit
+
         # Handicap-Effekte für Robustheit
         for handicap_name in charakter.selected_handicaps:
             if handicap_name in charakter.handicaps:

@@ -59,7 +59,9 @@ class TalentConfig:
                 "Arkaner Widerstand", "Verbesserte Arkane Resistenz",
                 "Meister aller Waffen", "Waffenmeister", "Block", "Harter Block",
                 "Schwer zu töten", "Schwerer zu töten", "Schnell", "Flink",
-                "Raufbold", "Schläger", "Attraktiv", "Sehr attraktiv"
+                "Raufbold", "Schläger", "Attraktiv", "Sehr attraktiv",
+                "Himmlische Symphonie (Mond)", "Himmlische Symphonie (Planeten)",
+                "Himmlische Symphonie (Sonne)", "Himmlische Symphonie (Sterne)"
             ],
             "pathfinder_kostenlose_kategorien": [
                 "Klasse", "Hintergrund", "Experte", "Class", "Background", "Expert"
