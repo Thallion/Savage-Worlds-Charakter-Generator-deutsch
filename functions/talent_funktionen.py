@@ -453,45 +453,74 @@ class TalentManager:
         "Rohling": [("Athletik", "Geschicklichkeit")],
     }
 
+    # Mapping: Talent → Anzahl Bonus-Aufstiege
+    TALENT_AUFSTIEGE_EFFEKTE = {
+        "Veteran der Dunklen Welt": 4,
+    }
+
     def _apply_talent_spezial_effekte(self, talent_name_key):
         """
         Wendet Spezial-Effekte bestimmter Talente an.
         Z.B. Rohling: Verknüpft Athletik mit Stärke statt Geschicklichkeit.
+        Z.B. Veteran der Dunklen Welt: +4 Aufstiege (Rang Erfahren).
         """
+        # Fertigkeits-Attribut-Verknüpfungen
         effekte = self.TALENT_FERTIGKEITS_EFFEKTE.get(talent_name_key)
-        if not effekte:
-            return
+        if effekte:
+            for fertigkeit_name, neues_attribut_name in effekte:
+                fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+                neues_attribut = self.charakter.attribute.get(neues_attribut_name)
+                if fertigkeit and neues_attribut:
+                    altes_attribut_name = (fertigkeit.attribut.attribut_name
+                                           if fertigkeit.attribut else "?")
+                    fertigkeit.attribut = neues_attribut
+                    Logger.info(
+                        f"Talent '{talent_name_key}': {fertigkeit_name} "
+                        f"verknüpft mit {neues_attribut_name} (vorher {altes_attribut_name})"
+                    )
 
-        for fertigkeit_name, neues_attribut_name in effekte:
-            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
-            neues_attribut = self.charakter.attribute.get(neues_attribut_name)
-            if fertigkeit and neues_attribut:
-                altes_attribut_name = (fertigkeit.attribut.attribut_name
-                                       if fertigkeit.attribut else "?")
-                fertigkeit.attribut = neues_attribut
-                Logger.info(
-                    f"Talent '{talent_name_key}': {fertigkeit_name} "
-                    f"verknüpft mit {neues_attribut_name} (vorher {altes_attribut_name})"
-                )
+        # Aufstiege-Boni (z.B. Veteran der Dunklen Welt → +4 Aufstiege)
+        aufstiege_bonus = self.TALENT_AUFSTIEGE_EFFEKTE.get(talent_name_key)
+        if aufstiege_bonus:
+            from functions.character_advancement import increase_aufstiege
+            for _ in range(aufstiege_bonus):
+                increase_aufstiege(self.charakter)
+            Logger.info(
+                f"Talent '{talent_name_key}': +{aufstiege_bonus} Aufstiege gewährt "
+                f"(Gesamt: {self.charakter.aufstiege_gesamt}, "
+                f"Verbleibend: {self.charakter.verbleibende_aufstiege})"
+            )
 
     def _remove_talent_spezial_effekte(self, talent_name_key):
         """
         Macht Spezial-Effekte bestimmter Talente rückgängig.
         Z.B. Rohling abgewählt: Athletik zurück auf Geschicklichkeit.
+        Z.B. Veteran der Dunklen Welt abgewählt: -4 Aufstiege.
         """
+        # Fertigkeits-Attribut-Verknüpfungen rückgängig machen
         original = self.TALENT_FERTIGKEITS_EFFEKTE_ORIGINAL.get(talent_name_key)
-        if not original:
-            return
+        if original:
+            for fertigkeit_name, original_attribut_name in original:
+                fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+                original_attribut = self.charakter.attribute.get(original_attribut_name)
+                if fertigkeit and original_attribut:
+                    fertigkeit.attribut = original_attribut
+                    Logger.info(
+                        f"Talent '{talent_name_key}' abgewählt: {fertigkeit_name} "
+                        f"zurück auf {original_attribut_name}"
+                    )
 
-        for fertigkeit_name, original_attribut_name in original:
-            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
-            original_attribut = self.charakter.attribute.get(original_attribut_name)
-            if fertigkeit and original_attribut:
-                fertigkeit.attribut = original_attribut
-                Logger.info(
-                    f"Talent '{talent_name_key}' abgewählt: {fertigkeit_name} "
-                    f"zurück auf {original_attribut_name}"
-                )
+        # Aufstiege-Boni rückgängig machen (z.B. Veteran der Dunklen Welt → -4 Aufstiege)
+        aufstiege_bonus = self.TALENT_AUFSTIEGE_EFFEKTE.get(talent_name_key)
+        if aufstiege_bonus:
+            from functions.character_advancement import decrease_aufstiege
+            for _ in range(aufstiege_bonus):
+                decrease_aufstiege(self.charakter)
+            Logger.info(
+                f"Talent '{talent_name_key}' abgewählt: -{aufstiege_bonus} Aufstiege entfernt "
+                f"(Gesamt: {self.charakter.aufstiege_gesamt}, "
+                f"Verbleibend: {self.charakter.verbleibende_aufstiege})"
+            )
 
     def pruefe_voraussetzungen(self, talent):
         """
