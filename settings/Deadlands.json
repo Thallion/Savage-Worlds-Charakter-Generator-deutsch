@@ -5599,5 +5599,7 @@
         "schwere_entscheidungen": false,
         "ungepanzerter_held": false,
         "wundobergrenze": false
-    }  
+    },
+    "startgeld": 250,
+    "waehrung": "$"
 }

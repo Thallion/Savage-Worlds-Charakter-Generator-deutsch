@@ -1,0 +1,64 @@
+{
+  "name": "Hesindian",
+  "description": "Wie überaus ungewöhnlich. Wir sollten dies unbedingt näher untersuchen.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Magier",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 4,
+    "Konstitution": 6,
+    "Stärke": 4,
+    "Verstand": 10,
+    "Willenskraft": 8
+  },
+  "skills": {
+    "Allgemeinwissen": 8,
+    "Athletik": 4,
+    "Heimlichkeit": 6,
+    "Kämpfen": 4,
+    "Recherche": 6,
+    "Überleben": 4,
+    "Überreden": 6,
+    "Wahrnehmung": 4,
+    "Zaubern": 10
+  },
+  "handicaps": [
+    "Neugierig",
+    "Schlechte Augen",
+    "Tick"
+  ],
+  "edges": [
+    "Arkaner Hintergrund (Magie)",
+    "Mehr Machtpunkte"
+  ],
+  "free_race_edge": "",
+  "powers": [
+    "Geschoss",
+    "Heilung",
+    "Blenden"
+  ],
+  "power_points": 15,
+  "equipment": [
+    "Magierstab (Stä+W4, Parade +1, Reichweite 1, Zweihändig)",
+    "Reiserobe",
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_hesindian_magier_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W4)/2 + Stab(+1) = 5",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 = 5",
+    "bewegung": 6
+  }
+}

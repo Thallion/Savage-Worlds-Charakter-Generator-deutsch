@@ -28,8 +28,11 @@ def main():
     build_dir = project_dir / "build"
     
     if dist_dir.exists():
-        print("🧹 Bereinige altes dist-Verzeichnis...")
-        shutil.rmtree(dist_dir)
+        if not os.environ.get("SKIP_DIST_CLEANUP"):
+            print("🧹 Bereinige altes dist-Verzeichnis...")
+            shutil.rmtree(dist_dir)
+        else:
+            print("⏭️ Überspringe dist-Verzeichnis Bereinigung (SKIP_DIST_CLEANUP gesetzt)")
     
     if build_dir.exists():
         print("🧹 Bereinige altes build-Verzeichnis...")

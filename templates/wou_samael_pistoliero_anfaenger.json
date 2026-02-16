@@ -1,0 +1,59 @@
+{
+  "name": "Samael",
+  "description": "Wir können das hier auf die sanfte oder die harte Tour machen. Nein, wartet, streicht das! Ich kann nur die harte Tour.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Pistoliero",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 6,
+    "Heimlichkeit": 6,
+    "Kämpfen": 6,
+    "Provozieren": 6,
+    "Schießen": 10,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Angewohnheit",
+    "Feind",
+    "Gesucht"
+  ],
+  "edges": [
+    "Beidhändig",
+    "Beidhändiger Fernkampf"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "2x Eruptor-Blaster (15/30/60, 2W6, PB 2)",
+    "Streitkolben (Stä+W6)",
+    "MuSP-Anzug (+2)"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_samael_pistoliero_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W6)/2 = 5",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + Rüstung(+2) = 7",
+    "bewegung": 6
+  }
+}

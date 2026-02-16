@@ -10,7 +10,7 @@ from kivymd.app import MDApp
 
 # Mocking Kivy vor Import
 with patch('kivy.logger.Logger'), patch('kivymd.app.MDApp'):
-    from views.handlers.template_handler import TemplateHandler
+    from controllers.template_handler import TemplateHandler
 
 
 class TestTemplateHandler(unittest.TestCase):
@@ -36,13 +36,13 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertEqual(self.template_handler.app, self.mock_app)
         self.assertIsNone(self.template_handler.selected_template)
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_show_template_selection_dialog(self, mock_logger):
         """Test Template-Auswahl-Dialog"""
         # Setup
         self.mock_app.controller.get_available_templates = Mock(return_value=['Template1', 'Template2'])
         
-        with patch('views.handlers.template_handler.MDDialog') as mock_dialog:
+        with patch('controllers.template_handler.MDDialog') as mock_dialog:
             # Test
             self.template_handler.show_template_selection_dialog()
             
@@ -50,7 +50,7 @@ class TestTemplateHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Template-Auswahl-Dialog geöffnet")
             
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_show_template_selection_dialog_no_templates(self, mock_logger):
         """Test Template-Dialog ohne verfügbare Templates"""
         # Setup - Keine Templates verfügbar
@@ -61,7 +61,7 @@ class TestTemplateHandler(unittest.TestCase):
         
         mock_logger.warning.assert_called_with("Keine Templates verfügbar")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_on_template_selected(self, mock_logger):
         """Test Template-Auswahl"""
         # Setup
@@ -75,7 +75,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertEqual(self.template_handler.selected_template, "Test Template")
         mock_logger.info.assert_called_with("Template ausgewählt: Test Template")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_on_template_deselected(self, mock_logger):
         """Test Template-Abwahl"""
         # Setup
@@ -90,7 +90,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertIsNone(self.template_handler.selected_template)
         mock_logger.info.assert_called_with("Template abgewählt: Test Template")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_generate_character_from_selected_template_with_template(self, mock_logger):
         """Test Charakter-Generierung mit ausgewähltem Template"""
         # Setup
@@ -104,7 +104,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.mock_app.controller.generate_character_from_template.assert_called_once_with("Test Template")
         mock_logger.info.assert_called_with("Charakter aus Template generiert: Test Template")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_generate_character_from_selected_template_no_template(self, mock_logger):
         """Test Charakter-Generierung ohne Template"""
         # Setup - Kein Template ausgewählt
@@ -118,7 +118,7 @@ class TestTemplateHandler(unittest.TestCase):
             mock_show_dialog.assert_called_once()
             mock_logger.warning.assert_called_with("Kein Template ausgewählt - zeige Auswahl-Dialog")
             
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_on_generate_button_clicked(self, mock_logger):
         """Test Generate-Button-Klick"""
         # Setup
@@ -134,7 +134,7 @@ class TestTemplateHandler(unittest.TestCase):
             mock_instance.dismiss.assert_called_once()
             mock_generate.assert_called_once()
             
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_clear_template_selection(self, mock_logger):
         """Test Template-Auswahl zurücksetzen"""
         # Setup
@@ -147,7 +147,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertIsNone(self.template_handler.selected_template)
         mock_logger.info.assert_called_with("Template-Auswahl zurückgesetzt")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_get_template_description(self, mock_logger):
         """Test Template-Beschreibung abrufen"""
         # Setup
@@ -160,7 +160,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertEqual(result, "Template Beschreibung")
         self.mock_app.controller.get_template_description.assert_called_once_with("Test Template")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_get_template_description_no_controller(self, mock_logger):
         """Test Template-Beschreibung ohne Controller"""
         # Setup - Kein Controller
@@ -173,7 +173,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertEqual(result, "Keine Beschreibung verfügbar")
         mock_logger.warning.assert_called_with("Controller nicht verfügbar für Template-Beschreibung")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_validate_template_with_valid_template(self, mock_logger):
         """Test Template-Validierung mit gültigem Template"""
         # Setup
@@ -186,7 +186,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertTrue(result)
         self.mock_app.controller.validate_template.assert_called_once_with("Valid Template")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_validate_template_with_invalid_template(self, mock_logger):
         """Test Template-Validierung mit ungültigem Template"""
         # Setup
@@ -199,7 +199,7 @@ class TestTemplateHandler(unittest.TestCase):
         self.assertFalse(result)
         mock_logger.warning.assert_called_with("Template 'Invalid Template' ist ungültig")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_exception_handling_show_dialog(self, mock_logger):
         """Test Exception-Handling bei Dialog-Anzeige"""
         # Setup - Exception simulieren
@@ -210,7 +210,7 @@ class TestTemplateHandler(unittest.TestCase):
         
         mock_logger.error.assert_called_with("Fehler beim Öffnen des Template-Dialogs: Test Error")
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_exception_handling_generate_character(self, mock_logger):
         """Test Exception-Handling bei Charakter-Generierung"""
         # Setup
@@ -222,8 +222,8 @@ class TestTemplateHandler(unittest.TestCase):
         
         mock_logger.error.assert_called_with("Fehler bei Template-Generierung: Generation Error")
         
-    @patch('views.handlers.template_handler.MDSelectionControl')
-    @patch('views.handlers.template_handler.MDListItem')
+    @patch('controllers.template_handler.MDSelectionControl')
+    @patch('controllers.template_handler.MDListItem')
     def test_create_template_list_item(self, mock_list_item, mock_selection_control):
         """Test Erstellung von Template-Listenelementen"""
         # Setup
@@ -240,7 +240,7 @@ class TestTemplateHandler(unittest.TestCase):
         mock_selection_control.assert_called_once()
         self.assertEqual(result, mock_item)
         
-    @patch('views.handlers.template_handler.Logger')
+    @patch('controllers.template_handler.Logger')
     def test_handle_template_dialog_dismiss(self, mock_logger):
         """Test Template-Dialog schließen"""
         # Setup

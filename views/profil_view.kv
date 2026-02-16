@@ -1,21 +1,18 @@
 <ProfilWidget>:
     orientation: 'vertical'
-    padding: [10, 10, 10, 10]
-    spacing: 10
     md_bg_color: self.theme_cls.backgroundColor
 
-    ScrollView:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
         size_hint: (1, 1)
-        do_scroll_x: False
-        do_scroll_y: True
-        bar_width: dp(15)
-        bar_margin: dp(8)
-        scroll_wheel_distance: dp(114)
-        MDGridLayout:
-            cols: 1
+
+        MDBoxLayout:
+            orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
-            padding: [10, 10, 10, 10]
+            size_hint_x: 1
+            padding: [10, 0, 10, 10]
             spacing: 10
 
             MDBoxLayout:
@@ -34,12 +31,10 @@
 
                 MDTextField:
                     id: name_input
+                    hint_text: "Name eingeben"
+                    size_hint_x: 1
                     text: root.char_name
-                    on_text: root.char_name = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
+                    on_text: root.on_char_name_change(root, self.text)
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -57,12 +52,10 @@
 
                 MDTextField:
                     id: alter_input
+                    hint_text: "Alter eingeben"
+                    size_hint_x: 1
                     text: root.alter
-                    on_text: root.alter = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
+                    on_text: root.on_alter_change(root, self.text)
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -80,12 +73,10 @@
 
                 MDTextField:
                     id: geschlecht_input
+                    hint_text: "Geschlecht eingeben"
+                    size_hint_x: 1
                     text: root.geschlecht
-                    on_text: root.geschlecht = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
+                    on_text: root.on_geschlecht_change(root, self.text)
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -103,12 +94,10 @@
 
                 MDTextField:
                     id: konzept_input
+                    hint_text: "Konzept eingeben"
+                    size_hint_x: 1
                     text: root.konzept
-                    on_text: root.konzept = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
+                    on_text: root.on_konzept_change(root, self.text)
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -126,26 +115,7 @@
 
                 MDTextField:
                     id: sprachen_input
+                    hint_text: "Sprachen eingeben"
+                    size_hint_x: 1
                     text: root.sprachen
-                    on_text: root.sprachen = self.text
-                    multiline: False
-                    size_hint_x: None
-                    width: 300
-                    mode: "outlined"
-
-            # MDLabel:
-            #     text: "Settingregeln"
-            #     size_hint_y: None
-            #     height: 30
-            #     halign: 'left'
-            #     theme_text_color: "Primary"
-
-            # MDGridLayout:
-            #     id: checkbox_container
-            #     cols: 1
-            #     size_hint_y: None
-            #     size_hint_x: None
-            #     width: self.minimum_width
-            #     height: self.minimum_height
-            #     spacing: 5
-            #     padding: (0, 10, 0, 10)
+                    on_text: root.on_sprachen_change(root, self.text)

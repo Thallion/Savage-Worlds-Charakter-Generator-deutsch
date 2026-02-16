@@ -52,6 +52,9 @@ class AppConfig:
     auto_backup_enabled: bool = True
     max_backups: int = 5
     
+    # Setting-Einstellungen
+    last_setting: str = "SWAE"
+    
     # Version und Metadaten
     config_version: str = "1.0"
     last_updated: str = ""

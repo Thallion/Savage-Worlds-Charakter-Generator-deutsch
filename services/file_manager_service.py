@@ -12,7 +12,7 @@ from datetime import datetime
 from kivy.logger import Logger
 
 # Import centralized path utilities
-from utils.path_utils import get_chars_path, get_application_root
+from utils.path_utils import get_chars_path, get_templates_path, get_application_root
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText
@@ -43,6 +43,7 @@ class FileManagerService:
         self.temp_filename = ""
         self.temp_pdf_filename = ""
         self.temp_printer_friendly = False
+        self.template_callback = None
     
     def get_default_directory(self, dir_type='chars'):
         """
@@ -58,6 +59,8 @@ class FileManagerService:
             # Verwende die zentrale path_utils für PyInstaller-Kompatibilität
             if dir_type == 'chars':
                 target_dir = get_chars_path()
+            elif dir_type == 'templates':
+                target_dir = get_templates_path()
             else:
                 # Für andere Verzeichnisse verwende application root
                 app_root = get_application_root()
@@ -148,7 +151,12 @@ class FileManagerService:
         if not os.path.exists(path):
             Logger.warning(f"Pfad existiert nicht: {path}")
             # KORRIGIERT: Besserer Fallback
-            path = self.get_default_directory('chars') if action_type in ['save_dir', 'load'] else os.path.expanduser("~")
+            if action_type == 'load_template':
+                path = self.get_default_directory('templates')
+            elif action_type in ['save_dir', 'load']:
+                path = self.get_default_directory('chars')
+            else:
+                path = os.path.expanduser("~")
         
         self.current_action = action_type
         
@@ -282,6 +290,8 @@ class FileManagerService:
                 self._handle_load_file(path)
             elif self.current_action == "save_pdf_dir":
                 self._handle_save_pdf_directory(path)
+            elif self.current_action == "load_template":
+                self._handle_load_template(path)
             else:
                 Logger.warning(f"Unbekannter Aktionstyp: {self.current_action}")
         except Exception as e:
@@ -360,6 +370,25 @@ class FileManagerService:
             else:
                 self._show_error(f"Die Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
     
+    def _handle_load_template(self, path):
+        """Behandelt Dateiauswahl zum Laden eines Templates"""
+        if not os.path.exists(path):
+            self._show_error(f"Der Pfad existiert nicht: {path}")
+            return
+
+        if os.path.isdir(path):
+            self._show_error("Bitte wähle eine .json Template-Datei aus.")
+            return
+
+        if not path.endswith('.json'):
+            self._show_error(f"Die Datei ist keine gültige JSON-Datei: {os.path.basename(path)}")
+            return
+
+        if self.template_callback:
+            self.template_callback(path)
+        else:
+            Logger.warning("Kein template_callback registriert")
+
     def _handle_save_pdf_directory(self, path):
         """KORRIGIERT: Behandelt Verzeichnisauswahl für PDF-Speicherung"""
         try:

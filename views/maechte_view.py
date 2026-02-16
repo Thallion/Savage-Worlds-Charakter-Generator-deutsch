@@ -24,6 +24,7 @@ from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
+from kivymd.uix.selectioncontrol import MDCheckbox
 
 # Import für Dialog Service
 from services.service_container import get_dialog_service
@@ -333,14 +334,14 @@ class MaechteWidget(MDBoxLayout):
         self.dialog = None  # Dialog-Referenz für Rangprüfung
         Clock.schedule_once(self.post_init, 0)
 
-    def toggle_only_selected_items(self, value):
+    def toggle_only_selected_items(self):
         """
         Schaltet den Filter für 'Nur ausgewählte Elemente' um.
-        Event-Handler für die Checkbox.
+        Event-Handler für den Button (Android Checkbox Workaround).
         """
-        self.only_selected_items = value
+        self.only_selected_items = not self.only_selected_items
         self.filter_maechte()
-        Logger.debug(f"Filter 'Nur ausgewählte Mächte' gesetzt auf: {value}")
+        Logger.debug(f"Filter 'Nur ausgewählte Mächte' gesetzt auf: {self.only_selected_items}")
 
     def _initialize_controller(self):
         """Initialisiert die Verbindung zum Controller."""

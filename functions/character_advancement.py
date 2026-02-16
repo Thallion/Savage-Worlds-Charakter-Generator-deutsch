@@ -147,16 +147,50 @@ def increase_aufstiege(charakter):
 
 def erhoehe_startkapital(charakter):
     """
-    Erhöht das Startkapital des Charakters um den Standardwert.
+    Erhöht das Startkapital des Charakters um das Setting-spezifische Startgeld.
     
     Args:
         charakter: Das Charakterobjekt, dessen Startkapital erhöht werden soll
     """
     if charakter.verbleibende_handicap_punkte > 0:
-        charakter.vermoegen += charakter.startkapital
+        # Setting-spezifisches Startgeld ermitteln
+        setting_startgeld = _get_setting_startgeld(charakter)
+        charakter.vermoegen += setting_startgeld
         charakter.verbleibende_handicap_punkte -= 1
+        Logger.info(f"Startkapital um {setting_startgeld} erhöht. Neues Vermögen: {charakter.vermoegen}")
     else:
         Logger.warning("Keine Handicap-Punkte mehr verfügbar.")
+
+
+def _get_setting_startgeld(charakter):
+    """
+    Ermittelt das Setting-spezifische Startgeld.
+    
+    Args:
+        charakter: Das Charakterobjekt
+        
+    Returns:
+        int: Das Startgeld aus dem aktiven Setting oder Default-Wert
+    """
+    try:
+        # Aktives Setting abrufen
+        if hasattr(charakter, 'custom_element_manager') and charakter.custom_element_manager:
+            active_setting = charakter.custom_element_manager.get_active_setting()
+            if active_setting and 'startgeld' in active_setting:
+                setting_startgeld = active_setting['startgeld']
+                Logger.debug(f"Setting-spezifisches Startgeld gefunden: {setting_startgeld}")
+                return setting_startgeld
+        
+        # Fallback auf Default-Wert aus Charakter oder Standard
+        default_startgeld = getattr(charakter, 'startkapital', 500)
+        Logger.debug(f"Verwende Default-Startgeld: {default_startgeld}")
+        return default_startgeld
+        
+    except Exception as e:
+        Logger.warning(f"Fehler beim Ermitteln des Setting-Startgelds: {e}")
+        # Sicherheits-Fallback
+        return 500
+
 
 def decrease_aufstiege(charakter):
     """

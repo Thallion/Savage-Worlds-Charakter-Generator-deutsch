@@ -11,6 +11,7 @@ from models.macht import Macht
 import logging
 import traceback
 import copy
+import time
 
 # Einfacher Filter für FocusBehavior-Warnungen
 class WarningFilter(logging.Filter):
@@ -59,20 +60,50 @@ class CharakterController(EventDispatcher):
         )
 
         # Charakter-Ereignisse mit Controller-Methoden verbinden
+        Logger.debug(f"CONTROLLER: Binding to charakter {id(self.charakter)} events")
         self.charakter.bind(on_charakter_change=self.on_model_change)
+        
+        # Android Double-Touch Protection - Verhindert echte Doppelklicks
+        self._last_transaction_time = {}
 
         Logger.info("CharakterController initialisiert")
 
     # Event-Handler für Änderungen im Charakter-Modell
     def on_model_change(self, *args):
         """Wird aufgerufen, wenn sich das Charakter-Modell ändert"""
-        Logger.debug("Modell-Änderung erkannt")
+        Logger.debug(f"CONTROLLER: on_model_change aufgerufen mit args: {args}")
+        Logger.debug(f"CONTROLLER: Charakter-ID: {id(self.charakter)}")
         try:
             # Event zur Benachrichtigung der UI auslösen
+            Logger.debug("CONTROLLER: Dispatching on_charakter_updated event")
             self.dispatch('on_charakter_updated')
+            
+            # ZUSÄTZLICHE SICHERSTELLUNG: Direktes Update der Eigenschaften-View erzwingen
+            Logger.debug("CONTROLLER: Zusätzliches direktes Update der Eigenschaften-View")
+            Clock.schedule_once(self._force_eigenschaften_view_update, 0.1)
+            
         except Exception as e:
             Logger.error(f"Fehler bei Verarbeitung von Modell-Änderung: {str(e)}")
             self.dispatch('on_charakter_error', f"UI-Update fehlgeschlagen: {str(e)}")
+    
+    def _force_eigenschaften_view_update(self, dt):
+        """Erzwingt ein direktes Update der Eigenschaften-View"""
+        try:
+            from kivy.app import App
+            app = App.get_running_app()
+            if app and hasattr(app, 'screens') and 'Eigenschaften' in app.screens:
+                eigenschaften_screen = app.screens['Eigenschaften']
+                if (hasattr(eigenschaften_screen, 'ids') and 
+                    hasattr(eigenschaften_screen.ids, 'eigenschaften_widget')):
+                    eigenschaften_widget = eigenschaften_screen.ids.eigenschaften_widget
+                    if hasattr(eigenschaften_widget, 'update_eigenschaften'):
+                        eigenschaften_widget.update_eigenschaften()
+                        Logger.debug("CONTROLLER: Direktes Eigenschaften-View-Update erfolgreich")
+                    elif hasattr(eigenschaften_widget, '_plane_update'):
+                        eigenschaften_widget._plane_update(None)
+                        Logger.debug("CONTROLLER: _plane_update für Eigenschaften-View ausgeführt")
+        except Exception as e:
+            Logger.warning(f"CONTROLLER: Direktes Eigenschaften-View-Update fehlgeschlagen: {e}")
 
     # Ereignis-Handler (Platzhalter, werden von Verbrauchern überschrieben)
     def on_charakter_updated(self, *args):
@@ -605,6 +636,18 @@ class CharakterController(EventDispatcher):
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
+        # Android Double-Touch Protection: Verhindert Dialog-Doppelaufrufe
+        transaction_key = f"buy_{item_name}"
+        current_time = time.time() * 1000  # Millisekunden
+        
+        if transaction_key in self._last_transaction_time:
+            last_time = self._last_transaction_time[transaction_key]
+            if current_time - last_time < 500:  # 500ms für Android-Dialog-Doppelaufrufe
+                Logger.debug(f"Kauf von {item_name} ignoriert - Android Dialog-Doppelaufruf verhindert")
+                return False
+        
+        self._last_transaction_time[transaction_key] = current_time
+        
         try:
             # Prüfen, ob der Gegenstand existiert
             if item_name in self.charakter.ausruestung:
@@ -635,6 +678,18 @@ class CharakterController(EventDispatcher):
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
+        # Android Double-Touch Protection: Verhindert Dialog-Doppelaufrufe  
+        transaction_key = f"sell_{item_name}"
+        current_time = time.time() * 1000  # Millisekunden
+        
+        if transaction_key in self._last_transaction_time:
+            last_time = self._last_transaction_time[transaction_key]
+            if current_time - last_time < 500:  # 500ms für Android-Dialog-Doppelaufrufe
+                Logger.debug(f"Verkauf von {item_name} ignoriert - Android Dialog-Doppelaufruf verhindert")
+                return False
+        
+        self._last_transaction_time[transaction_key] = current_time
+        
         try:
             # Prüfen, ob der Gegenstand existiert
             if item_name in self.charakter.ausruestung:
@@ -764,6 +819,35 @@ class CharakterController(EventDispatcher):
             self.charakter = alter_charakter
             Logger.error(f"Fehler beim Erstellen eines neuen Charakters: {str(e)}", exc_info=True)
             self.dispatch('on_charakter_error', f"Fehler beim Erstellen des Charakters: {str(e)}")
+            return False
+
+    # ============================
+    # Charakter-Erstellung und Entwicklung
+    # ============================
+    def erhoehe_startkapital_mit_handicap(self):
+        """
+        Erhöht das Startkapital des Charakters mit Handicap-Punkten
+        
+        Returns:
+            bool: True bei Erfolg, False bei Fehler
+        """
+        try:
+            # Prüfen ob genügend Handicap-Punkte verfügbar sind
+            if self.charakter.verbleibende_handicap_punkte <= 0:
+                Logger.warning("Keine Handicap-Punkte mehr verfügbar für Startkapital-Erhöhung")
+                return False
+                
+            # Delegiere an das Charakter-Modell
+            self.charakter.erhoehe_startkapital()
+            
+            # UI aktualisieren
+            self.dispatch('on_charakter_updated')
+            Logger.info(f"Startkapital mit Handicap-Punkten erhöht. Neues Vermögen: {self.charakter.vermoegen}")
+            return True
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Erhöhen des Startkapitals: {str(e)}")
+            self.dispatch('on_charakter_error', f"Startkapital-Erhöhung fehlgeschlagen: {str(e)}")
             return False
 
     # ============================

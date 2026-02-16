@@ -1,0 +1,66 @@
+{
+  "name": "Amiri",
+  "description": "Feuer und Flamme im Herzen und wild im Kampf verlangt Amiri Respekt. Wer die Barbarin beleidigt, bekommt bald den Zorn ihres Blutrausches zu spüren. Sie schwingt ein überdimensionales Bastardschwert, ihren wertvollsten Besitz, den sie vor Jahren von einem Frostriesen errungen hat.",
+  "setting": "Savage Pathfinder",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Barbar",
+    "languages": "Gemeinsprache, Goblinisch, Halblingisch",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 8,
+    "Stärke": 10,
+    "Verstand": 4,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 6,
+    "Einschüchtern": 6,
+    "Heimlichkeit": 4,
+    "Kämpfen": 8,
+    "Reiten": 4,
+    "Schießen": 6,
+    "Überleben": 4,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Blutrünstig",
+    "Lebensaufgabe",
+    "Arm"
+  ],
+  "edges": [
+    "Barbar",
+    "Rohling"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Bastardschwert (Stä+W8, PB 1)",
+    "Kurzbogen (Reichweite 12/24/48, Schaden 2W6)",
+    "20 Pfeile",
+    "Handaxt (Stä+W6)",
+    "Beschlagene Ledertunika und Beinlinge (+2)",
+    "Abenteurerausrüstung",
+    "9 GM"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/swpf_amiri_barbar_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W8)/2 = 6",
+    "robustheit_calculation": "Basis 2 + Konstitution(W8)/2 + Rüstung(+2) = 8",
+    "bewegung": 8,
+    "klassenfaehigkeiten": "Rüstungsbeschränkung (mittelschwer): -4 auf Geschicklichkeit und geschicklichkeitsbasierte Würfe mit schwerer Rüstung oder Schild. Kampfrausch: 5 Runden Berserker (+1 Stärke-Würfeltyp, Rücksichtsloser Angriff), Wutentbrannt (ignoriert 2 Stufen Wundabzüge), Zügelloser Kampfrausch (Kritischer Fehlschlag trifft zufälliges Ziel)."
+  }
+}

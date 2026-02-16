@@ -1,0 +1,60 @@
+{
+  "name": "Elsiara",
+  "description": "Drei, zwei, eins ... meins und weg!",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Brigantin",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 8,
+    "Diebeskunst": 8,
+    "Heimlichkeit": 8,
+    "Kämpfen": 8,
+    "Provozieren": 4,
+    "Schießen": 6,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Gesucht",
+    "Gierig",
+    "Nichtschwimmer"
+  ],
+  "edges": [
+    "Assassine",
+    "Dieb"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Lederrüstung (+1)",
+    "Dolch (Stä+W4)",
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_elsiara_brigantin_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W8)/2 = 6",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + Rüstung(+1) = 6",
+    "bewegung": 6
+  }
+}

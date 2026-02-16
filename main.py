@@ -10,6 +10,9 @@ from functools import partial
 import re
 import webbrowser
 
+# Logging-Setup als erstes importieren und initialisieren
+from utils.logging_setup import setup_file_logging, cleanup_old_logs, log_system_info
+
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
@@ -20,6 +23,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
+
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.textfield import MDTextField
@@ -37,6 +41,7 @@ from kivymd.uix.tab import (
 from controllers.charakter_controller import CharakterController
 from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
+from views.charakter_verwaltung_widget import CharakterVerwaltungWidget
 from views.einstellungen_widget import EinstellungenWidget
 from views.historie_view import HistorieWidget
 from views.voelker_view import VoelkerWidget
@@ -50,7 +55,7 @@ from views.charakterbogen_view import CharakterbogenWidget
 
 # Extrahierte Screen-Klassen
 from views.screens import (
-    EinstellungenScreen, VoelkerScreen, ProfilScreen, EigenschaftenScreen,
+    CharakterVerwaltungScreen, EinstellungenScreen, VoelkerScreen, ProfilScreen, EigenschaftenScreen,
     HandicapsScreen, TalenteScreen, MaechteScreen, AusruestungScreen, 
     CharakterbogenScreen, HistorieScreen, InfoScreen, HyperlinkLabel
 )
@@ -73,33 +78,66 @@ class SW_Charakter_GeneratorApp(MDApp):
         super().__init__(**kwargs)
         Logger.info("Init SW_Charakter_GeneratorApp")
         
+        # File-Logging als erstes initialisieren
+        try:
+            self.log_filepath = setup_file_logging("SavageWorldsCharakterGenerator")
+            cleanup_old_logs()  # Alte Logs bereinigen
+            log_system_info()   # System-Info loggen
+            Logger.info(f"Session-Logging aktiviert: {self.log_filepath}")
+            logging.info("=== App-Initialisierung gestartet ===")
+            
+            # Log-Pfad für einfache Anzeige speichern
+            if self.log_filepath:
+                self.log_directory = os.path.dirname(self.log_filepath)
+            else:
+                self.log_directory = None
+                
+        except Exception as e:
+            Logger.error(f"Konnte File-Logging nicht initialisieren: {str(e)}")
+            self.log_filepath = None
+            self.log_directory = None
+        
         # Ressourcen-Extraktion für PyInstaller EXE
         from utils.resource_extractor import resource_extractor
         if not resource_extractor.extract_resources():
             Logger.error("Fehler bei Ressourcen-Extraktion")
+            logging.error("Ressourcen-Extraktion fehlgeschlagen")
+        else:
+            logging.info("Ressourcen erfolgreich extrahiert")
         
         # KORRIGIERT: Frühe Controller-Initialisierung für Service Container
-        self.charakter = Charakter()
+        # Zuerst Service Container mit temporärem Controller initialisieren um Config Service zu erhalten
+        temp_controller = CharakterController()
+        service_container.initialize(temp_controller)
+        Logger.info("Service Container früh initialisiert")
+        logging.info("Service Container erfolgreich initialisiert")
+        
+        # Letztes Setting aus Config laden
+        last_setting = self._load_last_setting_from_config()
+        Logger.info(f"Geladenes letztes Setting: {last_setting}")
+        
+        # Charakter mit dem geladenen Setting initialisieren
+        self.charakter = Charakter(active_setting_name=last_setting)
         self.controller = CharakterController()
         
-        # Service Container früh initialisieren
+        # Service Container mit dem finalen Controller aktualisieren
         service_container.initialize(self.controller)
-        Logger.info("Service Container früh initialisiert")
         
         # Deine Icons + Tab-Texte + zugehörige Screens
-        # NEU: Historie-Tab hinzugefügt
+        # NEU: CharakterVerwaltung-Tab hinzugefügt
         self.tab_definitions = [
-            ("cog",              "Einstellungen",  EinstellungenScreen),
-            ("account-group",    "Völker",         VoelkerScreen),
-            ("account-details",  "Profil",         ProfilScreen),
-            ("arm-flex",         "Eigenschaften",  EigenschaftenScreen),
-            ("account-alert",    "Handicaps",      HandicapsScreen),
-            ("star-circle",      "Talente",        TalenteScreen),
-            ("creation-outline", "Mächte",         MaechteScreen),
-            ("shield-sword",     "Ausrüstung",     AusruestungScreen),
-            ("account",          "Charakter",      CharakterbogenScreen),
-            ("history",          "Historie",       HistorieScreen),
-            ("information",      "Info",           InfoScreen),
+            ("content-save",     "Speichern/Laden",      CharakterVerwaltungScreen),
+            ("cog",              "Einstellungen",        EinstellungenScreen),
+            ("account-group",    "Völker",               VoelkerScreen),
+            ("account-details",  "Profil",               ProfilScreen),
+            ("arm-flex",         "Eigenschaften",        EigenschaftenScreen),
+            ("account-alert",    "Handicaps",            HandicapsScreen),
+            ("star-circle",      "Talente",              TalenteScreen),
+            ("creation-outline", "Mächte",               MaechteScreen),
+            ("shield-sword",     "Ausrüstung",           AusruestungScreen),
+            ("account",          "Charakter",            CharakterbogenScreen),
+            ("history",          "Historie",             HistorieScreen),
+            ("information",      "Info",                 InfoScreen),
         ]
 
     def build(self):
@@ -246,6 +284,47 @@ class SW_Charakter_GeneratorApp(MDApp):
             
         except Exception as e:
             Logger.error(f"Fehler beim Update des Themes: {str(e)}", exc_info=True)
+    
+    def _load_last_setting_from_config(self):
+        """
+        Lädt das zuletzt verwendete Setting aus der Konfiguration
+        
+        Returns:
+            str: Name des letzten Settings oder "SWAE" als Fallback
+        """
+        try:
+            Logger.info("=== Lade letztes Setting aus Config ===")
+            
+            # Config Service aus Service Container holen
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+            
+            if not config_service:
+                Logger.warning("ConfigService nicht verfügbar, verwende Standard-Setting")
+                return "SWAE"
+            
+            # Letztes Setting aus Config laden
+            last_setting = config_service.get('last_setting', 'SWAE')
+            
+            Logger.info(f"Letztes Setting aus Config geladen: {last_setting}")
+            
+            # Validierung: Prüfen ob das Setting existiert
+            from utils.path_utils import get_application_root
+            settings_dir = get_application_root() / 'settings'
+            setting_file = settings_dir / f"{last_setting}.json"
+            
+            if setting_file.exists():
+                Logger.info(f"Setting-Datei gefunden: {setting_file}")
+                return last_setting
+            else:
+                Logger.warning(f"Setting-Datei '{setting_file}' nicht gefunden, verwende Standard-Setting 'SWAE'")
+                # Standard-Setting in Config speichern
+                config_service.set('last_setting', 'SWAE')
+                return "SWAE"
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden des letzten Settings: {str(e)}", exc_info=True)
+            return "SWAE"
 
     def on_start(self):
         """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""
@@ -509,6 +588,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 elif hasattr(screen, 'ids'):
                     # Map tab names to their widget IDs as defined in main.kv
                     widget_id_map = {
+                        'Charakterverwaltung': 'charakter_verwaltung_widget',
                         'Einstellungen': 'einstellungen_widget',
                         'Völker': 'voelker_widget',
                         'Profil': 'profil_widget', 
@@ -553,7 +633,12 @@ class SW_Charakter_GeneratorApp(MDApp):
             # Hole das tatsächliche Widget aus dem Screen
             widget = None
             if hasattr(screen_instance, 'ids'):
-                if tab_name == 'Einstellungen' and 'einstellungen_widget' in screen_instance.ids:
+                if tab_name == 'Charakterverwaltung' and 'charakter_verwaltung_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.charakter_verwaltung_widget
+                    self.charakter_verwaltung_widget = widget
+                    Logger.debug("CharakterVerwaltungWidget bei App registriert")
+                
+                elif tab_name == 'Einstellungen' and 'einstellungen_widget' in screen_instance.ids:
                     widget = screen_instance.ids.einstellungen_widget
                     self.einstellungen_widget = widget
                     Logger.debug("EinstellungenWidget bei App registriert")
@@ -605,6 +690,96 @@ class SW_Charakter_GeneratorApp(MDApp):
             
         except Exception as e:
             Logger.error(f"Fehler bei Widget-Registrierung für '{tab_name}': {str(e)}")
+    
+    def show_log_info(self):
+        """Zeigt Informationen über die Log-Dateien in einem Dialog."""
+        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.boxlayout import MDBoxLayout
+        
+        content = MDBoxLayout(orientation="vertical", spacing="12dp", adaptive_height=True)
+        
+        if self.log_filepath:
+            # Log-Datei-Info
+            info_label = MDLabel(
+                text=f"Aktuelle Log-Datei:\n{self.log_filepath}\n\nLog-Ordner:\n{self.log_directory}",
+                size_hint_y=None,
+                theme_text_color="Primary",
+                halign="left"
+            )
+            info_label.bind(texture_size=info_label.setter('size'))
+            content.add_widget(info_label)
+            
+            # Android-spezifische Hilfe
+            from kivy.utils import platform
+            if platform == 'android':
+                help_label = MDLabel(
+                    text="Auf Android findest du die Logs hier:\n• Dateimanager → Interner Speicher → SavageWorldsCharGen → logs\n• Oder: /sdcard/SavageWorldsCharGen/logs/",
+                    size_hint_y=None,
+                    theme_text_color="Secondary",
+                    halign="left"
+                )
+                help_label.bind(texture_size=help_label.setter('size'))
+                content.add_widget(help_label)
+        else:
+            error_label = MDLabel(
+                text="Logging ist nicht aktiv oder fehlgeschlagen.",
+                size_hint_y=None,
+                theme_text_color="Error",
+                halign="left"
+            )
+            error_label.bind(texture_size=error_label.setter('size'))
+            content.add_widget(error_label)
+        
+        dialog = MDDialog(
+            title="Log-Dateien Information",
+            content_cls=content,
+            buttons=[
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    on_release=lambda x: dialog.dismiss()
+                )
+            ]
+        )
+        dialog.open()
+
+    def get_widget_by_tab_text(self, tab_text, widget_id):
+        """
+        Holt ein Widget basierend auf Tab-Text und Widget-ID
+        
+        Args:
+            tab_text (str): Text des Tabs (z.B. 'Handicaps')
+            widget_id (str): ID des Widgets (z.B. 'handicaps_widget')
+            
+        Returns:
+            Widget oder None: Das gefundene Widget oder None
+        """
+        try:
+            # Direkte Zuordnung zu den registrierten Widgets
+            widget_map = {
+                'Charakterverwaltung': getattr(self, 'charakter_verwaltung_widget', None),
+                'Einstellungen': getattr(self, 'einstellungen_widget', None),
+                'Eigenschaften': getattr(self, 'eigenschaften_widget', None),
+                'Ausrüstung': getattr(self, 'ausruestung_widget', None),
+                'Profil': getattr(self, 'profil_widget', None),
+                'Völker': getattr(self, 'voelker_widget', None),
+                'Talente': getattr(self, 'talente_widget', None),
+                'Mächte': getattr(self, 'maechte_widget', None),
+                'Handicaps': getattr(self, 'handicaps_widget', None),
+            }
+            
+            widget = widget_map.get(tab_text)
+            if widget:
+                Logger.debug(f"Widget für Tab '{tab_text}' gefunden: {type(widget).__name__}")
+                return widget
+            else:
+                Logger.warning(f"Widget für Tab '{tab_text}' nicht gefunden")
+                return None
+                
+        except Exception as e:
+            Logger.error(f"Fehler beim Abrufen des Widgets für Tab '{tab_text}': {e}")
+            return None
 
 
 if __name__ == "__main__":

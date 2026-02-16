@@ -1,0 +1,59 @@
+{
+  "name": "Jeanne",
+  "description": "Gespräche sind wie Gefechte. Man sollte seine Ziele und Mittel sowie den Zeitpunkt gut wählen.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Schützin",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 10,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 6,
+    "Heimlichkeit": 8,
+    "Kämpfen": 6,
+    "Provozieren": 6,
+    "Schießen": 10,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Loyal",
+    "Schwerzüngig",
+    "Stur"
+  ],
+  "edges": [
+    "Aufmerksamkeit"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Lederjacke (Arme, Torso +2)",
+    "Muskete (10/20/40, 2W8)",
+    "Langschwert (Stä+W8)",
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_jeanne_schuetzin_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W6)/2 = 5",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + Rüstung(+2) = 7",
+    "bewegung": 6
+  }
+}

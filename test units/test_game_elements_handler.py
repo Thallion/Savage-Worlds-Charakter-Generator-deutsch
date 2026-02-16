@@ -10,7 +10,7 @@ from kivymd.app import MDApp
 
 # Mocking Kivy vor Import
 with patch('kivy.logger.Logger'), patch('kivymd.app.MDApp'):
-    from views.handlers.game_elements_handler import GameElementsHandler
+    from controllers.game_elements_handler import GameElementsHandler
 
 
 class TestGameElementsHandler(unittest.TestCase):
@@ -37,10 +37,10 @@ class TestGameElementsHandler(unittest.TestCase):
         
     # ==================== VÖLKER TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_volk_dialog(self, mock_logger):
         """Test Volk-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_volk_dialog()
             
@@ -48,13 +48,13 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Volk-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_delete_volk_dialog(self, mock_logger):
         """Test Volk-Löschen-Dialog"""
         # Setup
         self.mock_app.controller.get_available_voelker = Mock(return_value=['Volk1', 'Volk2'])
         
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_delete_volk_dialog()
             
@@ -62,7 +62,7 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Volk-Löschen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_add_volk_success(self, mock_logger):
         """Test erfolgreiches Hinzufügen eines Volks"""
         # Setup
@@ -78,7 +78,7 @@ class TestGameElementsHandler(unittest.TestCase):
         mock_instance.dismiss.assert_called_once()
         mock_logger.info.assert_called_with("Volk hinzugefügt: Test Volk")
         
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_add_volk_failure(self, mock_logger):
         """Test fehlgeschlagenes Hinzufügen eines Volks"""
         # Setup
@@ -93,10 +93,10 @@ class TestGameElementsHandler(unittest.TestCase):
         
     # ==================== TALENTE TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_talent_popup(self, mock_logger):
         """Test Talent-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_talent_popup()
             
@@ -104,13 +104,13 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Talent-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_delete_talent_popup(self, mock_logger):
         """Test Talent-Löschen-Dialog"""
         # Setup
         self.mock_app.controller.get_available_talents = Mock(return_value=['Talent1', 'Talent2'])
         
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_delete_talent_popup()
             
@@ -120,10 +120,10 @@ class TestGameElementsHandler(unittest.TestCase):
             
     # ==================== MÄCHTE TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_macht_popup(self, mock_logger):
         """Test Macht-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_macht_popup()
             
@@ -131,13 +131,13 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Macht-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')  
+    @patch('controllers.game_elements_handler.Logger')  
     def test_open_delete_macht_popup(self, mock_logger):
         """Test Macht-Löschen-Dialog"""
         # Setup
         self.mock_app.controller.get_available_maechte = Mock(return_value=['Macht1', 'Macht2'])
         
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_delete_macht_popup()
             
@@ -147,10 +147,10 @@ class TestGameElementsHandler(unittest.TestCase):
             
     # ==================== FERTIGKEITEN TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_fertigkeit_popup(self, mock_logger):
         """Test Fertigkeit-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_fertigkeit_popup()
             
@@ -160,10 +160,10 @@ class TestGameElementsHandler(unittest.TestCase):
             
     # ==================== HANDICAPS TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_handicap_popup(self, mock_logger):
         """Test Handicap-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_handicap_popup()
             
@@ -171,13 +171,13 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Handicap-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_delete_handicap_popup(self, mock_logger):
         """Test Handicap-Löschen-Dialog"""
         # Setup
         self.mock_app.controller.get_available_handicaps = Mock(return_value=['Handicap1', 'Handicap2'])
         
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_delete_handicap_popup()
             
@@ -187,10 +187,10 @@ class TestGameElementsHandler(unittest.TestCase):
             
     # ==================== AUSRÜSTUNG TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_ausruestung_popup(self, mock_logger):
         """Test Ausrüstung-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_ausruestung_popup()
             
@@ -198,10 +198,10 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Ausrüstung-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_waffe_popup(self, mock_logger):
         """Test Waffe-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_waffe_popup()
             
@@ -209,10 +209,10 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Waffe-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_ruestung_popup(self, mock_logger):
         """Test Rüstung-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_ruestung_popup()
             
@@ -220,10 +220,10 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Rüstung-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_schild_popup(self, mock_logger):
         """Test Schild-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_schild_popup()
             
@@ -233,10 +233,10 @@ class TestGameElementsHandler(unittest.TestCase):
             
     # ==================== SETTINGS TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_add_setting_popup(self, mock_logger):
         """Test Setting-Hinzufügen-Dialog"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_add_setting_popup()
             
@@ -244,13 +244,13 @@ class TestGameElementsHandler(unittest.TestCase):
             mock_dialog.assert_called_once()
             mock_logger.info.assert_called_with("Setting-Hinzufügen-Dialog geöffnet")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_open_setting_switch_options(self, mock_logger):
         """Test Setting-Wechsel-Dialog"""
         # Setup
         self.mock_app.controller.get_available_settings = Mock(return_value=['Setting1', 'Setting2'])
         
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             # Test
             self.handler.open_setting_switch_options()
             
@@ -260,7 +260,7 @@ class TestGameElementsHandler(unittest.TestCase):
             
     # ==================== DELETE TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_delete_element_success(self, mock_logger):
         """Test erfolgreiches Löschen eines Elements"""
         # Setup
@@ -276,7 +276,7 @@ class TestGameElementsHandler(unittest.TestCase):
         mock_instance.dismiss.assert_called_once()
         mock_logger.info.assert_called_with("talent gelöscht: Test Talent")
         
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_delete_element_failure(self, mock_logger):
         """Test fehlgeschlagenes Löschen eines Elements"""
         # Setup
@@ -291,16 +291,16 @@ class TestGameElementsHandler(unittest.TestCase):
         
     # ==================== EXCEPTION HANDLING TESTS ====================
     
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_exception_handling_add_dialog(self, mock_logger):
         """Test Exception-Handling bei Dialog-Erstellung"""
-        with patch('views.handlers.game_elements_handler.MDDialog', side_effect=Exception("Dialog Error")):
+        with patch('controllers.game_elements_handler.MDDialog', side_effect=Exception("Dialog Error")):
             # Test
             self.handler.open_add_volk_dialog()
             
             mock_logger.error.assert_called_with("Fehler beim Öffnen des Volk-Hinzufügen-Dialogs: Dialog Error")
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_exception_handling_delete_dialog(self, mock_logger):
         """Test Exception-Handling bei Lösch-Dialog"""
         # Setup - Exception bei get_available_voelker
@@ -311,7 +311,7 @@ class TestGameElementsHandler(unittest.TestCase):
         
         mock_logger.error.assert_called_with("Fehler beim Öffnen des Volk-Löschen-Dialogs: Get Error")
         
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_exception_handling_add_element(self, mock_logger):
         """Test Exception-Handling bei Element hinzufügen"""
         # Setup
@@ -341,10 +341,10 @@ class TestGameElementsHandler(unittest.TestCase):
         for element_type, method_name in mapping.items():
             self.assertTrue(hasattr(self.mock_app.controller, method_name))
             
-    @patch('views.handlers.game_elements_handler.Logger')
+    @patch('controllers.game_elements_handler.Logger')
     def test_create_dialog_with_custom_content(self, mock_logger):
         """Test Dialog-Erstellung mit benutzerdefiniertem Content"""
-        with patch('views.handlers.game_elements_handler.MDDialog') as mock_dialog:
+        with patch('controllers.game_elements_handler.MDDialog') as mock_dialog:
             mock_content = Mock()
             
             # Test - simuliere interne _create_dialog Methode

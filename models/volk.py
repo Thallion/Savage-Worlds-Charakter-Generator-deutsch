@@ -174,9 +174,9 @@ class Volk(EventDispatcher):
             for attr_name, bonus in self.effects.get('attribute_bonuses', {}).items():
                 if attr_name in charakter.attribute:
                     attribut = charakter.attribute[attr_name]
-                    if attribut.wert == 4 and attribut.modifier == 0:  # Nur von W4 auf W6
+                    if attribut.wert == 4 and attribut.modifier == 0:  # W4 + bonus (z.B. +2=W6, +4=W8)
                         alter_wert = attribut.wert
-                        attribut.wuerfel.value = 4 + bonus  # +2 = W6
+                        attribut.wuerfel.value = 4 + bonus  # +2=W6, +4=W8
                         Logger.info(f"Volk {self.name}: {attr_name} von W{alter_wert} auf W{attribut.wert} erhöht")
                     else:
                         Logger.debug(f"Volk {self.name}: {attr_name} nicht angepasst (aktuell: W{attribut.wert}+{attribut.modifier})")

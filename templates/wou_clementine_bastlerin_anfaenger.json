@@ -1,0 +1,60 @@
+{
+  "name": "Clementine",
+  "description": "Whoa, wer hätte gedacht, dass eine plötzliche Polaritätsumkehr eine solche Explosion verursachen könnte. Ich meine, außer mir. Weil ich das natürlich genau so geplant habe.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Bastlerin",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 4,
+    "Konstitution": 6,
+    "Stärke": 4,
+    "Verstand": 10,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 4,
+    "Heimlichkeit": 4,
+    "Naturwissenschaften": 10,
+    "Recherche": 8,
+    "Reparieren": 8,
+    "Überreden": 4,
+    "Wahrnehmung": 8
+  },
+  "handicaps": [
+    "Misstrauisch",
+    "Schwerhörig",
+    "Tick"
+  ],
+  "edges": [
+    "Gelehrter",
+    "McGyver",
+    "Reparaturgenie"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Revolver (12/24/48, 2W6+1, PB 1)",
+    "Brechstange",
+    "Van"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_clementine_bastlerin_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W4-2)/2 = 2",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 = 5",
+    "bewegung": 6
+  }
+}

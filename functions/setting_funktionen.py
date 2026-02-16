@@ -347,6 +347,9 @@ def load_elements_from_active_setting(charakter, skip_equipment: bool = False,
         # Settingregeln laden
         _lade_settingregeln(charakter, active_setting)
         
+        # Währung und Startgeld laden
+        _lade_currency(charakter, active_setting)
+        
         return True
         
     except Exception as e:
@@ -483,7 +486,10 @@ def _lade_ausruestung(charakter, active_setting: Dict[str, Any], merge_elements:
                 if not merge_elements or name not in charakter.ausruestung:
                     # Verwende die zentrale Funktion zum Erstellen des Items
                     item = ausruestung_funktionen.erstelle_item_nach_kategorie(item_dict)
-                    charakter.ausruestung[name] = item
+                    if item is not None:
+                        charakter.ausruestung[name] = item
+                    else:
+                        Logger.warning(f"Ausrüstung '{name}' konnte nicht erstellt werden und wird übersprungen.")
             except Exception as e:
                 Logger.warning(LogMessages.FEHLER_BEIM_LADEN.format(
                     name=name,
@@ -505,6 +511,25 @@ def _lade_settingregeln(charakter, active_setting: Dict[str, Any]) -> None:
             Logger.info("Settingregeln geladen.")
         except Exception as e:
             Logger.warning(f"Fehler beim Laden der Settingregeln: {e}")
+
+
+def _lade_currency(charakter, active_setting: Dict[str, Any]) -> None:
+    """Lädt Währung und Startgeld aus dem Setting."""
+    try:
+        # Startgeld laden
+        startgeld = active_setting.get('startgeld')
+        if startgeld is not None:
+            charakter.vermoegen = startgeld
+            Logger.info(f"Startgeld auf {startgeld} gesetzt.")
+        
+        # Währung laden
+        waehrung = active_setting.get('waehrung')
+        if waehrung:
+            charakter.waehrungseinheit = waehrung
+            Logger.info(f"Währungseinheit auf '{waehrung}' gesetzt.")
+            
+    except Exception as e:
+        Logger.warning(f"Fehler beim Laden der Währungseinstellungen: {e}")
 
 
 # Export der öffentlichen Funktionen und Klassen

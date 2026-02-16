@@ -9,7 +9,8 @@ from kivy.logger import Logger
 from models.settingregeln import SettingRegeln
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.textinput import TextInput
 
 import os
 import sys
@@ -87,7 +88,7 @@ class ProfilWidget(MDBoxLayout):
     #                 width=300
     #             )
 
-    #             checkbox = MDCheckbox(
+    #             checkbox = CheckBox(
     #                 active=getattr(self.settingregeln, attr),
     #                 size_hint_x=None,
     #                 width=50,
@@ -125,6 +126,22 @@ class ProfilWidget(MDBoxLayout):
 
     def on_sprachen_change(self, instance, value):
         self.on_field_change('Sprachen', value)
+    
+    def force_focus(self, field_id):
+        """Erzwingt Focus auf ein Textfeld - Android Workaround"""
+        try:
+            field = self.ids[field_id]
+            field.focus = True
+        except KeyError:
+            Logger.warning(f"ProfilWidget: Textfeld {field_id} nicht gefunden")
+    
+    def auto_focus_on_tap(self, instance):
+        """Automatischer Tab/Focus nach erstem Tap - Android Workaround"""
+        from kivy.clock import Clock
+        def delayed_focus(dt):
+            instance.focus = True
+            Logger.info(f"ProfilWidget: Auto-Focus auf {instance.id}")
+        Clock.schedule_once(delayed_focus, 0.1)
 
     def load_profil(self, dt=None):
         try:

@@ -2,55 +2,71 @@
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor  
     
+    # Suchfeld separat außerhalb des ScrollView für besseren Keyboard-Fokus
     MDBoxLayout:
+        orientation: 'horizontal'
         size_hint_y: None
-        height: 100
-        padding: [20, 5]
-        spacing: 5
-
-        MDIconButton:
-            icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
-            size_hint_y: 1
-            on_release: root.toggle_sort_order()
-            tooltip_text: "Namen aufsteigend sortieren" if root.sort_order != 'name_asc' else "Namen absteigend sortieren"
-
+        height: dp(100)
+        padding: [20, 10]
+        spacing: 10
+        
         MDTextField:
             id: search_input
             hint_text: 'Suche...'
             size_hint_x: 1
             on_text: root.filter_handicaps()
+    
+    # Toggle-Buttons in ScrollView für Android-Kompatibilität  
+    MDScrollView:
+        size_hint_y: None
+        height: dp(120)
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
 
-        # Checkbox für "Nur ausgewählte" hinzufügen
         MDBoxLayout:
             orientation: 'horizontal'
-            size_hint_x: None
-            width: dp(200)
-            spacing: dp(5)
-            
-            MDCheckbox:
-                id: only_selected_checkbox
+            size_hint_y: None
+            height: dp(120)
+            padding: [20, 10]
+            spacing: 10
+
+            MDFabButton:
+                icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
+                style: "small"
                 size_hint: None, None
-                size: dp(40), dp(40)
-                active: root.only_selected_items
-                on_active: root.toggle_only_selected_items(self.active)
-                pos_hint: {"center_y": .5}
-                
-            MDLabel:
-                text: "Nur ausgewählte"
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.toggle_sort_order()
+
+            # Button für "Nur ausgewählte" (Android Checkbox Workaround)
+            MDButton:
+                id: only_selected_button
+                size_hint_x: None
                 size_hint_y: None
-                height: dp(40)
-                pos_hint: {"center_y": .5}
+                width: dp(180)
+                height: dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.toggle_only_selected_items()
+                
+                MDButtonText:
+                    text: "Nur ausgewählte" if not root.only_selected_items else "Alle"
+                    theme_text_color: "Primary" if not root.only_selected_items else "Custom"
+                    text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
 
-        MDIconButton:
-            icon: "filter"
-            size_hint_y: 1
-            on_release: root.open_category_menu()
-            tooltip_text: "Nach Stufe filtern"
+            MDFabButton:
+                icon: "filter"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.open_category_menu()
 
-        MDLabel:
-            id: category_label
-            text: 'Alle Stufen'
-            size_hint_x: 1
+            MDLabel:
+                id: category_label
+                text: 'Alle Stufen'
+                size_hint_x: 1
 
     MDLabel:
         text: 'Handicaps'
@@ -139,10 +155,10 @@
             markup: True
             max_lines: 2
             
-        MDIconButton:
+        MDFabButton:
             icon: "information-outline"
+            style: "small"
             size_hint: None, None
-            size: dp(24), dp(24)
+            size: dp(32), dp(32)
             pos_hint: {"center_y": 0.5}
             on_release: root.show_full_description()
-            theme_icon_color: "Primary"

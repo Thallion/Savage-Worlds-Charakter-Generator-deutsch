@@ -4054,7 +4054,7 @@
             }
         },
         "Armbrust handgespannt": {
-            "name": "Armbrust (handgespannt)",
+            "name": "Armbrust handgespannt",
             "kategorie": "Waffe",
             "gewicht": 2.5,
             "kosten": 250,
@@ -4071,7 +4071,7 @@
                 "PB": 2
             }
         },
-        "Armbrust schwer": {
+        "Armbrust, Schwer": {
             "name": "Armbrust, Schwer",
             "kategorie": "Waffe",
             "gewicht": 4,
@@ -4090,7 +4090,7 @@
             }
         },
         "Wurfaxt": {
-            "name": "Axt, Wurfaxt",
+            "name": "Wurfaxt",
             "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 100,
@@ -4144,7 +4144,7 @@
             }
         },
         "Netz beschwert": {
-            "name": "Netz (beschwert)",
+            "name": "Netz beschwert",
             "kategorie": "Waffe",
             "gewicht": 4,
             "kosten": 50,
@@ -4180,7 +4180,7 @@
             }
         },
         "Wurfspeer": {
-            "name": "Speer/Wurfspeer",
+            "name": "Wurfspeer",
             "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 100,
@@ -4234,7 +4234,7 @@
             }
         },
         "Brown Bess": {
-            "name": "Brown Bess oder ähnliche Musketen",
+            "name": "Brown Bess",
             "kategorie": "Waffe",
             "gewicht": 7.5,
             "kosten": 300,
@@ -4288,7 +4288,7 @@
             }
         },
         "Springfield Model 1861": {
-            "name": "Springfield Model 1861 Glattlauf-Muskete",
+            "name": "Springfield Model 1861",
             "kategorie": "Waffe",
             "gewicht": 5.5,
             "kosten": 250,
@@ -4306,7 +4306,7 @@
             }
         },
         "Derringer": {
-            "name": "Derringer (.41)",
+            "name": "Derringer",
             "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 100,
@@ -4324,7 +4324,7 @@
             }
         },
         "Desert Eagle": {
-            "name": "Desert Eagle (.50)",
+            "name": "Desert Eagle",
             "kategorie": "Waffe",
             "gewicht": 4,
             "kosten": 300,
@@ -4360,7 +4360,7 @@
             }
         },
         "MP5": {
-            "name": "H&K MP5 (9mm)",
+            "name": "MP5",
             "kategorie": "Waffe",
             "gewicht": 5,
             "kosten": 300,
@@ -4378,7 +4378,7 @@
             }
         },
         "Tommy Gun": {
-            "name": "Tommy Gun (.45)",
+            "name": "Tommy Gun",
             "kategorie": "Waffe",
             "gewicht": 6.5,
             "kosten": 350,
@@ -4432,7 +4432,7 @@
             }
         },
         "AK47": {
-            "name": "AK47 (7.62mm)",
+            "name": "AK47",
             "kategorie": "Waffe",
             "gewicht": 5,
             "kosten": 450,
@@ -4450,7 +4450,7 @@
             }
         },
         "M-16": {
-            "name": "M-16 (5.56mm)",
+            "name": "M-16",
             "kategorie": "Waffe",
             "gewicht": 4,
             "kosten": 400,
@@ -4485,8 +4485,8 @@
                 "PB": 2
             }
         },
-        "BAR": {
-            "name": "Browning Automatic Rifle (BAR) (.30-06)",
+        "Browning Automatic Rifle": {
+            "name": "Browning Automatic Rifle",
             "kategorie": "Waffe",
             "gewicht": 8.5,
             "kosten": 300,
@@ -4503,8 +4503,8 @@
                 "PB": 2
             }
         },
-        "Gatling (.45)": {
-            "name": "Gatling (.45)",
+        "Gatling": {
+            "name": "Gatling",
             "kategorie": "Waffe",
             "gewicht": 85,
             "kosten": 500,
@@ -4521,8 +4521,8 @@
                 "PB": 2
             }
         },
-        "Minigun (7.62mm)": {
-            "name": "Minigun (7.62mm)",
+        "Minigun": {
+            "name": "Minigun",
             "kategorie": "Waffe",
             "gewicht": 42.5,
             "kosten": 100000,
@@ -4539,8 +4539,8 @@
                 "PB": 2
             }
         },
-        "M2 Browning (.50 Cal)": {
-            "name": "M2 Browning (.50 Cal)",
+        "M2 Browning": {
+            "name": "M2 Browning",
             "kategorie": "Waffe",
             "gewicht": 42,
             "kosten": 1500,
@@ -4557,8 +4557,8 @@
                 "PB": 4
             }
         },
-        "M60 (7.62mm)": {
-            "name": "M60 (7.62mm)",
+        "M60": {
+            "name": "M60",
             "kategorie": "Waffe",
             "gewicht": 16.5,
             "kosten": 6000,
@@ -4575,8 +4575,8 @@
                 "PB": 2
             }
         },
-        "MG42 (7.92mm)": {
-            "name": "MG42 (7.92mm)",
+        "MG42": {
+            "name": "MG42",
             "kategorie": "Waffe",
             "gewicht": 13,
             "kosten": 750,
@@ -4593,8 +4593,8 @@
                 "PB": 2
             }
         },
-        "SAW (5.56mm)": {
-            "name": "SAW (5.56mm)",
+        "Squad Automatic Weapon": {
+            "name": "Squad Automatic Weapon)",
             "kategorie": "Waffe",
             "gewicht": 10,
             "kosten": 4000,
@@ -4938,7 +4938,7 @@
             "mindeststaerke": "W4"
         },
         "Reitchaps": {
-            "name": "Reitchaps aus Leder",
+            "name": "Reitchaps",
             "kategorie": "Rüstung",
             "gewicht": 2.5,
             "kosten": 70,
@@ -4952,7 +4952,7 @@
             "mindeststaerke": "W4"
         },
         "Motorradjacke": {
-            "name": "Motorradjacke aus Kevlar",
+            "name": "Motorradjacke",
             "kategorie": "Rüstung",
             "gewicht": 4,
             "kosten": 350,
@@ -4966,7 +4966,7 @@
             "mindeststaerke": "W4"
         },
         "Motorradhose": {
-            "name": "Motorradhose aus Kevlar",
+            "name": "Motorradhose",
             "kategorie": "Rüstung",
             "gewicht": 2,
             "kosten": 175,
@@ -5345,8 +5345,8 @@
             "beschreibung": "Digitale Kamera mit Speicherkarte",
             "aktiv": true
         },
-        "Kerze (eine Stunde, 2\" Radius)": {
-            "name": "Kerze (eine Stunde, 2\" Radius)",
+        "Kerze": {
+            "name": "Kerze",
             "kategorie": "Allgemein",
             "gewicht": 0.5,
             "kosten": 1,
@@ -5354,8 +5354,8 @@
             "beschreibung": "Brennt eine Stunde, 2\" (4m) Lichtradius",
             "aktiv": true
         },
-        "Köcher (für 20 Pfeile/Bolzen)": {
-            "name": "Köcher (für 20 Pfeile/Bolzen)",
+        "Köcher": {
+            "name": "Köcher",
             "kategorie": "Allgemein",
             "gewicht": 1,
             "kosten": 25,
@@ -5363,8 +5363,8 @@
             "beschreibung": "Behälter für bis zu 20 Pfeile oder Bolzen",
             "aktiv": true
         },
-        "Laterne (4 Stunden, 4\" Radius)": {
-            "name": "Laterne (4 Stunden, 4\" Radius)",
+        "Laterne": {
+            "name": "Laterne",
             "kategorie": "Allgemein",
             "gewicht": 1.5,
             "kosten": 25,
@@ -5372,8 +5372,8 @@
             "beschreibung": "Brennt 4 Stunden mit 0,5 Liter Öl, 4\" (8m) Lichtradius",
             "aktiv": true
         },
-        "Öl (für Laterne, 0,5 Liter)": {
-            "name": "Öl (für Laterne, 0,5 Liter)",
+        "Laternen-Öl": {
+            "name": "Laternen-Öl",
             "kategorie": "Allgemein",
             "gewicht": 0.5,
             "kosten": 2,

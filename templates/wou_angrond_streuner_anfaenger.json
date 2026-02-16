@@ -1,0 +1,59 @@
+{
+  "name": "Angrond",
+  "description": "Spinnen? Wieso ausgerechnet Spinnen? Verfuchts nochmal!",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Streuner",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 6,
+    "Stärke": 4,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 8,
+    "Diebeskunst": 8,
+    "Heimlichkeit": 8,
+    "Kämpfen": 6,
+    "Provozieren": 6,
+    "Überreden": 6,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Phobie",
+    "Tick"
+  ],
+  "edges": [
+    "Beidhändig",
+    "Glück"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "5 Wurfdolche (3/6/9, Stä+W4)",
+    "Lederweste (+1 Torso)",
+    "Kurzschwert (Stä+W6)",
+    "Abenteurerpaket"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_angrond_streuner_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W6)/2 = 5",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + Rüstung(+1) = 6",
+    "bewegung": 6
+  }
+}

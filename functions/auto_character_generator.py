@@ -709,13 +709,23 @@ class AutoCharacterGenerator:
                 # Setze Flag zum Ignorieren von Voraussetzungen
                 charakter.ignore_voraussetzungen = True
                 
-                success = talent_manager.waehle_talent(talent_key)
-                
-                if success:
+                result = talent_manager.waehle_talent(talent_key)
+
+                # String-Rückgaben behandeln (z.B. "pathfinder_kostenlos_angeboten",
+                # "needs_voraussetzungen_confirmation", "needs_rang_confirmation")
+                if result == "pathfinder_kostenlos_angeboten":
+                    result = talent_manager.waehle_pathfinder_kostenloses_talent(
+                        talent_key, ignore_voraussetzungen=True)
+                    self.log(f"  🎁 {edge_name} als kostenloses Pathfinder-Talent gewählt")
+                elif isinstance(result, str):
+                    # Andere String-Rückgaben → Talent direkt setzen (Fallback)
+                    result = False
+
+                if result is True:
                     handicap_used = initial_handicap - charakter.verbleibende_handicap_punkte
                     cost_source = f"{handicap_used} Handicap-Punkte" if handicap_used > 0 else "Standard-Punkte"
                     self.log(f"  ✅ {edge_name} hinzugefügt ({cost_source}) - Voraussetzungen ignoriert")
-                    
+
                     total_costs += 1
                     self.cost_log['talente'].append({
                         'name': edge_name,
@@ -732,7 +742,7 @@ class AutoCharacterGenerator:
                     if hasattr(talent_obj, 'aktiv'):
                         talent_obj.aktiv = True
                     self.log(f"  ⚠️ {edge_name} direkt gesetzt (Fallback) - Voraussetzungen ignoriert")
-                    
+
                     total_costs += 1
                     self.cost_log['talente'].append({
                         'name': edge_name,
@@ -880,6 +890,7 @@ class AutoCharacterGenerator:
                         item.ausgewaehlt = True
                     if hasattr(item, 'aktiv'):
                         item.aktiv = True
+                    charakter.selected_allgemeine_ausruestung.append(item)
                     self.log(f"  ✅ {item_name} gefunden und ausgewählt")
                     return True
 
@@ -903,6 +914,7 @@ class AutoCharacterGenerator:
 
             success = charakter.add_ausruestung(custom_item)
             if success:
+                charakter.selected_allgemeine_ausruestung.append(custom_item)
                 self.log(f"    ✅ {item_name} erfolgreich hinzugefügt")
                 return True
             else:

@@ -320,7 +320,10 @@ class EigenschaftenManager:
             return False
         
         # Prüfe ob Fertigkeit über Attribut steigt
-        if fertigkeit.attribut and fertigkeit.wuerfel.value >= fertigkeit.attribut.wuerfel.value:
+        # Modifier berücksichtigen: W4-2 (effektiv 2) ist unter W4 (effektiv 4)
+        fertigkeit_effektiv = fertigkeit.wuerfel.value + fertigkeit.wuerfel.modifier
+        attribut_effektiv = fertigkeit.attribut.wuerfel.value + fertigkeit.attribut.wuerfel.modifier if fertigkeit.attribut else 0
+        if fertigkeit.attribut and fertigkeit_effektiv >= attribut_effektiv:
             if not confirm_double_cost:
                 return "needs_confirmation"
         
@@ -398,8 +401,12 @@ class EigenschaftenManager:
             base_kosten = self.kosten.get('fertigkeit_chargen', 1)
         
         # Doppelte Kosten wenn Fertigkeit über Attribut
-        if attribut and fertigkeit.wuerfel.value >= attribut.wuerfel.value:
-            return base_kosten * self.kosten.get('fertigkeit_ueber_attribut', 2)
+        # Modifier berücksichtigen: W4-2 (effektiv 2) ist unter W4 (effektiv 4)
+        if attribut:
+            fertigkeit_effektiv = fertigkeit.wuerfel.value + fertigkeit.wuerfel.modifier
+            attribut_effektiv = attribut.wuerfel.value + attribut.wuerfel.modifier
+            if fertigkeit_effektiv >= attribut_effektiv:
+                return base_kosten * self.kosten.get('fertigkeit_ueber_attribut', 2)
         
         return base_kosten
     

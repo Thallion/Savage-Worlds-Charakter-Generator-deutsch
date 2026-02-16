@@ -1,0 +1,61 @@
+{
+  "name": "The Shroud",
+  "description": "Hast du Angst?",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Vigilant",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 4,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 8,
+    "Einschüchtern": 6,
+    "Heimlichkeit": 4,
+    "Fahren": 6,
+    "Kämpfen": 8,
+    "Provozieren": 6,
+    "Schießen": 6,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Fies",
+    "Blutrünstig",
+    "Skrupellos"
+  ],
+  "edges": [
+    "Akrobat",
+    "Ruhige Hände"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Pistole (12/24/48, 2W6+1, PB 1)",
+    "Cape",
+    "Maske (+3)"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/wou_the_shroud_vigilant_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W8)/2 = 6",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + Maske(+3) = 8",
+    "bewegung": 6
+  }
+}

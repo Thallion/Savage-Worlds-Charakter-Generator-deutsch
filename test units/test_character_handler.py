@@ -10,7 +10,7 @@ from kivymd.app import MDApp
 
 # Mocking Kivy vor Import
 with patch('kivy.logger.Logger'), patch('kivymd.app.MDApp'):
-    from views.handlers.character_handler import CharacterHandler
+    from controllers.character_handler import CharacterHandler
 
 
 class TestCharacterHandler(unittest.TestCase):
@@ -66,7 +66,7 @@ class TestCharacterHandler(unittest.TestCase):
         
         self.assertEqual(result, 'default')
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_update_maximale_attributsteigerungen(self, mock_logger):
         """Test Update der maximalen Attributsteigerungen"""
         # Setup
@@ -80,7 +80,7 @@ class TestCharacterHandler(unittest.TestCase):
         # Prüfe dass das Text-Feld aktualisiert wurde
         mock_textfield.text = str(3)
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_update_maximale_fertigkeitssteigerungen(self, mock_logger):
         """Test Update der maximalen Fertigkeitssteigerungen"""
         # Setup
@@ -94,7 +94,7 @@ class TestCharacterHandler(unittest.TestCase):
         # Prüfe dass das Text-Feld aktualisiert wurde
         mock_textfield.text = str(4)  # aufstieg * 2
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_create_new_character(self, mock_logger):
         """Test Erstellung eines neuen Charakters"""
         # Setup
@@ -107,7 +107,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.mock_app.controller.new_character.assert_called_once()
         mock_logger.info.assert_called_with("Neuer Charakter erstellt")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_create_new_character_no_controller(self, mock_logger):
         """Test Charaktererstellung ohne Controller"""
         # Setup - Kein Controller
@@ -118,7 +118,7 @@ class TestCharacterHandler(unittest.TestCase):
         
         mock_logger.warning.assert_called_with("Controller nicht verfügbar für Charaktererstellung")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_schnellspeichern_charakter(self, mock_logger):
         """Test Schnellspeicherung des Charakters"""
         # Setup
@@ -131,7 +131,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.mock_app.controller.quick_save_character.assert_called_once()
         mock_logger.info.assert_called_with("Charakter schnell gespeichert")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_speichere_charakter(self, mock_logger):
         """Test normale Charakterspeicherung"""
         # Setup
@@ -144,7 +144,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.mock_app.controller.save_character.assert_called_once()
         mock_logger.info.assert_called_with("Charakter gespeichert")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_lade_charakter(self, mock_logger):
         """Test Charakterladen"""
         # Setup
@@ -157,7 +157,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.mock_app.controller.load_character.assert_called_once()
         mock_logger.info.assert_called_with("Charakter laden angefordert")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_erzeuge_charakterbogen_pdf(self, mock_logger):
         """Test PDF-Erzeugung"""
         # Setup
@@ -170,7 +170,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.mock_app.controller.generate_character_sheet_pdf.assert_called_once()
         mock_logger.info.assert_called_with("Charakterbogen PDF-Erzeugung angefordert")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_zeige_statblock(self, mock_logger):
         """Test Statblock-Anzeige"""
         # Setup
@@ -183,7 +183,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.mock_app.controller.show_stat_block.assert_called_once()
         mock_logger.info.assert_called_with("Statblock-Anzeige angefordert")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_update_vermoegen_with_values(self, mock_logger):
         """Test Vermögen-Update mit Werten"""
         # Setup
@@ -198,7 +198,7 @@ class TestCharacterHandler(unittest.TestCase):
         # Prüfe dass Wert aktualisiert wurde
         self.assertEqual(self.mock_app.controller.charakter.vermoegen, 100)
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_erhoehe_aufstieg(self, mock_logger):
         """Test Aufstieg-Erhöhung"""
         # Setup
@@ -212,7 +212,7 @@ class TestCharacterHandler(unittest.TestCase):
         # Prüfe dass Aufstieg erhöht wurde
         self.assertEqual(self.mock_app.controller.charakter.aufstieg, 2)
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_senke_aufstieg(self, mock_logger):
         """Test Aufstieg-Senkung"""
         # Setup
@@ -226,7 +226,7 @@ class TestCharacterHandler(unittest.TestCase):
         # Prüfe dass Aufstieg gesenkt wurde
         self.assertEqual(self.mock_app.controller.charakter.aufstieg, 1)
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_senke_aufstieg_minimum(self, mock_logger):
         """Test Aufstieg-Senkung bei Minimum"""
         # Setup
@@ -238,7 +238,7 @@ class TestCharacterHandler(unittest.TestCase):
         # Aufstieg sollte bei 0 bleiben
         self.assertEqual(self.mock_app.controller.charakter.aufstieg, 0)
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_exception_handling_create_character(self, mock_logger):
         """Test Exception-Handling bei Charaktererstellung"""
         # Setup - Exception simulieren
@@ -249,7 +249,7 @@ class TestCharacterHandler(unittest.TestCase):
         
         mock_logger.error.assert_called_with("Fehler bei Charaktererstellung: Test Error")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_on_character_created_event(self, mock_logger):
         """Test Character-Created Event"""
         # Setup
@@ -263,7 +263,7 @@ class TestCharacterHandler(unittest.TestCase):
         self.character_handler._update_ui_fields.assert_called_once()
         mock_logger.info.assert_called_with(f"Charakter erstellt: {test_data}")
         
-    @patch('views.handlers.character_handler.Logger')
+    @patch('controllers.character_handler.Logger')
     def test_on_character_loaded_event(self, mock_logger):
         """Test Character-Loaded Event"""
         # Setup
