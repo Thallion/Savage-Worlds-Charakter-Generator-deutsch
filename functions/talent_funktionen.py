@@ -211,13 +211,14 @@ class TalentManager:
         
         return False
     
-    def waehle_pathfinder_kostenloses_talent(self, talent_name_key):
+    def waehle_pathfinder_kostenloses_talent(self, talent_name_key, ignore_voraussetzungen=False):
         """
         NEU: Wählt ein kostenloses Pathfinder-Talent während der Charaktererstellung.
-        
+
         Args:
             talent_name_key: Der Name des auszuwählenden Talents
-            
+            ignore_voraussetzungen: Wenn True, werden Voraussetzungen nicht geprüft
+
         Returns:
             True bei Erfolg, False bei Misserfolg
         """
@@ -238,7 +239,7 @@ class TalentManager:
             return False
         
         # Talent auswählen
-        erfolg = self.talent_auswaehlen(talent_name_key, skip_prereq_check=False)
+        erfolg = self.talent_auswaehlen(talent_name_key, skip_prereq_check=ignore_voraussetzungen)
         
         if erfolg:
             # Markiere dass ein kostenloses Talent gewählt wurde
@@ -1205,9 +1206,9 @@ def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=Fals
     """Kompatibilitätsfunktion - verwendet TalentManager"""
     return get_talent_manager(charakter).waehle_freies_talent(talent_name_key, ignore_voraussetzungen)
 
-def waehle_pathfinder_kostenloses_talent(charakter, talent_name_key):
+def waehle_pathfinder_kostenloses_talent(charakter, talent_name_key, ignore_voraussetzungen=False):
     """Kompatibilitätsfunktion - verwendet TalentManager"""
-    return get_talent_manager(charakter).waehle_pathfinder_kostenloses_talent(talent_name_key)
+    return get_talent_manager(charakter).waehle_pathfinder_kostenloses_talent(talent_name_key, ignore_voraussetzungen)
 
 def talent_abwaehlen(charakter, talent_name_key):
     """Kompatibilitätsfunktion - verwendet TalentManager"""

@@ -1,0 +1,68 @@
+{
+  "name": "Harsk",
+  "description": "Harsk ist ein ungewöhnlicher Zwerg, denn er mag Wälder lieber als Minen und Tunnel. Nur wenige Dinge machen ihn glücklicher, als mit seiner Armbrust in einem Baum zu hocken. Harsks Axt gehörte einst seinem Bruder Sigur, der vor 20 Jahren von Riesen erschlagen wurde.",
+  "setting": "Savage Pathfinder",
+  "race": "Zwerg",
+  "profile": {
+    "age": "",
+    "gender": "männlich",
+    "concept": "Waldläufer",
+    "languages": "Gemeinsprache, Goblinisch, Sylvanisch, Zwergisch",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 8,
+    "Stärke": 6,
+    "Verstand": 6,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 4,
+    "Heilen": 4,
+    "Heimlichkeit": 6,
+    "Kämpfen": 6,
+    "Schießen": 8,
+    "Überleben": 8,
+    "Überreden": 4,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Angewohnheit",
+    "Misstrauisch",
+    "Dünnhäutig",
+    "Schwur"
+  ],
+  "edges": [
+    "Waldläufer",
+    "Naturbursche"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Sigurs Streitaxt (Stä+W6)",
+    "Schwere Armbrust (Reichweite 15/30/60, Schaden 2W8, PB 2, Nachladen 2)",
+    "20 Bolzen",
+    "Handaxt (Stä+W6)",
+    "Beschlagene Ledertunika und Beinlinge (+2)",
+    "Abenteurerausrüstung",
+    "Bergsteigerausrüstung",
+    "Verstrickungsbeutel",
+    "34 GM"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/swpf_harsk_waldlaeufer_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W6)/2 = 5",
+    "robustheit_calculation": "Basis 2 + Konstitution(W8)/2 + Rüstung(+2) = 8",
+    "bewegung": 5,
+    "klassenfaehigkeiten": "Rüstungsbeschränkung (mittel): -4 auf Geschicklichkeit mit schwerer Rüstung/Schild. Erzfeind (Humanoide): Freie Wiederholung beim Aufspüren/Angreifen. Bevorzugtes Gelände (Wälder): Zusätzliche Aktionskarte. Wildnis durchqueren: Ignoriert schwieriges Gelände."
+  }
+}

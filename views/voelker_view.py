@@ -299,7 +299,8 @@ class VoelkerWidget(MDBoxLayout):
                 'talent',
                 lambda: get_freie_talente(charakter),
                 lambda talent: self._select_talent(self.selected_volk_name, talent),
-                "Wähle ein freies Anfängertalent"
+                "Wähle ein freies Anfängertalent",
+                get_alle_items_func=lambda: get_freie_talente(charakter, nur_verfuegbare=False)
             )
             zusatzelemente_container.add_widget(talent_section)
             sections_added += 1
@@ -348,7 +349,7 @@ class VoelkerWidget(MDBoxLayout):
         if zusatzelemente.get('freie_attribute', False):
             Logger.info(f"Volk '{self.selected_volk_name}' hat Attribut-Optionen: {zusatzelemente.get('attribut_optionen', [])}")
 
-    def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text):
+    def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
         """Erstellt eine Sektion für Zusatzelemente."""
         # Hauptcontainer für die Sektion
         section_card = MDCard(
@@ -417,7 +418,9 @@ class VoelkerWidget(MDBoxLayout):
             on_release=lambda x: self._show_dropdown_menu(
                 get_options_func(),
                 select_func,
-                dropdown_button
+                dropdown_button,
+                get_options_func=get_options_func,
+                get_alle_items_func=get_alle_items_func
             )
         )
         
@@ -431,57 +434,80 @@ class VoelkerWidget(MDBoxLayout):
         
         return section_card
 
-    def _show_dropdown_menu(self, items, callback, caller):
+    def _show_dropdown_menu(self, items, callback, caller, get_options_func=None, get_alle_items_func=None):
         """Zeigt ein verbessertes Dialog-Menü mit Suchfeld."""
         # Items validieren
         Logger.debug(f"Dialog-Items: {items}")
-        
+
         if not items:
             Logger.warning("Keine Items für Dialog verfügbar")
             return
-            
+
         if len(items) == 1 and items[0] in [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT]:
             Logger.warning(f"Nur Fehlermeldung verfügbar: {items[0]}")
             return
 
         try:
             # Erstelle Search-Dialog statt Dropdown
-            self._show_search_dialog(items, callback, caller)
-            
+            self._show_search_dialog(items, callback, caller, get_options_func=get_options_func, get_alle_items_func=get_alle_items_func)
+
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen des Dialog-Menüs: {e}", exc_info=True)
 
-    def _show_search_dialog(self, items, callback, caller):
-        """KORRIGIERT: Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
+    def _show_search_dialog(self, items, callback, caller, get_options_func=None, get_alle_items_func=None):
+        """Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
         from kivymd.uix.dialog import (
-            MDDialog, MDDialogHeadlineText, MDDialogButtonContainer, 
+            MDDialog, MDDialogHeadlineText, MDDialogButtonContainer,
             MDDialogContentContainer
         )
         from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
-        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.button import MDButton, MDButtonText, MDIconButton
         from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
         from kivymd.uix.scrollview import MDScrollView
-        
+
         try:
-            # Hauptcontainer für den Dialog - KORRIGIERT: Feste Höhe statt adaptive_height
+            # State für Filter-Toggle
+            filter_state = {'nur_verfuegbare': True}
+
+            # Hauptcontainer für den Dialog
             dialog_content = MDBoxLayout(
                 orientation="vertical",
                 spacing=dp(15),
                 padding=dp(20),
                 size_hint_y=None,
-                height=dp(400)  # Feste Höhe statt adaptive_height
+                height=dp(400)
             )
-            
+
+            # Suchzeile mit optionalem Filter-Button
+            search_row = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(56),
+                spacing=dp(10)
+            )
+
             # Suchfeld
             search_field = MDTextField(
                 mode="outlined",
                 size_hint_y=None,
-                height=dp(56)
+                height=dp(56),
+                size_hint_x=1
             )
             search_hint = MDTextFieldHintText(text="Suchen...")
             search_field.add_widget(search_hint)
-            
-            # Scrollbare Liste mit breiterem Scroll-Bereich für Android
+            search_row.add_widget(search_field)
+
+            # Filter-Button nur anzeigen wenn alle-Items-Funktion vorhanden
+            if get_alle_items_func and get_options_func:
+                filter_button = MDIconButton(
+                    icon="filter",
+                    style="tonal",
+                    size_hint=(None, None),
+                    size=(dp(56), dp(56))
+                )
+                search_row.add_widget(filter_button)
+
+            # Scrollbare Liste
             scroll_view = MDScrollView(
                 size_hint_y=None,
                 height=dp(300),
@@ -490,68 +516,82 @@ class VoelkerWidget(MDBoxLayout):
                 bar_color=self.theme_cls.primaryColor,
                 bar_inactive_color=self.theme_cls.onSurfaceColor
             )
-            
-            # Container für Liste mit Padding rechts für Scroll-Bereich
+
+            # Container für Liste
             list_container = MDBoxLayout(
                 orientation='horizontal',
                 size_hint_y=None
             )
             list_container.bind(minimum_height=list_container.setter('height'))
-            
-            # KORRIGIERT: size_hint_y statt adaptive_height
+
             items_list = MDList(
                 size_hint_y=None,
                 size_hint_x=1
             )
-            # Höhe der Liste berechnen basierend auf Items
             items_list.bind(minimum_height=items_list.setter('height'))
-            
-            # Rechter Bereich für besseres Scrolling (nicht anklickbar)
+
+            # Rechter Bereich für besseres Scrolling
             scroll_zone = MDBoxLayout(
                 size_hint_x=None,
                 width=dp(40),
                 size_hint_y=1
             )
-            
-            # Items zur Liste hinzufügen - KORRIGIERT: Feste Höhe für MDListItem
-            for item in sorted(items):
-                if item and str(item).strip():
-                    list_item = MDListItem(
-                        size_hint_y=None,
-                        height=dp(48),  # Feste Höhe statt adaptive_height
-                        on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
-                    )
-                    list_item.add_widget(MDListItemHeadlineText(text=str(item)))
-                    items_list.add_widget(list_item)
-            
+
+            def populate_list(item_list):
+                """Befüllt die Liste mit Items."""
+                items_list.clear_widgets()
+                search_text = search_field.text.lower() if search_field.text else ""
+                for item in sorted(item_list):
+                    if item and str(item).strip():
+                        if search_text and search_text not in str(item).lower():
+                            continue
+                        list_item = MDListItem(
+                            size_hint_y=None,
+                            height=dp(48),
+                            on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
+                        )
+                        list_item.add_widget(MDListItemHeadlineText(text=str(item)))
+                        items_list.add_widget(list_item)
+
+            # Initiale Items anzeigen
+            populate_list(items)
+
             # Container zusammenbauen
             list_container.add_widget(items_list)
             list_container.add_widget(scroll_zone)
             scroll_view.add_widget(list_container)
-            
+
             # Such-Funktionalität
             def filter_items(instance, text):
-                items_list.clear_widgets()
-                search_text = text.lower()
-                
-                filtered_items = [item for item in sorted(items) 
-                                if item and search_text in str(item).lower()]
-                
-                for item in filtered_items:
-                    list_item = MDListItem(
-                        size_hint_y=None,
-                        height=dp(48),  # Feste Höhe statt adaptive_height
-                        on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
-                    )
-                    list_item.add_widget(MDListItemHeadlineText(text=str(item)))
-                    items_list.add_widget(list_item)
-            
+                if filter_state['nur_verfuegbare']:
+                    current_items = get_options_func() if get_options_func else items
+                else:
+                    current_items = get_alle_items_func() if get_alle_items_func else items
+                populate_list(current_items)
+
             search_field.bind(text=filter_items)
-            
+
+            # Filter-Toggle Funktionalität
+            if get_alle_items_func and get_options_func:
+                def toggle_filter(instance):
+                    filter_state['nur_verfuegbare'] = not filter_state['nur_verfuegbare']
+                    if filter_state['nur_verfuegbare']:
+                        filter_button.icon = "filter"
+                        filter_button.style = "tonal"
+                        current_items = get_options_func()
+                    else:
+                        filter_button.icon = "filter-off"
+                        filter_button.style = "outlined"
+                        current_items = get_alle_items_func()
+                    populate_list(current_items)
+                    Logger.debug(f"Filter-Toggle: nur_verfuegbare={filter_state['nur_verfuegbare']}")
+
+                filter_button.bind(on_release=toggle_filter)
+
             # Container zusammenbauen
-            dialog_content.add_widget(search_field)
+            dialog_content.add_widget(search_row)
             dialog_content.add_widget(scroll_view)
-            
+
             # Dialog erstellen
             self.search_dialog = MDDialog(
                 MDDialogHeadlineText(text="Auswahl treffen"),
@@ -569,10 +609,10 @@ class VoelkerWidget(MDBoxLayout):
                     spacing="8dp",
                 ),
             )
-            
+
             self.search_dialog.open()
             Logger.debug(f"Search-Dialog erfolgreich geöffnet mit {len(items)} Items")
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Search-Dialog: {e}", exc_info=True)
 
@@ -809,12 +849,17 @@ class VoelkerWidget(MDBoxLayout):
         Halbelf kann ENTWEDER freies Talent ODER Geschicklichkeit +2 wählen.
         """
         try:
+            # Aktuelle Auswahl prüfen
+            current_wahl = self.voelker_auswahlen.get(self.selected_volk_name, {}).get('halbelf_wahl', None)
+            hat_talent = current_wahl and current_wahl.startswith('Talent: ')
+            hat_attribut = current_wahl == 'Geschicklichkeit W6'
+
             # Hauptcontainer für die Sektion
             section_card = MDCard(
                 size_hint_x=None,
                 width=dp(800),
                 size_hint_y=None,
-                height=dp(180),  # Höher für zwei Optionen
+                height=dp(230) if current_wahl else dp(180),
                 padding=dp(25),
                 elevation=3,
                 radius=[12],
@@ -822,14 +867,14 @@ class VoelkerWidget(MDBoxLayout):
                 style="elevated",
                 pos_hint={"x": 0}
             )
-            
+
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                height=dp(130),
+                height=dp(180) if current_wahl else dp(130),
                 spacing=dp(15)
             )
-            
+
             # Titel der Sektion mit reduzierter Schriftgröße
             titel_label = MDLabel(
                 text="Erbe (ENTWEDER freies Talent ODER Geschicklichkeit W4 -> W6):",
@@ -843,7 +888,7 @@ class VoelkerWidget(MDBoxLayout):
             )
             titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
             titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
-            
+
             # Zwei Buttons für die Auswahl
             buttons_row = MDBoxLayout(
                 orientation='horizontal',
@@ -851,37 +896,52 @@ class VoelkerWidget(MDBoxLayout):
                 height=dp(55),
                 spacing=dp(20)
             )
-            
-            # Button 1: Freies Talent
+
+            # Button 1: Freies Talent - filled wenn ausgewählt
             talent_button = MDButton(
-                style="outlined",
+                style="filled" if hat_talent else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
                 height=dp(48),
                 on_release=lambda x: self._halbelf_waehle_talent()
             )
             talent_button.add_widget(MDButtonText(text="Freies Talent"))
-            
-            # Button 2: Geschicklichkeit +2
+
+            # Button 2: Geschicklichkeit +2 - filled wenn ausgewählt
             attribut_button = MDButton(
-                style="outlined", 
+                style="filled" if hat_attribut else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
                 height=dp(48),
                 on_release=lambda x: self._halbelf_waehle_attribut()
             )
             attribut_button.add_widget(MDButtonText(text="Geschicklichkeit W6"))
-            
+
             buttons_row.add_widget(talent_button)
             buttons_row.add_widget(attribut_button)
-            
+
             section_content.add_widget(titel_label)
             section_content.add_widget(buttons_row)
+
+            # Aktuelle Auswahl anzeigen
+            if current_wahl:
+                auswahl_label = MDLabel(
+                    text=f"Gewählt: {current_wahl}",
+                    font_style="Body",
+                    theme_text_color="Primary",
+                    size_hint_y=None,
+                    height=dp(30),
+                    halign='left',
+                    valign='center',
+                    bold=True
+                )
+                section_content.add_widget(auswahl_label)
+
             section_card.add_widget(section_content)
-            
-            Logger.debug("Halbelf ENTWEDER/ODER Sektion erstellt")
+
+            Logger.debug(f"Halbelf ENTWEDER/ODER Sektion erstellt (Auswahl: {current_wahl})")
             return section_card
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Halbelf ENTWEDER/ODER Sektion: {e}")
             # Fallback: Leere Card zurückgeben
@@ -891,19 +951,21 @@ class VoelkerWidget(MDBoxLayout):
         """NEUE: Halbelf wählt freies Talent (ENTWEDER-Option)."""
         try:
             Logger.debug("Halbelf: Freies Talent-Option ausgewählt")
-            
+
             charakter = self.controller.charakter
             freie_talente = get_freie_talente(charakter)
-            
+
             if not freie_talente or freie_talente == [NO_TALENT_AVAILABLE_TEXT]:
                 Logger.warning("Keine freien Talente für Halbelf verfügbar")
                 return
-            
-            # Zeige Talent-Auswahl Dialog
+
+            # Zeige Talent-Auswahl Dialog mit Filter-Button
             self._show_search_dialog(
                 freie_talente,
                 lambda talent: self._halbelf_talent_selected(talent),
-                None
+                None,
+                get_options_func=lambda: get_freie_talente(charakter),
+                get_alle_items_func=lambda: get_freie_talente(charakter, nur_verfuegbare=False)
             )
             
         except Exception as e:
@@ -921,7 +983,7 @@ class VoelkerWidget(MDBoxLayout):
                 # UI-lokale Auswahl speichern
                 if self.selected_volk_name not in self.voelker_auswahlen:
                     self.voelker_auswahlen[self.selected_volk_name] = {}
-                self.voelker_auswahlen[self.selected_volk_name]['halbelf_wahl'] = 'Geschicklichkeit +2'
+                self.voelker_auswahlen[self.selected_volk_name]['halbelf_wahl'] = 'Geschicklichkeit W6'
                 
                 Logger.info(f"Halbelf '{self.selected_volk_name}' hat Geschicklichkeit +2 gewählt")
                 

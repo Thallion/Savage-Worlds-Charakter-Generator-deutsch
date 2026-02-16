@@ -134,6 +134,6 @@ class Ausruestung(EventDispatcher):
                 beschreibung=data.get('beschreibung', ''),
             )
         except Exception as e:
-            Logger.error(f"Fehler beim Erstellen von Ausruestung aus Daten: {e}")
+            Logger.error(f"Fehler beim Erstellen von Ausruestung '{data.get('name', 'Unbekannt')}' aus Daten: {e}")
             return None
    

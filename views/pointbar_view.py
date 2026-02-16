@@ -110,8 +110,8 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.unbind(waehrungseinheit=self.update_vermoegen_text)
             self.charakter.unbind(verbleibende_handicap_punkte=self.update_handicaps_text)
             self.charakter.unbind(gesamt_handicap_punkte=self.update_handicaps_text)
-            self.charakter.unbind(gesamtgewicht=self.update_gewicht_text)
-            self.charakter.unbind(maximale_traglast=self.update_gewicht_text)
+            # gesamtgewicht ist ein @property, kein Kivy Property - kein unbind nötig
+            # maximale_traglast wird nicht mehr gebunden, daher auch kein unbind
             self.charakter.unbind(rang=self.update_rang_text)
             self.charakter.unbind(char_name=self.update_charakter_name)
             self.charakter.unbind(active_setting_name=self.update_setting_name)

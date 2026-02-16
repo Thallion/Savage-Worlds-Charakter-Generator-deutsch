@@ -212,8 +212,12 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
                 
                 # Elemente aus dem neuen Setting laden (mit Merging)
                 success = self.load_elements_from_active_setting(merge_elements=merge_elements)
-                
+
                 if success:
+                    # Fertigkeiten neu initialisieren, damit die Attribut-Referenzen
+                    # auf die aktuellen Attribut-Objekte zeigen (wichtig bei Replace-Modus)
+                    self.initialisiere_fertigkeiten()
+
                     self.active_setting_name = setting_name
                     
                     # Speichere das neue Setting als letztes Setting in der Config

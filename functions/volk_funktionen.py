@@ -350,13 +350,14 @@ def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
         return False
 
 
-def get_freie_talente(charakter):
+def get_freie_talente(charakter, nur_verfuegbare=True):
     """
     Gibt eine Liste aller verfügbaren freien Talente zurück.
-    
+
     Args:
         charakter: Das Charakterobjekt
-        
+        nur_verfuegbare: Wenn True, nur Talente mit erfüllten Voraussetzungen
+
     Returns:
         list: Liste der verfügbaren Talente
     """
@@ -364,20 +365,26 @@ def get_freie_talente(charakter):
         if not hasattr(charakter, 'talente') or not charakter.talente:
             Logger.warning("Keine Talente im Charakter gefunden")
             return [NO_TALENT_AVAILABLE_TEXT]
-        
+
         frei_talente = []
-        
+
         Logger.debug(f"Analysiere {len(charakter.talente)} Talente")
-        
+
         for name, talent in charakter.talente.items():
             # Talent-Status prüfen
             aktiv = getattr(talent, 'aktiv', False)
             ausgewaehlt = getattr(talent, 'ausgewaehlt', False)
-            
+
             Logger.debug(f"Talent '{name}': aktiv={aktiv}, ausgewaehlt={ausgewaehlt}")
-            
+
             # Talent ist frei wenn es aktiv aber nicht ausgewählt ist
             if aktiv and not ausgewaehlt:
+                if nur_verfuegbare:
+                    from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
+                    if pruefe_voraussetzungen(charakter, talent):
+                        continue
+                    if is_talent_rang_hoeher_als_charakter(charakter, talent.rang):
+                        continue
                 frei_talente.append(name)
         
         Logger.debug(f"Gefundene freie Talente: {frei_talente}")

@@ -448,7 +448,7 @@ class CharakterbogenWidget(MDBoxLayout):
         ausruestung_section.clear_widgets()
 
         # Alle ausgewählte Ausrüstung anzeigen
-        alle_ausruestung = [item for item in self.charakter.ausruestung.values() if item.ausgewaehlt]
+        alle_ausruestung = [item for item in self.charakter.ausruestung.values() if item is not None and item.ausgewaehlt]
 
         for item in alle_ausruestung:
             item_text = f"{item.name} x{item.menge}"
@@ -624,7 +624,7 @@ class CharakterbogenWidget(MDBoxLayout):
         """
         return [
             item for item in self.charakter.ausruestung.values()
-            if isinstance(item, item_type) and item.angelegt
+            if item is not None and isinstance(item, item_type) and item.angelegt
         ]
 
     def _toggle_item(self, item, instance):

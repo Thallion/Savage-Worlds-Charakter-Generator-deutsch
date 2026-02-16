@@ -9,6 +9,7 @@ __pycache__/
 dist/
 bin/
 build/
+Texte/
 .buildozer/
 *.egg-info/
 
@@ -66,4 +67,5 @@ setup.py
 app_config.json
 Savage_Worlds_Abenteuer-Edition.txt
 Fantasy_Kompendium_Text.txt
+Superkraefte-Kompendium.txt
 

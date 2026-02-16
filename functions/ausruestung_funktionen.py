@@ -123,7 +123,7 @@ def berechne_gesamt_ruestungsschutz(charakter) -> Dict[str, int]:
 
     # Durchsuche alle Ausrüstungsgegenstände
     for item in charakter.ausruestung.values():
-        if isinstance(item, Ruestung) and item.angelegt and item.ausgewaehlt:
+        if item is not None and isinstance(item, Ruestung) and item.angelegt and item.ausgewaehlt:
             gesamt_schutz[RuestungsKoerperteile.TORSO] += item.torso
             gesamt_schutz[RuestungsKoerperteile.ARME] += item.arme
             gesamt_schutz[RuestungsKoerperteile.BEINE] += item.beine
@@ -180,7 +180,7 @@ def berechne_gesamtkosten(charakter) -> float:
     
     # Alle Ausrüstungsgegenstände durchgehen
     for ausr in charakter.ausruestung.values():
-        if ausr.ausgewaehlt:
+        if ausr is not None and ausr.ausgewaehlt:
             gesamtkosten += ausr.kosten * ausr.menge
     
     # Falls separate Listen existieren (für Rückwärtskompatibilität)

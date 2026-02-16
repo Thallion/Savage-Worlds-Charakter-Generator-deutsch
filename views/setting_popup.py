@@ -84,7 +84,8 @@ class SettingsRepository:
         for item in charakter.maechte.values():
             item.ausgewaehlt = False
         for item in charakter.ausruestung.values():
-            item.ausgewaehlt = False
+            if item is not None:
+                item.ausgewaehlt = False
 
         # Erstelle das Setting-Dictionary – jedes Model liefert seine eigene Repräsentation
         new_setting = {

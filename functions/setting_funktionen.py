@@ -486,7 +486,10 @@ def _lade_ausruestung(charakter, active_setting: Dict[str, Any], merge_elements:
                 if not merge_elements or name not in charakter.ausruestung:
                     # Verwende die zentrale Funktion zum Erstellen des Items
                     item = ausruestung_funktionen.erstelle_item_nach_kategorie(item_dict)
-                    charakter.ausruestung[name] = item
+                    if item is not None:
+                        charakter.ausruestung[name] = item
+                    else:
+                        Logger.warning(f"Ausrüstung '{name}' konnte nicht erstellt werden und wird übersprungen.")
             except Exception as e:
                 Logger.warning(LogMessages.FEHLER_BEIM_LADEN.format(
                     name=name,

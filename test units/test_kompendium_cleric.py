@@ -73,6 +73,7 @@ from models.charakter import Charakter
 from functions.setting_funktionen import CustomElementManager
 from functions.talent_funktionen import waehle_talent, waehle_freies_talent
 from functions.handicap_funktionen import waehle_handicap
+from functions.volk_funktionen import waehle_volk
 
 
 class TestClericUebersetzungen(unittest.TestCase):
@@ -282,8 +283,7 @@ class TestClericCharakterErstellung(unittest.TestCase):
         }
 
         # --- VOLK: Zwerg (Konstitution W6 durch Widerstandsfaehig) ---
-        if 'Konstitution' in self.charakter.attribute:
-            self.charakter.attribute['Konstitution'].wuerfel.value = 6
+        waehle_volk(self.charakter, "Zwerg")
 
         # --- HANDICAPS: 4 Punkte ---
         # Loyal (leicht 1) + Pazifist (leicht 1) + Aufopferungsvoll (schwer 2)
@@ -369,7 +369,7 @@ class TestClericCharakterErstellung(unittest.TestCase):
     # ------------------------------------------------------------------
     def test_01_zwerg_konstitution_bonus(self):
         """Zwerg startet mit Konstitution W6 (Widerstandsfaehig)."""
-        self.charakter.attribute['Konstitution'].wuerfel.value = 6
+        waehle_volk(self.charakter, "Zwerg")
         self.assertEqual(self.charakter.attribute['Konstitution'].wuerfel.value, 6,
                          "Konstitution sollte W6 durch Zwerg-Widerstandsfähig sein")
 
@@ -398,7 +398,7 @@ class TestClericCharakterErstellung(unittest.TestCase):
                 waehle_handicap(self.charakter, name)
 
         # Konstitution W6 durch Zwerg
-        self.charakter.attribute['Konstitution'].wuerfel.value = 6
+        waehle_volk(self.charakter, "Zwerg")
 
         # 6 Steigerungen durchfuehren
         steigerungen_ok = 0
@@ -430,8 +430,8 @@ class TestClericCharakterErstellung(unittest.TestCase):
         for name in ["Loyal", "Pazifist_leicht", "Aufopferungsvoll_schwer"]:
             if name in self.charakter.handicaps:
                 waehle_handicap(self.charakter, name)
-        # Attribute (WIL W6 minimum fuer AH Kleriker Voraussetzung)
-        self.charakter.attribute['Konstitution'].wuerfel.value = 6
+        # Volk + Attribute (WIL W6 minimum fuer AH Kleriker Voraussetzung)
+        waehle_volk(self.charakter, "Zwerg")
         for attr, count in [('Geschicklichkeit', 1), ('Verstand', 1),
                             ('Willenskraft', 2), ('Stärke', 1), ('Konstitution', 1)]:
             for _ in range(count):

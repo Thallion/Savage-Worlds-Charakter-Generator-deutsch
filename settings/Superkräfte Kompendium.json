@@ -1,0 +1,2439 @@
+{
+  "name": "Superkräfte-Kompendium",
+  "description": "Superkräfte-Kompendium für Savage Worlds Abenteuer-Edition (SWAE). Enthält Superkräfte, Handicaps, Talente, Ausrüstung und Settingregeln für Superhelden-Kampagnen aller Machtstufen.",
+  "machtstufen": {
+    "I": {
+      "name": "Stufe I - Pulp-Helden/Teenager",
+      "superkraftpunkte": 15,
+      "kraftobergrenze": 5,
+      "beschreibung": "Frühe Pulp-Helden oder Teenager mit Kräften, die sich noch entwickeln. Verteidigen Zuhause und Nachbarschaft."
+    },
+    "II": {
+      "name": "Stufe II - Straßenkämpfer",
+      "superkraftpunkte": 30,
+      "kraftobergrenze": 10,
+      "beschreibung": "Straßenkämpfer, erfahrene Pulp-Helden oder neue Superwesen. Bekämpfen Bankräuber und Gangs."
+    },
+    "III": {
+      "name": "Stufe III - Four-Color-Helden",
+      "superkraftpunkte": 45,
+      "kraftobergrenze": 15,
+      "beschreibung": "Wahre Superwesen in farbenfrohen Kostümen, öffentlich bekannt. Mächtige Erzfeinde bedrohen Städte und Nationen."
+    },
+    "IV": {
+      "name": "Stufe IV - Schwere Kaliber",
+      "superkraftpunkte": 60,
+      "kraftobergrenze": 20,
+      "beschreibung": "Mächtigste Helden des Planeten. Erste Verteidigungslinie gegen Welteneroberer und Alien-Invasoren."
+    },
+    "V": {
+      "name": "Stufe V - Kosmische Beschützer",
+      "superkraftpunkte": 75,
+      "kraftobergrenze": 25,
+      "beschreibung": "Galaktische Beschützer gegen kosmische Bedrohungen. Reisen durch Weltraum, kämpfen gegen galaktische Kriegsherren."
+    }
+  },
+  "kraftsets": {
+    "beschreibung": "Erlaubt Charakteren, in verschiedenen Formen unterschiedliche Kräfte zu besitzen. Wechsel per Fokusprobe als Aktion.",
+    "kosten_und_obergrenzen": {
+      "I": {
+        "kosten": 3,
+        "obergrenze": 4
+      },
+      "II": {
+        "kosten": 5,
+        "obergrenze": 8
+      },
+      "III": {
+        "kosten": 8,
+        "obergrenze": 12
+      },
+      "IV": {
+        "kosten": 10,
+        "obergrenze": 16
+      },
+      "V": {
+        "kosten": 12,
+        "obergrenze": 20
+      }
+    }
+  },
+  "voelker": {},
+  "voelker_selected": "",
+  "attribute": {
+    "Geschicklichkeit": {
+      "attribut_name": "Geschicklichkeit",
+      "wert": 4,
+      "modifier": 0
+    },
+    "Konstitution": {
+      "attribut_name": "Konstitution",
+      "wert": 4,
+      "modifier": 0
+    },
+    "Stärke": {
+      "attribut_name": "Stärke",
+      "wert": 4,
+      "modifier": 0
+    },
+    "Verstand": {
+      "attribut_name": "Verstand",
+      "wert": 4,
+      "modifier": 0
+    },
+    "Willenskraft": {
+      "attribut_name": "Willenskraft",
+      "wert": 4,
+      "modifier": 0
+    }
+  },
+  "fertigkeiten_daten": {
+    "Allgemeinwissen": {
+      "attribut": "Verstand",
+      "startwert": "W4"
+    },
+    "Athletik": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "W4"
+    },
+    "Darbietung": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    },
+    "Diebeskunst": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "-"
+    },
+    "Einschüchtern": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    },
+    "Elektronik": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Fahren": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "-"
+    },
+    "Fokus": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    },
+    "Geisteswissenschaften": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Glaube": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    },
+    "Hacken": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Heilen": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Heimlichkeit": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "W4"
+    },
+    "Kämpfen": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "-"
+    },
+    "Naturwissenschaften": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Okkultismus": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Pilot": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "-"
+    },
+    "Provozieren": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    },
+    "Reparieren": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Schießen": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "-"
+    },
+    "Seefahrt": {
+      "attribut": "Geschicklichkeit",
+      "startwert": "-"
+    },
+    "Überreden": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    },
+    "Überleben": {
+      "attribut": "Verstand",
+      "startwert": "-"
+    },
+    "Wahrnehmung": {
+      "attribut": "Verstand",
+      "startwert": "W4"
+    },
+    "Zaubern": {
+      "attribut": "Willenskraft",
+      "startwert": "-"
+    }
+  },
+  "handicaps": {
+    "Abhängigkeit": {
+      "name": "Abhängigkeit",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Muss täglich 1 Stunde eine Substanz konsumieren/berühren. Sonst: Kräfte nicht nutzbar ODER 1 Stufe Erschöpfung/24h (bei Wahl). Ausgeschaltet kann zum Tod führen. 1 Stunde Ruhe mit Substanz heilt alle Erschöpfung.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Auffälliges Äußeres": {
+      "name": "Auffälliges Äußeres",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Superwesen sieht anders aus als Vertreter seines Volks (blaue Haut, sprechender Gorilla etc.), leicht wiederzuerkennen auch ohne Kostüm. Leichter aufzuspüren, soziale Probleme.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Fremdartige Gestalt": {
+      "name": "Fremdartige Gestalt",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Vollkommen fremdartig (leuchtende Energiekugel, Amöbe mit Tentakeln etc.). Heilenproben -4. Kann keine Restaurants betreten, normale Kleidung tragen etc. Gewährt keine Fähigkeiten.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Geheimidentität": {
+      "name": "Geheimidentität",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Nur engste Freunde kennen zivile Identität. Aufdeckung führt dazu, dass Feinde Arbeit und Zuhause angreifen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Grimmig": {
+      "name": "Grimmig",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Humorlos, lächelt nie. Wird von jedem erfolgreichen Provozieren erzürnt (-2 auf Proben gegen andere Gegner). Hält an bis Joker gezogen oder neu provoziert. Gilt als Voraussetzung für Bedrohlich.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Größenwahnsinnig": {
+      "name": "Größenwahnsinnig",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Muss jede Situation kontrollieren und Anführer sein. Keine positiven Effekte durch Anführer-Talente. -4 auf Unterstützungswürfe für andere Charaktere.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Idealistisch": {
+      "name": "Idealistisch",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Glaubt an Wahrheit und Gerechtigkeit. Sieht Welt in Schwarz und Weiß. Probleme in Graubereichen: hungriger Dieb, tödliche Gewalt gegen jemanden mit großem Zerstörungspotenzial.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Kraftnegierung (leicht)": {
+      "name": "Kraftnegierung",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Bestimmte seltene Substanz/Zustand (klassische Musik, Strahlung, seltene Metalle) raubt alle Superkräfte und mit SKP erworbene Talente/Eigenschaften. Wirkt sofort bei Kontakt/6\" Nähe.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Kraftnegierung (schwer)": {
+      "name": "Kraftnegierung",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Verbreitete Substanz/Zustand (Wasser, Lärm) raubt alle Superkräfte und mit SKP erworbene Talente/Eigenschaften. Wirkt sofort bei Kontakt/6\" Nähe.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Leichtsinnig": {
+      "name": "Leichtsinnig",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Bei kritischem Fehlschlag beim Aktivieren/Benutzen einer Kraft gerät diese komplett außer Kontrolle: falsches Ziel, gegenteiliger Effekt oder gewaltiger Kollateralschaden. Benötigt Kräfte mit Aktivierungswurf.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Redenschwinger": {
+      "name": "Redenschwinger",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Bei Kreuz-Aktionskarte: Verstandsprobe -2 oder ganzen Zug mit Monolog vergeuden (Untergang ankündigen, Erfolge feiern etc.). Kann sich bewegen und freie Aktionen ausführen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Schutzbefohlener (leicht)": {
+      "name": "Schutzbefohlener",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Person des Anfänger-Rangs ohne Kräfte, der Held sich verschrieben hat. Erscheint ab und zu, gerät in Schwierigkeiten, plaudert Geheimnisse aus. Bei Tod: 1 Punkt Entschlossenheit (+1 für Gerechtigkeit/Rache).",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Schutzbefohlener (schwer)": {
+      "name": "Schutzbefohlener",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Wie leicht, aber erscheint relativ häufig in der Kampagne.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Totkrank (leicht)": {
+      "name": "Totkrank",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Tödliche unheilbare Krankheit. -1 auf Proben gegen Erschöpfung. Kritischer Fehlschlag: wird schwer. Aufstieg kann leichtes Handicap heilen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Totkrank (schwer)": {
+      "name": "Totkrank",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Tödliche unheilbare Krankheit. -2 auf Proben gegen Erschöpfung. Kritischer Fehlschlag bei Konstitutionsprobe: Tod in dieser Sitzung (1 Punkt Entschlossenheit). Aufstieg wandelt schwer in leicht.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Transformation (leicht)": {
+      "name": "Transformation",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Muss sich transformieren für Kräftezugriff. Leicht: Fokusprobe als Aktion, kontrolliert.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Transformation (schwer)": {
+      "name": "Transformation",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Schwierige Transformation: ganze Minute+, externer Auslöser (Angeschlagen, Vollmond, Blut etc.). Fokusprobe um Verwandlung zu verhindern. Eventuell zweiter Charakterbogen nötig.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Umweltschwäche": {
+      "name": "Umweltschwäche",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Anfälliger gegen bestimmten Krafttyp (Kälte, Feuer, Mental etc.). +4 Schaden bei Treffern dieses Typs, -4 auf Widerstandswürfe. Kann mehrfach gewählt werden.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verwundbarkeit (leicht)": {
+      "name": "Verwundbarkeit",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Kontakt mit bestimmter Substanz innerhalb 12\" macht Abgelenkt.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verwundbarkeit (schwer)": {
+      "name": "Verwundbarkeit",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Wie leicht, plus: Konstitutionsprobe oder 1 Stufe Erschöpfung (kann zum Tod führen).",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    }
+  },
+  "talente": {
+    "Der Beste": {
+      "name": "Der Beste",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [],
+      "beschreibung": "Kraftobergrenze entspricht halben maximalen SKP (statt einem Drittel). Beispiel Stufe II: max 15 statt 10 SKP in eine Kraft.",
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Superkräfte": {
+      "name": "Superkräfte",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [],
+      "beschreibung": "Gewährt Superkraftpunkte je nach Kampagnen-Machtstufe (I: 15, II: 30, III: 45, IV: 60, V: 75). Normalerweise kostenlos in Superwesen-Kampagnen.",
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Treffer einstecken": {
+      "name": "Treffer einstecken",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "KON W10",
+        "Eisenkiefer"
+      ],
+      "beschreibung": "Freie Wurfwiederholung beim Schaden wegstecken und bei Konstitutionsproben gegen K.O.-Schläge.",
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Teamführer": {
+      "name": "Teamführer",
+      "kategorie": "Anführer",
+      "rang": "F",
+      "voraussetzungen": [
+        "Anführen",
+        "Geborener Anführer",
+        "Selbstlos"
+      ],
+      "beschreibung": "Alle Verbündeten in Befehlsreichweite können Bennys austauschen als hätten sie Selbstlos.",
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Dynamisches Duo": {
+      "name": "Dynamisches Duo",
+      "kategorie": "Sozial",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W8"
+      ],
+      "beschreibung": "Wähle einen Partner. Bei erfolgreichem Kombinationsangriff addiere Fertigkeitsbonus UND Bonusschaden. Kann mehrfach gewählt werden für verschiedene Verbündete.",
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Handlanger": {
+      "name": "Handlanger",
+      "kategorie": "Sozial",
+      "rang": "V",
+      "voraussetzungen": [
+        "Wildcard"
+      ],
+      "beschreibung": "SWAE-Handlanger ab Veteran. Handlanger erhält SKP gleich der Kraftobergrenze des Mentors (ohne eigene Kraftobergrenze).",
+      "ausgewaehlt": false,
+      "aktiv": true
+    }
+  },
+  "kraft_modifikatoren": {
+    "Abhängig": {
+      "name": "Abhängig",
+      "kosten": 0,
+      "beschreibung": "Abhängige Kräfte werden nur aktiviert wenn primäre Aktion erfolgreich. Nicht eigenständig nutzbar. Einmal pro Aktion. Verwendet Reichweite und Eigenschaftsprobe der primären Kraft."
+    },
+    "Verknüpft": {
+      "name": "Verknüpft",
+      "kosten": 2,
+      "beschreibung": "Wie Abhängig, aber auch eigenständig nutzbar. +2 SKP."
+    },
+    "Alternative Eigenschaft": {
+      "name": "Alternative Eigenschaft",
+      "kosten": 1,
+      "beschreibung": "Kraft verwendet andere Fertigkeit als Standard (z.B. Zaubern statt Fokus). Muss narrativ Sinn ergeben. Beeinflusst keine Talentvoraussetzungen."
+    },
+    "Apparatur (leicht)": {
+      "name": "Apparatur",
+      "kosten": -1,
+      "beschreibung": "Kraft als tragbarer Gegenstand (Rüstung, Maske, Helm, Gürtel). Schwer zu entfernen. -1 SKP. Funktioniert nie für andere Charaktere."
+    },
+    "Apparatur (schwer)": {
+      "name": "Apparatur",
+      "kosten": -2,
+      "beschreibung": "Kraft als Handgegenstand (Amulett, Zauberstab, Pistole). Leicht entfernbar/entwaffnbar. -2 SKP. Funktioniert nie für andere Charaktere."
+    },
+    "Einschränkung (selten)": {
+      "name": "Einschränkung",
+      "kosten": -1,
+      "beschreibung": "Seltene Einschränkung verhindert Kraftnutzung gelegentlich. -1 SKP."
+    },
+    "Einschränkung (üblich)": {
+      "name": "Einschränkung",
+      "kosten": -2,
+      "beschreibung": "Kraft funktioniert ca. die Hälfte der Zeit nicht (nur nachts, nur drinnen, nur gegen Männer etc.). -2 SKP."
+    },
+    "Kraftvoll": {
+      "name": "Kraftvoll",
+      "kosten": 2,
+      "beschreibung": "+1W6 auf Wegschleudern-Distanz."
+    },
+    "Reichweite (doppelt)": {
+      "name": "Reichweite",
+      "kosten": 2,
+      "beschreibung": "Verdoppelt alle Reichweiten der Kraft."
+    },
+    "Reichweite (dreifach)": {
+      "name": "Reichweite",
+      "kosten": 4,
+      "beschreibung": "Verdreifacht alle Reichweiten der Kraft."
+    },
+    "Schwere Waffe": {
+      "name": "Schwere Waffe",
+      "kosten": 1,
+      "beschreibung": "Angriff zählt als Schwere Waffe, durchdringt Schwere Panzerung."
+    },
+    "Selektiv": {
+      "name": "Selektiv",
+      "kosten": 1,
+      "beschreibung": "Wähle welche individuellen Ziele im Flächeneffekt betroffen sind."
+    },
+    "Speziell": {
+      "name": "Speziell",
+      "kosten": "variabel",
+      "beschreibung": "Spezifische Modifikatoren die in keine andere Kategorie passen. Normalerweise -2 bis +2 SKP."
+    },
+    "Umschaltbar": {
+      "name": "Umschaltbar",
+      "kosten": 1,
+      "beschreibung": "+1 SKP pro Variation. Mehrere Versionen derselben Kraft. Wechsel als eingeschränkte freie Aktion. Jede Variation muss gleich oder weniger als Original kosten."
+    }
+  },
+  "krafte": {
+    "Absorption": {
+      "name": "Absorption",
+      "kosten": 2,
+      "beschreibung": "Absorbiert bestimmten Krafttyp. Freier Schaden-Wegsteck-Wurf mit Fokus statt Konstitution bei Wunden durch gewählten Krafttyp.",
+      "modifikatoren": {
+        "Achillesferse": {
+          "kosten": -1,
+          "beschreibung": "2 Krafttypen können nicht absorbiert werden (nur mit Zusätzliche Krafttypen +4/+8)"
+        },
+        "Meisterschaft": {
+          "kosten": 1,
+          "beschreibung": "+2 auf Fokus für bestimmten Krafttyp"
+        },
+        "Reflexion": {
+          "kosten": 2,
+          "beschreibung": "Absorbierte Wunden auf Feind innerhalb 12\" umlenken"
+        },
+        "Transfer": {
+          "kosten": 2,
+          "beschreibung": "Pro absorbierte Wunde ein Attribut +1 Würfeltyp (5 Runden, max +4)"
+        },
+        "Umwandeln": {
+          "kosten": 3,
+          "beschreibung": "Marker pro absorbierte Wunde: Kraft-Stunt, +1 Robustheit oder +1W6 Schaden"
+        },
+        "Wachstum": {
+          "kosten": 3,
+          "beschreibung": "Pro absorbierte Wunde +1 Größe (Stärke/Robustheit steigen)"
+        },
+        "Zusätzliche Krafttypen": {
+          "kosten": "1/2/4/8",
+          "beschreibung": "+1 Typ/+3 Typen/alle einer Kategorie/alle Typen"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Alterslos": {
+      "name": "Alterslos",
+      "kosten": 1,
+      "beschreibung": "Wird niemals alt. Permanent gewähltes Alter.",
+      "modifikatoren": {
+        "Sehr alt": {
+          "kosten": 2,
+          "beschreibung": "+2 auf Verstand- und Allgemeinwissenproben"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Aquatisch": {
+      "name": "Aquatisch",
+      "kosten": "1/2",
+      "beschreibung": "1 SKP: semiaquatisch, 15 Min Atem anhalten. 2 SKP: kann nicht ertrinken, volle BW beim Schwimmen.",
+      "modifikatoren": {
+        "Schneller Schwimmer": {
+          "kosten": "1/2",
+          "beschreibung": "BW+2 oder BW+4 beim Schwimmen"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Atmet nicht": {
+      "name": "Atmet nicht",
+      "kosten": 1,
+      "beschreibung": "Kann Atem 15 Minuten lang anhalten.",
+      "modifikatoren": {
+        "Extrem": {
+          "kosten": 1,
+          "beschreibung": "Atmet gar nicht. Immun gegen Atemgifte, kein Ertrinken, kein Ersticken im Vakuum."
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ausweichen": {
+      "name": "Ausweichen",
+      "kosten": "1-5",
+      "beschreibung": "Direkte Fernkampfangriffe (Schießen/Athletik) -1 pro SKP (max -5). Kumulativ bis max -10. Kein Schutz gegen Flächenangriffe.",
+      "modifikatoren": {
+        "Umlenken": {
+          "kosten": 2,
+          "beschreibung": "Verfehlte Fernkampfangriffe 1x/Zug zurücklenken per Fokusprobe (-2 Feuerwaffe, -4 Energiewaffe)"
+        },
+        "Verteidiger": {
+          "kosten": "2/4",
+          "beschreibung": "Schutz auf MFS/GFS zentriert auf Held"
+        },
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion, Kraftverlust bei Konzentrationsverlust"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Betäuben": {
+      "name": "Betäuben",
+      "kosten": 3,
+      "beschreibung": "Fokusprobe, Ziel in 6\" legt Konstitutionsprobe ab (-2 bei Steigerung). Fehlschlag: Betäubt.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        },
+        "Flächeneffekt": {
+          "kosten": "2/4",
+          "beschreibung": "MFS für +2 oder MFS/GFS für +4"
+        },
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "Zusätzlich -2 auf Konstitutionsprobe des Ziels"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Bewegungsweite": {
+      "name": "Bewegungsweite",
+      "kosten": 2,
+      "beschreibung": "BW +2, Sprintwürfel +1 Würfeltyp. Kumulativ zu Flink.",
+      "modifikatoren": {
+        "Lange Schritte": {
+          "kosten": 1,
+          "beschreibung": "Ignoriert Schwieriges Gelände"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Blenden": {
+      "name": "Blenden",
+      "kosten": 2,
+      "beschreibung": "Fokusprobe vs Konstitution auf Ziel in 12\". Erfolg: -2 auf sichtbasierte Aktionen (-4 bei Steigerung). Abschütteln: KON als freie Aktion am Zugende.",
+      "modifikatoren": {
+        "Flächeneffekt": {
+          "kosten": "2/3",
+          "beschreibung": "MFS für +2, GFS für +3"
+        },
+        "Stark": {
+          "kosten": 1,
+          "beschreibung": "-2 auf Konstitutionsprobe zum Abschütteln"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Chamäleon": {
+      "name": "Chamäleon",
+      "kosten": 3,
+      "beschreibung": "Aussehen anderer Wesen annehmen (±2 Größe). Fokusprobe als Aktion. Wahrnehmung vs Darbietung zum Durchschauen. Kraftverlust.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren zum Kopieren"
+        },
+        "Biometrik": {
+          "kosten": 2,
+          "beschreibung": "Kopiert Stimme, Fingerabdrücke, Netzhäute. Wahrnehmung -2"
+        },
+        "Unbelebtes Objekt": {
+          "kosten": 2,
+          "beschreibung": "Kann Gestalt unbelebter Objekte annehmen (±2 Größe)"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Duplikation": {
+      "name": "Duplikation",
+      "kosten": "4/Stufe",
+      "beschreibung": "Fokusprobe erzeugt Klon-Statisten (alle Kräfte außer Duplikation). Fortschicken als eingeschränkte freie Aktion. Ausgeschaltet: 1h nicht beschwörbar. Kraftverlust.",
+      "modifikatoren": {
+        "Ausgerüstet": {
+          "kosten": 2,
+          "beschreibung": "Duplikate haben normale Gegenstände (einfache Versionen magischer Items)"
+        },
+        "Beförderung": {
+          "kosten": 2,
+          "beschreibung": "Bei Ausschaltung wird ein Duplikat zum neuen Wildcard"
+        },
+        "Kein Kennzeichen": {
+          "kosten": 1,
+          "beschreibung": "Wahrnehmung -4 statt -2 um Duplikat zu erkennen"
+        },
+        "Leine": {
+          "kosten": -2,
+          "beschreibung": "Duplikate verschwinden bei >12\" Entfernung"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Eigenschaft erhöhen/senken": {
+      "name": "Eigenschaft erhöhen/senken",
+      "kosten": 2,
+      "beschreibung": "Fokusprobe auf Ziel in 12\". Erhöht/senkt gewählte Eigenschaft um 1 (2 bei Steigerung, min W4). Bis Ende nächsten Zugs des Ziels. Max ±2 Würfeltypen.",
+      "modifikatoren": {
+        "Zusätzliche Empfänger": {
+          "kosten": 1,
+          "beschreibung": "+1 zusätzliches Ziel pro Auswahl"
+        },
+        "Beliebige Eigenschaft": {
+          "kosten": 2,
+          "beschreibung": "Kann spontan jedes Attribut/jede Fertigkeit beeinflussen"
+        },
+        "Absaugen": {
+          "kosten": 2,
+          "beschreibung": "Bei Senken: eigene entsprechende Eigenschaft +1 Würfeltyp"
+        },
+        "Macht": {
+          "kosten": 2,
+          "beschreibung": "Verbesserter Verbündeter erhält freie Wurfwiederholung (1x/Runde, 1x/Aktion bei Steigerung)"
+        },
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziele berühren"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Energiekontrolle": {
+      "name": "Energiekontrolle",
+      "kosten": 5,
+      "beschreibung": "Beeinflusst Energie-Krafttyp in MFS bis 12\" entfernt. Bewegbar 12\"/Zug. Effekte (eingeschränkte freie Aktion): Schaden 2W6, Dämpfen (Umweltresistenz), Verdunkeln, Ablenken. Kraftverlust.",
+      "modifikatoren": {
+        "Flächeneffekt": {
+          "kosten": 2,
+          "beschreibung": "Erweitert auf GFS"
+        },
+        "Macht": {
+          "kosten": 5,
+          "beschreibung": "Schaden 4W6, Immunität, Dunkle Umgebung, Abgelenkt+Verwundbar"
+        },
+        "Material erforderlich": {
+          "kosten": "-1/-2",
+          "beschreibung": "Kann keine Energie erschaffen (-1 häufig, -2 selten)"
+        },
+        "Zusätzlicher Krafttyp": {
+          "kosten": 1,
+          "beschreibung": "+1 Krafttyp pro Auswahl"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Erdbeben": {
+      "name": "Erdbeben",
+      "kosten": 2,
+      "beschreibung": "Erde beben als Aktion: Kegel, GFS in 24\" oder Linie 2\"x12\". Wegspringen oder Angeschlagen. Krit. Fehlschlag: 3W6 Schaden. Kann echtes Beben an Verwerfungslinien auslösen. Kann Beben auch stoppen.",
+      "modifikatoren": {
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "Wegspringen -2, Gebäude erleiden beträchtlichen Schaden"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Explodieren": {
+      "name": "Explodieren",
+      "kosten": 2,
+      "beschreibung": "Eingeschränkte Aktion + Fokuswurf. GFS zentriert auf Held, Wegspringen (-2 bei Steigerung) oder 3W10 Schaden (4W10 bei Steigerung). Held danach Angeschlagen.",
+      "modifikatoren": {
+        "Großer Knall": {
+          "kosten": 2,
+          "beschreibung": "5W10 Schaden, Held danach Betäubt"
+        },
+        "Sicherung": {
+          "kosten": 1,
+          "beschreibung": "Explodiert automatisch bei Ausschaltung"
+        },
+        "Temporäre Auflösung": {
+          "kosten": -1,
+          "beschreibung": "Körper löst sich auf, Fokus zum Neuformen"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fahrzeug": {
+      "name": "Fahrzeug",
+      "kosten": 1,
+      "beschreibung": "Spezielles anpassbares Fahrzeug. Basis: Größe 0, Manövrierfähigkeit 0, 90 km/h, Robustheit 9(2), 1 Sitz. Ersatz bei Zerstörung (nächste Sitzung oder 1 Entschlossenheit).",
+      "modifikatoren": {
+        "Fliegen": {
+          "kosten": 1,
+          "beschreibung": "Fliegt mit 90 km/h, Senkrechtstarter"
+        },
+        "Gepanzert": {
+          "kosten": "2/4",
+          "beschreibung": "4 Panzerung statt 2 / Schwere Panzerung"
+        },
+        "Größe": {
+          "kosten": "1/Größe",
+          "beschreibung": "+1 Größe und Robustheit pro SKP (max Größe 11)"
+        },
+        "Kugelsicheres Glas": {
+          "kosten": 1,
+          "beschreibung": "Härte 12 in allen Fenstern"
+        },
+        "Manövrierfähigkeit": {
+          "kosten": "1/2",
+          "beschreibung": "+1/+2 Manövrierfähigkeit"
+        },
+        "Passagiere": {
+          "kosten": "1/2/4",
+          "beschreibung": "+1/+2 pro Größe/+4 pro Größe Passagiere"
+        },
+        "Schleudersitze": {
+          "kosten": 1,
+          "beschreibung": "Freie Aktion: Passagiere sicher rausschleudern"
+        },
+        "Superkräfte": {
+          "kosten": "2/5",
+          "beschreibung": "Kraftobergrenze/volle Machtstufen-SKP an Kräften"
+        },
+        "Unterseeboot": {
+          "kosten": 1,
+          "beschreibung": "Kann unter Wasser operieren"
+        },
+        "Weltraumtauglich": {
+          "kosten": 1,
+          "beschreibung": "Kann im Weltraum operieren"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fehlfunktion": {
+      "name": "Fehlfunktion",
+      "kosten": 3,
+      "beschreibung": "Fokusprobe gegen Technologie/Maschine in Reichweite. Erfolg: Fehlfunktion. Steigerung: Zerstörung.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fernkampfangriff": {
+      "name": "Fernkampfangriff",
+      "kosten": "speziell",
+      "beschreibung": "Fernkampfangriff mit gewählter Eigenschaft. Reichweite 12/24/48. Schaden abhängig von SKP: 2 SKP = 2W6, 4 SKP = 3W6, 6 SKP = 4W6, 8 SKP = 5W6, 10 SKP = 6W6.",
+      "modifikatoren": {
+        "Flächeneffekt": {
+          "kosten": "2/3",
+          "beschreibung": "KFS/MFS/GFS, Schaden durch Fläche"
+        },
+        "Feuerrate": {
+          "kosten": 1,
+          "beschreibung": "FR 2 für +1, FR 3 für +2, FR 4 für +3"
+        },
+        "Schmettern": {
+          "kosten": "1/3",
+          "beschreibung": "+1W6/+2W6 Schaden bei Steigerung"
+        },
+        "Panzerbrechend": {
+          "kosten": "1 pro 2 PB",
+          "beschreibung": "Panzerbrechend +2 pro SKP"
+        },
+        "Betäubung": {
+          "kosten": 0,
+          "beschreibung": "Verursacht Betäubungsschaden statt tödlichem"
+        },
+        "Kegelschablone": {
+          "kosten": 1,
+          "beschreibung": "Kegelschablone statt Reichweite"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fertigkeitsbonus": {
+      "name": "Fertigkeitsbonus",
+      "kosten": "2/4",
+      "beschreibung": "+1 auf gewählte Fertigkeit (2 SKP) oder +2 (4 SKP).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fesseln": {
+      "name": "Fesseln",
+      "kosten": 3,
+      "beschreibung": "Fokusprobe auf Ziel in 12\". Erfolg: Festgehalten. Steigerung: Gebunden. Opfer kann sich mit Stärke oder Geschicklichkeit -2 befreien.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        },
+        "Flächeneffekt": {
+          "kosten": "2/4",
+          "beschreibung": "MFS/GFS"
+        },
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "Zusätzlich -2 auf Befreiungswürfe"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fliegen": {
+      "name": "Fliegen",
+      "kosten": "2-18",
+      "beschreibung": "Flugfähigkeit. Kosten nach Geschwindigkeit: 2=12\", 4=24\", 6=BW 48, 10=Mach 1, 14=Mach 2, 18=Lichtgeschwindigkeit.",
+      "modifikatoren": {
+        "Unbeholfen": {
+          "kosten": -2,
+          "beschreibung": "-1 auf Aktionen in der Luft"
+        },
+        "Senkrechtstarter": {
+          "kosten": 1,
+          "beschreibung": "Kann senkrecht starten/landen"
+        },
+        "Weltraumflug": {
+          "kosten": 2,
+          "beschreibung": "Kann im Weltraum fliegen"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Furcht": {
+      "name": "Furcht",
+      "kosten": 2,
+      "beschreibung": "Fokusprobe, Ziel in 6\" legt Furchtprobe ab.",
+      "modifikatoren": {
+        "Beförderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren oder sich in 2\" befinden"
+        },
+        "Flächeneffekt": {
+          "kosten": "2/4",
+          "beschreibung": "MFS/GFS"
+        },
+        "Schrecken": {
+          "kosten": 2,
+          "beschreibung": "Furchtprobe -2"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Furchtlos": {
+      "name": "Furchtlos",
+      "kosten": 2,
+      "beschreibung": "Komplett immun gegen Furcht und Einschüchtern.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gedankenkontrolle": {
+      "name": "Gedankenkontrolle",
+      "kosten": 5,
+      "beschreibung": "Fokusprobe vs Willenskraft auf Ziel in 12\". Fehlschlag des Ziels: kontrolliert. Pro Runde Willenskraftprobe zum Befreien (-2 bei Steigerung).",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        },
+        "Flächeneffekt": {
+          "kosten": "4",
+          "beschreibung": "GFS"
+        },
+        "Marionette": {
+          "kosten": 3,
+          "beschreibung": "Volle Kontrolle über Körper des Ziels"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gedankenlesen": {
+      "name": "Gedankenlesen",
+      "kosten": 3,
+      "beschreibung": "Fokusprobe vs Verstand auf Ziel in 12\". Erfolg: Oberflächengedanken. Steigerung: tiefe Erinnerungen/Geheimnisse.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gedankenschild": {
+      "name": "Gedankenschild",
+      "kosten": 1,
+      "beschreibung": "-2 auf Gedankenlesen oder Gedankenkontrolle gegen diesen Helden.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Genie": {
+      "name": "Genie",
+      "kosten": 2,
+      "beschreibung": "Freie Wurfwiederholung auf alle Verstandproben und verstandbasierte Fertigkeiten.",
+      "modifikatoren": {
+        "Beförderlich": {
+          "kosten": -2,
+          "beschreibung": "Bonus nur auf eine bestimmte Fertigkeit statt alle"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Geschärfte Sinne": {
+      "name": "Geschärfte Sinne",
+      "kosten": "speziell",
+      "beschreibung": "Wähle je 1 SKP: Adleraugen (Entfernungsabzüge -1), Scharfe Sinne (+2 Wahrnehmung), Infravision (halbe Dunkelheitsabzüge gegen warme Ziele), Nachtsicht (ignoriere düster/dunkel), Mikrosicht, Röntgensicht, Geruchssinn (+2 Überleben), Durchblick (ignoriere 2 Punkte Deckung).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Geschwindigkeit": {
+      "name": "Geschwindigkeit",
+      "kosten": "3-17",
+      "beschreibung": "Erhöhte Bewegungsweite: 3=BW 12, 5=BW 24, 7=BW 48, 9=Schall (ca. 1200 km/h), 13=Lichtgeschw. Ab Schall: -2 auf Angriffe gegen Speedster.",
+      "modifikatoren": {
+        "Fähig": {
+          "kosten": 1,
+          "beschreibung": "Ignoriere -2 Angriffsabzug durch Geschwindigkeit ab Schall"
+        },
+        "Blitzschnell": {
+          "kosten": 2,
+          "beschreibung": "Kann in einer Runde angreifen und volle Strecke zurücklegen"
+        },
+        "Unbeholfen": {
+          "kosten": -2,
+          "beschreibung": "-1 auf Angriffsproben bei voller Geschwindigkeit"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gestaltwandel": {
+      "name": "Gestaltwandel",
+      "kosten": "2/Stufe",
+      "beschreibung": "Nimmt Tiergestalt an mit 1 Größenunterschied pro Stufe. Erhält natürliche Fähigkeiten des Tieres. Fokusprobe als Aktion.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gift": {
+      "name": "Gift",
+      "kosten": 2,
+      "beschreibung": "Ziel legt jede Runde Konstitutionsprobe ab, sonst 1 Stufe Erschöpfung. Kann zum Tod führen.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        },
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "-2 auf Konstitutionsproben"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Graben": {
+      "name": "Graben",
+      "kosten": 1,
+      "beschreibung": "Halbe BW durch weiche Erde.",
+      "modifikatoren": {
+        "Schnell": {
+          "kosten": 1,
+          "beschreibung": "Volle BW durch Erde"
+        },
+        "Tunnel": {
+          "kosten": 1,
+          "beschreibung": "Hinterlässt nutzbaren Tunnel"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heilung": {
+      "name": "Heilung",
+      "kosten": 3,
+      "beschreibung": "Fokusprobe als Aktion heilt 1 Wunde (2 bei Steigerung). Nicht auf sich selbst anwendbar.",
+      "modifikatoren": {
+        "Auferstehung": {
+          "kosten": 2,
+          "beschreibung": "Kann kürzlich Verstorbene wiederbeleben"
+        },
+        "Selbstheilung": {
+          "kosten": 2,
+          "beschreibung": "Kann auch sich selbst heilen"
+        },
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Hörner": {
+      "name": "Hörner",
+      "kosten": 1,
+      "beschreibung": "Siehe Nahkampfangriff (Hörner verursachen Stä+W6 PB2 bei Ansturm).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Illusion": {
+      "name": "Illusion",
+      "kosten": 4,
+      "beschreibung": "Fokusprobe erzeugt visuelle Szene in GFS bis 12\". Wahrnehmung vs Fokus zum Durchschauen. Kraftverlust.",
+      "modifikatoren": {
+        "Audio": {
+          "kosten": 1,
+          "beschreibung": "Illusion erzeugt auch Geräusche"
+        },
+        "Haptisch": {
+          "kosten": 2,
+          "beschreibung": "Illusion fühlt sich real an"
+        },
+        "Persistent": {
+          "kosten": 2,
+          "beschreibung": "Illusion bleibt ohne Konzentration bestehen"
+        },
+        "Schmerz": {
+          "kosten": 3,
+          "beschreibung": "Illusion kann tatsächlich Schaden verursachen"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Immun gegen Gifte/Krankheiten": {
+      "name": "Immun gegen Gifte/Krankheiten",
+      "kosten": 1,
+      "beschreibung": "Immun gegen Gifte oder Krankheiten (wähle eins bei Erwerb).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Inbesitznahme": {
+      "name": "Inbesitznahme",
+      "kosten": 5,
+      "beschreibung": "Fokus vs Willenskraft. Bei Misserfolg des Ziels: Übernahme des Körpers. Eigener Körper reglos.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Infektion": {
+      "name": "Infektion",
+      "kosten": 2,
+      "beschreibung": "Fokus auf Ziel in 6\". Konstitutionsprobe jede Runde oder Erschöpfung. Kann zum Tod führen.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        },
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "-2 auf Konstitutionsproben"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Interface": {
+      "name": "Interface",
+      "kosten": 2,
+      "beschreibung": "+2 auf Elektronik und Hacken.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Isst nicht": {
+      "name": "Isst nicht",
+      "kosten": 1,
+      "beschreibung": "Überlebt doppelt so lang ohne Nahrung.",
+      "modifikatoren": {
+        "Extrem": {
+          "kosten": 1,
+          "beschreibung": "Braucht gar keine Nahrung"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kampfsinn": {
+      "name": "Kampfsinn",
+      "kosten": "1/Stufe",
+      "beschreibung": "Ignoriert 1 Punkt Angriffsabzüge pro Stufe (Ausweichen, Flug-/Geschwindigkeitsabzüge etc.). Nicht gegen Parade oder Block.",
+      "modifikatoren": {
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion, Kraftverlust"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Keine inneren Organe": {
+      "name": "Keine inneren Organe",
+      "kosten": 1,
+      "beschreibung": "Angriffe auf Angesagte Ziele verursachen keinen Bonusschaden.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Konstrukt": {
+      "name": "Konstrukt",
+      "kosten": 8,
+      "beschreibung": "+2 Erholung gegen Angeschlagen, ignoriere 1 Wundabzug, atmet/isst nicht, immun gegen Krankheiten/Gifte, verblutet nicht. Wunden via Reparieren (1h/Wundstufe). Keine Goldene Stunde.",
+      "modifikatoren": {
+        "Abhängigkeit": {
+          "kosten": -2,
+          "beschreibung": "Muss 1h/Tag aufladen, sonst Erschöpfung"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kraftfeld": {
+      "name": "Kraftfeld",
+      "kosten": "1/Stufe",
+      "beschreibung": "Verringert erlittenen Schaden um 1 pro Stufe (max -10). Kraftverlust.",
+      "modifikatoren": {
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion"
+        },
+        "Beweglich": {
+          "kosten": 1,
+          "beschreibung": "Feld bis 12\" entfernt aktivierbar und bewegbar"
+        },
+        "Flächeneffekt": {
+          "kosten": "2/4",
+          "beschreibung": "MFS/GFS zentriert auf Held"
+        },
+        "Lebenserhaltung": {
+          "kosten": 2,
+          "beschreibung": "Versiegelt: ignoriert Umgebungseffekte, Toxine, Weltraum"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Lakaien": {
+      "name": "Lakaien",
+      "kosten": "2/Lakai",
+      "beschreibung": "Loyale Statisten unter Kontrolle des Spielers. Mehrfach wählbar für verschiedene Lakaien-Sätze.",
+      "modifikatoren": {
+        "Superkräfte": {
+          "kosten": 2,
+          "beschreibung": "Lakaien erhalten SKP gleich Kraftobergrenze"
+        },
+        "Wildcard": {
+          "kosten": 4,
+          "beschreibung": "Ein Lakai ist ein Wildcard"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Maschinenkontrolle": {
+      "name": "Maschinenkontrolle",
+      "kosten": "speziell",
+      "beschreibung": "Kontrolliert elektrische/elektronische Geräte. Fokus als Aktion. Kosten nach Größe/Komplexität.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Materiekontrolle": {
+      "name": "Materiekontrolle",
+      "kosten": 5,
+      "beschreibung": "Manipuliert Materie-Krafttyp in MFS bis 12\". Form bilden (Härte 10), Schaden 2W6, Umweltresistenz, Ablenken. Kraftverlust.",
+      "modifikatoren": {
+        "Flächeneffekt": {
+          "kosten": 2,
+          "beschreibung": "Erweitert auf GFS"
+        },
+        "Macht": {
+          "kosten": 5,
+          "beschreibung": "Schaden 4W6, Immunität, dunkle Umgebung, Abgelenkt+Verwundbar"
+        },
+        "Material erforderlich": {
+          "kosten": "-1/-2",
+          "beschreibung": "Material muss vorhanden sein (-1 häufig, -2 selten)"
+        },
+        "Zusätzlicher Krafttyp": {
+          "kosten": 1,
+          "beschreibung": "+1 Krafttyp pro Auswahl"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Nachahmen": {
+      "name": "Nachahmen",
+      "kosten": "1/Stufe",
+      "beschreibung": "Ahmt Kräfte eines anderen Superwesens in 6\" nach. Stufe = max nachgeahmte SKP. Fokusprobe als Aktion. Kraftverlust.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Nahkampfangriff": {
+      "name": "Nahkampfangriff",
+      "kosten": "speziell",
+      "beschreibung": "Erhöht Nahkampfschaden. 1 SKP = Stä+W4, 2 SKP = Stä+W6, 3 SKP = Stä+W8, 4 SKP = Stä+W10, 5 SKP = Stä+W12, 7 SKP = Stä+W12+W4, etc. Diverse Formen: Klauen, Biss, Hörner, Schwanz.",
+      "modifikatoren": {
+        "Panzerbrechend": {
+          "kosten": "1 pro 2 PB",
+          "beschreibung": "Panzerbrechend +2 pro SKP"
+        },
+        "Reichweite": {
+          "kosten": "1-3",
+          "beschreibung": "+1 Reichweite pro SKP"
+        },
+        "Schmettern": {
+          "kosten": "1/3",
+          "beschreibung": "+1W6/+2W6 bei Steigerung"
+        },
+        "Schwere Waffe": {
+          "kosten": 1,
+          "beschreibung": "Zählt als Schwere Waffe"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Negierung": {
+      "name": "Negierung",
+      "kosten": 3,
+      "beschreibung": "Fokus vs Willenskraft auf Ziel in 12\". Negiert eine Kraft des Ziels (Wahl des Anwenders). Ziel: jede Runde Willenskraftprobe zum Befreien.",
+      "modifikatoren": {
+        "Alle Kräfte": {
+          "kosten": 5,
+          "beschreibung": "Negiert ALLE Kräfte des Ziels auf einmal"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Objekt auslesen": {
+      "name": "Objekt auslesen",
+      "kosten": 2,
+      "beschreibung": "Fokusprobe enthüllt vage Eindrücke der Geschichte des Objekts. Steigerung: detailliertere Informationen.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Panzerung": {
+      "name": "Panzerung",
+      "kosten": "1/Stufe",
+      "beschreibung": "+2 Panzerung pro SKP. Immer aktiv, überall am Körper.",
+      "modifikatoren": {
+        "Schwere Panzerung": {
+          "kosten": 1,
+          "beschreibung": "Panzerung gilt als Schwere Panzerung"
+        },
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Parade": {
+      "name": "Parade",
+      "kosten": "1-5",
+      "beschreibung": "Parade +1 pro Stufe (max +5). Kumulativ zu allen anderen bis max +10.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Regeneration": {
+      "name": "Regeneration",
+      "kosten": "2/5/10",
+      "beschreibung": "Fokusprobe heilt Wunden. 2 SKP: 1x/24h. 5 SKP: 1x/Stunde. 10 SKP: 1x/Runde. Erfolg: 1 Wunde, Steigerung: 2 Wunden.",
+      "modifikatoren": {
+        "Wiederbelebung": {
+          "kosten": 3,
+          "beschreibung": "Regeneriert auch nach Tod (1W4 Stunden)"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Reichweite": {
+      "name": "Reichweite",
+      "kosten": "1-3",
+      "beschreibung": "Natürliche Gliedmaßen haben Reichweite +1 pro SKP (max +3).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Robustheit": {
+      "name": "Robustheit",
+      "kosten": "1/Stufe",
+      "beschreibung": "+1 Robustheit pro Stufe.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Scannen": {
+      "name": "Scannen",
+      "kosten": 2,
+      "beschreibung": "Spürt Ziele/Objekte eines bestimmten Krafttyps in großem Radius.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schadensfeld": {
+      "name": "Schadensfeld",
+      "kosten": "speziell",
+      "beschreibung": "Als Aktion Schaden bei angrenzenden Charakteren. Kosten wie Fernkampfangriff. Fokus als Aktion. Wegspringen möglich.",
+      "modifikatoren": {
+        "Flächeneffekt": {
+          "kosten": "2/4",
+          "beschreibung": "MFS/GFS"
+        },
+        "Selektiv": {
+          "kosten": 1,
+          "beschreibung": "Wähle betroffene Ziele"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schieben": {
+      "name": "Schieben",
+      "kosten": 1,
+      "beschreibung": "Kegelschablone: alle Abgelenkt. Bei Steigerung beim Fokuswurf werden Ziele weggeschleudert.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schläft nicht": {
+      "name": "Schläft nicht",
+      "kosten": 1,
+      "beschreibung": "Braucht nur halb so viel Schlaf.",
+      "modifikatoren": {
+        "Extrem": {
+          "kosten": 1,
+          "beschreibung": "Braucht gar keinen Schlaf"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schrumpfen": {
+      "name": "Schrumpfen",
+      "kosten": 4,
+      "beschreibung": "Größe bis -4 verringern (-1 auf Stärke pro Punkt). Angreifer -2 pro Größenunterschied.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schwingen": {
+      "name": "Schwingen",
+      "kosten": 2,
+      "beschreibung": "BW 12 vertikal/horizontal an Leine (Netz, Kabel, Ranke etc.).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Senden": {
+      "name": "Senden",
+      "kosten": 2,
+      "beschreibung": "Funk-, Fernseh- oder Internetsignale in 15 km sehen und hören.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Sprachen verstehen": {
+      "name": "Sprachen verstehen",
+      "kosten": 1,
+      "beschreibung": "Kann alle bekannten Sprachen sprechen. Neue Sprachen nach kurzem Kontakt.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Springen": {
+      "name": "Springen",
+      "kosten": "1-8",
+      "beschreibung": "Weite Sprünge. 1 SKP: 4\", 2 SKP: 8\", 4 SKP: 16\", 6 SKP: 32\", 8 SKP: 64\".",
+      "modifikatoren": {
+        "Todesstoß": {
+          "kosten": 2,
+          "beschreibung": "Landung verursacht Schaden wie Sturz an Gegnern unter dem Helden"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Superattribut": {
+      "name": "Superattribut",
+      "kosten": "2/Stufe",
+      "beschreibung": "Erhöht gewähltes Attribut und Maximum um 1 Würfeltyp pro Stufe.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Superfertigkeit": {
+      "name": "Superfertigkeit",
+      "kosten": "1/Stufe",
+      "beschreibung": "Erwirbt oder erhöht Fertigkeit und Maximum um 1 Würfeltyp pro Stufe.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Supertalent": {
+      "name": "Supertalent",
+      "kosten": "2/Stufe",
+      "beschreibung": "Erlernt 1 nicht-legendäres Talent pro Stufe (Voraussetzungen müssen erfüllt sein).",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Superwissenschaft": {
+      "name": "Superwissenschaft",
+      "kosten": 4,
+      "beschreibung": "Kann 'Gerät'-Kraft-Stunt basierend auf beliebiger Kraft verwenden. Gerät erstellen: Naturwissenschaften + Reparieren, 1 Stunde pro SKP.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Superzauberei": {
+      "name": "Superzauberei",
+      "kosten": 4,
+      "beschreibung": "Kann 'Zauber'-Kraft-Stunt basierend auf beliebiger Kraft verwenden. Zauber: Okkultismus oder Zaubern.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Telekinese": {
+      "name": "Telekinese",
+      "kosten": 3,
+      "beschreibung": "Bewegt Gegenstände ohne Berührung mit Stärke W6 in 12\".",
+      "modifikatoren": {
+        "Stärke": {
+          "kosten": "1/Stufe",
+          "beschreibung": "+1 Würfeltyp Stärke pro SKP"
+        },
+        "Fokussiert": {
+          "kosten": 2,
+          "beschreibung": "Kann als Waffe benutzen (Schießen-Wurf, Schaden = TK-Stärke)"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Telepathie": {
+      "name": "Telepathie",
+      "kosten": 2,
+      "beschreibung": "Kommuniziert mit intelligenten Bewusstseinen in 24\". Keine Sprachbarriere.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Teleportieren": {
+      "name": "Teleportieren",
+      "kosten": 2,
+      "beschreibung": "Teleportiert bis 12\" als Aktion. Muss Ziel sehen oder gut kennen.",
+      "modifikatoren": {
+        "Großer Sprung": {
+          "kosten": "2/4/6",
+          "beschreibung": "Verdoppelt/verdreifacht/vervierfacht Reichweite"
+        },
+        "Passagiere": {
+          "kosten": 1,
+          "beschreibung": "+1 Passagier pro SKP"
+        },
+        "Kampfteleport": {
+          "kosten": 2,
+          "beschreibung": "Als eingeschränkte freie Aktion statt Aktion"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Tiergefährte": {
+      "name": "Tiergefährte",
+      "kosten": "3+Größe",
+      "beschreibung": "Wildcard-Tiergefährte, Bennys teilbar. Größe bestimmt Zusatzkosten.",
+      "modifikatoren": {
+        "Superkräfte": {
+          "kosten": "2/5",
+          "beschreibung": "Gefährte erhält SKP"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Tierkontrolle": {
+      "name": "Tierkontrolle",
+      "kosten": "speziell",
+      "beschreibung": "Geistige Kontrolle und Kommunikation mit Tieren. Kosten nach Reichweite und Anzahl.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Umweltresistenz": {
+      "name": "Umweltresistenz",
+      "kosten": 1,
+      "beschreibung": "Ignoriert Hintergrundeffekte eines Krafttyps, -4 Schaden, +4 auf Widerstands-würfe.",
+      "modifikatoren": {
+        "Immunität": {
+          "kosten": 1,
+          "beschreibung": "Komplett immun gegen den Krafttyp (Hintergrundeffekte UND Schaden)"
+        },
+        "Zusätzlicher Krafttyp": {
+          "kosten": 1,
+          "beschreibung": "+1 Krafttyp pro Auswahl"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unberührbarkeit": {
+      "name": "Unberührbarkeit",
+      "kosten": 5,
+      "beschreibung": "Körperlos. Physische Angriffe wirkungslos. Energie-Krafttypen treffen normal. Kann durch feste Objekte gehen.",
+      "modifikatoren": {
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion"
+        },
+        "Immer an": {
+          "kosten": -2,
+          "beschreibung": "Kann keine physischen Gegenstände berühren"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unglaubliche Reflexe": {
+      "name": "Unglaubliche Reflexe",
+      "kosten": 3,
+      "beschreibung": "Wegspringen gegen alle Flächenangriffe auch wenn sonst nicht möglich. Ignoriert -2 wenn Wegspringen möglich.",
+      "modifikatoren": {
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unsichtbarkeit": {
+      "name": "Unsichtbarkeit",
+      "kosten": 8,
+      "beschreibung": "Unsichtbar: -4 auf Würfe gegen den Helden. Angriffe brechen Unsichtbarkeit nicht.",
+      "modifikatoren": {
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Untoter": {
+      "name": "Untoter",
+      "kosten": 8,
+      "beschreibung": "+2 Robustheit, +2 Erholung vs Angeschlagen, ignoriere 1 Wundabzug, atmet/isst nicht, immun gegen Krankheiten/Gifte, kein Bonusschaden durch Angesagte Ziele, verblutet nicht. Keine Heilung durch Heilen/natürliche Heilung.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Veränderte Gestalt": {
+      "name": "Veränderte Gestalt",
+      "kosten": 2,
+      "beschreibung": "Immun gegen Angesagte Ziele, halbes Wegschleudern, halber Aufprallschaden. Elastisch, formbar.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verdunkeln": {
+      "name": "Verdunkeln",
+      "kosten": 4,
+      "beschreibung": "Erzeugt GFS mit düsterer oder dunkler Beleuchtung (Wahl). Platzierbar in 12\". Kraftverlust.",
+      "modifikatoren": {
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "Pechschwarze Finsternis (-6)"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verfall": {
+      "name": "Verfall",
+      "kosten": 2,
+      "beschreibung": "Fokus auf Ziel in 6\". Verursacht 1 Wunde (ignoriert Panzerung) oder zerstört sehr kleines Objekt.",
+      "modifikatoren": {
+        "Berührung erforderlich": {
+          "kosten": -2,
+          "beschreibung": "Muss Ziel berühren"
+        },
+        "Stark": {
+          "kosten": 2,
+          "beschreibung": "Ignoriert auch Robustheit, 2 Wunden bei Steigerung"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verhexen": {
+      "name": "Verhexen",
+      "kosten": 4,
+      "beschreibung": "Feinde die einen Wurf gegen den Helden nicht schaffen sind Verwundbar. Kraftverlust.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verlangsamen": {
+      "name": "Verlangsamen",
+      "kosten": 2,
+      "beschreibung": "Fokus auf Ziel in 12\". Halbiert BW (Steigerung: BW wird Aktion). Bis Ende nächsten Zugs.",
+      "modifikatoren": {
+        "Flächeneffekt": {
+          "kosten": "2/4",
+          "beschreibung": "MFS/GFS"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wachstum": {
+      "name": "Wachstum",
+      "kosten": "3/Stufe",
+      "beschreibung": "Jede Stufe: +1 Größe, +1 Robustheit, +1 Stärke-Würfeltyp.",
+      "modifikatoren": {
+        "Aktivierung erforderlich": {
+          "kosten": -1,
+          "beschreibung": "Fokusprobe als Aktion"
+        },
+        "Monster": {
+          "kosten": 3,
+          "beschreibung": "Kann bis Riesig oder Gigantisch wachsen"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wandschreiter": {
+      "name": "Wandschreiter",
+      "kosten": 1,
+      "beschreibung": "Normale BW an Wänden, halbe BW an Decke.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Weltraumreisender": {
+      "name": "Weltraumreisender",
+      "kosten": 2,
+      "beschreibung": "Überlebt im Weltraum und unter Wasser ohne Luft.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wetterkontrolle": {
+      "name": "Wetterkontrolle",
+      "kosten": 7,
+      "beschreibung": "1 Stufe Umweltresistenz gegen Luft/Elektrisch/Feuer/Wasser. Außerhalb Kampf: Wetter in 7,5 km kontrollieren. Im Kampf: GFS mit Wettereffekten. Kraftverlust.",
+      "modifikatoren": {
+        "Blitzschlag": {
+          "kosten": 3,
+          "beschreibung": "Einmal pro Runde 3W10 Blitzschaden auf Ziel in GFS"
+        }
+      },
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wirbelwind": {
+      "name": "Wirbelwind",
+      "kosten": 3,
+      "beschreibung": "Alle in MFS Abgelenkt, Stärkeprobe oder weggeschleudert.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zäh": {
+      "name": "Zäh",
+      "kosten": 2,
+      "beschreibung": "Zweites Angeschlagen-Ergebnis im Kampf führt nicht zu Wunde.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zielwasser": {
+      "name": "Zielwasser",
+      "kosten": 2,
+      "beschreibung": "+W6 Schaden mit gewöhnlichen Schusswaffen, Bögen und Armbrüsten.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zusatzaktionen": {
+      "name": "Zusatzaktionen",
+      "kosten": "5/10/15",
+      "beschreibung": "5 SKP: -2 Mehrfachaktionsabzug. 10 SKP: -4 Mehrfachaktionsabzug. 15 SKP: echte Zusatzaktion.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zusatzgliedmaßen": {
+      "name": "Zusatzgliedmaßen",
+      "kosten": "2/Stufe",
+      "beschreibung": "Zusätzliche Gliedmaßen, Überzahlbonus +1 pro Stufe.",
+      "modifikatoren": {},
+      "ausgewaehlt": false,
+      "aktiv": true
+    }
+  },
+  "krafttypen": {
+    "energie": [
+      "Dunkelheit",
+      "Elektrizität (Blitze)",
+      "Energie (Kraftfelder, Schwerkraft, Magnetismus)",
+      "Feuer (Hitze)",
+      "Geistig (Hypnose, Psionik)",
+      "Kälte (Frost, Eis)",
+      "Licht (Laser)",
+      "Magie (spirituell, übernatürlich)",
+      "Schall",
+      "Strahlung",
+      "Temporal (Zeitkräfte)"
+    ],
+    "materie": [
+      "Biologisch (Tiere, Menschen, Schläge, Tritte)",
+      "Erde (Glas, Sand, Stein)",
+      "Luft",
+      "Metall (Kugeln, Messer)",
+      "Pflanzen (Stoffe, Seil)",
+      "Synthetik (Plastik)",
+      "Wasser (Flüssigkeiten)"
+    ]
+  },
+  "ausruestung": {
+    "Energieschild": {
+      "name": "Energieschild",
+      "kategorie": "Persönliche Ausrüstung",
+      "kosten": 10000,
+      "gewicht": 6,
+      "beschreibung": "Großer Schild (Parade +2, -1 BW, Deckung -4), freier Schaden-Wegsteck-Wurf mit Fokus W10 gegen zulässige Angriffe. Fehlschlag: 1h Aufladen. Krit. Fehlschlag: zerstört.",
+      "aktiv": true
+    },
+    "Auto-Greifhaken": {
+      "name": "Auto-Greifhaken",
+      "kategorie": "Persönliche Ausrüstung",
+      "kosten": 600,
+      "gewicht": 2.5,
+      "beschreibung": "Reichweite 50m, trägt bis 250 kg, gewährt Schwingen.",
+      "aktiv": true
+    },
+    "Fernglas": {
+      "name": "Fernglas",
+      "kategorie": "Persönliche Ausrüstung",
+      "kosten": 1000,
+      "gewicht": 0.5,
+      "beschreibung": "Lichtverstärkung, starke Vergrößerung. Hebt bis 4 Punkte Abzüge durch Entfernung/Dunkelheit auf.",
+      "aktiv": true
+    },
+    "Kommunikator": {
+      "name": "Kommunikator",
+      "kategorie": "Persönliche Ausrüstung",
+      "kosten": 100,
+      "gewicht": 0,
+      "beschreibung": "1,5 km Reichweite oder Funk-/Telefonnetzwerk.",
+      "aktiv": true
+    },
+    "Jetpack": {
+      "name": "Jetpack",
+      "kategorie": "Persönliche Ausrüstung",
+      "kosten": 5000,
+      "gewicht": 6,
+      "beschreibung": "Fliegen BW 90 (90 km/h) mit Unbeholfen, -1 Angriffsabzug, 1h Laufzeit.",
+      "aktiv": true
+    },
+    "Rauchgranate": {
+      "name": "Rauchgranate",
+      "kategorie": "Persönliche Ausrüstung",
+      "kosten": 50,
+      "gewicht": 0.5,
+      "beschreibung": "GFS dichter Rauch (-4 Sicht). Wurfreichweite 5/10/20.",
+      "aktiv": true
+    },
+    "Bodysuit": {
+      "name": "Bodysuit",
+      "kategorie": "Rüstung",
+      "kosten": 200,
+      "gewicht": 4,
+      "beschreibung": "Panzerung +2, MinStä W6. Torso, Arme, Beine.",
+      "aktiv": true
+    },
+    "Körperpanzerung": {
+      "name": "Körperpanzerung",
+      "kategorie": "Rüstung",
+      "kosten": 200,
+      "gewicht": 2.5,
+      "beschreibung": "Panzerung +2*, MinStä W6. Nur Torso. Ballistisch.",
+      "aktiv": true
+    },
+    "Schwere Körperpanzerung": {
+      "name": "Schwere Körperpanzerung",
+      "kategorie": "Rüstung",
+      "kosten": 400,
+      "gewicht": 8.5,
+      "beschreibung": "Panzerung +4*, MinStä W8. Nur Torso. Ballistisch.",
+      "aktiv": true
+    },
+    "Gefechtsrüstung": {
+      "name": "Gefechtsrüstung",
+      "kategorie": "Rüstung",
+      "kosten": 600,
+      "gewicht": 6,
+      "beschreibung": "Panzerung +2*, MinStä W8. Torso, Arme, Beine. Ballistisch.",
+      "aktiv": true
+    },
+    "Schwere Gefechtsrüstung": {
+      "name": "Schwere Gefechtsrüstung",
+      "kategorie": "Rüstung",
+      "kosten": 1200,
+      "gewicht": 15,
+      "beschreibung": "Panzerung +4*, MinStä W10. Torso, Arme, Beine. Ballistisch.",
+      "aktiv": true
+    },
+    "Ballistischer Helm": {
+      "name": "Ballistischer Helm",
+      "kategorie": "Rüstung",
+      "kosten": 80,
+      "gewicht": 2.5,
+      "beschreibung": "Panzerung +4*, MinStä W4. Ballistisch.",
+      "aktiv": true
+    },
+    "Cape": {
+      "name": "Cape",
+      "kategorie": "Rüstung",
+      "kosten": 50,
+      "gewicht": 1,
+      "beschreibung": "Langes Cape: +1 Einschüchtern/Überreden (bei Wahl). Gegner +2 auf Packen. Optionen: Gepanzert (+2* ballistisch, 500), Feuerfest (-4 Feuerschaden, 300), Gleiten (BW 6, 500), Verhüllend (-1 Angriffe, 500).",
+      "aktiv": true
+    },
+    "Betäubungsschlagstock": {
+      "name": "Betäubungsschlagstock",
+      "kategorie": "Nahkampfwaffen",
+      "kosten": 25,
+      "gewicht": 1,
+      "beschreibung": "Stä+W4. MinStä W4. Leichte Keule.",
+      "aktiv": true
+    },
+    "Netz (beschwert)": {
+      "name": "Netz (beschwert)",
+      "kategorie": "Nahkampfwaffen",
+      "kosten": 50,
+      "gewicht": 4,
+      "beschreibung": "Athletik-Treffer = Festgehalten. Härte 10. Wurf 3/6/12.",
+      "aktiv": true
+    },
+    "Nullifizierstab": {
+      "name": "Nullifizierstab",
+      "kategorie": "Nahkampfwaffen",
+      "kosten": 10000,
+      "gewicht": 1,
+      "beschreibung": "Stä+W4, MinStä W4. Treffer: KON-Probe (-2 bei Steigerung) oder alle Superkräfte verloren. Erholung: KON als freie Aktion, 1/2 Kräfte pro Zug.",
+      "aktiv": true
+    },
+    "Kampfhandschuh": {
+      "name": "Kampfhandschuh",
+      "kategorie": "Nahkampfwaffen",
+      "kosten": 40,
+      "gewicht": 1.5,
+      "beschreibung": "Stä+W4, MinStä W6. +4 Panzerung für Hände. Aufrüstbar: Energiewaffe/Ladungswaffe/Betäubung. Keine Feinmanipulation.",
+      "aktiv": true
+    },
+    "Zweihändiger Schlegel": {
+      "name": "Zweihändiger Schlegel",
+      "kategorie": "Nahkampfwaffen",
+      "kosten": 60,
+      "gewicht": 3.5,
+      "beschreibung": "Stä+W8, MinStä W8, Parade -1, beidhändig.",
+      "aktiv": true
+    },
+    "Handgelenkklauen": {
+      "name": "Handgelenkklauen",
+      "kategorie": "Nahkampfwaffen",
+      "kosten": 150,
+      "gewicht": 1,
+      "beschreibung": "Stä+W6, PB 2, MinStä W6.",
+      "aktiv": true
+    },
+    "Betäubung (Mod)": {
+      "name": "Betäubung (Waffenmod)",
+      "kategorie": "Waffenmodifikation",
+      "kosten": 250,
+      "gewicht": 0.5,
+      "beschreibung": "Treffer: KON-Probe (-2 bei Steigerung) oder Betäubt.",
+      "aktiv": true
+    },
+    "Energiewaffe (Mod)": {
+      "name": "Energiewaffe (Waffenmod)",
+      "kategorie": "Waffenmodifikation",
+      "kosten": 750,
+      "gewicht": 0.5,
+      "beschreibung": "+1 Schadenswürfeltyp, PB +4. Schwere Waffe.",
+      "aktiv": true
+    },
+    "Ketten-/Vibroklinge (Mod)": {
+      "name": "Ketten-/Vibroklinge (Waffenmod)",
+      "kategorie": "Waffenmodifikation",
+      "kosten": 500,
+      "gewicht": 1,
+      "beschreibung": "+W6 Schaden, PB +2. Extrem laut.",
+      "aktiv": true
+    },
+    "Ladungswaffe (Mod)": {
+      "name": "Ladungswaffe (Waffenmod)",
+      "kategorie": "Waffenmodifikation",
+      "kosten": 0,
+      "gewicht": 0.5,
+      "beschreibung": "+W6 Schaden (+W10 bei Steigerung).",
+      "aktiv": true
+    },
+    "Molekularklinge (Mod)": {
+      "name": "Molekularklinge (Waffenmod)",
+      "kategorie": "Waffenmodifikation",
+      "kosten": 500,
+      "gewicht": 0,
+      "beschreibung": "+2 Schaden, halber Schadenswürfel als PB.",
+      "aktiv": true
+    },
+    "Impulspistole": {
+      "name": "Impulspistole",
+      "kategorie": "Impulswaffen",
+      "kosten": 500,
+      "gewicht": 1,
+      "beschreibung": "RW 10/20/40, 2W6 Schaden, PB 2, FR 1, 12 Schuss. Doppelschuss möglich (krit. Fehlschlag: Explosion 3W6). Tödlich/Betäubung umschaltbar.",
+      "aktiv": true
+    },
+    "Impuls-MP": {
+      "name": "Impuls-MP",
+      "kategorie": "Impulswaffen",
+      "kosten": 1000,
+      "gewicht": 2,
+      "beschreibung": "RW 10/20/40, 2W6 Schaden, PB 2, FR 3, 24 Schuss.",
+      "aktiv": true
+    },
+    "Impulsgewehr": {
+      "name": "Impulsgewehr",
+      "kategorie": "Impulswaffen",
+      "kosten": 1400,
+      "gewicht": 3,
+      "beschreibung": "RW 20/40/80, 3W6 Schaden, PB 4, FR 1, 12 Schuss. Schwere Waffe.",
+      "aktiv": true
+    },
+    "Impuls-Sturmgewehr": {
+      "name": "Impuls-Sturmgewehr",
+      "kategorie": "Impulswaffen",
+      "kosten": 1500,
+      "gewicht": 4,
+      "beschreibung": "RW 15/30/60, 3W6 Schaden, PB 4, FR 3, 24 Schuss. Schwere Waffe.",
+      "aktiv": true
+    },
+    "Impuls-Scharfschützengewehr": {
+      "name": "Impuls-Scharfschützengewehr",
+      "kategorie": "Impulswaffen",
+      "kosten": 1500,
+      "gewicht": 3,
+      "beschreibung": "RW 40/80/160, 4W6 Schaden, PB 4, FR 1, 6 Schuss. Schwere Waffe, Schnellschuss-Malus.",
+      "aktiv": true
+    },
+    "Impuls-Gatling": {
+      "name": "Impuls-Gatling",
+      "kategorie": "Impulswaffen",
+      "kosten": 5000,
+      "gewicht": 6,
+      "beschreibung": "RW 20/40/80, 3W6 Schaden, PB 4, FR 3, 48 Schuss. Schwere Waffe.",
+      "aktiv": true
+    },
+    "Impulskanone": {
+      "name": "Impulskanone",
+      "kategorie": "Impulswaffen",
+      "kosten": 400000,
+      "gewicht": 100,
+      "beschreibung": "RW 100/200/400, 4W10 Schaden, PB 10, FR 2, 12 Schuss. Schwere Waffe.",
+      "aktiv": true
+    },
+    "Betäubungsgewehr": {
+      "name": "Betäubungsgewehr",
+      "kategorie": "Spezialwaffen",
+      "kosten": 300,
+      "gewicht": 0.5,
+      "beschreibung": "RW 10/20/40, FR 1, 12 Schuss. Treffer: KON-Probe (-2 bei Steigerung) oder Betäubt.",
+      "aktiv": true
+    },
+    "Betäubungsgranate": {
+      "name": "Betäubungsgranate",
+      "kategorie": "Spezialwaffen",
+      "kosten": 100,
+      "gewicht": 0.5,
+      "beschreibung": "GFS. KON-Probe (-2 bei Steigerung) oder Betäubt.",
+      "aktiv": true
+    },
+    "Netzkanone": {
+      "name": "Netzkanone",
+      "kategorie": "Spezialwaffen",
+      "kosten": 500,
+      "gewicht": 5,
+      "beschreibung": "RW 5/10/20, Treffer: Festgehalten (Gebunden bei Steigerung). Munition 400/Schuss.",
+      "aktiv": true
+    },
+    "Nullifizierkanone": {
+      "name": "Nullifizierkanone",
+      "kategorie": "Spezialwaffen",
+      "kosten": 15000,
+      "gewicht": 2.5,
+      "beschreibung": "RW 5/10/20, 4 Schuss. Treffer: KON-Probe (-2 bei Steigerung) oder alle Superkräfte verloren. Paramilitärisch.",
+      "aktiv": true
+    },
+    "Schaumwerfer": {
+      "name": "Schaumwerfer",
+      "kategorie": "Spezialwaffen",
+      "kosten": 2000,
+      "gewicht": 250,
+      "beschreibung": "RW 10/20/40, FR 3, 6 Schuss. KFS/MFS/GFS schnell härtender Schaum. Wegspringen (-2 bei Steigerung) oder Gebunden.",
+      "aktiv": true
+    },
+    "Cape-Killer-Munition": {
+      "name": "Cape-Killer-Munition",
+      "kategorie": "Spezialmunition",
+      "kosten": 0,
+      "gewicht": 0,
+      "beschreibung": "Nur .45+. PB 4, Schwere Waffe. 10x Preis, 2x Gewicht.",
+      "aktiv": true
+    },
+    "Gummigeschosse": {
+      "name": "Gummigeschosse",
+      "kategorie": "Spezialmunition",
+      "kosten": 0,
+      "gewicht": 0,
+      "beschreibung": "Betäubungsschaden, kein PB-Bonus.",
+      "aktiv": true
+    },
+    "Chieftain-Straßenbike": {
+      "name": "Chieftain-Straßenbike",
+      "kategorie": "Fahrzeuge",
+      "kosten": 8000,
+      "gewicht": 0,
+      "beschreibung": "Größe 1, Manöver +1, 260 km/h, Robustheit 11, Besatzung 1+1. Optional: Impulsgatling, Beiwagen (+2000).",
+      "aktiv": true
+    },
+    "Mako-Angriffs-Uboot": {
+      "name": "Mako-Angriffs-Uboot",
+      "kategorie": "Fahrzeuge",
+      "kosten": 0,
+      "gewicht": 0,
+      "beschreibung": "Großes U-Boot für Superhelden-Teams.",
+      "aktiv": true
+    },
+    "Juggernaut-Transporter": {
+      "name": "Juggernaut-Transporter",
+      "kategorie": "Fahrzeuge",
+      "kosten": 0,
+      "gewicht": 0,
+      "beschreibung": "Großer Mannschaftstransporter für Superhelden-Teams.",
+      "aktiv": true
+    }
+  },
+  "settingregeln": {
+    "eingeschraenkte_aktionen": true,
+    "maximale_parade_abzug": true,
+    "comic_kampf": true,
+    "kombinationsangriffe": true,
+    "wegschleudern": true,
+    "kraft_stunts": true,
+    "grosse_improvisierte_waffen": true,
+    "synergie": true,
+    "tod_und_niederlagen": false,
+    "kein_todesstoss": false,
+    "ueberlebensgross": false,
+    "mega_zerstoerung": false,
+    "niemals_aufgeben": false,
+    "handgemenge": false,
+    "trainingsmontage": false,
+    "schurkische_entschlossenheit": false,
+    "entschlossenheit_swae": false,
+    "fanatiker_swae": false,
+    "geborener_held_swae": false,
+    "grosse_abenteuer_swae": false,
+    "kreativer_kampf_swae": false,
+    "mehr_fertigkeitspunkte_swae": false,
+    "mehr_sprachen_swae": false,
+    "schwere_entscheidungen_swae": false,
+    "narrrenglueck_swae": false,
+    "ungepanzerter_held_swae": false,
+    "wundobergrenze_swae": false,
+    "fieser_schaden_swae": false
+  },
+  "super_stile": {
+    "four_color": {
+      "name": "Four Color",
+      "machtstufe": "III-V",
+      "beschreibung": "Klassische Superhelden-Stimmung. Überlebensgroße Charaktere, farbenfrohe Kostüme, melodramatische Schurken.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Fanatiker (SWAE)",
+        "Geborener Held (SWAE)",
+        "Große Abenteuer (SWAE)",
+        "Handgemenge (SKK)",
+        "Kein Todesstoß (SKK)",
+        "Kreativer Kampf (SWAE)",
+        "Mega-Zerstörung (SKK)",
+        "Mehr Fertigkeitspunkte (SWAE)",
+        "Niemals aufgeben (SKK)",
+        "Schurkische Entschlossenheit (SKK)",
+        "Tod & Niederlage (SKK)",
+        "Überlebensgroß (SKK)",
+        "Ungepanzerter Held (SWAE)",
+        "Wundobergrenze (SWAE)"
+      ]
+    },
+    "kosmisch": {
+      "name": "Kosmisch",
+      "machtstufe": "IV-V",
+      "beschreibung": "Weltraum und außerirdische Welten. Weltraumreisender-Kraft empfohlen.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Fanatiker (SWAE)",
+        "Geborener Held (SWAE)",
+        "Große Abenteuer (SWAE)",
+        "Handgemenge (SKK)",
+        "Kein Todesstoß (SKK)",
+        "Kreativer Kampf (SWAE)",
+        "Mega-Zerstörung (SKK)",
+        "Mehr Fertigkeitspunkte (SWAE)",
+        "Mehr Sprachen (SWAE)",
+        "Niemals aufgeben (SKK)",
+        "Schurkische Entschlossenheit (SKK)",
+        "Tod & Niederlage (SKK)",
+        "Überlebensgroß (SKK)",
+        "Ungepanzerter Held (SWAE)",
+        "Wundobergrenze (SWAE)"
+      ]
+    },
+    "dreckig": {
+      "name": "Dreckig",
+      "machtstufe": "I-II",
+      "beschreibung": "Pulp-Action, Verbrechen, Noir. Straßenebene gegen Kriminelle.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Fanatiker (SWAE)",
+        "Fieser Schaden (SWAE)",
+        "Geborener Held (SWAE)",
+        "Große Abenteuer (SWAE)",
+        "Handgemenge (SKK)",
+        "Kreativer Kampf (SWAE)",
+        "Niemals aufgeben (SKK)",
+        "Schwere Entscheidungen (SWAE)",
+        "Tod & Niederlage (SKK)",
+        "Überlebensgroß (SKK)"
+      ]
+    },
+    "fantasy": {
+      "name": "Fantasy",
+      "machtstufe": "Alle",
+      "beschreibung": "Thor, Kamandi, John Carter. Exotische Orte, mysteriöse Mächte, große Kriege.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Fanatiker (SWAE)",
+        "Geborener Held (SWAE)",
+        "Große Abenteuer (SWAE)",
+        "Handgemenge (SKK)",
+        "Kein Todesstoß (SKK)",
+        "Kreativer Kampf (SWAE)",
+        "Mega-Zerstörung (SKK)",
+        "Mehr Fertigkeitspunkte (SWAE)",
+        "Mehr Sprachen (SWAE)",
+        "Niemals aufgeben (SKK)",
+        "Schurkische Entschlossenheit (SKK)",
+        "Tod & Niederlage (SKK)",
+        "Überlebensgroß (SKK)",
+        "Ungepanzerter Held (SWAE)",
+        "Wundobergrenze (SWAE)"
+      ]
+    },
+    "horror": {
+      "name": "Horror",
+      "machtstufe": "I-III",
+      "beschreibung": "Monströse Protagonisten. Erlösung und Wiedererlangen der sterblichen Gestalt.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Geborener Held (SWAE)",
+        "Große Abenteuer (SWAE)",
+        "Handgemenge (SKK)",
+        "Kreativer Kampf (SWAE)",
+        "Mega-Zerstörung (SKK)",
+        "Niemals aufgeben (SKK)",
+        "Tod & Niederlage (SKK)",
+        "Überlebensgroß (SKK)",
+        "Wundobergrenze (SWAE)"
+      ]
+    },
+    "ultra_gewalt": {
+      "name": "Ultra-Gewalt",
+      "machtstufe": "III-V",
+      "beschreibung": "Kick-Ass, Invincible, The Boys. Realistische Konsequenzen von Superkräften, soziale Medien, Regierung.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Geborener Held (SWAE)",
+        "Große Abenteuer (SWAE)",
+        "Handgemenge (SKK)",
+        "Mega-Zerstörung (SKK)",
+        "Mehr Fertigkeitspunkte (SWAE)",
+        "Niemals aufgeben (SKK)",
+        "Schwere Entscheidungen (SWAE)",
+        "Überlebensgroß (SKK)"
+      ]
+    },
+    "von_null_auf_held": {
+      "name": "Von Null auf Held",
+      "machtstufe": "Alle",
+      "beschreibung": "Sky High, Mystery Men. Humor + Aufstieg in der Superwesen-Gemeinschaft.",
+      "settingregeln": [
+        "Comic-Kampf (SKK)",
+        "Entschlossenheit (SWAE)",
+        "Fanatiker (SWAE)",
+        "Handgemenge (SKK)",
+        "Kreativer Kampf (SWAE)",
+        "Mega-Zerstörung (SKK)",
+        "Narrenglück (SWAE)",
+        "Niemals aufgeben (SKK)",
+        "Schurkische Entschlossenheit (SKK)",
+        "Tod & Niederlage (SKK)",
+        "Wundobergrenze (SWAE)"
+      ]
+    }
+  },
+  "gegenstaende_der_macht": {
+    "Amulett der Allsicht": {
+      "beschreibung": "Verstand W10+ nötig. +1 auf alle Eigenschaftswürfe. Bei krit. Fehlschlag: Betäubt."
+    },
+    "Das Buch des Verderbens": {
+      "beschreibung": "Beschwört uralte Wesen (Asmodeus, Surtr etc.). Rituale + dramatische Aufgabe Okkultismus -2."
+    },
+    "Die Brille der Mighty Owl": {
+      "beschreibung": "Geschärfte Sinne mit Adleraugen, Infravision, Mikroskopsicht, Nachtsicht und Röntgensicht."
+    },
+    "Die Kiste aller Schicksale": {
+      "beschreibung": "2m Würfel, Teleportation durch Raum/Zeit. Verstandsprobe -10. Fehlschlag: zufälliger Ort/Zeit, Verwandlung, Seelentausch etc."
+    },
+    "Krone des neuen Gottes": {
+      "beschreibung": "Orichalkum aus Atlantis. Willenskraftprobe -10 bei Sichtkontakt oder kontrolliert. Krone entfernen = Befreiung."
+    },
+    "Verwüstungssamen": {
+      "beschreibung": "Außerirdische Samen, die bei Kontakt mit Wasser monströse Pflanzenkreaturen erzeugen."
+    },
+    "Dr. Chronos' Zurückspulknopf": {
+      "beschreibung": "2,5cm Würfel. Ganzen Zug wiederholen (W6, bei 1: nächste Runde verpasst). Freie Aktion."
+    },
+    "Hellfighter-Handschuhe": {
+      "beschreibung": "Nahkampfangriff +2W6 Schaden. Nicht kumulativ mit bestehenden Stufen."
+    },
+    "Nega-Stäbe": {
+      "beschreibung": "Stä+W6 + W10 pro Machtstufe des Ziels. Superwesen -2 Schaden wegstecken. Krit. Fehlschlag: Explosion GFS 3W6 (ignoriert Panzerung)."
+    },
+    "Der Prismatische Schild": {
+      "beschreibung": "Kristallschild. Reflektiert verfehlte Energieangriffe per Fokuswurf auf Ziel in 12\"."
+    },
+    "Die Scarecrow-Maske": {
+      "beschreibung": "Gewährt Furcht und Furchtlos. Träger wird zunehmend paranoid."
+    },
+    "S'Kram-Kristalle": {
+      "beschreibung": "1x/Sitzung Fokusprobe -2: +5 Superkraftpunkte. Krit. Fehlschlag: Betäubt + Kristall zerstört."
+    },
+    "Sphäre der Ewigen Gefangenschaft": {
+      "beschreibung": "Fokus vs Konstitution. Gefangener in zeitlose Dimension. Willenskraftprobe -8 zum Befreien."
+    },
+    "Das Zerschlissene Symbol": {
+      "beschreibung": "Macht des Glaubens. +2 auf Glaube, gewährt Bannkreis und Vertreiben."
+    },
+    "Teleporter-Kanone": {
+      "beschreibung": "RW 10/20/40. Treffer: Konstitutionsprobe oder an zufälligen Ort teleportiert."
+    },
+    "Zeitbombe": {
+      "beschreibung": "10-Sekunden-Timer. Alles in GFS: Konstitutionsprobe -4 oder in zufällige Zeitperiode geschleudert."
+    },
+    "Das Titanzepter": {
+      "beschreibung": "Stä+2W6+2 Schaden, Schwere Waffe, PB 4. Verleiht Wachstum (3 Stufen) als freie Aktion."
+    },
+    "Der Zinober-Umhang": {
+      "beschreibung": "Fliegen BW 48, Panzerung +4, +2 auf Überreden."
+    },
+    "Die Z-Kontaminierung": {
+      "beschreibung": "Hochinfektiöser Virus. Konstitutionsprobe -4 oder: 1) Superkräfte verloren, 2) Mutation, 3) Tod."
+    }
+  },
+  "superstaerke_belastung": {
+    "W4": "10 kg",
+    "W6": "20 kg",
+    "W8": "30 kg",
+    "W10": "40 kg",
+    "W12": "50 kg",
+    "W12+1": "62,5 kg",
+    "W12+2": "125 kg",
+    "W12+3": "250 kg",
+    "W12+4": "500 kg",
+    "W12+5": "1 t",
+    "W12+6": "2 t",
+    "W12+7": "4 t",
+    "W12+8": "8 t",
+    "W12+9": "16 t",
+    "W12+10": "32 t",
+    "W12+11": "64 t",
+    "W12+12": "125 t",
+    "W12+13": "250 t",
+    "W12+14": "500 t",
+    "W12+15": "1 kt"
+  },
+  "maechte": {}
+}

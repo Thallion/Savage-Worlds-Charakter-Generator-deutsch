@@ -1,0 +1,67 @@
+{
+  "name": "Merisiel",
+  "description": "Obwohl Merisiel nie die ganze Wahrheit über ihre Eltern erfahren hat, weiß sie genug, um die Schande ihrer Situation zu ertragen. Merisiel hat im Leben viel gelernt, darunter auch Gefängnisaufenthalte in mehr als einer Stadt, und genießt nun jeden Augenblick in vollen Zügen.",
+  "setting": "Savage Pathfinder",
+  "race": "Elf",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Schurke",
+    "languages": "Elfisch, Gemeinsprache, Koboldisch, Riesisch, Sylvanisch",
+    "rank": "Anfänger"
+  },
+  "attributes": {
+    "Geschicklichkeit": 8,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 8,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 8,
+    "Diebeskunst": 6,
+    "Heimlichkeit": 8,
+    "Kämpfen": 8,
+    "Provozieren": 6,
+    "Überreden": 6,
+    "Wahrnehmung": 6
+  },
+  "handicaps": [
+    "Pech",
+    "Feind",
+    "Beschämt"
+  ],
+  "edges": [
+    "Akrobat",
+    "Schurke",
+    "Dieb"
+  ],
+  "free_race_edge": "",
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    "Rapier (Stä+W4, Parade +1)",
+    "6x Wurfmesser (Reichweite 3/6/12, Schaden Stä+W4)",
+    "2x Dolche (Stä+W4)",
+    "Weiche Lederjacke und Beinlinge (+2)",
+    "Diebeswerkzeug",
+    "Verstrickungsbeutel",
+    "Abenteurerausrüstung",
+    "Kletterausrüstung",
+    "35 GM"
+  ],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/swpf_merisiel_schurke_anfaenger",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 + Kämpfen(W8)/2 = 6",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 + Rüstung(+2) = 7, -1 Zierlich = 6",
+    "bewegung": 8,
+    "klassenfaehigkeiten": "Rüstungsbeschränkung (leicht): -4 auf Geschicklichkeit und geschicklichkeitsbasierte Würfe mit mittlerer/schwerer Rüstung oder Schilden. Hinterhältiger Angriff: +W6 Schaden bei Überraschung oder verwundbarem Opfer."
+  }
+}

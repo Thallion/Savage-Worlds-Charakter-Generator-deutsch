@@ -37,87 +37,40 @@ class TemplateHandler:
         Clock.schedule_once(self._load_available_templates, 0.2)
         
     def open_template_selection_dialog(self):
-        """Öffnet Dialog zur Auswahl von Templates für Auto Character Generator - ORIGINAL"""
+        """Öffnet FileManager zur Auswahl von Templates für Auto Character Generator"""
         try:
-            # Templates aus dem templates/ Ordner laden
-            templates_dir = Path(get_templates_path())
-            template_files = []
-            
-            if templates_dir.exists():
-                for template_file in templates_dir.glob('*.json'):
-                    # Überspringe schema und example dateien
-                    if not any(skip in template_file.name.lower() for skip in ['schema', 'example']):
-                        try:
-                            with open(template_file, 'r', encoding='utf-8') as f:
-                                template_data = json.load(f)
-                                # Unterstütze sowohl 'character_name' als auch 'name' Felder
-                                character_name = template_data.get('character_name', 
-                                               template_data.get('name', template_file.stem))
-                                template_files.append({
-                                    'file': template_file,
-                                    'name': character_name,
-                                    'description': template_data.get('description', 'Kein Beschreibung verfügbar')
-                                })
-                        except Exception as e:
-                            Logger.warning(f"Template {template_file} konnte nicht geladen werden: {e}")
-                            continue
-            
-            if not template_files:
-                # Kein Templates gefunden Dialog
-                no_templates_dialog = MDDialog(
-                    MDLabel(text="Keine Templates gefunden!\n\nLegen Sie Templates im 'templates/' Ordner ab."),
-                    MDButton(
-                        MDButtonText(text="OK"),
-                        style="text",
-                        on_release=lambda x: no_templates_dialog.dismiss()
-                    )
-                )
-                no_templates_dialog.open()
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                Logger.error("FileManagerService nicht verfügbar")
+                self._show_error_dialog("FileManagerService nicht verfügbar")
                 return
-            
-            # Template-Auswahl Dialog erstellen
-            content = MDBoxLayout(
-                orientation='vertical',
-                spacing="12dp",
-                size_hint_y=None,
-                height="400dp"
-            )
-            
-            content.add_widget(MDLabel(
-                text="Wählen Sie ein Template für die Charaktergenerierung:",
-                size_hint_y=None,
-                height="40dp",
-                theme_text_color="Primary"
-            ))
-            
-            # Scrollbare Liste
-            scroll = MDScrollView()
-            template_list = MDList()
-            
-            for template_info in template_files:
-                item = MDListItem(
-                    MDListItemSupportingText(
-                        text=f"{template_info['name']}"
-                    ),
-                    on_release=lambda x, template=template_info: self._generate_character_from_template(template, dialog)
-                )
-                template_list.add_widget(item)
-            
-            scroll.add_widget(template_list)
-            content.add_widget(scroll)
-            
-            dialog = MDDialog(
-                content,
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: dialog.dismiss()
-                )
-            )
-            dialog.open()
-            
+            templates_dir = file_service.get_default_directory('templates')
+            file_service.template_callback = self._on_template_file_selected
+            file_service.show_file_manager(templates_dir, "load_template")
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen der Template-Auswahl: {e}")
+
+    def _on_template_file_selected(self, path):
+        """Callback wenn eine Template-Datei im FileManager ausgewählt wurde"""
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                template_data = json.load(f)
+
+            template_file = Path(path)
+            character_name = template_data.get('character_name',
+                           template_data.get('name', template_file.stem))
+            template_info = {
+                'file': template_file,
+                'name': character_name,
+                'description': template_data.get('description', 'Keine Beschreibung verfügbar')
+            }
+            self._generate_character_from_template(template_info)
+        except json.JSONDecodeError as e:
+            Logger.error(f"Ungültige JSON-Datei: {path} - {e}")
+            self._show_error_dialog(f"Die Datei ist keine gültige JSON-Datei:\n{os.path.basename(path)}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden des Templates: {e}")
+            self._show_error_dialog(f"Fehler beim Laden des Templates: {str(e)}")
     
     def show_template_selection_dialog(self):
         """Zeigt Template-Auswahl Dialog mit Suchfeld (nach Vorbild von voelker_view) - ORIGINAL"""
