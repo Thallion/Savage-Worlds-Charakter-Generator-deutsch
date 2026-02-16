@@ -83,7 +83,8 @@ class EinstellungenWidget(MDBoxLayout):
             
             if event_service:
                 event_service.subscribe(EventTypes.THEME_CHANGED, self._on_theme_changed)
-                
+                event_service.subscribe(EventTypes.CHARACTER_UPDATED, self._on_character_updated)
+
                 Logger.debug("Event-Handler für Einstellungen registriert")
         except Exception as e:
             Logger.error(f"Fehler bei Event-Handler-Registrierung: {e}")
@@ -130,6 +131,13 @@ class EinstellungenWidget(MDBoxLayout):
         else:
             Logger.warning("ThemeManager nicht verfügbar für Theme-Update")
     
+    def _on_character_updated(self, data):
+        """Callback für Charakter-Änderungen (z.B. Setting-Wechsel)"""
+        if self.statistics_manager:
+            self.statistics_manager.update_element_statistics_ui()
+        else:
+            Logger.warning("StatisticsManager nicht verfügbar für Statistik-Update")
+
     # Character-Management - Basis-Operationen bleiben hier
     def get_charakter_value(self, attribute, default_value=''):
         """Hilfsmethode zum sicheren Abrufen von Charakter-Attributen"""

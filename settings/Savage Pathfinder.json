@@ -325,10 +325,7 @@
         "Einschüchtern": [
             "Willenskraft"
         ],
-        "Fokus": [
-            "Willenskraft"
-        ],
-        "Glaube": [
+"Glaube": [
             "Willenskraft"
         ],
         "Heilen": [
@@ -337,10 +334,7 @@
         "Provozieren": [
             "Verstand"
         ],
-        "Recherche": [
-            "Verstand"
-        ],
-        "Reparieren": [
+"Reparieren": [
             "Verstand"
         ],
         "Glücksspiel": [
@@ -358,16 +352,7 @@
         "Naturwissenschaften": [
             "Verstand"
         ],
-        "Sprache": [
-            "Verstand"
-        ],
         "Zaubern": [
-            "Verstand"
-        ],
-        "Verrückte Wissenschaft": [
-            "Verstand"
-        ],
-        "Alchemie": [
             "Verstand"
         ]
     },

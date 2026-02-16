@@ -1,5 +1,5 @@
 {
-  "theme_style": "Dark",
+  "theme_style": "Light",
   "primary_palette": "Lime",
   "default_attribute_points": 5,
   "default_skill_points": 12,
@@ -19,7 +19,7 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Fantasy Kompendium",
+  "last_setting": "Savage Pathfinder",
   "config_version": "1.0",
-  "last_updated": "2026-02-15T18:25:24.340439"
+  "last_updated": "2026-02-16T08:55:43.652683"
 }
