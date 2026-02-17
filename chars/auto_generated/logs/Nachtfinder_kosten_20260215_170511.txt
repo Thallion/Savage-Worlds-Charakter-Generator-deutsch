@@ -1,0 +1,87 @@
+================================================================================
+KOSTEN-LOG FÜR: Nachtfinder
+ERSTELLT: 2026-02-15 17:05:11
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Konstitution: W4 → W6 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Verstand: W6 → W8 = 1 Punkte
+  Verstand: W8 → W10 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+  Willenskraft: W6 → W8 = 1 Punkte
+GESAMT: 6 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+  Allgemeinwissen: W4 → W6 = 1 Punkte
+  Allgemeinwissen: W6 → W8 = 1 Punkte
+  Heilen: W2 → W4 = 1 Punkte
+  Kämpfen: W2 → W4 = 1 Punkte
+  Okkultismus: W2 → W4 = 1 Punkte
+  Okkultismus: W4 → W6 = 1 Punkte
+  Recherche: W2 → W4 = 1 Punkte
+  Recherche: W4 → W6 = 1 Punkte
+  Überleben: W2 → W4 = 1 Punkte
+  Überreden: W4 → W6 = 1 Punkte
+  Wahrnehmung: W4 → W6 = 1 Punkte
+  Zaubern: W2 → W4 = 1 Punkte
+  Zaubern: W4 → W6 = 1 Punkte
+  Zaubern: W6 → W8 = 1 Punkte
+  Zaubern: W8 → W10 = 1 Punkte
+  Zaubern: W10 → W12 = 1 Punkte
+GESAMT: 16 Punkte
+
+HANDICAPS:
+----------------------------------------
+  Alt: +2 Punkte
+  Neugierig: +2 Punkte
+GESAMT: +4 Punkte (Bonus)
+
+HANDICAP-PUNKTE VERWENDUNG:
+----------------------------------------
+Handicap-Punkte können verwendet werden für:
+  • 1 Punkt = 2 Attributsteigerungen
+  • 1 Punkt = 1 Anfänger-Talent
+  • 1 Punkt = 2 Fertigkeitssteigerungen
+  • 1 Punkt = Startgeld erhöhen
+→ 4 Handicap-Punkte entsprechen:
+  - Bis zu 8 Attribut-/Fertigkeitssteigerungen ODER
+  - Bis zu 4 Talente ODER
+  - Kombination aus beidem
+
+TALENTE:
+----------------------------------------
+GESAMT: 0 Punkte
+
+MÄCHTE:
+----------------------------------------
+  Abwehren [Voraussetzungen ignoriert]
+  Arkanes entdecken/verbergen [Voraussetzungen ignoriert]
+  Blenden [Voraussetzungen ignoriert]
+  Geschoss [Voraussetzungen ignoriert]
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +4
+Verfügbare Punkte gesamt: 21
+
+Ausgegeben für Attribute: 6
+Ausgegeben für Fertigkeiten: 16
+Ausgegeben für Talente: 0
+Ausgegeben gesamt: 22
+
+DEFIZIT: 1 Punkte
+AUTOMATISCH HINZUGEFÜGT: 0 Punkte
+→ Charakter wurde mit zusätzlichen Punkten erstellt
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================

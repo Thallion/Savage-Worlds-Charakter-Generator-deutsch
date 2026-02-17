@@ -1,0 +1,140 @@
+🎯 STARTE CHARAKTERGENERIERUNG: JESTER
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Jester' initialisiert (Setting: Fantasy Kompendium)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+  ⭐ Aufstiege: 4
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Infernaler
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ❌ Handicap 'Behindernde_Rüstung_leicht' nicht gefunden
+  ❌ Handicap 'Große Klappe' nicht gefunden
+  ❌ Handicap 'Außenseiter' nicht gefunden
+  ❌ Handicap 'Arrogant' nicht gefunden
+  ❌ Handicap 'Tick' nicht gefunden
+📊 HANDICAP-PUNKTE GESAMT: +0 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 0
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ⚡ Automatisch 1 Attributspunkte hinzugefügt
+    ✅ Steigerung 2: W6 → W8 (Auto-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ❌ Fertigkeit 'Athletik' nicht gefunden
+  ❌ Fertigkeit 'Allgemeinwissen' nicht gefunden
+  ❌ Fertigkeit 'Kämpfen' nicht gefunden
+  ❌ Fertigkeit 'Einschüchtern' nicht gefunden
+  ❌ Fertigkeit 'Wahrnehmung' nicht gefunden
+  ❌ Fertigkeit 'Darbietung' nicht gefunden
+  ❌ Fertigkeit 'Überreden' nicht gefunden
+  ❌ Fertigkeit 'Heimlichkeit' nicht gefunden
+📊 FERTIGKEITSKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  ❌ Talent 'Arkaner Hintergrund (Barde)' nicht gefunden
+  ❌ Talent 'Ermutigen' nicht gefunden
+  ❌ Talent 'Täuscher' nicht gefunden
+  ❌ Talent 'Erniedrigen' nicht gefunden
+  ❌ Talent 'Konter' nicht gefunden
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 7: MÄCHTE WÄHLEN (OHNE VORAUSSETZUNGEN) ---
+  🔮 Arkaner Hintergrund wird automatisch hinzugefügt/angenommen
+  ⚠️ Kein Arkaner Hintergrund gefunden - Mächte werden trotzdem hinzugefügt
+  ❌ Eigenschaft erhöhen/senken nicht verfügbar
+  ❌ Verwirrung nicht verfügbar
+  ❌ Geräusch/Stille nicht verfügbar
+  🔮 Machtpunkte gesetzt: 10
+📊 MÄCHTE GESAMT: 0 Mächte hinzugefügt
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Meistermesser (Reichweite 3/6/12, Schaden Stärke+d4, AP 1, RoF 1, Parade +1) nicht gefunden - lege als Custom-Item an...
+    ✅ Meistermesser (Reichweite 3/6/12, Schaden Stärke+d4, AP 1, RoF 1, Parade +1) erfolgreich hinzugefügt
+  📦 Sap (Stärke+d4, nicht tödlich) nicht gefunden - lege als Custom-Item an...
+    ✅ Sap (Stärke+d4, nicht tödlich) erfolgreich hinzugefügt
+  📦 Ledertunika (+2 Rüstung) nicht gefunden - lege als Custom-Item an...
+    ✅ Ledertunika (+2 Rüstung) erfolgreich hinzugefügt
+  ⏭️ Entertainer-Paket übersprungen - wird als Custom Equipment hinzugefügt
+  ⏭️ Trank der Unsichtbarkeit übersprungen - wird als Custom Equipment hinzugefügt
+  ⏭️ Trank: Boost Eigenschaft (Konstitution) übersprungen - wird als Custom Equipment hinzugefügt
+  🔧 Verarbeite custom_equipment aus Template...
+  🔧 Custom weapon: Meistermesser
+    ⚔️ Meistermesser zu selected_waffen hinzugefügt
+    ✅ Meistermesser erfolgreich hinzugefügt (Kategorie: Waffe)
+  🔧 Custom weapon: Sap
+    ⚔️ Sap zu selected_waffen hinzugefügt
+    ✅ Sap erfolgreich hinzugefügt (Kategorie: Waffe)
+  🔧 Custom armor: Ledertunika
+    🛡️ Ledertunika zu selected_ruestungen hinzugefügt
+    ✅ Ledertunika erfolgreich hinzugefügt (Kategorie: Rüstung)
+  🔧 Custom equipment: Entertainer-Paket
+    ✅ Entertainer-Paket erfolgreich hinzugefügt (Kategorie: Ausrüstung)
+  🔧 Custom equipment: Trank der Unsichtbarkeit
+    ✅ Trank der Unsichtbarkeit erfolgreich hinzugefügt (Kategorie: Trank)
+  🔧 Custom equipment: Trank: Boost Eigenschaft (Konstitution)
+    ✅ Trank: Boost Eigenschaft (Konstitution) erfolgreich hinzugefügt (Kategorie: Trank)
+📊 AUSRÜSTUNG GESAMT: 9 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 4
+  ⭐ Verbleibende Aufstiege: 6
+  👑 Rang: Fortgeschritten
+  🔄 12 übrige Punkte in 6 Aufstiege umgewandelt
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 0 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Jester
+Setting: Fantasy Kompendium
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 0 Punkte
+Handicaps: +0 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +0
+Verfügbar gesamt: 17
+Ausgegeben: 6
+Differenz: 11
+
+⚡ AUTOMATISCH HINZUGEFÜGT: 1 Punkte
+   (Um alle Anforderungen zu erfüllen)
+
+🎭 ATTRIBUTE:
+  Stärke: W4
+  Geschicklichkeit: W6
+  Konstitution: W6
+  Verstand: W8
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+
+⭐ TALENTE:
+
+⚠️ HANDICAPS:
+Machtpunkte: 10
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Jester_kosten_20251005_130259.txt

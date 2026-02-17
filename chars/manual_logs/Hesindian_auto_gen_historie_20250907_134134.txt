@@ -1,0 +1,69 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-09-07 13:41:34
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2025-09-07 13:41:34] Auto-Generierung abgeschlossen:
+    Template: Hesindian (Setting: SWAE)
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-09-07 13:41:34] Konstitution: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Verstand: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Verstand: W6 → W8 (1 Standard)
+  [2025-09-07 13:41:34] Verstand: W8 → W10 (1 Standard)
+  [2025-09-07 13:41:34] Willenskraft: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Willenskraft: W6 → W8 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2025-09-07 13:41:34] Allgemeinwissen: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Allgemeinwissen: W6 → W8 (1 Standard)
+  [2025-09-07 13:41:34] Heimlichkeit: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Kämpfen: W2 → W4 (1 Standard)
+  [2025-09-07 13:41:34] Recherche: W2 → W4 (1 Standard)
+  [2025-09-07 13:41:34] Recherche: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Überleben: W2 → W4 (1 Standard)
+  [2025-09-07 13:41:34] Überreden: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Zaubern: W2 → W4 (1 Standard)
+  [2025-09-07 13:41:34] Zaubern: W4 → W6 (1 Standard)
+  [2025-09-07 13:41:34] Zaubern: W6 → W8 (1 1 Handicap-Punkt)
+  [2025-09-07 13:41:34] Zaubern: W8 → W10 (1 1 Handicap-Punkt)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2025-09-07 13:41:34] Machtpunkte (Kosten: 0)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2025-09-07 13:41:34] Neugierig ( - Punkte: 2)
+  [2025-09-07 13:41:34] Schlechte Augen ( - Punkte: 1)
+  [2025-09-07 13:41:34] Tick ( - Punkte: 1)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2025-09-07 13:41:34] Geschoss (Rang: Anfänger)
+  [2025-09-07 13:41:34] Heilung (Rang: Anfänger)
+  [2025-09-07 13:41:34] Blenden (Rang: Anfänger)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2025-09-07 13:41:34] Magierstab hinzugefügt [Auto-Gen]
+  [2025-09-07 13:41:34] Reisrobe hinzugefügt [Auto-Gen]
+  [2025-09-07 13:41:34] Abenteuerpaket hinzugefügt [Auto-Gen]
+  [2025-09-07 13:41:34] Magierstab hinzugefügt [Custom] [Auto-Gen]
+  [2025-09-07 13:41:34] Reisrobe hinzugefügt [Custom] [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte (6 Steigerungen)
+  Fertigkeiten:  12 Punkte (12 Steigerungen)
+  Talente:       0 Punkte (1 hinzugefügt, 0 entfernt)
+  Handicaps:     +4 erhalten, 4 verwendet, 0 verfügbar (3 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (3 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

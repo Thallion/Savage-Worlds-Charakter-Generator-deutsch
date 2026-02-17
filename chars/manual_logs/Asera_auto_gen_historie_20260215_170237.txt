@@ -1,0 +1,60 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-15 17:02:37
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-15 17:02:37] Auto-Generierung abgeschlossen:
+    Template: Asera (Setting: SWAE)
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:02:37] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Geschicklichkeit: W6 → W8 (1 Standard)
+  [2026-02-15 17:02:37] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Verstand: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Verstand: W6 → W8 (1 Standard)
+  [2026-02-15 17:02:37] Willenskraft: W4 → W6 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:02:37] Athletik: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Heimlichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Heimlichkeit: W6 → W8 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Schießen: W2 → W4 (1 Standard)
+  [2026-02-15 17:02:37] Schießen: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Überleben: W2 → W4 (1 Standard)
+  [2026-02-15 17:02:37] Überleben: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Überleben: W6 → W8 (1 Standard)
+  [2026-02-15 17:02:37] Wahrnehmung: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Wahrnehmung: W6 → W8 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:02:37] Naturbursche (Kosten: 0)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:02:37] Angetrieben ( - Punkte: 1)
+  [2026-02-15 17:02:37] Blutrünstig ( - Punkte: 2)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:02:37] Flammengewehr (Kegelschablone, 3W6) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:02:37] Schockstab (Stä+W4) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:02:37] Lederwams (+1, Torso) hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte (6 Steigerungen)
+  Fertigkeiten:  12 Punkte (12 Steigerungen)
+  Talente:       0 Punkte (1 hinzugefügt, 0 entfernt)
+  Handicaps:     +3 erhalten, 2 verwendet, 1 verfügbar (2 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

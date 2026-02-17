@@ -1,0 +1,153 @@
+🎯 STARTE CHARAKTERGENERIERUNG: GRUKK DER BERSERKER
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Grukk der Berserker' initialisiert (Setting: Fantasy Kompendium)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+  ⭐ Aufstiege: 4
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Halbork
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Impulsiv hinzugefügt (+2 Punkte)
+  ✅ Analphabet hinzugefügt (+1 Punkte)
+  ✅ Zwei linke Hände hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Stärke: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  ✅ Verstand bereits auf W4
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Athletik: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Kämpfen: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Einschüchtern: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  ✅ Wahrnehmung bereits auf W4
+  ✅ Überreden bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Reiten: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Überleben: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Provozieren: W2 → W4 (1 Steigerungen)
+    ⚡ Automatisch 1 Fertigkeitspunkte hinzugefügt
+    ✅ Steigerung 1: W2 → W4 (Auto-Punkte)
+📊 FERTIGKEITSKOSTEN GESAMT: 11 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  ⚠️ Rohling direkt gesetzt (Fallback) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  ✅ Streitaxt gefunden und ausgewählt
+  ✅ Mittlerer Schild gefunden und ausgewählt
+  ✅ Kettenhemd gefunden und ausgewählt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 9: TEMPLATE-AUFSTIEGE ANWENDEN ---
+  🎯 Aufstieg edge: Kräftig
+    ⚡ Aufstieg hinzugefügt (gesamt: 5)
+    ✅ Talent Kräftig gewählt
+  🎯 Aufstieg edge: Berserker
+    ⚡ Aufstieg hinzugefügt (gesamt: 6)
+    ✅ Talent Berserker gewählt
+  🎯 Aufstieg edge: Wildling
+    ⚡ Aufstieg hinzugefügt (gesamt: 7)
+    ✅ Talent Wildling gewählt
+  🎯 Aufstieg edge: Aufwiegler
+    ⚡ Aufstieg hinzugefügt (gesamt: 8)
+    ✅ Talent Aufwiegler gewählt
+📊 AUFSTIEGE ANGEWENDET: 4/4
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 8
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Veteran
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 4 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Grukk der Berserker
+Setting: Fantasy Kompendium
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 11 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 19
+Differenz: 2
+
+⚡ AUTOMATISCH HINZUGEFÜGT: 1 Punkte
+   (Um alle Anforderungen zu erfüllen)
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W4
+  Stärke: W8
+  Konstitution: W8
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W8
+  Heimlichkeit: W4
+  Überreden: W4
+  Wahrnehmung: W4
+  Kämpfen: W8
+  Überleben: W4
+  Reiten: W4
+  Einschüchtern: W8
+  Provozieren: W4
+
+⭐ TALENTE:
+  Wildling
+  Berserker
+  Kräftig
+  Rohling [!]
+
+⚠️ HANDICAPS:
+  Analphabet (1 Punkte)
+  Zwei linke Hände (1 Punkte)
+  Impulsiv (2 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Grukk der Berserker_kosten_20260211_191002.txt

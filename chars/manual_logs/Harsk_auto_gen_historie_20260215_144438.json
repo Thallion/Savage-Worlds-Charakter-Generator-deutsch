@@ -1,0 +1,383 @@
+{
+  "session_start": "2026-02-15T14:44:38.901315",
+  "entries": [
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "auto_character_generated",
+      "details": {
+        "name": "Harsk",
+        "template": "Harsk",
+        "setting": "Savage Pathfinder",
+        "total_auto_points": 0,
+        "cost_log_file": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Harsk_kosten_20260215_144438.txt"
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Stärke",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Heilen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Heimlichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Schießen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Schießen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Schießen",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überleben",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überleben",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überleben",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Wahrnehmung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Waldläufer",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Naturbursche",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Angewohnheit",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Misstrauisch",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Dünnhäutig",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Schwur",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Sigurs Streitaxt (Stä+W6)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Schwere Armbrust (Reichweite 15/30/60, Schaden 2W8, PB 2, Nachladen 2)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "20 Bolzen",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Handaxt (Stä+W6)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Beschlagene Ledertunika und Beinlinge (+2)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Abenteurerausrüstung",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Bergsteigerausrüstung",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Verstrickungsbeutel",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:44:38",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "34 GM",
+        "auto_generated": true,
+        "custom": false
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 7,
+    "fertigkeiten": 11,
+    "talente": 2,
+    "handicaps": 0,
+    "maechte": 0,
+    "aufstiege": 0
+  }
+}

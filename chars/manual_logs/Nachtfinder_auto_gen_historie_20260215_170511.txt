@@ -1,0 +1,68 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-15 17:05:11
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-15 17:05:11] Auto-Generierung abgeschlossen:
+    Template: Nachtfinder (Setting: SWAE)
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:05:11] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Verstand: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Verstand: W6 → W8 (1 Standard)
+  [2026-02-15 17:05:11] Verstand: W8 → W10 (1 Standard)
+  [2026-02-15 17:05:11] Willenskraft: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Willenskraft: W6 → W8 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:05:11] Allgemeinwissen: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Allgemeinwissen: W6 → W8 (1 Standard)
+  [2026-02-15 17:05:11] Heilen: W2 → W4 (1 Standard)
+  [2026-02-15 17:05:11] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-15 17:05:11] Okkultismus: W2 → W4 (1 Standard)
+  [2026-02-15 17:05:11] Okkultismus: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Recherche: W2 → W4 (1 Standard)
+  [2026-02-15 17:05:11] Recherche: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Überleben: W2 → W4 (1 Standard)
+  [2026-02-15 17:05:11] Überreden: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Wahrnehmung: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Zaubern: W2 → W4 (1 Standard)
+  [2026-02-15 17:05:11] Zaubern: W4 → W6 (1 Standard)
+  [2026-02-15 17:05:11] Zaubern: W6 → W8 (1 Standard)
+  [2026-02-15 17:05:11] Zaubern: W8 → W10 (1 Standard)
+  [2026-02-15 17:05:11] Zaubern: W10 → W12 (1 Standard)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:05:11] Alt ( - Punkte: 2)
+  [2026-02-15 17:05:11] Neugierig ( - Punkte: 2)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:05:11] Abwehren (Rang: Anfänger)
+  [2026-02-15 17:05:11] Arkanes entdecken/verbergen (Rang: Anfänger)
+  [2026-02-15 17:05:11] Blenden (Rang: Anfänger)
+  [2026-02-15 17:05:11] Geschoss (Rang: Anfänger)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:05:11] Stab (Stä+W4, Parade +1) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:05:11] Kutte hinzugefügt [Auto-Gen]
+  [2026-02-15 17:05:11] Bücher mit Notizen hinzugefügt [Auto-Gen]
+  [2026-02-15 17:05:11] Abenteurerpaket hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte (6 Steigerungen)
+  Fertigkeiten:  16 Punkte (16 Steigerungen)
+  Talente:       0 Punkte (0 hinzugefügt, 0 entfernt)
+  Handicaps:     +4 erhalten, 2 verwendet, 2 verfügbar (2 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (4 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

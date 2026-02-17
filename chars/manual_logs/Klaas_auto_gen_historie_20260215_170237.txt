@@ -1,0 +1,61 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-15 17:02:37
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-15 17:02:37] Auto-Generierung abgeschlossen:
+    Template: Klaas (Setting: SWAE)
+    Zusätzliche Punkte: 2
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:02:37] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Geschicklichkeit: W6 → W8 (1 Standard)
+  [2026-02-15 17:02:37] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Stärke: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Verstand: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Willenskraft: W4 → W6 (2 Handicap-Punkte)
+  [2026-02-15 17:02:37] Willenskraft: W6 → W8 (1 Auto-Generator)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:02:37] Athletik: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Heimlichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W6 → W8 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W8 → W10 (1 Standard)
+  [2026-02-15 17:02:37] Kämpfen: W10 → W12 (1 Standard)
+  [2026-02-15 17:02:37] Provozieren: W2 → W4 (1 Standard)
+  [2026-02-15 17:02:37] Provozieren: W4 → W6 (1 Standard)
+  [2026-02-15 17:02:37] Provozieren: W6 → W8 (1 Auto-Generator)
+  [2026-02-15 17:02:37] Wahrnehmung: W4 → W6 (1 1 Handicap-Punkt)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:02:37] Finte (Kosten: 0)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:02:37] Große Klappe ( - Punkte: 1)
+  [2026-02-15 17:02:37] Impulsiv ( - Punkte: 2)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:02:37] Rapier (Stä+W4, Parade +1) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:02:37] Lederjacke (Arme, Torso +2) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:02:37] Abenteurerpaket hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     7 Punkte (7 Steigerungen)
+  Fertigkeiten:  11 Punkte (11 Steigerungen)
+  Talente:       0 Punkte (1 hinzugefügt, 0 entfernt)
+  Handicaps:     +3 erhalten, 3 verwendet, 0 verfügbar (2 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

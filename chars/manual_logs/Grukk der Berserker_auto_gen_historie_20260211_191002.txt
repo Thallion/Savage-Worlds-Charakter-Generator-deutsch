@@ -1,0 +1,62 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-11 19:10:02
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-11 19:10:02] Auto-Generierung abgeschlossen:
+    Template: Grukk der Berserker (Setting: Fantasy Kompendium)
+    Zusätzliche Punkte: 1
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-11 19:10:02] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-11 19:10:02] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-11 19:10:02] Konstitution: W6 → W8 (1 Standard)
+  [2026-02-11 19:10:02] Stärke: W4 → W6 (1 Standard)
+  [2026-02-11 19:10:02] Stärke: W6 → W8 (1 Standard)
+  [2026-02-11 19:10:02] Willenskraft: W4 → W6 (2 Handicap-Punkte)
+  [2026-02-11 19:10:02] Willenskraft: W6 → W8 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-11 19:10:02] Athletik: W4 → W6 (1 Standard)
+  [2026-02-11 19:10:02] Athletik: W6 → W8 (1 Standard)
+  [2026-02-11 19:10:02] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-11 19:10:02] Kämpfen: W4 → W6 (1 Standard)
+  [2026-02-11 19:10:02] Kämpfen: W6 → W8 (1 Standard)
+  [2026-02-11 19:10:02] Einschüchtern: W2 → W4 (1 Standard)
+  [2026-02-11 19:10:02] Einschüchtern: W4 → W6 (1 Standard)
+  [2026-02-11 19:10:02] Einschüchtern: W6 → W8 (1 Standard)
+  [2026-02-11 19:10:02] Reiten: W2 → W4 (1 Standard)
+  [2026-02-11 19:10:02] Überleben: W2 → W4 (1 Standard)
+  [2026-02-11 19:10:02] Provozieren: W2 → W4 (1 Auto-Generator)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-11 19:10:02] Rohling (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-11 19:10:02] Impulsiv ( - Punkte: 2)
+  [2026-02-11 19:10:02] Analphabet ( - Punkte: 1)
+  [2026-02-11 19:10:02] Zwei linke Hände ( - Punkte: 1)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-11 19:10:02] Streitaxt hinzugefügt [Auto-Gen]
+  [2026-02-11 19:10:02] Mittlerer Schild hinzugefügt [Auto-Gen]
+  [2026-02-11 19:10:02] Kettenhemd hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     7 Punkte (7 Steigerungen)
+  Fertigkeiten:  11 Punkte (11 Steigerungen)
+  Talente:       1 Punkte (1 hinzugefügt, 0 entfernt)
+  Handicaps:     +4 erhalten, 4 verwendet, 0 verfügbar (3 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

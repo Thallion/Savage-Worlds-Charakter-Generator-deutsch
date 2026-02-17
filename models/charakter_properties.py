@@ -83,3 +83,6 @@ class CharakterProperties:
     # Attribute und Fertigkeiten
     attribute = DictProperty({})
     fertigkeiten = DictProperty({})
+
+    # Steigerungs-Journal (kein Kivy-Property, da keine UI-Bindung nötig)
+    steigerungs_journal = None

@@ -1,0 +1,380 @@
+{
+  "session_start": "2026-02-15T17:02:37.948317",
+  "entries": [
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "auto_character_generated",
+      "details": {
+        "name": "Nachtfinder",
+        "template": "Nachtfinder",
+        "setting": "SWAE",
+        "total_auto_points": 0,
+        "cost_log_file": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Nachtfinder_kosten_20260215_170237.txt"
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Allgemeinwissen",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Heilen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Okkultismus",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Okkultismus",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überleben",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überreden",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Wahrnehmung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Zaubern",
+        "von": 10,
+        "nach": 12,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Alt",
+        "punkte": 2,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Neugierig",
+        "punkte": 2,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Abwehren",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Arkanes entdecken/verbergen",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Blenden",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "macht_hinzugefuegt",
+      "details": {
+        "name": "Geschoss",
+        "auto_generated": true,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Stab (Stä+W4, Parade +1)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Kutte",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Bücher mit Notizen",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Abenteurerpaket",
+        "auto_generated": true,
+        "custom": false
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 6,
+    "fertigkeiten": 16,
+    "talente": 0,
+    "handicaps": 0,
+    "maechte": 0,
+    "aufstiege": 0
+  }
+}

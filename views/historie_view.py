@@ -46,13 +46,14 @@ class CharakterHistorie:
             'aufstiege': 0
         }
     
-    def add_entry(self, entry_type: str, details: Dict[str, Any]) -> None:
+    def add_entry(self, entry_type: str, details: Dict[str, Any], rang: str = "") -> None:
         """
         Fügt einen neuen Eintrag zur Historie hinzu.
-        
+
         Args:
             entry_type: Art der Änderung (attribut_steigerung, fertigkeit_steigerung, etc.)
             details: Details zur Änderung
+            rang: Aktueller Rang des Charakters (z.B. "Anfänger", "Veteran")
         """
         current_time = datetime.now()
         timestamp_str = current_time.strftime('%Y-%m-%d %H:%M:%S')
@@ -80,6 +81,7 @@ class CharakterHistorie:
         entry = {
             'timestamp': timestamp_str,
             'type': entry_type,
+            'rang': rang,
             'details': details
         }
         self.entries.append(entry)
@@ -153,7 +155,8 @@ class CharakterHistorie:
             for entry in entries:
                 details = entry['details']
                 timestamp = entry['timestamp']
-                
+                rang_text = f" [{entry['rang']}]" if entry.get('rang') else ""
+
                 if entry_type == 'attribut_steigerung':
                     kosten_typ = details.get('kosten_typ', 'Punkte')
                     kosten = details['kosten']
@@ -166,8 +169,8 @@ class CharakterHistorie:
                     else:
                         kosten_text = f"{kosten} {kosten_typ}"
                         
-                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({kosten_text})")
-                    
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']}: W{details['von']} → W{details['nach']} ({kosten_text})")
+
                 elif entry_type == 'fertigkeit_steigerung':
                     kosten_typ = details.get('kosten_typ', 'Punkte')
                     kosten = details['kosten']
@@ -181,35 +184,35 @@ class CharakterHistorie:
                     else:
                         kosten_text = f"{kosten} {kosten_typ}"
                         
-                    log_lines.append(f"  [{timestamp}] {details['name']}: W{details['von']} → W{details['nach']} ({kosten_text})")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']}: W{details['von']} → W{details['nach']} ({kosten_text})")
                 elif entry_type == 'talent_hinzugefuegt':
-                    log_lines.append(f"  [{timestamp}] {details['name']} (Kosten: {details.get('kosten', 0)})")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} (Kosten: {details.get('kosten', 0)})")
                 elif entry_type == 'talent_entfernt':
-                    log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} entfernt")
                 elif entry_type == 'handicap_hinzugefuegt':
-                    log_lines.append(f"  [{timestamp}] {details['name']} ({details.get('stufe', '')} - Punkte: {details.get('punkte', 0)})")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} ({details.get('stufe', '')} - Punkte: {details.get('punkte', 0)})")
                 elif entry_type == 'handicap_entfernt':
-                    log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} entfernt")
                 elif entry_type == 'handicap_reduziert':
-                    log_lines.append(f"  [{timestamp}] {details['name']} von schwer zu leicht reduziert")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} von schwer zu leicht reduziert")
                 elif entry_type == 'macht_hinzugefuegt':
-                    log_lines.append(f"  [{timestamp}] {details['name']} (Rang: {details.get('rang', 'Anfänger')})")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} (Rang: {details.get('rang', 'Anfänger')})")
                 elif entry_type == 'macht_entfernt':
-                    log_lines.append(f"  [{timestamp}] {details['name']} entfernt")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} entfernt")
                 elif entry_type == 'ausruestung_hinzugefuegt':
                     custom_marker = " [Custom]" if details.get('custom', False) else ""
                     auto_marker = " [Auto-Gen]" if details.get('auto_generated', False) else ""
-                    log_lines.append(f"  [{timestamp}] {details['name']} hinzugefügt{custom_marker}{auto_marker}")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details['name']} hinzugefügt{custom_marker}{auto_marker}")
                 elif entry_type == 'auto_character_generated':
                     template_name = details.get('template', 'Unbekannt')
                     setting = details.get('setting', 'SWAE')
                     auto_points = details.get('total_auto_points', 0)
-                    log_lines.append(f"  [{timestamp}] Auto-Generierung abgeschlossen:")
+                    log_lines.append(f"  [{timestamp}]{rang_text} Auto-Generierung abgeschlossen:")
                     log_lines.append(f"    Template: {template_name} (Setting: {setting})")
                     if auto_points > 0:
                         log_lines.append(f"    Zusätzliche Punkte: {auto_points}")
                 else:
-                    log_lines.append(f"  [{timestamp}] {details}")
+                    log_lines.append(f"  [{timestamp}]{rang_text} {details}")
         
         # Zeige Gesamtkosten und Statistiken
         log_lines.append("")
@@ -361,6 +364,11 @@ class HistorieWidget(MDBoxLayout):
                 event_service.subscribe('character_saved', self._on_character_saved)
                 event_service.subscribe('character_created', self._on_character_created)
                 Logger.info("Historie Event-Listener registriert")
+
+            # Zusätzlich Kivy-Event vom Controller binden (wird beim regulären Laden ausgelöst)
+            if self.charakter_controller:
+                self.charakter_controller.bind(on_charakter_loaded=self._on_kivy_charakter_loaded)
+                Logger.info("Historie Kivy-Event on_charakter_loaded gebunden")
         except Exception as e:
             Logger.error(f"Fehler bei Event-Registrierung: {str(e)}")
     
@@ -556,6 +564,23 @@ class HistorieWidget(MDBoxLayout):
         
         self.add_widget(filter_box)
     
+    def _get_charakter_rang(self) -> str:
+        """Gibt den aktuellen Rang des Charakters zurück."""
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                return getattr(self.charakter_controller.charakter, 'rang', '')
+        except Exception:
+            pass
+        return ''
+
+    def _sync_journal_to_charakter(self):
+        """Synchronisiert die aktuelle Historie ins Charakter-Objekt."""
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                self.charakter_controller.charakter.steigerungs_journal = self.historie.to_dict()
+        except Exception as e:
+            Logger.error(f"Fehler bei Journal-Synchronisation: {e}")
+
     def _update_display(self):
         """Aktualisiert die Anzeige der Historie."""
         try:
@@ -597,7 +622,8 @@ class HistorieWidget(MDBoxLayout):
                 'kosten': data.get('cost', 1),
                 'kosten_typ': data.get('cost_type', 'Attributspunkte')
             }
-            self.historie.add_entry('attribut_steigerung', details)
+            self.historie.add_entry('attribut_steigerung', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Attribut-Logging: {str(e)}")
@@ -625,7 +651,8 @@ class HistorieWidget(MDBoxLayout):
                 'kosten': data.get('cost', 1),
                 'kosten_typ': data.get('cost_type', 'Fertigkeitspunkte')
             }
-            self.historie.add_entry('fertigkeit_steigerung', details)
+            self.historie.add_entry('fertigkeit_steigerung', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Fertigkeits-Logging: {str(e)}")
@@ -651,7 +678,8 @@ class HistorieWidget(MDBoxLayout):
                 'kosten': data.get('cost', 1),
                 'voraussetzungen': data.get('requirements', '')
             }
-            self.historie.add_entry('talent_hinzugefuegt', details)
+            self.historie.add_entry('talent_hinzugefuegt', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Talent-Logging: {str(e)}")
@@ -677,7 +705,8 @@ class HistorieWidget(MDBoxLayout):
                 'stufe': data.get('stufe', 'Leicht'),
                 'punkte': data.get('points', 1)
             }
-            self.historie.add_entry('handicap_hinzugefuegt', details)
+            self.historie.add_entry('handicap_hinzugefuegt', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Handicap-Logging: {str(e)}")
@@ -703,7 +732,8 @@ class HistorieWidget(MDBoxLayout):
                 'rang': data.get('rang', 'Anfänger'),
                 'kosten': data.get('cost', 1)
             }
-            self.historie.add_entry('macht_hinzugefuegt', details)
+            self.historie.add_entry('macht_hinzugefuegt', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Macht-Logging: {str(e)}")
@@ -718,7 +748,8 @@ class HistorieWidget(MDBoxLayout):
                 'name': event_data.get('talent_name', 'Unbekannt'),
                 'action': event_data.get('action', 'removed')
             }
-            self.historie.add_entry('talent_entfernt', details)
+            self.historie.add_entry('talent_entfernt', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Talent-Entfernung-Logging: {str(e)}")
@@ -733,7 +764,8 @@ class HistorieWidget(MDBoxLayout):
                 'name': event_data.get('handicap_name', 'Unbekannt'),
                 'action': event_data.get('action', 'removed')
             }
-            self.historie.add_entry('handicap_entfernt', details)
+            self.historie.add_entry('handicap_entfernt', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Handicap-Entfernung-Logging: {str(e)}")
@@ -748,7 +780,8 @@ class HistorieWidget(MDBoxLayout):
                 'name': event_data.get('handicap_name', 'Unbekannt'),
                 'action': event_data.get('action', 'reduced')
             }
-            self.historie.add_entry('handicap_reduziert', details)
+            self.historie.add_entry('handicap_reduziert', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Handicap-Reduzierung-Logging: {str(e)}")
@@ -763,25 +796,51 @@ class HistorieWidget(MDBoxLayout):
                 'name': event_data.get('macht_name', 'Unbekannt'),
                 'action': event_data.get('action', 'removed')
             }
-            self.historie.add_entry('macht_entfernt', details)
+            self.historie.add_entry('macht_entfernt', details, rang=self._get_charakter_rang())
+            self._sync_journal_to_charakter()
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler bei Macht-Entfernung-Logging: {str(e)}")
     
+    def _on_kivy_charakter_loaded(self, *args):
+        """Callback für Kivy-Event on_charakter_loaded vom Controller (reguläres Laden)."""
+        try:
+            char_name = 'Unbekannt'
+            if self.charakter_controller and self.charakter_controller.charakter:
+                char_name = getattr(self.charakter_controller.charakter, 'char_name', 'Unbekannt')
+            self._on_character_loaded({'character_name': char_name})
+        except Exception as e:
+            Logger.error(f"Fehler bei Kivy on_charakter_loaded: {str(e)}")
+
     def _on_character_loaded(self, event_data):
-        """Handler für geladene Charaktere."""
+        """Handler für geladene Charaktere. Lädt Journal aus Charakter-JSON falls vorhanden."""
         try:
             char_name = event_data.get('character_name', 'Unbekannt')
             self.historie = CharakterHistorie()  # Neue Historie starten
-            self.historie.add_entry('charakter_geladen', {'name': char_name})
-            self._load_existing_history()
+
+            # Versuche Journal aus dem Charakter-Objekt zu laden
+            journal_loaded = False
+            if self.charakter_controller and self.charakter_controller.charakter:
+                journal = self.charakter_controller.charakter.steigerungs_journal
+                if journal and isinstance(journal, dict) and journal.get('entries'):
+                    self.historie.from_dict(journal)
+                    journal_loaded = True
+                    Logger.info(f"Steigerungs-Journal aus Charakter-JSON geladen ({len(journal.get('entries', []))} Einträge)")
+
+            if not journal_loaded:
+                # Fallback: Aus Log-Dateien laden (Kompatibilität mit alten Charakteren)
+                self.historie.add_entry('charakter_geladen', {'name': char_name})
+                self._load_existing_history()
+
             self._update_display()
         except Exception as e:
             Logger.error(f"Fehler beim Laden der Historie: {str(e)}")
     
     def _on_character_saved(self, event_data):
-        """Handler für gespeicherte Charaktere."""
+        """Handler für gespeicherte Charaktere. Synchronisiert Journal ins Charakter-Objekt."""
         try:
+            # Journal immer ins Charakter-Objekt schreiben, damit es im JSON landet
+            self._sync_journal_to_charakter()
             if self.auto_log_switch.active:
                 self._save_history(None)
         except Exception as e:
@@ -792,8 +851,9 @@ class HistorieWidget(MDBoxLayout):
         try:
             char_name = event_data.get('character_name', 'Neuer Charakter')
             # Leere Historie bei neuem Charakter
-            self.historie = CharakterHistorie()  
+            self.historie = CharakterHistorie()
             self.historie.add_entry('charakter_erstellt', {'name': char_name})
+            self._sync_journal_to_charakter()
             self._update_display()
             Logger.info(f"Historie zurückgesetzt für neuen Charakter: {char_name}")
         except Exception as e:

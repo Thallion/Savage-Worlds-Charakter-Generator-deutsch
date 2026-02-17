@@ -17,7 +17,7 @@ Texte/
 htmlcov/
 test_units/
 debug/
-chars/
+privat/
 config/app_config.json
 .tox/
 .coverage

@@ -97,7 +97,10 @@ def to_dict(charakter):
         'erschoepfung': charakter.erschoepfung,
         'zusaetzliche_talente': charakter.zusaetzliche_talente,
         'gesamt_handicap_punkte': charakter.gesamt_handicap_punkte,
-        'pathfinder_kostenlose_talente_gewaehlt': pathfinder_kostenlose_talente_gewaehlt
+        'pathfinder_kostenlose_talente_gewaehlt': pathfinder_kostenlose_talente_gewaehlt,
+
+        # === STEIGERUNGS-JOURNAL ===
+        'steigerungs_journal': charakter.steigerungs_journal
     }
 
 def _get_selected_elements_with_data(charakter):
@@ -125,40 +128,46 @@ def _get_selected_elements_with_data(charakter):
                     # Hier könnten weitere individuelle Daten hinzugefügt werden
                 }
     
-    # Nur ausgewählte Handicaps mit individuellen Daten  
+    # Nur ausgewählte Handicaps mit individuellen Daten
     for name, handicap in charakter.handicaps.items():
         if handicap.ausgewaehlt:
-            selected_elements['handicaps'][name] = {
+            handicap_dict = {
                 'ausgewaehlt': True,
                 'stufe': handicap.stufe,
                 'punkte': handicap.punkte,
-                # Weitere individuelle Daten falls vorhanden
             }
+            if hasattr(handicap, 'individuelle_beschreibung') and handicap.individuelle_beschreibung:
+                handicap_dict['beschreibung'] = handicap.individuelle_beschreibung
+            selected_elements['handicaps'][name] = handicap_dict
     
     # Nur ausgewählte Talente mit individuellen Daten
     for talent_name in charakter.selected_talente:
         if talent_name in charakter.talente:
             talent = charakter.talente[talent_name]
-            selected_elements['talente'][talent_name] = {
+            talent_dict = {
                 'ausgewaehlt': True,
                 'rang': talent.rang,
                 'neue_maechte': talent.neue_maechte,
                 'machtpunkte': talent.machtpunkte,
-                # Weitere individuelle Daten falls vorhanden
             }
+            if hasattr(talent, 'individuelle_beschreibung') and talent.individuelle_beschreibung:
+                talent_dict['beschreibung'] = talent.individuelle_beschreibung
+            selected_elements['talente'][talent_name] = talent_dict
     
     # Nur ausgewählte Mächte mit individuellen Daten
     for macht_name in charakter.selected_maechte:
         if macht_name in charakter.maechte:
             macht = charakter.maechte[macht_name]
-            selected_elements['maechte'][macht_name] = {
+            macht_dict = {
                 'ausgewaehlt': True,
                 'rang': macht.rang,
                 'machtpunkte': macht.machtpunkte,
                 'reichweite': macht.reichweite,
                 'dauer': macht.dauer,
-                # Weitere individuelle Daten falls vorhanden
             }
+            if hasattr(macht, 'individuelle_beschreibung') and macht.individuelle_beschreibung:
+                macht_dict['beschreibung'] = macht.individuelle_beschreibung
+            selected_elements['maechte'][macht_name] = macht_dict
     
     # Nur ausgewählte Ausrüstung mit individuellen Daten
     all_selected_equipment = (
@@ -376,6 +385,9 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.handicaps[name].stufe = data['stufe']
             if 'punkte' in data:
                 charakter.handicaps[name].punkte = data['punkte']
+            if 'beschreibung' in data:
+                charakter.handicaps[name].individuelle_beschreibung = data['beschreibung']
+                charakter.handicaps[name].beschreibung = data['beschreibung']
 
     # Talent-Daten anwenden
     talente_data = selected_elements.get('talente', {})
@@ -388,6 +400,9 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.talente[name].neue_maechte = data['neue_maechte']
             if 'machtpunkte' in data:
                 charakter.talente[name].machtpunkte = data['machtpunkte']
+            if 'beschreibung' in data:
+                charakter.talente[name].individuelle_beschreibung = data['beschreibung']
+                charakter.talente[name].beschreibung = data['beschreibung']
 
     # Macht-Daten anwenden
     maechte_data = selected_elements.get('maechte', {})
@@ -402,6 +417,9 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.maechte[name].reichweite = data['reichweite']
             if 'dauer' in data:
                 charakter.maechte[name].dauer = data['dauer']
+            if 'beschreibung' in data:
+                charakter.maechte[name].individuelle_beschreibung = data['beschreibung']
+                charakter.maechte[name].beschreibung = data['beschreibung']
 
     # Ausrüstungs-Daten anwenden
     ausruestung_data = selected_elements.get('ausruestung', {})
@@ -505,6 +523,9 @@ def _finalize_character_loading(charakter, data):
 
     # Savage Pathfinder Support
     charakter.pathfinder_kostenlose_talente_gewaehlt = data.get('pathfinder_kostenlose_talente_gewaehlt', 0)
+
+    # Steigerungs-Journal laden (falls vorhanden)
+    charakter.steigerungs_journal = data.get('steigerungs_journal', None)
 
     # Setting-Einstellungen
     if 'settingregeln' in data:

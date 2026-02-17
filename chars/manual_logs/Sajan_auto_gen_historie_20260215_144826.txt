@@ -1,0 +1,69 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-15 14:48:26
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-15 14:48:26] Auto-Generierung abgeschlossen:
+    Template: Sajan (Setting: Savage Pathfinder)
+    Zusätzliche Punkte: 1
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 14:48:26] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Geschicklichkeit: W6 → W8 (1 Standard)
+  [2026-02-15 14:48:26] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Konstitution: W6 → W8 (1 Standard)
+  [2026-02-15 14:48:26] Stärke: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Verstand: W4 → W6 (2 Handicap-Punkte)
+  [2026-02-15 14:48:26] Willenskraft: W4 → W6 (1 Auto-Generator)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 14:48:26] Athletik: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Athletik: W6 → W8 (1 Standard)
+  [2026-02-15 14:48:26] Einschüchtern: W2 → W4 (1 Standard)
+  [2026-02-15 14:48:26] Einschüchtern: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Heilen: W2 → W4 (1 Standard)
+  [2026-02-15 14:48:26] Heimlichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Heimlichkeit: W6 → W8 (1 Standard)
+  [2026-02-15 14:48:26] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-15 14:48:26] Kämpfen: W4 → W6 (1 Standard)
+  [2026-02-15 14:48:26] Kämpfen: W6 → W8 (1 Standard)
+  [2026-02-15 14:48:26] Reiten: W2 → W4 (1 Standard)
+  [2026-02-15 14:48:26] Wahrnehmung: W4 → W6 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 14:48:26] Flink (Kosten: 0)
+  [2026-02-15 14:48:26] Mönch (Kosten: 1)
+  [2026-02-15 14:48:26] Lieblingswaffe (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 14:48:26] Loyal ( - Punkte: 1)
+  [2026-02-15 14:48:26] Schwur ( - Punkte: 1)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 14:48:26] Tempelschwert (als Kurzschwert, Stä+W6) hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] 6x Shuriken (Reichweite 3/6/12, Schaden Stä+W4) hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] Krähenfüße hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] Abenteurerausrüstung hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] 3x Alchemistenfeuer hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] Sonnenstab hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] Trank: schwache Heilung hinzugefügt [Auto-Gen]
+  [2026-02-15 14:48:26] 21 GM hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     7 Punkte (7 Steigerungen)
+  Fertigkeiten:  12 Punkte (12 Steigerungen)
+  Talente:       2 Punkte (3 hinzugefügt, 0 entfernt)
+  Handicaps:     +2 erhalten, 2 verwendet, 0 verfügbar (2 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

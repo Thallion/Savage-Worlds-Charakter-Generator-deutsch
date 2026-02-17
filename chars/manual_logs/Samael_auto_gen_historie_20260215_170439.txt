@@ -1,0 +1,61 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-15 17:04:39
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-15 17:04:39] Auto-Generierung abgeschlossen:
+    Template: Samael (Setting: SWAE)
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:04:39] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Geschicklichkeit: W6 → W8 (1 Standard)
+  [2026-02-15 17:04:39] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Stärke: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Verstand: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Willenskraft: W4 → W6 (2 Handicap-Punkte)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-15 17:04:39] Athletik: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Heimlichkeit: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-15 17:04:39] Kämpfen: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Provozieren: W2 → W4 (1 Standard)
+  [2026-02-15 17:04:39] Provozieren: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Schießen: W2 → W4 (1 Standard)
+  [2026-02-15 17:04:39] Schießen: W4 → W6 (1 Standard)
+  [2026-02-15 17:04:39] Schießen: W6 → W8 (1 Standard)
+  [2026-02-15 17:04:39] Schießen: W8 → W10 (1 Standard)
+  [2026-02-15 17:04:39] Wahrnehmung: W4 → W6 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:04:39] Beidhändig (Kosten: 0)
+  [2026-02-15 17:04:39] Beidhändiger Fernkampf (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:04:39] Angewohnheit ( - Punkte: 1)
+  [2026-02-15 17:04:39] Feind ( - Punkte: 1)
+  [2026-02-15 17:04:39] Gesucht ( - Punkte: 1)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-15 17:04:39] 2x Eruptor-Blaster (15/30/60, 2W6, PB 2) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:04:39] Streitkolben (Stä+W6) hinzugefügt [Auto-Gen]
+  [2026-02-15 17:04:39] MuSP-Anzug (+2) hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte (6 Steigerungen)
+  Fertigkeiten:  11 Punkte (11 Steigerungen)
+  Talente:       1 Punkte (2 hinzugefügt, 0 entfernt)
+  Handicaps:     +3 erhalten, 2 verwendet, 1 verfügbar (3 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

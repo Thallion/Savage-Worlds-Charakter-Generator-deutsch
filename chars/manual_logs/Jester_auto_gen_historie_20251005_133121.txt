@@ -1,0 +1,46 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2025-10-05 13:31:21
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2025-10-05 13:31:21] Auto-Generierung abgeschlossen:
+    Template: Jester (Setting: Fantasy Kompendium)
+    Zusätzliche Punkte: 1
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2025-10-05 13:31:21] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2025-10-05 13:31:21] Konstitution: W4 → W6 (1 Standard)
+  [2025-10-05 13:31:21] Verstand: W4 → W6 (1 Standard)
+  [2025-10-05 13:31:21] Verstand: W6 → W8 (1 Standard)
+  [2025-10-05 13:31:21] Willenskraft: W4 → W6 (1 Standard)
+  [2025-10-05 13:31:21] Willenskraft: W6 → W8 (1 Auto-Generator)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2025-10-05 13:31:21] Meistermesser (Reichweite 3/6/12, Schaden Stärke+d4, AP 1, RoF 1, Parade +1) hinzugefügt [Auto-Gen]
+  [2025-10-05 13:31:21] Sap (Stärke+d4, nicht tödlich) hinzugefügt [Auto-Gen]
+  [2025-10-05 13:31:21] Ledertunika (+2 Rüstung) hinzugefügt [Auto-Gen]
+  [2025-10-05 13:31:21] Entertainer-Paket hinzugefügt [Auto-Gen]
+  [2025-10-05 13:31:21] Trank der Unsichtbarkeit hinzugefügt [Auto-Gen]
+  [2025-10-05 13:31:21] Trank: Boost Eigenschaft (Konstitution) hinzugefügt [Auto-Gen]
+  [2025-10-05 13:31:21] Meistermesser hinzugefügt [Custom] [Auto-Gen]
+  [2025-10-05 13:31:21] Sap hinzugefügt [Custom] [Auto-Gen]
+  [2025-10-05 13:31:21] Ledertunika hinzugefügt [Custom] [Auto-Gen]
+  [2025-10-05 13:31:21] Entertainer-Paket hinzugefügt [Custom] [Auto-Gen]
+  [2025-10-05 13:31:21] Trank der Unsichtbarkeit hinzugefügt [Custom] [Auto-Gen]
+  [2025-10-05 13:31:21] Trank: Boost Eigenschaft (Konstitution) hinzugefügt [Custom] [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     6 Punkte (6 Steigerungen)
+  Fertigkeiten:  0 Punkte (0 Steigerungen)
+  Talente:       0 Punkte (0 hinzugefügt, 0 entfernt)
+  Handicaps:     +0 erhalten, 0 verwendet, 0 verfügbar (0 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

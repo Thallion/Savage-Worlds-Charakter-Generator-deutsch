@@ -1,0 +1,115 @@
+{
+    "profil_daten": {
+        "Name": "Jester",
+        "Alter": "",
+        "Geschlecht": "männlich",
+        "Konzept": "Gaukler / Barde",
+        "Sprachen": ""
+    },
+    "active_setting_name": "Fantasy Kompendium",
+    "char_gen_completed": true,
+    "settingregeln": {
+        "dynamischer_rueckschlag": false,
+        "entschlossenheit": false,
+        "fanatiker": false,
+        "fertigkeitsspezialisierungen": false,
+        "fieser_schaden": false,
+        "geborener_held": false,
+        "grosse_abenteuer": false,
+        "helden_sterben_nie": false,
+        "keine_machtpunkte": false,
+        "kreativer_kampf": false,
+        "mehr_fertigkeitspunkte": false,
+        "mehr_sprachen": false,
+        "narrenglueck": false,
+        "schnelle_genesung": false,
+        "schwere_entscheidungen": false,
+        "ungepanzerter_held": false,
+        "wundobergrenze": false,
+        "strahlschablone": false,
+        "große_hoehen": false,
+        "verrat": false,
+        "schwierige_heilung": false,
+        "freizeit": false,
+        "riesige_feinde,": false,
+        "schurkische_entschlossenheit": false
+    },
+    "attribute": {
+        "Stärke": {
+            "attribut_name": "Stärke",
+            "wert": 4,
+            "modifier": 0
+        },
+        "Geschicklichkeit": {
+            "attribut_name": "Geschicklichkeit",
+            "wert": 6,
+            "modifier": 0
+        },
+        "Konstitution": {
+            "attribut_name": "Konstitution",
+            "wert": 6,
+            "modifier": 0
+        },
+        "Verstand": {
+            "attribut_name": "Verstand",
+            "wert": 8,
+            "modifier": 0
+        },
+        "Willenskraft": {
+            "attribut_name": "Willenskraft",
+            "wert": 8,
+            "modifier": 0
+        }
+    },
+    "fertigkeiten": {},
+    "selected_elements": {
+        "voelker": {},
+        "handicaps": {},
+        "talente": {},
+        "maechte": {},
+        "ausruestung": {
+            "Meistermesser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Sap": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Ledertunika": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
+    },
+    "selected_handicaps": [],
+    "selected_talente": [],
+    "selected_maechte": [],
+    "voelker_selected": {},
+    "selected_allgemeine_ausruestung": [],
+    "selected_waffen": [
+        "Meistermesser",
+        "Sap"
+    ],
+    "selected_ruestungen": [
+        "Ledertunika"
+    ],
+    "selected_schilde": [],
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "maximale_attributsteigerungen": 5,
+    "maximale_fertigkeitssteigerungen": 12,
+    "verbleibende_aufstiege": 6,
+    "aufstiege_gesamt": 4,
+    "verfuegbare_maechte": 0,
+    "anzahl_maechte": 0,
+    "machtpunkte": 10,
+    "vermoegen": 500,
+    "erschoepfung": 0,
+    "zusaetzliche_talente": 0,
+    "gesamt_handicap_punkte": 0,
+    "pathfinder_kostenlose_talente_gewaehlt": 0
+}

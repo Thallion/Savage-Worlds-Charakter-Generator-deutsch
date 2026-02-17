@@ -333,8 +333,14 @@ class AutoCharacterGenerator:
 
         total_points = 0
 
-        for handicap_name in handicaps:
+        for handicap_entry in handicaps:
             added = False
+
+            # Unterstütze sowohl Strings als auch Dicts (aus Template-Wizard)
+            if isinstance(handicap_entry, dict):
+                handicap_name = handicap_entry.get("key", handicap_entry.get("name", ""))
+            else:
+                handicap_name = handicap_entry
 
             # Suche in vorhandenen Handicaps
             for key, handicap_obj in charakter.handicaps.items():
@@ -690,12 +696,16 @@ class AutoCharacterGenerator:
                 continue
 
             if is_free:
-                # Gratis-Talent direkt setzen
-                talent_obj = charakter.talente[talent_key]
-                if hasattr(talent_obj, 'ausgewaehlt'):
-                    talent_obj.ausgewaehlt = True
-                if hasattr(talent_obj, 'aktiv'):
-                    talent_obj.aktiv = True
+                # Gratis-Talent über talent_auswaehlen setzen (löst Seiteneffekte aus)
+                charakter.ignore_voraussetzungen = True
+                result = talent_manager.talent_auswaehlen(talent_key, skip_prereq_check=True)
+                if not result:
+                    # Fallback: Direkt setzen
+                    talent_obj = charakter.talente[talent_key]
+                    if hasattr(talent_obj, 'ausgewaehlt'):
+                        talent_obj.ausgewaehlt = True
+                    if hasattr(talent_obj, 'aktiv'):
+                        talent_obj.aktiv = True
                 self.log(f"  ✅ {edge_name} hinzugefügt (GRATIS - Völker-Bonus)")
                 self.cost_log['talente'].append({
                     'name': edge_name,
@@ -735,12 +745,15 @@ class AutoCharacterGenerator:
                         'voraussetzungen_ignoriert': True
                     })
                 else:
-                    # Fallback: Direkt setzen wenn originale Funktion fehlschlägt
-                    talent_obj = charakter.talente[talent_key]
-                    if hasattr(talent_obj, 'ausgewaehlt'):
-                        talent_obj.ausgewaehlt = True
-                    if hasattr(talent_obj, 'aktiv'):
-                        talent_obj.aktiv = True
+                    # Fallback: über talent_auswaehlen mit skip_prereq_check
+                    fallback_result = talent_manager.talent_auswaehlen(talent_key, skip_prereq_check=True)
+                    if not fallback_result:
+                        # Letzter Fallback: Direkt setzen
+                        talent_obj = charakter.talente[talent_key]
+                        if hasattr(talent_obj, 'ausgewaehlt'):
+                            talent_obj.ausgewaehlt = True
+                        if hasattr(talent_obj, 'aktiv'):
+                            talent_obj.aktiv = True
                     self.log(f"  ⚠️ {edge_name} direkt gesetzt (Fallback) - Voraussetzungen ignoriert")
 
                     total_costs += 1
@@ -765,14 +778,22 @@ class AutoCharacterGenerator:
 
         # Stelle sicher, dass ein Arkaner Hintergrund ausgewählt ist
         arcane_found = False
+        from functions.talent_funktionen import get_talent_manager
+        talent_manager = get_talent_manager(charakter)
+
         for talent_name, talent_obj in charakter.talente.items():
             if "arkaner hintergrund" in talent_name.lower():
-                if hasattr(talent_obj, 'ausgewaehlt'):
-                    talent_obj.ausgewaehlt = True
-                if hasattr(talent_obj, 'aktiv'):
-                    talent_obj.aktiv = True
+                if not talent_obj.ausgewaehlt:
+                    # Über talent_auswaehlen aktivieren (löst Machtpunkte/Mächte-Erhöhung aus)
+                    charakter.ignore_voraussetzungen = True
+                    result = talent_manager.talent_auswaehlen(talent_name, skip_prereq_check=True)
+                    if not result:
+                        # Fallback
+                        talent_obj.ausgewaehlt = True
+                        if hasattr(talent_obj, 'aktiv'):
+                            talent_obj.aktiv = True
                 arcane_found = True
-                self.log(f"  ✅ {talent_name} aktiviert")
+                self.log(f"  ✅ {talent_name} aktiviert (Machtpunkte: {charakter.machtpunkte})")
                 break
 
         if not arcane_found:

@@ -8,7 +8,7 @@ from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
-from kivymd.uix.textfield import MDTextField
+from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.selectioncontrol import MDCheckbox
 from kivymd.uix.selectioncontrol import MDSwitch
@@ -214,23 +214,23 @@ class TemplateWizardDialog:
         
         # Name
         self.name_field = MDTextField(
+            MDTextFieldHintText(text="Charakter-Name"),
             mode="outlined",
             text=self.template_data.get("name", "")
         )
         self.name_field.bind(text=self._update_name)
-        content.add_widget(MDLabel(text="Charakter-Name:", size_hint_y=None, height="30dp"))
         content.add_widget(self.name_field)
-        
+
         # Beschreibung
         self.description_field = MDTextField(
+            MDTextFieldHintText(text="Beschreibung"),
             mode="outlined",
             text=self.template_data.get("description", ""),
             multiline=True
         )
         self.description_field.bind(text=self._update_description)
-        content.add_widget(MDLabel(text="Beschreibung:", size_hint_y=None, height="30dp"))
         content.add_widget(self.description_field)
-        
+
         # Setting Dropdown
         self._create_setting_dropdown()
         setting_label = MDLabel(text="Setting:", size_hint_y=None, height="30dp")
@@ -241,7 +241,7 @@ class TemplateWizardDialog:
         self.setting_button.add_widget(MDButtonText(text=self.template_data.get("setting", "SWAE")))
         content.add_widget(setting_label)
         content.add_widget(self.setting_button)
-        
+
         # Volk Dropdown
         self._create_race_dropdown()
         race_label = MDLabel(text="Volk:", size_hint_y=None, height="30dp")
@@ -252,24 +252,24 @@ class TemplateWizardDialog:
         self.race_button.add_widget(MDButtonText(text=self.template_data.get("race", "Mensch")))
         content.add_widget(race_label)
         content.add_widget(self.race_button)
-        
+
         # Profile Felder
         profile = self.template_data.get("profile", {})
-        
+
         self.concept_field = MDTextField(
+            MDTextFieldHintText(text="Konzept"),
             mode="outlined",
             text=profile.get("concept", "")
         )
         self.concept_field.bind(text=self._update_concept)
-        content.add_widget(MDLabel(text="Konzept:", size_hint_y=None, height="30dp"))
         content.add_widget(self.concept_field)
-        
+
         self.gender_field = MDTextField(
+            MDTextFieldHintText(text="Geschlecht"),
             mode="outlined",
             text=profile.get("gender", "")
         )
         self.gender_field.bind(text=self._update_gender)
-        content.add_widget(MDLabel(text="Geschlecht:", size_hint_y=None, height="30dp"))
         content.add_widget(self.gender_field)
         
         layout.add_widget(content)
@@ -312,6 +312,7 @@ class TemplateWizardDialog:
             )
             
             field = MDTextField(
+                MDTextFieldHintText(text=f"W4-W12"),
                 mode="outlined",
                 text=str(self.template_data["attributes"].get(attr, 4)),
                 input_filter="int",
@@ -340,25 +341,29 @@ class TemplateWizardDialog:
     def _create_skills_step(self):
         """Erstellt Schritt 3: Fertigkeiten"""
         layout = MDScrollView()
+
+        # Verfügbare Fertigkeiten holen
+        skills = self._get_available_skills()
+        self.skill_fields = {}
+
+        # Content-Höhe dynamisch berechnen
+        content_height = max(800, 80 + len(skills) * 53)
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing="8dp",
             size_hint_y=None,
-            height=self._get_content_height(extended=True)
+            height=f"{content_height}dp"
         )
-        
+
         # Info-Text
         info_label = MDLabel(
-            text="Wähle Fertigkeiten aus und setze ihre Werte",
+            text=f"Wähle Fertigkeiten aus und setze ihre Werte ({len(skills)} verfügbar)",
             theme_text_color="Secondary",
             size_hint_y=None,
             height="30dp"
         )
         content.add_widget(info_label)
-        
-        # Verfügbare Fertigkeiten holen
-        skills = self._get_available_skills()
-        self.skill_fields = {}
         
         for skill in skills:
             skill_layout = MDBoxLayout(
@@ -384,6 +389,7 @@ class TemplateWizardDialog:
             
             # Wert-Eingabe
             field = MDTextField(
+                MDTextFieldHintText(text="Wert"),
                 mode="outlined",
                 text=str(self.template_data["skills"].get(skill, 4)),
                 input_filter="int",
@@ -404,72 +410,121 @@ class TemplateWizardDialog:
     def _create_handicaps_step(self):
         """Erstellt Schritt 4: Handicaps"""
         layout = MDScrollView()
+
+        # Verfügbare Handicaps holen
+        handicaps = self._get_available_handicaps()
+        self.handicap_checkboxes = {}
+        self._available_handicaps = handicaps
+
+        # Content-Höhe dynamisch berechnen
+        num_handicaps = len(handicaps)
+        content_height = max(600, 100 + num_handicaps * 45)
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing="8dp",
             size_hint_y=None,
-            height=self._get_content_height(extended=True)
+            height=f"{content_height}dp"
         )
-        
+
+        # Punkte-Anzeige oben
+        self.handicap_points_label = MDLabel(
+            text=f"Handicap-Punkte: {self._get_handicap_points()} / 4",
+            theme_text_color="Secondary",
+            bold=True,
+            size_hint_y=None,
+            height="35dp"
+        )
+        content.add_widget(self.handicap_points_label)
+
         info_label = MDLabel(
-            text="Wähle Handicaps für deinen Charakter",
+            text="Wähle Handicaps (leicht = 1 Pkt, schwer = 2 Pkt, max. 4 Pkt)",
             theme_text_color="Secondary",
             size_hint_y=None,
             height="30dp"
         )
         content.add_widget(info_label)
-        
-        # Verfügbare Handicaps holen
-        handicaps = self._get_available_handicaps()
-        self.handicap_checkboxes = {}
-        
-        for handicap in handicaps:
+        content.add_widget(MDDivider())
+
+        # Sortiert nach Name alphabetisch
+        sorted_keys = sorted(handicaps.keys(), key=lambda k: (handicaps[k]["name"], handicaps[k]["stufe"]))
+
+        for key in sorted_keys:
+            h = handicaps[key]
             handicap_layout = MDBoxLayout(
                 orientation="horizontal",
                 spacing="8dp",
                 size_hint_y=None,
                 height="40dp"
             )
-            
+
+            # Prüfe ob dieses Handicap bereits ausgewählt ist
+            is_selected = any(
+                sel.get("key") == key for sel in self.template_data["handicaps"]
+            ) if self.template_data["handicaps"] else False
+
             checkbox = MDCheckbox(
                 size_hint_x=None,
                 width="40dp",
-                active=handicap in self.template_data["handicaps"],
-                on_active=lambda instance, value, handicap=handicap: self._toggle_handicap(handicap, value)
+                active=is_selected,
+                on_active=lambda instance, value, k=key: self._toggle_handicap(k, value)
             )
-            
-            label = MDLabel(text=handicap)
-            
-            self.handicap_checkboxes[handicap] = checkbox
+
+            # Label mit Name, Stufe und Punkten
+            stufe_label = "leicht" if h["stufe"] == "leicht" else "schwer"
+            punkte = h["punkte"]
+            label = MDLabel(
+                text=f"{h['name']} ({stufe_label}) - {punkte} Pkt",
+                size_hint_x=0.8
+            )
+
+            # Info-Button für Beschreibung
+            info_btn = MDButton(
+                style="text",
+                size_hint_x=None,
+                width="40dp",
+                on_release=lambda instance, name=h["name"], desc=h["beschreibung"]: self._show_handicap_description(name, desc)
+            )
+            info_btn.add_widget(MDButtonIcon(icon="information-outline"))
+
+            self.handicap_checkboxes[key] = checkbox
             handicap_layout.add_widget(checkbox)
             handicap_layout.add_widget(label)
+            handicap_layout.add_widget(info_btn)
             content.add_widget(handicap_layout)
-        
+
         layout.add_widget(content)
         return layout
     
     def _create_edges_step(self):
         """Erstellt Schritt 5: Talente"""
         layout = MDScrollView()
+
+        # Verfügbare Talente holen
+        edges = self._get_available_edges()
+        self.edge_checkboxes = {}
+
+        # Content-Höhe dynamisch berechnen
+        content_height = max(800, 80 + len(edges) * 48)
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing="8dp",
             size_hint_y=None,
-            height=self._get_content_height(extended=True)
+            height=f"{content_height}dp"
         )
-        
+
         info_label = MDLabel(
-            text="Wähle Talente für deinen Charakter",
+            text=f"Wähle Talente für deinen Charakter ({len(edges)} verfügbar)",
             theme_text_color="Secondary",
             size_hint_y=None,
             height="30dp"
         )
         content.add_widget(info_label)
-        
-        # Verfügbare Talente holen
-        edges = self._get_available_edges()
-        self.edge_checkboxes = {}
-        
+
+        # Alphabetisch sortieren
+        edges = sorted(edges)
+
         for edge in edges:
             edge_layout = MDBoxLayout(
                 orientation="horizontal",
@@ -498,15 +553,22 @@ class TemplateWizardDialog:
     def _create_powers_step(self):
         """Erstellt Schritt 6: Mächte"""
         layout = MDScrollView()
+
+        # Mächte vorab holen für Höhenberechnung
+        powers = self._get_available_powers()
+
+        # Content-Höhe dynamisch berechnen
+        content_height = max(500, 120 + len(powers) * 48)
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
             size_hint_y=None,
-            height=self._get_content_height()
+            height=f"{content_height}dp"
         )
-        
+
         info_label = MDLabel(
-            text="Wähle Mächte (nur für arkane Charaktere)",
+            text=f"Wähle Mächte (nur für arkane Charaktere, {len(powers)} verfügbar)",
             theme_text_color="Secondary",
             size_hint_y=None,
             height="30dp"
@@ -515,16 +577,15 @@ class TemplateWizardDialog:
         
         # Machtpunkte
         self.power_points_field = MDTextField(
+            MDTextFieldHintText(text="Machtpunkte"),
             mode="outlined",
             text=str(self.template_data.get("power_points", 0)),
             input_filter="int"
         )
         self.power_points_field.bind(text=self._update_power_points)
-        content.add_widget(MDLabel(text="Machtpunkte:", size_hint_y=None, height="30dp"))
         content.add_widget(self.power_points_field)
         
-        # Verfügbare Mächte
-        powers = self._get_available_powers()
+        # Verfügbare Mächte (bereits oben geladen)
         self.power_checkboxes = {}
         
         for power in powers:
@@ -572,22 +633,22 @@ class TemplateWizardDialog:
         
         # Startkapital
         self.capital_field = MDTextField(
+            MDTextFieldHintText(text="Startkapital"),
             mode="outlined",
             text=str(self.template_data.get("starting_capital", 500)),
             input_filter="int"
         )
         self.capital_field.bind(text=self._update_capital)
-        content.add_widget(MDLabel(text="Startkapital:", size_hint_y=None, height="30dp"))
         content.add_widget(self.capital_field)
-        
+
         # Equipment Text-Liste (vereinfacht)
         self.equipment_field = MDTextField(
+            MDTextFieldHintText(text="Ausrüstung (eine pro Zeile)"),
             mode="outlined",
-            text="\\n".join(self.template_data.get("equipment", [])),
+            text="\n".join(self.template_data.get("equipment", [])),
             multiline=True
         )
         self.equipment_field.bind(text=self._update_equipment)
-        content.add_widget(MDLabel(text="Ausrüstung:", size_hint_y=None, height="30dp"))
         content.add_widget(self.equipment_field)
         
         layout.add_widget(content)
@@ -633,11 +694,11 @@ class TemplateWizardDialog:
         
         # Dateiname
         self.filename_field = MDTextField(
+            MDTextFieldHintText(text="Template-Dateiname"),
             mode="outlined",
             text=self._generate_filename()
         )
         self.filename_field.bind(text=self._update_filename)
-        content.add_widget(MDLabel(text="Template-Dateiname:", size_hint_y=None, height="30dp"))
         content.add_widget(self.filename_field)
         
         layout.add_widget(content)
@@ -646,7 +707,7 @@ class TemplateWizardDialog:
     # Event Handler
     def _update_name(self, instance, value):
         self.template_data["name"] = value
-    
+
     def _update_description(self, instance, value):
         self.template_data["description"] = value
     
@@ -695,14 +756,80 @@ class TemplateWizardDialog:
         except ValueError:
             pass
     
-    def _toggle_handicap(self, handicap, active):
+    def _toggle_handicap(self, key, active):
         if active:
-            if handicap not in self.template_data["handicaps"]:
-                self.template_data["handicaps"].append(handicap)
+            # Prüfe ob Handicap bereits ausgewählt
+            if any(sel.get("key") == key for sel in self.template_data["handicaps"]):
+                return
+
+            # Hole Handicap-Daten
+            h = self._available_handicaps.get(key, {})
+            punkte = h.get("punkte", 1)
+
+            # Prüfe 4-Punkte-Maximum
+            current_points = self._get_handicap_points()
+            if current_points + punkte > 4:
+                # Checkbox wieder deaktivieren
+                if key in self.handicap_checkboxes:
+                    self.handicap_checkboxes[key].active = False
+                self._update_handicap_points()
+                return
+
+            self.template_data["handicaps"].append({
+                "name": h.get("name", key),
+                "stufe": h.get("stufe", "leicht"),
+                "key": key
+            })
         else:
-            if handicap in self.template_data["handicaps"]:
-                self.template_data["handicaps"].remove(handicap)
-    
+            self.template_data["handicaps"] = [
+                sel for sel in self.template_data["handicaps"]
+                if sel.get("key") != key
+            ]
+        self._update_handicap_points()
+
+    def _get_handicap_points(self):
+        """Berechnet aktuelle Handicap-Punkte aus template_data"""
+        total = 0
+        for h in self.template_data.get("handicaps", []):
+            if isinstance(h, dict):
+                stufe = h.get("stufe", "leicht")
+                total += 2 if stufe == "schwer" else 1
+            else:
+                total += 1  # Legacy: String-Einträge als 1 Punkt
+        return total
+
+    def _update_handicap_points(self):
+        """Aktualisiert die Punkte-Anzeige im UI"""
+        if hasattr(self, 'handicap_points_label'):
+            points = self._get_handicap_points()
+            self.handicap_points_label.text = f"Handicap-Punkte: {points} / 4"
+
+    def _show_handicap_description(self, name, beschreibung):
+        """Zeigt einen Dialog mit der Handicap-Beschreibung"""
+        desc_dialog = MDDialog(
+            MDDialogHeadlineText(text=name),
+            MDDialogContentContainer(
+                MDBoxLayout(
+                    MDLabel(
+                        text=beschreibung,
+                        adaptive_height=True
+                    ),
+                    orientation="vertical",
+                    size_hint_y=None,
+                    height="150dp",
+                    padding="12dp"
+                )
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda *args: desc_dialog.dismiss()
+                )
+            )
+        )
+        desc_dialog.open()
+
     def _toggle_edge(self, edge, active):
         if active:
             if edge not in self.template_data["edges"]:
@@ -733,18 +860,42 @@ class TemplateWizardDialog:
     
     def _update_equipment(self, instance, value):
         # Teile bei Newlines und filtere leere Zeilen
-        equipment_list = [item.strip() for item in value.split("\\n") if item.strip()]
+        equipment_list = [item.strip() for item in value.split("\n") if item.strip()]
         self.template_data["equipment"] = equipment_list
     
     def _update_filename(self, instance, value):
         self.template_filename = value
     
     # Navigation
+    def _save_current_step_data(self):
+        """Sichert Daten des aktuellen Schritts aus den UI-Widgets"""
+        if self.current_step == 0:
+            # Allgemeine Daten
+            if hasattr(self, 'name_field') and self.name_field:
+                self.template_data["name"] = self.name_field.text or ""
+            if hasattr(self, 'description_field') and self.description_field:
+                self.template_data["description"] = self.description_field.text or ""
+            if hasattr(self, 'concept_field') and self.concept_field:
+                self.template_data.setdefault("profile", {})["concept"] = self.concept_field.text or ""
+            if hasattr(self, 'gender_field') and self.gender_field:
+                self.template_data.setdefault("profile", {})["gender"] = self.gender_field.text or ""
+        elif self.current_step == 1:
+            # Attribute
+            if hasattr(self, 'attribute_fields'):
+                for attr, field in self.attribute_fields.items():
+                    try:
+                        val = int(field.text) if field.text else 4
+                        self.template_data["attributes"][attr] = max(4, min(12, val))
+                    except ValueError:
+                        pass
+
     def _next_step(self, *args):
+        self._save_current_step_data()
         self.current_step += 1
         self._show_current_step()
-    
+
     def _previous_step(self, *args):
+        self._save_current_step_data()
         self.current_step -= 1
         self._show_current_step()
     
@@ -757,6 +908,9 @@ class TemplateWizardDialog:
     def _finish_wizard(self, *args):
         """Schließt den Wizard ab und speichert das Template"""
         try:
+            # Aktuelle Schritt-Daten sichern
+            self._save_current_step_data()
+
             # Validierung durchführen
             validation_errors = self._validate_template_data()
             if validation_errors:
@@ -792,58 +946,13 @@ class TemplateWizardDialog:
             self._show_error_dialog(str(e))
     
     def _validate_template_data(self):
-        """Validiert die Template-Daten und gibt eine Liste von Fehlern zurück"""
+        """Validiert die Template-Daten - nur Pflichtfelder prüfen"""
         errors = []
-        
-        # Grundlegende Pflichtfelder prüfen
+
+        # Nur Name ist wirklich erforderlich
         if not self.template_data.get("name", "").strip():
             errors.append("• Template-Name ist erforderlich")
-        
-        if not self.template_data.get("description", "").strip():
-            errors.append("• Template-Beschreibung ist erforderlich")
-        
-        # Attributspunkte prüfen
-        attr_costs = sum(max(0, val - 4) for val in self.template_data.get("attributes", {}).values())
-        available_attr_points = self.template_data.get("starting_attribute_points", 5)
-        if attr_costs > available_attr_points:
-            errors.append(f"• Zu viele Attributspunkte verwendet: {attr_costs} von {available_attr_points}")
-        
-        # Fertigkeitspunkte prüfen (vereinfachte Berechnung)
-        skills = self.template_data.get("skills", {})
-        if skills:
-            skill_costs = 0
-            for skill, value in skills.items():
-                if value >= 4:
-                    skill_costs += (value - 2) // 2  # Vereinfachte Kostenberechnung
-            available_skill_points = self.template_data.get("starting_skill_points", 12)
-            if skill_costs > available_skill_points:
-                errors.append(f"• Zu viele Fertigkeitspunkte verwendet: {skill_costs} von {available_skill_points}")
-        
-        # Handicaps vs. Talente Balance prüfen
-        handicaps = self.template_data.get("handicaps", [])
-        edges = self.template_data.get("edges", [])
-        
-        # Grobe Regel: Anzahl Handicaps sollte >= Anzahl zusätzlicher Talente sein
-        if len(edges) > len(handicaps) + 1:  # +1 für kostenloses Startertalent
-            errors.append(f"• Unausgewogene Balance: {len(edges)} Talente benötigen mehr Handicaps ({len(handicaps)} vorhanden)")
-        
-        # Machtpunkte prüfen wenn Mächte vorhanden
-        powers = self.template_data.get("powers", [])
-        power_points = self.template_data.get("power_points", 0)
-        if powers and power_points <= 0:
-            errors.append("• Charaktere mit Mächten benötigen Machtpunkte > 0")
-        
-        # Arkaner Hintergrund prüfen wenn Mächte vorhanden
-        if powers and not any("Arkaner Hintergrund" in edge or "Arcane Background" in edge for edge in edges):
-            errors.append("• Charaktere mit Mächten benötigen den 'Arkaner Hintergrund' als Talent")
-        
-        # Dateiname-Validierung
-        filename = getattr(self, 'template_filename', self._generate_filename())
-        if not filename.strip():
-            errors.append("• Template-Dateiname ist erforderlich")
-        elif any(char in filename for char in ['/', '\\', ':', '*', '?', '"', '<', '>', '|']):
-            errors.append("• Template-Dateiname enthält ungültige Zeichen")
-        
+
         return errors
     
     # Hilfsmethoden
@@ -890,9 +999,15 @@ class TemplateWizardDialog:
         # Handicaps
         handicaps = data.get('handicaps', [])
         if handicaps:
-            summary += f"\\n[b]Handicaps ({len(handicaps)}):[/b]\\n"
+            total_points = self._get_handicap_points()
+            summary += f"\\n[b]Handicaps ({total_points} Pkt):[/b]\\n"
             for handicap in handicaps:
-                summary += f"  • {handicap}\\n"
+                if isinstance(handicap, dict):
+                    stufe = handicap.get('stufe', 'leicht')
+                    punkte = 2 if stufe == 'schwer' else 1
+                    summary += f"  • {handicap['name']} ({stufe}) - {punkte} Pkt\\n"
+                else:
+                    summary += f"  • {handicap}\\n"
         
         # Talente
         edges = data.get('edges', [])
@@ -948,20 +1063,42 @@ class TemplateWizardDialog:
             return ["Athletik", "Kämpfen", "Wahrnehmung", "Heimlichkeit", "Überreden"]
     
     def _get_available_handicaps(self):
-        """Holt verfügbare Handicaps aus dem aktuellen Setting"""
+        """Holt verfügbare Handicaps aus dem aktuellen Setting als strukturierte Dicts"""
         try:
             if hasattr(self.app, 'controller') and self.app.controller:
-                handicaps = self.app.controller.charakter.setting.handicaps
-                return [h.name for h in handicaps.values()]
-            return ["Arrogant", "Außenseiter", "Große Klappe"]  # Fallback
-        except:
-            return ["Arrogant", "Außenseiter", "Große Klappe"]
+                charakter = self.app.controller.charakter
+                handicaps = charakter.handicaps
+                if not handicaps:
+                    return self._get_fallback_handicaps()
+                result = {}
+                for key, h in handicaps.items():
+                    result[key] = {
+                        "key": key,
+                        "name": h.name,
+                        "stufe": h.stufe,
+                        "punkte": h.punkte,
+                        "beschreibung": h.beschreibung
+                    }
+                return result
+            return self._get_fallback_handicaps()
+        except Exception as e:
+            Logger.error(f"Template-Wizard: Fehler beim Laden der Handicaps: {e}")
+            return self._get_fallback_handicaps()
+
+    def _get_fallback_handicaps(self):
+        """Fallback-Handicaps wenn kein Setting geladen"""
+        return {
+            "Arrogant (leicht)": {"key": "Arrogant (leicht)", "name": "Arrogant", "stufe": "leicht", "punkte": 1, "beschreibung": "Der Charakter glaubt, er sei besser als andere."},
+            "Arrogant (schwer)": {"key": "Arrogant (schwer)", "name": "Arrogant", "stufe": "schwer", "punkte": 2, "beschreibung": "Der Charakter glaubt, er sei besser als andere."},
+            "Außenseiter (leicht)": {"key": "Außenseiter (leicht)", "name": "Außenseiter", "stufe": "leicht", "punkte": 1, "beschreibung": "Der Charakter gehört nicht dazu."},
+            "Große Klappe (leicht)": {"key": "Große Klappe (leicht)", "name": "Große Klappe", "stufe": "leicht", "punkte": 1, "beschreibung": "Der Charakter redet zu viel."}
+        }
     
     def _get_available_edges(self):
         """Holt verfügbare Talente aus dem aktuellen Setting"""
         try:
             if hasattr(self.app, 'controller') and self.app.controller:
-                edges = self.app.controller.charakter.setting.talente
+                edges = self.app.controller.charakter.talente
                 return [e.name for e in edges.values()]
             return ["Arkaner Hintergrund", "Kämpfer", "Gelehrter"]  # Fallback
         except:
@@ -971,7 +1108,7 @@ class TemplateWizardDialog:
         """Holt verfügbare Mächte aus dem aktuellen Setting"""
         try:
             if hasattr(self.app, 'controller') and self.app.controller:
-                powers = self.app.controller.charakter.setting.maechte
+                powers = self.app.controller.charakter.maechte
                 return [p.name for p in powers.values()]
             return ["Feuerball", "Heilung", "Rüstung"]  # Fallback
         except:

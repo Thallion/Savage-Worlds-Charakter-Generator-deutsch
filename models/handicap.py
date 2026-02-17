@@ -22,6 +22,7 @@ class Handicap(EventDispatcher):
         self.aktiv = True
         self.custom = custom
         self.auto_applied = False
+        self.individuelle_beschreibung = None
         self.update_punkte()
 
     def update_punkte(self):

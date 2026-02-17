@@ -1,0 +1,56 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-16 10:43:10
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-16 10:43:10] Auto-Generierung abgeschlossen:
+    Template: qqq (Setting: SWAE)
+    Zusätzliche Punkte: 3
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-16 10:43:10] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-16 10:43:10] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-16 10:43:10] Konstitution: W6 → W8 (1 Standard)
+  [2026-02-16 10:43:10] Konstitution: W8 → W10 (1 Standard)
+  [2026-02-16 10:43:10] Konstitution: W10 → W12 (1 Standard)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-16 10:43:10] Heimlichkeit: W4 → W6 (1 Standard)
+  [2026-02-16 10:43:10] Heimlichkeit: W6 → W8 (1 Standard)
+  [2026-02-16 10:43:10] Heimlichkeit: W8 → W10 (1 Standard)
+  [2026-02-16 10:43:10] Überreden: W4 → W6 (1 Standard)
+  [2026-02-16 10:43:10] Überreden: W6 → W8 (1 Standard)
+  [2026-02-16 10:43:10] Überreden: W8 → W10 (1 Standard)
+  [2026-02-16 10:43:10] Überreden: W10 → W12 (1 2 Handicap-Punkt)
+  [2026-02-16 10:43:10] Wahrnehmung: W4 → W6 (1 Auto-Generator)
+  [2026-02-16 10:43:10] Wahrnehmung: W6 → W8 (1 Auto-Generator)
+  [2026-02-16 10:43:10] Kämpfen: W2 → W4 (1 1 Handicap-Punkt)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-16 10:43:10] Arm ( - Punkte: 1)
+  [2026-02-16 10:43:10] Arrogant ( - Punkte: 2)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-16 10:43:10] Aufheben (Rang: Anfänger)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-16 10:43:10] Schwert hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     5 Punkte (5 Steigerungen)
+  Fertigkeiten:  10 Punkte (10 Steigerungen)
+  Talente:       0 Punkte (0 hinzugefügt, 0 entfernt)
+  Handicaps:     +3 erhalten, 2 verwendet, 1 verfügbar (2 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (1 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

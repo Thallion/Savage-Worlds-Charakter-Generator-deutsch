@@ -1,0 +1,133 @@
+🎯 STARTE CHARAKTERGENERIERUNG: QQQ
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'qqq' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Arm hinzugefügt (+1 Punkte)
+  ✅ Arrogant hinzugefügt (+2 Punkte)
+  ❌ Handicap 'Außenseiter_leicht' nicht gefunden
+📊 HANDICAP-PUNKTE GESAMT: +3 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 3
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 3 Handicap-Punkte = 1 Attribute oder 3 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  ✅ Stärke bereits auf W4
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W12 (4 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+    ✅ Steigerung 4: W10 → W12 (Standard)
+  ✅ Verstand bereits auf W4
+  ✅ Willenskraft bereits auf W4
+📊 ATTRIBUTSKOSTEN GESAMT: 5 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 3
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Heimlichkeit: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Überreden: W4 → W12 (4 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+    ✅ Steigerung 4: W10 → W12 (2 Handicap-Punkt)
+  📈 Wahrnehmung: W4 → W8 (2 Steigerungen)
+    ⚡ Automatisch 2 Fertigkeitspunkte hinzugefügt
+    ✅ Steigerung 1: W4 → W6 (Auto-Punkte)
+    ⚡ Automatisch 1 Fertigkeitspunkte hinzugefügt
+    ✅ Steigerung 2: W6 → W8 (Auto-Punkte)
+  📈 Kämpfen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (1 Handicap-Punkt)
+📊 FERTIGKEITSKOSTEN GESAMT: 10 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Arkaner Hintergrund (Alchemist)
+  ❌ Talent 'Arkaner Hintergrund (Alchemist)' nicht gefunden
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 7: MÄCHTE WÄHLEN (OHNE VORAUSSETZUNGEN) ---
+  🔮 Arkaner Hintergrund wird automatisch hinzugefügt/angenommen
+  ✅ Arkaner Hintergrund aktiviert (Machtpunkte: 10)
+  ✅ Aufheben hinzugefügt - Voraussetzungen ignoriert
+  ❌ Aufspüren nicht verfügbar
+  ❌ Ausspähung nicht verfügbar
+📊 MÄCHTE GESAMT: 1 Mächte hinzugefügt
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  ✅ Schwert gefunden und ausgewählt
+📊 AUSRÜSTUNG GESAMT: 1 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 1 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: qqq
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 5 Punkte
+Fertigkeiten: 10 Punkte
+Handicaps: +3 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +3
+Verfügbar gesamt: 20
+Ausgegeben: 15
+Differenz: 5
+
+⚡ AUTOMATISCH HINZUGEFÜGT: 3 Punkte
+   (Um alle Anforderungen zu erfüllen)
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W4
+  Stärke: W4
+  Konstitution: W12
+  Willenskraft: W4
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W4
+  Heimlichkeit: W10
+  Überreden: W12
+  Wahrnehmung: W8
+  Kämpfen: W4
+
+⭐ TALENTE:
+  Arkaner Hintergrund
+
+⚠️ HANDICAPS:
+  Arm (1 Punkte)
+  Arrogant (2 Punkte)
+
+🔮 MÄCHTE:
+  Aufheben [!]
+Machtpunkte: 10
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/qqq_kosten_20260216_104310.txt

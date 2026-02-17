@@ -1,0 +1,79 @@
+================================================================================
+KOSTEN-LOG FÜR: Seelah
+ERSTELLT: 2026-02-15 14:48:26
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Geschicklichkeit: W4 → W6 = 1 Punkte
+  Konstitution: W4 → W6 = 1 Punkte
+  Konstitution: W6 → W8 = 1 Punkte
+  Stärke: W4 → W6 = 1 Punkte
+  Stärke: W6 → W8 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+  Willenskraft: W6 → W8 = 1 Punkte
+GESAMT: 8 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+  Athletik: W4 → W6 = 1 Punkte
+  Einschüchtern: W2 → W4 = 1 Punkte
+  Einschüchtern: W4 → W6 = 1 Punkte
+  Kämpfen: W2 → W4 = 1 Punkte
+  Kämpfen: W4 → W6 = 1 Punkte
+  Kämpfen: W6 → W8 = 1 Punkte
+  Reiten: W2 → W4 = 1 Punkte
+  Reiten: W4 → W6 = 1 Punkte
+  Schießen: W2 → W4 = 1 Punkte
+  Schießen: W4 → W6 = 1 Punkte
+  Wahrnehmung: W4 → W6 = 1 Punkte
+GESAMT: 11 Punkte
+
+HANDICAPS:
+----------------------------------------
+  Ehrenkodex: +2 Punkte
+  Loyal: +1 Punkte
+  Dünnhäutig: +1 Punkte
+  Schwur: +1 Punkte
+GESAMT: +5 Punkte (Bonus)
+
+HANDICAP-PUNKTE VERWENDUNG:
+----------------------------------------
+Handicap-Punkte können verwendet werden für:
+  • 1 Punkt = 2 Attributsteigerungen
+  • 1 Punkt = 1 Anfänger-Talent
+  • 1 Punkt = 2 Fertigkeitssteigerungen
+  • 1 Punkt = Startgeld erhöhen
+→ 5 Handicap-Punkte entsprechen:
+  - Bis zu 10 Attribut-/Fertigkeitssteigerungen ODER
+  - Bis zu 5 Talente ODER
+  - Kombination aus beidem
+
+TALENTE:
+----------------------------------------
+  Auserwählter: GRATIS (Völker-Bonus)
+  Paladin: 1 Punkte [Voraussetzungen ignoriert]
+GESAMT: 1 Punkte
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +5
+Verfügbare Punkte gesamt: 22
+
+Ausgegeben für Attribute: 8
+Ausgegeben für Fertigkeiten: 11
+Ausgegeben für Talente: 1
+Ausgegeben gesamt: 20
+
+ÜBERSCHUSS: 2 Punkte nicht verwendet
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================

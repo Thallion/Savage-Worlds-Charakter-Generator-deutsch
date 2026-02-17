@@ -365,38 +365,39 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
     elements.append(KeepTogether(talente_section))
 
     # **Mächte Abschnitt**
-    maechte_section = []
-    maechte_section.append(Paragraph("Mächte", style_heading))
     maechte = charakter.selected_maechte
-    data = [["Name", "Rang", "MP", "Reichweite", "Dauer"]]
-    for macht_name_key in maechte:
-        macht = charakter.maechte.get(macht_name_key)
-        if macht:
-            data.append([
-                macht.name,
-                macht.rang,
-                macht.machtpunkte,
-                macht.reichweite,
-                macht.dauer
+    if maechte:
+        maechte_section = []
+        maechte_section.append(Paragraph("Mächte", style_heading))
+        data = [["Name", "Rang", "MP", "Reichweite", "Dauer"]]
+        for macht_name_key in maechte:
+            macht = charakter.maechte.get(macht_name_key)
+            if macht:
+                data.append([
+                    macht.name,
+                    macht.rang,
+                    macht.machtpunkte,
+                    macht.reichweite,
+                    macht.dauer
+                ])
+                # Beschreibung hinzufügen
+                beschreibung_paragraph = Paragraph(macht.beschreibung, style_normal)
+                data.append([beschreibung_paragraph] + [''] * 4)  # Beschreibung über alle 6 Spalten
+
+        table = Table(data, colWidths=[205, 80, 80, 80, 80], hAlign='LEFT')  # Summe = 575
+        # Definieren eines neuen TableStyle für Mächte, basierend auf tabellen_style_commands
+        maechte_style_commands = tabellen_style_commands.copy()
+        for row in range(2, len(data), 2):
+            maechte_style_commands.extend([
+                ('SPAN', (0, row), (-1, row)),          # Span über alle Spalten
+                ('BACKGROUND', (0, row), (-1, row), oldlace),  # Hintergrundfarbe für Beschreibung
             ])
-            # Beschreibung hinzufügen
-            beschreibung_paragraph = Paragraph(macht.beschreibung, style_normal)
-            data.append([beschreibung_paragraph] + [''] * 4)  # Beschreibung über alle 6 Spalten
 
-    table = Table(data, colWidths=[205, 80, 80, 80, 80], hAlign='LEFT')  # Summe = 575
-    # Definieren eines neuen TableStyle für Mächte, basierend auf tabellen_style_commands
-    maechte_style_commands = tabellen_style_commands.copy()
-    for row in range(2, len(data), 2):
-        maechte_style_commands.extend([
-            ('SPAN', (0, row), (-1, row)),          # Span über alle Spalten
-            ('BACKGROUND', (0, row), (-1, row), oldlace),  # Hintergrundfarbe für Beschreibung
-        ])
-
-    maechte_style = TableStyle(maechte_style_commands)
-    table.setStyle(maechte_style)
-    maechte_section.append(table)
-    maechte_section.append(Spacer(1, 12))  # 12 Punkte Abstand
-    elements.append(KeepTogether(maechte_section))
+        maechte_style = TableStyle(maechte_style_commands)
+        table.setStyle(maechte_style)
+        maechte_section.append(table)
+        maechte_section.append(Spacer(1, 12))  # 12 Punkte Abstand
+        elements.append(KeepTogether(maechte_section))
 
     # **Allgemeine Ausrüstung Abschnitt** (analog zu Waffen)
     allgemeine_ausruestung_section = []
@@ -427,33 +428,34 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
     elements.append(KeepTogether(allgemeine_ausruestung_section))
 
     # **Waffen Abschnitt**
-    waffen_section = []
-    waffen_section.append(Paragraph("Waffen", style_heading))
     waffen = [w for w in charakter.selected_waffen if w.angelegt]
-    data = [["Name", "Schaden", "Reichweite", "FR", "Schuss", "PB"]]
-    for waffe in waffen:
-        eigenschaften = waffe.eigenschaften
-        data.append([
-            waffe.name,
-            eigenschaften.get('Schaden', '-'),
-            eigenschaften.get('Reichweite', '-'),
-            eigenschaften.get('FR', '-'),
-            eigenschaften.get('Schuss', '-'),
-            eigenschaften.get('PB', '-')
-        ])
+    if waffen:
+        waffen_section = []
+        waffen_section.append(Paragraph("Waffen", style_heading))
+        data = [["Name", "Schaden", "Reichweite", "FR", "Schuss", "PB"]]
+        for waffe in waffen:
+            eigenschaften = waffe.eigenschaften
+            data.append([
+                waffe.name,
+                eigenschaften.get('Schaden', '-'),
+                eigenschaften.get('Reichweite', '-'),
+                eigenschaften.get('FR', '-'),
+                eigenschaften.get('Schuss', '-'),
+                eigenschaften.get('PB', '-')
+            ])
 
-    # Berechnung der Spaltenbreiten basierend auf Anzahl der Spalten und Gesamtbreite 
-    waffen_table = Table(data, colWidths=[205, 70, 70, 60, 60, 60], hAlign='LEFT')  # Summe = 575
-    waffen_table.setStyle(tabellen_style)
-    waffen_section.append(waffen_table)
-    waffen_section.append(Spacer(1, 12))  # 12 Punkte Abstand
-    elements.append(KeepTogether(waffen_section))
+        # Berechnung der Spaltenbreiten basierend auf Anzahl der Spalten und Gesamtbreite
+        waffen_table = Table(data, colWidths=[205, 70, 70, 60, 60, 60], hAlign='LEFT')  # Summe = 575
+        waffen_table.setStyle(tabellen_style)
+        waffen_section.append(waffen_table)
+        waffen_section.append(Spacer(1, 12))  # 12 Punkte Abstand
+        elements.append(KeepTogether(waffen_section))
 
     # **Rüstungen Abschnitt**
-    ruestungen_section = []
-    ruestungen_section.append(Paragraph("Rüstungen", style_heading))
     ruestungen = [r for r in charakter.selected_ruestungen if r.angelegt]
     if ruestungen:
+        ruestungen_section = []
+        ruestungen_section.append(Paragraph("Rüstungen", style_heading))
         data = [["Name", "Torso", "Arme", "Beine", "Kopf"]]
         for ruestung in ruestungen:
             data.append([
@@ -489,41 +491,101 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
         ])
         table.setStyle(ruestungen_style)
         ruestungen_section.append(table)
-    else:
-        ruestungen_section.append(Paragraph("Keine Rüstungen angelegt.", style_normal))
-    ruestungen_section.append(Spacer(1, 12))  # 12 Punkte Abstand
-    elements.append(KeepTogether(ruestungen_section))
+        ruestungen_section.append(Spacer(1, 12))  # 12 Punkte Abstand
+        elements.append(KeepTogether(ruestungen_section))
 
     # **Schilde Abschnitt** (analog zu Waffen)
-    schilde_section = []
-    schilde_section.append(Paragraph("Schilde", style_heading))
-
-    # Analog zu Waffen (waffen = [w for w in ... if w.angelegt]):
     # Bei Schilden: nur angelegte Schilde anzeigen
     schilde_items = [
         s for name, s in charakter.ausruestung.items()
         if s in charakter.selected_schilde and s.angelegt
         ]
 
-    # Spalten analog zu Waffen, nur an Schilde angepasst:
-    # Name, Parade, Deckung, Mindeststärke, Beschreibung
-    data = [["Name", "Parade", "Deckung", "Mindeststärke"]]
-    for schild in schilde_items:
-        parade = getattr(schild, 'parade', '-')
-        deckung = getattr(schild, 'deckung', '-')
-        mindeststaerke = getattr(schild, 'mindeststaerke', '-')
-        data.append([
-            schild.name,
-            str(parade),
-            str(deckung),
-            mindeststaerke
-        ])
+    if schilde_items:
+        schilde_section = []
+        schilde_section.append(Paragraph("Schilde", style_heading))
 
-    schilde_table = Table(data, colWidths=[265, 80, 80, 100], hAlign='LEFT')
-    schilde_table.setStyle(TableStyle(tabellen_style_commands.copy()))
-    schilde_section.append(schilde_table)
-    schilde_section.append(Spacer(1, 12))
-    elements.append(KeepTogether(schilde_section))
+        # Spalten analog zu Waffen, nur an Schilde angepasst:
+        # Name, Parade, Deckung, Mindeststärke
+        data = [["Name", "Parade", "Deckung", "Mindeststärke"]]
+        for schild in schilde_items:
+            parade = getattr(schild, 'parade', '-')
+            deckung = getattr(schild, 'deckung', '-')
+            mindeststaerke = getattr(schild, 'mindeststaerke', '-')
+            data.append([
+                schild.name,
+                str(parade),
+                str(deckung),
+                mindeststaerke
+            ])
+
+        schilde_table = Table(data, colWidths=[265, 80, 80, 100], hAlign='LEFT')
+        schilde_table.setStyle(TableStyle(tabellen_style_commands.copy()))
+        schilde_section.append(schilde_table)
+        schilde_section.append(Spacer(1, 12))
+        elements.append(KeepTogether(schilde_section))
+
+    # **Steigerungs-Journal Abschnitt**
+    journal = getattr(charakter, 'steigerungs_journal', None)
+    if journal and isinstance(journal, dict) and journal.get('entries'):
+        journal_entries = journal['entries']
+        # Nur Einträge mit relevanten Steigerungen (keine Meta-Einträge wie charakter_geladen)
+        steigerungs_typen = {
+            'attribut_steigerung': 'Attribut',
+            'fertigkeit_steigerung': 'Fertigkeit',
+            'talent_hinzugefuegt': 'Talent',
+            'talent_entfernt': 'Talent',
+            'handicap_hinzugefuegt': 'Handicap',
+            'handicap_entfernt': 'Handicap',
+            'handicap_reduziert': 'Handicap',
+            'macht_hinzugefuegt': 'Macht',
+            'macht_entfernt': 'Macht',
+        }
+        relevante_eintraege = [e for e in journal_entries if e.get('type') in steigerungs_typen]
+
+        if relevante_eintraege:
+            steigerungen_section = []
+            steigerungen_section.append(Paragraph("Steigerungen", style_heading))
+
+            data = [["Rang", "Typ", "Name", "Kosten"]]
+            for entry in relevante_eintraege:
+                rang = entry.get('rang', '')
+                details = entry.get('details', {})
+                entry_type = entry.get('type', '')
+                typ = steigerungs_typen.get(entry_type, '')
+                name = details.get('name', '')
+
+                # Name mit Kontext anreichern
+                if entry_type in ('attribut_steigerung', 'fertigkeit_steigerung'):
+                    von = details.get('von', '')
+                    nach = details.get('nach', '')
+                    name = f"{name}: W{von} → W{nach}"
+                elif entry_type == 'talent_entfernt':
+                    name = f"{name} (entfernt)"
+                elif entry_type == 'handicap_entfernt':
+                    name = f"{name} (entfernt)"
+                elif entry_type == 'handicap_reduziert':
+                    name = f"{name} (reduziert)"
+                elif entry_type == 'macht_entfernt':
+                    name = f"{name} (entfernt)"
+
+                # Kosten-Text
+                kosten = details.get('kosten', details.get('punkte', ''))
+                kosten_typ = details.get('kosten_typ', '')
+                if kosten != '' and kosten_typ:
+                    kosten_text = f"{kosten} {kosten_typ}"
+                elif kosten != '':
+                    kosten_text = str(kosten)
+                else:
+                    kosten_text = ''
+
+                data.append([rang, typ, name, kosten_text])
+
+            steigerungen_table = Table(data, colWidths=[100, 75, 250, 100], hAlign='LEFT')
+            steigerungen_table.setStyle(TableStyle(tabellen_style_commands.copy()))
+            steigerungen_section.append(steigerungen_table)
+            steigerungen_section.append(Spacer(1, 12))
+            elements.append(KeepTogether(steigerungen_section))
 
     # PDF erstellen mit oder ohne Hintergrundbild
     if printer_friendly:

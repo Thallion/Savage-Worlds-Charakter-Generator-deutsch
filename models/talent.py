@@ -30,6 +30,7 @@ class Talent(EventDispatcher):
         self.custom = custom
         self.auto_handicaps = auto_handicaps or []
         self.auto_talente = auto_talente or []
+        self.individuelle_beschreibung = None
 
     def __str__(self):
         return f"{self.name} ({self.kategorie}, Rang: {self.rang})"

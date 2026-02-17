@@ -1,0 +1,318 @@
+{
+  "session_start": "2026-02-15T17:02:37.580274",
+  "entries": [
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "auto_character_generated",
+      "details": {
+        "name": "Clementine",
+        "template": "Clementine",
+        "setting": "SWAE",
+        "total_auto_points": 0,
+        "cost_log_file": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Clementine_kosten_20260215_170237.txt"
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Naturwissenschaften",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Naturwissenschaften",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Naturwissenschaften",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Naturwissenschaften",
+        "von": 8,
+        "nach": 10,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Recherche",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Reparieren",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Reparieren",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Reparieren",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Wahrnehmung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Wahrnehmung",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Gelehrter",
+        "kosten": 0,
+        "auto_generated": true,
+        "gratis": true,
+        "voraussetzungen_ignoriert": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "McGyver",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Reparaturgenie",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Misstrauisch",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Schwerhörig",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Tick",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Revolver (12/24/48, 2W6+1, PB 1)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Brechstange",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 17:02:37",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Van",
+        "auto_generated": true,
+        "custom": false
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 5,
+    "fertigkeiten": 12,
+    "talente": 2,
+    "handicaps": 0,
+    "maechte": 0,
+    "aufstiege": 0
+  }
+}

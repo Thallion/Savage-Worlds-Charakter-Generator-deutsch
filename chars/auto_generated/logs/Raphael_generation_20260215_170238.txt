@@ -1,0 +1,2219 @@
+🎯 STARTE CHARAKTERGENERIERUNG: AIDAN
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Aidan' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Heldenhaft hinzugefügt (+2 Punkte)
+  ✅ Loyal hinzugefügt (+1 Punkte)
+  ✅ Sanftmütig hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Allgemeinwissen: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Athletik bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Kämpfen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Einschüchtern: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Provozieren: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Schießen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Überreden: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 11 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Attraktiv
+  ✅ Attraktiv hinzugefügt (GRATIS - Völker-Bonus)
+  ✅ Starker Wille hinzugefügt (2 Handicap-Punkte) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Machete (Stä+W6) nicht gefunden - lege als Custom-Item an...
+    ✅ Machete (Stä+W6) erfolgreich hinzugefügt
+  📦 Pistole (12/24/48, 2W6+1, PB 1) nicht gefunden - lege als Custom-Item an...
+    ✅ Pistole (12/24/48, 2W6+1, PB 1) erfolgreich hinzugefügt
+  📦 Modische Lederjacke (+1, Arme und Torso) nicht gefunden - lege als Custom-Item an...
+    ✅ Modische Lederjacke (+1, Arme und Torso) erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 2 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Aidan
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 11 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 18
+Differenz: 3
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W6
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W6
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W10
+  Wahrnehmung: W6
+  Kämpfen: W4
+  Schießen: W4
+  Einschüchtern: W6
+  Provozieren: W6
+
+⭐ TALENTE:
+  Attraktiv
+  Starker Wille [!]
+
+⚠️ HANDICAPS:
+  Heldenhaft (2 Punkte)
+  Loyal (1 Punkte)
+  Sanftmütig (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Aidan_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Aidan_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Aidan_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Aidan_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_aidan_held_anfaenger/Aidan_20260215_170237.json
+✅ Erfolgreich gespeichert (16,763 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Aidan
+🎯 STARTE CHARAKTERGENERIERUNG: ANGROND
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Angrond' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Phobie hinzugefügt (+1 Punkte)
+  ✅ Tick hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +2 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 2
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 2 Handicap-Punkte = 1 Attribute oder 2 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 2
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 ATTRIBUTSKOSTEN GESAMT: 5 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Diebeskunst: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Heimlichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Provozieren: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überreden: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (1 Handicap-Punkt)
+📊 FERTIGKEITSKOSTEN GESAMT: 13 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Beidhändig
+  ✅ Beidhändig hinzugefügt (GRATIS - Völker-Bonus)
+  ⚠️ Glück direkt gesetzt (Fallback) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 5 Wurfdolche (3/6/9, Stä+W4) nicht gefunden - lege als Custom-Item an...
+    ✅ 5 Wurfdolche (3/6/9, Stä+W4) erfolgreich hinzugefügt
+  📦 Lederweste (+1 Torso) nicht gefunden - lege als Custom-Item an...
+    ✅ Lederweste (+1 Torso) erfolgreich hinzugefügt
+  📦 Kurzschwert (Stä+W6) nicht gefunden - lege als Custom-Item an...
+    ✅ Kurzschwert (Stä+W6) erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 4 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 2 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Angrond
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 5 Punkte
+Fertigkeiten: 13 Punkte
+Handicaps: +2 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +2
+Verfügbar gesamt: 19
+Ausgegeben: 19
+Differenz: 0
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W8
+  Verstand: W6
+  Stärke: W4
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W8
+  Heimlichkeit: W8
+  Überreden: W6
+  Wahrnehmung: W6
+  Kämpfen: W6
+  Diebeskunst: W8
+  Provozieren: W6
+
+⭐ TALENTE:
+  Beidhändig
+  Glück [!]
+
+⚠️ HANDICAPS:
+  Phobie_leicht (1 Punkte)
+  Tick (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Angrond_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Angrond_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Angrond_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Angrond_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_angrond_streuner_anfaenger/Angrond_20260215_170237.json
+✅ Erfolgreich gespeichert (16,736 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Angrond
+🎯 STARTE CHARAKTERGENERIERUNG: ARTHAN
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Arthan' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Ehrenkodex hinzugefügt (+2 Punkte)
+  ✅ Pazifist hinzugefügt (+1 Punkte)
+  ✅ Sanftmütig hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  ✅ Athletik bereits auf W4
+  📈 Glaube: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Heilen: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  ✅ Heimlichkeit bereits auf W4
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überreden: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 11 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Arkaner Hintergrund (Wunder)
+  ❌ Talent 'Arkaner Hintergrund (Wunder)' nicht gefunden
+  ✅ Heiler hinzugefügt (2 Handicap-Punkte) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 7: MÄCHTE WÄHLEN (OHNE VORAUSSETZUNGEN) ---
+  🔮 Arkaner Hintergrund wird automatisch hinzugefügt/angenommen
+  ✅ Arkaner Hintergrund aktiviert
+  ✅ Heilung hinzugefügt - Voraussetzungen ignoriert
+  ✅ Linderung hinzugefügt - Voraussetzungen ignoriert
+  ✅ Waffe verbessern hinzugefügt - Voraussetzungen ignoriert
+  🔮 Machtpunkte gesetzt: 10
+📊 MÄCHTE GESAMT: 3 Mächte hinzugefügt
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Kettenhemd (+3) nicht gefunden - lege als Custom-Item an...
+    ✅ Kettenhemd (+3) erfolgreich hinzugefügt
+  📦 Kriegshammer (Stä+W6) nicht gefunden - lege als Custom-Item an...
+    ✅ Kriegshammer (Stä+W6) erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 2 Items
+  🔮 selected_maechte: 3 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Arthan
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 11 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 18
+Differenz: 3
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W6
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W8
+  Wahrnehmung: W6
+  Kämpfen: W6
+  Glaube: W8
+  Heilen: W8
+
+⭐ TALENTE:
+  Arkaner Hintergrund
+  Heiler [!]
+
+⚠️ HANDICAPS:
+  Ehrenkodex (2 Punkte)
+  Pazifist_leicht (1 Punkte)
+  Sanftmütig (1 Punkte)
+
+🔮 MÄCHTE:
+  Heilung [!]
+  Linderung [!]
+  Waffe verbessern [!]
+Machtpunkte: 10
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Arthan_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Arthan_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Arthan_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Arthan_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_arthan_priester_anfaenger/Arthan_20260215_170237.json
+✅ Erfolgreich gespeichert (17,445 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Arthan
+🎯 STARTE CHARAKTERGENERIERUNG: ASERA
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Asera' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Angetrieben hinzugefügt (+1 Punkte)
+  ✅ Blutrünstig hinzugefügt (+2 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +3 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 3
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 3 Handicap-Punkte = 1 Attribute oder 3 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Heimlichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Schießen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überleben: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Naturbursche
+  ✅ Naturbursche hinzugefügt (GRATIS - Völker-Bonus)
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Flammengewehr (Kegelschablone, 3W6) nicht gefunden - lege als Custom-Item an...
+    ✅ Flammengewehr (Kegelschablone, 3W6) erfolgreich hinzugefügt
+  📦 Schockstab (Stä+W4) nicht gefunden - lege als Custom-Item an...
+    ✅ Schockstab (Stä+W4) erfolgreich hinzugefügt
+  📦 Lederwams (+1, Torso) nicht gefunden - lege als Custom-Item an...
+    ✅ Lederwams (+1, Torso) erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Asera
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +3 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +3
+Verfügbar gesamt: 20
+Ausgegeben: 18
+Differenz: 2
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W8
+  Verstand: W8
+  Stärke: W4
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W6
+  Heimlichkeit: W8
+  Überreden: W4
+  Wahrnehmung: W8
+  Kämpfen: W6
+  Schießen: W6
+  Überleben: W8
+
+⭐ TALENTE:
+  Naturbursche
+
+⚠️ HANDICAPS:
+  Angetrieben_leicht (1 Punkte)
+  Blutrünstig (2 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Asera_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Asera_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Asera_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Asera_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_asera_kopfgeldjaegerin_anfaenger/Asera_20260215_170237.json
+✅ Erfolgreich gespeichert (16,414 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Asera
+🎯 STARTE CHARAKTERGENERIERUNG: BEATRIZ
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Beatriz' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Angewohnheit hinzugefügt (+1 Punkte)
+  ✅ Ehrenkodex hinzugefügt (+2 Punkte)
+  ✅ Loyal hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Allgemeinwissen: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  ✅ Athletik bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Recherche: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Schießen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überreden: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Wahrnehmung: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Beziehungen
+  ✅ Beziehungen hinzugefügt (GRATIS - Völker-Bonus)
+  ✅ Ermittler hinzugefügt (2 Handicap-Punkte) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Kevlarweste (Torso +2) nicht gefunden - lege als Custom-Item an...
+    ✅ Kevlarweste (Torso +2) erfolgreich hinzugefügt
+  📦 9mm Pistole (12/24/48, 2W6, PB 1) nicht gefunden - lege als Custom-Item an...
+    ✅ 9mm Pistole (12/24/48, 2W6, PB 1) erfolgreich hinzugefügt
+  📦 Polizeiauto nicht gefunden - lege als Custom-Item an...
+    ✅ Polizeiauto erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 2 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Beatriz
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 19
+Differenz: 2
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W8
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W8
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W6
+  Wahrnehmung: W8
+  Kämpfen: W6
+  Schießen: W6
+  Recherche: W8
+
+⭐ TALENTE:
+  Ermittler [!]
+  Beziehungen
+
+⚠️ HANDICAPS:
+  Angewohnheit_leicht (1 Punkte)
+  Ehrenkodex (2 Punkte)
+  Loyal (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Beatriz_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Beatriz_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Beatriz_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Beatriz_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_beatriz_polizistin_anfaenger/Beatriz_20260215_170237.json
+✅ Erfolgreich gespeichert (16,738 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Beatriz
+🎯 STARTE CHARAKTERGENERIERUNG: CLEMENTINE
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Clementine' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Misstrauisch hinzugefügt (+1 Punkte)
+  ✅ Schwerhörig hinzugefügt (+1 Punkte)
+  ✅ Tick hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +3 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 3
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 3 Handicap-Punkte = 1 Attribute oder 3 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  ✅ Geschicklichkeit bereits auf W4
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 ATTRIBUTSKOSTEN GESAMT: 5 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 3
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  ✅ Athletik bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Naturwissenschaften: W2 → W10 (4 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+  📈 Recherche: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Reparieren: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Gelehrter
+  ✅ Gelehrter hinzugefügt (GRATIS - Völker-Bonus)
+  ✅ McGyver hinzugefügt (2 Handicap-Punkte) - Voraussetzungen ignoriert
+  ⚠️ Reparaturgenie direkt gesetzt (Fallback) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 2 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Revolver (12/24/48, 2W6+1, PB 1) nicht gefunden - lege als Custom-Item an...
+    ✅ Revolver (12/24/48, 2W6+1, PB 1) erfolgreich hinzugefügt
+  ✅ Brechstange gefunden und ausgewählt
+  📦 Van nicht gefunden - lege als Custom-Item an...
+    ✅ Van erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 3 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Clementine
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 5 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +3 Punkte (Bonus)
+Talente: 2 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +3
+Verfügbar gesamt: 20
+Ausgegeben: 19
+Differenz: 1
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W4
+  Verstand: W10
+  Stärke: W4
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W4
+  Wahrnehmung: W8
+  Recherche: W8
+  Reparieren: W8
+  Naturwissenschaften: W10
+
+⭐ TALENTE:
+  Gelehrter
+  McGyver [!]
+  Reparaturgenie [!]
+
+⚠️ HANDICAPS:
+  Misstrauisch_leicht (1 Punkte)
+  Schwerhörig_leicht (1 Punkte)
+  Tick (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Clementine_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Clementine_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Clementine_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Clementine_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_clementine_bastlerin_anfaenger/Clementine_20260215_170237.json
+✅ Erfolgreich gespeichert (16,917 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Clementine
+🎯 STARTE CHARAKTERGENERIERUNG: ELSIARA
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Elsiara' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Gesucht hinzugefügt (+1 Punkte)
+  ✅ Gierig hinzugefügt (+1 Punkte)
+  ❌ Handicap 'Nichtschwimmer' nicht gefunden
+📊 HANDICAP-PUNKTE GESAMT: +2 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 2
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 2 Handicap-Punkte = 1 Attribute oder 2 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 2
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Diebeskunst: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Heimlichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Kämpfen: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Provozieren: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Schießen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ⚡ Automatisch 1 Fertigkeitspunkte hinzugefügt
+    ✅ Steigerung 2: W4 → W6 (Auto-Punkte)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ⚡ Automatisch 1 Fertigkeitspunkte hinzugefügt
+    ✅ Steigerung 1: W4 → W6 (Auto-Punkte)
+📊 FERTIGKEITSKOSTEN GESAMT: 14 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Assassine
+  ✅ Assassine hinzugefügt (GRATIS - Völker-Bonus)
+  ⚠️ Dieb direkt gesetzt (Fallback) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Lederrüstung (+1) nicht gefunden - lege als Custom-Item an...
+    ✅ Lederrüstung (+1) erfolgreich hinzugefügt
+  📦 Dolch (Stä+W4) nicht gefunden - lege als Custom-Item an...
+    ✅ Dolch (Stä+W4) erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 2 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Elsiara
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 14 Punkte
+Handicaps: +2 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +2
+Verfügbar gesamt: 19
+Ausgegeben: 21
+Differenz: -2
+
+⚡ AUTOMATISCH HINZUGEFÜGT: 2 Punkte
+   (Um alle Anforderungen zu erfüllen)
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W8
+  Verstand: W6
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W8
+  Heimlichkeit: W8
+  Überreden: W4
+  Wahrnehmung: W6
+  Kämpfen: W8
+  Schießen: W6
+  Diebeskunst: W8
+  Provozieren: W4
+
+⭐ TALENTE:
+  Assassine
+  Dieb [!]
+
+⚠️ HANDICAPS:
+  Gesucht_leicht (1 Punkte)
+  Gierig_leicht (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Elsiara_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Elsiara_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Elsiara_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Elsiara_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_elsiara_brigantin_anfaenger/Elsiara_20260215_170237.json
+✅ Erfolgreich gespeichert (16,527 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Elsiara
+🎯 STARTE CHARAKTERGENERIERUNG: HESINDIAN
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Hesindian' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Neugierig hinzugefügt (+2 Punkte)
+  ✅ Schlechte Augen hinzugefügt (+1 Punkte)
+  ✅ Tick hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  ✅ Geschicklichkeit bereits auf W4
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Allgemeinwissen: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  ✅ Athletik bereits auf W4
+  📈 Heimlichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Kämpfen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Recherche: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überleben: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Überreden: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Wahrnehmung bereits auf W4
+  📈 Zaubern: W2 → W10 (4 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (1 Handicap-Punkt)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Arkaner Hintergrund (Magie)
+  ❌ Talent 'Arkaner Hintergrund (Magie)' nicht gefunden
+  ❌ Talent 'Mehr Machtpunkte' nicht gefunden
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 7: MÄCHTE WÄHLEN (OHNE VORAUSSETZUNGEN) ---
+  🔮 Arkaner Hintergrund wird automatisch hinzugefügt/angenommen
+  ✅ Arkaner Hintergrund aktiviert
+  ✅ Geschoss hinzugefügt - Voraussetzungen ignoriert
+  ✅ Heilung hinzugefügt - Voraussetzungen ignoriert
+  ✅ Blenden hinzugefügt - Voraussetzungen ignoriert
+  🔮 Machtpunkte gesetzt: 15
+📊 MÄCHTE GESAMT: 3 Mächte hinzugefügt
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Magierstab (Stä+W4, Parade +1, Reichweite 1, Zweihändig) nicht gefunden - lege als Custom-Item an...
+    ✅ Magierstab (Stä+W4, Parade +1, Reichweite 1, Zweihändig) erfolgreich hinzugefügt
+  📦 Reiserobe nicht gefunden - lege als Custom-Item an...
+    ✅ Reiserobe erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 3 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Hesindian
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 18
+Differenz: 3
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W4
+  Verstand: W10
+  Stärke: W4
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W8
+  Athletik: W4
+  Heimlichkeit: W6
+  Überreden: W6
+  Wahrnehmung: W4
+  Kämpfen: W4
+  Überleben: W4
+  Recherche: W6
+  Zaubern: W10
+
+⭐ TALENTE:
+  Arkaner Hintergrund
+
+⚠️ HANDICAPS:
+  Neugierig (2 Punkte)
+  Schlechte Augen (1 Punkte)
+  Tick (1 Punkte)
+
+🔮 MÄCHTE:
+  Blenden [!]
+  Geschoss [!]
+  Heilung [!]
+Machtpunkte: 15
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Hesindian_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Hesindian_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Hesindian_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Hesindian_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_hesindian_magier_anfaenger/Hesindian_20260215_170237.json
+✅ Erfolgreich gespeichert (17,284 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Hesindian
+🎯 STARTE CHARAKTERGENERIERUNG: JEANNE
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Jeanne' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Loyal hinzugefügt (+1 Punkte)
+  ✅ Schwerzüngig hinzugefügt (+2 Punkte)
+  ✅ Stur hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Heimlichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Provozieren: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Schießen: W2 → W10 (4 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Aufmerksamkeit
+  ✅ Aufmerksamkeit hinzugefügt (GRATIS - Völker-Bonus)
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Lederjacke (Arme, Torso +2) nicht gefunden - lege als Custom-Item an...
+    ✅ Lederjacke (Arme, Torso +2) erfolgreich hinzugefügt
+  📦 Muskete (10/20/40, 2W8) nicht gefunden - lege als Custom-Item an...
+    ✅ Muskete (10/20/40, 2W8) erfolgreich hinzugefügt
+  📦 Langschwert (Stä+W8) nicht gefunden - lege als Custom-Item an...
+    ✅ Langschwert (Stä+W8) erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 4 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Jeanne
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 19
+Differenz: 2
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W10
+  Verstand: W6
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W6
+  Heimlichkeit: W8
+  Überreden: W4
+  Wahrnehmung: W6
+  Kämpfen: W6
+  Schießen: W10
+  Provozieren: W6
+
+⭐ TALENTE:
+  Aufmerksamkeit
+
+⚠️ HANDICAPS:
+  Loyal (1 Punkte)
+  Schwerzüngig (2 Punkte)
+  Stur (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Jeanne_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Jeanne_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Jeanne_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Jeanne_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_jeanne_schuetzin_anfaenger/Jeanne_20260215_170237.json
+✅ Erfolgreich gespeichert (16,707 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Jeanne
+🎯 STARTE CHARAKTERGENERIERUNG: KENAKEN
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Kenaken' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Arrogant hinzugefügt (+2 Punkte)
+  ❌ Handicap 'Kränklich' nicht gefunden
+  ✅ Stur hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +3 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 3
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 3 Handicap-Punkte = 1 Attribute oder 3 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ⚡ Automatisch 1 Attributspunkte hinzugefügt
+    ✅ Steigerung 1: W4 → W6 (Auto-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Einschüchtern: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Heimlichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Kämpfen: W2 → W10 (4 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+  📈 Provozieren: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 11 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Kampfkünstler
+  ✅ Kampfkünstler hinzugefügt (GRATIS - Völker-Bonus)
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Fäuste (Stä+W4) nicht gefunden - lege als Custom-Item an...
+    ✅ Fäuste (Stä+W4) erfolgreich hinzugefügt
+  📦 Bequeme Kleidung nicht gefunden - lege als Custom-Item an...
+    ✅ Bequeme Kleidung erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Kenaken
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 11 Punkte
+Handicaps: +3 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +3
+Verfügbar gesamt: 20
+Ausgegeben: 18
+Differenz: 2
+
+⚡ AUTOMATISCH HINZUGEFÜGT: 1 Punkte
+   (Um alle Anforderungen zu erfüllen)
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W8
+  Verstand: W6
+  Stärke: W8
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W8
+  Heimlichkeit: W6
+  Überreden: W4
+  Wahrnehmung: W6
+  Kämpfen: W10
+  Einschüchtern: W6
+  Provozieren: W4
+
+⭐ TALENTE:
+  Kampfkünstler
+
+⚠️ HANDICAPS:
+  Arrogant (2 Punkte)
+  Stur (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Kenaken_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Kenaken_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Kenaken_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Kenaken_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_kenaken_kampfkuenstlerin_anfaenger/Kenaken_20260215_170237.json
+✅ Erfolgreich gespeichert (16,329 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Kenaken
+🎯 STARTE CHARAKTERGENERIERUNG: KLAAS
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Klaas' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Große Klappe hinzugefügt (+1 Punkte)
+  ✅ Impulsiv hinzugefügt (+2 Punkte)
+  ❌ Handicap 'Phobie (Untote)' nicht gefunden
+📊 HANDICAP-PUNKTE GESAMT: +3 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 3
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 3 Handicap-Punkte = 1 Attribute oder 3 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+    ⚡ Automatisch 1 Attributspunkte hinzugefügt
+    ✅ Steigerung 2: W6 → W8 (Auto-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Heimlichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Kämpfen: W2 → W12 (5 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+    ✅ Steigerung 5: W10 → W12 (Standard)
+  📈 Provozieren: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ⚡ Automatisch 1 Fertigkeitspunkte hinzugefügt
+    ✅ Steigerung 3: W6 → W8 (Auto-Punkte)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (1 Handicap-Punkt)
+📊 FERTIGKEITSKOSTEN GESAMT: 11 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Finte
+  ✅ Finte hinzugefügt (GRATIS - Völker-Bonus)
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Rapier (Stä+W4, Parade +1) nicht gefunden - lege als Custom-Item an...
+    ✅ Rapier (Stä+W4, Parade +1) erfolgreich hinzugefügt
+  📦 Lederjacke (Arme, Torso +2) nicht gefunden - lege als Custom-Item an...
+    ✅ Lederjacke (Arme, Torso +2) erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 3 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Klaas
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 11 Punkte
+Handicaps: +3 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +3
+Verfügbar gesamt: 20
+Ausgegeben: 18
+Differenz: 2
+
+⚡ AUTOMATISCH HINZUGEFÜGT: 2 Punkte
+   (Um alle Anforderungen zu erfüllen)
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W8
+  Verstand: W6
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W6
+  Heimlichkeit: W6
+  Überreden: W4
+  Wahrnehmung: W6
+  Kämpfen: W12
+  Provozieren: W8
+
+⭐ TALENTE:
+  Finte
+
+⚠️ HANDICAPS:
+  Große Klappe (1 Punkte)
+  Impulsiv (2 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Klaas_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Klaas_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Klaas_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Klaas_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_klaas_fechter_anfaenger/Klaas_20260215_170237.json
+✅ Erfolgreich gespeichert (16,362 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Klaas
+🎯 STARTE CHARAKTERGENERIERUNG: KLARA
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Klara' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Außenseiter hinzugefügt (+1 Punkte)
+  ✅ Neugierig hinzugefügt (+2 Punkte)
+  ✅ Tick hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Verrückte Wissenschaft: W2 → W10 (4 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+  📈 Allgemeinwissen: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Athletik bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Naturwissenschaften: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Reparieren: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Schießen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (1 Handicap-Punkt)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (1 Handicap-Punkt)
+📊 FERTIGKEITSKOSTEN GESAMT: 14 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Arkaner Hintergrund (Alchemie / Verrückte Wissenschaft)
+  ❌ Talent 'Arkaner Hintergrund (Alchemie / Verrückte Wissenschaft)' nicht gefunden
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 7: MÄCHTE WÄHLEN (OHNE VORAUSSETZUNGEN) ---
+  🔮 Arkaner Hintergrund wird automatisch hinzugefügt/angenommen
+  ✅ Arkaner Hintergrund aktiviert
+  ✅ Eigenschaft erhöhen/senken hinzugefügt - Voraussetzungen ignoriert
+  ✅ Schutz hinzugefügt - Voraussetzungen ignoriert
+  ✅ Strahl hinzugefügt - Voraussetzungen ignoriert
+  🔮 Machtpunkte gesetzt: 15
+📊 MÄCHTE GESAMT: 3 Mächte hinzugefügt
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Dolch (Stä+W4) nicht gefunden - lege als Custom-Item an...
+    ✅ Dolch (Stä+W4) erfolgreich hinzugefügt
+  📦 Alchemistenkoffer nicht gefunden - lege als Custom-Item an...
+    ✅ Alchemistenkoffer erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+  📦 Pistole (5/10/20, 2W6+1) nicht gefunden - lege als Custom-Item an...
+    ✅ Pistole (5/10/20, 2W6+1) erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 4 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 3 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Klara
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 14 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 20
+Differenz: 1
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W10
+  Stärke: W4
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W6
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W4
+  Wahrnehmung: W6
+  Schießen: W6
+  Reparieren: W8
+  Naturwissenschaften: W8
+  Verrückte Wissenschaft: W10
+
+⭐ TALENTE:
+  Arkaner Hintergrund
+
+⚠️ HANDICAPS:
+  Außenseiter (1 Punkte)
+  Neugierig (2 Punkte)
+  Tick (1 Punkte)
+
+🔮 MÄCHTE:
+  Arkaner Schutz
+  Eigenschaft erhöhen/senken [!]
+  Strahl [!]
+Machtpunkte: 15
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Klara_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Klara_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Klara_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Klara_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_klara_alchemistin_anfaenger/Klara_20260215_170237.json
+✅ Erfolgreich gespeichert (17,454 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Klara
+🎯 STARTE CHARAKTERGENERIERUNG: LEOMARA
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Leomara' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Ehrenkodex hinzugefügt (+2 Punkte)
+  ✅ Loyal hinzugefügt (+1 Punkte)
+  ✅ Phobie hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Verstand: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 7 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  ✅ Athletik bereits auf W4
+  ✅ Heimlichkeit bereits auf W4
+  📈 Einschüchtern: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Heilen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Kriegskunst: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Schießen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überreden: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Kämpfen: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 12 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 0
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Anführer
+  ✅ Anführer hinzugefügt (GRATIS - Völker-Bonus)
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Gambeson (+1 Torso und Arme) nicht gefunden - lege als Custom-Item an...
+    ✅ Gambeson (+1 Torso und Arme) erfolgreich hinzugefügt
+  📦 Langschwert (Stä+W8) nicht gefunden - lege als Custom-Item an...
+    ✅ Langschwert (Stä+W8) erfolgreich hinzugefügt
+  📦 Mittlerer Schild (+2 Parade) nicht gefunden - lege als Custom-Item an...
+    ✅ Mittlerer Schild (+2 Parade) erfolgreich hinzugefügt
+  📦 Kriegerbrief nicht gefunden - lege als Custom-Item an...
+    ✅ Kriegerbrief erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 5 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Leomara
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 7 Punkte
+Fertigkeiten: 12 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 19
+Differenz: 2
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W8
+  Stärke: W6
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W6
+  Wahrnehmung: W6
+  Kämpfen: W6
+  Schießen: W6
+  Einschüchtern: W6
+  Heilen: W6
+  Kriegskunst: W6
+
+⭐ TALENTE:
+  Anführer
+
+⚠️ HANDICAPS:
+  Ehrenkodex (2 Punkte)
+  Loyal (1 Punkte)
+  Phobie_leicht (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Leomara_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Leomara_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Leomara_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Leomara_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_leomara_kriegerin_anfaenger/Leomara_20260215_170237.json
+✅ Erfolgreich gespeichert (16,886 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Leomara
+🎯 STARTE CHARAKTERGENERIERUNG: NACHTFINDER
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Nachtfinder' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Alt hinzugefügt (+2 Punkte)
+  ✅ Neugierig hinzugefügt (+2 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +4 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 4
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 4 Handicap-Punkte = 2 Attribute oder 4 Fertigkeiten oder 2 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 4
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  ✅ Geschicklichkeit bereits auf W4
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  ✅ Stärke bereits auf W4
+  📈 Verstand: W4 → W10 (3 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+    ✅ Steigerung 3: W8 → W10 (Standard)
+  📈 Willenskraft: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  📈 Allgemeinwissen: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  ✅ Athletik bereits auf W4
+  📈 Heilen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  ✅ Heimlichkeit bereits auf W4
+  📈 Kämpfen: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Okkultismus: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Recherche: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  📈 Überleben: W2 → W4 (1 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+  📈 Überreden: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Zaubern: W2 → W12 (5 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+    ✅ Steigerung 4: W8 → W10 (Standard)
+    ✅ Steigerung 5: W10 → W12 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 16 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 2
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Arkaner Hintergrund (Magie)
+  ❌ Talent 'Arkaner Hintergrund (Magie)' nicht gefunden
+  ❌ Talent 'Mehr Machtpunkte' nicht gefunden
+📊 TALENTKOSTEN GESAMT: 0 Punkte
+--- SCHRITT 7: MÄCHTE WÄHLEN (OHNE VORAUSSETZUNGEN) ---
+  🔮 Arkaner Hintergrund wird automatisch hinzugefügt/angenommen
+  ✅ Arkaner Hintergrund aktiviert
+  ✅ Abwehren hinzugefügt - Voraussetzungen ignoriert
+  ✅ Arkanes entdecken/verbergen hinzugefügt - Voraussetzungen ignoriert
+  ✅ Blenden hinzugefügt - Voraussetzungen ignoriert
+  ✅ Geschoss hinzugefügt - Voraussetzungen ignoriert
+  🔮 Machtpunkte gesetzt: 15
+📊 MÄCHTE GESAMT: 4 Mächte hinzugefügt
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Stab (Stä+W4, Parade +1) nicht gefunden - lege als Custom-Item an...
+    ✅ Stab (Stä+W4, Parade +1) erfolgreich hinzugefügt
+  📦 Kutte nicht gefunden - lege als Custom-Item an...
+    ✅ Kutte erfolgreich hinzugefügt
+  📦 Bücher mit Notizen nicht gefunden - lege als Custom-Item an...
+    ✅ Bücher mit Notizen erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 4 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 1
+  👑 Rang: Anfänger
+  🔄 2 übrige Punkte in 1 Aufstiege umgewandelt
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 1 Items
+  🔮 selected_maechte: 4 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Nachtfinder
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 16 Punkte
+Handicaps: +4 Punkte (Bonus)
+Talente: 0 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +4
+Verfügbar gesamt: 21
+Ausgegeben: 22
+Differenz: -1
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W4
+  Verstand: W10
+  Stärke: W4
+  Konstitution: W6
+  Willenskraft: W8
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W8
+  Athletik: W4
+  Heimlichkeit: W4
+  Überreden: W6
+  Wahrnehmung: W6
+  Kämpfen: W4
+  Überleben: W4
+  Heilen: W4
+  Recherche: W6
+  Okkultismus: W6
+  Zaubern: W12
+
+⭐ TALENTE:
+  Arkaner Hintergrund
+
+⚠️ HANDICAPS:
+  Alt (2 Punkte)
+  Neugierig (2 Punkte)
+
+🔮 MÄCHTE:
+  Abwehren [!]
+  Arkanes entdecken/verbergen [!]
+  Blenden [!]
+  Geschoss [!]
+Machtpunkte: 15
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Nachtfinder_kosten_20260215_170237.txt
+  ✅ Generierungs-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Nachtfinder_generation_20260215_170237.txt
+--- HISTORIE VIEW INTEGRATION ---
+  ✅ Historie View Integration erfolgreich:
+    📄 JSON: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Nachtfinder_auto_gen_historie_20260215_170237.json
+    📄 Text: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/manual_logs/Nachtfinder_auto_gen_historie_20260215_170237.txt
+
+💾 SPEICHERE CHARAKTER: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/wou_nachtfinder_magierin_anfaenger/Nachtfinder_20260215_170237.json
+✅ Erfolgreich gespeichert (17,488 Bytes)
+🎉 CHARAKTERGENERIERUNG ERFOLGREICH ABGESCHLOSSEN: Nachtfinder
+🎯 STARTE CHARAKTERGENERIERUNG: RAPHAEL
+⚙️ MODUS: Automatische Punkteerhöhung aktiv, Voraussetzungen werden ignoriert
+--- SCHRITT 1: CHARAKTER INITIALISIEREN ---
+  ✅ Charakter 'Raphael' initialisiert (Setting: SWAE)
+  💰 Punkte gesetzt: 5 Attribut, 12 Fertigkeiten
+  💎 Startkapital: 500
+--- SCHRITT 2: VOLK UND VÖLKER-BONI ---
+  🎭 Volk gewählt: Mensch
+  🎁 Menschen-Bonus: 1 kostenloses Anfänger-Talent vorbereitet
+--- SCHRITT 4: HANDICAPS HINZUFÜGEN (UNLIMITED) ---
+  ✅ Ehrenkodex hinzugefügt (+2 Punkte)
+  ✅ Schwur hinzugefügt (+1 Punkte)
+📊 HANDICAP-PUNKTE GESAMT: +3 Punkte
+💰 Handicap-Punkte auf Charakter gesetzt: 3
+💰 Handicap-Punkte können verwendet werden für:
+   • 2 Punkte = 1 Attributsteigerung
+   • 2 Punkte = 1 Anfänger-Talent
+   • 1 Punkt = 1 Fertigkeitssteigerung
+   • 1 Punkt = Startgeld erhöhen
+   → 3 Handicap-Punkte = 1 Attribute oder 3 Fertigkeiten oder 1 Talente
+--- SCHRITT 4: ATTRIBUTE STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte zu Beginn: 3
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Attributsteigerung
+  📈 Geschicklichkeit: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Konstitution: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Stärke: W4 → W8 (2 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+    ✅ Steigerung 2: W6 → W8 (Standard)
+  📈 Verstand: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Willenskraft: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (2 Handicap-Punkte)
+📊 ATTRIBUTSKOSTEN GESAMT: 6 Punkte
+--- SCHRITT 5: FERTIGKEITEN STEIGERN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 1 Handicap-Punkt = 1 Fertigkeitssteigerung
+  ✅ Allgemeinwissen bereits auf W4
+  📈 Athletik: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+  📈 Einschüchtern: W2 → W6 (2 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+  ✅ Heimlichkeit bereits auf W4
+  📈 Kämpfen: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  📈 Reiten: W2 → W8 (3 Steigerungen)
+    ✅ Steigerung 1: W2 → W4 (Standard)
+    ✅ Steigerung 2: W4 → W6 (Standard)
+    ✅ Steigerung 3: W6 → W8 (Standard)
+  ✅ Überreden bereits auf W4
+  📈 Wahrnehmung: W4 → W6 (1 Steigerungen)
+    ✅ Steigerung 1: W4 → W6 (Standard)
+📊 FERTIGKEITSKOSTEN GESAMT: 10 Punkte
+--- SCHRITT 6: TALENTE WÄHLEN (ORIGINALFUNKTIONEN) ---
+  💰 Verfügbare Handicap-Punkte: 1
+  📋 Savage Worlds Regel: 2 Handicap-Punkte = 1 Talent
+  🎁 Menschen-Bonus verwendet für: Aristokrat
+  ✅ Aristokrat hinzugefügt (GRATIS - Völker-Bonus)
+  ⚠️ Kräftig direkt gesetzt (Fallback) - Voraussetzungen ignoriert
+📊 TALENTKOSTEN GESAMT: 1 Punkte
+--- SCHRITT 8: AUSRÜSTUNG HINZUFÜGEN ---
+  📦 Plattenrüstung mit Helm (+4) nicht gefunden - lege als Custom-Item an...
+    ✅ Plattenrüstung mit Helm (+4) erfolgreich hinzugefügt
+  ✅ Pferd gefunden und ausgewählt
+  📦 Langschwert (Stä+W8) nicht gefunden - lege als Custom-Item an...
+    ✅ Langschwert (Stä+W8) erfolgreich hinzugefügt
+  📦 Abenteurerpaket nicht gefunden - lege als Custom-Item an...
+    ✅ Abenteurerpaket erfolgreich hinzugefügt
+📊 AUSRÜSTUNG GESAMT: 4 Gegenstände hinzugefügt
+--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---
+  ✅ char_gen_completed = True
+  🎯 Aufstiege gesamt: 1
+  ⭐ Verbleibende Aufstiege: 0
+  👑 Rang: Anfänger
+--- SELECTED_ LISTEN AKTUALISIEREN ---
+  📋 selected_talente: 2 Items
+  🔮 selected_maechte: 0 Items
+  ✅ selected_ Listen aktualisiert
+
+================================================================================
+📊 CHARAKTERZUSAMMENFASSUNG MIT KOSTENANALYSE
+================================================================================
+Charakter: Raphael
+Setting: SWAE
+
+💰 KOSTENÜBERSICHT:
+Attribute: 6 Punkte
+Fertigkeiten: 10 Punkte
+Handicaps: +3 Punkte (Bonus)
+Talente: 1 Punkte
+
+📈 PUNKTEBILANZ:
+Standard-Punkte: 17 (5 Attr + 12 Fert)
+Handicap-Bonus: +3
+Verfügbar gesamt: 20
+Ausgegeben: 17
+Differenz: 3
+
+🎭 ATTRIBUTE:
+  Geschicklichkeit: W6
+  Verstand: W6
+  Stärke: W8
+  Konstitution: W6
+  Willenskraft: W6
+
+🎯 FERTIGKEITEN (gesteigerte):
+  Allgemeinwissen: W4
+  Athletik: W6
+  Heimlichkeit: W4
+  Überreden: W4
+  Wahrnehmung: W6
+  Kämpfen: W8
+  Reiten: W8
+  Einschüchtern: W6
+
+⭐ TALENTE:
+  Aristokrat
+  Kräftig [!]
+
+⚠️ HANDICAPS:
+  Ehrenkodex (2 Punkte)
+  Schwur_leicht (1 Punkte)
+
+[!] = Voraussetzungen wurden ignoriert
+
+--- ERSTELLE KOSTEN-LOG-DATEI ---
+  ✅ Kosten-Log gespeichert: /home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Raphael_kosten_20260215_170238.txt

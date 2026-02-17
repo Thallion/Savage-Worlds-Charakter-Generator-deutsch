@@ -1,0 +1,48 @@
+================================================================================
+KOSTEN-LOG FÜR: Jester
+ERSTELLT: 2025-10-05 13:31:21
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Geschicklichkeit: W4 → W6 = 1 Punkte
+  Konstitution: W4 → W6 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Verstand: W6 → W8 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+  Willenskraft: W6 → W8 = 1 Punkte
+GESAMT: 6 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+GESAMT: 0 Punkte
+
+HANDICAPS:
+----------------------------------------
+GESAMT: +0 Punkte (Bonus)
+
+TALENTE:
+----------------------------------------
+GESAMT: 0 Punkte
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +0
+Verfügbare Punkte gesamt: 17
+
+Ausgegeben für Attribute: 6
+Ausgegeben für Fertigkeiten: 0
+Ausgegeben für Talente: 0
+Ausgegeben gesamt: 6
+
+ÜBERSCHUSS: 11 Punkte nicht verwendet
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================

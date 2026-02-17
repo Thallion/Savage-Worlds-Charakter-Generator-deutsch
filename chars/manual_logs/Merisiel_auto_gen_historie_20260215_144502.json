@@ -1,0 +1,408 @@
+{
+  "session_start": "2026-02-15T14:45:02.813309",
+  "entries": [
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "auto_character_generated",
+      "details": {
+        "name": "Merisiel",
+        "template": "Merisiel",
+        "setting": "Savage Pathfinder",
+        "total_auto_points": 1,
+        "cost_log_file": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/logs/Merisiel_kosten_20260215_144502.txt"
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Geschicklichkeit",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Konstitution",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Stärke",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Verstand",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "attribut_steigerung",
+      "details": {
+        "name": "Willenskraft",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "2 Handicap-Punkte",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Athletik",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Athletik",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Diebeskunst",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Diebeskunst",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Heimlichkeit",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Heimlichkeit",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Kämpfen",
+        "von": 6,
+        "nach": 8,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Provozieren",
+        "von": 2,
+        "nach": 4,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Provozieren",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Überreden",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Standard",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "fertigkeit_steigerung",
+      "details": {
+        "name": "Wahrnehmung",
+        "von": 4,
+        "nach": 6,
+        "kosten": 1,
+        "kosten_typ": "Auto-Generator",
+        "auto_generated": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Akrobat",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Schurke",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "talent_hinzugefuegt",
+      "details": {
+        "name": "Dieb",
+        "kosten": 1,
+        "auto_generated": true,
+        "gratis": false,
+        "voraussetzungen_ignoriert": true
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Pech",
+        "punkte": 2,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Feind",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "handicap_hinzugefuegt",
+      "details": {
+        "name": "Beschämt",
+        "punkte": 1,
+        "auto_generated": true,
+        "erzwungen": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Rapier (Stä+W4, Parade +1)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "6x Wurfmesser (Reichweite 3/6/12, Schaden Stä+W4)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "2x Dolche (Stä+W4)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Weiche Lederjacke und Beinlinge (+2)",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Diebeswerkzeug",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Verstrickungsbeutel",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Abenteurerausrüstung",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "Kletterausrüstung",
+        "auto_generated": true,
+        "custom": false
+      }
+    },
+    {
+      "timestamp": "2026-02-15 14:45:02",
+      "type": "ausruestung_hinzugefuegt",
+      "details": {
+        "name": "35 GM",
+        "auto_generated": true,
+        "custom": false
+      }
+    }
+  ],
+  "total_kosten": {
+    "attribute": 7,
+    "fertigkeiten": 13,
+    "talente": 3,
+    "handicaps": 0,
+    "maechte": 0,
+    "aufstiege": 0
+  }
+}

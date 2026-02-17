@@ -29,6 +29,7 @@ class Macht(EventDispatcher):
         self.aktiv = True
         self.voraussetzungen = voraussetzungen or []
         self.custom = custom
+        self.individuelle_beschreibung = None
 
     def __str__(self):
         return f"{self.name} (Rang: {self.rang}, Machtpunkte: {self.machtpunkte}, Reichweite: {self.reichweite}, Dauer: {self.dauer})"
