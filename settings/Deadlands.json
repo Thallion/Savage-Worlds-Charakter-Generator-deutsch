@@ -142,7 +142,7 @@
         "Agent": {
                 "name": "Agent",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": ["Anfänger", "Verstand W8+", "Kämpfen W6+", "Okkultismus W6+", "Schießen W6+"],
                 "beschreibung": "Geheime Agenten der Agency, die Spionage und Korruption bekämpfen. Müssen ihre Identität geheim halten.",
                 "neue_maechte": 0,
@@ -153,7 +153,7 @@
         "Falsch Spielen": {
                 "name": "Falsch Spielen",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": ["Anfänger", "Glücksspiel W6+"],
                 "beschreibung": "Ermöglicht eine freie Wiederholung bei Glücksspielproben, auch bei Taschenspieleraktionen.",
                 "neue_maechte": 0,
@@ -164,7 +164,7 @@
         "Geschichtenerzähler": {
                 "name": "Geschichtenerzähler",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": ["Anfänger", "Darbietung oder Überreden W8+"],
                 "beschreibung": "Hilft, die lokale Furchtstufe zu senken und bietet Boni auf Überreden- oder Darbietungsproben.",
                 "neue_maechte": 0,
@@ -175,7 +175,7 @@
         "Im Sattel geboren": {
                 "name": "Im Sattel geboren",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": ["Anfänger", "Geschicklichkeit W8+", "Reiten W6+"],
                 "beschreibung": "Bietet eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Pferdes und verbessert den Sprintwürfel.",
                 "neue_maechte": 0,
@@ -186,7 +186,7 @@
         "Kundschafter": {
                 "name": "Kundschafter",
                 "kategorie": "Experte",
-                "rang": "Fortgeschritten",
+                "rang": "F",
                 "voraussetzungen": ["Fortgeschritten", "Naturbursche"],
                 "beschreibung": "Erlaubt Wahrnehmungsproben mit Abzug bei Begegnungen und bietet Vorteile bei Überlebens- und Wahrnehmungsproben.",
                 "neue_maechte": 0,
@@ -197,7 +197,7 @@
         "Mumm": {
                 "name": "Mumm",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": ["Anfänger", "Willenskraft W6+"],
                 "beschreibung": "Ermöglicht eine freie Wiederholung bei Furchtproben.",
                 "neue_maechte": 0,
@@ -208,7 +208,7 @@
         "Soldat": {
                 "name": "Soldat",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": ["Anfänger", "Stärke W6+", "Konstitution W6+"],
                 "beschreibung": "Charakter mit militärischer Ausbildung, optional mit Rängen und Verpflichtungen. Ermöglicht Beförderungen im Spiel.",
                 "neue_maechte": 0,
@@ -219,7 +219,7 @@
         "Territorialer Ranger": {
                 "name": "Territorialer Ranger",
                 "kategorie": "Experte",
-                "rang": "Anfänger",
+                "rang": "A",
                 "voraussetzungen": [
                     "Anfänger",
                     "Konstitution W6+",
@@ -238,7 +238,7 @@
         "Ruf": {
             "name": "Ruf",
             "kategorie": "Sozial",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Veteran"],
             "beschreibung": "Helden mit gutem Ruf erhalten freie Wiederholungen bei Überredenproben, Schurken erhalten +2 auf Einschüchtern bei bekannten Personen.",
             "neue_maechte": 0,
@@ -249,7 +249,7 @@
         "Schneid": {
             "name": "Schneid",
             "kategorie": "Übersinnlich",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Veteran", "Willenskraft W8+", "Mumm"],
             "beschreibung": "Senkt Abzüge bei Furchtproben um 2 und kann mit Mutig kombiniert werden.",
             "neue_maechte": 0,
@@ -260,7 +260,7 @@
         "Gepeinigt": {
             "name": "Gepeinigt",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Wildcard", "Anfänger", "Willenskraft W6+"],
             "beschreibung": "Charakter wird nach dem Tod wiedergeboren, jedoch mit Nachteilen. Kann nur bei der Erstellung oder durch das Talent Verdammt gewählt werden.",
             "neue_maechte": 0,
@@ -271,7 +271,7 @@
         "Vorzeichen (Bastard)": {
             "name": "Vorzeichen (Bastard)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Unsichtbare und versteckte Kreaturen 5 Runden lang sehen durch Benny-Ausgabe.",
             "neue_maechte": 0,
@@ -282,7 +282,7 @@
         "Vorzeichen (Geboren am Abend vor Allerheiligen)": {
             "name": "Vorzeichen (Geboren am Abend vor Allerheiligen)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Warnung vor katastrophalen Folgen, Entschlossenheit erlaubt Wiederholung bei Kritischem Fehlschlag.",
             "neue_maechte": 0,
@@ -293,7 +293,7 @@
         "Vorzeichen (Geboren an Weihnachten)": {
             "name": "Vorzeichen (Geboren an Weihnachten)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Effekte arkane Macht negieren, Zauberer muss Willenskraftprobe ablegen (–4) oder wird Angeschlagen.",
             "neue_maechte": 0,
@@ -304,7 +304,7 @@
         "Vorzeichen (Geburt in Steißlage)": {
             "name": "Vorzeichen (Geburt in Steißlage)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Heilung durch Benny möglich, automatischer Erfolg (eine Wunde heilen).",
             "neue_maechte": 0,
@@ -315,7 +315,7 @@
         "Vorzeichen (Im Sturm geboren)": {
             "name": "Vorzeichen (Im Sturm geboren)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Furchtproben können durch Benny ohne Abzüge wiederholt werden.",
             "neue_maechte": 0,
@@ -326,7 +326,7 @@
         "Vorzeichen (Der Siebte Sohn)": {
             "name": "Vorzeichen (Der Siebte Sohn)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Benny kann benutzt werden, um Effekt eines Bennys in der Nähe zu negieren.",
             "neue_maechte": 0,
@@ -337,7 +337,7 @@
         "Vorzeichen (Sternschnuppe)": {
             "name": "Vorzeichen (Sternschnuppe)",
             "kategorie": "Übersinnlich",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Benny verdoppelt Befehlsradius zu Beginn eines Kampfes.",
             "neue_maechte": 0,
@@ -348,7 +348,7 @@
         "Echter Schneid": {
             "name": "Echter Schneid",
             "kategorie": "Legendär",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Legendär", "Willenskraft W10+", "Schneid"],
             "beschreibung": "Dieser altgediente Veteran ignoriert alle Abzüge bei Furchtproben und darf Furchteffekte-Würfe wiederholen, wenn gewünscht.",
             "neue_maechte": 0,
@@ -359,7 +359,7 @@
         "Rechte Hand des Teufels": {
             "name": "Rechte Hand des Teufels",
             "kategorie": "Legendär",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Legendär", "Lieblingswaffe", "Schießen", "Kämpfen oder Athletik W10+"],
             "beschreibung": "Verleiht der bevorzugten Waffe mythische Kräfte, die zusätzlichen Schadenswürfel verursachen. Waffe verliert Effekt, wenn sie verloren geht.",
             "neue_maechte": 0,
@@ -370,7 +370,7 @@
         "Schnell wie der Blitz": {
             "name": "Schnell wie der Blitz",
             "kategorie": "Legendär",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Legendär", "Geschicklichkeit W10+", "Schnell"],
             "beschreibung": "Ermöglicht eine vierte Aktion und erhöht den maximalen Abzug für Mehrfachaktionen auf -6.",
             "neue_maechte": 0,
@@ -381,7 +381,7 @@
         "Siehe, ein fahles Pferd": {
             "name": "Siehe, ein fahles Pferd",
             "kategorie": "Legendär",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Legendär"],
             "beschreibung": "Das treue Ross wird zu einer Wildcard mit eigenen Bennys, Spezialfähigkeit Furchtlos und Talent Sechster Sinn.",
             "neue_maechte": 0,
@@ -392,7 +392,7 @@
         "Verdammt": {
             "name": "Verdammt",
             "kategorie": "Legendär",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Wildcard", "Legendär", "Willenskraft W6+", "Ruf"],
             "beschreibung": "Erlaubt dem Charakter nach dem Tod als Gepeinigter zurückzukehren, mit der Option, ein weiteres Talent der Gepeinigten zu wählen.",
             "neue_maechte": 0,
@@ -403,7 +403,7 @@
         "US-Marshal": {
             "name": "US-Marshal",
             "kategorie": "Beruf",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Gewerbe (Recht) W4+", "Kämpfen W4+", "Reiten W4+", "Schießen W4+"],
             "beschreibung": "US-Marshals und Deputy-Marshals haben rechtliche Befugnisse in den gesamten Vereinigten Staaten. Sie erhalten +1 auf Überreden- und Einschüchternproben in ihrer Zuständigkeit.",
             "neue_maechte": 0,
@@ -414,7 +414,7 @@
         "Arkaner Hintergrund (Voodoopraktiker)": {
             "name": "Arkaner Hintergrund (Voodoopraktiker)",
             "kategorie": "Magie",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Glaube W4+", "Willenskraft W8+"],
             "beschreibung": "Der Charakter erhält die arkane Fertigkeit Glaube (Willenskraft) und beginnt mit 2 Mächten und 15 Machtpunkten.",
             "neue_maechte": 2,
@@ -425,7 +425,7 @@
         "Am Scheideweg gestanden": {
             "name": "Am Scheideweg gestanden",
             "kategorie": "Magie",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Voodoopraktiker)", "Glaube W8+", "Willenskraft W8+"],
             "beschreibung": "Der Charakter erhält eine Freie Wiederholung auf Glaubensproben, nachdem er einen beinahe tödlichen Vorfall überlebt hat.",
             "neue_maechte": 0,
@@ -436,7 +436,7 @@
         "Begünstigt": {
             "name": "Begünstigt",
             "kategorie": "Magie",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Arkaner Hintergrund (Voodoopraktiker)", "Glaube W8+", "Willenskraft W8+"],
             "beschreibung": "Die Kosten der Zauber 'Aspekt der Rada-Loa' oder 'Zorn der Petro-Loa' werden auf 3 Machtpunkte reduziert, wenn die Huldigung des Loa sichtbar ist.",
             "neue_maechte": 0,
@@ -447,7 +447,7 @@
         "Arkaner Hintergrund (Hexe)": {
             "name": "Arkaner Hintergrund (Hexe)",
             "kategorie": "Magie",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Willenskraft W8+", "Zaubern W4+"],
             "beschreibung": "Der Charakter erhält die arkane Fertigkeit Zaubern (Verstand) und beginnt mit 3 Mächten und 10 Machtpunkten.",
             "neue_maechte": 3,
@@ -458,7 +458,7 @@
         "Vertrauter": {
             "name": "Vertrauter",
             "kategorie": "Magie",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Hexe)", "Zaubern W8+"],
             "beschreibung": "Der Charakter erhält einen Vertrauten, der als Wildcard agiert, spezielle Boni bietet und mit der Hexe verbunden ist.",
             "neue_maechte": 0,
@@ -469,7 +469,7 @@
         "Wichita-Hexe": {
             "name": "Wichita-Hexe",
             "kategorie": "Magie",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Hexe)", "Zaubern W8+"],
             "beschreibung": "Die Hexe erhält Boni auf Einschüchtern- und Überredenproben und kann ihre Peitsche mit Energie aufladen, um zusätzlichen Schaden zu verursachen.",
             "neue_maechte": 0,
@@ -480,7 +480,7 @@
         "Arkaner Hintergrund (Chi-Meister)": {
             "name": "Arkaner Hintergrund (Chi-Meister)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["GES W6+", "WIL W6+", "Kampfkünstler", "Fokus W4+"],
             "beschreibung": "Ermöglicht die Nutzung von Fokus als arkane Fertigkeit, um Chi-basierte Kräfte zu kanalisieren.",
             "neue_maechte": 3,
@@ -491,7 +491,7 @@
         "Arkaner Hintergrund (Gesegneter)": {
             "name": "Arkaner Hintergrund (Gesegneter)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["WIL W6+", "Glaube W4+"],
             "beschreibung": "Ermöglicht göttliche Kräfte durch Glaube und das Vertrauen in höhere Mächte.",
             "neue_maechte": 3,
@@ -502,7 +502,7 @@
         "Arkaner Hintergrund (Taschenspieler)": {
             "name": "Arkaner Hintergrund (Taschenspieler)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Glücksspiel W6+", "Zaubern W4+"],
             "beschreibung": "Verleiht arkane Kräfte durch Willensduelle, dargestellt als Kartenspiele.",
             "neue_maechte": 3,
@@ -513,7 +513,7 @@
         "Arkaner Hintergrund (Schamane)": {
             "name": "Arkaner Hintergrund (Schamane)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["WIL W8+", "Glaube W4+"],
             "beschreibung": "Schamanen nutzen Glaube und handeln mit Naturgeistern, um ihre Kräfte zu entfalten.",
             "neue_maechte": 2,
@@ -524,7 +524,7 @@
         "Beförderung der Agency": {
             "name": "Beförderung der Agency",
             "kategorie": "Agent",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Agent"],
             "beschreibung": "Ermöglicht Beförderungen bis zur Sicherheitsstufe 3, mit Gehaltserhöhungen, Ausrüstung und besseren Gefallen.",
             "neue_maechte": 0,
@@ -535,7 +535,7 @@
         "Person mit den tausend Gesichtern": {
             "name": "Person mit den tausend Gesichtern",
             "kategorie": "Agent",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Agent", "Darbietung W8+"],
             "beschreibung": "Ermöglicht überzeugende Verkleidungen mit Boni auf Darbietungsproben und reduzierten Abzügen bei der Nachahmung spezifischer Personen.",
             "neue_maechte": 0,
@@ -546,7 +546,7 @@
         "Leichenstarre": {
             "name": "Leichenstarre",
             "kategorie": "Gepeinigter",
-            "rang": "Heldenhaft",
+            "rang": "H",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erschafft ein schmerzhaftes Feld, das innerhalb einer Mittleren Flächenschablone um den Gepeinigten herum alle Betroffenen ablenkt.",
             "neue_maechte": 0,
@@ -557,7 +557,7 @@
         "Mit Toten Sprechen": {
             "name": "Mit Toten Sprechen",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt dem Gepeinigten, die Seele einer Leiche herbeizurufen und mit ihr zu sprechen. Die Seele hat vage Erinnerungen an ihr sterbliches Leben.",
             "neue_maechte": 0,
@@ -568,7 +568,7 @@
         "Schlaf der Toten": {
             "name": "Schlaf der Toten",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Schickt ein Opfer mit einer Berührung ins Land der Träume. Funktioniert ähnlich wie die Macht Schlummer.",
             "neue_maechte": 0,
@@ -579,7 +579,7 @@
         "Schnell wie der Tod": {
             "name": "Schnell wie der Tod",
             "kategorie": "Gepeinigter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erhöht die Bewegungsweite um 3 und den Sprintwürfel um einen Typ. Kombinierbar mit Flink.",
             "neue_maechte": 0,
@@ -590,7 +590,7 @@
         "Spinne": {
             "name": "Spinne",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt es, vertikale Oberflächen zu erklimmen und sich mit halber Bewegungsweite kopfüber festzuhalten.",
             "neue_maechte": 0,
@@ -601,7 +601,7 @@
         "Spiritueller Stacheldraht": {
             "name": "Spiritueller Stacheldraht",
             "kategorie": "Gepeinigter",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erschafft eine Barriere, die Geister und ätherische Wesen abhält. Erfordert eine Willenskraftprobe und Konzentration.",
             "neue_maechte": 0,
@@ -612,7 +612,7 @@
         "Spur aus Zähnen": {
             "name": "Spur aus Zähnen",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt das Aufspüren eines verlorenen Körperteils oder Feindes, sofern ein wesentlicher Teil in Reichweite ist.",
             "neue_maechte": 0,
@@ -623,7 +623,7 @@
         "Teufelsberührung": {
             "name": "Teufelsberührung",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Stört mit einer Berührung die Funktion von Höllenmaschinen oder Spielereien eines verrückten Wissenschaftlers.",
             "neue_maechte": 0,
@@ -634,7 +634,7 @@
         "Tote Spüren": {
             "name": "Tote Spüren",
             "kategorie": "Gepeinigter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt es, Leichen in einem Umkreis von 1,5 Kilometern wahrzunehmen. Nützlich zum Erkennen von wandelnden Toten.",
             "neue_maechte": 0,
@@ -645,7 +645,7 @@
         "Totenmaske": {
             "name": "Totenmaske",
             "kategorie": "Gepeinigter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Überreden W6+", "Gepeinigter"],
             "beschreibung": "Erlaubt dem Gepeinigten, ein Erscheinungsbild anzunehmen, das ihm ein lebendiges Aussehen verleiht.",
             "neue_maechte": 0,
@@ -656,7 +656,7 @@
         "Totenstille": {
             "name": "Totenstille",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Heimlichkeit W8+", "Gepeinigter"],
             "beschreibung": "Der Gepeinigte kann sich lautlos bewegen, solange seine Füße Kontakt mit der Erde haben. Gewährt +4 auf Heimlichkeit.",
             "neue_maechte": 0,
@@ -667,7 +667,7 @@
         "Unheilige Schar": {
             "name": "Unheilige Schar",
             "kategorie": "Gepeinigter",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Beschwört eine Gruppe von fünf wandelnden Toten als chaotische Verbündete. Verlorene Mitglieder können ersetzt werden.",
             "neue_maechte": 0,
@@ -678,7 +678,7 @@
         "Verrenkung": {
             "name": "Verrenkung",
             "kategorie": "Gepeinigter",
-            "rang": "Heldenhaft",
+            "rang": "H",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt es, Knochen aus ihren Gelenken zu zerren, um sich aus Gebunden oder Festgehalten zu befreien oder durch enge Spalten zu gelangen.",
             "neue_maechte": 0,
@@ -689,7 +689,7 @@
         "Albträume": {
             "name": "Albträume",
             "kategorie": "Gepeinigter",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt dem Gepeinigten, seinen Feinden jede Nacht dunkle und schreckliche Träume zu senden. Der Effekt erfordert einen Gegenstand oder eine Verbindung zum Ziel.",
             "neue_maechte": 0,
@@ -700,7 +700,7 @@
         "Atem des Ossariums": {
             "name": "Atem des Ossariums",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Der Gepeinigte atmet giftige Dämpfe aus, die innerhalb einer Mittleren Flächenschablone Gegner Erschöpfung erleiden lassen.",
             "neue_maechte": 0,
@@ -711,7 +711,7 @@
         "Besitz Ergreifen": {
             "name": "Besitz Ergreifen",
             "kategorie": "Gepeinigter",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Der Gepeinigte kann die Kontrolle über einen anderen Körper übernehmen, ähnlich der Macht Marionette.",
             "neue_maechte": 0,
@@ -722,7 +722,7 @@
         "Geisterblick": {
             "name": "Geisterblick",
             "kategorie": "Gepeinigter",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt dem Gepeinigten, die Geisterwelt zu sehen und übernatürliche Phänomene wahrzunehmen.",
             "neue_maechte": 0,
@@ -733,7 +733,7 @@
         "Graben": {
             "name": "Graben",
             "kategorie": "Gepeinigter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Der Gepeinigte kann sich durch Erde graben und sich unterirdisch bewegen, jedoch langsamer als an der Oberfläche.",
             "neue_maechte": 0,
@@ -744,7 +744,7 @@
         "Hand der Toten": {
             "name": "Hand der Toten",
             "kategorie": "Gepeinigter",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Der Gepeinigte kann eine abgetrennte Körperteil, wie eine Hand, steuern und für verschiedene Aufgaben verwenden.",
             "neue_maechte": 0,
@@ -755,7 +755,7 @@
         "Höllenross": {
             "name": "Höllenross",
             "kategorie": "Gepeinigter",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Beschwört ein dämonisches Pferd, das als Reittier dient und die Werte eines Streitrosses hat. Das Höllenross ist furchtlos und eine Wildcard.",
             "neue_maechte": 0,
@@ -766,7 +766,7 @@
         "Imitieren": {
             "name": "Imitieren",
             "kategorie": "Gepeinigter",
-            "rang": "Legendär",
+            "rang": "L",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt dem Gepeinigten, die Mächte anderer zu imitieren, die er in seiner Nähe erlebt hat. Dies erfordert Verstand und Verständnis der Macht.",
             "neue_maechte": 0,
@@ -777,7 +777,7 @@
         "Galgenhumor": {
             "name": "Galgenhumor",
             "kategorie": "Sozial",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Provozieren W6+"],
             "beschreibung": "Ermöglicht die Nutzung von Provozieren anstelle von Willenskraft bei Furchtproben. Bei einer Steigerung unterstützt der Charakter Verbündete.",
             "neue_maechte": 0,
@@ -788,7 +788,7 @@
         "Veteran des Unheimlichen Westens": {
             "name": "Veteran des Unheimlichen Westens",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Wildcard", "WIL W6+", "Okkultismus W6+"],
             "beschreibung": "Erlaubt den Start auf einem höheren Rang mit vier Aufstiegen, birgt jedoch ein Risiko aus einer speziellen Tabelle.",
             "neue_maechte": 0,
@@ -799,7 +799,7 @@
         "Fetisch": {
             "name": "Fetisch",
             "kategorie": "Schamane",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Schamane)", "Glaube W8+"],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glaubensproben, wenn ein Fetisch verwendet wird. Ersatz kann durch ein Ritual erstellt werden.",
             "neue_maechte": 0,
@@ -810,7 +810,7 @@
         "Die Gunst des Geistes": {
             "name": "Die Gunst des Geistes",
             "kategorie": "Schamane",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Arkaner Hintergrund (Schamane)", "Glaube W8+"],
             "beschreibung": "Ermöglicht das Wirken einer Macht ohne Abzug für Mehrfachaktionen einmal pro Runde.",
             "neue_maechte": 0,
@@ -821,7 +821,7 @@
         "Herde": {
             "name": "Herde",
             "kategorie": "Gesegneter",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Arkaner Hintergrund (Gesegneter)", "Überreden W8+"],
             "beschreibung": "Fügt fünf Gefolgsleute hinzu, die mit dem Gesegneten reisen und ihm helfen können. Gefolgsleute können ersetzt werden.",
             "neue_maechte": 0,
@@ -832,7 +832,7 @@
         "Wahrer Gläubiger": {
             "name": "Wahrer Gläubiger",
             "kategorie": "Gesegneter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Willenskraft W10+", "Arkaner Hintergrund (Gesegneter)", "Glaube W6+"],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glaubensproben.",
             "neue_maechte": 0,
@@ -843,7 +843,7 @@
         "Befallen": {
             "name": "Befallen",
             "kategorie": "Gepeinigter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Ermöglicht die Kontrolle von Schwärmen beißender oder stechender Insekten für begrenzte Zeit durch den Einsatz eines Bennys.",
             "neue_maechte": 0,
@@ -854,7 +854,7 @@
         "Flicken": {
             "name": "Flicken",
             "kategorie": "Gepeinigter",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Gepeinigter"],
             "beschreibung": "Erlaubt tägliche Würfe auf Natürliche Heilung, sofern der Gepeinigte mindestens 500 g Fleisch verzehrt.",
             "neue_maechte": 0,
@@ -876,7 +876,7 @@
         "Überlegenes Kung Fu": {
             "name": "Überlegenes Kung Fu",
             "kategorie": "Chi-Meister",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Willenskraft W6+", "Arkaner Hintergrund (Chi-Meister)", "Kämpfen W8+"],
             "beschreibung": "Ermöglicht die Wahl eines speziellen Kampfstils, der als freie Aktion aktiviert werden kann.",
             "neue_maechte": 0,
@@ -887,7 +887,7 @@
         "Himmlisches Kung Fu": {
             "name": "Himmlisches Kung Fu",
             "kategorie": "Chi-Meister",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Willenskraft W8+", "Überlegenes Kung Fu", "Kämpfen W10+"],
             "beschreibung": "Ermöglicht die gleichzeitige Nutzung von zwei Kampfstilen und erweitert die Auswahl um einen weiteren Stil.",
             "neue_maechte": 0,
@@ -898,7 +898,7 @@
         "Beförderungen der Ranger": {
             "name": "Beförderungen der Ranger",
             "kategorie": "Ranger",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Territorialer Ranger"],
             "beschreibung": "Ermöglicht Beförderungen vom Sergeant bis zum Captain mit zusätzlichen Vorteilen wie Gehaltserhöhungen und besseren Gefallen.",
             "neue_maechte": 0,
@@ -909,7 +909,7 @@
         "Wie eine Eiche": {
             "name": "Wie eine Eiche",
             "kategorie": "Ranger",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Schneid", "Territorialer Ranger"],
             "beschreibung": "Negiert bis zu 2 Punkte Furcht-Abzüge für Verbündete in der Nähe, solange der Ranger seine Furchtprobe besteht.",
             "neue_maechte": 0,
@@ -920,7 +920,7 @@
         "Alchemie": {
             "name": "Alchemie",
             "kategorie": "Verrückte Wissenschaft",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)", "Verrückte Wissenschaft W8+"],
             "beschreibung": "Ermöglicht die Herstellung von Tränken und Elixieren, die Machtpunkte binden, bis sie verwendet werden.",
             "neue_maechte": 0,
@@ -931,7 +931,7 @@
         "Erzfresser": {
             "name": "Erzfresser",
             "kategorie": "Verrückte Wissenschaft",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)", "Verrückte Wissenschaft W6+"],
             "beschreibung": "Erhöht Machtpunkte um 5, aber erhöht das Risiko für Geistersteinfieber bei Fehlfunktionen.",
             "neue_maechte": 0,
@@ -942,7 +942,7 @@
         "Mit Eisen beschlagen": {
             "name": "Mit Eisen beschlagen",
             "kategorie": "Verrückte Wissenschaft",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)"],
             "beschreibung": "Erhält $2.000 an Geräten oder Fahrzeugen und 25% Rabatt auf zukünftige Käufe bei bestimmten Anbietern.",
             "neue_maechte": 0,
@@ -953,7 +953,7 @@
         "Wahres Genie": {
             "name": "Wahres Genie",
             "kategorie": "Verrückte Wissenschaft",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)", "Verstand W8+"],
             "beschreibung": "Ermöglicht die Verwendung eines Bennys, um Ergebnisse auf der Wahnsinns- oder Fehlfunktionstabelle zu beeinflussen.",
             "neue_maechte": 0,
@@ -964,7 +964,7 @@
         "Blut der Whateleys": {
             "name": "Blut der Whateleys",
             "kategorie": "Taschenspieler",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Arkaner Hintergrund (Taschenspieler)"],
             "beschreibung": "Ermöglicht die Nutzung von Blutmagie, um Machtpunkte durch Selbstverletzung zu gewinnen.",
             "neue_maechte": 0,
@@ -986,7 +986,7 @@
         "Runenschießen": {
             "name": "Runenschießen",
             "kategorie": "Taschenspieler",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Arkaner Hintergrund (Taschenspieler)", "Schießen W8+"],
             "beschreibung": "Ermöglicht das Wirken bestimmter Zauber mit einer speziellen, runenbeschrifteten Waffe.",
             "neue_maechte": 1,
@@ -997,7 +997,7 @@
         "Zocker": {
             "name": "Zocker",
             "kategorie": "Taschenspieler",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Willenskraft W8+", "Arkaner Hintergrund (Taschenspieler)", "Zaubern W6+"],
             "beschreibung": "Zieht eine zusätzliche Karte, wenn Ein Spiel mit dem Teufel gewagt wird.",
             "neue_maechte": 0,
@@ -1008,7 +1008,7 @@
         "Verbesserter Zocker": {
             "name": "Verbesserter Zocker",
             "kategorie": "Taschenspieler",
-            "rang": "Veteran",
+            "rang": "V",
             "voraussetzungen": ["Zocker"],
             "beschreibung": "Zieht zwei zusätzliche Karten, wenn Ein Spiel mit dem Teufel gewagt wird.",
             "neue_maechte": 0,
@@ -1056,7 +1056,7 @@
         "Arkaner Hintergrund (Begabt)": {
             "name": "Arkaner Hintergrund (Begabt)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": [],
             "beschreibung": "Ermöglicht die Nutzung einzigartiger, angeborener Fähigkeiten, die nicht in gängige magische Konzepte passen.",
             "neue_maechte": 1,
@@ -1067,7 +1067,7 @@
         "Arkaner Hintergrund (Magie)": {
             "name": "Arkaner Hintergrund (Magie)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": [],
             "beschreibung": "Verleiht die Fähigkeit, rohe übernatürliche Energie für magische Zwecke zu nutzen.",
             "neue_maechte": 3,
@@ -1078,7 +1078,7 @@
         "Arkaner Hintergrund (Psionik)": {
             "name": "Arkaner Hintergrund (Psionik)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": [],
             "beschreibung": "Ermöglicht die Nutzung geistiger Energie, um Materie zu beeinflussen und Gedanken zu lesen.",
             "neue_maechte": 3,
@@ -1089,7 +1089,7 @@
         "Arkaner Hintergrund (Verrückte Wissenschaft)": {
             "name": "Arkaner Hintergrund (Verrückte Wissenschaft)",
             "kategorie": "Hintergrund",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger, VER W8+, Naturwissenschaften W6+, Verrückte Wissenschaft W4+"],
             "beschreibung": "Verleiht Zugang zu fortschrittlichen Erfindungen, die übernatürliche Kräfte simulieren.",
             "neue_maechte": 2,
@@ -2783,7 +2783,7 @@
         "Duellant": {
             "name": "Duellant",
             "kategorie": "Kampf",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger", "Schießen W6+"],
             "beschreibung": "Erhält zu Beginn eines Duells zwei zusätzliche verdeckte Karten.",
             "neue_maechte": 0,
@@ -2794,7 +2794,7 @@
         "Hahnwedeln": {
             "name": "Hahnwedeln",
             "kategorie": "Kampf",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "voraussetzungen": ["Fortgeschritten", "Geschicklichkeit W8+", "Schießen W8+"],
             "beschreibung": "Erlaubt bis zu sechs Schüsse in einer einzigen Aktion mit einem Abzug von -4 auf jeden Schuss.",
             "neue_maechte": 0,
@@ -2816,7 +2816,7 @@
         "Mach ihn nicht wütend!": {
             "name": "Mach ihn nicht wütend!",
             "kategorie": "Kampf",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger"],
             "beschreibung": "Fügt die Anzahl eigener Wunden als Bonus zu Nahkampfschadenswürfen hinzu.",
             "neue_maechte": 0,
@@ -2827,7 +2827,7 @@
         "Schnell ziehen": {
             "name": "Schnell ziehen",
             "kategorie": "Kampf",
-            "rang": "Anfänger",
+            "rang": "A",
             "voraussetzungen": ["Anfänger", "Geschicklichkeit W8+"],
             "beschreibung": "Erlaubt das Ziehen von zwei neuen Karten bei Benny-Ausgabe und bietet +2 auf Athletik-Würfe für Unterbrechungen.",
             "neue_maechte": 0,

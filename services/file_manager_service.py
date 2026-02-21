@@ -47,16 +47,22 @@ class FileManagerService:
     
     def get_default_directory(self, dir_type='chars'):
         """
-        Bestimmt das Standard-Verzeichnis basierend auf dem Typ (PyInstaller-kompatibel)
-        
+        Bestimmt das Standard-Verzeichnis basierend auf dem Typ und letzten verwendeten Pfad
+
         Args:
             dir_type (str): Typ des Verzeichnisses ('chars', 'pdfs', etc.)
-            
+
         Returns:
-            str: Pfad zum Standard-Verzeichnis
+            str: Pfad zum Verzeichnis (letzter verwendeter Pfad oder Standard-Fallback)
         """
         try:
-            # Verwende die zentrale path_utils für PyInstaller-Kompatibilität
+            # Ersten: Versuche letzten verwendeten Pfad aus Konfiguration zu laden
+            last_used_dir = self._get_last_used_directory(dir_type)
+            if last_used_dir and os.path.exists(last_used_dir) and os.path.isdir(last_used_dir):
+                Logger.debug(f"Verwende letzten Pfad für '{dir_type}': {last_used_dir}")
+                return last_used_dir
+
+            # Fallback: Standard-Verzeichnis bestimmen
             if dir_type == 'chars':
                 target_dir = get_chars_path()
             elif dir_type == 'templates':
@@ -65,7 +71,7 @@ class FileManagerService:
                 # Für andere Verzeichnisse verwende application root
                 app_root = get_application_root()
                 target_dir = str(app_root / dir_type)
-            
+
             # KORRIGIERT: Bessere Verzeichniserstellung mit Fehlerbehandlung
             if not os.path.exists(target_dir):
                 try:
@@ -83,15 +89,70 @@ class FileManagerService:
                         Logger.error(f"Auch Fallback-Verzeichnis konnte nicht erstellt werden: {str(e2)}")
                         # Letzter Fallback: Home-Verzeichnis
                         target_dir = os.path.expanduser("~")
-            
+
             Logger.debug(f"Standard-Verzeichnis für '{dir_type}': {target_dir}")
             return target_dir
-            
+
         except Exception as e:
             Logger.error(f"Fehler bei get_default_directory: {str(e)}")
             # Final fallback
             return os.path.expanduser("~")
-    
+
+    def _get_last_used_directory(self, dir_type):
+        """
+        Lädt den zuletzt verwendeten Pfad für den gegebenen Verzeichnistyp aus der Konfiguration
+
+        Args:
+            dir_type (str): Verzeichnistyp ('chars', 'pdfs')
+
+        Returns:
+            str: Letzter verwendeter Pfad oder None
+        """
+        try:
+            from services.service_container import service_container
+            config_service = service_container.get_config_service()
+            if not config_service:
+                return None
+
+            if dir_type == 'chars':
+                return config_service.config.last_character_directory
+            elif dir_type == 'pdfs':
+                return config_service.config.last_pdf_directory
+            else:
+                return None
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden des letzten Pfads für '{dir_type}': {str(e)}")
+            return None
+
+    def _save_last_used_directory(self, dir_type, directory_path):
+        """
+        Speichert den letzten verwendeten Pfad für den gegebenen Verzeichnistyp in der Konfiguration
+
+        Args:
+            dir_type (str): Verzeichnistyp ('chars', 'pdfs')
+            directory_path (str): Verzeichnispfad zum Speichern
+        """
+        try:
+            from services.service_container import service_container
+            config_service = service_container.get_config_service()
+            if not config_service:
+                Logger.warning("Config-Service nicht verfügbar, kann letzten Pfad nicht speichern")
+                return
+
+            if dir_type == 'chars':
+                config_service.config.last_character_directory = directory_path
+            elif dir_type == 'pdfs':
+                config_service.config.last_pdf_directory = directory_path
+            else:
+                Logger.warning(f"Unbekannter Verzeichnistyp: {dir_type}")
+                return
+
+            config_service.save_config()
+            Logger.debug(f"Letzter Pfad für '{dir_type}' gespeichert: {directory_path}")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern des letzten Pfads für '{dir_type}': {str(e)}")
+
     def generate_default_filename(self, file_type='character'):
         """
         Generiert einen Standard-Dateinamen basierend auf dem Charakternamen und Typ
@@ -360,7 +421,10 @@ class FileManagerService:
             success = self.controller.lade_charakter_von_json(path)
             if success:
                 Logger.info(f"Charakter geladen: {path}")
-                self._show_success("Charakter erfolgreich geladen", 
+                # Letzten verwendeten Pfad speichern
+                directory = os.path.dirname(path)
+                self._save_last_used_directory('chars', directory)
+                self._show_success("Charakter erfolgreich geladen",
                                  "Der Charakter wurde aus der Datei geladen.")
             else:
                 self._show_error("Fehler beim Laden des Charakters.")
@@ -429,6 +493,9 @@ class FileManagerService:
             success = self.controller.speichere_charakter_als_json(filepath)
             if success:
                 self._show_success("Speichern erfolgreich", f"Charakter wurde gespeichert als:\n{filepath}")
+                # Letzten verwendeten Pfad speichern
+                directory = os.path.dirname(filepath)
+                self._save_last_used_directory('chars', directory)
                 # Reset temp filename
                 self.temp_filename = ""
             else:
@@ -453,6 +520,9 @@ class FileManagerService:
             
             if success:
                 self._show_success("PDF erstellen erfolgreich", f"PDF wurde gespeichert als:\n{filepath}")
+                # Letzten verwendeten Pfad speichern
+                directory = os.path.dirname(filepath)
+                self._save_last_used_directory('pdfs', directory)
                 # Reset temp settings
                 self.temp_pdf_filename = ""
                 self.temp_printer_friendly = False

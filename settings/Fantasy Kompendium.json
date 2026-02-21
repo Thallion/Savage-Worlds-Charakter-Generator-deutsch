@@ -4781,7 +4781,7 @@
         },
         "Ausspähung": {
             "name": "Ausspähung",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "machtpunkte": 3,
             "reichweite": "Selbst",
             "dauer": "5",
@@ -4793,7 +4793,7 @@
         },
         "Bindender Ruf": {
             "name": "Bindender Ruf",
-            "rang": "Veteran",
+            "rang": "V",
             "machtpunkte": 8,
             "reichweite": "Verstand",
             "dauer": "Sofort",
@@ -4817,7 +4817,7 @@
         },          
         "Ebenenwechsel": {
             "name": "Ebenenwechsel",
-            "rang": "Veteran",
+            "rang": "V",
             "machtpunkte": 4,
             "reichweite": "Verstand",
             "dauer": "Sofort",
@@ -4829,7 +4829,7 @@
         },
         "Fluch": {
             "name": "Fluch",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "machtpunkte": 5,
             "reichweite": "Berührung",
             "dauer": "Speziell",
@@ -4877,7 +4877,7 @@
         },
         "Segen": {
             "name": "Segen",
-            "rang": "Fortgeschritten",
+            "rang": "F",
             "machtpunkte": 10,
             "reichweite": "Eine Stadt/Gemeinde",
             "dauer": "Ein Jahr",
@@ -4937,7 +4937,7 @@
         },
         "Zeitstopp": {
             "name": "Zeitstopp",
-            "rang": "Heroisch",
+            "rang": "H",
             "machtpunkte": 10,
             "reichweite": "Selbst",
             "dauer": "Sofort",

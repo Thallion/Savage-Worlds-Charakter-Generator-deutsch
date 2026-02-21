@@ -1,5 +1,5 @@
 {
-  "theme_style": "Light",
+  "theme_style": "Dark",
   "primary_palette": "Lime",
   "default_attribute_points": 5,
   "default_skill_points": 12,
@@ -10,7 +10,7 @@
   "window_height": 800,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "",
+  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/privat",
   "last_pdf_directory": "",
   "debug_mode": false,
   "log_level": "INFO",
@@ -19,7 +19,7 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Deadlands",
+  "last_setting": "Fantasy Kompendium",
   "config_version": "1.0",
-  "last_updated": "2026-02-17T16:56:18.991280"
+  "last_updated": "2026-02-21T09:17:41.209775"
 }

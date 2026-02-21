@@ -190,14 +190,14 @@ class CharacterHandler:
                 dialog_service.show_error_dialog(f"Fehler beim Schnellspeichern: {str(e)}")
 
     def speichere_charakter(self):
-        """Speichern-Dialog mit FileManager-Integration"""
+        """Speichern als-Dialog - erst Dateiname abfragen, dann Pfad wählen"""
         try:
             if not (self.controller and self.controller.charakter):
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
                     dialog_service.show_error_dialog("Kein Charakter verfügbar zum Speichern.")
                 return
-            
+
             file_service = service_container.get_file_manager_service()
             if not file_service:
                 Logger.error("FileManager-Service nicht verfügbar")
@@ -205,17 +205,10 @@ class CharacterHandler:
                 if dialog_service:
                     dialog_service.show_error_dialog("FileManager-Service nicht verfügbar.")
                 return
-            
-            # Prüfen ob bereits eine Datei für diesen Charakter existiert
-            existing_file_info = self._check_existing_character_file()
-            
-            if existing_file_info['exists']:
-                # Bestehende Datei gefunden - Überschreiben/Neu-Dialog anzeigen
-                self._show_save_options_dialog(existing_file_info)
-            else:
-                # Keine bestehende Datei - direkt Dateiname-Dialog anzeigen
-                self._show_save_filename_dialog()
-            
+
+            # Erst Dateiname abfragen, dann FileManager öffnen
+            self._show_save_filename_dialog()
+
         except Exception as e:
             Logger.error(f"Fehler beim Initialisieren des Speichervorgangs: {str(e)}", exc_info=True)
             dialog_service = service_container.get_dialog_service()
@@ -427,23 +420,31 @@ class CharacterHandler:
     def _show_save_filename_dialog(self):
         """Zeigt Dialog zur Eingabe eines Dateinamens"""
         try:
+            Logger.info("_show_save_filename_dialog gestartet")
+
             dialog_service = service_container.get_dialog_service()
             if not dialog_service:
                 Logger.error("Dialog-Service nicht verfügbar")
                 return
-            
+
+            Logger.info("Dialog-Service verfügbar")
+
             # Vorgeschlagenen Dateinamen generieren
             suggested_name = self._generate_suggested_filename()
-            
+            Logger.info(f"Vorgeschlagener Dateiname: {suggested_name}")
+
+            Logger.info("Rufe dialog_service.show_input_dialog auf...")
             dialog_service.show_input_dialog(
                 "Dateiname eingeben:",
                 "Charakter speichern",
                 suggested_name,
                 self._on_filename_entered
             )
-            
+
+            Logger.info("show_input_dialog wurde aufgerufen")
+
         except Exception as e:
-            Logger.error(f"Fehler beim Anzeigen des Dateiname-Dialogs: {str(e)}")
+            Logger.error(f"Fehler beim Anzeigen des Dateiname-Dialogs: {str(e)}", exc_info=True)
     
     def _generate_suggested_filename(self):
         """Generiert einen vorgeschlagenen Dateinamen"""
@@ -486,40 +487,34 @@ class CharacterHandler:
             Logger.error(f"Fehler beim Speichern in existierende Datei: {str(e)}")
     
     def _on_filename_entered(self, filename):
-        """Callback wenn Dateiname eingegeben wurde"""
+        """Callback wenn Dateiname eingegeben wurde - öffnet FileManager zur Pfadauswahl"""
         try:
             if not filename or not filename.strip():
                 return
-            
+
             # .json Extension hinzufügen falls nicht vorhanden
             if not filename.lower().endswith('.json'):
                 filename = f"{filename}.json"
-            
-            # Vollständigen Pfad erstellen
+
+            # Dateiname für späteren Gebrauch speichern
+            self.save_filename = filename
+            Logger.info(f"Dateiname gesetzt: {filename}")
+
+            # FileManager für Pfadauswahl öffnen
             file_service = service_container.get_file_manager_service()
             if not file_service:
                 Logger.error("FileManager-Service nicht verfügbar")
                 return
-            
-            chars_dir = file_service.get_default_directory('chars')
-            full_path = os.path.join(chars_dir, filename)
-            
-            # Speichern
-            controller = self.app.controller
-            success = controller.speichere_charakter_als_json(full_path)
-            
-            dialog_service = service_container.get_dialog_service()
-            if success and dialog_service:
-                dialog_service.show_success_dialog(
-                    f"Charakter wurde gespeichert:\n{filename}",
-                    "Speichern erfolgreich"
-                )
-                Logger.info(f"Charakter unter neuem Namen gespeichert: {full_path}")
-            elif dialog_service:
-                dialog_service.show_error_dialog("Fehler beim Speichern des Charakters.")
-                
+
+            # FileManager mit temp_filename setzen
+            file_service.temp_filename = filename
+
+            default_dir = file_service.get_default_directory('chars')
+            file_service.show_file_manager(default_dir, "save_dir")
+            Logger.info("FileManager für Pfadauswahl geöffnet")
+
         except Exception as e:
-            Logger.error(f"Fehler beim Speichern unter neuem Dateinamen: {str(e)}")
+            Logger.error(f"Fehler beim Öffnen des FileManagers: {str(e)}", exc_info=True)
     
     def _clear_temp_settings(self):
         """Löscht temporäre Einstellungen"""
