@@ -3054,7 +3054,7 @@
             ],
             "beschreibung": "Erhalte 5 zusätzliche Machtpunkte, nur einmal pro Rang.",
             "neue_maechte": 0,
-            "machtpunkte": 10,
+            "machtpunkte": 5,
             "ausgewaehlt": false,
             "aktiv": true
         },
