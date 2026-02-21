@@ -200,7 +200,8 @@ class EigenschaftenManager:
             Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
         
         # Aktualisiere abgeleitete Werte
-        charakter.rang = charakter.get_rang(charakter.aufstiege_gesamt)
+        ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+        charakter.rang = charakter.get_rang(ausgegebene_aufstiege)
         charakter.berechne_abgeleitete_werte()
         
         return True
@@ -239,7 +240,8 @@ class EigenschaftenManager:
             charakter.verbleibende_attributsteigerungen += kosten
         
         # Aktualisiere abgeleitete Werte
-        charakter.rang = charakter.get_rang(charakter.aufstiege_gesamt)
+        ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+        charakter.rang = charakter.get_rang(ausgegebene_aufstiege)
         charakter.berechne_abgeleitete_werte()
         
         return True

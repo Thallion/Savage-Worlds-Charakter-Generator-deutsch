@@ -4,27 +4,28 @@ from kivy.logger import Logger
 
 def update_rang(charakter):
     """
-    Aktualisiert den Rang basierend auf den Gesamtaufstiegen.
-    
+    Aktualisiert den Rang basierend auf den ausgegebenen Aufstiegen.
+
     Args:
         charakter: Das Charakterobjekt, dessen Rang aktualisiert werden soll
     """
-    charakter.rang = get_rang(charakter, charakter.aufstiege_gesamt)
-    Logger.info(f"Rang aktualisiert: {charakter.rang} (Aufstiege gesamt: {charakter.aufstiege_gesamt})")
+    ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+    charakter.rang = get_rang(charakter, ausgegebene_aufstiege)
+    Logger.info(f"Rang aktualisiert: {charakter.rang} (Ausgegebene Aufstiege: {ausgegebene_aufstiege}, Gesamt: {charakter.aufstiege_gesamt}, Verbleibend: {charakter.verbleibende_aufstiege})")
 
-def get_rang(charakter, aufstiege_gesamt):
+def get_rang(charakter, ausgegebene_aufstiege):
     """
-    Bestimmt den Rang basierend auf den Gesamtaufstiegen.
-    
+    Bestimmt den Rang basierend auf den ausgegebenen Aufstiegen.
+
     Args:
         charakter: Das Charakterobjekt
-        aufstiege_gesamt: Die Anzahl der Gesamtaufstiege
-        
+        ausgegebene_aufstiege: Die Anzahl der ausgegebenen Aufstiege
+
     Returns:
         str: Die Bezeichnung des Ranges
     """
     for min_val, max_val, rank_name, rank_num in charakter.rang_mapping:
-        if min_val <= aufstiege_gesamt < max_val:
+        if min_val <= ausgegebene_aufstiege < max_val:
             return rank_name
     return "Unbekannter Rang"
 
@@ -52,7 +53,8 @@ def steigere_attribut(charakter, attribut_name):
             attribut.wuerfel.increase()
             Logger.debug(f"Attribut '{attribut_name}' gesteigert auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier}")
             charakter.update_char_gen_status()  # Aktualisiere den Status
-            charakter.rang = get_rang(charakter, charakter.aufstiege_gesamt)
+            ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+            charakter.rang = get_rang(charakter, ausgegebene_aufstiege)
             return True
         else:
             Logger.warning(f"Attribut '{attribut_name}' nicht gefunden im Charakterobjekt mit ID {id(charakter)}.")
@@ -108,7 +110,8 @@ def senke_attribut(charakter, attribut_name):
             attribut.wuerfel.decrease()
             Logger.debug(f"Attribut '{attribut_name}' gesenkt auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier}")
             charakter.update_char_gen_status()  # Aktualisiere den Status
-            charakter.rang = get_rang(charakter, charakter.aufstiege_gesamt)
+            ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+            charakter.rang = get_rang(charakter, ausgegebene_aufstiege)
         else:
             Logger.warning(f"Attribut '{attribut_name}' nicht gefunden im Charakterobjekt mit ID {id(charakter)}.")
         return False
@@ -143,7 +146,8 @@ def increase_aufstiege(charakter):
     charakter.verbleibende_aufstiege += 1
     Logger.debug(f"Aufstiege erhöht: Aufstiege gesamt = {charakter.aufstiege_gesamt}, Verbleibende Aufstiege = {charakter.verbleibende_aufstiege}")
     # Rang neu setzen und speichern
-    charakter.rang = get_rang(charakter, charakter.aufstiege_gesamt)
+    ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+    charakter.rang = get_rang(charakter, ausgegebene_aufstiege)
 
 def erhoehe_startkapital(charakter):
     """
@@ -205,4 +209,5 @@ def decrease_aufstiege(charakter):
     charakter.verbleibende_aufstiege = max(charakter.verbleibende_aufstiege, 0)  # Sicherstellen, dass nicht negativ
     Logger.debug(f"Aufstiege verringert: Aufstiege gesamt = {charakter.aufstiege_gesamt}, Verbleibende Aufstiege = {charakter.verbleibende_aufstiege}")
     # Rang neu setzen und speichern
-    charakter.rang = get_rang(charakter, charakter.aufstiege_gesamt)
+    ausgegebene_aufstiege = charakter.aufstiege_gesamt - charakter.verbleibende_aufstiege
+    charakter.rang = get_rang(charakter, ausgegebene_aufstiege)

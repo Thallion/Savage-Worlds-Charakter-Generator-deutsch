@@ -165,6 +165,7 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         ]
         self.update_rang()
         self.bind(aufstiege_gesamt=lambda instance, value: self.update_rang())
+        self.bind(verbleibende_aufstiege=lambda instance, value: self.update_rang())
 
         # Berechnung der abgeleiteten Werte
         self.berechne_abgeleitete_werte()
