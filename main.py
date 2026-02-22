@@ -49,7 +49,7 @@ from views.profil_view import ProfilWidget
 from views.eigenschaften_view import EigenschaftenWidget
 from views.handicaps_view import HandicapsWidget
 from views.talente_view import TalenteWidget
-from views.maechte_view import MaechteWidget
+from views.maechte_view import KraefteWidget, MaechteWidget  # MaechteWidget für Rückwärtskompatibilität
 from views.ausruestung_view import AusruestungWidget
 from views.charakterbogen_view import CharakterbogenWidget
 

@@ -45,6 +45,7 @@ class CharakterController(EventDispatcher):
         self.register_event_type('on_charakter_updated')
         self.register_event_type('on_charakter_loaded')
         self.register_event_type('on_charakter_error')
+        self.register_event_type('on_setting_changed')
 
         # Erzeuge den Charakter
         self.charakter = Charakter(
@@ -121,6 +122,11 @@ class CharakterController(EventDispatcher):
     def on_charakter_error(self, error_msg):
         """Event-Handler für Fehler bei Charakteroperationen"""
         Logger.error(f"Charakterfehler: {error_msg}")
+        pass
+
+    def on_setting_changed(self, setting_name):
+        """Event-Handler für Setting-Änderungen (interner Default-Handler)"""
+        Logger.info(f"Setting geändert zu: {setting_name}")
         pass
 
     # ============================
@@ -741,12 +747,16 @@ class CharakterController(EventDispatcher):
             if success:
                 self.current_character_file_path = dateipfad
                 Logger.info(f"Charakter erfolgreich aus {dateipfad} geladen.")
-                
+
                 # Events auslösen zur Aktualisierung der UI
                 self.dispatch('on_charakter_changed', self.charakter)
                 self.dispatch('on_charakter_loaded')
                 self.dispatch('on_charakter_updated')
-                
+
+                # Setting-Change-Event für kontextabhängige UI-Umschaltung auslösen
+                if self.charakter and self.charakter.active_setting_name:
+                    self.dispatch('on_setting_changed', self.charakter.active_setting_name)
+
                 return True
             else:
                 # Bei Fehler: Ursprünglichen Charakter wiederherstellen
@@ -794,24 +804,29 @@ class CharakterController(EventDispatcher):
     def neuer_charakter(self, char_name="", setting_name=None):
         """
         Erstellt einen neuen Charakter
-        
+
         Args:
             char_name (str): Name des neuen Charakters
             setting_name (str): Name des zu verwendenden Settings (optional)
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
             # Backup des alten Charakters für Notfall-Wiederherstellung
             alter_charakter = self.charakter
-            
+
             # Neuen Charakter erstellen
             self.charakter = Charakter(char_name=char_name, active_setting_name=setting_name)
             self.current_character_file_path = None  # Zurücksetzen des Dateipfads (jetzt erlaubt)
-            
+
             # UI-Updates auslösen
             self.dispatch('on_charakter_changed', self.charakter)
+
+            # Setting-Change-Event für kontextabhängige UI-Umschaltung auslösen
+            if setting_name:
+                self.dispatch('on_setting_changed', setting_name)
+
             Logger.info(f"Neuer Charakter '{char_name}' mit Setting '{setting_name}' erstellt.")
             return True
         except Exception as e:

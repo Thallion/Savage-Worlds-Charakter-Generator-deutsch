@@ -2,9 +2,13 @@
     MDTooltipPlain:
         text: root.tooltip_text
 
-<MaechteWidget>:
+# Hauptdefinition für KraefteWidget
+<KraefteWidget>:
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor
+
+# Rückwärtskompatibilität: MaechteWidget als Alias
+<MaechteWidget@KraefteWidget>:
     
     # Suchfeld separat außerhalb des ScrollView für besseren Keyboard-Fokus
     MDBoxLayout:

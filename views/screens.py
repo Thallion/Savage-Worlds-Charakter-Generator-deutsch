@@ -133,14 +133,19 @@ class TalenteScreen(MDScreen):
 
 class MaechteScreen(MDScreen):
     def refresh_widget(self):
-        """Delegiert an das MaechteWidget"""
+        """Delegiert an das KraefteWidget (ehemals MaechteWidget)"""
         try:
-            if hasattr(self.ids, 'maechte_widget'):
+            # Unterstütze beide Namen für Übergangsphase
+            widget = None
+            if hasattr(self.ids, 'kraefte_widget'):
+                widget = self.ids.kraefte_widget
+            elif hasattr(self.ids, 'maechte_widget'):
                 widget = self.ids.maechte_widget
-                if widget and hasattr(widget, 'refresh_widget'):
-                    widget.refresh_widget()
-                    return True
-            Logger.warning("MaechteWidget oder refresh_widget nicht gefunden")
+
+            if widget and hasattr(widget, 'refresh_widget'):
+                widget.refresh_widget()
+                return True
+            Logger.warning("KraefteWidget/MaechteWidget oder refresh_widget nicht gefunden")
             return False
         except Exception as e:
             Logger.error(f"Fehler bei MaechteScreen.refresh_widget: {str(e)}")

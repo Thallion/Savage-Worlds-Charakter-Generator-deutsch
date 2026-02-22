@@ -1,7 +1,8 @@
 # views/maechte_view.py
 """
-View-Komponente für Mächte nach dem MVC-Pattern.
+View-Komponente für Mächte und Superkräfte nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Mächten bereit.
+Schaltet kontextabhängig zwischen traditionellem Mächte-Modus und Superkräfte-Modus um.
 """
 
 from kivymd.app import MDApp
@@ -12,6 +13,8 @@ from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.tooltip import MDTooltip
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
+from kivymd.uix.card import MDCard
+from kivymd.uix.progressindicator import MDLinearProgressIndicator
 
 from kivymd.uix.dialog import (
     MDDialog,
@@ -40,6 +43,13 @@ LIGHT_ODD_COLOR = [0.85, 0.85, 0.85, 1]
 SELECTED_LINE_COLOR = [1, 0.65, 0, 1]
 UNSELECTED_LINE_COLOR = [0, 0, 0, 0]
 
+# Settings, die den Superkräfte-Modus aktivieren
+SUPERKRAEFTE_SETTINGS = [
+    "Superkräfte Kompendium",
+    "Superkräfte-Kompendium",
+    "Superheroes"
+]
+
 
 class MaechteTooltip(MDTooltip):
     """Basis-Klasse für Tooltips in der Mächte-View"""
@@ -55,7 +65,6 @@ class TooltipIconButton(MaechteTooltip, MDIconButton):
 Factory.register('TooltipIconButton', TooltipIconButton)
 
 
-# KV-Datei laden
 # KV-Datei laden mit PyInstaller-kompatiblem Pfad
 from utils.path_utils import get_application_root
 import os
@@ -94,13 +103,13 @@ class MachtItemRow(MDBoxLayout):
         """Initialisiert die MachtItemRow und holt den Controller-Zugriff."""
         self._initialize_controller()
         super().__init__(**kwargs)
-        self.bind(index=self.update_color)  # Wichtig: Farbaktualisierung bei Indexänderung
+        self.bind(index=self.update_color)
 
     def _initialize_controller(self):
         """Initialisiert die Verbindung zum Controller."""
         app = MDApp.get_running_app()
         self.controller = app.controller if hasattr(app, 'controller') else None
-        
+
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
 
@@ -118,16 +127,14 @@ class MachtItemRow(MDBoxLayout):
     def bearbeite_macht(self):
         """Öffnet den Bearbeitungsdialog für die Macht."""
         Logger.debug(f"MachtItemRow: Bearbeite Macht '{self.macht_name}'")
-        
-        # Dialog Service über Service Container holen
+
         dialog_service = get_dialog_service()
-        
+
         if dialog_service and hasattr(dialog_service, 'macht_dialog_handler'):
             dialog_service.macht_dialog_handler.show_edit_dialog(self.macht_name)
             Logger.debug("MachtItemRow: Bearbeitungsdialog erfolgreich geöffnet")
         else:
             Logger.error("MachtItemRow: Dialog Service oder macht_dialog_handler nicht verfügbar")
-            # Fallback-Fehlermeldung für den Benutzer
             if dialog_service:
                 dialog_service.show_error_dialog(
                     "Der Bearbeitungsdialog konnte nicht geöffnet werden. "
@@ -137,31 +144,28 @@ class MachtItemRow(MDBoxLayout):
     def waehle_macht(self):
         """
         Wählt eine Macht aus.
-        Prüft vorher, ob genügend verfügbare Mächte vorhanden sind und leitet die Auswahl 
+        Prüft vorher, ob genügend verfügbare Mächte vorhanden sind und leitet die Auswahl
         an das Hauptwidget zur Rangprüfung weiter.
         """
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
             return
 
-        # Prüfen, ob genügend verfügbare Mächte vorhanden sind
         charakter = self.controller.charakter
         if charakter.verfuegbare_maechte <= 0:
             self._show_no_powers_dialog()
             return
 
-        # Delegation an das MaechteWidget für Rangprüfung
         if self.maechte_widget:
             self.maechte_widget._on_macht_selected(self.macht_name)
         else:
             Logger.error("MachtItemRow: MaechteWidget nicht verfügbar für Rangprüfung")
-            # Fallback zur direkten Kontrollernutzung
             success = self.controller.waehle_macht(self.macht_name)
             if success:
                 Logger.debug(f"Macht '{self.macht_name}' ausgewählt.")
                 if self.macht:
                     self.macht.ausgewaehlt = True
-                    self.line_color = self._get_line_color()  # Umrandung aktualisieren
+                    self.line_color = self._get_line_color()
                     self.canvas.ask_update()
                 self._refresh_ui()
             else:
@@ -175,7 +179,7 @@ class MachtItemRow(MDBoxLayout):
             padding=dp(20),
             adaptive_height=True
         )
-        
+
         warning_label = MDLabel(
             text="Keine verfügbaren Mächte mehr zum Auswählen! Du musst erst weitere Mächte durch Talente oder Aufstiege erwerben.",
             size_hint_y=None,
@@ -185,7 +189,7 @@ class MachtItemRow(MDBoxLayout):
             valign="middle"
         )
         content.add_widget(warning_label)
-        
+
         self.dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Keine Mächte verfügbar",
@@ -219,8 +223,7 @@ class MachtItemRow(MDBoxLayout):
             padding=dp(20),
             adaptive_height=True
         )
-        
-        # Macht-Name als Überschrift
+
         title_label = MDLabel(
             text=f"[b]{self.macht_name}[/b]",
             size_hint_y=None,
@@ -231,8 +234,7 @@ class MachtItemRow(MDBoxLayout):
             markup=True
         )
         content.add_widget(title_label)
-        
-        # Vollständige Beschreibung
+
         desc_label = MDLabel(
             text=self.beschreibung,
             size_hint_y=None,
@@ -244,7 +246,7 @@ class MachtItemRow(MDBoxLayout):
         )
         desc_label.bind(texture_size=desc_label.setter('size'))
         content.add_widget(desc_label)
-        
+
         description_dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Macht-Beschreibung",
@@ -273,13 +275,13 @@ class MachtItemRow(MDBoxLayout):
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
             return
-            
+
         success = self.controller.entferne_macht(self.macht_name)
         if success:
             Logger.debug(f"Macht '{self.macht_name}' entfernt.")
             if self.macht:
                 self.macht.ausgewaehlt = False
-                self.line_color = self._get_line_color()  # Umrandung aktualisieren
+                self.line_color = self._get_line_color()
                 self.canvas.ask_update()
             self._refresh_ui()
         else:
@@ -287,7 +289,6 @@ class MachtItemRow(MDBoxLayout):
 
     def update_color(self, *args):
         """Aktualisiert die Hintergrundfarbe bei Indexänderung."""
-        # Die Canvas-Farben aktualisieren
         self.md_bg_color = self._get_background_color()
         self.line_color = self._get_line_color()
 
@@ -308,14 +309,18 @@ class MachtItemRow(MDBoxLayout):
         return UNSELECTED_LINE_COLOR
 
 
-class MaechteWidget(MDBoxLayout):
+class KraefteWidget(MDBoxLayout):
     """
-    Widget zur Anzeige und Verwaltung von Mächten.
-    Hauptkomponente der View im MVC-Pattern.
+    Kontextabhängiges Widget zur Anzeige und Verwaltung von Mächten oder Superkräften.
+    Schaltet basierend auf dem aktiven Setting zwischen beiden Modi um.
+
+    Im Mächte-Modus werden die KV-definierten UI-Kinder (Suche, Sort, RecycleView) genutzt.
+    Im Superkräfte-Modus werden diese versteckt und eine SuperkraefteSubview angezeigt.
     """
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
-    only_selected_items = BooleanProperty(False)  # Property för den Filter
+    only_selected_items = BooleanProperty(False)
+    current_mode = StringProperty("maechte")  # "maechte" oder "superkraefte"
 
     # Mapping für Ränge, um numerische Sortierung zu ermöglichen
     RANG_MAPPING = {
@@ -328,11 +333,92 @@ class MaechteWidget(MDBoxLayout):
     }
 
     def __init__(self, **kwargs):
-        """Initialisiert das MaechteWidget und setzt Grundkonfiguration."""
+        """Initialisiert das KraefteWidget und setzt Grundkonfiguration."""
         super().__init__(**kwargs)
         self._initialize_controller()
-        self.dialog = None  # Dialog-Referenz für Rangprüfung
+        self.dialog = None
+        self._maechte_children = []  # Gespeicherte KV-Kinder für Moduswechsel
+        self._superkraefte_view = None  # Aktive Superkräfte-View
         Clock.schedule_once(self.post_init, 0)
+        Clock.schedule_once(self._check_initial_setting, 0.5)
+
+    def _initialize_controller(self):
+        """Initialisiert die Verbindung zum Controller."""
+        app = MDApp.get_running_app()
+        self.controller = app.controller if hasattr(app, 'controller') else None
+
+        if not self.controller:
+            Logger.error("KraefteWidget: Controller nicht gefunden")
+        else:
+            self.controller.bind(on_setting_changed=self._on_setting_changed_event)
+
+    def _check_initial_setting(self, dt):
+        """Prüft das initiale Setting und setzt den entsprechenden Modus."""
+        if self.controller and hasattr(self.controller, 'charakter'):
+            setting_name = getattr(self.controller.charakter, 'active_setting_name', '')
+            if setting_name:
+                self._switch_mode_based_on_setting(setting_name)
+
+    def _on_setting_changed_event(self, instance, setting_name):
+        """
+        Callback für gebundenes on_setting_changed Event vom Controller.
+        (Externe Callbacks erhalten instance als erstes Argument)
+        """
+        Logger.info(f"KraefteWidget: Setting geändert zu '{setting_name}'")
+        self._switch_mode_based_on_setting(setting_name)
+
+    def _switch_mode_based_on_setting(self, setting_name):
+        """Schaltet zwischen Mächte- und Superkräfte-Modus basierend auf Setting."""
+        new_mode = "superkraefte" if setting_name in SUPERKRAEFTE_SETTINGS else "maechte"
+
+        if self.current_mode != new_mode:
+            Logger.info(f"KraefteWidget: Wechsle von '{self.current_mode}' zu '{new_mode}'-Modus")
+            self.current_mode = new_mode
+            self._rebuild_view_for_mode()
+
+    def _rebuild_view_for_mode(self):
+        """Baut die View für den aktuellen Modus um."""
+        try:
+            if self.current_mode == "superkraefte":
+                self._switch_to_superkraefte()
+            else:
+                self._switch_to_maechte()
+        except Exception as e:
+            Logger.error(f"Fehler beim Modus-Wechsel: {e}")
+
+    def _switch_to_superkraefte(self):
+        """Wechselt in den Superkräfte-Modus: KV-Kinder verstecken, Superkräfte-View anzeigen."""
+        # KV-Kinder speichern und entfernen
+        if not self._maechte_children:
+            self._maechte_children = list(self.children)
+
+        for child in self._maechte_children:
+            if child in self.children:
+                self.remove_widget(child)
+
+        # Superkräfte-View erstellen und hinzufügen
+        if self._superkraefte_view is None:
+            self._superkraefte_view = SuperkraefteSubview(controller=self.controller)
+        self.add_widget(self._superkraefte_view)
+        Logger.info("KraefteWidget: Superkräfte-View aktiviert")
+
+    def _switch_to_maechte(self):
+        """Wechselt in den Mächte-Modus: Superkräfte-View entfernen, KV-Kinder wiederherstellen."""
+        # Superkräfte-View entfernen
+        if self._superkraefte_view and self._superkraefte_view in self.children:
+            self.remove_widget(self._superkraefte_view)
+            self._superkraefte_view = None
+
+        # KV-Kinder wiederherstellen (in umgekehrter Reihenfolge, da Kivy children reversed speichert)
+        if self._maechte_children:
+            for child in reversed(self._maechte_children):
+                if child not in self.children:
+                    self.add_widget(child)
+            self._maechte_children = []
+
+        Logger.info("KraefteWidget: Mächte-View aktiviert")
+
+    # ==================== MÄCHTE-FUNKTIONALITÄT ====================
 
     def toggle_only_selected_items(self):
         """
@@ -343,24 +429,14 @@ class MaechteWidget(MDBoxLayout):
         self.filter_maechte()
         Logger.debug(f"Filter 'Nur ausgewählte Mächte' gesetzt auf: {self.only_selected_items}")
 
-    def _initialize_controller(self):
-        """Initialisiert die Verbindung zum Controller."""
-        app = MDApp.get_running_app()
-        self.controller = app.controller if hasattr(app, 'controller') else None
-        
-        if not self.controller:
-            Logger.error("MaechteWidget: Controller nicht gefunden")
-
     def update_sort_option(self, option):
         """
         Aktualisiert die Sortieroptionen und -reihenfolge.
         Event-Handler für die Sortier-Buttons.
         """
         if self.current_sort_option == option:
-            # Wenn die gleiche Option nochmal geklickt wird, Reihenfolge umkehren
             self.sort_order = 'desc' if self.sort_order == 'asc' else 'asc'
         else:
-            # Bei neuer Option immer aufsteigend beginnen
             self.current_sort_option = option
             self.sort_order = 'asc'
 
@@ -372,47 +448,42 @@ class MaechteWidget(MDBoxLayout):
         Filtert und sortiert die Mächte.
         Event-Handler für Änderungen am Suchtext oder Filter.
         """
+        if self.current_mode != "maechte":
+            return
+
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("MaechteWidget: Controller oder Charakter nicht verfügbar")
             return
-            
+
+        if not hasattr(self.ids, 'search_input') or not hasattr(self.ids, 'recycleview'):
+            Logger.debug("MaechteWidget: IDs noch nicht verfügbar (Post-Init?)")
+            return
+
         search_term = self.ids.search_input.text.lower()
 
-        # Mächte vom Modell abrufen
         alle_maechte = self.controller.charakter.maechte
-        
-        # Gefilterte Liste erstellen
+
         filtered_data = self._filter_maechte_data(alle_maechte, search_term)
-        
-        # Sortieren
         filtered_data = self._sort_maechte_data(filtered_data)
-        
-        # Index nach Sortierung aktualisieren
+
         for i, item in enumerate(filtered_data):
             item['index'] = i
 
-        # An RecycleView übergeben
         self.ids.recycleview.data = filtered_data
         Logger.debug(f"Mächte gefiltert und sortiert: {len(filtered_data)} Einträge")
 
     def _filter_maechte_data(self, alle_maechte, search_term):
-        """
-        Filtert die Macht-Daten nach Suchbegriff und Auswahlstatus.
-        """
+        """Filtert die Macht-Daten nach Suchbegriff und Auswahlstatus."""
         filtered_data = []
-        
-        Logger.debug(f"MaechteWidget: Filtere Mächte - Suchterm: {search_term}, Nur ausgewählte: {self.only_selected_items}")
-        
+
         for macht in alle_maechte.values():
-            # Filter für "Nur ausgewählte Elemente"
             if self.only_selected_items and not macht.ausgewaehlt:
                 continue
-                
-            # Suchtext-Filter
-            if search_term and not (search_term in macht.name.lower() or 
+
+            if search_term and not (search_term in macht.name.lower() or
                                    search_term in macht.beschreibung.lower()):
                 continue
-                
+
             macht_data = {
                 'viewclass': 'MachtItemRow',
                 'macht_name': macht.name,
@@ -426,22 +497,19 @@ class MaechteWidget(MDBoxLayout):
                 'maechte_widget': self
             }
             filtered_data.append(macht_data)
-                
+
         return filtered_data
 
     def _sort_maechte_data(self, data):
-        """
-        Sortiert die Macht-Daten nach den aktuellen Sortierkriterien.
-        Extrahiert die Sortierlogik aus filter_maechte.
-        """
+        """Sortiert die Macht-Daten nach den aktuellen Sortierkriterien."""
         reverse_order = (self.sort_order == 'desc')
-        
+
         if self.current_sort_option == 'Name':
             data.sort(key=lambda x: x['macht_name'].lower(), reverse=reverse_order)
         elif self.current_sort_option == 'Rang':
-            data.sort(key=lambda x: self.RANG_MAPPING.get(x['rang'], float('inf')), 
+            data.sort(key=lambda x: self.RANG_MAPPING.get(x['rang'], float('inf')),
                      reverse=reverse_order)
-            
+
         return data
 
     def post_init(self, dt):
@@ -449,62 +517,55 @@ class MaechteWidget(MDBoxLayout):
         Initialisierung nach dem Laden des Widgets.
         Wird einmalig durch Clock.schedule_once aufgerufen.
         """
-        self.filter_maechte()
-        Logger.debug("MaechteWidget: Post-Init abgeschlossen")
+        if self.current_mode == "maechte":
+            self.filter_maechte()
+        Logger.debug("KraefteWidget: Post-Init abgeschlossen")
 
     def refresh_widget(self):
         """
         Leert das Widget und lädt die Daten neu.
-        Wird aufgerufen, wenn sich die Mächte ändern.
+        Wird aufgerufen, wenn sich die Mächte/Superkräfte ändern.
         """
-        # RecycleView leeren
-        self.ids.recycleview.data = []
-        
-        # Neu filtern und anzeigen
-        self.filter_maechte()
-        Logger.debug("MaechteWidget: Widget aktualisiert")
-        
-    # NEU HINZUGEFÜGTE METHODEN FÜR DIE RANGPRÜFUNG
+        if self.current_mode == "maechte":
+            if hasattr(self.ids, 'recycleview'):
+                self.ids.recycleview.data = []
+            self.filter_maechte()
+        elif self.current_mode == "superkraefte" and self._superkraefte_view:
+            if hasattr(self._superkraefte_view, 'refresh_widget'):
+                self._superkraefte_view.refresh_widget()
+        Logger.debug("KraefteWidget: Widget aktualisiert")
+
+    # ==================== RANGPRÜFUNG ====================
 
     def _on_macht_selected(self, macht_name):
         """
         Wird aufgerufen, wenn eine Macht ausgewählt wird.
         Prüft den Rang und zeigt ggf. einen Warnhinweis an.
-        
-        Args:
-            macht_name (str): Name der auszuwählenden Macht
         """
         result = self.controller.waehle_macht(macht_name)
         if result == "needs_rang_confirmation":
             self._show_rang_warning_dialog(macht_name)
         elif result:
-            # Macht erfolgreich ausgewählt
             Logger.debug(f"Macht '{macht_name}' erfolgreich ausgewählt")
             self.refresh_widget()
         else:
-            # Fehler beim Auswählen der Macht
             Logger.warning(f"Fehler beim Auswählen der Macht '{macht_name}'")
-            self.refresh_widget()  # UI trotzdem aktualisieren
+            self.refresh_widget()
 
     def _show_rang_warning_dialog(self, macht_name):
-        """
-        Zeigt einen Dialog zur Warnung vor der Auswahl einer Macht mit höherem Rang an.
-        
-        Args:
-            macht_name (str): Name der Macht mit Rangprüfungswarnung
-        """
+        """Zeigt einen Dialog zur Warnung vor der Auswahl einer Macht mit höherem Rang an."""
         macht = self.controller.charakter.maechte.get(macht_name)
         if not macht:
             Logger.error(f"Macht '{macht_name}' für Dialog nicht gefunden.")
             return
-            
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(10),
             padding=dp(20),
             adaptive_height=True
         )
-        
+
         warning_label = MDLabel(
             text=f"Die Macht '{macht_name}' (Rang: {macht.rang}) erfordert einen höheren Rang als deinen aktuellen ({self.controller.charakter.rang}). Möchtest du sie trotzdem auswählen?",
             size_hint_y=None,
@@ -514,7 +575,7 @@ class MaechteWidget(MDBoxLayout):
             valign="middle"
         )
         content.add_widget(warning_label)
-        
+
         self.dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Rang-Warnung",
@@ -546,22 +607,189 @@ class MaechteWidget(MDBoxLayout):
             self.dialog.dismiss()
             self.dialog = None
             self.refresh_widget()
-            
+
     def _confirm_macht_selection(self, macht_name):
-        """
-        Führt die Machtauswahl mit ignorierter Rangprüfung durch.
-        
-        Args:
-            macht_name (str): Name der Macht, die trotz Rangunterschied ausgewählt werden soll
-        """
+        """Führt die Machtauswahl mit ignorierter Rangprüfung durch."""
         self.close_dialog()
-        # Den Controller mit dem ignore_rang_check Flag aufrufen
         result = self.controller.waehle_macht(macht_name, ignore_rang_check=True)
         if result:
-            # Macht erfolgreich ausgewählt
             Logger.info(f"Macht '{macht_name}' trotz Rangunterschied ausgewählt")
             self.refresh_widget()
         else:
-            # Fehler beim Auswählen der Macht
             Logger.warning(f"Fehler beim Auswählen der Macht '{macht_name}' trotz ignorierter Rangprüfung.")
             self.refresh_widget()
+
+
+# ==================== SUPERKRÄFTE SUB-VIEW ====================
+
+class SuperkraefteSubview(MDBoxLayout):
+    """
+    Sub-View für Superkräfte.
+    Implementiert die Superkräfte-UI mit Machtstufen-Header, SKP-Anzeige und Kräfte-Liste.
+    """
+
+    def __init__(self, controller=None, **kwargs):
+        super().__init__(**kwargs)
+        self.controller = controller
+        self.orientation = "vertical"
+        self.spacing = dp(10)
+        self.padding = dp(10)
+        Clock.schedule_once(self._setup_superkraefte_view, 0.1)
+
+    def _setup_superkraefte_view(self, dt):
+        """Setzt die Superkräfte-UI auf."""
+        try:
+            self._create_machtstufe_header()
+            self._create_superkraefte_list()
+            self._create_action_buttons()
+        except Exception as e:
+            Logger.error(f"Fehler beim Setup der Superkräfte-View: {e}")
+
+    def _create_machtstufe_header(self):
+        """Erstellt den Header mit Machtstufen-Info und SKP-Anzeige."""
+        header_layout = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(5),
+            size_hint_y=None,
+            height=dp(120),
+            padding=dp(15)
+        )
+
+        # Machtstufen-Zeile
+        machtstufe_row = MDBoxLayout(
+            orientation="horizontal",
+            size_hint_y=None,
+            height=dp(30),
+            spacing=dp(10)
+        )
+
+        machtstufe_label = MDLabel(
+            text="Machtstufe:",
+            size_hint_x=None,
+            width=dp(100),
+            theme_text_color="Primary"
+        )
+
+        machtstufe_value = MDLabel(
+            text="III - Four-Color-Helden",
+            theme_text_color="Secondary"
+        )
+
+        machtstufe_row.add_widget(machtstufe_label)
+        machtstufe_row.add_widget(machtstufe_value)
+        header_layout.add_widget(machtstufe_row)
+
+        # SKP-Zeile
+        skp_row = MDBoxLayout(
+            orientation="horizontal",
+            size_hint_y=None,
+            height=dp(30),
+            spacing=dp(10)
+        )
+
+        skp_label = MDLabel(
+            text="SKP:",
+            size_hint_x=None,
+            width=dp(100),
+            theme_text_color="Primary"
+        )
+
+        skp_info = MDLabel(
+            text="0/45  Obergrenze: 15",
+            theme_text_color="Secondary"
+        )
+
+        skp_row.add_widget(skp_label)
+        skp_row.add_widget(skp_info)
+        header_layout.add_widget(skp_row)
+
+        # Fortschrittsbalken
+        progress_bar = MDLinearProgressIndicator(
+            value=0,
+            size_hint_y=None,
+            height=dp(6),
+            indicator_color=[0.2, 0.8, 0.2, 1]
+        )
+        header_layout.add_widget(progress_bar)
+
+        self.add_widget(header_layout)
+
+    def _create_superkraefte_list(self):
+        """Erstellt die Superkräfte-Liste."""
+        list_layout = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            size_hint_y=1
+        )
+
+        list_header = MDLabel(
+            text="Gewählte Superkräfte:",
+            theme_text_color="Primary",
+            font_style="Title",
+            size_hint_y=None,
+            height=dp(40)
+        )
+        list_layout.add_widget(list_header)
+
+        # Platzhalter bis die Superkraft-Daten implementiert sind
+        superkraefte_placeholder = MDLabel(
+            text="Noch keine Superkräfte gewählt.\n\n"
+                  "Klicke auf 'Superkraft hinzufügen' um Kräfte auszuwählen.",
+            halign="center",
+            theme_text_color="Secondary"
+        )
+        list_layout.add_widget(superkraefte_placeholder)
+
+        self.add_widget(list_layout)
+
+    def _create_action_buttons(self):
+        """Erstellt die Action-Buttons."""
+        button_row = MDBoxLayout(
+            orientation="horizontal",
+            size_hint_y=None,
+            height=dp(50),
+            spacing=dp(10)
+        )
+
+        add_kraft_button = MDButton(
+            MDButtonText(text="+ Superkraft hinzufügen"),
+            style="elevated",
+            on_release=self._on_add_superkraft
+        )
+
+        button_row.add_widget(add_kraft_button)
+        self.add_widget(button_row)
+
+    def _on_add_superkraft(self, instance):
+        """Event-Handler für 'Superkraft hinzufügen'-Button."""
+        Logger.info("Superkraft hinzufügen geklickt")
+        self._show_placeholder_dialog()
+
+    def _show_placeholder_dialog(self):
+        """Zeigt einen Placeholder-Dialog für Superkraft-Auswahl."""
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Superkraft hinzufügen"),
+            MDDialogContentContainer(
+                MDLabel(
+                    text="Superkraft-Auswahl-Dialog\n\nHier wird die Liste aller verfügbaren Superkräfte angezeigt.",
+                    halign="center"
+                ),
+                orientation="vertical"
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss()
+                )
+            )
+        )
+        dialog.open()
+
+    def refresh_widget(self):
+        """Aktualisiert die Superkräfte-Anzeige."""
+        Logger.debug("SuperkraefteSubview: refresh_widget aufgerufen")
+
+
+# Rückwärtskompatibilität: MaechteWidget als Alias für KraefteWidget
+MaechteWidget = KraefteWidget

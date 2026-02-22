@@ -120,10 +120,14 @@ class SettingsRepository:
             if controller and controller.charakter:
                 controller.charakter.custom_element_manager.set_active_setting(setting_name)
                 controller.charakter.load_elements_from_active_setting()
-                
+
                 # Speichere das geladene Setting als letztes Setting in der Config
                 self._save_last_setting_to_config(setting_name)
-                
+
+                # Setting-Change-Event für kontextabhängige UI-Umschaltung auslösen
+                if hasattr(controller, 'dispatch') and setting_name:
+                    controller.dispatch('on_setting_changed', setting_name)
+
                 MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
             Logger.info(f"Setting '{setting_name}' geladen.")
             return setting_data
