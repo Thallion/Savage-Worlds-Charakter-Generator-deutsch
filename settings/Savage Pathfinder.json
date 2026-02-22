@@ -70,6 +70,7 @@
                     "Wahrnehmung": 2
                 },
                 "auto_talente": [],
+                "auto_handicaps": ["Klein", "Langsam_leicht"],
                 "spezielle_effekte": {
                     "gnomenmagie": true,
                     "nachtsicht": true,
@@ -141,6 +142,7 @@
                     "Athletik": 2
                 },
                 "auto_talente": ["Glück"],
+                "auto_handicaps": ["Klein", "Langsam_leicht"],
                 "spezielle_effekte": {
                     "geschaerfte_sinne": true
                 },
@@ -175,6 +177,7 @@
                     "Einschüchtern": 2
                 },
                 "auto_talente": [],
+                "auto_handicaps": ["Außenseiter_leicht"],
                 "spezielle_effekte": {
                     "dunkelsicht": true
                 },
@@ -233,6 +236,7 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Langsam_leicht"],
                 "spezielle_effekte": {
                     "dunkelsicht": true,
                     "eiserne_konstitution": true,

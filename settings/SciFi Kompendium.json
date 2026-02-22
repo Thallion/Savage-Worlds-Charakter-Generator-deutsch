@@ -27,6 +27,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Kybernetische Abstoßung"],
                 "spezielle_effekte": {
                     "amorph": true,
                     "regeneration_taeglich": true,
@@ -59,6 +60,7 @@
                 "bewegungsweite_bonus": 2,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Wuchtig"],
                 "spezielle_effekte": {
                     "stabiler_stand": true,
                     "wuchtig": true,
@@ -92,6 +94,7 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Langsam"],
                 "spezielle_effekte": {
                     "hartes_haupt": true,
                     "langsam": true,
@@ -127,6 +130,7 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Wuchtig"],
                 "spezielle_effekte": {
                     "robust": true,
                     "dumm": true,
@@ -194,6 +198,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Atmosphärische Abhängigkeit (schwer)"],
                 "spezielle_effekte": {},
                 "wahlmoeglichkeiten": {}
             }
@@ -225,6 +230,7 @@
                 "auto_talente": [
                     "Kampfreflexe"
                 ],
+                "auto_handicaps": ["Skrupellos (schwer)"],
                 "spezielle_effekte": {
                     "schmerzresistenz": true,
                     "ausgebildet_fuer_krieg": true
@@ -260,6 +266,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Außenseiter (leicht)", "Trennungsangst"],
                 "spezielle_effekte": {
                     "gemeinschaft": true,
                     "kann_nicht_sprechen": true,
@@ -299,6 +306,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Außenseiter (leicht)", "Neugierig", "Trennungsangst"],
                 "spezielle_effekte": {
                     "energiegestalt": true,
                     "blutlos": true,
@@ -363,6 +371,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Außenseiter (leicht)"],
                 "spezielle_effekte": {
                     "gemeinschaft": true,
                     "huelle": true
@@ -396,6 +405,7 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["High Tech (schwer)", "Volksfeind (Insektoide)"],
                 "spezielle_effekte": {
                     "winzling_sehr_klein": true,
                     "max_staerke_w6": true
@@ -427,6 +437,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Pazifist (schwer)", "Programmiert (schwer)"],
                 "spezielle_effekte": {
                     "roboter": true,
                     "keine_natuerliche_heilung": true
@@ -457,6 +468,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Programmiert (schwer)"],
                 "spezielle_effekte": {
                     "immun_krankheiten_gifte": true,
                     "keine_natuerliche_heilung": true,
@@ -489,6 +501,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Volksfeind (SL-Wahl)", "Dünnhäutig"],
                 "spezielle_effekte": {
                     "zusaetzliche_aktion": true,
                     "zusaetzliche_gliedmassen": true,
@@ -520,6 +533,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Außenseiter (leicht)", "Kybernetische Abstoßung"],
                 "spezielle_effekte": {
                     "gestaltwandeln": true,
                     "keine_lebenswichtigen_organe": true,

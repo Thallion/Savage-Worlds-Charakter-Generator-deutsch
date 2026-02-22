@@ -265,10 +265,26 @@ class TalentManager:
         """
         def talent_abwaehlen_intern():
             talent.abwaehlen(self.charakter)
-            self.charakter.verfuegbare_maechte -= talent.neue_maechte
-            self.charakter.anzahl_maechte -= talent.neue_maechte
+
+            # Prüfe Zauberbücher-Bonus für "Neue Mächte" bei Abwahl (auch für Instanzen)
+            neue_maechte_anzahl = talent.neue_maechte
+            if talent_name_key.startswith("Neue Mächte") and self._hat_zauberbucher_talent():
+                # Zauberbücher-Bonus rückgängig machen: -1 zusätzliche Macht
+                neue_maechte_anzahl += 1
+                Logger.info("Zauberbücher-Bonus rückgängig: Neue Mächte-Abwahl entfernt 3 statt 2 Mächte")
+
+            self.charakter.verfuegbare_maechte -= neue_maechte_anzahl
+            self.charakter.anzahl_maechte -= neue_maechte_anzahl
             self.charakter.verfuegbare_maechte = max(self.charakter.verfuegbare_maechte, 0)  # Nicht negativ
             self.charakter.senke_machtpunkte(talent.machtpunkte)
+
+            # Spezialeffekt für Zauberbücher-Talent selbst bei Abwahl
+            if talent_name_key == "Zauberbücher":
+                # Sofortige Macht wieder entfernen
+                self.charakter.verfuegbare_maechte -= 1
+                self.charakter.anzahl_maechte -= 1
+                self.charakter.verfuegbare_maechte = max(self.charakter.verfuegbare_maechte, 0)  # Nicht negativ
+                Logger.info("Zauberbücher-Talent abgewählt: -1 sofortige Macht entfernt")
             
             # Spezielle Anpassungen für Reich/Stinkreich
             vermoegen_talente = TalentConfig.get('spezial_talente.vermoegen_talente', ["Reich", "Stinkreich"])
@@ -344,9 +360,24 @@ class TalentManager:
                 if skip_prereq_check or talent.voraussetzungen_erfuellt(self.charakter):
                     # Talent auswählen und Anpassungen vornehmen
                     talent.ausgewaehlt = True
-                    self.charakter.verfuegbare_maechte += talent.neue_maechte
-                    self.charakter.anzahl_maechte += talent.neue_maechte
+
+                    # Prüfe Zauberbücher-Bonus für "Neue Mächte" (auch für Instanzen wie "Neue Mächte_2")
+                    neue_maechte_anzahl = talent.neue_maechte
+                    if talent_name_key.startswith("Neue Mächte") and self._hat_zauberbucher_talent():
+                        # Zauberbücher-Bonus: +1 zusätzliche Macht (3 statt 2)
+                        neue_maechte_anzahl += 1
+                        Logger.info("Zauberbücher-Bonus: Neue Mächte gibt 3 statt 2 Mächte")
+
+                    self.charakter.verfuegbare_maechte += neue_maechte_anzahl
+                    self.charakter.anzahl_maechte += neue_maechte_anzahl
                     self.charakter.erhoehe_machtpunkte(talent.machtpunkte)
+
+                    # Spezialeffekt für Zauberbücher-Talent selbst
+                    if talent_name_key == "Zauberbücher":
+                        # Sofort eine Macht des eigenen Ranges hinzufügen
+                        self.charakter.verfuegbare_maechte += 1
+                        self.charakter.anzahl_maechte += 1
+                        Logger.info("Zauberbücher-Talent gewählt: +1 sofortige Macht des eigenen Ranges")
                     if talent_name_key not in self.charakter.selected_talente:
                         self.charakter.selected_talente.append(talent_name_key)
                     
@@ -931,6 +962,18 @@ class TalentManager:
         if hasattr(self.charakter, 'ignore_voraussetzungen'):
             self.charakter.ignore_voraussetzungen = False
             Logger.debug(f"Flag ignore_voraussetzungen zurückgesetzt nach Auswahl von '{talent_name_key}'")
+
+    def _hat_zauberbucher_talent(self):
+        """
+        Prüft, ob der Charakter das Talent "Zauberbücher" bereits gewählt hat.
+
+        Returns:
+            bool: True wenn das Zauberbücher-Talent gewählt ist, sonst False
+        """
+        zauberbucher_talent = self.charakter.talente.get("Zauberbücher")
+        if zauberbucher_talent and zauberbucher_talent.ausgewaehlt:
+            return True
+        return False
 
 
 # Globale Manager-Instanz für Kompatibilität mit altem Code

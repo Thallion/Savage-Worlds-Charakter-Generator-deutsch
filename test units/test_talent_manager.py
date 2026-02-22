@@ -133,6 +133,27 @@ class MockCharakter:
             neue_maechte=0,
             machtpunkte=0
         )
+
+        # Zauberbücher-Talente für Tests
+        self.talente["Zauberbücher"] = Talent(
+            name="Zauberbücher",
+            kategorie="Magier",
+            rang="A",
+            voraussetzungen=["Arkaner Hintergrund (Magie)"],
+            beschreibung="Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
+            neue_maechte=0,
+            machtpunkte=0
+        )
+
+        self.talente["Neue Mächte"] = Talent(
+            name="Neue Mächte",
+            kategorie="Macht",
+            rang="A",
+            voraussetzungen=["AH"],
+            beschreibung="Dein Charakter kennt zwei neue Mächte.",
+            neue_maechte=2,
+            machtpunkte=0
+        )
     
     def berechne_abgeleitete_werte(self):
         """Mock für berechne_abgeleitete_werte"""
@@ -487,20 +508,208 @@ class TestTalentManagerCompatibility(unittest.TestCase):
 
 class TestTalentConfigIntegration(unittest.TestCase):
     """Tests für Config-Integration"""
-    
+
     def test_config_get_method(self):
         """Test TalentConfig.get Methode"""
         handicap_punkte = TalentConfig.get('kosten.handicap_punkte', 0)
         self.assertEqual(handicap_punkte, 2)
-        
+
         nicht_duplizierbar = TalentConfig.get('nicht_duplizierbare_talente', [])
         self.assertIn('Reich', nicht_duplizierbar)
         self.assertIn('Glück', nicht_duplizierbar)
-    
+
     def test_config_default_fallback(self):
         """Test Config-Fallback auf Standardwerte"""
         inexistent = TalentConfig.get('inexistent.key', 'default')
         self.assertEqual(inexistent, 'default')
+
+
+class TestZauberbuecherMechanik(unittest.TestCase):
+    """Tests für die Zauberbücher-Fantasy-Kompendium-Mechanik"""
+
+    def setUp(self):
+        """Setup für jeden Test"""
+        self.charakter = MockCharakter()
+        self.charakter.active_setting_name = "Fantasy Kompendium"  # Für Fantasy-Kompendium-Kontext
+        self.manager = TalentManager(self.charakter)
+
+    def test_zauberbucher_talent_gibt_sofortige_macht(self):
+        """Test: Zauberbücher-Talent gibt sofort +1 Macht beim Auswählen"""
+        # Vorbedingungen
+        initial_maechte = self.charakter.verfuegbare_maechte
+        initial_anzahl = self.charakter.anzahl_maechte
+
+        # Debug: Prüfe ob Talent existiert
+        self.assertIn("Zauberbücher", self.charakter.talente)
+
+        # Zauberbücher direkt auswählen mit talent_auswaehlen (überspringt Voraussetzungen)
+        result = self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+
+        # Debug output bei Fehlschlag
+        if not result:
+            print(f"Debug: waehle_talent result: {result}")
+            print(f"Debug: Talent existiert: {'Zauberbücher' in self.charakter.talente}")
+            print(f"Debug: Talent ausgewählt: {self.charakter.talente['Zauberbücher'].ausgewaehlt if 'Zauberbücher' in self.charakter.talente else 'N/A'}")
+
+        # Sollte erfolgreich sein
+        self.assertTrue(result)
+        self.assertTrue(self.charakter.talente["Zauberbücher"].ausgewaehlt)
+
+        # Sollte +1 sofortige Macht geben
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_maechte + 1)
+        self.assertEqual(self.charakter.anzahl_maechte, initial_anzahl + 1)
+
+    def test_neue_maechte_ohne_zauberbucher_gibt_zwei_maechte(self):
+        """Test: Neue Mächte ohne Zauberbücher gibt normale 2 Mächte"""
+        # Vorbedingungen
+        initial_maechte = self.charakter.verfuegbare_maechte
+        initial_anzahl = self.charakter.anzahl_maechte
+
+        # Neue Mächte direkt auswählen
+        result = self.manager.talent_auswaehlen("Neue Mächte", skip_prereq_check=True)
+
+        # Sollte erfolgreich sein
+        self.assertTrue(result)
+        self.assertTrue(self.charakter.talente["Neue Mächte"].ausgewaehlt)
+
+        # Sollte normale 2 Mächte geben
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_maechte + 2)
+        self.assertEqual(self.charakter.anzahl_maechte, initial_anzahl + 2)
+
+    def test_neue_maechte_mit_zauberbucher_gibt_drei_maechte(self):
+        """Test: Neue Mächte mit bereits gewähltem Zauberbücher gibt 3 Mächte"""
+        # Zauberbücher zuerst auswählen
+        self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+
+        # Vorbedingungen nach Zauberbücher-Auswahl
+        initial_maechte = self.charakter.verfuegbare_maechte  # Sollte bereits +1 haben
+        initial_anzahl = self.charakter.anzahl_maechte
+
+        # Neue Mächte auswählen
+        result = self.manager.talent_auswaehlen("Neue Mächte", skip_prereq_check=True)
+
+        # Sollte erfolgreich sein
+        self.assertTrue(result)
+        self.assertTrue(self.charakter.talente["Neue Mächte"].ausgewaehlt)
+
+        # Sollte 3 statt 2 Mächte geben (Zauberbücher-Bonus)
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_maechte + 3)
+        self.assertEqual(self.charakter.anzahl_maechte, initial_anzahl + 3)
+
+    def test_zauberbucher_abwahl_entfernt_sofortige_macht(self):
+        """Test: Zauberbücher-Abwahl entfernt die sofortige Macht"""
+        # Zauberbücher auswählen
+        self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+
+        # Vorbedingungen nach Auswahl
+        initial_maechte = self.charakter.verfuegbare_maechte
+        initial_anzahl = self.charakter.anzahl_maechte
+
+        # Zauberbücher abwählen
+        result = self.manager.talent_abwaehlen("Zauberbücher")
+
+        # Sollte erfolgreich sein
+        self.assertTrue(result)
+        self.assertFalse(self.charakter.talente["Zauberbücher"].ausgewaehlt)
+
+        # Sollte sofortige Macht entfernen (-1 Macht)
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_maechte - 1)
+        self.assertEqual(self.charakter.anzahl_maechte, initial_anzahl - 1)
+
+    def test_neue_maechte_abwahl_mit_zauberbucher_entfernt_drei_maechte(self):
+        """Test: Neue Mächte-Abwahl mit Zauberbücher entfernt 3 Mächte"""
+        # Beide Talente auswählen
+        self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+        self.manager.talent_auswaehlen("Neue Mächte", skip_prereq_check=True)
+
+        # Vorbedingungen nach Auswahl beider Talente
+        initial_maechte = self.charakter.verfuegbare_maechte  # Sollte +1 (Zauberbücher) + 3 (Neue Mächte mit Bonus) haben
+        initial_anzahl = self.charakter.anzahl_maechte
+
+        # Neue Mächte abwählen
+        result = self.manager.talent_abwaehlen("Neue Mächte")
+
+        # Sollte erfolgreich sein
+        self.assertTrue(result)
+        self.assertFalse(self.charakter.talente["Neue Mächte"].ausgewaehlt)
+
+        # Sollte 3 Mächte entfernen (wegen Zauberbücher-Bonus)
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_maechte - 3)
+        self.assertEqual(self.charakter.anzahl_maechte, initial_anzahl - 3)
+
+    def test_reihenfolge_neue_maechte_vor_zauberbucher(self):
+        """Test: Neue Mächte vor Zauberbücher - kein Bonus beim ersten Mal"""
+        # Neue Mächte zuerst auswählen (ohne Zauberbücher)
+        self.manager.talent_auswaehlen("Neue Mächte", skip_prereq_check=True)
+        initial_maechte_nach_neue = self.charakter.verfuegbare_maechte  # Sollte +2 haben
+
+        # Zauberbücher danach auswählen
+        self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+
+        # Sollte nur +1 sofortige Macht von Zauberbücher hinzufügen (kein rückwirkender Bonus)
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_maechte_nach_neue + 1)
+
+        # Neue Mächte ein zweites Mal auswählen (sollte jetzt mit Bonus sein)
+        if "Neue Mächte_2" not in self.charakter.talente:
+            # Erstelle neue Instanz für Mehrfachauswahl
+            neue_instanz = Talent(
+                name="Neue Mächte",
+                kategorie="Macht",
+                rang="A",
+                voraussetzungen=["AH"],
+                beschreibung="Dein Charakter kennt zwei neue Mächte.",
+                neue_maechte=2,
+                machtpunkte=0
+            )
+            self.charakter.talente["Neue Mächte_2"] = neue_instanz
+
+        initial_vor_zweite_auswahl = self.charakter.verfuegbare_maechte
+        result_2 = self.manager.talent_auswaehlen("Neue Mächte_2", skip_prereq_check=True)
+
+        # Debug bei fehlenden Zauberbücher-Bonus
+        if not result_2:
+            print(f"Debug: Neue Mächte_2 Auswahl fehlgeschlagen")
+
+        # Sollte jetzt 3 Mächte hinzufügen (mit Zauberbücher-Bonus)
+        # Da Zauberbücher schon aktiv ist, bekommt auch die zweite Instanz den Bonus
+        self.assertEqual(self.charakter.verfuegbare_maechte, initial_vor_zweite_auswahl + 3)
+
+    def test_hat_zauberbucher_talent_hilfsfunktion(self):
+        """Test: _hat_zauberbucher_talent() Hilfsfunktion"""
+        # Initial sollte false sein
+        self.assertFalse(self.manager._hat_zauberbucher_talent())
+
+        # Nach Auswahl sollte true sein
+        self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+        self.assertTrue(self.manager._hat_zauberbucher_talent())
+
+        # Nach Abwahl sollte wieder false sein
+        self.manager.talent_abwaehlen("Zauberbücher")
+        self.assertFalse(self.manager._hat_zauberbucher_talent())
+
+    def test_gesamtbilanz_zauberbucher_und_neue_maechte(self):
+        """Test: Gesamtbilanz bei Auswahl beider Talente"""
+        # Ausgangssituation
+        self.assertEqual(self.charakter.verfuegbare_maechte, 0)
+        self.assertEqual(self.charakter.anzahl_maechte, 0)
+
+        # Zauberbücher auswählen
+        self.manager.talent_auswaehlen("Zauberbücher", skip_prereq_check=True)
+        self.assertEqual(self.charakter.verfuegbare_maechte, 1)  # +1 sofortige Macht
+
+        # Neue Mächte auswählen
+        self.manager.talent_auswaehlen("Neue Mächte", skip_prereq_check=True)
+        self.assertEqual(self.charakter.verfuegbare_maechte, 4)  # +1 (Zauberbücher) + 3 (Neue Mächte mit Bonus)
+        self.assertEqual(self.charakter.anzahl_maechte, 4)
+
+        # Neue Mächte abwählen
+        self.manager.talent_abwaehlen("Neue Mächte")
+        self.assertEqual(self.charakter.verfuegbare_maechte, 1)  # Nur noch Zauberbücher-Macht
+
+        # Zauberbücher abwählen
+        self.manager.talent_abwaehlen("Zauberbücher")
+        self.assertEqual(self.charakter.verfuegbare_maechte, 0)  # Zurück auf Ausgangssituation
+        self.assertEqual(self.charakter.anzahl_maechte, 0)
 
 
 def run_talent_manager_tests():
@@ -517,6 +726,7 @@ def run_talent_manager_tests():
     suite.addTest(unittest.makeSuite(TestOderVoraussetzungen))
     suite.addTest(unittest.makeSuite(TestTalentManagerCompatibility))
     suite.addTest(unittest.makeSuite(TestTalentConfigIntegration))
+    suite.addTest(unittest.makeSuite(TestZauberbuecherMechanik))
     
     # Führe Tests aus
     runner = unittest.TextTestRunner(verbosity=2)

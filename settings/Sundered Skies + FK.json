@@ -24,6 +24,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Klein"],
                 "spezielle_effekte": {
                     "arkanes_gespuer": true,
                     "drachenblut_machtpunkte": 5
@@ -146,7 +147,8 @@
                 "fertigkeits_startboni": {
                     "Einschüchtern": 2
                 },
-                "auto_talente": [],
+                "auto_talente": ["Berserker"],
+                "auto_handicaps": ["Außenseiter", "Dumm"],
                 "spezielle_effekte": {
                     "ausruestungs_einschraenkung": true,
                     "verstand_steigerung_erschwert": true,
@@ -181,6 +183,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": ["Flüchtling", "Klein"],
                 "spezielle_effekte": {
                     "gluehwahn_immunitaet": true,
                     "kein_schatten": true,
@@ -216,7 +219,8 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Nachtsicht"],
+                "auto_handicaps": ["Langsam"],
                 "spezielle_effekte": {
                     "nachtsicht": true,
                     "loyalty": true,
@@ -3713,6 +3717,17 @@
                 "KON W12"
             ],
             "beschreibung": "Der Held kann fünf Wunden einstecken, ehe er Ausgeschaltet ist.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Nachtsicht": {
+            "name": "Nachtsicht",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Ignoriert Abzüge für Düstere und Dunkle Beleuchtung.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,

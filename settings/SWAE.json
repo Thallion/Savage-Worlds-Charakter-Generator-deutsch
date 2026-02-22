@@ -68,7 +68,7 @@
             "robustheit_bonus": 1,
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
-            "auto_talente": [],
+            "auto_talente": ["Nachtsicht"],
             "spezielle_effekte": {
             "nachtsicht": true,
             "wasserwesen": true,
@@ -102,7 +102,8 @@
             "fertigkeits_startboni": {
             "Wahrnehmung": 2
             },
-            "auto_talente": [],
+            "auto_talente": ["Flug", "Geschärfte Sinne"],
+            "auto_handicaps": ["Zerbrechlich"],
             "spezielle_effekte": {
             "fliegen": true,
             "nichtschwimmer": true,
@@ -132,7 +133,7 @@
             "robustheit_bonus": 0,
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
-            "auto_talente": [],
+            "auto_talente": ["Nachtsicht"],
             "spezielle_effekte": {
             "nachtsicht": true,
             "aussenseiter_leicht": true
@@ -165,7 +166,8 @@
             "robustheit_bonus": 0,
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
-            "auto_talente": [],
+            "auto_talente": ["Nachtsicht"],
+            "auto_handicaps": ["Zwei linke Hände"],
             "spezielle_effekte": {
             "nachtsicht": true,
             "zwei_linke_haende": true
@@ -256,7 +258,7 @@
             "robustheit_bonus": 0,
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
-            "auto_talente": [],
+            "auto_talente": ["Nachtsicht"],
             "spezielle_effekte": {
             "biss": true,
             "klauen": true,
@@ -293,7 +295,7 @@
             "robustheit_bonus": 0,
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
-            "auto_talente": ["Aufmerksamkeit"],
+            "auto_talente": ["Aufmerksamkeit", "Geschärfte Sinne"],
             "spezielle_effekte": {
             "biss": true,
             "panzerung_2": true,
@@ -326,7 +328,7 @@
             "robustheit_bonus": 0,
             "bewegungsweite_bonus": -1,
             "fertigkeits_startboni": {},
-            "auto_talente": [],
+            "auto_talente": ["Nachtsicht"],
             "spezielle_effekte": {
             "nachtsicht": true
             },
@@ -639,6 +641,17 @@
                 "GES W6"
             ],
             "beschreibung": "Bewegungsweite +2, erhöhe Sprintwürfel um einen Schritt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Flug": {
+            "name": "Flug",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Bewegungsweite 12'' pro Runde in der Luft. Athletik für Flugmanöver.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -1405,6 +1418,17 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
+        "Geschärfte Sinne": {
+            "name": "Geschärfte Sinne",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "+2 auf Wahrnehmungsproben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
         "Haltet die Stellung!": {
             "name": "Haltet die Stellung!",
             "kategorie": "Anführer",
@@ -1784,6 +1808,17 @@
                 "Überleben W8"
             ],
             "beschreibung": "+2 Überleben und Heimlichkeit in der Wildnis.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Nachtsicht": {
+            "name": "Nachtsicht",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Ignoriert Abzüge für Düstere und Dunkle Beleuchtung.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2555,6 +2590,15 @@
             "aktiv": true,
             "custom": false
         },
+        "Nichtschwimmer": {
+            "name": "Nichtschwimmer",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "-2 auf Athletik-Würfe zum Schwimmen. Bewegungsweite im Wasser halbiert.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Pazifist_leicht": {
             "name": "Pazifist",
             "stufe": "leicht",
@@ -2794,6 +2838,24 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Der Charakter zweifelt an seinen Fähigkeiten und zögert in kritischen Situationen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Zwei linke Hände": {
+            "name": "Zwei linke Hände",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter ist ungeschickt mit den Händen und erleidet -2 bei Fertigkeitswürfen, die Fingerfertigkeit erfordern.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Zerbrechlich": {
+            "name": "Zerbrechlich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter ist körperlich schwach oder zerbrechlich gebaut und erleidet +1 Schaden durch alle Angriffe.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false

@@ -88,106 +88,81 @@
     }
   },
   "fertigkeiten_daten": {
-    "Allgemeinwissen": {
-      "attribut": "Verstand",
-      "startwert": "W4"
-    },
-    "Athletik": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "W4"
-    },
-    "Darbietung": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    },
-    "Diebeskunst": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "-"
-    },
-    "Einschüchtern": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    },
-    "Elektronik": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Fahren": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "-"
-    },
-    "Fokus": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    },
-    "Geisteswissenschaften": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Glaube": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    },
-    "Hacken": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Heilen": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Heimlichkeit": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "W4"
-    },
-    "Kämpfen": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "-"
-    },
-    "Naturwissenschaften": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Okkultismus": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Pilot": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "-"
-    },
-    "Provozieren": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    },
-    "Reparieren": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Schießen": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "-"
-    },
-    "Seefahrt": {
-      "attribut": "Geschicklichkeit",
-      "startwert": "-"
-    },
-    "Überreden": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    },
-    "Überleben": {
-      "attribut": "Verstand",
-      "startwert": "-"
-    },
-    "Wahrnehmung": {
-      "attribut": "Verstand",
-      "startwert": "W4"
-    },
-    "Zaubern": {
-      "attribut": "Willenskraft",
-      "startwert": "-"
-    }
+    "Allgemeinwissen": [
+      "Verstand"
+    ],
+    "Athletik": [
+      "Geschicklichkeit"
+    ],
+    "Darbietung": [
+      "Willenskraft"
+    ],
+    "Diebeskunst": [
+      "Geschicklichkeit"
+    ],
+    "Einschüchtern": [
+      "Willenskraft"
+    ],
+    "Elektronik": [
+      "Verstand"
+    ],
+    "Fahren": [
+      "Geschicklichkeit"
+    ],
+    "Fokus": [
+      "Willenskraft"
+    ],
+    "Geisteswissenschaften": [
+      "Verstand"
+    ],
+    "Glaube": [
+      "Willenskraft"
+    ],
+    "Hacken": [
+      "Verstand"
+    ],
+    "Heilen": [
+      "Verstand"
+    ],
+    "Heimlichkeit": [
+      "Geschicklichkeit"
+    ],
+    "Kämpfen": [
+      "Geschicklichkeit"
+    ],
+    "Naturwissenschaften": [
+      "Verstand"
+    ],
+    "Okkultismus": [
+      "Verstand"
+    ],
+    "Pilot": [
+      "Geschicklichkeit"
+    ],
+    "Provozieren": [
+      "Willenskraft"
+    ],
+    "Reparieren": [
+      "Verstand"
+    ],
+    "Schießen": [
+      "Geschicklichkeit"
+    ],
+    "Seefahrt": [
+      "Geschicklichkeit"
+    ],
+    "Überreden": [
+      "Willenskraft"
+    ],
+    "Überleben": [
+      "Verstand"
+    ],
+    "Wahrnehmung": [
+      "Verstand"
+    ],
+    "Zaubern": [
+      "Willenskraft"
+    ]
   },
   "handicaps": {
     "Abhängigkeit": {
@@ -378,6 +353,8 @@
       "rang": "A",
       "voraussetzungen": [],
       "beschreibung": "Kraftobergrenze entspricht halben maximalen SKP (statt einem Drittel). Beispiel Stufe II: max 15 statt 10 SKP in eine Kraft.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -387,6 +364,8 @@
       "rang": "A",
       "voraussetzungen": [],
       "beschreibung": "Gewährt Superkraftpunkte je nach Kampagnen-Machtstufe (I: 15, II: 30, III: 45, IV: 60, V: 75). Normalerweise kostenlos in Superwesen-Kampagnen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -399,6 +378,8 @@
         "Eisenkiefer"
       ],
       "beschreibung": "Freie Wurfwiederholung beim Schaden wegstecken und bei Konstitutionsproben gegen K.O.-Schläge.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -412,6 +393,8 @@
         "Selbstlos"
       ],
       "beschreibung": "Alle Verbündeten in Befehlsreichweite können Bennys austauschen als hätten sie Selbstlos.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -423,6 +406,8 @@
         "WIL W8"
       ],
       "beschreibung": "Wähle einen Partner. Bei erfolgreichem Kombinationsangriff addiere Fertigkeitsbonus UND Bonusschaden. Kann mehrfach gewählt werden für verschiedene Verbündete.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -434,6 +419,8 @@
         "Wildcard"
       ],
       "beschreibung": "SWAE-Handlanger ab Veteran. Handlanger erhält SKP gleich der Kraftobergrenze des Mentors (ohne eigene Kraftobergrenze).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     }

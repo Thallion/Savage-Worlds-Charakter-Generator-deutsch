@@ -34,6 +34,7 @@ class Volk(EventDispatcher):
             'bewegungsweite_bonus': 0,    # +1 oder -1
             'fertigkeits_startboni': {},  # {'Wahrnehmung': 2} = W4-2 -> W4+0
             'auto_talente': [],           # Automatisch erhaltene Talente
+            'auto_handicaps': [],         # Automatisch erhaltene Handicaps
             'spezielle_effekte': {},      # Für komplexere Effekte
             'wahlmoeglichkeiten': {}      # Für Dropdown-Auswahl
         }
@@ -50,6 +51,7 @@ class Volk(EventDispatcher):
                 'bewegungsweite_bonus': 0,    # +1 oder -1
                 'fertigkeits_startboni': {},  # {'Wahrnehmung': 2} = W4 -> W6
                 'auto_talente': [],           # Automatisch erhaltene Talente
+                'auto_handicaps': [],         # Automatisch erhaltene Handicaps
                 'spezielle_effekte': {},      # Für komplexere Effekte
                 'wahlmoeglichkeiten': {}      # Für Dropdown-Auswahl
             }
@@ -211,6 +213,14 @@ class Volk(EventDispatcher):
                         charakter.selected_talente.append(talent_name)
                     Logger.info(f"Volk {self.name}: Automatisches Talent '{talent_name}' erhalten")
 
+            # Automatische Handicaps hinzufügen
+            for handicap_name in self.effects.get('auto_handicaps', []):
+                if handicap_name in charakter.handicaps and not charakter.handicaps[handicap_name].ausgewaehlt:
+                    charakter.handicaps[handicap_name].ausgewaehlt = True
+                    if handicap_name not in charakter.selected_handicaps:
+                        charakter.selected_handicaps.append(handicap_name)
+                    Logger.info(f"Volk {self.name}: Automatisches Handicap '{handicap_name}' erhalten")
+
             # Robustheit und Bewegungsweite werden in abgeleitete_werte.py berechnet
             robustheit_bonus = self.effects.get('robustheit_bonus', 0)
             bewegungsweite_bonus = self.effects.get('bewegungsweite_bonus', 0)
@@ -310,6 +320,16 @@ class Volk(EventDispatcher):
                 if talent_name in charakter.talente and charakter.talente[talent_name].ausgewaehlt:
                     charakter.talente[talent_name].ausgewaehlt = False
                     Logger.info(f"Volk {self.name}: Automatisches Talent '{talent_name}' deaktiviert")
+
+            # Automatische Handicaps entfernen (nur die von diesem Volk hinzugefügten)
+            for handicap_name in self.effects.get('auto_handicaps', []):
+                if handicap_name in charakter.selected_handicaps:
+                    charakter.selected_handicaps.remove(handicap_name)
+                    Logger.info(f"Volk {self.name}: '{handicap_name}' aus selected_handicaps entfernt")
+
+                if handicap_name in charakter.handicaps and charakter.handicaps[handicap_name].ausgewaehlt:
+                    charakter.handicaps[handicap_name].ausgewaehlt = False
+                    Logger.info(f"Volk {self.name}: Automatisches Handicap '{handicap_name}' deaktiviert")
 
             Logger.info(f"=== Völker-Effekte für {self.name} erfolgreich entfernt ===")
             return True

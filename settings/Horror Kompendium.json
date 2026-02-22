@@ -34,7 +34,8 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Flug"],
+                "auto_handicaps": ["Schwur", "Auffällig"],
                 "spezielle_effekte": {
                     "fliegen": true,
                     "goettliche_waffe": true,
@@ -72,7 +73,8 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Infrarotsicht"],
+                "auto_handicaps": ["Böse", "Schwäche (Geweihtes Wasser)"],
                 "spezielle_effekte": {
                     "infrarotsicht": true,
                     "natuerliche_waffen": true,
@@ -111,7 +113,8 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Zäh"],
+                "auto_handicaps": ["Hässlich", "Langsam", "Schwäche (Feuer)"],
                 "spezielle_effekte": {
                     "untot": true,
                     "furchteinflössend": true,
@@ -155,7 +158,8 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Zäh", "Kräftig"],
+                "auto_handicaps": ["Hässlich", "Außenseiter", "Schwerfällig", "Schwäche (Feuer)", "Schwäche (Elektrizität)"],
                 "spezielle_effekte": {
                     "untot": true,
                     "panzerung_2": true,
@@ -195,7 +199,8 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Flug"],
+                "auto_handicaps": ["Schwäche (Salz)"],
                 "spezielle_effekte": {
                     "aetherisch": true,
                     "unsichtbar": true,
@@ -232,7 +237,8 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Zäh"],
+                "auto_handicaps": ["Schwur", "Hässlich"],
                 "spezielle_effekte": {
                     "untot": true,
                     "regeneration": true,
@@ -276,7 +282,8 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": 2,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Nachtsicht", "Zäh"],
+                "auto_handicaps": ["Schwäche (Sonnenlicht)", "Schwäche (Pfahl)", "Abhängigkeit (Blut)", "Schwäche (Geweihtes Wasser)"],
                 "spezielle_effekte": {
                     "untot": true,
                     "nachtsicht": true,
@@ -317,7 +324,8 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": ["Gestaltwandel", "Infrarotsicht"],
+                "auto_handicaps": ["Blutdurst", "Schwäche (Silber)"],
                 "spezielle_effekte": {
                     "gestaltwandel": true,
                     "infrarotsicht_tierform": true,
@@ -2680,6 +2688,61 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
+        "Flug": {
+            "name": "Flug",
+            "kategorie": "Monströs",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Der Charakter kann fliegen. Bewegungsweite entspricht der normalen Bewegungsweite, Steigrate ist halbe Bewegungsweite.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Gestaltwandel": {
+            "name": "Gestaltwandel",
+            "kategorie": "Monströs",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Der Charakter kann seine Gestalt in eine andere Form verändern. Die genauen Eigenschaften der anderen Form werden durch die Rassenbeschreibung festgelegt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Infrarotsicht": {
+            "name": "Infrarotsicht",
+            "kategorie": "Monströs",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Der Charakter kann Wärmequellen sehen und ignoriert alle Abzüge für schlechte Beleuchtung komplett.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Nachtsicht": {
+            "name": "Nachtsicht",
+            "kategorie": "Monströs",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Der Charakter ignoriert Abzüge für Düstere und Dunkle Beleuchtung.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Zäh": {
+            "name": "Zäh",
+            "kategorie": "Monströs",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Der Charakter ist widerstandsfähiger als normal. +2 Robustheit, +2 um sich von Schütteln zu erholen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
         "Wildheit": {
             "name": "Wildheit",
             "kategorie": "Monströs",
@@ -3447,6 +3510,114 @@
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "Bei zufälliger Zielauswahl durch den SL wird dieses Ziel bevorzugt gewählt. Überzählige Gegner greifen ebenfalls das Opfer an.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Abhängigkeit (Blut)": {
+            "name": "Abhängigkeit (Blut)",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter muss täglich Blut trinken, sonst erleidet er eine Stufe Erschöpfung pro Tag.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Auffällig": {
+            "name": "Auffällig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter hat eine auffällige Eigenschaft, die übernatürliche Wesen erkennen können.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Blutdurst": {
+            "name": "Blutdurst",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter muss bei bestimmten Auslösern (wie Vollmond) um die Kontrolle kämpfen oder wird blutrünstig.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Böse": {
+            "name": "Böse",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter hat eine inhärent böse Natur und neigt zu bösen Handlungen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Elektrizität)": {
+            "name": "Schwäche (Elektrizität)",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter erleidet +4 Schaden durch Elektrizität.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Feuer)": {
+            "name": "Schwäche (Feuer)",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter erleidet +4 Schaden durch Feuer.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Geweihtes Wasser)": {
+            "name": "Schwäche (Geweihtes Wasser)",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter erleidet +4 Schaden durch geweihtes Wasser und heilige Symbole.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Pfahl)": {
+            "name": "Schwäche (Pfahl)",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Ein gezielter Angriff mit einem Holzpfahl durchs Herz tötet den Charakter sofort.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Salz)": {
+            "name": "Schwäche (Salz)",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter kann Salzlinien nicht überqueren und wird von Salz abgestoßen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Silber)": {
+            "name": "Schwäche (Silber)",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter erleidet +4 Schaden durch Silberwaffen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwäche (Sonnenlicht)": {
+            "name": "Schwäche (Sonnenlicht)",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter erleidet 2W6 Schaden pro Runde bei direktem Sonnenlicht.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Schwerfällig": {
+            "name": "Schwerfällig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Die Geschicklichkeit des Charakters ist auf W8 begrenzt.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
