@@ -399,6 +399,46 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
         maechte_section.append(Spacer(1, 12))  # 12 Punkte Abstand
         elements.append(KeepTogether(maechte_section))
 
+    # **Superkräfte Abschnitt**
+    superkraefte = charakter.selected_superkraefte
+    if superkraefte:
+        superkraefte_section = []
+        machtstufe_info = f"Superkräfte (Machtstufe {charakter.machtstufe}, {charakter.superkraft_punkte_verbraucht}/{charakter.superkraft_punkte_gesamt} SKP)"
+        superkraefte_section.append(Paragraph(machtstufe_info, style_heading))
+        data = [["Name", "Basis", "SKP", "Modifikatoren", "Gesamt"]]
+        for kraft_name_key in superkraefte:
+            kraft = charakter.superkraefte.get(kraft_name_key)
+            if kraft:
+                mod_text = ""
+                if kraft.gewaehlte_modifikatoren:
+                    mod_names = [m.name for m in kraft.gewaehlte_modifikatoren]
+                    mod_text = ", ".join(mod_names)
+
+                data.append([
+                    kraft.name,
+                    str(kraft.basis_kosten),
+                    str(kraft.gewaehlte_kosten),
+                    mod_text,
+                    str(kraft.gesamt_kosten)
+                ])
+                # Beschreibung hinzufügen
+                beschreibung_paragraph = Paragraph(kraft.beschreibung, style_normal)
+                data.append([beschreibung_paragraph] + [''] * 4)
+
+        table = Table(data, colWidths=[150, 60, 55, 195, 65], hAlign='LEFT')  # Summe = 525 (wie Talente)
+        superkraefte_style_commands = tabellen_style_commands.copy()
+        for row in range(2, len(data), 2):
+            superkraefte_style_commands.extend([
+                ('SPAN', (0, row), (-1, row)),
+                ('BACKGROUND', (0, row), (-1, row), oldlace),
+            ])
+
+        superkraefte_style = TableStyle(superkraefte_style_commands)
+        table.setStyle(superkraefte_style)
+        superkraefte_section.append(table)
+        superkraefte_section.append(Spacer(1, 12))
+        elements.append(KeepTogether(superkraefte_section))
+
     # **Allgemeine Ausrüstung Abschnitt** (analog zu Waffen)
     allgemeine_ausruestung_section = []
     allgemeine_ausruestung_section.append(Paragraph("Allgemeine Ausrüstung", style_heading))

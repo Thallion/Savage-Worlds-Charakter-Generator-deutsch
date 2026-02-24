@@ -7,6 +7,10 @@
     MDTooltipPlain:
         text: root.tooltip_text
 
+<TooltipFabButton>:
+    MDTooltipPlain:
+        text: root.tooltip_text
+
 <AusruestungWidget>:
     orientation: 'vertical'
     md_bg_color: app.theme_cls.backgroundColor
@@ -41,8 +45,9 @@
             padding: [20, 10]
             spacing: 10
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_name_btn
+                tooltip_text: "Sortieren nach Name"
                 icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
                 style: "small"
                 size_hint: None, None
@@ -50,8 +55,9 @@
                 pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Name')
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_weight_btn
+                tooltip_text: "Sortieren nach Gewicht"
                 icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
                 style: "small"
                 size_hint: None, None
@@ -59,8 +65,9 @@
                 pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Gewicht')
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_costs_btn
+                tooltip_text: "Sortieren nach Kosten"
                 icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
                 style: "small"
                 size_hint: None, None
@@ -68,8 +75,9 @@
                 pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Kosten')
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_amount_btn
+                tooltip_text: "Sortieren nach Menge"
                 icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
                 style: "small"
                 size_hint: None, None
@@ -77,8 +85,9 @@
                 pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Menge')
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_category_btn
+                tooltip_text: "Sortieren nach Kategorie"
                 icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
                 style: "small"
                 size_hint: None, None

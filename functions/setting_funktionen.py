@@ -339,7 +339,10 @@ def load_elements_from_active_setting(charakter, skip_equipment: bool = False,
         
         # Mächte laden
         _lade_maechte(charakter, active_setting, merge_elements)
-        
+
+        # Superkräfte laden (falls im Setting vorhanden)
+        _lade_superkraefte(charakter, active_setting, merge_elements)
+
         # Ausrüstung laden, wenn nicht übersprungen
         if not skip_equipment:
             _lade_ausruestung(charakter, active_setting, merge_elements)
@@ -470,6 +473,46 @@ def _lade_maechte(charakter, active_setting: Dict[str, Any], merge_elements: boo
             anzahl=len(charakter.maechte),
             typ="Mächte"
         ))
+
+
+def _lade_superkraefte(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Superkräfte aus dem Setting (falls vorhanden).
+
+    Superkräfte werden aus dem 'krafte'-Schlüssel im Setting-JSON geladen.
+    Zusätzlich werden Machtstufen-Daten geladen und die SKP-Werte gesetzt.
+    """
+    krafte_data = active_setting.get('krafte', {})
+    if not krafte_data:
+        return
+
+    from models.superkraft import Superkraft
+    import functions.superkraft_funktionen as superkraft_funktionen
+
+    if not merge_elements:
+        charakter.superkraefte = {}
+
+    for name, kraft_dict in krafte_data.items():
+        try:
+            if not merge_elements or name not in charakter.superkraefte:
+                kraft = Superkraft.from_setting_dict(kraft_dict)
+                charakter.superkraefte[name] = kraft
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden der Superkraft '{name}': {e}")
+
+    Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+        anzahl=len(charakter.superkraefte),
+        typ="Superkräfte"
+    ))
+
+    # Machtstufen-Daten aus Setting laden und SKP-Budget setzen
+    machtstufen_data = active_setting.get('machtstufen', {})
+    if machtstufen_data:
+        stufe = getattr(charakter, 'machtstufe', 'III')
+        if stufe in machtstufen_data:
+            charakter.superkraft_punkte_gesamt = machtstufen_data[stufe].get('superkraftpunkte', 0)
+            charakter.kraftobergrenze = machtstufen_data[stufe].get('kraftobergrenze', 0)
+            Logger.info(f"Machtstufe {stufe}: {charakter.superkraft_punkte_gesamt} SKP, "
+                       f"Kraftobergrenze {charakter.kraftobergrenze}")
 
 
 def _lade_ausruestung(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:

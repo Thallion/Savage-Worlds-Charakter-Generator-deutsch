@@ -6,6 +6,7 @@ from kivy.logger import Logger
 import functions.talent_funktionen as talent_funktionen
 import functions.macht_funktionen as macht_funktionen
 import functions.handicap_funktionen as handicap_funktionen
+import functions.superkraft_funktionen as superkraft_funktionen
 
 class CharakterElements:
     """Mixin-Klasse für Element-Verwaltung"""
@@ -130,6 +131,38 @@ class CharakterElements:
     def load_custom_maechte(self):
         macht_funktionen.load_custom_maechte(self)
     
+    # === SUPERKRÄFTE ===
+    def initialisiere_superkraefte(self, krafte_daten):
+        superkraft_funktionen.initialisiere_superkraefte(self, krafte_daten)
+
+    def waehle_superkraft(self, kraft_name, kosten=None):
+        return superkraft_funktionen.waehle_superkraft(self, kraft_name, kosten)
+
+    def entferne_superkraft(self, kraft_name):
+        return superkraft_funktionen.entferne_superkraft(self, kraft_name)
+
+    def ausgewaehlte_superkraefte(self):
+        return superkraft_funktionen.ausgewaehlte_superkraefte(self)
+
+    def berechne_superkraft_kosten(self):
+        return superkraft_funktionen.berechne_gesamt_kosten(self)
+
+    def setze_machtstufe(self, stufe):
+        return superkraft_funktionen.setze_machtstufe(self, stufe)
+
+    def waehle_superkraft_modifikator(self, kraft_name, mod_name):
+        return superkraft_funktionen.waehle_modifikator(self, kraft_name, mod_name)
+
+    def entferne_superkraft_modifikator(self, kraft_name, mod_name):
+        return superkraft_funktionen.entferne_modifikator(self, kraft_name, mod_name)
+
+    def get_verbleibende_skp(self):
+        return superkraft_funktionen.get_verbleibende_skp(self)
+
+    def ist_superkraefte_setting(self):
+        """Prüft ob das aktuelle Setting Superkräfte verwendet."""
+        return superkraft_funktionen.ist_superkraefte_setting(self.active_setting_name)
+
     # === VÖLKER ===
     def set_selected_volk(self, volk_name):
         self.volk_manager.set_selected_volk(volk_name)

@@ -1,0 +1,116 @@
+<SuperkraftAuswahlContent>:
+    orientation: 'vertical'
+    spacing: "8dp"
+    padding: "12dp"
+    size_hint_y: None
+    height: "60dp"
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        spacing: "8dp"
+        size_hint_y: None
+        height: "40dp"
+
+        MDTextField:
+            id: search_input
+            mode: "outlined"
+            size_hint_x: 1
+            on_text: root.on_search_text(self.text)
+
+            MDTextFieldHintText:
+                text: 'Superkraft suchen...'
+
+<SuperkraftKonfigContent>:
+    orientation: 'vertical'
+    spacing: "12dp"
+    padding: "12dp"
+    size_hint_y: None
+    height: "400dp"
+
+    MDLabel:
+        id: kraft_name_label
+        text: "Superkraft"
+        font_style: "Title"
+        role: "medium"
+        size_hint_y: None
+        height: "32dp"
+
+    MDLabel:
+        id: kraft_beschreibung_label
+        text: ""
+        theme_text_color: "Secondary"
+        size_hint_y: None
+        height: self.texture_size[1] + dp(8)
+
+    MDDivider:
+        size_hint_y: None
+        height: "1dp"
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        spacing: "8dp"
+        size_hint_y: None
+        height: "48dp"
+
+        MDLabel:
+            text: "Kosten (SKP):"
+            size_hint_x: 0.5
+            theme_text_color: "Primary"
+
+        MDTextField:
+            id: kosten_input
+            mode: "outlined"
+            input_filter: 'int'
+            size_hint_x: 0.3
+
+            MDTextFieldHintText:
+                text: 'SKP'
+
+        MDLabel:
+            id: kosten_info_label
+            text: ""
+            size_hint_x: 0.2
+            theme_text_color: "Secondary"
+            font_style: "Body"
+            role: "small"
+
+    MDLabel:
+        id: modifikatoren_header
+        text: "Verfügbare Modifikatoren:"
+        font_style: "Title"
+        role: "small"
+        size_hint_y: None
+        height: "28dp"
+
+    ScrollView:
+        id: mod_scroll
+        size_hint_y: 1
+
+        MDBoxLayout:
+            id: mod_list
+            orientation: 'vertical'
+            spacing: "4dp"
+            size_hint_y: None
+            height: self.minimum_height
+
+    MDDivider:
+        size_hint_y: None
+        height: "1dp"
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        spacing: "8dp"
+        size_hint_y: None
+        height: "32dp"
+
+        MDLabel:
+            text: "Gesamtkosten:"
+            size_hint_x: 0.5
+            theme_text_color: "Primary"
+
+        MDLabel:
+            id: gesamt_kosten_label
+            text: "0 SKP"
+            size_hint_x: 0.5
+            theme_text_color: "Primary"
+            bold: True

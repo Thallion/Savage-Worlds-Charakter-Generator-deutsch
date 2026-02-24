@@ -134,6 +134,18 @@
                     key_text: "Anzahl Mächte:"
                     value_text: root.maechte_text
                     key_width_ratio: 0.65
+                    size_hint_y: None
+                    height: dp(24) if root.maechte_text else 0
+                    opacity: 1 if root.maechte_text else 0
+
+                LabelValuePair:
+                    key_text: "Superkraftpunkte:"
+                    value_text: root.superkraft_punkte_text
+                    key_width_ratio: 0.65
+                    size_hint_y: None
+                    height: dp(24) if root.superkraft_punkte_text else 0
+                    opacity: 1 if root.superkraft_punkte_text else 0
+
 
         # Dritte Spalte: Ressourcen
         MDCard:
@@ -153,9 +165,20 @@
                 adaptive_height: True
             
                 LabelValuePair:
+                    key_text: "Machtstufe:"
+                    value_text: root.machtstufe_text
+                    key_width_ratio: 0.55
+                    size_hint_y: None
+                    height: dp(24) if root.machtstufe_text else 0
+                    opacity: 1 if root.machtstufe_text else 0
+
+                LabelValuePair:
                     key_text: "Machtpunkte:"
                     value_text: root.machtpunkte_text
                     key_width_ratio: 0.55
+                    size_hint_y: None
+                    height: dp(24) if root.machtpunkte_text else 0
+                    opacity: 1 if root.machtpunkte_text else 0
 
                 LabelValuePair:
                     key_text: "Parade / Robustheit:"

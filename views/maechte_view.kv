@@ -2,6 +2,10 @@
     MDTooltipPlain:
         text: root.tooltip_text
 
+<TooltipFabButton>
+    MDTooltipPlain:
+        text: root.tooltip_text
+
 # Hauptdefinition für KraefteWidget
 <KraefteWidget>:
     orientation: 'vertical'
@@ -40,8 +44,9 @@
             padding: [20, 10]
             spacing: 10
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_name_btn
+                tooltip_text: "Sortieren nach Name"
                 icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
                 style: "small"
                 size_hint: None, None
@@ -49,8 +54,9 @@
                 pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Name')
 
-            MDFabButton:
+            TooltipFabButton:
                 id: sort_rank_btn
+                tooltip_text: "Sortieren nach Rang"
                 icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
                 style: "small"
                 size_hint: None, None

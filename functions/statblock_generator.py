@@ -5,6 +5,7 @@ Erstellt eine kompakte Textdarstellung des Charakters
 """
 
 from kivy.logger import Logger
+from functions.superkraft_funktionen import ist_superkraefte_setting
 
 
 def generate_character_statblock(charakter):
@@ -41,9 +42,10 @@ def generate_character_statblock(charakter):
         # Talente formatieren
         talente_text = _format_edges(charakter)
         
-        # Mächte formatieren
+        # Mächte / Superkräfte formatieren
         maechte_text = _format_powers(charakter)
-        
+        superkraefte_text = _format_superkraefte(charakter)
+
         # Ausrüstung formatieren
         gear_text = _format_gear(charakter)
         
@@ -71,7 +73,10 @@ def generate_character_statblock(charakter):
             
         if maechte_text:
             statblock_lines.append(f"Mächte: {maechte_text}")
-            
+
+        if superkraefte_text:
+            statblock_lines.append(f"Superkräfte: {superkraefte_text}")
+
         if gear_text:
             statblock_lines.append(f"Ausrüstung: {gear_text}")
         
@@ -219,6 +224,36 @@ def _format_powers(charakter):
         
     except Exception as e:
         Logger.error(f"Fehler beim Formatieren der Mächte: {str(e)}")
+        return ""
+
+
+def _format_superkraefte(charakter):
+    """Formatiert die Superkräfte für den Statblock"""
+    try:
+        if not ist_superkraefte_setting(charakter.active_setting_name):
+            return ""
+
+        kraft_parts = []
+        for kraft_name in charakter.selected_superkraefte:
+            if kraft_name in charakter.superkraefte:
+                kraft = charakter.superkraefte[kraft_name]
+                kosten = kraft.gesamt_kosten
+                modifikatoren = [m.name for m in kraft.gewaehlte_modifikatoren]
+                if modifikatoren:
+                    kraft_parts.append(f"{kraft.name} [{kosten} SKP, {', '.join(modifikatoren)}]")
+                else:
+                    kraft_parts.append(f"{kraft.name} [{kosten} SKP]")
+
+        if kraft_parts:
+            skp_gesamt = charakter.superkraft_punkte_gesamt
+            skp_verbraucht = charakter.superkraft_punkte_verbraucht
+            kraft_text = ", ".join(kraft_parts)
+            return f"{kraft_text} (Machtstufe {charakter.machtstufe}, {skp_verbraucht}/{skp_gesamt} SKP)"
+        else:
+            return ""
+
+    except Exception as e:
+        Logger.error(f"Fehler beim Formatieren der Superkräfte: {str(e)}")
         return ""
 
 

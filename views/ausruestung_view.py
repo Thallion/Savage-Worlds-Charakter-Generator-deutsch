@@ -8,7 +8,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.tooltip import MDTooltip
-from kivymd.uix.button import MDButton, MDButtonIcon, MDButtonText
+from kivymd.uix.button import MDButton, MDButtonIcon, MDButtonText, MDFabButton
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.label import MDLabel
 from kivy.uix.checkbox import CheckBox
@@ -864,7 +864,13 @@ class AusruestungWidget(MDBoxLayout):
 
 
 # Bei der Factory registrieren
+class TooltipFabButton(AusruestungTooltip, MDFabButton):
+    """Fab Button mit Tooltip Funktionalität"""
+    icon = StringProperty()
+
+
 Factory.register('TooltipIconButton', TooltipIconButton)
+Factory.register('TooltipFabButton', TooltipFabButton)
 Factory.register('AusruestungItemRow', AusruestungItemRow)
 
 # KV-String mit Theme-Fix - HAUPTÄNDERUNG: md_bg_color entfernt und theme_text_color hinzugefügt!

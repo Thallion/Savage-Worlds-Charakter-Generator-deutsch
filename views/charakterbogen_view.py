@@ -28,6 +28,7 @@ from controllers.charakter_controller import CharakterController
 from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
+from functions.superkraft_funktionen import ist_superkraefte_setting
 
 # Konstanten für bessere Lesbarkeit und Wartbarkeit
 LABEL_FONT_SIZE = '16sp'
@@ -419,17 +420,27 @@ class CharakterbogenWidget(MDBoxLayout):
 
     def _update_maechte_section(self):
         """
-        Aktualisiert den Mächte-Abschnitt des Charakterbogens.
-        Zeigt alle ausgewählten Mächte mit ihren Eigenschaften an.
+        Aktualisiert den Mächte/Superkräfte-Abschnitt des Charakterbogens.
+        Zeigt kontextabhängig Mächte oder Superkräfte an.
         """
         maechte_section = self.ids.maechte_section
         maechte_section.clear_widgets()
-        
-        # Ausgewählte Mächte anzeigen
+
+        if ist_superkraefte_setting(self.charakter.active_setting_name):
+            self._update_superkraefte_bogen(maechte_section)
+        else:
+            self._update_maechte_bogen(maechte_section)
+
+    def _update_maechte_bogen(self, section):
+        """Zeigt ausgewählte Mächte im Charakterbogen an."""
+        # Überschrift aktualisieren
+        if hasattr(self.ids, 'maechte_header'):
+            self.ids.maechte_header.text = "Mächte:"
+
         for macht_name_key in self.charakter.selected_maechte:
             macht = self.charakter.maechte.get(macht_name_key)
             if macht:
-                maechte_section.add_widget(LeftAlignedLabel(
+                section.add_widget(LeftAlignedLabel(
                     text=(f"{macht.name}, Rang: {macht.rang}, Machtpunkte: {macht.machtpunkte}, "
                           f"Reichweite: {macht.reichweite}, Dauer: {macht.dauer}, Effekt: {macht.effekt}"),
                     font_size=LABEL_FONT_SIZE,
@@ -438,6 +449,33 @@ class CharakterbogenWidget(MDBoxLayout):
                 ))
             else:
                 Logger.warning(f"Macht '{macht_name_key}' nicht in charakter.maechte gefunden.")
+
+    def _update_superkraefte_bogen(self, section):
+        """Zeigt ausgewählte Superkräfte im Charakterbogen an."""
+        # Überschrift aktualisieren
+        if hasattr(self.ids, 'maechte_header'):
+            stufe = self.charakter.machtstufe
+            skp_v = self.charakter.superkraft_punkte_verbraucht
+            skp_g = self.charakter.superkraft_punkte_gesamt
+            self.ids.maechte_header.text = f"Superkräfte (Machtstufe {stufe}, {skp_v}/{skp_g} SKP):"
+
+        for kraft_name_key in self.charakter.selected_superkraefte:
+            kraft = self.charakter.superkraefte.get(kraft_name_key)
+            if kraft:
+                # Modifikatoren-Text
+                mod_text = ""
+                if kraft.gewaehlte_modifikatoren:
+                    mod_namen = [m.name for m in kraft.gewaehlte_modifikatoren]
+                    mod_text = f", Mods: {', '.join(mod_namen)}"
+
+                section.add_widget(LeftAlignedLabel(
+                    text=f"{kraft.name}, {kraft.gesamt_kosten} SKP{mod_text}",
+                    font_size=LABEL_FONT_SIZE,
+                    size_hint_y=None,
+                    height=ROW_HEIGHT
+                ))
+            else:
+                Logger.warning(f"Superkraft '{kraft_name_key}' nicht in charakter.superkraefte gefunden.")
 
     def _update_ausruestung_section(self):
         """

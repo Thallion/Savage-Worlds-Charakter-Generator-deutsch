@@ -15,6 +15,7 @@ from models.ausruestung import Ausruestung
 from models.wuerfel import Wuerfel
 from models.attribut import Attribut
 from models.fertigkeit import Fertigkeit
+from models.superkraft import Superkraft
 
 class SetEncoder(json.JSONEncoder):
     """Ermöglicht das Serialisieren von Sets in JSON."""
@@ -77,6 +78,7 @@ def to_dict(charakter):
         'selected_handicaps': charakter.selected_handicaps,
         'selected_talente': charakter.selected_talente,
         'selected_maechte': charakter.selected_maechte,
+        'selected_superkraefte': charakter.selected_superkraefte,
         'voelker_selected': charakter.voelker_selected,
         'selected_allgemeine_ausruestung': [item.name for item in charakter.selected_allgemeine_ausruestung],
         'selected_waffen': [item.name for item in charakter.selected_waffen],
@@ -93,6 +95,10 @@ def to_dict(charakter):
         'verfuegbare_maechte': charakter.verfuegbare_maechte,
         'anzahl_maechte': charakter.anzahl_maechte,
         'machtpunkte': charakter.machtpunkte,
+        'machtstufe': charakter.machtstufe,
+        'superkraft_punkte_gesamt': charakter.superkraft_punkte_gesamt,
+        'superkraft_punkte_verbraucht': charakter.superkraft_punkte_verbraucht,
+        'kraftobergrenze': charakter.kraftobergrenze,
         'vermoegen': charakter.vermoegen,
         'erschoepfung': charakter.erschoepfung,
         'zusaetzliche_talente': charakter.zusaetzliche_talente,
@@ -112,9 +118,10 @@ def _get_selected_elements_with_data(charakter):
     """
     selected_elements = {
         'voelker': {},
-        'handicaps': {},  
+        'handicaps': {},
         'talente': {},
         'maechte': {},
+        'superkraefte': {},
         'ausruestung': {}
     }
     
@@ -169,6 +176,17 @@ def _get_selected_elements_with_data(charakter):
                 macht_dict['beschreibung'] = macht.individuelle_beschreibung
             selected_elements['maechte'][macht_name] = macht_dict
     
+    # Nur ausgewählte Superkräfte mit individuellen Daten
+    for kraft_name in getattr(charakter, 'selected_superkraefte', []):
+        if kraft_name in getattr(charakter, 'superkraefte', {}):
+            kraft = charakter.superkraefte[kraft_name]
+            kraft_dict = {
+                'ausgewaehlt': True,
+                'gewaehlte_kosten': kraft.gewaehlte_kosten,
+                'gewaehlte_modifikatoren': [mod.to_dict() for mod in kraft.gewaehlte_modifikatoren],
+            }
+            selected_elements['superkraefte'][kraft_name] = kraft_dict
+
     # Nur ausgewählte Ausrüstung mit individuellen Daten
     all_selected_equipment = (
         charakter.selected_allgemeine_ausruestung + 
@@ -244,6 +262,7 @@ def _load_new_format(charakter, data):
     charakter.selected_handicaps = data.get('selected_handicaps', [])
     charakter.selected_talente = data.get('selected_talente', [])
     charakter.selected_maechte = data.get('selected_maechte', [])
+    charakter.selected_superkraefte = data.get('selected_superkraefte', [])
     charakter.voelker_selected = data.get('voelker_selected', {})
     
     # Individuelle Daten auf die Setting-Elemente anwenden
@@ -421,6 +440,21 @@ def _apply_individual_element_data(charakter, selected_elements):
                 charakter.maechte[name].individuelle_beschreibung = data['beschreibung']
                 charakter.maechte[name].beschreibung = data['beschreibung']
 
+    # Superkraft-Daten anwenden
+    superkraefte_data = selected_elements.get('superkraefte', {})
+    from models.superkraft import SuperkraftModifikator
+    for name, data in superkraefte_data.items():
+        if name in getattr(charakter, 'superkraefte', {}):
+            kraft = charakter.superkraefte[name]
+            kraft.ausgewaehlt = data.get('ausgewaehlt', False)
+            kraft.gewaehlte_kosten = data.get('gewaehlte_kosten', 0)
+            # Gewählte Modifikatoren wiederherstellen
+            kraft.gewaehlte_modifikatoren = []
+            for mod_data in data.get('gewaehlte_modifikatoren', []):
+                kraft.gewaehlte_modifikatoren.append(
+                    SuperkraftModifikator.from_dict(mod_data)
+                )
+
     # Ausrüstungs-Daten anwenden
     ausruestung_data = selected_elements.get('ausruestung', {})
     for name, data in ausruestung_data.items():
@@ -517,6 +551,10 @@ def _finalize_character_loading(charakter, data):
     charakter.machtpunkte = data.get('machtpunkte', charakter.machtpunkte)
     charakter.vermoegen = data.get('vermoegen', charakter.vermoegen)
     charakter.erschoepfung = data.get('erschoepfung', charakter.erschoepfung)
+    charakter.machtstufe = data.get('machtstufe', getattr(charakter, 'machtstufe', 'III'))
+    charakter.superkraft_punkte_gesamt = data.get('superkraft_punkte_gesamt', getattr(charakter, 'superkraft_punkte_gesamt', 0))
+    charakter.superkraft_punkte_verbraucht = data.get('superkraft_punkte_verbraucht', getattr(charakter, 'superkraft_punkte_verbraucht', 0))
+    charakter.kraftobergrenze = data.get('kraftobergrenze', getattr(charakter, 'kraftobergrenze', 15))
     charakter.zusaetzliche_talente = data.get('zusaetzliche_talente', charakter.zusaetzliche_talente)
     charakter.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', charakter.gesamt_handicap_punkte)
     charakter.char_gen_completed = data.get('char_gen_completed', charakter.char_gen_completed)

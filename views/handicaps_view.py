@@ -12,6 +12,7 @@ from kivymd.uix.recycleview import MDRecycleView
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
+from kivymd.uix.tooltip import MDTooltip
 
 from kivymd.uix.dialog import (
     MDDialog,
@@ -41,6 +42,22 @@ SELECTED_LINE_COLOR = [1, 0.65, 0, 1]
 UNSELECTED_LINE_COLOR = [0, 0, 0, 0]
 
 
+from kivy.factory import Factory
+
+
+class HandicapsTooltip(MDTooltip):
+    """Basis-Klasse für Tooltips in der Handicaps-View"""
+    tooltip_text = StringProperty()
+
+
+class TooltipFabButton(HandicapsTooltip, MDFabButton):
+    """Fab Button mit Tooltip Funktionalität"""
+    icon = StringProperty()
+
+
+Factory.register('TooltipFabButton', TooltipFabButton)
+
+
 import os
 import sys
 
@@ -54,7 +71,7 @@ def load_kv_file():
         # Normale Ausführung
         base_path = os.path.dirname(os.path.dirname(__file__))
         kv_path = os.path.join(base_path, 'views', 'handicaps_view.kv')
-    
+
     if os.path.exists(kv_path):
         Builder.load_file(kv_path)
     else:

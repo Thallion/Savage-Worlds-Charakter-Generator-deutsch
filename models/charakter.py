@@ -75,6 +75,7 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         self.zusaetzliche_talente = 0
         self.talente = {}
         self.maechte = {}
+        self.superkraefte = {}
         self.ausruestung = {}
         self.ruestungen = {}
         self.waffen = {}

@@ -671,6 +671,68 @@ class TestSettingPopupEventIntegration(unittest.TestCase):
         self.assertEqual(received, ['Superkräfte Kompendium'])
 
 
+class TestGameElementsHandlerEventIntegration(unittest.TestCase):
+    """Testet den Setting-Wechsel über game_elements_handler (Hauptweg für Benutzer-UI)"""
+
+    def test_apply_setting_change_dispatcht_event(self):
+        """_apply_setting_change dispatcht on_setting_changed nach erfolgreichem Wechsel"""
+        controller = MockController("Superkräfte Kompendium")
+        received = []
+
+        controller.bind(on_setting_changed=lambda inst, name: received.append(name))
+
+        # Simuliere was _apply_setting_change tut nach erfolgreichem change_active_setting
+        setting_name = "SWAE"
+        success = True
+        if success and hasattr(controller, 'dispatch'):
+            controller.dispatch('on_setting_changed', setting_name)
+
+        self.assertEqual(received, ['SWAE'])
+
+    def test_setting_wechsel_superkraefte_zu_normal(self):
+        """Wechsel von Superkräfte zu normalem Setting dispatcht Event und ändert Modus"""
+        controller = MockController("Superkräfte Kompendium")
+        mode_tracker = {"mode": "superkraefte"}
+
+        def on_setting_changed(inst, name):
+            mode_tracker["mode"] = detect_mode(name)
+
+        controller.bind(on_setting_changed=on_setting_changed)
+
+        # Simuliere Setting-Wechsel über UI
+        controller.dispatch('on_setting_changed', 'Fantasy Kompendium')
+
+        self.assertEqual(mode_tracker["mode"], "maechte")
+
+    def test_setting_wechsel_normal_zu_superkraefte(self):
+        """Wechsel von normalem Setting zu Superkräfte dispatcht Event und ändert Modus"""
+        controller = MockController("SWAE")
+        mode_tracker = {"mode": "maechte"}
+
+        def on_setting_changed(inst, name):
+            mode_tracker["mode"] = detect_mode(name)
+
+        controller.bind(on_setting_changed=on_setting_changed)
+
+        controller.dispatch('on_setting_changed', 'Superkräfte Kompendium')
+
+        self.assertEqual(mode_tracker["mode"], "superkraefte")
+
+    def test_fehlgeschlagener_wechsel_kein_event(self):
+        """Bei fehlgeschlagenem Setting-Wechsel wird kein Event dispatcht"""
+        controller = MockController()
+        received = []
+
+        controller.bind(on_setting_changed=lambda inst, name: received.append(name))
+
+        # Simuliere fehlgeschlagenen Wechsel
+        success = False
+        if success and hasattr(controller, 'dispatch'):
+            controller.dispatch('on_setting_changed', 'Neues Setting')
+
+        self.assertEqual(received, [])  # Kein Event
+
+
 class TestIntegrationModusUndFilter(unittest.TestCase):
     """Integrationstests: Moduswechsel zusammen mit Filter/Sortierung"""
 

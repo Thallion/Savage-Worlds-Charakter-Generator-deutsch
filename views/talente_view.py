@@ -76,8 +76,14 @@ class TooltipIconButton(TalenteTooltip, MDIconButton):
     icon = StringProperty()
 
 
+class TooltipFabButton(TalenteTooltip, MDFabButton):
+    """Fab Button mit Tooltip Funktionalität"""
+    icon = StringProperty()
+
+
 # Bei der Factory registrieren
 Factory.register('TooltipIconButton', TooltipIconButton)
+Factory.register('TooltipFabButton', TooltipFabButton)
 
 
 # KV-Datei laden

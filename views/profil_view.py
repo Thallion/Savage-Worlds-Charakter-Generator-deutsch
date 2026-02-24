@@ -156,6 +156,19 @@ class ProfilWidget(MDBoxLayout):
             self.konzept = profil_daten.get('Konzept', '')
             self.sprachen = profil_daten.get('Sprachen', '')
 
+            # Textfelder direkt aktualisieren (KV-Bindings werden nach User-Eingabe nicht mehr propagiert)
+            if hasattr(self, 'ids'):
+                if 'name_input' in self.ids:
+                    self.ids.name_input.text = self.char_name
+                if 'alter_input' in self.ids:
+                    self.ids.alter_input.text = self.alter
+                if 'geschlecht_input' in self.ids:
+                    self.ids.geschlecht_input.text = self.geschlecht
+                if 'konzept_input' in self.ids:
+                    self.ids.konzept_input.text = self.konzept
+                if 'sprachen_input' in self.ids:
+                    self.ids.sprachen_input.text = self.sprachen
+
             Logger.debug("ProfilWidget: Profildaten erfolgreich geladen und UI aktualisiert.")
         except Exception as e:
             Logger.error(f"ProfilWidget: Fehler beim Laden der Profildaten: {e}")

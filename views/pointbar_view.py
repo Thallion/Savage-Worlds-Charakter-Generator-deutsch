@@ -29,6 +29,7 @@ from kivymd.theming import ThemableBehavior
 
 # Path utilities import
 from utils.path_utils import get_assets_path
+from functions.superkraft_funktionen import ist_superkraefte_setting
 
 class LabelValuePair(MDBoxLayout):
     """Theme-adaptive Label-Wert-Paar mit flexibler Skalierung."""
@@ -71,6 +72,8 @@ class GenerationPointsBar(MDBoxLayout):
     gewicht_text = StringProperty("")  
     rang_text = StringProperty("")  
     parade_robustheit_text = StringProperty("")
+    superkraft_punkte_text = StringProperty("")
+    machtstufe_text = StringProperty("")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -115,6 +118,9 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.unbind(rang=self.update_rang_text)
             self.charakter.unbind(char_name=self.update_charakter_name)
             self.charakter.unbind(active_setting_name=self.update_setting_name)
+            self.charakter.unbind(superkraft_punkte_gesamt=self.update_superkraft_punkte_text)
+            self.charakter.unbind(superkraft_punkte_verbraucht=self.update_superkraft_punkte_text)
+            self.charakter.unbind(machtstufe=self.update_machtstufe_text)
             self.charakter.unbind(parade=self.update_parade_robustheit_text)
             self.charakter.unbind(robustheit=self.update_parade_robustheit_text)
             # KORREKTUR: Auch auf robustheit_mit_ruestung binden
@@ -151,6 +157,11 @@ class GenerationPointsBar(MDBoxLayout):
             # Vermögen und Währung
             self.charakter.bind(vermoegen=self.update_vermoegen_text)
             self.charakter.bind(waehrungseinheit=self.update_vermoegen_text)
+
+            # Superkräfte (SKP)
+            self.charakter.bind(superkraft_punkte_gesamt=self.update_superkraft_punkte_text)
+            self.charakter.bind(superkraft_punkte_verbraucht=self.update_superkraft_punkte_text)
+            self.charakter.bind(machtstufe=self.update_machtstufe_text)
             
             # Handicaps
             self.charakter.bind(verbleibende_handicap_punkte=self.update_handicaps_text)
@@ -193,7 +204,9 @@ class GenerationPointsBar(MDBoxLayout):
             self.update_handicaps_text(None, None)
             self.update_gewicht_text(None, None)
             self.update_rang_text(None, None)
-            self.update_parade_robustheit_text(None, None)     
+            self.update_parade_robustheit_text(None, None)
+            self.update_superkraft_punkte_text(None, None)
+            self.update_machtstufe_text(None, None)     
             
             Logger.debug("Alle Texte erfolgreich aktualisiert")
         except Exception as e:
@@ -205,8 +218,13 @@ class GenerationPointsBar(MDBoxLayout):
         self.char_name_text = value if value else "Unbekannt"
 
     def update_setting_name(self, instance, value):
-        """Aktualisiert den Setting-Namen"""
+        """Aktualisiert den Setting-Namen und aktualisiert kontextabhängige Anzeigen"""
         self.active_setting_name_text = value if value else "Unbekanntes Setting"
+        # Mächte/SKP-Anzeigen bei Setting-Wechsel neu berechnen
+        self.update_maechte_text(None, None)
+        self.update_machtpunkte_text(None, None)
+        self.update_superkraft_punkte_text(None, None)
+        self.update_machtstufe_text(None, None)
 
     def update_attribut_text(self, instance, value):
         """Aktualisiert die Attribut-Anzeige"""
@@ -229,14 +247,39 @@ class GenerationPointsBar(MDBoxLayout):
             self.aufstiege_text = f"{self.charakter.verbleibende_aufstiege} / {self.charakter.aufstiege_gesamt}"
 
     def update_maechte_text(self, instance, value):
-        """Aktualisiert die Mächte-Anzeige"""
+        """Aktualisiert die Mächte-Anzeige (leer bei Superkräfte-Settings)"""
         if self.charakter:
-            self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
+            if ist_superkraefte_setting(self.charakter.active_setting_name):
+                self.maechte_text = ""
+            else:
+                self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
 
     def update_machtpunkte_text(self, instance, value):
-        """Aktualisiert die Machtpunkte-Anzeige"""
+        """Aktualisiert die Machtpunkte-Anzeige (leer bei Superkräfte-Settings)"""
         if self.charakter:
-            self.machtpunkte_text = f"{self.charakter.machtpunkte}"
+            if ist_superkraefte_setting(self.charakter.active_setting_name):
+                self.machtpunkte_text = ""
+            else:
+                self.machtpunkte_text = f"{self.charakter.machtpunkte}"
+
+    def update_superkraft_punkte_text(self, instance, value):
+        """Aktualisiert die SKP-Anzeige (leer bei Nicht-Superkräfte-Settings)"""
+        if self.charakter:
+            if ist_superkraefte_setting(self.charakter.active_setting_name):
+                verbraucht = self.charakter.superkraft_punkte_verbraucht
+                gesamt = self.charakter.superkraft_punkte_gesamt
+                verbleibend = gesamt - verbraucht
+                self.superkraft_punkte_text = f"{verbleibend} / {gesamt} (OG: {self.charakter.kraftobergrenze})"
+            else:
+                self.superkraft_punkte_text = ""
+
+    def update_machtstufe_text(self, instance, value):
+        """Aktualisiert die Machtstufe-Anzeige (leer bei Nicht-Superkräfte-Settings)"""
+        if self.charakter:
+            if ist_superkraefte_setting(self.charakter.active_setting_name):
+                self.machtstufe_text = f"{self.charakter.machtstufe}"
+            else:
+                self.machtstufe_text = ""
 
     def update_vermoegen_text(self, instance, value):
         """Aktualisiert die Vermögens-Anzeige"""

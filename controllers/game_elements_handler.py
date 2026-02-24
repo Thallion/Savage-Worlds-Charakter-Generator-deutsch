@@ -103,7 +103,7 @@ class GameElementsHandler:
         
         # Setting wechseln mit der gewählten Option
         success = char.change_active_setting(setting_name, merge_elements=merge_elements)
-        
+
         dialog_service = service_container.get_dialog_service()
         if success and dialog_service:
             merge_text = "zusammengeführt" if merge_elements else "komplett ersetzt"
@@ -112,6 +112,10 @@ class GameElementsHandler:
                 "Setting gewechselt"
             )
             self._trigger_ui_refresh()
+
+            # Setting-Change-Event für kontextabhängige UI-Umschaltung (Mächte/Superkräfte)
+            if self.charakter_controller and hasattr(self.charakter_controller, 'dispatch'):
+                self.charakter_controller.dispatch('on_setting_changed', setting_name)
         elif dialog_service:
             dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{setting_name}'.")
 

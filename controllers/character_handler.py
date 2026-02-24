@@ -144,9 +144,22 @@ class CharacterHandler:
             if not self.controller:
                 Logger.warning("Controller nicht verfügbar für neuen Charakter")
                 return
-                
+
             self.controller.neuer_charakter()
+
+            # char_gen_completed explizit zurücksetzen (neuer Charakter = Generierung nicht abgeschlossen)
+            if self.controller.charakter:
+                self.controller.charakter.char_gen_completed = False
+
+            # Button-Text im Widget aktualisieren
+            if hasattr(self.widget, 'char_gen_completed'):
+                self.widget.char_gen_completed = False
+
             self._update_ui_fields()
+
+            # Profil-UI aktualisieren (Textfelder zurücksetzen)
+            self._refresh_profil_widget()
+
             Logger.info("Neuer Charakter erstellt")
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen eines neuen Charakters: {e}")
@@ -318,6 +331,19 @@ class CharacterHandler:
                 self.widget.statistics_manager.update_element_statistics_ui()
         except Exception as e:
             Logger.error(f"Fehler bei Character-Loaded-Event: {e}")
+
+    def _refresh_profil_widget(self):
+        """Aktualisiert das ProfilWidget (Textfelder zurücksetzen)"""
+        try:
+            # ProfilWidget ist direkt auf dem App-Objekt registriert (main.py)
+            profil_widget = getattr(self.app, 'profil_widget', None)
+            if profil_widget and hasattr(profil_widget, 'load_profil'):
+                profil_widget.load_profil()
+                Logger.info("ProfilWidget nach neuem Charakter aktualisiert")
+            else:
+                Logger.warning("ProfilWidget nicht auf App registriert - Profil-Refresh übersprungen")
+        except Exception as e:
+            Logger.error(f"Fehler beim Aktualisieren des ProfilWidgets: {e}")
 
     def _update_ui_fields(self):
         """Aktualisiert die UI-Felder mit aktuellen Charakter-Werten"""

@@ -34,6 +34,14 @@ class CharakterProperties:
     verfuegbare_maechte = NumericProperty(0)
     anzahl_maechte = NumericProperty(0)
     machtpunkte = NumericProperty(0)
+
+    # Superkräfte (Superkräfte-Kompendium)
+    superkraefte = DictProperty({})
+    superkraft_punkte_gesamt = NumericProperty(0)
+    superkraft_punkte_verbraucht = NumericProperty(0)
+    machtstufe = StringProperty("III")
+    kraftobergrenze = NumericProperty(15)
+    selected_superkraefte = ListProperty([])
     
     # Vermögen
     vermoegen = NumericProperty(500)

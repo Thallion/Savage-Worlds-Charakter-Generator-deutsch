@@ -609,6 +609,7 @@ class EigenschaftenWidget(MDBoxLayout):
     def _on_charakter_changed(self, *args):
         """Wird aufgerufen, wenn der Charakter gewechselt wird"""
         Logger.debug("EIGENSCHAFTEN_VIEW: Charakter gewechselt - Re-Binding Events")
+        self._update_char_gen_status()
         self._rebind_charakter_events()
         self._plane_update(None)
         

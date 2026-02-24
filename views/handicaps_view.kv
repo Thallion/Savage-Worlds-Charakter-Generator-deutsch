@@ -1,3 +1,7 @@
+<TooltipFabButton>:
+    MDTooltipPlain:
+        text: root.tooltip_text
+
 <HandicapsWidget>:
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor  
@@ -32,7 +36,8 @@
             padding: [20, 10]
             spacing: 10
 
-            MDFabButton:
+            TooltipFabButton:
+                tooltip_text: "Sortieren nach Name"
                 icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
                 style: "small"
                 size_hint: None, None
