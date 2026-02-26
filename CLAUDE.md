@@ -2,10 +2,10 @@
 
 ## Project Overview
 
-A German-language character generator for the **Savage Worlds** tabletop RPG system. Built with Python/Kivy/KivyMD, it supports multiple game settings (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies) and runs on Desktop (Windows/Linux/macOS) and Android.
+A German-language character generator for the **Savage Worlds** tabletop RPG system. Built with Python/Kivy/KivyMD, it supports multiple game settings (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies, Horror Kompendium, Rippers, SciFi Kompendium, Superkräfte Kompendium) and runs on Desktop (Windows/Linux/macOS) and Android.
 
 **License:** CC BY-NC-SA 4.0 (non-commercial)
-**Current Version:** 0.5.7.4
+**Current Version:** 0.6.0.2
 **Python:** 3.8+ (3.11 recommended)
 
 ## Quick Reference
@@ -48,6 +48,7 @@ main.kv                    # Root Kivy layout
 │   ├── fertigkeit.py      # Skills
 │   ├── talent.py          # Edges/Talents
 │   ├── macht.py           # Powers
+│   ├── superkraft.py      # Super Powers (Superkräfte)
 │   ├── handicap.py        # Hindrances
 │   ├── volk.py            # Races/Species
 │   ├── waffe.py           # Weapons
@@ -61,7 +62,7 @@ main.kv                    # Root Kivy layout
 │   ├── screens.py         # Screen class definitions
 │   ├── ui_components.py   # Shared UI components
 │   ├── *_view.py/.kv      # Tab screens (profil, voelker, eigenschaften, etc.)
-│   ├── *_popup.py/.kv     # Modal dialogs (talent, handicap, macht, waffe, etc.)
+│   ├── *_popup.py/.kv     # Modal dialogs (talent, handicap, macht, superkraft, waffe, etc.)
 │   ├── pointbar_view.py   # Generation points progress bar
 │   ├── historie_view.py   # Change history widget
 │   └── einstellungen_widget.py  # Settings widget
@@ -93,6 +94,7 @@ main.kv                    # Root Kivy layout
 │   ├── talent_funktionen.py    # Talent selection logic
 │   ├── handicap_funktionen.py  # Handicap selection logic
 │   ├── macht_funktionen.py     # Power selection logic
+│   ├── superkraft_funktionen.py # Super power selection logic
 │   ├── volk_funktionen.py      # Race/species functions
 │   ├── ausruestung_funktionen.py    # Equipment functions
 │   ├── eigenschaften_funktionen.py  # Attribute functions
@@ -114,7 +116,11 @@ main.kv                    # Root Kivy layout
 │   ├── SWAE.json                # Savage Worlds Adventure Edition
 │   ├── Deadlands.json
 │   ├── Fantasy Kompendium.json
+│   ├── Horror Kompendium.json
+│   ├── Rippers.json
 │   ├── Savage Pathfinder.json
+│   ├── SciFi Kompendium.json
+│   ├── Superkräfte Kompendium.json
 │   ├── HeXXen1773.json
 │   └── Sundered Skies + FK.json
 │
@@ -153,7 +159,7 @@ The app uses `MDTabsPrimary` with 11 tabs: Einstellungen (Settings), Voelker (Ra
 ## Code Conventions
 
 ### Language
-- **Domain terms are in German**: Eigenschaften (attributes), Fertigkeiten (skills), Talente (edges/talents), Handicaps (hindrances), Mächte (powers), Ausrüstung (equipment), Völker (races), Würfel (dice)
+- **Domain terms are in German**: Eigenschaften (attributes), Fertigkeiten (skills), Talente (edges/talents), Handicaps (hindrances), Mächte (powers), Superkräfte (super powers), Ausrüstung (equipment), Völker (races), Würfel (dice)
 - **Docstrings and comments** are written in German
 - **Variable and function names** use German for domain concepts: `waehle_talent()`, `speichern_als_json()`, `charakter`, `fertigkeit`
 - **Module/file names** mix German domain terms with English structure: `charakter_controller.py`, `talent_funktionen.py`
@@ -263,3 +269,4 @@ Build specs: `savage_worlds_generator.spec` (Windows), `savage_worlds_generator_
 8. **Test directory has a space**: The test directory is `test units/` (with a space). Use quotes in paths.
 9. **No CI pipeline in repo**: There are no GitHub Actions workflow files committed; builds are done locally.
 10. **Character files are gitignored**: `chars/` directory is in `.gitignore`.
+11. **Superkräfte system**: Version 0.6.0.2 introduces super powers (Superkräfte) with dedicated models, views, and functions. The Superkräfte Kompendium provides specialized super hero character creation.
