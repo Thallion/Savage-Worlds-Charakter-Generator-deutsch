@@ -239,12 +239,12 @@ class CustomElementManager:
     def update_element(self, element_type: str, element_name: str, element_data: dict) -> bool:
         """
         Fügt ein Element zum aktiven Setting hinzu oder aktualisiert es.
-        
+
         Args:
             element_type: Typ des Elements (z.B. 'talente', 'attribute', etc.)
             element_name: Name des Elements
             element_data: Element-Daten als Dictionary
-            
+
         Returns:
             bool: True bei Erfolg, sonst False
         """
@@ -252,20 +252,69 @@ class CustomElementManager:
             if not self.active_setting:
                 Logger.error("Kein aktives Setting vorhanden.")
                 return False
-            
+
             # Element-Typ-Dictionary erstellen falls nicht vorhanden
             if element_type not in self.active_setting:
                 self.active_setting[element_type] = {}
-            
+
             # Element hinzufügen/aktualisieren
             self.active_setting[element_type][element_name] = element_data
             Logger.info(f"Element '{element_name}' vom Typ '{element_type}' aktualisiert.")
-            
+
             return True
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren von Element '{element_name}' (Typ: {element_type}): {e}")
             return False
+
+    def save_custom_element(self, element_type: str, elements: Dict[str, Any]) -> bool:
+        """
+        Speichert benutzerdefinierte Elemente in eine separate JSON-Datei.
+
+        Args:
+            element_type: Typ des Elements (z.B. 'handicaps', 'talente')
+            elements: Dictionary mit den zu speichernden Elementen
+
+        Returns:
+            bool: True bei Erfolg, sonst False
+        """
+        try:
+            if not self.settings_dir.exists():
+                self.settings_dir.mkdir(parents=True, exist_ok=True)
+
+            file_path = self.settings_dir / f"custom_{element_type}.json"
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(elements, f, ensure_ascii=False, indent=4)
+
+            Logger.info(f"Benutzerdefinierte Elemente vom Typ '{element_type}' gespeichert: {len(elements)} Einträge")
+            return True
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern benutzerdefinierter Elemente (Typ: {element_type}): {e}")
+            return False
+
+    def load_custom_element(self, element_type: str) -> Dict[str, Any]:
+        """
+        Lädt benutzerdefinierte Elemente aus einer JSON-Datei.
+
+        Args:
+            element_type: Typ des Elements (z.B. 'handicaps', 'talente')
+
+        Returns:
+            Dict mit den geladenen Elementen (leer wenn keine gefunden)
+        """
+        try:
+            file_path = self.settings_dir / f"custom_{element_type}.json"
+            if not file_path.exists():
+                return {}
+
+            with open(file_path, 'r', encoding='utf-8') as f:
+                elements = json.load(f)
+
+            Logger.info(f"Benutzerdefinierte Elemente vom Typ '{element_type}' geladen: {len(elements)} Einträge")
+            return elements
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden benutzerdefinierter Elemente (Typ: {element_type}): {e}")
+            return {}
 
 
 def create_default_setting(charakter) -> Dict[str, Any]:
@@ -346,7 +395,10 @@ def load_elements_from_active_setting(charakter, skip_equipment: bool = False,
         # Ausrüstung laden, wenn nicht übersprungen
         if not skip_equipment:
             _lade_ausruestung(charakter, active_setting, merge_elements)
-        
+
+        # Cyberware initialisieren (falls im Setting vorhanden)
+        _lade_cyberware(charakter, active_setting, merge_elements)
+
         # Settingregeln laden
         _lade_settingregeln(charakter, active_setting)
         
@@ -513,6 +565,25 @@ def _lade_superkraefte(charakter, active_setting: Dict[str, Any], merge_elements
             charakter.kraftobergrenze = machtstufen_data[stufe].get('kraftobergrenze', 0)
             Logger.info(f"Machtstufe {stufe}: {charakter.superkraft_punkte_gesamt} SKP, "
                        f"Kraftobergrenze {charakter.kraftobergrenze}")
+
+
+def _lade_cyberware(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:
+    """Lädt Cyberware aus den Ausrüstungsdaten des Settings (falls Cyberware-Setting)."""
+    from functions.cyberware_funktionen import ist_cyberware_setting
+    if not ist_cyberware_setting(getattr(charakter, 'active_setting_name', '')):
+        return
+
+    ausruestung_data = active_setting.get('ausruestung', {})
+    cyberware_items = {name: data for name, data in ausruestung_data.items()
+                       if data.get('kategorie') == 'Cyberware'}
+
+    if cyberware_items:
+        from functions.cyberware_funktionen import initialisiere_cyberware
+        initialisiere_cyberware(charakter, cyberware_items)
+        Logger.info(LogMessages.ELEMENTE_GELADEN.format(
+            anzahl=len(charakter.cyberware_verfuegbar),
+            typ="Cyberware-Items"
+        ))
 
 
 def _lade_ausruestung(charakter, active_setting: Dict[str, Any], merge_elements: bool) -> None:

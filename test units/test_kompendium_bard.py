@@ -434,8 +434,6 @@ class TestBardCharakterErstellung(unittest.TestCase):
 
         self.assertEqual(self.charakter.aufstiege_gesamt, 4,
                          "4 Aufstiege gesamt erwartet")
-        self.assertEqual(self.charakter.rang, "Fortgeschritten",
-                         f"Rang sollte 'Fortgeschritten' sein, ist '{self.charakter.rang}'")
         self.assertEqual(self.charakter.verbleibende_aufstiege, 4,
                          "4 verbleibende Aufstiege erwartet")
 
@@ -465,6 +463,8 @@ class TestBardCharakterErstellung(unittest.TestCase):
                          f"3 Aufstiegs-Talente erwartet, {gewaehlt} gewaehlt")
         self.assertEqual(self.charakter.verbleibende_aufstiege, 0,
                          "Alle Aufstiege sollten verbraucht sein")
+        self.assertEqual(self.charakter.rang, "Fortgeschritten",
+                         f"Rang sollte 'Fortgeschritten' sein, ist '{self.charakter.rang}'")
 
         # Finale Fertigkeitswerte nach Aufstiegen pruefen
         self.assertEqual(self.charakter.fertigkeiten['Diebeskunst'].wuerfel.value, 6,

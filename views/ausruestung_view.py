@@ -148,8 +148,22 @@ class AusruestungItemRow(MDBoxLayout):
         return None
         
     def kaufen_ausruestung(self):
-        """Zeigt einen Dialog zum Kaufen an"""
+        """Zeigt einen Dialog zum Kaufen an. Bei Cyberware wird ein spezieller
+        Konfigurationsdialog mit flexiblem Preisfeld angezeigt."""
         try:
+            controller = self._get_controller()
+            if controller:
+                # Alle Cyberware-Items bekommen den Konfigurationsdialog (mit Preisfeld)
+                from functions.cyberware_funktionen import ist_cyberware_setting, braucht_konfiguration
+                charakter = controller.charakter
+                if ist_cyberware_setting(charakter.active_setting_name):
+                    item = charakter.ausruestung.get(self.name)
+                    if item and getattr(item, 'kategorie', '') == 'Cyberware':
+                        konfig_info = braucht_konfiguration(self.name, charakter)
+                        # konfig_info ist None bei Items ohne Auswahl (z.B. Panzerung)
+                        self._erstelle_cyberware_konfiguration_dialog(konfig_info)
+                        return
+
             dialog_content = KaufDialogContent(name=self.name, preis=self.kosten)
             self._show_transaction_dialog(
                 title=f"Kaufen von {self.name}",
@@ -245,6 +259,168 @@ class AusruestungItemRow(MDBoxLayout):
         )
         self.dialog.open()
 
+    def _erstelle_cyberware_konfiguration_dialog(self, konfig_info):
+        """
+        Zeigt einen Konfigurationsdialog für Cyberware an (z.B. Attribut-/Fertigkeitswahl).
+        Enthält ein Preisfeld wie der normale Kauf-Dialog.
+        Nach Bestätigung wird der Kauf mit der gewählten Konfiguration ausgeführt.
+
+        Args:
+            konfig_info: Dict mit {"typ", "optionen", "label"} oder None für reine Preisanpassung
+        """
+        from kivymd.uix.button import MDButton, MDButtonText
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing="12dp",
+            padding="12dp",
+            adaptive_height=True,
+            size_hint_y=None,
+            height=dp(250),
+        )
+
+        # Speichere die aktuelle Auswahl
+        ausgewaehlter_wert = {"wert": None}
+
+        if konfig_info:
+            # Label
+            content.add_widget(MDLabel(
+                text=konfig_info['label'],
+                size_hint_y=None,
+                height=dp(30),
+                halign="left",
+            ))
+
+            # Auswahlfeld (MDDropdownMenu über einen Button)
+            auswahl_button = MDButton(
+                style="outlined",
+                size_hint_x=1,
+                size_hint_y=None,
+                height=dp(48),
+            )
+            auswahl_text = MDButtonText(text="-- Bitte wählen --")
+            auswahl_button.add_widget(auswahl_text)
+            content.add_widget(auswahl_button)
+
+            # Dropdown-Menü erstellen
+            menu_items = []
+            for option in konfig_info['optionen']:
+                menu_items.append({
+                    "text": option,
+                    "on_release": lambda x=option: _waehle_option(x),
+                })
+
+            menu = MDDropdownMenu(
+                caller=auswahl_button,
+                items=menu_items,
+            )
+
+            def _waehle_option(option):
+                ausgewaehlter_wert["wert"] = option
+                auswahl_text.text = option
+                menu.dismiss()
+
+            auswahl_button.bind(on_release=lambda x: menu.open())
+
+        # Preisfeld (bearbeitbar wie beim normalen Kauf-Dialog)
+        preis_field = MDTextField(
+            mode="outlined",
+            text=str(self.kosten),
+            input_filter="float",
+        )
+        preis_field.add_widget(MDTextFieldHintText(text="Preis (optional anpassbar)"))
+        content.add_widget(preis_field)
+
+        def _handle_konfiguration_kauf(*args):
+            if konfig_info and not ausgewaehlter_wert["wert"]:
+                self.show_error("Bitte eine Auswahl treffen.")
+                return
+
+            # Preis auslesen
+            preis = None
+            try:
+                if preis_field.text:
+                    preis = float(preis_field.text)
+            except ValueError:
+                pass
+
+            # Konfiguration bauen
+            konfiguration = {}
+            if konfig_info:
+                if konfig_info['typ'] == 'attribut':
+                    konfiguration['attribut'] = ausgewaehlter_wert["wert"]
+                elif konfig_info['typ'] == 'fertigkeit':
+                    konfiguration['fertigkeit'] = ausgewaehlter_wert["wert"]
+                elif konfig_info['typ'] == 'talent':
+                    konfiguration['talent'] = ausgewaehlter_wert["wert"]
+
+            # Dialog schließen und Kauf mit Konfiguration durchführen
+            if self.dialog:
+                self.dialog.dismiss()
+                self.dialog = None
+            self._kaufe_mit_konfiguration(konfiguration, preis_pro_stueck=preis)
+
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(text=f"{self.name} konfigurieren"),
+            MDDialogContentContainer(content, orientation="vertical"),
+            MDDialogButtonContainer(
+                Widget(),
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Installieren"),
+                    style="text",
+                    on_release=_handle_konfiguration_kauf,
+                ),
+                spacing="8dp",
+            ),
+        )
+        self.dialog.open()
+
+    def _kaufe_mit_konfiguration(self, konfiguration, preis_pro_stueck=None):
+        """Führt den Cyberware-Kauf mit der gewählten Konfiguration und optionalem Preis durch."""
+        if self._dialog_processing:
+            return
+        self._dialog_processing = True
+        try:
+            controller = self._get_controller()
+            if not controller:
+                self.show_error("Controller nicht gefunden.")
+                return
+
+            effektiver_preis = preis_pro_stueck or self.kosten
+            vermoegen_vorher = controller.charakter.vermoegen
+            log_transaction("KAUF_START", self.name, 1, effektiver_preis, True,
+                          f"Vermögen vorher: {vermoegen_vorher}, Mit Konfiguration: {konfiguration}")
+
+            success = controller.kaufen_ausruestung(
+                self.name,
+                anzahl=1,
+                preis_pro_stueck=preis_pro_stueck,
+                konfiguration=konfiguration
+            )
+
+            vermoegen_nachher = controller.charakter.vermoegen
+            log_transaction("KAUF_RESULT", self.name, 1, effektiver_preis, success,
+                          f"Vermögen nachher: {vermoegen_nachher}")
+
+            if success or vermoegen_nachher != vermoegen_vorher:
+                Logger.debug(f"Cyberware-Kauf mit Konfiguration erfolgreich: {self.name}")
+                self._refresh_ui()
+                self._zeige_cyberware_feedback(controller, self.name)
+            else:
+                Logger.debug(f"Cyberware-Kauf fehlgeschlagen: {self.name}")
+                self._refresh_ui()
+                self._zeige_cyberware_kauf_fehler(controller, self.name)
+        except Exception as e:
+            Logger.error(f"Fehler beim konfigurierten Cyberware-Kauf: {e}")
+            self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
+        finally:
+            self._dialog_processing = False
+
     def _handle_kauf_dialog(self, content):
         """Verarbeitet den Kauf"""
         # Android Dialog-Schutz: Verhindern von mehrfacher Ausführung
@@ -296,6 +472,8 @@ class AusruestungItemRow(MDBoxLayout):
                     self.dialog.dismiss()
                     self.dialog = None
                 self._refresh_ui()
+                # Cyberware-Stress-Feedback nach erfolgreichem Kauf
+                self._zeige_cyberware_feedback(controller, self.name)
             elif vermoegen_nachher != vermoegen_vorher:
                 # Vermögen hat sich geändert - Kauf war tatsächlich erfolgreich
                 Logger.debug(f"Android: Kauf von {self.name} war erfolgreich (Vermögen: {vermoegen_vorher} -> {vermoegen_nachher})")
@@ -303,6 +481,8 @@ class AusruestungItemRow(MDBoxLayout):
                     self.dialog.dismiss()
                     self.dialog = None
                 self._refresh_ui()
+                # Cyberware-Stress-Feedback auch in diesem Zweig
+                self._zeige_cyberware_feedback(controller, self.name)
             else:
                 # Kauf war nicht erfolgreich - prüfe ob es durch Android-Debouncing verhindert wurde
                 Logger.debug(f"Kauf fehlgeschlagen für {self.name} - Vermögen unverändert")
@@ -311,8 +491,8 @@ class AusruestungItemRow(MDBoxLayout):
                     self.dialog.dismiss()
                     self.dialog = None
                 self._refresh_ui()
-                # Nur echte Fehler anzeigen - nicht bei Android-Debouncing
-                # (erkennbar daran, dass success=False aber Vermögen unverändert)
+                # Cyberware: Zeige spezifische Fehlermeldung bei Stress-Überschreitung
+                self._zeige_cyberware_kauf_fehler(controller, self.name)
 
         except Exception as e:
             Logger.error(f"Fehler beim Verarbeiten des Kaufs: {str(e)}")
@@ -394,6 +574,137 @@ class AusruestungItemRow(MDBoxLayout):
             self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
         finally:
             self._dialog_processing = False
+
+    def _zeige_cyberware_feedback(self, controller, item_name):
+        """Zeigt nach erfolgreichem Cyberware-Kauf ein Stress-Info-Popup."""
+        try:
+            from functions.cyberware_funktionen import ist_cyberware_setting, berechne_nebenwirkungen
+            charakter = controller.charakter
+            if not ist_cyberware_setting(charakter.active_setting_name):
+                return
+
+            item = charakter.ausruestung.get(item_name)
+            if not item or getattr(item, 'kategorie', '') != 'Cyberware':
+                return
+
+            stress_aktuell = charakter.cyberware_stress_aktuell
+            stresslimit = charakter.cyberware_stresslimit
+            stress_max = charakter.cyberware_stress_maximum
+            nebenwirkungen = berechne_nebenwirkungen(charakter)
+
+            if nebenwirkungen.get('ueber_maximum'):
+                # Katastrophal: über hartem Maximum
+                self._zeige_cyberware_status_dialog(
+                    title="Stress-Maximum überschritten!",
+                    message=(f"Cyberware-Stress: {stress_aktuell} / {stress_max}\n\n"
+                             f"Das harte Maximum ist überschritten!\n"
+                             f"Das Implantat kann nicht stabil betrieben werden."),
+                    warnung=True
+                )
+            elif nebenwirkungen.get('hat_nebenwirkungen'):
+                # Warnung: über Stresslimit
+                ueber = nebenwirkungen.get('ueber_limit', 0)
+                self._zeige_cyberware_status_dialog(
+                    title="Stresslimit überschritten",
+                    message=(f"Cyberware-Stress: {stress_aktuell} / {stresslimit} (Max: {stress_max})\n\n"
+                             f"Stresslimit um {ueber} überschritten!\n"
+                             f"Eine Nebenwirkung aus der Tabelle ist fällig."),
+                    warnung=True
+                )
+            else:
+                # Info: alles im grünen Bereich
+                verbleibend = stresslimit - stress_aktuell
+                self._zeige_cyberware_status_dialog(
+                    title="Cyberware installiert",
+                    message=(f"Cyberware-Stress: {stress_aktuell} / {stresslimit} (Max: {stress_max})\n\n"
+                             f"Noch {verbleibend} Stress frei bis zum Limit."),
+                    warnung=False
+                )
+        except Exception as e:
+            Logger.error(f"Fehler beim Cyberware-Feedback: {e}")
+
+    def _zeige_cyberware_kauf_fehler(self, controller, item_name):
+        """Zeigt eine Fehlermeldung wenn der Cyberware-Kauf fehlgeschlagen ist."""
+        try:
+            from functions.cyberware_funktionen import ist_cyberware_setting
+            charakter = controller.charakter
+            if not ist_cyberware_setting(charakter.active_setting_name):
+                return
+
+            item = charakter.ausruestung.get(item_name)
+            if not item or getattr(item, 'kategorie', '') != 'Cyberware':
+                return
+
+            stress_aktuell = charakter.cyberware_stress_aktuell
+            stress_max = charakter.cyberware_stress_maximum
+            item_stress = getattr(item, 'stress', 0)
+            max_inst = getattr(item, 'max_installationen', -1)
+
+            # Prüfe welcher Grund vorliegt
+            if stress_aktuell + item_stress > stress_max:
+                self._zeige_cyberware_status_dialog(
+                    title="Installation nicht möglich",
+                    message=(f"Stress-Maximum würde überschritten!\n\n"
+                             f"Aktueller Stress: {stress_aktuell}\n"
+                             f"Implantat-Stress: {item_stress}\n"
+                             f"Stress-Maximum: {stress_max}\n\n"
+                             f"Das Implantat kann nicht installiert werden."),
+                    warnung=True
+                )
+            elif max_inst != -1:
+                from functions.cyberware_funktionen import _zaehle_installationen
+                aktuelle = _zaehle_installationen(charakter, item_name)
+                if aktuelle >= max_inst:
+                    self._zeige_cyberware_status_dialog(
+                        title="Installation nicht möglich",
+                        message=(f"Maximale Installationen erreicht!\n\n"
+                                 f"'{item_name}' kann maximal {max_inst}× installiert werden.\n"
+                                 f"Bereits installiert: {aktuelle}"),
+                        warnung=True
+                    )
+        except Exception as e:
+            Logger.error(f"Fehler beim Cyberware-Kauf-Fehler-Dialog: {e}")
+
+    def _zeige_cyberware_status_dialog(self, title, message, warnung=False):
+        """Zeigt einen Cyberware-Status-Dialog an."""
+        from kivymd.uix.dialog import (
+            MDDialog, MDDialogHeadlineText,
+            MDDialogContentContainer, MDDialogButtonContainer
+        )
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.boxlayout import MDBoxLayout
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing="12dp",
+            padding="12dp",
+            adaptive_height=True
+        )
+
+        label = MDLabel(
+            text=message,
+            theme_text_color="Error" if warnung else "Primary",
+            size_hint_y=None,
+            height=dp(120),
+            halign="left",
+            valign="top"
+        )
+        content.add_widget(label)
+
+        status_dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(content, orientation="vertical"),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Verstanden"),
+                    style="text",
+                    on_release=lambda x: status_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+        )
+        status_dialog.open()
 
     def show_error(self, message, title=ERROR_DIALOG_TITLE):
         """Zeigt einen Fehlerdialog an"""
@@ -705,6 +1016,22 @@ class AusruestungWidget(MDBoxLayout):
             is_ruestung = 'torso' in dir(ausruestung) and 'arme' in dir(ausruestung)
             is_schild = 'parade' in dir(ausruestung) and 'deckung' in dir(ausruestung)
             
+            # Cyberware-spezifische Details
+            is_cyberware = getattr(ausruestung, 'kategorie', '') == 'Cyberware'
+            if is_cyberware:
+                stress = getattr(ausruestung, 'stress', None)
+                if stress is not None:
+                    details.append(f"Stress: {stress}")
+                max_inst = getattr(ausruestung, 'max_installationen', -1)
+                if max_inst == -1:
+                    details.append("Max: unbegrenzt")
+                elif max_inst > 0:
+                    details.append(f"Max: {max_inst}")
+                unterkategorie = getattr(ausruestung, 'unterkategorie', '')
+                if unterkategorie:
+                    details.append(f"[{unterkategorie}]")
+                return " | ".join(details)
+
             # Spezifische Details je nach Typ
             if is_waffe:
                 typ = getattr(ausruestung, 'typ', '')

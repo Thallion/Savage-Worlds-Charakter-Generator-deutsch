@@ -630,15 +630,16 @@ class CharakterController(EventDispatcher):
     # ============================
     # Operationen auf Ausrüstung
     # ============================
-    def kaufen_ausruestung(self, item_name, anzahl=1, preis_pro_stueck=None):
+    def kaufen_ausruestung(self, item_name, anzahl=1, preis_pro_stueck=None, konfiguration=None):
         """
         Kauft einen Ausrüstungsgegenstand für den Charakter
-        
+
         Args:
             item_name (str): Name des Gegenstands
             anzahl (int): Anzahl der zu kaufenden Gegenstände
             preis_pro_stueck (float): Preis pro Stück (optional)
-            
+            konfiguration (dict): Optionale Cyberware-Konfiguration
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
@@ -662,7 +663,7 @@ class CharakterController(EventDispatcher):
                 Logger.warning(f"Ausrüstungsgegenstand '{item_name}' nicht gefunden.")
                 return False
 
-            success = self.charakter.kaufen(item, anzahl=anzahl, preis_pro_stueck=preis_pro_stueck)
+            success = self.charakter.kaufen(item, anzahl=anzahl, preis_pro_stueck=preis_pro_stueck, konfiguration=konfiguration)
             if success:
                 Logger.debug(f"Ausrüstung '{item.name}' gekauft.")
                 self.dispatch('on_charakter_updated')

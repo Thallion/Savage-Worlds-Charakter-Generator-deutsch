@@ -100,16 +100,14 @@ class Handicap(EventDispatcher):
 
     def to_setting_dict(self):
         """Speichert die Handicap-spezifischen Basisdaten für das Setting."""
-        data = super().to_setting_dict()
-        data.update({
+        return {
             'name': self.name,
             'stufe': self.stufe,
             'punkte': self.punkte,
             'beschreibung': self.beschreibung,
             'aktiv': self.aktiv,
             'custom': self.custom
-        })
-        return data           
+        }
 
     @staticmethod
     def parse_handicap_string(handicap_str):

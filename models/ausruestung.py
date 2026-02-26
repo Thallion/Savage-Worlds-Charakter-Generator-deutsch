@@ -19,7 +19,12 @@ class Ausruestung(EventDispatcher):
     aktiv = BooleanProperty(True)
     angelegt = BooleanProperty(False)
     custom = BooleanProperty(False)
-    
+
+    # Cyberware-spezifische Felder (nur für kategorie == "Cyberware" relevant)
+    stress = NumericProperty(0)
+    max_installationen = NumericProperty(-1)
+    unterkategorie = StringProperty("")
+    effekte = DictProperty({})
 
     def __init__(self, name, **kwargs):
         super().__init__(**kwargs)
@@ -34,6 +39,11 @@ class Ausruestung(EventDispatcher):
         self.aktiv = kwargs.get('aktiv', True)
         self.angelegt = kwargs.get('angelegt', False)
         self.custom = kwargs.get('custom', False)
+        # Cyberware-Felder
+        self.stress = kwargs.get('stress', 0)
+        self.max_installationen = kwargs.get('max_installationen', -1)
+        self.unterkategorie = kwargs.get('unterkategorie', '')
+        self.effekte = kwargs.get('effekte', {})
 
     def __str__(self):
         return f"{self.name} (Setting: {self.setting}, Kosten: {self.kosten}, Gewicht: {self.gewicht}, Menge: {self.menge})"
@@ -68,6 +78,10 @@ class Ausruestung(EventDispatcher):
             menge=data.get('menge', 0),
             ausgewaehlt=data.get('ausgewaehlt', False),
             aktiv=data.get('aktiv', True),
+            stress=data.get('stress', 0),
+            max_installationen=data.get('max_installationen', -1),
+            unterkategorie=data.get('unterkategorie', ''),
+            effekte=data.get('effekte', {}),
         )
 
     @classmethod
@@ -132,6 +146,10 @@ class Ausruestung(EventDispatcher):
                 kosten=kosten,
                 setting=data.get('setting', ''),
                 beschreibung=data.get('beschreibung', ''),
+                stress=data.get('stress', 0),
+                max_installationen=data.get('max_installationen', -1),
+                unterkategorie=data.get('unterkategorie', ''),
+                effekte=data.get('effekte', {}),
             )
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen von Ausruestung '{data.get('name', 'Unbekannt')}' aus Daten: {e}")

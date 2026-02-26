@@ -560,8 +560,6 @@ class TestDruidCharakterErstellung(unittest.TestCase):
 
         self.assertEqual(self.charakter.aufstiege_gesamt, 4,
                          "4 Aufstiege gesamt erwartet")
-        self.assertEqual(self.charakter.rang, "Fortgeschritten",
-                         f"Rang sollte 'Fortgeschritten' sein, ist '{self.charakter.rang}'")
         self.assertEqual(self.charakter.verbleibende_aufstiege, 4,
                          "4 verbleibende Aufstiege erwartet")
 
@@ -580,6 +578,8 @@ class TestDruidCharakterErstellung(unittest.TestCase):
                          f"4 Aufstiegs-Talente erwartet, {gewaehlt} gewaehlt")
         self.assertEqual(self.charakter.verbleibende_aufstiege, 0,
                          "Alle Aufstiege sollten verbraucht sein")
+        self.assertEqual(self.charakter.rang, "Fortgeschritten",
+                         f"Rang sollte 'Fortgeschritten' sein, ist '{self.charakter.rang}'")
 
     def test_09_abgeleitete_werte(self):
         """Abgeleitete Werte: Bewegungsweite 6, Parade 5, Robustheit 5."""

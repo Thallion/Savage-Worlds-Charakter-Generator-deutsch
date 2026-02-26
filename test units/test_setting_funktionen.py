@@ -136,7 +136,7 @@ class TestCustomElementManager(unittest.TestCase):
         """Test Laden von Settings aus nicht-existierendem Verzeichnis"""
         non_existent = self.temp_dir / "does_not_exist"
         
-        with patch('kivy.logger.Logger') as mock_logger:
+        with patch('functions.setting_funktionen.Logger') as mock_logger:
             manager = CustomElementManager(
                 self.mock_charakter,
                 settings_dir=non_existent
@@ -183,7 +183,7 @@ class TestCustomElementManager(unittest.TestCase):
             settings_dir=self.temp_dir
         )
         
-        with patch('kivy.logger.Logger') as mock_logger:
+        with patch('functions.setting_funktionen.Logger') as mock_logger:
             result = manager.set_active_setting('NonExistent')
             
             self.assertFalse(result)
@@ -223,7 +223,7 @@ class TestCustomElementManager(unittest.TestCase):
         
         new_setting = {"name": "Test", "test": True}
         
-        with patch('kivy.logger.Logger') as mock_logger:
+        with patch('functions.setting_funktionen.Logger') as mock_logger:
             result = manager.add_setting("TestSetting", new_setting, overwrite=False)
             
             self.assertFalse(result)
@@ -263,7 +263,7 @@ class TestCustomElementManager(unittest.TestCase):
             setting_name='TestSetting'
         )
         
-        with patch('kivy.logger.Logger') as mock_logger:
+        with patch('functions.setting_funktionen.Logger') as mock_logger:
             result = manager.remove_element_from_active_setting('talente', 'Non Existent')
             
             self.assertFalse(result)
@@ -277,7 +277,7 @@ class TestCustomElementManager(unittest.TestCase):
         )
         manager.active_setting = None
         
-        with patch('kivy.logger.Logger') as mock_logger:
+        with patch('functions.setting_funktionen.Logger') as mock_logger:
             result = manager.remove_element_from_active_setting('talente', 'Test')
             
             self.assertFalse(result)
@@ -340,7 +340,10 @@ class TestCreateDefaultSetting(unittest.TestCase):
         self.assertIn("settingregeln", result)
         
         # Prüfen ob fertigkeiten_daten als Liste serialisiert wurden
-        self.assertEqual(result["fertigkeiten_daten"]["Klettern"], ["Stärke", "Geschicklichkeit"])
+        # Klettern hat zwei verknüpfte Attribute - Reihenfolge prüfen wir per assertIn
+        klettern_attribute = result["fertigkeiten_daten"]["Klettern"]
+        self.assertIn("Stärke", klettern_attribute)
+        self.assertIn("Geschicklichkeit", klettern_attribute)
 
 
 class TestLoadElementsFromActiveSetting(unittest.TestCase):

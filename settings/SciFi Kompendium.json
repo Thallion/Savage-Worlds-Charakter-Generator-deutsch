@@ -27,7 +27,9 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Kybernetische Abstoßung"],
+                "auto_handicaps": [
+                    "Kybernetische Abstoßung"
+                ],
                 "spezielle_effekte": {
                     "amorph": true,
                     "regeneration_taeglich": true,
@@ -60,7 +62,9 @@
                 "bewegungsweite_bonus": 2,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Wuchtig"],
+                "auto_handicaps": [
+                    "Wuchtig"
+                ],
                 "spezielle_effekte": {
                     "stabiler_stand": true,
                     "wuchtig": true,
@@ -94,7 +98,9 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Langsam"],
+                "auto_handicaps": [
+                    "Langsam"
+                ],
                 "spezielle_effekte": {
                     "hartes_haupt": true,
                     "langsam": true,
@@ -130,7 +136,9 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Wuchtig"],
+                "auto_handicaps": [
+                    "Wuchtig"
+                ],
                 "spezielle_effekte": {
                     "robust": true,
                     "dumm": true,
@@ -198,7 +206,9 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Atmosphärische Abhängigkeit (schwer)"],
+                "auto_handicaps": [
+                    "Atmosphärische Abhängigkeit (schwer)"
+                ],
                 "spezielle_effekte": {},
                 "wahlmoeglichkeiten": {}
             }
@@ -230,7 +240,9 @@
                 "auto_talente": [
                     "Kampfreflexe"
                 ],
-                "auto_handicaps": ["Skrupellos (schwer)"],
+                "auto_handicaps": [
+                    "Skrupellos (schwer)"
+                ],
                 "spezielle_effekte": {
                     "schmerzresistenz": true,
                     "ausgebildet_fuer_krieg": true
@@ -266,7 +278,10 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Außenseiter (leicht)", "Trennungsangst"],
+                "auto_handicaps": [
+                    "Außenseiter (leicht)",
+                    "Trennungsangst"
+                ],
                 "spezielle_effekte": {
                     "gemeinschaft": true,
                     "kann_nicht_sprechen": true,
@@ -306,7 +321,11 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Außenseiter (leicht)", "Neugierig", "Trennungsangst"],
+                "auto_handicaps": [
+                    "Außenseiter (leicht)",
+                    "Neugierig",
+                    "Trennungsangst"
+                ],
                 "spezielle_effekte": {
                     "energiegestalt": true,
                     "blutlos": true,
@@ -371,7 +390,9 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Außenseiter (leicht)"],
+                "auto_handicaps": [
+                    "Außenseiter (leicht)"
+                ],
                 "spezielle_effekte": {
                     "gemeinschaft": true,
                     "huelle": true
@@ -405,7 +426,10 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["High Tech (schwer)", "Volksfeind (Insektoide)"],
+                "auto_handicaps": [
+                    "High Tech (schwer)",
+                    "Volksfeind (Insektoide)"
+                ],
                 "spezielle_effekte": {
                     "winzling_sehr_klein": true,
                     "max_staerke_w6": true
@@ -437,7 +461,10 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Pazifist (schwer)", "Programmiert (schwer)"],
+                "auto_handicaps": [
+                    "Pazifist (schwer)",
+                    "Programmiert (schwer)"
+                ],
                 "spezielle_effekte": {
                     "roboter": true,
                     "keine_natuerliche_heilung": true
@@ -468,7 +495,9 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Programmiert (schwer)"],
+                "auto_handicaps": [
+                    "Programmiert (schwer)"
+                ],
                 "spezielle_effekte": {
                     "immun_krankheiten_gifte": true,
                     "keine_natuerliche_heilung": true,
@@ -501,7 +530,10 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Volksfeind (SL-Wahl)", "Dünnhäutig"],
+                "auto_handicaps": [
+                    "Volksfeind (SL-Wahl)",
+                    "Dünnhäutig"
+                ],
                 "spezielle_effekte": {
                     "zusaetzliche_aktion": true,
                     "zusaetzliche_gliedmassen": true,
@@ -533,7 +565,10 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Außenseiter (leicht)", "Kybernetische Abstoßung"],
+                "auto_handicaps": [
+                    "Außenseiter (leicht)",
+                    "Kybernetische Abstoßung"
+                ],
                 "spezielle_effekte": {
                     "gestaltwandeln": true,
                     "keine_lebenswichtigen_organe": true,
@@ -2864,6 +2899,10 @@
             "rang": "A",
             "voraussetzungen": [],
             "beschreibung": "Stresslimit und Maximum für Cyberware erhöht sich um +2.",
+            "cyberware_effekte": {
+                "stresslimit_bonus": 2,
+                "stress_maximum_bonus": 2
+            },
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -2875,6 +2914,10 @@
                 "Kybernetische Toleranz"
             ],
             "beschreibung": "Stresslimit und Maximum um weitere +2 erhöht (insgesamt +4).",
+            "cyberware_effekte": {
+                "stresslimit_bonus": 2,
+                "stress_maximum_bonus": 2
+            },
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -2884,6 +2927,11 @@
             "rang": "A",
             "voraussetzungen": [],
             "beschreibung": "Stresslimit/Maximum +4 (kumulativ). Erhält Implantate im Wert von ₡20.000. Keine natürliche Heilung. Wunden: niedrigere von Heilen/Reparieren. Muss zusätzliches schweres Handicap nehmen oder permanente Cyberware-Nebenwirkung.",
+            "cyberware_effekte": {
+                "stresslimit_bonus": 4,
+                "stress_maximum_bonus": 4,
+                "cyberware_budget": 20000
+            },
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -4026,6 +4074,9 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Stresslimit für Cyberware sinkt um 2.",
+            "cyberware_effekte": {
+                "stresslimit_malus": 2
+            },
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -4035,6 +4086,9 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Chirurgen -2 auf Proben bei Installation von Cyberware.",
+            "cyberware_effekte": {
+                "installations_malus": 2
+            },
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -4044,6 +4098,10 @@
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "Erhält Cyberware im Wert von ₡10.000, aber permanente Nebenwirkung aus Tabelle.",
+            "cyberware_effekte": {
+                "cyberware_budget": 10000,
+                "permanente_nebenwirkung": true
+            },
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -5216,140 +5274,3102 @@
             "beschreibung": "Energiegeladenes Gerät zur Zeitmanipulation.",
             "aktiv": true
         },
+        "Cyberware: Amphibisch": {
+            "name": "Cyberware: Amphibisch",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Kiemen und Schwimmhäute. Kann in sauerstoffhaltiger Flüssigkeit nicht ertrinken; schwimmt mit voller Bewegungsweite.",
+            "effekte": {
+                "amphibisch": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Attraktiv": {
+            "name": "Cyberware: Attraktiv",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 2,
+            "setting": "scifi",
+            "beschreibung": "+1 Bonus auf Auftreten und Überreden. Kann zweimal erworben werden für max. +2 (kumulativ mit Talent Attraktiv, Obergrenze +2).",
+            "effekte": {
+                "fertigkeit_bonus": {
+                    "fertigkeiten": [
+                        "Auftreten",
+                        "Überreden"
+                    ],
+                    "bonus": 1,
+                    "max_bonus": 2
+                }
+            },
+            "aktiv": true
+        },
         "Cyberware: Attributerhöhung": {
             "name": "Cyberware: Attributerhöhung",
             "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
             "gewicht": 0,
             "kosten": 5000,
+            "stress": 2,
+            "max_installationen": -1,
             "setting": "scifi",
-            "beschreibung": "Stress 2 (U). Erhöht ein Attribut um einen Würfeltyp. Über Maximum: +2 Stress pro Stufe.",
+            "beschreibung": "Erhöht ein Attribut um einen Würfeltyp. Über dem Charakter-Maximum kostet jede Stufe +2 zusätzlichen Stress.",
+            "effekte": {
+                "attribut_erhoehung": true
+            },
             "aktiv": true
         },
         "Cyberware: Datenbuchse": {
             "name": "Cyberware: Datenbuchse",
             "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
             "gewicht": 0,
             "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
             "setting": "scifi",
-            "beschreibung": "Stress 1 (1). Direkte Verbindung zu Geräten. Wiederholung bei misslungener Elektronik-/Hackenprobe.",
+            "beschreibung": "Direkte Verbindung zu Geräten als begrenzte freie Aktion. Wiederholung bei misslungener Elektronik-/Hacken-Probe.",
+            "effekte": {
+                "wiederholungswurf": {
+                    "fertigkeiten": [
+                        "Elektronik",
+                        "Hacken"
+                    ]
+                }
+            },
+            "aktiv": true
+        },
+        "Cyberware: Ersatzgliedmaße": {
+            "name": "Cyberware: Ersatzgliedmaße",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 2000,
+            "stress": 1,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
+            "effekte": {
+                "ersatzgliedmasse": true,
+                "bonus_stress_kapazitaet": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Ersatzgliedmaße (geklont)": {
+            "name": "Cyberware: Ersatzgliedmaße (geklont)",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 0,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Geklonte Gliedmaße aus dem Wachstumstank. Teurer als elektronische Prothese, aber kein Stress.",
+            "effekte": {
+                "ersatzgliedmasse": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Ersatzorgane": {
+            "name": "Cyberware: Ersatzorgane",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Ersetzt oder verstärkt durch Trauma oder Krankheit beschädigte Organe. Heilt automatisch permanente Verletzungen oder Handicaps wie Einäugig.",
+            "effekte": {
+                "ersatzorgane": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Fertigkeitsbonus": {
+            "name": "Cyberware: Fertigkeitsbonus",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "+1 Bonus auf eine beliebige Fertigkeit. Kann zweimal pro Fertigkeit erworben werden (max. +2). Mehrere verschiedene Fertigkeiten möglich.",
+            "effekte": {
+                "fertigkeit_bonus": {
+                    "fertigkeit": "waehlbar",
+                    "bonus": 1,
+                    "max_bonus": 2
+                }
+            },
+            "aktiv": true
+        },
+        "Cyberware: Fertigkeitschip": {
+            "name": "Cyberware: Fertigkeitschip",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 15000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Implantierter Chip gewährt W6 in einer beliebigen Fertigkeit. Verschiedene Fertigkeiten als separate Chips erwerbbar, in einer Aktion austauschbar.",
+            "effekte": {
+                "fertigkeitschip": true,
+                "fertigkeit_wert": 6
+            },
+            "aktiv": true
+        },
+        "Cyberware: Gesichtsveränderung": {
+            "name": "Cyberware: Gesichtsveränderung",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 15000,
+            "stress": 3,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Synthetischer Ersatz von Gesichtsmuskeln, Knochen, Stimmbändern. Ermöglicht Nachahmung einer bestimmten Person (mit Foto/Audio). Jede Veränderung dauert 1 Minute, Verstandesprobe bei Imitation.",
+            "effekte": {
+                "gesichtsveraenderung": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Größe": {
+            "name": "Cyberware: Größe",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 3,
+            "setting": "scifi",
+            "beschreibung": "Komplette Knochen-/Körperumwandlung erhöht Größe (und Robustheit) um +1. Maximum Größe +3.",
+            "effekte": {
+                "groesse_bonus": 1,
+                "robustheit_bonus": 1,
+                "max_groesse": 3
+            },
+            "aktiv": true
+        },
+        "Cyberware: Herausnehmbares Auge": {
+            "name": "Cyberware: Herausnehmbares Auge",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Cyborg-Auge (mit allen Sichtverbesserungen) als begrenzte freie Aktion entfernbar und werfbar. Sehen/Hören/Aufzeichnen bis 10 Stunden, Reichweite 1,6 km.",
+            "effekte": {
+                "herausnehmbares_auge": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Kommunikation": {
+            "name": "Cyberware: Kommunikation",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 1000,
+            "stress": 0,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Integriertes Kommunikationspaket. Verbindung zu anderen Geräten im Radius von 32 km.",
+            "effekte": {
+                "kommunikation": true,
+                "reichweite_km": 32
+            },
+            "aktiv": true
+        },
+        "Cyberware: Kosmetische Anpassungen": {
+            "name": "Cyberware: Kosmetische Anpassungen",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Farbige Haut, metallisches Haar oder andere oberflächliche Veränderungen (keine Spielfunktion). Zeigt Reichtum/Stil.",
+            "effekte": {
+                "kosmetisch": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Maultier": {
+            "name": "Cyberware: Maultier",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Verstärktes Skelett. Stärke gilt als einen Würfeltyp höher für Traglast und Mindeststärke. Kumulativ mit Kräftig und Soldat.",
+            "effekte": {
+                "traglast_staerke_bonus": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Scanner": {
+            "name": "Cyberware: Scanner",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 1000,
+            "stress": 1,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Erkennt Zusammensetzung bekannter Materie oder Energie bis 50 Meter. Ziel muss nicht sichtbar sein. Bestimmte Materialien/Energien können den Scanner stören.",
+            "effekte": {
+                "scanner": true,
+                "reichweite_m": 50
+            },
             "aktiv": true
         },
         "Cyberware: Verbesserte Sicht": {
             "name": "Cyberware: Verbesserte Sicht",
             "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
             "gewicht": 0,
             "kosten": 10000,
+            "stress": 1,
+            "max_installationen": 1,
             "setting": "scifi",
-            "beschreibung": "Stress 1 (1). 50× Vergrößerung, hebt 4 Punkte Beleuchtungsabzüge auf, +2 Wahrnehmung.",
+            "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
+            "effekte": {
+                "beleuchtung_ignorieren": 4,
+                "wahrnehmung_bonus": 2
+            },
             "aktiv": true
         },
         "Cyberware: Verbessertes Gehör": {
             "name": "Cyberware: Verbessertes Gehör",
             "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
             "gewicht": 0,
             "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
             "setting": "scifi",
-            "beschreibung": "Stress 1 (1). Flüstern bis 200m, +2 gehörbasierte Wahrnehmung.",
+            "beschreibung": "Ohren können Flüstern bis 200 Meter wahrnehmen. +2 auf gehörbasierte Wahrnehmungsproben.",
+            "effekte": {
+                "gehoer_bonus": 2,
+                "reichweite_m": 200
+            },
+            "aktiv": true
+        },
+        "Cyberware: Verborgenes Fach": {
+            "name": "Cyberware: Verborgenes Fach",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 2000,
+            "stress": 1,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
+            "effekte": {
+                "verborgenes_fach": true,
+                "kapazitaet_kg": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Zusätzliche Gliedmaßen": {
+            "name": "Cyberware: Zusätzliche Gliedmaßen",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Körper",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 2,
+            "setting": "scifi",
+            "beschreibung": "Zusätzliches Armpaar (inkl. zweiter Haupthand). Kann andauernde Aktionen durchführen. Kann zwei verschiedene Zweihandwaffen führen. +1 Mehrfachaktionsbonus im Nahkampf, +1 Athletik (Klettern, Ringen).",
+            "effekte": {
+                "zusaetzliche_gliedmassen": true,
+                "mehrfachaktion_nahkampf_bonus": 1,
+                "athletik_bonus": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Abgehärtete Sinne": {
+            "name": "Cyberware: Abgehärtete Sinne",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Blitzschutz, Schalldämpfung, neurale Sensorikinhibitoren. +4 auf Konstitutionsproben zur Erholung von Angeschlagen.",
+            "effekte": {
+                "erholung_bonus": {
+                    "typ": "angeschlagen",
+                    "bonus": 4,
+                    "attribut": "Konstitution"
+                }
+            },
+            "aktiv": true
+        },
+        "Cyberware: Adrenalindrüse": {
+            "name": "Cyberware: Adrenalindrüse",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
+            "effekte": {
+                "erholung_bonus": {
+                    "typ": "angeschlagen_benommen",
+                    "bonus": 2
+                }
+            },
+            "aktiv": true
+        },
+        "Cyberware: Autodoc": {
+            "name": "Cyberware: Autodoc",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 10000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Nanobots oder starke Stimulanzien gewähren einmal pro Tag eine natürliche Heilungsprobe. Entfernt alle Abzüge gegen Verbluten.",
+            "effekte": {
+                "natuerliche_heilung_pro_tag": 1,
+                "verbluten_abzug_entfernt": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Bedrohungseinschätzer": {
+            "name": "Cyberware: Bedrohungseinschätzer",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Mikrosensoren und verbesserte neurale Sequenzer gewähren das Talent Sechster Sinn.",
+            "effekte": {
+                "talent_gewaehrt": "Sechster Sinn"
+            },
+            "aktiv": true
+        },
+        "Cyberware: EMP-Abschirmung": {
+            "name": "Cyberware: EMP-Abschirmung",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 0,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Cyberware durch Speziallegierungen, Gewebe, Schnellneustarts oder andere Technik geschützt. Ignoriert 2 Punkte des -4-Abzugs auf Benutzen/Reparieren nach EMP-Angriff.",
+            "effekte": {
+                "emp_schutz": 2
+            },
+            "aktiv": true
+        },
+        "Cyberware: Kampfsicht": {
+            "name": "Cyberware: Kampfsicht",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 2,
+            "setting": "scifi",
+            "beschreibung": "Verbessertes peripheres Sehen und Bedrohungsanalyse. Entfernt 1 Punkt Mehrfachaktionsabzug (oder bis zu 2 bei zweimaliger Installation).",
+            "effekte": {
+                "mehrfachaktion_ignorieren": 1
+            },
             "aktiv": true
         },
         "Cyberware: Panzerung": {
             "name": "Cyberware: Panzerung",
             "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
             "gewicht": 0,
             "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 3,
             "setting": "scifi",
-            "beschreibung": "Stress 1 (3). Subdermale Platten, +2 Panzerung (natürlich, kumulativ bis +10).",
+            "beschreibung": "Subdermale Platten oder Fasern unter der Haut. +2 Panzerung am gesamten Körper. Zählt als natürliche Panzerung, kumulativ mit getragener Panzerung bis +10.",
+            "effekte": {
+                "panzerung_bonus": 2,
+                "natuerliche_panzerung": true,
+                "max_kumulativ": 10
+            },
             "aktiv": true
         },
-        "Cyberware: Schmerzhemmer": {
-            "name": "Cyberware: Schmerzhemmer",
+        "Cyberware: Redundante Organe": {
+            "name": "Cyberware: Redundante Organe",
             "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
             "gewicht": 0,
             "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
             "setting": "scifi",
-            "beschreibung": "Stress 2 (3). Ignoriert 1 Punkt Wund-/Erschöpfungsabzüge pro Installation.",
-            "aktiv": true
-        },
-        "Cyberware: Klauen": {
-            "name": "Cyberware: Klauen",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 5000,
-            "setting": "scifi",
-            "beschreibung": "Stress 2 (2). Stä+W4. Zweites Mal: Stä+W6, PB 2. Freie begrenzte Aktion ein-/ausfahren.",
-            "aktiv": true
-        },
-        "Cyberware: Mächtiger Schlag": {
-            "name": "Cyberware: Mächtiger Schlag",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 5000,
-            "setting": "scifi",
-            "beschreibung": "Stress 2 (1). +4 Schaden unbewaffnet/Nahkampf. Bei Wunde: W6'' Rückstoß + zu Boden.",
-            "aktiv": true
-        },
-        "Cyberware: Zusätzliche Aktion": {
-            "name": "Cyberware: Zusätzliche Aktion",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 10000,
-            "setting": "scifi",
-            "beschreibung": "Stress 5 (1). Ignoriert 2 Punkte Mehrfachaktionsabzüge.",
-            "aktiv": true
-        },
-        "Cyberware: Beinverbesserung": {
-            "name": "Cyberware: Beinverbesserung",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 10000,
-            "setting": "scifi",
-            "beschreibung": "Stress 2 (U). +2 BW, +1 Sprintwürfel.",
-            "aktiv": true
-        },
-        "Cyberware: Wandkrabbler": {
-            "name": "Cyberware: Wandkrabbler",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 3000,
-            "setting": "scifi",
-            "beschreibung": "Stress 2 (1). Volle BW horizontal, halbe BW vertikal.",
-            "aktiv": true
-        },
-        "Cyberware: Zielsystem": {
-            "name": "Cyberware: Zielsystem",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 5000,
-            "setting": "scifi",
-            "beschreibung": "Stress 1 (1). Reduziert Abzüge für Angesagte Ziele, Deckung, Reichweite, Größe, Geschwindigkeit um 2.",
-            "aktiv": true
-        },
-        "Cyberware: Autodoc (ES II)": {
-            "name": "Cyberware: Autodoc (ES II)",
-            "kategorie": "Cyberware",
-            "gewicht": 0,
-            "kosten": 10000,
-            "setting": "scifi",
-            "beschreibung": "Stress 2 (1). Einmal pro Tag natürliche Heilung. Keine Abzüge gegen Verbluten.",
+            "beschreibung": "Mehrfachsysteme managen Organschäden oder Blutverlust. Angesagte Angriffe auf Organe/Kopf verursachen keinen zusätzlichen Schaden.",
+            "effekte": {
+                "angesagte_angriffe_ignorieren": true
+            },
             "aktiv": true
         },
         "Cyberware: Robustheit": {
             "name": "Cyberware: Robustheit",
             "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
             "gewicht": 0,
             "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 3,
             "setting": "scifi",
-            "beschreibung": "Stress 1 (3). +1 Robustheit pro Installation.",
+            "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
+            "effekte": {
+                "robustheit_bonus": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Schmerzhemmer": {
+            "name": "Cyberware: Schmerzhemmer",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 3,
+            "setting": "scifi",
+            "beschreibung": "Ignoriert 1 Punkt Abzüge durch Erschöpfung oder Wunden pro Installation.",
+            "effekte": {
+                "wund_ignorieren": 1
+            },
             "aktiv": true
         },
         "Cyberware: Toxinfilter": {
             "name": "Cyberware: Toxinfilter",
             "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
             "gewicht": 0,
             "kosten": 3000,
+            "stress": 1,
+            "max_installationen": 1,
             "setting": "scifi",
-            "beschreibung": "Stress 1 (1). +4 gegen Krankheiten, Gifte, gefährliche Atmosphäre.",
+            "beschreibung": "Mikrofaserfilter in Ohren, Nase, Hals, Lunge entfernen Giftstoffe. +4 gegen Krankheiten, Gifte (inkl. tödliche Gase) und dünne/gefährliche Atmosphäre.",
+            "effekte": {
+                "gift_resistenz": 4
+            },
             "aktiv": true
+        },
+        "Cyberware: Zäh": {
+            "name": "Cyberware: Zäh",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Defensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Charakter erleidet keine Wunde wenn zweimal hintereinander Angeschlagen.",
+            "effekte": {
+                "zaeh": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Außenlaststation": {
+            "name": "Cyberware: Außenlaststation",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 10000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Ausfahrbare Halterung für Fahrzeugwaffen (Mod 1 oder niedriger). Installierte Waffe kann mit erfolgreicher Reparieren-Probe innerhalb 1 Stunde getauscht werden.",
+            "effekte": {
+                "aussenlaststation": true,
+                "max_mod": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Integrierte Ausrüstung": {
+            "name": "Cyberware: Integrierte Ausrüstung",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Bis zu 5 kg Ausrüstung im Körper eingebaut (SL-Genehmigung). Kann nicht fallen gelassen oder entwaffnet werden. Waffen können als begrenzte freie Aktion gezogen/weggesteckt werden.",
+            "effekte": {
+                "integrierte_ausruestung": true,
+                "kapazitaet_kg": 5
+            },
+            "aktiv": true
+        },
+        "Cyberware: Kampftalent": {
+            "name": "Cyberware: Kampftalent",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Gewährt ein Kampftalent des Rangs oder niedriger. Ignoriert alle Voraussetzungen außer anderen Talenten. Kosten = ₡5.000 × Rang. Nicht kumulativ mit natürlichem/künstlichem Erwerb desselben Talents.",
+            "effekte": {
+                "kampftalent_gewaehrt": true,
+                "kosten_pro_rang": 5000
+            },
+            "aktiv": true
+        },
+        "Cyberware: Klauen": {
+            "name": "Cyberware: Klauen",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 2,
+            "setting": "scifi",
+            "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
+            "effekte": {
+                "schaden": "Stä+W4",
+                "schaden_stufe2": "Stä+W6",
+                "pb": 2
+            },
+            "aktiv": true
+        },
+        "Cyberware: Mächtiger Schlag": {
+            "name": "Cyberware: Mächtiger Schlag",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Armverbesserung mit erhöhter Beschleunigung und Kraft. +4 Schaden auf unbewaffnete Angriffe oder Nahkampf-/Naturwaffen. Bei mindestens 1 Wunde: W6\" Rückstoß und zu Boden (Athletik -2 zum Widerstehen).",
+            "effekte": {
+                "schaden_bonus": 4,
+                "rueckstoss": true
+            },
+            "aktiv": true
+        },
+        "Cyberware: Reichweite": {
+            "name": "Cyberware: Reichweite",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 2500,
+            "stress": 1,
+            "max_installationen": 3,
+            "setting": "scifi",
+            "beschreibung": "Gliedmaßen sind ausfahrbar mit zusätzlich 1\" (2 Meter) Reichweite pro Installation.",
+            "effekte": {
+                "reichweite_bonus": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Zielsystem": {
+            "name": "Cyberware: Zielsystem",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 5000,
+            "stress": 1,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Integriertes Ziel-/Verfolgungssystem reduziert Abzüge für Angesagte Ziele, Deckung, Reichweite, Größe und Geschwindigkeit um 2 Punkte beim direkten Schießen.",
+            "effekte": {
+                "abzug_reduktion": 2,
+                "typen": [
+                    "angesagte_ziele",
+                    "deckung",
+                    "reichweite",
+                    "groesse",
+                    "geschwindigkeit"
+                ]
+            },
+            "aktiv": true
+        },
+        "Cyberware: Zusätzliche Aktion": {
+            "name": "Cyberware: Zusätzliche Aktion",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Offensiv",
+            "gewicht": 0,
+            "kosten": 10000,
+            "stress": 5,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Verbesserte Nervenbahnen, optimierte Nerven oder erhöhtes Adrenalin ermöglichen es, 2 Punkte Mehrfachaktionsabzüge pro Runde zu ignorieren.",
+            "effekte": {
+                "mehrfachaktion_ignorieren": 2
+            },
+            "aktiv": true
+        },
+        "Cyberware: Beinverbesserung": {
+            "name": "Cyberware: Beinverbesserung",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Fortbewegung",
+            "gewicht": 0,
+            "kosten": 10000,
+            "stress": 2,
+            "max_installationen": -1,
+            "setting": "scifi",
+            "beschreibung": "Hydraulisches Sprinten, einfahrbare Skates oder Knieservos. +2 Bewegungsweite und Sprintwürfel um einen Würfeltyp erhöht.",
+            "effekte": {
+                "bewegungsweite_bonus": 2,
+                "sprint_wuerfel_bonus": 1
+            },
+            "aktiv": true
+        },
+        "Cyberware: Springer": {
+            "name": "Cyberware: Springer",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Fortbewegung",
+            "gewicht": 0,
+            "kosten": 10000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Kann 8\" (16 Meter) horizontal oder 4\" (8 Meter) vertikal springen. +2 Schaden bei Rücksichtslosem Angriff mit Sprung.",
+            "effekte": {
+                "springen_horizontal": 8,
+                "springen_vertikal": 4,
+                "sprung_schaden_bonus": 2
+            },
+            "aktiv": true
+        },
+        "Cyberware: Wandkrabbler": {
+            "name": "Cyberware: Wandkrabbler",
+            "kategorie": "Cyberware",
+            "unterkategorie": "Fortbewegung",
+            "gewicht": 0,
+            "kosten": 3000,
+            "stress": 2,
+            "max_installationen": 1,
+            "setting": "scifi",
+            "beschreibung": "Anti-Schwerkraft-Pads, Mikro-Haken, Saugnäpfe oder Materieumwandler. Volle Bewegungsweite horizontal, halbe vertikal.",
+            "effekte": {
+                "wandklettern": true
+            },
+            "aktiv": true
+        },
+        "Axt, Handbeil": {
+            "name": "Axt, Handbeil",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Handliche Axt für allgemeine Zwecke",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Axt, Kriegsbeil": {
+            "name": "Axt, Kriegsbeil",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Speziell für den Kampf konzipierte Axt",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Axt, Zweihandaxt": {
+            "name": "Axt, Zweihandaxt",
+            "kategorie": "Waffe",
+            "gewicht": 3.5,
+            "kosten": 400,
+            "setting": "mittelalterlich",
+            "beschreibung": "PB 2, Parade -1, Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Dolch/Messer": {
+            "name": "Dolch/Messer",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 25,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kleine Klinge für vielseitige Anwendung",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Hellebarde": {
+            "name": "Hellebarde",
+            "kategorie": "Waffe",
+            "gewicht": 3,
+            "kosten": 250,
+            "setting": "mittelalterlich",
+            "beschreibung": "Reichweite 1, Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Kampfstab": {
+            "name": "Kampfstab",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 10,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1, Reichweite 1, Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Katana": {
+            "name": "Katana",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 1000,
+            "setting": "mittelalterlich",
+            "beschreibung": "Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6+1",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Keule, Leicht": {
+            "name": "Keule, Leicht",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 25,
+            "setting": "mittelalterlich",
+            "beschreibung": "Für arme Schlucker und Kriminelle",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Keule, Schwer": {
+            "name": "Keule, Schwer",
+            "kategorie": "Waffe",
+            "gewicht": 2.5,
+            "kosten": 50,
+            "setting": "mittelalterlich",
+            "beschreibung": "Für arme Schlucker und Kriminelle",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Kriegshammer": {
+            "name": "Kriegshammer",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 250,
+            "setting": "mittelalterlich",
+            "beschreibung": "Mit Schlagdorn, PB 1",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
+            }
+        },
+        "Lanze": {
+            "name": "Lanze",
+            "kategorie": "Waffe",
+            "gewicht": 3,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "PB 2 bei Sturmangriff, Reichweite 2, nur einsetzbar im berittenen Kampf",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Morgenstern": {
+            "name": "Morgenstern",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Ignoriert Boni durch Schilde",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Rapier": {
+            "name": "Rapier",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 150,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schwert, Kurzschwert": {
+            "name": "Schwert, Kurzschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Beinhaltet Reitersäbel",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schwert, Langschwert": {
+            "name": "Schwert, Langschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Standardschwerter und Krummschwerter",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schwert, Zweihandschwert": {
+            "name": "Schwert, Zweihandschwert",
+            "kategorie": "Waffe",
+            "gewicht": 3,
+            "kosten": 400,
+            "setting": "mittelalterlich",
+            "beschreibung": "Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Speer": {
+            "name": "Speer",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Reichweite 1, Parade +1 bei Verwendung mit zwei Händen",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Spieß": {
+            "name": "Spieß",
+            "kategorie": "Waffe",
+            "gewicht": 9,
+            "kosten": 400,
+            "setting": "mittelalterlich",
+            "beschreibung": "Reichweite 2, Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Streitkolben": {
+            "name": "Streitkolben",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Metallkeule für Kriegszwecke",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Zweihandhammer": {
+            "name": "Zweihandhammer",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 400,
+            "setting": "mittelalterlich",
+            "beschreibung": "Zweihändig, +2 Schaden gegen Gegenstände",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Bangstick": {
+            "name": "Bangstick",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 5,
+            "setting": "modern",
+            "beschreibung": "Eine Schrotpatrone an einem Stock, der im Nahkampf verwendet wird; muss mit einer neuen Patrone nachgeladen werden (eine Aktion)",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "3W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Bajonett": {
+            "name": "Bajonett",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 25,
+            "setting": "modern",
+            "beschreibung": "Stä+W6 und Parade +1 wenn an einem Gewehr befestigt, Reichweite 1, Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Kettensäge": {
+            "name": "Kettensäge",
+            "kategorie": "Waffe",
+            "gewicht": 10,
+            "kosten": 200,
+            "setting": "modern",
+            "beschreibung": "Kritischer Fehlschlag trifft den Angreifer",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W6+4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schlagring": {
+            "name": "Schlagring",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 20,
+            "setting": "modern",
+            "beschreibung": "Zählt nicht als Waffe für die Regel Unbewaffneter Verteidiger",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schlagstock": {
+            "name": "Schlagstock",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "modern",
+            "beschreibung": "Oft die Waffe von Gesetzeshütern",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Springmesser": {
+            "name": "Springmesser",
+            "kategorie": "Waffe",
+            "gewicht": 0.25,
+            "kosten": 10,
+            "setting": "modern",
+            "beschreibung": "-2 auf Wahrnehmungsprobe wenn versteckt",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Überlebensmesser": {
+            "name": "Überlebensmesser",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 50,
+            "setting": "modern",
+            "beschreibung": "Einfache Werkzeuge im Griff, +1 auf Überlebensproben",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Molekularmesser": {
+            "name": "Molekularmesser",
+            "kategorie": "Waffe",
+            "gewicht": 0.25,
+            "kosten": 250,
+            "setting": "futuristisch",
+            "beschreibung": "PB 2, kann nicht geworfen werden",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4+2",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Molekularschwert": {
+            "name": "Molekularschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 500,
+            "setting": "futuristisch",
+            "beschreibung": "PB 4",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W8+2",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 4
+            }
+        },
+        "Laserschwert": {
+            "name": "Laserschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 1000,
+            "setting": "futuristisch",
+            "beschreibung": "PB 12",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W6+8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 12
+            }
+        },
+        "Armbrust handgespannt": {
+            "name": "Armbrust handgespannt",
+            "kategorie": "Waffe",
+            "gewicht": 2.5,
+            "kosten": 250,
+            "setting": "mittelalterlich",
+            "beschreibung": "Handgespannt",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Armbrust, Schwer": {
+            "name": "Armbrust, Schwer",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 400,
+            "setting": "mittelalterlich",
+            "beschreibung": "Wird mit Kurbel gespannt. Nachladen 2",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Wurfaxt": {
+            "name": "Wurfaxt",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Für Wurfangriffe konzipierte Axt",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "3/6/12",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Bogen": {
+            "name": "Bogen",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 250,
+            "setting": "mittelalterlich",
+            "beschreibung": "Standard Jagd- und Kriegsbogen",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Langbogen": {
+            "name": "Langbogen",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Längerer und stärkerer Bogen als der normale Bogen",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
+            }
+        },
+        "Netz beschwert": {
+            "name": "Netz beschwert",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 50,
+            "setting": "mittelalterlich",
+            "beschreibung": "Bei einem erfolgreichen Treffer ist das Ziel Festgehalten. Das Netz hat Härte 10 und ist nur durch Schnittangriffe zu zerstören",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "-",
+                "Reichweite": "3/6/12",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schleuder": {
+            "name": "Schleuder",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "mittelalterlich",
+            "beschreibung": "Verwendet Athletik (Werfen)",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "4/8/16",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Wurfspeer": {
+            "name": "Wurfspeer",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Als Wurf- oder Nahkampfwaffe verwendbar",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "3/6/12",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Kompositbogen": {
+            "name": "Kompositbogen",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 200,
+            "setting": "modern",
+            "beschreibung": "Moderner Bogen aus verschiedenen Materialien",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
+            }
+        },
+        "Steinschlosspistole": {
+            "name": "Steinschlosspistole",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 150,
+            "setting": "mittelalterlich",
+            "beschreibung": "Nachladen 3",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6+1",
+                "Reichweite": "5/10/20",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Brown Bess": {
+            "name": "Brown Bess",
+            "kategorie": "Waffe",
+            "gewicht": 7.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Nachladen 3",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Donnerbüchse": {
+            "name": "Donnerbüchse",
+            "kategorie": "Waffe",
+            "gewicht": 6,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Regeln wie Schrotflinte, Nachladen 3",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "1-3W6",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Kentucky Rifle": {
+            "name": "Kentucky Rifle",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Nachladen 4. Der gezogene Lauf erfordert vier Aktionen zum Nachladen statt der üblichen drei",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
+            }
+        },
+        "Springfield Model 1861": {
+            "name": "Springfield Model 1861",
+            "kategorie": "Waffe",
+            "gewicht": 5.5,
+            "kosten": 250,
+            "setting": "mittelalterlich",
+            "beschreibung": "Nachladen 3",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Derringer": {
+            "name": "Derringer",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 100,
+            "setting": "modern",
+            "beschreibung": "-2 auf Wahrnehmungsprobe wenn verborgen",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W4",
+                "Reichweite": "3/6/12",
+                "FR": 1,
+                "Schuss": 2,
+                "PB": "-"
+            }
+        },
+        "Desert Eagle": {
+            "name": "Desert Eagle",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 300,
+            "setting": "modern",
+            "beschreibung": "Schwere halbautomatische Pistole",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": 7,
+                "PB": 2
+            }
+        },
+        "Pistole": {
+            "name": "Pistole",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 250,
+            "setting": "modern",
+            "beschreibung": "Standard-Handfeuerwaffe",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": 50,
+                "PB": 2
+            }
+        },
+        "MP5": {
+            "name": "MP5",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 300,
+            "setting": "modern",
+            "beschreibung": "Weit verbreitete Maschinenpistole",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "12/24/48",
+                "FR": 3,
+                "Schuss": 30,
+                "PB": 1
+            }
+        },
+        "Tommy Gun": {
+            "name": "Tommy Gun",
+            "kategorie": "Waffe",
+            "gewicht": 6.5,
+            "kosten": 350,
+            "setting": "modern",
+            "beschreibung": "Kann auch eine Trommel mit 50 Schuss verwenden (+1 kg, $50)",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W6+1",
+                "Reichweite": "12/24/48",
+                "FR": 3,
+                "Schuss": 20,
+                "PB": 1
+            }
+        },
+        "Maschinenpistole": {
+            "name": "Maschinenpistole",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 500,
+            "setting": "modern",
+            "beschreibung": "Vollautomatische Waffe für kurze Entfernungen",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "15/30/60",
+                "FR": 4,
+                "Schuss": 100,
+                "PB": 2
+            }
+        },
+        "Doppelflinte": {
+            "name": "Doppelflinte",
+            "kategorie": "Waffe",
+            "gewicht": 5.5,
+            "kosten": 150,
+            "setting": "modern",
+            "beschreibung": "Regeln für Schrotflinten gelten",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "1-3W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": 2,
+                "PB": "-"
+            }
+        },
+        "AK47": {
+            "name": "AK47",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 450,
+            "setting": "modern",
+            "beschreibung": "Robustes Sturmgewehr",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8+1",
+                "Reichweite": "24/48/96",
+                "FR": 3,
+                "Schuss": 30,
+                "PB": 2
+            }
+        },
+        "M-16": {
+            "name": "M-16",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 400,
+            "setting": "modern",
+            "beschreibung": "Die Version A-2 kann auch 3-Schuss-Feuerstöße abgeben",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "24/48/96",
+                "FR": 3,
+                "Schuss": 30,
+                "PB": 2
+            }
+        },
+        "Gewehr": {
+            "name": "Gewehr",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 700,
+            "setting": "modern",
+            "beschreibung": "Standard-Gewehr mit hoher Durchschlagskraft",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "3W6",
+                "Reichweite": "30/60/120",
+                "FR": 3,
+                "Schuss": 100,
+                "PB": 2
+            }
+        },
+        "Browning Automatic Rifle": {
+            "name": "Browning Automatic Rifle",
+            "kategorie": "Waffe",
+            "gewicht": 8.5,
+            "kosten": 300,
+            "setting": "modern",
+            "beschreibung": "Feuerrate 1 bis 3. Verwendet Magazine (eine Aktion zum Nachladen statt der üblichen 2)",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "20/40/60",
+                "FR": 3,
+                "Schuss": 20,
+                "PB": 2
+            }
+        },
+        "Gatling": {
+            "name": "Gatling",
+            "kategorie": "Waffe",
+            "gewicht": 85,
+            "kosten": 500,
+            "setting": "modern",
+            "beschreibung": "Schwere, montierte Waffe mit hoher Feuerrate",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "24/48/96",
+                "FR": 3,
+                "Schuss": 100,
+                "PB": 2
+            }
+        },
+        "Minigun": {
+            "name": "Minigun",
+            "kategorie": "Waffe",
+            "gewicht": 42.5,
+            "kosten": 100000,
+            "setting": "modern",
+            "beschreibung": "Feuerrate von mindestens 3, erfordert Rucksackgeschirr mit Munition, das zusätzliche 42,5 kg wiegt, wenn es voll ist (enthält 4000 Schuss im Gurt)",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "2W8+1",
+                "Reichweite": "30/60/120",
+                "FR": 5,
+                "Schuss": 4000,
+                "PB": 2
+            }
+        },
+        "M2 Browning": {
+            "name": "M2 Browning",
+            "kategorie": "Waffe",
+            "gewicht": 42,
+            "kosten": 1500,
+            "setting": "modern",
+            "beschreibung": "Schwere Waffe",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "2W10",
+                "Reichweite": "50/100/200",
+                "FR": 3,
+                "Schuss": 200,
+                "PB": 4
+            }
+        },
+        "M60": {
+            "name": "M60",
+            "kategorie": "Waffe",
+            "gewicht": 16.5,
+            "kosten": 6000,
+            "setting": "modern",
+            "beschreibung": "Schweres Maschinengewehr",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "2W8+1",
+                "Reichweite": "30/60/120",
+                "FR": 3,
+                "Schuss": 100,
+                "PB": 2
+            }
+        },
+        "MG42": {
+            "name": "MG42",
+            "kategorie": "Waffe",
+            "gewicht": 13,
+            "kosten": 750,
+            "setting": "modern",
+            "beschreibung": "Deutsches Maschinengewehr mit sehr hoher Feuerrate",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "2W8+1",
+                "Reichweite": "30/60/120",
+                "FR": 4,
+                "Schuss": 200,
+                "PB": 2
+            }
+        },
+        "Squad Automatic Weapon": {
+            "name": "Squad Automatic Weapon)",
+            "kategorie": "Waffe",
+            "gewicht": 10,
+            "kosten": 4000,
+            "setting": "modern",
+            "beschreibung": "Squad Automatic Weapon, leichtes Maschinengewehr",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "30/60/120",
+                "FR": 4,
+                "Schuss": 200,
+                "PB": 2
+            }
+        },
+        "Gatling-Laser": {
+            "name": "Gatling-Laser",
+            "kategorie": "Waffe",
+            "gewicht": 10,
+            "kosten": 1000,
+            "setting": "futuristisch",
+            "beschreibung": "Schwere Laserwaffe mit hoher Feuerrate",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "3W6+4",
+                "Reichweite": "50/100/200",
+                "FR": 4,
+                "Schuss": 800,
+                "PB": 2
+            }
+        },
+        "Jacke (dünn)": {
+            "name": "Jacke (dünn)",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Winterkleidung, geschmeidige Lederrüstungen, weiche Felle",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Robe (dünn)": {
+            "name": "Robe (dünn)",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 30,
+            "setting": "mittelalterlich",
+            "beschreibung": "Leichte Schutzkleidung, die den ganzen Körper bedeckt",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Beinlinge (dünn)": {
+            "name": "Beinlinge (dünn)",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "Leichte Beinbekleidung aus Leder oder Fell",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Kappe (dünn)": {
+            "name": "Kappe (dünn)",
+            "kategorie": "Rüstung",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "mittelalterlich",
+            "beschreibung": "Leichter Kopfschutz aus weichem Material",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 1,
+            "mindeststaerke": "W4"
+        },
+        "Jacke (dick)": {
+            "name": "Jacke (dick)",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 80,
+            "setting": "mittelalterlich",
+            "beschreibung": "Gehärtetes Leder, Lederrüstung, Alligatorenhaut",
+            "aktiv": true,
+            "torso": 2,
+            "arme": 2,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Beinlinge (dick)": {
+            "name": "Beinlinge (dick)",
+            "kategorie": "Rüstung",
+            "gewicht": 3.5,
+            "kosten": 40,
+            "setting": "mittelalterlich",
+            "beschreibung": "Robuste Beinbekleidung aus gehärtetem Leder",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 2,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Kappe (dick)": {
+            "name": "Kappe (dick)",
+            "kategorie": "Rüstung",
+            "gewicht": 0.5,
+            "kosten": 20,
+            "setting": "mittelalterlich",
+            "beschreibung": "Robuster Kopfschutz aus gehärtetem Leder",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 2,
+            "mindeststaerke": "W6"
+        },
+        "Hemd (Kette)": {
+            "name": "Hemd (Kette)",
+            "kategorie": "Rüstung",
+            "gewicht": 12.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kettenhemd, Schienenpanzer, Ringpanzer, Samurairüstung",
+            "aktiv": true,
+            "torso": 3,
+            "arme": 3,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Beinlinge (Kette)": {
+            "name": "Beinlinge (Kette)",
+            "kategorie": "Rüstung",
+            "gewicht": 5,
+            "kosten": 150,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kettenhose für den Schutz der Beine",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 3,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Helm (Kette)": {
+            "name": "Helm (Kette)",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 25,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kettenhaube zum Kopfschutz",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 3,
+            "mindeststaerke": "W8"
+        },
+        "Bronze-Rossharnisch": {
+            "name": "Bronze-Rossharnisch",
+            "kategorie": "Rüstung",
+            "gewicht": 25,
+            "kosten": 1500,
+            "setting": "antike",
+            "beschreibung": "Rüstung für Pferde in antiken Zivilisationen",
+            "aktiv": true,
+            "torso": 3,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Brustharnisch (Bronze)": {
+            "name": "Brustharnisch (Bronze)",
+            "kategorie": "Rüstung",
+            "gewicht": 6.5,
+            "kosten": 80,
+            "setting": "antike",
+            "beschreibung": "Bronzener Brustharnisch für Krieger",
+            "aktiv": true,
+            "torso": 3,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Armschienen (Bronze)": {
+            "name": "Armschienen (Bronze)",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 40,
+            "setting": "antike",
+            "beschreibung": "Bronzene Armschienen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 3,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Beinschienen (Bronze)": {
+            "name": "Beinschienen (Bronze)",
+            "kategorie": "Rüstung",
+            "gewicht": 3,
+            "kosten": 50,
+            "setting": "antike",
+            "beschreibung": "Bronzene Beinschienen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 3,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Helm (Bronze)": {
+            "name": "Helm (Bronze)",
+            "kategorie": "Rüstung",
+            "gewicht": 3,
+            "kosten": 25,
+            "setting": "antike",
+            "beschreibung": "Bronzener Helm",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 3,
+            "mindeststaerke": "W8"
+        },
+        "Platten-Rossharnisch": {
+            "name": "Platten-Rossharnisch",
+            "kategorie": "Rüstung",
+            "gewicht": 25,
+            "kosten": 1500,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Rüstung für Pferde",
+            "aktiv": true,
+            "torso": 4,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Brustharnisch (Platte)": {
+            "name": "Brustharnisch (Platte)",
+            "kategorie": "Rüstung",
+            "gewicht": 15,
+            "kosten": 500,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwerer Plattenpanzer für den Torso",
+            "aktiv": true,
+            "torso": 4,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Armschienen (Platte)": {
+            "name": "Armschienen (Platte)",
+            "kategorie": "Rüstung",
+            "gewicht": 5,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Plattenarmschienen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 4,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Beinschienen (Platte)": {
+            "name": "Beinschienen (Platte)",
+            "kategorie": "Rüstung",
+            "gewicht": 5,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Plattenbeinschienen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 4,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Schwerer Helm": {
+            "name": "Schwerer Helm",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Offener schwerer Helm",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W10"
+        },
+        "Schwerer Helm, geschlossen": {
+            "name": "Schwerer Helm, geschlossen",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Geschlossener schwerer Helm mit Visier. –1 auf Sicht-basierte Wahrnehmungsproben",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W10"
+        },
+        "Dicker Mantel": {
+            "name": "Dicker Mantel, Lederjacke",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 100,
+            "setting": "modern",
+            "beschreibung": "Schwere Winterkleidung, Lederjacke",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Reitchaps": {
+            "name": "Reitchaps",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 70,
+            "setting": "modern",
+            "beschreibung": "Schützen die Beine beim Reiten",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Motorradjacke": {
+            "name": "Motorradjacke",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 350,
+            "setting": "modern",
+            "beschreibung": "Schützt bei Motorradunfällen",
+            "aktiv": true,
+            "torso": 2,
+            "arme": 2,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Motorradhose": {
+            "name": "Motorradhose",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 175,
+            "setting": "modern",
+            "beschreibung": "Schützt die Beine bei Motorradunfällen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 2,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Fahrradhelm": {
+            "name": "Fahrradhelm",
+            "kategorie": "Rüstung",
+            "gewicht": 0.5,
+            "kosten": 50,
+            "setting": "modern",
+            "beschreibung": "Schützt den Kopf bei Fahrradunfällen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 2,
+            "mindeststaerke": "W4"
+        },
+        "Motorradhelm": {
+            "name": "Motorradhelm",
+            "kategorie": "Rüstung",
+            "gewicht": 1.5,
+            "kosten": 100,
+            "setting": "modern",
+            "beschreibung": "Bietet umfassenden Schutz für den Kopf",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 3,
+            "mindeststaerke": "W4"
+        },
+        "Splitterschutzjacke": {
+            "name": "Splitterschutzjacke",
+            "kategorie": "Rüstung",
+            "gewicht": 5,
+            "kosten": 40,
+            "setting": "modern",
+            "beschreibung": "Vietnam-Ära Torso-Schutz gegen Granatsplitter",
+            "aktiv": true,
+            "torso": 2,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Kevlarweste": {
+            "name": "Kevlarweste",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 200,
+            "setting": "modern",
+            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
+            "aktiv": true,
+            "torso": 2,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Kevlarweste mit Keramikplatten": {
+            "name": "Kevlarweste mit Keramikplatten",
+            "kategorie": "Rüstung",
+            "gewicht": 8.5,
+            "kosten": 500,
+            "setting": "modern",
+            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
+            "aktiv": true,
+            "torso": 4,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
+        "Kevlarhelm": {
+            "name": "Kevlarhelm",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 80,
+            "setting": "modern",
+            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W4"
+        },
+        "Bombenschutzanzug": {
+            "name": "Bombenschutzanzug",
+            "kategorie": "Rüstung",
+            "gewicht": 40,
+            "kosten": 25000,
+            "setting": "modern",
+            "beschreibung": "Bombenschutzanzüge sind mit Ausnahme der Hände nicht für Beweglichkeit gebaut. Geschicklichkeit und verknüpfte Fertigkeiten können nicht höher sein als W6, Bewegungsweite -2",
+            "aktiv": true,
+            "torso": 10,
+            "arme": 10,
+            "beine": 10,
+            "kopf": 10,
+            "mindeststaerke": "W12"
+        },
+        "Infanteriekampfanzug": {
+            "name": "Infanteriekampfanzug",
+            "kategorie": "Rüstung",
+            "gewicht": 6,
+            "kosten": 800,
+            "setting": "futuristisch",
+            "beschreibung": "Ein Ganzkörperanzug mit Stiefeln und Handschuhen. Kann mit Energieüberzug behandelt werden (-4 Schaden von Lasern, +50% Kosten, -2 Heimlichkeit)",
+            "aktiv": true,
+            "torso": 6,
+            "arme": 6,
+            "beine": 6,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Kampfhelm": {
+            "name": "Kampfhelm",
+            "kategorie": "Rüstung",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "futuristisch",
+            "beschreibung": "Vollgesichtshelm mit fortschrittlicher Technologie. Kann mit Energieüberzug behandelt werden (-4 Schaden von Lasern, +50% Kosten, -2 Heimlichkeit)",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 6,
+            "mindeststaerke": "W6"
+        },
+        "Kleiner Schild": {
+            "name": "Kleiner Schild",
+            "kategorie": "Schild",
+            "gewicht": 2,
+            "kosten": 50,
+            "setting": "mittelalterlich",
+            "beschreibung": "Härte 10, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 1,
+            "deckung": 0,
+            "mindeststaerke": "W4"
+        },
+        "Mittelerer Schild": {
+            "name": "Mittelerer Schild",
+            "kategorie": "Schild",
+            "gewicht": 4,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Härte 10, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 2,
+            "deckung": -2,
+            "mindeststaerke": "W6"
+        },
+        "Großer Schild": {
+            "name": "Großer Schild",
+            "kategorie": "Schild",
+            "gewicht": 6,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Härte 10, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 3,
+            "deckung": -4,
+            "mindeststaerke": "W8"
+        },
+        "Einsatzschild": {
+            "name": "Einsatzschild",
+            "kategorie": "Schild",
+            "gewicht": 2.5,
+            "kosten": 80,
+            "setting": "modern",
+            "beschreibung": "Härte 12, +2 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 3,
+            "deckung": -4,
+            "mindeststaerke": "W4"
+        },
+        "Ballistischer Schild": {
+            "name": "Ballistischer Schild",
+            "kategorie": "Schild",
+            "gewicht": 4.5,
+            "kosten": 250,
+            "setting": "modern",
+            "beschreibung": "Härte 12, +2 Panzerung. Verringert den Schaden von Feuerwaffen um -4. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 3,
+            "deckung": -4,
+            "mindeststaerke": "W6"
+        },
+        "Polymerschild, Klein": {
+            "name": "Polymerschild, Klein",
+            "kategorie": "Schild",
+            "gewicht": 1,
+            "kosten": 200,
+            "setting": "futuristisch",
+            "beschreibung": "Härte 10, +4 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 1,
+            "deckung": 0,
+            "mindeststaerke": "W4"
+        },
+        "Polymerschild, Mittel": {
+            "name": "Polymerschild, Mittel",
+            "kategorie": "Schild",
+            "gewicht": 2,
+            "kosten": 300,
+            "setting": "futuristisch",
+            "beschreibung": "Härte 10, +4 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 2,
+            "deckung": -2,
+            "mindeststaerke": "W4"
+        },
+        "Polymerschild, Groß": {
+            "name": "Polymerschild, Groß",
+            "kategorie": "Schild",
+            "gewicht": 3,
+            "kosten": 400,
+            "setting": "futuristisch",
+            "beschreibung": "Härte 10, +4 Panzerung. Kann zum Zuschlagen verwendet werden (Stä+W4 Schaden)",
+            "aktiv": true,
+            "parade": 3,
+            "deckung": -4,
+            "mindeststaerke": "W6"
+        },
+        "Pferd": {
+            "name": "Pferd",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 300,
+            "setting": "",
+            "beschreibung": "Normales Reitpferd für Transport und leichte Lasten",
+            "aktiv": true
+        },
+        "Streitross": {
+            "name": "Streitross",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 750,
+            "setting": "",
+            "beschreibung": "Für den Kampf ausgebildetes Pferd mit besseren Kampfeigenschaften",
+            "aktiv": true
+        },
+        "Sattel": {
+            "name": "Sattel",
+            "kategorie": "Allgemein",
+            "gewicht": 5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Standard-Reitsattel",
+            "aktiv": true
+        },
+        "Verzierter Sattel": {
+            "name": "Verzierter Sattel",
+            "kategorie": "Allgemein",
+            "gewicht": 5,
+            "kosten": 50,
+            "setting": "",
+            "beschreibung": "Kunstvoll gearbeiteter und verzierter Sattel",
+            "aktiv": true
+        },
+        "Brechstange": {
+            "name": "Brechstange",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Zum Aufbrechen von Türen und Schlössern (+1 auf entsprechende Stärkeproben)",
+            "aktiv": true
+        },
+        "Dietriche": {
+            "name": "Dietriche",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 200,
+            "setting": "",
+            "beschreibung": "Werkzeuge zum Öffnen von Schlössern, nötig für Diebeskunst",
+            "aktiv": true
+        },
+        "Erste-Hilfe-Tasche": {
+            "name": "Erste-Hilfe-Tasche",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Drei Anwendungen, siehe Heilung auf Seite 96",
+            "aktiv": true
+        },
+        "Fackel": {
+            "name": "Fackel",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Brennt eine Stunde, 4\" (8m) Lichtradius",
+            "aktiv": true
+        },
+        "Feuerstein und Stahl": {
+            "name": "Feuerstein und Stahl",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 3,
+            "setting": "",
+            "beschreibung": "Traditionelle Methode zum Feuer machen",
+            "aktiv": true
+        },
+        "Feuerzeug": {
+            "name": "Feuerzeug",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Einfaches Feuerzeug zum Entfachen von Feuer",
+            "aktiv": true
+        },
+        "Fläschchen (Keramik)": {
+            "name": "Fläschchen (Keramik)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Kleiner Behälter für Flüssigkeiten",
+            "aktiv": true
+        },
+        "Hammer": {
+            "name": "Hammer",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Werkzeug zum Hämmern und Nageln",
+            "aktiv": true
+        },
+        "Kamera (Einweg)": {
+            "name": "Kamera (Einweg)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Einfache Kamera für etwa 24 Bilder",
+            "aktiv": true
+        },
+        "Kamera (normal)": {
+            "name": "Kamera (normal)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 75,
+            "setting": "",
+            "beschreibung": "Standard-Fotokamera",
+            "aktiv": true
+        },
+        "Kamera (digital)": {
+            "name": "Kamera (digital)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 300,
+            "setting": "",
+            "beschreibung": "Digitale Kamera mit Speicherkarte",
+            "aktiv": true
+        },
+        "Kerze": {
+            "name": "Kerze",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 1,
+            "setting": "",
+            "beschreibung": "Brennt eine Stunde, 2\" (4m) Lichtradius",
+            "aktiv": true
+        },
+        "Köcher": {
+            "name": "Köcher",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 25,
+            "setting": "",
+            "beschreibung": "Behälter für bis zu 20 Pfeile oder Bolzen",
+            "aktiv": true
+        },
+        "Laterne": {
+            "name": "Laterne",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 25,
+            "setting": "",
+            "beschreibung": "Brennt 4 Stunden mit 0,5 Liter Öl, 4\" (8m) Lichtradius",
+            "aktiv": true
+        },
+        "Laternen-Öl": {
+            "name": "Laternen-Öl",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Genug für 4 Stunden Betrieb einer Laterne",
+            "aktiv": true
+        },
+        "Regenschirm": {
+            "name": "Regenschirm",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Schützt vor Regen und Sonne",
+            "aktiv": true
+        },
+        "Rucksack": {
+            "name": "Rucksack",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 50,
+            "setting": "",
+            "beschreibung": "Fasst bis zu 30 kg Ausrüstung",
+            "aktiv": true
+        },
+        "Sanitätskoffer": {
+            "name": "Sanitätskoffer",
+            "kategorie": "Allgemein",
+            "gewicht": 2,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Fünf Anwendungen, +1 auf Heilen; $25 zum Nachfüllen",
+            "aktiv": true
+        },
+        "Schaufel": {
+            "name": "Schaufel",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Zum Graben und Ausheben",
+            "aktiv": true
+        },
+        "Schlafsack (winterfest)": {
+            "name": "Schlafsack (winterfest)",
+            "kategorie": "Allgemein",
+            "gewicht": 2,
+            "kosten": 25,
+            "setting": "",
+            "beschreibung": "Hält auch bei niedrigen Temperaturen warm",
+            "aktiv": true
+        },
+        "Schutzbrille": {
+            "name": "Schutzbrille",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Schützt die Augen vor Splittern und Staub",
+            "aktiv": true
+        },
+        "Seife": {
+            "name": "Seife",
+            "kategorie": "Allgemein",
+            "gewicht": 0.1,
+            "kosten": 1,
+            "setting": "",
+            "beschreibung": "Zur Reinigung und Hygiene",
+            "aktiv": true
+        },
+        "Seil, Hanf (10\" / 20 m)": {
+            "name": "Seil, Hanf (10\" / 20 m)",
+            "kategorie": "Allgemein",
+            "gewicht": 7.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "20 Meter Hanfseil, hält bis zu 300 kg",
+            "aktiv": true
+        },
+        "Seil, Nylon (10\" / 20 m)": {
+            "name": "Seil, Nylon (10\" / 20 m)",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "20 Meter modernes Nylonseil, hält bis zu 500 kg",
+            "aktiv": true
+        },
+        "Taschenlampe (10\" Strahl)": {
+            "name": "Taschenlampe (10\" Strahl)",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Leuchtreichweite von 10\" (20m) in gerader Linie",
+            "aktiv": true
+        },
+        "Trillerpfeife": {
+            "name": "Trillerpfeife",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Lautes Signal über große Entfernung hörbar",
+            "aktiv": true
+        },
+        "Wasserflasche (Wasserschlauch)": {
+            "name": "Wasserflasche (Wasserschlauch)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Behälter für einen Liter Wasser",
+            "aktiv": true
+        },
+        "Werkzeugkoffer": {
+            "name": "Werkzeugkoffer",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 200,
+            "setting": "",
+            "beschreibung": "+2 auf Reparieren-Proben für mechanische Geräte",
+            "aktiv": true
+        },
+        "Wetzstein": {
+            "name": "Wetzstein",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Zum Schärfen von Klingen",
+            "aktiv": true
+        },
+        "Wolldecke": {
+            "name": "Wolldecke",
+            "kategorie": "Allgemein",
+            "gewicht": 2,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Wärmt bei kaltem Wetter",
+            "aktiv": true
+        },
+        "Wurfanker": {
+            "name": "Wurfanker",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Haken mit Seil zum Werfen und Klettern",
+            "aktiv": true
+        },
+        "Laser-/Rotpunktvisier": {
+            "name": "Laser-/Rotpunktvisier",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 150,
+            "setting": "",
+            "beschreibung": "+1 auf Schießen auf kurze und mittlere Entfernung",
+            "aktiv": true
+        },
+        "Zielfernrohr": {
+            "name": "Zielfernrohr",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Negiert beim Zielen 2 Punkte zusätzliche Abzüge",
+            "aktiv": true
+        },
+        "Zweibein/Dreibein": {
+            "name": "Zweibein/Dreibein",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Eine Aktion zum Ausklappen. Negiert Abzüge für Rückstoß und Mindeststärke",
+            "aktiv": true
+        },
+        "Kleidung, Alltag": {
+            "name": "Kleidung, Alltag",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Normale Alltagskleidung passend zur Epoche",
+            "aktiv": true
+        },
+        "Kleidung, formell": {
+            "name": "Kleidung, formell",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 200,
+            "setting": "",
+            "beschreibung": "Elegante Kleidung für gesellschaftliche Anlässe",
+            "aktiv": true
+        },
+        "Tarnkleidung": {
+            "name": "Tarnkleidung",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "+2 auf Heimlichkeit in passendem Terrain",
+            "aktiv": true
+        },
+        "Wanderstiefel": {
+            "name": "Wanderstiefel",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Robuste Stiefel für schwieriges Gelände",
+            "aktiv": true
+        },
+        "Winterkleidung (Mantel/Parka)": {
+            "name": "Winterkleidung (Mantel/Parka)",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 200,
+            "setting": "",
+            "beschreibung": "Schützt vor Kälte und Witterung",
+            "aktiv": true
+        },
+        "Winterstiefel": {
+            "name": "Winterstiefel",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Isolierte Stiefel für kalte Umgebungen",
+            "aktiv": true
+        },
+        "Desktop": {
+            "name": "Desktop",
+            "kategorie": "Allgemein",
+            "gewicht": 10,
+            "kosten": 800,
+            "setting": "",
+            "beschreibung": "Stationärer Computer",
+            "aktiv": true
+        },
+        "GPS": {
+            "name": "GPS",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 250,
+            "setting": "",
+            "beschreibung": "Satellitengestütztes Navigationssystem",
+            "aktiv": true
+        },
+        "Laptop": {
+            "name": "Laptop",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 1200,
+            "setting": "",
+            "beschreibung": "Tragbarer Computer",
+            "aktiv": true
+        },
+        "Taschencomputer": {
+            "name": "Taschencomputer",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 250,
+            "setting": "",
+            "beschreibung": "Kleinerer tragbarer Computer/PDA",
+            "aktiv": true
+        },
+        "EPA (Einmannpackung)": {
+            "name": "EPA (Einmannpackung)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Militärische Notration für einen Tag",
+            "aktiv": true
+        },
+        "Fastfood-Mahlzeit": {
+            "name": "Fastfood-Mahlzeit",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 8,
+            "setting": "",
+            "beschreibung": "Schnelle Mahlzeit zum Mitnehmen",
+            "aktiv": true
+        },
+        "Gute Mahlzeit (Restaurant)": {
+            "name": "Gute Mahlzeit (Restaurant)",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Qualitativ hochwertige Mahlzeit in einem Restaurant",
+            "aktiv": true
+        },
+        "Reiserationen": {
+            "name": "Reiserationen",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "5 Mahlzeiten; hält sich eine Woche",
+            "aktiv": true
+        },
+        "Pfefferspray": {
+            "name": "Pfefferspray",
+            "kategorie": "Allgemein",
+            "gewicht": 0.25,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Verwende Schießen (oder Kämpfen im Nahkampf). Kein Entfernungsabzug, maximale Reichweite 2\", 5 Schuss, Opfer muss Konstitutionsprobe mit -2 ablegen, um nicht Betäubt zu werden",
+            "aktiv": true
+        },
+        "Taser": {
+            "name": "Taser",
+            "kategorie": "Allgemein",
+            "gewicht": 0.25,
+            "kosten": 25,
+            "setting": "",
+            "beschreibung": "Verwendet Schießen. FRW 1/2/4. 3 Schuss, dann muss die Waffe mindestens zwei Stunden lang aufgeladen werden. Opfer muss eine Konstitutionsprobe mit -2 ablegen, um nicht Betäubt zu werden",
+            "aktiv": true
+        },
+        "Handy-Abhörer": {
+            "name": "Handy-Abhörer",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 650,
+            "setting": "",
+            "beschreibung": "Gerät zum Abhören von Mobiltelefongesprächen",
+            "aktiv": true
+        },
+        "Knopfkamera": {
+            "name": "Knopfkamera",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "",
+            "beschreibung": "12 Stunden durchgehender Betrieb, verborgen in einem Knopf",
+            "aktiv": true
+        },
+        "Nachtsichtbrille": {
+            "name": "Nachtsichtbrille",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 500,
+            "setting": "",
+            "beschreibung": "Kein Abzug für Düstere oder Dunkle Beleuchtung. Für den doppelten Preis ist die Brille 'aktiv' und ignoriert alle Abzüge durch Beleuchtung",
+            "aktiv": true
+        },
+        "Parabolmikrofon": {
+            "name": "Parabolmikrofon",
+            "kategorie": "Allgemein",
+            "gewicht": 2,
+            "kosten": 750,
+            "setting": "",
+            "beschreibung": "Flüstern auf 200 m Entfernung hören",
+            "aktiv": true
+        },
+        "Senderdetektor": {
+            "name": "Senderdetektor",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 525,
+            "setting": "",
+            "beschreibung": "Entdeckt versteckte Wanzen und Sender",
+            "aktiv": true
+        },
+        "Störtelefon": {
+            "name": "Störtelefon",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 150,
+            "setting": "",
+            "beschreibung": "Reparierenprobe, um sich in Telefonleitung einzuklinken",
+            "aktiv": true
+        },
+        "Telefonanzapfung": {
+            "name": "Telefonanzapfung",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 250,
+            "setting": "",
+            "beschreibung": "Ermöglicht das Abhören von Telefongesprächen",
+            "aktiv": true
+        },
+        "Wanze (Mikrotransmitter)": {
+            "name": "Wanze (Mikrotransmitter)",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 30,
+            "setting": "",
+            "beschreibung": "12 Stunden durchgehender Betrieb, überträgt Gespräche",
+            "aktiv": true
+        },
+        "Pfeile/Bolzen": {
+            "name": "Pfeile/Bolzen",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 1,
+            "setting": "",
+            "beschreibung": "Pfeile für Bögen, Bolzen für Armbrüste. Gewicht für 10 Stück",
+            "aktiv": true
+        },
+        "Patronen (Klein)": {
+            "name": "Patronen (Klein)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Kaliber .22 bis .32, Preis und Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Patronen (Mittel)": {
+            "name": "Patronen (Mittel)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Kaliber 9mm bis .45, Preis und Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Patronen (Groß)": {
+            "name": "Patronen (Groß)",
+            "kategorie": "Allgemein",
+            "gewicht": 7.5,
+            "kosten": 50,
+            "setting": "",
+            "beschreibung": "Kaliber .50 und größer, Preis und Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Laserbatterien (Pistole)": {
+            "name": "Laserbatterien (Pistole)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.1,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Bietet ein volles Magazin für eine Laserpistole",
+            "aktiv": true
+        },
+        "Laserbatterien (Gewehr, Maschinenpistole)": {
+            "name": "Laserbatterien (Gewehr, Maschinenpistole)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.25,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Bietet ein volles Magazin für ein Lasergewehr oder eine Lasermaschinenpistole",
+            "aktiv": true
+        },
+        "Gattling": {
+            "name": "Gattling",
+            "kategorie": "Allgemein",
+            "gewicht": 2,
+            "kosten": 50,
+            "setting": "",
+            "beschreibung": "Batterie für einen Gattling-Laser",
+            "aktiv": true
+        },
+        "Kugel (mit Schwarzpulver)": {
+            "name": "Kugel (mit Schwarzpulver)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.25,
+            "kosten": 1,
+            "setting": "",
+            "beschreibung": "Für Schwarzpulverwaffen, Gewicht für 10 Stück",
+            "aktiv": true
+        },
+        "Schrotflinte": {
+            "name": "Schrotflinte",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Normale Schrotladung, Preis für 25 Patronen, Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Flintenlaufgschosse": {
+            "name": "Flintenlaufgschosse",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Einzelgeschoss für Schrotflinten, Preis für 25 Stück, Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Schleudersteine": {
+            "name": "Schleudersteine",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Munition für Schleudern, Preis für 20 Stück, Gewicht für 40 Stück",
+            "aktiv": true
+        }
+    },
+    "cyberware_nebenwirkungen": {
+        "1": {
+            "name": "Systemüberlastung",
+            "effekt": "Willenskraft oder Konstitution -1 Würfeltyp (Wahl des Spielers)"
+        },
+        "2": {
+            "name": "Neurale Interferenz",
+            "effekt": "Handicap Zögerlich"
+        },
+        "3-4": {
+            "name": "Neuraler Block",
+            "effekt": "-2 auf Willenskraftwürfe zur Erholung von Angeschlagen"
+        },
+        "5-6": {
+            "name": "Angestrengte Atmung",
+            "effekt": "-1 auf Bewegungsweite und Heimlichkeit"
+        },
+        "7-8": {
+            "name": "Komplikationen",
+            "effekt": "Stress des Implantats +1"
+        },
+        "9-10": {
+            "name": "Phantomkrämpfe",
+            "effekt": "Verwundbar bei Kreuz-Aktionskarte"
+        },
+        "11-12": {
+            "name": "Migräne",
+            "effekt": "Kritischer Fehlschlag = 1 Erschöpfungsstufe (1 Tag, kann nicht zu Kampfunfähig führen)"
+        },
+        "13": {
+            "name": "Paranoia",
+            "effekt": "Handicap Misstrauisch (schwer)"
+        },
+        "14-15": {
+            "name": "Erhöhtes Feedback",
+            "effekt": "Handicap Dünnhäutig (schwer)"
+        },
+        "16-17": {
+            "name": "Gedächtnisverlust",
+            "effekt": "-2 auf Verstand und Allgemeinwissen"
+        },
+        "18": {
+            "name": "Schüttelkrämpfe",
+            "effekt": "Abgelenkt bei Kreuz-Aktionskarte"
+        },
+        "19": {
+            "name": "Gewalttätige Episoden",
+            "effekt": "Handicap Blutrünstig"
+        },
+        "20": {
+            "name": "Innere Blutungen",
+            "effekt": "Handicap Totkrank (schwer) bis Implantat entfernt wird"
         }
     },
     "settingregeln": {

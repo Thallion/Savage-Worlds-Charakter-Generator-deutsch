@@ -19,19 +19,26 @@ from models.schild import Schild
 from models.ausruestung import Ausruestung
 
 
-def kaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Optional[float] = None) -> bool:
+def kaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Optional[float] = None,
+           konfiguration: Optional[Dict] = None) -> bool:
     """
     Kauft einen Ausrüstungsgegenstand für einen Charakter.
-    
+    Bei Cyberware wird stattdessen die Installation ausgelöst.
+
     Args:
         charakter: Das Charakterobjekt, das die Ausrüstung kauft
         item: Das zu kaufende Ausrüstungsobjekt
         anzahl: Wie viele Einheiten gekauft werden sollen
         preis_pro_stueck: Optionaler benutzerdefinierter Preis
-    
+        konfiguration: Optionale Cyberware-Konfiguration (z.B. {"attribut": "Stärke"})
+
     Returns:
         bool: True bei Erfolg, False bei Fehlschlag
     """
+    # Cyberware-Sonderbehandlung: Installation statt normalem Kauf
+    if getattr(item, 'kategorie', '') == 'Cyberware':
+        return _kaufe_cyberware(charakter, item, anzahl, preis_pro_stueck, konfiguration)
+
     preis_pro_stueck = preis_pro_stueck or item.kosten
     gesamtpreis = preis_pro_stueck * anzahl
 
@@ -46,9 +53,9 @@ def kaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Opti
     charakter.vermoegen -= gesamtpreis
     item.erhoehe_menge(anzahl)
     Logger.debug(LogMessages.KAUF_ERFOLGREICH.format(
-        anzahl=anzahl, 
-        name=item.name, 
-        preis=gesamtpreis, 
+        anzahl=anzahl,
+        name=item.name,
+        preis=gesamtpreis,
         vermoegen=charakter.vermoegen
     ))
 
@@ -65,16 +72,21 @@ def kaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Opti
 def verkaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Optional[float] = None) -> bool:
     """
     Verkauft einen Ausrüstungsgegenstand eines Charakters.
-    
+    Bei Cyberware wird stattdessen die Deinstallation ausgelöst.
+
     Args:
         charakter: Das Charakterobjekt, das die Ausrüstung verkauft
         item: Das zu verkaufende Ausrüstungsobjekt
         anzahl: Wie viele Einheiten verkauft werden sollen
         preis_pro_stueck: Optionaler benutzerdefinierter Preis
-    
+
     Returns:
         bool: True bei Erfolg, False bei Fehlschlag
     """
+    # Cyberware-Sonderbehandlung: Deinstallation statt normalem Verkauf
+    if getattr(item, 'kategorie', '') == 'Cyberware':
+        return _verkaufe_cyberware(charakter, item, anzahl)
+
     # Verfügbarkeitsprüfung
     if item.menge < anzahl:
         Logger.warning(LogMessages.NICHT_GENUEGEND_MENGE.format(
@@ -89,7 +101,7 @@ def verkaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: O
     gesamtpreis = preis_pro_stueck * anzahl
     charakter.vermoegen += gesamtpreis
     item.verringere_menge(anzahl)
-    
+
     Logger.debug(LogMessages.VERKAUF_ERFOLGREICH.format(
         anzahl=anzahl,
         name=item.name,
@@ -104,7 +116,7 @@ def verkaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: O
     # Gewicht und abgeleitete Werte neu berechnen
     charakter.berechne_gesamtgewicht()
     charakter.berechne_abgeleitete_werte()
-    
+
     return True
 
 
@@ -272,6 +284,152 @@ def erstelle_item_nach_kategorie(item_dict: Dict[str, Any]) -> Ausruestung:
     
     klasse = kategorie_zu_klasse.get(kategorie, Ausruestung)
     return klasse.from_setting_dict(item_dict)
+
+
+# --- Cyberware Kauf/Verkauf ---
+
+def _kaufe_cyberware(charakter, item: Ausruestung, anzahl: int = 1,
+                     preis_pro_stueck: Optional[float] = None,
+                     konfiguration: Optional[Dict] = None) -> bool:
+    """
+    Kauft und installiert Cyberware. Prüft Stress-Validierung und aktualisiert
+    sowohl das Ausrüstungs- als auch das Cyberware-System.
+
+    Args:
+        charakter: Das Charakterobjekt
+        item: Das Cyberware-Ausrüstungsobjekt
+        anzahl: Anzahl der zu installierenden Implantate
+        preis_pro_stueck: Optionaler benutzerdefinierter Preis
+        konfiguration: Optionale Konfiguration (z.B. {"attribut": "Stärke"})
+
+    Returns:
+        bool: True bei Erfolg, False bei Fehlschlag
+    """
+    from functions.cyberware_funktionen import (
+        ist_cyberware_setting, validiere_installation, installiere_cyberware
+    )
+
+    preis_pro_stueck = preis_pro_stueck or item.kosten
+    gesamtpreis = preis_pro_stueck * anzahl
+
+    # Vermögensprüfung
+    if charakter.vermoegen < gesamtpreis:
+        Logger.warning(LogMessages.NICHT_GENUEGEND_VERMOEGEN.format(
+            anzahl=anzahl, name=item.name
+        ))
+        return False
+
+    # Cyberware installieren (einzeln pro Stück)
+    installiert = 0
+    for _ in range(anzahl):
+        if ist_cyberware_setting(charakter.active_setting_name):
+            # Validierung über das Cyberware-System
+            kann_installiert, fehler = validiere_installation(charakter, item.name)
+            if not kann_installiert:
+                Logger.warning(f"Cyberware-Installation abgelehnt: {fehler}")
+                if installiert == 0:
+                    return False
+                break
+
+            # Kosten für dieses einzelne Implantat abziehen
+            if charakter.vermoegen < preis_pro_stueck:
+                Logger.warning(f"Nicht genug Vermögen für weitere Installation von '{item.name}'")
+                break
+
+            charakter.vermoegen -= preis_pro_stueck
+
+            # Im Cyberware-System installieren
+            ok, msg = installiere_cyberware(charakter, item.name, konfiguration=konfiguration)
+            if ok:
+                installiert += 1
+                # Menge im Ausrüstungs-Item erhöhen (für Anzeige)
+                item.erhoehe_menge(1)
+                Logger.info(f"Cyberware '{item.name}' installiert: {msg}")
+            else:
+                # Geld zurückerstatten
+                charakter.vermoegen += preis_pro_stueck
+                Logger.warning(f"Cyberware-Installation fehlgeschlagen: {msg}")
+                break
+        else:
+            # Kein Cyberware-Setting → normaler Kauf
+            charakter.vermoegen -= preis_pro_stueck
+            item.erhoehe_menge(1)
+            installiert += 1
+
+    if installiert > 0:
+        # Item zur Ausrüstungsliste hinzufügen
+        _item_zu_ausruestung_hinzufuegen(charakter, item)
+        charakter.berechne_abgeleitete_werte()
+        Logger.info(f"Cyberware '{item.name}' × {installiert} erfolgreich installiert")
+        return True
+
+    return False
+
+
+def _verkaufe_cyberware(charakter, item: Ausruestung, anzahl: int = 1) -> bool:
+    """
+    Deinstalliert Cyberware. Entfernt Installationen aus dem Cyberware-System
+    und aktualisiert das Ausrüstungs-System.
+
+    Args:
+        charakter: Das Charakterobjekt
+        item: Das Cyberware-Ausrüstungsobjekt
+        anzahl: Anzahl der zu deinstallierenden Implantate
+
+    Returns:
+        bool: True bei Erfolg, False bei Fehlschlag
+    """
+    from functions.cyberware_funktionen import (
+        ist_cyberware_setting, deinstalliere_cyberware
+    )
+
+    if item.menge < anzahl:
+        Logger.warning(LogMessages.NICHT_GENUEGEND_MENGE.format(
+            name=item.name, verfuegbar=item.menge, angefordert=anzahl
+        ))
+        return False
+
+    deinstalliert = 0
+    for _ in range(anzahl):
+        if ist_cyberware_setting(charakter.active_setting_name):
+            # Finde eine Installation dieses Typs zum Entfernen
+            installationen = getattr(charakter, 'cyberware_installationen', {})
+            inst_id = None
+            for iid, inst in installationen.items():
+                if inst.name == item.name and inst.installiert:
+                    inst_id = iid
+                    break
+
+            if inst_id:
+                ok, msg, kosten = deinstalliere_cyberware(charakter, inst_id)
+                if ok:
+                    deinstalliert += 1
+                    item.verringere_menge(1)
+                    # Deinstallationskosten erstatten (25% des Kaufpreises)
+                    charakter.vermoegen += kosten
+                    Logger.info(f"Cyberware '{item.name}' deinstalliert, {kosten} erstattet")
+                else:
+                    Logger.warning(f"Cyberware-Deinstallation fehlgeschlagen: {msg}")
+                    break
+            else:
+                # Keine Installation im Cyberware-System gefunden, normaler Verkauf
+                item.verringere_menge(1)
+                charakter.vermoegen += int(item.kosten * 0.25)
+                deinstalliert += 1
+        else:
+            item.verringere_menge(1)
+            charakter.vermoegen += int(item.kosten * 0.5)
+            deinstalliert += 1
+
+    if deinstalliert > 0:
+        if item.menge <= 0:
+            _item_aus_ausruestung_entfernen(charakter, item)
+        charakter.berechne_gesamtgewicht()
+        charakter.berechne_abgeleitete_werte()
+        Logger.info(f"Cyberware '{item.name}' × {deinstalliert} deinstalliert")
+        return True
+
+    return False
 
 
 # --- Private Hilfsfunktionen ---

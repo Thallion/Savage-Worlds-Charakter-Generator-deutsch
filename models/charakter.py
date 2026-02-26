@@ -76,6 +76,8 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         self.talente = {}
         self.maechte = {}
         self.superkraefte = {}
+        self.cyberware_verfuegbar = {}
+        self.cyberware_installationen = {}
         self.ausruestung = {}
         self.ruestungen = {}
         self.waffen = {}

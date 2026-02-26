@@ -275,11 +275,12 @@ class HandicapDialogHandler:
             
             # Speichere die Custom Handicaps
             charakter.save_custom_handicaps()
-            
+
             # Aktualisiere die UI
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
-            
+            self._refresh_handicap_view()
+
             self.dismiss_dialog()
             Logger.info(f"Handicap '{name}' wurde aktualisiert.")
             
@@ -370,14 +371,15 @@ class HandicapDialogHandler:
             
             # Füge das Handicap hinzu
             charakter.add_handicap(new_handicap)
-            
+
             # Speichere die Custom Handicaps
             charakter.save_custom_handicaps()
-            
+
             # Aktualisiere die UI
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
-            
+            self._refresh_handicap_view()
+
             self.dismiss_dialog()
             Logger.info(f"Handicap '{name}' wurde hinzugefügt.")
             
@@ -399,14 +401,15 @@ class HandicapDialogHandler:
             
             # Lösche das Handicap
             charakter.remove_handicap(handicap_name)
-            
+
             # Speichere die Custom Handicaps
             charakter.save_custom_handicaps()
-            
+
             # Aktualisiere die UI
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
-            
+            self._refresh_handicap_view()
+
             Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
             self.dismiss_dialog()
                 
@@ -423,6 +426,15 @@ class HandicapDialogHandler:
             Logger.info(f"Handicap '{handicap_name}' wurde ausgewählt.")
         else:
             Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
+
+    def _refresh_handicap_view(self):
+        """Aktualisiert die Handicap-RecycleView nach Änderungen."""
+        app = App.get_running_app()
+        if hasattr(app, 'get_widget_by_tab_text'):
+            widget = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
+            if widget:
+                from kivy.clock import Clock
+                Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""

@@ -16,6 +16,7 @@ from models.wuerfel import Wuerfel
 from models.attribut import Attribut
 from models.fertigkeit import Fertigkeit
 from models.superkraft import Superkraft
+from models.cyberware import CyberwareInstallation
 
 class SetEncoder(json.JSONEncoder):
     """Ermöglicht das Serialisieren von Sets in JSON."""
@@ -79,6 +80,7 @@ def to_dict(charakter):
         'selected_talente': charakter.selected_talente,
         'selected_maechte': charakter.selected_maechte,
         'selected_superkraefte': charakter.selected_superkraefte,
+        'selected_cyberware': charakter.selected_cyberware,
         'voelker_selected': charakter.voelker_selected,
         'selected_allgemeine_ausruestung': [item.name for item in charakter.selected_allgemeine_ausruestung],
         'selected_waffen': [item.name for item in charakter.selected_waffen],
@@ -122,6 +124,7 @@ def _get_selected_elements_with_data(charakter):
         'talente': {},
         'maechte': {},
         'superkraefte': {},
+        'cyberware': {},
         'ausruestung': {}
     }
     
@@ -186,6 +189,11 @@ def _get_selected_elements_with_data(charakter):
                 'gewaehlte_modifikatoren': [mod.to_dict() for mod in kraft.gewaehlte_modifikatoren],
             }
             selected_elements['superkraefte'][kraft_name] = kraft_dict
+
+    # Cyberware-Installationen speichern
+    for inst_id, installation in getattr(charakter, 'cyberware_installationen', {}).items():
+        if installation.installiert:
+            selected_elements['cyberware'][inst_id] = installation.to_dict()
 
     # Nur ausgewählte Ausrüstung mit individuellen Daten
     all_selected_equipment = (
@@ -263,6 +271,7 @@ def _load_new_format(charakter, data):
     charakter.selected_talente = data.get('selected_talente', [])
     charakter.selected_maechte = data.get('selected_maechte', [])
     charakter.selected_superkraefte = data.get('selected_superkraefte', [])
+    charakter.selected_cyberware = data.get('selected_cyberware', [])
     charakter.voelker_selected = data.get('voelker_selected', {})
     
     # Individuelle Daten auf die Setting-Elemente anwenden
@@ -455,6 +464,18 @@ def _apply_individual_element_data(charakter, selected_elements):
                     SuperkraftModifikator.from_dict(mod_data)
                 )
 
+    # Cyberware-Installationen laden
+    cyberware_data = selected_elements.get('cyberware', {})
+    installationen = {}
+    for inst_id, inst_data in cyberware_data.items():
+        try:
+            installation = CyberwareInstallation.from_dict(inst_data)
+            installationen[inst_id] = installation
+        except Exception as e:
+            Logger.warning(f"Fehler beim Laden der Cyberware-Installation '{inst_id}': {e}")
+    if installationen:
+        charakter.cyberware_installationen = installationen
+
     # Ausrüstungs-Daten anwenden
     ausruestung_data = selected_elements.get('ausruestung', {})
     for name, data in ausruestung_data.items():
@@ -561,6 +582,16 @@ def _finalize_character_loading(charakter, data):
 
     # Savage Pathfinder Support
     charakter.pathfinder_kostenlose_talente_gewaehlt = data.get('pathfinder_kostenlose_talente_gewaehlt', 0)
+
+    # Cyberware-Status aktualisieren
+    from functions.cyberware_funktionen import ist_cyberware_setting
+    if ist_cyberware_setting(charakter.active_setting_name):
+        from functions.cyberware_funktionen import (
+            berechne_stresslimit, berechne_stress_maximum, berechne_stress_aktuell
+        )
+        charakter.cyberware_stresslimit = berechne_stresslimit(charakter)
+        charakter.cyberware_stress_maximum = berechne_stress_maximum(charakter)
+        charakter.cyberware_stress_aktuell = berechne_stress_aktuell(charakter)
 
     # Steigerungs-Journal laden (falls vorhanden)
     charakter.steigerungs_journal = data.get('steigerungs_journal', None)

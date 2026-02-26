@@ -92,5 +92,15 @@ class CharakterProperties:
     attribute = DictProperty({})
     fertigkeiten = DictProperty({})
 
+    # Cyberware (SciFi-Settings)
+    cyberware_verfuegbar = DictProperty({})
+    cyberware_installationen = DictProperty({})
+    cyberware_stress_aktuell = NumericProperty(0)
+    cyberware_stresslimit = NumericProperty(0)
+    cyberware_stress_maximum = NumericProperty(0)
+    cyberware_budget = NumericProperty(0)
+    cyberware_nebenwirkungen = ListProperty([])
+    selected_cyberware = ListProperty([])
+
     # Steigerungs-Journal (kein Kivy-Property, da keine UI-Bindung nötig)
     steigerungs_journal = None

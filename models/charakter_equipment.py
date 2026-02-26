@@ -39,8 +39,8 @@ class CharakterEquipment:
         """
         return [ausr for ausr in self.ausruestung.values() if ausr.setting == setting.lower()]
     
-    def kaufen(self, item, anzahl=1, preis_pro_stueck=None):
-        return ausruestung_funktionen.kaufen(self, item, anzahl, preis_pro_stueck)
+    def kaufen(self, item, anzahl=1, preis_pro_stueck=None, konfiguration=None):
+        return ausruestung_funktionen.kaufen(self, item, anzahl, preis_pro_stueck, konfiguration=konfiguration)
     
     def verkaufen(self, item, anzahl=1, preis_pro_stueck=None):
         return ausruestung_funktionen.verkaufen(self, item, anzahl, preis_pro_stueck)

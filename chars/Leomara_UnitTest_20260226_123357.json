@@ -1,13 +1,13 @@
 {
     "profil_daten": {
-        "Name": "FK Archetyp - Himmlicher Champion",
-        "Alter": "31",
+        "Name": "Leomara",
+        "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
         "Sprachen": ""
     },
-    "active_setting_name": "Fantasy Kompendium",
-    "char_gen_completed": true,
+    "active_setting_name": "SWAE",
+    "char_gen_completed": false,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -42,12 +42,12 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -130,11 +130,11 @@
         "Kämpfen": {
             "fertigkeit_name": "Kämpfen",
             "grundfertigkeit": false,
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -143,11 +143,11 @@
         "Schießen": {
             "fertigkeit_name": "Schießen",
             "grundfertigkeit": false,
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -247,11 +247,11 @@
         "Einschüchtern": {
             "fertigkeit_name": "Einschüchtern",
             "grundfertigkeit": false,
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -273,11 +273,11 @@
         "Glaube": {
             "fertigkeit_name": "Glaube",
             "grundfertigkeit": false,
-            "ausgewaehlt": true,
+            "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -413,8 +413,47 @@
             "attribut": "Verstand",
             "custom": false
         },
+        "Elektronik": {
+            "fertigkeit_name": "Elektronik",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Hacken": {
+            "fertigkeit_name": "Hacken",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
         "Zaubern": {
             "fertigkeit_name": "Zaubern",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Psionik": {
+            "fertigkeit_name": "Psionik",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -438,161 +477,59 @@
             },
             "attribut": "Verstand",
             "custom": false
-        },
-        "Alchemie": {
-            "fertigkeit_name": "Alchemie",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
         }
     },
     "selected_elements": {
         "voelker": {
-            "Himmlische": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {},
-        "talente": {
-            "Aura der Tapferkeit": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Auserwählter": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Heiliger/Unheiliger Krieger": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Arkaner Hintergrund (Kleriker)": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 5,
-                "machtpunkte": 10
-            }
-        },
-        "maechte": {
-            "Verbannen": {
-                "ausgewaehlt": true,
-                "rang": "V",
-                "machtpunkte": 3,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Heilung": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 3,
-                "reichweite": "B",
-                "dauer": "Sofort"
-            },
-            "Licht/Dunkelheit": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 2,
-                "reichweite": "VER 10m",
-                "dauer": "—"
-            },
-            "Schutz": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER 5",
-                "dauer": "—"
-            },
-            "Zuflucht": {
-                "ausgewaehlt": true,
-                "rang": "Anfänger",
-                "machtpunkte": 2,
-                "reichweite": "Berührung",
-                "dauer": "5"
-            }
-        },
+        "talente": {},
+        "maechte": {},
         "superkraefte": {},
+        "cyberware": {},
         "ausruestung": {}
     },
     "selected_handicaps": [],
-    "selected_talente": [
-        "Aura der Tapferkeit",
-        "Auserwählter",
-        "Heiliger/Unheiliger Krieger",
-        "Arkaner Hintergrund (Kleriker)"
-    ],
-    "selected_maechte": [
-        "Verbannen",
-        "Heilung",
-        "Licht/Dunkelheit",
-        "Schutz",
-        "Zuflucht"
-    ],
+    "selected_talente": [],
+    "selected_maechte": [],
     "selected_superkraefte": [],
+    "selected_cyberware": [],
     "voelker_selected": {
+        "Androiden": false,
         "Aquarianer": false,
         "Avionen": false,
+        "Halbelf": false,
         "Elf": false,
-        "Mensch": false,
+        "Halbling": false,
+        "Mensch": true,
         "Rakashaner": false,
         "Saurianer": false,
-        "Zwerg": false,
-        "Zentauren": false,
-        "Schlangenvolk": false,
-        "Rattlinge": false,
-        "Orks": false,
-        "Oger": false,
-        "Minotauren": false,
-        "Mauslinge": false,
-        "Insektoide": false,
-        "Infernale": false,
-        "Halbriesen": false,
-        "Halborks": false,
-        "Halblinge": false,
-        "Halbelfen": false,
-        "Grabgeborene": false,
-        "Golems": false,
-        "Goblins": false,
-        "Gnome": false,
-        "Gestaltwandler": false,
-        "Feen": false,
-        "ElementareAbkoemmlinge": false,
-        "Drachenvolk": false,
-        "Himmlische": true
+        "Zwerg": false
     },
     "selected_allgemeine_ausruestung": [],
     "selected_waffen": [],
     "selected_ruestungen": [],
     "selected_schilde": [],
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
+    "verbleibende_attributsteigerungen": 5,
+    "verbleibende_fertigkeitssteigerungen": 12,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
-    "machtpunkte": 10,
+    "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 26,
+    "vermoegen": 500,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 4,
+    "gesamt_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": null
 }

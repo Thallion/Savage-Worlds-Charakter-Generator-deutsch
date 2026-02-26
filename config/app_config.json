@@ -10,8 +10,8 @@
   "window_height": 800,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/privat",
-  "last_pdf_directory": "",
+  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
+  "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
   "debug_mode": false,
   "log_level": "INFO",
   "max_recent_files": 10,
@@ -19,7 +19,7 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Deadlands",
+  "last_setting": "SciFi Kompendium",
   "config_version": "1.0",
-  "last_updated": "2026-02-22T09:55:51.578052"
+  "last_updated": "2026-02-25T13:59:14.922178"
 }

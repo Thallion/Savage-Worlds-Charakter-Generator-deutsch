@@ -7,6 +7,7 @@ import functions.talent_funktionen as talent_funktionen
 import functions.macht_funktionen as macht_funktionen
 import functions.handicap_funktionen as handicap_funktionen
 import functions.superkraft_funktionen as superkraft_funktionen
+import functions.cyberware_funktionen as cyberware_funktionen
 
 class CharakterElements:
     """Mixin-Klasse für Element-Verwaltung"""
@@ -162,6 +163,35 @@ class CharakterElements:
     def ist_superkraefte_setting(self):
         """Prüft ob das aktuelle Setting Superkräfte verwendet."""
         return superkraft_funktionen.ist_superkraefte_setting(self.active_setting_name)
+
+    # === CYBERWARE ===
+    def initialisiere_cyberware(self, ausruestung_daten):
+        cyberware_funktionen.initialisiere_cyberware(self, ausruestung_daten)
+
+    def installiere_cyberware(self, cyberware_name, konfiguration=None):
+        return cyberware_funktionen.installiere_cyberware(self, cyberware_name, konfiguration)
+
+    def deinstalliere_cyberware(self, installations_id):
+        return cyberware_funktionen.deinstalliere_cyberware(self, installations_id)
+
+    def aktiviere_cyberware(self, installations_id):
+        return cyberware_funktionen.aktiviere_cyberware(self, installations_id)
+
+    def deaktiviere_cyberware(self, installations_id):
+        return cyberware_funktionen.deaktiviere_cyberware(self, installations_id)
+
+    def get_installierte_cyberware(self):
+        return cyberware_funktionen.get_installierte_cyberware(self)
+
+    def get_aktive_cyberware(self):
+        return cyberware_funktionen.get_aktive_cyberware(self)
+
+    def berechne_cyberware_nebenwirkungen(self):
+        return cyberware_funktionen.berechne_nebenwirkungen(self)
+
+    def ist_cyberware_setting(self):
+        """Prüft ob das aktuelle Setting Cyberware verwendet."""
+        return cyberware_funktionen.ist_cyberware_setting(self.active_setting_name)
 
     # === VÖLKER ===
     def set_selected_volk(self, volk_name):

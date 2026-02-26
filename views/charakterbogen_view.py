@@ -705,6 +705,17 @@ class CharakterbogenWidget(MDBoxLayout):
             ("Vermögen", f"{self.charakter.vermoegen} {self.charakter.waehrungseinheit}"),
             ("Traglast", f"{self.charakter.gesamtgewicht}/{self.charakter.maximale_traglast} kg")
         ]
+
+        # Cyberware-Stress nur im SciFi-Setting anzeigen
+        from functions.cyberware_funktionen import ist_cyberware_setting
+        if ist_cyberware_setting(self.charakter.active_setting_name):
+            stress_aktuell = self.charakter.cyberware_stress_aktuell
+            stresslimit = self.charakter.cyberware_stresslimit
+            stress_max = self.charakter.cyberware_stress_maximum
+            werte.append(("Cyberware Stress", f"{stress_aktuell} / {stresslimit} (Max: {stress_max})"))
+            installationen = len(getattr(self.charakter, 'cyberware_installationen', {}))
+            if installationen > 0:
+                werte.append(("Installationen", str(installationen)))
         
         # Werte anzeigen
         for name, wert in werte:

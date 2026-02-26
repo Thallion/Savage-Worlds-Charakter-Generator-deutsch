@@ -489,12 +489,14 @@
         "talente": {},
         "maechte": {},
         "superkraefte": {},
+        "cyberware": {},
         "ausruestung": {}
     },
     "selected_handicaps": [],
     "selected_talente": [],
     "selected_maechte": [],
     "selected_superkraefte": [],
+    "selected_cyberware": [],
     "voelker_selected": {
         "Androiden": false,
         "Aquarianer": false,

@@ -639,8 +639,6 @@ class TestMageCharakterErstellung(unittest.TestCase):
 
         self.assertEqual(self.charakter.aufstiege_gesamt, 4,
                          "4 Aufstiege gesamt erwartet")
-        self.assertEqual(self.charakter.rang, "Fortgeschritten",
-                         f"Rang sollte 'Fortgeschritten' sein, ist '{self.charakter.rang}'")
 
         # Aufstiegs-Talente waehlen
         # Energieschub hat generische Voraussetzung "Arkane Fertigkeit W8"
@@ -660,10 +658,12 @@ class TestMageCharakterErstellung(unittest.TestCase):
                          f"4 Aufstiegs-Talente erwartet, {gewaehlt} gewaehlt")
         self.assertEqual(self.charakter.verbleibende_aufstiege, 0,
                          "Alle Aufstiege sollten verbraucht sein")
+        self.assertEqual(self.charakter.rang, "Fortgeschritten",
+                         f"Rang sollte 'Fortgeschritten' sein, ist '{self.charakter.rang}'")
 
-        # Machtpunkte: 15 (AB) + 10 (Machtpunkte-Talent) = 25
-        self.assertEqual(self.charakter.machtpunkte, 25,
-                         f"25 Machtpunkte erwartet (15+10), sind {self.charakter.machtpunkte}")
+        # Machtpunkte: 15 (AB) + 5 (Machtpunkte-Talent) = 20
+        self.assertEqual(self.charakter.machtpunkte, 20,
+                         f"20 Machtpunkte erwartet (15+5), sind {self.charakter.machtpunkte}")
 
     def test_10b_neue_maechte_auswahl(self):
         """Nach Neue Maechte: 2 zusaetzliche Maechte waehlen (inkl. Rang F).
@@ -808,8 +808,8 @@ class TestMageCharakterErstellung(unittest.TestCase):
                          "4 Aufstiegs-Talente sollten gewaehlt sein")
         self.assertEqual(self.charakter.rang, "Fortgeschritten",
                          "Rang sollte Fortgeschritten (Seasoned) sein")
-        self.assertEqual(self.charakter.machtpunkte, 25,
-                         "25 Machtpunkte erwartet (15 AB + 10 Machtpunkte-Talent)")
+        self.assertEqual(self.charakter.machtpunkte, 20,
+                         "20 Machtpunkte erwartet (15 AB + 5 Machtpunkte-Talent)")
         self.assertEqual(len(self.charakter.selected_maechte), 8,
                          "8 Maechte erwartet (6 Erstellung + 2 Neue Maechte)")
         self.assertEqual(self.charakter.verbleibende_aufstiege, 0,

@@ -90,6 +90,10 @@ def berechne_abgeleitete_werte(charakter):
         # 2. Völker-Effekte für Bewegungsweite
         voelker_bewegungsweite_bonus = _berechne_voelker_bewegungsweite_bonus(charakter)
         bewegungsweite_malus -= voelker_bewegungsweite_bonus  # Bonus ist negativ bei Malus
+
+        # 2b. Cyberware-Effekte für Bewegungsweite
+        cyberware_bw_bonus = _berechne_cyberware_bewegungsweite_bonus(charakter)
+        bewegungsweite_malus -= cyberware_bw_bonus
         
         # Bewegungsweite anpassen (nicht unter 1)
         Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
@@ -134,6 +138,10 @@ def berechne_abgeleitete_werte(charakter):
         # 3. Völker-Effekte für Robustheit (Größe/Basis-Modifikationen)
         voelker_robustheit_bonus = _berechne_voelker_robustheit_bonus(charakter)
         robustheit_bonus += voelker_robustheit_bonus
+
+        # 3b. Cyberware-Effekte für Robustheit
+        cyberware_robustheit_bonus = _berechne_cyberware_robustheit_bonus(charakter)
+        robustheit_bonus += cyberware_robustheit_bonus
         
         # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Boni
         charakter.robustheit_basis = (konstitution_wert // 2) + 2 + robustheit_bonus
@@ -146,8 +154,12 @@ def berechne_abgeleitete_werte(charakter):
         # 4. Natürliche Panzerung aus Völker-Effekten hinzufügen
         natuerliche_panzerung = _berechne_voelker_natuerliche_panzerung(charakter)
         gesamt_torso += natuerliche_panzerung
+
+        # 4b. Natürliche Panzerung aus Cyberware
+        cyberware_panzerung = _berechne_cyberware_natuerliche_panzerung(charakter)
+        gesamt_torso += cyberware_panzerung
         
-        Logger.debug(f"Rüstungsschutz: Normal={gesamt_ruestungsschutz.get('Torso', 0)}, Natürlich={natuerliche_panzerung}, Gesamt={gesamt_torso}")
+        Logger.debug(f"Rüstungsschutz: Normal={gesamt_ruestungsschutz.get('Torso', 0)}, Natürlich={natuerliche_panzerung}, Cyberware={cyberware_panzerung}, Gesamt={gesamt_torso}")
 
         # Gesamte Robustheit (Basis + Rüstung)
         charakter.robustheit = charakter.robustheit_basis + gesamt_torso
@@ -181,12 +193,24 @@ def berechne_abgeleitete_werte(charakter):
             
         charakter.bennys = bennys  # Aktualisiere Bennys im Charakter-Objekt
 
-        # Maximale Traglast berechnen
+        # Maximale Traglast berechnen (inkl. Cyberware-Bonus)
         from functions.ausruestung_funktionen import berechne_traglast
         maximale_traglast = berechne_traglast(charakter)
+        cyberware_traglast_bonus = _berechne_cyberware_traglast_bonus(charakter)
+        maximale_traglast += cyberware_traglast_bonus
         charakter.maximale_traglast = maximale_traglast
 
         # Gesamtgewicht wird automatisch über die Property berechnet - keine manuelle Zuweisung nötig
+
+        # === CYBERWARE STRESS BERECHNUNG ===
+        from functions.cyberware_funktionen import ist_cyberware_setting
+        if ist_cyberware_setting(charakter.active_setting_name):
+            from functions.cyberware_funktionen import (
+                berechne_stresslimit, berechne_stress_maximum, berechne_stress_aktuell
+            )
+            charakter.cyberware_stresslimit = berechne_stresslimit(charakter)
+            charakter.cyberware_stress_maximum = berechne_stress_maximum(charakter)
+            charakter.cyberware_stress_aktuell = berechne_stress_aktuell(charakter)
 
         # Zusammenstellen der abgeleiteten Werte
         abgeleitete_werte = {
@@ -305,6 +329,110 @@ def _berechne_voelker_natuerliche_panzerung(charakter):
         Logger.error(f"Fehler bei Berechnung natürlicher Panzerung: {e}")
     
     return natuerliche_panzerung
+
+
+def _berechne_cyberware_robustheit_bonus(charakter):
+    """
+    Berechnet den Robustheit-Bonus durch aktive Cyberware.
+    Summiert 'robustheit_bonus' aller aktiven Installationen.
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        int: Cyberware-Robustheit-Bonus
+    """
+    bonus = 0
+    try:
+        from functions.cyberware_funktionen import ist_cyberware_setting, get_aktive_cyberware
+        if not ist_cyberware_setting(getattr(charakter, 'active_setting_name', '')):
+            return 0
+        for inst in get_aktive_cyberware(charakter):
+            bonus += inst.effekte.get('robustheit_bonus', 0)
+        if bonus:
+            Logger.debug(f"Cyberware-Robustheit-Bonus: +{bonus}")
+    except Exception as e:
+        Logger.error(f"Fehler bei Cyberware-Robustheit-Berechnung: {e}")
+    return bonus
+
+
+def _berechne_cyberware_natuerliche_panzerung(charakter):
+    """
+    Berechnet die natürliche Panzerung durch aktive Cyberware.
+    Summiert 'panzerung_bonus' aller aktiven Installationen mit 'natuerliche_panzerung: true'.
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        int: Cyberware-Panzerungsbonus
+    """
+    panzerung = 0
+    try:
+        from functions.cyberware_funktionen import ist_cyberware_setting, get_aktive_cyberware
+        if not ist_cyberware_setting(getattr(charakter, 'active_setting_name', '')):
+            return 0
+        for inst in get_aktive_cyberware(charakter):
+            if inst.effekte.get('natuerliche_panzerung'):
+                panzerung += inst.effekte.get('panzerung_bonus', 0)
+        # Beachte max_kumulativ (Standard: 10 mit getragener Panzerung)
+        if panzerung:
+            Logger.debug(f"Cyberware-Natürliche-Panzerung: +{panzerung}")
+    except Exception as e:
+        Logger.error(f"Fehler bei Cyberware-Panzerung-Berechnung: {e}")
+    return panzerung
+
+
+def _berechne_cyberware_bewegungsweite_bonus(charakter):
+    """
+    Berechnet den Bewegungsweite-Bonus durch aktive Cyberware.
+    Summiert 'bewegungsweite_bonus' aller aktiven Installationen.
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        int: Cyberware-Bewegungsweite-Bonus
+    """
+    bonus = 0
+    try:
+        from functions.cyberware_funktionen import ist_cyberware_setting, get_aktive_cyberware
+        if not ist_cyberware_setting(getattr(charakter, 'active_setting_name', '')):
+            return 0
+        for inst in get_aktive_cyberware(charakter):
+            bonus += inst.effekte.get('bewegungsweite_bonus', 0)
+        if bonus:
+            Logger.debug(f"Cyberware-Bewegungsweite-Bonus: +{bonus}")
+    except Exception as e:
+        Logger.error(f"Fehler bei Cyberware-Bewegungsweite-Berechnung: {e}")
+    return bonus
+
+
+def _berechne_cyberware_traglast_bonus(charakter):
+    """
+    Berechnet den Traglast-Bonus durch aktive Cyberware.
+    'traglast_staerke_bonus' wird als virtueller Stärke-Bonus umgerechnet:
+    +1 Würfeltyp = +20 Traglast (2 Stärke-Punkte × 10 kg).
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        int: Cyberware-Traglast-Bonus in kg
+    """
+    bonus = 0
+    try:
+        from functions.cyberware_funktionen import ist_cyberware_setting, get_aktive_cyberware
+        if not ist_cyberware_setting(getattr(charakter, 'active_setting_name', '')):
+            return 0
+        for inst in get_aktive_cyberware(charakter):
+            staerke_bonus = inst.effekte.get('traglast_staerke_bonus', 0)
+            bonus += staerke_bonus * 20  # +1 Würfeltyp = +2 Stärke = +20 Traglast
+        if bonus:
+            Logger.debug(f"Cyberware-Traglast-Bonus: +{bonus} kg")
+    except Exception as e:
+        Logger.error(f"Fehler bei Cyberware-Traglast-Berechnung: {e}")
+    return bonus
 
 
 def _berechne_voelker_benny_bonus(charakter):

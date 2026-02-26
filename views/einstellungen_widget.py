@@ -138,6 +138,11 @@ class EinstellungenWidget(MDBoxLayout):
         else:
             Logger.warning("StatisticsManager nicht verfügbar für Statistik-Update")
 
+    def aktualisiere_ui(self):
+        """Aktualisiert die Einstellungen-UI nach Änderungen"""
+        if self.statistics_manager:
+            self.statistics_manager.update_element_statistics_ui()
+
     # Character-Management - Basis-Operationen bleiben hier
     def get_charakter_value(self, attribute, default_value=''):
         """Hilfsmethode zum sicheren Abrufen von Charakter-Attributen"""

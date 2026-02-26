@@ -74,7 +74,7 @@ class TestAusruestungKonfig(unittest.TestCase):
 
 class TestAusruestungFunktionen(unittest.TestCase):
     """Tests für die Ausrüstungs-Funktionen"""
-    
+
     def setUp(self):
         """Setup für jeden Test"""
         # Mock-Charakter erstellen
@@ -88,6 +88,9 @@ class TestAusruestungFunktionen(unittest.TestCase):
         self.charakter.selected_waffen = []
         self.charakter.selected_ruestungen = []
         self.charakter.selected_schilde = []
+        self.charakter.waffen = {}
+        self.charakter.ruestungen = {}
+        self.charakter.schilde = {}
         self.charakter.selected_talente = set()
         self.charakter.selected_handicaps = set()
         

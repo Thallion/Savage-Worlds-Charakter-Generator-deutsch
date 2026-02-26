@@ -1,0 +1,73 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-02-24 18:46:35
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-02-24 18:46:35] Auto-Generierung abgeschlossen:
+    Template: Seelah (Setting: Savage Pathfinder)
+    Zusätzliche Punkte: 1
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-02-24 18:46:35] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Konstitution: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Konstitution: W6 → W8 (1 Standard)
+  [2026-02-24 18:46:35] Stärke: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Stärke: W6 → W8 (1 Standard)
+  [2026-02-24 18:46:35] Verstand: W4 → W6 (2 Handicap-Punkte)
+  [2026-02-24 18:46:35] Willenskraft: W4 → W6 (2 Handicap-Punkte)
+  [2026-02-24 18:46:35] Willenskraft: W6 → W8 (1 Auto-Generator)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-02-24 18:46:35] Athletik: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Einschüchtern: W2 → W4 (1 Standard)
+  [2026-02-24 18:46:35] Einschüchtern: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Kämpfen: W2 → W4 (1 Standard)
+  [2026-02-24 18:46:35] Kämpfen: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Kämpfen: W6 → W8 (1 Standard)
+  [2026-02-24 18:46:35] Reiten: W2 → W4 (1 Standard)
+  [2026-02-24 18:46:35] Reiten: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Schießen: W2 → W4 (1 Standard)
+  [2026-02-24 18:46:35] Schießen: W4 → W6 (1 Standard)
+  [2026-02-24 18:46:35] Wahrnehmung: W4 → W6 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-24 18:46:35] Auserwählter (Kosten: 0)
+  [2026-02-24 18:46:35] Paladin (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-24 18:46:35] Ehrenkodex ( - Punkte: 2)
+  [2026-02-24 18:46:35] Loyal ( - Punkte: 1)
+  [2026-02-24 18:46:35] Dünnhäutig ( - Punkte: 1)
+  [2026-02-24 18:46:35] Schwur ( - Punkte: 1)
+
+AUSRUESTUNG HINZUGEFUEGT:
+----------------------------------------
+  [2026-02-24 18:46:35] Langschwert (Stä+W8) hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Langbogen (Reichweite 15/30/60, Schaden 2W6, PB 1) hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] 20 Pfeile hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Entdeckerkleidung hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Kettenhemd (+3) hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Lederbeinlinge (+2) hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Mittlerer Schild (+2 Parade, -2 Deckung) hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Abenteurerausrüstung hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Heiliges Symbol hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] Weihwasser hinzugefügt [Auto-Gen]
+  [2026-02-24 18:46:35] 15 GM hinzugefügt [Auto-Gen]
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     8 Punkte (8 Steigerungen)
+  Fertigkeiten:  11 Punkte (11 Steigerungen)
+  Talente:       1 Punkte (2 hinzugefügt, 0 entfernt)
+  Handicaps:     +5 erhalten, 4 verwendet, 1 verfügbar (4 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (0 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

@@ -287,6 +287,17 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
     for key, value in abgeleitete_werte.items():
         abgeleitete_data.append([key, str(value)])
 
+    # Cyberware-Stress für SciFi-Settings
+    from functions.cyberware_funktionen import ist_cyberware_setting
+    if ist_cyberware_setting(charakter.active_setting_name):
+        stress_aktuell = charakter.cyberware_stress_aktuell
+        stresslimit = charakter.cyberware_stresslimit
+        stress_max = charakter.cyberware_stress_maximum
+        abgeleitete_data.append(["Cyberware Stress", f"{stress_aktuell} / {stresslimit} (Max: {stress_max})"])
+        installationen = len(getattr(charakter, 'cyberware_installationen', {}))
+        if installationen > 0:
+            abgeleitete_data.append(["Installationen", str(installationen)])
+
     abgeleitete_table = Table(abgeleitete_data, colWidths=[100, 70], hAlign='LEFT')
     abgeleitete_table.setStyle(tabellen_style)
     right_column_content.append(abgeleitete_header)
