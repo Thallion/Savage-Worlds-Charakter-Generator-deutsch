@@ -2383,7 +2383,7 @@
             "voraussetzungen": [
                 "Fraktion (Hexenjäger)"
             ],
-            "beschreibung": "Hexenjäger-Talent: Schwarze Magie erleidet gegen diesen Helden –2 auf die arkane Fertigkeitsprobe. Rückschlag tritt bereits bei 1 oder 2 auf dem arkanen Fertigkeitswürfel auf.",
+            "beschreibung": "Hexenjäger-Talent: Schwarze Magie erleidet gegen diesen Helden –2 auf die arkane Fertigkeitsprobe. (Rückschlag tritt nur bei einem Kritischen Fehlschlag auf.)",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2448,9 +2448,8 @@
             "voraussetzungen": [
                 "Fraktion (Rosenkreuzer)"
             ],
-            "beschreibung": "Rosenkreuzer-Talent: Eine Stufe Erschöpfung in Kauf nehmen und dafür 1W6 Machtpunkte erhalten. Nicht möglich, wenn es den Helden Außer Gefecht setzen würde. Machtpunkte können auch für empfangene Mächte verwendet werden. Erschöpfung nach 8 Stunden Ruhe abgebaut.",
+            "beschreibung": "Rosenkreuzer-Talent: Nutze die Regeln für das Talent Seelenentzug aus SWAE. Eine Stufe Erschöpfung in Kauf nehmen und dafür 5 Machtpunkte erhalten.",
             "neue_maechte": 0,
-            "maktpunkte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
@@ -2473,8 +2472,8 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Wissen (Chemie) W6",
-                "Wissen (Rippertech) W6"
+                "Wissenschaft W6",
+                "Rippertech W6"
             ],
             "beschreibung": "Beim Brauen von Extrakten kann der Ripper doppelt so viele Dosierungen herstellen wie üblich.",
             "neue_maechte": 0,
@@ -2515,8 +2514,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Heilen W6",
-                "Überreden W6",
-                "Wissen (Psychologie) W6"
+                "Überreden W6"
             ],
             "beschreibung": "Hat Verständnis für jene, deren Seele Schaden erlitten hat. Kann bei einem Patienten temporären Stabilitätsverlust heilen.",
             "neue_maechte": 0,
@@ -2571,7 +2569,7 @@
                 "Arkaner Hintergrund (Verrückte Wissenschaft)",
                 "Verrückte Wissenschaft W8"
             ],
-            "beschreibung": "Wähle eine Macht: Diese erleidet nur noch bei einem kritischen Fehlschlag eine Fehlfunktion. Mehrfach erwerbbar, aber nur einmal pro Macht.",
+            "beschreibung": "Gilt für alle Mächte des Charakters. Bei einem Kritischen Fehlschlag auf eine arkane Fertigkeitsprobe wird gewürfelt: ungerade = Fehlfunktion wie üblich, gerade = die Macht funktioniert einfach nicht. In beiden Fällen wird nur 1 Machtpunkt verbraucht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2611,7 +2609,7 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
-            "beschreibung": "An lokale Umgebung angepasst, vermeidet Erschöpfungsabzüge durch Hitze, Kälte oder andere Umgebungseinflüsse. +2 auf Charisma bei Einheimischen, wird aber als Außenseiter behandelt (außer mit Weltreisender).",
+            "beschreibung": "Der Charakter ignoriert einen Punkt Abzüge beim Widerstand gegen natürliche Erschöpfung durch Umgebungseinflüsse (Hitze, Kälte etc.).",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2649,7 +2647,7 @@
             "kategorie": "Sozial",
             "rang": "A",
             "voraussetzungen": [
-                "Überreden W6"
+                "Darstellung W6"
             ],
             "beschreibung": "Zweite Identität von geringerem Status. Erkennung: vergleichende Wahrnehmungsprobe mit –4 gegen Heimlichkeit. Skandale des Alter Ego betreffen die echte Person nicht. Vertuschen kostet einen Gefallen weniger.",
             "neue_maechte": 0,
@@ -2663,7 +2661,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "Tarnidentität",
-                "Überreden W8"
+                "Darstellung W6"
             ],
             "beschreibung": "Kann sich als gänzlich andere Person verkleiden. Benötigt 15 Minuten und Handwerkszeug. Ohne Handwerkszeug: –2. Auf die Schnelle (1W6 Runden): –2 (oder –4 ohne Handwerkszeug).",
             "neue_maechte": 0,
@@ -2693,7 +2691,7 @@
                 "Verteidiger der Fraktion",
                 "Status 4+"
             ],
-            "beschreibung": "+2 Charisma unter Rippern und Verbündeten (außer feindlich gesonnenen Logen). Gefallen von allen diesen Personen kosten einen Punkt weniger (Minimum 1).",
+            "beschreibung": "+2 auf Überreden-Proben bei befreundeten Rippern und deren Verbündeten (außer feindlich gesonnenen Logen). Gefallen von allen diesen Personen kosten einen Punkt weniger (Minimum 1).",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2704,7 +2702,7 @@
             "kategorie": "Sozial",
             "rang": "F",
             "voraussetzungen": [],
-            "beschreibung": "Der Charakter ist mit anderen Nationen und Kulturen vertraut und erleidet nicht die üblichen Abzüge für Außenseiter in anderen Ländern.",
+            "beschreibung": "Der Charakter ignoriert den Außenseiter-Abzug im Umgang mit Einheimischen (siehe Settingregel Außenseiter).",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -3536,7 +3534,7 @@
             "name": "Chauvinist",
             "stufe": "leicht",
             "punkte": 1,
-            "beschreibung": "Der Charakter hält seine eigene Kultur für weit überlegen. –2 auf Charisma in allen Kulturen außer seiner eigenen. Kann das Talent Anführer bei Fremden nicht anwenden, bis er mindestens eine Woche mit ihnen zusammengearbeitet hat.",
+            "beschreibung": "Der Charakter hält seine eigene Kultur für weit überlegen. –2 auf Überreden-Proben im Umgang mit anderen Kulturen. Kann Anführer-Talente bei Fremden nicht anwenden.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -3545,7 +3543,7 @@
             "name": "Chauvinist",
             "stufe": "schwer",
             "punkte": 2,
-            "beschreibung": "Der Charakter hält seine eigene Kultur für weit überlegen. –4 auf Charisma in allen Kulturen außer seiner eigenen. Kann das Talent Anführer bei Fremden nicht anwenden, bis er mindestens eine Woche mit ihnen zusammengearbeitet hat.",
+            "beschreibung": "Der Charakter hält seine eigene Kultur für weit überlegen. –4 auf Überreden-Proben im Umgang mit anderen Kulturen. Kann Anführer-Talente bei Fremden nicht anwenden.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
