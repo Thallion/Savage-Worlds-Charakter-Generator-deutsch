@@ -131,7 +131,11 @@
             "name": "Arkaner Hintergrund (Hexenmystiker)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W6+", "Okkultismus W4+", "Überleben W4+"],
+            "voraussetzungen": [
+                "Willenskraft W6+",
+                "Okkultismus W4+",
+                "Überleben W4+"
+            ],
             "beschreibung": "Startmächte: 3, Machtpunkte: 10, kann Tränke herstellen und Rituale ausführen, muss Zutaten sammeln.",
             "neue_maechte": 3,
             "machtpunkte": 10,
@@ -142,18 +146,24 @@
             "name": "Feuerprediger",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Alchemist)", "Fanatiker"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Alchemist)",
+                "Fanatiker"
+            ],
             "beschreibung": "Schutz vor Naturgewalten mit Einschränkung Feuer erlernt. Kann sich selbst Erschöpfung zufügen, um Bennys zu erhalten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Mariannen-Seelsorgerin": {
             "name": "Mariannen-Seelsorgerin",
             "kategorie": "Sozial",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Priester)", "weiblich"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Priester)",
+                "weiblich"
+            ],
             "beschreibung": "Kann Verderbnis erhöhen, um einen Benny zu erhalten, und anderen Mariannen besonders gut helfen, Verderbnis abzubauen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -164,7 +174,9 @@
             "name": "Gesegnete Mariannen-Seelsorgerin",
             "kategorie": "Sozial",
             "rang": "F",
-            "voraussetzungen": ["Mariannen-Seelsorgerin"],
+            "voraussetzungen": [
+                "Mariannen-Seelsorgerin"
+            ],
             "beschreibung": "Kann Freizeitaktionen aufwenden, um Segnungen zu erhalten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -175,7 +187,10 @@
             "name": "Mariannen-Streiterin",
             "kategorie": "Sozial",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Eiferer)", "weiblich"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Eiferer)",
+                "weiblich"
+            ],
             "beschreibung": "Kann Verderbnis erhöhen, um bis zum Beginn ihres nächsten Zuges einen Bonus in Höhe ihrer Verderbnis auf alle Eigenschafts- und Schadenswürfe zu erhalten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -186,18 +201,23 @@
             "name": "Feurige Mariannen-Streiterin",
             "kategorie": "Sozial",
             "rang": "F",
-            "voraussetzungen": ["Mariannen-Streiterin"],
+            "voraussetzungen": [
+                "Mariannen-Streiterin"
+            ],
             "beschreibung": "Kann Verderbnis erhöhen, um bis zum Ende der Begegnung ein Kampftalent zu erlernen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        }, 
+        },
         "Prediger": {
             "name": "Prediger",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Priester)", "Überreden W6+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Priester)",
+                "Überreden W6+"
+            ],
             "beschreibung": "Erlaubt Priestern, Rituale durchzuführen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -208,29 +228,37 @@
             "name": "Weiße Hexe",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexenmystiker)", "Gesucht (schwer)", "weiblich"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexenmystiker)",
+                "Gesucht (schwer)",
+                "weiblich"
+            ],
             "beschreibung": "Gilt als Widernatürlich, keine Segnungen, kann Hexenkräfte wirken.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },  
+        },
         "Esprit": {
             "name": "Esprit",
             "kategorie": "Sozial",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W8+"],
+            "voraussetzungen": [
+                "Willenskraft W8+"
+            ],
             "beschreibung": "+1 Wohlstandsbonus von Beute, +2 Unterhalt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Gesandter": {
             "name": "Gesandter",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W6+"],
+            "voraussetzungen": [
+                "Geschicklichkeit W6+"
+            ],
             "beschreibung": "+2 Unterhalt, Benny, um Unterstützung anzufordern.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -241,7 +269,10 @@
             "name": "Giftmischer",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["AH (Priester)", "Einschüchtern W6+"],
+            "voraussetzungen": [
+                "AH (Priester)",
+                "Einschüchtern W6+"
+            ],
             "beschreibung": "Macht Gift und Waffengifte auftragen als begrenzte freie Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -252,7 +283,10 @@
             "name": "Im Sattel geboren",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W8+", "Reiten W6+"],
+            "voraussetzungen": [
+                "Geschicklichkeit W8+",
+                "Reiten W6+"
+            ],
             "beschreibung": "Freie Wiederholung auf Reiten, Bewegungsweite Pferd +2 und Sprintwürfel ist einen Würfeltyp besser.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -263,7 +297,10 @@
             "name": "Inquisitor",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["AH (Priester) oder AH (Eiferer)", "Einschüchtern W6+"],
+            "voraussetzungen": [
+                "AH (Priester) oder AH (Eiferer)",
+                "Einschüchtern W6+"
+            ],
             "beschreibung": "Freie Wiederholung auf Einschüchtern.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -274,7 +311,9 @@
             "name": "Söldner",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Kämpfen W8+"],
+            "voraussetzungen": [
+                "Kämpfen W8+"
+            ],
             "beschreibung": "Ein Herausfordern mit Einschüchtern als begrenzte freie Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -285,7 +324,9 @@
             "name": "Großmeister der Dolche",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Meister der Dolche"],
+            "voraussetzungen": [
+                "Meister der Dolche"
+            ],
             "beschreibung": "Insgesamt +2 Kämpfen und zusätzlich PB 3 mit Messern und Dolchen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -296,7 +337,10 @@
             "name": "Musketier",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W8+", "Schießen W6+"],
+            "voraussetzungen": [
+                "Geschicklichkeit W8+",
+                "Schießen W6+"
+            ],
             "beschreibung": "Eine Nachladeaktion für Schwarzpulverwaffen ohne Mehrfachaktionsabzug, doppelte Ladung explodiert nur bei Kritischem Fehlschlag.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -307,7 +351,9 @@
             "name": "Pistolero",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W6+"],
+            "voraussetzungen": [
+                "Geschicklichkeit W6+"
+            ],
             "beschreibung": "Darf 4 geladene Pistolen am Körper tragen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -318,7 +364,9 @@
             "name": "Grande Pistolero",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Pistolero"],
+            "voraussetzungen": [
+                "Pistolero"
+            ],
             "beschreibung": "Darf 6 geladene Pistolen am Körper tragen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -329,7 +377,9 @@
             "name": "Präzises Nachladen",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Schießen W8+"],
+            "voraussetzungen": [
+                "Schießen W8+"
+            ],
             "beschreibung": "Eine Nachladeaktion beim Zielen möglich.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -340,18 +390,23 @@
             "name": "Vergiftete Bolzen",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W6+", "AH (Alchemist)"],
+            "voraussetzungen": [
+                "Geschicklichkeit W6+",
+                "AH (Alchemist)"
+            ],
             "beschreibung": "Kann Bolzen vergiften.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },  
+        },
         "Betäubungsschlag": {
             "name": "Betäubungsschlag",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Stärke W8+"],
+            "voraussetzungen": [
+                "Stärke W8+"
+            ],
             "beschreibung": "Wenn Angriff Angeschlagen oder Wunde erzielt, muss das Ziel eine Konstitutionsprobe ablegen oder wird Betäubt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -362,7 +417,9 @@
             "name": "Blattschuss",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Schießen W8+"],
+            "voraussetzungen": [
+                "Schießen W8+"
+            ],
             "beschreibung": "Meister der Dolche, +1 Kämpfen und +1W4 Schaden mit Messern und Dolchen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -373,7 +430,9 @@
             "name": "Tödlicher Blattschuss",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W8+"],
+            "voraussetzungen": [
+                "Geschicklichkeit W8+"
+            ],
             "beschreibung": "Schaden von Armbrust steigt um einen Würfeltyp.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -384,7 +443,9 @@
             "name": "Feuerregen",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Kämpfen W8+"],
+            "voraussetzungen": [
+                "Kämpfen W8+"
+            ],
             "beschreibung": "Musketenangriff gegen alle Ziele in MFS, begrenzte Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -395,7 +456,9 @@
             "name": "Gewaltiger Feuerregen",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Kämpfen W8+"],
+            "voraussetzungen": [
+                "Kämpfen W8+"
+            ],
             "beschreibung": "Musketenangriff gegen alle Ziele in GFS.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -406,7 +469,9 @@
             "name": "Formationskämpfer",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Kämpfen W8+"],
+            "voraussetzungen": [
+                "Kämpfen W8+"
+            ],
             "beschreibung": "Gewährt Verbündeten und sich selbst +1 Überzahlbonus.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -417,7 +482,9 @@
             "name": "Hinterhältiger Angriff",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Assassine"],
+            "voraussetzungen": [
+                "Assassine"
+            ],
             "beschreibung": "Schadensbonus von Assassine ist W6.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -428,7 +495,9 @@
             "name": "Hinterhältigster Angriff",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Hinterhältiger Angriff"],
+            "voraussetzungen": [
+                "Hinterhältiger Angriff"
+            ],
             "beschreibung": "Schadensbonus gilt auch bei Abgelenkt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -439,18 +508,23 @@
             "name": "Leibgarde",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Geschicklichkeit W6+"],
+            "voraussetzungen": [
+                "Geschicklichkeit W6+"
+            ],
             "beschreibung": "Angriffe auf angrenzende Mitstreiter treffen Anwender bzw. binden Angreifer an Anwender statt an Mitstreiter.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },                
+        },
         "Arkaner Hintergrund (Alchemist)": {
             "name": "Arkaner Hintergrund (Alchemist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Verstand W6+", "Alchemie W6+"],
+            "voraussetzungen": [
+                "Verstand W6+",
+                "Alchemie W6+"
+            ],
             "beschreibung": "Startmächte: 3, Machtpunkte: 10, kein Selektiv, Waffengifte möglich, transportables Labor notwendig, kann Tränke und Gifte weitergeben.",
             "neue_maechte": 3,
             "machtpunkte": 10,
@@ -461,7 +535,10 @@
             "name": "Arkaner Hintergrund (Eiferer)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W6+", "Kämpfen W6+"],
+            "voraussetzungen": [
+                "Willenskraft W6+",
+                "Kämpfen W6+"
+            ],
             "beschreibung": "Startmächte: Waffe verbessern +1, Machtpunkte: 15, Reichweite immer Selbst oder Berührung.",
             "neue_maechte": 1,
             "machtpunkte": 15,
@@ -472,7 +549,10 @@
             "name": "Arkaner Hintergrund (Konstrukteur)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Verstand W8+", "Naturwissenschaften oder Alchemie W6+"],
+            "voraussetzungen": [
+                "Verstand W8+",
+                "Naturwissenschaften oder Alchemie W6+"
+            ],
             "beschreibung": "Startmächte: 2, Machtpunkte: 15, kein Selektiv, Werkzeugkiste notwendig.",
             "neue_maechte": 2,
             "machtpunkte": 15,
@@ -483,7 +563,9 @@
             "name": "Arkaner Hintergrund (Priester)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W8+"],
+            "voraussetzungen": [
+                "Willenskraft W8+"
+            ],
             "beschreibung": "Startmächte: Heiliges Symbol +2, Machtpunkte: 10, Sündigen erschwert Wirken von Mächten oder macht es unmöglich. Kann Bennys gegen Segnungen tauschen.",
             "neue_maechte": 2,
             "machtpunkte": 10,
@@ -494,13 +576,15 @@
             "name": "Fanatiker",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W8+"],
+            "voraussetzungen": [
+                "Willenskraft W8+"
+            ],
             "beschreibung": "Alchemiewürfe für Waffengifte –2, +2 Konstitution gegen Vergiftet.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },              
+        },
         "Aristokrat": {
             "name": "Aristokrat",
             "kategorie": "Hintergrund",
@@ -2115,8 +2199,7 @@
             "name": "Gefolgsleute",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Der Held hat fünf Gefolgsleute.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2127,8 +2210,7 @@
             "name": "Handlanger",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Der Charakter erhält einen Wildcard-Handlanger.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2264,7 +2346,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },        
+        },
         "Alt": {
             "name": "Alt",
             "stufe": "schwer",
@@ -2939,6 +3021,24 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
+        },
+        "Klein": {
+            "name": "Klein",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Dieser Abenteurer ist ziemlich dürr, klein oder beides. Seine Größe (siehe Seite 103) wird um –1 verringert, wodurch auch seine Robustheit sinkt. Die Größe kann nicht unter –1 sinken, doch der Abzug auf Robustheit ist kumulativ. Ein kleiner Halbling hat beispielsweise Größe –1, verliert aber einen zusätzlichen Punkt Robustheit.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Kränklich": {
+            "name": "Kränklich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
         }
     },
     "maechte": {
@@ -2993,7 +3093,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },        
+        },
         "Abwehren": {
             "name": "Abwehren",
             "rang": "A",
@@ -4481,7 +4581,7 @@
             "setting": "HeXXen 1773",
             "beschreibung": "Größe 12 (Gigantisch), Manövrierfähigkeit –1, Höchstgeschwindigkeit 15 km/h, Robustheit 14 (2), Besatzung 12+30, 100 Beutegut-Pakete",
             "aktiv": true
-        },        
+        },
         "Sattel": {
             "name": "Sattel",
             "kategorie": "Allgemein",

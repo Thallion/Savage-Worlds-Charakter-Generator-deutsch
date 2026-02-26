@@ -12,7 +12,10 @@
                 "Arkanes Gespür (Kann übernatürliche Wesen und Effekte wahrnehmen. Willenskraftprobe mit -2 oder erleidet Erschöpfungsstufe.)",
                 "Drachenblut (Bei AH (Magie) beginnt der Charakter mit 15 statt 10 Machtpunkten.)"
             ],
-            "sprachen": ["Drakin", "Himmelssprech"],
+            "sprachen": [
+                "Drakin",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 15, Alt mit 60, maximales Alter 80-100 (Drachen-Verwandlung verlängert das Leben erheblich)",
             "groesse_maennlich": "1,10-1,20m, 25-35kg (Durchschnitt 1,15m, 30kg)",
             "groesse_weiblich": "1,05-1,20m, 22-32kg (Durchschnitt 1,12m, 27kg)",
@@ -24,7 +27,9 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Klein"],
+                "auto_handicaps": [
+                    "Klein"
+                ],
                 "spezielle_effekte": {
                     "arkanes_gespuer": true,
                     "drachenblut_machtpunkte": 5
@@ -40,7 +45,10 @@
                 "Geschickt (Beginnt mit Geschicklichkeit W6 statt W4.)",
                 "Pflanzenerbe (Elfen haben eines von acht verschiedenen Pflanzenerben: Blutrose, Dornen, Efeuranken, Nesselgriff, Parfüm, Rindenhaut, Sporen, Weidenschatten.)"
             ],
-            "sprachen": ["Elfisch", "Himmelssprech"],
+            "sprachen": [
+                "Elfisch",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 110, Alt mit 275, maximales Alter 300+",
             "groesse_maennlich": "1,80-1,95m, 60-75kg (Durchschnitt 1,85m, 65kg)",
             "groesse_weiblich": "1,75-1,90m, 55-70kg (Durchschnitt 1,82m, 60kg)",
@@ -71,7 +79,10 @@
                 "Bonustalent (Beginnt das Spiel mit einem freien Talent nach Wahl.)",
                 "Loyal (Entwickelt starke Bindungen zu denen, die als Familie betrachtet werden.)"
             ],
-            "sprachen": ["Goblin", "Himmelssprech"],
+            "sprachen": [
+                "Goblin",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 12, Alt mit 40, maximales Alter 50-80",
             "groesse_maennlich": "1,65-1,80m, 65-85kg (Durchschnitt 1,72m, 75kg)",
             "groesse_weiblich": "1,60-1,75m, 55-75kg (Durchschnitt 1,67m, 65kg)",
@@ -100,7 +111,10 @@
             "besonderheiten": [
                 "Anpassungsfähig (Menschen beginnen das Spiel mit 17 statt 15 Fertigkeitspunkten) ODER Bonustalent (Menschen beginnen das Spiel mit einem freien Talent nach Wahl.)"
             ],
-            "sprachen": ["Gemeinsprache", "Himmelssprech"],
+            "sprachen": [
+                "Gemeinsprache",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 17, Alt mit 53, maximales Alter 70",
             "groesse_maennlich": "1,60-1,85m, 65-90kg (Durchschnitt 1,72m, 77kg)",
             "groesse_weiblich": "1,55-1,75m, 50-75kg (Durchschnitt 1,65m, 62kg)",
@@ -132,7 +146,10 @@
                 "Groß (Robustheit +1, kann keine Kleidung oder Rüstung für kleinere Rassen tragen.)",
                 "Stark (Beginnt mit Stärke W6 statt W4 aufgrund des muskulösen Körperbaus.)"
             ],
-            "sprachen": ["Orkisch", "Himmelssprech"],
+            "sprachen": [
+                "Orkisch",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 14, Alt mit 55, maximales Alter 70-90",
             "groesse_maennlich": "1,95-2,10m, 90-120kg (Durchschnitt 2,02m, 105kg)",
             "groesse_weiblich": "1,85-2,00m, 80-110kg (Durchschnitt 1,92m, 95kg)",
@@ -147,8 +164,13 @@
                 "fertigkeits_startboni": {
                     "Einschüchtern": 2
                 },
-                "auto_talente": ["Berserker"],
-                "auto_handicaps": ["Außenseiter", "Dumm"],
+                "auto_talente": [
+                    "Berserker"
+                ],
+                "auto_handicaps": [
+                    "Außenseiter",
+                    "Dumm"
+                ],
                 "spezielle_effekte": {
                     "ausruestungs_einschraenkung": true,
                     "verstand_steigerung_erschwert": true,
@@ -169,7 +191,10 @@
                 "Fleischgeschmiedet (Wildlinge sind aus Tieren erschaffen worden und erhalten entsprechende Fähigkeiten und Handicaps basierend auf ihrer Tierart.)",
                 "Glühwahnimmunität (Immun gegen Glühwahn. Wirft keinen Schatten.)"
             ],
-            "sprachen": ["Elfisch (Dialekt)", "Himmelssprech"],
+            "sprachen": [
+                "Elfisch (Dialekt)",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 5, Alt mit 35, maximales Alter 50 (wenige sterben an Altersschwäche)",
             "groesse_maennlich": "85-95cm, 15-25kg (Durchschnitt 90cm, 20kg)",
             "groesse_weiblich": "80-90cm, 12-22kg (Durchschnitt 85cm, 17kg)",
@@ -183,7 +208,10 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": ["Flüchtling", "Klein"],
+                "auto_handicaps": [
+                    "Flüchtling",
+                    "Klein"
+                ],
                 "spezielle_effekte": {
                     "gluehwahn_immunitaet": true,
                     "kein_schatten": true,
@@ -206,7 +234,10 @@
                 "Nachtsicht (Ignoriert Abzüge durch schlechte Beleuchtung im Düsteren und im Dunkeln.)",
                 "Widerstandsfähig (Beginnt mit Konstitution W6 statt W4.)"
             ],
-            "sprachen": ["Zwergisch", "Himmelssprech"],
+            "sprachen": [
+                "Zwergisch",
+                "Himmelssprech"
+            ],
             "altersspanne": "Erwachsen mit 40, Alt mit 200, maximales Alter 250+",
             "groesse_maennlich": "1,35-1,50m, 70-90kg (Durchschnitt 1,42m, 80kg)",
             "groesse_weiblich": "1,30-1,45m, 60-80kg (Durchschnitt 1,37m, 70kg)",
@@ -219,8 +250,12 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Nachtsicht"],
-                "auto_handicaps": ["Langsam"],
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "auto_handicaps": [
+                    "Langsam"
+                ],
                 "spezielle_effekte": {
                     "nachtsicht": true,
                     "loyalty": true,
@@ -768,12 +803,15 @@
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Clangeborener": {
             "name": "Clangeborener",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Ork"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Ork"
+            ],
             "beschreibung": "+2 auf Überleben- und Konstitutionsproben gegen kalte Umgebung. Ermöglicht Schwimmen als Fertigkeit und empfiehlt das Talent Beziehungen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -784,7 +822,10 @@
             "name": "Gottesgeschenk",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (Wunder)"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Wunder)"
+            ],
             "beschreibung": "Erster Jahr der Kampagne gesegnet. Kann durch ein jährliches Ritual wiedererlangt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -795,13 +836,17 @@
             "name": "Steingeborener",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Zwerg", "Konstitution W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Zwerg",
+                "Konstitution W8+"
+            ],
             "beschreibung": "Verwandelt sich schrittweise in ein Erdelementar. Erhält Fähigkeiten und Handicaps mit jedem Rang.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Arkaner Hintergrund (Alchemist)": {
             "name": "Arkaner Hintergrund (Alchemist)",
             "kategorie": "Hintergrund",
@@ -817,7 +862,11 @@
             "name": "Chemiker",
             "kategorie": "Alchemist",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (Alchemist)", "Alchemie W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Alchemist)",
+                "Alchemie W8+"
+            ],
             "beschreibung": "Die Gebräue des Alchemisten halten eine Woche statt 48 Stunden, wenn sie an andere weitergegeben werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -828,13 +877,17 @@
             "name": "Meisterlicher Alchemist",
             "kategorie": "Alchemist",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Arkaner Hintergrund (Alchemist)", "Alchemie W10+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Alchemist)",
+                "Alchemie W10+"
+            ],
             "beschreibung": "Erlaubt die Herstellung permanenter Tränke zu halb so hohen Kosten mit improvisierten Vorräten oder einer Alchemistentasche.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Arkaner Hintergrund (Barde)": {
             "name": "Arkaner Hintergrund (Barde)",
             "kategorie": "Hintergrund",
@@ -850,7 +903,10 @@
             "name": "Grabgesang",
             "kategorie": "Barde",
             "rang": "H",
-            "voraussetzungen": ["Heroisch", "Arkaner Hintergrund (Barde)"],
+            "voraussetzungen": [
+                "Heroisch",
+                "Arkaner Hintergrund (Barde)"
+            ],
             "beschreibung": "Löst Furcht aus und reduziert Proben von Feinden um -2, wenn sie Bennys verwenden. Der Barde muss singen oder ein Instrument spielen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -861,7 +917,11 @@
             "name": "Heldentum inspirieren",
             "kategorie": "Barde",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Arkaner Hintergrund (Barde)", "Darbietung W8+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Barde)",
+                "Darbietung W8+"
+            ],
             "beschreibung": "Erlaubt es, fünf Inspirations-Marker zu generieren, die Kameraden Boni auf Proben oder Schadenswürfe geben.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -872,7 +932,10 @@
             "name": "Instrument",
             "kategorie": "Barde",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (Barde)"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Barde)"
+            ],
             "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -883,7 +946,9 @@
             "name": "Der Alpha",
             "kategorie": "Spezial",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "+2 auf vergleichende Proben gegen Elfen für ein Jahr. Kann durch das Töten eines weiteren Elfen erneuert werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -894,7 +959,9 @@
             "name": "Der Baumeister",
             "kategorie": "Spezial",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "+2 auf Reparierenproben für ein Jahr durch ein jährliches Ritual mit Werkzeugen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -905,7 +972,9 @@
             "name": "Der Kriegsherr",
             "kategorie": "Spezial",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Wählt zwischen +2 auf Überredenproben oder einer besonderen Eigenschaft für eine Waffe für ein Jahr.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -916,7 +985,9 @@
             "name": "Die Herrin der Winde",
             "kategorie": "Spezial",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Ermöglicht verschiedene Boni je nach gewähltem Aspekt der Herrin durch jährliche Zeremonien.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -927,7 +998,9 @@
             "name": "Die Lebensmutter",
             "kategorie": "Spezial",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Schützt ein Jahr vor Erschöpfung und Tod durch Wassermangel.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -938,29 +1011,37 @@
             "name": "Der Herr des Festivals",
             "kategorie": "Spezial",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Erhöht die Reichweite von Anführertalenten und unterstützenden Zaubern um 5\" für ein Jahr.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },    
+        },
         "Zwillingsseele": {
             "name": "Zwillingsseele",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Glühblut"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Glühblut"
+            ],
             "beschreibung": "+1 auf Willenskraft- oder Verstand-Proben und deren Fertigkeiten. Wird bei Glühwahn zur Zornbestie.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        }, 
+        },
         "Anhaltender Zorn": {
             "name": "Anhaltender Zorn",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Berserker"],
+            "voraussetzungen": [
+                "Veteran",
+                "Berserker"
+            ],
             "beschreibung": "Kann Berserkermodus ohne Verwundung aktivieren. Verstandprobe bei Verwundung erforderlich.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -971,7 +1052,11 @@
             "name": "Befleckter",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Arkaner Hintergrund (Magie)", "Wissen (Dämonen) W8+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (Magie)",
+                "Wissen (Dämonen) W8+"
+            ],
             "beschreibung": "+4 auf Glühwahn-Widerstand und +2 pro Grad Glühwahn auf Zauberproben. Zählt als Dämon für bestimmte Effekte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -982,7 +1067,12 @@
             "name": "Glühmagus",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "kein Wildling", "Arkaner Hintergrund (Leerewandler)", "Wissen (Arkanes) W10+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "kein Wildling",
+                "Arkaner Hintergrund (Leerewandler)",
+                "Wissen (Arkanes) W10+"
+            ],
             "beschreibung": "Kann Machtpunkte aus der Leere entziehen. Bei Fehlschlag entsteht Glühwahn und Bewusstlosigkeit möglich.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -993,7 +1083,11 @@
             "name": "Zwei Pfeile, ein Ziel",
             "kategorie": "Kampf",
             "rang": "E",
-            "voraussetzungen": ["Erfahren", "Elf", "Schießen W8+"],
+            "voraussetzungen": [
+                "Erfahren",
+                "Elf",
+                "Schießen W8+"
+            ],
             "beschreibung": "Erlaubt zwei Pfeile auf ein Ziel zu schießen mit −2 auf die Schießenprobe. Funktioniert nur mit Bögen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1004,7 +1098,10 @@
             "name": "Zwei Pfeile, ein Volltreffer",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Zwei Pfeile, ein Ziel"],
+            "voraussetzungen": [
+                "Veteran",
+                "Zwei Pfeile, ein Ziel"
+            ],
             "beschreibung": "Wie 'Zwei Pfeile, ein Ziel', jedoch ohne den −2-Abzug.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1015,7 +1112,10 @@
             "name": "Zweifacher Odem",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Drachenatem"],
+            "voraussetzungen": [
+                "Veteran",
+                "Drachenatem"
+            ],
             "beschreibung": "Erlaubt die Wahl zwischen zwei Ausprägungen des Drachenatems.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1026,7 +1126,11 @@
             "name": "Kräftiger Wurf",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Stärke W8+", "Werfen W10+"],
+            "voraussetzungen": [
+                "Veteran",
+                "Stärke W8+",
+                "Werfen W10+"
+            ],
             "beschreibung": "Erhöht die Reichweite von Wurfwaffen um 1/2/4 und fügt +1 Schaden bei kurzer Reichweite hinzu.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1037,7 +1141,12 @@
             "name": "Großwaffenmeister",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Stärke W10+", "Kämpfen W10+", "Größe +0 oder größer"],
+            "voraussetzungen": [
+                "Veteran",
+                "Stärke W10+",
+                "Kämpfen W10+",
+                "Größe +0 oder größer"
+            ],
             "beschreibung": "Kann zweihändige Nahkampfwaffen einhändig führen. Kann gleichzeitig eine Einhandwaffe tragen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1048,18 +1157,28 @@
             "name": "Ausmanövrieren",
             "kategorie": "Kampf",
             "rang": "E",
-            "voraussetzungen": ["Erfahren", "Wildling oder nicht auserkorener Drakin", "Geschicklichkeit W8+"],
+            "voraussetzungen": [
+                "Erfahren",
+                "Wildling oder nicht auserkorener Drakin",
+                "Geschicklichkeit W8+"
+            ],
             "beschreibung": "Menschengroße oder größere Gegner erhalten −1 auf Angriffsproben gegen den Charakter.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Astronom": {
             "name": "Astronom",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "VER W10", "Seefahrt W6+", "Wissen (Astronomie) W10+", "Mitglied der Söhne der Turmspitze"],
+            "voraussetzungen": [
+                "Anfänger",
+                "VER W10",
+                "Seefahrt W6+",
+                "Wissen (Astronomie) W10+",
+                "Mitglied der Söhne der Turmspitze"
+            ],
             "beschreibung": "Verkürzt Reisezeit pro Erfolg in Seefahrt um eine Woche. Kumulativ mit 'Vom Wind gesegnet'.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1070,7 +1189,13 @@
             "name": "Geliebte(r)",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (Wunder)", "Glaube W6+", "Willenskraft W8+", "Verehrung der Wunderschönen"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Wunder)",
+                "Glaube W6+",
+                "Willenskraft W8+",
+                "Verehrung der Wunderschönen"
+            ],
             "beschreibung": "+2 gegen Glühwahn, andere erhalten ebenfalls Bonus gegen Glühwahn durch die Anwesenheit der Geliebten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1081,7 +1206,10 @@
             "name": "Astbrecher",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Elf"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Elf"
+            ],
             "beschreibung": "+2 gegen geistige Duelle oder vergleichende Proben gegen Elfen oder Agenten der Weidenkönigin.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1092,7 +1220,11 @@
             "name": "Forscher",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Wahrnehmung W8", "Glück"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Wahrnehmung W8",
+                "Glück"
+            ],
             "beschreibung": "Einmal pro Reise kann eine zufällige Begegnung durch eine Ruine ersetzt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1103,7 +1235,11 @@
             "name": "Düsterer Troubadour",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "zwergisch", "Priester von Festival"],
+            "voraussetzungen": [
+                "Anfänger",
+                "zwergisch",
+                "Priester von Festival"
+            ],
             "beschreibung": "Reduziert die Machtpunktekosten bestimmter Mächte um 1 pro Steigerung bei einer Glaubensprobe.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1114,7 +1250,11 @@
             "name": "Rabes Diener",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Überreden W6", "Mitglied der Astbrecher"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Überreden W6",
+                "Mitglied der Astbrecher"
+            ],
             "beschreibung": "Erzeugt die Vision des Rabenstabs in Elfen, wodurch sie Angeschlagen werden können.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1125,7 +1265,10 @@
             "name": "Einender",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "verehrt keinen der Götter"],
+            "voraussetzungen": [
+                "Anfänger",
+                "verehrt keinen der Götter"
+            ],
             "beschreibung": "+1 gegen Glühwahn, Wildcard-Einende würfeln W8-Wildcard-Würfel, um Wundern zu widerstehen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1136,7 +1279,14 @@
             "name": "Vom Wind gesegnet",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (Wunder)", "Willenskraft W8+", "Glaube W8+", "Wissen (Winde) W8+", "Priester der Herrin der Winde"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Wunder)",
+                "Willenskraft W8+",
+                "Glaube W8+",
+                "Wissen (Winde) W8+",
+                "Priester der Herrin der Winde"
+            ],
             "beschreibung": "Verringert Reisezeit eines Segelschiffs um ein Viertel. Kumulativ mit 'Astronom'.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1147,18 +1297,27 @@
             "name": "Kriegsschrei",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Willenskraft W8+", "Glaube W8+", "Priester des Kriegsherrn"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Willenskraft W8+",
+                "Glaube W8+",
+                "Priester des Kriegsherrn"
+            ],
             "beschreibung": "Erzeugt einen mächtigen Kriegsschrei, der Feinde innerhalb eines großen Bereichs einschüchtern kann.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },    
+        },
         "Kerzengebunden": {
             "name": "Kerzengebunden",
             "kategorie": "Übernatürlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Wahrnehmung W8+", "Kurier"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Wahrnehmung W8+",
+                "Kurier"
+            ],
             "beschreibung": "Kann eine magische Kerze nutzen, um täglich eine freie Probe auf Natürliche Heilung zu machen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1169,7 +1328,9 @@
             "name": "Von einem Geist besessen",
             "kategorie": "Übernatürlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Erhält einen zusätzlichen Bennie, der Gegner zwingt, erneut zu würfeln und das schlechtere Ergebnis zu nehmen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1180,13 +1341,15 @@
             "name": "Ahnenfreund",
             "kategorie": "Übernatürlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Kann Geister seiner Ahnen rufen, die als Mannschaft auf seinem Schiff dienen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Arkaner Hintergrund (Beschwörer)": {
             "name": "Arkaner Hintergrund (Beschwörer)",
             "kategorie": "Hintergrund",
@@ -1202,7 +1365,9 @@
             "name": "Arkaner Hintergrund (Diabolist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1213,7 +1378,9 @@
             "name": "Arkaner Hintergrund (Druide)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W6+"],
+            "voraussetzungen": [
+                "Willenskraft W6+"
+            ],
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1224,7 +1391,9 @@
             "name": "Arkaner Hintergrund (Elementarist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1235,7 +1404,9 @@
             "name": "Arkaner Hintergrund (Illusionist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1246,7 +1417,9 @@
             "name": "Arkaner Hintergrund (Kleriker)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W6"],
+            "voraussetzungen": [
+                "WIL W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1257,7 +1430,9 @@
             "name": "Arkaner Hintergrund (Magier)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 6,
             "machtpunkte": 15,
@@ -1268,7 +1443,9 @@
             "name": "Arkaner Hintergrund (Nekromant)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1279,7 +1456,9 @@
             "name": "Arkaner Hintergrund (Schamane)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W6"],
+            "voraussetzungen": [
+                "WIL W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
@@ -1290,7 +1469,9 @@
             "name": "Arkaner Hintergrund (Tüftler)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Reparieren (Verstand)",
             "neue_maechte": 2,
             "machtpunkte": 15,
@@ -1301,7 +1482,9 @@
             "name": "Arkaner Hintergrund (Zauberer)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 3,
             "machtpunkte": 15,
@@ -1358,7 +1541,9 @@
             "name": "Zorn der Hölle",
             "kategorie": "Diabolist",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Diabolist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Diabolist)"
+            ],
             "beschreibung": "Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1369,7 +1554,9 @@
             "name": "Infernale Rüstung",
             "kategorie": "Diabolist",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Diabolist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Diabolist)"
+            ],
             "beschreibung": "Verleiht +2 Rüstung durch eine höllische Aura, macht Heimlichkeit jedoch nahezu unmöglich.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1380,7 +1567,9 @@
             "name": "Herzholzstab",
             "kategorie": "Druide",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Druide)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Druide)"
+            ],
             "beschreibung": "Ein Kampfstab, der zusätzlichen Schaden verursacht und bei Verlust durch ein Ritual ersetzt werden kann.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1391,7 +1580,9 @@
             "name": "Wahre Form",
             "kategorie": "Druide",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Druide)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Druide)"
+            ],
             "beschreibung": "Ermöglicht Druiden, in Tierform zu sprechen und Mächte zu wirken, mit Risiken bei längerem Verweilen in Tiergestalt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1402,7 +1593,9 @@
             "name": "Elementare Absorption",
             "kategorie": "Elementarmagier",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Elementarmagier)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Elementarmagier)"
+            ],
             "beschreibung": "Erhöht Robustheit um +2 während der Nutzung von Elementarsynergie.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1413,7 +1606,9 @@
             "name": "Elementarer Meister",
             "kategorie": "Elementarmagier",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Elementarist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Elementarist)"
+            ],
             "beschreibung": "Erlaubt die Beherrschung eines zusätzlichen Elements, Mächte können zwischen Elementen gewechselt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1424,7 +1619,9 @@
             "name": "Böser Blick",
             "kategorie": "Hexer/Hexe",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexer/Hexe)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexer/Hexe)"
+            ],
             "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1435,7 +1632,9 @@
             "name": "Hexenzeit",
             "kategorie": "Hexer/Hexe",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexer/Hexe)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexer/Hexe)"
+            ],
             "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1446,7 +1645,10 @@
             "name": "Tödliche Illusion",
             "kategorie": "Illusionist",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Illusionist)", "Zaubern W10+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Illusionist)",
+                "Zaubern W10+"
+            ],
             "beschreibung": "Erlaubt den Einsatz des Machtmodifikators Tödliche Illusion ohne zusätzliche Machtpunkte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1457,7 +1659,10 @@
             "name": "Meisterlicher Illusionist",
             "kategorie": "Illusionist",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Illusionist)", "Zaubern W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Illusionist)",
+                "Zaubern W8+"
+            ],
             "beschreibung": "Illusionen erhalten die Machtmodifikatoren Beweglich und Geräusch ohne zusätzliche Machtpunkte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1468,7 +1673,9 @@
             "name": "Untote zerstören",
             "kategorie": "Kleriker",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Kleriker)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Kleriker)"
+            ],
             "beschreibung": "Kanalisierung positiver Energie, um Untote mit 2W6 (oder 3W6 für 2 Machtpunkte) Schaden zu treffen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1479,7 +1686,10 @@
             "name": "Gnade",
             "kategorie": "Kleriker",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Kleriker)", "Glaube W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Kleriker)",
+                "Glaube W8+"
+            ],
             "beschreibung": "Hebt Abgelenkt, Angeschlagen oder Verwundbar durch Einsatz von 1 Machtpunkt auf.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1490,7 +1700,9 @@
             "name": "Unheimliche Inspiration",
             "kategorie": "Magier",
             "rang": "H",
-            "voraussetzungen": ["Arkaner Hintergrund (Magier)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Magier)"
+            ],
             "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht mit einem Benny, solange Zugang zu Zauberbüchern besteht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1501,7 +1713,9 @@
             "name": "Zauberbücher",
             "kategorie": "Magier",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Magie)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Magie)"
+            ],
             "beschreibung": "Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1512,7 +1726,10 @@
             "name": "Seelengefäß",
             "kategorie": "Nekromant",
             "rang": "L",
-            "voraussetzungen": ["Arkaner Hintergrund (Nekromant)", "Okkultismus W10+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Nekromant)",
+                "Okkultismus W10+"
+            ],
             "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1523,7 +1740,9 @@
             "name": "Untoter Vertrauter",
             "kategorie": "Nekromant",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Nekromant)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Nekromant)"
+            ],
             "beschreibung": "Erhält einen untoten Tiergefährten mit speziellen Boni, ähnlich wie das Talent Vertrauter.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1534,7 +1753,9 @@
             "name": "Urtümliche Magie",
             "kategorie": "Schamane",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Schamane)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Schamane)"
+            ],
             "beschreibung": "Erhöht Schaden von Mächten um +2, verursacht jedoch bei Kritischen Fehlschlägen Betäubung im Umkreis.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1545,7 +1766,10 @@
             "name": "Geweihter Fetisch",
             "kategorie": "Schamane",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Schamane)", "Glaube W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Schamane)",
+                "Glaube W8+"
+            ],
             "beschreibung": "Verleiht eine Freie Wurfwiederholung bei Glaubensproben, wenn ein geweihter Fetisch genutzt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1556,7 +1780,9 @@
             "name": "Konstrukt-Vertrauter",
             "kategorie": "Tüftler",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Tüftler)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Tüftler)"
+            ],
             "beschreibung": "Erhält einen mechanischen Tiergefährten mit speziellen Vorteilen, ähnlich wie das Talent Vertrauter.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1567,7 +1793,9 @@
             "name": "Tüftlerrüstung",
             "kategorie": "Tüftler",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Tüftler)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Tüftler)"
+            ],
             "beschreibung": "Ermöglicht modifizierte Rüstung mit Boni auf Arme, Rumpf oder Beine, unterliegt jedoch Ausfällen bei Wunden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1578,7 +1806,9 @@
             "name": "Große Macht",
             "kategorie": "Zauberer",
             "rang": "V",
-            "voraussetzungen": ["Arkaner Hintergrund (Zauberer)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Zauberer)"
+            ],
             "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1589,7 +1819,10 @@
             "name": "Phänomenale Macht",
             "kategorie": "Zauberer",
             "rang": "H",
-            "voraussetzungen": ["Arkaner Hintergrund (Zauberer)", "Große Macht"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Zauberer)",
+                "Große Macht"
+            ],
             "beschreibung": "Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1600,7 +1833,9 @@
             "name": "Auserkoren",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Wildcard"],
+            "voraussetzungen": [
+                "Wildcard"
+            ],
             "beschreibung": "Entschlossenheit hält bis zum Ende der Begegnung an, ohne dass sie mit Bennys aufrechterhalten werden muss. Der Charakter hat ein unverkennbares Mal und wird von mächtigen Feinden verfolgt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1611,7 +1846,9 @@
             "name": "Bevorzugtes Gelände",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Überleben W6+"],
+            "voraussetzungen": [
+                "Überleben W6+"
+            ],
             "beschreibung": "Wähle ein Geländetyp. In diesem Gelände erhält der Charakter eine freie Wiederholung bei Überlebens- und Wahrnehmungsproben sowie eine zusätzliche Aktionskarte zur Initiative.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1633,7 +1870,10 @@
             "name": "Erzfeind",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Athletik", "Kämpfen oder Schießen W6+"],
+            "voraussetzungen": [
+                "Athletik",
+                "Kämpfen oder Schießen W6+"
+            ],
             "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1655,7 +1895,9 @@
             "name": "Betäubungsschlag",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Stärke W8+"],
+            "voraussetzungen": [
+                "Stärke W8+"
+            ],
             "beschreibung": "Schläge mit stumpfen Waffen zwingen Gegner zu Konstitutionsproben. Bei einem Misserfolg wird der Gegner Betäubt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1666,7 +1908,10 @@
             "name": "Böe",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Flügel"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Flügel"
+            ],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1677,7 +1922,10 @@
             "name": "Doppelschuss",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Athletik W8+ für Wurfwaffen oder Schießen W8+ für Bögen"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Athletik W8+ für Wurfwaffen oder Schießen W8+ für Bögen"
+            ],
             "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1688,7 +1936,11 @@
             "name": "Vierfachschuss",
             "kategorie": "Kampf",
             "rang": "H",
-            "voraussetzungen": ["Heroisch", "Doppelschuss", "Athletik W10+ für Wurfwaffen oder Schießen W10+ für Bögen"],
+            "voraussetzungen": [
+                "Heroisch",
+                "Doppelschuss",
+                "Athletik W10+ für Wurfwaffen oder Schießen W10+ für Bögen"
+            ],
             "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1699,7 +1951,11 @@
             "name": "Unglaubliche Reflexe",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Geschicklichkeit W8+", "Athletik W8+"],
+            "voraussetzungen": [
+                "Veteran",
+                "Geschicklichkeit W8+",
+                "Athletik W8+"
+            ],
             "beschreibung": "Der Charakter ignoriert den üblichen -2 Geschicklichkeits-Abzug beim Wegspringen und kann bei Flächeneffekten oder Angriffen wie Strahl oder Verwirrung Wegspringen anwenden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1710,7 +1966,11 @@
             "name": "Versengen",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Konstitution W8+", "Odemwaffe"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Konstitution W8+",
+                "Odemwaffe"
+            ],
             "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1721,7 +1981,10 @@
             "name": "Verteidiger",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Kämpfen W6+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Kämpfen W6+"
+            ],
             "beschreibung": "Erlaubt das Teilen des Parade- und Deckungsbonus eines Schildes mit einem Verbündeten in der Nähe als freie Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1732,7 +1995,10 @@
             "name": "Wildling",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Kämpfen W6+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Kämpfen W6+"
+            ],
             "beschreibung": "Ein Rücksichtsloser Angriff verursacht +4 Schaden statt +2.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1743,7 +2009,10 @@
             "name": "Zerschmettern",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Stärke W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Stärke W8+"
+            ],
             "beschreibung": "Fügt bei Angriffen auf Objekte +W6 Schaden hinzu, wobei die Schadenswürfel nicht explodieren können.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1754,7 +2023,10 @@
             "name": "Artefakterschaffer",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Arkaner Hintergrund (beliebig)"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (beliebig)"
+            ],
             "beschreibung": "Erlaubt die Herstellung von temporären Arkane Apparaturen und permanenter magischer Gegenstände.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1765,7 +2037,11 @@
             "name": "Meisterlicher Artefakterschaffer",
             "kategorie": "Macht",
             "rang": "H",
-            "voraussetzungen": ["Heroisch", "Artefakterschaffer", "Okkultismus W10+"],
+            "voraussetzungen": [
+                "Heroisch",
+                "Artefakterschaffer",
+                "Okkultismus W10+"
+            ],
             "beschreibung": "Erhöht die Belohnung für Okkultismusproben bei der Herstellung magischer Gegenstände auf 1000 G pro Erfolg oder Steigerung.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1776,7 +2052,11 @@
             "name": "Bevorzugte Macht",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Arkaner Hintergrund (beliebig)", "Arkane Fertigkeit W8+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W8+"
+            ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1787,7 +2067,11 @@
             "name": "Blutmagie",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (beliebig)", "eine böse Gesinnung"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (beliebig)",
+                "eine böse Gesinnung"
+            ],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1798,7 +2082,11 @@
             "name": "Epische Meisterschaft",
             "kategorie": "Macht",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Arkaner Hintergrund (beliebig)", "Arkane Fertigkeit W6+"],
+            "voraussetzungen": [
+                "Veteran",
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W6+"
+            ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1809,7 +2097,9 @@
             "name": "Mystische Kräfte",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten"],
+            "voraussetzungen": [
+                "Fortgeschritten"
+            ],
             "beschreibung": "Erlaubt das Erlernen von 10 dedizierten Machtpunkten mit ausgewählten Mächten, die automatisch aktiviert werden können. Die Mächte und Einschränkungen sind abhängig vom gewählten Paket (z. B. Barbar, Kämpfer, Mönch, etc.).",
             "neue_maechte": 0,
             "machtpunkte": 10,
@@ -1820,7 +2110,11 @@
             "name": "Schlachtenmagie",
             "kategorie": "Macht",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Arkaner Hintergrund (beliebig)", "Arkane Fertigkeit W10+"],
+            "voraussetzungen": [
+                "Veteran",
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W10+"
+            ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1831,7 +2125,11 @@
             "name": "Stillzauberer",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (jeder außer Barde)", "Okkultismus W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (jeder außer Barde)",
+                "Okkultismus W8+"
+            ],
             "beschreibung": "Erlaubt das Wirken von Zaubern ohne zu sprechen. Funktioniert auch unter Wasser, in einem Vakuum, oder innerhalb der Macht Stille.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1842,7 +2140,10 @@
             "name": "Übertragung",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (beliebig)"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (beliebig)"
+            ],
             "beschreibung": "Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1853,7 +2154,10 @@
             "name": "Vertrauter",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
+            ],
             "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
             "neue_maechte": 0,
             "machtpunkte": 5,
@@ -1864,7 +2168,11 @@
             "name": "Entdecker",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Konstitution W6+", "Überleben W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Konstitution W6+",
+                "Überleben W8+"
+            ],
             "beschreibung": "Ermöglicht eine zusätzliche Aktionskarte bei Reisen und verkürzt die Reisezeit der Gruppe um 10%.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1875,7 +2183,10 @@
             "name": "Fallengespür",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Reparieren W6+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Reparieren W6+"
+            ],
             "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1886,7 +2197,10 @@
             "name": "Giftmischer",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Alchemie, Heilen oder Überleben W6+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Alchemie, Heilen oder Überleben W6+"
+            ],
             "beschreibung": "Erstellt Gifte in der Hälfte der Zeit, die Kontaktgifte halten 12 statt 4 Stunden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1897,7 +2211,11 @@
             "name": "Im Sattel geboren",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Geschicklichkeit W8+", "Reiten W6+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Geschicklichkeit W8+",
+                "Reiten W6+"
+            ],
             "beschreibung": "Verleiht eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Reittiers um 2 und den Sprintwürfel um einen Würfeltyp.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1908,7 +2226,10 @@
             "name": "Kundschafter",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Überleben W6+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Überleben W6+"
+            ],
             "beschreibung": "Ermöglicht Wahrnehmungsproben zum frühzeitigen Erkennen von Gefahren, verbessert Wachsamkeit und gibt Boni auf Allgemeinwissen über bereiste Orte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1919,7 +2240,10 @@
             "name": "Reittier",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Reiten W6+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Reiten W6+"
+            ],
             "beschreibung": "Gewährt ein treues, aufsteigbares Reittier mit besonderen Fähigkeiten. Ermöglicht die Wahl eines mächtigen Reittiers auf höheren Rängen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1930,7 +2254,15 @@
             "name": "Ritter",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Willenskraft W6+", "Stärke W8+", "Konstitution W8+", "Kämpfen W8+", "Reiten W6+", "Verpflichtung (schwer)"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Willenskraft W6+",
+                "Stärke W8+",
+                "Konstitution W8+",
+                "Kämpfen W8+",
+                "Reiten W6+",
+                "Verpflichtung (schwer)"
+            ],
             "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1941,7 +2273,11 @@
             "name": "Schatzjäger",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Wahrnehmung W8+", "Okkultismus W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Wahrnehmung W8+",
+                "Okkultismus W8+"
+            ],
             "beschreibung": "Erlaubt Verstandsproben zur Einschätzung von Schätzen und magischen Gegenständen. Ermöglicht das Neuwürfeln von magischen Gegenstandseffekten mit einem Benny.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1952,7 +2288,10 @@
             "name": "Steingespür",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Reparieren W6+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Reparieren W6+"
+            ],
             "beschreibung": "Erhöht Wahrnehmungsproben um +2, um Fallen oder versteckte Türen in Stein zu entdecken.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1963,7 +2302,11 @@
             "name": "Troubadour",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Allgemeinwissen W6+", "Darbietung W8+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Allgemeinwissen W6+",
+                "Darbietung W8+"
+            ],
             "beschreibung": "Gewährt +2 auf Allgemeinwissenproben und erlaubt die Nutzung von Darbietung statt Kriegskunst für Anführertalente.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1974,7 +2317,10 @@
             "name": "Täuscher",
             "kategorie": "Sozial",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Verstand W8+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Verstand W8+"
+            ],
             "beschreibung": "Erlaubt das Ziel, bei Herausforderungen entweder mit Verstand oder Willenskraft zu widerstehen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1985,7 +2331,10 @@
             "name": "Aura der Tapferkeit",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Willenskraft W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Willenskraft W8+"
+            ],
             "beschreibung": "Verbündete im Umkreis von 20 Metern erhalten +1 auf Furchtproben und -1 auf der Furchttabelle.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1996,7 +2345,9 @@
             "name": "Bestienflüsterer",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Erlaubt es, mit einer Tiergattung zu kommunizieren und Informationen von ihnen zu erhalten, abhängig von ihrer Intelligenz.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2007,7 +2358,10 @@
             "name": "Schnelle Verwandlung",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Lykanthropie"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Lykanthropie"
+            ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3752,7 +4106,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },  
+        },
         "Dumm": {
             "name": "Dumm",
             "stufe": "schwer",
@@ -3779,7 +4133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Glühblind": {
             "name": "Glühblind",
             "stufe": "leicht",
@@ -3788,7 +4142,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Gottverlassen": {
             "name": "Gottverlassen",
             "stufe": "schwer",
@@ -3797,7 +4151,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Klaustrophobie_leicht": {
             "name": "Klaustrophobie",
             "stufe": "leicht",
@@ -3806,7 +4160,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Klaustrophobie_schwer": {
             "name": "Klaustrophobie",
             "stufe": "schwer",
@@ -3815,7 +4169,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Blutrünstig": {
             "name": "Blutrünstig",
             "stufe": "schwer",
@@ -3824,7 +4178,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Fies": {
             "name": "Fies",
             "stufe": "leicht",
@@ -3833,7 +4187,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },          
+        },
         "Druckempfindlich": {
             "name": "Druckempfindlich",
             "stufe": "leicht",
@@ -3842,7 +4196,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Heimgesucht": {
             "name": "Heimgesucht",
             "stufe": "leicht",
@@ -3851,7 +4205,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Irritierend": {
             "name": "Irritierend",
             "stufe": "leicht",
@@ -3860,7 +4214,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Kurze Aufmerksamkeitsspanne": {
             "name": "Kurze Aufmerksamkeitsspanne",
             "stufe": "leicht",
@@ -3869,7 +4223,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Einschüchternd": {
             "name": "Einschüchternd",
             "stufe": "leicht",
@@ -3878,7 +4232,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Glamourös": {
             "name": "Glamourös",
             "stufe": "leicht",
@@ -3887,7 +4241,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Wahrheitssuchend": {
             "name": "Wahrheitssuchend",
             "stufe": "leicht",
@@ -3896,7 +4250,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Ehemaliger Leerer": {
             "name": "Ehemaliger Leerer",
             "stufe": "schwer",
@@ -3905,7 +4259,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Ehemaliger Nekromant": {
             "name": "Ehemaliger Nekromant",
             "stufe": "schwer",
@@ -3914,7 +4268,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Hexenfeind": {
             "name": "Hexenfeind",
             "stufe": "schwer",
@@ -3923,7 +4277,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },
+        },
         "Handelsfluch": {
             "name": "Handelsfluch",
             "stufe": "leicht",
@@ -3932,7 +4286,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-            },        
+        },
         "Blind": {
             "name": "Blind",
             "stufe": "schwer",
@@ -4121,9 +4475,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },      
-
-
+        },
         "Alt": {
             "name": "Alt",
             "stufe": "schwer",
@@ -4196,7 +4548,6 @@
             "aktiv": true,
             "custom": false
         },
-
         "Ehrenkodex": {
             "name": "Ehrenkodex",
             "stufe": "schwer",
@@ -4268,7 +4619,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },          
+        },
         "Gesucht": {
             "name": "Gesucht",
             "stufe": "leicht",
@@ -4421,8 +4772,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Skrupellos": {
+        },
+        "Skrupellos": {
             "name": "Skrupellos",
             "stufe": "leicht",
             "punkte": 1,
@@ -4430,8 +4781,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Stumm": {
+        },
+        "Stumm": {
             "name": "Stumm",
             "stufe": "schwer",
             "punkte": 2,
@@ -4439,8 +4790,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Stur": {
+        },
+        "Stur": {
             "name": "Stur",
             "stufe": "leicht",
             "punkte": 1,
@@ -4448,8 +4799,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Tick": {
+        },
+        "Tick": {
             "name": "Tick",
             "stufe": "leicht",
             "punkte": 1,
@@ -4457,8 +4808,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Tollpatschig": {
+        },
+        "Tollpatschig": {
             "name": "Tollpatschig",
             "stufe": "schwer",
             "punkte": 2,
@@ -4466,8 +4817,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Übermütig": {
+        },
+        "Übermütig": {
             "name": "Übermütig",
             "stufe": "schwer",
             "punkte": 2,
@@ -4475,8 +4826,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Verpeilt": {
+        },
+        "Verpeilt": {
             "name": "Verpeilt",
             "stufe": "schwer",
             "punkte": 2,
@@ -4484,8 +4835,26 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          }    
-    },         
+        },
+        "Klein": {
+            "name": "Klein",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Dieser Abenteurer ist ziemlich dürr, klein oder beides. Seine Größe (siehe Seite 103) wird um –1 verringert, wodurch auch seine Robustheit sinkt. Die Größe kann nicht unter –1 sinken, doch der Abzug auf Robustheit ist kumulativ. Ein kleiner Halbling hat beispielsweise Größe –1, verliert aber einen zusätzlichen Punkt Robustheit.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Kränklich": {
+            "name": "Kränklich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        }
+    },
     "maechte": {
         "Blendender Blitz": {
             "name": "Blendender Blitz",
@@ -4733,7 +5102,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },        
+        },
         "Bankett der Lebensmutter": {
             "name": "Bankett der Lebensmutter",
             "rang": "Anfänger",
@@ -4865,7 +5234,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },       
+        },
         "Aufspüren": {
             "name": "Aufspüren",
             "rang": "Anfänger",
@@ -4913,7 +5282,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },          
+        },
         "Ebenenwechsel": {
             "name": "Ebenenwechsel",
             "rang": "Veteran",
@@ -5057,7 +5426,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },            
+        },
         "Abwehren": {
             "name": "Abwehren",
             "rang": "A",
@@ -6038,7 +6407,6 @@
             "deckung": -2,
             "mindeststaerke": "W8"
         },
-
         "Dolch": {
             "name": "Dolch",
             "kategorie": "Waffe",
@@ -6471,7 +6839,7 @@
                 "PB": 2
             }
         },
-    "Bogen": {
+        "Bogen": {
             "name": "Bogen",
             "kategorie": "Waffe",
             "gewicht": 3,
@@ -6746,7 +7114,7 @@
             "kategorie": "Munition",
             "gewicht": 0.2,
             "kosten": 2,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "PB 2, ungebräuchliche Verfügbarkeit. Gewicht für 5 Stück.",
             "aktiv": true
         },
@@ -6755,7 +7123,7 @@
             "kategorie": "Munition",
             "gewicht": 4,
             "kosten": 4,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Ungebräuchliche Verfügbarkeit.",
             "aktiv": true
         },
@@ -6764,7 +7132,7 @@
             "kategorie": "Munition",
             "gewicht": 10,
             "kosten": 8,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Nur in den Niederen Weiten und den Eisinseln erhältlich, ungebräuchliche Verfügbarkeit.",
             "aktiv": true
         },
@@ -6773,7 +7141,7 @@
             "kategorie": "Munition",
             "gewicht": 12,
             "kosten": 10,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Rare Verfügbarkeit.",
             "aktiv": true
         },
@@ -6782,7 +7150,7 @@
             "kategorie": "Munition",
             "gewicht": 0.1,
             "kosten": 2,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Für Feuerwaffen, ungebräuchliche Verfügbarkeit. Gewicht für 10 Stück.",
             "aktiv": true
         },
@@ -6791,7 +7159,7 @@
             "kategorie": "Munition",
             "gewicht": 12,
             "kosten": 10,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Rare Verfügbarkeit.",
             "aktiv": true
         },
@@ -6800,7 +7168,7 @@
             "kategorie": "Munition",
             "gewicht": 0.2,
             "kosten": 1,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Verbreitete Verfügbarkeit. Gewicht für 5 Stück. Können im Freien mit 50% Chance und in Räumen mit 33% Chance wiedergefunden werden.",
             "aktiv": true
         },
@@ -6809,7 +7177,7 @@
             "kategorie": "Munition",
             "gewicht": 4,
             "kosten": 1,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Verbreitete Verfügbarkeit.",
             "aktiv": true
         },
@@ -6818,7 +7186,7 @@
             "kategorie": "Munition",
             "gewicht": 0.1,
             "kosten": 0.1,
-            "setting": "mittelalterlich", 
+            "setting": "mittelalterlich",
             "beschreibung": "Weit verbreitete Verfügbarkeit. Umsonst mit Wahrnehmungsprobe und 1W10 Minuten. Gewicht für 10 Stück.",
             "aktiv": true
         },
@@ -7051,8 +7419,7 @@
             "aktiv": true,
             "typ": "-",
             "eigenschaften": {}
-        },      
-
+        },
         "Alchemistentasche": {
             "name": "Alchemistentasche",
             "kategorie": "Allgemein",
@@ -7061,8 +7428,8 @@
             "setting": "fantasy",
             "beschreibung": "Tragbares Labor mit Werkzeugen und Kräutern.",
             "aktiv": true
-            },
-            "Artefakterschaffertasche": {
+        },
+        "Artefakterschaffertasche": {
             "name": "Artefakterschaffertasche",
             "kategorie": "Allgemein",
             "gewicht": 2.5,
@@ -7070,8 +7437,8 @@
             "setting": "fantasy",
             "beschreibung": "Werkzeuge zum Verzaubern von magischen Gegenständen.",
             "aktiv": true
-            },
-            "Bandolier": {
+        },
+        "Bandolier": {
             "name": "Bandolier",
             "kategorie": "Allgemein",
             "gewicht": 1,
@@ -7079,8 +7446,8 @@
             "setting": "fantasy",
             "beschreibung": "",
             "aktiv": true
-            },
-            "Behälter für Karte oder Schriftrolle": {
+        },
+        "Behälter für Karte oder Schriftrolle": {
             "name": "Behälter für Karte oder Schriftrolle",
             "kategorie": "Allgemein",
             "gewicht": 0.25,
@@ -7088,8 +7455,8 @@
             "setting": "fantasy",
             "beschreibung": "",
             "aktiv": true
-            },
-            "Brechstange": {
+        },
+        "Brechstange": {
             "name": "Brechstange",
             "kategorie": "Allgemein",
             "gewicht": 2.5,
@@ -7097,8 +7464,8 @@
             "setting": "fantasy",
             "beschreibung": "",
             "aktiv": true
-            },
-            "Buch": {
+        },
+        "Buch": {
             "name": "Buch",
             "kategorie": "Allgemein",
             "gewicht": 2.5,
@@ -7106,8 +7473,8 @@
             "setting": "fantasy",
             "beschreibung": "Ermöglicht Rechercheproben.",
             "aktiv": true
-            },
-            "Diebeswerkzeuge": {
+        },
+        "Diebeswerkzeuge": {
             "name": "Diebeswerkzeuge",
             "kategorie": "Allgemein",
             "gewicht": 0.5,
@@ -7115,8 +7482,8 @@
             "setting": "fantasy",
             "beschreibung": "-2 auf Diebeskunst ohne Werkzeuge.",
             "aktiv": true
-            },
-            "Fackel": {
+        },
+        "Fackel": {
             "name": "Fackel",
             "kategorie": "Allgemein",
             "gewicht": 0.5,
@@ -7124,8 +7491,8 @@
             "setting": "fantasy",
             "beschreibung": "Licht für 1 Stunde, 4'' Radius.",
             "aktiv": true
-            },
-            "Fallenherstellungsset": {
+        },
+        "Fallenherstellungsset": {
             "name": "Fallenherstellungsset",
             "kategorie": "Allgemein",
             "gewicht": 5,
@@ -7133,51 +7500,51 @@
             "setting": "fantasy",
             "beschreibung": "-2 auf Reparieren ohne Set.",
             "aktiv": true
-            },
+        },
         "Fass": {
-        "name": "Fass",
-        "kategorie": "Allgemein",
-        "gewicht": 15,
-        "kosten": 2,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Fass",
+            "kategorie": "Allgemein",
+            "gewicht": 15,
+            "kosten": 2,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Feder": {
-        "name": "Feder",
-        "kategorie": "Allgemein",
-        "gewicht": 0,
-        "kosten": 0.25,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Feder",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 0.25,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Feldflasche (Metall)": {
-        "name": "Feldflasche (Metall)",
-        "kategorie": "Allgemein",
-        "gewicht": 0.5,
-        "kosten": 0.25,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Feldflasche (Metall)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 0.25,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Fernglas": {
-        "name": "Fernglas",
-        "kategorie": "Allgemein",
-        "gewicht": 0.5,
-        "kosten": 1000,
-        "setting": "fantasy",
-        "beschreibung": "Wahrnehmung +2, um entfernte Objekte zu erkennen.",
-        "aktiv": true
+            "name": "Fernglas",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 1000,
+            "setting": "fantasy",
+            "beschreibung": "Wahrnehmung +2, um entfernte Objekte zu erkennen.",
+            "aktiv": true
         },
         "Feuerstein und Stahl": {
-        "name": "Feuerstein und Stahl",
-        "kategorie": "Allgemein",
-        "gewicht": 0,
-        "kosten": 0.25,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Feuerstein und Stahl",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 0.25,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Flasche": {
             "name": "Flasche",
@@ -7781,7 +8148,7 @@
             "setting": "fantasy",
             "beschreibung": "Zelt (2 Personen), Rucksack, Seil, Schlafsack, Winterkleidung, Stiefel (schwer), Feuerstein und Stahl, Schaufel (klein), Umhang mit Kapuze, Wasserschlauch, Verpflegung für 1 Woche.",
             "aktiv": true
-        },        
+        },
         "Blasrohrpfeile (20)": {
             "name": "Blasrohrpfeile (20)",
             "kategorie": "Allgemein",
@@ -7835,7 +8202,7 @@
             "setting": "fantasy",
             "beschreibung": "Polierte Steine für Schleudern. Enthält 20 Steine.",
             "aktiv": true
-        },                   
+        },
         "Beinlinge": {
             "name": "Beinlinge",
             "kategorie": "Rüstung",
@@ -8059,7 +8426,7 @@
             "beine": 0,
             "kopf": 3,
             "mindeststaerke": "W8"
-        },                
+        },
         "Beinlinge aus natürlicher Rüstung": {
             "name": "Beinlinge aus natürlicher Rüstung",
             "kategorie": "Rüstung",
@@ -8087,7 +8454,7 @@
             "beine": 0,
             "kopf": 0,
             "mindeststaerke": "W6"
-        },        
+        },
         "Kleiner Schild": {
             "name": "Kleiner Schild",
             "kategorie": "Schild",
@@ -8100,7 +8467,6 @@
             "deckung": 0,
             "mindeststaerke": "W6"
         },
-
         "Großer Schild": {
             "name": "Großer Schild",
             "kategorie": "Schild",
@@ -8124,11 +8490,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W10",
             "eigenschaften": {
-            "Schaden": "Stä+W10",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Chakram": {
@@ -8142,11 +8508,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Dreizack": {
@@ -8160,11 +8526,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Glefe": {
@@ -8178,11 +8544,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W8",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Katana": {
@@ -8196,11 +8562,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6+1",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6+1",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Peitsche": {
@@ -8214,11 +8580,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "2",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "2",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Pike": {
@@ -8232,11 +8598,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "2",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W8",
+                "Reichweite": "2",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Ranseur": {
@@ -8250,11 +8616,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W6",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Bastardschwert": {
@@ -8268,11 +8634,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Haken-Schwert": {
@@ -8286,11 +8652,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Sense": {
@@ -8304,11 +8670,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Spalthammer": {
@@ -8322,11 +8688,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W10",
             "eigenschaften": {
-            "Schaden": "Stä+W10",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Entermesser": {
@@ -8436,7 +8802,7 @@
                 "Schuss": "-",
                 "PB": "1"
             }
-        },    
+        },
         "Lanze": {
             "name": "Lanze",
             "kategorie": "Waffe",
@@ -8646,11 +9012,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Handarmbrust": {
@@ -8664,11 +9030,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "2W4",
-            "Reichweite": "5/10/20",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "2W4",
+                "Reichweite": "5/10/20",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Handrepetierarmbrust": {
@@ -8682,11 +9048,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "2W4",
-            "Reichweite": "5/10/20",
-            "FR": 2,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "2W4",
+                "Reichweite": "5/10/20",
+                "FR": 2,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Leichte Armbrust": {
@@ -8700,11 +9066,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "2W6",
-            "Reichweite": "10/20/40",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "2W6",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Schwere Armbrust": {
@@ -8718,11 +9084,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "2W8",
-            "Reichweite": "15/30/60",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Blasrohr": {
@@ -8736,11 +9102,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "W4−2",
-            "Reichweite": "3/6/12",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "W4−2",
+                "Reichweite": "3/6/12",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Kompositbogen": {
@@ -8754,11 +9120,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "12/24/48",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Langbogen": {
@@ -8772,11 +9138,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "2W6",
-            "Reichweite": "15/30/60",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "2W6",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Muskete": {
@@ -8790,11 +9156,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "2W8",
-            "Reichweite": "10/20/40",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "2W8",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Armbrust, Leichte Repetier-": {
@@ -9142,8 +9508,8 @@
             "setting": "mittelalterlich",
             "beschreibung": "Ein dünnes Stäbchen, das eine Flamme erzeugt, wenn es hart gegen eine Oberfläche geschlagen wird",
             "aktiv": true
-        }      
-    },  
+        }
+    },
     "settingregeln": {
         "strahlschablone": false,
         "große_hoehen": false,

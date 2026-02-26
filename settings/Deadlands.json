@@ -137,109 +137,137 @@
         "Verrückte Wissenschaft": [
             "Verstand"
         ]
-    },         
+    },
     "talente": {
         "Agent": {
-                "name": "Agent",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": ["Anfänger", "Verstand W8+", "Kämpfen W6+", "Okkultismus W6+", "Schießen W6+"],
-                "beschreibung": "Geheime Agenten der Agency, die Spionage und Korruption bekämpfen. Müssen ihre Identität geheim halten.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Agent",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Verstand W8+",
+                "Kämpfen W6+",
+                "Okkultismus W6+",
+                "Schießen W6+"
+            ],
+            "beschreibung": "Geheime Agenten der Agency, die Spionage und Korruption bekämpfen. Müssen ihre Identität geheim halten.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Falsch Spielen": {
-                "name": "Falsch Spielen",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": ["Anfänger", "Glücksspiel W6+"],
-                "beschreibung": "Ermöglicht eine freie Wiederholung bei Glücksspielproben, auch bei Taschenspieleraktionen.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Falsch Spielen",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Glücksspiel W6+"
+            ],
+            "beschreibung": "Ermöglicht eine freie Wiederholung bei Glücksspielproben, auch bei Taschenspieleraktionen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Geschichtenerzähler": {
-                "name": "Geschichtenerzähler",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": ["Anfänger", "Darbietung oder Überreden W8+"],
-                "beschreibung": "Hilft, die lokale Furchtstufe zu senken und bietet Boni auf Überreden- oder Darbietungsproben.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Geschichtenerzähler",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Darbietung oder Überreden W8+"
+            ],
+            "beschreibung": "Hilft, die lokale Furchtstufe zu senken und bietet Boni auf Überreden- oder Darbietungsproben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Im Sattel geboren": {
-                "name": "Im Sattel geboren",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": ["Anfänger", "Geschicklichkeit W8+", "Reiten W6+"],
-                "beschreibung": "Bietet eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Pferdes und verbessert den Sprintwürfel.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Im Sattel geboren",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Geschicklichkeit W8+",
+                "Reiten W6+"
+            ],
+            "beschreibung": "Bietet eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Pferdes und verbessert den Sprintwürfel.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Kundschafter": {
-                "name": "Kundschafter",
-                "kategorie": "Experte",
-                "rang": "F",
-                "voraussetzungen": ["Fortgeschritten", "Naturbursche"],
-                "beschreibung": "Erlaubt Wahrnehmungsproben mit Abzug bei Begegnungen und bietet Vorteile bei Überlebens- und Wahrnehmungsproben.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Kundschafter",
+            "kategorie": "Experte",
+            "rang": "F",
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Naturbursche"
+            ],
+            "beschreibung": "Erlaubt Wahrnehmungsproben mit Abzug bei Begegnungen und bietet Vorteile bei Überlebens- und Wahrnehmungsproben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Mumm": {
-                "name": "Mumm",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": ["Anfänger", "Willenskraft W6+"],
-                "beschreibung": "Ermöglicht eine freie Wiederholung bei Furchtproben.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Mumm",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Willenskraft W6+"
+            ],
+            "beschreibung": "Ermöglicht eine freie Wiederholung bei Furchtproben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Soldat": {
-                "name": "Soldat",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": ["Anfänger", "Stärke W6+", "Konstitution W6+"],
-                "beschreibung": "Charakter mit militärischer Ausbildung, optional mit Rängen und Verpflichtungen. Ermöglicht Beförderungen im Spiel.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Soldat",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Stärke W6+",
+                "Konstitution W6+"
+            ],
+            "beschreibung": "Charakter mit militärischer Ausbildung, optional mit Rängen und Verpflichtungen. Ermöglicht Beförderungen im Spiel.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Territorialer Ranger": {
-                "name": "Territorialer Ranger",
-                "kategorie": "Experte",
-                "rang": "A",
-                "voraussetzungen": [
-                    "Anfänger",
-                    "Konstitution W6+",
-                    "Kämpfen W6+",
-                    "Einschüchtern W6+",
-                    "Reiten W6+",
-                    "Schießen W6+",
-                    "Überleben W4+"
-                ],
-                "beschreibung": "Gesetzeshüter der Territorien, die Diebe und Gesetzlose jagen. Optionale erweiterte Aufgaben.",
-                "neue_maechte": 0,
-                "machtpunkte": 0,
-                "ausgewaehlt": false,
-                "aktiv": true
+            "name": "Territorialer Ranger",
+            "kategorie": "Experte",
+            "rang": "A",
+            "voraussetzungen": [
+                "Anfänger",
+                "Konstitution W6+",
+                "Kämpfen W6+",
+                "Einschüchtern W6+",
+                "Reiten W6+",
+                "Schießen W6+",
+                "Überleben W4+"
+            ],
+            "beschreibung": "Gesetzeshüter der Territorien, die Diebe und Gesetzlose jagen. Optionale erweiterte Aufgaben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
         },
         "Ruf": {
             "name": "Ruf",
             "kategorie": "Sozial",
             "rang": "V",
-            "voraussetzungen": ["Veteran"],
+            "voraussetzungen": [
+                "Veteran"
+            ],
             "beschreibung": "Helden mit gutem Ruf erhalten freie Wiederholungen bei Überredenproben, Schurken erhalten +2 auf Einschüchtern bei bekannten Personen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -250,7 +278,11 @@
             "name": "Schneid",
             "kategorie": "Übersinnlich",
             "rang": "V",
-            "voraussetzungen": ["Veteran", "Willenskraft W8+", "Mumm"],
+            "voraussetzungen": [
+                "Veteran",
+                "Willenskraft W8+",
+                "Mumm"
+            ],
             "beschreibung": "Senkt Abzüge bei Furchtproben um 2 und kann mit Mutig kombiniert werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -261,7 +293,11 @@
             "name": "Gepeinigt",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Wildcard", "Anfänger", "Willenskraft W6+"],
+            "voraussetzungen": [
+                "Wildcard",
+                "Anfänger",
+                "Willenskraft W6+"
+            ],
             "beschreibung": "Charakter wird nach dem Tod wiedergeboren, jedoch mit Nachteilen. Kann nur bei der Erstellung oder durch das Talent Verdammt gewählt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -272,84 +308,102 @@
             "name": "Vorzeichen (Bastard)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Unsichtbare und versteckte Kreaturen 5 Runden lang sehen durch Benny-Ausgabe.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },     
+        },
         "Vorzeichen (Geboren am Abend vor Allerheiligen)": {
             "name": "Vorzeichen (Geboren am Abend vor Allerheiligen)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Warnung vor katastrophalen Folgen, Entschlossenheit erlaubt Wiederholung bei Kritischem Fehlschlag.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Vorzeichen (Geboren an Weihnachten)": {
             "name": "Vorzeichen (Geboren an Weihnachten)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Effekte arkane Macht negieren, Zauberer muss Willenskraftprobe ablegen (–4) oder wird Angeschlagen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Vorzeichen (Geburt in Steißlage)": {
             "name": "Vorzeichen (Geburt in Steißlage)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Heilung durch Benny möglich, automatischer Erfolg (eine Wunde heilen).",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Vorzeichen (Im Sturm geboren)": {
             "name": "Vorzeichen (Im Sturm geboren)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Furchtproben können durch Benny ohne Abzüge wiederholt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Vorzeichen (Der Siebte Sohn)": {
             "name": "Vorzeichen (Der Siebte Sohn)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Benny kann benutzt werden, um Effekt eines Bennys in der Nähe zu negieren.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },   
+        },
         "Vorzeichen (Sternschnuppe)": {
             "name": "Vorzeichen (Sternschnuppe)",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Benny verdoppelt Befehlsradius zu Beginn eines Kampfes.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },                           
+        },
         "Echter Schneid": {
             "name": "Echter Schneid",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": ["Legendär", "Willenskraft W10+", "Schneid"],
+            "voraussetzungen": [
+                "Legendär",
+                "Willenskraft W10+",
+                "Schneid"
+            ],
             "beschreibung": "Dieser altgediente Veteran ignoriert alle Abzüge bei Furchtproben und darf Furchteffekte-Würfe wiederholen, wenn gewünscht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -360,7 +414,12 @@
             "name": "Rechte Hand des Teufels",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": ["Legendär", "Lieblingswaffe", "Schießen", "Kämpfen oder Athletik W10+"],
+            "voraussetzungen": [
+                "Legendär",
+                "Lieblingswaffe",
+                "Schießen",
+                "Kämpfen oder Athletik W10+"
+            ],
             "beschreibung": "Verleiht der bevorzugten Waffe mythische Kräfte, die zusätzlichen Schadenswürfel verursachen. Waffe verliert Effekt, wenn sie verloren geht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -371,7 +430,11 @@
             "name": "Schnell wie der Blitz",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": ["Legendär", "Geschicklichkeit W10+", "Schnell"],
+            "voraussetzungen": [
+                "Legendär",
+                "Geschicklichkeit W10+",
+                "Schnell"
+            ],
             "beschreibung": "Ermöglicht eine vierte Aktion und erhöht den maximalen Abzug für Mehrfachaktionen auf -6.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -382,7 +445,9 @@
             "name": "Siehe, ein fahles Pferd",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": ["Legendär"],
+            "voraussetzungen": [
+                "Legendär"
+            ],
             "beschreibung": "Das treue Ross wird zu einer Wildcard mit eigenen Bennys, Spezialfähigkeit Furchtlos und Talent Sechster Sinn.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -393,7 +458,12 @@
             "name": "Verdammt",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": ["Wildcard", "Legendär", "Willenskraft W6+", "Ruf"],
+            "voraussetzungen": [
+                "Wildcard",
+                "Legendär",
+                "Willenskraft W6+",
+                "Ruf"
+            ],
             "beschreibung": "Erlaubt dem Charakter nach dem Tod als Gepeinigter zurückzukehren, mit der Option, ein weiteres Talent der Gepeinigten zu wählen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -404,7 +474,12 @@
             "name": "US-Marshal",
             "kategorie": "Beruf",
             "rang": "A",
-            "voraussetzungen": ["Gewerbe (Recht) W4+", "Kämpfen W4+", "Reiten W4+", "Schießen W4+"],
+            "voraussetzungen": [
+                "Gewerbe (Recht) W4+",
+                "Kämpfen W4+",
+                "Reiten W4+",
+                "Schießen W4+"
+            ],
             "beschreibung": "US-Marshals und Deputy-Marshals haben rechtliche Befugnisse in den gesamten Vereinigten Staaten. Sie erhalten +1 auf Überreden- und Einschüchternproben in ihrer Zuständigkeit.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -415,7 +490,10 @@
             "name": "Arkaner Hintergrund (Voodoopraktiker)",
             "kategorie": "Magie",
             "rang": "A",
-            "voraussetzungen": ["Glaube W4+", "Willenskraft W8+"],
+            "voraussetzungen": [
+                "Glaube W4+",
+                "Willenskraft W8+"
+            ],
             "beschreibung": "Der Charakter erhält die arkane Fertigkeit Glaube (Willenskraft) und beginnt mit 2 Mächten und 15 Machtpunkten.",
             "neue_maechte": 2,
             "machtpunkte": 15,
@@ -426,7 +504,11 @@
             "name": "Am Scheideweg gestanden",
             "kategorie": "Magie",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Voodoopraktiker)", "Glaube W8+", "Willenskraft W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Voodoopraktiker)",
+                "Glaube W8+",
+                "Willenskraft W8+"
+            ],
             "beschreibung": "Der Charakter erhält eine Freie Wiederholung auf Glaubensproben, nachdem er einen beinahe tödlichen Vorfall überlebt hat.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -437,7 +519,11 @@
             "name": "Begünstigt",
             "kategorie": "Magie",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Voodoopraktiker)", "Glaube W8+", "Willenskraft W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Voodoopraktiker)",
+                "Glaube W8+",
+                "Willenskraft W8+"
+            ],
             "beschreibung": "Die Kosten der Zauber 'Aspekt der Rada-Loa' oder 'Zorn der Petro-Loa' werden auf 3 Machtpunkte reduziert, wenn die Huldigung des Loa sichtbar ist.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -448,7 +534,10 @@
             "name": "Arkaner Hintergrund (Hexe)",
             "kategorie": "Magie",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W8+", "Zaubern W4+"],
+            "voraussetzungen": [
+                "Willenskraft W8+",
+                "Zaubern W4+"
+            ],
             "beschreibung": "Der Charakter erhält die arkane Fertigkeit Zaubern (Verstand) und beginnt mit 3 Mächten und 10 Machtpunkten.",
             "neue_maechte": 3,
             "machtpunkte": 10,
@@ -459,7 +548,10 @@
             "name": "Vertrauter",
             "kategorie": "Magie",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexe)", "Zaubern W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexe)",
+                "Zaubern W8+"
+            ],
             "beschreibung": "Der Charakter erhält einen Vertrauten, der als Wildcard agiert, spezielle Boni bietet und mit der Hexe verbunden ist.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -470,18 +562,26 @@
             "name": "Wichita-Hexe",
             "kategorie": "Magie",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexe)", "Zaubern W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexe)",
+                "Zaubern W8+"
+            ],
             "beschreibung": "Die Hexe erhält Boni auf Einschüchtern- und Überredenproben und kann ihre Peitsche mit Energie aufladen, um zusätzlichen Schaden zu verursachen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },    
+        },
         "Arkaner Hintergrund (Chi-Meister)": {
             "name": "Arkaner Hintergrund (Chi-Meister)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["GES W6+", "WIL W6+", "Kampfkünstler", "Fokus W4+"],
+            "voraussetzungen": [
+                "GES W6+",
+                "WIL W6+",
+                "Kampfkünstler",
+                "Fokus W4+"
+            ],
             "beschreibung": "Ermöglicht die Nutzung von Fokus als arkane Fertigkeit, um Chi-basierte Kräfte zu kanalisieren.",
             "neue_maechte": 3,
             "machtpunkte": 15,
@@ -492,7 +592,10 @@
             "name": "Arkaner Hintergrund (Gesegneter)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W6+", "Glaube W4+"],
+            "voraussetzungen": [
+                "WIL W6+",
+                "Glaube W4+"
+            ],
             "beschreibung": "Ermöglicht göttliche Kräfte durch Glaube und das Vertrauen in höhere Mächte.",
             "neue_maechte": 3,
             "machtpunkte": 15,
@@ -503,7 +606,10 @@
             "name": "Arkaner Hintergrund (Taschenspieler)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Glücksspiel W6+", "Zaubern W4+"],
+            "voraussetzungen": [
+                "Glücksspiel W6+",
+                "Zaubern W4+"
+            ],
             "beschreibung": "Verleiht arkane Kräfte durch Willensduelle, dargestellt als Kartenspiele.",
             "neue_maechte": 3,
             "machtpunkte": 10,
@@ -514,7 +620,10 @@
             "name": "Arkaner Hintergrund (Schamane)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W8+", "Glaube W4+"],
+            "voraussetzungen": [
+                "WIL W8+",
+                "Glaube W4+"
+            ],
             "beschreibung": "Schamanen nutzen Glaube und handeln mit Naturgeistern, um ihre Kräfte zu entfalten.",
             "neue_maechte": 2,
             "machtpunkte": 15,
@@ -525,7 +634,9 @@
             "name": "Beförderung der Agency",
             "kategorie": "Agent",
             "rang": "F",
-            "voraussetzungen": ["Agent"],
+            "voraussetzungen": [
+                "Agent"
+            ],
             "beschreibung": "Ermöglicht Beförderungen bis zur Sicherheitsstufe 3, mit Gehaltserhöhungen, Ausrüstung und besseren Gefallen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -536,7 +647,10 @@
             "name": "Person mit den tausend Gesichtern",
             "kategorie": "Agent",
             "rang": "F",
-            "voraussetzungen": ["Agent", "Darbietung W8+"],
+            "voraussetzungen": [
+                "Agent",
+                "Darbietung W8+"
+            ],
             "beschreibung": "Ermöglicht überzeugende Verkleidungen mit Boni auf Darbietungsproben und reduzierten Abzügen bei der Nachahmung spezifischer Personen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -547,7 +661,9 @@
             "name": "Leichenstarre",
             "kategorie": "Gepeinigter",
             "rang": "H",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erschafft ein schmerzhaftes Feld, das innerhalb einer Mittleren Flächenschablone um den Gepeinigten herum alle Betroffenen ablenkt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -558,7 +674,9 @@
             "name": "Mit Toten Sprechen",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt dem Gepeinigten, die Seele einer Leiche herbeizurufen und mit ihr zu sprechen. Die Seele hat vage Erinnerungen an ihr sterbliches Leben.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -569,7 +687,9 @@
             "name": "Schlaf der Toten",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Schickt ein Opfer mit einer Berührung ins Land der Träume. Funktioniert ähnlich wie die Macht Schlummer.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -580,7 +700,9 @@
             "name": "Schnell wie der Tod",
             "kategorie": "Gepeinigter",
             "rang": "A",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erhöht die Bewegungsweite um 3 und den Sprintwürfel um einen Typ. Kombinierbar mit Flink.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -591,7 +713,9 @@
             "name": "Spinne",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt es, vertikale Oberflächen zu erklimmen und sich mit halber Bewegungsweite kopfüber festzuhalten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -602,7 +726,9 @@
             "name": "Spiritueller Stacheldraht",
             "kategorie": "Gepeinigter",
             "rang": "V",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erschafft eine Barriere, die Geister und ätherische Wesen abhält. Erfordert eine Willenskraftprobe und Konzentration.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -613,7 +739,9 @@
             "name": "Spur aus Zähnen",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt das Aufspüren eines verlorenen Körperteils oder Feindes, sofern ein wesentlicher Teil in Reichweite ist.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -624,7 +752,9 @@
             "name": "Teufelsberührung",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Stört mit einer Berührung die Funktion von Höllenmaschinen oder Spielereien eines verrückten Wissenschaftlers.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -635,7 +765,9 @@
             "name": "Tote Spüren",
             "kategorie": "Gepeinigter",
             "rang": "A",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt es, Leichen in einem Umkreis von 1,5 Kilometern wahrzunehmen. Nützlich zum Erkennen von wandelnden Toten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -646,7 +778,10 @@
             "name": "Totenmaske",
             "kategorie": "Gepeinigter",
             "rang": "A",
-            "voraussetzungen": ["Überreden W6+", "Gepeinigter"],
+            "voraussetzungen": [
+                "Überreden W6+",
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt dem Gepeinigten, ein Erscheinungsbild anzunehmen, das ihm ein lebendiges Aussehen verleiht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -657,7 +792,10 @@
             "name": "Totenstille",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Heimlichkeit W8+", "Gepeinigter"],
+            "voraussetzungen": [
+                "Heimlichkeit W8+",
+                "Gepeinigter"
+            ],
             "beschreibung": "Der Gepeinigte kann sich lautlos bewegen, solange seine Füße Kontakt mit der Erde haben. Gewährt +4 auf Heimlichkeit.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -668,7 +806,9 @@
             "name": "Unheilige Schar",
             "kategorie": "Gepeinigter",
             "rang": "L",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Beschwört eine Gruppe von fünf wandelnden Toten als chaotische Verbündete. Verlorene Mitglieder können ersetzt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -679,18 +819,22 @@
             "name": "Verrenkung",
             "kategorie": "Gepeinigter",
             "rang": "H",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt es, Knochen aus ihren Gelenken zu zerren, um sich aus Gebunden oder Festgehalten zu befreien oder durch enge Spalten zu gelangen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },    
+        },
         "Albträume": {
             "name": "Albträume",
             "kategorie": "Gepeinigter",
             "rang": "V",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt dem Gepeinigten, seinen Feinden jede Nacht dunkle und schreckliche Träume zu senden. Der Effekt erfordert einen Gegenstand oder eine Verbindung zum Ziel.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -701,7 +845,9 @@
             "name": "Atem des Ossariums",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Der Gepeinigte atmet giftige Dämpfe aus, die innerhalb einer Mittleren Flächenschablone Gegner Erschöpfung erleiden lassen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -712,7 +858,9 @@
             "name": "Besitz Ergreifen",
             "kategorie": "Gepeinigter",
             "rang": "V",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Der Gepeinigte kann die Kontrolle über einen anderen Körper übernehmen, ähnlich der Macht Marionette.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -723,7 +871,9 @@
             "name": "Geisterblick",
             "kategorie": "Gepeinigter",
             "rang": "F",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt dem Gepeinigten, die Geisterwelt zu sehen und übernatürliche Phänomene wahrzunehmen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -734,7 +884,9 @@
             "name": "Graben",
             "kategorie": "Gepeinigter",
             "rang": "A",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Der Gepeinigte kann sich durch Erde graben und sich unterirdisch bewegen, jedoch langsamer als an der Oberfläche.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -745,7 +897,9 @@
             "name": "Hand der Toten",
             "kategorie": "Gepeinigter",
             "rang": "V",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Der Gepeinigte kann eine abgetrennte Körperteil, wie eine Hand, steuern und für verschiedene Aufgaben verwenden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -756,7 +910,9 @@
             "name": "Höllenross",
             "kategorie": "Gepeinigter",
             "rang": "V",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Beschwört ein dämonisches Pferd, das als Reittier dient und die Werte eines Streitrosses hat. Das Höllenross ist furchtlos und eine Wildcard.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -767,7 +923,9 @@
             "name": "Imitieren",
             "kategorie": "Gepeinigter",
             "rang": "L",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt dem Gepeinigten, die Mächte anderer zu imitieren, die er in seiner Nähe erlebt hat. Dies erfordert Verstand und Verständnis der Macht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -778,7 +936,9 @@
             "name": "Galgenhumor",
             "kategorie": "Sozial",
             "rang": "A",
-            "voraussetzungen": ["Provozieren W6+"],
+            "voraussetzungen": [
+                "Provozieren W6+"
+            ],
             "beschreibung": "Ermöglicht die Nutzung von Provozieren anstelle von Willenskraft bei Furchtproben. Bei einer Steigerung unterstützt der Charakter Verbündete.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -789,7 +949,11 @@
             "name": "Veteran des Unheimlichen Westens",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Wildcard", "WIL W6+", "Okkultismus W6+"],
+            "voraussetzungen": [
+                "Wildcard",
+                "WIL W6+",
+                "Okkultismus W6+"
+            ],
             "beschreibung": "Erlaubt den Start auf einem höheren Rang mit vier Aufstiegen, birgt jedoch ein Risiko aus einer speziellen Tabelle.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -800,7 +964,10 @@
             "name": "Fetisch",
             "kategorie": "Schamane",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Schamane)", "Glaube W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Schamane)",
+                "Glaube W8+"
+            ],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glaubensproben, wenn ein Fetisch verwendet wird. Ersatz kann durch ein Ritual erstellt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -811,7 +978,10 @@
             "name": "Die Gunst des Geistes",
             "kategorie": "Schamane",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Schamane)", "Glaube W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Schamane)",
+                "Glaube W8+"
+            ],
             "beschreibung": "Ermöglicht das Wirken einer Macht ohne Abzug für Mehrfachaktionen einmal pro Runde.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -822,7 +992,10 @@
             "name": "Herde",
             "kategorie": "Gesegneter",
             "rang": "V",
-            "voraussetzungen": ["Arkaner Hintergrund (Gesegneter)", "Überreden W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Gesegneter)",
+                "Überreden W8+"
+            ],
             "beschreibung": "Fügt fünf Gefolgsleute hinzu, die mit dem Gesegneten reisen und ihm helfen können. Gefolgsleute können ersetzt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -833,7 +1006,11 @@
             "name": "Wahrer Gläubiger",
             "kategorie": "Gesegneter",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W10+", "Arkaner Hintergrund (Gesegneter)", "Glaube W6+"],
+            "voraussetzungen": [
+                "Willenskraft W10+",
+                "Arkaner Hintergrund (Gesegneter)",
+                "Glaube W6+"
+            ],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glaubensproben.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -844,7 +1021,9 @@
             "name": "Befallen",
             "kategorie": "Gepeinigter",
             "rang": "A",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Ermöglicht die Kontrolle von Schwärmen beißender oder stechender Insekten für begrenzte Zeit durch den Einsatz eines Bennys.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -855,7 +1034,9 @@
             "name": "Flicken",
             "kategorie": "Gepeinigter",
             "rang": "A",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Erlaubt tägliche Würfe auf Natürliche Heilung, sofern der Gepeinigte mindestens 500 g Fleisch verzehrt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -866,7 +1047,9 @@
             "name": "Höllenfeuer",
             "kategorie": "Gepeinigter",
             "rang": "Heroisch",
-            "voraussetzungen": ["Gepeinigter"],
+            "voraussetzungen": [
+                "Gepeinigter"
+            ],
             "beschreibung": "Ermöglicht die Nutzung von 3W6 Feuerschaden in einer kegelförmigen Schablone mit der Fertigkeit Athletik.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -877,7 +1060,11 @@
             "name": "Überlegenes Kung Fu",
             "kategorie": "Chi-Meister",
             "rang": "A",
-            "voraussetzungen": ["Willenskraft W6+", "Arkaner Hintergrund (Chi-Meister)", "Kämpfen W8+"],
+            "voraussetzungen": [
+                "Willenskraft W6+",
+                "Arkaner Hintergrund (Chi-Meister)",
+                "Kämpfen W8+"
+            ],
             "beschreibung": "Ermöglicht die Wahl eines speziellen Kampfstils, der als freie Aktion aktiviert werden kann.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -888,7 +1075,11 @@
             "name": "Himmlisches Kung Fu",
             "kategorie": "Chi-Meister",
             "rang": "V",
-            "voraussetzungen": ["Willenskraft W8+", "Überlegenes Kung Fu", "Kämpfen W10+"],
+            "voraussetzungen": [
+                "Willenskraft W8+",
+                "Überlegenes Kung Fu",
+                "Kämpfen W10+"
+            ],
             "beschreibung": "Ermöglicht die gleichzeitige Nutzung von zwei Kampfstilen und erweitert die Auswahl um einen weiteren Stil.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -899,7 +1090,9 @@
             "name": "Beförderungen der Ranger",
             "kategorie": "Ranger",
             "rang": "F",
-            "voraussetzungen": ["Territorialer Ranger"],
+            "voraussetzungen": [
+                "Territorialer Ranger"
+            ],
             "beschreibung": "Ermöglicht Beförderungen vom Sergeant bis zum Captain mit zusätzlichen Vorteilen wie Gehaltserhöhungen und besseren Gefallen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -910,7 +1103,10 @@
             "name": "Wie eine Eiche",
             "kategorie": "Ranger",
             "rang": "V",
-            "voraussetzungen": ["Schneid", "Territorialer Ranger"],
+            "voraussetzungen": [
+                "Schneid",
+                "Territorialer Ranger"
+            ],
             "beschreibung": "Negiert bis zu 2 Punkte Furcht-Abzüge für Verbündete in der Nähe, solange der Ranger seine Furchtprobe besteht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -921,7 +1117,10 @@
             "name": "Alchemie",
             "kategorie": "Verrückte Wissenschaft",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)", "Verrückte Wissenschaft W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Verrückter Wissenschaftler)",
+                "Verrückte Wissenschaft W8+"
+            ],
             "beschreibung": "Ermöglicht die Herstellung von Tränken und Elixieren, die Machtpunkte binden, bis sie verwendet werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -932,7 +1131,10 @@
             "name": "Erzfresser",
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)", "Verrückte Wissenschaft W6+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Verrückter Wissenschaftler)",
+                "Verrückte Wissenschaft W6+"
+            ],
             "beschreibung": "Erhöht Machtpunkte um 5, aber erhöht das Risiko für Geistersteinfieber bei Fehlfunktionen.",
             "neue_maechte": 0,
             "machtpunkte": 5,
@@ -943,7 +1145,9 @@
             "name": "Mit Eisen beschlagen",
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Verrückter Wissenschaftler)"
+            ],
             "beschreibung": "Erhält $2.000 an Geräten oder Fahrzeugen und 25% Rabatt auf zukünftige Käufe bei bestimmten Anbietern.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -954,7 +1158,10 @@
             "name": "Wahres Genie",
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Verrückter Wissenschaftler)", "Verstand W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Verrückter Wissenschaftler)",
+                "Verstand W8+"
+            ],
             "beschreibung": "Ermöglicht die Verwendung eines Bennys, um Ergebnisse auf der Wahnsinns- oder Fehlfunktionstabelle zu beeinflussen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -965,7 +1172,9 @@
             "name": "Blut der Whateleys",
             "kategorie": "Taschenspieler",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Taschenspieler)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Taschenspieler)"
+            ],
             "beschreibung": "Ermöglicht die Nutzung von Blutmagie, um Machtpunkte durch Selbstverletzung zu gewinnen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -976,7 +1185,10 @@
             "name": "Erfahrene Hand",
             "kategorie": "Taschenspieler",
             "rang": "Heroisch",
-            "voraussetzungen": ["Arkaner Hintergrund (Taschenspieler)", "Zaubern W10+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Taschenspieler)",
+                "Zaubern W10+"
+            ],
             "beschreibung": "Erlaubt es, bis zu drei Karten abzulegen und neu zu ziehen, wenn Ein Spiel mit dem Teufel gewagt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -987,7 +1199,10 @@
             "name": "Runenschießen",
             "kategorie": "Taschenspieler",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Taschenspieler)", "Schießen W8+"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Taschenspieler)",
+                "Schießen W8+"
+            ],
             "beschreibung": "Ermöglicht das Wirken bestimmter Zauber mit einer speziellen, runenbeschrifteten Waffe.",
             "neue_maechte": 1,
             "machtpunkte": 0,
@@ -998,7 +1213,11 @@
             "name": "Zocker",
             "kategorie": "Taschenspieler",
             "rang": "F",
-            "voraussetzungen": ["Willenskraft W8+", "Arkaner Hintergrund (Taschenspieler)", "Zaubern W6+"],
+            "voraussetzungen": [
+                "Willenskraft W8+",
+                "Arkaner Hintergrund (Taschenspieler)",
+                "Zaubern W6+"
+            ],
             "beschreibung": "Zieht eine zusätzliche Karte, wenn Ein Spiel mit dem Teufel gewagt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1009,7 +1228,9 @@
             "name": "Verbesserter Zocker",
             "kategorie": "Taschenspieler",
             "rang": "V",
-            "voraussetzungen": ["Zocker"],
+            "voraussetzungen": [
+                "Zocker"
+            ],
             "beschreibung": "Zieht zwei zusätzliche Karten, wenn Ein Spiel mit dem Teufel gewagt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1090,13 +1311,15 @@
             "name": "Arkaner Hintergrund (Verrückte Wissenschaft)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Anfänger, VER W8+, Naturwissenschaften W6+, Verrückte Wissenschaft W4+"],
+            "voraussetzungen": [
+                "Anfänger, VER W8+, Naturwissenschaften W6+, Verrückte Wissenschaft W4+"
+            ],
             "beschreibung": "Verleiht Zugang zu fortschrittlichen Erfindungen, die übernatürliche Kräfte simulieren.",
             "neue_maechte": 2,
             "machtpunkte": 15,
             "ausgewaehlt": false,
             "aktiv": true
-        },                      
+        },
         "Attraktiv": {
             "name": "Attraktiv",
             "kategorie": "Hintergrund",
@@ -2784,7 +3007,10 @@
             "name": "Duellant",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Schießen W6+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Schießen W6+"
+            ],
             "beschreibung": "Erhält zu Beginn eines Duells zwei zusätzliche verdeckte Karten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2795,7 +3021,11 @@
             "name": "Hahnwedeln",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Fortgeschritten", "Geschicklichkeit W8+", "Schießen W8+"],
+            "voraussetzungen": [
+                "Fortgeschritten",
+                "Geschicklichkeit W8+",
+                "Schießen W8+"
+            ],
             "beschreibung": "Erlaubt bis zu sechs Schüsse in einer einzigen Aktion mit einem Abzug von -4 auf jeden Schuss.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2806,7 +3036,12 @@
             "name": "Sauberes Hahnwedeln",
             "kategorie": "Kampf",
             "rang": "Heroisch",
-            "voraussetzungen": ["Heroisch", "Geschicklichkeit W10+", "Hahnwedeln", "Schießen W10+"],
+            "voraussetzungen": [
+                "Heroisch",
+                "Geschicklichkeit W10+",
+                "Hahnwedeln",
+                "Schießen W10+"
+            ],
             "beschreibung": "Wie Hahnwedeln, jedoch mit einem Abzug von nur -2 auf jeden Schuss.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2817,7 +3052,9 @@
             "name": "Mach ihn nicht wütend!",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Anfänger"],
+            "voraussetzungen": [
+                "Anfänger"
+            ],
             "beschreibung": "Fügt die Anzahl eigener Wunden als Bonus zu Nahkampfschadenswürfen hinzu.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2828,13 +3065,16 @@
             "name": "Schnell ziehen",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Anfänger", "Geschicklichkeit W8+"],
+            "voraussetzungen": [
+                "Anfänger",
+                "Geschicklichkeit W8+"
+            ],
             "beschreibung": "Erlaubt das Ziehen von zwei neuen Karten bei Benny-Ausgabe und bietet +2 auf Athletik-Würfe für Unterbrechungen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        }        
+        }
     },
     "handicaps": {
         "Ärgermagnet (leicht)": {
@@ -2852,7 +3092,7 @@
             "beschreibung": "Kritische Fehlschläge führen zu schlimmeren Konsequenzen. Zufällige negative Effekte treffen immer diesen Charakter.",
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Eid auf die alten Bräuche (leicht)": {
             "name": "Eid auf die alten Bräuche",
             "stufe": "leicht",
@@ -2884,7 +3124,7 @@
             "beschreibung": "–2 auf Proben gegen Erschöpfung und ein kritischer Fehlschlag führt zu schwerwiegenden Konsequenzen.",
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Memme (schwer)": {
             "name": "Memme",
             "stufe": "schwer",
@@ -3508,6 +3748,24 @@
             "beschreibung": "–1 auf Proben mit Allgemeinwissen und Wahrnehmung.",
             "ausgewaehlt": false,
             "aktiv": true
+        },
+        "Klein": {
+            "name": "Klein",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Dieser Abenteurer ist ziemlich dürr, klein oder beides. Seine Größe (siehe Seite 103) wird um –1 verringert, wodurch auch seine Robustheit sinkt. Die Größe kann nicht unter –1 sinken, doch der Abzug auf Robustheit ist kumulativ. Ein kleiner Halbling hat beispielsweise Größe –1, verliert aber einen zusätzlichen Punkt Robustheit.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Kränklich": {
+            "name": "Kränklich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
         }
     },
     "maechte": {
@@ -3570,7 +3828,7 @@
             "voraussetzungen": [],
             "ausgewaehlt": false,
             "aktiv": true
-        },    
+        },
         "Ausbessern": {
             "name": "Ausbessern",
             "rang": "A",
@@ -3579,7 +3837,9 @@
             "dauer": "Sofort",
             "effekt": "",
             "beschreibung": "Erlaubt es, Schäden an Maschinen und Fahrzeugen zu reparieren. Eine erfolgreiche Probe auf Verrückte Wissenschaft heilt 1 Wunde, 2 bei einer Steigerung.",
-            "voraussetzungen": ["Metallmagier"],
+            "voraussetzungen": [
+                "Metallmagier"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -3591,7 +3851,9 @@
             "dauer": "Sofort",
             "effekt": "",
             "beschreibung": "Lässt mechanische Geräte blockieren, ausfallen oder Fehlfunktionen verursachen. Bei einer Steigerung erleidet das Gerät sofort einen Ausfall.",
-            "voraussetzungen": ["Metallmagier"],
+            "voraussetzungen": [
+                "Metallmagier"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -3639,7 +3901,9 @@
             "dauer": "5",
             "effekt": "",
             "beschreibung": "Runen auf der Waffe verleihen Kugeln Effekte wie PB 6, Schwer, Explosiv oder zusätzliche Reichweite. Steigerung erlaubt zwei Effekte gleichzeitig.",
-            "voraussetzungen": ["Talent Runenschießen"],
+            "voraussetzungen": [
+                "Talent Runenschießen"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -4322,7 +4586,7 @@
             "setting": "Deadlands",
             "beschreibung": "",
             "aktiv": true
-        },        
+        },
         "Eingeborenenschild (Klein)": {
             "name": "Eingeborenenschild (Klein)",
             "kategorie": "Schild",
@@ -4335,7 +4599,7 @@
             "deckung": -1,
             "mindeststaerke": "W4",
             "haerte": 7
-          },
+        },
         "Eingeborenenschild (Mittel)": {
             "name": "Eingeborenenschild (Mittel)",
             "kategorie": "Schild",
@@ -4348,7 +4612,7 @@
             "deckung": -2,
             "mindeststaerke": "W4",
             "haerte": 8
-            },
+        },
         "Hemd, einfach": {
             "name": "Hemd, einfach",
             "kategorie": "Allgemein",
@@ -4366,7 +4630,7 @@
             "setting": "Deadlands",
             "beschreibung": "",
             "aktiv": true
-        },        
+        },
         "Hemd, elegant": {
             "name": "Hemd, elegant",
             "kategorie": "Allgemein",
@@ -4384,7 +4648,7 @@
             "setting": "Deadlands",
             "beschreibung": "",
             "aktiv": true
-        },        
+        },
         "Hose": {
             "name": "Hose",
             "kategorie": "Allgemein",
@@ -4402,7 +4666,7 @@
             "setting": "Deadlands",
             "beschreibung": "",
             "aktiv": true
-        },        
+        },
         "Lange Unterhosen": {
             "name": "Lange Unterhosen",
             "kategorie": "Allgemein",
@@ -4734,7 +4998,7 @@
             "name": "Silbererz",
             "kategorie": "Allgemein",
             "gewicht": 0.03,
-            "kosten": 1.50,
+            "kosten": 1.5,
             "setting": "Deadlands",
             "beschreibung": ""
         },
@@ -4873,79 +5137,79 @@
             "kosten": 5,
             "setting": "Deadlands",
             "beschreibung": ""
-        }, 
+        },
         "Munition Gewehr (groß) .45 (50 Stück)": {
-        "name": "Munition Gewehr (groß) .45 (50 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 4,
-        "kosten": 5,
-        "setting": "Deadlands",
-        "beschreibung": "Für Gewehre Kaliber .45 und größer (50 Stück).",
-        "aktiv": true
+            "name": "Munition Gewehr (groß) .45 (50 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 4,
+            "kosten": 5,
+            "setting": "Deadlands",
+            "beschreibung": "Für Gewehre Kaliber .45 und größer (50 Stück).",
+            "aktiv": true
         },
         "Munition Gewehr (klein) .38-44 (50 Stück)": {
-        "name": "Munition Gewehr (klein) .38-44 (50 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 3,
-        "kosten": 4,
-        "setting": "Deadlands",
-        "beschreibung": "Für Gewehre Kaliber .38-44 (50 Stück).",
-        "aktiv": true
+            "name": "Munition Gewehr (klein) .38-44 (50 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 3,
+            "kosten": 4,
+            "setting": "Deadlands",
+            "beschreibung": "Für Gewehre Kaliber .38-44 (50 Stück).",
+            "aktiv": true
         },
         "Pfeile (20 Stück)": {
-        "name": "Pfeile (20 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 0.5,
-        "kosten": 2,
-        "setting": "Deadlands",
-        "beschreibung": "Für Bögen (20 Stück).",
-        "aktiv": true
+            "name": "Pfeile (20 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 2,
+            "setting": "Deadlands",
+            "beschreibung": "Für Bögen (20 Stück).",
+            "aktiv": true
         },
         "Munition Pistole (groß) .40-.50 (50 Stück)": {
-        "name": "Munition Pistole (groß) .40-.50 (50 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 2.5,
-        "kosten": 3,
-        "setting": "Deadlands",
-        "beschreibung": "Für Pistolen Kaliber .40-.50 (50 Stück).",
-        "aktiv": true
+            "name": "Munition Pistole (groß) .40-.50 (50 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 3,
+            "setting": "Deadlands",
+            "beschreibung": "Für Pistolen Kaliber .40-.50 (50 Stück).",
+            "aktiv": true
         },
         "Munition Pistolen (klein) .22-.38 (50 Stück)": {
-        "name": "Munition Pistolen (klein) .22-.38 (50 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 1.5,
-        "kosten": 2,
-        "setting": "Deadlands",
-        "beschreibung": "Für Pistolen Kaliber .22-.38 (50 Stück).",
-        "aktiv": true
+            "name": "Munition Pistolen (klein) .22-.38 (50 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 2,
+            "setting": "Deadlands",
+            "beschreibung": "Für Pistolen Kaliber .22-.38 (50 Stück).",
+            "aktiv": true
         },
         "Munition Schrotflinte (20 Stück)": {
-        "name": "Munition Schrotflinte (20 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 1,
-        "kosten": 2,
-        "setting": "Deadlands",
-        "beschreibung": "Normales, grobkörniges Schrot (20 Stück).",
-        "aktiv": true
+            "name": "Munition Schrotflinte (20 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 2,
+            "setting": "Deadlands",
+            "beschreibung": "Normales, grobkörniges Schrot (20 Stück).",
+            "aktiv": true
         },
         "Kugeln (mit Schwarzpulver) (20 Stück)": {
-        "name": "Kugel (mit Schwarzpulver) (20 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 2,
-        "kosten": 1,
-        "setting": "Deadlands",
-        "beschreibung": "Für Schwarzpulverwaffen (20 Stück).",
-        "aktiv": true
+            "name": "Kugel (mit Schwarzpulver) (20 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 2,
+            "kosten": 1,
+            "setting": "Deadlands",
+            "beschreibung": "Für Schwarzpulverwaffen (20 Stück).",
+            "aktiv": true
         },
         "Zündkapsel (60 Stück)": {
-        "name": "Zündkapsel (60 Stück)",
-        "kategorie": "Allgemein",
-        "gewicht": 0.5,
-        "kosten": 0.5,
-        "setting": "Deadlands",
-        "beschreibung": "Für Kapsel- und Kugelwaffen (60 Stück).",
-        "aktiv": true
-        },   
+            "name": "Zündkapsel (60 Stück)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 0.5,
+            "setting": "Deadlands",
+            "beschreibung": "Für Kapsel- und Kugelwaffen (60 Stück).",
+            "aktiv": true
+        },
         "Bajonett": {
             "name": "Bajonett",
             "kategorie": "Waffe",
@@ -4963,7 +5227,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        },   
+        },
         "Keule": {
             "name": "Keule",
             "kategorie": "Waffe",
@@ -4981,7 +5245,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        },               
+        },
         "Keule, Kriegs-": {
             "name": "Keule, Kriegs-",
             "kategorie": "Waffe",
@@ -4999,7 +5263,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Keule, Kriegs- (mit Klingen)": {
             "name": "Keule, Kriegs- (mit Klingen)",
             "kategorie": "Waffe",
@@ -5017,7 +5281,7 @@
                 "Schuss": "-",
                 "PB": 2
             }
-        }, 
+        },
         "Lanze (Prärieindianer)": {
             "name": "Lanze (Prärieindianer)",
             "kategorie": "Waffe",
@@ -5035,7 +5299,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Lasso": {
             "name": "Lasso",
             "kategorie": "Waffe",
@@ -5053,7 +5317,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Messer": {
             "name": "Messer",
             "kategorie": "Waffe",
@@ -5071,7 +5335,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Messer, Bowie": {
             "name": "Messer, Bowie",
             "kategorie": "Waffe",
@@ -5089,7 +5353,7 @@
                 "Schuss": "-",
                 "PB": 1
             }
-        }, 
+        },
         "Peitsche": {
             "name": "Peitsche",
             "kategorie": "Waffe",
@@ -5107,7 +5371,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Schlagring": {
             "name": "Schlagring",
             "kategorie": "Waffe",
@@ -5125,7 +5389,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Säbel": {
             "name": "Säbel",
             "kategorie": "Waffe",
@@ -5143,7 +5407,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Speer": {
             "name": "Speer",
             "kategorie": "Waffe",
@@ -5161,7 +5425,7 @@
                 "Schuss": "-",
                 "PB": "-"
             }
-        }, 
+        },
         "Tomahawk": {
             "name": "Tomahawk",
             "kategorie": "Waffe",
@@ -5178,7 +5442,7 @@
                 "FR": "-",
                 "Schuss": "-",
                 "PB": "-"
-            } 
+            }
         },
         "Erfinderschürze": {
             "name": "Erfinderschürze",
@@ -5292,295 +5556,295 @@
             "kopf": 0,
             "mindeststaerke": "W4"
         },
-            "Gatling-Pistole (.36)": {
-              "name": "Gatling-Pistole (.36)",
-              "kategorie": "Waffe",
-              "gewicht": 2.5,
-              "kosten": 400,
-              "setting": "Deadlands",
-              "beschreibung": "Personalisierte Gatling mit mehreren Läufen und Trommel.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W4",
-              "eigenschaften": {
+        "Gatling-Pistole (.36)": {
+            "name": "Gatling-Pistole (.36)",
+            "kategorie": "Waffe",
+            "gewicht": 2.5,
+            "kosten": 400,
+            "setting": "Deadlands",
+            "beschreibung": "Personalisierte Gatling mit mehreren Läufen und Trommel.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
                 "Schaden": "2W6",
                 "Reichweite": "12/24/48",
                 "FR": 3,
                 "Schuss": 30,
                 "PB": 1
-              }
-            },
-            "Gatling-Karabiner (.45)": {
-              "name": "Gatling-Karabiner (.45)",
-              "kategorie": "Waffe",
-              "gewicht": 6,
-              "kosten": 750,
-              "setting": "Deadlands",
-              "beschreibung": "Personalisierte Gatling-Karabiner.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W6",
-              "eigenschaften": {
+            }
+        },
+        "Gatling-Karabiner (.45)": {
+            "name": "Gatling-Karabiner (.45)",
+            "kategorie": "Waffe",
+            "gewicht": 6,
+            "kosten": 750,
+            "setting": "Deadlands",
+            "beschreibung": "Personalisierte Gatling-Karabiner.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
                 "Schaden": "2W8",
                 "Reichweite": "20/40/80",
                 "FR": 2,
                 "Schuss": 30,
                 "PB": 2
-              }
-            },
-            "Gatling-Gewehr (.45)": {
-              "name": "Gatling-Gewehr (.45)",
-              "kategorie": "Waffe",
-              "gewicht": 8.5,
-              "kosten": 1000,
-              "setting": "Deadlands",
-              "beschreibung": "Personalisierte Gatling-Gewehr.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W8",
-              "eigenschaften": {
+            }
+        },
+        "Gatling-Gewehr (.45)": {
+            "name": "Gatling-Gewehr (.45)",
+            "kategorie": "Waffe",
+            "gewicht": 8.5,
+            "kosten": 1000,
+            "setting": "Deadlands",
+            "beschreibung": "Personalisierte Gatling-Gewehr.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
                 "Schaden": "2W8",
                 "Reichweite": "24/48/96",
                 "FR": 2,
                 "Schuss": 30,
                 "PB": 2
-              }
-            },
-            "Gatling-Schrotflinte": {
-              "name": "Gatling-Schrotflinte",
-              "kategorie": "Waffe",
-              "gewicht": 7.5,
-              "kosten": 1000,
-              "setting": "Deadlands",
-              "beschreibung": "Personalisierte Gatling-Schrotflinte.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W8",
-              "eigenschaften": {
+            }
+        },
+        "Gatling-Schrotflinte": {
+            "name": "Gatling-Schrotflinte",
+            "kategorie": "Waffe",
+            "gewicht": 7.5,
+            "kosten": 1000,
+            "setting": "Deadlands",
+            "beschreibung": "Personalisierte Gatling-Schrotflinte.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
                 "Schaden": "1–3W6",
                 "Reichweite": "12/24/48",
                 "FR": 2,
                 "Schuss": 15,
                 "PB": "-"
-              }
-            },
-            "Gatling-Geschütz (.45)": {
-              "name": "Gatling-Geschütz (.45)",
-              "kategorie": "Waffe",
-              "gewicht": 20,
-              "kosten": 1500,
-              "setting": "Deadlands",
-              "beschreibung": "Das originale sechsläufige Gatling-Geschütz.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W6",
-              "eigenschaften": {
+            }
+        },
+        "Gatling-Geschütz (.45)": {
+            "name": "Gatling-Geschütz (.45)",
+            "kategorie": "Waffe",
+            "gewicht": 20,
+            "kosten": 1500,
+            "setting": "Deadlands",
+            "beschreibung": "Das originale sechsläufige Gatling-Geschütz.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
                 "Schaden": "2W8",
                 "Reichweite": "24/48/96",
                 "FR": 3,
                 "Schuss": 100,
                 "PB": 2
-              }
-            },
-            "Bündelrevolver Rupertus (.22)": {
-              "name": "Bündelrevolver Rupertus (.22)",
-              "kategorie": "Waffe",
-              "gewicht": 0.5,
-              "kosten": 6,
-              "setting": "Deadlands",
-              "beschreibung": "",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W6",
-              "eigenschaften": {
+            }
+        },
+        "Bündelrevolver Rupertus (.22)": {
+            "name": "Bündelrevolver Rupertus (.22)",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 6,
+            "setting": "Deadlands",
+            "beschreibung": "",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
                 "Schaden": "2W4",
                 "Reichweite": "5/10/20",
                 "FR": 1,
                 "Schuss": 8,
                 "PB": "-"
-              }
-            },
-            "Derringer (.41)": {
-              "name": "Derringer (.41)",
-              "kategorie": "Waffe",
-              "gewicht": 0.5,
-              "kosten": 5,
-              "setting": "Deadlands",
-              "beschreibung": "–2 auf Wahrnehmung, wenn versteckt.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W4",
-              "eigenschaften": {
+            }
+        },
+        "Derringer (.41)": {
+            "name": "Derringer (.41)",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "Deadlands",
+            "beschreibung": "–2 auf Wahrnehmung, wenn versteckt.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
                 "Schaden": "2W4",
                 "Reichweite": "3/6/12",
                 "FR": 1,
                 "Schuss": 2,
                 "PB": "-"
-              }
-            },
-            "Colt Peacemaker (.45)": {
-              "name": "Colt Peacemaker (.45)",
-              "kategorie": "Waffe",
-              "gewicht": 4,
-              "kosten": 15,
-              "setting": "Deadlands",
-              "beschreibung": "Auch bekannt als Colt Single-Action Army.",
-              "aktiv": true,
-              "typ": "Fernkampf",
-              "mindeststaerke": "W4",
-              "eigenschaften": {
+            }
+        },
+        "Colt Peacemaker (.45)": {
+            "name": "Colt Peacemaker (.45)",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 15,
+            "setting": "Deadlands",
+            "beschreibung": "Auch bekannt als Colt Single-Action Army.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
                 "Schaden": "2W6+1",
                 "Reichweite": "12/24/48",
                 "FR": 1,
                 "Schuss": 6,
                 "PB": 1
-              }                                          
-            },
-            "Colt Lightning (.38)": {
-                "name": "Colt Lightning (.38)",
-                "kategorie": "Waffe",
-                "gewicht": 1,
-                "kosten": 13,
-                "setting": "Deadlands",
-                "beschreibung": "",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W4",
-                "eigenschaften": {
-                  "Schaden": "2W6",
-                  "Reichweite": "12/24/48",
-                  "FR": 1,
-                  "Schuss": 6,
-                  "PB": 1
-                }
-              },
-              "Colt Rainmaker (.32)": {
-                "name": "Colt Rainmaker (.32)",
-                "kategorie": "Waffe",
-                "gewicht": 1,
-                "kosten": 8,
-                "setting": "Deadlands",
-                "beschreibung": "",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W4",
-                "eigenschaften": {
-                  "Schaden": "2W6",
-                  "Reichweite": "12/24/48",
-                  "FR": 1,
-                  "Schuss": 6,
-                  "PB": 1
-                }
-              },
-              "Springfield-Muskete (.58)": {
-                "name": "Springfield-Muskete (.58)",
-                "kategorie": "Waffe",
-                "gewicht": 5.5,
-                "kosten": 8,
-                "setting": "Deadlands",
-                "beschreibung": "Nachladen 3, Schwarzpulverwaffe.",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W6",
-                "eigenschaften": {
-                  "Schaden": "2W8",
-                  "Reichweite": "15/30/60",
-                  "FR": 1,
-                  "Schuss": "-",
-                  "PB": "-"
-                }
-              },
-              "Winchester '73 (.44-40)": {
-                "name": "Winchester '73 (.44-40)",
-                "kategorie": "Waffe",
-                "gewicht": 5,
-                "kosten": 25,
-                "setting": "Deadlands",
-                "beschreibung": "",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W6",
-                "eigenschaften": {
-                  "Schaden": "2W8–1",
-                  "Reichweite": "24/48/96",
-                  "FR": 1,
-                  "Schuss": 15,
-                  "PB": 2
-                }
-              },
-              "Colt Army (.44)": {
-                "name": "Colt Army (.44)",
-                "kategorie": "Waffe",
-                "gewicht": 1,
-                "kosten": 12,
-                "setting": "Deadlands",
-                "beschreibung": "Ältere Versionen haben Zündkapseln und Kugeln, Nachladen 3, $10.",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W4",
-                "eigenschaften": {
-                  "Schaden": "2W6+1",
-                  "Reichweite": "12/24/48",
-                  "FR": 1,
-                  "Schuss": 6,
-                  "PB": 1
-                }
-              },
-              "Enfield Muskete (.58)": {
-                "name": "Enfield Muskete (.58)",
-                "kategorie": "Waffe",
-                "gewicht": 4.5,
-                "kosten": 25,
-                "setting": "Deadlands",
-                "beschreibung": "Nachladen 3, Schwarzpulverwaffe.",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W6",
-                "eigenschaften": {
-                  "Schaden": "2W8",
-                  "Reichweite": "12/24/48",
-                  "FR": 1,
-                  "Schuss": "-",
-                  "PB": "-"
-                }
-              },
-              "Colt Frontier (.44-40)": {
-                "name": "Colt Frontier (.44-40)",
-                "kategorie": "Waffe",
-                "gewicht": 1,
-                "kosten": 15,
-                "setting": "Deadlands",
-                "beschreibung": "Kann die Munition der Winchester '73 verwenden.",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W4",
-                "eigenschaften": {
-                  "Schaden": "2W6+1",
-                  "Reichweite": "12/24/48",
-                  "FR": 1,
-                  "Schuss": 6,
-                  "PB": 1
-                }
-              },
-              "Sharp’s Big 50 (.50)": {
-                "name": "Sharp’s Big 50 (.50)",
-                "kategorie": "Waffe",
-                "gewicht": 5.5,
-                "kosten": 50,
-                "setting": "Deadlands",
-                "beschreibung": "Schnellschuss-Malus, Zündkapseln und Kugeln, Nachladen 3.",
-                "aktiv": true,
-                "typ": "Fernkampf",
-                "mindeststaerke": "W8",
-                "eigenschaften": {
-                  "Schaden": "2W10",
-                  "Reichweite": "30/60/120",
-                  "FR": 1,
-                  "Schuss": 1,
-                  "PB": 2
-                }
-              }
-    },                  
+            }
+        },
+        "Colt Lightning (.38)": {
+            "name": "Colt Lightning (.38)",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 13,
+            "setting": "Deadlands",
+            "beschreibung": "",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": 6,
+                "PB": 1
+            }
+        },
+        "Colt Rainmaker (.32)": {
+            "name": "Colt Rainmaker (.32)",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 8,
+            "setting": "Deadlands",
+            "beschreibung": "",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": 6,
+                "PB": 1
+            }
+        },
+        "Springfield-Muskete (.58)": {
+            "name": "Springfield-Muskete (.58)",
+            "kategorie": "Waffe",
+            "gewicht": 5.5,
+            "kosten": 8,
+            "setting": "Deadlands",
+            "beschreibung": "Nachladen 3, Schwarzpulverwaffe.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Winchester '73 (.44-40)": {
+            "name": "Winchester '73 (.44-40)",
+            "kategorie": "Waffe",
+            "gewicht": 5,
+            "kosten": 25,
+            "setting": "Deadlands",
+            "beschreibung": "",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8–1",
+                "Reichweite": "24/48/96",
+                "FR": 1,
+                "Schuss": 15,
+                "PB": 2
+            }
+        },
+        "Colt Army (.44)": {
+            "name": "Colt Army (.44)",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 12,
+            "setting": "Deadlands",
+            "beschreibung": "Ältere Versionen haben Zündkapseln und Kugeln, Nachladen 3, $10.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6+1",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": 6,
+                "PB": 1
+            }
+        },
+        "Enfield Muskete (.58)": {
+            "name": "Enfield Muskete (.58)",
+            "kategorie": "Waffe",
+            "gewicht": 4.5,
+            "kosten": 25,
+            "setting": "Deadlands",
+            "beschreibung": "Nachladen 3, Schwarzpulverwaffe.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "2W8",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Colt Frontier (.44-40)": {
+            "name": "Colt Frontier (.44-40)",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 15,
+            "setting": "Deadlands",
+            "beschreibung": "Kann die Munition der Winchester '73 verwenden.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6+1",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": 6,
+                "PB": 1
+            }
+        },
+        "Sharp’s Big 50 (.50)": {
+            "name": "Sharp’s Big 50 (.50)",
+            "kategorie": "Waffe",
+            "gewicht": 5.5,
+            "kosten": 50,
+            "setting": "Deadlands",
+            "beschreibung": "Schnellschuss-Malus, Zündkapseln und Kugeln, Nachladen 3.",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "2W10",
+                "Reichweite": "30/60/120",
+                "FR": 1,
+                "Schuss": 1,
+                "PB": 2
+            }
+        }
+    },
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,

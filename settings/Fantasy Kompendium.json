@@ -3,1117 +3,1250 @@
     "description": "Fantasy Kompendium",
     "voelker": {
         "Aquarianer": {
-        "name": "Aquarianer",
-        "handicaps": [
-            "Abhängigkeit (Wasser: 1 Stunde pro 24 Stunden, sonst Erschöpfung bis Ausgeschaltet, dann Tod)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-            "Robustheit (+1 Robustheit durch zähes Fleisch der Tiefen)",
-            "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)"
-        ],
-        "sprachen": ["Gemeinsprache", "Aquarianisch"],
-        "altersspanne": "Erwachsen mit 25, Alt mit 80, maximales Alter 120-200",
-        "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
-        "groesse_weiblich": "1,65-2,00m, 70-110kg (Durchschnitt 1,85m, 90kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "spezielle_effekte": {
-            "nachtsicht": true,
-            "wasserwesen": true,
-            "abhaengigkeit_wasser": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Aquarianer",
+            "handicaps": [
+                "Abhängigkeit (Wasser: 1 Stunde pro 24 Stunden, sonst Erschöpfung bis Ausgeschaltet, dann Tod)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Robustheit (+1 Robustheit durch zähes Fleisch der Tiefen)",
+                "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Aquarianisch"
+            ],
+            "altersspanne": "Erwachsen mit 25, Alt mit 80, maximales Alter 120-200",
+            "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
+            "groesse_weiblich": "1,65-2,00m, 70-110kg (Durchschnitt 1,85m, 90kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "wasserwesen": true,
+                    "abhaengigkeit_wasser": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Avionen": {
-        "name": "Avionen",
-        "handicaps": [
-            "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser kostet)",
-            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)",
-            "Zerbrechlich (-1 Robustheit durch hohle Knochen)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)",
-            "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
-        ],
-        "sprachen": ["Gemeinsprache", "Avionisch"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 50, maximales Alter 70-90",
-        "groesse_maennlich": "1,60-1,90m, 40-60kg (Durchschnitt 1,75m, 50kg)",
-        "groesse_weiblich": "1,55-1,85m, 35-55kg (Durchschnitt 1,70m, 45kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {
-            "Wahrnehmung": 2
-            },
-            "auto_talente": ["Flug", "Geschärfte Sinne"],
-            "auto_handicaps": ["Nichtschwimmer", "Zerbrechlich"],
-            "spezielle_effekte": {
-            "fliegen": true,
-            "nichtschwimmer": true,
-            "geschaerfte_sinne": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Avionen",
+            "handicaps": [
+                "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser kostet)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)",
+                "Zerbrechlich (-1 Robustheit durch hohle Knochen)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)",
+                "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Avionisch"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 50, maximales Alter 70-90",
+            "groesse_maennlich": "1,60-1,90m, 40-60kg (Durchschnitt 1,75m, 50kg)",
+            "groesse_weiblich": "1,55-1,85m, 35-55kg (Durchschnitt 1,70m, 45kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {
+                    "Wahrnehmung": 2
+                },
+                "auto_talente": [
+                    "Flug",
+                    "Geschärfte Sinne"
+                ],
+                "auto_handicaps": [
+                    "Nichtschwimmer",
+                    "Zerbrechlich"
+                ],
+                "spezielle_effekte": {
+                    "fliegen": true,
+                    "nichtschwimmer": true,
+                    "geschaerfte_sinne": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Drachenvolk": {
-        "name": "Drachenvolk",
-        "handicaps": [
-            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
-            "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)",
-            "Schlecht gelaunt (Handicap Arrogant)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Biss/Klauen (Stä+W4, PB 2)",
-            "Odemwaffe (2W6 Schaden, Kegelschablone oder 12'' Linie, Athletikprobe)",
-            "Panzerung +2 (Dicke schuppige Haut)",
-            "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Drakonisch"],
-        "altersspanne": "Erwachsen mit 30, Alt mit 200, maximales Alter 300-500",
-        "groesse_maennlich": "1,80-2,20m, 90-130kg (Durchschnitt 2,00m, 110kg)",
-        "groesse_weiblich": "1,75-2,15m, 85-125kg (Durchschnitt 1,95m, 105kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "biss_klauen": true,
-            "odemwaffe": true,
-            "panzerung_2": true,
-            "widerstand_hitze": true,
-            "anfaelligkeit_kaelte": true,
-            "kaltblutig": true,
-            "arrogant": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Drachenvolk",
+            "handicaps": [
+                "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+                "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)",
+                "Schlecht gelaunt (Handicap Arrogant)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Biss/Klauen (Stä+W4, PB 2)",
+                "Odemwaffe (2W6 Schaden, Kegelschablone oder 12'' Linie, Athletikprobe)",
+                "Panzerung +2 (Dicke schuppige Haut)",
+                "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Drakonisch"
+            ],
+            "altersspanne": "Erwachsen mit 30, Alt mit 200, maximales Alter 300-500",
+            "groesse_maennlich": "1,80-2,20m, 90-130kg (Durchschnitt 2,00m, 110kg)",
+            "groesse_weiblich": "1,75-2,15m, 85-125kg (Durchschnitt 1,95m, 105kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "biss_klauen": true,
+                    "odemwaffe": true,
+                    "panzerung_2": true,
+                    "widerstand_hitze": true,
+                    "anfaelligkeit_kaelte": true,
+                    "kaltblutig": true,
+                    "arrogant": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Elementarer_Abkoemmling_Erde": {
-        "name": "Elementarer Abkömmling (Erde)",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Felsenfest (Konstitution W6 statt W4, Maximum W12+1)",
-            "Widerstand gegen Naturgewalten (Erde: +4 Resistenz, -4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Terranisch"],
-        "altersspanne": "Erwachsen mit 20, Alt mit 100, maximales Alter 150-300",
-        "groesse_maennlich": "1,65-1,95m, 70-100kg (Durchschnitt 1,80m, 85kg)",
-        "groesse_weiblich": "1,60-1,90m, 60-90kg (Durchschnitt 1,75m, 75kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Konstitution": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "widerstand_erde": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Elementarer Abkömmling (Erde)",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Felsenfest (Konstitution W6 statt W4, Maximum W12+1)",
+                "Widerstand gegen Naturgewalten (Erde: +4 Resistenz, -4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Terranisch"
+            ],
+            "altersspanne": "Erwachsen mit 20, Alt mit 100, maximales Alter 150-300",
+            "groesse_maennlich": "1,65-1,95m, 70-100kg (Durchschnitt 1,80m, 85kg)",
+            "groesse_weiblich": "1,60-1,90m, 60-90kg (Durchschnitt 1,75m, 75kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "widerstand_erde": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Elementarer_Abkoemmling_Feuer": {
-        "name": "Elementarer Abkömmling (Feuer)",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
-        ],
-        "talente": [
-            "Schnell"
-        ],
-        "besonderheiten": [
-            "Schnell (Talent Schnell durch frenetische Natur)",
-            "Widerstand gegen Naturgewalten (Feuer: +4 Resistenz, -4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Ignisch"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
-        "groesse_maennlich": "1,65-1,95m, 60-85kg (Durchschnitt 1,80m, 72kg)",
-        "groesse_weiblich": "1,60-1,90m, 55-80kg (Durchschnitt 1,75m, 67kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Schnell"],
-            "spezielle_effekte": {
-            "widerstand_feuer": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Elementarer Abkömmling (Feuer)",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+            ],
+            "talente": [
+                "Schnell"
+            ],
+            "besonderheiten": [
+                "Schnell (Talent Schnell durch frenetische Natur)",
+                "Widerstand gegen Naturgewalten (Feuer: +4 Resistenz, -4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Ignisch"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+            "groesse_maennlich": "1,65-1,95m, 60-85kg (Durchschnitt 1,80m, 72kg)",
+            "groesse_weiblich": "1,60-1,90m, 55-80kg (Durchschnitt 1,75m, 67kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Schnell"
+                ],
+                "spezielle_effekte": {
+                    "widerstand_feuer": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Elementarer_Abkoemmling_Luft": {
-        "name": "Elementarer Abkömmling (Luft)",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Innere Luft (Müssen nicht atmen, immun gegen eingeatmete Gifte, ertrinken/ersticken nicht)",
-            "Widerstand gegen Naturgewalten (Luft: +4 Resistenz, -4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Auranisch"],
-        "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 120-200",
-        "groesse_maennlich": "1,65-1,95m, 55-75kg (Durchschnitt 1,80m, 65kg)",
-        "groesse_weiblich": "1,60-1,90m, 50-70kg (Durchschnitt 1,75m, 60kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "innere_luft": true,
-            "widerstand_luft": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Elementarer Abkömmling (Luft)",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Innere Luft (Müssen nicht atmen, immun gegen eingeatmete Gifte, ertrinken/ersticken nicht)",
+                "Widerstand gegen Naturgewalten (Luft: +4 Resistenz, -4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Auranisch"
+            ],
+            "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 120-200",
+            "groesse_maennlich": "1,65-1,95m, 55-75kg (Durchschnitt 1,80m, 65kg)",
+            "groesse_weiblich": "1,60-1,90m, 50-70kg (Durchschnitt 1,75m, 60kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "innere_luft": true,
+                    "widerstand_luft": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Elementarer_Abkoemmling_Wasser": {
-        "name": "Elementarer Abkömmling (Wasser)",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)",
-            "Widerstand gegen Naturgewalten (Wasser: +4 Resistenz, -4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Aquatisch"],
-        "altersspanne": "Erwachsen mit 20, Alt mit 90, maximales Alter 130-250",
-        "groesse_maennlich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
-        "groesse_weiblich": "1,60-1,90m, 60-85kg (Durchschnitt 1,75m, 72kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "wasserwesen": true,
-            "widerstand_wasser": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Elementarer Abkömmling (Wasser)",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)",
+                "Widerstand gegen Naturgewalten (Wasser: +4 Resistenz, -4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Aquatisch"
+            ],
+            "altersspanne": "Erwachsen mit 20, Alt mit 90, maximales Alter 130-250",
+            "groesse_maennlich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
+            "groesse_weiblich": "1,60-1,90m, 60-85kg (Durchschnitt 1,75m, 72kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "wasserwesen": true,
+                    "widerstand_wasser": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Elf": {
-        "name": "Elf",
-        "handicaps": [
-            "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
-        ],
-        "sprachen": ["Gemeinsprache", "Elfisch"],
-        "altersspanne": "Erwachsen mit 115, Alt mit 263, maximales Alter 350-750",
-        "groesse_maennlich": "1,65-2,05m, 52-72kg (Durchschnitt 1,85m, 58kg)",
-        "groesse_weiblich": "1,65-1,95m, 44-57kg (Durchschnitt 1,85m, 53kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Geschicklichkeit": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "auto_handicaps": ["Zwei linke Hände"],
-            "spezielle_effekte": {
-            "nachtsicht": true,
-            "zwei_linke_haende": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Elf",
+            "handicaps": [
+                "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Elfisch"
+            ],
+            "altersspanne": "Erwachsen mit 115, Alt mit 263, maximales Alter 350-750",
+            "groesse_maennlich": "1,65-2,05m, 52-72kg (Durchschnitt 1,85m, 58kg)",
+            "groesse_weiblich": "1,65-1,95m, 44-57kg (Durchschnitt 1,85m, 53kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "auto_handicaps": [
+                    "Zwei linke Hände"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "zwei_linke_haende": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Fee": {
-        "name": "Fee",
-        "handicaps": [
-            "Große Klappe (Können Geheimnisse nicht für sich behalten)",
-            "Impulsiv (Zurückhaltung ist selten)",
-            "Neugierig (Unendlich viele Fragen)",
-            "Winzig (Größe -4, -4 Robustheit, maximale Stärke W4)",
-            "Zwei linke Hände (Verachtung für mechanische Gegenstände)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Fliegen (Bewegungsweite 6'')"
-        ],
-        "sprachen": ["Gemeinsprache", "Sylvanisch"],
-        "altersspanne": "Erwachsen mit 50, Alt mit 200, maximales Alter 300-600",
-        "groesse_maennlich": "15-25cm, 0,5-1kg (Durchschnitt 20cm, 0,7kg)",
-        "groesse_weiblich": "15-25cm, 0,4-0,9kg (Durchschnitt 20cm, 0,6kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": -4,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "fliegen": true,
-            "winzig": true,
-            "grosse_klappe": true,
-            "impulsiv": true,
-            "neugierig": true,
-            "zwei_linke_haende": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Fee",
+            "handicaps": [
+                "Große Klappe (Können Geheimnisse nicht für sich behalten)",
+                "Impulsiv (Zurückhaltung ist selten)",
+                "Neugierig (Unendlich viele Fragen)",
+                "Winzig (Größe -4, -4 Robustheit, maximale Stärke W4)",
+                "Zwei linke Hände (Verachtung für mechanische Gegenstände)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Fliegen (Bewegungsweite 6'')"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Sylvanisch"
+            ],
+            "altersspanne": "Erwachsen mit 50, Alt mit 200, maximales Alter 300-600",
+            "groesse_maennlich": "15-25cm, 0,5-1kg (Durchschnitt 20cm, 0,7kg)",
+            "groesse_weiblich": "15-25cm, 0,4-0,9kg (Durchschnitt 20cm, 0,6kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": -4,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "fliegen": true,
+                    "winzig": true,
+                    "grosse_klappe": true,
+                    "impulsiv": true,
+                    "neugierig": true,
+                    "zwei_linke_haende": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Gestaltwandler": {
-        "name": "Gestaltwandler",
-        "handicaps": [
-            "Geheimnis (schwer: Wahre Natur muss geheim gehalten werden)"
-        ],
-        "talente": [
-            "Charismatisch",
-            "Arkaner Hintergrund (Begabt)"
-        ],
-        "besonderheiten": [
-            "Charismatisch (Talent kostenlos erhalten)",
-            "Gestaltwandeln (Arkaner Hintergrund Begabt + Macht Verkleiden mit Einschränkung Persönlich)"
-        ],
-        "sprachen": ["Gemeinsprache", "Variable"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
-        "groesse_maennlich": "1,60-1,90m, 60-90kg (Durchschnitt 1,75m, 75kg)",
-        "groesse_weiblich": "1,55-1,85m, 50-80kg (Durchschnitt 1,70m, 65kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Charismatisch", "Arkaner Hintergrund (Begabt)"],
-            "spezielle_effekte": {
-            "gestaltwandeln": true,
-            "geheimnis_schwer": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Gestaltwandler",
+            "handicaps": [
+                "Geheimnis (schwer: Wahre Natur muss geheim gehalten werden)"
+            ],
+            "talente": [
+                "Charismatisch",
+                "Arkaner Hintergrund (Begabt)"
+            ],
+            "besonderheiten": [
+                "Charismatisch (Talent kostenlos erhalten)",
+                "Gestaltwandeln (Arkaner Hintergrund Begabt + Macht Verkleiden mit Einschränkung Persönlich)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Variable"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+            "groesse_maennlich": "1,60-1,90m, 60-90kg (Durchschnitt 1,75m, 75kg)",
+            "groesse_weiblich": "1,55-1,85m, 50-80kg (Durchschnitt 1,70m, 65kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Charismatisch",
+                    "Arkaner Hintergrund (Begabt)"
+                ],
+                "spezielle_effekte": {
+                    "gestaltwandeln": true,
+                    "geheimnis_schwer": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Gnom": {
-        "name": "Gnom",
-        "handicaps": [
-            "Größe -1 (Reduzierte Robustheit um 1)",
-            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ reduziert)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "List (Verstand W6 statt W4, Maximum W12+1)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-            "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
-        ],
-        "sprachen": ["Gemeinsprache", "Gnomisch"],
-        "altersspanne": "Erwachsen mit 45, Alt mit 150, maximales Alter 200-500",
-        "groesse_maennlich": "110-130cm, 18-22kg (Durchschnitt 120cm, 20kg)",
-        "groesse_weiblich": "105-125cm, 16-20kg (Durchschnitt 115cm, 18kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Verstand": 2
-            },
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {
-            "Wahrnehmung": 2
-            },
-            "auto_talente": ["Nachtsicht", "Geschärfte Sinne"],
-            "spezielle_effekte": {
-            "nachtsicht": true,
-            "geschaerfte_sinne": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Gnom",
+            "handicaps": [
+                "Größe -1 (Reduzierte Robustheit um 1)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ reduziert)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "List (Verstand W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Gnomisch"
+            ],
+            "altersspanne": "Erwachsen mit 45, Alt mit 150, maximales Alter 200-500",
+            "groesse_maennlich": "110-130cm, 18-22kg (Durchschnitt 120cm, 20kg)",
+            "groesse_weiblich": "105-125cm, 16-20kg (Durchschnitt 115cm, 18kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Verstand": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {
+                    "Wahrnehmung": 2
+                },
+                "auto_talente": [
+                    "Nachtsicht",
+                    "Geschärfte Sinne"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "geschaerfte_sinne": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Goblin": {
-        "name": "Goblin",
-        "handicaps": [
-            "Fies (-1 Überredenproben)",
-            "Größe -1 (Reduzierte Robustheit um 1)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Geschickt (Heimlichkeit W6 statt W4, Maximum W12+1)",
-            "Überlebenskünstler (Kostenloses Anfänger-Talent nach Wahl)",
-            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
-        ],
-        "sprachen": ["Goblinisch", "Orkisch"],
-        "altersspanne": "Erwachsen mit 12, Alt mit 25, maximales Alter 30-50",
-        "groesse_maennlich": "110-130cm, 15-25kg (Durchschnitt 120cm, 20kg)",
-        "groesse_weiblich": "105-125cm, 12-22kg (Durchschnitt 115cm, 17kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {
-            "Heimlichkeit": 2
-            },
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "waermesicht": true,
-            "fies": true,
-            "ueberlebenskuenstler": true
-            },
-            "wahlmoeglichkeiten": {
-            "freies_anfaenger_talent": true
+            "name": "Goblin",
+            "handicaps": [
+                "Fies (-1 Überredenproben)",
+                "Größe -1 (Reduzierte Robustheit um 1)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Geschickt (Heimlichkeit W6 statt W4, Maximum W12+1)",
+                "Überlebenskünstler (Kostenloses Anfänger-Talent nach Wahl)",
+                "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+            ],
+            "sprachen": [
+                "Goblinisch",
+                "Orkisch"
+            ],
+            "altersspanne": "Erwachsen mit 12, Alt mit 25, maximales Alter 30-50",
+            "groesse_maennlich": "110-130cm, 15-25kg (Durchschnitt 120cm, 20kg)",
+            "groesse_weiblich": "105-125cm, 12-22kg (Durchschnitt 115cm, 17kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {
+                    "Heimlichkeit": 2
+                },
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "waermesicht": true,
+                    "fies": true,
+                    "ueberlebenskuenstler": true
+                },
+                "wahlmoeglichkeiten": {
+                    "freies_anfaenger_talent": true
+                }
             }
-        }
         },
         "Golem": {
-        "name": "Golem",
-        "handicaps": [
-            "Tollpatschig (-2 Athletik und Heimlichkeit)",
-            "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
-            "Verringerte Bewegungsweite (5, Sprintwürfel W4)",
-            "Weniger Grundfertigkeiten (Keine Allgemeinwissen, Überreden, Heimlichkeit)",
-            "Wuchtig (-2 bei normaler Ausrüstung)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Größe +2 (+2 Robustheit durch wuchtige Gestalt)",
-            "Keine lebenswichtigen Organe (Angesagte Ziele richten keinen zusätzlichen Schaden an)",
-            "Konstrukt (+2 Erholungsproben, ignoriert 1 Punkt Wundabzüge, atmet nicht, immun gegen Gift/Krankheiten)",
-            "Panzerung +2 (Steingolem)"
-        ],
-        "sprachen": ["Gemeinsprache"],
-        "altersspanne": "Erschaffen als Erwachsener, kein natürliches Altern",
-        "groesse_maennlich": "2,50-3,00m, 400-600kg (Durchschnitt 2,75m, 500kg)",
-        "groesse_weiblich": "2,50-3,00m, 400-600kg (Durchschnitt 2,75m, 500kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 2,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "konstrukt": true,
-            "keine_lebenswichtigen_organe": true,
-            "panzerung_2": true,
-            "tollpatschig": true,
-            "verpeilt": true,
-            "weniger_grundfertigkeiten": true,
-            "wuchtig": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Golem",
+            "handicaps": [
+                "Tollpatschig (-2 Athletik und Heimlichkeit)",
+                "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
+                "Verringerte Bewegungsweite (5, Sprintwürfel W4)",
+                "Weniger Grundfertigkeiten (Keine Allgemeinwissen, Überreden, Heimlichkeit)",
+                "Wuchtig (-2 bei normaler Ausrüstung)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Größe +2 (+2 Robustheit durch wuchtige Gestalt)",
+                "Keine lebenswichtigen Organe (Angesagte Ziele richten keinen zusätzlichen Schaden an)",
+                "Konstrukt (+2 Erholungsproben, ignoriert 1 Punkt Wundabzüge, atmet nicht, immun gegen Gift/Krankheiten)",
+                "Panzerung +2 (Steingolem)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Erschaffen als Erwachsener, kein natürliches Altern",
+            "groesse_maennlich": "2,50-3,00m, 400-600kg (Durchschnitt 2,75m, 500kg)",
+            "groesse_weiblich": "2,50-3,00m, 400-600kg (Durchschnitt 2,75m, 500kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 2,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "konstrukt": true,
+                    "keine_lebenswichtigen_organe": true,
+                    "panzerung_2": true,
+                    "tollpatschig": true,
+                    "verpeilt": true,
+                    "weniger_grundfertigkeiten": true,
+                    "wuchtig": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Grabgeborener": {
-        "name": "Grabgeborener",
-        "handicaps": [
-            "Außenseiter (schwer: -2 Überreden, Furcht/Jagd durch andere)",
-            "Sonnenlichtempfindlichkeit (Abgelenkt im Sonnenlicht)",
-            "Tierschreck (Tiere nähern sich nicht bis auf 5'', -2 auf Tierproben)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Biss (Stä+W4 Schaden durch Reißzähne)",
-            "Bluttrinker (Einmal pro Sitzung natürliche Heilung durch Bluttrinken)",
-            "Kälteresistenz (+4 Resistenz gegen Kälte, -4 Kälteschaden)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-            "Unnatürliche Stärke (Stärke W6 statt W4, Maximum W12+1)"
-        ],
-        "sprachen": ["Gemeinsprache", "Abyssal"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 80, maximales Alter 100-150",
-        "groesse_maennlich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
-        "groesse_weiblich": "1,60-1,90m, 55-80kg (Durchschnitt 1,75m, 67kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Stärke": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "spezielle_effekte": {
-            "biss": true,
-            "bluttrinker": true,
-            "kaelteresistenz": true,
-            "nachtsicht": true,
-            "aussenseiter_schwer": true,
-            "sonnenlichtempfindlichkeit": true,
-            "tierschreck": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Grabgeborener",
+            "handicaps": [
+                "Außenseiter (schwer: -2 Überreden, Furcht/Jagd durch andere)",
+                "Sonnenlichtempfindlichkeit (Abgelenkt im Sonnenlicht)",
+                "Tierschreck (Tiere nähern sich nicht bis auf 5'', -2 auf Tierproben)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Biss (Stä+W4 Schaden durch Reißzähne)",
+                "Bluttrinker (Einmal pro Sitzung natürliche Heilung durch Bluttrinken)",
+                "Kälteresistenz (+4 Resistenz gegen Kälte, -4 Kälteschaden)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Unnatürliche Stärke (Stärke W6 statt W4, Maximum W12+1)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Abyssal"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 80, maximales Alter 100-150",
+            "groesse_maennlich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
+            "groesse_weiblich": "1,60-1,90m, 55-80kg (Durchschnitt 1,75m, 67kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "biss": true,
+                    "bluttrinker": true,
+                    "kaelteresistenz": true,
+                    "nachtsicht": true,
+                    "aussenseiter_schwer": true,
+                    "sonnenlichtempfindlichkeit": true,
+                    "tierschreck": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Halbelf": {
-        "name": "Halbelf",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
-        ],
-        "sprachen": ["Gemeinsprache", "Elfisch"],
-        "altersspanne": "Erwachsen mit 20, Alt mit 65, maximales Alter 80-120",
-        "groesse_maennlich": "1,60-1,95m, 60-85kg (Durchschnitt 1,77m, 72kg)",
-        "groesse_weiblich": "1,55-1,90m, 50-75kg (Durchschnitt 1,72m, 62kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "spezielle_effekte": {
-            "nachtsicht": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {
-            "freies_talent_oder_attribut": true
+            "name": "Halbelf",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Elfisch"
+            ],
+            "altersspanne": "Erwachsen mit 20, Alt mit 65, maximales Alter 80-120",
+            "groesse_maennlich": "1,60-1,95m, 60-85kg (Durchschnitt 1,77m, 72kg)",
+            "groesse_weiblich": "1,55-1,90m, 50-75kg (Durchschnitt 1,72m, 62kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {
+                    "freies_talent_oder_attribut": true
+                }
             }
-        }
         },
         "Halbling": {
-        "name": "Halbling",
-        "handicaps": [
-            "Größe -1 (Reduzierte Robustheit um 1)",
-            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
-        ],
-        "talente": [
-            "Glück"
-        ],
-        "besonderheiten": [
-            "Beherzt (Willenskraft W6 statt W4, Maximum W12+1)",
-            "Glück (Zusätzlicher Benny pro Spielsitzung)"
-        ],
-        "sprachen": ["Gemeinsprache", "Halblingisch"],
-        "altersspanne": "Erwachsen mit 33, Alt mit 85, maximales Alter 110-150",
-        "groesse_maennlich": "110-130cm, 18-25kg (Durchschnitt 120cm, 21kg)",
-        "groesse_weiblich": "105-125cm, 16-23kg (Durchschnitt 115cm, 19kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Willenskraft": 2
-            },
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Glück"],
-            "spezielle_effekte": {},
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Halbling",
+            "handicaps": [
+                "Größe -1 (Reduzierte Robustheit um 1)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
+            ],
+            "talente": [
+                "Glück"
+            ],
+            "besonderheiten": [
+                "Beherzt (Willenskraft W6 statt W4, Maximum W12+1)",
+                "Glück (Zusätzlicher Benny pro Spielsitzung)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Halblingisch"
+            ],
+            "altersspanne": "Erwachsen mit 33, Alt mit 85, maximales Alter 110-150",
+            "groesse_maennlich": "110-130cm, 18-25kg (Durchschnitt 120cm, 21kg)",
+            "groesse_weiblich": "105-125cm, 16-23kg (Durchschnitt 115cm, 19kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Willenskraft": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Glück"
+                ],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Halbork": {
-        "name": "Halbork",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Abgehärtet (Stärke W6 ODER Konstitution W6 statt W4, Maximum W12+1)",
-            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
-        ],
-        "sprachen": ["Gemeinsprache", "Orkisch"],
-        "altersspanne": "Erwachsen mit 14, Alt mit 45, maximales Alter 60-80",
-        "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
-        "groesse_weiblich": "1,65-2,05m, 70-110kg (Durchschnitt 1,85m, 90kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "waermesicht": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {
-            "attribut_staerke_oder_konstitution": true
+            "name": "Halbork",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Abgehärtet (Stärke W6 ODER Konstitution W6 statt W4, Maximum W12+1)",
+                "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Orkisch"
+            ],
+            "altersspanne": "Erwachsen mit 14, Alt mit 45, maximales Alter 60-80",
+            "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
+            "groesse_weiblich": "1,65-2,05m, 70-110kg (Durchschnitt 1,85m, 90kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "waermesicht": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {
+                    "attribut_staerke_oder_konstitution": true
+                }
             }
-        }
         },
         "Halbriese": {
-        "name": "Halbriese",
-        "handicaps": [
-            "Analphabet (Kann nicht lesen oder schreiben)",
-            "Außenseiter (schwer: -2 Überreden, keine Grundrechte außerhalb eigener Clans)",
-            "Dumm (-1 Verstandsproben)",
-            "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
-            "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Größe +3 (+3 Robustheit durch überragende Größe)",
-            "Sehr stark (Stärke W8, Maximum W12+2)",
-            "Sehr widerstandsfähig (Konstitution W8, Maximum W12+2)"
-        ],
-        "sprachen": ["Riesisch"],
-        "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 100-150",
-        "groesse_maennlich": "2,80-3,20m, 300-500kg (Durchschnitt 3,00m, 400kg)",
-        "groesse_weiblich": "2,70-3,10m, 280-480kg (Durchschnitt 2,90m, 380kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Stärke": 4,
-            "Konstitution": 4
-            },
-            "robustheit_bonus": 3,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "analphabet": true,
-            "aussenseiter_schwer": true,
-            "dumm": true,
-            "verpeilt": true,
-            "wuchtig": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Halbriese",
+            "handicaps": [
+                "Analphabet (Kann nicht lesen oder schreiben)",
+                "Außenseiter (schwer: -2 Überreden, keine Grundrechte außerhalb eigener Clans)",
+                "Dumm (-1 Verstandsproben)",
+                "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
+                "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Größe +3 (+3 Robustheit durch überragende Größe)",
+                "Sehr stark (Stärke W8, Maximum W12+2)",
+                "Sehr widerstandsfähig (Konstitution W8, Maximum W12+2)"
+            ],
+            "sprachen": [
+                "Riesisch"
+            ],
+            "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 100-150",
+            "groesse_maennlich": "2,80-3,20m, 300-500kg (Durchschnitt 3,00m, 400kg)",
+            "groesse_weiblich": "2,70-3,10m, 280-480kg (Durchschnitt 2,90m, 380kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 4,
+                    "Konstitution": 4
+                },
+                "robustheit_bonus": 3,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "analphabet": true,
+                    "aussenseiter_schwer": true,
+                    "dumm": true,
+                    "verpeilt": true,
+                    "wuchtig": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Himmlischer": {
-        "name": "Himmlischer",
-        "handicaps": [
-            "Ehrenkodex (Moralisch, verabscheut Lügen, schützt Schwache)",
-            "Schwur (schwer: Dient der erschaffenden Gottheit)"
-        ],
-        "talente": [
-            "Attraktiv"
-        ],
-        "besonderheiten": [
-            "Attraktiv (Talent kostenlos erhalten)",
-            "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)"
-        ],
-        "sprachen": ["Gemeinsprache", "Celestial"],
-        "altersspanne": "Erschaffen als Erwachsener, unsterblich außer durch Gewalt",
-        "groesse_maennlich": "1,70-2,00m, 70-90kg (Durchschnitt 1,85m, 80kg)",
-        "groesse_weiblich": "1,65-1,95m, 60-80kg (Durchschnitt 1,80m, 70kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Attraktiv"],
-            "spezielle_effekte": {
-            "fliegen": true,
-            "ehrenkodex": true,
-            "schwur_schwer": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Himmlischer",
+            "handicaps": [
+                "Ehrenkodex (Moralisch, verabscheut Lügen, schützt Schwache)",
+                "Schwur (schwer: Dient der erschaffenden Gottheit)"
+            ],
+            "talente": [
+                "Attraktiv"
+            ],
+            "besonderheiten": [
+                "Attraktiv (Talent kostenlos erhalten)",
+                "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Celestial"
+            ],
+            "altersspanne": "Erschaffen als Erwachsener, unsterblich außer durch Gewalt",
+            "groesse_maennlich": "1,70-2,00m, 70-90kg (Durchschnitt 1,85m, 80kg)",
+            "groesse_weiblich": "1,65-1,95m, 60-80kg (Durchschnitt 1,80m, 70kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Attraktiv"
+                ],
+                "spezielle_effekte": {
+                    "fliegen": true,
+                    "ehrenkodex": true,
+                    "schwur_schwer": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Infernaler": {
-        "name": "Infernaler",
-        "handicaps": [
-            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
-            "Außenseiter (leicht: -2 Überreden durch teuflisches Erbe)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Dunkelsicht (Ignoriert Beleuchtungsabzüge bis zu 10'' / 20 Meter)",
-            "Hörner (W4 Schaden, +4 bei Sturmangriff ab 5'' Lauf)",
-            "Teuflische Natur (+1 Einschüchterungsproben)",
-            "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Infernal"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 90, maximales Alter 120-200",
-        "groesse_maennlich": "1,70-2,00m, 75-100kg (Durchschnitt 1,85m, 87kg)",
-        "groesse_weiblich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "dunkelsicht": true,
-            "hoerner": true,
-            "teuflische_natur": true,
-            "widerstand_hitze": true,
-            "anfaelligkeit_kaelte": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Infernaler",
+            "handicaps": [
+                "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+                "Außenseiter (leicht: -2 Überreden durch teuflisches Erbe)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge bis zu 10'' / 20 Meter)",
+                "Hörner (W4 Schaden, +4 bei Sturmangriff ab 5'' Lauf)",
+                "Teuflische Natur (+1 Einschüchterungsproben)",
+                "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Infernal"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 90, maximales Alter 120-200",
+            "groesse_maennlich": "1,70-2,00m, 75-100kg (Durchschnitt 1,85m, 87kg)",
+            "groesse_weiblich": "1,65-1,95m, 65-90kg (Durchschnitt 1,80m, 77kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "hoerner": true,
+                    "teuflische_natur": true,
+                    "widerstand_hitze": true,
+                    "anfaelligkeit_kaelte": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Insektoid": {
-        "name": "Insektoid",
-        "handicaps": [
-            "Außenseiter (leicht: -2 Überreden durch fremdartige Natur)",
-            "Schwarmbewusstsein (Angetrieben schwer und Loyal gegenüber Kolonie)",
-            "Ungewöhnliche Körperform (Keine normale Kleidung/Rüstung/Möbel)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Biss oder Klaue (Stä+W4 Schaden durch Mandibeln/Zangen)",
-            "Panzerung +2 (Dickes Exoskelett)",
-            "Wandkrabbler (Normal auf vertikalen Oberflächen, halbe Geschwindigkeit kopfüber)",
-            "Zusätzliche Aktionen (4 Arme, -2 Abzug für Mehrfachaktionen reduziert)"
-        ],
-        "sprachen": ["Gemeinsprache", "Insektoid"],
-        "altersspanne": "Erwachsen mit 5, Alt mit 20, maximales Alter 25-40",
-        "groesse_maennlich": "1,60-1,90m, 70-100kg (Durchschnitt 1,75m, 85kg)",
-        "groesse_weiblich": "1,55-1,85m, 65-95kg (Durchschnitt 1,70m, 80kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "biss_klaue": true,
-            "panzerung_2": true,
-            "wandkrabbler": true,
-            "zusaetzliche_aktionen": true,
-            "aussenseiter_leicht": true,
-            "schwarmbewusstsein": true,
-            "ungewoehnliche_koerperform": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Insektoid",
+            "handicaps": [
+                "Außenseiter (leicht: -2 Überreden durch fremdartige Natur)",
+                "Schwarmbewusstsein (Angetrieben schwer und Loyal gegenüber Kolonie)",
+                "Ungewöhnliche Körperform (Keine normale Kleidung/Rüstung/Möbel)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Biss oder Klaue (Stä+W4 Schaden durch Mandibeln/Zangen)",
+                "Panzerung +2 (Dickes Exoskelett)",
+                "Wandkrabbler (Normal auf vertikalen Oberflächen, halbe Geschwindigkeit kopfüber)",
+                "Zusätzliche Aktionen (4 Arme, -2 Abzug für Mehrfachaktionen reduziert)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Insektoid"
+            ],
+            "altersspanne": "Erwachsen mit 5, Alt mit 20, maximales Alter 25-40",
+            "groesse_maennlich": "1,60-1,90m, 70-100kg (Durchschnitt 1,75m, 85kg)",
+            "groesse_weiblich": "1,55-1,85m, 65-95kg (Durchschnitt 1,70m, 80kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "biss_klaue": true,
+                    "panzerung_2": true,
+                    "wandkrabbler": true,
+                    "zusaetzliche_aktionen": true,
+                    "aussenseiter_leicht": true,
+                    "schwarmbewusstsein": true,
+                    "ungewoehnliche_koerperform": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Mausling": {
-        "name": "Mausling",
-        "handicaps": [
-            "Außenseiter (schwer: -2 Überreden, keine Grundrechte)",
-            "Phobie (leicht) Katzen",
-            "Unscheinbar (Handicap Sanftmütig)",
-            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel W4)",
-            "Winzig (Größe -4, -4 Robustheit, Stärke W4)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
-        ],
-        "sprachen": ["Gemeinsprache", "Mausling"],
-        "altersspanne": "Erwachsen mit 2, Alt mit 8, maximales Alter 10-15",
-        "groesse_maennlich": "8-12cm, 0,1-0,2kg (Durchschnitt 10cm, 0,15kg)",
-        "groesse_weiblich": "8-12cm, 0,1-0,2kg (Durchschnitt 10cm, 0,15kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": -4,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "spezielle_effekte": {
-            "nachtsicht": true,
-            "aussenseiter_schwer": true,
-            "phobie_katzen": true,
-            "sanftmuetig": true,
-            "winzig": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Mausling",
+            "handicaps": [
+                "Außenseiter (schwer: -2 Überreden, keine Grundrechte)",
+                "Phobie (leicht) Katzen",
+                "Unscheinbar (Handicap Sanftmütig)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel W4)",
+                "Winzig (Größe -4, -4 Robustheit, Stärke W4)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Mausling"
+            ],
+            "altersspanne": "Erwachsen mit 2, Alt mit 8, maximales Alter 10-15",
+            "groesse_maennlich": "8-12cm, 0,1-0,2kg (Durchschnitt 10cm, 0,15kg)",
+            "groesse_weiblich": "8-12cm, 0,1-0,2kg (Durchschnitt 10cm, 0,15kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": -4,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "aussenseiter_schwer": true,
+                    "phobie_katzen": true,
+                    "sanftmuetig": true,
+                    "winzig": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Mensch": {
-        "name": "Mensch",
-        "handicaps": [],
-        "talente": [],
-        "besonderheiten": [
-            "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
-        ],
-        "sprachen": ["Gemeinsprache"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 55, maximales Alter 70-110",
-        "groesse_maennlich": "1,60-1,95m, 60-100kg (Durchschnitt 1,77m, 80kg)",
-        "groesse_weiblich": "1,50-1,85m, 45-85kg (Durchschnitt 1,67m, 65kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {},
-            "wahlmoeglichkeiten": {
-            "freies_talent": true
+            "name": "Mensch",
+            "handicaps": [],
+            "talente": [],
+            "besonderheiten": [
+                "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 55, maximales Alter 70-110",
+            "groesse_maennlich": "1,60-1,95m, 60-100kg (Durchschnitt 1,77m, 80kg)",
+            "groesse_weiblich": "1,50-1,85m, 45-85kg (Durchschnitt 1,67m, 65kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true
+                }
             }
-        }
         },
         "Minotaur": {
-        "name": "Minotaur",
-        "handicaps": [
-            "Dünnhäutig (schwer: Verliert schnell Beherrschung)",
-            "Fies (Schwierigkeiten mit Diplomatie und Taktgefühl)",
-            "Ungebildet (-1 Verstandsproben)",
-            "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Größe +1 (+1 Robustheit)",
-            "Hörner (Stä+W6 Schaden, +4 bei Sturmangriff ab 5'' Lauf)",
-            "Sehr stark (Stärke W8, Maximum W12+2)",
-            "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
-        ],
-        "sprachen": ["Gemeinsprache", "Minotaurisch"],
-        "altersspanne": "Erwachsen mit 15, Alt mit 40, maximales Alter 50-80",
-        "groesse_maennlich": "2,00-2,40m, 150-250kg (Durchschnitt 2,20m, 200kg)",
-        "groesse_weiblich": "1,90-2,30m, 130-230kg (Durchschnitt 2,10m, 180kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Stärke": 4,
-            "Konstitution": 2
-            },
-            "robustheit_bonus": 1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "hoerner": true,
-            "duennhaeutig_schwer": true,
-            "fies": true,
-            "ungebildet": true,
-            "wuchtig": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Minotaur",
+            "handicaps": [
+                "Dünnhäutig (schwer: Verliert schnell Beherrschung)",
+                "Fies (Schwierigkeiten mit Diplomatie und Taktgefühl)",
+                "Ungebildet (-1 Verstandsproben)",
+                "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Größe +1 (+1 Robustheit)",
+                "Hörner (Stä+W6 Schaden, +4 bei Sturmangriff ab 5'' Lauf)",
+                "Sehr stark (Stärke W8, Maximum W12+2)",
+                "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Minotaurisch"
+            ],
+            "altersspanne": "Erwachsen mit 15, Alt mit 40, maximales Alter 50-80",
+            "groesse_maennlich": "2,00-2,40m, 150-250kg (Durchschnitt 2,20m, 200kg)",
+            "groesse_weiblich": "1,90-2,30m, 130-230kg (Durchschnitt 2,10m, 180kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 4,
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "hoerner": true,
+                    "duennhaeutig_schwer": true,
+                    "fies": true,
+                    "ungebildet": true,
+                    "wuchtig": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Oger": {
-        "name": "Oger",
-        "handicaps": [
-            "Arrogant (Hochmütig und distanziert)",
-            "Außenseiter (leicht: -2 Überreden durch imposante Größe)",
-            "Tollpatschig (-2 Athletik und Heimlichkeit)",
-            "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
-            "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
-        ],
-        "talente": [
-            "Zäh"
-        ],
-        "besonderheiten": [
-            "Größe +1 (+1 Robustheit)",
-            "Sehr stark (Stärke W8, Maximum W12+2)",
-            "Sehr widerstandsfähig (Konstitution W8, Maximum W12+2)",
-            "Zäh (Keine Wunde bei zweimal Angeschlagen)"
-        ],
-        "sprachen": ["Gemeinsprache", "Ogerisch"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
-        "groesse_maennlich": "2,30-2,70m, 200-300kg (Durchschnitt 2,50m, 250kg)",
-        "groesse_weiblich": "2,20-2,60m, 180-280kg (Durchschnitt 2,40m, 230kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Stärke": 4,
-            "Konstitution": 4
-            },
-            "robustheit_bonus": 1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Zäh"],
-            "spezielle_effekte": {
-            "arrogant": true,
-            "aussenseiter_leicht": true,
-            "tollpatschig": true,
-            "verpeilt": true,
-            "wuchtig": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Oger",
+            "handicaps": [
+                "Arrogant (Hochmütig und distanziert)",
+                "Außenseiter (leicht: -2 Überreden durch imposante Größe)",
+                "Tollpatschig (-2 Athletik und Heimlichkeit)",
+                "Verpeilt (-1 Allgemeinwissen und Wahrnehmung)",
+                "Wuchtig (-2 bei normaler Ausrüstung, doppelte Kosten)"
+            ],
+            "talente": [
+                "Zäh"
+            ],
+            "besonderheiten": [
+                "Größe +1 (+1 Robustheit)",
+                "Sehr stark (Stärke W8, Maximum W12+2)",
+                "Sehr widerstandsfähig (Konstitution W8, Maximum W12+2)",
+                "Zäh (Keine Wunde bei zweimal Angeschlagen)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Ogerisch"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+            "groesse_maennlich": "2,30-2,70m, 200-300kg (Durchschnitt 2,50m, 250kg)",
+            "groesse_weiblich": "2,20-2,60m, 180-280kg (Durchschnitt 2,40m, 230kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 4,
+                    "Konstitution": 4
+                },
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Zäh"
+                ],
+                "spezielle_effekte": {
+                    "arrogant": true,
+                    "aussenseiter_leicht": true,
+                    "tollpatschig": true,
+                    "verpeilt": true,
+                    "wuchtig": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Ork": {
-        "name": "Ork",
-        "handicaps": [
-            "Außenseiter (schwer: -2 Überreden, können als Monster behandelt werden)",
-            "Brutal (-1 Verstandsproben)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Größe +1 (+1 Robustheit)",
-            "Stark (Stärke W6, Maximum W12+1)",
-            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)",
-            "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
-        ],
-        "sprachen": ["Orkisch"],
-        "altersspanne": "Erwachsen mit 12, Alt mit 35, maximales Alter 45-65",
-        "groesse_maennlich": "1,90-2,30m, 100-150kg (Durchschnitt 2,10m, 125kg)",
-        "groesse_weiblich": "1,80-2,20m, 85-135kg (Durchschnitt 2,00m, 110kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Stärke": 2,
-            "Konstitution": 2
-            },
-            "robustheit_bonus": 1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "waermesicht": true,
-            "aussenseiter_schwer": true,
-            "brutal": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Ork",
+            "handicaps": [
+                "Außenseiter (schwer: -2 Überreden, können als Monster behandelt werden)",
+                "Brutal (-1 Verstandsproben)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Größe +1 (+1 Robustheit)",
+                "Stark (Stärke W6, Maximum W12+1)",
+                "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)",
+                "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
+            ],
+            "sprachen": [
+                "Orkisch"
+            ],
+            "altersspanne": "Erwachsen mit 12, Alt mit 35, maximales Alter 45-65",
+            "groesse_maennlich": "1,90-2,30m, 100-150kg (Durchschnitt 2,10m, 125kg)",
+            "groesse_weiblich": "1,80-2,20m, 85-135kg (Durchschnitt 2,00m, 110kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2,
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "waermesicht": true,
+                    "aussenseiter_schwer": true,
+                    "brutal": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Rakashaner": {
-        "name": "Rakashaner",
-        "handicaps": [
-            "Blutrünstig (Grausam zu Feinen, spielen mit ihnen)",
-            "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser)",
-            "Volksfeind (-2 Überreden mit einem anderen Volk)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
-            "Geschicklichkeit (W6 statt W4, Maximum W12+1)",
-            "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
-        ],
-        "sprachen": ["Gemeinsprache", "Rakashanisch"],
-        "altersspanne": "Erwachsen mit 16, Alt mit 45, maximales Alter 60-90",
-        "groesse_maennlich": "1,70-2,00m, 70-100kg (Durchschnitt 1,85m, 85kg)",
-        "groesse_weiblich": "1,65-1,95m, 60-90kg (Durchschnitt 1,80m, 75kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Geschicklichkeit": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "spezielle_effekte": {
-            "biss": true,
-            "klauen": true,
-            "nachtsicht": true,
-            "blutrünstig": true,
-            "nichtschwimmer": true,
-            "volksfeind": true
-            },
-            "wahlmoeglichkeiten": {}
-        }        
+            "name": "Rakashaner",
+            "handicaps": [
+                "Blutrünstig (Grausam zu Feinen, spielen mit ihnen)",
+                "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser)",
+                "Volksfeind (-2 Überreden mit einem anderen Volk)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+                "Geschicklichkeit (W6 statt W4, Maximum W12+1)",
+                "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Rakashanisch"
+            ],
+            "altersspanne": "Erwachsen mit 16, Alt mit 45, maximales Alter 60-90",
+            "groesse_maennlich": "1,70-2,00m, 70-100kg (Durchschnitt 1,85m, 85kg)",
+            "groesse_weiblich": "1,65-1,95m, 60-90kg (Durchschnitt 1,80m, 75kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "biss": true,
+                    "klauen": true,
+                    "nachtsicht": true,
+                    "blutrünstig": true,
+                    "nichtschwimmer": true,
+                    "volksfeind": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Rattling": {
-        "name": "Rattling",
-        "handicaps": [
-            "Außenseiter (schwer: -2 Überreden, als Ungeziefer behandelt)",
-            "Feige (Diskretion ist der bessere Teil der Tapferkeit)",
-            "Gierig (leicht: Besessenheit, neue Schätze zu erwerben)",
-            "Größe -1 (Reduzierte Robustheit um 1)"
-        ],
-        "talente": [
-            "Sammler"
-        ],
-        "besonderheiten": [
-            "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
-            "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-            "Natürliche Resistenz (Immun gegen Gift und Krankheiten)",
-            "Sammler (Talent kostenlos erhalten)"
-        ],
-        "sprachen": ["Gemeinsprache", "Rattlingisch"],
-        "altersspanne": "Erwachsen mit 8, Alt mit 20, maximales Alter 25-35",
-        "groesse_maennlich": "90-110cm, 12-18kg (Durchschnitt 100cm, 15kg)",
-        "groesse_weiblich": "85-105cm, 10-16kg (Durchschnitt 95cm, 13kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Sammler", "Nachtsicht"],
-            "spezielle_effekte": {
-            "biss": true,
-            "klauen": true,
-            "nachtsicht": true,
-            "natuerliche_resistenz": true,
-            "aussenseiter_schwer": true,
-            "feige": true,
-            "gierig_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Rattling",
+            "handicaps": [
+                "Außenseiter (schwer: -2 Überreden, als Ungeziefer behandelt)",
+                "Feige (Diskretion ist der bessere Teil der Tapferkeit)",
+                "Gierig (leicht: Besessenheit, neue Schätze zu erwerben)",
+                "Größe -1 (Reduzierte Robustheit um 1)"
+            ],
+            "talente": [
+                "Sammler"
+            ],
+            "besonderheiten": [
+                "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+                "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Natürliche Resistenz (Immun gegen Gift und Krankheiten)",
+                "Sammler (Talent kostenlos erhalten)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Rattlingisch"
+            ],
+            "altersspanne": "Erwachsen mit 8, Alt mit 20, maximales Alter 25-35",
+            "groesse_maennlich": "90-110cm, 12-18kg (Durchschnitt 100cm, 15kg)",
+            "groesse_weiblich": "85-105cm, 10-16kg (Durchschnitt 95cm, 13kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Sammler",
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "biss": true,
+                    "klauen": true,
+                    "nachtsicht": true,
+                    "natuerliche_resistenz": true,
+                    "aussenseiter_schwer": true,
+                    "feige": true,
+                    "gierig_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Saurianer": {
-        "name": "Saurianer",
-        "handicaps": [
-            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
-            "Außenseiter (leicht: -2 Überreden durch seltsame Sitten/Erscheinung)"
-        ],
-        "talente": [
-            "Aufmerksamkeit"
-        ],
-        "besonderheiten": [
-            "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
-            "Geschärfte Sinne (Talent Aufmerksamkeit)",
-            "Panzerung +2 (Schuppige Haut wie Lederrüstung)"
-        ],
-        "sprachen": ["Gemeinsprache", "Saurianisch"],
-        "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 100-150",
-        "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
-        "groesse_weiblich": "1,65-2,05m, 70-110kg (Durchschnitt 1,85m, 90kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Aufmerksamkeit"],
-            "spezielle_effekte": {
-            "biss": true,
-            "panzerung_2": true,
-            "anfaelligkeit_kaelte": true,
-            "aussenseiter_leicht": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Saurianer",
+            "handicaps": [
+                "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+                "Außenseiter (leicht: -2 Überreden durch seltsame Sitten/Erscheinung)"
+            ],
+            "talente": [
+                "Aufmerksamkeit"
+            ],
+            "besonderheiten": [
+                "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+                "Geschärfte Sinne (Talent Aufmerksamkeit)",
+                "Panzerung +2 (Schuppige Haut wie Lederrüstung)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Saurianisch"
+            ],
+            "altersspanne": "Erwachsen mit 20, Alt mit 80, maximales Alter 100-150",
+            "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
+            "groesse_weiblich": "1,65-2,05m, 70-110kg (Durchschnitt 1,85m, 90kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Aufmerksamkeit"
+                ],
+                "spezielle_effekte": {
+                    "biss": true,
+                    "panzerung_2": true,
+                    "anfaelligkeit_kaelte": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Schlangenvolk": {
-        "name": "Schlangenvolk",
-        "handicaps": [
-            "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
-            "Außenseiter (schwer: -2 Überreden außerhalb eigener Clans)",
-            "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Bewegungsweite (10, Sprintwürfel W10)",
-            "Biss (Stä+W4 Schaden)",
-            "Giftiger Biss (Leichtes Gift bei Angeschlagen/Wunde)",
-            "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
-        ],
-        "sprachen": ["Gemeinsprache", "Schlangisch"],
-        "altersspanne": "Erwachsen mit 15, Alt mit 60, maximales Alter 80-120",
-        "groesse_maennlich": "1,80-2,20m, 70-100kg (Durchschnitt 2,00m, 85kg)",
-        "groesse_weiblich": "1,75-2,15m, 65-95kg (Durchschnitt 1,95m, 80kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 4,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "biss": true,
-            "giftiger_biss": true,
-            "waermesicht": true,
-            "anfaelligkeit_kaelte": true,
-            "aussenseiter_schwer": true,
-            "kaltblutig": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Schlangenvolk",
+            "handicaps": [
+                "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+                "Außenseiter (schwer: -2 Überreden außerhalb eigener Clans)",
+                "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Bewegungsweite (10, Sprintwürfel W10)",
+                "Biss (Stä+W4 Schaden)",
+                "Giftiger Biss (Leichtes Gift bei Angeschlagen/Wunde)",
+                "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Schlangisch"
+            ],
+            "altersspanne": "Erwachsen mit 15, Alt mit 60, maximales Alter 80-120",
+            "groesse_maennlich": "1,80-2,20m, 70-100kg (Durchschnitt 2,00m, 85kg)",
+            "groesse_weiblich": "1,75-2,15m, 65-95kg (Durchschnitt 1,95m, 80kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 4,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "biss": true,
+                    "giftiger_biss": true,
+                    "waermesicht": true,
+                    "anfaelligkeit_kaelte": true,
+                    "aussenseiter_schwer": true,
+                    "kaltblutig": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Zentaur": {
-        "name": "Zentaur",
-        "handicaps": [
-            "Abhängigkeit (Mindestens 1 Stunde von 24 unter freiem Himmel galoppieren)",
-            "Ungewöhnliche Form (Keine Reittiere, eingeschränkte Ausrüstung)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Bewegungsweite +4 (10, Sprintwürfel W10)",
-            "Größe +1 (+1 Robustheit)",
-            "Hufe (Stä+W4 Schaden)"
-        ],
-        "sprachen": ["Gemeinsprache", "Sylvanisch"],
-        "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
-        "groesse_maennlich": "2,00-2,40m, 180-250kg (Durchschnitt 2,20m, 215kg)",
-        "groesse_weiblich": "1,95-2,35m, 170-240kg (Durchschnitt 2,15m, 205kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {},
-            "robustheit_bonus": 1,
-            "bewegungsweite_bonus": 4,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "spezielle_effekte": {
-            "hufe": true,
-            "abhaengigkeit_freier_himmel": true,
-            "ungewoehnliche_form": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+            "name": "Zentaur",
+            "handicaps": [
+                "Abhängigkeit (Mindestens 1 Stunde von 24 unter freiem Himmel galoppieren)",
+                "Ungewöhnliche Form (Keine Reittiere, eingeschränkte Ausrüstung)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Bewegungsweite +4 (10, Sprintwürfel W10)",
+                "Größe +1 (+1 Robustheit)",
+                "Hufe (Stä+W4 Schaden)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Sylvanisch"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 60, maximales Alter 80-120",
+            "groesse_maennlich": "2,00-2,40m, 180-250kg (Durchschnitt 2,20m, 215kg)",
+            "groesse_weiblich": "1,95-2,35m, 170-240kg (Durchschnitt 2,15m, 205kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 1,
+                "bewegungsweite_bonus": 4,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {
+                    "hufe": true,
+                    "abhaengigkeit_freier_himmel": true,
+                    "ungewoehnliche_form": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         },
         "Zwerg": {
-        "name": "Zwerg",
-        "handicaps": [
-            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
-        ],
-        "talente": [],
-        "besonderheiten": [
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-            "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)"
-        ],
-        "sprachen": ["Gemeinsprache", "Zwergisch"],
-        "altersspanne": "Erwachsen mit 40, Alt mit 150, maximales Alter 200-350",
-        "groesse_maennlich": "110-140cm, 60-90kg (Durchschnitt 125cm, 75kg)",
-        "groesse_weiblich": "105-135cm, 55-85kg (Durchschnitt 120cm, 70kg)",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-            "Konstitution": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {},
-            "auto_talente": ["Nachtsicht"],
-            "spezielle_effekte": {
-            "nachtsicht": true
-            },
-            "wahlmoeglichkeiten": {}
+            "name": "Zwerg",
+            "handicaps": [
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Zwergisch"
+            ],
+            "altersspanne": "Erwachsen mit 40, Alt mit 150, maximales Alter 200-350",
+            "groesse_maennlich": "110-140cm, 60-90kg (Durchschnitt 125cm, 75kg)",
+            "groesse_weiblich": "105-135cm, 55-85kg (Durchschnitt 120cm, 70kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true
+                },
+                "wahlmoeglichkeiten": {}
             }
-        }  
+        }
     },
     "voelker_selected": {
         "Android": false,
@@ -1255,7 +1388,9 @@
             "beschreibung": "Arkane Fertigkeit: Alchemie (Verstand)",
             "neue_maechte": 3,
             "machtpunkte": 15,
-            "auto_handicaps": ["Materialkomponenten"],
+            "auto_handicaps": [
+                "Materialkomponenten"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1263,7 +1398,10 @@
             "name": "Chemiker",
             "kategorie": "Alchemist",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Alchemist)", "Alchemie W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Alchemist)",
+                "Alchemie W8"
+            ],
             "beschreibung": "Die Gebräue des Alchemisten halten eine Woche statt 48 Stunden, wenn sie an andere weitergegeben werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1274,13 +1412,16 @@
             "name": "Meisterlicher Alchemist",
             "kategorie": "Alchemist",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Alchemist)", "Alchemie W10"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Alchemist)",
+                "Alchemie W10"
+            ],
             "beschreibung": "Erlaubt die Herstellung permanenter Tränke zu halb so hohen Kosten mit improvisierten Vorräten oder einer Alchemistentasche.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },        
+        },
         "Arkaner Hintergrund (Barde)": {
             "name": "Arkaner Hintergrund (Barde)",
             "kategorie": "Hintergrund",
@@ -1289,7 +1430,9 @@
             "beschreibung": "Arkane Fertigkeit: Darbietung (Willenskraft)",
             "neue_maechte": 3,
             "machtpunkte": 10,
-            "auto_handicaps": ["Behindernde_Rüstung_leicht"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_leicht"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1297,7 +1440,9 @@
             "name": "Grabgesang",
             "kategorie": "Barde",
             "rang": "H",
-            "voraussetzungen": ["Arkaner Hintergrund (Barde)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Barde)"
+            ],
             "beschreibung": "Löst Furcht aus und reduziert Proben von Feinden um -2, wenn sie Bennys verwenden. Der Barde muss singen oder ein Instrument spielen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1308,7 +1453,10 @@
             "name": "Heldentum inspirieren",
             "kategorie": "Barde",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Barde)", "Darbietung W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Barde)",
+                "Darbietung W8"
+            ],
             "beschreibung": "Erlaubt es, fünf Inspirations-Marker zu generieren, die Kameraden Boni auf Proben oder Schadenswürfe geben.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1319,7 +1467,9 @@
             "name": "Instrument",
             "kategorie": "Barde",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Barde)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Barde)"
+            ],
             "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1334,7 +1484,9 @@
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 15,
-            "auto_handicaps": ["Behindernde_Rüstung_leicht"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_leicht"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1342,12 +1494,19 @@
             "name": "Arkaner Hintergrund (Diabolist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Verderbnis", "Behindernde_Rüstung_schwer"],
-            "auto_talente": ["Beschwörung"],
+            "auto_handicaps": [
+                "Verderbnis",
+                "Behindernde_Rüstung_schwer"
+            ],
+            "auto_talente": [
+                "Beschwörung"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1355,11 +1514,17 @@
             "name": "Arkaner Hintergrund (Druide)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W6"],
+            "voraussetzungen": [
+                "WIL W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Behindernde_Rüstung_leicht", "Materialkomponenten", "Schwur_schwer"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_leicht",
+                "Materialkomponenten",
+                "Schwur_schwer"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1367,11 +1532,15 @@
             "name": "Arkaner Hintergrund (Elementarist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Behindernde_Rüstung_schwer"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_schwer"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1379,11 +1548,15 @@
             "name": "Arkaner Hintergrund (Illusionist)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Behindernde_Rüstung_schwer"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_schwer"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1391,11 +1564,15 @@
             "name": "Arkaner Hintergrund (Kleriker)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W6"],
+            "voraussetzungen": [
+                "WIL W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Schwur_schwer"],
+            "auto_handicaps": [
+                "Schwur_schwer"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1403,11 +1580,16 @@
             "name": "Arkaner Hintergrund (Magier)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 6,
             "machtpunkte": 15,
-            "auto_handicaps": ["Behindernde_Rüstung_schwer", "Materialkomponenten"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_schwer",
+                "Materialkomponenten"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1415,11 +1597,15 @@
             "name": "Arkaner Hintergrund (Nekromant)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Verderbnis"],
+            "auto_handicaps": [
+                "Verderbnis"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1427,11 +1613,17 @@
             "name": "Arkaner Hintergrund (Schamane)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["WIL W6"],
+            "voraussetzungen": [
+                "WIL W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 5,
             "machtpunkte": 10,
-            "auto_handicaps": ["Behindernde_Rüstung_leicht", "Tick", "Materialkomponenten"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_leicht",
+                "Tick",
+                "Materialkomponenten"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1439,7 +1631,9 @@
             "name": "Arkaner Hintergrund (Tüftler)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Reparieren (Verstand)",
             "neue_maechte": 2,
             "machtpunkte": 15,
@@ -1450,11 +1644,16 @@
             "name": "Arkaner Hintergrund (Zauberer)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 3,
             "machtpunkte": 15,
-            "auto_handicaps": ["Behindernde_Rüstung_leicht", "Verderbnis"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_leicht",
+                "Verderbnis"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1462,12 +1661,20 @@
             "name": "Arkaner Hintergrund (Hexer/Hexe)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["VER W6"],
+            "voraussetzungen": [
+                "VER W6"
+            ],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
             "neue_maechte": 3,
             "machtpunkte": 10,
-            "auto_handicaps": ["Behindernde_Rüstung_schwer", "Materialkomponenten", "Verderbnis"],
-            "auto_talente": ["Vertrauter"],
+            "auto_handicaps": [
+                "Behindernde_Rüstung_schwer",
+                "Materialkomponenten",
+                "Verderbnis"
+            ],
+            "auto_talente": [
+                "Vertrauter"
+            ],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -1475,7 +1682,9 @@
             "name": "Beschwörung",
             "kategorie": "Diabolist",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Diabolist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Diabolist)"
+            ],
             "beschreibung": "Ermöglicht die Beschwörung von Dämonen, Geistern und bösartigen Kreaturen. Diener können als Aktion mit Machtpunkten beschworen werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1529,7 +1738,9 @@
             "name": "Zorn der Hölle",
             "kategorie": "Diabolist",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Diabolist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Diabolist)"
+            ],
             "beschreibung": "Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1540,7 +1751,9 @@
             "name": "Infernale Rüstung",
             "kategorie": "Diabolist",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Diabolist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Diabolist)"
+            ],
             "beschreibung": "Verleiht +2 Rüstung durch eine höllische Aura, macht Heimlichkeit jedoch nahezu unmöglich.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1551,7 +1764,9 @@
             "name": "Herzholzstab",
             "kategorie": "Druide",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Druide)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Druide)"
+            ],
             "beschreibung": "Ein Kampfstab, der zusätzlichen Schaden verursacht und bei Verlust durch ein Ritual ersetzt werden kann.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1562,7 +1777,9 @@
             "name": "Wahre Form",
             "kategorie": "Druide",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Druide)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Druide)"
+            ],
             "beschreibung": "Ermöglicht Druiden, in Tierform zu sprechen und Mächte zu wirken, mit Risiken bei längerem Verweilen in Tiergestalt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1573,7 +1790,9 @@
             "name": "Elementare Absorption",
             "kategorie": "Elementarmagier",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Elementarmagier)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Elementarmagier)"
+            ],
             "beschreibung": "Erhöht Robustheit um +2 während der Nutzung von Elementarsynergie.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1584,7 +1803,9 @@
             "name": "Elementarer Meister",
             "kategorie": "Elementarmagier",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Elementarist)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Elementarist)"
+            ],
             "beschreibung": "Erlaubt die Beherrschung eines zusätzlichen Elements, Mächte können zwischen Elementen gewechselt werden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1595,7 +1816,9 @@
             "name": "Böser Blick",
             "kategorie": "Hexer/Hexe",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexer/Hexe)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexer/Hexe)"
+            ],
             "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1606,7 +1829,9 @@
             "name": "Hexenzeit",
             "kategorie": "Hexer/Hexe",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Hexer/Hexe)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Hexer/Hexe)"
+            ],
             "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1617,7 +1842,10 @@
             "name": "Tödliche Illusion",
             "kategorie": "Illusionist",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Illusionist)", "Zaubern W10"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Illusionist)",
+                "Zaubern W10"
+            ],
             "beschreibung": "Erlaubt den Einsatz des Machtmodifikators Tödliche Illusion ohne zusätzliche Machtpunkte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1628,7 +1856,10 @@
             "name": "Meisterlicher Illusionist",
             "kategorie": "Illusionist",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Illusionist)", "Zaubern W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Illusionist)",
+                "Zaubern W8"
+            ],
             "beschreibung": "Illusionen erhalten die Machtmodifikatoren Beweglich und Geräusch ohne zusätzliche Machtpunkte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1639,7 +1870,9 @@
             "name": "Untote zerstören",
             "kategorie": "Kleriker",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Kleriker)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Kleriker)"
+            ],
             "beschreibung": "Kanalisierung positiver Energie, um Untote mit 2W6 (oder 3W6 für 2 Machtpunkte) Schaden zu treffen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1650,7 +1883,10 @@
             "name": "Gnade",
             "kategorie": "Kleriker",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Kleriker)", "Glaube W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Kleriker)",
+                "Glaube W8"
+            ],
             "beschreibung": "Hebt Abgelenkt, Angeschlagen oder Verwundbar durch Einsatz von 1 Machtpunkt auf.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1661,7 +1897,9 @@
             "name": "Unheimliche Inspiration",
             "kategorie": "Magier",
             "rang": "H",
-            "voraussetzungen": ["Arkaner Hintergrund (Magier)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Magier)"
+            ],
             "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht mit einem Benny, solange Zugang zu Zauberbüchern besteht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1672,7 +1910,9 @@
             "name": "Zauberbücher",
             "kategorie": "Magier",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Magie)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Magie)"
+            ],
             "beschreibung": "Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1683,7 +1923,10 @@
             "name": "Seelengefäß",
             "kategorie": "Nekromant",
             "rang": "L",
-            "voraussetzungen": ["Arkaner Hintergrund (Nekromant)", "Okkultismus W10"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Nekromant)",
+                "Okkultismus W10"
+            ],
             "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1694,7 +1937,9 @@
             "name": "Untoter Vertrauter",
             "kategorie": "Nekromant",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Nekromant)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Nekromant)"
+            ],
             "beschreibung": "Erhält einen untoten Tiergefährten mit speziellen Boni, ähnlich wie das Talent Vertrauter.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1705,7 +1950,9 @@
             "name": "Urtümliche Magie",
             "kategorie": "Schamane",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Schamane)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Schamane)"
+            ],
             "beschreibung": "Erhöht Schaden von Mächten um +2, verursacht jedoch bei Kritischen Fehlschlägen Betäubung im Umkreis.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1716,7 +1963,10 @@
             "name": "Geweihter Fetisch",
             "kategorie": "Schamane",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Schamane)", "Glaube W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Schamane)",
+                "Glaube W8"
+            ],
             "beschreibung": "Verleiht eine Freie Wurfwiederholung bei Glaubensproben, wenn ein geweihter Fetisch genutzt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1727,7 +1977,9 @@
             "name": "Konstrukt-Vertrauter",
             "kategorie": "Tüftler",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Tüftler)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Tüftler)"
+            ],
             "beschreibung": "Erhält einen mechanischen Tiergefährten mit speziellen Vorteilen, ähnlich wie das Talent Vertrauter.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1738,7 +1990,9 @@
             "name": "Tüftlerrüstung",
             "kategorie": "Tüftler",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (Tüftler)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Tüftler)"
+            ],
             "beschreibung": "Ermöglicht modifizierte Rüstung mit Boni auf Arme, Rumpf oder Beine, unterliegt jedoch Ausfällen bei Wunden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1749,7 +2003,9 @@
             "name": "Große Macht",
             "kategorie": "Zauberer",
             "rang": "V",
-            "voraussetzungen": ["Arkaner Hintergrund (Zauberer)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Zauberer)"
+            ],
             "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1760,7 +2016,10 @@
             "name": "Phänomenale Macht",
             "kategorie": "Zauberer",
             "rang": "H",
-            "voraussetzungen": ["Arkaner Hintergrund (Zauberer)", "Große Macht"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Zauberer)",
+                "Große Macht"
+            ],
             "beschreibung": "Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1782,7 +2041,9 @@
             "name": "Bevorzugtes Gelände",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Überleben W6"],
+            "voraussetzungen": [
+                "Überleben W6"
+            ],
             "beschreibung": "Wähle ein Geländetyp. In diesem Gelände erhält der Charakter eine freie Wiederholung bei Überlebens- und Wahrnehmungsproben sowie eine zusätzliche Aktionskarte zur Initiative.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1804,7 +2065,9 @@
             "name": "Erzfeind",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Athletik, Kämpfen oder Schießen W6"],
+            "voraussetzungen": [
+                "Athletik, Kämpfen oder Schießen W6"
+            ],
             "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1826,7 +2089,9 @@
             "name": "Betäubungsschlag",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["STÄ W8"],
+            "voraussetzungen": [
+                "STÄ W8"
+            ],
             "beschreibung": "Schläge mit stumpfen Waffen zwingen Gegner zu Konstitutionsproben. Bei einem Misserfolg wird der Gegner Betäubt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1837,7 +2102,9 @@
             "name": "Böe",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Flügel"],
+            "voraussetzungen": [
+                "Flügel"
+            ],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1848,7 +2115,9 @@
             "name": "Doppelschuss",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen"],
+            "voraussetzungen": [
+                "Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen"
+            ],
             "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1859,7 +2128,10 @@
             "name": "Vierfachschuss",
             "kategorie": "Kampf",
             "rang": "H",
-            "voraussetzungen": ["Doppelschuss", "Athletik W10 für Wurfwaffen oder Schießen W10 für Bögen"],
+            "voraussetzungen": [
+                "Doppelschuss",
+                "Athletik W10 für Wurfwaffen oder Schießen W10 für Bögen"
+            ],
             "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1870,7 +2142,10 @@
             "name": "Unglaubliche Reflexe",
             "kategorie": "Kampf",
             "rang": "V",
-            "voraussetzungen": ["GES W8", "Athletik W8"],
+            "voraussetzungen": [
+                "GES W8",
+                "Athletik W8"
+            ],
             "beschreibung": "Der Charakter ignoriert den üblichen -2 Geschicklichkeits-Abzug beim Wegspringen und kann bei Flächeneffekten oder Angriffen wie Strahl oder Verwirrung Wegspringen anwenden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1881,7 +2156,10 @@
             "name": "Versengen",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["KON W8", "Odemwaffe"],
+            "voraussetzungen": [
+                "KON W8",
+                "Odemwaffe"
+            ],
             "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1892,7 +2170,9 @@
             "name": "Verteidiger",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Kämpfen W6"],
+            "voraussetzungen": [
+                "Kämpfen W6"
+            ],
             "beschreibung": "Erlaubt das Teilen des Parade- und Deckungsbonus eines Schildes mit einem Verbündeten in der Nähe als freie Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1903,7 +2183,9 @@
             "name": "Wildling",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["Kämpfen W6"],
+            "voraussetzungen": [
+                "Kämpfen W6"
+            ],
             "beschreibung": "Ein Rücksichtsloser Angriff verursacht +4 Schaden statt +2.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1914,7 +2196,9 @@
             "name": "Zerschmettern",
             "kategorie": "Kampf",
             "rang": "A",
-            "voraussetzungen": ["STÄ W8"],
+            "voraussetzungen": [
+                "STÄ W8"
+            ],
             "beschreibung": "Fügt bei Angriffen auf Objekte +W6 Schaden hinzu, wobei die Schadenswürfel nicht explodieren können.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1925,7 +2209,9 @@
             "name": "Artefakterschaffer",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (beliebig)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)"
+            ],
             "beschreibung": "Erlaubt die Herstellung von temporären Arkane Apparaturen und permanenter magischer Gegenstände.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1936,7 +2222,10 @@
             "name": "Meisterlicher Artefakterschaffer",
             "kategorie": "Macht",
             "rang": "H",
-            "voraussetzungen": ["Artefakterschaffer", "Okkultismus W10"],
+            "voraussetzungen": [
+                "Artefakterschaffer",
+                "Okkultismus W10"
+            ],
             "beschreibung": "Erhöht die Belohnung für Okkultismusproben bei der Herstellung magischer Gegenstände auf 1000 G pro Erfolg oder Steigerung.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1947,7 +2236,10 @@
             "name": "Bevorzugte Macht",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["Arkaner Hintergrund (beliebig)", "Arkane Fertigkeit W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W8"
+            ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1958,7 +2250,10 @@
             "name": "Blutmagie",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (beliebig)", "eine böse Gesinnung"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "eine böse Gesinnung"
+            ],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1969,7 +2264,10 @@
             "name": "Epische Meisterschaft",
             "kategorie": "Macht",
             "rang": "V",
-            "voraussetzungen": ["Arkaner Hintergrund (beliebig)", "Arkane Fertigkeit W6"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W6"
+            ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1991,7 +2289,10 @@
             "name": "Schlachtenmagie",
             "kategorie": "Macht",
             "rang": "V",
-            "voraussetzungen": ["Arkaner Hintergrund (beliebig)", "Arkane Fertigkeit W10"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)",
+                "Arkane Fertigkeit W10"
+            ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2002,7 +2303,10 @@
             "name": "Stillzauberer",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (jeder außer Barde)", "Okkultismus W8"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (jeder außer Barde)",
+                "Okkultismus W8"
+            ],
             "beschreibung": "Erlaubt das Wirken von Zaubern ohne zu sprechen. Funktioniert auch unter Wasser, in einem Vakuum, oder innerhalb der Macht Stille.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2013,7 +2317,9 @@
             "name": "Übertragung",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (beliebig)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (beliebig)"
+            ],
             "beschreibung": "Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2024,7 +2330,9 @@
             "name": "Vertrauter",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"],
+            "voraussetzungen": [
+                "Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
+            ],
             "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
             "neue_maechte": 0,
             "machtpunkte": 5,
@@ -2035,7 +2343,10 @@
             "name": "Entdecker",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["KON W6", "Überleben W8"],
+            "voraussetzungen": [
+                "KON W6",
+                "Überleben W8"
+            ],
             "beschreibung": "Ermöglicht eine zusätzliche Aktionskarte bei Reisen und verkürzt die Reisezeit der Gruppe um 10%.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2046,7 +2357,9 @@
             "name": "Fallengespür",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Reparieren W6"],
+            "voraussetzungen": [
+                "Reparieren W6"
+            ],
             "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2057,7 +2370,9 @@
             "name": "Giftmischer",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Alchemie, Heilen oder Überleben W6"],
+            "voraussetzungen": [
+                "Alchemie, Heilen oder Überleben W6"
+            ],
             "beschreibung": "Erstellt Gifte in der Hälfte der Zeit, die Kontaktgifte halten 12 statt 4 Stunden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2068,7 +2383,10 @@
             "name": "Im Sattel geboren",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["GES W8", "Reiten W6"],
+            "voraussetzungen": [
+                "GES W8",
+                "Reiten W6"
+            ],
             "beschreibung": "Verleiht eine freie Wiederholung bei Reitenproben, erhöht die Bewegungsweite des Reittiers um 2 und den Sprintwürfel um einen Würfeltyp.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2079,7 +2397,9 @@
             "name": "Kundschafter",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Überleben W6"],
+            "voraussetzungen": [
+                "Überleben W6"
+            ],
             "beschreibung": "Ermöglicht Wahrnehmungsproben zum frühzeitigen Erkennen von Gefahren, verbessert Wachsamkeit und gibt Boni auf Allgemeinwissen über bereiste Orte.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2090,7 +2410,9 @@
             "name": "Reittier",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Reiten W6"],
+            "voraussetzungen": [
+                "Reiten W6"
+            ],
             "beschreibung": "Gewährt ein treues, aufsteigbares Reittier mit besonderen Fähigkeiten. Ermöglicht die Wahl eines mächtigen Reittiers auf höheren Rängen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2101,7 +2423,14 @@
             "name": "Ritter",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["WIL W6", "STÄ W8", "KON W8", "Kämpfen W8", "Reiten W6", "Verpflichtung (schwer)"],
+            "voraussetzungen": [
+                "WIL W6",
+                "STÄ W8",
+                "KON W8",
+                "Kämpfen W8",
+                "Reiten W6",
+                "Verpflichtung (schwer)"
+            ],
             "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2112,7 +2441,10 @@
             "name": "Schatzjäger",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Wahrnehmung W8", "Okkultismus W8"],
+            "voraussetzungen": [
+                "Wahrnehmung W8",
+                "Okkultismus W8"
+            ],
             "beschreibung": "Erlaubt Verstandsproben zur Einschätzung von Schätzen und magischen Gegenständen. Ermöglicht das Neuwürfeln von magischen Gegenstandseffekten mit einem Benny.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2123,7 +2455,9 @@
             "name": "Steingespür",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["Reparieren W6"],
+            "voraussetzungen": [
+                "Reparieren W6"
+            ],
             "beschreibung": "Erhöht Wahrnehmungsproben um +2, um Fallen oder versteckte Türen in Stein zu entdecken.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2134,7 +2468,10 @@
             "name": "Troubadour",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": ["Allgemeinwissen W6", "Darbietung W8"],
+            "voraussetzungen": [
+                "Allgemeinwissen W6",
+                "Darbietung W8"
+            ],
             "beschreibung": "Gewährt +2 auf Allgemeinwissenproben und erlaubt die Nutzung von Darbietung statt Kriegskunst für Anführertalente.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2145,7 +2482,9 @@
             "name": "Täuscher",
             "kategorie": "Sozial",
             "rang": "F",
-            "voraussetzungen": ["VER W8"],
+            "voraussetzungen": [
+                "VER W8"
+            ],
             "beschreibung": "Erlaubt das Ziel, bei Herausforderungen entweder mit Verstand oder Willenskraft zu widerstehen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2156,7 +2495,9 @@
             "name": "Aura der Tapferkeit",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["WIL W8"],
+            "voraussetzungen": [
+                "WIL W8"
+            ],
             "beschreibung": "Verbündete im Umkreis von 20 Metern erhalten +1 auf Furchtproben und -1 auf der Furchttabelle.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2178,7 +2519,9 @@
             "name": "Schnelle Verwandlung",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Lykanthropie"],
+            "voraussetzungen": [
+                "Lykanthropie"
+            ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3808,8 +4151,7 @@
             "name": "Gefolgsleute",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Der Held hat fünf Gefolgsleute.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3820,8 +4162,7 @@
             "name": "Handlanger",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Der Charakter erhält einen Wildcard-Handlanger.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -4228,217 +4569,213 @@
             "aktiv": true,
             "custom": false
         },
-            "Neugierig": {
-                "name": "Neugierig",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Der Charakter muss alles erforschen und untersuchen, selbst wenn es gefährlich ist.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Nichtschwimmer": {
-                "name": "Nichtschwimmer",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "-2 auf Athletik-Würfe zum Schwimmen. Bewegungsweite im Wasser halbiert.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Blind": {
-                "name": "Blind",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "–6 auf alle Aufgaben, die Sicht erfordern (freies Talent als Ausgleich).",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Blutrünstig": {
-                "name": "Blutrünstig",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Nimmt niemals Gefangene.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Dünnhäutig": {
-                "name": "Dünnhäutig",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Abzug von –2 beim Widerstand gegen Provozieren.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Amorös_leicht": {
-                "name": "Amorös",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "-2 um Herausforderungen von Gegnern mit dem Talent Attraktiv oder Sehr Attraktiv zu widerstehen.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Arkane_Empfindlichkeit_leicht": {
-                "name": "Arkane Empfindlichkeit",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Ziehe -2 ab, wenn du einer Macht widerstehst.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Arkane_Empfindlichkeit_schwer": {
-                "name": "Arkane Empfindlichkeit",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Ziehe -4 ab, wenn du einer Macht widerstehst.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Aufopferungsvoll_leicht": {
-                "name": "Aufopferungsvoll",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Der Held stellt andere vor sich selbst.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Aufopferungsvoll_schwer": {
-                "name": "Aufopferungsvoll",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Der Held stellt andere vor sich selbst.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Behindernde_Rüstung_leicht": {
-                "name": "Behindernde Rüstung",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Mittelschwere Rüstung / Schilde benutzt.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Behindernde_Rüstung_schwer": {
-                "name": "Behindernde Rüstung",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Leichte Rüstung / Schilde als schweres Handicap benutzt.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Chauvinistisch_leicht": {
-                "name": "Chauvinistisch",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -2 und sie dürfen nicht von seinen Anführertalenten profitieren.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Chauvinistisch_schwer": {
-                "name": "Chauvinistisch",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -4 und sie dürfen nicht von seinen Anführertalenten profitieren.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Grimmig": {
-                "name": "Grimmig",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Der Held ist ein düsterer Geselle und wird Erzürnt, wenn er erfolgreich Provoziert wird.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Idealistisch": {
-                "name": "Idealistisch",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Der Held sieht die Dinge in einer vereinfachten, schwarz-weißen Weltsicht.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Materialkomponenten": {
-                "name": "Materialkomponenten",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Zauberwirker benötigt materielle Gegenstände, um zu zaubern. Wenn er einen Kritischen Fehlschlag würfelt, zieht er -4 von Proben für arkane Fertigkeiten ab, bis er sie aufgefüllt hat.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Talisman_leicht": {
-                "name": "Talisman",
-                "stufe": "leicht",
-                "punkte": 1,
-                "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -1 von Proben auf seine arkane Fertigkeiten ab.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Talisman_schwer": {
-                "name": "Talisman",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -2 von Proben auf seine arkane Fertigkeiten ab.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Tölpel": {
-                "name": "Tölpel",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Ein Wurf von 1 auf den Fertigkeitswürfel ist ein Kritischer Fehlschlag, wenn du eine für den Charakter wichtige Fertigkeit einsetzt.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Verdammt": {
-                "name": "Verdammt",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "-2 auf Würfe, um Schaden wegzustecken.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Verderbnis": {
-                "name": "Verderbnis",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Benötigt einen Arkanen Hintergrund. Erhalte ein neues leichtes Handicap (oder erhöhe auf schwer), wenn bei einer arkanen Fertigkeit ein Kritischer Fehlschlag gewürfelt wird, bis zum nächsten Aufstieg des Charakters.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-            "Verflucht": {
-                "name": "Verflucht",
-                "stufe": "schwer",
-                "punkte": 2,
-                "beschreibung": "Zauberwirken erleiden -2, wenn sie versuchen, den Helden mit nützlicher Magie zu beeinflussen.",
-                "ausgewaehlt": false,
-                "aktiv": true,
-                "custom": false
-            },
-
-        
-
-
+        "Neugierig": {
+            "name": "Neugierig",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter muss alles erforschen und untersuchen, selbst wenn es gefährlich ist.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Nichtschwimmer": {
+            "name": "Nichtschwimmer",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "-2 auf Athletik-Würfe zum Schwimmen. Bewegungsweite im Wasser halbiert.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Blind": {
+            "name": "Blind",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "–6 auf alle Aufgaben, die Sicht erfordern (freies Talent als Ausgleich).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Blutrünstig": {
+            "name": "Blutrünstig",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Nimmt niemals Gefangene.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Dünnhäutig": {
+            "name": "Dünnhäutig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Abzug von –2 beim Widerstand gegen Provozieren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Amorös_leicht": {
+            "name": "Amorös",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "-2 um Herausforderungen von Gegnern mit dem Talent Attraktiv oder Sehr Attraktiv zu widerstehen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Arkane_Empfindlichkeit_leicht": {
+            "name": "Arkane Empfindlichkeit",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Ziehe -2 ab, wenn du einer Macht widerstehst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Arkane_Empfindlichkeit_schwer": {
+            "name": "Arkane Empfindlichkeit",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Ziehe -4 ab, wenn du einer Macht widerstehst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Aufopferungsvoll_leicht": {
+            "name": "Aufopferungsvoll",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Held stellt andere vor sich selbst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Aufopferungsvoll_schwer": {
+            "name": "Aufopferungsvoll",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Held stellt andere vor sich selbst.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Behindernde_Rüstung_leicht": {
+            "name": "Behindernde Rüstung",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Mittelschwere Rüstung / Schilde benutzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Behindernde_Rüstung_schwer": {
+            "name": "Behindernde Rüstung",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Ziehe -4 ab und kann keine Fähigkeiten nutzen, die durch den Arkanen Hintergrund oder Talente, die ihn Voraussetzen, gewährt werden, wenn du Leichte Rüstung / Schilde als schweres Handicap benutzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Chauvinistisch_leicht": {
+            "name": "Chauvinistisch",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -2 und sie dürfen nicht von seinen Anführertalenten profitieren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Chauvinistisch_schwer": {
+            "name": "Chauvinistisch",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter hat eine natürliche Voreingenommenheit gegenüber anderen Völkern und Kulturen. Er erleidet im Umgang einen Malus von -4 und sie dürfen nicht von seinen Anführertalenten profitieren.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Grimmig": {
+            "name": "Grimmig",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Held ist ein düsterer Geselle und wird Erzürnt, wenn er erfolgreich Provoziert wird.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Idealistisch": {
+            "name": "Idealistisch",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Held sieht die Dinge in einer vereinfachten, schwarz-weißen Weltsicht.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Materialkomponenten": {
+            "name": "Materialkomponenten",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Zauberwirker benötigt materielle Gegenstände, um zu zaubern. Wenn er einen Kritischen Fehlschlag würfelt, zieht er -4 von Proben für arkane Fertigkeiten ab, bis er sie aufgefüllt hat.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Talisman_leicht": {
+            "name": "Talisman",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -1 von Proben auf seine arkane Fertigkeiten ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Talisman_schwer": {
+            "name": "Talisman",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Der Wirker benötigt einen physischen Gegenstand (Stab, Symbol, etc.), um seine Mächte zu wirken. Ohne ihn zieht er -2 von Proben auf seine arkane Fertigkeiten ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Tölpel": {
+            "name": "Tölpel",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Ein Wurf von 1 auf den Fertigkeitswürfel ist ein Kritischer Fehlschlag, wenn du eine für den Charakter wichtige Fertigkeit einsetzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verdammt": {
+            "name": "Verdammt",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "-2 auf Würfe, um Schaden wegzustecken.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verderbnis": {
+            "name": "Verderbnis",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Benötigt einen Arkanen Hintergrund. Erhalte ein neues leichtes Handicap (oder erhöhe auf schwer), wenn bei einer arkanen Fertigkeit ein Kritischer Fehlschlag gewürfelt wird, bis zum nächsten Aufstieg des Charakters.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Verflucht": {
+            "name": "Verflucht",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Zauberwirken erleiden -2, wenn sie versuchen, den Helden mit nützlicher Magie zu beeinflussen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Alt": {
             "name": "Alt",
             "stufe": "schwer",
@@ -4529,7 +4866,6 @@
             "aktiv": true,
             "custom": false
         },
-
         "Ehrenkodex": {
             "name": "Ehrenkodex",
             "stufe": "schwer",
@@ -4601,7 +4937,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },        
+        },
         "Gesucht": {
             "name": "Gesucht",
             "stufe": "leicht",
@@ -4754,8 +5090,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Skrupellos": {
+        },
+        "Skrupellos": {
             "name": "Skrupellos",
             "stufe": "leicht",
             "punkte": 1,
@@ -4763,8 +5099,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Stumm": {
+        },
+        "Stumm": {
             "name": "Stumm",
             "stufe": "schwer",
             "punkte": 2,
@@ -4772,8 +5108,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Stur": {
+        },
+        "Stur": {
             "name": "Stur",
             "stufe": "leicht",
             "punkte": 1,
@@ -4781,8 +5117,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Tick": {
+        },
+        "Tick": {
             "name": "Tick",
             "stufe": "leicht",
             "punkte": 1,
@@ -4790,8 +5126,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Tollpatschig": {
+        },
+        "Tollpatschig": {
             "name": "Tollpatschig",
             "stufe": "schwer",
             "punkte": 2,
@@ -4799,8 +5135,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Übermütig": {
+        },
+        "Übermütig": {
             "name": "Übermütig",
             "stufe": "schwer",
             "punkte": 2,
@@ -4808,8 +5144,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          },
-          "Verpeilt": {
+        },
+        "Verpeilt": {
             "name": "Verpeilt",
             "stufe": "schwer",
             "punkte": 2,
@@ -4817,8 +5153,26 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-          }    
-    },         
+        },
+        "Klein": {
+            "name": "Klein",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Dieser Abenteurer ist ziemlich dürr, klein oder beides. Seine Größe (siehe Seite 103) wird um –1 verringert, wodurch auch seine Robustheit sinkt. Die Größe kann nicht unter –1 sinken, doch der Abzug auf Robustheit ist kumulativ. Ein kleiner Halbling hat beispielsweise Größe –1, verliert aber einen zusätzlichen Punkt Robustheit.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Kränklich": {
+            "name": "Kränklich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        }
+    },
     "maechte": {
         "Aufspüren": {
             "name": "Aufspüren",
@@ -4867,7 +5221,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },          
+        },
         "Ebenenwechsel": {
             "name": "Ebenenwechsel",
             "rang": "V",
@@ -5011,7 +5365,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },            
+        },
         "Abwehren": {
             "name": "Abwehren",
             "rang": "A",
@@ -5698,8 +6052,8 @@
             "setting": "fantasy",
             "beschreibung": "Tragbares Labor mit Werkzeugen und Kräutern.",
             "aktiv": true
-            },
-            "Artefakterschaffertasche": {
+        },
+        "Artefakterschaffertasche": {
             "name": "Artefakterschaffertasche",
             "kategorie": "Allgemein",
             "gewicht": 2.5,
@@ -5707,8 +6061,8 @@
             "setting": "fantasy",
             "beschreibung": "Werkzeuge zum Verzaubern von magischen Gegenständen.",
             "aktiv": true
-            },
-            "Bandolier": {
+        },
+        "Bandolier": {
             "name": "Bandolier",
             "kategorie": "Allgemein",
             "gewicht": 1,
@@ -5716,8 +6070,8 @@
             "setting": "fantasy",
             "beschreibung": "",
             "aktiv": true
-            },
-            "Behälter für Karte oder Schriftrolle": {
+        },
+        "Behälter für Karte oder Schriftrolle": {
             "name": "Behälter für Karte oder Schriftrolle",
             "kategorie": "Allgemein",
             "gewicht": 0.25,
@@ -5725,8 +6079,8 @@
             "setting": "fantasy",
             "beschreibung": "",
             "aktiv": true
-            },
-            "Brechstange": {
+        },
+        "Brechstange": {
             "name": "Brechstange",
             "kategorie": "Allgemein",
             "gewicht": 2.5,
@@ -5734,8 +6088,8 @@
             "setting": "fantasy",
             "beschreibung": "",
             "aktiv": true
-            },
-            "Buch": {
+        },
+        "Buch": {
             "name": "Buch",
             "kategorie": "Allgemein",
             "gewicht": 2.5,
@@ -5743,8 +6097,8 @@
             "setting": "fantasy",
             "beschreibung": "Ermöglicht Rechercheproben.",
             "aktiv": true
-            },
-            "Diebeswerkzeuge": {
+        },
+        "Diebeswerkzeuge": {
             "name": "Diebeswerkzeuge",
             "kategorie": "Allgemein",
             "gewicht": 0.5,
@@ -5752,8 +6106,8 @@
             "setting": "fantasy",
             "beschreibung": "-2 auf Diebeskunst ohne Werkzeuge.",
             "aktiv": true
-            },
-            "Fackel": {
+        },
+        "Fackel": {
             "name": "Fackel",
             "kategorie": "Allgemein",
             "gewicht": 0.5,
@@ -5761,8 +6115,8 @@
             "setting": "fantasy",
             "beschreibung": "Licht für 1 Stunde, 4'' Radius.",
             "aktiv": true
-            },
-            "Fallenherstellungsset": {
+        },
+        "Fallenherstellungsset": {
             "name": "Fallenherstellungsset",
             "kategorie": "Allgemein",
             "gewicht": 5,
@@ -5770,51 +6124,51 @@
             "setting": "fantasy",
             "beschreibung": "-2 auf Reparieren ohne Set.",
             "aktiv": true
-            },
+        },
         "Fass": {
-        "name": "Fass",
-        "kategorie": "Allgemein",
-        "gewicht": 15,
-        "kosten": 2,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Fass",
+            "kategorie": "Allgemein",
+            "gewicht": 15,
+            "kosten": 2,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Feder": {
-        "name": "Feder",
-        "kategorie": "Allgemein",
-        "gewicht": 0,
-        "kosten": 0.25,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Feder",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 0.25,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Feldflasche (Metall)": {
-        "name": "Feldflasche (Metall)",
-        "kategorie": "Allgemein",
-        "gewicht": 0.5,
-        "kosten": 0.25,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Feldflasche (Metall)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 0.25,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Fernglas": {
-        "name": "Fernglas",
-        "kategorie": "Allgemein",
-        "gewicht": 0.5,
-        "kosten": 1000,
-        "setting": "fantasy",
-        "beschreibung": "Wahrnehmung +2, um entfernte Objekte zu erkennen.",
-        "aktiv": true
+            "name": "Fernglas",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 1000,
+            "setting": "fantasy",
+            "beschreibung": "Wahrnehmung +2, um entfernte Objekte zu erkennen.",
+            "aktiv": true
         },
         "Feuerstein und Stahl": {
-        "name": "Feuerstein und Stahl",
-        "kategorie": "Allgemein",
-        "gewicht": 0,
-        "kosten": 0.25,
-        "setting": "fantasy",
-        "beschreibung": "",
-        "aktiv": true
+            "name": "Feuerstein und Stahl",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 0.25,
+            "setting": "fantasy",
+            "beschreibung": "",
+            "aktiv": true
         },
         "Flasche": {
             "name": "Flasche",
@@ -6418,7 +6772,7 @@
             "setting": "fantasy",
             "beschreibung": "Zelt (2 Personen), Rucksack, Seil, Schlafsack, Winterkleidung, Stiefel (schwer), Feuerstein und Stahl, Schaufel (klein), Umhang mit Kapuze, Wasserschlauch, Verpflegung für 1 Woche.",
             "aktiv": true
-        },        
+        },
         "Blasrohrpfeile (20)": {
             "name": "Blasrohrpfeile (20)",
             "kategorie": "Allgemein",
@@ -6472,7 +6826,7 @@
             "setting": "fantasy",
             "beschreibung": "Polierte Steine für Schleudern. Enthält 20 Steine.",
             "aktiv": true
-        },                   
+        },
         "Beinlinge": {
             "name": "Beinlinge",
             "kategorie": "Rüstung",
@@ -6724,7 +7078,7 @@
             "beine": 0,
             "kopf": 3,
             "mindeststaerke": "W8"
-        },                
+        },
         "Beinlinge aus natürlicher Rüstung": {
             "name": "Beinlinge aus natürlicher Rüstung",
             "kategorie": "Rüstung",
@@ -6752,7 +7106,7 @@
             "beine": 0,
             "kopf": 0,
             "mindeststaerke": "W6"
-        },        
+        },
         "Kleiner Schild": {
             "name": "Kleiner Schild",
             "kategorie": "Schild",
@@ -6800,11 +7154,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Streitaxt": {
@@ -6818,11 +7172,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Zweihandaxt": {
@@ -6836,11 +7190,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W10",
             "eigenschaften": {
-            "Schaden": "Stä+W10",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Chakram": {
@@ -6854,11 +7208,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Dolch": {
@@ -6872,11 +7226,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Dreizack": {
@@ -6890,11 +7244,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Glefe": {
@@ -6908,11 +7262,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W8",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Katana": {
@@ -6926,11 +7280,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6+1",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6+1",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Peitsche": {
@@ -6944,11 +7298,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "2",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "2",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Pike": {
@@ -6962,11 +7316,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "2",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W8",
+                "Reichweite": "2",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Ranseur": {
@@ -6980,11 +7334,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W6",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Rapier": {
@@ -6998,11 +7352,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Bastardschwert": {
@@ -7016,11 +7370,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "Stä+W8",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Haken-Schwert": {
@@ -7034,11 +7388,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Zweihandschwert": {
@@ -7052,11 +7406,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W10",
             "eigenschaften": {
-            "Schaden": "Stä+W10",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Sense": {
@@ -7070,11 +7424,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Spalthammer": {
@@ -7088,11 +7442,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W10",
             "eigenschaften": {
-            "Schaden": "Stä+W10",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Stab": {
@@ -7106,11 +7460,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "1",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Entermesser": {
@@ -7238,7 +7592,7 @@
                 "Schuss": "-",
                 "PB": "1"
             }
-        },    
+        },
         "Lanze": {
             "name": "Lanze",
             "kategorie": "Waffe",
@@ -7466,11 +7820,11 @@
             "typ": "Nahkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "Stä+W4",
-            "Reichweite": "nah",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Handarmbrust": {
@@ -7484,11 +7838,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "2W4",
-            "Reichweite": "5/10/20",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "2W4",
+                "Reichweite": "5/10/20",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Handrepetierarmbrust": {
@@ -7502,11 +7856,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "2W4",
-            "Reichweite": "5/10/20",
-            "FR": 2,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "2W4",
+                "Reichweite": "5/10/20",
+                "FR": 2,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Leichte Armbrust": {
@@ -7520,11 +7874,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "2W6",
-            "Reichweite": "10/20/40",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "2W6",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Schwere Armbrust": {
@@ -7538,11 +7892,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "2W8",
-            "Reichweite": "15/30/60",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 2
+                "Schaden": "2W8",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 2
             }
         },
         "Blasrohr": {
@@ -7556,11 +7910,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W4",
             "eigenschaften": {
-            "Schaden": "W4−2",
-            "Reichweite": "3/6/12",
-            "FR": "-",
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "W4−2",
+                "Reichweite": "3/6/12",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Kompositbogen": {
@@ -7574,11 +7928,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "Stä+W6",
-            "Reichweite": "12/24/48",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "Stä+W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Langbogen": {
@@ -7592,11 +7946,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W8",
             "eigenschaften": {
-            "Schaden": "2W6",
-            "Reichweite": "15/30/60",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": 1
+                "Schaden": "2W6",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": 1
             }
         },
         "Donnerbüchse": {
@@ -7610,11 +7964,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "1-3W6",
-            "Reichweite": "10/20/40",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "1-3W6",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Muskete": {
@@ -7628,11 +7982,11 @@
             "typ": "Fernkampf",
             "mindeststaerke": "W6",
             "eigenschaften": {
-            "Schaden": "2W8",
-            "Reichweite": "10/20/40",
-            "FR": 1,
-            "Schuss": "-",
-            "PB": "-"
+                "Schaden": "2W8",
+                "Reichweite": "10/20/40",
+                "FR": 1,
+                "Schuss": "-",
+                "PB": "-"
             }
         },
         "Armbrust, Leichte Repetier-": {
@@ -8016,8 +8370,8 @@
             "setting": "mittelalterlich",
             "beschreibung": "Ein dünnes Stäbchen, das eine Flamme erzeugt, wenn es hart gegen eine Oberfläche geschlagen wird",
             "aktiv": true
-        }      
-    },  
+        }
+    },
     "settingregeln": {
         "strahlschablone": false,
         "große_hoehen": false,

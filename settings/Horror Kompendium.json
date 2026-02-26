@@ -34,8 +34,13 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Flug"],
-                "auto_handicaps": ["Schwur", "Auffällig"],
+                "auto_talente": [
+                    "Flug"
+                ],
+                "auto_handicaps": [
+                    "Schwur",
+                    "Auffällig"
+                ],
                 "spezielle_effekte": {
                     "fliegen": true,
                     "goettliche_waffe": true,
@@ -73,8 +78,13 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Infrarotsicht"],
-                "auto_handicaps": ["Böse", "Schwäche (Geweihtes Wasser)"],
+                "auto_talente": [
+                    "Infrarotsicht"
+                ],
+                "auto_handicaps": [
+                    "Böse",
+                    "Schwäche (Geweihtes Wasser)"
+                ],
                 "spezielle_effekte": {
                     "infrarotsicht": true,
                     "natuerliche_waffen": true,
@@ -113,8 +123,14 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Zäh"],
-                "auto_handicaps": ["Hässlich", "Langsam", "Schwäche (Feuer)"],
+                "auto_talente": [
+                    "Zäh"
+                ],
+                "auto_handicaps": [
+                    "Hässlich",
+                    "Langsam",
+                    "Schwäche (Feuer)"
+                ],
                 "spezielle_effekte": {
                     "untot": true,
                     "furchteinflössend": true,
@@ -158,8 +174,17 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Zäh", "Kräftig"],
-                "auto_handicaps": ["Hässlich", "Außenseiter", "Schwerfällig", "Schwäche (Feuer)", "Schwäche (Elektrizität)"],
+                "auto_talente": [
+                    "Zäh",
+                    "Kräftig"
+                ],
+                "auto_handicaps": [
+                    "Hässlich",
+                    "Außenseiter",
+                    "Schwerfällig",
+                    "Schwäche (Feuer)",
+                    "Schwäche (Elektrizität)"
+                ],
                 "spezielle_effekte": {
                     "untot": true,
                     "panzerung_2": true,
@@ -199,8 +224,12 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Flug"],
-                "auto_handicaps": ["Schwäche (Salz)"],
+                "auto_talente": [
+                    "Flug"
+                ],
+                "auto_handicaps": [
+                    "Schwäche (Salz)"
+                ],
                 "spezielle_effekte": {
                     "aetherisch": true,
                     "unsichtbar": true,
@@ -237,8 +266,13 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Zäh"],
-                "auto_handicaps": ["Schwur", "Hässlich"],
+                "auto_talente": [
+                    "Zäh"
+                ],
+                "auto_handicaps": [
+                    "Schwur",
+                    "Hässlich"
+                ],
                 "spezielle_effekte": {
                     "untot": true,
                     "regeneration": true,
@@ -282,8 +316,16 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": 2,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Nachtsicht", "Zäh"],
-                "auto_handicaps": ["Schwäche (Sonnenlicht)", "Schwäche (Pfahl)", "Abhängigkeit (Blut)", "Schwäche (Geweihtes Wasser)"],
+                "auto_talente": [
+                    "Nachtsicht",
+                    "Zäh"
+                ],
+                "auto_handicaps": [
+                    "Schwäche (Sonnenlicht)",
+                    "Schwäche (Pfahl)",
+                    "Abhängigkeit (Blut)",
+                    "Schwäche (Geweihtes Wasser)"
+                ],
                 "spezielle_effekte": {
                     "untot": true,
                     "nachtsicht": true,
@@ -324,8 +366,14 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": ["Gestaltwandel", "Infrarotsicht"],
-                "auto_handicaps": ["Blutdurst", "Schwäche (Silber)"],
+                "auto_talente": [
+                    "Gestaltwandel",
+                    "Infrarotsicht"
+                ],
+                "auto_handicaps": [
+                    "Blutdurst",
+                    "Schwäche (Silber)"
+                ],
                 "spezielle_effekte": {
                     "gestaltwandel": true,
                     "infrarotsicht_tierform": true,
@@ -3618,6 +3666,24 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Die Geschicklichkeit des Charakters ist auf W8 begrenzt.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Klein": {
+            "name": "Klein",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Dieser Abenteurer ist ziemlich dürr, klein oder beides. Seine Größe (siehe Seite 103) wird um –1 verringert, wodurch auch seine Robustheit sinkt. Die Größe kann nicht unter –1 sinken, doch der Abzug auf Robustheit ist kumulativ. Ein kleiner Halbling hat beispielsweise Größe –1, verliert aber einen zusätzlichen Punkt Robustheit.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Kränklich": {
+            "name": "Kränklich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
