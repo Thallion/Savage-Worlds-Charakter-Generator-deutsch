@@ -26,6 +26,7 @@ from functions.volk_funktionen import (
     waehle_freies_talent, waehle_freies_attribut, waehle_freie_fertigkeit,
     reset_volk_auswahlen, initialisiere_voelker_system, get_voelker_status_info,
     waehle_halbelf_talent, waehle_halbelf_attribut,  # NEUE: Halbelf-spezifische Funktionen
+    waehle_mensch_talent, waehle_mensch_fertigkeitspunkte,  # NEUE: Menschen-Vielseitig-Funktionen
     DEFAULT_TALENT_TEXT, DEFAULT_ATTRIBUT_TEXT, DEFAULT_FERTIGKEIT_TEXT,
     NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT
 )
@@ -284,7 +285,15 @@ class VoelkerWidget(MDBoxLayout):
             sections_added += 1
             Logger.debug(f"Halbelf ENTWEDER/ODER Sektion erstellt für '{self.selected_volk_name}'")
             return  # Früher Return für Halbelf - keine weiteren Sektionen
-        
+
+        # NEUE: Menschen-Vielseitig ENTWEDER/ODER Sektion
+        if zusatzelemente.get('menschen_vielseitig', False):
+            vielseitig_section = self._create_menschen_vielseitig_section()
+            zusatzelemente_container.add_widget(vielseitig_section)
+            sections_added += 1
+            Logger.debug(f"Menschen Vielseitig Sektion erstellt für '{self.selected_volk_name}'")
+            return  # Früher Return - spezielle Sektion
+
         # Freie Talente Sektion (inkl. Goblin)
         if zusatzelemente.get('freie_talente', False):
             # ERWEITERT: Volk-spezifische Titel
@@ -946,6 +955,195 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Erstellen der Halbelf ENTWEDER/ODER Sektion: {e}")
             # Fallback: Leere Card zurückgeben
             return MDCard(size_hint_x=None, width=dp(800), size_hint_y=None, height=dp(50), pos_hint={"x": 0})
+
+    def _create_menschen_vielseitig_section(self):
+        """
+        Erstellt spezielle Menschen-Vielseitig ENTWEDER/ODER Sektion.
+        Mensch kann ENTWEDER freies Talent ODER +2 Fertigkeitspunkte wählen.
+        """
+        try:
+            from functions.volk_funktionen import (
+                _get_menschen_freies_talent, _get_mensch_fertigkeitspunkte_gewaehlt
+            )
+
+            charakter = self.controller.charakter
+
+            # Aktuelle Auswahl prüfen
+            current_wahl = self.voelker_auswahlen.get(self.selected_volk_name, {}).get('vielseitig_wahl', None)
+            hat_talent = current_wahl and current_wahl.startswith('Talent: ')
+            hat_fertigkeitspunkte = current_wahl == '+2 Fertigkeitspunkte'
+
+            # Hauptcontainer
+            section_card = MDCard(
+                size_hint_x=None,
+                width=dp(800),
+                size_hint_y=None,
+                height=dp(230) if current_wahl else dp(180),
+                padding=dp(25),
+                elevation=3,
+                radius=[12],
+                md_bg_color=self.theme_cls.surfaceContainerHighColor,
+                style="elevated",
+                pos_hint={"x": 0}
+            )
+
+            section_content = MDBoxLayout(
+                orientation='vertical',
+                size_hint_y=None,
+                height=dp(180) if current_wahl else dp(130),
+                spacing=dp(15)
+            )
+
+            # Titel
+            titel_label = MDLabel(
+                text="Vielseitig (ENTWEDER freies Talent ODER +2 Fertigkeitspunkte):",
+                font_style="Body",
+                theme_text_color="Primary",
+                size_hint_y=None,
+                height=dp(40),
+                halign='left',
+                valign='top',
+                bold=True
+            )
+            titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
+            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
+
+            # Zwei Buttons
+            buttons_row = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(55),
+                spacing=dp(20)
+            )
+
+            # Button 1: Freies Talent
+            talent_button = MDButton(
+                style="filled" if hat_talent else "outlined",
+                size_hint_x=0.5,
+                size_hint_y=None,
+                height=dp(48),
+                on_release=lambda x: self._mensch_vielseitig_waehle_talent()
+            )
+            talent_button.add_widget(MDButtonText(text="Freies Talent"))
+
+            # Button 2: +2 Fertigkeitspunkte
+            fp_button = MDButton(
+                style="filled" if hat_fertigkeitspunkte else "outlined",
+                size_hint_x=0.5,
+                size_hint_y=None,
+                height=dp(48),
+                on_release=lambda x: self._mensch_vielseitig_waehle_fertigkeitspunkte()
+            )
+            fp_button.add_widget(MDButtonText(text="+2 Fertigkeitspunkte"))
+
+            buttons_row.add_widget(talent_button)
+            buttons_row.add_widget(fp_button)
+
+            section_content.add_widget(titel_label)
+            section_content.add_widget(buttons_row)
+
+            # Aktuelle Auswahl anzeigen
+            if current_wahl:
+                auswahl_label = MDLabel(
+                    text=f"Gewählt: {current_wahl}",
+                    font_style="Body",
+                    theme_text_color="Primary",
+                    size_hint_y=None,
+                    height=dp(30),
+                    halign='left',
+                    valign='center',
+                    bold=True
+                )
+                section_content.add_widget(auswahl_label)
+
+            section_card.add_widget(section_content)
+
+            Logger.debug(f"Menschen Vielseitig Sektion erstellt (Auswahl: {current_wahl})")
+            return section_card
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der Menschen-Vielseitig Sektion: {e}")
+            return MDCard(size_hint_x=None, width=dp(800), size_hint_y=None, height=dp(50), pos_hint={"x": 0})
+
+    def _mensch_vielseitig_waehle_talent(self):
+        """Menschen-Vielseitig: Wählt freies Talent (ENTWEDER-Option)."""
+        try:
+            Logger.debug("Mensch Vielseitig: Freies Talent-Option ausgewählt")
+
+            charakter = self.controller.charakter
+            freie_talente = get_freie_talente(charakter)
+
+            if not freie_talente or freie_talente == [NO_TALENT_AVAILABLE_TEXT]:
+                Logger.warning("Keine freien Talente verfügbar")
+                return
+
+            # Dropdown-Menü für Talent-Auswahl erstellen
+            menu_items = []
+            for talent in freie_talente:
+                menu_items.append({
+                    "text": talent,
+                    "on_release": lambda t=talent: self._mensch_vielseitig_talent_gewaehlt(t)
+                })
+
+            self._talent_menu = MDDropdownMenu(
+                caller=self.ids.zusatzelemente_container,
+                items=menu_items,
+                width_mult=4,
+                max_height=dp(300)
+            )
+            self._talent_menu.open()
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Mensch-Vielseitig-Talent-Auswahl: {e}")
+
+    def _mensch_vielseitig_talent_gewaehlt(self, talent_name):
+        """Callback wenn Talent aus Dropdown gewählt wird."""
+        try:
+            if hasattr(self, '_talent_menu'):
+                self._talent_menu.dismiss()
+
+            charakter = self.controller.charakter
+            success = waehle_mensch_talent(charakter, self.selected_volk_name, talent_name)
+
+            if success:
+                # Auswahl im Dictionary speichern
+                if self.selected_volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[self.selected_volk_name] = {}
+                self.voelker_auswahlen[self.selected_volk_name]['vielseitig_wahl'] = f"Talent: {talent_name}"
+
+                # UI aktualisieren
+                self._update_zusatzelemente()
+
+                # Controller informieren
+                if hasattr(self.controller, 'dispatch'):
+                    self.controller.dispatch('on_charakter_updated')
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Mensch-Vielseitig-Talent-Callback: {e}")
+
+    def _mensch_vielseitig_waehle_fertigkeitspunkte(self):
+        """Menschen-Vielseitig: Wählt +2 Fertigkeitspunkte (ODER-Option)."""
+        try:
+            Logger.debug("Mensch Vielseitig: +2 Fertigkeitspunkte-Option ausgewählt")
+
+            charakter = self.controller.charakter
+            success = waehle_mensch_fertigkeitspunkte(charakter, self.selected_volk_name)
+
+            if success:
+                # Auswahl im Dictionary speichern
+                if self.selected_volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[self.selected_volk_name] = {}
+                self.voelker_auswahlen[self.selected_volk_name]['vielseitig_wahl'] = '+2 Fertigkeitspunkte'
+
+                # UI aktualisieren
+                self._update_zusatzelemente()
+
+                # Controller informieren
+                if hasattr(self.controller, 'dispatch'):
+                    self.controller.dispatch('on_charakter_updated')
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Mensch-Vielseitig-Fertigkeitspunkte-Callback: {e}")
 
     def _halbelf_waehle_talent(self):
         """NEUE: Halbelf wählt freies Talent (ENTWEDER-Option)."""

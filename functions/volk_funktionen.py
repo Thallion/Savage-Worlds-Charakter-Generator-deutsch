@@ -751,7 +751,8 @@ def get_volk_zusatzelemente(charakter, volk_name):
             'freie_attribute': False,
             'freie_fertigkeiten': False,
             'attribut_optionen': [],
-            'halbelf_entweder_oder': False
+            'halbelf_entweder_oder': False,
+            'menschen_vielseitig': False
         }
         
         # Prüfen ob Volk existiert
@@ -770,6 +771,12 @@ def get_volk_zusatzelemente(charakter, volk_name):
             Logger.debug(f"Halbelf ENTWEDER/ODER Wahlmöglichkeit verfügbar für '{volk_name}'")
             return zusatzelemente  # Früher Return für Halbelf
         
+        # ERWEITERT: Menschen-Vielseitig (freies Talent ODER 2 Fertigkeitspunkte)
+        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent_oder_fertigkeitspunkte'):
+            zusatzelemente['menschen_vielseitig'] = True
+            Logger.debug(f"Menschen Vielseitig Wahlmöglichkeit verfügbar für '{volk_name}'")
+            return zusatzelemente  # Früher Return - spezielle Sektion
+
         # ERWEITERT: Goblin-spezifische Debug-Ausgabe
         if volk_name.lower() in ["goblin", "goblins"]:
             Logger.debug(f"🔍 GOBLIN SPEZIAL-CHECK für '{volk_name}'")
@@ -811,11 +818,12 @@ def get_volk_zusatzelemente(charakter, volk_name):
     except Exception as e:
         Logger.error(f"Fehler beim Abrufen der Zusatzelemente für '{volk_name}': {e}")
         return {
-            'freie_talente': False, 
-            'freie_attribute': False, 
-            'freie_fertigkeiten': False, 
+            'freie_talente': False,
+            'freie_attribute': False,
+            'freie_fertigkeiten': False,
             'attribut_optionen': [],
-            'halbelf_entweder_oder': False
+            'halbelf_entweder_oder': False,
+            'menschen_vielseitig': False
         }
 
 
@@ -896,7 +904,10 @@ def initialisiere_voelker_system(charakter):
             
         if not hasattr(charakter, '_menschen_freies_talent'):
             charakter._menschen_freies_talent = None
-            
+
+        if not hasattr(charakter, '_mensch_fertigkeitspunkte_gewaehlt'):
+            charakter._mensch_fertigkeitspunkte_gewaehlt = False
+
         # NEUE LOGIK: Halbelf-spezifisches Tracking initialisieren
         if not hasattr(charakter, '_halbelf_freies_talent'):
             charakter._halbelf_freies_talent = None
@@ -1458,3 +1469,113 @@ def _force_trigger_ui_refresh(app):
         
     except Exception as e:
         Logger.warning(f"UI-Refresh fehlgeschlagen: {e}")
+
+
+# NEUE FUNKTIONEN für Menschen-Vielseitig (freies Talent ODER 2 Fertigkeitspunkte)
+
+def waehle_mensch_talent(charakter, volk_name, talent_name):
+    """
+    Wählt ein freies Talent für einen Menschen aus (Vielseitig ENTWEDER-Teil).
+    Setzt ggf. vorherige Fertigkeitspunkte-Wahl zurück.
+
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks
+        talent_name: Name des zu wählenden Talents
+
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.debug(f"Mensch Vielseitig: Wähle freies Talent '{talent_name}' für '{volk_name}'")
+
+        # Fertigkeitspunkte-Wahl zurücksetzen falls vorhanden
+        if _get_mensch_fertigkeitspunkte_gewaehlt(charakter):
+            Logger.info("Mensch Vielseitig: Setze Fertigkeitspunkte-Wahl zurück (ENTWEDER/ODER)")
+            _reset_mensch_fertigkeitspunkte(charakter)
+
+        # Standard freies Talent auswählen
+        success = waehle_freies_talent(charakter, volk_name, talent_name)
+
+        if success:
+            Logger.info(f"Mensch Vielseitig: Talent '{talent_name}' gewählt für '{volk_name}'")
+
+        return success
+
+    except Exception as e:
+        Logger.error(f"Fehler bei Mensch-Vielseitig-Talent-Auswahl: {e}", exc_info=True)
+        return False
+
+
+def waehle_mensch_fertigkeitspunkte(charakter, volk_name):
+    """
+    Wählt +2 Fertigkeitspunkte für einen Menschen aus (Vielseitig ODER-Teil).
+    Setzt ggf. vorherige Talent-Wahl zurück.
+
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks
+
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.debug(f"Mensch Vielseitig: Wähle +2 Fertigkeitspunkte für '{volk_name}'")
+
+        # Bereits gewählt?
+        if _get_mensch_fertigkeitspunkte_gewaehlt(charakter):
+            Logger.info("Mensch Vielseitig: Fertigkeitspunkte bereits gewählt")
+            return True
+
+        # Talent-Wahl zurücksetzen falls vorhanden
+        aktuelles_talent = _get_menschen_freies_talent(charakter)
+        if aktuelles_talent:
+            Logger.info(f"Mensch Vielseitig: Setze Talent '{aktuelles_talent}' zurück (ENTWEDER/ODER)")
+            _reset_menschen_freies_talent(charakter)
+
+        # +2 Fertigkeitspunkte gewähren
+        if hasattr(charakter, 'fertigkeitspunkte_gesamt'):
+            charakter.fertigkeitspunkte_gesamt += 2
+            Logger.debug(f"Fertigkeitspunkte erhöht auf {charakter.fertigkeitspunkte_gesamt}")
+
+        # Tracking setzen
+        _set_mensch_fertigkeitspunkte_gewaehlt(charakter, True)
+
+        Logger.info(f"Mensch Vielseitig: +2 Fertigkeitspunkte gewählt für '{volk_name}'")
+        return True
+
+    except Exception as e:
+        Logger.error(f"Fehler bei Mensch-Vielseitig-Fertigkeitspunkte-Auswahl: {e}", exc_info=True)
+        return False
+
+
+def _get_mensch_fertigkeitspunkte_gewaehlt(charakter):
+    """Gibt zurück ob der Mensch Fertigkeitspunkte statt Talent gewählt hat."""
+    try:
+        if hasattr(charakter, '_mensch_fertigkeitspunkte_gewaehlt'):
+            return charakter._mensch_fertigkeitspunkte_gewaehlt
+        return False
+    except Exception:
+        return False
+
+
+def _set_mensch_fertigkeitspunkte_gewaehlt(charakter, gewaehlt):
+    """Setzt den Tracking-Status für Mensch-Fertigkeitspunkte."""
+    try:
+        charakter._mensch_fertigkeitspunkte_gewaehlt = gewaehlt
+        Logger.debug(f"Mensch Fertigkeitspunkte-Wahl auf {gewaehlt} gesetzt")
+    except Exception as e:
+        Logger.error(f"Fehler beim Setzen der Mensch-Fertigkeitspunkte-Wahl: {e}")
+
+
+def _reset_mensch_fertigkeitspunkte(charakter):
+    """Setzt die Mensch-Fertigkeitspunkte-Wahl zurück (-2 Punkte)."""
+    try:
+        if _get_mensch_fertigkeitspunkte_gewaehlt(charakter):
+            if hasattr(charakter, 'fertigkeitspunkte_gesamt'):
+                charakter.fertigkeitspunkte_gesamt -= 2
+                Logger.debug(f"Fertigkeitspunkte zurückgesetzt auf {charakter.fertigkeitspunkte_gesamt}")
+            _set_mensch_fertigkeitspunkte_gewaehlt(charakter, False)
+            Logger.info("Mensch Fertigkeitspunkte-Wahl zurückgesetzt")
+    except Exception as e:
+        Logger.error(f"Fehler beim Zurücksetzen der Mensch-Fertigkeitspunkte: {e}")
