@@ -110,21 +110,44 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Post-Initialisierung: {e}")
 
     def _init_mobile_modus_switch(self):
-        """Initialisiert den Mobiler-Modus-Switch aus der Config"""
+        """Initialisiert die UI-Switches aus der Config"""
         try:
             config_service = service_container.get_config_service()
             if not config_service:
                 return
 
+            # Mobiler Modus Switch
             mobile_modus = config_service.get('mobile_modus', False)
             switch = self.ids.get('mobile_modus_switch')
             if switch:
-                # Temporär Event-Handler deaktivieren um Endlosschleife zu vermeiden
                 switch.unbind(on_active=None)
                 switch.active = mobile_modus
                 Logger.debug(f"Mobiler Modus Switch initialisiert: {mobile_modus}")
+
+            # Logger-Leiste Switch
+            show_logger = config_service.get('show_logger', True)
+            logger_switch = self.ids.get('show_logger_switch')
+            if logger_switch:
+                logger_switch.unbind(on_active=None)
+                logger_switch.active = show_logger
+                Logger.debug(f"Logger Switch initialisiert: {show_logger}")
         except Exception as e:
-            Logger.error(f"Fehler beim Initialisieren des Mobile-Modus-Switch: {e}")
+            Logger.error(f"Fehler beim Initialisieren der UI-Switches: {e}")
+
+    def toggle_logger(self, active):
+        """Wechselt die Logger-Leiste Sichtbarkeit und speichert die Einstellung"""
+        try:
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('show_logger', active)
+
+            app = MDApp.get_running_app()
+            if app and hasattr(app, 'set_logger_visible'):
+                app.set_logger_visible(active)
+
+            Logger.info(f"Logger-Leiste {'angezeigt' if active else 'ausgeblendet'}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Umschalten der Logger-Leiste: {e}")
 
     def toggle_mobile_modus(self, active):
         """Wechselt den mobilen Modus und speichert die Einstellung"""

@@ -8,7 +8,8 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": false,
+  "mobile_modus": true,
+  "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
   "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
@@ -22,5 +23,5 @@
   "max_backups": 5,
   "last_setting": "Hellfrost",
   "config_version": "1.0",
-  "last_updated": "2026-02-28T09:17:51.714076"
+  "last_updated": "2026-02-28T12:53:20.463216"
 }

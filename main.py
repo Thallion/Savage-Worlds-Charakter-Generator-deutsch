@@ -829,8 +829,35 @@ class SW_Charakter_GeneratorApp(MDApp):
                     if Window.width < dp(800):
                         self.set_navigation_mode(True)
 
+                # Logger-Sichtbarkeit aus Config laden
+                show_logger = config_service.get('show_logger', True)
+                self.set_logger_visible(show_logger)
+
         except Exception as e:
             Logger.error(f"Fehler beim Laden des initialen Navigationsmodus: {str(e)}")
+
+    def set_logger_visible(self, visible: bool):
+        """Steuert die Sichtbarkeit der Logger-Box (Logger-Handler bleibt aktiv)"""
+        try:
+            root = self.root
+            if not root:
+                return
+            logger_container = root.ids.get('logger_container')
+            if not logger_container:
+                return
+
+            if visible:
+                logger_container.height = dp(60)
+                logger_container.opacity = 1
+                logger_container.disabled = False
+            else:
+                logger_container.height = 0
+                logger_container.opacity = 0
+                logger_container.disabled = True
+
+            Logger.debug(f"Logger-Box Sichtbarkeit: {visible}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Setzen der Logger-Sichtbarkeit: {str(e)}")
 
     def _on_window_resize(self, instance, width, height):
         """Automatischer Moduswechsel basierend auf Fensterbreite"""

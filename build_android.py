@@ -13,6 +13,33 @@ import subprocess
 from pathlib import Path
 import time
 
+def set_android_config_defaults():
+    """Setzt Android-spezifische Config-Defaults (mobile_modus=true, show_logger=false)"""
+    project_dir = Path.cwd()
+    config_dir = project_dir / "config"
+    config_dir.mkdir(exist_ok=True)
+    config_file = config_dir / "app_config.json"
+
+    # Bestehende Config laden oder neue erstellen
+    import json
+    config_data = {}
+    if config_file.exists():
+        try:
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config_data = json.load(f)
+        except Exception as e:
+            print(f"⚠️  Bestehende Config konnte nicht geladen werden: {e}")
+
+    # Android-Defaults setzen
+    config_data['mobile_modus'] = True
+    config_data['show_logger'] = False
+
+    with open(config_file, 'w', encoding='utf-8') as f:
+        json.dump(config_data, f, indent=2, ensure_ascii=False)
+
+    print(f"📱 Android-Defaults gesetzt: mobile_modus=true, show_logger=false")
+
+
 def setup_dist_structure():
     """Erstellt die dist-Ordnerstruktur"""
     project_dir = Path.cwd()
@@ -190,6 +217,9 @@ def main():
     
     start_time = time.time()
     
+    # Android-Config-Defaults setzen
+    set_android_config_defaults()
+
     # Setup dist-Struktur
     dist_dir = setup_dist_structure()
     
