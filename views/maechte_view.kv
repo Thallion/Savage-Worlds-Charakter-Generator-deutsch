@@ -14,22 +14,32 @@
 # Rückwärtskompatibilität: MaechteWidget als Alias
 <MaechteWidget@KraefteWidget>:
     
-    # Suchfeld separat außerhalb des ScrollView für besseren Keyboard-Fokus
+    # Suchfeld mit Chevron-Button zum Ein-/Ausklappen der Filter
     MDBoxLayout:
         orientation: 'horizontal'
         size_hint_y: None
         height: dp(100)
         padding: [20, 10]
         spacing: 10
-        
+
         MDTextField:
             id: search_input
             hint_text: 'Suche...'
             size_hint_x: 1
             on_text: root.filter_maechte()
-    
-    # Toggle-Buttons in ScrollView für Android-Kompatibilität  
+
+        MDIconButton:
+            id: filter_chevron
+            icon: "chevron-down" if root.is_filter_expanded else "chevron-right"
+            size_hint: None, None
+            width: dp(40)
+            height: dp(40)
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_filter_panel()
+
+    # Toggle-Buttons in ScrollView für Android-Kompatibilität
     MDScrollView:
+        id: filter_container
         size_hint_y: None
         height: dp(120)
         do_scroll_x: False
@@ -63,7 +73,7 @@
                 size: dp(56), dp(56)
                 pos_hint: {"center_y": 0.5}
                 on_release: root.update_sort_option('Rang')
-                
+
             # Button für "Nur ausgewählte" (Android Checkbox Workaround)
             MDButton:
                 id: only_selected_button
@@ -73,7 +83,7 @@
                 height: dp(56)
                 pos_hint: {"center_y": 0.5}
                 on_release: root.toggle_only_selected_items()
-                
+
                 MDButtonText:
                     text: "Nur ausgewählte" if not root.only_selected_items else "Alle"
                     theme_text_color: "Primary" if not root.only_selected_items else "Custom"
