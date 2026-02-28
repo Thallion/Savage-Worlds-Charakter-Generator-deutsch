@@ -37,6 +37,7 @@ from kivymd.uix.tab import (
     MDTabsItemText,
     MDTabsCarousel,
 )
+from kivymd.uix.label import MDLabel, MDIcon
 
 from controllers.charakter_controller import CharakterController
 from models.charakter import Charakter
@@ -123,6 +124,11 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Service Container mit dem finalen Controller aktualisieren
         service_container.initialize(self.controller)
         
+        # NavigationRail-Items und Modus-Tracking
+        self.rail_items = []
+        self._mobile_modus_active = False
+        self._mobile_modus_override = None  # None = automatisch, True/False = manuell
+
         # Deine Icons + Tab-Texte + zugehörige Screens
         # NEU: CharakterVerwaltung-Tab hinzugefügt
         self.tab_definitions = [
@@ -353,6 +359,9 @@ class SW_Charakter_GeneratorApp(MDApp):
         else:
             Logger.warning("Logger-Widget nicht gefunden")
 
+        # Fenster-Resize-Event für automatischen Moduswechsel
+        Window.bind(on_resize=self._on_window_resize)
+
         # KORRIGIERT: Tabs und Screens mit mehr Verzögerung für vollständige UI-Initialisierung
         Clock.schedule_once(lambda dt: self.build_tabs_and_screens_immediate(), 0.5)
 
@@ -482,7 +491,10 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Clock.schedule_once(lambda dt: self._activate_first_tab(screen_manager), 0.1)
 
             Logger.info(f"=== {len(self.tab_definitions)} Tabs und Screens erfolgreich erstellt ===")
-            
+
+            # NavigationRail aufbauen und initialen Modus setzen
+            self.build_navigation_rail()
+            self._apply_initial_navigation_mode()
 
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Tabs und Screens: {str(e)}", exc_info=True)
@@ -616,6 +628,224 @@ class SW_Charakter_GeneratorApp(MDApp):
                 
         except Exception as e:
             Logger.error(f"Fehler beim Screen-Update: {str(e)}")
+
+    def build_navigation_rail(self):
+        """Erstellt scrollbare NavigationRail-Items für alle Tab-Definitionen"""
+        try:
+            root = self.root
+            if not root:
+                return
+
+            nav_rail_box = root.ids.get('nav_rail_box')
+            if not nav_rail_box:
+                Logger.warning("nav_rail_box nicht im Layout gefunden")
+                return
+
+            nav_rail_box.clear_widgets()
+            self.rail_items = []
+            self._active_rail_index = 0
+
+            for i, (icon_str, tab_text, _) in enumerate(self.tab_definitions):
+                # Vertikales Item: Icon + Label
+                item = MDBoxLayout(
+                    orientation='vertical',
+                    size_hint_y=None,
+                    height=dp(64),
+                    padding=[dp(4), dp(8), dp(4), dp(4)],
+                    spacing=dp(2),
+                )
+                item._rail_index = i
+
+                icon = MDIcon(
+                    icon=icon_str,
+                    halign='center',
+                    pos_hint={'center_x': 0.5},
+                    size_hint_y=None,
+                    height=dp(28),
+                )
+
+                label = MDLabel(
+                    text=tab_text,
+                    halign='center',
+                    font_style='Label',
+                    role='small',
+                    size_hint_y=None,
+                    height=dp(20),
+                )
+
+                item.add_widget(icon)
+                item.add_widget(label)
+
+                # Touch-Event binden
+                item.bind(on_touch_down=self._on_rail_item_touch)
+
+                nav_rail_box.add_widget(item)
+                self.rail_items.append(item)
+
+            Logger.info(f"NavigationRail mit {len(self.rail_items)} Items erstellt")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der NavigationRail: {str(e)}", exc_info=True)
+
+    def _on_rail_item_touch(self, item, touch):
+        """Callback wenn ein Rail-Item berührt wird"""
+        if not item.collide_point(*touch.pos):
+            return False
+
+        try:
+            item_index = item._rail_index
+
+            # Screen wechseln
+            root = self.root
+            if not root:
+                return False
+
+            screen_manager = root.ids.get('tabs_carousel')
+            if not screen_manager:
+                return False
+
+            if 0 <= item_index < len(self.tab_definitions):
+                tab_text = self.tab_definitions[item_index][1]
+                clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+                screen_name = f"screen_{item_index}_{clean_name}"
+
+                try:
+                    screen_manager.get_screen(screen_name)
+                    screen_manager.current = screen_name
+                except Exception:
+                    Logger.warning(f"Screen '{screen_name}' nicht gefunden")
+
+                # Aktives Item visuell hervorheben
+                self._set_active_rail_item(item_index)
+                self.update_active_screen(item_index)
+                Logger.info(f"NavigationRail-Wechsel zu: {tab_text}")
+
+            return True
+
+        except Exception as e:
+            Logger.error(f"Fehler beim NavigationRail-Wechsel: {str(e)}")
+            return False
+
+    def _set_active_rail_item(self, active_index):
+        """Hebt das aktive Rail-Item visuell hervor"""
+        self._active_rail_index = active_index
+        for i, item in enumerate(self.rail_items):
+            if i == active_index:
+                item.md_bg_color = self.theme_cls.secondaryContainerColor
+            else:
+                item.md_bg_color = (0, 0, 0, 0)
+
+    def set_navigation_mode(self, mobile):
+        """
+        Wechselt zwischen Desktop-Tabs und mobiler NavigationRail
+
+        Args:
+            mobile (bool): True für NavigationRail, False für Tabs
+        """
+        try:
+            if self._mobile_modus_active == mobile:
+                return
+
+            root = self.root
+            if not root:
+                return
+
+            tabs_container = root.ids.get('tabs_container')
+            nav_rail_container = root.ids.get('nav_rail_container')
+            tab_content_box = root.ids.get('tab_content_box')
+            screen_manager = root.ids.get('tabs_carousel')
+
+            if not all([tabs_container, nav_rail_container, tab_content_box]):
+                Logger.warning("Layout-Elemente für Moduswechsel nicht verfügbar")
+                return
+
+            # Aktuellen Screen-Index ermitteln
+            current_index = 0
+            if screen_manager and screen_manager.current:
+                for i, (_, tab_text, _) in enumerate(self.tab_definitions):
+                    clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+                    if screen_manager.current == f"screen_{i}_{clean_name}":
+                        current_index = i
+                        break
+
+            if mobile:
+                # Tabs verstecken
+                tabs_container.height = 0
+                tabs_container.opacity = 0
+                tabs_container.disabled = True
+
+                # NavigationRail zeigen
+                nav_rail_container.width = dp(100)
+                nav_rail_container.opacity = 1
+                nav_rail_container.disabled = False
+
+                # Content-Padding reduzieren
+                tab_content_box.padding = [dp(8), 0, dp(8), dp(8)]
+
+                # Aktives Rail-Item hervorheben
+                if current_index < len(self.rail_items):
+                    self._set_active_rail_item(current_index)
+
+                Logger.info("Mobiler Modus aktiviert (NavigationRail)")
+            else:
+                # NavigationRail verstecken
+                nav_rail_container.width = 0
+                nav_rail_container.opacity = 0
+                nav_rail_container.disabled = True
+
+                # Tabs zeigen
+                tabs_container.height = dp(60)
+                tabs_container.opacity = 1
+                tabs_container.disabled = False
+
+                # Content-Padding wiederherstellen
+                tab_content_box.padding = [dp(30), 0, dp(30), dp(30)]
+
+                # Aktiven Tab setzen (ohne erneuten Screen-Wechsel)
+                if current_index < len(self.tab_items):
+                    self.tab_items[current_index].active = True
+
+                Logger.info("Desktop-Modus aktiviert (Tabs)")
+
+            self._mobile_modus_active = mobile
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Moduswechsel: {str(e)}", exc_info=True)
+
+    def _apply_initial_navigation_mode(self):
+        """Wendet den initialen Navigationsmodus basierend auf Config an"""
+        try:
+            from services.service_container import get_config_service
+            config_service = get_config_service()
+
+            if config_service:
+                mobile_modus = config_service.get('mobile_modus', False)
+                if mobile_modus:
+                    self._mobile_modus_override = True
+                    self.set_navigation_mode(True)
+                    Logger.info("Mobiler Modus aus Config geladen")
+                else:
+                    # Automatische Erkennung basierend auf Fensterbreite
+                    if Window.width < dp(800):
+                        self.set_navigation_mode(True)
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden des initialen Navigationsmodus: {str(e)}")
+
+    def _on_window_resize(self, instance, width, height):
+        """Automatischer Moduswechsel basierend auf Fensterbreite"""
+        try:
+            # Bei manuellem Override nicht automatisch wechseln
+            if self._mobile_modus_override is not None:
+                return
+
+            if width < dp(800):
+                self.set_navigation_mode(True)
+            else:
+                self.set_navigation_mode(False)
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Fenster-Resize-Handler: {str(e)}")
 
     def get_screen(self, screen_name):
         """Hilfsmethode zum Abrufen von Screen-Objekten"""

@@ -85,6 +85,26 @@
                             padding: dp(8)
                             pos_hint: {"center_y": .5}
 
+                    MDDivider:
+
+                    # Mobiler Modus Toggle
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(16)
+
+                        MDLabel:
+                            text: 'Mobiler Modus (NavigationRail):'
+                            size_hint: None, None
+                            size: dp(250), dp(40)
+                            pos_hint: {"center_y": .5}
+
+                        MDSwitch:
+                            id: mobile_modus_switch
+                            pos_hint: {"center_y": .5}
+                            on_active: root.toggle_mobile_modus(self.active)
+
             # Charakter-Einstellungen Card
             MDCard:
                 style: "elevated"

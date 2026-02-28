@@ -32,6 +32,7 @@ class AppConfig:
     window_maximized: bool = True
     window_width: int = 1200
     window_height: int = 800
+    mobile_modus: bool = False
     auto_save_enabled: bool = True
     auto_save_interval: int = 300  # Sekunden
     

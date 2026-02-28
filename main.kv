@@ -89,6 +89,7 @@ MDScreen:
 
         # ----------------- (1) OBERE MENÜLEISTE (TABS) -----------------
         MDBoxLayout:
+            id: tabs_container
             orientation: 'vertical'
             size_hint_y: None
             height: dp(60)  # Höhe der Tabbar
@@ -98,41 +99,74 @@ MDScreen:
                 id: tabs_bar
                 # In "on_start" füllen wir hier MDTabsItem rein.
 
-        # ----------------- (2) POINTBAR -------------------
+        # ----------------- (2) HORIZONTALES LAYOUT: NAV-RAIL + CONTENT -----------------
         MDBoxLayout:
-            orientation: 'vertical'
-            size_hint_y: None
-            height: self.minimum_height
-            md_bg_color: app.theme_cls.backgroundColor
+            orientation: 'horizontal'
 
-            GenerationPointsBar:
-                id: generation_points
-                charakter: app.controller.charakter
+            # NavigationRail (initial versteckt)
+            MDBoxLayout:
+                id: nav_rail_container
+                orientation: 'vertical'
+                size_hint_x: None
+                width: 0
+                opacity: 0
+                disabled: True
+                md_bg_color: app.theme_cls.surfaceContainerColor
 
-        # ----------------- (3) TAB-INHALT (CAROUSEL) -------------------
-        MDBoxLayout:
-            orientation: 'vertical'
-            id: tab_content_box
-            padding: [30, 0, 30, 30]
-            size_hint_y: 1  # Füllt den restlichen Platz
-            md_bg_color: app.theme_cls.backgroundColor
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: dp(4)
+                    bar_margin: dp(2)
 
-            ScreenManager:
-                id: tabs_carousel
-                size_hint: (1, 1)
-                # Screens werden dynamisch hinzugefügt.
+                    MDBoxLayout:
+                        id: nav_rail_box
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(4)
+                        padding: [0, dp(8), 0, dp(8)]
 
-        # ----------------- (4) LOGGER (unten) -------------------
-        MDBoxLayout:
-            orientation: 'vertical'
-            size_hint_y: None
-            height: dp(60)
-            md_bg_color: app.theme_cls.backgroundColor
+            # Hauptinhalt (Pointbar + ScreenManager + Logger)
+            MDBoxLayout:
+                orientation: 'vertical'
+                id: main_content_area
 
-            TextInput:
-                id: logger_label
-                text: "Logger: Keine neuen Nachrichten"
-                readonly: True
-                multiline: True
-                background_color: (0, 0, 0, 0)
-                foreground_color: (1, 1, 1, 1)
+                # ----------------- POINTBAR -------------------
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    md_bg_color: app.theme_cls.backgroundColor
+
+                    GenerationPointsBar:
+                        id: generation_points
+                        charakter: app.controller.charakter
+
+                # ----------------- TAB-INHALT (CAROUSEL) -------------------
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    id: tab_content_box
+                    padding: [30, 0, 30, 30]
+                    size_hint_y: 1  # Füllt den restlichen Platz
+                    md_bg_color: app.theme_cls.backgroundColor
+
+                    ScreenManager:
+                        id: tabs_carousel
+                        size_hint: (1, 1)
+                        # Screens werden dynamisch hinzugefügt.
+
+                # ----------------- LOGGER (unten) -------------------
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: dp(60)
+                    md_bg_color: app.theme_cls.backgroundColor
+
+                    TextInput:
+                        id: logger_label
+                        text: "Logger: Keine neuen Nachrichten"
+                        readonly: True
+                        multiline: True
+                        background_color: (0, 0, 0, 0)
+                        foreground_color: (1, 1, 1, 1)

@@ -95,16 +95,55 @@ class EinstellungenWidget(MDBoxLayout):
             # Theme initialisieren (directly via manager)
             if self.theme_manager:
                 self.theme_manager.initialize_theme()
-            
+
             # UI-Felder aktualisierung ausgelagert
-            
+
             # Statistiken aktualisieren
             if self.statistics_manager:
                 self.statistics_manager.update_element_statistics_ui()
-            
+
+            # Mobiler Modus Switch initialisieren
+            self._init_mobile_modus_switch()
+
             Logger.info("Post-Initialisierung erfolgreich abgeschlossen")
         except Exception as e:
             Logger.error(f"Fehler bei Post-Initialisierung: {e}")
+
+    def _init_mobile_modus_switch(self):
+        """Initialisiert den Mobiler-Modus-Switch aus der Config"""
+        try:
+            config_service = service_container.get_config_service()
+            if not config_service:
+                return
+
+            mobile_modus = config_service.get('mobile_modus', False)
+            switch = self.ids.get('mobile_modus_switch')
+            if switch:
+                # Temporär Event-Handler deaktivieren um Endlosschleife zu vermeiden
+                switch.unbind(on_active=None)
+                switch.active = mobile_modus
+                Logger.debug(f"Mobiler Modus Switch initialisiert: {mobile_modus}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Mobile-Modus-Switch: {e}")
+
+    def toggle_mobile_modus(self, active):
+        """Wechselt den mobilen Modus und speichert die Einstellung"""
+        try:
+            # Config speichern
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('mobile_modus', active)
+
+            # Modus in der App umschalten
+            app = MDApp.get_running_app()
+            if app and hasattr(app, 'set_navigation_mode'):
+                # Override setzen (manueller Modus)
+                app._mobile_modus_override = active if active else None
+                app.set_navigation_mode(active)
+
+            Logger.info(f"Mobiler Modus {'aktiviert' if active else 'deaktiviert'}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Umschalten des mobilen Modus: {e}")
 
     # ==================== DELEGIERTE METHODEN ====================
     # Alle Methoden delegieren an die entsprechenden Manager/Handler
