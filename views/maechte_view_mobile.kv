@@ -1,0 +1,189 @@
+# maechte_view_mobile.kv - Smartphone-optimiertes Layout
+# Beschreibungen ausgeblendet, nur per Info-Button erreichbar
+# Kompakte Zeilen: Name | Rang | MP-Info | Buttons
+
+<TooltipIconButton>
+    MDTooltipPlain:
+        text: root.tooltip_text
+
+<TooltipFabButton>
+    MDTooltipPlain:
+        text: root.tooltip_text
+
+# Hauptdefinition für KraefteWidget
+<KraefteWidget>:
+    orientation: 'vertical'
+    md_bg_color: self.theme_cls.backgroundColor
+
+# Rückwärtskompatibilität: MaechteWidget als Alias
+<MaechteWidget@KraefteWidget>:
+
+    # Suchfeld kompakt
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(64)
+        padding: [dp(8), dp(6)]
+        spacing: dp(6)
+
+        MDTextField:
+            id: search_input
+            hint_text: 'Suche...'
+            size_hint_x: 1
+            on_text: root.filter_maechte()
+
+        MDIconButton:
+            id: filter_chevron
+            icon: "chevron-down" if root.is_filter_expanded else "chevron-right"
+            size_hint: None, None
+            width: dp(40)
+            height: dp(40)
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_filter_panel()
+
+    # Filter-Buttons kompakt, horizontal scrollbar
+    MDScrollView:
+        id: filter_container
+        size_hint_y: None
+        height: dp(56)
+        do_scroll_x: True
+        do_scroll_y: False
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: self.minimum_width
+            size_hint_y: None
+            height: dp(48)
+            padding: [dp(8), dp(4)]
+            spacing: dp(6)
+
+            TooltipFabButton:
+                id: sort_name_btn
+                tooltip_text: "Name"
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Name')
+
+            TooltipFabButton:
+                id: sort_rank_btn
+                tooltip_text: "Rang"
+                icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Rang')
+
+            MDButton:
+                id: only_selected_button
+                size_hint: None, None
+                height: dp(40)
+                on_release: root.toggle_only_selected_items()
+
+                MDButtonText:
+                    text: "Gewählt" if not root.only_selected_items else "Alle"
+                    theme_text_color: "Primary" if not root.only_selected_items else "Custom"
+                    text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
+                    font_size: dp(12)
+
+    MDLabel:
+        text: 'Mächte'
+        font_size: dp(18)
+        size_hint_y: None
+        height: dp(32)
+        padding: [dp(8), dp(4)]
+        bold: True
+
+    MaechteRecycleView:
+        id: recycleview
+        viewclass: 'MachtItemRow'
+        size_hint_y: 1
+
+        RecycleBoxLayout:
+            id: layout
+            default_size: None, dp(48)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            spacing: dp(2)
+            padding: [dp(4), dp(4)]
+
+# Kompakte Macht-Zeile: Name | Rang | MP/RW/Dauer kompakt | Buttons | Info
+# KEINE Beschreibung inline
+<MachtItemRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(48)
+    md_bg_color: self._get_background_color()
+    line_color: self._get_line_color()
+    line_width: 2
+    spacing: dp(4)
+    padding: [dp(6), dp(4)]
+
+    # Name
+    MDLabel:
+        text: root.macht_name
+        font_size: dp(13)
+        size_hint_x: 1
+        halign: 'left'
+        valign: 'middle'
+        shorten: True
+        shorten_from: 'right'
+        text_size: self.size
+
+    # Rang kompakt
+    MDLabel:
+        text: root.rang
+        font_size: dp(11)
+        size_hint_x: None
+        width: dp(20)
+        halign: 'center'
+        valign: 'middle'
+
+    # MP kompakt
+    MDLabel:
+        text: f"MP:{root.machtpunkte}"
+        font_size: dp(10)
+        size_hint_x: None
+        width: dp(40)
+        halign: 'center'
+        valign: 'middle'
+
+    # Action-Buttons
+    MDFabButton:
+        icon: "plus"
+        style: "small"
+        size_hint: None, None
+        size: dp(36), dp(36)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.waehle_macht()
+        disabled: root.macht and root.macht.ausgewaehlt
+
+    MDFabButton:
+        icon: "minus"
+        style: "small"
+        size_hint: None, None
+        size: dp(36), dp(36)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.entferne_macht()
+        disabled: not root.macht or not root.macht.ausgewaehlt
+
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(36), dp(36)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_macht()
+
+    # Info-Button für Beschreibung
+    MDFabButton:
+        icon: "information-outline"
+        style: "small"
+        size_hint: None, None
+        size: dp(32), dp(32)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.show_full_description()

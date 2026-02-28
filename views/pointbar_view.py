@@ -40,19 +40,27 @@ class LabelValuePair(MDBoxLayout):
 import os
 import sys
 
-# PyInstaller-kompatibles Laden der KV-Datei
+# PyInstaller-kompatibles Laden der KV-Datei (mit Mobile-Unterstützung)
 def load_kv_file():
+    from utils.platform_utils import is_mobile_layout
+
     if getattr(sys, 'frozen', False):
-        # PyInstaller Bundle
         base_path = sys._MEIPASS
-        kv_path = os.path.join(base_path, 'views', 'pointbar_view.kv')
     else:
-        # Normale Ausführung
         base_path = os.path.dirname(os.path.dirname(__file__))
+
+    # Mobile-KV bevorzugen wenn verfügbar
+    mobile = is_mobile_layout()
+    kv_name = 'pointbar_view_mobile.kv' if mobile else 'pointbar_view.kv'
+    kv_path = os.path.join(base_path, 'views', kv_name)
+
+    # Fallback auf Desktop-KV wenn Mobile-KV nicht existiert
+    if not os.path.exists(kv_path):
         kv_path = os.path.join(base_path, 'views', 'pointbar_view.kv')
-    
+
     if os.path.exists(kv_path):
         Builder.load_file(kv_path)
+        Logger.info(f"PointbarView: KV-Datei geladen: {os.path.basename(kv_path)}")
     else:
         Logger.error(f"PointbarView: KV-Datei nicht gefunden: {kv_path}")
 
@@ -75,7 +83,7 @@ class GenerationPointsBar(MDBoxLayout):
     superkraft_punkte_text = StringProperty("")
     machtstufe_text = StringProperty("")
     header_summary_text = StringProperty("")
-    is_expanded = BooleanProperty(True)
+    is_expanded = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -230,7 +238,7 @@ class GenerationPointsBar(MDBoxLayout):
 
         self.header_summary_text = f"{name}  |  {setting}  |  Attr: {attr}  |  Fert: {fert}  |  {rang}"
 
-    _content_height = 0  # Wird beim ersten Einklappen gespeichert
+    _content_height = dp(120)  # Standard-Höhe für content_box
 
     def toggle_panel(self):
         """Klappt den Detail-Bereich auf oder zu"""

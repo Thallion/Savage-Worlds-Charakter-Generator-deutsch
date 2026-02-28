@@ -1,4 +1,5 @@
 #:import MDDivider kivymd.uix.divider.MDDivider
+#:import SwipeScreenManager views.ui_components.SwipeScreenManager
 
 <CharakterVerwaltungScreen>:
     CharakterVerwaltungWidget:
@@ -93,7 +94,7 @@ MDScreen:
             orientation: 'vertical'
             size_hint_y: None
             height: dp(60)  # Höhe der Tabbar
-            padding: [30, 0, 0, 0]
+            padding: [dp(4), 0, 0, 0]
             md_bg_color: app.theme_cls.backgroundColor
             MDTabsPrimary:
                 id: tabs_bar
@@ -102,6 +103,23 @@ MDScreen:
         # ----------------- (2) HORIZONTALES LAYOUT: NAV-RAIL + CONTENT -----------------
         MDBoxLayout:
             orientation: 'horizontal'
+
+            # Menü-Toggle-Button (nur im Mobile-Modus sichtbar)
+            MDBoxLayout:
+                id: menu_toggle_container
+                orientation: 'vertical'
+                size_hint_x: None
+                width: 0
+                opacity: 0
+                disabled: True
+
+                MDIconButton:
+                    id: menu_toggle_btn
+                    icon: "menu"
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    pos_hint: {'center_x': 0.5, 'top': 1}
+                    on_release: app.toggle_navigation_rail()
 
             # NavigationRail (initial versteckt)
             MDBoxLayout:
@@ -151,7 +169,7 @@ MDScreen:
                     size_hint_y: 1  # Füllt den restlichen Platz
                     md_bg_color: app.theme_cls.backgroundColor
 
-                    ScreenManager:
+                    SwipeScreenManager:
                         id: tabs_carousel
                         size_hint: (1, 1)
                         # Screens werden dynamisch hinzugefügt.

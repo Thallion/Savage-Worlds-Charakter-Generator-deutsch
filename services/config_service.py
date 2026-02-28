@@ -56,6 +56,9 @@ class AppConfig:
     
     # Setting-Einstellungen
     last_setting: str = "SWAE"
+
+    # Mobile-Layout-Override (für Desktop-Tests)
+    force_mobile_layout: bool = False
     
     # Version und Metadaten
     config_version: str = "1.0"

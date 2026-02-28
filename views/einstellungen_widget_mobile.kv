@@ -1,0 +1,616 @@
+#:import MDDivider kivymd.uix.divider.MDDivider
+
+# einstellungen_widget_mobile.kv - Smartphone-optimiertes Layout
+# Cards volle Breite (size_hint_x: 1), Labels fließend
+# Gleiche Widget-Klasse und IDs wie Desktop-Version
+
+<EinstellungenWidget>:
+    MDScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(16)
+            padding: [dp(8), dp(8), dp(8), dp(8)]
+            size_hint_y: None
+            height: self.minimum_height
+
+            # Theme und Farben Card
+            MDCard:
+                style: "elevated"
+                padding: dp(12)
+                size_hint_x: 1
+                size_hint_y: None
+                height: self.minimum_height
+                md_bg_color: app.theme_cls.surfaceColor
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(12)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    # Theme Controls - vertikal auf Mobile
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: 'Theme:'
+                            size_hint_y: None
+                            height: dp(28)
+
+                        MDSegmentedButton:
+                            size_hint_x: 1
+
+                            MDSegmentedButtonItem:
+                                size_hint_x: 0.5
+                                size_hint_y: None
+                                height: dp(40)
+                                on_release: root.switch_theme_style('Light')
+
+                                MDSegmentButtonLabel:
+                                    text: "Hell"
+
+                            MDSegmentedButtonItem:
+                                size_hint_x: 0.5
+                                size_hint_y: None
+                                height: dp(40)
+                                on_release: root.switch_theme_style('Dark')
+
+                                MDSegmentButtonLabel:
+                                    text: "Dunkel"
+
+                    # Farbschema - vertikal auf Mobile
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: 'Farbschema:'
+                            size_hint_y: None
+                            height: dp(28)
+
+                        MDGridLayout:
+                            id: colors_box
+                            cols: 5
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: dp(6)
+                            padding: dp(4)
+
+                    MDDivider:
+
+                    # Mobiler Modus Toggle
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: 'Mobiler Modus:'
+                            size_hint_x: 1
+                            pos_hint: {"center_y": .5}
+
+                        MDSwitch:
+                            id: mobile_modus_switch
+                            pos_hint: {"center_y": .5}
+                            on_active: root.toggle_mobile_modus(self.active)
+
+                    # Logger-Leiste Toggle
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: 'Logger anzeigen:'
+                            size_hint_x: 1
+                            pos_hint: {"center_y": .5}
+
+                        MDSwitch:
+                            id: show_logger_switch
+                            pos_hint: {"center_y": .5}
+                            on_active: root.toggle_logger(self.active)
+
+            # Charakter-Einstellungen Card
+            MDCard:
+                style: "elevated"
+                padding: dp(12)
+                size_hint_x: 1
+                size_hint_y: None
+                height: self.minimum_height
+                md_bg_color: app.theme_cls.surfaceColor
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(12)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    # Startattribute
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Attributs-Punkte:"
+                            size_hint_x: 1
+                            pos_hint: {"center_y": .5}
+
+                        MDTextField:
+                            id: attributsteigerungen_field
+                            text: root.get_charakter_value('maximale_attributsteigerungen', '5')
+                            size_hint_x: None
+                            width: dp(80)
+                            input_filter: 'int'
+                            pos_hint: {"center_y": .5}
+                            on_focus: if not self.focus: root.update_maximale_attributsteigerungen()
+
+                    # Startfertigkeiten
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Fertigkeits-Punkte:"
+                            size_hint_x: 1
+                            pos_hint: {"center_y": .5}
+
+                        MDTextField:
+                            id: fertigkeitssteigerungen_field
+                            text: root.get_charakter_value('maximale_fertigkeitssteigerungen', '12')
+                            size_hint_x: None
+                            width: dp(80)
+                            input_filter: 'int'
+                            pos_hint: {"center_y": .5}
+                            on_focus: if not self.focus: root.update_maximale_fertigkeitssteigerungen()
+
+                    # Vermögen - vertikal gestapelt auf Mobile
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(4)
+
+                        MDLabel:
+                            text: "Vermögen:"
+                            size_hint_y: None
+                            height: dp(28)
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: dp(48)
+                            spacing: dp(8)
+
+                            MDTextField:
+                                id: vermoegen_field
+                                text: root.get_charakter_value('vermoegen', '500')
+                                size_hint_x: 0.5
+                                input_filter: 'int'
+                                on_focus: if not self.focus: root.update_vermoegen()
+
+                            MDTextField:
+                                id: waehrung_field
+                                text: root.get_charakter_value('waehrungseinheit', 'Gold')
+                                size_hint_x: 0.5
+                                on_focus: if not self.focus: root.update_waehrung()
+
+                    MDButton:
+                        style: "elevated"
+                        size_hint_x: 1
+                        on_release: root.erhoehe_startkapital()
+
+                        MDButtonText:
+                            text: 'Startkapital + Handicap-Pkt.'
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(8)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "tonal"
+                            size_hint_x: 1
+                            on_release: root.erhoehe_aufstieg()
+
+                            MDButtonIcon:
+                                icon: "plus"
+
+                            MDButtonText:
+                                text: "Aufstieg"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.senke_aufstieg()
+
+                            MDButtonIcon:
+                                icon: "minus"
+
+                            MDButtonText:
+                                text: "Abstieg"
+
+            # Verwaltungs Card
+            MDCard:
+                padding: dp(12)
+                spacing: dp(12)
+                size_hint_x: 1
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(12)
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: dp(4)
+
+                    # Setting-Verwaltung
+                    MDLabel:
+                        text: "Setting"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(32)
+
+                    MDGridLayout:
+                        cols: 3
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_setting_popup()
+                            MDButtonIcon:
+                                icon: "plus"
+                            MDButtonText:
+                                text: "Neu"
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_setting_switch_options()
+                            MDButtonIcon:
+                                icon: "swap-horizontal"
+                            MDButtonText:
+                                text: "Wechsel"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_setting_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Lösch."
+
+                    # Export
+                    MDLabel:
+                        text: "Export"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(32)
+
+            # Spielelemente Card
+            MDCard:
+                padding: dp(12)
+                spacing: dp(12)
+                size_hint_x: 1
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(12)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    MDLabel:
+                        text: "Spielelemente"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(32)
+
+                    # Statistik-Anzeige
+                    MDBoxLayout:
+                        id: element_stats_box
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(4)
+
+                    # Völker
+                    MDLabel:
+                        text: "Völker"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(28)
+                        font_size: dp(13)
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_volk_dialog()
+                            MDButtonIcon:
+                                icon: "plus"
+                            MDButtonText:
+                                text: "Hinzufügen"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_volk_dialog()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Löschen"
+
+                    # Talente
+                    MDLabel:
+                        text: "Talente"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(28)
+                        font_size: dp(13)
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_talent_popup()
+                            MDButtonIcon:
+                                icon: "plus"
+                            MDButtonText:
+                                text: "Hinzufügen"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_talent_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Löschen"
+
+                    # Mächte
+                    MDLabel:
+                        text: "Mächte"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(28)
+                        font_size: dp(13)
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_macht_popup()
+                            MDButtonIcon:
+                                icon: "plus"
+                            MDButtonText:
+                                text: "Hinzufügen"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_macht_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Löschen"
+
+                    # Fertigkeiten
+                    MDLabel:
+                        text: "Fertigkeiten"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(28)
+                        font_size: dp(13)
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_fertigkeit_popup()
+                            MDButtonIcon:
+                                icon: "plus"
+                            MDButtonText:
+                                text: "Hinzufügen"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_fertigkeit_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Löschen"
+
+                    # Handicaps
+                    MDLabel:
+                        text: "Handicaps"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(28)
+                        font_size: dp(13)
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_handicap_popup()
+                            MDButtonIcon:
+                                icon: "plus"
+                            MDButtonText:
+                                text: "Hinzufügen"
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_handicap_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Löschen"
+
+                    # Ausrüstung
+                    MDLabel:
+                        text: "Ausrüstung"
+                        bold: True
+                        size_hint_y: None
+                        height: dp(28)
+                        font_size: dp(13)
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_ausruestung_popup()
+                            MDButtonIcon:
+                                icon: "package-variant"
+                            MDButtonText:
+                                text: "Allgemein"
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_waffe_popup()
+                            MDButtonIcon:
+                                icon: "sword"
+                            MDButtonText:
+                                text: "Waffen"
+
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(48)
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_ruestung_popup()
+                            MDButtonIcon:
+                                icon: "shield"
+                            MDButtonText:
+                                text: "Rüstungen"
+
+                        MDButton:
+                            style: "elevated"
+                            size_hint_x: 1
+                            on_release: root.open_add_schild_popup()
+                            MDButtonIcon:
+                                icon: "shield-outline"
+                            MDButtonText:
+                                text: "Schilde"
+
+                    # Lösch-Buttons für Ausrüstung
+                    MDGridLayout:
+                        cols: 2
+                        spacing: dp(6)
+                        size_hint_y: None
+                        height: dp(96)
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_ausruestung_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Allg. lösch."
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_waffe_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Waffe lösch."
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_ruestung_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Rüst. lösch."
+
+                        MDButton:
+                            style: "outlined"
+                            size_hint_x: 1
+                            on_release: root.open_delete_schild_popup()
+                            MDButtonIcon:
+                                icon: "delete"
+                            MDButtonText:
+                                text: "Schild lösch."
+
+            # Log-Button Card
+            MDCard:
+                style: "elevated"
+                padding: dp(12)
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(64)
+                md_bg_color: app.theme_cls.surfaceColor
+
+                MDButton:
+                    style: "filled"
+                    size_hint_x: 1
+                    pos_hint: {"center_y": 0.5}
+                    on_release: root.open_log_file()
+
+                    MDButtonIcon:
+                        icon: "content-copy"
+
+                    MDButtonText:
+                        text: "Log kopieren"

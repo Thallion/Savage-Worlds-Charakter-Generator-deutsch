@@ -1228,10 +1228,16 @@ Factory.register('TooltipIconButton', TooltipIconButton)
 Factory.register('TooltipFabButton', TooltipFabButton)
 Factory.register('AusruestungItemRow', AusruestungItemRow)
 
-# KV-String mit Theme-Fix - HAUPTÄNDERUNG: md_bg_color entfernt und theme_text_color hinzugefügt!
-# KV-Datei laden
-# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad und Mobile-Unterstützung
 from utils.path_utils import get_application_root
+from utils.platform_utils import is_mobile_layout
 import os
-kv_path = os.path.join(get_application_root(), 'views', 'ausruestung_view.kv')
-Builder.load_file(kv_path)
+
+_base_path = str(get_application_root())
+_mobile = is_mobile_layout()
+_kv_name = 'ausruestung_view_mobile.kv' if _mobile else 'ausruestung_view.kv'
+_kv_path = os.path.join(_base_path, 'views', _kv_name)
+if not os.path.exists(_kv_path):
+    _kv_path = os.path.join(_base_path, 'views', 'ausruestung_view.kv')
+Builder.load_file(_kv_path)
+Logger.info(f"ausruestung_view: KV-Datei geladen: {os.path.basename(_kv_path)}")

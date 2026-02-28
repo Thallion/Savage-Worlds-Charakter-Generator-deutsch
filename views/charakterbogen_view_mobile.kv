@@ -1,0 +1,279 @@
+# charakterbogen_view_mobile.kv - Smartphone-optimiertes Layout
+# Einspaltiges Layout statt 2-Spalten Grid
+# Reduzierte Paddings für mehr Platz
+# Gleiche Widget-Klasse und IDs wie Desktop-Version
+
+<CharakterbogenWidget>:
+    orientation: 'vertical'
+    padding: dp(4)
+    spacing: dp(6)
+
+    MDScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(6)
+            padding: [dp(6), dp(4)]
+
+            # Profil
+            LeftAlignedLabel:
+                text: "Charakter"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(28)
+
+            MDBoxLayout:
+                id: profil_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Attribute - einspaltig
+            LeftAlignedLabel:
+                text: "Attribute"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+                padding: [dp(4), dp(2)]
+
+                MDGridLayout:
+                    id: attribut_grid
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: dp(22)
+                    spacing: dp(2)
+
+            # Fertigkeiten - einspaltig
+            LeftAlignedLabel:
+                text: "Fertigkeiten"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+                padding: [dp(4), dp(2)]
+
+                MDGridLayout:
+                    id: fertigkeit_grid
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: dp(22)
+                    spacing: dp(2)
+
+            # Abgeleitete Werte - einspaltig
+            LeftAlignedLabel:
+                text: "Abgeleitete Werte:"
+                font_size: '14sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+                padding: [dp(4), dp(2)]
+
+                MDGridLayout:
+                    id: abgeleitete_werte_grid
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: dp(22)
+                    spacing: dp(2)
+
+            # Volk
+            MDBoxLayout:
+                id: volk_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Handicaps
+            LeftAlignedLabel:
+                text: "Handicaps:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: handicaps_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Talente
+            LeftAlignedLabel:
+                text: "Talente:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: talente_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Mächte / Superkräfte
+            LeftAlignedLabel:
+                id: maechte_header
+                text: "Mächte:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: maechte_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Ausrüstung
+            LeftAlignedLabel:
+                text: "Ausrüstung:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: ausruestung_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Waffen
+            LeftAlignedLabel:
+                text: "Waffen:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: waffen_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Schilde
+            LeftAlignedLabel:
+                text: "Schild:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: schilde_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+            # Rüstungen
+            LeftAlignedLabel:
+                text: "Rüstungen:"
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                id: ruestungen_section
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(4)
+                padding: [dp(4), dp(2)]
+
+<WeaponItem@MDBoxLayout>:
+    weapon: None
+    weapon_text: ''
+    button_text: ''
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(28)
+    MDLabel:
+        text: root.weapon_text
+        size_hint_x: 0.75
+        font_size: dp(12)
+    MDButton:
+        text: root.button_text
+        size_hint_x: 0.25
+        on_press: root.on_button_press()
+
+<ArmorItem@MDBoxLayout>:
+    armor: None
+    armor_text: ''
+    button_text: ''
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(28)
+    MDLabel:
+        text: root.armor_text
+        size_hint_x: 0.75
+        font_size: dp(12)
+    MDButton:
+        text: root.button_text
+        size_hint_x: 0.25
+        on_press: root.on_button_press()
+
+<EquipmentItem@MDBoxLayout>:
+    item: None
+    item_text: ''
+    button_text: ''
+    root_widget: None
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(28)
+
+    MDLabel:
+        text: root.item_text
+        size_hint_x: 0.75
+        font_size: dp(12)
+
+    MDButton:
+        text: root.button_text
+        size_hint_x: 0.25
+        on_press: root.on_button_press()

@@ -22,7 +22,7 @@ from kivy.metrics import dp
 from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition, NoTransition
 
 
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -60,7 +60,7 @@ from views.screens import (
     HandicapsScreen, TalenteScreen, MaechteScreen, AusruestungScreen, 
     CharakterbogenScreen, HistorieScreen, InfoScreen, HyperlinkLabel
 )
-from views.ui_components import CustomTabsItem
+from views.ui_components import CustomTabsItem, SwipeScreenManager
 from utils.logging_utils import GUIHandler
 
 # Config Service für Theme-Speicherung importieren
@@ -128,6 +128,8 @@ class SW_Charakter_GeneratorApp(MDApp):
         self.rail_items = []
         self._mobile_modus_active = False
         self._mobile_modus_override = None  # None = automatisch, True/False = manuell
+        self._nav_rail_visible = False  # NavigationRail Sichtbarkeit im Mobile-Modus
+        self._current_tab_index = 0  # Aktueller Tab-Index für Swipe-Navigation
 
         # Deine Icons + Tab-Texte + zugehörige Screens
         # NEU: CharakterVerwaltung-Tab hinzugefügt
@@ -392,6 +394,12 @@ class SW_Charakter_GeneratorApp(MDApp):
             if not scroll_view:
                 Logger.error("KRITISCH: MDTabsScrollView nicht gefunden!")
                 return
+
+            # Scrollbar für Tab-Navigation besser sichtbar machen (wichtig für Android)
+            scroll_view.bar_width = dp(8)
+            scroll_view.bar_margin = dp(2)
+            scroll_view.do_scroll_x = True
+            scroll_view.do_scroll_y = False
             
             # MDTabsScrollView hat normalerweise ein internes Layout-Widget
             container = None
@@ -494,6 +502,7 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             # NavigationRail aufbauen und initialen Modus setzen
             self.build_navigation_rail()
+            self._setup_swipe_navigation(screen_manager)
             self._apply_initial_navigation_mode()
 
         except Exception as e:
@@ -528,6 +537,9 @@ class SW_Charakter_GeneratorApp(MDApp):
             # Tab-Namen für Logging
             tab_name = self.tab_definitions[tab_index][1] if tab_index < len(self.tab_definitions) else "Unknown"
             Logger.info(f"Tab-Wechsel zu Index {tab_index}: {tab_name}")
+
+            # Tab-Index tracken
+            self._current_tab_index = tab_index
 
             # ScreenManager-Screen setzen
             root = self.root
@@ -709,6 +721,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
                 screen_name = f"screen_{item_index}_{clean_name}"
 
+                # Transition ohne Animation bei direktem Tap
+                screen_manager.transition = NoTransition()
+
                 try:
                     screen_manager.get_screen(screen_name)
                     screen_manager.current = screen_name
@@ -717,6 +732,7 @@ class SW_Charakter_GeneratorApp(MDApp):
 
                 # Aktives Item visuell hervorheben
                 self._set_active_rail_item(item_index)
+                self._current_tab_index = item_index
                 self.update_active_screen(item_index)
                 Logger.info(f"NavigationRail-Wechsel zu: {tab_text}")
 
@@ -754,6 +770,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             nav_rail_container = root.ids.get('nav_rail_container')
             tab_content_box = root.ids.get('tab_content_box')
             screen_manager = root.ids.get('tabs_carousel')
+            menu_toggle = root.ids.get('menu_toggle_container')
 
             if not all([tabs_container, nav_rail_container, tab_content_box]):
                 Logger.warning("Layout-Elemente für Moduswechsel nicht verfügbar")
@@ -768,30 +785,50 @@ class SW_Charakter_GeneratorApp(MDApp):
                         current_index = i
                         break
 
+            self._current_tab_index = current_index
+
             if mobile:
                 # Tabs verstecken
                 tabs_container.height = 0
                 tabs_container.opacity = 0
                 tabs_container.disabled = True
 
-                # NavigationRail zeigen
-                nav_rail_container.width = dp(100)
-                nav_rail_container.opacity = 1
-                nav_rail_container.disabled = False
+                # NavigationRail initial ausgeblendet (per Toggle-Button einblendbar)
+                nav_rail_container.width = 0
+                nav_rail_container.opacity = 0
+                nav_rail_container.disabled = True
+                self._nav_rail_visible = False
+
+                # Menü-Toggle-Button zeigen
+                if menu_toggle:
+                    menu_toggle.width = dp(48)
+                    menu_toggle.opacity = 1
+                    menu_toggle.disabled = False
 
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(8), 0, dp(8), dp(8)]
+
+                # Swipe aktivieren
+                if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
+                    screen_manager.swipe_enabled = True
 
                 # Aktives Rail-Item hervorheben
                 if current_index < len(self.rail_items):
                     self._set_active_rail_item(current_index)
 
-                Logger.info("Mobiler Modus aktiviert (NavigationRail)")
+                Logger.info("Mobiler Modus aktiviert (Swipe + Menü-Toggle)")
             else:
                 # NavigationRail verstecken
                 nav_rail_container.width = 0
                 nav_rail_container.opacity = 0
                 nav_rail_container.disabled = True
+                self._nav_rail_visible = False
+
+                # Menü-Toggle-Button verstecken
+                if menu_toggle:
+                    menu_toggle.width = 0
+                    menu_toggle.opacity = 0
+                    menu_toggle.disabled = True
 
                 # Tabs zeigen
                 tabs_container.height = dp(60)
@@ -800,6 +837,10 @@ class SW_Charakter_GeneratorApp(MDApp):
 
                 # Content-Padding wiederherstellen
                 tab_content_box.padding = [dp(30), 0, dp(30), dp(30)]
+
+                # Swipe deaktivieren
+                if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
+                    screen_manager.swipe_enabled = False
 
                 # Aktiven Tab setzen (ohne erneuten Screen-Wechsel)
                 if current_index < len(self.tab_items):
@@ -873,6 +914,124 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         except Exception as e:
             Logger.error(f"Fehler bei Fenster-Resize-Handler: {str(e)}")
+
+    def _setup_swipe_navigation(self, screen_manager):
+        """Konfiguriert die Swipe-Navigation auf dem ScreenManager"""
+        try:
+            if hasattr(screen_manager, 'swipe_enabled'):
+                screen_manager._swipe_callback = self._on_swipe
+                Logger.info("Swipe-Navigation konfiguriert")
+            else:
+                Logger.warning("ScreenManager unterstützt kein Swipe (kein SwipeScreenManager)")
+        except Exception as e:
+            Logger.error(f"Fehler bei Swipe-Setup: {str(e)}")
+
+    def _on_swipe(self, direction):
+        """Callback für Swipe-Gesten auf dem Content-Bereich"""
+        try:
+            if not self._mobile_modus_active:
+                return
+
+            num_tabs = len(self.tab_definitions)
+            if num_tabs == 0:
+                return
+
+            if direction == 'left':
+                # Swipe nach links → nächster Tab
+                new_index = self._current_tab_index + 1
+                if new_index >= num_tabs:
+                    return  # Am Ende, nicht wrappen
+            elif direction == 'right':
+                # Swipe nach rechts → vorheriger Tab
+                new_index = self._current_tab_index - 1
+                if new_index < 0:
+                    return  # Am Anfang, nicht wrappen
+            else:
+                return
+
+            self._switch_to_tab_index(new_index, direction)
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Swipe-Handler: {str(e)}")
+
+    def _switch_to_tab_index(self, index, swipe_direction=None):
+        """Wechselt zum Tab mit dem angegebenen Index mit Slide-Animation"""
+        try:
+            if index < 0 or index >= len(self.tab_definitions):
+                return
+
+            root = self.root
+            if not root:
+                return
+
+            screen_manager = root.ids.get('tabs_carousel')
+            if not screen_manager:
+                return
+
+            tab_text = self.tab_definitions[index][1]
+            clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+            screen_name = f"screen_{index}_{clean_name}"
+
+            # Slide-Animation setzen
+            if swipe_direction:
+                transition = SlideTransition()
+                transition.direction = 'left' if swipe_direction == 'left' else 'right'
+                transition.duration = 0.2
+                screen_manager.transition = transition
+            else:
+                screen_manager.transition = NoTransition()
+
+            try:
+                screen_manager.get_screen(screen_name)
+                screen_manager.current = screen_name
+            except Exception:
+                Logger.warning(f"Screen '{screen_name}' nicht gefunden bei Swipe")
+                return
+
+            self._current_tab_index = index
+
+            # NavigationRail-Highlight aktualisieren
+            if index < len(self.rail_items):
+                self._set_active_rail_item(index)
+
+            # Screen-spezifische Updates
+            self.update_active_screen(index)
+
+            Logger.info(f"Swipe-Wechsel zu: {tab_text} (Index {index})")
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Tab-Wechsel per Swipe: {str(e)}")
+
+    def toggle_navigation_rail(self):
+        """Blendet die NavigationRail im Mobile-Modus ein/aus"""
+        try:
+            if not self._mobile_modus_active:
+                return
+
+            root = self.root
+            if not root:
+                return
+
+            nav_rail_container = root.ids.get('nav_rail_container')
+            if not nav_rail_container:
+                return
+
+            if self._nav_rail_visible:
+                # Rail ausblenden
+                nav_rail_container.width = 0
+                nav_rail_container.opacity = 0
+                nav_rail_container.disabled = True
+                self._nav_rail_visible = False
+                Logger.debug("NavigationRail ausgeblendet")
+            else:
+                # Rail einblenden
+                nav_rail_container.width = dp(100)
+                nav_rail_container.opacity = 1
+                nav_rail_container.disabled = False
+                self._nav_rail_visible = True
+                Logger.debug("NavigationRail eingeblendet")
+        except Exception as e:
+            Logger.error(f"Fehler beim Toggle der NavigationRail: {str(e)}")
 
     def get_screen(self, screen_name):
         """Hilfsmethode zum Abrufen von Screen-Objekten"""

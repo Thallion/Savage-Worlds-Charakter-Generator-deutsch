@@ -1,0 +1,147 @@
+ Plan: Mobile-optimierte Views für Smartphones
+
+ Kontext
+
+ Die App funktioniert auf Desktop und Tablet bereits gut. Auf Smartphones (360-430dp Breite) sind jedoch viele Views nicht nutzbar, weil sie hardcodierte Breiten verwenden (z.B. dp(350) für Labels, dp(750) für Cards). Die
+ bestehenden Desktop/Tablet-Views sollen nicht verändert werden. Stattdessen werden parallele Mobile-KV-Dateien erstellt, die bei erkanntem Smartphone-Modus geladen werden.
+
+ Architektur-Ansatz: Bedingte KV-Datei-Ladung
+
+ Kernmechanismus
+
+ Jede View-Datei (z.B. eigenschaften_view.py) hat bereits eine load_kv_file()-Funktion, die Builder.load_file() aufruft. Diese wird so erweitert, dass sie plattformabhängig entweder die Desktop- oder die Mobile-KV-Datei lädt:
+
+ views/
+ ├── eigenschaften_view.kv          # Desktop/Tablet (unverändert)
+ ├── eigenschaften_view_mobile.kv   # NEU: Smartphone-Layout
+ ├── eigenschaften_view.py          # Gemeinsame Logik (load_kv_file angepasst)
+ ├── profil_view.kv
+ ├── profil_view_mobile.kv          # NEU
+ ├── profil_view.py
+ ├── pointbar_view.kv
+ ├── pointbar_view_mobile.kv        # NEU
+ ├── pointbar_view.py
+ └── ...
+
+ Utility-Modul: utils/platform_utils.py (NEU)
+
+ Zentrale Erkennung, ob Mobile-Layout verwendet werden soll:
+
+ from kivy.utils import platform
+
+ def is_mobile_layout():
+     """Prüft ob Mobile-KV-Dateien geladen werden sollen"""
+     if platform == 'android':
+         from kivy.core.window import Window
+         # Smartphones: Breite < 600dp, Tablets: >= 600dp
+         return Window.width < 600
+     return False  # Desktop/Linux/Windows immer Desktop-Layout
+
+ Anpassung der load_kv_file() in jeder View
+
+ def load_kv_file():
+     from utils.platform_utils import is_mobile_layout
+     mobile = is_mobile_layout()
+     kv_name = 'eigenschaften_view_mobile.kv' if mobile else 'eigenschaften_view.kv'
+     kv_path = os.path.join(base_path, 'views', kv_name)
+     # Fallback auf Desktop wenn Mobile-KV nicht existiert
+     if not os.path.exists(kv_path):
+         kv_path = os.path.join(base_path, 'views', 'eigenschaften_view.kv')
+     Builder.load_file(kv_path)
+
+ Betroffene Views (Priorität nach Smartphone-Problematik)
+
+ Phase 1 - Kritisch (unbrauchbar auf Smartphone)
+
+ ┌─────────────────────────┬────────────────────────────────────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────┐
+ │          View           │                                  Problem                                   │                                       Mobile-Lösung                                        │
+ ├─────────────────────────┼────────────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ eigenschaften_view.kv   │ Labels dp(350), Würfel-Icons dp(160), Buttons dp(50) — alles feste Breiten │ Vertikales Layout pro Eigenschaft: Name oben, Würfel+Buttons unten. Kompakte Card pro Item │
+ ├─────────────────────────┼────────────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ einstellungen_widget.kv │ Cards dp(750) fest                                                         │ Cards size_hint_x: 1, Labels fließend                                                      │
+ ├─────────────────────────┼────────────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ pointbar_view.kv        │ 3-Spalten horizontal dp(130) Logo-Card                                     │ Vertikales Stapel-Layout, Logo ausblenden, nur Summary-Header                              │
+ ├─────────────────────────┼────────────────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤
+ │ profil_view.kv          │ Labels width: 150 fest                                                     │ Labels als Überschriften über den TextFields statt daneben                                 │
+ └─────────────────────────┴────────────────────────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────┘
+
+ Phase 2 - Wichtig (funktioniert eingeschränkt)
+
+ ┌─────────────────────┬───────────────────────────────────────┬───────────────────────────────────────────────────────────────────────┐
+ │        View         │                Problem                │                             Mobile-Lösung                             │
+ ├─────────────────────┼───────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+ │ ausruestung_view.kv │ 5+ Spalten horizontal, dp(100) Zeilen │ Kompakte Card-Ansicht pro Ausrüstungsstück                            │
+ ├─────────────────────┼───────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+ │ talente_view.kv     │ 4 Spalten RecycleView                 │ 2 Zeilen pro Talent: Name+Rang oben, Voraussetzung+Beschreibung unten │
+ ├─────────────────────┼───────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+ │ handicaps_view.kv   │ 3 Spalten RecycleView                 │ Name+Punkte in einer Zeile, Beschreibung darunter                     │
+ ├─────────────────────┼───────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+ │ maechte_view.kv     │ 4 Spalten RecycleView                 │ Ähnlich Talente: kompakte Card-Ansicht                                │
+ └─────────────────────┴───────────────────────────────────────┴───────────────────────────────────────────────────────────────────────┘
+
+ Phase 3 - Feinschliff
+
+ ┌────────────────────────┬──────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────┐
+ │          View          │                         Problem                          │                                  Mobile-Lösung                                   │
+ ├────────────────────────┼──────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────┤
+ │ voelker_view.kv        │ Relativ responsive, aber Buttons könnten schmaler werden │ Buttons volle Breite, vertikal gestapelt                                         │
+ ├────────────────────────┼──────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────┤
+ │ charakterbogen_view.kv │ 2-Spalten Grid                                           │ Einspaltiges Layout                                                              │
+ ├────────────────────────┼──────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────┤
+ │ main.kv                │ Padding [30,0,30,30], Logger dp(60)                      │ Bereits gelöst: Padding wird auf [dp(8),0,dp(8),dp(8)] reduziert im Mobile-Modus │
+ └────────────────────────┴──────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────┘
+
+ Popups (Phase 2-3)
+
+ Popups brauchen ggf. ebenfalls Mobile-Varianten, da fixe Höhen (520dp, 720dp) auf kleinen Bildschirmen (Höhe ~640dp) überlaufen können. Priorität: waffe_popup.kv (720dp!) und talent_popup.kv (520dp).
+
+ Mobile-Navigation
+
+ Die bestehende NavigationRail-Lösung (main.py:777-816) funktioniert als Seitenleiste. Für Smartphones wäre eine MDNavigationBar (Bottom Navigation) besser, da die Seitenleiste auf schmalen Bildschirmen zu viel Platz frisst.
+
+ Vorschlag: Die NavigationRail beibehalten für Tablets, aber für Smartphones eine Bottom-Navigation mit den 4-5 wichtigsten Tabs (Profil, Eigenschaften, Talente, Ausrüstung, Bogen) + "Mehr"-Button für den Rest einführen. Dies
+ kann als separater Folge-Schritt umgesetzt werden.
+
+ Umsetzungsreihenfolge
+
+ 1. utils/platform_utils.py erstellen — zentrale Mobile-Erkennung
+ 2. load_kv_file() Pattern in einer View als Prototyp anpassen (z.B. profil_view.py)
+ 3. profil_view_mobile.kv erstellen — einfachste View, guter Prototyp
+ 4. Testen auf Android oder mit erzwungenem Mobile-Modus (schmales Fenster + Config-Override)
+ 5. Weitere Views nachziehen (eigenschaften, pointbar, einstellungen, etc.)
+ 6. Popups anpassen wo nötig
+ 7. Navigation optimieren (Bottom-Bar statt Rail für Smartphones)
+
+ Desktop-Testmodus für Mobile-Layouts
+
+ Damit wir auf dem Desktop testen können, erweitern wir platform_utils.py:
+
+ def is_mobile_layout():
+     if platform == 'android':
+         from kivy.core.window import Window
+         return Window.width < 600
+     # Desktop-Override für Tests via Config
+     from services.service_container import get_config_service
+     config = get_config_service()
+     if config:
+         return config.get('force_mobile_layout', False)
+     return False
+
+ Und in config/app_config.json: "force_mobile_layout": false
+
+ Wichtige Design-Prinzipien für Mobile-KV-Dateien
+
+ - Gleiche Widget-Klassen wie Desktop (ProfilWidget, EigenschaftenWidget etc.) — nur das Layout ändert sich
+ - Gleiche id-Namen in den KV-Dateien, damit die Python-Logik unverändert funktioniert
+ - Vertikale Stapelung statt horizontaler Spalten
+ - size_hint_x: 1 statt fester dp-Breiten
+ - Touch-Ziele mindestens dp(48) (Material Design Richtlinie)
+ - Scrollbare Bereiche großzügig einsetzen
+
+ Verifizierung
+
+ 1. python main.py — Desktop-Version muss unverändert funktionieren
+ 2. "force_mobile_layout": true in Config setzen → Mobile-Layouts auf Desktop testen
+ 3. python "test units/run_all_tests.py" — alle Tests müssen bestehen
+ 4. Fenster auf ~400px Breite ziehen → prüfen ob Mobile-Layout korrekt dargestellt wird
+ 5. Alle Tabs durchklicken und auf Overflow/Clipping prüfen

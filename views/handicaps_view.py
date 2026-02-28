@@ -61,19 +61,25 @@ Factory.register('TooltipFabButton', TooltipFabButton)
 import os
 import sys
 
-# PyInstaller-kompatibles Laden der KV-Datei
+# PyInstaller-kompatibles Laden der KV-Datei (mit Mobile-Unterstützung)
 def load_kv_file():
+    from utils.platform_utils import is_mobile_layout
+
     if getattr(sys, 'frozen', False):
-        # PyInstaller Bundle
         base_path = sys._MEIPASS
-        kv_path = os.path.join(base_path, 'views', 'handicaps_view.kv')
     else:
-        # Normale Ausführung
         base_path = os.path.dirname(os.path.dirname(__file__))
+
+    mobile = is_mobile_layout()
+    kv_name = 'handicaps_view_mobile.kv' if mobile else 'handicaps_view.kv'
+    kv_path = os.path.join(base_path, 'views', kv_name)
+
+    if not os.path.exists(kv_path):
         kv_path = os.path.join(base_path, 'views', 'handicaps_view.kv')
 
     if os.path.exists(kv_path):
         Builder.load_file(kv_path)
+        Logger.info(f"handicaps_view: KV-Datei geladen: {os.path.basename(kv_path)}")
     else:
         Logger.error(f"handicaps_view: KV-Datei nicht gefunden: {kv_path}")
 

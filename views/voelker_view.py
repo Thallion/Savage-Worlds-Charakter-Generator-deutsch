@@ -34,12 +34,19 @@ from functions.volk_funktionen import (
 # Logger konfigurieren
 Logger = logging.getLogger(__name__)
 
-# NEUER KV-STRING mit MDDropdownMenu für kompakte Völker-Auswahl
-# KV-Datei laden mit PyInstaller-kompatiblem Pfad
+# KV-Datei laden mit PyInstaller-kompatiblem Pfad und Mobile-Unterstützung
 from utils.path_utils import get_application_root
+from utils.platform_utils import is_mobile_layout
 import os
-kv_path = os.path.join(get_application_root(), 'views', 'voelker_view.kv')
-Builder.load_file(kv_path)
+
+_base_path = str(get_application_root())
+_mobile = is_mobile_layout()
+_kv_name = 'voelker_view_mobile.kv' if _mobile else 'voelker_view.kv'
+_kv_path = os.path.join(_base_path, 'views', _kv_name)
+if not os.path.exists(_kv_path):
+    _kv_path = os.path.join(_base_path, 'views', 'voelker_view.kv')
+Builder.load_file(_kv_path)
+Logger.info(f"voelker_view: KV-Datei geladen: {os.path.basename(_kv_path)}")
 
 
 class VoelkerWidget(MDBoxLayout):

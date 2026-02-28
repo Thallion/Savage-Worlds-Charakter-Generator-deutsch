@@ -1,0 +1,248 @@
+# ausruestung_view_mobile.kv - Smartphone-optimiertes Layout
+# Kompakte Card-Ansicht: Name + Kategorie + Gewicht/Kosten + Buttons
+# Beschreibung und Details ausgeblendet, nur per Info-Button
+
+<TooltipIconButton>:
+    style: "filled"
+    size_hint: None, None
+    size: dp(40), dp(40)
+    MDButtonIcon:
+        icon: root.icon
+    MDTooltipPlain:
+        text: root.tooltip_text
+
+<TooltipFabButton>:
+    MDTooltipPlain:
+        text: root.tooltip_text
+
+<AusruestungWidget>:
+    orientation: 'vertical'
+    md_bg_color: app.theme_cls.backgroundColor
+
+    # Suchfeld kompakt
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(64)
+        padding: [dp(8), dp(6)]
+        spacing: dp(6)
+
+        MDTextField:
+            id: search_input
+            hint_text: 'Suche...'
+            size_hint_x: 1
+            on_text: root.filter_ausruestung()
+
+        MDIconButton:
+            id: filter_chevron
+            icon: "chevron-down" if root.is_filter_expanded else "chevron-right"
+            size_hint: None, None
+            width: dp(40)
+            height: dp(40)
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_filter_panel()
+
+    # Filter-Buttons kompakt, horizontal scrollbar
+    MDScrollView:
+        id: filter_container
+        size_hint_y: None
+        height: dp(56)
+        do_scroll_x: True
+        do_scroll_y: False
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: None
+            width: self.minimum_width
+            size_hint_y: None
+            height: dp(48)
+            padding: [dp(8), dp(4)]
+            spacing: dp(6)
+
+            TooltipFabButton:
+                id: sort_name_btn
+                tooltip_text: "Name"
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Name')
+
+            TooltipFabButton:
+                id: sort_weight_btn
+                tooltip_text: "Gewicht"
+                icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Gewicht')
+
+            TooltipFabButton:
+                id: sort_costs_btn
+                tooltip_text: "Kosten"
+                icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Kosten')
+
+            TooltipFabButton:
+                id: sort_amount_btn
+                tooltip_text: "Menge"
+                icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Menge')
+
+            TooltipFabButton:
+                id: sort_category_btn
+                tooltip_text: "Kategorie"
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.update_sort_option('Kategorie')
+
+            MDButton:
+                id: only_owned_button
+                size_hint: None, None
+                height: dp(40)
+                on_release: root.toggle_only_owned_items()
+
+                MDButtonText:
+                    text: "Vorh." if not root.only_owned_items else "Alle"
+                    theme_text_color: "Primary" if not root.only_owned_items else "Custom"
+                    text_color: self.theme_cls.primaryColor if root.only_owned_items else self.theme_cls.onSurfaceColor
+                    font_size: dp(12)
+
+            MDFabButton:
+                icon: "filter"
+                style: "small"
+                size_hint: None, None
+                size: dp(40), dp(40)
+                on_release: root.open_category_menu()
+
+            MDLabel:
+                id: category_label
+                text: 'Alle Kategorien'
+                size_hint_x: None
+                width: dp(80)
+                font_size: dp(12)
+                shorten: True
+                shorten_from: 'right'
+                text_size: self.size
+
+    MDLabel:
+        text: 'Ausrüstung'
+        font_size: dp(18)
+        size_hint_y: None
+        height: dp(32)
+        padding: [dp(8), dp(4)]
+        bold: True
+
+    # Debug-Label
+    MDLabel:
+        id: debug_label
+        text: ''
+        size_hint_y: None
+        height: dp(24) if self.text else 0
+        color: 1, 0, 0, 1
+        halign: 'center'
+        font_size: dp(11)
+
+    # RecycleView
+    MDRecycleView:
+        id: recycleview
+        viewclass: 'AusruestungItemRow'
+        size_hint_y: 1
+
+        RecycleBoxLayout:
+            id: layout
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            spacing: dp(4)
+            padding: [dp(4), dp(4)]
+
+# Kompakte Ausrüstungs-Zeile für Smartphone
+# Name + Kategorie + Gewicht + Kosten + Menge + Buttons
+# KEINE Beschreibung/Details inline
+<AusruestungItemRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(56)
+    spacing: dp(4)
+    padding: [dp(4), dp(4)]
+
+    # Name und Kategorie vertikal gestapelt
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint_x: 1
+        spacing: dp(1)
+
+        MDLabel:
+            text: root.name
+            font_size: dp(13)
+            bold: True
+            halign: 'left'
+            valign: 'middle'
+            shorten: True
+            shorten_from: 'right'
+            text_size: self.size
+            theme_text_color: "Primary"
+
+        MDLabel:
+            text: f"{root.kategorie.capitalize() if root.kategorie else '?'} | {root.gewicht}kg | {root.kosten}{root.waehrungseinheit} | x{root.menge}"
+            font_size: dp(10)
+            theme_text_color: "Secondary"
+            halign: 'left'
+            valign: 'middle'
+            shorten: True
+            shorten_from: 'right'
+            text_size: self.size
+
+    # Info-Button
+    MDFabButton:
+        icon: "information-outline"
+        style: "small"
+        size_hint: None, None
+        size: dp(32), dp(32)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.show_full_description()
+        opacity: 1 if root.beschreibung else 0
+        disabled: not root.beschreibung
+
+    # Buttons kompakt
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_x: None
+        width: dp(110)
+        spacing: dp(2)
+        pos_hint: {"center_y": 0.5}
+
+        MDButton:
+            style: "filled"
+            size_hint: None, None
+            size: dp(34), dp(34)
+            on_release: root.kaufen_ausruestung()
+            MDButtonIcon:
+                icon: "plus"
+
+        MDButton:
+            style: "filled"
+            size_hint: None, None
+            size: dp(34), dp(34)
+            on_release: root.verkaufen_ausruestung()
+            MDButtonIcon:
+                icon: "minus"
+
+        MDButton:
+            style: "filled"
+            size_hint: None, None
+            size: dp(34), dp(34)
+            on_release: root.bearbeite_ausruestung()
+            MDButtonIcon:
+                icon: "pencil"

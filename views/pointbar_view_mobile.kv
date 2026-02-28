@@ -1,0 +1,226 @@
+# pointbar_view_mobile.kv - Smartphone-optimiertes Layout
+# Vertikales Stapel-Layout, Logo nur im Header (klein), Detail vertikal
+# Gleiche Widget-Klassen und IDs wie Desktop-Version
+
+<LabelValuePair>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(22)
+    spacing: dp(6)
+
+    MDLabel:
+        text: root.key_text
+        theme_text_color: "Primary"
+        halign: 'left'
+        valign: 'center'
+        size_hint_x: root.key_width_ratio
+        font_size: dp(11)
+        shorten: True
+        shorten_from: 'right'
+        text_size: self.size
+
+    MDLabel:
+        text: root.value_text
+        theme_text_color: "Secondary"
+        halign: 'left'
+        valign: 'center'
+        size_hint_x: 1 - root.key_width_ratio
+        font_size: dp(11)
+        bold: True
+        shorten: True
+        shorten_from: 'right'
+        text_size: self.size
+
+<GenerationPointsBar>:
+    orientation: 'vertical'
+    spacing: 0
+    size_hint_y: None
+    height: self.minimum_height
+    md_bg_color: app.theme_cls.backgroundColor
+
+    # Header-Zeile (immer sichtbar) - kompakter für Smartphone
+    MDBoxLayout:
+        id: header_bar
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(40)
+        padding: [dp(8), dp(4), dp(4), dp(4)]
+        spacing: dp(6)
+        md_bg_color: app.theme_cls.surfaceColor
+
+        # Mini-Logo (kleiner auf Mobile)
+        Image:
+            source: root.get_logo_path()
+            size_hint: None, None
+            width: dp(28)
+            height: dp(28)
+            allow_stretch: True
+            keep_ratio: True
+            pos_hint: {'center_y': 0.5}
+
+        # Zusammenfassung
+        MDLabel:
+            text: root.header_summary_text
+            theme_text_color: "Primary"
+            halign: 'left'
+            valign: 'center'
+            font_size: dp(11)
+            bold: True
+            shorten: True
+            shorten_from: 'right'
+            text_size: self.size
+            size_hint_x: 1
+
+        # Chevron-Button
+        MDIconButton:
+            id: chevron_icon
+            icon: "chevron-right"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(40), dp(40)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_panel()
+
+    # Detail-Inhalt (ein-/ausklappbar) - VERTIKAL statt horizontal
+    MDBoxLayout:
+        id: content_box
+        orientation: 'vertical'
+        spacing: dp(8)
+        size_hint_y: None
+        height: 0
+        padding: [dp(8), dp(6), dp(8), dp(6)]
+        opacity: 0
+        disabled: True
+
+        # Erste Card: Charakterdaten
+        MDCard:
+            style: "elevated"
+            padding: dp(8)
+            spacing: dp(2)
+            size_hint_x: 1
+            size_hint_y: None
+            height: self.minimum_height
+            md_bg_color: app.theme_cls.surfaceColor
+            elevation: 1
+            radius: [dp(6)]
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(1)
+                adaptive_height: True
+
+                LabelValuePair:
+                    key_text: "Name:"
+                    value_text: root.char_name_text
+                    key_width_ratio: 0.35
+
+                LabelValuePair:
+                    key_text: "Setting:"
+                    value_text: root.active_setting_name_text
+                    key_width_ratio: 0.35
+
+                LabelValuePair:
+                    key_text: "Rang:"
+                    value_text: root.rang_text
+                    key_width_ratio: 0.35
+
+                LabelValuePair:
+                    key_text: "Aufstiege:"
+                    value_text: root.aufstiege_text
+                    key_width_ratio: 0.35
+
+        # Zweite Card: Generierungspunkte
+        MDCard:
+            style: "elevated"
+            padding: dp(8)
+            spacing: dp(2)
+            size_hint_x: 1
+            size_hint_y: None
+            height: self.minimum_height
+            md_bg_color: app.theme_cls.surfaceColor
+            elevation: 1
+            radius: [dp(6)]
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(1)
+                adaptive_height: True
+
+                LabelValuePair:
+                    key_text: "Attribute:"
+                    value_text: root.attribut_text
+                    key_width_ratio: 0.55
+
+                LabelValuePair:
+                    key_text: "Fertigkeiten:"
+                    value_text: root.faehigkeiten_text
+                    key_width_ratio: 0.55
+
+                LabelValuePair:
+                    key_text: "Handicaps:"
+                    value_text: root.handicaps_text
+                    key_width_ratio: 0.55
+
+                LabelValuePair:
+                    key_text: "Mächte:"
+                    value_text: root.maechte_text
+                    key_width_ratio: 0.55
+                    size_hint_y: None
+                    height: dp(22) if root.maechte_text else 0
+                    opacity: 1 if root.maechte_text else 0
+
+                LabelValuePair:
+                    key_text: "SKP:"
+                    value_text: root.superkraft_punkte_text
+                    key_width_ratio: 0.55
+                    size_hint_y: None
+                    height: dp(22) if root.superkraft_punkte_text else 0
+                    opacity: 1 if root.superkraft_punkte_text else 0
+
+        # Dritte Card: Ressourcen
+        MDCard:
+            style: "elevated"
+            padding: dp(8)
+            spacing: dp(2)
+            size_hint_x: 1
+            size_hint_y: None
+            height: self.minimum_height
+            md_bg_color: app.theme_cls.surfaceColor
+            elevation: 1
+            radius: [dp(6)]
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(1)
+                adaptive_height: True
+
+                LabelValuePair:
+                    key_text: "Machtstufe:"
+                    value_text: root.machtstufe_text
+                    key_width_ratio: 0.55
+                    size_hint_y: None
+                    height: dp(22) if root.machtstufe_text else 0
+                    opacity: 1 if root.machtstufe_text else 0
+
+                LabelValuePair:
+                    key_text: "Machtpunkte:"
+                    value_text: root.machtpunkte_text
+                    key_width_ratio: 0.55
+                    size_hint_y: None
+                    height: dp(22) if root.machtpunkte_text else 0
+                    opacity: 1 if root.machtpunkte_text else 0
+
+                LabelValuePair:
+                    key_text: "Parade / Rob.:"
+                    value_text: root.parade_robustheit_text
+                    key_width_ratio: 0.55
+
+                LabelValuePair:
+                    key_text: "Gewicht:"
+                    value_text: root.gewicht_text
+                    key_width_ratio: 0.55
+
+                LabelValuePair:
+                    key_text: "Vermögen:"
+                    value_text: root.vermoegen_text
+                    key_width_ratio: 0.55

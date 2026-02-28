@@ -22,6 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Hellfrost",
+  "force_mobile_layout": true,
   "config_version": "1.0",
-  "last_updated": "2026-02-28T13:16:22.695565"
+  "last_updated": "2026-02-28T18:34:22.142201"
 }

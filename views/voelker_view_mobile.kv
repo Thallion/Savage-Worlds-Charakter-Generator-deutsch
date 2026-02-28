@@ -1,0 +1,78 @@
+# voelker_view_mobile.kv - Smartphone-optimiertes Layout
+# Dropdown volle Breite, vertikal gestapelt
+# Gleiche Widget-Klasse und IDs wie Desktop-Version
+
+<VoelkerWidget>:
+    orientation: 'vertical'
+    md_bg_color: self.theme_cls.backgroundColor
+    padding: [dp(8), dp(6), dp(8), dp(6)]
+    spacing: dp(8)
+
+    MDLabel:
+        text: "Völker"
+        size_hint_y: None
+        height: dp(32)
+        halign: 'left'
+        font_style: "Title"
+        theme_text_color: "Primary"
+        bold: True
+
+    # Völker-Auswahl - vertikal auf Mobile
+    MDCard:
+        size_hint_x: 1
+        size_hint_y: None
+        height: self.minimum_height
+        padding: dp(10)
+        elevation: 2
+        radius: [10]
+        md_bg_color: self.theme_cls.surfaceContainerLowColor
+        style: "elevated"
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(8)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Ausgewähltes Volk:"
+                font_style: "Body"
+                theme_text_color: "Primary"
+                size_hint_y: None
+                height: dp(24)
+                halign: 'left'
+
+            # Dropdown volle Breite
+            MDButton:
+                id: volk_dropdown_button
+                style: "outlined"
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(48)
+                on_release: root.open_volk_dropdown()
+
+                MDButtonText:
+                    id: selected_volk_text
+                    text: "Volk auswählen..."
+
+    # Zusatzelemente Container
+    MDBoxLayout:
+        id: zusatzelemente_container
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+        spacing: dp(8)
+
+    # Volk-Details ScrollView
+    MDScrollView:
+        size_hint_y: 1
+        do_scroll_x: False
+        do_scroll_y: True
+
+        MDBoxLayout:
+            id: selected_volk_container
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(8)
+            padding: [dp(4), dp(6), dp(4), dp(6)]

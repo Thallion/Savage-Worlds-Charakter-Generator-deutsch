@@ -1,0 +1,130 @@
+# profil_view_mobile.kv - Smartphone-optimiertes Layout
+# Labels als Überschriften ÜBER den TextFields statt daneben
+# Gleiche Widget-Klasse und IDs wie Desktop-Version
+
+<ProfilWidget>:
+    orientation: 'vertical'
+    md_bg_color: self.theme_cls.backgroundColor
+
+    MDScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            size_hint_x: 1
+            padding: [dp(12), dp(8), dp(12), dp(12)]
+            spacing: dp(16)
+
+            # Name
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+
+                MDLabel:
+                    text: "Name:"
+                    size_hint_y: None
+                    height: dp(24)
+                    halign: 'left'
+                    theme_text_color: "Primary"
+                    font_size: dp(13)
+
+                MDTextField:
+                    id: name_input
+                    hint_text: "Name eingeben"
+                    size_hint_x: 1
+                    text: root.char_name
+                    on_text: root.on_char_name_change(root, self.text)
+
+            # Alter
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+
+                MDLabel:
+                    text: "Alter:"
+                    size_hint_y: None
+                    height: dp(24)
+                    halign: 'left'
+                    theme_text_color: "Primary"
+                    font_size: dp(13)
+
+                MDTextField:
+                    id: alter_input
+                    hint_text: "Alter eingeben"
+                    size_hint_x: 1
+                    text: root.alter
+                    on_text: root.on_alter_change(root, self.text)
+
+            # Geschlecht
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+
+                MDLabel:
+                    text: "Geschlecht:"
+                    size_hint_y: None
+                    height: dp(24)
+                    halign: 'left'
+                    theme_text_color: "Primary"
+                    font_size: dp(13)
+
+                MDTextField:
+                    id: geschlecht_input
+                    hint_text: "Geschlecht eingeben"
+                    size_hint_x: 1
+                    text: root.geschlecht
+                    on_text: root.on_geschlecht_change(root, self.text)
+
+            # Konzept
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+
+                MDLabel:
+                    text: "Konzept:"
+                    size_hint_y: None
+                    height: dp(24)
+                    halign: 'left'
+                    theme_text_color: "Primary"
+                    font_size: dp(13)
+
+                MDTextField:
+                    id: konzept_input
+                    hint_text: "Konzept eingeben"
+                    size_hint_x: 1
+                    text: root.konzept
+                    on_text: root.on_konzept_change(root, self.text)
+
+            # Sprachen
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+
+                MDLabel:
+                    text: "Sprachen:"
+                    size_hint_y: None
+                    height: dp(24)
+                    halign: 'left'
+                    theme_text_color: "Primary"
+                    font_size: dp(13)
+
+                MDTextField:
+                    id: sprachen_input
+                    hint_text: "Sprachen eingeben"
+                    size_hint_x: 1
+                    text: root.sprachen
+                    on_text: root.on_sprachen_change(root, self.text)
