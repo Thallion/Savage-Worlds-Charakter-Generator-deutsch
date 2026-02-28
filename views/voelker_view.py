@@ -362,25 +362,23 @@ class VoelkerWidget(MDBoxLayout):
         """Erstellt eine Sektion für Zusatzelemente."""
         # Hauptcontainer für die Sektion
         section_card = MDCard(
-            size_hint_x=None,
-            width=dp(800),
+            size_hint_x=1,
             size_hint_y=None,
-            height=dp(140),
-            padding=dp(25),
-            spacing=dp(15),
+            padding=dp(14),
+            spacing=dp(10),
             elevation=3,
             radius=[12],
             md_bg_color=self.theme_cls.surfaceContainerHighColor,
             style="elevated",
-            pos_hint={"x": 0}
         )
-        
+
         section_content = MDBoxLayout(
             orientation='vertical',
             size_hint_y=None,
-            height=dp(90),
-            spacing=dp(15)
+            spacing=dp(10)
         )
+        section_content.bind(minimum_height=section_content.setter('height'))
+        section_card.bind(minimum_height=section_card.setter('height'))
         
         # Titel der Sektion
         titel_label = MDLabel(
@@ -484,7 +482,7 @@ class VoelkerWidget(MDBoxLayout):
                 spacing=dp(15),
                 padding=dp(20),
                 size_hint_y=None,
-                height=dp(400)
+                height=dp(350)
             )
 
             # Suchzeile mit optionalem Filter-Button
@@ -519,8 +517,8 @@ class VoelkerWidget(MDBoxLayout):
             # Scrollbare Liste
             scroll_view = MDScrollView(
                 size_hint_y=None,
-                height=dp(300),
-                bar_width=dp(30),
+                height=dp(250),
+                bar_width=dp(15),
                 bar_margin=dp(0),
                 bar_color=self.theme_cls.primaryColor,
                 bar_inactive_color=self.theme_cls.onSurfaceColor
@@ -542,7 +540,7 @@ class VoelkerWidget(MDBoxLayout):
             # Rechter Bereich für besseres Scrolling
             scroll_zone = MDBoxLayout(
                 size_hint_x=None,
-                width=dp(40),
+                width=dp(20),
                 size_hint_y=1
             )
 
@@ -732,7 +730,7 @@ class VoelkerWidget(MDBoxLayout):
             font_style="Title",
             theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(50),
+            height=dp(35),
             halign='left',
             valign='center',
             bold=True
@@ -758,21 +756,13 @@ class VoelkerWidget(MDBoxLayout):
                     font_style="Body",
                     theme_text_color="Primary",
                     size_hint_y=None,
-                    height=dp(35),
+                    height=dp(28),
                     halign='left',
                     valign='center',
                     bold=True
                 )
                 selected_volk_container.add_widget(section_label)
-                
-                # Abstandshalter zwischen Überschrift und Inhalt
-                spacer_top = MDLabel(
-                    text="",
-                    size_hint_y=None,
-                    height=dp(15)
-                )
-                selected_volk_container.add_widget(spacer_top)
-                
+
                 # Sektion-Inhalt mit dynamischer Höhe
                 content_label = MDLabel(
                     text=self._format_content(content),
@@ -785,21 +775,13 @@ class VoelkerWidget(MDBoxLayout):
                     markup=True
                 )
                 content_label.bind(
-                    size=lambda instance, size: setattr(instance, 'text_size', (size[0] - dp(40), None))
+                    size=lambda instance, size: setattr(instance, 'text_size', (size[0] - dp(20), None))
                 )
                 content_label.bind(
                     text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10)))
                 )
-                
+
                 selected_volk_container.add_widget(content_label)
-                
-                # Abstand zwischen Sektionen
-                spacer = MDLabel(
-                    text="",
-                    size_hint_y=None,
-                    height=dp(10)
-                )
-                selected_volk_container.add_widget(spacer)
 
     def _has_valid_content(self, content):
         """Prüft, ob Content valid und nicht leer ist."""
@@ -865,24 +847,22 @@ class VoelkerWidget(MDBoxLayout):
 
             # Hauptcontainer für die Sektion
             section_card = MDCard(
-                size_hint_x=None,
-                width=dp(800),
+                size_hint_x=1,
                 size_hint_y=None,
-                height=dp(230) if current_wahl else dp(180),
-                padding=dp(25),
+                padding=dp(14),
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
                 style="elevated",
-                pos_hint={"x": 0}
             )
+            section_card.bind(minimum_height=section_card.setter('height'))
 
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                height=dp(180) if current_wahl else dp(130),
-                spacing=dp(15)
+                spacing=dp(10)
             )
+            section_content.bind(minimum_height=section_content.setter('height'))
 
             # Titel der Sektion mit reduzierter Schriftgröße
             titel_label = MDLabel(
@@ -954,7 +934,7 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Halbelf ENTWEDER/ODER Sektion: {e}")
             # Fallback: Leere Card zurückgeben
-            return MDCard(size_hint_x=None, width=dp(800), size_hint_y=None, height=dp(50), pos_hint={"x": 0})
+            return MDCard(size_hint_x=1, size_hint_y=None, height=dp(50))
 
     def _create_menschen_vielseitig_section(self):
         """
@@ -975,24 +955,22 @@ class VoelkerWidget(MDBoxLayout):
 
             # Hauptcontainer
             section_card = MDCard(
-                size_hint_x=None,
-                width=dp(800),
+                size_hint_x=1,
                 size_hint_y=None,
-                height=dp(230) if current_wahl else dp(180),
-                padding=dp(25),
+                padding=dp(14),
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
                 style="elevated",
-                pos_hint={"x": 0}
             )
+            section_card.bind(minimum_height=section_card.setter('height'))
 
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                height=dp(180) if current_wahl else dp(130),
-                spacing=dp(15)
+                spacing=dp(10)
             )
+            section_content.bind(minimum_height=section_content.setter('height'))
 
             # Titel
             titel_label = MDLabel(
@@ -1063,7 +1041,7 @@ class VoelkerWidget(MDBoxLayout):
 
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Menschen-Vielseitig Sektion: {e}")
-            return MDCard(size_hint_x=None, width=dp(800), size_hint_y=None, height=dp(50), pos_hint={"x": 0})
+            return MDCard(size_hint_x=1, size_hint_y=None, height=dp(50))
 
     def _mensch_vielseitig_waehle_talent(self):
         """Menschen-Vielseitig: Wählt freies Talent (ENTWEDER-Option)."""

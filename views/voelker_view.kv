@@ -1,29 +1,27 @@
 <VoelkerWidget>:
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor
-    padding: [dp(20), dp(15), dp(20), dp(15)]
-    spacing: dp(20)
+    padding: [dp(10), dp(8), dp(10), dp(8)]
+    spacing: dp(10)
 
     MDLabel:
         text: "Völker"
         size_hint_y: None
-        height: dp(45)
+        height: dp(35)
         halign: 'left'
         font_style: "Title"
         theme_text_color: "Primary"
 
-    # NEUE KOMPAKTE VÖLKER-AUSWAHL - 60% weniger Platz!
+    # KOMPAKTE VÖLKER-AUSWAHL - responsiv
     MDCard:
-        size_hint_x: None
-        width: dp(800)
+        size_hint_x: 1
         size_hint_y: None
-        height: dp(100)  # Nur 100dp statt 160dp!
-        padding: dp(20)
+        height: dp(80)
+        padding: dp(12)
         elevation: 2
         radius: [10]
         md_bg_color: self.theme_cls.surfaceContainerLowColor
         style: "elevated"
-        pos_hint: {"x": 0}
 
         MDBoxLayout:
             orientation: 'horizontal'
@@ -56,12 +54,11 @@
         orientation: 'vertical'
         size_hint_y: None
         height: self.minimum_height
-        spacing: dp(20)
+        spacing: dp(10)
 
     # Ausgewähltes Volk Details in eigenem ScrollView
     MDScrollView:
-        size_hint_y: None
-        height: dp(400)
+        size_hint_y: 1
         do_scroll_x: False
         do_scroll_y: True
         bar_width: dp(15)
@@ -73,5 +70,5 @@
             orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
-            spacing: dp(25)
-            padding: [dp(20), dp(20), dp(50), dp(30)]
+            spacing: dp(12)
+            padding: [dp(12), dp(10), dp(12), dp(10)]
