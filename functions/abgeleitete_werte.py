@@ -51,7 +51,10 @@ def berechne_abgeleitete_werte(charakter):
         
         if "Waffenmeister" in charakter.selected_talente:
             parade_bonus += 1  # Waffenmeister: +1 Parade
-            
+
+        if "Herdritter" in charakter.selected_talente:
+            parade_bonus += 1  # Herdritter (Hellfrost): +1 Parade
+
         charakter.parade = parade_basis + parade_bonus
       
         # Debug-Ausgaben zur Fehleridentifikation
@@ -120,8 +123,11 @@ def berechne_abgeleitete_werte(charakter):
             robustheit_bonus += 1  # Raufbold: +1 Robustheit
 
         if "Schläger" in charakter.selected_talente:
-            robustheit_bonus += 1  # Schläger: +1 Robustheit      
-            
+            robustheit_bonus += 1  # Schläger: +1 Robustheit
+
+        if "Jünger Erthas" in charakter.selected_talente:
+            robustheit_bonus += 1  # Jünger Erthas (Hellfrost): +1 Robustheit
+
         # Handicap-Effekte für Robustheit
         for handicap_name in charakter.selected_handicaps:
             if handicap_name in charakter.handicaps:

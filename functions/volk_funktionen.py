@@ -1534,9 +1534,12 @@ def waehle_mensch_fertigkeitspunkte(charakter, volk_name):
             _reset_menschen_freies_talent(charakter)
 
         # +2 Fertigkeitspunkte gewähren
-        if hasattr(charakter, 'fertigkeitspunkte_gesamt'):
-            charakter.fertigkeitspunkte_gesamt += 2
-            Logger.debug(f"Fertigkeitspunkte erhöht auf {charakter.fertigkeitspunkte_gesamt}")
+        if hasattr(charakter, 'verbleibende_fertigkeitssteigerungen'):
+            charakter.verbleibende_fertigkeitssteigerungen += 2
+            Logger.debug(f"Verbleibende Fertigkeitssteigerungen erhöht auf {charakter.verbleibende_fertigkeitssteigerungen}")
+        if hasattr(charakter, 'maximale_fertigkeitssteigerungen'):
+            charakter.maximale_fertigkeitssteigerungen += 2
+            Logger.debug(f"Maximale Fertigkeitssteigerungen erhöht auf {charakter.maximale_fertigkeitssteigerungen}")
 
         # Tracking setzen
         _set_mensch_fertigkeitspunkte_gewaehlt(charakter, True)
@@ -1572,9 +1575,12 @@ def _reset_mensch_fertigkeitspunkte(charakter):
     """Setzt die Mensch-Fertigkeitspunkte-Wahl zurück (-2 Punkte)."""
     try:
         if _get_mensch_fertigkeitspunkte_gewaehlt(charakter):
-            if hasattr(charakter, 'fertigkeitspunkte_gesamt'):
-                charakter.fertigkeitspunkte_gesamt -= 2
-                Logger.debug(f"Fertigkeitspunkte zurückgesetzt auf {charakter.fertigkeitspunkte_gesamt}")
+            if hasattr(charakter, 'verbleibende_fertigkeitssteigerungen'):
+                charakter.verbleibende_fertigkeitssteigerungen -= 2
+                Logger.debug(f"Verbleibende Fertigkeitssteigerungen zurückgesetzt auf {charakter.verbleibende_fertigkeitssteigerungen}")
+            if hasattr(charakter, 'maximale_fertigkeitssteigerungen'):
+                charakter.maximale_fertigkeitssteigerungen -= 2
+                Logger.debug(f"Maximale Fertigkeitssteigerungen zurückgesetzt auf {charakter.maximale_fertigkeitssteigerungen}")
             _set_mensch_fertigkeitspunkte_gewaehlt(charakter, False)
             Logger.info("Mensch Fertigkeitspunkte-Wahl zurückgesetzt")
     except Exception as e:

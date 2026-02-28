@@ -182,7 +182,7 @@ voelker = {
     "Frostzwerg": {
         "name": "Frostzwerg",
         "handicaps": [
-            "Abgekapselt (Charisma -2 gegenüber anderen Rassen)",
+            "Abgekapselt (-2 Überreden gegenüber anderen Rassen)",
             "Hitzelethargie (bei 12°C+: -1 auf alle Eigenschaftswürfe)",
             "Langsam (Bewegungsweite 5\")"
         ],
@@ -387,7 +387,7 @@ voelker = {
     "Taigaelf": {
         "name": "Taigaelf",
         "handicaps": [
-            "Abgekapselt (Charisma -2 gegenüber anderen Rassen)",
+            "Abgekapselt (-2 Überreden gegenüber anderen Rassen)",
             "Hitzelethargie (bei 12°C+: -1 auf alle Eigenschaftswürfe)",
             "Zwei linke Hände (Abneigung gegen mechanische Gegenstände inkl. Armbrüste)"
         ],
@@ -533,7 +533,7 @@ hellfrost_handicaps = {
         "name": "Schwarzes Schaf",
         "stufe": "leicht",
         "punkte": 1,
-        "beschreibung": "Nur für Helden aus der Magokratie. Der Held lehnt die Heahmagier ab und wurde von seiner Familie verstoßen. Kann kein Land oder Titel erben, -2 Charisma gegenüber Heahmagiern. Kann nicht Adelig, Arkaner Hintergrund (Heahmagier) oder Reich wählen.",
+        "beschreibung": "Nur für Helden aus der Magokratie. Der Held lehnt die Heahmagier ab und wurde von seiner Familie verstoßen. Kann kein Land oder Titel erben, -2 Überreden gegenüber Heahmagiern. Kann nicht Adelig, Arkaner Hintergrund (Heahmagier) oder Reich wählen.",
         "ausgewaehlt": False,
         "aktiv": True,
         "custom": False
@@ -811,7 +811,7 @@ hellfrost_talente = {
         "kategorie": "Experte",
         "rang": "A",
         "voraussetzungen": ["Heilen W8+", "Handicap Pazifist", "weiblich"],
-        "beschreibung": "+2 auf Heilenwürfe, +1 Charisma. Kann ab Veteran das Talent Mitstreiter erwerben. Erhält Beziehungen und Handicap Befehle.",
+        "beschreibung": "+2 auf Heilenwürfe, +1 Überreden. Kann ab Veteran das Talent Mitstreiter erwerben. Erhält Beziehungen und Handicap Befehle.",
         "neue_maechte": 0,
         "machtpunkte": 0,
         "ausgewaehlt": False,
@@ -855,7 +855,7 @@ hellfrost_talente = {
         "kategorie": "Experte",
         "rang": "A",
         "voraussetzungen": ["Engro", "Stärke W6+", "Willenskraft W8+", "Einschüchtern W6+", "Schießen W8+"],
-        "beschreibung": "Reichweite der Schleuder +1 pro Rang. Stä+W6 Schaden auf kurze Reichweite. +1 Charisma gegenüber Engros. Erhält Beziehungen und Handicap Befehle.",
+        "beschreibung": "Reichweite der Schleuder +1 pro Rang. Stä+W6 Schaden auf kurze Reichweite. +1 Überreden gegenüber Engros. Erhält Beziehungen und Handicap Befehle.",
         "neue_maechte": 0,
         "machtpunkte": 0,
         "ausgewaehlt": False,
@@ -934,7 +934,7 @@ hellfrost_talente = {
         "kategorie": "Hintergrund",
         "rang": "A",
         "voraussetzungen": [],
-        "beschreibung": "Der Charakter ist von adeligem Geblüt. +2 Charisma, +2 Geld. Magokratie-Adelige benötigen Arkaner Hintergrund (Heahmagier).",
+        "beschreibung": "Der Charakter ist von adeligem Geblüt. +2 Überreden, +2 Geld. Magokratie-Adelige benötigen Arkaner Hintergrund (Heahmagier).",
         "neue_maechte": 0,
         "machtpunkte": 0,
         "ausgewaehlt": False,
@@ -1266,7 +1266,7 @@ hellfrost_talente = {
         "kategorie": "Jünger",
         "rang": "F",
         "voraussetzungen": ["Arkaner Hintergrund (Wunder)", "Glaube W8+", "Überreden W8+", "Umhören W8+", "Anhänger Vars"],
-        "beschreibung": "Umhörenprobe zum Verkaufen: Erfolg = 50%, Steigerung = 75% des Preises. Probe alle 4 Tage statt 1x/Woche. +1 Charisma.",
+        "beschreibung": "Umhörenprobe zum Verkaufen: Erfolg = 50%, Steigerung = 75% des Preises. Probe alle 4 Tage statt 1x/Woche. +1 Überreden.",
         "neue_maechte": 0,
         "machtpunkte": 0,
         "ausgewaehlt": False,
