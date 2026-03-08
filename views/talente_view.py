@@ -707,19 +707,17 @@ class TalenteWidget(MDBoxLayout):
         Clock.schedule_once(self._init_filter_collapsed_state, 0.1)
 
     def toggle_filter_panel(self):
-        """Klappt den Filter-Bereich auf oder zu"""
+        """Klappt den Filter-Bereich auf oder zu (Android-kompatibel, kein disabled)"""
         container = self.ids.get('filter_container')
         if not container:
             return
         if self.is_filter_expanded:
             container.height = 0
             container.opacity = 0
-            container.disabled = True
             self.is_filter_expanded = False
         else:
             container.height = dp(120)
             container.opacity = 1
-            container.disabled = False
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
@@ -884,8 +882,10 @@ class TalenteWidget(MDBoxLayout):
             Logger.error("TalenteWidget: Controller oder Charakter nicht verfügbar")
             return
             
-        search_term = self.ids.search_input.text.lower()
-        selected_kategorie = self.ids.category_label.text.lower()
+        search_input = self.ids.get('search_input')
+        category_label = self.ids.get('category_label')
+        search_term = search_input.text.lower() if search_input else ''
+        selected_kategorie = category_label.text.lower() if category_label else 'alle kategorien'
 
         # Talente vom Modell abrufen
         alle_talente = self.controller.charakter.talente
@@ -982,8 +982,9 @@ class TalenteWidget(MDBoxLayout):
                 "on_release": lambda x=f"{i}": self.set_category(x),
             } for i in [ALL_CATEGORIES_TEXT] + self.kategorien
         ]
+        caller = self.ids.get('category_label') or self.ids.get('only_selected_button')
         self.menu = MDDropdownMenu(
-            caller=self.ids.category_label,
+            caller=caller,
             items=menu_items,
             width_mult=4,
         )
@@ -994,6 +995,8 @@ class TalenteWidget(MDBoxLayout):
         Setzt die ausgewählte Kategorie und aktualisiert die Anzeige.
         Event-Handler für die Kategorie-Auswahl im Menü.
         """
-        self.ids.category_label.text = text
+        category_label = self.ids.get('category_label')
+        if category_label:
+            category_label.text = text
         self.menu.dismiss()
         self.filter_talente()

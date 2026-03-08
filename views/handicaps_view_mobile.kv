@@ -10,86 +10,75 @@
     orientation: 'vertical'
     md_bg_color: self.theme_cls.backgroundColor
 
-    # Suchfeld kompakt
+    # Suchfeld und Filter-Buttons in einer Zeile, horizontal scrollbar
     MDBoxLayout:
         orientation: 'horizontal'
         size_hint_y: None
-        height: dp(64)
-        padding: [dp(8), dp(6)]
-        spacing: dp(6)
+        height: dp(44)
+        padding: [dp(4), dp(2)]
+        spacing: dp(4)
 
         MDTextField:
             id: search_input
             hint_text: 'Suche...'
-            size_hint_x: 1
+            size_hint_x: None
+            width: dp(140)
             on_text: root.filter_handicaps()
 
-        MDIconButton:
-            id: filter_chevron
-            icon: "chevron-down" if root.is_filter_expanded else "chevron-right"
-            size_hint: None, None
-            width: dp(40)
-            height: dp(40)
-            pos_hint: {'center_y': 0.5}
-            on_release: root.toggle_filter_panel()
+        MDScrollView:
+            id: filter_container
+            size_hint_x: 1
+            do_scroll_x: True
+            do_scroll_y: False
 
-    # Filter-Buttons kompakt, horizontal scrollbar
-    MDScrollView:
-        id: filter_container
-        size_hint_y: None
-        height: dp(56)
-        do_scroll_x: True
-        do_scroll_y: False
-
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_x: None
-            width: self.minimum_width
-            size_hint_y: None
-            height: dp(48)
-            padding: [dp(8), dp(4)]
-            spacing: dp(6)
-
-            TooltipFabButton:
-                tooltip_text: "Name sortieren"
-                icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(40), dp(40)
-                on_release: root.toggle_sort_order()
-
-            MDButton:
-                id: only_selected_button
-                size_hint: None, None
-                height: dp(40)
-                on_release: root.toggle_only_selected_items()
-
-                MDButtonText:
-                    text: "Gewählt" if not root.only_selected_items else "Alle"
-                    theme_text_color: "Primary" if not root.only_selected_items else "Custom"
-                    text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
-                    font_size: dp(12)
-
-            MDFabButton:
-                icon: "filter"
-                style: "small"
-                size_hint: None, None
-                size: dp(40), dp(40)
-                on_release: root.open_category_menu()
-
-            MDLabel:
-                id: category_label
-                text: 'Alle Stufen'
+            MDBoxLayout:
+                orientation: 'horizontal'
                 size_hint_x: None
-                width: dp(80)
-                font_size: dp(12)
+                width: self.minimum_width
+                size_hint_y: None
+                height: dp(40)
+                spacing: dp(4)
+
+                TooltipFabButton:
+                    tooltip_text: "Name sortieren"
+                    icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.toggle_sort_order()
+
+                MDButton:
+                    id: only_selected_button
+                    size_hint: None, None
+                    height: dp(36)
+                    on_release: root.toggle_only_selected_items()
+
+                    MDButtonText:
+                        text: "Gewählt" if not root.only_selected_items else "Alle"
+                        theme_text_color: "Primary" if not root.only_selected_items else "Custom"
+                        text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
+                        font_size: dp(11)
+
+                MDFabButton:
+                    icon: "filter"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.open_category_menu()
+
+                MDLabel:
+                    id: category_label
+                    text: 'Alle Stufen'
+                    size_hint_x: None
+                    width: dp(80)
+                    font_size: dp(11)
 
     MDLabel:
         text: 'Handicaps'
-        font_size: dp(18)
+        font_size: dp(16)
         size_hint_y: None
-        height: dp(32)
-        padding: [dp(8), dp(4)]
+        height: dp(28)
+        padding: [dp(4), dp(2)]
         bold: True
 
     HandicapsRecycleView:
@@ -99,31 +88,31 @@
 
         RecycleBoxLayout:
             id: layout
-            default_size: None, dp(48)
+            default_size: None, dp(38)
             default_size_hint: 1, None
             size_hint_y: None
             height: self.minimum_height
             orientation: 'vertical'
             spacing: dp(2)
-            padding: [dp(4), dp(4)]
+            padding: [dp(2), dp(2)]
 
 # Kompakte Handicap-Zeile: Name | Stufe | +/- Buttons | Info
-# KEINE Beschreibung inline
 <HandicapItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(48)
+    height: dp(38)
     md_bg_color: self._get_background_color()
     line_color: self._get_line_color()
     line_width: 2
-    spacing: dp(4)
-    padding: [dp(6), dp(4)]
+    spacing: dp(2)
+    padding: [dp(4), dp(2)]
 
-    # Name
+    # Name - feste Breite
     MDLabel:
         text: root.handicap_name
         font_size: dp(13)
-        size_hint_x: 1
+        size_hint_x: None
+        width: dp(200)
         halign: 'left'
         valign: 'middle'
         shorten: True
@@ -133,9 +122,9 @@
     # Stufe kompakt
     MDLabel:
         text: root.stufe.capitalize() if root.stufe else "?"
-        font_size: dp(12)
+        font_size: dp(11)
         size_hint_x: None
-        width: dp(60)
+        width: dp(48)
         halign: 'center'
         valign: 'middle'
 
@@ -144,7 +133,7 @@
         icon: "plus"
         style: "small"
         size_hint: None, None
-        size: dp(36), dp(36)
+        size: dp(30), dp(30)
         pos_hint: {"center_y": 0.5}
         on_release: root.waehle_handicap()
 
@@ -152,7 +141,7 @@
         icon: "minus"
         style: "small"
         size_hint: None, None
-        size: dp(36), dp(36)
+        size: dp(30), dp(30)
         pos_hint: {"center_y": 0.5}
         on_release: root.entferne_handicap()
         disabled: not root.ausgewaehlt
@@ -161,15 +150,15 @@
         icon: "pencil"
         style: "small"
         size_hint: None, None
-        size: dp(36), dp(36)
+        size: dp(30), dp(30)
         pos_hint: {"center_y": 0.5}
         on_release: root.bearbeite_handicap()
 
-    # Info-Button für Beschreibung
+    # Info-Button
     MDFabButton:
         icon: "information-outline"
         style: "small"
         size_hint: None, None
-        size: dp(32), dp(32)
+        size: dp(28), dp(28)
         pos_hint: {"center_y": 0.5}
         on_release: root.show_full_description()

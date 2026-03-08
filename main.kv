@@ -105,30 +105,33 @@ MDScreen:
             orientation: 'horizontal'
 
             # Menü-Toggle-Button (nur im Mobile-Modus sichtbar)
+            # KEIN disabled auf Container-Ebene - Android propagiert das nicht
+            # zuverlässig an Kinder. width=0 + opacity=0 reicht zum Verstecken.
             MDBoxLayout:
                 id: menu_toggle_container
                 orientation: 'vertical'
                 size_hint_x: None
                 width: 0
                 opacity: 0
-                disabled: True
+                padding: [0, dp(8), 0, dp(8)]
 
                 MDIconButton:
                     id: menu_toggle_btn
                     icon: "menu"
+                    style: "filled"
                     size_hint: None, None
-                    size: dp(48), dp(48)
-                    pos_hint: {'center_x': 0.5, 'top': 1}
+                    size: dp(56), dp(56)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                     on_release: app.toggle_navigation_rail()
 
             # NavigationRail (initial versteckt)
+            # KEIN disabled - Android-Kompatibilität (width=0 reicht)
             MDBoxLayout:
                 id: nav_rail_container
                 orientation: 'vertical'
                 size_hint_x: None
                 width: 0
                 opacity: 0
-                disabled: True
                 md_bg_color: app.theme_cls.surfaceContainerColor
 
                 ScrollView:

@@ -359,19 +359,17 @@ class KraefteWidget(MDBoxLayout):
         Clock.schedule_once(self._init_filter_collapsed_state, 0.1)
 
     def toggle_filter_panel(self):
-        """Klappt den Filter-Bereich auf oder zu"""
+        """Klappt den Filter-Bereich auf oder zu (Android-kompatibel, kein disabled)"""
         container = self.ids.get('filter_container')
         if not container:
             return
         if self.is_filter_expanded:
             container.height = 0
             container.opacity = 0
-            container.disabled = True
             self.is_filter_expanded = False
         else:
             container.height = dp(120)
             container.opacity = 1
-            container.disabled = False
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):

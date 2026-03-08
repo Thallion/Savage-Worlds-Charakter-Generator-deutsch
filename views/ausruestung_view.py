@@ -889,19 +889,17 @@ class AusruestungWidget(MDBoxLayout):
         Clock.schedule_once(self._init_filter_collapsed_state, 0.1)
 
     def toggle_filter_panel(self):
-        """Klappt den Filter-Bereich auf oder zu"""
+        """Klappt den Filter-Bereich auf oder zu (Android-kompatibel, kein disabled)"""
         container = self.ids.get('filter_container')
         if not container:
             return
         if self.is_filter_expanded:
             container.height = 0
             container.opacity = 0
-            container.disabled = True
             self.is_filter_expanded = False
         else:
             container.height = dp(120)
             container.opacity = 1
-            container.disabled = False
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
@@ -945,8 +943,10 @@ class AusruestungWidget(MDBoxLayout):
             self.set_debug_message("Controller oder Charakter nicht verfügbar")
             return
             
-        search_term = self.ids.search_input.text.lower()
-        selected_kategorie = self.ids.category_label.text.lower()
+        search_input = self.ids.get('search_input')
+        category_label = self.ids.get('category_label')
+        search_term = search_input.text.lower() if search_input else ''
+        selected_kategorie = category_label.text.lower() if category_label else 'alle kategorien'
 
         # Ausrüstung vom Modell abrufen
         alle_ausruestung = self.controller.charakter.ausruestung
@@ -1193,8 +1193,9 @@ class AusruestungWidget(MDBoxLayout):
                 "on_release": lambda x=f"{i}": self.set_category(x),
             } for i in [ALL_CATEGORIES_TEXT] + self.kategorien
         ]
+        caller = self.ids.get('category_label') or self.ids.get('only_owned_button')
         self.menu = MDDropdownMenu(
-            caller=self.ids.category_label,
+            caller=caller,
             items=menu_items,
             width_mult=4,
         )
@@ -1202,7 +1203,9 @@ class AusruestungWidget(MDBoxLayout):
 
     def set_category(self, text):
         """Setzt die ausgewählte Kategorie und aktualisiert die Anzeige"""
-        self.ids.category_label.text = text
+        category_label = self.ids.get('category_label')
+        if category_label:
+            category_label.text = text
         self.menu.dismiss()
         self.filter_ausruestung()
 

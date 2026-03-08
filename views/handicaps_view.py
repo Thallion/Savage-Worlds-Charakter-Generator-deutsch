@@ -684,19 +684,17 @@ class HandicapsWidget(MDBoxLayout):
         Clock.schedule_once(self._init_filter_collapsed_state, 0.1)
 
     def toggle_filter_panel(self):
-        """Klappt den Filter-Bereich auf oder zu"""
+        """Klappt den Filter-Bereich auf oder zu (Android-kompatibel, kein disabled)"""
         container = self.ids.get('filter_container')
         if not container:
             return
         if self.is_filter_expanded:
             container.height = 0
             container.opacity = 0
-            container.disabled = True
             self.is_filter_expanded = False
         else:
             container.height = dp(120)
             container.opacity = 1
-            container.disabled = False
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
@@ -835,8 +833,10 @@ class HandicapsWidget(MDBoxLayout):
             Logger.error("HandicapsWidget: Controller oder Charakter nicht verfügbar")
             return
             
-        search_term = self.ids.search_input.text.lower()
-        selected_stufe = self.ids.category_label.text.lower()
+        search_input = self.ids.get('search_input')
+        category_label = self.ids.get('category_label')
+        search_term = search_input.text.lower() if search_input else ''
+        selected_stufe = category_label.text.lower() if category_label else 'alle stufen'
 
         # Handicaps vom Modell abrufen
         alle_handicaps = self.controller.charakter.handicaps
@@ -879,8 +879,9 @@ class HandicapsWidget(MDBoxLayout):
                 "on_release": lambda x=f"{i}": self.set_category(x),
             } for i in [ALL_CATEGORIES_TEXT] + self.stufen
         ]
+        caller = self.ids.get('category_label') or self.ids.get('only_selected_button')
         self.menu = MDDropdownMenu(
-            caller=self.ids.category_label,
+            caller=caller,
             items=menu_items,
             width_mult=4,
         )
@@ -891,6 +892,8 @@ class HandicapsWidget(MDBoxLayout):
         Setzt die ausgewählte Kategorie und aktualisiert die Anzeige.
         Event-Handler für die Kategorie-Auswahl im Menü.
         """
-        self.ids.category_label.text = text
+        category_label = self.ids.get('category_label')
+        if category_label:
+            category_label.text = text
         self.menu.dismiss()
         self.filter_handicaps()

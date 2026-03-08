@@ -10,6 +10,7 @@ dist/
 bin/
 build/
 Texte/
+screenshots/
 ToDo/
 .buildozer/
 *.egg-info/

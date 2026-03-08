@@ -15,8 +15,8 @@
             orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
-            padding: [dp(8), dp(8), dp(8), dp(8)]
-            spacing: dp(8)
+            padding: [dp(8), dp(6), dp(8), dp(6)]
+            spacing: dp(4)
 
             # Charaktergenerierung abschließen Button
             MDButton:
@@ -86,14 +86,15 @@
 <EigenschaftenItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(48)
-    spacing: dp(4)
+    height: dp(40)
+    spacing: dp(2)
     padding: [dp(4), 0]
 
-    # Name-Label - nutzt verfügbaren Platz
+    # Name-Label - feste Breite, nicht den ganzen Landscape-Platz füllen
     MDLabel:
         text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
-        size_hint_x: 1
+        size_hint_x: None
+        width: dp(220)
         halign: 'left'
         valign: 'middle'
         font_size: dp(13)
@@ -104,8 +105,8 @@
     # Würfel-Icon-Gruppe kompakt
     MDBoxLayout:
         size_hint_x: None
-        width: dp(120)
-        spacing: dp(1)
+        width: dp(100)
+        spacing: 0
 
         # Würfel-Icon
         MDIconButton:
@@ -113,7 +114,7 @@
             style: "standard"
             theme_icon_color: "Primary"
             size_hint: None, None
-            size: dp(28), dp(28)
+            size: dp(26), dp(26)
 
         # Modifier-Vorzeichen
         MDIconButton:
@@ -121,9 +122,8 @@
             style: "standard"
             theme_icon_color: "Primary"
             size_hint: None, None
-            size: dp(24), dp(24)
+            size: dp(22), dp(22)
             opacity: 1 if root.has_modifier else 0
-            disabled: not root.has_modifier
 
         # Erste Ziffer des Modifiers
         MDIconButton:
@@ -131,9 +131,8 @@
             style: "standard"
             theme_icon_color: "Primary"
             size_hint: None, None
-            size: dp(24), dp(24)
+            size: dp(22), dp(22)
             opacity: 1 if root.has_modifier else 0
-            disabled: not root.has_modifier
 
         # Zweite Ziffer (zweistellig)
         MDIconButton:
@@ -141,25 +140,24 @@
             style: "standard"
             theme_icon_color: "Primary"
             size_hint: None, None
-            size: dp(24), dp(24)
+            size: dp(22), dp(22)
             opacity: 1 if root.has_second_digit else 0
-            disabled: not root.has_second_digit
 
     # Steigern/Senken Buttons
     MDBoxLayout:
         size_hint_x: None
-        width: dp(56)
+        width: dp(52)
 
         MDIconButton:
             icon: "arrow-up-thick"
             style: "standard"
             on_release: root.steigere_eigenschaft()
             size_hint: None, None
-            size: dp(28), dp(28)
+            size: dp(26), dp(26)
 
         MDIconButton:
             icon: "arrow-down-thick"
             style: "standard"
             on_release: root.senke_eigenschaft()
             size_hint: None, None
-            size: dp(28), dp(28)
+            size: dp(26), dp(26)

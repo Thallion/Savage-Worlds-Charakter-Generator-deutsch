@@ -56,15 +56,12 @@ def is_mobile_layout():
         return _mobile_layout_cache
 
     if platform == 'android':
-        try:
-            from kivy.core.window import Window
-            _mobile_layout_cache = Window.width < 600
-            Logger.debug(f"platform_utils: Android erkannt, Breite={Window.width}dp, mobile={_mobile_layout_cache}")
-            return _mobile_layout_cache
-        except Exception as e:
-            Logger.warning(f"platform_utils: Fehler bei Android-Erkennung: {e}")
-            _mobile_layout_cache = True
-            return True
+        # Android-Geräte nutzen immer Mobile-Layout.
+        # Im Landscape-Modus kann Window.width > 600dp sein (z.B. Pixel 9: ~923dp),
+        # aber Smartphones brauchen trotzdem das Mobile-Layout.
+        _mobile_layout_cache = True
+        Logger.info("platform_utils: Android erkannt → Mobile-Layout aktiviert")
+        return True
 
     # Desktop-Override: Direkt aus JSON-Datei lesen (ServiceContainer existiert noch nicht)
     force_mobile = _read_force_mobile_from_config()

@@ -13,22 +13,48 @@ import subprocess
 from pathlib import Path
 import time
 
+def set_android_config_defaults():
+    """Setzt Android-spezifische Config-Defaults (mobile_modus=true, show_logger=false)"""
+    import json
+    project_dir = Path.cwd()
+    config_dir = project_dir / "config"
+    config_dir.mkdir(exist_ok=True)
+    config_file = config_dir / "app_config.json"
+
+    config_data = {}
+    if config_file.exists():
+        try:
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config_data = json.load(f)
+        except Exception as e:
+            print(f"⚠️  Bestehende Config konnte nicht geladen werden: {e}")
+
+    config_data['mobile_modus'] = True
+    config_data['show_logger'] = False
+    config_data['force_mobile_layout'] = True
+
+    with open(config_file, 'w', encoding='utf-8') as f:
+        json.dump(config_data, f, indent=2, ensure_ascii=False)
+
+    print(f"📱 Android-Defaults gesetzt: mobile_modus=true, show_logger=false, force_mobile_layout=true")
+
+
 def setup_dist_structure():
     """Erstellt die dist-Ordnerstruktur"""
     project_dir = Path.cwd()
     dist_dir = project_dir / "dist"
-    
+
     # Bereinige alten dist-Ordner
     if dist_dir.exists():
         print("🧹 Bereinige alten dist-Ordner...")
         shutil.rmtree(dist_dir)
-    
+
     # Erstelle neue Struktur
     dist_dir.mkdir(exist_ok=True)
     (dist_dir / "linux").mkdir(exist_ok=True)
     (dist_dir / "windows").mkdir(exist_ok=True)
     (dist_dir / "android").mkdir(exist_ok=True)
-    
+
     print(f"📁 Dist-Struktur erstellt: {dist_dir}")
     return dist_dir
 
@@ -105,21 +131,51 @@ def build_android(dist_dir):
     print("\n" + "="*50)
     print("🤖 ANDROID BUILD STARTEN")
     print("="*50)
-    
+
     try:
         # Prüfe Buildozer Installation
-        result = subprocess.run(['buildozer', '--version'], 
+        result = subprocess.run(['buildozer', '--version'],
                               capture_output=True, text=True)
         print(f"Buildozer Version: {result.stdout.strip()}")
-        
-        # Starte Android Build
-        result = subprocess.run(['buildozer', 'android', 'debug'], 
+
+        # Alte APKs aus bin/ entfernen, damit wir erkennen ob ein neuer Build entsteht
+        bin_dir = Path.cwd() / "bin"
+        if bin_dir.exists():
+            old_apks = list(bin_dir.glob("*.apk"))
+            for old_apk in old_apks:
+                old_apk.unlink()
+                print(f"🧹 Alte APK entfernt: {old_apk.name}")
+
+        # Nur App-Quellcode-Cache löschen (nicht die kompilierten Libraries!)
+        # buildozer android clean würde auch pyjnius/kivy löschen, die dann
+        # wegen Cython 3.x Inkompatibilität nicht neu kompilieren können.
+        app_cache = Path.cwd() / ".buildozer" / "android" / "app"
+        if app_cache.exists():
+            import shutil as _shutil
+            _shutil.rmtree(app_cache)
+            print("🧹 App-Quellcode-Cache bereinigt (.buildozer/android/app/)")
+
+        # Cython 3.x Fixes für pyjnius/kivy anwenden (falls Sources vorhanden)
+        print("🔧 Wende Cython-Kompatibilitäts-Fixes an...")
+        subprocess.run([sys.executable, 'build_fixes.py'], cwd=Path.cwd())
+
+        # Starte Android Build (erster Versuch)
+        result = subprocess.run(['buildozer', 'android', 'debug'],
                               cwd=Path.cwd())
-        
+
+        if result.returncode != 0:
+            # Build fehlgeschlagen - Fixes erneut anwenden und nochmal versuchen.
+            # Buildozer lädt beim ersten Lauf ggf. frische Quellen herunter,
+            # die die Fixes überschreiben. Nach dem Download sind sie vorhanden.
+            print("⚠️  Erster Build fehlgeschlagen - wende Fixes erneut an...")
+            subprocess.run([sys.executable, 'build_fixes.py'], cwd=Path.cwd())
+            result = subprocess.run(['buildozer', 'android', 'debug'],
+                                  cwd=Path.cwd())
+
     except FileNotFoundError:
         print("❌ Buildozer nicht gefunden! Installiere mit: pip install buildozer")
         return False
-    
+
     # Finde und verschiebe APK (unabhängig vom Build Return Code)
     bin_dir = Path.cwd() / "bin"
     apk_files = list(bin_dir.glob("*.apk"))
@@ -257,21 +313,24 @@ def main():
     print("="*60)
     
     start_time = time.time()
-    
+
+    # Android-Config-Defaults setzen
+    set_android_config_defaults()
+
     # Setup dist-Struktur
     dist_dir = setup_dist_structure()
-    
+
     # Build-Ergebnisse verfolgen
     results = {}
-    
+
     # Linux Build
     print("\n⏳ Starte Linux Build...")
     results['linux'] = build_linux(dist_dir)
-    
+
     # Windows Build (via Wine)
     print("\n⏳ Starte Windows Build...")
     results['windows'] = build_windows(dist_dir)
-    
+
     # Android Build
     print("\n⏳ Starte Android Build...")
     results['android'] = build_android(dist_dir)

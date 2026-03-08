@@ -71,13 +71,13 @@
             text_size: self.size
             size_hint_x: 1
 
-        # Chevron-Button
-        MDIconButton:
+        # Chevron-Button (MDFabButton statt MDIconButton - Android-kompatibel)
+        MDFabButton:
             id: chevron_icon
             icon: "chevron-right"
-            style: "standard"
+            style: "small"
             size_hint: None, None
-            size: [dp(40), dp(40)]
+            size: [dp(36), dp(36)]
             pos_hint: {'center_y': 0.5}
             on_release: root.toggle_panel()
 
@@ -90,7 +90,6 @@
         height: 0
         padding: [dp(8), dp(6), dp(8), dp(6)]
         opacity: 0
-        disabled: True
 
         # Erste Card: Charakterdaten
         MDCard:

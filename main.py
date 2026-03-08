@@ -688,8 +688,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 item.add_widget(icon)
                 item.add_widget(label)
 
-                # Touch-Event binden
-                item.bind(on_touch_down=self._on_rail_item_touch)
+                # Touch-Event auf on_touch_up binden (statt on_touch_down),
+                # damit ScrollView Scroll-Gesten erkennen kann
+                item.bind(on_touch_up=self._on_rail_item_touch)
 
                 nav_rail_box.add_widget(item)
                 self.rail_items.append(item)
@@ -700,8 +701,18 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.error(f"Fehler beim Erstellen der NavigationRail: {str(e)}", exc_info=True)
 
     def _on_rail_item_touch(self, item, touch):
-        """Callback wenn ein Rail-Item berührt wird"""
+        """Callback wenn ein Rail-Item losgelassen wird (touch_up).
+
+        Verwendet on_touch_up statt on_touch_down, damit ScrollView
+        Scroll-Gesten verarbeiten kann (Android-Kompatibilität).
+        """
         if not item.collide_point(*touch.pos):
+            return False
+
+        # Scroll-Gesten ignorieren (nur Taps verarbeiten)
+        if hasattr(touch, 'is_mouse_scrolling') and touch.is_mouse_scrolling:
+            return False
+        if touch.grab_current is not None and touch.grab_current is not item:
             return False
 
         try:
@@ -791,22 +802,24 @@ class SW_Charakter_GeneratorApp(MDApp):
                 # Tabs verstecken
                 tabs_container.height = 0
                 tabs_container.opacity = 0
-                tabs_container.disabled = True
 
-                # NavigationRail initial ausgeblendet (per Toggle-Button einblendbar)
-                nav_rail_container.width = 0
-                nav_rail_container.opacity = 0
-                nav_rail_container.disabled = True
-                self._nav_rail_visible = False
+                # NavigationRail immer sichtbar (kompakt)
+                nav_rail_container.width = dp(72)
+                nav_rail_container.opacity = 1
+                self._nav_rail_visible = True
 
-                # Menü-Toggle-Button zeigen
+                # Menü-Toggle-Button verstecken (Rail ist immer sichtbar)
                 if menu_toggle:
-                    menu_toggle.width = dp(48)
-                    menu_toggle.opacity = 1
-                    menu_toggle.disabled = False
+                    menu_toggle.width = 0
+                    menu_toggle.opacity = 0
 
                 # Content-Padding reduzieren
-                tab_content_box.padding = [dp(8), 0, dp(8), dp(8)]
+                tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
+
+                # Pointbar auf Smartphone weiter runter (Statusbar/Notch-Abstand)
+                main_content_area = root.ids.get('main_content_area')
+                if main_content_area:
+                    main_content_area.padding = [0, dp(12), 0, 0]
 
                 # Swipe aktivieren
                 if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
@@ -816,24 +829,21 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if current_index < len(self.rail_items):
                     self._set_active_rail_item(current_index)
 
-                Logger.info("Mobiler Modus aktiviert (Swipe + Menü-Toggle)")
+                Logger.info("Mobiler Modus aktiviert (Swipe + NavigationRail)")
             else:
                 # NavigationRail verstecken
                 nav_rail_container.width = 0
                 nav_rail_container.opacity = 0
-                nav_rail_container.disabled = True
                 self._nav_rail_visible = False
 
                 # Menü-Toggle-Button verstecken
                 if menu_toggle:
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
-                    menu_toggle.disabled = True
 
                 # Tabs zeigen
                 tabs_container.height = dp(60)
                 tabs_container.opacity = 1
-                tabs_container.disabled = False
 
                 # Content-Padding wiederherstellen
                 tab_content_box.padding = [dp(30), 0, dp(30), dp(30)]
@@ -1017,19 +1027,17 @@ class SW_Charakter_GeneratorApp(MDApp):
                 return
 
             if self._nav_rail_visible:
-                # Rail ausblenden
+                # Rail ausblenden (kein disabled - Android-Kompatibilität)
                 nav_rail_container.width = 0
                 nav_rail_container.opacity = 0
-                nav_rail_container.disabled = True
                 self._nav_rail_visible = False
-                Logger.debug("NavigationRail ausgeblendet")
+                Logger.info("NavigationRail ausgeblendet")
             else:
                 # Rail einblenden
                 nav_rail_container.width = dp(100)
                 nav_rail_container.opacity = 1
-                nav_rail_container.disabled = False
                 self._nav_rail_visible = True
-                Logger.debug("NavigationRail eingeblendet")
+                Logger.info("NavigationRail eingeblendet")
         except Exception as e:
             Logger.error(f"Fehler beim Toggle der NavigationRail: {str(e)}")
 

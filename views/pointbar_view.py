@@ -252,7 +252,6 @@ class GenerationPointsBar(MDBoxLayout):
             self._content_height = content.height
             content.height = 0
             content.opacity = 0
-            content.disabled = True
             if chevron:
                 chevron.icon = "chevron-right"
             self.is_expanded = False
@@ -260,7 +259,6 @@ class GenerationPointsBar(MDBoxLayout):
             # Ausklappen
             content.height = self._content_height
             content.opacity = 1
-            content.disabled = False
             if chevron:
                 chevron.icon = "chevron-down"
             self.is_expanded = True

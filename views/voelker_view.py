@@ -13,6 +13,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.card import MDCard
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.button import MDIconButton, MDButton, MDButtonText
+from kivymd.uix.scrollview import MDScrollView
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, DictProperty
 from kivy.metrics import dp
@@ -118,12 +119,15 @@ class VoelkerWidget(MDBoxLayout):
                     "on_release": lambda x=volk_name: self._select_volk_from_dropdown(x),
                 })
             
-            # Dropdown-Menü erstellen
+            # Dropdown-Menü erstellen - Höhe an Plattform anpassen
+            from kivy.core.window import Window
+            max_h = min(dp(400), Window.height * 0.6)  # Max 60% der Bildschirmhöhe
+
             self.volk_dropdown_menu = MDDropdownMenu(
                 caller=self.ids.volk_dropdown_button,
                 items=menu_items,
                 width_mult=6,  # Breite für lange Namen
-                max_height=dp(400),  # Max. Höhe bei vielen Völkern
+                max_height=max_h,
             )
             
             self.volk_dropdown_menu.open()
@@ -192,12 +196,119 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Völker-Auswahl aus Dropdown: {e}", exc_info=True)
 
     def _update_dropdown_text(self, text):
-        """Aktualisiert den Text des Dropdown-Buttons."""
+        """Aktualisiert den Text des Dropdown-Buttons (Desktop) oder die Liste (Mobile)."""
         try:
-            if 'selected_volk_text' in self.ids:
+            if _mobile:
+                # Auf Mobile: Liste aktualisieren mit neuem Highlight
+                self._populate_voelker_liste()
+            elif 'selected_volk_text' in self.ids:
                 self.ids.selected_volk_text.text = text
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren des Dropdown-Texts: {e}")
+
+    # === MOBILE INLINE-LISTE METHODEN ===
+
+    def _populate_voelker_liste(self):
+        """Befüllt die Inline-Völker-Liste (nur Mobile)."""
+        if not _mobile:
+            return
+        try:
+            if 'voelker_liste_container' not in self.ids:
+                return
+
+            container = self.ids.voelker_liste_container
+            container.clear_widgets()
+
+            if not self.controller or not hasattr(self.controller, 'charakter'):
+                return
+
+            charakter = self.controller.charakter
+            if not hasattr(charakter, 'voelker') or not charakter.voelker:
+                return
+
+            # Suchtext ermitteln
+            search_text = ""
+            if 'search_input' in self.ids and self.ids.search_input.text:
+                search_text = self.ids.search_input.text.lower()
+
+            # "Kein Volk" Option
+            if not search_text or "kein" in search_text:
+                is_selected = self.selected_volk_name is None
+                item = self._create_volk_list_item("Kein Volk", is_selected, volk_name=None)
+                container.add_widget(item)
+
+            # Alle Völker alphabetisch sortiert
+            for volk_name in sorted(charakter.voelker.keys()):
+                if search_text and search_text not in volk_name.lower():
+                    continue
+                is_selected = (self.selected_volk_name == volk_name)
+                item = self._create_volk_list_item(volk_name, is_selected, volk_name=volk_name)
+                container.add_widget(item)
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Befüllen der Völker-Liste: {e}", exc_info=True)
+
+    def filter_voelker(self):
+        """Filtert die Völker-Liste basierend auf dem Suchfeld (Mobile)."""
+        self._populate_voelker_liste()
+
+    def _create_volk_list_item(self, display_name, is_selected, volk_name=None):
+        """Erstellt ein einzelnes Listenelement für die Völker-Inline-Liste."""
+        # Farbige Hervorhebung für ausgewähltes Volk
+        if is_selected:
+            bg_color = self.theme_cls.primaryContainerColor
+            text_color = "Primary"
+        else:
+            bg_color = self.theme_cls.surfaceContainerLowColor
+            text_color = "Primary"
+
+        item_card = MDCard(
+            size_hint_x=1,
+            size_hint_y=None,
+            height=dp(44),
+            padding=[dp(12), dp(4)],
+            radius=[8],
+            md_bg_color=bg_color,
+            style="elevated" if is_selected else "outlined",
+            elevation=2 if is_selected else 0,
+            on_release=lambda x, vn=volk_name: self._select_volk_from_dropdown(vn),
+        )
+
+        content = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(36),
+            spacing=dp(8),
+        )
+
+        # Auswahl-Indikator
+        if is_selected:
+            check_icon = MDIconButton(
+                icon="check-circle",
+                size_hint=(None, None),
+                size=(dp(28), dp(28)),
+                pos_hint={"center_y": 0.5},
+                theme_icon_color="Custom",
+                icon_color=self.theme_cls.primaryColor,
+            )
+            content.add_widget(check_icon)
+
+        # Volk-Name
+        name_label = MDLabel(
+            text=display_name,
+            font_style="Body",
+            theme_text_color=text_color,
+            size_hint_x=1,
+            size_hint_y=None,
+            height=dp(36),
+            halign='left',
+            valign='center',
+            bold=is_selected,
+        )
+        content.add_widget(name_label)
+
+        item_card.add_widget(content)
+        return item_card
 
     def aktualisiere_ui(self, dt=None):
         """Aktualisiert die gesamte UI basierend auf den aktuellen Charakter-Daten."""
@@ -234,11 +345,14 @@ class VoelkerWidget(MDBoxLayout):
             selected_volk = get_selected_volk(charakter)
             self.selected_volk_name = selected_volk.name if selected_volk else None
 
-            # Dropdown-Text aktualisieren
-            if self.selected_volk_name:
-                self._update_dropdown_text(self.selected_volk_name)
+            # Dropdown-Text / Inline-Liste aktualisieren
+            if _mobile:
+                self._populate_voelker_liste()
             else:
-                self._update_dropdown_text("Kein Volk ausgewählt")
+                if self.selected_volk_name:
+                    self._update_dropdown_text(self.selected_volk_name)
+                else:
+                    self._update_dropdown_text("Kein Volk ausgewählt")
 
             # UI-Komponenten aktualisieren
             self._update_zusatzelemente()
@@ -251,9 +365,14 @@ class VoelkerWidget(MDBoxLayout):
 
     def _show_no_data_message(self):
         """Zeigt eine Nachricht an, wenn keine Völker-Daten verfügbar sind."""
-        # Dropdown-Text aktualisieren
-        self._update_dropdown_text("Keine Völker verfügbar")
-        
+        if _mobile:
+            # Inline-Liste leeren
+            if 'voelker_liste_container' in self.ids:
+                self.ids.voelker_liste_container.clear_widgets()
+        else:
+            # Dropdown-Text aktualisieren
+            self._update_dropdown_text("Keine Völker verfügbar")
+
         # Container leeren
         for container_id in ['zusatzelemente_container', 'selected_volk_container']:
             if container_id in self.ids:
