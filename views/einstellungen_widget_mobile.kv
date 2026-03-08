@@ -9,6 +9,8 @@
         size_hint: (1, 1)
         do_scroll_x: False
         do_scroll_y: True
+        scroll_timeout: 200
+        scroll_distance: dp(30)
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -122,77 +124,105 @@
                 height: self.minimum_height
                 padding: [dp(4), dp(8)]
 
-                # Startattribute
+                # Startattribute + Startfertigkeiten nebeneinander
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    size_hint_y: None
-                    height: dp(48)
-                    spacing: dp(8)
-
-                    MDLabel:
-                        text: "Attributs-Punkte:"
-                        size_hint_x: 1
-                        pos_hint: {"center_y": .5}
-
-                    MDTextField:
-                        id: attributsteigerungen_field
-                        text: root.get_charakter_value('maximale_attributsteigerungen', '5')
-                        size_hint_x: None
-                        width: dp(80)
-                        input_filter: 'int'
-                        pos_hint: {"center_y": .5}
-                        on_focus: if not self.focus: root.update_maximale_attributsteigerungen()
-
-                # Startfertigkeiten
-                MDBoxLayout:
-                    orientation: 'horizontal'
-                    size_hint_y: None
-                    height: dp(48)
-                    spacing: dp(8)
-
-                    MDLabel:
-                        text: "Fertigkeits-Punkte:"
-                        size_hint_x: 1
-                        pos_hint: {"center_y": .5}
-
-                    MDTextField:
-                        id: fertigkeitssteigerungen_field
-                        text: root.get_charakter_value('maximale_fertigkeitssteigerungen', '12')
-                        size_hint_x: None
-                        width: dp(80)
-                        input_filter: 'int'
-                        pos_hint: {"center_y": .5}
-                        on_focus: if not self.focus: root.update_maximale_fertigkeitssteigerungen()
-
-                # Vermögen
-                MDBoxLayout:
-                    orientation: 'vertical'
                     size_hint_y: None
                     height: self.minimum_height
-                    spacing: dp(4)
-
-                    MDLabel:
-                        text: "Vermögen:"
-                        size_hint_y: None
-                        height: dp(28)
+                    spacing: dp(8)
 
                     MDBoxLayout:
-                        orientation: 'horizontal'
+                        orientation: 'vertical'
+                        size_hint_x: 0.5
                         size_hint_y: None
-                        height: dp(48)
-                        spacing: dp(8)
+                        height: self.minimum_height
+                        spacing: dp(2)
+
+                        MDLabel:
+                            text: "Attributs-Punkte:"
+                            size_hint_y: None
+                            height: dp(24)
+                            halign: 'left'
+                            theme_text_color: "Primary"
+                            font_size: dp(13)
+
+                        MDTextField:
+                            id: attributsteigerungen_field
+                            text: root.get_charakter_value('maximale_attributsteigerungen', '5')
+                            size_hint_x: 1
+                            input_filter: 'int'
+                            on_focus: if not self.focus: root.update_maximale_attributsteigerungen()
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 0.5
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(2)
+
+                        MDLabel:
+                            text: "Fertigkeits-Punkte:"
+                            size_hint_y: None
+                            height: dp(24)
+                            halign: 'left'
+                            theme_text_color: "Primary"
+                            font_size: dp(13)
+
+                        MDTextField:
+                            id: fertigkeitssteigerungen_field
+                            text: root.get_charakter_value('maximale_fertigkeitssteigerungen', '12')
+                            size_hint_x: 1
+                            input_filter: 'int'
+                            on_focus: if not self.focus: root.update_maximale_fertigkeitssteigerungen()
+
+                # Vermögen + Währung nebeneinander
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(8)
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 0.5
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(2)
+
+                        MDLabel:
+                            text: "Vermögen:"
+                            size_hint_y: None
+                            height: dp(24)
+                            halign: 'left'
+                            theme_text_color: "Primary"
+                            font_size: dp(13)
 
                         MDTextField:
                             id: vermoegen_field
                             text: root.get_charakter_value('vermoegen', '500')
-                            size_hint_x: 0.5
+                            size_hint_x: 1
                             input_filter: 'int'
                             on_focus: if not self.focus: root.update_vermoegen()
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 0.5
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(2)
+
+                        MDLabel:
+                            text: "Währung:"
+                            size_hint_y: None
+                            height: dp(24)
+                            halign: 'left'
+                            theme_text_color: "Primary"
+                            font_size: dp(13)
 
                         MDTextField:
                             id: waehrung_field
                             text: root.get_charakter_value('waehrungseinheit', 'Gold')
-                            size_hint_x: 0.5
+                            size_hint_x: 1
                             on_focus: if not self.focus: root.update_waehrung()
 
                 MDButton:

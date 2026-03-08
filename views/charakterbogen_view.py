@@ -34,12 +34,12 @@ from functions.superkraft_funktionen import ist_superkraefte_setting
 LABEL_FONT_SIZE = '16sp'
 HEADER_FONT_SIZE = '18sp'
 SUBHEADER_FONT_SIZE = '15sp'
-ROW_HEIGHT = 20
+ROW_HEIGHT = dp(28)
 GRID_WIDTH = dp(250)
 LABEL_WIDTH = 250
 GRID_HEIGHT = dp(30)
 DICE_LAYOUT_WIDTH = dp(120)
-INFO_PADDING = 5
+INFO_PADDING = dp(4)
 
 # KV-Datei laden mit PyInstaller-kompatiblem Pfad und Mobile-Unterstützung
 from utils.path_utils import get_application_root
@@ -310,15 +310,23 @@ class CharakterbogenWidget(MDBoxLayout):
             height=ROW_HEIGHT
         ))
         
-        # Eigenschaften
+        # Eigenschaften - dynamische Höhe für langen Text
         for eigenschaft in eigenschaften_liste:
-            container.add_widget(LeftAlignedLabel(
+            label = LeftAlignedLabel(
                 text=f"- {eigenschaft}",
                 font_size=SUBHEADER_FONT_SIZE,
                 size_hint_y=None,
                 padding=INFO_PADDING,
-                height=ROW_HEIGHT
-            ))
+                height=ROW_HEIGHT,
+                markup=True
+            )
+            # Dynamische Höhe nach Layout-Pass
+            label.bind(
+                width=lambda inst, w: Clock.schedule_once(
+                    lambda dt, l=inst: self._update_label_height(l), 0
+                )
+            )
+            container.add_widget(label)
 
     def _update_attribute_section(self):
         """
@@ -447,13 +455,21 @@ class CharakterbogenWidget(MDBoxLayout):
         for macht_name_key in self.charakter.selected_maechte:
             macht = self.charakter.maechte.get(macht_name_key)
             if macht:
-                section.add_widget(LeftAlignedLabel(
+                label = LeftAlignedLabel(
                     text=(f"{macht.name}, Rang: {macht.rang}, Machtpunkte: {macht.machtpunkte}, "
                           f"Reichweite: {macht.reichweite}, Dauer: {macht.dauer}, Effekt: {macht.effekt}"),
                     font_size=LABEL_FONT_SIZE,
                     size_hint_y=None,
-                    height=ROW_HEIGHT
-                ))
+                    height=ROW_HEIGHT,
+                    markup=True
+                )
+                # Dynamische Höhe für langen Mächte-Text
+                label.bind(
+                    width=lambda inst, w: Clock.schedule_once(
+                        lambda dt, l=inst: self._update_label_height(l), 0
+                    )
+                )
+                section.add_widget(label)
             else:
                 Logger.warning(f"Macht '{macht_name_key}' nicht in charakter.maechte gefunden.")
 
@@ -475,12 +491,19 @@ class CharakterbogenWidget(MDBoxLayout):
                     mod_namen = [m.name for m in kraft.gewaehlte_modifikatoren]
                     mod_text = f", Mods: {', '.join(mod_namen)}"
 
-                section.add_widget(LeftAlignedLabel(
+                label = LeftAlignedLabel(
                     text=f"{kraft.name}, {kraft.gesamt_kosten} SKP{mod_text}",
                     font_size=LABEL_FONT_SIZE,
                     size_hint_y=None,
-                    height=ROW_HEIGHT
-                ))
+                    height=ROW_HEIGHT,
+                    markup=True
+                )
+                label.bind(
+                    width=lambda inst, w: Clock.schedule_once(
+                        lambda dt, l=inst: self._update_label_height(l), 0
+                    )
+                )
+                section.add_widget(label)
             else:
                 Logger.warning(f"Superkraft '{kraft_name_key}' nicht in charakter.superkraefte gefunden.")
 
@@ -745,6 +768,13 @@ class CharakterbogenWidget(MDBoxLayout):
                 height=GRID_HEIGHT,
                 halign='left'
             ))
+
+    def _update_label_height(self, label):
+        """Berechnet die Höhe eines Labels basierend auf dem Textinhalt"""
+        if label.width > 0:
+            label.text_size = (label.width - dp(10), None)
+            label.texture_update()
+            label.height = max(ROW_HEIGHT, label.texture_size[1] + dp(8))
 
     def refresh_widget(self):
         """Methode zum Aktualisieren des Widgets beim Tab-Wechsel"""

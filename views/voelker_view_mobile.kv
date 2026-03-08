@@ -1,5 +1,5 @@
 # voelker_view_mobile.kv - Smartphone-optimiertes Layout
-# Inline-Liste mit Suchfeld statt Dropdown für bessere Bedienbarkeit
+# Popup-Auswahl mit Suchfeld statt Inline-Liste
 # Gleiche Widget-Klasse und IDs wie Desktop-Version
 
 <VoelkerWidget>:
@@ -17,57 +17,61 @@
         theme_text_color: "Primary"
         bold: True
 
-    # Suchfeld für Völker-Filter
-    MDTextField:
-        id: search_input
-        mode: "outlined"
+    # Kompakte Volk-Auswahl mit Button
+    MDCard:
         size_hint_x: 1
         size_hint_y: None
-        height: dp(48)
-        on_text: root.filter_voelker()
-
-        MDTextFieldHintText:
-            text: "Volk suchen..."
-
-    # Scrollbare Völker-Liste
-    MDScrollView:
-        size_hint_y: 0.4
-        do_scroll_x: False
-        do_scroll_y: True
+        height: dp(64)
+        padding: dp(10)
+        elevation: 2
+        radius: [10]
+        md_bg_color: self.theme_cls.surfaceContainerLowColor
+        style: "elevated"
 
         MDBoxLayout:
-            id: voelker_liste_container
-            orientation: 'vertical'
-            size_hint_y: None
-            height: self.minimum_height
-            spacing: dp(2)
-            padding: [dp(2), dp(2)]
+            orientation: 'horizontal'
+            spacing: dp(10)
 
-    # Volk-Details ScrollView (enthält Zusatzelemente + Volk-Details)
+            MDLabel:
+                text: "Volk:"
+                font_style: "Body"
+                theme_text_color: "Primary"
+                size_hint_x: 0.2
+                halign: 'left'
+                valign: 'center'
+
+            MDButton:
+                id: volk_dropdown_button
+                style: "outlined"
+                size_hint_x: 0.8
+                size_hint_y: None
+                height: dp(44)
+                on_release: root.open_volk_dropdown()
+
+                MDButtonText:
+                    id: selected_volk_text
+                    text: "Volk auswählen..."
+
+    # Zusatzelemente Container
+    MDBoxLayout:
+        id: zusatzelemente_container
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+        spacing: dp(8)
+
+    # Volk-Details ScrollView
     MDScrollView:
         size_hint_y: 1
         do_scroll_x: False
         do_scroll_y: True
+        scroll_timeout: 200
+        scroll_distance: dp(20)
 
         MDBoxLayout:
+            id: selected_volk_container
             orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
             spacing: dp(8)
             padding: [dp(4), dp(6), dp(4), dp(6)]
-
-            # Zusatzelemente Container (innerhalb ScrollView)
-            MDBoxLayout:
-                id: zusatzelemente_container
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(8)
-
-            # Volk-Details
-            MDBoxLayout:
-                id: selected_volk_container
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: dp(8)

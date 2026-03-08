@@ -903,8 +903,11 @@ class AusruestungWidget(MDBoxLayout):
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
-        """Im mobilen Modus Filter eingeklappt starten"""
+        """Im mobilen Modus Filter eingeklappt starten (nur wenn Toggle-Button vorhanden)"""
         try:
+            # Nur einklappen wenn ein Toggle-Button zum Aufklappen existiert (Desktop-KV)
+            if not self.ids.get('filter_chevron'):
+                return
             from services.service_container import service_container
             config_service = service_container.get_config_service()
             if config_service and config_service.get('mobile_modus', False):

@@ -273,39 +273,27 @@
         pos_hint: {'center_y': 0.5}
         theme_text_color: "Primary"  # THEME-FIX
     
-    # Buttons
-    AnchorLayout:
-        anchor_x: 'right'
-        anchor_y: 'center'
-        size_hint_x: None
-        width: dp(140)
-        
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint: None, None
-            size: dp(140), dp(35)
-            spacing: dp(5)
-            
-            MDButton:
-                style: "filled"
-                size_hint: None, None
-                size: dp(35), dp(35)
-                on_release: root.kaufen_ausruestung()
-                MDButtonIcon:
-                    icon: "plus"
-            
-            MDButton:
-                style: "filled"
-                size_hint: None, None
-                size: dp(35), dp(35)
-                on_release: root.verkaufen_ausruestung()
-                MDButtonIcon:
-                    icon: "minus"
-            
-            MDButton:
-                style: "filled"
-                size_hint: None, None
-                size: dp(35), dp(35)
-                on_release: root.bearbeite_ausruestung()
-                MDButtonIcon:
-                    icon: "pencil"
+    # Action-Buttons
+    MDFabButton:
+        icon: "plus"
+        style: "small"
+        size_hint: None, None
+        size: dp(35), dp(35)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.kaufen_ausruestung()
+
+    MDFabButton:
+        icon: "minus"
+        style: "small"
+        size_hint: None, None
+        size: dp(35), dp(35)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.verkaufen_ausruestung()
+
+    MDFabButton:
+        icon: "pencil"
+        style: "small"
+        size_hint: None, None
+        size: dp(35), dp(35)
+        pos_hint: {"center_y": 0.5}
+        on_release: root.bearbeite_ausruestung()

@@ -745,6 +745,12 @@ class SW_Charakter_GeneratorApp(MDApp):
                 self._set_active_rail_item(item_index)
                 self._current_tab_index = item_index
                 self.update_active_screen(item_index)
+
+                # In Portrait-Modus Rail nach Auswahl automatisch schließen
+                is_portrait = Window.height > Window.width
+                if is_portrait and self._nav_rail_visible:
+                    self.toggle_navigation_rail()
+
                 Logger.info(f"NavigationRail-Wechsel zu: {tab_text}")
 
             return True
@@ -803,15 +809,13 @@ class SW_Charakter_GeneratorApp(MDApp):
                 tabs_container.height = 0
                 tabs_container.opacity = 0
 
-                # NavigationRail immer sichtbar (kompakt)
-                nav_rail_container.width = dp(72)
-                nav_rail_container.opacity = 1
-                self._nav_rail_visible = True
-
-                # Menü-Toggle-Button verstecken (Rail ist immer sichtbar)
+                # Menü-Toggle-Button immer verstecken (ersetzt durch FAB)
                 if menu_toggle:
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
+
+                # Orientierung prüfen: Portrait vs. Landscape
+                self._update_mobile_orientation()
 
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
@@ -840,6 +844,12 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if menu_toggle:
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
+
+                # FAB verstecken
+                portrait_fab = root.ids.get('portrait_nav_fab')
+                if portrait_fab:
+                    portrait_fab.opacity = 0
+                    portrait_fab.disabled = True
 
                 # Tabs zeigen
                 tabs_container.height = dp(60)
@@ -910,11 +920,50 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.error(f"Fehler beim Setzen der Logger-Sichtbarkeit: {str(e)}")
 
+    def _update_mobile_orientation(self):
+        """Aktualisiert die Navigation basierend auf Portrait/Landscape im Mobile-Modus"""
+        try:
+            root = self.root
+            if not root or not self._mobile_modus_active:
+                return
+
+            nav_rail_container = root.ids.get('nav_rail_container')
+            portrait_fab = root.ids.get('portrait_nav_fab')
+            if not nav_rail_container:
+                return
+
+            is_portrait = Window.height > Window.width
+
+            if is_portrait:
+                # Portrait: Rail verstecken, FAB anzeigen
+                nav_rail_container.width = 0
+                nav_rail_container.opacity = 0
+                self._nav_rail_visible = False
+                if portrait_fab:
+                    portrait_fab.opacity = 1
+                    portrait_fab.disabled = False
+                Logger.debug("Mobile Portrait: Rail versteckt, FAB sichtbar")
+            else:
+                # Landscape: Rail anzeigen, FAB verstecken
+                nav_rail_container.width = dp(72)
+                nav_rail_container.opacity = 1
+                self._nav_rail_visible = True
+                if portrait_fab:
+                    portrait_fab.opacity = 0
+                    portrait_fab.disabled = True
+                Logger.debug("Mobile Landscape: Rail sichtbar, FAB versteckt")
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")
+
     def _on_window_resize(self, instance, width, height):
         """Automatischer Moduswechsel basierend auf Fensterbreite"""
         try:
             # Bei manuellem Override nicht automatisch wechseln
             if self._mobile_modus_override is not None:
+                # Trotzdem Orientierung im Mobile-Modus aktualisieren
+                if self._mobile_modus_active:
+                    self._update_mobile_orientation()
                 return
 
             if width < dp(800):

@@ -8,6 +8,7 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 from kivy.cache import Cache
 from threading import Thread
+import time
 from kivy.uix.modalview import ModalView
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.widget import Widget
@@ -324,29 +325,85 @@ class EigenschaftenWidget(MDBoxLayout):
             # Fehler behandeln und Indicator entfernen
             self._entferne_lade_indicator()
 
+    def _get_scroll_view(self):
+        """Findet die übergeordnete ScrollView des Widgets."""
+        widget = self
+        for _ in range(5):
+            if widget is None:
+                return None
+            for child in widget.children:
+                if hasattr(child, 'scroll_y') and hasattr(child, 'do_scroll_y'):
+                    return child
+            widget = widget.parent if hasattr(widget, 'parent') else None
+        return None
+
+    def _kann_inplace_aktualisieren(self, layout, neue_widgets):
+        """Prüft ob vorhandene Widgets in-place aktualisiert werden können (gleiche Anzahl und Namen)."""
+        if not layout or len(layout.children) == 0:
+            return False
+        # children sind in umgekehrter Reihenfolge
+        vorhandene = list(reversed(layout.children))
+        if len(vorhandene) != len(neue_widgets):
+            return False
+        for widget, daten in zip(vorhandene, neue_widgets):
+            if not isinstance(widget, EigenschaftenItemRow):
+                return False
+            if widget.item_name != daten['item_name']:
+                return False
+        return True
+
+    def _aktualisiere_inplace(self, layout, neue_widgets):
+        """Aktualisiert vorhandene Widgets in-place ohne clear_widgets/add_widget."""
+        vorhandene = list(reversed(layout.children))
+        for widget, daten in zip(vorhandene, neue_widgets):
+            widget.dice_icon = daten['dice_icon']
+            widget.modifier_sign = daten['modifier_sign']
+            widget.modifier_value_icon = daten['modifier_value_icon']
+            widget.has_modifier = daten['has_modifier']
+            # Zweite Ziffer aktualisieren
+            second_digit = IconCache.get_second_digit_icon(daten['item_obj'].modifier) if daten['item_obj'] else None
+            widget.has_second_digit = bool(second_digit)
+            if second_digit:
+                widget.second_digit_icon = second_digit
+            # Cache aktualisieren
+            widget._update_eigenschaften_cache()
+
     @mainthread
     def _aktualisiere_ui_im_hauptthread(self, attribute_widgets, fertigkeiten_widgets):
         """Aktualisiert die UI im Hauptthread mit den vorbereiteten Daten"""
         # Entferne Lade-Indicator
         self._entferne_lade_indicator()
 
-        # Füge Attribute-Widgets hinzu
+        # Attribute: In-place wenn möglich, sonst Rebuild
         if hasattr(self, 'attribute_layout'):
-            self.attribute_layout.clear_widgets()
-            for widget_data in attribute_widgets:
-                item = EigenschaftenItemRow(**widget_data)
-                self.attribute_layout.add_widget(item)
+            if self._kann_inplace_aktualisieren(self.attribute_layout, attribute_widgets):
+                self._aktualisiere_inplace(self.attribute_layout, attribute_widgets)
+            else:
+                self.attribute_layout.clear_widgets()
+                for widget_data in attribute_widgets:
+                    item = EigenschaftenItemRow(**widget_data)
+                    self.attribute_layout.add_widget(item)
 
-        # Füge Fertigkeiten-Widgets hinzu (mit Lazy-Loading)
+        # Fertigkeiten: In-place wenn möglich, sonst Rebuild mit Lazy-Loading
         if hasattr(self, 'fertigkeiten_layout'):
-            self.fertigkeiten_layout.clear_widgets()
-            self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(fertigkeiten_widgets)
+            if self._kann_inplace_aktualisieren(self.fertigkeiten_layout, fertigkeiten_widgets):
+                self._aktualisiere_inplace(self.fertigkeiten_layout, fertigkeiten_widgets)
+            else:
+                scroll_view = self._get_scroll_view()
+                saved_scroll_y = scroll_view.scroll_y if scroll_view else 1.0
+                self.fertigkeiten_layout.clear_widgets()
+                self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(fertigkeiten_widgets, saved_scroll_y)
 
-    def _fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(self, fertigkeiten_widgets):
+    def _fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(self, fertigkeiten_widgets, saved_scroll_y=None):
         """Fügt Fertigkeiten-Widgets stufenweise hinzu, um UI-Ruckler zu vermeiden"""
         BATCH_SIZE = 30  # Anzahl der Widgets pro Batch
 
         if not fertigkeiten_widgets:
+            # Letzter Batch - Scroll-Position wiederherstellen
+            if saved_scroll_y is not None:
+                scroll_view = self._get_scroll_view()
+                if scroll_view:
+                    Clock.schedule_once(lambda dt: setattr(scroll_view, 'scroll_y', saved_scroll_y), 0.05)
             return
 
         batch = fertigkeiten_widgets[:BATCH_SIZE]
@@ -360,9 +417,14 @@ class EigenschaftenWidget(MDBoxLayout):
         # Rest verzögert laden
         if rest:
             Clock.schedule_once(
-                lambda dt: self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(rest),
+                lambda dt: self._fuege_fertigkeiten_widget_hinzu_mit_lazy_loading(rest, saved_scroll_y),
                 0.05
             )
+        elif saved_scroll_y is not None:
+            # Alles geladen - Scroll-Position wiederherstellen
+            scroll_view = self._get_scroll_view()
+            if scroll_view:
+                Clock.schedule_once(lambda dt: setattr(scroll_view, 'scroll_y', saved_scroll_y), 0.05)
 
     @mainthread
     def _entferne_lade_indicator(self):
@@ -785,6 +847,11 @@ class EigenschaftenItemRow(MDBoxLayout):
 
     def _confirm_double_cost(self):
         """Führt die Steigerung mit bestätigten doppelten Kosten durch."""
+        # Debounce: Verhindert doppelte Steigerung durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_confirm_double_cost_time') and (now - self._last_confirm_double_cost_time) < 0.5:
+            return
+        self._last_confirm_double_cost_time = now
         self.close_dialog()
         self.controller.steigere_fertigkeit(self.item_name, confirm_double_cost=True)
 

@@ -10,6 +10,9 @@
         size_hint: (1, 1)
         do_scroll_x: False
         do_scroll_y: True
+        bar_width: 0
+        scroll_timeout: 200
+        scroll_distance: dp(20)
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -90,11 +93,11 @@
     spacing: dp(2)
     padding: [dp(4), 0]
 
-    # Name-Label - feste Breite, nicht den ganzen Landscape-Platz füllen
+    # Name-Label - responsiv mit Obergrenze
     MDLabel:
         text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
         size_hint_x: None
-        width: dp(220)
+        width: min(dp(260), self.parent.width - dp(160)) if self.parent else dp(200)
         halign: 'left'
         valign: 'middle'
         font_size: dp(13)

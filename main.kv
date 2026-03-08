@@ -83,6 +83,18 @@
                 spacing: dp(8)
 
 MDScreen:
+    # Floating Navigation Button (Portrait-Modus)
+    MDFabButton:
+        id: portrait_nav_fab
+        icon: "menu"
+        style: "small"
+        size_hint: None, None
+        size: dp(44), dp(44)
+        pos_hint: {'right': 0.97, 'y': 0.02}
+        opacity: 0
+        disabled: True
+        on_release: app.toggle_navigation_rail()
+
     # Wir packen alles in eine einzige vertikale MDBoxLayout-Struktur
     MDBoxLayout:
         orientation: 'vertical'

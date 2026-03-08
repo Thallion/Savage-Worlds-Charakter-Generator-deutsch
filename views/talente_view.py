@@ -6,6 +6,8 @@ Mit Unterstützung für Mehrfachauswahl von Talenten und Bearbeitungsfunktion.
 ERWEITERT: Mit Savage Pathfinder Support für kostenlose Klassen-/Hintergrund-/Experte-Talente
 """
 
+import time
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty, BooleanProperty
@@ -194,6 +196,13 @@ class TalentItemRow(MDBoxLayout):
         Prüft, ob das Talent duplizierbar ist und zeigt ggf. einen Dialog.
         ERWEITERT: Unterstützt kostenlose Pathfinder-Talente.
         """
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_waehle_time') and (now - self._last_waehle_time) < 0.5:
+            Logger.debug("TalentItemRow: Doppelklick-Schutz aktiv, ignoriere")
+            return
+        self._last_waehle_time = now
+
         Logger.debug(f"TalentItemRow: Start waehle_talent für {self.talent_name}")
         controller = self._get_controller()
         if not controller:
@@ -293,6 +302,11 @@ class TalentItemRow(MDBoxLayout):
         """
         NEU: Wählt das Talent kostenlos als Pathfinder-Talent aus.
         """
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_kostenlos_time') and (now - self._last_kostenlos_time) < 0.5:
+            return
+        self._last_kostenlos_time = now
         self.pathfinder_dialog.dismiss()
         controller = self._get_controller()
         if controller:
@@ -320,6 +334,11 @@ class TalentItemRow(MDBoxLayout):
         """
         NEU: Wählt das Talent mit normalen Kosten aus (bypassed die kostenlose Option).
         """
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_mit_kosten_time') and (now - self._last_mit_kosten_time) < 0.5:
+            return
+        self._last_mit_kosten_time = now
         self.pathfinder_dialog.dismiss()
         controller = self._get_controller()
         if controller:
@@ -512,6 +531,12 @@ class TalentItemRow(MDBoxLayout):
 
     def _confirm_talent_with_higher_rang(self):
         """Bestätigt die Auswahl eines Talents mit höherem Rang."""
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_confirm_time') and (now - self._last_confirm_time) < 0.5:
+            return
+        self._last_confirm_time = now
+
         self.rang_dialog.dismiss()
         controller = self._get_controller()
         if controller:
@@ -526,6 +551,12 @@ class TalentItemRow(MDBoxLayout):
 
     def _confirm_talent_without_voraussetzungen(self):
         """Bestätigt die Auswahl eines Talents ohne erfüllte Voraussetzungen."""
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_confirm_time') and (now - self._last_confirm_time) < 0.5:
+            return
+        self._last_confirm_time = now
+
         self.voraussetzungen_dialog.dismiss()
         controller = self._get_controller()
         if controller:
@@ -539,6 +570,12 @@ class TalentItemRow(MDBoxLayout):
         Entfernt ein ausgewähltes Talent.
         Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
         """
+        # Debounce: Verhindert Doppelklick auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_entferne_time') and (now - self._last_entferne_time) < 0.5:
+            return
+        self._last_entferne_time = now
+
         Logger.debug(f"TalentItemRow: Start entferne_talent für {self.talent_name}")
         controller = self._get_controller()
         if not controller:
@@ -721,8 +758,11 @@ class TalenteWidget(MDBoxLayout):
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
-        """Im mobilen Modus Filter eingeklappt starten"""
+        """Im mobilen Modus Filter eingeklappt starten (nur wenn Toggle-Button vorhanden)"""
         try:
+            # Nur einklappen wenn ein Toggle-Button zum Aufklappen existiert (Desktop-KV)
+            if not self.ids.get('filter_chevron'):
+                return
             from services.service_container import service_container
             config_service = service_container.get_config_service()
             if config_service and config_service.get('mobile_modus', False):

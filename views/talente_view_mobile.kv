@@ -149,24 +149,24 @@
     spacing: dp(2)
     padding: [dp(4), dp(2)]
 
-    # Name - feste Breite, füllt nicht den ganzen Landscape-Platz
+    # Name - responsiv mit Obergrenze
     MDLabel:
         text: root.talent_name
         font_size: dp(13)
         size_hint_x: None
-        width: dp(200)
+        width: min(dp(260), self.parent.width - dp(220)) if self.parent else dp(200)
         halign: 'left'
         valign: 'middle'
         shorten: True
         shorten_from: 'right'
         text_size: self.size
 
-    # Kategorie kompakt
+    # Kategorie - breiter im Landscape
     MDLabel:
         text: root.kategorie
         font_size: dp(11)
         size_hint_x: None
-        width: dp(44)
+        width: dp(70) if (self.parent and self.parent.width > dp(400)) else dp(44)
         halign: 'left'
         valign: 'middle'
         shorten: True

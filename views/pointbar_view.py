@@ -11,6 +11,7 @@
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, BooleanProperty
 from kivy.logger import Logger
 from kivy.clock import Clock
@@ -18,13 +19,28 @@ from kivy.metrics import dp
 
 # KivyMD-Imports
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.behaviors import RotateBehavior
+
+
+class TouchableBoxLayout(ButtonBehavior, MDBoxLayout):
+    """MDBoxLayout mit Button-Verhalten für zuverlässige Touch-Events auf Android"""
+    pass
+
+
+from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemTrailingIcon
+
+
+class TrailingPressedIconButton(ButtonBehavior, RotateBehavior, MDListItemTrailingIcon):
+    """Icon-Button mit Rotation für ExpansionPanel-Chevron"""
+    pass
+
+
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.button import MDIconButton, MDFabButton
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.label import MDLabel
 from kivymd.uix.card import MDCard
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText
 from kivymd.theming import ThemableBehavior
 
 # Path utilities import
@@ -90,10 +106,10 @@ class GenerationPointsBar(MDBoxLayout):
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
         self.on_charakter_changed(self.controller, self.controller.charakter)
-        
+
         # Timer für regelmäßige Gewichts-Updates
         self._weight_update_event = Clock.schedule_interval(self._update_weight_periodically, 2.0)
-        
+
         Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
 
     def on_charakter_changed(self, instance, value):
@@ -236,31 +252,51 @@ class GenerationPointsBar(MDBoxLayout):
         fert = f"{self.charakter.verbleibende_fertigkeitssteigerungen}/{self.charakter.maximale_fertigkeitssteigerungen}"
         rang = self.charakter.rang if self.charakter.rang else "Anfänger"
 
-        self.header_summary_text = f"{name}  |  {setting}  |  Attr: {attr}  |  Fert: {fert}  |  {rang}"
+        from kivy.core.window import Window
+        # Kompaktere Darstellung im Portrait
+        if Window.height > Window.width:
+            self.header_summary_text = f"{name} | {setting} | A:{attr} | F:{fert}"
+        else:
+            self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | {rang}"
 
-    _content_height = dp(120)  # Standard-Höhe für content_box
+    _content_height = dp(120)  # Standard-Höhe für content_box (Desktop-Fallback)
 
     def toggle_panel(self):
         """Klappt den Detail-Bereich auf oder zu"""
+        # MDExpansionPanel-Variante (Mobile)
+        panel = self.ids.get('expansion_panel')
+        chevron = self.ids.get('chevron')
+        if panel:
+            if panel.is_open:
+                panel.close()
+                if chevron:
+                    panel.set_chevron_down(chevron)
+                self.is_expanded = False
+            else:
+                panel.open()
+                if chevron:
+                    panel.set_chevron_up(chevron)
+                self.is_expanded = True
+            return
+
+        # Desktop-Fallback: manuelles Toggle
         content = self.ids.get('content_box')
-        chevron = self.ids.get('chevron_icon')
+        chevron_icon = self.ids.get('chevron_icon')
         if not content:
             return
 
         if self.is_expanded:
-            # Aktuelle Höhe merken bevor wir einklappen
             self._content_height = content.height
             content.height = 0
             content.opacity = 0
-            if chevron:
-                chevron.icon = "chevron-right"
+            if chevron_icon:
+                chevron_icon.icon = "chevron-right"
             self.is_expanded = False
         else:
-            # Ausklappen
             content.height = self._content_height
             content.opacity = 1
-            if chevron:
-                chevron.icon = "chevron-down"
+            if chevron_icon:
+                chevron_icon.icon = "chevron-down"
             self.is_expanded = True
 
     # Event-Handler für einzelne Eigenschaften

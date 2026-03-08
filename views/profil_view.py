@@ -54,6 +54,7 @@ class ProfilWidget(MDBoxLayout):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
+        self.controller.bind(on_charakter_loaded=self._on_charakter_loaded)
         self.charakter = self.controller.charakter
 
         self.bind(
@@ -119,6 +120,11 @@ class ProfilWidget(MDBoxLayout):
             self.load_profil()
         else:
             Logger.warning("ProfilWidget: Charakter ist None in on_charakter_changed")
+
+    def _on_charakter_loaded(self, *args):
+        """Wird aufgerufen, wenn ein Charakter aus Datei geladen wird."""
+        self.charakter = self.controller.charakter
+        self.load_profil()
 
     def on_char_name_change(self, instance, value):
         self.on_field_change('Name', value)

@@ -4,6 +4,8 @@ View-Komponente für Handicaps nach dem MVC-Pattern.
 Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Handicaps bereit.
 """
 
+import time
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty, BooleanProperty
@@ -159,6 +161,13 @@ class HandicapItemRow(MDBoxLayout):
         Wählt ein Handicap aus.
         Prüft vorher, ob das Limit von 4 Punkten bereits erreicht ist und zeigt ggf. einen Warnhinweis.
         """
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_waehle_time') and (now - self._last_waehle_time) < 0.5:
+            Logger.debug("HandicapItemRow: Doppelklick-Schutz aktiv, ignoriere")
+            return
+        self._last_waehle_time = now
+
         Logger.debug(f"HandicapItemRow: Start waehle_handicap für {self.handicap_name}")
         controller = self._get_controller()
         if not controller:
@@ -289,6 +298,12 @@ class HandicapItemRow(MDBoxLayout):
         Nach der Charaktergenerierung kostet dies Aufstiege.
         Bei schweren Handicaps mit leichter Version werden beide Optionen angeboten.
         """
+        # Debounce: Verhindert Doppelklick auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_entferne_time') and (now - self._last_entferne_time) < 0.5:
+            return
+        self._last_entferne_time = now
+
         Logger.debug(f"HandicapItemRow: Start entferne_handicap für {self.handicap_name}")
         controller = self._get_controller()
         if not controller:
@@ -698,8 +713,11 @@ class HandicapsWidget(MDBoxLayout):
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
-        """Im mobilen Modus Filter eingeklappt starten"""
+        """Im mobilen Modus Filter eingeklappt starten (nur wenn Toggle-Button vorhanden)"""
         try:
+            # Nur einklappen wenn ein Toggle-Button zum Aufklappen existiert (Desktop-KV)
+            if not self.ids.get('filter_chevron'):
+                return
             from services.service_container import service_container
             config_service = service_container.get_config_service()
             if config_service and config_service.get('mobile_modus', False):

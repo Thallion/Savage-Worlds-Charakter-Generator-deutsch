@@ -5,6 +5,8 @@ Stellt die Benutzerschnittstelle zur Anzeige und Verwaltung von Mächten bereit.
 Schaltet kontextabhängig zwischen traditionellem Mächte-Modus und Superkräfte-Modus um.
 """
 
+import time
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, BooleanProperty, ListProperty
@@ -161,6 +163,13 @@ class MachtItemRow(MDBoxLayout):
         Prüft vorher, ob genügend verfügbare Mächte vorhanden sind und leitet die Auswahl
         an das Hauptwidget zur Rangprüfung weiter.
         """
+        # Debounce: Verhindert Doppelauswahl durch mehrfache Touch-Events auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_waehle_time') and (now - self._last_waehle_time) < 0.5:
+            Logger.debug("MachtItemRow: Doppelklick-Schutz aktiv, ignoriere")
+            return
+        self._last_waehle_time = now
+
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
             return
@@ -286,6 +295,12 @@ class MachtItemRow(MDBoxLayout):
         Entfernt eine ausgewählte Macht.
         Delegiert die Aktion an den Controller und aktualisiert die Ansicht.
         """
+        # Debounce: Verhindert Doppelklick auf Android
+        now = time.monotonic()
+        if hasattr(self, '_last_entferne_time') and (now - self._last_entferne_time) < 0.5:
+            return
+        self._last_entferne_time = now
+
         if not self.controller:
             Logger.error("MachtItemRow: Controller nicht gefunden")
             return
@@ -373,8 +388,11 @@ class KraefteWidget(MDBoxLayout):
             self.is_filter_expanded = True
 
     def _init_filter_collapsed_state(self, dt):
-        """Im mobilen Modus Filter eingeklappt starten"""
+        """Im mobilen Modus Filter eingeklappt starten (nur wenn Toggle-Button vorhanden)"""
         try:
+            # Nur einklappen wenn ein Toggle-Button zum Aufklappen existiert (Desktop-KV)
+            if not self.ids.get('filter_chevron'):
+                return
             from services.service_container import service_container
             config_service = service_container.get_config_service()
             if config_service and config_service.get('mobile_modus', False):

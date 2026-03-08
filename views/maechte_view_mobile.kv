@@ -111,12 +111,12 @@
     spacing: dp(2)
     padding: [dp(4), dp(2)]
 
-    # Name - feste Breite
+    # Name - responsiv mit Obergrenze
     MDLabel:
         text: root.macht_name
         font_size: dp(13)
         size_hint_x: None
-        width: dp(200)
+        width: min(dp(260), self.parent.width - dp(220)) if self.parent else dp(200)
         halign: 'left'
         valign: 'middle'
         shorten: True
@@ -132,12 +132,13 @@
         halign: 'center'
         valign: 'middle'
 
-    # MP kompakt
+    # MP kompakt - im Portrait ausgeblendet (Platzsparen)
     MDLabel:
         text: f"MP:{root.machtpunkte}"
         font_size: dp(10)
         size_hint_x: None
-        width: dp(36)
+        width: dp(42) if (self.parent and self.parent.width > dp(400)) else 0
+        opacity: 1 if (self.parent and self.parent.width > dp(400)) else 0
         halign: 'center'
         valign: 'middle'
 
