@@ -108,11 +108,39 @@ def setup_dist_structure():
     print(f"📁 Dist-Struktur erstellt: {dist_dir}")
     return dist_dir
 
+def ensure_java17():
+    """Stellt sicher dass JAVA_HOME auf Java 17 zeigt (Gradle 8.0.2 braucht Java <= 20)"""
+    java17_path = "/usr/lib/jvm/java-17-openjdk-amd64"
+    if os.path.exists(java17_path):
+        os.environ['JAVA_HOME'] = java17_path
+        print(f"☕ JAVA_HOME gesetzt auf: {java17_path}")
+    else:
+        current = os.environ.get('JAVA_HOME', 'nicht gesetzt')
+        print(f"⚠️  Java 17 nicht unter {java17_path} gefunden, verwende: {current}")
+
+    # Gradle-Daemon stoppen (könnte mit falscher Java-Version laufen)
+    gradlew = Path.cwd() / ".buildozer" / "android" / "platform" / "build-arm64-v8a" / "dists" / "savageworlds" / "gradlew"
+    if gradlew.exists():
+        subprocess.run([str(gradlew), '--stop'], cwd=gradlew.parent,
+                      capture_output=True, timeout=30)
+        print("🛑 Gradle-Daemon gestoppt")
+
+    # Korrupten Script-Cache löschen
+    gradle_script_cache = Path.home() / ".gradle" / "caches" / "8.0.2" / "scripts"
+    if gradle_script_cache.exists():
+        import shutil as _shutil
+        _shutil.rmtree(gradle_script_cache, ignore_errors=True)
+        print("🧹 Gradle Script-Cache bereinigt")
+
+
 def build_android(dist_dir):
     """Build Android APK mit Buildozer"""
     print("\n" + "="*50)
     print("🤖 ANDROID BUILD STARTEN")
     print("="*50)
+
+    # Java 17 sicherstellen (Gradle 8.0.2 ist inkompatibel mit Java 21)
+    ensure_java17()
 
     try:
         # Prüfe Buildozer Installation
