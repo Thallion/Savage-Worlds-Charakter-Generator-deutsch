@@ -39,6 +39,13 @@ class SwipeScreenManager(ScreenManager):
 
             # Horizontaler Swipe: genug horizontal, wenig vertikal
             if abs(dx) > self.min_swipe_distance and dy < self.max_vertical_drift:
+                # Laufende Transition abbrechen bevor ein neuer Wechsel getriggert wird
+                if hasattr(self, '_anim_progress') and self._anim_progress is not None:
+                    try:
+                        from kivy.uix.screenmanager import NoTransition
+                        self.transition = NoTransition()
+                    except Exception:
+                        pass
                 if self._swipe_callback:
                     direction = 'right' if dx > 0 else 'left'
                     self._swipe_callback(direction)

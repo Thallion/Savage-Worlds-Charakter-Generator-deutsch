@@ -545,21 +545,31 @@ class SW_Charakter_GeneratorApp(MDApp):
             root = self.root
             if root and root.ids.get('tabs_carousel'):
                 screen_manager = root.ids['tabs_carousel']
-                
+
+                # WICHTIG: NoTransition für Tab-Bar-Klicks setzen um
+                # Animations-Konflikte mit vorherigen Swipe-Transitionen zu vermeiden
+                screen_manager.transition = NoTransition()
+
                 # Get screen name from tab index
                 if 0 <= tab_index < len(self.tab_definitions):
                     tab_text = self.tab_definitions[tab_index][1]
                     clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
                     screen_name = f"screen_{tab_index}_{clean_name}"
-                    
-                    # Check if screen exists, create if needed
+
+                    # Screen suchen und wechseln - getrennte try-Blöcke
+                    # damit ein Transitionsfehler keinen neuen Screen erzeugt
+                    screen_exists = False
                     if hasattr(screen_manager, 'get_screen'):
                         try:
-                            screen = screen_manager.get_screen(screen_name)
-                            screen_manager.current = screen_name
-                        except Exception as e:
+                            screen_manager.get_screen(screen_name)
+                            screen_exists = True
+                        except Exception:
                             Logger.warning(f"Screen '{screen_name}' nicht gefunden, erstelle neu...")
-                            # Try to create screen dynamically
+
+                        if screen_exists:
+                            screen_manager.current = screen_name
+                        else:
+                            # Screen dynamisch erstellen (nur bei echtem ScreenNotFound)
                             if 0 <= tab_index < len(self.tab_definitions):
                                 ScreenClass = self.tab_definitions[tab_index][2]
                                 try:
@@ -573,6 +583,8 @@ class SW_Charakter_GeneratorApp(MDApp):
                                     self.screens[tab_text] = new_screen
                                     screen_manager.current = screen_name
                                     Logger.info(f"Screen '{screen_name}' dynamisch erstellt")
+                                    # Widget-Registrierung für den neuen Screen
+                                    self._register_widget_for_compatibility(new_screen, tab_text)
                                 except Exception as create_error:
                                     Logger.error(f"Dynamische Erstellung von '{screen_name}' fehlgeschlagen: {create_error}")
                     else:
@@ -825,9 +837,11 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if main_content_area:
                     main_content_area.padding = [0, dp(12), 0, 0]
 
-                # Swipe aktivieren
-                if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
-                    screen_manager.swipe_enabled = True
+                # Swipe nur auf Android aktivieren (Desktop: nur Menü-Orientierung wechseln)
+                from kivy.utils import platform as _platform
+                if _platform == 'android':
+                    if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
+                        screen_manager.swipe_enabled = True
 
                 # Aktives Rail-Item hervorheben
                 if current_index < len(self.rail_items):

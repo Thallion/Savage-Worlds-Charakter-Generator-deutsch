@@ -160,23 +160,23 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Umschalten der Logger-Leiste: {e}")
 
     def toggle_mobile_modus(self, active):
-        """Wechselt den mobilen Modus und speichert die Einstellung"""
+        """Wechselt zwischen horizontalem und vertikalem Menü (ohne Touch-Swipe zu ändern)"""
         try:
             # Config speichern
             config_service = service_container.get_config_service()
             if config_service:
                 config_service.set('mobile_modus', active)
 
-            # Modus in der App umschalten
+            # Menü-Orientierung in der App umschalten
             app = MDApp.get_running_app()
             if app and hasattr(app, 'set_navigation_mode'):
                 # Override setzen (manueller Modus)
                 app._mobile_modus_override = active if active else None
                 app.set_navigation_mode(active)
 
-            Logger.info(f"Mobiler Modus {'aktiviert' if active else 'deaktiviert'}")
+            Logger.info(f"Vertikales Menü {'aktiviert' if active else 'deaktiviert'}")
         except Exception as e:
-            Logger.error(f"Fehler beim Umschalten des mobilen Modus: {e}")
+            Logger.error(f"Fehler beim Umschalten des Menü-Modus: {e}")
 
     # ==================== DELEGIERTE METHODEN ====================
     # Alle Methoden delegieren an die entsprechenden Manager/Handler
@@ -214,6 +214,10 @@ class EinstellungenWidget(MDBoxLayout):
         """Aktualisiert die Einstellungen-UI nach Änderungen"""
         if self.statistics_manager:
             self.statistics_manager.update_element_statistics_ui()
+        # Layout-Neuberechnung erzwingen (verhindert leere Ansicht nach Tab-Wechsel)
+        for child in self.children:
+            if hasattr(child, 'do_layout'):
+                child.do_layout()
 
     # Character-Management - Basis-Operationen bleiben hier
     def get_charakter_value(self, attribute, default_value=''):

@@ -13,14 +13,10 @@ import subprocess
 from pathlib import Path
 import time
 
-def set_android_config_defaults():
-    """Setzt Android-spezifische Config-Defaults (mobile_modus=true, show_logger=false)"""
+def _load_config():
+    """Lädt die aktuelle Config-Datei"""
     import json
-    project_dir = Path.cwd()
-    config_dir = project_dir / "config"
-    config_dir.mkdir(exist_ok=True)
-    config_file = config_dir / "app_config.json"
-
+    config_file = Path.cwd() / "config" / "app_config.json"
     config_data = {}
     if config_file.exists():
         try:
@@ -28,14 +24,33 @@ def set_android_config_defaults():
                 config_data = json.load(f)
         except Exception as e:
             print(f"⚠️  Bestehende Config konnte nicht geladen werden: {e}")
+    return config_data
 
-    config_data['mobile_modus'] = True
-    config_data['show_logger'] = False
-    config_data['force_mobile_layout'] = True
-
+def _save_config(config_data):
+    """Speichert die Config-Datei"""
+    import json
+    config_dir = Path.cwd() / "config"
+    config_dir.mkdir(exist_ok=True)
+    config_file = config_dir / "app_config.json"
     with open(config_file, 'w', encoding='utf-8') as f:
         json.dump(config_data, f, indent=2, ensure_ascii=False)
 
+def set_desktop_config_defaults():
+    """Setzt Desktop-spezifische Config-Defaults (mobile_modus=false, show_logger=false)"""
+    config_data = _load_config()
+    config_data['mobile_modus'] = False
+    config_data['show_logger'] = False
+    config_data['force_mobile_layout'] = False
+    _save_config(config_data)
+    print(f"🖥️  Desktop-Defaults gesetzt: mobile_modus=false, show_logger=false, force_mobile_layout=false")
+
+def set_android_config_defaults():
+    """Setzt Android-spezifische Config-Defaults (mobile_modus=true, show_logger=false)"""
+    config_data = _load_config()
+    config_data['mobile_modus'] = True
+    config_data['show_logger'] = False
+    config_data['force_mobile_layout'] = True
+    _save_config(config_data)
     print(f"📱 Android-Defaults gesetzt: mobile_modus=true, show_logger=false, force_mobile_layout=true")
 
 
@@ -314,25 +329,25 @@ def main():
     
     start_time = time.time()
 
-    # Android-Config-Defaults setzen
-    set_android_config_defaults()
-
     # Setup dist-Struktur
     dist_dir = setup_dist_structure()
 
     # Build-Ergebnisse verfolgen
     results = {}
 
-    # Linux Build
+    # Linux Build (Desktop-Defaults)
     print("\n⏳ Starte Linux Build...")
+    set_desktop_config_defaults()
     results['linux'] = build_linux(dist_dir)
 
-    # Windows Build (via Wine)
+    # Windows Build via Wine (Desktop-Defaults)
     print("\n⏳ Starte Windows Build...")
+    set_desktop_config_defaults()
     results['windows'] = build_windows(dist_dir)
 
-    # Android Build
+    # Android Build (Android-Defaults)
     print("\n⏳ Starte Android Build...")
+    set_android_config_defaults()
     results['android'] = build_android(dist_dir)
     
     # README für dist-Ordner erstellen

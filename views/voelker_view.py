@@ -122,6 +122,9 @@ class VoelkerWidget(MDBoxLayout):
             charakter = self.controller.charakter
             voelker_namen = sorted(charakter.voelker.keys())
 
+            # Vorauswahl: aktuell gewähltes Volk
+            self._popup_pending_volk = self.selected_volk_name
+
             # Hauptcontainer
             dialog_content = MDBoxLayout(
                 orientation="vertical",
@@ -174,14 +177,15 @@ class VoelkerWidget(MDBoxLayout):
                 """Befüllt die Liste mit Völkern, gefiltert nach Suchtext."""
                 items_list.clear_widgets()
                 search_text = search_field.text.lower() if search_field.text else ""
+                pending = self._popup_pending_volk
 
                 # "Kein Volk" Option
                 if not search_text or "kein" in search_text:
-                    is_sel = self.selected_volk_name is None
+                    is_sel = pending is None
                     item = MDListItem(
                         size_hint_y=None,
                         height=dp(48),
-                        on_release=lambda x: self._on_volk_popup_selected(None),
+                        on_release=lambda x: _select_in_popup(None),
                         md_bg_color=self.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
                     )
                     if is_sel:
@@ -200,11 +204,11 @@ class VoelkerWidget(MDBoxLayout):
                 for volk_name in voelker_namen:
                     if search_text and search_text not in volk_name.lower():
                         continue
-                    is_sel = (self.selected_volk_name == volk_name)
+                    is_sel = (pending == volk_name)
                     item = MDListItem(
                         size_hint_y=None,
                         height=dp(48),
-                        on_release=lambda x, vn=volk_name: self._on_volk_popup_selected(vn),
+                        on_release=lambda x, vn=volk_name: _select_in_popup(vn),
                         md_bg_color=self.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
                     )
                     if is_sel:
@@ -218,6 +222,11 @@ class VoelkerWidget(MDBoxLayout):
                         headline.bold = True
                     item.add_widget(headline)
                     items_list.add_widget(item)
+
+            def _select_in_popup(volk_name):
+                """Markiert ein Volk als vorausgewählt (ohne Dialog zu schließen)."""
+                self._popup_pending_volk = volk_name
+                populate_list()
 
             # Liste initial befüllen
             populate_list()
@@ -243,7 +252,12 @@ class VoelkerWidget(MDBoxLayout):
                     MDButton(
                         MDButtonText(text="Abbrechen"),
                         style="text",
-                        on_release=lambda x: self.volk_search_dialog.dismiss(),
+                        on_release=lambda x: self._dismiss_volk_popup(),
+                    ),
+                    MDButton(
+                        MDButtonText(text="Bestätigen"),
+                        style="text",
+                        on_release=lambda x: self._confirm_volk_popup(),
                     ),
                     spacing="8dp",
                 ),
@@ -255,11 +269,36 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Völker-Popup: {e}", exc_info=True)
 
+    def _dismiss_volk_popup(self):
+        """Schließt den Völker-Popup-Dialog ohne Änderung."""
+        try:
+            if hasattr(self, 'volk_search_dialog') and self.volk_search_dialog:
+                self.volk_search_dialog.dismiss()
+                self.volk_search_dialog = None
+            self._popup_pending_volk = None
+        except Exception as e:
+            Logger.error(f"Fehler beim Schließen des Völker-Popups: {e}", exc_info=True)
+
+    def _confirm_volk_popup(self):
+        """Bestätigt die Völker-Auswahl und schließt den Dialog."""
+        try:
+            pending = getattr(self, '_popup_pending_volk', None)
+            if hasattr(self, 'volk_search_dialog') and self.volk_search_dialog:
+                self.volk_search_dialog.dismiss()
+                self.volk_search_dialog = None
+            # Nur anwenden wenn sich die Auswahl geändert hat
+            if pending != self.selected_volk_name:
+                self._select_volk_from_dropdown(pending)
+            self._popup_pending_volk = None
+        except Exception as e:
+            Logger.error(f"Fehler bei Völker-Popup-Bestätigung: {e}", exc_info=True)
+
     def _on_volk_popup_selected(self, volk_name):
         """Behandelt die Auswahl eines Volkes im Popup-Dialog."""
         try:
-            if hasattr(self, 'volk_search_dialog'):
+            if hasattr(self, 'volk_search_dialog') and self.volk_search_dialog:
                 self.volk_search_dialog.dismiss()
+                self.volk_search_dialog = None
             self._select_volk_from_dropdown(volk_name)
         except Exception as e:
             Logger.error(f"Fehler bei Völker-Popup-Auswahl: {e}", exc_info=True)

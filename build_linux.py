@@ -10,11 +10,33 @@ import shutil
 import subprocess
 from pathlib import Path
 
+def set_desktop_config_defaults():
+    """Setzt Desktop-spezifische Config-Defaults (mobile_modus=false, show_logger=false)"""
+    import json
+    config_file = Path.cwd() / "config" / "app_config.json"
+    config_data = {}
+    if config_file.exists():
+        try:
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config_data = json.load(f)
+        except Exception as e:
+            print(f"⚠️  Bestehende Config konnte nicht geladen werden: {e}")
+    config_data['mobile_modus'] = False
+    config_data['show_logger'] = False
+    config_data['force_mobile_layout'] = False
+    (Path.cwd() / "config").mkdir(exist_ok=True)
+    with open(config_file, 'w', encoding='utf-8') as f:
+        json.dump(config_data, f, indent=2, ensure_ascii=False)
+    print(f"🖥️  Desktop-Defaults gesetzt: mobile_modus=false, show_logger=false")
+
 def main():
     """Hauptfunktion für Linux Build"""
     project_dir = Path.cwd()
     print(f"Projekt-Verzeichnis: {project_dir}")
-    
+
+    # Desktop-Config-Defaults setzen
+    set_desktop_config_defaults()
+
     # Prüfe ob PyInstaller verfügbar ist
     try:
         import PyInstaller
