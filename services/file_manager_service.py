@@ -46,10 +46,38 @@ class FileManagerService:
         self.temp_printer_friendly = False
         self.template_callback = None
 
+    def _has_manage_storage_permission(self):
+        """
+        Prüft ob MANAGE_EXTERNAL_STORAGE erteilt ist (API 30+).
+        Returns: True wenn erteilt oder nicht benötigt, False wenn fehlend.
+        """
+        from kivy.utils import platform as kivy_platform
+        if kivy_platform != 'android':
+            return True
+
+        try:
+            from jnius import autoclass
+            Environment = autoclass('android.os.Environment')
+            if hasattr(Environment, 'isExternalStorageManager'):
+                result = Environment.isExternalStorageManager()
+                Logger.info(f"MANAGE_EXTERNAL_STORAGE Status: {result}")
+                return result
+            # API < 30: MANAGE_EXTERNAL_STORAGE nicht nötig
+            Logger.info("MANAGE_EXTERNAL_STORAGE nicht verfügbar (API < 30)")
+            return True
+        except ImportError:
+            Logger.info("jnius nicht verfügbar — überspringe MANAGE_EXTERNAL_STORAGE Prüfung")
+            return True
+        except Exception as e:
+            Logger.warning(f"MANAGE_EXTERNAL_STORAGE Prüfung fehlgeschlagen: {e}")
+            return True
+
     def _request_android_permissions(self, callback=None):
         """
         Fordert Speicher-Berechtigungen auf Android an.
         Ab API 30 wird MANAGE_EXTERNAL_STORAGE benötigt.
+        Wenn MANAGE_EXTERNAL_STORAGE fehlt, wird zu den Einstellungen weitergeleitet
+        und der callback wird NICHT aufgerufen (User muss erneut auf Laden drücken).
         """
         from kivy.utils import platform as kivy_platform
         if kivy_platform != 'android':
@@ -60,8 +88,9 @@ class FileManagerService:
 
         try:
             from android.permissions import request_permissions, Permission, check_permission
+            from kivy.clock import Clock
 
-            # Prüfe ob MANAGE_EXTERNAL_STORAGE verfügbar (API 30+)
+            # Prüfe Basis-Berechtigungen (READ/WRITE_EXTERNAL_STORAGE)
             needed = []
             try:
                 if not check_permission(Permission.READ_EXTERNAL_STORAGE):
@@ -73,23 +102,47 @@ class FileManagerService:
 
             if needed:
                 def _on_permissions(permissions, results):
-                    granted = all(results)
-                    self._android_permissions_granted = granted
-                    if granted:
-                        Logger.info("Android Speicher-Berechtigungen erteilt")
-                    else:
-                        Logger.warning("Android Speicher-Berechtigungen verweigert")
-                    # MANAGE_EXTERNAL_STORAGE erfordert Weiterleitung in Einstellungen
-                    self._request_manage_storage_permission()
-                    if callback:
-                        callback()
+                    # WICHTIG: Dieser Callback läuft auf dem Java UI-Thread!
+                    # Alle weiteren Aktionen müssen auf den Kivy-Hauptthread verschoben werden.
+                    try:
+                        granted = all(results)
+                        self._android_permissions_granted = granted
+
+                        def _continue_on_main_thread(dt):
+                            try:
+                                if granted:
+                                    Logger.info("Android Speicher-Berechtigungen erteilt")
+                                else:
+                                    Logger.warning("Android Speicher-Berechtigungen verweigert")
+
+                                # Prüfe MANAGE_EXTERNAL_STORAGE separat
+                                if self._has_manage_storage_permission():
+                                    if callback:
+                                        callback()
+                                else:
+                                    # Zu Einstellungen weiterleiten, OHNE callback
+                                    self._open_manage_storage_settings()
+                            except Exception as e:
+                                Logger.error(f"Fehler in _continue_on_main_thread: {e}")
+
+                        Clock.schedule_once(_continue_on_main_thread, 0.1)
+                    except Exception as e:
+                        # Fehler auf Java-Thread dürfen nicht unbehandelt bleiben
+                        self._android_permissions_granted = True
+                        try:
+                            Clock.schedule_once(lambda dt: callback() if callback else None, 0.1)
+                        except Exception:
+                            pass
 
                 request_permissions(needed, _on_permissions)
             else:
                 self._android_permissions_granted = True
-                self._request_manage_storage_permission()
-                if callback:
-                    callback()
+                # Prüfe MANAGE_EXTERNAL_STORAGE
+                if self._has_manage_storage_permission():
+                    if callback:
+                        callback()
+                else:
+                    self._open_manage_storage_settings()
 
         except ImportError:
             Logger.warning("android.permissions nicht verfügbar")
@@ -102,39 +155,25 @@ class FileManagerService:
             if callback:
                 callback()
 
-    def _request_manage_storage_permission(self):
+    def _open_manage_storage_settings(self):
         """
-        Prüft und fordert MANAGE_EXTERNAL_STORAGE an (API 30+).
-        Diese Berechtigung muss vom Nutzer in den System-Einstellungen erteilt werden.
+        Öffnet die System-Einstellungen für MANAGE_EXTERNAL_STORAGE.
+        Der File Manager wird NICHT geöffnet — der User muss nach Rückkehr
+        erneut auf Laden/Speichern drücken.
         """
-        from kivy.utils import platform as kivy_platform
-        if kivy_platform != 'android':
-            return
-
         try:
             from android import mActivity
             from jnius import autoclass
 
-            Environment = autoclass('android.os.Environment')
-            # isExternalStorageManager() gibt es ab API 30
-            if hasattr(Environment, 'isExternalStorageManager'):
-                if not Environment.isExternalStorageManager():
-                    Logger.info("MANAGE_EXTERNAL_STORAGE nicht erteilt, leite zu Einstellungen weiter")
-                    try:
-                        Intent = autoclass('android.content.Intent')
-                        Settings = autoclass('android.provider.Settings')
-                        Uri = autoclass('android.net.Uri')
+            Logger.info("MANAGE_EXTERNAL_STORAGE nicht erteilt, leite zu Einstellungen weiter")
+            Intent = autoclass('android.content.Intent')
+            Settings = autoclass('android.provider.Settings')
 
-                        intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                        mActivity.startActivity(intent)
-                    except Exception as e:
-                        Logger.warning(f"Konnte Einstellungen nicht öffnen: {e}")
-                else:
-                    Logger.info("MANAGE_EXTERNAL_STORAGE bereits erteilt")
-        except ImportError:
-            Logger.debug("jnius nicht verfügbar - kein Android")
+            intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+            mActivity.startActivity(intent)
+            Logger.info("Einstellungen geöffnet — nach Rückkehr erneut Laden/Speichern drücken")
         except Exception as e:
-            Logger.warning(f"MANAGE_EXTERNAL_STORAGE Prüfung fehlgeschlagen: {e}")
+            Logger.warning(f"Konnte Einstellungen nicht öffnen: {e}")
     
     def get_default_directory(self, dir_type='chars'):
         """
@@ -313,21 +352,94 @@ class FileManagerService:
 
         self.current_action = action_type
 
-        # Android: Berechtigungen prüfen bevor FileManager geöffnet wird
+        # Android: Berechtigungen bei jedem Aufruf prüfen
         from kivy.utils import platform as kivy_platform
-        if kivy_platform == 'android' and not self._android_permissions_granted:
-            self._request_android_permissions(
-                callback=lambda: self._open_file_manager_for_platform(path)
-            )
+        if kivy_platform == 'android':
+            Logger.info(f"Android FileManager: permissions_granted={self._android_permissions_granted}")
+            if not self._android_permissions_granted:
+                Logger.info("Android: Fordere Basis-Berechtigungen an...")
+                self._request_android_permissions(
+                    callback=lambda: self._open_file_manager_for_platform(path)
+                )
+            elif not self._has_manage_storage_permission():
+                Logger.info("Android: MANAGE_EXTERNAL_STORAGE fehlt, öffne Einstellungen...")
+                self._open_manage_storage_settings()
+            else:
+                Logger.info("Android: Alle Berechtigungen vorhanden, öffne FileManager...")
+                self._open_file_manager_for_platform(path)
         else:
             self._open_file_manager_for_platform(path)
 
     def _open_file_manager_for_platform(self, path):
         """Öffnet den FileManager plattformspezifisch"""
+        from kivy.utils import platform as kivy_platform
+
+        # Android: Sicherstellen dass der Pfad existiert und zugreifbar ist
+        if kivy_platform == 'android':
+            path = self._get_valid_android_path(path)
+
+        Logger.info(f"FileManager öffnen mit Pfad: {path}")
+
         if self.is_windows:
             self.show_drive_selector(path, self.current_action)
         else:
             self._show_file_manager_direct(path)
+
+    def _get_valid_android_path(self, path):
+        """Ermittelt einen gültigen und zugreifbaren Pfad auf Android.
+        Bevorzugt externen Speicher, da /data/data/... für den User unbrauchbar ist."""
+
+        # Prüfe ob der Pfad im externen Speicher liegt UND zugreifbar ist
+        if (path and os.path.exists(path) and os.access(path, os.R_OK)
+                and not path.startswith("/data/")):
+            return path
+
+        Logger.info(f"Android: Pfad ist app-privat oder nicht zugreifbar: {path}")
+
+        # Bevorzugte Pfade: Externer Speicher zuerst
+        preferred_paths = [
+            "/storage/emulated/0/SavageWorldsCharGen",
+            "/storage/emulated/0/Download",
+            "/storage/emulated/0/Documents",
+            "/storage/emulated/0",
+        ]
+
+        for preferred in preferred_paths:
+            if os.path.exists(preferred) and os.access(preferred, os.R_OK):
+                # SavageWorldsCharGen-Ordner automatisch anlegen
+                if preferred == "/storage/emulated/0/SavageWorldsCharGen":
+                    Logger.info(f"Android: Verwende App-Ordner: {preferred}")
+                else:
+                    Logger.info(f"Android: Verwende externen Pfad: {preferred}")
+                return preferred
+
+        # SavageWorldsCharGen-Ordner erstellen falls externer Speicher zugreifbar ist
+        chargen_dir = "/storage/emulated/0/SavageWorldsCharGen"
+        if os.path.exists("/storage/emulated/0") and os.access("/storage/emulated/0", os.W_OK):
+            try:
+                os.makedirs(chargen_dir, exist_ok=True)
+                Logger.info(f"Android: App-Ordner erstellt: {chargen_dir}")
+                return chargen_dir
+            except Exception as e:
+                Logger.warning(f"Android: Konnte App-Ordner nicht erstellen: {e}")
+
+        # App-privates Verzeichnis nur als letzter Fallback
+        try:
+            from android.storage import app_storage_path
+            private = app_storage_path()
+            if os.path.exists(private):
+                Logger.warning(f"Android: Nur App-privates Verzeichnis zugreifbar: {private}")
+                return private
+        except ImportError:
+            pass
+
+        # Originaler Pfad als absolut letzter Fallback
+        if path and os.path.exists(path):
+            return path
+
+        home = os.path.expanduser("~")
+        Logger.warning(f"Android: Verwende Home als letzten Fallback: {home}")
+        return home
     
     def show_drive_selector(self, default_path, action_type):
         """
@@ -427,8 +539,21 @@ class FileManagerService:
     
     def _show_file_manager_direct(self, path):
         """Zeigt den FileManager direkt an"""
-        self.file_manager.show(path)
-        self.manager_open = True
+        try:
+            Logger.info(f"FileManager.show() aufrufen mit: {path}")
+            self.file_manager.show(path)
+            self.manager_open = True
+            Logger.info("FileManager erfolgreich geöffnet")
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des FileManagers: {e}", exc_info=True)
+            # Fallback: Versuche mit Home-Verzeichnis
+            try:
+                fallback = os.path.expanduser("~")
+                Logger.info(f"FileManager Fallback mit: {fallback}")
+                self.file_manager.show(fallback)
+                self.manager_open = True
+            except Exception as e2:
+                Logger.error(f"FileManager Fallback ebenfalls fehlgeschlagen: {e2}")
     
     def exit_manager(self, *args):
         """Schließt den FileManager"""

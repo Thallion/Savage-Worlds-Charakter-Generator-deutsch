@@ -406,7 +406,9 @@ class DialogService:
         text_input = MDTextField(
             text=default_text,
             hint_text="Text eingeben...",
-            mode="outlined"
+            mode="outlined",
+            size_hint_y=None,
+            height=dp(56)
         )
         content.add_widget(text_input)
         

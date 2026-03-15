@@ -13,6 +13,54 @@ import subprocess
 from pathlib import Path
 import time
 
+def get_version_from_git():
+    """Liest die Version aus der letzten Git-Commit-Nachricht (z.B. '0.6.1.6')"""
+    try:
+        result = subprocess.run(
+            ['git', 'log', '-1', '--format=%s'],
+            capture_output=True, text=True, cwd=Path.cwd()
+        )
+        if result.returncode == 0:
+            version = result.stdout.strip()
+            parts = version.split('.')
+            if len(parts) >= 3 and all(p.isdigit() for p in parts):
+                return version
+    except Exception as e:
+        print(f"⚠️  Git-Version konnte nicht gelesen werden: {e}")
+    return None
+
+def get_version_from_spec():
+    """Liest die Version aus buildozer.spec (Fallback)"""
+    spec_file = Path.cwd() / "buildozer.spec"
+    if spec_file.exists():
+        with open(spec_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('version') and '=' in line and not line.startswith('version.'):
+                    return line.split('=', 1)[1].strip()
+    return None
+
+def get_version():
+    """Ermittelt die aktuelle Version (Git-Commit > buildozer.spec > None)"""
+    return get_version_from_git() or get_version_from_spec()
+
+def update_buildozer_spec_version(version):
+    """Aktualisiert die Version in buildozer.spec"""
+    spec_file = Path.cwd() / "buildozer.spec"
+    if not spec_file.exists():
+        return
+
+    lines = spec_file.read_text(encoding='utf-8').splitlines(keepends=True)
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith('version') and '=' in stripped and not stripped.startswith('version.'):
+            old_version = stripped.split('=', 1)[1].strip()
+            if old_version != version:
+                lines[i] = f"version = {version}\n"
+                spec_file.write_text(''.join(lines), encoding='utf-8')
+                print(f"📝 buildozer.spec Version aktualisiert: {old_version} → {version}")
+            return
+
 def set_android_config_defaults():
     """Setzt Android-spezifische Config-Defaults (mobile_modus=true, show_logger=false)"""
     project_dir = Path.cwd()
@@ -110,30 +158,35 @@ def build_android(dist_dir):
         print("❌ Buildozer nicht gefunden! Installiere mit: pip install buildozer")
         return False
 
-    # Finde und verschiebe APK (unabhängig vom Build Return Code)
+    # Finde und verschiebe APK mit Versions-Name
     bin_dir = Path.cwd() / "bin"
     apk_files = list(bin_dir.glob("*.apk"))
-    
+    version = get_version()
+
     if apk_files:
         # Stelle sicher dass android Ordner existiert
         (dist_dir / "android").mkdir(exist_ok=True)
-        
+
         for apk_file in apk_files:
-            target_file = dist_dir / "android" / apk_file.name
+            # APK mit Version umbenennen
+            if version:
+                build_type = "debug" if "debug" in apk_file.name.lower() else "release"
+                new_name = f"SavageWorldsCharGen-v{version}-{build_type}.apk"
+            else:
+                new_name = apk_file.name
+            target_file = dist_dir / "android" / new_name
             shutil.copy2(apk_file, target_file)
             print(f"✅ APK nach {target_file} kopiert")
-        
+
         # Kopiere auch buildozer.spec für Referenz
         spec_file = Path.cwd() / "buildozer.spec"
         if spec_file.exists():
             shutil.copy2(spec_file, dist_dir / "android" / "buildozer.spec")
-        
+
         return True
     else:
         print(f"❌ Keine APK-Datei gefunden in: {bin_dir}")
         return False
-    
-    return False
 
 def create_dist_readme(dist_dir):
     """Erstellt eine README für den dist-Ordner"""
@@ -247,7 +300,15 @@ def main():
     print("="*60)
     
     start_time = time.time()
-    
+
+    # Version aus Git ermitteln und buildozer.spec aktualisieren
+    version = get_version()
+    if version:
+        print(f"📌 Aktuelle Version: {version}")
+        update_buildozer_spec_version(version)
+    else:
+        print("⚠️  Keine Version ermittelt — verwende bestehende buildozer.spec Version")
+
     # Android-Config-Defaults setzen
     set_android_config_defaults()
 

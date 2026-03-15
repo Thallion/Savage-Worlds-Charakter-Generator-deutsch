@@ -130,6 +130,7 @@ class SW_Charakter_GeneratorApp(MDApp):
         self._mobile_modus_override = None  # None = automatisch, True/False = manuell
         self._nav_rail_visible = False  # NavigationRail Sichtbarkeit im Mobile-Modus
         self._current_tab_index = 0  # Aktueller Tab-Index für Swipe-Navigation
+        self._last_rail_touch_time = 0  # Debounce für doppelte Touch-Events
 
         # Deine Icons + Tab-Texte + zugehörige Screens
         # NEU: CharakterVerwaltung-Tab hinzugefügt
@@ -727,6 +728,13 @@ class SW_Charakter_GeneratorApp(MDApp):
         if touch.grab_current is not None and touch.grab_current is not item:
             return False
 
+        # Debounce: Doppelte Touch-Events innerhalb 300ms ignorieren
+        import time as _time
+        now = _time.time()
+        if now - self._last_rail_touch_time < 0.3:
+            return True
+        self._last_rail_touch_time = now
+
         try:
             item_index = item._rail_index
 
@@ -816,6 +824,9 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             self._current_tab_index = current_index
 
+            # Modus-Flag ZUERST setzen (wird von _update_mobile_orientation benötigt)
+            self._mobile_modus_active = mobile
+
             if mobile:
                 # Tabs verstecken
                 tabs_container.height = 0
@@ -827,18 +838,31 @@ class SW_Charakter_GeneratorApp(MDApp):
                     menu_toggle.opacity = 0
 
                 # Orientierung prüfen: Portrait vs. Landscape
-                self._update_mobile_orientation()
+                # Auf Desktop immer Rail anzeigen (kein FAB)
+                from kivy.utils import platform as _platform
+                if _platform == 'android':
+                    self._update_mobile_orientation()
+                else:
+                    # Desktop: Rail immer anzeigen
+                    nav_rail_container.width = dp(72)
+                    nav_rail_container.opacity = 1
+                    self._nav_rail_visible = True
+                    # FAB verstecken (nicht benötigt auf Desktop)
+                    portrait_fab = root.ids.get('portrait_nav_fab')
+                    if portrait_fab:
+                        portrait_fab.opacity = 0
+                        portrait_fab.disabled = True
 
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
 
                 # Pointbar auf Smartphone weiter runter (Statusbar/Notch-Abstand)
-                main_content_area = root.ids.get('main_content_area')
-                if main_content_area:
-                    main_content_area.padding = [0, dp(12), 0, 0]
+                if _platform == 'android':
+                    main_content_area = root.ids.get('main_content_area')
+                    if main_content_area:
+                        main_content_area.padding = [0, dp(12), 0, 0]
 
-                # Swipe nur auf Android aktivieren (Desktop: nur Menü-Orientierung wechseln)
-                from kivy.utils import platform as _platform
+                # Swipe nur auf Android aktivieren
                 if _platform == 'android':
                     if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
                         screen_manager.swipe_enabled = True
@@ -847,7 +871,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if current_index < len(self.rail_items):
                     self._set_active_rail_item(current_index)
 
-                Logger.info("Mobiler Modus aktiviert (Swipe + NavigationRail)")
+                Logger.info("Vertikales Menü aktiviert (NavigationRail)")
             else:
                 # NavigationRail verstecken
                 nav_rail_container.width = 0
@@ -880,9 +904,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if current_index < len(self.tab_items):
                     self.tab_items[current_index].active = True
 
-                Logger.info("Desktop-Modus aktiviert (Tabs)")
-
-            self._mobile_modus_active = mobile
+                Logger.info("Horizontales Menü aktiviert (Tabs)")
 
         except Exception as e:
             Logger.error(f"Fehler beim Moduswechsel: {str(e)}", exc_info=True)
@@ -975,8 +997,9 @@ class SW_Charakter_GeneratorApp(MDApp):
         try:
             # Bei manuellem Override nicht automatisch wechseln
             if self._mobile_modus_override is not None:
-                # Trotzdem Orientierung im Mobile-Modus aktualisieren
-                if self._mobile_modus_active:
+                # Orientierung nur auf Android aktualisieren (Portrait/Landscape FAB-Wechsel)
+                from kivy.utils import platform as _platform
+                if _platform == 'android' and self._mobile_modus_active:
                     self._update_mobile_orientation()
                 return
 

@@ -526,7 +526,17 @@ class CharacterHandler:
             self.save_filename = filename
             Logger.info(f"Dateiname gesetzt: {filename}")
 
-            # FileManager für Pfadauswahl öffnen
+            # FileManager für Pfadauswahl öffnen (verzögert, damit der Input-Dialog
+            # vollständig geschlossen ist bevor der FileManager angezeigt wird)
+            from kivy.clock import Clock
+            Clock.schedule_once(lambda dt: self._open_save_file_manager(filename), 0.3)
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des FileManagers: {str(e)}", exc_info=True)
+
+    def _open_save_file_manager(self, filename):
+        """Öffnet den FileManager für die Pfadauswahl beim Speichern"""
+        try:
             file_service = service_container.get_file_manager_service()
             if not file_service:
                 Logger.error("FileManager-Service nicht verfügbar")
