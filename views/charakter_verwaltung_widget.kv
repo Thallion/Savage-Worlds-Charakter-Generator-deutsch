@@ -136,12 +136,22 @@
                         MDButton:
                             style: "elevated"
                             on_release: root.erzeuge_charakterbogen_pdf()
-                            
+
                             MDButtonIcon:
                                 icon: "file-pdf-box"
-                            
+
                             MDButtonText:
                                 text: "PDF erstellen"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.erzeuge_charakterbogen_html()
+
+                            MDButtonIcon:
+                                icon: "language-html5"
+
+                            MDButtonText:
+                                text: "HTML erstellen"
 
                         MDButton:
                             style: "elevated"

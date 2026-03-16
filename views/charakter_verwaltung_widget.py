@@ -21,6 +21,7 @@ from services.event_service import EventTypes
 # Manager imports
 from manager.statistics_manager import StatisticsManager
 from manager.pdf_manager import PDFManager
+from manager.html_manager import HTMLManager
 
 # KV-Datei laden
 from utils.path_utils import get_application_root
@@ -66,11 +67,13 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         try:
             self.statistics_manager = StatisticsManager(self)
             self.pdf_manager = PDFManager(self)
+            self.html_manager = HTMLManager(self)
             Logger.info("CharakterVerwaltung Manager erfolgreich initialisiert")
         except Exception as e:
             Logger.error(f"Fehler bei Manager-Initialisierung: {e}")
             self.statistics_manager = None
             self.pdf_manager = None
+            self.html_manager = None
 
     def _register_event_handlers(self):
         """Registriert Event-Handler"""
@@ -122,6 +125,13 @@ class CharakterVerwaltungWidget(MDBoxLayout):
     def erzeuge_charakterbogen_pdf(self):
         """Erstellt Charakterbogen als PDF"""
         return self.character_handler.erzeuge_charakterbogen_pdf()
+
+    def erzeuge_charakterbogen_html(self):
+        """Erstellt Charakterbogen als HTML"""
+        if hasattr(self, 'html_manager') and self.html_manager:
+            return self.html_manager.create_character_html()
+        else:
+            Logger.error("HTMLManager nicht verfügbar")
     
     def zeige_statblock(self):
         """Zeigt Statblock an"""

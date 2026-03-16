@@ -520,7 +520,7 @@ class CharakterbogenWidget(MDBoxLayout):
 
         for item in alle_ausruestung:
             item_text = f"{item.name} x{item.menge}"
-            item_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=45)
+            item_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(8))
             item_label = LeftAlignedLabel(
                 text=item_text,
                 font_size=LABEL_FONT_SIZE,

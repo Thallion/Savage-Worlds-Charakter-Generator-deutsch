@@ -192,15 +192,58 @@ class PDFManager:
             self.file_service.show_file_manager(chars_dir, "save_pdf_dir")
     
     def _show_platform_not_supported_dialog(self, platform_info):
-        """Zeigt Dialog für nicht unterstützte Plattform"""
+        """Zeigt Dialog für nicht unterstützte Plattform mit HTML-Alternative"""
         if not self.dialog_service:
             Logger.error("Dialog-Service nicht verfügbar für Plattform-Warnung")
             return
-        
+
         platform_name = "Android" if platform_info.get('is_android') else "Unbekannte Plattform"
-        reason = platform_info.get('reason', 'PDF-Generierung nicht verfügbar')
-        
-        title = "PDF-Erstellung nicht verfügbar"
-        message = f"PDF-Erstellung ist auf {platform_name} nicht verfügbar.\n\n{reason}\n\nDiese Funktion ist nur auf Desktop-Systemen (Windows/Linux/macOS) verfügbar."
-        
-        self.dialog_service.show_info_dialog(message, title)
+
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(12),
+            size_hint_y=None,
+            height=dp(150),
+            padding=dp(16)
+        )
+
+        content.add_widget(MDLabel(
+            text=f"PDF-Erstellung ist auf {platform_name} nicht verfügbar.\n\n"
+                 f"Du kannst stattdessen einen HTML-Charakterbogen erstellen, "
+                 f"der im Browser geöffnet wird.",
+            size_hint_y=None,
+            height=dp(80)
+        ))
+
+        html_btn = MDButton(
+            style="elevated",
+            size_hint=(1, None),
+            height=dp(40),
+            on_release=lambda x: self._redirect_to_html_export()
+        )
+        html_btn.add_widget(MDButtonText(text="HTML-Charakterbogen erstellen"))
+        content.add_widget(html_btn)
+
+        self._platform_dialog = MDDialog(
+            MDDialogHeadlineText(text="PDF-Erstellung nicht verfügbar"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._platform_dialog.dismiss()
+                )
+            )
+        )
+        self._platform_dialog.open()
+
+    def _redirect_to_html_export(self):
+        """Leitet zum HTML-Export weiter"""
+        if hasattr(self, '_platform_dialog') and self._platform_dialog:
+            self._platform_dialog.dismiss()
+
+        # HTMLManager über das Widget aufrufen
+        if hasattr(self.widget, 'html_manager') and self.widget.html_manager:
+            self.widget.html_manager.create_character_html()
+        else:
+            Logger.error("HTMLManager nicht verfügbar für HTML-Export-Redirect")

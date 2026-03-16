@@ -339,6 +339,9 @@ class FileManagerService:
         elif action_type == "save_pdf_dir" and not self.temp_pdf_filename:
             self.temp_pdf_filename = self.generate_default_filename('pdf')
             Logger.info(f"Automatisch generierter PDF-Dateiname: {self.temp_pdf_filename}")
+        elif action_type == "save_html_dir" and not getattr(self, 'temp_html_filename', ''):
+            self.temp_html_filename = self.generate_default_filename('html')
+            Logger.info(f"Automatisch generierter HTML-Dateiname: {self.temp_html_filename}")
 
         if not os.path.exists(path):
             Logger.warning(f"Pfad existiert nicht: {path}")
@@ -579,6 +582,8 @@ class FileManagerService:
                 self._handle_load_file(path)
             elif self.current_action == "save_pdf_dir":
                 self._handle_save_pdf_directory(path)
+            elif self.current_action == "save_html_dir":
+                self._handle_save_html_directory(path)
             elif self.current_action == "load_template":
                 self._handle_load_template(path)
             else:
@@ -707,6 +712,64 @@ class FileManagerService:
             Logger.error(f"Fehler beim Verarbeiten des PDF-Speicherpfads: {str(e)}", exc_info=True)
             self._show_error(f"Fehler beim Verarbeiten des PDF-Speicherpfads: {str(e)}")
     
+    def _handle_save_html_directory(self, path):
+        """Behandelt Verzeichnisauswahl für HTML-Speicherung"""
+        try:
+            if not getattr(self, 'temp_html_filename', ''):
+                self.temp_html_filename = self.generate_default_filename('html')
+                Logger.warning(f"Kein temp_html_filename gesetzt, generiere automatisch: {self.temp_html_filename}")
+
+            if os.path.isdir(path):
+                full_path = os.path.join(path, self.temp_html_filename)
+            elif path.endswith('.html'):
+                full_path = path
+            else:
+                full_path = path + '.html'
+
+            Logger.info(f"Vollständiger HTML-Speicherpfad: {full_path}")
+
+            if os.path.exists(full_path):
+                self._request_overwrite_confirmation(full_path, self._save_html)
+            else:
+                self._save_html(full_path)
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Verarbeiten des HTML-Speicherpfads: {str(e)}", exc_info=True)
+            self._show_error(f"Fehler beim Verarbeiten des HTML-Speicherpfads: {str(e)}")
+
+    def _save_html(self, filepath):
+        """Speichert die HTML-Datei"""
+        try:
+            Logger.info(f"Versuche HTML zu speichern unter: {filepath}")
+
+            # Verzeichnis erstellen falls nötig
+            directory = os.path.dirname(filepath)
+            if directory and not os.path.exists(directory):
+                os.makedirs(directory, exist_ok=True)
+                Logger.info(f"Verzeichnis erstellt: {directory}")
+
+            from utils.html_utils import generiere_html
+            printer_friendly = getattr(self, 'temp_html_printer_friendly', False)
+            success = generiere_html(self.controller.charakter, filepath, printer_friendly)
+
+            if success:
+                self._show_success("HTML erstellen erfolgreich", f"HTML wurde gespeichert als:\n{filepath}")
+                directory = os.path.dirname(filepath)
+                self._save_last_used_directory('html', directory)
+                # Reset temp settings
+                self.temp_html_filename = ""
+                self.temp_html_printer_friendly = False
+
+                # Im Browser öffnen
+                import webbrowser
+                file_url = 'file://' + os.path.abspath(filepath)
+                webbrowser.open(file_url)
+            else:
+                self._show_error("Fehler beim Erstellen der HTML-Datei.")
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der HTML: {str(e)}", exc_info=True)
+            self._show_error(f"Fehler beim Erstellen der HTML: {str(e)}")
+
     def _save_character(self, filepath):
         """Speichert den Charakter"""
         try:
@@ -787,6 +850,12 @@ class FileManagerService:
         self.temp_pdf_filename = filename
         self.temp_printer_friendly = printer_friendly
         Logger.debug(f"Temp PDF settings gesetzt: {filename}, printer_friendly: {printer_friendly}")
+
+    def set_temp_html_settings(self, filename, printer_friendly=False):
+        """Setzt die temporären HTML-Einstellungen"""
+        self.temp_html_filename = filename
+        self.temp_html_printer_friendly = printer_friendly
+        Logger.debug(f"Temp HTML settings gesetzt: {filename}, printer_friendly: {printer_friendly}")
     
     def clear_temp_settings(self):
         """Löscht alle temporären Einstellungen"""

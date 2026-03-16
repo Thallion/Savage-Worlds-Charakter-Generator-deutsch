@@ -12,6 +12,7 @@ from typing import Optional, Dict, Any
 from services.theme_service import ThemeService
 from services.file_manager_service import FileManagerService
 from services.pdf_service import PDFService
+from services.html_service import HTMLService
 from services.dialog_service import DialogService
 from services.event_service import EventService
 from services.config_service import ConfigService
@@ -60,6 +61,7 @@ class ServiceContainer:
                 
                 self._services['file_manager'] = FileManagerService(charakter_controller)
                 self._services['pdf'] = PDFService(charakter_controller)
+                self._services['html'] = HTMLService(charakter_controller)
                 
                 if theme_cls:
                     self._services['dialog'] = DialogService(charakter_controller, theme_cls)
@@ -99,6 +101,10 @@ class ServiceContainer:
     def get_pdf_service(self) -> Optional[PDFService]:
         """Gibt den PDF-Service zurück"""
         return self.get_service('pdf')
+
+    def get_html_service(self) -> Optional[HTMLService]:
+        """Gibt den HTML-Service zurück"""
+        return self.get_service('html')
     
     def get_dialog_service(self) -> Optional[DialogService]:
         """Gibt den Dialog-Service zurück"""
@@ -229,6 +235,10 @@ def get_file_service() -> Optional[FileManagerService]:
 def get_pdf_service() -> Optional[PDFService]:
     """Gibt den PDF-Service zurück"""
     return service_container.get_pdf_service()
+
+def get_html_service() -> Optional[HTMLService]:
+    """Gibt den HTML-Service zurück"""
+    return service_container.get_html_service()
 
 def get_event_service() -> Optional[EventService]:
     """Gibt den Event-Service zurück"""
