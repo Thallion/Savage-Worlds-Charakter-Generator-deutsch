@@ -51,13 +51,14 @@ from views.eigenschaften_view import EigenschaftenWidget
 from views.handicaps_view import HandicapsWidget
 from views.talente_view import TalenteWidget
 from views.maechte_view import KraefteWidget, MaechteWidget  # MaechteWidget für Rückwärtskompatibilität
+from views.superkraefte_view import SuperkraefteWidget
 from views.ausruestung_view import AusruestungWidget
 from views.charakterbogen_view import CharakterbogenWidget
 
 # Extrahierte Screen-Klassen
 from views.screens import (
     CharakterVerwaltungScreen, EinstellungenScreen, VoelkerScreen, ProfilScreen, EigenschaftenScreen,
-    HandicapsScreen, TalenteScreen, MaechteScreen, AusruestungScreen, 
+    HandicapsScreen, TalenteScreen, MaechteScreen, SuperkraefteScreen, AusruestungScreen,
     CharakterbogenScreen, HistorieScreen, InfoScreen, HyperlinkLabel
 )
 from views.ui_components import CustomTabsItem, SwipeScreenManager
@@ -143,6 +144,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             ("account-alert",    "Handicaps",            HandicapsScreen),
             ("star-circle",      "Talente",              TalenteScreen),
             ("creation-outline", "Mächte",               MaechteScreen),
+            ("flash-outline",    "Superkräfte",          SuperkraefteScreen),
             ("shield-sword",     "Ausrüstung",           AusruestungScreen),
             ("account",          "Charakter",            CharakterbogenScreen),
             ("history",          "Historie",             HistorieScreen),
@@ -506,8 +508,86 @@ class SW_Charakter_GeneratorApp(MDApp):
             self._setup_swipe_navigation(screen_manager)
             self._apply_initial_navigation_mode()
 
+            # Superkräfte-Tab-Sichtbarkeit an Setting binden
+            if self.controller:
+                self.controller.bind(on_setting_changed=self._on_setting_changed_update_tabs)
+                # Initial prüfen
+                Clock.schedule_once(lambda dt: self._on_setting_changed_update_tabs(
+                    self.controller, getattr(self.controller.charakter, 'active_setting_name', '')), 0.5)
+
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Tabs und Screens: {str(e)}", exc_info=True)
+
+    def _on_setting_changed_update_tabs(self, instance, setting_name):
+        """Blendet den Superkräfte-Tab je nach Setting ein oder aus."""
+        try:
+            from functions.superkraft_funktionen import ist_superkraefte_setting
+            is_sk = ist_superkraefte_setting(setting_name)
+
+            # Finde den Superkräfte-Tab-Index in tab_definitions
+            sk_index = None
+            for i, (icon_str, tab_text, screen_class) in enumerate(self.tab_definitions):
+                if tab_text == "Superkräfte":
+                    sk_index = i
+                    break
+
+            if sk_index is None or sk_index >= len(self.tab_items):
+                return
+
+            tab_item = self.tab_items[sk_index]
+
+            if is_sk:
+                # Tab einblenden
+                tab_item.opacity = 1
+                tab_item.disabled = False
+                tab_item.size_hint_x = None
+                tab_item.width = tab_item._original_width if hasattr(tab_item, '_original_width') else dp(120)
+            else:
+                # Tab ausblenden - Originalbreite merken
+                if not hasattr(tab_item, '_original_width') or tab_item.width > 0:
+                    tab_item._original_width = tab_item.width
+                tab_item.opacity = 0
+                tab_item.disabled = True
+                tab_item.size_hint_x = None
+                tab_item.width = 0
+
+            # NavigationRail aktualisieren
+            self._update_rail_superkraefte_visibility(is_sk)
+
+            Logger.info(f"Superkräfte-Tab {'eingeblendet' if is_sk else 'ausgeblendet'} für Setting '{setting_name}'")
+        except Exception as e:
+            Logger.error(f"Fehler bei Tab-Sichtbarkeit: {e}")
+
+    def _update_rail_superkraefte_visibility(self, visible):
+        """Aktualisiert die Sichtbarkeit des Superkräfte-Eintrags in der NavigationRail."""
+        try:
+            rail = self.root.ids.get('nav_rail_content') if self.root else None
+            if not rail:
+                return
+
+            # Finde den Superkräfte-Index
+            sk_index = None
+            for i, (_, tab_text, _) in enumerate(self.tab_definitions):
+                if tab_text == "Superkräfte":
+                    sk_index = i
+                    break
+
+            if sk_index is None:
+                return
+
+            for child in rail.children:
+                if hasattr(child, '_rail_index') and child._rail_index == sk_index:
+                    if visible:
+                        child.opacity = 1
+                        child.disabled = False
+                        child.height = dp(64)
+                    else:
+                        child.opacity = 0
+                        child.disabled = True
+                        child.height = 0
+                    break
+        except Exception as e:
+            Logger.debug(f"Rail-Update für Superkräfte: {e}")
 
     def _activate_first_tab(self, screen_manager):
         """Aktiviert den ersten Tab mit Verzögerung um KivyMD-Initialisierung abzuwarten"""
@@ -1183,6 +1263,11 @@ class SW_Charakter_GeneratorApp(MDApp):
                     self.maechte_widget = widget
                     Logger.debug("MächteWidget bei App registriert")
                 
+                elif tab_name == 'Superkräfte' and 'superkraefte_widget' in screen_instance.ids:
+                    widget = screen_instance.ids.superkraefte_widget
+                    self.superkraefte_widget = widget
+                    Logger.debug("SuperkraefteWidget bei App registriert")
+
                 elif tab_name == 'Handicaps' and 'handicaps_widget' in screen_instance.ids:
                     widget = screen_instance.ids.handicaps_widget
                     self.handicaps_widget = widget
@@ -1276,6 +1361,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 'Völker': getattr(self, 'voelker_widget', None),
                 'Talente': getattr(self, 'talente_widget', None),
                 'Mächte': getattr(self, 'maechte_widget', None),
+                'Superkräfte': getattr(self, 'superkraefte_widget', None),
                 'Handicaps': getattr(self, 'handicaps_widget', None),
             }
             

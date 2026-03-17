@@ -651,14 +651,14 @@ class SuperkraftDialogHandler:
         """Aktualisiert die UI nach Änderungen."""
         try:
             app = App.get_running_app()
-            # KraefteWidget über etabliertes Pattern finden und refresh aufrufen
             if hasattr(app, 'get_widget_by_tab_text'):
-                widget = app.get_widget_by_tab_text('Mächte', 'maechte_widget')
-                if widget and hasattr(widget, 'refresh_widget'):
-                    Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
-                    Logger.debug("SuperkraftDialogHandler: KraefteWidget refresh ausgelöst")
+                # SuperkraefteWidget refreshen
+                sk_widget = app.get_widget_by_tab_text('Superkräfte', 'superkraefte_widget')
+                if sk_widget and hasattr(sk_widget, 'refresh_widget'):
+                    Clock.schedule_once(lambda dt: sk_widget.refresh_widget(), 0)
+                    Logger.debug("SuperkraftDialogHandler: SuperkraefteWidget refresh ausgelöst")
                 else:
-                    Logger.warning("SuperkraftDialogHandler: KraefteWidget nicht gefunden")
+                    Logger.warning("SuperkraftDialogHandler: SuperkraefteWidget nicht gefunden")
 
             # Event-System benachrichtigen
             from services.service_container import service_container

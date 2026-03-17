@@ -259,7 +259,7 @@ class GenerationPointsBar(MDBoxLayout):
         else:
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | {rang}"
 
-    _content_height = dp(120)  # Standard-Höhe für content_box (Desktop-Fallback)
+    _saved_padding = None  # Gespeichertes Padding beim Einklappen
 
     def toggle_panel(self):
         """Klappt den Detail-Bereich auf oder zu"""
@@ -286,17 +286,30 @@ class GenerationPointsBar(MDBoxLayout):
             return
 
         if self.is_expanded:
-            self._content_height = content.height
-            content.height = 0
+            # Einklappen: Kinder verstecken, Padding auf 0
+            self._saved_padding = content.padding[:]
+            content.padding = [0, 0, 0, 0]
+            content.spacing = 0
+            for child in content.children:
+                child.opacity = 0
+                child.disabled = True
+                child.size_hint_y = None
+                child._saved_height = child.height
+                child.height = 0
             content.opacity = 0
-            content.disabled = True
             if chevron_icon:
                 chevron_icon.icon = "chevron-right"
             self.is_expanded = False
         else:
-            content.height = self._content_height
+            # Aufklappen: Kinder wiederherstellen
+            content.padding = self._saved_padding or [dp(12), dp(8), dp(12), dp(8)]
+            content.spacing = dp(12)
+            for child in content.children:
+                child.opacity = 1
+                child.disabled = False
+                child.height = getattr(child, '_saved_height', dp(116))
+                child.size_hint_y = None
             content.opacity = 1
-            content.disabled = False
             if chevron_icon:
                 chevron_icon.icon = "chevron-down"
             self.is_expanded = True
@@ -339,20 +352,14 @@ class GenerationPointsBar(MDBoxLayout):
             self.aufstiege_text = f"{self.charakter.verbleibende_aufstiege} / {self.charakter.aufstiege_gesamt}"
 
     def update_maechte_text(self, instance, value):
-        """Aktualisiert die Mächte-Anzeige (leer bei Superkräfte-Settings)"""
+        """Aktualisiert die Mächte-Anzeige"""
         if self.charakter:
-            if ist_superkraefte_setting(self.charakter.active_setting_name):
-                self.maechte_text = ""
-            else:
-                self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
+            self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
 
     def update_machtpunkte_text(self, instance, value):
-        """Aktualisiert die Machtpunkte-Anzeige (leer bei Superkräfte-Settings)"""
+        """Aktualisiert die Machtpunkte-Anzeige"""
         if self.charakter:
-            if ist_superkraefte_setting(self.charakter.active_setting_name):
-                self.machtpunkte_text = ""
-            else:
-                self.machtpunkte_text = f"{self.charakter.machtpunkte}"
+            self.machtpunkte_text = f"{self.charakter.machtpunkte}"
 
     def update_superkraft_punkte_text(self, instance, value):
         """Aktualisiert die SKP-Anzeige (leer bei Nicht-Superkräfte-Settings)"""

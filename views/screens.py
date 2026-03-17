@@ -152,6 +152,22 @@ class MaechteScreen(MDScreen):
             return False
 
 
+class SuperkraefteScreen(MDScreen):
+    def refresh_widget(self):
+        """Delegiert an das SuperkraefteWidget"""
+        try:
+            if hasattr(self.ids, 'superkraefte_widget'):
+                widget = self.ids.superkraefte_widget
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                    return True
+            Logger.warning("SuperkraefteWidget oder refresh_widget nicht gefunden")
+            return False
+        except Exception as e:
+            Logger.error(f"Fehler bei SuperkraefteScreen.refresh_widget: {str(e)}")
+            return False
+
+
 class AusruestungScreen(MDScreen):
     def refresh_widget(self):
         """Delegiert an das AusruestungWidget"""

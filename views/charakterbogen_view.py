@@ -436,21 +436,33 @@ class CharakterbogenWidget(MDBoxLayout):
     def _update_maechte_section(self):
         """
         Aktualisiert den Mächte/Superkräfte-Abschnitt des Charakterbogens.
-        Zeigt kontextabhängig Mächte oder Superkräfte an.
+        Bei Superkräfte-Settings werden beide Abschnitte angezeigt.
         """
         maechte_section = self.ids.maechte_section
         maechte_section.clear_widgets()
 
         if ist_superkraefte_setting(self.charakter.active_setting_name):
             self._update_superkraefte_bogen(maechte_section)
+            self._update_maechte_bogen(maechte_section)
         else:
             self._update_maechte_bogen(maechte_section)
 
     def _update_maechte_bogen(self, section):
         """Zeigt ausgewählte Mächte im Charakterbogen an."""
-        # Überschrift aktualisieren
+        # Überschrift aktualisieren (nur wenn nicht im Kombi-Modus mit Superkräften)
         if hasattr(self.ids, 'maechte_header'):
-            self.ids.maechte_header.text = "Mächte:"
+            if ist_superkraefte_setting(self.charakter.active_setting_name):
+                # Im Kombi-Modus: Zwischenüberschrift als Label in der Section
+                maechte_sub_header = LeftAlignedLabel(
+                    text=f"[b]Mächte ({self.charakter.machtpunkte} Machtpunkte):[/b]",
+                    font_size=LABEL_FONT_SIZE,
+                    size_hint_y=None,
+                    height=ROW_HEIGHT,
+                    markup=True
+                )
+                section.add_widget(maechte_sub_header)
+            else:
+                self.ids.maechte_header.text = "Mächte:"
 
         for macht_name_key in self.charakter.selected_maechte:
             macht = self.charakter.maechte.get(macht_name_key)
@@ -480,7 +492,7 @@ class CharakterbogenWidget(MDBoxLayout):
             stufe = self.charakter.machtstufe
             skp_v = self.charakter.superkraft_punkte_verbraucht
             skp_g = self.charakter.superkraft_punkte_gesamt
-            self.ids.maechte_header.text = f"Superkräfte (Machtstufe {stufe}, {skp_v}/{skp_g} SKP):"
+            self.ids.maechte_header.text = f"Superkräfte & Mächte (Machtstufe {stufe}, {skp_v}/{skp_g} SKP):"
 
         for kraft_name_key in self.charakter.selected_superkraefte:
             kraft = self.charakter.superkraefte.get(kraft_name_key)
