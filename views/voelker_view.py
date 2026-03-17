@@ -112,7 +112,7 @@ class VoelkerWidget(MDBoxLayout):
     def _show_volk_search_popup(self):
         """Zeigt einen Popup-Dialog mit Suchfeld für die Völker-Auswahl."""
         from kivymd.uix.dialog import (
-            MDDialog, MDDialogHeadlineText, MDDialogButtonContainer,
+            MDDialog, MDDialogHeadlineText,
             MDDialogContentContainer
         )
         from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
@@ -234,13 +234,40 @@ class VoelkerWidget(MDBoxLayout):
             # Live-Filterung bei Texteingabe
             search_field.bind(text=populate_list)
 
+            # Button-Leiste innerhalb des Content-Bereichs (zuverlässiger auf Android)
+            button_row = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(48),
+                spacing=dp(8),
+                padding=[dp(0), dp(8), dp(0), dp(0)],
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))  # Spacer
+            btn_cancel = MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: self._dismiss_volk_popup(),
+            )
+            btn_confirm = MDButton(
+                MDButtonText(text="Bestätigen"),
+                style="text",
+                on_release=lambda x: self._confirm_volk_popup(),
+            )
+            button_row.add_widget(btn_cancel)
+            button_row.add_widget(btn_confirm)
+
             # Zusammenbauen
             list_container.add_widget(items_list)
             list_container.add_widget(scroll_zone)
             scroll_view.add_widget(list_container)
             dialog_content.add_widget(scroll_view)
+            dialog_content.add_widget(button_row)
 
-            # Dialog erstellen
+            # Dialog-Höhe anpassen für Buttons
+            dialog_content.height = dp(440)
+
+            # Dialog erstellen - auto_dismiss=False verhindert versehentliches
+            # Schließen durch Touch auf den Hintergrund (Android-Problem)
             self.volk_search_dialog = MDDialog(
                 MDDialogHeadlineText(text="Volk auswählen"),
                 MDDialogContentContainer(
@@ -248,19 +275,7 @@ class VoelkerWidget(MDBoxLayout):
                     orientation="vertical",
                     padding=dp(0),
                 ),
-                MDDialogButtonContainer(
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=lambda x: self._dismiss_volk_popup(),
-                    ),
-                    MDButton(
-                        MDButtonText(text="Bestätigen"),
-                        style="text",
-                        on_release=lambda x: self._confirm_volk_popup(),
-                    ),
-                    spacing="8dp",
-                ),
+                auto_dismiss=False,
             )
 
             self.volk_search_dialog.open()
@@ -718,7 +733,7 @@ class VoelkerWidget(MDBoxLayout):
     def _show_search_dialog(self, items, callback, caller, get_options_func=None, get_alle_items_func=None):
         """Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
         from kivymd.uix.dialog import (
-            MDDialog, MDDialogHeadlineText, MDDialogButtonContainer,
+            MDDialog, MDDialogHeadlineText,
             MDDialogContentContainer
         )
         from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
@@ -849,11 +864,30 @@ class VoelkerWidget(MDBoxLayout):
 
                 filter_button.bind(on_release=toggle_filter)
 
+            # Abbrechen-Button innerhalb des Content-Bereichs (zuverlässiger auf Android)
+            button_row = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(48),
+                padding=[dp(0), dp(8), dp(0), dp(0)],
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))  # Spacer
+            btn_cancel = MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: self.search_dialog.dismiss(),
+            )
+            button_row.add_widget(btn_cancel)
+
             # Container zusammenbauen
             dialog_content.add_widget(search_row)
             dialog_content.add_widget(scroll_view)
+            dialog_content.add_widget(button_row)
 
-            # Dialog erstellen
+            # Dialog-Höhe anpassen für Button
+            dialog_content.height = dp(440)
+
+            # Dialog erstellen - auto_dismiss=False für Android-Kompatibilität
             self.search_dialog = MDDialog(
                 MDDialogHeadlineText(text="Auswahl treffen"),
                 MDDialogContentContainer(
@@ -861,14 +895,7 @@ class VoelkerWidget(MDBoxLayout):
                     orientation="vertical",
                     padding=dp(0),
                 ),
-                MDDialogButtonContainer(
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=lambda x: self.search_dialog.dismiss(),
-                    ),
-                    spacing="8dp",
-                ),
+                auto_dismiss=False,
             )
 
             self.search_dialog.open()

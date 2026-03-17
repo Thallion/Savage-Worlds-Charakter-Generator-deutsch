@@ -70,23 +70,23 @@
         # Chevron-Button
         MDIconButton:
             id: chevron_icon
-            icon: "chevron-right"
+            icon: "chevron-down"
             style: "standard"
             size_hint: None, None
             size: [dp(48), dp(48)]
             pos_hint: {'center_y': 0.5}
             on_release: root.toggle_panel()
 
-    # Detail-Inhalt (ein-/ausklappbar) - startet eingeklappt
+    # Detail-Inhalt (ein-/ausklappbar) - startet ausgeklappt auf Desktop
     MDBoxLayout:
         id: content_box
         orientation: 'horizontal'
         spacing: dp(12)
         size_hint_y: None
-        height: 0
+        height: dp(120)
         padding: [dp(12), dp(8), dp(12), dp(8)]
-        opacity: 0
-        disabled: True
+        opacity: 1
+        disabled: False
 
         # Logo-Container
         MDCard:

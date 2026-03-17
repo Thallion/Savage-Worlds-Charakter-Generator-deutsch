@@ -99,7 +99,7 @@ class GenerationPointsBar(MDBoxLayout):
     superkraft_punkte_text = StringProperty("")
     machtstufe_text = StringProperty("")
     header_summary_text = StringProperty("")
-    is_expanded = BooleanProperty(False)
+    is_expanded = BooleanProperty(True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -289,12 +289,14 @@ class GenerationPointsBar(MDBoxLayout):
             self._content_height = content.height
             content.height = 0
             content.opacity = 0
+            content.disabled = True
             if chevron_icon:
                 chevron_icon.icon = "chevron-right"
             self.is_expanded = False
         else:
             content.height = self._content_height
             content.opacity = 1
+            content.disabled = False
             if chevron_icon:
                 chevron_icon.icon = "chevron-down"
             self.is_expanded = True
