@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": false,
+  "mobile_modus": true,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Superkräfte Kompendium",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "config_version": "1.0",
-  "last_updated": "2026-03-17T20:18:58.551516"
+  "last_updated": "2026-03-18T18:42:12.666358"
 }
