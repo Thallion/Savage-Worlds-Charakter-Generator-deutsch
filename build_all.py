@@ -218,10 +218,75 @@ def ensure_java17():
         print("🧹 Gradle Script-Cache bereinigt")
 
 
+def _clean_android_bin(extensions=None):
+    """Entfernt alte Build-Artefakte aus bin/"""
+    if extensions is None:
+        extensions = ["*.apk", "*.aab"]
+    bin_dir = Path.cwd() / "bin"
+    if bin_dir.exists():
+        for ext in extensions:
+            for old_file in bin_dir.glob(ext):
+                old_file.unlink()
+                print(f"🧹 Alte Datei entfernt: {old_file.name}")
+
+
+def _prepare_android_build():
+    """Gemeinsame Vorbereitung für Android-Builds (Cache + Fixes)"""
+    # Nur App-Quellcode-Cache löschen (nicht die kompilierten Libraries!)
+    # buildozer android clean würde auch pyjnius/kivy löschen, die dann
+    # wegen Cython 3.x Inkompatibilität nicht neu kompilieren können.
+    app_cache = Path.cwd() / ".buildozer" / "android" / "app"
+    if app_cache.exists():
+        shutil.rmtree(app_cache)
+        print("🧹 App-Quellcode-Cache bereinigt (.buildozer/android/app/)")
+
+    # Cython 3.x Fixes für pyjnius/kivy anwenden (falls Sources vorhanden)
+    print("🔧 Wende Cython-Kompatibilitäts-Fixes an...")
+    subprocess.run([sys.executable, 'build_fixes.py'], cwd=Path.cwd())
+
+
+def _run_buildozer(build_command):
+    """Führt Buildozer aus mit Retry-Logik für Cython-Fixes"""
+    result = subprocess.run(['buildozer'] + build_command, cwd=Path.cwd())
+
+    if result.returncode != 0:
+        # Build fehlgeschlagen - Fixes erneut anwenden und nochmal versuchen.
+        # Buildozer lädt beim ersten Lauf ggf. frische Quellen herunter,
+        # die die Fixes überschreiben. Nach dem Download sind sie vorhanden.
+        print("⚠️  Erster Build fehlgeschlagen - wende Fixes erneut an...")
+        subprocess.run([sys.executable, 'build_fixes.py'], cwd=Path.cwd())
+        result = subprocess.run(['buildozer'] + build_command, cwd=Path.cwd())
+
+    return result.returncode == 0
+
+
+def _collect_android_artifacts(dist_dir, extensions, build_type_label):
+    """Sammelt Build-Artefakte aus bin/ und kopiert sie nach dist/android/"""
+    bin_dir = Path.cwd() / "bin"
+    version = get_version()
+    found = False
+
+    (dist_dir / "android").mkdir(exist_ok=True)
+
+    for ext in extensions:
+        for artifact in bin_dir.glob(ext):
+            suffix = artifact.suffix  # .apk oder .aab
+            if version:
+                new_name = f"SavageWorldsCharGen-v{version}-{build_type_label}{suffix}"
+            else:
+                new_name = artifact.name
+            target_file = dist_dir / "android" / new_name
+            shutil.copy2(artifact, target_file)
+            print(f"✅ {suffix.upper()[1:]} nach {target_file} kopiert")
+            found = True
+
+    return found
+
+
 def build_android(dist_dir):
-    """Build Android APK mit Buildozer"""
+    """Build Android APK (debug) und AAB (release) mit Buildozer"""
     print("\n" + "="*50)
-    print("🤖 ANDROID BUILD STARTEN")
+    print("🤖 ANDROID BUILD STARTEN (APK + AAB)")
     print("="*50)
 
     # Java 17 sicherstellen (Gradle 8.0.2 ist inkompatibel mit Java 21)
@@ -232,75 +297,53 @@ def build_android(dist_dir):
         result = subprocess.run(['buildozer', '--version'],
                               capture_output=True, text=True)
         print(f"Buildozer Version: {result.stdout.strip()}")
-
-        # Alte APKs aus bin/ entfernen, damit wir erkennen ob ein neuer Build entsteht
-        bin_dir = Path.cwd() / "bin"
-        if bin_dir.exists():
-            old_apks = list(bin_dir.glob("*.apk"))
-            for old_apk in old_apks:
-                old_apk.unlink()
-                print(f"🧹 Alte APK entfernt: {old_apk.name}")
-
-        # Nur App-Quellcode-Cache löschen (nicht die kompilierten Libraries!)
-        # buildozer android clean würde auch pyjnius/kivy löschen, die dann
-        # wegen Cython 3.x Inkompatibilität nicht neu kompilieren können.
-        app_cache = Path.cwd() / ".buildozer" / "android" / "app"
-        if app_cache.exists():
-            import shutil as _shutil
-            _shutil.rmtree(app_cache)
-            print("🧹 App-Quellcode-Cache bereinigt (.buildozer/android/app/)")
-
-        # Cython 3.x Fixes für pyjnius/kivy anwenden (falls Sources vorhanden)
-        print("🔧 Wende Cython-Kompatibilitäts-Fixes an...")
-        subprocess.run([sys.executable, 'build_fixes.py'], cwd=Path.cwd())
-
-        # Starte Android Build (erster Versuch)
-        result = subprocess.run(['buildozer', 'android', 'debug'],
-                              cwd=Path.cwd())
-
-        if result.returncode != 0:
-            # Build fehlgeschlagen - Fixes erneut anwenden und nochmal versuchen.
-            # Buildozer lädt beim ersten Lauf ggf. frische Quellen herunter,
-            # die die Fixes überschreiben. Nach dem Download sind sie vorhanden.
-            print("⚠️  Erster Build fehlgeschlagen - wende Fixes erneut an...")
-            subprocess.run([sys.executable, 'build_fixes.py'], cwd=Path.cwd())
-            result = subprocess.run(['buildozer', 'android', 'debug'],
-                                  cwd=Path.cwd())
-
     except FileNotFoundError:
         print("❌ Buildozer nicht gefunden! Installiere mit: pip install buildozer")
         return False
 
-    # Finde und verschiebe APK mit Versions-Name
-    bin_dir = Path.cwd() / "bin"
-    apk_files = list(bin_dir.glob("*.apk"))
-    version = get_version()
+    apk_ok = False
+    aab_ok = False
 
-    if apk_files:
-        # Stelle sicher dass android Ordner existiert
-        (dist_dir / "android").mkdir(exist_ok=True)
+    # --- 1. Debug APK bauen ---
+    print("\n" + "-"*40)
+    print("📦 Debug APK bauen...")
+    print("-"*40)
+    _clean_android_bin(["*.apk"])
+    _prepare_android_build()
 
-        for apk_file in apk_files:
-            # APK mit Version umbenennen
-            if version:
-                # debug/release aus Original-Namen erkennen
-                build_type = "debug" if "debug" in apk_file.name.lower() else "release"
-                new_name = f"SavageWorldsCharGen-v{version}-{build_type}.apk"
-            else:
-                new_name = apk_file.name
-            target_file = dist_dir / "android" / new_name
-            shutil.copy2(apk_file, target_file)
-            print(f"✅ APK nach {target_file} kopiert")
-
-        # Kopiere auch buildozer.spec für Referenz
-        spec_file = Path.cwd() / "buildozer.spec"
-        if spec_file.exists():
-            shutil.copy2(spec_file, dist_dir / "android" / "buildozer.spec")
-
-        return True
+    if _run_buildozer(['android', 'debug']):
+        apk_ok = _collect_android_artifacts(dist_dir, ["*.apk"], "debug")
+        if not apk_ok:
+            print("❌ Keine APK-Datei gefunden in bin/")
     else:
-        print(f"❌ Keine APK-Datei gefunden in: {bin_dir}")
-        return False
+        print("❌ Debug APK Build fehlgeschlagen")
+
+    # --- 2. Release AAB bauen (für Play Store) ---
+    print("\n" + "-"*40)
+    print("📦 Release AAB bauen (Play Store)...")
+    print("-"*40)
+    _clean_android_bin(["*.aab"])
+    _prepare_android_build()
+
+    if _run_buildozer(['android', 'release']):
+        aab_ok = _collect_android_artifacts(dist_dir, ["*.aab"], "release")
+        if not aab_ok:
+            print("❌ Keine AAB-Datei gefunden in bin/")
+    else:
+        print("❌ Release AAB Build fehlgeschlagen")
+
+    # Kopiere buildozer.spec für Referenz
+    spec_file = Path.cwd() / "buildozer.spec"
+    if spec_file.exists():
+        (dist_dir / "android").mkdir(exist_ok=True)
+        shutil.copy2(spec_file, dist_dir / "android" / "buildozer.spec")
+
+    if apk_ok and aab_ok:
+        print("\n✅ Beide Android-Artefakte erstellt (APK + AAB)")
+    elif apk_ok or aab_ok:
+        print(f"\n⚠️  Nur {'APK' if apk_ok else 'AAB'} erstellt")
+
+    return apk_ok or aab_ok
 
 def create_dist_readme(dist_dir):
     """Erstellt eine README für den dist-Ordner"""
@@ -322,7 +365,8 @@ Dieses Verzeichnis enthält die fertigen Builds für alle Plattformen:
 │       └── README_WINDOWS.txt            # Windows-spezifische Anweisungen
 │
 └── android/
-    ├── *.apk                             # Android APK-Datei(en)
+    ├── *-debug.apk                       # Android APK (Debug/Sideloading)
+    ├── *-release.aab                     # Android AAB (Google Play Store)
     └── buildozer.spec                    # Build-Konfiguration (Referenz)
 
 🚀 AUSFÜHRUNG:
@@ -335,9 +379,13 @@ Windows:
   Doppelklick auf SavageWorldsCharakterGenerator.exe
   (oder über Eingabeaufforderung)
 
-Android:
+Android (Debug APK):
   APK auf Android-Gerät installieren
   (Entwickleroptionen + "Unbekannte Quellen" erforderlich)
+
+Android (Play Store AAB):
+  AAB-Datei über die Google Play Console hochladen
+  (Muss vor Upload mit einem Keystore signiert werden)
 
 📋 HINWEISE:
 
