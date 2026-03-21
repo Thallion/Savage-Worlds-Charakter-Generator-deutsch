@@ -181,11 +181,57 @@ class HTMLManager:
             self.file_service.show_file_manager(chars_dir, "save_html_dir")
 
     def _open_in_browser(self, html_path):
-        """Öffnet die HTML-Datei im Standard-Browser"""
+        """Öffnet die HTML-Datei im Standard-Browser (plattformspezifisch)"""
         try:
             import os
-            file_url = 'file://' + os.path.abspath(html_path)
-            webbrowser.open(file_url)
-            Logger.info(f"HTML-Datei im Browser geöffnet: {file_url}")
+            from kivy.utils import platform as kivy_platform
+
+            abs_path = os.path.abspath(html_path)
+
+            if kivy_platform == 'android':
+                self._open_file_on_android(abs_path, 'text/html')
+            else:
+                file_url = 'file://' + abs_path
+                webbrowser.open(file_url)
+                Logger.info(f"HTML-Datei im Browser geöffnet: {file_url}")
         except Exception as e:
             Logger.warning(f"Konnte HTML-Datei nicht im Browser öffnen: {e}")
+
+    @staticmethod
+    def _open_file_on_android(file_path, mime_type='*/*'):
+        """Öffnet eine Datei auf Android über Intent mit FileProvider"""
+        try:
+            from jnius import autoclass
+
+            Intent = autoclass('android.content.Intent')
+            Uri = autoclass('android.net.Uri')
+            File = autoclass('java.io.File')
+            FileProvider = autoclass('androidx.core.content.FileProvider')
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+
+            context = PythonActivity.mActivity
+            java_file = File(file_path)
+
+            # FileProvider für sichere Datei-Freigabe (Android 7+)
+            authority = context.getPackageName() + '.fileprovider'
+            try:
+                content_uri = FileProvider.getUriForFile(context, authority, java_file)
+            except Exception:
+                # Fallback: Direkte file:// URI (funktioniert auf älteren Geräten)
+                content_uri = Uri.fromFile(java_file)
+
+            intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(content_uri, mime_type)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+            context.startActivity(intent)
+            Logger.info(f"Android: Datei geöffnet via Intent: {file_path}")
+        except Exception as e:
+            Logger.error(f"Android: Fehler beim Öffnen der Datei: {e}")
+            # Fallback: webbrowser
+            try:
+                import webbrowser as wb
+                wb.open('file://' + file_path)
+            except Exception as e2:
+                Logger.error(f"Android: Auch webbrowser-Fallback fehlgeschlagen: {e2}")

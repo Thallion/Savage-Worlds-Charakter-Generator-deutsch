@@ -669,10 +669,15 @@ class FileManagerService:
                 self.temp_html_filename = ""
                 self.temp_html_printer_friendly = False
 
-                # Im Browser öffnen
-                import webbrowser
-                file_url = 'file://' + os.path.abspath(filepath)
-                webbrowser.open(file_url)
+                # Im Browser öffnen (plattformspezifisch)
+                from kivy.utils import platform as kivy_platform
+                if kivy_platform == 'android':
+                    from manager.html_manager import HTMLManager
+                    HTMLManager._open_file_on_android(os.path.abspath(filepath), 'text/html')
+                else:
+                    import webbrowser
+                    file_url = 'file://' + os.path.abspath(filepath)
+                    webbrowser.open(file_url)
             else:
                 self._show_error("Fehler beim Erstellen der HTML-Datei.")
         except Exception as e:

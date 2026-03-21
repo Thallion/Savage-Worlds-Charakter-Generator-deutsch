@@ -163,17 +163,31 @@
                             MDButtonText:
                                 text: "Statblock"
 
-                    MDButton:
-                        style: "elevated"
-                        on_release: root.zeige_element_statistiken()
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
                         size_hint_y: None
                         height: "50dp"
-                        
-                        MDButtonIcon:
-                            icon: "chart-bar"
-                        
-                        MDButtonText:
-                            text: "Element-Statistiken"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.lade_charakterbogen()
+
+                            MDButtonIcon:
+                                icon: "file-eye"
+
+                            MDButtonText:
+                                text: "Charakterbogen laden"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.zeige_element_statistiken()
+
+                            MDButtonIcon:
+                                icon: "chart-bar"
+
+                            MDButtonText:
+                                text: "Element-Statistiken"
 
             # Template Management Bereich
             MDCard:
