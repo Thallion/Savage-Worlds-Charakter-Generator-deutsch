@@ -31,11 +31,22 @@ from manager.statistics_manager import StatisticsManager
 from manager.pdf_manager import PDFManager
 from manager.html_manager import HTMLManager
 
-# KV-Datei laden
+# KV-Datei laden mit Mobile-Unterstützung
 from utils.path_utils import get_application_root
+from utils.platform_utils import is_mobile_layout
 import os
-kv_path = os.path.join(get_application_root(), 'views', 'charakter_verwaltung_widget.kv')
-Builder.load_file(kv_path)
+
+_base_path = str(get_application_root())
+_mobile = is_mobile_layout()
+_kv_name = 'charakter_verwaltung_widget_mobile.kv' if _mobile else 'charakter_verwaltung_widget.kv'
+_kv_path = os.path.join(_base_path, 'views', _kv_name)
+
+# Fallback auf Desktop-KV wenn Mobile-KV nicht existiert
+if not os.path.exists(_kv_path):
+    _kv_path = os.path.join(_base_path, 'views', 'charakter_verwaltung_widget.kv')
+
+Builder.load_file(_kv_path)
+Logger.info(f"charakter_verwaltung_widget: KV-Datei geladen: {os.path.basename(_kv_path)}")
 
 
 class CharakterVerwaltungWidget(MDBoxLayout):
@@ -145,8 +156,8 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             spacing=dp(15),
             padding=dp(20),
             size_hint_y=None,
-            height=dp(380)
         )
+        dialog_content.bind(minimum_height=dialog_content.setter('height'))
 
         # Suchfeld
         search_field = MDTextField(
@@ -251,8 +262,8 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             spacing=dp(20),
             padding=dp(20),
             size_hint_y=None,
-            height=dp(300)
         )
+        dialog_content.bind(minimum_height=dialog_content.setter('height'))
 
         # Info-Label
         info_label = MDLabel(
@@ -487,8 +498,8 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             spacing=dp(15),
             padding=dp(20),
             size_hint_y=None,
-            height=dp(380)
         )
+        dialog_content.bind(minimum_height=dialog_content.setter('height'))
 
         # Suchfeld
         search_field = MDTextField(

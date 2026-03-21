@@ -347,10 +347,20 @@ class TestEinstellungenWidgetCharakter(unittest.TestCase):
         widget.update_waehrung()
 
     def test_erhoehe_startkapital(self):
-        """erhoehe_startkapital delegiert an Controller"""
+        """erhoehe_startkapital delegiert an Controller wenn Handicap-Punkte verfügbar"""
         widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.verbleibende_handicap_punkte = 2
         widget.erhoehe_startkapital()
         mocks['app'].controller.erhoehe_startkapital_mit_handicap.assert_called_once()
+
+    def test_erhoehe_startkapital_keine_punkte(self):
+        """erhoehe_startkapital zeigt Warnung wenn keine Handicap-Punkte"""
+        widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.verbleibende_handicap_punkte = 0
+        with patch('views.einstellungen_widget.service_container') as mock_sc:
+            mock_sc.get_dialog_service.return_value = Mock()
+            widget.erhoehe_startkapital()
+        mocks['app'].controller.erhoehe_startkapital_mit_handicap.assert_not_called()
 
     def test_erhoehe_startkapital_no_controller(self):
         """erhoehe_startkapital kehrt zurück wenn kein Controller"""
@@ -359,18 +369,42 @@ class TestEinstellungenWidgetCharakter(unittest.TestCase):
         widget.erhoehe_startkapital()
 
     def test_erhoehe_aufstieg(self):
-        """erhoehe_aufstieg ruft increase_aufstiege auf"""
+        """erhoehe_aufstieg ruft increase_aufstiege auf wenn char_gen_completed"""
         widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.char_gen_completed = True
         with patch('functions.character_advancement.increase_aufstiege') as mock_fn:
             widget.erhoehe_aufstieg()
             mock_fn.assert_called_once_with(mocks['app'].controller.charakter)
 
-    def test_senke_aufstieg(self):
-        """senke_aufstieg ruft decrease_aufstiege auf"""
+    def test_erhoehe_aufstieg_gen_nicht_abgeschlossen(self):
+        """erhoehe_aufstieg zeigt Warnung wenn Generierung nicht abgeschlossen"""
         widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.char_gen_completed = False
+        with patch('views.einstellungen_widget.service_container') as mock_sc:
+            mock_sc.get_dialog_service.return_value = Mock()
+            with patch('functions.character_advancement.increase_aufstiege') as mock_fn:
+                widget.erhoehe_aufstieg()
+                mock_fn.assert_not_called()
+
+    def test_senke_aufstieg(self):
+        """senke_aufstieg ruft decrease_aufstiege auf wenn char_gen_completed"""
+        widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.char_gen_completed = True
+        mocks['app'].controller.charakter.verbleibende_aufstiege = 1
+        mocks['app'].controller.charakter.aufstiege_gesamt = 1
         with patch('functions.character_advancement.decrease_aufstiege') as mock_fn:
             widget.senke_aufstieg()
             mock_fn.assert_called_once_with(mocks['app'].controller.charakter)
+
+    def test_senke_aufstieg_gen_nicht_abgeschlossen(self):
+        """senke_aufstieg zeigt Warnung wenn Generierung nicht abgeschlossen"""
+        widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.char_gen_completed = False
+        with patch('views.einstellungen_widget.service_container') as mock_sc:
+            mock_sc.get_dialog_service.return_value = Mock()
+            with patch('functions.character_advancement.decrease_aufstiege') as mock_fn:
+                widget.senke_aufstieg()
+                mock_fn.assert_not_called()
 
     def test_erhoehe_aufstieg_no_controller(self):
         """erhoehe_aufstieg kehrt zurück wenn kein Controller"""

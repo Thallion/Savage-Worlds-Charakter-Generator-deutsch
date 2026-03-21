@@ -87,18 +87,6 @@
                 spacing: dp(8)
 
 MDScreen:
-    # Floating Navigation Button (Portrait-Modus)
-    MDFabButton:
-        id: portrait_nav_fab
-        icon: "menu"
-        style: "small"
-        size_hint: None, None
-        size: dp(44), dp(44)
-        pos_hint: {'right': 0.97, 'y': 0.02}
-        opacity: 0
-        disabled: True
-        on_release: app.toggle_navigation_rail()
-
     # Wir packen alles in eine einzige vertikale MDBoxLayout-Struktur
     MDBoxLayout:
         orientation: 'vertical'
@@ -208,3 +196,34 @@ MDScreen:
                         multiline: True
                         background_color: (0, 0, 0, 0)
                         foreground_color: (1, 1, 1, 1)
+
+        # ----------------- (3) BOTTOM BAR (Mobile) -----------------
+        MDBoxLayout:
+            id: bottom_bar_container
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 0
+            opacity: 0
+            md_bg_color: app.theme_cls.surfaceContainerColor
+            padding: [dp(16), 0, dp(16), 0]
+
+            MDIconButton:
+                icon: "menu"
+                style: "standard"
+                size_hint_x: 1
+                pos_hint: {'center_y': 0.5}
+                on_release: app.toggle_navigation_rail()
+
+            MDIconButton:
+                icon: "content-save"
+                style: "standard"
+                size_hint_x: 1
+                pos_hint: {'center_y': 0.5}
+                on_release: app.quick_save()
+
+            MDIconButton:
+                icon: "close-circle-outline"
+                style: "standard"
+                size_hint_x: 1
+                pos_hint: {'center_y': 0.5}
+                on_release: app.quit_app()

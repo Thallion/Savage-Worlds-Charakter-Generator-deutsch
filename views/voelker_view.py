@@ -131,8 +131,8 @@ class VoelkerWidget(MDBoxLayout):
                 spacing=dp(15),
                 padding=dp(20),
                 size_hint_y=None,
-                height=dp(380)
             )
+            dialog_content.bind(minimum_height=dialog_content.setter('height'))
 
             # Suchfeld
             search_field = MDTextField(
@@ -262,9 +262,6 @@ class VoelkerWidget(MDBoxLayout):
             scroll_view.add_widget(list_container)
             dialog_content.add_widget(scroll_view)
             dialog_content.add_widget(button_row)
-
-            # Dialog-Höhe anpassen für Buttons
-            dialog_content.height = dp(440)
 
             # Dialog erstellen - auto_dismiss=False verhindert versehentliches
             # Schließen durch Touch auf den Hintergrund (Android-Problem)
@@ -751,8 +748,8 @@ class VoelkerWidget(MDBoxLayout):
                 spacing=dp(15),
                 padding=dp(20),
                 size_hint_y=None,
-                height=dp(350)
             )
+            dialog_content.bind(minimum_height=dialog_content.setter('height'))
 
             # Suchzeile mit optionalem Filter-Button
             search_row = MDBoxLayout(
@@ -883,9 +880,6 @@ class VoelkerWidget(MDBoxLayout):
             dialog_content.add_widget(search_row)
             dialog_content.add_widget(scroll_view)
             dialog_content.add_widget(button_row)
-
-            # Dialog-Höhe anpassen für Button
-            dialog_content.height = dp(440)
 
             # Dialog erstellen - auto_dismiss=False für Android-Kompatibilität
             self.search_dialog = MDDialog(

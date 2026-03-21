@@ -917,8 +917,14 @@ class SW_Charakter_GeneratorApp(MDApp):
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
 
+                # Bottom-Bar anzeigen
+                bottom_bar = root.ids.get('bottom_bar_container')
+                if bottom_bar:
+                    bottom_bar.height = dp(56)
+                    bottom_bar.opacity = 1
+
                 # Orientierung prüfen: Portrait vs. Landscape
-                # Auf Desktop immer Rail anzeigen (kein FAB)
+                # Auf Desktop immer Rail anzeigen
                 from kivy.utils import platform as _platform
                 if _platform == 'android':
                     self._update_mobile_orientation()
@@ -927,11 +933,6 @@ class SW_Charakter_GeneratorApp(MDApp):
                     nav_rail_container.width = dp(72)
                     nav_rail_container.opacity = 1
                     self._nav_rail_visible = True
-                    # FAB verstecken (nicht benötigt auf Desktop)
-                    portrait_fab = root.ids.get('portrait_nav_fab')
-                    if portrait_fab:
-                        portrait_fab.opacity = 0
-                        portrait_fab.disabled = True
 
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
@@ -963,11 +964,11 @@ class SW_Charakter_GeneratorApp(MDApp):
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
 
-                # FAB verstecken
-                portrait_fab = root.ids.get('portrait_nav_fab')
-                if portrait_fab:
-                    portrait_fab.opacity = 0
-                    portrait_fab.disabled = True
+                # Bottom-Bar verstecken
+                bottom_bar = root.ids.get('bottom_bar_container')
+                if bottom_bar:
+                    bottom_bar.height = 0
+                    bottom_bar.opacity = 0
 
                 # Tabs zeigen
                 tabs_container.height = dp(60)
@@ -1044,30 +1045,23 @@ class SW_Charakter_GeneratorApp(MDApp):
                 return
 
             nav_rail_container = root.ids.get('nav_rail_container')
-            portrait_fab = root.ids.get('portrait_nav_fab')
             if not nav_rail_container:
                 return
 
             is_portrait = Window.height > Window.width
 
             if is_portrait:
-                # Portrait: Rail verstecken, FAB anzeigen
+                # Portrait: Rail verstecken (Bottom-Bar ist immer sichtbar)
                 nav_rail_container.width = 0
                 nav_rail_container.opacity = 0
                 self._nav_rail_visible = False
-                if portrait_fab:
-                    portrait_fab.opacity = 1
-                    portrait_fab.disabled = False
-                Logger.debug("Mobile Portrait: Rail versteckt, FAB sichtbar")
+                Logger.debug("Mobile Portrait: Rail versteckt, Bottom-Bar sichtbar")
             else:
-                # Landscape: Rail anzeigen, FAB verstecken
+                # Landscape: Rail anzeigen
                 nav_rail_container.width = dp(72)
                 nav_rail_container.opacity = 1
                 self._nav_rail_visible = True
-                if portrait_fab:
-                    portrait_fab.opacity = 0
-                    portrait_fab.disabled = True
-                Logger.debug("Mobile Landscape: Rail sichtbar, FAB versteckt")
+                Logger.debug("Mobile Landscape: Rail sichtbar")
 
         except Exception as e:
             Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")
@@ -1206,6 +1200,24 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Logger.info("NavigationRail eingeblendet")
         except Exception as e:
             Logger.error(f"Fehler beim Toggle der NavigationRail: {str(e)}")
+
+    def quick_save(self):
+        """Schnellspeichern über die Bottom-Bar"""
+        try:
+            if hasattr(self, 'charakter_verwaltung_widget') and self.charakter_verwaltung_widget:
+                self.charakter_verwaltung_widget.schnellspeichern_charakter()
+            else:
+                Logger.warning("CharakterVerwaltungWidget nicht verfügbar für Schnellspeichern")
+        except Exception as e:
+            Logger.error(f"Fehler beim Schnellspeichern: {str(e)}")
+
+    def quit_app(self):
+        """Beendet die App"""
+        try:
+            Logger.info("App wird beendet über Bottom-Bar")
+            self.stop()
+        except Exception as e:
+            Logger.error(f"Fehler beim Beenden: {str(e)}")
 
     def get_screen(self, screen_name):
         """Hilfsmethode zum Abrufen von Screen-Objekten"""

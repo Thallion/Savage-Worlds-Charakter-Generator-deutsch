@@ -566,46 +566,308 @@ class EinstellungenWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der Währung: {e}")
     
+    def _show_warning(self, title, message):
+        """Zeigt ein Warn-Popup an"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_info_dialog(message, title)
+        else:
+            Logger.warning(f"{title}: {message}")
+
     def erhoehe_startkapital(self):
         """Erhöht das Startkapital mit Handicap-Punkten"""
         try:
             if not self.app.controller:
                 Logger.warning("Controller nicht verfügbar für Startkapital-Erhöhung")
                 return
-                
+
+            char = self.app.controller.charakter
+            if not char:
+                return
+
+            if char.verbleibende_handicap_punkte <= 0:
+                self._show_warning(
+                    "Keine Handicap-Punkte",
+                    "Es sind keine Handicap-Punkte verfügbar.\n\n"
+                    "Wähle zuerst Handicaps aus, um Punkte zu erhalten, "
+                    "die du für zusätzliches Startkapital einsetzen kannst."
+                )
+                return
+
             self.app.controller.erhoehe_startkapital_mit_handicap()
             Logger.info("Startkapital mit Handicap-Punkten erhöht")
         except Exception as e:
             Logger.error(f"Fehler beim Erhöhen des Startkapitals: {e}")
-    
+
     def erhoehe_aufstieg(self):
         """Erhöht die Aufstiege"""
         try:
             if not (self.app.controller and self.app.controller.charakter):
                 Logger.warning("Controller oder Charakter nicht verfügbar für Aufstieg-Erhöhung")
                 return
-                
+
+            char = self.app.controller.charakter
+            if not char.char_gen_completed:
+                self._show_warning(
+                    "Charaktergenerierung nicht abgeschlossen",
+                    "Aufstiege können erst nach Abschluss der Charaktergenerierung "
+                    "hinzugefügt werden.\n\n"
+                    "Schließe zuerst die Charaktererstellung ab."
+                )
+                return
+
             from functions.character_advancement import increase_aufstiege
-            increase_aufstiege(self.app.controller.charakter)
+            increase_aufstiege(char)
             Logger.info("Aufstieg erhöht")
         except Exception as e:
             Logger.error(f"Fehler beim Erhöhen des Aufstiegs: {e}")
-    
+
     def senke_aufstieg(self):
         """Senkt die Aufstiege"""
         try:
             if not (self.app.controller and self.app.controller.charakter):
                 Logger.warning("Controller oder Charakter nicht verfügbar für Aufstieg-Senkung")
                 return
-                
+
+            char = self.app.controller.charakter
+            if not char.char_gen_completed:
+                self._show_warning(
+                    "Charaktergenerierung nicht abgeschlossen",
+                    "Aufstiege können erst nach Abschluss der Charaktergenerierung "
+                    "verändert werden.\n\n"
+                    "Schließe zuerst die Charaktererstellung ab."
+                )
+                return
+
+            if char.verbleibende_aufstiege <= 0 and char.aufstiege_gesamt <= 0:
+                self._show_warning(
+                    "Kein Abstieg möglich",
+                    "Es sind keine Aufstiege vorhanden, die entfernt werden könnten."
+                )
+                return
+
             from functions.character_advancement import decrease_aufstiege
-            decrease_aufstiege(self.app.controller.charakter)
+            decrease_aufstiege(char)
             Logger.info("Aufstieg gesenkt")
         except Exception as e:
             Logger.error(f"Fehler beim Senken des Aufstiegs: {e}")
-    
-    
-    
+
+    # ==================== MOBILE POPUPS ====================
+
+    def open_punkte_popup(self):
+        """Öffnet Popup für Attribut-/Fertigkeitspunkte (Mobile)"""
+        try:
+            from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
+            from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.label import MDLabel
+            from kivy.metrics import dp
+
+            char = self.app.controller.charakter if self.app.controller else None
+            attr_val = str(getattr(char, 'maximale_attributsteigerungen', 5)) if char else '5'
+            fert_val = str(getattr(char, 'maximale_fertigkeitssteigerungen', 12)) if char else '12'
+
+            content = MDBoxLayout(
+                orientation="vertical", spacing=dp(20), padding=dp(20),
+                size_hint_y=None,
+            )
+            content.bind(minimum_height=content.setter('height'))
+
+            # Attribut-Punkte
+            attr_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
+            )
+            attr_row.add_widget(MDLabel(
+                text="Attributs-Punkte:", size_hint_x=0.6,
+                size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
+            ))
+            self._popup_attr_field = MDTextField(
+                text=attr_val, mode="outlined",
+                size_hint_x=0.4, size_hint_y=None, height=dp(56),
+                input_filter='int'
+            )
+            attr_row.add_widget(self._popup_attr_field)
+            content.add_widget(attr_row)
+
+            # Fertigkeits-Punkte
+            fert_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
+            )
+            fert_row.add_widget(MDLabel(
+                text="Fertigkeits-Punkte:", size_hint_x=0.6,
+                size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
+            ))
+            self._popup_fert_field = MDTextField(
+                text=fert_val, mode="outlined",
+                size_hint_x=0.4, size_hint_y=None, height=dp(56),
+                input_filter='int'
+            )
+            fert_row.add_widget(self._popup_fert_field)
+            content.add_widget(fert_row)
+
+            # Buttons
+            button_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Abbrechen"), style="text",
+                on_release=lambda x: self._punkte_dialog.dismiss(),
+            ))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Übernehmen"), style="text",
+                on_release=lambda x: self._apply_punkte_popup(),
+            ))
+            content.add_widget(button_row)
+
+            self._punkte_dialog = MDDialog(
+                MDDialogHeadlineText(text="Start-Punkte"),
+                MDDialogContentContainer(content, orientation="vertical", padding=dp(0)),
+                auto_dismiss=False,
+            )
+            self._punkte_dialog.open()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Punkte-Popups: {e}")
+
+    def _apply_punkte_popup(self):
+        """Wendet die Werte aus dem Punkte-Popup an"""
+        try:
+            self._punkte_dialog.dismiss()
+            char = self.app.controller.charakter if self.app.controller else None
+            if not char:
+                return
+
+            try:
+                attr_val = int(self._popup_attr_field.text)
+                char.maximale_attributsteigerungen = attr_val
+                if 'attributsteigerungen_field' in self.ids:
+                    self.ids.attributsteigerungen_field.text = str(attr_val)
+            except ValueError:
+                pass
+
+            try:
+                fert_val = int(self._popup_fert_field.text)
+                char.maximale_fertigkeitssteigerungen = fert_val
+                if 'fertigkeitssteigerungen_field' in self.ids:
+                    self.ids.fertigkeitssteigerungen_field.text = str(fert_val)
+            except ValueError:
+                pass
+
+            # Button-Text aktualisieren
+            if 'punkte_button_text' in self.ids:
+                self.ids.punkte_button_text.text = (
+                    f"Attr: {char.maximale_attributsteigerungen} / "
+                    f"Fert: {char.maximale_fertigkeitssteigerungen}"
+                )
+
+            Logger.info(f"Punkte aktualisiert: Attr={char.maximale_attributsteigerungen}, "
+                        f"Fert={char.maximale_fertigkeitssteigerungen}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Anwenden der Punkte: {e}")
+
+    def open_vermoegen_popup(self):
+        """Öffnet Popup für Vermögen/Währung (Mobile)"""
+        try:
+            from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
+            from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.label import MDLabel
+            from kivy.metrics import dp
+
+            char = self.app.controller.charakter if self.app.controller else None
+            money_val = str(getattr(char, 'vermoegen', 500)) if char else '500'
+            currency_val = str(getattr(char, 'waehrungseinheit', 'Gold')) if char else 'Gold'
+
+            content = MDBoxLayout(
+                orientation="vertical", spacing=dp(20), padding=dp(20),
+                size_hint_y=None,
+            )
+            content.bind(minimum_height=content.setter('height'))
+
+            # Vermögen
+            money_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
+            )
+            money_row.add_widget(MDLabel(
+                text="Vermögen:", size_hint_x=0.4,
+                size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
+            ))
+            self._popup_money_field = MDTextField(
+                text=money_val, mode="outlined",
+                size_hint_x=0.6, size_hint_y=None, height=dp(56),
+                input_filter='int'
+            )
+            money_row.add_widget(self._popup_money_field)
+            content.add_widget(money_row)
+
+            # Währung
+            currency_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
+            )
+            currency_row.add_widget(MDLabel(
+                text="Währung:", size_hint_x=0.4,
+                size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
+            ))
+            self._popup_currency_field = MDTextField(
+                text=currency_val, mode="outlined",
+                size_hint_x=0.6, size_hint_y=None, height=dp(56),
+            )
+            currency_row.add_widget(self._popup_currency_field)
+            content.add_widget(currency_row)
+
+            # Buttons
+            button_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Abbrechen"), style="text",
+                on_release=lambda x: self._vermoegen_dialog.dismiss(),
+            ))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Übernehmen"), style="text",
+                on_release=lambda x: self._apply_vermoegen_popup(),
+            ))
+            content.add_widget(button_row)
+
+            self._vermoegen_dialog = MDDialog(
+                MDDialogHeadlineText(text="Vermögen & Währung"),
+                MDDialogContentContainer(content, orientation="vertical", padding=dp(0)),
+                auto_dismiss=False,
+            )
+            self._vermoegen_dialog.open()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Vermögen-Popups: {e}")
+
+    def _apply_vermoegen_popup(self):
+        """Wendet die Werte aus dem Vermögen-Popup an"""
+        try:
+            self._vermoegen_dialog.dismiss()
+            char = self.app.controller.charakter if self.app.controller else None
+            if not char:
+                return
+
+            try:
+                money_val = int(self._popup_money_field.text)
+                char.vermoegen = money_val
+                if 'vermoegen_field' in self.ids:
+                    self.ids.vermoegen_field.text = str(money_val)
+            except ValueError:
+                pass
+
+            currency_val = self._popup_currency_field.text or 'Gold'
+            char.waehrungseinheit = currency_val
+            if 'waehrung_field' in self.ids:
+                self.ids.waehrung_field.text = currency_val
+
+            # Button-Text aktualisieren
+            if 'vermoegen_button_text' in self.ids:
+                self.ids.vermoegen_button_text.text = f"{char.vermoegen} {char.waehrungseinheit}"
+
+            Logger.info(f"Vermögen aktualisiert: {char.vermoegen} {char.waehrungseinheit}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Anwenden des Vermögens: {e}")
+
     # Game Elements Management (delegiert an GameElementsHandler)
     def open_add_volk_dialog(self):
         """Delegiert Volk-Dialog an GameElementsHandler"""
@@ -690,7 +952,140 @@ class EinstellungenWidget(MDBoxLayout):
     def open_setting_switch_options(self):
         """Delegiert Setting-Wechsel-Dialog an GameElementsHandler"""
         return self.game_elements_handler.open_setting_switch_options()
-    
+
+    def open_setting_switch_popup(self):
+        """Setting-Wechsel mit Auswahl-Popup (Mobile, Stil wie Neuer-Charakter-Wizard)"""
+        try:
+            from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
+            from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+            from kivymd.uix.list import MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.list import MDList
+            from kivymd.uix.scrollview import MDScrollView
+            from kivy.metrics import dp
+
+            if not (self.app.controller and self.app.controller.charakter):
+                self._show_warning("Kein Charakter", "Kein Charakter verfügbar.")
+                return
+
+            char = self.app.controller.charakter
+            available_settings = char.custom_element_manager.get_all_settings()
+            current_setting = char.active_setting_name
+
+            if not available_settings or len(available_settings) <= 1:
+                self._show_warning(
+                    "Kein Setting-Wechsel möglich",
+                    f"Nur ein Setting verfügbar: '{current_setting}'"
+                )
+                return
+
+            self._switch_pending_setting = current_setting
+
+            # Hauptcontainer
+            dialog_content = MDBoxLayout(
+                orientation="vertical", spacing=dp(15), padding=dp(20),
+                size_hint_y=None,
+            )
+            dialog_content.bind(minimum_height=dialog_content.setter('height'))
+
+            # Info
+            from kivymd.uix.label import MDLabel
+            dialog_content.add_widget(MDLabel(
+                text=f"Aktuelles Setting: {current_setting}",
+                theme_text_color="Secondary", font_style="Body",
+                size_hint_y=None, height=dp(30),
+            ))
+
+            # Suchfeld
+            search_field = MDTextField(
+                mode="outlined", size_hint_y=None, height=dp(56), size_hint_x=1
+            )
+            search_field.add_widget(MDTextFieldHintText(text="Setting suchen..."))
+            dialog_content.add_widget(search_field)
+
+            # Scrollbare Liste
+            scroll_view = MDScrollView(size_hint=(1, None), height=dp(250))
+            scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
+            items_list = MDList(size_hint_y=None, size_hint_x=1)
+            items_list.bind(minimum_height=items_list.setter('height'))
+            scroll_layout.add_widget(items_list)
+            scroll_layout.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
+            scroll_view.add_widget(scroll_layout)
+            scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+            dialog_content.add_widget(scroll_view)
+
+            def populate_list(*args):
+                items_list.clear_widgets()
+                search_text = search_field.text.lower() if search_field.text else ""
+                pending = self._switch_pending_setting
+
+                for setting_name in sorted(available_settings):
+                    if search_text and search_text not in setting_name.lower():
+                        continue
+                    is_sel = (pending == setting_name)
+                    is_current = (setting_name == current_setting)
+                    item = MDListItem(
+                        size_hint_y=None, height=dp(48),
+                        on_release=lambda x, s=setting_name: _select(s),
+                        md_bg_color=self.app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
+                    )
+                    if is_sel:
+                        item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                    label_text = f"{setting_name} (aktiv)" if is_current else setting_name
+                    headline = MDListItemHeadlineText(text=label_text)
+                    if is_sel:
+                        headline.bold = True
+                    item.add_widget(headline)
+                    items_list.add_widget(item)
+
+            def _select(setting_name):
+                self._switch_pending_setting = setting_name
+                populate_list()
+
+            search_field.bind(text=populate_list)
+            populate_list()
+
+            # Buttons
+            button_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Abbrechen"), style="text",
+                on_release=lambda x: self._switch_dialog.dismiss(),
+            ))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Wechseln"), style="text",
+                on_release=lambda x: self._apply_setting_switch(),
+            ))
+            dialog_content.add_widget(button_row)
+
+            self._switch_dialog = MDDialog(
+                MDDialogHeadlineText(text="Setting wechseln"),
+                MDDialogContentContainer(dialog_content, orientation="vertical", padding=dp(0)),
+                auto_dismiss=False,
+            )
+            self._switch_dialog.open()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Setting-Wechsel-Popups: {e}")
+
+    def _apply_setting_switch(self):
+        """Wendet den Setting-Wechsel aus dem Popup an"""
+        try:
+            self._switch_dialog.dismiss()
+            chosen = getattr(self, '_switch_pending_setting', None)
+            if not chosen:
+                return
+
+            char = self.app.controller.charakter
+            if chosen == char.active_setting_name:
+                return
+
+            # Delegiere an GameElementsHandler für Merge-Dialog
+            self.game_elements_handler._on_setting_choice_made(chosen)
+        except Exception as e:
+            Logger.error(f"Fehler beim Setting-Wechsel: {e}")
+
     def open_delete_setting_popup(self):
         """Öffnet Dialog zum Löschen von Settings"""
         dialog_service = service_container.get_dialog_service()

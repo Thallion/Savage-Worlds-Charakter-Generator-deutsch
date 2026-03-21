@@ -199,25 +199,87 @@ class HTMLManager:
 
     @staticmethod
     def _open_file_on_android(file_path, mime_type='*/*'):
-        """Öffnet eine Datei auf Android über Intent mit FileProvider"""
+        """Öffnet eine Datei auf Android - HTML via WebView, PDF via Intent"""
+        try:
+            if mime_type == 'text/html':
+                HTMLManager._open_html_in_webview(file_path)
+            else:
+                HTMLManager._open_with_intent(file_path, mime_type)
+        except Exception as e:
+            Logger.error(f"Android: Fehler beim Öffnen der Datei: {e}")
+
+    @staticmethod
+    def _open_html_in_webview(file_path):
+        """Öffnet eine HTML-Datei in einem Android WebView"""
+        try:
+            from jnius import autoclass, cast
+            from android.runnable import run_on_ui_thread
+
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            WebView = autoclass('android.webkit.WebView')
+            WebViewClient = autoclass('android.webkit.WebViewClient')
+            LinearLayout = autoclass('android.widget.LinearLayout')
+            LayoutParams = autoclass('android.widget.LinearLayout$LayoutParams')
+            AlertDialog = autoclass('android.app.AlertDialog$Builder')
+            DialogInterface = autoclass('android.content.DialogInterface')
+
+            activity = PythonActivity.mActivity
+
+            @run_on_ui_thread
+            def show_webview():
+                webview = WebView(activity)
+                webview.getSettings().setJavaScriptEnabled(True)
+                webview.getSettings().setBuiltInZoomControls(True)
+                webview.getSettings().setDisplayZoomControls(False)
+                webview.getSettings().setLoadWithOverviewMode(True)
+                webview.getSettings().setUseWideViewPort(True)
+                webview.setWebViewClient(WebViewClient())
+
+                # HTML-Datei laden
+                webview.loadUrl('file://' + file_path)
+
+                # LayoutParams für Vollbild
+                params = LayoutParams(
+                    LayoutParams.MATCH_PARENT,
+                    LayoutParams.MATCH_PARENT
+                )
+                webview.setLayoutParams(params)
+
+                # Dialog mit WebView anzeigen
+                builder = AlertDialog(activity)
+                builder.setView(webview)
+                builder.setPositiveButton("Schließen", None)
+                builder.setCancelable(True)
+                dialog = builder.create()
+                dialog.show()
+
+            show_webview()
+            Logger.info(f"Android: HTML in WebView geöffnet: {file_path}")
+        except Exception as e:
+            Logger.error(f"Android: WebView-Fehler: {e}")
+            # Letzter Fallback: Intent
+            HTMLManager._open_with_intent(file_path, 'text/html')
+
+    @staticmethod
+    def _open_with_intent(file_path, mime_type):
+        """Öffnet eine Datei auf Android über Intent"""
         try:
             from jnius import autoclass
 
             Intent = autoclass('android.content.Intent')
             Uri = autoclass('android.net.Uri')
             File = autoclass('java.io.File')
-            FileProvider = autoclass('androidx.core.content.FileProvider')
             PythonActivity = autoclass('org.kivy.android.PythonActivity')
 
             context = PythonActivity.mActivity
             java_file = File(file_path)
 
-            # FileProvider für sichere Datei-Freigabe (Android 7+)
-            authority = context.getPackageName() + '.fileprovider'
+            # Versuche FileProvider, dann Fallback auf file:// URI
             try:
+                FileProvider = autoclass('androidx.core.content.FileProvider')
+                authority = context.getPackageName() + '.fileprovider'
                 content_uri = FileProvider.getUriForFile(context, authority, java_file)
             except Exception:
-                # Fallback: Direkte file:// URI (funktioniert auf älteren Geräten)
                 content_uri = Uri.fromFile(java_file)
 
             intent = Intent(Intent.ACTION_VIEW)
@@ -228,10 +290,4 @@ class HTMLManager:
             context.startActivity(intent)
             Logger.info(f"Android: Datei geöffnet via Intent: {file_path}")
         except Exception as e:
-            Logger.error(f"Android: Fehler beim Öffnen der Datei: {e}")
-            # Fallback: webbrowser
-            try:
-                import webbrowser as wb
-                wb.open('file://' + file_path)
-            except Exception as e2:
-                Logger.error(f"Android: Auch webbrowser-Fallback fehlgeschlagen: {e2}")
+            Logger.error(f"Android: Intent-Fehler: {e}")
