@@ -33,7 +33,7 @@ source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.6.2.1
+version = 0.6.2.3
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -52,7 +52,7 @@ requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/arc
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/assets/Savage-Worlds-Fanprodukt-Logo.png
+icon.filename = %(source.dir)s/assets/icon_512.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
@@ -95,8 +95,8 @@ fullscreen = 0
 #android.presplash_lottie = "path/to/lottie/file.json"
 
 # (str) Adaptive icon of the application (used if Android API level is 26+ at runtime)
-#icon.adaptive_foreground.filename = %(source.dir)s/data/icon_fg.png
-#icon.adaptive_background.filename = %(source.dir)s/data/icon_bg.png
+icon.adaptive_foreground.filename = %(source.dir)s/assets/icon_foreground.png
+icon.adaptive_background.filename = %(source.dir)s/assets/icon_background.png
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
@@ -316,6 +316,12 @@ android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
 android.debug_artifact = apk
+
+# (str) Keystore for signing release builds (Play Store)
+android.keystore = %(source.dir)s/savageworlds-release.jks
+android.keyalias = savageworlds
+android.keystore_password = savage2026
+android.key_password = savage2026
 
 #
 # Python for android (p4a) specific

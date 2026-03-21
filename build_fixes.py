@@ -11,13 +11,26 @@ import re
 from pathlib import Path
 
 
+def _find_build_root():
+    """Findet das Build-Verzeichnis dynamisch (Single- oder Multi-Arch)"""
+    platform_dir = Path(".buildozer/android/platform")
+    if not platform_dir.exists():
+        return None
+    # Suche nach build-* Verzeichnissen (z.B. build-arm64-v8a, build-arm64-v8a_armeabi-v7a)
+    for build_dir in sorted(platform_dir.glob("build-*/build/other_builds"), reverse=True):
+        if build_dir.exists():
+            print(f"P4A Hook: Build-Verzeichnis gefunden: {build_dir.parent.parent.name}")
+            return build_dir
+    return None
+
+
 def fix_kivy_python3_compatibility():
     """Fix Python 3+ / Cython 3.x compatibility issues in ALL Kivy .pyx files"""
     print("P4A Hook: Searching for Kivy build directories...")
 
     # Find kivy build directories
-    build_root = Path(".buildozer/android/platform/build-arm64-v8a/build/other_builds")
-    if not build_root.exists():
+    build_root = _find_build_root()
+    if not build_root:
         print("P4A Hook: Build directory not found, skipping Kivy fix")
         return False
 
@@ -105,8 +118,8 @@ def fix_pyjnius_python3_compatibility():
     """Fix Python 3+ / Cython 3.x compatibility issues in ALL pyjnius .pxi files"""
     print("P4A Hook: Searching for pyjnius build directories...")
 
-    build_root = Path(".buildozer/android/platform/build-arm64-v8a/build/other_builds")
-    if not build_root.exists():
+    build_root = _find_build_root()
+    if not build_root:
         print("P4A Hook: Build directory not found, skipping pyjnius fix")
         return False
 

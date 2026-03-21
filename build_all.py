@@ -260,6 +260,129 @@ def _run_buildozer(build_command):
     return result.returncode == 0
 
 
+def _find_apksigner():
+    """Findet apksigner im Android SDK"""
+    sdk_path = os.environ.get('ANDROID_SDK_ROOT') or os.environ.get('ANDROID_HOME')
+    if not sdk_path:
+        sdk_path = os.path.expanduser("~/Android/Sdk")
+
+    build_tools = Path(sdk_path) / "build-tools"
+    if build_tools.exists():
+        # Neueste Version verwenden
+        versions = sorted(build_tools.iterdir(), reverse=True)
+        for v in versions:
+            apksigner = v / "apksigner"
+            if apksigner.exists():
+                return str(apksigner)
+    return None
+
+
+def _sign_apk(apk_path):
+    """Signiert eine APK mit dem Release-Keystore via apksigner"""
+    keystore = Path.cwd() / "savageworlds-release.jks"
+    if not keystore.exists():
+        print("⚠️  Keystore nicht gefunden, APK bleibt debug-signiert")
+        return False
+
+    apksigner = _find_apksigner()
+    if not apksigner:
+        print("⚠️  apksigner nicht gefunden, APK bleibt debug-signiert")
+        return False
+
+    # Erst zipalign (muss VOR dem Signieren passieren)
+    sdk_path = os.environ.get('ANDROID_SDK_ROOT') or os.path.expanduser("~/Android/Sdk")
+    zipalign = None
+    for v in sorted(Path(sdk_path, "build-tools").iterdir(), reverse=True):
+        za = v / "zipalign"
+        if za.exists():
+            zipalign = str(za)
+            break
+
+    if zipalign:
+        aligned_path = str(apk_path) + ".aligned"
+        result = subprocess.run(
+            [zipalign, '-f', '4', str(apk_path), aligned_path],
+            capture_output=True, text=True
+        )
+        if result.returncode == 0:
+            shutil.move(aligned_path, str(apk_path))
+            print(f"📐 APK aligned: {Path(apk_path).name}")
+        else:
+            print(f"⚠️  zipalign fehlgeschlagen: {result.stderr}")
+
+    # Signieren mit apksigner
+    result = subprocess.run([
+        apksigner, 'sign',
+        '--ks', str(keystore),
+        '--ks-key-alias', 'savageworlds',
+        '--ks-pass', 'pass:savage2026',
+        '--key-pass', 'pass:savage2026',
+        str(apk_path)
+    ], capture_output=True, text=True)
+
+    if result.returncode == 0:
+        print(f"🔐 APK signiert: {Path(apk_path).name}")
+        return True
+    else:
+        print(f"❌ APK-Signierung fehlgeschlagen: {result.stderr}")
+        return False
+
+
+def _sign_aab(aab_path):
+    """Signiert eine AAB mit dem Release-Keystore via jarsigner"""
+    keystore = Path.cwd() / "savageworlds-release.jks"
+    if not keystore.exists():
+        print("⚠️  Keystore nicht gefunden, AAB bleibt unsigniert")
+        return False
+
+    result = subprocess.run([
+        'jarsigner',
+        '-sigalg', 'SHA256withRSA',
+        '-digestalg', 'SHA-256',
+        '-keystore', str(keystore),
+        '-storepass', 'savage2026',
+        '-keypass', 'savage2026',
+        str(aab_path),
+        'savageworlds'
+    ], capture_output=True, text=True)
+
+    if result.returncode == 0:
+        print(f"🔐 AAB signiert: {Path(aab_path).name}")
+        return True
+    else:
+        print(f"❌ AAB-Signierung fehlgeschlagen: {result.stderr}")
+        return False
+
+
+def _verify_signature(artifact_path):
+    """Verifiziert die Signatur eines APK/AAB"""
+    suffix = Path(artifact_path).suffix
+
+    if suffix == '.aab':
+        # AAB mit jarsigner verifizieren
+        result = subprocess.run(
+            ['jarsigner', '-verify', str(artifact_path)],
+            capture_output=True, text=True
+        )
+        if result.returncode == 0 and 'jar verified' in result.stdout:
+            print(f"✅ Signatur verifiziert: {Path(artifact_path).name}")
+        else:
+            print(f"⚠️  AAB nicht signiert: {Path(artifact_path).name}")
+    else:
+        # APK mit apksigner verifizieren
+        apksigner = _find_apksigner()
+        if not apksigner:
+            return
+        result = subprocess.run(
+            [apksigner, 'verify', '--verbose', str(artifact_path)],
+            capture_output=True, text=True
+        )
+        if result.returncode == 0:
+            print(f"✅ Signatur verifiziert: {Path(artifact_path).name}")
+        else:
+            print(f"⚠️  Signatur-Verifizierung fehlgeschlagen: {Path(artifact_path).name}")
+
+
 def _collect_android_artifacts(dist_dir, extensions, build_type_label):
     """Sammelt Build-Artefakte aus bin/ und kopiert sie nach dist/android/"""
     bin_dir = Path.cwd() / "bin"
@@ -278,6 +401,16 @@ def _collect_android_artifacts(dist_dir, extensions, build_type_label):
             target_file = dist_dir / "android" / new_name
             shutil.copy2(artifact, target_file)
             print(f"✅ {suffix.upper()[1:]} nach {target_file} kopiert")
+
+            # Signieren
+            if suffix == '.apk':
+                _sign_apk(target_file)
+            elif suffix == '.aab':
+                _sign_aab(target_file)
+
+            # Signatur verifizieren
+            _verify_signature(target_file)
+
             found = True
 
     return found

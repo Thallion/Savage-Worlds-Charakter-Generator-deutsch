@@ -274,11 +274,12 @@ class TestCharakterVerwaltungWidgetCharakter(unittest.TestCase):
         mocks['character_handler'].get_charakter_value.assert_called_once_with('name', '')
         self.assertEqual(result, "Testname")
 
-    def test_create_new_character_delegates(self):
-        """create_new_character delegiert an character_handler"""
+    def test_create_new_character_opens_wizard(self):
+        """create_new_character startet den Setting-Auswahl-Wizard"""
         widget, mocks = _create_widget()
-        widget.create_new_character()
-        mocks['character_handler'].create_new_character.assert_called_once()
+        with patch.object(widget, '_show_setting_selection_popup') as mock_popup:
+            widget.create_new_character()
+            mock_popup.assert_called_once()
 
     def test_schnellspeichern_charakter_delegates(self):
         """schnellspeichern_charakter delegiert an character_handler"""
@@ -316,12 +317,18 @@ class TestCharakterVerwaltungWidgetCharakter(unittest.TestCase):
         widget.zeige_element_statistiken()
         mocks['character_handler'].zeige_element_statistiken.assert_called_once()
 
-    def test_delegation_returns_handler_result(self):
-        """Delegations-Methoden geben den Rückgabewert des Handlers zurück"""
+    def test_wizard_config_confirmed_creates_character(self):
+        """_on_config_confirmed erstellt Charakter über Controller"""
         widget, mocks = _create_widget()
-        mocks['character_handler'].create_new_character.return_value = "new_char"
-        result = widget.create_new_character()
-        self.assertEqual(result, "new_char")
+        widget._wizard_selected_setting = 'SWAE'
+        widget._wizard_attr_field = Mock(text='5')
+        widget._wizard_fert_field = Mock(text='12')
+        widget._wizard_money_field = Mock(text='500')
+        widget._wizard_currency_field = Mock(text='Gold')
+        widget._wizard_config_dialog = Mock()
+        with patch('views.charakter_verwaltung_widget.Clock'):
+            widget._on_config_confirmed()
+        mocks['app'].controller.neuer_charakter.assert_called_once_with(setting_name='SWAE')
 
 
 # ==================== TEMPLATE-MANAGEMENT TESTS ====================
