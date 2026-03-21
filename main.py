@@ -917,22 +917,21 @@ class SW_Charakter_GeneratorApp(MDApp):
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
 
-                # Bottom-Bar anzeigen
-                bottom_bar = root.ids.get('bottom_bar_container')
-                if bottom_bar:
-                    bottom_bar.height = dp(56)
-                    bottom_bar.opacity = 1
-
                 # Orientierung prüfen: Portrait vs. Landscape
-                # Auf Desktop immer Rail anzeigen
+                # Auf Desktop immer Rail anzeigen, Bottom-Bar immer anzeigen
                 from kivy.utils import platform as _platform
                 if _platform == 'android':
+                    # Android: Bottom-Bar nur in Portrait, Rail nur in Landscape
                     self._update_mobile_orientation()
                 else:
-                    # Desktop: Rail immer anzeigen
+                    # Desktop: Rail immer anzeigen, Bottom-Bar immer anzeigen
                     nav_rail_container.width = dp(72)
                     nav_rail_container.opacity = 1
                     self._nav_rail_visible = True
+                    bottom_bar = root.ids.get('bottom_bar_container')
+                    if bottom_bar:
+                        bottom_bar.height = dp(56)
+                        bottom_bar.opacity = 1
 
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
@@ -1049,19 +1048,26 @@ class SW_Charakter_GeneratorApp(MDApp):
                 return
 
             is_portrait = Window.height > Window.width
+            bottom_bar = root.ids.get('bottom_bar_container')
 
             if is_portrait:
-                # Portrait: Rail verstecken (Bottom-Bar ist immer sichtbar)
+                # Portrait: Rail verstecken, Bottom-Bar anzeigen
                 nav_rail_container.width = 0
                 nav_rail_container.opacity = 0
                 self._nav_rail_visible = False
+                if bottom_bar:
+                    bottom_bar.height = dp(56)
+                    bottom_bar.opacity = 1
                 Logger.debug("Mobile Portrait: Rail versteckt, Bottom-Bar sichtbar")
             else:
-                # Landscape: Rail anzeigen
+                # Landscape: Rail anzeigen, Bottom-Bar verstecken
                 nav_rail_container.width = dp(72)
                 nav_rail_container.opacity = 1
                 self._nav_rail_visible = True
-                Logger.debug("Mobile Landscape: Rail sichtbar")
+                if bottom_bar:
+                    bottom_bar.height = 0
+                    bottom_bar.opacity = 0
+                Logger.debug("Mobile Landscape: Rail sichtbar, Bottom-Bar versteckt")
 
         except Exception as e:
             Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")

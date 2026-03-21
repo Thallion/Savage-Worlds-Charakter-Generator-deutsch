@@ -2,7 +2,7 @@
 """
 Unit Tests für CharakterVerwaltungScreen und CharakterVerwaltungWidget
 Testet Screen-Delegation, Handler/Manager-Initialisierung, Charakter-CRUD,
-Template-Management, UI-Updates und Cleanup.
+Setting-Verwaltung, Charakter-Einstellungen, UI-Updates und Cleanup.
 """
 
 import unittest
@@ -45,7 +45,7 @@ def _create_widget():
     mock_app.controller.charakter = Mock()
 
     mock_char_handler = Mock()
-    mock_tmpl_handler = Mock()
+    mock_game_handler = Mock()
     mock_stats_mgr = Mock()
     mock_pdf_mgr = Mock()
     mock_event_service = Mock()
@@ -57,7 +57,7 @@ def _create_widget():
          patch('views.charakter_verwaltung_widget.MDApp') as mock_mdapp, \
          patch('views.charakter_verwaltung_widget.Clock') as mock_clock, \
          patch('views.charakter_verwaltung_widget.CharacterHandler', return_value=mock_char_handler), \
-         patch('views.charakter_verwaltung_widget.TemplateHandler', return_value=mock_tmpl_handler), \
+         patch('views.charakter_verwaltung_widget.GameElementsHandler', return_value=mock_game_handler), \
          patch('views.charakter_verwaltung_widget.StatisticsManager', return_value=mock_stats_mgr), \
          patch('views.charakter_verwaltung_widget.PDFManager', return_value=mock_pdf_mgr), \
          patch('views.charakter_verwaltung_widget.service_container', mock_sc):
@@ -68,7 +68,7 @@ def _create_widget():
     mocks = {
         'app': mock_app,
         'character_handler': mock_char_handler,
-        'template_handler': mock_tmpl_handler,
+        'game_elements_handler': mock_game_handler,
         'statistics_manager': mock_stats_mgr,
         'pdf_manager': mock_pdf_mgr,
         'event_service': mock_event_service,
@@ -159,10 +159,10 @@ class TestCharakterVerwaltungWidgetInit(unittest.TestCase):
         widget, mocks = _create_widget()
         self.assertEqual(widget.character_handler, mocks['character_handler'])
 
-    def test_init_sets_template_handler(self):
-        """__init__ erstellt TemplateHandler"""
+    def test_init_sets_game_elements_handler(self):
+        """__init__ erstellt GameElementsHandler"""
         widget, mocks = _create_widget()
-        self.assertEqual(widget.template_handler, mocks['template_handler'])
+        self.assertEqual(widget.game_elements_handler, mocks['game_elements_handler'])
 
     def test_init_sets_managers(self):
         """__init__ erstellt StatisticsManager und PDFManager"""
@@ -181,7 +181,7 @@ class TestCharakterVerwaltungWidgetInit(unittest.TestCase):
              patch('views.charakter_verwaltung_widget.MDApp') as mock_mdapp, \
              patch('views.charakter_verwaltung_widget.Clock'), \
              patch('views.charakter_verwaltung_widget.CharacterHandler', side_effect=Exception("handler fail")), \
-             patch('views.charakter_verwaltung_widget.TemplateHandler', return_value=Mock()), \
+             patch('views.charakter_verwaltung_widget.GameElementsHandler', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.StatisticsManager', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.PDFManager', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.service_container', Mock()), \
@@ -197,7 +197,7 @@ class TestCharakterVerwaltungWidgetInit(unittest.TestCase):
              patch('views.charakter_verwaltung_widget.MDApp') as mock_mdapp, \
              patch('views.charakter_verwaltung_widget.Clock'), \
              patch('views.charakter_verwaltung_widget.CharacterHandler', return_value=Mock()), \
-             patch('views.charakter_verwaltung_widget.TemplateHandler', return_value=Mock()), \
+             patch('views.charakter_verwaltung_widget.GameElementsHandler', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.StatisticsManager', side_effect=Exception("mgr fail")), \
              patch('views.charakter_verwaltung_widget.service_container', Mock()), \
              patch('views.charakter_verwaltung_widget.Logger'):
@@ -223,7 +223,7 @@ class TestCharakterVerwaltungWidgetInit(unittest.TestCase):
              patch('views.charakter_verwaltung_widget.MDApp') as mock_mdapp, \
              patch('views.charakter_verwaltung_widget.Clock'), \
              patch('views.charakter_verwaltung_widget.CharacterHandler', return_value=Mock()), \
-             patch('views.charakter_verwaltung_widget.TemplateHandler', return_value=Mock()), \
+             patch('views.charakter_verwaltung_widget.GameElementsHandler', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.StatisticsManager', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.PDFManager', return_value=Mock()), \
              patch('views.charakter_verwaltung_widget.service_container') as mock_sc:
@@ -331,109 +331,64 @@ class TestCharakterVerwaltungWidgetCharakter(unittest.TestCase):
         mocks['app'].controller.neuer_charakter.assert_called_once_with(setting_name='SWAE')
 
 
-# ==================== TEMPLATE-MANAGEMENT TESTS ====================
+# ==================== SETTING-VERWALTUNG TESTS ====================
 
-class TestCharakterVerwaltungWidgetTemplate(unittest.TestCase):
-    """Tests für Template-Delegation und Template-Wizard"""
+class TestCharakterVerwaltungWidgetSetting(unittest.TestCase):
+    """Tests für Setting-Verwaltung"""
 
-    def test_open_template_selection_dialog_delegates(self):
-        """open_template_selection_dialog delegiert an template_handler"""
+    def test_open_setting_switch_options_delegates(self):
+        """open_setting_switch_options delegiert an game_elements_handler"""
         widget, mocks = _create_widget()
-        widget.open_template_selection_dialog()
-        mocks['template_handler'].open_template_selection_dialog.assert_called_once()
+        widget.open_setting_switch_options()
+        mocks['game_elements_handler'].open_setting_switch_options.assert_called_once()
 
-    def test_show_template_selection_dialog_delegates(self):
-        """show_template_selection_dialog delegiert an template_handler"""
+    def test_open_add_setting_popup_uses_dialog_service(self):
+        """open_add_setting_popup nutzt dialog_service"""
         widget, mocks = _create_widget()
-        widget.show_template_selection_dialog()
-        mocks['template_handler'].show_template_selection_dialog.assert_called_once()
-
-    def test_generate_character_from_selected_template_delegates(self):
-        """generate_character_from_selected_template delegiert an template_handler"""
-        widget, mocks = _create_widget()
-        widget.generate_character_from_selected_template()
-        mocks['template_handler'].generate_character_from_selected_template.assert_called_once()
-
-    def test_selected_template_property_returns_handler_value(self):
-        """selected_template Property gibt Wert vom template_handler zurück"""
-        widget, mocks = _create_widget()
-        mocks['template_handler'].selected_template = {'name': 'Test Template'}
-        result = widget.selected_template
-        self.assertEqual(result, {'name': 'Test Template'})
-
-    def test_selected_template_property_no_handler(self):
-        """selected_template gibt None zurück wenn kein template_handler"""
-        widget, mocks = _create_widget()
-        widget.template_handler = None
-        result = widget.selected_template
-        self.assertIsNone(result)
-
-    def test_selected_template_property_no_attr(self):
-        """selected_template gibt None zurück wenn template_handler kein Attribut hat"""
-        widget, mocks = _create_widget()
-        del widget.template_handler
-        result = widget.selected_template
-        self.assertIsNone(result)
-
-    def test_create_template_wizard_calls_show(self):
-        """create_template_wizard ruft show_template_wizard auf"""
-        widget, mocks = _create_widget()
-        with patch('views.charakter_verwaltung_widget.show_template_wizard', create=True) as mock_show:
-            # Patch den Import innerhalb der Methode
-            with patch.dict('sys.modules', {'views.template_wizard': MagicMock(show_template_wizard=mock_show)}):
-                widget.create_template_wizard()
-                mock_show.assert_called_once()
-
-    def test_create_template_wizard_error_shows_dialog(self):
-        """create_template_wizard zeigt Fehler-Dialog bei Exception"""
-        widget, mocks = _create_widget()
-        mock_dialog_service = Mock()
-
-        # show_template_wizard wirft Exception
-        mock_wizard_module = MagicMock()
-        mock_wizard_module.show_template_wizard.side_effect = Exception("wizard fail")
-
-        mock_sc = Mock()
-        mock_sc.get_dialog_service.return_value = mock_dialog_service
-
-        with patch.dict('sys.modules', {'views.template_wizard': mock_wizard_module}):
-            # Patch sowohl modul-level als auch den Re-Import im except-Block
-            with patch('views.charakter_verwaltung_widget.service_container', mock_sc), \
-                 patch('services.service_container.service_container', mock_sc):
-                widget.create_template_wizard()
-                mock_dialog_service.show_error_dialog.assert_called_once()
-
-    def test_create_template_wizard_callback_updates_handler(self):
-        """Template-Wizard Callback aktualisiert template_handler"""
-        widget, mocks = _create_widget()
-
-        captured_callback = None
-
-        def capture_show(callback=None):
-            nonlocal captured_callback
-            captured_callback = callback
-
-        mock_wizard_module = MagicMock()
-        mock_wizard_module.show_template_wizard = capture_show
-
-        with patch.dict('sys.modules', {'views.template_wizard': mock_wizard_module}):
-            with patch('views.charakter_verwaltung_widget.service_container') as mock_sc:
-                mock_sc.get_dialog_service.return_value = Mock()
-                widget.create_template_wizard()
-
-        self.assertIsNotNone(captured_callback)
-
-        # Callback ausführen
+        mock_dialog = Mock()
         with patch('views.charakter_verwaltung_widget.service_container') as mock_sc:
-            mock_sc.get_dialog_service.return_value = Mock()
-            captured_callback('/path/to/template.json', {'name': 'My Template'})
+            mock_sc.get_dialog_service.return_value = mock_dialog
+            widget.open_add_setting_popup()
+            mock_dialog.open_add_setting_popup.assert_called_once()
 
-        mocks['template_handler']._load_templates.assert_called_once()
-        self.assertEqual(mocks['template_handler'].selected_template, {
-            'name': 'My Template',
-            'path': '/path/to/template.json',
-            'data': {'name': 'My Template'}
-        })
+    def test_open_delete_setting_popup_uses_dialog_service(self):
+        """open_delete_setting_popup nutzt dialog_service"""
+        widget, mocks = _create_widget()
+        mock_dialog = Mock()
+        with patch('views.charakter_verwaltung_widget.service_container') as mock_sc:
+            mock_sc.get_dialog_service.return_value = mock_dialog
+            widget.open_delete_setting_popup()
+            mock_dialog.open_delete_setting_popup.assert_called_once()
+
+
+# ==================== CHARAKTER-EINSTELLUNGEN TESTS ====================
+
+class TestCharakterVerwaltungWidgetEinstellungen(unittest.TestCase):
+    """Tests für Charakter-Einstellungen (Punkte, Vermögen, Aufstieg/Abstieg)"""
+
+    def test_erhoehe_aufstieg_needs_completed_chargen(self):
+        """erhoehe_aufstieg warnt wenn Charaktergenerierung nicht abgeschlossen"""
+        widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.char_gen_completed = False
+        with patch.object(widget, '_show_warning') as mock_warn:
+            widget.erhoehe_aufstieg()
+            mock_warn.assert_called_once()
+
+    def test_senke_aufstieg_needs_completed_chargen(self):
+        """senke_aufstieg warnt wenn Charaktergenerierung nicht abgeschlossen"""
+        widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.char_gen_completed = False
+        with patch.object(widget, '_show_warning') as mock_warn:
+            widget.senke_aufstieg()
+            mock_warn.assert_called_once()
+
+    def test_erhoehe_startkapital_no_handicap_points(self):
+        """erhoehe_startkapital warnt wenn keine Handicap-Punkte"""
+        widget, mocks = _create_widget()
+        mocks['app'].controller.charakter.verbleibende_handicap_punkte = 0
+        with patch.object(widget, '_show_warning') as mock_warn:
+            widget.erhoehe_startkapital()
+            mock_warn.assert_called_once()
 
 
 # ==================== UI UPDATE TESTS ====================

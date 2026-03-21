@@ -263,160 +263,6 @@ class TestEinstellungenWidgetCharakter(unittest.TestCase):
         result = widget.get_charakter_value('name', 'default')
         self.assertEqual(result, 'default')
 
-    def test_update_maximale_attributsteigerungen(self):
-        """update_maximale_attributsteigerungen setzt int-Wert aus UI-Feld"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(attributsteigerungen_field=Mock(text='5'))
-        widget.update_maximale_attributsteigerungen()
-        self.assertEqual(
-            mocks['app'].controller.charakter.maximale_attributsteigerungen, 5
-        )
-
-    def test_update_maximale_attributsteigerungen_invalid(self):
-        """update_maximale_attributsteigerungen ignoriert ungültigen Wert"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(attributsteigerungen_field=Mock(text='abc'))
-        original = mocks['app'].controller.charakter.maximale_attributsteigerungen
-        widget.update_maximale_attributsteigerungen()
-        # Wert soll unverändert bleiben
-        self.assertEqual(
-            mocks['app'].controller.charakter.maximale_attributsteigerungen, original
-        )
-
-    def test_update_maximale_attributsteigerungen_no_controller(self):
-        """update_maximale_attributsteigerungen kehrt zurück wenn kein Controller"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller = None
-        # Soll keine Exception werfen
-        widget.update_maximale_attributsteigerungen()
-
-    def test_update_maximale_fertigkeitssteigerungen(self):
-        """update_maximale_fertigkeitssteigerungen setzt int-Wert"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(fertigkeitssteigerungen_field=Mock(text='10'))
-        widget.update_maximale_fertigkeitssteigerungen()
-        self.assertEqual(
-            mocks['app'].controller.charakter.maximale_fertigkeitssteigerungen, 10
-        )
-
-    def test_update_maximale_fertigkeitssteigerungen_invalid(self):
-        """update_maximale_fertigkeitssteigerungen ignoriert ungültigen Wert"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(fertigkeitssteigerungen_field=Mock(text='xyz'))
-        # Soll keine Exception werfen
-        widget.update_maximale_fertigkeitssteigerungen()
-
-    def test_update_maximale_fertigkeitssteigerungen_no_controller(self):
-        """update_maximale_fertigkeitssteigerungen kehrt zurück wenn kein Controller"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller = None
-        widget.update_maximale_fertigkeitssteigerungen()
-
-    def test_update_vermoegen(self):
-        """update_vermoegen setzt int-Wert"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(vermoegen_field=Mock(text='500'))
-        widget.update_vermoegen()
-        self.assertEqual(mocks['app'].controller.charakter.vermoegen, 500)
-
-    def test_update_vermoegen_invalid(self):
-        """update_vermoegen ignoriert ungültigen Wert"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(vermoegen_field=Mock(text='nein'))
-        widget.update_vermoegen()
-
-    def test_update_vermoegen_no_controller(self):
-        """update_vermoegen kehrt zurück wenn kein Controller"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller = None
-        widget.update_vermoegen()
-
-    def test_update_waehrung(self):
-        """update_waehrung setzt String-Wert"""
-        widget, mocks = _create_widget()
-        widget.ids = _AttrDict(waehrung_field=Mock(text='Gold'))
-        widget.update_waehrung()
-        self.assertEqual(
-            mocks['app'].controller.charakter.waehrungseinheit, 'Gold'
-        )
-
-    def test_update_waehrung_no_controller(self):
-        """update_waehrung kehrt zurück wenn kein Controller"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller = None
-        widget.update_waehrung()
-
-    def test_erhoehe_startkapital(self):
-        """erhoehe_startkapital delegiert an Controller wenn Handicap-Punkte verfügbar"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter.verbleibende_handicap_punkte = 2
-        widget.erhoehe_startkapital()
-        mocks['app'].controller.erhoehe_startkapital_mit_handicap.assert_called_once()
-
-    def test_erhoehe_startkapital_keine_punkte(self):
-        """erhoehe_startkapital zeigt Warnung wenn keine Handicap-Punkte"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter.verbleibende_handicap_punkte = 0
-        with patch('views.einstellungen_widget.service_container') as mock_sc:
-            mock_sc.get_dialog_service.return_value = Mock()
-            widget.erhoehe_startkapital()
-        mocks['app'].controller.erhoehe_startkapital_mit_handicap.assert_not_called()
-
-    def test_erhoehe_startkapital_no_controller(self):
-        """erhoehe_startkapital kehrt zurück wenn kein Controller"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller = None
-        widget.erhoehe_startkapital()
-
-    def test_erhoehe_aufstieg(self):
-        """erhoehe_aufstieg ruft increase_aufstiege auf wenn char_gen_completed"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter.char_gen_completed = True
-        with patch('functions.character_advancement.increase_aufstiege') as mock_fn:
-            widget.erhoehe_aufstieg()
-            mock_fn.assert_called_once_with(mocks['app'].controller.charakter)
-
-    def test_erhoehe_aufstieg_gen_nicht_abgeschlossen(self):
-        """erhoehe_aufstieg zeigt Warnung wenn Generierung nicht abgeschlossen"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter.char_gen_completed = False
-        with patch('views.einstellungen_widget.service_container') as mock_sc:
-            mock_sc.get_dialog_service.return_value = Mock()
-            with patch('functions.character_advancement.increase_aufstiege') as mock_fn:
-                widget.erhoehe_aufstieg()
-                mock_fn.assert_not_called()
-
-    def test_senke_aufstieg(self):
-        """senke_aufstieg ruft decrease_aufstiege auf wenn char_gen_completed"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter.char_gen_completed = True
-        mocks['app'].controller.charakter.verbleibende_aufstiege = 1
-        mocks['app'].controller.charakter.aufstiege_gesamt = 1
-        with patch('functions.character_advancement.decrease_aufstiege') as mock_fn:
-            widget.senke_aufstieg()
-            mock_fn.assert_called_once_with(mocks['app'].controller.charakter)
-
-    def test_senke_aufstieg_gen_nicht_abgeschlossen(self):
-        """senke_aufstieg zeigt Warnung wenn Generierung nicht abgeschlossen"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter.char_gen_completed = False
-        with patch('views.einstellungen_widget.service_container') as mock_sc:
-            mock_sc.get_dialog_service.return_value = Mock()
-            with patch('functions.character_advancement.decrease_aufstiege') as mock_fn:
-                widget.senke_aufstieg()
-                mock_fn.assert_not_called()
-
-    def test_erhoehe_aufstieg_no_controller(self):
-        """erhoehe_aufstieg kehrt zurück wenn kein Controller"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller = None
-        widget.erhoehe_aufstieg()
-
-    def test_senke_aufstieg_no_charakter(self):
-        """senke_aufstieg kehrt zurück wenn kein Charakter"""
-        widget, mocks = _create_widget()
-        mocks['app'].controller.charakter = None
-        widget.senke_aufstieg()
 
 
 class TestEinstellungenWidgetDialoge(unittest.TestCase):
@@ -428,20 +274,6 @@ class TestEinstellungenWidgetDialoge(unittest.TestCase):
         mock_dialog_service = Mock()
         mocks['service_container'].get_dialog_service.return_value = mock_dialog_service
         return widget, mocks, mock_dialog_service
-
-    def test_open_add_setting_popup(self):
-        """open_add_setting_popup delegiert an DialogService"""
-        widget, mocks, ds = self._make_widget_with_dialog_service()
-        with patch('views.einstellungen_widget.service_container', mocks['service_container']):
-            widget.open_add_setting_popup()
-            ds.open_add_setting_popup.assert_called_once()
-
-    def test_open_delete_setting_popup(self):
-        """open_delete_setting_popup delegiert an DialogService"""
-        widget, mocks, ds = self._make_widget_with_dialog_service()
-        with patch('views.einstellungen_widget.service_container', mocks['service_container']):
-            widget.open_delete_setting_popup()
-            ds.open_delete_setting_popup.assert_called_once()
 
     def test_open_add_volk_dialog(self):
         """open_add_volk_dialog delegiert an DialogService"""
@@ -575,16 +407,10 @@ class TestEinstellungenWidgetDialoge(unittest.TestCase):
         mocks['service_container'].get_dialog_service.return_value = None
         with patch('views.einstellungen_widget.service_container', mocks['service_container']), \
              patch('views.einstellungen_widget.Logger') as mock_logger:
-            widget.open_add_setting_popup()
+            widget.open_add_volk_dialog()
             mock_logger.warning.assert_called_with(
-                "DialogService nicht verfügbar - Setting hinzufügen nicht möglich"
+                "DialogService nicht verfügbar - Volk hinzufügen nicht möglich"
             )
-
-    def test_open_setting_switch_options_delegates_to_handler(self):
-        """open_setting_switch_options delegiert an GameElementsHandler"""
-        widget, mocks = _create_widget()
-        widget.open_setting_switch_options()
-        mocks['game_elements_handler'].open_setting_switch_options.assert_called_once()
 
 
 class TestEinstellungenWidgetLog(unittest.TestCase):
