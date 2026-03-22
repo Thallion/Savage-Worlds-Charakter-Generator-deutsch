@@ -8,7 +8,7 @@ Verantwortlich für: Charakter-CRUD, PDF-Export, Statblock,
 
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
+from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
@@ -229,34 +229,25 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         search_field.bind(text=populate_list)
         populate_list()
 
-        # Button-Zeile
-        button_row = MDBoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-            height=dp(48),
-            spacing=dp(8),
-        )
-        button_row.add_widget(MDBoxLayout(size_hint_x=1))
-        btn_cancel = MDButton(
-            MDButtonText(text="Abbrechen"),
-            style="text",
-            on_release=lambda x: self._wizard_setting_dialog.dismiss(),
-        )
-        btn_next = MDButton(
-            MDButtonText(text="Weiter"),
-            style="text",
-            on_release=lambda x: self._on_setting_selected(),
-        )
-        button_row.add_widget(btn_cancel)
-        button_row.add_widget(btn_next)
-        dialog_content.add_widget(button_row)
-
         self._wizard_setting_dialog = MDDialog(
             MDDialogHeadlineText(text="Setting auswählen"),
             MDDialogContentContainer(
                 dialog_content,
                 orientation="vertical",
                 padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._wizard_setting_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Weiter"),
+                    style="text",
+                    on_release=lambda x: self._on_setting_selected(),
+                ),
+                spacing="8dp",
             ),
             size_hint=(0.85, None),
             auto_dismiss=False,
@@ -341,34 +332,25 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         money_row.add_widget(self._wizard_currency_field)
         dialog_content.add_widget(money_row)
 
-        # Button-Zeile
-        button_row = MDBoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-            height=dp(48),
-            spacing=dp(8),
-        )
-        button_row.add_widget(MDBoxLayout(size_hint_x=1))
-        btn_back = MDButton(
-            MDButtonText(text="Zurück"),
-            style="text",
-            on_release=lambda x: self._defocus_and_call(self._on_config_back),
-        )
-        btn_next = MDButton(
-            MDButtonText(text="Weiter"),
-            style="text",
-            on_release=lambda x: self._defocus_and_call(self._on_config_confirmed),
-        )
-        button_row.add_widget(btn_back)
-        button_row.add_widget(btn_next)
-        dialog_content.add_widget(button_row)
-
         self._wizard_config_dialog = MDDialog(
             MDDialogHeadlineText(text="Charakter-Einstellungen"),
             MDDialogContentContainer(
                 dialog_content,
                 orientation="vertical",
                 padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Zurück"),
+                    style="text",
+                    on_release=lambda x: self._defocus_and_call(self._on_config_back),
+                ),
+                MDButton(
+                    MDButtonText(text="Weiter"),
+                    style="text",
+                    on_release=lambda x: self._defocus_and_call(self._on_config_confirmed),
+                ),
+                spacing="8dp",
             ),
             size_hint=(0.85, None),
             auto_dismiss=False,
