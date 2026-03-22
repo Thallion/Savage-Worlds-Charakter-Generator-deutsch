@@ -623,6 +623,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 Logger.info(f"Charakterbogen geöffnet: {file_url}")
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen des Charakterbogens: {e}")
+            if self.dialog_service:
+                self.dialog_service.show_error_dialog(
+                    f"Fehler beim Öffnen: {e}"
+                )
 
     def zeige_statblock(self):
         """Zeigt Statblock an"""

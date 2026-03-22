@@ -182,6 +182,10 @@ class HTMLManager:
             chars_dir = self.file_service.get_default_directory('chars')
             self.file_service.show_file_manager(chars_dir, "save_html_dir")
 
+    # Klassen-Variable für den lokalen HTTP-Server (wird wiederverwendet)
+    _http_server = None
+    _http_server_port = None
+
     def _open_in_browser(self, html_path):
         """Öffnet die HTML-Datei im Standard-Browser (plattformspezifisch)"""
         try:
@@ -201,40 +205,105 @@ class HTMLManager:
 
     @staticmethod
     def _open_file_on_android(file_path, mime_type='*/*'):
-        """Öffnet eine Datei auf Android über mehrere Fallback-Strategien"""
+        """Öffnet eine Datei auf Android über mehrere Fallback-Strategien.
+
+        Für HTML-Dateien wird bevorzugt ein lokaler HTTP-Server gestartet und
+        die Datei über webbrowser.open() mit http://localhost geöffnet.
+        Das funktioniert zuverlässig auf allen Android-Versionen, da
+        webbrowser.open() mit HTTP-URLs nachweislich funktioniert (wie im Info-Screen).
+        """
         import os
 
         if not os.path.exists(file_path):
             Logger.error(f"Android: Datei nicht gefunden: {file_path}")
             return
 
-        # Strategie 1: Intent mit FileProvider (Android 7+)
+        # Strategie 1: Lokaler HTTP-Server + webbrowser.open() (für HTML)
+        # webbrowser.open() funktioniert auf Android mit HTTP-URLs einwandfrei
+        if mime_type == 'text/html':
+            try:
+                HTMLManager._open_via_localhost(file_path)
+                return
+            except Exception as e:
+                Logger.warning(f"Android: Localhost-Strategie fehlgeschlagen: {e}")
+
+        # Strategie 2: Intent mit FileProvider (Android 7+)
         try:
             HTMLManager._open_with_fileprovider(file_path, mime_type)
             return
         except Exception as e:
             Logger.warning(f"Android: FileProvider fehlgeschlagen: {e}")
 
-        # Strategie 2: Intent mit file:// URI (ältere Android-Versionen)
+        # Strategie 3: Intent mit file:// URI (ältere Android-Versionen)
         try:
             HTMLManager._open_with_file_uri(file_path, mime_type)
             return
         except Exception as e:
             Logger.warning(f"Android: file:// URI fehlgeschlagen: {e}")
 
-        # Strategie 3: Für HTML - Inhalt in WebView anzeigen
-        if mime_type == 'text/html':
-            try:
-                HTMLManager._open_html_in_webview(file_path)
-                return
-            except Exception as e:
-                Logger.warning(f"Android: WebView fehlgeschlagen: {e}")
-
         # Strategie 4: Android Share-Intent als letzter Fallback
         try:
             HTMLManager._share_file_on_android(file_path, mime_type)
         except Exception as e:
             Logger.error(f"Android: Alle Öffnungs-Strategien fehlgeschlagen: {e}")
+
+    @staticmethod
+    def _open_via_localhost(file_path):
+        """Öffnet eine HTML-Datei über einen lokalen HTTP-Server im Browser.
+
+        Startet einen einfachen HTTP-Server im Hintergrund, der die Datei
+        über http://localhost serviert. webbrowser.open() funktioniert auf
+        Android zuverlässig mit HTTP-URLs (wie die Links im Info-Screen).
+        """
+        import os
+        import threading
+        from http.server import HTTPServer, SimpleHTTPRequestHandler
+        import urllib.parse
+
+        abs_path = os.path.abspath(file_path)
+        serve_dir = os.path.dirname(abs_path)
+        filename = os.path.basename(abs_path)
+
+        # Falls bereits ein Server läuft, diesen stoppen
+        if HTMLManager._http_server is not None:
+            try:
+                HTMLManager._http_server.shutdown()
+            except Exception:
+                pass
+            HTMLManager._http_server = None
+
+        # Freien Port finden und Server starten
+        server = HTTPServer(('127.0.0.1', 0), lambda *args, **kwargs:
+            SimpleHTTPRequestHandler(*args, directory=serve_dir, **kwargs))
+        port = server.server_address[1]
+
+        HTMLManager._http_server = server
+        HTMLManager._http_server_port = port
+
+        # Server im Hintergrund-Thread starten
+        server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+        server_thread.start()
+
+        # URL zusammenbauen und im Browser öffnen
+        encoded_name = urllib.parse.quote(filename)
+        url = f"http://127.0.0.1:{port}/{encoded_name}"
+        Logger.info(f"Android: HTML-Server gestartet auf Port {port}, öffne {url}")
+        webbrowser.open(url)
+
+        # Server nach 5 Minuten automatisch stoppen (Aufräumen)
+        def auto_shutdown():
+            import time
+            time.sleep(300)
+            try:
+                if HTMLManager._http_server is server:
+                    server.shutdown()
+                    HTMLManager._http_server = None
+                    Logger.info("Android: HTML-Server automatisch gestoppt")
+            except Exception:
+                pass
+
+        cleanup_thread = threading.Thread(target=auto_shutdown, daemon=True)
+        cleanup_thread.start()
 
     @staticmethod
     def _open_with_fileprovider(file_path, mime_type):
@@ -279,47 +348,6 @@ class HTMLManager:
 
         context.startActivity(intent)
         Logger.info(f"Android: Datei geöffnet via file:// URI: {file_path}")
-
-    @staticmethod
-    def _open_html_in_webview(file_path):
-        """Öffnet eine HTML-Datei in einem Android WebView"""
-        from jnius import autoclass
-        from android.runnable import run_on_ui_thread
-
-        PythonActivity = autoclass('org.kivy.android.PythonActivity')
-        WebView = autoclass('android.webkit.WebView')
-        WebViewClient = autoclass('android.webkit.WebViewClient')
-        LayoutParams = autoclass('android.widget.LinearLayout$LayoutParams')
-        AlertDialog = autoclass('android.app.AlertDialog$Builder')
-
-        activity = PythonActivity.mActivity
-
-        @run_on_ui_thread
-        def show_webview():
-            webview = WebView(activity)
-            webview.getSettings().setJavaScriptEnabled(True)
-            webview.getSettings().setBuiltInZoomControls(True)
-            webview.getSettings().setDisplayZoomControls(False)
-            webview.getSettings().setLoadWithOverviewMode(True)
-            webview.getSettings().setUseWideViewPort(True)
-            webview.setWebViewClient(WebViewClient())
-            webview.loadUrl('file://' + file_path)
-
-            params = LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT
-            )
-            webview.setLayoutParams(params)
-
-            builder = AlertDialog(activity)
-            builder.setView(webview)
-            builder.setPositiveButton("Schließen", None)
-            builder.setCancelable(True)
-            dialog = builder.create()
-            dialog.show()
-
-        show_webview()
-        Logger.info(f"Android: HTML in WebView geöffnet: {file_path}")
 
     @staticmethod
     def _share_file_on_android(file_path, mime_type):
