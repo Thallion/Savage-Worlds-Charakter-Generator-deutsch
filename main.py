@@ -1295,10 +1295,14 @@ class SW_Charakter_GeneratorApp(MDApp):
 
     def set_navigation_mode(self, mobile):
         """
-        Wechselt zwischen Desktop-Tabs und mobiler NavigationRail
+        Wechselt zwischen Desktop-Tabs und mobiler Navigation.
+
+        Desktop: Immer obere Tab-Leiste, keine Bottom-Bar, kein Rail.
+        Mobile Portrait: Bottom-Bar (kein Rail, keine Tabs).
+        Mobile Landscape: NavigationRail (keine Bottom-Bar, keine Tabs).
 
         Args:
-            mobile (bool): True für NavigationRail, False für Tabs
+            mobile (bool): True für mobile Navigation, False für Desktop-Tabs
         """
         try:
             if self._mobile_modus_active == mobile:
@@ -1313,6 +1317,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             tab_content_box = root.ids.get('tab_content_box')
             screen_manager = root.ids.get('tabs_carousel')
             menu_toggle = root.ids.get('menu_toggle_container')
+            bottom_bar = root.ids.get('bottom_bar_container')
 
             if not all([tabs_container, nav_rail_container, tab_content_box]):
                 Logger.warning("Layout-Elemente für Moduswechsel nicht verfügbar")
@@ -1337,38 +1342,25 @@ class SW_Charakter_GeneratorApp(MDApp):
                 tabs_container.height = 0
                 tabs_container.opacity = 0
 
-                # Menü-Toggle-Button immer verstecken (ersetzt durch FAB)
+                # Menü-Toggle-Button verstecken
                 if menu_toggle:
                     menu_toggle.width = 0
                     menu_toggle.opacity = 0
 
-                # Orientierung prüfen: Portrait vs. Landscape
-                # Auf Desktop immer Rail anzeigen, Bottom-Bar immer anzeigen
-                from kivy.utils import platform as _platform
-                if _platform == 'android':
-                    # Android: Bottom-Bar nur in Portrait, Rail nur in Landscape
-                    self._update_mobile_orientation()
-                else:
-                    # Desktop: Rail immer anzeigen, Bottom-Bar immer anzeigen
-                    nav_rail_container.width = dp(72)
-                    nav_rail_container.opacity = 1
-                    self._nav_rail_visible = True
-                    bottom_bar = root.ids.get('bottom_bar_container')
-                    if bottom_bar:
-                        bottom_bar.height = dp(56)
-                        bottom_bar.opacity = 1
+                # Orientierung bestimmt ob Rail oder Bottom-Bar
+                self._update_mobile_orientation()
 
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
 
                 # Pointbar auf Smartphone weiter runter (Statusbar/Notch-Abstand)
+                from kivy.utils import platform as _platform
                 if _platform == 'android':
                     main_content_area = root.ids.get('main_content_area')
                     if main_content_area:
                         main_content_area.padding = [0, self._android_top_padding, 0, 0]
 
-                # Swipe nur auf Android aktivieren
-                if _platform == 'android':
+                    # Swipe nur auf Android aktivieren
                     if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
                         screen_manager.swipe_enabled = True
 
@@ -1377,7 +1369,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                     self._set_active_rail_item(current_index)
                 self._set_active_bottom_nav_item(current_index)
 
-                Logger.info("Vertikales Menü aktiviert (NavigationRail + Bottom-Nav)")
+                Logger.info("Mobile Navigation aktiviert")
             else:
                 # NavigationRail verstecken
                 nav_rail_container.width = 0
@@ -1390,7 +1382,6 @@ class SW_Charakter_GeneratorApp(MDApp):
                     menu_toggle.opacity = 0
 
                 # Bottom-Bar verstecken
-                bottom_bar = root.ids.get('bottom_bar_container')
                 if bottom_bar:
                     bottom_bar.height = 0
                     bottom_bar.opacity = 0
@@ -1410,27 +1401,36 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if current_index < len(self.tab_items):
                     self.tab_items[current_index].active = True
 
-                Logger.info("Horizontales Menü aktiviert (Tabs)")
+                Logger.info("Desktop-Tabs aktiviert")
 
         except Exception as e:
             Logger.error(f"Fehler beim Moduswechsel: {str(e)}", exc_info=True)
 
     def _apply_initial_navigation_mode(self):
-        """Wendet den initialen Navigationsmodus basierend auf Config an"""
+        """Wendet den initialen Navigationsmodus basierend auf Config an.
+
+        Desktop: Immer Tabs, außer mobile_modus in Config ist True.
+        Android: Immer mobile Navigation (Bottom-Bar/Rail je nach Orientierung).
+        """
         try:
+            from kivy.utils import platform as _platform
             from services.service_container import get_config_service
             config_service = get_config_service()
 
             if config_service:
                 mobile_modus = config_service.get('mobile_modus', False)
-                if mobile_modus:
+
+                if _platform == 'android':
+                    # Android: Immer mobile Navigation
+                    self._mobile_modus_override = True
+                    self.set_navigation_mode(True)
+                    Logger.info("Android: Mobile Navigation aktiviert")
+                elif mobile_modus:
+                    # Desktop mit explizit aktiviertem Mobile-Modus (Einstellungen)
                     self._mobile_modus_override = True
                     self.set_navigation_mode(True)
                     Logger.info("Mobiler Modus aus Config geladen")
-                else:
-                    # Automatische Erkennung basierend auf Fensterbreite
-                    if Window.width < dp(800):
-                        self.set_navigation_mode(True)
+                # else: Desktop bleibt im Tab-Modus (Standard)
 
                 # Logger-Sichtbarkeit aus Config laden
                 show_logger = config_service.get('show_logger', True)
@@ -1551,25 +1551,16 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.warning(f"Android Top-Padding Erkennung fehlgeschlagen: {e}, verwende Fallback")
 
     def _on_window_resize(self, instance, width, height):
-        """Automatischer Moduswechsel basierend auf Fensterbreite"""
+        """Reagiert auf Fenster-Resize.
+
+        Desktop: Kein automatischer Moduswechsel (Tabs bleiben immer).
+        Android/Mobile: Orientierung aktualisieren (Portrait ↔ Landscape).
+        """
         try:
             from kivy.utils import platform as _platform
 
-            if self._mobile_modus_override is not None:
-                # Bei manuellem Override nicht automatisch wechseln
-                if _platform == 'android' and self._mobile_modus_active:
-                    self._update_mobile_orientation()
-                return
-
-            if width < dp(800):
-                self.set_navigation_mode(True)
-            else:
-                self.set_navigation_mode(False)
-
-            # Orientierung auf Android immer aktualisieren (Portrait/Landscape-Wechsel)
-            # set_navigation_mode hat einen Guard der bei gleichem Modus zurückkehrt,
-            # daher muss _update_mobile_orientation separat aufgerufen werden
-            if _platform == 'android' and self._mobile_modus_active:
+            # Auf Android/Mobile: Orientierung bei Rotation aktualisieren
+            if self._mobile_modus_active:
                 self._update_mobile_orientation()
 
         except Exception as e:
