@@ -45,26 +45,26 @@
     md_bg_color: app.theme_cls.backgroundColor
 
     # Status-Button: immer sichtbar, über der Pointbar
-    MDBoxLayout:
+    TouchableBoxLayout:
         id: char_gen_bar
         orientation: 'horizontal'
         size_hint_y: None
-        height: dp(32)
-        padding: [dp(8), dp(2), dp(8), dp(2)]
+        height: dp(40)
+        padding: [dp(12), dp(4), dp(12), dp(4)]
+        spacing: dp(8)
         md_bg_color: app.theme_cls.surfaceContainerHighColor if not root.char_gen_completed else app.theme_cls.primaryContainerColor
+        on_release: root.toggle_char_gen_completed()
 
-        MDButton:
-            id: char_gen_status_button
-            style: "text"
-            size_hint_x: 1
-            on_release: root.toggle_char_gen_completed()
+        MDIcon:
+            icon: "check-circle" if root.char_gen_completed else "progress-wrench"
+            size_hint: None, None
+            size: dp(24), dp(24)
+            pos_hint: {'center_y': 0.5}
 
-            MDButtonIcon:
-                icon: "check-circle" if root.char_gen_completed else "progress-wrench"
-
-            MDButtonText:
-                text: "Aufstiege freigeschaltet" if root.char_gen_completed else "Erstellung abschließen"
-                font_size: dp(11)
+        MDLabel:
+            text: "Aufstiege freigeschaltet" if root.char_gen_completed else "Erstellung abschließen"
+            font_size: dp(12)
+            pos_hint: {'center_y': 0.5}
 
     MDExpansionPanel:
         id: expansion_panel
@@ -194,26 +194,3 @@
                 value_text: root.vermoegen_text
                 key_width_ratio: 0.50
 
-            # Trennlinie vor Status-Button
-            MDDivider:
-                size_hint_y: None
-                height: dp(1)
-
-            # Status-Button: Charaktergenerierung abschließen
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: dp(40)
-                padding: [dp(16), dp(4), dp(8), dp(4)]
-
-                MDButton:
-                    id: char_gen_status_button
-                    style: "tonal" if not root.char_gen_completed else "filled"
-                    size_hint_x: 1
-                    on_release: root.toggle_char_gen_completed()
-
-                    MDButtonIcon:
-                        icon: "check-circle" if root.char_gen_completed else "progress-wrench"
-
-                    MDButtonText:
-                        text: "Aufstiege freigeschaltet" if root.char_gen_completed else "Erstellung abschließen"

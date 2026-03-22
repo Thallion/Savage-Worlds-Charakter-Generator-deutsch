@@ -209,7 +209,7 @@ class GenerationPointsBar(MDBoxLayout):
 
             # Generierungsstatus
             self.charakter.bind(char_gen_completed=self._update_char_gen_status)
-            
+
             Logger.info("GenerationPointsBar erfolgreich mit Charakter-Properties verbunden")
         except Exception as e:
             Logger.error(f"Fehler beim Binden der Charakter-Properties: {str(e)}")
