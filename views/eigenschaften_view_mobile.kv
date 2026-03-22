@@ -23,17 +23,6 @@
             padding: [dp(8), dp(6), dp(8), dp(6)]
             spacing: dp(4)
 
-            # Charaktergenerierung abschließen Button
-            MDButton:
-                id: char_gen_button
-                size_hint_x: 1
-                on_release: root.toggle_char_gen_completed()
-
-                MDButtonText:
-                    text: "Generierung abschließen" if not root.char_gen_completed else "Generierung aktivieren"
-                    theme_text_color: "Primary" if not root.char_gen_completed else "Custom"
-                    text_color: self.theme_cls.primaryColor if root.char_gen_completed else self.theme_cls.onSurfaceColor
-
             MDLabel:
                 text: 'Attribute'
                 size_hint: (1, None)

@@ -295,33 +295,63 @@
                         MDButtonText:
                             text: 'Erhöhe Startkapital mit Handicap-Punkten'
 
-                    MDGridLayout:
-                        cols: 2
-                        spacing: dp(8)
+                    # Generierungsstatus und Aufstiege
+                    MDBoxLayout:
+                        orientation: 'vertical'
                         size_hint_y: None
-                        height: dp(48)
+                        height: self.minimum_height
+                        spacing: dp(8)
+
+                        MDLabel:
+                            text: "Schließe die Charaktererstellung ab, um Aufstiege und Rang-Fortschritt freizuschalten."
+                            size_hint_y: None
+                            height: dp(36)
+                            font_size: dp(12)
+                            theme_text_color: "Secondary"
+                            opacity: 0 if root.char_gen_completed else 1
+                            size_hint_y: None
+                            height: dp(36) if not root.char_gen_completed else 0
 
                         MDButton:
-                            style: "tonal"
-                            size_hint_x: 1
-                            on_release: root.erhoehe_aufstieg()
+                            id: char_gen_toggle_button
+                            style: "filled" if not root.char_gen_completed else "outlined"
+                            size_hint: None, None
+                            size: dp(300), dp(40)
+                            on_release: root.toggle_char_gen_completed()
 
                             MDButtonIcon:
-                                icon: "plus"
+                                icon: "check-circle" if root.char_gen_completed else "progress-wrench"
 
                             MDButtonText:
-                                text: "Aufstieg"
+                                text: "Erstellung abschließen" if not root.char_gen_completed else "Zurück zur Erstellung"
 
-                        MDButton:
-                            style: "outlined"
-                            size_hint_x: 1
-                            on_release: root.senke_aufstieg()
+                        MDGridLayout:
+                            cols: 2
+                            spacing: dp(8)
+                            size_hint_y: None
+                            height: dp(48)
 
-                            MDButtonIcon:
-                                icon: "minus"
+                            MDButton:
+                                style: "tonal"
+                                size_hint_x: 1
+                                on_release: root.erhoehe_aufstieg()
 
-                            MDButtonText:
-                                text: "Abstieg"
+                                MDButtonIcon:
+                                    icon: "plus"
+
+                                MDButtonText:
+                                    text: "Aufstieg"
+
+                            MDButton:
+                                style: "outlined"
+                                size_hint_x: 1
+                                on_release: root.senke_aufstieg()
+
+                                MDButtonIcon:
+                                    icon: "minus"
+
+                                MDButtonText:
+                                    text: "Abstieg"
 
             # ===== Setting-Verwaltung =====
             MDCard:

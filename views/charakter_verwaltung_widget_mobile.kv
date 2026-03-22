@@ -244,6 +244,26 @@
                     MDButtonText:
                         text: 'Startkapital + Handicap-Pkt.'
 
+                MDLabel:
+                    text: "Schließe die Erstellung ab, um Aufstiege freizuschalten."
+                    size_hint_y: None
+                    height: dp(28) if not root.char_gen_completed else 0
+                    font_size: dp(11)
+                    theme_text_color: "Secondary"
+                    opacity: 0 if root.char_gen_completed else 1
+
+                MDButton:
+                    id: char_gen_toggle_button
+                    style: "filled" if not root.char_gen_completed else "outlined"
+                    size_hint_x: 1
+                    on_release: root.toggle_char_gen_completed()
+
+                    MDButtonIcon:
+                        icon: "check-circle" if root.char_gen_completed else "progress-wrench"
+
+                    MDButtonText:
+                        text: "Erstellung abschließen" if not root.char_gen_completed else "Zurück zur Erstellung"
+
                 MDGridLayout:
                     cols: 2
                     spacing: dp(8)

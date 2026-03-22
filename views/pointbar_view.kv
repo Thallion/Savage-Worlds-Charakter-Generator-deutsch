@@ -67,6 +67,22 @@
             text_size: self.size
             size_hint_x: 1
 
+        # Status-Button: Charaktergenerierung abschließen / Aufstiege aktiv
+        MDButton:
+            id: char_gen_status_button
+            style: "tonal" if not root.char_gen_completed else "filled"
+            size_hint: None, None
+            size: dp(220), dp(36)
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_char_gen_completed()
+
+            MDButtonIcon:
+                icon: "check-circle" if root.char_gen_completed else "progress-wrench"
+
+            MDButtonText:
+                text: "Aufstiege freigeschaltet" if root.char_gen_completed else "Erstellung abschließen"
+                font_size: dp(11)
+
         # Chevron-Button
         MDIconButton:
             id: chevron_icon

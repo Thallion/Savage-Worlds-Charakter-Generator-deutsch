@@ -17,28 +17,6 @@
             padding: "20dp"
             spacing: "10dp"
 
-            # Hinzugefügte Checkbox für die manuelle Steuerung des char_gen_completed-Status
-            # MDBoxLayout für die feste Positionierung
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: dp(48)
-                spacing: dp(10)
-                size_hint_x: None
-                width: dp(300)  # Feste Breite statt dynamischer Berechnung
-
-                # Button für "Charaktergenerierung abgeschlossen" (Android Checkbox Workaround)
-                MDButton:
-                    id: char_gen_button
-                    size_hint_x: 1
-                    on_release: root.toggle_char_gen_completed()
-                    pos_hint: {"center_y": .5}
-                    
-                    MDButtonText:
-                        text: "Charaktergenerierung abschließen" if not root.char_gen_completed else "Charaktergenerierung aktivieren"
-                        theme_text_color: "Primary" if not root.char_gen_completed else "Custom"
-                        text_color: self.theme_cls.primaryColor if root.char_gen_completed else self.theme_cls.onSurfaceColor
-
             MDLabel:
                 text: 'Attribute'
                 size_hint: (1, None)
