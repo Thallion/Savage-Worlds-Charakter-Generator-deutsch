@@ -38,6 +38,7 @@ from kivymd.uix.tab import (
     MDTabsCarousel,
 )
 from kivymd.uix.label import MDLabel, MDIcon
+from kivymd.uix.button import MDIconButton
 
 from controllers.charakter_controller import CharakterController
 from models.charakter import Charakter
@@ -131,6 +132,8 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         # NavigationRail-Items und Modus-Tracking
         self.rail_items = []
+        self._bottom_nav_items = []  # Bottom-Navigation-Items für Portrait-Modus
+        self._bottom_nav_tab_indices = []  # Tab-Indices der Bottom-Nav-Items
         self._mobile_modus_active = False
         self._mobile_modus_override = None  # None = automatisch, True/False = manuell
         self._nav_rail_visible = False  # NavigationRail Sichtbarkeit im Mobile-Modus
@@ -506,8 +509,9 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             Logger.info(f"=== {len(self.tab_definitions)} Tabs und Screens erfolgreich erstellt ===")
 
-            # NavigationRail aufbauen und initialen Modus setzen
+            # NavigationRail und Bottom-Navigation aufbauen und initialen Modus setzen
             self.build_navigation_rail()
+            self.build_bottom_navigation()
             self._setup_swipe_navigation(screen_manager)
             self._apply_initial_navigation_mode()
 
@@ -626,8 +630,9 @@ class SW_Charakter_GeneratorApp(MDApp):
             tab_name = self.tab_definitions[tab_index][1] if tab_index < len(self.tab_definitions) else "Unknown"
             Logger.info(f"Tab-Wechsel zu Index {tab_index}: {tab_name}")
 
-            # Tab-Index tracken
+            # Tab-Index tracken und Bottom-Nav aktualisieren
             self._current_tab_index = tab_index
+            self._set_active_bottom_nav_item(tab_index)
 
             # ScreenManager-Screen setzen
             root = self.root
@@ -800,6 +805,418 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der NavigationRail: {str(e)}", exc_info=True)
 
+    def build_bottom_navigation(self):
+        """Erstellt die Bottom-Navigation-Leiste für den Portrait-Modus.
+
+        Zeigt die 5 wichtigsten Screens direkt und einen 'Mehr'-Button
+        für alle weiteren Screens.
+        """
+        try:
+            root = self.root
+            if not root:
+                return
+
+            bottom_nav_box = root.ids.get('bottom_nav_box')
+            if not bottom_nav_box:
+                Logger.warning("bottom_nav_box nicht im Layout gefunden")
+                return
+
+            bottom_nav_box.clear_widgets()
+            self._bottom_nav_items = []
+            self._bottom_nav_tab_indices = []
+
+            # Die 5 wichtigsten Tabs für direkte Bottom-Navigation
+            # (Index in tab_definitions, Icon, Kurzname)
+            bottom_nav_definitions = [
+                (3,  "account-details",  "Profil"),
+                (4,  "arm-flex",         "Werte"),
+                (6,  "star-circle",      "Talente"),
+                (9,  "shield-sword",     "Ausrüst."),
+                (10, "account",          "Bogen"),
+            ]
+
+            for tab_index, icon_str, short_label in bottom_nav_definitions:
+                item = MDBoxLayout(
+                    orientation='vertical',
+                    size_hint=(1, 1),
+                    padding=[0, dp(2), 0, 0],
+                )
+                item._bottom_nav_tab_index = tab_index
+
+                icon = MDIcon(
+                    icon=icon_str,
+                    halign='center',
+                    pos_hint={'center_x': 0.5},
+                    size_hint_y=None,
+                    height=dp(24),
+                )
+                icon._is_nav_icon = True
+
+                label = MDLabel(
+                    text=short_label,
+                    halign='center',
+                    font_style='Label',
+                    role='small',
+                    size_hint_y=None,
+                    height=dp(16),
+                )
+                label._is_nav_label = True
+
+                item.add_widget(icon)
+                item.add_widget(label)
+                item.bind(on_touch_up=self._on_bottom_nav_touch)
+
+                bottom_nav_box.add_widget(item)
+                self._bottom_nav_items.append(item)
+                self._bottom_nav_tab_indices.append(tab_index)
+
+            # "Mehr"-Button hinzufügen
+            mehr_item = MDBoxLayout(
+                orientation='vertical',
+                size_hint=(1, 1),
+                padding=[0, dp(2), 0, 0],
+            )
+            mehr_item._bottom_nav_tab_index = -1  # Spezialwert für "Mehr"
+
+            mehr_icon = MDIcon(
+                icon="dots-horizontal",
+                halign='center',
+                pos_hint={'center_x': 0.5},
+                size_hint_y=None,
+                height=dp(24),
+            )
+            mehr_icon._is_nav_icon = True
+
+            mehr_label = MDLabel(
+                text="Mehr",
+                halign='center',
+                font_style='Label',
+                role='small',
+                size_hint_y=None,
+                height=dp(16),
+            )
+            mehr_label._is_nav_label = True
+
+            mehr_item.add_widget(mehr_icon)
+            mehr_item.add_widget(mehr_label)
+            mehr_item.bind(on_touch_up=self._on_bottom_nav_touch)
+
+            bottom_nav_box.add_widget(mehr_item)
+            self._bottom_nav_items.append(mehr_item)
+
+            Logger.info(f"Bottom-Navigation mit {len(self._bottom_nav_items)} Items erstellt")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen der Bottom-Navigation: {str(e)}", exc_info=True)
+
+    def _on_bottom_nav_touch(self, item, touch):
+        """Callback wenn ein Bottom-Nav-Item angetippt wird"""
+        if not item.collide_point(*touch.pos):
+            return False
+
+        # Scroll-Gesten ignorieren
+        if hasattr(touch, 'is_mouse_scrolling') and touch.is_mouse_scrolling:
+            return False
+
+        # Debounce
+        import time as _time
+        now = _time.time()
+        if now - self._last_rail_touch_time < 0.3:
+            return True
+        self._last_rail_touch_time = now
+
+        try:
+            tab_index = item._bottom_nav_tab_index
+
+            if tab_index == -1:
+                # "Mehr"-Button: Alle Screens anzeigen
+                self._show_more_screens_popup()
+                return True
+
+            # Zum Screen wechseln
+            root = self.root
+            if not root:
+                return False
+
+            screen_manager = root.ids.get('tabs_carousel')
+            if not screen_manager:
+                return False
+
+            if 0 <= tab_index < len(self.tab_definitions):
+                tab_text = self.tab_definitions[tab_index][1]
+                clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+                screen_name = f"screen_{tab_index}_{clean_name}"
+
+                screen_manager.transition = NoTransition()
+                try:
+                    screen_manager.get_screen(screen_name)
+                    screen_manager.current = screen_name
+                except Exception:
+                    Logger.warning(f"Screen '{screen_name}' nicht gefunden")
+                    return True
+
+                self._current_tab_index = tab_index
+                self._set_active_bottom_nav_item(tab_index)
+                self._set_active_rail_item(tab_index)
+                self.update_active_screen(tab_index)
+
+                Logger.info(f"Bottom-Nav-Wechsel zu: {tab_text}")
+
+            return True
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Bottom-Nav-Wechsel: {str(e)}")
+            return False
+
+    def _set_active_bottom_nav_item(self, active_tab_index):
+        """Hebt das aktive Bottom-Nav-Item visuell hervor"""
+        try:
+            for item in self._bottom_nav_items:
+                tab_idx = getattr(item, '_bottom_nav_tab_index', None)
+                is_active = (tab_idx == active_tab_index)
+                # Aktives Item hervorheben durch Farbe der Icon/Label-Kinder
+                for child in item.children:
+                    if hasattr(child, '_is_nav_icon') and child._is_nav_icon:
+                        if is_active:
+                            child.theme_icon_color = "Custom"
+                            child.icon_color = self.theme_cls.primaryColor
+                        else:
+                            child.theme_icon_color = "Custom"
+                            child.icon_color = self.theme_cls.onSurfaceVariantColor
+                    elif hasattr(child, '_is_nav_label') and child._is_nav_label:
+                        if is_active:
+                            child.theme_text_color = "Custom"
+                            child.text_color = self.theme_cls.primaryColor
+                        else:
+                            child.theme_text_color = "Custom"
+                            child.text_color = self.theme_cls.onSurfaceVariantColor
+        except Exception as e:
+            Logger.debug(f"Fehler bei Bottom-Nav-Highlighting: {e}")
+
+    def _show_more_screens_popup(self):
+        """Zeigt ein Popup mit allen verfügbaren Screens als Grid"""
+        try:
+            from kivy.uix.modalview import ModalView
+            from kivy.uix.gridlayout import GridLayout
+            from kivy.uix.behaviors import ButtonBehavior
+
+            # ModalView erstellen (halbtransparenter Hintergrund)
+            popup = ModalView(
+                size_hint=(1, None),
+                height=dp(420),
+                pos_hint={'y': 0},
+                background_color=(0, 0, 0, 0.5),
+                auto_dismiss=True,
+            )
+
+            # Container mit Hintergrundfarbe
+            container = MDBoxLayout(
+                orientation='vertical',
+                md_bg_color=self.theme_cls.surfaceContainerHighColor,
+                padding=[dp(12), dp(16), dp(12), dp(12)],
+                spacing=dp(8),
+                radius=[dp(20), dp(20), 0, 0],
+            )
+
+            # Titel-Leiste mit Schließen-Button
+            header = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(36),
+            )
+            title_label = MDLabel(
+                text="Alle Screens",
+                font_style='Title',
+                role='medium',
+                halign='left',
+                valign='center',
+            )
+            close_btn = MDIconButton(
+                icon="close",
+                style="standard",
+                size_hint=(None, None),
+                size=(dp(36), dp(36)),
+                pos_hint={'center_y': 0.5},
+                on_release=lambda x: popup.dismiss(),
+            )
+            header.add_widget(title_label)
+            header.add_widget(close_btn)
+            container.add_widget(header)
+
+            # Scrollbarer Grid-Bereich
+            scroll = ScrollView(
+                do_scroll_x=False,
+                do_scroll_y=True,
+            )
+
+            grid = GridLayout(
+                cols=4,
+                size_hint_y=None,
+                spacing=dp(8),
+                padding=[0, dp(8), 0, dp(8)],
+            )
+            grid.bind(minimum_height=grid.setter('height'))
+
+            # Superkräfte-Sichtbarkeit prüfen
+            sk_visible = True
+            try:
+                from functions.superkraft_funktionen import ist_superkraefte_setting
+                setting = getattr(self.controller.charakter, 'active_setting_name', '')
+                sk_visible = ist_superkraefte_setting(setting)
+            except Exception:
+                pass
+
+            for i, (icon_str, tab_text, _) in enumerate(self.tab_definitions):
+                # Superkräfte ausblenden wenn nicht aktiv
+                if tab_text == "Superkräfte" and not sk_visible:
+                    continue
+
+                grid_item = MDBoxLayout(
+                    orientation='vertical',
+                    size_hint_y=None,
+                    height=dp(72),
+                    padding=[dp(4), dp(8), dp(4), dp(4)],
+                    spacing=dp(2),
+                )
+                grid_item._popup_tab_index = i
+
+                # Aktiven Screen hervorheben
+                if i == self._current_tab_index:
+                    grid_item.md_bg_color = self.theme_cls.secondaryContainerColor
+                    grid_item.radius = [dp(12)]
+
+                icon = MDIcon(
+                    icon=icon_str,
+                    halign='center',
+                    pos_hint={'center_x': 0.5},
+                    size_hint_y=None,
+                    height=dp(28),
+                )
+
+                # Kurzname für Grid
+                short_names = {
+                    "Speichern/Laden": "Speichern",
+                    "Einstellungen": "Settings",
+                    "Eigenschaften": "Werte",
+                    "Ausrüstung": "Ausrüst.",
+                    "Superkräfte": "S-Kräfte",
+                }
+                display_name = short_names.get(tab_text, tab_text)
+
+                label = MDLabel(
+                    text=display_name,
+                    halign='center',
+                    font_style='Label',
+                    role='small',
+                    size_hint_y=None,
+                    height=dp(24),
+                    text_size=(dp(80), None),
+                )
+
+                grid_item.add_widget(icon)
+                grid_item.add_widget(label)
+
+                # Touch-Handler mit Closure für Index
+                def make_touch_handler(idx, p):
+                    def handler(inst, touch):
+                        if inst.collide_point(*touch.pos):
+                            p.dismiss()
+                            self._switch_to_tab_from_popup(idx)
+                            return True
+                        return False
+                    return handler
+
+                grid_item.bind(on_touch_up=make_touch_handler(i, popup))
+                grid.add_widget(grid_item)
+
+            scroll.add_widget(grid)
+            container.add_widget(scroll)
+
+            # Schnellaktionen: Speichern + Beenden
+            actions = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(48),
+                spacing=dp(8),
+                padding=[dp(8), dp(4), dp(8), 0],
+            )
+
+            save_item = MDBoxLayout(
+                orientation='horizontal',
+                size_hint=(1, 1),
+                spacing=dp(4),
+            )
+            save_icon = MDIcon(
+                icon="content-save",
+                halign='center',
+                pos_hint={'center_y': 0.5},
+                size_hint_x=None,
+                width=dp(24),
+            )
+            save_label = MDLabel(
+                text="Schnellspeichern",
+                font_style='Label',
+                role='medium',
+                halign='left',
+                valign='center',
+            )
+            save_item.add_widget(save_icon)
+            save_item.add_widget(save_label)
+
+            def on_save_touch(inst, touch):
+                if inst.collide_point(*touch.pos):
+                    popup.dismiss()
+                    self.quick_save()
+                    return True
+                return False
+
+            save_item.bind(on_touch_up=on_save_touch)
+            actions.add_widget(save_item)
+
+            container.add_widget(actions)
+            popup.add_widget(container)
+            popup.open()
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Mehr-Popups: {str(e)}", exc_info=True)
+
+    def _switch_to_tab_from_popup(self, index):
+        """Wechselt zum Tab nach Auswahl im Mehr-Popup"""
+        try:
+            if index < 0 or index >= len(self.tab_definitions):
+                return
+
+            root = self.root
+            if not root:
+                return
+
+            screen_manager = root.ids.get('tabs_carousel')
+            if not screen_manager:
+                return
+
+            tab_text = self.tab_definitions[index][1]
+            clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+            screen_name = f"screen_{index}_{clean_name}"
+
+            screen_manager.transition = NoTransition()
+            try:
+                screen_manager.get_screen(screen_name)
+                screen_manager.current = screen_name
+            except Exception:
+                Logger.warning(f"Screen '{screen_name}' nicht gefunden")
+                return
+
+            self._current_tab_index = index
+            self._set_active_bottom_nav_item(index)
+            if index < len(self.rail_items):
+                self._set_active_rail_item(index)
+            self.update_active_screen(index)
+
+            Logger.info(f"Popup-Wechsel zu: {tab_text}")
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Tab-Wechsel aus Popup: {str(e)}")
+
     def _on_rail_item_touch(self, item, touch):
         """Callback wenn ein Rail-Item losgelassen wird (touch_up).
 
@@ -850,6 +1267,7 @@ class SW_Charakter_GeneratorApp(MDApp):
 
                 # Aktives Item visuell hervorheben
                 self._set_active_rail_item(item_index)
+                self._set_active_bottom_nav_item(item_index)
                 self._current_tab_index = item_index
                 self.update_active_screen(item_index)
 
@@ -954,11 +1372,12 @@ class SW_Charakter_GeneratorApp(MDApp):
                     if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
                         screen_manager.swipe_enabled = True
 
-                # Aktives Rail-Item hervorheben
+                # Aktive Items hervorheben
                 if current_index < len(self.rail_items):
                     self._set_active_rail_item(current_index)
+                self._set_active_bottom_nav_item(current_index)
 
-                Logger.info("Vertikales Menü aktiviert (NavigationRail)")
+                Logger.info("Vertikales Menü aktiviert (NavigationRail + Bottom-Nav)")
             else:
                 # NavigationRail verstecken
                 nav_rail_container.width = 0
@@ -1231,9 +1650,10 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             self._current_tab_index = index
 
-            # NavigationRail-Highlight aktualisieren
+            # NavigationRail- und Bottom-Nav-Highlight aktualisieren
             if index < len(self.rail_items):
                 self._set_active_rail_item(index)
+            self._set_active_bottom_nav_item(index)
 
             # Screen-spezifische Updates
             self.update_active_screen(index)

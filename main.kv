@@ -197,7 +197,7 @@ MDScreen:
                         background_color: (0, 0, 0, 0)
                         foreground_color: (1, 1, 1, 1)
 
-        # ----------------- (3) BOTTOM BAR (Mobile) -----------------
+        # ----------------- (3) BOTTOM NAVIGATION BAR (Mobile Portrait) -----------------
         MDBoxLayout:
             id: bottom_bar_container
             orientation: 'horizontal'
@@ -205,25 +205,10 @@ MDScreen:
             height: 0
             opacity: 0
             md_bg_color: app.theme_cls.surfaceContainerColor
-            padding: [dp(16), 0, dp(16), 0]
+            padding: [0, dp(4), 0, dp(4)]
 
-            MDIconButton:
-                icon: "menu"
-                style: "standard"
-                size_hint_x: 1
-                pos_hint: {'center_y': 0.5}
-                on_release: app.toggle_navigation_rail()
-
-            MDIconButton:
-                icon: "content-save"
-                style: "standard"
-                size_hint_x: 1
-                pos_hint: {'center_y': 0.5}
-                on_release: app.quick_save()
-
-            MDIconButton:
-                icon: "close-circle-outline"
-                style: "standard"
-                size_hint_x: 1
-                pos_hint: {'center_y': 0.5}
-                on_release: app.quit_app()
+            # Bottom-Nav-Items werden dynamisch in build_bottom_navigation() erstellt
+            MDBoxLayout:
+                id: bottom_nav_box
+                orientation: 'horizontal'
+                size_hint: (1, 1)
