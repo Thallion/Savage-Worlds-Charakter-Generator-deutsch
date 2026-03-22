@@ -9,14 +9,15 @@ Moderner, benutzerfreundlicher Charakter-Generator für das Savage Worlds Rollen
 - **Interaktive Benutzeroberfläche** mit Material Design
 - **PDF-Export** für professionelle Charakterbögen
 - **Speichern/Laden** von Charakteren im JSON-Format
-- **Multi-Setting Support** (Deadlands, 50 Fathoms, etc.)
+- **Multi-Setting Support** (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies, Horror Kompendium, Rippers, SciFi Kompendium, Superkräfte Kompendium, 50 Fathoms, Hellfrost)
+- **Android-App** mit optimiertem Mobile-Layout
 
 ### 🎨 UI/UX Features
 - **Dark/Light Theme** Support
-- **Responsive Design** für verschiedene Bildschirmgrößen
-- **Intuitive Navigation** mit Tab-System
+- **Responsive Design** für Desktop und Smartphone (automatische Layout-Erkennung)
+- **Intuitive Navigation** mit Tab-System (Desktop) und Bottom-Navigation (Mobile)
+- **Non-blocking Snackbar-Benachrichtigungen** für Statusmeldungen
 - **Real-time Validation** bei Eingaben
-- **Tooltips und Hilfe-Texte** für Anfänger
 
 ### 🔧 Technische Features
 - **Automatische Punkteverteilung** mit Regelvalidierung
@@ -103,12 +104,19 @@ Savage-Worlds-Charakter-Generator-deutsch/
 ├── main.py                 # Einstiegspunkt der Anwendung
 ├── models/                 # Datenmodelle (Charakter, Attribute, etc.)
 ├── views/                  # UI-Komponenten und Layouts
+│   ├── *_view.py/.kv       # Desktop-Layouts
+│   └── *_view_mobile.kv    # Smartphone-optimierte Layouts
 ├── controllers/            # Geschäftslogik und App-Steuerung
-├── functions/              # Hilfsfunktionen (PDF-Export, Dateien, etc.)
-├── data/                   # Spieldaten (Talente, Handicaps, Settings)
-├── assets/                 # Ressourcen (Bilder, Fonts, Icons)
+├── services/               # Service Container (DI), Dialog, Theme, etc.
+├── functions/              # Spielmechanik-Funktionen
+├── manager/                # Domain-Manager (PDF, Statistik, Völker)
+├── settings/               # Spielsetting-Daten (JSON)
+├── config/                 # App-Konfiguration (JSON)
+├── templates/              # Charakter-Vorlagen (JSON)
+├── assets/                 # Ressourcen (Bilder, Logos)
+├── test units/             # Test-Suite (unittest)
 ├── requirements.txt        # Python-Dependencies
-└── README.md              # Diese Datei
+└── README.md               # Diese Datei
 ```
 
 ## 🐛 Troubleshooting
@@ -148,19 +156,24 @@ sudo apt-get install libjpeg-dev zlib1g-dev  # für Pillow
 pip install --upgrade reportlab
 ```
 
-## 📦 Executable erstellen (Optional)
+## 📦 Build & Distribution
 
-Für Benutzer ohne Python-Installation:
+### Desktop (PyInstaller)
 
 ```bash
-# PyInstaller installieren
-pip install pyinstaller
-
-# Executable erstellen
-pyinstaller --windowed --onefile main.py
-
-# Executable findet sich dann in dist/
+python build_linux.py          # Linux
+python build_windows.py        # Windows
+python build_desktop.py        # Plattform-automatisch
 ```
+
+### Android (Buildozer)
+
+```bash
+buildozer android debug        # Debug APK
+bash build_android_local.sh    # Lokaler Android Build
+```
+
+Siehe [README_BUILD.md](README_BUILD.md) und [README_CROSS_PLATFORM_BUILD.md](README_CROSS_PLATFORM_BUILD.md) für Details.
 
 ## 🔄 Updates
 
@@ -191,7 +204,7 @@ Dieses Projekt ist lizenziert unter der **Creative Commons Attribution-NonCommer
 „Dieses Produkt bezieht sich auf das Regelsystem Savage Worlds, erhältlich bei der Pinnacle Entertainment Group unter www.peginc.com. Savage Worlds und alle zugehörigen Logos und Warenzeichen sind urheberrechtlich geschützt durch die Pinnacle Entertainment Group. Verwendung mit Genehmigung. Die deutsche Übersetzung der Begrifflichkeiten von Ulisses Spiele darf verwendet werden. Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder Eignung dieses Produkts für einen bestimmten Zweck."
 
 ### Copyright
-Copyright (c) 2025 Jean-Michel Fenske (Thallion)
+Copyright (c) 2025-2026 Jean-Michel Fenske (Thallion)
 
 ## 🤝 Beitragen
 

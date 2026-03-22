@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Fantasy Kompendium",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "config_version": "1.0",
-  "last_updated": "2026-03-22T17:41:01.589871"
+  "last_updated": "2026-03-22T17:47:56.120172"
 }

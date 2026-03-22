@@ -2,10 +2,10 @@
 
 ## Project Overview
 
-A German-language character generator for the **Savage Worlds** tabletop RPG system. Built with Python/Kivy/KivyMD, it supports multiple game settings (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies, Horror Kompendium, Rippers, SciFi Kompendium, Superkräfte Kompendium) and runs on Desktop (Windows/Linux/macOS) and Android.
+A German-language character generator for the **Savage Worlds** tabletop RPG system. Built with Python/Kivy/KivyMD, it supports multiple game settings (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies, Horror Kompendium, Rippers, SciFi Kompendium, Superkräfte Kompendium, 50 Fathoms, Hellfrost) and runs on Desktop (Windows/Linux/macOS) and Android.
 
 **License:** CC BY-NC-SA 4.0 (non-commercial)
-**Current Version:** 0.6.0.2
+**Current Version:** 0.6.4.4
 **Python:** 3.8+ (3.11 recommended)
 
 ## Quick Reference
@@ -62,6 +62,7 @@ main.kv                    # Root Kivy layout
 │   ├── screens.py         # Screen class definitions
 │   ├── ui_components.py   # Shared UI components
 │   ├── *_view.py/.kv      # Tab screens (profil, voelker, eigenschaften, etc.)
+│   ├── *_view_mobile.kv   # Smartphone-optimized layouts (loaded on Android/mobile)
 │   ├── *_popup.py/.kv     # Modal dialogs (talent, handicap, macht, superkraft, waffe, etc.)
 │   ├── pointbar_view.py   # Generation points progress bar
 │   ├── historie_view.py   # Change history widget
@@ -122,7 +123,9 @@ main.kv                    # Root Kivy layout
 │   ├── SciFi Kompendium.json
 │   ├── Superkräfte Kompendium.json
 │   ├── HeXXen1773.json
-│   └── Sundered Skies + FK.json
+│   ├── Sundered Skies.json
+│   ├── 50 Fathoms.json
+│   └── Hellfrost.json
 │
 ├── templates/             # Character templates (JSON)
 │   ├── character_template_schema.json  # Validation schema
@@ -156,6 +159,11 @@ The controller uses Kivy `EventDispatcher` with custom events:
 ### Tab-Based Navigation
 The app uses `MDTabsPrimary` with 11 tabs: Einstellungen (Settings), Voelker (Races), Profil (Profile), Eigenschaften (Attributes), Handicaps, Talente (Talents/Edges), Maechte (Powers), Ausruestung (Equipment), Charakterbogen (Character Sheet), Historie (History), Info.
 
+### Dialog & Snackbar Pattern
+- **MDDialog** for decisions that need user action (errors, confirmations, choices). Always use `size_hint=(0.85, None)` to prevent full-screen dialogs on Android.
+- **MDSnackbar** (via `dialog_service.show_snackbar()`) for non-blocking info/warnings. `show_success_dialog()` and `show_warning_dialog()` are implemented as snackbar calls. `show_error_dialog()` remains a modal dialog.
+- When adding new user-facing warnings (e.g., "not enough points"), use `dialog_service.show_warning_dialog()` — do not just use `Logger.warning()`.
+
 ## Code Conventions
 
 ### Language
@@ -176,7 +184,7 @@ The app uses `MDTabsPrimary` with 11 tabs: Einstellungen (Settings), Voelker (Ra
 3. Project imports grouped by layer (models, controllers, views, services, functions, utils)
 
 ### View Files
-Each view tab has a paired `.py` and `.kv` file (e.g., `profil_view.py` + `profil_view.kv`). Popups follow the same pattern (`talent_popup.py` + `talent_popup.kv`).
+Each view tab has a paired `.py` and `.kv` file (e.g., `profil_view.py` + `profil_view.kv`). Popups follow the same pattern (`talent_popup.py` + `talent_popup.kv`). Mobile-optimized layouts use `*_view_mobile.kv` files (e.g., `eigenschaften_view_mobile.kv`) — these are loaded on Android instead of the desktop `.kv` files. The Python logic is shared; only the `.kv` layout differs.
 
 ## Technology Stack
 
@@ -264,9 +272,11 @@ Build specs: `savage_worlds_generator.spec` (Windows), `savage_worlds_generator_
 3. **KivyMD 2.0.1**: The project uses the development version from GitHub master, not the stable PyPI release. Widget APIs may differ from KivyMD docs.
 4. **Mixin architecture**: When modifying the `Charakter` class, identify which mixin owns the functionality before editing.
 5. **Service container**: Access services through `service_container` singleton, not by creating new instances.
-6. **View/KV pairs**: When adding or modifying UI, update both the `.py` and `.kv` files.
+6. **View/KV pairs**: When adding or modifying UI, update both the `.py` and `.kv` files. If a `*_view_mobile.kv` exists for the view, update it too.
 7. **Config files are gitignored**: `config/app_config.json` and custom config files are in `.gitignore`. Don't rely on their committed state.
 8. **Test directory has a space**: The test directory is `test units/` (with a space). Use quotes in paths.
 9. **No CI pipeline in repo**: There are no GitHub Actions workflow files committed; builds are done locally.
 10. **Character files are gitignored**: `chars/` directory is in `.gitignore`.
-11. **Superkräfte system**: Version 0.6.0.2 introduces super powers (Superkräfte) with dedicated models, views, and functions. The Superkräfte Kompendium provides specialized super hero character creation.
+11. **Superkräfte system**: Super powers (Superkräfte) with dedicated models, views, and functions. The Superkräfte Kompendium provides specialized super hero character creation.
+12. **MDDialog size_hint**: All MDDialog instances must use `size_hint=(0.85, None)` (or similar constrained values) to prevent full-screen popups on Android. Never use the default `(1, 1)`.
+13. **Snackbar for feedback**: Use `dialog_service.show_warning_dialog()` / `show_success_dialog()` for non-blocking user feedback (these internally use MDSnackbar). Reserve `show_error_dialog()` for errors requiring user acknowledgment.
