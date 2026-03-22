@@ -34,6 +34,28 @@
     height: self.minimum_height
     md_bg_color: app.theme_cls.backgroundColor
 
+    # Status-Button: immer sichtbar, über der Pointbar
+    MDBoxLayout:
+        id: char_gen_bar
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(36)
+        padding: [dp(12), dp(2), dp(12), dp(2)]
+        md_bg_color: app.theme_cls.surfaceContainerHighColor if not root.char_gen_completed else app.theme_cls.primaryContainerColor
+
+        MDButton:
+            id: char_gen_status_button
+            style: "text"
+            size_hint_x: 1
+            on_release: root.toggle_char_gen_completed()
+
+            MDButtonIcon:
+                icon: "check-circle" if root.char_gen_completed else "progress-wrench"
+
+            MDButtonText:
+                text: "Aufstiege freigeschaltet" if root.char_gen_completed else "Charaktererstellung abschließen"
+                font_size: dp(12)
+
     # Header-Zeile (immer sichtbar)
     MDBoxLayout:
         id: header_bar

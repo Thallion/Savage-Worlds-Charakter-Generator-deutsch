@@ -99,6 +99,7 @@ class GenerationPointsBar(MDBoxLayout):
     superkraft_punkte_text = StringProperty("")
     machtstufe_text = StringProperty("")
     header_summary_text = StringProperty("")
+    char_gen_completed = BooleanProperty(False)
     is_expanded = BooleanProperty(True)
 
     def __init__(self, **kwargs):
@@ -151,6 +152,7 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.unbind(robustheit=self.update_parade_robustheit_text)
             # KORREKTUR: Auch auf robustheit_mit_ruestung binden
             self.charakter.unbind(robustheit_mit_ruestung=self.update_parade_robustheit_text)
+            self.charakter.unbind(char_gen_completed=self._update_char_gen_status)
             Logger.debug("Charakter-Bindings erfolgreich entfernt")
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen der Charakter-Bindings: {str(e)}")
@@ -204,6 +206,9 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.bind(parade=self.update_parade_robustheit_text)
             self.charakter.bind(robustheit=self.update_parade_robustheit_text)
             self.charakter.bind(robustheit_mit_ruestung=self.update_parade_robustheit_text)
+
+            # Generierungsstatus
+            self.charakter.bind(char_gen_completed=self._update_char_gen_status)
 
             Logger.info("GenerationPointsBar erfolgreich mit Charakter-Properties verbunden")
         except Exception as e:
@@ -428,6 +433,19 @@ class GenerationPointsBar(MDBoxLayout):
     def get_logo_path(self):
         """Gibt den korrekten Pfad zum Logo zurück (PyInstaller-kompatibel)"""
         return get_assets_path("Savage-Worlds-Fanprodukt-Logo.png")
+
+    def toggle_char_gen_completed(self):
+        """Umschaltet den Charakter-Generierungsstatus über die Pointbar"""
+        if self.charakter:
+            new_value = not self.charakter.char_gen_completed
+            self.charakter.char_gen_completed = new_value
+            self.char_gen_completed = new_value
+            Logger.info(f"Charakter-Generierungsstatus über Pointbar geändert: {new_value}")
+
+    def _update_char_gen_status(self, instance, value):
+        """Aktualisiert den lokalen char_gen_completed-Status aus dem Charakter-Modell"""
+        if self.charakter:
+            self.char_gen_completed = self.charakter.char_gen_completed
 
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""
