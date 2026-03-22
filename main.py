@@ -125,6 +125,10 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Service Container mit dem finalen Controller aktualisieren
         service_container.initialize(self.controller)
         
+        # Android Statusbar/Notch-Höhe ermitteln
+        self._android_top_padding = dp(24)  # Fallback
+        self._detect_android_top_padding()
+
         # NavigationRail-Items und Modus-Tracking
         self.rail_items = []
         self._mobile_modus_active = False
@@ -940,7 +944,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 if _platform == 'android':
                     main_content_area = root.ids.get('main_content_area')
                     if main_content_area:
-                        main_content_area.padding = [0, dp(12), 0, 0]
+                        main_content_area.padding = [0, self._android_top_padding, 0, 0]
 
                 # Swipe nur auf Android aktivieren
                 if _platform == 'android':
@@ -1071,6 +1075,58 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         except Exception as e:
             Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")
+
+    def _detect_android_top_padding(self):
+        """Ermittelt die Statusbar/Notch-Höhe auf Android für korrektes Top-Padding"""
+        try:
+            from kivy.utils import platform as _platform
+            if _platform != 'android':
+                return
+
+            from jnius import autoclass
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            activity = PythonActivity.mActivity
+            resources = activity.getResources()
+
+            # Statusbar-Höhe abfragen
+            resource_id = resources.getIdentifier(
+                'status_bar_height', 'dimen', 'android'
+            )
+            if resource_id > 0:
+                status_bar_px = resources.getDimensionPixelSize(resource_id)
+                # Pixel zu dp umrechnen
+                density = resources.getDisplayMetrics().density
+                status_bar_dp = status_bar_px / density if density > 0 else 24
+
+                # Display-Cutout (Notch) prüfen - API 28+
+                cutout_dp = 0
+                try:
+                    Build_VERSION = autoclass('android.os.Build$VERSION')
+                    if Build_VERSION.SDK_INT >= 28:
+                        window = activity.getWindow()
+                        decorView = window.getDecorView()
+                        rootInsets = decorView.getRootWindowInsets()
+                        if rootInsets:
+                            cutout = rootInsets.getDisplayCutout()
+                            if cutout:
+                                cutout_top_px = cutout.getSafeInsetTop()
+                                cutout_dp = cutout_top_px / density if density > 0 else 0
+                except Exception:
+                    pass
+
+                # Das Maximum von Statusbar und Cutout verwenden + kleiner Puffer
+                top_dp = max(status_bar_dp, cutout_dp) + 4
+                self._android_top_padding = dp(top_dp)
+                Logger.info(
+                    f"Android Top-Padding: {top_dp:.0f}dp "
+                    f"(Statusbar: {status_bar_dp:.0f}dp, Cutout: {cutout_dp:.0f}dp)"
+                )
+            else:
+                Logger.warning("Android: status_bar_height Resource nicht gefunden, verwende Fallback")
+        except ImportError:
+            Logger.info("jnius nicht verfügbar (kein Android), verwende Fallback-Padding")
+        except Exception as e:
+            Logger.warning(f"Android Top-Padding Erkennung fehlgeschlagen: {e}, verwende Fallback")
 
     def _on_window_resize(self, instance, width, height):
         """Automatischer Moduswechsel basierend auf Fensterbreite"""
