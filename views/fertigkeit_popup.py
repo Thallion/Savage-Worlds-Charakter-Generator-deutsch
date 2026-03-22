@@ -140,6 +140,7 @@ class FertigkeitDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -181,6 +182,7 @@ class FertigkeitDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -305,6 +307,7 @@ class FertigkeitDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         error_dialog.open()
 

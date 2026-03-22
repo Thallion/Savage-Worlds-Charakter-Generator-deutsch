@@ -153,6 +153,7 @@ class SchildDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -194,6 +195,7 @@ class SchildDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -248,6 +250,7 @@ class SchildDialogHandler:
                         ),
                         spacing="8dp",
                     ),
+                    auto_dismiss=False,
                 )
                 self.dialog.open()
                 
@@ -471,6 +474,7 @@ class SchildDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         error_dialog.open()
 

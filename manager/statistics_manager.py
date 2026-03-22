@@ -274,7 +274,8 @@ class StatisticsManager:
                         style="text",
                         on_release=lambda x: error_dialog.dismiss()
                     )
-                )
+                ),
+                auto_dismiss=False,
             )
             
             error_dialog.open()

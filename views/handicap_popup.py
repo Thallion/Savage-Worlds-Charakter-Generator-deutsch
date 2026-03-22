@@ -156,6 +156,7 @@ class HandicapDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -205,6 +206,7 @@ class HandicapDialogHandler:
                     ),
                     spacing="8dp",
                 ),
+                auto_dismiss=False,
             )
             self.dialog.open()
             
@@ -326,6 +328,7 @@ class HandicapDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -461,6 +464,7 @@ class HandicapDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         error_dialog.open()
 

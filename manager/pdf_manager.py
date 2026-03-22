@@ -58,7 +58,8 @@ class PDFManager:
                     style="text",
                     on_release=lambda x: self.pdf_options_dialog.dismiss()
                 )
-            )
+            ),
+            auto_dismiss=False,
         )
         self.pdf_options_dialog.open()
     
@@ -233,7 +234,8 @@ class PDFManager:
                     style="text",
                     on_release=lambda x: self._platform_dialog.dismiss()
                 )
-            )
+            ),
+            auto_dismiss=False,
         )
         self._platform_dialog.open()
 

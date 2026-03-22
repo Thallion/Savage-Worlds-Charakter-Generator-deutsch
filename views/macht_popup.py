@@ -155,6 +155,7 @@ class MachtDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -209,6 +210,7 @@ class MachtDialogHandler:
                     ),
                     spacing="8dp",
                 ),
+                auto_dismiss=False,
             )
             self.dialog.open()
             
@@ -335,6 +337,7 @@ class MachtDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -462,6 +465,7 @@ class MachtDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         error_dialog.open()
 

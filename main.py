@@ -1353,7 +1353,8 @@ class SW_Charakter_GeneratorApp(MDApp):
                     MDButtonText(text="Schließen"),
                     on_release=lambda x: dialog.dismiss()
                 )
-            ]
+            ],
+            auto_dismiss=False,
         )
         dialog.open()
 

@@ -82,7 +82,8 @@ class TemplateHandler:
                     MDButtonText(text="OK"),
                     style="text",
                     on_release=lambda x: dialog.dismiss()
-                )
+                ),
+                auto_dismiss=False,
             )
             dialog.open()
             return
@@ -185,7 +186,8 @@ class TemplateHandler:
                         style="text",
                         on_release=self._dismiss_template_dialog
                     ),
-                )
+                ),
+                auto_dismiss=False,
             )
             
             self.template_dialog.open()
@@ -235,7 +237,8 @@ class TemplateHandler:
                     MDButtonText(text="OK"),
                     style="text",
                     on_release=lambda x: dialog.dismiss()
-                )
+                ),
+                auto_dismiss=False,
             )
             dialog.open()
             return
@@ -284,7 +287,8 @@ class TemplateHandler:
                                 MDButtonText(text="OK"),
                                 style="text", 
                                 on_release=lambda x: success_dialog.dismiss()
-                            )
+                            ),
+                            auto_dismiss=False,
                         )
                         success_dialog.open()
                     else:
@@ -310,7 +314,8 @@ class TemplateHandler:
                     MDButtonText(text="OK"),
                     style="text",
                     on_release=lambda x: error_dialog.dismiss()
-                )
+                ),
+                auto_dismiss=False,
             )
             error_dialog.open()
         except Exception as e:

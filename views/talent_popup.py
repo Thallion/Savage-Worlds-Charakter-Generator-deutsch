@@ -191,6 +191,7 @@ class TalentDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -244,6 +245,7 @@ class TalentDialogHandler:
                     ),
                     spacing="8dp",
                 ),
+                auto_dismiss=False,
             )
             self.dialog.open()
             
@@ -373,6 +375,7 @@ class TalentDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -499,6 +502,7 @@ class TalentDialogHandler:
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         error_dialog.open()
 

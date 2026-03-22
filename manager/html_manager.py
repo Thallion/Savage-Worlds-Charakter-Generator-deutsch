@@ -51,7 +51,8 @@ class HTMLManager:
                     style="text",
                     on_release=lambda x: self.html_options_dialog.dismiss()
                 )
-            )
+            ),
+            auto_dismiss=False,
         )
         self.html_options_dialog.open()
 

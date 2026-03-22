@@ -256,6 +256,7 @@ class AusruestungItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -377,6 +378,7 @@ class AusruestungItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -703,6 +705,7 @@ class AusruestungItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         status_dialog.open()
 
@@ -741,6 +744,7 @@ class AusruestungItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         error_dialog.open()
 
@@ -798,6 +802,7 @@ class AusruestungItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         description_dialog.open()
 

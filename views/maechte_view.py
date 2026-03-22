@@ -230,6 +230,7 @@ class MachtItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 
@@ -287,6 +288,7 @@ class MachtItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         description_dialog.open()
 
@@ -604,6 +606,7 @@ class KraefteWidget(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            auto_dismiss=False,
         )
         self.dialog.open()
 

@@ -91,7 +91,8 @@ class DialogService:
                     on_release=lambda x: self._dismiss_dialog('error')
                 )
             ),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['error'] = error_dialog
@@ -132,7 +133,8 @@ class DialogService:
                     on_release=lambda x: self._dismiss_dialog('success')
                 )
             ),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['success'] = success_dialog
@@ -188,7 +190,8 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.8, 0.8)  # Größerer Dialog für mehr Inhalt
+            size_hint=(0.8, 0.8),  # Größerer Dialog für mehr Inhalt
+            auto_dismiss=False,
         )
         
         self.active_dialogs['info'] = info_dialog
@@ -229,7 +232,8 @@ class DialogService:
                     on_release=lambda x: self._dismiss_dialog('warning')
                 )
             ),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['warning'] = warning_dialog
@@ -287,7 +291,8 @@ class DialogService:
                     on_release=lambda x: handle_confirm()
                 )
             ),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['confirmation'] = confirmation_dialog
@@ -371,7 +376,8 @@ class DialogService:
                     on_release=lambda x: self._dismiss_dialog('choice')
                 )
             ),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['choice'] = choice_dialog
@@ -437,7 +443,8 @@ class DialogService:
                     on_release=lambda x: handle_confirm()
                 )
             ),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['input'] = input_dialog
@@ -505,7 +512,8 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.8, 0.7)
+            size_hint=(0.8, 0.7),
+            auto_dismiss=False,
         )
         
         self.active_dialogs['multiline_input'] = multiline_dialog
@@ -614,7 +622,8 @@ class DialogService:
         statblock_dialog = MDDialog(
             MDDialogHeadlineText(text="Charakterstatblock"),
             MDDialogContentContainer(content),
-            md_bg_color=self.theme_cls.surfaceColor
+            md_bg_color=self.theme_cls.surfaceColor,
+            auto_dismiss=False,
         )
         
         self.active_dialogs['statblock'] = statblock_dialog

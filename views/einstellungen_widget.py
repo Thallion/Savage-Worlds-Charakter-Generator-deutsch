@@ -413,7 +413,8 @@ class EinstellungenWidget(MDBoxLayout):
                         MDButtonText(text="Schließen"),
                         on_release=lambda x: dialog.dismiss()
                     )
-                ]
+                ],
+                auto_dismiss=False,
             )
             dialog.open()
             
@@ -452,7 +453,8 @@ class EinstellungenWidget(MDBoxLayout):
                     MDButtonText(text="OK"),
                     on_release=lambda x: dialog.dismiss()
                 )
-            ]
+            ],
+            auto_dismiss=False,
         )
         dialog.open()
     

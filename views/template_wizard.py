@@ -826,7 +826,8 @@ class TemplateWizardDialog:
                     style="text",
                     on_release=lambda *args: desc_dialog.dismiss()
                 )
-            )
+            ),
+            auto_dismiss=False,
         )
         desc_dialog.open()
 
