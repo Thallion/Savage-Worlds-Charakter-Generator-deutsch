@@ -1419,6 +1419,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                     on_release=lambda x: dialog.dismiss()
                 )
             ],
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         dialog.open()

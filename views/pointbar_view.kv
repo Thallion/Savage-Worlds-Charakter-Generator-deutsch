@@ -88,13 +88,15 @@
         opacity: 1
         disabled: False
 
-        # Logo-Container
+        # Logo-Container (nur bei breitem Fenster sichtbar)
         MDCard:
+            id: logo_card
             style: "elevated"
             size_hint_x: None
-            width: dp(130)
+            width: dp(130) if self.parent and self.parent.width > dp(700) else 0
             size_hint_y: None
-            height: dp(116)
+            height: dp(116) if self.width > 0 else 0
+            opacity: 1 if self.width > 0 else 0
             md_bg_color: app.theme_cls.surfaceColor
             elevation: 1
             radius: [dp(6)]
@@ -118,7 +120,7 @@
                 style: "elevated"
                 padding: dp(8)
                 spacing: dp(2)
-                size_hint_x: 0.28
+                size_hint_x: 0.33
                 size_hint_y: None
                 height: self.minimum_height
                 md_bg_color: app.theme_cls.surfaceColor
@@ -133,29 +135,29 @@
                     LabelValuePair:
                         key_text: "Name:"
                         value_text: root.char_name_text
-                        key_width_ratio: 0.32
+                        key_width_ratio: 0.35
 
                     LabelValuePair:
                         key_text: "Setting:"
                         value_text: root.active_setting_name_text
-                        key_width_ratio: 0.32
+                        key_width_ratio: 0.35
 
                     LabelValuePair:
                         key_text: "Rang:"
                         value_text: root.rang_text
-                        key_width_ratio: 0.32
+                        key_width_ratio: 0.35
 
                     LabelValuePair:
                         key_text: "Aufstiege:"
                         value_text: root.aufstiege_text
-                        key_width_ratio: 0.32
+                        key_width_ratio: 0.35
 
             # Zweite Spalte: Generierungspunkte
             MDCard:
                 style: "elevated"
                 padding: dp(8)
                 spacing: dp(2)
-                size_hint_x: 0.36
+                size_hint_x: 0.34
                 size_hint_y: None
                 height: self.minimum_height
                 md_bg_color: app.theme_cls.surfaceColor
@@ -168,32 +170,32 @@
                     adaptive_height: True
 
                     LabelValuePair:
-                        key_text: "Attribute-Punkte:"
+                        key_text: "Attribute:"
                         value_text: root.attribut_text
-                        key_width_ratio: 0.65
+                        key_width_ratio: 0.55
 
                     LabelValuePair:
-                        key_text: "Fähigkeiten-Punkte:"
+                        key_text: "Fertigkeiten:"
                         value_text: root.faehigkeiten_text
-                        key_width_ratio: 0.65
+                        key_width_ratio: 0.55
 
                     LabelValuePair:
-                        key_text: "Handicap-Punkte:"
+                        key_text: "Handicaps:"
                         value_text: root.handicaps_text
-                        key_width_ratio: 0.65
+                        key_width_ratio: 0.55
 
                     LabelValuePair:
-                        key_text: "Anzahl Mächte:"
+                        key_text: "Mächte:"
                         value_text: root.maechte_text
-                        key_width_ratio: 0.65
+                        key_width_ratio: 0.55
                         size_hint_y: None
                         height: dp(24) if root.maechte_text else 0
                         opacity: 1 if root.maechte_text else 0
 
                     LabelValuePair:
-                        key_text: "Superkraftpunkte:"
+                        key_text: "SKP:"
                         value_text: root.superkraft_punkte_text
-                        key_width_ratio: 0.65
+                        key_width_ratio: 0.55
                         size_hint_y: None
                         height: dp(24) if root.superkraft_punkte_text else 0
                         opacity: 1 if root.superkraft_punkte_text else 0
@@ -204,7 +206,7 @@
                 style: "elevated"
                 padding: dp(8)
                 spacing: dp(2)
-                size_hint_x: 0.36
+                size_hint_x: 0.33
                 size_hint_y: None
                 height: self.minimum_height
                 md_bg_color: app.theme_cls.surfaceColor
@@ -233,12 +235,12 @@
                         opacity: 1 if root.machtpunkte_text else 0
 
                     LabelValuePair:
-                        key_text: "Parade / Robustheit:"
+                        key_text: "Parade / Rob.:"
                         value_text: root.parade_robustheit_text
                         key_width_ratio: 0.55
 
                     LabelValuePair:
-                        key_text: "Gewicht / Traglast:"
+                        key_text: "Gewicht:"
                         value_text: root.gewicht_text
                         key_width_ratio: 0.55
 

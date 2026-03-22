@@ -372,6 +372,7 @@ class FileManagerService:
         self.drive_dialog = MDDialog(
             MDDialogHeadlineText(text="Laufwerksauswahl"),
             MDDialogContentContainer(content, orientation="vertical"),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.drive_dialog.open()

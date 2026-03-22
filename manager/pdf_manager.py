@@ -59,6 +59,7 @@ class PDFManager:
                     on_release=lambda x: self.pdf_options_dialog.dismiss()
                 )
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.pdf_options_dialog.open()
@@ -235,6 +236,7 @@ class PDFManager:
                     on_release=lambda x: self._platform_dialog.dismiss()
                 )
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self._platform_dialog.open()

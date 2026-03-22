@@ -92,6 +92,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -134,6 +135,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -190,7 +192,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.8, 0.8),  # Größerer Dialog für mehr Inhalt
+            size_hint=(0.85, 0.6),
             auto_dismiss=False,
         )
         
@@ -233,6 +235,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -292,6 +295,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -377,6 +381,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -444,6 +449,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -512,10 +518,10 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.8, 0.7),
+            size_hint=(0.85, 0.5),
             auto_dismiss=False,
         )
-        
+
         self.active_dialogs['multiline_input'] = multiline_dialog
         multiline_dialog.open()
     
@@ -552,7 +558,8 @@ class DialogService:
             MDDialogHeadlineText(text=title),
             MDDialogContentContainer(content),
             md_bg_color=self.theme_cls.surfaceColor,
-            auto_dismiss=False  # Verhindert das Schließen durch Außenklick
+            size_hint=(0.75, None),
+            auto_dismiss=False,
         )
         
         self.active_dialogs[dialog_key] = progress_dialog
@@ -623,6 +630,7 @@ class DialogService:
             MDDialogHeadlineText(text="Charakterstatblock"),
             MDDialogContentContainer(content),
             md_bg_color=self.theme_cls.surfaceColor,
+            size_hint=(0.9, 0.7),
             auto_dismiss=False,
         )
         
@@ -857,8 +865,8 @@ CHARAKTER-STATUS:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.9, 0.8),  # Größerer Dialog
-            auto_dismiss=False  # Verhindert versehentliches Schließen
+            size_hint=(0.9, 0.6),
+            auto_dismiss=False,
         )
         
         self.active_dialogs['info'] = info_dialog

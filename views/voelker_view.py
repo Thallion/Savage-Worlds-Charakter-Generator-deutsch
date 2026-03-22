@@ -272,6 +272,7 @@ class VoelkerWidget(MDBoxLayout):
                     orientation="vertical",
                     padding=dp(0),
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
 
@@ -889,6 +890,7 @@ class VoelkerWidget(MDBoxLayout):
                     orientation="vertical",
                     padding=dp(0),
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
 

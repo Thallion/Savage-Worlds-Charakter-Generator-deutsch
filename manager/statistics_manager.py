@@ -275,6 +275,7 @@ class StatisticsManager:
                         on_release=lambda x: error_dialog.dismiss()
                     )
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             

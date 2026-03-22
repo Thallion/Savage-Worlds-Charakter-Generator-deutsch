@@ -837,6 +837,7 @@ class EigenschaftenItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.dialog.open()

@@ -83,6 +83,7 @@ class TemplateHandler:
                     style="text",
                     on_release=lambda x: dialog.dismiss()
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             dialog.open()
@@ -187,6 +188,7 @@ class TemplateHandler:
                         on_release=self._dismiss_template_dialog
                     ),
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             
@@ -238,6 +240,7 @@ class TemplateHandler:
                     style="text",
                     on_release=lambda x: dialog.dismiss()
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             dialog.open()
@@ -288,6 +291,7 @@ class TemplateHandler:
                                 style="text", 
                                 on_release=lambda x: success_dialog.dismiss()
                             ),
+                            size_hint=(0.85, None),
                             auto_dismiss=False,
                         )
                         success_dialog.open()
@@ -315,6 +319,7 @@ class TemplateHandler:
                     style="text",
                     on_release=lambda x: error_dialog.dismiss()
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             error_dialog.open()

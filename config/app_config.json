@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": false,
+  "mobile_modus": true,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -21,8 +21,8 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Horror Kompendium",
+  "last_setting": "Fantasy Kompendium",
   "force_mobile_layout": true,
   "config_version": "1.0",
-  "last_updated": "2026-03-22T11:42:58.128497"
+  "last_updated": "2026-03-22T13:17:52.205283"
 }

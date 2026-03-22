@@ -295,6 +295,7 @@ class TalentItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.pathfinder_dialog.open()
@@ -408,6 +409,7 @@ class TalentItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         dialog.open()
@@ -453,6 +455,7 @@ class TalentItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.rang_dialog.open()
@@ -529,6 +532,7 @@ class TalentItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.voraussetzungen_dialog.open()
@@ -717,6 +721,7 @@ class TalentItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         description_dialog.open()

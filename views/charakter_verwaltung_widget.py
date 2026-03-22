@@ -258,6 +258,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 orientation="vertical",
                 padding=dp(0),
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self._wizard_setting_dialog.open()
@@ -369,6 +370,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 orientation="vertical",
                 padding=dp(0),
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self._wizard_config_dialog.open()
@@ -594,6 +596,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             MDDialogContentContainer(
                 dialog_content, orientation="vertical", padding=dp(0)
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self._bogen_dialog.open()
@@ -707,7 +710,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         """Zeigt ein Warn-Popup an"""
         dialog_service = service_container.get_dialog_service()
         if dialog_service:
-            dialog_service.show_info_dialog(message, title)
+            dialog_service.show_warning_dialog(message, title)
         else:
             Logger.warning(f"{title}: {message}")
 
@@ -854,6 +857,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             self._punkte_dialog = MDDialog(
                 MDDialogHeadlineText(text="Start-Punkte"),
                 MDDialogContentContainer(content, orientation="vertical", padding=dp(0)),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             self._punkte_dialog.open()
@@ -964,6 +968,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             self._vermoegen_dialog = MDDialog(
                 MDDialogHeadlineText(text="Vermögen & Währung"),
                 MDDialogContentContainer(content, orientation="vertical", padding=dp(0)),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             self._vermoegen_dialog.open()
@@ -1114,6 +1119,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             self._switch_dialog = MDDialog(
                 MDDialogHeadlineText(text="Setting wechseln"),
                 MDDialogContentContainer(dialog_content, orientation="vertical", padding=dp(0)),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             self._switch_dialog.open()

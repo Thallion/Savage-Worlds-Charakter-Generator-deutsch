@@ -52,6 +52,7 @@ class HTMLManager:
                     on_release=lambda x: self.html_options_dialog.dismiss()
                 )
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.html_options_dialog.open()

@@ -454,6 +454,7 @@ class EinstellungenWidget(MDBoxLayout):
                     on_release=lambda x: dialog.dismiss()
                 )
             ],
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         dialog.open()
@@ -487,7 +488,7 @@ class EinstellungenWidget(MDBoxLayout):
             dialog = MDDialog()
             dialog.title = title
             dialog.content_cls = content
-            dialog.size_hint = (0.8, None)
+            dialog.size_hint = (0.85, None)
             dialog.height = "200dp"
             
             # Button hinzufügen

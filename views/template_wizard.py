@@ -187,10 +187,10 @@ class TemplateWizardDialog:
                     on_release=self._cancel_wizard
                 )
             ),
-            size_hint=(0.9, 0.8),
-            auto_dismiss=False
+            size_hint=(0.9, 0.7),
+            auto_dismiss=False,
         )
-        
+
         self.dialog.open()
     
     def _calculate_dialog_height(self):
@@ -827,6 +827,7 @@ class TemplateWizardDialog:
                     on_release=lambda *args: desc_dialog.dismiss()
                 )
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         desc_dialog.open()

@@ -226,6 +226,7 @@ class AddSettingPopup(MDBoxLayout, BaseFileManagerMixin):
 
     def show_error(self, message):
         error_dialog = MDDialog(auto_dismiss=True)
+        error_dialog.size_hint = (0.85, None)
         error_container = MDBoxLayout(orientation="vertical", padding="12dp", spacing="12dp")
         label = MDLabel(text=message, halign="center")
         error_container.add_widget(label)
@@ -266,6 +267,7 @@ class LoadSettingPopup(MDBoxLayout, BaseFileManagerMixin):
 
     def show_error(self, message, title="Fehler"):
         error_dialog = MDDialog(auto_dismiss=True)
+        error_dialog.size_hint = (0.85, None)
         error_container = MDBoxLayout(orientation="vertical", padding="12dp", spacing="12dp")
         label = MDLabel(text=message, halign="center")
         error_container.add_widget(label)
@@ -300,6 +302,7 @@ class DeleteSettingPopup(MDBoxLayout, BaseFileManagerMixin):
 
     def show_error(self, message, title="Fehler"):
         error_dialog = MDDialog(auto_dismiss=True)
+        error_dialog.size_hint = (0.85, None)
         error_container = MDBoxLayout(orientation="vertical", padding="12dp", spacing="12dp")
         label = MDLabel(text=message, halign="center")
         error_container.add_widget(label)
@@ -334,6 +337,7 @@ class SettingDialogHandler:
                 create_text_button("Speichern", popup_content.save_setting),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         popup_content.popup = self.dialog
@@ -353,6 +357,7 @@ class SettingDialogHandler:
         btn_container.add_widget(btn_cancel)
         container.add_widget(btn_container)
         self.dialog = MDDialog(auto_dismiss=False)
+        self.dialog.size_hint = (0.85, None)
         self.dialog.add_widget(container)
         popup_content.popup = self.dialog
         self.dialog.open()
@@ -371,6 +376,7 @@ class SettingDialogHandler:
         btn_container.add_widget(btn_cancel)
         container.add_widget(btn_container)
         self.dialog = MDDialog(auto_dismiss=False)
+        self.dialog.size_hint = (0.85, None)
         self.dialog.add_widget(container)
         popup_content.popup = self.dialog
         popup_content.show_file_manager_popup()  # Direktstart der Dateiauswahl

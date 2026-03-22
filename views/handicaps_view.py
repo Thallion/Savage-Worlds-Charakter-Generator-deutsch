@@ -231,6 +231,7 @@ class HandicapItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         dialog.open()
@@ -276,6 +277,7 @@ class HandicapItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.dialog.open()
@@ -419,6 +421,7 @@ class HandicapItemRow(MDBoxLayout):
                 padding=dp(0),
             ),
             button_container,
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.remove_reduce_dialog.open()
@@ -529,6 +532,7 @@ class HandicapItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.advancement_dialog.open()
@@ -576,6 +580,7 @@ class HandicapItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         self.reduce_dialog.open()
@@ -655,6 +660,7 @@ class HandicapItemRow(MDBoxLayout):
                 ),
                 spacing="8dp",
             ),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         description_dialog.open()
