@@ -249,12 +249,12 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 MDButton(
                     MDButtonText(text="Abbrechen"),
                     style="text",
-                    on_release=lambda x: self._wizard_setting_dialog.dismiss(),
+                    on_release=lambda x: self._defocus_and_call(self._wizard_setting_dialog.dismiss),
                 ),
                 MDButton(
                     MDButtonText(text="Weiter"),
                     style="text",
-                    on_release=lambda x: self._on_setting_selected(),
+                    on_release=lambda x: self._defocus_and_call(self._on_setting_selected),
                 ),
                 spacing="8dp",
             ),
