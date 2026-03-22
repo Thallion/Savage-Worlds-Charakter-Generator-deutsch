@@ -18,6 +18,52 @@ class CustomFileManager(MDFileManager):
     Android: Schnellzugriff auf gängige Verzeichnisse statt nur / und /storage.
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Auf Android: Bottom-Padding der Dateiliste erhöhen,
+        # damit letzte Einträge nicht hinter FAB/Navigationsleiste verschwinden
+        if platform == 'android':
+            Clock.schedule_once(self._apply_android_padding, 0.1)
+
+    def _apply_android_padding(self, *args):
+        """Setzt Bottom-Padding auf der RecycleGridLayout für Android"""
+        try:
+            rv = self.ids.get('rv')
+            if rv and rv.children:
+                grid = rv.children[0]  # RecycleGridLayout
+                # Kivy padding: [left, top, right, bottom]
+                # Standard ist "10dp" (alle Seiten gleich)
+                # Bottom auf 80dp setzen (FAB dp(72) + Puffer)
+                grid.padding = [dp(10), dp(10), dp(10), dp(80)]
+                Logger.info("CustomFileManager: Android Bottom-Padding gesetzt")
+        except Exception as e:
+            Logger.warning(f"CustomFileManager: Bottom-Padding konnte nicht gesetzt werden: {e}")
+
+    def _create_selection_button(self, *args):
+        """Überschrieben: FAB höher positionieren für Android-Navigationsleiste"""
+        from kivymd.uix.button import MDFabButton
+
+        if self.selector in ("any", "multi", "folder"):
+            # Android-Navigationsleiste ist typisch 48dp hoch
+            # Standard KivyMD setzt y=dp(12), was verdeckt wird
+            fab_y = dp(12)
+            if platform == 'android':
+                fab_y = dp(72)
+
+            self.selection_button = MDFabButton(
+                on_release=self.select_directory_on_press_button,
+                theme_bg_color="Custom",
+                md_bg_color=(
+                    self.theme_cls.primaryColor
+                    if not self.background_color_selection_button
+                    else self.background_color_selection_button
+                ),
+                icon=self.icon_selection_button,
+                pos_hint={"right": 0.99},
+                y=fab_y,
+            )
+            self.add_widget(self.selection_button)
+
     def _get_android_paths(self):
         """
         Ermittelt verfügbare Android-Verzeichnisse mit Schnellzugriffen.
