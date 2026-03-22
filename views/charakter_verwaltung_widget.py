@@ -19,6 +19,7 @@ from kivy.logger import Logger
 from kivy.clock import Clock
 from kivy.metrics import dp
 from kivy.core.window import Window
+from kivy.properties import BooleanProperty
 from pathlib import Path
 
 # Handler imports
@@ -58,6 +59,8 @@ class CharakterVerwaltungWidget(MDBoxLayout):
     Fokussiert auf: Charakter-CRUD, PDF-Export, Statblock,
                     Charakter-Einstellungen, Setting-Verwaltung
     """
+
+    char_gen_completed = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -107,6 +110,9 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 # Character-Events
                 event_service.subscribe(EventTypes.CHARACTER_CREATED, self.character_handler.on_character_created)
                 event_service.subscribe(EventTypes.CHARACTER_LOADED, self.character_handler.on_character_loaded)
+                # Generierungsstatus bei Laden/Erstellen synchronisieren
+                event_service.subscribe(EventTypes.CHARACTER_CREATED, lambda data: self._sync_char_gen_status())
+                event_service.subscribe(EventTypes.CHARACTER_LOADED, lambda data: self._sync_char_gen_status())
 
                 Logger.debug("Event-Handler für CharakterVerwaltung registriert")
         except Exception as e:
@@ -118,6 +124,9 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             # Statistiken aktualisieren
             if self.statistics_manager:
                 self.statistics_manager.update_element_statistics_ui()
+
+            # Generierungsstatus synchronisieren
+            self._sync_char_gen_status()
 
             Logger.info("CharakterVerwaltung Post-Initialisierung erfolgreich abgeschlossen")
         except Exception as e:
@@ -724,6 +733,27 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             Logger.info("Startkapital mit Handicap-Punkten erhöht")
         except Exception as e:
             Logger.error(f"Fehler beim Erhöhen des Startkapitals: {e}")
+
+    def toggle_char_gen_completed(self):
+        """Umschaltet den Charakter-Generierungsstatus"""
+        try:
+            if not (self.app.controller and self.app.controller.charakter):
+                return
+            char = self.app.controller.charakter
+            new_value = not char.char_gen_completed
+            char.char_gen_completed = new_value
+            self.char_gen_completed = new_value
+            Logger.info(f"Charakter-Generierungsstatus über Einstellungen geändert: {new_value}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Umschalten des Generierungsstatus: {e}")
+
+    def _sync_char_gen_status(self):
+        """Synchronisiert den lokalen char_gen_completed-Status mit dem Charakter-Modell"""
+        try:
+            if self.app.controller and self.app.controller.charakter:
+                self.char_gen_completed = self.app.controller.charakter.char_gen_completed
+        except Exception as e:
+            Logger.error(f"Fehler beim Synchronisieren des Generierungsstatus: {e}")
 
     def erhoehe_aufstieg(self):
         """Erhöht die Aufstiege"""
