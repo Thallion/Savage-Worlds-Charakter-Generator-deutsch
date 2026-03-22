@@ -632,34 +632,42 @@ class CharakterVerwaltungWidget(MDBoxLayout):
     # ==================== CHARAKTER-EINSTELLUNGEN ====================
 
     def update_maximale_attributsteigerungen(self):
-        """Aktualisiert die maximalen Attributsteigerungen"""
+        """Aktualisiert die maximalen Attributsteigerungen und passt verbleibende Punkte an"""
         try:
             if not self.app.controller:
                 Logger.warning("Controller nicht verfügbar für Attributsteigerungen-Update")
                 return
 
+            char = self.app.controller.charakter
             field_value = self.ids.attributsteigerungen_field.text
             try:
                 new_value = int(field_value)
-                self.app.controller.charakter.maximale_attributsteigerungen = new_value
-                Logger.info(f"Maximale Attributsteigerungen aktualisiert auf: {new_value}")
+                old_value = char.maximale_attributsteigerungen
+                differenz = new_value - old_value
+                char.maximale_attributsteigerungen = new_value
+                char.verbleibende_attributsteigerungen = max(0, char.verbleibende_attributsteigerungen + differenz)
+                Logger.info(f"Attributsteigerungen: max={new_value}, verbleibend={char.verbleibende_attributsteigerungen}")
             except ValueError:
                 Logger.warning(f"Ungültiger Wert für Attributsteigerungen: {field_value}")
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der Attributsteigerungen: {e}")
 
     def update_maximale_fertigkeitssteigerungen(self):
-        """Aktualisiert die maximalen Fertigkeitssteigerungen"""
+        """Aktualisiert die maximalen Fertigkeitssteigerungen und passt verbleibende Punkte an"""
         try:
             if not self.app.controller:
                 Logger.warning("Controller nicht verfügbar für Fertigkeitssteigerungen-Update")
                 return
 
+            char = self.app.controller.charakter
             field_value = self.ids.fertigkeitssteigerungen_field.text
             try:
                 new_value = int(field_value)
-                self.app.controller.charakter.maximale_fertigkeitssteigerungen = new_value
-                Logger.info(f"Maximale Fertigkeitssteigerungen aktualisiert auf: {new_value}")
+                old_value = char.maximale_fertigkeitssteigerungen
+                differenz = new_value - old_value
+                char.maximale_fertigkeitssteigerungen = new_value
+                char.verbleibende_fertigkeitssteigerungen = max(0, char.verbleibende_fertigkeitssteigerungen + differenz)
+                Logger.info(f"Fertigkeitssteigerungen: max={new_value}, verbleibend={char.verbleibende_fertigkeitssteigerungen}")
             except ValueError:
                 Logger.warning(f"Ungültiger Wert für Fertigkeitssteigerungen: {field_value}")
         except Exception as e:
@@ -862,7 +870,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
             try:
                 attr_val = int(self._popup_attr_field.text)
+                old_attr = char.maximale_attributsteigerungen
+                differenz = attr_val - old_attr
                 char.maximale_attributsteigerungen = attr_val
+                char.verbleibende_attributsteigerungen = max(0, char.verbleibende_attributsteigerungen + differenz)
                 if 'attributsteigerungen_field' in self.ids:
                     self.ids.attributsteigerungen_field.text = str(attr_val)
             except ValueError:
@@ -870,7 +881,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
             try:
                 fert_val = int(self._popup_fert_field.text)
+                old_fert = char.maximale_fertigkeitssteigerungen
+                differenz = fert_val - old_fert
                 char.maximale_fertigkeitssteigerungen = fert_val
+                char.verbleibende_fertigkeitssteigerungen = max(0, char.verbleibende_fertigkeitssteigerungen + differenz)
                 if 'fertigkeitssteigerungen_field' in self.ids:
                     self.ids.fertigkeitssteigerungen_field.text = str(fert_val)
             except ValueError:

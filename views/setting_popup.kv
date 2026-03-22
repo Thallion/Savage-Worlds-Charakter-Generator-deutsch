@@ -1,21 +1,54 @@
 <AddSettingPopup>:
     orientation: "vertical"
-    spacing: "12dp"
+    spacing: "8dp"
     padding: "12dp"
+    size_hint_y: None
+    height: self.minimum_height
+
+    MDLabel:
+        text: "Speichert den aktuellen Charakter als neues Setting."
+        theme_text_color: "Secondary"
+        font_size: "12sp"
+        size_hint_y: None
+        height: self.texture_size[1] + dp(8)
+
+    MDLabel:
+        text: "Setting-Name *"
+        theme_text_color: "Primary"
+        font_size: "13sp"
+        bold: True
+        size_hint_y: None
+        height: dp(24)
+
     MDTextField:
         id: setting_name_input
         mode: "outlined"
-        hint_text: "Name des neuen Settings"
         max_text_length: 50
         font_size: "16sp"
-        required: True
+        size_hint_y: None
+        height: dp(56)
+
+        MDTextFieldHintText:
+            text: "z.B. Meine Deadlands Kampagne"
+
+    MDLabel:
+        text: "Beschreibung (optional)"
+        theme_text_color: "Primary"
+        font_size: "13sp"
+        size_hint_y: None
+        height: dp(24)
+
     MDTextField:
         id: setting_description_input
         mode: "outlined"
-        hint_text: "Beschreibung des neuen Settings"
         multiline: True
         max_text_length: 200
         font_size: "16sp"
+        size_hint_y: None
+        height: dp(80)
+
+        MDTextFieldHintText:
+            text: "Kurze Beschreibung des Settings"
 
 <LoadSettingPopup>:
     orientation: "vertical"

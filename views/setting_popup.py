@@ -24,7 +24,10 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
-from kivymd.uix.dialog import MDDialog
+from kivymd.uix.dialog import (
+    MDDialog, MDDialogHeadlineText, MDDialogContentContainer,
+    MDDialogButtonContainer
+)
 from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
@@ -320,21 +323,19 @@ class SettingDialogHandler:
         popup_content = AddSettingPopup(controller=self.controller)
         popup_content.repository = self.repository
 
-        # Container für den Dialogaufbau (Titel, Inhalt, Buttonleiste)
-        container = MDBoxLayout(orientation="vertical", spacing="12dp", padding="12dp")
-        title_label = MDLabel(text="Neues Setting erstellen", halign="center",
-                              font_style="Title", size_hint_y=None, height="40dp")
-        container.add_widget(title_label)
-        container.add_widget(popup_content)
-        btn_container = MDBoxLayout(orientation="horizontal", spacing="12dp",
-                                    size_hint_y=None, height="40dp")
-        btn_cancel = create_text_button("Abbrechen", lambda x: self.dialog.dismiss())
-        btn_save = create_text_button("Speichern", popup_content.save_setting)
-        btn_container.add_widget(btn_cancel)
-        btn_container.add_widget(btn_save)
-        container.add_widget(btn_container)
-        self.dialog = MDDialog(auto_dismiss=False)
-        self.dialog.add_widget(container)
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(text="Neues Setting erstellen"),
+            MDDialogContentContainer(
+                popup_content,
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                create_text_button("Abbrechen", lambda x: self.dialog.dismiss()),
+                create_text_button("Speichern", popup_content.save_setting),
+                spacing="8dp",
+            ),
+            auto_dismiss=False,
+        )
         popup_content.popup = self.dialog
         self.dialog.open()
 
