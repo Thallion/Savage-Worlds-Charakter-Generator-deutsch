@@ -126,9 +126,11 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Service Container mit dem finalen Controller aktualisieren
         service_container.initialize(self.controller)
         
-        # Android Statusbar/Notch-Höhe ermitteln
+        # Android Statusbar/Notch-Höhe und Navigationsleisten-Höhe ermitteln
         self._android_top_padding = dp(24)  # Fallback
+        self._android_bottom_padding = dp(24)  # Fallback für System-Navigationsleiste
         self._detect_android_top_padding()
+        self._detect_android_bottom_padding()
 
         # NavigationRail-Items und Modus-Tracking
         self.rail_items = []
@@ -1463,7 +1465,11 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.error(f"Fehler beim Setzen der Logger-Sichtbarkeit: {str(e)}")
 
     def _update_mobile_orientation(self):
-        """Aktualisiert die Navigation basierend auf Portrait/Landscape im Mobile-Modus"""
+        """Aktualisiert die Navigation basierend auf Portrait/Landscape im Mobile-Modus.
+
+        Portrait: Bottom-Bar mit Padding für System-Navigationsleiste.
+        Landscape: NavigationRail links, keine Bottom-Bar.
+        """
         try:
             root = self.root
             if not root or not self._mobile_modus_active:
@@ -1482,7 +1488,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 nav_rail_container.opacity = 0
                 self._nav_rail_visible = False
                 if bottom_bar:
-                    bottom_bar.height = dp(56)
+                    # Höhe = Inhalt (56dp) + Platz für System-Navigationsleiste
+                    bottom_bar.height = dp(56) + self._android_bottom_padding
+                    bottom_bar.padding = [0, dp(4), 0, self._android_bottom_padding]
                     bottom_bar.opacity = 1
                 Logger.debug("Mobile Portrait: Rail versteckt, Bottom-Bar sichtbar")
             else:
@@ -1549,6 +1557,41 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.info("jnius nicht verfügbar (kein Android), verwende Fallback-Padding")
         except Exception as e:
             Logger.warning(f"Android Top-Padding Erkennung fehlgeschlagen: {e}, verwende Fallback")
+
+    def _detect_android_bottom_padding(self):
+        """Ermittelt die System-Navigationsleisten-Höhe auf Android für Bottom-Padding"""
+        try:
+            from kivy.utils import platform as _platform
+            if _platform != 'android':
+                return
+
+            from jnius import autoclass
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            activity = PythonActivity.mActivity
+            resources = activity.getResources()
+
+            # Navigation-Bar-Höhe abfragen
+            resource_id = resources.getIdentifier(
+                'navigation_bar_height', 'dimen', 'android'
+            )
+            if resource_id > 0:
+                nav_bar_px = resources.getDimensionPixelSize(resource_id)
+                density = resources.getDisplayMetrics().density
+                nav_bar_dp = nav_bar_px / density if density > 0 else 24
+
+                # Sicherheitspuffer hinzufügen
+                bottom_dp = nav_bar_dp + 4
+                self._android_bottom_padding = dp(bottom_dp)
+                Logger.info(
+                    f"Android Bottom-Padding: {bottom_dp:.0f}dp "
+                    f"(Navigationsleiste: {nav_bar_dp:.0f}dp)"
+                )
+            else:
+                Logger.warning("Android: navigation_bar_height Resource nicht gefunden, verwende Fallback")
+        except ImportError:
+            Logger.info("jnius nicht verfügbar (kein Android), verwende Fallback-Padding")
+        except Exception as e:
+            Logger.warning(f"Android Bottom-Padding Erkennung fehlgeschlagen: {e}, verwende Fallback")
 
     def _on_window_resize(self, instance, width, height):
         """Reagiert auf Fenster-Resize.

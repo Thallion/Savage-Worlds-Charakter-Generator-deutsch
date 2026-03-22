@@ -267,6 +267,13 @@ class VoelkerWidget(MDBoxLayout):
                 auto_dismiss=False,
             )
 
+            # Android-Fix: Bei Touch außerhalb des TextFields Fokus freigeben,
+            # damit Buttons nicht vom fokussierten TextField blockiert werden.
+            def _defocus_on_touch(instance, touch):
+                if search_field.focus and not search_field.collide_point(*touch.pos):
+                    search_field.focus = False
+            self.volk_search_dialog.bind(on_touch_down=_defocus_on_touch)
+
             self.volk_search_dialog.open()
             Logger.debug(f"Völker-Popup geöffnet mit {len(voelker_namen)} Völkern")
 

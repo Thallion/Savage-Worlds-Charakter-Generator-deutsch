@@ -23,8 +23,19 @@ from kivymd.uix.behaviors import RotateBehavior
 
 
 class TouchableBoxLayout(ButtonBehavior, MDBoxLayout):
-    """MDBoxLayout mit Button-Verhalten für zuverlässige Touch-Events auf Android"""
-    pass
+    """MDBoxLayout mit Button-Verhalten für zuverlässige Touch-Events auf Android.
+
+    Kind-Widgets (MDIcon, MDLabel) können Touch-Events konsumieren,
+    bevor ButtonBehavior sie verarbeitet. Deshalb wird on_touch_down
+    so überschrieben, dass ButtonBehavior den Touch direkt verarbeitet
+    und nicht an Kinder weiterleitet.
+    """
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            # ButtonBehavior direkt verarbeiten lassen, NICHT an Kinder weiterleiten
+            return ButtonBehavior.on_touch_down(self, touch)
+        return False
 
 
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemTrailingIcon

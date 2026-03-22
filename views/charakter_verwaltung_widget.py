@@ -261,6 +261,14 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             size_hint=(0.85, None),
             auto_dismiss=False,
         )
+
+        # Android-Fix: Bei Touch außerhalb des TextFields Fokus freigeben,
+        # damit Buttons nicht vom fokussierten TextField blockiert werden.
+        def _defocus_on_touch(instance, touch):
+            if search_field.focus and not search_field.collide_point(*touch.pos):
+                search_field.focus = False
+        self._wizard_setting_dialog.bind(on_touch_down=_defocus_on_touch)
+
         self._wizard_setting_dialog.open()
 
     def _on_setting_selected(self):
@@ -364,6 +372,17 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             size_hint=(0.85, None),
             auto_dismiss=False,
         )
+
+        # Android-Fix: Bei Touch außerhalb der TextFields Fokus freigeben,
+        # damit Buttons nicht vom fokussierten TextField blockiert werden.
+        text_fields = [self._wizard_attr_field, self._wizard_fert_field,
+                       self._wizard_money_field, self._wizard_currency_field]
+        def _defocus_on_touch(instance, touch):
+            for tf in text_fields:
+                if tf.focus and not tf.collide_point(*touch.pos):
+                    tf.focus = False
+        self._wizard_config_dialog.bind(on_touch_down=_defocus_on_touch)
+
         self._wizard_config_dialog.open()
 
     def _on_config_back(self):

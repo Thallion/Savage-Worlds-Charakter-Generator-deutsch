@@ -32,16 +32,32 @@ from views.setting_popup import SettingDialogHandler
 from functions.statblock_generator import generate_character_statblock, copy_statblock_to_clipboard
 
 
+def defocus_and_call(callback, *args):
+    """Gibt den Fokus aller Textfelder frei und ruft den Callback verzögert auf.
+
+    Auf Android konsumiert ein fokussiertes MDTextField die Touch-Events
+    von Dialog-Buttons. Durch Window.release_all_keyboards() und eine
+    kurze Verzögerung wird sichergestellt, dass der Button-Callback ausgeführt wird.
+
+    Kann als Standalone-Funktion importiert werden:
+        from services.dialog_service import defocus_and_call
+    """
+    from kivy.core.window import Window
+    from kivy.clock import Clock
+    Window.release_all_keyboards()
+    Clock.schedule_once(lambda dt: callback(*args), 0.1)
+
+
 class DialogService:
     """Service für Dialog-Management und Benutzer-Feedback"""
-    
+
     def __init__(self, controller, theme_cls):
         self.controller = controller
         self.theme_cls = theme_cls
-        
+
         # Dialog-Handler initialisieren
         self._initialize_dialog_handlers()
-        
+
         # Aktuelle Dialoge verfolgen
         self.active_dialogs = {}
     
@@ -402,19 +418,19 @@ class DialogService:
                 MDButton(
                     MDButtonText(text="Abbrechen"),
                     style="text",
-                    on_release=lambda x: handle_cancel()
+                    on_release=lambda x: defocus_and_call(handle_cancel)
                 ),
                 MDButton(
                     MDButtonText(text="OK"),
                     style="text",
-                    on_release=lambda x: handle_confirm()
+                    on_release=lambda x: defocus_and_call(handle_confirm)
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
             size_hint=(0.85, None),
             auto_dismiss=False,
         )
-        
+
         self.active_dialogs['input'] = input_dialog
         input_dialog.open()
     
@@ -471,12 +487,12 @@ class DialogService:
                 MDButton(
                     MDButtonText(text="Abbrechen"),
                     style="text",
-                    on_release=lambda x: handle_cancel()
+                    on_release=lambda x: defocus_and_call(handle_cancel)
                 ),
                 MDButton(
                     MDButtonText(text="OK"),
                     style="text",
-                    on_release=lambda x: handle_confirm()
+                    on_release=lambda x: defocus_and_call(handle_confirm)
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
@@ -572,16 +588,16 @@ class DialogService:
         copy_button = MDButton(
             style="elevated",
             size_hint_x=0.5,
-            on_release=lambda x: self._copy_statblock(statblock_text)
+            on_release=lambda x: defocus_and_call(self._copy_statblock, statblock_text)
         )
         copy_button.add_widget(MDButtonText(text="Kopieren"))
         button_container.add_widget(copy_button)
-        
+
         # Schließen-Button
         close_button = MDButton(
             style="text",
             size_hint_x=0.5,
-            on_release=lambda x: self._dismiss_dialog('statblock')
+            on_release=lambda x: defocus_and_call(self._dismiss_dialog, 'statblock')
         )
         close_button.add_widget(MDButtonText(text="Schließen"))
         button_container.add_widget(close_button)
