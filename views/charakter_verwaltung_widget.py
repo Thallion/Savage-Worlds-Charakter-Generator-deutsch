@@ -553,7 +553,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                     on_release=lambda x, p=fpath: _select_file(p),
                     md_bg_color=self.app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
                 )
-                item.add_widget(MDListItemLeadingIcon(icon=icon))
+                if is_sel:
+                    item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                else:
+                    item.add_widget(MDListItemLeadingIcon(icon=icon))
                 headline = MDListItemHeadlineText(text=fname)
                 if is_sel:
                     headline.bold = True

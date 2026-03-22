@@ -203,7 +203,7 @@ class CharacterHandler:
                 dialog_service.show_error_dialog(f"Fehler beim Schnellspeichern: {str(e)}")
 
     def speichere_charakter(self):
-        """Speichern als-Dialog - erst Dateiname abfragen, dann Pfad wählen"""
+        """Speichern als-Dialog - kombinierter Dialog mit Dateiname und Pfadauswahl"""
         try:
             if not (self.controller and self.controller.charakter):
                 dialog_service = service_container.get_dialog_service()
@@ -219,11 +219,236 @@ class CharacterHandler:
                     dialog_service.show_error_dialog("FileManager-Service nicht verfügbar.")
                 return
 
-            # Erst Dateiname abfragen, dann FileManager öffnen
-            self._show_save_filename_dialog()
+            from kivy.utils import platform as _platform
+            if _platform != 'android':
+                # Desktop: Kombinierter Dialog mit Dateiname + Pfadauswahl
+                self._show_combined_save_dialog()
+            else:
+                # Android: Erst Dateiname abfragen, dann FileManager öffnen
+                self._show_save_filename_dialog()
 
         except Exception as e:
             Logger.error(f"Fehler beim Initialisieren des Speichervorgangs: {str(e)}", exc_info=True)
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler beim Speichern: {str(e)}")
+
+    def _show_combined_save_dialog(self):
+        """Zeigt einen kombinierten Dialog mit Dateiname-Eingabe und Pfadauswahl (Desktop)"""
+        suggested_name = self._generate_suggested_filename()
+        file_service = service_container.get_file_manager_service()
+        default_dir = str(file_service.get_default_directory('chars')) if file_service else os.path.expanduser("~")
+        self._show_combined_save_dialog_with_state(suggested_name, default_dir)
+
+    def _open_path_chooser_for_save_dialog(self, current_path):
+        """Öffnet FileManager zur Verzeichniswahl und zeigt danach den Speichern-Dialog erneut"""
+        try:
+            file_service = service_container.get_file_manager_service()
+            if not file_service:
+                return
+
+            # Originale Callbacks sichern
+            original_select = file_service.file_manager.select_path
+            original_exit = file_service.file_manager.exit_manager
+
+            def _on_path_selected(path):
+                # Pfad normalisieren: Wenn Datei gewählt, Verzeichnis nehmen
+                selected_dir = path if os.path.isdir(path) else os.path.dirname(path)
+                # Callbacks wiederherstellen
+                file_service.file_manager.select_path = original_select
+                file_service.file_manager.exit_manager = original_exit
+                file_service.file_manager.close()
+                file_service.manager_open = False
+                # Dialog erneut mit neuem Pfad öffnen
+                from kivy.clock import Clock
+                Clock.schedule_once(
+                    lambda dt: self._reopen_save_dialog_with_path(selected_dir), 0.2
+                )
+
+            def _on_exit(*args):
+                # Callbacks wiederherstellen
+                file_service.file_manager.select_path = original_select
+                file_service.file_manager.exit_manager = original_exit
+                file_service.manager_open = False
+                file_service.file_manager.close()
+                # Dialog erneut mit altem Pfad öffnen
+                from kivy.clock import Clock
+                Clock.schedule_once(
+                    lambda dt: self._reopen_save_dialog_with_path(current_path), 0.2
+                )
+
+            # Temporär Callbacks umleiten
+            file_service.file_manager.select_path = _on_path_selected
+            file_service.file_manager.exit_manager = _on_exit
+            file_service.file_manager.show(current_path)
+            file_service.manager_open = True
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Pfad-Choosers: {e}")
+
+    def _reopen_save_dialog_with_path(self, new_path):
+        """Öffnet den Speichern-Dialog erneut mit dem gewählten Pfad"""
+        try:
+            filename = getattr(self, '_save_dialog_name_field', None)
+            current_name = filename.text if filename else self._generate_suggested_filename()
+            self._save_dialog = None
+            self._show_combined_save_dialog_with_state(current_name, new_path)
+        except Exception as e:
+            Logger.error(f"Fehler beim erneuten Öffnen des Speichern-Dialogs: {e}")
+
+    def _show_combined_save_dialog_with_state(self, filename, save_path):
+        """Zeigt kombinierten Speichern-Dialog mit vorgegebenem Dateiname und Pfad"""
+        try:
+            from kivy.metrics import dp
+            from kivymd.uix.boxlayout import MDBoxLayout
+            from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+            from kivymd.uix.label import MDLabel
+            from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
+            from kivymd.uix.dialog import (
+                MDDialog, MDDialogHeadlineText, MDDialogContentContainer,
+                MDDialogButtonContainer
+            )
+
+            content = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(16),
+                padding=[dp(16), dp(8), dp(16), dp(8)],
+                size_hint_y=None,
+                height=dp(180),
+            )
+
+            name_field = MDTextField(
+                mode="outlined",
+                size_hint_y=None,
+                height=dp(56),
+                text=filename,
+            )
+            name_field.add_widget(MDTextFieldHintText(text="Dateiname"))
+            content.add_widget(name_field)
+
+            path_row = MDBoxLayout(
+                orientation="horizontal",
+                spacing=dp(8),
+                size_hint_y=None,
+                height=dp(48),
+            )
+
+            path_label = MDLabel(
+                text=save_path,
+                theme_text_color="Secondary",
+                font_size=dp(12),
+                shorten=True,
+                shorten_from="left",
+                text_size=(None, None),
+                size_hint_x=1,
+                valign="center",
+            )
+            path_row.add_widget(path_label)
+
+            change_path_btn = MDButton(
+                style="outlined",
+                size_hint_x=None,
+                width=dp(120),
+            )
+            change_path_btn.add_widget(MDButtonIcon(icon="folder-open"))
+            change_path_btn.add_widget(MDButtonText(text="Ändern"))
+            path_row.add_widget(change_path_btn)
+
+            content.add_widget(path_row)
+
+            content.add_widget(MDLabel(
+                text="Speicherort:",
+                theme_text_color="Secondary",
+                font_size=dp(11),
+                size_hint_y=None,
+                height=dp(20),
+            ))
+
+            self._save_dialog = MDDialog(
+                MDDialogHeadlineText(text="Charakter speichern als..."),
+                MDDialogContentContainer(content, orientation="vertical"),
+                MDDialogButtonContainer(
+                    MDButton(
+                        MDButtonText(text="Abbrechen"),
+                        style="text",
+                        on_release=lambda x: self._save_dialog.dismiss(),
+                    ),
+                    MDButton(
+                        MDButtonText(text="Speichern"),
+                        style="text",
+                        on_release=lambda x: self._on_combined_save(
+                            name_field.text, path_label.text
+                        ),
+                    ),
+                    spacing="8dp",
+                ),
+                auto_dismiss=False,
+            )
+
+            self._save_dialog_path_label = path_label
+            self._save_dialog_name_field = name_field
+
+            def _on_change_path(instance):
+                self._save_dialog.dismiss()
+                self._open_path_chooser_for_save_dialog(save_path)
+
+            change_path_btn.bind(on_release=_on_change_path)
+
+            self._save_dialog.open()
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern-Dialog mit State: {e}", exc_info=True)
+
+    def _on_combined_save(self, filename, save_path):
+        """Callback für den kombinierten Speichern-Dialog"""
+        try:
+            if self._save_dialog:
+                self._save_dialog.dismiss()
+                self._save_dialog = None
+
+            if not filename or not filename.strip():
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog("Bitte einen Dateinamen eingeben.")
+                return
+
+            filename = filename.strip()
+            if not filename.lower().endswith('.json'):
+                filename = f"{filename}.json"
+
+            filepath = os.path.join(save_path, filename)
+            self._save_to_path(filepath)
+
+        except Exception as e:
+            Logger.error(f"Fehler beim kombinierten Speichern: {e}", exc_info=True)
+
+    def _save_to_path(self, filepath):
+        """Speichert den Charakter unter dem angegebenen Pfad"""
+        try:
+            if not filepath.lower().endswith('.json'):
+                filepath = f"{filepath}.json"
+
+            # Verzeichnis erstellen falls nötig
+            dir_path = os.path.dirname(filepath)
+            if dir_path and not os.path.exists(dir_path):
+                os.makedirs(dir_path, exist_ok=True)
+
+            controller = self.app.controller
+            success = controller.speichere_charakter_als_json(filepath)
+
+            dialog_service = service_container.get_dialog_service()
+            if success and dialog_service:
+                filename = os.path.basename(filepath)
+                dialog_service.show_success_dialog(
+                    f"Charakter wurde gespeichert:\n{filename}",
+                    "Speichern erfolgreich"
+                )
+                Logger.info(f"Charakter gespeichert: {filepath}")
+            elif dialog_service:
+                dialog_service.show_error_dialog("Fehler beim Speichern des Charakters.")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Speichern: {e}", exc_info=True)
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_error_dialog(f"Fehler beim Speichern: {str(e)}")

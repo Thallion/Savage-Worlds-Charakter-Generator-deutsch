@@ -200,95 +200,155 @@ class HTMLManager:
 
     @staticmethod
     def _open_file_on_android(file_path, mime_type='*/*'):
-        """Öffnet eine Datei auf Android - HTML via WebView, PDF via Intent"""
+        """Öffnet eine Datei auf Android über mehrere Fallback-Strategien"""
+        import os
+
+        if not os.path.exists(file_path):
+            Logger.error(f"Android: Datei nicht gefunden: {file_path}")
+            return
+
+        # Strategie 1: Intent mit FileProvider (Android 7+)
         try:
-            if mime_type == 'text/html':
-                HTMLManager._open_html_in_webview(file_path)
-            else:
-                HTMLManager._open_with_intent(file_path, mime_type)
+            HTMLManager._open_with_fileprovider(file_path, mime_type)
+            return
         except Exception as e:
-            Logger.error(f"Android: Fehler beim Öffnen der Datei: {e}")
+            Logger.warning(f"Android: FileProvider fehlgeschlagen: {e}")
+
+        # Strategie 2: Intent mit file:// URI (ältere Android-Versionen)
+        try:
+            HTMLManager._open_with_file_uri(file_path, mime_type)
+            return
+        except Exception as e:
+            Logger.warning(f"Android: file:// URI fehlgeschlagen: {e}")
+
+        # Strategie 3: Für HTML - Inhalt in WebView anzeigen
+        if mime_type == 'text/html':
+            try:
+                HTMLManager._open_html_in_webview(file_path)
+                return
+            except Exception as e:
+                Logger.warning(f"Android: WebView fehlgeschlagen: {e}")
+
+        # Strategie 4: Android Share-Intent als letzter Fallback
+        try:
+            HTMLManager._share_file_on_android(file_path, mime_type)
+        except Exception as e:
+            Logger.error(f"Android: Alle Öffnungs-Strategien fehlgeschlagen: {e}")
+
+    @staticmethod
+    def _open_with_fileprovider(file_path, mime_type):
+        """Öffnet eine Datei über FileProvider (bevorzugt auf Android 7+)"""
+        from jnius import autoclass
+
+        Intent = autoclass('android.content.Intent')
+        File = autoclass('java.io.File')
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        FileProvider = autoclass('androidx.core.content.FileProvider')
+
+        context = PythonActivity.mActivity
+        java_file = File(file_path)
+        authority = context.getPackageName() + '.fileprovider'
+        content_uri = FileProvider.getUriForFile(context, authority, java_file)
+
+        intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(content_uri, mime_type)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        context.startActivity(intent)
+        Logger.info(f"Android: Datei geöffnet via FileProvider: {file_path}")
+
+    @staticmethod
+    def _open_with_file_uri(file_path, mime_type):
+        """Öffnet eine Datei über file:// URI (Fallback für ältere Android-Versionen)"""
+        from jnius import autoclass
+
+        Intent = autoclass('android.content.Intent')
+        Uri = autoclass('android.net.Uri')
+        File = autoclass('java.io.File')
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+
+        context = PythonActivity.mActivity
+        java_file = File(file_path)
+        content_uri = Uri.fromFile(java_file)
+
+        intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(content_uri, mime_type)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        context.startActivity(intent)
+        Logger.info(f"Android: Datei geöffnet via file:// URI: {file_path}")
 
     @staticmethod
     def _open_html_in_webview(file_path):
         """Öffnet eine HTML-Datei in einem Android WebView"""
-        try:
-            from jnius import autoclass, cast
-            from android.runnable import run_on_ui_thread
+        from jnius import autoclass
+        from android.runnable import run_on_ui_thread
 
-            PythonActivity = autoclass('org.kivy.android.PythonActivity')
-            WebView = autoclass('android.webkit.WebView')
-            WebViewClient = autoclass('android.webkit.WebViewClient')
-            LinearLayout = autoclass('android.widget.LinearLayout')
-            LayoutParams = autoclass('android.widget.LinearLayout$LayoutParams')
-            AlertDialog = autoclass('android.app.AlertDialog$Builder')
-            DialogInterface = autoclass('android.content.DialogInterface')
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        WebView = autoclass('android.webkit.WebView')
+        WebViewClient = autoclass('android.webkit.WebViewClient')
+        LayoutParams = autoclass('android.widget.LinearLayout$LayoutParams')
+        AlertDialog = autoclass('android.app.AlertDialog$Builder')
 
-            activity = PythonActivity.mActivity
+        activity = PythonActivity.mActivity
 
-            @run_on_ui_thread
-            def show_webview():
-                webview = WebView(activity)
-                webview.getSettings().setJavaScriptEnabled(True)
-                webview.getSettings().setBuiltInZoomControls(True)
-                webview.getSettings().setDisplayZoomControls(False)
-                webview.getSettings().setLoadWithOverviewMode(True)
-                webview.getSettings().setUseWideViewPort(True)
-                webview.setWebViewClient(WebViewClient())
+        @run_on_ui_thread
+        def show_webview():
+            webview = WebView(activity)
+            webview.getSettings().setJavaScriptEnabled(True)
+            webview.getSettings().setBuiltInZoomControls(True)
+            webview.getSettings().setDisplayZoomControls(False)
+            webview.getSettings().setLoadWithOverviewMode(True)
+            webview.getSettings().setUseWideViewPort(True)
+            webview.setWebViewClient(WebViewClient())
+            webview.loadUrl('file://' + file_path)
 
-                # HTML-Datei laden
-                webview.loadUrl('file://' + file_path)
+            params = LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
+            )
+            webview.setLayoutParams(params)
 
-                # LayoutParams für Vollbild
-                params = LayoutParams(
-                    LayoutParams.MATCH_PARENT,
-                    LayoutParams.MATCH_PARENT
-                )
-                webview.setLayoutParams(params)
+            builder = AlertDialog(activity)
+            builder.setView(webview)
+            builder.setPositiveButton("Schließen", None)
+            builder.setCancelable(True)
+            dialog = builder.create()
+            dialog.show()
 
-                # Dialog mit WebView anzeigen
-                builder = AlertDialog(activity)
-                builder.setView(webview)
-                builder.setPositiveButton("Schließen", None)
-                builder.setCancelable(True)
-                dialog = builder.create()
-                dialog.show()
-
-            show_webview()
-            Logger.info(f"Android: HTML in WebView geöffnet: {file_path}")
-        except Exception as e:
-            Logger.error(f"Android: WebView-Fehler: {e}")
-            # Letzter Fallback: Intent
-            HTMLManager._open_with_intent(file_path, 'text/html')
+        show_webview()
+        Logger.info(f"Android: HTML in WebView geöffnet: {file_path}")
 
     @staticmethod
-    def _open_with_intent(file_path, mime_type):
-        """Öffnet eine Datei auf Android über Intent"""
+    def _share_file_on_android(file_path, mime_type):
+        """Teilt eine Datei über Android Share-Intent (letzter Fallback)"""
+        from jnius import autoclass
+        import os
+
+        Intent = autoclass('android.content.Intent')
+        Uri = autoclass('android.net.Uri')
+        File = autoclass('java.io.File')
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+
+        context = PythonActivity.mActivity
+        java_file = File(file_path)
+
+        # Versuche FileProvider für Share
         try:
-            from jnius import autoclass
+            FileProvider = autoclass('androidx.core.content.FileProvider')
+            authority = context.getPackageName() + '.fileprovider'
+            content_uri = FileProvider.getUriForFile(context, authority, java_file)
+        except Exception:
+            content_uri = Uri.fromFile(java_file)
 
-            Intent = autoclass('android.content.Intent')
-            Uri = autoclass('android.net.Uri')
-            File = autoclass('java.io.File')
-            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        intent = Intent(Intent.ACTION_SEND)
+        intent.setType(mime_type)
+        intent.putExtra(Intent.EXTRA_STREAM, content_uri)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-            context = PythonActivity.mActivity
-            java_file = File(file_path)
-
-            # Versuche FileProvider, dann Fallback auf file:// URI
-            try:
-                FileProvider = autoclass('androidx.core.content.FileProvider')
-                authority = context.getPackageName() + '.fileprovider'
-                content_uri = FileProvider.getUriForFile(context, authority, java_file)
-            except Exception:
-                content_uri = Uri.fromFile(java_file)
-
-            intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndType(content_uri, mime_type)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-            context.startActivity(intent)
-            Logger.info(f"Android: Datei geöffnet via Intent: {file_path}")
-        except Exception as e:
-            Logger.error(f"Android: Intent-Fehler: {e}")
+        chooser = Intent.createChooser(intent, "Charakterbogen öffnen mit...")
+        chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(chooser)
+        Logger.info(f"Android: Datei geteilt via Share-Intent: {os.path.basename(file_path)}")

@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
+  "mobile_modus": false,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "HeXXen1773",
-  "force_mobile_layout": true,
+  "force_mobile_layout": false,
   "config_version": "1.0",
-  "last_updated": "2026-03-22T10:19:21.793473"
+  "last_updated": "2026-03-22T10:37:15.953173"
 }
