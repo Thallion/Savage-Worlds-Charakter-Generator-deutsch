@@ -368,10 +368,9 @@ class SW_Charakter_GeneratorApp(MDApp):
         else:
             Logger.warning("Logger-Widget nicht gefunden")
 
-        # Fenster-Resize-Event für automatischen Moduswechsel
-        Window.bind(on_resize=self._on_window_resize)
-
         # KORRIGIERT: Tabs und Screens mit mehr Verzögerung für vollständige UI-Initialisierung
+        # Window.bind(on_resize) wird NACH Tab-Setup in build_tabs_and_screens_immediate gebunden,
+        # um Race-Condition bei Android-Startup zu vermeiden
         Clock.schedule_once(lambda dt: self.build_tabs_and_screens_immediate(), 0.5)
 
     def build_tabs_and_screens_immediate(self):
@@ -511,6 +510,10 @@ class SW_Charakter_GeneratorApp(MDApp):
             self.build_navigation_rail()
             self._setup_swipe_navigation(screen_manager)
             self._apply_initial_navigation_mode()
+
+            # Fenster-Resize-Event NACH initialer Navigation binden
+            # (verhindert Race-Condition bei Android-Startup)
+            Window.bind(on_resize=self._on_window_resize)
 
             # Superkräfte-Tab-Sichtbarkeit an Setting binden
             if self.controller:
@@ -1131,10 +1134,10 @@ class SW_Charakter_GeneratorApp(MDApp):
     def _on_window_resize(self, instance, width, height):
         """Automatischer Moduswechsel basierend auf Fensterbreite"""
         try:
-            # Bei manuellem Override nicht automatisch wechseln
+            from kivy.utils import platform as _platform
+
             if self._mobile_modus_override is not None:
-                # Orientierung nur auf Android aktualisieren (Portrait/Landscape FAB-Wechsel)
-                from kivy.utils import platform as _platform
+                # Bei manuellem Override nicht automatisch wechseln
                 if _platform == 'android' and self._mobile_modus_active:
                     self._update_mobile_orientation()
                 return
@@ -1143,6 +1146,12 @@ class SW_Charakter_GeneratorApp(MDApp):
                 self.set_navigation_mode(True)
             else:
                 self.set_navigation_mode(False)
+
+            # Orientierung auf Android immer aktualisieren (Portrait/Landscape-Wechsel)
+            # set_navigation_mode hat einen Guard der bei gleichem Modus zurückkehrt,
+            # daher muss _update_mobile_orientation separat aufgerufen werden
+            if _platform == 'android' and self._mobile_modus_active:
+                self._update_mobile_orientation()
 
         except Exception as e:
             Logger.error(f"Fehler bei Fenster-Resize-Handler: {str(e)}")
