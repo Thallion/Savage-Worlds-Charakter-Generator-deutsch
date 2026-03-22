@@ -15,6 +15,7 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.button import MDIconButton, MDButton, MDButtonText
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.list import MDList
+from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, DictProperty
 from kivy.metrics import dp
@@ -253,12 +254,12 @@ class VoelkerWidget(MDBoxLayout):
                     MDButton(
                         MDButtonText(text="Abbrechen"),
                         style="text",
-                        on_release=lambda x: self._dismiss_volk_popup(),
+                        on_release=lambda x: self._defocus_and_call(self._dismiss_volk_popup),
                     ),
                     MDButton(
                         MDButtonText(text="Bestätigen"),
                         style="text",
-                        on_release=lambda x: self._confirm_volk_popup(),
+                        on_release=lambda x: self._defocus_and_call(self._confirm_volk_popup),
                     ),
                     spacing="8dp",
                 ),
@@ -271,6 +272,12 @@ class VoelkerWidget(MDBoxLayout):
 
         except Exception as e:
             Logger.error(f"Fehler beim Völker-Popup: {e}", exc_info=True)
+
+    def _defocus_and_call(self, callback):
+        """Defokussiert alle TextFields und ruft callback verzögert auf.
+        Behebt Android-Problem: TextField-Fokus schluckt Button-Touch-Events."""
+        Window.release_all_keyboards()
+        Clock.schedule_once(lambda dt: callback(), 0.1)
 
     def _dismiss_volk_popup(self):
         """Schließt den Völker-Popup-Dialog ohne Änderung."""
@@ -868,7 +875,7 @@ class VoelkerWidget(MDBoxLayout):
                     MDButton(
                         MDButtonText(text="Abbrechen"),
                         style="text",
-                        on_release=lambda x: self.search_dialog.dismiss(),
+                        on_release=lambda x: self._defocus_and_call(self.search_dialog.dismiss),
                     ),
                     spacing="8dp",
                 ),
