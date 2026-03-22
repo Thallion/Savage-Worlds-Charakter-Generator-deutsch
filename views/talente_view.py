@@ -232,8 +232,23 @@ class TalentItemRow(MDBoxLayout):
                 self.ausgewaehlt = True
                 Logger.debug(f"TalentItemRow: {self.talent_name} erfolgreich ausgewählt")
                 self._refresh_ui()
+            else:
+                # result == False: Keine Punkte/Aufstiege übrig
+                self._show_talent_warnung()
         except Exception as e:
             Logger.error(f"Fehler beim Auswählen des Talents: {str(e)}")
+
+    def _show_talent_warnung(self):
+        """Zeigt eine Snackbar-Warnung wenn keine Punkte/Aufstiege für Talente übrig sind."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(
+                    "Keine verbleibenden Aufstiege oder Handicap-Punkte übrig."
+                )
+        except Exception as e:
+            Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
 
     def _show_pathfinder_kostenlos_dialog(self):
         """
@@ -556,6 +571,8 @@ class TalentItemRow(MDBoxLayout):
             elif result:
                 self.ausgewaehlt = True
                 self._refresh_ui()
+            elif result is False:
+                self._show_talent_warnung()
 
     def _confirm_talent_without_voraussetzungen(self):
         """Bestätigt die Auswahl eines Talents ohne erfüllte Voraussetzungen."""
@@ -572,6 +589,8 @@ class TalentItemRow(MDBoxLayout):
             if result:
                 self.ausgewaehlt = True
                 self._refresh_ui()
+            elif result is False:
+                self._show_talent_warnung()
 
     def entferne_talent(self):
         """

@@ -419,6 +419,7 @@ class AusruestungItemRow(MDBoxLayout):
                 Logger.debug(f"Cyberware-Kauf fehlgeschlagen: {self.name}")
                 self._refresh_ui()
                 self._zeige_cyberware_kauf_fehler(controller, self.name)
+                self._show_kauf_warnung(1)
         except Exception as e:
             Logger.error(f"Fehler beim konfigurierten Cyberware-Kauf: {e}")
             self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
@@ -488,15 +489,16 @@ class AusruestungItemRow(MDBoxLayout):
                 # Cyberware-Stress-Feedback auch in diesem Zweig
                 self._zeige_cyberware_feedback(controller, self.name)
             else:
-                # Kauf war nicht erfolgreich - prüfe ob es durch Android-Debouncing verhindert wurde
+                # Kauf war nicht erfolgreich
                 Logger.debug(f"Kauf fehlgeschlagen für {self.name} - Vermögen unverändert")
-                # Bei Android-Debouncing: Kein Fehler zeigen, Dialog schließen
                 if self.dialog:
                     self.dialog.dismiss()
                     self.dialog = None
                 self._refresh_ui()
                 # Cyberware: Zeige spezifische Fehlermeldung bei Stress-Überschreitung
                 self._zeige_cyberware_kauf_fehler(controller, self.name)
+                # Snackbar-Warnung bei nicht ausreichendem Vermögen
+                self._show_kauf_warnung(anzahl)
 
         except Exception as e:
             Logger.error(f"Fehler beim Verarbeiten des Kaufs: {str(e)}")
@@ -711,6 +713,18 @@ class AusruestungItemRow(MDBoxLayout):
             auto_dismiss=False,
         )
         status_dialog.open()
+
+    def _show_kauf_warnung(self, anzahl=1):
+        """Zeigt eine Snackbar-Warnung wenn der Kauf fehlschlägt."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(
+                    f"Nicht genügend Vermögen, um {anzahl}x {self.name} zu kaufen."
+                )
+        except Exception as e:
+            Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
 
     def show_error(self, message, title=ERROR_DIALOG_TITLE):
         """Zeigt einen Fehlerdialog an"""

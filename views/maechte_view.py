@@ -195,45 +195,16 @@ class MachtItemRow(MDBoxLayout):
                 Logger.warning(f"Auswahl der Macht '{self.macht_name}' fehlgeschlagen.")
 
     def _show_no_powers_dialog(self):
-        """Zeigt einen Dialog an, wenn keine verfügbaren Mächte mehr vorhanden sind."""
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
-        )
-
-        warning_label = MDLabel(
-            text="Keine verfügbaren Mächte mehr zum Auswählen! Du musst erst weitere Mächte durch Talente oder Aufstiege erwerben.",
-            size_hint_y=None,
-            height=dp(80),
-            theme_text_color="Secondary",
-            halign="left",
-            valign="middle"
-        )
-        content.add_widget(warning_label)
-
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Keine Mächte verfügbar",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="OK"),
-                    style="text",
-                    on_release=lambda x: self.close_dialog(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        self.dialog.open()
+        """Zeigt eine Snackbar-Warnung an, wenn keine verfügbaren Mächte mehr vorhanden sind."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(
+                    "Keine verfügbaren Mächte mehr. Erst weitere durch Talente oder Aufstiege erwerben."
+                )
+        except Exception as e:
+            Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
 
     def close_dialog(self):
         """Schließt den Dialog."""

@@ -13,6 +13,7 @@ from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.scrollview import MDScrollView
+from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText, MDSnackbarSupportingText
 from kivy.metrics import dp
 
 # Dialog-Handler Imports
@@ -56,7 +57,30 @@ class DialogService:
         self.waffe_dialog_handler = WaffeDialogHandler(self.controller)
         self.fertigkeit_dialog_handler = FertigkeitDialogHandler(self.controller)
         self.setting_dialog_handler = SettingDialogHandler(self.controller)
-    
+
+    def show_snackbar(self, message, duration=3):
+        """
+        Zeigt eine nicht-blockierende Snackbar-Benachrichtigung am unteren Bildschirmrand.
+        Für reine Informationen, die keine Benutzeraktion erfordern.
+
+        Args:
+            message (str): Anzuzeigende Nachricht
+            duration (int): Anzeigedauer in Sekunden (Standard: 3)
+        """
+        try:
+            snackbar = MDSnackbar(
+                MDSnackbarText(text=message),
+                y=dp(24),
+                pos_hint={"center_x": 0.5},
+                size_hint_x=0.8,
+                duration=duration,
+                auto_dismiss=True,
+            )
+            snackbar.open()
+            Logger.info(f"Snackbar: {message}")
+        except Exception as e:
+            Logger.error(f"Snackbar-Fehler: {e} - Fallback auf Logger")
+
     def show_error_dialog(self, message, title="Fehler"):
         """
         Zeigt einen Fehlerdialog
@@ -102,46 +126,15 @@ class DialogService:
     
     def show_success_dialog(self, message, title="Erfolgreich"):
         """
-        Zeigt einen Erfolgsdialog
-        
+        Zeigt eine Erfolgs-Snackbar (nicht-blockierend).
+        Ersetzt den modalen Dialog für reine Bestätigungen.
+
         Args:
             message (str): Erfolgsnachricht
-            title (str): Dialog-Titel
+            title (str): Dialog-Titel (wird in Snackbar-Text integriert)
         """
-        self._dismiss_dialog('success')
-        
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
-        )
-        
-        content.add_widget(MDLabel(
-            text=message,
-            size_hint_y=None,
-            height=dp(60),
-            text_size=(None, None)
-        ))
-        
-        success_dialog = MDDialog(
-            MDDialogHeadlineText(text=title),
-            MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="OK"),
-                    style="text",
-                    on_release=lambda x: self._dismiss_dialog('success')
-                )
-            ),
-            md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        
-        self.active_dialogs['success'] = success_dialog
-        success_dialog.open()
-        Logger.info(f"Dialog Success: {title} - {message}")
+        snackbar_text = f"{title}: {message}" if title != "Erfolgreich" else message
+        self.show_snackbar(snackbar_text, duration=3)
     
     def show_info_dialog(self, message, title="Information"):
         """
@@ -202,46 +195,15 @@ class DialogService:
     
     def show_warning_dialog(self, message, title="Warnung"):
         """
-        Zeigt einen Warnungsdialog
-        
+        Zeigt eine Warn-Snackbar (nicht-blockierend, längere Anzeige).
+        Ersetzt den modalen Dialog für Warnungen ohne Entscheidungsbedarf.
+
         Args:
             message (str): Warnungsnachricht
-            title (str): Dialog-Titel
+            title (str): Dialog-Titel (wird in Snackbar-Text integriert)
         """
-        self._dismiss_dialog('warning')
-        
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
-        )
-        
-        content.add_widget(MDLabel(
-            text=message,
-            size_hint_y=None,
-            height=dp(60),
-            text_size=(None, None)
-        ))
-        
-        warning_dialog = MDDialog(
-            MDDialogHeadlineText(text=title),
-            MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="OK"),
-                    style="text",
-                    on_release=lambda x: self._dismiss_dialog('warning')
-                )
-            ),
-            md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        
-        self.active_dialogs['warning'] = warning_dialog
-        warning_dialog.open()
-        Logger.warning(f"Dialog Warning: {message}")
+        snackbar_text = f"{title}: {message}" if title != "Warnung" else message
+        self.show_snackbar(snackbar_text, duration=4)
     
     def show_confirmation_dialog(self, message, title="Bestätigung", on_confirm=None, on_cancel=None):
         """

@@ -787,13 +787,29 @@ class EigenschaftenItemRow(MDBoxLayout):
             return
 
         if self.item_type == 'attribute':
-            self.controller.steigere_attribut(self.item_name)
+            result = self.controller.steigere_attribut(self.item_name)
+            if result is False:
+                self._show_steigern_warnung(self.item_name)
         elif self.item_type == 'fertigkeit':
             result = self.controller.steigere_fertigkeit(self.item_name)
             if result == "needs_confirmation":
                 self._show_double_cost_dialog()
+            elif result is False:
+                self._show_steigern_warnung(self.item_name)
         else:
             Logger.warning(f"Unbekannter Eigenschaftstyp: {self.item_type}")
+
+    def _show_steigern_warnung(self, name):
+        """Zeigt eine Snackbar-Warnung wenn Steigerung fehlschlägt."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(
+                    f"Nicht genügend Punkte, um {name} zu steigern."
+                )
+        except Exception as e:
+            Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
 
     def _show_double_cost_dialog(self):
         """Zeigt einen Dialog zur Bestätigung der doppelten Kosten an."""
@@ -864,8 +880,24 @@ class EigenschaftenItemRow(MDBoxLayout):
             return
 
         if self.item_type == 'attribute':
-            self.controller.senke_attribut(self.item_name)
+            result = self.controller.senke_attribut(self.item_name)
+            if result is False:
+                self._show_senken_warnung(self.item_name)
         elif self.item_type == 'fertigkeit':
-            self.controller.senke_fertigkeit(self.item_name)
+            result = self.controller.senke_fertigkeit(self.item_name)
+            if result is False:
+                self._show_senken_warnung(self.item_name)
         else:
             Logger.warning(f"Unbekannter Eigenschaftstyp: {self.item_type}")
+
+    def _show_senken_warnung(self, name):
+        """Zeigt eine Snackbar-Warnung wenn Senkung fehlschlägt."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(
+                    f"{name} kann nicht weiter gesenkt werden."
+                )
+        except Exception as e:
+            Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
