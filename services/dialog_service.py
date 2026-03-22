@@ -70,7 +70,7 @@ class DialogService:
         try:
             snackbar = MDSnackbar(
                 MDSnackbarText(text=message),
-                y=dp(24),
+                y=dp(64),
                 pos_hint={"center_x": 0.5},
                 size_hint_x=0.8,
                 duration=duration,
