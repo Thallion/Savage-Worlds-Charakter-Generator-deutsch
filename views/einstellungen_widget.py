@@ -141,8 +141,83 @@ class EinstellungenWidget(MDBoxLayout):
                 logger_switch.unbind(on_active=None)
                 logger_switch.active = show_logger
                 Logger.debug(f"Logger Switch initialisiert: {show_logger}")
+
+            # Desktop-Skalierung Slider initialisieren
+            self._init_scale_slider(config_service)
         except Exception as e:
             Logger.error(f"Fehler beim Initialisieren der UI-Switches: {e}")
+
+    def _init_scale_slider(self, config_service):
+        """Initialisiert den Skalierungs-Slider aus der Config"""
+        try:
+            scale_factor = config_service.get('desktop_scale_factor', 'auto')
+            slider = self.ids.get('scale_slider')
+            label = self.ids.get('scale_label')
+            if not slider or not label:
+                return
+
+            self._scale_slider_programmatic = True
+            if scale_factor == 'auto' or scale_factor is None:
+                # Aktuellen Wert aus Environment anzeigen
+                import os
+                current = float(os.environ.get('KIVY_METRICS_DENSITY', '1.0'))
+                slider.value = current
+                label.text = f'Auto ({current}x)'
+                self._scale_is_auto = True
+            else:
+                try:
+                    val = float(scale_factor)
+                    slider.value = val
+                    label.text = f'{val}x'
+                    self._scale_is_auto = False
+                except (ValueError, TypeError):
+                    slider.value = 1.0
+                    label.text = 'Auto'
+                    self._scale_is_auto = True
+            self._scale_slider_programmatic = False
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Skalierungs-Sliders: {e}")
+
+    def on_scale_slider_changed(self, value):
+        """Callback wenn der Skalierungs-Slider verändert wird"""
+        if getattr(self, '_scale_slider_programmatic', False):
+            return
+        try:
+            value = round(value, 1)
+            label = self.ids.get('scale_label')
+            if label:
+                label.text = f'{value}x'
+
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('desktop_scale_factor', value)
+            self._scale_is_auto = False
+            Logger.info(f"UI-Skalierung auf {value}x gesetzt (Neustart erforderlich)")
+        except Exception as e:
+            Logger.error(f"Fehler beim Setzen der Skalierung: {e}")
+
+    def reset_scale_to_auto(self):
+        """Setzt die Skalierung auf automatische Erkennung zurück"""
+        try:
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('desktop_scale_factor', 'auto')
+
+            import os
+            current = float(os.environ.get('KIVY_METRICS_DENSITY', '1.0'))
+
+            self._scale_slider_programmatic = True
+            slider = self.ids.get('scale_slider')
+            label = self.ids.get('scale_label')
+            if slider:
+                slider.value = current
+            if label:
+                label.text = f'Auto ({current}x)'
+            self._scale_is_auto = True
+            self._scale_slider_programmatic = False
+            Logger.info("UI-Skalierung auf Auto zurückgesetzt (Neustart erforderlich)")
+        except Exception as e:
+            Logger.error(f"Fehler beim Zurücksetzen der Skalierung: {e}")
 
     def toggle_logger(self, active):
         """Wechselt die Logger-Leiste Sichtbarkeit und speichert die Einstellung"""
