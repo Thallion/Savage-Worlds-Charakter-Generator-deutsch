@@ -111,202 +111,30 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Öffnen des Völker-Dialogs: {e}", exc_info=True)
 
     def _show_volk_search_popup(self):
-        """Zeigt einen Popup-Dialog mit Suchfeld für die Völker-Auswahl."""
-        from kivymd.uix.dialog import (
-            MDDialog, MDDialogHeadlineText,
-            MDDialogContentContainer, MDDialogButtonContainer
-        )
-        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
-        from kivymd.uix.list import MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
+        """Zeigt ein Bottom-Sheet mit Suchfeld für die Völker-Auswahl.
+        Verwendet SearchBottomSheet statt MDDialog für Android-Kompatibilität."""
+        from views.ui_components import SearchBottomSheet
 
         try:
             charakter = self.controller.charakter
             voelker_namen = sorted(charakter.voelker.keys())
 
-            # Vorauswahl: aktuell gewähltes Volk
-            self._popup_pending_volk = self.selected_volk_name
+            def _on_confirm(selected_name):
+                if selected_name != self.selected_volk_name:
+                    self._select_volk_from_dropdown(selected_name)
 
-            # Hauptcontainer
-            dialog_content = MDBoxLayout(
-                orientation="vertical",
-                spacing=dp(15),
-                padding=dp(20),
-                size_hint_y=None,
+            self.volk_search_sheet = SearchBottomSheet(
+                title="Volk auswählen",
+                items=voelker_namen,
+                selected=self.selected_volk_name,
+                on_confirm=_on_confirm,
+                search_hint="Volk suchen...",
+                allow_none=True,
+                none_label="Kein Volk",
             )
-            dialog_content.bind(minimum_height=dialog_content.setter('height'))
+            self.volk_search_sheet.open()
+            Logger.debug(f"Völker-BottomSheet geöffnet mit {len(voelker_namen)} Völkern")
 
-            # Suchfeld
-            search_field = MDTextField(
-                mode="outlined",
-                size_hint_y=None,
-                height=dp(56),
-                size_hint_x=1
-            )
-            search_field.add_widget(MDTextFieldHintText(text="Volk suchen..."))
-            dialog_content.add_widget(search_field)
-
-            # Scrollbare Liste
-            scroll_view = MDScrollView(
-                size_hint_y=None,
-                height=dp(280),
-                bar_width=dp(15),
-                bar_margin=dp(0),
-                bar_color=self.theme_cls.primaryColor,
-                bar_inactive_color=self.theme_cls.onSurfaceColor
-            )
-
-            list_container = MDBoxLayout(
-                orientation='horizontal',
-                size_hint_y=None
-            )
-            list_container.bind(minimum_height=list_container.setter('height'))
-
-            items_list = MDList(
-                size_hint_y=None,
-                size_hint_x=1
-            )
-            items_list.bind(minimum_height=items_list.setter('height'))
-
-            # Scroll-Zone rechts für Touch
-            scroll_zone = MDBoxLayout(
-                size_hint_x=None,
-                width=dp(20),
-                size_hint_y=1
-            )
-
-            def populate_list(*args):
-                """Befüllt die Liste mit Völkern, gefiltert nach Suchtext."""
-                items_list.clear_widgets()
-                search_text = search_field.text.lower() if search_field.text else ""
-                pending = self._popup_pending_volk
-
-                # "Kein Volk" Option
-                if not search_text or "kein" in search_text:
-                    is_sel = pending is None
-                    item = MDListItem(
-                        size_hint_y=None,
-                        height=dp(48),
-                        on_release=lambda x: _select_in_popup(None),
-                        md_bg_color=self.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
-                    )
-                    if is_sel:
-                        item.add_widget(MDListItemLeadingIcon(
-                            icon="check-circle",
-                            theme_icon_color="Custom",
-                            icon_color=self.theme_cls.primaryColor,
-                        ))
-                    headline = MDListItemHeadlineText(text="Kein Volk")
-                    if is_sel:
-                        headline.bold = True
-                    item.add_widget(headline)
-                    items_list.add_widget(item)
-
-                # Völker
-                for volk_name in voelker_namen:
-                    if search_text and search_text not in volk_name.lower():
-                        continue
-                    is_sel = (pending == volk_name)
-                    item = MDListItem(
-                        size_hint_y=None,
-                        height=dp(48),
-                        on_release=lambda x, vn=volk_name: _select_in_popup(vn),
-                        md_bg_color=self.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
-                    )
-                    if is_sel:
-                        item.add_widget(MDListItemLeadingIcon(
-                            icon="check-circle",
-                            theme_icon_color="Custom",
-                            icon_color=self.theme_cls.primaryColor,
-                        ))
-                    headline = MDListItemHeadlineText(text=volk_name)
-                    if is_sel:
-                        headline.bold = True
-                    item.add_widget(headline)
-                    items_list.add_widget(item)
-
-            def _select_in_popup(volk_name):
-                """Markiert ein Volk als vorausgewählt (ohne Dialog zu schließen)."""
-                self._popup_pending_volk = volk_name
-                populate_list()
-
-            # Liste initial befüllen
-            populate_list()
-
-            # Live-Filterung bei Texteingabe
-            search_field.bind(text=populate_list)
-
-            # Zusammenbauen
-            list_container.add_widget(items_list)
-            list_container.add_widget(scroll_zone)
-            scroll_view.add_widget(list_container)
-            dialog_content.add_widget(scroll_view)
-
-            # Dialog erstellen - auto_dismiss=False verhindert versehentliches
-            # Schließen durch Touch auf den Hintergrund (Android-Problem)
-            self.volk_search_dialog = MDDialog(
-                MDDialogHeadlineText(text="Volk auswählen"),
-                MDDialogContentContainer(
-                    dialog_content,
-                    orientation="vertical",
-                    padding=dp(0),
-                ),
-                MDDialogButtonContainer(
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=lambda x: self._defocus_and_call(self._dismiss_volk_popup),
-                    ),
-                    MDButton(
-                        MDButtonText(text="Bestätigen"),
-                        style="text",
-                        on_release=lambda x: self._defocus_and_call(self._confirm_volk_popup),
-                    ),
-                    spacing="8dp",
-                ),
-                size_hint=(0.85, None),
-                auto_dismiss=False,
-            )
-
-            # Android-Fix: Bei Touch außerhalb des TextFields Fokus freigeben,
-            # damit Buttons nicht vom fokussierten TextField blockiert werden.
-            def _defocus_on_touch(instance, touch):
-                if search_field.focus and not search_field.collide_point(*touch.pos):
-                    search_field.focus = False
-            self.volk_search_dialog.bind(on_touch_down=_defocus_on_touch)
-
-            self.volk_search_dialog.open()
-            Logger.debug(f"Völker-Popup geöffnet mit {len(voelker_namen)} Völkern")
-
-        except Exception as e:
-            Logger.error(f"Fehler beim Völker-Popup: {e}", exc_info=True)
-
-    def _defocus_and_call(self, callback):
-        """Defokussiert alle TextFields und ruft callback verzögert auf.
-        Behebt Android-Problem: TextField-Fokus schluckt Button-Touch-Events."""
-        Window.release_all_keyboards()
-        Clock.schedule_once(lambda dt: callback(), 0.1)
-
-    def _dismiss_volk_popup(self):
-        """Schließt den Völker-Popup-Dialog ohne Änderung."""
-        try:
-            if hasattr(self, 'volk_search_dialog') and self.volk_search_dialog:
-                self.volk_search_dialog.dismiss()
-                self.volk_search_dialog = None
-            self._popup_pending_volk = None
-        except Exception as e:
-            Logger.error(f"Fehler beim Schließen des Völker-Popups: {e}", exc_info=True)
-
-    def _confirm_volk_popup(self):
-        """Bestätigt die Völker-Auswahl und schließt den Dialog."""
-        try:
-            pending = getattr(self, '_popup_pending_volk', None)
-            if hasattr(self, 'volk_search_dialog') and self.volk_search_dialog:
-                self.volk_search_dialog.dismiss()
-                self.volk_search_dialog = None
-            # Nur anwenden wenn sich die Auswahl geändert hat
-            if pending != self.selected_volk_name:
-                self._select_volk_from_dropdown(pending)
-            self._popup_pending_volk = None
         except Exception as e:
             Logger.error(f"Fehler bei Völker-Popup-Bestätigung: {e}", exc_info=True)
 

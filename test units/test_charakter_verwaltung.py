@@ -318,16 +318,18 @@ class TestCharakterVerwaltungWidgetCharakter(unittest.TestCase):
         mocks['character_handler'].zeige_element_statistiken.assert_called_once()
 
     def test_wizard_config_confirmed_creates_character(self):
-        """_on_config_confirmed erstellt Charakter über Controller"""
+        """_config_sheet_confirm erstellt Charakter über Controller"""
         widget, mocks = _create_widget()
         widget._wizard_selected_setting = 'SWAE'
         widget._wizard_attr_field = Mock(text='5')
         widget._wizard_fert_field = Mock(text='12')
         widget._wizard_money_field = Mock(text='500')
         widget._wizard_currency_field = Mock(text='Gold')
-        widget._wizard_config_dialog = Mock()
+        widget._wizard_config_sheet = Mock(height=400)
+        mock_modal = Mock()
         with patch('views.charakter_verwaltung_widget.Clock'):
-            widget._on_config_confirmed()
+            with patch('kivy.animation.Animation'):
+                widget._config_sheet_confirm(mock_modal)
         mocks['app'].controller.neuer_charakter.assert_called_once_with(setting_name='SWAE')
 
 

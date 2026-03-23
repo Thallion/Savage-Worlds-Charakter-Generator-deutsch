@@ -346,10 +346,42 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.error(f"Fehler beim Laden des letzten Settings: {str(e)}", exc_info=True)
             return "SWAE"
 
+    def _migrate_chars_on_android(self):
+        """Migriert Charaktere vom alten App-Verzeichnis ins persistente Verzeichnis auf Android."""
+        from kivy.utils import platform as kivy_platform
+        if kivy_platform != 'android':
+            return
+
+        try:
+            from utils.path_utils import get_application_root, get_chars_path
+            import shutil
+
+            old_chars_dir = Path(get_application_root()) / 'chars'
+            new_chars_dir = Path(get_chars_path())
+
+            # Neues Verzeichnis erstellen falls nötig
+            new_chars_dir.mkdir(parents=True, exist_ok=True)
+
+            # Alte Charaktere migrieren (nur wenn alte Dateien existieren)
+            if old_chars_dir.exists() and old_chars_dir != new_chars_dir:
+                migrated = 0
+                for json_file in old_chars_dir.glob('*.json'):
+                    target = new_chars_dir / json_file.name
+                    if not target.exists():
+                        shutil.copy2(str(json_file), str(target))
+                        migrated += 1
+                if migrated > 0:
+                    Logger.info(f"Migration: {migrated} Charakter(e) ins persistente Verzeichnis kopiert")
+        except Exception as e:
+            Logger.warning(f"Charakter-Migration fehlgeschlagen: {e}")
+
     def on_start(self):
         """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""
         Logger.info("=== App-Start gestartet ===")
-        
+
+        # Charaktere auf Android ins persistente Verzeichnis migrieren
+        self._migrate_chars_on_android()
+
         # Fenster maximieren
         Window.maximize()
         
@@ -830,11 +862,11 @@ class SW_Charakter_GeneratorApp(MDApp):
             # Die 5 wichtigsten Tabs für direkte Bottom-Navigation
             # (Index in tab_definitions, Icon, Kurzname)
             bottom_nav_definitions = [
-                (3,  "account-details",  "Profil"),
-                (4,  "arm-flex",         "Werte"),
-                (6,  "star-circle",      "Talente"),
-                (9,  "shield-sword",     "Ausrüst."),
-                (10, "account",          "Bogen"),
+                (4,  "arm-flex",          "Werte"),
+                (5,  "account-alert",     "Handicaps"),
+                (6,  "star-circle",       "Talente"),
+                (7,  "creation-outline",  "Mächte"),
+                (9,  "shield-sword",      "Ausrüst."),
             ]
 
             for tab_index, icon_str, short_label in bottom_nav_definitions:

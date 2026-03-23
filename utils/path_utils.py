@@ -76,20 +76,56 @@ def get_assets_path(filename: str = "") -> str:
     else:
         return get_resource_path("assets")
 
+def _get_android_user_data_dir() -> str:
+    """
+    Gibt das persistente Datenverzeichnis auf Android zurück.
+    Dieses Verzeichnis überlebt App-Updates (wird nur bei Deinstallation gelöscht).
+
+    Returns:
+        str: Pfad zum persistenten Datenverzeichnis
+    """
+    try:
+        from android.storage import app_storage_path
+        return app_storage_path()
+    except ImportError:
+        pass
+    try:
+        # Fallback: Kivy App user_data_dir
+        from kivymd.app import MDApp
+        app = MDApp.get_running_app()
+        if app:
+            return app.user_data_dir
+    except Exception:
+        pass
+    # Letzter Fallback
+    return str(get_application_root())
+
+
 def get_chars_path(filename: str = "") -> str:
     """
     Gibt den Pfad zum Chars-Verzeichnis oder einer spezifischen Char-Datei zurück.
-    
+
+    Auf Android wird ein persistentes Verzeichnis verwendet, das App-Updates überlebt.
+    Auf Desktop wird das Projektverzeichnis verwendet.
+
     Args:
         filename (str): Optional - Name der Char-Datei
-        
+
     Returns:
         str: Pfad zum Chars-Verzeichnis oder zur Char-Datei
     """
-    if filename:
-        return get_resource_path(f"chars/{filename}")
+    from kivy.utils import platform as kivy_platform
+
+    if kivy_platform == 'android':
+        # Persistentes Verzeichnis auf Android (überlebt Updates)
+        base = Path(_get_android_user_data_dir()) / 'chars'
     else:
-        return get_resource_path("chars")
+        base = Path(get_resource_path("chars"))
+
+    if filename:
+        return str(base / filename)
+    else:
+        return str(base)
 
 def get_settings_path(filename: str = "") -> str:
     """

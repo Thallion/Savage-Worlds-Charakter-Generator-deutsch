@@ -162,146 +162,106 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         return settings
 
     def _show_setting_selection_popup(self):
-        """Schritt 1: Setting-Auswahl Popup (Design wie Völker-Popup)"""
+        """Schritt 1: Setting-Auswahl als Bottom-Sheet.
+        Verwendet SearchBottomSheet statt MDDialog für Android-Kompatibilität."""
+        from views.ui_components import SearchBottomSheet
+
         available_settings = self._get_available_settings()
         if not available_settings:
             Logger.error("Keine Settings im settings-Verzeichnis gefunden")
             return
 
         # Standard: SWAE vorausgewählt
-        self._wizard_selected_setting = 'SWAE' if 'SWAE' in available_settings else available_settings[0]
+        default_setting = 'SWAE' if 'SWAE' in available_settings else available_settings[0]
 
-        # Hauptcontainer
-        dialog_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(15),
-            padding=dp(20),
-            size_hint_y=None,
+        def _on_setting_confirmed(selected_name):
+            self._wizard_selected_setting = selected_name or default_setting
+            self._show_character_config_popup()
+
+        self._wizard_setting_sheet = SearchBottomSheet(
+            title="Setting auswählen",
+            items=available_settings,
+            selected=default_setting,
+            on_confirm=_on_setting_confirmed,
+            search_hint="Setting suchen...",
         )
-        dialog_content.bind(minimum_height=dialog_content.setter('height'))
-
-        # Suchfeld
-        search_field = MDTextField(
-            mode="outlined",
-            size_hint_y=None,
-            height=dp(56),
-            size_hint_x=1
-        )
-        search_field.add_widget(MDTextFieldHintText(text="Setting suchen..."))
-        dialog_content.add_widget(search_field)
-
-        # Scrollbare Liste
-        scroll_view = MDScrollView(
-            size_hint=(1, None),
-            height=dp(280)
-        )
-        scroll_layout = MDBoxLayout(
-            orientation="horizontal",
-            size_hint=(1, None)
-        )
-        items_list = MDList(size_hint_y=None, size_hint_x=1)
-        items_list.bind(minimum_height=items_list.setter('height'))
-        scroll_layout.add_widget(items_list)
-        # Touch-Zone für zuverlässiges Scrollen auf Android
-        scroll_layout.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
-        scroll_view.add_widget(scroll_layout)
-        scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
-        dialog_content.add_widget(scroll_view)
-
-        def populate_list(*args):
-            items_list.clear_widgets()
-            search_text = search_field.text.lower() if search_field.text else ""
-            pending = self._wizard_selected_setting
-
-            for setting_name in available_settings:
-                if search_text and search_text not in setting_name.lower():
-                    continue
-                is_sel = (pending == setting_name)
-                item = MDListItem(
-                    size_hint_y=None,
-                    height=dp(48),
-                    on_release=lambda x, s=setting_name: _select_setting(s),
-                    md_bg_color=self.app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
-                )
-                if is_sel:
-                    item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
-                headline = MDListItemHeadlineText(text=setting_name)
-                if is_sel:
-                    headline.bold = True
-                item.add_widget(headline)
-                items_list.add_widget(item)
-
-        def _select_setting(setting_name):
-            self._wizard_selected_setting = setting_name
-            populate_list()
-
-        search_field.bind(text=populate_list)
-        populate_list()
-
-        self._wizard_setting_dialog = MDDialog(
-            MDDialogHeadlineText(text="Setting auswählen"),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self._defocus_and_call(self._wizard_setting_dialog.dismiss),
-                ),
-                MDButton(
-                    MDButtonText(text="Weiter"),
-                    style="text",
-                    on_release=lambda x: self._defocus_and_call(self._on_setting_selected),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-
-        # Android-Fix: Bei Touch außerhalb des TextFields Fokus freigeben,
-        # damit Buttons nicht vom fokussierten TextField blockiert werden.
-        def _defocus_on_touch(instance, touch):
-            if search_field.focus and not search_field.collide_point(*touch.pos):
-                search_field.focus = False
-        self._wizard_setting_dialog.bind(on_touch_down=_defocus_on_touch)
-
-        self._wizard_setting_dialog.open()
-
-    def _on_setting_selected(self):
-        """Callback nach Setting-Auswahl: Dialog schließen, Konfig-Popup öffnen"""
-        self._wizard_setting_dialog.dismiss()
-        self._show_character_config_popup()
+        self._wizard_setting_sheet.open()
 
     def _show_character_config_popup(self):
-        """Schritt 2: Startpunkte und Vermögen konfigurieren"""
-        dialog_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(20),
-            padding=dp(20),
+        """Schritt 2: Startpunkte und Vermögen konfigurieren.
+        Verwendet ModalView statt MDDialog für Android-Kompatibilität."""
+        from kivy.uix.modalview import ModalView
+        from kivy.animation import Animation
+
+        # Bottom-Padding für Android-Navigationsleiste
+        from kivy.utils import platform as kivy_platform
+        bottom_pad = dp(48) if kivy_platform == 'android' else 0
+
+        # Sheet-Container
+        sheet = MDBoxLayout(
+            orientation='vertical',
+            size_hint=(1, None),
+            height=dp(380) + bottom_pad,
+            pos_hint={'center_x': 0.5},
+            md_bg_color=self.app.theme_cls.surfaceContainerColor,
+            radius=[dp(16), dp(16), 0, 0],
+            padding=[0, dp(8), 0, bottom_pad],
+        )
+
+        # Drag-Handle
+        handle_container = MDBoxLayout(
+            orientation='vertical', size_hint_y=None, height=dp(20),
+            padding=[0, dp(8), 0, dp(4)],
+        )
+        handle_container.add_widget(MDBoxLayout(
+            size_hint=(None, None), size=(dp(32), dp(4)),
+            pos_hint={'center_x': 0.5},
+            md_bg_color=(0.5, 0.5, 0.5, 1), radius=[dp(2)],
+        ))
+        sheet.add_widget(handle_container)
+
+        # Header: Zurück + Titel + Weiter
+        header = MDBoxLayout(
+            orientation='horizontal', size_hint_y=None, height=dp(48),
+            padding=[dp(8), 0, dp(8), 0], spacing=dp(8),
+        )
+        from kivymd.uix.button import MDIconButton
+        header.add_widget(MDIconButton(
+            icon="arrow-left",
+            on_release=lambda x: self._config_sheet_back(modal),
+            pos_hint={'center_y': 0.5},
+        ))
+        header.add_widget(MDLabel(
+            text="Charakter-Einstellungen",
+            font_style="Title", role="medium", bold=True,
+            size_hint_x=1, pos_hint={'center_y': 0.5},
+        ))
+        header.add_widget(MDIconButton(
+            icon="check",
+            on_release=lambda x: self._config_sheet_confirm(modal),
+            pos_hint={'center_y': 0.5},
+        ))
+        sheet.add_widget(header)
+
+        # Formular-Inhalt
+        form = MDBoxLayout(
+            orientation='vertical', spacing=dp(16),
+            padding=[dp(20), dp(8), dp(20), dp(16)],
             size_hint_y=None,
         )
-        dialog_content.bind(minimum_height=dialog_content.setter('height'))
+        form.bind(minimum_height=form.setter('height'))
 
         # Info-Label
-        info_label = MDLabel(
+        form.add_widget(MDLabel(
             text=f"Setting: {self._wizard_selected_setting}",
-            theme_text_color="Secondary",
-            font_style="Body",
-            size_hint_y=None,
-            height=dp(30),
-        )
-        dialog_content.add_widget(info_label)
+            theme_text_color="Secondary", font_style="Body",
+            size_hint_y=None, height=dp(24),
+        ))
 
         # Attribut-Punkte
-        attr_row = MDBoxLayout(
-            orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
-        )
+        attr_row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16))
         attr_row.add_widget(MDLabel(
-            text="Startattributs-Punkte:", size_hint_x=0.6,
+            text="Attributs-Punkte:", size_hint_x=0.6,
             size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
         ))
         self._wizard_attr_field = MDTextField(
@@ -310,14 +270,12 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             input_filter='int'
         )
         attr_row.add_widget(self._wizard_attr_field)
-        dialog_content.add_widget(attr_row)
+        form.add_widget(attr_row)
 
         # Fertigkeits-Punkte
-        fert_row = MDBoxLayout(
-            orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
-        )
+        fert_row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16))
         fert_row.add_widget(MDLabel(
-            text="Startfertigkeits-Punkte:", size_hint_x=0.6,
+            text="Fertigkeits-Punkte:", size_hint_x=0.6,
             size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
         ))
         self._wizard_fert_field = MDTextField(
@@ -326,12 +284,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             input_filter='int'
         )
         fert_row.add_widget(self._wizard_fert_field)
-        dialog_content.add_widget(fert_row)
+        form.add_widget(fert_row)
 
         # Vermögen und Währung
-        money_row = MDBoxLayout(
-            orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16)
-        )
+        money_row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(56), spacing=dp(16))
         money_row.add_widget(MDLabel(
             text="Vermögen:", size_hint_x=0.3,
             size_hint_y=None, height=dp(40), pos_hint={"center_y": .5}
@@ -347,53 +303,37 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             size_hint_x=0.35, size_hint_y=None, height=dp(56),
         )
         money_row.add_widget(self._wizard_currency_field)
-        dialog_content.add_widget(money_row)
+        form.add_widget(money_row)
 
-        self._wizard_config_dialog = MDDialog(
-            MDDialogHeadlineText(text="Charakter-Einstellungen"),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Zurück"),
-                    style="text",
-                    on_release=lambda x: self._defocus_and_call(self._on_config_back),
-                ),
-                MDButton(
-                    MDButtonText(text="Weiter"),
-                    style="text",
-                    on_release=lambda x: self._defocus_and_call(self._on_config_confirmed),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
+        sheet.add_widget(form)
+
+        # ModalView erstellen
+        modal = ModalView(
+            size_hint=(1, 1),
+            background_color=(0, 0, 0, 0),
+            background='',
             auto_dismiss=False,
         )
+        modal.add_widget(sheet)
+        self._wizard_config_sheet = sheet
+        self._wizard_config_modal = modal
 
-        # Android-Fix: Bei Touch außerhalb der TextFields Fokus freigeben,
-        # damit Buttons nicht vom fokussierten TextField blockiert werden.
-        text_fields = [self._wizard_attr_field, self._wizard_fert_field,
-                       self._wizard_money_field, self._wizard_currency_field]
-        def _defocus_on_touch(instance, touch):
-            for tf in text_fields:
-                if tf.focus and not tf.collide_point(*touch.pos):
-                    tf.focus = False
-        self._wizard_config_dialog.bind(on_touch_down=_defocus_on_touch)
+        # Öffnen mit Animation
+        modal.open()
+        sheet.y = -sheet.height
+        Animation(y=0, duration=0.25, t='out_cubic').start(sheet)
 
-        self._wizard_config_dialog.open()
-
-    def _on_config_back(self):
+    def _config_sheet_back(self, modal):
         """Zurück zur Setting-Auswahl"""
-        self._wizard_config_dialog.dismiss()
-        self._show_setting_selection_popup()
+        from kivy.animation import Animation
+        sheet = self._wizard_config_sheet
+        anim = Animation(y=-sheet.height, duration=0.2, t='in_cubic')
+        anim.bind(on_complete=lambda *a: modal.dismiss())
+        anim.start(sheet)
+        Clock.schedule_once(lambda dt: self._show_setting_selection_popup(), 0.3)
 
-    def _on_config_confirmed(self):
+    def _config_sheet_confirm(self, modal):
         """Wizard abschließen: Charakter erstellen und zum Profil wechseln"""
-        self._wizard_config_dialog.dismiss()
-
         # Werte aus den Feldern lesen
         try:
             attr_punkte = int(self._wizard_attr_field.text)
@@ -408,6 +348,13 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         except (ValueError, AttributeError):
             vermoegen = 500
         waehrung = getattr(self._wizard_currency_field, 'text', 'Gold') or 'Gold'
+
+        # Sheet schließen
+        from kivy.animation import Animation
+        sheet = self._wizard_config_sheet
+        anim = Animation(y=-sheet.height, duration=0.2, t='in_cubic')
+        anim.bind(on_complete=lambda *a: modal.dismiss())
+        anim.start(sheet)
 
         setting_name = self._wizard_selected_setting
 
@@ -430,7 +377,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             self.character_handler._refresh_profil_widget()
 
         # Zum Profil-Tab wechseln (Index 3)
-        Clock.schedule_once(lambda dt: self._switch_to_profil(), 0.1)
+        Clock.schedule_once(lambda dt: self._switch_to_profil(), 0.3)
 
         Logger.info(f"Neuer Charakter mit Setting '{setting_name}' erstellt "
                     f"(Attr: {attr_punkte}, Fert: {fert_punkte}, "
