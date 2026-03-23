@@ -3748,24 +3748,6 @@
             "beschreibung": "–1 auf Proben mit Allgemeinwissen und Wahrnehmung.",
             "ausgewaehlt": false,
             "aktiv": true
-        },
-        "Klein": {
-            "name": "Klein",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Dieser Abenteurer ist ziemlich dürr, klein oder beides. Seine Größe (siehe Seite 103) wird um –1 verringert, wodurch auch seine Robustheit sinkt. Die Größe kann nicht unter –1 sinken, doch der Abzug auf Robustheit ist kumulativ. Ein kleiner Halbling hat beispielsweise Größe –1, verliert aber einen zusätzlichen Punkt Robustheit.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Kränklich": {
-            "name": "Kränklich",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
         }
     },
     "maechte": {

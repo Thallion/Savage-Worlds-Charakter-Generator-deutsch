@@ -4296,15 +4296,6 @@
             "aktiv": true,
             "custom": false
         },
-        "Blutrünstig FK": {
-            "name": "Blutrünstig",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Nimmt niemals Gefangene.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
         "Dünnhäutig": {
             "name": "Dünnhäutig",
             "stufe": "leicht",
