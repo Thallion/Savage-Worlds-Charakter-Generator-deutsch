@@ -59,6 +59,9 @@ class AppConfig:
 
     # Mobile-Layout-Override (für Desktop-Tests)
     force_mobile_layout: bool = False
+
+    # Desktop-Skalierung: "auto" für automatische Erkennung, oder float (z.B. 1.5)
+    desktop_scale_factor: str = "auto"
     
     # Version und Metadaten
     config_version: str = "1.0"

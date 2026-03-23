@@ -10,6 +10,11 @@ from functools import partial
 import re
 import webbrowser
 
+# Desktop-Skalierung MUSS vor allen Kivy-Imports gesetzt werden!
+# Setzt KIVY_METRICS_DENSITY für korrekte dp()-Skalierung auf HiDPI-Displays.
+from utils.desktop_scaling import apply_desktop_scaling
+_applied_density = apply_desktop_scaling()
+
 # Logging-Setup als erstes importieren und initialisieren
 from utils.logging_setup import setup_file_logging, cleanup_old_logs, log_system_info
 
