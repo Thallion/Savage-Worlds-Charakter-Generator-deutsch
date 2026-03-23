@@ -129,18 +129,49 @@ def get_chars_path(filename: str = "") -> str:
 
 def get_settings_path(filename: str = "") -> str:
     """
-    Gibt den Pfad zum Settings-Verzeichnis oder einer spezifischen Settings-Datei zurück.
-    
+    Gibt den Pfad zum nativen Settings-Verzeichnis (mitgelieferte Settings) zurück.
+
     Args:
         filename (str): Optional - Name der Settings-Datei
-        
+
     Returns:
-        str: Pfad zum Settings-Verzeichnis oder zur Settings-Datei
+        str: Pfad zum nativen Settings-Verzeichnis oder zur Settings-Datei
     """
     if filename:
         return get_resource_path(f"settings/{filename}")
     else:
         return get_resource_path("settings")
+
+
+def get_user_settings_path(filename: str = "") -> str:
+    """
+    Gibt den Pfad zum persistenten Benutzer-Settings-Verzeichnis zurück.
+
+    Auf Android wird ein persistentes Verzeichnis verwendet, das App-Updates überlebt.
+    Auf Desktop wird das gleiche Verzeichnis wie für native Settings verwendet.
+
+    Benutzer-erstellte Settings werden hier gespeichert, damit sie bei App-Updates
+    nicht verloren gehen.
+
+    Args:
+        filename (str): Optional - Name der Settings-Datei
+
+    Returns:
+        str: Pfad zum Benutzer-Settings-Verzeichnis oder zur Settings-Datei
+    """
+    from kivy.utils import platform as kivy_platform
+
+    if kivy_platform == 'android':
+        # Persistentes Verzeichnis auf Android (überlebt Updates)
+        base = Path(_get_android_user_data_dir()) / 'settings'
+    else:
+        # Auf Desktop: gleicher Pfad wie native Settings
+        base = Path(get_resource_path("settings"))
+
+    if filename:
+        return str(base / filename)
+    else:
+        return str(base)
 
 def get_templates_path(filename: str = "") -> str:
     """
