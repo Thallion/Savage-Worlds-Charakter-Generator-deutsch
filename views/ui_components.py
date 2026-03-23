@@ -193,22 +193,15 @@ class SearchBottomSheet(ModalView):
         search_container.add_widget(self._search_field)
         self._sheet.add_widget(search_container)
 
-        # Scrollbare Liste
+        # Scrollbare Liste - MDList direkt in ScrollView ohne horizontalen Wrapper
         scroll_view = MDScrollView(
             size_hint=(1, 1),
             bar_width=dp(8),
+            do_scroll_x=False,
         )
-        scroll_layout = MDBoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-        )
-        self._items_list = MDList(size_hint_y=None, size_hint_x=1)
+        self._items_list = MDList(size_hint_y=None)
         self._items_list.bind(minimum_height=self._items_list.setter('height'))
-        scroll_layout.add_widget(self._items_list)
-        # Touch-Zone rechts für zuverlässiges Scrollen auf Android
-        scroll_layout.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
-        scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
-        scroll_view.add_widget(scroll_layout)
+        scroll_view.add_widget(self._items_list)
         self._sheet.add_widget(scroll_view)
 
         self.add_widget(self._sheet)
@@ -297,9 +290,9 @@ class SearchBottomSheet(ModalView):
         self._populate_list()
 
     def _select(self, name):
-        """Markiert einen Eintrag als ausgewählt."""
+        """Wählt einen Eintrag aus und bestätigt sofort (schließt das Sheet)."""
         self._selected = name
-        self._populate_list()
+        self._confirm()
 
     def _confirm(self):
         """Bestätigt die Auswahl und schließt das Sheet."""
