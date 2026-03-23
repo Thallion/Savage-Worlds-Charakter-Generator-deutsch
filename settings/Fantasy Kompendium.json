@@ -4794,24 +4794,6 @@
             "aktiv": true,
             "custom": false
         },
-        "Angetrieben": {
-            "name": "Angetrieben",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Die Handlungen des Helden werden von einem wichtigen Ziel oder einer Überzeugung angetrieben.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Angewohnheit": {
-            "name": "Angewohnheit",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Abhängig von etwas, erleidet Erschöpfung bei Entzug.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
         "Arm": {
             "name": "Arm",
             "stufe": "leicht",
@@ -4911,15 +4893,6 @@
             "aktiv": true,
             "custom": false
         },
-        "Feind": {
-            "name": "Feind",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter hat eine wiederkehrende Nemesis.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
         "Geheimnis": {
             "name": "Geheimnis",
             "stufe": "leicht",
@@ -4934,24 +4907,6 @@
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "Der Held hat ein dunkles Geheimnis.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Gesucht": {
-            "name": "Gesucht",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter wird von den Obrigkeiten gesucht.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Gierig": {
-            "name": "Gierig",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter ist von Reichtum und materiellen Besitztümern besessen.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -5001,47 +4956,11 @@
             "aktiv": true,
             "custom": false
         },
-        "Langsam": {
-            "name": "Langsam",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Bewegungsweite –1, verringere den Sprintwürfel um eine Stufe.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Pazifist": {
-            "name": "Pazifist",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Kämpft nur in Selbstverteidigung.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
         "Pech": {
             "name": "Pech",
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "Der Charakter beginnt jede Spielsitzung mit einem Benny weniger.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Phobie": {
-            "name": "Phobie",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter hat Angst vor etwas und zieht –1 von Eigenschaftsproben in dessen Gegenwart ab.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Rachsüchtig": {
-            "name": "Rachsüchtig",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Abenteurer strebt nach Rache für Kränkungen.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -5064,29 +4983,11 @@
             "aktiv": true,
             "custom": false
         },
-        "Schwerhörig": {
-            "name": "Schwerhörig",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "–4 auf Wahrnehmung bei Geräuschen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
         "Schwerzüngig": {
             "name": "Schwerzüngig",
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "–1 auf Einschüchtern, Überreden und Provozieren.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Schwur": {
-            "name": "Schwur",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter hat sich einer Sache verschrieben.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false

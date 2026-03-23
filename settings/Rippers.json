@@ -3557,15 +3557,6 @@
             "aktiv": true,
             "custom": false
         },
-        "Schreihals": {
-            "name": "Schreihals",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Furcht und Schrecken entlocken dem Helden einen ohrenbetäubenden Schrei. Jedes Mal, wenn er eine Furchtprobe nicht besteht, schreit er automatisch. Jeder Charakter im Bereich einer großen Schablone erleidet –1 auf das Ergebnis seiner eigenen Furchtprobe.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
         "Überempfindlich": {
             "name": "Überempfindlich",
             "stufe": "schwer",
@@ -3580,15 +3571,6 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Der Held hat eine Schwäche gegenüber einem bestimmten Material (Kaltes Eisen, Holz, Silber, Sonnenlicht, Salz oder Feuer). Er kann dieses Material nicht verwenden und dessen Berührung nicht ertragen. Waffen aus diesem Material verursachen +4 Schaden. Kann mehrfach gewählt werden (jedes Mal andere Schwäche).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verflucht": {
-            "name": "Verflucht",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Der Held hat eine dunkle Macht übers Ohr gehauen und ist auf immer mit deren dunklem Mal gezeichnet. Der Charakter kann niemals nützliche Segnungen erhalten, wie sie der Arkane Hintergrund (Wunder) gewährt.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
