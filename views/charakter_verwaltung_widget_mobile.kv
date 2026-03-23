@@ -158,6 +158,30 @@
                     MDButtonText:
                         text: "Element-Statistiken"
 
+                MDGridLayout:
+                    cols: 2
+                    spacing: dp(6)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    MDButton:
+                        style: "elevated"
+                        size_hint_x: 1
+                        on_release: root.versende_charakter()
+                        MDButtonIcon:
+                            icon: "share-variant"
+                        MDButtonText:
+                            text: "Char versenden"
+
+                    MDButton:
+                        style: "elevated"
+                        size_hint_x: 1
+                        on_release: root.versende_setting()
+                        MDButtonIcon:
+                            icon: "share"
+                        MDButtonText:
+                            text: "Setting versenden"
+
             MDDivider:
 
             # ===== Charakter-Einstellungen =====
