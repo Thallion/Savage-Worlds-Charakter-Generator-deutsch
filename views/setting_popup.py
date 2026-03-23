@@ -62,21 +62,26 @@ def load_kv_file():
 
 load_kv_file()
 
-# Hilfsfunktion zur Bestimmung des Applikations‑Rootpfads
 # Import centralized path utilities
-from utils.path_utils import get_application_root
+from utils.path_utils import get_application_root, get_settings_path, get_user_settings_path
 
-# Erstellen des Ordners "settings", falls nicht existent
-app_root = get_application_root()
-settings_path = app_root / "settings"
-settings_path.mkdir(parents=True, exist_ok=True)
-Logger.debug(f"Settings-Pfad: {settings_path}")
+# Erstellen der Settings-Ordner, falls nicht existent
+_native_settings_path = Path(get_settings_path())
+_user_settings_path = Path(get_user_settings_path())
+_native_settings_path.mkdir(parents=True, exist_ok=True)
+_user_settings_path.mkdir(parents=True, exist_ok=True)
+Logger.debug(f"Nativer Settings-Pfad: {_native_settings_path}")
+Logger.debug(f"Benutzer Settings-Pfad: {_user_settings_path}")
 
 # Domain-Repository zum Speichern, Laden und Löschen von Settings (DDD-Schicht)
 class SettingsRepository:
     def __init__(self, settings_dir):
+        # settings_dir wird als natives Verzeichnis verwendet (Rückwärtskompatibilität)
         self.settings_dir = settings_dir
         self.settings_dir.mkdir(parents=True, exist_ok=True)
+        # Benutzer-Settings werden in einem persistenten Verzeichnis gespeichert
+        self.user_settings_dir = _user_settings_path
+        self.user_settings_dir.mkdir(parents=True, exist_ok=True)
 
     def save(self, setting_name, setting_description, charakter):
         # Alle "ausgewaehlten" Attribute zurücksetzen
@@ -102,7 +107,7 @@ class SettingsRepository:
             "ausruestung": {name: ausruestung.to_setting_dict() for name, ausruestung in charakter.ausruestung.items()}
         }
         dateiname = f"{setting_name}.json"
-        filepath = self.settings_dir / dateiname
+        filepath = self.user_settings_dir / dateiname
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(new_setting, f, ensure_ascii=False, indent=4)
@@ -205,8 +210,7 @@ class AddSettingPopup(MDBoxLayout, BaseFileManagerMixin):
         if not setting_name:
             self.show_error("Der Name des Settings darf nicht leer sein.")
             return
-        settings_dir = get_application_root() / "settings"
-        self.open_file_manager(settings_dir, self.datei_ausgewaehlt)
+        self.open_file_manager(_user_settings_path, self.datei_ausgewaehlt)
 
     def datei_ausgewaehlt(self, gewaehlter_ordner):
         setting_name = self.ids.setting_name_input.text.strip()
@@ -249,7 +253,8 @@ class LoadSettingPopup(MDBoxLayout, BaseFileManagerMixin):
         self.show_file_manager_popup()
 
     def show_file_manager_popup(self):
-        settings_dir = get_application_root() / "settings"
+        # Zeige das native Settings-Verzeichnis (enthält alle mitgelieferten Settings)
+        settings_dir = _native_settings_path
         if not settings_dir.exists():
             settings_dir.mkdir(parents=True, exist_ok=True)
         self.open_file_manager(settings_dir, self.datei_ausgewaehlt)
@@ -285,7 +290,9 @@ class DeleteSettingPopup(MDBoxLayout, BaseFileManagerMixin):
     repository = ObjectProperty()
 
     def show_file_manager_popup(self):
-        settings_dir = get_application_root() / "settings"
+        # Lösch-Dialog zeigt das Benutzer-Settings-Verzeichnis
+        # (native Settings können nicht gelöscht werden)
+        settings_dir = _user_settings_path
         if not settings_dir.exists():
             settings_dir.mkdir(parents=True, exist_ok=True)
         self.open_file_manager(settings_dir, self.datei_ausgewaehlt)
@@ -318,8 +325,7 @@ class DeleteSettingPopup(MDBoxLayout, BaseFileManagerMixin):
 class SettingDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        settings_dir = get_application_root() / "settings"
-        self.repository = SettingsRepository(settings_dir)
+        self.repository = SettingsRepository(_native_settings_path)
         self.dialog = None
 
     def open_add_setting_popup(self):

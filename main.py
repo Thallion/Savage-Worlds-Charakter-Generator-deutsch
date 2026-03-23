@@ -328,16 +328,16 @@ class SW_Charakter_GeneratorApp(MDApp):
             
             Logger.info(f"Letztes Setting aus Config geladen: {last_setting}")
             
-            # Validierung: Prüfen ob das Setting existiert
-            from utils.path_utils import get_application_root
-            settings_dir = get_application_root() / 'settings'
-            setting_file = settings_dir / f"{last_setting}.json"
-            
-            if setting_file.exists():
-                Logger.info(f"Setting-Datei gefunden: {setting_file}")
+            # Validierung: Prüfen ob das Setting existiert (natives oder Benutzer-Verzeichnis)
+            from utils.path_utils import get_settings_path, get_user_settings_path
+            native_file = Path(get_settings_path(f"{last_setting}.json"))
+            user_file = Path(get_user_settings_path(f"{last_setting}.json"))
+
+            if native_file.exists() or user_file.exists():
+                Logger.info(f"Setting-Datei für '{last_setting}' gefunden.")
                 return last_setting
             else:
-                Logger.warning(f"Setting-Datei '{setting_file}' nicht gefunden, verwende Standard-Setting 'SWAE'")
+                Logger.warning(f"Setting-Datei für '{last_setting}' nicht gefunden, verwende Standard-Setting 'SWAE'")
                 # Standard-Setting in Config speichern
                 config_service.set('last_setting', 'SWAE')
                 return "SWAE"
@@ -375,12 +375,49 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.warning(f"Charakter-Migration fehlgeschlagen: {e}")
 
+    def _migrate_settings_on_android(self):
+        """Migriert benutzerdefinierte Settings vom alten App-Verzeichnis ins persistente Verzeichnis auf Android."""
+        from kivy.utils import platform as kivy_platform
+        if kivy_platform != 'android':
+            return
+
+        try:
+            from utils.path_utils import get_settings_path, get_user_settings_path
+            import shutil
+
+            old_settings_dir = Path(get_settings_path())
+            new_settings_dir = Path(get_user_settings_path())
+
+            # Neues Verzeichnis erstellen falls nötig
+            new_settings_dir.mkdir(parents=True, exist_ok=True)
+
+            # Nur migrieren wenn die Verzeichnisse unterschiedlich sind
+            if old_settings_dir.exists() and old_settings_dir != new_settings_dir:
+                # Mitgelieferte Settings-Namen ermitteln (diese nicht migrieren,
+                # da sie sowieso immer aus dem nativen Verzeichnis geladen werden)
+                native_settings = {f.stem for f in old_settings_dir.glob('*.json')}
+
+                # Benutzerdefinierte Settings migrieren (custom_*.json und andere)
+                migrated = 0
+                for json_file in old_settings_dir.glob('*.json'):
+                    target = new_settings_dir / json_file.name
+                    if not target.exists():
+                        shutil.copy2(str(json_file), str(target))
+                        migrated += 1
+                if migrated > 0:
+                    Logger.info(f"Migration: {migrated} Setting(s) ins persistente Verzeichnis kopiert")
+        except Exception as e:
+            Logger.warning(f"Settings-Migration fehlgeschlagen: {e}")
+
     def on_start(self):
         """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""
         Logger.info("=== App-Start gestartet ===")
 
         # Charaktere auf Android ins persistente Verzeichnis migrieren
         self._migrate_chars_on_android()
+
+        # Settings auf Android ins persistente Verzeichnis migrieren
+        self._migrate_settings_on_android()
 
         # Fenster maximieren
         Window.maximize()

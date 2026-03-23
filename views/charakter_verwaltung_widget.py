@@ -153,13 +153,23 @@ class CharakterVerwaltungWidget(MDBoxLayout):
     # ==================== NEUER CHARAKTER WIZARD ====================
 
     def _get_available_settings(self):
-        """Liest alle verfügbaren Settings aus dem settings-Verzeichnis"""
-        settings_dir = Path(get_application_root()) / 'settings'
-        settings = []
-        if settings_dir.exists():
-            for f in sorted(settings_dir.glob('*.json')):
-                settings.append(f.stem)
-        return settings
+        """Liest alle verfügbaren Settings aus dem nativen und Benutzer-Settings-Verzeichnis"""
+        from utils.path_utils import get_settings_path, get_user_settings_path
+
+        settings_set = set()
+        # Native Settings laden
+        native_dir = Path(get_settings_path())
+        if native_dir.exists():
+            for f in native_dir.glob('*.json'):
+                settings_set.add(f.stem)
+
+        # Benutzer-Settings laden (persistentes Verzeichnis)
+        user_dir = Path(get_user_settings_path())
+        if user_dir.exists() and user_dir != native_dir:
+            for f in user_dir.glob('*.json'):
+                settings_set.add(f.stem)
+
+        return sorted(settings_set)
 
     def _show_setting_selection_popup(self):
         """Schritt 1: Setting-Auswahl als Bottom-Sheet.

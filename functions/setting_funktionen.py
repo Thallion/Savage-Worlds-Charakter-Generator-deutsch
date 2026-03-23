@@ -36,7 +36,7 @@ import functions.ausruestung_funktionen as ausruestung_funktionen
 
 
 # Import centralized path utilities
-from utils.path_utils import get_application_root
+from utils.path_utils import get_application_root, get_settings_path, get_user_settings_path
 
 
 class SetEncoder(json.JSONEncoder):
@@ -53,24 +53,29 @@ class CustomElementManager:
     def __init__(self, charakter, settings_dir: Optional[Path] = None, setting_name: str = 'SWAE'):
         """
         Initialisiert den CustomElementManager.
-        
+
         Args:
             charakter: Das Charakter-Objekt
-            settings_dir: Das Verzeichnis für die Settings (optional)
+            settings_dir: Das Verzeichnis für die Settings (optional, wird als natives Verzeichnis verwendet)
             setting_name: Der Name des aktiven Settings (default: 'SWAE')
         """
         self.charakter = charakter
         if settings_dir is None:
-            app_root = get_application_root()
-            settings_dir = app_root / 'settings'
+            self.native_settings_dir = Path(get_settings_path())
+            self.user_settings_dir = Path(get_user_settings_path())
         else:
             settings_dir = Path(settings_dir)
+            self.native_settings_dir = settings_dir
+            self.user_settings_dir = settings_dir
 
-        self.settings_dir = settings_dir
+        # Rückwärtskompatibilität: settings_dir zeigt auf das native Verzeichnis
+        self.settings_dir = self.native_settings_dir
         self.settings = {}
         self.active_setting = None
+        # Merkt sich welche Settings vom Benutzer erstellt wurden
+        self._user_settings = set()
 
-        # Laden der Einstellungen
+        # Laden der Einstellungen aus beiden Verzeichnissen
         self.load_all_settings()
 
         # Setzen des aktiven Setting-Namens nach dem Laden der Settings
@@ -78,47 +83,76 @@ class CustomElementManager:
         self.set_active_setting(self.active_setting_name)
 
     def load_all_settings(self) -> None:
-        """Lädt alle Einstellungen aus dem settings-Verzeichnis."""
-        try:
-            if not self.settings_dir.exists():
-                Logger.warning(f"Settings-Verzeichnis {self.settings_dir} existiert nicht.")
-                return
+        """Lädt alle Einstellungen aus dem nativen und dem Benutzer-Settings-Verzeichnis.
 
-            for setting_file in self.settings_dir.glob('*.json'):
-                try:
-                    with open(setting_file, 'r', encoding='utf-8') as f:
-                        setting_data = json.load(f)
-                        setting_name = setting_file.stem
-                        self.settings[setting_name] = setting_data
-                        Logger.info(f"Setting '{setting_name}' geladen.")
-                except Exception as e:
-                    Logger.error(f"Fehler beim Laden von Setting {setting_file}: {e}")
+        Zuerst werden die mitgelieferten (nativen) Settings geladen, dann die
+        benutzerdefinierten Settings. Benutzer-Settings mit gleichem Namen
+        überschreiben native Settings.
+        """
+        try:
+            # 1. Native Settings laden (mitgeliefert mit der App)
+            self._load_settings_from_dir(self.native_settings_dir, is_user=False)
+
+            # 2. Benutzer-Settings laden (persistentes Verzeichnis)
+            # Nur wenn das Benutzer-Verzeichnis ein anderes ist als das native
+            if self.user_settings_dir != self.native_settings_dir:
+                self._load_settings_from_dir(self.user_settings_dir, is_user=True)
 
         except Exception as e:
             Logger.error(f"Fehler beim Laden der Settings: {e}")
 
+    def _load_settings_from_dir(self, settings_dir: Path, is_user: bool = False) -> None:
+        """Lädt Settings aus einem einzelnen Verzeichnis.
+
+        Args:
+            settings_dir: Das Verzeichnis mit den Settings-Dateien
+            is_user: True wenn es sich um Benutzer-Settings handelt
+        """
+        if not settings_dir.exists():
+            if is_user:
+                Logger.info(f"Benutzer-Settings-Verzeichnis {settings_dir} existiert noch nicht.")
+            else:
+                Logger.warning(f"Natives Settings-Verzeichnis {settings_dir} existiert nicht.")
+            return
+
+        quelle = "Benutzer" if is_user else "Nativ"
+        for setting_file in settings_dir.glob('*.json'):
+            try:
+                with open(setting_file, 'r', encoding='utf-8') as f:
+                    setting_data = json.load(f)
+                    setting_name = setting_file.stem
+                    self.settings[setting_name] = setting_data
+                    if is_user:
+                        self._user_settings.add(setting_name)
+                    Logger.info(f"Setting '{setting_name}' geladen ({quelle}).")
+            except Exception as e:
+                Logger.error(f"Fehler beim Laden von Setting {setting_file}: {e}")
+
     def save_setting(self, name: str, setting_data: Dict[str, Any]) -> bool:
         """
-        Speichert ein Setting in eine JSON-Datei.
-        
+        Speichert ein Setting in eine JSON-Datei im Benutzer-Settings-Verzeichnis.
+
         Args:
             name: Name des Settings
             setting_data: Die Setting-Daten als Dictionary
-            
+
         Returns:
             bool: True bei Erfolg, sonst False
         """
         try:
-            if not self.settings_dir.exists():
-                self.settings_dir.mkdir(parents=True, exist_ok=True)
+            # Immer ins Benutzer-Verzeichnis speichern (persistiert bei Updates)
+            save_dir = self.user_settings_dir
+            if not save_dir.exists():
+                save_dir.mkdir(parents=True, exist_ok=True)
 
-            file_path = self.settings_dir / f"{name}.json"
+            file_path = save_dir / f"{name}.json"
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(setting_data, f, ensure_ascii=False, indent=4, cls=SetEncoder)
-            
+
             # Setting auch zum internen Dictionary hinzufügen
             self.settings[name] = setting_data
-            
+            self._user_settings.add(name)
+
             Logger.info(f"Setting '{name}' gespeichert unter {file_path}")
             return True
         except Exception as e:
@@ -183,32 +217,62 @@ class CustomElementManager:
 
     def delete_setting(self, name: str) -> bool:
         """
-        Löscht ein Setting.
-        
+        Löscht ein Setting. Löscht die Datei aus dem Benutzer-Verzeichnis.
+        Native Settings können nicht gelöscht werden.
+
         Args:
             name: Name des zu löschenden Settings
-            
+
         Returns:
             bool: True bei Erfolg, sonst False
         """
         if name not in self.settings:
             Logger.warning(f"Setting '{name}' existiert nicht.")
             return False
-        
+
         try:
-            # Datei löschen
-            file_path = self.settings_dir / f"{name}.json"
-            if file_path.exists():
-                file_path.unlink()
-                Logger.info(f"Setting-Datei '{file_path}' gelöscht.")
-            
-            # Aus Dictionary entfernen
-            del self.settings[name]
-            Logger.info(f"Setting '{name}' erfolgreich gelöscht.")
-            return True
+            deleted = False
+
+            # Aus dem Benutzer-Verzeichnis löschen
+            user_file = self.user_settings_dir / f"{name}.json"
+            if user_file.exists():
+                user_file.unlink()
+                Logger.info(f"Benutzer-Setting-Datei '{user_file}' gelöscht.")
+                deleted = True
+
+            # Auch aus dem nativen Verzeichnis löschen (falls gleicher Pfad wie Benutzer)
+            native_file = self.native_settings_dir / f"{name}.json"
+            if native_file.exists() and self.native_settings_dir == self.user_settings_dir:
+                native_file.unlink()
+                Logger.info(f"Setting-Datei '{native_file}' gelöscht.")
+                deleted = True
+            elif native_file.exists():
+                Logger.warning(f"Natives Setting '{name}' kann nicht gelöscht werden.")
+                return False
+
+            if deleted:
+                # Aus Dictionary entfernen
+                del self.settings[name]
+                self._user_settings.discard(name)
+                Logger.info(f"Setting '{name}' erfolgreich gelöscht.")
+                return True
+            else:
+                Logger.warning(f"Keine Setting-Datei für '{name}' gefunden.")
+                return False
         except Exception as e:
             Logger.error(f"Fehler beim Löschen von Setting '{name}': {e}")
             return False
+
+    def is_user_setting(self, name: str) -> bool:
+        """Prüft ob ein Setting vom Benutzer erstellt wurde (nicht nativ).
+
+        Args:
+            name: Name des Settings
+
+        Returns:
+            bool: True wenn es ein Benutzer-Setting ist
+        """
+        return name in self._user_settings
 
     def remove_element_from_active_setting(self, element_type: str, element_name: str) -> bool:
         """
@@ -279,10 +343,11 @@ class CustomElementManager:
             bool: True bei Erfolg, sonst False
         """
         try:
-            if not self.settings_dir.exists():
-                self.settings_dir.mkdir(parents=True, exist_ok=True)
+            save_dir = self.user_settings_dir
+            if not save_dir.exists():
+                save_dir.mkdir(parents=True, exist_ok=True)
 
-            file_path = self.settings_dir / f"custom_{element_type}.json"
+            file_path = save_dir / f"custom_{element_type}.json"
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(elements, f, ensure_ascii=False, indent=4)
 
@@ -295,6 +360,7 @@ class CustomElementManager:
     def load_custom_element(self, element_type: str) -> Dict[str, Any]:
         """
         Lädt benutzerdefinierte Elemente aus einer JSON-Datei.
+        Sucht zuerst im Benutzer-Verzeichnis, dann im nativen Verzeichnis.
 
         Args:
             element_type: Typ des Elements (z.B. 'handicaps', 'talente')
@@ -303,7 +369,11 @@ class CustomElementManager:
             Dict mit den geladenen Elementen (leer wenn keine gefunden)
         """
         try:
-            file_path = self.settings_dir / f"custom_{element_type}.json"
+            # Zuerst im Benutzer-Verzeichnis suchen
+            file_path = self.user_settings_dir / f"custom_{element_type}.json"
+            if not file_path.exists() and self.user_settings_dir != self.native_settings_dir:
+                # Fallback auf natives Verzeichnis
+                file_path = self.native_settings_dir / f"custom_{element_type}.json"
             if not file_path.exists():
                 return {}
 
