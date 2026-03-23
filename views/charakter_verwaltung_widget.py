@@ -1143,6 +1143,228 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         else:
             Logger.warning("DialogService nicht verfügbar - Setting löschen nicht möglich")
 
+    # ==================== TEILEN / VERSENDEN ====================
+
+    def versende_charakter(self):
+        """Zeigt Dialog zum Versenden von Charakter-Dateien (JSON, PDF, HTML)"""
+        try:
+            controller = self.app.controller
+            if not controller or not controller.charakter:
+                self._show_share_warning("Kein Charakter geladen.")
+                return
+
+            char_name = getattr(controller.charakter, 'char_name', 'Charakter')
+            char_file_path = getattr(controller, 'current_character_file_path', None)
+
+            # Verfügbare Dateien sammeln
+            dateien = self._sammle_charakter_dateien(char_file_path, char_name)
+
+            if not dateien:
+                self._show_share_warning(
+                    "Keine Charakter-Dateien zum Versenden gefunden.\n"
+                    "Speichere den Charakter zuerst."
+                )
+                return
+
+            self._zeige_versende_dialog(dateien, f"Charakter versenden: {char_name}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Versenden des Charakters: {e}")
+
+    def _sammle_charakter_dateien(self, char_file_path, char_name):
+        """Sammelt alle vorhandenen Dateien eines Charakters (JSON, PDF, HTML)."""
+        dateien = []
+
+        if char_file_path and os.path.exists(char_file_path):
+            dateien.append({
+                'pfad': char_file_path,
+                'name': os.path.basename(char_file_path),
+                'typ': 'Charakter (JSON)',
+                'icon': 'code-json',
+            })
+
+            # Zugehörige PDF/HTML im gleichen Verzeichnis suchen
+            ordner = os.path.dirname(char_file_path)
+            basis = Path(char_file_path).stem
+
+            pdf_pfad = os.path.join(ordner, f"{basis}.pdf")
+            if os.path.exists(pdf_pfad):
+                dateien.append({
+                    'pfad': pdf_pfad,
+                    'name': os.path.basename(pdf_pfad),
+                    'typ': 'Charakterbogen (PDF)',
+                    'icon': 'file-pdf-box',
+                })
+
+            html_pfad = os.path.join(ordner, f"{basis}.html")
+            if os.path.exists(html_pfad):
+                dateien.append({
+                    'pfad': html_pfad,
+                    'name': os.path.basename(html_pfad),
+                    'typ': 'Charakterbogen (HTML)',
+                    'icon': 'language-html5',
+                })
+        else:
+            # Kein gespeicherter Charakter - in chars/ nach passenden Dateien suchen
+            from utils.path_utils import get_chars_path
+            import glob as glob_mod
+
+            chars_dir = get_chars_path()
+            for ext in ('*.json', '*.pdf', '*.html'):
+                for f in glob_mod.glob(os.path.join(chars_dir, ext)):
+                    if char_name.lower() in os.path.basename(f).lower():
+                        icon = 'code-json' if f.endswith('.json') else (
+                            'file-pdf-box' if f.endswith('.pdf') else 'language-html5'
+                        )
+                        typ = 'JSON' if f.endswith('.json') else (
+                            'PDF' if f.endswith('.pdf') else 'HTML'
+                        )
+                        dateien.append({
+                            'pfad': f,
+                            'name': os.path.basename(f),
+                            'typ': typ,
+                            'icon': icon,
+                        })
+
+        return dateien
+
+    def _zeige_versende_dialog(self, dateien, titel):
+        """Zeigt einen Dialog mit Checkboxen für die zu versendenden Dateien."""
+        from kivymd.uix.selectioncontrol import MDCheckbox
+
+        dialog_content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            padding=dp(16),
+            size_hint_y=None,
+        )
+        dialog_content.bind(minimum_height=dialog_content.setter('height'))
+
+        dialog_content.add_widget(MDLabel(
+            text="Dateien zum Versenden auswählen:",
+            size_hint_y=None,
+            height=dp(30),
+        ))
+
+        checkboxes = []
+        for datei in dateien:
+            row = MDBoxLayout(
+                orientation='horizontal',
+                spacing=dp(8),
+                size_hint_y=None,
+                height=dp(48),
+            )
+
+            cb = MDCheckbox(
+                active=True,
+                size_hint=(None, None),
+                size=(dp(48), dp(48)),
+                pos_hint={"center_y": .5},
+            )
+            checkboxes.append((cb, datei))
+
+            row.add_widget(cb)
+            row.add_widget(MDListItemLeadingIcon(icon=datei['icon']))
+            row.add_widget(MDLabel(
+                text=f"{datei['name']} ({datei['typ']})",
+                pos_hint={"center_y": .5},
+            ))
+
+            dialog_content.add_widget(row)
+
+        def _on_versenden(x):
+            self._versende_dialog.dismiss()
+            ausgewaehlte = [d['pfad'] for cb, d in checkboxes if cb.active]
+            if ausgewaehlte:
+                self._versende_dateien(ausgewaehlte, titel)
+
+        self._versende_dialog = MDDialog(
+            MDDialogHeadlineText(text=titel),
+            MDDialogContentContainer(dialog_content, orientation="vertical"),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._versende_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Versenden"),
+                    style="text",
+                    on_release=_on_versenden,
+                ),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self._versende_dialog.open()
+
+    def _versende_dateien(self, dateipfade, titel="Dateien versenden"):
+        """Versendet die ausgewählten Dateien über die Plattform-Teilen-Funktion."""
+        from utils.share_utils import share_file, share_multiple_files, get_mime_type
+
+        try:
+            if len(dateipfade) == 1:
+                mime = get_mime_type(dateipfade[0])
+                success = share_file(dateipfade[0], mime, titel)
+            else:
+                success = share_multiple_files(dateipfade, '*/*', titel)
+
+            if not success:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_warning_dialog(
+                        "Das Versenden konnte nicht gestartet werden."
+                    )
+        except Exception as e:
+            Logger.error(f"Fehler beim Versenden: {e}")
+
+    def versende_setting(self):
+        """Versendet das aktuell aktive Setting als JSON-Datei."""
+        try:
+            controller = self.app.controller
+            if not controller or not controller.charakter:
+                self._show_share_warning("Kein Charakter geladen.")
+                return
+
+            setting_name = getattr(controller.charakter, 'active_setting_name', None)
+            if not setting_name:
+                self._show_share_warning("Kein aktives Setting vorhanden.")
+                return
+
+            # Setting-Datei finden (zuerst im Benutzer-Verzeichnis, dann nativ)
+            from utils.path_utils import get_settings_path, get_user_settings_path
+
+            setting_file = None
+            user_file = os.path.join(get_user_settings_path(), f"{setting_name}.json")
+            native_file = os.path.join(get_settings_path(), f"{setting_name}.json")
+
+            if os.path.exists(user_file):
+                setting_file = user_file
+            elif os.path.exists(native_file):
+                setting_file = native_file
+
+            if not setting_file:
+                self._show_share_warning(f"Setting-Datei für '{setting_name}' nicht gefunden.")
+                return
+
+            from utils.share_utils import share_file
+            success = share_file(setting_file, 'application/json', f"Setting versenden: {setting_name}")
+
+            if not success:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_warning_dialog(
+                        "Das Versenden konnte nicht gestartet werden."
+                    )
+        except Exception as e:
+            Logger.error(f"Fehler beim Versenden des Settings: {e}")
+
+    def _show_share_warning(self, message):
+        """Zeigt eine Warnung beim Versenden."""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service:
+            dialog_service.show_warning_dialog(message)
+
     # ==================== UI UPDATE METHODEN ====================
 
     def refresh_widget(self):

@@ -189,6 +189,32 @@
                             MDButtonText:
                                 text: "Element-Statistiken"
 
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "50dp"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.versende_charakter()
+
+                            MDButtonIcon:
+                                icon: "share-variant"
+
+                            MDButtonText:
+                                text: "Charakter versenden"
+
+                        MDButton:
+                            style: "elevated"
+                            on_release: root.versende_setting()
+
+                            MDButtonIcon:
+                                icon: "share"
+
+                            MDButtonText:
+                                text: "Setting versenden"
+
             # ===== Charakter-Einstellungen =====
             MDCard:
                 style: "elevated"
