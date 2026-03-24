@@ -476,29 +476,39 @@ class FileManagerService:
     
     def select_path(self, path):
         """
-        Verarbeitet ausgewählten Pfad basierend auf der aktuellen Aktion
-        
+        Verarbeitet ausgewählten Pfad basierend auf der aktuellen Aktion.
+        Verhindert doppelte Ausführung durch Touch-Event-Propagation auf Android.
+
         Args:
             path (str): Ausgewählter Pfad
         """
+        # Schutz gegen doppelte Ausführung (Android Touch-Event-Propagation)
+        if not self.current_action:
+            Logger.warning("select_path ignoriert: keine aktive Aktion (vermutlich doppelter Aufruf)")
+            return
+
+        # Aktion sofort sichern und zurücksetzen, bevor weitere Verarbeitung stattfindet
+        action = self.current_action
+        self.current_action = None
+
         self.exit_manager()
-        
+
         try:
             Logger.info(f"Ausgewählter Pfad: {path}")
-            Logger.info(f"Aktuelle Aktion: {self.current_action}")
-            
-            if self.current_action == "save_dir":
+            Logger.info(f"Aktuelle Aktion: {action}")
+
+            if action == "save_dir":
                 self._handle_save_directory(path)
-            elif self.current_action == "load":
+            elif action == "load":
                 self._handle_load_file(path)
-            elif self.current_action == "save_pdf_dir":
+            elif action == "save_pdf_dir":
                 self._handle_save_pdf_directory(path)
-            elif self.current_action == "save_html_dir":
+            elif action == "save_html_dir":
                 self._handle_save_html_directory(path)
-            elif self.current_action == "load_template":
+            elif action == "load_template":
                 self._handle_load_template(path)
             else:
-                Logger.warning(f"Unbekannter Aktionstyp: {self.current_action}")
+                Logger.warning(f"Unbekannter Aktionstyp: {action}")
         except Exception as e:
             Logger.error(f"Fehler bei Pfad-Verarbeitung: {str(e)}", exc_info=True)
             self._show_error(f"Fehler bei der Verarbeitung: {str(e)}")
