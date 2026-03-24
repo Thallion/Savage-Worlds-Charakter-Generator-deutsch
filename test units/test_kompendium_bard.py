@@ -17,7 +17,7 @@ UEBERSETZUNGSUEBERSICHT (EN -> DE im Fantasy Kompendium):
     Armor Interference (minor) -> Behindernde Ruestung (leicht) - AUTO von AH
 
   Edges:
-    Arcane Background (Bard) -> Arkaner Hintergrund (Barde) (Hintergrund, Rang A)
+    Arcane Background (Bard) -> AH (Barde) (Hintergrund, Rang A)
       EFFEKT: 3 Maechte, 10 Machtpunkte, Auto-Handicap Behindernde Ruestung
     Attractive -> Attraktiv (Hintergrund, Rang A)
     Humiliate -> Erniedrigen (Sozial, Rang A)
@@ -47,7 +47,7 @@ KOSTENAUFSTELLUNG (Fortgeschrittener Charakter):
   Handicap-Punkte: 4 (1 schwer + 2 leicht)
     -> 2 Punkte fuer +1 Attributsteigerung
     -> 2 Punkte fuer Talent "Attraktiv"
-  Menschen-Talent (frei): Arkaner Hintergrund (Barde)
+  Menschen-Talent (frei): AH (Barde)
   Aufstiege: 4 (Fortgeschritten)
     -> 1. Diebeskunst W6 + Kaempfen W6 (2 Fertigkeiten)
     -> 2. Erniedrigen (Talent, Oder-Voraussetzung: Darbietung W10 >= W8)
@@ -127,9 +127,9 @@ class TestBardUebersetzungen(unittest.TestCase):
     # Talente / Edges
     # ------------------------------------------------------------------
     def test_talent_ah_barde(self):
-        """Arkaner Hintergrund (Barde) muss als Talent im FK existieren."""
-        self.assertIn("Arkaner Hintergrund (Barde)", self.charakter.talente,
-                      "Arkaner Hintergrund (Barde) fehlt im FK")
+        """AH (Barde) muss als Talent im FK existieren."""
+        self.assertIn("AH (Barde)", self.charakter.talente,
+                      "AH (Barde) fehlt im FK")
 
     def test_talent_attraktiv(self):
         """Attraktiv (Attractive) muss als Talent im FK existieren."""
@@ -261,10 +261,10 @@ class TestBardCharakterErstellung(unittest.TestCase):
                     kosten['attribut_basis'] += ap_diff
                     kosten['attribut_handicap'] += hp_diff
 
-        # --- MENSCHEN-TALENT (frei): Arkaner Hintergrund (Barde) ---
+        # --- MENSCHEN-TALENT (frei): AH (Barde) ---
         # Gibt 3 Maechte + 10 Machtpunkte + Auto-Handicap Behindernde Ruestung
-        if "Arkaner Hintergrund (Barde)" in self.charakter.talente:
-            waehle_freies_talent(self.charakter, "Arkaner Hintergrund (Barde)")
+        if "AH (Barde)" in self.charakter.talente:
+            waehle_freies_talent(self.charakter, "AH (Barde)")
 
         # --- NOVIZE-TALENT: Attraktiv (2 HP) ---
         # Voraussetzung: KON W6 (erfuellt)
@@ -367,11 +367,11 @@ class TestBardCharakterErstellung(unittest.TestCase):
     def test_03_ah_barde_als_menschen_talent(self):
         """AH (Barde) als kostenloses Menschen-Talent + Auto-Handicap."""
         # AH (Barde) als freies Talent waehlen
-        erfolg = waehle_freies_talent(self.charakter, "Arkaner Hintergrund (Barde)")
+        erfolg = waehle_freies_talent(self.charakter, "AH (Barde)")
         self.assertTrue(erfolg, "AH (Barde) konnte nicht als freies Talent gewaehlt werden")
 
         # AH (Barde) sollte ausgewaehlt sein
-        ah = self.charakter.talente.get("Arkaner Hintergrund (Barde)")
+        ah = self.charakter.talente.get("AH (Barde)")
         self.assertIsNotNone(ah, "AH (Barde) nicht gefunden")
         self.assertTrue(ah.ausgewaehlt, "AH (Barde) sollte ausgewaehlt sein")
 
@@ -572,7 +572,7 @@ class TestBardCharakterErstellung(unittest.TestCase):
         print(f"  Attributpunkte:     5/5 Basis + 2 HP fuer 1 extra = 6")
         print(f"  Fertigkeitspunkte:  12/12 Basis")
         print(f"  Handicap-Punkte:    4/4 (2 Attribut + 2 Attraktiv)")
-        print(f"  Menschen-Talent:    Arkaner Hintergrund (Barde) (frei)")
+        print(f"  Menschen-Talent:    AH (Barde) (frei)")
         print(f"  Aufstiege:          4/4 (1 Fertigkeiten + 3 Talente)")
         print(f"{'=' * 60}")
 

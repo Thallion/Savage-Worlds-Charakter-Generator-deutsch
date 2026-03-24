@@ -22,7 +22,7 @@
             id: search_input
             hint_text: 'Suche...'
             size_hint_x: None
-            width: dp(140)
+            width: dp(110)
             on_text: root.filter_handicaps()
 
         MDScrollView:
@@ -39,26 +39,6 @@
                 height: dp(40)
                 spacing: dp(4)
 
-                TooltipFabButton:
-                    tooltip_text: "Name sortieren"
-                    icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
-                    style: "small"
-                    size_hint: None, None
-                    size: dp(36), dp(36)
-                    on_release: root.toggle_sort_order()
-
-                MDButton:
-                    id: only_selected_button
-                    size_hint: None, None
-                    height: dp(36)
-                    on_release: root.toggle_only_selected_items()
-
-                    MDButtonText:
-                        text: "Gewählt" if not root.only_selected_items else "Alle"
-                        theme_text_color: "Primary" if not root.only_selected_items else "Custom"
-                        text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
-                        font_size: dp(11)
-
                 MDFabButton:
                     icon: "filter"
                     style: "small"
@@ -72,6 +52,23 @@
                     size_hint_x: None
                     width: dp(80)
                     font_size: dp(11)
+
+                TooltipFabButton:
+                    id: only_selected_button
+                    tooltip_text: "Nur ausgewählte / Alle"
+                    icon: "sort-bool-descending-variant" if not root.only_selected_items else "sort-bool-ascending-variant"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.toggle_only_selected_items()
+
+                TooltipFabButton:
+                    tooltip_text: "Name sortieren"
+                    icon: "sort-alphabetical-ascending" if root.sort_order == 'name_asc' else "sort-alphabetical-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.toggle_sort_order()
 
     MDLabel:
         text: 'Handicaps'

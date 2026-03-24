@@ -101,9 +101,9 @@ class MockCharakter:
             machtpunkte=0
         )
         
-        # Arkaner Hintergrund
-        self.talente["Arkaner Hintergrund: Magie"] = Talent(
-            name="Arkaner Hintergrund: Magie",
+        # AH
+        self.talente["AH: Magie"] = Talent(
+            name="AH: Magie",
             kategorie="Macht",
             rang="A",
             voraussetzungen=[],
@@ -139,7 +139,7 @@ class MockCharakter:
             name="Zauberbücher",
             kategorie="Magier",
             rang="A",
-            voraussetzungen=["Arkaner Hintergrund (Magie)"],
+            voraussetzungen=["AH (Magie)"],
             beschreibung="Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
             neue_maechte=0,
             machtpunkte=0
@@ -266,8 +266,8 @@ class TestTalentManager(unittest.TestCase):
         self.assertNotIn("Glück", self.charakter.selected_talente)
     
     def test_arkaner_hintergrund_machtpunkte(self):
-        """Test Arkaner Hintergrund Machtpunkte-Gewährung"""
-        result = self.manager.waehle_talent("Arkaner Hintergrund: Magie")
+        """Test AH Machtpunkte-Gewährung"""
+        result = self.manager.waehle_talent("AH: Magie")
         self.assertTrue(result)
         self.assertEqual(self.charakter.verfuegbare_maechte, 3)
         self.assertEqual(self.charakter.anzahl_maechte, 3)
@@ -437,13 +437,13 @@ class TestOderVoraussetzungen(unittest.TestCase):
     def test_oder_ah_alternativen(self):
         """Test: 'AH (Priester) oder AH (Eiferer)' - AH-Alternativen"""
         # Erstelle AH-Talente
-        self.charakter.talente["Arkaner Hintergrund (Priester)"] = Talent(
-            "Arkaner Hintergrund (Priester)", "Macht", "A", [], "", 3, 10)
-        self.charakter.talente["Arkaner Hintergrund (Eiferer)"] = Talent(
-            "Arkaner Hintergrund (Eiferer)", "Macht", "A", [], "", 3, 10)
+        self.charakter.talente["AH (Priester)"] = Talent(
+            "AH (Priester)", "Macht", "A", [], "", 3, 10)
+        self.charakter.talente["AH (Eiferer)"] = Talent(
+            "AH (Eiferer)", "Macht", "A", [], "", 3, 10)
 
         # Wähle Priester aus
-        self.charakter.talente["Arkaner Hintergrund (Priester)"].ausgewaehlt = True
+        self.charakter.talente["AH (Priester)"].ausgewaehlt = True
 
         talent = Talent("Test", "Macht", "A",
                         ["AH (Priester) oder AH (Eiferer)"], "", 0, 0)

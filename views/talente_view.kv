@@ -21,7 +21,7 @@
         MDTextField:
             id: search_input
             hint_text: 'Suche...'
-            size_hint_x: 1
+            size_hint_x: 0.7
             on_text: root.filter_talente()
 
         MDIconButton:
@@ -50,35 +50,19 @@
             padding: [20, 10]
             spacing: 10
 
-            TooltipFabButton:
-                id: sort_name_btn
-                tooltip_text: "Sortieren nach Name"
-                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+            MDFabButton:
+                icon: "filter"
                 style: "small"
                 size_hint: None, None
                 size: dp(56), dp(56)
                 pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Name')
+                on_release: root.open_category_menu()
 
-            TooltipFabButton:
-                id: sort_rank_btn
-                tooltip_text: "Sortieren nach Rang"
-                icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Rang')
-
-            TooltipFabButton:
-                id: sort_category_btn
-                tooltip_text: "Sortieren nach Kategorie"
-                icon: "sort-reverse-variant" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-variant"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Kategorie')
+            MDLabel:
+                id: category_label
+                text: 'Alle Kategorien'
+                size_hint_x: None
+                width: dp(140)
 
             # Button für "Nur ausgewählte" (Android Checkbox Workaround)
             MDButton:
@@ -110,18 +94,35 @@
                     theme_text_color: "Primary" if not root.only_available_talents else "Custom"
                     text_color: self.theme_cls.primaryColor if root.only_available_talents else self.theme_cls.onSurfaceColor
 
-            MDFabButton:
-                icon: "filter"
+            TooltipFabButton:
+                id: sort_name_btn
+                tooltip_text: "Sortieren nach Name"
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
                 style: "small"
                 size_hint: None, None
                 size: dp(56), dp(56)
                 pos_hint: {"center_y": 0.5}
-                on_release: root.open_category_menu()
+                on_release: root.update_sort_option('Name')
 
-            MDLabel:
-                id: category_label
-                text: 'Alle Kategorien'
-                size_hint_x: 1
+            TooltipFabButton:
+                id: sort_rank_btn
+                tooltip_text: "Sortieren nach Rang"
+                icon: "sort-numeric-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-numeric-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.update_sort_option('Rang')
+
+            TooltipFabButton:
+                id: sort_category_btn
+                tooltip_text: "Sortieren nach Kategorie"
+                icon: "sort-bool-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-bool-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.update_sort_option('Kategorie')
 
     MDBoxLayout:
         orientation: 'horizontal'

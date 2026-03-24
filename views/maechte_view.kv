@@ -25,7 +25,7 @@
         MDTextField:
             id: search_input
             hint_text: 'Suche...'
-            size_hint_x: 1
+            size_hint_x: 0.7
             on_text: root.filter_maechte()
 
         MDIconButton:
@@ -54,26 +54,6 @@
             padding: [20, 10]
             spacing: 10
 
-            TooltipFabButton:
-                id: sort_name_btn
-                tooltip_text: "Sortieren nach Name"
-                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Name')
-
-            TooltipFabButton:
-                id: sort_rank_btn
-                tooltip_text: "Sortieren nach Rang"
-                icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Rang')
-
             # Button für "Nur ausgewählte" (Android Checkbox Workaround)
             MDButton:
                 id: only_selected_button
@@ -88,6 +68,26 @@
                     text: "Nur ausgewählte" if not root.only_selected_items else "Alle"
                     theme_text_color: "Primary" if not root.only_selected_items else "Custom"
                     text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
+
+            TooltipFabButton:
+                id: sort_name_btn
+                tooltip_text: "Sortieren nach Name"
+                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.update_sort_option('Name')
+
+            TooltipFabButton:
+                id: sort_rank_btn
+                tooltip_text: "Sortieren nach Rang"
+                icon: "sort-numeric-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-numeric-descending"
+                style: "small"
+                size_hint: None, None
+                size: dp(56), dp(56)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.update_sort_option('Rang')
 
     MDLabel:
         text: 'Mächte'

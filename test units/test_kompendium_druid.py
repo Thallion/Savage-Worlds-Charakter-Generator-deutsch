@@ -23,7 +23,7 @@ UEBERSETZUNGSUEBERSICHT (EN -> DE im Fantasy Kompendium):
     Vow (major) -> Schwur_schwer
 
   Edges (Erstellung):
-    Arcane Background (Druid) -> Arkaner Hintergrund (Druide)
+    Arcane Background (Druid) -> AH (Druide)
       Gibt 5 Maechte, 10 Machtpunkte, Arkane Fertigkeit: Glaube (WIL)
     Beast Master -> Tiermeister (Uebersinnlich, WIL W8)
 
@@ -55,7 +55,7 @@ KOSTENAUFSTELLUNG (Fortgeschrittener Charakter):
   Attributpunkte: 5 Basis (Elf-GES-Bonus spart 1)
   Fertigkeitspunkte: 12 Basis
   Handicap-Punkte: 4 (1 schwer + 2 leicht)
-    -> 2 Punkte fuer Arkaner Hintergrund (Druide)
+    -> 2 Punkte fuer AH (Druide)
     -> 2 Punkte fuer Tiermeister
   Aufstiege: 4 (Fortgeschritten)
     -> Bestienfluesterer, Bevorzugtes Gelaende, Herzholzstab, Naturbursche
@@ -170,9 +170,9 @@ class TestDruidUebersetzungen(unittest.TestCase):
     # Talente / Edges
     # ------------------------------------------------------------------
     def test_talent_arkaner_hintergrund_druide(self):
-        """Arkaner Hintergrund (Druide) muss als Talent im FK existieren."""
-        self.assertIn("Arkaner Hintergrund (Druide)", self.charakter.talente,
-                      "Arkaner Hintergrund (Druide) fehlt im FK")
+        """AH (Druide) muss als Talent im FK existieren."""
+        self.assertIn("AH (Druide)", self.charakter.talente,
+                      "AH (Druide) fehlt im FK")
 
     def test_talent_tiermeister(self):
         """Tiermeister (Beast Master) muss als Talent im FK existieren."""
@@ -285,7 +285,7 @@ class TestDruidCharakterErstellung(unittest.TestCase):
             'attribut_handicap': 0,    # aus verbleibende_handicap_punkte
             'fertigkeiten': 0,
             'handicap_gesamt': 0,
-            'talent_ab_hp': 0,         # HP fuer Arkaner Hintergrund (Druide)
+            'talent_ab_hp': 0,         # HP fuer AH (Druide)
             'talent_tiermeister_hp': 0, # HP fuer Tiermeister
         }
 
@@ -324,9 +324,9 @@ class TestDruidCharakterErstellung(unittest.TestCase):
 
         # --- NOVIZE-TALENTE: AB Druide (2 HP) + Tiermeister (2 HP) ---
         # AB Druide gibt 5 Maechte, 10 Machtpunkte, Auto-Handicaps
-        if "Arkaner Hintergrund (Druide)" in self.charakter.talente:
+        if "AH (Druide)" in self.charakter.talente:
             hp_vor = self.charakter.verbleibende_handicap_punkte
-            erfolg = waehle_talent(self.charakter, "Arkaner Hintergrund (Druide)")
+            erfolg = waehle_talent(self.charakter, "AH (Druide)")
             if erfolg == True:
                 hp_diff = hp_vor - self.charakter.verbleibende_handicap_punkte
                 kosten['talent_ab_hp'] = hp_diff
@@ -446,7 +446,7 @@ class TestDruidCharakterErstellung(unittest.TestCase):
 
         # AB Druide waehlen
         hp_vor = self.charakter.verbleibende_handicap_punkte
-        erfolg = waehle_talent(self.charakter, "Arkaner Hintergrund (Druide)")
+        erfolg = waehle_talent(self.charakter, "AH (Druide)")
         self.assertTrue(erfolg, "AB Druide konnte nicht gewaehlt werden")
 
         hp_nach = self.charakter.verbleibende_handicap_punkte
@@ -480,7 +480,7 @@ class TestDruidCharakterErstellung(unittest.TestCase):
                             ('Stärke', 1), ('Konstitution', 1)]:
             for _ in range(count):
                 self.charakter.steigere_attribut(attr)
-        waehle_talent(self.charakter, "Arkaner Hintergrund (Druide)")
+        waehle_talent(self.charakter, "AH (Druide)")
 
         # Tiermeister waehlen (braucht WIL W8, kostet 2 HP)
         hp_vor = self.charakter.verbleibende_handicap_punkte

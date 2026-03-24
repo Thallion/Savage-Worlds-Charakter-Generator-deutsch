@@ -127,8 +127,8 @@
         ]
     },
     "talente": {
-        "Arkaner Hintergrund (Hexenmystiker)": {
-            "name": "Arkaner Hintergrund (Hexenmystiker)",
+        "AH (Hexenmystiker)": {
+            "name": "AH (Hexenmystiker)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -147,7 +147,7 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Alchemist)",
+                "AH (Alchemist)",
                 "Fanatiker"
             ],
             "beschreibung": "Schutz vor Naturgewalten mit Einschränkung Feuer erlernt. Kann sich selbst Erschöpfung zufügen, um Bennys zu erhalten.",
@@ -161,7 +161,7 @@
             "kategorie": "Sozial",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Priester)",
+                "AH (Priester)",
                 "weiblich"
             ],
             "beschreibung": "Kann Verderbnis erhöhen, um einen Benny zu erhalten, und anderen Mariannen besonders gut helfen, Verderbnis abzubauen.",
@@ -188,7 +188,7 @@
             "kategorie": "Sozial",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Eiferer)",
+                "AH (Eiferer)",
                 "weiblich"
             ],
             "beschreibung": "Kann Verderbnis erhöhen, um bis zum Beginn ihres nächsten Zuges einen Bonus in Höhe ihrer Verderbnis auf alle Eigenschafts- und Schadenswürfe zu erhalten.",
@@ -215,7 +215,7 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Priester)",
+                "AH (Priester)",
                 "Überreden W6+"
             ],
             "beschreibung": "Erlaubt Priestern, Rituale durchzuführen.",
@@ -229,7 +229,7 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Hexenmystiker)",
+                "AH (Hexenmystiker)",
                 "Gesucht (schwer)",
                 "weiblich"
             ],
@@ -517,8 +517,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Alchemist)": {
-            "name": "Arkaner Hintergrund (Alchemist)",
+        "AH (Alchemist)": {
+            "name": "AH (Alchemist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -531,8 +531,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Eiferer)": {
-            "name": "Arkaner Hintergrund (Eiferer)",
+        "AH (Eiferer)": {
+            "name": "AH (Eiferer)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -545,8 +545,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Konstrukteur)": {
-            "name": "Arkaner Hintergrund (Konstrukteur)",
+        "AH (Konstrukteur)": {
+            "name": "AH (Konstrukteur)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -559,8 +559,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Priester)": {
-            "name": "Arkaner Hintergrund (Priester)",
+        "AH (Priester)": {
+            "name": "AH (Priester)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -622,8 +622,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund": {
-            "name": "Arkaner Hintergrund",
+        "AH": {
+            "name": "AH",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],

@@ -1,168 +1,20 @@
 {
-    "name": "SciFi Kompendium",
-    "description": "Science-Fiction-Kompendium für Savage Worlds Abenteuer-Edition (SWAE)",
+    "name": "ttt",
+    "description": "ttt",
     "voelker": {
-        "Amorphe": {
-            "name": "Amorphe",
+        "Androiden": {
+            "name": "Androiden",
             "handicaps": [
-                "Kybernetische Abstoßung"
+                "Aussenseiter (Schwer) (-2 auf Überredenproben mit Nicht-Androiden, werden als Besitz behandelt)",
+                "Pazifist (Schwer) (Asimov-Schaltkreise: Dürfen keine intelligenten Lebewesen verletzen)",
+                "Schwur (Schwer) (An bestimmte Direktive/Daseinszweck gebunden)"
             ],
             "talente": [],
             "besonderheiten": [
-                "Amorph (gelatineartiger Körper, halber Schaden bei Stürzen/Zusammenstößen, keine Angesagten Ziele, kann durch Gitter schlüpfen mit Athletikprobe)",
-                "Regeneration (einmal pro Tag natürliche Heilungsprobe)",
-                "Schwäche (-1 auf Stärkeproben und Nahkampf-Schadenswürfe)"
+                "Konstrukt (+2 auf Erholungsproben gegen Angeschlagen, atmen nicht, ignorieren eine Stufe Wundabzüge, immun gegen Gifte und Krankheiten)",
+                "Künstliche Reparatur (Keine natürliche Heilung, benötigen Reparieren-Fertigkeit, 1 Stunde pro Wundstufe, nicht durch Goldene Stunde eingeschränkt)",
+                "Menschenähnlich (Können normalerweise als Menschen durchgehen, außer bei medizinischer Untersuchung)"
             ],
-            "sprachen": [
-                "Pheromone (benötigt Universalübersetzer)"
-            ],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "variabel",
-            "groesse_weiblich": "variabel",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Kybernetische Abstoßung"
-                ],
-                "spezielle_effekte": {
-                    "amorph": true,
-                    "regeneration_taeglich": true,
-                    "cyberresistent": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Centaux": {
-            "name": "Centaux",
-            "handicaps": [
-                "Wuchtig"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Bewegungsweite +2 (Sprintwürfel um einen Würfeltyp erhöht)",
-                "Größe +2 (+2 Robustheit)",
-                "Offensichtlich (-1 auf Heimlichkeitsproben)",
-                "Stabiler Stand (ignoriert Schwieriges Gelände)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "2,00-2,50m",
-            "groesse_weiblich": "1,90-2,40m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 2,
-                "bewegungsweite_bonus": 2,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Wuchtig"
-                ],
-                "spezielle_effekte": {
-                    "stabiler_stand": true,
-                    "wuchtig": true,
-                    "offensichtlich": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Draken": {
-            "name": "Draken",
-            "handicaps": [],
-            "talente": [],
-            "besonderheiten": [
-                "Hartes Haupt (Kopfstoß: Stä+W4 Schaden, zählt als Hörner)",
-                "Langsam (Bewegungsweite -1, Sprintwürfel W4)",
-                "Robustheit +2",
-                "Ruppig (-2 auf Überredenproben)",
-                "Stark (beginnt mit W6 Stärke, max. W12+1)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "1,80-2,20m",
-            "groesse_weiblich": "1,70-2,10m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {
-                    "Stärke": 2
-                },
-                "robustheit_bonus": 2,
-                "bewegungsweite_bonus": -1,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Langsam"
-                ],
-                "spezielle_effekte": {
-                    "hartes_haupt": true,
-                    "langsam": true,
-                    "ruppig": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Elementare": {
-            "name": "Elementare",
-            "handicaps": [
-                "Wuchtig"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Dumm (-1 auf Verstandsproben)",
-                "Größe +1 (+1 Robustheit, über 2m groß)",
-                "Robust +2 (steinerner Körper)",
-                "Stark (beginnt mit W8 Stärke, max. W12+2)",
-                "Verringerte Bewegungsweite (-1 BW, -1 Sprintwürfel)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Unsterblich",
-            "groesse_maennlich": "2,10-2,50m",
-            "groesse_weiblich": "2,00-2,40m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {
-                    "Stärke": 4
-                },
-                "robustheit_bonus": 3,
-                "bewegungsweite_bonus": -1,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Wuchtig"
-                ],
-                "spezielle_effekte": {
-                    "robust": true,
-                    "dumm": true,
-                    "wuchtig": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Floraner": {
-            "name": "Floraner",
-            "handicaps": [],
-            "talente": [],
-            "besonderheiten": [
-                "Abhängigkeit (benötigt einmal am Tag Sonnenlicht, sonst Erschöpfung bis zum Tod)",
-                "Anfälligkeit für Naturgewalten Hitze/Feuer (-4 auf Erschöpfungsproben gegen Hitze, +4 Schaden durch Feuer)",
-                "Blutlos (stabilisiert sich automatisch bei Verbluten)",
-                "Geringeres Schlafbedürfnis (nur halb so viel Schlaf)",
-                "Keine lebenswichtigen Organe (kein zusätzlicher Schaden durch Angesagte Ziele)",
-                "Zäh (kein zweites Angeschlagen verursacht Wunde)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "1,60-2,00m",
-            "groesse_weiblich": "1,55-1,95m",
             "aktiv": true,
             "custom": false,
             "effects": {
@@ -172,64 +24,35 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "spezielle_effekte": {
-                    "abhaengigkeit_sonnenlicht": true,
-                    "blutlos": true,
-                    "zaeh": true,
-                    "keine_lebenswichtigen_organe": true,
-                    "anfaellig_feuer": true
+                    "konstrukt": true,
+                    "erholungsbonus_angeschlagen": 2,
+                    "atmet_nicht": true,
+                    "ignoriert_wundstufe": 1,
+                    "immun_gifte_krankheiten": true,
+                    "keine_natuerliche_heilung": true,
+                    "reparieren_statt_heilen": true,
+                    "heilung_nicht_goldene_stunde": true,
+                    "menschenaehnlich": true,
+                    "ueberreden_malus_nicht_androiden": -2,
+                    "asimov_schaltkreise": true,
+                    "direktive_gebunden": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {
+                    "spezialisierung": true
+                }
             }
         },
-        "Gen-Schufter": {
-            "name": "Gen-Schufter",
+        "Aquarianer": {
+            "name": "Aquarianer",
             "handicaps": [
-                "Atmosphärische Abhängigkeit (schwer)"
+                "Abhängigkeit (Wasser: 1 Stunde pro 24 Stunden, sonst Erschöpfung bis Ausgeschaltet, dann Tod)"
             ],
             "talente": [],
             "besonderheiten": [
-                "Fit (beginnt mit W6 Konstitution, max. W12+1)",
-                "Stark (beginnt mit W6 Stärke, max. W12+1)"
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Robustheit (+1 Robustheit durch zähes Fleisch der Tiefen)",
+                "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)"
             ],
-            "sprachen": [],
-            "altersspanne": "60-80 Jahre",
-            "groesse_maennlich": "1,70-1,95m",
-            "groesse_weiblich": "1,60-1,85m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {
-                    "Stärke": 2,
-                    "Konstitution": 2
-                },
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Atmosphärische Abhängigkeit (schwer)"
-                ],
-                "spezielle_effekte": {},
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Gen-Soldaten": {
-            "name": "Gen-Soldaten",
-            "handicaps": [
-                "Skrupellos (schwer)"
-            ],
-            "talente": [
-                "Kampfreflexe"
-            ],
-            "besonderheiten": [
-                "Ausgebildet für den Krieg (-4 auf Allgemeinwissenproben)",
-                "Robustheit +1",
-                "Schmerzresistenz (ignoriert 1 Punkt Wundabzüge)"
-            ],
-            "sprachen": [],
-            "altersspanne": "30-50 Jahre",
-            "groesse_maennlich": "1,80-2,10m",
-            "groesse_weiblich": "1,70-2,00m",
             "aktiv": true,
             "custom": false,
             "effects": {
@@ -238,150 +61,62 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
-                    "Kampfreflexe"
-                ],
-                "auto_handicaps": [
-                    "Skrupellos (schwer)"
+                    "Nachtsicht"
                 ],
                 "spezielle_effekte": {
-                    "schmerzresistenz": true,
-                    "ausgebildet_fuer_krieg": true
+                    "nachtsicht": true,
+                    "wasserwesen": true,
+                    "abhaengigkeit_wasser": true
                 },
                 "wahlmoeglichkeiten": {}
             }
         },
-        "Insektoide": {
-            "name": "Insektoide",
+        "Avionen": {
+            "name": "Avionen",
             "handicaps": [
-                "Außenseiter (leicht)",
-                "Trennungsangst"
+                "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser kostet)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)",
+                "Zerbrechlich (-1 Robustheit durch hohle Knochen)"
             ],
             "talente": [],
             "besonderheiten": [
-                "Gemeinschaft (+2 auf Willenskraftproben wenn Artgenossen im Umkreis von 12'')",
-                "Kann nicht sprechen (benötigt Universalübersetzer)",
-                "Klauen (Stä+W4, PB 2)",
-                "Panzerung +2 (Chitin-Exoskelett)",
-                "Rundumsicht (ignoriert 1 Punkt Überzahlbonus)"
+                "Fliegen (Bewegungsweite 12'' pro Runde, Athletik für Manöver)",
+                "Scharfe Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
             ],
-            "sprachen": [
-                "Klick-Sprache (benötigt Universalübersetzer)"
-            ],
-            "altersspanne": "20-40 Jahre",
-            "groesse_maennlich": "1,50-2,00m",
-            "groesse_weiblich": "1,50-2,00m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Außenseiter (leicht)",
-                    "Trennungsangst"
-                ],
-                "spezielle_effekte": {
-                    "gemeinschaft": true,
-                    "kann_nicht_sprechen": true,
-                    "klauen": true,
-                    "panzerung_2": true,
-                    "rundumsicht": true,
-                    "trennungsangst": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Leerlinge": {
-            "name": "Leerlinge",
-            "handicaps": [
-                "Außenseiter (leicht)",
-                "Neugierig",
-                "Trennungsangst"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Blutlos (stabilisiert sich automatisch bei Verbluten)",
-                "Energiegestalt (keine lebenswichtigen Organe, immun gegen physische Waffen/Geschosse, kann durch Öffnungen schlüpfen, kann keine Panzerung/Waffen/Materie benutzen ohne Eindämmungsanzug)",
-                "Kann nicht sprechen (benötigt Übersetzungsschirm)",
-                "Weltraumreisender (atmet nicht, ignoriert Dekompression und Hintergrundstrahlung)"
-            ],
-            "sprachen": [
-                "Energieimpulse (benötigt Übersetzungsschirm)"
-            ],
-            "altersspanne": "Unsterblich",
-            "groesse_maennlich": "variabel",
-            "groesse_weiblich": "variabel",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Außenseiter (leicht)",
-                    "Neugierig",
-                    "Trennungsangst"
-                ],
-                "spezielle_effekte": {
-                    "energiegestalt": true,
-                    "blutlos": true,
-                    "weltraumreisender": true,
-                    "kann_nicht_sprechen": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Orakel": {
-            "name": "Orakel",
-            "handicaps": [],
-            "talente": [
-                "Sechster Sinn"
-            ],
-            "besonderheiten": [
-                "Gefahrensinn (Talent Sechster Sinn)",
-                "Telepathie (mentale Kommunikation mit intelligenten Wesen im Umkreis von 12'')",
-                "Zerbrechlich (-1 Robustheit)"
-            ],
-            "sprachen": [
-                "Telepathie"
-            ],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "1,50-1,80m",
-            "groesse_weiblich": "1,45-1,75m",
             "aktiv": true,
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
                 "robustheit_bonus": -1,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {
+                    "Wahrnehmung": 2
+                },
                 "auto_talente": [
-                    "Sechster Sinn"
+                    "Flug",
+                    "Geschärfte Sinne"
+                ],
+                "auto_handicaps": [
+                    "Zerbrechlich"
                 ],
                 "spezielle_effekte": {
-                    "telepathie": true
+                    "fliegen": true,
+                    "nichtschwimmer": true,
+                    "geschaerfte_sinne": true
                 },
                 "wahlmoeglichkeiten": {}
             }
         },
-        "Parasiten": {
-            "name": "Parasiten",
+        "Halbelf": {
+            "name": "Halbelf",
             "handicaps": [
-                "Außenseiter (leicht)"
+                "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
             ],
             "talente": [],
             "besonderheiten": [
-                "Gemeinschaft (+2 auf Willenskraftproben wenn Artgenossen im Umkreis von 12'')",
-                "Hülle (kann neuen Wirtskörper beziehen wenn aktuelle Hülle zerstört wird, innerhalb 24h)"
+                "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
             ],
-            "sprachen": [],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "abhängig vom Wirt",
-            "groesse_weiblich": "abhängig vom Wirt",
             "aktiv": true,
             "custom": false,
             "effects": {
@@ -389,339 +124,199 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Außenseiter (leicht)"
+                "auto_talente": [
+                    "Nachtsicht"
                 ],
                 "spezielle_effekte": {
-                    "gemeinschaft": true,
-                    "huelle": true
+                    "nachtsicht": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {
+                    "freies_talent_oder_attribut": true
+                }
+            }
+        },
+        "Elf": {
+            "name": "Elf",
+            "handicaps": [
+                "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+            ],
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "auto_handicaps": [
+                    "Zwei linke Hände"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true,
+                    "zwei_linke_haende": true
                 },
                 "wahlmoeglichkeiten": {}
             }
         },
-        "Racker": {
-            "name": "Racker",
+        "Halbling": {
+            "name": "Halbling",
             "handicaps": [
-                "High Tech (schwer)",
-                "Volksfeind (Insektoide)"
+                "Größe -1 (Reduzierte Robustheit um 1)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
             ],
-            "talente": [],
+            "talente": [
+                "Glück"
+            ],
             "besonderheiten": [
-                "Verringerte Bewegungsweite (-1 BW, -1 Sprintwürfel)",
-                "Willensstark (beginnt mit W6 Willenskraft, max. W12+1)",
-                "Winzlinge Größe -3 (Sehr klein, -3 Robustheit, max. Stärke W6)"
+                "Beherzt (Willenskraft W6 statt W4, Maximum W12+1)",
+                "Glück (Zusätzlicher Benny pro Spielsitzung)"
             ],
-            "sprachen": [],
-            "altersspanne": "20-30 Jahre",
-            "groesse_maennlich": "~40cm",
-            "groesse_weiblich": "~35cm",
             "aktiv": true,
             "custom": false,
             "effects": {
                 "attribute_bonuses": {
                     "Willenskraft": 2
                 },
-                "robustheit_bonus": -3,
+                "robustheit_bonus": -1,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "High Tech (schwer)",
-                    "Volksfeind (Insektoide)"
+                "auto_talente": [
+                    "Glück"
                 ],
-                "spezielle_effekte": {
-                    "winzling_sehr_klein": true,
-                    "max_staerke_w6": true
-                },
+                "spezielle_effekte": {},
                 "wahlmoeglichkeiten": {}
             }
         },
-        "Roboter": {
-            "name": "Roboter",
-            "handicaps": [
-                "Pazifist (schwer)",
-                "Programmiert (schwer)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Roboter (atmet nicht, immun gegen Krankheiten/Gifte, ignoriert Dekompression/Hintergrundstrahlung, Mods je nach Größe, keine natürliche Heilung, muss repariert werden)"
-            ],
-            "sprachen": [
-                "Alle bekannten"
-            ],
-            "altersspanne": "Unbegrenzt",
-            "groesse_maennlich": "variabel",
-            "groesse_weiblich": "variabel",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Pazifist (schwer)",
-                    "Programmiert (schwer)"
-                ],
-                "spezielle_effekte": {
-                    "roboter": true,
-                    "keine_natuerliche_heilung": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Synthetische Wesen": {
-            "name": "Synthetische Wesen",
-            "handicaps": [
-                "Programmiert (schwer)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Immunität gegen Krankheiten und Gifte",
-                "Keine Selbstheilung (keine natürliche Heilung, aber normal heilbar)",
-                "Weltraumreisender (atmet nicht, ignoriert Dekompression und Hintergrundstrahlung)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Unbegrenzt",
-            "groesse_maennlich": "1,70-1,90m",
-            "groesse_weiblich": "1,65-1,85m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Programmiert (schwer)"
-                ],
-                "spezielle_effekte": {
-                    "immun_krankheiten_gifte": true,
-                    "keine_natuerliche_heilung": true,
-                    "weltraumreisender": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Vierarmige": {
-            "name": "Vierarmige",
-            "handicaps": [
-                "Volksfeind (SL-Wahl)"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Dünnhäutig (-4 auf Widerstand gegen Provozieren)",
-                "Zerbrechlich (-1 Robustheit)",
-                "Zusätzliche Aktion (ignoriert 2 Punkte körperliche Abzüge für Mehrfachaktionen)",
-                "Zusätzliche Gliedmaßen (zweiter Satz Arme, +1 Überzahlbonus im Nahkampf, +1 auf Athletikproben)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "1,70-2,00m",
-            "groesse_weiblich": "1,65-1,95m",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": -1,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Volksfeind (SL-Wahl)",
-                    "Dünnhäutig"
-                ],
-                "spezielle_effekte": {
-                    "zusaetzliche_aktion": true,
-                    "zusaetzliche_gliedmassen": true,
-                    "duennhaeutig": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Wechselbälger": {
-            "name": "Wechselbälger",
-            "handicaps": [
-                "Außenseiter (leicht)",
-                "Kybernetische Abstoßung"
-            ],
-            "talente": [],
-            "besonderheiten": [
-                "Gestaltwandeln (als begrenzte Aktion Aussehen anderer Wesen annehmen, ±2 Größe, Verstandsprobe für spezifische Individuen)",
-                "Keine lebenswichtigen Organe (kein zusätzlicher Schaden durch Angesagte Ziele)"
-            ],
-            "sprachen": [],
-            "altersspanne": "Variabel",
-            "groesse_maennlich": "variabel",
-            "groesse_weiblich": "variabel",
-            "aktiv": true,
-            "custom": false,
-            "effects": {
-                "attribute_bonuses": {},
-                "robustheit_bonus": 0,
-                "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {},
-                "auto_talente": [],
-                "auto_handicaps": [
-                    "Außenseiter (leicht)",
-                    "Kybernetische Abstoßung"
-                ],
-                "spezielle_effekte": {
-                    "gestaltwandeln": true,
-                    "keine_lebenswichtigen_organe": true,
-                    "cyberresistent": true
-                },
-                "wahlmoeglichkeiten": {}
-            }
-        },
-        "Yetis": {
-            "name": "Yetis",
+        "Mensch": {
+            "name": "Mensch",
             "handicaps": [],
             "talente": [],
             "besonderheiten": [
-                "Groß (Wuchtig: -2 auf Eigenschaftsproben mit nicht angepasster Ausrüstung, doppelte Kosten)",
-                "Größe +2 (+2 Robustheit)",
-                "Stark (beginnt mit W6 Stärke, max. W12+1)",
-                "Umweltschwäche Hitze (-4 auf Erschöpfungsproben gegen Hitze, +4 Schaden durch Hitze/Feuer)"
+                "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
             ],
-            "sprachen": [],
-            "altersspanne": "80-120 Jahre",
-            "groesse_maennlich": "2,10-2,60m",
-            "groesse_weiblich": "2,00-2,50m",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true
+                }
+            }
+        },
+        "Rakashaner": {
+            "name": "Rakashaner",
+            "handicaps": [
+                "Blutrünstig (Grausam zu Feinen, spielen mit ihnen)",
+                "Nichtschwimmer (-2 Athletik Schwimmen, 3'' Bewegungsweite im Wasser)",
+                "Volksfeind (-2 Überreden mit einem anderen Volk)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+                "Geschicklichkeit (W6 statt W4, Maximum W12+1)",
+                "Klauen (Stä+W4 Schaden, PB 2, +2 Athletik Klettern)",
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
+            ],
             "aktiv": true,
             "custom": false,
             "effects": {
                 "attribute_bonuses": {
-                    "Stärke": 2
+                    "Geschicklichkeit": 2
                 },
-                "robustheit_bonus": 2,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
                 "spezielle_effekte": {
-                    "wuchtig": true,
-                    "anfaellig_hitze": true
+                    "biss": true,
+                    "klauen": true,
+                    "nachtsicht": true,
+                    "blutrünstig": true,
+                    "nichtschwimmer": true,
+                    "volksfeind": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Saurianer": {
+            "name": "Saurianer",
+            "handicaps": [
+                "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
+                "Außenseiter (leicht: -2 Überreden durch seltsame Sitten/Erscheinung)"
+            ],
+            "talente": [
+                "Aufmerksamkeit"
+            ],
+            "besonderheiten": [
+                "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
+                "Geschärfte Sinne (Talent Aufmerksamkeit)",
+                "Panzerung +2 (Schuppige Haut wie Lederrüstung)"
+            ],
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Aufmerksamkeit",
+                    "Geschärfte Sinne"
+                ],
+                "spezielle_effekte": {
+                    "biss": true,
+                    "panzerung_2": true,
+                    "anfaelligkeit_kaelte": true,
+                    "aussenseiter_leicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
+        },
+        "Zwerg": {
+            "name": "Zwerg",
+            "handicaps": [
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+                "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)"
+            ],
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [
+                    "Nachtsicht"
+                ],
+                "spezielle_effekte": {
+                    "nachtsicht": true
                 },
                 "wahlmoeglichkeiten": {}
             }
         }
-    },
-    "voelker_selected": "",
-    "attribute": {
-        "Geschicklichkeit": {
-            "attribut_name": "Geschicklichkeit",
-            "wert": 4,
-            "modifier": 0
-        },
-        "Verstand": {
-            "attribut_name": "Verstand",
-            "wert": 4,
-            "modifier": 0
-        },
-        "Stärke": {
-            "attribut_name": "Stärke",
-            "wert": 4,
-            "modifier": 0
-        },
-        "Konstitution": {
-            "attribut_name": "Konstitution",
-            "wert": 4,
-            "modifier": 0
-        },
-        "Willenskraft": {
-            "attribut_name": "Willenskraft",
-            "wert": 4,
-            "modifier": 0
-        }
-    },
-    "fertigkeiten_daten": {
-        "Allgemeinwissen": [
-            "Verstand"
-        ],
-        "Athletik": [
-            "Geschicklichkeit"
-        ],
-        "Darbietung": [
-            "Willenskraft"
-        ],
-        "Diebeskunst": [
-            "Geschicklichkeit"
-        ],
-        "Einschüchtern": [
-            "Willenskraft"
-        ],
-        "Elektronik": [
-            "Verstand"
-        ],
-        "Fahren": [
-            "Geschicklichkeit"
-        ],
-        "Fokus": [
-            "Willenskraft"
-        ],
-        "Geisteswissenschaften": [
-            "Verstand"
-        ],
-        "Glaube": [
-            "Willenskraft"
-        ],
-        "Glücksspiel": [
-            "Verstand"
-        ],
-        "Hacken": [
-            "Verstand"
-        ],
-        "Heilen": [
-            "Verstand"
-        ],
-        "Heimlichkeit": [
-            "Geschicklichkeit"
-        ],
-        "Kämpfen": [
-            "Geschicklichkeit"
-        ],
-        "Naturwissenschaften": [
-            "Verstand"
-        ],
-        "Okkultismus": [
-            "Verstand"
-        ],
-        "Pilot": [
-            "Geschicklichkeit"
-        ],
-        "Provozieren": [
-            "Willenskraft"
-        ],
-        "Psionik": [
-            "Verstand"
-        ],
-        "Reparieren": [
-            "Verstand"
-        ],
-        "Schießen": [
-            "Geschicklichkeit"
-        ],
-        "Seefahrt": [
-            "Geschicklichkeit"
-        ],
-        "Überreden": [
-            "Willenskraft"
-        ],
-        "Überleben": [
-            "Verstand"
-        ],
-        "Verrückte Wissenschaft": [
-            "Verstand"
-        ],
-        "Wahrnehmung": [
-            "Verstand"
-        ],
-        "Zaubern": [
-            "Verstand"
-        ]
     },
     "talente": {
         "Aristokrat": {
@@ -758,6 +353,17 @@
             "beschreibung": "Arkane Fertigkeiten, die den Helden als Ziel haben, erleiden einen Abzug von –2 (gilt auch für Verbündete); magischer Schaden wird um –4 verringert.",
             "neue_maechte": 0,
             "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "AH": {
+            "name": "AH",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Erlaubt Zugriff auf die arkanen Hintergründe in Kapitel 5.",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -880,6 +486,17 @@
                 "GES W6"
             ],
             "beschreibung": "Bewegungsweite +2, erhöhe Sprintwürfel um einen Schritt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Flug": {
+            "name": "Flug",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Bewegungsweite 12'' pro Runde in der Luft. Athletik für Flugmanöver.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -1646,6 +1263,17 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
+        "Geschärfte Sinne": {
+            "name": "Geschärfte Sinne",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "+2 auf Wahrnehmungsproben.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
         "Haltet die Stellung!": {
             "name": "Haltet die Stellung!",
             "kategorie": "Anführer",
@@ -2025,6 +1653,17 @@
                 "Überleben W8"
             ],
             "beschreibung": "+2 Überleben und Heimlichkeit in der Wildnis.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Nachtsicht": {
+            "name": "Nachtsicht",
+            "kategorie": "Volkstalent",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Ignoriert Abzüge für Düstere und Dunkle Beleuchtung.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2449,822 +2088,6 @@
             "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
-        },
-        "AH (Chronomant)": {
-            "name": "AH (Chronomant)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Magier der Zeit, manipuliert den Zeitstrahl. Schmetterlingseffekt bei Kritischem Fehlschlag. Begabt-Talente wählbar.",
-            "neue_maechte": 2,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Former)": {
-            "name": "AH (Former)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Kanalisiert rohe kosmische Energie/Hyperraum. +2 auf Astronavigation. Kann sich kostenlos 12'' teleportieren. Bei Kritischem Fehlschlag: Mikro-Schwarzes Loch. Begabt-Talente wählbar.",
-            "neue_maechte": 3,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Gravitationshexer)": {
-            "name": "AH (Gravitationshexer)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Beherrscht die Schwerkraft. Startmächte: Telekinese und Wandkrabbler. Behandelt Stärke als einen Würfeltyp höher für Belastung/Mindeststärke.",
-            "neue_maechte": 2,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Hartlichtformer)": {
-            "name": "AH (Hartlichtformer)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "VER W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Naturwissenschaften (Verstand). Erschafft feste Objekte aus Licht. Startmächte: Objekt erschaffen, Illusion + 1 weitere. Bei Kritischem Fehlschlag: verliert alle MP. Tech-Abhängigkeit (braucht Gerät). Umhüllt: 2 MP statt Benny für Schaden wegstecken.",
-            "neue_maechte": 3,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Hirte)": {
-            "name": "AH (Hirte)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Kleriker/Missionar. Startmächte: Eigenschaft erhöhen, Heilung + 1 weitere. Aura der Tapferkeit: Verbündete 10'' +1 Furcht/-1 Furchttabelle. Wunder-Talente wählbar.",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "auto_handicaps": [
-                "Schwur (schwer)"
-            ]
-        },
-        "AH (Kaplan)": {
-            "name": "AH (Kaplan)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Militärseelsorger. Startmächte: Eigenschaft erhöhen, Heilung + 1 weitere. Barmherzigkeit: 1 MP um Abgelenkt/Angeschlagen/Verwundbar zu entfernen (2 MP für Betäubt). Wunder-Talente wählbar.",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "auto_handicaps": [
-                "Schwur (schwer)"
-            ]
-        },
-        "AH (Mystiker)": {
-            "name": "AH (Mystiker)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Verbindet Astrologie und Astronomie. Harmonische Resonanz: Karo=+2, Kreuz=+1 MP Kosten. Kosmische Führung: Freie Wurfwiederholung für Allgemeinwissen, Geisteswissenschaften, Naturwissenschaften, Okkultismus. Begabt-Talente wählbar.",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Psioniker)": {
-            "name": "AH (Psioniker)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "VER W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Psionik (Verstand). Entfesselt die Kraft des Geistes. Psionik-Talente wählbar.",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Sternenritter)": {
-            "name": "AH (Sternenritter)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Startmächte: Abwehren, Schutz + 1 weitere. Beginnt mit Talent Lieblingswaffe und Hartlichtklinge. Behindernde Rüstung: -4 Fokus bei Rüstung >+2.",
-            "neue_maechte": 3,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "auto_handicaps": [
-                "Ehrenkodex"
-            ],
-            "auto_talente": [
-                "Lieblingswaffe"
-            ]
-        },
-        "AH (Technomancer)": {
-            "name": "AH (Technomancer)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "VER W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Verrückte Wissenschaft (Verstand). Manipuliert Technologie. Interface: +2 auf Elektronik- und Hackenproben.",
-            "neue_maechte": 2,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "AH (Wandler)": {
-            "name": "AH (Wandler)",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "WIL W6"
-            ],
-            "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Verwandelt eigenes Fleisch. Startmächte: Verkleiden und Gestaltwandeln. Interner Fokus: alle Mächte nur Persönlich. Regeneration (Langsam): einmal pro Tag natürliche Heilung. Begabt-Talente wählbar.",
-            "neue_maechte": 2,
-            "machtpunkte": 15,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Bevorzugtes Gelände": {
-            "name": "Bevorzugtes Gelände",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Überleben W6"
-            ],
-            "beschreibung": "Wähle ein Gelände. Dort: freie Wiederholung für Überlebens-/Wahrnehmungsproben, zusätzliche Aktionskarte für Initiative. Mehrfach wählbar.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Gut Ausgerüstet": {
-            "name": "Gut Ausgerüstet",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Nur bei Charaktererschaffung. Beginnt mit 10-fachem Startkapital (₡10.000). Einmaliger Vorteil.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hochgravitations-/Extremgravitationsweltler": {
-            "name": "Hochgravitations-/Extremgravitationsweltler",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Behandle Stärke als einen Würfeltyp höher für Belastung und Mindeststärke. Verdoppelt normale Sprungdistanzen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Kapitän": {
-            "name": "Kapitän",
-            "kategorie": "Hintergrund",
-            "rang": "A",
-            "voraussetzungen": [
-                "Anführer",
-                "Pilot W8"
-            ],
-            "beschreibung": "Beginnt die Kampagne mit einem Raumschiff, das groß genug ist, um die Gruppe zu beherbergen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Munitionsabzähler": {
-            "name": "Munitionsabzähler",
-            "kategorie": "Kampf",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Reduziert abgefeuerte Kugeln um die Hälfte (aufgerundet). FR 2: 3 statt 5, FR 3: 5 statt 10.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Opportunistisch": {
-            "name": "Opportunistisch",
-            "kategorie": "Kampf",
-            "rang": "V",
-            "voraussetzungen": [],
-            "beschreibung": "Bei einem Joker: +4 statt +2 auf Eigenschafts- und Schadenswürfe.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Schnell Ziehen": {
-            "name": "Schnell Ziehen",
-            "kategorie": "Kampf",
-            "rang": "A",
-            "voraussetzungen": [
-                "GES W8"
-            ],
-            "beschreibung": "Ziehe zwei Karten wenn Benny für neue Aktionskarte ausgegeben wird. +2 auf Athletik für Unterbrechungen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Teamführer": {
-            "name": "Teamführer",
-            "kategorie": "Anführer",
-            "rang": "F",
-            "voraussetzungen": [
-                "Anführer",
-                "Geborener Anführer",
-                "Selbstlos"
-            ],
-            "beschreibung": "Alle Verbündeten im Befehlsradius können Bennys austauschen (wie Talent Selbstlos).",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Bevorzugte Macht": {
-            "name": "Bevorzugte Macht",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (beliebig)",
-                "Arkane Fertigkeit W8"
-            ],
-            "beschreibung": "Wähle eine Macht. Ignoriere bis zu 2 Punkte beliebiger Abzüge bei Aktivierung dieser Macht.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Mystische Kräfte": {
-            "name": "Mystische Kräfte",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [],
-            "beschreibung": "10 dedizierte Machtpunkte, Macht aktiviert automatisch (Erfolg ohne Probe). Steigerung: +2 MP. Pakete: Sternenkrieger (Kämpfen W8+) oder Telepath (Verstand W8+).",
-            "neue_maechte": 0,
-            "machtpunkte": 10,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Atmosphärische Anpassung": {
-            "name": "Atmosphärische Anpassung",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Keine KON-Proben gegen Dünne Atmosphäre oder hohen/niedrigen atmosphärischen Druck.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Ausweichmanöver": {
-            "name": "Ausweichmanöver",
-            "kategorie": "Experte",
-            "rang": "V",
-            "voraussetzungen": [
-                "Ass am Steuer"
-            ],
-            "beschreibung": "Als Fahrzeuglenker: Benny ausgeben um Aktionskarte mit feindlichem Fahrzeug zu tauschen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Brummipilot": {
-            "name": "Brummipilot",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                {
-                    "oder": [
-                        "Seefahrt W4",
-                        "Fahren W4",
-                        "Pilot W4"
-                    ]
-                }
-            ],
-            "beschreibung": "Ignoriert bis zu 2 Punkte Abzüge durch schlechte Manövrierfähigkeit.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Exo-Wissenschaftler": {
-            "name": "Exo-Wissenschaftler",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Naturwissenschaften W8"
-            ],
-            "beschreibung": "Ignoriert bis zu 2 Punkte Abzüge wenn Ausrüstung zu fortschrittlich/fremdartig/primitiv.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Gravitationsanpassung": {
-            "name": "Gravitationsanpassung",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "GES W6"
-            ],
-            "beschreibung": "Ignoriert -2 auf GES und GES-basierte Fertigkeiten in anderer Schwerkraft.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hackerman/-woman": {
-            "name": "Hackerman/-woman",
-            "kategorie": "Experte",
-            "rang": "A",
-            "voraussetzungen": [
-                "Hacken W8"
-            ],
-            "beschreibung": "Freie Wiederholung bei misslungener Hackenprobe. Ignoriert Beschränkung für wiederholtes Herausfordern beim Hacken.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hinterhältiger Angriff": {
-            "name": "Hinterhältiger Angriff",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                "Assassine"
-            ],
-            "beschreibung": "Der +2 Bonus aus Assassine wird durch W6 ersetzt (explodiert). Gilt für Athletik, Kämpfen, Schießen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hinterhältigerer Angriff": {
-            "name": "Hinterhältigerer Angriff",
-            "kategorie": "Experte",
-            "rang": "V",
-            "voraussetzungen": [
-                "Hinterhältiger Angriff"
-            ],
-            "beschreibung": "Bonus gilt auch wenn Gegner Abgelenkt ist.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Kampfpilot": {
-            "name": "Kampfpilot",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                "Ass am Steuer"
-            ],
-            "beschreibung": "Ignoriert Mehrfachaktionsabzug bei Seefahrt/Fahren/Pilot + andere Aktion in gleicher Runde.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Panzertape & Kaugummi": {
-            "name": "Panzertape & Kaugummi",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                "Reparieren W8"
-            ],
-            "beschreibung": "Reparierenprobe als begrenzte Aktion um Abgelenkt/Verwundbar eines Fahrzeugs zu entfernen. Steigerung: beides.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Trickschuss": {
-            "name": "Trickschuss",
-            "kategorie": "Experte",
-            "rang": "F",
-            "voraussetzungen": [
-                {
-                    "oder": [
-                        "Athletik W8",
-                        "Schießen W8"
-                    ]
-                }
-            ],
-            "beschreibung": "Bei Herausfordern mit Athletik/Schießen: Gegner widersteht mit Verstand statt Geschicklichkeit.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Unglaubliche Reflexe": {
-            "name": "Unglaubliche Reflexe",
-            "kategorie": "Experte",
-            "rang": "V",
-            "voraussetzungen": [
-                "GES W8",
-                "Athletik W8"
-            ],
-            "beschreibung": "Kein -2 Abzug beim Wegspringen. Kann auch bei Effekten Wegspringen die es normalerweise nicht erlauben (mit -2).",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Täuscher": {
-            "name": "Täuscher",
-            "kategorie": "Sozial",
-            "rang": "F",
-            "voraussetzungen": [
-                "VER W8"
-            ],
-            "beschreibung": "Bei Herausfordern mit Überreden/Provozieren: wähle ob Ziel mit Verstand oder Willenskraft widersteht.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Retter des Universums": {
-            "name": "Retter des Universums",
-            "kategorie": "Legendär",
-            "rang": "L",
-            "voraussetzungen": [],
-            "beschreibung": "Kann zwei Bennys in einen Punkt Entschlossenheit umwandeln. Jederzeit möglich, auch an andere weitergeben.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Unsterblich": {
-            "name": "Unsterblich",
-            "kategorie": "Legendär",
-            "rang": "L",
-            "voraussetzungen": [],
-            "beschreibung": "Altert nicht mehr. Wenn getötet, erholt sich wieder (solange Körper einigermaßen intakt).",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Wunderwirker": {
-            "name": "Wunderwirker",
-            "kategorie": "Legendär",
-            "rang": "L",
-            "voraussetzungen": [
-                "Reparaturgenie"
-            ],
-            "beschreibung": "1× pro Sitzung: Reparatur als begrenzte Aktion mit -2 auf Reparieren/Elektronik, auch ohne Werkstatt.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Kybernetische Toleranz": {
-            "name": "Kybernetische Toleranz",
-            "kategorie": "Cyberware",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Stresslimit und Maximum für Cyberware erhöht sich um +2.",
-            "cyberware_effekte": {
-                "stresslimit_bonus": 2,
-                "stress_maximum_bonus": 2
-            },
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Cyber-Samurai": {
-            "name": "Cyber-Samurai",
-            "kategorie": "Cyberware",
-            "rang": "A",
-            "voraussetzungen": [
-                "Kybernetische Toleranz"
-            ],
-            "beschreibung": "Stresslimit und Maximum um weitere +2 erhöht (insgesamt +4).",
-            "cyberware_effekte": {
-                "stresslimit_bonus": 2,
-                "stress_maximum_bonus": 2
-            },
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Cyborg": {
-            "name": "Cyborg",
-            "kategorie": "Cyberware",
-            "rang": "A",
-            "voraussetzungen": [],
-            "beschreibung": "Stresslimit/Maximum +4 (kumulativ). Erhält Implantate im Wert von ₡20.000. Keine natürliche Heilung. Wunden: niedrigere von Heilen/Reparieren. Muss zusätzliches schweres Handicap nehmen oder permanente Cyberware-Nebenwirkung.",
-            "cyberware_effekte": {
-                "stresslimit_bonus": 4,
-                "stress_maximum_bonus": 4,
-                "cyberware_budget": 20000
-            },
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Vorahnung": {
-            "name": "Vorahnung",
-            "kategorie": "Chronomant",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Chronomant)"
-            ],
-            "beschreibung": "2 MP für +1 (oder 3 MP für +2) auf Wegspringen oder Schaden wegstecken, auch nach dem Wurf. Auch für Verbündete in Verstand-Reichweite.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Zeit Umordnen": {
-            "name": "Zeit Umordnen",
-            "kategorie": "Chronomant",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Chronomant)"
-            ],
-            "beschreibung": "Benny ausgeben um ein Ziel zu zwingen, neue Aktionskarte zu ziehen. Wähle ob alte oder neue behalten wird. Nicht bei Jokern.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Zeitwanderer": {
-            "name": "Zeitwanderer",
-            "kategorie": "Chronomant",
-            "rang": "H",
-            "voraussetzungen": [
-                "AH (Chronomant)"
-            ],
-            "beschreibung": "Benny für zusätzliche Aktionskarte auf der man auch handelt. Zusätzlich zur regulären Karte.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Formen aus Nichts": {
-            "name": "Formen aus Nichts",
-            "kategorie": "Former",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Former)"
-            ],
-            "beschreibung": "Bei Benny für Machtpunkte: Fokusprobe. Erfolg: 5 MP, Steigerung: 10 MP, Fehlschlag: 3 MP, Kritischer Fehlschlag: 0 MP + Konsequenz.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Welle der Leere": {
-            "name": "Welle der Leere",
-            "kategorie": "Former",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Former)"
-            ],
-            "beschreibung": "Bei Teleportation/Hyperraum: 2W6 Schaden in KFS am Ankunftsort (verletzt Wirker nicht).",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Meister der Gravitation": {
-            "name": "Meister der Gravitation",
-            "kategorie": "Gravitationshexer",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Gravitationshexer)"
-            ],
-            "beschreibung": "Kann persönliches Schwerkraftfeld um eine Stufe nach oben oder unten verschieben.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Heber": {
-            "name": "Heber",
-            "kategorie": "Gravitationshexer",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Gravitationshexer)"
-            ],
-            "beschreibung": "Telekinese-Stärke auf W12+2 (W12+4 mit Steigerung, bis 500 kg). Neue Modifikatoren: Flächeneffekt und Stark.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Aufgeladen": {
-            "name": "Aufgeladen",
-            "kategorie": "Hartlichtformer",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Hartlichtformer)"
-            ],
-            "beschreibung": "+1 Machtpunkt: schadensverursachende Kreation/Macht +2 Schaden (auch beschworene Verbündete).",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Bessere Ausrüstung": {
-            "name": "Bessere Ausrüstung",
-            "kategorie": "Hartlichtformer",
-            "rang": "H",
-            "voraussetzungen": [
-                "AH (Hartlichtformer)"
-            ],
-            "beschreibung": "+1 auf Naturwissenschaftenproben für Mächte. Kritischer Fehlschlag: nur W6 MP Verlust statt alle.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Alleine gegen die Wölfe": {
-            "name": "Alleine gegen die Wölfe",
-            "kategorie": "Hirte",
-            "rang": "F",
-            "voraussetzungen": [
-                "WIL W8",
-                "AH (Hirte)"
-            ],
-            "beschreibung": "Robustheit des Hirten erhöht sich um den Überzahlbonus der gegen ihn angewendet wird.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Gnade": {
-            "name": "Gnade",
-            "kategorie": "Hirte",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Hirte)"
-            ],
-            "beschreibung": "1 MP: hebt Abgelenkt, Angeschlagen oder Verwundbar für alle in WIL-Reichweite auf. 2 MP für Betäubt.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Litanei des Zorns": {
-            "name": "Litanei des Zorns",
-            "kategorie": "Kaplan",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Kaplan)"
-            ],
-            "beschreibung": "Verbündete im Befehlsradius +2 Schaden, solange Kaplan kommunizieren kann.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Vorstoßen": {
-            "name": "Vorstoßen",
-            "kategorie": "Kaplan",
-            "rang": "F",
-            "voraussetzungen": [
-                "WIL W8",
-                "AH (Kaplan)",
-                "Einschüchtern W8"
-            ],
-            "beschreibung": "2 MP um einem Charakter/Gruppe in 12'' eine Wurfwiederholung zu geben (wie Benny). Im Zug des Ziels.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Eingestimmt": {
-            "name": "Eingestimmt",
-            "kategorie": "Mystiker",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Mystiker)"
-            ],
-            "beschreibung": "In Harmonischer Resonanz (Karo): +W6 statt +2 auf Fokusprobe. Kumulativ mit Entschlossenheit.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Himmlische Symphonie (Mond)": {
-            "name": "Himmlische Symphonie (Mond)",
-            "kategorie": "Mystiker",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Mystiker)"
-            ],
-            "beschreibung": "Ersetze Resonanzkarte."
-        },
-        "Himmlische Symphonie (Planeten)": {
-            "name": "Himmlische Symphonie (Planeten)",
-            "kategorie": "Mystiker",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Mystiker)"
-            ],
-            "beschreibung": "+2 Robustheit."
-        },
-        "Himmlische Symphonie (Sonne)": {
-            "name": "Himmlische Symphonie (Sonne)",
-            "kategorie": "Mystiker",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Mystiker)"
-            ],
-            "beschreibung": "Geschoss/Flächenschlag/Strahl",
-            "neue_maechte": 1
-        },
-        "Himmlische Symphonie (Sterne)": {
-            "name": "Himmlische Symphonie (Sterne)",
-            "kategorie": "Mystiker",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Mystiker)"
-            ],
-            "beschreibung": "Bonusschaden +2W6 bei Steigerung"
-        },
-        "Scannen": {
-            "name": "Scannen",
-            "kategorie": "Psioniker",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Psioniker)"
-            ],
-            "beschreibung": "Nimmt alle empfindungsfähigen Wesen in 10'' wahr (Richtung, Entfernung, starke Emotionen). Abgelenkt während aktiv.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Turm des Willens": {
-            "name": "Turm des Willens",
-            "kategorie": "Psioniker",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Psioniker)",
-                "Psionik W8"
-            ],
-            "beschreibung": "+4 auf Proben gegen Gedankenlesen, Gedankenleere, Marionette und ähnliche mentale Eingriffe.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hartlichtparade": {
-            "name": "Hartlichtparade",
-            "kategorie": "Sternenritter",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Sternenritter)"
-            ],
-            "beschreibung": "Mit Hartlicht-Nahkampfwaffe: Angreifer -2 auf Schießen. Bei Verteidigen: -4. Kumulativ mit Ausweichen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hartlichtreflexion": {
-            "name": "Hartlichtreflexion",
-            "kategorie": "Sternenritter",
-            "rang": "F",
-            "voraussetzungen": [
-                "Hartlichtparade"
-            ],
-            "beschreibung": "Bei Verteidigen: einen verfehlten Fernkampfangriff pro Runde auf neues Ziel umlenken (Kämpfen-Probe, Reichweite 6/12/24).",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Hartlichtreflexionshagel": {
-            "name": "Hartlichtreflexionshagel",
-            "kategorie": "Sternenritter",
-            "rang": "V",
-            "voraussetzungen": [
-                "Hartlichtreflexion"
-            ],
-            "beschreibung": "Bis zu drei verfehlte Fernkampfangriffe pro Runde umlenken.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Stellarer Aufstieg": {
-            "name": "Stellarer Aufstieg",
-            "kategorie": "Sternenritter",
-            "rang": "L",
-            "voraussetzungen": [
-                "Sternenmagier"
-            ],
-            "beschreibung": "Bei Tod: erhebe dich mit Energiegestalt und Ätherisch. Kann noch Mächte einsetzen. Bei erneutem Tod: permanent aufgelöst.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Sternenmagier": {
-            "name": "Sternenmagier",
-            "kategorie": "Sternenritter",
-            "rang": "V",
-            "voraussetzungen": [
-                "AH (Sternenritter)"
-            ],
-            "beschreibung": "Neue Mächte verfügbar: Aufheben, Blenden, Fliegen, Furcht, Heilung, Illusion, Licht/Dunkelheit, Stille, Trägheit/Beschleunigung, Verkleiden. Erhält eine sofort.",
-            "neue_maechte": 1,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Sternenschuft": {
-            "name": "Sternenschuft",
-            "kategorie": "Sternenritter",
-            "rang": "V",
-            "voraussetzungen": [
-                "AH (Sternenritter)"
-            ],
-            "beschreibung": "Neue Mächte verfügbar: Gedankenleere, Machtpunkte entziehen, Strahl (Blitz), Telekinetischer Druck, Unberührbarkeit, Verkleiden, Wiederauferstehung. Erhält eine sofort.",
-            "neue_maechte": 1,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Brecher": {
-            "name": "Brecher",
-            "kategorie": "Technomancer",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Technomancer)"
-            ],
-            "beschreibung": "Schaden gegen Objekte mit Härte kann bei Schadensmächten explodieren. Schwere Panzerung braucht weiterhin Schwere Waffe.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Drohnen": {
-            "name": "Drohnen",
-            "kategorie": "Technomancer",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Technomancer)"
-            ],
-            "beschreibung": "Besitzt Drohne(n): Robustheit 5(2), Klein, Fliegen BW 12. Sicht/Mächte durch Drohne. Aufwertung: Betäubungswaffe oder Feuerplattform. Bis zu 4× wählbar.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Amorph (Wandler)": {
-            "name": "Amorph (Wandler)",
-            "kategorie": "Wandler",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Wandler)"
-            ],
-            "beschreibung": "Keine lebenswichtigen Organe, halber Schaden bei Stürzen, keine Angesagten Ziele. Kann durch Öffnungen schlüpfen.",
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
-        "Morphen": {
-            "name": "Morphen",
-            "kategorie": "Wandler",
-            "rang": "A",
-            "voraussetzungen": [
-                "AH (Wandler)"
-            ],
-            "beschreibung": "Als begrenzte Aktion eine Fähigkeit manifestieren (bis Ausschalten/Wechsel): Flink (+2 BW), Klauen (Stä+W4), Reichweite 1, Tarnung (+2/+4 Heimlichkeit), Zäh (kein Wunde durch 2. Angeschlagen).",
-            "ausgewaehlt": false,
-            "aktiv": true
         }
     },
     "handicaps": {
@@ -3610,6 +2433,15 @@
             "aktiv": true,
             "custom": false
         },
+        "Nichtschwimmer": {
+            "name": "Nichtschwimmer",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "-2 auf Athletik-Würfe zum Schwimmen. Bewegungsweite im Wasser halbiert.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Pazifist_leicht": {
             "name": "Pazifist",
             "stufe": "leicht",
@@ -3853,255 +2685,29 @@
             "aktiv": true,
             "custom": false
         },
+        "Zwei linke Hände": {
+            "name": "Zwei linke Hände",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter ist ungeschickt mit den Händen und erleidet -2 bei Fertigkeitswürfen, die Fingerfertigkeit erfordern.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Zerbrechlich": {
+            "name": "Zerbrechlich",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "Der Charakter ist körperlich schwach oder zerbrechlich gebaut und erleidet +1 Schaden durch alle Angriffe.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Zweifler": {
             "name": "Zweifler",
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Der Charakter glaubt nicht an übernatürliche Dinge und versucht, sie rational zu erklären.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Amourös": {
-            "name": "Amourös",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Leicht zu bezirzen. -2 auf Widerstand gegen Herausfordern durch Charaktere mit Attraktiv/Sehr Attraktiv.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Atmosphärische Abhängigkeit (leicht)": {
-            "name": "Atmosphärische Abhängigkeit (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Benötigt seltene Atmosphäre. Ohne passende Ausrüstung: jede Stunde KON-Probe oder Erschöpfung (bis zum Tod).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Atmosphärische Abhängigkeit (schwer)": {
-            "name": "Atmosphärische Abhängigkeit (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Benötigt seltene Atmosphäre. Ohne passende Ausrüstung: jede Minute KON-Probe oder Erschöpfung (bis zum Tod).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Aufopferungsvoll (leicht)": {
-            "name": "Aufopferungsvoll (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Stellt das Wohl anderer über das eigene.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Aufopferungsvoll (schwer)": {
-            "name": "Aufopferungsvoll (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Riskiert das eigene Leben für andere.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Ehemalige Drohne": {
-            "name": "Ehemalige Drohne",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "-2 auf Willenskraftproben wenn kein Verbündeter innerhalb von 5'' (10m).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "FTL-Übelkeit (leicht)": {
-            "name": "FTL-Übelkeit (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Nach jeder überlichtschnellen Reise: eine Stufe Erschöpfung (24h). Kann Ausschalten, aber nicht töten.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "FTL-Übelkeit (schwer)": {
-            "name": "FTL-Übelkeit (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Wie leicht, plus KON-Probe oder Entkräftet. Kritischer Fehlschlag: Herzanfall.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Kugelfang": {
-            "name": "Kugelfang",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Treffer auf Unbeteiligte: 1-2 einschüssig, 1-3 Schrotflinte/Vollauto.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Low Tech (leicht)": {
-            "name": "Low Tech (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-2 auf Elektronik- und Hackenproben mit fremder Technologie.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Low Tech (schwer)": {
-            "name": "Low Tech (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "-4 auf Elektronik- und Hackenproben mit fremder Technologie.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "High Tech (leicht)": {
-            "name": "High Tech (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-2 auf Elektronik- und Hackenproben mit fremder Technologie.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "High Tech (schwer)": {
-            "name": "High Tech (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "-4 auf Elektronik- und Hackenproben mit fremder Technologie.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Niedergravitations-/Schwerelosigkeitsweltler": {
-            "name": "Niedergravitations-/Schwerelosigkeitsweltler",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "-1 auf Stärkeproben und Nahkampf-Schadenswürfe. Kumulativ mit Attributsabzug der Abstammung.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Null-G-Übelkeit": {
-            "name": "Null-G-Übelkeit",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Eine Stufe Erschöpfung in Schwerelosigkeit (kann Ausschalten aber nicht töten). Erholt nach 1h in normaler Schwerkraft.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Pechvogel (leicht)": {
-            "name": "Pechvogel (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Kritische Fehlschläge haben schlimmere Konsequenzen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Pechvogel (schwer)": {
-            "name": "Pechvogel (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Ist immer das Opfer bei zufälligen negativen Ereignissen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Programmiert": {
-            "name": "Programmiert",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Muss Anweisungen/Befehle des Schöpfers befolgen. Kann nicht verweigert werden.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Rebellisch": {
-            "name": "Rebellisch",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-2 auf Überredenproben gegenüber Autoritätspersonen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Schutzbefohlener (leicht)": {
-            "name": "Schutzbefohlener (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Beschützt einen Widerstandsfähigen Statisten der gelegentlich in Schwierigkeiten gerät.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Schutzbefohlener (schwer)": {
-            "name": "Schutzbefohlener (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Beschützt einen Widerstandsfähigen Statisten der häufig in Schwierigkeiten gerät.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Totkrank (leicht)": {
-            "name": "Totkrank (leicht)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-1 auf Proben gegen Erschöpfung. Kritischer Fehlschlag: wird schwer.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Totkrank (schwer)": {
-            "name": "Totkrank (schwer)",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "-2 auf Proben gegen Erschöpfung. Kritischer Fehlschlag: stirbt in dieser Sitzung (Entschlossenheit).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Kybernetische Abstoßung": {
-            "name": "Kybernetische Abstoßung",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Stresslimit für Cyberware sinkt um 2.",
-            "cyberware_effekte": {
-                "stresslimit_malus": 2
-            },
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Kybernetische Empfindlichkeit": {
-            "name": "Kybernetische Empfindlichkeit",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Chirurgen -2 auf Proben bei Installation von Cyberware.",
-            "cyberware_effekte": {
-                "installations_malus": 2
-            },
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Kybernetische Nebenwirkungen": {
-            "name": "Kybernetische Nebenwirkungen",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Erhält Cyberware im Wert von ₡10.000, aber permanente Nebenwirkung aus Tabelle.",
-            "cyberware_effekte": {
-                "cyberware_budget": 10000,
-                "permanente_nebenwirkung": true
-            },
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -4124,6 +2730,104 @@
             "aktiv": true,
             "custom": false
         }
+    },
+    "fertigkeiten_daten": {
+        "Allgemeinwissen": [
+            "Verstand"
+        ],
+        "Athletik": [
+            "Geschicklichkeit"
+        ],
+        "Heimlichkeit": [
+            "Geschicklichkeit"
+        ],
+        "Überreden": [
+            "Willenskraft"
+        ],
+        "Wahrnehmung": [
+            "Verstand"
+        ],
+        "Kämpfen": [
+            "Geschicklichkeit"
+        ],
+        "Schießen": [
+            "Geschicklichkeit"
+        ],
+        "Diebeskunst": [
+            "Geschicklichkeit"
+        ],
+        "Überleben": [
+            "Verstand"
+        ],
+        "Reiten": [
+            "Geschicklichkeit"
+        ],
+        "Fahren": [
+            "Geschicklichkeit"
+        ],
+        "Seefahrt": [
+            "Geschicklichkeit"
+        ],
+        "Pilot": [
+            "Geschicklichkeit"
+        ],
+        "Darbietung": [
+            "Willenskraft"
+        ],
+        "Einschüchtern": [
+            "Willenskraft"
+        ],
+        "Fokus": [
+            "Willenskraft"
+        ],
+        "Glaube": [
+            "Willenskraft"
+        ],
+        "Heilen": [
+            "Verstand"
+        ],
+        "Provozieren": [
+            "Verstand"
+        ],
+        "Recherche": [
+            "Verstand"
+        ],
+        "Reparieren": [
+            "Verstand"
+        ],
+        "Glücksspiel": [
+            "Verstand"
+        ],
+        "Kriegskunst": [
+            "Verstand"
+        ],
+        "Okkultismus": [
+            "Verstand"
+        ],
+        "Geisteswissenschaften": [
+            "Verstand"
+        ],
+        "Naturwissenschaften": [
+            "Verstand"
+        ],
+        "Sprache": [
+            "Verstand"
+        ],
+        "Elektronik": [
+            "Verstand"
+        ],
+        "Hacken": [
+            "Verstand"
+        ],
+        "Zaubern": [
+            "Verstand"
+        ],
+        "Psionik": [
+            "Verstand"
+        ],
+        "Verrückte Wissenschaft": [
+            "Verstand"
+        ]
     },
     "maechte": {
         "Abwehren": {
@@ -4827,1169 +3531,9 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
-        },
-        "Aufspüren": {
-            "name": "Aufspüren",
-            "rang": "Anfänger",
-            "machtpunkte": 3,
-            "reichweite": "Selbst",
-            "dauer": "10 Minuten",
-            "beschreibung": "Findet verborgene Gegenstände/Wesen/Orte. -2 wenn noch nie gesehen. Erfolg: Richtung/Entfernung. Steigerung: Eindruck des Ziels.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Ausspähung": {
-            "name": "Ausspähung",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 3,
-            "reichweite": "Selbst",
-            "dauer": "5 Runden",
-            "beschreibung": "Spioniert entferntes Ziel aus. 1 Min Vorbereitung. Widerstand: WIL. Erfolg: sehen/hören. Steigerung: Perspektive wechseln, Ziel folgen.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Durchdrehen": {
-            "name": "Durchdrehen",
-            "rang": "Anfänger",
-            "machtpunkte": 2,
-            "reichweite": "Verstand",
-            "dauer": "5 Runden",
-            "beschreibung": "Sabotiert mechanische/elektronische Geräte in MFS. -2 (oder -4 bei Steigerung) auf betroffene Proben. Modifikator: Flächeneffekt (+2) für GFS.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Geist in der Maschine": {
-            "name": "Geist in der Maschine",
-            "rang": "Veteran",
-            "machtpunkte": 3,
-            "reichweite": "Sicht",
-            "dauer": "Sofort",
-            "beschreibung": "Fahrzeug erleidet sofort Kritischen Treffer. Steigerung: Fahrer muss Manöverwurf ablegen. Modifikator: Selektiv (+3) wählt Treffer.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Maschine kontrollieren": {
-            "name": "Maschine kontrollieren",
-            "rang": "Anfänger",
-            "machtpunkte": 2,
-            "reichweite": "Sicht",
-            "dauer": "1 Stunde",
-            "beschreibung": "Übernimmt Kontrolle über komplexe Maschine/Computer/Fahrzeug. Ziel kann Kontrolle mit Elektronik/Hacken/Reparieren (-2 bei Steigerung) zurückgewinnen.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Objekt erschaffen": {
-            "name": "Objekt erschaffen",
-            "rang": "Anfänger",
-            "machtpunkte": 2,
-            "reichweite": "Verstand",
-            "dauer": "1 Stunde",
-            "beschreibung": "Erschafft Gegenstand Größe 0 oder kleiner. Härte 8. Modifikatoren: Erhöhte Größe (+3/Größe), Maschine (+2), Vollständig (+1).",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Rücksendung": {
-            "name": "Rücksendung",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 3,
-            "reichweite": "Verstand ×2",
-            "dauer": "Sofort",
-            "beschreibung": "Sendet psionischen Schlag über bestehende magische Verbindung: 3W6 Schaden (4W6 Steigerung), ignoriert nicht-magische Rüstung.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Schwarzes Loch": {
-            "name": "Schwarzes Loch",
-            "rang": "Veteran",
-            "machtpunkte": 3,
-            "reichweite": "Verstand ×2",
-            "dauer": "5 Runden",
-            "beschreibung": "GFS: STÄ-Probe oder W6'' in Mitte gezogen + 2W6 Schaden (ignoriert nicht-magische Rüstung). Modifikator: Wirkungsbereich (+3) 10'' Radius, 3W6.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Schwerkraft manipulieren": {
-            "name": "Schwerkraft manipulieren",
-            "rang": "Anfänger",
-            "machtpunkte": 3,
-            "reichweite": "Verstand",
-            "dauer": "5 Runden",
-            "beschreibung": "Schwerkraft in GFS um eine Stufe erhöhen/verringern (2 bei Steigerung). Modifikator: Lokale Ausbreitung (+3) bis 25''.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Telekinetischer Druck": {
-            "name": "Telekinetischer Druck",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 3,
-            "reichweite": "Verstand ×2",
-            "dauer": "Sofort",
-            "beschreibung": "Vergleichende Probe (Arkane Fertigkeit -2 vs KON). Erfolg: 2W10 Schaden (ignoriert nicht-magische Rüstung). Wirkt nicht auf Untote/Konstrukte.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verriegeln/Entriegeln": {
-            "name": "Verriegeln/Entriegeln",
-            "rang": "Anfänger",
-            "machtpunkte": 1,
-            "reichweite": "Verstand",
-            "dauer": "Permanent/Sofort",
-            "beschreibung": "Verriegeln: -4 zum Öffnen. Entriegeln: ersetzt Reparieren/Diebeskunst, ignoriert bis zu 4 Punkte Abzüge. Modifikator: Alarm (+1).",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Vorhersage": {
-            "name": "Vorhersage",
-            "rang": "Fortgeschritten",
-            "machtpunkte": 5,
-            "reichweite": "Selbst",
-            "dauer": "5 Runden",
-            "beschreibung": "Erhält 3 Marker. Kann ausgegeben werden um Personen in Verstand-Reichweite Wurfwiederholung zu geben.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Zeitstopp": {
-            "name": "Zeitstopp",
-            "rang": "Heroisch",
-            "machtpunkte": 10,
-            "reichweite": "Selbst",
-            "dauer": "Sofort",
-            "beschreibung": "Hält Zeit an. 1W4+1 zusätzliche Züge. Steigerung: neue Aktionskarte pro Zug. Endet wenn Aktion andere betrifft.",
-            "voraussetzungen": [],
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
         }
     },
     "ausruestung": {
-        "3D-Drucker": {
-            "name": "3D-Drucker",
-            "kategorie": "Ausrüstung",
-            "gewicht": 5,
-            "kosten": 500,
-            "setting": "scifi",
-            "beschreibung": "Stellt gängige Ausrüstung bis 5 kg her. 2 Min/kg, benötigt Blaupause und Materialien.",
-            "aktiv": true
-        },
-        "Batterie, Universal-": {
-            "name": "Batterie, Universal-",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.25,
-            "kosten": 50,
-            "setting": "scifi",
-            "beschreibung": "Universeller Akku. Kritischer Fehlschlag = leer.",
-            "aktiv": true
-        },
-        "Bewegungsdetektor": {
-            "name": "Bewegungsdetektor",
-            "kategorie": "Ausrüstung",
-            "gewicht": 1,
-            "kosten": 200,
-            "setting": "scifi",
-            "beschreibung": "Zeigt Bewegung in 25'' (50m) an. Blockiert durch Energie/dichte Festkörper.",
-            "aktiv": true
-        },
-        "Biomonitor": {
-            "name": "Biomonitor",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 100,
-            "setting": "scifi",
-            "beschreibung": "Komlink + Kamera + Vitalmonitor für Sicherheitskräfte/Militär.",
-            "aktiv": true
-        },
-        "Direktionales Mikrofon": {
-            "name": "Direktionales Mikrofon",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 250,
-            "setting": "scifi",
-            "beschreibung": "+2 auf akustische Wahrnehmung bis 200m.",
-            "aktiv": true
-        },
-        "Drohne, Kommerziell": {
-            "name": "Drohne, Kommerziell",
-            "kategorie": "Ausrüstung",
-            "gewicht": 1,
-            "kosten": 200,
-            "setting": "scifi",
-            "beschreibung": "Größe -2, Kamera/Mikrofon, Robustheit 3, BW 12, Pilot-Fertigkeit.",
-            "aktiv": true
-        },
-        "Drohne, Kampf-": {
-            "name": "Drohne, Kampf-",
-            "kategorie": "Ausrüstung",
-            "gewicht": 5,
-            "kosten": 10000,
-            "setting": "scifi",
-            "beschreibung": "Bewaffnete Kampfdrohne.",
-            "aktiv": true
-        },
-        "Durchdringender Visor (ES II)": {
-            "name": "Durchdringender Visor (ES II)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 1,
-            "kosten": 1000,
-            "setting": "scifi",
-            "beschreibung": "Hebt 4 Punkte Beleuchtungs-/Reichweitenabzüge auf. Durchsicht 6'' durch Materie.",
-            "aktiv": true
-        },
-        "Energieschlafsack": {
-            "name": "Energieschlafsack",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 100,
-            "setting": "scifi",
-            "beschreibung": "72h Schutz, -45° bis 65°.",
-            "aktiv": true
-        },
-        "Energiezelt": {
-            "name": "Energiezelt",
-            "kategorie": "Ausrüstung",
-            "gewicht": 1,
-            "kosten": 200,
-            "setting": "scifi",
-            "beschreibung": "Für 2 Personen, gleiche Spezifikationen wie Energieschlafsack.",
-            "aktiv": true
-        },
-        "Exoskelett": {
-            "name": "Exoskelett",
-            "kategorie": "Ausrüstung",
-            "gewicht": 2.5,
-            "kosten": 10000,
-            "setting": "scifi",
-            "beschreibung": "+2 Würfeltypen Stärke. Benötigt Batterie. Über Kleidung/Panzerung tragbar.",
-            "aktiv": true
-        },
-        "Fernglas": {
-            "name": "Fernglas",
-            "kategorie": "Ausrüstung",
-            "gewicht": 1,
-            "kosten": 250,
-            "setting": "scifi",
-            "beschreibung": "100× Vergrößerung, hebt 4 Punkte Beleuchtungsabzüge auf, +2 Wahrnehmung.",
-            "aktiv": true
-        },
-        "Generator": {
-            "name": "Generator",
-            "kategorie": "Ausrüstung",
-            "gewicht": 25,
-            "kosten": 500,
-            "setting": "scifi",
-            "beschreibung": "Mikrofusionsreaktor. ₡10.000/Monat Betriebskosten bei intensiver Nutzung.",
-            "aktiv": true
-        },
-        "Gravitationsfalle (ES III)": {
-            "name": "Gravitationsfalle (ES III)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 2.5,
-            "kosten": 1000,
-            "setting": "scifi",
-            "beschreibung": "GFS Schwerkraftfeld. Ziele ab Größe 7: Schwieriges Gelände. Andere: Gebunden, -6 Befreiung.",
-            "aktiv": true
-        },
-        "Handschellen": {
-            "name": "Handschellen",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 200,
-            "setting": "scifi",
-            "beschreibung": "Härte 16, -6 zum Befreien.",
-            "aktiv": true
-        },
-        "Holoprojektor (ES II)": {
-            "name": "Holoprojektor (ES II)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 2,
-            "kosten": 1000,
-            "setting": "scifi",
-            "beschreibung": "3D-Lichtprojektor, KFS Bilder. Kann Furchtprobe/Ablenken auslösen.",
-            "aktiv": true
-        },
-        "Klebeflicken": {
-            "name": "Klebeflicken",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.125,
-            "kosten": 20,
-            "setting": "scifi",
-            "beschreibung": "Repariert versiegelten Anzug. Aktion + Reparieren +2.",
-            "aktiv": true
-        },
-        "Komlink": {
-            "name": "Komlink",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0,
-            "kosten": 50,
-            "setting": "scifi",
-            "beschreibung": "Freihändige Zwei-Wege-Kommunikation, 32 km Reichweite.",
-            "aktiv": true
-        },
-        "Kommandostation": {
-            "name": "Kommandostation",
-            "kategorie": "Ausrüstung",
-            "gewicht": 10,
-            "kosten": 10000,
-            "setting": "scifi",
-            "beschreibung": "Verbindet bis zu 100 Teammitglieder. Befehlsradius auf alle Kontakte erweitert.",
-            "aktiv": true
-        },
-        "Kreislaufatemgerät": {
-            "name": "Kreislaufatemgerät",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 250,
-            "setting": "scifi",
-            "beschreibung": "12h Luft, +2 gegen schädliche Atmosphären. Unbegrenzt bei Sauerstoffatmosphäre.",
-            "aktiv": true
-        },
-        "Materiedesintegrator (ES II)": {
-            "name": "Materiedesintegrator (ES II)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 5,
-            "kosten": 4000,
-            "setting": "scifi",
-            "beschreibung": "3W10 Schaden, PB 20, Min.Stä W10. Verdampft 30cm Würfel/Runde.",
-            "aktiv": true
-        },
-        "Materiereplikator (ES III)": {
-            "name": "Materiereplikator (ES III)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 10,
-            "kosten": 100000,
-            "setting": "scifi",
-            "beschreibung": "Wandelt bis 250 kg Materie in ein Objekt gleicher Masse um.",
-            "aktiv": true
-        },
-        "Materieschneider": {
-            "name": "Materieschneider",
-            "kategorie": "Ausrüstung",
-            "gewicht": 3,
-            "kosten": 400,
-            "setting": "scifi",
-            "beschreibung": "2W4+8 Schaden (II), PB 8, SW. Schneidet Rumpf auf.",
-            "aktiv": true
-        },
-        "Mineraliendetektor": {
-            "name": "Mineraliendetektor",
-            "kategorie": "Ausrüstung",
-            "gewicht": 2,
-            "kosten": 100,
-            "setting": "scifi",
-            "beschreibung": "Spürt Mineralien in GFS bis 2m Tiefe auf. Entfernt Abzüge für Minensuche.",
-            "aktiv": true
-        },
-        "Notrufbake": {
-            "name": "Notrufbake",
-            "kategorie": "Ausrüstung",
-            "gewicht": 2.5,
-            "kosten": 250,
-            "setting": "scifi",
-            "beschreibung": "FTL-Notsignal. Wochen Batterielaufzeit.",
-            "aktiv": true
-        },
-        "Omnitool (ES III)": {
-            "name": "Omnitool (ES III)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 3,
-            "kosten": 600,
-            "setting": "scifi",
-            "beschreibung": "PDA + Hartlicht-Werkzeuge. Computertastatur, Bildschirm, Interface.",
-            "aktiv": true
-        },
-        "Psiblocker (ES II)": {
-            "name": "Psiblocker (ES II)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 5000,
-            "setting": "scifi",
-            "beschreibung": "+4 Widerstand/Panzerung gegen psionische Angriffe. Kumulativ mit Arkane Resistenz.",
-            "aktiv": true
-        },
-        "Reparaturflicken (ES III)": {
-            "name": "Reparaturflicken (ES III)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 5,
-            "kosten": 1000,
-            "setting": "scifi",
-            "beschreibung": "Nano-Reparatur-Bots, Reparieren W10+2, halbiert Reparaturzeit.",
-            "aktiv": true
-        },
-        "Schockhalsband": {
-            "name": "Schockhalsband",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 500,
-            "setting": "scifi",
-            "beschreibung": "Per Komlink aktiviert: KON-4 oder Betäubt.",
-            "aktiv": true
-        },
-        "Schweißbrenner": {
-            "name": "Schweißbrenner",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 200,
-            "setting": "scifi",
-            "beschreibung": "3W6 Schaden (II), PB 10, SW.",
-            "aktiv": true
-        },
-        "Seilspender (ES II)": {
-            "name": "Seilspender (ES II)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 1.5,
-            "kosten": 100,
-            "setting": "scifi",
-            "beschreibung": "Am Handgelenk, bis 500 kg, 150m Reichweite.",
-            "aktiv": true
-        },
-        "Universalübersetzer": {
-            "name": "Universalübersetzer",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 250,
-            "setting": "scifi",
-            "beschreibung": "Übersetzt alle bekannten Sprachen. W10 verbreitet, W6 selten.",
-            "aktiv": true
-        },
-        "Wandkrabbler (Ausrüstung)": {
-            "name": "Wandkrabbler (Ausrüstung)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 2,
-            "kosten": 2500,
-            "setting": "scifi",
-            "beschreibung": "Halbe BW auf glatten Flächen. ES III: volle BW + Sprint.",
-            "aktiv": true
-        },
-        "Zeitregulator (ES III)": {
-            "name": "Zeitregulator (ES III)",
-            "kategorie": "Ausrüstung",
-            "gewicht": 0.5,
-            "kosten": 25000,
-            "setting": "scifi",
-            "beschreibung": "Energiegeladenes Gerät zur Zeitmanipulation.",
-            "aktiv": true
-        },
-        "Cyberware: Amphibisch": {
-            "name": "Cyberware: Amphibisch",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Kiemen und Schwimmhäute. Kann in sauerstoffhaltiger Flüssigkeit nicht ertrinken; schwimmt mit voller Bewegungsweite.",
-            "effekte": {
-                "amphibisch": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Attraktiv": {
-            "name": "Cyberware: Attraktiv",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 2,
-            "setting": "scifi",
-            "beschreibung": "+1 Bonus auf Auftreten und Überreden. Kann zweimal erworben werden für max. +2 (kumulativ mit Talent Attraktiv, Obergrenze +2).",
-            "effekte": {
-                "fertigkeit_bonus": {
-                    "fertigkeiten": [
-                        "Auftreten",
-                        "Überreden"
-                    ],
-                    "bonus": 1,
-                    "max_bonus": 2
-                }
-            },
-            "aktiv": true
-        },
-        "Cyberware: Attributerhöhung": {
-            "name": "Cyberware: Attributerhöhung",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Erhöht ein Attribut um einen Würfeltyp. Über dem Charakter-Maximum kostet jede Stufe +2 zusätzlichen Stress.",
-            "effekte": {
-                "attribut_erhoehung": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Datenbuchse": {
-            "name": "Cyberware: Datenbuchse",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Direkte Verbindung zu Geräten als begrenzte freie Aktion. Wiederholung bei misslungener Elektronik-/Hacken-Probe.",
-            "effekte": {
-                "wiederholungswurf": {
-                    "fertigkeiten": [
-                        "Elektronik",
-                        "Hacken"
-                    ]
-                }
-            },
-            "aktiv": true
-        },
-        "Cyberware: Ersatzgliedmaße": {
-            "name": "Cyberware: Ersatzgliedmaße",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 2000,
-            "stress": 1,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
-            "effekte": {
-                "ersatzgliedmasse": true,
-                "bonus_stress_kapazitaet": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Ersatzgliedmaße (geklont)": {
-            "name": "Cyberware: Ersatzgliedmaße (geklont)",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 0,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Geklonte Gliedmaße aus dem Wachstumstank. Teurer als elektronische Prothese, aber kein Stress.",
-            "effekte": {
-                "ersatzgliedmasse": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Ersatzorgane": {
-            "name": "Cyberware: Ersatzorgane",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Ersetzt oder verstärkt durch Trauma oder Krankheit beschädigte Organe. Heilt automatisch permanente Verletzungen oder Handicaps wie Einäugig.",
-            "effekte": {
-                "ersatzorgane": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Fertigkeitsbonus": {
-            "name": "Cyberware: Fertigkeitsbonus",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "+1 Bonus auf eine beliebige Fertigkeit. Kann zweimal pro Fertigkeit erworben werden (max. +2). Mehrere verschiedene Fertigkeiten möglich.",
-            "effekte": {
-                "fertigkeit_bonus": {
-                    "fertigkeit": "waehlbar",
-                    "bonus": 1,
-                    "max_bonus": 2
-                }
-            },
-            "aktiv": true
-        },
-        "Cyberware: Fertigkeitschip": {
-            "name": "Cyberware: Fertigkeitschip",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 15000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Implantierter Chip gewährt W6 in einer beliebigen Fertigkeit. Verschiedene Fertigkeiten als separate Chips erwerbbar, in einer Aktion austauschbar.",
-            "effekte": {
-                "fertigkeitschip": true,
-                "fertigkeit_wert": 6
-            },
-            "aktiv": true
-        },
-        "Cyberware: Gesichtsveränderung": {
-            "name": "Cyberware: Gesichtsveränderung",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 15000,
-            "stress": 3,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Synthetischer Ersatz von Gesichtsmuskeln, Knochen, Stimmbändern. Ermöglicht Nachahmung einer bestimmten Person (mit Foto/Audio). Jede Veränderung dauert 1 Minute, Verstandesprobe bei Imitation.",
-            "effekte": {
-                "gesichtsveraenderung": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Größe": {
-            "name": "Cyberware: Größe",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 3,
-            "setting": "scifi",
-            "beschreibung": "Komplette Knochen-/Körperumwandlung erhöht Größe (und Robustheit) um +1. Maximum Größe +3.",
-            "effekte": {
-                "groesse_bonus": 1,
-                "robustheit_bonus": 1,
-                "max_groesse": 3
-            },
-            "aktiv": true
-        },
-        "Cyberware: Herausnehmbares Auge": {
-            "name": "Cyberware: Herausnehmbares Auge",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Cyborg-Auge (mit allen Sichtverbesserungen) als begrenzte freie Aktion entfernbar und werfbar. Sehen/Hören/Aufzeichnen bis 10 Stunden, Reichweite 1,6 km.",
-            "effekte": {
-                "herausnehmbares_auge": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Kommunikation": {
-            "name": "Cyberware: Kommunikation",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 1000,
-            "stress": 0,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Integriertes Kommunikationspaket. Verbindung zu anderen Geräten im Radius von 32 km.",
-            "effekte": {
-                "kommunikation": true,
-                "reichweite_km": 32
-            },
-            "aktiv": true
-        },
-        "Cyberware: Kosmetische Anpassungen": {
-            "name": "Cyberware: Kosmetische Anpassungen",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Farbige Haut, metallisches Haar oder andere oberflächliche Veränderungen (keine Spielfunktion). Zeigt Reichtum/Stil.",
-            "effekte": {
-                "kosmetisch": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Maultier": {
-            "name": "Cyberware: Maultier",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Verstärktes Skelett. Stärke gilt als einen Würfeltyp höher für Traglast und Mindeststärke. Kumulativ mit Kräftig und Soldat.",
-            "effekte": {
-                "traglast_staerke_bonus": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Scanner": {
-            "name": "Cyberware: Scanner",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 1000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Erkennt Zusammensetzung bekannter Materie oder Energie bis 50 Meter. Ziel muss nicht sichtbar sein. Bestimmte Materialien/Energien können den Scanner stören.",
-            "effekte": {
-                "scanner": true,
-                "reichweite_m": 50
-            },
-            "aktiv": true
-        },
-        "Cyberware: Verbesserte Sicht": {
-            "name": "Cyberware: Verbesserte Sicht",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 10000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
-            "effekte": {
-                "beleuchtung_ignorieren": 4,
-                "wahrnehmung_bonus": 2
-            },
-            "aktiv": true
-        },
-        "Cyberware: Verbessertes Gehör": {
-            "name": "Cyberware: Verbessertes Gehör",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Ohren können Flüstern bis 200 Meter wahrnehmen. +2 auf gehörbasierte Wahrnehmungsproben.",
-            "effekte": {
-                "gehoer_bonus": 2,
-                "reichweite_m": 200
-            },
-            "aktiv": true
-        },
-        "Cyberware: Verborgenes Fach": {
-            "name": "Cyberware: Verborgenes Fach",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 2000,
-            "stress": 1,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
-            "effekte": {
-                "verborgenes_fach": true,
-                "kapazitaet_kg": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Zusätzliche Gliedmaßen": {
-            "name": "Cyberware: Zusätzliche Gliedmaßen",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Körper",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 2,
-            "setting": "scifi",
-            "beschreibung": "Zusätzliches Armpaar (inkl. zweiter Haupthand). Kann andauernde Aktionen durchführen. Kann zwei verschiedene Zweihandwaffen führen. +1 Mehrfachaktionsbonus im Nahkampf, +1 Athletik (Klettern, Ringen).",
-            "effekte": {
-                "zusaetzliche_gliedmassen": true,
-                "mehrfachaktion_nahkampf_bonus": 1,
-                "athletik_bonus": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Abgehärtete Sinne": {
-            "name": "Cyberware: Abgehärtete Sinne",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Blitzschutz, Schalldämpfung, neurale Sensorikinhibitoren. +4 auf Konstitutionsproben zur Erholung von Angeschlagen.",
-            "effekte": {
-                "erholung_bonus": {
-                    "typ": "angeschlagen",
-                    "bonus": 4,
-                    "attribut": "Konstitution"
-                }
-            },
-            "aktiv": true
-        },
-        "Cyberware: Adrenalindrüse": {
-            "name": "Cyberware: Adrenalindrüse",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
-            "effekte": {
-                "erholung_bonus": {
-                    "typ": "angeschlagen_benommen",
-                    "bonus": 2
-                }
-            },
-            "aktiv": true
-        },
-        "Cyberware: Autodoc": {
-            "name": "Cyberware: Autodoc",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 10000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Nanobots oder starke Stimulanzien gewähren einmal pro Tag eine natürliche Heilungsprobe. Entfernt alle Abzüge gegen Verbluten.",
-            "effekte": {
-                "natuerliche_heilung_pro_tag": 1,
-                "verbluten_abzug_entfernt": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Bedrohungseinschätzer": {
-            "name": "Cyberware: Bedrohungseinschätzer",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Mikrosensoren und verbesserte neurale Sequenzer gewähren das Talent Sechster Sinn.",
-            "effekte": {
-                "talent_gewaehrt": "Sechster Sinn"
-            },
-            "aktiv": true
-        },
-        "Cyberware: EMP-Abschirmung": {
-            "name": "Cyberware: EMP-Abschirmung",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 0,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Cyberware durch Speziallegierungen, Gewebe, Schnellneustarts oder andere Technik geschützt. Ignoriert 2 Punkte des -4-Abzugs auf Benutzen/Reparieren nach EMP-Angriff.",
-            "effekte": {
-                "emp_schutz": 2
-            },
-            "aktiv": true
-        },
-        "Cyberware: Kampfsicht": {
-            "name": "Cyberware: Kampfsicht",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 2,
-            "setting": "scifi",
-            "beschreibung": "Verbessertes peripheres Sehen und Bedrohungsanalyse. Entfernt 1 Punkt Mehrfachaktionsabzug (oder bis zu 2 bei zweimaliger Installation).",
-            "effekte": {
-                "mehrfachaktion_ignorieren": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Panzerung": {
-            "name": "Cyberware: Panzerung",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 3,
-            "setting": "scifi",
-            "beschreibung": "Subdermale Platten oder Fasern unter der Haut. +2 Panzerung am gesamten Körper. Zählt als natürliche Panzerung, kumulativ mit getragener Panzerung bis +10.",
-            "effekte": {
-                "panzerung_bonus": 2,
-                "natuerliche_panzerung": true,
-                "max_kumulativ": 10
-            },
-            "aktiv": true
-        },
-        "Cyberware: Redundante Organe": {
-            "name": "Cyberware: Redundante Organe",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Mehrfachsysteme managen Organschäden oder Blutverlust. Angesagte Angriffe auf Organe/Kopf verursachen keinen zusätzlichen Schaden.",
-            "effekte": {
-                "angesagte_angriffe_ignorieren": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Robustheit": {
-            "name": "Cyberware: Robustheit",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 3,
-            "setting": "scifi",
-            "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
-            "effekte": {
-                "robustheit_bonus": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Schmerzhemmer": {
-            "name": "Cyberware: Schmerzhemmer",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 3,
-            "setting": "scifi",
-            "beschreibung": "Ignoriert 1 Punkt Abzüge durch Erschöpfung oder Wunden pro Installation.",
-            "effekte": {
-                "wund_ignorieren": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Toxinfilter": {
-            "name": "Cyberware: Toxinfilter",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 3000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Mikrofaserfilter in Ohren, Nase, Hals, Lunge entfernen Giftstoffe. +4 gegen Krankheiten, Gifte (inkl. tödliche Gase) und dünne/gefährliche Atmosphäre.",
-            "effekte": {
-                "gift_resistenz": 4
-            },
-            "aktiv": true
-        },
-        "Cyberware: Zäh": {
-            "name": "Cyberware: Zäh",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Defensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Charakter erleidet keine Wunde wenn zweimal hintereinander Angeschlagen.",
-            "effekte": {
-                "zaeh": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Außenlaststation": {
-            "name": "Cyberware: Außenlaststation",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 10000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Ausfahrbare Halterung für Fahrzeugwaffen (Mod 1 oder niedriger). Installierte Waffe kann mit erfolgreicher Reparieren-Probe innerhalb 1 Stunde getauscht werden.",
-            "effekte": {
-                "aussenlaststation": true,
-                "max_mod": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Integrierte Ausrüstung": {
-            "name": "Cyberware: Integrierte Ausrüstung",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Bis zu 5 kg Ausrüstung im Körper eingebaut (SL-Genehmigung). Kann nicht fallen gelassen oder entwaffnet werden. Waffen können als begrenzte freie Aktion gezogen/weggesteckt werden.",
-            "effekte": {
-                "integrierte_ausruestung": true,
-                "kapazitaet_kg": 5
-            },
-            "aktiv": true
-        },
-        "Cyberware: Kampftalent": {
-            "name": "Cyberware: Kampftalent",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Gewährt ein Kampftalent des Rangs oder niedriger. Ignoriert alle Voraussetzungen außer anderen Talenten. Kosten = ₡5.000 × Rang. Nicht kumulativ mit natürlichem/künstlichem Erwerb desselben Talents.",
-            "effekte": {
-                "kampftalent_gewaehrt": true,
-                "kosten_pro_rang": 5000
-            },
-            "aktiv": true
-        },
-        "Cyberware: Klauen": {
-            "name": "Cyberware: Klauen",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 2,
-            "setting": "scifi",
-            "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
-            "effekte": {
-                "schaden": "Stä+W4",
-                "schaden_stufe2": "Stä+W6",
-                "pb": 2
-            },
-            "aktiv": true
-        },
-        "Cyberware: Mächtiger Schlag": {
-            "name": "Cyberware: Mächtiger Schlag",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Armverbesserung mit erhöhter Beschleunigung und Kraft. +4 Schaden auf unbewaffnete Angriffe oder Nahkampf-/Naturwaffen. Bei mindestens 1 Wunde: W6\" Rückstoß und zu Boden (Athletik -2 zum Widerstehen).",
-            "effekte": {
-                "schaden_bonus": 4,
-                "rueckstoss": true
-            },
-            "aktiv": true
-        },
-        "Cyberware: Reichweite": {
-            "name": "Cyberware: Reichweite",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 2500,
-            "stress": 1,
-            "max_installationen": 3,
-            "setting": "scifi",
-            "beschreibung": "Gliedmaßen sind ausfahrbar mit zusätzlich 1\" (2 Meter) Reichweite pro Installation.",
-            "effekte": {
-                "reichweite_bonus": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Zielsystem": {
-            "name": "Cyberware: Zielsystem",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 5000,
-            "stress": 1,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Integriertes Ziel-/Verfolgungssystem reduziert Abzüge für Angesagte Ziele, Deckung, Reichweite, Größe und Geschwindigkeit um 2 Punkte beim direkten Schießen.",
-            "effekte": {
-                "abzug_reduktion": 2,
-                "typen": [
-                    "angesagte_ziele",
-                    "deckung",
-                    "reichweite",
-                    "groesse",
-                    "geschwindigkeit"
-                ]
-            },
-            "aktiv": true
-        },
-        "Cyberware: Zusätzliche Aktion": {
-            "name": "Cyberware: Zusätzliche Aktion",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Offensiv",
-            "gewicht": 0,
-            "kosten": 10000,
-            "stress": 5,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Verbesserte Nervenbahnen, optimierte Nerven oder erhöhtes Adrenalin ermöglichen es, 2 Punkte Mehrfachaktionsabzüge pro Runde zu ignorieren.",
-            "effekte": {
-                "mehrfachaktion_ignorieren": 2
-            },
-            "aktiv": true
-        },
-        "Cyberware: Beinverbesserung": {
-            "name": "Cyberware: Beinverbesserung",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Fortbewegung",
-            "gewicht": 0,
-            "kosten": 10000,
-            "stress": 2,
-            "max_installationen": -1,
-            "setting": "scifi",
-            "beschreibung": "Hydraulisches Sprinten, einfahrbare Skates oder Knieservos. +2 Bewegungsweite und Sprintwürfel um einen Würfeltyp erhöht.",
-            "effekte": {
-                "bewegungsweite_bonus": 2,
-                "sprint_wuerfel_bonus": 1
-            },
-            "aktiv": true
-        },
-        "Cyberware: Springer": {
-            "name": "Cyberware: Springer",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Fortbewegung",
-            "gewicht": 0,
-            "kosten": 10000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Kann 8\" (16 Meter) horizontal oder 4\" (8 Meter) vertikal springen. +2 Schaden bei Rücksichtslosem Angriff mit Sprung.",
-            "effekte": {
-                "springen_horizontal": 8,
-                "springen_vertikal": 4,
-                "sprung_schaden_bonus": 2
-            },
-            "aktiv": true
-        },
-        "Cyberware: Wandkrabbler": {
-            "name": "Cyberware: Wandkrabbler",
-            "kategorie": "Cyberware",
-            "unterkategorie": "Fortbewegung",
-            "gewicht": 0,
-            "kosten": 3000,
-            "stress": 2,
-            "max_installationen": 1,
-            "setting": "scifi",
-            "beschreibung": "Anti-Schwerkraft-Pads, Mikro-Haken, Saugnäpfe oder Materieumwandler. Volle Bewegungsweite horizontal, halbe vertikal.",
-            "effekte": {
-                "wandklettern": true
-            },
-            "aktiv": true
-        },
         "Axt, Handbeil": {
             "name": "Axt, Handbeil",
             "kategorie": "Waffe",
@@ -7786,6 +5330,15 @@
             "beschreibung": "Werkzeug zum Hämmern und Nageln",
             "aktiv": true
         },
+        "Handschellen": {
+            "name": "Handschellen",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Zum Fesseln von Personen, Stärke gegen 8 zum Ausbrechen",
+            "aktiv": true
+        },
         "Kamera (Einweg)": {
             "name": "Kamera (Einweg)",
             "kategorie": "Allgemein",
@@ -8335,108 +5888,5 @@
             "beschreibung": "Munition für Schleudern, Preis für 20 Stück, Gewicht für 40 Stück",
             "aktiv": true
         }
-    },
-    "cyberware_nebenwirkungen": {
-        "1": {
-            "name": "Systemüberlastung",
-            "effekt": "Willenskraft oder Konstitution -1 Würfeltyp (Wahl des Spielers)"
-        },
-        "2": {
-            "name": "Neurale Interferenz",
-            "effekt": "Handicap Zögerlich"
-        },
-        "3-4": {
-            "name": "Neuraler Block",
-            "effekt": "-2 auf Willenskraftwürfe zur Erholung von Angeschlagen"
-        },
-        "5-6": {
-            "name": "Angestrengte Atmung",
-            "effekt": "-1 auf Bewegungsweite und Heimlichkeit"
-        },
-        "7-8": {
-            "name": "Komplikationen",
-            "effekt": "Stress des Implantats +1"
-        },
-        "9-10": {
-            "name": "Phantomkrämpfe",
-            "effekt": "Verwundbar bei Kreuz-Aktionskarte"
-        },
-        "11-12": {
-            "name": "Migräne",
-            "effekt": "Kritischer Fehlschlag = 1 Erschöpfungsstufe (1 Tag, kann nicht zu Kampfunfähig führen)"
-        },
-        "13": {
-            "name": "Paranoia",
-            "effekt": "Handicap Misstrauisch (schwer)"
-        },
-        "14-15": {
-            "name": "Erhöhtes Feedback",
-            "effekt": "Handicap Dünnhäutig (schwer)"
-        },
-        "16-17": {
-            "name": "Gedächtnisverlust",
-            "effekt": "-2 auf Verstand und Allgemeinwissen"
-        },
-        "18": {
-            "name": "Schüttelkrämpfe",
-            "effekt": "Abgelenkt bei Kreuz-Aktionskarte"
-        },
-        "19": {
-            "name": "Gewalttätige Episoden",
-            "effekt": "Handicap Blutrünstig"
-        },
-        "20": {
-            "name": "Innere Blutungen",
-            "effekt": "Handicap Totkrank (schwer) bis Implantat entfernt wird"
-        }
-    },
-    "settingregeln": {
-        "riesige_feinde": false,
-        "verrat": false,
-        "schwierige_heilung": false,
-        "auszeit_freizeit": false,
-        "energieverteilung": false,
-        "extreme_umgebungen": false,
-        "akklimatisierung": false,
-        "atmosphaere": false,
-        "gravitation": false,
-        "druck": false,
-        "hacken": false,
-        "netrunning": false,
-        "logistik": false,
-        "versorgungsstufen": false,
-        "detaillierte_logistik": false,
-        "bergung_und_handel": false,
-        "sword_and_planet": false,
-        "schnelle_heilung": false,
-        "ko_schlag": false,
-        "cliffhanger": false,
-        "planetare_romanzen": false,
-        "ungepanzerter_held": false,
-        "transhumanismus": false,
-        "genetische_anpassung": false,
-        "fahrzeugregeln": false,
-        "schwermetall": false,
-        "taktischer_kampf_mit_fahrzeugen": false,
-        "konflikte": false,
-        "schurkische_entschlossenheit": false,
-        "fertigkeitsspezialisierungen": false,
-        "entschlossenheit": false,
-        "fanatiker": false,
-        "geborene_anfuehrer": false,
-        "dynamischer_rueckschlag": false,
-        "helden_sterben_nie": false,
-        "narrenglück": false,
-        "genre_nahe_zukunft": false,
-        "genre_star_opera": false,
-        "genre_star_military": false,
-        "genre_cyberpunk": false,
-        "genre_post_apokalyptisch": false,
-        "genre_sword_and_planet": false,
-        "genre_zeitreisen": false,
-        "genre_transhumanismus": false,
-        "genre_mech_sci_fi": false,
-        "genre_weltraumwestern": false,
-        "genre_hard_sci_fi": false
     }
 }

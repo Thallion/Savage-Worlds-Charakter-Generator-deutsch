@@ -54,8 +54,8 @@ class TalentConfig:
             "nicht_duplizierbare_talente": [
                 "Glück", "Großes Glück", "Reich", "Stinkreich", 
                 "Kräftig", "Riesenwuchs", "Klein", "Zäh", "Sehr zäh",
-                "Arkaner Hintergrund: Gaben", "Arkaner Hintergrund: Magie", 
-                "Arkaner Hintergrund: Psionik", "Arkaner Hintergrund: Wunder",
+                "AH: Gaben", "AH: Magie",
+                "AH: Psionik", "AH: Wunder",
                 "Arkaner Widerstand", "Verbesserte Arkane Resistenz",
                 "Meister aller Waffen", "Waffenmeister", "Block", "Harter Block",
                 "Schwer zu töten", "Schwerer zu töten", "Schnell", "Flink",
@@ -67,8 +67,8 @@ class TalentConfig:
             "rang_hierarchie": {"A": 1, "F": 2, "V": 3, "H": 4, "L": 5},
             "spezial_talente": {
                 "vermoegen_talente": ["Reich", "Stinkreich"],
-                "arkane_hintergruende": ["Arkaner Hintergrund: Gaben", "Arkaner Hintergrund: Magie", 
-                                       "Arkaner Hintergrund: Psionik", "Arkaner Hintergrund: Wunder"]
+                "arkane_hintergruende": ["AH: Gaben", "AH: Magie",
+                                       "AH: Psionik", "AH: Wunder"]
             }
         }
     
@@ -325,8 +325,8 @@ class TalentManager:
             Logger.info(f"Kostenloses Pathfinder-Talent '{talent_name_key}' abgewählt.")
             return True
         
-        # Mächte entfernen wenn ein Arkaner Hintergrund abgewählt wird
-        if talent.name.startswith("Arkaner Hintergrund"):
+        # Mächte entfernen wenn ein Arkaner Hintergrund (AH) abgewählt wird
+        if talent.name == "AH" or talent.name.startswith("AH (") or talent.name.startswith("AH:"):
             # Kopie der Liste, da sie während der Iteration modifiziert wird
             selected_copy = list(self.charakter.selected_maechte)
             for macht_name in selected_copy:
@@ -647,11 +647,11 @@ class TalentManager:
         """
         fehlermeldungen = []
 
-        # Spezialfall: "AH" oder "Arkaner Hintergrund (beliebig)" - beliebiger Arkaner Hintergrund
-        if voraussetzung == "AH" or voraussetzung == "Arkaner Hintergrund (beliebig)":
+        # Spezialfall: "AH" oder "AH (beliebig)" - beliebiger Arkaner Hintergrund
+        if voraussetzung == "AH" or voraussetzung == "AH (beliebig)":
             hat_arkanen_hintergrund = False
             for talent_name, talent_obj in self.charakter.talente.items():
-                if talent_name.startswith("Arkaner Hintergrund") and talent_obj.ausgewaehlt:
+                if (talent_name == "AH" or talent_name.startswith("AH (") or talent_name.startswith("AH:")) and talent_obj.ausgewaehlt:
                     hat_arkanen_hintergrund = True
                     break
 
@@ -663,43 +663,43 @@ class TalentManager:
         ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
         if ah_kurz_match:
             ah_name = ah_kurz_match.group(1)
-            full_name = f"Arkaner Hintergrund ({ah_name})"
+            full_name = f"AH ({ah_name})"
             talent_obj = self.charakter.talente.get(full_name)
             if not talent_obj or not talent_obj.ausgewaehlt:
                 fehlermeldungen.append(f"'{full_name}' muss ausgewählt sein.")
             return fehlermeldungen
 
-        # Spezialfall: "Arkaner Hintergrund (jeder außer X)" - beliebiger AH außer einem bestimmten
-        ausser_match = re.match(r'^Arkaner Hintergrund \(jeder außer (.+)\)$', voraussetzung)
+        # Spezialfall: "AH (jeder außer X)" - beliebiger AH außer einem bestimmten
+        ausser_match = re.match(r'^AH \(jeder außer (.+)\)$', voraussetzung)
         if ausser_match:
             ausgeschlossener_ah = ausser_match.group(1).strip()
             hat_passenden_ah = False
             for talent_name, talent_obj in self.charakter.talente.items():
-                if (talent_name.startswith("Arkaner Hintergrund") and
+                if ((talent_name == "AH" or talent_name.startswith("AH (") or talent_name.startswith("AH:")) and
                         talent_obj.ausgewaehlt and
-                        talent_name != f"Arkaner Hintergrund ({ausgeschlossener_ah})"):
+                        talent_name != f"AH ({ausgeschlossener_ah})"):
                     hat_passenden_ah = True
                     break
             if not hat_passenden_ah:
                 fehlermeldungen.append(
-                    f"Ein beliebiger Arkaner Hintergrund außer {ausgeschlossener_ah} wird vorausgesetzt."
+                    f"Ein beliebiger AH außer {ausgeschlossener_ah} wird vorausgesetzt."
                 )
             return fehlermeldungen
 
-        # Spezialfall: "Arkaner Hintergrund (X, Y, Z)" - einer aus einer Liste von AHs
-        if voraussetzung.startswith("Arkaner Hintergrund (") and "," in voraussetzung:
-            inner = voraussetzung[len("Arkaner Hintergrund ("):-1]
+        # Spezialfall: "AH (X, Y, Z)" - einer aus einer Liste von AHs
+        if voraussetzung.startswith("AH (") and "," in voraussetzung:
+            inner = voraussetzung[len("AH ("):-1]
             ah_namen = [name.strip() for name in inner.split(",")]
             hat_passenden_ah = False
             for ah_name in ah_namen:
-                full_name = f"Arkaner Hintergrund ({ah_name})"
+                full_name = f"AH ({ah_name})"
                 talent_obj = self.charakter.talente.get(full_name)
                 if talent_obj and talent_obj.ausgewaehlt:
                     hat_passenden_ah = True
                     break
             if not hat_passenden_ah:
                 fehlermeldungen.append(
-                    f"Einer der folgenden Arkanen Hintergründe wird vorausgesetzt: {', '.join(ah_namen)}"
+                    f"Einer der folgenden AH wird vorausgesetzt: {', '.join(ah_namen)}"
                 )
             return fehlermeldungen
 

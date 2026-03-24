@@ -486,8 +486,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Voodoopraktiker)": {
-            "name": "Arkaner Hintergrund (Voodoopraktiker)",
+        "AH (Voodoopraktiker)": {
+            "name": "AH (Voodoopraktiker)",
             "kategorie": "Magie",
             "rang": "A",
             "voraussetzungen": [
@@ -505,7 +505,7 @@
             "kategorie": "Magie",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Voodoopraktiker)",
+                "AH (Voodoopraktiker)",
                 "Glaube W8+",
                 "Willenskraft W8+"
             ],
@@ -520,7 +520,7 @@
             "kategorie": "Magie",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Voodoopraktiker)",
+                "AH (Voodoopraktiker)",
                 "Glaube W8+",
                 "Willenskraft W8+"
             ],
@@ -530,8 +530,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Hexe)": {
-            "name": "Arkaner Hintergrund (Hexe)",
+        "AH (Hexe)": {
+            "name": "AH (Hexe)",
             "kategorie": "Magie",
             "rang": "A",
             "voraussetzungen": [
@@ -549,7 +549,7 @@
             "kategorie": "Magie",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Hexe)",
+                "AH (Hexe)",
                 "Zaubern W8+"
             ],
             "beschreibung": "Der Charakter erhält einen Vertrauten, der als Wildcard agiert, spezielle Boni bietet und mit der Hexe verbunden ist.",
@@ -563,7 +563,7 @@
             "kategorie": "Magie",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Hexe)",
+                "AH (Hexe)",
                 "Zaubern W8+"
             ],
             "beschreibung": "Die Hexe erhält Boni auf Einschüchtern- und Überredenproben und kann ihre Peitsche mit Energie aufladen, um zusätzlichen Schaden zu verursachen.",
@@ -572,8 +572,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Chi-Meister)": {
-            "name": "Arkaner Hintergrund (Chi-Meister)",
+        "AH (Chi-Meister)": {
+            "name": "AH (Chi-Meister)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -588,8 +588,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Gesegneter)": {
-            "name": "Arkaner Hintergrund (Gesegneter)",
+        "AH (Gesegneter)": {
+            "name": "AH (Gesegneter)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -602,8 +602,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Taschenspieler)": {
-            "name": "Arkaner Hintergrund (Taschenspieler)",
+        "AH (Taschenspieler)": {
+            "name": "AH (Taschenspieler)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -616,8 +616,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Schamane)": {
-            "name": "Arkaner Hintergrund (Schamane)",
+        "AH (Schamane)": {
+            "name": "AH (Schamane)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -965,7 +965,7 @@
             "kategorie": "Schamane",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Schamane)",
+                "AH (Schamane)",
                 "Glaube W8+"
             ],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glaubensproben, wenn ein Fetisch verwendet wird. Ersatz kann durch ein Ritual erstellt werden.",
@@ -979,7 +979,7 @@
             "kategorie": "Schamane",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Schamane)",
+                "AH (Schamane)",
                 "Glaube W8+"
             ],
             "beschreibung": "Ermöglicht das Wirken einer Macht ohne Abzug für Mehrfachaktionen einmal pro Runde.",
@@ -993,7 +993,7 @@
             "kategorie": "Gesegneter",
             "rang": "V",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Gesegneter)",
+                "AH (Gesegneter)",
                 "Überreden W8+"
             ],
             "beschreibung": "Fügt fünf Gefolgsleute hinzu, die mit dem Gesegneten reisen und ihm helfen können. Gefolgsleute können ersetzt werden.",
@@ -1008,7 +1008,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Willenskraft W10+",
-                "Arkaner Hintergrund (Gesegneter)",
+                "AH (Gesegneter)",
                 "Glaube W6+"
             ],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glaubensproben.",
@@ -1062,7 +1062,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Willenskraft W6+",
-                "Arkaner Hintergrund (Chi-Meister)",
+                "AH (Chi-Meister)",
                 "Kämpfen W8+"
             ],
             "beschreibung": "Ermöglicht die Wahl eines speziellen Kampfstils, der als freie Aktion aktiviert werden kann.",
@@ -1118,7 +1118,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Verrückter Wissenschaftler)",
+                "AH (Verrückter Wissenschaftler)",
                 "Verrückte Wissenschaft W8+"
             ],
             "beschreibung": "Ermöglicht die Herstellung von Tränken und Elixieren, die Machtpunkte binden, bis sie verwendet werden.",
@@ -1132,7 +1132,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Verrückter Wissenschaftler)",
+                "AH (Verrückter Wissenschaftler)",
                 "Verrückte Wissenschaft W6+"
             ],
             "beschreibung": "Erhöht Machtpunkte um 5, aber erhöht das Risiko für Geistersteinfieber bei Fehlfunktionen.",
@@ -1146,7 +1146,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Verrückter Wissenschaftler)"
+                "AH (Verrückter Wissenschaftler)"
             ],
             "beschreibung": "Erhält $2.000 an Geräten oder Fahrzeugen und 25% Rabatt auf zukünftige Käufe bei bestimmten Anbietern.",
             "neue_maechte": 0,
@@ -1159,7 +1159,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Verrückter Wissenschaftler)",
+                "AH (Verrückter Wissenschaftler)",
                 "Verstand W8+"
             ],
             "beschreibung": "Ermöglicht die Verwendung eines Bennys, um Ergebnisse auf der Wahnsinns- oder Fehlfunktionstabelle zu beeinflussen.",
@@ -1173,7 +1173,7 @@
             "kategorie": "Taschenspieler",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Taschenspieler)"
+                "AH (Taschenspieler)"
             ],
             "beschreibung": "Ermöglicht die Nutzung von Blutmagie, um Machtpunkte durch Selbstverletzung zu gewinnen.",
             "neue_maechte": 0,
@@ -1186,7 +1186,7 @@
             "kategorie": "Taschenspieler",
             "rang": "Heroisch",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Taschenspieler)",
+                "AH (Taschenspieler)",
                 "Zaubern W10+"
             ],
             "beschreibung": "Erlaubt es, bis zu drei Karten abzulegen und neu zu ziehen, wenn Ein Spiel mit dem Teufel gewagt wird.",
@@ -1200,7 +1200,7 @@
             "kategorie": "Taschenspieler",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Taschenspieler)",
+                "AH (Taschenspieler)",
                 "Schießen W8+"
             ],
             "beschreibung": "Ermöglicht das Wirken bestimmter Zauber mit einer speziellen, runenbeschrifteten Waffe.",
@@ -1215,7 +1215,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "Willenskraft W8+",
-                "Arkaner Hintergrund (Taschenspieler)",
+                "AH (Taschenspieler)",
                 "Zaubern W6+"
             ],
             "beschreibung": "Zieht eine zusätzliche Karte, wenn Ein Spiel mit dem Teufel gewagt wird.",
@@ -1274,8 +1274,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Begabt)": {
-            "name": "Arkaner Hintergrund (Begabt)",
+        "AH (Begabt)": {
+            "name": "AH (Begabt)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -1285,8 +1285,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Magie)": {
-            "name": "Arkaner Hintergrund (Magie)",
+        "AH (Magie)": {
+            "name": "AH (Magie)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -1296,8 +1296,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Psionik)": {
-            "name": "Arkaner Hintergrund (Psionik)",
+        "AH (Psionik)": {
+            "name": "AH (Psionik)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -1307,8 +1307,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Verrückte Wissenschaft)": {
-            "name": "Arkaner Hintergrund (Verrückte Wissenschaft)",
+        "AH (Verrückte Wissenschaft)": {
+            "name": "AH (Verrückte Wissenschaft)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [

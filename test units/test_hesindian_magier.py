@@ -257,7 +257,7 @@ def erstelle_hesindian_magier():
     if hasattr(charakter, 'voelker_boni') and charakter.voelker_boni.get('freie_talente', 0) > 0:
         print("  🎁 KOSTENLOSES MENSCHEN-TALENT (ANFÄNGER):")
         
-        # Suche nach "Arkaner Hintergrund" (ohne "Magie")
+        # Suche nach "AH" (ohne "Magie")
         talent_name = None
         for name in charakter.talente.keys():
             if "arkaner hintergrund" in name.lower() and "magie" not in name.lower():
@@ -278,10 +278,10 @@ def erstelle_hesindian_magier():
             else:
                 print(f"    ❌ FEHLER: Talent '{talent_name}' konnte nicht hinzugefügt werden")
         else:
-            print("    ❌ 'Arkaner Hintergrund' nicht gefunden - suche andere Varianten...")
+            print("    ❌ 'AH' nicht gefunden - suche andere Varianten...")
             
             # Alternative Namen probieren
-            alternative_namen = ["Arkaner Hintergrund", "Arkane Hintergrund", "Magier", "Zauberer"]
+            alternative_namen = ["AH", "Arkane Hintergrund", "Magier", "Zauberer"]
             for alt_name in alternative_namen:
                 if alt_name in charakter.talente:
                     erfolg = waehle_freies_talent(charakter, alt_name, ignore_voraussetzungen=False)
@@ -306,7 +306,7 @@ def erstelle_hesindian_magier():
                 break
         
         if arkaner_hintergrund:
-            print(f"    ✅ Voraussetzung erfüllt (Arkaner Hintergrund vorhanden)")
+            print(f"    ✅ Voraussetzung erfüllt (AH vorhanden)")
             erfolg = waehle_talent(charakter, talent_name)
             if erfolg:
                 print(f"    ✅ Talent '{talent_name}' hinzugefügt")
@@ -314,7 +314,7 @@ def erstelle_hesindian_magier():
             else:
                 print(f"    ❌ FEHLER: Talent '{talent_name}' konnte nicht hinzugefügt werden")
         else:
-            print(f"    ❌ Voraussetzung NICHT erfüllt (Arkaner Hintergrund fehlt)")
+            print(f"    ❌ Voraussetzung NICHT erfüllt (AH fehlt)")
     else:
         print("    ❌ 'Machtpunkte' nicht verfügbar")
     
@@ -326,12 +326,12 @@ def erstelle_hesindian_magier():
     maechte_liste = ["Geschoss", "Heilung", "Blenden"]
     maechte_hinzugefuegt = 0
     
-    # Prüfe ob Arkaner Hintergrund vorhanden ist
+    # Prüfe ob AH vorhanden ist
     arkaner_hintergrund_aktiv = False
     for talent_name, talent_obj in charakter.talente.items():
         if "arkaner hintergrund" in talent_name.lower() and getattr(talent_obj, 'ausgewaehlt', False):
             arkaner_hintergrund_aktiv = True
-            print(f"  ✅ Arkaner Hintergrund gefunden: {talent_name}")
+            print(f"  ✅ AH gefunden: {talent_name}")
             break
     
     if arkaner_hintergrund_aktiv:
@@ -362,7 +362,7 @@ def erstelle_hesindian_magier():
         else:
             print(f"  ⚠️ Machtpunkte-Property nicht gefunden")
     else:
-        print("  ❌ Kein Arkaner Hintergrund gefunden - keine Mächte verfügbar")
+        print("  ❌ Kein AH gefunden - keine Mächte verfügbar")
     
     print(f"\n📊 MÄCHTE GESAMT: {maechte_hinzugefuegt} Mächte hinzugefügt")
     

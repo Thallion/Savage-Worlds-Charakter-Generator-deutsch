@@ -31,7 +31,7 @@
             id: search_input
             hint_text: 'Suche...'
             size_hint_x: None
-            width: dp(140)
+            width: dp(110)
             on_text: root.filter_ausruestung()
 
         MDScrollView:
@@ -47,63 +47,6 @@
                 size_hint_y: None
                 height: dp(40)
                 spacing: dp(4)
-
-                TooltipFabButton:
-                    id: sort_name_btn
-                    tooltip_text: "Name"
-                    icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-                    style: "small"
-                    size_hint: None, None
-                    size: dp(36), dp(36)
-                    on_release: root.update_sort_option('Name')
-
-                TooltipFabButton:
-                    id: sort_weight_btn
-                    tooltip_text: "Gewicht"
-                    icon: "sort-ascending" if root.current_sort_option != 'Gewicht' or root.sort_order == 'asc' else "sort-descending"
-                    style: "small"
-                    size_hint: None, None
-                    size: dp(36), dp(36)
-                    on_release: root.update_sort_option('Gewicht')
-
-                TooltipFabButton:
-                    id: sort_costs_btn
-                    tooltip_text: "Kosten"
-                    icon: "sort-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-descending"
-                    style: "small"
-                    size_hint: None, None
-                    size: dp(36), dp(36)
-                    on_release: root.update_sort_option('Kosten')
-
-                TooltipFabButton:
-                    id: sort_amount_btn
-                    tooltip_text: "Menge"
-                    icon: "sort-ascending" if root.current_sort_option != 'Menge' or root.sort_order == 'asc' else "sort-descending"
-                    style: "small"
-                    size_hint: None, None
-                    size: dp(36), dp(36)
-                    on_release: root.update_sort_option('Menge')
-
-                TooltipFabButton:
-                    id: sort_category_btn
-                    tooltip_text: "Kategorie"
-                    icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-                    style: "small"
-                    size_hint: None, None
-                    size: dp(36), dp(36)
-                    on_release: root.update_sort_option('Kategorie')
-
-                MDButton:
-                    id: only_owned_button
-                    size_hint: None, None
-                    height: dp(36)
-                    on_release: root.toggle_only_owned_items()
-
-                    MDButtonText:
-                        text: "Vorh." if not root.only_owned_items else "Alle"
-                        theme_text_color: "Primary" if not root.only_owned_items else "Custom"
-                        text_color: self.theme_cls.primaryColor if root.only_owned_items else self.theme_cls.onSurfaceColor
-                        font_size: dp(11)
 
                 MDFabButton:
                     icon: "filter"
@@ -121,6 +64,42 @@
                     shorten: True
                     shorten_from: 'right'
                     text_size: self.size
+
+                TooltipFabButton:
+                    id: only_owned_button
+                    tooltip_text: "Nur vorhandene / Alle"
+                    icon: "sort-bool-descending-variant" if not root.only_owned_items else "sort-bool-ascending-variant"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.toggle_only_owned_items()
+
+                TooltipFabButton:
+                    id: sort_name_btn
+                    tooltip_text: "Name"
+                    icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.update_sort_option('Name')
+
+                TooltipFabButton:
+                    id: sort_costs_btn
+                    tooltip_text: "Kosten"
+                    icon: "sort-numeric-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-numeric-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.update_sort_option('Kosten')
+
+                TooltipFabButton:
+                    id: sort_category_btn
+                    tooltip_text: "Kategorie"
+                    icon: "sort-bool-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-bool-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.update_sort_option('Kategorie')
 
     MDLabel:
         text: 'Ausrüstung'

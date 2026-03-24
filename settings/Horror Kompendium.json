@@ -2250,8 +2250,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Verdorbener)": {
-            "name": "Arkaner Hintergrund (Verdorbener)",
+        "AH (Verdorbener)": {
+            "name": "AH (Verdorbener)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -2264,8 +2264,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Dämonologe)": {
-            "name": "Arkaner Hintergrund (Dämonologe)",
+        "AH (Dämonologe)": {
+            "name": "AH (Dämonologe)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2280,8 +2280,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Wahrsager)": {
-            "name": "Arkaner Hintergrund (Wahrsager)",
+        "AH (Wahrsager)": {
+            "name": "AH (Wahrsager)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -2291,8 +2291,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Medium)": {
-            "name": "Arkaner Hintergrund (Medium)",
+        "AH (Medium)": {
+            "name": "AH (Medium)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2304,8 +2304,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Okkultist)": {
-            "name": "Arkaner Hintergrund (Okkultist)",
+        "AH (Okkultist)": {
+            "name": "AH (Okkultist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2320,8 +2320,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Priester)": {
-            "name": "Arkaner Hintergrund (Priester)",
+        "AH (Priester)": {
+            "name": "AH (Priester)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2336,8 +2336,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Psionischer Ermittler)": {
-            "name": "Arkaner Hintergrund (Psionischer Ermittler)",
+        "AH (Psionischer Ermittler)": {
+            "name": "AH (Psionischer Ermittler)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2349,8 +2349,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Voodooist)": {
-            "name": "Arkaner Hintergrund (Voodooist)",
+        "AH (Voodooist)": {
+            "name": "AH (Voodooist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2365,8 +2365,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Hexenmeister/Hexe)": {
-            "name": "Arkaner Hintergrund (Hexenmeister/Hexe)",
+        "AH (Hexenmeister/Hexe)": {
+            "name": "AH (Hexenmeister/Hexe)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2378,8 +2378,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Alchemist, Horror)": {
-            "name": "Arkaner Hintergrund (Alchemist, Horror)",
+        "AH (Alchemist, Horror)": {
+            "name": "AH (Alchemist, Horror)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -2463,9 +2463,9 @@
             "voraussetzungen": [
                 {
                     "oder": [
-                        "Arkaner Hintergrund (Verdorbener)",
-                        "Arkaner Hintergrund (Okkultist)",
-                        "Arkaner Hintergrund (Hexenmeister/Hexe)"
+                        "AH (Verdorbener)",
+                        "AH (Okkultist)",
+                        "AH (Hexenmeister/Hexe)"
                     ]
                 },
                 "Arkane Fertigkeit W8"
@@ -2481,7 +2481,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Okkultismus W8"
             ],
             "beschreibung": "Der Charakter kann Zauber wirken oder Wunder anrufen, ohne zu sprechen – unter Wasser, im Vakuum, geknebelt, innerhalb eines Stillezaubers usw.",
@@ -2586,7 +2586,7 @@
             "kategorie": "Profi",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Arkane Fertigkeit W8",
                 "Okkultismus W6"
             ],
@@ -2627,7 +2627,7 @@
             "kategorie": "Profi",
             "rang": "V",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Priester)",
+                "AH (Priester)",
                 "Glaube W8"
             ],
             "beschreibung": "Der Charakter kann einen Ort weihen und gegen übernatürliche Wesen schützen. Übernatürliche Kreaturen erleiden -2 auf alle Proben im geweihten Bereich.",
@@ -2641,7 +2641,7 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Arkane Fertigkeit W6"
             ],
             "beschreibung": "Einmal pro Begegnung kann der Charakter 2 Machtpunkte ohne Kosten regenerieren, indem er sich von einer düsteren Quelle inspirieren lässt.",
@@ -2657,9 +2657,9 @@
             "voraussetzungen": [
                 {
                     "oder": [
-                        "Arkaner Hintergrund (Dämonologe)",
-                        "Arkaner Hintergrund (Verdorbener)",
-                        "Arkaner Hintergrund (Hexenmeister/Hexe)"
+                        "AH (Dämonologe)",
+                        "AH (Verdorbener)",
+                        "AH (Hexenmeister/Hexe)"
                     ]
                 },
                 "Arkane Fertigkeit W10"
@@ -2675,7 +2675,7 @@
             "kategorie": "Profi",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Okkultismus W8"
             ],
             "beschreibung": "Kann mit der Macht Zombie die doppelte Anzahl an Untoten kontrollieren.",
@@ -2703,7 +2703,7 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)"
+                "AH (beliebig)"
             ],
             "beschreibung": "Der Charakter hat einen Pakt an einem Kreuzweg geschlossen. Beginnt mit einer zusätzlichen Macht, leidet aber unter einem vom SL bestimmten Nachteil.",
             "neue_maechte": 1,
@@ -2716,7 +2716,7 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Voodooist)",
+                "AH (Voodooist)",
                 "Glaube W8"
             ],
             "beschreibung": "Der Voodooist hat einen engen Kontakt zu einem bestimmten Loa, der zusätzliche Unterstützung gewährt.",

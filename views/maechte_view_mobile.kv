@@ -30,7 +30,7 @@
             id: search_input
             hint_text: 'Suche...'
             size_hint_x: None
-            width: dp(140)
+            width: dp(110)
             on_text: root.filter_maechte()
 
         MDScrollView:
@@ -48,6 +48,15 @@
                 spacing: dp(4)
 
                 TooltipFabButton:
+                    id: only_selected_button
+                    tooltip_text: "Nur ausgewählte / Alle"
+                    icon: "sort-bool-descending-variant" if not root.only_selected_items else "sort-bool-ascending-variant"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(36), dp(36)
+                    on_release: root.toggle_only_selected_items()
+
+                TooltipFabButton:
                     id: sort_name_btn
                     tooltip_text: "Name"
                     icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
@@ -59,23 +68,11 @@
                 TooltipFabButton:
                     id: sort_rank_btn
                     tooltip_text: "Rang"
-                    icon: "sort-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-descending"
+                    icon: "sort-numeric-ascending" if root.current_sort_option != 'Rang' or root.sort_order == 'asc' else "sort-numeric-descending"
                     style: "small"
                     size_hint: None, None
                     size: dp(36), dp(36)
                     on_release: root.update_sort_option('Rang')
-
-                MDButton:
-                    id: only_selected_button
-                    size_hint: None, None
-                    height: dp(36)
-                    on_release: root.toggle_only_selected_items()
-
-                    MDButtonText:
-                        text: "Gewählt" if not root.only_selected_items else "Alle"
-                        theme_text_color: "Primary" if not root.only_selected_items else "Custom"
-                        text_color: self.theme_cls.primaryColor if root.only_selected_items else self.theme_cls.onSurfaceColor
-                        font_size: dp(11)
 
     MDLabel:
         text: 'Mächte'

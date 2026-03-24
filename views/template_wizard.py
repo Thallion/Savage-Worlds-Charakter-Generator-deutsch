@@ -1102,9 +1102,9 @@ class TemplateWizardDialog:
             if hasattr(self.app, 'controller') and self.app.controller:
                 edges = self.app.controller.charakter.talente
                 return [e.name for e in edges.values()]
-            return ["Arkaner Hintergrund", "Kämpfer", "Gelehrter"]  # Fallback
+            return ["AH", "Kämpfer", "Gelehrter"]  # Fallback
         except:
-            return ["Arkaner Hintergrund", "Kämpfer", "Gelehrter"]
+            return ["AH", "Kämpfer", "Gelehrter"]
     
     def _get_available_powers(self):
         """Holt verfügbare Mächte aus dem aktuellen Setting"""

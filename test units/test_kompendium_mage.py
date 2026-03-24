@@ -21,7 +21,7 @@ UEBERSETZUNGSUEBERSICHT (EN -> DE im Fantasy Kompendium):
     Material Components -> Materialkomponenten
 
   Edges (Erstellung):
-    Arcane Background (Wizard) -> Arkaner Hintergrund (Magier)
+    Arcane Background (Wizard) -> AH (Magier)
       Freies Talent durch Mensch-Anpassungsfaehig
       Gibt 6 Maechte, 15 Machtpunkte, Arkane Fertigkeit: Zaubern (VER)
     Scholar -> Gelehrter (Experte, Recherche W8) - 2 HP
@@ -67,7 +67,7 @@ KOSTENAUFSTELLUNG (Fortgeschrittener Charakter):
   Attributpunkte: 5 Basis
   Fertigkeitspunkte: 12 Basis + 5 durch Alt = 17 verfuegbar, 15 benoetigt
   Handicap-Punkte: 4 (1 schwer + 2 leicht)
-    -> Freies Talent (Mensch): Arkaner Hintergrund (Magier) (0 HP)
+    -> Freies Talent (Mensch): AH (Magier) (0 HP)
     -> 2 Punkte fuer Gelehrter
     -> 2 Punkte fuer Zauberbuecher (automatisch HP weil > 1.5)
   Aufstiege: 4 (Fortgeschritten)
@@ -171,9 +171,9 @@ class TestMageUebersetzungen(unittest.TestCase):
     # Talente / Edges
     # ------------------------------------------------------------------
     def test_talent_ab_magier(self):
-        """Arkaner Hintergrund (Magier) muss als Talent im FK existieren."""
-        self.assertIn("Arkaner Hintergrund (Magier)", self.charakter.talente,
-                      "Arkaner Hintergrund (Magier) fehlt im FK")
+        """AH (Magier) muss als Talent im FK existieren."""
+        self.assertIn("AH (Magier)", self.charakter.talente,
+                      "AH (Magier) fehlt im FK")
 
     def test_talent_gelehrter(self):
         """Gelehrter (Scholar) muss als Talent im FK existieren."""
@@ -336,10 +336,10 @@ class TestMageCharakterErstellung(unittest.TestCase):
 
         # --- FREIES TALENT: AB Magier (Mensch-Bonus, 0 HP) ---
         # Gibt 6 Maechte, 15 Machtpunkte, Auto-Handicaps
-        if "Arkaner Hintergrund (Magier)" in self.charakter.talente:
+        if "AH (Magier)" in self.charakter.talente:
             hp_vor = self.charakter.verbleibende_handicap_punkte
             erfolg = waehle_freies_talent(self.charakter,
-                                          "Arkaner Hintergrund (Magier)")
+                                          "AH (Magier)")
             if erfolg == True:
                 hp_diff = hp_vor - self.charakter.verbleibende_handicap_punkte
                 kosten['talent_ab_hp'] = hp_diff
@@ -484,7 +484,7 @@ class TestMageCharakterErstellung(unittest.TestCase):
 
         hp_vor = self.charakter.verbleibende_handicap_punkte
         erfolg = waehle_freies_talent(self.charakter,
-                                      "Arkaner Hintergrund (Magier)")
+                                      "AH (Magier)")
         self.assertTrue(erfolg, "AB Magier konnte nicht als freies Talent gewaehlt werden")
 
         hp_nach = self.charakter.verbleibende_handicap_punkte
@@ -503,7 +503,7 @@ class TestMageCharakterErstellung(unittest.TestCase):
             for _ in range(count):
                 self.charakter.steigere_attribut(attr)
 
-        waehle_freies_talent(self.charakter, "Arkaner Hintergrund (Magier)")
+        waehle_freies_talent(self.charakter, "AH (Magier)")
 
         for auto_hc in ["Behindernde_Rüstung_schwer", "Materialkomponenten"]:
             if auto_hc in self.charakter.handicaps:
@@ -521,7 +521,7 @@ class TestMageCharakterErstellung(unittest.TestCase):
                             ('Willenskraft', 1)]:
             for _ in range(count):
                 self.charakter.steigere_attribut(attr)
-        waehle_freies_talent(self.charakter, "Arkaner Hintergrund (Magier)")
+        waehle_freies_talent(self.charakter, "AH (Magier)")
 
         hp_vor = self.charakter.verbleibende_handicap_punkte
         self.charakter.ignore_voraussetzungen = True
@@ -543,7 +543,7 @@ class TestMageCharakterErstellung(unittest.TestCase):
                             ('Willenskraft', 1)]:
             for _ in range(count):
                 self.charakter.steigere_attribut(attr)
-        waehle_freies_talent(self.charakter, "Arkaner Hintergrund (Magier)")
+        waehle_freies_talent(self.charakter, "AH (Magier)")
 
         # Gelehrter zuerst (2 HP)
         self.charakter.ignore_voraussetzungen = True

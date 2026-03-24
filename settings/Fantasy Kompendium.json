@@ -344,11 +344,11 @@
             ],
             "talente": [
                 "Charismatisch",
-                "Arkaner Hintergrund (Begabt)"
+                "AH (Begabt)"
             ],
             "besonderheiten": [
                 "Charismatisch (Talent kostenlos erhalten)",
-                "Gestaltwandeln (Arkaner Hintergrund Begabt + Macht Verkleiden mit Einschränkung Persönlich)"
+                "Gestaltwandeln (AH Begabt + Macht Verkleiden mit Einschränkung Persönlich)"
             ],
             "sprachen": [
                 "Gemeinsprache",
@@ -366,7 +366,7 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [
                     "Charismatisch",
-                    "Arkaner Hintergrund (Begabt)"
+                    "AH (Begabt)"
                 ],
                 "spezielle_effekte": {
                     "gestaltwandeln": true,
@@ -1380,8 +1380,8 @@
         ]
     },
     "talente": {
-        "Arkaner Hintergrund (Alchemist)": {
-            "name": "Arkaner Hintergrund (Alchemist)",
+        "AH (Alchemist)": {
+            "name": "AH (Alchemist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -1399,7 +1399,7 @@
             "kategorie": "Alchemist",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Alchemist)",
+                "AH (Alchemist)",
                 "Alchemie W8"
             ],
             "beschreibung": "Die Gebräue des Alchemisten halten eine Woche statt 48 Stunden, wenn sie an andere weitergegeben werden.",
@@ -1413,7 +1413,7 @@
             "kategorie": "Alchemist",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Alchemist)",
+                "AH (Alchemist)",
                 "Alchemie W10"
             ],
             "beschreibung": "Erlaubt die Herstellung permanenter Tränke zu halb so hohen Kosten mit improvisierten Vorräten oder einer Alchemistentasche.",
@@ -1422,8 +1422,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Barde)": {
-            "name": "Arkaner Hintergrund (Barde)",
+        "AH (Barde)": {
+            "name": "AH (Barde)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -1441,7 +1441,7 @@
             "kategorie": "Barde",
             "rang": "H",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Barde)"
+                "AH (Barde)"
             ],
             "beschreibung": "Löst Furcht aus und reduziert Proben von Feinden um -2, wenn sie Bennys verwenden. Der Barde muss singen oder ein Instrument spielen.",
             "neue_maechte": 0,
@@ -1454,7 +1454,7 @@
             "kategorie": "Barde",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Barde)",
+                "AH (Barde)",
                 "Darbietung W8"
             ],
             "beschreibung": "Erlaubt es, fünf Inspirations-Marker zu generieren, die Kameraden Boni auf Proben oder Schadenswürfe geben.",
@@ -1468,7 +1468,7 @@
             "kategorie": "Barde",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Barde)"
+                "AH (Barde)"
             ],
             "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
             "neue_maechte": 0,
@@ -1476,8 +1476,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Beschwörer)": {
-            "name": "Arkaner Hintergrund (Beschwörer)",
+        "AH (Beschwörer)": {
+            "name": "AH (Beschwörer)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -1490,8 +1490,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Diabolist)": {
-            "name": "Arkaner Hintergrund (Diabolist)",
+        "AH (Diabolist)": {
+            "name": "AH (Diabolist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1510,8 +1510,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Druide)": {
-            "name": "Arkaner Hintergrund (Druide)",
+        "AH (Druide)": {
+            "name": "AH (Druide)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1528,8 +1528,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Elementarist)": {
-            "name": "Arkaner Hintergrund (Elementarist)",
+        "AH (Elementarist)": {
+            "name": "AH (Elementarist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1544,8 +1544,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Illusionist)": {
-            "name": "Arkaner Hintergrund (Illusionist)",
+        "AH (Illusionist)": {
+            "name": "AH (Illusionist)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1560,8 +1560,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Kleriker)": {
-            "name": "Arkaner Hintergrund (Kleriker)",
+        "AH (Kleriker)": {
+            "name": "AH (Kleriker)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1576,8 +1576,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Magier)": {
-            "name": "Arkaner Hintergrund (Magier)",
+        "AH (Magier)": {
+            "name": "AH (Magier)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1593,8 +1593,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Nekromant)": {
-            "name": "Arkaner Hintergrund (Nekromant)",
+        "AH (Nekromant)": {
+            "name": "AH (Nekromant)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1609,8 +1609,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Schamane)": {
-            "name": "Arkaner Hintergrund (Schamane)",
+        "AH (Schamane)": {
+            "name": "AH (Schamane)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1627,8 +1627,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Tüftler)": {
-            "name": "Arkaner Hintergrund (Tüftler)",
+        "AH (Tüftler)": {
+            "name": "AH (Tüftler)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1640,8 +1640,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Zauberer)": {
-            "name": "Arkaner Hintergrund (Zauberer)",
+        "AH (Zauberer)": {
+            "name": "AH (Zauberer)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1657,8 +1657,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund (Hexer/Hexe)": {
-            "name": "Arkaner Hintergrund (Hexer/Hexe)",
+        "AH (Hexer/Hexe)": {
+            "name": "AH (Hexer/Hexe)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -1683,7 +1683,7 @@
             "kategorie": "Diabolist",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Diabolist)"
+                "AH (Diabolist)"
             ],
             "beschreibung": "Ermöglicht die Beschwörung von Dämonen, Geistern und bösartigen Kreaturen. Diener können als Aktion mit Machtpunkten beschworen werden.",
             "neue_maechte": 0,
@@ -1696,7 +1696,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Beschwörer)",
+                "AH (Beschwörer)",
                 "Tier beschwören"
             ],
             "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
@@ -1710,7 +1710,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Beschwörer)",
+                "AH (Beschwörer)",
                 "Monster beschwören"
             ],
             "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
@@ -1724,7 +1724,7 @@
             "kategorie": "Beschwörer",
             "rang": "H",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Beschwörer)",
+                "AH (Beschwörer)",
                 "Tier beschwören",
                 "Monster beschwören"
             ],
@@ -1739,7 +1739,7 @@
             "kategorie": "Diabolist",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Diabolist)"
+                "AH (Diabolist)"
             ],
             "beschreibung": "Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
             "neue_maechte": 0,
@@ -1752,7 +1752,7 @@
             "kategorie": "Diabolist",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Diabolist)"
+                "AH (Diabolist)"
             ],
             "beschreibung": "Verleiht +2 Rüstung durch eine höllische Aura, macht Heimlichkeit jedoch nahezu unmöglich.",
             "neue_maechte": 0,
@@ -1765,7 +1765,7 @@
             "kategorie": "Druide",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Druide)"
+                "AH (Druide)"
             ],
             "beschreibung": "Ein Kampfstab, der zusätzlichen Schaden verursacht und bei Verlust durch ein Ritual ersetzt werden kann.",
             "neue_maechte": 0,
@@ -1778,7 +1778,7 @@
             "kategorie": "Druide",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Druide)"
+                "AH (Druide)"
             ],
             "beschreibung": "Ermöglicht Druiden, in Tierform zu sprechen und Mächte zu wirken, mit Risiken bei längerem Verweilen in Tiergestalt.",
             "neue_maechte": 0,
@@ -1791,7 +1791,7 @@
             "kategorie": "Elementarmagier",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Elementarmagier)"
+                "AH (Elementarmagier)"
             ],
             "beschreibung": "Erhöht Robustheit um +2 während der Nutzung von Elementarsynergie.",
             "neue_maechte": 0,
@@ -1804,7 +1804,7 @@
             "kategorie": "Elementarmagier",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Elementarist)"
+                "AH (Elementarist)"
             ],
             "beschreibung": "Erlaubt die Beherrschung eines zusätzlichen Elements, Mächte können zwischen Elementen gewechselt werden.",
             "neue_maechte": 0,
@@ -1817,7 +1817,7 @@
             "kategorie": "Hexer/Hexe",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Hexer/Hexe)"
+                "AH (Hexer/Hexe)"
             ],
             "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
             "neue_maechte": 0,
@@ -1830,7 +1830,7 @@
             "kategorie": "Hexer/Hexe",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Hexer/Hexe)"
+                "AH (Hexer/Hexe)"
             ],
             "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
             "neue_maechte": 0,
@@ -1843,7 +1843,7 @@
             "kategorie": "Illusionist",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Illusionist)",
+                "AH (Illusionist)",
                 "Zaubern W10"
             ],
             "beschreibung": "Erlaubt den Einsatz des Machtmodifikators Tödliche Illusion ohne zusätzliche Machtpunkte.",
@@ -1857,7 +1857,7 @@
             "kategorie": "Illusionist",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Illusionist)",
+                "AH (Illusionist)",
                 "Zaubern W8"
             ],
             "beschreibung": "Illusionen erhalten die Machtmodifikatoren Beweglich und Geräusch ohne zusätzliche Machtpunkte.",
@@ -1871,7 +1871,7 @@
             "kategorie": "Kleriker",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Kleriker)"
+                "AH (Kleriker)"
             ],
             "beschreibung": "Kanalisierung positiver Energie, um Untote mit 2W6 (oder 3W6 für 2 Machtpunkte) Schaden zu treffen.",
             "neue_maechte": 0,
@@ -1884,7 +1884,7 @@
             "kategorie": "Kleriker",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Kleriker)",
+                "AH (Kleriker)",
                 "Glaube W8"
             ],
             "beschreibung": "Hebt Abgelenkt, Angeschlagen oder Verwundbar durch Einsatz von 1 Machtpunkt auf.",
@@ -1898,7 +1898,7 @@
             "kategorie": "Magier",
             "rang": "H",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Magier)"
+                "AH (Magier)"
             ],
             "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht mit einem Benny, solange Zugang zu Zauberbüchern besteht.",
             "neue_maechte": 0,
@@ -1911,7 +1911,7 @@
             "kategorie": "Magier",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Magie)"
+                "AH (Magie)"
             ],
             "beschreibung": "Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
             "neue_maechte": 0,
@@ -1924,7 +1924,7 @@
             "kategorie": "Nekromant",
             "rang": "L",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Nekromant)",
+                "AH (Nekromant)",
                 "Okkultismus W10"
             ],
             "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
@@ -1938,7 +1938,7 @@
             "kategorie": "Nekromant",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Nekromant)"
+                "AH (Nekromant)"
             ],
             "beschreibung": "Erhält einen untoten Tiergefährten mit speziellen Boni, ähnlich wie das Talent Vertrauter.",
             "neue_maechte": 0,
@@ -1951,7 +1951,7 @@
             "kategorie": "Schamane",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Schamane)"
+                "AH (Schamane)"
             ],
             "beschreibung": "Erhöht Schaden von Mächten um +2, verursacht jedoch bei Kritischen Fehlschlägen Betäubung im Umkreis.",
             "neue_maechte": 0,
@@ -1964,7 +1964,7 @@
             "kategorie": "Schamane",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Schamane)",
+                "AH (Schamane)",
                 "Glaube W8"
             ],
             "beschreibung": "Verleiht eine Freie Wurfwiederholung bei Glaubensproben, wenn ein geweihter Fetisch genutzt wird.",
@@ -1978,7 +1978,7 @@
             "kategorie": "Tüftler",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Tüftler)"
+                "AH (Tüftler)"
             ],
             "beschreibung": "Erhält einen mechanischen Tiergefährten mit speziellen Vorteilen, ähnlich wie das Talent Vertrauter.",
             "neue_maechte": 0,
@@ -1991,7 +1991,7 @@
             "kategorie": "Tüftler",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Tüftler)"
+                "AH (Tüftler)"
             ],
             "beschreibung": "Ermöglicht modifizierte Rüstung mit Boni auf Arme, Rumpf oder Beine, unterliegt jedoch Ausfällen bei Wunden.",
             "neue_maechte": 0,
@@ -2004,7 +2004,7 @@
             "kategorie": "Zauberer",
             "rang": "V",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Zauberer)"
+                "AH (Zauberer)"
             ],
             "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.",
             "neue_maechte": 0,
@@ -2017,7 +2017,7 @@
             "kategorie": "Zauberer",
             "rang": "H",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Zauberer)",
+                "AH (Zauberer)",
                 "Große Macht"
             ],
             "beschreibung": "Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.",
@@ -2210,7 +2210,7 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)"
+                "AH (beliebig)"
             ],
             "beschreibung": "Erlaubt die Herstellung von temporären Arkane Apparaturen und permanenter magischer Gegenstände.",
             "neue_maechte": 0,
@@ -2237,7 +2237,7 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Arkane Fertigkeit W8"
             ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
@@ -2251,7 +2251,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "eine böse Gesinnung"
             ],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
@@ -2265,7 +2265,7 @@
             "kategorie": "Macht",
             "rang": "V",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Arkane Fertigkeit W6"
             ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
@@ -2290,7 +2290,7 @@
             "kategorie": "Macht",
             "rang": "V",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)",
+                "AH (beliebig)",
                 "Arkane Fertigkeit W10"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
@@ -2304,7 +2304,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (jeder außer Barde)",
+                "AH (jeder außer Barde)",
                 "Okkultismus W8"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern ohne zu sprechen. Funktioniert auch unter Wasser, in einem Vakuum, oder innerhalb der Macht Stille.",
@@ -2318,7 +2318,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (beliebig)"
+                "AH (beliebig)"
             ],
             "beschreibung": "Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.",
             "neue_maechte": 0,
@@ -2331,7 +2331,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkaner Hintergrund (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
+                "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
             ],
             "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
             "neue_maechte": 0,

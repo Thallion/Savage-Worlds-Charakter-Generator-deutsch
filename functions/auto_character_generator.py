@@ -782,7 +782,7 @@ class AutoCharacterGenerator:
         talent_manager = get_talent_manager(charakter)
 
         for talent_name, talent_obj in charakter.talente.items():
-            if "arkaner hintergrund" in talent_name.lower():
+            if talent_name == "AH" or talent_name.startswith("AH (") or talent_name.startswith("AH:"):
                 if not talent_obj.ausgewaehlt:
                     # Über talent_auswaehlen aktivieren (löst Machtpunkte/Mächte-Erhöhung aus)
                     charakter.ignore_voraussetzungen = True

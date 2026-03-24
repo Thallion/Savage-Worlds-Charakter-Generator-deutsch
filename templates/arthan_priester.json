@@ -3,7 +3,7 @@
   "description": "Die Dunkelheit ist über das Land gekommen, aber du bist hier, um das Leid zu lindern und die Schwachen zu schützen.",
   "setting": "SWAE",
   "race": "Mensch",
-  "free_race_edge": "Arkaner Hintergrund",
+  "free_race_edge": "AH",
   "profile": {
     "age": "",
     "gender": "männlich",
@@ -88,7 +88,7 @@
     "parade_calculation": "Basis 5 + Kämpfen(W6)/2 = 5",
     "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 = 5, mit Kettenhemd +3 = 8",
     "bewegung": 6,
-    "machtpunkte_info": "10 Machtpunkte durch Arkaner Hintergrund (Wunder)"
+    "machtpunkte_info": "10 Machtpunkte durch AH (Wunder)"
   },
   "power_descriptions": {
     "Heilung": "3 Machtpunkte, Reichweite: Berührung, Wirkungsdauer: Sofort; Heilung entfernt Wunden, die weniger als eine Stunde alt sind. Ein Erfolg entfernt eine Wunde, eine Steigerung zwei.",

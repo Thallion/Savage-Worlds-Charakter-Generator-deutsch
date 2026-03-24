@@ -19,7 +19,7 @@ UEBERSETZUNGSUEBERSICHT (EN -> DE im Fantasy Kompendium):
     Vow (major) -> Schwur (schwer) - AUTO von AH (Kleriker)
 
   Edges:
-    Arcane Background (Cleric) -> Arkaner Hintergrund (Kleriker) (Hintergrund, Rang A)
+    Arcane Background (Cleric) -> AH (Kleriker) (Hintergrund, Rang A)
       EFFEKT: 5 Maechte, 10 Machtpunkte, Auto-Handicap Schwur (schwer)
       Arkane Fertigkeit: Glaube (Willenskraft)
     Champion -> Gnade (Kleriker, Rang A) - FK-ERSATZ
@@ -51,7 +51,7 @@ KOSTENAUFSTELLUNG (Fortgeschrittener Charakter):
   Attributpunkte: 5 Basis + 1 aus Handicap-Punkten = 6
   Fertigkeitspunkte: 12 Basis
   Handicap-Punkte: 4 (1 schwer + 2 leicht)
-    -> 2 Punkte fuer Talent "Arkaner Hintergrund (Kleriker)"
+    -> 2 Punkte fuer Talent "AH (Kleriker)"
     -> 2 Punkte fuer +1 Attributsteigerung
   Schwur (schwer): AUTO von AH (Kleriker), gibt keine HP
   Aufstiege: 4 (Fortgeschritten)
@@ -168,9 +168,9 @@ class TestClericUebersetzungen(unittest.TestCase):
     # Talente / Edges
     # ------------------------------------------------------------------
     def test_talent_ah_kleriker(self):
-        """Arkaner Hintergrund (Kleriker) muss als Talent im FK existieren."""
-        self.assertIn("Arkaner Hintergrund (Kleriker)", self.charakter.talente,
-                      "Arkaner Hintergrund (Kleriker) fehlt im FK")
+        """AH (Kleriker) muss als Talent im FK existieren."""
+        self.assertIn("AH (Kleriker)", self.charakter.talente,
+                      "AH (Kleriker) fehlt im FK")
 
     def test_talent_gnade(self):
         """Gnade muss als Kleriker-Talent im FK existieren (Champion-Ersatz)."""
@@ -319,9 +319,9 @@ class TestClericCharakterErstellung(unittest.TestCase):
 
         # --- NOVIZE-TALENT: AH (Kleriker) (2 HP) ---
         # Gibt 5 Maechte + 10 Machtpunkte + Auto-Handicap Schwur (schwer)
-        if "Arkaner Hintergrund (Kleriker)" in self.charakter.talente:
+        if "AH (Kleriker)" in self.charakter.talente:
             hp_vor = self.charakter.verbleibende_handicap_punkte
-            erfolg = waehle_talent(self.charakter, "Arkaner Hintergrund (Kleriker)")
+            erfolg = waehle_talent(self.charakter, "AH (Kleriker)")
             if erfolg:
                 hp_diff = hp_vor - self.charakter.verbleibende_handicap_punkte
                 kosten['talent_ah_kleriker_hp'] = hp_diff
@@ -438,11 +438,11 @@ class TestClericCharakterErstellung(unittest.TestCase):
                 self.charakter.steigere_attribut(attr)
 
         # AH (Kleriker) mit 2 verbleibenden HP kaufen
-        erfolg = waehle_talent(self.charakter, "Arkaner Hintergrund (Kleriker)")
+        erfolg = waehle_talent(self.charakter, "AH (Kleriker)")
         self.assertTrue(erfolg, "AH (Kleriker) konnte nicht gewaehlt werden")
 
         # AH (Kleriker) sollte ausgewaehlt sein
-        ah = self.charakter.talente.get("Arkaner Hintergrund (Kleriker)")
+        ah = self.charakter.talente.get("AH (Kleriker)")
         self.assertIsNotNone(ah, "AH (Kleriker) nicht gefunden")
         self.assertTrue(ah.ausgewaehlt, "AH (Kleriker) sollte ausgewaehlt sein")
 
@@ -513,7 +513,7 @@ class TestClericCharakterErstellung(unittest.TestCase):
         # Aufstiegs-Talente waehlen
         # HINWEIS: Champion existiert nicht im FK, daher Gnade als Ersatz.
         # Bevorzugte Macht hat generische Voraussetzung "Arkane Fertigkeit W8"
-        # und "Arkaner Hintergrund (beliebig)" - ggf. ignore_voraussetzungen noetig.
+        # und "AH (beliebig)" - ggf. ignore_voraussetzungen noetig.
         aufstiegs_talente = ["Gnade", "Heiler", "Machtpunkte", "Bevorzugte Macht"]
         gewaehlt = 0
         for talent_name in aufstiegs_talente:

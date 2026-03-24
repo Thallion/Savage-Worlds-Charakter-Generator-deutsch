@@ -562,8 +562,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Arkaner Hintergrund": {
-            "name": "Arkaner Hintergrund",
+        "AH": {
+            "name": "AH",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
