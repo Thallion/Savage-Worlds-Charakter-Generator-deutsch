@@ -5,6 +5,7 @@ Unterstützt Android (Share-Intent) und Desktop (xdg-open / open / Explorer).
 """
 
 import os
+import shutil
 import subprocess
 from pathlib import Path
 from kivy.logger import Logger
@@ -80,25 +81,81 @@ def get_mime_type(file_path):
     return mime_types.get(ext, '*/*')
 
 
+def _kopiere_in_share_verzeichnis(context, file_path):
+    """
+    Kopiert eine Datei in das externe Cache-Verzeichnis zum Teilen.
+
+    Dateien im internen App-Speicher sind für andere Apps nicht zugänglich.
+    Durch das Kopieren ins externe Cache-Verzeichnis wird der Zugriff ermöglicht.
+
+    Returns:
+        str: Pfad zur kopierten Datei im Share-Verzeichnis
+    """
+    cache_dir = context.getExternalCacheDir()
+    if cache_dir:
+        share_dir = os.path.join(cache_dir.getAbsolutePath(), 'share')
+    else:
+        # Fallback auf internen Cache
+        share_dir = os.path.join(context.getCacheDir().getAbsolutePath(), 'share')
+
+    os.makedirs(share_dir, exist_ok=True)
+    dest_path = os.path.join(share_dir, os.path.basename(file_path))
+    shutil.copy2(file_path, dest_path)
+    Logger.debug(f"Teilen: Datei kopiert nach {dest_path}")
+    return dest_path
+
+
+def _erzeuge_content_uri(context, file_path):
+    """
+    Erzeugt eine content:// URI für die Datei über FileProvider.
+
+    Falls FileProvider nicht konfiguriert ist (Manifest fehlt), wird als Fallback
+    StrictMode gelockert und eine file:// URI verwendet.
+
+    Returns:
+        Content-URI für die Datei
+    """
+    from jnius import autoclass
+
+    File = autoclass('java.io.File')
+    java_file = File(file_path)
+
+    # Versuch 1: FileProvider (bevorzugt, sicher)
+    try:
+        FileProvider = autoclass('androidx.core.content.FileProvider')
+        authority = context.getPackageName() + '.fileprovider'
+        content_uri = FileProvider.getUriForFile(context, authority, java_file)
+        Logger.debug(f"Teilen: FileProvider URI erzeugt für {os.path.basename(file_path)}")
+        return content_uri
+    except Exception as e:
+        Logger.warning(f"Teilen: FileProvider nicht verfügbar ({e}), verwende Fallback")
+
+    # Versuch 2: StrictMode lockern und file:// URI verwenden
+    # Notwendig auf Android 7+ (API 24+) wenn FileProvider nicht im Manifest konfiguriert ist
+    try:
+        StrictMode = autoclass('android.os.StrictMode')
+        Builder = autoclass('android.os.StrictMode$VmPolicy$Builder')
+        StrictMode.setVmPolicy(Builder().build())
+        Logger.debug("Teilen: StrictMode VmPolicy gelockert für file:// URI")
+    except Exception as e:
+        Logger.warning(f"Teilen: StrictMode konnte nicht angepasst werden: {e}")
+
+    Uri = autoclass('android.net.Uri')
+    return Uri.fromFile(java_file)
+
+
 def _share_on_android(file_path, mime_type, title):
     """Teilt eine Datei über Android Share-Intent mit FileProvider."""
     from jnius import autoclass
 
     Intent = autoclass('android.content.Intent')
-    File = autoclass('java.io.File')
     PythonActivity = autoclass('org.kivy.android.PythonActivity')
 
     context = PythonActivity.mActivity
-    java_file = File(file_path)
 
-    # FileProvider für sichere URI-Erzeugung verwenden
-    try:
-        FileProvider = autoclass('androidx.core.content.FileProvider')
-        authority = context.getPackageName() + '.fileprovider'
-        content_uri = FileProvider.getUriForFile(context, authority, java_file)
-    except Exception:
-        Uri = autoclass('android.net.Uri')
-        content_uri = Uri.fromFile(java_file)
+    # Datei ins teilbare Verzeichnis kopieren
+    share_path = _kopiere_in_share_verzeichnis(context, file_path)
+    content_uri = _erzeuge_content_uri(context, share_path)
 
     intent = Intent(Intent.ACTION_SEND)
     intent.setType(mime_type)
@@ -118,7 +175,6 @@ def _share_multiple_on_android(file_paths, mime_type, title):
     from jnius import autoclass
 
     Intent = autoclass('android.content.Intent')
-    File = autoclass('java.io.File')
     ArrayList = autoclass('java.util.ArrayList')
     PythonActivity = autoclass('org.kivy.android.PythonActivity')
 
@@ -126,14 +182,9 @@ def _share_multiple_on_android(file_paths, mime_type, title):
     uris = ArrayList()
 
     for file_path in file_paths:
-        java_file = File(file_path)
-        try:
-            FileProvider = autoclass('androidx.core.content.FileProvider')
-            authority = context.getPackageName() + '.fileprovider'
-            content_uri = FileProvider.getUriForFile(context, authority, java_file)
-        except Exception:
-            Uri = autoclass('android.net.Uri')
-            content_uri = Uri.fromFile(java_file)
+        # Jede Datei ins teilbare Verzeichnis kopieren
+        share_path = _kopiere_in_share_verzeichnis(context, file_path)
+        content_uri = _erzeuge_content_uri(context, share_path)
         uris.add(content_uri)
 
     intent = Intent(Intent.ACTION_SEND_MULTIPLE)

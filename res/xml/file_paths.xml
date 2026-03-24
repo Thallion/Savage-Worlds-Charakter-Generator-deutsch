@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- App-internes Dateiverzeichnis (user_data_dir) -->
+    <files-path name="files" path="." />
+    <!-- Externes Dateiverzeichnis -->
+    <external-files-path name="external_files" path="." />
+    <!-- Cache-Verzeichnis -->
+    <cache-path name="cache" path="." />
+    <!-- Externes Cache-Verzeichnis (fuer temporaere Share-Dateien) -->
+    <external-cache-path name="external_cache" path="." />
+</paths>
