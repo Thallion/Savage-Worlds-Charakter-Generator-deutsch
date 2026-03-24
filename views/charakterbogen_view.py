@@ -584,15 +584,20 @@ class CharakterbogenWidget(MDBoxLayout):
             eigenschaften = waffe.eigenschaften
             eigenschaften_text = self._format_waffen_eigenschaften(eigenschaften)
 
-            waffe_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
             weapon_label = LeftAlignedLabel(
                 text=f"{waffe.name}, {eigenschaften_text}",
                 font_size=LABEL_FONT_SIZE,
-                size_hint_x=0.8
+                size_hint_y=None,
+                height=ROW_HEIGHT,
+                markup=True
             )
-
-            waffe_layout.add_widget(weapon_label)
-            waffen_section.add_widget(waffe_layout)
+            # Dynamische Höhe für langen Waffen-Text
+            weapon_label.bind(
+                width=lambda inst, w: Clock.schedule_once(
+                    lambda dt, l=inst: self._update_label_height(l), 0
+                )
+            )
+            waffen_section.add_widget(weapon_label)
 
     def _format_waffen_eigenschaften(self, eigenschaften):
         """
@@ -624,16 +629,21 @@ class CharakterbogenWidget(MDBoxLayout):
         schilde = self._get_equipped_items_of_type(Schild)
 
         for schild in schilde:
-            schild_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
             schild_label = LeftAlignedLabel(
                 text=(f"{schild.name}, Parade={schild.parade}, Deckung={schild.deckung}, "
                       f"Mindeststärke={schild.mindeststaerke}"),
                 font_size=LABEL_FONT_SIZE,
-                size_hint_x=0.8
+                size_hint_y=None,
+                height=ROW_HEIGHT,
+                markup=True
             )
-
-            schild_layout.add_widget(schild_label)
-            schilde_section.add_widget(schild_layout)
+            # Dynamische Höhe für langen Schild-Text
+            schild_label.bind(
+                width=lambda inst, w: Clock.schedule_once(
+                    lambda dt, l=inst: self._update_label_height(l), 0
+                )
+            )
+            schilde_section.add_widget(schild_label)
 
     def _update_ruestungen_section(self):
         """
@@ -647,34 +657,44 @@ class CharakterbogenWidget(MDBoxLayout):
         ruestungen = self._get_equipped_items_of_type(Ruestung)
 
         for ruestung in ruestungen:
-            ruestung_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
             armor_label = LeftAlignedLabel(
                 text=self._format_ruestung_text(ruestung),
                 font_size=LABEL_FONT_SIZE,
-                size_hint_x=0.8
+                size_hint_y=None,
+                height=ROW_HEIGHT,
+                markup=True
             )
+            # Dynamische Höhe für langen Rüstungs-Text
+            armor_label.bind(
+                width=lambda inst, w: Clock.schedule_once(
+                    lambda dt, l=inst: self._update_label_height(l), 0
+                )
+            )
+            ruestungen_section.add_widget(armor_label)
 
-            ruestung_layout.add_widget(armor_label)
-            ruestungen_section.add_widget(ruestung_layout)
-        
         # Gesamtrüstungsschutz anzeigen
         gesamt_rs = self.charakter.berechne_gesamt_ruestungsschutz()
-        gesamt_layout = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=ROW_HEIGHT)
-        
+
         gesamt_text = (
             f"Gesamtrüstung: Torso={gesamt_rs['Torso']}, Arme={gesamt_rs['Arme']}, "
             f"Beine={gesamt_rs['Beine']}, Kopf={gesamt_rs['Kopf']}"
         )
-        
+
         gesamt_label = LeftAlignedLabel(
             text=gesamt_text,
             font_size=LABEL_FONT_SIZE,
             bold=True,
-            size_hint_x=0.8
+            size_hint_y=None,
+            height=ROW_HEIGHT,
+            markup=True
         )
-        
-        gesamt_layout.add_widget(gesamt_label)
-        ruestungen_section.add_widget(gesamt_layout)
+        # Dynamische Höhe für Gesamtrüstungs-Text
+        gesamt_label.bind(
+            width=lambda inst, w: Clock.schedule_once(
+                lambda dt, l=inst: self._update_label_height(l), 0
+            )
+        )
+        ruestungen_section.add_widget(gesamt_label)
 
     def _format_ruestung_text(self, ruestung):
         """
