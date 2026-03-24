@@ -452,6 +452,32 @@ class SW_Charakter_GeneratorApp(MDApp):
         # um Race-Condition bei Android-Startup zu vermeiden
         Clock.schedule_once(lambda dt: self.build_tabs_and_screens_immediate(), 0.5)
 
+        # Android: Intent-Handler für empfangene JSON-Dateien registrieren
+        self._setup_android_intent_handler()
+
+    def _setup_android_intent_handler(self):
+        """Registriert den Android Intent-Handler für eingehende Dateien (Teilen/Öffnen mit)."""
+        from kivy.utils import platform as kivy_platform
+        if kivy_platform != 'android':
+            return
+
+        try:
+            from jnius import autoclass
+            from utils.intent_handler import handle_incoming_intent, handle_new_intent
+
+            # Intent verarbeiten, mit dem die App gestartet wurde
+            # Verzögert, damit UI vollständig initialisiert ist
+            Clock.schedule_once(lambda dt: handle_incoming_intent(self), 2.0)
+
+            # Listener für neue Intents registrieren (App bereits im Vordergrund)
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            activity = PythonActivity.mActivity
+            activity.bind(on_new_intent=lambda intent: handle_new_intent(self, intent))
+            Logger.info("Android Intent-Handler registriert")
+
+        except Exception as e:
+            Logger.warning(f"Android Intent-Handler konnte nicht registriert werden: {e}")
+
     def build_tabs_and_screens_immediate(self):
         """Erstellt die Tabs und Screen-Inhalte sofort (wie in main_backup.py)"""
         try:
