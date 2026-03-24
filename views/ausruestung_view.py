@@ -419,7 +419,9 @@ class AusruestungItemRow(MDBoxLayout):
                 Logger.debug(f"Cyberware-Kauf fehlgeschlagen: {self.name}")
                 self._refresh_ui()
                 self._zeige_cyberware_kauf_fehler(controller, self.name)
-                self._show_kauf_warnung(1)
+                # Vermögen-Warnung nur bei tatsächlich nicht ausreichendem Vermögen
+                if controller.charakter.vermoegen < effektiver_preis:
+                    self._show_kauf_warnung(1)
         except Exception as e:
             Logger.error(f"Fehler beim konfigurierten Cyberware-Kauf: {e}")
             self.show_error("Ein unerwarteter Fehler ist aufgetreten.")
@@ -497,8 +499,10 @@ class AusruestungItemRow(MDBoxLayout):
                 self._refresh_ui()
                 # Cyberware: Zeige spezifische Fehlermeldung bei Stress-Überschreitung
                 self._zeige_cyberware_kauf_fehler(controller, self.name)
-                # Snackbar-Warnung bei nicht ausreichendem Vermögen
-                self._show_kauf_warnung(anzahl)
+                # Snackbar-Warnung nur bei tatsächlich nicht ausreichendem Vermögen
+                aktueller_preis = preis or self.kosten
+                if controller.charakter.vermoegen < aktueller_preis * anzahl:
+                    self._show_kauf_warnung(anzahl)
 
         except Exception as e:
             Logger.error(f"Fehler beim Verarbeiten des Kaufs: {str(e)}")
