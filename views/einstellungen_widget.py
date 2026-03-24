@@ -537,45 +537,36 @@ class EinstellungenWidget(MDBoxLayout):
     def _show_simple_dialog(self, title, message):
         """Zeigt einen einfachen Dialog"""
         try:
-            from kivymd.uix.dialog import MDDialog
+            from kivymd.uix.dialog import (
+                MDDialog, MDDialogHeadlineText, MDDialogContentContainer,
+                MDDialogButtonContainer
+            )
             from kivymd.uix.label import MDLabel
             from kivymd.uix.button import MDButton, MDButtonText
-            from kivymd.uix.boxlayout import MDBoxLayout
-            
-            # Content mit MDBoxLayout umhüllen
-            content = MDBoxLayout(
-                orientation="vertical",
-                adaptive_height=True,
-                padding="12dp"
+
+            dialog = MDDialog(
+                MDDialogHeadlineText(text=title),
+                MDDialogContentContainer(
+                    MDLabel(
+                        text=message,
+                        theme_text_color="Primary",
+                        halign="left",
+                    ),
+                    orientation="vertical",
+                ),
+                MDDialogButtonContainer(
+                    MDButton(
+                        MDButtonText(text="OK"),
+                        style="text",
+                        on_release=lambda x: dialog.dismiss(),
+                    ),
+                    spacing="8dp",
+                ),
+                size_hint=(0.85, None),
+                auto_dismiss=True,
             )
-            
-            label = MDLabel(
-                text=message,
-                theme_text_color="Primary",
-                halign="left",
-                valign="top",
-                text_size=(None, None)
-            )
-            label.bind(texture_size=label.setter('size'))
-            content.add_widget(label)
-            
-            # Einfacher Dialog ohne veraltete Parameter
-            dialog = MDDialog()
-            dialog.title = title
-            dialog.content_cls = content
-            dialog.size_hint = (0.85, None)
-            dialog.height = "200dp"
-            
-            # Button hinzufügen
-            from kivymd.uix.button import MDButton, MDButtonText
-            ok_button = MDButton(
-                MDButtonText(text="OK"),
-                on_release=lambda x: dialog.dismiss()
-            )
-            dialog.add_widget(ok_button)
-            
             dialog.open()
-            
+
         except Exception as e:
             # Fallback: Nur Logger verwenden
             Logger.info(f"Dialog-Fallback - {title}: {message}")

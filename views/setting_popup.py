@@ -229,17 +229,19 @@ class AddSettingPopup(MDBoxLayout, BaseFileManagerMixin):
             self.close_file_manager()
 
     def show_error(self, message):
-        error_dialog = MDDialog(auto_dismiss=True)
-        error_dialog.size_hint = (0.85, None)
-        error_container = MDBoxLayout(orientation="vertical", padding="12dp", spacing="12dp")
-        label = MDLabel(text=message, halign="center")
-        error_container.add_widget(label)
-        btn_container = MDBoxLayout(orientation="horizontal", spacing="12dp",
-                                    size_hint_y=None, height="40dp")
-        btn_cancel = create_text_button("Schließen", lambda x: error_dialog.dismiss())
-        btn_container.add_widget(btn_cancel)
-        error_container.add_widget(btn_container)
-        error_dialog.add_widget(error_container)
+        error_dialog = MDDialog(
+            MDDialogHeadlineText(text="Fehler"),
+            MDDialogContentContainer(
+                MDLabel(text=message, halign="center"),
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                create_text_button("Schließen", lambda x: error_dialog.dismiss()),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=True,
+        )
         error_dialog.open()
 
 class LoadSettingPopup(MDBoxLayout, BaseFileManagerMixin):
@@ -271,17 +273,19 @@ class LoadSettingPopup(MDBoxLayout, BaseFileManagerMixin):
                 self.popup.dismiss()
 
     def show_error(self, message, title="Fehler"):
-        error_dialog = MDDialog(auto_dismiss=True)
-        error_dialog.size_hint = (0.85, None)
-        error_container = MDBoxLayout(orientation="vertical", padding="12dp", spacing="12dp")
-        label = MDLabel(text=message, halign="center")
-        error_container.add_widget(label)
-        btn_container = MDBoxLayout(orientation="horizontal", spacing="12dp",
-                                    size_hint_y=None, height="40dp")
-        btn_cancel = create_text_button("Schließen", lambda x: error_dialog.dismiss())
-        btn_container.add_widget(btn_cancel)
-        error_container.add_widget(btn_container)
-        error_dialog.add_widget(error_container)
+        error_dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(
+                MDLabel(text=message, halign="center"),
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                create_text_button("Schließen", lambda x: error_dialog.dismiss()),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=True,
+        )
         error_dialog.open()
 
 class DeleteSettingPopup(MDBoxLayout, BaseFileManagerMixin):
@@ -308,17 +312,19 @@ class DeleteSettingPopup(MDBoxLayout, BaseFileManagerMixin):
                 self.popup.dismiss()
 
     def show_error(self, message, title="Fehler"):
-        error_dialog = MDDialog(auto_dismiss=True)
-        error_dialog.size_hint = (0.85, None)
-        error_container = MDBoxLayout(orientation="vertical", padding="12dp", spacing="12dp")
-        label = MDLabel(text=message, halign="center")
-        error_container.add_widget(label)
-        btn_container = MDBoxLayout(orientation="horizontal", spacing="12dp",
-                                    size_hint_y=None, height="40dp")
-        btn_cancel = create_text_button("Schließen", lambda x: error_dialog.dismiss())
-        btn_container.add_widget(btn_cancel)
-        error_container.add_widget(btn_container)
-        error_dialog.add_widget(error_container)
+        error_dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(
+                MDLabel(text=message, halign="center"),
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                create_text_button("Schließen", lambda x: error_dialog.dismiss()),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=True,
+        )
         error_dialog.open()
 
 # Controller: Verknüpft die Dialoge (Views) mit dem Domain-Repository
@@ -352,38 +358,40 @@ class SettingDialogHandler:
     def open_load_setting_popup(self):
         popup_content = LoadSettingPopup(controller=self.controller)
         popup_content.repository = self.repository
-        container = MDBoxLayout(orientation="vertical", spacing="12dp", padding="12dp")
-        title_label = MDLabel(text="Setting laden", halign="center",
-                              font_style="Title", size_hint_y=None, height="40dp")
-        container.add_widget(title_label)
-        container.add_widget(popup_content)
-        btn_container = MDBoxLayout(orientation="horizontal", spacing="12dp",
-                                    size_hint_y=None, height="40dp")
-        btn_cancel = create_text_button("Abbrechen", lambda x: self.dialog.dismiss())
-        btn_container.add_widget(btn_cancel)
-        container.add_widget(btn_container)
-        self.dialog = MDDialog(auto_dismiss=False)
-        self.dialog.size_hint = (0.85, None)
-        self.dialog.add_widget(container)
+
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(text="Setting laden"),
+            MDDialogContentContainer(
+                popup_content,
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                create_text_button("Abbrechen", lambda x: self.dialog.dismiss()),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
         popup_content.popup = self.dialog
         self.dialog.open()
 
     def open_delete_setting_popup(self):
         popup_content = DeleteSettingPopup(controller=self.controller)
         popup_content.repository = self.repository
-        container = MDBoxLayout(orientation="vertical", spacing="12dp", padding="12dp")
-        title_label = MDLabel(text="Setting löschen", halign="center",
-                              font_style="Title", size_hint_y=None, height="40dp")
-        container.add_widget(title_label)
-        container.add_widget(popup_content)
-        btn_container = MDBoxLayout(orientation="horizontal", spacing="12dp",
-                                    size_hint_y=None, height="40dp")
-        btn_cancel = create_text_button("Abbrechen", lambda x: self.dialog.dismiss())
-        btn_container.add_widget(btn_cancel)
-        container.add_widget(btn_container)
-        self.dialog = MDDialog(auto_dismiss=False)
-        self.dialog.size_hint = (0.85, None)
-        self.dialog.add_widget(container)
+
+        self.dialog = MDDialog(
+            MDDialogHeadlineText(text="Setting löschen"),
+            MDDialogContentContainer(
+                popup_content,
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                create_text_button("Abbrechen", lambda x: self.dialog.dismiss()),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
         popup_content.popup = self.dialog
         popup_content.show_file_manager_popup()  # Direktstart der Dateiauswahl
         self.dialog.open()
