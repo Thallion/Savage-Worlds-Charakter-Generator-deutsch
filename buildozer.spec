@@ -203,7 +203,8 @@ android.accept_sdk_license = True
 # 3) A directory, here 'legal_resources' must contain one or more directories, 
 # each of a resource kind:  drawable, xml, etc...
 # android.add_resources = legal_resources
-#android.add_resources =
+# FileProvider-Konfiguration fuer Datei-Versenden (Share-Intent)
+android.add_resources = res/xml/file_paths.xml:xml/file_paths.xml
 
 # (list) Gradle dependencies to add
 android.gradle_dependencies = androidx.core:core-ktx:1.15.0, androidx.core:core:1.6.0

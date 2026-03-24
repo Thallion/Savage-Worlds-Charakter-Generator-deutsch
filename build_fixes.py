@@ -114,6 +114,65 @@ def fix_kivy_python3_compatibility():
     return fixed_any
 
 
+def fix_android_manifest_fileprovider():
+    """Fügt FileProvider-Deklaration in AndroidManifest.xml ein (für Datei-Versenden)."""
+    print("P4A Hook: Checking AndroidManifest.xml for FileProvider...")
+
+    platform_dir = Path(".buildozer/android/platform")
+    if not platform_dir.exists():
+        print("P4A Hook: Platform directory not found, skipping FileProvider fix")
+        return False
+
+    # AndroidManifest.xml in allen Build-Verzeichnissen suchen
+    manifest_files = list(platform_dir.glob("build-*/dists/*/src/main/AndroidManifest.xml"))
+    if not manifest_files:
+        # Alternativer Pfad
+        manifest_files = list(platform_dir.glob("build-*/dists/*/AndroidManifest.xml"))
+
+    if not manifest_files:
+        print("P4A Hook: No AndroidManifest.xml found, skipping FileProvider fix")
+        return False
+
+    fileprovider_xml = '''
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>'''
+
+    fixed_any = False
+    for manifest_file in manifest_files:
+        try:
+            with open(manifest_file, 'r') as f:
+                content = f.read()
+
+            if 'FileProvider' in content:
+                print(f"P4A Hook: FileProvider already present in {manifest_file.name}")
+                continue
+
+            # Vor </application> einfügen
+            if '</application>' in content:
+                content = content.replace(
+                    '</application>',
+                    f'{fileprovider_xml}\n    </application>'
+                )
+                with open(manifest_file, 'w') as f:
+                    f.write(content)
+                print(f"P4A Hook: FileProvider added to {manifest_file}")
+                fixed_any = True
+            else:
+                print(f"P4A Hook: </application> not found in {manifest_file}")
+
+        except Exception as e:
+            print(f"P4A Hook: Error fixing manifest {manifest_file}: {e}")
+
+    return fixed_any
+
+
 def fix_pyjnius_python3_compatibility():
     """Fix Python 3+ / Cython 3.x compatibility issues in ALL pyjnius .pxi files"""
     print("P4A Hook: Searching for pyjnius build directories...")
@@ -200,6 +259,7 @@ def before_apk_build(toolchain):
     print("P4A Hook (before_apk_build): Applying build fixes...")
     fix_kivy_python3_compatibility()
     fix_pyjnius_python3_compatibility()
+    fix_android_manifest_fileprovider()
 
 
 if __name__ == "__main__":
