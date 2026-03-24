@@ -59,11 +59,14 @@ class HTMLManager:
 
     def _create_html_options_content(self, exists, existing_name, existing_path):
         """Erstellt den Inhalt für den HTML-Options-Dialog"""
+        # Höhe anpassen: mit existierender HTML brauchen wir mehr Platz
+        # für Info-Label und Überschreiben-Button
+        content_height = dp(260) if exists else dp(200)
         content = MDBoxLayout(
             orientation='vertical',
             spacing=dp(16),
             size_hint_y=None,
-            height=dp(200),
+            height=content_height,
             padding=dp(16)
         )
 
@@ -90,12 +93,13 @@ class HTMLManager:
 
         content.add_widget(checkbox_container)
 
-        # Buttons
+        # Buttons - bei zwei Buttons mehr Höhe benötigt
+        buttons_height = dp(100) if exists else dp(52)
         buttons_container = MDBoxLayout(
             orientation='vertical',
             spacing=dp(12),
             size_hint_y=None,
-            height=dp(100)
+            height=buttons_height
         )
 
         if exists:
