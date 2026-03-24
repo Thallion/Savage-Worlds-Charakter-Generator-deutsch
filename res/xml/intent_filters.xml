@@ -1,0 +1,32 @@
+<intent-filter>
+    <!-- Empfange JSON-Dateien über "Öffnen mit" (ACTION_VIEW) -->
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="content" />
+    <data android:scheme="file" />
+    <data android:mimeType="application/json" />
+</intent-filter>
+<intent-filter>
+    <!-- Empfange JSON-Dateien über "Teilen" (ACTION_SEND) -->
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="application/json" />
+</intent-filter>
+<intent-filter>
+    <!-- Fallback: Manche Apps senden JSON als text/plain -->
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:scheme="content" />
+    <data android:scheme="file" />
+    <data android:mimeType="application/octet-stream" />
+    <data android:pathPattern=".*\\.json" />
+</intent-filter>
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:scheme="content" />
+    <data android:scheme="file" />
+    <data android:mimeType="text/plain" />
+    <data android:pathPattern=".*\\.json" />
+</intent-filter>

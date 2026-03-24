@@ -242,13 +242,15 @@ android.enable_androidx = True
 #android.ouya.icon.filename = %(source.dir)s/data/ouya_icon.png
 
 # (str) XML file to include as an intent filters in <activity> tag
-#android.manifest.intent_filters =
+# Empfange JSON-Dateien über "Teilen" und "Öffnen mit" (Charakter/Settings Import)
+android.manifest.intent_filters = res/xml/intent_filters.xml
 
 # (list) Copy these files to src/main/res/xml/ (used for example with intent-filters)
 #android.res_xml = PATH_TO_FILE,
 
 # (str) launchMode to set for the main activity
-#android.manifest.launch_mode = standard
+# singleTask: Wiederverwendung der Activity bei Intent-Empfang (statt neue Instanz)
+android.manifest.launch_mode = singleTask
 
 # (str) screenOrientation to set for the main activity.
 # Valid values can be found at https://developer.android.com/guide/topics/manifest/activity-element
