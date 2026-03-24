@@ -28,7 +28,7 @@ from kivymd.uix.dialog import (
     MDDialog, MDDialogHeadlineText, MDDialogContentContainer,
     MDDialogButtonContainer
 )
-from kivymd.uix.filemanager import MDFileManager
+from utils.custom_filemanager import CustomFileManager
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDButton, MDButtonText
@@ -184,7 +184,7 @@ class BaseFileManagerMixin:
     file_manager = None
 
     def open_file_manager(self, settings_dir, select_callback):
-        self.file_manager = MDFileManager(
+        self.file_manager = CustomFileManager(
             exit_manager=self.close_file_manager,
             select_path=select_callback,
             ext=[".json"],
