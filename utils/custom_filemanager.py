@@ -33,8 +33,9 @@ class CustomFileManager(MDFileManager):
                 grid = rv.children[0]  # RecycleGridLayout
                 # Kivy padding: [left, top, right, bottom]
                 # Standard ist "10dp" (alle Seiten gleich)
-                # Bottom auf 80dp setzen (FAB dp(72) + Puffer)
-                grid.padding = [dp(10), dp(10), dp(10), dp(80)]
+                # Top auf 20dp für Pfadanzeige-Abstand, Bottom auf 100dp
+                # (FAB dp(72) + Navigationsleiste + Puffer)
+                grid.padding = [dp(10), dp(20), dp(10), dp(100)]
                 Logger.info("CustomFileManager: Android Bottom-Padding gesetzt")
         except Exception as e:
             Logger.warning(f"CustomFileManager: Bottom-Padding konnte nicht gesetzt werden: {e}")
@@ -48,7 +49,7 @@ class CustomFileManager(MDFileManager):
             # Standard KivyMD setzt y=dp(12), was verdeckt wird
             fab_y = dp(12)
             if platform == 'android':
-                fab_y = dp(72)
+                fab_y = dp(88)
 
             self.selection_button = MDFabButton(
                 on_release=self.select_directory_on_press_button,
