@@ -83,26 +83,56 @@ def get_mime_type(file_path):
 
 def _kopiere_in_share_verzeichnis(context, file_path):
     """
-    Kopiert eine Datei in das externe Cache-Verzeichnis zum Teilen.
+    Kopiert eine Datei in ein Cache-Verzeichnis zum Teilen.
 
     Dateien im internen App-Speicher sind für andere Apps nicht zugänglich.
-    Durch das Kopieren ins externe Cache-Verzeichnis wird der Zugriff ermöglicht.
+    Durch das Kopieren ins Cache-Verzeichnis wird der Zugriff ermöglicht.
+
+    Versucht zuerst das externe Cache-Verzeichnis, dann den internen Cache
+    als Fallback bei Berechtigungsproblemen.
 
     Returns:
         str: Pfad zur kopierten Datei im Share-Verzeichnis
     """
-    cache_dir = context.getExternalCacheDir()
-    if cache_dir:
-        share_dir = os.path.join(cache_dir.getAbsolutePath(), 'share')
-    else:
-        # Fallback auf internen Cache
-        share_dir = os.path.join(context.getCacheDir().getAbsolutePath(), 'share')
+    # Mögliche Cache-Verzeichnisse in Prioritätsreihenfolge
+    cache_dirs = []
+    ext_cache = context.getExternalCacheDir()
+    if ext_cache:
+        cache_dirs.append(ext_cache.getAbsolutePath())
+    int_cache = context.getCacheDir()
+    if int_cache:
+        cache_dirs.append(int_cache.getAbsolutePath())
 
-    os.makedirs(share_dir, exist_ok=True)
-    dest_path = os.path.join(share_dir, os.path.basename(file_path))
-    shutil.copy2(file_path, dest_path)
-    Logger.debug(f"Teilen: Datei kopiert nach {dest_path}")
-    return dest_path
+    if not cache_dirs:
+        raise OSError("Kein Cache-Verzeichnis verfügbar")
+
+    dest_filename = os.path.basename(file_path)
+    last_error = None
+
+    for cache_base in cache_dirs:
+        share_dir = os.path.join(cache_base, 'share')
+        try:
+            os.makedirs(share_dir, exist_ok=True)
+            dest_path = os.path.join(share_dir, dest_filename)
+            # shutil.copy statt copy2 - copy2 kann auf Android bei
+            # Metadaten (Timestamps/Permissions) fehlschlagen
+            shutil.copy(file_path, dest_path)
+            Logger.debug(f"Teilen: Datei kopiert nach {dest_path}")
+            return dest_path
+        except PermissionError as e:
+            Logger.warning(
+                f"Teilen: Kein Zugriff auf {share_dir}, versuche nächstes Verzeichnis: {e}"
+            )
+            last_error = e
+            continue
+        except OSError as e:
+            Logger.warning(
+                f"Teilen: Fehler bei {share_dir}, versuche nächstes Verzeichnis: {e}"
+            )
+            last_error = e
+            continue
+
+    raise last_error or OSError("Keine beschreibbares Cache-Verzeichnis gefunden")
 
 
 def _erzeuge_content_uri(context, file_path):
