@@ -16,6 +16,7 @@ from services.html_service import HTMLService
 from services.dialog_service import DialogService
 from services.event_service import EventService
 from services.config_service import ConfigService
+from services.backup_service import BackupService
 
 
 class ServiceContainer:
@@ -53,6 +54,7 @@ class ServiceContainer:
             self._services['config'] = ConfigService()
             self._services['event'] = EventService()
             self._services['theme'] = ThemeService()
+            self._services['backup'] = BackupService(self._services['config'])
             
             # Controller-abhängige Services
             if charakter_controller:
@@ -118,6 +120,10 @@ class ServiceContainer:
         """Gibt den Config-Service zurück"""
         return self.get_service('config')
     
+    def get_backup_service(self) -> Optional[BackupService]:
+        """Gibt den Backup-Service zurück"""
+        return self.get_service('backup')
+
     def get_charakter_controller(self):
         """Gibt den Charakter-Controller zurück"""
         return self.get_service('charakter_controller')
@@ -247,3 +253,7 @@ def get_event_service() -> Optional[EventService]:
 def get_config_service() -> Optional[ConfigService]:
     """Gibt den Config-Service zurück"""
     return service_container.get_config_service()
+
+def get_backup_service() -> Optional[BackupService]:
+    """Gibt den Backup-Service zurück"""
+    return service_container.get_backup_service()

@@ -420,6 +420,16 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.warning(f"Settings-Migration fehlgeschlagen: {e}")
 
+    def _erstelle_auto_backup(self):
+        """Erstellt ein automatisches Backup der Benutzerdaten beim App-Start."""
+        try:
+            from services.service_container import service_container
+            backup_service = service_container.get_backup_service()
+            if backup_service:
+                backup_service.erstelle_backup()
+        except Exception as e:
+            Logger.warning(f"Auto-Backup fehlgeschlagen: {e}")
+
     def on_start(self):
         """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""
         Logger.info("=== App-Start gestartet ===")
@@ -429,6 +439,9 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         # Settings auf Android ins persistente Verzeichnis migrieren
         self._migrate_settings_on_android()
+
+        # Automatisches Backup der Benutzerdaten erstellen
+        self._erstelle_auto_backup()
 
         # Fenster maximieren
         Window.maximize()

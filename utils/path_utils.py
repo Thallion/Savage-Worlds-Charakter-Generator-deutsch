@@ -173,6 +173,32 @@ def get_user_settings_path(filename: str = "") -> str:
     else:
         return str(base)
 
+def get_backup_path(filename: str = "") -> str:
+    """
+    Gibt den Pfad zum Backup-Verzeichnis oder einer spezifischen Backup-Datei zurück.
+
+    Auf Android wird ein persistentes Verzeichnis verwendet, das App-Updates überlebt.
+    Auf Desktop wird das Projektverzeichnis verwendet.
+
+    Args:
+        filename (str): Optional - Name der Backup-Datei
+
+    Returns:
+        str: Pfad zum Backup-Verzeichnis oder zur Backup-Datei
+    """
+    from kivy.utils import platform as kivy_platform
+
+    if kivy_platform == 'android':
+        base = Path(_get_android_user_data_dir()) / 'backups'
+    else:
+        base = Path(get_resource_path("backups"))
+
+    if filename:
+        return str(base / filename)
+    else:
+        return str(base)
+
+
 def get_templates_path(filename: str = "") -> str:
     """
     Gibt den Pfad zum Templates-Verzeichnis oder einer spezifischen Template-Datei zurück.
