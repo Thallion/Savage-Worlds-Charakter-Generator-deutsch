@@ -166,6 +166,12 @@ class SW_Charakter_GeneratorApp(MDApp):
         ]
 
     def build(self):
+        # Auf Android: Fenster automatisch verschieben, damit die Tastatur
+        # das fokussierte Textfeld nicht überdeckt
+        from kivy.utils import platform as _platform
+        if _platform == 'android':
+            Window.softinput_mode = 'below_target'
+
         # KORRIGIERT: Theme aus Config laden (Service Container ist bereits initialisiert)
         self.load_theme_from_config()
         return self.load_main_kv()
