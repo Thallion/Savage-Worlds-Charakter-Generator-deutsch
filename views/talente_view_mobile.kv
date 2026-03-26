@@ -146,7 +146,7 @@
     # Name - responsiv mit Obergrenze
     MDLabel:
         text: root.talent_name
-        font_size: dp(13)
+        font_size: dp(11)
         size_hint_x: None
         width: min(dp(260), self.parent.width - dp(220)) if self.parent else dp(200)
         halign: 'left'
@@ -158,7 +158,7 @@
     # Kategorie - breiter im Landscape
     MDLabel:
         text: root.kategorie
-        font_size: dp(11)
+        font_size: dp(9)
         size_hint_x: None
         width: dp(70) if (self.parent and self.parent.width > dp(400)) else dp(44)
         halign: 'left'
@@ -170,7 +170,7 @@
     # Rang kompakt
     MDLabel:
         text: root.rang
-        font_size: dp(11)
+        font_size: dp(9)
         size_hint_x: None
         width: dp(18)
         halign: 'center'
