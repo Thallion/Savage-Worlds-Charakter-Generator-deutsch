@@ -201,7 +201,7 @@ class MachtItemRow(MDBoxLayout):
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_warning_dialog(
-                    "Keine verfügbaren Mächte mehr. Erst weitere durch Talente oder Aufstiege erwerben."
+                    "Keine Mächte verfügbar. Erst durch Talente/Aufstiege erwerben."
                 )
         except Exception as e:
             Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")

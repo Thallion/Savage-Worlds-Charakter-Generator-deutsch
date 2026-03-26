@@ -806,7 +806,7 @@ class EigenschaftenItemRow(MDBoxLayout):
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_warning_dialog(
-                    f"Nicht genügend Punkte, um {name} zu steigern."
+                    f"Nicht genug Punkte für {name}."
                 )
         except Exception as e:
             Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")

@@ -1313,7 +1313,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
                     dialog_service.show_warning_dialog(
-                        "Das Versenden konnte nicht gestartet werden."
+                        "Versenden fehlgeschlagen."
                     )
         except Exception as e:
             Logger.error(f"Fehler beim Versenden: {e}")
@@ -1354,7 +1354,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
                     dialog_service.show_warning_dialog(
-                        "Das Versenden konnte nicht gestartet werden."
+                        "Versenden fehlgeschlagen."
                     )
         except Exception as e:
             Logger.error(f"Fehler beim Versenden des Settings: {e}")

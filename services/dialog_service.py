@@ -626,8 +626,7 @@ class DialogService:
         
         if success:
             self.show_success_dialog(
-                "Der Statblock wurde in die Zwischenablage kopiert.",
-                "Kopiert"
+                "Statblock in Zwischenablage kopiert."
             )
         else:
             self.show_error_dialog(

@@ -185,8 +185,7 @@ class CharacterHandler:
                 dialog_service = service_container.get_dialog_service()
                 if success and dialog_service:
                     dialog_service.show_success_dialog(
-                        f"Charakter wurde schnell gespeichert:\n{os.path.basename(file_path)}",
-                        "Schnellspeichern erfolgreich"
+                        f"Schnell gespeichert: {os.path.basename(file_path)}"
                     )
                     Logger.info(f"Charakter schnell gespeichert: {file_path}")
                 elif dialog_service:
@@ -441,8 +440,7 @@ class CharacterHandler:
             if success and dialog_service:
                 filename = os.path.basename(filepath)
                 dialog_service.show_success_dialog(
-                    f"Charakter wurde gespeichert:\n{filename}",
-                    "Speichern erfolgreich"
+                    f"Gespeichert: {filename}"
                 )
                 Logger.info(f"Charakter gespeichert: {filepath}")
             elif dialog_service:
@@ -728,8 +726,7 @@ class CharacterHandler:
             dialog_service = service_container.get_dialog_service()
             if success and dialog_service:
                 dialog_service.show_success_dialog(
-                    f"Charakter wurde gespeichert:\n{existing_file_info['name']}",
-                    "Speichern erfolgreich"
+                    f"Gespeichert: {existing_file_info['name']}"
                 )
                 Logger.info(f"Charakter in existierende Datei gespeichert: {existing_file_info['path']}")
             elif dialog_service:
@@ -923,8 +920,7 @@ class CharacterHandler:
             dialog_service = service_container.get_dialog_service()
             if success and dialog_service:
                 dialog_service.show_success_dialog(
-                    f"Charakterbogen-PDF wurde erstellt:\n{existing_pdf_info['name']}",
-                    "PDF erfolgreich erstellt"
+                    f"PDF erstellt: {existing_pdf_info['name']}"
                 )
                 Logger.info(f"PDF in existierende Datei erstellt: {existing_pdf_info['path']}")
             elif dialog_service:
@@ -966,8 +962,7 @@ class CharacterHandler:
             dialog_service = service_container.get_dialog_service()
             if success and dialog_service:
                 dialog_service.show_success_dialog(
-                    f"Charakterbogen-PDF wurde erstellt:\n{filename}",
-                    "PDF erfolgreich erstellt"
+                    f"PDF erstellt: {filename}"
                 )
                 Logger.info(f"PDF unter neuem Namen erstellt: {full_path}")
             elif dialog_service:

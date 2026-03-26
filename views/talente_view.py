@@ -245,7 +245,7 @@ class TalentItemRow(MDBoxLayout):
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_warning_dialog(
-                    "Keine verbleibenden Aufstiege oder Handicap-Punkte übrig."
+                    "Keine Aufstiege oder Handicap-Punkte übrig."
                 )
         except Exception as e:
             Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
