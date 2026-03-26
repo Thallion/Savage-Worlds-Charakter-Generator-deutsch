@@ -94,7 +94,7 @@ class HandicapManager:
                 "standard_fertigkeitssteigerungen": 12
             },
             "nicht_duplizierbare_handicaps": [
-                "Alt", "Jung", "Blind", "Einarmig", "Einäugig", 
+                "Alt", "Arm", "Jung", "Blind", "Einarmig", "Einäugig",
                 "Stumm", "Analphabet", "Klein", "Fettleibig", "Langsam"
             ]
         }
