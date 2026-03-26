@@ -398,8 +398,7 @@ def _show_import_success_setting(app, filename):
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_success_dialog(
-                    f"Setting '{filename}' wurde importiert.\n"
-                    "Es steht beim nächsten Neustart zur Verfügung."
+                    f"Setting '{filename}' importiert. Verfügbar nach Neustart."
                 )
             else:
                 Logger.info(f"IntentHandler: Setting importiert: {filename}")

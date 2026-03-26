@@ -1044,8 +1044,7 @@ class TemplateWizardDialog:
         dialog_service = service_container.get_dialog_service()
         if dialog_service:
             dialog_service.show_success_dialog(
-                f"Template '{filename}' wurde erfolgreich erstellt!\\n\\nSie können es jetzt in der Template-Auswahl verwenden.",
-                "Template erstellt"
+                f"Template '{filename}' erstellt."
             )
     
     def _show_error_dialog(self, error_message):

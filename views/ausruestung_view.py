@@ -725,7 +725,7 @@ class AusruestungItemRow(MDBoxLayout):
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_warning_dialog(
-                    f"Nicht genügend Vermögen, um {anzahl}x {self.name} zu kaufen."
+                    f"Nicht genug Vermögen für {anzahl}x {self.name}."
                 )
         except Exception as e:
             Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")

@@ -146,8 +146,7 @@ class HTMLManager:
                 self._open_in_browser(html_path)
 
                 self.dialog_service.show_success_dialog(
-                    f"HTML-Charakterbogen wurde gespeichert als:\n{html_path}\n\nDie Datei wurde im Browser geöffnet.",
-                    "HTML erstellen erfolgreich"
+                    f"HTML gespeichert und im Browser geöffnet."
                 )
             else:
                 self.dialog_service.show_error_dialog("Fehler beim Erstellen der HTML-Datei.")

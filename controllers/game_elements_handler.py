@@ -108,8 +108,7 @@ class GameElementsHandler:
         if success and dialog_service:
             merge_text = "zusammengeführt" if merge_elements else "komplett ersetzt"
             dialog_service.show_success_dialog(
-                f"Setting erfolgreich zu '{setting_name}' gewechselt.\nElemente wurden {merge_text}.",
-                "Setting gewechselt"
+                f"Setting '{setting_name}' geladen. Elemente {merge_text}."
             )
             self._trigger_ui_refresh()
 

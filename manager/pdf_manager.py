@@ -152,8 +152,7 @@ class PDFManager:
                     self.event_service.publish(EventTypes.PDF_CREATED, {'path': pdf_path})
                 
                 self.dialog_service.show_success_dialog(
-                    f"PDF wurde gespeichert als:\n{pdf_path}",
-                    "PDF erstellen erfolgreich"
+                    "PDF erfolgreich gespeichert."
                 )
             else:
                 self.dialog_service.show_error_dialog("Fehler beim Erstellen der PDF-Datei.")
