@@ -112,7 +112,7 @@ class HandicapItemRow(MDBoxLayout):
     ausgewaehlt = BooleanProperty(False)
 
     NICHT_DUPLIZIERBARE_HANDICAPS = [
-        "Alt", "Jung", "Blind", "Einarmig", "Einäugig", "Stumm", 
+        "Alt", "Arm", "Jung", "Blind", "Einarmig", "Einäugig", "Stumm",
         "Analphabet", "Klein", "Fettleibig", "Langsam"
     ]
 

@@ -51,6 +51,7 @@
   },
   "nicht_duplizierbare_handicaps": [
     "Alt",
+    "Arm",
     "Jung",
     "Blind",
     "Einarmig",
