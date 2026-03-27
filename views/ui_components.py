@@ -8,6 +8,10 @@ from kivy.uix.screenmanager import ScreenManager, SlideTransition
 from kivy.metrics import dp
 from kivy.logger import Logger
 
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
+
 
 class SwipeScreenManager(ScreenManager):
     """
@@ -196,9 +200,12 @@ class SearchBottomSheet(ModalView):
         # Scrollbare Liste - MDList direkt in ScrollView ohne horizontalen Wrapper
         scroll_view = MDScrollView(
             size_hint=(1, 1),
-            bar_width=dp(8),
+            bar_width=dp(20) if _mobile else dp(8),
+            bar_margin=dp(4) if _mobile else dp(0),
             do_scroll_x=False,
         )
+        if _mobile:
+            scroll_view.scroll_type = ['bars', 'content']
         self._items_list = MDList(size_hint_y=None)
         self._items_list.bind(minimum_height=self._items_list.setter('height'))
         scroll_view.add_widget(self._items_list)
