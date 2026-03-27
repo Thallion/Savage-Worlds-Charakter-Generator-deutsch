@@ -7,7 +7,7 @@ import html
 from kivy.logger import Logger
 
 
-def generiere_html(charakter, output_html, printer_friendly=False):
+def generiere_html(charakter, output_html, printer_friendly=False, show_steigerungen=True):
     """
     Generiert den Charakterbogen als HTML-Datei.
 
@@ -15,6 +15,7 @@ def generiere_html(charakter, output_html, printer_friendly=False):
         charakter: Das Charakterobjekt mit allen Daten
         output_html: Pfad für die zu erstellende HTML-Datei
         printer_friendly: Bool, ob eine druckerfreundliche Version ohne Hintergrundfarben erstellt werden soll
+        show_steigerungen: Bool, ob die Steigerungsliste eingeblendet werden soll
 
     Returns:
         bool: True wenn erfolgreich, False bei Fehler
@@ -63,9 +64,10 @@ def generiere_html(charakter, output_html, printer_friendly=False):
             sections.append(schilde_html)
 
         # Steigerungs-Journal
-        journal_html = _erzeuge_steigerungen_sektion(charakter)
-        if journal_html:
-            sections.append(journal_html)
+        if show_steigerungen:
+            journal_html = _erzeuge_steigerungen_sektion(charakter)
+            if journal_html:
+                sections.append(journal_html)
 
         body_content = "\n".join(sections)
 
