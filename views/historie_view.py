@@ -15,6 +15,10 @@ from kivy.metrics import dp
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.uix.textinput import TextInput
 
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
+
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.label import MDLabel
@@ -502,10 +506,10 @@ class HistorieWidget(MDBoxLayout):
             size_hint=(1, 1),
             do_scroll_x=False,
             do_scroll_y=True,
-            bar_width="15dp",
-            bar_margin="8dp",
+            bar_width=dp(20) if _mobile else dp(15),
+            bar_margin=dp(4) if _mobile else dp(8),
             scroll_type=['bars', 'content'],
-            scroll_wheel_distance="114dp"
+            scroll_wheel_distance=dp(114)
         )
         
         self.log_display = TextInput(

@@ -617,11 +617,13 @@ class VoelkerWidget(MDBoxLayout):
             scroll_view = MDScrollView(
                 size_hint_y=None,
                 height=dp(250),
-                bar_width=dp(15),
-                bar_margin=dp(0),
+                bar_width=dp(20) if _mobile else dp(15),
+                bar_margin=dp(4) if _mobile else dp(0),
                 bar_color=self.theme_cls.primaryColor,
                 bar_inactive_color=self.theme_cls.onSurfaceColor
             )
+            if _mobile:
+                scroll_view.scroll_type = ['bars', 'content']
 
             # Container für Liste
             list_container = MDBoxLayout(
