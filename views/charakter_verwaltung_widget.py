@@ -1230,6 +1230,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
     def _zeige_versende_dialog(self, dateien, titel):
         """Zeigt einen Dialog mit Checkboxen für die zu versendenden Dateien."""
         from kivymd.uix.selectioncontrol import MDCheckbox
+        from kivymd.uix.label import MDIcon
 
         dialog_content = MDBoxLayout(
             orientation="vertical",
@@ -1263,11 +1264,20 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             checkboxes.append((cb, datei))
 
             row.add_widget(cb)
-            row.add_widget(MDListItemLeadingIcon(icon=datei['icon']))
+            row.add_widget(MDIcon(
+                icon=datei['icon'],
+                size_hint=(None, None),
+                size=(dp(24), dp(24)),
+                pos_hint={"center_y": .5},
+            ))
             row.add_widget(MDLabel(
                 text=f"{datei['name']} ({datei['typ']})",
                 pos_hint={"center_y": .5},
             ))
+
+            # Tippen auf die Zeile schaltet die Checkbox um (bessere Touch-Bedienung)
+            row.bind(on_touch_down=lambda instance, touch, _cb=cb:
+                     self._toggle_checkbox_on_row_touch(instance, touch, _cb))
 
             dialog_content.add_widget(row)
 
@@ -1297,6 +1307,13 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             auto_dismiss=False,
         )
         self._versende_dialog.open()
+
+    def _toggle_checkbox_on_row_touch(self, row, touch, checkbox):
+        """Schaltet die Checkbox um wenn die Zeile berührt wird."""
+        if row.collide_point(*touch.pos):
+            checkbox.active = not checkbox.active
+            return True
+        return False
 
     def _versende_dateien(self, dateipfade, titel="Dateien versenden"):
         """Versendet die ausgewählten Dateien über die Plattform-Teilen-Funktion."""
