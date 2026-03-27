@@ -105,6 +105,7 @@ def to_dict(charakter):
         'erschoepfung': charakter.erschoepfung,
         'zusaetzliche_talente': charakter.zusaetzliche_talente,
         'gesamt_handicap_punkte': charakter.gesamt_handicap_punkte,
+        'verbleibende_handicap_punkte': charakter.verbleibende_handicap_punkte,
         'pathfinder_kostenlose_talente_gewaehlt': pathfinder_kostenlose_talente_gewaehlt,
 
         # === STEIGERUNGS-JOURNAL ===
@@ -578,6 +579,7 @@ def _finalize_character_loading(charakter, data):
     charakter.kraftobergrenze = data.get('kraftobergrenze', getattr(charakter, 'kraftobergrenze', 15))
     charakter.zusaetzliche_talente = data.get('zusaetzliche_talente', charakter.zusaetzliche_talente)
     charakter.gesamt_handicap_punkte = data.get('gesamt_handicap_punkte', charakter.gesamt_handicap_punkte)
+    charakter.verbleibende_handicap_punkte = data.get('verbleibende_handicap_punkte', charakter.verbleibende_handicap_punkte)
     charakter.char_gen_completed = data.get('char_gen_completed', charakter.char_gen_completed)
 
     # Savage Pathfinder Support

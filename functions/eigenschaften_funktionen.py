@@ -148,42 +148,53 @@ class EigenschaftenManager:
             Logger.warning(f"Attribut '{attribut_name}' hat bereits den Maximalwert W{max_wert}.")
             return False
         
-        # Bestimme die Kosten
+        # Bestimme die Kosten und Zahlungsquelle
+        zahlungsquelle = "Attributspunkte"
         if charakter.char_gen_completed:
             kosten = self.kosten.get('attribut_spiel', 1)
             if charakter.verbleibende_aufstiege < kosten:
                 Logger.warning(f"Nicht genügend Aufstiege verfügbar. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_aufstiege}")
                 return False
             charakter.verbleibende_aufstiege -= kosten
+            zahlungsquelle = "Aufstiege"
         else:
             kosten = self.kosten.get('attribut_chargen', 1)
             # Prüfe zuerst normale Attributspunkte
             if charakter.verbleibende_attributsteigerungen >= kosten:
                 charakter.verbleibende_attributsteigerungen -= kosten
+                zahlungsquelle = "Attributspunkte"
             # Falls keine normalen Punkte verfügbar, prüfe Handicap-Punkte (2 HP = 1 Attr)
             elif hasattr(charakter, 'verbleibende_handicap_punkte') and charakter.verbleibende_handicap_punkte >= 2:
                 charakter.verbleibende_handicap_punkte -= 2
+                zahlungsquelle = "Handicap-Punkte"
                 Logger.info(f"Attributsteigerung mit 2 Handicap-Punkten bezahlt.")
             else:
                 verfügbare_attr = charakter.verbleibende_attributsteigerungen
                 verfügbare_hp = getattr(charakter, 'verbleibende_handicap_punkte', 0)
                 Logger.warning(f"Nicht genügend Punkte verfügbar. Benötigt: {kosten} Attributspunkte ODER 2 Handicap-Punkte. Verfügbar: {verfügbare_attr} Attributspunkte, {verfügbare_hp} Handicap-Punkte")
                 return False
-        
+
         # Alte Werte für Event merken
         old_value = attribut.wuerfel.value
-        
+
         # Führe die Steigerung durch
         attribut.wuerfel.increase()
         Logger.debug(f"Attribut '{attribut_name}' wurde auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier} gesteigert.")
-        
+
+        # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
+        if charakter.steigerungs_journal is None:
+            charakter.steigerungs_journal = []
+        charakter.steigerungs_journal.append({
+            'typ': 'attribut',
+            'name': attribut_name,
+            'wert': attribut.wuerfel.value,
+            'zahlungsquelle': zahlungsquelle,
+            'kosten': 2 if zahlungsquelle == "Handicap-Punkte" else kosten
+        })
+
         # Event für Historie-System senden
         new_value = attribut.wuerfel.value
-        cost_type = "Aufstiege" if charakter.char_gen_completed else (
-            "Handicap-Punkte" if hasattr(charakter, 'verbleibende_handicap_punkte') and 
-            charakter.verbleibende_attributsteigerungen < kosten and
-            charakter.verbleibende_handicap_punkte >= 2 else "Attributspunkte"
-        )
+        cost_type = zahlungsquelle
         
         try:
             from services.service_container import service_container
@@ -228,11 +239,19 @@ class EigenschaftenManager:
             return False
         
         # Senke das Attribut
+        alter_wert = attribut.wuerfel.value
         attribut.wuerfel.decrease()
         Logger.debug(f"Attribut '{attribut_name}' wurde auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier} gesenkt.")
-        
-        # Gib Punkte zurück
-        if charakter.char_gen_completed:
+
+        # Gib Punkte an die richtige Quelle zurück (aus Journal ermitteln)
+        zahlungsquelle = self._finde_zahlungsquelle_im_journal(
+            charakter, 'attribut', attribut_name, alter_wert
+        )
+
+        if zahlungsquelle == "Handicap-Punkte":
+            charakter.verbleibende_handicap_punkte += 2
+            Logger.info(f"Attributsenkung: 2 Handicap-Punkte zurückerstattet.")
+        elif zahlungsquelle == "Aufstiege":
             kosten = self.kosten.get('attribut_spiel', 1)
             charakter.verbleibende_aufstiege += kosten
         else:
@@ -332,42 +351,53 @@ class EigenschaftenManager:
         # Berechne Kosten
         kosten = self._berechne_fertigkeit_kosten(charakter, fertigkeit, fertigkeit.attribut)
         
-        # Prüfe verfügbare Punkte
+        # Prüfe verfügbare Punkte und bestimme Zahlungsquelle
+        zahlungsquelle = "Fertigkeitspunkte"
         if charakter.char_gen_completed:
             if charakter.verbleibende_aufstiege < kosten:
                 Logger.warning(f"Nicht genügend Aufstiege. Benötigt: {kosten}, Verfügbar: {charakter.verbleibende_aufstiege}")
                 return False
             charakter.verbleibende_aufstiege -= kosten
+            zahlungsquelle = "Aufstiege"
         else:
             # Verwende das richtige Attribut für Fertigkeitspunkte
             verfuegbare_punkte = charakter.verbleibende_fertigkeitssteigerungen
-            
+
             # Prüfe zuerst normale Fertigkeitspunkte
             if verfuegbare_punkte >= kosten:
                 charakter.verbleibende_fertigkeitssteigerungen -= kosten
+                zahlungsquelle = "Fertigkeitspunkte"
             # Falls keine normalen Punkte verfügbar, prüfe Handicap-Punkte (1 HP = 1 Fertigkeitssteigerung)
             elif hasattr(charakter, 'verbleibende_handicap_punkte') and charakter.verbleibende_handicap_punkte >= kosten:
                 charakter.verbleibende_handicap_punkte -= kosten
+                zahlungsquelle = "Handicap-Punkte"
                 Logger.info(f"Fertigkeitssteigerung mit {kosten} Handicap-Punkt(en) bezahlt.")
             else:
                 verfügbare_hp = getattr(charakter, 'verbleibende_handicap_punkte', 0)
                 Logger.warning(f"Nicht genügend Punkte verfügbar. Benötigt: {kosten} Fertigkeitspunkte ODER {kosten} Handicap-Punkte. Verfügbar: {verfuegbare_punkte} Fertigkeitspunkte, {verfügbare_hp} Handicap-Punkte")
                 return False
-        
+
         # Alte Werte für Event merken
         old_value = fertigkeit.wuerfel.value
-        
+
         # Steigere die Fertigkeit
         fertigkeit.wuerfel.increase()
         Logger.debug(f"Fertigkeit '{fertigkeit_name}' wurde auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier} gesteigert.")
-        
+
+        # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
+        if charakter.steigerungs_journal is None:
+            charakter.steigerungs_journal = []
+        charakter.steigerungs_journal.append({
+            'typ': 'fertigkeit',
+            'name': fertigkeit_name,
+            'wert': fertigkeit.wuerfel.value,
+            'zahlungsquelle': zahlungsquelle,
+            'kosten': kosten
+        })
+
         # Event für Historie-System senden
         new_value = fertigkeit.wuerfel.value
-        cost_type = "Aufstiege" if charakter.char_gen_completed else (
-            "Handicap-Punkte" if hasattr(charakter, 'verbleibende_handicap_punkte') and 
-            charakter.verbleibende_fertigkeitssteigerungen < kosten and
-            charakter.verbleibende_handicap_punkte >= kosten else "Fertigkeitspunkte"
-        )
+        cost_type = zahlungsquelle
         
         try:
             from services.service_container import service_container
@@ -385,6 +415,41 @@ class EigenschaftenManager:
         
         return True
     
+    def _finde_zahlungsquelle_im_journal(self, charakter, typ, name, wert):
+        """
+        Sucht im Steigerungs-Journal die Zahlungsquelle für eine bestimmte Steigerung.
+        Wird beim Senken verwendet, um die Punkte korrekt zurückzuerstatten.
+
+        Args:
+            charakter: Das Charakter-Objekt
+            typ: 'attribut' oder 'fertigkeit'
+            name: Name des Attributs/der Fertigkeit
+            wert: Der Würfelwert der Steigerung (vor dem Senken)
+
+        Returns:
+            str: Die Zahlungsquelle ('Attributspunkte', 'Fertigkeitspunkte', 'Handicap-Punkte', 'Aufstiege')
+        """
+        if charakter.steigerungs_journal is None:
+            # Kein Journal vorhanden - Fallback auf Standard
+            if charakter.char_gen_completed:
+                return "Aufstiege"
+            return "Attributspunkte" if typ == 'attribut' else "Fertigkeitspunkte"
+
+        # Suche den letzten passenden Eintrag im Journal (rückwärts)
+        for i in range(len(charakter.steigerungs_journal) - 1, -1, -1):
+            eintrag = charakter.steigerungs_journal[i]
+            if (eintrag.get('typ') == typ and
+                eintrag.get('name') == name and
+                eintrag.get('wert') == wert):
+                # Eintrag gefunden - aus Journal entfernen und Quelle zurückgeben
+                charakter.steigerungs_journal.pop(i)
+                return eintrag.get('zahlungsquelle', "Attributspunkte" if typ == 'attribut' else "Fertigkeitspunkte")
+
+        # Kein passender Eintrag gefunden - Fallback
+        if charakter.char_gen_completed:
+            return "Aufstiege"
+        return "Attributspunkte" if typ == 'attribut' else "Fertigkeitspunkte"
+
     def _berechne_fertigkeit_kosten(self, charakter, fertigkeit, attribut):
         """
         Berechnet die Kosten für eine Fertigkeitssteigerung.
@@ -436,13 +501,21 @@ class EigenschaftenManager:
         
         # Berechne Rückerstattung
         kosten = self._berechne_fertigkeit_kosten(charakter, fertigkeit, fertigkeit.attribut)
-        
+
         # Senke die Fertigkeit
+        alter_wert = fertigkeit.wuerfel.value
         fertigkeit.wuerfel.decrease()
         Logger.debug(f"Fertigkeit '{fertigkeit_name}' wurde auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier} gesenkt.")
-        
-        # Erstatte Punkte zurück
-        if charakter.char_gen_completed:
+
+        # Gib Punkte an die richtige Quelle zurück (aus Journal ermitteln)
+        zahlungsquelle = self._finde_zahlungsquelle_im_journal(
+            charakter, 'fertigkeit', fertigkeit_name, alter_wert
+        )
+
+        if zahlungsquelle == "Handicap-Punkte":
+            charakter.verbleibende_handicap_punkte += kosten
+            Logger.info(f"Fertigkeitssenkung: {kosten} Handicap-Punkt(e) zurückerstattet.")
+        elif zahlungsquelle == "Aufstiege":
             charakter.verbleibende_aufstiege += kosten
         else:
             charakter.verbleibende_fertigkeitssteigerungen += kosten
