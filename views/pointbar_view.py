@@ -291,9 +291,9 @@ class GenerationPointsBar(MDBoxLayout):
         rang = self.charakter.rang if self.charakter.rang else "Anfänger"
 
         from kivy.core.window import Window
-        # Kompaktere Darstellung im Portrait
+        # Portrait: Punkte zuerst, damit sie nicht abgeschnitten werden
         if Window.height > Window.width:
-            self.header_summary_text = f"{name} | {setting} | A:{attr} | F:{fert}"
+            self.header_summary_text = f"A:{attr} | F:{fert} | {name} | {setting}"
         else:
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | {rang}"
 
