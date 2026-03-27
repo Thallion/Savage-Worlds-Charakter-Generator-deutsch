@@ -397,7 +397,7 @@ class DialogService:
             hint_text="Text eingeben...",
             mode="outlined",
             size_hint_y=None,
-            height=dp(56)
+            height=dp(72)
         )
         content.add_widget(text_input)
         

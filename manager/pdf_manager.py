@@ -70,7 +70,7 @@ class PDFManager:
             orientation='vertical',
             spacing=dp(16),
             size_hint_y=None,
-            height=dp(200),
+            adaptive_height=True,
             padding=dp(16)
         )
         
