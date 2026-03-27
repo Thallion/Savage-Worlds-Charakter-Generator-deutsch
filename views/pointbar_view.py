@@ -32,10 +32,31 @@ class TouchableBoxLayout(ButtonBehavior, MDBoxLayout):
     """
 
     def on_touch_down(self, touch):
-        if self.collide_point(*touch.pos):
-            # ButtonBehavior direkt verarbeiten lassen, NICHT an Kinder weiterleiten
-            return ButtonBehavior.on_touch_down(self, touch)
-        return False
+        if not self.collide_point(*touch.pos):
+            return False
+        if touch.is_mouse_scrolling:
+            return False
+        if self in touch.ud:
+            return False
+        # Touch direkt greifen, OHNE an Kinder weiterzuleiten.
+        # ButtonBehavior.on_touch_down ruft intern super().on_touch_down() auf,
+        # was den Touch an Kind-Widgets (MDIcon, MDLabel) verteilt.
+        # Diese können den Touch konsumieren und so on_press/on_release verhindern.
+        touch.grab(self)
+        touch.ud[self] = True
+        self.last_touch = touch
+        self._do_press()
+        self.dispatch('on_press')
+        return True
+
+    def on_touch_up(self, touch):
+        if touch.grab_current is not self:
+            return False
+        touch.ungrab(self)
+        self.last_touch = touch
+        self._do_release()
+        self.dispatch('on_release')
+        return True
 
 
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemTrailingIcon
