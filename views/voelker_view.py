@@ -80,6 +80,12 @@ class VoelkerWidget(MDBoxLayout):
             controller.charakter.bind(on_charakter_change=self.aktualisiere_ui)
             self.aktualisiere_ui()
 
+    def _defocus_and_call(self, callback):
+        """Defokussiert alle TextFields und ruft callback verzögert auf.
+        Behebt Android-Problem: TextField-Fokus schluckt Button-Touch-Events."""
+        Window.release_all_keyboards()
+        Clock.schedule_once(lambda dt: callback(), 0.1)
+
     def _initialize_controller(self, dt=None):
         """Initialisiert die Verbindung zum Controller aus der App."""
         try:
@@ -656,7 +662,7 @@ class VoelkerWidget(MDBoxLayout):
                         list_item = MDListItem(
                             size_hint_y=None,
                             height=dp(48),
-                            on_release=lambda x, selected_item=item: self._on_search_dialog_item_selected(callback, selected_item)
+                            on_release=lambda x, selected_item=item: self._defocus_and_call(lambda: self._on_search_dialog_item_selected(callback, selected_item))
                         )
                         list_item.add_widget(MDListItemHeadlineText(text=str(item)))
                         items_list.add_widget(list_item)
