@@ -1,7 +1,13 @@
 # Savage Worlds Charakter-Generator - Requirements
 # Python 3.8+ erforderlich
-# 
+#
 # Installation: pip install -r requirements.txt
+#
+# LINUX: System-Abhängigkeiten müssen VOR der Installation vorhanden sein!
+#   Debian/Ubuntu: sudo apt-get install python3-dev libcairo2-dev libffi-dev pkg-config
+#   Fedora/RHEL:   sudo dnf install python3-devel cairo-devel gcc pkg-config
+#   Arch Linux:    sudo pacman -S cairo pkgconf
+# Siehe README.md für Details.
 
 # =============================================================================
 # KERN-DEPENDENCIES

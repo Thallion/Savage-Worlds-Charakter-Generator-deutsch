@@ -50,14 +50,29 @@ source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 ```
 
-3. **Dependencies installieren:**
+3. **System-Abhängigkeiten installieren (Linux):**
+
+KivyMD benötigt `pycairo`, das C-Erweiterungen kompiliert. Dafür werden System-Pakete benötigt:
+
+```bash
+# Debian/Ubuntu:
+sudo apt-get install python3-dev libcairo2-dev libffi-dev pkg-config libjpeg-dev zlib1g-dev
+
+# Fedora/RHEL/CentOS:
+sudo dnf install python3-devel cairo-devel gcc pkg-config libjpeg-devel zlib-devel
+
+# Arch Linux:
+sudo pacman -S cairo pkgconf
+```
+
+4. **Dependencies installieren:**
 ```bash
 pip install -r requirements.txt
 ```
 
 **Hinweis zu KivyMD:** Die aktuelle KivyMD 2.0.1 Version wird direkt von GitHub installiert, da sie noch nicht offiziell auf PyPI verfügbar ist.
 
-4. **Anwendung starten:**
+5. **Anwendung starten:**
 ```bash
 python main.py
 ```
@@ -136,11 +151,22 @@ pip install kivy>=2.1.0
 pip install https://github.com/kivymd/KivyMD/archive/master.zip
 ```
 
-**Linux: "command 'gcc' failed"**
+**Linux: pycairo / "Python dependency not found" / "command 'gcc' failed"**
+
+KivyMD hängt von `pycairo` ab, das System-Bibliotheken zum Kompilieren benötigt:
+
 ```bash
-sudo apt-get install python3-dev libffi-dev
-sudo apt-get install libjpeg-dev zlib1g-dev  # für Pillow
+# Debian/Ubuntu:
+sudo apt-get install python3-dev libcairo2-dev libffi-dev pkg-config libjpeg-dev zlib1g-dev
+
+# Fedora/RHEL/CentOS:
+sudo dnf install python3-devel cairo-devel gcc pkg-config libjpeg-devel zlib-devel
+
+# Arch Linux:
+sudo pacman -S cairo pkgconf
 ```
+
+Danach erneut `pip install -r requirements.txt` ausführen.
 
 **Windows: "Microsoft Visual C++ 14.0 is required"**
 - Visual Studio Build Tools installieren oder
