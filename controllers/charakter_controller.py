@@ -8,6 +8,7 @@ from kivy.logger import Logger
 from models.charakter import Charakter
 from models.talent import Talent
 from models.macht import Macht
+from controllers.undo_manager import UndoManager
 import logging
 import traceback
 import copy
@@ -66,6 +67,9 @@ class CharakterController(EventDispatcher):
         
         # Android Double-Touch Protection - Verhindert echte Doppelklicks
         self._last_transaction_time = {}
+
+        # Undo-Manager für Rückgängig-Funktion
+        self.undo_manager = UndoManager()
 
         Logger.info("CharakterController initialisiert")
 
@@ -130,19 +134,50 @@ class CharakterController(EventDispatcher):
         pass
 
     # ============================
+    # Undo-Funktionalität
+    # ============================
+    def undo(self):
+        """
+        Macht die letzte Aktion rückgängig.
+
+        Returns:
+            str: Beschreibung der rückgängig gemachten Aktion, oder None
+        """
+        try:
+            beschreibung = self.undo_manager.undo(self.charakter)
+            if beschreibung is not None:
+                self.dispatch('on_charakter_updated')
+                Logger.info(f"Undo erfolgreich: '{beschreibung}'")
+            return beschreibung
+        except Exception as e:
+            Logger.error(f"Fehler beim Undo: {str(e)}")
+            self.dispatch('on_charakter_error', f"Undo fehlgeschlagen: {str(e)}")
+            return None
+
+    @property
+    def kann_undo(self):
+        """Gibt True zurück, wenn ein Undo möglich ist."""
+        return self.undo_manager.kann_undo
+
+    def _snapshot(self, beschreibung):
+        """Erstellt einen Undo-Snapshot vor einer Aktion."""
+        self.undo_manager.snapshot_erstellen(self.charakter, beschreibung)
+
+    # ============================
     # Operationen auf Attributen
     # ============================
     def steigere_attribut(self, attribut_name):
         """
         Steigert ein Attribut des Charakters
-        
+
         Args:
             attribut_name (str): Name des Attributs
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Attribut '{attribut_name}' steigern")
             # Alte Werte und verfügbare Punkte für Historie merken
             old_value = getattr(self.charakter.attribute.get(attribut_name), 'wuerfel', None)
             old_value = old_value.value if old_value else 4
@@ -203,14 +238,15 @@ class CharakterController(EventDispatcher):
     def senke_attribut(self, attribut_name):
         """
         Senkt ein Attribut des Charakters
-        
+
         Args:
             attribut_name (str): Name des Attributs
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Attribut '{attribut_name}' senken")
             success = self.charakter.senke_attribut(attribut_name)
             if success:
                 self.charakter.berechne_abgeleitete_werte()
@@ -227,15 +263,16 @@ class CharakterController(EventDispatcher):
     def steigere_fertigkeit(self, fertigkeit_name, confirm_double_cost=False):
         """
         Steigert eine Fertigkeit des Charakters
-        
+
         Args:
             fertigkeit_name (str): Name der Fertigkeit
             confirm_double_cost (bool): Ob die doppelten Kosten bestätigt wurden
-            
+
         Returns:
             bool oder str: True bei Erfolg, False bei Fehler, "needs_confirmation" wenn Bestätigung erforderlich
         """
         try:
+            self._snapshot(f"Fertigkeit '{fertigkeit_name}' steigern")
             # Alte Werte und verfügbare Punkte für Historie merken
             fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
             old_value = fertigkeit.wuerfel.value if fertigkeit else 0
@@ -298,14 +335,15 @@ class CharakterController(EventDispatcher):
     def senke_fertigkeit(self, fertigkeit_name):
         """
         Senkt eine Fertigkeit des Charakters
-        
+
         Args:
             fertigkeit_name (str): Name der Fertigkeit
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Fertigkeit '{fertigkeit_name}' senken")
             success = self.charakter.senke_fertigkeit(fertigkeit_name)
             if success:
                 self.charakter.berechne_abgeleitete_werte()
@@ -322,14 +360,15 @@ class CharakterController(EventDispatcher):
     def waehle_handicap(self, handicap_name):
         """
         Wählt ein Handicap für den Charakter aus
-        
+
         Args:
             handicap_name (str): Name des Handicaps
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Handicap '{handicap_name}' wählen")
             success = self.charakter.waehle_handicap(handicap_name)
             if success:
                 self.dispatch('on_charakter_updated')
@@ -362,18 +401,19 @@ class CharakterController(EventDispatcher):
         """
         Entfernt ein Handicap vom Charakter.
         Nach der Charaktergenerierung kostet dies Aufstiege.
-        
+
         Args:
             handicap_name (str): Name des Handicaps
             force_remove (bool): Wenn True, wird direkt entfernt ohne Dialog-Option
-            
+
         Returns:
-            bool oder str: True bei Erfolg, False bei Fehler, 
+            bool oder str: True bei Erfolg, False bei Fehler,
                         "needs_advancement_X" wenn X Aufstiege benötigt werden,
                         "can_reduce" wenn Reduzierung möglich ist,
                         "has_both_options" wenn beide Optionen verfügbar sind
         """
         try:
+            self._snapshot(f"Handicap '{handicap_name}' entfernen")
             success = self.charakter.entferne_handicap(handicap_name, force_remove)
             if isinstance(success, str) and (success.startswith("needs_advancement_") or success == "can_reduce" or success == "has_both_options"):
                 return success
@@ -398,15 +438,16 @@ class CharakterController(EventDispatcher):
     def reduziere_handicap(self, handicap_name):
         """
         Reduziert ein schweres Handicap zu einem leichten Handicap.
-        
+
         Args:
             handicap_name (str): Name des schweren Handicaps
-            
+
         Returns:
             bool oder str: True bei Erfolg, False bei Fehler,
                           "needs_advancement" wenn Aufstieg fehlt
         """
         try:
+            self._snapshot(f"Handicap '{handicap_name}' reduzieren")
             success = self.charakter.reduziere_handicap(handicap_name)
             if success == "needs_advancement":
                 return "needs_advancement"
@@ -453,16 +494,17 @@ class CharakterController(EventDispatcher):
     def waehle_talent(self, talent_name, ignore_rang_check=False, ignore_voraussetzungen=False):
         """
         Wählt ein Talent für den Charakter aus
-        
+
         Args:
             talent_name (str): Name des Talents
             ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung
             ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
-            
+
         Returns:
             bool oder str: Ergebniscode oder Erfolgsstatus
         """
         try:
+            self._snapshot(f"Talent '{talent_name}' wählen")
             # Flag nur setzen, wenn es angefordert wurde
             if ignore_voraussetzungen:
                 self.charakter.ignore_voraussetzungen = True
@@ -493,14 +535,15 @@ class CharakterController(EventDispatcher):
     def entferne_talent(self, talent_name):
         """
         Entfernt ein Talent vom Charakter
-        
+
         Args:
             talent_name (str): Name des Talents
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Talent '{talent_name}' entfernen")
             success = self.charakter.entferne_talent(talent_name)
             if success:
                 self.dispatch('on_charakter_updated')
@@ -544,16 +587,17 @@ class CharakterController(EventDispatcher):
     def waehle_macht(self, macht_name, ignore_rang_check=False):
         """
         Wählt eine Macht für den Charakter aus
-        
+
         Args:
             macht_name (str): Name der Macht
             ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung (für UI-Bestätigung)
-            
+
         Returns:
             bool oder str: "needs_rang_confirmation" wenn Rang-Bestätigung benötigt wird,
                         True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Macht '{macht_name}' wählen")
             result = self.charakter.waehle_macht(macht_name, ignore_rang_check=ignore_rang_check)
             if result is True:  # Nur bei True-Wert, nicht bei "needs_rang_confirmation"
                 self.dispatch('on_charakter_updated')
@@ -582,14 +626,15 @@ class CharakterController(EventDispatcher):
     def entferne_macht(self, macht_name):
         """
         Entfernt eine Macht vom Charakter
-        
+
         Args:
             macht_name (str): Name der Macht
-            
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot(f"Macht '{macht_name}' entfernen")
             success = self.charakter.entferne_macht(macht_name)
             if success:
                 self.dispatch('on_charakter_updated')
@@ -654,8 +699,9 @@ class CharakterController(EventDispatcher):
                 return False
         
         self._last_transaction_time[transaction_key] = current_time
-        
+
         try:
+            self._snapshot(f"Ausrüstung '{item_name}' kaufen")
             # Prüfen, ob der Gegenstand existiert
             if item_name in self.charakter.ausruestung:
                 item = self.charakter.ausruestung[item_name]
@@ -696,8 +742,9 @@ class CharakterController(EventDispatcher):
                 return False
         
         self._last_transaction_time[transaction_key] = current_time
-        
+
         try:
+            self._snapshot(f"Ausrüstung '{item_name}' verkaufen")
             # Prüfen, ob der Gegenstand existiert
             if item_name in self.charakter.ausruestung:
                 item = self.charakter.ausruestung[item_name]
@@ -742,6 +789,9 @@ class CharakterController(EventDispatcher):
             except Exception as backup_error:
                 Logger.warning(f"Konnte keine Backup-Kopie erstellen: {str(backup_error)}")
             
+            # Undo-Stack leeren bei neuem Charakter
+            self.undo_manager.leere_stack()
+
             # Charakter laden
             success = self.charakter.laden_von_json(dateipfad)
             
@@ -817,6 +867,9 @@ class CharakterController(EventDispatcher):
             # Backup des alten Charakters für Notfall-Wiederherstellung
             alter_charakter = self.charakter
 
+            # Undo-Stack leeren bei neuem Charakter
+            self.undo_manager.leere_stack()
+
             # Neuen Charakter erstellen
             self.charakter = Charakter(char_name=char_name, active_setting_name=setting_name)
             self.current_character_file_path = None  # Zurücksetzen des Dateipfads (jetzt erlaubt)
@@ -843,11 +896,12 @@ class CharakterController(EventDispatcher):
     def erhoehe_startkapital_mit_handicap(self):
         """
         Erhöht das Startkapital des Charakters mit Handicap-Punkten
-        
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
+            self._snapshot("Startkapital mit Handicap-Punkten erhöhen")
             # Prüfen ob genügend Handicap-Punkte verfügbar sind
             if self.charakter.verbleibende_handicap_punkte <= 0:
                 Logger.warning("Keine Handicap-Punkte mehr verfügbar für Startkapital-Erhöhung")
@@ -883,15 +937,16 @@ class CharakterController(EventDispatcher):
     def waehle_pathfinder_kostenloses_talent(self, talent_name, ignore_voraussetzungen=False):
         """
         NEU: Wählt ein Klassen-, Hintergrund- oder Experte-Talent in Savage Pathfinder kostenlos aus.
-        
+
         Args:
             talent_name (str): Name des Talents
             ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
-            
+
         Returns:
             bool oder str: True bei Erfolg, False bei Fehler, oder Fehlercodes
         """
         try:
+            self._snapshot(f"Pathfinder-Talent '{talent_name}' wählen")
             result = self.charakter.waehle_pathfinder_kostenloses_talent(talent_name, ignore_voraussetzungen)
             
             if result is True:

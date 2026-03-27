@@ -87,6 +87,17 @@
                     theme_text_color: "Primary"
                     bold: True
 
+                MDIconButton:
+                    id: undo_button
+                    icon: "undo"
+                    style: "standard"
+                    size_hint: None, None
+                    size: [dp(40), dp(40)]
+                    pos_hint: {'center_y': 0.5}
+                    disabled: not root.kann_undo
+                    opacity: 1 if root.kann_undo else 0.3
+                    on_release: root.on_undo_pressed()
+
                 TrailingPressedIconButton:
                     id: chevron
                     icon: "chevron-right"

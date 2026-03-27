@@ -333,11 +333,17 @@ class TalentManager:
                 entferne_macht(self.charakter, macht_name)
         
         talent_abwaehlen_intern()
-        
-        # Ressourcen zurückgeben (Aufstiege oder Handicap-Punkte)
-        if hasattr(self.charakter, 'verbleibende_aufstiege'):
+
+        # Ressourcen zurückgeben - aus Journal ermitteln, welche Währung verwendet wurde
+        zahlungsquelle = self._finde_talent_zahlungsquelle(talent_name_key)
+
+        if zahlungsquelle == "Handicap-Punkte":
+            kosten = TalentConfig.get('kosten.handicap_punkte', 2)
+            self.charakter.verbleibende_handicap_punkte += kosten
+            Logger.info(f"Talent '{talent_name_key}' entfernt: {kosten} Handicap-Punkte zurückerstattet.")
+        elif hasattr(self.charakter, 'verbleibende_aufstiege'):
             self.charakter.verbleibende_aufstiege += 1
-        
+
         self.charakter.berechne_abgeleitete_werte()
         return True
     
@@ -884,21 +890,31 @@ class TalentManager:
     def _waehle_mit_handicap_punkten(self, talent_name_key):
         """
         Wählt ein Talent mit Handicap-Punkten aus.
-        
+
         Args:
             talent_name_key: Der Talent-Schlüssel
-            
+
         Returns:
             bool: True bei Erfolg, False bei Misserfolg
         """
         skip_prereq = hasattr(self.charakter, 'ignore_voraussetzungen') and self.charakter.ignore_voraussetzungen
         erfolg = self.talent_auswaehlen(talent_name_key, skip_prereq_check=skip_prereq)
-        
+
         if erfolg:
             kosten = TalentConfig.get('kosten.handicap_punkte', 2)
             self.charakter.verbleibende_handicap_punkte -= kosten
             self._reset_ignore_voraussetzungen_flag(talent_name_key)
-            
+
+            # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
+            if self.charakter.steigerungs_journal is None:
+                self.charakter.steigerungs_journal = []
+            self.charakter.steigerungs_journal.append({
+                'typ': 'talent',
+                'name': talent_name_key,
+                'zahlungsquelle': 'Handicap-Punkte',
+                'kosten': kosten
+            })
+
             # Event für Historie-System senden
             try:
                 from services.service_container import service_container
@@ -911,7 +927,7 @@ class TalentManager:
                     })
             except Exception as e:
                 Logger.warning(f"Event-Publishing fehlgeschlagen: {e}")
-            
+
             self.charakter.berechne_abgeleitete_werte()
             return True
         return False
@@ -919,21 +935,31 @@ class TalentManager:
     def _waehle_mit_aufstieg(self, talent_name_key):
         """
         Wählt ein Talent mit einem Aufstieg aus.
-        
+
         Args:
             talent_name_key: Der Talent-Schlüssel
-            
+
         Returns:
             bool: True bei Erfolg, False bei Misserfolg
         """
         skip_prereq = hasattr(self.charakter, 'ignore_voraussetzungen') and self.charakter.ignore_voraussetzungen
         erfolg = self.talent_auswaehlen(talent_name_key, skip_prereq_check=skip_prereq)
-        
+
         if erfolg:
             kosten = TalentConfig.get('kosten.aufstieg', 1)
             self.charakter.verbleibende_aufstiege -= kosten
             self.charakter.update_char_gen_status()
             self._reset_ignore_voraussetzungen_flag(talent_name_key)
+
+            # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
+            if self.charakter.steigerungs_journal is None:
+                self.charakter.steigerungs_journal = []
+            self.charakter.steigerungs_journal.append({
+                'typ': 'talent',
+                'name': talent_name_key,
+                'zahlungsquelle': 'Aufstiege',
+                'kosten': kosten
+            })
             
             # Event für Historie-System senden
             try:
@@ -952,6 +978,31 @@ class TalentManager:
             return True
         return False
     
+    def _finde_talent_zahlungsquelle(self, talent_name_key):
+        """
+        Sucht im Steigerungs-Journal die Zahlungsquelle für ein Talent.
+
+        Args:
+            talent_name_key: Der Talent-Schlüssel
+
+        Returns:
+            str: Die Zahlungsquelle ('Handicap-Punkte' oder 'Aufstiege')
+        """
+        journal = self.charakter.steigerungs_journal
+        if journal is None:
+            return "Aufstiege"
+
+        # Suche den letzten passenden Eintrag (rückwärts)
+        for i in range(len(journal) - 1, -1, -1):
+            eintrag = journal[i]
+            if (eintrag.get('typ') == 'talent' and
+                eintrag.get('name') == talent_name_key):
+                # Eintrag gefunden - aus Journal entfernen und Quelle zurückgeben
+                journal.pop(i)
+                return eintrag.get('zahlungsquelle', 'Aufstiege')
+
+        return "Aufstiege"
+
     def _reset_ignore_voraussetzungen_flag(self, talent_name_key):
         """
         Setzt das ignore_voraussetzungen Flag zurück.

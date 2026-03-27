@@ -115,29 +115,31 @@ def load_kv_file():
 load_kv_file()
 
 class GenerationPointsBar(MDBoxLayout):
-    charakter = ObjectProperty(None)  
+    charakter = ObjectProperty(None)
     char_name_text = StringProperty("")
     active_setting_name_text = StringProperty("")
-    attribut_text = StringProperty("")  
-    faehigkeiten_text = StringProperty("")  
-    aufstiege_text = StringProperty("")  
-    maechte_text = StringProperty("")  
-    machtpunkte_text = StringProperty("")  
-    vermoegen_text = StringProperty("")  
-    handicaps_text = StringProperty("")  
-    gewicht_text = StringProperty("")  
-    rang_text = StringProperty("")  
+    attribut_text = StringProperty("")
+    faehigkeiten_text = StringProperty("")
+    aufstiege_text = StringProperty("")
+    maechte_text = StringProperty("")
+    machtpunkte_text = StringProperty("")
+    vermoegen_text = StringProperty("")
+    handicaps_text = StringProperty("")
+    gewicht_text = StringProperty("")
+    rang_text = StringProperty("")
     parade_robustheit_text = StringProperty("")
     superkraft_punkte_text = StringProperty("")
     machtstufe_text = StringProperty("")
     header_summary_text = StringProperty("")
     char_gen_completed = BooleanProperty(False)
     is_expanded = BooleanProperty(True)
+    kann_undo = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
+        self.controller.bind(on_charakter_updated=self._update_undo_status)
         self.on_charakter_changed(self.controller, self.controller.charakter)
 
         # Timer für regelmäßige Gewichts-Updates
@@ -351,6 +353,24 @@ class GenerationPointsBar(MDBoxLayout):
             if chevron_icon:
                 chevron_icon.icon = "chevron-down"
             self.is_expanded = True
+
+    # Undo-Funktionalität
+    def _update_undo_status(self, *args):
+        """Aktualisiert den Undo-Button-Status."""
+        self.kann_undo = self.controller.kann_undo
+
+    def on_undo_pressed(self):
+        """Wird beim Klick auf den Undo-Button aufgerufen."""
+        beschreibung = self.controller.undo()
+        if beschreibung:
+            try:
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_success_dialog(f"Rückgängig: {beschreibung}")
+            except Exception:
+                pass
+            self._update_undo_status()
 
     # Event-Handler für einzelne Eigenschaften
     def update_charakter_name(self, instance, value):
