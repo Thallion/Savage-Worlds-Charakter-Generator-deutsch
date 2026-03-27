@@ -29,6 +29,8 @@ from kivy.factory import Factory
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
+from kivy.core.window import Window
+from kivy.uix.scrollview import ScrollView
 from kivymd.uix.selectioncontrol import MDCheckbox
 
 # Import der Funktionen für Voraussetzungsprüfung
@@ -691,13 +693,16 @@ class TalentItemRow(MDBoxLayout):
 
     def show_full_description(self):
         """Zeigt die vollständige Beschreibung in einem Dialog an."""
+        # Responsive Textbreite basierend auf Fensterbreite
+        text_width = min(dp(400), Window.width * 0.85 - dp(60))
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(10),
             padding=dp(20),
             adaptive_height=True
         )
-        
+
         # Talent-Name als Überschrift
         title_label = MDLabel(
             text=f"[b]{self.talent_name}[/b]",
@@ -709,7 +714,7 @@ class TalentItemRow(MDBoxLayout):
             markup=True
         )
         content.add_widget(title_label)
-        
+
         # Vollständige Beschreibung
         desc_label = MDLabel(
             text=self.beschreibung,
@@ -717,18 +722,27 @@ class TalentItemRow(MDBoxLayout):
             theme_text_color="Secondary",
             halign="left",
             valign="top",
-            text_size=(dp(400), None),
+            text_size=(text_width, None),
             markup=True
         )
         desc_label.bind(texture_size=desc_label.setter('size'))
         content.add_widget(desc_label)
-        
+
+        # ScrollView für lange Beschreibungen (Android-kompatibel)
+        max_content_height = min(dp(400), Window.height * 0.6)
+        scroll = ScrollView(
+            size_hint_y=None,
+            height=max_content_height,
+            do_scroll_x=False,
+        )
+        scroll.add_widget(content)
+
         description_dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Talent-Beschreibung",
             ),
             MDDialogContentContainer(
-                content,
+                scroll,
                 orientation="vertical",
                 padding=dp(0),
             ),
@@ -741,7 +755,7 @@ class TalentItemRow(MDBoxLayout):
                 spacing="8dp",
             ),
             size_hint=(0.85, None),
-            auto_dismiss=False,
+            auto_dismiss=True,
         )
         description_dialog.open()
 
