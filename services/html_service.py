@@ -24,19 +24,20 @@ class HTMLService:
         """
         return True
 
-    def create_character_html(self, output_path, printer_friendly=False):
+    def create_character_html(self, output_path, printer_friendly=False, show_steigerungen=True):
         """
         Erstellt eine HTML-Datei des Charakterbogens
 
         Args:
             output_path (str): Pfad für die HTML-Datei
             printer_friendly (bool): Ob druckerfreundliche Version erstellt werden soll
+            show_steigerungen (bool): Ob die Steigerungsliste eingeblendet werden soll
 
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
         try:
-            success = generiere_html(self.controller.charakter, output_path, printer_friendly)
+            success = generiere_html(self.controller.charakter, output_path, printer_friendly, show_steigerungen)
 
             if success:
                 Logger.info(f"HTML erfolgreich erstellt: {output_path}")

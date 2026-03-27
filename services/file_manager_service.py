@@ -671,7 +671,8 @@ class FileManagerService:
 
             from utils.html_utils import generiere_html
             printer_friendly = getattr(self, 'temp_html_printer_friendly', False)
-            success = generiere_html(self.controller.charakter, filepath, printer_friendly)
+            show_steigerungen = getattr(self, 'temp_html_show_steigerungen', True)
+            success = generiere_html(self.controller.charakter, filepath, printer_friendly, show_steigerungen)
 
             if success:
                 self._show_success("HTML erstellen erfolgreich", f"HTML wurde gespeichert als:\n{filepath}")
@@ -680,6 +681,7 @@ class FileManagerService:
                 # Reset temp settings
                 self.temp_html_filename = ""
                 self.temp_html_printer_friendly = False
+                self.temp_html_show_steigerungen = True
 
                 # Im Browser öffnen (plattformspezifisch)
                 from kivy.utils import platform as kivy_platform
@@ -733,7 +735,8 @@ class FileManagerService:
                 Logger.info(f"Verzeichnis erstellt: {directory}")
             
             from utils.pdf_utils import generiere_pdf
-            success = generiere_pdf(self.controller.charakter, filepath, self.temp_printer_friendly)
+            show_steigerungen = getattr(self, 'temp_pdf_show_steigerungen', True)
+            success = generiere_pdf(self.controller.charakter, filepath, self.temp_printer_friendly, show_steigerungen)
             
             if success:
                 self._show_success("PDF erstellen erfolgreich", f"PDF wurde gespeichert als:\n{filepath}")
@@ -743,6 +746,7 @@ class FileManagerService:
                 # Reset temp settings
                 self.temp_pdf_filename = ""
                 self.temp_printer_friendly = False
+                self.temp_pdf_show_steigerungen = True
             else:
                 self._show_error("Fehler beim Erstellen der PDF-Datei.")
         except Exception as e:
@@ -771,17 +775,19 @@ class FileManagerService:
         self.temp_filename = filename
         Logger.debug(f"Temp filename gesetzt: {filename}")
     
-    def set_temp_pdf_settings(self, filename, printer_friendly=False):
+    def set_temp_pdf_settings(self, filename, printer_friendly=False, show_steigerungen=True):
         """Setzt die temporären PDF-Einstellungen"""
         self.temp_pdf_filename = filename
         self.temp_printer_friendly = printer_friendly
-        Logger.debug(f"Temp PDF settings gesetzt: {filename}, printer_friendly: {printer_friendly}")
+        self.temp_pdf_show_steigerungen = show_steigerungen
+        Logger.debug(f"Temp PDF settings gesetzt: {filename}, printer_friendly: {printer_friendly}, show_steigerungen: {show_steigerungen}")
 
-    def set_temp_html_settings(self, filename, printer_friendly=False):
+    def set_temp_html_settings(self, filename, printer_friendly=False, show_steigerungen=True):
         """Setzt die temporären HTML-Einstellungen"""
         self.temp_html_filename = filename
         self.temp_html_printer_friendly = printer_friendly
-        Logger.debug(f"Temp HTML settings gesetzt: {filename}, printer_friendly: {printer_friendly}")
+        self.temp_html_show_steigerungen = show_steigerungen
+        Logger.debug(f"Temp HTML settings gesetzt: {filename}, printer_friendly: {printer_friendly}, show_steigerungen: {show_steigerungen}")
     
     def clear_temp_settings(self):
         """Löscht alle temporären Einstellungen"""

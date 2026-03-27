@@ -57,18 +57,19 @@ else:
 
 # Removed - using centralized path utilities instead
 
-def generiere_pdf(charakter, output_pdf, printer_friendly=False):
+def generiere_pdf(charakter, output_pdf, printer_friendly=False, show_steigerungen=True):
     """
     Generiert das Charakterbogen-PDF und speichert es unter dem angegebenen Pfad.
-    
+
     Args:
         charakter: Das Charakterobjekt mit allen Daten
         output_pdf: Pfad für die zu erstellende PDF-Datei
         printer_friendly: Bool, ob eine druckerfreundliche Version ohne Hintergrund erstellt werden soll
-    
+        show_steigerungen: Bool, ob die Steigerungsliste eingeblendet werden soll
+
     Returns:
         bool: True wenn erfolgreich, False wenn PDF-Generierung nicht verfügbar
-    
+
     Raises:
         RuntimeError: Wenn PDF-Generierung auf aktueller Plattform nicht unterstützt wird
     """
@@ -578,7 +579,7 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False):
 
     # **Steigerungs-Journal Abschnitt**
     journal = getattr(charakter, 'steigerungs_journal', None)
-    if journal and isinstance(journal, dict) and journal.get('entries'):
+    if show_steigerungen and journal and isinstance(journal, dict) and journal.get('entries'):
         journal_entries = journal['entries']
         # Nur Einträge mit relevanten Steigerungen (keine Meta-Einträge wie charakter_geladen)
         steigerungs_typen = {

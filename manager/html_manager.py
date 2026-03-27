@@ -27,7 +27,9 @@ class HTMLManager:
         # Dialog-Referenzen
         self.html_options_dialog = None
         self.printer_friendly_checkbox = None
+        self.show_steigerungen_checkbox = None
         self.temp_printer_friendly = False
+        self.temp_show_steigerungen = True
 
     def create_character_html(self):
         """Startet den HTML-Erstellungsprozess mit Optionen"""
@@ -61,7 +63,7 @@ class HTMLManager:
         """Erstellt den Inhalt für den HTML-Options-Dialog"""
         # Höhe anpassen: mit existierender HTML brauchen wir mehr Platz
         # für Info-Label und Überschreiben-Button
-        content_height = dp(260) if exists else dp(200)
+        content_height = dp(320) if exists else dp(260)
         content = MDBoxLayout(
             orientation='vertical',
             spacing=dp(16),
@@ -92,6 +94,30 @@ class HTMLManager:
         ))
 
         content.add_widget(checkbox_container)
+
+        # Checkbox für Steigerungen einblenden
+        steigerungen_container = MDBoxLayout(
+            orientation='horizontal',
+            spacing=dp(16),
+            size_hint_y=None,
+            height=dp(48)
+        )
+
+        self.show_steigerungen_checkbox = MDCheckbox(
+            size_hint=(None, None),
+            size=(dp(48), dp(48)),
+            pos_hint={"center_y": .5},
+            active=True
+        )
+
+        steigerungen_container.add_widget(self.show_steigerungen_checkbox)
+        steigerungen_container.add_widget(MDLabel(
+            text="Steigerungen einblenden",
+            size_hint_x=1,
+            pos_hint={"center_y": .5}
+        ))
+
+        content.add_widget(steigerungen_container)
 
         # Buttons - bei zwei Buttons mehr Höhe benötigt
         buttons_height = dp(100) if exists else dp(52)
@@ -138,8 +164,9 @@ class HTMLManager:
 
         if self.html_service and self.dialog_service:
             is_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
+            show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
 
-            success = self.html_service.create_character_html(html_path, is_printer_friendly)
+            success = self.html_service.create_character_html(html_path, is_printer_friendly, show_steigerungen)
 
             if success:
                 # HTML im Browser öffnen
@@ -178,10 +205,11 @@ class HTMLManager:
             filename += '.html'
 
         self.temp_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
+        self.temp_show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
 
         # FileManager Service für Verzeichnisauswahl
         if self.file_service:
-            self.file_service.set_temp_html_settings(filename, self.temp_printer_friendly)
+            self.file_service.set_temp_html_settings(filename, self.temp_printer_friendly, self.temp_show_steigerungen)
             chars_dir = self.file_service.get_default_directory('chars')
             self.file_service.show_file_manager(chars_dir, "save_html_dir")
 

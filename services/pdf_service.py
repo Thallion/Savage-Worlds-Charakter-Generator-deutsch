@@ -36,14 +36,15 @@ class PDFService:
             'reason': "PDF-Generierung ist auf Android nicht verfügbar" if is_android() and not REPORTLAB_AVAILABLE else None
         }
     
-    def create_character_pdf(self, output_path, printer_friendly=False):
+    def create_character_pdf(self, output_path, printer_friendly=False, show_steigerungen=True):
         """
         Erstellt ein PDF des Charakterbogens
-        
+
         Args:
             output_path (str): Pfad für die PDF-Datei
             printer_friendly (bool): Ob druckerfreundliche Version erstellt werden soll
-            
+            show_steigerungen (bool): Ob die Steigerungsliste eingeblendet werden soll
+
         Returns:
             bool: True bei Erfolg, False bei Fehler
         """
@@ -53,9 +54,9 @@ class PDFService:
             error_msg = f"PDF-Erstellung nicht verfügbar: {platform_info.get('reason', 'Unbekannter Grund')}"
             Logger.error(error_msg)
             return False
-        
+
         try:
-            success = generiere_pdf(self.controller.charakter, output_path, printer_friendly)
+            success = generiere_pdf(self.controller.charakter, output_path, printer_friendly, show_steigerungen)
             
             if success:
                 Logger.info(f"PDF erfolgreich erstellt: {output_path}")
