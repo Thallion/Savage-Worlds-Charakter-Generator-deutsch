@@ -239,9 +239,13 @@ class CharakterHistorie:
         log_lines.append("GESAMTKOSTEN:")
         log_lines.append("-" * 40)
         
-        # Zähle Steigerungen
-        attribut_steigerungen = len([e for e in self.entries if e['type'] == 'attribut_steigerung'])
-        fertigkeits_steigerungen = len([e for e in self.entries if e['type'] == 'fertigkeit_steigerung'])
+        # Zähle Steigerungen (netto: nur echte Erhöhungen minus Senkungen)
+        attr_erhoeht = len([e for e in self.entries if e['type'] == 'attribut_steigerung' and e['details'].get('nach', 0) > e['details'].get('von', 0)])
+        attr_gesenkt = len([e for e in self.entries if e['type'] == 'attribut_steigerung' and e['details'].get('nach', 0) < e['details'].get('von', 0)])
+        attribut_steigerungen = attr_erhoeht - attr_gesenkt
+        fert_erhoeht = len([e for e in self.entries if e['type'] == 'fertigkeit_steigerung' and e['details'].get('nach', 0) > e['details'].get('von', 0)])
+        fert_gesenkt = len([e for e in self.entries if e['type'] == 'fertigkeit_steigerung' and e['details'].get('nach', 0) < e['details'].get('von', 0)])
+        fertigkeits_steigerungen = fert_erhoeht - fert_gesenkt
         talente_hinzugefuegt = len([e for e in self.entries if e['type'] == 'talent_hinzugefuegt'])
         talente_entfernt = len([e for e in self.entries if e['type'] == 'talent_entfernt'])
         handicaps_hinzugefuegt = len([e for e in self.entries if e['type'] == 'handicap_hinzugefuegt'])
@@ -421,11 +425,31 @@ class HistorieWidget(MDBoxLayout):
             # Log-Text aktualisieren
             self.log_display.text = self.historie.get_formatted_log()
             
-            # Statistik aktualisieren
+            # Statistik aktualisieren - Netto-Werte berechnen
             stats_text = []
-            stats_text.append(f"Attribute gesteigert: {len([e for e in self.historie.entries if 'attribut' in e['type']])} mal")
-            stats_text.append(f"Fertigkeiten gesteigert: {len([e for e in self.historie.entries if 'fertigkeit' in e['type']])} mal")
-            stats_text.append(f"Talente erworben: {len([e for e in self.historie.entries if 'talent' in e['type']])}")
+
+            # Attribute: Nur echte Steigerungen zählen (nach > von), Senkungen abziehen
+            attr_erhoeht = len([e for e in self.historie.entries
+                              if e['type'] == 'attribut_steigerung' and e['details'].get('nach', 0) > e['details'].get('von', 0)])
+            attr_gesenkt = len([e for e in self.historie.entries
+                              if e['type'] == 'attribut_steigerung' and e['details'].get('nach', 0) < e['details'].get('von', 0)])
+            attr_netto = attr_erhoeht - attr_gesenkt
+            stats_text.append(f"Attribute gesteigert: {attr_netto} (netto)")
+
+            # Fertigkeiten: Nur echte Steigerungen zählen
+            fert_erhoeht = len([e for e in self.historie.entries
+                              if e['type'] == 'fertigkeit_steigerung' and e['details'].get('nach', 0) > e['details'].get('von', 0)])
+            fert_gesenkt = len([e for e in self.historie.entries
+                              if e['type'] == 'fertigkeit_steigerung' and e['details'].get('nach', 0) < e['details'].get('von', 0)])
+            fert_netto = fert_erhoeht - fert_gesenkt
+            stats_text.append(f"Fertigkeiten gesteigert: {fert_netto} (netto)")
+
+            # Talente: Hinzugefügt minus Entfernt
+            talente_added = len([e for e in self.historie.entries if e['type'] == 'talent_hinzugefuegt'])
+            talente_removed = len([e for e in self.historie.entries if e['type'] == 'talent_entfernt'])
+            talente_netto = talente_added - talente_removed
+            stats_text.append(f"Talente: {talente_netto} (netto)")
+
             stats_text.append(f"Gesamtkosten: {sum(self.historie.total_kosten.values())} Punkte")
             
             self.stats_text.text = "\n".join(stats_text)

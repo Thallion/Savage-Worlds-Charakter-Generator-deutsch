@@ -95,7 +95,7 @@
             height: dp(70)
             font_size: "13sp"
 
-    # Log-Anzeige (ScrollView mit TextInput) - nimmt restlichen Platz
+    # Log-Anzeige (ScrollView mit Label) - nimmt restlichen Platz
     MDScrollView:
         size_hint: (1, 1)
         do_scroll_x: False
@@ -103,18 +103,16 @@
         bar_width: dp(20)
         bar_margin: dp(4)
         scroll_type: ['bars', 'content']
-        scroll_wheel_distance: dp(114)
 
-        TextInput:
+        MDLabel:
             id: log_display
             text: ""
-            readonly: True
-            multiline: True
             font_size: "12sp"
-            background_color: (0.05, 0.05, 0.05, 1)
-            foreground_color: (1, 1, 1, 1)
             size_hint_y: None
-            height: self.minimum_height
+            height: self.texture_size[1] + dp(20)
+            text_size: self.width, None
+            color: (1, 1, 1, 1)
+            padding: [dp(8), dp(8)]
 
     # Filter-Zeile kompakt
     MDBoxLayout:
