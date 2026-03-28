@@ -176,7 +176,7 @@ def _erzeuge_content_uri(context, file_path):
 
 def _share_on_android(file_path, mime_type, title):
     """Teilt eine Datei über Android Share-Intent mit FileProvider."""
-    from jnius import autoclass
+    from jnius import autoclass, cast
 
     Intent = autoclass('android.content.Intent')
     PythonActivity = autoclass('org.kivy.android.PythonActivity')
@@ -189,7 +189,10 @@ def _share_on_android(file_path, mime_type, title):
 
     intent = Intent(Intent.ACTION_SEND)
     intent.setType(mime_type)
-    intent.putExtra(Intent.EXTRA_STREAM, content_uri)
+    # Uri muss als Parcelable gecastet werden, damit pyjnius die richtige
+    # putExtra(String, Parcelable)-Überladung wählt statt putExtra(String, String)
+    intent.putExtra(Intent.EXTRA_STREAM,
+                    cast('android.os.Parcelable', content_uri))
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
