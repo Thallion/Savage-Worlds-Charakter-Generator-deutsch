@@ -180,6 +180,7 @@ def _share_on_android(file_path, mime_type, title):
 
     Intent = autoclass('android.content.Intent')
     PythonActivity = autoclass('org.kivy.android.PythonActivity')
+    JavaString = autoclass('java.lang.String')
 
     context = PythonActivity.mActivity
 
@@ -196,7 +197,9 @@ def _share_on_android(file_path, mime_type, title):
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-    chooser = Intent.createChooser(intent, title)
+    # Python-String muss als CharSequence gecastet werden für createChooser
+    java_title = cast('java.lang.CharSequence', JavaString(title))
+    chooser = Intent.createChooser(intent, java_title)
     chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     context.startActivity(chooser)
     Logger.info(f"Android: Datei geteilt: {os.path.basename(file_path)}")
@@ -205,11 +208,12 @@ def _share_on_android(file_path, mime_type, title):
 
 def _share_multiple_on_android(file_paths, mime_type, title):
     """Teilt mehrere Dateien über Android Share-Intent (ACTION_SEND_MULTIPLE)."""
-    from jnius import autoclass
+    from jnius import autoclass, cast
 
     Intent = autoclass('android.content.Intent')
     ArrayList = autoclass('java.util.ArrayList')
     PythonActivity = autoclass('org.kivy.android.PythonActivity')
+    JavaString = autoclass('java.lang.String')
 
     context = PythonActivity.mActivity
     uris = ArrayList()
@@ -226,7 +230,9 @@ def _share_multiple_on_android(file_paths, mime_type, title):
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-    chooser = Intent.createChooser(intent, title)
+    # Python-String muss als CharSequence gecastet werden für createChooser
+    java_title = cast('java.lang.CharSequence', JavaString(title))
+    chooser = Intent.createChooser(intent, java_title)
     chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     context.startActivity(chooser)
     Logger.info(f"Android: {len(file_paths)} Dateien geteilt")
