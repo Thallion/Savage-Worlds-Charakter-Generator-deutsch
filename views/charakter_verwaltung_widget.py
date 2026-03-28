@@ -1309,8 +1309,8 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         self._versende_dialog.open()
 
     def _toggle_checkbox_on_row_touch(self, row, touch, checkbox):
-        """Schaltet die Checkbox um wenn die Zeile berührt wird."""
-        if row.collide_point(*touch.pos):
+        """Schaltet die Checkbox um wenn die Zeile (aber nicht die Checkbox selbst) berührt wird."""
+        if row.collide_point(*touch.pos) and not checkbox.collide_point(*touch.pos):
             checkbox.active = not checkbox.active
             return True
         return False
