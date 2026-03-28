@@ -144,11 +144,26 @@ def fix_android_manifest_fileprovider():
                 android:resource="@xml/file_paths" />
         </provider>'''
 
+    # Pattern für fehlerhaft als String-Attribut injizierte FileProvider-Deklaration
+    # (p4a fügt extra_manifest_application_arguments manchmal als quoted String in das <application>-Tag ein)
+    broken_pattern = re.compile(
+        r'\s*"<provider\s.*?FileProvider.*?</provider>\s*"',
+        re.DOTALL
+    )
+
     fixed_any = False
     for manifest_file in manifest_files:
         try:
             with open(manifest_file, 'r') as f:
                 content = f.read()
+
+            # Zuerst: Fehlerhaft injizierte String-Deklaration entfernen
+            if broken_pattern.search(content):
+                content = broken_pattern.sub('', content)
+                print(f"P4A Hook: Removed broken FileProvider string injection from {manifest_file.name}")
+                # Datei sofort schreiben, damit der korrekte Check folgen kann
+                with open(manifest_file, 'w') as f:
+                    f.write(content)
 
             if 'FileProvider' in content:
                 print(f"P4A Hook: FileProvider already present in {manifest_file.name}")

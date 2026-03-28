@@ -156,7 +156,9 @@ android.accept_sdk_license = True
 
 # (str) Extra xml to write directly inside the <manifest><application> tag of AndroidManifest.xml
 # use that parameter to provide a filename from where to load your custom XML arguments:
-android.extra_manifest_application_arguments = ./src/android/extra_manifest_application_arguments.xml
+# Deaktiviert: p4a injiziert den Inhalt fehlerhaft als String-Attribut statt als XML-Kindelemente.
+# Der FileProvider wird stattdessen über den build_fixes.py Hook korrekt eingefügt.
+#android.extra_manifest_application_arguments = ./src/android/extra_manifest_application_arguments.xml
 
 # (str) Full name including package path of the Java class that implements Python Service
 # use that parameter to set custom Java class which extends PythonService
