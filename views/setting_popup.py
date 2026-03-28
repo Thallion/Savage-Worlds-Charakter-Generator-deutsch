@@ -210,23 +210,19 @@ class AddSettingPopup(MDBoxLayout, BaseFileManagerMixin):
         if not setting_name:
             self.show_error("Der Name des Settings darf nicht leer sein.")
             return
-        self.open_file_manager(_user_settings_path, self.datei_ausgewaehlt)
-
-    def datei_ausgewaehlt(self, gewaehlter_ordner):
-        setting_name = self.ids.setting_name_input.text.strip()
-        filename = f"{setting_name}.json"
-        vollstaendiger_pfad = Path(gewaehlter_ordner) / filename
         try:
             app = MDApp.get_running_app()
             charakter = app.controller.charakter
-            self.repository.save(setting_name, self.ids.setting_description_input.text.strip(), charakter)
-            Logger.info(f"Setting '{setting_name}' gespeichert unter {vollstaendiger_pfad}")
+            self.repository.save(setting_name, setting_description, charakter)
+            Logger.info(f"Setting '{setting_name}' gespeichert unter {_user_settings_path}")
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(f"Setting '{setting_name}' gespeichert.")
             if self.popup:
                 self.popup.dismiss()
         except Exception as e:
             self.show_error(f"Fehler beim Speichern des Settings: {e}")
-        finally:
-            self.close_file_manager()
 
     def show_error(self, message):
         error_dialog = MDDialog(
