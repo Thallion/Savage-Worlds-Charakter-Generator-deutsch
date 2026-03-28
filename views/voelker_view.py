@@ -99,7 +99,8 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Controller-Initialisierung: {e}")
 
     def open_volk_dropdown(self):
-        """Öffnet den Völker-Auswahl-Dialog mit Suchfeld."""
+        """Öffnet den Völker-Auswahl-Dialog.
+        Verwendet show_choice_dialog wie beim Setting-Wechsel."""
         try:
             if not self.controller or not hasattr(self.controller, 'charakter'):
                 Logger.warning("Controller nicht verfügbar")
@@ -111,38 +112,45 @@ class VoelkerWidget(MDBoxLayout):
                 Logger.warning("Keine Völker verfügbar")
                 return
 
-            self._show_volk_search_popup()
+            self._show_volk_choice_dialog()
 
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen des Völker-Dialogs: {e}", exc_info=True)
 
-    def _show_volk_search_popup(self):
-        """Zeigt ein Bottom-Sheet mit Suchfeld für die Völker-Auswahl.
-        Verwendet SearchBottomSheet statt MDDialog für Android-Kompatibilität."""
-        from views.ui_components import SearchBottomSheet
-
+    def _show_volk_choice_dialog(self):
+        """Zeigt einen Auswahl-Dialog für Völker, analog zum Setting-Wechsel-Dialog.
+        Verwendet dialog_service.show_choice_dialog() für zuverlässiges Scrolling."""
         try:
+            from services.service_container import service_container
+
             charakter = self.controller.charakter
             voelker_namen = sorted(charakter.voelker.keys())
 
-            def _on_confirm(selected_name):
-                if selected_name != self.selected_volk_name:
-                    self._select_volk_from_dropdown(selected_name)
+            # Auswahloptionen aufbauen: "Kein Volk" + alle Völker
+            choices = [("Kein Volk", None)]
+            for name in voelker_namen:
+                choices.append((name, name))
 
-            self.volk_search_sheet = SearchBottomSheet(
-                title="Volk auswählen",
-                items=voelker_namen,
-                selected=self.selected_volk_name,
-                on_confirm=_on_confirm,
-                search_hint="Volk suchen...",
-                allow_none=True,
-                none_label="Kein Volk",
-            )
-            self.volk_search_sheet.open()
-            Logger.debug(f"Völker-BottomSheet geöffnet mit {len(voelker_namen)} Völkern")
+            current_volk = self.selected_volk_name or "Keins"
+            message = f"Aktuelles Volk: {current_volk}\n\nWähle ein Volk:"
+
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_choice_dialog(
+                    message,
+                    "Volk auswählen",
+                    choices,
+                    self._on_volk_choice_made
+                )
+            Logger.debug(f"Völker-Dialog geöffnet mit {len(voelker_namen)} Völkern")
 
         except Exception as e:
-            Logger.error(f"Fehler bei Völker-Popup-Bestätigung: {e}", exc_info=True)
+            Logger.error(f"Fehler bei Völker-Dialog: {e}", exc_info=True)
+
+    def _on_volk_choice_made(self, chosen_volk):
+        """Verarbeitet die Völker-Auswahl aus dem Dialog."""
+        if chosen_volk != self.selected_volk_name:
+            self._select_volk_from_dropdown(chosen_volk)
 
     def _on_volk_popup_selected(self, volk_name):
         """Behandelt die Auswahl eines Volkes im Popup-Dialog."""
