@@ -498,6 +498,8 @@ class GenerationPointsBar(MDBoxLayout):
         """Aktualisiert den lokalen char_gen_completed-Status aus dem Charakter-Modell"""
         if self.charakter:
             self.char_gen_completed = self.charakter.char_gen_completed
+            # Alle Texte neu laden, damit Attribute, Fertigkeiten und Vermögen korrekt angezeigt werden
+            self.update_all_texts()
 
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""

@@ -378,6 +378,8 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
             Logger.debug("Charaktergenerierung abgeschlossen. `verbleibende_aufstiege` ist bereit zur Nutzung.")
         else:
             Logger.debug("Charaktergenerierung noch nicht abgeschlossen.")
+        # UI-Refresh auslösen, damit Pointbar und andere Views aktualisiert werden
+        self.dispatch('on_charakter_change')
 
     def update_eigenschaften_tab(self, dt):
         app = App.get_running_app()
