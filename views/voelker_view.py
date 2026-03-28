@@ -567,10 +567,11 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Erstellen des Dialog-Menüs: {e}", exc_info=True)
 
     def _show_search_dialog(self, items, callback, caller, get_options_func=None, get_alle_items_func=None):
-        """Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl."""
+        """Zeigt einen erweiterten Dialog mit Suchfeld für Talent/Attribut/Fertigkeiten-Auswahl.
+        Aufbau wie Setting-Wechsel-Dialog für Android-Kompatibilität."""
         from kivymd.uix.dialog import (
             MDDialog, MDDialogHeadlineText,
-            MDDialogContentContainer, MDDialogButtonContainer
+            MDDialogContentContainer
         )
         from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
         from kivymd.uix.button import MDButton, MDButtonText, MDIconButton
@@ -621,20 +622,14 @@ class VoelkerWidget(MDBoxLayout):
 
             # Scrollbare Liste
             scroll_view = MDScrollView(
-                size_hint_y=None,
+                size_hint=(1, None),
                 height=dp(250),
-                bar_width=dp(20) if _mobile else dp(15),
-                bar_margin=dp(4) if _mobile else dp(0),
-                bar_color=self.theme_cls.primaryColor,
-                bar_inactive_color=self.theme_cls.onSurfaceColor
             )
-            if _mobile:
-                scroll_view.scroll_type = ['bars', 'content']
 
             # Container für Liste
             list_container = MDBoxLayout(
                 orientation='horizontal',
-                size_hint_y=None
+                size_hint=(1, None)
             )
             list_container.bind(minimum_height=list_container.setter('height'))
 
@@ -643,13 +638,6 @@ class VoelkerWidget(MDBoxLayout):
                 size_hint_x=1
             )
             items_list.bind(minimum_height=items_list.setter('height'))
-
-            # Rechter Bereich für besseres Scrolling
-            scroll_zone = MDBoxLayout(
-                size_hint_x=None,
-                width=dp(20),
-                size_hint_y=1
-            )
 
             def populate_list(item_list):
                 """Befüllt die Liste mit Items."""
@@ -672,8 +660,9 @@ class VoelkerWidget(MDBoxLayout):
 
             # Container zusammenbauen
             list_container.add_widget(items_list)
-            list_container.add_widget(scroll_zone)
+            list_container.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
             scroll_view.add_widget(list_container)
+            list_container.bind(minimum_height=list_container.setter('height'))
 
             # Such-Funktionalität
             def filter_items(instance, text):
@@ -706,6 +695,17 @@ class VoelkerWidget(MDBoxLayout):
             dialog_content.add_widget(search_row)
             dialog_content.add_widget(scroll_view)
 
+            # Buttons innerhalb des Content-Containers (wie Setting-Wechsel-Dialog)
+            button_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Abbrechen"), style="text",
+                on_release=lambda x: self._defocus_and_call(self.search_dialog.dismiss),
+            ))
+            dialog_content.add_widget(button_row)
+
             # Dialog erstellen - auto_dismiss=False für Android-Kompatibilität
             self.search_dialog = MDDialog(
                 MDDialogHeadlineText(text="Auswahl treffen"),
@@ -713,14 +713,6 @@ class VoelkerWidget(MDBoxLayout):
                     dialog_content,
                     orientation="vertical",
                     padding=dp(0),
-                ),
-                MDDialogButtonContainer(
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=lambda x: self._defocus_and_call(self.search_dialog.dismiss),
-                    ),
-                    spacing="8dp",
                 ),
                 size_hint=(0.85, None),
                 auto_dismiss=False,
