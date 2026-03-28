@@ -182,9 +182,7 @@ class EigenschaftenManager:
         Logger.debug(f"Attribut '{attribut_name}' wurde auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier} gesteigert.")
 
         # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
-        if charakter.steigerungs_journal is None:
-            charakter.steigerungs_journal = []
-        charakter.steigerungs_journal.append({
+        self._get_cost_entries(charakter).append({
             'typ': 'attribut',
             'name': attribut_name,
             'wert': attribut.wuerfel.value,
@@ -385,9 +383,7 @@ class EigenschaftenManager:
         Logger.debug(f"Fertigkeit '{fertigkeit_name}' wurde auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier} gesteigert.")
 
         # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
-        if charakter.steigerungs_journal is None:
-            charakter.steigerungs_journal = []
-        charakter.steigerungs_journal.append({
+        self._get_cost_entries(charakter).append({
             'typ': 'fertigkeit',
             'name': fertigkeit_name,
             'wert': fertigkeit.wuerfel.value,
@@ -415,6 +411,23 @@ class EigenschaftenManager:
         
         return True
     
+    def _get_cost_entries(self, charakter):
+        """
+        Gibt die Kosten-Einträge des Steigerungs-Journals als Liste zurück.
+        Behandelt beide Formate: Liste (Kosten-Tracking) und Dict (Historie-System).
+        Initialisiert das Journal falls nötig.
+        """
+        journal = getattr(charakter, 'steigerungs_journal', None)
+        if journal is None:
+            charakter.steigerungs_journal = {'cost_entries': []}
+            return charakter.steigerungs_journal['cost_entries']
+        if isinstance(journal, dict):
+            if 'cost_entries' not in journal:
+                journal['cost_entries'] = []
+            return journal['cost_entries']
+        # Legacy-Format: Journal ist direkt eine Liste
+        return journal
+
     def _finde_zahlungsquelle_im_journal(self, charakter, typ, name, wert):
         """
         Sucht im Steigerungs-Journal die Zahlungsquelle für eine bestimmte Steigerung.
@@ -429,20 +442,21 @@ class EigenschaftenManager:
         Returns:
             str: Die Zahlungsquelle ('Attributspunkte', 'Fertigkeitspunkte', 'Handicap-Punkte', 'Aufstiege')
         """
-        if charakter.steigerungs_journal is None:
+        cost_entries = self._get_cost_entries(charakter)
+        if not cost_entries:
             # Kein Journal vorhanden - Fallback auf Standard
             if charakter.char_gen_completed:
                 return "Aufstiege"
             return "Attributspunkte" if typ == 'attribut' else "Fertigkeitspunkte"
 
         # Suche den letzten passenden Eintrag im Journal (rückwärts)
-        for i in range(len(charakter.steigerungs_journal) - 1, -1, -1):
-            eintrag = charakter.steigerungs_journal[i]
+        for i in range(len(cost_entries) - 1, -1, -1):
+            eintrag = cost_entries[i]
             if (eintrag.get('typ') == typ and
                 eintrag.get('name') == name and
                 eintrag.get('wert') == wert):
                 # Eintrag gefunden - aus Journal entfernen und Quelle zurückgeben
-                charakter.steigerungs_journal.pop(i)
+                cost_entries.pop(i)
                 return eintrag.get('zahlungsquelle', "Attributspunkte" if typ == 'attribut' else "Fertigkeitspunkte")
 
         # Kein passender Eintrag gefunden - Fallback

@@ -906,9 +906,7 @@ class TalentManager:
             self._reset_ignore_voraussetzungen_flag(talent_name_key)
 
             # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
-            if self.charakter.steigerungs_journal is None:
-                self.charakter.steigerungs_journal = []
-            self.charakter.steigerungs_journal.append({
+            self._get_cost_entries().append({
                 'typ': 'talent',
                 'name': talent_name_key,
                 'zahlungsquelle': 'Handicap-Punkte',
@@ -931,7 +929,7 @@ class TalentManager:
             self.charakter.berechne_abgeleitete_werte()
             return True
         return False
-    
+
     def _waehle_mit_aufstieg(self, talent_name_key):
         """
         Wählt ein Talent mit einem Aufstieg aus.
@@ -952,9 +950,7 @@ class TalentManager:
             self._reset_ignore_voraussetzungen_flag(talent_name_key)
 
             # Zahlungsquelle im Journal speichern für korrekte Rückerstattung
-            if self.charakter.steigerungs_journal is None:
-                self.charakter.steigerungs_journal = []
-            self.charakter.steigerungs_journal.append({
+            self._get_cost_entries().append({
                 'typ': 'talent',
                 'name': talent_name_key,
                 'zahlungsquelle': 'Aufstiege',
@@ -978,6 +974,23 @@ class TalentManager:
             return True
         return False
     
+    def _get_cost_entries(self):
+        """
+        Gibt die Kosten-Einträge des Steigerungs-Journals als Liste zurück.
+        Behandelt beide Formate: Liste (Kosten-Tracking) und Dict (Historie-System).
+        Initialisiert das Journal falls nötig.
+        """
+        journal = getattr(self.charakter, 'steigerungs_journal', None)
+        if journal is None:
+            self.charakter.steigerungs_journal = {'cost_entries': []}
+            return self.charakter.steigerungs_journal['cost_entries']
+        if isinstance(journal, dict):
+            if 'cost_entries' not in journal:
+                journal['cost_entries'] = []
+            return journal['cost_entries']
+        # Legacy-Format: Journal ist direkt eine Liste
+        return journal
+
     def _finde_talent_zahlungsquelle(self, talent_name_key):
         """
         Sucht im Steigerungs-Journal die Zahlungsquelle für ein Talent.
@@ -988,17 +1001,15 @@ class TalentManager:
         Returns:
             str: Die Zahlungsquelle ('Handicap-Punkte' oder 'Aufstiege')
         """
-        journal = self.charakter.steigerungs_journal
-        if journal is None:
-            return "Aufstiege"
+        cost_entries = self._get_cost_entries()
 
         # Suche den letzten passenden Eintrag (rückwärts)
-        for i in range(len(journal) - 1, -1, -1):
-            eintrag = journal[i]
+        for i in range(len(cost_entries) - 1, -1, -1):
+            eintrag = cost_entries[i]
             if (eintrag.get('typ') == 'talent' and
                 eintrag.get('name') == talent_name_key):
                 # Eintrag gefunden - aus Journal entfernen und Quelle zurückgeben
-                journal.pop(i)
+                cost_entries.pop(i)
                 return eintrag.get('zahlungsquelle', 'Aufstiege')
 
         return "Aufstiege"
