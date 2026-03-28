@@ -378,6 +378,159 @@ class HistorieWidget(MDBoxLayout):
     
     def _build_ui(self):
         """Erstellt die Benutzeroberfläche."""
+        if _mobile:
+            self._build_ui_mobile()
+        else:
+            self._build_ui_desktop()
+
+    def _build_ui_mobile(self):
+        """Erstellt die mobile Benutzeroberfläche (Android/Smartphone)."""
+        self.padding = dp(6)
+        self.spacing = dp(6)
+
+        # Kompakter Header: Titel + Auto-Log Switch in einer Zeile
+        title_row = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(40),
+            spacing=dp(8)
+        )
+        header_label = MDLabel(
+            text="[b]Charakter-Historie[/b]",
+            markup=True,
+            font_size="18sp",
+            size_hint_x=1
+        )
+        title_row.add_widget(header_label)
+
+        switch_box = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_x=None,
+            width=dp(110),
+            spacing=dp(4)
+        )
+        switch_box.add_widget(MDLabel(
+            text="Auto-Log:",
+            size_hint_x=None,
+            width=dp(65),
+            font_size="13sp"
+        ))
+        self.auto_log_switch = MDSwitch()
+        self.auto_log_switch.active = True
+        switch_box.add_widget(self.auto_log_switch)
+        title_row.add_widget(switch_box)
+        self.add_widget(title_row)
+
+        # Buttons in einer Zeile, gleichmäßig verteilt
+        button_row = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(44),
+            spacing=dp(6)
+        )
+
+        save_button = MDButton(
+            style="tonal",
+            size_hint_x=1,
+            on_release=self._save_history
+        )
+        save_button.add_widget(MDButtonText(text="Speichern"))
+        button_row.add_widget(save_button)
+
+        clear_button = MDButton(
+            style="tonal",
+            size_hint_x=1,
+            on_release=self._clear_history
+        )
+        clear_button.add_widget(MDButtonText(text="Löschen"))
+        button_row.add_widget(clear_button)
+
+        export_button = MDButton(
+            style="tonal",
+            size_hint_x=1,
+            on_release=self._export_full_history
+        )
+        export_button.add_widget(MDButtonText(text="Exportieren"))
+        button_row.add_widget(export_button)
+
+        self.add_widget(button_row)
+
+        # Divider
+        self.add_widget(MDDivider())
+
+        # Kompakte Statistik-Karte
+        self.stats_card = MDCard(
+            orientation='vertical',
+            padding=dp(8),
+            size_hint_y=None,
+            height=dp(110),
+            md_bg_color=(0.1, 0.1, 0.1, 1)
+        )
+
+        stats_label = MDLabel(
+            text="[b]Session-Statistik:[/b]",
+            markup=True,
+            size_hint_y=None,
+            height=dp(24),
+            font_size="14sp"
+        )
+        self.stats_card.add_widget(stats_label)
+
+        self.stats_text = MDLabel(
+            text="Keine Daten verfügbar",
+            size_hint_y=None,
+            height=dp(70),
+            font_size="13sp"
+        )
+        self.stats_card.add_widget(self.stats_text)
+
+        self.add_widget(self.stats_card)
+
+        # Log-Anzeige (ScrollView mit TextInput) - nimmt restlichen Platz
+        log_scroll = MDScrollView(
+            size_hint=(1, 1),
+            do_scroll_x=False,
+            do_scroll_y=True,
+            bar_width=dp(20),
+            bar_margin=dp(4),
+            scroll_type=['bars', 'content'],
+            scroll_wheel_distance=dp(114)
+        )
+
+        self.log_display = TextInput(
+            text="",
+            readonly=True,
+            multiline=True,
+            font_size="12sp",
+            background_color=(0.05, 0.05, 0.05, 1),
+            foreground_color=(1, 1, 1, 1),
+            size_hint_y=None
+        )
+        self.log_display.bind(minimum_height=self.log_display.setter('height'))
+
+        log_scroll.add_widget(self.log_display)
+        self.add_widget(log_scroll)
+
+        # Filter-Zeile kompakt
+        filter_box = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(48),
+            spacing=dp(6)
+        )
+
+        self.filter_input = MDTextField(
+            hint_text="Suche in Historie...",
+            mode="outlined",
+            size_hint_x=1
+        )
+        self.filter_input.bind(text=self._apply_filter)
+        filter_box.add_widget(self.filter_input)
+
+        self.add_widget(filter_box)
+
+    def _build_ui_desktop(self):
+        """Erstellt die Desktop-Benutzeroberfläche."""
         # Header mit Titel und Aktionen - aufgeteilt in zwei Zeilen
         header_container = MDBoxLayout(
             orientation='vertical',
@@ -385,7 +538,7 @@ class HistorieWidget(MDBoxLayout):
             height=dp(120),
             spacing=dp(10)
         )
-        
+
         # Erste Zeile: Titel
         title_box = MDBoxLayout(
             orientation='horizontal',
@@ -393,7 +546,7 @@ class HistorieWidget(MDBoxLayout):
             height=dp(40),
             spacing=dp(10)
         )
-        
+
         # Titel
         header_label = MDLabel(
             text="[b]Charakter-Historie[/b]",
@@ -403,7 +556,7 @@ class HistorieWidget(MDBoxLayout):
         )
         title_box.add_widget(header_label)
         header_container.add_widget(title_box)
-        
+
         # Zweite Zeile: Controls in separaten Cards
         controls_box = MDBoxLayout(
             orientation='horizontal',
@@ -411,7 +564,7 @@ class HistorieWidget(MDBoxLayout):
             height=dp(60),
             spacing=dp(15)
         )
-        
+
         # Auto-Log Switch in Card
         switch_card = MDCard(
             orientation='horizontal',
@@ -431,10 +584,10 @@ class HistorieWidget(MDBoxLayout):
         self.auto_log_switch.active = True
         switch_card.add_widget(self.auto_log_switch)
         controls_box.add_widget(switch_card)
-        
+
         # Spacer
         controls_box.add_widget(MDLabel(text="", size_hint_x=0.2))
-        
+
         # Save Button in Card
         save_card = MDCard(
             size_hint_x=None,
@@ -451,8 +604,8 @@ class HistorieWidget(MDBoxLayout):
         save_button.add_widget(MDButtonText(text="Log speichern"))
         save_card.add_widget(save_button)
         controls_box.add_widget(save_card)
-        
-        # Clear Button in Card  
+
+        # Clear Button in Card
         clear_card = MDCard(
             size_hint_x=None,
             width=dp(240),
@@ -468,13 +621,13 @@ class HistorieWidget(MDBoxLayout):
         clear_button.add_widget(MDButtonText(text="Historie löschen"))
         clear_card.add_widget(clear_button)
         controls_box.add_widget(clear_card)
-        
+
         header_container.add_widget(controls_box)
         self.add_widget(header_container)
-        
+
         # Divider
         self.add_widget(MDDivider())
-        
+
         # Statistik-Karte
         self.stats_card = MDCard(
             orientation='vertical',
@@ -483,7 +636,7 @@ class HistorieWidget(MDBoxLayout):
             height=dp(150),
             md_bg_color=(0.1, 0.1, 0.1, 1)
         )
-        
+
         stats_label = MDLabel(
             text="[b]Aktuelle Session-Statistik:[/b]",
             markup=True,
@@ -491,27 +644,27 @@ class HistorieWidget(MDBoxLayout):
             height=dp(30)
         )
         self.stats_card.add_widget(stats_label)
-        
+
         self.stats_text = MDLabel(
             text="Keine Daten verfügbar",
             size_hint_y=None,
             height=dp(100)
         )
         self.stats_card.add_widget(self.stats_text)
-        
+
         self.add_widget(self.stats_card)
-        
+
         # Log-Anzeige (ScrollView mit TextInput)
         log_scroll = MDScrollView(
             size_hint=(1, 1),
             do_scroll_x=False,
             do_scroll_y=True,
-            bar_width=dp(20) if _mobile else dp(15),
-            bar_margin=dp(4) if _mobile else dp(8),
+            bar_width=dp(15),
+            bar_margin=dp(8),
             scroll_type=['bars', 'content'],
             scroll_wheel_distance=dp(114)
         )
-        
+
         self.log_display = TextInput(
             text="",
             readonly=True,
@@ -522,10 +675,10 @@ class HistorieWidget(MDBoxLayout):
             size_hint_y=None
         )
         self.log_display.bind(minimum_height=self.log_display.setter('height'))
-        
+
         log_scroll.add_widget(self.log_display)
         self.add_widget(log_scroll)
-        
+
         # Filter-Optionen (unten)
         filter_box = MDBoxLayout(
             orientation='horizontal',
@@ -533,14 +686,14 @@ class HistorieWidget(MDBoxLayout):
             height=dp(50),
             spacing=dp(10)
         )
-        
+
         filter_label = MDLabel(
             text="Filter:",
             size_hint_x=None,
             width=dp(60)
         )
         filter_box.add_widget(filter_label)
-        
+
         self.filter_input = MDTextField(
             hint_text="Suche in Historie...",
             mode="outlined",
@@ -548,7 +701,7 @@ class HistorieWidget(MDBoxLayout):
         )
         self.filter_input.bind(text=self._apply_filter)
         filter_box.add_widget(self.filter_input)
-        
+
         # Export-Button in Card
         export_card = MDCard(
             size_hint_x=None,
@@ -565,7 +718,7 @@ class HistorieWidget(MDBoxLayout):
         export_button.add_widget(MDButtonText(text="Vollständige Historie exportieren"))
         export_card.add_widget(export_button)
         filter_box.add_widget(export_card)
-        
+
         self.add_widget(filter_box)
     
     def _get_charakter_rang(self) -> str:
