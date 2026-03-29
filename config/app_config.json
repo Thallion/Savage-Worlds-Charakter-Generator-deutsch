@@ -22,8 +22,8 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "50 Fathoms",
-  "force_mobile_layout": true,
+  "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "config_version": "1.0",
-  "last_updated": "2026-03-28T07:55:12.990356"
+  "last_updated": "2026-03-29T10:31:42.410955"
 }
