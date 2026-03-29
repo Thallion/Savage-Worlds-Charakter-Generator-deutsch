@@ -52,15 +52,7 @@
                     id: selected_volk_text
                     text: "Volk auswählen..."
 
-    # Zusatzelemente Container
-    MDBoxLayout:
-        id: zusatzelemente_container
-        orientation: 'vertical'
-        size_hint_y: None
-        height: self.minimum_height
-        spacing: dp(8)
-
-    # Volk-Details ScrollView
+    # Volk-Details ScrollView - Zusatzelemente und Details zusammen scrollbar
     MDScrollView:
         size_hint_y: 1
         do_scroll_x: False
@@ -72,9 +64,24 @@
         scroll_distance: dp(20)
 
         MDBoxLayout:
-            id: selected_volk_container
             orientation: 'vertical'
             size_hint_y: None
             height: self.minimum_height
             spacing: dp(8)
             padding: [dp(4), dp(6), dp(4), dp(6)]
+
+            # Zusatzelemente Container (ENTWEDER/ODER Auswahlen)
+            MDBoxLayout:
+                id: zusatzelemente_container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
+
+            # Volk-Details Container
+            MDBoxLayout:
+                id: selected_volk_container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)

@@ -567,12 +567,18 @@ class VoelkerWidget(MDBoxLayout):
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
         """Erstellt eine Sektion für Zusatzelemente."""
+        # Kompaktere Werte für Mobile
+        _pad = dp(10) if _mobile else dp(14)
+        _spacing = dp(6) if _mobile else dp(10)
+        _row_height = dp(44) if _mobile else dp(55)
+        _icon_size = dp(44) if _mobile else dp(55)
+
         # Hauptcontainer für die Sektion
         section_card = MDCard(
             size_hint_x=1,
             size_hint_y=None,
-            padding=dp(14),
-            spacing=dp(10),
+            padding=_pad,
+            spacing=_spacing,
             elevation=3,
             radius=[12],
             md_bg_color=self.theme_cls.surfaceContainerHighColor,
@@ -582,35 +588,35 @@ class VoelkerWidget(MDBoxLayout):
         section_content = MDBoxLayout(
             orientation='vertical',
             size_hint_y=None,
-            spacing=dp(10)
+            spacing=_spacing
         )
         section_content.bind(minimum_height=section_content.setter('height'))
         section_card.bind(minimum_height=section_card.setter('height'))
-        
+
         # Titel der Sektion
         titel_label = MDLabel(
             text=f"{titel}:",
             font_style="Body",
             theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(30),
+            height=dp(24) if _mobile else dp(30),
             halign='left',
             valign='center',
             bold=True
         )
-        
+
         # Auswahl-Bereich
         auswahl_row = MDBoxLayout(
             orientation='horizontal',
             size_hint_y=None,
-            height=dp(55),
-            spacing=dp(20)
+            height=_row_height,
+            spacing=dp(10) if _mobile else dp(20)
         )
-        
+
         # Aktuell ausgewählten Text ermitteln
         current_selection = self.voelker_auswahlen.get(volk_name, {}).get(auswahl_typ, placeholder_text)
         text_color = "Primary" if current_selection != placeholder_text else "Secondary"
-        
+
         # Auswahl-Text mit dynamischer Höhe
         auswahl_label = MDLabel(
             text=current_selection,
@@ -623,12 +629,12 @@ class VoelkerWidget(MDBoxLayout):
         )
         auswahl_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
         auswahl_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(30), instance.texture_size[1])))
-        
+
         # Dropdown-Button
         dropdown_button = MDIconButton(
             icon="chevron-down",
             size_hint=(None, None),
-            size=(dp(55), dp(55)),
+            size=(_icon_size, _icon_size),
             on_release=lambda x: self._show_dropdown_menu(
                 get_options_func(),
                 select_func,
@@ -1055,11 +1061,19 @@ class VoelkerWidget(MDBoxLayout):
             hat_talent = current_wahl and current_wahl.startswith('Talent: ')
             hat_attribut = current_wahl == 'Geschicklichkeit W6'
 
+            # Kompaktere Werte für Mobile
+            _pad = dp(10) if _mobile else dp(14)
+            _spacing = dp(6) if _mobile else dp(10)
+            _btn_spacing = dp(10) if _mobile else dp(20)
+            _btn_height = dp(40) if _mobile else dp(48)
+            _row_height = dp(44) if _mobile else dp(55)
+            _title_height = dp(30) if _mobile else dp(40)
+
             # Hauptcontainer für die Sektion
             section_card = MDCard(
                 size_hint_x=1,
                 size_hint_y=None,
-                padding=dp(14),
+                padding=_pad,
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
@@ -1070,7 +1084,7 @@ class VoelkerWidget(MDBoxLayout):
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                spacing=dp(10)
+                spacing=_spacing
             )
             section_content.bind(minimum_height=section_content.setter('height'))
 
@@ -1080,20 +1094,20 @@ class VoelkerWidget(MDBoxLayout):
                 font_style="Body",
                 theme_text_color="Primary",
                 size_hint_y=None,
-                height=dp(40),
+                height=_title_height,
                 halign='left',
                 valign='top',
                 bold=True
             )
             titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
+            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(_title_height, instance.texture_size[1] + dp(6))))
 
             # Zwei Buttons für die Auswahl
             buttons_row = MDBoxLayout(
                 orientation='horizontal',
                 size_hint_y=None,
-                height=dp(55),
-                spacing=dp(20)
+                height=_row_height,
+                spacing=_btn_spacing
             )
 
             # Button 1: Freies Talent - filled wenn ausgewählt
@@ -1101,7 +1115,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_talent else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._halbelf_waehle_talent()
             )
             talent_button.add_widget(MDButtonText(text="Freies Talent"))
@@ -1111,7 +1125,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_attribut else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._halbelf_waehle_attribut()
             )
             attribut_button.add_widget(MDButtonText(text="Geschicklichkeit W6"))
@@ -1129,7 +1143,7 @@ class VoelkerWidget(MDBoxLayout):
                     font_style="Body",
                     theme_text_color="Primary",
                     size_hint_y=None,
-                    height=dp(30),
+                    height=dp(24) if _mobile else dp(30),
                     halign='left',
                     valign='center',
                     bold=True
@@ -1163,11 +1177,19 @@ class VoelkerWidget(MDBoxLayout):
             hat_talent = current_wahl and current_wahl.startswith('Talent: ')
             hat_fertigkeitspunkte = current_wahl == '+2 Fertigkeitspunkte'
 
+            # Kompaktere Werte für Mobile
+            _pad = dp(10) if _mobile else dp(14)
+            _spacing = dp(6) if _mobile else dp(10)
+            _btn_spacing = dp(10) if _mobile else dp(20)
+            _btn_height = dp(40) if _mobile else dp(48)
+            _row_height = dp(44) if _mobile else dp(55)
+            _title_height = dp(30) if _mobile else dp(40)
+
             # Hauptcontainer
             section_card = MDCard(
                 size_hint_x=1,
                 size_hint_y=None,
-                padding=dp(14),
+                padding=_pad,
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
@@ -1178,7 +1200,7 @@ class VoelkerWidget(MDBoxLayout):
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                spacing=dp(10)
+                spacing=_spacing
             )
             section_content.bind(minimum_height=section_content.setter('height'))
 
@@ -1188,20 +1210,20 @@ class VoelkerWidget(MDBoxLayout):
                 font_style="Body",
                 theme_text_color="Primary",
                 size_hint_y=None,
-                height=dp(40),
+                height=_title_height,
                 halign='left',
                 valign='top',
                 bold=True
             )
             titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
+            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(_title_height, instance.texture_size[1] + dp(6))))
 
             # Zwei Buttons
             buttons_row = MDBoxLayout(
                 orientation='horizontal',
                 size_hint_y=None,
-                height=dp(55),
-                spacing=dp(20)
+                height=_row_height,
+                spacing=_btn_spacing
             )
 
             # Button 1: Freies Talent
@@ -1209,7 +1231,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_talent else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._mensch_vielseitig_waehle_talent()
             )
             talent_button.add_widget(MDButtonText(text="Freies Talent"))
@@ -1219,7 +1241,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_fertigkeitspunkte else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._mensch_vielseitig_waehle_fertigkeitspunkte()
             )
             fp_button.add_widget(MDButtonText(text="+2 Fertigkeitspunkte"))
@@ -1237,7 +1259,7 @@ class VoelkerWidget(MDBoxLayout):
                     font_style="Body",
                     theme_text_color="Primary",
                     size_hint_y=None,
-                    height=dp(30),
+                    height=dp(24) if _mobile else dp(30),
                     halign='left',
                     valign='center',
                     bold=True
