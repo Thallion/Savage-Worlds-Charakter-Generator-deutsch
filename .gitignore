@@ -11,6 +11,7 @@ bin/
 build/
 Texte/
 screenshots/
+backups/
 ToDo/
 .buildozer/
 *.egg-info/

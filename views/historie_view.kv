@@ -1,0 +1,170 @@
+# historie_view.kv - Desktop-Layout
+
+#:import dp kivy.metrics.dp
+
+<HistorieWidget>:
+    orientation: 'vertical'
+    padding: dp(10)
+    spacing: dp(10)
+
+    # Header mit Titel und Aktionen
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: dp(120)
+        spacing: dp(10)
+
+        # Erste Zeile: Titel
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(40)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "[b]Charakter-Historie[/b]"
+                markup: True
+                font_size: "20sp"
+                size_hint_x: 1
+
+        # Zweite Zeile: Controls
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(60)
+            spacing: dp(15)
+
+            # Auto-Log Switch in Card
+            MDCard:
+                orientation: 'horizontal'
+                size_hint_x: None
+                width: dp(180)
+                height: dp(50)
+                padding: dp(10)
+                spacing: dp(10)
+                md_bg_color: (0.2, 0.2, 0.2, 1)
+
+                MDLabel:
+                    text: "Auto-Log:"
+                    size_hint_x: None
+                    width: dp(70)
+
+                MDSwitch:
+                    id: auto_log_switch
+                    active: True
+
+            # Spacer
+            MDLabel:
+                text: ""
+                size_hint_x: 0.2
+
+            # Save Button
+            MDCard:
+                size_hint_x: None
+                width: dp(220)
+                height: dp(50)
+                padding: dp(5)
+                md_bg_color: (0.1, 0.1, 0.1, 0.5)
+
+                MDButton:
+                    style: "tonal"
+                    size_hint_x: 1
+                    on_release: root._save_history(self)
+
+                    MDButtonText:
+                        text: "Log speichern"
+
+            # Clear Button
+            MDCard:
+                size_hint_x: None
+                width: dp(240)
+                height: dp(50)
+                padding: dp(5)
+                md_bg_color: (0.1, 0.1, 0.1, 0.5)
+
+                MDButton:
+                    style: "tonal"
+                    size_hint_x: 1
+                    on_release: root._clear_history(self)
+
+                    MDButtonText:
+                        text: "Historie löschen"
+
+    # Divider
+    MDDivider:
+
+    # Statistik-Karte
+    MDCard:
+        id: stats_card
+        orientation: 'vertical'
+        padding: dp(15)
+        size_hint_y: None
+        height: dp(150)
+        md_bg_color: (0.1, 0.1, 0.1, 1)
+
+        MDLabel:
+            text: "[b]Aktuelle Session-Statistik:[/b]"
+            markup: True
+            size_hint_y: None
+            height: dp(30)
+
+        MDLabel:
+            id: stats_text
+            text: "Keine Daten verfügbar"
+            size_hint_y: None
+            height: dp(100)
+
+    # Log-Anzeige (ScrollView mit TextInput)
+    MDScrollView:
+        size_hint: (1, 1)
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(15)
+        bar_margin: dp(8)
+        scroll_type: ['bars', 'content']
+        scroll_wheel_distance: dp(114)
+
+        TextInput:
+            id: log_display
+            text: ""
+            readonly: True
+            multiline: True
+            font_size: "14sp"
+            background_color: (0.05, 0.05, 0.05, 1)
+            foreground_color: (1, 1, 1, 1)
+            size_hint_y: None
+            height: self.minimum_height
+
+    # Filter-Optionen (unten)
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(50)
+        spacing: dp(10)
+
+        MDLabel:
+            text: "Filter:"
+            size_hint_x: None
+            width: dp(60)
+
+        MDTextField:
+            id: filter_input
+            hint_text: "Suche in Historie..."
+            mode: "outlined"
+            size_hint_x: 0.5
+
+        # Export-Button
+        MDCard:
+            size_hint_x: None
+            width: dp(340)
+            height: dp(40)
+            padding: dp(3)
+            md_bg_color: (0.1, 0.1, 0.1, 0.5)
+
+            MDButton:
+                style: "tonal"
+                size_hint_x: 1
+                on_release: root._export_full_history(self)
+
+                MDButtonText:
+                    text: "Vollständige Historie exportieren"

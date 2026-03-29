@@ -1,8 +1,10 @@
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.uix.widget import Widget
+from kivy.uix.scrollview import ScrollView
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import (
     MDDialog,
@@ -161,12 +163,18 @@ class WaffeDialogHandler:
         dialog_content.dialog = self.dialog
         self.dialog_content = dialog_content
         
+        scroll_view = ScrollView(
+            size_hint_y=None,
+            height=min(dialog_content.height, Window.height * 0.6),
+        )
+        scroll_view.add_widget(dialog_content)
+
         self.dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Neue Waffe hinzufügen",
             ),
             MDDialogContentContainer(
-                dialog_content,
+                scroll_view,
                 orientation="vertical",
             ),
             MDDialogButtonContainer(
@@ -260,12 +268,18 @@ class WaffeDialogHandler:
                 self.dialog_content = dialog_content
                 self.selected_waffe = waffe_name  # Speichere den Key für Updates
                 
+                scroll_view = ScrollView(
+                    size_hint_y=None,
+                    height=min(dialog_content.height, Window.height * 0.6),
+                )
+                scroll_view.add_widget(dialog_content)
+
                 self.dialog = MDDialog(
                     MDDialogHeadlineText(
                         text="Waffe bearbeiten",
                     ),
                     MDDialogContentContainer(
-                        dialog_content,
+                        scroll_view,
                         orientation="vertical",
                     ),
                     MDDialogButtonContainer(

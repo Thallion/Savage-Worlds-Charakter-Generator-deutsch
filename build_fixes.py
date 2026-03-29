@@ -124,10 +124,19 @@ def fix_android_manifest_fileprovider():
         return False
 
     # AndroidManifest.xml in allen Build-Verzeichnissen suchen
+    # python-for-android legt das Manifest je nach Version an verschiedenen Pfaden ab
     manifest_files = list(platform_dir.glob("build-*/dists/*/src/main/AndroidManifest.xml"))
     if not manifest_files:
-        # Alternativer Pfad
         manifest_files = list(platform_dir.glob("build-*/dists/*/AndroidManifest.xml"))
+    if not manifest_files:
+        # Neuere p4a-Versionen: Manifest liegt direkt im Gradle-Build
+        manifest_files = list(platform_dir.glob("build-*/dists/*/templates/AndroidManifest.xml"))
+    if not manifest_files:
+        # Breitere Suche als letzter Versuch
+        manifest_files = [
+            p for p in platform_dir.glob("**/AndroidManifest.xml")
+            if 'build' in str(p) and '.buildozer' in str(p)
+        ]
 
     if not manifest_files:
         print("P4A Hook: No AndroidManifest.xml found, skipping FileProvider fix")
@@ -144,11 +153,26 @@ def fix_android_manifest_fileprovider():
                 android:resource="@xml/file_paths" />
         </provider>'''
 
+    # Pattern für fehlerhaft als String-Attribut injizierte FileProvider-Deklaration
+    # (p4a fügt extra_manifest_application_arguments manchmal als quoted String in das <application>-Tag ein)
+    broken_pattern = re.compile(
+        r'\s*"<provider\s.*?FileProvider.*?</provider>\s*"',
+        re.DOTALL
+    )
+
     fixed_any = False
     for manifest_file in manifest_files:
         try:
             with open(manifest_file, 'r') as f:
                 content = f.read()
+
+            # Zuerst: Fehlerhaft injizierte String-Deklaration entfernen
+            if broken_pattern.search(content):
+                content = broken_pattern.sub('', content)
+                print(f"P4A Hook: Removed broken FileProvider string injection from {manifest_file.name}")
+                # Datei sofort schreiben, damit der korrekte Check folgen kann
+                with open(manifest_file, 'w') as f:
+                    f.write(content)
 
             if 'FileProvider' in content:
                 print(f"P4A Hook: FileProvider already present in {manifest_file.name}")
@@ -273,7 +297,11 @@ if __name__ == "__main__":
     if pyjnius_fixed:
         print("P4A Hook: PyJNIus Python 3+ compatibility issues fixed")
 
-    if kivy_fixed or pyjnius_fixed:
+    manifest_fixed = fix_android_manifest_fileprovider()
+    if manifest_fixed:
+        print("P4A Hook: FileProvider in AndroidManifest.xml eingefügt")
+
+    if kivy_fixed or pyjnius_fixed or manifest_fixed:
         print("P4A Hook: Build fixes completed successfully")
     else:
         print("P4A Hook: No fixes were needed")

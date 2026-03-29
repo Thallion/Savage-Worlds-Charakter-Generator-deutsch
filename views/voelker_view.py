@@ -117,32 +117,134 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Öffnen des Völker-Dialogs: {e}", exc_info=True)
 
     def _show_volk_search_popup(self):
-        """Zeigt ein Bottom-Sheet mit Suchfeld für die Völker-Auswahl.
-        Verwendet SearchBottomSheet statt MDDialog für Android-Kompatibilität."""
-        from views.ui_components import SearchBottomSheet
+        """Zeigt einen Auswahl-Dialog für Völker mit Suchfeld und scrollbarer Liste.
+        Gleicher Stil wie der Setting-Wechsel-Dialog in der Charakter-Verwaltung."""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
+        from kivymd.uix.list import MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
 
         try:
             charakter = self.controller.charakter
             voelker_namen = sorted(charakter.voelker.keys())
+            current_volk = self.selected_volk_name
 
-            def _on_confirm(selected_name):
-                if selected_name != self.selected_volk_name:
-                    self._select_volk_from_dropdown(selected_name)
+            self._volk_pending_selection = current_volk
 
-            self.volk_search_sheet = SearchBottomSheet(
-                title="Volk auswählen",
-                items=voelker_namen,
-                selected=self.selected_volk_name,
-                on_confirm=_on_confirm,
-                search_hint="Volk suchen...",
-                allow_none=True,
-                none_label="Kein Volk",
+            # Hauptcontainer
+            dialog_content = MDBoxLayout(
+                orientation="vertical", spacing=dp(15), padding=dp(20),
+                size_hint_y=None,
             )
-            self.volk_search_sheet.open()
-            Logger.debug(f"Völker-BottomSheet geöffnet mit {len(voelker_namen)} Völkern")
+            dialog_content.bind(minimum_height=dialog_content.setter('height'))
+
+            # Info
+            dialog_content.add_widget(MDLabel(
+                text=f"Aktuelles Volk: {current_volk or 'Keins'}",
+                theme_text_color="Secondary", font_style="Body",
+                size_hint_y=None, height=dp(30),
+            ))
+
+            # Suchfeld
+            from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+            search_field = MDTextField(
+                mode="outlined", size_hint_y=None, height=dp(56), size_hint_x=1
+            )
+            search_field.add_widget(MDTextFieldHintText(text="Volk suchen..."))
+            dialog_content.add_widget(search_field)
+
+            # Scrollbare Liste
+            scroll_view = MDScrollView(size_hint=(1, None), height=dp(250))
+            scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
+            items_list = MDList(size_hint_y=None, size_hint_x=1)
+            items_list.bind(minimum_height=items_list.setter('height'))
+            scroll_layout.add_widget(items_list)
+            scroll_layout.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
+            scroll_view.add_widget(scroll_layout)
+            scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+            dialog_content.add_widget(scroll_view)
+
+            app = App.get_running_app()
+
+            def populate_list(*args):
+                items_list.clear_widgets()
+                search_text = search_field.text.lower() if search_field.text else ""
+                pending = self._volk_pending_selection
+
+                # "Kein Volk" Option
+                if not search_text or search_text in "kein volk":
+                    is_sel = pending is None
+                    item = MDListItem(
+                        size_hint_y=None, height=dp(48),
+                        on_release=lambda x: _select(None),
+                        md_bg_color=app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
+                    )
+                    if is_sel:
+                        item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                    headline = MDListItemHeadlineText(text="Kein Volk")
+                    if is_sel:
+                        headline.bold = True
+                    item.add_widget(headline)
+                    items_list.add_widget(item)
+
+                for name in voelker_namen:
+                    if search_text and search_text not in name.lower():
+                        continue
+                    is_sel = (pending == name)
+                    item = MDListItem(
+                        size_hint_y=None, height=dp(48),
+                        on_release=lambda x, n=name: _select(n),
+                        md_bg_color=app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
+                    )
+                    if is_sel:
+                        item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                    headline = MDListItemHeadlineText(text=name)
+                    if is_sel:
+                        headline.bold = True
+                    item.add_widget(headline)
+                    items_list.add_widget(item)
+
+            def _select(volk_name):
+                self._volk_pending_selection = volk_name
+                populate_list()
+
+            search_field.bind(text=populate_list)
+            populate_list()
+
+            # Buttons
+            button_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Abbrechen"), style="text",
+                on_release=lambda x: self._defocus_and_call(self._volk_dialog.dismiss),
+            ))
+            button_row.add_widget(MDButton(
+                MDButtonText(text="Auswählen"), style="text",
+                on_release=lambda x: self._defocus_and_call(self._apply_volk_selection),
+            ))
+            dialog_content.add_widget(button_row)
+
+            self._volk_dialog = MDDialog(
+                MDDialogHeadlineText(text="Volk auswählen"),
+                MDDialogContentContainer(dialog_content, orientation="vertical", padding=dp(0)),
+                size_hint=(0.85, None),
+                auto_dismiss=False,
+            )
+            self._volk_dialog.open()
+            Logger.debug(f"Völker-Dialog geöffnet mit {len(voelker_namen)} Völkern")
 
         except Exception as e:
-            Logger.error(f"Fehler bei Völker-Popup-Bestätigung: {e}", exc_info=True)
+            Logger.error(f"Fehler bei Völker-Dialog: {e}", exc_info=True)
+
+    def _apply_volk_selection(self):
+        """Wendet die Volk-Auswahl aus dem Dialog an."""
+        try:
+            self._volk_dialog.dismiss()
+            chosen = getattr(self, '_volk_pending_selection', None)
+            if chosen != self.selected_volk_name:
+                self._select_volk_from_dropdown(chosen)
+        except Exception as e:
+            Logger.error(f"Fehler bei Volk-Auswahl: {e}", exc_info=True)
 
     def _on_volk_popup_selected(self, volk_name):
         """Behandelt die Auswahl eines Volkes im Popup-Dialog."""
@@ -469,12 +571,16 @@ class VoelkerWidget(MDBoxLayout):
         from kivymd.uix.chip import MDChip, MDChipText
         from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
+        # Kompaktere Werte für Mobile
+        _pad = dp(10) if _mobile else dp(14)
+        _spacing = dp(6) if _mobile else dp(10)
+
         # Hauptcontainer für die Sektion
         section_card = MDCard(
             size_hint_x=1,
             size_hint_y=None,
-            padding=dp(14),
-            spacing=dp(10),
+            padding=_pad,
+            spacing=_spacing,
             elevation=3,
             radius=[12],
             md_bg_color=self.theme_cls.surfaceContainerHighColor,
@@ -484,7 +590,7 @@ class VoelkerWidget(MDBoxLayout):
         section_content = MDBoxLayout(
             orientation='vertical',
             size_hint_y=None,
-            spacing=dp(10)
+            spacing=_spacing
         )
         section_content.bind(minimum_height=section_content.setter('height'))
         section_card.bind(minimum_height=section_card.setter('height'))
@@ -495,7 +601,7 @@ class VoelkerWidget(MDBoxLayout):
             font_style="Body",
             theme_text_color="Primary",
             size_hint_y=None,
-            height=dp(30),
+            height=dp(24) if _mobile else dp(30),
             halign='left',
             valign='center',
             bold=True
@@ -1092,11 +1198,19 @@ class VoelkerWidget(MDBoxLayout):
             hat_talent = current_wahl and current_wahl.startswith('Talent: ')
             hat_attribut = current_wahl == 'Geschicklichkeit W6'
 
+            # Kompaktere Werte für Mobile
+            _pad = dp(10) if _mobile else dp(14)
+            _spacing = dp(6) if _mobile else dp(10)
+            _btn_spacing = dp(10) if _mobile else dp(20)
+            _btn_height = dp(40) if _mobile else dp(48)
+            _row_height = dp(44) if _mobile else dp(55)
+            _title_height = dp(30) if _mobile else dp(40)
+
             # Hauptcontainer für die Sektion
             section_card = MDCard(
                 size_hint_x=1,
                 size_hint_y=None,
-                padding=dp(14),
+                padding=_pad,
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
@@ -1107,7 +1221,7 @@ class VoelkerWidget(MDBoxLayout):
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                spacing=dp(10)
+                spacing=_spacing
             )
             section_content.bind(minimum_height=section_content.setter('height'))
 
@@ -1117,20 +1231,20 @@ class VoelkerWidget(MDBoxLayout):
                 font_style="Body",
                 theme_text_color="Primary",
                 size_hint_y=None,
-                height=dp(40),
+                height=_title_height,
                 halign='left',
                 valign='top',
                 bold=True
             )
             titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
+            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(_title_height, instance.texture_size[1] + dp(6))))
 
             # Zwei Buttons für die Auswahl
             buttons_row = MDBoxLayout(
                 orientation='horizontal',
                 size_hint_y=None,
-                height=dp(55),
-                spacing=dp(20)
+                height=_row_height,
+                spacing=_btn_spacing
             )
 
             # Button 1: Freies Talent - filled wenn ausgewählt
@@ -1138,7 +1252,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_talent else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._halbelf_waehle_talent()
             )
             talent_button.add_widget(MDButtonText(text="Freies Talent"))
@@ -1148,7 +1262,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_attribut else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._halbelf_waehle_attribut()
             )
             attribut_button.add_widget(MDButtonText(text="Geschicklichkeit W6"))
@@ -1166,7 +1280,7 @@ class VoelkerWidget(MDBoxLayout):
                     font_style="Body",
                     theme_text_color="Primary",
                     size_hint_y=None,
-                    height=dp(30),
+                    height=dp(24) if _mobile else dp(30),
                     halign='left',
                     valign='center',
                     bold=True
@@ -1200,11 +1314,19 @@ class VoelkerWidget(MDBoxLayout):
             hat_talent = current_wahl and current_wahl.startswith('Talent: ')
             hat_fertigkeitspunkte = current_wahl == '+2 Fertigkeitspunkte'
 
+            # Kompaktere Werte für Mobile
+            _pad = dp(10) if _mobile else dp(14)
+            _spacing = dp(6) if _mobile else dp(10)
+            _btn_spacing = dp(10) if _mobile else dp(20)
+            _btn_height = dp(40) if _mobile else dp(48)
+            _row_height = dp(44) if _mobile else dp(55)
+            _title_height = dp(30) if _mobile else dp(40)
+
             # Hauptcontainer
             section_card = MDCard(
                 size_hint_x=1,
                 size_hint_y=None,
-                padding=dp(14),
+                padding=_pad,
                 elevation=3,
                 radius=[12],
                 md_bg_color=self.theme_cls.surfaceContainerHighColor,
@@ -1215,7 +1337,7 @@ class VoelkerWidget(MDBoxLayout):
             section_content = MDBoxLayout(
                 orientation='vertical',
                 size_hint_y=None,
-                spacing=dp(10)
+                spacing=_spacing
             )
             section_content.bind(minimum_height=section_content.setter('height'))
 
@@ -1225,20 +1347,20 @@ class VoelkerWidget(MDBoxLayout):
                 font_style="Body",
                 theme_text_color="Primary",
                 size_hint_y=None,
-                height=dp(40),
+                height=_title_height,
                 halign='left',
                 valign='top',
                 bold=True
             )
             titel_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(40), instance.texture_size[1] + dp(10))))
+            titel_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(_title_height, instance.texture_size[1] + dp(6))))
 
             # Zwei Buttons
             buttons_row = MDBoxLayout(
                 orientation='horizontal',
                 size_hint_y=None,
-                height=dp(55),
-                spacing=dp(20)
+                height=_row_height,
+                spacing=_btn_spacing
             )
 
             # Button 1: Freies Talent
@@ -1246,7 +1368,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_talent else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._mensch_vielseitig_waehle_talent()
             )
             talent_button.add_widget(MDButtonText(text="Freies Talent"))
@@ -1256,7 +1378,7 @@ class VoelkerWidget(MDBoxLayout):
                 style="filled" if hat_fertigkeitspunkte else "outlined",
                 size_hint_x=0.5,
                 size_hint_y=None,
-                height=dp(48),
+                height=_btn_height,
                 on_release=lambda x: self._mensch_vielseitig_waehle_fertigkeitspunkte()
             )
             fp_button.add_widget(MDButtonText(text="+2 Fertigkeitspunkte"))
@@ -1274,7 +1396,7 @@ class VoelkerWidget(MDBoxLayout):
                     font_style="Body",
                     theme_text_color="Primary",
                     size_hint_y=None,
-                    height=dp(30),
+                    height=dp(24) if _mobile else dp(30),
                     halign='left',
                     valign='center',
                     bold=True
