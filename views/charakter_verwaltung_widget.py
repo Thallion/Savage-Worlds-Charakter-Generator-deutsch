@@ -172,9 +172,11 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         return sorted(settings_set)
 
     def _show_setting_selection_popup(self):
-        """Schritt 1: Setting-Auswahl als Bottom-Sheet.
-        Verwendet SearchBottomSheet statt MDDialog für Android-Kompatibilität."""
-        from views.ui_components import SearchBottomSheet
+        """Schritt 1: Setting-Auswahl als MDDialog.
+        Gleicher Stil wie der Setting-Wechsel-Dialog."""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer
+        from kivymd.uix.list import MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
         available_settings = self._get_available_settings()
         if not available_settings:
@@ -183,19 +185,93 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
         # Standard: SWAE vorausgewählt
         default_setting = 'SWAE' if 'SWAE' in available_settings else available_settings[0]
+        self._wizard_pending_setting = default_setting
 
-        def _on_setting_confirmed(selected_name):
-            self._wizard_selected_setting = selected_name or default_setting
-            self._show_character_config_popup()
-
-        self._wizard_setting_sheet = SearchBottomSheet(
-            title="Setting auswählen",
-            items=available_settings,
-            selected=default_setting,
-            on_confirm=_on_setting_confirmed,
-            search_hint="Setting suchen...",
+        # Hauptcontainer
+        dialog_content = MDBoxLayout(
+            orientation="vertical", spacing=dp(15), padding=dp(20),
+            size_hint_y=None,
         )
-        self._wizard_setting_sheet.open()
+        dialog_content.bind(minimum_height=dialog_content.setter('height'))
+
+        # Suchfeld
+        search_field = MDTextField(
+            mode="outlined", size_hint_y=None, height=dp(56), size_hint_x=1
+        )
+        search_field.add_widget(MDTextFieldHintText(text="Setting suchen..."))
+        dialog_content.add_widget(search_field)
+
+        # Scrollbare Liste
+        scroll_view = MDScrollView(size_hint=(1, None), height=dp(250))
+        scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
+        items_list = MDList(size_hint_y=None, size_hint_x=1)
+        items_list.bind(minimum_height=items_list.setter('height'))
+        scroll_layout.add_widget(items_list)
+        scroll_layout.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
+        scroll_view.add_widget(scroll_layout)
+        scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+        dialog_content.add_widget(scroll_view)
+
+        def populate_list(*args):
+            items_list.clear_widgets()
+            search_text = search_field.text.lower() if search_field.text else ""
+            pending = self._wizard_pending_setting
+
+            for setting_name in sorted(available_settings):
+                if search_text and search_text not in setting_name.lower():
+                    continue
+                is_sel = (pending == setting_name)
+                item = MDListItem(
+                    size_hint_y=None, height=dp(48),
+                    on_release=lambda x, s=setting_name: _select(s),
+                    md_bg_color=self.app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
+                )
+                if is_sel:
+                    item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                headline = MDListItemHeadlineText(text=setting_name)
+                if is_sel:
+                    headline.bold = True
+                item.add_widget(headline)
+                items_list.add_widget(item)
+
+        def _select(setting_name):
+            self._wizard_pending_setting = setting_name
+            populate_list()
+
+        search_field.bind(text=populate_list)
+        populate_list()
+
+        # Buttons
+        button_row = MDBoxLayout(
+            orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+        )
+        button_row.add_widget(MDBoxLayout(size_hint_x=1))
+        button_row.add_widget(MDButton(
+            MDButtonText(text="Abbrechen"), style="text",
+            on_release=lambda x: self._defocus_and_call(self._wizard_setting_dialog.dismiss),
+        ))
+        button_row.add_widget(MDButton(
+            MDButtonText(text="Auswählen"), style="text",
+            on_release=lambda x: self._defocus_and_call(self._apply_wizard_setting),
+        ))
+        dialog_content.add_widget(button_row)
+
+        self._wizard_setting_dialog = MDDialog(
+            MDDialogHeadlineText(text="Setting auswählen"),
+            MDDialogContentContainer(dialog_content, orientation="vertical", padding=dp(0)),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self._wizard_setting_dialog.open()
+
+    def _apply_wizard_setting(self):
+        """Wendet die Setting-Auswahl im Wizard an und geht zum nächsten Schritt."""
+        try:
+            self._wizard_setting_dialog.dismiss()
+            self._wizard_selected_setting = self._wizard_pending_setting
+            self._show_character_config_popup()
+        except Exception as e:
+            Logger.error(f"Fehler bei Setting-Auswahl im Wizard: {e}")
 
     def _show_character_config_popup(self):
         """Schritt 2: Startpunkte und Vermögen konfigurieren.
