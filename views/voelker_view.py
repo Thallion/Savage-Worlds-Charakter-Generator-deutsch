@@ -566,12 +566,14 @@ class VoelkerWidget(MDBoxLayout):
             Logger.info(f"Volk '{self.selected_volk_name}' hat Attribut-Optionen: {zusatzelemente.get('attribut_optionen', [])}")
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
-        """Erstellt eine Sektion für Zusatzelemente."""
+        """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.
+        Ersetzt den bisherigen Dialog-basierten Ansatz für bessere Android-Kompatibilität."""
+        from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+
         # Kompaktere Werte für Mobile
         _pad = dp(10) if _mobile else dp(14)
         _spacing = dp(6) if _mobile else dp(10)
-        _row_height = dp(44) if _mobile else dp(55)
-        _icon_size = dp(44) if _mobile else dp(55)
 
         # Hauptcontainer für die Sektion
         section_card = MDCard(
@@ -604,55 +606,190 @@ class VoelkerWidget(MDBoxLayout):
             valign='center',
             bold=True
         )
-
-        # Auswahl-Bereich
-        auswahl_row = MDBoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-            height=_row_height,
-            spacing=dp(10) if _mobile else dp(20)
-        )
+        section_content.add_widget(titel_label)
 
         # Aktuell ausgewählten Text ermitteln
-        current_selection = self.voelker_auswahlen.get(volk_name, {}).get(auswahl_typ, placeholder_text)
-        text_color = "Primary" if current_selection != placeholder_text else "Secondary"
+        current_selection = self.voelker_auswahlen.get(volk_name, {}).get(auswahl_typ, None)
 
-        # Auswahl-Text mit dynamischer Höhe
-        auswahl_label = MDLabel(
-            text=current_selection,
-            font_style="Body",
-            theme_text_color=text_color,
-            size_hint_x=0.7,
-            size_hint_y=None,
-            halign='left',
-            valign='top'
-        )
-        auswahl_label.bind(size=lambda instance, size: setattr(instance, 'text_size', (size[0], None)))
-        auswahl_label.bind(text_size=lambda instance, size: setattr(instance, 'height', max(dp(30), instance.texture_size[1])))
-
-        # Dropdown-Button
-        dropdown_button = MDIconButton(
-            icon="chevron-down",
-            size_hint=(None, None),
-            size=(_icon_size, _icon_size),
-            on_release=lambda x: self._show_dropdown_menu(
-                get_options_func(),
-                select_func,
-                dropdown_button,
-                get_options_func=get_options_func,
-                get_alle_items_func=get_alle_items_func
+        # Ausgewähltes Element anzeigen (wenn vorhanden)
+        if current_selection and current_selection != placeholder_text:
+            auswahl_row = MDBoxLayout(
+                orientation='horizontal',
+                size_hint_y=None,
+                height=dp(44),
+                spacing=dp(10)
             )
+            selected_chip = MDChip(
+                MDChipText(text=current_selection),
+                type="filter",
+                active=True,
+                md_bg_color=self.theme_cls.primaryContainerColor,
+            )
+            auswahl_row.add_widget(selected_chip)
+
+            # Ändern-Button
+            aendern_button = MDIconButton(
+                icon="pencil",
+                size_hint=(None, None),
+                size=(dp(44), dp(44)),
+            )
+            auswahl_row.add_widget(aendern_button)
+            section_content.add_widget(auswahl_row)
+
+        # Suchfeld
+        search_field = MDTextField(
+            mode="outlined",
+            size_hint_y=None,
+            height=dp(56),
+            size_hint_x=1
         )
-        
-        auswahl_row.add_widget(auswahl_label)
-        auswahl_row.add_widget(dropdown_button)
-        
-        section_content.add_widget(titel_label)
-        section_content.add_widget(auswahl_row)
-        
+        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
+
+        # Filter-Toggle State
+        filter_state = {'nur_verfuegbare': True}
+
+        # Suchzeile mit optionalem Filter-Button
+        search_row = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(56),
+            spacing=dp(10)
+        )
+        search_row.add_widget(search_field)
+
+        if get_alle_items_func:
+            filter_button = MDIconButton(
+                icon="filter",
+                style="tonal",
+                size_hint=(None, None),
+                size=(dp(56), dp(56))
+            )
+            search_row.add_widget(filter_button)
+
+        # Scrollbare Chip-Liste
+        scroll_view = MDScrollView(
+            size_hint=(1, None),
+            height=dp(200),
+        )
+
+        chips_container = MDBoxLayout(
+            orientation='vertical',
+            size_hint_y=None,
+            spacing=dp(6),
+            padding=[0, dp(4), 0, dp(4)]
+        )
+        chips_container.bind(minimum_height=chips_container.setter('height'))
+
+        def populate_chips(item_list):
+            """Befüllt den Container mit Chips."""
+            chips_container.clear_widgets()
+            search_text = search_field.text.lower() if search_field.text else ""
+            for item in sorted(item_list):
+                if not item or not str(item).strip():
+                    continue
+                if item in [NO_TALENT_AVAILABLE_TEXT, NO_ATTRIBUT_AVAILABLE_TEXT, NO_FERTIGKEIT_AVAILABLE_TEXT]:
+                    continue
+                if search_text and search_text not in str(item).lower():
+                    continue
+                is_selected = (str(item) == current_selection)
+                chip = MDChip(
+                    MDChipText(text=str(item)),
+                    type="filter",
+                    active=is_selected,
+                    md_bg_color=self.theme_cls.primaryContainerColor if is_selected else [0, 0, 0, 0],
+                    size_hint_y=None,
+                    height=dp(40),
+                    on_release=lambda x, selected_item=item: self._on_chip_selected(select_func, selected_item)
+                )
+                chips_container.add_widget(chip)
+
+            if not chips_container.children:
+                chips_container.add_widget(MDLabel(
+                    text="Keine Einträge gefunden",
+                    theme_text_color="Secondary",
+                    size_hint_y=None,
+                    height=dp(40),
+                    halign='center'
+                ))
+
+        # Initiale Chips anzeigen
+        options = get_options_func()
+        populate_chips(options)
+
+        scroll_view.add_widget(chips_container)
+
+        # Such-Funktionalität
+        def filter_items(instance, text):
+            if filter_state['nur_verfuegbare']:
+                current_items = get_options_func()
+            else:
+                current_items = get_alle_items_func() if get_alle_items_func else get_options_func()
+            populate_chips(current_items)
+
+        search_field.bind(text=filter_items)
+
+        # Filter-Toggle
+        if get_alle_items_func:
+            def toggle_filter(instance):
+                filter_state['nur_verfuegbare'] = not filter_state['nur_verfuegbare']
+                if filter_state['nur_verfuegbare']:
+                    filter_button.icon = "filter"
+                    filter_button.style = "tonal"
+                    current_items = get_options_func()
+                else:
+                    filter_button.icon = "filter-off"
+                    filter_button.style = "outlined"
+                    current_items = get_alle_items_func()
+                populate_chips(current_items)
+
+            filter_button.bind(on_release=toggle_filter)
+
+        # Aufklapp-Logik: Suchfeld + Chips zunächst versteckt wenn bereits ausgewählt
+        expandable_box = MDBoxLayout(
+            orientation='vertical',
+            size_hint_y=None,
+            spacing=dp(8)
+        )
+        expandable_box.bind(minimum_height=expandable_box.setter('height'))
+        expandable_box.add_widget(search_row)
+        expandable_box.add_widget(scroll_view)
+
+        if current_selection and current_selection != placeholder_text:
+            # Versteckt starten - nur Ändern-Button sichtbar
+            expandable_box.opacity = 0
+            expandable_box.disabled = True
+            expandable_box.size_hint_y = None
+            expandable_box.height = 0
+
+            def toggle_expand(instance):
+                if expandable_box.height == 0:
+                    expandable_box.opacity = 1
+                    expandable_box.disabled = False
+                    expandable_box.size_hint_y = None
+                    expandable_box.bind(minimum_height=expandable_box.setter('height'))
+                    # Höhe neu berechnen
+                    expandable_box.height = search_row.height + scroll_view.height + dp(8)
+                else:
+                    expandable_box.opacity = 0
+                    expandable_box.disabled = True
+                    expandable_box.height = 0
+
+            aendern_button.bind(on_release=toggle_expand)
+
+        section_content.add_widget(expandable_box)
         section_card.add_widget(section_content)
-        
+
         return section_card
+
+    def _on_chip_selected(self, select_func, item):
+        """Behandelt die Auswahl eines Chips in der Inline-Auswahl."""
+        try:
+            Logger.debug(f"Chip ausgewählt: {item}")
+            Window.release_all_keyboards()
+            if select_func:
+                select_func(item)
+        except Exception as e:
+            Logger.error(f"Fehler bei Chip-Auswahl: {e}", exc_info=True)
 
     def _show_dropdown_menu(self, items, callback, caller, get_options_func=None, get_alle_items_func=None):
         """Zeigt ein verbessertes Dialog-Menü mit Suchfeld."""
