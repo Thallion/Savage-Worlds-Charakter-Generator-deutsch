@@ -28,20 +28,19 @@ class GameElementsHandler:
             event_service.publish(EventTypes.CHARACTER_UPDATED, {})
     
     # ==================== SETTING MANAGEMENT ====================
-    
+
     def open_setting_switch_options(self):
-        """KORRIGIERT: Setting-Wechsel mit Merge-Dialog"""
+        """Setting-Wechsel mit Slide-In Overlay (kein MDDialog)"""
         if not self.charakter_controller or not self.charakter_controller.charakter:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_error_dialog("Kein Charakter verfügbar.")
             return
-        
-        # Verfügbare Settings direkt über den Charakter abrufen
+
         char = self.charakter_controller.charakter
         available_settings = char.custom_element_manager.get_all_settings()
         current_setting = char.active_setting_name
-        
+
         if not available_settings or len(available_settings) <= 1:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
@@ -50,41 +49,23 @@ class GameElementsHandler:
                     "Kein Setting-Wechsel möglich"
                 )
             return
-        
-        # Setting-Auswahl
-        setting_choices = []
-        for setting_name in available_settings:
-            if setting_name != current_setting:
-                setting_choices.append((setting_name, setting_name))
-        
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
-            message = f"Aktuelles Setting: {current_setting}\n\nWähle ein neues Setting:"
-            dialog_service.show_choice_dialog(
-                message,
-                "Setting wechseln", 
-                setting_choices,
-                self._on_setting_choice_made
-            )
+
+        # Overlay öffnen statt MDDialog
+        from views.setting_wechsel_overlay import SettingWechselOverlay
+
+        if not hasattr(self, '_setting_overlay'):
+            self._setting_overlay = SettingWechselOverlay()
+
+        self._setting_overlay.open(
+            current_setting=current_setting,
+            available_settings=available_settings,
+            on_setting_chosen=self._on_setting_overlay_chosen,
+        )
     
-    def _on_setting_choice_made(self, chosen_setting):
-        """KORRIGIERT: Verarbeitet die Setting-Auswahl mit Merge-Dialog"""
-        if not chosen_setting or not self.charakter_controller or not self.charakter_controller.charakter:
-            return
-        
-        char = self.charakter_controller.charakter
-        if chosen_setting == char.active_setting_name:
-            return
-        
-        # HIER IST DIE KORREKTUR: Jetzt wird der Setting-Merge-Dialog verwendet
-        dialog_service = service_container.get_dialog_service()
-        if dialog_service:
-            # Verwende die show_setting_merge_dialog Methode
-            dialog_service.show_setting_merge_dialog(
-                chosen_setting,
-                lambda merge_choice: self._apply_setting_change(chosen_setting, merge_choice)
-            )
-    
+    def _on_setting_overlay_chosen(self, setting_name, merge_mode):
+        """Callback vom SettingWechselOverlay - Setting + Merge-Modus gewählt"""
+        self._apply_setting_change(setting_name, merge_mode)
+
     def _apply_setting_change(self, setting_name, merge_choice):
         """
         Wendet den Setting-Wechsel mit der gewählten Merge-Option an
