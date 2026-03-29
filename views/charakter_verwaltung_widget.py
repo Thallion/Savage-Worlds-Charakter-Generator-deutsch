@@ -1087,7 +1087,11 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         return self.game_elements_handler.open_setting_switch_options()
 
     def open_setting_switch_popup(self):
-        """Setting-Wechsel mit Auswahl-Popup (Mobile, Stil wie Neuer-Charakter-Wizard)"""
+        """Setting-Wechsel - delegiert an GameElementsHandler (Overlay statt MDDialog)"""
+        return self.game_elements_handler.open_setting_switch_options()
+
+    def _open_setting_switch_popup_legacy(self):
+        """LEGACY: Setting-Wechsel mit Auswahl-Popup (alter MDDialog-Code, nicht mehr verwendet)"""
         try:
             if not (self.app.controller and self.app.controller.charakter):
                 self._show_warning("Kein Charakter", "Kein Charakter verfügbar.")
