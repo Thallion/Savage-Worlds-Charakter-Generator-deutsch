@@ -2,9 +2,11 @@
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.uix.widget import Widget
+from kivy.uix.scrollview import ScrollView
 from kivy.properties import ObjectProperty
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.button import MDButton, MDButtonText
@@ -133,12 +135,18 @@ class MachtDialogHandler:
         dialog_content.dialog = self.dialog
         self.dialog_content = dialog_content
         
+        scroll_view = ScrollView(
+            size_hint_y=None,
+            height=min(dialog_content.height, Window.height * 0.6),
+        )
+        scroll_view.add_widget(dialog_content)
+
         self.dialog = MDDialog(
             MDDialogHeadlineText(
                 text="Neue Macht hinzufügen",
             ),
             MDDialogContentContainer(
-                dialog_content,
+                scroll_view,
                 orientation="vertical",
             ),
             MDDialogButtonContainer(
@@ -189,12 +197,18 @@ class MachtDialogHandler:
             self.dialog_content = dialog_content
             self.selected_macht = macht_name_key  # Speichere den Key für Updates
             
+            scroll_view = ScrollView(
+                size_hint_y=None,
+                height=min(dialog_content.height, Window.height * 0.6),
+            )
+            scroll_view.add_widget(dialog_content)
+
             self.dialog = MDDialog(
                 MDDialogHeadlineText(
                     text="Macht bearbeiten",
                 ),
                 MDDialogContentContainer(
-                    dialog_content,
+                    scroll_view,
                     orientation="vertical",
                 ),
                 MDDialogButtonContainer(
