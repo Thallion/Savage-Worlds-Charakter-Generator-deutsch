@@ -5,7 +5,7 @@
 A German-language character generator for the **Savage Worlds** tabletop RPG system. Built with Python/Kivy/KivyMD, it supports multiple game settings (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies, Horror Kompendium, Rippers, SciFi Kompendium, Superkräfte Kompendium, 50 Fathoms, Hellfrost) and runs on Desktop (Windows/Linux/macOS) and Android.
 
 **License:** CC BY-NC-SA 4.0 (non-commercial)
-**Current Version:** 0.6.4.4
+**Current Version:** 0.6.5.1
 **Python:** 3.8+ (3.11 recommended)
 
 ## Quick Reference
@@ -63,7 +63,11 @@ main.kv                    # Root Kivy layout
 │   ├── ui_components.py   # Shared UI components
 │   ├── *_view.py/.kv      # Tab screens (profil, voelker, eigenschaften, etc.)
 │   ├── *_view_mobile.kv   # Smartphone-optimized layouts (loaded on Android/mobile)
-│   ├── *_popup.py/.kv     # Modal dialogs (talent, handicap, macht, superkraft, waffe, etc.)
+│   ├── *_popup.py/.kv     # Modal dialogs (11 popups: talent, handicap, macht, etc.)
+│   ├── setting_wechsel_overlay.py  # Slide-in overlay for setting switching
+│   ├── superkraefte_view.py  # Super powers widget
+│   ├── template_wizard.py    # Template wizard
+│   ├── charakter_verwaltung_widget.py/.kv  # Character management widget
 │   ├── pointbar_view.py   # Generation points progress bar
 │   ├── historie_view.py   # Change history widget
 │   └── einstellungen_widget.py  # Settings widget
@@ -73,6 +77,7 @@ main.kv                    # Root Kivy layout
 │   ├── character_handler.py     # Character operations handler
 │   ├── template_handler.py      # Template system
 │   ├── game_elements_handler.py # Game element dialogs
+│   ├── undo_manager.py          # Undo/redo functionality
 │   └── decorators.py            # Utility decorators
 │
 ├── services/              # Dependency-injected services
@@ -82,11 +87,14 @@ main.kv                    # Root Kivy layout
 │   ├── event_service.py         # Event/signal bus
 │   ├── file_manager_service.py  # File I/O
 │   ├── pdf_service.py           # PDF export
-│   └── dialog_service.py        # Dialog management
+│   ├── dialog_service.py        # Dialog management
+│   ├── backup_service.py        # Backup management
+│   └── html_service.py          # HTML generation
 │
 ├── manager/               # Domain-specific managers
 │   ├── theme_manager.py         # Theme styling
 │   ├── pdf_manager.py           # PDF generation
+│   ├── html_manager.py          # HTML export
 │   ├── statistics_manager.py    # Character stat calculations
 │   └── volk_manager.py          # Race/species management
 │
@@ -103,6 +111,7 @@ main.kv                    # Root Kivy layout
 │   ├── setting_funktionen.py   # Setting-specific logic
 │   ├── character_advancement.py # Advancement rules
 │   ├── statblock_generator.py  # Stat block generation
+│   ├── cyberware_funktionen.py  # Cyberware mechanics (SciFi)
 │   └── kompatibilitaets_pruefung.py # Compatibility checks
 │
 ├── config/                # Configuration files (JSON)
@@ -132,8 +141,24 @@ main.kv                    # Root Kivy layout
 │   └── *.json                   # Named character archetypes
 │
 ├── chars/                 # Saved characters (JSON + PDF exports)
-├── assets/                # Static resources (images)
-├── utils/                 # Utility modules (paths, PDF, logging)
+├── assets/                # Static resources (images, logos)
+├── docs/                  # Documentation and planning (plans, tutorials)
+├── scripts/               # Utility scripts (e.g., merge_swae_into_kompendien.py)
+├── src/                   # Platform-specific sources (Android manifest)
+├── utils/                 # Utility modules
+│   ├── logging_setup.py         # Logging infrastructure
+│   ├── logging_utils.py         # Logging helpers
+│   ├── path_utils.py            # Path utilities
+│   ├── platform_utils.py        # Platform detection
+│   ├── desktop_scaling.py       # HiDPI scaling
+│   ├── pdf_utils.py             # PDF export utilities
+│   ├── html_utils.py            # HTML export utilities
+│   ├── custom_filemanager.py    # File browser widget
+│   ├── app_integration.py       # App integration utilities
+│   ├── intent_handler.py        # Android intent handling
+│   ├── resource_extractor.py    # Resource extraction
+│   └── share_utils.py           # File sharing (Android MediaStore)
+│
 └── test units/            # Test suite (unittest)
 ```
 
@@ -162,6 +187,7 @@ The app uses `MDTabsPrimary` with 11 tabs: Einstellungen (Settings), Voelker (Ra
 ### Dialog & Snackbar Pattern
 - **MDDialog** for decisions that need user action (errors, confirmations, choices). Always use `size_hint=(0.85, None)` to prevent full-screen dialogs on Android.
 - **MDSnackbar** (via `dialog_service.show_snackbar()`) for non-blocking info/warnings. `show_success_dialog()` and `show_warning_dialog()` are implemented as snackbar calls. `show_error_dialog()` remains a modal dialog.
+- **Slide-in Overlay** for setting switching (`setting_wechsel_overlay.py`), replacing the previous MDDialog approach for a smoother UX.
 - When adding new user-facing warnings (e.g., "not enough points"), use `dialog_service.show_warning_dialog()` — do not just use `Logger.warning()`.
 
 ## Code Conventions
@@ -221,11 +247,24 @@ python "test units/run_all_tests.py" test_theme_handler.TestThemeHandler.test_in
 - `test_einstellungen_widget.py` - Settings widget integration tests
 - `test_ausruestung_config.py` - Equipment configuration tests
 - `test_ausruestung_funktionen.py` - Equipment function tests
+- `test_ausruestung_settings.py` - Equipment settings tests
 - `test_auto_generator.py` - Auto character generation tests
 - `test_eigenschaften_manager.py` - Attribute manager tests
 - `test_talent_manager.py` - Talent manager tests
 - `test_setting_funktionen.py` - Setting functions tests
-- `test_leomara_*.py` / `test_hesindian_magier.py` - Character-specific regression tests
+- `test_fertigkeit_steigerung.py` - Skill advancement tests
+- `test_charakter_verwaltung.py` - Character management tests
+- `test_hesindian_magier.py` - Character-specific regression test
+- `test_kompendium_*.py` - Kompendium class tests (cleric, barbarian, bard, druid, mage)
+- `test_korrekte_reihenfolge.py` - Correct ordering tests
+- `test_superkraft_model.py` - Super power model tests
+- `test_superkraft_popup.py` - Super power popup tests
+- `test_superkraft_integration.py` - Super power integration tests
+- `test_kraefte_widget.py` - Powers widget tests
+- `test_cyberware.py` - Cyberware mechanics tests
+- `test_html_service.py` - HTML service tests
+- `test_html_utils.py` - HTML utility tests
+- `test_backup_service.py` - Backup service tests
 - `test_app_integration.py` - Application integration tests
 
 ### Testing Conventions
@@ -253,17 +292,17 @@ Application preferences: theme (Dark/Light), primary palette, window size, auto-
 # Desktop builds (PyInstaller)
 python build_linux.py          # Linux
 python build_windows.py        # Windows
-python build_desktop.py        # Platform-detected
+python build_all.py            # All platforms
 
 # Android (Buildozer)
-buildozer android debug        # Debug APK
-bash build_android_local.sh    # Local Android build
+python build_android.py        # Android APK
+buildozer android debug        # Direct Buildozer
 
 # Windows via Wine (on Linux)
 python build_windows_wine.py
 ```
 
-Build specs: `savage_worlds_generator.spec` (Windows), `savage_worlds_generator_linux.spec` (Linux), `buildozer.spec` (Android).
+Build specs: `savage_worlds_generator.spec` (Windows), `savage_worlds_generator_linux.spec` (Linux), `savage_worlds_generator_wine.spec` (Wine), `buildozer.spec` (Android).
 
 ## Important Notes for AI Assistants
 

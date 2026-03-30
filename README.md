@@ -117,19 +117,24 @@ pip install python-dateutil>=2.8.0
 ```
 Savage-Worlds-Charakter-Generator-deutsch/
 ├── main.py                 # Einstiegspunkt der Anwendung
-├── models/                 # Datenmodelle (Charakter, Attribute, etc.)
+├── main.kv                 # Root Kivy Layout
+├── models/                 # Datenmodelle (Charakter, Attribute, Waffen, etc.)
 ├── views/                  # UI-Komponenten und Layouts
-│   ├── *_view.py/.kv       # Desktop-Layouts
-│   └── *_view_mobile.kv    # Smartphone-optimierte Layouts
+│   ├── *_view.py/.kv       # Desktop-Layouts (12 Tab-Views)
+│   ├── *_view_mobile.kv    # Smartphone-optimierte Layouts (12 Mobile-Varianten)
+│   └── *_popup.py/.kv      # Modale Dialoge (11 Popups)
 ├── controllers/            # Geschäftslogik und App-Steuerung
-├── services/               # Service Container (DI), Dialog, Theme, etc.
-├── functions/              # Spielmechanik-Funktionen
-├── manager/                # Domain-Manager (PDF, Statistik, Völker)
-├── settings/               # Spielsetting-Daten (JSON)
+├── services/               # Service Container (DI), Dialog, Theme, Backup, HTML, etc.
+├── functions/              # Spielmechanik-Funktionen (inkl. Cyberware)
+├── manager/                # Domain-Manager (PDF, HTML, Statistik, Völker)
+├── settings/               # Spielsetting-Daten (12 Settings als JSON)
 ├── config/                 # App-Konfiguration (JSON)
-├── templates/              # Charakter-Vorlagen (JSON)
+├── templates/              # Charakter-Vorlagen (43+ Templates als JSON)
+├── utils/                  # Hilfsfunktionen (Logging, Pfade, Plattform, Sharing)
 ├── assets/                 # Ressourcen (Bilder, Logos)
-├── test units/             # Test-Suite (unittest)
+├── docs/                   # Dokumentation und Planungen
+├── scripts/                # Utility-Skripte
+├── test units/             # Test-Suite (30+ Testmodule, unittest)
 ├── requirements.txt        # Python-Dependencies
 └── README.md               # Diese Datei
 ```
