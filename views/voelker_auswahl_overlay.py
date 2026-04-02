@@ -11,6 +11,7 @@ from kivy.core.window import Window
 from kivy.logger import Logger
 from kivy.metrics import dp
 from kivy.properties import StringProperty, ListProperty, ObjectProperty, DictProperty
+from kivy.utils import platform as kivy_platform
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
@@ -46,9 +47,29 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         self.orientation = "vertical"
         self._build_ui()
 
+    def _get_android_padding(self):
+        """Ermittelt Top- und Bottom-Padding für Android-Systemleisten"""
+        if kivy_platform != 'android':
+            return 0, 0
+        try:
+            from kivymd.app import MDApp
+            app = MDApp.get_running_app()
+            top = getattr(app, '_android_top_padding', dp(24))
+            bottom = getattr(app, '_android_bottom_padding', dp(24))
+            return top, bottom
+        except Exception:
+            return dp(24), dp(24)
+
     def _build_ui(self):
         """Erstellt die UI-Struktur programmatisch"""
         self.md_bg_color = self.theme_cls.backgroundColor
+
+        # ===== Top-Spacer für Android-Statusbar/Notch =====
+        self._top_spacer = MDBoxLayout(
+            size_hint_y=None,
+            height=0,
+        )
+        self.add_widget(self._top_spacer)
 
         # ===== Top-Bar =====
         top_bar = MDBoxLayout(
@@ -99,6 +120,13 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         content_scroll.add_widget(self._content_box)
         self.add_widget(content_scroll)
 
+        # ===== Bottom-Spacer für Android-Navigationsleiste =====
+        self._bottom_spacer = MDBoxLayout(
+            size_hint_y=None,
+            height=0,
+        )
+        self.add_widget(self._bottom_spacer)
+
     def open(self, current_volk, available_voelker, charakter, on_volk_chosen):
         """
         Öffnet das Overlay mit Slide-Animation von rechts.
@@ -122,6 +150,11 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         # UI aufbauen
         self._build_select_phase()
 
+        # Android-Systemleisten-Padding setzen
+        top_pad, bottom_pad = self._get_android_padding()
+        self._top_spacer.height = top_pad
+        self._bottom_spacer.height = bottom_pad
+
         # Overlay zum Window hinzufügen
         self.size_hint = (1, 1)
         self.pos = (Window.width, 0)
@@ -136,6 +169,9 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         """Schließt das Overlay mit Slide-Out Animation nach rechts"""
         if not self._is_open:
             return
+
+        # Keyboard-Fokus freigeben (verhindert Ghost-Keyboards)
+        Window.release_all_keyboards()
 
         anim = Animation(pos=(Window.width, 0), duration=0.2, t="in_cubic")
         anim.bind(on_complete=self._on_close_complete)
