@@ -192,8 +192,8 @@ class ElementOverlay(MDBoxLayout):
         self._bottom_bar = MDBoxLayout(
             orientation="horizontal",
             size_hint_y=None,
-            height=dp(64),
-            padding=(dp(16), dp(8), dp(16), dp(8)),
+            height=dp(80),
+            padding=(dp(16), dp(8), dp(16), dp(24)),
             spacing=dp(12),
         )
 
@@ -284,6 +284,20 @@ class ElementOverlay(MDBoxLayout):
             super().on_touch_down(touch)
             return True
         return super().on_touch_down(touch)
+
+    def on_touch_move(self, touch):
+        """Verhindert Touch-Move Durchreichung an darunterliegende Widgets"""
+        if self._is_open:
+            super().on_touch_move(touch)
+            return True
+        return super().on_touch_move(touch)
+
+    def on_touch_up(self, touch):
+        """Verhindert Touch-Up Durchreichung an darunterliegende Widgets"""
+        if self._is_open:
+            super().on_touch_up(touch)
+            return True
+        return super().on_touch_up(touch)
 
     def _handle_back(self):
         """Zurück-Button: Overlay schließen"""

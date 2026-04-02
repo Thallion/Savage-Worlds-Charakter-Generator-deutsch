@@ -156,6 +156,20 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             return True
         return super().on_touch_down(touch)
 
+    def on_touch_move(self, touch):
+        """Verhindert Touch-Move Durchreichung an darunterliegende Widgets"""
+        if self._is_open:
+            super().on_touch_move(touch)
+            return True
+        return super().on_touch_move(touch)
+
+    def on_touch_up(self, touch):
+        """Verhindert Touch-Up Durchreichung an darunterliegende Widgets"""
+        if self._is_open:
+            super().on_touch_up(touch)
+            return True
+        return super().on_touch_up(touch)
+
     def _handle_back(self):
         """Zurück-Button: Phase zurück oder Overlay schließen"""
         if self._phase == "extras":
