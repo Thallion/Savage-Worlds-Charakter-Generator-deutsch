@@ -330,6 +330,14 @@ class SettingDialogHandler:
         self.repository = SettingsRepository(_native_settings_path)
         self.dialog = None
 
+    def show_add_dialog(self):
+        """Wrapper für einheitliche Handler-Schnittstelle"""
+        self.open_add_setting_popup()
+
+    def show_delete_dialog(self):
+        """Wrapper für einheitliche Handler-Schnittstelle"""
+        self.open_delete_setting_popup()
+
     def open_add_setting_popup(self):
         popup_content = AddSettingPopup(controller=self.controller)
         popup_content.repository = self.repository

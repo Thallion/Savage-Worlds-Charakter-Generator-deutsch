@@ -1,20 +1,7 @@
 # volk-popup.py
 from kivy.lang import Builder
 from kivy.logger import Logger
-from kivy.uix.widget import Widget
-from kivy.properties import ObjectProperty, StringProperty
 from kivy.app import App
-from kivymd.app import MDApp
-from kivymd.uix.screen import MDScreen
-from kivymd.uix.button import MDButton, MDButtonText
-from kivymd.uix.dialog import (
-    MDDialog,
-    MDDialogHeadlineText,
-    MDDialogSupportingText,
-    MDDialogButtonContainer,
-    MDDialogContentContainer,
-)
-from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.menu import MDDropdownMenu
@@ -34,7 +21,7 @@ def load_kv_file():
         # Normale Ausführung
         base_path = os.path.dirname(os.path.dirname(__file__))
         kv_path = os.path.join(base_path, 'views', 'volk_popup.kv')
-    
+
     if os.path.exists(kv_path):
         Builder.load_file(kv_path)
     else:
@@ -46,22 +33,22 @@ class VolkDialogContent(MDBoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.dialog = None
-        
+
 class DeleteVolkDialogContent(MDBoxLayout):
     def __init__(self, voelker_callback=None, menu_callback=None, **kwargs):
         super().__init__(**kwargs)
         self.voelker_callback = voelker_callback
         self.menu_callback = menu_callback
         self.dialog = None
-        
+
     def open_menu(self, instance_item):
         if not self.voelker_callback:
             return
-            
+
         voelker = self.voelker_callback()
         if not voelker:
             return
-            
+
         menu_items = [
             {
                 "text": name,
@@ -69,12 +56,12 @@ class DeleteVolkDialogContent(MDBoxLayout):
             }
             for name in voelker
         ]
-        
+
         MDDropdownMenu(
             caller=instance_item,
             items=menu_items,
         ).open()
-        
+
     def select_item(self, text_item):
         if self.menu_callback:
             self.menu_callback(text_item)
@@ -84,94 +71,59 @@ class DeleteVolkDialogContent(MDBoxLayout):
 class VolkDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
+        self.overlay = None
         self.selected_volk = None
         self.dialog_content = None
+
+    def _get_overlay(self):
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
 
     def show_add_dialog(self):
         """Zeigt den Dialog zum Hinzufügen eines neuen Volkes"""
         dialog_content = VolkDialogContent()
-        dialog_content.dialog = self.dialog
         self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Neues Volk hinzufügen",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Speichern"),
-                    style="text",
-                    on_release=self.save_volk,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Neues Volk hinzufügen",
+            content_widget=dialog_content,
+            action_text="Speichern",
+            on_action=self.save_volk,
         )
-        self.dialog.open()
 
     def show_delete_dialog(self):
-        """Zeigt den Dialog zum Löschen eines Volkes"""
-        if not self.get_all_voelker():
+        """Zeigt das Overlay zum Löschen eines Volkes (suchbare Liste)"""
+        voelker = self.get_all_voelker()
+        if not voelker:
             self.show_error("Keine Völker zum Löschen verfügbar.")
             return
 
-        dialog_content = DeleteVolkDialogContent(
-            voelker_callback=self.get_all_voelker,
-            menu_callback=self.on_volk_select
+        from views.element_overlay import ElementListContent
+        content = ElementListContent(
+            items=voelker,
+            on_select=self.on_volk_select,
         )
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Volk löschen",
-            ),
-            MDDialogSupportingText(
-                text="Wähle ein Volk zum Löschen:",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="text",
-                    on_release=self.delete_volk,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self.dialog_content = content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Volk löschen",
+            content_widget=content,
+            action_text="Löschen",
+            on_action=self.delete_volk,
         )
-        self.dialog.open()
 
     def save_volk(self, *args):
         """Speichert ein neues Volk"""
         if not self.dialog_content:
             Logger.error("Dialog-Content nicht gefunden")
             return
-            
+
         name = self.dialog_content.ids.name_input.text.strip()
-        
+
         if not name:
             self.show_error("Der Name des Volkes darf nicht leer sein.")
             return
@@ -183,7 +135,7 @@ class VolkDialogHandler:
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             if name in charakter.voelker:
                 self.show_error(f"Volk '{name}' existiert bereits.")
                 return
@@ -195,15 +147,15 @@ class VolkDialogHandler:
                 besonderheiten=besonderheiten,
                 custom=True
             )
-            
+
             charakter.voelker[name] = new_volk
-            
+
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
-            
+
             self.dismiss_dialog()
             Logger.info(f"Volk '{name}' wurde hinzugefügt.")
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Speichern des Volks: {e}")
             self.show_error("Fehler beim Speichern des Volks")
@@ -217,10 +169,10 @@ class VolkDialogHandler:
 
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             # Temporärer Speicher für den Namen zum Logging
             volk_name = self.selected_volk
-            
+
             if volk_name in charakter.voelker:
                 if charakter.voelker[volk_name].ausgewaehlt:
                     self.show_error(f"Volk '{volk_name}' ist ausgewählt und kann nicht gelöscht werden.")
@@ -230,12 +182,12 @@ class VolkDialogHandler:
 
                 if hasattr(app, 'einstellungen_widget'):
                     app.einstellungen_widget.aktualisiere_ui()
-                
+
                 Logger.info(f"Volk '{volk_name}' wurde gelöscht.")
                 self.dismiss_dialog()
             else:
                 self.show_error(f"Volk '{volk_name}' nicht gefunden.")
-                
+
         except Exception as e:
             Logger.error(f"Fehler beim Löschen des Volks: {e}")
             self.show_error("Fehler beim Löschen des Volks")
@@ -244,7 +196,7 @@ class VolkDialogHandler:
         """Callback wenn ein Volk im Dropdown ausgewählt wurde"""
         self.selected_volk = volk_name
         # Dialog-Content aktualisieren wenn vorhanden
-        if (self.dialog_content and 
+        if (self.dialog_content and
             hasattr(self.dialog_content.ids, 'selected_volk_text')):
             self.dialog_content.ids.selected_volk_text.text = volk_name
             Logger.info(f"Volk '{volk_name}' wurde ausgewählt.")
@@ -253,33 +205,22 @@ class VolkDialogHandler:
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_volk = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_volk = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung im Dialog an"""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Fehler",
-            ),
-            MDDialogSupportingText(
-                text=message,
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Volk-Fehler: {message}")
 
     def get_all_voelker(self):
         """Gibt eine Liste aller verfügbaren Völker zurück"""

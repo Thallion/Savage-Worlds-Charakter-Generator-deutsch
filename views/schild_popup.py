@@ -123,157 +123,88 @@ class DeleteSchildDialogContent(MDBoxLayout):
 class SchildDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
+        self.overlay = None
         self.selected_schild = None
         self.dialog_content = None
 
-    def show_add_dialog(self):
-        """Zeigt den Dialog zum Hinzufügen eines neuen Schildes"""
-        dialog_content = SchildDialogContent()
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        scroll_view = ScrollView(
-            size_hint_y=None,
-            height=min(dialog_content.height, Window.height * 0.6),
-        )
-        scroll_view.add_widget(dialog_content)
+    def _get_overlay(self):
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Neues Schild hinzufügen",
-            ),
-            MDDialogContentContainer(
-                scroll_view,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Speichern"),
-                    style="text",
-                    on_release=self.save_schild,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+    def show_add_dialog(self):
+        """Zeigt das Overlay zum Hinzufügen eines neuen Schildes"""
+        dialog_content = SchildDialogContent()
+        self.dialog_content = dialog_content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Neues Schild hinzufügen",
+            content_widget=dialog_content,
+            action_text="Speichern",
+            on_action=self.save_schild,
         )
-        self.dialog.open()
 
     def show_delete_dialog(self):
-        """Zeigt den Dialog zum Löschen eines Schildes"""
-        if not self.get_all_schilde():
+        """Zeigt das Overlay zum Löschen eines Schildes (suchbare Liste)"""
+        schilde = self.get_all_schilde()
+        if not schilde:
             self.show_error("Keine Schilde zum Löschen verfügbar.")
             return
 
-        dialog_content = DeleteSchildDialogContent(
-            schilde_callback=self.get_all_schilde,
-            menu_callback=self.on_schild_select
+        from views.element_overlay import ElementListContent
+        content = ElementListContent(
+            items=schilde,
+            on_select=self.on_schild_select,
         )
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Schild löschen",
-            ),
-            MDDialogSupportingText(
-                text="Wähle ein Schild zum Löschen:",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="text",
-                    on_release=self.delete_schild,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self.dialog_content = content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Schild löschen",
+            content_widget=content,
+            action_text="Löschen",
+            on_action=self.delete_schild,
         )
-        self.dialog.open()
 
     def show_edit_dialog(self, schild_name):
-            """Zeigt den Dialog zum Bearbeiten eines bestehenden Schildes"""
-            try:
-                app = App.get_running_app()
-                charakter = app.controller.charakter
-                
-                # Hole das Schild
-                schild = charakter.ausruestung.get(schild_name)
-                if not schild:
-                    self.show_error(f"Schild '{schild_name}' nicht gefunden.")
-                    return
-                
-                # Erstelle Dialog-Content mit Schild-Daten
-                schild_data = {
-                    'name': schild.name,
-                    'parade': schild.parade,
-                    'deckung': schild.deckung,
-                    'mindeststaerke': schild.mindeststaerke,
-                    'gewicht': schild.gewicht,
-                    'kosten': schild.kosten,
-                    'setting': schild.setting,
-                    'beschreibung': schild.beschreibung
-                }
-                
-                dialog_content = SchildDialogContent(schild_data=schild_data)
-                dialog_content.dialog = self.dialog
-                self.dialog_content = dialog_content
-                self.selected_schild = schild_name  # Speichere den Key für Updates
-                
-                scroll_view = ScrollView(
-                    size_hint_y=None,
-                    height=min(dialog_content.height, Window.height * 0.6),
-                )
-                scroll_view.add_widget(dialog_content)
+        """Zeigt das Overlay zum Bearbeiten eines bestehenden Schildes"""
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
 
-                self.dialog = MDDialog(
-                    MDDialogHeadlineText(
-                        text="Schild bearbeiten",
-                    ),
-                    MDDialogContentContainer(
-                        scroll_view,
-                        orientation="vertical",
-                    ),
-                    MDDialogButtonContainer(
-                        Widget(),
-                        MDButton(
-                            MDButtonText(text="Abbrechen"),
-                            style="text",
-                            on_release=self.dismiss_dialog,
-                        ),
-                        MDButton(
-                            MDButtonText(text="Speichern"),
-                            style="text",
-                            on_release=self.update_schild,
-                        ),
-                        spacing="8dp",
-                    ),
-                    size_hint=(0.85, None),
-                    auto_dismiss=False,
-                )
-                self.dialog.open()
-                
-            except Exception as e:
-                Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
-                self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
+            schild = charakter.ausruestung.get(schild_name)
+            if not schild:
+                self.show_error(f"Schild '{schild_name}' nicht gefunden.")
+                return
+
+            schild_data = {
+                'name': schild.name,
+                'parade': schild.parade,
+                'deckung': schild.deckung,
+                'mindeststaerke': schild.mindeststaerke,
+                'gewicht': schild.gewicht,
+                'kosten': schild.kosten,
+                'setting': schild.setting,
+                'beschreibung': schild.beschreibung
+            }
+
+            dialog_content = SchildDialogContent(schild_data=schild_data)
+            self.dialog_content = dialog_content
+            self.selected_schild = schild_name
+
+            overlay = self._get_overlay()
+            overlay.open(
+                title="Schild bearbeiten",
+                content_widget=dialog_content,
+                action_text="Speichern",
+                on_action=self.update_schild,
+            )
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
+            self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
 
     def update_schild(self, *args):
         """Aktualisiert ein bestehendes Schild"""
@@ -457,44 +388,27 @@ class SchildDialogHandler:
             self.show_error("Fehler beim Löschen des Schilds")
 
     def on_schild_select(self, schild_name):
-        """Callback wenn ein Schild im Dropdown ausgewählt wurde"""
+        """Callback wenn ein Schild ausgewählt wurde"""
         self.selected_schild = schild_name
-        if (self.dialog_content and 
-            hasattr(self.dialog_content.ids, 'selected_schild_text')):
-            self.dialog_content.ids.selected_schild_text.text = schild_name
-            Logger.info(f"Schild '{schild_name}' wurde ausgewählt.")
-        else:
-            Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_schild = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_schild = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung im Dialog an"""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Fehler",
-            ),
-            MDDialogSupportingText(
-                text=message,
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Schild-Fehler: {message}")
 
     def get_all_schilde(self):
         """Gibt eine Liste aller verfügbaren Schilde zurück"""

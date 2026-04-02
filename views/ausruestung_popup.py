@@ -111,62 +111,41 @@ class DeleteAusruestungDialogContent(MDBoxLayout):
 class AusruestungDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
+        self.overlay = None
         self.selected_ausruestung = None
         self.dialog_content = None
 
-    def show_add_dialog(self):
-        """Zeigt den Dialog zum Hinzufügen einer neuen Ausrüstung"""
-        dialog_content = AusruestungDialogContent()
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        scroll_view = ScrollView(
-            size_hint_y=None,
-            height=min(dialog_content.height, Window.height * 0.6),
-        )
-        scroll_view.add_widget(dialog_content)
+    def _get_overlay(self):
+        """Gibt eine gecachte ElementOverlay-Instanz zurück"""
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Neue Ausrüstung hinzufügen",
-            ),
-            MDDialogContentContainer(
-                scroll_view,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Speichern"),
-                    style="text",
-                    on_release=self.save_ausruestung,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+    def show_add_dialog(self):
+        """Zeigt das Overlay zum Hinzufügen einer neuen Ausrüstung"""
+        dialog_content = AusruestungDialogContent()
+        self.dialog_content = dialog_content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Neue Ausrüstung hinzufügen",
+            content_widget=dialog_content,
+            action_text="Speichern",
+            on_action=self.save_ausruestung,
         )
-        self.dialog.open()
 
     def show_edit_dialog(self, ausruestung_name):
-        """Zeigt den Dialog zum Bearbeiten einer bestehenden Ausrüstung"""
+        """Zeigt das Overlay zum Bearbeiten einer bestehenden Ausrüstung"""
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
-            # Hole die Ausrüstung
+
             ausruestung = charakter.ausruestung.get(ausruestung_name)
             if not ausruestung:
                 self.show_error(f"Ausrüstung '{ausruestung_name}' nicht gefunden.")
                 return
-            
-            # Erstelle Dialog-Content mit Ausrüstungs-Daten
+
             ausruestung_data = {
                 'name': ausruestung.name,
                 'kategorie': getattr(ausruestung, 'kategorie', 'Allgemein'),
@@ -175,45 +154,19 @@ class AusruestungDialogHandler:
                 'setting': ausruestung.setting,
                 'beschreibung': ausruestung.beschreibung
             }
-            
-            dialog_content = AusruestungDialogContent(ausruestung_data=ausruestung_data)
-            dialog_content.dialog = self.dialog
-            self.dialog_content = dialog_content
-            self.selected_ausruestung = ausruestung_name  # Speichere den Key für Updates
-            
-            scroll_view = ScrollView(
-                size_hint_y=None,
-                height=min(dialog_content.height, Window.height * 0.6),
-            )
-            scroll_view.add_widget(dialog_content)
 
-            self.dialog = MDDialog(
-                MDDialogHeadlineText(
-                    text="Ausrüstung bearbeiten",
-                ),
-                MDDialogContentContainer(
-                    scroll_view,
-                    orientation="vertical",
-                ),
-                MDDialogButtonContainer(
-                    Widget(),
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=self.dismiss_dialog,
-                    ),
-                    MDButton(
-                        MDButtonText(text="Speichern"),
-                        style="text",
-                        on_release=self.update_ausruestung,
-                    ),
-                    spacing="8dp",
-                ),
-                size_hint=(0.85, None),
-                auto_dismiss=False,
+            dialog_content = AusruestungDialogContent(ausruestung_data=ausruestung_data)
+            self.dialog_content = dialog_content
+            self.selected_ausruestung = ausruestung_name
+
+            overlay = self._get_overlay()
+            overlay.open(
+                title="Ausrüstung bearbeiten",
+                content_widget=dialog_content,
+                action_text="Speichern",
+                on_action=self.update_ausruestung,
             )
-            self.dialog.open()
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
             self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
@@ -223,7 +176,7 @@ class AusruestungDialogHandler:
         if not self.dialog_content or not self.selected_ausruestung:
             Logger.error("Dialog-Content oder ausgewählte Ausrüstung nicht gefunden")
             return
-            
+
         # Grunddaten sammeln
         name = self.dialog_content.ids.name_input.text.strip()
         kategorie = self.dialog_content.ids.kategorie_input.text.strip()
@@ -236,7 +189,7 @@ class AusruestungDialogHandler:
         if not name:
             self.show_error("Der Name der Ausrüstung darf nicht leer sein.")
             return
-            
+
         if not kategorie:
             self.show_error("Bitte geben Sie eine Kategorie an.")
             return
@@ -251,18 +204,18 @@ class AusruestungDialogHandler:
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             # Hole die bestehende Ausrüstung
             ausruestung = charakter.ausruestung.get(self.selected_ausruestung)
             if not ausruestung:
                 self.show_error(f"Ausrüstung '{self.selected_ausruestung}' nicht mehr gefunden.")
                 return
-            
+
             # Wenn der Name geändert wurde und bereits existiert
             if name != ausruestung.name and name in charakter.ausruestung:
                 self.show_error(f"Ausrüstung mit dem Namen '{name}' existiert bereits.")
                 return
-            
+
             # Aktualisiere die Ausrüstung
             old_name = ausruestung.name
             ausruestung.name = name
@@ -271,74 +224,52 @@ class AusruestungDialogHandler:
             ausruestung.kosten = kosten
             ausruestung.setting = setting
             ausruestung.beschreibung = beschreibung
-            
+
             # Bei Namensänderung: Key im Dictionary ändern
             if name != old_name:
-                # Neuen Key erstellen
                 charakter.ausruestung[name] = ausruestung
                 if old_name in charakter.ausruestung:
                     del charakter.ausruestung[old_name]
-            
+
             # Aktualisiere die UI
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
-            
+
             self.dismiss_dialog()
             Logger.info(f"Ausrüstung '{name}' wurde aktualisiert.")
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der Ausrüstung: {e}")
             self.show_error("Fehler beim Aktualisieren der Ausrüstung")
 
     def show_delete_dialog(self):
-        """Zeigt den Dialog zum Löschen einer Ausrüstung"""
-        if not self.get_all_ausruestung():
+        """Zeigt das Overlay zum Löschen einer Ausrüstung (suchbare Liste)"""
+        ausruestung = self.get_all_ausruestung()
+        if not ausruestung:
             self.show_error("Keine Ausrüstung zum Löschen verfügbar.")
             return
 
-        dialog_content = DeleteAusruestungDialogContent(
-            ausruestung_callback=self.get_all_ausruestung,
-            menu_callback=self.on_ausruestung_select
+        from views.element_overlay import ElementListContent
+        content = ElementListContent(
+            items=ausruestung,
+            on_select=self.on_ausruestung_select,
         )
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Ausrüstung löschen",
-            ),
-            MDDialogSupportingText(
-                text="Wähle eine Ausrüstung zum Löschen:",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="text",
-                    on_release=self.delete_ausruestung,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self.dialog_content = content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Ausrüstung löschen",
+            content_widget=content,
+            action_text="Löschen",
+            on_action=self.delete_ausruestung,
         )
-        self.dialog.open()
 
     def save_ausruestung(self, *args):
         """Speichert eine neue Ausrüstung"""
         if not self.dialog_content:
             Logger.error("Dialog-Content nicht gefunden")
             return
-            
+
         # Grunddaten sammeln
         name = self.dialog_content.ids.name_input.text.strip()
         kategorie = self.dialog_content.ids.kategorie_input.text.strip()
@@ -351,7 +282,7 @@ class AusruestungDialogHandler:
         if not name:
             self.show_error("Der Name der Ausrüstung darf nicht leer sein.")
             return
-            
+
         if not kategorie:
             self.show_error("Bitte geben Sie eine Kategorie an.")
             return
@@ -366,7 +297,7 @@ class AusruestungDialogHandler:
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             if name in charakter.ausruestung:
                 self.show_error(f"Ausrüstung '{name}' existiert bereits.")
                 return
@@ -384,18 +315,18 @@ class AusruestungDialogHandler:
                 angelegt=False,
                 custom=True
             )
-            
+
             success = charakter.add_ausruestung(new_ausruestung)
-            
+
             if success:
                 if hasattr(app, 'einstellungen_widget'):
                     app.einstellungen_widget.aktualisiere_ui()
-                
+
                 self.dismiss_dialog()
                 Logger.info(f"Ausrüstung '{name}' wurde hinzugefügt.")
             else:
                 self.show_error(f"Ausrüstung '{name}' konnte nicht hinzugefügt werden.")
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Speichern der Ausrüstung: {e}")
             self.show_error("Fehler beim Speichern der Ausrüstung")
@@ -409,62 +340,45 @@ class AusruestungDialogHandler:
 
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             ausruestung_name = self.selected_ausruestung
             success = charakter.remove_ausruestung(ausruestung_name)
 
             if success:
                 if hasattr(app, 'einstellungen_widget'):
                     app.einstellungen_widget.aktualisiere_ui()
-                
+
                 Logger.info(f"Ausrüstung '{ausruestung_name}' wurde gelöscht.")
                 self.dismiss_dialog()
             else:
                 self.show_error(f"Ausrüstung '{ausruestung_name}' konnte nicht gelöscht werden.")
-                
+
         except Exception as e:
             Logger.error(f"Fehler beim Löschen der Ausrüstung: {e}")
             self.show_error("Fehler beim Löschen der Ausrüstung")
 
     def on_ausruestung_select(self, ausruestung_name):
-        """Callback wenn eine Ausrüstung im Dropdown ausgewählt wurde"""
+        """Callback wenn eine Ausrüstung ausgewählt wurde"""
         self.selected_ausruestung = ausruestung_name
-        if (self.dialog_content and 
-            hasattr(self.dialog_content.ids, 'selected_ausruestung_text')):
-            self.dialog_content.ids.selected_ausruestung_text.text = ausruestung_name
-            Logger.info(f"Ausrüstung '{ausruestung_name}' wurde ausgewählt.")
-        else:
-            Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_ausruestung = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_ausruestung = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung im Dialog an"""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Fehler",
-            ),
-            MDDialogSupportingText(
-                text=message,
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Ausrüstung-Fehler: {message}")
 
     def get_all_ausruestung(self):
         """Gibt eine Liste aller verfügbaren Ausrüstung zurück"""

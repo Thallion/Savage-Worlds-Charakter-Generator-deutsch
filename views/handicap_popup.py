@@ -1,19 +1,8 @@
 # handicap-popup.py
 from kivy.lang import Builder
 from kivy.logger import Logger
-from kivy.uix.widget import Widget
-from kivy.properties import ObjectProperty
 from kivy.app import App
 from kivy.clock import Clock
-from kivymd.uix.dialog import (
-    MDDialog,
-    MDDialogHeadlineText,
-    MDDialogSupportingText,
-    MDDialogButtonContainer,
-    MDDialogContentContainer,
-)
-from kivymd.uix.button import MDButton, MDButtonText
-from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.menu import MDDropdownMenu
@@ -33,7 +22,7 @@ def load_kv_file():
         # Normale Ausführung
         base_path = os.path.dirname(os.path.dirname(__file__))
         kv_path = os.path.join(base_path, 'views', 'handicap_popup.kv')
-    
+
     if os.path.exists(kv_path):
         Builder.load_file(kv_path)
     else:
@@ -48,23 +37,23 @@ class HandicapDialogContent(MDBoxLayout):
         self.selected_stufe = None
         self.edit_mode = False
         self.original_name = None
-        
+
         # Wenn Handicap-Daten übergeben wurden, befülle die Felder
         if handicap_data:
             self.edit_mode = True
             self.original_name = handicap_data.get('name', '')
             Clock.schedule_once(lambda dt: self._fill_fields(handicap_data), 0.1)
-    
+
     def _fill_fields(self, handicap_data):
         """Befüllt die Felder mit den Handicap-Daten beim Bearbeiten"""
         if hasattr(self.ids, 'name_input'):
             self.ids.name_input.text = handicap_data.get('name', '')
-        
+
         if hasattr(self.ids, 'selected_stufe_text'):
             stufe = handicap_data.get('stufe', 'leicht')
             self.ids.selected_stufe_text.text = stufe
             self.selected_stufe = stufe
-        
+
         if hasattr(self.ids, 'beschreibung_input'):
             self.ids.beschreibung_input.text = handicap_data.get('beschreibung', '')
 
@@ -76,7 +65,7 @@ class HandicapDialogContent(MDBoxLayout):
             }
             for stufe in ['leicht', 'schwer']
         ]
-        
+
         MDDropdownMenu(
             caller=instance_item,
             items=menu_items,
@@ -86,22 +75,22 @@ class HandicapDialogContent(MDBoxLayout):
         self.selected_stufe = stufe
         if hasattr(self.ids, 'selected_stufe_text'):
             self.ids.selected_stufe_text.text = stufe
-        
+
 class DeleteHandicapDialogContent(MDBoxLayout):
     def __init__(self, handicaps_callback=None, menu_callback=None, **kwargs):
         super().__init__(**kwargs)
         self.handicaps_callback = handicaps_callback
         self.menu_callback = menu_callback
         self.dialog = None
-        
+
     def open_menu(self, instance_item):
         if not self.handicaps_callback:
             return
-            
+
         handicaps = self.handicaps_callback()
         if not handicaps:
             return
-            
+
         menu_items = [
             {
                 "text": name,
@@ -109,12 +98,12 @@ class DeleteHandicapDialogContent(MDBoxLayout):
             }
             for name in handicaps
         ]
-        
+
         MDDropdownMenu(
             caller=instance_item,
             items=menu_items,
         ).open()
-        
+
     def select_item(self, text_item):
         if self.menu_callback:
             self.menu_callback(text_item)
@@ -124,94 +113,60 @@ class DeleteHandicapDialogContent(MDBoxLayout):
 class HandicapDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
+        self.overlay = None
         self.selected_handicap = None
         self.dialog_content = None
+
+    def _get_overlay(self):
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
 
     def show_add_dialog(self):
         """Zeigt den Dialog zum Hinzufügen eines neuen Handicaps"""
         dialog_content = HandicapDialogContent()
-        dialog_content.dialog = self.dialog
         self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Neues Handicap hinzufügen",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Speichern"),
-                    style="text",
-                    on_release=self.save_handicap,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Neues Handicap hinzufügen",
+            content_widget=dialog_content,
+            action_text="Speichern",
+            on_action=self.save_handicap,
         )
-        self.dialog.open()
 
     def show_edit_dialog(self, handicap_name_key):
         """Zeigt den Dialog zum Bearbeiten eines bestehenden Handicaps"""
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             # Hole das Handicap
             handicap = charakter.handicaps.get(handicap_name_key)
             if not handicap:
                 self.show_error(f"Handicap '{handicap_name_key}' nicht gefunden.")
                 return
-            
+
             # Erstelle Dialog-Content mit Handicap-Daten
             handicap_data = {
                 'name': handicap.name,
                 'stufe': handicap.stufe,
                 'beschreibung': handicap.beschreibung
             }
-            
+
             dialog_content = HandicapDialogContent(handicap_data=handicap_data)
-            dialog_content.dialog = self.dialog
             self.dialog_content = dialog_content
             self.selected_handicap = handicap_name_key  # Speichere den Key für Updates
-            
-            self.dialog = MDDialog(
-                MDDialogHeadlineText(
-                    text="Handicap bearbeiten",
-                ),
-                MDDialogContentContainer(
-                    dialog_content,
-                    orientation="vertical",
-                ),
-                MDDialogButtonContainer(
-                    Widget(),
-                    MDButton(
-                        MDButtonText(text="Abbrechen"),
-                        style="text",
-                        on_release=self.dismiss_dialog,
-                    ),
-                    MDButton(
-                        MDButtonText(text="Speichern"),
-                        style="text",
-                        on_release=self.update_handicap,
-                    ),
-                    spacing="8dp",
-                ),
-                size_hint=(0.85, None),
-                auto_dismiss=False,
+
+            overlay = self._get_overlay()
+            overlay.open(
+                title="Handicap bearbeiten",
+                content_widget=dialog_content,
+                action_text="Speichern",
+                on_action=self.update_handicap,
             )
-            self.dialog.open()
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
             self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
@@ -221,9 +176,9 @@ class HandicapDialogHandler:
         if not self.dialog_content or not self.selected_handicap:
             Logger.error("Dialog-Content oder ausgewähltes Handicap nicht gefunden")
             return
-            
+
         name = self.dialog_content.ids.name_input.text.strip()
-        
+
         if not name:
             self.show_error("Der Name des Handicaps darf nicht leer sein.")
             return
@@ -243,40 +198,40 @@ class HandicapDialogHandler:
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             # Hole das bestehende Handicap
             handicap = charakter.handicaps.get(self.selected_handicap)
             if not handicap:
                 self.show_error(f"Handicap '{self.selected_handicap}' nicht mehr gefunden.")
                 return
-            
+
             # Wenn der Name geändert wurde und bereits existiert
             if name != handicap.name and name in charakter.handicaps:
                 self.show_error(f"Ein Handicap mit dem Namen '{name}' existiert bereits.")
                 return
-            
+
             # Aktualisiere das Handicap
             handicap.name = name
             handicap.stufe = stufe
             handicap.beschreibung = beschreibung
             handicap.update_punkte()  # Punkte neu berechnen
-            
+
             # Bei Namensänderung: Key im Dictionary ändern
             if name != self.dialog_content.original_name and self.dialog_content.original_name:
                 # Neuen Key erstellen
                 new_key = f"{name} ({stufe})"
                 old_key = self.selected_handicap
-                
+
                 # Handicap unter neuem Key speichern und alten löschen
                 charakter.handicaps[new_key] = handicap
                 if old_key != new_key and old_key in charakter.handicaps:
                     del charakter.handicaps[old_key]
-                    
+
                     # Auch in selected_handicaps aktualisieren
                     if old_key in charakter.selected_handicaps:
                         idx = charakter.selected_handicaps.index(old_key)
                         charakter.selected_handicaps[idx] = new_key
-            
+
             # Speichere die Custom Handicaps
             charakter.save_custom_handicaps()
 
@@ -287,62 +242,41 @@ class HandicapDialogHandler:
 
             self.dismiss_dialog()
             Logger.info(f"Handicap '{name}' wurde aktualisiert.")
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren des Handicaps: {e}")
             self.show_error("Fehler beim Aktualisieren des Handicaps")
 
     def show_delete_dialog(self):
-        """Zeigt den Dialog zum Löschen eines Handicaps"""
-        if not self.get_all_handicaps():
+        """Zeigt das Overlay zum Löschen eines Handicaps (suchbare Liste)"""
+        handicaps = self.get_all_handicaps()
+        if not handicaps:
             self.show_error("Keine Handicaps zum Löschen verfügbar.")
             return
 
-        dialog_content = DeleteHandicapDialogContent(
-            handicaps_callback=self.get_all_handicaps,
-            menu_callback=self.on_handicap_select
+        from views.element_overlay import ElementListContent
+        content = ElementListContent(
+            items=handicaps,
+            on_select=self.on_handicap_select,
         )
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Handicap löschen",
-            ),
-            MDDialogSupportingText(
-                text="Wähle ein Handicap zum Löschen:",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="text",
-                    on_release=self.delete_handicap,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self.dialog_content = content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Handicap löschen",
+            content_widget=content,
+            action_text="Löschen",
+            on_action=self.delete_handicap,
         )
-        self.dialog.open()
 
     def save_handicap(self, *args):
         """Speichert ein neues Handicap"""
         if not self.dialog_content:
             Logger.error("Dialog-Content nicht gefunden")
             return
-            
+
         name = self.dialog_content.ids.name_input.text.strip()
-        
+
         if not name:
             self.show_error("Der Name des Handicaps darf nicht leer sein.")
             return
@@ -363,7 +297,7 @@ class HandicapDialogHandler:
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             if name in charakter.handicaps:
                 self.show_error(f"Handicap '{name}' existiert bereits.")
                 return
@@ -374,7 +308,7 @@ class HandicapDialogHandler:
                 beschreibung=beschreibung,
                 custom=True
             )
-            
+
             # Füge das Handicap hinzu
             charakter.add_handicap(new_handicap)
 
@@ -388,7 +322,7 @@ class HandicapDialogHandler:
 
             self.dismiss_dialog()
             Logger.info(f"Handicap '{name}' wurde hinzugefügt.")
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Speichern des Handicaps: {e}")
             self.show_error("Fehler beim Speichern des Handicaps")
@@ -402,9 +336,9 @@ class HandicapDialogHandler:
 
             app = App.get_running_app()
             charakter = app.controller.charakter
-            
+
             handicap_name = self.selected_handicap
-            
+
             # Lösche das Handicap
             charakter.remove_handicap(handicap_name)
 
@@ -418,7 +352,7 @@ class HandicapDialogHandler:
 
             Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
             self.dismiss_dialog()
-                
+
         except Exception as e:
             Logger.error(f"Fehler beim Löschen des Handicaps: {e}")
             self.show_error("Fehler beim Löschen des Handicaps")
@@ -426,7 +360,7 @@ class HandicapDialogHandler:
     def on_handicap_select(self, handicap_name):
         """Callback wenn ein Handicap im Dropdown ausgewählt wurde"""
         self.selected_handicap = handicap_name
-        if (self.dialog_content and 
+        if (self.dialog_content and
             hasattr(self.dialog_content.ids, 'selected_handicap_text')):
             self.dialog_content.ids.selected_handicap_text.text = handicap_name
             Logger.info(f"Handicap '{handicap_name}' wurde ausgewählt.")
@@ -444,33 +378,22 @@ class HandicapDialogHandler:
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_handicap = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_handicap = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung im Dialog an"""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Fehler",
-            ),
-            MDDialogSupportingText(
-                text=message,
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Handicap-Fehler: {message}")
 
     def get_all_handicaps(self):
         """Gibt eine Liste aller verfügbaren Handicaps zurück"""

@@ -153,157 +153,88 @@ class DeleteWaffeDialogContent(MDBoxLayout):
 class WaffeDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
+        self.overlay = None
         self.selected_waffe = None
         self.dialog_content = None
 
-    def show_add_dialog(self):
-        """Zeigt den Dialog zum Hinzufügen einer neuen Waffe"""
-        dialog_content = WaffeDialogContent()
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        scroll_view = ScrollView(
-            size_hint_y=None,
-            height=min(dialog_content.height, Window.height * 0.6),
-        )
-        scroll_view.add_widget(dialog_content)
+    def _get_overlay(self):
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Neue Waffe hinzufügen",
-            ),
-            MDDialogContentContainer(
-                scroll_view,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Speichern"),
-                    style="text",
-                    on_release=self.save_waffe,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+    def show_add_dialog(self):
+        """Zeigt das Overlay zum Hinzufügen einer neuen Waffe"""
+        dialog_content = WaffeDialogContent()
+        self.dialog_content = dialog_content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Neue Waffe hinzufügen",
+            content_widget=dialog_content,
+            action_text="Speichern",
+            on_action=self.save_waffe,
         )
-        self.dialog.open()
 
     def show_delete_dialog(self):
-        """Zeigt den Dialog zum Löschen einer Waffe"""
-        if not self.get_all_waffen():
+        """Zeigt das Overlay zum Löschen einer Waffe (suchbare Liste)"""
+        waffen = self.get_all_waffen()
+        if not waffen:
             self.show_error("Keine Waffen zum Löschen verfügbar.")
             return
 
-        dialog_content = DeleteWaffeDialogContent(
-            waffen_callback=self.get_all_waffen,
-            menu_callback=self.on_waffe_select
+        from views.element_overlay import ElementListContent
+        content = ElementListContent(
+            items=waffen,
+            on_select=self.on_waffe_select,
         )
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Waffe löschen",
-            ),
-            MDDialogSupportingText(
-                text="Wähle eine Waffe zum Löschen:",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="text",
-                    on_release=self.delete_waffe,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self.dialog_content = content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Waffe löschen",
+            content_widget=content,
+            action_text="Löschen",
+            on_action=self.delete_waffe,
         )
-        self.dialog.open()
 
     def show_edit_dialog(self, waffe_name):
-            """Zeigt den Dialog zum Bearbeiten einer bestehenden Waffe"""
-            try:
-                app = App.get_running_app()
-                charakter = app.controller.charakter
-                
-                # Hole die Waffe
-                waffe = charakter.ausruestung.get(waffe_name)
-                if not waffe:
-                    self.show_error(f"Waffe '{waffe_name}' nicht gefunden.")
-                    return
-                
-                # Erstelle Dialog-Content mit Waffen-Daten
-                waffe_data = {
-                    'name': waffe.name,
-                    'typ': waffe.typ,
-                    'mindeststaerke': waffe.mindeststaerke,
-                    'gewicht': waffe.gewicht,
-                    'kosten': waffe.kosten,
-                    'setting': waffe.setting,
-                    'beschreibung': waffe.beschreibung,
-                    'eigenschaften': waffe.eigenschaften
-                }
-                
-                dialog_content = WaffeDialogContent(waffe_data=waffe_data)
-                dialog_content.dialog = self.dialog
-                self.dialog_content = dialog_content
-                self.selected_waffe = waffe_name  # Speichere den Key für Updates
-                
-                scroll_view = ScrollView(
-                    size_hint_y=None,
-                    height=min(dialog_content.height, Window.height * 0.6),
-                )
-                scroll_view.add_widget(dialog_content)
+        """Zeigt das Overlay zum Bearbeiten einer bestehenden Waffe"""
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
 
-                self.dialog = MDDialog(
-                    MDDialogHeadlineText(
-                        text="Waffe bearbeiten",
-                    ),
-                    MDDialogContentContainer(
-                        scroll_view,
-                        orientation="vertical",
-                    ),
-                    MDDialogButtonContainer(
-                        Widget(),
-                        MDButton(
-                            MDButtonText(text="Abbrechen"),
-                            style="text",
-                            on_release=self.dismiss_dialog,
-                        ),
-                        MDButton(
-                            MDButtonText(text="Speichern"),
-                            style="text",
-                            on_release=self.update_waffe,
-                        ),
-                        spacing="8dp",
-                    ),
-                    size_hint=(0.85, None),
-                    auto_dismiss=False,
-                )
-                self.dialog.open()
-                
-            except Exception as e:
-                Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
-                self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
+            waffe = charakter.ausruestung.get(waffe_name)
+            if not waffe:
+                self.show_error(f"Waffe '{waffe_name}' nicht gefunden.")
+                return
+
+            waffe_data = {
+                'name': waffe.name,
+                'typ': waffe.typ,
+                'mindeststaerke': waffe.mindeststaerke,
+                'gewicht': waffe.gewicht,
+                'kosten': waffe.kosten,
+                'setting': waffe.setting,
+                'beschreibung': waffe.beschreibung,
+                'eigenschaften': waffe.eigenschaften
+            }
+
+            dialog_content = WaffeDialogContent(waffe_data=waffe_data)
+            self.dialog_content = dialog_content
+            self.selected_waffe = waffe_name
+
+            overlay = self._get_overlay()
+            overlay.open(
+                title="Waffe bearbeiten",
+                content_widget=dialog_content,
+                action_text="Speichern",
+                on_action=self.update_waffe,
+            )
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
+            self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
 
     def update_waffe(self, *args):
         """Aktualisiert eine bestehende Waffe"""
@@ -518,44 +449,27 @@ class WaffeDialogHandler:
             self.show_error("Fehler beim Löschen der Waffe")
 
     def on_waffe_select(self, waffe_name):
-        """Callback wenn eine Waffe im Dropdown ausgewählt wurde"""
+        """Callback wenn eine Waffe ausgewählt wurde"""
         self.selected_waffe = waffe_name
-        if (self.dialog_content and 
-            hasattr(self.dialog_content.ids, 'selected_waffe_text')):
-            self.dialog_content.ids.selected_waffe_text.text = waffe_name
-            Logger.info(f"Waffe '{waffe_name}' wurde ausgewählt.")
-        else:
-            Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_waffe = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_waffe = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung im Dialog an"""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Fehler",
-            ),
-            MDDialogSupportingText(
-                text=message,
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Waffe-Fehler: {message}")
 
     def get_all_waffen(self):
         """Gibt eine Liste aller verfügbaren Waffen zurück"""

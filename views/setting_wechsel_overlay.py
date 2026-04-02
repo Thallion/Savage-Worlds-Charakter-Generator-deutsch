@@ -153,6 +153,13 @@ class SettingWechselOverlay(MDBoxLayout):
             pass
         self._is_open = False
 
+    def on_touch_down(self, touch):
+        """Konsumiert alle Touch-Events wenn das Overlay offen ist"""
+        if self._is_open:
+            super().on_touch_down(touch)
+            return True
+        return super().on_touch_down(touch)
+
     def _handle_back(self):
         """Zurück-Button: Phase zurück oder Overlay schließen"""
         if self._phase == "merge":

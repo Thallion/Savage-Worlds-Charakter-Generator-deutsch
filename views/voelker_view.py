@@ -99,7 +99,7 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler bei Controller-Initialisierung: {e}")
 
     def open_volk_dropdown(self):
-        """Öffnet den Völker-Auswahl-Dialog mit Suchfeld."""
+        """Öffnet das Völker-Auswahl-Overlay (Slide-In von rechts)."""
         try:
             if not self.controller or not hasattr(self.controller, 'charakter'):
                 Logger.warning("Controller nicht verfügbar")
@@ -111,10 +111,52 @@ class VoelkerWidget(MDBoxLayout):
                 Logger.warning("Keine Völker verfügbar")
                 return
 
-            self._show_volk_search_popup()
+            from views.voelker_auswahl_overlay import VoelkerAuswahlOverlay
+
+            if not hasattr(self, '_voelker_overlay'):
+                self._voelker_overlay = VoelkerAuswahlOverlay()
+
+            self._voelker_overlay.open(
+                current_volk=self.selected_volk_name or "",
+                available_voelker=sorted(charakter.voelker.keys()),
+                charakter=charakter,
+                on_volk_chosen=self._on_overlay_volk_chosen,
+            )
 
         except Exception as e:
-            Logger.error(f"Fehler beim Öffnen des Völker-Dialogs: {e}", exc_info=True)
+            Logger.error(f"Fehler beim Öffnen des Völker-Overlays: {e}", exc_info=True)
+
+    def _on_overlay_volk_chosen(self, volk_name, zusatzelemente):
+        """Callback vom VoelkerAuswahlOverlay - Volk + Zusatzelemente gewählt"""
+        try:
+            # Volk auswählen/abwählen
+            self._select_volk_from_dropdown(volk_name)
+
+            # Zusatzelemente anwenden
+            if volk_name and zusatzelemente:
+                charakter = self.controller.charakter
+
+                if zusatzelemente.get('halbelf_talent'):
+                    waehle_halbelf_talent(charakter, volk_name, zusatzelemente['halbelf_talent'])
+                elif zusatzelemente.get('halbelf_attribut'):
+                    waehle_halbelf_attribut(charakter, volk_name)
+                elif zusatzelemente.get('mensch_talent'):
+                    waehle_mensch_talent(charakter, volk_name, zusatzelemente['mensch_talent'])
+                elif zusatzelemente.get('mensch_fertigkeitspunkte'):
+                    waehle_mensch_fertigkeitspunkte(charakter, volk_name)
+                elif zusatzelemente.get('freies_talent'):
+                    waehle_freies_talent(charakter, volk_name, zusatzelemente['freies_talent'])
+                elif zusatzelemente.get('freies_attribut'):
+                    waehle_freies_attribut(charakter, volk_name, zusatzelemente['freies_attribut'])
+                elif zusatzelemente.get('freie_fertigkeit'):
+                    waehle_freie_fertigkeit(charakter, volk_name, zusatzelemente['freie_fertigkeit'])
+
+                # UI aktualisieren nach Zusatzelemente-Anwendung
+                Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+
+        except Exception as e:
+            Logger.error(f"Fehler bei Overlay-Volk-Auswahl: {e}", exc_info=True)
 
     def _show_volk_search_popup(self):
         """Zeigt einen Auswahl-Dialog für Völker mit Suchfeld und scrollbarer Liste.
@@ -471,99 +513,118 @@ class VoelkerWidget(MDBoxLayout):
             self.ids.selected_volk_container.add_widget(placeholder)
 
     def _update_zusatzelemente(self):
-        """ERWEITERT: Aktualisiert die Zusatzelemente-Bereiche inkl. neuer Völker-Wahlmöglichkeiten."""
+        """Zeigt Info über getroffene Zusatzelemente-Auswahl an.
+        Die Auswahl selbst findet im VoelkerAuswahlOverlay (Phase 2) statt."""
         zusatzelemente_container = self.ids.zusatzelemente_container
         zusatzelemente_container.clear_widgets()
-        
+
         if not self.selected_volk_name:
             return
-            
+
         charakter = self.controller.charakter
-        
-        # Verfügbare Zusatzelemente von der Geschäftslogik abrufen
         zusatzelemente = get_volk_zusatzelemente(charakter, self.selected_volk_name)
-        
-        sections_added = 0
-        
-        # NEUE: Halbelf spezielle ENTWEDER/ODER Sektion
-        if zusatzelemente.get('halbelf_entweder_oder', False):
-            halbelf_section = self._create_halbelf_entweder_oder_section()
-            zusatzelemente_container.add_widget(halbelf_section)
-            sections_added += 1
-            Logger.debug(f"Halbelf ENTWEDER/ODER Sektion erstellt für '{self.selected_volk_name}'")
-            return  # Früher Return für Halbelf - keine weiteren Sektionen
 
-        # NEUE: Menschen-Vielseitig ENTWEDER/ODER Sektion
-        if zusatzelemente.get('menschen_vielseitig', False):
-            vielseitig_section = self._create_menschen_vielseitig_section()
-            zusatzelemente_container.add_widget(vielseitig_section)
-            sections_added += 1
-            Logger.debug(f"Menschen Vielseitig Sektion erstellt für '{self.selected_volk_name}'")
-            return  # Früher Return - spezielle Sektion
+        # Prüfe ob es überhaupt Zusatzelemente gibt
+        hat_extras = (
+            zusatzelemente.get('halbelf_entweder_oder', False) or
+            zusatzelemente.get('menschen_vielseitig', False) or
+            zusatzelemente.get('freie_talente', False) or
+            zusatzelemente.get('freie_attribute', False) or
+            zusatzelemente.get('freie_fertigkeiten', False)
+        )
 
-        # Freie Talente Sektion (inkl. Goblin)
-        if zusatzelemente.get('freie_talente', False):
-            # ERWEITERT: Volk-spezifische Titel
-            if self.selected_volk_name.lower() in ["goblin", "goblins"]:
-                titel = "Überlebenskünstler (Freies Anfängertalent)"
-            else:
-                titel = "Freies Anfängertalent"
-                
-            talent_section = self._create_zusatzelement_section(
-                titel,
-                self.selected_volk_name,
-                'talent',
-                lambda: get_freie_talente(charakter),
-                lambda talent: self._select_talent(self.selected_volk_name, talent),
-                "Wähle ein freies Anfängertalent",
-                get_alle_items_func=lambda: get_freie_talente(charakter, nur_verfuegbare=False)
-            )
-            zusatzelemente_container.add_widget(talent_section)
-            sections_added += 1
+        if not hat_extras:
+            return
 
-        # ERWEITERT: Attribute Sektion mit verbessertem Titel
-        if zusatzelemente.get('freie_attribute', False):
-            attribut_optionen = zusatzelemente.get('attribut_optionen', [])
-            
-            # ERWEITERT: Volk-spezifische Titel
-            if self.selected_volk_name.lower() in ["halbork", "halborks"]:
-                titel = "Abgehärtet (Stärke oder Konstitution)"
-            elif len(attribut_optionen) == 2:
-                titel = f"Attribut wählen ({' oder '.join(attribut_optionen)})"
-            elif len(attribut_optionen) > 2:
-                titel = "Freies Attribut"
-            else:
-                titel = "Freies Attribut"
-            
-            attribut_section = self._create_zusatzelement_section(
-                titel,
-                self.selected_volk_name,
-                'attribut',
-                lambda: attribut_optionen,  # Verwende spezifische Optionen
-                lambda attribut: self._select_attribut(self.selected_volk_name, attribut),
-                "Wähle ein Attribut"
-            )
-            zusatzelemente_container.add_widget(attribut_section)
-            sections_added += 1
+        # Getroffene Auswahlen sammeln
+        auswahlen = self.voelker_auswahlen.get(self.selected_volk_name, {})
+        auswahl_texte = []
 
-        # Verstandsbasierte Fertigkeiten Sektion
-        if zusatzelemente.get('freie_fertigkeiten', False):
-            fertigkeit_section = self._create_zusatzelement_section(
-                "Verstandsbasierte Fertigkeit",
-                self.selected_volk_name,
-                'fertigkeit',
-                lambda: get_verfuegbare_fertigkeiten(charakter, nur_verstand=True),
-                lambda fertigkeit: self._select_fertigkeit(self.selected_volk_name, fertigkeit),
-                "Wähle eine Fertigkeit"
-            )
-            zusatzelemente_container.add_widget(fertigkeit_section)
-            sections_added += 1
-            
-        Logger.debug(f"Zusatzelemente für Volk '{self.selected_volk_name}' aktualisiert - {sections_added} Sektionen")
-        
-        # Debug-Info für Attribut-Optionen ausgeben
-        if zusatzelemente.get('freie_attribute', False):
-            Logger.info(f"Volk '{self.selected_volk_name}' hat Attribut-Optionen: {zusatzelemente.get('attribut_optionen', [])}")
+        if auswahlen.get('halbelf_wahl'):
+            auswahl_texte.append(f"Erbe: {auswahlen['halbelf_wahl']}")
+        if auswahlen.get('vielseitig_wahl'):
+            auswahl_texte.append(f"Vielseitig: {auswahlen['vielseitig_wahl']}")
+        if auswahlen.get('talent'):
+            auswahl_texte.append(f"Freies Talent: {auswahlen['talent']}")
+        if auswahlen.get('attribut'):
+            auswahl_texte.append(f"Freies Attribut: {auswahlen['attribut']}")
+        if auswahlen.get('fertigkeit'):
+            auswahl_texte.append(f"Freie Fertigkeit: {auswahlen['fertigkeit']}")
+
+        # Kompaktere Werte für Mobile
+        _pad = dp(10) if _mobile else dp(14)
+        _spacing = dp(6) if _mobile else dp(10)
+
+        # Info-Card erstellen
+        from kivymd.uix.chip import MDChip, MDChipText
+
+        info_card = MDCard(
+            size_hint_x=1,
+            size_hint_y=None,
+            padding=_pad,
+            elevation=3,
+            radius=[12],
+            md_bg_color=self.theme_cls.surfaceContainerHighColor,
+            style="elevated",
+        )
+        info_card.bind(minimum_height=info_card.setter('height'))
+
+        card_content = MDBoxLayout(
+            orientation='vertical',
+            size_hint_y=None,
+            spacing=_spacing,
+        )
+        card_content.bind(minimum_height=card_content.setter('height'))
+
+        # Titel
+        card_content.add_widget(MDLabel(
+            text="Volk-Optionen:",
+            font_style="Body",
+            theme_text_color="Primary",
+            size_hint_y=None,
+            height=dp(24) if _mobile else dp(30),
+            halign='left',
+            bold=True,
+        ))
+
+        if auswahl_texte:
+            for text in auswahl_texte:
+                chip = MDChip(
+                    MDChipText(text=text),
+                    type="filter",
+                    active=True,
+                    md_bg_color=self.theme_cls.primaryContainerColor,
+                    size_hint_y=None,
+                    height=dp(36),
+                )
+                card_content.add_widget(chip)
+        else:
+            card_content.add_widget(MDLabel(
+                text="Noch keine Optionen gewählt",
+                theme_text_color="Secondary",
+                font_style="Body",
+                size_hint_y=None,
+                height=dp(24),
+            ))
+
+        # Ändern-Button → öffnet erneut das Overlay
+        from kivymd.uix.button import MDIconButton
+        aendern_row = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(36),
+        )
+        aendern_row.add_widget(MDBoxLayout(size_hint_x=1))
+        aendern_btn = MDButton(
+            style="text",
+            on_release=lambda x: self.open_volk_dropdown(),
+        )
+        aendern_btn.add_widget(MDButtonText(text="Ändern"))
+        aendern_row.add_widget(aendern_btn)
+        card_content.add_widget(aendern_row)
+
+        info_card.add_widget(card_content)
+        zusatzelemente_container.add_widget(info_card)
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
         """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.

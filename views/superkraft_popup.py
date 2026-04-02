@@ -316,8 +316,8 @@ class SuperkraftDialogHandler:
 
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
-        self.konfig_dialog = None
+        self.overlay = None
+        self.konfig_overlay = None
         self.dialog_content = None
         self.selected_kraft = None
 
@@ -327,10 +327,24 @@ class SuperkraftDialogHandler:
             return self.controller.charakter
         return None
 
+    def _get_overlay(self):
+        """Gibt eine gecachte ElementOverlay-Instanz zurück"""
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
+
+    def _get_konfig_overlay(self):
+        """Gibt eine separate Overlay-Instanz für die Konfiguration zurück"""
+        from views.element_overlay import ElementOverlay
+        if not self.konfig_overlay:
+            self.konfig_overlay = ElementOverlay()
+        return self.konfig_overlay
+
     # ==================== AUSWAHL-DIALOG ====================
 
     def show_auswahl_dialog(self):
-        """Zeigt den Dialog zur Auswahl einer Superkraft."""
+        """Zeigt das Overlay zur Auswahl einer Superkraft."""
         charakter = self._get_charakter()
         if not charakter:
             self.show_error("Kein Charakter verfügbar.")
@@ -346,30 +360,13 @@ class SuperkraftDialogHandler:
             on_kraft_selected=self._on_kraft_ausgewaehlt,
         )
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(text="Superkraft auswählen"),
-            MDDialogSupportingText(
-                text=f"Verfügbare SKP: {superkraft_funktionen.get_verbleibende_skp(charakter)} / "
-                     f"{charakter.superkraft_punkte_gesamt}  |  "
-                     f"Obergrenze: {charakter.kraftobergrenze}",
-            ),
-            MDDialogContentContainer(
-                self.dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        overlay = self._get_overlay()
+        overlay.open(
+            title=f"Superkraft auswählen  —  SKP: {superkraft_funktionen.get_verbleibende_skp(charakter)}/{charakter.superkraft_punkte_gesamt}  |  Obergrenze: {charakter.kraftobergrenze}",
+            content_widget=self.dialog_content,
+            action_text="Schließen",
+            on_action=self.dismiss_dialog,
         )
-        self.dialog.open()
 
     def _get_verfuegbare_krafte_list(self, charakter):
         """Erstellt eine Liste aller Superkräfte mit Status-Info."""
@@ -403,7 +400,7 @@ class SuperkraftDialogHandler:
     # ==================== KONFIGURATIONS-DIALOG ====================
 
     def show_konfig_dialog(self, kraft_name):
-        """Zeigt den Dialog zur Konfiguration einer Superkraft (Kosten + Modifikatoren)."""
+        """Zeigt das Overlay zur Konfiguration einer Superkraft (Kosten + Modifikatoren)."""
         charakter = self._get_charakter()
         if not charakter or kraft_name not in charakter.superkraefte:
             return
@@ -426,30 +423,13 @@ class SuperkraftDialogHandler:
             verbleibende_skp=verbleibend,
         )
 
-        self.konfig_dialog = MDDialog(
-            MDDialogHeadlineText(text=f"'{kraft_name}' konfigurieren"),
-            MDDialogContentContainer(
-                self.dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self._dismiss_konfig_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Hinzufügen"),
-                    style="text",
-                    on_release=self._on_konfig_bestaetigt,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        konfig_overlay = self._get_konfig_overlay()
+        konfig_overlay.open(
+            title=f"'{kraft_name}' konfigurieren",
+            content_widget=self.dialog_content,
+            action_text="Hinzufügen",
+            on_action=self._on_konfig_bestaetigt,
         )
-        self.konfig_dialog.open()
 
     def _on_konfig_bestaetigt(self, *args):
         """Callback wenn die Konfiguration bestätigt wird."""
@@ -501,7 +481,7 @@ class SuperkraftDialogHandler:
     # ==================== ENTFERNUNG-DIALOG ====================
 
     def show_entfernen_dialog(self, kraft_name):
-        """Zeigt einen Bestätigungs-Dialog zum Entfernen einer Superkraft."""
+        """Zeigt ein Overlay zum Entfernen einer Superkraft."""
         charakter = self._get_charakter()
         if not charakter or kraft_name not in charakter.superkraefte:
             return
@@ -512,30 +492,36 @@ class SuperkraftDialogHandler:
 
         self.selected_kraft = kraft_name
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(text="Superkraft entfernen"),
-            MDDialogSupportingText(
-                text=f"'{kraft_name}' entfernen?\n\n"
-                     f"Kosten: {kraft.gesamt_kosten} SKP werden freigegeben.",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Entfernen"),
-                    style="text",
-                    on_release=self._on_entfernen_bestaetigt,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        # Bestätigungs-Content
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(12),
+            size_hint_y=None,
+            height=dp(120),
+            padding=(dp(16), dp(16), dp(16), dp(16)),
         )
-        self.dialog.open()
+        content.add_widget(MDLabel(
+            text=f"'{kraft_name}' entfernen?",
+            theme_text_color="Primary",
+            font_style="Title",
+            role="medium",
+            size_hint_y=None,
+            height=dp(32),
+        ))
+        content.add_widget(MDLabel(
+            text=f"Kosten: {kraft.gesamt_kosten} SKP werden freigegeben.",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=dp(48),
+        ))
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Superkraft entfernen",
+            content_widget=content,
+            action_text="Entfernen",
+            on_action=self._on_entfernen_bestaetigt,
+        )
 
     def _on_entfernen_bestaetigt(self, *args):
         """Callback wenn die Entfernung bestätigt wird."""
@@ -555,18 +541,14 @@ class SuperkraftDialogHandler:
     # ==================== MACHTSTUFE-DIALOG ====================
 
     def show_machtstufe_dialog(self):
-        """Zeigt einen Dialog zur Auswahl der Machtstufe."""
+        """Zeigt ein Overlay zur Auswahl der Machtstufe."""
         charakter = self._get_charakter()
         if not charakter:
             return
 
-        content = MDBoxLayout(
-            orientation='vertical',
-            spacing=dp(4),
-            size_hint_y=None,
-            padding=(dp(12), dp(8), dp(12), dp(8)),
-        )
-        content.bind(minimum_height=content.setter('height'))
+        from kivymd.uix.list import MDList, MDListItemLeadingIcon
+
+        aktuelle_stufe = charakter.machtstufe
 
         stufen_info = {
             "I": "Stufe I - Pulp-Helden (15 SKP)",
@@ -576,40 +558,51 @@ class SuperkraftDialogHandler:
             "V": "Stufe V - Kosmische Beschützer (75 SKP)",
         }
 
-        aktuelle_stufe = charakter.machtstufe
+        content = MDBoxLayout(
+            orientation='vertical',
+            spacing=dp(4),
+            size_hint_y=None,
+            padding=(dp(4), dp(8), dp(4), dp(8)),
+        )
+        content.bind(minimum_height=content.setter('height'))
+
+        # Hinweis
+        content.add_widget(MDLabel(
+            text=f"Aktuelle Stufe: {aktuelle_stufe}\nÄnderung der Machtstufe ändert das SKP-Budget!",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=dp(48),
+        ))
+
+        list_widget = MDList(
+            size_hint_y=None,
+        )
+        list_widget.bind(minimum_height=list_widget.setter('height'))
 
         for stufe, text in stufen_info.items():
             ist_aktiv = (stufe == aktuelle_stufe)
             item = MDListItem(
-                MDListItemHeadlineText(text=text),
                 on_release=lambda x, s=stufe: self._on_machtstufe_gewaehlt(s),
+                size_hint_y=None,
+                height=dp(56),
             )
+            item.add_widget(MDListItemHeadlineText(text=text))
             if ist_aktiv:
-                item.md_bg_color = [0.2, 0.5, 0.2, 0.3]
-            content.add_widget(item)
+                item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                item.md_bg_color = self.overlay.theme_cls.primaryContainerColor if self.overlay else [0.2, 0.5, 0.2, 0.3]
+            else:
+                item.add_widget(MDListItemLeadingIcon(icon="circle-outline"))
+            list_widget.add_widget(item)
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(text="Machtstufe wählen"),
-            MDDialogSupportingText(
-                text=f"Aktuelle Stufe: {aktuelle_stufe}\n"
-                     f"Achtung: Änderung der Machtstufe ändert das SKP-Budget!",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        content.add_widget(list_widget)
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Machtstufe wählen",
+            content_widget=content,
+            action_text="Schließen",
+            on_action=self.dismiss_dialog,
         )
-        self.dialog.open()
 
     def _on_machtstufe_gewaehlt(self, stufe):
         """Callback wenn eine Machtstufe gewählt wird."""
@@ -625,37 +618,29 @@ class SuperkraftDialogHandler:
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog."""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_kraft = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_kraft = None
 
     def _dismiss_konfig_dialog(self, *args):
         """Schließt den Konfigurations-Dialog."""
-        if self.konfig_dialog:
-            self.konfig_dialog.dismiss()
-            self.konfig_dialog = None
-            self.dialog_content = None
-            self.selected_kraft = None
+        if self.konfig_overlay and self.konfig_overlay._is_open:
+            self.konfig_overlay.close()
+        self.dialog_content = None
+        self.selected_kraft = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung."""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(text="Fehler"),
-            MDDialogSupportingText(text=message),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Superkraft-Fehler: {message}")
 
     def _refresh_ui(self):
         """Aktualisiert die UI nach Änderungen."""

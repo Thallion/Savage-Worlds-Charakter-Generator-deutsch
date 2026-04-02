@@ -99,85 +99,172 @@ class GameElementsHandler:
         elif dialog_service:
             dialog_service.show_error_dialog(f"Fehler beim Wechseln zu Setting '{setting_name}'.")
 
-    # ==================== ELEMENT DIALOGS STUBS ====================
-    # Diese wurden zu ElementDialogManager verschoben, hier nur Stubs für Kompatibilität
-    
-    def open_add_setting_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Setting hinzufügen - Stub aufgerufen")
-    
-    def open_delete_setting_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Setting löschen - Stub aufgerufen")
-        
-    def open_add_volk_dialog(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Volk hinzufügen - Stub aufgerufen")
-        
-    def open_delete_volk_dialog(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Volk löschen - Stub aufgerufen")
-        
+    # ==================== ELEMENT DIALOG HANDLER ====================
+
+    def _get_dialog_handler(self, handler_attr):
+        """Gibt den DialogHandler aus dem DialogService zurück"""
+        dialog_service = service_container.get_dialog_service()
+        if dialog_service and hasattr(dialog_service, handler_attr):
+            return getattr(dialog_service, handler_attr)
+        Logger.warning(f"GameElementsHandler: DialogService oder Handler '{handler_attr}' nicht verfügbar")
+        return None
+
+    # ==================== TALENT DIALOGE ====================
+
     def open_add_talent_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Talent hinzufügen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Hinzufügen eines neuen Talents"""
+        handler = self._get_dialog_handler('talent_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Talent hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
     def open_delete_talent_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Talent löschen - Stub aufgerufen")
-        
-    def open_add_macht_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Macht hinzufügen - Stub aufgerufen")
-        
-    def open_delete_macht_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Macht löschen - Stub aufgerufen")
-        
-    def open_add_fertigkeit_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Fertigkeit hinzufügen - Stub aufgerufen")
-        
-    def open_delete_fertigkeit_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Fertigkeit löschen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Löschen eines Talents"""
+        handler = self._get_dialog_handler('talent_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Talent löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== HANDICAP DIALOGE ====================
+
     def open_add_handicap_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Handicap hinzufügen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Hinzufügen eines neuen Handicaps"""
+        handler = self._get_dialog_handler('handicap_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Handicap hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
     def open_delete_handicap_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Handicap löschen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Löschen eines Handicaps"""
+        handler = self._get_dialog_handler('handicap_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Handicap löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== MACHT DIALOGE ====================
+
+    def open_add_macht_popup(self):
+        """Öffnet das Overlay zum Hinzufügen einer neuen Macht"""
+        handler = self._get_dialog_handler('macht_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Macht hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
+    def open_delete_macht_popup(self):
+        """Öffnet das Overlay zum Löschen einer Macht"""
+        handler = self._get_dialog_handler('macht_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Macht löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== FERTIGKEIT DIALOGE ====================
+
+    def open_add_fertigkeit_popup(self):
+        """Öffnet das Overlay zum Hinzufügen einer neuen Fertigkeit"""
+        handler = self._get_dialog_handler('fertigkeit_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Fertigkeit hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
+    def open_delete_fertigkeit_popup(self):
+        """Öffnet das Overlay zum Löschen einer Fertigkeit"""
+        handler = self._get_dialog_handler('fertigkeit_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Fertigkeit löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== VOLK DIALOGE ====================
+
+    def open_add_volk_dialog(self):
+        """Öffnet das Overlay zum Hinzufügen eines neuen Volkes"""
+        handler = self._get_dialog_handler('volk_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Volk hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
+    def open_delete_volk_dialog(self):
+        """Öffnet das Overlay zum Löschen eines Volkes"""
+        handler = self._get_dialog_handler('volk_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Volk löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== SETTING DIALOGE ====================
+
+    def open_add_setting_popup(self):
+        """Öffnet das Overlay zum Hinzufügen eines neuen Settings"""
+        handler = self._get_dialog_handler('setting_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Setting hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
+    def open_delete_setting_popup(self):
+        """Öffnet das Overlay zum Löschen eines Settings"""
+        handler = self._get_dialog_handler('setting_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Setting löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== AUSRÜSTUNG DIALOGE ====================
+
     def open_add_ausruestung_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Ausrüstung hinzufügen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Hinzufügen einer Ausrüstung"""
+        handler = self._get_dialog_handler('ausruestung_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Ausrüstung hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
     def open_delete_ausruestung_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Ausrüstung löschen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Löschen einer Ausrüstung"""
+        handler = self._get_dialog_handler('ausruestung_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Ausrüstung löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== WAFFE DIALOGE ====================
+
     def open_add_waffe_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Waffe hinzufügen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Hinzufügen einer Waffe"""
+        handler = self._get_dialog_handler('waffe_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Waffe hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
     def open_delete_waffe_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Waffe löschen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Löschen einer Waffe"""
+        handler = self._get_dialog_handler('waffe_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Waffe löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== RÜSTUNG DIALOGE ====================
+
     def open_add_ruestung_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Rüstung hinzufügen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Hinzufügen einer Rüstung"""
+        handler = self._get_dialog_handler('ruestung_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Rüstung hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
     def open_delete_ruestung_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Rüstung löschen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Löschen einer Rüstung"""
+        handler = self._get_dialog_handler('ruestung_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Rüstung löschen Overlay öffnen")
+            handler.show_delete_dialog()
+
+    # ==================== SCHILD DIALOGE ====================
+
     def open_add_schild_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Schild hinzufügen - Stub aufgerufen")
-        
+        """Öffnet das Overlay zum Hinzufügen eines Schildes"""
+        handler = self._get_dialog_handler('schild_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Schild hinzufügen Overlay öffnen")
+            handler.show_add_dialog()
+
     def open_delete_schild_popup(self):
-        """Stub - echte Implementierung in ElementDialogManager"""
-        Logger.info("Schild löschen - Stub aufgerufen")
+        """Öffnet das Overlay zum Löschen eines Schildes"""
+        handler = self._get_dialog_handler('schild_dialog_handler')
+        if handler:
+            Logger.info("GameElementsHandler: Schild löschen Overlay öffnen")
+            handler.show_delete_dialog()

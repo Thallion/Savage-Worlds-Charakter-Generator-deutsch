@@ -128,159 +128,90 @@ class DeleteRuestungDialogContent(MDBoxLayout):
 class RuestungDialogHandler:
     def __init__(self, controller):
         self.controller = controller
-        self.dialog = None
+        self.overlay = None
         self.selected_ruestung = None
         self.dialog_content = None
 
-    def show_add_dialog(self):
-        """Zeigt den Dialog zum Hinzufügen einer neuen Rüstung"""
-        dialog_content = RuestungDialogContent()
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        scroll_view = ScrollView(
-            size_hint_y=None,
-            height=min(dialog_content.height, Window.height * 0.6),
-        )
-        scroll_view.add_widget(dialog_content)
+    def _get_overlay(self):
+        from views.element_overlay import ElementOverlay
+        if not self.overlay:
+            self.overlay = ElementOverlay()
+        return self.overlay
 
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Neue Rüstung hinzufügen",
-            ),
-            MDDialogContentContainer(
-                scroll_view,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Speichern"),
-                    style="text",
-                    on_release=self.save_ruestung,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+    def show_add_dialog(self):
+        """Zeigt das Overlay zum Hinzufügen einer neuen Rüstung"""
+        dialog_content = RuestungDialogContent()
+        self.dialog_content = dialog_content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Neue Rüstung hinzufügen",
+            content_widget=dialog_content,
+            action_text="Speichern",
+            on_action=self.save_ruestung,
         )
-        self.dialog.open()
 
     def show_delete_dialog(self):
-        """Zeigt den Dialog zum Löschen einer Rüstung"""
-        if not self.get_all_ruestungen():
+        """Zeigt das Overlay zum Löschen einer Rüstung (suchbare Liste)"""
+        ruestungen = self.get_all_ruestungen()
+        if not ruestungen:
             self.show_error("Keine Rüstungen zum Löschen verfügbar.")
             return
 
-        dialog_content = DeleteRuestungDialogContent(
-            ruestungen_callback=self.get_all_ruestungen,
-            menu_callback=self.on_ruestung_select
+        from views.element_overlay import ElementListContent
+        content = ElementListContent(
+            items=ruestungen,
+            on_select=self.on_ruestung_select,
         )
-        dialog_content.dialog = self.dialog
-        self.dialog_content = dialog_content
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Rüstung löschen",
-            ),
-            MDDialogSupportingText(
-                text="Wähle eine Rüstung zum Löschen:",
-            ),
-            MDDialogContentContainer(
-                dialog_content,
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                Widget(),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=self.dismiss_dialog,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="text",
-                    on_release=self.delete_ruestung,
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self.dialog_content = content
+
+        overlay = self._get_overlay()
+        overlay.open(
+            title="Rüstung löschen",
+            content_widget=content,
+            action_text="Löschen",
+            on_action=self.delete_ruestung,
         )
-        self.dialog.open()
 
     def show_edit_dialog(self, ruestung_name):
-            """Zeigt den Dialog zum Bearbeiten einer bestehenden Rüstung"""
-            try:
-                app = App.get_running_app()
-                charakter = app.controller.charakter
-                
-                # Hole die Rüstung
-                ruestung = charakter.ausruestung.get(ruestung_name)
-                if not ruestung:
-                    self.show_error(f"Rüstung '{ruestung_name}' nicht gefunden.")
-                    return
-                
-                # Erstelle Dialog-Content mit Rüstungs-Daten
-                ruestung_data = {
-                    'name': ruestung.name,
-                    'torso': ruestung.torso,
-                    'arme': ruestung.arme,
-                    'beine': ruestung.beine,
-                    'kopf': ruestung.kopf,
-                    'mindeststaerke': ruestung.mindeststaerke,
-                    'gewicht': ruestung.gewicht,
-                    'kosten': ruestung.kosten,
-                    'setting': ruestung.setting,
-                    'beschreibung': ruestung.beschreibung
-                }
-                
-                dialog_content = RuestungDialogContent(ruestung_data=ruestung_data)
-                dialog_content.dialog = self.dialog
-                self.dialog_content = dialog_content
-                self.selected_ruestung = ruestung_name  # Speichere den Key für Updates
-                
-                scroll_view = ScrollView(
-                    size_hint_y=None,
-                    height=min(dialog_content.height, Window.height * 0.6),
-                )
-                scroll_view.add_widget(dialog_content)
+        """Zeigt das Overlay zum Bearbeiten einer bestehenden Rüstung"""
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
 
-                self.dialog = MDDialog(
-                    MDDialogHeadlineText(
-                        text="Rüstung bearbeiten",
-                    ),
-                    MDDialogContentContainer(
-                        scroll_view,
-                        orientation="vertical",
-                    ),
-                    MDDialogButtonContainer(
-                        Widget(),
-                        MDButton(
-                            MDButtonText(text="Abbrechen"),
-                            style="text",
-                            on_release=self.dismiss_dialog,
-                        ),
-                        MDButton(
-                            MDButtonText(text="Speichern"),
-                            style="text",
-                            on_release=self.update_ruestung,
-                        ),
-                        spacing="8dp",
-                    ),
-                    size_hint=(0.85, None),
-                    auto_dismiss=False,
-                )
-                self.dialog.open()
-                
-            except Exception as e:
-                Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
-                self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
+            ruestung = charakter.ausruestung.get(ruestung_name)
+            if not ruestung:
+                self.show_error(f"Rüstung '{ruestung_name}' nicht gefunden.")
+                return
+
+            ruestung_data = {
+                'name': ruestung.name,
+                'torso': ruestung.torso,
+                'arme': ruestung.arme,
+                'beine': ruestung.beine,
+                'kopf': ruestung.kopf,
+                'mindeststaerke': ruestung.mindeststaerke,
+                'gewicht': ruestung.gewicht,
+                'kosten': ruestung.kosten,
+                'setting': ruestung.setting,
+                'beschreibung': ruestung.beschreibung
+            }
+
+            dialog_content = RuestungDialogContent(ruestung_data=ruestung_data)
+            self.dialog_content = dialog_content
+            self.selected_ruestung = ruestung_name
+
+            overlay = self._get_overlay()
+            overlay.open(
+                title="Rüstung bearbeiten",
+                content_widget=dialog_content,
+                action_text="Speichern",
+                on_action=self.update_ruestung,
+            )
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
+            self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
 
     def update_ruestung(self, *args):
         """Aktualisiert eine bestehende Rüstung"""
@@ -477,44 +408,27 @@ class RuestungDialogHandler:
             self.show_error("Fehler beim Löschen der Rüstung")
 
     def on_ruestung_select(self, ruestung_name):
-        """Callback wenn eine Rüstung im Dropdown ausgewählt wurde"""
+        """Callback wenn eine Rüstung ausgewählt wurde"""
         self.selected_ruestung = ruestung_name
-        if (self.dialog_content and 
-            hasattr(self.dialog_content.ids, 'selected_ruestung_text')):
-            self.dialog_content.ids.selected_ruestung_text.text = ruestung_name
-            Logger.info(f"Rüstung '{ruestung_name}' wurde ausgewählt.")
-        else:
-            Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
-        if self.dialog:
-            self.dialog.dismiss()
-            self.dialog = None
-            self.dialog_content = None
-            self.selected_ruestung = None
+        if self.overlay and self.overlay._is_open:
+            self.overlay.close()
+        self.dialog_content = None
+        self.selected_ruestung = None
 
     def show_error(self, message):
-        """Zeigt eine Fehlermeldung im Dialog an"""
-        error_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Fehler",
-            ),
-            MDDialogSupportingText(
-                text=message,
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: error_dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        error_dialog.open()
+        """Zeigt eine Fehlermeldung an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(message)
+                return
+        except Exception:
+            pass
+        Logger.error(f"Rüstung-Fehler: {message}")
 
     def get_all_ruestungen(self):
         """Gibt eine Liste aller verfügbaren Rüstungen zurück"""

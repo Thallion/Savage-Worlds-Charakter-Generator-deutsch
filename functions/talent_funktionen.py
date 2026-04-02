@@ -1245,7 +1245,7 @@ def remove_talent(charakter, talent_name):
     """
     if talent_name in charakter.talente:
         del charakter.talente[talent_name]
-        charakter.custom_element_manager.remove_element('talente', talent_name)
+        charakter.custom_element_manager.remove_element_from_active_setting('talente', talent_name)
         return True
     return False
 

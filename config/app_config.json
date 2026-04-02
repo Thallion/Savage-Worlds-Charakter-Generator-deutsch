@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
+  "mobile_modus": false,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -21,9 +21,9 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "50 Fathoms",
+  "last_setting": "Superkräfte Kompendium",
   "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "config_version": "1.0",
-  "last_updated": "2026-03-29T10:31:42.410955"
+  "last_updated": "2026-04-02T14:24:29.729621"
 }
