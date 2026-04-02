@@ -13,6 +13,7 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.logger import Logger
 from kivy.metrics import dp
+from kivy.utils import platform as kivy_platform
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
@@ -137,8 +138,28 @@ class ElementOverlay(MDBoxLayout):
         self._top_bar.md_bg_color = self.theme_cls.surfaceContainerColor
         self._bottom_bar.md_bg_color = self.theme_cls.surfaceContainerColor
 
+    def _get_android_padding(self):
+        """Ermittelt Top- und Bottom-Padding für Android-Systemleisten"""
+        if kivy_platform != 'android':
+            return 0, 0
+        try:
+            from kivymd.app import MDApp
+            app = MDApp.get_running_app()
+            top = getattr(app, '_android_top_padding', dp(24))
+            bottom = getattr(app, '_android_bottom_padding', dp(24))
+            return top, bottom
+        except Exception:
+            return dp(24), dp(24)
+
     def _build_ui(self):
         """Erstellt die UI-Struktur programmatisch"""
+
+        # ===== Top-Spacer für Android-Statusbar/Notch =====
+        self._top_spacer = MDBoxLayout(
+            size_hint_y=None,
+            height=0,
+        )
+        self.add_widget(self._top_spacer)
 
         # ===== Top-Bar =====
         self._top_bar = MDBoxLayout(
@@ -217,6 +238,14 @@ class ElementOverlay(MDBoxLayout):
         self.add_widget(MDDivider())
         self.add_widget(self._bottom_bar)
 
+        # ===== Bottom-Spacer für Android-Navigationsleiste =====
+        self._bottom_spacer = MDBoxLayout(
+            size_hint_y=None,
+            height=0,
+            md_bg_color=self.theme_cls.surfaceContainerColor,
+        )
+        self.add_widget(self._bottom_spacer)
+
     def open(self, title, content_widget, action_text="Speichern", on_action=None, on_close=None):
         """
         Öffnet das Overlay mit Slide-Animation von rechts.
@@ -241,6 +270,11 @@ class ElementOverlay(MDBoxLayout):
         # Content einfügen
         self._content_box.clear_widgets()
         self._content_box.add_widget(content_widget)
+
+        # Android-Systemleisten-Padding setzen
+        top_pad, bottom_pad = self._get_android_padding()
+        self._top_spacer.height = top_pad
+        self._bottom_spacer.height = bottom_pad
 
         # Overlay zum Window hinzufügen
         self.size_hint = (1, 1)
