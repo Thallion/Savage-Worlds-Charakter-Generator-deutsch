@@ -71,10 +71,13 @@ class TextFieldScrollView(MDScrollView):
 
     def _find_textfield_at(self, widget, pos):
         """Sucht rekursiv nach einem MDTextField unter der Touch-Position."""
-        for child in reversed(widget.children):
+        for child in widget.children:
             if not hasattr(child, 'collide_point'):
                 continue
-            if not child.collide_point(*pos):
+            if not hasattr(child, 'to_widget'):
+                continue
+            local_pos = child.to_widget(*pos)
+            if not child.collide_point(*local_pos):
                 continue
             if isinstance(child, MDTextField):
                 return child
@@ -120,7 +123,8 @@ class SwipeScreenManager(ScreenManager):
             # Horizontaler Swipe: genug horizontal, wenig vertikal
             if abs(dx) > self.min_swipe_distance and dy < self.max_vertical_drift:
                 # Laufende Transition abbrechen bevor ein neuer Wechsel getriggert wird
-                if hasattr(self, '_anim_progress') and self._anim_progress is not None:
+                anim_progress = getattr(self, '_anim_progress', None)
+                if anim_progress is not None:
                     try:
                         from kivy.uix.screenmanager import NoTransition
                         self.transition = NoTransition()
@@ -187,7 +191,7 @@ class SearchBottomSheet(ModalView):
 
         # Scrim (halbtransparenter Hintergrund) - Klick schließt das Sheet
         scrim = Widget(size_hint=(1, 1))
-        scrim.bind(on_touch_down=self._on_scrim_touch)
+        scrim.bind(on_touch_down=self._on_scrim_touch)  # type: ignore[attr-defined]
         self.add_widget(scrim)
 
         # Sheet-Card (untere Hälfte)
