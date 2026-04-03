@@ -23,6 +23,8 @@ from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListIt
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
+from views.ui_components import TextFieldScrollView
+
 
 class VoelkerAuswahlOverlay(MDBoxLayout):
     """
@@ -104,7 +106,8 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         self.add_widget(MDDivider())
 
         # ===== Content-Bereich =====
-        content_scroll = MDScrollView(
+        # TextFieldScrollView: verhindert Focus-Verlust bei Suchfeld auf Android
+        content_scroll = TextFieldScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
         )

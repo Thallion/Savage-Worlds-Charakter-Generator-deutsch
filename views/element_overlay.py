@@ -23,6 +23,8 @@ from kivymd.uix.list import MDList, MDListItem, MDListItemLeadingIcon, MDListIte
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.textfield import MDTextField, MDTextFieldLeadingIcon, MDTextFieldHintText
 
+from views.ui_components import TextFieldScrollView
+
 
 class ElementListContent(MDBoxLayout):
     """
@@ -193,7 +195,9 @@ class ElementOverlay(MDBoxLayout):
         self.add_widget(MDDivider())
 
         # ===== Content-Bereich (scrollbar) =====
-        self._content_scroll = MDScrollView(
+        # TextFieldScrollView statt MDScrollView: verhindert Focus-Verlust
+        # bei MDTextFields auf Android (Tastatur verschwindet sofort nach Touch)
+        self._content_scroll = TextFieldScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
         )
