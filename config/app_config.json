@@ -22,8 +22,8 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Superkräfte Kompendium",
-  "force_mobile_layout": true,
+  "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "config_version": "1.0",
-  "last_updated": "2026-04-02T18:51:02.994102"
+  "last_updated": "2026-04-03T09:11:48.951954"
 }
