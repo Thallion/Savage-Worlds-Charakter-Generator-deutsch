@@ -3,14 +3,64 @@
 UI-Komponenten und Tab-Klassen extrahiert aus main.py
 """
 
+from kivy.clock import Clock
 from kivy.properties import StringProperty, BooleanProperty, NumericProperty
 from kivy.uix.screenmanager import ScreenManager, SlideTransition
 from kivy.metrics import dp
 from kivy.logger import Logger
 
+from kivymd.uix.scrollview import MDScrollView
+from kivymd.uix.textfield import MDTextField
+
 from utils.platform_utils import is_mobile_layout
 
 _mobile = is_mobile_layout()
+
+
+class TextFieldScrollView(MDScrollView):
+    """
+    MDScrollView mit Workaround für TextField-Focus auf Android.
+
+    Problem: Kivy's ScrollView fängt Touch-Events ab und verwendet einen
+    scroll_timeout, um Scroll von Tap zu unterscheiden. Dabei wird der Focus
+    von MDTextField gestohlen - die Android-Tastatur erscheint kurz und
+    verschwindet sofort wieder.
+
+    Lösung: Bei Touch auf ein MDTextField wird der Focus nach dem
+    ScrollView-Timeout per Clock.schedule_once wiederhergestellt.
+
+    Referenz: kivy/kivy#4399, kivy/kivy#890, kivy/kivy#7320
+    """
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            target = self._find_textfield_at(self, touch.pos)
+            if target and not target.disabled:
+                # Focus nach ScrollView-Timeout wiederherstellen
+                Clock.schedule_once(
+                    lambda dt: self._ensure_focus(target), 0.15
+                )
+        return super().on_touch_down(touch)
+
+    def _find_textfield_at(self, widget, pos):
+        """Sucht rekursiv nach einem MDTextField unter der Touch-Position."""
+        for child in reversed(widget.children):
+            if not hasattr(child, 'collide_point'):
+                continue
+            if not child.collide_point(*pos):
+                continue
+            if isinstance(child, MDTextField):
+                return child
+            # Rekursiv in Kinder suchen
+            result = self._find_textfield_at(child, pos)
+            if result:
+                return result
+        return None
+
+    def _ensure_focus(self, field):
+        """Stellt den Focus wieder her, falls ScrollView ihn gestohlen hat."""
+        if field and not field.focus and not field.disabled:
+            field.focus = True
 
 
 class SwipeScreenManager(ScreenManager):
