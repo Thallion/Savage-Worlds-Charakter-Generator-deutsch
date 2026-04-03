@@ -22,25 +22,52 @@ class TextFieldScrollView(MDScrollView):
     MDScrollView mit Workaround für TextField-Focus auf Android.
 
     Problem: Kivy's ScrollView fängt Touch-Events ab und verwendet einen
-    scroll_timeout, um Scroll von Tap zu unterscheiden. Dabei wird der Focus
-    von MDTextField gestohlen - die Android-Tastatur erscheint kurz und
-    verschwindet sofort wieder.
+    scroll_timeout (55-200ms), um Scroll von Tap zu unterscheiden. Während
+    dieses Timeouts wird der Touch nicht an Kinder weitergegeben. Das stört
+    die Focus-Verwaltung von MDTextField - die Android-Tastatur erscheint
+    kurz und verschwindet sofort wieder.
 
-    Lösung: Bei Touch auf ein MDTextField wird der Focus nach dem
-    ScrollView-Timeout per Clock.schedule_once wiederhergestellt.
+    Lösung: Touch-Position tracken und bei touch_up (nachdem ScrollView
+    ihre Entscheidung getroffen hat) den Focus auf das getroffene TextField
+    erzwingen, falls es ein Tap war (kein Scroll).
 
     Referenz: kivy/kivy#4399, kivy/kivy#890, kivy/kivy#7320
     """
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._pending_textfield = None
+        self._touch_start_pos = None
+
     def on_touch_down(self, touch):
+        self._pending_textfield = None
+        self._touch_start_pos = None
+
         if self.collide_point(*touch.pos):
             target = self._find_textfield_at(self, touch.pos)
             if target and not target.disabled:
-                # Focus nach ScrollView-Timeout wiederherstellen
-                Clock.schedule_once(
-                    lambda dt: self._ensure_focus(target), 0.15
-                )
+                self._pending_textfield = target
+                self._touch_start_pos = (touch.x, touch.y)
         return super().on_touch_down(touch)
+
+    def on_touch_up(self, touch):
+        result = super().on_touch_up(touch)
+        field = self._pending_textfield
+        start = self._touch_start_pos
+
+        if field and start and not field.disabled:
+            # Prüfe ob es ein Tap war (kein Scroll-Gesture)
+            dx = abs(touch.x - start[0])
+            dy = abs(touch.y - start[1])
+            if dx < dp(30) and dy < dp(30):
+                # Tap erkannt - Focus erzwingen nach aktuellem Frame
+                # und nochmals nach kurzem Delay als Absicherung
+                Clock.schedule_once(lambda dt: self._ensure_focus(field), 0)
+                Clock.schedule_once(lambda dt: self._ensure_focus(field), 0.1)
+
+        self._pending_textfield = None
+        self._touch_start_pos = None
+        return result
 
     def _find_textfield_at(self, widget, pos):
         """Sucht rekursiv nach einem MDTextField unter der Touch-Position."""
@@ -51,7 +78,6 @@ class TextFieldScrollView(MDScrollView):
                 continue
             if isinstance(child, MDTextField):
                 return child
-            # Rekursiv in Kinder suchen
             result = self._find_textfield_at(child, pos)
             if result:
                 return result
