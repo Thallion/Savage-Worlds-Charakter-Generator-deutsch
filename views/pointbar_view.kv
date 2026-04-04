@@ -34,28 +34,6 @@
     height: self.minimum_height
     md_bg_color: app.theme_cls.backgroundColor
 
-    # Status-Button: immer sichtbar, über der Pointbar
-    TouchableBoxLayout:
-        id: char_gen_bar
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: dp(40)
-        padding: [dp(12), dp(4), dp(12), dp(4)]
-        spacing: dp(8)
-        md_bg_color: app.theme_cls.surfaceContainerHighColor if not root.char_gen_completed else app.theme_cls.primaryContainerColor
-        on_release: root.toggle_char_gen_completed()
-
-        MDIcon:
-            icon: "check-circle" if root.char_gen_completed else "progress-wrench"
-            size_hint: None, None
-            size: dp(24), dp(24)
-            pos_hint: {'center_y': 0.5}
-
-        MDLabel:
-            text: "Aufstiege freigeschaltet" if root.char_gen_completed else "Charaktererstellung abschließen"
-            font_size: dp(12)
-            pos_hint: {'center_y': 0.5}
-
     # Header-Zeile (immer sichtbar)
     MDBoxLayout:
         id: header_bar
@@ -76,18 +54,62 @@
             keep_ratio: True
             pos_hint: {'center_y': 0.5}
 
-        # Zusammenfassung
+        # Attributspunkte
         MDLabel:
-            text: root.header_summary_text
+            text: "Attr: " + root.attribut_text
             theme_text_color: "Primary"
-            halign: 'left'
-            valign: 'center'
-            font_size: dp(12)
+            font_size: dp(11)
+            size_hint_x: None
+            width: dp(60)
+            pos_hint: {'center_y': 0.5}
+
+        # Fertigkeitenpunkte
+        MDLabel:
+            text: "Fert: " + root.faehigkeiten_text
+            theme_text_color: "Primary"
+            font_size: dp(11)
+            size_hint_x: None
+            width: dp(70)
+            pos_hint: {'center_y': 0.5}
+
+        # Setting-Name
+        MDLabel:
+            text: root.active_setting_name_text
+            theme_text_color: "Secondary"
+            halign: 'center'
+            font_size: dp(10)
+            size_hint_x: 0.35
+            pos_hint: {'center_y': 0.5}
+
+        # Charakter-Name
+        MDLabel:
+            text: root.char_name_text
+            theme_text_color: "Primary"
+            halign: 'right'
+            font_size: dp(11)
             bold: True
             shorten: True
-            shorten_from: 'right'
-            text_size: self.size
-            size_hint_x: 1
+            shorten_from: 'left'
+            size_hint_x: 0.2
+            pos_hint: {'center_y': 0.5}
+
+        # Handicap-Punkte
+        MDLabel:
+            text: "H: " + root.handicaps_text
+            theme_text_color: "Secondary"
+            font_size: dp(10)
+            size_hint_x: None
+            width: dp(55)
+            pos_hint: {'center_y': 0.5}
+
+        # Mächte-Anzahl
+        MDLabel:
+            text: "M: " + root.maechte_text
+            theme_text_color: "Secondary"
+            font_size: dp(10)
+            size_hint_x: None
+            width: dp(55)
+            pos_hint: {'center_y': 0.5}
 
         # Undo-Button
         MDIconButton:

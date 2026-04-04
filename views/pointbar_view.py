@@ -60,20 +60,18 @@ class TouchableBoxLayout(ButtonBehavior, MDBoxLayout):
 
 
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemTrailingIcon
+from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.button import MDIconButton, MDFabButton
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.label import MDLabel, MDIcon
+from kivymd.uix.card import MDCard
+from kivymd.uix.menu import MDDropdownMenu
+from kivymd.theming import ThemableBehavior
 
 
 class TrailingPressedIconButton(ButtonBehavior, RotateBehavior, MDListItemTrailingIcon):
     """Icon-Button mit Rotation für ExpansionPanel-Chevron"""
     pass
-
-
-from kivymd.uix.gridlayout import MDGridLayout
-from kivymd.uix.button import MDIconButton, MDFabButton
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.label import MDLabel
-from kivymd.uix.card import MDCard
-from kivymd.uix.menu import MDDropdownMenu
-from kivymd.theming import ThemableBehavior
 
 # Path utilities import
 from utils.path_utils import get_assets_path
@@ -135,26 +133,23 @@ class GenerationPointsBar(MDBoxLayout):
     is_expanded = BooleanProperty(True)
     kann_undo = BooleanProperty(False)
 
-    def on_touch_down(self, touch):
-        """Fängt Touch-Events für char_gen_bar ab (insbesondere auf Mobile)."""
-        char_gen_bar = self.ids.get('char_gen_bar')
-        if char_gen_bar and char_gen_bar.collide_point(*touch.pos):
-            if not touch.is_mouse_scrolling:
-                self.toggle_char_gen_completed()
-                return True
-        return super().on_touch_down(touch)
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
-        self.controller.bind(on_charakter_updated=self._update_undo_status)
+        self.controller.bind(on_charakter_updated=self._on_charakter_updated)
         self.on_charakter_changed(self.controller, self.controller.charakter)
 
         # Timer für regelmäßige Gewichts-Updates
         self._weight_update_event = Clock.schedule_interval(self._update_weight_periodically, 2.0)
 
         Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
+
+    def _on_charakter_updated(self, *args):
+        """Wird aufgerufen wenn der Charakter aktualisiert wird (z.B. Setting-Wechsel)"""
+        if self.charakter:
+            self.update_all_texts()
+            self._update_char_gen_status(self.charakter, self.charakter.char_gen_completed)
 
     def on_charakter_changed(self, instance, value):
         if hasattr(self, 'charakter') and self.charakter:
@@ -163,6 +158,8 @@ class GenerationPointsBar(MDBoxLayout):
         if self.charakter:
             self.bind_charakter_properties()
             self.update_all_texts()
+            # char_gen_completed Status explizit aktualisieren
+            self._update_char_gen_status(self.charakter, self.charakter.char_gen_completed if self.charakter else False)
 
     def unbind_charakter_properties(self):
         """Entfernt alle Charakter-Property-Bindings"""
@@ -509,6 +506,54 @@ class GenerationPointsBar(MDBoxLayout):
             self.char_gen_completed = self.charakter.char_gen_completed
             # Alle Texte neu laden, damit Attribute, Fertigkeiten und Vermögen korrekt angezeigt werden
             self.update_all_texts()
+            # UI in main.kv aktualisieren
+            self._update_char_gen_bar_ui()
+
+    def _update_char_gen_bar_ui(self):
+        """Aktualisiert die char_gen_bar in main.kv"""
+        try:
+            from kivy.app import App
+            app = App.get_running_app()
+            # Versuche verschiedene Wege, um char_gen_bar zu finden
+            char_gen_bar = None
+            if app:
+                # Methode 1: Über app.ids
+                if hasattr(app, 'ids') and app.ids:
+                    char_gen_bar = app.ids.get('char_gen_bar')
+                # Methode 2: Über root widget
+                if not char_gen_bar and hasattr(app, 'root') and app.root:
+                    root = app.root
+                    if hasattr(root, 'ids') and root.ids:
+                        char_gen_bar = root.ids.get('char_gen_bar')
+                # Methode 3: Über SwipeScreenManager und NavigationRail
+                if not char_gen_bar and hasattr(app, 'root'):
+                    for child in app.root.children if hasattr(app.root, 'children') else []:
+                        if hasattr(child, 'ids'):
+                            char_gen_bar = child.ids.get('char_gen_bar')
+                            if char_gen_bar:
+                                break
+            
+            if char_gen_bar:
+                # Farbe aktualisieren
+                if self.char_gen_completed:
+                    char_gen_bar.md_bg_color = app.theme_cls.primaryContainerColor
+                else:
+                    char_gen_bar.md_bg_color = app.theme_cls.surfaceContainerHighColor
+                # Text im Label aktualisieren
+                for child in char_gen_bar.children:
+                    if isinstance(child, MDLabel):
+                        if self.char_gen_completed:
+                            child.text = "Aufstiege freigeschaltet"
+                        else:
+                            child.text = "Charaktererstellung abschließen"
+                    elif isinstance(child, MDIcon):
+                        if self.char_gen_completed:
+                            child.icon = "check-circle"
+                        else:
+                            child.icon = "progress-wrench"
+                Logger.debug(f"char_gen_bar UI aktualisiert: {self.char_gen_completed}")
+        except Exception as e:
+            Logger.warning(f"Fehler beim Aktualisieren der char_gen_bar: {e}")
 
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""

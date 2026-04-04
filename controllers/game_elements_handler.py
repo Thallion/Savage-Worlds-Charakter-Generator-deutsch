@@ -21,7 +21,12 @@ class GameElementsHandler:
         return getattr(self.app, 'controller', None)
     
     def _trigger_ui_refresh(self):
-        """Triggert UI-Refresh über Event-System"""
+        """Triggert UI-Refresh über Event-System und Controller-Event"""
+        # Controller-Event dispatchen für GenerationPointsBar
+        if self.charakter_controller and hasattr(self.charakter_controller, 'dispatch'):
+            self.charakter_controller.dispatch('on_charakter_updated')
+        
+        # Event-Service für andere Listener
         event_service = service_container.get_event_service()
         if event_service:
             from services.event_service import EventTypes

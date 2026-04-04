@@ -164,6 +164,28 @@ MDScreen:
                     height: self.minimum_height
                     md_bg_color: app.theme_cls.backgroundColor
 
+                    # Status-Button: außerhalb des komplexen Layouts für bessere Touch-Reaktion
+                    TouchableBoxLayout:
+                        id: char_gen_bar
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(40)
+                        padding: [dp(12), dp(4), dp(12), dp(4)]
+                        spacing: dp(8)
+                        md_bg_color: app.theme_cls.surfaceContainerHighColor if not root.ids.generation_points.char_gen_completed else app.theme_cls.primaryContainerColor
+                        on_release: root.ids.generation_points.toggle_char_gen_completed()
+
+                        MDIcon:
+                            icon: "check-circle" if root.ids.generation_points.char_gen_completed else "progress-wrench"
+                            size_hint: None, None
+                            size: dp(24), dp(24)
+                            pos_hint: {'center_y': 0.5}
+
+                        MDLabel:
+                            text: "Aufstiege freigeschaltet" if root.ids.generation_points.char_gen_completed else "Charaktererstellung abschließen"
+                            font_size: dp(12)
+                            pos_hint: {'center_y': 0.5}
+
                     GenerationPointsBar:
                         id: generation_points
                         charakter: app.controller.charakter
