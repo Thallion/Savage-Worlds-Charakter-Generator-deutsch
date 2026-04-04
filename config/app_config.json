@@ -9,7 +9,7 @@
   "window_width": 1200,
   "window_height": 800,
   "mobile_modus": true,
-  "show_logger": true,
+  "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
   "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen/wou_aidan_held_anfaenger",
@@ -25,5 +25,5 @@
   "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "config_version": "1.0",
-  "last_updated": "2026-04-04T08:20:22.216318"
+  "last_updated": "2026-04-04T09:09:18.395530"
 }

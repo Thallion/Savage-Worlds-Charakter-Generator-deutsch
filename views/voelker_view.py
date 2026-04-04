@@ -362,6 +362,43 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren des Dropdown-Texts: {e}")
 
+    def open_add_volk_dialog(self):
+        """Öffnet den Dialog zum Erstellen eines neuen Volkes."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service and hasattr(dialog_service, 'volk_dialog_handler'):
+                dialog_service.volk_dialog_handler.show_add_dialog()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Volk-erstellen-Dialogs: {e}")
+
+    def open_edit_volk_dialog(self):
+        """Öffnet den Dialog zum Bearbeiten des ausgewählten Volkes."""
+        try:
+            if not self.selected_volk_name:
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_warning_dialog("Bitte wähle zuerst ein Volk aus.")
+                return
+            
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service and hasattr(dialog_service, 'volk_dialog_handler'):
+                dialog_service.volk_dialog_handler.show_edit_dialog(self.selected_volk_name)
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Volk-bearbeiten-Dialogs: {e}")
+
+    def open_delete_volk_dialog(self):
+        """Öffnet den Dialog zum Löschen von Völkern."""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service and hasattr(dialog_service, 'volk_dialog_handler'):
+                dialog_service.volk_dialog_handler.show_delete_dialog()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Volk-löschen-Dialogs: {e}")
+
     # === MOBILE INLINE-LISTE METHODEN ===
 
     def _populate_voelker_liste(self):

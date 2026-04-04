@@ -4,13 +4,34 @@
     padding: [dp(10), dp(8), dp(10), dp(8)]
     spacing: dp(10)
 
-    MDLabel:
-        text: "Völker"
+    MDBoxLayout:
+        orientation: 'horizontal'
         size_hint_y: None
         height: dp(35)
-        halign: 'left'
-        font_style: "Title"
-        theme_text_color: "Primary"
+        
+        MDLabel:
+            text: "Völker"
+            size_hint_x: 1
+            halign: 'left'
+            font_style: "Title"
+            theme_text_color: "Primary"
+        
+        # Buttons für Volk-Management
+        MDIconButton:
+            icon: "plus"
+            tooltip: "Volk erstellen"
+            on_release: root.open_add_volk_dialog()
+        
+        MDIconButton:
+            id: edit_volk_button
+            icon: "pencil"
+            tooltip: "Volk bearbeiten"
+            on_release: root.open_edit_volk_dialog()
+        
+        MDIconButton:
+            icon: "delete"
+            tooltip: "Volk löschen"
+            on_release: root.open_delete_volk_dialog()
 
     # KOMPAKTE VÖLKER-AUSWAHL - responsiv
     MDCard:
