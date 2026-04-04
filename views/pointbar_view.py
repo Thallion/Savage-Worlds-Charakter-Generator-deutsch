@@ -135,6 +135,15 @@ class GenerationPointsBar(MDBoxLayout):
     is_expanded = BooleanProperty(True)
     kann_undo = BooleanProperty(False)
 
+    def on_touch_down(self, touch):
+        """Fängt Touch-Events für char_gen_bar ab (insbesondere auf Mobile)."""
+        char_gen_bar = self.ids.get('char_gen_bar')
+        if char_gen_bar and char_gen_bar.collide_point(*touch.pos):
+            if not touch.is_mouse_scrolling:
+                self.toggle_char_gen_completed()
+                return True
+        return super().on_touch_down(touch)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller

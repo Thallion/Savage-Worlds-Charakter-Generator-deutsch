@@ -12,7 +12,7 @@
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
+  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen/wou_aidan_held_anfaenger",
   "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
   "debug_mode": false,
   "log_level": "INFO",
@@ -22,8 +22,8 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Superkräfte Kompendium",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "config_version": "1.0",
-  "last_updated": "2026-04-03T21:06:45.033752"
+  "last_updated": "2026-04-04T06:43:53.838319"
 }

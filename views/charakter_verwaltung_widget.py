@@ -1309,13 +1309,9 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
     def _zeige_versende_dialog(self, dateien, titel):
         """Zeigt einen Dialog mit Checkboxen für die zu versendenden Dateien."""
-        from kivymd.uix.selectioncontrol import MDCheckbox
+        from kivymd.uix.list import MDListItem, MDListItemHeadlineText, MDListItemTrailingCheckbox
         from kivymd.uix.label import MDIcon
-        from kivy.uix.behaviors import ButtonBehavior
-
-        class ClickableRow(ButtonBehavior, MDBoxLayout):
-            """BoxLayout-Zeile die auf Tippen reagiert und die Checkbox umschaltet."""
-            pass
+        from kivymd.uix.scrollview import MDScrollView
 
         dialog_content = MDBoxLayout(
             orientation="vertical",
@@ -1332,43 +1328,49 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         ))
 
         checkboxes = []
+
+        scroll_view = MDScrollView(
+            size_hint=(1, None),
+            height=min(dp(300), dp(48) * len(dateien) + dp(20)),
+            bar_width=dp(15),
+            bar_margin=dp(4),
+        )
+        scroll_layout = MDBoxLayout(
+            orientation="vertical",
+            size_hint_y=None,
+            height=dp(48) * len(dateien),
+        )
+        scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+
         for datei in dateien:
-            row = ClickableRow(
-                orientation='horizontal',
-                spacing=dp(8),
+            item = MDListItem(
                 size_hint_y=None,
                 height=dp(48),
             )
-
-            cb = MDCheckbox(
-                active=True,
-                size_hint=(None, None),
-                size=(dp(48), dp(48)),
-                pos_hint={"center_y": .5},
-            )
-            checkboxes.append((cb, datei))
-
-            row.add_widget(cb)
-            row.add_widget(MDIcon(
+            item.add_widget(MDIcon(
                 icon=datei['icon'],
                 size_hint=(None, None),
                 size=(dp(24), dp(24)),
                 pos_hint={"center_y": .5},
             ))
-            row.add_widget(MDLabel(
+            item.add_widget(MDListItemHeadlineText(
                 text=f"{datei['name']} ({datei['typ']})",
-                pos_hint={"center_y": .5},
             ))
 
-            # Tippen auf die Zeile schaltet die Checkbox um (bessere Touch-Bedienung)
-            row.bind(on_release=lambda instance, _cb=cb: setattr(
-                _cb, 'active', not _cb.active))
+            trailing = MDListItemTrailingCheckbox(
+                active=True,
+            )
+            item.add_widget(trailing)
+            checkboxes.append((trailing, datei, item))
 
-            dialog_content.add_widget(row)
+            scroll_layout.add_widget(item)
+
+        scroll_view.add_widget(scroll_layout)
+        dialog_content.add_widget(scroll_view)
 
         def _on_versenden(x):
             self._versende_dialog.dismiss()
-            ausgewaehlte = [d['pfad'] for cb, d in checkboxes if cb.active]
+            ausgewaehlte = [d['pfad'] for cb, d, item in checkboxes if cb.active]
             if ausgewaehlte:
                 self._versende_dateien(ausgewaehlte, titel)
 
