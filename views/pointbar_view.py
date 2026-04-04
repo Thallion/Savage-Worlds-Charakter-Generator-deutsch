@@ -394,31 +394,46 @@ class GenerationPointsBar(MDBoxLayout):
         self.update_machtstufe_text(None, None)
 
     def update_attribut_text(self, instance, value):
-        """Aktualisiert die Attribut-Anzeige"""
+        """Aktualisiert die Attribut-Anzeige (hochzählen)"""
         if self.charakter:
-            self.attribut_text = f"{self.charakter.verbleibende_attributsteigerungen} / {self.charakter.maximale_attributsteigerungen}"
+            max_attr = self.charakter.maximale_attributsteigerungen
+            verbleibend = self.charakter.verbleibende_attributsteigerungen
+            ausgegeben = max_attr - verbleibend
+            self.attribut_text = f"{ausgegeben} / {max_attr}"
             self.update_header_summary()
 
     def update_handicaps_text(self, instance, value):
-        """Aktualisiert die Handicap-Anzeige"""
+        """Aktualisiert die Handicap-Anzeige (hochzählen)"""
         if self.charakter:
-            self.handicaps_text = f"{self.charakter.verbleibende_handicap_punkte} / {self.charakter.gesamt_handicap_punkte}"
+            gesamt = self.charakter.gesamt_handicap_punkte
+            verbleibend = self.charakter.verbleibende_handicap_punkte
+            ausgegeben = gesamt - verbleibend
+            self.handicaps_text = f"{ausgegeben} / {gesamt}"
 
     def update_faehigkeiten_text(self, instance, value):
-        """Aktualisiert die Fertigkeits-Anzeige"""
+        """Aktualisiert die Fertigkeits-Anzeige (hochzählen)"""
         if self.charakter:
-            self.faehigkeiten_text = f"{self.charakter.verbleibende_fertigkeitssteigerungen} / {self.charakter.maximale_fertigkeitssteigerungen}"
+            max_fert = self.charakter.maximale_fertigkeitssteigerungen
+            verbleibend = self.charakter.verbleibende_fertigkeitssteigerungen
+            ausgegeben = max_fert - verbleibend
+            self.faehigkeiten_text = f"{ausgegeben} / {max_fert}"
             self.update_header_summary()
 
     def update_aufstiege_text(self, instance, value):
-        """Aktualisiert die Aufstiegs-Anzeige"""
+        """Aktualisiert die Aufstiegs-Anzeige (hochzählen)"""
         if self.charakter:
-            self.aufstiege_text = f"{self.charakter.verbleibende_aufstiege} / {self.charakter.aufstiege_gesamt}"
+            gesamt = self.charakter.aufstiege_gesamt
+            verbleibend = self.charakter.verbleibende_aufstiege
+            ausgegeben = gesamt - verbleibend
+            self.aufstiege_text = f"{ausgegeben} / {gesamt}"
 
     def update_maechte_text(self, instance, value):
-        """Aktualisiert die Mächte-Anzeige"""
+        """Aktualisiert die Mächte-Anzeige (hochzählen)"""
         if self.charakter:
-            self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
+            anzahl = self.charakter.anzahl_maechte
+            verfuegbar = self.charakter.verfuegbare_maechte
+            ausgewaehlt = anzahl - verfuegbar
+            self.maechte_text = f"{ausgewaehlt} / {anzahl}"
 
     def update_machtpunkte_text(self, instance, value):
         """Aktualisiert die Machtpunkte-Anzeige"""
