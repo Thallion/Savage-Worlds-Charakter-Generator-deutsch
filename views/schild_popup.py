@@ -147,7 +147,7 @@ class SchildDialogHandler:
         )
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen eines Schildes (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Schilden (suchbare Liste mit Mehrfachauswahl)"""
         schilde = self.get_all_schilde()
         if not schilde:
             self.show_error("Keine Schilde zum Löschen verfügbar.")
@@ -156,7 +156,7 @@ class SchildDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=schilde,
-            on_select=self.on_schild_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -362,30 +362,38 @@ class SchildDialogHandler:
             self.show_error("Fehler beim Speichern des Schilds")
 
     def delete_schild(self, *args):
-        """Löscht das ausgewählte Schild"""
+        """Löscht die ausgewählten Schilde"""
         try:
-            if not self.selected_schild:
-                self.show_error("Bitte wähle ein Schild zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens ein Schild zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
             
-            schild_name = self.selected_schild
-            success = charakter.remove_ausruestung(schild_name)
+            for schild_name in selected:
+                success = charakter.remove_ausruestung(schild_name)
+                if success:
+                    Logger.info(f"Schild '{schild_name}' wurde gelöscht.")
+                else:
+                    Logger.warning(f"Schild '{schild_name}' konnte nicht gelöscht werden.")
 
-            if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
-                
-                Logger.info(f"Schild '{schild_name}' wurde gelöscht.")
-                self.dismiss_dialog()
-            else:
-                self.show_error(f"Schild '{schild_name}' konnte nicht gelöscht werden.")
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_ausruestung_view()
+            self._show_success_snackbar(f"{len(selected)} Schild(e) gelöscht")
+            
+            Logger.info(f"{len(selected)} Schild(e) wurde(n) gelöscht.")
+            self.dismiss_dialog()
                 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen des Schilds: {e}")
-            self.show_error("Fehler beim Löschen des Schilds")
+            Logger.error(f"Fehler beim Löschen der Schilde: {e}")
+            self.show_error("Fehler beim Löschen der Schilde")
 
     def on_schild_select(self, schild_name):
         """Callback wenn ein Schild ausgewählt wurde"""
@@ -420,3 +428,26 @@ class SchildDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Schilde: {e}")
         return []
+
+    def _refresh_ausruestung_view(self):
+        """Aktualisiert das Ausrüstung-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+                elif widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+        except Exception as e:
+            Logger.debug(f"Ausrüstung-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

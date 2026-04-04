@@ -177,7 +177,7 @@ class WaffeDialogHandler:
         )
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen einer Waffe (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Waffen (suchbare Liste mit Mehrfachauswahl)"""
         waffen = self.get_all_waffen()
         if not waffen:
             self.show_error("Keine Waffen zum Löschen verfügbar.")
@@ -186,7 +186,7 @@ class WaffeDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=waffen,
-            on_select=self.on_waffe_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -423,30 +423,38 @@ class WaffeDialogHandler:
             self.show_error("Fehler beim Speichern der Waffe")
 
     def delete_waffe(self, *args):
-        """Löscht die ausgewählte Waffe"""
+        """Löscht die ausgewählten Waffen"""
         try:
-            if not self.selected_waffe:
-                self.show_error("Bitte wähle eine Waffe zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens eine Waffe zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
             
-            waffe_name = self.selected_waffe
-            success = charakter.remove_ausruestung(waffe_name)
+            for waffe_name in selected:
+                success = charakter.remove_ausruestung(waffe_name)
+                if success:
+                    Logger.info(f"Waffe '{waffe_name}' wurde gelöscht.")
+                else:
+                    Logger.warning(f"Waffe '{waffe_name}' konnte nicht gelöscht werden.")
 
-            if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
-                
-                Logger.info(f"Waffe '{waffe_name}' wurde gelöscht.")
-                self.dismiss_dialog()
-            else:
-                self.show_error(f"Waffe '{waffe_name}' konnte nicht gelöscht werden.")
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_ausruestung_view()
+            self._show_success_snackbar(f"{len(selected)} Waffe(n) gelöscht")
+            
+            Logger.info(f"{len(selected)} Waffe(n) wurde(n) gelöscht.")
+            self.dismiss_dialog()
                 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Waffe: {e}")
-            self.show_error("Fehler beim Löschen der Waffe")
+            Logger.error(f"Fehler beim Löschen der Waffen: {e}")
+            self.show_error("Fehler beim Löschen der Waffen")
 
     def on_waffe_select(self, waffe_name):
         """Callback wenn eine Waffe ausgewählt wurde"""
@@ -481,3 +489,26 @@ class WaffeDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Waffe: {e}")
         return []
+
+    def _refresh_ausruestung_view(self):
+        """Aktualisiert das Ausrüstung-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+                elif widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+        except Exception as e:
+            Logger.debug(f"Ausrüstung-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

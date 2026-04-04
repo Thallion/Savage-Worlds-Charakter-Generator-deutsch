@@ -242,7 +242,7 @@ class TalentDialogHandler:
             self.show_error("Fehler beim Aktualisieren des Talents")
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen eines Talents (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Talenten (suchbare Liste mit Mehrfachauswahl)"""
         talente = self.get_all_talente()
         if not talente:
             self.show_error("Keine Talente zum Löschen verfügbar.")
@@ -251,7 +251,7 @@ class TalentDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=talente,
-            on_select=self.on_talent_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -322,28 +322,35 @@ class TalentDialogHandler:
             self.show_error("Fehler beim Speichern des Talents")
 
     def delete_talent(self, *args):
-        """Löscht das ausgewählte Talent"""
+        """Löscht die ausgewählten Talente"""
         try:
-            if not self.selected_talent:
-                self.show_error("Bitte wähle ein Talent zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens ein Talent zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
 
-            talent_name = self.selected_talent
-
-            charakter.remove_talent(talent_name)
+            for talent_name in selected:
+                charakter.remove_talent(talent_name)
+                Logger.info(f"Talent '{talent_name}' wurde gelöscht.")
 
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_eigenschaften_widget()
+            self._show_success_snackbar(f"{len(selected)} Talent(e) gelöscht")
 
-            Logger.info(f"Talent '{talent_name}' wurde gelöscht.")
+            Logger.info(f"{len(selected)} Talent(e) wurde(n) gelöscht.")
             self.dismiss_dialog()
 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen des Talents: {e}")
-            self.show_error("Fehler beim Löschen des Talents")
+            Logger.error(f"Fehler beim Löschen der Talente: {e}")
+            self.show_error("Fehler beim Löschen der Talente")
 
     def on_talent_select(self, talent_name):
         """Callback wenn ein Talent im Dropdown ausgewählt wurde"""
@@ -384,3 +391,26 @@ class TalentDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Talente: {e}")
         return []
+
+    def _refresh_eigenschaften_widget(self):
+        """Aktualisiert das Talente-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Talente', 'talente_widget')
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                elif widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+        except Exception as e:
+            Logger.debug(f"Talente-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

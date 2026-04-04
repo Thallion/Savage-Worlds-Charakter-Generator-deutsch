@@ -255,7 +255,7 @@ class MachtDialogHandler:
             self.show_error("Fehler beim Aktualisieren der Macht")
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen einer Macht (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Mächten (suchbare Liste mit Mehrfachauswahl)"""
         maechte = self.get_all_maechte()
         if not maechte:
             self.show_error("Keine Mächte zum Löschen verfügbar.")
@@ -264,7 +264,7 @@ class MachtDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=maechte,
-            on_select=self.on_macht_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -337,32 +337,38 @@ class MachtDialogHandler:
             self.show_error("Fehler beim Speichern der Macht")
 
     def delete_macht(self, *args):
-        """Löscht die ausgewählte Macht"""
+        """Löscht die ausgewählten Mächte"""
         try:
-            if not self.selected_macht:
-                self.show_error("Bitte wähle eine Macht zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens eine Macht zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
 
-            # Temporärer Speicher für den Namen zum Logging
-            macht_name = self.selected_macht
+            for macht_name in selected:
+                success = charakter.remove_macht(macht_name)
+                if success:
+                    Logger.info(f"Macht '{macht_name}' wurde gelöscht.")
+                else:
+                    Logger.warning(f"Macht '{macht_name}' konnte nicht gelöscht werden.")
 
-            success = charakter.remove_macht(macht_name)
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_macht_view()
+            self._show_success_snackbar(f"{len(selected)} Macht/Mächte gelöscht")
 
-            if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
-
-                Logger.info(f"Macht '{macht_name}' wurde gelöscht.")
-                self.dismiss_dialog()
-            else:
-                self.show_error(f"Macht '{macht_name}' konnte nicht gelöscht werden.")
+            Logger.info(f"{len(selected)} Macht/Mächte wurde(n) gelöscht.")
+            self.dismiss_dialog()
 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Macht: {e}")
-            self.show_error("Fehler beim Löschen der Macht")
+            Logger.error(f"Fehler beim Löschen der Mächte: {e}")
+            self.show_error("Fehler beim Löschen der Mächte")
 
     def on_macht_select(self, macht_name):
         """Callback wenn eine Macht im Dropdown ausgewählt wurde"""
@@ -404,3 +410,26 @@ class MachtDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Mächte: {e}")
         return []
+
+    def _refresh_macht_view(self):
+        """Aktualisiert das Macht-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Mächte', 'maechte_widget')
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                elif widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+        except Exception as e:
+            Logger.debug(f"Macht-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

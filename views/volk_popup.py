@@ -95,7 +95,7 @@ class VolkDialogHandler:
         )
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen eines Volkes (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Völkern (suchbare Liste mit Mehrfachauswahl)"""
         voelker = self.get_all_voelker()
         if not voelker:
             self.show_error("Keine Völker zum Löschen verfügbar.")
@@ -104,7 +104,7 @@ class VolkDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=voelker,
-            on_select=self.on_volk_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -161,36 +161,40 @@ class VolkDialogHandler:
             self.show_error("Fehler beim Speichern des Volks")
 
     def delete_volk(self, *args):
-        """Löscht das ausgewählte Volk"""
+        """Löscht die ausgewählten Völker"""
         try:
-            if not self.selected_volk:
-                self.show_error("Bitte wähle ein Volk zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens ein Volk zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
 
-            # Temporärer Speicher für den Namen zum Logging
-            volk_name = self.selected_volk
+            for volk_name in selected:
+                if volk_name in charakter.voelker:
+                    if charakter.voelker[volk_name].ausgewaehlt:
+                        Logger.warning(f"Volk '{volk_name}' ist ausgewählt und kann nicht gelöscht werden.")
+                        continue
 
-            if volk_name in charakter.voelker:
-                if charakter.voelker[volk_name].ausgewaehlt:
-                    self.show_error(f"Volk '{volk_name}' ist ausgewählt und kann nicht gelöscht werden.")
-                    return
+                    del charakter.voelker[volk_name]
+                    Logger.info(f"Volk '{volk_name}' wurde gelöscht.")
 
-                del charakter.voelker[volk_name]
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_volk_view()
+            self._show_success_snackbar(f"{len(selected)} Volk/Völker gelöscht")
 
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
-
-                Logger.info(f"Volk '{volk_name}' wurde gelöscht.")
-                self.dismiss_dialog()
-            else:
-                self.show_error(f"Volk '{volk_name}' nicht gefunden.")
+            Logger.info(f"{len(selected)} Volk/Völker wurde(n) gelöscht.")
+            self.dismiss_dialog()
 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen des Volks: {e}")
-            self.show_error("Fehler beim Löschen des Volks")
+            Logger.error(f"Fehler beim Löschen der Völker: {e}")
+            self.show_error("Fehler beim Löschen der Völker")
 
     def on_volk_select(self, volk_name):
         """Callback wenn ein Volk im Dropdown ausgewählt wurde"""
@@ -232,3 +236,28 @@ class VolkDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Völker: {e}")
         return []
+
+    def _refresh_volk_view(self):
+        """Aktualisiert das Volk-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Völker', 'voelker_widget')
+                if widget and hasattr(widget, 'aktualisiere_ui'):
+                    widget.aktualisiere_ui()
+                elif widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+                elif widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+        except Exception as e:
+            Logger.debug(f"Volk-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

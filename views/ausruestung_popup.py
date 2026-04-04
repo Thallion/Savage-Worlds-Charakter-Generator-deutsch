@@ -243,7 +243,7 @@ class AusruestungDialogHandler:
             self.show_error("Fehler beim Aktualisieren der Ausrüstung")
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen einer Ausrüstung (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Ausrüstung (suchbare Liste mit Mehrfachauswahl)"""
         ausruestung = self.get_all_ausruestung()
         if not ausruestung:
             self.show_error("Keine Ausrüstung zum Löschen verfügbar.")
@@ -252,7 +252,7 @@ class AusruestungDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=ausruestung,
-            on_select=self.on_ausruestung_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -332,30 +332,38 @@ class AusruestungDialogHandler:
             self.show_error("Fehler beim Speichern der Ausrüstung")
 
     def delete_ausruestung(self, *args):
-        """Löscht die ausgewählte Ausrüstung"""
+        """Löscht die ausgewählten Ausrüstungen"""
         try:
-            if not self.selected_ausruestung:
-                self.show_error("Bitte wähle eine Ausrüstung zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens eine Ausrüstung zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
 
-            ausruestung_name = self.selected_ausruestung
-            success = charakter.remove_ausruestung(ausruestung_name)
+            for ausruestung_name in selected:
+                success = charakter.remove_ausruestung(ausruestung_name)
+                if success:
+                    Logger.info(f"Ausrüstung '{ausruestung_name}' wurde gelöscht.")
+                else:
+                    Logger.warning(f"Ausrüstung '{ausruestung_name}' konnte nicht gelöscht werden.")
 
-            if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_ausruestung_view()
+            self._show_success_snackbar(f"{len(selected)} Ausrüstung(en) gelöscht")
 
-                Logger.info(f"Ausrüstung '{ausruestung_name}' wurde gelöscht.")
-                self.dismiss_dialog()
-            else:
-                self.show_error(f"Ausrüstung '{ausruestung_name}' konnte nicht gelöscht werden.")
+            Logger.info(f"{len(selected)} Ausrüstung(en) wurde(n) gelöscht.")
+            self.dismiss_dialog()
 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Ausrüstung: {e}")
-            self.show_error("Fehler beim Löschen der Ausrüstung")
+            Logger.error(f"Fehler beim Löschen der Ausrüstungen: {e}")
+            self.show_error("Fehler beim Löschen der Ausrüstungen")
 
     def on_ausruestung_select(self, ausruestung_name):
         """Callback wenn eine Ausrüstung ausgewählt wurde"""
@@ -390,3 +398,26 @@ class AusruestungDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Ausrüstung: {e}")
         return []
+
+    def _refresh_ausruestung_view(self):
+        """Aktualisiert das Ausrüstung-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+                elif widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+        except Exception as e:
+            Logger.debug(f"Ausrüstung-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

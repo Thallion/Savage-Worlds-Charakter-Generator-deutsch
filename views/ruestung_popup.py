@@ -152,7 +152,7 @@ class RuestungDialogHandler:
         )
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen einer Rüstung (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Rüstungen (suchbare Liste mit Mehrfachauswahl)"""
         ruestungen = self.get_all_ruestungen()
         if not ruestungen:
             self.show_error("Keine Rüstungen zum Löschen verfügbar.")
@@ -161,7 +161,7 @@ class RuestungDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=ruestungen,
-            on_select=self.on_ruestung_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -382,30 +382,38 @@ class RuestungDialogHandler:
             self.show_error("Fehler beim Speichern der Rüstung")
 
     def delete_ruestung(self, *args):
-        """Löscht die ausgewählte Rüstung"""
+        """Löscht die ausgewählten Rüstungen"""
         try:
-            if not self.selected_ruestung:
-                self.show_error("Bitte wähle eine Rüstung zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens eine Rüstung zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
             
-            ruestung_name = self.selected_ruestung
-            success = charakter.remove_ausruestung(ruestung_name)
+            for ruestung_name in selected:
+                success = charakter.remove_ausruestung(ruestung_name)
+                if success:
+                    Logger.info(f"Rüstung '{ruestung_name}' wurde gelöscht.")
+                else:
+                    Logger.warning(f"Rüstung '{ruestung_name}' konnte nicht gelöscht werden.")
 
-            if success:
-                if hasattr(app, 'einstellungen_widget'):
-                    app.einstellungen_widget.aktualisiere_ui()
-                
-                Logger.info(f"Rüstung '{ruestung_name}' wurde gelöscht.")
-                self.dismiss_dialog()
-            else:
-                self.show_error(f"Rüstung '{ruestung_name}' konnte nicht gelöscht werden.")
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_ausruestung_view()
+            self._show_success_snackbar(f"{len(selected)} Rüstung(en) gelöscht")
+            
+            Logger.info(f"{len(selected)} Rüstung(en) wurde(n) gelöscht.")
+            self.dismiss_dialog()
                 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Rüstung: {e}")
-            self.show_error("Fehler beim Löschen der Rüstung")
+            Logger.error(f"Fehler beim Löschen der Rüstungen: {e}")
+            self.show_error("Fehler beim Löschen der Rüstungen")
 
     def on_ruestung_select(self, ruestung_name):
         """Callback wenn eine Rüstung ausgewählt wurde"""
@@ -441,3 +449,26 @@ class RuestungDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Rüstungen: {e}")
         return []
+
+    def _refresh_ausruestung_view(self):
+        """Aktualisiert das Ausrüstung-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Ausrüstung', 'ausruestung_widget')
+                if widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+                elif widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+        except Exception as e:
+            Logger.debug(f"Ausrüstung-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

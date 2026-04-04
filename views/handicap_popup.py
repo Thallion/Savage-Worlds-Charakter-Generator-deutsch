@@ -248,7 +248,7 @@ class HandicapDialogHandler:
             self.show_error("Fehler beim Aktualisieren des Handicaps")
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen eines Handicaps (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Handicaps (suchbare Liste mit Mehrfachauswahl)"""
         handicaps = self.get_all_handicaps()
         if not handicaps:
             self.show_error("Keine Handicaps zum Löschen verfügbar.")
@@ -257,7 +257,7 @@ class HandicapDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=handicaps,
-            on_select=self.on_handicap_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -328,34 +328,37 @@ class HandicapDialogHandler:
             self.show_error("Fehler beim Speichern des Handicaps")
 
     def delete_handicap(self, *args):
-        """Löscht das ausgewählte Handicap"""
+        """Löscht die ausgewählten Handicaps"""
         try:
-            if not self.selected_handicap:
-                self.show_error("Bitte wähle ein Handicap zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens ein Handicap zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
 
-            handicap_name = self.selected_handicap
+            for handicap_name in selected:
+                charakter.remove_handicap(handicap_name)
+                Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
 
-            # Lösche das Handicap
-            charakter.remove_handicap(handicap_name)
-
-            # Speichere die Custom Handicaps
             charakter.save_custom_handicaps()
 
-            # Aktualisiere die UI
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
             self._refresh_handicap_view()
+            self._show_success_snackbar(f"{len(selected)} Handicap(s) gelöscht")
 
-            Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
+            Logger.info(f"{len(selected)} Handicap(s) wurde(n) gelöscht.")
             self.dismiss_dialog()
 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen des Handicaps: {e}")
-            self.show_error("Fehler beim Löschen des Handicaps")
+            Logger.error(f"Fehler beim Löschen der Handicaps: {e}")
+            self.show_error("Fehler beim Löschen der Handicaps")
 
     def on_handicap_select(self, handicap_name):
         """Callback wenn ein Handicap im Dropdown ausgewählt wurde"""
@@ -369,12 +372,15 @@ class HandicapDialogHandler:
 
     def _refresh_handicap_view(self):
         """Aktualisiert die Handicap-RecycleView nach Änderungen."""
-        app = App.get_running_app()
-        if hasattr(app, 'get_widget_by_tab_text'):
-            widget = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
-            if widget:
-                from kivy.clock import Clock
-                Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Handicaps', 'handicaps_widget')
+                if widget:
+                    from kivy.clock import Clock
+                    Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
+        except Exception as e:
+            Logger.debug(f"Handicap-Widget nicht gefunden: {e}")
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""
@@ -405,3 +411,13 @@ class HandicapDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Handicaps: {e}")
         return []
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass

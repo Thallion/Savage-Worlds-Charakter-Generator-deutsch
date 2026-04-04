@@ -19,7 +19,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.divider import MDDivider
 from kivymd.uix.label import MDLabel
-from kivymd.uix.list import MDList, MDListItem, MDListItemLeadingIcon, MDListItemHeadlineText
+from kivymd.uix.list import MDList, MDListItem, MDListItemLeadingIcon, MDListItemHeadlineText, MDListItemTrailingCheckbox
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.textfield import MDTextField, MDTextFieldLeadingIcon, MDTextFieldHintText
 
@@ -29,10 +29,10 @@ from views.ui_components import TextFieldScrollView
 class ElementListContent(MDBoxLayout):
     """
     Wiederverwendbares Listen-Widget mit Suchfeld für Lösch-Dialoge.
-    Zeigt eine filterbare Liste von Elementen mit Einzel-Auswahl.
+    Unterstützt Einzel- und Mehrfach-Auswahl.
     """
 
-    def __init__(self, items, on_select, **kwargs):
+    def __init__(self, items, on_select=None, multi_select=False, **kwargs):
         super().__init__(**kwargs)
         self.orientation = "vertical"
         self.spacing = dp(8)
@@ -41,8 +41,11 @@ class ElementListContent(MDBoxLayout):
 
         self._all_items = sorted(items) if items else []
         self._on_select = on_select
+        self._multi_select = multi_select
         self._selected_item = None
+        self._selected_items = set()
         self._item_widgets = {}
+        self._checkboxes = {}
 
         self._build_ui()
 
@@ -63,6 +66,8 @@ class ElementListContent(MDBoxLayout):
         scroll = MDScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
+            bar_width=dp(15),
+            bar_margin=dp(4),
         )
         self._list = MDList(
             size_hint_y=None,
@@ -77,39 +82,70 @@ class ElementListContent(MDBoxLayout):
         """Baut die Liste auf, optional gefiltert"""
         self._list.clear_widgets()
         self._item_widgets.clear()
+        self._checkboxes.clear()
         search = filter_text.lower().strip()
 
         for item_name in self._all_items:
             if search and search not in item_name.lower():
                 continue
 
-            item = MDListItem(
-                on_release=lambda x, name=item_name: self._on_item_selected(name),
-                size_hint_y=None,
-                height=dp(48),
-            )
-            item.add_widget(MDListItemHeadlineText(text=item_name))
+            if self._multi_select:
+                item = MDListItem(
+                    size_hint_y=None,
+                    height=dp(48),
+                )
+                item.add_widget(MDListItemHeadlineText(text=item_name))
 
-            if item_name == self._selected_item:
-                item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
-                item.md_bg_color = self.theme_cls.primaryContainerColor
+                checkbox = MDListItemTrailingCheckbox(
+                    active=item_name in self._selected_items,
+                )
+                checkbox.bind(on_release=lambda x, cb=checkbox, name=item_name: self._on_checkbox_toggled(name, cb))
+                item.add_widget(checkbox)
+                self._checkboxes[item_name] = checkbox
             else:
-                item.add_widget(MDListItemLeadingIcon(icon="circle-outline"))
+                item = MDListItem(
+                    on_release=lambda x, name=item_name: self._on_item_selected(name),
+                    size_hint_y=None,
+                    height=dp(48),
+                )
+                item.add_widget(MDListItemHeadlineText(text=item_name))
+
+                if item_name == self._selected_item:
+                    item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                    item.md_bg_color = self.theme_cls.primaryContainerColor
+                else:
+                    item.add_widget(MDListItemLeadingIcon(icon="circle-outline"))
 
             self._list.add_widget(item)
             self._item_widgets[item_name] = item
 
+    def _on_checkbox_toggled(self, item_name, checkbox):
+        """Callback wenn eine Checkbox umgeschaltet wird (Mehrfachauswahl)"""
+        if checkbox.active:
+            self._selected_items.add(item_name)
+        else:
+            self._selected_items.discard(item_name)
+        if self._on_select:
+            self._on_select(item_name)
+
     def _on_item_selected(self, item_name):
-        """Callback wenn ein Element ausgewählt wird"""
+        """Callback wenn ein Element ausgewählt wird (Einzel-Auswahl)"""
         self._selected_item = item_name
         if self._on_select:
             self._on_select(item_name)
-        # Liste neu aufbauen für visuelles Feedback
         self._populate_list(self._search_field.text if self._search_field else "")
 
     def _on_search_text(self, instance, text):
         """Filtert die Liste bei Texteingabe"""
         self._populate_list(text)
+
+    def get_selected_items(self):
+        """Gibt die ausgewählten Elemente zurück (bei Mehrfachauswahl)"""
+        return list(self._selected_items)
+
+    def get_selected_item(self):
+        """Gibt das ausgewählte Element zurück (bei Einzel-Auswahl)"""
+        return self._selected_item
 
 
 class ElementOverlay(MDBoxLayout):

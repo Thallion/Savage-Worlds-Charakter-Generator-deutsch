@@ -119,7 +119,7 @@ class FertigkeitDialogHandler:
         )
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen einer Fertigkeit (suchbare Liste)"""
+        """Zeigt das Overlay zum Löschen von Fertigkeiten (suchbare Liste mit Mehrfachauswahl)"""
         fertigkeiten = self.get_all_fertigkeiten()
         if not fertigkeiten:
             self.show_error("Keine Fertigkeiten zum Löschen verfügbar.")
@@ -128,7 +128,7 @@ class FertigkeitDialogHandler:
         from views.element_overlay import ElementListContent
         content = ElementListContent(
             items=fertigkeiten,
-            on_select=self.on_fertigkeit_select,
+            multi_select=True,
         )
         self.dialog_content = content
 
@@ -198,33 +198,37 @@ class FertigkeitDialogHandler:
             self.show_error("Fehler beim Speichern der Fertigkeit")
 
     def delete_fertigkeit(self, *args):
-        """Löscht die ausgewählte Fertigkeit"""
+        """Löscht die ausgewählten Fertigkeiten"""
         try:
-            if not self.selected_fertigkeit:
-                self.show_error("Bitte wähle eine Fertigkeit zum Löschen aus.")
+            if not self.dialog_content:
+                self.show_error("Dialog-Content nicht gefunden.")
+                return
+
+            selected = self.dialog_content.get_selected_items()
+            if not selected:
+                self.show_error("Bitte wähle mindestens eine Fertigkeit zum Löschen aus.")
                 return
 
             app = App.get_running_app()
             charakter = app.controller.charakter
 
-            fertigkeit_name = self.selected_fertigkeit
+            for fertigkeit_name in selected:
+                charakter.remove_fertigkeit(fertigkeit_name)
+                Logger.info(f"Fertigkeit '{fertigkeit_name}' wurde gelöscht.")
 
-            # Lösche die Fertigkeit
-            charakter.remove_fertigkeit(fertigkeit_name)
-
-            # Speichere die Custom Fertigkeiten
             charakter.save_custom_fertigkeiten()
 
-            # Aktualisiere die UI
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_fertigkeit_view()
+            self._show_success_snackbar(f"{len(selected)} Fertigkeit(en) gelöscht")
 
-            Logger.info(f"Fertigkeit '{fertigkeit_name}' wurde gelöscht.")
+            Logger.info(f"{len(selected)} Fertigkeit(en) wurde(n) gelöscht.")
             self.dismiss_dialog()
 
         except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Fertigkeit: {e}")
-            self.show_error("Fehler beim Löschen der Fertigkeit")
+            Logger.error(f"Fehler beim Löschen der Fertigkeiten: {e}")
+            self.show_error("Fehler beim Löschen der Fertigkeiten")
 
     def on_fertigkeit_select(self, fertigkeit_name):
         """Callback wenn eine Fertigkeit im Dropdown ausgewählt wurde"""
@@ -265,3 +269,28 @@ class FertigkeitDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Abrufen der Fertigkeiten: {e}")
         return []
+
+    def _refresh_fertigkeit_view(self):
+        """Aktualisiert das Eigenschaften-Widget nach Lösch-Operationen"""
+        try:
+            app = App.get_running_app()
+            if hasattr(app, 'get_widget_by_tab_text'):
+                widget = app.get_widget_by_tab_text('Eigenschaften', 'eigenschaften_widget')
+                if widget and hasattr(widget, 'update_eigenschaften'):
+                    widget.update_eigenschaften()
+                elif widget and hasattr(widget, 'refresh'):
+                    widget.refresh()
+                elif widget and hasattr(widget, 'refresh_widget'):
+                    widget.refresh_widget()
+        except Exception as e:
+            Logger.debug(f"Eigenschaften-Widget nicht gefunden: {e}")
+
+    def _show_success_snackbar(self, message):
+        """Zeigt eine Erfolgs-Snackbar an"""
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(message)
+        except Exception:
+            pass
