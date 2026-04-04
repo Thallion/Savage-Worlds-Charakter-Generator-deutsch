@@ -799,6 +799,36 @@ class EinstellungenWidget(MDBoxLayout):
             dialog_service.open_delete_schild_popup()
         else:
             Logger.warning("DialogService nicht verfügbar - Schild löschen nicht möglich")
+    
+    # ==================== Setting-Assistent ====================
+    
+    def open_setting_assistent(self):
+        """Öffnet den Setting-Assistenten"""
+        try:
+            from views.setting_assistent_view import SettingAssistentDialogHandler
+            
+            app = MDApp.get_running_app()
+            if hasattr(app, 'controller') and app.controller:
+                handler = SettingAssistentDialogHandler(app.controller)
+                handler.show_assistent()
+            else:
+                Logger.warning("Controller nicht verfügbar - Setting-Assistent kann nicht geöffnet werden")
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Setting-Assistenten: {e}")
+    
+    def open_drafts_overview(self):
+        """Öffnet die Übersicht der gespeicherten Entwürfe"""
+        try:
+            from views.setting_assistent_view import SettingAssistentDialogHandler
+            
+            app = MDApp.get_running_app()
+            if hasattr(app, 'controller') and app.controller:
+                handler = SettingAssistentDialogHandler(app.controller)
+                handler.show_drafts_overview()
+            else:
+                Logger.warning("Controller nicht verfügbar")
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen der Entwürfe: {e}")
 
     # ==================== CLEANUP ====================
     

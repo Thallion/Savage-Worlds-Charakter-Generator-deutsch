@@ -518,6 +518,54 @@
 
             MDDivider:
 
+            # ===== Setting-Verwaltung =====
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(16)
+                size_hint_y: None
+                height: self.minimum_height
+                size_hint_x: None
+                width: dp(750)
+                padding: [dp(16), dp(8)]
+
+                MDLabel:
+                    text: "Setting-Verwaltung"
+                    bold: True
+                    size_hint_y: None
+                    height: dp(40)
+
+                # Setting Assistent Button
+                MDButton:
+                    style: "filled"
+                    size_hint_x: 1
+                    on_release: root.open_setting_assistent()
+
+                    MDButtonIcon:
+                        icon: "wizard-hat"
+
+                    MDButtonText:
+                        text: "Setting-Assistent öffnen"
+
+                MDLabel:
+                    text: "Erstelle neue Settings mit dem Assistenten oder bearbeite bestehende."
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: dp(24)
+
+                # Entwürfe anzeigen
+                MDButton:
+                    style: "tonal"
+                    size_hint_x: 1
+                    on_release: root.open_drafts_overview()
+
+                    MDButtonIcon:
+                        icon: "file-document-outline"
+
+                    MDButtonText:
+                        text: "Gespeicherte Entwürfe anzeigen"
+
+            MDDivider:
+
             # ===== Log =====
             MDButton:
                 style: "filled"
