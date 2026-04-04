@@ -68,60 +68,49 @@ class PDFManager:
     
     def _create_pdf_options_content(self, exists, existing_name, existing_path):
         """Erstellt den Inhalt für den PDF-Options-Dialog"""
+        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+
         content = MDBoxLayout(
             orientation='vertical',
-            spacing=dp(16),
+            spacing=dp(8),
             size_hint_y=None,
             adaptive_height=True,
             padding=dp(16)
         )
-        
+
+        # Liste für Checkboxen
+        checkbox_list = MDList(
+            size_hint_y=None,
+        )
+        checkbox_list.bind(minimum_height=checkbox_list.setter('height'))
+
         # Checkbox für druckerfreundliche Version
-        checkbox_container = MDBoxLayout(
-            orientation='horizontal',
-            spacing=dp(16),
+        printer_item = MDListItem(
             size_hint_y=None,
             height=dp(48)
         )
-        
-        self.printer_friendly_checkbox = MDCheckbox(
-            size_hint=(None, None),
-            size=(dp(48), dp(48)),
-            pos_hint={"center_y": .5}
-        )
-        
-        checkbox_container.add_widget(self.printer_friendly_checkbox)
-        checkbox_container.add_widget(MDLabel(
-            text="Druckerfreundliche Version (ohne Hintergrund)",
-            size_hint_x=1,
-            pos_hint={"center_y": .5}
+        printer_item.add_widget(MDListItemSupportingText(
+            text="Druckerfreundliche Version (ohne Hintergrund)"
         ))
-        
-        content.add_widget(checkbox_container)
+        self.printer_friendly_checkbox = MDListItemTrailingCheckbox()
+        printer_item.add_widget(self.printer_friendly_checkbox)
+        checkbox_list.add_widget(printer_item)
 
         # Checkbox für Steigerungen einblenden
-        steigerungen_container = MDBoxLayout(
-            orientation='horizontal',
-            spacing=dp(16),
+        steigerungen_item = MDListItem(
             size_hint_y=None,
             height=dp(48)
         )
-
-        self.show_steigerungen_checkbox = MDCheckbox(
-            size_hint=(None, None),
-            size=(dp(48), dp(48)),
-            pos_hint={"center_y": .5},
+        steigerungen_item.add_widget(MDListItemSupportingText(
+            text="Steigerungen einblenden"
+        ))
+        self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(
             active=True
         )
+        steigerungen_item.add_widget(self.show_steigerungen_checkbox)
+        checkbox_list.add_widget(steigerungen_item)
 
-        steigerungen_container.add_widget(self.show_steigerungen_checkbox)
-        steigerungen_container.add_widget(MDLabel(
-            text="Steigerungen einblenden",
-            size_hint_x=1,
-            pos_hint={"center_y": .5}
-        ))
-
-        content.add_widget(steigerungen_container)
+        content.add_widget(checkbox_list)
 
         # Buttons für verschiedene Optionen
         buttons_container = MDBoxLayout(
