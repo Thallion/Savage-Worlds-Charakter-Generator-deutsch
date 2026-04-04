@@ -1284,8 +1284,8 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                     'icon': 'language-html5',
                 })
         else:
-            # Kein gespeicherter Charakter - in chars/ nach passenden Dateien suchen
-            from utils.path_utils import get_chars_path
+            # Kein gespeicherter Charakter - in chars/ und Archetypen/ nach passenden Dateien suchen
+            from utils.path_utils import get_chars_path, get_resource_path
             import glob as glob_mod
 
             chars_dir = get_chars_path()
@@ -1304,6 +1304,27 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                             'typ': typ,
                             'icon': icon,
                         })
+
+            # Auch in Archetypen/ im Hauptverzeichnis suchen
+            archetyps_dir = get_resource_path('chars/Archetypen')
+            if os.path.isdir(archetyps_dir):
+                for ext in ('*.json', '*.pdf', '*.html'):
+                    for f in glob_mod.glob(os.path.join(archetyps_dir, ext)):
+                        if char_name.lower() in os.path.basename(f).lower():
+                            # Prüfen ob bereits in dateien
+                            if not any(d['pfad'] == f for d in dateien):
+                                icon = 'code-json' if f.endswith('.json') else (
+                                    'file-pdf-box' if f.endswith('.pdf') else 'language-html5'
+                                )
+                                typ = 'Archetyp (JSON)' if f.endswith('.json') else (
+                                    'Archetyp (PDF)' if f.endswith('.pdf') else 'Archetyp (HTML)'
+                                )
+                                dateien.append({
+                                    'pfad': f,
+                                    'name': os.path.basename(f),
+                                    'typ': typ,
+                                    'icon': icon,
+                                })
 
         return dateien
 
