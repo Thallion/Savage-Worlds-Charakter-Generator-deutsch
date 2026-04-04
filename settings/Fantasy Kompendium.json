@@ -6359,15 +6359,6 @@
             "beschreibung": "",
             "aktiv": true
         },
-        "Seil, Hanf (10''/20 Meter)": {
-            "name": "Seil, Hanf (10''/20 Meter)",
-            "kategorie": "Allgemein",
-            "gewicht": 5,
-            "kosten": 1,
-            "setting": "fantasy",
-            "beschreibung": "Trägt 150 kg, bricht bei Überbelastung.",
-            "aktiv": true
-        },
         "Schwertscheide": {
             "name": "Schwertscheide",
             "kategorie": "Allgemein",
@@ -6537,6 +6528,15 @@
             "kosten": 0.5,
             "setting": "fantasy",
             "beschreibung": "",
+            "aktiv": true
+        },
+        "Wasserflasche (Wasserschlauch)": {
+            "name": "Wasserflasche (Wasserschlauch)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Behälter für einen Liter Wasser",
             "aktiv": true
         },
         "Feine Kleidung": {
@@ -7926,8 +7926,8 @@
                 "PB": "2"
             }
         },
-        "Axt, Hand-": {
-            "name": "Axt, Hand-",
+        "Wurfaxt": {
+            "name": "Wurfaxt",
             "kategorie": "Fernkampfwaffe",
             "gewicht": 1.5,
             "kosten": 6,

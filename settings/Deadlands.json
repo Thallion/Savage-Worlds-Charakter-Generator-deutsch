@@ -5082,7 +5082,7 @@
         },
         "Flasche": {
             "name": "Flasche",
-            "kategorie": "Schnaps",
+            "kategorie": "Allgemein",
             "gewicht": 2,
             "kosten": 2,
             "setting": "Deadlands",
