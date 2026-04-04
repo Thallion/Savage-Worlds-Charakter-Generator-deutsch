@@ -800,35 +800,31 @@ class EinstellungenWidget(MDBoxLayout):
         else:
             Logger.warning("DialogService nicht verfügbar - Schild löschen nicht möglich")
     
-    # ==================== Setting-Assistent ====================
+    # ==================== Tutorial ====================
     
-    def open_setting_assistent(self):
-        """Öffnet den Setting-Assistenten"""
+    def open_tutorial(self):
+        """Startet das Tutorial."""
         try:
-            from views.setting_assistent_view import SettingAssistentDialogHandler
-            
-            app = MDApp.get_running_app()
-            if hasattr(app, 'controller') and app.controller:
-                handler = SettingAssistentDialogHandler(app.controller)
-                handler.show_assistent()
-            else:
-                Logger.warning("Controller nicht verfügbar - Setting-Assistent kann nicht geöffnet werden")
+            from views.tutorial_overlay import show_welcome_tutorial
+            show_welcome_tutorial()
         except Exception as e:
-            Logger.error(f"Fehler beim Öffnen des Setting-Assistenten: {e}")
+            Logger.error(f"Fehler beim Starten des Tutorials: {e}")
     
-    def open_drafts_overview(self):
-        """Öffnet die Übersicht der gespeicherten Entwürfe"""
+    def reset_tutorial_hints(self):
+        """Setzt alle Tutorial-Hinweise zurück."""
         try:
-            from views.setting_assistent_view import SettingAssistentDialogHandler
+            from views.tutorial_overlay import reset_tutorial_state
+            reset_tutorial_state()
             
-            app = MDApp.get_running_app()
-            if hasattr(app, 'controller') and app.controller:
-                handler = SettingAssistentDialogHandler(app.controller)
-                handler.show_drafts_overview()
-            else:
-                Logger.warning("Controller nicht verfügbar")
+            try:
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_success_dialog("Hilfetexte wurden zurückgesetzt.")
+            except Exception:
+                pass
         except Exception as e:
-            Logger.error(f"Fehler beim Öffnen der Entwürfe: {e}")
+            Logger.error(f"Fehler beim Zurücksetzen der Tutorial-Hinweise: {e}")
 
     # ==================== CLEANUP ====================
     

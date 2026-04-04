@@ -9,7 +9,7 @@ Verantwortlich für: Charakter-CRUD, PDF-Export, Statblock,
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
-from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
+from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemTrailingCheckbox
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.label import MDLabel
@@ -147,8 +147,185 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         return self.character_handler.get_charakter_value(attribute, default_value)
 
     def create_new_character(self):
-        """Startet den Neuer-Charakter-Wizard mit Setting-Auswahl"""
-        self._show_setting_selection_popup()
+        """Startet den Wizard für die Charaktererstellung mit Namensabfrage und Setting-Auswahl."""
+        try:
+            self._show_new_character_dialog()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Neuer-Charakter-Dialogs: {e}")
+    
+    def _show_new_character_dialog(self):
+        """Zeigt einen Dialog zur Eingabe des Charakternamens und Setting-Auswahl."""
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+        
+        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, adaptive_height=True)
+        
+        name_field = MDTextField(size_hint_x=1)
+        name_field.add_widget(MDTextFieldHintText(text="Charaktername"))
+        content.add_widget(name_field)
+        
+        app = MDApp.get_running_app()
+        if not hasattr(app, 'controller') or not app.controller:
+            Logger.warning("Controller nicht verfügbar")
+            return
+        
+        available_settings = self._get_available_settings()
+        
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+        
+        selected_setting = [available_settings[0] if available_settings else None]
+        checkboxes = {}
+        
+        for setting_name in available_settings:
+            list_item = MDListItem(
+                size_hint_y=None,
+                height=dp(48),
+                on_release=lambda x, s=setting_name: self._select_new_char_setting(s, selected_setting, checkboxes)
+            )
+            list_item.add_widget(MDListItemHeadlineText(text=setting_name))
+            checkbox = MDListItemTrailingCheckbox(
+                active=(setting_name == selected_setting[0]),
+                group="new_char_setting"
+            )
+            list_item.add_widget(checkbox)
+            list_layout.add_widget(list_item)
+            checkboxes[setting_name] = checkbox
+        
+        scroll = MDScrollView(size_hint_y=None, height="200dp")
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+        
+        def on_create(instance):
+            char_name = name_field.text.strip()
+            if not char_name:
+                self._show_error_dialog("Bitte gib einen Charakternamen ein.")
+                return
+            
+            setting_name = selected_setting[0]
+            if not setting_name:
+                self._show_error_dialog("Bitte wähle ein Setting aus.")
+                return
+            
+            dialog.dismiss()
+            self._create_character_with_setting(char_name, setting_name)
+        
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Neuer Charakter"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Erstellen"),
+                    style="filled",
+                    on_release=on_create
+                ),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+    
+    def _select_new_char_setting(self, setting_name, selected_setting, checkboxes):
+        """Wählt ein Setting für den neuen Charakter aus."""
+        selected_setting[0] = setting_name
+        for s, cb in checkboxes.items():
+            cb.active = (s == setting_name)
+    
+    def _create_character_with_setting(self, char_name: str, setting_name: str):
+        """Erstellt einen neuen Charakter mit dem gegebenen Namen und Setting."""
+        try:
+            app = MDApp.get_running_app()
+            if not hasattr(app, 'controller') or not app.controller:
+                Logger.error("Controller nicht verfügbar")
+                return
+            
+            controller = app.controller
+            
+            from models.charakter import Charakter
+            
+            neuer_char = Charakter(
+                active_setting_name=setting_name,
+                char_name=char_name
+            )
+            
+            controller.charakter = neuer_char
+            controller.on_charakter_changed()
+            
+            Logger.info(f"Neuer Charakter '{char_name}' mit Setting '{setting_name}' erstellt")
+            
+            try:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_success_dialog(f"Charakter '{char_name}' erstellt.")
+            except Exception:
+                pass
+            
+            # Wizard-Modus: Zum nächsten Schritt wechseln (Völker)
+            wizard_service = service_container.get_wizard_service()
+            if wizard_service and wizard_service.aktiv:
+                schritt = wizard_service.get_aktueller_schritt()
+                if schritt and schritt.tab_id == 'neuer_charakter':
+                    wizard_service.naechster_schritt()
+            
+            if hasattr(app, '_switch_to_tab_index'):
+                app._switch_to_tab_index(2)
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Erstellen des Charakters: {e}")
+            self._show_error_dialog(f"Fehler beim Erstellen: {e}")
+    
+    def _show_error_dialog(self, message: str):
+        """Zeigt einen Fehlerdialog."""
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(message)
+            else:
+                Logger.error(message)
+        except Exception:
+            Logger.error(message)
+    
+    def open_setting_assistent(self):
+        """Öffnet den Setting-Assistenten zum Erstellen/Bearbeiten von Settings."""
+        try:
+            from views.setting_assistent_view import SettingAssistentDialogHandler
+            
+            app = MDApp.get_running_app()
+            if hasattr(app, 'controller') and app.controller:
+                handler = SettingAssistentDialogHandler(app.controller)
+                handler.show_assistent()
+            else:
+                Logger.warning("Controller nicht verfügbar - Setting-Assistent kann nicht geöffnet werden")
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Setting-Assistenten: {e}")
+    
+    def start_wizard_mode(self):
+        """Startet den Charakter-Erstellungs-Wizard."""
+        try:
+            from services.service_container import service_container
+            
+            wizard_service = service_container.get_wizard_service()
+            if not wizard_service:
+                Logger.error("WizardService nicht verfügbar")
+                return
+            
+            app = MDApp.get_running_app()
+            if hasattr(app, 'controller') and app.controller:
+                wizard_service.charakter_controller = app.controller
+            
+            wizard_service.starten()
+            
+            schritt = wizard_service.get_aktueller_schritt()
+            if schritt and hasattr(app, '_navigate_to_wizard_tab'):
+                app._navigate_to_wizard_tab(schritt.tab_name)
+            
+            Logger.info("Charakter-Erstellungs-Wizard gestartet")
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Starten des Wizards: {e}")
 
     # ==================== NEUER CHARAKTER WIZARD ====================
 

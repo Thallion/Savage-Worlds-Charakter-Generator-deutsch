@@ -54,6 +54,21 @@
                             text: "Neu"
 
                     MDButton:
+                        style: "tonal"
+                        size_hint_x: 1
+                        on_release: root.start_wizard_mode()
+                        MDButtonIcon:
+                            icon: "map-search"
+                        MDButtonText:
+                            text: "Geführt"
+
+                MDGridLayout:
+                    cols: 2
+                    spacing: dp(6)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    MDButton:
                         style: "elevated"
                         size_hint_x: 1
                         on_release: root.lade_charakter()
@@ -342,11 +357,11 @@
                     MDButton:
                         style: "elevated"
                         size_hint_x: 1
-                        on_release: root.open_add_setting_popup()
+                        on_release: root.open_setting_assistent()
                         MDButtonIcon:
-                            icon: "plus"
+                            icon: "wizard-hat"
                         MDButtonText:
-                            text: "Neu"
+                            text: "Assistent"
 
                     MDButton:
                         style: "elevated"

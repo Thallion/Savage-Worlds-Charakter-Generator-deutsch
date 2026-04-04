@@ -402,6 +402,43 @@
 
             MDDivider:
 
+            # ===== Tutorial =====
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(8)
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDLabel:
+                    text: "Hilfe & Tutorial"
+                    bold: True
+                    size_hint_y: None
+                    height: dp(40)
+
+                MDButton:
+                    style: "filled"
+                    size_hint_x: 1
+                    on_release: root.open_tutorial()
+
+                    MDButtonIcon:
+                        icon: "book-open-variant"
+
+                    MDButtonText:
+                        text: "Tutorial starten"
+
+                MDButton:
+                    style: "outlined"
+                    size_hint_x: 1
+                    on_release: root.reset_tutorial_hints()
+
+                    MDButtonIcon:
+                        icon: "refresh"
+
+                    MDButtonText:
+                        text: "Hilfetexte zurücks."
+
+            MDDivider:
+
             # ===== Log =====
             MDButton:
                 style: "filled"

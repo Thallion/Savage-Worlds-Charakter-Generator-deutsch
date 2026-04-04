@@ -9,10 +9,10 @@
   "window_width": 1200,
   "window_height": 800,
   "mobile_modus": true,
-  "show_logger": true,
+  "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen/wou_aidan_held_anfaenger",
+  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen/jester",
   "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
   "debug_mode": false,
   "log_level": "INFO",
@@ -21,9 +21,9 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "test",
-  "force_mobile_layout": false,
+  "last_setting": "Deadlands",
+  "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "config_version": "1.0",
-  "last_updated": "2026-04-04T10:08:25.899843"
+  "last_updated": "2026-04-04T21:05:36.210068"
 }

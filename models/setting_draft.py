@@ -291,12 +291,17 @@ def create_template_draft(name: str, base_setting: str, description: str = "") -
     
     base_data = manager.settings[base_setting]
     
+    setting_data = dict(base_data)
+    
+    if "fertigkeiten_daten" in setting_data and "fertigkeiten" not in setting_data:
+        setting_data["fertigkeiten"] = dict(setting_data["fertigkeiten_daten"])
+    
     return SettingDraft(
         name=name,
         mode="template",
         base_settings=[base_setting],
         description=description,
-        setting_data=dict(base_data)
+        setting_data=setting_data
     )
 
 
@@ -334,6 +339,7 @@ def _get_empty_setting_template() -> Dict[str, Any]:
             "Willenskraft": {"basis_wert": 4}
         },
         "fertigkeiten": {},
+        "fertigkeiten_daten": {},
         "talente": {},
         "handicaps": {},
         "maechte": {},

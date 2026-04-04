@@ -32,46 +32,27 @@ class TouchableBoxLayout(ButtonBehavior, MDBoxLayout):
     """
 
     def on_touch_down(self, touch):
-        if not self.collide_point(*touch.pos):
-            return False
-        if touch.is_mouse_scrolling:
-            return False
-        if self in touch.ud:
-            return False
-        # Touch direkt greifen, OHNE an Kinder weiterzuleiten.
-        # ButtonBehavior.on_touch_down ruft intern super().on_touch_down() auf,
-        # was den Touch an Kind-Widgets (MDIcon, MDLabel) verteilt.
-        # Diese können den Touch konsumieren und so on_press/on_release verhindern.
-        touch.grab(self)
-        touch.ud[self] = True
-        self.last_touch = touch
-        self._do_press()
-        self.dispatch('on_press')
-        return True
-
-    def on_touch_up(self, touch):
-        if touch.grab_current is not self:
-            return False
-        touch.ungrab(self)
-        self.last_touch = touch
-        self._do_release()
-        self.dispatch('on_release')
-        return True
+        if self.collide_point(*touch.pos):
+            # ButtonBehavior direkt verarbeiten lassen, NICHT an Kinder weiterleiten
+            return ButtonBehavior.on_touch_down(self, touch)
+        return False
 
 
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemTrailingIcon
-from kivymd.uix.gridlayout import MDGridLayout
-from kivymd.uix.button import MDIconButton, MDFabButton
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.label import MDLabel, MDIcon
-from kivymd.uix.card import MDCard
-from kivymd.uix.menu import MDDropdownMenu
-from kivymd.theming import ThemableBehavior
 
 
 class TrailingPressedIconButton(ButtonBehavior, RotateBehavior, MDListItemTrailingIcon):
     """Icon-Button mit Rotation für ExpansionPanel-Chevron"""
     pass
+
+
+from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.button import MDIconButton, MDFabButton
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.label import MDLabel
+from kivymd.uix.card import MDCard
+from kivymd.uix.menu import MDDropdownMenu
+from kivymd.theming import ThemableBehavior
 
 # Path utilities import
 from utils.path_utils import get_assets_path
@@ -113,18 +94,18 @@ def load_kv_file():
 load_kv_file()
 
 class GenerationPointsBar(MDBoxLayout):
-    charakter = ObjectProperty(None)
+    charakter = ObjectProperty(None)  
     char_name_text = StringProperty("")
     active_setting_name_text = StringProperty("")
-    attribut_text = StringProperty("")
-    faehigkeiten_text = StringProperty("")
-    aufstiege_text = StringProperty("")
-    maechte_text = StringProperty("")
-    machtpunkte_text = StringProperty("")
-    vermoegen_text = StringProperty("")
-    handicaps_text = StringProperty("")
-    gewicht_text = StringProperty("")
-    rang_text = StringProperty("")
+    attribut_text = StringProperty("")  
+    faehigkeiten_text = StringProperty("")  
+    aufstiege_text = StringProperty("")  
+    maechte_text = StringProperty("")  
+    machtpunkte_text = StringProperty("")  
+    vermoegen_text = StringProperty("")  
+    handicaps_text = StringProperty("")  
+    gewicht_text = StringProperty("")  
+    rang_text = StringProperty("")  
     parade_robustheit_text = StringProperty("")
     superkraft_punkte_text = StringProperty("")
     machtstufe_text = StringProperty("")
@@ -137,19 +118,15 @@ class GenerationPointsBar(MDBoxLayout):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
-        self.controller.bind(on_charakter_updated=self._on_charakter_updated)
         self.on_charakter_changed(self.controller, self.controller.charakter)
 
         # Timer für regelmäßige Gewichts-Updates
         self._weight_update_event = Clock.schedule_interval(self._update_weight_periodically, 2.0)
 
-        Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
+        # Undo-Status initialisieren
+        self._update_undo_status()
 
-    def _on_charakter_updated(self, *args):
-        """Wird aufgerufen wenn der Charakter aktualisiert wird (z.B. Setting-Wechsel)"""
-        if self.charakter:
-            self.update_all_texts()
-            self._update_char_gen_status(self.charakter, self.charakter.char_gen_completed)
+        Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
 
     def on_charakter_changed(self, instance, value):
         if hasattr(self, 'charakter') and self.charakter:
@@ -158,8 +135,10 @@ class GenerationPointsBar(MDBoxLayout):
         if self.charakter:
             self.bind_charakter_properties()
             self.update_all_texts()
-            # char_gen_completed Status explizit aktualisieren
-            self._update_char_gen_status(self.charakter, self.charakter.char_gen_completed if self.charakter else False)
+            # char_gen_completed Status aktualisieren
+            self._update_char_gen_status(self.charakter, self.charakter.char_gen_completed)
+            # Undo-Status aktualisieren
+            self._update_undo_status()
 
     def unbind_charakter_properties(self):
         """Entfernt alle Charakter-Property-Bindings"""
@@ -299,13 +278,14 @@ class GenerationPointsBar(MDBoxLayout):
         rang = self.charakter.rang if self.charakter.rang else "Anfänger"
 
         from kivy.core.window import Window
-        # Portrait: Punkte zuerst, damit sie nicht abgeschnitten werden
+        # Kompaktere Darstellung im Portrait
         if Window.height > Window.width:
-            self.header_summary_text = f"A:{attr} | F:{fert} | {name} | {setting}"
+            self.header_summary_text = f"{name} | {setting} | A:{attr} | F:{fert}"
         else:
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | {rang}"
 
     _saved_padding = None  # Gespeichertes Padding beim Einklappen
+    _content_min_height = None  # Gespeicherte minimum_height
 
     def toggle_panel(self):
         """Klappt den Detail-Bereich auf oder zu"""
@@ -325,37 +305,28 @@ class GenerationPointsBar(MDBoxLayout):
                 self.is_expanded = True
             return
 
-        # Desktop-Fallback: manuelles Toggle
+        # Desktop-Fallback: content_box Höhe togglen
         content = self.ids.get('content_box')
         chevron_icon = self.ids.get('chevron_icon')
         if not content:
             return
 
         if self.is_expanded:
-            # Einklappen: Kinder verstecken, Padding auf 0
+            # Einklappen: minimum_height speichern, dann auf 0 setzen
+            self._content_min_height = content.minimum_height
             self._saved_padding = content.padding[:]
             content.padding = [0, 0, 0, 0]
             content.spacing = 0
-            for child in content.children:
-                child.opacity = 0
-                child.disabled = True
-                child.size_hint_y = None
-                child._saved_height = child.height
-                child.height = 0
-            content.opacity = 0
+            content.height = 0
             if chevron_icon:
                 chevron_icon.icon = "chevron-right"
             self.is_expanded = False
         else:
-            # Aufklappen: Kinder wiederherstellen
+            # Aufklappen: gespeicherte Höhe wiederherstellen
             content.padding = self._saved_padding or [dp(12), dp(8), dp(12), dp(8)]
             content.spacing = dp(12)
-            for child in content.children:
-                child.opacity = 1
-                child.disabled = False
-                child.height = getattr(child, '_saved_height', dp(116))
-                child.size_hint_y = None
-            content.opacity = 1
+            if self._content_min_height:
+                content.height = self._content_min_height
             if chevron_icon:
                 chevron_icon.icon = "chevron-down"
             self.is_expanded = True
@@ -394,46 +365,31 @@ class GenerationPointsBar(MDBoxLayout):
         self.update_machtstufe_text(None, None)
 
     def update_attribut_text(self, instance, value):
-        """Aktualisiert die Attribut-Anzeige (hochzählen)"""
+        """Aktualisiert die Attribut-Anzeige"""
         if self.charakter:
-            max_attr = self.charakter.maximale_attributsteigerungen
-            verbleibend = self.charakter.verbleibende_attributsteigerungen
-            ausgegeben = max_attr - verbleibend
-            self.attribut_text = f"{ausgegeben} / {max_attr}"
+            self.attribut_text = f"{self.charakter.verbleibende_attributsteigerungen} / {self.charakter.maximale_attributsteigerungen}"
             self.update_header_summary()
 
     def update_handicaps_text(self, instance, value):
-        """Aktualisiert die Handicap-Anzeige (hochzählen)"""
+        """Aktualisiert die Handicap-Anzeige"""
         if self.charakter:
-            gesamt = self.charakter.gesamt_handicap_punkte
-            verbleibend = self.charakter.verbleibende_handicap_punkte
-            ausgegeben = gesamt - verbleibend
-            self.handicaps_text = f"{ausgegeben} / {gesamt}"
+            self.handicaps_text = f"{self.charakter.verbleibende_handicap_punkte} / {self.charakter.gesamt_handicap_punkte}"
 
     def update_faehigkeiten_text(self, instance, value):
-        """Aktualisiert die Fertigkeits-Anzeige (hochzählen)"""
+        """Aktualisiert die Fertigkeits-Anzeige"""
         if self.charakter:
-            max_fert = self.charakter.maximale_fertigkeitssteigerungen
-            verbleibend = self.charakter.verbleibende_fertigkeitssteigerungen
-            ausgegeben = max_fert - verbleibend
-            self.faehigkeiten_text = f"{ausgegeben} / {max_fert}"
+            self.faehigkeiten_text = f"{self.charakter.verbleibende_fertigkeitssteigerungen} / {self.charakter.maximale_fertigkeitssteigerungen}"
             self.update_header_summary()
 
     def update_aufstiege_text(self, instance, value):
-        """Aktualisiert die Aufstiegs-Anzeige (hochzählen)"""
+        """Aktualisiert die Aufstiegs-Anzeige"""
         if self.charakter:
-            gesamt = self.charakter.aufstiege_gesamt
-            verbleibend = self.charakter.verbleibende_aufstiege
-            ausgegeben = gesamt - verbleibend
-            self.aufstiege_text = f"{ausgegeben} / {gesamt}"
+            self.aufstiege_text = f"{self.charakter.verbleibende_aufstiege} / {self.charakter.aufstiege_gesamt}"
 
     def update_maechte_text(self, instance, value):
-        """Aktualisiert die Mächte-Anzeige (hochzählen)"""
+        """Aktualisiert die Mächte-Anzeige"""
         if self.charakter:
-            anzahl = self.charakter.anzahl_maechte
-            verfuegbar = self.charakter.verfuegbare_maechte
-            ausgewaehlt = anzahl - verfuegbar
-            self.maechte_text = f"{ausgewaehlt} / {anzahl}"
+            self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
 
     def update_machtpunkte_text(self, instance, value):
         """Aktualisiert die Machtpunkte-Anzeige"""
@@ -519,56 +475,6 @@ class GenerationPointsBar(MDBoxLayout):
         """Aktualisiert den lokalen char_gen_completed-Status aus dem Charakter-Modell"""
         if self.charakter:
             self.char_gen_completed = self.charakter.char_gen_completed
-            # Alle Texte neu laden, damit Attribute, Fertigkeiten und Vermögen korrekt angezeigt werden
-            self.update_all_texts()
-            # UI in main.kv aktualisieren
-            self._update_char_gen_bar_ui()
-
-    def _update_char_gen_bar_ui(self):
-        """Aktualisiert die char_gen_bar in main.kv"""
-        try:
-            from kivy.app import App
-            app = App.get_running_app()
-            # Versuche verschiedene Wege, um char_gen_bar zu finden
-            char_gen_bar = None
-            if app:
-                # Methode 1: Über app.ids
-                if hasattr(app, 'ids') and app.ids:
-                    char_gen_bar = app.ids.get('char_gen_bar')
-                # Methode 2: Über root widget
-                if not char_gen_bar and hasattr(app, 'root') and app.root:
-                    root = app.root
-                    if hasattr(root, 'ids') and root.ids:
-                        char_gen_bar = root.ids.get('char_gen_bar')
-                # Methode 3: Über SwipeScreenManager und NavigationRail
-                if not char_gen_bar and hasattr(app, 'root'):
-                    for child in app.root.children if hasattr(app.root, 'children') else []:
-                        if hasattr(child, 'ids'):
-                            char_gen_bar = child.ids.get('char_gen_bar')
-                            if char_gen_bar:
-                                break
-            
-            if char_gen_bar:
-                # Farbe aktualisieren
-                if self.char_gen_completed:
-                    char_gen_bar.md_bg_color = app.theme_cls.primaryContainerColor
-                else:
-                    char_gen_bar.md_bg_color = app.theme_cls.surfaceContainerHighColor
-                # Text im Label aktualisieren
-                for child in char_gen_bar.children:
-                    if isinstance(child, MDLabel):
-                        if self.char_gen_completed:
-                            child.text = "Aufstiege freigeschaltet"
-                        else:
-                            child.text = "Charaktererstellung abschließen"
-                    elif isinstance(child, MDIcon):
-                        if self.char_gen_completed:
-                            child.icon = "check-circle"
-                        else:
-                            child.icon = "progress-wrench"
-                Logger.debug(f"char_gen_bar UI aktualisiert: {self.char_gen_completed}")
-        except Exception as e:
-            Logger.warning(f"Fehler beim Aktualisieren der char_gen_bar: {e}")
 
     def cleanup(self):
         """Bereinigt die Pointbar beim Herunterfahren"""

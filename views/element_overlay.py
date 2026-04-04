@@ -67,7 +67,7 @@ class ElementListContent(MDBoxLayout):
             do_scroll_x=False,
             do_scroll_y=True,
             bar_width=dp(15),
-            bar_margin=dp(4),
+            bar_margin=dp(12),
         )
         self._list = MDList(
             size_hint_y=None,
@@ -236,6 +236,8 @@ class ElementOverlay(MDBoxLayout):
         self._content_scroll = TextFieldScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
+            bar_width=dp(15),
+            bar_margin=dp(12),
         )
 
         self._content_box = MDBoxLayout(

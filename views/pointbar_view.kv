@@ -54,74 +54,18 @@
             keep_ratio: True
             pos_hint: {'center_y': 0.5}
 
-        # Attributspunkte
+        # Zusammenfassung
         MDLabel:
-            text: "Attr: " + root.attribut_text
+            text: root.header_summary_text
             theme_text_color: "Primary"
-            font_size: dp(11)
-            size_hint_x: None
-            width: dp(60)
-            pos_hint: {'center_y': 0.5}
-
-        # Fertigkeitenpunkte
-        MDLabel:
-            text: "Fert: " + root.faehigkeiten_text
-            theme_text_color: "Primary"
-            font_size: dp(11)
-            size_hint_x: None
-            width: dp(70)
-            pos_hint: {'center_y': 0.5}
-
-        # Setting-Name
-        MDLabel:
-            text: root.active_setting_name_text
-            theme_text_color: "Secondary"
-            halign: 'center'
-            font_size: dp(10)
-            size_hint_x: 0.35
-            pos_hint: {'center_y': 0.5}
-
-        # Charakter-Name
-        MDLabel:
-            text: root.char_name_text
-            theme_text_color: "Primary"
-            halign: 'right'
-            font_size: dp(11)
+            halign: 'left'
+            valign: 'center'
+            font_size: dp(12)
             bold: True
             shorten: True
-            shorten_from: 'left'
-            size_hint_x: 0.2
-            pos_hint: {'center_y': 0.5}
-
-        # Handicap-Punkte
-        MDLabel:
-            text: "H: " + root.handicaps_text
-            theme_text_color: "Secondary"
-            font_size: dp(10)
-            size_hint_x: None
-            width: dp(55)
-            pos_hint: {'center_y': 0.5}
-
-        # Mächte-Anzahl
-        MDLabel:
-            text: "M: " + root.maechte_text
-            theme_text_color: "Secondary"
-            font_size: dp(10)
-            size_hint_x: None
-            width: dp(55)
-            pos_hint: {'center_y': 0.5}
-
-        # Undo-Button
-        MDIconButton:
-            id: undo_button
-            icon: "undo"
-            style: "standard"
-            size_hint: None, None
-            size: [dp(48), dp(48)]
-            pos_hint: {'center_y': 0.5}
-            disabled: not root.kann_undo
-            opacity: 1 if root.kann_undo else 0.3
-            on_release: root.on_undo_pressed()
+            shorten_from: 'right'
+            text_size: self.size
+            size_hint_x: 1
 
         # Chevron-Button
         MDIconButton:

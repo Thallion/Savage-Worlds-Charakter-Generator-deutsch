@@ -518,10 +518,10 @@
 
             MDDivider:
 
-            # ===== Setting-Verwaltung =====
+            # ===== Tutorial =====
             MDBoxLayout:
                 orientation: 'vertical'
-                spacing: dp(16)
+                spacing: dp(12)
                 size_hint_y: None
                 height: self.minimum_height
                 size_hint_x: None
@@ -529,40 +529,32 @@
                 padding: [dp(16), dp(8)]
 
                 MDLabel:
-                    text: "Setting-Verwaltung"
+                    text: "Hilfe & Tutorial"
                     bold: True
                     size_hint_y: None
                     height: dp(40)
 
-                # Setting Assistent Button
                 MDButton:
                     style: "filled"
                     size_hint_x: 1
-                    on_release: root.open_setting_assistent()
+                    on_release: root.open_tutorial()
 
                     MDButtonIcon:
-                        icon: "wizard-hat"
+                        icon: "book-open-variant"
 
                     MDButtonText:
-                        text: "Setting-Assistent öffnen"
+                        text: "Tutorial starten"
 
-                MDLabel:
-                    text: "Erstelle neue Settings mit dem Assistenten oder bearbeite bestehende."
-                    theme_text_color: "Secondary"
-                    size_hint_y: None
-                    height: dp(24)
-
-                # Entwürfe anzeigen
                 MDButton:
-                    style: "tonal"
+                    style: "outlined"
                     size_hint_x: 1
-                    on_release: root.open_drafts_overview()
+                    on_release: root.reset_tutorial_hints()
 
                     MDButtonIcon:
-                        icon: "file-document-outline"
+                        icon: "refresh"
 
                     MDButtonText:
-                        text: "Gespeicherte Entwürfe anzeigen"
+                        text: "Hilfetexte zurücksetzen"
 
             MDDivider:
 

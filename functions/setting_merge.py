@@ -288,6 +288,14 @@ def calculate_setting_statistics(setting_data: Dict[str, Any]) -> Dict[str, Dict
                 stats[label] = {"aktiv": active, "inaktiv": inactive, "gesamt": len(data)}
             elif isinstance(data, list):
                 stats[label] = {"aktiv": len(data), "inaktiv": 0, "gesamt": len(data)}
+        elif key == "fertigkeiten" and "fertigkeiten_daten" in setting_data:
+            data = setting_data["fertigkeiten_daten"]
+            if isinstance(data, dict):
+                active = sum(1 for v in data.values() if _is_active(v))
+                inactive = len(data) - active
+                stats[label] = {"aktiv": active, "inaktiv": inactive, "gesamt": len(data)}
+            elif isinstance(data, list):
+                stats[label] = {"aktiv": len(data), "inaktiv": 0, "gesamt": len(data)}
         else:
             stats[label] = {"aktiv": 0, "inaktiv": 0, "gesamt": 0}
     

@@ -48,7 +48,17 @@ from kivymd.uix.button import MDIconButton
 from controllers.charakter_controller import CharakterController
 from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
+from views.wizard_bar import WizardBar
+from kivy.lang import Builder
+from utils.path_utils import get_application_root
+import os
 from views.charakter_verwaltung_widget import CharakterVerwaltungWidget
+
+# Wizard-Bar KV laden
+_wizard_bar_kv = os.path.join(get_application_root(), 'views', 'wizard_bar.kv')
+if os.path.exists(_wizard_bar_kv):
+    Builder.load_file(_wizard_bar_kv)
+    Logger.info(f"wizard_bar.kv geladen")
 from views.einstellungen_widget import EinstellungenWidget
 from views.historie_view import HistorieWidget
 from views.voelker_view import VoelkerWidget
@@ -80,6 +90,7 @@ Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
 class SW_Charakter_GeneratorApp(MDApp):
     controller = ObjectProperty(None)
+    wizard_service = ObjectProperty(None)
     screens = {}  # Dictionary to hold screen instances
 
     def __init__(self, **kwargs):
@@ -130,6 +141,12 @@ class SW_Charakter_GeneratorApp(MDApp):
         
         # Service Container mit dem finalen Controller aktualisieren
         service_container.initialize(self.controller)
+        
+        # Wizard Service initialisieren
+        self.wizard_service = service_container.get_wizard_service()
+        if self.wizard_service:
+            self.wizard_service.charakter_controller = self.controller
+            self._bind_wizard_events()
         
         # Android Statusbar/Notch-Höhe und Navigationsleisten-Höhe ermitteln
         self._android_top_padding = dp(24)  # Fallback
@@ -474,6 +491,170 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Android: Intent-Handler für empfangene JSON-Dateien registrieren
         self._setup_android_intent_handler()
 
+    def _check_and_show_welcome_tutorial(self):
+        """Lädt Tutorial-Zustand und zeigt Willkommens-Tutorial bei Bedarf."""
+        try:
+            from services.service_container import service_container
+            from views.tutorial_overlay import show_welcome_tutorial
+            
+            tutorial_service = service_container.get_tutorial_service()
+            if not tutorial_service:
+                Logger.warning("TutorialService nicht verfügbar")
+                return
+            
+            # Tutorial-Zustand aus Config laden
+            config_service = service_container.get_config_service()
+            if config_service:
+                tutorial_state = config_service.get('tutorial_state', {})
+                tutorial_service.load_state(tutorial_state)
+            
+            # Willkommens-Tutorial bei Bedarf zeigen
+            if tutorial_service.should_show_welcome():
+                Logger.info("Zeige Willkommens-Tutorial...")
+                Clock.schedule_once(lambda dt: show_welcome_tutorial(), 1.0)
+            
+        except Exception as e:
+            Logger.error(f"Fehler beim Prüfen des Tutorial-Status: {e}")
+    
+    def _bind_wizard_events(self):
+        """Bindet die Wizard-Events an UI-Updates."""
+        if not self.wizard_service:
+            return
+        
+        self.wizard_service.bind_event('on_wizard_started', self._on_wizard_started)
+        self.wizard_service.bind_event('on_wizard_finished', self._on_wizard_finished)
+        self.wizard_service.bind_event('on_wizard_cancelled', self._on_wizard_cancelled)
+        self.wizard_service.bind_event('on_step_changed', self._on_wizard_step_changed)
+        Logger.info("Wizard-Events gebunden")
+    
+    def _on_wizard_started(self, schritt):
+        """Wird aufgerufen wenn der Wizard startet."""
+        Logger.info("Wizard gestartet - UI aktualisieren")
+        self._show_wizard_bar()
+        if schritt:
+            self._on_wizard_step_changed(schritt)
+    
+    def _on_wizard_finished(self):
+        """Wird aufgerufen wenn der Wizard beendet wird."""
+        Logger.info("Wizard beendet - UI aktualisieren")
+        self._hide_wizard_bar()
+    
+    def _on_wizard_cancelled(self):
+        """Wird aufgerufen wenn der Wizard abgebrochen wird."""
+        Logger.info("Wizard abgebrochen - UI aktualisieren")
+        self._hide_wizard_bar()
+    
+    def _on_wizard_step_changed(self, schritt):
+        """Wird aufgerufen wenn sich der Wizard-Schritt ändert."""
+        if not schritt:
+            return
+        
+        Logger.info(f"Wizard-Schritt geändert: {schritt.tab_id} - {schritt.title}")
+        
+        if schritt.tab_id == 'neuer_charakter':
+            # Zuerst zum Speichern/Laden Tab wechseln
+            self._switch_to_tab_index(0)
+            # Dann Dialog öffnen (verzögert, damit Tab-Wechsel abgeschlossen ist)
+            from kivy.clock import Clock
+            Clock.schedule_once(lambda dt: self._open_new_char_dialog(), 0.3)
+        else:
+            self._navigate_to_wizard_tab(schritt.tab_name)
+    
+    def _open_new_char_dialog(self):
+        """Öffnet den Neuer-Charakter-Dialog nach dem Tab-Wechsel."""
+        char_verwaltung = self._get_charakter_verwaltung_widget()
+        Logger.info(f"CharakterVerwaltungWidget gefunden: {char_verwaltung is not None}")
+        if char_verwaltung:
+            Logger.info("Öffne Neuer-Charakter-Dialog...")
+            char_verwaltung.create_new_character()
+        else:
+            Logger.error("CharakterVerwaltungWidget nicht gefunden!")
+    
+    def _get_charakter_verwaltung_widget(self):
+        """Gibt das CharakterVerwaltungWidget zurück."""
+        try:
+            # Direkt über das App-Attribut (wird bei Screen-Erstellung gesetzt)
+            if hasattr(self, 'charakter_verwaltung_widget') and self.charakter_verwaltung_widget:
+                Logger.debug(f"Widget über App-Attribut gefunden: {self.charakter_verwaltung_widget}")
+                return self.charakter_verwaltung_widget
+            
+            # Fallback: Über screen_instances
+            if hasattr(self, 'screen_instances'):
+                Logger.debug(f"screen_instances hat {len(self.screen_instances)} Einträge")
+                for screen in self.screen_instances:
+                    if hasattr(screen, 'ids') and 'charakter_verwaltung_widget' in screen.ids:
+                        widget = screen.ids.charakter_verwaltung_widget
+                        self.charakter_verwaltung_widget = widget
+                        Logger.debug(f"Widget über screen_instances gefunden: {widget}")
+                        return widget
+            
+            # Fallback: Über ScreenManager
+            root = self.root
+            if root:
+                screen_manager = root.ids.get('tabs_carousel')
+                if screen_manager and hasattr(screen_manager, 'screens'):
+                    for screen in screen_manager.screens:
+                        if hasattr(screen, 'ids') and 'charakter_verwaltung_widget' in screen.ids:
+                            widget = screen.ids.charakter_verwaltung_widget
+                            self.charakter_verwaltung_widget = widget
+                            Logger.debug(f"Widget über ScreenManager.screens gefunden: {widget}")
+                            return widget
+                
+                # Letzter Fallback: root.ids
+                widget = root.ids.get('charakter_verwaltung_widget')
+                if widget:
+                    Logger.debug(f"Widget über root.ids gefunden: {widget}")
+                    return widget
+        except Exception as e:
+            Logger.error(f"Fehler beim Suchen des CharakterVerwaltungWidget: {e}")
+        Logger.warning("CharakterVerwaltungWidget konnte nicht gefunden werden")
+        return None
+    
+    def _show_wizard_bar(self):
+        """Zeigt die Wizard-Bar an."""
+        try:
+            wizard_bar = self.root.ids.get('wizard_bar')
+            if wizard_bar:
+                wizard_bar.opacity = 1
+                wizard_bar.height = "56dp"
+                Logger.debug("Wizard-Bar eingeblendet")
+        except Exception as e:
+            Logger.error(f"Fehler beim Einblenden der Wizard-Bar: {e}")
+    
+    def _hide_wizard_bar(self):
+        """Blendet die Wizard-Bar aus."""
+        try:
+            wizard_bar = self.root.ids.get('wizard_bar')
+            if wizard_bar:
+                wizard_bar.opacity = 0
+                wizard_bar.height = 0
+                Logger.debug("Wizard-Bar ausgeblendet")
+        except Exception as e:
+            Logger.error(f"Fehler beim Ausblenden der Wizard-Bar: {e}")
+    
+    def _navigate_to_wizard_tab(self, tab_name):
+        """Navigiert zum Wizard-Tab."""
+        if not tab_name:
+            return
+        
+        tab_name_to_index = {
+            'Neuer Charakter': 0,
+            'Völker': 2,
+            'Profil': 3,
+            'Eigenschaften': 4,
+            'Handicaps': 5,
+            'Talente': 6,
+            'Mächte': 7,
+            'Ausrüstung': 9,
+            'Charakterbogen': 10,
+            'Historie': 11,
+            'Info': 12,
+        }
+        
+        index = tab_name_to_index.get(tab_name)
+        if index is not None:
+            self._switch_to_tab_index(index)
+
     def _setup_android_intent_handler(self):
         """Registriert den Android Intent-Handler für eingehende Dateien (Teilen/Öffnen mit)."""
         from kivy.utils import platform as kivy_platform
@@ -646,6 +827,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 # Initial prüfen
                 Clock.schedule_once(lambda dt: self._on_setting_changed_update_tabs(
                     self.controller, getattr(self.controller.charakter, 'active_setting_name', '')), 0.5)
+
+            # Tutorial-Zustand laden und Willkommens-Tutorial bei Bedarf zeigen
+            self._check_and_show_welcome_tutorial()
 
         except Exception as e:
             Logger.error(f"Fehler beim Erstellen der Tabs und Screens: {str(e)}", exc_info=True)

@@ -1,0 +1,47 @@
+# views/wizard_bar.kv
+# Wizard-Bar Layout
+
+<WizardBar>:
+    MDLinearProgressIndicator:
+        id: progress
+        pos_hint: {'top': 1}
+        value: 0
+
+    MDLabel:
+        id: step_label
+        text: ""
+        theme_text_color: "Primary"
+        size_hint_x: 0.35
+        pos_hint: {'center_y': 0.5}
+
+    MDButton:
+        style: "outlined"
+        on_release: root.on_help_pressed()
+        size_hint_x: 0.1
+
+        MDButtonIcon:
+            icon: "help-circle-outline"
+
+    MDButton:
+        style: "outlined"
+        on_release: root.on_cancel_pressed()
+        size_hint_x: 0.1
+
+        MDButtonIcon:
+            icon: "close"
+
+    MDButton:
+        style: "outlined"
+        on_release: root.on_prev_pressed()
+        size_hint_x: 0.1
+
+        MDButtonIcon:
+            icon: "arrow-left"
+
+    MDButton:
+        style: "tonal"
+        on_release: root.on_next_pressed()
+        size_hint_x: 0.1
+
+        MDButtonIcon:
+            icon: "arrow-right"

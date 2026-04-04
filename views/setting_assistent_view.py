@@ -79,17 +79,15 @@ class SettingAssistentWizard:
             )
         
         self.steps = [
-            {"title": "Grundeinstellungen", "handler": self._create_step1},
-            {"title": "Elemente konfigurieren", "handler": self._create_step2},
-            {"title": "Konflikte lösen", "handler": self._create_step3},
-            {"title": "Vorschau & Speichern", "handler": self._create_step4}
+            {"title": "Name & Beschreibung", "handler": self._create_step_name},
+            {"title": "Modus & Basis", "handler": self._create_step_modus},
+            {"title": "Elemente konfigurieren", "handler": self._create_step_elemente},
+            {"title": "Vorschau & Speichern", "handler": self._create_step_vorschau}
         ]
     
-    @property
-    def total_steps(self) -> int:
-        if self.draft.mode == "merge":
-            return 4
-        return 3
+    def _get_total_steps(self) -> int:
+        """Berechnet die Gesamtanzahl der Schritte basierend auf dem Modus."""
+        return len(self.steps)
     
     def start_wizard(self):
         """Startet den Wizard."""
@@ -100,13 +98,15 @@ class SettingAssistentWizard:
     def _show_current_step(self):
         """Zeigt den aktuellen Schritt."""
         step_index = self.current_step - 1
-        if step_index >= len(self.steps):
+        total = self._get_total_steps()
+        
+        if self.current_step > total:
             self._finish_wizard()
             return
         
-        if self.draft.mode != "merge" and self.current_step == 3:
-            self.current_step = 4
-            step_index = 3
+        if step_index >= len(self.steps):
+            self._finish_wizard()
+            return
         
         step = self.steps[step_index]
         Logger.info(f"Zeige Wizard-Schritt {self.current_step}: {step['title']}")
@@ -137,7 +137,7 @@ class SettingAssistentWizard:
         save_draft_btn.add_widget(MDButtonText(text="Entwurf speichern"))
         nav_layout.add_widget(save_draft_btn)
         
-        is_last_step = self.current_step >= self.total_steps
+        is_last_step = self.current_step >= self._get_total_steps()
         next_btn = MDButton(style="filled", on_release=self._finish_wizard if is_last_step else self._next_step)
         next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
         next_btn.add_widget(MDButtonText(text="Speichern" if is_last_step else "Weiter"))
@@ -145,7 +145,7 @@ class SettingAssistentWizard:
         
         main_layout = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="750dp")
         
-        progress_text = f"Schritt {self.current_step} von {self.total_steps}"
+        progress_text = f"Schritt {self.current_step} von {self._get_total_steps()}"
         if self.edit_draft:
             progress_text += " (Bearbeiten)"
         progress_label = MDLabel(
@@ -169,23 +169,34 @@ class SettingAssistentWizard:
         )
         self.dialog.open()
     
-    def _create_step1(self):
-        """Schritt 1: Grundeinstellungen"""
+    def _create_step_name(self):
+        """Schritt 1: Name & Beschreibung"""
         layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="750dp")
+        content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="500dp")
+        
+        name_label = MDLabel(text="Name des Settings *", theme_text_color="Primary", bold=True)
+        content.add_widget(name_label)
         
         self.name_field = MDTextField(mode="outlined", text=self.draft.name)
-        self.name_field.add_widget(MDTextFieldHintText(text="Name des Settings (max. 50 Zeichen)"))
+        self.name_field.add_widget(MDTextFieldHintText(text="Name (max. 50 Zeichen)"))
         self.name_field.bind(text=self._update_name)
         content.add_widget(self.name_field)
         
         desc_label = MDLabel(text="Beschreibung", theme_text_color="Primary", bold=True)
         content.add_widget(desc_label)
         
-        self.desc_field = MDTextField(mode="outlined", text=self.draft.description, multiline=True)
+        self.desc_field = MDTextField(mode="outlined", text=self.draft.description, multiline=True, size_hint_y=None, height="150dp")
         self.desc_field.add_widget(MDTextFieldHintText(text="Kurze Beschreibung (optional)"))
         self.desc_field.bind(text=self._update_description)
         content.add_widget(self.desc_field)
+        
+        layout.add_widget(content)
+        return layout
+    
+    def _create_step_modus(self):
+        """Schritt 2: Modus & Basis-Setting Auswahl"""
+        layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
+        content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="850dp")
         
         mode_label = MDLabel(text="Modus wählen", theme_text_color="Primary", bold=True)
         content.add_widget(mode_label)
@@ -209,7 +220,7 @@ class SettingAssistentWizard:
             orientation="vertical",
             spacing="12dp",
             size_hint_y=None,
-            height="200dp"
+            height="300dp"
         )
         self._update_setting_selection_ui()
         content.add_widget(self.setting_selection_box)
@@ -230,7 +241,7 @@ class SettingAssistentWizard:
             return
         
         if mode == "template":
-            self.setting_selection_box.height = "200dp"
+            self.setting_selection_box.height = "300dp"
             label = MDLabel(text="Basis-Setting wählen:", bold=True)
             self.setting_selection_box.add_widget(label)
             
@@ -238,7 +249,7 @@ class SettingAssistentWizard:
             self.setting_selection_box.add_widget(self.template_setting_dropdown)
             
         elif mode == "merge":
-            self.setting_selection_box.height = "280dp"
+            self.setting_selection_box.height = "300dp"
             label = MDLabel(text="Settings zum Zusammenführen wählen:", bold=True)
             self.setting_selection_box.add_widget(label)
             
@@ -254,8 +265,8 @@ class SettingAssistentWizard:
             self.setting_selection_box.height = "50dp"
     
     def _create_setting_dropdown(self) -> MDCard:
-        """Erstellt ein Dropdown für die Template-Auswahl."""
-        card = MDCard(style="outlined", padding="12dp", size_hint_y=None, height="80dp")
+        """Erstellt eine Liste für die Template-Auswahl mit Checkboxen."""
+        card = MDCard(style="outlined", padding="12dp", size_hint_y=None, height="250dp")
         
         try:
             from models.charakter import Charakter
@@ -267,29 +278,34 @@ class SettingAssistentWizard:
         except Exception:
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
         
-        dropdown_layout = MDBoxLayout(orientation="vertical", spacing="8dp")
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
         
-        self.template_setting_buttons = {}
-        for setting_name in available_settings[:6]:
-            btn = MDButton(
-                style="outlined" if setting_name != self.draft.base_settings else "filled",
+        self.template_setting_checkboxes = {}
+        for setting_name in available_settings:
+            is_selected = setting_name in self.draft.base_settings
+            list_item = MDListItem(
                 size_hint_y=None,
-                height="40dp",
-                on_release=lambda x, s=setting_name: self._select_template_setting(s)
+                height=dp(48)
             )
-            btn.add_widget(MDButtonText(text=setting_name))
-            dropdown_layout.add_widget(btn)
-            self.template_setting_buttons[setting_name] = btn
+            list_item.add_widget(MDListItemHeadlineText(text=setting_name))
+            checkbox = MDListItemTrailingCheckbox(
+                active=is_selected,
+                on_active=lambda inst, val, s=setting_name: self._select_template_setting(s, val)
+            )
+            list_item.add_widget(checkbox)
+            list_layout.add_widget(list_item)
+            self.template_setting_checkboxes[setting_name] = checkbox
         
-        scroll = MDScrollView(size_hint_y=1)
-        scroll.add_widget(dropdown_layout)
+        scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
         return card
     
     def _create_merge_setting_list(self) -> MDCard:
         """Erstellt eine Liste für die Merge-Auswahl mit Checkboxen."""
-        card = MDCard(style="outlined", padding="12dp", size_hint_y=None, height="200dp")
+        card = MDCard(style="outlined", padding="12dp", size_hint_y=None, height="250dp")
         
         try:
             from models.charakter import Charakter
@@ -315,22 +331,26 @@ class SettingAssistentWizard:
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = MDScrollView(size_hint_y=1)
+        scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
         return card
     
-    def _select_template_setting(self, setting_name: str):
-        """Wählt ein Template-Setting aus."""
-        self.draft.base_settings = [setting_name]
-        self._update_template_buttons()
+    def _select_template_setting(self, setting_name: str, is_selected: bool):
+        """Wählt ein Template-Setting aus (nur einer möglich)."""
+        if is_selected:
+            self.draft.base_settings = [setting_name]
+            self._update_template_checkboxes()
+        elif setting_name in self.draft.base_settings:
+            self.draft.base_settings.remove(setting_name)
     
-    def _update_template_buttons(self):
-        """Aktualisiert die Template-Button-Stile."""
-        if hasattr(self, 'template_setting_buttons'):
-            for name, btn in self.template_setting_buttons.items():
-                btn.style = "filled" if name == self.draft.base_settings else "outlined"
+    def _update_template_checkboxes(self):
+        """Aktualisiert die Template-Checkboxen (nur einer aktiv)."""
+        if hasattr(self, 'template_setting_checkboxes'):
+            selected = self.draft.base_settings[0] if self.draft.base_settings else None
+            for name, checkbox in self.template_setting_checkboxes.items():
+                checkbox.active = (name == selected)
     
     def _toggle_merge_setting(self, setting_name: str, is_selected: bool):
         """Toggled ein Setting für das Merge."""
@@ -407,7 +427,7 @@ class SettingAssistentWizard:
             if mode_id in self.mode_checkboxes:
                 self.mode_checkboxes[mode_id].active = is_selected
     
-    def _create_step2(self):
+    def _create_step_elemente(self):
         """Schritt 2: Elemente konfigurieren (Tab-basiert)"""
         layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
         content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="680dp")
@@ -509,6 +529,9 @@ class SettingAssistentWizard:
         """Zeigt einen Dialog zum Bearbeiten einer Kategorie."""
         category_data = self.draft.setting_data.get(cat_id, {})
         
+        if cat_id == "fertigkeiten" and not category_data:
+            category_data = self.draft.setting_data.get("fertigkeiten_daten", {})
+        
         if isinstance(category_data, dict):
             items = list(category_data.keys())
         elif isinstance(category_data, list):
@@ -516,43 +539,59 @@ class SettingAssistentWizard:
         else:
             items = []
         
-        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="400dp")
+        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="500dp")
         
-        search_field = MDTextField(mode="outlined", size_hint_y=None, height="56dp")
-        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
-        content.add_widget(search_field)
-        
-        scroll = MDScrollView(size_hint_y=1)
-        list_container = MDList(size_hint_y=None)
-        list_container.bind(minimum_height=list_container.setter('height'))
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
         
         for item_name in items[:50]:
-            list_item = MDListItem()
+            list_item = MDListItem(
+                size_hint_y=None,
+                height=dp(48)
+            )
             list_item.add_widget(MDListItemHeadlineText(text=str(item_name)))
             
             is_active = True
-            if isinstance(category_data, dict) and isinstance(category_data[item_name], dict):
-                is_active = category_data[item_name].get("aktiv", True)
+            if isinstance(category_data, dict) and isinstance(category_data.get(item_name), dict):
+                is_active = category_data.get(item_name, {}).get("aktiv", True)
             
             checkbox = MDListItemTrailingCheckbox(
                 active=is_active,
-                on_active=lambda inst, val, item=item_name: self._toggle_category_item(cat_id, item, val)
+                on_active=lambda inst, val, item=item_name, cid=cat_id: self._toggle_category_item(cid, item, val)
             )
             list_item.add_widget(checkbox)
-            list_container.add_widget(list_item)
+            list_layout.add_widget(list_item)
         
-        scroll.add_widget(list_container)
+        scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll.add_widget(list_layout)
         content.add_widget(scroll)
         
         dialog = MDDialog(
             MDDialogHeadlineText(text=f"{cat_name} bearbeiten"),
             MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(MDButtonText(text="Schließen"), style="text", on_release=lambda x: dialog.dismiss())
-            ),
             size_hint=(0.9, 0.7),
         )
+        
+        cancel_btn = MDButton(MDButtonText(text="Abbrechen"), style="text")
+        cancel_btn.bind(on_release=lambda x: dialog.dismiss())
+        
+        confirm_btn = MDButton(MDButtonText(text="Bestätigen"), style="filled")
+        confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
+        
+        dialog.add_widget(cancel_btn)
+        dialog.add_widget(confirm_btn)
+        
         dialog.open()
+    
+    def _on_category_confirm(self, dialog):
+        """Bestätigt die Kategorie-Änderungen."""
+        dialog.dismiss()
+        self._refresh_elemente_step()
+    
+    def _refresh_elemente_step(self):
+        """Aktualisiert den Elemente-Schritt (Statistiken)."""
+        if self.current_step == 3:
+            self._show_current_step()
     
     def _toggle_category_item(self, cat_id: str, item_name: str, is_active: bool):
         """Toggled den Aktiv-Status eines Elements."""
@@ -564,71 +603,12 @@ class SettingAssistentWizard:
                     else:
                         self.draft.setting_data[cat_id][item_name] = {"aktiv": is_active}
     
-    def _create_step3(self):
-        """Schritt 3: Konflikte lösen (nur bei Merge)"""
-        layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="630dp")
-        
-        conflicts = get_merge_conflicts(self.draft.setting_data)
-        
-        if not conflicts:
-            no_conflicts = MDLabel(
-                text="Keine Konflikte gefunden. Die Settings können ohne Probleme zusammengeführt werden.",
-                theme_text_color="Secondary"
-            )
-            content.add_widget(no_conflicts)
-        else:
-            header = MDLabel(
-                text=f"{len(conflicts)} Konflikt(e) gefunden:",
-                bold=True
-            )
-            content.add_widget(header)
-            
-            for i, conflict in enumerate(conflicts):
-                card = self._create_conflict_card(i, conflict)
-                content.add_widget(card)
-        
-        layout.add_widget(content)
-        return layout
-    
-    def _create_conflict_card(self, index: int, conflict: dict) -> MDCard:
-        """Erstellt eine Konflikt-Karte."""
-        card = MDCard(style="elevated", padding="12dp", size_hint_y=None, height="120dp")
-        
-        key = conflict.get("key", "Unbekannt")
-        cat = conflict.get("category", "")
-        
-        header = MDLabel(text=f"{cat}: {key}", bold=True)
-        card.add_widget(header)
-        
-        old_val = str(conflict.get("old_value", ""))[:50]
-        new_val = str(conflict.get("new_value", ""))[:50]
-        
-        card.add_widget(MDLabel(text=f"Alt: {old_val}...", theme_text_color="Secondary"))
-        card.add_widget(MDLabel(text=f"Neu: {new_val}...", theme_text_color="Secondary"))
-        
-        buttons = MDBoxLayout(orientation="horizontal", size_hint_y=None, height="40dp")
-        
-        keep_btn = MDButton(style="outlined", size_hint_x=1)
-        keep_btn.add_widget(MDButtonText(text="Alt behalten"))
-        keep_btn.bind(on_release=lambda x: self._resolve_conflict(index, "keep_old"))
-        buttons.add_widget(keep_btn)
-        
-        use_btn = MDButton(style="filled", size_hint_x=1)
-        use_btn.add_widget(MDButtonText(text="Neu verwenden"))
-        use_btn.bind(on_release=lambda x: self._resolve_conflict(index, "use_new"))
-        buttons.add_widget(use_btn)
-        
-        card.add_widget(buttons)
-        
-        return card
-    
     def _resolve_conflict(self, index: int, resolution: str):
         """Löst einen Konflikt auf."""
         Logger.info(f"Konflikt {index} gelöst mit: {resolution}")
         self.draft.conflicts_resolved += 1
     
-    def _create_step4(self):
+    def _create_step_vorschau(self):
         """Schritt 4: Vorschau & Speichern"""
         layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
         content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="680dp")
@@ -711,7 +691,8 @@ class SettingAssistentWizard:
             if not validation["is_valid"]:
                 self._show_error("\n".join(validation["errors"]))
                 return
-            
+        
+        if self.current_step == 2:
             self._initialize_draft_data()
         
         self.current_step += 1

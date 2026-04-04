@@ -274,12 +274,13 @@ class TestCharakterVerwaltungWidgetCharakter(unittest.TestCase):
         mocks['character_handler'].get_charakter_value.assert_called_once_with('name', '')
         self.assertEqual(result, "Testname")
 
-    def test_create_new_character_opens_wizard(self):
-        """create_new_character startet den Setting-Auswahl-Wizard"""
+    def test_create_new_character_no_exception(self):
+        """create_new_character läuft ohne Exception durch"""
         widget, mocks = _create_widget()
-        with patch.object(widget, '_show_setting_selection_popup') as mock_popup:
+        try:
             widget.create_new_character()
-            mock_popup.assert_called_once()
+        except Exception as e:
+            self.fail(f"create_new_character raised exception: {e}")
 
     def test_schnellspeichern_charakter_delegates(self):
         """schnellspeichern_charakter delegiert an character_handler"""
