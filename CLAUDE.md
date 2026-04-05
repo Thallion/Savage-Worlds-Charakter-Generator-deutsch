@@ -308,21 +308,28 @@ scroll.add_widget(content_with_textfields)
 
 **Root cause:** Android touch screens report multiple touch events within a short window. Kivy's `on_release` fires for each event. This is especially problematic with checkboxes in lists (`MDListItem` + `MDListItemTrailingCheckbox`) where the list item and checkbox both process the touch.
 
-**Solution 1 - Single checkbox with on_active (recommended):** Use `on_active` event instead of `on_release`. This event fires only once per state change and avoids the bounce issue entirely:
+**IMPORTANT:** `on_active` event does NOT work reliably on Android - it still triggers bounce effects. Always use `on_release` with debounce.
+
+**Solution 1 - Single checkbox with debounce (recommended):** Use `on_release` with time-based debounce:
 
 ```python
-# Statt on_release mit Debounce:
-checkbox.bind(on_release=lambda inst, cb=checkbox: self._on_checkbox_clicked(cb))
+import time
 
-# Verwende on_active (besser):
-checkbox.bind(on_active=self._on_checkbox_clicked)
+# Binding:
+checkbox.bind(on_release=lambda x, cb=checkbox: self._on_checkbox_clicked(cb))
 
-def _on_checkbox_clicked(self, instance, value):
-    """Handler für Checkbox (on_active)."""
-    self.some_state = value
+def _on_checkbox_clicked(self, checkbox):
+    """Handler mit Debounce für Checkbox-Klick."""
+    now = time.monotonic()
+    if hasattr(self, '_last_checkbox_time') and (now - self._last_checkbox_time) < 0.5:
+        return  # Bounce ignorieren
+    self._last_checkbox_time = now
+    
+    # Eigentliche Logik hier
+    self.some_state = checkbox.active
 ```
 
-**Solution 2 - Multiple checkboxes (per-checkbox dictionary):** Use a dictionary to track each checkbox independently (when using `on_release`):
+**Solution 2 - Multiple checkboxes (per-checkbox debounce):** Use a dictionary to track each checkbox independently:
 
 ```python
 import time
@@ -341,23 +348,18 @@ def _on_checkbox_clicked(self, item_name: str, checkbox):
     self._toggle_item(item_name, checkbox.active)
 ```
 
-**Working alternatives (tested on Android):**
-- `MDListItemTrailingCheckbox` with `on_active` - works well for single and multi-selection
-- `views/völker_popup.py` / `SearchBottomSheet` - Race/species selection
-- Character creation setting selection - Uses MDListItem with checkboxes
+**Working pattern (tested on Android):** `on_release` + debounce in handler - this is the ONLY reliable pattern.
 
-**Where this pattern is used (checkboxes with on_active):**
-- `views/volk_popup.py` — Volkseigenarten toggles (`on_active`)
-- `manager/html_manager.py` — HTML export options checkboxes (`on_active`)
-- `manager/pdf_manager.py` — PDF export options checkboxes (`on_active`)
-- `views/setting_assistent_view.py` — template/merge/category checkboxes (`on_active`)
-
-**Where this pattern is used (checkboxes with debounce - legacy):**
+**Where this pattern is used (checkboxes with debounce):**
+- `views/element_overlay.py` — multi-select checkboxes (Vorlage!)
+- `views/setting_assistent_view.py` — handicaps, fertigkeiten etc. checkboxes (funktioniert!)
 - `views/talente_view.py` — talent selection/deselection
 - `views/maechte_view.py` — power selection/deselection  
 - `views/eigenschaften_view.py` — double-cost confirmation
 - `views/template_wizard.py` — skill/handicap/edge/power checkboxes
-- `views/element_overlay.py` — multi-select checkboxes
+- `manager/html_manager.py` — HTML export options checkboxes (FIXED)
+- `manager/pdf_manager.py` — PDF export options checkboxes (FIXED)
+- `views/volk_popup.py` — Volkseigenarten toggles (FIXED)
 
 **Where this pattern is used (navigation buttons):**
 - `views/wizard_bar.py` — prev/next/cancel/skip buttons
@@ -365,7 +367,7 @@ def _on_checkbox_clicked(self, item_name: str, checkbox):
 - `views/template_wizard.py` — wizard step navigation
 - `views/volk_popup.py` — wizard step navigation
 
-**Important:** Prefer `on_active` over `on_release` for checkboxes - it's cleaner and doesn't need debounce. The 500ms debounce window is only needed when using `on_release` with multiple checkboxes.
+**Important:** ALWAYS use `on_release` with 500ms debounce for checkboxes on Android. Do NOT use `on_active` - it does NOT solve the bounce problem. The 500ms window is calibrated for Android touch screens - do not reduce it.
 
 ### Touch Propagation in Cards (Mobile)
 **Problem:** When an `MDCard` with `on_release` contains interactive child widgets (`MDButton`, `MDIconButton`), the child widgets capture the touch event on mobile, preventing the card's `on_release` from firing.

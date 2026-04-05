@@ -419,10 +419,6 @@ class SettingAssistentWizard:
     
     def _create_setting_dropdown(self) -> MDCard:
         """Erstellt eine Liste für die Template-Auswahl mit Checkboxen."""
-        card_height = dp(100) if _mobile else "250dp"
-        card_padding = dp(4) if _mobile else "12dp"
-        card = MDCard(style="outlined", padding=card_padding, size_hint_y=None, height=card_height)
-        
         try:
             from models.charakter import Charakter
             from functions.setting_funktionen import CustomElementManager
@@ -432,6 +428,15 @@ class SettingAssistentWizard:
             available_settings.sort()
         except Exception:
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
+        
+        num_items = len(available_settings)
+        item_height = dp(40) if _mobile else dp(48)
+        list_height = num_items * item_height + dp(16)
+        max_list_height = dp(200) if _mobile else "300dp"
+        card_height = min(list_height, max_list_height)
+        
+        card_padding = dp(4) if _mobile else "12dp"
+        card = MDCard(style="outlined", padding=card_padding, size_hint_y=None, height=card_height)
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
@@ -448,12 +453,12 @@ class SettingAssistentWizard:
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
             )
-            checkbox.bind(on_active=lambda inst, value, s=setting_name: self._on_template_checkbox_clicked(s, value))
+            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_template_checkbox_clicked(s, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
             self.template_setting_checkboxes[setting_name] = checkbox
         
-        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(8) if _mobile else dp(12), bar_margin=dp(4) if _mobile else dp(8))
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
@@ -461,10 +466,6 @@ class SettingAssistentWizard:
     
     def _create_merge_setting_list(self) -> MDCard:
         """Erstellt eine Liste für die Merge-Auswahl mit Checkboxen."""
-        card_height = dp(100) if _mobile else "250dp"
-        card_padding = dp(4) if _mobile else "12dp"
-        card = MDCard(style="outlined", padding=card_padding, size_hint_y=None, height=card_height)
-        
         try:
             from models.charakter import Charakter
             from functions.setting_funktionen import CustomElementManager
@@ -474,6 +475,15 @@ class SettingAssistentWizard:
             available_settings.sort()
         except Exception:
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
+        
+        num_items = len(available_settings)
+        item_height = dp(40) if _mobile else dp(48)
+        list_height = num_items * item_height + dp(16)
+        max_list_height = dp(200) if _mobile else "300dp"
+        card_height = min(list_height, max_list_height)
+        
+        card_padding = dp(4) if _mobile else "12dp"
+        card = MDCard(style="outlined", padding=card_padding, size_hint_y=None, height=card_height)
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
@@ -486,11 +496,11 @@ class SettingAssistentWizard:
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
             )
-            checkbox.bind(on_active=lambda inst, value, s=setting_name: self._on_merge_checkbox_clicked(s, value))
+            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_merge_checkbox_clicked(s, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(8) if _mobile else dp(12), bar_margin=dp(4) if _mobile else dp(8))
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
@@ -520,13 +530,21 @@ class SettingAssistentWizard:
             if setting_name in self.draft.base_settings:
                 self.draft.base_settings.remove(setting_name)
     
-    def _on_template_checkbox_clicked(self, setting_name: str, value: bool):
-        """Handler für Checkbox-Klick (Template-Modus, on_active)."""
-        self._select_template_setting(setting_name, value)
+    def _on_template_checkbox_clicked(self, setting_name: str, checkbox):
+        """Handler für Checkbox-Klick mit Debounce (Template-Modus)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_template_checkbox_time') and (now - self._last_template_checkbox_time) < 0.5:
+            return
+        self._last_template_checkbox_time = now
+        self._select_template_setting(setting_name, checkbox.active)
     
-    def _on_merge_checkbox_clicked(self, setting_name: str, value: bool):
-        """Handler für Checkbox-Klick (Merge-Modus, on_active)."""
-        self._toggle_merge_setting(setting_name, value)
+    def _on_merge_checkbox_clicked(self, setting_name: str, checkbox):
+        """Handler für Checkbox-Klick mit Debounce (Merge-Modus)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_merge_checkbox_time') and (now - self._last_merge_checkbox_time) < 0.5:
+            return
+        self._last_merge_checkbox_time = now
+        self._toggle_merge_setting(setting_name, checkbox.active)
     
     def _create_mode_card(self, mode_id: str, mode_info: dict) -> tuple:
         """Erstellt eine Mode-Auswahlkarte. Gibt (card, checkbox) zurück."""

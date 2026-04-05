@@ -337,7 +337,7 @@ class VolkGeneratorWizard:
                 size_hint_x=None,
                 width="40dp",
                 active=aktuelle_anzahl > 0,
-                on_active=lambda instance, value, eid=eigenart_id, et=eigenart_typ: self._toggle_eigenart(eid, et, value)
+                on_release=lambda x, cb=checkbox, eid=eigenart_id, et=eigenart_typ: self._on_eigenart_checkbox_clicked(eid, et, cb)
             )
             
             kosten = eigenart.get('kosten', 2)
@@ -485,12 +485,6 @@ class VolkGeneratorWizard:
     
     def _toggle_eigenart(self, eigenart_id, eigenart_typ, active):
         """Toggle eine Eigenart-Auswahl"""
-        # Android Touch-Bounce Debounce
-        now = time.monotonic()
-        if hasattr(self, '_last_eigenart_toggle_time') and (now - self._last_eigenart_toggle_time) < 0.5:
-            return
-        self._last_eigenart_toggle_time = now
-
         volle_eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
         if not volle_eigenart:
             return
@@ -505,6 +499,14 @@ class VolkGeneratorWizard:
                 liste.append(dict(volle_eigenart))
         else:
             self._remove_eigenart(eigenart_id, liste)
+    
+    def _on_eigenart_checkbox_clicked(self, eigenart_id, eigenart_typ, checkbox):
+        """Handler für Checkbox-Klick mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_eigenart_toggle_time') and (now - self._last_eigenart_toggle_time) < 0.5:
+            return
+        self._last_eigenart_toggle_time = now
+        self._toggle_eigenart(eigenart_id, eigenart_typ, checkbox.active)
     
     def _remove_eigenart(self, eigenart_id, liste):
         """Entfernt eine Eigenart aus der Liste"""

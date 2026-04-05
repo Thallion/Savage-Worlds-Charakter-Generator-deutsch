@@ -32,13 +32,21 @@ class HTMLManager:
         self.temp_printer_friendly = False
         self.temp_show_steigerungen = True
 
-    def _on_printer_checkbox_clicked(self, instance, value):
-        """Handler für Druckerfreundlich-Checkbox (on_active)."""
-        self.temp_printer_friendly = value
+    def _on_printer_checkbox_clicked(self, checkbox):
+        """Handler für Druckerfreundlich-Checkbox mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_printer_checkbox_time') and (now - self._last_printer_checkbox_time) < 0.5:
+            return
+        self._last_printer_checkbox_time = now
+        self.temp_printer_friendly = checkbox.active
 
-    def _on_steigerungen_checkbox_clicked(self, instance, value):
-        """Handler für Steigerungen-Checkbox (on_active)."""
-        self.temp_show_steigerungen = value
+    def _on_steigerungen_checkbox_clicked(self, checkbox):
+        """Handler für Steigerungen-Checkbox mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_steigerungen_checkbox_time') and (now - self._last_steigerungen_checkbox_time) < 0.5:
+            return
+        self._last_steigerungen_checkbox_time = now
+        self.temp_show_steigerungen = checkbox.active
 
     def create_character_html(self):
         """Startet den HTML-Erstellungsprozess mit Optionen"""
@@ -98,7 +106,7 @@ class HTMLManager:
             text="Druckerfreundliche Version (ohne Farben)"
         ))
         self.printer_friendly_checkbox = MDListItemTrailingCheckbox()
-        self.printer_friendly_checkbox.bind(on_active=self._on_printer_checkbox_clicked)
+        self.printer_friendly_checkbox.bind(on_release=lambda x, cb=self.printer_friendly_checkbox: self._on_printer_checkbox_clicked(cb))
         printer_item.add_widget(self.printer_friendly_checkbox)
         checkbox_list.add_widget(printer_item)
 
@@ -113,7 +121,7 @@ class HTMLManager:
         self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(
             active=True
         )
-        self.show_steigerungen_checkbox.bind(on_active=self._on_steigerungen_checkbox_clicked)
+        self.show_steigerungen_checkbox.bind(on_release=lambda x, cb=self.show_steigerungen_checkbox: self._on_steigerungen_checkbox_clicked(cb))
         steigerungen_item.add_widget(self.show_steigerungen_checkbox)
         checkbox_list.add_widget(steigerungen_item)
 
