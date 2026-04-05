@@ -337,8 +337,8 @@ class VolkGeneratorWizard:
                 size_hint_x=None,
                 width="40dp",
                 active=aktuelle_anzahl > 0,
-                on_release=lambda x, cb=checkbox, eid=eigenart_id, et=eigenart_typ: self._on_eigenart_checkbox_clicked(eid, et, cb)
             )
+            checkbox.bind(on_release=lambda x, cb=checkbox, eid=eigenart_id, et=eigenart_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
             
             kosten = eigenart.get('kosten', 2)
             if eigenart_typ == 'negative':

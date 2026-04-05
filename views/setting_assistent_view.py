@@ -22,6 +22,7 @@ from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText, MDListItemTrailingCheckbox
+from kivymd.uix.scrollview import MDScrollView
 from views.ui_components import TextFieldScrollView
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
@@ -372,32 +373,32 @@ class SettingAssistentWizard:
             return
         
         if mode == "template":
-            self.setting_selection_box.height = dp(120) if _mobile else "300dp"
+            self.setting_selection_box.height = dp(60) if _mobile else "80dp"
             if _mobile:
                 label_text = "Basis:"
-                label_height = dp(20)
             else:
                 label_text = "Basis-Setting wählen:"
-                label_height = "24dp"
-            label = MDLabel(text=label_text, bold=True, size_hint_y=None, height=label_height)
+            label = MDLabel(text=label_text, bold=True, size_hint_y=None, height=dp(24))
             self.setting_selection_box.add_widget(label)
             
-            self.template_setting_dropdown = self._create_setting_dropdown()
-            self.setting_selection_box.add_widget(self.template_setting_dropdown)
+            basis_btn = MDButton(style="tonal", size_hint_y=None, height=dp(40))
+            basis_btn.add_widget(MDButtonText(text=self.draft.base_settings[0] if self.draft.base_settings else "Auswählen..."))
+            basis_btn.bind(on_release=lambda x: self._show_basis_selection_popup())
+            self.setting_selection_box.add_widget(basis_btn)
             
         elif mode == "merge":
-            self.setting_selection_box.height = dp(120) if _mobile else "300dp"
+            self.setting_selection_box.height = dp(60) if _mobile else "80dp"
             if _mobile:
                 label_text = "Merge:"
-                label_height = dp(20)
             else:
                 label_text = "Settings zum Zusammenführen wählen:"
-                label_height = "24dp"
-            label = MDLabel(text=label_text, bold=True, size_hint_y=None, height=label_height)
+            label = MDLabel(text=label_text, bold=True, size_hint_y=None, height=dp(24))
             self.setting_selection_box.add_widget(label)
             
-            self.merge_setting_list = self._create_merge_setting_list()
-            self.setting_selection_box.add_widget(self.merge_setting_list)
+            merge_btn = MDButton(style="tonal", size_hint_y=None, height=dp(40))
+            merge_btn.add_widget(MDButtonText(text=f"{len(self.draft.base_settings)} Ausgewählt..." if self.draft.base_settings else "Auswählen..."))
+            merge_btn.bind(on_release=lambda x: self._show_merge_selection_popup())
+            self.setting_selection_box.add_widget(merge_btn)
         
         elif mode == "extract":
             if _mobile:
@@ -864,7 +865,7 @@ class SettingAssistentWizard:
             checkbox = MDListItemTrailingCheckbox(
                 active=is_active,
             )
-            checkbox.bind(on_active=lambda inst, value, item=item_name, cid=cat_id: self._on_category_checkbox_clicked(cid, item, value))
+            checkbox.bind(on_release=lambda inst, cb=checkbox, item=item_name, cid=cat_id: self._on_category_checkbox_clicked(cid, item, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
 
@@ -920,9 +921,142 @@ class SettingAssistentWizard:
                     else:
                         self.draft.setting_data[cat_id][item_name] = {"aktiv": is_active}
     
-    def _on_category_checkbox_clicked(self, cat_id: str, item_name: str, value: bool):
-        """Handler für Checkbox-Klick (Kategorie-Editor, on_active)."""
-        self._toggle_category_item(cat_id, item_name, value)
+    def _on_category_checkbox_clicked(self, cat_id: str, item_name: str, checkbox):
+        """Handler für Checkbox-Klick mit Debounce (Kategorie-Editor)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_category_checkbox_time') and (now - self._last_category_checkbox_time) < 0.5:
+            return
+        self._last_category_checkbox_time = now
+        self._toggle_category_item(cat_id, item_name, checkbox.active)
+    
+    def _show_basis_selection_popup(self):
+        """Zeigt Popup für Basis-Setting Auswahl."""
+        try:
+            from models.charakter import Charakter
+            from functions.setting_funktionen import CustomElementManager
+            charakter = Charakter()
+            manager = CustomElementManager(charakter)
+            available_settings = list(manager.settings.keys())
+            available_settings.sort()
+        except Exception:
+            available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
+        
+        content = MDBoxLayout(orientation="vertical", spacing=dp(8), size_hint_y=None, height=dp(300))
+        
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+        
+        for setting_name in available_settings:
+            is_selected = setting_name in self.draft.base_settings
+            list_item = MDListItem(size_hint_y=None, height=dp(48))
+            list_item.add_widget(MDListItemHeadlineText(text=setting_name))
+            checkbox = MDListItemTrailingCheckbox(active=is_selected)
+            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_basis_setting_selected(s, cb))
+            list_item.add_widget(checkbox)
+            list_layout.add_widget(list_item)
+        
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15), bar_margin=dp(8))
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+        
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Basis-Setting wählen"),
+            MDDialogContentContainer(content),
+            size_hint=(0.9, 0.7),
+        )
+        close_btn = MDButton(MDButtonText(text="Schließen"), style="text")
+        close_btn.bind(on_release=lambda x: dialog.dismiss())
+        btn_container = MDDialogButtonContainer(close_btn)
+        dialog.add_widget(btn_container)
+        dialog.open()
+    
+    def _on_basis_setting_selected(self, setting_name: str, checkbox):
+        """Handler für Basis-Setting Auswahl mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_basis_checkbox_time') and (now - self._last_basis_checkbox_time) < 0.5:
+            return
+        self._last_basis_checkbox_time = now
+        
+        self.draft.base_settings = [setting_name]
+        self._update_setting_selection_ui()
+        self._update_basis_button_text()
+    
+    def _show_merge_selection_popup(self):
+        """Zeigt Popup für Merge-Setting Auswahl."""
+        try:
+            from models.charakter import Charakter
+            from functions.setting_funktionen import CustomElementManager
+            charakter = Charakter()
+            manager = CustomElementManager(charakter)
+            available_settings = list(manager.settings.keys())
+            available_settings.sort()
+        except Exception:
+            available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
+        
+        content = MDBoxLayout(orientation="vertical", spacing=dp(8), size_hint_y=None, height=dp(300))
+        
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+        
+        for setting_name in available_settings:
+            is_selected = setting_name in self.draft.base_settings
+            list_item = MDListItem(size_hint_y=None, height=dp(48))
+            list_item.add_widget(MDListItemHeadlineText(text=setting_name))
+            checkbox = MDListItemTrailingCheckbox(active=is_selected)
+            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_merge_setting_selected(s, cb))
+            list_item.add_widget(checkbox)
+            list_layout.add_widget(list_item)
+        
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15), bar_margin=dp(8))
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+        
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Settings zum Zusammenführen wählen"),
+            MDDialogContentContainer(content),
+            size_hint=(0.9, 0.7),
+        )
+        close_btn = MDButton(MDButtonText(text="Schließen"), style="text")
+        close_btn.bind(on_release=lambda x: dialog.dismiss())
+        btn_container = MDDialogButtonContainer(close_btn)
+        dialog.add_widget(btn_container)
+        dialog.open()
+    
+    def _on_merge_setting_selected(self, setting_name: str, checkbox):
+        """Handler für Merge-Setting Auswahl mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_merge_checkbox_time') and (now - self._last_merge_checkbox_time) < 0.5:
+            return
+        self._last_merge_checkbox_time = now
+        
+        if checkbox.active:
+            if setting_name not in self.draft.base_settings:
+                self.draft.base_settings.append(setting_name)
+        else:
+            if setting_name in self.draft.base_settings:
+                self.draft.base_settings.remove(setting_name)
+        
+        self._update_merge_button_text()
+    
+    def _update_basis_button_text(self):
+        """Aktualisiert den Text des Basis-Buttons."""
+        for widget in self.setting_selection_box.children:
+            if isinstance(widget, MDButton):
+                text = self.draft.base_settings[0] if self.draft.base_settings else "Auswählen..."
+                if hasattr(widget, 'children') and widget.children:
+                    for child in widget.children:
+                        if isinstance(child, MDButtonText):
+                            child.text = text
+    
+    def _update_merge_button_text(self):
+        """Aktualisiert den Text des Merge-Buttons."""
+        for widget in self.setting_selection_box.children:
+            if isinstance(widget, MDButton):
+                text = f"{len(self.draft.base_settings)} Ausgewählt..." if self.draft.base_settings else "Auswählen..."
+                if hasattr(widget, 'children') and widget.children:
+                    for child in widget.children:
+                        if isinstance(child, MDButtonText):
+                            child.text = text
     
     def _resolve_conflict(self, index: int, resolution: str):
         """Löst einen Konflikt auf."""
