@@ -532,7 +532,49 @@ class SW_Charakter_GeneratorApp(MDApp):
         Logger.info("Wizard gestartet - UI aktualisieren")
         self._show_wizard_bar()
         if schritt:
-            self._on_wizard_step_changed(schritt)
+            # Popup zuerst zeigen, dann nach Schließen den Dialog öffnen
+            self._show_wizard_popup_and_then(schritt, self._open_new_char_dialog)
+    
+    def _show_wizard_popup_and_then(self, schritt, callback):
+        """Zeigt das Wizard-Popup und ruft nach dem Schließen den Callback auf."""
+        if not schritt or not schritt.popup_title:
+            callback()
+            return
+        
+        try:
+            from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+            from kivymd.uix.button import MDButton, MDButtonText
+            from kivymd.uix.scrollview import MDScrollView
+            from kivymd.uix.label import MDLabel
+            from kivy.metrics import dp
+            
+            content = MDBoxLayout(orientation="vertical", size_hint_y=None, adaptive_height=True)
+            scroll = MDScrollView(size_hint_y=None, height="300dp")
+            text_label = MDLabel(
+                text=schritt.popup_text,
+                theme_text_color="Primary",
+                size_hint_y=None,
+                adaptive_height=True,
+            )
+            scroll.add_widget(text_label)
+            content.add_widget(scroll)
+            
+            dialog = MDDialog(
+                MDDialogHeadlineText(text=schritt.popup_title),
+                MDDialogContentContainer(content),
+                MDDialogButtonContainer(
+                    MDButton(
+                        MDButtonText(text="Verstanden"),
+                        style="filled",
+                        on_release=lambda x: (dialog.dismiss(), callback())
+                    ),
+                ),
+                size_hint=(0.85, None),
+            )
+            dialog.open()
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Wizard-Popups: {e}")
+            callback()
     
     def _on_wizard_finished(self):
         """Wird aufgerufen wenn der Wizard beendet wird."""

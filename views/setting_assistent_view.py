@@ -21,12 +21,13 @@ from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText, MDListItemTrailingCheckbox
-from kivymd.uix.scrollview import MDScrollView
+from views.ui_components import TextFieldScrollView
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
 
 import os
 import sys
+import time
 from typing import Optional, List, Callable
 
 from models.setting_draft import (
@@ -124,23 +125,21 @@ class SettingAssistentWizard:
         )
         
         if self.current_step > 1:
-            back_btn = MDButton(style="outlined", on_release=self._previous_step)
+            back_btn = MDButton(style="text", on_release=self._previous_step, size_hint_x=None, width="48dp")
             back_btn.add_widget(MDButtonIcon(icon="arrow-left"))
-            back_btn.add_widget(MDButtonText(text="Zurück"))
             nav_layout.add_widget(back_btn)
         
         cancel_btn = MDButton(style="text", on_release=self._cancel_wizard)
         cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
         nav_layout.add_widget(cancel_btn)
         
-        save_draft_btn = MDButton(style="tonal", on_release=self._save_draft_only)
-        save_draft_btn.add_widget(MDButtonText(text="Entwurf speichern"))
+        save_draft_btn = MDButton(style="text", on_release=self._save_draft_only)
+        save_draft_btn.add_widget(MDButtonText(text="Entwurf"))
         nav_layout.add_widget(save_draft_btn)
         
         is_last_step = self.current_step >= self._get_total_steps()
-        next_btn = MDButton(style="filled", on_release=self._finish_wizard if is_last_step else self._next_step)
+        next_btn = MDButton(style="text", on_release=self._finish_wizard if is_last_step else self._next_step, size_hint_x=None, width="48dp")
         next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
-        next_btn.add_widget(MDButtonText(text="Speichern" if is_last_step else "Weiter"))
         nav_layout.add_widget(next_btn)
         
         main_layout = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="750dp")
@@ -171,7 +170,7 @@ class SettingAssistentWizard:
     
     def _create_step_name(self):
         """Schritt 1: Name & Beschreibung"""
-        layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
         content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="500dp")
         
         name_label = MDLabel(text="Name des Settings *", theme_text_color="Primary", bold=True)
@@ -195,7 +194,7 @@ class SettingAssistentWizard:
     
     def _create_step_modus(self):
         """Schritt 2: Modus & Basis-Setting Auswahl"""
-        layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
         content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="850dp")
         
         mode_label = MDLabel(text="Modus wählen", theme_text_color="Primary", bold=True)
@@ -291,13 +290,13 @@ class SettingAssistentWizard:
             list_item.add_widget(MDListItemHeadlineText(text=setting_name))
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
-                on_active=lambda inst, val, s=setting_name: self._select_template_setting(s, val)
             )
+            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_template_checkbox_clicked(s, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
             self.template_setting_checkboxes[setting_name] = checkbox
         
-        scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
@@ -326,12 +325,12 @@ class SettingAssistentWizard:
             list_item.add_widget(MDListItemHeadlineText(text=setting_name))
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
-                on_active=lambda inst, val, s=setting_name: self._toggle_merge_setting(s, val)
             )
+            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_merge_checkbox_clicked(s, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
@@ -360,6 +359,26 @@ class SettingAssistentWizard:
         else:
             if setting_name in self.draft.base_settings:
                 self.draft.base_settings.remove(setting_name)
+    
+    def _on_template_checkbox_clicked(self, setting_name: str, checkbox):
+        """Handler für Checkbox-Klick mit Debounce (Template-Modus)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_template_checkbox_time') and (now - self._last_template_checkbox_time) < 0.5:
+            return
+        self._last_template_checkbox_time = now
+        
+        is_selected = checkbox.active
+        self._select_template_setting(setting_name, is_selected)
+    
+    def _on_merge_checkbox_clicked(self, setting_name: str, checkbox):
+        """Handler für Checkbox-Klick mit Debounce (Merge-Modus)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_merge_checkbox_time') and (now - self._last_merge_checkbox_time) < 0.5:
+            return
+        self._last_merge_checkbox_time = now
+        
+        is_selected = checkbox.active
+        self._toggle_merge_setting(setting_name, is_selected)
     
     def _create_mode_card(self, mode_id: str, mode_info: dict) -> tuple:
         """Erstellt eine Mode-Auswahlkarte. Gibt (card, checkbox) zurück."""
@@ -429,7 +448,7 @@ class SettingAssistentWizard:
     
     def _create_step_elemente(self):
         """Schritt 2: Elemente konfigurieren (Tab-basiert)"""
-        layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
         content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="680dp")
         
         info_label = MDLabel(
@@ -557,12 +576,12 @@ class SettingAssistentWizard:
             
             checkbox = MDListItemTrailingCheckbox(
                 active=is_active,
-                on_active=lambda inst, val, item=item_name, cid=cat_id: self._toggle_category_item(cid, item, val)
             )
+            checkbox.bind(on_release=lambda inst, cb=checkbox, item=item_name, cid=cat_id: self._on_category_checkbox_clicked(cid, item, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
         
@@ -603,6 +622,16 @@ class SettingAssistentWizard:
                     else:
                         self.draft.setting_data[cat_id][item_name] = {"aktiv": is_active}
     
+    def _on_category_checkbox_clicked(self, cat_id: str, item_name: str, checkbox):
+        """Handler für Checkbox-Klick mit Debounce (Kategorie-Editor)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_category_checkbox_time') and (now - self._last_category_checkbox_time) < 0.5:
+            return
+        self._last_category_checkbox_time = now
+        
+        is_active = checkbox.active
+        self._toggle_category_item(cat_id, item_name, is_active)
+    
     def _resolve_conflict(self, index: int, resolution: str):
         """Löst einen Konflikt auf."""
         Logger.info(f"Konflikt {index} gelöst mit: {resolution}")
@@ -610,7 +639,7 @@ class SettingAssistentWizard:
     
     def _create_step_vorschau(self):
         """Schritt 4: Vorschau & Speichern"""
-        layout = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
         content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="680dp")
         
         preview_card = MDCard(style="elevated", padding="16dp", size_hint_y=None, height="400dp")
@@ -828,7 +857,7 @@ class SettingAssistentDialogHandler:
         
         content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="400dp")
         
-        scroll = MDScrollView(size_hint_y=1)
+        scroll = TextFieldScrollView(size_hint_y=1)
         list_container = MDList(size_hint_y=None)
         list_container.bind(minimum_height=list_container.setter('height'))
         
