@@ -346,27 +346,62 @@ for item in items:
     checkbox.bind(on_release=lambda x, cb=cb: self._on_clicked(cb))
 ```
 
-**Solution 3 - Separate popup dialog (BEST):** For complex checkbox lists, use a separate popup with its own ScrollView - this avoids nested ScrollView issues on Android:
+**Solution 3 - Separate popup dialog (STANDARD — IMMER VERWENDEN):** Checkboxen MÜSSEN IMMER in ein eigenes separates Popup mit eigenem ScrollView ausgegliedert werden. Checkboxen direkt in einen bestehenden Dialog einzubetten funktioniert auf Android nicht zuverlässig (Touch-Probleme, nested ScrollView). Das separate Popup löst das Problem vollständig.
+
+**Vorlagen für dieses Pattern:**
+- Setting-Auswahl bei "Neuer Charakter" (`views/einstellungen_widget.py`)
+- Modus-Auswahl im Setting Assistent (`views/setting_assistent_view.py`)
+- Elemente-Auswahl (Handicaps, Fertigkeiten etc.) im Setting Assistent (`views/setting_assistent_view.py`)
+- Volkseigenarten-Checkboxen (`views/volk_popup.py`)
+
+**Ablauf bei Dialogen mit Checkboxen:**
+1. Zuerst ein separates Optionen-Popup für Checkboxen zeigen
+2. Checkbox-Werte in temp-Variablen speichern
+3. Popup schließen
+4. Dann den eigentlichen Aktions-Dialog zeigen (der die temp-Werte verwendet)
 
 ```python
-def _show_selection_popup(self):
-    content = MDBoxLayout(orientation="vertical", ...)
-    list_layout = MDList()
+def _show_options_popup(self):
+    """Separates Popup für Checkbox-Optionen"""
+    from kivymd.uix.scrollview import MDScrollView
+    from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+
+    content = MDBoxLayout(orientation="vertical", spacing=dp(8), size_hint_y=None, height=dp(160), padding=dp(16))
     
-    for item_name in available_items:
-        list_item = MDListItem(...)
-        checkbox = MDListItemTrailingCheckbox()
-        cb = checkbox  # Intermediate variable
-        checkbox.bind(on_release=lambda x, cb=cb, name=item_name: self._on_item_selected(name, cb))
-        list_item.add_widget(checkbox)
-        list_layout.add_widget(list_item)
+    checkbox_list = MDList(size_hint_y=None)
+    checkbox_list.bind(minimum_height=checkbox_list.setter('height'))
     
-    scroll = MDScrollView(bar_width=dp(15))  # Own scroll view
-    scroll.add_widget(list_layout)
+    # Checkbox erstellen mit Intermediate Variable + Debounce
+    item = MDListItem(size_hint_y=None, height=dp(48))
+    item.add_widget(MDListItemSupportingText(text="Option Name"))
+    self.my_checkbox = MDListItemTrailingCheckbox()
+    cb = self.my_checkbox  # Intermediate variable!
+    self.my_checkbox.bind(on_release=lambda x, cb=cb: self._on_checkbox_clicked(cb))
+    item.add_widget(self.my_checkbox)
+    checkbox_list.add_widget(item)
+    
+    scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+    scroll.add_widget(checkbox_list)
     content.add_widget(scroll)
     
-    dialog = MDDialog(..., content)
-    dialog.open()
+    self._options_popup = MDDialog(
+        MDDialogHeadlineText(text="Optionen"),
+        MDDialogContentContainer(content),
+        MDDialogButtonContainer(
+            MDButton(MDButtonText(text="Abbrechen"), style="text",
+                     on_release=lambda x: self._options_popup.dismiss()),
+            MDButton(MDButtonText(text="Weiter"), style="filled",
+                     on_release=lambda x: self._on_options_confirmed()),
+        ),
+        size_hint=(0.85, None),
+    )
+    self._options_popup.open()
+
+def _on_options_confirmed(self):
+    """Werte speichern, Popup schließen, nächsten Dialog zeigen"""
+    self.temp_value = self.my_checkbox.active
+    self._options_popup.dismiss()
+    self._show_next_dialog()  # Aktions-Dialog ohne Checkboxen
 ```
 
 **Working pattern (tested on Android):** `on_release` + debounce in handler - this is the ONLY reliable pattern.
@@ -379,9 +414,9 @@ def _show_selection_popup(self):
 - `views/maechte_view.py` — power selection/deselection  
 - `views/eigenschaften_view.py` — double-cost confirmation
 - `views/template_wizard.py` — skill/handicap/edge/power checkboxes
-- `manager/html_manager.py` — HTML export options checkboxes (FIXED)
-- `manager/pdf_manager.py` — PDF export options checkboxes (FIXED)
-- `views/volk_popup.py` — Volkseigenarten toggles (FIXED)
+- `manager/html_manager.py` — HTML export options in separatem Popup → dann Speicher-Dialog
+- `manager/pdf_manager.py` — PDF export options checkboxes
+- `views/volk_popup.py` — Volkseigenarten in separatem Popup
 
 **Where this pattern is used (navigation buttons):**
 - `views/wizard_bar.py` — prev/next/cancel/skip buttons
@@ -544,3 +579,4 @@ Build specs: `savage_worlds_generator.spec` (Windows), `savage_worlds_generator_
 14. **Tutorial System**: Tutorial content is defined in `config/tutorial_config.json`. When adding new UI features, consider adding corresponding tutorial hints. The tutorial service manages display state automatically.
 15. **Wizard Integration**: Multi-step processes should use the wizard service pattern for consistent UX. Each wizard step should have proper validation and clear navigation.
 16. **Setting Assistant**: For advanced setting modification, use the setting assistant rather than direct JSON editing. The assistant handles validation and conflict resolution automatically.
+17. **Checkboxen IMMER in separates Popup**: Checkboxen dürfen NIEMALS direkt in einen bestehenden Dialog eingebettet werden. Sie müssen IMMER in ein eigenes separates Popup mit eigenem ScrollView ausgegliedert werden. Erst Optionen-Popup zeigen → Werte in temp-Variablen speichern → Popup schließen → dann Aktions-Dialog zeigen. Siehe "Separate popup dialog (STANDARD)" in den Kivy/Android Workarounds. Vorlagen: Setting-Auswahl (Neuer Charakter), Modus-Auswahl (Setting Assistent), Elemente-Auswahl (Setting Assistent), Volkseigenarten (volk_popup.py), HTML-Export (html_manager.py).

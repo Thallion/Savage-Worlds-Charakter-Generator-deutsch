@@ -10,7 +10,6 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
-from kivymd.uix.selectioncontrol import MDCheckbox
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from services.service_container import service_container
@@ -49,93 +48,108 @@ class HTMLManager:
         self.temp_show_steigerungen = checkbox.active
 
     def create_character_html(self):
-        """Startet den HTML-Erstellungsprozess mit Optionen"""
+        """Startet den HTML-Erstellungsprozess - zeigt zuerst Optionen-Popup"""
         if not self.html_service or not self.dialog_service:
             Logger.error("Erforderliche Services nicht verfügbar für HTML-Export")
             return
 
-        # Prüfen, ob bereits eine HTML-Datei existiert
-        exists, existing_path, existing_name = self.html_service.check_existing_html()
+        # Temp-Werte zurücksetzen
+        self.temp_printer_friendly = False
+        self.temp_show_steigerungen = True
 
-        # Dialog-Inhalt für HTML-Optionen erstellen
-        content = self._create_html_options_content(exists, existing_name, existing_path)
+        # Zuerst Optionen-Popup für Checkboxen zeigen
+        self._show_options_popup()
 
-        # Dialog erstellen und anzeigen
-        self.html_options_dialog = MDDialog(
-            MDDialogHeadlineText(text="HTML-Charakterbogen erstellen"),
-            MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.html_options_dialog.dismiss()
-                )
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        self.html_options_dialog.open()
+    def _show_options_popup(self):
+        """Zeigt separates Popup für HTML-Export-Optionen (Checkboxen).
 
-    def _create_html_options_content(self, exists, existing_name, existing_path):
-        """Erstellt den Inhalt für den HTML-Options-Dialog"""
+        Checkboxen werden in eigenem Popup mit eigenem ScrollView angezeigt,
+        um Touch-Probleme auf Android zu vermeiden (analog zu Volkseigenarten-Popup).
+        """
+        from kivymd.uix.scrollview import MDScrollView
         from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
 
-        # Höhe anpassen: mit existierender HTML brauchen wir mehr Platz
-        # für Info-Label und Überschreiben-Button
-        content_height = dp(320) if exists else dp(260)
         content = MDBoxLayout(
-            orientation='vertical',
+            orientation="vertical",
             spacing=dp(8),
             size_hint_y=None,
-            height=content_height,
+            height=dp(160),
             padding=dp(16)
         )
 
-        # Liste für Checkboxen
-        checkbox_list = MDList(
-            size_hint_y=None,
-        )
+        checkbox_list = MDList(size_hint_y=None)
         checkbox_list.bind(minimum_height=checkbox_list.setter('height'))
 
-        # Checkbox für druckerfreundliche Version
-        printer_item = MDListItem(
-            size_hint_y=None,
-            height=dp(48)
-        )
+        # Checkbox: Druckerfreundlich
+        printer_item = MDListItem(size_hint_y=None, height=dp(48))
         printer_item.add_widget(MDListItemSupportingText(
             text="Druckerfreundliche Version (ohne Farben)"
         ))
         self.printer_friendly_checkbox = MDListItemTrailingCheckbox()
         cb = self.printer_friendly_checkbox
-        self.printer_friendly_checkbox.bind(on_release=lambda x, cb=cb: self._on_printer_checkbox_clicked(cb))
+        self.printer_friendly_checkbox.bind(
+            on_release=lambda x, cb=cb: self._on_printer_checkbox_clicked(cb)
+        )
         printer_item.add_widget(self.printer_friendly_checkbox)
         checkbox_list.add_widget(printer_item)
 
-        # Checkbox für Steigerungen einblenden
-        steigerungen_item = MDListItem(
-            size_hint_y=None,
-            height=dp(48)
-        )
+        # Checkbox: Steigerungen
+        steigerungen_item = MDListItem(size_hint_y=None, height=dp(48))
         steigerungen_item.add_widget(MDListItemSupportingText(
             text="Steigerungen einblenden"
         ))
-        self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(
-            active=True
-        )
+        self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(active=True)
         cb2 = self.show_steigerungen_checkbox
-        self.show_steigerungen_checkbox.bind(on_release=lambda x, cb=cb2: self._on_steigerungen_checkbox_clicked(cb))
+        self.show_steigerungen_checkbox.bind(
+            on_release=lambda x, cb=cb2: self._on_steigerungen_checkbox_clicked(cb)
+        )
         steigerungen_item.add_widget(self.show_steigerungen_checkbox)
         checkbox_list.add_widget(steigerungen_item)
 
-        content.add_widget(checkbox_list)
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll.add_widget(checkbox_list)
+        content.add_widget(scroll)
 
-        # Buttons - bei zwei Buttons mehr Höhe benötigt
-        buttons_height = dp(100) if exists else dp(52)
-        buttons_container = MDBoxLayout(
+        self._options_popup = MDDialog(
+            MDDialogHeadlineText(text="HTML-Export Optionen"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._options_popup.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Weiter"),
+                    style="filled",
+                    on_release=lambda x: self._on_options_confirmed()
+                ),
+            ),
+            size_hint=(0.85, None),
+        )
+        self._options_popup.open()
+
+    def _on_options_confirmed(self):
+        """Übernimmt Checkbox-Werte und zeigt Speicher-Dialog"""
+        self.temp_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
+        self.temp_show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
+        self._options_popup.dismiss()
+
+        # Prüfen, ob bereits eine HTML-Datei existiert
+        exists, existing_path, existing_name = self.html_service.check_existing_html()
+
+        # Speicher-Dialog anzeigen (ohne Checkboxen)
+        self._show_save_dialog(exists, existing_name, existing_path)
+
+    def _show_save_dialog(self, exists, existing_name, existing_path):
+        """Zeigt den Speicher-Dialog (überschreiben / neu speichern)"""
+        content_height = dp(160) if exists else dp(100)
+        content = MDBoxLayout(
             orientation='vertical',
             spacing=dp(12),
             size_hint_y=None,
-            height=buttons_height
+            height=content_height,
+            padding=dp(16)
         )
 
         if exists:
@@ -153,7 +167,7 @@ class HTMLManager:
                 on_release=lambda x: self._create_html_at_path(existing_path, True)
             )
             overwrite_btn.add_widget(MDButtonText(text="Bestehende HTML überschreiben"))
-            buttons_container.add_widget(overwrite_btn)
+            content.add_widget(overwrite_btn)
 
         new_html_btn = MDButton(
             style="elevated",
@@ -162,10 +176,22 @@ class HTMLManager:
             on_release=lambda x: self._start_new_html_creation()
         )
         new_html_btn.add_widget(MDButtonText(text="Als neue HTML speichern..."))
-        buttons_container.add_widget(new_html_btn)
+        content.add_widget(new_html_btn)
 
-        content.add_widget(buttons_container)
-        return content
+        self.html_options_dialog = MDDialog(
+            MDDialogHeadlineText(text="HTML-Charakterbogen erstellen"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.html_options_dialog.dismiss()
+                )
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self.html_options_dialog.open()
 
     def _create_html_at_path(self, html_path, close_dialog=False):
         """Erstellt HTML am angegebenen Pfad und öffnet sie im Browser"""
@@ -173,8 +199,8 @@ class HTMLManager:
             self.html_options_dialog.dismiss()
 
         if self.html_service and self.dialog_service:
-            is_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
-            show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
+            is_printer_friendly = self.temp_printer_friendly
+            show_steigerungen = self.temp_show_steigerungen
 
             success = self.html_service.create_character_html(html_path, is_printer_friendly, show_steigerungen)
 
@@ -213,9 +239,6 @@ class HTMLManager:
         # HTML-Endung sicherstellen
         if not filename.lower().endswith('.html'):
             filename += '.html'
-
-        self.temp_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
-        self.temp_show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
 
         # FileManager Service für Verzeichnisauswahl
         if self.file_service:
