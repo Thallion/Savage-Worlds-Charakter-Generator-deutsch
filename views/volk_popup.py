@@ -265,35 +265,30 @@ class VolkGeneratorWizard:
         return layout
     
     def _create_positive_step(self):
-        """Erstellt Schritt 2: Positive Volkseigenarten"""
-        return self._create_eigenarten_step('positive')
-    
+        """Erstellt Schritt 2: Positive Volkseigenarten (Button öffnet Popup)"""
+        return self._create_eigenarten_button_step('positive')
+
     def _create_negative_step(self):
-        """Erstellt Schritt 3: Negative Volkseigenarten"""
-        return self._create_eigenarten_step('negative')
-    
-    def _create_eigenarten_step(self, eigenart_typ):
-        """Erstellt einen Schritt für Eigenarten-Auswahl"""
-        config = lade_volkseigenarten_config()
-        eigenarten = config.get(eigenart_typ, [])
-        
-        if eigenart_typ == 'positive':
-            aktuelle_auswahl = self.positive_eigenarten
-        else:
-            aktuelle_auswahl = self.negative_eigenarten
-        
-        layout = MDScrollView()
-        
-        content_height = max(600, 80 + len(eigenarten) * 70)
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing="8dp",
+        """Erstellt Schritt 3: Negative Volkseigenarten (Button öffnet Popup)"""
+        return self._create_eigenarten_button_step('negative')
+
+    def _create_eigenarten_button_step(self, eigenart_typ):
+        """Erstellt Wizard-Schritt mit Button, der das Eigenarten-Popup öffnet"""
+        layout = MDBoxLayout(orientation="vertical", spacing=dp(16), padding=dp(16))
+
+        title = "Positive Volkseigenarten" if eigenart_typ == 'positive' else "Negative Volkseigenarten"
+
+        label = MDLabel(
+            text=f"{title} auswählen",
+            theme_text_color="Primary",
+            bold=True,
             size_hint_y=None,
-            height=f"{content_height}dp"
+            height=dp(30)
         )
-        
+        layout.add_widget(label)
+
+        # Punktestand-Info
         punkte_status = berechne_punktestand(self.positive_eigenarten + self.negative_eigenarten)
-        
         if eigenart_typ == 'positive':
             punkte_text = f"Punkte: {START_PUNKTE} Startpunkte verfügbar für positive Eigenarten"
         else:
@@ -302,81 +297,112 @@ class VolkGeneratorWizard:
                 punkte_text = f"Müssen {fehlende} EP durch negative Eigenarten ausgeglichen werden"
             else:
                 punkte_text = f"Positive Eigenarten kosten {punkte_status['positive_kosten']} EP (von {START_PUNKTE} abgezogen)"
-        
+
         punkte_label = MDLabel(
             text=punkte_text,
-            theme_text_color="Primary",
-            bold=True,
+            theme_text_color="Secondary",
             size_hint_y=None,
-            height="35dp"
+            height=dp(24)
         )
-        content.add_widget(punkte_label)
-        content.add_widget(MDDivider())
-        
+        layout.add_widget(punkte_label)
+
+        # Button zum Öffnen des Checkbox-Popups
+        btn = MDButton(style="tonal", size_hint_y=None, height=dp(48))
+        btn.add_widget(MDButtonText(text=f"{title} auswählen..."))
+        btn.bind(on_release=lambda x: self._show_eigenarten_popup(eigenart_typ))
+        layout.add_widget(btn)
+
+        # Aktuelle Auswahl anzeigen
+        auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
+        if auswahl:
+            auswahl_text = ", ".join([e.get('name', e.get('id', '')) for e in auswahl])
+            auswahl_label = MDLabel(
+                text=f"Ausgewählt: {auswahl_text}",
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height=dp(48)
+            )
+            layout.add_widget(auswahl_label)
+
+        return layout
+
+    def _show_eigenarten_popup(self, eigenart_typ):
+        """Zeigt separates Popup für Eigenarten-Checkboxen (eigener ScrollView)"""
+        from kivy.core.window import Window
+
+        config = lade_volkseigenarten_config()
+        eigenarten = config.get(eigenart_typ, [])
+        aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
+        title = "Positive Volkseigenarten" if eigenart_typ == 'positive' else "Negative Volkseigenarten"
+
+        # Hauptlayout mit fester Höhe
+        popup_height = min(Window.height * 0.7, dp(400))
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            height=popup_height
+        )
+
+        # Liste für Checkboxen
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+
         for eigenart in eigenarten:
             eigenart_id = eigenart.get('id')
             aktuelle_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
             max_auswahl = eigenart.get('max_auswahl', 1)
-            
-            eigenart_layout = MDBoxLayout(
-                orientation="vertical",
-                spacing="4dp",
-                size_hint_y=None,
-                height="65dp",
-                padding="4dp"
-            )
-            
-            header_layout = MDBoxLayout(
-                orientation="horizontal",
-                spacing="8dp",
-                size_hint_y=None,
-                height="28dp"
-            )
-            
-            checkbox = MDListItemTrailingCheckbox(
-                size_hint_x=None,
-                width="40dp",
-                active=aktuelle_anzahl > 0,
-            )
-            cb = checkbox
-            checkbox.bind(on_release=lambda x, cb=cb, eid=eigenart_id, et=eigenart_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
-            
+
             kosten = eigenart.get('kosten', 2)
-            if eigenart_typ == 'negative':
-                kosten_text = f"[{kosten} EP]"
-            else:
-                kosten_text = f"[{kosten} EP]"
-            
+            kosten_text = f" [{kosten} EP]"
             if max_auswahl == 0:
                 max_text = " (U)"
             elif max_auswahl > 1:
                 max_text = f" ({aktuelle_anzahl}/{max_auswahl})"
             else:
                 max_text = ""
-            
-            name_label = MDLabel(
-                text=f"{eigenart.get('name', eigenart_id)}{kosten_text}{max_text}",
-                size_hint_x=0.7,
-                bold=True
-            )
-            
-            header_layout.add_widget(checkbox)
-            header_layout.add_widget(name_label)
-            
-            desc_label = MDLabel(
-                text=eigenart.get('beschreibung', ''),
-                theme_text_color="Secondary",
-                size_hint_y=None,
-                height="20dp",
-                shorten=True
-            )
-            
-            eigenart_layout.add_widget(header_layout)
-            eigenart_layout.add_widget(desc_label)
-            content.add_widget(eigenart_layout)
-        
-        layout.add_widget(content)
-        return layout
+
+            list_item = MDListItem(size_hint_y=None, height=dp(56))
+            list_item.add_widget(MDListItemHeadlineText(
+                text=f"{eigenart.get('name', eigenart_id)}{kosten_text}{max_text}"
+            ))
+            if eigenart.get('beschreibung'):
+                list_item.add_widget(MDListItemSupportingText(
+                    text=eigenart.get('beschreibung', '')
+                ))
+
+            checkbox = MDListItemTrailingCheckbox(active=aktuelle_anzahl > 0)
+            cb = checkbox
+            e_id = eigenart_id
+            e_typ = eigenart_typ
+            checkbox.bind(on_release=lambda x, cb=cb, eid=e_id, et=e_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
+            list_item.add_widget(checkbox)
+            list_layout.add_widget(list_item)
+
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+
+        self._eigenarten_popup = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: self._close_eigenarten_popup(eigenart_typ)
+                ),
+            ),
+            size_hint=(0.9, None),
+        )
+        self._eigenarten_popup.open()
+
+    def _close_eigenarten_popup(self, eigenart_typ):
+        """Schließt das Eigenarten-Popup und aktualisiert den Wizard-Schritt"""
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.dismiss()
+        # Wizard-Schritt neu aufbauen, damit aktuelle Auswahl angezeigt wird
+        self._show_current_step()
     
     def _create_preview_step(self):
         """Erstellt Schritt 4: Vorschau & Speichern"""

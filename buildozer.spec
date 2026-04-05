@@ -17,10 +17,10 @@ author = Jean-Michel Fenske (SavageThallion)
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,jpeg,kv,atlas,json,svg
+source.include_exts = py,png,jpg,jpeg,kv,atlas,json,svg,pdf,html
 
 # (list) List of inclusions using pattern matching
-source.include_patterns = assets/*,views/*.kv,templates/*,config/*,settings/*
+source.include_patterns = assets/*,views/*.kv,templates/*,config/*,settings/*,chars/Archetypen/*
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -33,7 +33,7 @@ source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.6.7.8
+version = 0.6.7.9
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]

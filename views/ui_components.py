@@ -70,21 +70,43 @@ class TextFieldScrollView(MDScrollView):
         return result
 
     def _find_textfield_at(self, widget, pos):
-        """Sucht rekursiv nach einem MDTextField unter der Touch-Position."""
+        """Sucht rekursiv nach einem MDTextField unter der Touch-Position.
+
+        Verwendet Window-Koordinaten (pos) und wandelt diese pro Kind in
+        lokale Koordinaten um. Sammelt alle treffenden TextFields und
+        gibt das oberste (höchste y-Position auf dem Bildschirm) zurück,
+        um bei überlappenden Kollisionen das visuell richtige Feld zu wählen.
+        """
+        hits = []
+        self._collect_textfields_at(widget, pos, hits)
+        if not hits:
+            return None
+        if len(hits) == 1:
+            return hits[0]
+        # Bei mehreren Treffern: das Feld wählen, dessen Bildschirm-Position
+        # am nächsten an der Touch-Position liegt (Y-Achse)
+        best = None
+        best_dist = float('inf')
+        for field in hits:
+            # Mittelpunkt des Feldes in Window-Koordinaten
+            field_center_y = field.to_window(field.center_x, field.center_y)[1]
+            dist = abs(pos[1] - field_center_y)
+            if dist < best_dist:
+                best_dist = dist
+                best = field
+        return best
+
+    def _collect_textfields_at(self, widget, pos, hits):
+        """Sammelt alle MDTextFields unter der Touch-Position."""
         for child in widget.children:
-            if not hasattr(child, 'collide_point'):
-                continue
-            if not hasattr(child, 'to_widget'):
+            if not hasattr(child, 'collide_point') or not hasattr(child, 'to_widget'):
                 continue
             local_pos = child.to_widget(*pos)
             if not child.collide_point(*local_pos):
                 continue
             if isinstance(child, MDTextField):
-                return child
-            result = self._find_textfield_at(child, pos)
-            if result:
-                return result
-        return None
+                hits.append(child)
+            self._collect_textfields_at(child, pos, hits)
 
     def _ensure_focus(self, field):
         """Stellt den Focus wieder her, falls ScrollView ihn gestohlen hat."""

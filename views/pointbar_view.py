@@ -273,8 +273,10 @@ class GenerationPointsBar(MDBoxLayout):
 
         name = self.charakter.char_name if self.charakter.char_name else "Unbekannt"
         setting = self.charakter.active_setting_name if self.charakter.active_setting_name else "—"
-        attr = f"{self.charakter.verbleibende_attributsteigerungen}/{self.charakter.maximale_attributsteigerungen}"
-        fert = f"{self.charakter.verbleibende_fertigkeitssteigerungen}/{self.charakter.maximale_fertigkeitssteigerungen}"
+        attr_verbraucht = self.charakter.maximale_attributsteigerungen - self.charakter.verbleibende_attributsteigerungen
+        fert_verbraucht = self.charakter.maximale_fertigkeitssteigerungen - self.charakter.verbleibende_fertigkeitssteigerungen
+        attr = f"{attr_verbraucht}/{self.charakter.maximale_attributsteigerungen}"
+        fert = f"{fert_verbraucht}/{self.charakter.maximale_fertigkeitssteigerungen}"
         rang = self.charakter.rang if self.charakter.rang else "Anfänger"
 
         from kivy.core.window import Window
@@ -365,31 +367,36 @@ class GenerationPointsBar(MDBoxLayout):
         self.update_machtstufe_text(None, None)
 
     def update_attribut_text(self, instance, value):
-        """Aktualisiert die Attribut-Anzeige"""
+        """Aktualisiert die Attribut-Anzeige (verbrauchte / maximale)"""
         if self.charakter:
-            self.attribut_text = f"{self.charakter.verbleibende_attributsteigerungen} / {self.charakter.maximale_attributsteigerungen}"
+            verbraucht = self.charakter.maximale_attributsteigerungen - self.charakter.verbleibende_attributsteigerungen
+            self.attribut_text = f"{verbraucht} / {self.charakter.maximale_attributsteigerungen}"
             self.update_header_summary()
 
     def update_handicaps_text(self, instance, value):
-        """Aktualisiert die Handicap-Anzeige"""
+        """Aktualisiert die Handicap-Anzeige (verbrauchte / maximale)"""
         if self.charakter:
-            self.handicaps_text = f"{self.charakter.verbleibende_handicap_punkte} / {self.charakter.gesamt_handicap_punkte}"
+            verbraucht = self.charakter.gesamt_handicap_punkte - self.charakter.verbleibende_handicap_punkte
+            self.handicaps_text = f"{verbraucht} / {self.charakter.gesamt_handicap_punkte}"
 
     def update_faehigkeiten_text(self, instance, value):
-        """Aktualisiert die Fertigkeits-Anzeige"""
+        """Aktualisiert die Fertigkeits-Anzeige (verbrauchte / maximale)"""
         if self.charakter:
-            self.faehigkeiten_text = f"{self.charakter.verbleibende_fertigkeitssteigerungen} / {self.charakter.maximale_fertigkeitssteigerungen}"
+            verbraucht = self.charakter.maximale_fertigkeitssteigerungen - self.charakter.verbleibende_fertigkeitssteigerungen
+            self.faehigkeiten_text = f"{verbraucht} / {self.charakter.maximale_fertigkeitssteigerungen}"
             self.update_header_summary()
 
     def update_aufstiege_text(self, instance, value):
-        """Aktualisiert die Aufstiegs-Anzeige"""
+        """Aktualisiert die Aufstiegs-Anzeige (verbrauchte / maximale)"""
         if self.charakter:
-            self.aufstiege_text = f"{self.charakter.verbleibende_aufstiege} / {self.charakter.aufstiege_gesamt}"
+            verbraucht = self.charakter.aufstiege_gesamt - self.charakter.verbleibende_aufstiege
+            self.aufstiege_text = f"{verbraucht} / {self.charakter.aufstiege_gesamt}"
 
     def update_maechte_text(self, instance, value):
-        """Aktualisiert die Mächte-Anzeige"""
+        """Aktualisiert die Mächte-Anzeige (gewählte / maximale)"""
         if self.charakter:
-            self.maechte_text = f"{self.charakter.verfuegbare_maechte} / {self.charakter.anzahl_maechte}"
+            gewaehlt = self.charakter.anzahl_maechte - self.charakter.verfuegbare_maechte
+            self.maechte_text = f"{gewaehlt} / {self.charakter.anzahl_maechte}"
 
     def update_machtpunkte_text(self, instance, value):
         """Aktualisiert die Machtpunkte-Anzeige"""
@@ -397,13 +404,12 @@ class GenerationPointsBar(MDBoxLayout):
             self.machtpunkte_text = f"{self.charakter.machtpunkte}"
 
     def update_superkraft_punkte_text(self, instance, value):
-        """Aktualisiert die SKP-Anzeige (leer bei Nicht-Superkräfte-Settings)"""
+        """Aktualisiert die SKP-Anzeige (verbrauchte / maximale, leer bei Nicht-Superkräfte-Settings)"""
         if self.charakter:
             if ist_superkraefte_setting(self.charakter.active_setting_name):
                 verbraucht = self.charakter.superkraft_punkte_verbraucht
                 gesamt = self.charakter.superkraft_punkte_gesamt
-                verbleibend = gesamt - verbraucht
-                self.superkraft_punkte_text = f"{verbleibend} / {gesamt} (OG: {self.charakter.kraftobergrenze})"
+                self.superkraft_punkte_text = f"{verbraucht} / {gesamt} (OG: {self.charakter.kraftobergrenze})"
             else:
                 self.superkraft_punkte_text = ""
 

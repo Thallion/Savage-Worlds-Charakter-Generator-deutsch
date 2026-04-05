@@ -148,6 +148,12 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
     def create_new_character(self):
         """Startet den Wizard für die Charaktererstellung mit Namensabfrage und Setting-Auswahl."""
+        import time
+        now = time.monotonic()
+        if hasattr(self, '_last_new_char_time') and (now - self._last_new_char_time) < 0.5:
+            return
+        self._last_new_char_time = now
+
         try:
             self._show_new_character_dialog()
         except Exception as e:
@@ -304,18 +310,24 @@ class CharakterVerwaltungWidget(MDBoxLayout):
     
     def start_wizard_mode(self):
         """Startet den Charakter-Erstellungs-Wizard."""
+        import time
+        now = time.monotonic()
+        if hasattr(self, '_last_wizard_time') and (now - self._last_wizard_time) < 0.5:
+            return
+        self._last_wizard_time = now
+
         try:
             from services.service_container import service_container
-            
+
             wizard_service = service_container.get_wizard_service()
             if not wizard_service:
                 Logger.error("WizardService nicht verfügbar")
                 return
-            
+
             app = MDApp.get_running_app()
             if hasattr(app, 'controller') and app.controller:
                 wizard_service.charakter_controller = app.controller
-            
+
             wizard_service.starten()
 
             # Navigation und Dialog-Öffnung erfolgt über _on_wizard_started in main.py
@@ -1481,26 +1493,32 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                             'icon': icon,
                         })
 
-            # Auch in Archetypen/ im Hauptverzeichnis suchen
-            archetyps_dir = get_resource_path('chars/Archetypen')
-            if os.path.isdir(archetyps_dir):
-                for ext in ('*.json', '*.pdf', '*.html'):
-                    for f in glob_mod.glob(os.path.join(archetyps_dir, ext)):
-                        if char_name.lower() in os.path.basename(f).lower():
-                            # Prüfen ob bereits in dateien
-                            if not any(d['pfad'] == f for d in dateien):
-                                icon = 'code-json' if f.endswith('.json') else (
-                                    'file-pdf-box' if f.endswith('.pdf') else 'language-html5'
-                                )
-                                typ = 'Archetyp (JSON)' if f.endswith('.json') else (
-                                    'Archetyp (PDF)' if f.endswith('.pdf') else 'Archetyp (HTML)'
-                                )
-                                dateien.append({
-                                    'pfad': f,
-                                    'name': os.path.basename(f),
-                                    'typ': typ,
-                                    'icon': icon,
-                                })
+            # Auch in Archetypen/ suchen (gebündelt + persistentes Verzeichnis auf Android)
+            archetypen_dirs = set()
+            archetypen_dirs.add(get_resource_path('chars/Archetypen'))
+            # Auf Android: auch im persistenten User-Chars-Verzeichnis
+            user_archetypen = os.path.join(get_chars_path(), 'Archetypen')
+            archetypen_dirs.add(user_archetypen)
+
+            for archetyps_dir in archetypen_dirs:
+                if os.path.isdir(archetyps_dir):
+                    for ext in ('*.json', '*.pdf', '*.html'):
+                        for f in glob_mod.glob(os.path.join(archetyps_dir, ext)):
+                            if char_name.lower() in os.path.basename(f).lower():
+                                # Prüfen ob bereits in dateien
+                                if not any(d['pfad'] == f for d in dateien):
+                                    icon = 'code-json' if f.endswith('.json') else (
+                                        'file-pdf-box' if f.endswith('.pdf') else 'language-html5'
+                                    )
+                                    typ = 'Archetyp (JSON)' if f.endswith('.json') else (
+                                        'Archetyp (PDF)' if f.endswith('.pdf') else 'Archetyp (HTML)'
+                                    )
+                                    dateien.append({
+                                        'pfad': f,
+                                        'name': os.path.basename(f),
+                                        'typ': typ,
+                                        'icon': icon,
+                                    })
 
         return dateien
 

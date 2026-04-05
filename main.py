@@ -404,8 +404,42 @@ class SW_Charakter_GeneratorApp(MDApp):
                         migrated += 1
                 if migrated > 0:
                     Logger.info(f"Migration: {migrated} Charakter(e) ins persistente Verzeichnis kopiert")
+
+            # Archetypen aus gebündeltem App-Verzeichnis ins persistente Verzeichnis kopieren
+            self._copy_archetypen_on_android(old_chars_dir, new_chars_dir)
+
         except Exception as e:
             Logger.warning(f"Charakter-Migration fehlgeschlagen: {e}")
+
+    def _copy_archetypen_on_android(self, bundled_chars_dir: Path, user_chars_dir: Path):
+        """Kopiert mitgelieferte Archetypen ins persistente Benutzer-Verzeichnis auf Android."""
+        try:
+            import shutil
+
+            bundled_archetypen = bundled_chars_dir / 'Archetypen'
+            user_archetypen = user_chars_dir / 'Archetypen'
+
+            if not bundled_archetypen.exists():
+                Logger.info("Archetypen: Kein gebündeltes Archetypen-Verzeichnis gefunden")
+                return
+
+            user_archetypen.mkdir(parents=True, exist_ok=True)
+
+            copied = 0
+            for item in bundled_archetypen.rglob('*'):
+                if item.is_file():
+                    rel_path = item.relative_to(bundled_archetypen)
+                    target = user_archetypen / rel_path
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    # Nur kopieren wenn Zieldatei nicht existiert oder älter ist
+                    if not target.exists() or item.stat().st_mtime > target.stat().st_mtime:
+                        shutil.copy2(str(item), str(target))
+                        copied += 1
+
+            if copied > 0:
+                Logger.info(f"Archetypen: {copied} Datei(en) ins persistente Verzeichnis kopiert")
+        except Exception as e:
+            Logger.warning(f"Archetypen-Kopie fehlgeschlagen: {e}")
 
     def _migrate_settings_on_android(self):
         """Migriert benutzerdefinierte Settings vom alten App-Verzeichnis ins persistente Verzeichnis auf Android."""
@@ -544,14 +578,14 @@ class SW_Charakter_GeneratorApp(MDApp):
         if not schritt or not schritt.popup_title:
             callback()
             return
-        
+
         try:
             from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
             from kivymd.uix.button import MDButton, MDButtonText
             from kivymd.uix.scrollview import MDScrollView
             from kivymd.uix.label import MDLabel
             from kivy.metrics import dp
-            
+
             content = MDBoxLayout(orientation="vertical", size_hint_y=None, adaptive_height=True)
             scroll = MDScrollView(size_hint_y=None, height="300dp")
             text_label = MDLabel(
@@ -562,7 +596,17 @@ class SW_Charakter_GeneratorApp(MDApp):
             )
             scroll.add_widget(text_label)
             content.add_widget(scroll)
-            
+
+            # Debounce-Flag gegen doppeltes Feuern auf Android
+            callback_fired = [False]
+
+            def _on_verstanden(x):
+                if callback_fired[0]:
+                    return
+                callback_fired[0] = True
+                dialog.dismiss()
+                callback()
+
             dialog = MDDialog(
                 MDDialogHeadlineText(text=schritt.popup_title),
                 MDDialogContentContainer(content),
@@ -570,7 +614,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                     MDButton(
                         MDButtonText(text="Verstanden"),
                         style="filled",
-                        on_release=lambda x: (dialog.dismiss(), callback())
+                        on_release=_on_verstanden
                     ),
                 ),
                 size_hint=(0.85, None),
