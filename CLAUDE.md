@@ -315,8 +315,10 @@ scroll.add_widget(content_with_textfields)
 ```python
 import time
 
-# Binding:
-checkbox.bind(on_release=lambda x, cb=checkbox: self._on_checkbox_clicked(cb))
+# Binding - use separate variable to avoid closure issue:
+checkbox = MDListItemTrailingCheckbox()
+cb = checkbox
+checkbox.bind(on_release=lambda x, cb=cb: self._on_checkbox_clicked(cb))
 
 def _on_checkbox_clicked(self, checkbox):
     """Handler mit Debounce für Checkbox-Klick."""
@@ -329,23 +331,42 @@ def _on_checkbox_clicked(self, checkbox):
     self.some_state = checkbox.active
 ```
 
-**Solution 2 - Multiple checkboxes (per-checkbox debounce):** Use a dictionary to track each checkbox independently:
+**Solution 2 - Multiple checkboxes in loop (CRITICAL):** When creating checkboxes in a loop, you MUST use intermediate variables to capture the current values. NEVER use the checkbox variable directly in the lambda:
 
 ```python
-import time
+# FALSCH - causes closure issue:
+for item in items:
+    checkbox = MDListItemTrailingCheckbox()
+    checkbox.bind(on_release=lambda x, cb=checkbox: self._on_clicked(cb))  # Bug!
 
-def _on_checkbox_clicked(self, item_name: str, checkbox):
-    """Handler mit Debounce für Checkbox-Klick (pro Checkbox)."""
-    now = time.monotonic()
-    key = f"cb_{item_name}"
-    if not hasattr(self, '_last_checkbox_times'):
-        self._last_checkbox_times = {}
-    if key in self._last_checkbox_times and (now - self._last_checkbox_times[key]) < 0.5:
-        return  # Bounce ignorieren
-    self._last_checkbox_times[key] = now
+# RICHTIG - use intermediate variable:
+for item in items:
+    checkbox = MDListItemTrailingCheckbox()
+    cb = checkbox  # Separate variable
+    checkbox.bind(on_release=lambda x, cb=cb: self._on_clicked(cb))
+```
+
+**Solution 3 - Separate popup dialog (BEST):** For complex checkbox lists, use a separate popup with its own ScrollView - this avoids nested ScrollView issues on Android:
+
+```python
+def _show_selection_popup(self):
+    content = MDBoxLayout(orientation="vertical", ...)
+    list_layout = MDList()
     
-    # Eigentliche Logik hier
-    self._toggle_item(item_name, checkbox.active)
+    for item_name in available_items:
+        list_item = MDListItem(...)
+        checkbox = MDListItemTrailingCheckbox()
+        cb = checkbox  # Intermediate variable
+        checkbox.bind(on_release=lambda x, cb=cb, name=item_name: self._on_item_selected(name, cb))
+        list_item.add_widget(checkbox)
+        list_layout.add_widget(list_item)
+    
+    scroll = MDScrollView(bar_width=dp(15))  # Own scroll view
+    scroll.add_widget(list_layout)
+    content.add_widget(scroll)
+    
+    dialog = MDDialog(..., content)
+    dialog.open()
 ```
 
 **Working pattern (tested on Android):** `on_release` + debounce in handler - this is the ONLY reliable pattern.
@@ -353,6 +374,7 @@ def _on_checkbox_clicked(self, item_name: str, checkbox):
 **Where this pattern is used (checkboxes with debounce):**
 - `views/element_overlay.py` — multi-select checkboxes (Vorlage!)
 - `views/setting_assistent_view.py` — handicaps, fertigkeiten etc. checkboxes (funktioniert!)
+- `views/setting_assistent_view.py` — basis/merge selection via popup (NEU - funktioniert!)
 - `views/talente_view.py` — talent selection/deselection
 - `views/maechte_view.py` — power selection/deselection  
 - `views/eigenschaften_view.py` — double-cost confirmation
@@ -367,7 +389,7 @@ def _on_checkbox_clicked(self, item_name: str, checkbox):
 - `views/template_wizard.py` — wizard step navigation
 - `views/volk_popup.py` — wizard step navigation
 
-**Important:** ALWAYS use `on_release` with 500ms debounce for checkboxes on Android. Do NOT use `on_active` - it does NOT solve the bounce problem. The 500ms window is calibrated for Android touch screens - do not reduce it.
+**Important:** ALWAYS use `on_release` with 500ms debounce for checkboxes on Android. Do NOT use `on_active` - it does NOT solve the bounce problem. The 500ms window is calibrated for Android touch screens - do not reduce it. When using lambdas in loops, ALWAYS use intermediate variables to capture the current checkbox value.
 
 ### Touch Propagation in Cards (Mobile)
 **Problem:** When an `MDCard` with `on_release` contains interactive child widgets (`MDButton`, `MDIconButton`), the child widgets capture the touch event on mobile, preventing the card's `on_release` from firing.

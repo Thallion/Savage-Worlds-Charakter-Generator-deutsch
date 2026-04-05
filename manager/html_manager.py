@@ -106,7 +106,8 @@ class HTMLManager:
             text="Druckerfreundliche Version (ohne Farben)"
         ))
         self.printer_friendly_checkbox = MDListItemTrailingCheckbox()
-        self.printer_friendly_checkbox.bind(on_release=lambda x, cb=self.printer_friendly_checkbox: self._on_printer_checkbox_clicked(cb))
+        cb = self.printer_friendly_checkbox
+        self.printer_friendly_checkbox.bind(on_release=lambda x, cb=cb: self._on_printer_checkbox_clicked(cb))
         printer_item.add_widget(self.printer_friendly_checkbox)
         checkbox_list.add_widget(printer_item)
 
@@ -121,7 +122,8 @@ class HTMLManager:
         self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(
             active=True
         )
-        self.show_steigerungen_checkbox.bind(on_release=lambda x, cb=self.show_steigerungen_checkbox: self._on_steigerungen_checkbox_clicked(cb))
+        cb2 = self.show_steigerungen_checkbox
+        self.show_steigerungen_checkbox.bind(on_release=lambda x, cb=cb2: self._on_steigerungen_checkbox_clicked(cb))
         steigerungen_item.add_widget(self.show_steigerungen_checkbox)
         checkbox_list.add_widget(steigerungen_item)
 
