@@ -13,6 +13,7 @@ from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText
 from kivymd.uix.scrollview import MDScrollView
+from views.ui_components import TextFieldScrollView
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
 from kivymd.uix.selectioncontrol import MDCheckbox
@@ -35,6 +36,7 @@ from functions.volkseigenarten_funktionen import (
 
 import os
 import sys
+import time
 
 # PyInstaller-kompatibles Laden der KV-Datei
 def load_kv_file():
@@ -226,7 +228,7 @@ class VolkGeneratorWizard:
     
     def _create_name_step(self):
         """Erstellt Schritt 1: Name & Grundlagen"""
-        layout = MDScrollView()
+        layout = TextFieldScrollView()
         content = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
@@ -483,6 +485,12 @@ class VolkGeneratorWizard:
     
     def _toggle_eigenart(self, eigenart_id, eigenart_typ, active):
         """Toggle eine Eigenart-Auswahl"""
+        # Android Touch-Bounce Debounce
+        now = time.monotonic()
+        if hasattr(self, '_last_eigenart_toggle_time') and (now - self._last_eigenart_toggle_time) < 0.5:
+            return
+        self._last_eigenart_toggle_time = now
+
         volle_eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
         if not volle_eigenart:
             return
@@ -505,24 +513,40 @@ class VolkGeneratorWizard:
                 liste.pop(i)
                 break
     
+    def _nav_debounce_check(self) -> bool:
+        """Prüft ob ein Navigations-Event zu schnell hintereinander kommt (Android Touch-Bounce)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_nav_time') and (now - self._last_nav_time) < 0.5:
+            return False
+        self._last_nav_time = now
+        return True
+
     def _next_step(self, *args):
+        if not self._nav_debounce_check():
+            return
         if self.current_step == 0:
             if not self.wizard_data.get('name', '').strip():
                 self._show_error("Bitte gib einen Namen für das Volk ein.")
                 return
         self.current_step += 1
         self._show_current_step()
-    
+
     def _previous_step(self, *args):
+        if not self._nav_debounce_check():
+            return
         self.current_step -= 1
         self._show_current_step()
-    
+
     def _cancel_wizard(self, *args):
+        if not self._nav_debounce_check():
+            return
         if self.dialog:
             self.dialog.dismiss()
         Logger.info("Volkseigenarten-Wizard abgebrochen")
-    
+
     def _finish_wizard(self, *args):
+        if not self._nav_debounce_check():
+            return
         validation = validiere_volk_erstellung(
             self.wizard_data['name'],
             self.positive_eigenarten,

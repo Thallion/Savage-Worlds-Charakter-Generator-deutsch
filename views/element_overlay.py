@@ -8,6 +8,8 @@ Enthält auch ElementListContent - ein wiederverwendbares Listen-Widget
 mit Suchfeld für Lösch-Dialoge.
 """
 
+import time
+
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -121,6 +123,14 @@ class ElementListContent(MDBoxLayout):
 
     def _on_checkbox_toggled(self, item_name, checkbox):
         """Callback wenn eine Checkbox umgeschaltet wird (Mehrfachauswahl)"""
+        # Android Touch-Bounce Debounce
+        now = time.monotonic()
+        key = f"cb_{item_name}"
+        if not hasattr(self, '_last_checkbox_times'):
+            self._last_checkbox_times = {}
+        if key in self._last_checkbox_times and (now - self._last_checkbox_times[key]) < 0.5:
+            return
+        self._last_checkbox_times[key] = now
         if checkbox.active:
             self._selected_items.add(item_name)
         else:

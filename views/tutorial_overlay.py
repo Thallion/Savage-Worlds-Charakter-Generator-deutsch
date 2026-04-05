@@ -3,10 +3,13 @@
 Tutorial-Overlay mit Spotlight-Funktion für geführte Einführung.
 """
 
+import time
+
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.logger import Logger
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ListProperty, StringProperty, BooleanProperty
 from kivy.graphics import Color, Rectangle, Ellipse
@@ -19,6 +22,10 @@ from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from kivymd.uix.scrollview import MDScrollView
+
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
 
 
 class SpotlightOverlay(Widget):
@@ -91,59 +98,93 @@ class TutorialDialog:
         self.current_step = 0
         self.dialog = None
         self.steps = tutorial_service.get_welcome_steps()
-    
+        self._last_nav_time = 0  # Debounce für Navigation (Android Touch-Bounce)
+
+    def _nav_debounce_check(self) -> bool:
+        """Prüft ob ein Navigations-Event zu schnell hintereinander kommt."""
+        now = time.monotonic()
+        if (now - self._last_nav_time) < 0.5:
+            return False
+        self._last_nav_time = now
+        return True
+
     def start(self):
         """Startet das Tutorial."""
         if not self.steps:
             Logger.warning("Keine Tutorial-Schritte gefunden")
             return
-        
+
         self.current_step = 0
         self._show_step()
-    
+
     def _show_step(self):
         """Zeigt den aktuellen Schritt."""
         if self.current_step >= len(self.steps):
             self._finish_tutorial()
             return
-        
+
         step = self.steps[self.current_step]
         title = step.get('title', f'Schritt {self.current_step + 1}')
         text = step.get('text', '').replace('\\n', '\n')
-        
+
         if self.dialog:
             self.dialog.dismiss()
-        
+
         content = self._create_content(text, self.current_step + 1, len(self.steps))
-        
-        buttons = []
-        if self.current_step > 0:
+
+        if _mobile:
+            # Mobile: kompakte Buttons
+            buttons = []
+            if self.current_step > 0:
+                back_btn = MDButton(style="text", on_release=lambda x: self._previous_step(),
+                                    size_hint_x=None, width=dp(40))
+                back_btn.add_widget(MDButtonIcon(icon="arrow-left"))
+                buttons.append(back_btn)
+
+            skip_btn = MDButton(style="text", on_release=lambda x: self._skip_tutorial(),
+                                size_hint_x=None, width=dp(40))
+            skip_btn.add_widget(MDButtonIcon(icon="close"))
+            buttons.append(skip_btn)
+
+            is_last = self.current_step >= len(self.steps) - 1
+            next_icon = "check" if is_last else "arrow-right"
+            next_btn = MDButton(
+                style="filled",
+                on_release=lambda x: self._finish_tutorial() if is_last else self._next_step(),
+                size_hint_x=None, width=dp(40)
+            )
+            next_btn.add_widget(MDButtonIcon(icon=next_icon))
+            buttons.append(next_btn)
+        else:
+            # Desktop: Buttons mit Text
+            buttons = []
+            if self.current_step > 0:
+                buttons.append(
+                    MDButton(
+                        MDButtonText(text="Zurück"),
+                        style="outlined",
+                        on_release=lambda x: self._previous_step()
+                    )
+                )
+
             buttons.append(
                 MDButton(
-                    MDButtonText(text="Zurück"),
-                    style="outlined",
-                    on_release=lambda x: self._previous_step()
+                    MDButtonText(text="Überspringen"),
+                    style="text",
+                    on_release=lambda x: self._skip_tutorial()
                 )
             )
-        
-        buttons.append(
-            MDButton(
-                MDButtonText(text="Überspringen"),
-                style="text",
-                on_release=lambda x: self._skip_tutorial()
+
+            is_last = self.current_step >= len(self.steps) - 1
+            next_text = "Fertig" if is_last else "Weiter"
+            buttons.append(
+                MDButton(
+                    MDButtonText(text=next_text),
+                    style="filled",
+                    on_release=lambda x: self._finish_tutorial() if is_last else self._next_step()
+                )
             )
-        )
-        
-        is_last = self.current_step >= len(self.steps) - 1
-        next_text = "Fertig" if is_last else "Weiter"
-        buttons.append(
-            MDButton(
-                MDButtonText(text=next_text),
-                style="filled",
-                on_release=lambda x: self._next_step() if not is_last else self._finish_tutorial()
-            )
-        )
-        
+
         self.dialog = MDDialog(
             MDDialogHeadlineText(text=title),
             MDDialogContentContainer(content),
@@ -152,16 +193,28 @@ class TutorialDialog:
             auto_dismiss=False,
         )
         self.dialog.open()
-    
+
     def _create_content(self, text, current, total):
         """Erstellt den Content für den Dialog."""
+        # Verfügbare Höhe für Scroll-Bereich berechnen
+        # Dialog: ~85% Bildschirmbreite, Höhe wird auto-berechnet
+        # Headline ~dp(56), Buttons ~dp(56), Padding ~dp(40), Dots ~dp(24)
+        is_landscape = Window.width > Window.height
+        if _mobile and is_landscape:
+            # Querformat: wenig Höhe verfügbar → ScrollView mit fester Höhe
+            max_content_height = Window.height * 0.55 - dp(20)
+        elif _mobile:
+            max_content_height = Window.height * 0.5
+        else:
+            max_content_height = dp(400)
+
         layout = MDBoxLayout(
             orientation="vertical",
-            spacing="12dp",
+            spacing=dp(6) if _mobile else dp(12),
             size_hint_y=None,
-            adaptive_height=True,
         )
-        
+
+        # Text in ScrollView für Querformat
         text_label = MDLabel(
             text=text,
             theme_text_color="Primary",
@@ -169,13 +222,27 @@ class TutorialDialog:
             size_hint_y=None,
             adaptive_height=True,
         )
-        layout.add_widget(text_label)
-        
+
+        scroll = MDScrollView(
+            size_hint_y=None,
+            height=max_content_height,
+        )
+        text_container = MDBoxLayout(
+            orientation="vertical",
+            size_hint_y=None,
+            adaptive_height=True,
+            padding=(0, 0, dp(8), 0),
+        )
+        text_container.add_widget(text_label)
+        scroll.add_widget(text_container)
+        layout.add_widget(scroll)
+
+        # Fortschritts-Dots
         dots_layout = MDBoxLayout(
             orientation="horizontal",
             size_hint_y=None,
-            height="24dp",
-            spacing="8dp",
+            height=dp(20),
+            spacing=dp(4),
             adaptive_width=True,
             pos_hint={"center_x": 0.5}
         )
@@ -184,43 +251,48 @@ class TutorialDialog:
                 text="●" if i == current - 1 else "○",
                 theme_text_color="Primary" if i == current - 1 else "Secondary",
                 size_hint_x=None,
-                width="24dp",
+                width=dp(20),
+                font_style="Body" if _mobile else "Body",
+                role="small" if _mobile else "medium",
             )
             dots_layout.add_widget(dot)
         layout.add_widget(dots_layout)
-        
-        progress_label = MDLabel(
-            text=f"Schritt {current} von {total}",
-            theme_text_color="Secondary",
-            size_hint_y=None,
-            height="24dp",
-        )
-        layout.add_widget(progress_label)
-        
+
+        # Gesamthöhe: ScrollView + Dots
+        layout.height = max_content_height + dp(26)
+
         return layout
-    
+
     def _next_step(self):
         """Geht zum nächsten Schritt."""
+        if not self._nav_debounce_check():
+            return
         self.current_step += 1
         self._show_step()
-    
+
     def _previous_step(self):
         """Geht zum vorherigen Schritt."""
+        if not self._nav_debounce_check():
+            return
         if self.current_step > 0:
             self.current_step -= 1
             self._show_step()
-    
+
     def _skip_tutorial(self):
         """Überspringt das Tutorial."""
+        if not self._nav_debounce_check():
+            return
         if self.dialog:
             self.dialog.dismiss()
         self.tutorial_service.mark_welcome_completed()
         if self.on_skip:
             self.on_skip()
         Logger.info("Tutorial übersprungen")
-    
+
     def _finish_tutorial(self):
         """Beendet das Tutorial."""
+        if not self._nav_debounce_check():
+            return
         if self.dialog:
             self.dialog.dismiss()
         self.tutorial_service.mark_welcome_completed()
@@ -296,30 +368,54 @@ class TabHintDialog:
             self.dialog.dismiss()
 
 
+_welcome_tutorial_active = False
+
+
 def show_welcome_tutorial(on_complete=None, on_skip=None):
     """
     Zeigt das Willkommens-Tutorial.
-    
+
     Args:
         on_complete: Callback wenn Tutorial abgeschlossen
         on_skip: Callback wenn Tutorial übersprungen
     """
+    global _welcome_tutorial_active
+
+    if _welcome_tutorial_active:
+        Logger.info("Willkommens-Tutorial ist bereits geöffnet")
+        return
+
     try:
         from services.service_container import service_container
-        
+
         tutorial_service = service_container.get_tutorial_service()
         if not tutorial_service:
             Logger.error("TutorialService nicht verfügbar")
             return
-        
+
         if not tutorial_service.should_show_welcome():
             Logger.info("Willkommens-Tutorial wurde bereits abgeschlossen")
             return
-        
-        dialog = TutorialDialog(tutorial_service, on_complete=on_complete, on_skip=on_skip)
+
+        _welcome_tutorial_active = True
+
+        def _on_done():
+            global _welcome_tutorial_active
+            _welcome_tutorial_active = False
+            if on_complete:
+                on_complete()
+
+        def _on_skipped():
+            global _welcome_tutorial_active
+            _welcome_tutorial_active = False
+            if on_skip:
+                on_skip()
+
+        dialog = TutorialDialog(tutorial_service, on_complete=_on_done, on_skip=_on_skipped)
         dialog.start()
-        
+
     except Exception as e:
+        _welcome_tutorial_active = False
         Logger.error(f"Fehler beim Starten des Tutorials: {e}")
 
 

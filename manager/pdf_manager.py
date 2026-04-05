@@ -31,6 +31,14 @@ class PDFManager:
         self.show_steigerungen_checkbox = None
         self.temp_printer_friendly = False
         self.temp_show_steigerungen = True
+
+    def _on_printer_checkbox_clicked(self, instance, value):
+        """Handler für Druckerfreundlich-Checkbox (on_active)."""
+        self.temp_printer_friendly = value
+
+    def _on_steigerungen_checkbox_clicked(self, instance, value):
+        """Handler für Steigerungen-Checkbox (on_active)."""
+        self.temp_show_steigerungen = value
     
     def create_character_pdf(self):
         """Startet den PDF-Erstellungsprozess mit Optionen"""
@@ -93,6 +101,7 @@ class PDFManager:
             text="Druckerfreundliche Version (ohne Hintergrund)"
         ))
         self.printer_friendly_checkbox = MDListItemTrailingCheckbox()
+        self.printer_friendly_checkbox.bind(on_active=self._on_printer_checkbox_clicked)
         printer_item.add_widget(self.printer_friendly_checkbox)
         checkbox_list.add_widget(printer_item)
 
@@ -107,6 +116,7 @@ class PDFManager:
         self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(
             active=True
         )
+        self.show_steigerungen_checkbox.bind(on_active=self._on_steigerungen_checkbox_clicked)
         steigerungen_item.add_widget(self.show_steigerungen_checkbox)
         checkbox_list.add_widget(steigerungen_item)
 

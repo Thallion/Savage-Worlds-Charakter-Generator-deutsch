@@ -3,6 +3,8 @@
 Wizard-Bar Widget für die Anzeige des Wizard-Fortschritts.
 """
 
+import time
+
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty, NumericProperty, BooleanProperty
 from kivy.logger import Logger
@@ -40,6 +42,7 @@ class WizardBar(MDBoxLayout):
         
         self._wizard_callbacks_bound = False
         self._current_popup_dialog = None
+        self._last_nav_time = 0  # Debounce für Navigation (Android Touch-Bounce)
     
     def on_wizard_service(self, instance, value):
         """Wird aufgerufen wenn der Wizard-Service gesetzt wird."""
@@ -123,23 +126,39 @@ class WizardBar(MDBoxLayout):
         if progress:
             progress.value = self.wizard_service.get_fortschritt_prozent()
     
+    def _debounce_check(self) -> bool:
+        """Prüft ob ein Navigations-Event zu schnell hintereinander kommt (Android Touch-Bounce)."""
+        now = time.monotonic()
+        if (now - self._last_nav_time) < 0.5:
+            return False
+        self._last_nav_time = now
+        return True
+
     def on_prev_pressed(self):
         """Wird aufgerufen wenn der Zurück-Button gedrückt wird."""
+        if not self._debounce_check():
+            return
         if self.wizard_service:
             self.wizard_service.vorheriger_schritt()
-    
+
     def on_next_pressed(self):
         """Wird aufgerufen wenn der Weiter-Button gedrückt wird."""
+        if not self._debounce_check():
+            return
         if self.wizard_service:
             self.wizard_service.naechster_schritt()
-    
+
     def on_cancel_pressed(self):
         """Wird aufgerufen wenn der Abbrechen-Button gedrückt wird."""
+        if not self._debounce_check():
+            return
         if self.wizard_service:
             self.wizard_service.abbrechen()
-    
+
     def on_skip_pressed(self):
         """Wird aufgerufen wenn der Überspringen-Button gedrückt wird."""
+        if not self._debounce_check():
+            return
         if self.wizard_service:
             self.wizard_service.schritt_ueberspringen()
     

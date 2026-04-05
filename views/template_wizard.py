@@ -17,6 +17,7 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
+from views.ui_components import TextFieldScrollView
 
 from kivy.logger import Logger
 from kivy.clock import Clock
@@ -25,6 +26,7 @@ from kivy.properties import StringProperty, DictProperty, ListProperty
 
 import json
 import os
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -204,7 +206,7 @@ class TemplateWizardDialog:
     
     def _create_general_step(self):
         """Erstellt Schritt 1: Allgemeine Daten"""
-        layout = MDScrollView()
+        layout = TextFieldScrollView()
         content = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
@@ -277,7 +279,7 @@ class TemplateWizardDialog:
     
     def _create_attributes_step(self):
         """Erstellt Schritt 2: Attribute"""
-        layout = MDScrollView()
+        layout = TextFieldScrollView()
         content = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
@@ -340,7 +342,7 @@ class TemplateWizardDialog:
     
     def _create_skills_step(self):
         """Erstellt Schritt 3: Fertigkeiten"""
-        layout = MDScrollView()
+        layout = TextFieldScrollView()
 
         # Verfügbare Fertigkeiten holen
         skills = self._get_available_skills()
@@ -552,7 +554,7 @@ class TemplateWizardDialog:
     
     def _create_powers_step(self):
         """Erstellt Schritt 6: Mächte"""
-        layout = MDScrollView()
+        layout = TextFieldScrollView()
 
         # Mächte vorab holen für Höhenberechnung
         powers = self._get_available_powers()
@@ -738,7 +740,19 @@ class TemplateWizardDialog:
             remaining = available - total_cost
             self.points_info.text = f"Verbraucht: {total_cost} / {available} (Übrig: {remaining})"
     
+    def _checkbox_debounce_check(self, key: str) -> bool:
+        """Prüft ob ein Checkbox-Event zu schnell hintereinander kommt (Android Touch-Bounce)."""
+        now = time.monotonic()
+        if not hasattr(self, '_last_checkbox_times'):
+            self._last_checkbox_times = {}
+        if key in self._last_checkbox_times and (now - self._last_checkbox_times[key]) < 0.5:
+            return False
+        self._last_checkbox_times[key] = now
+        return True
+
     def _toggle_skill(self, skill, active):
+        if not self._checkbox_debounce_check(f"skill_{skill}"):
+            return
         if active:
             self.template_data["skills"][skill] = 4
             self.skill_fields[skill][1].disabled = False
@@ -757,6 +771,8 @@ class TemplateWizardDialog:
             pass
     
     def _toggle_handicap(self, key, active):
+        if not self._checkbox_debounce_check(f"handicap_{key}"):
+            return
         if active:
             # Prüfe ob Handicap bereits ausgewählt
             if any(sel.get("key") == key for sel in self.template_data["handicaps"]):
@@ -833,6 +849,8 @@ class TemplateWizardDialog:
         desc_dialog.open()
 
     def _toggle_edge(self, edge, active):
+        if not self._checkbox_debounce_check(f"edge_{edge}"):
+            return
         if active:
             if edge not in self.template_data["edges"]:
                 self.template_data["edges"].append(edge)
@@ -841,6 +859,8 @@ class TemplateWizardDialog:
                 self.template_data["edges"].remove(edge)
     
     def _toggle_power(self, power, active):
+        if not self._checkbox_debounce_check(f"power_{power}"):
+            return
         if active:
             if power not in self.template_data["powers"]:
                 self.template_data["powers"].append(power)
@@ -891,24 +911,40 @@ class TemplateWizardDialog:
                     except ValueError:
                         pass
 
+    def _nav_debounce_check(self) -> bool:
+        """Prüft ob ein Navigations-Event zu schnell hintereinander kommt (Android Touch-Bounce)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_nav_time') and (now - self._last_nav_time) < 0.5:
+            return False
+        self._last_nav_time = now
+        return True
+
     def _next_step(self, *args):
+        if not self._nav_debounce_check():
+            return
         self._save_current_step_data()
         self.current_step += 1
         self._show_current_step()
 
     def _previous_step(self, *args):
+        if not self._nav_debounce_check():
+            return
         self._save_current_step_data()
         self.current_step -= 1
         self._show_current_step()
-    
+
     def _cancel_wizard(self, *args):
         """Bricht den Wizard ab"""
+        if not self._nav_debounce_check():
+            return
         if self.dialog:
             self.dialog.dismiss()
         Logger.info("Template-Wizard abgebrochen")
-    
+
     def _finish_wizard(self, *args):
         """Schließt den Wizard ab und speichert das Template"""
+        if not self._nav_debounce_check():
+            return
         try:
             # Aktuelle Schritt-Daten sichern
             self._save_current_step_data()

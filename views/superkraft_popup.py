@@ -35,6 +35,7 @@ import functions.superkraft_funktionen as superkraft_funktionen
 
 import os
 import sys
+import time
 
 # PyInstaller-kompatibles Laden der KV-Datei
 def load_kv_file():
@@ -254,6 +255,11 @@ class SuperkraftKonfigContent(MDBoxLayout):
 
     def _on_mod_toggle(self, mod_name, active):
         """Callback wenn ein Modifikator an/abgewählt wird."""
+        # Android Touch-Bounce Debounce
+        now = time.monotonic()
+        if hasattr(self, '_last_mod_toggle_time') and (now - self._last_mod_toggle_time) < 0.5:
+            return
+        self._last_mod_toggle_time = now
         if active:
             mod_data = self.kraft_data.get('modifikatoren', {}).get(mod_name, {})
             self.gewaehlte_mods[mod_name] = mod_data

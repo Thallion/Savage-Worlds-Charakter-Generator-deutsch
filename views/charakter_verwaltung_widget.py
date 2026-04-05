@@ -317,11 +317,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 wizard_service.charakter_controller = app.controller
             
             wizard_service.starten()
-            
-            schritt = wizard_service.get_aktueller_schritt()
-            if schritt and hasattr(app, '_navigate_to_wizard_tab'):
-                app._navigate_to_wizard_tab(schritt.tab_name)
-            
+
+            # Navigation und Dialog-Öffnung erfolgt über _on_wizard_started in main.py
+            # NICHT hier doppelt navigieren, sonst öffnet sich "Neuer Charakter" zweimal
+
             Logger.info("Charakter-Erstellungs-Wizard gestartet")
             
         except Exception as e:

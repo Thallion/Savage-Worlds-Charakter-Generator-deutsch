@@ -279,6 +279,137 @@ Guided creation of character templates:
 ### View Files
 Each view tab has a paired `.py` and `.kv` file (e.g., `profil_view.py` + `profil_view.kv`). Popups follow the same pattern (`talent_popup.py` + `talent_popup.kv`). Mobile-optimized layouts use `*_view_mobile.kv` files (e.g., `eigenschaften_view_mobile.kv`) — these are loaded on Android instead of the desktop `.kv` files. The Python logic is shared; only the `.kv` layout differs.
 
+## Kivy/Android Workarounds
+
+This project contains several custom fixes for known Kivy/KivyMD issues, especially on Android. **Do not refactor or remove these patterns** — they solve real bugs that are hard to reproduce on Desktop.
+
+### TextFieldScrollView (`views/ui_components.py`)
+**Problem:** Kivy's `ScrollView` uses a `scroll_timeout` (55–200ms) to distinguish scroll from tap. During this timeout, touch events are not passed to children. This breaks `MDTextField` focus on Android — the keyboard appears briefly and disappears immediately.
+
+**Root cause:** `kivy/kivy#4399`, `kivy/kivy#890`, `kivy/kivy#7320` — ScrollView steals the touch before TextField can process it.
+
+**Solution:** `TextFieldScrollView` extends `MDScrollView`:
+1. On `touch_down`: records the touch position and finds any `MDTextField` under it
+2. On `touch_up`: checks if it was a tap (movement < `dp(30)`) vs. a scroll gesture
+3. If tap: forces `field.focus = True` via `Clock.schedule_once()` (twice: immediately + 100ms delay as safety net)
+
+```python
+# Usage: Replace MDScrollView with TextFieldScrollView in any layout containing MDTextField
+from views.ui_components import TextFieldScrollView
+
+scroll = TextFieldScrollView(size_hint_y=1)
+scroll.add_widget(content_with_textfields)
+```
+
+**Important:** Always use `TextFieldScrollView` instead of `MDScrollView` when the scroll area contains `MDTextField` widgets. This applies to all popups, overlays, and wizard dialogs.
+
+### Checkbox/Button Debounce Pattern (Android Touch Bounce)
+**Problem:** On Android, touch events on `MDListItemTrailingCheckbox` and `MDButton` can fire multiple times for a single tap. This causes talents to be selected twice, checkboxes to toggle back, or actions to execute twice.
+
+**Root cause:** Android touch screens report multiple touch events within a short window. Kivy's `on_release` fires for each event. This is especially problematic with checkboxes in lists (`MDListItem` + `MDListItemTrailingCheckbox`) where the list item and checkbox both process the touch.
+
+**Solution 1 - Single checkbox with on_active (recommended):** Use `on_active` event instead of `on_release`. This event fires only once per state change and avoids the bounce issue entirely:
+
+```python
+# Statt on_release mit Debounce:
+checkbox.bind(on_release=lambda inst, cb=checkbox: self._on_checkbox_clicked(cb))
+
+# Verwende on_active (besser):
+checkbox.bind(on_active=self._on_checkbox_clicked)
+
+def _on_checkbox_clicked(self, instance, value):
+    """Handler für Checkbox (on_active)."""
+    self.some_state = value
+```
+
+**Solution 2 - Multiple checkboxes (per-checkbox dictionary):** Use a dictionary to track each checkbox independently (when using `on_release`):
+
+```python
+import time
+
+def _on_checkbox_clicked(self, item_name: str, checkbox):
+    """Handler mit Debounce für Checkbox-Klick (pro Checkbox)."""
+    now = time.monotonic()
+    key = f"cb_{item_name}"
+    if not hasattr(self, '_last_checkbox_times'):
+        self._last_checkbox_times = {}
+    if key in self._last_checkbox_times and (now - self._last_checkbox_times[key]) < 0.5:
+        return  # Bounce ignorieren
+    self._last_checkbox_times[key] = now
+    
+    # Eigentliche Logik hier
+    self._toggle_item(item_name, checkbox.active)
+```
+
+**Working alternatives (tested on Android):**
+- `MDListItemTrailingCheckbox` with `on_active` - works well for single and multi-selection
+- `views/völker_popup.py` / `SearchBottomSheet` - Race/species selection
+- Character creation setting selection - Uses MDListItem with checkboxes
+
+**Where this pattern is used (checkboxes with on_active):**
+- `views/volk_popup.py` — Volkseigenarten toggles (`on_active`)
+- `manager/html_manager.py` — HTML export options checkboxes (`on_active`)
+- `manager/pdf_manager.py` — PDF export options checkboxes (`on_active`)
+- `views/setting_assistent_view.py` — template/merge/category checkboxes (`on_active`)
+
+**Where this pattern is used (checkboxes with debounce - legacy):**
+- `views/talente_view.py` — talent selection/deselection
+- `views/maechte_view.py` — power selection/deselection  
+- `views/eigenschaften_view.py` — double-cost confirmation
+- `views/template_wizard.py` — skill/handicap/edge/power checkboxes
+- `views/element_overlay.py` — multi-select checkboxes
+
+**Where this pattern is used (navigation buttons):**
+- `views/wizard_bar.py` — prev/next/cancel/skip buttons
+- `views/setting_assistent_view.py` — wizard step navigation
+- `views/template_wizard.py` — wizard step navigation
+- `views/volk_popup.py` — wizard step navigation
+
+**Important:** Prefer `on_active` over `on_release` for checkboxes - it's cleaner and doesn't need debounce. The 500ms debounce window is only needed when using `on_release` with multiple checkboxes.
+
+### Touch Propagation in Cards (Mobile)
+**Problem:** When an `MDCard` with `on_release` contains interactive child widgets (`MDButton`, `MDIconButton`), the child widgets capture the touch event on mobile, preventing the card's `on_release` from firing.
+
+**Solution:** On mobile, use non-interactive display widgets instead of buttons for icons inside clickable cards:
+
+```python
+if _mobile:
+    # MDIcon is non-interactive — touch passes through to the card
+    from kivymd.uix.label import MDIcon
+    icon = MDIcon(icon="star", size_hint_x=None, width=dp(28))
+    card_content.add_widget(icon)
+else:
+    # On desktop, MDButton with tonal style for visual accent
+    icon_btn = MDButton(style="tonal", size_hint_x=None, width="48dp")
+    icon_btn.add_widget(MDButtonIcon(icon="star"))
+    card_content.add_widget(icon_btn)
+```
+
+**Where this pattern is used:**
+- `views/setting_assistent_view.py` — category cards and mode selection cards
+
+### MDDialog Fixed Height (Mobile)
+**Problem:** `MDDialog` does not support `size_hint_y=1` for child layouts (`MDDialogContentContainer`). Using it causes the content to collapse to the bottom of the dialog with a huge empty gap above.
+
+**Solution:** Always use `size_hint_y=None` with a calculated fixed height for the main content layout inside dialogs:
+
+```python
+from kivy.core.window import Window
+
+# Calculate available height: dialog_height - headline - padding
+main_layout_height = Window.height * 0.95 - dp(80)
+main_layout = MDBoxLayout(orientation="vertical", size_hint_y=None, height=main_layout_height)
+```
+
+### SearchBottomSheet (`views/ui_components.py`)
+**Problem:** `MDDialog` with search fields has severe touch issues on Android — the dialog's touch handling conflicts with the TextField and list scrolling.
+
+**Solution:** Custom `SearchBottomSheet` using `ModalView` instead of `MDDialog`:
+- Transparent background with scrim layer for dismiss
+- Slide-up/down animation
+- Integrated search field with filtered list
+- Used for race/species selection and other searchable lists
+
 ## Technology Stack
 
 | Component | Technology | Version |

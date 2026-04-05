@@ -50,6 +50,10 @@ TEST_MODULE = [
     'test_superkraft_popup',
     'test_talent_manager',
     'test_template_handler',
+    'test_wizard_service',
+    'test_tutorial_service',
+    'test_setting_draft',
+    'test_setting_merge',
 ]
 
 # Doppelte entfernen

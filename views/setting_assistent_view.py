@@ -448,7 +448,7 @@ class SettingAssistentWizard:
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
             )
-            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_template_checkbox_clicked(s, cb))
+            checkbox.bind(on_active=lambda inst, value, s=setting_name: self._on_template_checkbox_clicked(s, value))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
             self.template_setting_checkboxes[setting_name] = checkbox
@@ -486,7 +486,7 @@ class SettingAssistentWizard:
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
             )
-            checkbox.bind(on_release=lambda inst, cb=checkbox, s=setting_name: self._on_merge_checkbox_clicked(s, cb))
+            checkbox.bind(on_active=lambda inst, value, s=setting_name: self._on_merge_checkbox_clicked(s, value))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
@@ -520,25 +520,13 @@ class SettingAssistentWizard:
             if setting_name in self.draft.base_settings:
                 self.draft.base_settings.remove(setting_name)
     
-    def _on_template_checkbox_clicked(self, setting_name: str, checkbox):
-        """Handler für Checkbox-Klick mit Debounce (Template-Modus)."""
-        now = time.monotonic()
-        if hasattr(self, '_last_template_checkbox_time') and (now - self._last_template_checkbox_time) < 0.5:
-            return
-        self._last_template_checkbox_time = now
-        
-        is_selected = checkbox.active
-        self._select_template_setting(setting_name, is_selected)
+    def _on_template_checkbox_clicked(self, setting_name: str, value: bool):
+        """Handler für Checkbox-Klick (Template-Modus, on_active)."""
+        self._select_template_setting(setting_name, value)
     
-    def _on_merge_checkbox_clicked(self, setting_name: str, checkbox):
-        """Handler für Checkbox-Klick mit Debounce (Merge-Modus)."""
-        now = time.monotonic()
-        if hasattr(self, '_last_merge_checkbox_time') and (now - self._last_merge_checkbox_time) < 0.5:
-            return
-        self._last_merge_checkbox_time = now
-        
-        is_selected = checkbox.active
-        self._toggle_merge_setting(setting_name, is_selected)
+    def _on_merge_checkbox_clicked(self, setting_name: str, value: bool):
+        """Handler für Checkbox-Klick (Merge-Modus, on_active)."""
+        self._toggle_merge_setting(setting_name, value)
     
     def _create_mode_card(self, mode_id: str, mode_info: dict) -> tuple:
         """Erstellt eine Mode-Auswahlkarte. Gibt (card, checkbox) zurück."""
@@ -858,7 +846,7 @@ class SettingAssistentWizard:
             checkbox = MDListItemTrailingCheckbox(
                 active=is_active,
             )
-            checkbox.bind(on_release=lambda inst, cb=checkbox, item=item_name, cid=cat_id: self._on_category_checkbox_clicked(cid, item, cb))
+            checkbox.bind(on_active=lambda inst, value, item=item_name, cid=cat_id: self._on_category_checkbox_clicked(cid, item, value))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
 
@@ -914,15 +902,9 @@ class SettingAssistentWizard:
                     else:
                         self.draft.setting_data[cat_id][item_name] = {"aktiv": is_active}
     
-    def _on_category_checkbox_clicked(self, cat_id: str, item_name: str, checkbox):
-        """Handler für Checkbox-Klick mit Debounce (Kategorie-Editor)."""
-        now = time.monotonic()
-        if hasattr(self, '_last_category_checkbox_time') and (now - self._last_category_checkbox_time) < 0.5:
-            return
-        self._last_category_checkbox_time = now
-        
-        is_active = checkbox.active
-        self._toggle_category_item(cat_id, item_name, is_active)
+    def _on_category_checkbox_clicked(self, cat_id: str, item_name: str, value: bool):
+        """Handler für Checkbox-Klick (Kategorie-Editor, on_active)."""
+        self._toggle_category_item(cat_id, item_name, value)
     
     def _resolve_conflict(self, index: int, resolution: str):
         """Löst einen Konflikt auf."""
@@ -1077,7 +1059,17 @@ class SettingAssistentWizard:
     def _update_description(self, instance, value):
         self.draft.description = value[:200]
     
+    def _nav_debounce_check(self) -> bool:
+        """Prüft ob ein Navigations-Event zu schnell hintereinander kommt (Android Touch-Bounce)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_nav_time') and (now - self._last_nav_time) < 0.5:
+            return False
+        self._last_nav_time = now
+        return True
+
     def _next_step(self, *args):
+        if not self._nav_debounce_check():
+            return
         if self.current_step == 1:
             validation = self._validate_basic_settings()
             if not validation["is_valid"]:
@@ -1123,11 +1115,15 @@ class SettingAssistentWizard:
             self.draft.setting_data = merged_data.setting_data
     
     def _previous_step(self, *args):
+        if not self._nav_debounce_check():
+            return
         self.current_step -= 1
         self.draft.current_step = self.current_step
         self._show_current_step()
     
     def _cancel_wizard(self, *args):
+        if not self._nav_debounce_check():
+            return
         if self.dialog:
             self.dialog.dismiss()
         Logger.info("Setting-Assistent Wizard abgebrochen")
@@ -1142,6 +1138,8 @@ class SettingAssistentWizard:
     
     def _finish_wizard(self, *args):
         """Schließt den Wizard ab und speichert das Setting."""
+        if not self._nav_debounce_check():
+            return
         validation = self._validate_draft()
         if not validation["is_valid"]:
             self._show_error("\n".join(validation["errors"]))
