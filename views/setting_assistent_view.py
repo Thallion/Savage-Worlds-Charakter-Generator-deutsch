@@ -149,48 +149,76 @@ class SettingAssistentWizard:
         content = step['handler']()
         
         if _mobile:
-            nav_height = dp(48)
+            nav_height = dp(40)
+            nav_spacing = dp(4)
         else:
             nav_height = "50dp"
+            nav_spacing = "12dp"
         nav_layout = MDBoxLayout(
             orientation="horizontal",
-            spacing="8dp",
+            spacing=nav_spacing,
             size_hint_y=None,
             height=nav_height
         )
         
         if self.current_step > 1:
-            back_btn = MDButton(style="text", on_release=self._previous_step, size_hint_x=None, width="48dp")
+            back_btn = MDButton(style="text", on_release=self._previous_step, size_hint_x=None, width=dp(40))
             back_btn.add_widget(MDButtonIcon(icon="arrow-left"))
             nav_layout.add_widget(back_btn)
         
-        cancel_btn = MDButton(style="text", on_release=self._cancel_wizard)
-        cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
+        if _mobile:
+            cancel_btn = MDButton(style="text", on_release=self._cancel_wizard, size_hint_x=None, width=dp(40))
+            cancel_btn.add_widget(MDButtonIcon(icon="close"))
+        else:
+            cancel_btn = MDButton(style="text", on_release=self._cancel_wizard, size_hint_x=None, width=dp(80))
+            cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
         nav_layout.add_widget(cancel_btn)
         
-        save_draft_btn = MDButton(style="text", on_release=self._save_draft_only)
-        save_draft_btn.add_widget(MDButtonText(text="Entwurf"))
+        if _mobile:
+            save_draft_btn = MDButton(style="text", on_release=self._save_draft_only, size_hint_x=None, width=dp(40))
+            save_draft_btn.add_widget(MDButtonIcon(icon="content-save-outline"))
+        else:
+            save_draft_btn = MDButton(style="text", on_release=self._save_draft_only, size_hint_x=None, width=dp(100))
+            save_draft_btn.add_widget(MDButtonText(text="Entwurf speichern"))
         nav_layout.add_widget(save_draft_btn)
         
+        spacer = MDBoxLayout(size_hint_x=1)
+        nav_layout.add_widget(spacer)
+        
         is_last_step = self.current_step >= self._get_total_steps()
-        next_btn = MDButton(style="text", on_release=self._finish_wizard if is_last_step else self._next_step, size_hint_x=None, width="48dp")
-        next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
+        if _mobile:
+            next_icon = "check" if is_last_step else "arrow-right"
+            next_btn = MDButton(style="text", on_release=self._finish_wizard if is_last_step else self._next_step, size_hint_x=None, width=dp(40))
+            next_btn.add_widget(MDButtonIcon(icon=next_icon))
+        else:
+            next_btn = MDButton(style="text", on_release=self._finish_wizard if is_last_step else self._next_step, size_hint_x=None, width=dp(80))
+            next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
+            next_btn.add_widget(MDButtonText(text="Speichern" if is_last_step else "Weiter"))
         nav_layout.add_widget(next_btn)
         
         if _mobile:
-            main_layout_height = dp(500)
+            main_layout_height = dp(380)
+            main_layout_spacing = dp(4)
         else:
             main_layout_height = "750dp"
-        main_layout = MDBoxLayout(orientation="vertical", spacing="8dp", size_hint_y=None, height=main_layout_height)
+            main_layout_spacing = "12dp"
+        main_layout = MDBoxLayout(orientation="vertical", spacing=main_layout_spacing, size_hint_y=None, height=main_layout_height)
         
-        progress_text = f"Schritt {self.current_step} von {self._get_total_steps()}"
+        if _mobile:
+            progress_text = f"Schritt {self.current_step}/{self._get_total_steps()}"
+        else:
+            progress_text = f"Schritt {self.current_step} von {self._get_total_steps()}"
         if self.edit_draft:
             progress_text += " (Bearbeiten)"
+        if _mobile:
+            progress_height = dp(20)
+        else:
+            progress_height = "30dp"
         progress_label = MDLabel(
             text=progress_text,
             theme_text_color="Secondary",
             size_hint_y=None,
-            height="30dp"
+            height=progress_height
         )
         main_layout.add_widget(progress_label)
         main_layout.add_widget(content)
@@ -210,22 +238,54 @@ class SettingAssistentWizard:
     
     def _create_step_name(self):
         """Schritt 1: Name & Beschreibung"""
-        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="500dp")
+        if _mobile:
+            bar_width = dp(8)
+            bar_margin = dp(8)
+            content_height = dp(180)
+            content_spacing = dp(4)
+        else:
+            bar_width = dp(12)
+            bar_margin = dp(12)
+            content_height = "500dp"
+            content_spacing = "16dp"
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
+        content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
         
-        name_label = MDLabel(text="Name des Settings *", theme_text_color="Primary", bold=True)
+        if _mobile:
+            name_label_text = "Name *"
+            name_height = dp(20)
+        else:
+            name_label_text = "Name des Settings *"
+            name_height = "24dp"
+        name_label = MDLabel(text=name_label_text, theme_text_color="Primary", bold=True, size_hint_y=None, height=name_height)
         content.add_widget(name_label)
         
-        self.name_field = MDTextField(mode="outlined", text=self.draft.name)
-        self.name_field.add_widget(MDTextFieldHintText(text="Name (max. 50 Zeichen)"))
+        if _mobile:
+            name_height_field = dp(48)
+            name_hint = "Name"
+        else:
+            name_height_field = "56dp"
+            name_hint = "Name (max. 50 Zeichen)"
+        self.name_field = MDTextField(mode="outlined", text=self.draft.name, size_hint_y=None, height=name_height_field)
+        self.name_field.add_widget(MDTextFieldHintText(text=name_hint))
         self.name_field.bind(text=self._update_name)
         content.add_widget(self.name_field)
         
-        desc_label = MDLabel(text="Beschreibung", theme_text_color="Primary", bold=True)
+        if _mobile:
+            desc_height = dp(20)
+        else:
+            desc_height = "24dp"
+        desc_label = MDLabel(text="Beschreibung", theme_text_color="Primary", bold=True, size_hint_y=None, height=desc_height)
         content.add_widget(desc_label)
         
-        self.desc_field = MDTextField(mode="outlined", text=self.draft.description, multiline=True, size_hint_y=None, height="150dp")
-        self.desc_field.add_widget(MDTextFieldHintText(text="Kurze Beschreibung (optional)"))
+        if _mobile:
+            desc_height_field = dp(60)
+            desc_hint = "Beschreibung"
+        else:
+            desc_height_field = "150dp"
+            desc_hint = "Kurze Beschreibung (optional)"
+        self.desc_field = MDTextField(mode="outlined", text=self.draft.description, multiline=True, size_hint_y=None, height=desc_height_field)
+        self.desc_field.add_widget(MDTextFieldHintText(text=desc_hint))
         self.desc_field.bind(text=self._update_description)
         content.add_widget(self.desc_field)
         
@@ -234,10 +294,24 @@ class SettingAssistentWizard:
     
     def _create_step_modus(self):
         """Schritt 2: Modus & Basis-Setting Auswahl"""
-        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="850dp")
+        if _mobile:
+            bar_width = dp(12)
+            bar_margin = dp(12)
+            content_height = dp(350)
+            content_spacing = dp(4)
+            mode_label_text = "Modus:"
+            mode_label_height = dp(20)
+        else:
+            bar_width = dp(12)
+            bar_margin = dp(12)
+            content_height = "850dp"
+            content_spacing = "16dp"
+            mode_label_text = "Modus wählen"
+            mode_label_height = "24dp"
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
+        content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
         
-        mode_label = MDLabel(text="Modus wählen", theme_text_color="Primary", bold=True)
+        mode_label = MDLabel(text=mode_label_text, theme_text_color="Primary", bold=True, size_hint_y=None, height=mode_label_height)
         content.add_widget(mode_label)
         
         self.mode_cards = {}
@@ -255,11 +329,17 @@ class SettingAssistentWizard:
     
     def _create_setting_selection_section(self, content):
         """Erstellt den Abschnitt für die Setting-Auswahl basierend auf dem Modus."""
+        if _mobile:
+            box_spacing = dp(4)
+            box_height = dp(150)
+        else:
+            box_spacing = "12dp"
+            box_height = "300dp"
         self.setting_selection_box = MDBoxLayout(
             orientation="vertical",
-            spacing="12dp",
+            spacing=box_spacing,
             size_hint_y=None,
-            height="300dp"
+            height=box_height
         )
         self._update_setting_selection_ui()
         content.add_widget(self.setting_selection_box)
@@ -271,43 +351,75 @@ class SettingAssistentWizard:
         mode = self.draft.mode
         
         if mode == "empty":
+            if _mobile:
+                info_text = "Keine Basiseinstellungen."
+                info_height = dp(30)
+                box_height = dp(30)
+            else:
+                info_text = "Keine Basiseinstellungen erforderlich."
+                info_height = "24dp"
+                box_height = "50dp"
             info = MDLabel(
-                text="Keine Basiseinstellungen erforderlich.",
-                theme_text_color="Secondary"
+                text=info_text,
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height=info_height
             )
             self.setting_selection_box.add_widget(info)
-            self.setting_selection_box.height = "50dp"
+            self.setting_selection_box.height = box_height
             return
         
         if mode == "template":
-            self.setting_selection_box.height = dp(200) if _mobile else "300dp"
-            label_text = "Basis-Setting:" if _mobile else "Basis-Setting wählen:"
-            label = MDLabel(text=label_text, bold=True)
+            self.setting_selection_box.height = dp(120) if _mobile else "300dp"
+            if _mobile:
+                label_text = "Basis:"
+                label_height = dp(20)
+            else:
+                label_text = "Basis-Setting wählen:"
+                label_height = "24dp"
+            label = MDLabel(text=label_text, bold=True, size_hint_y=None, height=label_height)
             self.setting_selection_box.add_widget(label)
             
             self.template_setting_dropdown = self._create_setting_dropdown()
             self.setting_selection_box.add_widget(self.template_setting_dropdown)
             
         elif mode == "merge":
-            self.setting_selection_box.height = dp(200) if _mobile else "300dp"
-            label_text = "Zusammenführen:" if _mobile else "Settings zum Zusammenführen wählen:"
-            label = MDLabel(text=label_text, bold=True)
+            self.setting_selection_box.height = dp(120) if _mobile else "300dp"
+            if _mobile:
+                label_text = "Merge:"
+                label_height = dp(20)
+            else:
+                label_text = "Settings zum Zusammenführen wählen:"
+                label_height = "24dp"
+            label = MDLabel(text=label_text, bold=True, size_hint_y=None, height=label_height)
             self.setting_selection_box.add_widget(label)
             
             self.merge_setting_list = self._create_merge_setting_list()
             self.setting_selection_box.add_widget(self.merge_setting_list)
         
         elif mode == "extract":
+            if _mobile:
+                info_text = "Aktuelles Setting als Basis."
+                info_height = dp(30)
+                box_height = dp(30)
+            else:
+                info_text = "Das aktuelle Setting wird als Basis verwendet."
+                info_height = "24dp"
+                box_height = "50dp"
             info = MDLabel(
-                text="Das aktuelle Setting wird als Basis verwendet.",
-                theme_text_color="Secondary"
+                text=info_text,
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height=info_height
             )
             self.setting_selection_box.add_widget(info)
-            self.setting_selection_box.height = "50dp"
+            self.setting_selection_box.height = box_height
     
     def _create_setting_dropdown(self) -> MDCard:
         """Erstellt eine Liste für die Template-Auswahl mit Checkboxen."""
-        card = MDCard(style="outlined", padding="12dp", size_hint_y=None, height="250dp")
+        card_height = dp(100) if _mobile else "250dp"
+        card_padding = dp(4) if _mobile else "12dp"
+        card = MDCard(style="outlined", padding=card_padding, size_hint_y=None, height=card_height)
         
         try:
             from models.charakter import Charakter
@@ -325,9 +437,10 @@ class SettingAssistentWizard:
         self.template_setting_checkboxes = {}
         for setting_name in available_settings:
             is_selected = setting_name in self.draft.base_settings
+            item_height = dp(36) if _mobile else dp(48)
             list_item = MDListItem(
                 size_hint_y=None,
-                height=dp(48)
+                height=item_height
             )
             list_item.add_widget(MDListItemHeadlineText(text=setting_name))
             checkbox = MDListItemTrailingCheckbox(
@@ -346,7 +459,9 @@ class SettingAssistentWizard:
     
     def _create_merge_setting_list(self) -> MDCard:
         """Erstellt eine Liste für die Merge-Auswahl mit Checkboxen."""
-        card = MDCard(style="outlined", padding="12dp", size_hint_y=None, height="250dp")
+        card_height = dp(100) if _mobile else "250dp"
+        card_padding = dp(4) if _mobile else "12dp"
+        card = MDCard(style="outlined", padding=card_padding, size_hint_y=None, height=card_height)
         
         try:
             from models.charakter import Charakter
@@ -363,7 +478,8 @@ class SettingAssistentWizard:
         
         for setting_name in available_settings:
             is_selected = setting_name in self.draft.base_settings
-            list_item = MDListItem()
+            item_height = dp(36) if _mobile else dp(48)
+            list_item = MDListItem(size_hint_y=None, height=item_height)
             list_item.add_widget(MDListItemHeadlineText(text=setting_name))
             checkbox = MDListItemTrailingCheckbox(
                 active=is_selected,
@@ -517,30 +633,61 @@ class SettingAssistentWizard:
     
     def _create_step_elemente(self):
         """Schritt 2: Elemente konfigurieren (Tab-basiert)"""
-        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content_height = dp(450) if _mobile else "680dp"
-        content = MDBoxLayout(orientation="vertical", spacing="8dp", size_hint_y=None, height=content_height)
+        if _mobile:
+            bar_width = dp(8)
+            bar_margin = dp(4)
+            content_height = dp(280)
+            content_spacing = dp(4)
+        else:
+            bar_width = dp(12)
+            bar_margin = dp(12)
+            content_height = "680dp"
+            content_spacing = "12dp"
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
+        content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
         
-        info_text = "Kategorien wählen" if _mobile else "Wähle die Kategorien und Elemente für dein Setting aus."
+        if _mobile:
+            info_text = "Kategorien:"
+            info_height = dp(20)
+        else:
+            info_text = "Wähle die Kategorien und Elemente für dein Setting aus."
+            info_height = "24dp"
         info_label = MDLabel(
             text=info_text,
-            theme_text_color="Secondary"
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=info_height
         )
         content.add_widget(info_label)
         
         stats = calculate_setting_statistics(self.draft.setting_data)
         stats_text = format_statistics_for_display(stats)
         
-        stats_height = dp(100) if _mobile else "180dp"
-        stats_card = MDCard(style="elevated", padding="8dp", size_hint_y=None, height=stats_height)
-        stats_content = MDLabel(text=stats_text, markup=True)
+        if _mobile:
+            stats_height = dp(60)
+            stats_padding = dp(4)
+            stats_font = "12sp"
+        else:
+            stats_height = "180dp"
+            stats_padding = "12dp"
+            stats_font = "14sp"
+        stats_card = MDCard(style="elevated", padding=stats_padding, size_hint_y=None, height=stats_height)
+        stats_content = MDLabel(text=stats_text, markup=True, font_size=stats_font)
         stats_card.add_widget(stats_content)
         content.add_widget(stats_card)
         
+        if _mobile:
+            tabs_text = "Kategorien:"
+            tabs_height = dp(20)
+        else:
+            tabs_text = "Verfügbare Kategorien (klicken für Details):"
+            tabs_height = "24dp"
         tabs_label = MDLabel(
-            text="Verfügbare Kategorien (klicken für Details):",
+            text=tabs_text,
             theme_text_color="Primary",
-            bold=True
+            bold=True,
+            size_hint_y=None,
+            height=tabs_height
         )
         content.add_widget(tabs_label)
         
@@ -661,17 +808,27 @@ class SettingAssistentWizard:
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
         
+        dialog_size = (0.95, 0.8) if _mobile else (0.9, 0.7)
         dialog = MDDialog(
-            MDDialogHeadlineText(text=f"{cat_name} bearbeiten"),
+            MDDialogHeadlineText(text=cat_name),
             MDDialogContentContainer(content),
-            size_hint=(0.9, 0.7),
+            size_hint=dialog_size,
         )
         
-        cancel_btn = MDButton(MDButtonText(text="Abbrechen"), style="text")
-        cancel_btn.bind(on_release=lambda x: dialog.dismiss())
-        
-        confirm_btn = MDButton(MDButtonText(text="Bestätigen"), style="filled")
-        confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
+        if _mobile:
+            cancel_btn = MDButton(style="text", size_hint_x=None, width=dp(40))
+            cancel_btn.add_widget(MDButtonIcon(icon="close"))
+            cancel_btn.bind(on_release=lambda x: dialog.dismiss())
+            
+            confirm_btn = MDButton(style="text", size_hint_x=None, width=dp(40))
+            confirm_btn.add_widget(MDButtonIcon(icon="check"))
+            confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
+        else:
+            cancel_btn = MDButton(MDButtonText(text="Abbrechen"), style="text")
+            cancel_btn.bind(on_release=lambda x: dialog.dismiss())
+            
+            confirm_btn = MDButton(MDButtonText(text="Bestätigen"), style="filled")
+            confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
         
         dialog.add_widget(cancel_btn)
         dialog.add_widget(confirm_btn)
@@ -715,48 +872,84 @@ class SettingAssistentWizard:
     
     def _create_step_vorschau(self):
         """Schritt 4: Vorschau & Speichern"""
-        layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content = MDBoxLayout(orientation="vertical", spacing="16dp", size_hint_y=None, height="680dp")
+        if _mobile:
+            bar_width = dp(8)
+            bar_margin = dp(4)
+            content_height = dp(280)
+            content_spacing = dp(4)
+        else:
+            bar_width = dp(12)
+            bar_margin = dp(12)
+            content_height = "680dp"
+            content_spacing = "16dp"
+        layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
+        content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
         
-        preview_card = MDCard(style="elevated", padding="16dp", size_hint_y=None, height="400dp")
+        if _mobile:
+            preview_height = dp(200)
+            preview_padding = dp(8)
+            preview_spacing = dp(4)
+            name_height = dp(24)
+            mode_height = dp(20)
+        else:
+            preview_height = "400dp"
+            preview_padding = "16dp"
+            preview_spacing = "8dp"
+            name_height = "30dp"
+            mode_height = "24dp"
+        preview_card = MDCard(style="elevated", padding=preview_padding, size_hint_y=None, height=preview_height)
         
-        preview_content = MDBoxLayout(orientation="vertical", spacing="8dp")
+        preview_content = MDBoxLayout(orientation="vertical", spacing=preview_spacing)
         
-        name_label = MDLabel(text=f"[b]{self.draft.name}[/b]", markup=True, size_hint_y=None, height="30dp")
+        name_label = MDLabel(text=f"[b]{self.draft.name or 'Unbenannt'}[/b]", markup=True, size_hint_y=None, height=name_height)
         preview_content.add_widget(name_label)
         
-        if self.draft.description:
-            desc_label = MDLabel(text=f"[i]{self.draft.description}[/i]", markup=True, theme_text_color="Secondary")
-            preview_content.add_widget(desc_label)
-        
+        mode_text = self.MODES.get(self.draft.mode, {}).get('label', self.draft.mode)
         mode_label = MDLabel(
-            text=f"Modus: {self.MODES.get(self.draft.mode, {}).get('label', self.draft.mode)}",
-            theme_text_color="Secondary"
+            text=f"Modus: {mode_text}",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=mode_height
         )
         preview_content.add_widget(mode_label)
         
-        if self.draft.base_settings:
+        if not _mobile and self.draft.description:
+            desc_label = MDLabel(text=f"[i]{self.draft.description}[/i]", markup=True, theme_text_color="Secondary")
+            preview_content.add_widget(desc_label)
+        
+        if not _mobile and self.draft.base_settings:
             bases = ", ".join(self.draft.base_settings)
             bases_label = MDLabel(text=f"Basierend auf: {bases}", theme_text_color="Secondary")
             preview_content.add_widget(bases_label)
         
-        preview_content.add_widget(MDDivider())
-        
-        stats = calculate_setting_statistics(self.draft.setting_data)
-        stats_text = format_statistics_for_display(stats)
-        stats_label = MDLabel(text=stats_text, markup=True)
-        preview_content.add_widget(stats_label)
+        if not _mobile:
+            preview_content.add_widget(MDDivider())
+            stats = calculate_setting_statistics(self.draft.setting_data)
+            stats_text = format_statistics_for_display(stats)
+            stats_label = MDLabel(text=stats_text, markup=True)
+            preview_content.add_widget(stats_label)
         
         preview_card.add_widget(preview_content)
         content.add_widget(preview_card)
         
         validation = self._validate_draft()
         if not validation["is_valid"]:
-            error_card = MDCard(style="elevated", padding="12dp", md_bg_color=(1, 0, 0, 0.1))
+            if _mobile:
+                error_padding = dp(8)
+                error_height = dp(60)
+                error_font = "12sp"
+                error_text = ", ".join(validation["errors"])
+            else:
+                error_padding = "12dp"
+                error_height = "100dp"
+                error_font = "14sp"
+                error_text = "\n".join(validation["errors"])
+            error_card = MDCard(style="elevated", padding=error_padding, md_bg_color=(1, 0, 0, 0.1), size_hint_y=None, height=error_height)
             error_content = MDLabel(
-                text="[color=ff4444]Fehler:[/color] " + "\n".join(validation["errors"]),
+                text="[color=ff4444]Fehler:[/color] " + error_text,
                 markup=True,
-                theme_text_color="Error"
+                theme_text_color="Error",
+                font_size=error_font
             )
             error_card.add_widget(error_content)
             content.add_widget(error_card)
