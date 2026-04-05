@@ -14,6 +14,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.metrics import dp
 from kivy.properties import StringProperty, DictProperty, ListProperty, ObjectProperty
+from kivy.utils import platform as kivy_platform
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
@@ -45,7 +46,20 @@ from functions.setting_merge import (
 )
 from utils.path_utils import get_application_root
 
-Builder.load_file(os.path.join(os.path.dirname(__file__), 'setting_assistent_view.kv'))
+def _is_mobile_layout():
+    """Prüft ob Mobile-Layout verwendet werden soll."""
+    if kivy_platform in ('android', 'ios'):
+        return True
+    try:
+        from services.service_container import service_container
+        config = service_container.get_config_service()
+        return config.get('force_mobile_layout', False)
+    except Exception:
+        return False
+
+_mobile = _is_mobile_layout()
+_kv_name = 'setting_assistent_view_mobile.kv' if _mobile else 'setting_assistent_view.kv'
+Builder.load_file(os.path.join(os.path.dirname(__file__), _kv_name))
 
 
 class SettingAssistentWizard:
@@ -54,12 +68,21 @@ class SettingAssistentWizard:
     Verwaltet den mehrstufigen Prozess.
     """
     
-    MODES = {
+    MODES_DESKTOP = {
         "empty": {"label": "Leer starten", "icon": "file-outline", "description": "Komplett leeres Setting erstellen"},
         "template": {"label": "Vorlage verwenden", "icon": "file-document-outline", "description": "Auf bestehendem Setting aufbauen"},
         "merge": {"label": "Zusammenführen", "icon": "merge", "description": "Mehrere Settings kombinieren"},
         "extract": {"label": "Aus Charakter", "icon": "account-outline", "description": "Aus aktuellem Charakter extrahieren"}
     }
+    
+    MODES_MOBILE = {
+        "empty": {"label": "Leer", "icon": "file-outline", "description": "Neues Setting"},
+        "template": {"label": "Vorlage", "icon": "file-document-outline", "description": "Auf bestehendem Setting"},
+        "merge": {"label": "Zusammenführen", "icon": "merge", "description": "Mehrere kombinieren"},
+        "extract": {"label": "Charakter", "icon": "account-outline", "description": "Aus Charakter"}
+    }
+    
+    MODES = MODES_MOBILE if _mobile else MODES_DESKTOP
     
     def __init__(self, controller, callback: Optional[Callable] = None, edit_draft: Optional[SettingDraft] = None):
         self.controller = controller
@@ -79,12 +102,20 @@ class SettingAssistentWizard:
                 current_step=1
             )
         
-        self.steps = [
-            {"title": "Name & Beschreibung", "handler": self._create_step_name},
-            {"title": "Modus & Basis", "handler": self._create_step_modus},
-            {"title": "Elemente konfigurieren", "handler": self._create_step_elemente},
-            {"title": "Vorschau & Speichern", "handler": self._create_step_vorschau}
-        ]
+        if _mobile:
+            self.steps = [
+                {"Title": "Name", "handler": self._create_step_name},
+                {"Title": "Modus", "handler": self._create_step_modus},
+                {"Title": "Elemente", "handler": self._create_step_elemente},
+                {"Title": "Vorschau", "handler": self._create_step_vorschau}
+            ]
+        else:
+            self.steps = [
+                {"Title": "Name & Beschreibung", "handler": self._create_step_name},
+                {"Title": "Modus & Basis", "handler": self._create_step_modus},
+                {"Title": "Elemente konfigurieren", "handler": self._create_step_elemente},
+                {"Title": "Vorschau & Speichern", "handler": self._create_step_vorschau}
+            ]
     
     def _get_total_steps(self) -> int:
         """Berechnet die Gesamtanzahl der Schritte basierend auf dem Modus."""
@@ -110,18 +141,22 @@ class SettingAssistentWizard:
             return
         
         step = self.steps[step_index]
-        Logger.info(f"Zeige Wizard-Schritt {self.current_step}: {step['title']}")
+        Logger.info(f"Zeige Wizard-Schritt {self.current_step}: {step['Title']}")
         
         if self.dialog:
             self.dialog.dismiss()
         
         content = step['handler']()
         
+        if _mobile:
+            nav_height = dp(48)
+        else:
+            nav_height = "50dp"
         nav_layout = MDBoxLayout(
             orientation="horizontal",
             spacing="8dp",
             size_hint_y=None,
-            height="50dp"
+            height=nav_height
         )
         
         if self.current_step > 1:
@@ -142,7 +177,11 @@ class SettingAssistentWizard:
         next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
         nav_layout.add_widget(next_btn)
         
-        main_layout = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="750dp")
+        if _mobile:
+            main_layout_height = dp(500)
+        else:
+            main_layout_height = "750dp"
+        main_layout = MDBoxLayout(orientation="vertical", spacing="8dp", size_hint_y=None, height=main_layout_height)
         
         progress_text = f"Schritt {self.current_step} von {self._get_total_steps()}"
         if self.edit_draft:
@@ -160,10 +199,11 @@ class SettingAssistentWizard:
         
         title = "Setting erstellen" if not self.edit_draft else f"Setting bearbeiten: {self.edit_draft.name}"
         
+        dialog_size_hint = (0.95, 0.95) if _mobile else (0.9, 0.9)
         self.dialog = MDDialog(
             MDDialogHeadlineText(text=title),
             MDDialogContentContainer(main_layout),
-            size_hint=(0.9, 0.9),
+            size_hint=dialog_size_hint,
             auto_dismiss=False,
         )
         self.dialog.open()
@@ -240,16 +280,18 @@ class SettingAssistentWizard:
             return
         
         if mode == "template":
-            self.setting_selection_box.height = "300dp"
-            label = MDLabel(text="Basis-Setting wählen:", bold=True)
+            self.setting_selection_box.height = dp(200) if _mobile else "300dp"
+            label_text = "Basis-Setting:" if _mobile else "Basis-Setting wählen:"
+            label = MDLabel(text=label_text, bold=True)
             self.setting_selection_box.add_widget(label)
             
             self.template_setting_dropdown = self._create_setting_dropdown()
             self.setting_selection_box.add_widget(self.template_setting_dropdown)
             
         elif mode == "merge":
-            self.setting_selection_box.height = "300dp"
-            label = MDLabel(text="Settings zum Zusammenführen wählen:", bold=True)
+            self.setting_selection_box.height = dp(200) if _mobile else "300dp"
+            label_text = "Zusammenführen:" if _mobile else "Settings zum Zusammenführen wählen:"
+            label = MDLabel(text=label_text, bold=True)
             self.setting_selection_box.add_widget(label)
             
             self.merge_setting_list = self._create_merge_setting_list()
@@ -382,40 +424,67 @@ class SettingAssistentWizard:
     
     def _create_mode_card(self, mode_id: str, mode_info: dict) -> tuple:
         """Erstellt eine Mode-Auswahlkarte. Gibt (card, checkbox) zurück."""
+        if _mobile:
+            card_height = dp(56)
+            card_padding = dp(8)
+        else:
+            card_height = "90dp"
+            card_padding = "12dp"
+        
         card = MDCard(
             style="elevated",
-            padding="12dp",
+            padding=card_padding,
             size_hint_y=None,
-            height="90dp",
+            height=card_height,
             on_release=lambda x: self._select_mode(mode_id)
         )
         
         is_selected = self.draft.mode == mode_id
         
-        card_content = MDBoxLayout(orientation="vertical", spacing="4dp")
-        
-        header = MDBoxLayout(orientation="horizontal", size_hint_y=None, height="28dp")
-        
-        title = MDLabel(
-            text=mode_info["label"],
-            bold=True,
-            size_hint_x=1,
-            halign="left"
-        )
-        header.add_widget(title)
-        
-        checkbox = MDListItemTrailingCheckbox(active=is_selected, size_hint_x=None, width="40dp")
-        checkbox.disabled = True
-        header.add_widget(checkbox)
-        
-        card_content.add_widget(header)
-        
-        desc = MDLabel(
-            text=mode_info["description"],
-            theme_text_color="Secondary",
-            font_style="Body"
-        )
-        card_content.add_widget(desc)
+        if _mobile:
+            card_content = MDBoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=1)
+            
+            icon_btn = MDButton(style="tonal", size_hint_x=None, width=dp(40), height=dp(40))
+            icon_btn.add_widget(MDButtonIcon(icon=mode_info["icon"]))
+            card_content.add_widget(icon_btn)
+            
+            title = MDLabel(
+                text=mode_info["label"],
+                bold=True,
+                size_hint_x=1,
+                halign="left",
+                valign="center"
+            )
+            card_content.add_widget(title)
+            
+            checkbox = MDListItemTrailingCheckbox(active=is_selected, size_hint_x=None, width=dp(40))
+            checkbox.disabled = True
+            card_content.add_widget(checkbox)
+        else:
+            card_content = MDBoxLayout(orientation="vertical", spacing="4dp")
+            
+            header = MDBoxLayout(orientation="horizontal", size_hint_y=None, height="28dp")
+            
+            title = MDLabel(
+                text=mode_info["label"],
+                bold=True,
+                size_hint_x=1,
+                halign="left"
+            )
+            header.add_widget(title)
+            
+            checkbox = MDListItemTrailingCheckbox(active=is_selected, size_hint_x=None, width="40dp")
+            checkbox.disabled = True
+            header.add_widget(checkbox)
+            
+            card_content.add_widget(header)
+            
+            desc = MDLabel(
+                text=mode_info["description"],
+                theme_text_color="Secondary",
+                font_style="Body"
+            )
+            card_content.add_widget(desc)
         
         card.add_widget(card_content)
         
@@ -449,10 +518,12 @@ class SettingAssistentWizard:
     def _create_step_elemente(self):
         """Schritt 2: Elemente konfigurieren (Tab-basiert)"""
         layout = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(12))
-        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="680dp")
+        content_height = dp(450) if _mobile else "680dp"
+        content = MDBoxLayout(orientation="vertical", spacing="8dp", size_hint_y=None, height=content_height)
         
+        info_text = "Kategorien wählen" if _mobile else "Wähle die Kategorien und Elemente für dein Setting aus."
         info_label = MDLabel(
-            text="Wähle die Kategorien und Elemente für dein Setting aus.",
+            text=info_text,
             theme_text_color="Secondary"
         )
         content.add_widget(info_label)
@@ -460,7 +531,8 @@ class SettingAssistentWizard:
         stats = calculate_setting_statistics(self.draft.setting_data)
         stats_text = format_statistics_for_display(stats)
         
-        stats_card = MDCard(style="elevated", padding="12dp", size_hint_y=None, height="180dp")
+        stats_height = dp(100) if _mobile else "180dp"
+        stats_card = MDCard(style="elevated", padding="8dp", size_hint_y=None, height=stats_height)
         stats_content = MDLabel(text=stats_text, markup=True)
         stats_card.add_widget(stats_content)
         content.add_widget(stats_card)
@@ -490,17 +562,21 @@ class SettingAssistentWizard:
     
     def _create_category_card(self, cat_id: str, cat_name: str, cat_icon: str, stats: dict) -> MDCard:
         """Erstellt eine Kategorie-Karte für Schritt 2."""
+        card_height = dp(48) if _mobile else "70dp"
+        card_padding = dp(8) if _mobile else "12dp"
+        icon_size = dp(36) if _mobile else "48dp"
+        
         card = MDCard(
             style="elevated",
-            padding="12dp",
+            padding=card_padding,
             size_hint_y=None,
-            height="70dp",
+            height=card_height,
             on_release=lambda x: self._open_category_editor(cat_id, cat_name)
         )
         
-        card_content = MDBoxLayout(orientation="horizontal", spacing="12dp")
+        card_content = MDBoxLayout(orientation="horizontal", spacing="8dp")
         
-        icon_btn = MDButton(style="tonal", size_hint_x=None, width="48dp", height="48dp")
+        icon_btn = MDButton(style="tonal", size_hint_x=None, width=icon_size, height=icon_size)
         icon_btn.add_widget(MDButtonIcon(icon=cat_icon))
         card_content.add_widget(icon_btn)
         
