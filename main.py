@@ -54,11 +54,15 @@ from utils.path_utils import get_application_root
 import os
 from views.charakter_verwaltung_widget import CharakterVerwaltungWidget
 
-# Wizard-Bar KV laden
-_wizard_bar_kv = os.path.join(get_application_root(), 'views', 'wizard_bar.kv')
+# Wizard-Bar KV laden (Mobile oder Desktop)
+from utils.platform_utils import get_kv_filename as _get_kv_filename
+_wizard_bar_kv_name = _get_kv_filename('wizard_bar')
+_wizard_bar_kv = os.path.join(get_application_root(), 'views', _wizard_bar_kv_name)
+if not os.path.exists(_wizard_bar_kv):
+    _wizard_bar_kv = os.path.join(get_application_root(), 'views', 'wizard_bar.kv')
 if os.path.exists(_wizard_bar_kv):
     Builder.load_file(_wizard_bar_kv)
-    Logger.info(f"wizard_bar.kv geladen")
+    Logger.info(f"{os.path.basename(_wizard_bar_kv)} geladen")
 from views.einstellungen_widget import EinstellungenWidget
 from views.historie_view import HistorieWidget
 from views.voelker_view import VoelkerWidget

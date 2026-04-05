@@ -14,6 +14,9 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from kivymd.uix.scrollview import MDScrollView
 from kivy.metrics import dp
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
 
 
 class WizardBar(MDBoxLayout):
@@ -107,7 +110,12 @@ class WizardBar(MDBoxLayout):
         """Aktualisiert das Schritt-Label."""
         step_label = self.ids.get('step_label')
         if step_label:
-            step_label.text = f"Schritt {self.wizard_service.aktueller_schritt_index + 1}/{len(self.wizard_service.schritte)}: {schritt.title}"
+            idx = self.wizard_service.aktueller_schritt_index + 1
+            total = len(self.wizard_service.schritte)
+            if _mobile:
+                step_label.text = f"{idx}/{total}: {schritt.title}"
+            else:
+                step_label.text = f"Schritt {idx}/{total}: {schritt.title}"
     
     def _update_progress(self):
         """Aktualisiert die Fortschrittsleiste."""

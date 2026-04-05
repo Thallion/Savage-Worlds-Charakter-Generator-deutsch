@@ -6,6 +6,7 @@ Moderner, benutzerfreundlicher Charakter-Generator für das Savage Worlds Rollen
 
 ### 🎯 Kern-Funktionalitäten
 - **Vollständige Charaktererstellung** nach Savage Worlds Regeln
+- **Geführte Tutorials & Assistenten** für neue Benutzer
 - **Interaktive Benutzeroberfläche** mit Material Design
 - **PDF-Export** für professionelle Charakterbögen
 - **Speichern/Laden** von Charakteren im JSON-Format
@@ -18,6 +19,13 @@ Moderner, benutzerfreundlicher Charakter-Generator für das Savage Worlds Rollen
 - **Intuitive Navigation** mit Tab-System (Desktop) und Bottom-Navigation (Mobile)
 - **Non-blocking Snackbar-Benachrichtigungen** für Statusmeldungen
 - **Real-time Validation** bei Eingaben
+
+### 🧙‍♂️ Tutorials & Assistenten
+- **Willkommens-Tutorial** mit Spotlight-Funktion für neue Benutzer
+- **Tab-spezifische Hilfen** mit kontextbezogenen Tipps für jeden Bereich
+- **Setting-Assistent** für die Erstellung und Bearbeitung eigener Settings
+- **Template-Wizard** für die benutzerfreundliche Charakter-Vorlagen-Erstellung
+- **Charaktererstellungs-Assistent** für geführte Schritt-für-Schritt-Erstellung
 
 ### 🔧 Technische Features
 - **Automatische Punkteverteilung** mit Regelvalidierung
@@ -92,14 +100,39 @@ pip install python-dateutil>=2.8.0
 
 ## 🎮 Verwendung
 
+### Willkommens-Tutorial (für Einsteiger)
+Beim ersten Start der App wird automatisch ein geführtes Tutorial angezeigt:
+- **Übersicht** der wichtigsten Funktionen und Navigation
+- **Spotlight-Highlights** zeigen wichtige UI-Bereiche
+- **Schritt-für-Schritt-Anleitung** für die erste Charaktererstellung
+- **Tab-spezifische Hilfen** können jederzeit über das Fragezeichen-Symbol aufgerufen werden
+
+Das Tutorial kann in den **Einstellungen** jederzeit erneut gestartet werden.
+
 ### Ersten Charakter erstellen
-1. **Profil**: Name, Alter, Geschlecht und Konzept eingeben
-2. **Volk**: Gewünschtes Volk auswählen (Menschen, Elfen, Zwerge, etc.)
-3. **Attribute**: Fünf Punkte auf Attribute verteilen
-4. **Fertigkeiten**: 15 Punkte auf Fertigkeiten verteilen  
-5. **Handicaps**: Optional Handicaps für zusätzliche Punkte wählen
-6. **Talente**: Talente mit erworbenen Punkten auswählen
-7. **Ausrüstung**: Waffen, Rüstung und Gegenstände auswählen
+**Empfohlene Reihenfolge (auch im Tutorial gezeigt):**
+1. **Setting wählen**: Zuerst ein Spielsetting auswählen (bestimmt verfügbare Völker, Talente, etc.)
+2. **Neuer Charakter**: Über "Speichern/Laden" → "Neuer Charakter"
+3. **Volk**: Gewünschtes Volk auswählen (Menschen, Elfen, Zwerge, etc.)
+4. **Profil**: Name, Alter, Geschlecht und Konzept eingeben
+5. **Eigenschaften**: Attribut- und Fertigkeitspunkte verteilen
+6. **Handicaps**: Optional Handicaps für Bonuspunkte wählen
+7. **Talente**: Talente mit erworbenen Punkten auswählen
+8. **Mächte/Superkräfte**: Bei entsprechenden Talenten verfügbar
+9. **Ausrüstung**: Waffen, Rüstung und Gegenstände kaufen
+10. **Charakterbogen**: Finalen Charakter prüfen und als PDF exportieren
+
+### Assistenten verwenden
+
+**Setting-Assistent** (für fortgeschrittene Benutzer):
+- Über Einstellungen zugänglich
+- 4-Schritt-Wizard zum Erstellen eigener Settings
+- Merge-Funktion zum Kombinieren bestehender Settings
+
+**Template-Wizard**:
+- Erstellt Charakter-Vorlagen aus fertigen Charakteren  
+- Mehrstufiger Dialog für detaillierte Template-Konfiguration
+- Templates können später für automatische Charaktererstellung verwendet werden
 
 ### Charaktere verwalten
 - **Speichern**: `Datei > Speichern` oder `Strg+S`

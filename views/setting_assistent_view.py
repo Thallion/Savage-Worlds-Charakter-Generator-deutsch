@@ -20,7 +20,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
-from kivymd.uix.label import MDLabel
+from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText, MDListItemTrailingCheckbox
 from views.ui_components import TextFieldScrollView
 from kivymd.uix.card import MDCard
@@ -197,11 +197,13 @@ class SettingAssistentWizard:
         nav_layout.add_widget(next_btn)
         
         if _mobile:
-            main_layout_height = dp(380)
-            main_layout_spacing = dp(4)
+            main_layout_spacing = dp(6)
+            # Dynamische Höhe: Fensterhöhe * 0.95 (Dialog) - Headline(~dp(56)) - Padding(~dp(24))
+            from kivy.core.window import Window
+            main_layout_height = Window.height * 0.95 - dp(80)
         else:
-            main_layout_height = "750dp"
             main_layout_spacing = "12dp"
+            main_layout_height = "750dp"
         main_layout = MDBoxLayout(orientation="vertical", spacing=main_layout_spacing, size_hint_y=None, height=main_layout_height)
         
         if _mobile:
@@ -559,11 +561,18 @@ class SettingAssistentWizard:
         
         if _mobile:
             card_content = MDBoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=1)
-            
-            icon_btn = MDButton(style="tonal", size_hint_x=None, width=dp(40), height=dp(40))
-            icon_btn.add_widget(MDButtonIcon(icon=mode_info["icon"]))
-            card_content.add_widget(icon_btn)
-            
+
+            # Nicht-interaktives Icon damit Touch zur Karte durchgeht
+            icon_label = MDIcon(
+                icon=mode_info["icon"],
+                size_hint_x=None,
+                width=dp(32),
+                halign="center",
+                valign="center",
+                theme_text_color="Primary"
+            )
+            card_content.add_widget(icon_label)
+
             title = MDLabel(
                 text=mode_info["label"],
                 bold=True,
@@ -572,7 +581,7 @@ class SettingAssistentWizard:
                 valign="center"
             )
             card_content.add_widget(title)
-            
+
             checkbox = MDListItemTrailingCheckbox(active=is_selected, size_hint_x=None, width=dp(40))
             checkbox.disabled = True
             card_content.add_widget(checkbox)
@@ -636,8 +645,8 @@ class SettingAssistentWizard:
         if _mobile:
             bar_width = dp(8)
             bar_margin = dp(4)
-            content_height = dp(280)
-            content_spacing = dp(4)
+            content_height = dp(550)
+            content_spacing = dp(6)
         else:
             bar_width = dp(12)
             bar_margin = dp(12)
@@ -645,51 +654,41 @@ class SettingAssistentWizard:
             content_spacing = "12dp"
         layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
         content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
-        
-        if _mobile:
-            info_text = "Kategorien:"
-            info_height = dp(20)
-        else:
-            info_text = "Wähle die Kategorien und Elemente für dein Setting aus."
-            info_height = "24dp"
-        info_label = MDLabel(
-            text=info_text,
-            theme_text_color="Secondary",
-            size_hint_y=None,
-            height=info_height
-        )
-        content.add_widget(info_label)
-        
+
         stats = calculate_setting_statistics(self.draft.setting_data)
         stats_text = format_statistics_for_display(stats)
-        
+
         if _mobile:
-            stats_height = dp(60)
-            stats_padding = dp(4)
-            stats_font = "12sp"
+            # Höhe dynamisch: ~dp(16) pro Statistik-Zeile + Padding
+            num_lines = len(stats) if stats else 1
+            stats_height = dp(12 + num_lines * 16)
+            stats_padding = dp(6)
+            stats_font = "11sp"
         else:
             stats_height = "180dp"
             stats_padding = "12dp"
             stats_font = "14sp"
+            info_label = MDLabel(
+                text="Wähle die Kategorien und Elemente für dein Setting aus.",
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height="24dp"
+            )
+            content.add_widget(info_label)
         stats_card = MDCard(style="elevated", padding=stats_padding, size_hint_y=None, height=stats_height)
         stats_content = MDLabel(text=stats_text, markup=True, font_size=stats_font)
         stats_card.add_widget(stats_content)
         content.add_widget(stats_card)
-        
-        if _mobile:
-            tabs_text = "Kategorien:"
-            tabs_height = dp(20)
-        else:
-            tabs_text = "Verfügbare Kategorien (klicken für Details):"
-            tabs_height = "24dp"
-        tabs_label = MDLabel(
-            text=tabs_text,
-            theme_text_color="Primary",
-            bold=True,
-            size_hint_y=None,
-            height=tabs_height
-        )
-        content.add_widget(tabs_label)
+
+        if not _mobile:
+            tabs_label = MDLabel(
+                text="Verfügbare Kategorien (klicken für Details):",
+                theme_text_color="Primary",
+                bold=True,
+                size_hint_y=None,
+                height="24dp"
+            )
+            content.add_widget(tabs_label)
         
         categories = [
             ("voelker", "Völker", "account-group"),
@@ -709,10 +708,17 @@ class SettingAssistentWizard:
     
     def _create_category_card(self, cat_id: str, cat_name: str, cat_icon: str, stats: dict) -> MDCard:
         """Erstellt eine Kategorie-Karte für Schritt 2."""
-        card_height = dp(48) if _mobile else "70dp"
-        card_padding = dp(8) if _mobile else "12dp"
-        icon_size = dp(36) if _mobile else "48dp"
-        
+        if _mobile:
+            card_height = dp(56)
+            card_padding = [dp(6), dp(4), dp(6), dp(4)]
+            icon_size = dp(28)
+            card_spacing = dp(6)
+        else:
+            card_height = "70dp"
+            card_padding = "12dp"
+            icon_size = "48dp"
+            card_spacing = "8dp"
+
         card = MDCard(
             style="elevated",
             padding=card_padding,
@@ -720,46 +726,87 @@ class SettingAssistentWizard:
             height=card_height,
             on_release=lambda x: self._open_category_editor(cat_id, cat_name)
         )
-        
-        card_content = MDBoxLayout(orientation="horizontal", spacing="8dp")
-        
-        icon_btn = MDButton(style="tonal", size_hint_x=None, width=icon_size, height=icon_size)
-        icon_btn.add_widget(MDButtonIcon(icon=cat_icon))
-        card_content.add_widget(icon_btn)
-        
+
+        card_content = MDBoxLayout(orientation="horizontal", spacing=card_spacing)
+
+        if _mobile:
+            # Nicht-interaktives Icon (MDLabel) statt MDButton, damit Touch zur Karte durchgeht
+            icon_label = MDIcon(
+                icon=cat_icon,
+                size_hint_x=None,
+                width=icon_size,
+                halign="center",
+                valign="center",
+                theme_text_color="Primary"
+            )
+            card_content.add_widget(icon_label)
+        else:
+            icon_btn = MDButton(style="tonal", size_hint_x=None, width=icon_size, height=icon_size)
+            icon_btn.add_widget(MDButtonIcon(icon=cat_icon))
+            card_content.add_widget(icon_btn)
+
         info_layout = MDBoxLayout(orientation="vertical", size_hint_x=1)
-        
-        title = MDLabel(text=cat_name, bold=True, size_hint_y=None, height="24dp")
-        info_layout.add_widget(title)
-        
+
         gesamt = stats.get("gesamt", 0)
         aktiv = stats.get("aktiv", 0)
         inaktiv = stats.get("inaktiv", 0)
-        
-        if gesamt > 0:
+
+        if _mobile:
+            title = MDLabel(text=cat_name, bold=True, size_hint_y=None, height=dp(20), font_style="Body", role="medium")
+            info_layout.add_widget(title)
+
+            if gesamt > 0:
+                detail_text = f"{aktiv}/{gesamt} aktiv"
+            else:
+                detail_text = "Keine"
             detail = MDLabel(
-                text=f"{aktiv} aktiv / {inaktiv} inaktiv / {gesamt} gesamt",
+                text=detail_text,
                 theme_text_color="Secondary",
                 size_hint_y=None,
-                height="20dp"
+                height=dp(16),
+                font_style="Body",
+                role="small"
             )
+            info_layout.add_widget(detail)
         else:
-            detail = MDLabel(
-                text="Keine Elemente",
-                theme_text_color="Secondary",
-                size_hint_y=None,
-                height="20dp"
-            )
-        info_layout.add_widget(detail)
-        
+            title = MDLabel(text=cat_name, bold=True, size_hint_y=None, height="24dp")
+            info_layout.add_widget(title)
+
+            if gesamt > 0:
+                detail = MDLabel(
+                    text=f"{aktiv} aktiv / {inaktiv} inaktiv / {gesamt} gesamt",
+                    theme_text_color="Secondary",
+                    size_hint_y=None,
+                    height="20dp"
+                )
+            else:
+                detail = MDLabel(
+                    text="Keine Elemente",
+                    theme_text_color="Secondary",
+                    size_hint_y=None,
+                    height="20dp"
+                )
+            info_layout.add_widget(detail)
+
         card_content.add_widget(info_layout)
-        
-        arrow = MDButton(style="text", size_hint_x=None, width="40dp")
-        arrow.add_widget(MDButtonIcon(icon="chevron-right"))
-        card_content.add_widget(arrow)
-        
+
+        if _mobile:
+            # Nicht-interaktiver Pfeil (MDIcon) statt MDButton
+            arrow_icon = MDIcon(
+                icon="chevron-right",
+                size_hint_x=None,
+                width=dp(24),
+                halign="center",
+                theme_text_color="Secondary"
+            )
+            card_content.add_widget(arrow_icon)
+        else:
+            arrow = MDButton(style="text", size_hint_x=None, width="40dp")
+            arrow.add_widget(MDButtonIcon(icon="chevron-right"))
+            card_content.add_widget(arrow)
+
         card.add_widget(card_content)
-        
+
         return card
     
     def _open_category_editor(self, cat_id: str, cat_name: str):
@@ -770,69 +817,81 @@ class SettingAssistentWizard:
     def _show_category_dialog(self, cat_id: str, cat_name: str):
         """Zeigt einen Dialog zum Bearbeiten einer Kategorie."""
         category_data = self.draft.setting_data.get(cat_id, {})
-        
+
         if cat_id == "fertigkeiten" and not category_data:
             category_data = self.draft.setting_data.get("fertigkeiten_daten", {})
-        
+
         if isinstance(category_data, dict):
             items = list(category_data.keys())
         elif isinstance(category_data, list):
             items = category_data
         else:
             items = []
-        
-        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="500dp")
-        
+
+        if _mobile:
+            content_height = dp(350)
+            content_spacing = dp(4)
+            item_height = dp(40)
+            max_items = 100
+        else:
+            content_height = "500dp"
+            content_spacing = "12dp"
+            item_height = dp(48)
+            max_items = 50
+
+        content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
+
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
-        
-        for item_name in items[:50]:
+
+        for item_name in items[:max_items]:
             list_item = MDListItem(
                 size_hint_y=None,
-                height=dp(48)
+                height=item_height
             )
             list_item.add_widget(MDListItemHeadlineText(text=str(item_name)))
-            
+
             is_active = True
             if isinstance(category_data, dict) and isinstance(category_data.get(item_name), dict):
                 is_active = category_data.get(item_name, {}).get("aktiv", True)
-            
+
             checkbox = MDListItemTrailingCheckbox(
                 active=is_active,
             )
             checkbox.bind(on_release=lambda inst, cb=checkbox, item=item_name, cid=cat_id: self._on_category_checkbox_clicked(cid, item, cb))
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
-        
-        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(8))
+
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(8) if _mobile else dp(12), bar_margin=dp(4) if _mobile else dp(8))
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
-        
-        dialog_size = (0.95, 0.8) if _mobile else (0.9, 0.7)
-        dialog = MDDialog(
-            MDDialogHeadlineText(text=cat_name),
-            MDDialogContentContainer(content),
-            size_hint=dialog_size,
-        )
-        
+
+        dialog_size = (0.95, 0.85) if _mobile else (0.9, 0.7)
+
+        btn_container = MDDialogButtonContainer()
+
         if _mobile:
             cancel_btn = MDButton(style="text", size_hint_x=None, width=dp(40))
             cancel_btn.add_widget(MDButtonIcon(icon="close"))
-            cancel_btn.bind(on_release=lambda x: dialog.dismiss())
-            
+
             confirm_btn = MDButton(style="text", size_hint_x=None, width=dp(40))
             confirm_btn.add_widget(MDButtonIcon(icon="check"))
-            confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
         else:
             cancel_btn = MDButton(MDButtonText(text="Abbrechen"), style="text")
-            cancel_btn.bind(on_release=lambda x: dialog.dismiss())
-            
             confirm_btn = MDButton(MDButtonText(text="Bestätigen"), style="filled")
-            confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
-        
-        dialog.add_widget(cancel_btn)
-        dialog.add_widget(confirm_btn)
-        
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=cat_name),
+            MDDialogContentContainer(content),
+            btn_container,
+            size_hint=dialog_size,
+        )
+
+        cancel_btn.bind(on_release=lambda x: dialog.dismiss())
+        confirm_btn.bind(on_release=lambda x: self._on_category_confirm(dialog))
+        btn_container.add_widget(cancel_btn)
+        btn_container.add_widget(confirm_btn)
+
         dialog.open()
     
     def _on_category_confirm(self, dialog):
@@ -875,8 +934,8 @@ class SettingAssistentWizard:
         if _mobile:
             bar_width = dp(8)
             bar_margin = dp(4)
-            content_height = dp(280)
-            content_spacing = dp(4)
+            content_height = dp(350)
+            content_spacing = dp(6)
         else:
             bar_width = dp(12)
             bar_margin = dp(12)
@@ -885,50 +944,85 @@ class SettingAssistentWizard:
         layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
         content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
         
+        stats = calculate_setting_statistics(self.draft.setting_data)
+        stats_text = format_statistics_for_display(stats)
+
         if _mobile:
-            preview_height = dp(200)
+            # Kompakte Vorschau: Name, Modus, ggf. Basis, Divider, Stats + Padding
+            num_stats = len(stats) if stats else 0
+            preview_height = dp(70 + num_stats * 18)
+            if self.draft.base_settings:
+                preview_height += dp(20)
             preview_padding = dp(8)
             preview_spacing = dp(4)
-            name_height = dp(24)
-            mode_height = dp(20)
         else:
             preview_height = "400dp"
             preview_padding = "16dp"
             preview_spacing = "8dp"
-            name_height = "30dp"
-            mode_height = "24dp"
         preview_card = MDCard(style="elevated", padding=preview_padding, size_hint_y=None, height=preview_height)
-        
+
         preview_content = MDBoxLayout(orientation="vertical", spacing=preview_spacing)
-        
-        name_label = MDLabel(text=f"[b]{self.draft.name or 'Unbenannt'}[/b]", markup=True, size_hint_y=None, height=name_height)
-        preview_content.add_widget(name_label)
-        
-        mode_text = self.MODES.get(self.draft.mode, {}).get('label', self.draft.mode)
-        mode_label = MDLabel(
-            text=f"Modus: {mode_text}",
-            theme_text_color="Secondary",
-            size_hint_y=None,
-            height=mode_height
-        )
-        preview_content.add_widget(mode_label)
-        
-        if not _mobile and self.draft.description:
-            desc_label = MDLabel(text=f"[i]{self.draft.description}[/i]", markup=True, theme_text_color="Secondary")
-            preview_content.add_widget(desc_label)
-        
-        if not _mobile and self.draft.base_settings:
-            bases = ", ".join(self.draft.base_settings)
-            bases_label = MDLabel(text=f"Basierend auf: {bases}", theme_text_color="Secondary")
-            preview_content.add_widget(bases_label)
-        
-        if not _mobile:
+
+        if _mobile:
+            name_label = MDLabel(
+                text=f"[b]{self.draft.name or 'Unbenannt'}[/b]",
+                markup=True, size_hint_y=None, height=dp(22),
+                font_style="Body", role="large"
+            )
+            preview_content.add_widget(name_label)
+
+            mode_text = self.MODES.get(self.draft.mode, {}).get('label', self.draft.mode)
+            mode_label = MDLabel(
+                text=f"Modus: {mode_text}",
+                theme_text_color="Secondary",
+                size_hint_y=None, height=dp(18),
+                font_style="Body", role="small"
+            )
+            preview_content.add_widget(mode_label)
+
+            if self.draft.base_settings:
+                bases = ", ".join(self.draft.base_settings)
+                bases_label = MDLabel(
+                    text=f"Basis: {bases}",
+                    theme_text_color="Secondary",
+                    size_hint_y=None, height=dp(18),
+                    font_style="Body", role="small"
+                )
+                preview_content.add_widget(bases_label)
+
             preview_content.add_widget(MDDivider())
-            stats = calculate_setting_statistics(self.draft.setting_data)
-            stats_text = format_statistics_for_display(stats)
+            stats_label = MDLabel(
+                text=stats_text, markup=True,
+                size_hint_y=None, height=dp(num_stats * 18),
+                font_size="11sp"
+            )
+            preview_content.add_widget(stats_label)
+        else:
+            name_label = MDLabel(text=f"[b]{self.draft.name or 'Unbenannt'}[/b]", markup=True, size_hint_y=None, height="30dp")
+            preview_content.add_widget(name_label)
+
+            mode_text = self.MODES.get(self.draft.mode, {}).get('label', self.draft.mode)
+            mode_label = MDLabel(
+                text=f"Modus: {mode_text}",
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height="24dp"
+            )
+            preview_content.add_widget(mode_label)
+
+            if self.draft.description:
+                desc_label = MDLabel(text=f"[i]{self.draft.description}[/i]", markup=True, theme_text_color="Secondary")
+                preview_content.add_widget(desc_label)
+
+            if self.draft.base_settings:
+                bases = ", ".join(self.draft.base_settings)
+                bases_label = MDLabel(text=f"Basierend auf: {bases}", theme_text_color="Secondary")
+                preview_content.add_widget(bases_label)
+
+            preview_content.add_widget(MDDivider())
             stats_label = MDLabel(text=stats_text, markup=True)
             preview_content.add_widget(stats_label)
-        
+
         preview_card.add_widget(preview_content)
         content.add_widget(preview_card)
         
@@ -1119,26 +1213,35 @@ class SettingAssistentDialogHandler:
         """Zeigt eine Übersicht aller Drafts."""
         manager = DraftManager()
         drafts = manager.list_drafts()
-        
+
         if not drafts:
             self._show_no_drafts_message()
             return
-        
-        content = MDBoxLayout(orientation="vertical", spacing="12dp", size_hint_y=None, height="400dp")
-        
+
+        if _mobile:
+            content_height = dp(300)
+            content_spacing = dp(4)
+            dialog_size = (0.95, 0.7)
+        else:
+            content_height = "400dp"
+            content_spacing = "12dp"
+            dialog_size = (0.9, 0.7)
+
+        content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
+
         scroll = TextFieldScrollView(size_hint_y=1)
         list_container = MDList(size_hint_y=None)
         list_container.bind(minimum_height=list_container.setter('height'))
-        
+
         for draft in drafts:
             list_item = MDListItem(
                 on_release=lambda x, d=draft: self._open_draft(d)
             )
             list_item.add_widget(MDListItemHeadlineText(text=draft.name))
-            
+
             info_text = f"{draft.mode} • Schritt {draft.current_step}"
             list_item.add_widget(MDListItemSupportingText(text=info_text))
-            
+
             delete_btn = MDButton(
                 style="text",
                 size_hint_x=None,
@@ -1147,20 +1250,25 @@ class SettingAssistentDialogHandler:
             )
             delete_btn.add_widget(MDButtonIcon(icon="delete"))
             list_item.add_widget(delete_btn)
-            
+
             list_container.add_widget(list_item)
-        
+
         scroll.add_widget(list_container)
         content.add_widget(scroll)
-        
+
+        if _mobile:
+            close_btn = MDButton(style="text", size_hint_x=None, width=dp(40))
+            close_btn.add_widget(MDButtonIcon(icon="close"))
+        else:
+            close_btn = MDButton(MDButtonText(text="Schließen"), style="text")
+
         dialog = MDDialog(
-            MDDialogHeadlineText(text="Gespeicherte Entwürfe"),
+            MDDialogHeadlineText(text="Entwürfe" if _mobile else "Gespeicherte Entwürfe"),
             MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(MDButtonText(text="Schließen"), style="text", on_release=lambda x: dialog.dismiss())
-            ),
-            size_hint=(0.9, 0.7),
+            MDDialogButtonContainer(close_btn),
+            size_hint=dialog_size,
         )
+        close_btn.bind(on_release=lambda x: dialog.dismiss())
         dialog.open()
     
     def _show_no_drafts_message(self):

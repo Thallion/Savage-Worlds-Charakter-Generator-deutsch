@@ -1,0 +1,57 @@
+# views/wizard_bar_mobile.kv
+# Smartphone-optimiertes Layout für Wizard-Bar
+
+<WizardBar>:
+    height: dp(44)
+    spacing: dp(4)
+    padding: [dp(4), dp(2), dp(4), dp(2)]
+
+    MDLinearProgressIndicator:
+        id: progress
+        pos_hint: {'top': 1}
+        value: 0
+
+    MDLabel:
+        id: step_label
+        text: ""
+        theme_text_color: "Primary"
+        size_hint_x: 1
+        font_style: "Body"
+        role: "small"
+        pos_hint: {'center_y': 0.5}
+
+    MDButton:
+        style: "text"
+        on_release: root.on_help_pressed()
+        size_hint_x: None
+        width: dp(36)
+
+        MDButtonIcon:
+            icon: "help-circle-outline"
+
+    MDButton:
+        style: "text"
+        on_release: root.on_cancel_pressed()
+        size_hint_x: None
+        width: dp(36)
+
+        MDButtonIcon:
+            icon: "close"
+
+    MDButton:
+        style: "text"
+        on_release: root.on_prev_pressed()
+        size_hint_x: None
+        width: dp(36)
+
+        MDButtonIcon:
+            icon: "arrow-left"
+
+    MDButton:
+        style: "tonal"
+        on_release: root.on_next_pressed()
+        size_hint_x: None
+        width: dp(36)
+
+        MDButtonIcon:
+            icon: "arrow-right"

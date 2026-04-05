@@ -56,7 +56,8 @@ main.kv                    # Root Kivy layout
 │   ├── schild.py          # Shields
 │   ├── ausruestung.py     # Equipment base
 │   ├── wuerfel.py         # Dice mechanics
-│   └── settingregeln.py   # Setting-specific rules
+│   ├── settingregeln.py   # Setting-specific rules
+│   └── setting_draft.py   # Setting draft model for setting assistant
 │
 ├── views/                 # UI components (Kivy widgets + .kv layouts)
 │   ├── screens.py         # Screen class definitions
@@ -65,8 +66,11 @@ main.kv                    # Root Kivy layout
 │   ├── *_view_mobile.kv   # Smartphone-optimized layouts (loaded on Android/mobile)
 │   ├── *_popup.py/.kv     # Modal dialogs (11 popups: talent, handicap, macht, etc.)
 │   ├── setting_wechsel_overlay.py  # Slide-in overlay for setting switching
+│   ├── setting_assistent_view.py   # Setting creation/editing assistant
+│   ├── template_wizard.py          # Template creation wizard
+│   ├── tutorial_overlay.py         # Tutorial spotlight overlay
+│   ├── wizard_bar.py              # Wizard progress bar
 │   ├── superkraefte_view.py  # Super powers widget
-│   ├── template_wizard.py    # Template wizard
 │   ├── charakter_verwaltung_widget.py/.kv  # Character management widget
 │   ├── pointbar_view.py   # Generation points progress bar
 │   ├── historie_view.py   # Change history widget
@@ -85,6 +89,8 @@ main.kv                    # Root Kivy layout
 │   ├── config_service.py        # App configuration
 │   ├── theme_service.py         # Theme management
 │   ├── event_service.py         # Event/signal bus
+│   ├── tutorial_service.py      # Tutorial management & state
+│   ├── wizard_service.py        # Character creation wizard
 │   ├── file_manager_service.py  # File I/O
 │   ├── pdf_service.py           # PDF export
 │   ├── dialog_service.py        # Dialog management
@@ -109,6 +115,7 @@ main.kv                    # Root Kivy layout
 │   ├── eigenschaften_funktionen.py  # Attribute functions
 │   ├── abgeleitete_werte.py    # Derived value calculations
 │   ├── setting_funktionen.py   # Setting-specific logic
+│   ├── setting_merge.py        # Setting merge and conflict resolution
 │   ├── character_advancement.py # Advancement rules
 │   ├── statblock_generator.py  # Stat block generation
 │   ├── cyberware_funktionen.py  # Cyberware mechanics (SciFi)
@@ -116,6 +123,7 @@ main.kv                    # Root Kivy layout
 │
 ├── config/                # Configuration files (JSON)
 │   ├── app_config.json          # App settings (theme, window, auto-save)
+│   ├── tutorial_config.json     # Tutorial content and configuration
 │   ├── eigenschaften_config.json # Attribute system config
 │   ├── handicap_config.json     # Handicap cost config
 │   ├── talent_config.json       # Talent system config
@@ -189,6 +197,65 @@ The app uses `MDTabsPrimary` with 11 tabs: Einstellungen (Settings), Voelker (Ra
 - **MDSnackbar** (via `dialog_service.show_snackbar()`) for non-blocking info/warnings. `show_success_dialog()` and `show_warning_dialog()` are implemented as snackbar calls. `show_error_dialog()` remains a modal dialog.
 - **Slide-in Overlay** for setting switching (`setting_wechsel_overlay.py`), replacing the previous MDDialog approach for a smoother UX.
 - When adding new user-facing warnings (e.g., "not enough points"), use `dialog_service.show_warning_dialog()` — do not just use `Logger.warning()`.
+
+## Tutorial & Wizard Systems
+
+### Tutorial Service (`services/tutorial_service.py`)
+Manages guided user introduction and contextual help:
+- **Welcome Tutorial**: Multi-step introduction with spotlight highlighting
+- **Tab-specific Hints**: Contextual help for each UI section
+- **Tutorial State**: Tracks which tutorials have been shown
+- **Configuration**: Loads from `config/tutorial_config.json`
+
+Key features:
+- `show_welcome_tutorial()` - displays initial guided tour
+- `show_tab_hint(tab_id)` - shows contextual help for specific tabs
+- `mark_tutorial_completed()` - tracks tutorial completion state
+- `is_tutorial_shown()` - checks if specific tutorial was already shown
+
+### Tutorial Overlay (`views/tutorial_overlay.py`)
+Interactive tutorial overlay with spotlight functionality:
+- **SpotlightOverlay**: Semi-transparent overlay with cutout highlighting
+- **Tutorial Cards**: Context-aware help cards with navigation
+- **Interactive Elements**: Next/Previous/Skip functionality
+- **Responsive Layout**: Adapts to desktop/mobile layouts
+
+### Character Creation Wizard (`services/wizard_service.py`)
+Step-by-step guided character creation:
+- **WizardSchritt**: Individual wizard step with validation
+- **WizardService**: Event-driven wizard state management
+- **Step Validation**: Each step can validate character state
+- **Progress Tracking**: Visual progress indication via `wizard_bar.py`
+
+Wizard steps include:
+1. Setting selection
+2. Race selection  
+3. Profile setup
+4. Attribute distribution
+5. Skill allocation
+6. Handicap selection
+7. Talent selection
+8. Equipment purchase
+
+### Setting Assistant (`views/setting_assistent_view.py`)
+Multi-step wizard for creating and editing game settings:
+- **4-Step Process**: Basic info → Element configuration → Conflict resolution → Preview
+- **Merge Functionality**: Combine multiple existing settings
+- **Conflict Resolution**: Handle overlapping elements when merging
+- **Draft Management**: Save/restore work in progress via `models/setting_draft.py`
+
+### Template Wizard (`views/template_wizard.py`)
+Guided creation of character templates:
+- **Multi-step Dialog**: Captures template metadata and configuration
+- **Character Analysis**: Analyzes current character for template creation
+- **Validation**: Ensures template completeness and validity
+- **JSON Export**: Saves templates in standardized format
+
+### Integration Points
+- **ServiceContainer**: All tutorial/wizard services are dependency-injected
+- **Event System**: Wizard progress triggers UI updates via event service
+- **Configuration**: Tutorial content and wizard steps are configurable via JSON
+- **Mobile Optimization**: All wizards adapt to mobile layouts automatically
 
 ## Code Conventions
 
@@ -319,3 +386,6 @@ Build specs: `savage_worlds_generator.spec` (Windows), `savage_worlds_generator_
 11. **Superkräfte system**: Super powers (Superkräfte) with dedicated models, views, and functions. The Superkräfte Kompendium provides specialized super hero character creation.
 12. **MDDialog size_hint**: All MDDialog instances must use `size_hint=(0.85, None)` (or similar constrained values) to prevent full-screen popups on Android. Never use the default `(1, 1)`.
 13. **Snackbar for feedback**: Use `dialog_service.show_warning_dialog()` / `show_success_dialog()` for non-blocking user feedback (these internally use MDSnackbar). Reserve `show_error_dialog()` for errors requiring user acknowledgment.
+14. **Tutorial System**: Tutorial content is defined in `config/tutorial_config.json`. When adding new UI features, consider adding corresponding tutorial hints. The tutorial service manages display state automatically.
+15. **Wizard Integration**: Multi-step processes should use the wizard service pattern for consistent UX. Each wizard step should have proper validation and clear navigation.
+16. **Setting Assistant**: For advanced setting modification, use the setting assistant rather than direct JSON editing. The assistant handles validation and conflict resolution automatically.
