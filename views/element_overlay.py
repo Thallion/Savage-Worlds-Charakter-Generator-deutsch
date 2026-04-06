@@ -26,6 +26,9 @@ from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.textfield import MDTextField, MDTextFieldLeadingIcon, MDTextFieldHintText
 
 from views.ui_components import TextFieldScrollView
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
 
 
 class ElementListContent(MDBoxLayout):
@@ -68,13 +71,17 @@ class ElementListContent(MDBoxLayout):
         scroll = MDScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
-            bar_width=dp(15),
-            bar_margin=dp(12),
+            bar_width=dp(20) if _mobile else dp(15),
+            bar_margin=dp(8) if _mobile else dp(12),
         )
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
         self._list = MDList(
             size_hint_y=None,
         )
         self._list.bind(minimum_height=self._list.setter("height"))
+        if _mobile:
+            self._list.padding = [0, 0, dp(32), 0]
         scroll.add_widget(self._list)
         self.add_widget(scroll)
 

@@ -136,20 +136,49 @@ class VoelkerWidget(MDBoxLayout):
             if volk_name and zusatzelemente:
                 charakter = self.controller.charakter
 
+                # Initialize volk_auswahlen entry if needed
+                if volk_name not in self.voelker_auswahlen:
+                    self.voelker_auswahlen[volk_name] = {}
+
+                # Freies Talent (all types)
+                if zusatzelemente.get('freies_talent'):
+                    talent = zusatzelemente['freies_talent']
+                    waehle_freies_talent(charakter, volk_name, talent)
+                    self.voelker_auswahlen[volk_name]['talent'] = talent
+
+                # Halbelf Talent
                 if zusatzelemente.get('halbelf_talent'):
-                    waehle_halbelf_talent(charakter, volk_name, zusatzelemente['halbelf_talent'])
-                elif zusatzelemente.get('halbelf_attribut'):
+                    talent = zusatzelemente['halbelf_talent']
+                    waehle_halbelf_talent(charakter, volk_name, talent)
+                    self.voelker_auswahlen[volk_name]['halbelf_wahl'] = f'Talent: {talent}'
+
+                # Halbelf Attribut
+                if zusatzelemente.get('halbelf_attribut'):
                     waehle_halbelf_attribut(charakter, volk_name)
-                elif zusatzelemente.get('mensch_talent'):
-                    waehle_mensch_talent(charakter, volk_name, zusatzelemente['mensch_talent'])
-                elif zusatzelemente.get('mensch_fertigkeitspunkte'):
+                    self.voelker_auswahlen[volk_name]['halbelf_wahl'] = 'Geschicklichkeit W6'
+
+                # Mensch Talent
+                if zusatzelemente.get('mensch_talent'):
+                    talent = zusatzelemente['mensch_talent']
+                    waehle_mensch_talent(charakter, volk_name, talent)
+                    self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = f"Talent: {talent}"
+
+                # Mensch Fertigkeitspunkte
+                if zusatzelemente.get('mensch_fertigkeitspunkte'):
                     waehle_mensch_fertigkeitspunkte(charakter, volk_name)
-                elif zusatzelemente.get('freies_talent'):
-                    waehle_freies_talent(charakter, volk_name, zusatzelemente['freies_talent'])
-                elif zusatzelemente.get('freies_attribut'):
-                    waehle_freies_attribut(charakter, volk_name, zusatzelemente['freies_attribut'])
-                elif zusatzelemente.get('freie_fertigkeit'):
-                    waehle_freie_fertigkeit(charakter, volk_name, zusatzelemente['freie_fertigkeit'])
+                    self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = '+2 Fertigkeitspunkte'
+
+                # Freies Attribut
+                if zusatzelemente.get('freies_attribut'):
+                    attr = zusatzelemente['freies_attribut']
+                    waehle_freies_attribut(charakter, volk_name, attr)
+                    self.voelker_auswahlen[volk_name]['attribut'] = attr
+
+                # Freie Fertigkeit
+                if zusatzelemente.get('freie_fertigkeit'):
+                    fert = zusatzelemente['freie_fertigkeit']
+                    waehle_freie_fertigkeit(charakter, volk_name, fert)
+                    self.voelker_auswahlen[volk_name]['fertigkeit'] = fert
 
                 # UI aktualisieren nach Zusatzelemente-Anwendung
                 Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
@@ -550,118 +579,67 @@ class VoelkerWidget(MDBoxLayout):
             self.ids.selected_volk_container.add_widget(placeholder)
 
     def _update_zusatzelemente(self):
-        """Zeigt Info über getroffene Zusatzelemente-Auswahl an.
-        Die Auswahl selbst findet im VoelkerAuswahlOverlay (Phase 2) statt."""
-        zusatzelemente_container = self.ids.zusatzelemente_container
-        zusatzelemente_container.clear_widgets()
-
+        """Zeigt die ausgewählten Zusatzelemente an (aus voelker_auswahlen)."""
+        container = self.ids.get('zusatzelemente_container')
+        if not container:
+            return
+        
+        container.clear_widgets()
+        
         if not self.selected_volk_name:
             return
-
-        charakter = self.controller.charakter
-        zusatzelemente = get_volk_zusatzelemente(charakter, self.selected_volk_name)
-
-        # Prüfe ob es überhaupt Zusatzelemente gibt
-        hat_extras = (
-            zusatzelemente.get('halbelf_entweder_oder', False) or
-            zusatzelemente.get('menschen_vielseitig', False) or
-            zusatzelemente.get('freie_talente', False) or
-            zusatzelemente.get('freie_attribute', False) or
-            zusatzelemente.get('freie_fertigkeiten', False)
-        )
-
-        if not hat_extras:
+        
+        wahl = self.voelker_auswahlen.get(self.selected_volk_name, {})
+        
+        # Collect all selections for this volk
+        selections = []
+        
+        # Talent
+        if wahl.get('talent'):
+            selections.append(('Freies Talent', wahl['talent']))
+        
+        # Halbelf Wahl
+        if wahl.get('halbelf_wahl'):
+            selections.append(('Halbelf Wahl', wahl['halbelf_wahl']))
+        
+        # Vielseitig Wahl (Mensch)
+        if wahl.get('vielseitig_wahl'):
+            selections.append(('Vielseitig Wahl', wahl['vielseitig_wahl']))
+        
+        # Attribut
+        if wahl.get('attribut'):
+            selections.append(('Freies Attribut', wahl['attribut']))
+        
+        # Fertigkeit
+        if wahl.get('fertigkeit'):
+            selections.append(('Freie Fertigkeit', wahl['fertigkeit']))
+        
+        if not selections:
             return
-
-        # Getroffene Auswahlen sammeln
-        auswahlen = self.voelker_auswahlen.get(self.selected_volk_name, {})
-        auswahl_texte = []
-
-        if auswahlen.get('halbelf_wahl'):
-            auswahl_texte.append(f"Erbe: {auswahlen['halbelf_wahl']}")
-        if auswahlen.get('vielseitig_wahl'):
-            auswahl_texte.append(f"Vielseitig: {auswahlen['vielseitig_wahl']}")
-        if auswahlen.get('talent'):
-            auswahl_texte.append(f"Freies Talent: {auswahlen['talent']}")
-        if auswahlen.get('attribut'):
-            auswahl_texte.append(f"Freies Attribut: {auswahlen['attribut']}")
-        if auswahlen.get('fertigkeit'):
-            auswahl_texte.append(f"Freie Fertigkeit: {auswahlen['fertigkeit']}")
-
-        # Kompaktere Werte für Mobile
-        _pad = dp(10) if _mobile else dp(14)
-        _spacing = dp(6) if _mobile else dp(10)
-
-        # Info-Card erstellen
+        
+        # Create display for selections
         from kivymd.uix.chip import MDChip, MDChipText
-
-        info_card = MDCard(
-            size_hint_x=1,
-            size_hint_y=None,
-            padding=_pad,
-            elevation=3,
-            radius=[12],
-            md_bg_color=self.theme_cls.surfaceContainerHighColor,
-            style="elevated",
-        )
-        info_card.bind(minimum_height=info_card.setter('height'))
-
-        card_content = MDBoxLayout(
-            orientation='vertical',
-            size_hint_y=None,
-            spacing=_spacing,
-        )
-        card_content.bind(minimum_height=card_content.setter('height'))
-
-        # Titel
-        card_content.add_widget(MDLabel(
-            text="Volk-Optionen:",
-            font_style="Body",
-            theme_text_color="Primary",
-            size_hint_y=None,
-            height=dp(24) if _mobile else dp(30),
-            halign='left',
-            bold=True,
-        ))
-
-        if auswahl_texte:
-            for text in auswahl_texte:
-                chip = MDChip(
-                    MDChipText(text=text),
-                    type="filter",
-                    active=True,
-                    md_bg_color=self.theme_cls.primaryContainerColor,
-                    size_hint_y=None,
-                    height=dp(36),
-                )
-                card_content.add_widget(chip)
-        else:
-            card_content.add_widget(MDLabel(
-                text="Noch keine Optionen gewählt",
+        
+        for label, value in selections:
+            row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(36), spacing=dp(8))
+            label_widget = MDLabel(
+                text=f"{label}:",
+                size_hint_x=None,
+                width=dp(120),
                 theme_text_color="Secondary",
-                font_style="Body",
-                size_hint_y=None,
-                height=dp(24),
-            ))
-
-        # Ändern-Button → öffnet erneut das Overlay
-        from kivymd.uix.button import MDIconButton
-        aendern_row = MDBoxLayout(
-            orientation='horizontal',
-            size_hint_y=None,
-            height=dp(36),
-        )
-        aendern_row.add_widget(MDBoxLayout(size_hint_x=1))
-        aendern_btn = MDButton(
-            style="text",
-            on_release=lambda x: self.open_volk_dropdown(),
-        )
-        aendern_btn.add_widget(MDButtonText(text="Ändern"))
-        aendern_row.add_widget(aendern_btn)
-        card_content.add_widget(aendern_row)
-
-        info_card.add_widget(card_content)
-        zusatzelemente_container.add_widget(info_card)
+                halign='left',
+            )
+            row.add_widget(label_widget)
+            
+            chip = MDChip(
+                MDChipText(text=value),
+                type="filter",
+                active=True,
+                md_bg_color=self.theme_cls.primaryContainerColor,
+            )
+            row.add_widget(chip)
+            
+            container.add_widget(row)
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
         """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.
@@ -1181,17 +1159,56 @@ class VoelkerWidget(MDBoxLayout):
         )
         selected_volk_container.add_widget(title_label)
         
+        # Effekte-Sektion (Attribute, Fertigkeiten, Robustheit, Bewegungsweite etc.)
+        effects = getattr(volk_obj, 'effects', {})
+        effekt_zeilen = self._build_effekt_zeilen(effects)
+        if effekt_zeilen:
+            effekt_label = MDLabel(
+                text="Effekte:",
+                font_style="Body",
+                theme_text_color="Primary",
+                size_hint_y=None,
+                height=dp(28),
+                halign='left',
+                valign='center',
+                bold=True
+            )
+            selected_volk_container.add_widget(effekt_label)
+
+            effekt_text = "\n\n".join([f"• {z}" for z in effekt_zeilen])
+            effekt_content = MDLabel(
+                text=effekt_text,
+                font_style="Body",
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height=dp(40),
+                halign='left',
+                valign='top',
+                markup=True
+            )
+
+            def _update_effekt_height(label, *args):
+                if label.width > 0:
+                    label.text_size = (label.width - dp(10), None)
+                    label.texture_update()
+                    label.height = max(dp(30), label.texture_size[1] + dp(10))
+
+            effekt_content.bind(
+                width=lambda inst, w: Clock.schedule_once(lambda dt: _update_effekt_height(inst), 0)
+            )
+            selected_volk_container.add_widget(effekt_content)
+
         # Details strukturiert anzeigen - KORRIGIERT: Direkter Zugriff auf Objekt-Attribute
         detail_sections = [
             ('Handicaps', getattr(volk_obj, 'handicaps', [])),
             ('Besonderheiten', getattr(volk_obj, 'besonderheiten', [])),
             ('Talente', getattr(volk_obj, 'talente', [])),
         ]
-        
+
         # Beschreibung nur hinzufügen, wenn sie existiert
         if hasattr(volk_obj, 'beschreibung'):
             detail_sections.append(('Beschreibung', getattr(volk_obj, 'beschreibung', '')))
-        
+
         for section_title, content in detail_sections:
             if self._has_valid_content(content):
                 # Sektion-Titel mit reduzierter Schriftgröße
@@ -1282,6 +1299,66 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Formatieren des Inhalts: {e}")
             return "Fehler beim Anzeigen der Details"
+
+    def _build_effekt_zeilen(self, effects):
+        """Baut eine Liste lesbarer Zeilen aus dem Volk-Effects-Dictionary."""
+        zeilen = []
+        if not effects:
+            return zeilen
+
+        # Attribut-Boni / -Mali
+        for attr_name, bonus in effects.get('attribute_bonuses', {}).items():
+            if bonus > 0:
+                zeilen.append(f"{attr_name} +{bonus} (W{4 + bonus})")
+            elif bonus < 0:
+                zeilen.append(f"{attr_name} {bonus:+d}")
+
+        # Fertigkeits-Startboni
+        for fert_name, bonus in effects.get('fertigkeits_startboni', {}).items():
+            if bonus > 0:
+                zeilen.append(f"{fert_name} +{bonus} (W{4 + bonus})")
+            elif bonus == 0:
+                zeilen.append(f"{fert_name} W4")
+
+        # Robustheit
+        rob = effects.get('robustheit_bonus', 0)
+        if rob != 0:
+            zeilen.append(f"Robustheit {rob:+d}")
+
+        # Bewegungsweite
+        bew = effects.get('bewegungsweite_bonus', 0)
+        if bew != 0:
+            zeilen.append(f"Bewegungsweite {bew:+d}")
+
+        # Auto-Talente
+        for talent in effects.get('auto_talente', []):
+            zeilen.append(f"Talent: {talent}")
+
+        # Auto-Handicaps
+        for handicap in effects.get('auto_handicaps', []):
+            zeilen.append(f"Handicap: {handicap}")
+
+        # Spezielle Effekte
+        spezial = effects.get('spezielle_effekte', {})
+        if isinstance(spezial, dict):
+            for key, val in spezial.items():
+                if val:
+                    zeilen.append(key.replace('_', ' ').capitalize())
+        elif isinstance(spezial, list):
+            for item in spezial:
+                if isinstance(item, dict):
+                    zeilen.append(item.get('typ', '').replace('_', ' ').capitalize())
+                else:
+                    zeilen.append(str(item))
+
+        # Wahlmöglichkeiten
+        wahl = effects.get('wahlmoeglichkeiten', {})
+        if wahl.get('freies_talent'):
+            zeilen.append("Freies Anfängertalent")
+        if wahl.get('freies_attribut'):
+            zeilen.append("Freie Attributserhöhung")
+
+        return zeilen
 
     # === NEUE METHODEN FÜR ERWEITERTE VÖLKER-WAHLMÖGLICHKEITEN ===
 

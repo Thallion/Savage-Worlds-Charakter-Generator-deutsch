@@ -178,10 +178,12 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
-        
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
+
         selected_setting = [available_settings[0] if available_settings else None]
         checkboxes = {}
-        
+
         for setting_name in available_settings:
             list_item = MDListItem(
                 size_hint_y=None,
@@ -196,7 +198,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
             checkboxes[setting_name] = checkbox
-        
+
         scroll = MDScrollView(size_hint_y=None, height=landscape_height(200, 0.35))
         if _mobile:
             scroll.bar_width = dp(20)
@@ -1551,13 +1553,16 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         scroll_view = MDScrollView(
             size_hint=(1, None),
             height=min(dp(300), dp(48) * len(dateien) + dp(20)),
-            bar_width=dp(15),
-            bar_margin=dp(4),
+            bar_width=dp(20) if _mobile else dp(15),
+            bar_margin=dp(8) if _mobile else dp(4),
         )
+        if _mobile:
+            scroll_view.scroll_type = ['bars', 'content']
         scroll_layout = MDBoxLayout(
             orientation="vertical",
             size_hint_y=None,
             height=dp(48) * len(dateien),
+            padding=[0, 0, dp(32), 0] if _mobile else [0, 0, 0, 0],
         )
         scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
 

@@ -209,8 +209,8 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
     effects = {
         'eigenarten': [],
         'wahlmoeglichkeiten': {},
-        'attribut_bonus': {},
-        'fertigkeits_bonus': {},
+        'attribute_bonuses': {},
+        'fertigkeits_startboni': {},
         'spezielle_effekte': [],
         'handicaps': [],
         'auto_talente': []
@@ -246,21 +246,21 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
             if effekt.get('attribut_wahl'):
                 effects['wahlmoeglichkeiten']['freies_attribut'] = True
             if attribut:
-                effects['attribut_bonus'][attribut] = effekt.get('attribut_bonus', 2)
+                effects['attribute_bonuses'][attribut] = effekt.get('attribut_bonus', 2)
         
         elif effekt_typ == 'fertigkeits_bonus':
             if effekt.get('grundfertigkeit_bonus'):
                 if optionen and optionen.get('typ') == 'grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
                     if fertigkeit:
-                        effects['fertigkeits_bonus'][fertigkeit] = effekt.get('grundfertigkeit_bonus', 2)
+                        effects['fertigkeits_startboni'][fertigkeit] = effekt.get('grundfertigkeit_bonus', 2)
             elif effekt.get('nicht_grundfertigkeit_bonus'):
                 if optionen and optionen.get('typ') == 'nicht_grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
                     if fertigkeit:
-                        effects['fertigkeits_bonus'][fertigkeit] = effekt.get('nicht_grundfertigkeit_bonus', 2)
+                        effects['fertigkeits_startboni'][fertigkeit] = effekt.get('nicht_grundfertigkeit_bonus', 2)
             elif effekt.get('geschaeftssinn'):
-                effects['fertigkeits_bonus']['Überzeugen/Schätzen'] = 2
+                effects['fertigkeits_startboni']['Überzeugen/Schätzen'] = 2
         
         elif effekt_typ == 'wahlmoeglichkeit':
             for key, value in effekt.items():
@@ -291,10 +291,31 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                     else:
                         effects[key] = value
         
+        elif effekt_typ == 'attribut_malus':
+            # Attributsschwäche: negatives Attribut (z.B. -2 auf gewähltes Attribut)
+            attribut = None
+            if optionen and optionen.get('typ') == 'attribut_auswahl':
+                attribut = optionen.get('ausgewaehlt')
+            if attribut:
+                malus = effekt.get('attribut_malus', 2)
+                effects['attribute_bonuses'][attribut] = effects['attribute_bonuses'].get(attribut, 0) - malus
+
         elif effekt_typ == 'robustheit_bonus':
             effects.setdefault('robustheit_bonus', 0)
             effects['robustheit_bonus'] += effekt.get('robustheit_bonus', 0)
-        
+
+        elif effekt_typ == 'robustheit_malus':
+            effects.setdefault('robustheit_bonus', 0)
+            effects['robustheit_bonus'] += effekt.get('robustheit_bonus', 0)
+
+        elif effekt_typ == 'bewegungsweite_bonus':
+            effects.setdefault('bewegungsweite_bonus', 0)
+            effects['bewegungsweite_bonus'] += effekt.get('bewegungsweite_bonus', 0)
+
+        elif effekt_typ == 'bewegungsweite_malus':
+            effects.setdefault('bewegungsweite_bonus', 0)
+            effects['bewegungsweite_bonus'] += effekt.get('bewegungsweite_bonus', 0)
+
         elif effekt_typ == 'kombinierter_effekt':
             for key, value in effekt.items():
                 if key == 'bewegungsweite_bonus':
@@ -310,10 +331,10 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         if eigenart.get('handicaps'):
             effects['handicaps'].extend(eigenart['handicaps'])
     
-    if not effects['attribut_bonus']:
-        del effects['attribut_bonus']
-    if not effects['fertigkeits_bonus']:
-        del effects['fertigkeits_bonus']
+    if not effects['attribute_bonuses']:
+        del effects['attribute_bonuses']
+    if not effects['fertigkeits_startboni']:
+        del effects['fertigkeits_startboni']
     if not effects['spezielle_effekte']:
         del effects['spezielle_effekte']
     if not effects['auto_talente']:

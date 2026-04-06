@@ -137,12 +137,7 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         self.initialisiere_fertigkeiten()
         self.bind(fertigkeiten=self.on_fertigkeiten_changed)
 
-        # Beispiel: Standardvolk auswählen, wenn vorhanden
-        if "Mensch" in self.voelker:
-            # Alle auf False setzen
-            self.voelker_selected = {name: False for name in self.voelker.keys()}
-            # Mensch auswählen
-            self.voelker_selected["Mensch"] = True
+        # Kein Volk standardmäßig auswählen - Benutzer soll selbst wählen
 
         self.bind(voelker_selected=self.on_charakter_change)
 

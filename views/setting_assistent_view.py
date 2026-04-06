@@ -442,6 +442,8 @@ class SettingAssistentWizard:
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
         
         self.template_setting_checkboxes = {}
         for setting_name in available_settings:
@@ -491,6 +493,8 @@ class SettingAssistentWizard:
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
         
         for setting_name in available_settings:
             is_selected = setting_name in self.draft.base_settings
@@ -847,6 +851,8 @@ class SettingAssistentWizard:
 
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
 
         for item_name in items[:max_items]:
             list_item = MDListItem(
@@ -958,6 +964,8 @@ class SettingAssistentWizard:
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
         
         for setting_name in available_settings:
             is_selected = setting_name in self.draft.base_settings
@@ -1010,6 +1018,8 @@ class SettingAssistentWizard:
         
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
         
         for setting_name in available_settings:
             is_selected = setting_name in self.draft.base_settings
@@ -1398,6 +1408,8 @@ class SettingAssistentDialogHandler:
         scroll = TextFieldScrollView(size_hint_y=1)
         list_container = MDList(size_hint_y=None)
         list_container.bind(minimum_height=list_container.setter('height'))
+        if _mobile:
+            list_container.padding = [0, 0, dp(32), 0]
 
         for draft in drafts:
             list_item = MDListItem(

@@ -312,6 +312,8 @@ class SearchBottomSheet(ModalView):
             scroll_view.scroll_distance = dp(20)
         self._items_list = MDList(size_hint_y=None)
         self._items_list.bind(minimum_height=self._items_list.setter('height'))
+        if _mobile:
+            self._items_list.padding = [0, 0, dp(32), 0]
         scroll_view.add_widget(self._items_list)
         self._sheet.add_widget(scroll_view)
 

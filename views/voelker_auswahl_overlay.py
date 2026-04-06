@@ -5,6 +5,8 @@ Slide-In von rechts, scrollbare Völker-Liste mit Suchfeld,
 optionale Phase 2 für Zusatzelemente (freie Talente, Halbelf ENTWEDER/ODER, etc.).
 """
 
+import time
+
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -17,13 +19,17 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.card import MDCard
 from kivymd.uix.chip import MDChip, MDChipText
+from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
 from kivymd.uix.divider import MDDivider
 from kivymd.uix.label import MDLabel
-from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemSupportingText
+from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemSupportingText, MDListItemTrailingCheckbox
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
 from views.ui_components import TextFieldScrollView
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
 
 
 class VoelkerAuswahlOverlay(MDBoxLayout):
@@ -504,78 +510,149 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
     # ==================== Talent-Auswahl (Sub-Phase) ====================
 
     def _show_talent_selection(self, talent_typ):
-        """Zeigt eine durchsuchbare Talent-Auswahl"""
-        self._content_box.clear_widgets()
-        self._title_label.text = f"{self._selected_volk} – Talent wählen"
-
+        """Zeigt eine durchsuchbare Talent-Auswahl mit Checkboxen als separates Popup"""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+        from kivy.core.window import Window
+        
         from functions.volk_funktionen import get_freie_talente
         talente = get_freie_talente(self._charakter)
+        Logger.debug(f"Talent-Auswahl für {self._selected_volk}: {len(talente)} Talente gefunden, typ={talent_typ}")
+        
+        if not talente or (len(talente) == 1 and "Keine" in talente[0]):
+            self._show_no_talente_message()
+            return
 
-        # Suchfeld
+        self._talent_selected = None
+        self._last_talent_click = 0
+        selected_talent = [None]
+        checkboxes = {}
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            padding=[dp(16), dp(8), dp(16), dp(8)]
+        )
+
+        info_label = MDLabel(
+            text=f"Wähle ein freies Anfängertalent für {self._selected_volk}:",
+            font_style="Body",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=dp(48)
+        )
+        content.add_widget(info_label)
+
         search_field = MDTextField(
             mode="outlined",
             size_hint_y=None,
-            height=dp(56),
-            size_hint_x=1,
+            height=dp(56)
         )
         search_field.add_widget(MDTextFieldHintText(text="Talent suchen..."))
-        self._content_box.add_widget(search_field)
+        content.add_widget(search_field)
 
-        # Scrollbare Talent-Liste
+        scroll_height = min(dp(350), Window.height * 0.5)
+        scroll = TextFieldScrollView(
+            size_hint=(1, None),
+            height=scroll_height,
+            do_scroll_x=False,
+            bar_width=dp(20) if _mobile else dp(12),
+            bar_margin=dp(8) if _mobile else dp(4)
+        )
+        scroll.scroll_type = ['bars', 'content']
+
         talent_list = MDList(size_hint_y=None)
-        talent_list.bind(minimum_height=talent_list.setter("height"))
+        talent_list.bind(minimum_height=talent_list.setter('height'))
+        if _mobile:
+            talent_list.padding = [0, 0, dp(32), 0]
 
         def populate_talents(*args):
             talent_list.clear_widgets()
+            checkboxes.clear()
             search_text = search_field.text.lower() if search_field.text else ""
-            for talent in sorted(talente):
-                if not talent or not str(talent).strip():
+            for talent_name in sorted(talente):
+                if not talent_name or not str(talent_name).strip():
                     continue
-                if search_text and search_text not in str(talent).lower():
+                if search_text and search_text not in str(talent_name).lower():
                     continue
-                item = MDListItem(
-                    size_hint_y=None,
-                    height=dp(48),
-                    on_release=lambda x, t=talent: self._on_talent_chosen(talent_typ, t),
-                )
-                item.add_widget(MDListItemLeadingIcon(icon="star-outline"))
-                item.add_widget(MDListItemHeadlineText(text=str(talent)))
-                talent_list.add_widget(item)
 
-            if not talent_list.children:
-                talent_list.add_widget(MDLabel(
-                    text="Keine Talente verfügbar",
-                    theme_text_color="Secondary",
-                    halign="center",
-                    size_hint_y=None,
-                    height=dp(48),
-                ))
+                item = MDListItem(size_hint_y=None, height=dp(48))
+                item.add_widget(MDListItemHeadlineText(text=str(talent_name)))
+
+                checkbox = MDListItemTrailingCheckbox()
+                cb = checkbox
+                t_name = talent_name
+                checkbox.bind(on_release=lambda x, cb=cb, t=t_name: self._on_talent_checkbox_clicked(talent_typ, t, cb, checkboxes, selected_talent))
+                item.add_widget(checkbox)
+                talent_list.add_widget(item)
+                checkboxes[talent_name] = checkbox
+
+        def on_confirm(*args):
+            if selected_talent[0]:
+                self._on_talent_chosen(talent_typ, selected_talent[0])
+                if hasattr(self, '_talent_selection_popup'):
+                    self._talent_selection_popup.dismiss()
+            else:
+                from services.service_container import service_container
+                ds = service_container.get_dialog_service()
+                if ds:
+                    ds.show_warning_dialog("Bitte wähle ein Talent aus.")
 
         search_field.bind(text=populate_talents)
         populate_talents()
 
-        self._content_box.add_widget(talent_list)
+        scroll.add_widget(talent_list)
+        content.add_widget(scroll)
 
-        # Zurück-Button → zurück zu Extras-Phase
-        back_box = MDBoxLayout(
-            orientation="horizontal",
+        self._talent_selection_popup = MDDialog(
+            MDDialogHeadlineText(text="Freies Talent wählen"),
+            MDDialogContentContainer(content, orientation="vertical"),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"), style="text",
+                    on_release=lambda x: self._talent_selection_popup.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Auswählen"), style="filled",
+                    on_release=on_confirm
+                ),
+            ),
+            size_hint=(0.85, None),
+            height=scroll_height + dp(150)
+        )
+        self._talent_selection_popup.open()
+
+    def _show_no_talente_message(self):
+        """Zeigt eine Meldung wenn keine Talente verfügbar sind"""
+        self._content_box.clear_widgets()
+        self._title_label.text = f"{self._selected_volk} – Talent wählen"
+        
+        self._content_box.add_widget(MDLabel(
+            text="Keine freien Talente verfügbar.",
+            theme_text_color="Secondary",
+            halign="center",
             size_hint_y=None,
-            height=dp(56),
-            padding=(0, dp(8), 0, 0),
-        )
-        back_box.add_widget(MDBoxLayout(size_hint_x=1))
-        back_btn = MDButton(
-            style="outlined",
-            on_release=lambda x: self._build_extras_phase(),
-        )
-        back_btn.add_widget(MDButtonIcon(icon="arrow-left"))
-        back_btn.add_widget(MDButtonText(text="Zurück zu Optionen"))
-        back_box.add_widget(back_btn)
-        back_box.add_widget(MDBoxLayout(size_hint_x=1))
-        self._content_box.add_widget(back_box)
+            height=dp(48),
+        ))
+        self._add_back_button()
+
+    def _on_talent_checkbox_clicked(self, talent_typ, talent_name, checkbox, checkboxes, selected_container):
+        """Handler für Talent-Checkbox mit Debounce (Radio-Style)"""
+        now = time.monotonic()
+        if hasattr(self, '_last_talent_click') and (now - self._last_talent_click) < 0.5:
+            return
+        self._last_talent_click = now
+
+        Logger.debug(f"Talent-Checkbox geklickt: {talent_name}")
+        selected_container[0] = talent_name
+        
+        for name, cb in checkboxes.items():
+            cb.active = (name == talent_name)
 
     def _on_talent_chosen(self, talent_typ, talent_name):
         """Talent aus der Liste gewählt"""
+        Logger.debug(f"Talent bestätigt: {talent_name} (typ: {talent_typ})")
         extras = {}
         if talent_typ == 'halbelf_talent':
             extras = {'halbelf_talent': talent_name}

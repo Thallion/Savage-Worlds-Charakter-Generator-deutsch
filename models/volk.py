@@ -176,12 +176,21 @@ class Volk(EventDispatcher):
             for attr_name, bonus in self.effects.get('attribute_bonuses', {}).items():
                 if attr_name in charakter.attribute:
                     attribut = charakter.attribute[attr_name]
-                    if attribut.wert == 4 and attribut.modifier == 0:  # W4 + bonus (z.B. +2=W6, +4=W8)
-                        alter_wert = attribut.wert
-                        attribut.wuerfel.value = 4 + bonus  # +2=W6, +4=W8
-                        Logger.info(f"Volk {self.name}: {attr_name} von W{alter_wert} auf W{attribut.wert} erhöht")
-                    else:
-                        Logger.debug(f"Volk {self.name}: {attr_name} nicht angepasst (aktuell: W{attribut.wert}+{attribut.modifier})")
+                    if bonus > 0:
+                        # Positiver Bonus: Würfelwert erhöhen (W4 → W6)
+                        if attribut.wert == 4 and attribut.modifier == 0:
+                            alter_wert = attribut.wert
+                            attribut.wuerfel.value = 4 + bonus
+                            Logger.info(f"Volk {self.name}: {attr_name} von W{alter_wert} auf W{attribut.wert} erhöht")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {attr_name} nicht angepasst (aktuell: W{attribut.wert}{attribut.modifier:+d})")
+                    elif bonus < 0:
+                        # Negativer Bonus (Attributsschwäche): Modifier setzen (W4 → W4-2)
+                        if attribut.modifier == 0:
+                            attribut.wuerfel.modifier = bonus
+                            Logger.info(f"Volk {self.name}: {attr_name} Attributsschwäche W{attribut.wert}{bonus:+d}")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {attr_name} Modifier bereits gesetzt ({attribut.modifier:+d})")
 
             # Fertigkeits-Startboni anwenden (unterschiedlich für Grund- und Nicht-Grundfertigkeiten)
             for fert_name, bonus in self.effects.get('fertigkeits_startboni', {}).items():
@@ -258,22 +267,30 @@ class Volk(EventDispatcher):
             for attr_name, bonus in self.effects.get('attribute_bonuses', {}).items():
                 if attr_name in charakter.attribute:
                     attribut = charakter.attribute[attr_name]
-                    expected_boosted_value = 4 + bonus
-                    
-                    # Prüfe verschiedene mögliche Zustände
-                    if attribut.wert == expected_boosted_value:
-                        # Standard Fall: Attribut hat den erwarteten Bonus-Wert
-                        attribut.wuerfel.value = 4
-                        Logger.info(f"Volk {self.name}: {attr_name} von W{expected_boosted_value} auf W4 zurückgesetzt")
-                    elif attribut.wert > 4:
-                        # Edge Case: Attribut wurde über den Basis-Bonus hinaus erhöht
-                        # Nur den Völker-Bonus entfernen
-                        new_value = max(4, attribut.wert - bonus)
-                        attribut.wuerfel.value = new_value
-                        Logger.info(f"Volk {self.name}: {attr_name} von W{attribut.wert} auf W{new_value} reduziert (Völker-Bonus entfernt)")
-                    else:
-                        # Attribut ist bereits W4 oder niedriger - nichts zu tun
-                        Logger.debug(f"Volk {self.name}: {attr_name} bereits auf Basis-Niveau (W{attribut.wert})")
+
+                    if bonus > 0:
+                        # Positiven Bonus rückgängig machen (Würfelwert reduzieren)
+                        expected_boosted_value = 4 + bonus
+                        if attribut.wert == expected_boosted_value:
+                            attribut.wuerfel.value = 4
+                            Logger.info(f"Volk {self.name}: {attr_name} von W{expected_boosted_value} auf W4 zurückgesetzt")
+                        elif attribut.wert > 4:
+                            new_value = max(4, attribut.wert - bonus)
+                            attribut.wuerfel.value = new_value
+                            Logger.info(f"Volk {self.name}: {attr_name} von W{attribut.wert} auf W{new_value} reduziert")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {attr_name} bereits auf Basis-Niveau (W{attribut.wert})")
+                    elif bonus < 0:
+                        # Negativen Bonus (Attributsschwäche) rückgängig machen (Modifier auf 0)
+                        if attribut.modifier == bonus:
+                            attribut.wuerfel.modifier = 0
+                            Logger.info(f"Volk {self.name}: {attr_name} Attributsschwäche entfernt (W{attribut.wert}{bonus:+d} → W{attribut.wert})")
+                        elif attribut.modifier < 0:
+                            new_modifier = min(0, attribut.modifier - bonus)
+                            attribut.wuerfel.modifier = new_modifier
+                            Logger.info(f"Volk {self.name}: {attr_name} Modifier von {attribut.modifier:+d} auf {new_modifier:+d} reduziert")
+                        else:
+                            Logger.debug(f"Volk {self.name}: {attr_name} Modifier bereits auf 0")
 
             # Fertigkeits-Boni rückgängig machen
             for fert_name, bonus in self.effects.get('fertigkeits_startboni', {}).items():
