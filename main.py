@@ -7,6 +7,7 @@ import sys
 import os
 import logging
 from functools import partial
+from pathlib import Path
 import re
 import webbrowser
 

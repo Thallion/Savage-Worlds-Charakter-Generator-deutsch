@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional, Union
 from kivy.logger import Logger
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from datetime import datetime
 
 
@@ -62,7 +62,10 @@ class AppConfig:
 
     # Desktop-Skalierung: "auto" für automatische Erkennung, oder float (z.B. 1.5)
     desktop_scale_factor: str = "auto"
-    
+
+    # Tutorial-Zustand
+    tutorial_state: dict = field(default_factory=dict)
+
     # Version und Metadaten
     config_version: str = "1.0"
     last_updated: str = ""

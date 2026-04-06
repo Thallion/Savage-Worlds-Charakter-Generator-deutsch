@@ -83,20 +83,13 @@
     spacing: dp(5)
     adaptive_height: True
 
-    MDLabel:
-        text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
-        size_hint_x: None
-        width: dp(350)
-        halign: 'left'
-        valign: 'middle'
-
-    # Würfel-Icon-Gruppe mit originalem Farbschema
+    # Würfel-Icon-Gruppe mit originalem Farbschema - LINKS
     MDBoxLayout:
         size_hint_x: None
         width: dp(160)  # Breiter für zwei Ziffern
         spacing: dp(2)
         padding: [dp(10), 0]
-        
+
         # Würfel-Icon mit Theme-Farbe
         MDIconButton:
             icon: root.dice_icon
@@ -104,7 +97,8 @@
             theme_icon_color: "Primary"
             size_hint: None, None
             size: dp(28), dp(28)
-            
+            pos_hint: {'center_y': 0.48}
+
         # Modifier-Vorzeichen wenn vorhanden
         MDIconButton:
             icon: root.modifier_sign
@@ -114,7 +108,8 @@
             size: dp(28), dp(28)
             opacity: 1 if root.has_modifier else 0
             disabled: not root.has_modifier
-            
+            pos_hint: {'center_y': 0.48}
+
         # Erste Ziffer des Modifiers
         MDIconButton:
             icon: root.modifier_value_icon
@@ -124,6 +119,7 @@
             size: dp(28), dp(28)
             opacity: 1 if root.has_modifier else 0
             disabled: not root.has_modifier
+            pos_hint: {'center_y': 0.48}
 
         # Zweite Ziffer des Modifiers (für zweistellige Zahlen)
         MDIconButton:
@@ -134,12 +130,13 @@
             size: dp(28), dp(28)
             opacity: 1 if root.has_second_digit else 0
             disabled: not root.has_second_digit
+            pos_hint: {'center_y': 0.48}
 
-    # Steigern/Senken Buttons
+    # Steigern/Senken Buttons - LINKS NACH WÜRFELN
     MDBoxLayout:
         size_hint_x: None
-        width: dp(50)
-        padding: [dp(30), 0]
+        width: dp(80)
+        padding: [dp(20), 0, dp(20), 0]  # Links- und Rechts-Padding für Abstand
 
         MDIconButton:
             icon: "arrow-up-thick"
@@ -147,6 +144,7 @@
             on_release: root.steigere_eigenschaft()
             size_hint: None, None
             size: dp(28), dp(28)
+            pos_hint: {'center_y': 0.48}
 
         MDIconButton:
             icon: "arrow-down-thick"
@@ -154,3 +152,12 @@
             on_release: root.senke_eigenschaft()
             size_hint: None, None
             size: dp(28), dp(28)
+            pos_hint: {'center_y': 0.48}
+
+    # Name-Label - füllt restlichen Platz RECHTS
+    MDLabel:
+        text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
+        size_hint_x: 1
+        halign: 'left'
+        valign: 'middle'
+        padding: [dp(10), 0, 0, 0]  # Links-Padding für Abstand

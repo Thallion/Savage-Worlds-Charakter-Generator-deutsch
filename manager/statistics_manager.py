@@ -159,7 +159,7 @@ class StatisticsManager:
         """Aktualisiert die Element-Statistiken in der UI"""
         try:
             if not hasattr(self.widget.ids, 'element_stats_box'):
-                Logger.warning("element_stats_box nicht in IDs gefunden")
+                Logger.debug(f"element_stats_box nicht in {self.widget.__class__.__name__} gefunden - überspringe UI-Update")
                 return
             
             stats_box = self.widget.ids.element_stats_box

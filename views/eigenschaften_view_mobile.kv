@@ -86,21 +86,10 @@
     spacing: 0
     padding: [dp(4), 0]
 
-    # Name-Label - füllt restlichen Platz (kein dynamisches width)
-    MDLabel:
-        text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
-        size_hint_x: 1
-        halign: 'left'
-        valign: 'middle'
-        font_size: dp(13)
-        shorten: True
-        shorten_from: 'right'
-        text_size: self.size
-
-    # Würfel-Icon-Gruppe kompakt (feste Breite, feste Positionen)
+    # Würfel-Icon-Gruppe kompakt (feste Breite, feste Positionen) - LINKS
     MDBoxLayout:
         size_hint_x: None
-        width: dp(96)
+        width: dp(88)
         spacing: 0
         padding: 0
 
@@ -139,11 +128,12 @@
             pos_hint: {'center_y': 0.5}
             opacity: 1 if root.has_second_digit else 0
 
-    # Steigern/Senken Buttons (feste Breite)
+    # Steigern/Senken Buttons (feste Breite) - LINKS NACH WÜRFELN
     MDBoxLayout:
         size_hint_x: None
-        width: dp(56)
+        width: dp(52)
         spacing: 0
+        padding: [0, 0, dp(8), 0]  # Rechts-Padding für Abstand zum Text
 
         MDIconButton:
             icon: "arrow-up-thick"
@@ -160,3 +150,16 @@
             size_hint: None, None
             size: dp(28), dp(28)
             pos_hint: {'center_y': 0.5}
+
+    # Name-Label - füllt restlichen Platz RECHTS
+    MDLabel:
+        text: root.item_type == 'fertigkeit' and root.item_obj and root.item_obj.attribut and f"{root.item_name} ({root.item_obj.attribut.attribut_name})" or root.item_name
+        size_hint_x: 1
+        halign: 'left'
+        valign: 'middle'
+        font_size: dp(13)
+        shorten: True
+        shorten_from: 'right'
+        text_size: self.size
+        padding: [dp(6), 0, 0, 0]  # Links-Padding für mehr Abstand
+        pos_hint: {'center_y': 0.48}  # Leicht nach unten verschieben
