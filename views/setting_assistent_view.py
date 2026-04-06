@@ -460,7 +460,9 @@ class SettingAssistentWizard:
             list_layout.add_widget(list_item)
             self.template_setting_checkboxes[setting_name] = checkbox
         
-        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(8) if _mobile else dp(12), bar_margin=dp(4) if _mobile else dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(12), bar_margin=dp(8))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
@@ -502,7 +504,9 @@ class SettingAssistentWizard:
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(8) if _mobile else dp(12), bar_margin=dp(4) if _mobile else dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(12), bar_margin=dp(8))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(list_layout)
         card.add_widget(scroll)
         
@@ -831,7 +835,7 @@ class SettingAssistentWizard:
         if _mobile:
             content_height = dp(350)
             content_spacing = dp(4)
-            item_height = dp(40)
+            item_height = dp(56)  # Erhöht von dp(40) für bessere Touch-Targets und Abstand
             max_items = 100
         else:
             content_height = "500dp"
@@ -862,7 +866,9 @@ class SettingAssistentWizard:
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
 
-        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(8) if _mobile else dp(12), bar_margin=dp(4) if _mobile else dp(8))
+        scroll = TextFieldScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(12), bar_margin=dp(8))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
 
@@ -904,15 +910,29 @@ class SettingAssistentWizard:
         if self.current_step == 3:
             self._show_current_step()
     
+    def _resolve_category_key(self, cat_id: str) -> str:
+        """Löst den tatsächlichen Key im setting_data auf (z.B. fertigkeiten -> fertigkeiten_daten)."""
+        if cat_id in self.draft.setting_data:
+            return cat_id
+        # Fallback: fertigkeiten -> fertigkeiten_daten
+        if cat_id == "fertigkeiten" and "fertigkeiten_daten" in self.draft.setting_data:
+            return "fertigkeiten_daten"
+        return cat_id
+
     def _toggle_category_item(self, cat_id: str, item_name: str, is_active: bool):
         """Toggled den Aktiv-Status eines Elements."""
-        if cat_id in self.draft.setting_data:
-            if isinstance(self.draft.setting_data[cat_id], dict):
-                if item_name in self.draft.setting_data[cat_id]:
-                    if isinstance(self.draft.setting_data[cat_id][item_name], dict):
-                        self.draft.setting_data[cat_id][item_name]["aktiv"] = is_active
-                    else:
-                        self.draft.setting_data[cat_id][item_name] = {"aktiv": is_active}
+        actual_key = self._resolve_category_key(cat_id)
+        if actual_key not in self.draft.setting_data:
+            return
+        data = self.draft.setting_data[actual_key]
+        if not isinstance(data, dict) or item_name not in data:
+            return
+        current_value = data[item_name]
+        if isinstance(current_value, dict):
+            current_value["aktiv"] = is_active
+        else:
+            # Ursprünglichen Wert bewahren (z.B. Liste mit Attributen) und aktiv-Flag hinzufügen
+            data[item_name] = {"original": current_value, "aktiv": is_active}
     
     def _on_category_checkbox_clicked(self, cat_id: str, item_name: str, checkbox):
         """Handler für Checkbox-Klick mit Debounce (Kategorie-Editor)."""

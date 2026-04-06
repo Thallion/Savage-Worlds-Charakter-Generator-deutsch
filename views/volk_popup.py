@@ -14,6 +14,8 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText
 from kivymd.uix.scrollview import MDScrollView
 from views.ui_components import TextFieldScrollView
+from utils.platform_utils import is_mobile_layout
+_mobile = is_mobile_layout()
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
 from kivymd.uix.selectioncontrol import MDCheckbox
@@ -379,7 +381,9 @@ class VolkGeneratorWizard:
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
 
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
 

@@ -185,7 +185,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         for setting_name in available_settings:
             list_item = MDListItem(
                 size_hint_y=None,
-                height=dp(48),
+                height=dp(56) if _mobile else dp(48),
                 on_release=lambda x, s=setting_name: self._select_new_char_setting(s, selected_setting, checkboxes)
             )
             list_item.add_widget(MDListItemHeadlineText(text=setting_name))
@@ -198,6 +198,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             checkboxes[setting_name] = checkbox
         
         scroll = MDScrollView(size_hint_y=None, height=landscape_height(200, 0.35))
+        if _mobile:
+            scroll.bar_width = dp(20)
+            scroll.bar_margin = dp(8)
+            scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
 
