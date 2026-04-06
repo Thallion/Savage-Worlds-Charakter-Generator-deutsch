@@ -1240,13 +1240,15 @@ class SettingAssistentWizard:
             if not validation["is_valid"]:
                 self._show_error("\n".join(validation["errors"]))
                 return
-        
+
         if self.current_step == 2:
             self._initialize_draft_data()
-        
+
         self.current_step += 1
         self.draft.current_step = self.current_step
-        self._show_current_step()
+        # Verzögert anzeigen damit der Touch-Event abgeschlossen ist
+        # bevor die UI neu aufgebaut wird (verhindert Bounce auf neuen Button)
+        Clock.schedule_once(lambda dt: self._show_current_step(), 0.1)
     
     def _validate_basic_settings(self) -> dict:
         """Validiert die Grundeinstellungen."""
@@ -1284,7 +1286,8 @@ class SettingAssistentWizard:
             return
         self.current_step -= 1
         self.draft.current_step = self.current_step
-        self._show_current_step()
+        # Verzögert anzeigen damit der Touch-Event abgeschlossen ist
+        Clock.schedule_once(lambda dt: self._show_current_step(), 0.1)
     
     def _cancel_wizard(self, *args):
         if not self._nav_debounce_check():
