@@ -176,7 +176,8 @@ class WizardBar(MDBoxLayout):
         
         content = MDBoxLayout(orientation="vertical", size_hint_y=None, adaptive_height=True)
         
-        scroll = MDScrollView(size_hint_y=None, height="300dp")
+        from utils.platform_utils import landscape_height
+        scroll = MDScrollView(size_hint_y=None, height=landscape_height(300, 0.45))
         text_label = MDLabel(
             text=schritt.popup_text,
             theme_text_color="Primary",

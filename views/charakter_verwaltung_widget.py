@@ -37,7 +37,7 @@ from manager.html_manager import HTMLManager
 
 # KV-Datei laden mit Mobile-Unterstützung
 from utils.path_utils import get_application_root
-from utils.platform_utils import is_mobile_layout
+from utils.platform_utils import is_mobile_layout, landscape_height
 import os
 
 _base_path = str(get_application_root())
@@ -197,10 +197,10 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             list_layout.add_widget(list_item)
             checkboxes[setting_name] = checkbox
         
-        scroll = MDScrollView(size_hint_y=None, height="200dp")
+        scroll = MDScrollView(size_hint_y=None, height=landscape_height(200, 0.35))
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
-        
+
         def on_create(instance):
             char_name = name_field.text.strip()
             if not char_name:
@@ -390,7 +390,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         dialog_content.add_widget(search_field)
 
         # Scrollbare Liste
-        scroll_view = MDScrollView(size_hint=(1, None), height=dp(250))
+        scroll_view = MDScrollView(size_hint=(1, None), height=landscape_height(250, 0.4))
         scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
         items_list = MDList(size_hint_y=None, size_hint_x=1)
         items_list.bind(minimum_height=items_list.setter('height'))
@@ -475,7 +475,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         sheet = MDBoxLayout(
             orientation='vertical',
             size_hint=(1, None),
-            height=dp(380) + bottom_pad,
+            height=landscape_height(380, 0.75) + bottom_pad,
             pos_hint={'center_x': 0.5},
             md_bg_color=self.app.theme_cls.surfaceContainerColor,
             radius=[dp(16), dp(16), 0, 0],
@@ -757,7 +757,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         dialog_content.add_widget(search_field)
 
         # Scrollbare Liste
-        scroll_view = MDScrollView(size_hint=(1, None), height=dp(280))
+        scroll_view = MDScrollView(size_hint=(1, None), height=landscape_height(280, 0.45))
         scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
         items_list = MDList(size_hint_y=None, size_hint_x=1)
         items_list.bind(minimum_height=items_list.setter('height'))
@@ -1320,7 +1320,7 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             dialog_content.add_widget(search_field)
 
             # Scrollbare Liste
-            scroll_view = MDScrollView(size_hint=(1, None), height=dp(250))
+            scroll_view = MDScrollView(size_hint=(1, None), height=landscape_height(250, 0.4))
             scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
             items_list = MDList(size_hint_y=None, size_hint_x=1)
             items_list.bind(minimum_height=items_list.setter('height'))

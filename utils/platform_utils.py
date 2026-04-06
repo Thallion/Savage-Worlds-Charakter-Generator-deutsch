@@ -74,6 +74,34 @@ def is_mobile_layout():
     return False
 
 
+def landscape_height(portrait_dp_value, landscape_fraction=0.7):
+    """
+    Gibt eine Hoehe zurueck, die im Landscape-Modus auf Mobile
+    an die verfuegbare Bildschirmhoehe angepasst wird.
+
+    Im Portrait-Modus oder auf Desktop wird der portrait_dp_value
+    als dp()-Wert unveraendert zurueckgegeben.
+
+    Args:
+        portrait_dp_value: Hoehe in dp fuer den Portrait-Modus (ohne dp()-Aufruf)
+        landscape_fraction: Anteil der Bildschirmhoehe im Landscape (Standard: 0.7)
+
+    Returns:
+        float: Berechnete Hoehe in Pixeln
+    """
+    from kivy.core.window import Window
+    from kivy.metrics import dp
+
+    if not is_mobile_layout():
+        return dp(portrait_dp_value)
+
+    # Landscape erkennen
+    if Window.width > Window.height:
+        return min(dp(portrait_dp_value), Window.height * landscape_fraction)
+
+    return dp(portrait_dp_value)
+
+
 def get_kv_filename(base_name):
     """
     Gibt den korrekten KV-Dateinamen zurück (Desktop oder Mobile).

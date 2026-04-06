@@ -12,7 +12,7 @@ from kivy.logger import Logger
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.textfield import MDTextField
 
-from utils.platform_utils import is_mobile_layout
+from utils.platform_utils import is_mobile_layout, landscape_height
 
 _mobile = is_mobile_layout()
 
@@ -228,7 +228,7 @@ class SearchBottomSheet(ModalView):
         self._sheet = MDBoxLayout(
             orientation='vertical',
             size_hint=(1, None),
-            height=dp(420) + bottom_pad,
+            height=landscape_height(420) + bottom_pad,
             pos_hint={'center_x': 0.5},
             md_bg_color=theme.surfaceContainerColor if theme else (0.15, 0.15, 0.15, 1),
             radius=[dp(16), dp(16), 0, 0],

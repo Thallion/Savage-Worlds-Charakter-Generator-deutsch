@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": false,
+  "mobile_modus": true,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,

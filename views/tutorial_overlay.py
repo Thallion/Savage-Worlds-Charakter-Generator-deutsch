@@ -201,8 +201,8 @@ class TutorialDialog:
         # Headline ~dp(56), Buttons ~dp(56), Padding ~dp(40), Dots ~dp(24)
         is_landscape = Window.width > Window.height
         if _mobile and is_landscape:
-            # Querformat: wenig Höhe verfügbar → ScrollView mit fester Höhe
-            max_content_height = Window.height * 0.55 - dp(20)
+            # Querformat: wenig Höhe verfügbar → kleinerer ScrollView damit Buttons sichtbar bleiben
+            max_content_height = Window.height * 0.35
         elif _mobile:
             max_content_height = Window.height * 0.5
         else:

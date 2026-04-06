@@ -280,7 +280,7 @@ class AusruestungItemRow(MDBoxLayout):
             padding="12dp",
             adaptive_height=True,
             size_hint_y=None,
-            height=dp(250),
+            height=landscape_height(250, 0.4),
         )
 
         # Speichere die aktuelle Auswahl
@@ -1278,7 +1278,7 @@ Factory.register('AusruestungItemRow', AusruestungItemRow)
 
 # KV-Datei laden mit PyInstaller-kompatiblem Pfad und Mobile-Unterstützung
 from utils.path_utils import get_application_root
-from utils.platform_utils import is_mobile_layout
+from utils.platform_utils import is_mobile_layout, landscape_height
 import os
 
 _base_path = str(get_application_root())
