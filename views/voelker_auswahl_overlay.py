@@ -116,7 +116,11 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         content_scroll = TextFieldScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
+            bar_width=dp(20) if _mobile else dp(12),
+            bar_margin=dp(8) if _mobile else dp(4),
         )
+        if _mobile:
+            content_scroll.scroll_type = ['bars', 'content']
 
         self._content_box = MDBoxLayout(
             orientation="vertical",

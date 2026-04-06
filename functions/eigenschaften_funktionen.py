@@ -238,7 +238,9 @@ class EigenschaftenManager:
         
         # Senke das Attribut
         alter_wert = attribut.wuerfel.value
-        attribut.wuerfel.decrease()
+        if not attribut.wuerfel.decrease():
+            Logger.warning(f"Attribut '{attribut_name}' konnte nicht gesenkt werden (Würfel-Limit).")
+            return False
         Logger.debug(f"Attribut '{attribut_name}' wurde auf W{attribut.wuerfel.value}+{attribut.wuerfel.modifier} gesenkt.")
 
         # Gib Punkte an die richtige Quelle zurück (aus Journal ermitteln)
@@ -507,18 +509,26 @@ class EigenschaftenManager:
             Logger.error(f"Fertigkeit '{fertigkeit_name}' existiert nicht.")
             return False
         
-        # Prüfe ob Minimum erreicht (0 für normale, 4 für Grundfertigkeiten)
-        min_wert = 4 if fertigkeit.grundfertigkeit else 0
-        if fertigkeit.wuerfel.value <= min_wert:
-            Logger.warning(f"Fertigkeit '{fertigkeit_name}' kann nicht unter W{min_wert} gesenkt werden.")
-            return False
-        
+        # Prüfe ob Minimum erreicht
+        # Grundfertigkeiten: Minimum W4 (value=4, modifier=0)
+        # Nicht-Grundfertigkeiten: Minimum W4-2 = untrained (value=4, modifier=-2)
+        if fertigkeit.grundfertigkeit:
+            if fertigkeit.wuerfel.value <= 4:
+                Logger.warning(f"Grundfertigkeit '{fertigkeit_name}' kann nicht unter W4 gesenkt werden.")
+                return False
+        else:
+            if fertigkeit.wuerfel.value <= 4 and fertigkeit.wuerfel.modifier <= -2:
+                Logger.warning(f"Fertigkeit '{fertigkeit_name}' kann nicht weiter gesenkt werden (bereits untrained).")
+                return False
+
         # Berechne Rückerstattung
         kosten = self._berechne_fertigkeit_kosten(charakter, fertigkeit, fertigkeit.attribut)
 
         # Senke die Fertigkeit
         alter_wert = fertigkeit.wuerfel.value
-        fertigkeit.wuerfel.decrease()
+        if not fertigkeit.wuerfel.decrease():
+            Logger.warning(f"Fertigkeit '{fertigkeit_name}' konnte nicht gesenkt werden (Würfel-Limit).")
+            return False
         Logger.debug(f"Fertigkeit '{fertigkeit_name}' wurde auf W{fertigkeit.wuerfel.value}+{fertigkeit.wuerfel.modifier} gesenkt.")
 
         # Gib Punkte an die richtige Quelle zurück (aus Journal ermitteln)

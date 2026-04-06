@@ -148,10 +148,19 @@ class VolkGeneratorWizard:
     
     def _show_current_step(self):
         """Zeigt den aktuellen Wizard-Schritt"""
+        self._navigating = True
+        try:
+            self.__show_current_step_inner()
+        finally:
+            # Flag nach kurzem Delay zurücksetzen (Android Touch-Events abklingen lassen)
+            Clock.schedule_once(lambda dt: setattr(self, '_navigating', False), 0.3)
+
+    def __show_current_step_inner(self):
+        """Innere Implementierung von _show_current_step"""
         if self.current_step >= len(self.steps):
             self._finish_wizard()
             return
-        
+
         step = self.steps[self.current_step]
         Logger.info(f"Zeige Wizard-Schritt {self.current_step + 1}: {step['Title']}")
         
@@ -167,30 +176,41 @@ class VolkGeneratorWizard:
             height="50dp",
             adaptive_height=True
         )
-        
+
         if self.current_step > 0:
-            back_btn = MDButton(
-                style="outlined",
-                on_release=self._previous_step
-            )
+            back_btn = MDButton(style="text", on_release=self._previous_step, size_hint_x=None, width=dp(40))
             back_btn.add_widget(MDButtonIcon(icon="arrow-left"))
-            back_btn.add_widget(MDButtonText(text="Zurück"))
+            if not _mobile:
+                back_btn.add_widget(MDButtonText(text="Zurück"))
             nav_layout.add_widget(back_btn)
-        
-        cancel_btn = MDButton(
-            style="text",
-            on_release=self._cancel_wizard
-        )
-        cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
+
+        if _mobile:
+            cancel_btn = MDButton(style="text", on_release=self._cancel_wizard, size_hint_x=None, width=dp(40))
+            cancel_btn.add_widget(MDButtonIcon(icon="close"))
+        else:
+            cancel_btn = MDButton(style="text", on_release=self._cancel_wizard)
+            cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
         nav_layout.add_widget(cancel_btn)
-        
+
+        spacer = MDBoxLayout(size_hint_x=1)
+        nav_layout.add_widget(spacer)
+
         is_last_step = self.current_step == len(self.steps) - 1
-        next_btn = MDButton(
-            style="filled",
-            on_release=self._finish_wizard if is_last_step else self._next_step
-        )
-        next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
-        next_btn.add_widget(MDButtonText(text="Speichern" if is_last_step else "Weiter"))
+        if _mobile:
+            next_icon = "check" if is_last_step else "arrow-right"
+            next_btn = MDButton(
+                style="filled",
+                on_release=self._finish_wizard if is_last_step else self._next_step,
+                size_hint_x=None, width=dp(48)
+            )
+            next_btn.add_widget(MDButtonIcon(icon=next_icon))
+        else:
+            next_btn = MDButton(
+                style="filled",
+                on_release=self._finish_wizard if is_last_step else self._next_step
+            )
+            next_btn.add_widget(MDButtonIcon(icon="check" if is_last_step else "arrow-right"))
+            next_btn.add_widget(MDButtonText(text="Speichern" if is_last_step else "Weiter"))
         nav_layout.add_widget(next_btn)
         
         main_layout = MDBoxLayout(
@@ -225,8 +245,12 @@ class VolkGeneratorWizard:
             size_hint=(0.9, 0.85),
             auto_dismiss=False,
         )
-        
+
         self.dialog.open()
+
+        # Schritt 1: Name-Feld explizit fokussieren (verhindert Fokus-Sprung zu Beschreibung)
+        if self.current_step == 0 and hasattr(self, 'name_field'):
+            Clock.schedule_once(lambda dt: setattr(self.name_field, 'focus', True), 0.3)
     
     def _create_name_step(self):
         """Erstellt Schritt 1: Name & Grundlagen"""
@@ -557,10 +581,15 @@ class VolkGeneratorWizard:
         self._toggle_eigenart(eigenart_id, eigenart_typ, checkbox.active, checkbox=checkbox)
     
     def _show_optionen_dialog(self, eigenart, liste, checkbox=None):
-        """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Attribut-/Fertigkeits-Auswahl oder Texteingabe)."""
+        """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Attribut-/Fertigkeits-Auswahl oder Texteingabe).
+        Blendet das Eigenarten-Popup temporär aus um Überlappung zu vermeiden."""
         optionen = eigenart.get('optionen', {})
         typ = optionen.get('typ', '')
         eigenart_name = eigenart.get('name', eigenart.get('id', ''))
+
+        # Eigenarten-Popup temporär ausblenden um Überlappung zu vermeiden
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.opacity = 0
 
         def _on_cancel(dialog_ref):
             """Abbrechen: Checkbox zuruecksetzen, Eigenart nicht hinzufuegen."""
@@ -577,6 +606,14 @@ class VolkGeneratorWizard:
         else:
             # Unbekannter Typ - einfach hinzufuegen
             liste.append(eigenart)
+            # Eigenarten-Popup wieder einblenden
+            if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+                self._eigenarten_popup.opacity = 1
+
+    def _restore_eigenarten_popup(self):
+        """Blendet das Eigenarten-Popup nach Schließen eines Unter-Dialogs wieder ein."""
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.opacity = 1
 
     def _show_text_optionen_dialog(self, eigenart, liste, checkbox, optionen, eigenart_name):
         """Dialog mit Texteingabe fuer Eigenart-Optionen (z.B. Immunität, Abhängigkeit)."""
@@ -604,9 +641,11 @@ class VolkGeneratorWizard:
             eigenart['optionen']['ausgewaehlt'] = wert
             liste.append(eigenart)
             dialog.dismiss()
+            self._restore_eigenarten_popup()
 
         def _on_cancel(x):
             dialog.dismiss()
+            self._restore_eigenarten_popup()
             if checkbox:
                 checkbox.active = False
 
@@ -688,13 +727,15 @@ class VolkGeneratorWizard:
                 eigenart['optionen']['ausgewaehlt'] = selected[0]
                 liste.append(eigenart)
                 dialog.dismiss()
+                self._restore_eigenarten_popup()
                 Logger.info(f"Freies Talent '{selected[0]}' für Volkseigenart gewählt")
-        
+
         def _on_cancel(x):
             dialog.dismiss()
+            self._restore_eigenarten_popup()
             if checkbox:
                 checkbox.active = False
-        
+
         dialog = MDDialog(
             MDDialogHeadlineText(text=f"{eigenart_name} — Talent wählen"),
             MDDialogContentContainer(content),
@@ -773,9 +814,11 @@ class VolkGeneratorWizard:
                 eigenart['optionen']['ausgewaehlt'] = selected[0]
                 liste.append(eigenart)
                 dialog.dismiss()
+                self._restore_eigenarten_popup()
 
         def _on_cancel(x):
             dialog.dismiss()
+            self._restore_eigenarten_popup()
             if checkbox:
                 checkbox.active = False
 
@@ -833,6 +876,9 @@ class VolkGeneratorWizard:
     
     def _nav_debounce_check(self) -> bool:
         """Prüft ob ein Navigations-Event zu schnell hintereinander kommt (Android Touch-Bounce)."""
+        # Flag-basierter Guard: verhindert doppelte Navigation während _show_current_step läuft
+        if getattr(self, '_navigating', False):
+            return False
         now = time.monotonic()
         if hasattr(self, '_last_nav_time') and (now - self._last_nav_time) < 0.5:
             return False

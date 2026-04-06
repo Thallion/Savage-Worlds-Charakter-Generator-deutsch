@@ -153,7 +153,12 @@ class Volk(EventDispatcher):
 
     def has_spezialeffekt(self, effekt_name):
         """Prüft, ob das Volk einen spezifischen Spezialeffekt hat."""
-        return self.effects.get('spezielle_effekte', {}).get(effekt_name, False)
+        spezielle_effekte = self.effects.get('spezielle_effekte', {})
+        if isinstance(spezielle_effekte, list):
+            # Listen-Format vom Volksgenerator: [{'typ': 'nachtsicht', 'wert': True}]
+            return any(e.get('typ') == effekt_name and e.get('wert') for e in spezielle_effekte)
+        # Dict-Format von _parse_effects_from_text
+        return spezielle_effekte.get(effekt_name, False)
 
     def apply_effects_to_charakter(self, charakter):
         """
