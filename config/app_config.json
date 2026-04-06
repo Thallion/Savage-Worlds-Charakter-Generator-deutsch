@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
+  "mobile_modus": false,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Fantasy Kompendium",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "tutorial_state": {
     "welcome_completed": true,
@@ -41,5 +41,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-06T06:32:16.160481"
+  "last_updated": "2026-04-06T07:08:11.820062"
 }

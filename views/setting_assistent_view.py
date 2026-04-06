@@ -26,6 +26,7 @@ from kivymd.uix.scrollview import MDScrollView
 from views.ui_components import TextFieldScrollView
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
+from kivymd.uix.widget import MDWidget
 
 import os
 import sys
@@ -662,19 +663,11 @@ class SettingAssistentWizard:
         layout = TextFieldScrollView(size_hint_y=1, bar_width=bar_width, bar_margin=bar_margin)
         content = MDBoxLayout(orientation="vertical", spacing=content_spacing, size_hint_y=None, height=content_height)
 
+        # Stats berechnen für Kategorie-Karten
         stats = calculate_setting_statistics(self.draft.setting_data)
-        stats_text = format_statistics_for_display(stats)
 
-        if _mobile:
-            # Höhe dynamisch: ~dp(16) pro Statistik-Zeile + Padding
-            num_lines = len(stats) if stats else 1
-            stats_height = dp(12 + num_lines * 16)
-            stats_padding = dp(6)
-            stats_font = "11sp"
-        else:
-            stats_height = "180dp"
-            stats_padding = "12dp"
-            stats_font = "14sp"
+        # Info-Label nur auf Desktop
+        if not _mobile:
             info_label = MDLabel(
                 text="Wähle die Kategorien und Elemente für dein Setting aus.",
                 theme_text_color="Secondary",
@@ -682,10 +675,6 @@ class SettingAssistentWizard:
                 height="24dp"
             )
             content.add_widget(info_label)
-        stats_card = MDCard(style="elevated", padding=stats_padding, size_hint_y=None, height=stats_height)
-        stats_content = MDLabel(text=stats_text, markup=True, font_size=stats_font)
-        stats_card.add_widget(stats_content)
-        content.add_widget(stats_card)
 
         if not _mobile:
             tabs_label = MDLabel(
@@ -721,7 +710,7 @@ class SettingAssistentWizard:
             icon_size = dp(28)
             card_spacing = dp(6)
         else:
-            card_height = "70dp"
+            card_height = "75dp"  # Moderater erhöht auf 75dp statt 85dp
             card_padding = "12dp"
             icon_size = "48dp"
             card_spacing = "8dp"
@@ -776,22 +765,26 @@ class SettingAssistentWizard:
             )
             info_layout.add_widget(detail)
         else:
-            title = MDLabel(text=cat_name, bold=True, size_hint_y=None, height="24dp")
+            title = MDLabel(text=cat_name, bold=True, size_hint_y=None, height="28dp")
             info_layout.add_widget(title)
 
             if gesamt > 0:
+                # Kürzerer Text für bessere Anzeige
+                detail_text = f"{aktiv}/{gesamt} aktiv"
+                if inaktiv > 0:
+                    detail_text += f" ({inaktiv} inaktiv)"
                 detail = MDLabel(
-                    text=f"{aktiv} aktiv / {inaktiv} inaktiv / {gesamt} gesamt",
+                    text=detail_text,
                     theme_text_color="Secondary",
                     size_hint_y=None,
-                    height="20dp"
+                    height="24dp"
                 )
             else:
                 detail = MDLabel(
                     text="Keine Elemente",
                     theme_text_color="Secondary",
                     size_hint_y=None,
-                    height="20dp"
+                    height="24dp"
                 )
             info_layout.add_widget(detail)
 
