@@ -803,28 +803,12 @@ class EinstellungenWidget(MDBoxLayout):
     # ==================== Tutorial ====================
     
     def open_tutorial(self):
-        """Startet das Tutorial."""
+        """Startet das Tutorial (setzt Hilfetexte automatisch zurück)."""
         try:
             from views.tutorial_overlay import show_welcome_tutorial
-            show_welcome_tutorial()
+            show_welcome_tutorial(force=True)
         except Exception as e:
             Logger.error(f"Fehler beim Starten des Tutorials: {e}")
-    
-    def reset_tutorial_hints(self):
-        """Setzt alle Tutorial-Hinweise zurück."""
-        try:
-            from views.tutorial_overlay import reset_tutorial_state
-            reset_tutorial_state()
-            
-            try:
-                from services.service_container import service_container
-                dialog_service = service_container.get_dialog_service()
-                if dialog_service:
-                    dialog_service.show_success_dialog("Hilfetexte wurden zurückgesetzt.")
-            except Exception:
-                pass
-        except Exception as e:
-            Logger.error(f"Fehler beim Zurücksetzen der Tutorial-Hinweise: {e}")
 
     # ==================== CLEANUP ====================
     
