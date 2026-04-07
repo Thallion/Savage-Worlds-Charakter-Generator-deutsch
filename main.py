@@ -413,7 +413,11 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.warning(f"Charakter-Migration fehlgeschlagen: {e}")
 
     def _copy_archetypen_on_android(self, bundled_chars_dir: Path, user_chars_dir: Path):
-        """Kopiert mitgelieferte Archetypen ins persistente Benutzer-Verzeichnis auf Android."""
+        """Kopiert mitgelieferte Archetypen ins persistente Benutzer-Verzeichnis auf Android.
+
+        Vergleicht Dateigröße statt mtime, da APK-Extraktion oft ältere Timestamps
+        setzt als bereits vorhandene User-Dateien.
+        """
         try:
             import shutil
 
@@ -432,8 +436,8 @@ class SW_Charakter_GeneratorApp(MDApp):
                     rel_path = item.relative_to(bundled_archetypen)
                     target = user_archetypen / rel_path
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    # Nur kopieren wenn Zieldatei nicht existiert oder älter ist
-                    if not target.exists() or item.stat().st_mtime > target.stat().st_mtime:
+                    # Kopieren wenn Zieldatei fehlt oder abweichende Größe hat (Update)
+                    if not target.exists() or item.stat().st_size != target.stat().st_size:
                         shutil.copy2(str(item), str(target))
                         copied += 1
 
