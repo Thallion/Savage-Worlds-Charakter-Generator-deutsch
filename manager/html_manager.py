@@ -178,20 +178,30 @@ class HTMLManager:
         new_html_btn.add_widget(MDButtonText(text="Als neue HTML speichern..."))
         content.add_widget(new_html_btn)
 
+        # Button-Zeile manuell statt MDDialogButtonContainer (bessere Touch-Kompatibilität auf Android)
+        button_row = MDBoxLayout(
+            orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+        )
+        button_row.add_widget(MDBoxLayout(size_hint_x=1))
+        btn_cancel = MDButton(
+            MDButtonText(text="Abbrechen"),
+            style="text",
+            on_release=lambda x: self._dismiss_save_dialog(),
+        )
+        button_row.add_widget(btn_cancel)
+        content.add_widget(button_row)
+
         self.html_options_dialog = MDDialog(
             MDDialogHeadlineText(text="HTML-Charakterbogen erstellen"),
             MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.html_options_dialog.dismiss()
-                )
-            ),
             size_hint=(0.85, None),
-            auto_dismiss=False,
         )
         self.html_options_dialog.open()
+
+    def _dismiss_save_dialog(self):
+        """Schließt den Speicher-Dialog sicher"""
+        if self.html_options_dialog:
+            self.html_options_dialog.dismiss()
 
     def _create_html_at_path(self, html_path, close_dialog=False):
         """Erstellt HTML am angegebenen Pfad und öffnet sie im Browser"""

@@ -763,7 +763,16 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         dialog_content.add_widget(search_field)
 
         # Scrollbare Liste
-        scroll_view = MDScrollView(size_hint=(1, None), height=landscape_height(280, 0.45))
+        scroll_view = MDScrollView(
+            size_hint=(1, None),
+            height=landscape_height(280, 0.45),
+            do_scroll_x=False,
+            do_scroll_y=True,
+            bar_width=dp(20) if _mobile else dp(15),
+            bar_margin=dp(8) if _mobile else dp(4),
+        )
+        if _mobile:
+            scroll_view.scroll_type = ['bars', 'content']
         scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
         items_list = MDList(size_hint_y=None, size_hint_x=1)
         items_list.bind(minimum_height=items_list.setter('height'))
