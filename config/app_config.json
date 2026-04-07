@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Fantasy Kompendium",
-  "force_mobile_layout": true,
+  "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "tutorial_state": {
     "welcome_completed": true,
