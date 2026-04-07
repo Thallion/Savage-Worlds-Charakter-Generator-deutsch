@@ -14,7 +14,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText
 from kivymd.uix.scrollview import MDScrollView
 from views.ui_components import TextFieldScrollView
-from utils.platform_utils import is_mobile_layout
+from utils.platform_utils import is_mobile_layout, landscape_height
 _mobile = is_mobile_layout()
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
@@ -685,22 +685,22 @@ class VolkGeneratorWizard:
         standard = optionen.get('standard', talente[0] if talente else None)
         selected = [standard]
         self._last_talent_click = 0
-        
-        content = MDBoxLayout(orientation="vertical", spacing=dp(4), size_hint_y=None, height=dp(min(len(talente) * 56, 300)))
-        
+
+        content = MDBoxLayout(orientation="vertical", spacing=dp(4), size_hint_y=None, adaptive_height=True)
+
         content.add_widget(MDLabel(
             text=beschreibung,
             theme_text_color="Secondary",
             size_hint_y=None,
             height=dp(24)
         ))
-        
+
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
         if _mobile:
             list_layout.padding = [0, 0, dp(32), 0]
         radio_checkboxes = {}
-        
+
         for item_name in talente:
             list_item = MDListItem(size_hint_y=None, height=dp(56) if _mobile else dp(48))
             list_item.add_widget(MDListItemHeadlineText(text=item_name))
@@ -715,8 +715,9 @@ class VolkGeneratorWizard:
             list_item.add_widget(radio_cb)
             list_layout.add_widget(list_item)
             radio_checkboxes[item_name] = radio_cb
-        
-        scroll = MDScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
+
+        scroll = MDScrollView(size_hint_y=None, height=landscape_height(200, 0.35),
+                              bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
         if _mobile:
             scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(list_layout)
