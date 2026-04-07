@@ -166,16 +166,16 @@ class WizardBar(MDBoxLayout):
         """Zeigt ein Erklärungs-Popup für den aktuellen Schritt."""
         if not self.wizard_service:
             return
-        
+
         schritt = self.wizard_service.get_aktueller_schritt()
         if not schritt or not schritt.popup_title:
             return
-        
+
         if self._current_popup_dialog:
             self._current_popup_dialog.dismiss()
-        
+
         content = MDBoxLayout(orientation="vertical", size_hint_y=None, adaptive_height=True)
-        
+
         from utils.platform_utils import landscape_height
         scroll = MDScrollView(size_hint_y=None, height=landscape_height(300, 0.45))
         text_label = MDLabel(
@@ -186,18 +186,52 @@ class WizardBar(MDBoxLayout):
         )
         scroll.add_widget(text_label)
         content.add_widget(scroll)
-        
+
+        # Buttons erstellen
+        is_last_step = (self.wizard_service.aktueller_schritt_index >= len(self.wizard_service.schritte) - 1)
+
+        buttons = []
+        buttons.append(
+            MDButton(
+                MDButtonText(text="Verstanden"),
+                style="text" if is_last_step else "filled",
+                on_release=lambda x: self._current_popup_dialog.dismiss() if self._current_popup_dialog else None
+            )
+        )
+
+        if is_last_step:
+            buttons.append(
+                MDButton(
+                    MDButtonText(text="Abschließen"),
+                    style="filled",
+                    on_release=lambda x: self._on_finish_char_gen()
+                )
+            )
+
         self._current_popup_dialog = MDDialog(
             MDDialogHeadlineText(text=schritt.popup_title),
             MDDialogContentContainer(content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Verstanden"),
-                    style="filled",
-                    on_release=lambda x: self._current_popup_dialog.dismiss() if self._current_popup_dialog else None
-                ),
-            ),
+            MDDialogButtonContainer(*buttons),
             size_hint=(0.85, None),
         )
         self._current_popup_dialog.open()
+
+    def _on_finish_char_gen(self):
+        """Schließt die Charaktererstellung ab und beendet den Wizard."""
+        from kivy.app import App
+        app = App.get_running_app()
+
+        if self._current_popup_dialog:
+            self._current_popup_dialog.dismiss()
+
+        # Charaktererstellung abschließen
+        if app and hasattr(app, 'root') and app.root:
+            generation_points = app.root.ids.get('generation_points')
+            if generation_points:
+                if not generation_points.char_gen_completed:
+                    generation_points.toggle_char_gen_completed()
+
+        # Wizard beenden
+        if self.wizard_service:
+            self.wizard_service.beenden()
 

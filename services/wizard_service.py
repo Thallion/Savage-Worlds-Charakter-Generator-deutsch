@@ -154,7 +154,7 @@ class WizardService(EventDispatcher):
                 title='Charakterbogen prüfen',
                 description='Überprüfe deinen fertigen Charakter und exportiere ihn als PDF.',
                 popup_title='Fertig!',
-                popup_text='Dein Charakter ist fertig! Überprüfe folgende Punkte:\n\n✓ Attribute korrekt verteilt?\n✓ Fertigkeitspunkte korrekt verwendet?\n✓ Grundfertigkeiten vs. ungeübt beachtet?\n✓ Handicaps maximal 4 Punkte?\n✓ Talente: Voraussetzungen erfüllt?\n✓ Parade berechnet? (2 + halber Kämpfen-Wert + Schilde)\n✓ Robustheit berechnet? (2 + halber Konstitutionswert + Rüstung)\n\nDu kannst deinen Charakter als PDF exportieren oder weiter spielen und Aufstiege freischalten.\n\nViel Spaß mit deinem Helden!',
+                popup_text='Dein Charakter ist fertig!\n\nDenke daran, Waffen, Rüstung und Schilde im Ausrüstungs-Tab nicht nur zu kaufen, sondern auch anzulegen. Nur angelegte Ausrüstung wirkt sich auf Parade und Robustheit aus.\n\nUm deinen Charakter weiterzuentwickeln, schließe die Charaktererstellung ab. Danach werden Aufstiege freigeschaltet, mit denen du Attribute, Fertigkeiten und Talente steigern kannst.\n\nDu kannst deinen Charakter jederzeit als PDF exportieren.\n\nViel Spaß mit deinem Helden!',
                 is_required=False,
                 validator=lambda c: True
             ),
