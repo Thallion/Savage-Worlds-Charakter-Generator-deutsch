@@ -534,6 +534,9 @@ class SW_Charakter_GeneratorApp(MDApp):
         # Android: Intent-Handler für empfangene JSON-Dateien registrieren
         self._setup_android_intent_handler()
 
+        # Android: Gespeicherte Bildschirm-Orientierung anwenden
+        self._apply_saved_orientation()
+
     def _check_and_show_welcome_tutorial(self):
         """Lädt Tutorial-Zustand und zeigt Willkommens-Tutorial bei Bedarf."""
         try:
@@ -1903,6 +1906,65 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         except Exception as e:
             Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")
+
+    def set_screen_orientation(self, orientation='auto', locked=False):
+        """Setzt die Bildschirm-Orientierung auf Android.
+
+        Args:
+            orientation: 'auto', 'portrait' oder 'landscape'
+            locked: True = fixiert, False = flexibel (System-Einstellung beachten)
+        """
+        try:
+            from kivy.utils import platform as _platform
+            if _platform != 'android':
+                Logger.info(f"Orientierung ignoriert (kein Android): {orientation}, locked={locked}")
+                return
+
+            from jnius import autoclass
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            activity = PythonActivity.mActivity
+
+            # Android ActivityInfo Orientierungs-Konstanten
+            SCREEN_ORIENTATION_USER = 2           # System-Einstellung beachten
+            SCREEN_ORIENTATION_PORTRAIT = 1       # Portrait fixiert
+            SCREEN_ORIENTATION_LANDSCAPE = 0      # Landscape fixiert
+            SCREEN_ORIENTATION_SENSOR_PORTRAIT = 7   # Portrait (beide Richtungen)
+            SCREEN_ORIENTATION_SENSOR_LANDSCAPE = 6  # Landscape (beide Richtungen)
+
+            if not locked:
+                # Flexibel: System-Einstellung beachten
+                requested = SCREEN_ORIENTATION_USER
+                Logger.info("Orientierung: flexibel (System-Einstellung)")
+            elif orientation == 'portrait':
+                requested = SCREEN_ORIENTATION_SENSOR_PORTRAIT
+                Logger.info("Orientierung: Portrait fixiert")
+            elif orientation == 'landscape':
+                requested = SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                Logger.info("Orientierung: Landscape fixiert")
+            else:
+                # auto + locked: System-Einstellung beachten
+                requested = SCREEN_ORIENTATION_USER
+                Logger.info("Orientierung: Auto (System-Einstellung)")
+
+            activity.setRequestedOrientation(requested)
+
+        except ImportError:
+            Logger.info("jnius nicht verfügbar (kein Android)")
+        except Exception as e:
+            Logger.warning(f"Fehler beim Setzen der Bildschirm-Orientierung: {e}")
+
+    def _apply_saved_orientation(self):
+        """Wendet die gespeicherte Orientierungs-Einstellung an."""
+        try:
+            config_service = service_container.get_config_service()
+            if not config_service:
+                return
+
+            orientation = config_service.get('screen_orientation', 'auto')
+            locked = config_service.get('screen_orientation_locked', False)
+            self.set_screen_orientation(orientation, locked)
+        except Exception as e:
+            Logger.warning(f"Fehler beim Anwenden der gespeicherten Orientierung: {e}")
 
     def _detect_android_top_padding(self):
         """Ermittelt die Statusbar/Notch-Höhe auf Android für korrektes Top-Padding"""

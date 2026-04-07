@@ -63,6 +63,11 @@ class AppConfig:
     # Desktop-Skalierung: "auto" für automatische Erkennung, oder float (z.B. 1.5)
     desktop_scale_factor: str = "auto"
 
+    # Bildschirm-Orientierung (Android): "auto", "portrait", "landscape"
+    screen_orientation: str = "auto"
+    # Orientierung fixieren (True = fixiert, False = flexibel/System-Einstellung)
+    screen_orientation_locked: bool = False
+
     # Tutorial-Zustand
     tutorial_state: dict = field(default_factory=dict)
 
