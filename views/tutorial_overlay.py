@@ -371,13 +371,14 @@ class TabHintDialog:
 _welcome_tutorial_active = False
 
 
-def show_welcome_tutorial(on_complete=None, on_skip=None):
+def show_welcome_tutorial(on_complete=None, on_skip=None, force=False):
     """
     Zeigt das Willkommens-Tutorial.
 
     Args:
         on_complete: Callback wenn Tutorial abgeschlossen
         on_skip: Callback wenn Tutorial übersprungen
+        force: Wenn True, wird der Tutorial-Zustand zurückgesetzt und das Tutorial immer gestartet
     """
     global _welcome_tutorial_active
 
@@ -393,7 +394,10 @@ def show_welcome_tutorial(on_complete=None, on_skip=None):
             Logger.error("TutorialService nicht verfügbar")
             return
 
-        if not tutorial_service.should_show_welcome():
+        if force:
+            tutorial_service.reset_welcome()
+            tutorial_service.reset_all_tab_hints()
+        elif not tutorial_service.should_show_welcome():
             Logger.info("Willkommens-Tutorial wurde bereits abgeschlossen")
             return
 
