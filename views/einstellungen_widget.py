@@ -142,10 +142,56 @@ class EinstellungenWidget(MDBoxLayout):
                 logger_switch.active = show_logger
                 Logger.debug(f"Logger Switch initialisiert: {show_logger}")
 
+            # Orientierung fixieren Switch
+            orientation_locked = config_service.get('screen_orientation_locked', False)
+            lock_switch = self.ids.get('orientation_lock_switch')
+            if lock_switch:
+                lock_switch.unbind(on_active=None)
+                lock_switch.active = orientation_locked
+                Logger.debug(f"Orientierung-Lock Switch initialisiert: {orientation_locked}")
+
+            # Orientierung Segmented Button
+            screen_orientation = config_service.get('screen_orientation', 'auto')
+            self._init_orientation_segment(screen_orientation)
+
+            # Orientierung-Auswahl nur bei fixiert sichtbar machen
+            self._update_orientation_choice_visibility(orientation_locked)
+
             # Desktop-Skalierung Slider initialisieren
             self._init_scale_slider(config_service)
         except Exception as e:
             Logger.error(f"Fehler beim Initialisieren der UI-Switches: {e}")
+
+    def _init_orientation_segment(self, orientation):
+        """Initialisiert den Orientierung-SegmentedButton aus der Config"""
+        try:
+            segment = self.ids.get('orientation_segment')
+            if not segment:
+                return
+            # Aktuellen Zustand in den Segment-Buttons markieren
+            # Die Segmente werden über on_release gesteuert
+            Logger.debug(f"Orientierung-Segment initialisiert: {orientation}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Initialisieren des Orientierung-Segments: {e}")
+
+    def _update_orientation_choice_visibility(self, locked):
+        """Zeigt/versteckt die Orientierungs-Auswahl je nach Lock-Status"""
+        try:
+            choice_box = self.ids.get('orientation_choice_box')
+            if choice_box:
+                if locked:
+                    choice_box.height = choice_box.minimum_height if hasattr(choice_box, 'minimum_height') else self._orientation_choice_height
+                    choice_box.opacity = 1
+                    choice_box.disabled = False
+                else:
+                    # Höhe merken für späteres Einblenden
+                    if hasattr(choice_box, 'minimum_height') and choice_box.height > 0:
+                        self._orientation_choice_height = choice_box.height
+                    choice_box.height = 0
+                    choice_box.opacity = 0
+                    choice_box.disabled = True
+        except Exception as e:
+            Logger.error(f"Fehler bei Orientierung-Sichtbarkeit: {e}")
 
     def _init_scale_slider(self, config_service):
         """Initialisiert den Skalierungs-Slider aus der Config"""
@@ -252,6 +298,49 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.info(f"Vertikales Menü {'aktiviert' if active else 'deaktiviert'}")
         except Exception as e:
             Logger.error(f"Fehler beim Umschalten des Menü-Modus: {e}")
+
+    def toggle_orientation_lock(self, active):
+        """Wechselt zwischen fixierter und flexibler Bildschirm-Orientierung"""
+        try:
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('screen_orientation_locked', active)
+
+            # Orientierungs-Auswahl ein-/ausblenden
+            self._update_orientation_choice_visibility(active)
+
+            # Orientierung anwenden
+            app = MDApp.get_running_app()
+            if app and hasattr(app, 'set_screen_orientation'):
+                orientation = 'auto'
+                if config_service:
+                    orientation = config_service.get('screen_orientation', 'auto')
+                app.set_screen_orientation(orientation, active)
+
+            Logger.info(f"Orientierung {'fixiert' if active else 'flexibel (System)'}")
+        except Exception as e:
+            Logger.error(f"Fehler beim Umschalten der Orientierungs-Sperre: {e}")
+
+    def set_orientation(self, orientation):
+        """Setzt die bevorzugte Bildschirm-Orientierung (portrait/landscape)"""
+        try:
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('screen_orientation', orientation)
+
+            # Nur anwenden wenn fixiert
+            locked = False
+            if config_service:
+                locked = config_service.get('screen_orientation_locked', False)
+
+            app = MDApp.get_running_app()
+            if app and hasattr(app, 'set_screen_orientation'):
+                app.set_screen_orientation(orientation, locked)
+
+            labels = {'portrait': 'Portrait', 'landscape': 'Landscape', 'auto': 'Auto'}
+            Logger.info(f"Orientierung auf {labels.get(orientation, orientation)} gesetzt")
+        except Exception as e:
+            Logger.error(f"Fehler beim Setzen der Orientierung: {e}")
 
     # ==================== DELEGIERTE METHODEN ====================
     # Alle Methoden delegieren an die entsprechenden Manager/Handler
