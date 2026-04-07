@@ -113,6 +113,8 @@ class VolkGeneratorWizard:
         self.positive_eigenarten = []
         self.negative_eigenarten = []
         
+        self._wizard_finished = False
+
         self.wizard_data = {
             'name': '',
             'beschreibung': '',
@@ -354,6 +356,8 @@ class VolkGeneratorWizard:
 
     def _show_eigenarten_popup(self, eigenart_typ):
         """Zeigt separates Popup für Eigenarten-Checkboxen (eigener ScrollView)"""
+        if self._wizard_finished:
+            return
         from kivy.core.window import Window
 
         config = lade_volkseigenarten_config()
@@ -413,26 +417,49 @@ class VolkGeneratorWizard:
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
 
+        cancel_btn = MDButton(
+            style="text",
+            on_release=lambda x: self._cancel_eigenarten_popup()
+        )
+        cancel_btn.add_widget(MDButtonIcon(icon="close"))
+        if not _mobile:
+            cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
+
+        confirm_btn = MDButton(
+            style="filled",
+            on_release=lambda x: self._close_eigenarten_popup(eigenart_typ)
+        )
+        confirm_btn.add_widget(MDButtonIcon(icon="check"))
+        if not _mobile:
+            confirm_btn.add_widget(MDButtonText(text="Übernehmen"))
+
         self._eigenarten_popup = MDDialog(
             MDDialogHeadlineText(text=title),
             MDDialogContentContainer(content),
             MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Schließen"),
-                    style="text",
-                    on_release=lambda x: self._close_eigenarten_popup(eigenart_typ)
-                ),
+                cancel_btn,
+                confirm_btn,
             ),
             size_hint=(0.9, None),
         )
         self._eigenarten_popup.open()
 
+    def _cancel_eigenarten_popup(self):
+        """Schließt das Eigenarten-Popup OHNE die Auswahl zu übernehmen (Abbrechen)."""
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.dismiss()
+
     def _close_eigenarten_popup(self, eigenart_typ):
         """Schließt das Eigenarten-Popup und aktualisiert den Wizard-Schritt"""
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
             self._eigenarten_popup.dismiss()
-        # Wizard-Schritt neu aufbauen, damit aktuelle Auswahl angezeigt wird
-        self._show_current_step()
+        if self._wizard_finished:
+            return
+        # Wizard-Schritt nach kurzer Verzögerung neu aufbauen —
+        # verhindert Touch-Propagation auf Android (Schließen-Touch wird sonst
+        # an den neuen "Eigenarten auswählen"-Button weitergeleitet und öffnet
+        # das Popup sofort wieder).
+        Clock.schedule_once(lambda dt: self._show_current_step(), 0.35)
     
     def _create_preview_step(self):
         """Erstellt Schritt 4: Vorschau & Speichern"""
@@ -905,6 +932,11 @@ class VolkGeneratorWizard:
     def _cancel_wizard(self, *args):
         if not self._nav_debounce_check():
             return
+        self._wizard_finished = True
+        # Offenes Eigenarten-Popup schließen, falls noch vorhanden
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.dismiss()
+            self._eigenarten_popup = None
         if self.dialog:
             self.dialog.dismiss()
         Logger.info("Volkseigenarten-Wizard abgebrochen")
@@ -912,6 +944,11 @@ class VolkGeneratorWizard:
     def _finish_wizard(self, *args):
         if not self._nav_debounce_check():
             return
+        self._wizard_finished = True
+        # Offenes Eigenarten-Popup schließen, falls noch vorhanden
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.dismiss()
+            self._eigenarten_popup = None
         validation = validiere_volk_erstellung(
             self.wizard_data['name'],
             self.positive_eigenarten,
