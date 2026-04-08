@@ -21,9 +21,11 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Fantasy Kompendium",
+  "last_setting": "Deadlands",
   "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
+  "screen_orientation": "auto",
+  "screen_orientation_locked": false,
   "tutorial_state": {
     "welcome_completed": true,
     "tab_hints_shown": {
@@ -41,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-07T21:07:12.385909"
+  "last_updated": "2026-04-08T17:39:13.635522"
 }

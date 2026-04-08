@@ -717,7 +717,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Elf"
             ],
             "beschreibung": "Gebundene Rüstung (Panzerung +3, 15 Pfund). Charisma -2. Kann Dornensalve abfeuern (Reichweite 2/4/8, Schaden 2W6, 3 MP).",
             "neue_maechte": 0,
@@ -809,8 +808,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
-                "Ork"
             ],
             "beschreibung": "+2 auf Überleben- und Konstitutionsproben gegen kalte Umgebung. Ermöglicht Schwimmen als Fertigkeit und empfiehlt das Talent Beziehungen.",
             "neue_maechte": 0,
@@ -823,7 +820,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (Wunder)"
             ],
             "beschreibung": "Erster Jahr der Kampagne gesegnet. Kann durch ein jährliches Ritual wiedererlangt werden.",
@@ -837,8 +833,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
-                "Zwerg",
                 "Konstitution W8+"
             ],
             "beschreibung": "Verwandelt sich schrittweise in ein Erdelementar. Erhält Fähigkeiten und Handicaps mit jedem Rang.",
@@ -863,7 +857,6 @@
             "kategorie": "Alchemist",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (Alchemist)",
                 "Alchemie W8+"
             ],
@@ -933,7 +926,6 @@
             "kategorie": "Barde",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (Barde)"
             ],
             "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
@@ -947,7 +939,6 @@
             "kategorie": "Spezial",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "+2 auf vergleichende Proben gegen Elfen für ein Jahr. Kann durch das Töten eines weiteren Elfen erneuert werden.",
             "neue_maechte": 0,
@@ -960,7 +951,6 @@
             "kategorie": "Spezial",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "+2 auf Reparierenproben für ein Jahr durch ein jährliches Ritual mit Werkzeugen.",
             "neue_maechte": 0,
@@ -973,7 +963,6 @@
             "kategorie": "Spezial",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Wählt zwischen +2 auf Überredenproben oder einer besonderen Eigenschaft für eine Waffe für ein Jahr.",
             "neue_maechte": 0,
@@ -986,7 +975,6 @@
             "kategorie": "Spezial",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Ermöglicht verschiedene Boni je nach gewähltem Aspekt der Herrin durch jährliche Zeremonien.",
             "neue_maechte": 0,
@@ -999,7 +987,6 @@
             "kategorie": "Spezial",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Schützt ein Jahr vor Erschöpfung und Tod durch Wassermangel.",
             "neue_maechte": 0,
@@ -1012,7 +999,6 @@
             "kategorie": "Spezial",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Erhöht die Reichweite von Anführertalenten und unterstützenden Zaubern um 5\" für ein Jahr.",
             "neue_maechte": 0,
@@ -1025,7 +1011,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Glühblut"
             ],
             "beschreibung": "+1 auf Willenskraft- oder Verstand-Proben und deren Fertigkeiten. Wird bei Glühwahn zur Zornbestie.",
@@ -1085,7 +1070,6 @@
             "rang": "E",
             "voraussetzungen": [
                 "Erfahren",
-                "Elf",
                 "Schießen W8+"
             ],
             "beschreibung": "Erlaubt zwei Pfeile auf ein Ziel zu schießen mit −2 auf die Schießenprobe. Funktioniert nur mit Bögen.",
@@ -1173,11 +1157,9 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "VER W10",
                 "Seefahrt W6+",
-                "Wissen (Astronomie) W10+",
-                "Mitglied der Söhne der Turmspitze"
+                "Wissen (Astronomie) W10+"
             ],
             "beschreibung": "Verkürzt Reisezeit pro Erfolg in Seefahrt um eine Woche. Kumulativ mit 'Vom Wind gesegnet'.",
             "neue_maechte": 0,
@@ -1190,7 +1172,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (Wunder)",
                 "Glaube W6+",
                 "Willenskraft W8+",
@@ -1207,8 +1188,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
-                "Elf"
             ],
             "beschreibung": "+2 gegen geistige Duelle oder vergleichende Proben gegen Elfen oder Agenten der Weidenkönigin.",
             "neue_maechte": 0,
@@ -1221,7 +1200,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Wahrnehmung W8",
                 "Glück"
             ],
@@ -1236,9 +1214,8 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "zwergisch",
-                "Priester von Festival"
+                "AH Priester"
             ],
             "beschreibung": "Reduziert die Machtpunktekosten bestimmter Mächte um 1 pro Steigerung bei einer Glaubensprobe.",
             "neue_maechte": 0,
@@ -1251,9 +1228,7 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
-                "Überreden W6",
-                "Mitglied der Astbrecher"
+                "Überreden W6"
             ],
             "beschreibung": "Erzeugt die Vision des Rabenstabs in Elfen, wodurch sie Angeschlagen werden können.",
             "neue_maechte": 0,
@@ -1266,7 +1241,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "verehrt keinen der Götter"
             ],
             "beschreibung": "+1 gegen Glühwahn, Wildcard-Einende würfeln W8-Wildcard-Würfel, um Wundern zu widerstehen.",
@@ -1280,7 +1254,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (Wunder)",
                 "Willenskraft W8+",
                 "Glaube W8+",
@@ -1298,7 +1271,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Willenskraft W8+",
                 "Glaube W8+",
                 "Priester des Kriegsherrn"
@@ -1314,7 +1286,6 @@
             "kategorie": "Übernatürlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Wahrnehmung W8+",
                 "Kurier"
             ],
@@ -1328,9 +1299,7 @@
             "name": "Von einem Geist besessen",
             "kategorie": "Übernatürlich",
             "rang": "A",
-            "voraussetzungen": [
-                "Anfänger"
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Erhält einen zusätzlichen Bennie, der Gegner zwingt, erneut zu würfeln und das schlechtere Ergebnis zu nehmen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1341,9 +1310,7 @@
             "name": "Ahnenfreund",
             "kategorie": "Übernatürlich",
             "rang": "A",
-            "voraussetzungen": [
-                "Anfänger"
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Kann Geister seiner Ahnen rufen, die als Mannschaft auf seinem Schiff dienen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1996,7 +1963,6 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Kämpfen W6+"
             ],
             "beschreibung": "Ein Rücksichtsloser Angriff verursacht +4 Schaden statt +2.",
@@ -2010,7 +1976,6 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Stärke W8+"
             ],
             "beschreibung": "Fügt bei Angriffen auf Objekte +W6 Schaden hinzu, wobei die Schadenswürfel nicht explodieren können.",
@@ -2068,7 +2033,6 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (beliebig)",
                 "eine böse Gesinnung"
             ],
@@ -2126,7 +2090,6 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (jeder außer Barde)",
                 "Okkultismus W8+"
             ],
@@ -2141,7 +2104,6 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (beliebig)"
             ],
             "beschreibung": "Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.",
@@ -2155,7 +2117,6 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
             ],
             "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
@@ -2169,7 +2130,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Konstitution W6+",
                 "Überleben W8+"
             ],
@@ -2198,7 +2158,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Alchemie, Heilen oder Überleben W6+"
             ],
             "beschreibung": "Erstellt Gifte in der Hälfte der Zeit, die Kontaktgifte halten 12 statt 4 Stunden.",
@@ -2212,7 +2171,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Geschicklichkeit W8+",
                 "Reiten W6+"
             ],
@@ -2241,7 +2199,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Reiten W6+"
             ],
             "beschreibung": "Gewährt ein treues, aufsteigbares Reittier mit besonderen Fähigkeiten. Ermöglicht die Wahl eines mächtigen Reittiers auf höheren Rängen.",
@@ -2255,7 +2212,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Willenskraft W6+",
                 "Stärke W8+",
                 "Konstitution W8+",
@@ -2274,7 +2230,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Wahrnehmung W8+",
                 "Okkultismus W8+"
             ],
@@ -2289,7 +2244,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Reparieren W6+"
             ],
             "beschreibung": "Erhöht Wahrnehmungsproben um +2, um Fallen oder versteckte Türen in Stein zu entdecken.",
@@ -2332,7 +2286,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Willenskraft W8+"
             ],
             "beschreibung": "Verbündete im Umkreis von 20 Metern erhalten +1 auf Furchtproben und -1 auf der Furchttabelle.",
@@ -2346,7 +2299,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Erlaubt es, mit einer Tiergattung zu kommunizieren und Informationen von ihnen zu erhalten, abhängig von ihrer Intelligenz.",
             "neue_maechte": 0,
@@ -2359,7 +2311,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Lykanthropie"
             ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",

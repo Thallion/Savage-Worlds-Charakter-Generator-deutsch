@@ -458,7 +458,8 @@ class HistorieWidget(MDBoxLayout):
 
         switch_box = MDBoxLayout(orientation='horizontal', size_hint_x=None, width=dp(110), spacing=dp(4))
         switch_label = MDLabel(text="Auto-Log:", size_hint_x=None, width=dp(65), font_size="13sp")
-        self.auto_log_switch = MDSwitch(active=True)
+        self.auto_log_switch = MDSwitch()
+        self.auto_log_switch.active = True
         switch_box.add_widget(switch_label)
         switch_box.add_widget(self.auto_log_switch)
         header.add_widget(switch_box)
@@ -581,7 +582,8 @@ class HistorieWidget(MDBoxLayout):
             orientation='horizontal', size_hint_y=None, height=dp(36), spacing=dp(4)
         )
         switch_label = MDLabel(text="Auto-Log:", font_size="12sp", size_hint_x=None, width=dp(65))
-        self.auto_log_switch = MDSwitch(active=True)
+        self.auto_log_switch = MDSwitch()
+        self.auto_log_switch.active = True
         switch_box.add_widget(switch_label)
         switch_box.add_widget(self.auto_log_switch)
         left_col.add_widget(switch_box)
