@@ -41,16 +41,27 @@ class CustomFileManager(MDFileManager):
             Logger.warning(f"CustomFileManager: Bottom-Padding konnte nicht gesetzt werden: {e}")
 
     def _create_selection_button(self, *args):
-        """Überschrieben: FAB höher positionieren für Android-Navigationsleiste"""
+        """Überschrieben: FAB höher positionieren für Android-Navigationsleiste
+        und Abbrechen-Button auf der linken Seite hinzufügen."""
         from kivymd.uix.button import MDFabButton
 
-        if self.selector in ("any", "multi", "folder"):
-            # Android-Navigationsleiste ist typisch 48dp hoch
-            # Standard KivyMD setzt y=dp(12), was verdeckt wird
-            fab_y = dp(12)
-            if platform == 'android':
-                fab_y = dp(88)
+        # Abbrechen-Button (links) — immer anzeigen
+        fab_y = dp(12)
+        if platform == 'android':
+            fab_y = dp(88)
 
+        self.cancel_button = MDFabButton(
+            on_release=lambda x: self.exit_manager(1),
+            theme_bg_color="Custom",
+            md_bg_color=self.theme_cls.errorColor,
+            icon="close",
+            pos_hint={"x": 0.01},
+            y=fab_y,
+        )
+        self.add_widget(self.cancel_button)
+
+        # Auswahl-Button (rechts) — nur bei Ordner-/Multi-Auswahl
+        if self.selector in ("any", "multi", "folder"):
             self.selection_button = MDFabButton(
                 on_release=self.select_directory_on_press_button,
                 theme_bg_color="Custom",
