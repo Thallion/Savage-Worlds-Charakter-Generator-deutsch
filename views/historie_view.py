@@ -325,8 +325,12 @@ class HistorieWidget(MDBoxLayout):
     """
     Widget zur Anzeige und Verwaltung der Charakter-Historie.
     Zeigt alle Änderungen und Steigerungen des aktuellen Charakters an.
+
+    Mobile: Layout wird dynamisch in Python aufgebaut und reagiert
+    auf Orientierungswechsel (Portrait/Landscape).
+    Desktop: Layout kommt aus historie_view.kv.
     """
-    
+
     charakter_controller = ObjectProperty(None)
 
     def __init__(self, **kwargs):
@@ -339,8 +343,24 @@ class HistorieWidget(MDBoxLayout):
         self.charakter_controller = None
         self._dialog_service = None
 
-        # Widget-Referenzen aus KV-IDs setzen (nach KV-Layout-Aufbau)
-        Clock.schedule_once(self._init_widget_refs, 0)
+        # Widget-Referenzen
+        self.auto_log_switch = None
+        self.log_display = None
+        self.stats_text = None
+        self.stats_card = None
+        self.filter_input = None
+
+        # Mobile-State
+        self._stats_collapsed = False
+        self._current_orientation = None  # 'portrait' oder 'landscape'
+        self._debounce_resize_event = None
+
+        if _mobile:
+            # Mobile: Layout dynamisch aufbauen
+            Clock.schedule_once(self._build_mobile_layout, 0)
+        else:
+            # Desktop: Widget-Referenzen aus KV-IDs
+            Clock.schedule_once(self._init_widget_refs_desktop, 0)
 
         # Services initialisieren
         Clock.schedule_once(self._init_services, 0.1)
@@ -348,15 +368,318 @@ class HistorieWidget(MDBoxLayout):
         # Event-Listener registrieren
         Clock.schedule_once(self._register_event_listeners, 0.2)
 
-    def _init_widget_refs(self, dt):
-        """Setzt Widget-Referenzen aus KV-IDs auf self-Attribute."""
+    # ── Desktop: KV-basierte Widget-Refs ──────────────────────────
+
+    def _init_widget_refs_desktop(self, dt):
+        """Setzt Widget-Referenzen aus KV-IDs (Desktop)."""
         self.auto_log_switch = self.ids.auto_log_switch
         self.log_display = self.ids.log_display
         self.stats_text = self.ids.stats_text
         self.stats_card = self.ids.stats_card
         self.filter_input = self.ids.filter_input
-        # Filter-Binding
         self.filter_input.bind(text=self._apply_filter)
+
+    # ── Mobile: Dynamisches Layout ────────────────────────────────
+
+    def _build_mobile_layout(self, dt):
+        """Baut das Mobile-Layout dynamisch auf und bindet Orientierungswechsel."""
+        from kivy.core.window import Window
+
+        # Orientierung bestimmen und Layout aufbauen
+        self._rebuild_for_orientation()
+
+        # Auf Größenänderungen reagieren (Orientierungswechsel)
+        Window.bind(on_resize=self._on_window_resize)
+
+    def _on_window_resize(self, window, width, height):
+        """Reagiert auf Fenster-/Orientierungswechsel."""
+        new_orientation = 'landscape' if width > height else 'portrait'
+        if new_orientation != self._current_orientation:
+            # Debounce: Verzögert rebuilden um mehrfache resize-Events zu vermeiden
+            if self._debounce_resize_event:
+                self._debounce_resize_event.cancel()
+            self._debounce_resize_event = Clock.schedule_once(
+                lambda dt: self._rebuild_for_orientation(), 0.15
+            )
+
+    def _rebuild_for_orientation(self):
+        """Baut das Layout passend zur aktuellen Orientierung neu auf."""
+        from kivy.core.window import Window
+        from kivy.metrics import dp
+
+        is_landscape = Window.width > Window.height
+        new_orientation = 'landscape' if is_landscape else 'portrait'
+
+        # Aktuellen Log-Text sichern
+        current_text = ""
+        if self.log_display:
+            current_text = self.log_display.text
+
+        # Alte Widgets entfernen
+        self.clear_widgets()
+
+        if is_landscape:
+            self._build_landscape_layout()
+        else:
+            self._build_portrait_layout()
+
+        # Log-Text wiederherstellen
+        if current_text and self.log_display:
+            self.log_display.text = current_text
+
+        self._current_orientation = new_orientation
+
+        # Display aktualisieren falls Historie vorhanden
+        if self.historie.entries:
+            self._update_display()
+
+    def _build_portrait_layout(self):
+        """Baut das Portrait-Layout auf (vertikal gestapelt)."""
+        from kivy.metrics import dp
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.card import MDCard
+        from kivymd.uix.divider import MDDivider
+        from kivymd.uix.selectioncontrol import MDSwitch
+        from kivymd.uix.textfield import MDTextField
+        from kivymd.uix.scrollview import MDScrollView
+        from views.ui_components import ReadonlyTextDisplay
+
+        self.orientation = 'vertical'
+        self.padding = dp(6)
+        self.spacing = dp(6)
+
+        # ── Header: Titel + Auto-Log Switch ──
+        header = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(40), spacing=dp(8))
+
+        title = MDLabel(text="[b]Charakter-Historie[/b]", markup=True, font_size="18sp", size_hint_x=1)
+        header.add_widget(title)
+
+        switch_box = MDBoxLayout(orientation='horizontal', size_hint_x=None, width=dp(110), spacing=dp(4))
+        switch_label = MDLabel(text="Auto-Log:", size_hint_x=None, width=dp(65), font_size="13sp")
+        self.auto_log_switch = MDSwitch(active=True)
+        switch_box.add_widget(switch_label)
+        switch_box.add_widget(self.auto_log_switch)
+        header.add_widget(switch_box)
+
+        self.add_widget(header)
+
+        # ── Buttons ──
+        btn_row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(44), spacing=dp(6))
+
+        btn_save = MDButton(style="tonal", size_hint_x=1, on_release=self._save_history)
+        btn_save.add_widget(MDButtonText(text="Speichern"))
+        btn_row.add_widget(btn_save)
+
+        btn_clear = MDButton(style="tonal", size_hint_x=1, on_release=self._clear_history)
+        btn_clear.add_widget(MDButtonText(text="Löschen"))
+        btn_row.add_widget(btn_clear)
+
+        btn_export = MDButton(style="tonal", size_hint_x=1, on_release=self._export_full_history)
+        btn_export.add_widget(MDButtonText(text="Exportieren"))
+        btn_row.add_widget(btn_export)
+
+        self.add_widget(btn_row)
+
+        # ── Divider ──
+        self.add_widget(MDDivider())
+
+        # ── Statistik-Karte (klappbar) ──
+        self.stats_card = MDCard(
+            orientation='vertical', padding=dp(8),
+            size_hint_y=None, height=dp(110),
+            md_bg_color=(0.1, 0.1, 0.1, 1)
+        )
+        self.stats_card.bind(on_release=self._toggle_stats)
+
+        stats_header = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(24))
+        stats_title = MDLabel(
+            text="[b]Session-Statistik:[/b]", markup=True,
+            size_hint_x=1, font_size="14sp"
+        )
+        self._stats_chevron = MDLabel(
+            text="▲", size_hint_x=None, width=dp(24),
+            font_size="14sp", halign="center"
+        )
+        stats_header.add_widget(stats_title)
+        stats_header.add_widget(self._stats_chevron)
+        self.stats_card.add_widget(stats_header)
+
+        self.stats_text = MDLabel(
+            text="Keine Daten verfügbar",
+            size_hint_y=None, height=dp(70), font_size="13sp"
+        )
+        self.stats_card.add_widget(self.stats_text)
+
+        self._stats_collapsed = False
+        self.add_widget(self.stats_card)
+
+        # ── Log-Anzeige (ScrollView) ──
+        scroll = MDScrollView(
+            size_hint=(1, 1),
+            do_scroll_x=False, do_scroll_y=True,
+            bar_width=dp(24), bar_margin=dp(12),
+            scroll_type=['bars', 'content']
+        )
+        scroll.scroll_wheel_distance = dp(114)
+
+        self.log_display = ReadonlyTextDisplay(
+            text="", readonly=True, multiline=True,
+            font_size="12sp",
+            background_color=(0.05, 0.05, 0.05, 1),
+            foreground_color=(1, 1, 1, 1),
+            padding=[dp(8), dp(8), dp(40), dp(8)],
+            size_hint_y=None
+        )
+        self.log_display.bind(minimum_height=self.log_display.setter('height'))
+        scroll.add_widget(self.log_display)
+
+        self.add_widget(scroll)
+
+        # ── Filter-Zeile ──
+        filter_row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(6))
+        self.filter_input = MDTextField(mode="outlined", size_hint_x=1)
+        self.filter_input.hint_text = "Suche in Historie..."
+        self.filter_input.bind(text=self._apply_filter)
+        filter_row.add_widget(self.filter_input)
+
+        self.add_widget(filter_row)
+
+    def _build_landscape_layout(self):
+        """Baut das Landscape-Layout auf (zwei Spalten: Controls links, Log rechts)."""
+        from kivy.metrics import dp
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.card import MDCard
+        from kivymd.uix.divider import MDDivider
+        from kivymd.uix.selectioncontrol import MDSwitch
+        from kivymd.uix.textfield import MDTextField
+        from kivymd.uix.scrollview import MDScrollView
+        from views.ui_components import ReadonlyTextDisplay
+
+        self.orientation = 'horizontal'
+        self.padding = dp(6)
+        self.spacing = dp(8)
+
+        # ═══ Linke Spalte: Controls + Stats ═══
+        left_col = MDBoxLayout(
+            orientation='vertical', size_hint_x=None, width=dp(200),
+            spacing=dp(6), padding=[0, 0, dp(4), 0]
+        )
+
+        # Titel
+        title = MDLabel(
+            text="[b]Charakter-\nHistorie[/b]", markup=True,
+            font_size="16sp", size_hint_y=None, height=dp(44)
+        )
+        left_col.add_widget(title)
+
+        # Auto-Log Switch
+        switch_box = MDBoxLayout(
+            orientation='horizontal', size_hint_y=None, height=dp(36), spacing=dp(4)
+        )
+        switch_label = MDLabel(text="Auto-Log:", font_size="12sp", size_hint_x=None, width=dp(65))
+        self.auto_log_switch = MDSwitch(active=True)
+        switch_box.add_widget(switch_label)
+        switch_box.add_widget(self.auto_log_switch)
+        left_col.add_widget(switch_box)
+
+        left_col.add_widget(MDDivider())
+
+        # Buttons (vertikal gestapelt)
+        btn_save = MDButton(style="tonal", size_hint_x=1, size_hint_y=None, height=dp(36),
+                            on_release=self._save_history)
+        btn_save.add_widget(MDButtonText(text="Speichern", font_size="12sp"))
+        left_col.add_widget(btn_save)
+
+        btn_clear = MDButton(style="tonal", size_hint_x=1, size_hint_y=None, height=dp(36),
+                             on_release=self._clear_history)
+        btn_clear.add_widget(MDButtonText(text="Löschen", font_size="12sp"))
+        left_col.add_widget(btn_clear)
+
+        btn_export = MDButton(style="tonal", size_hint_x=1, size_hint_y=None, height=dp(36),
+                              on_release=self._export_full_history)
+        btn_export.add_widget(MDButtonText(text="Exportieren", font_size="12sp"))
+        left_col.add_widget(btn_export)
+
+        left_col.add_widget(MDDivider())
+
+        # Kompakte Statistik
+        self.stats_card = MDCard(
+            orientation='vertical', padding=dp(6),
+            size_hint_y=None, height=dp(100),
+            md_bg_color=(0.1, 0.1, 0.1, 1)
+        )
+        stats_title = MDLabel(
+            text="[b]Statistik:[/b]", markup=True,
+            size_hint_y=None, height=dp(20), font_size="12sp"
+        )
+        self.stats_card.add_widget(stats_title)
+
+        self.stats_text = MDLabel(
+            text="Keine Daten", size_hint_y=None, height=dp(70), font_size="11sp"
+        )
+        self.stats_card.add_widget(self.stats_text)
+        left_col.add_widget(self.stats_card)
+
+        # Filter
+        self.filter_input = MDTextField(mode="outlined", size_hint_y=None, height=dp(40))
+        self.filter_input.hint_text = "Suche..."
+        self.filter_input.bind(text=self._apply_filter)
+        left_col.add_widget(self.filter_input)
+
+        # Spacer unten
+        left_col.add_widget(MDBoxLayout(size_hint_y=1))
+
+        self.add_widget(left_col)
+
+        # ═══ Rechte Spalte: Log-Anzeige (volle Höhe) ═══
+        scroll = MDScrollView(
+            size_hint=(1, 1),
+            do_scroll_x=False, do_scroll_y=True,
+            bar_width=dp(20), bar_margin=dp(8),
+            scroll_type=['bars', 'content']
+        )
+        scroll.scroll_wheel_distance = dp(114)
+
+        self.log_display = ReadonlyTextDisplay(
+            text="", readonly=True, multiline=True,
+            font_size="11sp",
+            background_color=(0.05, 0.05, 0.05, 1),
+            foreground_color=(1, 1, 1, 1),
+            padding=[dp(8), dp(8), dp(30), dp(8)],
+            size_hint_y=None
+        )
+        self.log_display.bind(minimum_height=self.log_display.setter('height'))
+        scroll.add_widget(self.log_display)
+
+        self.add_widget(scroll)
+
+    def _toggle_stats(self, *args):
+        """Klappt die Statistik-Karte ein/aus (nur Portrait)."""
+        from kivy.metrics import dp
+        from kivy.animation import Animation
+
+        if self._stats_collapsed:
+            # Aufklappen
+            anim = Animation(height=dp(110), duration=0.2)
+            anim.start(self.stats_card)
+            if self.stats_text:
+                self.stats_text.opacity = 1
+            if hasattr(self, '_stats_chevron'):
+                self._stats_chevron.text = "▲"
+            self._stats_collapsed = False
+        else:
+            # Zuklappen
+            anim = Animation(height=dp(30), duration=0.2)
+            anim.start(self.stats_card)
+            if self.stats_text:
+                self.stats_text.opacity = 0
+            if hasattr(self, '_stats_chevron'):
+                self._stats_chevron.text = "▼"
+            self._stats_collapsed = True
     
     def _init_services(self, dt):
         """Initialisiert die Service-Referenzen."""
@@ -418,24 +741,27 @@ class HistorieWidget(MDBoxLayout):
     def _update_display(self):
         """Aktualisiert die Anzeige der Historie."""
         try:
+            if not self.log_display or not self.stats_text:
+                return
+
             # Log-Text aktualisieren
             self.log_display.text = self.historie.get_formatted_log()
-            
+
             # Statistik aktualisieren
             stats_text = []
             stats_text.append(f"Attribute gesteigert: {len([e for e in self.historie.entries if 'attribut' in e['type']])} mal")
             stats_text.append(f"Fertigkeiten gesteigert: {len([e for e in self.historie.entries if 'fertigkeit' in e['type']])} mal")
             stats_text.append(f"Talente erworben: {len([e for e in self.historie.entries if 'talent' in e['type']])}")
             stats_text.append(f"Gesamtkosten: {sum(self.historie.total_kosten.values())} Punkte")
-            
+
             self.stats_text.text = "\n".join(stats_text)
-            
+
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der Historie-Anzeige: {str(e)}")
     
     def _on_attribute_changed(self, event_data):
         """Handler für Attribut-Änderungen."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -464,7 +790,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_skill_changed(self, event_data):
         """Handler für Fertigkeits-Änderungen."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -493,7 +819,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_talent_added(self, event_data):
         """Handler für neue Talente."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -520,7 +846,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_handicap_added(self, event_data):
         """Handler für neue Handicaps."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -547,7 +873,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_macht_added(self, event_data):
         """Handler für neue Mächte."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -574,7 +900,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_talent_removed(self, event_data):
         """Handler für entfernte Talente."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -590,7 +916,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_handicap_removed(self, event_data):
         """Handler für entfernte Handicaps."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -606,7 +932,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_handicap_reduced(self, event_data):
         """Handler für reduzierte Handicaps."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -622,7 +948,7 @@ class HistorieWidget(MDBoxLayout):
     
     def _on_macht_removed(self, event_data):
         """Handler für entfernte Mächte."""
-        if not self.auto_log_switch.active:
+        if not self.auto_log_switch or not self.auto_log_switch.active:
             return
             
         try:
@@ -675,7 +1001,7 @@ class HistorieWidget(MDBoxLayout):
         try:
             # Journal immer ins Charakter-Objekt schreiben, damit es im JSON landet
             self._sync_journal_to_charakter()
-            if self.auto_log_switch.active:
+            if self.auto_log_switch and self.auto_log_switch.active:
                 self._save_history(None)
         except Exception as e:
             Logger.error(f"Fehler beim Auto-Speichern der Historie: {str(e)}")

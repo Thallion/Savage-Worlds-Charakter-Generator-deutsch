@@ -1,6 +1,7 @@
 # historie_view.kv - Desktop-Layout
 
 #:import dp kivy.metrics.dp
+#:import ReadonlyTextDisplay views.ui_components.ReadonlyTextDisplay
 
 <HistorieWidget>:
     orientation: 'vertical'
@@ -114,7 +115,7 @@
             size_hint_y: None
             height: dp(100)
 
-    # Log-Anzeige (ScrollView mit TextInput)
+    # Log-Anzeige (ScrollView mit ReadonlyTextDisplay)
     MDScrollView:
         size_hint: (1, 1)
         do_scroll_x: False
@@ -124,7 +125,7 @@
         scroll_type: ['bars', 'content']
         scroll_wheel_distance: dp(114)
 
-        TextInput:
+        ReadonlyTextDisplay:
             id: log_display
             text: ""
             readonly: True

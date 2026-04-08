@@ -193,6 +193,26 @@ from kivy.animation import Animation
 from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.graphics import Color, Rectangle
+from kivy.uix.textinput import TextInput
+
+
+class ReadonlyTextDisplay(TextInput):
+    """
+    Schreibgeschütztes TextInput für Log-Anzeige.
+    Leitet Touch-Events an das übergeordnete ScrollView weiter,
+    statt Text zu markieren. Ermöglicht korrektes Scrollen
+    ohne ungewollte Textmarkierung.
+    """
+
+    def on_touch_down(self, touch):
+        # Touch nicht abfangen → ScrollView kann scrollen
+        return False
+
+    def on_touch_move(self, touch):
+        return False
+
+    def on_touch_up(self, touch):
+        return False
 
 
 class SearchBottomSheet(ModalView):
