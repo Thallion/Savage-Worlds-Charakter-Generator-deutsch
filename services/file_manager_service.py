@@ -470,9 +470,11 @@ class FileManagerService:
                 Logger.error(f"FileManager Fallback ebenfalls fehlgeschlagen: {e2}")
     
     def exit_manager(self, *args):
-        """Schließt den FileManager"""
+        """Schließt den FileManager und setzt temporäre Einstellungen zurück"""
         self.manager_open = False
+        self.current_action = None
         self.file_manager.close()
+        self.clear_temp_settings()
     
     def select_path(self, path):
         """
