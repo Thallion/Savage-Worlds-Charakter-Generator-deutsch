@@ -556,7 +556,15 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         search_field.add_widget(MDTextFieldHintText(text="Talent suchen..."))
         content.add_widget(search_field)
 
-        scroll_height = min(dp(350), Window.height * 0.5)
+        # Feste Höhen: Info-Label(48) + Suchfeld(56) + Spacing/Padding(32)
+        content_fixed = dp(48) + dp(56) + dp(32)
+        # Dialog-Chrome: Headline(56) + Buttons(64) + internes Padding(40)
+        dialog_chrome = dp(160)
+        # Maximale Dialog-Höhe: 80% des Bildschirms
+        max_dialog_height = Window.height * 0.8
+        scroll_height = min(dp(350), max_dialog_height - content_fixed - dialog_chrome)
+        scroll_height = max(scroll_height, dp(150))
+
         scroll = TextFieldScrollView(
             size_hint=(1, None),
             height=scroll_height,
@@ -608,7 +616,9 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
 
         scroll.add_widget(talent_list)
         content.add_widget(scroll)
+        content.height = content_fixed + scroll_height
 
+        dialog_height = min(content.height + dialog_chrome, max_dialog_height)
         self._talent_selection_popup = MDDialog(
             MDDialogHeadlineText(text="Freies Talent wählen"),
             MDDialogContentContainer(content, orientation="vertical"),
@@ -623,7 +633,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                 ),
             ),
             size_hint=(0.85, None),
-            height=scroll_height + dp(150)
+            height=dialog_height,
         )
         self._talent_selection_popup.open()
 
