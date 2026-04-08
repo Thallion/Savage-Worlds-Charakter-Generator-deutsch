@@ -314,8 +314,10 @@ def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
         if hasattr(volk, 'has_wahlmoeglichkeit'):
             result = volk.has_wahlmoeglichkeit(wahlmoeglichkeit_typ)
             Logger.debug(f"Volk-Methode has_wahlmoeglichkeit für '{volk_name}': {result}")
-            return result
-        
+            if result:
+                return True
+            # Bei False: Weiter zu Fallback-Checks (z.B. Menschen-Spezialbehandlung)
+
         # Fallback: Prüfung über effects
         if hasattr(volk, 'effects'):
             wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})

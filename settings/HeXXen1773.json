@@ -8,9 +8,22 @@
             "talente": [
                 "Anpassungsfähig"
             ],
-            "besonderheiten": [],
+            "besonderheiten": [
+                "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
+            ],
             "aktiv": true,
-            "custom": false
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true
+                }
+            }
         }
     },
     "voelker_selected": {

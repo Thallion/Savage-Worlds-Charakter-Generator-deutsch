@@ -130,7 +130,7 @@
                     "zusaetzliche_fertigkeitspunkte": 2
                 },
                 "wahlmoeglichkeiten": {
-                    "anpassungsfaehigkeit_oder_talent": true
+                    "freies_talent_oder_fertigkeitspunkte": true
                 }
             }
         },
