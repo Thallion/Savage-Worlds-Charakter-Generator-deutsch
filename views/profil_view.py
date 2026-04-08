@@ -11,6 +11,8 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.textinput import TextInput
+from kivy.uix.widget import Widget
+from kivy.metrics import dp
 
 import os
 import sys
@@ -48,7 +50,7 @@ class ProfilWidget(MDBoxLayout):
     konzept = StringProperty('')
     sprachen = StringProperty('')
     settingregeln = ObjectProperty(None)
-    charakter = ObjectProperty(None)  
+    charakter = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -65,10 +67,22 @@ class ProfilWidget(MDBoxLayout):
             sprachen=self.on_sprachen_change,
         )
 
+        # Orientierungs-Tracking für Mobile Landscape
+        self._current_orientation = None
+        self._debounce_resize_event = None
+        self._is_mobile = False
+
+        from utils.platform_utils import is_mobile_layout
+        self._is_mobile = is_mobile_layout()
+
+        if self._is_mobile:
+            from kivy.core.window import Window
+            Window.bind(on_resize=self._on_size_change)
+            # Initiale Orientierung prüfen
+            Clock.schedule_once(self._check_initial_orientation, 0.1)
+
         self.load_profil()
         Logger.info("ProfilWidget initialisiert und an Charakteränderungen gebunden.")
-        # self.settingregeln = SettingRegeln()
-        # Clock.schedule_once(self.setup_checkboxes)
 
     # def setup_checkboxes(self, dt):
     #     try:
@@ -113,7 +127,169 @@ class ProfilWidget(MDBoxLayout):
     #             h_layout.add_widget(checkbox)
     #             self.ids.checkbox_container.add_widget(h_layout)
 
-    # Die restlichen Methoden bleiben unverändert
+    # ── Orientierungs-Management (Mobile Landscape) ──
+
+    def _check_initial_orientation(self, dt):
+        """Prüft beim Start ob Landscape-Layout nötig ist."""
+        from kivy.core.window import Window
+        is_landscape = Window.width > Window.height
+        if is_landscape:
+            self._current_orientation = 'portrait'  # Erzwingt Rebuild
+            self._rebuild_for_orientation()
+        else:
+            self._current_orientation = 'portrait'
+
+    def _on_size_change(self, instance, width, height):
+        """Reagiert auf Fenster-/Orientierungswechsel."""
+        new_orientation = 'landscape' if width > height else 'portrait'
+        if new_orientation != self._current_orientation:
+            if self._debounce_resize_event:
+                self._debounce_resize_event.cancel()
+            self._debounce_resize_event = Clock.schedule_once(
+                lambda dt: self._rebuild_for_orientation(), 0.15
+            )
+
+    def _rebuild_for_orientation(self):
+        """Baut das Layout passend zur aktuellen Orientierung neu auf."""
+        from kivy.core.window import Window
+
+        is_landscape = Window.width > Window.height
+        new_orientation = 'landscape' if is_landscape else 'portrait'
+
+        # Aktuelle Feldwerte sichern
+        field_values = {}
+        for field_id in ('name_input', 'alter_input', 'geschlecht_input', 'konzept_input', 'sprachen_input'):
+            if field_id in self.ids:
+                field_values[field_id] = self.ids[field_id].text
+
+        # Alte Widgets entfernen
+        self.clear_widgets()
+
+        if is_landscape:
+            self._build_landscape_layout()
+        else:
+            self._build_portrait_layout()
+
+        # Feldwerte wiederherstellen
+        for field_id, text in field_values.items():
+            if field_id in self.ids:
+                self.ids[field_id].text = text
+
+        self._current_orientation = new_orientation
+        Logger.info(f"ProfilWidget: Layout neu gebaut für {new_orientation}")
+
+    def _create_field_group(self, label_text, field_id, hint_text, change_callback):
+        """Erstellt eine Feld-Gruppe (Label + TextField) für Mobile-Layout."""
+        group = MDBoxLayout(
+            orientation='vertical',
+            size_hint_y=None,
+            height=dp(70),
+            spacing=dp(2),
+        )
+
+        label = MDLabel(
+            text=label_text,
+            size_hint_y=None,
+            height=dp(24),
+            halign='left',
+            theme_text_color="Primary",
+            font_size=dp(13),
+        )
+        group.add_widget(label)
+
+        field = MDTextField(
+            hint_text=hint_text,
+            size_hint_x=1,
+        )
+        field.bind(text=change_callback)
+        group.add_widget(field)
+
+        # ID registrieren
+        self.ids[field_id] = field
+
+        return group
+
+    def _build_portrait_layout(self):
+        """Baut das Portrait-Layout auf (einspaltig, wie mobile KV)."""
+        self.orientation = 'vertical'
+
+        container = MDBoxLayout(
+            orientation='vertical',
+            size_hint=(1, 1),
+            padding=[dp(12), dp(8), dp(12), dp(12)],
+            spacing=dp(6),
+        )
+
+        container.add_widget(self._create_field_group(
+            "Name:", "name_input", "Name eingeben",
+            lambda inst, val: self.on_char_name_change(self, val)))
+        container.add_widget(self._create_field_group(
+            "Alter:", "alter_input", "Alter eingeben",
+            lambda inst, val: self.on_alter_change(self, val)))
+        container.add_widget(self._create_field_group(
+            "Geschlecht:", "geschlecht_input", "Geschlecht eingeben",
+            lambda inst, val: self.on_geschlecht_change(self, val)))
+        container.add_widget(self._create_field_group(
+            "Konzept:", "konzept_input", "Konzept eingeben",
+            lambda inst, val: self.on_konzept_change(self, val)))
+        container.add_widget(self._create_field_group(
+            "Sprachen:", "sprachen_input", "Sprachen eingeben",
+            lambda inst, val: self.on_sprachen_change(self, val)))
+
+        # Spacer - drückt alle Felder nach oben
+        container.add_widget(Widget(size_hint_y=1))
+
+        self.add_widget(container)
+
+    def _build_landscape_layout(self):
+        """Baut das Landscape-Layout auf (zweispaltig)."""
+        self.orientation = 'vertical'
+
+        container = MDBoxLayout(
+            orientation='horizontal',
+            size_hint=(1, 1),
+            padding=[dp(12), dp(8), dp(12), dp(12)],
+            spacing=dp(16),
+        )
+
+        # Linke Spalte: Name, Alter, Geschlecht
+        left_col = MDBoxLayout(
+            orientation='vertical',
+            size_hint_x=0.5,
+            spacing=dp(6),
+        )
+        left_col.add_widget(self._create_field_group(
+            "Name:", "name_input", "Name eingeben",
+            lambda inst, val: self.on_char_name_change(self, val)))
+        left_col.add_widget(self._create_field_group(
+            "Alter:", "alter_input", "Alter eingeben",
+            lambda inst, val: self.on_alter_change(self, val)))
+        left_col.add_widget(self._create_field_group(
+            "Geschlecht:", "geschlecht_input", "Geschlecht eingeben",
+            lambda inst, val: self.on_geschlecht_change(self, val)))
+        left_col.add_widget(Widget(size_hint_y=1))
+
+        # Rechte Spalte: Konzept, Sprachen
+        right_col = MDBoxLayout(
+            orientation='vertical',
+            size_hint_x=0.5,
+            spacing=dp(6),
+        )
+        right_col.add_widget(self._create_field_group(
+            "Konzept:", "konzept_input", "Konzept eingeben",
+            lambda inst, val: self.on_konzept_change(self, val)))
+        right_col.add_widget(self._create_field_group(
+            "Sprachen:", "sprachen_input", "Sprachen eingeben",
+            lambda inst, val: self.on_sprachen_change(self, val)))
+        right_col.add_widget(Widget(size_hint_y=1))
+
+        container.add_widget(left_col)
+        container.add_widget(right_col)
+
+        self.add_widget(container)
+
+    # ── Charakter-Bindings ──
+
     def on_charakter_changed(self, instance, value):
         self.charakter = value
         if self.charakter:
