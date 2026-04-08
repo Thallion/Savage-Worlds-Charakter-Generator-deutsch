@@ -1,0 +1,66 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-04-07 20:11:05
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-04-07 20:11:05] Auto-Generierung abgeschlossen:
+    Template: Hzinth-Priester (Setting: Fantasy Kompendium)
+    Zusätzliche Punkte: 3
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-04-07 20:11:05] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Konstitution: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Konstitution: W6 → W8 (1 Standard)
+  [2026-04-07 20:11:05] Stärke: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Stärke: W6 → W8 (1 Standard)
+  [2026-04-07 20:11:05] Verstand: W4 → W6 (2 Handicap-Punkte)
+  [2026-04-07 20:11:05] Verstand: W6 → W8 (1 Auto-Generator)
+  [2026-04-07 20:11:05] Willenskraft: W4 → W6 (1 Auto-Generator)
+  [2026-04-07 20:11:05] Willenskraft: W6 → W8 (1 Standard)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-04-07 20:11:05] Athletik: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Glaube: W2 → W4 (1 Standard)
+  [2026-04-07 20:11:05] Glaube: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Glaube: W6 → W8 (1 Standard)
+  [2026-04-07 20:11:05] Heilen: W2 → W4 (1 Standard)
+  [2026-04-07 20:11:05] Heilen: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Kämpfen: W2 → W4 (1 Standard)
+  [2026-04-07 20:11:05] Kämpfen: W4 → W6 (1 Standard)
+  [2026-04-07 20:11:05] Kämpfen: W6 → W8 (1 Standard)
+  [2026-04-07 20:11:05] Wahrnehmung: W4 → W6 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-04-07 20:11:05] Auserwählt (Kosten: 0)
+  [2026-04-07 20:11:05] Heiliger/Unheiliger Krieger (Kosten: 1)
+  [2026-04-07 20:11:05] AH (Kleriker) (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-04-07 20:11:05] Tollpatschig ( - Punkte: 2)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2026-04-07 20:11:05] Verbannen (Rang: Anfänger)
+  [2026-04-07 20:11:05] Heilung (Rang: Anfänger)
+  [2026-04-07 20:11:05] Schutz (Rang: Anfänger)
+  [2026-04-07 20:11:05] Licht/Dunkelheit (Rang: Anfänger)
+  [2026-04-07 20:11:05] Zuflucht (Rang: Anfänger)
+  [2026-04-07 20:11:05] Waffe verbessern (Rang: Anfänger)
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     9 Punkte (9 Steigerungen)
+  Fertigkeiten:  10 Punkte (10 Steigerungen)
+  Talente:       2 Punkte (3 hinzugefügt, 0 entfernt)
+  Handicaps:     +2 erhalten, 2 verwendet, 0 verfügbar (1 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (6 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

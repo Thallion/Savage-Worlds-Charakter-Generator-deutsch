@@ -1,0 +1,63 @@
+{
+  "name": "Egnus Amaron",
+  "description": "Ein erfahrener Alchemist",
+  "setting": "Fantasy Kompendium",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "",
+    "concept": "Alchemist",
+    "languages": "",
+    "rank": "Erfahren"
+  },
+  "attributes": {
+    "Geschicklichkeit": 6,
+    "Konstitution": 6,
+    "Stärke": 6,
+    "Verstand": 10,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 6,
+    "Athletik": 6,
+    "Heimlichkeit": 4,
+    "Überreden": 4,
+    "Wahrnehmung": 6,
+    "Kämpfen": 6,
+    "Überleben": 6,
+    "Einschüchtern": 6,
+    "Recherche": 6,
+    "Okkultismus": 6,
+    "Naturwissenschaften": 6,
+    "Sprache": 6,
+    "Zaubern": 8,
+    "Alchemie": 8
+  },
+  "handicaps": [
+    "Talisman_leicht",
+    "Alt",
+    "Feind_leicht"
+  ],
+  "edges": [
+    "AH (Alchemist)",
+    "Chemiker"
+  ],
+  "powers": [
+    "Betäuben",
+    "Eigenschaft erhöhen/senken",
+    "Schutz vor Naturgewalten",
+    "Aufspüren",
+    "Barriere",
+    "Geschoss",
+    "Elementarmanipulation",
+    "Verstricken",
+    "Furcht"
+  ],
+  "power_points": 15,
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated"
+  }
+}

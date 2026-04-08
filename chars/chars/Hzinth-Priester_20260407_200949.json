@@ -1,12 +1,12 @@
 {
     "profil_daten": {
-        "Name": "Clementine",
-        "Alter": "",
-        "Geschlecht": "weiblich",
-        "Konzept": "Bastlerin",
+        "Name": "Hzinth-Priester",
+        "Alter": "45",
+        "Geschlecht": "",
+        "Konzept": "Kriegspriester des Hzinth-Kults",
         "Sprachen": ""
     },
-    "active_setting_name": "SWAE",
+    "active_setting_name": "Fantasy Kompendium",
     "char_gen_completed": false,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
@@ -37,27 +37,27 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 10,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 8,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,8 +133,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -276,8 +276,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -289,8 +289,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -315,8 +315,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -328,8 +328,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -393,8 +393,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 10,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -402,32 +402,6 @@
         },
         "Sprache": {
             "fertigkeit_name": "Sprache",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Elektronik": {
-            "fertigkeit_name": "Elektronik",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Hacken": {
-            "fertigkeit_name": "Hacken",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -452,8 +426,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Psionik": {
-            "fertigkeit_name": "Psionik",
+        "Verrückte Wissenschaft": {
+            "fertigkeit_name": "Verrückte Wissenschaft",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -465,8 +439,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Verrückte Wissenschaft": {
-            "fertigkeit_name": "Verrückte Wissenschaft",
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -480,104 +454,202 @@
         }
     },
     "selected_elements": {
-        "voelker": {
-            "Mensch": {
-                "ausgewaehlt": true
-            }
-        },
+        "voelker": {},
         "handicaps": {
-            "Misstrauisch_leicht": {
+            "Materialkomponenten": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             },
-            "Schwerhörig_leicht": {
+            "Tollpatschig": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Tick": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
-            "Gelehrter": {
+            "AH (Alchemist)": {
                 "ausgewaehlt": true,
                 "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 15
+            },
+            "Heiliger/Unheiliger Krieger": {
+                "ausgewaehlt": true,
+                "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "McGyver": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Reparaturgenie": {
+            "Auserwählter": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
-        "ausruestung": {
-            "Revolver": {
+        "maechte": {
+            "Zuflucht": {
                 "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Berührung",
+                "dauer": "5"
             },
-            "Brechstange": {
+            "Arkaner Schutz": {
                 "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "B",
+                "dauer": "Sofort"
+            },
+            "Licht/Dunkelheit": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 10m",
+                "dauer": "—"
+            },
+            "Verbannen": {
+                "ausgewaehlt": true,
+                "rang": "V",
+                "machtpunkte": 3,
+                "reichweite": "VER",
+                "dauer": "Sofort"
+            },
+            "Waffe verbessern": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "—"
             }
-        }
+        },
+        "superkraefte": {},
+        "cyberware": {},
+        "ausruestung": {}
     },
     "selected_handicaps": [
-        "Misstrauisch_leicht",
-        "Schwerhörig_leicht",
-        "Tick"
+        "Materialkomponenten",
+        "Tollpatschig"
     ],
     "selected_talente": [
-        "Gelehrter",
-        "McGyver",
-        "Reparaturgenie"
+        "AH (Alchemist)",
+        "Heiliger/Unheiliger Krieger",
+        "Auserwählter"
     ],
-    "selected_maechte": [],
-    "voelker_selected": {
-        "Androiden": false,
-        "Aquarianer": false,
-        "Avionen": false,
-        "Halbelf": false,
-        "Elf": false,
-        "Halbling": false,
-        "Mensch": true,
-        "Rakashaner": false,
-        "Saurianer": false,
-        "Zwerg": false
-    },
+    "selected_maechte": [
+        "Zuflucht",
+        "Arkaner Schutz",
+        "Heilung",
+        "Licht/Dunkelheit",
+        "Verbannen",
+        "Waffe verbessern"
+    ],
+    "selected_superkraefte": [],
+    "selected_cyberware": [],
+    "voelker_selected": {},
     "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [
-        "Revolver",
-        "Brechstange"
-    ],
+    "selected_waffen": [],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 1,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
-    "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "verfuegbare_maechte": 3,
+    "anzahl_maechte": 3,
+    "machtpunkte": 10,
+    "machtstufe": "III",
+    "superkraft_punkte_gesamt": 0,
+    "superkraft_punkte_verbraucht": 0,
+    "kraftobergrenze": 15,
     "vermoegen": 500,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 3,
-    "pathfinder_kostenlose_talente_gewaehlt": 0
+    "gesamt_handicap_punkte": 2,
+    "verbleibende_handicap_punkte": 0,
+    "pathfinder_kostenlose_talente_gewaehlt": 0,
+    "steigerungs_journal": {
+        "cost_entries": [
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            }
+        ]
+    }
 }

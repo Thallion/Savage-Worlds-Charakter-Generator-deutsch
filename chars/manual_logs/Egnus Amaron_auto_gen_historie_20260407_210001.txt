@@ -1,0 +1,80 @@
+================================================================================
+CHARAKTER-HISTORIE
+Session gestartet: 2026-04-07 21:00:01
+================================================================================
+
+
+AUTO CHARACTER GENERATED:
+----------------------------------------
+  [2026-04-07 21:00:01] Auto-Generierung abgeschlossen:
+    Template: Egnus Amaron (Setting: Fantasy Kompendium)
+    Zusätzliche Punkte: 12
+
+ATTRIBUT STEIGERUNG:
+----------------------------------------
+  [2026-04-07 21:00:01] Geschicklichkeit: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Konstitution: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Stärke: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Verstand: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Verstand: W6 → W8 (1 Standard)
+  [2026-04-07 21:00:01] Verstand: W8 → W10 (2 Handicap-Punkte)
+  [2026-04-07 21:00:01] Willenskraft: W4 → W6 (1 Auto-Generator)
+
+FERTIGKEIT STEIGERUNG:
+----------------------------------------
+  [2026-04-07 21:00:01] Allgemeinwissen: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Athletik: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Wahrnehmung: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Kämpfen: W2 → W4 (1 Standard)
+  [2026-04-07 21:00:01] Kämpfen: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Überleben: W2 → W4 (1 Standard)
+  [2026-04-07 21:00:01] Überleben: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Einschüchtern: W2 → W4 (1 Standard)
+  [2026-04-07 21:00:01] Einschüchtern: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Recherche: W2 → W4 (1 Standard)
+  [2026-04-07 21:00:01] Recherche: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Okkultismus: W2 → W4 (1 Standard)
+  [2026-04-07 21:00:01] Okkultismus: W4 → W6 (1 Auto-Generator)
+  [2026-04-07 21:00:01] Naturwissenschaften: W2 → W4 (1 Auto-Generator)
+  [2026-04-07 21:00:01] Naturwissenschaften: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Sprache: W2 → W4 (1 Auto-Generator)
+  [2026-04-07 21:00:01] Sprache: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Zaubern: W2 → W4 (1 Auto-Generator)
+  [2026-04-07 21:00:01] Zaubern: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Zaubern: W6 → W8 (1 Standard)
+  [2026-04-07 21:00:01] Alchemie: W2 → W4 (1 Auto-Generator)
+  [2026-04-07 21:00:01] Alchemie: W4 → W6 (1 Standard)
+  [2026-04-07 21:00:01] Alchemie: W6 → W8 (1 Standard)
+
+TALENT HINZUGEFUEGT:
+----------------------------------------
+  [2026-04-07 21:00:01] AH (Alchemist) (Kosten: 0)
+  [2026-04-07 21:00:01] Chemiker (Kosten: 1)
+
+HANDICAP HINZUGEFUEGT:
+----------------------------------------
+  [2026-04-07 21:00:01] Talisman_leicht ( - Punkte: 1)
+  [2026-04-07 21:00:01] Feind_leicht ( - Punkte: 1)
+
+MACHT HINZUGEFUEGT:
+----------------------------------------
+  [2026-04-07 21:00:01] Betäuben (Rang: Anfänger)
+  [2026-04-07 21:00:01] Eigenschaft erhöhen/senken (Rang: Anfänger)
+  [2026-04-07 21:00:01] Schutz vor Naturgewalten (Rang: Anfänger)
+  [2026-04-07 21:00:01] Aufspüren (Rang: Anfänger)
+  [2026-04-07 21:00:01] Barriere (Rang: Anfänger)
+  [2026-04-07 21:00:01] Geschoss (Rang: Anfänger)
+  [2026-04-07 21:00:01] Elementarmanipulation (Rang: Anfänger)
+  [2026-04-07 21:00:01] Verstricken (Rang: Anfänger)
+  [2026-04-07 21:00:01] Furcht (Rang: Anfänger)
+
+================================================================================
+GESAMTKOSTEN:
+----------------------------------------
+  Attribute:     7 Punkte (7 Steigerungen)
+  Fertigkeiten:  23 Punkte (23 Steigerungen)
+  Talente:       1 Punkte (2 hinzugefügt, 0 entfernt)
+  Handicaps:     +2 erhalten, 2 verwendet, 0 verfügbar (2 hinzugefügt, 0 entfernt)
+  Mächte:        0 Punkte (9 hinzugefügt, 0 entfernt)
+  Aufstiege:     0 verwendet
+================================================================================

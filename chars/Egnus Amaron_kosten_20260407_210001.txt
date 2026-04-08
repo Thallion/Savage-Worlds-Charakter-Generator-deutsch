@@ -1,0 +1,102 @@
+================================================================================
+KOSTEN-LOG FÜR: Egnus Amaron
+ERSTELLT: 2026-04-07 21:00:01
+================================================================================
+
+ATTRIBUTE:
+----------------------------------------
+  Geschicklichkeit: W4 → W6 = 1 Punkte
+  Konstitution: W4 → W6 = 1 Punkte
+  Stärke: W4 → W6 = 1 Punkte
+  Verstand: W4 → W6 = 1 Punkte
+  Verstand: W6 → W8 = 1 Punkte
+  Verstand: W8 → W10 = 1 Punkte
+  Willenskraft: W4 → W6 = 1 Punkte
+GESAMT: 7 Punkte
+
+FERTIGKEITEN:
+----------------------------------------
+  Allgemeinwissen: W4 → W6 = 1 Punkte
+  Athletik: W4 → W6 = 1 Punkte
+  Wahrnehmung: W4 → W6 = 1 Punkte
+  Kämpfen: W2 → W4 = 1 Punkte
+  Kämpfen: W4 → W6 = 1 Punkte
+  Überleben: W2 → W4 = 1 Punkte
+  Überleben: W4 → W6 = 1 Punkte
+  Einschüchtern: W2 → W4 = 1 Punkte
+  Einschüchtern: W4 → W6 = 1 Punkte
+  Recherche: W2 → W4 = 1 Punkte
+  Recherche: W4 → W6 = 1 Punkte
+  Okkultismus: W2 → W4 = 1 Punkte
+  Okkultismus: W4 → W6 = 1 Punkte
+  Naturwissenschaften: W2 → W4 = 1 Punkte
+  Naturwissenschaften: W4 → W6 = 1 Punkte
+  Sprache: W2 → W4 = 1 Punkte
+  Sprache: W4 → W6 = 1 Punkte
+  Zaubern: W2 → W4 = 1 Punkte
+  Zaubern: W4 → W6 = 1 Punkte
+  Zaubern: W6 → W8 = 1 Punkte
+  Alchemie: W2 → W4 = 1 Punkte
+  Alchemie: W4 → W6 = 1 Punkte
+  Alchemie: W6 → W8 = 1 Punkte
+GESAMT: 23 Punkte
+
+HANDICAPS:
+----------------------------------------
+  Talisman_leicht: +1 Punkte
+  Feind_leicht: +1 Punkte
+GESAMT: +2 Punkte (Bonus)
+
+HANDICAP-PUNKTE VERWENDUNG:
+----------------------------------------
+Handicap-Punkte können verwendet werden für:
+  • 1 Punkt = 2 Attributsteigerungen
+  • 1 Punkt = 1 Anfänger-Talent
+  • 1 Punkt = 2 Fertigkeitssteigerungen
+  • 1 Punkt = Startgeld erhöhen
+→ 2 Handicap-Punkte entsprechen:
+  - Bis zu 4 Attribut-/Fertigkeitssteigerungen ODER
+  - Bis zu 2 Talente ODER
+  - Kombination aus beidem
+
+TALENTE:
+----------------------------------------
+  AH (Alchemist): GRATIS (Völker-Bonus)
+  Chemiker: 1 Punkte [Voraussetzungen ignoriert]
+GESAMT: 1 Punkte
+
+MÄCHTE:
+----------------------------------------
+  Betäuben [Voraussetzungen ignoriert]
+  Eigenschaft erhöhen/senken [Voraussetzungen ignoriert]
+  Schutz vor Naturgewalten [Voraussetzungen ignoriert]
+  Aufspüren [Voraussetzungen ignoriert]
+  Barriere [Voraussetzungen ignoriert]
+  Geschoss [Voraussetzungen ignoriert]
+  Elementarmanipulation [Voraussetzungen ignoriert]
+  Verstricken [Voraussetzungen ignoriert]
+  Furcht [Voraussetzungen ignoriert]
+
+================================================================================
+ZUSAMMENFASSUNG:
+================================================================================
+Standardpunkte Attribute: 5
+Standardpunkte Fertigkeiten: 12
+Handicap-Bonus: +2
+Verfügbare Punkte gesamt: 19
+
+Ausgegeben für Attribute: 7
+Ausgegeben für Fertigkeiten: 23
+Ausgegeben für Talente: 1
+Ausgegeben gesamt: 31
+
+DEFIZIT: 12 Punkte
+AUTOMATISCH HINZUGEFÜGT: 12 Punkte
+→ Charakter wurde mit zusätzlichen Punkten erstellt
+
+================================================================================
+HINWEISE:
+- [!] = Voraussetzungen wurden ignoriert
+- [ERZWUNGEN] = Handicap wurde trotz Fehler markiert
+- Automatisch hinzugefügte Punkte ermöglichen die Charaktererstellung
+================================================================================
