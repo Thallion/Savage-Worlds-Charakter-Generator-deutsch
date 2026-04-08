@@ -35,6 +35,27 @@ def _patched_on_touch_move(self, touch):
 MDScrollView.on_touch_move = _patched_on_touch_move
 
 
+# --- Monkey-Patch: Android TextInput Bubble/Handles deaktivieren ---
+# Problem: Auf Android erscheint beim Antippen von Textfeldern ein Kontext-Menü
+# (Copy/Paste-Bubble) das nach dem Schließen von Dialogen oder beim Navigieren
+# im UI hängen bleiben kann und nicht korrekt verschwindet.
+#
+# Lösung: use_bubble und use_handles auf Android global deaktivieren.
+# Copy/Paste ist auf Android weiterhin über die Tastatur oder die
+# systemseitige Zwischenablage zugänglich.
+from kivy.utils import platform as _kivy_platform
+if _kivy_platform == 'android':
+    from kivy.uix.textinput import TextInput as _TextInput
+    _orig_textinput_init = _TextInput.__init__
+
+    def _patched_textinput_init(self, **kwargs):
+        kwargs.setdefault('use_bubble', False)
+        kwargs.setdefault('use_handles', False)
+        _orig_textinput_init(self, **kwargs)
+
+    _TextInput.__init__ = _patched_textinput_init
+
+
 class TextFieldScrollView(MDScrollView):
     """
     MDScrollView mit Workaround für TextField-Focus auf Android.

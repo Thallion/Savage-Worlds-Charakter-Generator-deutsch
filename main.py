@@ -1896,7 +1896,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Logger.debug("Mobile Portrait: Rail versteckt, Bottom-Bar sichtbar")
             else:
                 # Landscape: Rail anzeigen, Bottom-Bar verstecken
-                nav_rail_container.width = dp(72)
+                nav_rail_container.width = dp(92)
                 nav_rail_container.opacity = 1
                 self._nav_rail_visible = True
                 if bottom_bar:
@@ -2179,7 +2179,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Logger.info("NavigationRail ausgeblendet")
             else:
                 # Rail einblenden
-                nav_rail_container.width = dp(100)
+                nav_rail_container.width = dp(120)
                 nav_rail_container.opacity = 1
                 self._nav_rail_visible = True
                 Logger.info("NavigationRail eingeblendet")
