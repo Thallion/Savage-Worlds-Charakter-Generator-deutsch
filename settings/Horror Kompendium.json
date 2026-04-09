@@ -2,6 +2,29 @@
     "name": "Horror Kompendium",
     "description": "Horror Kompendium",
     "voelker": {
+        "Mensch": {
+            "name": "Mensch",
+            "handicaps": [],
+            "talente": [
+                "Anpassungsfähig"
+            ],
+            "besonderheiten": [
+                "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
+            ],
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true
+                }
+            }
+        },
         "Engel": {
             "name": "Engel",
             "handicaps": [
@@ -386,6 +409,7 @@
         }
     },
     "voelker_selected": {
+        "Mensch": false,
         "Engel": false,
         "Dämon": false,
         "Mumie": false,

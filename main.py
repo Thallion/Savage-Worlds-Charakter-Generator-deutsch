@@ -51,7 +51,7 @@ from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
 from views.wizard_bar import WizardBar
 from kivy.lang import Builder
-from utils.path_utils import get_application_root
+from utils.path_utils import get_application_root, get_resource_path
 import os
 from views.charakter_verwaltung_widget import CharakterVerwaltungWidget
 
@@ -421,14 +421,40 @@ class SW_Charakter_GeneratorApp(MDApp):
         try:
             import shutil
 
-            bundled_archetypen = bundled_chars_dir / 'Archetypen'
-            user_archetypen = user_chars_dir / 'Archetypen'
+            # Hol den Root der App (wo die Ressourcen entpackt werden)
+            app_root = get_application_root()
+            
+            # Prüfe mehrere mögliche Quellpfade für Archetypen
+            possible_sources = [
+                bundled_chars_dir / 'Archetypen',  # chars/Archetypen (normal)
+                bundled_chars_dir.parent / 'Archetypen',  # /Archetypen (neben chars)
+                app_root / 'Archetypen',  # Direkt im App-Root (buildozer)
+                app_root / 'chars' / 'Archetypen',  # App-Root/chars/Archetypen
+                Path(get_resource_path('chars/Archetypen')),  # via get_resource_path
+                Path(get_resource_path('Archetypen')),  # direkt im resources
+            ]
 
-            if not bundled_archetypen.exists():
-                Logger.info("Archetypen: Kein gebündeltes Archetypen-Verzeichnis gefunden")
+            bundled_archetypen = None
+            for src in possible_sources:
+                Logger.debug(f"Archetypen: Prüfe {src}")
+                if src.exists():
+                    bundled_archetypen = src
+                    Logger.info(f"Archetypen: Gefunden in {src}")
+                    break
+
+            if not bundled_archetypen:
+                Logger.warning(f"Archetypen: Kein gebündeltes Verzeichnis gefunden in {len(possible_sources)} möglichen Pfaden:")
+                for src in possible_sources:
+                    Logger.warning(f"Archetypen:   - {src}: {src.exists()}")
                 return
 
+            user_archetypen = user_chars_dir / 'Archetypen'
             user_archetypen.mkdir(parents=True, exist_ok=True)
+
+            # Zähle Quelldateien
+            source_files = list(bundled_archetypen.rglob('*'))
+            source_count = sum(1 for f in source_files if f.is_file())
+            Logger.info(f"Archetypen: Quelle hat {source_count} Datei(en)")
 
             copied = 0
             for item in bundled_archetypen.rglob('*'):
@@ -440,11 +466,16 @@ class SW_Charakter_GeneratorApp(MDApp):
                     if not target.exists() or item.stat().st_size != target.stat().st_size:
                         shutil.copy2(str(item), str(target))
                         copied += 1
+                        Logger.debug(f"Archetypen: Kopiert {item.name}")
 
             if copied > 0:
                 Logger.info(f"Archetypen: {copied} Datei(en) ins persistente Verzeichnis kopiert")
+            else:
+                # Auch loggen wenn nichts kopiert wurde, weil bereits vorhanden
+                existing_count = sum(1 for f in user_archetypen.rglob('*') if f.is_file())
+                Logger.info(f"Archetypen: Bereits {existing_count} Datei(en) im Zielverzeichnis vorhanden")
         except Exception as e:
-            Logger.warning(f"Archetypen-Kopie fehlgeschlagen: {e}")
+            Logger.error(f"Archetypen-Kopie fehlgeschlagen: {e}", exc_info=True)
 
     def _migrate_settings_on_android(self):
         """Migriert benutzerdefinierte Settings vom alten App-Verzeichnis ins persistente Verzeichnis auf Android."""

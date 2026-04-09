@@ -696,6 +696,160 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         """Lädt einen Charakter"""
         return self.character_handler.lade_charakter()
 
+    def loesche_charakter(self):
+        """Zeigt Dialog zum Löschen eines Charakters"""
+        try:
+            import glob as glob_mod
+            from utils.path_utils import get_chars_path
+            from kivymd.uix.list import MDListItemLeadingIcon
+
+            chars_dir = get_chars_path()
+            json_files = glob_mod.glob(os.path.join(chars_dir, '*.json'))
+
+            if not json_files:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_info_dialog(
+                        "Keine Charakter-Dateien zum Löschen gefunden.",
+                        "Keine Dateien"
+                    )
+                return
+
+            json_files.sort(key=lambda f: os.path.getmtime(f), reverse=True)
+            self._delete_selected_file = None
+
+            dialog_content = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(15),
+                padding=dp(20),
+                size_hint_y=None,
+            )
+            dialog_content.bind(minimum_height=dialog_content.setter('height'))
+
+            search_field = MDTextField(
+                mode="outlined",
+                size_hint_y=None,
+                height=dp(56),
+                size_hint_x=1
+            )
+            search_field.add_widget(MDTextFieldHintText(text="Charakter suchen..."))
+            dialog_content.add_widget(search_field)
+
+            scroll_view = MDScrollView(
+                size_hint=(1, None),
+                height=landscape_height(280, 0.45),
+                do_scroll_x=False,
+                do_scroll_y=True,
+                bar_width=dp(20) if _mobile else dp(15),
+                bar_margin=dp(8) if _mobile else dp(4),
+            )
+            if _mobile:
+                scroll_view.scroll_type = ['bars', 'content']
+            scroll_layout = MDBoxLayout(orientation="horizontal", size_hint=(1, None))
+            items_list = MDList(size_hint_y=None, size_hint_x=1)
+            items_list.bind(minimum_height=items_list.setter('height'))
+            scroll_layout.add_widget(items_list)
+            scroll_layout.add_widget(MDBoxLayout(size_hint_x=None, width=dp(20)))
+            scroll_view.add_widget(scroll_layout)
+            scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+            dialog_content.add_widget(scroll_view)
+
+            def populate_list(*args):
+                items_list.clear_widgets()
+                search_text = search_field.text.lower() if search_field.text else ""
+                pending = self._delete_selected_file
+
+                for fpath in json_files:
+                    fname = os.path.basename(fpath)
+                    if search_text and search_text not in fname.lower():
+                        continue
+                    is_sel = (pending == fpath)
+
+                    item = MDListItem(
+                        size_hint_y=None,
+                        height=dp(48),
+                        on_release=lambda x, p=fpath: _select_file(p),
+                        md_bg_color=self.app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
+                    )
+                    if is_sel:
+                        item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
+                    else:
+                        item.add_widget(MDListItemLeadingIcon(icon="account"))
+                    headline = MDListItemHeadlineText(text=fname)
+                    if is_sel:
+                        headline.bold = True
+                    item.add_widget(headline)
+                    items_list.add_widget(item)
+
+            def _select_file(fpath):
+                self._delete_selected_file = fpath
+                populate_list()
+
+            search_field.bind(text=populate_list)
+            populate_list()
+
+            button_row = MDBoxLayout(
+                orientation='horizontal', size_hint_y=None, height=dp(48), spacing=dp(8)
+            )
+            button_row.add_widget(MDBoxLayout(size_hint_x=1))
+            btn_cancel = MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: self._delete_dialog.dismiss(),
+            )
+            btn_delete = MDButton(
+                MDButtonText(text="Löschen"),
+                style="text",
+                on_release=lambda x: self._confirm_delete_charakter(),
+            )
+            button_row.add_widget(btn_cancel)
+            button_row.add_widget(btn_delete)
+            dialog_content.add_widget(button_row)
+
+            self._delete_dialog = MDDialog(
+                MDDialogHeadlineText(text="Charakter löschen"),
+                MDDialogContentContainer(
+                    dialog_content, orientation="vertical", padding=dp(0)
+                ),
+                size_hint=(0.85, None),
+                auto_dismiss=False,
+            )
+            self._delete_dialog.open()
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Öffnen des Lösch-Dialogs: {e}")
+
+    def _confirm_delete_charakter(self):
+        """Bestätigt das Löschen des ausgewählten Charakters"""
+        fpath = getattr(self, '_delete_selected_file', None)
+        if not fpath:
+            return
+
+        fname = os.path.basename(fpath)
+        dialog_service = service_container.get_dialog_service()
+
+        def do_delete(*args):
+            try:
+                os.remove(fpath)
+                Logger.info(f"Charakter gelöscht: {fpath}")
+                if dialog_service:
+                    dialog_service.show_success_dialog(f"Charakter '{fname}' gelöscht.")
+                self._delete_dialog.dismiss()
+            except Exception as e:
+                Logger.error(f"Fehler beim Löschen: {e}")
+                if dialog_service:
+                    dialog_service.show_error_dialog(f"Fehler beim Löschen: {e}")
+
+        if dialog_service:
+            dialog_service.show_choice_dialog(
+                message=f"Möchtest du '{fname}' wirklich löschen?",
+                title="Charakter löschen",
+                choices=[("Ja, löschen", "delete"), ("Abbrechen", "cancel")],
+                on_choice=lambda c: do_delete() if c == "delete" else None
+            )
+        else:
+            do_delete()
+
     def erzeuge_charakterbogen_pdf(self):
         """Erstellt Charakterbogen als PDF"""
         return self.character_handler.erzeuge_charakterbogen_pdf()

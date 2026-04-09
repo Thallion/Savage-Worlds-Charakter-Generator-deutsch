@@ -77,6 +77,15 @@
                         MDButtonText:
                             text: "Laden"
 
+                    MDButton:
+                        style: "outlined"
+                        size_hint_x: 1
+                        on_release: root.loesche_charakter()
+                        MDButtonIcon:
+                            icon: "delete"
+                        MDButtonText:
+                            text: "Löschen"
+
                 MDGridLayout:
                     cols: 2
                     spacing: dp(6)

@@ -547,6 +547,19 @@ class TalentManager:
             return fehlermeldungen
 
         for voraussetzung in talent.voraussetzungen:
+            # Handle dict prerequisites (e.g. {'oder': ['A', 'B']})
+            if isinstance(voraussetzung, dict):
+                # Handle dict format - try each alternative
+                if 'oder' in voraussetzung:
+                    alternativen = voraussetzung['oder']
+                    for alt in alternativen:
+                        fehler = self._pruefe_einzelne_voraussetzung(alt)
+                        if not fehler:
+                            break  # At least one alternative is satisfied
+                    else:
+                        fehlermeldungen.append(f"Voraussetzung nicht erfüllt: {voraussetzung}")
+                continue
+            
             # Entweder-Oder Voraussetzung (z.B. "Kämpfen oder Schießen W6", "Athletik oder Schießen W8")
             if self._hat_oder_ausserhalb_klammern(voraussetzung):
                 fehler = self._pruefe_oder_voraussetzung(voraussetzung)
@@ -566,11 +579,18 @@ class TalentManager:
         Z.B. "Kämpfen oder Schießen W6" → True (oder ist außerhalb von Klammern)
 
         Args:
-            text: Der zu prüfende Text
+            text: Der zu prüfende Text (str oder dict)
 
         Returns:
             bool: True wenn ' oder ' außerhalb von Klammern vorkommt
         """
+        # Handle dict prerequisites (e.g. {'oder': ['A', 'B']})
+        if isinstance(text, dict):
+            return False  # Dict format handled separately
+        
+        if not isinstance(text, str):
+            return False
+            
         tiefe = 0
         suche = " oder "
         for i in range(len(text)):

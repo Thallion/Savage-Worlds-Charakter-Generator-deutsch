@@ -12,7 +12,7 @@
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
+  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
   "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
   "debug_mode": false,
   "log_level": "INFO",
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Sundered Skies",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-09T17:01:36.010106"
+  "last_updated": "2026-04-09T20:20:20.532479"
 }
