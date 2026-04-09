@@ -401,11 +401,10 @@
             "kategorie": "Anführer",
             "rang": "V",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "VER W8",
                 "Einschüchtern W8",
-                "Seefahrt W10",
-                "Alleiniger Kapitän"
+                "Seefahrt W10"
             ],
             "beschreibung": "Besatzungen unter diesem Kapitän erhalten +2 auf Seefahrtwürfe.",
             "neue_maechte": 0,
@@ -541,8 +540,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "WIL W8",
-                "Glaube W6",
-                "Priester der Wildnis"
+                "Glaube W6"
             ],
             "beschreibung": "Gewährt Blatthütern ein weiteres Pflanzenerbe. Mehrmals wählbar, einmal pro Rang.",
             "neue_maechte": 0,
@@ -557,8 +555,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "WIL W8",
-                "Glaube W6",
-                "Priester des Baumeisters"
+                "Glaube W6"
             ],
             "beschreibung": "Opfert Beute an den Baumeister und erhält 1 Machtpunkt pro 100 Räder Wert.",
             "neue_maechte": 0,
@@ -574,8 +571,7 @@
                 "AH (Wunder)",
                 "WIL W8",
                 "Glaube W6",
-                "Überreden W6",
-                "Priester des Kriegsherrn"
+                "Überreden W6"
             ],
             "beschreibung": "+2 auf Überreden, wirkt auf alle im Radius der WIL in Zoll. 1 auf Überreden senkt Grundhaltung nicht.",
             "neue_maechte": 0,
@@ -605,8 +601,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "WIL W8",
-                "Glaube W6",
-                "Priester der Lebensmutter"
+                "Glaube W6"
             ],
             "beschreibung": "Kann Erschöpfungsstufen heilen. 10 Min. Berührung und 1 Machtpunkt pro Stufe.",
             "neue_maechte": 0,
@@ -636,8 +631,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "WIL W8",
-                "Glaube W6",
-                "Priester des Festivals"
+                "Glaube W6"
             ],
             "beschreibung": "+2 auf Allgemeinwissen, Wissen (Legenden) und Überreden. Kann Zauber durch Gesang/Musik ohne MP aufrechterhalten.",
             "neue_maechte": 0,
@@ -653,8 +647,7 @@
                 "Wildling",
                 "AH (Wunder)",
                 "WIL W8",
-                "Glaube W6",
-                "Priester des Alphas"
+                "Glaube W6"
             ],
             "beschreibung": "Kann mit WIL-Probe (-4) seine fleischgeschmiedete Tierfähigkeit ändern.",
             "neue_maechte": 0,
@@ -669,8 +662,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "WIL W8",
-                "Glaube W6",
-                "Priester des Kriegsherrn"
+                "Glaube W6"
             ],
             "beschreibung": "+4 Robustheit gegen eine spezifische Waffenart. Mehrmals wählbar, einmal pro Rang.",
             "neue_maechte": 0,
@@ -686,8 +678,7 @@
                 "AH (Wunder)",
                 "WIL W8",
                 "Glaube W6",
-                "Wissen (Winde) W6",
-                "Priester der Herrin der Winde"
+                "Wissen (Winde) W6"
             ],
             "beschreibung": "Segnet Schiffe: +1 Manövrierfähigkeit, +25% Beschleunigung und Maximalgeschwindigkeit.",
             "neue_maechte": 0,
@@ -700,7 +691,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Drakin",
                 "VER W6",
                 "WIL W8",
                 "Wissen (Geschichte) W6",
@@ -753,12 +743,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Einschüchtern W8",
-                "Kein nicht-auserkorener Drakin",
-                "Kein Wildling",
-                "Kein Fürsorger",
-                "Kein Sangespriester"
-            ],
+                "Einschüchtern W8"],
             "beschreibung": "Kann mit Einschüchtern gegen Mumm Glühwahngestalt zeigen. Ziel würfelt auf Furchttabelle. Erhält dauerhafte Glühwahnstufe, immer Gereizt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -794,7 +779,6 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Blatthüter oder Magier",
                 "Wissen (Übernatürliches) oder Glaube"
             ],
             "beschreibung": "Funktioniert wie im Grundregelwerk, aber nur für Blatthüter und Magier verfügbar.",
@@ -911,7 +895,6 @@
             "kategorie": "Barde",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "AH (Barde)",
                 "Darbietung W8+"
             ],
@@ -1024,7 +1007,6 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Berserker"
             ],
             "beschreibung": "Kann Berserkermodus ohne Verwundung aktivieren. Verstandprobe bei Verwundung erforderlich.",
@@ -1038,7 +1020,6 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "AH (Magie)",
                 "Wissen (Dämonen) W8+"
             ],
@@ -1053,8 +1034,6 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
-                "kein Wildling",
                 "AH (Leerewandler)",
                 "Wissen (Arkanes) W10+"
             ],
@@ -1069,7 +1048,6 @@
             "kategorie": "Kampf",
             "rang": "E",
             "voraussetzungen": [
-                "Erfahren",
                 "Schießen W8+"
             ],
             "beschreibung": "Erlaubt zwei Pfeile auf ein Ziel zu schießen mit −2 auf die Schießenprobe. Funktioniert nur mit Bögen.",
@@ -1083,7 +1061,6 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Zwei Pfeile, ein Ziel"
             ],
             "beschreibung": "Wie 'Zwei Pfeile, ein Ziel', jedoch ohne den −2-Abzug.",
@@ -1097,7 +1074,6 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Drachenatem"
             ],
             "beschreibung": "Erlaubt die Wahl zwischen zwei Ausprägungen des Drachenatems.",
@@ -1111,7 +1087,6 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Stärke W8+",
                 "Werfen W10+"
             ],
@@ -1126,10 +1101,8 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Stärke W10+",
-                "Kämpfen W10+",
-                "Größe +0 oder größer"
+                "Kämpfen W10+"
             ],
             "beschreibung": "Kann zweihändige Nahkampfwaffen einhändig führen. Kann gleichzeitig eine Einhandwaffe tragen.",
             "neue_maechte": 0,
@@ -1142,8 +1115,6 @@
             "kategorie": "Kampf",
             "rang": "E",
             "voraussetzungen": [
-                "Erfahren",
-                "Wildling oder nicht auserkorener Drakin",
                 "Geschicklichkeit W8+"
             ],
             "beschreibung": "Menschengroße oder größere Gegner erhalten −1 auf Angriffsproben gegen den Charakter.",
@@ -1174,8 +1145,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Glaube W6+",
-                "Willenskraft W8+",
-                "Verehrung der Wunderschönen"
+                "Willenskraft W8+"
             ],
             "beschreibung": "+2 gegen Glühwahn, andere erhalten ebenfalls Bonus gegen Glühwahn durch die Anwesenheit der Geliebten.",
             "neue_maechte": 0,
@@ -1214,7 +1184,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "zwergisch",
                 "AH Priester"
             ],
             "beschreibung": "Reduziert die Machtpunktekosten bestimmter Mächte um 1 pro Steigerung bei einer Glaubensprobe.",
@@ -1241,7 +1210,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "verehrt keinen der Götter"
             ],
             "beschreibung": "+1 gegen Glühwahn, Wildcard-Einende würfeln W8-Wildcard-Würfel, um Wundern zu widerstehen.",
             "neue_maechte": 0,
@@ -1257,8 +1225,7 @@
                 "AH (Wunder)",
                 "Willenskraft W8+",
                 "Glaube W8+",
-                "Wissen (Winde) W8+",
-                "Priester der Herrin der Winde"
+                "Wissen (Winde) W8+"
             ],
             "beschreibung": "Verringert Reisezeit eines Segelschiffs um ein Viertel. Kumulativ mit 'Astronom'.",
             "neue_maechte": 0,
@@ -1272,8 +1239,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Willenskraft W8+",
-                "Glaube W8+",
-                "Priester des Kriegsherrn"
+                "Glaube W8+"
             ],
             "beschreibung": "Erzeugt einen mächtigen Kriegsschrei, der Feinde innerhalb eines großen Bereichs einschüchtern kann.",
             "neue_maechte": 0,
@@ -1463,9 +1429,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
-                "AH (Beschwörer)",
-                "Tier beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
             "neue_maechte": 0,
@@ -1478,9 +1442,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
-                "AH (Beschwörer)",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
             "neue_maechte": 0,
@@ -1493,10 +1455,7 @@
             "kategorie": "Beschwörer",
             "rang": "H",
             "voraussetzungen": [
-                "Heroisch",
-                "AH (Beschwörer)",
-                "Tier beschwören",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
             "neue_maechte": 0,
@@ -1587,7 +1546,7 @@
             "kategorie": "Hexer/Hexe",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Hexer/Hexe)"
+                "AH (Hexe)"
             ],
             "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
             "neue_maechte": 0,
@@ -1600,7 +1559,7 @@
             "kategorie": "Hexer/Hexe",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Hexer/Hexe)"
+                "AH (Hexe)"
             ],
             "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
             "neue_maechte": 0,
@@ -1801,7 +1760,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Wildcard"
             ],
             "beschreibung": "Entschlossenheit hält bis zum Ende der Begegnung an, ohne dass sie mit Bennys aufrechterhalten werden muss. Der Charakter hat ein unverkennbares Mal und wird von mächtigen Feinden verfolgt.",
             "neue_maechte": 0,
@@ -1876,7 +1834,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Flügel"
             ],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
@@ -1890,8 +1847,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
-                "Athletik W8+ für Wurfwaffen oder Schießen W8+ für Bögen"
+                "Athletik W8+ oder Schießen W8+"
             ],
             "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
             "neue_maechte": 0,
@@ -1906,7 +1862,7 @@
             "voraussetzungen": [
                 "Heroisch",
                 "Doppelschuss",
-                "Athletik W10+ für Wurfwaffen oder Schießen W10+ für Bögen"
+                "Athletik W10+ foder Schießen W10+"
             ],
             "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
             "neue_maechte": 0,
@@ -1934,7 +1890,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Konstitution W8+",
                 "Odemwaffe"
             ],
@@ -1949,7 +1904,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Kämpfen W6+"
             ],
             "beschreibung": "Erlaubt das Teilen des Parade- und Deckungsbonus eines Schildes mit einem Verbündeten in der Nähe als freie Aktion.",
@@ -1989,7 +1943,6 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "AH (beliebig)"
             ],
             "beschreibung": "Erlaubt die Herstellung von temporären Arkane Apparaturen und permanenter magischer Gegenstände.",
@@ -2003,7 +1956,6 @@
             "kategorie": "Macht",
             "rang": "H",
             "voraussetzungen": [
-                "Heroisch",
                 "Artefakterschaffer",
                 "Okkultismus W10+"
             ],
@@ -2018,7 +1970,6 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "AH (beliebig)",
                 "Arkane Fertigkeit W8+"
             ],
@@ -2033,8 +1984,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "AH (beliebig)",
-                "eine böse Gesinnung"
+                "AH (beliebig)"
             ],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
             "neue_maechte": 0,
@@ -2047,7 +1997,6 @@
             "kategorie": "Macht",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "AH (beliebig)",
                 "Arkane Fertigkeit W6+"
             ],
@@ -2062,7 +2011,6 @@
             "kategorie": "Macht",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten"
             ],
             "beschreibung": "Erlaubt das Erlernen von 10 dedizierten Machtpunkten mit ausgewählten Mächten, die automatisch aktiviert werden können. Die Mächte und Einschränkungen sind abhängig vom gewählten Paket (z. B. Barbar, Kämpfer, Mönch, etc.).",
             "neue_maechte": 0,
@@ -2075,7 +2023,6 @@
             "kategorie": "Macht",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "AH (beliebig)",
                 "Arkane Fertigkeit W10+"
             ],
@@ -2090,7 +2037,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "AH (jeder außer Barde)",
+                "AH",
                 "Okkultismus W8+"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern ohne zu sprechen. Funktioniert auch unter Wasser, in einem Vakuum, oder innerhalb der Macht Stille.",
@@ -2144,7 +2091,6 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Reparieren W6+"
             ],
             "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
@@ -2185,7 +2131,6 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Überleben W6+"
             ],
             "beschreibung": "Ermöglicht Wahrnehmungsproben zum frühzeitigen Erkennen von Gefahren, verbessert Wachsamkeit und gibt Boni auf Allgemeinwissen über bereiste Orte.",
@@ -2216,8 +2161,7 @@
                 "Stärke W8+",
                 "Konstitution W8+",
                 "Kämpfen W8+",
-                "Reiten W6+",
-                "Verpflichtung (schwer)"
+                "Reiten W6+"
             ],
             "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
             "neue_maechte": 0,
@@ -2257,7 +2201,6 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Allgemeinwissen W6+",
                 "Darbietung W8+"
             ],
@@ -2272,7 +2215,6 @@
             "kategorie": "Sozial",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Verstand W8+"
             ],
             "beschreibung": "Erlaubt das Ziel, bei Herausforderungen entweder mit Verstand oder Willenskraft zu widerstehen.",

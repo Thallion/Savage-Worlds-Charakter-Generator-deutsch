@@ -21,8 +21,8 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Deadlands",
-  "force_mobile_layout": true,
+  "last_setting": "Sundered Skies",
+  "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-08T17:39:13.635522"
+  "last_updated": "2026-04-09T17:01:36.010106"
 }
