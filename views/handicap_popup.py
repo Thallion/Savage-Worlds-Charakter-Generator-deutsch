@@ -266,7 +266,7 @@ class HandicapDialogHandler:
             title="Handicap löschen",
             content_widget=content,
             action_text="Löschen",
-            on_action=self.delete_handicap,
+            on_action=self._on_delete_action_clicked,
         )
 
     def save_handicap(self, *args):
@@ -359,6 +359,107 @@ class HandicapDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Löschen der Handicaps: {e}")
             self.show_error("Fehler beim Löschen der Handicaps")
+
+    def _on_delete_action_clicked(self):
+        """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
+        if not self.dialog_content:
+            return
+
+        selected = self.dialog_content.get_selected_items()
+        if not selected:
+            self.show_error("Bitte wähle mindestens ein Handicap zum Löschen aus.")
+            return
+
+        self._pending_delete_items = selected
+        self._show_delete_confirmation_popup(
+            selected_items=selected,
+            item_type="Handicap",
+            on_confirm=self._confirm_delete_handicap
+        )
+
+    def _confirm_delete_handicap(self):
+        """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
+        if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:
+            return
+
+        selected = self._pending_delete_items
+        self._pending_delete_items = None
+
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
+
+            for handicap_name in selected:
+                charakter.remove_handicap(handicap_name)
+                Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
+
+            charakter.save_custom_handicaps()
+
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_handicap_view()
+            self._show_success_snackbar(f"{len(selected)} Handicap(s) gelöscht")
+
+            Logger.info(f"{len(selected)} Handicap(s) wurde(n) gelöscht.")
+            self.dismiss_dialog()
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Löschen der Handicaps: {e}")
+            self.show_error("Fehler beim Löschen der Handicaps")
+
+    def _show_delete_confirmation_popup(self, selected_items, item_type, on_confirm):
+        """Zeigt separates Bestätigungs-Popup OHNE Checkboxen (Two-Phase Pattern)."""
+        from kivymd.uix.scrollview import MDScrollView
+        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivy.metrics import dp
+
+        content = MDList(size_hint_y=None)
+        content.bind(minimum_height=content.setter('height'))
+
+        for item_name in selected_items:
+            list_item = MDListItem(size_hint_y=None, height=dp(48))
+            list_item.add_widget(MDListItemSupportingText(text=item_name))
+            content.add_widget(list_item)
+
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll.add_widget(content)
+
+        list_height = min(dp(48) * len(selected_items), dp(200))
+        content.size_hint_y = None
+        content.height = list_height
+
+        main_content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            height=dp(80) + list_height,
+            padding=dp(16)
+        )
+        main_content.add_widget(scroll)
+
+        self._delete_confirm_popup = MDDialog(
+            MDDialogHeadlineText(text=f"{item_type} löschen?"),
+            MDDialogContentContainer(main_content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._delete_confirm_popup.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Löschen"),
+                    style="filled",
+                    on_release=lambda x: (
+                        self._delete_confirm_popup.dismiss(),
+                        on_confirm()
+                    )
+                ),
+            ),
+            size_hint=(0.85, None),
+        )
+        self._delete_confirm_popup.open()
 
     def on_handicap_select(self, handicap_name):
         """Callback wenn ein Handicap im Dropdown ausgewählt wurde"""

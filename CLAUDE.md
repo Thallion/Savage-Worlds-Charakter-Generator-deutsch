@@ -406,6 +406,89 @@ def _on_options_confirmed(self):
 
 **Working pattern (tested on Android):** `on_release` + debounce in handler - this is the ONLY reliable pattern.
 
+**Solution 3 - Separate popup dialog (STANDARD — IMMER VERWENDEN):** 
+Checkboxen MÜSSEN IMMER in ein eigenes separates Popup mit eigenem ScrollView ausgegliedert werden. 
+Checkboxen direkt in einen bestehenden Dialog einzubetten funktioniert auf Android nicht zuverlässig 
+(Touch-Probleme, nested ScrollView). Das separate Popup löst das Problem vollständig.
+
+**STANDARD-MUSTER für alle Checkboxen mit ScrollView:**
+
+```python
+# Schritt 1: Separates Optionen-Popup mit Checkboxen
+def _show_options_popup(self):
+    from kivymd.uix.scrollview import MDScrollView
+    from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+
+    content = MDBoxLayout(orientation="vertical", spacing=dp(8), size_hint_y=None, height=dp(160), padding=dp(16))
+    
+    checkbox_list = MDList(size_hint_y=None)
+    checkbox_list.bind(minimum_height=checkbox_list.setter('height'))
+    
+    # Checkbox mit Intermediate Variable + Debounce
+    item = MDListItem(size_hint_y=None, height=dp(48))
+    item.add_widget(MDListItemSupportingText(text="Meine Option"))
+    self.my_checkbox = MDListItemTrailingCheckbox()
+    cb = self.my_checkbox  # Intermediate variable!
+    self.my_checkbox.bind(on_release=lambda x, cb=cb: self._on_checkbox_clicked(cb))
+    item.add_widget(self.my_checkbox)
+    checkbox_list.add_widget(item)
+    
+    scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+    scroll.add_widget(checkbox_list)
+    content.add_widget(scroll)
+    
+    self._options_popup = MDDialog(
+        MDDialogHeadlineText(text="Optionen"),
+        MDDialogContentContainer(content),
+        MDDialogButtonContainer(
+            MDButton(MDButtonText(text="Abbrechen"), style="text",
+                     on_release=lambda x: self._options_popup.dismiss()),
+            MDButton(MDButtonText(text="Weiter"), style="filled",
+                     on_release=lambda x: self._on_options_confirmed()),
+        ),
+        size_hint=(0.85, None),
+    )
+    self._options_popup.open()
+
+def _on_checkbox_clicked(self, checkbox):
+    """Handler mit Debounce für Checkbox-Klick."""
+    now = time.monotonic()
+    if hasattr(self, '_last_checkbox_time') and (now - self._last_checkbox_time) < 0.5:
+        return  # Bounce ignorieren
+    self._last_checkbox_time = now
+    self.temp_value = checkbox.active
+
+def _on_options_confirmed(self):
+    """Werte speichern, Popup schließen, nächsten Dialog zeigen"""
+    self.temp_value = self.my_checkbox.active
+    self._options_popup.dismiss()
+    self._show_action_dialog()  # Aktions-Dialog ohne Checkboxen
+```
+
+**Wann welches Pattern verwenden:**
+
+| Pattern | Anwendungsfall | Empfehlung |
+|---------|---------------|------------|
+| Solution 1 (Single + Debounce) | Einzelne Checkbox in bestehendem Dialog | Nur wenn SEHR wenige Checkboxen |
+| Solution 2 (Loop + Debounce) | Checkboxen in einer Schleife | Nur für sehr einfache Fälle |
+| **Solution 3 (Separate Popup)** | **Alle anderen Fälle mit ScrollView** | **STANDARD - IMMER VERWENDEN** |
+
+**Warum Solution 3 der STANDARD ist:**
+1. Eigener ScrollView verhindert nested ScrollView-Probleme
+2. Checkboxen werden vom restlichen Dialog-Code getrennt
+3. Einfachere Fehlersuche und Wartung
+4. Bewährtes Pattern aus: Char Verwaltung (Setting-Auswahl), Volkseigenarten, HTML-Export
+
+**Wo dieses Pattern bereits verwendet wird (als Vorlage):**
+- `views/charakter_verwaltung_widget.py` — Setting-Auswahl bei "Neuer Charakter"
+- `views/element_overlay.py` — multi-select checkboxes (hat Debounce, aber im Overlay)
+- `views/volk_popup.py` — Volkseigenarten Checkboxen
+- `views/setting_assistent_view.py` — Modus-Auswahl und Elemente-Auswahl
+- `manager/html_manager.py` — HTML/PDF Export-Optionen
+
+**Kritische Regel:** Wenn du auch nur eine Checkbox in einem Dialog mit ScrollView hast, 
+verwende IMMER Solution 3 (Separate Popup). Das ist der zuverlässigste Weg auf Android.
+
 **Where this pattern is used (checkboxes with debounce):**
 - `views/element_overlay.py` — multi-select checkboxes (Vorlage!)
 - `views/setting_assistent_view.py` — handicaps, fertigkeiten etc. checkboxes (funktioniert!)
@@ -446,6 +529,46 @@ else:
 
 **Where this pattern is used:**
 - `views/setting_assistent_view.py` — category cards and mode selection cards
+
+### Delete Dialogs mit Checkboxen
+**Problem:** Die "Löschen"-Dialoge in Einstellungen (Volk, Talent, Macht, etc.) haben Checkboxen im ElementOverlay, die auf Android Touch-Bounce-Probleme haben. Das funktioniert schlechter als die Setting-Auswahl in "Neuer Charakter".
+
+**Lösung - Two-Phase Pattern (NEU - STANDARD für Delete-Dialoge):**
+1. **Phase 1:** ElementOverlay öffnen mit Checkboxen (mit Debounce, wie bisher)
+2. **Phase 2:** Wenn der Benutzer auf "Löschen" klickt, EIN SEPARATES Popup öffnen zur Bestätigung
+   - Keine Checkboxen im Bestätigungs-Popup
+   - Das Bestätigungs-Popup zeigt die ausgewählten Elemente als Text-Liste
+
+**Alternative - Noch besser: Setting-Auswahl Pattern reproduzieren:**
+Die Setting-Auswahl bei "Neuer Charakter" in `charakter_verwaltung_widget.py:185-243` ist das beste Pattern:
+- MDListItem mit on_release auf dem Item (nicht auf der Checkbox)
+- Checkbox nur zur visuellen Anzeige, nicht für Event-Handling
+- Beim Klick auf das Item wird die Selection-Logik ausgeführt
+
+**Vorlage für neue Delete-Dialoge:**
+```python
+def _show_delete_options_popup(self):
+    """Phase 1: Optionen-Popup mit Checkboxen"""
+    # Das bestehende ElementOverlay mit Debounce verwenden
+    # ODER: Das Setting-Auswahl-Pattern aus charakter_verwaltung_widget adaptieren
+    pass
+
+def _show_delete_confirmation_popup(self, selected_items):
+    """Phase 2: Bestätigungs-Popup OHNE Checkboxen"""
+    # Hier nur Buttons für Bestätigung/Abbrechen
+    # Ausgewählte Items als Text anzeigen
+    pass
+```
+
+**Wo dieses Two-Phase Pattern implementiert werden sollte:**
+- `views/talent_popup.py` - Talent löschen
+- `views/handicap_popup.py` - Handicap löschen
+- `views/macht_popup.py` - Macht löschen
+- `views/fertigkeit_popup.py` - Fertigkeit löschen
+- `views/volk_popup.py` - Volk löschen
+- usw.
+
+**WICHTIG:** Bestehende Implementierungen mit ElementOverlay (die funktionieren) NICHT ändern, außer sie haben nachweislich Probleme auf Android. Das ElementOverlay hat bereits Debounce im _on_checkbox_toggled Handler.
 
 ### MDDialog Fixed Height (Mobile)
 **Problem:** `MDDialog` does not support `size_hint_y=1` for child layouts (`MDDialogContentContainer`). Using it causes the content to collapse to the bottom of the dialog with a huge empty gap above.
