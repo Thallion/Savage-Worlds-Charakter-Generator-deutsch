@@ -5698,6 +5698,24 @@
                 "PB": 1
             }
         },
+        "Stab": {
+            "name": "Stab",
+            "kategorie": "Waffe",
+            "gewicht": 2,
+            "kosten": 0,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1, Reichweite 1, Zweihändig.",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "1",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
         "Springfield-Muskete (.58)": {
             "name": "Springfield-Muskete (.58)",
             "kategorie": "Waffe",

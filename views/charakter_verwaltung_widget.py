@@ -852,6 +852,17 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
     def erzeuge_charakterbogen_pdf(self):
         """Erstellt Charakterbogen als PDF"""
+        from kivy.utils import platform as kivy_platform
+
+        # Auf Android: Nutze HTML->PDF über PrintManager
+        if kivy_platform == 'android':
+            if hasattr(self, 'html_manager') and self.html_manager:
+                return self.html_manager.create_character_pdf_android()
+            else:
+                Logger.error("HTMLManager nicht verfügbar für Android-PDF")
+                return
+
+        # Auf Desktop: Nutze klassischen PDF-Manager
         return self.character_handler.erzeuge_charakterbogen_pdf()
 
     def erzeuge_charakterbogen_html(self):

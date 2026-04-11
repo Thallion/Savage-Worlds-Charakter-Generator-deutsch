@@ -60,6 +60,105 @@ class HTMLManager:
         # Zuerst Optionen-Popup für Checkboxen zeigen
         self._show_options_popup()
 
+    def create_character_pdf_android(self):
+        """Exportiert den Charakterbogen als PDF auf Android via PrintManager."""
+        from kivy.utils import platform as kivy_platform
+
+        if kivy_platform != 'android':
+            Logger.warning("PDF-Export: Nur auf Android verfügbar")
+            if self.dialog_service:
+                self.dialog_service.show_warning_dialog(
+                    "PDF-Export ist nur auf Android verfügbar."
+                )
+            return
+
+        if not self.html_service or not self.dialog_service:
+            Logger.error("Erforderliche Services nicht verfügbar für PDF-Export")
+            return
+
+        # Temp-Werte zurücksetzen
+        self.temp_printer_friendly = False
+        self.temp_show_steigerungen = True
+
+        # Optionen-Popup mit PDF-Option zeigen
+        self._show_pdf_options_popup()
+
+    def _show_pdf_options_popup(self):
+        """Zeigt Popup für PDF-Export-Optionen auf Android."""
+        from kivymd.uix.scrollview import MDScrollView
+        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+        from utils.android_print_utils import is_android
+
+        if not is_android():
+            Logger.warning("PDF-Optionen: Nur auf Android verfügbar")
+            return
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            height=dp(160),
+            padding=dp(16)
+        )
+
+        checkbox_list = MDList(size_hint_y=None)
+        checkbox_list.bind(minimum_height=checkbox_list.setter('height'))
+
+        printer_item = MDListItem(size_hint_y=None, height=dp(48))
+        printer_item.add_widget(MDListItemSupportingText(
+            text="Druckerfreundliche Version (ohne Farben)"
+        ))
+        self.printer_friendly_checkbox = MDListItemTrailingCheckbox()
+        cb = self.printer_friendly_checkbox
+        self.printer_friendly_checkbox.bind(
+            on_release=lambda x, cb=cb: self._on_printer_checkbox_clicked(cb)
+        )
+        printer_item.add_widget(self.printer_friendly_checkbox)
+        checkbox_list.add_widget(printer_item)
+
+        steigerungen_item = MDListItem(size_hint_y=None, height=dp(48))
+        steigerungen_item.add_widget(MDListItemSupportingText(
+            text="Steigerungen einblenden"
+        ))
+        self.show_steigerungen_checkbox = MDListItemTrailingCheckbox(active=True)
+        cb2 = self.show_steigerungen_checkbox
+        self.show_steigerungen_checkbox.bind(
+            on_release=lambda x, cb=cb2: self._on_steigerungen_checkbox_clicked(cb)
+        )
+        steigerungen_item.add_widget(self.show_steigerungen_checkbox)
+        checkbox_list.add_widget(steigerungen_item)
+
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll.add_widget(checkbox_list)
+        content.add_widget(scroll)
+
+        self._options_popup = MDDialog(
+            MDDialogHeadlineText(text="PDF-Export Optionen"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._options_popup.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="PDF erstellen"),
+                    style="filled",
+                    on_release=lambda x: self._on_pdf_options_confirmed()
+                ),
+            ),
+            size_hint=(0.85, None),
+        )
+        self._options_popup.open()
+
+    def _on_pdf_options_confirmed(self):
+        """Bestätigt PDF-Optionen und startet die PDF-Erstellung auf Android."""
+        self.temp_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
+        self.temp_show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
+        self._options_popup.dismiss()
+
+        self._create_pdf_on_android()
+
     def _show_options_popup(self):
         """Zeigt separates Popup für HTML-Export-Optionen (Checkboxen).
 
@@ -455,3 +554,55 @@ class HTMLManager:
         chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(chooser)
         Logger.info(f"Android: Datei geteilt via Share-Intent: {os.path.basename(file_path)}")
+
+    def _create_pdf_on_android(self):
+        """Erstellt HTML und konvertiert diese zu PDF auf Android."""
+        if not self.html_service:
+            Logger.error("PDF: HTML-Service nicht verfügbar")
+            if self.dialog_service:
+                self.dialog_service.show_error_dialog("PDF-Export fehlgeschlagen.")
+            return
+
+        charakter = self.html_service.controller.charakter
+        char_name = charakter.char_name if hasattr(charakter, 'char_name') and charakter.char_name else "charakter"
+        pdf_name = f"{char_name.strip().replace(' ', '_')}.pdf"
+
+        from utils.android_print_utils import get_downloads_path
+
+        downloads_dir = get_downloads_path()
+        if not downloads_dir:
+            Logger.error("PDF: Download-Verzeichnis nicht gefunden")
+            if self.dialog_service:
+                self.dialog_service.show_error_dialog("PDF-Export fehlgeschlagen: Kein Download-Ordner gefunden.")
+            return
+
+        import os
+        html_path = os.path.join(downloads_dir, f"{char_name.strip().replace(' ', '_')}.html")
+        pdf_path = os.path.join(downloads_dir, pdf_name)
+
+        is_printer_friendly = self.temp_printer_friendly
+        show_steigerungen = self.temp_show_steigerungen
+
+        success = self.html_service.create_character_html(html_path, is_printer_friendly, show_steigerungen)
+
+        if not success:
+            Logger.error("PDF: HTML-Erstellung fehlgeschlagen")
+            if self.dialog_service:
+                self.dialog_service.show_error_dialog("PDF-Export fehlgeschlagen: HTML-Erstellung fehlgeschlagen.")
+            return
+
+        from utils.android_print_utils import print_html_to_pdf
+        pdf_result = print_html_to_pdf(html_path, pdf_name)
+
+        if pdf_result:
+            Logger.info(f"PDF erstellt: {pdf_result}")
+            if self.dialog_service:
+                self.dialog_service.show_success_dialog(
+                    f"PDF wurde erstellt und kann über das Druckmenü als PDF gespeichert werden."
+                )
+        else:
+            Logger.warning("PDF: PrintManager-Dialog wurde geöffnet")
+            if self.dialog_service:
+                self.dialog_service.show_warning_dialog(
+                    "Der Druckdialog wurde geöffnet. Wählen Sie dort 'Als PDF speichern' aus."
+                )

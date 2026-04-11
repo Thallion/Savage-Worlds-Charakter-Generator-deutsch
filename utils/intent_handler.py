@@ -88,8 +88,15 @@ def _handle_send_intent(app, intent):
         if uri:
             Logger.info(f"IntentHandler: SEND URI empfangen: {uri.toString()}")
             _import_from_uri(app, uri)
-        else:
-            Logger.info("IntentHandler: ACTION_SEND ohne EXTRA_STREAM")
+            return
+
+        text = intent.getStringExtra(IntentClass.EXTRA_TEXT)
+        if text:
+            Logger.info(f"IntentHandler: EXTRA_TEXT empfangen ({len(text)} Zeichen)")
+            _import_from_text(app, text)
+            return
+
+        Logger.info("IntentHandler: ACTION_SEND ohne EXTRA_STREAM oder EXTRA_TEXT")
 
     except Exception as e:
         Logger.error(f"IntentHandler: Fehler bei ACTION_SEND: {e}")
@@ -107,6 +114,53 @@ def _handle_view_intent(app, intent):
 
     except Exception as e:
         Logger.error(f"IntentHandler: Fehler bei ACTION_VIEW: {e}")
+
+
+def _import_from_text(app, text):
+    """
+    Importiert JSON-Text der als String (EXTRA_TEXT) gesendet wurde.
+    WhatsApp teilt oft Dateien als Text statt als Dateianhang.
+
+    Args:
+        app: Die MDApp-Instanz
+        text: Der empfangene Text (JSON-Inhalt)
+    """
+    try:
+        if not text or not text.strip():
+            _show_import_error(app, "Kein Inhalt empfangen.")
+            return
+
+        filename = "geteilte_charakter.json"
+
+        # JSON validieren
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError as e:
+            Logger.error(f"IntentHandler: Ungültige JSON im Text: {e}")
+            _show_import_error(app, f"Der geteilte Inhalt ist kein gültiges JSON:\n{e}")
+            return
+
+        # Typ erkennen
+        file_type = _detect_json_type(data)
+        Logger.info(f"IntentHandler: Erkannter Typ aus Text: {file_type}")
+
+        # Speichern
+        if file_type == 'charakter':
+            target_path = _save_to_chars_dir(filename, text)
+            if target_path:
+                _show_import_success_charakter(app, filename, target_path)
+        elif file_type == 'setting':
+            target_path = _save_to_settings_dir(filename, text)
+            if target_path:
+                _show_import_success_setting(app, filename)
+        else:
+            target_path = _save_to_chars_dir(filename, text)
+            if target_path:
+                _show_import_success_charakter(app, filename, target_path)
+
+    except Exception as e:
+        Logger.error(f"IntentHandler: Fehler beim Importieren aus Text: {e}")
+        _show_import_error(app, f"Fehler beim Import:\n{e}")
 
 
 def _import_from_uri(app, uri):

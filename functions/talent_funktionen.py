@@ -1095,20 +1095,18 @@ def ist_savage_pathfinder_setting(charakter):
 
 def ist_pathfinder_kostenloses_talent(talent):
     """
-    Prüft, ob ein Talent zu den Kategorien gehört, die in Savage Pathfinder 
-    während der Charaktererstellung kostenlos gewählt werden können.
+    Prüft, ob ein Talent in Savage Pathfinder kostenlos ist (Kategorie "Klasse").
     
     Args:
         talent: Das Talent-Objekt
         
     Returns:
-        bool: True wenn Klassen-, Hintergrund- oder Experte-Talent, sonst False
+        bool: True wenn Kategorie "Klasse", sonst False
     """
     if not hasattr(talent, 'kategorie') or not talent.kategorie:
         return False
     
-    kategorien = TalentConfig.get('pathfinder_kostenlose_kategorien', [])
-    return talent.kategorie in kategorien
+    return talent.kategorie == "Klasse"
 
 
 def hat_bereits_kostenloses_pathfinder_talent(charakter):
