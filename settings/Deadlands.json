@@ -157,7 +157,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Verstand W8+",
                 "Kämpfen W6+",
                 "Okkultismus W6+",
@@ -174,7 +173,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Glücksspiel W6+"
             ],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Glücksspielproben, auch bei Taschenspieleraktionen.",
@@ -188,7 +186,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Darbietung oder Überreden W8+"
             ],
             "beschreibung": "Hilft, die lokale Furchtstufe zu senken und bietet Boni auf Überreden- oder Darbietungsproben.",
@@ -202,7 +199,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Geschicklichkeit W8+",
                 "Reiten W6+"
             ],
@@ -217,7 +213,6 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Naturbursche"
             ],
             "beschreibung": "Erlaubt Wahrnehmungsproben mit Abzug bei Begegnungen und bietet Vorteile bei Überlebens- und Wahrnehmungsproben.",
@@ -231,7 +226,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Willenskraft W6+"
             ],
             "beschreibung": "Ermöglicht eine freie Wiederholung bei Furchtproben.",
@@ -245,7 +239,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Stärke W6+",
                 "Konstitution W6+"
             ],
@@ -260,7 +253,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Konstitution W6+",
                 "Kämpfen W6+",
                 "Einschüchtern W6+",
@@ -279,7 +271,6 @@
             "kategorie": "Sozial",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran"
             ],
             "beschreibung": "Helden mit gutem Ruf erhalten freie Wiederholungen bei Überredenproben, Schurken erhalten +2 auf Einschüchtern bei bekannten Personen.",
             "neue_maechte": 0,
@@ -292,7 +283,6 @@
             "kategorie": "Übersinnlich",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Willenskraft W8+",
                 "Mumm"
             ],
@@ -307,8 +297,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Wildcard",
-                "Anfänger",
                 "Willenskraft W6+"
             ],
             "beschreibung": "Charakter wird nach dem Tod wiedergeboren, jedoch mit Nachteilen. Kann nur bei der Erstellung oder durch das Talent Verdammt gewählt werden.",
@@ -322,7 +310,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Unsichtbare und versteckte Kreaturen 5 Runden lang sehen durch Benny-Ausgabe.",
             "neue_maechte": 0,
@@ -335,7 +322,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Warnung vor katastrophalen Folgen, Entschlossenheit erlaubt Wiederholung bei Kritischem Fehlschlag.",
             "neue_maechte": 0,
@@ -348,7 +334,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Effekte arkane Macht negieren, Zauberer muss Willenskraftprobe ablegen (–4) oder wird Angeschlagen.",
             "neue_maechte": 0,
@@ -361,7 +346,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Heilung durch Benny möglich, automatischer Erfolg (eine Wunde heilen).",
             "neue_maechte": 0,
@@ -374,7 +358,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Furchtproben können durch Benny ohne Abzüge wiederholt werden.",
             "neue_maechte": 0,
@@ -387,7 +370,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Benny kann benutzt werden, um Effekt eines Bennys in der Nähe zu negieren.",
             "neue_maechte": 0,
@@ -400,7 +382,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Benny verdoppelt Befehlsradius zu Beginn eines Kampfes.",
             "neue_maechte": 0,
@@ -413,7 +394,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Legendär",
                 "Willenskraft W10+",
                 "Schneid"
             ],
@@ -428,7 +408,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Legendär",
                 "Lieblingswaffe",
                 "Schießen",
                 "Kämpfen oder Athletik W10+"
@@ -444,7 +423,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Legendär",
                 "Geschicklichkeit W10+",
                 "Schnell"
             ],
@@ -459,7 +437,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Legendär"
             ],
             "beschreibung": "Das treue Ross wird zu einer Wildcard mit eigenen Bennys, Spezialfähigkeit Furchtlos und Talent Sechster Sinn.",
             "neue_maechte": 0,
@@ -472,8 +449,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Wildcard",
-                "Legendär",
                 "Willenskraft W6+",
                 "Ruf"
             ],
@@ -963,7 +938,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Wildcard",
                 "WIL W6+",
                 "Okkultismus W6+"
             ],
