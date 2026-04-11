@@ -135,6 +135,9 @@
         "Zaubern": [
             "Verstand"
         ],
+        "Verrückte Wissenschaft": [
+            "Verstand"
+        ],
         "Alchemie": [
             "Verstand"
         ]
@@ -174,8 +177,7 @@
             "kategorie": "Sozial",
             "rang": "A",
             "voraussetzungen": [
-                "AH (Priester)",
-                "weiblich"
+                "AH (Priester)"
             ],
             "beschreibung": "Kann Verderbnis erhöhen, um einen Benny zu erhalten, und anderen Mariannen besonders gut helfen, Verderbnis abzubauen.",
             "neue_maechte": 0,
@@ -201,8 +203,7 @@
             "kategorie": "Sozial",
             "rang": "A",
             "voraussetzungen": [
-                "AH (Eiferer)",
-                "weiblich"
+                "AH (Eiferer)"
             ],
             "beschreibung": "Kann Verderbnis erhöhen, um bis zum Beginn ihres nächsten Zuges einen Bonus in Höhe ihrer Verderbnis auf alle Eigenschafts- und Schadenswürfe zu erhalten.",
             "neue_maechte": 0,
@@ -242,9 +243,7 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Hexenmystiker)",
-                "Gesucht (schwer)",
-                "weiblich"
+                "AH (Hexenmystiker)"
             ],
             "beschreibung": "Gilt als Widernatürlich, keine Segnungen, kann Hexenkräfte wirken.",
             "neue_maechte": 0,
@@ -338,7 +337,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Meister der Dolche"
+                "Blattschuss"
             ],
             "beschreibung": "Insgesamt +2 Kämpfen und zusätzlich PB 3 mit Messern und Dolchen.",
             "neue_maechte": 0,
@@ -1157,7 +1156,7 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
             "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
@@ -1618,7 +1617,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkane Fertigkeit W8",
+                "Glaube oder Fokus oder Zaubern W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -1680,20 +1679,6 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Mentalist": {
-            "name": "Mentalist",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Psionik)",
-                "Psionik W6"
-            ],
-            "beschreibung": "+2 auf vergleichende Psionikproben.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Neue Mächte": {
             "name": "Neue Mächte",
             "kategorie": "Macht",
@@ -1740,7 +1725,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Glaube oder Fokus oder Zaubern W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -2235,7 +2220,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -2248,7 +2232,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -2261,7 +2245,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,

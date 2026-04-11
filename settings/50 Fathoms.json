@@ -1289,8 +1289,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Beschwörer)",
-                "Tier beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
             "neue_maechte": 0,
@@ -1303,8 +1302,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Beschwörer)",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
             "neue_maechte": 0,
@@ -1317,9 +1315,7 @@
             "kategorie": "Beschwörer",
             "rang": "H",
             "voraussetzungen": [
-                "AH (Beschwörer)",
-                "Tier beschwören",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
             "neue_maechte": 0,
@@ -1696,7 +1692,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Flügel"
             ],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
@@ -1709,7 +1704,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen"
+                "Athletik W8 oder Schießen W8"
             ],
             "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
             "neue_maechte": 0,
@@ -1723,7 +1718,7 @@
             "rang": "H",
             "voraussetzungen": [
                 "Doppelschuss",
-                "Athletik W10 für Wurfwaffen oder Schießen W10 für Bögen"
+                "Athletik W10 oder Schießen W10"
             ],
             "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
             "neue_maechte": 0,
@@ -1750,8 +1745,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "KON W8",
-                "Odemwaffe"
+                "KON W8"
             ],
             "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
             "neue_maechte": 0,
@@ -1831,7 +1825,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W8"
+                "Zaubern oder Glaube oder Fokus W8"
             ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
@@ -1844,8 +1838,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "AH (beliebig)",
-                "eine böse Gesinnung"
+                "AH (beliebig)"
             ],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
             "neue_maechte": 0,
@@ -1859,7 +1852,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W6"
+                "Zaubern oder Glaube oder Fokus W6"
             ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
@@ -1884,7 +1877,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W10"
+                "Zaubern oder Glaube oder Fokus W10"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
@@ -2019,8 +2012,7 @@
                 "STÄ W8",
                 "KON W8",
                 "Kämpfen W8",
-                "Reiten W6",
-                "Verpflichtung (schwer)"
+                "Reiten W6"
             ],
             "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
             "neue_maechte": 0,
@@ -2110,7 +2102,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Lykanthropie"
             ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
@@ -2664,7 +2655,7 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
             "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
@@ -3123,7 +3114,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkane Fertigkeit W8",
+                "Zaubern oder Glaube oder Fokus W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -3185,20 +3176,6 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Mentalist": {
-            "name": "Mentalist",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Psionik)",
-                "Psionik W6"
-            ],
-            "beschreibung": "+2 auf vergleichende Psionikproben.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Neue Mächte": {
             "name": "Neue Mächte",
             "kategorie": "Macht",
@@ -3245,7 +3222,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Zaubern oder Glaube oder Fokus W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -3431,8 +3408,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Reparaturgenie": {
-            "name": "Reparaturgenie",
+        "Reparierengenie": {
+            "name": "Reparierengenie",
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
@@ -3764,7 +3741,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -3777,7 +3753,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -3790,7 +3766,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,
@@ -3884,7 +3860,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Krake"
             ],
             "beschreibung": "Der Krake besitzt ein Krakenknochenschwert (Stä+W10, 2 kg) und eine Krakenknochenrüstung (+3 Panzerung Torso/Arme/Kopf, 7,5 kg). Für Nichtkraken nur Stä+W6 und +1 Panzerung.",
             "neue_maechte": 0,
@@ -3897,7 +3872,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Nicht aquatisch oder halbaquatisch"
             ],
             "beschreibung": "+2 auf Athletikproben (Schwimmen), +1 auf Schwimmbewegungsweite, kann 50% länger den Atem anhalten.",
             "neue_maechte": 0,
@@ -3913,7 +3887,7 @@
                 "Verstand W8",
                 "Seefahrt W8",
                 "Einschüchtern W8",
-                "Anführen"
+                "Anführer"
             ],
             "beschreibung": "Besatzungen unter diesem Kapitän erhalten +2 auf Seefahrtsproben. Muss beim Einsatz alleiniger Kapitän sein.",
             "neue_maechte": 0,
@@ -3926,7 +3900,7 @@
             "kategorie": "Anführer",
             "rang": "A",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "Athletik W8"
             ],
             "beschreibung": "Gruppenproben auf Athletik (Werfen) zum Einfangen eines gegnerischen Schiffs mit Wurfhaken erhalten +4.",
@@ -3941,7 +3915,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Verstand W8",
-                "Reparatur W8"
+                "Reparieren W8"
             ],
             "beschreibung": "Kann beschädigte Feuerwaffen reparieren (4 Stunden, halb bei Steigerung). Kann mit Formen Bleikugeln herstellen (12 pro Stunde). Kritische Wunden -2 Abzug, 1W6 Tage.",
             "neue_maechte": 0,
@@ -4008,7 +3982,7 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Reparatur W6",
+                "Reparieren W6",
                 "Seefahrt W6"
             ],
             "beschreibung": "Kann Schiffswunden reparieren ohne Trockendock (Reparierenprobe, 1W4 Tage, halbe Frachteinheit Holz). Kritische Wunden: -2 Abzug, 1W6 Tage.",

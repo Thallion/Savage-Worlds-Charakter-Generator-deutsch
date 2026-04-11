@@ -2238,7 +2238,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W8"
+                "Glaube oder Zaubern W8"
             ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
@@ -2266,7 +2266,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W6"
+                "Glaube oder Zaubern W6"
             ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
@@ -2291,7 +2291,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W10"
+                "Glaube oder Zaubern W10"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
@@ -3074,7 +3074,7 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
             "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
@@ -3533,7 +3533,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkane Fertigkeit W8",
+                "Glaube oder Zaubern W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -3655,7 +3655,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Glaube oder Zaubern W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -4174,7 +4174,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -4187,7 +4186,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -4200,7 +4199,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,

@@ -358,6 +358,15 @@
         ],
         "Zaubern": [
             "Verstand"
+        ],
+        "Verrückte Wissenschaft": [
+            "Verstand"
+        ],
+        "Alchemie": [
+            "Verstand"
+        ],
+        "Fokus": [
+            "Willenskraft"
         ]
     },
     "talente": {
@@ -651,7 +660,7 @@
             "name": "Paladin",
             "kategorie": "Klasse",
             "rang": "A",
-            "voraussetzungen": ["WIL W6", "STÄ W6", "Schwur (leicht oder schwer)"],
+            "voraussetzungen": ["WIL W6", "STÄ W6"],
             "beschreibung": "Aura der Tapferkeit (+1 auf Furchtproben innerhalb von 10''), Ehrenkodex, Böses entdecken, Böses niederstrecken (freie Wiederholung bei Angriffswürfen gegen einen gewählten bösen Gegner pro Begegnung)",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -728,7 +737,7 @@
             "name": "Waldläufer",
             "kategorie": "Klasse",
             "rang": "A",
-            "voraussetzungen": ["Athletik, Kämpfen oder Schießen W6", "Überleben W6"],
+            "voraussetzungen": ["Athletik W6, Kämpfen oder Schießen W6", "Überleben W6"],
             "beschreibung": "Rüstungsbeschränkung (mittelschwer), Erzfeind, Bevorzugtes Gelände, Wildnis durchqueren",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -871,7 +880,7 @@
             "name": "Arkane Rüstung",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["Behindernde Rüstung"],
+            "voraussetzungen": [],
             "beschreibung": "Die Behindernde Rüstung des Charakters wird um eine Stufe verbessert (beispielsweise von mittelschwer auf leicht)",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -915,7 +924,7 @@
             "name": "Arkaner Betrüger",
             "kategorie": "Prestige",
             "rang": "F",
-            "voraussetzungen": ["AH oder MM", "Hinterhältiger Angriff", "Diebeskunst W8"],
+            "voraussetzungen": ["AH", "Diebeskunst W8"],
             "beschreibung": "Weitreichende Fingerfertigkeit: kann Diebeskunst mit –2 auf Entfernung von 5'' verwenden; Spontaner Angriff: Einmal pro Begegnung kann der Schwindler Hinterhältiger Angriff ohne Überraschungsangriff oder Verwundbar verwenden.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -948,7 +957,7 @@
             "name": "Assassine",
             "kategorie": "Prestige",
             "rang": "F",
-            "voraussetzungen": ["Hinterhältiger Angriff"],
+            "voraussetzungen": [],
             "beschreibung": "Todesangriff: Wenn Assassine mit Überraschungsangriff angreift und mindestens eine Wunde erzielt, muss Opfer Konstitutionsprobe schaffen oder sterben.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1080,7 +1089,7 @@
             "name": "Mystischer Ritter",
             "kategorie": "Prestige",
             "rang": "F",
-            "voraussetzungen": ["AH oder MM", "Kämpfen W8"],
+            "voraussetzungen": ["AH", "Kämpfen W8"],
             "beschreibung": "Mystische Aufladung: Erhalte Machtpunkt bei Steigerung mit Angriff oder arkaner Fertigkeit.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1113,7 +1122,7 @@
             "name": "Mystischer Theurg",
             "kategorie": "Prestige",
             "rang": "F",
-            "voraussetzungen": ["Arkane Hintergründe (beliebige)", "siehe Text"],
+            "voraussetzungen": ["AH (beliebig)"],
             "beschreibung": "Magiefusion: Wirke zwei Zauber auf einmal und würfle eine arkane Fertigkeit für jede sowie den Wildcard-Würfel.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1179,7 +1188,7 @@
             "name": "Wissenshüter",
             "kategorie": "Prestige",
             "rang": "F",
-            "voraussetzungen": ["Ver W8", "siehe Text"],
+            "voraussetzungen": ["Ver W8"],
             "beschreibung": "Legendenkunde: freie Wiederholung bei Allgemeinwissen, Geisteswissenschaften, Okkultismus oder Naturwissenschaften",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1499,9 +1508,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
-                "AH (Beschwörer)",
-                "Tier beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
             "neue_maechte": 0,
@@ -1514,9 +1521,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
-                "AH (Beschwörer)",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
             "neue_maechte": 0,
@@ -1529,10 +1534,7 @@
             "kategorie": "Beschwörer",
             "rang": "H",
             "voraussetzungen": [
-                "Heroisch",
-                "AH (Beschwörer)",
-                "Tier beschwören",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
             "neue_maechte": 0,
@@ -1786,7 +1788,7 @@
             "name": "Auserkoren",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Wildcard"],
+            "voraussetzungen": [],
             "beschreibung": "Entschlossenheit hält bis zum Ende der Begegnung an, ohne dass sie mit Bennys aufrechterhalten werden muss. Der Charakter hat ein unverkennbares Mal und wird von mächtigen Feinden verfolgt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1819,7 +1821,7 @@
             "name": "Erzfeind",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": ["Athletik", "Kämpfen oder Schießen W6"],
+            "voraussetzungen": ["Athletik W6", "Kämpfen oder Schießen W6"],
             "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1852,7 +1854,7 @@
             "name": "Böe",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["Flügel"],
+            "voraussetzungen": [],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1896,7 +1898,7 @@
             "name": "Versengen",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": ["KON W8", "Odemwaffe"],
+            "voraussetzungen": ["KON W8"],
             "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1962,7 +1964,7 @@
             "name": "Bevorzugte Macht",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": ["AH (beliebig)", "Arkane Fertigkeit W8"],
+            "voraussetzungen": ["AH (beliebig)", "Glaube oder Zaubern W8"],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1973,7 +1975,7 @@
             "name": "Blutmagie",
             "kategorie": "Macht",
             "rang": "A",
-            "voraussetzungen": ["AH (beliebig)", "eine böse Gesinnung"],
+            "voraussetzungen": ["AH (beliebig)"],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -1984,7 +1986,7 @@
             "name": "Epische Meisterschaft",
             "kategorie": "Macht",
             "rang": "V",
-            "voraussetzungen": ["AH (beliebig)", "Arkane Fertigkeit W6"],
+            "voraussetzungen": ["AH (beliebig)", "Glaube oder Zaubern W6"],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2006,7 +2008,7 @@
             "name": "Schlachtenmagie",
             "kategorie": "Macht",
             "rang": "V",
-            "voraussetzungen": ["AH (beliebig)", "Arkane Fertigkeit W10"],
+            "voraussetzungen": ["AH (beliebig)", "Glaube oder Zaubern W10"],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2116,7 +2118,7 @@
             "name": "Ritter",
             "kategorie": "Experte",
             "rang": "A",
-            "voraussetzungen": ["WIL W6", "STÄ W8", "KON W8", "Kämpfen W8", "Reiten W6", "Verpflichtung (schwer)"],
+            "voraussetzungen": ["WIL W6", "STÄ W8", "KON W8", "Kämpfen W8", "Reiten W6"],
             "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2193,7 +2195,8 @@
             "name": "Schnelle Verwandlung",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": ["Lykanthropie"],
+            "voraussetzungen": [
+        ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2711,7 +2714,7 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
             "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
@@ -3131,27 +3134,13 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Bastler": {
-            "name": "Bastler",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Verrückte Wissenschaft)",
-                "Verrückte Wissenschaft W6"
-            ],
-            "beschreibung": "Gib 3 Machtpunkte aus, um ein Gerät zu erschaffen, das eine andere Macht nachahmt.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Energieschub": {
             "name": "Energieschub",
             "kategorie": "Macht",
             "rang": "WC",
             "voraussetzungen": [
                 "A",
-                "Arkane Fertigkeit W8",
+                "Glaube oder Zaubern W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -3213,20 +3202,6 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Mentalist": {
-            "name": "Mentalist",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Psionik)",
-                "Psionik W6"
-            ],
-            "beschreibung": "+2 auf vergleichende Psionikproben.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Neue Mächte": {
             "name": "Neue Mächte",
             "kategorie": "Macht",
@@ -3273,7 +3248,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Glaube oder Zaubern W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -3677,7 +3652,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -3690,7 +3664,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -3703,8 +3677,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "WC",
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,
@@ -3743,7 +3716,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "K W8"
+                "Konstitution W8"
             ],
             "beschreibung": "Der Held kann vier Wunden einstecken, ehe er Ausgeschaltet ist.",
             "neue_maechte": 0,

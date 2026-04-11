@@ -729,8 +729,8 @@ class TalentManager:
                 )
             return fehlermeldungen
 
-        # Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8")
-        attribut_match = re.match(r'^(Geschicklichkeit|Stärke|Konstitution|Verstand|Willenskraft|STÄ|GES|KON|VER|WIL)\s+W(\d+)$', voraussetzung)
+        # Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8" oder "STÄ W8+")
+        attribut_match = re.match(r'^(Geschicklichkeit|Stärke|Konstitution|Verstand|Willenskraft|STÄ|GES|KON|VER|WIL)\s+W(\d+)\+?$', voraussetzung)
         if attribut_match:
             attribut_name_or_kuerzel = attribut_match.group(1)
             wuerfel_wert = int(attribut_match.group(2))
@@ -755,8 +755,8 @@ class TalentManager:
 
             return fehlermeldungen
 
-        # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8")
-        fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)$', voraussetzung)
+        # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8", "Kämpfen W8+", "Verrückte Wissenschaft W6+")
+        fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)\+?$', voraussetzung)
         if fertigkeit_match:
             fertigkeit_name = fertigkeit_match.group(1)
             wuerfel_wert = int(fertigkeit_match.group(2))

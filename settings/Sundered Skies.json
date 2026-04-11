@@ -316,6 +316,9 @@
         "Überreden": [
             "Willenskraft"
         ],
+        "Umhören": [
+            "Willenskraft"
+        ],
         "Wahrnehmung": [
             "Verstand"
         ],
@@ -392,6 +395,24 @@
             "Verstand"
         ],
         "Alchemie": [
+            "Verstand"
+        ],
+        "Wissen (Astronomie)": [
+            "Verstand"
+        ],
+        "Wissen (Dämonen)": [
+            "Verstand"
+        ],
+        "Wissen (Arkanes)": [
+            "Verstand"
+        ],
+        "Wissen (Geschichte)": [
+            "Verstand"
+        ],
+        "Wissen (Übernatürliches)": [
+            "Verstand"
+        ],
+        "Wissen (Winde)": [
             "Verstand"
         ]
     },
@@ -492,7 +513,6 @@
             "rang": "H",
             "voraussetzungen": [
                 "Drachenmacht",
-                "Zwei weitere Drachentalente",
                 "WIL W10",
                 "Einschüchtern W10"
             ],
@@ -585,7 +605,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Beziehungen",
-                "Nachforschung W6",
+                "Recherche W6",
                 "Umhören W8"
             ],
             "beschreibung": "Verbessert Verfügbarkeit von Ausrüstung um eins, +2 auf Handels-/Kaufwürfe. Freie Unterkunft in Navigatorenhallen.",
@@ -855,7 +875,6 @@
             "kategorie": "Alchemist",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "AH (Alchemist)",
                 "Alchemie W10+"
             ],
@@ -881,7 +900,6 @@
             "kategorie": "Barde",
             "rang": "H",
             "voraussetzungen": [
-                "Heroisch",
                 "AH (Barde)"
             ],
             "beschreibung": "Löst Furcht aus und reduziert Proben von Feinden um -2, wenn sie Bennys verwenden. Der Barde muss singen oder ein Instrument spielen.",
@@ -994,7 +1012,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Glühblut"
             ],
             "beschreibung": "+1 auf Willenskraft- oder Verstand-Proben und deren Fertigkeiten. Wird bei Glühwahn zur Zornbestie.",
             "neue_maechte": 0,
@@ -1088,7 +1105,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "Stärke W8+",
-                "Werfen W10+"
+                "Athletik W10+"
             ],
             "beschreibung": "Erhöht die Reichweite von Wurfwaffen um 1/2/4 und fügt +1 Schaden bei kurzer Reichweite hinzu.",
             "neue_maechte": 0,
@@ -1796,7 +1813,7 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Athletik",
+                "Athletik W6",
                 "Kämpfen oder Schießen W6+"
             ],
             "beschreibung": "Wähle eine Art von Feind. Der Charakter erhält eine freie Wiederholung bei Überlebensproben, um diese zu verfolgen, und bei Angriffen auf diese Feinde.",
@@ -1834,7 +1851,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Flügel"
             ],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
@@ -1875,7 +1891,6 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Veteran",
                 "Geschicklichkeit W8+",
                 "Athletik W8+"
             ],
@@ -1890,8 +1905,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Konstitution W8+",
-                "Odemwaffe"
+                "Konstitution W8+"
             ],
             "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
             "neue_maechte": 0,
@@ -1971,7 +1985,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W8+"
+                "Glaube oder Okkultismus oder Zaubern W8+"
             ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
@@ -1998,7 +2012,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W6+"
+                "Glaube oder Okkultismus oder Zaubern W6+"
             ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
@@ -2024,7 +2038,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W10+"
+                "Glaube oder Okkultismus oder Zaubern W10+"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
@@ -2253,7 +2267,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Lykanthropie"
             ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
@@ -2796,7 +2809,7 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
             "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
@@ -3247,7 +3260,7 @@
             "rang": "WC",
             "voraussetzungen": [
                 "A",
-                "Arkane Fertigkeit W8",
+                "Glaube oder Okkultismus oder Zaubern W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -3309,20 +3322,6 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Mentalist": {
-            "name": "Mentalist",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Psionik)",
-                "Psionik W6"
-            ],
-            "beschreibung": "+2 auf vergleichende Psionikproben.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Neue Mächte": {
             "name": "Neue Mächte",
             "kategorie": "Macht",
@@ -3369,7 +3368,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Glaube oder Okkultismus oder Zaubern W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -3881,7 +3880,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -3894,7 +3892,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -3907,8 +3905,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "WC",
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,
@@ -3947,7 +3944,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "K W8"
+                "Konstitution W8"
             ],
             "beschreibung": "Der Held kann vier Wunden einstecken, ehe er Ausgeschaltet ist.",
             "neue_maechte": 0,

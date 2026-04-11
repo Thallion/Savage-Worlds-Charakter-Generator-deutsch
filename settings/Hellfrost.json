@@ -398,113 +398,113 @@
         "Athletik": [
             "Geschicklichkeit"
         ],
-        "Einschüchtern": [
-            "Willenskraft"
-        ],
-        "Elektronik": [
-            "Verstand"
-        ],
         "Heimlichkeit": [
             "Geschicklichkeit"
         ],
+        "Überreden": [
+            "Willenskraft"
+        ],
+        "Wahrnehmung": [
+            "Verstand"
+        ],
         "Kämpfen": [
-            "Geschicklichkeit"
-        ],
-        "Klettern": [
-            "Stärke"
-        ],
-        "Okkultismus": [
-            "Verstand"
-        ],
-        "Reparieren": [
-            "Verstand"
-        ],
-        "Reiten": [
-            "Geschicklichkeit"
-        ],
-        "Schlösser knacken": [
             "Geschicklichkeit"
         ],
         "Schießen": [
             "Geschicklichkeit"
         ],
-        "Schwimmen": [
+        "Diebeskunst": [
+            "Geschicklichkeit"
+        ],
+        "Überleben": [
+            "Verstand"
+        ],
+        "Reiten": [
+            "Geschicklichkeit"
+        ],
+        "Fahren": [
             "Geschicklichkeit"
         ],
         "Seefahrt": [
             "Geschicklichkeit"
         ],
-        "Spuren lesen": [
-            "Verstand"
-        ],
-        "Überreden": [
-            "Willenskraft"
-        ],
-        "Überleben": [
-            "Verstand"
-        ],
-        "Umhören": [
-            "Verstand"
-        ],
-        "Wahrnehmung": [
-            "Verstand"
-        ],
-        "Werfen": [
+        "Pilot": [
             "Geschicklichkeit"
         ],
+        "Darbietung": [
+            "Willenskraft"
+        ],
+        "Einschüchtern": [
+            "Willenskraft"
+        ],
+        "Fokus": [
+            "Willenskraft"
+        ],
+        "Glaube": [
+            "Willenskraft"
+        ],
         "Heilen": [
+            "Verstand"
+        ],
+        "Provozieren": [
+            "Verstand"
+        ],
+        "Recherche": [
+            "Verstand"
+        ],
+        "Reparieren": [
             "Verstand"
         ],
         "Glücksspiel": [
             "Verstand"
         ],
-        "Nachforschung": [
+        "Kriegskunst": [
+            "Verstand"
+        ],
+        "Okkultismus": [
+            "Verstand"
+        ],
+        "Geisteswissenschaften": [
+            "Verstand"
+        ],
+        "Naturwissenschaften": [
+            "Verstand"
+        ],
+        "Sprache": [
+            "Verstand"
+        ],
+        "Zaubern": [
+            "Verstand"
+        ],
+        "Verrückte Wissenschaft": [
+            "Verstand"
+        ],
+        "Alchemie": [
             "Verstand"
         ],
         "Wissen (Alchemie)": [
             "Verstand"
         ],
-        "Wissen (Belagerungsartillerie)": [
-            "Verstand"
-        ],
         "Wissen (Folklore)": [
-            "Verstand"
-        ],
-        "Wissen (Gegend)": [
-            "Verstand"
-        ],
-        "Wissen (Geschichte)": [
-            "Verstand"
-        ],
-        "Wissen (Handwerk)": [
-            "Verstand"
-        ],
-        "Wissen (Heraldik)": [
             "Verstand"
         ],
         "Wissen (Kriegsführung)": [
             "Verstand"
         ],
-        "Wissen (Monster)": [
-            "Verstand"
-        ],
-        "Wissen (Rätsel)": [
-            "Verstand"
-        ],
-        "Wissen (Recht)": [
-            "Verstand"
-        ],
-        "Wissen (Religion)": [
-            "Verstand"
-        ],
         "Wissen (Übernatürliches)": [
             "Verstand"
+        ],
+        "Umhören": [
+            "Willenskraft"
         ],
         "Druidenmagie": [
             "Verstand"
         ],
         "Elementarmagie": [
             "Verstand"
+        ],
+        "Gesangsmagie": [
+            "Willenskraft"
         ],
         "Heahmagie": [
             "Verstand"
@@ -513,15 +513,6 @@
             "Verstand"
         ],
         "Runemagie": [
-            "Verstand"
-        ],
-        "Gesangsmagie": [
-            "Willenskraft"
-        ],
-        "Glaube": [
-            "Willenskraft"
-        ],
-        "Sprache": [
             "Verstand"
         ]
     },
@@ -1735,8 +1726,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Beschwörer)",
-                "Tier beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
             "neue_maechte": 0,
@@ -1749,8 +1739,7 @@
             "kategorie": "Beschwörer",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Beschwörer)",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
             "neue_maechte": 0,
@@ -1763,9 +1752,7 @@
             "kategorie": "Beschwörer",
             "rang": "H",
             "voraussetzungen": [
-                "AH (Beschwörer)",
-                "Tier beschwören",
-                "Monster beschwören"
+                "AH (Beschwörer)"
             ],
             "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
             "neue_maechte": 0,
@@ -2106,7 +2093,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "Verstand W8+",
-                "Kämpfen, Schießen oder Werfen W8+"
+                "Kämpfen, Schießen oder Athletik W8+"
             ],
             "beschreibung": "Wähle eine Kreaturenart. +1 Parade gegen Erzfeinde, W8 statt W6 Bonusschaden bei Steigerung. Kann mehrfach gewählt werden.",
             "neue_maechte": 0,
@@ -2143,7 +2130,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Flügel"
             ],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
@@ -2156,9 +2142,9 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Athletik W8 für Wurfwaffen oder Schießen W8 für Bögen"
+                "Athletik W8 oder Schießen W8"
             ],
-            "beschreibung": "Erlaubt das Schießen oder Werfen von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
+            "beschreibung": "Erlaubt das Schießen oder Athletik von zwei Geschossen in einem Angriff mit separaten Angriffswürfen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -2170,7 +2156,7 @@
             "rang": "H",
             "voraussetzungen": [
                 "Doppelschuss",
-                "Athletik W10 für Wurfwaffen oder Schießen W10 für Bögen"
+                "Athletik W10 oder Schießen W10"
             ],
             "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
             "neue_maechte": 0,
@@ -2197,8 +2183,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "KON W8",
-                "Odemwaffe"
+                "KON W8"
             ],
             "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
             "neue_maechte": 0,
@@ -2278,7 +2263,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W8"
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W8"
             ],
             "beschreibung": "Erlaubt das Ignorieren von bis zu zwei Punkten Abzügen bei der Aktivierung einer ausgewählten Macht.",
             "neue_maechte": 0,
@@ -2291,8 +2276,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "AH (beliebig)",
-                "eine böse Gesinnung"
+                "AH (beliebig)"
             ],
             "beschreibung": "Gewährt W6 Machtpunkte zurück, wenn der Charakter einem bewussten Wesen eine Wunde zufügt, die nicht weggesteckt wird.",
             "neue_maechte": 0,
@@ -2306,7 +2290,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W6"
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W6"
             ],
             "beschreibung": "Gewährt Zugang zu epischen Machtmodifikatoren für alle Mächte des Helden. Gilt für alle arkanen Hintergründe, die der Charakter besitzt, wenn er die Voraussetzungen erfüllt.",
             "neue_maechte": 0,
@@ -2331,7 +2315,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "Arkane Fertigkeit W10"
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W10"
             ],
             "beschreibung": "Erlaubt das Wirken von Zaubern auf große Einheiten von Statisten. Siehe Regeln für Schlachtenmagie.",
             "neue_maechte": 0,
@@ -2468,8 +2452,7 @@
                 "STÄ W8",
                 "KON W8",
                 "Kämpfen W8",
-                "Reiten W6",
-                "Verpflichtung (schwer)"
+                "Reiten W6"
             ],
             "beschreibung": "Repräsentiert einen Lehnsherrn, gewährt +1 auf Einschüchtern- oder Überredenproben gegenüber Autorität-respektierenden Personen.",
             "neue_maechte": 0,
@@ -2560,7 +2543,6 @@
             "kategorie": "Übersinnlich",
             "rang": "A",
             "voraussetzungen": [
-                "Lykanthropie"
             ],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
@@ -2901,7 +2883,7 @@
             "voraussetzungen": [
                 "GES W8"
             ],
-            "beschreibung": "Führe einen zusätzlichen Angriff mit Athletik (Werfen) oder Schießen mit der falschen Hand ohne Mehrfachaktionsabzug aus.",
+            "beschreibung": "Führe einen zusätzlichen Angriff mit Athletik (Athletik) oder Schießen mit der falschen Hand ohne Mehrfachaktionsabzug aus.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -3114,9 +3096,9 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
-            "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
+            "beschreibung": "+1 auf Athletik (Athletik), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -3155,7 +3137,7 @@
             "voraussetzungen": [
                 "Athletik oder Schießen W8"
             ],
-            "beschreibung": "Bei erster Aktion +1 Bonus oder ignoriere bis zu 2 Punkte Abzüge auf Athletik (Werfen) oder Schießen, wenn du dich nicht bewegst und nicht mehr als FR 1 verwendest.",
+            "beschreibung": "Bei erster Aktion +1 Bonus oder ignoriere bis zu 2 Punkte Abzüge auf Athletik (Athletik) oder Schießen, wenn du dich nicht bewegst und nicht mehr als FR 1 verwendest.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -3428,7 +3410,7 @@
             "voraussetzungen": [
                 "Athletik oder Schießen W8"
             ],
-            "beschreibung": "Wenn Du einen Joker hast, verdopple den Schaden deines ersten erfolgreichen Angriffs mit Athletik (Werfen) oder Schießen.",
+            "beschreibung": "Wenn Du einen Joker hast, verdopple den Schaden deines ersten erfolgreichen Angriffs mit Athletik (Athletik) oder Schießen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -3531,8 +3513,7 @@
             "kategorie": "Anführer",
             "rang": "F",
             "voraussetzungen": [
-                "Wildcard",
-                "Anführen",
+                "Anführer",
                 "Verstand W8+",
                 "Wissen (Kriegsführung) W6+"
             ],
@@ -3574,7 +3555,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "Arkane Fertigkeit W8",
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -3639,20 +3620,6 @@
             "ausgewaehlt": false,
             "aktiv": false
         },
-        "Mentalist": {
-            "name": "Mentalist",
-            "kategorie": "Macht",
-            "rang": "F",
-            "voraussetzungen": [
-                "AH (Psionik)",
-                "Psionik W6"
-            ],
-            "beschreibung": "+2 auf vergleichende Psionikproben.",
-            "neue_maechte": 0,
-            "machtpunkte": 0,
-            "ausgewaehlt": false,
-            "aktiv": true
-        },
         "Neue Mächte": {
             "name": "Neue Mächte",
             "kategorie": "Macht",
@@ -3699,7 +3666,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -4218,7 +4185,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -4231,7 +4197,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -4244,7 +4210,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,
@@ -4310,7 +4276,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Herd- oder Taigaelf oder Engro"
             ],
             "beschreibung": "Arkane Fertigkeit: Druidenmagie (Verstand). Startmächte: 3. Druiden ziehen an den Fäden der Naturmagie und manipulieren Pflanzen und Tiere. In Wildnis +1 auf Druidenmagie, in Städten -1.",
             "neue_maechte": 3,
@@ -4334,7 +4299,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Mensch (Anari)"
             ],
             "beschreibung": "Arkane Fertigkeit: Heahmagie (Verstand). Startmächte: 3. Heahmagier schöpfen ihre Macht durch magische Stäbe. Ohne Stab -2 auf alle Heahmagiewürfe. Der Stab verursacht Stä+W4 Schaden.",
             "neue_maechte": 3,
@@ -4358,7 +4322,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Frostzwerg"
             ],
             "beschreibung": "Runenmagier ritzen Runen der Macht auf Steintafeln. Jede Rune hat eine eigene arkane Fertigkeit und ist mit drei Zaubersprüchen verknüpft. Beginnt mit einer Rune.",
             "neue_maechte": 3,
@@ -4410,7 +4373,7 @@
             "kategorie": "Anführer",
             "rang": "V",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "Haltet die Stellung!",
                 "Willenskraft W8+",
                 "Wissen (Kriegsführung) W8+"
@@ -4426,7 +4389,7 @@
             "kategorie": "Anführer",
             "rang": "H",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "Inspirieren",
                 "Verstand W8+",
                 "Wissen (Kriegsführung) W10+"
@@ -4442,7 +4405,7 @@
             "kategorie": "Anführer",
             "rang": "F",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "Anheizen"
             ],
             "beschreibung": "Truppen unter dem Kommando erhalten +2 auf Willenskraftwürfe gegen Furcht und ziehen -2 von Würfen auf der Furchttabelle ab.",
@@ -4470,7 +4433,7 @@
             "kategorie": "Anführer",
             "rang": "V",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "Anheizen",
                 "Willenskraft W8+",
                 "Wissen (Kriegsführung) W10+"
@@ -4486,10 +4449,10 @@
             "kategorie": "Anführer",
             "rang": "V",
             "voraussetzungen": [
-                "Anführen",
+                "Anführer",
                 "Verstand W6+",
                 "Schießen W8+",
-                "Werfen W8+"
+                "Athletik W8+"
             ],
             "beschreibung": "Fernkampfeinheiten in Befehlsreichweite feuern als Einheit. +2 pro Schütze auf Angriffswurf des Helden. Pro Steigerung +1W6 Bonusschaden.",
             "neue_maechte": 0,
@@ -4503,8 +4466,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Verstand W8+",
-                "Nachforschung W6+",
-                "nicht Analphabet"
+                "Recherche W6+"
             ],
             "beschreibung": "Trägt Schriftrollen (5 Pfund). Ungeübte Verstand-Fertigkeiten werden mit W4 statt W4-2 abgelegt, wenn eine Runde studiert wird. Erhält Beziehungen und Handicap Befehle.",
             "neue_maechte": 0,
@@ -4517,8 +4479,7 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Dieb",
-                "Sprache Fingersprech"
+                "Dieb"
             ],
             "beschreibung": "+2 auf Umhörenproben im Heimatland. Wildcard-Würfel W8 für Heimlichkeit, Klettern oder Schlösser knacken (wähle eine). Erhält Beziehungen und Handicap Befehle.",
             "neue_maechte": 0,
@@ -4531,9 +4492,7 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Heilen W8+",
-                "Handicap Pazifist",
-                "weiblich"
+                "Heilen W8+"
             ],
             "beschreibung": "+2 auf Heilenwürfe, +1 Überreden. Kann ab Veteran das Talent Mitstreiter erwerben. Erhält Beziehungen und Handicap Befehle.",
             "neue_maechte": 0,
@@ -4548,8 +4507,7 @@
             "voraussetzungen": [
                 "Willenskraft W8+",
                 "Kämpfen W8+",
-                "Schießen oder Werfen W6+",
-                "keine Familie/Verantwortung"
+                "Schießen oder Athletik W6+"
             ],
             "beschreibung": "Immun gegen Einschüchterung und Furcht. Kann sich keiner anderen Organisation anschließen. Erhält Beziehungen und Handicap Befehle.",
             "neue_maechte": 0,
@@ -4579,7 +4537,6 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "Herd- oder Taigaelf",
                 "Beidhändiger Kampf",
                 "Geschicklichkeit W8+",
                 "Kämpfen W8+"
@@ -4595,7 +4552,6 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Engro",
                 "Stärke W6+",
                 "Willenskraft W8+",
                 "Einschüchtern W6+",
@@ -4612,8 +4568,7 @@
             "kategorie": "Experte",
             "rang": "A",
             "voraussetzungen": [
-                "Anführen",
-                "ein weiteres Anführertalent",
+                "Anführer",
                 "Verstand W6+",
                 "Willenskraft W6+",
                 "Wissen (Kriegsführung) W8+"
@@ -4645,7 +4600,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "Geschicklichkeit W8+",
-                "Schlösser knacken W6+",
+                "Diebeskunst W6+",
                 "Wahrnehmung W6+"
             ],
             "beschreibung": "+2 auf Wahrnehmung beim Suchen nach Fallen/Geheimtüren. +2 auf Entschärfenwürfe. Wird nie von Fallen überrascht. Kann Geschicklichkeitsprobe -2 ablegen um Fallen auszuweichen. Erhält Beziehungen und Handicap Befehle.",
@@ -4691,7 +4646,7 @@
                 "Konstitution W6+",
                 "Kämpfen W8+",
                 "Reiten W6+",
-                "Spuren lesen W6+",
+                "Überleben W6+",
                 "Überleben W6+"
             ],
             "beschreibung": "+2 auf Überlebens- und Spuren-lesen-Würfe. +2 auf Wahrnehmung für Hinterhalte, Fallen und verborgene Waffen (nicht in urbaner Umgebung). Erhält Beziehungen und Handicap Befehle.",
@@ -4729,8 +4684,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Reich oder Bewahrer des Wissens",
-                "nicht Analphabet"
             ],
             "beschreibung": "Besitzt Wissensbände. Erhält Punkte gleich halbem Verstandwürfel, verteilt auf Bände (max +3 pro Band), die Boni auf Wissensfertigkeiten geben.",
             "neue_maechte": 0,
@@ -4773,8 +4726,7 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Verstand W6+",
-                "nicht Analphabet"
+                "Verstand W6+"
             ],
             "beschreibung": "Beherrscht eine Zahl von Sprachen gleich dem Verstandwürfel.",
             "neue_maechte": 0,
@@ -4814,7 +4766,6 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
-                "Engro, Herdelf oder Mensch",
                 "Konstitution W8+"
             ],
             "beschreibung": "+2 auf Konstitutionswürfe, um den Auswirkungen von kaltem Wetter zu widerstehen.",
@@ -4832,8 +4783,7 @@
                 "Stärke W8+",
                 "Einschüchtern W8+",
                 "Glaube W8+",
-                "Kämpfen W8+",
-                "Anhänger Dargars"
+                "Kämpfen W8+"
             ],
             "beschreibung": "Wenn ein Statist mit einem Schlag Außer Gefecht gesetzt wird, müssen benachbarte Verbündete des Opfers Willenskraftprobe bestehen oder sind Angeschlagen. Kann Kriegsschrei ohne Rassenbeschränkung erlernen.",
             "neue_maechte": 0,
@@ -4849,8 +4799,7 @@
                 "AH (Wunder)",
                 "Willenskraft W8+",
                 "Glaube W8+",
-                "Heilen W6+",
-                "Anhänger Eiras"
+                "Heilen W6+"
             ],
             "beschreibung": "+2 auf alle Heilenwürfe (natürlich und magisch). Bis zu 5 Gefährten profitieren vom Bonus auf natürliche Heilungswürfe.",
             "neue_maechte": 0,
@@ -4867,8 +4816,7 @@
                 "Geschicklichkeit W8+",
                 "Konstitution W8+",
                 "Willenskraft W8+",
-                "Glaube W8+",
-                "Anhänger Eostres"
+                "Glaube W8+"
             ],
             "beschreibung": "Keine Abzüge bei Bewegung in natürlichem schwierigem Gelände (Vegetation). +1 auf Glaubenswürfe in starker Vegetation. Vorteile von Auserwählter und Heiliger Krieger gegen Pflanzenwesen.",
             "neue_maechte": 0,
@@ -4884,8 +4832,7 @@
                 "AH (Wunder)",
                 "Tierempathie",
                 "Willenskraft W8+",
-                "Glaube W8+",
-                "Anhänger Eostres"
+                "Glaube W8+"
             ],
             "beschreibung": "Vorteile des Talents Tiermeister, aber der Tiergefährte ist eine Wildcard und sammelt Erfahrungspunkte.",
             "neue_maechte": 0,
@@ -4900,10 +4847,9 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Konstitution W8+",
-                "Klettern W6+",
+                "Athletik W6+",
                 "Glaube W8+",
-                "Überleben W6+",
-                "Anhänger Erthas"
+                "Überleben W6+"
             ],
             "beschreibung": "+1 auf Robustheit. +2 auf Überlebenswürfe unter der Erde.",
             "neue_maechte": 0,
@@ -4919,8 +4865,7 @@
                 "AH (Wunder)",
                 "Geschicklichkeit W8+",
                 "Konstitution W8+",
-                "Glaube W8+",
-                "Anhänger Freos"
+                "Glaube W8+"
             ],
             "beschreibung": "Jegliches Terrain eine Kategorie niedriger (Überlandreise). Im taktischen Kampf ist jegliches Terrain normaler Untergrund.",
             "neue_maechte": 0,
@@ -4935,8 +4880,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Willenskraft W8+",
-                "Glaube W8+",
-                "Anhänger Helas"
+                "Glaube W8+"
             ],
             "beschreibung": "+1 auf Glaubenswürfe in Grabstätten und Todesorten. Bei zwei Steigerungen auf Zombie/Mächtige Untote sind diese permanent.",
             "neue_maechte": 0,
@@ -4952,8 +4896,7 @@
                 "AH (Wunder)",
                 "Gelehrter",
                 "Verstand W10+",
-                "Glaube W8+",
-                "Anhänger Hoenirs"
+                "Glaube W8+"
             ],
             "beschreibung": "+1 auf alle Wissens- und Allgemeinwissenswürfe (außer Gelehrter-Fertigkeiten). Kann ungeübte Wissensfertigkeiten mit W4-2 ablegen.",
             "neue_maechte": 0,
@@ -4970,8 +4913,7 @@
                 "Ermittler",
                 "Verstand W8+",
                 "Glaube W8+",
-                "Wahrnehmung W6+",
-                "Anhänger Hothars"
+                "Wahrnehmung W6+"
             ],
             "beschreibung": "+2 auf Widerstandswürfe gegen geistige Beeinflussung (inkl. Willensduell, Marionette, Verwirrung). Kumulativ mit Eiserner Wille.",
             "neue_maechte": 0,
@@ -4986,8 +4928,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Konstitution W8+",
-                "Glaube W8+",
-                "Anhänger Kenaz'"
+                "Glaube W8+"
             ],
             "beschreibung": "+2 auf Konstitution gegen Hitze, +4 Panzerung gegen Feuer/Hitze-Schaden. Metallwaffen können mit magischer Hitze erhitzt werden: +2/+4 Schaden gegen Kreaturen mit Resistenz/Immunität (Kälte).",
             "neue_maechte": 0,
@@ -5003,8 +4944,7 @@
                 "AH (Wunder)",
                 "Verstand W8+",
                 "Willenskraft W6+",
-                "Glaube W8+",
-                "Anhänger Maeras"
+                "Glaube W8+"
             ],
             "beschreibung": "Kann jeden Zauberspruch erlernen (mit -2 auf Glauben). +2 auf Glaubenswurf bei Bann.",
             "neue_maechte": 0,
@@ -5021,8 +4961,7 @@
                 "Dieb",
                 "Geschicklichkeit W10+",
                 "Glaube W8+",
-                "Glücksspiel W8+",
-                "Anhänger Nauthiz'"
+                "Glücksspiel W8+"
             ],
             "beschreibung": "Bei einer 1 auf Glücksspiel-, Heimlichkeits- oder Schlösser-knacken-Würfel kann automatisch wiederholt werden. Bei erneutem Fehlschlag: 24h Erschöpfungsstufe.",
             "neue_maechte": 0,
@@ -5038,9 +4977,8 @@
                 "AH (Wunder)",
                 "Konstitution W8+",
                 "Glaube W6+",
-                "Schwimmen W6+",
-                "Seefahrt W6+",
-                "Anhänger Neorthes"
+                "Athletik W6+",
+                "Seefahrt W6+"
             ],
             "beschreibung": "Halbierter täglicher Wasserbedarf. Konstitutionsprobe bei Dehydrierung nur alle 12h statt 6h. Kann Runden gleich Konstitutionswürfel beim Ertrinken überleben.",
             "neue_maechte": 0,
@@ -5057,8 +4995,7 @@
                 "Verstand W6+",
                 "Glaube W8+",
                 "Heimlichkeit W8+",
-                "Wahrnehmung W8+",
-                "Anhänger Nihts"
+                "Wahrnehmung W8+"
             ],
             "beschreibung": "Ignoriert Abzüge für düstere und dunkle Beleuchtung. Nur -2 bei totaler Dunkelheit (auch magischer).",
             "neue_maechte": 0,
@@ -5073,8 +5010,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Verstand W8+",
-                "Glaube W8+",
-                "Anhänger der Nornen"
+                "Glaube W8+"
             ],
             "beschreibung": "Kann Weissagungen treffen. Beteiligte Helden geben je einen Bennie aus. Eine Karte wird gezogen und liefert Boni oder Abzüge bis Abentuerende.",
             "neue_maechte": 0,
@@ -5091,8 +5027,7 @@
                 "Aufmerksamkeit",
                 "Konstitution W8+",
                 "Glaube W8+",
-                "Wahrnehmung W8+",
-                "Anhänger Rigrs"
+                "Wahrnehmung W8+"
             ],
             "beschreibung": "Benötigt nur 3 Stunden Schlaf. Nur -1 Konstitutionsabzug bei Schlafentzug statt -2. Gilt im Schlaf als aktive Wache.",
             "neue_maechte": 0,
@@ -5108,8 +5043,7 @@
                 "AH (Wunder)",
                 "Willenskraft W8+",
                 "Glaube W8+",
-                "Kämpfen W8+",
-                "Anhänger Scaethas"
+                "Kämpfen W8+"
             ],
             "beschreibung": "Vorteile von Auserwählter und Heiliger Krieger gegen Untote. +2 auf Glaube-Widerstandswürfe gegen nekromantische Zauber.",
             "neue_maechte": 0,
@@ -5125,8 +5059,7 @@
                 "AH (Wunder)",
                 "Konstitution W8+",
                 "Willenskraft W8+",
-                "Glaube W8+",
-                "Anhänger Sigels"
+                "Glaube W8+"
             ],
             "beschreibung": "Kälte-, Kaltfeuer- und Eisangriffe verursachen halben Schaden. +2 auf Konstitution gegen Kälte.",
             "neue_maechte": 0,
@@ -5141,8 +5074,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Konstitution W8+",
-                "Glaube W8+",
-                "Anhänger Thunors"
+                "Glaube W8+"
             ],
             "beschreibung": "+2 auf Konstitution bei Wind und Regen, +2 Panzerung gegen Blitz/Elektrizitätsschaden. Seefahrer erhalten +1 auf Seefahrt bei Sturm.",
             "neue_maechte": 0,
@@ -5159,8 +5091,7 @@
                 "Konstitution W8+",
                 "Stärke W8+",
                 "Glaube W8+",
-                "Kämpfen W10+",
-                "Anhänger Tiws"
+                "Kämpfen W10+"
             ],
             "beschreibung": "Gilt als einen Rang höher für Voraussetzungen von Kampftalenten.",
             "neue_maechte": 0,
@@ -5175,8 +5106,7 @@
             "voraussetzungen": [
                 "AH (Wunder)",
                 "Konstitution W6+",
-                "Glaube W8+",
-                "Anhänger Valis"
+                "Glaube W8+"
             ],
             "beschreibung": "Immun gegen jegliche Art von Krankheit und Gift (magisch und weltlich). Kann Krankheitsträger sein.",
             "neue_maechte": 0,
@@ -5192,8 +5122,7 @@
                 "AH (Wunder)",
                 "Glaube W8+",
                 "Überreden W8+",
-                "Umhören W8+",
-                "Anhänger Vars"
+                "Umhören W8+"
             ],
             "beschreibung": "Umhörenprobe zum Verkaufen: Erfolg = 50%, Steigerung = 75% des Preises. Probe alle 4 Tage statt 1x/Woche. +1 Überreden.",
             "neue_maechte": 0,
@@ -5206,7 +5135,7 @@
             "kategorie": "Kampf",
             "rang": "V",
             "voraussetzungen": [
-                "Kämpfen, Schießen oder Werfen W10+"
+                "Kämpfen, Schießen oder Athletik W10+"
             ],
             "beschreibung": "Massenschlacht: Halbiert (abgerundet) die negative Marker-Differenz für Angriffswürfe.",
             "neue_maechte": 0,
@@ -5219,7 +5148,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Frostzwerg oder Saxa",
                 "Einschüchtern W8+"
             ],
             "beschreibung": "Einschüchternwurf gegen alle Gegner auf einmal (Große Schablone). Jede Kreatur unter der Schablone muss Willenskraftwurf bestehen.",
@@ -5248,7 +5176,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "Stärke W8+",
-                "Werfen W10+"
+                "Athletik W10+"
             ],
             "beschreibung": "Wurfwaffen-Reichweite +1/2/4. Stärke eine Stufe höher (max W12+2) auf kurze Reichweite.",
             "neue_maechte": 0,
@@ -5262,8 +5190,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "Stärke W10+",
-                "Kämpfen W10+",
-                "Größe +0 oder größer"
+                "Kämpfen W10+"
             ],
             "beschreibung": "Kann zweihändige Nahkampfwaffen einhändig führen. Kann mit normaler einhändiger Waffe kombiniert werden.",
             "neue_maechte": 0,
@@ -5303,8 +5230,7 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Block",
-                "mittlerer oder großer Schild"
+                "Block"
             ],
             "beschreibung": "Ein benachbarter Kamerad erhält den Schildbonus des Helden auf seine Parade. Nur höchster Bonus gilt.",
             "neue_maechte": 0,
@@ -5372,7 +5298,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "arkane Fertigkeit W6+",
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W6+",
                 "Wissen (Alchemie) W6+"
             ],
             "beschreibung": "Kann alchemistische Gegenstände (Tränke, Schriftrollen, Zauberstäbe) erschaffen. Wissensprobe (Alchemie) zum Herstellen. Kosten: 50gs pro Rang des Zaubers.",
@@ -5387,7 +5313,7 @@
             "rang": "V",
             "voraussetzungen": [
                 "AH (Kälte-Ausprägungen)",
-                "arkane Fertigkeit W10+",
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W10+",
                 "Wissen (Übernatürliches) W10+"
             ],
             "beschreibung": "Kälte/Kaltfeuer/Eis-Zauber verursachen gegen Resistenz (Kälte) normalen und gegen Immunität (Kälte) halben Schaden. Doppelter Schaden gegen Empfindlich (Kälte).",
@@ -5403,7 +5329,7 @@
             "voraussetzungen": [
                 "AH (beliebig)",
                 "Willenskraft W6+",
-                "arkane Fertigkeit W8+"
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W8+"
             ],
             "beschreibung": "Bei Angeschlagen durch Zauber oder Sog: sofortige Erholungsprobe mit -2.",
             "neue_maechte": 0,
@@ -5456,8 +5382,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "AH (Runenmagie)",
-                "Wissen (Übernatürliches) W8+",
-                "spezifische Runenfertigkeit W8+"
+                "Wissen (Übernatürliches) W8+"
             ],
             "beschreibung": "+1 auf arkane Fertigkeitswürfe für die drei Zaubersprüche der gewählten Rune. Einmal pro Rang, jedes Mal andere Rune.",
             "neue_maechte": 0,
@@ -5486,7 +5411,7 @@
             "rang": "A",
             "voraussetzungen": [
                 "AH (außer Runenmagie)",
-                "arkane Fertigkeit W8+",
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W8+",
                 "Wissen (Übernatürliches) W8+"
             ],
             "beschreibung": "Wähle einen Zauber und eine Option: Arkan (WC-Würfel +1), Panzerbrechend (PB 2), Reichweite (+2/4/8), Schwere Waffe, oder Selektiv (Ziele ausnehmen). Mehrfach wählbar.",
@@ -5501,7 +5426,7 @@
             "rang": "H",
             "voraussetzungen": [
                 "AH (beliebig)",
-                "arkane Fertigkeit W10+",
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W10+",
                 "Wissen (Übernatürliches) W10+"
             ],
             "beschreibung": "Kann zwei unterschiedliche Zaubersprüche gleichzeitig auf dasselbe Ziel wirken. Eine arkane Fertigkeitsprobe für beide.",
@@ -5543,9 +5468,8 @@
             "kategorie": "Wildcard",
             "rang": "F",
             "voraussetzungen": [
-                "Wildcard",
                 "AH (beliebig)",
-                "arkane Fertigkeit W10+"
+                "Druidenmagie oder Elementarmagie oder Gesangsmagie oder Glaube oder Heahmagie oder Hrimmagie oder Runemagie oder Zaubern W10+"
             ],
             "beschreibung": "Verdoppelt den Schaden arkaner Angriffe in dieser Runde.",
             "neue_maechte": 0,

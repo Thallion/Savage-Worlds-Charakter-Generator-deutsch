@@ -138,7 +138,7 @@
         "Sprache": [
             "Verstand"
         ],
-        "Gewerbe": [
+        "Gewerbe (Recht)": [
             "Verstand"
         ],
         "Zaubern": [
@@ -409,7 +409,7 @@
             "rang": "L",
             "voraussetzungen": [
                 "Lieblingswaffe",
-                "Schießen",
+                "Schießen W6",
                 "Kämpfen oder Athletik W10+"
             ],
             "beschreibung": "Verleiht der bevorzugten Waffe mythische Kräfte, die zusätzlichen Schadenswürfel verursachen. Waffe verliert Effekt, wenn sie verloren geht.",
@@ -647,10 +647,10 @@
         },
         "Leichenstarre": {
             "name": "Leichenstarre",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "H",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erschafft ein schmerzhaftes Feld, das innerhalb einer Mittleren Flächenschablone um den Gepeinigten herum alle Betroffenen ablenkt.",
             "neue_maechte": 0,
@@ -660,10 +660,10 @@
         },
         "Mit Toten Sprechen": {
             "name": "Mit Toten Sprechen",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt dem Gepeinigten, die Seele einer Leiche herbeizurufen und mit ihr zu sprechen. Die Seele hat vage Erinnerungen an ihr sterbliches Leben.",
             "neue_maechte": 0,
@@ -673,10 +673,10 @@
         },
         "Schlaf der Toten": {
             "name": "Schlaf der Toten",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Schickt ein Opfer mit einer Berührung ins Land der Träume. Funktioniert ähnlich wie die Macht Schlummer.",
             "neue_maechte": 0,
@@ -686,10 +686,10 @@
         },
         "Schnell wie der Tod": {
             "name": "Schnell wie der Tod",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "A",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erhöht die Bewegungsweite um 3 und den Sprintwürfel um einen Typ. Kombinierbar mit Flink.",
             "neue_maechte": 0,
@@ -699,10 +699,10 @@
         },
         "Spinne": {
             "name": "Spinne",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt es, vertikale Oberflächen zu erklimmen und sich mit halber Bewegungsweite kopfüber festzuhalten.",
             "neue_maechte": 0,
@@ -712,10 +712,10 @@
         },
         "Spiritueller Stacheldraht": {
             "name": "Spiritueller Stacheldraht",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "V",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erschafft eine Barriere, die Geister und ätherische Wesen abhält. Erfordert eine Willenskraftprobe und Konzentration.",
             "neue_maechte": 0,
@@ -725,10 +725,10 @@
         },
         "Spur aus Zähnen": {
             "name": "Spur aus Zähnen",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt das Aufspüren eines verlorenen Körperteils oder Feindes, sofern ein wesentlicher Teil in Reichweite ist.",
             "neue_maechte": 0,
@@ -738,10 +738,10 @@
         },
         "Teufelsberührung": {
             "name": "Teufelsberührung",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Stört mit einer Berührung die Funktion von Höllenmaschinen oder Spielereien eines verrückten Wissenschaftlers.",
             "neue_maechte": 0,
@@ -751,10 +751,10 @@
         },
         "Tote Spüren": {
             "name": "Tote Spüren",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "A",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt es, Leichen in einem Umkreis von 1,5 Kilometern wahrzunehmen. Nützlich zum Erkennen von wandelnden Toten.",
             "neue_maechte": 0,
@@ -764,11 +764,11 @@
         },
         "Totenmaske": {
             "name": "Totenmaske",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "A",
             "voraussetzungen": [
                 "Überreden W6+",
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt dem Gepeinigten, ein Erscheinungsbild anzunehmen, das ihm ein lebendiges Aussehen verleiht.",
             "neue_maechte": 0,
@@ -778,11 +778,11 @@
         },
         "Totenstille": {
             "name": "Totenstille",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
                 "Heimlichkeit W8+",
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Der Gepeinigte kann sich lautlos bewegen, solange seine Füße Kontakt mit der Erde haben. Gewährt +4 auf Heimlichkeit.",
             "neue_maechte": 0,
@@ -792,10 +792,10 @@
         },
         "Unheilige Schar": {
             "name": "Unheilige Schar",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "L",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Beschwört eine Gruppe von fünf wandelnden Toten als chaotische Verbündete. Verlorene Mitglieder können ersetzt werden.",
             "neue_maechte": 0,
@@ -805,10 +805,10 @@
         },
         "Verrenkung": {
             "name": "Verrenkung",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "H",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt es, Knochen aus ihren Gelenken zu zerren, um sich aus Gebunden oder Festgehalten zu befreien oder durch enge Spalten zu gelangen.",
             "neue_maechte": 0,
@@ -818,10 +818,10 @@
         },
         "Albträume": {
             "name": "Albträume",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "V",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt dem Gepeinigten, seinen Feinden jede Nacht dunkle und schreckliche Träume zu senden. Der Effekt erfordert einen Gegenstand oder eine Verbindung zum Ziel.",
             "neue_maechte": 0,
@@ -831,10 +831,10 @@
         },
         "Atem des Ossariums": {
             "name": "Atem des Ossariums",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Der Gepeinigte atmet giftige Dämpfe aus, die innerhalb einer Mittleren Flächenschablone Gegner Erschöpfung erleiden lassen.",
             "neue_maechte": 0,
@@ -844,10 +844,10 @@
         },
         "Besitz Ergreifen": {
             "name": "Besitz Ergreifen",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "V",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Der Gepeinigte kann die Kontrolle über einen anderen Körper übernehmen, ähnlich der Macht Marionette.",
             "neue_maechte": 0,
@@ -857,10 +857,10 @@
         },
         "Geisterblick": {
             "name": "Geisterblick",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "F",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt dem Gepeinigten, die Geisterwelt zu sehen und übernatürliche Phänomene wahrzunehmen.",
             "neue_maechte": 0,
@@ -870,10 +870,10 @@
         },
         "Graben": {
             "name": "Graben",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "A",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Der Gepeinigte kann sich durch Erde graben und sich unterirdisch bewegen, jedoch langsamer als an der Oberfläche.",
             "neue_maechte": 0,
@@ -883,10 +883,10 @@
         },
         "Hand der Toten": {
             "name": "Hand der Toten",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "V",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Der Gepeinigte kann eine abgetrennte Körperteil, wie eine Hand, steuern und für verschiedene Aufgaben verwenden.",
             "neue_maechte": 0,
@@ -896,10 +896,10 @@
         },
         "Höllenross": {
             "name": "Höllenross",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "V",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Beschwört ein dämonisches Pferd, das als Reittier dient und die Werte eines Streitrosses hat. Das Höllenross ist furchtlos und eine Wildcard.",
             "neue_maechte": 0,
@@ -909,10 +909,10 @@
         },
         "Imitieren": {
             "name": "Imitieren",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "L",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt dem Gepeinigten, die Mächte anderer zu imitieren, die er in seiner Nähe erlebt hat. Dies erfordert Verstand und Verständnis der Macht.",
             "neue_maechte": 0,
@@ -1006,10 +1006,10 @@
         },
         "Befallen": {
             "name": "Befallen",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "A",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Ermöglicht die Kontrolle von Schwärmen beißender oder stechender Insekten für begrenzte Zeit durch den Einsatz eines Bennys.",
             "neue_maechte": 0,
@@ -1019,10 +1019,10 @@
         },
         "Flicken": {
             "name": "Flicken",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "A",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Erlaubt tägliche Würfe auf Natürliche Heilung, sofern der Gepeinigte mindestens 500 g Fleisch verzehrt.",
             "neue_maechte": 0,
@@ -1032,10 +1032,10 @@
         },
         "Höllenfeuer": {
             "name": "Höllenfeuer",
-            "kategorie": "Gepeinigter",
+            "kategorie": "Gepeinigt",
             "rang": "Heroisch",
             "voraussetzungen": [
-                "Gepeinigter"
+                "Gepeinigt"
             ],
             "beschreibung": "Ermöglicht die Nutzung von 3W6 Feuerschaden in einer kegelförmigen Schablone mit der Fertigkeit Athletik.",
             "neue_maechte": 0,
@@ -1105,7 +1105,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "F",
             "voraussetzungen": [
-                "AH (Verrückter Wissenschaftler)",
+                "AH (Verrückte Wissenschaft)",
                 "Verrückte Wissenschaft W8+"
             ],
             "beschreibung": "Ermöglicht die Herstellung von Tränken und Elixieren, die Machtpunkte binden, bis sie verwendet werden.",
@@ -1119,7 +1119,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
             "voraussetzungen": [
-                "AH (Verrückter Wissenschaftler)",
+                "AH (Verrückte Wissenschaft)",
                 "Verrückte Wissenschaft W6+"
             ],
             "beschreibung": "Erhöht Machtpunkte um 5, aber erhöht das Risiko für Geistersteinfieber bei Fehlfunktionen.",
@@ -1133,7 +1133,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
             "voraussetzungen": [
-                "AH (Verrückter Wissenschaftler)"
+                "AH (Verrückte Wissenschaft)"
             ],
             "beschreibung": "Erhält $2.000 an Geräten oder Fahrzeugen und 25% Rabatt auf zukünftige Käufe bei bestimmten Anbietern.",
             "neue_maechte": 0,
@@ -1146,7 +1146,7 @@
             "kategorie": "Verrückte Wissenschaft",
             "rang": "A",
             "voraussetzungen": [
-                "AH (Verrückter Wissenschaftler)",
+                "AH (Verrückte Wissenschaft)",
                 "Verstand W8+"
             ],
             "beschreibung": "Ermöglicht die Verwendung eines Bennys, um Ergebnisse auf der Wahnsinns- oder Fehlfunktionstabelle zu beeinflussen.",
@@ -1818,7 +1818,7 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "W8 in relevanter Fertigkeit"
+                "Kämpfen oder Schießen W8"
             ],
             "beschreibung": "+1 auf Athletik (Werfen), Kämpfen oder Schießen mit einer bestimmten Waffe; +1 Parade, wenn die Waffe bereit ist.",
             "neue_maechte": 0,
@@ -2282,7 +2282,7 @@
             "rang": "WC",
             "voraussetzungen": [
                 "A",
-                "Arkane Fertigkeit W8",
+                "Zaubern oder Glaube oder Fokus oder Psionik W8",
                 "AH"
             ],
             "beschreibung": "Erhalte 10 Machtpunkte zurück, wenn du im Kampf einen Joker ziehst.",
@@ -2404,7 +2404,7 @@
             "rang": "F",
             "voraussetzungen": [
                 "AH",
-                "arkane Fertigkeit W10"
+                "Zaubern oder Glaube oder Fokus oder Psionik W10"
             ],
             "beschreibung": "Erhalte 5 Machtpunkte für eine Stufe Erschöpfung.",
             "neue_maechte": 0,
@@ -2902,7 +2902,6 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "W12 in Eigenschaft"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
@@ -2915,7 +2914,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "Profi in Eigenschaft"
+                "Profi"
             ],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.",
             "neue_maechte": 0,
@@ -2928,8 +2927,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "WC",
-                "Experte in Eigenschaft"
+                "Experte"
             ],
             "beschreibung": "Der Wildcard-Würfel des Charakters für die Eigenschaft ist ein W10.",
             "neue_maechte": 0,
@@ -2968,7 +2966,7 @@
             "kategorie": "Legendär",
             "rang": "L",
             "voraussetzungen": [
-                "K W8"
+                "KON W8"
             ],
             "beschreibung": "Der Held kann vier Wunden einstecken, ehe er Ausgeschaltet ist.",
             "neue_maechte": 0,
@@ -2995,7 +2993,6 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Schießen W6+"
             ],
             "beschreibung": "Erhält zu Beginn eines Duells zwei zusätzliche verdeckte Karten.",
@@ -3009,7 +3006,6 @@
             "kategorie": "Kampf",
             "rang": "F",
             "voraussetzungen": [
-                "Fortgeschritten",
                 "Geschicklichkeit W8+",
                 "Schießen W8+"
             ],
@@ -3024,7 +3020,6 @@
             "kategorie": "Kampf",
             "rang": "Heroisch",
             "voraussetzungen": [
-                "Heroisch",
                 "Geschicklichkeit W10+",
                 "Hahnwedeln",
                 "Schießen W10+"
@@ -3040,7 +3035,6 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger"
             ],
             "beschreibung": "Fügt die Anzahl eigener Wunden als Bonus zu Nahkampfschadenswürfen hinzu.",
             "neue_maechte": 0,
@@ -3053,7 +3047,6 @@
             "kategorie": "Kampf",
             "rang": "A",
             "voraussetzungen": [
-                "Anfänger",
                 "Geschicklichkeit W8+"
             ],
             "beschreibung": "Erlaubt das Ziehen von zwei neuen Karten bei Benny-Ausgabe und bietet +2 auf Athletik-Würfe für Unterbrechungen.",
