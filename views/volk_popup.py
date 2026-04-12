@@ -1398,23 +1398,6 @@ class VolkDialogHandler:
             Logger.error(f"Fehler beim Löschen der Völker: {e}")
             self.show_error("Fehler beim Löschen der Völker")
 
-    def _on_delete_action_clicked(self, *args):
-        """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
-        if not self.dialog_content:
-            return
-
-        selected = self.dialog_content.get_selected_items()
-        if not selected:
-            self.show_error("Bitte wähle mindestens ein Volk zum Löschen aus.")
-            return
-
-        self._pending_delete_items = selected
-        self._show_delete_confirmation_popup(
-            selected_items=selected,
-            item_type="Volk",
-            on_confirm=self._confirm_delete_volk
-        )
-
     def _confirm_delete_volk(self):
         """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
         if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:

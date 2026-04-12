@@ -1,8 +1,5 @@
 # pointbar_view_mobile.kv - Smartphone-optimiertes Layout
 
-#:import MDExpansionPanel kivymd.uix.expansionpanel.MDExpansionPanel
-#:import MDExpansionPanelHeader kivymd.uix.expansionpanel.MDExpansionPanelHeader
-#:import MDExpansionPanelContent kivymd.uix.expansionpanel.MDExpansionPanelContent
 #:import MDDivider kivymd.uix.divider.MDDivider
 
 <LabelValuePair>:
@@ -112,121 +109,103 @@
             pos_hint: {'center_y': 0.5}
             on_release: root.toggle_char_gen_completed()
 
-    # ───── Detail-Inhalt (ein-/ausklappbar via ExpansionPanel) ─────
-    MDExpansionPanel:
-        id: expansion_panel
+    # ───── Detail-Inhalt (ein-/ausklappbar, gesteuert durch is_expanded) ─────
+    MDBoxLayout:
+        id: content_box
+        orientation: "vertical"
+        padding: [0, dp(4), 0, dp(4)] if root.is_expanded else [0, 0, 0, 0]
         size_hint_y: None
-        height: self.minimum_height
+        height: self.minimum_height if root.is_expanded else 0
+        opacity: 1 if root.is_expanded else 0
+        disabled: not root.is_expanded
 
-        MDExpansionPanelHeader:
-            MDListItem:
-                theme_bg_color: "Custom"
-                md_bg_color: app.theme_cls.surfaceContainerLowColor
-                ripple_effect: False
-                size_hint_y: None
-                height: dp(36)
+        # Charakterdaten
+        LabelValuePair:
+            key_text: "Name:"
+            value_text: root.char_name_text
+            key_width_ratio: 0.40
 
-                MDListItemSupportingText:
-                    text: "Attr: " + root.attribut_text + "  |  Fert: " + root.faehigkeiten_text + "  |  H: " + root.handicaps_text
+        LabelValuePair:
+            key_text: "Setting:"
+            value_text: root.active_setting_name_text
+            key_width_ratio: 0.40
 
-                TrailingPressedIconButton:
-                    id: chevron
-                    icon: "chevron-right"
+        LabelValuePair:
+            key_text: "Rang:"
+            value_text: root.rang_text
+            key_width_ratio: 0.40
 
-        MDExpansionPanelContent:
-            id: content_box
-            orientation: "vertical"
-            padding: [0, dp(4), 0, dp(4)]
+        LabelValuePair:
+            key_text: "Aufstiege:"
+            value_text: root.aufstiege_text
+            key_width_ratio: 0.40
+
+        MDDivider:
             size_hint_y: None
-            height: self.minimum_height
+            height: dp(1)
 
-            # Charakterdaten
-            LabelValuePair:
-                key_text: "Name:"
-                value_text: root.char_name_text
-                key_width_ratio: 0.40
+        LabelValuePair:
+            key_text: "Attribute:"
+            value_text: root.attribut_text
+            key_width_ratio: 0.50
 
-            LabelValuePair:
-                key_text: "Setting:"
-                value_text: root.active_setting_name_text
-                key_width_ratio: 0.40
+        LabelValuePair:
+            key_text: "Fertigkeiten:"
+            value_text: root.faehigkeiten_text
+            key_width_ratio: 0.50
 
-            LabelValuePair:
-                key_text: "Rang:"
-                value_text: root.rang_text
-                key_width_ratio: 0.40
+        LabelValuePair:
+            key_text: "Handicaps:"
+            value_text: root.handicaps_text
+            key_width_ratio: 0.50
 
-            LabelValuePair:
-                key_text: "Aufstiege:"
-                value_text: root.aufstiege_text
-                key_width_ratio: 0.40
+        LabelValuePair:
+            key_text: "Mächte:"
+            value_text: root.maechte_text
+            key_width_ratio: 0.50
+            size_hint_y: None
+            height: dp(20) if root.maechte_text else 0
+            opacity: 1 if root.maechte_text else 0
 
-            MDDivider:
-                size_hint_y: None
-                height: dp(1)
+        LabelValuePair:
+            key_text: "SKP:"
+            value_text: root.superkraft_punkte_text
+            key_width_ratio: 0.50
+            size_hint_y: None
+            height: dp(20) if root.superkraft_punkte_text else 0
+            opacity: 1 if root.superkraft_punkte_text else 0
 
-            LabelValuePair:
-                key_text: "Attribute:"
-                value_text: root.attribut_text
-                key_width_ratio: 0.50
+        MDDivider:
+            size_hint_y: None
+            height: dp(1)
 
-            LabelValuePair:
-                key_text: "Fertigkeiten:"
-                value_text: root.faehigkeiten_text
-                key_width_ratio: 0.50
+        LabelValuePair:
+            key_text: "Machtstufe:"
+            value_text: root.machtstufe_text
+            key_width_ratio: 0.50
+            size_hint_y: None
+            height: dp(20) if root.machtstufe_text else 0
+            opacity: 1 if root.machtstufe_text else 0
 
-            LabelValuePair:
-                key_text: "Handicaps:"
-                value_text: root.handicaps_text
-                key_width_ratio: 0.50
+        LabelValuePair:
+            key_text: "Machtpunkte:"
+            value_text: root.machtpunkte_text
+            key_width_ratio: 0.50
+            size_hint_y: None
+            height: dp(20) if root.machtpunkte_text else 0
+            opacity: 1 if root.machtpunkte_text else 0
 
-            LabelValuePair:
-                key_text: "Mächte:"
-                value_text: root.maechte_text
-                key_width_ratio: 0.50
-                size_hint_y: None
-                height: dp(20) if root.maechte_text else 0
-                opacity: 1 if root.maechte_text else 0
+        LabelValuePair:
+            key_text: "Parade / Rob.:"
+            value_text: root.parade_robustheit_text
+            key_width_ratio: 0.50
 
-            LabelValuePair:
-                key_text: "SKP:"
-                value_text: root.superkraft_punkte_text
-                key_width_ratio: 0.50
-                size_hint_y: None
-                height: dp(20) if root.superkraft_punkte_text else 0
-                opacity: 1 if root.superkraft_punkte_text else 0
+        LabelValuePair:
+            key_text: "Gewicht:"
+            value_text: root.gewicht_text
+            key_width_ratio: 0.50
 
-            MDDivider:
-                size_hint_y: None
-                height: dp(1)
-
-            LabelValuePair:
-                key_text: "Machtstufe:"
-                value_text: root.machtstufe_text
-                key_width_ratio: 0.50
-                size_hint_y: None
-                height: dp(20) if root.machtstufe_text else 0
-                opacity: 1 if root.machtstufe_text else 0
-
-            LabelValuePair:
-                key_text: "Machtpunkte:"
-                value_text: root.machtpunkte_text
-                key_width_ratio: 0.50
-                size_hint_y: None
-                height: dp(20) if root.machtpunkte_text else 0
-                opacity: 1 if root.machtpunkte_text else 0
-
-            LabelValuePair:
-                key_text: "Parade / Rob.:"
-                value_text: root.parade_robustheit_text
-                key_width_ratio: 0.50
-
-            LabelValuePair:
-                key_text: "Gewicht:"
-                value_text: root.gewicht_text
-                key_width_ratio: 0.50
-
-            LabelValuePair:
-                key_text: "Vermögen:"
-                value_text: root.vermoegen_text
-                key_width_ratio: 0.50
+        LabelValuePair:
+            key_text: "Vermögen:"
+            value_text: root.vermoegen_text
+            key_width_ratio: 0.50

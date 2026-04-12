@@ -1914,6 +1914,9 @@ class SW_Charakter_GeneratorApp(MDApp):
             is_portrait = Window.height > Window.width
             bottom_bar = root.ids.get('bottom_bar_container')
 
+            # Pointbar im Landscape zuklappen, im Portrait aufklappen
+            pointbar = root.ids.get('generation_points')
+
             if is_portrait:
                 # Portrait: Rail verstecken, Bottom-Bar anzeigen
                 nav_rail_container.width = 0
@@ -1924,15 +1927,19 @@ class SW_Charakter_GeneratorApp(MDApp):
                     bottom_bar.height = dp(56) + self._android_bottom_padding
                     bottom_bar.padding = [0, dp(4), 0, self._android_bottom_padding]
                     bottom_bar.opacity = 1
+                if pointbar:
+                    pointbar.is_expanded = True
                 Logger.debug("Mobile Portrait: Rail versteckt, Bottom-Bar sichtbar")
             else:
-                # Landscape: Rail anzeigen, Bottom-Bar verstecken
+                # Landscape: Rail anzeigen, Bottom-Bar verstecken, Pointbar zuklappen
                 nav_rail_container.width = dp(92)
                 nav_rail_container.opacity = 1
                 self._nav_rail_visible = True
                 if bottom_bar:
                     bottom_bar.height = 0
                     bottom_bar.opacity = 0
+                if pointbar:
+                    pointbar.is_expanded = False
                 Logger.debug("Mobile Landscape: Rail sichtbar, Bottom-Bar versteckt")
 
         except Exception as e:

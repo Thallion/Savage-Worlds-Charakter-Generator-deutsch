@@ -8,6 +8,8 @@
 # - Adaptive Textgrößen und Spacing
 # - KORREKTUR: Robustheit-Anzeige in Pointbar
 
+import time
+
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -295,7 +297,12 @@ class GenerationPointsBar(MDBoxLayout):
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | HP: {hp} | MP: {mp} | {rang}"
 
     def toggle_panel(self, *args):
-        """Klappt den Detail-Bereich auf oder zu"""
+        """Klappt den Detail-Bereich auf oder zu (mit Debounce für Android)"""
+        now = time.monotonic()
+        if hasattr(self, '_last_toggle_time') and (now - self._last_toggle_time) < 0.5:
+            return
+        self._last_toggle_time = now
+
         # MDExpansionPanel-Variante (Mobile)
         panel = self.ids.get('expansion_panel')
         if panel:
@@ -318,7 +325,12 @@ class GenerationPointsBar(MDBoxLayout):
         return None
 
     def on_schnellspeichern(self, *args):
-        """Schnellspeichern über die Toolbar"""
+        """Schnellspeichern über die Toolbar (mit Debounce für Android)"""
+        now = time.monotonic()
+        if hasattr(self, '_last_save_time') and (now - self._last_save_time) < 0.5:
+            return
+        self._last_save_time = now
+
         try:
             widget = self._get_char_verwaltung()
             if widget:
@@ -327,7 +339,12 @@ class GenerationPointsBar(MDBoxLayout):
             Logger.error(f"Schnellspeichern-Fehler: {e}")
 
     def on_laden(self, *args):
-        """Charakter laden über die Toolbar"""
+        """Charakter laden über die Toolbar (mit Debounce für Android)"""
+        now = time.monotonic()
+        if hasattr(self, '_last_load_time') and (now - self._last_load_time) < 0.5:
+            return
+        self._last_load_time = now
+
         try:
             widget = self._get_char_verwaltung()
             if widget:
@@ -341,7 +358,12 @@ class GenerationPointsBar(MDBoxLayout):
         self.kann_undo = self.controller.kann_undo
 
     def on_undo_pressed(self, *args):
-        """Wird beim Klick auf den Undo-Button aufgerufen."""
+        """Wird beim Klick auf den Undo-Button aufgerufen (mit Debounce für Android)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_undo_time') and (now - self._last_undo_time) < 0.5:
+            return  # Bounce ignorieren
+        self._last_undo_time = now
+
         beschreibung = self.controller.undo()
         if beschreibung:
             try:
@@ -472,12 +494,39 @@ class GenerationPointsBar(MDBoxLayout):
         return get_assets_path("Savage-Worlds-Fanprodukt-Logo.png")
 
     def toggle_char_gen_completed(self, *args):
-        """Umschaltet den Charakter-Generierungsstatus über die Pointbar"""
-        if self.charakter:
+        """Umschaltet den Charakter-Generierungsstatus über die Pointbar (mit Debounce für Android)"""
+        now = time.monotonic()
+        if hasattr(self, '_last_chargen_time') and (now - self._last_chargen_time) < 0.5:
+            return
+        self._last_chargen_time = now
+
+        if not self.charakter:
+            return
+
+        # Über CharVerwaltung delegieren (synchronisiert beide Widgets)
+        widget = self._get_char_verwaltung()
+        if widget and hasattr(widget, 'toggle_char_gen_completed'):
+            widget.toggle_char_gen_completed()
+        else:
+            # Fallback: direkt umschalten
             new_value = not self.charakter.char_gen_completed
             self.charakter.char_gen_completed = new_value
-            self.char_gen_completed = new_value
             Logger.info(f"Charakter-Generierungsstatus über Pointbar geändert: {new_value}")
+
+        # Lokalen Status synchronisieren
+        self.char_gen_completed = self.charakter.char_gen_completed
+
+        # Visuelles Feedback
+        try:
+            from services.service_container import service_container
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                if self.charakter.char_gen_completed:
+                    dialog_service.show_success_dialog("Charaktererstellung abgeschlossen")
+                else:
+                    dialog_service.show_success_dialog("Zurück zur Charaktererstellung")
+        except Exception:
+            pass
 
     def _update_char_gen_status(self, instance, value):
         """Aktualisiert den lokalen char_gen_completed-Status aus dem Charakter-Modell"""
