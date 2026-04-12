@@ -1,13 +1,15 @@
 <TalentDialogContent>:
     orientation: 'vertical'
-    spacing: "12dp"
-    padding: "12dp"
+    spacing: "16dp"
+    padding: "16dp"
     size_hint_y: None
     height: self.minimum_height
 
     MDTextField:
         id: name_input
         mode: "outlined"
+        size_hint_y: None
+        height: "48dp"
         
         MDTextFieldHintText:
             text: 'Name des Talents'
@@ -15,6 +17,8 @@
     MDTextField:
         id: kategorie_input
         mode: "outlined"
+        size_hint_y: None
+        height: "48dp"
         
         MDTextFieldHintText:
             text: 'Kategorie'
@@ -22,6 +26,8 @@
     MDTextField:
         id: rang_input
         mode: "outlined"
+        size_hint_y: None
+        height: "48dp"
         
         MDTextFieldHintText:
             text: 'Rang'
@@ -30,6 +36,8 @@
         id: beschreibung_input
         mode: "outlined"
         multiline: True
+        size_hint_y: None
+        height: "80dp"
         
         MDTextFieldHintText:
             text: 'Beschreibung'
@@ -37,6 +45,8 @@
     MDTextField:
         id: voraussetzungen_input
         mode: "outlined"
+        size_hint_y: None
+        height: "48dp"
         
         MDTextFieldHintText:
             text: 'Voraussetzungen (durch Komma getrennt)'
@@ -45,6 +55,8 @@
         id: neue_maechte_input
         mode: "outlined"
         input_filter: 'int'
+        size_hint_y: None
+        height: "48dp"
         
         MDTextFieldHintText:
             text: 'Neue Mächte (Anzahl)'
@@ -53,6 +65,8 @@
         id: machtpunkte_input
         mode: "outlined"
         input_filter: 'int'
+        size_hint_y: None
+        height: "48dp"
         
         MDTextFieldHintText:
             text: 'Machtpunkte'

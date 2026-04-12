@@ -488,31 +488,36 @@ class TalentItemRow(MDBoxLayout):
         
         content = MDBoxLayout(
             orientation="vertical",
-            spacing=dp(10),
+            spacing=dp(12),
             padding=dp(20),
-            adaptive_height=True
+            size_hint_y=None,
+            height=dp(90) + (len(fehlermeldungen) * dp(40))  # dp(90) = header + frage + padding + spacing
         )
         
         # Haupttext
         main_label = MDLabel(
             text="Die Voraussetzungen für dieses Talent sind nicht erfüllt:",
             size_hint_y=None,
-            height=dp(30),
+            height=dp(32),
             theme_text_color="Secondary",
             halign="left",
             valign="middle"
         )
         content.add_widget(main_label)
         
+        # Abstandshalter
+        spacer = MDLabel(size_hint_y=None, height=dp(8))
+        content.add_widget(spacer)
+        
         # Fehlermeldungen
         for fehler in fehlermeldungen:
             fehler_label = MDLabel(
                 text=f"• {fehler}",
                 size_hint_y=None,
-                height=dp(25),
+                height=dp(36),
                 theme_text_color="Error",
                 halign="left",
-                valign="middle"
+                valign="middle",
             )
             content.add_widget(fehler_label)
         
