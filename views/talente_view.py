@@ -255,46 +255,66 @@ class TalentItemRow(MDBoxLayout):
     def _show_pathfinder_kostenlos_dialog(self):
         """
         NEU: Zeigt einen Dialog für kostenlose Pathfinder-Talente an.
+        Optimiert für Android Portrait-Modus: Labels mit dynamischer Höhe,
+        Buttons vertikal gestapelt auf Mobilgeräten.
         """
+        # Dialog-Breite berechnen für text_size Binding
+        dialog_width = Window.width * 0.85 - dp(40)  # Dialog padding abziehen
+
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(10),
             padding=dp(20),
             adaptive_height=True
         )
-        
-        # Haupttext
+
+        # Haupttext - dynamische Höhe basierend auf Textinhalt
         info_label = MDLabel(
             text=f"Das Talent '{self.talent_name}' ist ein Klassen-, Hintergrund- oder Experte-Talent und kann in Savage Pathfinder während der Charaktererstellung kostenlos gewählt werden.",
             size_hint_y=None,
-            height=dp(80),
             theme_text_color="Secondary",
             halign="left",
-            valign="middle"
+            valign="top",
+            text_size=(dialog_width, None),
         )
+        info_label.bind(texture_size=lambda inst, sz: setattr(inst, 'height', sz[1]))
         content.add_widget(info_label)
-        
-        # Frage
+
+        # Frage - dynamische Höhe basierend auf Textinhalt
         question_label = MDLabel(
             text="Möchten Sie dieses Talent kostenlos wählen oder mit den normalen Kosten (2 Handicap-Punkte oder 1 Aufstieg)?",
             size_hint_y=None,
-            height=dp(60),
             theme_text_color="Primary",
             halign="left",
-            valign="middle"
+            valign="top",
+            text_size=(dialog_width, None),
         )
+        question_label.bind(texture_size=lambda inst, sz: setattr(inst, 'height', sz[1]))
         content.add_widget(question_label)
-        
-        self.pathfinder_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Kostenloses Pathfinder-Talent",
-            ),
-            MDDialogContentContainer(
-                content,
+
+        # Buttons: Auf Mobilgeräten vertikal stapeln, damit alle sichtbar sind
+        if _mobile:
+            button_container = MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Kostenlos wählen"),
+                    style="filled",
+                    on_release=lambda x: self._waehle_talent_kostenlos(),
+                ),
+                MDButton(
+                    MDButtonText(text="Normale Kosten"),
+                    style="text",
+                    on_release=lambda x: self._waehle_talent_mit_kosten(),
+                ),
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.pathfinder_dialog.dismiss(),
+                ),
+                spacing="8dp",
                 orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
+            )
+        else:
+            button_container = MDDialogButtonContainer(
                 MDButton(
                     MDButtonText(text="Abbrechen"),
                     style="text",
@@ -311,7 +331,18 @@ class TalentItemRow(MDBoxLayout):
                     on_release=lambda x: self._waehle_talent_kostenlos(),
                 ),
                 spacing="8dp",
+            )
+
+        self.pathfinder_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Kostenloses Pathfinder-Talent",
             ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            button_container,
             size_hint=(0.85, None),
             auto_dismiss=False,
         )

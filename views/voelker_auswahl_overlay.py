@@ -16,7 +16,7 @@ from kivy.properties import StringProperty, ListProperty, ObjectProperty, DictPr
 from kivy.utils import platform as kivy_platform
 
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
+from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon, MDFabButton
 from kivymd.uix.card import MDCard
 from kivymd.uix.chip import MDChip, MDChipText
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
@@ -24,6 +24,7 @@ from kivymd.uix.divider import MDDivider
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemSupportingText, MDListItemTrailingCheckbox
 from kivymd.uix.scrollview import MDScrollView
+from kivymd.uix.selectioncontrol import MDCheckbox
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
 from views.ui_components import TextFieldScrollView
@@ -589,15 +590,45 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                 if search_text and search_text not in str(talent_name).lower():
                     continue
 
-                item = MDListItem(size_hint_y=None, height=dp(48))
-                item.add_widget(MDListItemHeadlineText(text=str(talent_name)))
+                row = MDBoxLayout(
+                    orientation="horizontal",
+                    size_hint_y=None,
+                    height=dp(56),
+                    spacing=dp(8),
+                    padding=[dp(4), dp(4), dp(8), dp(4)]
+                )
 
-                checkbox = MDListItemTrailingCheckbox()
+                # Info-Button für Talent-Beschreibung
+                info_btn = MDFabButton(
+                    icon="information-outline",
+                    style="small",
+                    size_hint=(None, None),
+                    size=(dp(36), dp(36)),
+                    pos_hint={"center_y": 0.5}
+                )
+                t_info = talent_name
+                info_btn.bind(on_release=lambda x, t=t_info: self._show_talent_info(t))
+                row.add_widget(info_btn)
+
+                # Talent-Name
+                name_label = MDLabel(
+                    text=str(talent_name),
+                    halign="left",
+                    valign="center",
+                )
+                row.add_widget(name_label)
+
+                # Checkbox (Radio-Style Auswahl)
+                checkbox = MDCheckbox(
+                    size_hint=(None, None),
+                    size=(dp(48), dp(48)),
+                    pos_hint={"center_y": 0.5}
+                )
                 cb = checkbox
                 t_name = talent_name
                 checkbox.bind(on_release=lambda x, cb=cb, t=t_name: self._on_talent_checkbox_clicked(talent_typ, t, cb, checkboxes, selected_talent))
-                item.add_widget(checkbox)
-                talent_list.add_widget(item)
+                row.add_widget(checkbox)
+                talent_list.add_widget(row)
                 checkboxes[talent_name] = checkbox
 
         def on_confirm(*args):
@@ -676,6 +707,63 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             extras = {'freies_talent': talent_name}
 
         self._apply_choice(self._selected_volk, extras)
+
+    def _show_talent_info(self, talent_name):
+        """Zeigt die Beschreibung eines Talents in einem Info-Dialog an."""
+        talent = self._charakter.talente.get(talent_name) if hasattr(self._charakter, 'talente') else None
+        beschreibung = getattr(talent, 'beschreibung', '') if talent else ''
+
+        if not beschreibung:
+            beschreibung = "Keine Beschreibung verfügbar."
+
+        text_width = min(dp(400), Window.width * 0.85 - dp(60))
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(10),
+            padding=dp(20),
+            adaptive_height=True
+        )
+
+        desc_label = MDLabel(
+            text=beschreibung,
+            size_hint_y=None,
+            theme_text_color="Secondary",
+            halign="left",
+            valign="top",
+            text_size=(text_width, None),
+            markup=True
+        )
+        desc_label.bind(texture_size=desc_label.setter('size'))
+        content.add_widget(desc_label)
+
+        max_content_height = min(dp(400), Window.height * 0.6)
+        scroll = MDScrollView(
+            size_hint_y=None,
+            height=max_content_height,
+            do_scroll_x=False,
+        )
+        scroll.add_widget(content)
+
+        info_dialog = MDDialog(
+            MDDialogHeadlineText(text=str(talent_name)),
+            MDDialogContentContainer(
+                scroll,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: info_dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=True,
+        )
+        info_dialog.open()
 
     # ==================== Hilfsfunktionen ====================
 
