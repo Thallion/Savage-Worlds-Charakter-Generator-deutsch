@@ -1205,25 +1205,108 @@ class VolkDialogHandler:
         self._refresh_volk_view()
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen von Völkern (suchbare Liste mit Mehrfachauswahl)"""
+        """Zeigt das Two-Phase Popup zum Löschen von Völkern."""
+        import time
+        from kivymd.uix.list import MDListItemTrailingCheckbox
+
         voelker = self.get_all_voelker()
         if not voelker:
             self.show_error("Keine Völker zum Löschen verfügbar.")
             return
 
-        from views.element_overlay import ElementListContent
-        content = ElementListContent(
-            items=voelker,
-            multi_select=True,
-        )
-        self.dialog_content = content
+        self._volk_checkboxes = {}
+        self._volk_last_cb_times = {}
 
-        overlay = self._get_overlay()
-        overlay.open(
-            title="Volk löschen",
-            content_widget=content,
-            action_text="Löschen",
-            on_action=self._on_delete_action_clicked,
+        content = MDList(size_hint_y=None)
+        content.bind(minimum_height=content.setter('height'))
+
+        def create_checkbox(item_name):
+            item = MDListItem(size_hint_y=None, height=dp(48))
+            item.add_widget(MDListItemSupportingText(text=item_name))
+
+            checkbox = MDListItemTrailingCheckbox()
+            cb = checkbox
+
+            def on_release_checkbox(inst, cb=cb, name=item_name):
+                now = time.monotonic()
+                key = f"cb_{name}"
+                if key in self._volk_last_cb_times and (now - self._volk_last_cb_times[key]) < 0.5:
+                    return
+                self._volk_last_cb_times[key] = now
+
+            checkbox.bind(on_release=on_release_checkbox)
+            item.add_widget(checkbox)
+            content.add_widget(item)
+            self._volk_checkboxes[item_name] = checkbox
+
+        for volk_name in sorted(voelker):
+            create_checkbox(volk_name)
+
+        scroll_height = min(len(voelker) * dp(48), dp(250))
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height=scroll_height,
+            do_scroll_x=False,
+            do_scroll_y=True,
+            bar_width=dp(15),
+            bar_margin=dp(4),
+        )
+        scroll.add_widget(content)
+
+        main_content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            padding=dp(16),
+            height=scroll_height + dp(80),
+        )
+
+        search_field = MDTextField(
+            mode="outlined",
+            size_hint_y=None,
+            height=dp(56),
+            hint_text="Suchen...",
+        )
+        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
+        main_content.add_widget(search_field)
+        main_content.add_widget(scroll)
+
+        def populate_list(search_text):
+            content.clear_widgets()
+            for volk_name in sorted(voelker):
+                if search_text and search_text.lower() not in volk_name.lower():
+                    continue
+                create_checkbox(volk_name)
+
+        search_field.bind(text=populate_list)
+        populate_list("")
+
+        self._delete_popup = MDDialog(
+            MDDialogHeadlineText(text="Volk löschen"),
+            MDDialogContentContainer(main_content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text",
+                         on_release=lambda x: self._delete_popup.dismiss()),
+                MDButton(MDButtonText(text="Weiter"), style="filled",
+                         on_release=self._on_delete_action_clicked),
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self._delete_popup.open()
+
+    def _on_delete_action_clicked(self):
+        """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
+        selected = [name for name, cb in self._volk_checkboxes.items() if cb.active]
+
+        if not selected:
+            self.show_error("Bitte wähle mindestens ein Volk zum Löschen aus.")
+            return
+
+        self._pending_delete_items = selected
+        self._delete_popup.dismiss()
+        self._show_delete_confirmation_popup(
+            selected_items=selected, item_type="Volk", on_confirm=self._confirm_delete_volk
         )
 
     def save_volk(self, *args):

@@ -1795,3 +1795,93 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             Logger.info("CharakterVerwaltungWidget bereinigt")
         except Exception as e:
             Logger.error(f"Fehler beim Bereinigen: {e}")
+
+    # ==================== LOG KOPIEREN ====================
+
+    def _copy_to_clipboard(self, text: str):
+        """Kopiert Text in die Zwischenablage."""
+        import shutil
+        from kivy.utils import platform as kivy_platform
+
+        try:
+            if kivy_platform == 'android':
+                from android.clipboard import clipboard
+                clipboard.copy(text)
+                Logger.info("Text über Android Clipboard kopiert")
+                return
+
+            if kivy_platform == 'win':
+                import subprocess
+                subprocess.run(['clip'], input=text.encode('utf-8'), check=True)
+                Logger.info("Text über Windows clip.exe kopiert")
+                return
+
+            if kivy_platform == 'linux':
+                try:
+                    subprocess.run(['xclip', '-selection', 'c'], input=text.encode('utf-8'), check=True)
+                    Logger.info("Text über xclip kopiert")
+                    return
+                except Exception:
+                    pass
+
+                try:
+                    subprocess.run(['xsel', '-bc'], input=text.encode('utf-8'), check=True)
+                    Logger.info("Text über xsel kopiert")
+                    return
+                except Exception:
+                    pass
+
+            # Fallback: Kivy Clipboard
+            from kivy.core.clipboard import Clipboard
+            Clipboard.copy(text)
+            Logger.info("Text über Kivy Clipboard kopiert (fallback)")
+
+        except Exception as e:
+            Logger.warning(f"System-Clipboard fehlgeschlagen, verwende Kivy: {e}")
+            from kivy.core.clipboard import Clipboard
+            Clipboard.copy(text)
+            Logger.info("Text über Kivy Clipboard kopiert (fallback)")
+
+    def open_log_file(self):
+        """Kopiert den Log-Inhalt in die Zwischenablage"""
+        try:
+            app = MDApp.get_running_app()
+            if not hasattr(app, 'log_filepath') or not app.log_filepath:
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_warning_dialog("Keine Log-Datei verfügbar")
+                Logger.warning("Log-Datei nicht verfügbar")
+                return
+
+            log_filepath = app.log_filepath
+            Logger.info(f"Kopiere Log-Datei: {log_filepath}")
+
+            try:
+                with open(log_filepath, 'r', encoding='utf-8') as f:
+                    log_content = f.read()
+
+                header = f"=== Session Log ===\n"
+                header += f"Datei: {os.path.basename(log_filepath)}\n"
+                header += f"Pfad: {log_filepath}\n"
+                header += f"Größe: {len(log_content)} Zeichen\n\n"
+
+                full_content = header + log_content
+                self._copy_to_clipboard(full_content)
+
+                lines_count = log_content.count('\n')
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_success_dialog(
+                        f"Log kopiert!\n\n{lines_count} Zeilen • {len(log_content)} Zeichen"
+                    )
+
+                Logger.info(f"Log-Inhalt kopiert ({lines_count} Zeilen)")
+
+            except Exception as e:
+                Logger.error(f"Fehler beim Lesen der Log-Datei: {e}")
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_error_dialog(f"Fehler: {e}")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Kopieren der Log-Datei: {e}")

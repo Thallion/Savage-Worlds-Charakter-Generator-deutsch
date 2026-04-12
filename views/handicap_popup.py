@@ -3,6 +3,7 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.menu import MDDropdownMenu
@@ -248,26 +249,175 @@ class HandicapDialogHandler:
             self.show_error("Fehler beim Aktualisieren des Handicaps")
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen von Handicaps (suchbare Liste mit Mehrfachauswahl)"""
+        """Zeigt das Two-Phase Popup zum Löschen von Handicaps."""
+        import time
+        from kivy.core.window import Window
+
         handicaps = self.get_all_handicaps()
         if not handicaps:
             self.show_error("Keine Handicaps zum Löschen verfügbar.")
             return
 
-        from views.element_overlay import ElementListContent
-        content = ElementListContent(
-            items=handicaps,
-            multi_select=True,
-        )
-        self.dialog_content = content
+        from kivymd.app import MDApp
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+        from kivymd.uix.scrollview import MDScrollView
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
-        overlay = self._get_overlay()
-        overlay.open(
-            title="Handicap löschen",
-            content_widget=content,
-            action_text="Löschen",
-            on_action=self._on_delete_action_clicked,
+        self._handicap_checkboxes = {}
+        self._handicap_last_cb_times = {}
+        
+        content = MDList(size_hint_y=None)
+        content.bind(minimum_height=content.setter('height'))
+
+        def create_checkbox(item_name):
+            cb_wrapper = {"active": False}
+
+            item = MDListItem(size_hint_y=None, height=dp(48))
+            item.add_widget(MDListItemSupportingText(text=item_name))
+
+            checkbox = MDListItemTrailingCheckbox()
+            cb = checkbox
+
+            def on_release_checkbox(inst, cb=cb, name=item_name):
+                now = time.monotonic()
+                key = f"cb_{name}"
+                if key in self._handicap_last_cb_times and (now - self._handicap_last_cb_times[key]) < 0.5:
+                    return
+                self._handicap_last_cb_times[key] = now
+                Logger.debug(f"Handicap check: {name} = {cb.active}")
+
+            checkbox.bind(on_release=on_release_checkbox)
+            item.add_widget(checkbox)
+            content.add_widget(item)
+            self._handicap_checkboxes[item_name] = checkbox
+
+        for handicap_name in sorted(handicaps):
+            create_checkbox(handicap_name)
+
+        scroll_height = min(len(handicaps) * dp(48), dp(250))
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height=scroll_height,
+            do_scroll_x=False,
+            do_scroll_y=True,
+            bar_width=dp(15),
+            bar_margin=dp(4),
         )
+        scroll.add_widget(content)
+
+        main_content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            padding=dp(16),
+            height=scroll_height + dp(80),
+        )
+
+        search_field = MDTextField(
+            mode="outlined",
+            size_hint_y=None,
+            height=dp(56),
+            hint_text="Suchen...",
+        )
+        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
+        main_content.add_widget(search_field)
+        main_content.add_widget(scroll)
+
+        def populate_list(search_text):
+            content.clear_widgets()
+            for handicap_name in sorted(handicaps):
+                if search_text and search_text.lower() not in handicap_name.lower():
+                    continue
+                create_checkbox(handicap_name)
+
+        search_field.bind(text=populate_list)
+        populate_list("")
+
+        self._delete_popup = MDDialog(
+            MDDialogHeadlineText(text="Handicap löschen"),
+            MDDialogContentContainer(main_content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text",
+                         on_release=lambda x: self._delete_popup.dismiss()),
+                MDButton(MDButtonText(text="Löschen"), style="filled",
+                         on_release=self._on_delete_action_clicked),
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self._delete_popup.open()
+
+    def _on_delete_action_clicked(self, *args):
+        """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
+        selected = []
+        for name, cb in self._handicap_checkboxes.items():
+            if cb.active:
+                selected.append(name)
+
+        if not selected:
+            self.show_error("Bitte wähle mindestens ein Handicap zum Löschen aus.")
+            return
+
+        self._pending_delete_items = selected
+        self._show_delete_confirmation_popup(
+            selected_items=selected,
+            item_type="Handicap",
+            on_confirm=self._confirm_delete_handicap
+        )
+
+    def _show_delete_confirmation_popup(self, selected_items, item_type, on_confirm):
+        """Phase 2: Bestätigungs-Popup ohne Checkboxen."""
+        from kivymd.app import MDApp
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.label import MDLabel
+
+        items_text = "\n".join([f"• {name}" for name in selected_items])
+        message = f"Möchtest du diese {item_type}(e) wirklich löschen?\n\n{items_text}"
+
+        confirm_popup = MDDialog(
+            MDDialogHeadlineText(text=f"{item_type} löschen?"),
+            MDDialogContentContainer(
+                MDLabel(text=message, halign="center"),
+            ),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text",
+                         on_release=lambda x: confirm_popup.dismiss()),
+                MDButton(MDButtonText(text="Löschen"), style="filled",
+                         on_release=lambda x: (on_confirm(), confirm_popup.dismiss())),
+            ),
+            size_hint=(0.85, None),
+        )
+        confirm_popup.open()
+
+    def _confirm_delete_handicap(self):
+        """Phase 2: Führt das tatsächliche Löschen durch."""
+        if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:
+            return
+
+        selected = self._pending_delete_items
+        self._pending_delete_items = None
+
+        try:
+            app = MDApp.get_running_app()
+            charakter = app.controller.charakter
+
+            for handicap_name in selected:
+                charakter.remove_handicap(handicap_name)
+                Logger.info(f"Handicap '{handicap_name}' wurde gelöscht.")
+
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+
+            Logger.info(f"{len(selected)} Handicap(s) wurde(n) gelöscht.")
+            if hasattr(self, '_delete_popup') and self._delete_popup:
+                self._delete_popup.dismiss()
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Löschen der Handicaps: {e}")
+            self.show_error("Fehler beim L��schen der Handicaps")
 
     def save_handicap(self, *args):
         """Speichert ein neues Handicap"""

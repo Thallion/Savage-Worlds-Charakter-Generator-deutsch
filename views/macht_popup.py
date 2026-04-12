@@ -3,6 +3,7 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.menu import MDDropdownMenu
@@ -11,6 +12,7 @@ from models.macht import Macht
 
 import os
 import sys
+import time
 
 # PyInstaller-kompatibles Laden der KV-Datei
 def load_kv_file():
@@ -255,25 +257,104 @@ class MachtDialogHandler:
             self.show_error("Fehler beim Aktualisieren der Macht")
 
     def show_delete_dialog(self):
-        """Zeigt das Overlay zum Löschen von Mächten (suchbare Liste mit Mehrfachauswahl)"""
+        """Zeigt das Two-Phase Popup zum Löschen von Mächten."""
+        from kivy.core.window import Window
+        from kivymd.app import MDApp
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+        from kivymd.uix.scrollview import MDScrollView
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+
         maechte = self.get_all_maechte()
         if not maechte:
             self.show_error("Keine Mächte zum Löschen verfügbar.")
             return
 
-        from views.element_overlay import ElementListContent
-        content = ElementListContent(
-            items=maechte,
-            multi_select=True,
-        )
-        self.dialog_content = content
+        self._macht_checkboxes = {}
+        self._macht_last_cb_times = {}
 
-        overlay = self._get_overlay()
-        overlay.open(
-            title="Macht löschen",
-            content_widget=content,
-            action_text="Löschen",
-            on_action=self._on_delete_action_clicked,
+        content = MDList(size_hint_y=None)
+        content.bind(minimum_height=content.setter('height'))
+
+        def create_checkbox(item_name):
+            item = MDListItem(size_hint_y=None, height=dp(48))
+            item.add_widget(MDListItemSupportingText(text=item_name))
+
+            checkbox = MDListItemTrailingCheckbox()
+            cb = checkbox
+
+            def on_release_checkbox(inst, cb=cb, name=item_name):
+                now = time.monotonic()
+                key = f"cb_{name}"
+                if key in self._macht_last_cb_times and (now - self._macht_last_cb_times[key]) < 0.5:
+                    return
+                self._macht_last_cb_times[key] = now
+
+            checkbox.bind(on_release=on_release_checkbox)
+            item.add_widget(checkbox)
+            content.add_widget(item)
+            self._macht_checkboxes[item_name] = checkbox
+
+        for macht_name in sorted(maechte):
+            create_checkbox(macht_name)
+
+        scroll_height = min(len(maechte) * dp(48), dp(250))
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height=scroll_height,
+            do_scroll_x=False,
+            do_scroll_y=True,
+            bar_width=dp(15),
+            bar_margin=dp(4),
+        )
+        scroll.add_widget(content)
+
+        main_content = MDBoxLayout(
+            orientation="vertical", spacing=dp(8), size_hint_y=None,
+            padding=dp(16), height=scroll_height + dp(80),
+        )
+
+        search_field = MDTextField(mode="outlined", size_hint_y=None, height=dp(56), hint_text="Suchen...")
+        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
+        main_content.add_widget(search_field)
+        main_content.add_widget(scroll)
+
+        def populate_list(search_text):
+            content.clear_widgets()
+            for macht_name in sorted(maechte):
+                if search_text and search_text.lower() not in macht_name.lower():
+                    continue
+                create_checkbox(macht_name)
+
+        search_field.bind(text=populate_list)
+        populate_list("")
+
+        self._delete_popup = MDDialog(
+            MDDialogHeadlineText(text="Macht löschen"),
+            MDDialogContentContainer(main_content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text",
+                         on_release=lambda x: self._delete_popup.dismiss()),
+                MDButton(MDButtonText(text="Weiter"), style="filled",
+                         on_release=self._on_delete_action_clicked),
+            ),
+            size_hint=(0.85, None), auto_dismiss=False,
+        )
+        self._delete_popup.open()
+
+    def _on_delete_action_clicked(self):
+        """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
+        selected = [name for name, cb in self._macht_checkboxes.items() if cb.active]
+
+        if not selected:
+            self.show_error("Bitte wähle mindestens eine Macht zum Löschen aus.")
+            return
+
+        self._pending_delete_items = selected
+        self._delete_popup.dismiss()
+        self._show_delete_confirmation_popup(
+            selected_items=selected, item_type="Macht", on_confirm=self._confirm_delete_macht
         )
 
     def save_macht(self, *args):
