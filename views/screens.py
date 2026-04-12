@@ -216,41 +216,49 @@ class HistorieScreen(MDScreen):
             return False
 
 
+APP_VERSION = "0.7.0.5"
+APP_UPDATE_DATE = "12.04.2026"
+
+
 class InfoScreen(MDScreen):
-    info_text = StringProperty("""
+    info_text = StringProperty(f"""
+    Version {APP_VERSION} | Stand: {APP_UPDATE_DATE}
+
     Lizenz- und Urheberrechtsinformationen
     Savage Worlds Fan-Produkt
 
-    „Dieses Produkt bezieht sich auf das Regelsystem Savage Worlds, 
-    erhältlich bei der Pinnacle Entertainment Group unter www.peginc.com. 
-    Savage Worlds und alle zugehörigen Logos und Warenzeichen sind 
-    urheberrechtlich geschützt durch die Pinnacle Entertainment Group. 
-    Verwendung mit Genehmigung. Die deutsche Übersetzung der 
-    Begrifflichkeiten von Ulisses Spiele darf verwendet werden. 
-    Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder 
-    Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder 
+    „Dieses Produkt bezieht sich auf das Regelsystem Savage Worlds,
+    erhältlich bei der Pinnacle Entertainment Group unter www.peginc.com.
+    Savage Worlds und alle zugehörigen Logos und Warenzeichen sind
+    urheberrechtlich geschützt durch die Pinnacle Entertainment Group.
+    Verwendung mit Genehmigung. Die deutsche Übersetzung der
+    Begrifflichkeiten von Ulisses Spiele darf verwendet werden.
+    Pinnacle oder Ulisses Spiele geben keine Zusicherungen oder
+    Garantien in Bezug auf die Qualität, Funktionsfähigkeit oder
     Eignung dieses Produkts für einen bestimmten Zweck."
 
-    „This game references the Savage Worlds game system, 
-    available from Pinnacle Entertainment Group at www.peginc.com. 
-    Savage Worlds and all associated logos and trademarks are copyrights 
+    „This game references the Savage Worlds game system,
+    available from Pinnacle Entertainment Group at www.peginc.com.
+    Savage Worlds and all associated logos and trademarks are copyrights
     of Pinnacle Entertainment Group. Used with permission.
-    Pinnacle makes no representation or warranty as to the quality, 
+    Pinnacle makes no representation or warranty as to the quality,
     viability, or suitability for purpose of this product."
 
-    Danksagungen: 
+    Danksagungen:
     Vielen Dank an Ulisses Spiele für die Genehmigung der App.
     Danke an die Pinnacle Entertainment Group für dieses großartige Rollenspiel
     und an Ulisses Spiele für die Übersetzung ins Deutsche.
-    Besonderer Dank gilt allen Testusern, die fleißig Bugs gesammelt und 
-    tolle Anregungen geliefert haben. 
+    Besonderer Dank gilt allen Testusern, die fleißig Bugs gesammelt und
+    tolle Anregungen geliefert haben.
     Danke an alle Savage-Fans, die dem Spiel Leben einhauchen.
 
     Links:
     """)
-    
+
     # Liste der Links und deren Beschreibungen
     links = [
+        ("Im Google Play Store öffnen", "https://play.google.com/store/apps/details?id=com.github.thallion.savageworlds"),
+        ("Feedback senden: Thallion81@gmail.com", "mailto:Thallion81@gmail.com"),
         ("Ulisses E-Book-Store", "https://www.ulisses-ebooks.de/browse.php?sort=4a&src=fid45795&filters=45795_0_0"),
         ("Pinnacle Entertainment Group", "https://www.peginc.com"),
         ("Savage Worlds Deutschland", "https://ulisses-spiele.de/game-system/savage-worlds/")
@@ -294,7 +302,7 @@ class InfoScreen(MDScreen):
         button.width = max(min_width, estimated_width)
             
     def open_link(self, url):
-        """Öffnet einen Link im Browser."""
+        """Öffnet einen Link im Browser oder E-Mail-Client."""
         Logger.info(f"Öffne Link: {url}")
         webbrowser.open(url)
 
