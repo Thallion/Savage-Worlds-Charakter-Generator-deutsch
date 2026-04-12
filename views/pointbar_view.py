@@ -93,6 +93,7 @@ class GenerationPointsBar(MDBoxLayout):
         super().__init__(**kwargs)
         self.controller = App.get_running_app().controller
         self.controller.bind(charakter=self.on_charakter_changed)
+        self.controller.bind(on_charakter_updated=self._update_undo_status)
         self.on_charakter_changed(self.controller, self.controller.charakter)
 
         # Timer für regelmäßige Gewichts-Updates
@@ -194,6 +195,8 @@ class GenerationPointsBar(MDBoxLayout):
             self.charakter.bind(verfuegbare_maechte=self.update_maechte_text)
             self.charakter.bind(anzahl_maechte=self.update_maechte_text)
             self.charakter.bind(machtpunkte=self.update_machtpunkte_text)
+            self.charakter.bind(verfuegbare_maechte=self.update_header_summary)
+            self.charakter.bind(anzahl_maechte=self.update_header_summary)
             
             # Vermögen und Währung
             self.charakter.bind(vermoegen=self.update_vermoegen_text)
@@ -207,6 +210,8 @@ class GenerationPointsBar(MDBoxLayout):
             # Handicaps
             self.charakter.bind(verbleibende_handicap_punkte=self.update_handicaps_text)
             self.charakter.bind(gesamt_handicap_punkte=self.update_handicaps_text)
+            self.charakter.bind(verbleibende_handicap_punkte=self.update_header_summary)
+            self.charakter.bind(gesamt_handicap_punkte=self.update_header_summary)
             
             # Gewicht und Traglast - keine direkten Property-Bindings mehr
             # Stattdessen auf Events hören, die Gewichtsänderungen verursachen können
@@ -259,7 +264,7 @@ class GenerationPointsBar(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren der Texte: {str(e)}")
 
-    def update_header_summary(self):
+    def update_header_summary(self, *args):
         """Aktualisiert den kompakten Header-Text für den eingeklappten Zustand"""
         if not self.charakter:
             self.header_summary_text = ""
@@ -272,13 +277,22 @@ class GenerationPointsBar(MDBoxLayout):
         attr = f"{attr_verbraucht}/{self.charakter.maximale_attributsteigerungen}"
         fert = f"{fert_verbraucht}/{self.charakter.maximale_fertigkeitssteigerungen}"
         rang = self.charakter.rang if self.charakter.rang else "Anfänger"
+        
+        handicaps = self.charakter.verbleibende_handicap_punkte
+        gesamt_handicaps = self.charakter.gesamt_handicap_punkte
+        max_maechte = self.charakter.anzahl_maechte
+        verbleibende_maechte = self.charakter.verfuegbare_maechte
+        gewählte_maechte = max_maechte - verbleibende_maechte
+        hp = f"{handicaps}/{gesamt_handicaps}"
+        mp = f"{gewählte_maechte}/{max_maechte}"
 
         from kivy.core.window import Window
-        # Kompaktere Darstellung im Portrait
-        if Window.height > Window.width:
-            self.header_summary_text = f"{name} | {setting} | A:{attr} | F:{fert}"
+        from utils.platform_utils import is_mobile_layout
+        # Kompakte Darstellung (Mobile/Portrait): Rang + A + F + HP + MP
+        if Window.height > Window.width or is_mobile_layout():
+            self.header_summary_text = f"{rang} A:{attr} F:{fert} HP:{hp} MP:{mp}"
         else:
-            self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | {rang}"
+            self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | HP: {hp} | MP: {mp} | {rang}"
 
     def toggle_panel(self, *args):
         """Klappt den Detail-Bereich auf oder zu"""
