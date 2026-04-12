@@ -292,7 +292,7 @@ class GenerationPointsBar(MDBoxLayout):
         from utils.platform_utils import is_mobile_layout
         # Kompakte Darstellung (Mobile/Portrait): Rang + A + F + HP + MP
         if Window.height > Window.width or is_mobile_layout():
-            self.header_summary_text = f"{rang} A:{attr} F:{fert} HP:{hp} MP:{mp}"
+            self.header_summary_text = f"A:{attr} F:{fert} HP:{hp} MP:{mp} {rang}"
         else:
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | HP: {hp} | MP: {mp} | {rang}"
 
