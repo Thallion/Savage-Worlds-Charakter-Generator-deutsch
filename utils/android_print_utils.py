@@ -100,12 +100,12 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
                 self.pdf_name = pdf_name
                 self.callback = callback
 
-            @java_method('()V')
-            def onPageStarted(self, url, favicon, bitmap):
+            @java_method('(Landroid/webkit/WebView;Ljava/lang/String;Landroid/graphics/Bitmap;)V')
+            def onPageStarted(self, view, url, favicon):
                 pass
 
-            @java_method('()V')
-            def onPageFinished(self, url):
+            @java_method('(Landroid/webkit/WebView;Ljava/lang/String;)V')
+            def onPageFinished(self, view, url):
                 threading.Thread(target=self._delayed_print, daemon=True).start()
 
             def _delayed_print(self):
@@ -122,7 +122,7 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
                     print_adapter = self.web_view.createPrintDocumentAdapter(job_name)
 
                     print_attrs = (PrintAttributes.Builder()
-                                   .setMediaSize(PrintAttributes.MediaSize.NA_LETTER)
+                                   .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
                                    .setResolution(PrintAttributes.Resolution("pdf", "pdf", 300, 300))
                                    .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
                                    .build())
@@ -149,7 +149,7 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
                 web_view.getSettings().setPluginState(
                     autoclass('android.webkit.WebSettings$PluginState').ON)
 
-                abs_path = os.path.abspath(self.html_path)
+                abs_path = os.path.abspath(html_path)
                 file_url = f"file://{abs_path}"
 
                 helper = AsyncPrintHelper(context, print_manager, html_path, pdf_name,
@@ -244,63 +244,69 @@ def _convert_html_to_pdf_with_webview(context, html_path, output_pdf):
     Konvertiert HTML zu PDF mittels WebView und PrintDocumentAdapter.
     """
     try:
-        from jnius import autoclass
+        from jnius import autoclass, PythonJavaClass, java_method
 
         WebView = autoclass('android.webkit.WebView')
         WebSettings = autoclass('android.webkit.WebSettings')
         PrintAttributes = autoclass('android.print.PrintAttributes$Builder')
-        PrintDocumentAdapter = autoclass('android.print.PrintDocumentAdapter')
         PrintManager = autoclass('android.print.PrintManager')
-        File = autoclass('java.io.File')
-        FileOutputStream = autoclass('java.io.FileOutputStream')
-        ParcelFileDescriptor = autoclass('android.os.ParcelFileDescriptor')
-        PdfRenderer = autoclass('android.graphics.pdf.PdfRenderer')
-        Bitmap = autoclass('android.graphics.Bitmap')
-        Canvas = autoclass('android.graphics.Canvas')
         PythonActivity = autoclass('org.kivy.android.PythonActivity')
         Looper = autoclass('android.os.Looper')
+        Context = autoclass('android.content.Context')
 
         print_manager = context.getSystemService(Context.PRINT_SERVICE)
 
         result = {'success': False, 'path': None}
         result_lock = threading.Lock()
 
-        class CustomWebViewClient(autoclass('android.webkit.WebViewClient')):
+        class CustomWebViewClient(PythonJavaClass):
+            __javainterfaces__ = ['android/webkit/WebViewClient']
+
+            def __init__(self, ctx, pm, hp, opdf, res):
+                super().__init__()
+                self._context = ctx
+                self._print_manager = pm
+                self._html_path = hp
+                self._output_pdf = opdf
+                self._result = res
+
+            @java_method('(Landroid/webkit/WebView;Ljava/lang/String;)V')
             def onPageFinished(self, web_view, url):
                 threading.Thread(target=lambda: _perform_print_and_save(
-                    context, print_manager, web_view, html_path, output_pdf, result), 
+                    self._context, self._print_manager, web_view,
+                    self._html_path, self._output_pdf, self._result),
                     daemon=True).start()
 
-        def _perform_print_and_save(context, print_manager, web_view, html_path, output_pdf, result):
+        def _perform_print_and_save(ctx, pm, web_view, hp, opdf, res):
             try:
                 Looper.prepare()
 
                 time.sleep(0.5)
 
-                job_name = f"Charakterbogen PDF Export"
+                job_name = "Charakterbogen PDF Export"
                 print_adapter = web_view.createPrintDocumentAdapter(job_name)
 
                 print_attrs = (PrintAttributes.Builder()
-                               .setMediaSize(PrintAttributes.MediaSize.NA_LETTER)
+                               .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
                                .setResolution(PrintAttributes.Resolution("default", "default", 300, 300))
                                .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
                                .build())
 
-                print_manager.print(job_name, print_adapter, print_attrs)
+                pm.print(job_name, print_adapter, print_attrs)
 
                 Logger.info("Android PDF: Druckdialog geöffnet - bitte als PDF speichern")
 
                 with result_lock:
-                    result['success'] = True
-                    result['path'] = output_pdf.getAbsolutePath()
+                    res['success'] = True
+                    res['path'] = opdf.getAbsolutePath()
 
                 Looper.loop()
 
             except Exception as e:
                 Logger.error(f"Android PDF: Druckfehler: {e}")
                 with result_lock:
-                    result['success'] = False
-                    result['error'] = str(e)
+                    res['success'] = False
+                    res['error'] = str(e)
 
         web_view = WebView(context)
         settings = web_view.getSettings()
@@ -310,15 +316,14 @@ def _convert_html_to_pdf_with_webview(context, html_path, output_pdf):
         settings.setLoadWithOverviewMode(True)
         settings.setUseWideViewPort(True)
 
-        web_view.setWebViewClient(CustomWebViewClient())
+        client = CustomWebViewClient(context, print_manager, html_path, output_pdf, result)
+        web_view.setWebViewClient(client)
 
         abs_path = os.path.abspath(html_path)
         file_url = f"file://{abs_path}"
         web_view.loadUrl(file_url)
 
-        threading.Thread(target=lambda: time.sleep(3) and 
-                        Logger.info("Android PDF: Warte auf Druckvorgang..."), 
-                        daemon=True).start()
+        Logger.info("Android PDF: WebView gestartet, warte auf Druckvorgang...")
 
         return output_pdf.getAbsolutePath()
 

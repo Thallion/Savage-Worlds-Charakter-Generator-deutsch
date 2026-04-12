@@ -1582,7 +1582,6 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             archetypen_dirs = set()
             
             # Suche an mehreren möglichen Stellen (wie in main.py)
-            from utils.path_utils import get_resource_path, get_application_root
             app_root = Path(get_application_root())
             
             # Gebündelte Archetypen aus verschiedenen Quellen

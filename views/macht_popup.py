@@ -325,9 +325,18 @@ class MachtDialogHandler:
             for macht_name in sorted(maechte):
                 if search_text and search_text.lower() not in macht_name.lower():
                     continue
-                create_checkbox(macht_name)
+                if macht_name in self._macht_checkboxes:
+                    item = MDListItem(size_hint_y=None, height=dp(48))
+                    item.add_widget(MDListItemSupportingText(text=macht_name))
+                    cb_existing = self._macht_checkboxes[macht_name]
+                    if cb_existing.parent:
+                        cb_existing.parent.remove_widget(cb_existing)
+                    item.add_widget(cb_existing)
+                    content.add_widget(item)
+                else:
+                    create_checkbox(macht_name)
 
-        search_field.bind(text=populate_list)
+        search_field.bind(text=lambda instance, value: populate_list(value))
         populate_list("")
 
         self._delete_popup = MDDialog(
@@ -343,7 +352,7 @@ class MachtDialogHandler:
         )
         self._delete_popup.open()
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
         selected = [name for name, cb in self._macht_checkboxes.items() if cb.active]
 
@@ -451,7 +460,7 @@ class MachtDialogHandler:
             Logger.error(f"Fehler beim Löschen der Mächte: {e}")
             self.show_error("Fehler beim Löschen der Mächte")
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
         if not self.dialog_content:
             return

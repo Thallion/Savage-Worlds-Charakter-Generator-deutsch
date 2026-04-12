@@ -188,9 +188,19 @@ class FertigkeitDialogHandler:
             for fert_name in sorted(fertigkeiten):
                 if search_text and search_text.lower() not in fert_name.lower():
                     continue
-                create_checkbox(fert_name)
+                # Bestehende Checkbox wiederverwenden statt neue zu erstellen
+                if fert_name in self._fertigkeit_checkboxes:
+                    item = MDListItem(size_hint_y=None, height=dp(48))
+                    item.add_widget(MDListItemSupportingText(text=fert_name))
+                    cb_existing = self._fertigkeit_checkboxes[fert_name]
+                    if cb_existing.parent:
+                        cb_existing.parent.remove_widget(cb_existing)
+                    item.add_widget(cb_existing)
+                    content.add_widget(item)
+                else:
+                    create_checkbox(fert_name)
 
-        search_field.bind(text=populate_list)
+        search_field.bind(text=lambda instance, value: populate_list(value))
         populate_list("")
 
         self._delete_popup = MDDialog(
@@ -206,7 +216,7 @@ class FertigkeitDialogHandler:
         )
         self._delete_popup.open()
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
         selected = [name for name, cb in self._fertigkeit_checkboxes.items() if cb.active]
 
@@ -310,7 +320,7 @@ class FertigkeitDialogHandler:
             Logger.error(f"Fehler beim Löschen der Fertigkeiten: {e}")
             self.show_error("Fehler beim Löschen der Fertigkeiten")
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
         if not self.dialog_content:
             return

@@ -330,9 +330,18 @@ class HandicapDialogHandler:
             for handicap_name in sorted(handicaps):
                 if search_text and search_text.lower() not in handicap_name.lower():
                     continue
-                create_checkbox(handicap_name)
+                if handicap_name in self._handicap_checkboxes:
+                    item = MDListItem(size_hint_y=None, height=dp(48))
+                    item.add_widget(MDListItemSupportingText(text=handicap_name))
+                    cb_existing = self._handicap_checkboxes[handicap_name]
+                    if cb_existing.parent:
+                        cb_existing.parent.remove_widget(cb_existing)
+                    item.add_widget(cb_existing)
+                    content.add_widget(item)
+                else:
+                    create_checkbox(handicap_name)
 
-        search_field.bind(text=populate_list)
+        search_field.bind(text=lambda instance, value: populate_list(value))
         populate_list("")
 
         self._delete_popup = MDDialog(
@@ -510,7 +519,7 @@ class HandicapDialogHandler:
             Logger.error(f"Fehler beim Löschen der Handicaps: {e}")
             self.show_error("Fehler beim Löschen der Handicaps")
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
         if not self.dialog_content:
             return

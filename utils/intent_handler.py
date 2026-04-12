@@ -130,8 +130,6 @@ def _import_from_text(app, text):
             _show_import_error(app, "Kein Inhalt empfangen.")
             return
 
-        filename = "geteilte_charakter.json"
-
         # JSON validieren
         try:
             data = json.loads(text)
@@ -143,6 +141,15 @@ def _import_from_text(app, text):
         # Typ erkennen
         file_type = _detect_json_type(data)
         Logger.info(f"IntentHandler: Erkannter Typ aus Text: {file_type}")
+
+        # Dateiname aus JSON-Daten oder Zeitstempel generieren
+        import datetime
+        char_name = data.get('name', data.get('char_name', ''))
+        if char_name:
+            safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).strip()
+            filename = f"{safe_name}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        else:
+            filename = f"import_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
 
         # Speichern
         if file_type == 'charakter':

@@ -322,9 +322,18 @@ class TalentDialogHandler:
             for talent_name in sorted(talente):
                 if search_text and search_text.lower() not in talent_name.lower():
                     continue
-                create_checkbox(talent_name)
+                if talent_name in self._talent_checkboxes:
+                    item = MDListItem(size_hint_y=None, height=dp(48))
+                    item.add_widget(MDListItemSupportingText(text=talent_name))
+                    cb_existing = self._talent_checkboxes[talent_name]
+                    if cb_existing.parent:
+                        cb_existing.parent.remove_widget(cb_existing)
+                    item.add_widget(cb_existing)
+                    content.add_widget(item)
+                else:
+                    create_checkbox(talent_name)
 
-        search_field.bind(text=populate_list)
+        search_field.bind(text=lambda instance, value: populate_list(value))
         populate_list("")
 
         self._delete_popup = MDDialog(
@@ -341,7 +350,7 @@ class TalentDialogHandler:
         )
         self._delete_popup.open()
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
         selected = []
         for name, cb in self._talent_checkboxes.items():
@@ -449,7 +458,7 @@ class TalentDialogHandler:
             Logger.error(f"Fehler beim Löschen der Talente: {e}")
             self.show_error("Fehler beim Löschen der Talente")
 
-    def _on_delete_action_clicked(self):
+    def _on_delete_action_clicked(self, *args):
         """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
         if not self.dialog_content:
             return
