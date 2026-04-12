@@ -396,52 +396,61 @@ class EinstellungenWidget(MDBoxLayout):
     
     
     def open_log_file(self):
-        """Kopiert den Log-Inhalt in die Zwischenablage"""
+        """Exportiert die Log-Datei — auf Android über Teilen-Dialog, auf Desktop in Zwischenablage"""
         try:
-            Logger.info("Log-File kopieren wurde aufgerufen")
-            
+            Logger.info("Log-File Export wurde aufgerufen")
+
             if not hasattr(self.app, 'log_filepath') or not self.app.log_filepath:
                 Logger.warning("Keine Log-Datei verfügbar")
-                Logger.warning("ERROR: Log-Datei nicht verfügbar oder Logging deaktiviert.")
                 return
-            
+
             log_filepath = self.app.log_filepath
-            Logger.info(f"Kopiere Log-Datei in Zwischenablage: {log_filepath}")
-            
-            # Log-Datei lesen
-            try:
-                with open(log_filepath, 'r', encoding='utf-8') as f:
-                    log_content = f.read()
-                    
-                # Log-Info Header hinzufügen
-                header = f"=== Session Log ===\n"
-                header += f"Datei: {os.path.basename(log_filepath)}\n"
-                header += f"Pfad: {log_filepath}\n"
-                header += f"Größe: {len(log_content)} Zeichen\n\n"
-                
-                full_content = header + log_content
-                
-                # In Zwischenablage kopieren
-                self._copy_to_clipboard(full_content)
-                
-                # Erfolgs-Nachricht
-                lines_count = log_content.count('\n')
-                success_msg = f"Log erfolgreich kopiert!\n\n"
-                success_msg += f"• {lines_count} Zeilen\n"
-                success_msg += f"• {len(log_content)} Zeichen\n"
-                success_msg += f"• Datei: {os.path.basename(log_filepath)}\n\n"
-                success_msg += f"Der Log-Inhalt ist jetzt in der Zwischenablage und kann in einen Texteditor eingefügt werden."
-                
-                Logger.info(f"SUCCESS: {success_msg}")
-                Logger.info(f"Log-Inhalt erfolgreich in Zwischenablage kopiert ({lines_count} Zeilen)")
-                
-            except Exception as e:
-                Logger.error(f"Fehler beim Lesen der Log-Datei: {e}")
-                Logger.error(f"ERROR: Konnte Log-Datei nicht lesen: {str(e)}")
-                    
+
+            if not os.path.exists(log_filepath):
+                Logger.warning(f"Log-Datei nicht gefunden: {log_filepath}")
+                return
+
+            from kivy.utils import platform
+            if platform == 'android':
+                # Android: Log-Datei über Teilen-Dialog exportieren
+                try:
+                    from utils.share_utils import share_file
+                    share_file(
+                        log_filepath,
+                        mime_type='text/plain',
+                        title="Log-Datei teilen"
+                    )
+                    Logger.info(f"Log-Datei zum Teilen geöffnet: {log_filepath}")
+                except Exception as e:
+                    Logger.error(f"Fehler beim Teilen der Log-Datei: {e}")
+                    # Fallback: In Zwischenablage kopieren
+                    self._export_log_to_clipboard(log_filepath)
+            else:
+                # Desktop: In Zwischenablage kopieren
+                self._export_log_to_clipboard(log_filepath)
+
         except Exception as e:
-            Logger.error(f"Fehler beim Kopieren der Log-Datei: {e}")
-            Logger.error(f"ERROR: Unerwarteter Fehler beim Log-Kopieren: {str(e)}")
+            Logger.error(f"Fehler beim Log-Export: {e}")
+
+    def _export_log_to_clipboard(self, log_filepath):
+        """Kopiert den Log-Inhalt in die Zwischenablage (Desktop-Fallback)"""
+        try:
+            with open(log_filepath, 'r', encoding='utf-8') as f:
+                log_content = f.read()
+
+            header = f"=== Session Log ===\n"
+            header += f"Datei: {os.path.basename(log_filepath)}\n"
+            header += f"Pfad: {log_filepath}\n"
+            header += f"Größe: {len(log_content)} Zeichen\n\n"
+
+            full_content = header + log_content
+            self._copy_to_clipboard(full_content)
+
+            lines_count = log_content.count('\n')
+            Logger.info(f"Log-Inhalt in Zwischenablage kopiert ({lines_count} Zeilen)")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Lesen der Log-Datei: {e}")
     
     def _copy_to_clipboard(self, text):
         """Kopiert Text in die Zwischenablage - plattformspezifisch"""

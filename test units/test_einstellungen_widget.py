@@ -431,12 +431,13 @@ class TestEinstellungenWidgetLog(unittest.TestCase):
             widget.open_log_file()
 
     def test_open_log_file_success(self):
-        """open_log_file liest Datei und kopiert in Zwischenablage"""
+        """open_log_file liest Datei und kopiert in Zwischenablage (Desktop)"""
         widget, mocks = _create_widget()
         mocks['app'].log_filepath = '/tmp/test.log'
 
         log_content = "Line1\nLine2\nLine3"
         with patch('views.einstellungen_widget.Logger'), \
+             patch('views.einstellungen_widget.os.path.exists', return_value=True), \
              patch('builtins.open', mock_open(read_data=log_content)), \
              patch.object(widget, '_copy_to_clipboard') as mock_copy:
             widget.open_log_file()
@@ -451,6 +452,7 @@ class TestEinstellungenWidgetLog(unittest.TestCase):
         mocks['app'].log_filepath = '/tmp/test.log'
 
         with patch('views.einstellungen_widget.Logger'), \
+             patch('views.einstellungen_widget.os.path.exists', return_value=True), \
              patch('builtins.open', mock_open(read_data="content")), \
              patch.object(widget, '_copy_to_clipboard') as mock_copy:
             widget.open_log_file()
@@ -464,6 +466,7 @@ class TestEinstellungenWidgetLog(unittest.TestCase):
         mocks['app'].log_filepath = '/tmp/test.log'
 
         with patch('views.einstellungen_widget.Logger') as mock_logger, \
+             patch('views.einstellungen_widget.os.path.exists', return_value=True), \
              patch('builtins.open', side_effect=IOError("read fail")):
             widget.open_log_file()
             mock_logger.error.assert_called()

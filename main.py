@@ -791,7 +791,6 @@ class SW_Charakter_GeneratorApp(MDApp):
             return
 
         try:
-            from jnius import autoclass
             from utils.intent_handler import handle_incoming_intent, handle_new_intent
 
             # Intent verarbeiten, mit dem die App gestartet wurde
@@ -799,11 +798,21 @@ class SW_Charakter_GeneratorApp(MDApp):
             Clock.schedule_once(lambda dt: handle_incoming_intent(self), 2.0)
 
             # Listener für neue Intents registrieren (App bereits im Vordergrund)
-            PythonActivity = autoclass('org.kivy.android.PythonActivity')
-            activity = PythonActivity.mActivity
-            activity.bind(on_new_intent=lambda intent: handle_new_intent(self, intent))
-            Logger.info("Android Intent-Handler registriert")
+            # WICHTIG: android.activity.bind() nutzt registerNewIntentListener()
+            # und erzeugt einen Java NewIntentListener — PythonActivity.mActivity.bind()
+            # ist NICHT dasselbe und funktioniert nicht für on_new_intent.
+            from android import activity as android_activity
 
+            # Callback als benannte Funktion, damit GC die Referenz nicht verliert
+            def _on_new_intent(intent):
+                handle_new_intent(self, intent)
+
+            self._intent_callback = _on_new_intent  # Referenz halten
+            android_activity.bind(on_new_intent=_on_new_intent)
+            Logger.info("Android Intent-Handler registriert (via android.activity.bind)")
+
+        except ImportError:
+            Logger.info("android.activity nicht verfügbar (kein Android)")
         except Exception as e:
             Logger.warning(f"Android Intent-Handler konnte nicht registriert werden: {e}")
 

@@ -1859,45 +1859,68 @@ class CharakterVerwaltungWidget(MDBoxLayout):
             Logger.info("Text über Kivy Clipboard kopiert (fallback)")
 
     def open_log_file(self):
-        """Kopiert den Log-Inhalt in die Zwischenablage"""
+        """Exportiert die Log-Datei — auf Android über Teilen-Dialog, auf Desktop in Zwischenablage"""
         try:
             app = MDApp.get_running_app()
             if not hasattr(app, 'log_filepath') or not app.log_filepath:
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
                     dialog_service.show_warning_dialog("Keine Log-Datei verfügbar")
-                Logger.warning("Log-Datei nicht verfügbar")
                 return
 
             log_filepath = app.log_filepath
-            Logger.info(f"Kopiere Log-Datei: {log_filepath}")
 
-            try:
-                with open(log_filepath, 'r', encoding='utf-8') as f:
-                    log_content = f.read()
-
-                header = f"=== Session Log ===\n"
-                header += f"Datei: {os.path.basename(log_filepath)}\n"
-                header += f"Pfad: {log_filepath}\n"
-                header += f"Größe: {len(log_content)} Zeichen\n\n"
-
-                full_content = header + log_content
-                self._copy_to_clipboard(full_content)
-
-                lines_count = log_content.count('\n')
+            if not os.path.exists(log_filepath):
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
-                    dialog_service.show_success_dialog(
-                        f"Log kopiert!\n\n{lines_count} Zeilen • {len(log_content)} Zeichen"
+                    dialog_service.show_warning_dialog(f"Log-Datei nicht gefunden: {log_filepath}")
+                return
+
+            from kivy.utils import platform
+            if platform == 'android':
+                # Android: Log-Datei über Teilen-Dialog exportieren
+                try:
+                    from utils.share_utils import share_file
+                    share_file(
+                        log_filepath,
+                        mime_type='text/plain',
+                        title="Log-Datei teilen"
                     )
-
-                Logger.info(f"Log-Inhalt kopiert ({lines_count} Zeilen)")
-
-            except Exception as e:
-                Logger.error(f"Fehler beim Lesen der Log-Datei: {e}")
-                dialog_service = service_container.get_dialog_service()
-                if dialog_service:
-                    dialog_service.show_error_dialog(f"Fehler: {e}")
+                    Logger.info(f"Log-Datei zum Teilen geöffnet: {log_filepath}")
+                except Exception as e:
+                    Logger.error(f"Fehler beim Teilen der Log-Datei: {e}")
+                    # Fallback: In Zwischenablage kopieren
+                    self._copy_log_to_clipboard(log_filepath)
+            else:
+                self._copy_log_to_clipboard(log_filepath)
 
         except Exception as e:
-            Logger.error(f"Fehler beim Kopieren der Log-Datei: {e}")
+            Logger.error(f"Fehler beim Log-Export: {e}")
+
+    def _copy_log_to_clipboard(self, log_filepath):
+        """Kopiert den Log-Inhalt in die Zwischenablage (Desktop-Fallback)"""
+        try:
+            with open(log_filepath, 'r', encoding='utf-8') as f:
+                log_content = f.read()
+
+            header = f"=== Session Log ===\n"
+            header += f"Datei: {os.path.basename(log_filepath)}\n"
+            header += f"Pfad: {log_filepath}\n"
+            header += f"Größe: {len(log_content)} Zeichen\n\n"
+
+            full_content = header + log_content
+            self._copy_to_clipboard(full_content)
+
+            lines_count = log_content.count('\n')
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_success_dialog(
+                    f"Log kopiert!\n\n{lines_count} Zeilen • {len(log_content)} Zeichen"
+                )
+            Logger.info(f"Log-Inhalt kopiert ({lines_count} Zeilen)")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Lesen der Log-Datei: {e}")
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_error_dialog(f"Fehler: {e}")
