@@ -1,6 +1,4 @@
 # pointbar_view_mobile.kv - Smartphone-optimiertes Layout
-# MDExpansionPanel für zuverlässiges Ein-/Ausklappen auf Android
-# Kompakte LabelValuePair-Zeilen statt schwerer Cards
 
 #:import MDExpansionPanel kivymd.uix.expansionpanel.MDExpansionPanel
 #:import MDExpansionPanelHeader kivymd.uix.expansionpanel.MDExpansionPanelHeader
@@ -44,6 +42,77 @@
     height: self.minimum_height
     md_bg_color: app.theme_cls.backgroundColor
 
+    # ───── Toolbar (immer sichtbar) ─────
+    MDBoxLayout:
+        id: toolbar
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(40)
+        padding: [dp(4), dp(2), dp(4), dp(2)]
+        spacing: dp(2)
+        md_bg_color: app.theme_cls.surfaceContainerColor
+
+        # Chevron — klappt Detail-Bereich auf/zu
+        MDIconButton:
+            icon: "chevron-down" if root.is_expanded else "chevron-right"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_panel()
+
+        # Zusammenfassung
+        MDLabel:
+            text: root.header_summary_text
+            theme_text_color: "Primary"
+            halign: 'left'
+            valign: 'center'
+            font_size: dp(11)
+            bold: True
+            shorten: True
+            shorten_from: 'right'
+            text_size: self.size
+            size_hint_x: 1
+
+        # Undo
+        MDIconButton:
+            icon: "undo"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            disabled: not root.kann_undo
+            opacity: 1 if root.kann_undo else 0.3
+            on_release: root.on_undo_pressed()
+
+        # Schnellspeichern
+        MDIconButton:
+            icon: "content-save"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.on_schnellspeichern()
+
+        # Laden
+        MDIconButton:
+            icon: "folder-open"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.on_laden()
+
+        # CharGen-Toggle
+        MDIconButton:
+            icon: "check-circle" if root.char_gen_completed else "progress-wrench"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_char_gen_completed()
+
+    # ───── Detail-Inhalt (ein-/ausklappbar via ExpansionPanel) ─────
     MDExpansionPanel:
         id: expansion_panel
         size_hint_y: None
@@ -55,31 +124,14 @@
                 md_bg_color: app.theme_cls.surfaceContainerLowColor
                 ripple_effect: False
                 size_hint_y: None
-                height: dp(44)
-
-                MDListItemLeadingAvatar:
-                    source: root.get_logo_path()
+                height: dp(36)
 
                 MDListItemSupportingText:
-                    text: "Attr: " + root.attribut_text + "  |  " + "Fert: " + root.faehigkeiten_text + "  |  H: " + root.handicaps_text + "  |  M: " + root.maechte_text
-                    theme_text_color: "Primary"
-                    bold: True
-
-                MDIconButton:
-                    id: undo_button
-                    icon: "undo"
-                    style: "standard"
-                    size_hint: None, None
-                    size: [dp(40), dp(40)]
-                    pos_hint: {'center_y': 0.5}
-                    disabled: not root.kann_undo
-                    opacity: 1 if root.kann_undo else 0.3
-                    on_release: root.on_undo_pressed()
+                    text: "Attr: " + root.attribut_text + "  |  Fert: " + root.faehigkeiten_text + "  |  H: " + root.handicaps_text
 
                 TrailingPressedIconButton:
                     id: chevron
                     icon: "chevron-right"
-                    on_release: root.toggle_panel()
 
         MDExpansionPanelContent:
             id: content_box
@@ -109,12 +161,10 @@
                 value_text: root.aufstiege_text
                 key_width_ratio: 0.40
 
-            # Trennlinie
             MDDivider:
                 size_hint_y: None
                 height: dp(1)
 
-            # Generierungspunkte
             LabelValuePair:
                 key_text: "Attribute:"
                 value_text: root.attribut_text
@@ -146,12 +196,10 @@
                 height: dp(20) if root.superkraft_punkte_text else 0
                 opacity: 1 if root.superkraft_punkte_text else 0
 
-            # Trennlinie
             MDDivider:
                 size_hint_y: None
                 height: dp(1)
 
-            # Ressourcen
             LabelValuePair:
                 key_text: "Machtstufe:"
                 value_text: root.machtstufe_text
@@ -182,4 +230,3 @@
                 key_text: "Vermögen:"
                 value_text: root.vermoegen_text
                 key_width_ratio: 0.50
-

@@ -164,21 +164,6 @@ MDScreen:
                     height: self.minimum_height
                     md_bg_color: app.theme_cls.backgroundColor
 
-                    # Status-Button: MDButton für zuverlässige Touch-Events auf Android
-                    MDButton:
-                        id: char_gen_bar
-                        style: "tonal"
-                        size_hint_x: 1
-                        size_hint_y: None
-                        height: dp(40)
-                        on_release: root.ids.generation_points.toggle_char_gen_completed()
-
-                        MDButtonIcon:
-                            icon: "check-circle" if root.ids.generation_points.char_gen_completed else "progress-wrench"
-
-                        MDButtonText:
-                            text: "Aufstiege freigeschaltet" if root.ids.generation_points.char_gen_completed else "Charaktererstellung abschließen"
-
                     GenerationPointsBar:
                         id: generation_points
                         charakter: app.controller.charakter

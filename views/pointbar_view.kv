@@ -34,25 +34,24 @@
     height: self.minimum_height
     md_bg_color: app.theme_cls.backgroundColor
 
-    # Header-Zeile (immer sichtbar)
+    # ───── Toolbar (immer sichtbar) ─────
     MDBoxLayout:
-        id: header_bar
+        id: toolbar
         orientation: 'horizontal'
         size_hint_y: None
-        height: dp(48)
-        padding: [dp(12), dp(4), dp(8), dp(4)]
-        spacing: dp(8)
-        md_bg_color: app.theme_cls.surfaceColor
+        height: dp(40)
+        padding: [dp(4), dp(2), dp(4), dp(2)]
+        spacing: dp(2)
+        md_bg_color: app.theme_cls.surfaceContainerColor
 
-        # Mini-Logo
-        Image:
-            source: root.get_logo_path()
+        # Chevron — klappt Detail-Bereich auf/zu
+        MDIconButton:
+            icon: "chevron-down" if root.is_expanded else "chevron-right"
+            style: "standard"
             size_hint: None, None
-            width: dp(36)
-            height: dp(36)
-            allow_stretch: True
-            keep_ratio: True
+            size: [dp(36), dp(36)]
             pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_panel()
 
         # Zusammenfassung
         MDLabel:
@@ -67,26 +66,54 @@
             text_size: self.size
             size_hint_x: 1
 
-        # Chevron-Button
+        # Undo
         MDIconButton:
-            id: chevron_icon
-            icon: "chevron-down"
+            icon: "undo"
             style: "standard"
             size_hint: None, None
-            size: [dp(48), dp(48)]
+            size: [dp(36), dp(36)]
             pos_hint: {'center_y': 0.5}
-            on_release: root.toggle_panel()
+            disabled: not root.kann_undo
+            opacity: 1 if root.kann_undo else 0.3
+            on_release: root.on_undo_pressed()
 
-    # Detail-Inhalt (ein-/ausklappbar) - startet ausgeklappt auf Desktop
+        # Schnellspeichern
+        MDIconButton:
+            icon: "content-save"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.on_schnellspeichern()
+
+        # Laden
+        MDIconButton:
+            icon: "folder-open"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.on_laden()
+
+        # CharGen-Toggle
+        MDIconButton:
+            icon: "check-circle" if root.char_gen_completed else "progress-wrench"
+            style: "standard"
+            size_hint: None, None
+            size: [dp(36), dp(36)]
+            pos_hint: {'center_y': 0.5}
+            on_release: root.toggle_char_gen_completed()
+
+    # ───── Detail-Inhalt (ein-/ausklappbar) ─────
     MDBoxLayout:
         id: content_box
         orientation: 'horizontal'
-        spacing: dp(12)
+        spacing: dp(12) if root.is_expanded else 0
         size_hint_y: None
-        height: self.minimum_height
-        padding: [dp(12), dp(8), dp(12), dp(8)]
-        opacity: 1
-        disabled: False
+        height: self.minimum_height if root.is_expanded else 0
+        padding: [dp(12), dp(8), dp(12), dp(8)] if root.is_expanded else [0, 0, 0, 0]
+        opacity: 1 if root.is_expanded else 0
+        disabled: not root.is_expanded
 
         # Logo-Container (nur bei breitem Fenster sichtbar)
         MDCard:

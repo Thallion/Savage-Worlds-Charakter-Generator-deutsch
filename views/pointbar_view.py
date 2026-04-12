@@ -20,39 +20,14 @@ from kivy.metrics import dp
 # KivyMD-Imports
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.behaviors import RotateBehavior
-
-
-class TouchableBoxLayout(ButtonBehavior, MDBoxLayout):
-    """MDBoxLayout mit Button-Verhalten für zuverlässige Touch-Events auf Android.
-
-    Kind-Widgets (MDIcon, MDLabel) können Touch-Events konsumieren,
-    bevor ButtonBehavior sie verarbeitet. Deshalb wird on_touch_down
-    so überschrieben, dass ButtonBehavior den Touch direkt verarbeitet
-    und nicht an Kinder weiterleitet.
-    """
-
-    def on_touch_down(self, touch):
-        if self.collide_point(*touch.pos):
-            # ButtonBehavior direkt verarbeiten lassen, NICHT an Kinder weiterleiten
-            return ButtonBehavior.on_touch_down(self, touch)
-        return False
-
-
-from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemTrailingIcon
+from kivymd.uix.list import MDListItemTrailingIcon
+from kivymd.uix.label import MDLabel
+from kivymd.uix.card import MDCard
 
 
 class TrailingPressedIconButton(ButtonBehavior, RotateBehavior, MDListItemTrailingIcon):
     """Icon-Button mit Rotation für ExpansionPanel-Chevron"""
     pass
-
-
-from kivymd.uix.gridlayout import MDGridLayout
-from kivymd.uix.button import MDIconButton, MDFabButton
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.label import MDLabel
-from kivymd.uix.card import MDCard
-from kivymd.uix.menu import MDDropdownMenu
-from kivymd.theming import ThemableBehavior
 
 # Path utilities import
 from utils.path_utils import get_assets_path
@@ -126,7 +101,26 @@ class GenerationPointsBar(MDBoxLayout):
         # Undo-Status initialisieren
         self._update_undo_status()
 
+        # MDExpansionPanel-Status tracken (Mobile)
+        Clock.schedule_once(self._bind_expansion_panel, 0)
+
         Logger.info("GenerationPointsBar initialisiert und an Charakter-Änderungen gebunden.")
+
+    def _bind_expansion_panel(self, dt):
+        """Bindet an das MDExpansionPanel, um is_expanded zu synchronisieren."""
+        panel = self.ids.get('expansion_panel')
+        if panel:
+            panel.bind(is_open=self._on_panel_state_changed)
+
+    def _on_panel_state_changed(self, panel, is_open):
+        """Callback wenn MDExpansionPanel geöffnet/geschlossen wird."""
+        self.is_expanded = is_open
+        chevron = self.ids.get('chevron')
+        if chevron:
+            if is_open:
+                panel.set_chevron_up(chevron)
+            else:
+                panel.set_chevron_down(chevron)
 
     def on_charakter_changed(self, instance, value):
         if hasattr(self, 'charakter') and self.charakter:
@@ -286,59 +280,53 @@ class GenerationPointsBar(MDBoxLayout):
         else:
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | {rang}"
 
-    _saved_padding = None  # Gespeichertes Padding beim Einklappen
-    _content_min_height = None  # Gespeicherte minimum_height
-
-    def toggle_panel(self):
+    def toggle_panel(self, *args):
         """Klappt den Detail-Bereich auf oder zu"""
         # MDExpansionPanel-Variante (Mobile)
         panel = self.ids.get('expansion_panel')
-        chevron = self.ids.get('chevron')
         if panel:
             if panel.is_open:
                 panel.close()
-                if chevron:
-                    panel.set_chevron_down(chevron)
-                self.is_expanded = False
             else:
                 panel.open()
-                if chevron:
-                    panel.set_chevron_up(chevron)
-                self.is_expanded = True
             return
 
-        # Desktop-Fallback: content_box Höhe togglen
-        content = self.ids.get('content_box')
-        chevron_icon = self.ids.get('chevron_icon')
-        if not content:
-            return
+        # Desktop: is_expanded togglen, KV-Bindings erledigen den Rest
+        self.is_expanded = not self.is_expanded
 
-        if self.is_expanded:
-            # Einklappen: minimum_height speichern, dann auf 0 setzen
-            self._content_min_height = content.minimum_height
-            self._saved_padding = content.padding[:]
-            content.padding = [0, 0, 0, 0]
-            content.spacing = 0
-            content.height = 0
-            if chevron_icon:
-                chevron_icon.icon = "chevron-right"
-            self.is_expanded = False
-        else:
-            # Aufklappen: gespeicherte Höhe wiederherstellen
-            content.padding = self._saved_padding or [dp(12), dp(8), dp(12), dp(8)]
-            content.spacing = dp(12)
-            if self._content_min_height:
-                content.height = self._content_min_height
-            if chevron_icon:
-                chevron_icon.icon = "chevron-down"
-            self.is_expanded = True
+    def _get_char_verwaltung(self):
+        """Holt das CharakterVerwaltungWidget über die App."""
+        app = App.get_running_app()
+        if hasattr(app, '_get_charakter_verwaltung_widget'):
+            return app._get_charakter_verwaltung_widget()
+        if hasattr(app, 'charakter_verwaltung_widget'):
+            return app.charakter_verwaltung_widget
+        return None
+
+    def on_schnellspeichern(self, *args):
+        """Schnellspeichern über die Toolbar"""
+        try:
+            widget = self._get_char_verwaltung()
+            if widget:
+                widget.schnellspeichern_charakter()
+        except Exception as e:
+            Logger.error(f"Schnellspeichern-Fehler: {e}")
+
+    def on_laden(self, *args):
+        """Charakter laden über die Toolbar"""
+        try:
+            widget = self._get_char_verwaltung()
+            if widget:
+                widget.lade_charakter()
+        except Exception as e:
+            Logger.error(f"Laden-Fehler: {e}")
 
     # Undo-Funktionalität
     def _update_undo_status(self, *args):
         """Aktualisiert den Undo-Button-Status."""
         self.kann_undo = self.controller.kann_undo
 
-    def on_undo_pressed(self):
+    def on_undo_pressed(self, *args):
         """Wird beim Klick auf den Undo-Button aufgerufen."""
         beschreibung = self.controller.undo()
         if beschreibung:
@@ -469,7 +457,7 @@ class GenerationPointsBar(MDBoxLayout):
         """Gibt den korrekten Pfad zum Logo zurück (PyInstaller-kompatibel)"""
         return get_assets_path("Savage-Worlds-Fanprodukt-Logo.png")
 
-    def toggle_char_gen_completed(self):
+    def toggle_char_gen_completed(self, *args):
         """Umschaltet den Charakter-Generierungsstatus über die Pointbar"""
         if self.charakter:
             new_value = not self.charakter.char_gen_completed
