@@ -1580,7 +1580,24 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
             # Auch in Archetypen/ suchen (gebündelt + persistentes Verzeichnis auf Android)
             archetypen_dirs = set()
-            archetypen_dirs.add(get_resource_path('chars/Archetypen'))
+            
+            # Suche an mehreren möglichen Stellen (wie in main.py)
+            from utils.path_utils import get_resource_path, get_application_root
+            app_root = Path(get_application_root())
+            
+            # Gebündelte Archetypen aus verschiedenen Quellen
+            possible_archetypen = [
+                app_root / 'Archetypen',
+                app_root / 'chars' / 'Archetypen',
+                Path(get_resource_path('Archetypen')),
+                Path(get_resource_path('chars/Archetypen')),
+            ]
+            
+            for arch_path in possible_archetypen:
+                if arch_path.exists() and arch_path.is_dir():
+                    archetypen_dirs.add(str(arch_path))
+                    Logger.debug(f"Archetypen: Gefunden in {arch_path}")
+            
             # Auf Android: auch im persistenten User-Chars-Verzeichnis
             user_archetypen = os.path.join(get_chars_path(), 'Archetypen')
             archetypen_dirs.add(user_archetypen)
