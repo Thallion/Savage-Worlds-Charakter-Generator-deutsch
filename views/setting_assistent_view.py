@@ -1332,6 +1332,7 @@ class SettingAssistentWizard:
             dummy = Charakter()
             manager = CustomElementManager(dummy)
             manager.save_setting(self.draft.name, final_setting)
+            manager.reload_settings()
             
             if self.edit_draft:
                 self.draft_manager.delete_draft(self.edit_draft.name)
@@ -1344,7 +1345,7 @@ class SettingAssistentWizard:
             if self.callback:
                 self.callback(self.draft.name, final_setting)
             
-            Logger.info(f"Setting '{self.draft.name}' erfolgreich gespeichert.")
+            Logger.info(f"Setting 'custom_{self.draft.name}' erfolgreich gespeichert.")
             
         except Exception as e:
             Logger.error(f"Fehler beim Speichern des Settings: {e}")

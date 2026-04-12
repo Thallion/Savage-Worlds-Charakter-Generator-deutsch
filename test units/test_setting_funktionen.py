@@ -155,10 +155,11 @@ class TestCustomElementManager(unittest.TestCase):
         result = manager.save_setting("NewSetting", new_setting)
         
         self.assertTrue(result)
-        self.assertTrue((self.temp_dir / "NewSetting.json").exists())
+        # User-Settings werden automatisch mit 'custom_' Präfix gespeichert
+        self.assertTrue((self.temp_dir / "custom_NewSetting.json").exists())
         
         # Datei lesen und prüfen
-        with open(self.temp_dir / "NewSetting.json", 'r', encoding='utf-8') as f:
+        with open(self.temp_dir / "custom_NewSetting.json", 'r', encoding='utf-8') as f:
             saved_data = json.load(f)
         
         self.assertEqual(saved_data, new_setting)

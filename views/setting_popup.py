@@ -126,6 +126,7 @@ class SettingsRepository:
                 setting_data = json.load(f)
             setting_name = setting_data.get("name", setting_datei.stem)
             if controller and controller.charakter:
+                controller.charakter.custom_element_manager.reload_settings()
                 controller.charakter.custom_element_manager.set_active_setting(setting_name)
                 controller.charakter.load_elements_from_active_setting()
 
@@ -149,6 +150,7 @@ class SettingsRepository:
             if controller and controller.charakter:
                 success = controller.charakter.custom_element_manager.delete_setting(setting_name)
                 if success:
+                    controller.charakter.custom_element_manager.reload_settings()
                     Logger.info(f"Setting '{setting_name}' gelöscht.")
                     MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
                     return True
@@ -211,16 +213,43 @@ class AddSettingPopup(MDBoxLayout, BaseFileManagerMixin):
             self.show_error("Der Name des Settings darf nicht leer sein.")
             return
         try:
-            app = MDApp.get_running_app()
-            charakter = app.controller.charakter
-            self.repository.save(setting_name, setting_description, charakter)
-            Logger.info(f"Setting '{setting_name}' gespeichert unter {_user_settings_path}")
-            from services.service_container import service_container
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_success_dialog(f"Setting '{setting_name}' gespeichert.")
-            if self.popup:
-                self.popup.dismiss()
+            from utils.path_utils import get_user_settings_path
+            user_settings_dir = Path(get_user_settings_path())
+            
+            for item in self.controller.charakter.talente.values():
+                item.ausgewaehlt = False
+            for item in self.controller.charakter.handicaps.values():
+                item.ausgewaehlt = False
+            for item in self.controller.charakter.maechte.values():
+                item.ausgewaehlt = False
+            for item in self.controller.charakter.ausruestung.values():
+                if item is not None:
+                    item.ausgewaehlt = False
+
+            new_setting = {
+                "name": setting_name,
+                "description": setting_description,
+                "voelker": {name: volk.to_setting_dict() for name, volk in self.controller.charakter.voelker.items()},
+                "talente": {name: talent.to_dict() for name, talent in self.controller.charakter.talente.items()},
+                "handicaps": {name: handicap.to_dict() for name, handicap in self.controller.charakter.handicaps.items()},
+                "fertigkeiten_daten": {name: list(attribut_set) for name, attribut_set in self.controller.charakter.fertigkeiten_daten.items()},
+                "maechte": {name: macht.to_dict() for name, macht in self.controller.charakter.maechte.items()},
+                "ausruestung": {name: ausruestung.to_setting_dict() for name, ausruestung in self.controller.charakter.ausruestung.items()}
+            }
+
+            success = self.controller.charakter.custom_element_manager.save_setting(setting_name, new_setting)
+            if success:
+                self.controller.charakter.custom_element_manager.reload_settings()
+                Logger.info(f"Setting 'custom_{setting_name}' gespeichert.")
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_success_dialog(f"Setting '{setting_name}' gespeichert.")
+                if self.popup:
+                    self.popup.dismiss()
+                MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
+            else:
+                self.show_error("Setting konnte nicht gespeichert werden.")
         except Exception as e:
             self.show_error(f"Fehler beim Speichern des Settings: {e}")
 

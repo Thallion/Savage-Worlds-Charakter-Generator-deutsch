@@ -43,6 +43,8 @@ class GameElementsHandler:
             return
 
         char = self.charakter_controller.charakter
+        
+        char.custom_element_manager.reload_settings()
         available_settings = char.custom_element_manager.get_all_settings()
         current_setting = char.active_setting_name
 

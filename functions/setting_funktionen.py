@@ -86,20 +86,30 @@ class CustomElementManager:
         """Lädt alle Einstellungen aus dem nativen und dem Benutzer-Settings-Verzeichnis.
 
         Zuerst werden die mitgelieferten (nativen) Settings geladen, dann die
-        benutzerdefinierten Settings. Benutzer-Settings mit gleichem Namen
-        überschreiben native Settings.
+        benutzerdefinierten Settings. Settings mit Präfix 'custom_' werden als
+        Benutzer-Settings behandelt. Offizielle Settings werden NIE überschrieben -
+        nur wenn User ein eigenes Setting unter eigenem Namen speichert.
         """
         try:
             # 1. Native Settings laden (mitgeliefert mit der App)
             self._load_settings_from_dir(self.native_settings_dir, is_user=False)
 
             # 2. Benutzer-Settings laden (persistentes Verzeichnis)
-            # Nur wenn das Benutzer-Verzeichnis ein anderes ist als das native
+            # Nur Dateien mit Präfix 'custom_' als User-Settings behandeln
             if self.user_settings_dir != self.native_settings_dir:
-                self._load_settings_from_dir(self.user_settings_dir, is_user=True)
+                self.user_settings_dir.mkdir(parents=True, exist_ok=True)
+                for setting_file in self.user_settings_dir.glob('custom_*.json'):
+                    self._load_single_setting_file(setting_file, is_user=True)
 
         except Exception as e:
             Logger.error(f"Fehler beim Laden der Settings: {e}")
+
+    def reload_settings(self) -> None:
+        """Lädt alle Settings neu (für Refresh nach Speichern/Löschen)."""
+        self.settings.clear()
+        self._user_settings.clear()
+        self.load_all_settings()
+        Logger.info("Settings-Liste wurde aktualisiert.")
 
     def _load_settings_from_dir(self, settings_dir: Path, is_user: bool = False) -> None:
         """Lädt Settings aus einem einzelnen Verzeichnis.
@@ -117,29 +127,48 @@ class CustomElementManager:
 
         quelle = "Benutzer" if is_user else "Nativ"
         for setting_file in settings_dir.glob('*.json'):
-            try:
-                with open(setting_file, 'r', encoding='utf-8') as f:
-                    setting_data = json.load(f)
-                    setting_name = setting_file.stem
-                    self.settings[setting_name] = setting_data
-                    if is_user:
-                        self._user_settings.add(setting_name)
-                    Logger.info(f"Setting '{setting_name}' geladen ({quelle}).")
-            except Exception as e:
-                Logger.error(f"Fehler beim Laden von Setting {setting_file}: {e}")
+            self._load_single_setting_file(setting_file, is_user)
 
-    def save_setting(self, name: str, setting_data: Dict[str, Any]) -> bool:
+    def _load_single_setting_file(self, setting_file: Path, is_user: bool = False) -> None:
+        """Lädt ein einzelnes Setting aus einer Datei.
+
+        Args:
+            setting_file: Pfad zur Setting-Datei
+            is_user: True wenn es sich um eine Benutzer-Setting handelt
+        """
+        try:
+            with open(setting_file, 'r', encoding='utf-8') as f:
+                setting_data = json.load(f)
+                setting_name = setting_file.stem
+                self.settings[setting_name] = setting_data
+                if is_user:
+                    self._user_settings.add(setting_name)
+                quelle = "Benutzer" if is_user else "Nativ"
+                Logger.info(f"Setting '{setting_name}' geladen ({quelle}).")
+        except Exception as e:
+            Logger.error(f"Fehler beim Laden von Setting {setting_file}: {e}")
+
+    def save_setting(self, name: str, setting_data: Dict[str, Any], force_custom_prefix: bool = True) -> bool:
         """
         Speichert ein Setting in eine JSON-Datei im Benutzer-Settings-Verzeichnis.
+
+        Benutzerdefinierte Settings werden immer mit Präfix 'custom_' gespeichert, damit
+        sie nicht mit offiziellen Settings aus dem App-Update kollidieren.
 
         Args:
             name: Name des Settings
             setting_data: Die Setting-Daten als Dictionary
+            force_custom_prefix: Wenn True, wird 'custom_' Präfix erzwungen (default: True)
 
         Returns:
             bool: True bei Erfolg, sonst False
         """
         try:
+            # Automatisch 'custom_' Präfix hinzufügen für User-Settings
+            # damit offizielle Settings nicht überschrieben werden
+            if force_custom_prefix and not name.startswith('custom_'):
+                name = f"custom_{name}"
+
             # Immer ins Benutzer-Verzeichnis speichern (persistiert bei Updates)
             save_dir = self.user_settings_dir
             if not save_dir.exists():
