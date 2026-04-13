@@ -1502,19 +1502,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             )
             grid.bind(minimum_height=grid.setter('height'))
 
-            # Superkräfte-Sichtbarkeit prüfen
-            sk_visible = True
-            try:
-                from functions.superkraft_funktionen import ist_superkraefte_setting
-                setting = getattr(self.controller.charakter, 'active_setting_name', '')
-                sk_visible = ist_superkraefte_setting(setting)
-            except Exception:
-                pass
-
             for i, (icon_str, tab_text, _) in enumerate(self.tab_definitions):
-                # Superkräfte ausblenden wenn nicht aktiv
-                if tab_text == "Superkräfte" and not sk_visible:
-                    continue
 
                 grid_item = MDBoxLayout(
                     orientation='vertical',
@@ -2132,6 +2120,15 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.error(f"Fehler bei Swipe-Setup: {str(e)}")
 
+    def _is_tab_swipeable(self, index):
+        """Gibt True zurück, wenn der Tab per Swipe erreichbar sein soll."""
+        if index < 0 or index >= len(self.tab_definitions):
+            return False
+        # Ausgeblendete Tabs (z.B. Superkräfte bei nicht passendem Setting) überspringen
+        if index < len(self.tab_items) and self.tab_items[index].disabled:
+            return False
+        return True
+
     def _on_swipe(self, direction):
         """Callback für Swipe-Gesten auf dem Content-Bereich"""
         try:
@@ -2142,18 +2139,17 @@ class SW_Charakter_GeneratorApp(MDApp):
             if num_tabs == 0:
                 return
 
-            if direction == 'left':
-                # Swipe nach links → nächster Tab
-                new_index = self._current_tab_index + 1
-                if new_index >= num_tabs:
-                    return  # Am Ende, nicht wrappen
-            elif direction == 'right':
-                # Swipe nach rechts → vorheriger Tab
-                new_index = self._current_tab_index - 1
-                if new_index < 0:
-                    return  # Am Anfang, nicht wrappen
-            else:
+            step = 1 if direction == 'left' else -1 if direction == 'right' else None
+            if step is None:
                 return
+
+            new_index = self._current_tab_index + step
+            # Überspringe deaktivierte Tabs (z.B. Superkräfte bei nicht passendem Setting)
+            while 0 <= new_index < num_tabs and not self._is_tab_swipeable(new_index):
+                new_index += step
+
+            if new_index < 0 or new_index >= num_tabs:
+                return  # Rand erreicht, nicht wrappen
 
             self._switch_to_tab_index(new_index, direction)
 
