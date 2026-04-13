@@ -202,9 +202,15 @@ def _import_from_uri(app, uri):
             return
 
         # Inhalt über ContentResolver lesen
-        content = _read_content_from_uri(context, uri)
+        try:
+            content = _read_content_from_uri(context, uri)
+        except Exception as read_error:
+            Logger.error(f"IntentHandler: Datei konnte nicht gelesen werden: {read_error}")
+            _show_import_error(app, f"Die Datei konnte nicht gelesen werden.\n\n{read_error}")
+            return
+
         if not content:
-            _show_import_error(app, "Die Datei konnte nicht gelesen werden.")
+            _show_import_error(app, "Die Datei ist leer.")
             return
 
         # JSON validieren
@@ -269,37 +275,79 @@ def _get_filename_from_uri(context, uri):
 
 
 def _read_content_from_uri(context, uri):
-    """Liest den gesamten Inhalt einer URI über den ContentResolver."""
-    try:
-        from jnius import autoclass
+    """Liest den gesamten Inhalt einer URI über den ContentResolver.
 
+    Versucht mehrere Methoden: erst Python-nativ über FileDescriptor,
+    dann Java IO als Fallback.
+
+    Returns:
+        str: Dateiinhalt
+
+    Raises:
+        RuntimeError: Wenn keine Lesemethode funktioniert (mit Details)
+    """
+    from jnius import autoclass
+    errors = []
+
+    # Methode 1: ParcelFileDescriptor → Python os.fdopen (zuverlässigste Methode)
+    try:
+        pfd = context.getContentResolver().openFileDescriptor(uri, "r")
+        if pfd:
+            fd = pfd.detachFd()
+            try:
+                with os.fdopen(fd, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                Logger.info(f"IntentHandler: {len(content)} Zeichen gelesen (via FileDescriptor)")
+                return content
+            except Exception as e:
+                Logger.warning(f"IntentHandler: fdopen fehlgeschlagen: {e}")
+                errors.append(f"FileDescriptor-Lesen: {e}")
+        else:
+            Logger.warning("IntentHandler: openFileDescriptor gab null zurück")
+            errors.append("FileDescriptor: null")
+    except Exception as e:
+        Logger.warning(f"IntentHandler: openFileDescriptor fehlgeschlagen: {e}")
+        errors.append(f"FileDescriptor: {e}")
+
+    # Methode 2: InputStream → Java BufferedReader (ohne explizites Charset)
+    try:
         BufferedReader = autoclass('java.io.BufferedReader')
         InputStreamReader = autoclass('java.io.InputStreamReader')
         StringBuilder = autoclass('java.lang.StringBuilder')
 
         input_stream = context.getContentResolver().openInputStream(uri)
         if not input_stream:
-            Logger.error("IntentHandler: InputStream ist null")
-            return None
+            errors.append("InputStream: null (Zugriff verweigert)")
+        else:
+            try:
+                reader = BufferedReader(InputStreamReader(input_stream))
+                sb = StringBuilder()
+                line = reader.readLine()
+                while line is not None:
+                    sb.append(line)
+                    sb.append('\n')
+                    line = reader.readLine()
 
-        reader = BufferedReader(InputStreamReader(input_stream, 'UTF-8'))
-        sb = StringBuilder()
-        line = reader.readLine()
-        while line is not None:
-            sb.append(line)
-            sb.append('\n')
-            line = reader.readLine()
+                reader.close()
+                input_stream.close()
 
-        reader.close()
-        input_stream.close()
-
-        content = sb.toString()
-        Logger.info(f"IntentHandler: {len(content)} Zeichen gelesen")
-        return content
-
+                content = sb.toString()
+                Logger.info(f"IntentHandler: {len(content)} Zeichen gelesen (via InputStream)")
+                return content
+            except Exception as e:
+                Logger.warning(f"IntentHandler: BufferedReader fehlgeschlagen: {e}")
+                errors.append(f"InputStream-Lesen: {e}")
+                try:
+                    input_stream.close()
+                except Exception:
+                    pass
     except Exception as e:
-        Logger.error(f"IntentHandler: Fehler beim Lesen der URI: {e}")
-        return None
+        Logger.error(f"IntentHandler: InputStream-Setup fehlgeschlagen: {e}")
+        errors.append(f"InputStream: {e}")
+
+    # Alle Methoden fehlgeschlagen
+    error_detail = "\n".join(errors) if errors else "Unbekannter Fehler"
+    raise RuntimeError(f"Keine Lesemethode erfolgreich:\n{error_detail}")
 
 
 def _detect_json_type(data):

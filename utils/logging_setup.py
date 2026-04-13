@@ -44,11 +44,24 @@ def get_app_data_dir():
             except Exception as e:
                 KivyLogger.warning(f"FileLogging: Android Storage API fehlgeschlagen: {e}")
                 
-            # Fallback 2: App-interner Speicher (wie bisher)
+            # Fallback 2: App-interner Speicher (python-for-android API)
             try:
                 from android.storage import app_storage_path
                 app_dir = app_storage_path()
                 KivyLogger.warning(f"FileLogging: Fallback auf App-internen Speicher: {app_dir}")
+                return app_dir
+            except Exception as e:
+                KivyLogger.warning(f"FileLogging: app_storage_path fehlgeschlagen: {e}")
+
+            # Fallback 3: getFilesDir() über Java API (zuverlässigste Methode)
+            try:
+                from jnius import autoclass
+                PythonActivity = autoclass('org.kivy.android.PythonActivity')
+                context = PythonActivity.mActivity
+                files_dir = context.getFilesDir().getAbsolutePath()
+                app_dir = os.path.join(files_dir, "SavageWorldsCharGen")
+                os.makedirs(app_dir, exist_ok=True)
+                KivyLogger.warning(f"FileLogging: Fallback auf getFilesDir: {app_dir}")
                 return app_dir
             except Exception as e:
                 KivyLogger.error(f"FileLogging: Alle Android-Speicher-Optionen fehlgeschlagen: {e}")
