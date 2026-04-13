@@ -56,14 +56,6 @@ class CharakterHistorie:
     def __init__(self):
         self.entries = []
         self.session_start = datetime.now()
-        self.total_kosten = {
-            'attribute': 0,
-            'fertigkeiten': 0,
-            'talente': 0,
-            'handicaps': 0,
-            'maechte': 0,
-            'aufstiege': 0
-        }
     
     def add_entry(self, entry_type: str, details: Dict[str, Any], rang: str = "") -> None:
         """
@@ -104,45 +96,6 @@ class CharakterHistorie:
             'details': details
         }
         self.entries.append(entry)
-        
-        # Kosten aktualisieren - korrekte Aufstiegs-Berechnung
-        if 'kosten' in details:
-            cost_type = details.get('kosten_typ', '')
-            kosten = details['kosten']
-            
-            if 'attribut' in entry_type.lower():
-                if 'aufstieg' in cost_type.lower():
-                    # 1 Aufstieg = 1 Attributsteigerung  
-                    self.total_kosten['aufstiege'] += kosten
-                else:
-                    self.total_kosten['attribute'] += kosten
-                    
-            elif 'fertigkeit' in entry_type.lower():
-                if 'aufstieg' in cost_type.lower():
-                    # Fertigkeiten: Normale = 0.5, über Attribut = 1 Aufstieg
-                    self.total_kosten['aufstiege'] += kosten  
-                else:
-                    self.total_kosten['fertigkeiten'] += kosten
-                    
-            elif 'talent' in entry_type.lower():
-                if 'aufstieg' in cost_type.lower():
-                    # 1 Aufstieg = 1 Talent
-                    self.total_kosten['aufstiege'] += kosten
-                else:
-                    self.total_kosten['talente'] += kosten
-                    
-            elif 'handicap' in entry_type.lower():
-                self.total_kosten['handicaps'] += details.get('punkte', 0)
-                
-            elif 'macht' in entry_type.lower():
-                if 'aufstieg' in cost_type.lower():
-                    # 1 Aufstieg = 1 Macht
-                    self.total_kosten['aufstiege'] += kosten
-                else:
-                    self.total_kosten['maechte'] += kosten
-                    
-            elif 'aufstieg' in entry_type.lower():
-                self.total_kosten['aufstiege'] += 1
     
     def get_formatted_log(self) -> str:
         """
@@ -233,13 +186,13 @@ class CharakterHistorie:
                 else:
                     log_lines.append(f"  [{timestamp}]{rang_text} {details}")
         
-        # Zeige Gesamtkosten und Statistiken
+        # Zeige Statistiken pro Pool (berechnet aus Entries)
         log_lines.append("")
         log_lines.append("=" * 80)
-        log_lines.append("GESAMTKOSTEN:")
+        log_lines.append("STATISTIK:")
         log_lines.append("-" * 40)
-        
-        # Zähle Steigerungen
+
+        # Zähle Steigerungen (nur exakte Typen, keine Substring-Matches)
         attribut_steigerungen = len([e for e in self.entries if e['type'] == 'attribut_steigerung'])
         fertigkeits_steigerungen = len([e for e in self.entries if e['type'] == 'fertigkeit_steigerung'])
         talente_hinzugefuegt = len([e for e in self.entries if e['type'] == 'talent_hinzugefuegt'])
@@ -248,28 +201,50 @@ class CharakterHistorie:
         handicaps_entfernt = len([e for e in self.entries if e['type'] == 'handicap_entfernt'])
         maechte_hinzugefuegt = len([e for e in self.entries if e['type'] == 'macht_hinzugefuegt'])
         maechte_entfernt = len([e for e in self.entries if e['type'] == 'macht_entfernt'])
-        
-        # Berechne Handicap-Punkte korrekt
+
+        # Berechne Punkte pro Pool aus Entries (nicht aus total_kosten)
+        # Attributpunkte: nur Chargen-Attributsteigerungen (nicht Aufstiege/Handicap)
+        attr_punkte = sum(e['details'].get('kosten', 0) for e in self.entries
+                         if e['type'] == 'attribut_steigerung'
+                         and 'aufstieg' not in e['details'].get('kosten_typ', '').lower()
+                         and 'handicap' not in e['details'].get('kosten_typ', '').lower())
+
+        # Fertigkeitspunkte: nur Chargen-Fertigkeitssteigerungen
+        fert_punkte = sum(e['details'].get('kosten', 0) for e in self.entries
+                         if e['type'] == 'fertigkeit_steigerung'
+                         and 'aufstieg' not in e['details'].get('kosten_typ', '').lower()
+                         and 'handicap' not in e['details'].get('kosten_typ', '').lower())
+
+        # Talentpunkte: nur Chargen-Talente (nicht Aufstiege/Handicap)
+        talent_punkte = sum(e['details'].get('kosten', 0) for e in self.entries
+                           if e['type'] == 'talent_hinzugefuegt'
+                           and 'aufstieg' not in e['details'].get('kosten_typ', '').lower()
+                           and 'handicap' not in e['details'].get('kosten_typ', '').lower())
+
+        # Handicap-Punkte: erhalten vs. verwendet
         handicap_punkte_erhalten = sum(e['details'].get('punkte', 0) for e in self.entries if e['type'] == 'handicap_hinzugefuegt')
         handicap_punkte_entfernt = sum(e['details'].get('punkte', 0) for e in self.entries if e['type'] == 'handicap_entfernt')
-        
-        # Berechne verwendete Punkte korrekt für Savage Worlds Regeln
-        handicap_punkte_fuer_attribute = sum(2 for e in self.entries 
+
+        handicap_punkte_fuer_attribute = sum(2 for e in self.entries
                                            if e['type'] == 'attribut_steigerung' and 'handicap' in e['details'].get('kosten_typ', '').lower())
-        handicap_punkte_fuer_fertigkeiten = sum(e['details'].get('kosten', 0) for e in self.entries 
+        handicap_punkte_fuer_fertigkeiten = sum(e['details'].get('kosten', 0) for e in self.entries
                                                if e['type'] == 'fertigkeit_steigerung' and 'handicap' in e['details'].get('kosten_typ', '').lower())
-        handicap_punkte_fuer_talente = sum(2 for e in self.entries 
+        handicap_punkte_fuer_talente = sum(2 for e in self.entries
                                          if e['type'] == 'talent_hinzugefuegt' and 'handicap' in e['details'].get('kosten_typ', '').lower())
-        
+
         handicap_punkte_verwendet = handicap_punkte_fuer_attribute + handicap_punkte_fuer_fertigkeiten + handicap_punkte_fuer_talente
         handicap_punkte_verfuegbar = handicap_punkte_erhalten - handicap_punkte_entfernt - handicap_punkte_verwendet
-        
-        log_lines.append(f"  Attribute:     {self.total_kosten['attribute']} Punkte ({attribut_steigerungen} Steigerungen)")
-        log_lines.append(f"  Fertigkeiten:  {self.total_kosten['fertigkeiten']} Punkte ({fertigkeits_steigerungen} Steigerungen)")
-        log_lines.append(f"  Talente:       {self.total_kosten['talente']} Punkte ({talente_hinzugefuegt} hinzugefügt, {talente_entfernt} entfernt)")
+
+        # Aufstiege: alle Steigerungen die via Aufstieg bezahlt wurden
+        aufstiege_verwendet = sum(e['details'].get('kosten', 0) for e in self.entries
+                                 if 'aufstieg' in e['details'].get('kosten_typ', '').lower())
+
+        log_lines.append(f"  Attribute:     {attr_punkte} Punkte ({attribut_steigerungen} Steigerungen)")
+        log_lines.append(f"  Fertigkeiten:  {fert_punkte} Punkte ({fertigkeits_steigerungen} Steigerungen)")
+        log_lines.append(f"  Talente:       {talent_punkte} Punkte ({talente_hinzugefuegt} hinzugefügt, {talente_entfernt} entfernt)")
         log_lines.append(f"  Handicaps:     +{handicap_punkte_erhalten} erhalten, {handicap_punkte_verwendet} verwendet, {handicap_punkte_verfuegbar} verfügbar ({handicaps_hinzugefuegt} hinzugefügt, {handicaps_entfernt} entfernt)")
-        log_lines.append(f"  Mächte:        {self.total_kosten['maechte']} Punkte ({maechte_hinzugefuegt} hinzugefügt, {maechte_entfernt} entfernt)")
-        log_lines.append(f"  Aufstiege:     {self.total_kosten['aufstiege']} verwendet")
+        log_lines.append(f"  Mächte:        {maechte_hinzugefuegt} hinzugefügt, {maechte_entfernt} entfernt")
+        log_lines.append(f"  Aufstiege:     {aufstiege_verwendet} verwendet")
         log_lines.append("=" * 80)
         
         return "\n".join(log_lines)
@@ -310,15 +285,13 @@ class CharakterHistorie:
         """Konvertiert die Historie zu einem Dictionary."""
         return {
             'session_start': self.session_start.isoformat(),
-            'entries': self.entries,
-            'total_kosten': self.total_kosten
+            'entries': self.entries
         }
-    
+
     def from_dict(self, data: Dict) -> None:
         """Lädt die Historie aus einem Dictionary."""
         self.session_start = datetime.fromisoformat(data['session_start'])
-        self.entries = data['entries']
-        self.total_kosten = data['total_kosten']
+        self.entries = data.get('entries', [])
 
 
 class HistorieWidget(MDBoxLayout):
@@ -749,12 +722,13 @@ class HistorieWidget(MDBoxLayout):
             # Log-Text aktualisieren
             self.log_display.text = self.historie.get_formatted_log()
 
-            # Statistik aktualisieren
+            # Statistik aktualisieren (exakte Typ-Matches)
             stats_text = []
-            stats_text.append(f"Attribute gesteigert: {len([e for e in self.historie.entries if 'attribut' in e['type']])} mal")
-            stats_text.append(f"Fertigkeiten gesteigert: {len([e for e in self.historie.entries if 'fertigkeit' in e['type']])} mal")
-            stats_text.append(f"Talente erworben: {len([e for e in self.historie.entries if 'talent' in e['type']])}")
-            stats_text.append(f"Gesamtkosten: {sum(self.historie.total_kosten.values())} Punkte")
+            stats_text.append(f"Attribute gesteigert: {len([e for e in self.historie.entries if e['type'] == 'attribut_steigerung'])} mal")
+            stats_text.append(f"Fertigkeiten gesteigert: {len([e for e in self.historie.entries if e['type'] == 'fertigkeit_steigerung'])} mal")
+            talente_add = len([e for e in self.historie.entries if e['type'] == 'talent_hinzugefuegt'])
+            talente_del = len([e for e in self.historie.entries if e['type'] == 'talent_entfernt'])
+            stats_text.append(f"Talente: {talente_add} erworben, {talente_del} entfernt")
 
             self.stats_text.text = "\n".join(stats_text)
 
