@@ -1502,19 +1502,7 @@ class SW_Charakter_GeneratorApp(MDApp):
             )
             grid.bind(minimum_height=grid.setter('height'))
 
-            # Superkräfte-Sichtbarkeit prüfen
-            sk_visible = True
-            try:
-                from functions.superkraft_funktionen import ist_superkraefte_setting
-                setting = getattr(self.controller.charakter, 'active_setting_name', '')
-                sk_visible = ist_superkraefte_setting(setting)
-            except Exception:
-                pass
-
             for i, (icon_str, tab_text, _) in enumerate(self.tab_definitions):
-                # Superkräfte ausblenden wenn nicht aktiv
-                if tab_text == "Superkräfte" and not sk_visible:
-                    continue
 
                 grid_item = MDBoxLayout(
                     orientation='vertical',
