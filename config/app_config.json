@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "SWAE",
-  "force_mobile_layout": true,
+  "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-12T21:30:16.289636"
+  "last_updated": "2026-04-13T17:53:30.565991"
 }
