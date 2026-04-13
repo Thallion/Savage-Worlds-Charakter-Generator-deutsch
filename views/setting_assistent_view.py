@@ -1290,6 +1290,28 @@ class SettingAssistentWizard:
                 self.draft.description
             )
             self.draft.setting_data = merged_data.setting_data
+        elif self.draft.mode == "extract":
+            # Live-Daten des Charakters verwenden (inkl. aller Anpassungen)
+            from kivymd.app import MDApp
+            import copy
+            app = MDApp.get_running_app()
+            charakter = app.controller.charakter
+            if hasattr(charakter, 'custom_element_manager') and charakter.custom_element_manager and charakter.custom_element_manager.active_setting:
+                # Deep-Copy der Live-Setting-Daten (enthält Basis + Anpassungen)
+                setting_data = copy.deepcopy(charakter.custom_element_manager.active_setting)
+                # fertigkeiten aus fertigkeiten_daten ableiten falls nötig
+                if "fertigkeiten_daten" in setting_data and "fertigkeiten" not in setting_data:
+                    setting_data["fertigkeiten"] = dict(setting_data["fertigkeiten_daten"])
+                self.draft.setting_data = setting_data
+            else:
+                # Fallback: Setting von Datei laden
+                active_setting = charakter.active_setting_name or "SWAE"
+                extract_data = create_template_draft(
+                    self.draft.name,
+                    active_setting,
+                    self.draft.description
+                )
+                self.draft.setting_data = extract_data.setting_data
     
     def _previous_step(self, *args):
         if not self._nav_debounce_check():
