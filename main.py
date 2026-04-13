@@ -1307,7 +1307,9 @@ class SW_Charakter_GeneratorApp(MDApp):
 
                 item.add_widget(icon)
                 item.add_widget(label)
-                item.bind(on_touch_up=self._on_bottom_nav_touch)
+                # on_touch_down statt on_touch_up: Bottom-Bar liegt NICHT in einem
+                # ScrollView, daher ist sofortige Reaktion möglich und zuverlässiger.
+                item.bind(on_touch_down=self._on_bottom_nav_touch)
 
                 bottom_nav_box.add_widget(item)
                 self._bottom_nav_items.append(item)
@@ -1342,7 +1344,7 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             mehr_item.add_widget(mehr_icon)
             mehr_item.add_widget(mehr_label)
-            mehr_item.bind(on_touch_up=self._on_bottom_nav_touch)
+            mehr_item.bind(on_touch_down=self._on_bottom_nav_touch)
 
             bottom_nav_box.add_widget(mehr_item)
             self._bottom_nav_items.append(mehr_item)
@@ -1361,10 +1363,10 @@ class SW_Charakter_GeneratorApp(MDApp):
         if hasattr(touch, 'is_mouse_scrolling') and touch.is_mouse_scrolling:
             return False
 
-        # Debounce
+        # Debounce: 500ms (Android-Standard, verhindert Doppel-Taps)
         import time as _time
         now = _time.time()
-        if now - self._last_rail_touch_time < 0.3:
+        if now - self._last_rail_touch_time < 0.5:
             return True
         self._last_rail_touch_time = now
 
@@ -1667,7 +1669,9 @@ class SW_Charakter_GeneratorApp(MDApp):
         Scroll-Gesten verarbeiten kann (Android-Kompatibilität).
         """
         if not item.collide_point(*touch.pos):
-            return False
+            # Lenienter Fallback: Startposition prüfen (Android-Fingerdrift beim Loslassen)
+            if not item.collide_point(*touch.opos):
+                return False
 
         # Scroll-Gesten ignorieren (nur Taps verarbeiten)
         if hasattr(touch, 'is_mouse_scrolling') and touch.is_mouse_scrolling:
@@ -1675,10 +1679,10 @@ class SW_Charakter_GeneratorApp(MDApp):
         if touch.grab_current is not None and touch.grab_current is not item:
             return False
 
-        # Debounce: Doppelte Touch-Events innerhalb 300ms ignorieren
+        # Debounce: Doppelte Touch-Events innerhalb 500ms ignorieren
         import time as _time
         now = _time.time()
-        if now - self._last_rail_touch_time < 0.3:
+        if now - self._last_rail_touch_time < 0.5:
             return True
         self._last_rail_touch_time = now
 
@@ -1830,7 +1834,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                     bottom_bar.opacity = 0
 
                 # Tabs zeigen
-                tabs_container.height = dp(60)
+                tabs_container.height = dp(64)
                 tabs_container.opacity = 1
 
                 # Content-Padding wiederherstellen
@@ -1932,8 +1936,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 nav_rail_container.opacity = 0
                 self._nav_rail_visible = False
                 if bottom_bar:
-                    # Höhe = Inhalt (56dp) + Platz für System-Navigationsleiste
-                    bottom_bar.height = dp(56) + self._android_bottom_padding
+                    # Höhe = Inhalt (64dp) + Platz für System-Navigationsleiste
+                    # 64dp statt 56dp für bessere Touch-Zielfläche auf Android
+                    bottom_bar.height = dp(64) + self._android_bottom_padding
                     bottom_bar.padding = [0, dp(4), 0, self._android_bottom_padding]
                     bottom_bar.opacity = 1
                 if pointbar:
