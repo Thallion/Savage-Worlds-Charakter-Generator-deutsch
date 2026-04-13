@@ -369,6 +369,87 @@ class TalentDialogHandler:
             on_confirm=self._confirm_delete_talent
         )
 
+    def _confirm_delete_talent(self):
+        """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
+        if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:
+            return
+
+        selected = self._pending_delete_items
+        self._pending_delete_items = None
+
+        try:
+            app = App.get_running_app()
+            charakter = app.controller.charakter
+
+            for talent_name in selected:
+                charakter.remove_talent(talent_name)
+                Logger.info(f"Talent '{talent_name}' wurde gelöscht.")
+
+            if hasattr(app, 'einstellungen_widget'):
+                app.einstellungen_widget.aktualisiere_ui()
+            self._refresh_eigenschaften_widget()
+            self._show_success_snackbar(f"{len(selected)} Talent(e) gelöscht")
+
+            Logger.info(f"{len(selected)} Talent(e) wurde(n) gelöscht.")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Löschen der Talente: {e}")
+            self.show_error("Fehler beim Löschen der Talente")
+
+    def _show_delete_confirmation_popup(self, selected_items, item_type, on_confirm):
+        """Zeigt separates Bestätigungs-Popup OHNE Checkboxen (Two-Phase Pattern)."""
+        from kivymd.uix.scrollview import MDScrollView
+        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivy.metrics import dp
+
+        content = MDList(size_hint_y=None)
+        content.bind(minimum_height=content.setter('height'))
+
+        for item_name in selected_items:
+            list_item = MDListItem(size_hint_y=None, height=dp(48))
+            list_item.add_widget(MDListItemSupportingText(text=item_name))
+            content.add_widget(list_item)
+
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll.add_widget(content)
+
+        list_height = min(dp(48) * len(selected_items), dp(200))
+        content.size_hint_y = None
+        content.height = list_height
+
+        main_content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            height=dp(80) + list_height,
+            padding=dp(16)
+        )
+        main_content.add_widget(scroll)
+
+        self._delete_confirm_popup = MDDialog(
+            MDDialogHeadlineText(text=f"{item_type} löschen?"),
+            MDDialogContentContainer(main_content),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self._delete_confirm_popup.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Löschen"),
+                    style="filled",
+                    on_release=lambda x: (
+                        self._delete_confirm_popup.dismiss(),
+                        on_confirm()
+                    )
+                ),
+            ),
+            size_hint=(0.85, None),
+        )
+        self._delete_confirm_popup.open()
+
     def save_talent(self, *args):
         """Speichert ein neues Talent"""
         if not self.dialog_content:
@@ -458,107 +539,6 @@ class TalentDialogHandler:
             Logger.error(f"Fehler beim Löschen der Talente: {e}")
             self.show_error("Fehler beim Löschen der Talente")
 
-    def _on_delete_action_clicked(self, *args):
-        """Phase 1: Zeigt Bestätigungs-Popup vor dem Löschen (Two-Phase Pattern)"""
-        if not self.dialog_content:
-            return
-
-        selected = self.dialog_content.get_selected_items()
-        if not selected:
-            self.show_error("Bitte wähle mindestens ein Talent zum Löschen aus.")
-            return
-
-        self._pending_delete_items = selected
-        self._show_delete_confirmation_popup(
-            selected_items=selected,
-            item_type="Talent",
-            on_confirm=self._confirm_delete_talent
-        )
-
-    def _confirm_delete_talent(self):
-        """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
-        if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:
-            return
-
-        selected = self._pending_delete_items
-        self._pending_delete_items = None
-
-        try:
-            app = App.get_running_app()
-            charakter = app.controller.charakter
-
-            for talent_name in selected:
-                charakter.remove_talent(talent_name)
-                Logger.info(f"Talent '{talent_name}' wurde gelöscht.")
-
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
-            self._refresh_eigenschaften_widget()
-            self._show_success_snackbar(f"{len(selected)} Talent(e) gelöscht")
-
-            Logger.info(f"{len(selected)} Talent(e) wurde(n) gelöscht.")
-            self.dismiss_dialog()
-
-        except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Talente: {e}")
-            self.show_error("Fehler beim Löschen der Talente")
-
-    def _show_delete_confirmation_popup(self, selected_items, item_type, on_confirm):
-        """Zeigt separates Bestätigungs-Popup OHNE Checkboxen (Two-Phase Pattern).
-        
-        Verwendet das gleiche Pattern wie HTML-Export in html_manager.py.
-        """
-        from kivymd.uix.scrollview import MDScrollView
-        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText
-        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
-        from kivymd.uix.button import MDButton, MDButtonText
-        from kivy.metrics import dp
-
-        content = MDList(size_hint_y=None)
-        content.bind(minimum_height=content.setter('height'))
-
-        for item_name in selected_items:
-            list_item = MDListItem(size_hint_y=None, height=dp(48))
-            list_item.add_widget(MDListItemSupportingText(text=item_name))
-            content.add_widget(list_item)
-
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
-        scroll.add_widget(content)
-
-        list_height = min(dp(48) * len(selected_items), dp(200))
-        content.size_hint_y = None
-        content.height = list_height
-
-        main_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(8),
-            size_hint_y=None,
-            height=dp(80) + list_height,
-            padding=dp(16)
-        )
-        main_content.add_widget(scroll)
-
-        self._delete_confirm_popup = MDDialog(
-            MDDialogHeadlineText(text=f"{item_type} löschen?"),
-            MDDialogContentContainer(main_content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self._delete_confirm_popup.dismiss()
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="filled",
-                    on_release=lambda x: (
-                        self._delete_confirm_popup.dismiss(),
-                        on_confirm()
-                    )
-                ),
-            ),
-            size_hint=(0.85, None),
-        )
-        self._delete_confirm_popup.open()
 
     def on_talent_select(self, talent_name):
         """Callback wenn ein Talent im Dropdown ausgewählt wurde"""
