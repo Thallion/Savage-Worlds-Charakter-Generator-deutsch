@@ -402,12 +402,24 @@ class EinstellungenWidget(MDBoxLayout):
 
             if not hasattr(self.app, 'log_filepath') or not self.app.log_filepath:
                 Logger.warning("Keine Log-Datei verfügbar")
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_warning_dialog(
+                        "Keine Log-Datei verfügbar.\nDas File-Logging konnte nicht initialisiert werden."
+                    )
                 return
 
             log_filepath = self.app.log_filepath
 
             if not os.path.exists(log_filepath):
                 Logger.warning(f"Log-Datei nicht gefunden: {log_filepath}")
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    dialog_service.show_warning_dialog(
+                        f"Log-Datei nicht gefunden:\n{log_filepath}"
+                    )
                 return
 
             from kivy.utils import platform
