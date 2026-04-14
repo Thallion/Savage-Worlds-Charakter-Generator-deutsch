@@ -89,6 +89,7 @@
 MDScreen:
     # Wir packen alles in eine einzige vertikale MDBoxLayout-Struktur
     MDBoxLayout:
+        id: outer_box
         orientation: 'vertical'
         md_bg_color: app.theme_cls.backgroundColor
 
@@ -103,6 +104,27 @@ MDScreen:
             MDTabsPrimary:
                 id: tabs_bar
                 # In "on_start" füllen wir hier MDTabsItem rein.
+
+        # ----------------- (1.5) POINTBAR + WIZARD BAR -----------------
+        # Direkt im äußeren Layout für zuverlässiges Touch-Handling
+        # auf Android (kürzerer Touch-Dispatch-Pfad).
+        MDBoxLayout:
+            id: pointbar_container
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            md_bg_color: app.theme_cls.backgroundColor
+
+            GenerationPointsBar:
+                id: generation_points
+                charakter: app.controller.charakter
+
+            # WIZARD BAR (wird bei Bedarf eingeblendet)
+            WizardBar:
+                id: wizard_bar
+                opacity: 0
+                height: 0
+                wizard_service: app.wizard_service
 
         # ----------------- (2) HORIZONTALES LAYOUT: NAV-RAIL + CONTENT -----------------
         MDBoxLayout:
@@ -152,28 +174,10 @@ MDScreen:
                         spacing: dp(4)
                         padding: [0, dp(8), 0, dp(8)]
 
-            # Hauptinhalt (Pointbar + ScreenManager + Logger)
+            # Hauptinhalt (ScreenManager + Logger)
             MDBoxLayout:
                 orientation: 'vertical'
                 id: main_content_area
-
-                # ----------------- POINTBAR -------------------
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    size_hint_y: None
-                    height: self.minimum_height
-                    md_bg_color: app.theme_cls.backgroundColor
-
-                    GenerationPointsBar:
-                        id: generation_points
-                        charakter: app.controller.charakter
-
-                    # ----------------- WIZARD BAR (wird bei Bedarf eingeblendet) -------------------
-                    WizardBar:
-                        id: wizard_bar
-                        opacity: 0
-                        height: 0
-                        wizard_service: app.wizard_service
 
                 # ----------------- TAB-INHALT (CAROUSEL) -------------------
                 MDBoxLayout:
