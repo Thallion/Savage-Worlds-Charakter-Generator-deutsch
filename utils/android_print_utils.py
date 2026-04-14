@@ -11,6 +11,12 @@ import time
 from kivy.logger import Logger
 from kivy.utils import platform as kivy_platform
 
+# Modul-globale Referenzen, damit Python die PythonJavaClass-Instanzen und
+# WebViews während des asynchronen Android-Druckvorgangs nicht per GC entsorgt.
+# Ohne diese Referenzen können Java-Callbacks auf freigegebene Python-Objekte
+# zugreifen und abstürzen.
+_active_print_refs = []
+
 
 def is_android():
     """Prüft ob die App auf Android läuft."""
@@ -75,30 +81,35 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
     """
     Führt die HTML-zu-PDF Konvertierung asynchron durch.
     Nutzt einen einfachen WebView mit PrintDocumentAdapter.
+
+    WICHTIG: WebView, PrintManager und createPrintDocumentAdapter dürfen NUR
+    auf dem Android-UI-Thread (der einen vorbereiteten Looper hat) erzeugt und
+    aufgerufen werden. Aufrufe von einem normalen Python-`threading.Thread`
+    führen zu einer JVM-Exception:
+        "Attempt to read from field 'android.os.MessageQueue
+         android.os.Looper.mQueue' on a null object reference ..."
+    Deshalb planen wir alle Android-Aufrufe via ``Activity.runOnUiThread`` ein.
     """
     try:
-        from jnius import autoclass, cast, PythonJavaClass, java_method
+        from jnius import autoclass, PythonJavaClass, java_method
 
         WebView = autoclass('android.webkit.WebView')
-        WebSettings = autoclass('android.webkit.WebSettings')
         PrintAttributes = autoclass('android.print.PrintAttributes$Builder')
-        PrintManager = autoclass('android.print.PrintManager')
-        Environment = autoclass('android.os.Environment')
-        File = autoclass('java.io.File')
-        FileOutputStream = autoclass('java.io.FileOutputStream')
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
 
-        result_container = {'pdf_path': None, 'error': None}
+        activity = PythonActivity.mActivity
 
         class AsyncPrintHelper(PythonJavaClass):
             __javainterfaces__ = ['android/webkit/WebViewClient']
 
-            def __init__(self, context, print_manager, html_path, pdf_name, callback):
+            def __init__(self, context, print_manager, html_path, pdf_name):
                 super().__init__()
                 self.context = context
                 self.print_manager = print_manager
                 self.html_path = html_path
                 self.pdf_name = pdf_name
-                self.callback = callback
+                self.web_view = None
+                self._print_started = False
 
             @java_method('(Landroid/webkit/WebView;Ljava/lang/String;Landroid/graphics/Bitmap;)V')
             def onPageStarted(self, view, url, favicon):
@@ -106,15 +117,20 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
 
             @java_method('(Landroid/webkit/WebView;Ljava/lang/String;)V')
             def onPageFinished(self, view, url):
-                threading.Thread(target=self._delayed_print, daemon=True).start()
-
-            def _delayed_print(self):
-                time.sleep(1.0)
+                # onPageFinished wird vom WebView bereits auf dem UI-Thread
+                # aufgerufen. Wir starten den Druck aber leicht verzögert,
+                # damit Rendering und Layout vollständig sind.
+                if self._print_started:
+                    return
+                self._print_started = True
                 try:
-                    self.web_view.post(lambda: self._do_print())
+                    DoPrintRunnable = _make_runnable(self._do_print)
+                    # 400 ms Verzögerung auf dem UI-Thread über postDelayed.
+                    view.postDelayed(DoPrintRunnable, 400)
+                    # Referenz behalten, damit das Runnable nicht vor Ausführung GC'd wird.
+                    self._pending_runnable = DoPrintRunnable
                 except Exception as e:
-                    Logger.error(f"Android Print: Print-Fehler: {e}")
-                    self.callback(None, str(e))
+                    Logger.error(f"Android Print: Print-Scheduling-Fehler: {e}")
 
             def _do_print(self):
                 try:
@@ -136,9 +152,13 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
             @java_method('(Landroid/webkit/WebView;Ljava/lang/String;)V')
             def onReceivedError(self, view, error):
                 Logger.error(f"Android Print: WebView Fehler: {error}")
-                self.callback(None, str(error))
 
-        def run_in_thread():
+        helper = AsyncPrintHelper(context, print_manager, html_path, pdf_name)
+        # Modul-globale Referenz, damit Java-Callbacks nicht in freigegebenen
+        # Python-Speicher laufen.
+        _active_print_refs.append(helper)
+
+        def _setup_on_ui_thread():
             try:
                 web_view = WebView(context)
                 settings = web_view.getSettings()
@@ -146,30 +166,59 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
                 settings.setAllowFileAccess(True)
                 settings.setDomStorageEnabled(True)
 
-                web_view.getSettings().setPluginState(
-                    autoclass('android.webkit.WebSettings$PluginState').ON)
-
-                abs_path = os.path.abspath(html_path)
-                file_url = f"file://{abs_path}"
-
-                helper = AsyncPrintHelper(context, print_manager, html_path, pdf_name,
-                                         lambda path, err: None)
                 helper.web_view = web_view
                 web_view.setWebViewClient(helper)
 
+                abs_path = os.path.abspath(html_path)
+                file_url = f"file://{abs_path}"
                 web_view.loadUrl(file_url)
 
+                Logger.info(
+                    "Android Print: WebView auf UI-Thread erstellt, lade HTML"
+                )
             except Exception as e:
-                Logger.error(f"Android Print: Thread Fehler: {e}")
+                Logger.error(f"Android Print: UI-Thread Setup-Fehler: {e}")
+                try:
+                    _active_print_refs.remove(helper)
+                except ValueError:
+                    pass
 
-        threading.Thread(target=run_in_thread, daemon=True).start()
-        Logger.info("Android Print: WebView gestartet, Druckdialog sollte erscheinen")
+        setup_runnable = _make_runnable(_setup_on_ui_thread)
+        # Referenz behalten, bis runOnUiThread es ausgeführt hat.
+        helper._setup_runnable = setup_runnable
+        activity.runOnUiThread(setup_runnable)
+
+        Logger.info("Android Print: Setup auf UI-Thread eingeplant")
 
         return pdf_name
 
     except Exception as e:
         Logger.error(f"Android Print: Async Fehler: {e}")
         return None
+
+
+def _make_runnable(py_callable):
+    """
+    Erzeugt ein java.lang.Runnable, das ein Python-Callable ausführt.
+    Fängt Fehler ab, damit sie nicht in die JVM propagieren.
+    """
+    from jnius import PythonJavaClass, java_method
+
+    class _PyRunnable(PythonJavaClass):
+        __javainterfaces__ = ['java/lang/Runnable']
+
+        def __init__(self, func):
+            super().__init__()
+            self._func = func
+
+        @java_method('()V')
+        def run(self):
+            try:
+                self._func()
+            except Exception as exc:
+                Logger.error(f"Android Print: Runnable-Fehler: {exc}")
+
+    return _PyRunnable(py_callable)
 
 
 def save_html_to_pdf_direct(html_path, pdf_name=None):
