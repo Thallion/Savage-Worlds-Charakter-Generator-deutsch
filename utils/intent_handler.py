@@ -185,10 +185,19 @@ def _import_from_uri(app, uri):
         uri: Android Uri-Objekt
     """
     try:
-        from jnius import autoclass
+        from jnius import autoclass, cast
 
         PythonActivity = autoclass('org.kivy.android.PythonActivity')
         context = PythonActivity.mActivity
+
+        # URI zu android.net.Uri casten. getParcelableExtra() liefert Parcelable,
+        # aber openFileDescriptor/openInputStream erwarten android.net.Uri.
+        # Ohne Cast: "Invalid instance of 'android/os/Parcelable' passed for a 'android/net/Uri'"
+        try:
+            Uri = autoclass('android.net.Uri')
+            uri = cast(Uri, uri)
+        except Exception as e:
+            Logger.warning(f"IntentHandler: URI-Cast fehlgeschlagen: {e}")
 
         # Dateiname aus URI ermitteln
         filename = _get_filename_from_uri(context, uri)
