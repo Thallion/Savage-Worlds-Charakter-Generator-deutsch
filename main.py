@@ -1797,34 +1797,24 @@ class SW_Charakter_GeneratorApp(MDApp):
                 # Content-Padding reduzieren
                 tab_content_box.padding = [dp(4), 0, dp(4), dp(4)]
 
-                # Pointbar auf Smartphone weiter runter (Statusbar/Notch-Abstand)
+                # Android: Top-Padding auf äußerstes Layout für Statusbar/Notch
                 from kivy.utils import platform as _platform
                 if _platform == 'android':
-                    main_content_area = root.ids.get('main_content_area')
-                    if main_content_area:
-                        main_content_area.padding = [0, self._android_top_padding, 0, 0]
+                    outer_box = root.ids.get('outer_box')
+                    if outer_box:
+                        outer_box.padding = [0, self._android_top_padding, 0, 0]
 
                     # Swipe nur auf Android aktivieren
                     if screen_manager and hasattr(screen_manager, 'swipe_enabled'):
                         screen_manager.swipe_enabled = True
 
                 # Orientierung bestimmt ob Rail oder Bottom-Bar
-                # (NACH Padding-Änderungen, damit das Layout korrekt berechnet wird)
                 self._update_mobile_orientation()
 
                 # Aktive Items hervorheben
                 if current_index < len(self.rail_items):
                     self._set_active_rail_item(current_index)
                 self._set_active_bottom_nav_item(current_index)
-
-                # Android: Pointbar-Layout erzwingen — die initiale Layout-Kette
-                # propagiert Widget-Positionen nicht vollständig, weil
-                # is_expanded=True (Default) von _update_mobile_orientation nicht
-                # geändert wird. Durch ein verzögertes Toggle wird die Neuberechnung
-                # aller KV-Bindings (content_box height, minimum_height-Kette)
-                # erzwungen — dasselbe, was bei einer Orientierungsänderung passiert.
-                if _platform == 'android':
-                    Clock.schedule_once(self._force_android_pointbar_layout, 0.3)
 
                 Logger.info("Mobile Navigation aktiviert")
             else:
@@ -1973,31 +1963,6 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         except Exception as e:
             Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")
-
-    def _force_android_pointbar_layout(self, dt):
-        """Erzwingt ein vollständiges Relayout der Pointbar auf Android.
-
-        Workaround: Beim App-Start ist is_expanded=True (Default) und
-        _update_mobile_orientation setzt es erneut auf True — kein Change-Event,
-        KV-Bindings für content_box.height und die minimum_height-Kette werden
-        nicht neu berechnet.  Durch ein kurzes Toggle (False → True) wird
-        dasselbe Relayout ausgelöst wie bei einer Orientierungsänderung.
-        """
-        try:
-            root = self.root
-            if not root:
-                return
-            pointbar = root.ids.get('generation_points')
-            if not pointbar:
-                return
-
-            # is_expanded kurz auf False setzen → KV-Bindings feuern
-            pointbar.is_expanded = False
-            # Im nächsten Frame zurück auf True → zweites Relayout
-            Clock.schedule_once(lambda dt: setattr(pointbar, 'is_expanded', True), 0)
-            Logger.debug("Android: Pointbar-Layout-Fix angewendet")
-        except Exception as e:
-            Logger.error(f"Fehler beim Pointbar-Layout-Fix: {e}")
 
     def set_screen_orientation(self, orientation='auto', locked=False):
         """Setzt die Bildschirm-Orientierung auf Android.
