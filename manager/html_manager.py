@@ -7,6 +7,7 @@ Kapselt alle HTML-bezogenen Funktionalitäten (analog zu PDFManager)
 import webbrowser
 import time
 from kivy.logger import Logger
+from kivy.clock import Clock
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
@@ -297,15 +298,50 @@ class HTMLManager:
         )
         self.html_options_dialog.open()
 
+    def _close_html_options_dialog(self, clear_ref=True):
+        """Schließt den HTML-Speicher-Dialog robust.
+
+        Auf Android kann der Dialog in einem inkonsistenten Zustand hängen
+        bleiben, wenn direkt nach dem dismiss() ein neuer Dialog geöffnet
+        wird. Diese Methode ruft dismiss() auf und plant zusätzlich einen
+        verzögerten zweiten Versuch, falls der erste dismiss() durch die
+        Animation noch nicht wirksam war.
+
+        Args:
+            clear_ref (bool): Referenz nach dem Schließen auf None setzen.
+                              Muss False sein, wenn der Dialog noch sichtbar
+                              sein könnte (z. B. beim Abbrechen), damit ein
+                              erneuter Schließen-Versuch möglich bleibt.
+        """
+        dialog = self.html_options_dialog
+        if not dialog:
+            return
+
+        def _do_dismiss(*_):
+            try:
+                dialog.dismiss()
+            except Exception as e:
+                Logger.warning(f"Fehler beim Schließen des HTML-Dialogs: {e}")
+
+        _do_dismiss()
+        # Zweiter Versuch verzögert, falls der erste nicht gegriffen hat
+        # (z. B. wegen Timing-Problemen der Dismiss-Animation auf Android).
+        Clock.schedule_once(_do_dismiss, 0.15)
+
+        if clear_ref:
+            # Referenz erst nach den Dismiss-Versuchen löschen.
+            Clock.schedule_once(lambda dt: setattr(self, 'html_options_dialog', None), 0.3)
+
     def _dismiss_save_dialog(self):
-        """Schließt den Speicher-Dialog sicher"""
-        if self.html_options_dialog:
-            self.html_options_dialog.dismiss()
+        """Schließt den Speicher-Dialog sicher (Abbrechen-Button)."""
+        # Referenz NICHT sofort löschen, damit bei Bedarf weitere Dismiss-
+        # Versuche möglich sind, falls der erste nicht gegriffen hat.
+        self._close_html_options_dialog(clear_ref=False)
 
     def _create_html_at_path(self, html_path, close_dialog=False):
         """Erstellt HTML am angegebenen Pfad und öffnet sie im Browser"""
-        if close_dialog and self.html_options_dialog:
-            self.html_options_dialog.dismiss()
+        if close_dialog:
+            self._close_html_options_dialog()
 
         if self.html_service and self.dialog_service:
             is_printer_friendly = self.temp_printer_friendly
@@ -314,6 +350,10 @@ class HTMLManager:
             success = self.html_service.create_character_html(html_path, is_printer_friendly, show_steigerungen)
 
             if success:
+                # Falls der Dialog noch offen ist (z. B. weil dismiss nicht
+                # zuverlässig gegriffen hat), nun sicher schließen.
+                self._close_html_options_dialog()
+
                 # HTML im Browser öffnen
                 self._open_in_browser(html_path)
 
@@ -324,18 +364,29 @@ class HTMLManager:
                 self.dialog_service.show_error_dialog("Fehler beim Erstellen der HTML-Datei.")
 
     def _start_new_html_creation(self):
-        """Startet den Prozess für neue HTML-Erstellung"""
-        if self.html_options_dialog:
-            self.html_options_dialog.dismiss()
+        """Startet den Prozess für neue HTML-Erstellung.
+
+        Der aktuelle Dialog wird zuerst geschlossen, dann wird der
+        Eingabe-Dialog verzögert geöffnet, damit die Dismiss-Animation
+        auf Android abgeschlossen werden kann (ansonsten kann der alte
+        Dialog als "Geister-Modal" hängen bleiben und z. B. den Abbrechen-
+        Button unbrauchbar machen).
+        """
+        self._close_html_options_dialog()
 
         if self.dialog_service and self.html_service:
             default_name = self.html_service.get_default_html_name()
 
-            self.dialog_service.show_input_dialog(
-                "Dateiname für neue HTML:",
-                "Als neue HTML speichern",
-                default_name,
-                self._on_html_filename_entered
+            # Nächsten Dialog verzögert öffnen, damit der vorherige Dialog
+            # sicher geschlossen ist (wichtig für Android-Touch-Handling).
+            Clock.schedule_once(
+                lambda dt: self.dialog_service.show_input_dialog(
+                    "Dateiname für neue HTML:",
+                    "Als neue HTML speichern",
+                    default_name,
+                    self._on_html_filename_entered
+                ),
+                0.2
             )
 
     def _on_html_filename_entered(self, filename):
