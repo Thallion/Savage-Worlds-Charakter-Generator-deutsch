@@ -363,8 +363,10 @@ def _detect_json_type(data):
     """
     Erkennt ob die JSON-Daten ein Charakter oder ein Setting sind.
 
-    Charakter-Dateien enthalten typischerweise: char_name, setting, rang, etc.
-    Setting-Dateien enthalten typischerweise: Talente, Handicaps, Völker, etc.
+    Charakter-Dateien (Top-Level-Keys): profil_daten, selected_talente,
+    selected_handicaps, selected_maechte, active_setting_name, voelker_selected.
+    Setting-Dateien (Top-Level-Keys): name, description, fertigkeiten_daten,
+    voelker, talente, handicaps, maechte, startgeld.
 
     Returns:
         str: 'charakter', 'setting' oder 'unbekannt'
@@ -372,18 +374,46 @@ def _detect_json_type(data):
     if not isinstance(data, dict):
         return 'unbekannt'
 
-    # Charakter-Schlüssel
-    charakter_keys = {'char_name', 'setting', 'rang', 'erfahrungspunkte', 'attribute'}
-    # Setting-Schlüssel
-    setting_keys = {'Talente', 'Handicaps', 'Völker', 'Fertigkeiten', 'Mächte'}
+    keys = data.keys()
 
-    char_matches = len(charakter_keys.intersection(data.keys()))
-    setting_matches = len(setting_keys.intersection(data.keys()))
+    # Charakter-spezifische Top-Level-Keys (wie sie vom Charakter-Model gespeichert werden)
+    charakter_keys = {
+        'profil_daten',
+        'selected_talente',
+        'selected_handicaps',
+        'selected_maechte',
+        'selected_waffen',
+        'selected_ruestungen',
+        'active_setting_name',
+        'voelker_selected',
+        'aufstiege_gesamt',
+        'erschoepfung',
+    }
+    # Setting-spezifische Top-Level-Keys (klein, wie in den Setting-JSON-Dateien)
+    setting_keys = {
+        'fertigkeiten_daten',  # sehr unterscheidend - nur Settings haben das
+        'voelker',             # Settings haben 'voelker', Charaktere 'voelker_selected'
+        'talente',             # Settings haben 'talente', Charaktere 'selected_talente'
+        'handicaps',           # Settings haben 'handicaps', Charaktere 'selected_handicaps'
+        'maechte',             # Settings haben 'maechte', Charaktere 'selected_maechte'
+        'startgeld',
+    }
 
-    if char_matches >= 2:
-        return 'charakter'
-    elif setting_matches >= 2:
+    char_matches = len(charakter_keys.intersection(keys))
+    setting_matches = len(setting_keys.intersection(keys))
+
+    # Settings haben oft mehrere distinktive Keys - wenn fertigkeiten_daten vorhanden ist,
+    # ist es definitiv ein Setting (Charaktere haben 'fertigkeiten' ohne _daten)
+    if 'fertigkeiten_daten' in keys:
         return 'setting'
+    # profil_daten ist sehr charakteristisch für Charaktere
+    if 'profil_daten' in keys:
+        return 'charakter'
+
+    if setting_matches >= 2:
+        return 'setting'
+    elif char_matches >= 2:
+        return 'charakter'
     else:
         return 'unbekannt'
 

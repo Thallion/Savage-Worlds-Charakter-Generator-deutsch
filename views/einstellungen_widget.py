@@ -403,11 +403,27 @@ class EinstellungenWidget(MDBoxLayout):
             if not hasattr(self.app, 'log_filepath') or not self.app.log_filepath:
                 Logger.warning("Keine Log-Datei verfügbar")
                 from services.service_container import service_container
+
+                # Konkrete Fehlerdetails aus dem Setup abrufen
+                try:
+                    from utils.logging_setup import get_last_setup_errors
+                    setup_errors = get_last_setup_errors()
+                except Exception:
+                    setup_errors = []
+
+                detail = "\n\nDetails:\n" + "\n".join(setup_errors) if setup_errors else ""
+                message = (
+                    "Keine Log-Datei verfügbar.\n"
+                    "Das File-Logging konnte nicht initialisiert werden." + detail
+                )
+
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
-                    dialog_service.show_warning_dialog(
-                        "Keine Log-Datei verfügbar.\nDas File-Logging konnte nicht initialisiert werden."
-                    )
+                    # Bei langen Details lieber Error-Dialog verwenden (Snackbar wird abgeschnitten)
+                    if setup_errors:
+                        dialog_service.show_error_dialog(message)
+                    else:
+                        dialog_service.show_warning_dialog(message)
                 return
 
             log_filepath = self.app.log_filepath
