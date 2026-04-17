@@ -29,7 +29,7 @@ version = 0.1.0
 
 # (list) Application requirements
 # Match the main app's Kivy/KivyMD versions for consistent bug reproduction.
-requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
+requirements = python3==3.11.13,kivy==2.3.0,KivyMD,pillow
 
 # (list) Supported orientations
 orientation = landscape, portrait
