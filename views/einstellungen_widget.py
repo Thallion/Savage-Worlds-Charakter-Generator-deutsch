@@ -399,6 +399,12 @@ class EinstellungenWidget(MDBoxLayout):
         """Exportiert die Log-Datei — auf Android über Teilen-Dialog, auf Desktop in Zwischenablage"""
         try:
             Logger.info("Log-File Export wurde aufgerufen")
+            
+            # Debug-Informationen zum Logging-Status
+            if hasattr(self.app, 'log_filepath'):
+                Logger.info(f"App.log_filepath existiert: {self.app.log_filepath}")
+            else:
+                Logger.warning("App hat kein Attribut 'log_filepath'")
 
             if not hasattr(self.app, 'log_filepath') or not self.app.log_filepath:
                 Logger.warning("Keine Log-Datei verfügbar")
@@ -408,7 +414,11 @@ class EinstellungenWidget(MDBoxLayout):
                 try:
                     from utils.logging_setup import get_last_setup_errors
                     setup_errors = get_last_setup_errors()
-                except Exception:
+                    Logger.info(f"Setup-Fehler gefunden: {len(setup_errors)} Einträge")
+                    for i, err in enumerate(setup_errors):
+                        Logger.info(f"Setup-Fehler {i}: {err}")
+                except Exception as e:
+                    Logger.error(f"Fehler beim Abrufen der Setup-Fehler: {e}")
                     setup_errors = []
 
                 detail = "\n\nDetails:\n" + "\n".join(setup_errors) if setup_errors else ""
