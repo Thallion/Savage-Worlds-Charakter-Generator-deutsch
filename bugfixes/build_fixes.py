@@ -239,6 +239,8 @@ def fix_pyjnius_python3_compatibility():
                 # === Fix 1: isinstance(arg, long) → isinstance(arg, int) ===
                 content = content.replace("isinstance(arg, long)", "isinstance(arg, int)")
                 content = content.replace("isinstance(obj, long)", "isinstance(obj, int)")
+                # General isinstance(..., long) → isinstance(..., int)
+                content = re.sub(r'isinstance\((\w+),\s*long\)', r'isinstance(\1, int)', content)
 
                 # === Fix 2: (int, long) Tuples → (int,) ===
                 content = content.replace("(int, long)", "(int,)")
@@ -285,12 +287,47 @@ def fix_pyjnius_python3_compatibility():
 
 
 # p4a Hook-Funktionen (werden von python-for-android aufgerufen)
+def before_build(toolchain):
+    """p4a Hook: Wird vor dem Bau der Rezepte aufgerufen"""
+    print("P4A Hook (before_build): Applying build fixes...")
+    # Use toolchain's build_dir to find files
+    import os
+    from pathlib import Path
+    # toolchain.build_dir points to the build directory (e.g., .../build-arm64-v8a)
+    if hasattr(toolchain, 'build_dir'):
+        original_dir = os.getcwd()
+        os.chdir(toolchain.build_dir)
+        try:
+            fix_kivy_python3_compatibility()
+            fix_pyjnius_python3_compatibility()
+            fix_android_manifest_fileprovider()
+        finally:
+            os.chdir(original_dir)
+    else:
+        # fallback
+        fix_kivy_python3_compatibility()
+        fix_pyjnius_python3_compatibility()
+        fix_android_manifest_fileprovider()
+
 def before_apk_build(toolchain):
     """p4a Hook: Wird vor dem APK-Build aufgerufen"""
     print("P4A Hook (before_apk_build): Applying build fixes...")
-    fix_kivy_python3_compatibility()
-    fix_pyjnius_python3_compatibility()
-    fix_android_manifest_fileprovider()
+    # Use toolchain's build_dir to find files
+    import os
+    from pathlib import Path
+    if hasattr(toolchain, 'build_dir'):
+        original_dir = os.getcwd()
+        os.chdir(toolchain.build_dir)
+        try:
+            fix_kivy_python3_compatibility()
+            fix_pyjnius_python3_compatibility()
+            fix_android_manifest_fileprovider()
+        finally:
+            os.chdir(original_dir)
+    else:
+        fix_kivy_python3_compatibility()
+        fix_pyjnius_python3_compatibility()
+        fix_android_manifest_fileprovider()
 
 
 if __name__ == "__main__":

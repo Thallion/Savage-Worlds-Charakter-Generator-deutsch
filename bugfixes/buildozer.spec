@@ -98,7 +98,7 @@ p4a.branch = master
 p4a.commit = 957a3e5f
 
 # (str) Directory containing the local recipes (pyjnius, python3)
-# p4a.local_recipes = ../p4a-recipes
+p4a.local_recipes = ../p4a-recipes
 
 # (str) Bootstrap to use for android builds
 p4a.bootstrap = sdl2
