@@ -846,11 +846,19 @@ class VoelkerWidget(MDBoxLayout):
         
         self._voelker_overlay._charakter = self.controller.charakter
         self._voelker_overlay._selected_volk = volk_name
+        # Overlay-Zustand für Edit-Modus vorbereiten: _selected_extras zurücksetzen und
+        # _zusatzelemente_info auf nur das bearbeitete Element begrenzen, damit
+        # _all_extras_selected() nach einer Auswahl True zurückgibt.
+        self._voelker_overlay._selected_extras = {}
+        if talent_typ == 'freies_talent':
+            self._voelker_overlay._zusatzelemente_info = {'freie_talente': True}
+        elif talent_typ == 'halbelf_talent':
+            self._voelker_overlay._zusatzelemente_info = {'halbelf_entweder_oder': True}
+        elif talent_typ == 'mensch_talent':
+            self._voelker_overlay._zusatzelemente_info = {'menschen_vielseitig': True}
+        self._voelker_overlay.on_volk_chosen = self._on_overlay_volk_chosen
         # Talentauswahl direkt öffnen
         self._voelker_overlay._show_talent_selection(talent_typ)
-        # Das Overlay wird geöffnet; es sollte den bereits gewählten Talentnamen vorselektieren?
-        # Aktuell nicht implementiert, aber das Overlay zeigt alle Talente an.
-        # Der User kann ein anderes Talent wählen.
 
     def _on_edit_attribut(self, attribut_name):
         """Öffnet einen Dialog zum Bearbeiten des ausgewählten freien Attributs."""

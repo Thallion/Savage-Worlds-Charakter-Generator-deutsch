@@ -671,10 +671,8 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             from functions.volk_funktionen import _get_halbelf_freies_talent
             current_talent = _get_halbelf_freies_talent(self._charakter)
         elif talent_typ == 'freies_talent':
-            # Für generische freie Talente gibt es keine spezielle Tracking-Variable
-            # Wir könnten prüfen, ob ein Talent ausgewählt ist, das zu diesem Volk gehört
-            # Aber das ist komplex; vorerst keine Vorselektion
-            current_talent = None
+            from functions.volk_funktionen import _get_menschen_freies_talent
+            current_talent = _get_menschen_freies_talent(self._charakter)
         
         if current_talent:
             selected_talent[0] = current_talent
