@@ -51,7 +51,7 @@ def _get_log_level():
             KivyLogger.debug(f"Log-Level aus Konfiguration gelesen: {level_str}")
             return level
         else:
-            KivyLogger.debug(f"Konfigurationsdatei nicht gefunden, verwende Standard-Log-Level: INFO")
+            KivyLogger.warning(f"Konfigurationsdatei nicht gefunden, verwende Standard-Log-Level: INFO")
             return default_level
             
     except Exception as e:

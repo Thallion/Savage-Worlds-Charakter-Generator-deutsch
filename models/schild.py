@@ -79,7 +79,7 @@ class Schild(Ausruestung):
         
         # Nur zur Information prüfen, ob die Mindeststärke erfüllt ist
         if not self.kann_angelegt_werden(charakter):
-            Logger.debug(f"Warnung: {self.name} wurde angelegt, obwohl Mindeststärke nicht erfüllt ist.")
+            Logger.warning(f"{self.name} wurde angelegt, obwohl Mindeststärke nicht erfüllt ist.")
         else:
             Logger.debug(f"{self.name} wurde angelegt.")
 

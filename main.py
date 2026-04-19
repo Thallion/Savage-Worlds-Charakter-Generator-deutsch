@@ -1451,7 +1451,7 @@ class SW_Charakter_GeneratorApp(MDApp):
                             child.theme_text_color = "Custom"
                             child.text_color = self.theme_cls.onSurfaceVariantColor
         except Exception as e:
-            Logger.debug(f"Fehler bei Bottom-Nav-Highlighting: {e}")
+            Logger.warning(f"Fehler bei Bottom-Nav-Highlighting: {e}")
 
     def _show_more_screens_popup(self):
         """Zeigt ein Popup mit allen verfügbaren Screens als Grid"""

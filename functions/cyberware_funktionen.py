@@ -460,7 +460,7 @@ def _modifiziere_fertigkeit(charakter, fert_name, bonus):
         nachher = f"W{fert.wuerfel.value}" + (f"{fert.wuerfel.modifier:+d}" if fert.wuerfel.modifier else "")
         Logger.info(f"Cyberware-Effekt: {fert_name} {'+'if bonus > 0 else ''}{bonus} ({vorher} → {nachher})")
     else:
-        Logger.debug(f"Cyberware-Effekt: Fertigkeit '{fert_name}' nicht gefunden")
+        Logger.warning(f"Cyberware-Effekt: Fertigkeit '{fert_name}' nicht gefunden")
 
 
 def _fuege_talent_hinzu(charakter, talent_name):

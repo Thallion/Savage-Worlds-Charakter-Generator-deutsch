@@ -611,7 +611,7 @@ class TalentDialogHandler:
                 elif widget and hasattr(widget, 'refresh'):
                     widget.refresh()
         except Exception as e:
-            Logger.debug(f"Talente-Widget nicht gefunden: {e}")
+            Logger.warning(f"Talente-Widget nicht gefunden: {e}")
 
     def _show_success_snackbar(self, message):
         """Zeigt eine Erfolgs-Snackbar an"""

@@ -710,7 +710,7 @@ class WaffeDialogHandler:
                 elif widget and hasattr(widget, 'refresh_widget'):
                     widget.refresh_widget()
         except Exception as e:
-            Logger.debug(f"Ausrüstung-Widget nicht gefunden: {e}")
+            Logger.warning(f"Ausrüstung-Widget nicht gefunden: {e}")
 
     def _show_success_snackbar(self, message):
         """Zeigt eine Erfolgs-Snackbar an"""
