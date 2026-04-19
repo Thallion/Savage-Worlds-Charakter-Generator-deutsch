@@ -351,17 +351,17 @@ class RuestungDialogHandler:
                 Logger.warning(f"Fehler beim Schließen des Lösch-Dialogs: {e}")
 
         def _on_cancel(x):
-            _dismiss_confirm_popup()
-            Clock.schedule_once(_dismiss_confirm_popup, 0.15)
+            Clock.schedule_once(lambda dt: _dismiss_confirm_popup(), 0)
+            Clock.schedule_once(_dismiss_confirm_popup, 0.2)
 
         def _on_confirm_release(x):
-            # Dialog zuerst schließen, dann die eigentliche Aktion verzögert
-            # ausführen. Auf Android kann das synchrone Aufrufen von
-            # on_confirm() (mit UI-Refresh) die Dismiss-Animation unterbrechen
-            # und den Dialog in einem inkonsistenten Zustand hinterlassen.
-            _dismiss_confirm_popup()
-            Clock.schedule_once(_dismiss_confirm_popup, 0.15)
-            Clock.schedule_once(lambda dt: on_confirm(), 0.2)
+            # dismiss() darf nicht synchron im on_release-Handler aufgerufen
+            # werden – auf Android blockiert das laufende Touch-Event die
+            # Dismiss-Animation. Daher erst im nächsten Frame schließen und
+            # on_confirm() mit ausreichend Abstand danach ausführen.
+            Clock.schedule_once(lambda dt: _dismiss_confirm_popup(), 0)
+            Clock.schedule_once(_dismiss_confirm_popup, 0.2)
+            Clock.schedule_once(lambda dt: on_confirm(), 0.35)
 
         self._delete_confirm_popup = MDDialog(
             MDDialogHeadlineText(text=f"{item_type} löschen?"),
