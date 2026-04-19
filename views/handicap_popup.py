@@ -590,7 +590,7 @@ class HandicapDialogHandler:
                     from kivy.clock import Clock
                     Clock.schedule_once(lambda dt: widget.refresh_widget(), 0)
         except Exception as e:
-            Logger.debug(f"Handicap-Widget nicht gefunden: {e}")
+            Logger.warning(f"Handicap-Widget nicht gefunden: {e}")
 
     def dismiss_dialog(self, *args):
         """Schließt den aktiven Dialog"""

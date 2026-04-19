@@ -513,7 +513,7 @@ class GenerationPointsBar(MDBoxLayout):
             if not robustheit_text:
                 robustheit_wert = getattr(self.charakter, 'robustheit', 2)
                 robustheit_text = str(robustheit_wert)
-                Logger.debug(f"Fallback auf robustheit: {robustheit_text}")
+                Logger.warning(f"Fallback auf robustheit: {robustheit_text}")
             else:
                 Logger.debug(f"Verwende robustheit_mit_ruestung: {robustheit_text}")
 

@@ -743,12 +743,12 @@ def get_volk_attribut_optionen(charakter, volk_name):
         if not hasattr(volk, 'effects'):
             if volk_name.lower() in ["halbork", "halborks"]:
                 # Halborks können zwischen Stärke und Konstitution wählen
-                Logger.debug(f"Halbork Attribut-Optionen (Fallback ohne effects): Stärke oder Konstitution")
+                Logger.warning(f"Halbork Attribut-Optionen (Fallback ohne effects): Stärke oder Konstitution")
                 return ["Stärke", "Konstitution"]
             
             elif volk_name.lower() in ["halbelf", "halbelfen"]:
                 # Halbelfen können Geschicklichkeit wählen (als Teil der ENTWEDER/ODER Wahl)
-                Logger.debug(f"Halbelf Attribut-Option (Fallback ohne effects): Geschicklichkeit")
+                Logger.warning(f"Halbelf Attribut-Option (Fallback ohne effects): Geschicklichkeit")
                 return ["Geschicklichkeit"]
         
         # Prüfe ob das Volk generell freie Attribut-Wahlmöglichkeiten hat
