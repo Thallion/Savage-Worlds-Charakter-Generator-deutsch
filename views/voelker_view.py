@@ -1694,14 +1694,14 @@ class VoelkerWidget(MDBoxLayout):
         # Attribut-Boni / -Mali
         for attr_name, bonus in effects.get('attribute_bonuses', {}).items():
             if bonus > 0:
-                zeilen.append(f"{attr_name} +{bonus} (W{4 + bonus})")
+                zeilen.append(f"{attr_name} W{4 + bonus}")
             elif bonus < 0:
-                zeilen.append(f"{attr_name} {bonus:+d}")
+                zeilen.append(f"{attr_name} W{4 + bonus}")
 
         # Fertigkeits-Startboni
         for fert_name, bonus in effects.get('fertigkeits_startboni', {}).items():
             if bonus > 0:
-                zeilen.append(f"{fert_name} +{bonus} (W{4 + bonus})")
+                zeilen.append(f"{fert_name} W{4 + bonus}")
             elif bonus == 0:
                 zeilen.append(f"{fert_name} W4")
 
