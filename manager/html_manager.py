@@ -646,10 +646,12 @@ class HTMLManager:
         pdf_result = print_html_to_pdf(html_path, pdf_name)
 
         if pdf_result:
-            Logger.info(f"PDF: Druckdialog wird geöffnet für: {pdf_result}")
+            Logger.info(f"Android Print: Druckdialog wird geöffnet, PDF-Name: {pdf_result}")
             if self.dialog_service:
-                self.dialog_service.show_success_dialog(
-                    "Der Druckdialog wird geöffnet. Wählen Sie dort 'Als PDF speichern' aus."
+                self.dialog_service.show_warning_dialog(
+                    "Der Druckdialog wird geöffnet. Wählen Sie dort 'Als PDF speichern' aus.\n\n"
+                    "Hinweis: Auf einigen Android-Geräten erscheint der Druckdialog möglicherweise im Hintergrund. "
+                    "Prüfen Sie Ihre Benachrichtigungen oder wechseln Sie zur Drucker-App."
                 )
         else:
             Logger.error("PDF: PDF-Erstellung fehlgeschlagen")

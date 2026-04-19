@@ -117,3 +117,15 @@ Bugs getestet mit:
 - KivyMD 2.0.1.dev0 (GitHub master)
 - Android API 21-35, NDK 25b
 - Buildozer (aktuelle Version)
+
+
+## Script
+
+ Führe einen sauberen Build mit dem neuen Skript aus:  
+
+ cd bugfixes/                                                                                                                                                                                   
+ ./build.sh --force --clean                                                                                                                                                           
+                                                                                                                                                                                                          
+ Oder mit dem Python-Skript:                                                                                                                                                              
+                                                                                                                                                                                                   
+ python build.py --force --clean   

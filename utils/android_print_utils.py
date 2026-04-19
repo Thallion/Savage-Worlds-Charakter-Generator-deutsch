@@ -77,6 +77,8 @@ def print_html_to_pdf(html_path, pdf_name=None):
             Logger.error("Android Print: PrintManager nicht verfügbar")
             return None
 
+        Logger.info("Android Print: Context und PrintManager erhalten")
+
         if pdf_name is None:
             base_name = os.path.splitext(os.path.basename(html_path))[0]
             pdf_name = base_name
@@ -103,6 +105,7 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
     1. runOnUiThread: WebView erstellen, HTML laden (loadDataWithBaseURL)
     2. Handler.postDelayed (3s): createPrintDocumentAdapter + PrintManager.print
     """
+    Logger.info(f"Android Print: Starte async PDF-Erstellung für {html_path}")
     try:
         from jnius import autoclass
 
@@ -133,7 +136,9 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
 
         def _do_print():
             """Erzeugt den PrintDocumentAdapter und startet den Druckdialog."""
+            Logger.info("Android Print: _do_print wird ausgeführt")
             if state['printed']:
+                Logger.info("Android Print: Druck bereits gestartet, ignoriere")
                 return
             state['printed'] = True
             try:
@@ -143,6 +148,7 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
                     return
 
                 job_name = f"Charakterbogen - {pdf_name}"
+                Logger.info(f"Android Print: Erstelle PrintDocumentAdapter für {job_name}")
                 print_adapter = web_view.createPrintDocumentAdapter(job_name)
 
                 print_attrs = (PrintAttrsBuilder()
@@ -151,6 +157,7 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
                                .setMinMargins(Margins.NO_MARGINS)
                                .build())
 
+                Logger.info("Android Print: Rufe print_manager.print auf")
                 print_manager.print(job_name, print_adapter, print_attrs)
                 Logger.info(f"Android Print: Druckdialog geöffnet: {job_name}")
 
@@ -159,6 +166,7 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
 
         def _setup_on_ui_thread():
             """WebView erstellen, HTML laden, Druck-Delay einplanen."""
+            Logger.info("Android Print: _setup_on_ui_thread wird ausgeführt")
             try:
                 Logger.info("Android Print: Setup läuft auf UI-Thread")
 
@@ -198,7 +206,8 @@ def _print_html_to_pdf_async(context, print_manager, html_path, pdf_name):
         _active_print_refs.append(state)
 
         activity.runOnUiThread(setup_runnable)
-        Logger.info("Android Print: Setup an UI-Thread übergeben")
+        Logger.info("Android Print: Setup auf UI-Thread eingeplant")
+        Logger.info(f"Android Print: Rückgabe von pdf_name: {pdf_name}")
 
         return pdf_name
 

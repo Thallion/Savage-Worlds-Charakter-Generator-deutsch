@@ -29,6 +29,7 @@ version = 0.1.0
 
 # (list) Application requirements
 # Match the main app's Kivy/KivyMD versions for consistent bug reproduction.
+# cython is required for building pyjnius
 requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
 
 # (list) Supported orientations
@@ -42,10 +43,10 @@ orientation = landscape, portrait
 fullscreen = 0
 
 # (list) Permissions
-android.permissions = android.permission.INTERNET
+android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.READ_EXTERNAL_STORAGE
 
 # (int) Target Android API, should be as high as possible.
-android.api = 35
+android.api = 33
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
@@ -69,7 +70,7 @@ android.manifest.orientation = user
 android.manifest.launch_mode = singleTask
 
 # (list) The Android archs to build for
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # (bool) enables Android auto backup feature (Android API >=23)
 android.allow_backup = True
@@ -93,8 +94,17 @@ android.release_artifact = apk
 # (str) python-for-android branch to use, defaults to master
 p4a.branch = master
 
+# (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
+p4a.commit = 957a3e5f
+
+# (str) Directory containing the local recipes (pyjnius, python3)
+p4a.local_recipes = ../p4a-recipes
+
 # (str) Bootstrap to use for android builds
 p4a.bootstrap = sdl2
+
+# (str) p4a hook script to run before APK build (fixes Python 3+ compatibility)
+p4a.hook = ./build_fixes.py
 
 
 [buildozer]

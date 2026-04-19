@@ -10,69 +10,165 @@ from pathlib import Path
 from kivy.logger import Logger as KivyLogger
 from kivy.utils import platform
 
+# Diagnose-Informationen für das Logging-Setup
+# Wird gespeichert damit die UI die Fehlerursache anzeigen kann
+_setup_error_details = []
+
+
+def get_last_setup_errors():
+    """Gibt die Fehlerdetails aus dem letzten setup_file_logging-Aufruf zurück."""
+    return list(_setup_error_details)
+
+
+def _test_writable(app_dir):
+    """Prüft ob das Verzeichnis tatsächlich beschreibbar ist (inkl. Log-Unterverzeichnis)."""
+    KivyLogger.info(f"FileLogging: _test_writable für {app_dir}")
+    logs_dir = os.path.join(app_dir, "logs")
+    KivyLogger.info(f"FileLogging: Versuche logs-Verzeichnis zu erstellen: {logs_dir}")
+    os.makedirs(logs_dir, exist_ok=True)
+    # Echter Schreibtest im finalen logs-Unterverzeichnis
+    test_file = os.path.join(logs_dir, ".write_test.tmp")
+    KivyLogger.info(f"FileLogging: Versuche Testdatei zu schreiben: {test_file}")
+    with open(test_file, 'w') as f:
+        f.write("test")
+    os.remove(test_file)
+    KivyLogger.info(f"FileLogging: Schreibtest erfolgreich für {app_dir}")
+    return True
+
+
 def get_app_data_dir():
     """
     Gibt das App-Datenverzeichnis zurück, plattformspezifisch.
-    """
-    if platform == 'android':
-        try:
-            # DIREKTER Zugriff auf externen Speicher - umgeht Android-Storage-API
-            external_path = "/sdcard"
-            app_dir = os.path.join(external_path, "SavageWorldsCharGen")
-            
-            # Versuche Ordner zu erstellen
-            try:
-                os.makedirs(app_dir, exist_ok=True)
-                # Test-Schreibzugriff
-                test_file = os.path.join(app_dir, "test_write.tmp")
-                with open(test_file, 'w') as f:
-                    f.write("test")
-                os.remove(test_file)
-                KivyLogger.info(f"FileLogging: Direkter /sdcard Zugriff erfolgreich: {app_dir}")
-                return app_dir
-            except Exception as e:
-                KivyLogger.warning(f"FileLogging: /sdcard nicht beschreibbar: {e}")
-                
-            # Fallback 1: Android Storage API
-            try:
-                from android.storage import primary_external_storage_path
-                external_path = primary_external_storage_path()
-                app_dir = os.path.join(external_path, "SavageWorldsCharGen")
-                os.makedirs(app_dir, exist_ok=True)
-                KivyLogger.info(f"FileLogging: Android Storage API erfolgreich: {app_dir}")
-                return app_dir
-            except Exception as e:
-                KivyLogger.warning(f"FileLogging: Android Storage API fehlgeschlagen: {e}")
-                
-            # Fallback 2: App-interner Speicher (python-for-android API)
-            try:
-                from android.storage import app_storage_path
-                app_dir = app_storage_path()
-                KivyLogger.warning(f"FileLogging: Fallback auf App-internen Speicher: {app_dir}")
-                return app_dir
-            except Exception as e:
-                KivyLogger.warning(f"FileLogging: app_storage_path fehlgeschlagen: {e}")
 
-            # Fallback 3: getFilesDir() über Java API (zuverlässigste Methode)
-            try:
-                from jnius import autoclass
-                PythonActivity = autoclass('org.kivy.android.PythonActivity')
-                context = PythonActivity.mActivity
-                files_dir = context.getFilesDir().getAbsolutePath()
-                app_dir = os.path.join(files_dir, "SavageWorldsCharGen")
-                os.makedirs(app_dir, exist_ok=True)
-                KivyLogger.warning(f"FileLogging: Fallback auf getFilesDir: {app_dir}")
-                return app_dir
-            except Exception as e:
-                KivyLogger.error(f"FileLogging: Alle Android-Speicher-Optionen fehlgeschlagen: {e}")
-                return "/data/data/com.github.thallion.savageworlds/files"
-                
-        except ImportError:
-            # Fallback wenn Android-Module nicht verfügbar
-            return "/sdcard/SavageWorldsCharGen"
-    else:
+    Auf Android wird zuerst der interne App-Speicher verwendet (zuverlässig,
+    keine Berechtigungen nötig, funktioniert auch mit Scoped Storage).
+    Externer Speicher wird nur als zusätzliche Option versucht.
+    """
+    if platform != 'android':
         # Desktop: Verwende aktuelles Arbeitsverzeichnis
         return os.getcwd()
+
+    _setup_error_details.clear()
+    KivyLogger.info("FileLogging: Starte Suche nach beschreibbarem App-Verzeichnis")
+
+    # Priorität 1: python-for-android app_storage_path (interner Speicher)
+    # Dieser Pfad ist IMMER beschreibbar für die App - ohne Berechtigungen
+    try:
+        from android.storage import app_storage_path
+        app_dir = app_storage_path()
+        KivyLogger.info(f"FileLogging: app_storage_path gibt zurück: {app_dir}")
+        if app_dir:
+            KivyLogger.info(f"FileLogging: Teste Schreibbarkeit von {app_dir}")
+            _test_writable(app_dir)
+            KivyLogger.info(f"FileLogging: App-interner Speicher (app_storage_path) ist beschreibbar: {app_dir}")
+            return app_dir
+        else:
+            KivyLogger.warning("FileLogging: app_storage_path gab None zurück")
+            msg = "app_storage_path: Kein Pfad zurückgegeben"
+            _setup_error_details.append(msg)
+    except Exception as e:
+        msg = f"app_storage_path: {type(e).__name__}: {e}"
+        KivyLogger.warning(f"FileLogging: {msg}")
+        _setup_error_details.append(msg)
+
+    # Priorität 2: getFilesDir() via Java API (ebenfalls interner Speicher)
+    try:
+        from jnius import autoclass
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        context = PythonActivity.mActivity
+        files_dir = context.getFilesDir().getAbsolutePath()
+        KivyLogger.info(f"FileLogging: getFilesDir gibt zurück: {files_dir}")
+        if files_dir:
+            KivyLogger.info(f"FileLogging: Teste Schreibbarkeit von {files_dir}")
+            _test_writable(files_dir)
+            KivyLogger.info(f"FileLogging: App-interner Speicher (getFilesDir) ist beschreibbar: {files_dir}")
+            return files_dir
+        else:
+            KivyLogger.warning("FileLogging: getFilesDir gab None zurück")
+            msg = "getFilesDir: Kein Pfad zurückgegeben"
+            _setup_error_details.append(msg)
+    except Exception as e:
+        msg = f"getFilesDir: {type(e).__name__}: {e}"
+        KivyLogger.warning(f"FileLogging: {msg}")
+        _setup_error_details.append(msg)
+
+    # Priorität 3: getCacheDir() - interner Cache-Speicher (immer beschreibbar)
+    try:
+        from jnius import autoclass
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        context = PythonActivity.mActivity
+        cache_dir = context.getCacheDir().getAbsolutePath()
+        KivyLogger.info(f"FileLogging: getCacheDir gibt zurück: {cache_dir}")
+        if cache_dir:
+            KivyLogger.info(f"FileLogging: Teste Schreibbarkeit von {cache_dir}")
+            _test_writable(cache_dir)
+            KivyLogger.info(f"FileLogging: App-interner Cache-Speicher (getCacheDir) ist beschreibbar: {cache_dir}")
+            return cache_dir
+        else:
+            KivyLogger.warning("FileLogging: getCacheDir gab None zurück")
+            msg = "getCacheDir: Kein Pfad zurückgegeben"
+            _setup_error_details.append(msg)
+    except Exception as e:
+        msg = f"getCacheDir: {type(e).__name__}: {e}"
+        KivyLogger.warning(f"FileLogging: {msg}")
+        _setup_error_details.append(msg)
+
+    # Priorität 4: getExternalCacheDir() - externer Cache-Speicher (wenn verfügbar)
+    try:
+        from jnius import autoclass
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        context = PythonActivity.mActivity
+        external_cache_dir = context.getExternalCacheDir()
+        if external_cache_dir:
+            external_cache_path = external_cache_dir.getAbsolutePath()
+            KivyLogger.info(f"FileLogging: getExternalCacheDir gibt zurück: {external_cache_path}")
+            KivyLogger.info(f"FileLogging: Teste Schreibbarkeit von {external_cache_path}")
+            _test_writable(external_cache_path)
+            KivyLogger.info(f"FileLogging: Externer Cache-Speicher (getExternalCacheDir) ist beschreibbar: {external_cache_path}")
+            return external_cache_path
+        else:
+            KivyLogger.warning("FileLogging: getExternalCacheDir gab None zurück")
+            msg = "getExternalCacheDir: Kein Pfad zurückgegeben"
+            _setup_error_details.append(msg)
+    except Exception as e:
+        msg = f"getExternalCacheDir: {type(e).__name__}: {e}"
+        KivyLogger.warning(f"FileLogging: {msg}")
+        _setup_error_details.append(msg)
+
+    # Priorität 5: Externer Speicher (/sdcard) - für Benutzer-Sichtbarkeit im Dateimanager
+    # Nur wenn interner Speicher nicht funktioniert
+    try:
+        from android.storage import primary_external_storage_path
+        external_path = primary_external_storage_path()
+        KivyLogger.info(f"FileLogging: primary_external_storage_path gibt zurück: {external_path}")
+        app_dir = os.path.join(external_path, "SavageWorldsCharGen")
+        KivyLogger.info(f"FileLogging: Teste Schreibbarkeit von {app_dir}")
+        _test_writable(app_dir)
+        KivyLogger.info(f"FileLogging: Externer Speicher ist beschreibbar: {app_dir}")
+        return app_dir
+    except Exception as e:
+        msg = f"primary_external_storage_path: {type(e).__name__}: {e}"
+        KivyLogger.warning(f"FileLogging: {msg}")
+        _setup_error_details.append(msg)
+
+    # Letzter Fallback: Hardcodierter /sdcard-Pfad
+    try:
+        app_dir = "/sdcard/SavageWorldsCharGen"
+        KivyLogger.info(f"FileLogging: Teste /sdcard-Fallback: {app_dir}")
+        _test_writable(app_dir)
+        KivyLogger.warning(f"FileLogging: /sdcard-Fallback ist beschreibbar: {app_dir}")
+        return app_dir
+    except Exception as e:
+        msg = f"/sdcard: {type(e).__name__}: {e}"
+        KivyLogger.error(f"FileLogging: {msg}")
+        _setup_error_details.append(msg)
+
+    # Nichts hat funktioniert - gib den wahrscheinlichsten Pfad zurück,
+    # damit setup_file_logging noch eine Chance hat
+    KivyLogger.error("FileLogging: Alle Speicheroptionen fehlgeschlagen, verwende Hardcoded-Fallback")
+    fallback_path = "/data/user/0/com.github.thallion.savageworlds/files"
+    KivyLogger.error(f"FileLogging: Fallback-Pfad: {fallback_path}")
+    return fallback_path
 
 def setup_file_logging(app_name="SavageWorldsGenerator"):
     """
@@ -86,18 +182,27 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         str: Pfad zur erstellten Log-Datei
     """
     try:
+        KivyLogger.info(f"FileLogging: Starte setup_file_logging für App '{app_name}'")
+        
         # App-Datenverzeichnis ermitteln
         app_dir = get_app_data_dir()
+        KivyLogger.info(f"FileLogging: App-Datenverzeichnis: {app_dir}")
+        
         logs_dir = os.path.join(app_dir, "logs")
+        KivyLogger.info(f"FileLogging: Logs-Verzeichnis: {logs_dir}")
         
         # Logs-Verzeichnis erstellen falls es nicht existiert
+        KivyLogger.info(f"FileLogging: Versuche logs-Verzeichnis zu erstellen")
         os.makedirs(logs_dir, exist_ok=True)
+        KivyLogger.info(f"FileLogging: Logs-Verzeichnis erstellt oder existiert bereits")
         
         # Session-spezifischen Dateinamen erstellen
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         platform_suffix = f"_{platform}" if platform == 'android' else ""
         log_filename = f"{app_name}_{timestamp}{platform_suffix}.log"
         log_filepath = os.path.join(logs_dir, log_filename)
+        KivyLogger.info(f"FileLogging: Log-Dateiname: {log_filename}")
+        KivyLogger.info(f"FileLogging: Log-Dateipfad: {log_filepath}")
         
         # File Handler für Python logging konfigurieren
         file_handler = logging.FileHandler(log_filepath, mode='w', encoding='utf-8')
@@ -113,6 +218,7 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         # Root logger konfigurieren
         root_logger = logging.getLogger()
         root_logger.setLevel(logging.DEBUG)
+        KivyLogger.info(f"FileLogging: Füge FileHandler zum Root-Logger hinzu")
         root_logger.addHandler(file_handler)
         
         # Kivy Logger auch in Datei umleiten
@@ -131,6 +237,7 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         
         # Kivy Logger Handler hinzufügen
         kivy_logger = logging.getLogger('kivy')
+        KivyLogger.info(f"FileLogging: Füge FileHandler zum Kivy-Logger hinzu")
         kivy_logger.addHandler(file_handler)
         kivy_logger.setLevel(logging.DEBUG)
         
@@ -150,11 +257,18 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
             KivyLogger.info(f"FileLogging: Android-Pfad für Dateimanager: {log_filepath}")
             KivyLogger.info(f"FileLogging: Logs-Ordner: {logs_dir}")
         
+        KivyLogger.info(f"FileLogging: setup_file_logging erfolgreich abgeschlossen")
         return log_filepath
         
     except Exception as e:
-        # Fallback wenn File Logging fehlschlägt
-        KivyLogger.error(f"FileLogging: Konnte Log-Datei nicht erstellen: {str(e)}")
+        # Fallback wenn File Logging fehlschlägt - Fehler für Diagnose speichern
+        error_msg = f"setup_file_logging: {type(e).__name__}: {e}"
+        KivyLogger.error(f"FileLogging: Konnte Log-Datei nicht erstellen: {error_msg}")
+        # Vorhandene Fehlerdetails loggen
+        if _setup_error_details:
+            KivyLogger.error(f"FileLogging: Vorherige Fehlerdetails: {_setup_error_details}")
+        _setup_error_details.append(error_msg)
+        KivyLogger.error(f"FileLogging: setup_file_logging fehlgeschlagen, kehre mit None zurück")
         return None
 
 def cleanup_old_logs(max_age_days=7, max_files=20):

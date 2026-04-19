@@ -399,15 +399,41 @@ class EinstellungenWidget(MDBoxLayout):
         """Exportiert die Log-Datei — auf Android über Teilen-Dialog, auf Desktop in Zwischenablage"""
         try:
             Logger.info("Log-File Export wurde aufgerufen")
+            
+            # Debug-Informationen zum Logging-Status
+            if hasattr(self.app, 'log_filepath'):
+                Logger.info(f"App.log_filepath existiert: {self.app.log_filepath}")
+            else:
+                Logger.warning("App hat kein Attribut 'log_filepath'")
 
             if not hasattr(self.app, 'log_filepath') or not self.app.log_filepath:
                 Logger.warning("Keine Log-Datei verfügbar")
                 from services.service_container import service_container
+
+                # Konkrete Fehlerdetails aus dem Setup abrufen
+                try:
+                    from utils.logging_setup import get_last_setup_errors
+                    setup_errors = get_last_setup_errors()
+                    Logger.info(f"Setup-Fehler gefunden: {len(setup_errors)} Einträge")
+                    for i, err in enumerate(setup_errors):
+                        Logger.info(f"Setup-Fehler {i}: {err}")
+                except Exception as e:
+                    Logger.error(f"Fehler beim Abrufen der Setup-Fehler: {e}")
+                    setup_errors = []
+
+                detail = "\n\nDetails:\n" + "\n".join(setup_errors) if setup_errors else ""
+                message = (
+                    "Keine Log-Datei verfügbar.\n"
+                    "Das File-Logging konnte nicht initialisiert werden." + detail
+                )
+
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
-                    dialog_service.show_warning_dialog(
-                        "Keine Log-Datei verfügbar.\nDas File-Logging konnte nicht initialisiert werden."
-                    )
+                    # Bei langen Details lieber Error-Dialog verwenden (Snackbar wird abgeschnitten)
+                    if setup_errors:
+                        dialog_service.show_error_dialog(message)
+                    else:
+                        dialog_service.show_warning_dialog(message)
                 return
 
             log_filepath = self.app.log_filepath

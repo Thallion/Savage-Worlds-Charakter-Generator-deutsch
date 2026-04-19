@@ -2,6 +2,7 @@
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
@@ -291,6 +292,31 @@ class FertigkeitDialogHandler:
         )
         main_content.add_widget(scroll)
 
+        def _dismiss_confirm_popup(*_):
+            """Schließt das Bestätigungs-Popup robust (doppelter Versuch)."""
+            popup = getattr(self, '_delete_confirm_popup', None)
+            if popup is None:
+                return
+            try:
+                popup.dismiss()
+            except Exception as e:
+                Logger.warning(f"Fehler beim Schließen des Lösch-Dialogs: {e}")
+
+        def _on_cancel(x):
+            _dismiss_confirm_popup()
+            # Zweiter Dismiss-Versuch verzögert, falls der erste auf Android
+            # durch Timing-Probleme der Animation nicht gegriffen hat.
+            Clock.schedule_once(_dismiss_confirm_popup, 0.15)
+
+        def _on_confirm_release(x):
+            # Dialog zuerst schließen, dann die eigentliche Aktion verzögert
+            # ausführen. Auf Android kann das synchrone Aufrufen von
+            # on_confirm() (mit UI-Refresh) die Dismiss-Animation unterbrechen
+            # und den Dialog in einem inkonsistenten Zustand hinterlassen.
+            _dismiss_confirm_popup()
+            Clock.schedule_once(_dismiss_confirm_popup, 0.15)
+            Clock.schedule_once(lambda dt: on_confirm(), 0.2)
+
         self._delete_confirm_popup = MDDialog(
             MDDialogHeadlineText(text=f"{item_type} löschen?"),
             MDDialogContentContainer(main_content),
@@ -298,15 +324,12 @@ class FertigkeitDialogHandler:
                 MDButton(
                     MDButtonText(text="Abbrechen"),
                     style="text",
-                    on_release=lambda x: self._delete_confirm_popup.dismiss()
+                    on_release=_on_cancel,
                 ),
                 MDButton(
                     MDButtonText(text="Löschen"),
                     style="filled",
-                    on_release=lambda x: (
-                        self._delete_confirm_popup.dismiss(),
-                        on_confirm()
-                    )
+                    on_release=_on_confirm_release,
                 ),
             ),
             size_hint=(0.85, None),
