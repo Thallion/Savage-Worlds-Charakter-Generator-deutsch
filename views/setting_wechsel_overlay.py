@@ -112,6 +112,7 @@ class SettingWechselOverlay(MDBoxLayout):
         content_scroll = MDScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
+            bar_width=dp(15),
         )
 
         self._content_box = MDBoxLayout(
