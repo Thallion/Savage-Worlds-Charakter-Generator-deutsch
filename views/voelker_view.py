@@ -877,22 +877,26 @@ class VoelkerWidget(MDBoxLayout):
             return
         
         # Dialog-Content mit Chips
+        # Höhe explizit berechnen (MDDialog Fixed Height: size_hint_y=None braucht feste Höhe)
+        scroll_height = min(dp(350), len(attribut_optionen) * dp(52))
+        content_height = dp(86) + scroll_height  # padding(40) + label(34) + spacing(12) + scroll
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(12),
             padding=dp(20),
             size_hint_y=None,
+            height=content_height,
         )
-        
+
         # Info-Label
         info_label = MDLabel(
             text="Wähle ein neues Attribut:",
             bold=True,
-            adaptive_height=True,
             size_hint_y=None,
+            height=dp(34),
         )
         content.add_widget(info_label)
-        
+
         # Chips-Box
         chips_box = MDBoxLayout(
             orientation="vertical",
@@ -935,7 +939,7 @@ class VoelkerWidget(MDBoxLayout):
         from kivymd.uix.scrollview import MDScrollView
         scroll = MDScrollView(
             size_hint_y=None,
-            height=min(dp(400), len(attribut_optionen) * dp(50)),
+            height=scroll_height,
             do_scroll_x=False,
         )
         scroll.add_widget(chips_box)
