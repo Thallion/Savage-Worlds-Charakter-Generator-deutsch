@@ -36,6 +36,7 @@ class PointbarOverlay(MDBoxLayout):
         self.pointbar_container = None
         self.nav_rail_container = None
         self.menu_toggle_container = None
+        self.embedded_pointbar = None  # Referenz auf eingebettete (unsichtbare) Pointbar
         
         # Pointbar-Widget laden (GenerationPointsBar)
         self.pointbar = GenerationPointsBar(size_hint_y=None)
@@ -70,6 +71,13 @@ class PointbarOverlay(MDBoxLayout):
     def _on_expanded_changed(self, instance, value):
         """Wird aufgerufen, wenn die Pointbar ein-/ausgeklappt wird."""
         Clock.schedule_once(self._update_height, 0.05)
+
+    def _sync_embedded_expanded(self, instance, value):
+        """Synchronisiert is_expanded mit der eingebetteten (unsichtbaren) Pointbar,
+        damit pointbar_container.minimum_height dem Overlay folgt und
+        der Hauptinhalt korrekt unter das Overlay rutscht."""
+        if self.embedded_pointbar:
+            self.embedded_pointbar.is_expanded = value
     
     def _on_window_size(self, window, size):
         """Passt die Position bei Fenstergrößenänderung an."""
@@ -128,11 +136,20 @@ class PointbarOverlay(MDBoxLayout):
         self.pointbar_container = root.ids.get('pointbar_container')
         self.nav_rail_container = root.ids.get('nav_rail_container')
         self.menu_toggle_container = root.ids.get('menu_toggle_container')
-        
+        self.embedded_pointbar = root.ids.get('generation_points')
+
         # Overlay direkt zum Root (MDScreen) hinzufügen - über allen anderen Widgets
         root.add_widget(self)
         Logger.info("PointbarOverlay zu Root (MDScreen) hinzugefügt")
-        
+
+        # is_expanded zwischen Overlay-Pointbar und eingebetteter (unsichtbarer)
+        # Pointbar synchronisieren. Die eingebettete Pointbar bestimmt via ihrer
+        # minimum_height die Höhe des pointbar_container, wodurch der Hauptinhalt
+        # korrekt unter dem Overlay beginnt (kein Layout-Loch).
+        if self.embedded_pointbar:
+            self.embedded_pointbar.is_expanded = self.pointbar.is_expanded
+            self.pointbar.bind(is_expanded=self._sync_embedded_expanded)
+
         # Positionierung aktualisieren
         self._update_position()
         
@@ -157,7 +174,7 @@ class PointbarOverlay(MDBoxLayout):
         """Entfernt das Overlay aus dem Root und entfernt Bindungen."""
         if self.parent:
             self.parent.remove_widget(self)
-        
+
         # Bindungen entfernen
         if self.tabs_container:
             self.tabs_container.unbind(height=self._update_position)
@@ -169,15 +186,17 @@ class PointbarOverlay(MDBoxLayout):
             self.nav_rail_container.unbind(width=self._update_position)
         if self.root:
             self.root.unbind(size=self._update_position)
-        
+
         if self.pointbar:
+            self.pointbar.unbind(is_expanded=self._sync_embedded_expanded)
             self.pointbar.unbind_charakter_properties()
-        
+
         self.root = None
         self.tabs_container = None
         self.pointbar_container = None
         self.menu_toggle_container = None
         self.nav_rail_container = None
+        self.embedded_pointbar = None
         
         Logger.info("PointbarOverlay geschlossen")
     

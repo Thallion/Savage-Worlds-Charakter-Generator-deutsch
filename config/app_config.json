@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": false,
+  "mobile_modus": true,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "SWAE",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-18T13:58:25.613528"
+  "last_updated": "2026-04-19T10:29:01.575953"
 }
