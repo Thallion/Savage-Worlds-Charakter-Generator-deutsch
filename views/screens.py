@@ -3,7 +3,11 @@
 Screen-Klassen extrahiert aus main.py für bessere Code-Organisation
 """
 
+import json as json_lib
 import re
+import threading
+import urllib.error
+import urllib.request
 import webbrowser
 from kivy.logger import Logger
 from kivy.clock import Clock
@@ -13,6 +17,12 @@ from kivy.properties import StringProperty
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDButton, MDButtonText
+from kivymd.uix.dialog import (
+    MDDialog,
+    MDDialogButtonContainer,
+    MDDialogHeadlineText,
+    MDDialogSupportingText,
+)
 
 
 class CharakterVerwaltungScreen(MDScreen):
@@ -216,8 +226,16 @@ class HistorieScreen(MDScreen):
             return False
 
 
-APP_VERSION = "0.7.0.5"
+APP_VERSION = "0.7.1.8"
 APP_UPDATE_DATE = "12.04.2026"
+
+VERSION_CHECK_URL = (
+    "https://raw.githubusercontent.com/thallion/"
+    "savage-worlds-charakter-generator-deutsch/main/version.json"
+)
+PLAY_STORE_URL = (
+    "https://play.google.com/store/apps/details?id=com.github.thallion.savageworlds"
+)
 
 
 class InfoScreen(MDScreen):
@@ -265,33 +283,43 @@ class InfoScreen(MDScreen):
     ]
 
     def on_kv_post(self, base_widget):
-        """Fügt die Link-Buttons hinzu, nachdem das KV geladen wurde."""
-        # Container für Links finden
+        """Fügt den Update-Button und die Link-Buttons hinzu."""
         container = self.ids.link_container
-        
-        # Container für linksbündige Ausrichtung konfigurieren
         container.spacing = dp(4)
-        container.padding = [dp(10), dp(4), dp(10), dp(4)]  # links, oben, rechts, unten
-        
-        # Für jeden Link einen Button erstellen
+        container.padding = [dp(10), dp(4), dp(10), dp(4)]
+
+        # Update-Button (ganz oben)
+        self._update_btn_text = MDButtonText(
+            text="Auf Updates prüfen",
+            padding=[dp(20), 0],
+        )
+        self._update_btn = MDButton(
+            style="filled",
+            size_hint_x=None,
+            size_hint_y=None,
+            height=dp(50),
+            pos_hint={"x": 0},
+            on_release=lambda x: self.pruefe_auf_update(),
+        )
+        self._update_btn.add_widget(self._update_btn_text)
+        container.add_widget(self._update_btn)
+        Clock.schedule_once(
+            lambda dt: self._adjust_button_width(self._update_btn, "Auf Updates prüfen"), 0
+        )
+
+        # Link-Buttons
         for label, url in self.links:
             btn = MDButton(
                 style="elevated",
-                size_hint_x=None,  # Keine horizontale Größenbindung
+                size_hint_x=None,
                 size_hint_y=None,
                 height=dp(50),
-                pos_hint={"x": 0},  # Linksbündige Positionierung
-                on_release=lambda x, u=url: self.open_link(u)
+                pos_hint={"x": 0},
+                on_release=lambda x, u=url: self.open_link(u),
             )
-            # Text als Kind-Widget hinzufügen
-            btn_text = MDButtonText(
-                text=label,
-                padding=[dp(20), 0]  # Seitenpolsterung für den Text
-            )
+            btn_text = MDButtonText(text=label, padding=[dp(20), 0])
             btn.add_widget(btn_text)
             container.add_widget(btn)
-            
-            # Nach dem Hinzufügen die Breite des Buttons berechnen
             Clock.schedule_once(lambda dt, btn=btn, lbl=label: self._adjust_button_width(btn, lbl), 0)
         
     def _adjust_button_width(self, button, text):
@@ -301,6 +329,89 @@ class InfoScreen(MDScreen):
         estimated_width = len(text) * dp(10) + dp(40)  # 10dp pro Zeichen + Padding
         button.width = max(min_width, estimated_width)
             
+    def pruefe_auf_update(self):
+        """Startet den Update-Check in einem Hintergrund-Thread."""
+        self._update_btn_text.text = "Prüfe..."
+        self._update_btn.disabled = True
+        threading.Thread(target=self._update_check_worker, daemon=True).start()
+
+    def _update_check_worker(self):
+        """Läuft im Hintergrund-Thread: lädt version.json und vergleicht."""
+        try:
+            with urllib.request.urlopen(VERSION_CHECK_URL, timeout=10) as resp:
+                data = json_lib.loads(resp.read().decode("utf-8"))
+            latest = data.get("version", "")
+            Clock.schedule_once(lambda dt: self._zeige_update_ergebnis(latest, None), 0)
+        except Exception as exc:
+            Clock.schedule_once(lambda dt, e=str(exc): self._zeige_update_ergebnis(None, e), 0)
+
+    def _zeige_update_ergebnis(self, latest_version, fehler):
+        """Verarbeitet das Ergebnis des Update-Checks im Hauptthread."""
+        self._update_btn_text.text = "Auf Updates prüfen"
+        self._update_btn.disabled = False
+
+        try:
+            from services.service_container import service_container
+            dialog_svc = service_container.dialog_service
+        except Exception:
+            dialog_svc = None
+
+        if fehler:
+            Logger.warning(f"InfoScreen: Update-Check fehlgeschlagen: {fehler}")
+            if dialog_svc:
+                dialog_svc.show_warning_dialog(
+                    "Update-Check fehlgeschlagen.\nBitte Internetverbindung prüfen."
+                )
+            return
+
+        if not latest_version:
+            if dialog_svc:
+                dialog_svc.show_warning_dialog("Ungültige Versionsinformation erhalten.")
+            return
+
+        if self._ist_neuere_version(APP_VERSION, latest_version):
+            self._zeige_update_dialog(latest_version)
+        else:
+            if dialog_svc:
+                dialog_svc.show_success_dialog(
+                    f"Du nutzt bereits die aktuelle Version ({APP_VERSION})."
+                )
+
+    def _zeige_update_dialog(self, neue_version):
+        """Zeigt einen Dialog, wenn ein Update verfügbar ist."""
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Update verfügbar"),
+            MDDialogSupportingText(
+                text=f"Version {neue_version} ist im Play Store verfügbar.\n"
+                     f"Aktuell installiert: {APP_VERSION}"
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Schließen"),
+                    style="text",
+                    on_release=lambda x: dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Im Play Store öffnen"),
+                    style="filled",
+                    on_release=lambda x: (dialog.dismiss(), self.open_link(PLAY_STORE_URL)),
+                ),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+
+    @staticmethod
+    def _ist_neuere_version(aktuell: str, neuest: str) -> bool:
+        """Gibt True zurück, wenn neuest > aktuell (Tupel-Vergleich)."""
+        try:
+            return (
+                tuple(int(x) for x in neuest.split("."))
+                > tuple(int(x) for x in aktuell.split("."))
+            )
+        except (ValueError, AttributeError):
+            return False
+
     def open_link(self, url):
         """Öffnet einen Link im Browser oder E-Mail-Client."""
         Logger.info(f"Öffne Link: {url}")
