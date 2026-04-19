@@ -118,6 +118,37 @@ class GenerationPointsBar(MDBoxLayout):
         if panel:
             panel.bind(is_open=self._on_panel_state_changed)
 
+    def on_touch_down(self, touch):
+        """Temporäres Diagnose-Logging zur Identifikation des Desktop-Button-Problems."""
+        inside = self.collide_point(*touch.pos)
+        if inside:
+            # Welche Kinder sind unter dem Touch?
+            toolbar = self.ids.get('toolbar')
+            if toolbar and toolbar.collide_point(*touch.pos):
+                hit_names = []
+                for child in toolbar.children:
+                    if child.collide_point(*touch.pos):
+                        hit_names.append(f"{type(child).__name__}(disabled={child.disabled},opacity={child.opacity})")
+                Logger.debug(
+                    f"GenerationPointsBar: touch_down @ ({touch.pos[0]:.1f},{touch.pos[1]:.1f}) "
+                    f"toolbar hit: {hit_names}"
+                )
+            else:
+                Logger.debug(
+                    f"GenerationPointsBar: touch_down @ ({touch.pos[0]:.1f},{touch.pos[1]:.1f}) "
+                    f"toolbar={toolbar}, toolbar_pos={toolbar.pos if toolbar else 'N/A'}"
+                )
+        result = super().on_touch_down(touch)
+        if inside:
+            Logger.debug(f"GenerationPointsBar: on_touch_down super() returned {result}")
+        return result
+
+    def on_touch_up(self, touch):
+        """Diagnose-Logging für Touch-Up."""
+        if self.collide_point(*touch.pos):
+            Logger.debug(f"GenerationPointsBar: touch_up @ ({touch.pos[0]:.1f},{touch.pos[1]:.1f}), grab_list={list(touch.grab_list)}")
+        return super().on_touch_up(touch)
+
     def _on_panel_state_changed(self, panel, is_open):
         """Callback wenn MDExpansionPanel geöffnet/geschlossen wird."""
         self.is_expanded = is_open

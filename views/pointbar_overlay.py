@@ -11,6 +11,7 @@ from kivy.metrics import dp
 from kivy.logger import Logger
 from kivy.clock import Clock
 from kivy.app import App
+from kivy.utils import platform
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
@@ -107,16 +108,24 @@ class PointbarOverlay(MDBoxLayout):
         root = self.parent  # MDScreen
         root_height = root.height
         root_width = root.width
-        
+
+        # Android: Statusbar/Notch-Höhe berücksichtigen. Das Overlay hängt
+        # direkt am MDScreen (nicht in outer_box), daher greift das
+        # outer_box.padding aus main.py nicht.
+        android_top = 0
+        if platform == 'android':
+            app = App.get_running_app()
+            android_top = getattr(app, '_android_top_padding', 0)
+
         # Position: direkt unter den Tabs, über dem restlichen Content
         # Beginnt rechts von Menu-Toggle und Nav Railbar (falls sichtbar)
-        self.top = root_height - tabs_height
+        self.top = root_height - android_top - tabs_height
         self.x = menu_toggle_width + nav_rail_width  # Nach rechts versetzen um beide Breiten
         self.width = root_width - menu_toggle_width - nav_rail_width  # Breite anpassen
         self.size_hint_x = None  # Absolute Breite verwenden
-        
+
         # Debug-Logging
-        Logger.info(f"PointbarOverlay Position: x={self.x}, width={self.width}, menu_toggle_width={menu_toggle_width}, nav_rail_width={nav_rail_width}, root_width={root_width}, tabs_height={tabs_height}")
+        Logger.info(f"PointbarOverlay Position: x={self.x}, width={self.width}, menu_toggle_width={menu_toggle_width}, nav_rail_width={nav_rail_width}, root_width={root_width}, tabs_height={tabs_height}, android_top={android_top}")
     
     def open(self, *args, **kwargs):
         """Fügt das Overlay zum Root-Layout hinzu und bindet an den Charakter-Controller."""

@@ -113,6 +113,7 @@
         height: self.minimum_height if root.is_expanded else 0
         padding: [dp(12), dp(8), dp(12), dp(8)] if root.is_expanded else [0, 0, 0, 0]
         opacity: 1 if root.is_expanded else 0
+        disabled: not root.is_expanded
 
         # Logo-Container (nur bei breitem Fenster sichtbar)
         MDCard:
