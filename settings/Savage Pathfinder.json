@@ -197,9 +197,7 @@
                 },
                 "robustheit_bonus": 1,
                 "bewegungsweite_bonus": 0,
-                "fertigkeits_startboni": {
-                    "Einschüchtern": 2
-                },
+                "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
                     "Außenseiter_leicht"
