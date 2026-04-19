@@ -35,6 +35,7 @@ from functions.volkseigenarten_funktionen import (
     formatiere_punkte_anzeige,
     START_PUNKTE
 )
+from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
 
 import os
 import sys
@@ -114,6 +115,7 @@ class VolkGeneratorWizard:
         self.negative_eigenarten = []
         
         self._wizard_finished = False
+        self._filter_nur_verfuegbar = True  # Filter für Talent-Auswahl
 
         self.wizard_data = {
             'name': '',
@@ -688,8 +690,9 @@ class VolkGeneratorWizard:
         dialog.open()
 
     def _show_talent_optionen_dialog(self, eigenart, liste, checkbox, optionen, eigenart_name):
-        """Dialog zur Auswahl eines freien Talents für Volkseigenart."""
+        """Dialog zur Auswahl eines freien Talents für Volkseigenart mit Filter-Toggle und Warn-Icons."""
         import time
+        from kivy.core.window import Window
         
         from functions.volk_funktionen import get_freie_talente
         
@@ -702,7 +705,8 @@ class VolkGeneratorWizard:
             liste.append(eigenart)
             return
         
-        talente = get_freie_talente(charakter, nur_verfuegbare=True)
+        # Talente mit aktuellem Filter laden
+        talente = get_freie_talente(charakter, nur_verfuegbare=self._filter_nur_verfuegbar)
         if not talente or (len(talente) == 1 and "Keine" in talente[0]):
             Logger.warning("Keine freien Talente verfügbar für Volkseigenart")
             liste.append(eigenart)
@@ -713,42 +717,137 @@ class VolkGeneratorWizard:
         selected = [standard]
         self._last_talent_click = 0
 
-        content = MDBoxLayout(orientation="vertical", spacing=dp(4), size_hint_y=None, adaptive_height=True)
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            padding=[dp(16), dp(8), dp(16), dp(8)]
+        )
 
-        content.add_widget(MDLabel(
+        # Header mit Titel und Filter-Button
+        header_box = MDBoxLayout(
+            orientation="horizontal",
+            size_hint_y=None,
+            height=dp(48),
+            spacing=dp(8),
+            padding=[0, 0, 0, 0]
+        )
+        title_label = MDLabel(
             text=beschreibung,
+            font_style="Body",
             theme_text_color="Secondary",
             size_hint_y=None,
-            height=dp(24)
-        ))
+            height=dp(48),
+            size_hint_x=0.85,
+            halign="left",
+            valign="center"
+        )
+        header_box.add_widget(title_label)
+        
+        # Filter-Toggle-Button
+        from kivymd.uix.button import MDIconButton
+        self._filter_btn = MDIconButton(
+            icon="filter" if self._filter_nur_verfuegbar else "filter-off",
+            style="tonal" if self._filter_nur_verfuegbar else "outlined",
+            size_hint=(None, None),
+            size=(dp(48), dp(48)),
+            pos_hint={"center_y": 0.5}
+        )
+        # Debounce für Android
+        btn = self._filter_btn
+        self._filter_btn.bind(on_release=lambda x, btn=btn: self._on_filter_toggle_talent(btn))
+        header_box.add_widget(self._filter_btn)
+        
+        content.add_widget(header_box)
 
-        list_layout = MDList(size_hint_y=None)
-        list_layout.bind(minimum_height=list_layout.setter('height'))
+        # Suchfeld
+        search_field = MDTextField(
+            mode="outlined",
+            size_hint_y=None,
+            height=dp(56)
+        )
+        search_field.add_widget(MDTextFieldHintText(text="Talent suchen..."))
+        content.add_widget(search_field)
+
+        # Höhenberechnung für ScrollView
+        content_fixed = dp(48) + dp(56) + dp(32)  # Header + Suchfeld + Spacing/Padding
+        dialog_chrome = dp(160)  # Headline + Buttons + internes Padding
+        max_dialog_height = Window.height * 0.8
+        scroll_height = min(dp(350), max_dialog_height - content_fixed - dialog_chrome)
+        scroll_height = max(scroll_height, dp(150))
+
+        scroll = TextFieldScrollView(
+            size_hint=(1, None),
+            height=scroll_height,
+            do_scroll_x=False,
+            bar_width=dp(20) if _mobile else dp(12),
+            bar_margin=dp(8) if _mobile else dp(4)
+        )
+        scroll.scroll_type = ['bars', 'content']
+
+        talent_list = MDList(size_hint_y=None)
+        talent_list.bind(minimum_height=talent_list.setter('height'))
         if _mobile:
-            list_layout.padding = [0, 0, dp(32), 0]
+            talent_list.padding = [0, 0, dp(32), 0]
         radio_checkboxes = {}
 
-        for item_name in talente:
-            list_item = MDListItem(size_hint_y=None, height=dp(56) if _mobile else dp(48))
-            list_item.add_widget(MDListItemHeadlineText(text=item_name))
-            radio_cb = MDListItemTrailingCheckbox(
-                active=(item_name == standard),
-                group=f"optionen_{eigenart.get('id', '')}"
-            )
-            r_cb = radio_cb
-            i_name = item_name
-            list_item.bind(on_release=lambda x, name=i_name: self._select_talent_option(name, selected, radio_checkboxes))
-            radio_cb.bind(on_release=lambda x, cb=r_cb, name=i_name: self._on_talent_radio_clicked(name, selected, radio_checkboxes, cb))
-            list_item.add_widget(radio_cb)
-            list_layout.add_widget(list_item)
-            radio_checkboxes[item_name] = radio_cb
+        def populate_talents(*args):
+            talent_list.clear_widgets()
+            radio_checkboxes.clear()
+            search_text = search_field.text.lower() if search_field.text else ""
+            # Talente mit aktuellem Filter neu laden
+            aktuell_talente = get_freie_talente(charakter, nur_verfuegbare=self._filter_nur_verfuegbar)
+            for talent_name in sorted(aktuell_talente):
+                if not talent_name or not str(talent_name).strip():
+                    continue
+                if search_text and search_text not in str(talent_name).lower():
+                    continue
 
-        scroll = MDScrollView(size_hint_y=None, height=landscape_height(200, 0.35),
-                              bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
-        if _mobile:
-            scroll.scroll_type = ['bars', 'content']
-        scroll.add_widget(list_layout)
+                list_item = MDListItem(
+                    size_hint_y=None,
+                    height=dp(56) if _mobile else dp(48)
+                )
+                
+                # Warnicon wenn Voraussetzungen nicht erfüllt (nur bei "Alle anzeigen")
+                if not self._filter_nur_verfuegbar:
+                    talent_obj = charakter.talente.get(talent_name)
+                    if talent_obj:
+                        if not pruefe_voraussetzungen(charakter, talent_obj) or is_talent_rang_hoeher_als_charakter(charakter, talent_obj.rang):
+                            from kivymd.uix.label import MDIcon
+                            warn_icon = MDIcon(
+                                icon="alert-circle-outline",
+                                theme_text_color="Error",
+                                size_hint=(None, None),
+                                size=(dp(24), dp(24)),
+                                pos_hint={"center_y": 0.5}
+                            )
+                            list_item.add_widget(warn_icon)
+                
+                list_item.add_widget(MDListItemHeadlineText(text=str(talent_name)))
+                
+                radio_cb = MDListItemTrailingCheckbox(
+                    active=(talent_name == selected[0]),
+                    group=f"optionen_{eigenart.get('id', '')}"
+                )
+                r_cb = radio_cb
+                i_name = talent_name
+                list_item.bind(on_release=lambda x, name=i_name: self._select_talent_option(name, selected, radio_checkboxes))
+                radio_cb.bind(on_release=lambda x, cb=r_cb, name=i_name: self._on_talent_radio_clicked(name, selected, radio_checkboxes, cb))
+                list_item.add_widget(radio_cb)
+                talent_list.add_widget(list_item)
+                radio_checkboxes[talent_name] = radio_cb
+        
+        # Für Filter-Button zugreifbar machen
+        self._populate_talents_func = populate_talents
+
+        search_field.bind(text=populate_talents)
+        populate_talents()
+
+        scroll.add_widget(talent_list)
         content.add_widget(scroll)
+        content.height = content_fixed + scroll_height
+
+        dialog_height = min(content.height + dialog_chrome, max_dialog_height)
         
         def _on_confirm(x):
             if selected[0]:
@@ -766,14 +865,31 @@ class VolkGeneratorWizard:
 
         dialog = MDDialog(
             MDDialogHeadlineText(text=f"{eigenart_name} — Talent wählen"),
-            MDDialogContentContainer(content),
+            MDDialogContentContainer(content, orientation="vertical"),
             MDDialogButtonContainer(
                 MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
                 MDButton(MDButtonText(text="Bestätigen"), style="filled", on_release=_on_confirm),
             ),
             size_hint=(0.85, None),
+            height=dialog_height,
         )
         dialog.open()
+    
+    def _on_filter_toggle_talent(self, button):
+        """Toggle-Filter für 'nur verfügbare Talente' mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_filter_toggle') and (now - self._last_filter_toggle) < 0.5:
+            return
+        self._last_filter_toggle = now
+        
+        self._filter_nur_verfuegbar = not self._filter_nur_verfuegbar
+        button.icon = "filter" if self._filter_nur_verfuegbar else "filter-off"
+        button.style = "tonal" if self._filter_nur_verfuegbar else "outlined"
+        Logger.debug(f"Filter umgeschaltet auf nur_verfuegbar={self._filter_nur_verfuegbar}")
+        
+        # Talentliste neu aufbauen
+        if hasattr(self, '_populate_talents_func'):
+            self._populate_talents_func()
     
     def _select_talent_option(self, name, selected, radio_checkboxes):
         """Wählt eine Option in der Radio-Liste aus (Klick auf ListItem)."""
@@ -1005,14 +1121,16 @@ class VolkGeneratorWizard:
             self._show_error(f"Fehler beim Speichern: {e}")
     
     def _show_freies_talent_popup(self, volk_name):
-        """Zeigt ein separates Popup zur Auswahl eines freien Talents nach Volk-Erstellung."""
+        """Zeigt separates Popup zur Auswahl eines freien Talents mit Filter-Toggle und Warn-Icons."""
         import time
+        from kivy.core.window import Window
         try:
             app = App.get_running_app()
             charakter = app.controller.charakter
             from functions.volk_funktionen import get_freie_talente, waehle_freies_talent, NO_TALENT_AVAILABLE_TEXT
 
-            talente = get_freie_talente(charakter, nur_verfuegbare=True)
+            # Talente mit aktuellem Filter laden
+            talente = get_freie_talente(charakter, nur_verfuegbare=self._filter_nur_verfuegbar)
             if not talente or talente == [NO_TALENT_AVAILABLE_TEXT]:
                 Logger.warning("Keine freien Talente verfügbar")
                 return
@@ -1027,48 +1145,112 @@ class VolkGeneratorWizard:
             )
             content.bind(minimum_height=content.setter('height'))
 
-            info_label = MDLabel(
-                text=f"Volk '{volk_name}' hat ein freies Talent.\nBitte wähle ein Anfängertalent:",
-                font_style="Body", theme_text_color="Secondary",
-                size_hint_y=None, height=dp(48)
+            # Header mit Titel und Filter-Button
+            header_box = MDBoxLayout(
+                orientation="horizontal",
+                size_hint_y=None,
+                height=dp(48),
+                spacing=dp(8),
+                padding=[0, 0, 0, 0]
             )
-            content.add_widget(info_label)
+            title_label = MDLabel(
+                text=f"Volk '{volk_name}' hat ein freies Talent.\nBitte wähle ein Anfängertalent:",
+                font_style="Body",
+                theme_text_color="Secondary",
+                size_hint_y=None,
+                height=dp(48),
+                size_hint_x=0.85,
+                halign="left",
+                valign="center"
+            )
+            header_box.add_widget(title_label)
+            
+            # Filter-Toggle-Button
+            from kivymd.uix.button import MDIconButton
+            self._filter_btn = MDIconButton(
+                icon="filter" if self._filter_nur_verfuegbar else "filter-off",
+                style="tonal" if self._filter_nur_verfuegbar else "outlined",
+                size_hint=(None, None),
+                size=(dp(48), dp(48)),
+                pos_hint={"center_y": 0.5}
+            )
+            # Debounce für Android
+            btn = self._filter_btn
+            self._filter_btn.bind(on_release=lambda x, btn=btn: self._on_filter_toggle_talent(btn))
+            header_box.add_widget(self._filter_btn)
+            
+            content.add_widget(header_box)
 
             # Suchfeld
             search_field = MDTextField(mode="outlined", size_hint_y=None, height=dp(56))
             search_field.add_widget(MDTextFieldHintText(text="Talent suchen..."))
             content.add_widget(search_field)
 
-            # Scrollbare Talentliste
-            from kivy.core.window import Window
-            scroll_height = min(dp(300), Window.height * 0.4)
-            scroll = MDScrollView(size_hint=(1, None), height=scroll_height, do_scroll_x=False)
-            if _mobile:
-                scroll.bar_width = dp(20)
-                scroll.bar_margin = dp(8)
-                scroll.scroll_type = ['bars', 'content']
+            # Höhenberechnung für ScrollView
+            content_fixed = dp(48) + dp(56) + dp(32)  # Header + Suchfeld + Spacing/Padding
+            dialog_chrome = dp(160)  # Headline + Buttons + internes Padding
+            max_dialog_height = Window.height * 0.8
+            scroll_height = min(dp(350), max_dialog_height - content_fixed - dialog_chrome)
+            scroll_height = max(scroll_height, dp(150))
+
+            scroll = TextFieldScrollView(
+                size_hint=(1, None),
+                height=scroll_height,
+                do_scroll_x=False,
+                bar_width=dp(20) if _mobile else dp(12),
+                bar_margin=dp(8) if _mobile else dp(4)
+            )
+            scroll.scroll_type = ['bars', 'content']
+
             talent_list = MDList(size_hint_y=None)
             talent_list.bind(minimum_height=talent_list.setter('height'))
             if _mobile:
                 talent_list.padding = [0, 0, dp(32), 0]
-            scroll.add_widget(talent_list)
-            content.add_widget(scroll)
 
             def populate_talent_list(*args):
                 talent_list.clear_widgets()
                 search_text = search_field.text.lower() if search_field.text else ""
-                for talent_name in talente:
-                    if search_text and search_text not in talent_name.lower():
+                # Talente mit aktuellem Filter neu laden
+                aktuell_talente = get_freie_talente(charakter, nur_verfuegbare=self._filter_nur_verfuegbar)
+                for talent_name in sorted(aktuell_talente):
+                    if not talent_name or not str(talent_name).strip():
                         continue
-                    is_sel = (self._talent_selected == talent_name)
-                    item = MDListItem(
-                        size_hint_y=None, height=dp(48),
-                        md_bg_color=app.theme_cls.primaryContainerColor if is_sel else [0, 0, 0, 0],
+                    if search_text and search_text not in str(talent_name).lower():
+                        continue
+
+                    list_item = MDListItem(
+                        size_hint_y=None,
+                        height=dp(56) if _mobile else dp(48)
                     )
+                    
+                    # Warnicon wenn Voraussetzungen nicht erfüllt (nur bei "Alle anzeigen")
+                    if not self._filter_nur_verfuegbar:
+                        talent_obj = charakter.talente.get(talent_name)
+                        if talent_obj:
+                            if not pruefe_voraussetzungen(charakter, talent_obj) or is_talent_rang_hoeher_als_charakter(charakter, talent_obj.rang):
+                                from kivymd.uix.label import MDIcon
+                                warn_icon = MDIcon(
+                                    icon="alert-circle-outline",
+                                    theme_text_color="Error",
+                                    size_hint=(None, None),
+                                    size=(dp(24), dp(24)),
+                                    pos_hint={"center_y": 0.5}
+                                )
+                                list_item.add_widget(warn_icon)
+                    
+                    list_item.add_widget(MDListItemHeadlineText(text=str(talent_name)))
+                    
+                    # Auswahl-Hintergrund
+                    is_sel = (self._talent_selected == talent_name)
+                    if is_sel:
+                        list_item.md_bg_color = app.theme_cls.primaryContainerColor
+                    
                     t_name = talent_name
-                    item.bind(on_release=lambda x, n=t_name: _select_talent(n))
-                    item.add_widget(MDListItemHeadlineText(text=talent_name))
-                    talent_list.add_widget(item)
+                    list_item.bind(on_release=lambda x, n=t_name: _select_talent(n))
+                    talent_list.add_widget(list_item)
+            
+            # Für Filter-Button zugreifbar machen
+            self._populate_talents_func = populate_talent_list
 
             def _select_talent(talent_name):
                 now = time.monotonic()
@@ -1084,8 +1266,11 @@ class VolkGeneratorWizard:
                     return
                 self._last_talent_click = now
                 if self._talent_selected:
-                    success = waehle_freies_talent(charakter, volk_name, self._talent_selected)
-                    if success:
+                    result = waehle_freies_talent(charakter, volk_name, self._talent_selected)
+                    if result == "needs_voraussetzungen_confirmation":
+                        # Voraussetzungen nicht erfüllt -> Bestätigungsdialog zeigen
+                        self._show_voraussetzungen_confirmation_dialog(volk_name, self._talent_selected, charakter)
+                    elif result:
                         Logger.info(f"Freies Talent '{self._talent_selected}' für Volk '{volk_name}' gewählt")
                         # VoelkerWidget UI aktualisieren
                         try:
@@ -1096,8 +1281,14 @@ class VolkGeneratorWizard:
                                 widget.aktualisiere_ui()
                         except Exception:
                             pass
-                    if self._talent_popup:
-                        self._talent_popup.dismiss()
+                        if self._talent_popup:
+                            self._talent_popup.dismiss()
+                    else:
+                        # Fehler (z.B. bereits gewählt)
+                        from services.service_container import service_container
+                        ds = service_container.get_dialog_service()
+                        if ds:
+                            ds.show_warning_dialog("Das Talent konnte nicht gewählt werden.")
                 else:
                     from services.service_container import service_container
                     ds = service_container.get_dialog_service()
@@ -1107,6 +1298,11 @@ class VolkGeneratorWizard:
             search_field.bind(text=populate_talent_list)
             populate_talent_list()
 
+            scroll.add_widget(talent_list)
+            content.add_widget(scroll)
+            content.height = content_fixed + scroll_height
+
+            dialog_height = min(content.height + dialog_chrome, max_dialog_height)
             self._talent_popup = MDDialog(
                 MDDialogHeadlineText(text="Freies Talent wählen"),
                 MDDialogContentContainer(content, orientation="vertical"),
@@ -1121,6 +1317,7 @@ class VolkGeneratorWizard:
                     ),
                 ),
                 size_hint=(0.85, None),
+                height=dialog_height,
             )
             self._talent_popup.open()
 

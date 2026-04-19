@@ -50,10 +50,12 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
     _is_open = False
     _charakter = ObjectProperty(None, allownone=True)
     _zusatzelemente_info = DictProperty({})
+    _selected_extras = DictProperty({})  # Gesammelte Zusatzelemente-Auswahlen
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.orientation = "vertical"
+        self._filter_nur_verfuegbar = True
         self._build_ui()
 
     def _get_android_padding(self):
@@ -347,6 +349,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         from functions.volk_funktionen import get_volk_zusatzelemente
         zusatzelemente = get_volk_zusatzelemente(self._charakter, volk_name)
         self._zusatzelemente_info = zusatzelemente
+        self._selected_extras = {}  # Zurücksetzen der gesammelten Auswahlen
 
         hat_extras = (
             zusatzelemente.get('halbelf_entweder_oder', False) or
@@ -448,8 +451,46 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
 
     def _build_generic_extras_section(self):
         """Generische Zusatzelemente: freie Talente, Attribute, Fertigkeiten"""
-        info = self._zusatzelemente_info
+        self._update_extras_ui()
 
+    def _all_extras_selected(self):
+        """Prüft ob alle erforderlichen Zusatzelemente ausgewählt wurden."""
+        info = self._zusatzelemente_info
+        selected = self._selected_extras
+        
+        Logger.debug(f"[DEBUG] _all_extras_selected: info={info}, selected={selected}")
+        
+        # Freie Talente
+        if info.get('freie_talente', False) and 'freies_talent' not in selected:
+            Logger.debug(f"[DEBUG] Freie Talente erforderlich aber nicht ausgewählt")
+            return False
+        # Freie Attribute
+        if info.get('freie_attribute', False) and 'freies_attribut' not in selected:
+            Logger.debug(f"[DEBUG] Freie Attribute erforderlich aber nicht ausgewählt")
+            return False
+        # Freie Fertigkeiten
+        if info.get('freie_fertigkeiten', False) and 'freie_fertigkeit' not in selected:
+            Logger.debug(f"[DEBUG] Freie Fertigkeiten erforderlich aber nicht ausgewählt")
+            return False
+        # Halbelf ENTWEDER/ODER - spezieller Fall (entweder Talent oder Attribut)
+        if info.get('halbelf_entweder_oder', False):
+            if 'halbelf_talent' not in selected and 'halbelf_attribut' not in selected:
+                Logger.debug(f"[DEBUG] Halbelf ENTWEDER/ODER erforderlich aber nicht ausgewählt")
+                return False
+        # Menschen Vielseitig - spezieller Fall (entweder Talent oder Fertigkeitspunkte)
+        if info.get('menschen_vielseitig', False):
+            if 'mensch_talent' not in selected and 'mensch_fertigkeitspunkte' not in selected:
+                Logger.debug(f"[DEBUG] Menschen Vielseitig erforderlich aber nicht ausgewählt")
+                return False
+        Logger.debug(f"[DEBUG] _all_extras_selected: ALLE ausgewählt -> True")
+        return True
+
+    def _update_extras_ui(self):
+        """Aktualisiert die UI nach einer Auswahl, zeigt bereits ausgewählte Elemente an."""
+        self._content_box.clear_widgets()
+        info = self._zusatzelemente_info
+        selected = self._selected_extras
+        
         # Info-Text
         self._content_box.add_widget(MDLabel(
             text=f"Optionen für [b]{self._selected_volk}[/b]:",
@@ -457,9 +498,57 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             adaptive_height=True,
             size_hint_y=None,
         ))
-
-        # Freie Talente
-        if info.get('freie_talente', False):
+        
+        # Bereits ausgewählte Elemente anzeigen
+        if selected:
+            selected_label = MDLabel(
+                text="Bereits ausgewählt:",
+                bold=True,
+                adaptive_height=True,
+                size_hint_y=None,
+            )
+            self._content_box.add_widget(selected_label)
+            
+            for key, value in selected.items():
+                if key == 'freies_talent':
+                    self._content_box.add_widget(MDLabel(
+                        text=f"• Freies Talent: {value}",
+                        adaptive_height=True,
+                        size_hint_y=None,
+                        theme_text_color="Secondary",
+                    ))
+                elif key == 'freies_attribut':
+                    self._content_box.add_widget(MDLabel(
+                        text=f"• Freies Attribut: {value}",
+                        adaptive_height=True,
+                        size_hint_y=None,
+                        theme_text_color="Secondary",
+                    ))
+                elif key == 'freie_fertigkeit':
+                    self._content_box.add_widget(MDLabel(
+                        text=f"• Freie Fertigkeit: {value}",
+                        adaptive_height=True,
+                        size_hint_y=None,
+                        theme_text_color="Secondary",
+                    ))
+                elif key == 'halbelf_talent':
+                    self._content_box.add_widget(MDLabel(
+                        text=f"• Halbelf Talent: {value}",
+                        adaptive_height=True,
+                        size_hint_y=None,
+                        theme_text_color="Secondary",
+                    ))
+                elif key == 'mensch_talent':
+                    self._content_box.add_widget(MDLabel(
+                        text=f"• Mensch Talent: {value}",
+                        adaptive_height=True,
+                        size_hint_y=None,
+                        theme_text_color="Secondary",
+                    ))
+        
+        # Noch ausstehende Auswahlen als Cards anzeigen
+        # Freie Talente (falls noch nicht ausgewählt)
+        if info.get('freie_talente', False) and 'freies_talent' not in selected:
             talent_card = self._create_option_card(
                 icon="star",
                 title="Freies Anfängertalent",
@@ -468,12 +557,11 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                 color=self.theme_cls.primaryContainerColor,
             )
             self._content_box.add_widget(talent_card)
-
-        # Freie Attribute
-        if info.get('freie_attribute', False):
+        
+        # Freie Attribute (falls noch nicht ausgewählt)
+        if info.get('freie_attribute', False) and 'freies_attribut' not in selected:
             attribut_optionen = info.get('attribut_optionen', [])
             if len(attribut_optionen) <= 4:
-                # Wenige Optionen → als Cards anzeigen
                 self._content_box.add_widget(MDLabel(
                     text="Freies Attribut:",
                     bold=True,
@@ -491,26 +579,66 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                     )
                     self._content_box.add_widget(attr_card)
             else:
-                # Viele Optionen → als Chip-Liste
-                self._show_chip_selection(
-                    "Freies Attribut wählen:",
-                    attribut_optionen,
-                    lambda attr: self._apply_choice(
-                        self._selected_volk, {'freies_attribut': attr}),
+                # Viele Optionen → als Card die Chip-Liste öffnet
+                attr_card = self._create_option_card(
+                    icon="arm-flex",
+                    title="Freies Attribut wählen",
+                    description=f"Wähle aus {len(attribut_optionen)} Attributen",
+                    on_click=lambda: self._show_chip_selection(
+                        "Freies Attribut wählen:",
+                        attribut_optionen,
+                        lambda attr: self._apply_choice(
+                            self._selected_volk, {'freies_attribut': attr})),
+                    color=self.theme_cls.surfaceContainerColor,
                 )
-
-        # Freie Fertigkeiten
-        if info.get('freie_fertigkeiten', False):
+                self._content_box.add_widget(attr_card)
+        
+        # Freie Fertigkeiten (falls noch nicht ausgewählt)
+        if info.get('freie_fertigkeiten', False) and 'freie_fertigkeit' not in selected:
             from functions.volk_funktionen import get_verfuegbare_fertigkeiten
             fertigkeiten = get_verfuegbare_fertigkeiten(self._charakter, nur_verstand=True)
-            self._show_chip_selection(
-                "Verstandsbasierte Fertigkeit wählen:",
-                fertigkeiten,
-                lambda fert: self._apply_choice(
-                    self._selected_volk, {'freie_fertigkeit': fert}),
+            fert_card = self._create_option_card(
+                icon="school",
+                title="Verstandsbasierte Fertigkeit wählen",
+                description=f"Wähle aus {len(fertigkeiten)} Fertigkeiten",
+                on_click=lambda: self._show_chip_selection(
+                    "Verstandsbasierte Fertigkeit wählen:",
+                    fertigkeiten,
+                    lambda fert: self._apply_choice(
+                        self._selected_volk, {'freie_fertigkeit': fert})),
+                color=self.theme_cls.surfaceContainerColor,
             )
-
+            self._content_box.add_widget(fert_card)
+        
+        # Falls alle bereits ausgewählt wurden, sollte eigentlich _all_extras_selected True sein
+        # und das Overlay geschlossen werden. Falls nicht (Bug), zeige "Fertig" Button an.
+        if self._all_extras_selected():
+            # Sollte nicht passieren, aber zur Sicherheit
+            fertig_btn = MDButton(
+                style="filled",
+                size_hint_y=None,
+                height=dp(48),
+                on_release=lambda x: self._finish_selection(),
+            )
+            fertig_btn.add_widget(MDButtonText(text="Fertig"))
+            self._content_box.add_widget(fertig_btn)
+        
         self._add_back_button()
+
+    def _finish_selection(self):
+        """Manueller Abschluss der Auswahl (Fallback)."""
+        callback = self.on_volk_chosen
+        
+        # KOPIE der ausgewählten Extras erstellen, bevor sie zurückgesetzt werden
+        selected_extras_copy = self._selected_extras.copy()
+        Logger.debug(f"[DEBUG] _finish_selection: Kopie der Extras erstellt: {selected_extras_copy}")
+        
+        self.close()
+        if callback:
+            Clock.schedule_once(
+                lambda dt: callback(self._selected_volk, selected_extras_copy), 0.25
+            )
+        self._selected_extras = {}
 
     # ==================== Talent-Auswahl (Sub-Phase) ====================
 
@@ -521,8 +649,9 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         from kivy.core.window import Window
         
         from functions.volk_funktionen import get_freie_talente
-        talente = get_freie_talente(self._charakter)
-        Logger.debug(f"Talent-Auswahl für {self._selected_volk}: {len(talente)} Talente gefunden, typ={talent_typ}")
+        from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
+        talente = get_freie_talente(self._charakter, nur_verfuegbare=self._filter_nur_verfuegbar)
+        Logger.debug(f"Talent-Auswahl für {self._selected_volk}: {len(talente)} Talente gefunden, typ={talent_typ}, nur_verfuegbare={self._filter_nur_verfuegbar}")
         
         if not talente or (len(talente) == 1 and "Keine" in talente[0]):
             self._show_no_talente_message()
@@ -532,6 +661,24 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         self._last_talent_click = 0
         selected_talent = [None]
         checkboxes = {}
+        
+        # Aktuell gewähltes Talent für diesen Volkstyp ermitteln
+        current_talent = None
+        if talent_typ == 'mensch_talent':
+            from functions.volk_funktionen import _get_menschen_freies_talent
+            current_talent = _get_menschen_freies_talent(self._charakter)
+        elif talent_typ == 'halbelf_talent':
+            from functions.volk_funktionen import _get_halbelf_freies_talent
+            current_talent = _get_halbelf_freies_talent(self._charakter)
+        elif talent_typ == 'freies_talent':
+            # Für generische freie Talente gibt es keine spezielle Tracking-Variable
+            # Wir könnten prüfen, ob ein Talent ausgewählt ist, das zu diesem Volk gehört
+            # Aber das ist komplex; vorerst keine Vorselektion
+            current_talent = None
+        
+        if current_talent:
+            selected_talent[0] = current_talent
+            Logger.debug(f"Aktuell gewähltes Talent für {talent_typ}: {current_talent}")
 
         content = MDBoxLayout(
             orientation="vertical",
@@ -540,14 +687,41 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             padding=[dp(16), dp(8), dp(16), dp(8)]
         )
 
-        info_label = MDLabel(
+        # Header mit Titel und Filter-Button
+        header_box = MDBoxLayout(
+            orientation="horizontal",
+            size_hint_y=None,
+            height=dp(48),
+            spacing=dp(8),
+            padding=[0, 0, 0, 0]
+        )
+        title_label = MDLabel(
             text=f"Wähle ein freies Anfängertalent für {self._selected_volk}:",
             font_style="Body",
             theme_text_color="Secondary",
             size_hint_y=None,
-            height=dp(48)
+            height=dp(48),
+            size_hint_x=0.85,
+            halign="left",
+            valign="center"
         )
-        content.add_widget(info_label)
+        header_box.add_widget(title_label)
+        
+        # Filter-Toggle-Button
+        from kivymd.uix.button import MDIconButton
+        self._filter_btn = MDIconButton(
+            icon="filter" if self._filter_nur_verfuegbar else "filter-off",
+            style="tonal" if self._filter_nur_verfuegbar else "outlined",
+            size_hint=(None, None),
+            size=(dp(48), dp(48)),
+            pos_hint={"center_y": 0.5}
+        )
+        # Debounce für Android
+        btn = self._filter_btn
+        self._filter_btn.bind(on_release=lambda x, btn=btn: self._on_filter_toggle(btn))
+        header_box.add_widget(self._filter_btn)
+        
+        content.add_widget(header_box)
 
         search_field = MDTextField(
             mode="outlined",
@@ -584,7 +758,9 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             talent_list.clear_widgets()
             checkboxes.clear()
             search_text = search_field.text.lower() if search_field.text else ""
-            for talent_name in sorted(talente):
+            # Talente mit aktuellem Filter neu laden
+            aktuell_talente = get_freie_talente(self._charakter, nur_verfuegbare=self._filter_nur_verfuegbar)
+            for talent_name in sorted(aktuell_talente):
                 if not talent_name or not str(talent_name).strip():
                     continue
                 if search_text and search_text not in str(talent_name).lower():
@@ -610,6 +786,21 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                 info_btn.bind(on_release=lambda x, t=t_info: self._show_talent_info(t))
                 row.add_widget(info_btn)
 
+                # Warnicon wenn Voraussetzungen nicht erfüllt (nur bei "Alle anzeigen")
+                if not self._filter_nur_verfuegbar:
+                    talent_obj = self._charakter.talente.get(talent_name)
+                    if talent_obj:
+                        if not pruefe_voraussetzungen(self._charakter, talent_obj) or is_talent_rang_hoeher_als_charakter(self._charakter, talent_obj.rang):
+                            from kivymd.uix.label import MDIcon
+                            warn_icon = MDIcon(
+                                icon="alert-circle-outline",
+                                theme_text_color="Error",
+                                size_hint=(None, None),
+                                size=(dp(24), dp(24)),
+                                pos_hint={"center_y": 0.5}
+                            )
+                            row.add_widget(warn_icon)
+
                 # Talent-Name
                 name_label = MDLabel(
                     text=str(talent_name),
@@ -630,6 +821,12 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                 row.add_widget(checkbox)
                 talent_list.add_widget(row)
                 checkboxes[talent_name] = checkbox
+                # Vorselektieren wenn dieses Talent aktuell gewählt ist
+                if selected_talent[0] and talent_name == selected_talent[0]:
+                    checkbox.active = True
+        
+        # Für Filter-Button zugreifbar machen
+        self._populate_talents_func = populate_talents
 
         def on_confirm(*args):
             if selected_talent[0]:
@@ -667,6 +864,22 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             height=dialog_height,
         )
         self._talent_selection_popup.open()
+
+    def _on_filter_toggle(self, button):
+        """Toggle-Filter für 'nur verfügbare Talente' mit Debounce"""
+        now = time.monotonic()
+        if hasattr(self, '_last_filter_toggle') and (now - self._last_filter_toggle) < 0.5:
+            return
+        self._last_filter_toggle = now
+        
+        self._filter_nur_verfuegbar = not self._filter_nur_verfuegbar
+        button.icon = "filter" if self._filter_nur_verfuegbar else "filter-off"
+        button.style = "tonal" if self._filter_nur_verfuegbar else "outlined"
+        Logger.debug(f"Filter umgeschaltet auf nur_verfuegbar={self._filter_nur_verfuegbar}")
+        
+        # Talentliste neu aufbauen
+        if hasattr(self, '_populate_talents_func'):
+            self._populate_talents_func()
 
     def _show_no_talente_message(self):
         """Zeigt eine Meldung wenn keine Talente verfügbar sind"""
@@ -867,13 +1080,30 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         self._content_box.add_widget(back_box)
 
     def _apply_choice(self, volk_name, zusatzelemente):
-        """Wendet die Auswahl an und schließt das Overlay"""
-        callback = self.on_volk_chosen
-
-        self.close()
-
-        # Callback verzögert aufrufen, damit die Animation abgeschlossen ist
-        if callback:
-            Clock.schedule_once(
-                lambda dt: callback(volk_name, zusatzelemente), 0.25
-            )
+        """Fügt eine Zusatzelement-Auswahl hinzu und schließt das Overlay wenn alle erfüllt."""
+        # Auswahl zum Sammeldict hinzufügen
+        self._selected_extras.update(zusatzelemente)
+        Logger.debug(f"Zusatzelement ausgewählt: {zusatzelemente}. Gesammelt: {self._selected_extras}")
+        
+        # Prüfen ob alle erforderlichen Auswahlen getroffen wurden
+        if self._all_extras_selected():
+            Logger.debug(f"[DEBUG] _apply_choice: ALLE Extras ausgewählt, rufe Callback auf")
+            callback = self.on_volk_chosen
+            Logger.debug(f"[DEBUG] Callback vorhanden: {callback is not None}")
+            
+            # KOPIE der ausgewählten Extras erstellen, bevor sie zurückgesetzt werden
+            selected_extras_copy = self._selected_extras.copy()
+            Logger.debug(f"[DEBUG] Kopie der Extras erstellt: {selected_extras_copy}")
+            
+            self.close()
+            # Callback verzögert aufrufen, damit die Animation abgeschlossen ist
+            if callback:
+                Clock.schedule_once(
+                    lambda dt: callback(volk_name, selected_extras_copy), 0.25
+                )
+            # Gesammelte Extras zurücksetzen für nächste Auswahl
+            self._selected_extras = {}
+        else:
+            Logger.debug(f"[DEBUG] _apply_choice: Noch nicht alle Extras ausgewählt, update UI")
+            # Noch weitere Auswahlen erforderlich - UI aktualisieren
+            self._update_extras_ui()

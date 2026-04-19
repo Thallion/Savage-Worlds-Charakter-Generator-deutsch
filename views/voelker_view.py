@@ -129,6 +129,7 @@ class VoelkerWidget(MDBoxLayout):
     def _on_overlay_volk_chosen(self, volk_name, zusatzelemente):
         """Callback vom VoelkerAuswahlOverlay - Volk + Zusatzelemente gewählt"""
         try:
+            Logger.info(f"[DEBUG] _on_overlay_volk_chosen aufgerufen: volk_name={volk_name}, zusatzelemente={zusatzelemente}")
             # Volk auswählen/abwählen
             self._select_volk_from_dropdown(volk_name)
 
@@ -143,14 +144,28 @@ class VoelkerWidget(MDBoxLayout):
                 # Freies Talent (all types)
                 if zusatzelemente.get('freies_talent'):
                     talent = zusatzelemente['freies_talent']
-                    waehle_freies_talent(charakter, volk_name, talent)
-                    self.voelker_auswahlen[volk_name]['talent'] = talent
+                    Logger.info(f"[DEBUG] Rufe waehle_freies_talent auf für '{volk_name}' mit Talent '{talent}'")
+                    result = waehle_freies_talent(charakter, volk_name, talent)
+                    Logger.info(f"[DEBUG] waehle_freies_talent result: {result}")
+                    if result == "needs_voraussetzungen_confirmation":
+                        self._show_voraussetzungen_confirmation_dialog(volk_name, 'freies_talent', talent)
+                        return  # Abbrechen, Dialog wird angezeigt
+                    elif result:
+                        self.voelker_auswahlen[volk_name]['talent'] = talent
+                    else:
+                        Logger.error(f"Fehler bei Auswahl von freiem Talent '{talent}' für Volk '{volk_name}'")
 
                 # Halbelf Talent
                 if zusatzelemente.get('halbelf_talent'):
                     talent = zusatzelemente['halbelf_talent']
-                    waehle_halbelf_talent(charakter, volk_name, talent)
-                    self.voelker_auswahlen[volk_name]['halbelf_wahl'] = f'Talent: {talent}'
+                    result = waehle_halbelf_talent(charakter, volk_name, talent)
+                    if result == "needs_voraussetzungen_confirmation":
+                        self._show_voraussetzungen_confirmation_dialog(volk_name, 'halbelf_talent', talent)
+                        return  # Abbrechen, Dialog wird angezeigt
+                    elif result:
+                        self.voelker_auswahlen[volk_name]['halbelf_wahl'] = f'Talent: {talent}'
+                    else:
+                        Logger.error(f"Fehler bei Auswahl von Halbelf-Talent '{talent}' für Volk '{volk_name}'")
 
                 # Halbelf Attribut
                 if zusatzelemente.get('halbelf_attribut'):
@@ -160,8 +175,14 @@ class VoelkerWidget(MDBoxLayout):
                 # Mensch Talent
                 if zusatzelemente.get('mensch_talent'):
                     talent = zusatzelemente['mensch_talent']
-                    waehle_mensch_talent(charakter, volk_name, talent)
-                    self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = f"Talent: {talent}"
+                    result = waehle_mensch_talent(charakter, volk_name, talent)
+                    if result == "needs_voraussetzungen_confirmation":
+                        self._show_voraussetzungen_confirmation_dialog(volk_name, 'mensch_talent', talent)
+                        return  # Abbrechen, Dialog wird angezeigt
+                    elif result:
+                        self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = f"Talent: {talent}"
+                    else:
+                        Logger.error(f"Fehler bei Auswahl von Mensch-Talent '{talent}' für Volk '{volk_name}'")
 
                 # Mensch Fertigkeitspunkte
                 if zusatzelemente.get('mensch_fertigkeitspunkte'):
@@ -171,6 +192,7 @@ class VoelkerWidget(MDBoxLayout):
                 # Freies Attribut
                 if zusatzelemente.get('freies_attribut'):
                     attr = zusatzelemente['freies_attribut']
+                    Logger.info(f"[DEBUG] Rufe waehle_freies_attribut auf für '{volk_name}' mit Attribut '{attr}'")
                     waehle_freies_attribut(charakter, volk_name, attr)
                     self.voelker_auswahlen[volk_name]['attribut'] = attr
 
@@ -186,6 +208,131 @@ class VoelkerWidget(MDBoxLayout):
 
         except Exception as e:
             Logger.error(f"Fehler bei Overlay-Volk-Auswahl: {e}", exc_info=True)
+
+    def _show_voraussetzungen_confirmation_dialog(self, volk_name, talent_typ, talent_name):
+        """Zeigt einen Dialog für nicht erfüllte Voraussetzungen (wie in talente_view.py)."""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.label import MDLabel
+        from kivy.metrics import dp
+        
+        charakter = self.controller.charakter
+        fehlermeldungen = getattr(charakter, 'temp_voraussetzungs_fehler', [])
+        
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(12),
+            padding=dp(20),
+            size_hint_y=None,
+            height=dp(90) + (len(fehlermeldungen) * dp(40))
+        )
+        
+        main_label = MDLabel(
+            text="Die Voraussetzungen für dieses Talent sind nicht erfüllt:",
+            size_hint_y=None,
+            height=dp(32),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(main_label)
+        
+        spacer = MDLabel(size_hint_y=None, height=dp(8))
+        content.add_widget(spacer)
+        
+        for fehler in fehlermeldungen:
+            fehler_label = MDLabel(
+                text=f"• {fehler}",
+                size_hint_y=None,
+                height=dp(36),
+                theme_text_color="Error",
+                halign="left",
+                valign="middle",
+            )
+            content.add_widget(fehler_label)
+        
+        frage_label = MDLabel(
+            text="\nTrotzdem auswählen?",
+            size_hint_y=None,
+            height=dp(30),
+            theme_text_color="Secondary",
+            halign="left",
+            valign="middle"
+        )
+        content.add_widget(frage_label)
+        
+        # Speichere Kontext für Bestätigung
+        self._pending_voraussetzungen = {
+            'volk_name': volk_name,
+            'talent_typ': talent_typ,
+            'talent_name': talent_name
+        }
+        
+        self.voraussetzungen_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text="Voraussetzungen nicht erfüllt",
+            ),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+                padding=dp(0),
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(text="Abbrechen"),
+                    style="text",
+                    on_release=lambda x: self.voraussetzungen_dialog.dismiss(),
+                ),
+                MDButton(
+                    MDButtonText(text="Trotzdem auswählen"),
+                    style="text",
+                    on_release=lambda x: self._confirm_talent_without_voraussetzungen(),
+                ),
+                spacing="8dp",
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self.voraussetzungen_dialog.open()
+
+    def _confirm_talent_without_voraussetzungen(self):
+        """Wählt das Talent mit ignore_voraussetzungen=True nach Bestätigung."""
+        if not hasattr(self, '_pending_voraussetzungen'):
+            return
+        context = self._pending_voraussetzungen
+        volk_name = context['volk_name']
+        talent_typ = context['talent_typ']
+        talent_name = context['talent_name']
+        
+        charakter = self.controller.charakter
+        from functions.volk_funktionen import waehle_freies_talent, waehle_mensch_talent, waehle_halbelf_talent
+        
+        success = False
+        if talent_typ == 'freies_talent':
+            success = waehle_freies_talent(charakter, volk_name, talent_name, ignore_voraussetzungen=True)
+        elif talent_typ == 'mensch_talent':
+            success = waehle_mensch_talent(charakter, volk_name, talent_name, ignore_voraussetzungen=True)
+        elif talent_typ == 'halbelf_talent':
+            success = waehle_halbelf_talent(charakter, volk_name, talent_name, ignore_voraussetzungen=True)
+        
+        if success:
+            # UI aktualisieren
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            if talent_typ == 'freies_talent':
+                self.voelker_auswahlen[volk_name]['talent'] = talent_name
+            elif talent_typ == 'halbelf_talent':
+                self.voelker_auswahlen[volk_name]['halbelf_wahl'] = f'Talent: {talent_name}'
+            elif talent_typ == 'mensch_talent':
+                self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = f"Talent: {talent_name}"
+            
+            from kivy.clock import Clock
+            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+        
+        if hasattr(self, 'voraussetzungen_dialog'):
+            self.voraussetzungen_dialog.dismiss()
+        delattr(self, '_pending_voraussetzungen')
 
     def _show_volk_search_popup(self):
         """Zeigt einen Auswahl-Dialog für Völker mit Suchfeld und scrollbarer Liste.
@@ -619,6 +766,7 @@ class VoelkerWidget(MDBoxLayout):
         
         # Create display for selections
         from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.button import MDIconButton
         
         for label, value in selections:
             row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(36), spacing=dp(8))
@@ -631,15 +779,227 @@ class VoelkerWidget(MDBoxLayout):
             )
             row.add_widget(label_widget)
             
+            # Hintergrundfarbe sicherstellen (nie None)
+            if hasattr(self, 'theme_cls') and self.theme_cls:
+                bg_color = self.theme_cls.primaryContainerColor
+            else:
+                bg_color = [0.7, 0.8, 1.0, 1.0]  # hellblau als Fallback
+            
             chip = MDChip(
                 MDChipText(text=value),
                 type="filter",
                 active=True,
-                md_bg_color=self.theme_cls.primaryContainerColor,
+                md_bg_color=bg_color,
             )
             row.add_widget(chip)
             
+            # Edit-Button für Talent-Auswahl (nur bei Talenten) und Attribut
+            if label in ['Freies Talent', 'Halbelf Wahl', 'Vielseitig Wahl', 'Freies Attribut', 'Freie Fertigkeit']:
+                # Elementnamen extrahieren
+                element_name = value
+                if label == 'Halbelf Wahl' and value.startswith('Talent: '):
+                    element_name = value.replace('Talent: ', '')
+                elif label == 'Vielseitig Wahl' and value.startswith('Talent: '):
+                    element_name = value.replace('Talent: ', '')
+                # Edit-Button hinzufügen
+                edit_btn = MDIconButton(
+                    icon="pencil",
+                    size_hint=(None, None),
+                    size=(dp(36), dp(36)),
+                    pos_hint={"center_y": 0.5}
+                )
+                # Callback mit Debounce - unterscheide zwischen Talent, Attribut und Fertigkeit
+                btn = edit_btn
+                if label == 'Freies Attribut':
+                    edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name: self._on_edit_attribut(attr))
+                elif label == 'Freie Fertigkeit':
+                    edit_btn.bind(on_release=lambda x, btn=btn, fert=element_name: self._on_edit_fertigkeit(fert))
+                else:
+                    edit_btn.bind(on_release=lambda x, btn=btn, l=label, tn=element_name: self._on_edit_zusatzelement(l, tn))
+                row.add_widget(edit_btn)
+            
             container.add_widget(row)
+
+    def _on_edit_zusatzelement(self, label, talent_name):
+        """Öffnet das Talent-Auswahl-Overlay zum Bearbeiten eines bereits gewählten Talents."""
+        if not hasattr(self, '_voelker_overlay'):
+            Logger.error("VoelkerOverlay nicht initialisiert")
+            return
+        
+        # Talenttyp bestimmen
+        talent_typ = None
+        if label == 'Freies Talent':
+            talent_typ = 'freies_talent'
+        elif label == 'Halbelf Wahl':
+            talent_typ = 'halbelf_talent'
+        elif label == 'Vielseitig Wahl':
+            talent_typ = 'mensch_talent'
+        else:
+            Logger.warning(f"Unbekannter Label für Edit: {label}")
+            return
+        
+        # Overlay für aktuelles Volk vorbereiten
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            Logger.warning("Kein Volk ausgewählt")
+            return
+        
+        self._voelker_overlay._charakter = self.controller.charakter
+        self._voelker_overlay._selected_volk = volk_name
+        # Talentauswahl direkt öffnen
+        self._voelker_overlay._show_talent_selection(talent_typ)
+        # Das Overlay wird geöffnet; es sollte den bereits gewählten Talentnamen vorselektieren?
+        # Aktuell nicht implementiert, aber das Overlay zeigt alle Talente an.
+        # Der User kann ein anderes Talent wählen.
+
+    def _on_edit_attribut(self, attribut_name):
+        """Öffnet einen Dialog zum Bearbeiten des ausgewählten freien Attributs."""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivy.metrics import dp
+        
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            Logger.warning("Kein Volk ausgewählt")
+            return
+        
+        charakter = self.controller.charakter
+        
+        # Verfügbare Attribut-Optionen abrufen
+        from functions.volk_funktionen import get_volk_attribut_optionen, NO_ATTRIBUT_AVAILABLE_TEXT
+        attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
+        
+        if not attribut_optionen or attribut_optionen == [NO_ATTRIBUT_AVAILABLE_TEXT]:
+            Logger.warning(f"Keine Attribut-Optionen verfügbar für Volk '{volk_name}'")
+            return
+        
+        # Dialog-Content mit Chips
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(12),
+            padding=dp(20),
+            size_hint_y=None,
+        )
+        
+        # Info-Label
+        info_label = MDLabel(
+            text="Wähle ein neues Attribut:",
+            bold=True,
+            adaptive_height=True,
+            size_hint_y=None,
+        )
+        content.add_widget(info_label)
+        
+        # Chips-Box
+        chips_box = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+        )
+        chips_box.bind(minimum_height=chips_box.setter('height'))
+        
+        for attr in sorted(attribut_optionen):
+            if attr == NO_ATTRIBUT_AVAILABLE_TEXT:
+                continue
+            
+            # Chip mit Hervorhebung des aktuell ausgewählten Attributs
+            chip_kwargs = {
+                'type': "filter",
+                'size_hint_y': None,
+                'height': dp(40),
+                'on_release': lambda x, a=attr: self._on_attribut_chosen(a),
+            }
+            # Hintergrundfarbe setzen (nie None)
+            if hasattr(self, 'theme_cls') and self.theme_cls:
+                if attr == attribut_name:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.primaryContainerColor
+                else:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.surfaceColor
+            else:
+                # Fallback: hellgrau für nicht-ausgewählt, blau für ausgewählt
+                if attr == attribut_name:
+                    chip_kwargs['md_bg_color'] = [0.7, 0.8, 1.0, 1.0]  # hellblau
+                else:
+                    chip_kwargs['md_bg_color'] = [0.95, 0.95, 0.95, 1.0]  # hellgrau
+            
+            chip = MDChip(
+                MDChipText(text=attr),
+                **chip_kwargs
+            )
+            chips_box.add_widget(chip)
+        
+        # ScrollView für viele Optionen
+        from kivymd.uix.scrollview import MDScrollView
+        scroll = MDScrollView(
+            size_hint_y=None,
+            height=min(dp(400), len(attribut_optionen) * dp(50)),
+            do_scroll_x=False,
+        )
+        scroll.add_widget(chips_box)
+        content.add_widget(scroll)
+        
+        # Dialog-Buttons
+        button_container = MDDialogButtonContainer(
+            MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: dialog.dismiss(),
+            ),
+            spacing="8dp",
+        )
+        
+        # Dialog erstellen
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"Attribut für {volk_name} ändern"),
+            MDDialogContentContainer(content, orientation="vertical"),
+            button_container,
+            size_hint=(0.85, None),
+        )
+        
+        self._attribut_dialog = dialog
+        dialog.open()
+    
+    def _on_attribut_chosen(self, attribut_name):
+        """Wird aufgerufen wenn ein neues Attribut im Bearbeitungs-Dialog ausgewählt wird."""
+        from kivy.clock import Clock
+        from functions.volk_funktionen import waehle_freies_attribut
+        
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            return
+        
+        charakter = self.controller.charakter
+        
+        Logger.info(f"[DEBUG] Ändere freies Attribut für '{volk_name}' zu '{attribut_name}'")
+        
+        # Attribut ändern (waehle_freies_attribut setzt das alte Attribut zurück)
+        success = waehle_freies_attribut(charakter, volk_name, attribut_name)
+        
+        if success:
+            # voelker_auswahlen aktualisieren
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            self.voelker_auswahlen[volk_name]['attribut'] = attribut_name
+            
+            # Dialog schließen
+            if hasattr(self, '_attribut_dialog') and self._attribut_dialog:
+                self._attribut_dialog.dismiss()
+            
+            # UI aktualisieren
+            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+            
+            Logger.info(f"Freies Attribut für '{volk_name}' erfolgreich geändert zu '{attribut_name}'")
+        else:
+            Logger.error(f"Fehler beim Ändern des Attributs für '{volk_name}'")
+
+    def _on_edit_fertigkeit(self, fertigkeit_name):
+        """Platzhalter für Fertigkeits-Bearbeitung (noch nicht implementiert)."""
+        Logger.warning("Bearbeiten von freien Fertigkeiten ist noch nicht implementiert")
+        # TODO: Implementieren ähnlich wie _on_edit_attribut
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
         """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.
@@ -695,11 +1055,17 @@ class VoelkerWidget(MDBoxLayout):
                 height=dp(44),
                 spacing=dp(10)
             )
+            # Hintergrundfarbe sicherstellen (nie None)
+            if hasattr(self, 'theme_cls') and self.theme_cls:
+                bg_color = self.theme_cls.primaryContainerColor
+            else:
+                bg_color = [0.7, 0.8, 1.0, 1.0]  # hellblau als Fallback
+            
             selected_chip = MDChip(
                 MDChipText(text=current_selection),
                 type="filter",
                 active=True,
-                md_bg_color=self.theme_cls.primaryContainerColor,
+                md_bg_color=bg_color,
             )
             auswahl_row.add_widget(selected_chip)
 
@@ -768,11 +1134,18 @@ class VoelkerWidget(MDBoxLayout):
                 if search_text and search_text not in str(item).lower():
                     continue
                 is_selected = (str(item) == current_selection)
+                # Hintergrundfarbe sicherstellen (nie None)
+                if hasattr(self, 'theme_cls') and self.theme_cls:
+                    bg_color = self.theme_cls.primaryContainerColor if is_selected else self.theme_cls.surfaceColor
+                else:
+                    # Fallback-Farben
+                    bg_color = [0.7, 0.8, 1.0, 1.0] if is_selected else [0.95, 0.95, 0.95, 1.0]
+                
                 chip = MDChip(
                     MDChipText(text=str(item)),
                     type="filter",
                     active=is_selected,
-                    md_bg_color=self.theme_cls.primaryContainerColor if is_selected else [0, 0, 0, 0],
+                    md_bg_color=bg_color,
                     size_hint_y=None,
                     height=dp(40),
                     on_release=lambda x, selected_item=item: self._on_chip_selected(select_func, selected_item)

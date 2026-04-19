@@ -298,17 +298,8 @@ def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
                     Logger.warning(f"❌ GOBLIN: Keine effects für '{volk_name}'")
                 return False  # Expliziter Return für Goblin
         
-        # Spezifische Völker-Wahlmöglichkeiten prüfen
-        if wahlmoeglichkeit_typ == 'freies_attribut':
-            # Halborks haben Attribut-Wahlmöglichkeiten (Stärke oder Konstitution)
-            if volk_name.lower() in ["halbork", "halborks"]:
-                Logger.debug(f"Halbork-Spezialbehandlung: freies Attribut für '{volk_name}'")
-                return True
-            
-            # Halbelfen haben freie Attribut-Wahlmöglichkeiten (als Teil der ENTWEDER/ODER Wahl)
-            if volk_name.lower() in ["halbelf", "halbelfen"]:
-                Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
-                return True
+        # Spezifische Völker-Wahlmöglichkeiten prüfen (nur basierend auf JSON)
+        # Keine harten Volk-Namen-Checks mehr - verlassen wir uns auf die effects/wahlmoeglichkeiten
         
         # Direkte Prüfung über Volk-Methode
         if hasattr(volk, 'has_wahlmoeglichkeit'):
@@ -377,7 +368,7 @@ def get_freie_talente(charakter, nur_verfuegbare=True):
             aktiv = getattr(talent, 'aktiv', False)
             ausgewaehlt = getattr(talent, 'ausgewaehlt', False)
 
-            Logger.debug(f"Talent '{name}': aktiv={aktiv}, ausgewaehlt={ausgewaehlt}")
+            #Logger.debug(f"Talent '{name}': aktiv={aktiv}, ausgewaehlt={ausgewaehlt}")
 
             # Talent ist frei wenn es aktiv aber nicht ausgewählt ist
             if aktiv and not ausgewaehlt:
@@ -389,7 +380,7 @@ def get_freie_talente(charakter, nur_verfuegbare=True):
                         continue
                 frei_talente.append(name)
         
-        Logger.debug(f"Gefundene freie Talente: {frei_talente}")
+        #Logger.debug(f"Gefundene freie Talente: {frei_talente}")
         
         # Alphabetisch sortieren
         frei_talente.sort()
@@ -475,21 +466,24 @@ def get_verfuegbare_fertigkeiten(charakter, nur_verstand=True):
         return [NO_FERTIGKEIT_AVAILABLE_TEXT]
 
 
-def waehle_freies_talent(charakter, volk_name, talent_name):
+def waehle_freies_talent(charakter, volk_name, talent_name, ignore_voraussetzungen=False):
     """
     Wählt ein freies Talent für ein Volk aus.
     ERWEITERT: Spezielle Behandlung für Menschen - nur ein Talent gleichzeitig.
+    Nutzt talent_funktionen.waehle_freies_talent für AH-Aktivierung etc.
     
     Args:
         charakter: Das Charakterobjekt
         volk_name: Name des Volks
         talent_name: Name des zu wählenden Talents
+        ignore_voraussetzungen: Voraussetzungsprüfung überspringen (default: False)
         
     Returns:
         bool: True bei Erfolg, False bei Fehler
+        str: "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt
     """
     try:
-        Logger.debug(f"Wähle freies Talent '{talent_name}' für Volk '{volk_name}'")
+        Logger.debug(f"Wähle freies Talent '{talent_name}' für Volk '{volk_name}' (ignore_voraussetzungen={ignore_voraussetzungen})")
         
         if talent_name in [NO_TALENT_AVAILABLE_TEXT, "Keine freien Talente verfügbar"]:
             Logger.warning("Ungültiges Talent ausgewählt")
@@ -519,30 +513,36 @@ def waehle_freies_talent(charakter, volk_name, talent_name):
             
             if aktuelles_freies_talent and aktuelles_freies_talent != talent_name:
                 Logger.info(f"Menschen: Setze vorheriges freies Talent '{aktuelles_freies_talent}' zurück")
-                # Vorheriges Talent abwählen
-                if aktuelles_freies_talent in charakter.talente:
-                    vorheriges_talent = charakter.talente[aktuelles_freies_talent]
-                    vorheriges_talent.ausgewaehlt = False
-                    
-                    # Aus selected_talente entfernen
-                    if hasattr(charakter, 'selected_talente') and aktuelles_freies_talent in charakter.selected_talente:
-                        charakter.selected_talente.remove(aktuelles_freies_talent)
-                        Logger.debug(f"Talent '{aktuelles_freies_talent}' aus selected_talente entfernt")
+                # Vorheriges Talent abwählen (inkl. AH-Effekte, Mächte, Machtpunkte)
+                from functions.talent_funktionen import talent_abwaehlen
+                talent_abwaehlen(charakter, aktuelles_freies_talent)
             
-            # Neues freies Talent setzen
+            # Neues freies Talent setzen (nach erfolgreicher Auswahl)
             _set_menschen_freies_talent(charakter, talent_name)
         
-        # Talent auswählen
-        talent.ausgewaehlt = True
+        # Talent über talent_funktionen.waehle_freies_talent auswählen (berücksichtigt AH, Mächte, Auto-Handicaps etc.)
+        from functions.talent_funktionen import waehle_freies_talent as talent_waehle_freies_talent
+        result = talent_waehle_freies_talent(charakter, talent_name, ignore_voraussetzungen)
         
-        # Zu selected_talente hinzufügen
-        if hasattr(charakter, 'selected_talente'):
-            if talent_name not in charakter.selected_talente:
-                charakter.selected_talente.append(talent_name)
-                Logger.debug(f"Talent '{talent_name}' zu selected_talente hinzugefügt")
+        # Wenn result "needs_voraussetzungen_confirmation" ist, müssen wir das temporär gesetzte Talent wieder zurücksetzen?
+        # talent_waehle_freies_talent hat das Talent noch nicht ausgewählt, also kein Zurücksetzen nötig.
+        # Fehlermeldungen wurden bereits in charakter.temp_voraussetzungs_fehler gespeichert.
+        if result == "needs_voraussetzungen_confirmation":
+            Logger.debug(f"Voraussetzungen nicht erfüllt für Talent '{talent_name}', Rückgabe 'needs_voraussetzungen_confirmation'")
+            # Menschen-Tracking zurücksetzen, da wir das Talent nicht gewählt haben
+            if (volk_name.lower() in ["mensch", "menschen", "human"] and 
+                (hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent') or 
+                 hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_anfaengertalent'))):
+                _set_menschen_freies_talent(charakter, None)
+            return "needs_voraussetzungen_confirmation"
         
-        Logger.info(f"Freies Talent '{talent_name}' für Volk '{volk_name}' erfolgreich ausgewählt")
-        return True
+        # Erfolg
+        if result:
+            Logger.info(f"Freies Talent '{talent_name}' für Volk '{volk_name}' erfolgreich ausgewählt")
+            return True
+        else:
+            Logger.error(f"Fehler bei der Auswahl des freien Talents '{talent_name}'")
+            return False
         
     except Exception as e:
         Logger.error(f"Fehler bei freier Talent-Auswahl: {e}", exc_info=True)
@@ -712,16 +712,44 @@ def get_volk_attribut_optionen(charakter, volk_name):
         
         volk = charakter.voelker[volk_name]
         
-        # ERWEITERT: Spezifische Völker-Wahlmöglichkeiten prüfen
-        if volk_name.lower() in ["halbork", "halborks"]:
-            # Halborks können zwischen Stärke und Konstitution wählen
-            Logger.debug(f"Halbork Attribut-Optionen: Stärke oder Konstitution")
-            return ["Stärke", "Konstitution"]
+        # Prüfe effects/wahlmoeglichkeiten für spezifische Attribut-Optionen
+        if hasattr(volk, 'effects'):
+            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            
+            # Halbork: Attribut Stärke oder Konstitution wählen
+            if wahlmoeglichkeiten.get('attribut_staerke_oder_konstitution', False):
+                Logger.debug(f"Halbork Attribut-Optionen: Stärke oder Konstitution")
+                return ["Stärke", "Konstitution"]
+            
+            # Prüfe auf freies_talent_oder_attribut (z.B. SWAE Halbelf)
+            if wahlmoeglichkeiten.get('freies_talent_oder_attribut', False):
+                # ENTWEDER/ODER Wahl: Für Halbelf ist das Attribut Geschicklichkeit
+                if volk_name.lower() in ["halbelf", "halbelfen"]:
+                    Logger.debug(f"Halbelf Attribut-Option (ENTWEDER/ODER): Geschicklichkeit")
+                    return ["Geschicklichkeit"]
+                # Anderes Volk mit diesem Schlüssel? Unwahrscheinlich, aber Fallback
+                return get_verfuegbare_attribute(charakter)
+            
+            # Prüfe auf freies_attribut (ohne freies_talent_oder_attribut)
+            if wahlmoeglichkeiten.get('freies_attribut', False):
+                # freies_attribut: true bedeutet freie Auswahl eines Attributs (alle Attribute)
+                # Nur wenn auch freies_talent_oder_attribut vorhanden, ist es SWAE Halbelf mit festem Attribut
+                # Aber das wird oben bereits abgefangen (freies_talent_oder_attribut)
+                # Also: freies_attribut: true -> alle Attribute
+                Logger.debug(f"Freies Attribut verfügbar für '{volk_name}' -> alle Attribute")
+                return get_verfuegbare_attribute(charakter)
         
-        elif volk_name.lower() in ["halbelf", "halbelfen"]:
-            # ERWEITERT: Halbelfen können Geschicklichkeit wählen (als Teil der ENTWEDER/ODER Wahl)
-            Logger.debug(f"Halbelf Attribut-Option: Geschicklichkeit")
-            return ["Geschicklichkeit"]
+        # Fallback: Alte Volk-Namen-basierte Prüfung (nur wenn effects nicht vorhanden)
+        if not hasattr(volk, 'effects'):
+            if volk_name.lower() in ["halbork", "halborks"]:
+                # Halborks können zwischen Stärke und Konstitution wählen
+                Logger.debug(f"Halbork Attribut-Optionen (Fallback ohne effects): Stärke oder Konstitution")
+                return ["Stärke", "Konstitution"]
+            
+            elif volk_name.lower() in ["halbelf", "halbelfen"]:
+                # Halbelfen können Geschicklichkeit wählen (als Teil der ENTWEDER/ODER Wahl)
+                Logger.debug(f"Halbelf Attribut-Option (Fallback ohne effects): Geschicklichkeit")
+                return ["Geschicklichkeit"]
         
         # Prüfe ob das Volk generell freie Attribut-Wahlmöglichkeiten hat
         if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_attribut'):
@@ -754,7 +782,8 @@ def get_volk_zusatzelemente(charakter, volk_name):
             'freie_fertigkeiten': False,
             'attribut_optionen': [],
             'halbelf_entweder_oder': False,
-            'menschen_vielseitig': False
+            'menschen_vielseitig': False,
+            'beide_optionen': False  # Talent UND Attribut (z.B. Savage Pathfinder Mensch)
         }
         
         # Prüfen ob Volk existiert
@@ -767,11 +796,14 @@ def get_volk_zusatzelemente(charakter, volk_name):
         
         Logger.debug(f"=== ZUSATZELEMENTE DEBUG für '{volk_name}' ===")
         
-        # ERWEITERT: Spezielle Halbelf-Behandlung
-        if volk_name.lower() in ["halbelf", "halbelfen"]:
-            zusatzelemente['halbelf_entweder_oder'] = True
-            Logger.debug(f"Halbelf ENTWEDER/ODER Wahlmöglichkeit verfügbar für '{volk_name}'")
-            return zusatzelemente  # Früher Return für Halbelf
+        # ERWEITERT: Prüfe ob Volk ENTWEDER/ODER Wahlmöglichkeit hat (z.B. Halbelf in einigen Settings)
+        volk = charakter.voelker[volk_name]
+        if hasattr(volk, 'effects'):
+            wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            if wahlmoeglichkeiten.get('freies_talent_oder_attribut', False):
+                zusatzelemente['halbelf_entweder_oder'] = True
+                Logger.debug(f"ENTWEDER/ODER Wahlmöglichkeit verfügbar für '{volk_name}' (freies_talent_oder_attribut)")
+                return zusatzelemente  # Spezielle Sektion
         
         # ERWEITERT: Menschen-Vielseitig (freies Talent ODER 2 Fertigkeitspunkte)
         if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent_oder_fertigkeitspunkte'):
@@ -991,7 +1023,7 @@ def get_voelker_status_info(charakter):
 
 # NEUE FUNKTIONEN für Halbelf ENTWEDER/ODER Logik
 
-def waehle_halbelf_talent(charakter, volk_name, talent_name):
+def waehle_halbelf_talent(charakter, volk_name, talent_name, ignore_voraussetzungen=False):
     """
     Wählt ein freies Talent für Halbelf aus (ENTWEDER-Teil der Wahl).
     ERWEITERT: Verhindert Mehrfachauswahl und setzt Attribut-Wahl zurück.
@@ -1000,12 +1032,14 @@ def waehle_halbelf_talent(charakter, volk_name, talent_name):
         charakter: Das Charakterobjekt
         volk_name: Name des Volks (sollte Halbelf sein)
         talent_name: Name des zu wählenden Talents
+        ignore_voraussetzungen: Voraussetzungsprüfung überspringen (default: False)
         
     Returns:
         bool: True bei Erfolg, False bei Fehler
+        str: "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt
     """
     try:
-        Logger.debug(f"Halbelf wählt freies Talent '{talent_name}' für Volk '{volk_name}'")
+        Logger.debug(f"Halbelf wählt freies Talent '{talent_name}' für Volk '{volk_name}' (ignore_voraussetzungen={ignore_voraussetzungen})")
         
         if volk_name.lower() not in ["halbelf", "halbelfen"]:
             Logger.error(f"Halbelf-Talent-Wahl nur für Halbelfen, nicht für '{volk_name}'")
@@ -1015,15 +1049,9 @@ def waehle_halbelf_talent(charakter, volk_name, talent_name):
         aktuelles_talent = _get_halbelf_freies_talent(charakter)
         if aktuelles_talent and aktuelles_talent != talent_name:
             Logger.info(f"Halbelf: Setze vorheriges freies Talent '{aktuelles_talent}' zurück")
-            # Vorheriges Talent abwählen
-            if aktuelles_talent in charakter.talente:
-                vorheriges_talent = charakter.talente[aktuelles_talent]
-                vorheriges_talent.ausgewaehlt = False
-                
-                # Aus selected_talente entfernen
-                if hasattr(charakter, 'selected_talente') and aktuelles_talent in charakter.selected_talente:
-                    charakter.selected_talente.remove(aktuelles_talent)
-                    Logger.debug(f"Talent '{aktuelles_talent}' aus selected_talente entfernt")
+            # Vorheriges Talent abwählen (inkl. AH-Effekte, Mächte, Machtpunkte)
+            from functions.talent_funktionen import talent_abwaehlen
+            talent_abwaehlen(charakter, aktuelles_talent)
         
         # NEUE LOGIK: Wenn Attribut bereits gewählt wurde, zurücksetzen (ENTWEDER/ODER)
         if _get_halbelf_attribut_gewaehlt(charakter):
@@ -1036,13 +1064,15 @@ def waehle_halbelf_talent(charakter, volk_name, talent_name):
             _set_halbelf_attribut_gewaehlt(charakter, False)
         
         # Standard Talent-Auswahl durchführen
-        success = waehle_freies_talent(charakter, volk_name, talent_name)
+        result = waehle_freies_talent(charakter, volk_name, talent_name, ignore_voraussetzungen)
         
-        if success:
+        if result is True:
             # Markiere, dass Halbelf die Talent-Option gewählt hat
             _set_halbelf_freies_talent(charakter, talent_name)
             Logger.info(f"Halbelf '{volk_name}' hat freies Talent '{talent_name}' gewählt")
             return True
+        elif result == "needs_voraussetzungen_confirmation":
+            return "needs_voraussetzungen_confirmation"
         
         return False
         
@@ -1475,7 +1505,7 @@ def _force_trigger_ui_refresh(app):
 
 # NEUE FUNKTIONEN für Menschen-Vielseitig (freies Talent ODER 2 Fertigkeitspunkte)
 
-def waehle_mensch_talent(charakter, volk_name, talent_name):
+def waehle_mensch_talent(charakter, volk_name, talent_name, ignore_voraussetzungen=False):
     """
     Wählt ein freies Talent für einen Menschen aus (Vielseitig ENTWEDER-Teil).
     Setzt ggf. vorherige Fertigkeitspunkte-Wahl zurück.
@@ -1484,12 +1514,14 @@ def waehle_mensch_talent(charakter, volk_name, talent_name):
         charakter: Das Charakterobjekt
         volk_name: Name des Volks
         talent_name: Name des zu wählenden Talents
+        ignore_voraussetzungen: Voraussetzungsprüfung überspringen (default: False)
 
     Returns:
         bool: True bei Erfolg, False bei Fehler
+        str: "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt
     """
     try:
-        Logger.debug(f"Mensch Vielseitig: Wähle freies Talent '{talent_name}' für '{volk_name}'")
+        Logger.debug(f"Mensch Vielseitig: Wähle freies Talent '{talent_name}' für '{volk_name}' (ignore_voraussetzungen={ignore_voraussetzungen})")
 
         # Fertigkeitspunkte-Wahl zurücksetzen falls vorhanden
         if _get_mensch_fertigkeitspunkte_gewaehlt(charakter):
@@ -1497,12 +1529,12 @@ def waehle_mensch_talent(charakter, volk_name, talent_name):
             _reset_mensch_fertigkeitspunkte(charakter)
 
         # Standard freies Talent auswählen
-        success = waehle_freies_talent(charakter, volk_name, talent_name)
+        result = waehle_freies_talent(charakter, volk_name, talent_name, ignore_voraussetzungen)
 
-        if success:
+        if result is True:
             Logger.info(f"Mensch Vielseitig: Talent '{talent_name}' gewählt für '{volk_name}'")
 
-        return success
+        return result
 
     except Exception as e:
         Logger.error(f"Fehler bei Mensch-Vielseitig-Talent-Auswahl: {e}", exc_info=True)

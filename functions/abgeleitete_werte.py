@@ -58,12 +58,12 @@ def berechne_abgeleitete_werte(charakter):
         charakter.parade = parade_basis + parade_bonus
       
         # Debug-Ausgaben zur Fehleridentifikation
-        Logger.debug("=== Berechne abgeleitete Werte ===")
-        Logger.debug(f"Ausgewählte Handicaps: {charakter.selected_handicaps}")
+        #Logger.debug("=== Berechne abgeleitete Werte ===")
+        #Logger.debug(f"Ausgewählte Handicaps: {charakter.selected_handicaps}")
         for hcap_key in charakter.selected_handicaps:
             if hcap_key in charakter.handicaps:
                 hcap = charakter.handicaps[hcap_key]
-                Logger.debug(f"- {hcap_key}: Name={hcap.name}, Stufe={hcap.stufe}")
+                #Logger.debug(f"- {hcap_key}: Name={hcap.name}, Stufe={hcap.stufe}")
         
         # === BEWEGUNGSWEITE BERECHNUNG ===
         bewegungsweite_malus = 0
@@ -77,18 +77,18 @@ def berechne_abgeleitete_werte(charakter):
                 if handicap.name == "Langsam":
                     if handicap.stufe == "leicht":
                         bewegungsweite_malus += 1
-                        Logger.debug(f"Bewegungsweite -1 durch Langsam (leicht)")
+                        #Logger.debug(f"Bewegungsweite -1 durch Langsam (leicht)")
                     elif handicap.stufe == "schwer":
                         bewegungsweite_malus += 2
-                        Logger.debug(f"Bewegungsweite -2 durch Langsam (schwer)")
+                        #Logger.debug(f"Bewegungsweite -2 durch Langsam (schwer)")
                 
                 elif handicap.name == "Fettleibig" and handicap.stufe == "leicht":
                     bewegungsweite_malus += 1
-                    Logger.debug(f"Bewegungsweite -1 durch Fettleibig (leicht)")
+                    #Logger.debug(f"Bewegungsweite -1 durch Fettleibig (leicht)")
                 
                 elif handicap.name == "Alt" and handicap.stufe == "schwer":
                     bewegungsweite_malus += 1
-                    Logger.debug(f"Bewegungsweite -1 durch Alt (schwer)")
+                    #Logger.debug(f"Bewegungsweite -1 durch Alt (schwer)")
 
         # 2. Völker-Effekte für Bewegungsweite
         voelker_bewegungsweite_bonus = _berechne_voelker_bewegungsweite_bonus(charakter)
@@ -99,9 +99,9 @@ def berechne_abgeleitete_werte(charakter):
         bewegungsweite_malus -= cyberware_bw_bonus
         
         # Bewegungsweite anpassen (nicht unter 1)
-        Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
+        #Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
         bewegungsweite = max(1, bewegungsweite - bewegungsweite_malus)
-        Logger.debug(f"Resultierende Bewegungsweite: {bewegungsweite}")
+        #Logger.debug(f"Resultierende Bewegungsweite: {bewegungsweite}")
 
         # Sicherstellen, dass bewegungsweite im Charakter-Objekt aktualisiert wird
         charakter.bewegungsweite = bewegungsweite
