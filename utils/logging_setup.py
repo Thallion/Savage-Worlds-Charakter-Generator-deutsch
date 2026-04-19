@@ -266,6 +266,10 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         KivyLogger.info(f"FileLogging: Füge FileHandler zum Root-Logger hinzu")
         root_logger.addHandler(file_handler)
         
+        # jnius reflect-Logging unterdrücken (erzeugt massenhaft DEBUG-Spam)
+        logging.getLogger('kivy.jnius.reflect').setLevel(logging.WARNING)
+        logging.getLogger('kivy.jnius').setLevel(logging.WARNING)
+
         # Kivy Logger auch in Datei umleiten
         class KivyFileHandler(logging.Handler):
             def __init__(self, file_handler):
