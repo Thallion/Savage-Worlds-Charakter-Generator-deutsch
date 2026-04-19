@@ -1,12 +1,8 @@
 # models/ruestung.py
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from models.ausruestung import Ausruestung
-from kivy.logger import Logger, LOG_LEVELS
+from kivy.logger import Logger
 import logging
-
-# Setze Kivy Logger-Level auf DEBUG
-Logger.setLevel(LOG_LEVELS['debug'])
-Logger.info("Kivy Logger auf DEBUG-Level gesetzt.")
 
 class Ruestung(Ausruestung):
     torso = NumericProperty(0)

@@ -4,6 +4,8 @@ Erstellt session-basierte Log-Dateien für besseres Debugging.
 """
 
 import os
+import sys
+import json
 import logging
 import datetime
 from pathlib import Path
@@ -13,6 +15,48 @@ from kivy.utils import platform
 # Diagnose-Informationen für das Logging-Setup
 # Wird gespeichert damit die UI die Fehlerursache anzeigen kann
 _setup_error_details = []
+
+
+def _get_log_level():
+    """
+    Liest das Log-Level aus der Konfigurationsdatei.
+    
+    Returns:
+        int: logging.DEBUG, logging.INFO, etc.
+    """
+    default_level = logging.INFO
+    level_mapping = {
+        'DEBUG': logging.DEBUG,
+        'INFO': logging.INFO,
+        'WARNING': logging.WARNING,
+        'ERROR': logging.ERROR,
+        'CRITICAL': logging.CRITICAL
+    }
+    
+    try:
+        # Pfad zur Konfigurationsdatei ermitteln
+        if getattr(sys, 'frozen', False):
+            app_dir = Path(sys.executable).parent
+        else:
+            app_dir = Path(__file__).parent.parent
+        
+        config_path = app_dir / "config" / "app_config.json"
+        
+        if config_path.exists():
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+            
+            level_str = config.get('log_level', 'INFO')
+            level = level_mapping.get(level_str.upper(), default_level)
+            KivyLogger.debug(f"Log-Level aus Konfiguration gelesen: {level_str}")
+            return level
+        else:
+            KivyLogger.debug(f"Konfigurationsdatei nicht gefunden, verwende Standard-Log-Level: INFO")
+            return default_level
+            
+    except Exception as e:
+        KivyLogger.warning(f"Konnte Log-Level nicht aus Konfiguration lesen: {e}, verwende INFO")
+        return default_level
 
 
 def get_last_setup_errors():
@@ -206,7 +250,8 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         
         # File Handler für Python logging konfigurieren
         file_handler = logging.FileHandler(log_filepath, mode='w', encoding='utf-8')
-        file_handler.setLevel(logging.DEBUG)
+        log_level = _get_log_level()
+        file_handler.setLevel(log_level)
         
         # Formatter mit detaillierter Information
         formatter = logging.Formatter(
@@ -217,7 +262,7 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         
         # Root logger konfigurieren
         root_logger = logging.getLogger()
-        root_logger.setLevel(logging.DEBUG)
+        root_logger.setLevel(log_level)
         KivyLogger.info(f"FileLogging: Füge FileHandler zum Root-Logger hinzu")
         root_logger.addHandler(file_handler)
         
@@ -239,7 +284,7 @@ def setup_file_logging(app_name="SavageWorldsGenerator"):
         kivy_logger = logging.getLogger('kivy')
         KivyLogger.info(f"FileLogging: Füge FileHandler zum Kivy-Logger hinzu")
         kivy_logger.addHandler(file_handler)
-        kivy_logger.setLevel(logging.DEBUG)
+        kivy_logger.setLevel(log_level)
         
         # Erfolgreiche Initialisierung loggen
         logging.info(f"=== Neue Session gestartet ===")

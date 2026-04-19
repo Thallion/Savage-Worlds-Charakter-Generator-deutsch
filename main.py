@@ -21,7 +21,7 @@ from utils.logging_setup import setup_file_logging, cleanup_old_logs, log_system
 
 from kivy.lang import Builder
 from kivy.clock import Clock
-from kivy.properties import ObjectProperty, StringProperty, ListProperty
+from kivy.properties import ObjectProperty, StringProperty, ListProperty, BooleanProperty
 from kivy.core.window import Window
 from kivy.logger import Logger
 from kivy.metrics import dp
@@ -50,13 +50,14 @@ from controllers.charakter_controller import CharakterController
 from models.charakter import Charakter
 from views.pointbar_view import GenerationPointsBar
 from views.wizard_bar import WizardBar
+from views.pointbar_overlay import PointbarOverlay
 from kivy.lang import Builder
 from utils.path_utils import get_application_root, get_resource_path
 import os
 from views.charakter_verwaltung_widget import CharakterVerwaltungWidget
 
 # Wizard-Bar KV laden (Mobile oder Desktop)
-from utils.platform_utils import get_kv_filename as _get_kv_filename
+from utils.platform_utils import get_kv_filename as _get_kv_filename, is_mobile_layout
 _wizard_bar_kv_name = _get_kv_filename('wizard_bar')
 _wizard_bar_kv = os.path.join(get_application_root(), 'views', _wizard_bar_kv_name)
 if not os.path.exists(_wizard_bar_kv):
@@ -96,6 +97,7 @@ Config.set('input', 'mouse', 'mouse,disable_multitouch')
 class SW_Charakter_GeneratorApp(MDApp):
     controller = ObjectProperty(None)
     wizard_service = ObjectProperty(None)
+    use_pointbar_overlay = BooleanProperty(False)  # True für Android/Mobile, False für Desktop
     screens = {}  # Dictionary to hold screen instances
 
     def __init__(self, **kwargs):
@@ -567,6 +569,16 @@ class SW_Charakter_GeneratorApp(MDApp):
 
         # Android: Intent-Handler für empfangene JSON-Dateien registrieren
         self._setup_android_intent_handler()
+
+        # Pointbar-Overlay nur im Mobile-Modus erstellen (Android oder force_mobile_layout)
+        self.use_pointbar_overlay = is_mobile_layout()
+        Logger.info(f"Pointbar-Modus: {'Overlay (Mobile)' if self.use_pointbar_overlay else 'Eingebettet (Desktop)'}")
+        
+        if self.use_pointbar_overlay:
+            self.pointbar_overlay = PointbarOverlay()
+            Clock.schedule_once(lambda dt: self.pointbar_overlay.open(), 0.2)
+        else:
+            self.pointbar_overlay = None
 
         # Android: Gespeicherte Bildschirm-Orientierung anwenden
         self._apply_saved_orientation()
@@ -1933,7 +1945,11 @@ class SW_Charakter_GeneratorApp(MDApp):
             bottom_bar = root.ids.get('bottom_bar_container')
 
             # Pointbar im Landscape zuklappen, im Portrait aufklappen
-            pointbar = root.ids.get('generation_points')
+            pointbar = None
+            if hasattr(self, 'pointbar_overlay') and self.pointbar_overlay:
+                pointbar = self.pointbar_overlay.pointbar
+            else:
+                pointbar = root.ids.get('generation_points')
 
             if is_portrait:
                 # Portrait: Rail verstecken, Bottom-Bar anzeigen

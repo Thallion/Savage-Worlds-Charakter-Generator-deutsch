@@ -1,11 +1,7 @@
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty, ObjectProperty, DictProperty, ListProperty
 from kivy.event import EventDispatcher
-from kivy.logger import Logger, LOG_LEVELS
+from kivy.logger import Logger
 import logging
-
-# Setze Kivy Logger-Level auf DEBUG
-Logger.setLevel(LOG_LEVELS['debug'])
-Logger.info("Kivy Logger auf DEBUG-Level gesetzt.")
 
 class Ausruestung(EventDispatcher):
     name = StringProperty("")

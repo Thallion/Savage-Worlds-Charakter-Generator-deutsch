@@ -93,7 +93,10 @@ class GenerationPointsBar(MDBoxLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.controller = App.get_running_app().controller
+        app = App.get_running_app()
+        Logger.debug(f"GenerationPointsBar: App controller vorhanden? {hasattr(app, 'controller')}")
+        self.controller = app.controller
+        Logger.debug(f"GenerationPointsBar: Controller gesetzt: {self.controller}")
         self.controller.bind(charakter=self.on_charakter_changed)
         self.controller.bind(on_charakter_updated=self._update_undo_status)
         self.on_charakter_changed(self.controller, self.controller.charakter)
@@ -297,7 +300,8 @@ class GenerationPointsBar(MDBoxLayout):
             self.header_summary_text = f"{name} | {setting} | Attr: {attr} | Fert: {fert} | HP: {hp} | MP: {mp} | {rang}"
 
     def toggle_panel(self, *args):
-        """Klappt den Detail-Bereich auf oder zu (mit Debounce für Android)"""
+        """Klappt den Detail-Bereich auf oder zu (mit Debounce für Android)."""
+        Logger.debug(f"GenerationPointsBar: toggle_panel aufgerufen, aktuell is_expanded={self.is_expanded}")
         now = time.monotonic()
         if hasattr(self, '_last_toggle_time') and (now - self._last_toggle_time) < 0.5:
             return
@@ -306,6 +310,7 @@ class GenerationPointsBar(MDBoxLayout):
         # MDExpansionPanel-Variante (Mobile)
         panel = self.ids.get('expansion_panel')
         if panel:
+            Logger.debug(f"GenerationPointsBar: MDExpansionPanel gefunden, is_open={panel.is_open}")
             if panel.is_open:
                 panel.close()
             else:
@@ -314,6 +319,7 @@ class GenerationPointsBar(MDBoxLayout):
 
         # Desktop: is_expanded togglen, KV-Bindings erledigen den Rest
         self.is_expanded = not self.is_expanded
+        Logger.debug(f"GenerationPointsBar: is_expanded auf {self.is_expanded} gesetzt")
 
     def _get_char_verwaltung(self):
         """Holt das CharakterVerwaltungWidget über die App."""
@@ -326,6 +332,7 @@ class GenerationPointsBar(MDBoxLayout):
 
     def on_schnellspeichern(self, *args):
         """Schnellspeichern über die Toolbar (mit Debounce für Android)"""
+        Logger.debug("GenerationPointsBar: Schnellspeichern-Button geklickt")
         now = time.monotonic()
         if hasattr(self, '_last_save_time') and (now - self._last_save_time) < 0.5:
             return
@@ -359,6 +366,7 @@ class GenerationPointsBar(MDBoxLayout):
 
     def on_undo_pressed(self, *args):
         """Wird beim Klick auf den Undo-Button aufgerufen (mit Debounce für Android)."""
+        Logger.debug("GenerationPointsBar: Undo-Button geklickt")
         now = time.monotonic()
         if hasattr(self, '_last_undo_time') and (now - self._last_undo_time) < 0.5:
             return  # Bounce ignorieren

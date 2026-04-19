@@ -225,11 +225,15 @@ class WizardBar(MDBoxLayout):
             self._current_popup_dialog.dismiss()
 
         # Charaktererstellung abschließen
-        if app and hasattr(app, 'root') and app.root:
-            generation_points = app.root.ids.get('generation_points')
-            if generation_points:
-                if not generation_points.char_gen_completed:
-                    generation_points.toggle_char_gen_completed()
+        if app:
+            pointbar = None
+            if hasattr(app, 'pointbar_overlay') and app.pointbar_overlay:
+                pointbar = app.pointbar_overlay.pointbar
+            elif hasattr(app, 'root') and app.root:
+                pointbar = app.root.ids.get('generation_points')
+            if pointbar:
+                if not pointbar.char_gen_completed:
+                    pointbar.toggle_char_gen_completed()
 
         # Wizard beenden
         if self.wizard_service:

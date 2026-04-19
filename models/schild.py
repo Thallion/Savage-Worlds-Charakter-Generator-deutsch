@@ -1,12 +1,8 @@
 # models/schild.py
 from kivy.properties import NumericProperty, BooleanProperty, StringProperty, DictProperty
 from models.ausruestung import Ausruestung
-from kivy.logger import Logger, LOG_LEVELS
+from kivy.logger import Logger
 import logging
-
-# Setze Kivy Logger-Level auf DEBUG
-Logger.setLevel(LOG_LEVELS['debug'])
-Logger.info("Kivy Logger auf DEBUG-Level gesetzt.")
 
 
 class Schild(Ausruestung):

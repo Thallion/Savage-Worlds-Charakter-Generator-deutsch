@@ -115,9 +115,12 @@ MDScreen:
             height: self.minimum_height
             md_bg_color: app.theme_cls.backgroundColor
 
+            # GENERATION POINTS BAR (Desktop-Modus)
             GenerationPointsBar:
                 id: generation_points
-                charakter: app.controller.charakter
+                disabled: app.use_pointbar_overlay
+                opacity: 0 if app.use_pointbar_overlay else 1
+                size_hint_y: None
 
             # WIZARD BAR (wird bei Bedarf eingeblendet)
             WizardBar:
