@@ -49,7 +49,7 @@ requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/arc
 # requirements.source.hostpython3 = python3==3.11.13
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/assets/icon_512.png
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/assets/icon_512.png
@@ -86,7 +86,7 @@ fullscreen = 0
 # red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
 # darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
 # olive, purple, silver, teal.
-#android.presplash_color = #FFFFFF
+android.presplash_color = #121212
 
 # (string) Presplash animation using Lottie format.
 # see https://lottiefiles.com/ for examples and https://airbnb.design/lottie/
