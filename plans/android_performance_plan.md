@@ -27,10 +27,10 @@ Ziel: Messbar schnellerer Kaltstart, flüssigere Tab-Wechsel, kein Freeze bei Ch
 - [ ] **Schritt 7** — `CharakterbogenWidget` Update-in-Place
 - [ ] **Schritt 8** — Dialog-Wiederverwendung
 - [ ] **Schritt 9** — Binding-Lifecycle prüfen
-- [ ] **Schritt 10** — Theme-Color-Caching
+- [x] **Schritt 10** — Theme-Color-Caching
 - [ ] **Schritt 11** — Debug-Build-Profil arm64-only
 - [ ] **Schritt 12** — `no-byte-compile-python` prüfen
-- [ ] **Schritt 13** — Release-Logging-Level reduzieren
+- [x] **Schritt 13** — Release-Logging-Level reduzieren
 - [ ] **Schritt 14** — Startup-Timing-Logs in `main.py`
 - [ ] **Schritt 15** — On-Device-Profiling
 

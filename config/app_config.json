@@ -1,6 +1,6 @@
 {
   "theme_style": "Dark",
-  "primary_palette": "Lime",
+  "primary_palette": "Green",
   "default_attribute_points": 5,
   "default_skill_points": 12,
   "default_money": 500,
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "SWAE",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-20T17:25:03.764565"
+  "last_updated": "2026-04-20T19:53:51.739300"
 }

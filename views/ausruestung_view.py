@@ -77,6 +77,9 @@ class AusruestungItemRow(MDBoxLayout):
     waehrungseinheit = StringProperty("")
     beschreibung = StringProperty("")
     details = StringProperty("")  # Weitere Details
+    
+    # Klassenattribut für Caching der Hintergrundfarben
+    _color_cache = {}
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -84,25 +87,34 @@ class AusruestungItemRow(MDBoxLayout):
         self._dialog_processing = False  # Android Dialog-Schutz
         self._set_background_color()  # THEME-FIX: Hintergrundfarbe setzen
 
+    def _get_background_color(self):
+        """Berechnet die Hintergrundfarbe basierend auf Theme und Index."""
+        app = MDApp.get_running_app()
+        if not app or not hasattr(app, 'theme_cls'):
+            return [0, 0, 0, 1]  # Fallback
+        
+        theme_style = app.theme_cls.theme_style
+        is_even = self.index % 2 == 0
+        key = (theme_style, is_even)
+        
+        if key not in self._color_cache:
+            if theme_style == "Light":
+                if is_even:
+                    color = [0.95, 0.95, 0.95, 1]  # Sehr helles Grau
+                else:
+                    color = [0.98, 0.98, 0.98, 1]  # Noch heller
+            else:
+                if is_even:
+                    color = [0.2, 0.2, 0.2, 1]
+                else:
+                    color = [0.15, 0.15, 0.15, 1]
+            self._color_cache[key] = color
+            
+        return self._color_cache[key]
+    
     def _set_background_color(self):
         """Setzt die Hintergrundfarbe basierend auf dem aktuellen Theme"""
-        app = MDApp.get_running_app()
-        if app and hasattr(app, 'theme_cls'):
-            theme_cls = app.theme_cls
-            
-            # Theme-abhängige Farben für alternierende Zeilen
-            if theme_cls.theme_style == "Light":
-                # Helle Theme-Farben
-                if self.index % 2 == 0:
-                    self.md_bg_color = [0.95, 0.95, 0.95, 1]  # Sehr helles Grau
-                else:
-                    self.md_bg_color = [0.98, 0.98, 0.98, 1]  # Noch heller
-            else:
-                # Dunkle Theme-Farben (bisherige Farben)
-                if self.index % 2 == 0:
-                    self.md_bg_color = [0.2, 0.2, 0.2, 1]
-                else:
-                    self.md_bg_color = [0.15, 0.15, 0.15, 1]
+        self.md_bg_color = self._get_background_color()
     
     def on_index(self, instance, value):
         """Wird aufgerufen wenn sich der Index ändert - THEME-FIX"""

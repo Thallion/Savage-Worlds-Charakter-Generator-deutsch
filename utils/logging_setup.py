@@ -24,7 +24,14 @@ def _get_log_level():
     Returns:
         int: logging.DEBUG, logging.INFO, etc.
     """
-    default_level = logging.INFO
+    # Default-Level basierend auf Build-Typ setzen
+    if getattr(sys, 'frozen', False):
+        # Release-Build: weniger ausführliches Logging
+        default_level = logging.WARNING
+    else:
+        # Entwicklungs-Build: detailliertes Logging
+        default_level = logging.INFO
+    
     level_mapping = {
         'DEBUG': logging.DEBUG,
         'INFO': logging.INFO,

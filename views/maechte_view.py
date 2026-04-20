@@ -116,6 +116,9 @@ class MachtItemRow(MDBoxLayout):
     beschreibung = StringProperty("")
     macht = ObjectProperty(None)
     maechte_widget = ObjectProperty(None)
+    
+    # Klassenattribut für Caching der Hintergrundfarben
+    _color_cache = {}
 
     def __init__(self, **kwargs):
         """Initialisiert die MachtItemRow und holt den Controller-Zugriff."""
@@ -312,13 +315,18 @@ class MachtItemRow(MDBoxLayout):
 
     def _get_background_color(self):
         """Berechnet die Hintergrundfarbe basierend auf Theme und Index."""
-        is_dark = self.theme_cls.theme_style == "Dark"
+        theme_style = self.theme_cls.theme_style
         is_even = self.index % 2 == 0
-
-        if is_dark:
-            return DARK_EVEN_COLOR if is_even else DARK_ODD_COLOR
-        else:
-            return LIGHT_EVEN_COLOR if is_even else LIGHT_ODD_COLOR
+        key = (theme_style, is_even)
+        
+        if key not in self._color_cache:
+            if theme_style == "Dark":
+                color = DARK_EVEN_COLOR if is_even else DARK_ODD_COLOR
+            else:
+                color = LIGHT_EVEN_COLOR if is_even else LIGHT_ODD_COLOR
+            self._color_cache[key] = color
+            
+        return self._color_cache[key]
 
     def _get_line_color(self):
         """Berechnet die Rahmenfarbe basierend auf dem Auswahlstatus der Macht."""
