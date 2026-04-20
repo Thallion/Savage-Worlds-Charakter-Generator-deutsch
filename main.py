@@ -6,6 +6,7 @@ REFACTORED: Screen-Klassen nach views/screens.py extrahiert
 import sys
 import os
 import logging
+import time
 from functools import partial
 from pathlib import Path
 import re
@@ -885,15 +886,16 @@ class SW_Charakter_GeneratorApp(MDApp):
             # WICHTIG: Screen-Instances-Liste behalten um WeakReference-Probleme zu vermeiden  
             self.screen_instances = []
 
-            # Build tabs and screens SOFORT
+            # Tabs und Screens aufbauen — Screens nur für Tab 0 sofort,
+            # alle anderen werden lazy bei erstem Tab-Wechsel erzeugt (spart Startup-Zeit, v.a. Android).
             for i, (icon_str, tab_text, ScreenClass) in enumerate(self.tab_definitions):
                 Logger.info(f"Erstelle Tab {i+1}/{len(self.tab_definitions)}: '{tab_text}' mit Icon '{icon_str}'")
-                
-                # Create Tab Item
+
+                # Tab-Item für alle Tabs sofort erstellen (Tab-Bar bleibt vollständig sichtbar)
                 tab_item = MDTabsItem()
                 icon_widget = MDTabsItemIcon(icon=icon_str)
                 text_widget = MDTabsItemText(text=tab_text)
-                
+
                 # Setze parent-Referenzen für KivyMD's interne Logik
                 if hasattr(icon_widget, '_tabs'):
                     icon_widget._tabs = tabs_bar
@@ -901,46 +903,24 @@ class SW_Charakter_GeneratorApp(MDApp):
                     text_widget._tabs = tabs_bar
                 if hasattr(tab_item, '_tabs'):
                     tab_item._tabs = tabs_bar
-                
+
                 tab_item.add_widget(icon_widget)
                 tab_item.add_widget(text_widget)
-                
+
                 # Füge Tab zum Container hinzu
                 container.add_widget(tab_item)
-                
+
                 # WICHTIG: Referenz behalten um WeakReference-Problem zu vermeiden
                 self.tab_items.append(tab_item)
 
-                # Create screen instance and add to screen manager  
-                try:
-                    # Create the screen instance directly (ScreenClass is already a Screen)
-                    screen_instance = ScreenClass()
-                    clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
-                    screen_instance.name = f"screen_{i}_{clean_name}"
-                    
-                    # Add to ScreenManager
-                    screen_manager.add_widget(screen_instance)
-                    
-                    # Setze den ersten Screen als aktuellen Screen
-                    if i == 0:
-                        screen_manager.current = screen_instance.name
-                        
-                except Exception as e:
-                    Logger.error(f"Fehler beim Erstellen von {ScreenClass.__name__}: {str(e)}")
-                    screen_instance = None
-                
-                # Store screen with tab_text as key (like in original)
-                if screen_instance:
-                    self.screens[tab_text] = screen_instance
-                    # WICHTIG: Starke Referenz behalten um Garbage Collection zu verhindern
-                    self.screen_instances.append(screen_instance)
-                    
-                    # WICHTIG: Widget-Registrierung für Kompatibilität
-                    self._register_widget_for_compatibility(screen_instance, tab_text)
+                # Screen-Instanzierung: nur Tab 0 sofort, Rest on-demand
+                if i == 0:
+                    screen_instance, screen_name = self._instantiate_screen(i, screen_manager)
+                    if screen_instance and screen_name:
+                        screen_manager.current = screen_name
+                    Logger.info(f"✓ Tab '{tab_text}' + Screen (eager) erstellt")
                 else:
-                    Logger.error(f"DEBUG: Screen {tab_text} konnte nicht erstellt werden!")
-                
-                Logger.info(f"✓ Tab '{tab_text}' erfolgreich erstellt und registriert")
+                    Logger.info(f"✓ Tab '{tab_text}' erstellt (Screen lazy)")
 
             # Stelle sicher dass tabs_bar seine Tab-Updates verarbeitet
             if hasattr(tabs_bar, '_trigger_update_tab_width'):
@@ -1058,6 +1038,77 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.debug(f"Rail-Update für Superkräfte: {e}")
 
+    def _screen_name_for_tab(self, tab_index):
+        """Erzeugt den kanonischen Screen-Namen für einen Tab-Index."""
+        if tab_index < 0 or tab_index >= len(self.tab_definitions):
+            return None
+        tab_text = self.tab_definitions[tab_index][1]
+        clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+        return f"screen_{tab_index}_{clean_name}"
+
+    def _instantiate_screen(self, tab_index, screen_manager):
+        """
+        Instanziiert den Screen für den gegebenen Tab-Index, falls noch nicht geschehen.
+
+        Lazy-Loading: Screens werden erst erzeugt, wenn sie tatsächlich gebraucht werden
+        (Tab-Wechsel, Swipe, programmatische Navigation) — spart Startup-Zeit v.a. auf Android.
+
+        Returns:
+            (screen_instance, screen_name) oder (None, None) bei Fehler/ungültigem Index.
+        """
+        try:
+            if tab_index < 0 or tab_index >= len(self.tab_definitions):
+                Logger.warning(f"Lazy-Screen: Ungültiger tab_index {tab_index}")
+                return None, None
+
+            if screen_manager is None:
+                Logger.error("Lazy-Screen: screen_manager ist None")
+                return None, None
+
+            _, tab_text, ScreenClass = self.tab_definitions[tab_index]
+            screen_name = self._screen_name_for_tab(tab_index)
+
+            # Bereits registriert?
+            if tab_text in self.screens:
+                return self.screens[tab_text], screen_name
+
+            # Sicherheitsnetz: vielleicht im ScreenManager ohne dict-Eintrag?
+            if screen_name and screen_name in getattr(screen_manager, 'screen_names', []):
+                try:
+                    existing = screen_manager.get_screen(screen_name)
+                    self.screens[tab_text] = existing
+                    if not hasattr(self, 'screen_instances'):
+                        self.screen_instances = []
+                    if existing not in self.screen_instances:
+                        self.screen_instances.append(existing)
+                    return existing, screen_name
+                except Exception:
+                    pass  # neu erzeugen
+
+            # Neu erzeugen
+            t0 = time.monotonic()
+            screen_instance = ScreenClass()
+            screen_instance.name = screen_name
+            screen_manager.add_widget(screen_instance)
+
+            self.screens[tab_text] = screen_instance
+            if not hasattr(self, 'screen_instances'):
+                self.screen_instances = []
+            self.screen_instances.append(screen_instance)
+            self._register_widget_for_compatibility(screen_instance, tab_text)
+
+            dt_ms = (time.monotonic() - t0) * 1000
+            Logger.info(f"Lazy-Screen: '{tab_text}' (Index {tab_index}) in {dt_ms:.1f} ms instanziiert")
+            return screen_instance, screen_name
+
+        except Exception as e:
+            safe_name = (
+                self.tab_definitions[tab_index][1]
+                if 0 <= tab_index < len(self.tab_definitions) else str(tab_index)
+            )
+            Logger.error(f"Lazy-Screen: Fehler bei '{safe_name}': {e}", exc_info=True)
+            return None, None
+
     def _activate_first_tab(self, screen_manager):
         """Aktiviert den ersten Tab mit Verzögerung um KivyMD-Initialisierung abzuwarten"""
         try:
@@ -1107,39 +1158,12 @@ class SW_Charakter_GeneratorApp(MDApp):
                     clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
                     screen_name = f"screen_{tab_index}_{clean_name}"
 
-                    # Screen suchen und wechseln - getrennte try-Blöcke
-                    # damit ein Transitionsfehler keinen neuen Screen erzeugt
-                    screen_exists = False
-                    if hasattr(screen_manager, 'get_screen'):
-                        try:
-                            screen_manager.get_screen(screen_name)
-                            screen_exists = True
-                        except Exception:
-                            Logger.warning(f"Screen '{screen_name}' nicht gefunden, erstelle neu...")
-
-                        if screen_exists:
-                            screen_manager.current = screen_name
-                        else:
-                            # Screen dynamisch erstellen (nur bei echtem ScreenNotFound)
-                            if 0 <= tab_index < len(self.tab_definitions):
-                                ScreenClass = self.tab_definitions[tab_index][2]
-                                try:
-                                    new_screen = ScreenClass()
-                                    new_screen.name = screen_name
-                                    screen_manager.add_widget(new_screen)
-                                    # Keep strong reference
-                                    if not hasattr(self, 'screen_instances'):
-                                        self.screen_instances = []
-                                    self.screen_instances.append(new_screen)
-                                    self.screens[tab_text] = new_screen
-                                    screen_manager.current = screen_name
-                                    Logger.info(f"Screen '{screen_name}' dynamisch erstellt")
-                                    # Widget-Registrierung für den neuen Screen
-                                    self._register_widget_for_compatibility(new_screen, tab_text)
-                                except Exception as create_error:
-                                    Logger.error(f"Dynamische Erstellung von '{screen_name}' fehlgeschlagen: {create_error}")
+                    # Screen ggf. lazy erzeugen und dann wechseln
+                    screen_instance, _ = self._instantiate_screen(tab_index, screen_manager)
+                    if screen_instance:
+                        screen_manager.current = screen_name
                     else:
-                        Logger.error("ScreenManager hat keine get_screen Methode")
+                        Logger.error(f"Tab-Wechsel zu '{screen_name}' fehlgeschlagen: Screen konnte nicht erzeugt werden")
                 else:
                     Logger.error(f"Ungültiger Tab-Index: {tab_index}")
 
@@ -2216,12 +2240,12 @@ class SW_Charakter_GeneratorApp(MDApp):
             else:
                 screen_manager.transition = NoTransition()
 
-            try:
-                screen_manager.get_screen(screen_name)
-                screen_manager.current = screen_name
-            except Exception:
-                Logger.warning(f"Screen '{screen_name}' nicht gefunden bei Swipe")
+            # Screen ggf. lazy erzeugen
+            screen_instance, _ = self._instantiate_screen(index, screen_manager)
+            if not screen_instance:
+                Logger.warning(f"Screen '{screen_name}' konnte nicht erzeugt werden (Swipe/Nav)")
                 return
+            screen_manager.current = screen_name
 
             self._current_tab_index = index
 
