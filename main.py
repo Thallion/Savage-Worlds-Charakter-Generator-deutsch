@@ -1428,12 +1428,15 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             if 0 <= tab_index < len(self.tab_definitions):
                 tab_text = self.tab_definitions[tab_index][1]
-                clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
-                screen_name = f"screen_{tab_index}_{clean_name}"
+
+                # Lazy-Instanziierung sicherstellen
+                screen, screen_name = self._instantiate_screen(tab_index, screen_manager)
+                if screen is None or screen_name is None:
+                    Logger.warning(f"Bottom-Nav: Screen für Tab '{tab_text}' konnte nicht erzeugt werden")
+                    return True
 
                 screen_manager.transition = NoTransition()
                 try:
-                    screen_manager.get_screen(screen_name)
                     screen_manager.current = screen_name
                 except Exception:
                     Logger.warning(f"Screen '{screen_name}' nicht gefunden")
@@ -1667,12 +1670,15 @@ class SW_Charakter_GeneratorApp(MDApp):
                 return
 
             tab_text = self.tab_definitions[index][1]
-            clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
-            screen_name = f"screen_{index}_{clean_name}"
+
+            # Lazy-Instanziierung sicherstellen
+            screen, screen_name = self._instantiate_screen(index, screen_manager)
+            if screen is None or screen_name is None:
+                Logger.warning(f"Popup-Wechsel: Screen für Tab '{tab_text}' konnte nicht erzeugt werden")
+                return
 
             screen_manager.transition = NoTransition()
             try:
-                screen_manager.get_screen(screen_name)
                 screen_manager.current = screen_name
             except Exception:
                 Logger.warning(f"Screen '{screen_name}' nicht gefunden")
@@ -1727,14 +1733,17 @@ class SW_Charakter_GeneratorApp(MDApp):
 
             if 0 <= item_index < len(self.tab_definitions):
                 tab_text = self.tab_definitions[item_index][1]
-                clean_name = tab_text.lower().replace(' ', '_').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
-                screen_name = f"screen_{item_index}_{clean_name}"
+
+                # Lazy-Instanziierung sicherstellen
+                screen, screen_name = self._instantiate_screen(item_index, screen_manager)
+                if screen is None or screen_name is None:
+                    Logger.warning(f"NavigationRail: Screen für Tab '{tab_text}' konnte nicht erzeugt werden")
+                    return True
 
                 # Transition ohne Animation bei direktem Tap
                 screen_manager.transition = NoTransition()
 
                 try:
-                    screen_manager.get_screen(screen_name)
                     screen_manager.current = screen_name
                 except Exception:
                     Logger.warning(f"Screen '{screen_name}' nicht gefunden")
