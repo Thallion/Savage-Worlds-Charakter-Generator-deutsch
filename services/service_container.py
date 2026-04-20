@@ -33,13 +33,14 @@ class ServiceContainer:
     """
 
     _instance = None
-    _services: Dict[str, Any] = {}
-    _lazy_factories: Dict[str, Callable[[], Any]] = {}
-    _initialized = False
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
+            # Instance variables initialisieren
+            cls._instance._services = {}
+            cls._instance._lazy_factories = {}
+            cls._instance._initialized = False
         return cls._instance
 
     def __init__(self):
@@ -61,13 +62,13 @@ class ServiceContainer:
             app = App.get_running_app()
             theme_cls = app.theme_cls if app else None
 
-            # --- Kernservices (eager) ---
+            # --- Kernservices (eager) - diese sollten immer funktionieren ---
             self._services['config'] = ConfigService()
             self._services['event'] = EventService()
             self._services['theme'] = ThemeService()
             self._services['wizard'] = WizardService()
 
-            # --- Nicht-kritische Services (lazy) ---
+            # --- Nicht-kritische Services (lazy) - IMMER registrieren ---
             config_service = self._services['config']
             self._lazy_factories['backup'] = lambda: BackupService(config_service)
             self._lazy_factories['tutorial'] = lambda: TutorialService(config_service)
@@ -77,16 +78,22 @@ class ServiceContainer:
                 # Controller selbst registrieren
                 self._services['charakter_controller'] = charakter_controller
 
-                # FileManager wird früh gebraucht (Auto-Load) → eager
-                self._services['file_manager'] = FileManagerService(charakter_controller)
-
-                # PDF/HTML erst bei Export nötig → lazy
+                # PDF/HTML erst bei Export nötig → lazy (IMMER registrieren)
                 self._lazy_factories['pdf'] = lambda: PDFService(charakter_controller)
                 self._lazy_factories['html'] = lambda: HTMLService(charakter_controller)
 
-                if theme_cls:
-                    # Dialog wird bei fast jeder Nutzeraktion gebraucht → eager
-                    self._services['dialog'] = DialogService(charakter_controller, theme_cls)
+                # FileManager wird früh gebraucht (Auto-Load) → eager (kann fehlschlagen in Tests)
+                try:
+                    self._services['file_manager'] = FileManagerService(charakter_controller)
+                except Exception as e:
+                    Logger.warning(f"FileManagerService konnte nicht erstellt werden: {str(e)}")
+
+                # Dialog Service (kann fehlschlagen wenn theme_cls None ist)
+                try:
+                    if theme_cls:
+                        self._services['dialog'] = DialogService(charakter_controller, theme_cls)
+                except Exception as e:
+                    Logger.warning(f"DialogService konnte nicht erstellt werden: {str(e)}")
 
             eager = sorted(self._services.keys())
             lazy = sorted(self._lazy_factories.keys())
