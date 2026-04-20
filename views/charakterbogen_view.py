@@ -97,8 +97,13 @@ class CharakterbogenWidget(MDBoxLayout):
     def __init__(self, **kwargs):
         """Initialisiert das CharakterbogenWidget und lädt die Daten."""
         super().__init__(**kwargs)
+
+        # DEBOUNCE: Update-Throttling um mehrfache Widget-Rebuilds zu vermeiden
+        self._update_scheduled = False
+        self._update_event = None
+
         self._initialize_controller()
-        
+
         # Initiale Übersicht erstellen
         Clock.schedule_once(self.update_overview, 0)
         
@@ -194,14 +199,37 @@ class CharakterbogenWidget(MDBoxLayout):
     def update_overview(self, *args):
         """
         Aktualisiert die gesamte Charakterübersicht.
-        Ruft die spezialisierten Update-Methoden für jeden Abschnitt auf.
+        DEBOUNCE: Sammelt mehrere Update-Calls und führt nur einen einzigen Rebuild aus.
         """
-        Logger.debug("Aktualisiere die Charakterübersicht.")
+        # DEBOUNCE: Verhindere mehrfache Update-Calls pro Frame (Performance-Optimierung)
+        if self._update_scheduled:
+            Logger.debug("CharakterbogenWidget: Update bereits geplant, überspringe Duplikat")
+            return
+
+        if self._update_event:
+            # Vorherigen Event abbrechen
+            self._update_event.cancel()
+
+        self._update_scheduled = True
+
+        # Schedule das echte Update nach kurzer Verzögerung (sammelt weitere Calls)
+        self._update_event = Clock.schedule_once(self._perform_update, 0.05)
+
+    def _perform_update(self, dt):
+        """
+        Führt das tatsächliche Update der Charakterübersicht aus.
+        Interne Methode für Debounce-Pattern.
+        """
+        self._update_scheduled = False
+        self._update_event = None
+
+        Logger.debug("CharakterbogenWidget: Führe konsolidierten Update-Rebuild aus")
+
         if not self.charakter:
             Logger.warning("CharakterbogenWidget: Kein Charakter zum Aktualisieren der Übersicht.")
             return
 
-        # Aktualisierung der einzelnen Sektionen
+        # Aktualisierung der einzelnen Sektionen (ursprüngliche Logik)
         self._update_profil_section()
         self._update_volk_section()
         self._update_attribute_section()
@@ -214,6 +242,8 @@ class CharakterbogenWidget(MDBoxLayout):
         self._update_waffen_section()
         self._update_schilde_section()
         self._update_ruestungen_section()
+
+        Logger.debug("CharakterbogenWidget: Konsolidierter Update abgeschlossen")
 
     def _update_profil_section(self):
         """
@@ -740,8 +770,8 @@ class CharakterbogenWidget(MDBoxLayout):
         else:
             item.anlegen(self.charakter)
             
-        # UI aktualisieren
-        self.update_overview(0)
+        # UI aktualisieren (Debounce-sicher)
+        self.update_overview()
         
         # Abgeleitete Werte neu berechnen
         self.charakter.berechne_abgeleitete_werte()
@@ -816,10 +846,16 @@ class CharakterbogenWidget(MDBoxLayout):
     def cleanup(self):
         """Bereinigt das Widget beim Beenden"""
         try:
+            # DEBOUNCE: Geplante Update-Events abbrechen
+            if self._update_event:
+                self._update_event.cancel()
+                self._update_event = None
+            self._update_scheduled = False
+
             # Controller-Bindings entfernen
             if self.controller:
                 self.controller.unbind(charakter=self._on_controller_charakter_changed)
-            
+
             # Charakter-Bindings entfernen
             if self.charakter:
                 self.charakter.unbind(on_charakter_change=self._on_charakter_change)
