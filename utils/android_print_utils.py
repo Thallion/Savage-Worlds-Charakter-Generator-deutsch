@@ -242,10 +242,17 @@ def _make_runnable(py_callable):
 
 def get_downloads_path():
     """
-    Gibt den Pfad zum Download-Ordner auf Android zurück.
+    Gibt einen beschreibbaren Pfad für temporäre Export-Dateien auf Android zurück.
+
+    Unter Scoped Storage (targetSdk ≥ 29, Android 10+) ist das öffentliche
+    Download-Verzeichnis `/storage/emulated/0/Download/` für normale Apps
+    nicht mehr direkt beschreibbar — `open(..., 'w')` scheitert mit
+    `PermissionError: [Errno 13] Permission denied`. Deshalb wird die
+    app-private externe Ablage bevorzugt; sie ist auf jeder Android-Version
+    ohne Runtime-Permission beschreibbar.
 
     Returns:
-        str: Pfad zum Download-Ordner oder None
+        str: Pfad zu einem beschreibbaren Verzeichnis oder None
     """
     if not is_android():
         return None
@@ -257,16 +264,18 @@ def get_downloads_path():
         PythonActivity = autoclass('org.kivy.android.PythonActivity')
         context = PythonActivity.mActivity
 
-        downloads_dir = Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_DOWNLOADS)
+        # App-private externe Ablage — immer beschreibbar, kein Permission nötig
+        try:
+            alt_dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            if alt_dir is not None:
+                if not alt_dir.exists():
+                    alt_dir.mkdirs()
+                if alt_dir.exists():
+                    return alt_dir.getAbsolutePath()
+        except Exception as e:
+            Logger.warning(f"Android: getExternalFilesDir fehlgeschlagen: {e}")
 
-        if downloads_dir and downloads_dir.exists():
-            return downloads_dir.getAbsolutePath()
-
-        alt_dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-        if alt_dir and alt_dir.exists():
-            return alt_dir.getAbsolutePath()
-
+        # Letzter Fallback: app-internes Verzeichnis
         return context.getFilesDir().getAbsolutePath()
 
     except Exception as e:

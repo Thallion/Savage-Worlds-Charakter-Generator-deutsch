@@ -56,6 +56,7 @@ TEST_MODULE = [
     'test_setting_merge',
     'test_lazy_screens',
     'test_lazy_services',
+    'test_android_scoped_storage',
 ]
 
 # Doppelte entfernen
