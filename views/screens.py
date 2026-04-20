@@ -330,7 +330,20 @@ class InfoScreen(MDScreen):
         button.width = max(min_width, estimated_width)
             
     def pruefe_auf_update(self):
-        """Startet den Update-Check in einem Hintergrund-Thread."""
+        """Startet den Update-Check - Android-sicher ohne Threading."""
+        from kivy.utils import platform as kivy_platform
+
+        # Android: Update-Checks übersprungen (Play Store Policy + Thread-Safety)
+        if kivy_platform == 'android':
+            Logger.info("Android: Update-Check übersprungen (Play Store Policy)")
+            Clock.schedule_once(
+                lambda dt: self._zeige_update_ergebnis(None,
+                    "Update-Checks sind auf Android deaktiviert. "
+                    "Updates erfolgen über den Play Store."), 0
+            )
+            return
+
+        # Desktop: Threading wie bisher
         self._update_btn_text.text = "Prüfe..."
         self._update_btn.disabled = True
         threading.Thread(target=self._update_check_worker, daemon=True).start()

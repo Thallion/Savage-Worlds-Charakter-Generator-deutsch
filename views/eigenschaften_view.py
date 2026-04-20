@@ -8,6 +8,7 @@ from kivy.logger import Logger
 from kivy.metrics import dp
 from kivy.cache import Cache
 from threading import Thread
+from kivy.utils import platform as kivy_platform
 import time
 from kivy.uix.modalview import ModalView
 from kivy.uix.checkbox import CheckBox
@@ -238,10 +239,15 @@ class EigenschaftenWidget(MDBoxLayout):
         self._initialisiere_sortieroptionen()
         self._initialisiere_menues()
 
-        # Starte Thread für das Laden der Daten
-        self._thread = Thread(target=self._lade_daten_im_hintergrund)
-        self._thread.daemon = True
-        self._thread.start()
+        # Starte Hintergrund-Laden - Android-sicher über Clock, Desktop über Thread
+        if kivy_platform == 'android':
+            # Android: Clock-basierte Lösung ohne Threading (JVM-Crash vermeiden)
+            Clock.schedule_once(self._lade_daten_android_sicher, 0.1)
+        else:
+            # Desktop: Thread wie bisher
+            self._thread = Thread(target=self._lade_daten_im_hintergrund)
+            self._thread.daemon = True
+            self._thread.start()
 
     def _initialisiere_controller(self):
         """Initialisiert die Controller-Verbindung gemäß MVC-Pattern"""
@@ -273,6 +279,16 @@ class EigenschaftenWidget(MDBoxLayout):
         """Initialisiert Dropdown-Menüs (lazy loading)"""
         self.sort_menu = None
         self.filter_menu = None
+
+    def _lade_daten_android_sicher(self, dt):
+        """Android-sichere Methode zum Laden der Daten ohne Threading."""
+        try:
+            # Lade Daten direkt im Hauptthread
+            self._lade_daten_im_hintergrund()
+        except Exception as e:
+            Logger.error(f"Android Eigenschaften-Loading Fehler: {e}")
+            # UI-Update im nächsten Frame
+            Clock.schedule_once(self._on_daten_geladen_fehler, 0)
 
     def _lade_daten_im_hintergrund(self):
         """Thread-Methode zum Laden und Vorverarbeiten der Daten"""
@@ -526,10 +542,15 @@ class EigenschaftenWidget(MDBoxLayout):
             # Warten, bis der Thread beendet ist - sollte normalerweise nicht vorkommen
             self._thread.join(0.5)
 
-            # Neuen Thread starten
-        self._thread = Thread(target=self._lade_daten_im_hintergrund)
-        self._thread.daemon = True
-        self._thread.start()
+        # Neuen Thread starten - Android-sicher über Clock, Desktop über Thread
+        if kivy_platform == 'android':
+            # Android: Clock-basierte Lösung ohne Threading
+            Clock.schedule_once(self._lade_daten_android_sicher, 0.1)
+        else:
+            # Desktop: Thread wie bisher
+            self._thread = Thread(target=self._lade_daten_im_hintergrund)
+            self._thread.daemon = True
+            self._thread.start()
 
     def _aktualisiere_sort_option(self):
         """Aktualisiert die Sortieroptionen basierend auf der Auswahl"""
@@ -901,3 +922,10 @@ class EigenschaftenItemRow(MDBoxLayout):
                 )
         except Exception as e:
             Logger.error(f"Warnung konnte nicht angezeigt werden: {e}")
+    def _on_daten_geladen_fehler(self, dt):
+        """Callback bei Fehlern beim Android-sicheren Daten-Laden."""
+        # Lade-Indikator verstecken
+        if hasattr(self, "_lade_indicator"):
+            self.remove_widget(self._lade_indicator)
+        Logger.error("Android: Eigenschaften-Daten konnten nicht geladen werden")
+

@@ -478,8 +478,33 @@ class HTMLManager:
         Startet einen einfachen HTTP-Server im Hintergrund, der die Datei
         über http://localhost serviert. webbrowser.open() funktioniert auf
         Android zuverlässig mit HTTP-URLs (wie die Links im Info-Screen).
+
+        ANDROID-SICHERHEIT: Auf Android wird kein HTTP-Server-Thread verwendet,
+        da threading.Thread JVM-Crashes verursachen kann. Stattdessen wird
+        auf das android_print_utils.py System verwiesen.
         """
         import os
+        from kivy.utils import platform as kivy_platform
+
+        # Android: HTTP-Server-Threads vermeiden (JVM-Crash-Risiko)
+        if kivy_platform == 'android':
+            Logger.warning(
+                "HTMLManager: HTTP-Server auf Android deaktiviert (Thread-Safety). "
+                "Nutzen Sie stattdessen den PDF-Export über android_print_utils.py"
+            )
+
+            # Alternative: Datei per FileProvider öffnen (fallback)
+            try:
+                import webbrowser
+                abs_path = os.path.abspath(file_path)
+                Logger.info(f"Android: Versuche HTML-Datei über FileProvider zu öffnen: {abs_path}")
+                webbrowser.open(f"file://{abs_path}")
+            except Exception as e:
+                Logger.error(f"Android: Fallback HTML-Öffnung fehlgeschlagen: {e}")
+
+            return
+
+        # Desktop: HTTP-Server wie bisher (thread-sicher)
         import threading
         from http.server import HTTPServer, SimpleHTTPRequestHandler
         import urllib.parse
@@ -504,17 +529,19 @@ class HTMLManager:
         HTMLManager._http_server = server
         HTMLManager._http_server_port = port
 
-        # Server im Hintergrund-Thread starten
+        # Server im Hintergrund-Thread starten (nur Desktop)
         server_thread = threading.Thread(target=server.serve_forever, daemon=True)
         server_thread.start()
 
         # URL zusammenbauen und im Browser öffnen
         encoded_name = urllib.parse.quote(filename)
         url = f"http://127.0.0.1:{port}/{encoded_name}"
-        Logger.info(f"Android: HTML-Server gestartet auf Port {port}, öffne {url}")
+        Logger.info(f"Desktop: HTML-Server gestartet auf Port {port}, öffne {url}")
+
+        import webbrowser
         webbrowser.open(url)
 
-        # Server nach 5 Minuten automatisch stoppen (Aufräumen)
+        # Server nach 5 Minuten automatisch stoppen (Aufräumen - nur Desktop)
         def auto_shutdown():
             import time
             time.sleep(300)
@@ -522,7 +549,7 @@ class HTMLManager:
                 if HTMLManager._http_server is server:
                     server.shutdown()
                     HTMLManager._http_server = None
-                    Logger.info("Android: HTML-Server automatisch gestoppt")
+                    Logger.info("Desktop: HTML-Server automatisch gestoppt")
             except Exception:
                 pass
 
