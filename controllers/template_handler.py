@@ -26,15 +26,16 @@ class TemplateHandler:
     def __init__(self, widget):
         self.widget = widget
         self.app = widget.app
-        
+
         # Template-Variablen initialisieren (ORIGINAL)
         self.available_templates = []
         self.filtered_templates = []
         self.selected_template = None
         self.template_dialog = None
-        
-        # Templates nach kurzer Verzögerung laden
-        Clock.schedule_once(self._load_available_templates, 0.2)
+        self._templates_loaded = False  # Lazy-Load-Flag
+
+        # ENTFERNT: Template-Load aus __init__ - wird erst bei Dialog-Öffnung geladen
+        # Clock.schedule_once(self._load_available_templates, 0.2)
         
     def open_template_selection_dialog(self):
         """Öffnet FileManager zur Auswahl von Templates für Auto Character Generator"""
@@ -74,6 +75,12 @@ class TemplateHandler:
     
     def show_template_selection_dialog(self):
         """Zeigt Template-Auswahl Dialog mit Suchfeld (nach Vorbild von voelker_view) - ORIGINAL"""
+        # LAZY-LOADING: Templates erst beim ersten Dialog-Aufruf laden
+        if not self._templates_loaded:
+            Logger.info("TemplateHandler: Lade Templates bei erstem Dialog-Aufruf (Lazy-Loading)")
+            self._load_available_templates()
+            self._templates_loaded = True
+
         if not self.available_templates:
             # Keine Templates verfügbar
             dialog = MDDialog(
@@ -327,8 +334,12 @@ class TemplateHandler:
             Logger.error(f"Fehler beim Anzeigen des Fehler-Dialogs: {e}")
     
     # ==================== TEMPLATE FUNCTIONALITY ====================
-    def _load_available_templates(self, dt):
-        """Lädt verfügbare Templates aus dem templates/ Ordner - ORIGINAL"""
+    def _load_available_templates(self, dt=None):
+        """Lädt verfügbare Templates aus dem templates/ Ordner - ORIGINAL
+
+        Args:
+            dt: Optional Clock delta time (für Clock.schedule_once Kompatibilität)
+        """
         try:
             templates_dir = Path(get_templates_path())
             self.available_templates = []

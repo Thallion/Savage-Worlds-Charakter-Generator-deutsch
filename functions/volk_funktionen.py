@@ -617,13 +617,26 @@ def waehle_freies_attribut(charakter, volk_name, attribut_name):
             from kivy.clock import Clock
             app = App.get_running_app()
             if hasattr(app, 'controller') and hasattr(app.controller, 'charakter'):
-                # MEHRFACH-STRATEGIE für robustes Update
-                Clock.schedule_once(lambda dt: _force_eigenschaften_update(app), 0.05)  # Sofort
-                Clock.schedule_once(lambda dt: _force_eigenschaften_update(app), 0.2)   # Verzögert
-                Clock.schedule_once(lambda dt: _force_trigger_ui_refresh(app), 0.1)     # UI-Refresh
+                # KONSOLIDIERT: Sequenzielle Logik statt kaskadierter Delays (0.05+0.2+0.1s → 0s)
+                def consolidated_update_sequence(dt):
+                    """Konsolidierte Update-Sequenz statt mehrerer Clock-Calls."""
+                    try:
+                        # Eigenschaften-Updates (war 2x mit 0.05s und 0.2s delay)
+                        _force_eigenschaften_update(app)
+                        _force_eigenschaften_update(app)  # Doppelt für Robustheit
+
+                        # UI-Refresh (war separater 0.1s delay)
+                        _force_trigger_ui_refresh(app)
+
+                        Logger.debug("VOLK_FUNKTIONEN: Konsolidierte Update-Sequenz abgeschlossen")
+                    except Exception as e:
+                        Logger.warning(f"Konsolidierte Update-Sequenz fehlgeschlagen: {e}")
+
+                # Einziger Clock-Call statt 3 kaskadierten
+                Clock.schedule_once(consolidated_update_sequence, 0)
         except Exception as e:
             Logger.warning(f"Direktes Eigenschaften-Update fehlgeschlagen: {e}")
-        
+
         return True
         
     except Exception as e:

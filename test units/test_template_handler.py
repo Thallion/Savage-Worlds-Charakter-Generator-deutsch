@@ -47,6 +47,8 @@ class TestTemplateHandler(unittest.TestCase):
         mock_dialog_inst = Mock()
         mock_dialog_class.return_value = mock_dialog_inst
 
+        # Lazy-Loading bereits erfolgt markieren (simuliert)
+        self.template_handler._templates_loaded = True
         self.template_handler.available_templates = []
         self.template_handler.show_template_selection_dialog()
 
