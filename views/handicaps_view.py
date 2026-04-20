@@ -198,91 +198,33 @@ class HandicapItemRow(MDBoxLayout):
             Logger.error(f"Fehler beim Auswählen des Handicaps: {str(e)}")
 
     def _show_not_duplicatable_dialog(self):
-        """Zeigt einen Dialog an, wenn ein Handicap nicht mehrfach ausgewählt werden kann."""
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
-        )
-        
-        warning_label = MDLabel(
-            text=f"Das Handicap '{self.handicap_name}' kann nicht mehrfach ausgewählt werden.",
-            size_hint_y=None,
-            height=dp(60),
-            theme_text_color="Secondary",
-            halign="left",
-            valign="middle"
-        )
-        content.add_widget(warning_label)
-        
-        dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Handicap nicht duplizierbar",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="OK"),
-                    style="text",
-                    on_release=lambda x: dialog.dismiss(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        dialog.open()
+        """
+        OPTIMIERT: Zeigt einen Dialog an, wenn ein Handicap nicht mehrfach ausgewählt werden kann.
+        Verwendet gecachte Dialog-Instanz für bessere Performance (Schritt 8).
+        """
+        from utils.dialog_helpers import show_cached_not_duplicatable_dialog
+        show_cached_not_duplicatable_dialog(self.handicap_name)
 
     def _show_max_points_dialog(self):
-        """Zeigt einen Dialog an, wenn das Maximum an Handicap-Punkten erreicht ist."""
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
+        """
+        OPTIMIERT: Zeigt einen Dialog an, wenn das Maximum an Handicap-Punkten erreicht ist.
+        Verwendet gecachte Dialog-Instanz für bessere Performance (Schritt 8).
+        """
+        from utils.dialog_helpers import show_cached_confirmation_dialog
+
+        message = ("Das Maximum von 4 Handicap-Punkten ist bereits erreicht!\n"
+                  "Die Auswirkungen des Handicaps werden angewendet, aber keine "
+                  "weiteren Punkte werden gutgeschrieben.\n\n"
+                  "Möchten Sie das Handicap trotzdem auswählen?")
+
+        show_cached_confirmation_dialog(
+            title="Maximum erreicht",
+            message=message,
+            confirm_text="Trotzdem auswählen",
+            cancel_text="Abbrechen",
+            on_confirm=self._confirm_handicap_selection,
+            on_cancel=None  # Dialog wird automatisch geschlossen
         )
-        
-        warning_label = MDLabel(
-            text="Das Maximum von 4 Handicap-Punkten ist bereits erreicht! Die Auswirkungen des Handicaps werden angewendet, aber keine weiteren Punkte werden gutgeschrieben.",
-            size_hint_y=None,
-            height=dp(80),
-            theme_text_color="Secondary",
-            halign="left",
-            valign="middle"
-        )
-        content.add_widget(warning_label)
-        
-        self.dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Maximum erreicht",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.close_dialog(),
-                ),
-                MDButton(
-                    MDButtonText(text="Trotzdem auswählen"),
-                    style="text",
-                    on_release=lambda x: self._confirm_handicap_selection(),
-                ),
-                spacing="8dp",
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        self.dialog.open()
 
     def close_dialog(self):
         """Schließt den Dialog."""

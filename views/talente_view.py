@@ -149,7 +149,7 @@ class TalentItemRow(MDBoxLayout):
         self.dialog = None
         self.voraussetzungen_dialog = None
         self.rang_dialog = None
-        self.pathfinder_dialog = None  # NEU: Dialog für kostenlose Pathfinder-Talente
+        # pathfinder_dialog entfernt - verwendet jetzt gecachte Dialog-Instanz (Schritt 8)
         Logger.debug(f"TalentItemRow.__init__: Controller gesetzt: {self.controller is not None}")
 
     def _get_controller(self):
@@ -254,99 +254,17 @@ class TalentItemRow(MDBoxLayout):
 
     def _show_pathfinder_kostenlos_dialog(self):
         """
-        NEU: Zeigt einen Dialog für kostenlose Pathfinder-Talente an.
-        Optimiert für Android Portrait-Modus: Labels mit dynamischer Höhe,
-        Buttons vertikal gestapelt auf Mobilgeräten.
+        OPTIMIERT: Zeigt einen Dialog für kostenlose Pathfinder-Talente an.
+        Verwendet gecachte Dialog-Instanz für bessere Performance (Schritt 8).
         """
-        # Dialog-Breite berechnen für text_size Binding
-        dialog_width = Window.width * 0.85 - dp(40)  # Dialog padding abziehen
+        from utils.dialog_helpers import show_cached_pathfinder_kostenlos_dialog
 
-        content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(10),
-            padding=dp(20),
-            adaptive_height=True
+        show_cached_pathfinder_kostenlos_dialog(
+            talent_name=self.talent_name,
+            on_kostenlos=self._waehle_talent_kostenlos,
+            on_kosten=self._waehle_talent_mit_kosten,
+            on_cancel=None  # Dialog wird automatisch geschlossen
         )
-
-        # Haupttext - dynamische Höhe basierend auf Textinhalt
-        info_label = MDLabel(
-            text=f"Das Talent '{self.talent_name}' ist ein Klassen-, Hintergrund- oder Experte-Talent und kann in Savage Pathfinder während der Charaktererstellung kostenlos gewählt werden.",
-            size_hint_y=None,
-            theme_text_color="Secondary",
-            halign="left",
-            valign="top",
-            text_size=(dialog_width, None),
-        )
-        info_label.bind(texture_size=lambda inst, sz: setattr(inst, 'height', sz[1]))
-        content.add_widget(info_label)
-
-        # Frage - dynamische Höhe basierend auf Textinhalt
-        question_label = MDLabel(
-            text="Möchten Sie dieses Talent kostenlos wählen oder mit den normalen Kosten (2 Handicap-Punkte oder 1 Aufstieg)?",
-            size_hint_y=None,
-            theme_text_color="Primary",
-            halign="left",
-            valign="top",
-            text_size=(dialog_width, None),
-        )
-        question_label.bind(texture_size=lambda inst, sz: setattr(inst, 'height', sz[1]))
-        content.add_widget(question_label)
-
-        # Buttons: Auf Mobilgeräten vertikal stapeln, damit alle sichtbar sind
-        if _mobile:
-            button_container = MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Kostenlos wählen"),
-                    style="filled",
-                    on_release=lambda x: self._waehle_talent_kostenlos(),
-                ),
-                MDButton(
-                    MDButtonText(text="Normale Kosten"),
-                    style="text",
-                    on_release=lambda x: self._waehle_talent_mit_kosten(),
-                ),
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.pathfinder_dialog.dismiss(),
-                ),
-                spacing="8dp",
-                orientation="vertical",
-            )
-        else:
-            button_container = MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=lambda x: self.pathfinder_dialog.dismiss(),
-                ),
-                MDButton(
-                    MDButtonText(text="Normale Kosten"),
-                    style="text",
-                    on_release=lambda x: self._waehle_talent_mit_kosten(),
-                ),
-                MDButton(
-                    MDButtonText(text="Kostenlos wählen"),
-                    style="text",
-                    on_release=lambda x: self._waehle_talent_kostenlos(),
-                ),
-                spacing="8dp",
-            )
-
-        self.pathfinder_dialog = MDDialog(
-            MDDialogHeadlineText(
-                text="Kostenloses Pathfinder-Talent",
-            ),
-            MDDialogContentContainer(
-                content,
-                orientation="vertical",
-                padding=dp(0),
-            ),
-            button_container,
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        self.pathfinder_dialog.open()
 
     def _waehle_talent_kostenlos(self):
         """
@@ -357,7 +275,7 @@ class TalentItemRow(MDBoxLayout):
         if hasattr(self, '_last_kostenlos_time') and (now - self._last_kostenlos_time) < 0.5:
             return
         self._last_kostenlos_time = now
-        self.pathfinder_dialog.dismiss()
+        # Dialog wird automatisch vom Cache-System geschlossen
         controller = self._get_controller()
         if controller:
             # Verwende die spezielle Pathfinder-Funktion
@@ -389,7 +307,7 @@ class TalentItemRow(MDBoxLayout):
         if hasattr(self, '_last_mit_kosten_time') and (now - self._last_mit_kosten_time) < 0.5:
             return
         self._last_mit_kosten_time = now
-        self.pathfinder_dialog.dismiss()
+        # Dialog wird automatisch vom Cache-System geschlossen
         controller = self._get_controller()
         if controller:
             # Normale Talent-Auswahl durchführen, aber Rang-Check ignorieren da bereits geprüft
@@ -797,7 +715,8 @@ class TalentItemRow(MDBoxLayout):
 
     def close_dialog(self):
         """Schließt aktive Dialoge."""
-        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog', 'pathfinder_dialog']:
+        for dialog_attr in ['dialog', 'voraussetzungen_dialog', 'rang_dialog']:
+            # pathfinder_dialog entfernt - verwendet jetzt gecachte Dialog-Instanz (Schritt 8)
             if hasattr(self, dialog_attr) and getattr(self, dialog_attr):
                 getattr(self, dialog_attr).dismiss()
 
