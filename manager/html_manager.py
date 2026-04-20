@@ -486,23 +486,17 @@ class HTMLManager:
         import os
         from kivy.utils import platform as kivy_platform
 
-        # Android: HTTP-Server-Threads vermeiden (JVM-Crash-Risiko)
+        # Android: HTTP-Server-Threads vermeiden (JVM-Crash-Risiko).
+        # Wir werfen eine Exception, damit der Aufrufer (_open_file_on_android)
+        # auf die nächste Strategie fällt (FileProvider/Share-Intent).
+        # `webbrowser.open("file://...")` löst auf Android ≥ 7 eine
+        # FileUriExposedException aus und funktioniert nicht.
         if kivy_platform == 'android':
             Logger.warning(
                 "HTMLManager: HTTP-Server auf Android deaktiviert (Thread-Safety). "
-                "Nutzen Sie stattdessen den PDF-Export über android_print_utils.py"
+                "Fallback auf FileProvider/Share-Intent über android_print_utils.py"
             )
-
-            # Alternative: Datei per FileProvider öffnen (fallback)
-            try:
-                import webbrowser
-                abs_path = os.path.abspath(file_path)
-                Logger.info(f"Android: Versuche HTML-Datei über FileProvider zu öffnen: {abs_path}")
-                webbrowser.open(f"file://{abs_path}")
-            except Exception as e:
-                Logger.error(f"Android: Fallback HTML-Öffnung fehlgeschlagen: {e}")
-
-            return
+            raise RuntimeError("HTTP-Server auf Android deaktiviert")
 
         # Desktop: HTTP-Server wie bisher (thread-sicher)
         import threading
