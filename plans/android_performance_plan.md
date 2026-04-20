@@ -19,7 +19,7 @@ Ziel: Messbar schnellerer Kaltstart, flüssigere Tab-Wechsel, kein Freeze bei Ch
 ## Checkliste
 
 - [x] **Schritt 1** — Presplash in `buildozer.spec` aktivieren
-- [ ] **Schritt 2** — Tab-Screens lazy instanziieren (`main.py`)
+- [x] **Schritt 2** — Tab-Screens lazy instanziieren (`main.py`)
 - [ ] **Schritt 3** — Nicht-kritische Services lazy (`service_container.py`)
 - [ ] **Schritt 4** — `BackupService` in Hintergrund-Thread
 - [ ] **Schritt 5** — `threading.Thread`-Gebrauch für Android absichern

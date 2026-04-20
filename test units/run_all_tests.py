@@ -54,6 +54,7 @@ TEST_MODULE = [
     'test_tutorial_service',
     'test_setting_draft',
     'test_setting_merge',
+    'test_lazy_screens',
 ]
 
 # Doppelte entfernen
