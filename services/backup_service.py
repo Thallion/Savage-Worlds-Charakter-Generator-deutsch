@@ -7,10 +7,13 @@ Erstellt ZIP-Backups bei App-Start und rotiert alte Backups.
 import json
 import os
 import shutil
+import threading
+import time
 import zipfile
 from datetime import datetime
 from pathlib import Path
 from kivy.logger import Logger
+from kivy.clock import Clock
 from utils.path_utils import get_chars_path, get_backup_path
 
 
@@ -22,6 +25,8 @@ class BackupService:
 
     def __init__(self, config_service=None):
         self._config_service = config_service
+        self._backup_thread = None
+        self._backup_running = False
 
     @property
     def auto_backup_enabled(self) -> bool:
@@ -36,6 +41,61 @@ class BackupService:
         if self._config_service:
             return self._config_service.get('max_backups', 5)
         return 5
+
+    def start_background_backup(self, delay_seconds: float = 2.0):
+        """
+        Startet ein automatisches Backup in einem Hintergrund-Thread.
+
+        Args:
+            delay_seconds (float): Verzögerung in Sekunden bevor Backup startet
+        """
+        if not self.auto_backup_enabled:
+            Logger.info("BackupService: Auto-Backup ist deaktiviert")
+            return
+
+        if self._backup_running:
+            Logger.info("BackupService: Backup bereits in Bearbeitung")
+            return
+
+        Logger.info(f"BackupService: Starte Hintergrund-Backup in {delay_seconds}s")
+
+        self._backup_thread = threading.Thread(
+            target=self._background_backup_worker,
+            args=(delay_seconds,),
+            daemon=True,
+            name="BackupService-Worker"
+        )
+        self._backup_thread.start()
+
+    def _background_backup_worker(self, delay_seconds: float):
+        """
+        Worker-Funktion für Hintergrund-Backup.
+
+        Args:
+            delay_seconds (float): Verzögerung vor Backup-Start
+        """
+        try:
+            self._backup_running = True
+
+            # Kurze Verzögerung damit App Zeit für wichtigere Startup-Tasks hat
+            time.sleep(delay_seconds)
+
+            start_time = time.monotonic()
+
+            # Backup erstellen (I/O-intensiv, aber thread-safe)
+            erfolg = self.erstelle_backup()
+
+            elapsed_ms = (time.monotonic() - start_time) * 1000.0
+
+            if erfolg:
+                Logger.info(f"BackupService: Hintergrund-Backup erfolgreich in {elapsed_ms:.1f} ms")
+            else:
+                Logger.info(f"BackupService: Hintergrund-Backup übersprungen ({elapsed_ms:.1f} ms)")
+
+        except Exception as e:
+            Logger.error(f"BackupService: Fehler im Hintergrund-Backup: {e}", exc_info=True)
+        finally:
+            self._backup_running = False
 
     def erstelle_backup(self) -> bool:
         """
@@ -285,4 +345,12 @@ class BackupService:
 
     def cleanup(self):
         """Bereinigt den Backup-Service (für ServiceContainer.shutdown)."""
+        if self._backup_thread and self._backup_thread.is_alive():
+            Logger.info("BackupService: Warte auf Backup-Thread...")
+            # Thread ist daemon, wird automatisch beendet bei App-Ende
+            # Maximal 2s warten, dann fortfahren
+            self._backup_thread.join(timeout=2.0)
+            if self._backup_thread.is_alive():
+                Logger.warning("BackupService: Backup-Thread läuft noch, App wird trotzdem beendet")
+
         Logger.info("BackupService bereinigt")

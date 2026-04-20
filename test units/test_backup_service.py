@@ -10,6 +10,7 @@ import os
 import json
 import tempfile
 import shutil
+import time
 import zipfile
 from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
@@ -283,6 +284,89 @@ class TestBackupService(unittest.TestCase):
         with zipfile.ZipFile(os.path.join(self.backup_dir, backup_dateien[0]), 'r') as zf:
             namen = zf.namelist()
             self.assertIn('settings/MeinSetting.json', namen)
+
+    @patch('services.backup_service.get_backup_path')
+    @patch('services.backup_service.get_chars_path')
+    def test_12_background_backup(self, mock_chars_path, mock_backup_path):
+        """Test: Background-Backup startet Thread und erstellt Backup."""
+        mock_chars_path.return_value = self.chars_dir
+        mock_backup_path.return_value = self.backup_dir
+
+        # Test-Dateien vorbereiten
+        self._erstelle_test_charakter()
+
+        service = self._erstelle_service()
+
+        # Background-Backup mit minimaler Verzögerung starten
+        service.start_background_backup(delay_seconds=0.1)
+
+        # Thread sollte gestartet sein
+        self.assertIsNotNone(service._backup_thread)
+        self.assertTrue(service._backup_running)
+
+        # Warten bis Background-Backup abgeschlossen ist (max. 2s)
+        start_time = time.monotonic()
+        while service._backup_running and (time.monotonic() - start_time) < 2.0:
+            time.sleep(0.05)
+
+        # Background-Backup sollte abgeschlossen sein
+        self.assertFalse(service._backup_running)
+
+        # Backup-Datei sollte erstellt worden sein
+        backup_dateien = [f for f in os.listdir(self.backup_dir) if f.endswith('.zip')]
+        self.assertEqual(len(backup_dateien), 1)
+
+    def test_13_background_backup_disabled(self):
+        """Test: Background-Backup wird übersprungen wenn deaktiviert."""
+        # Auto-Backup deaktivieren
+        self.mock_config.get.side_effect = lambda key, default: False if key == 'auto_backup_enabled' else default
+
+        service = self._erstelle_service()
+        service.start_background_backup(delay_seconds=0.1)
+
+        # Kein Thread sollte gestartet werden
+        self.assertIsNone(service._backup_thread)
+        self.assertFalse(service._backup_running)
+
+    @patch('services.backup_service.get_backup_path')
+    @patch('services.backup_service.get_chars_path')
+    def test_14_background_backup_already_running(self, mock_chars_path, mock_backup_path):
+        """Test: Zweiter Background-Backup-Aufruf wird ignoriert."""
+        mock_chars_path.return_value = self.chars_dir
+        mock_backup_path.return_value = self.backup_dir
+
+        self._erstelle_test_charakter()
+
+        service = self._erstelle_service()
+        service._backup_running = True  # Manuell auf "läuft" setzen
+
+        service.start_background_backup(delay_seconds=0.1)
+
+        # Kein neuer Thread sollte gestartet werden
+        self.assertIsNone(service._backup_thread)
+
+    @patch('services.backup_service.get_backup_path')
+    @patch('services.backup_service.get_chars_path')
+    def test_15_cleanup_waits_for_background_backup(self, mock_chars_path, mock_backup_path):
+        """Test: cleanup() wartet auf laufenden Background-Backup-Thread."""
+        mock_chars_path.return_value = self.chars_dir
+        mock_backup_path.return_value = self.backup_dir
+
+        self._erstelle_test_charakter()
+
+        service = self._erstelle_service()
+        service.start_background_backup(delay_seconds=0.1)
+
+        # Thread sollte laufen
+        self.assertTrue(service._backup_thread.is_alive())
+
+        # Cleanup aufrufen - sollte nicht hängen
+        start_time = time.monotonic()
+        service.cleanup()
+        elapsed = time.monotonic() - start_time
+
+        # Cleanup sollte innerhalb vernünftiger Zeit abgeschlossen sein
+        self.assertLess(elapsed, 3.0)
 
 
 if __name__ == '__main__':

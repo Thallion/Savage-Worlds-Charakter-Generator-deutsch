@@ -515,14 +515,14 @@ class SW_Charakter_GeneratorApp(MDApp):
             Logger.warning(f"Settings-Migration fehlgeschlagen: {e}")
 
     def _erstelle_auto_backup(self):
-        """Erstellt ein automatisches Backup der Benutzerdaten beim App-Start."""
+        """Startet ein automatisches Backup der Benutzerdaten im Hintergrund."""
         try:
             from services.service_container import service_container
             backup_service = service_container.get_backup_service()
             if backup_service:
-                backup_service.erstelle_backup()
+                backup_service.start_background_backup(delay_seconds=2.0)
         except Exception as e:
-            Logger.warning(f"Auto-Backup fehlgeschlagen: {e}")
+            Logger.warning(f"Auto-Backup-Start fehlgeschlagen: {e}")
 
     def on_start(self):
         """Wird nach build() aufgerufen, wenn das Layout verfügbar ist."""
