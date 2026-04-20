@@ -34,21 +34,24 @@ class TestLazyServices(unittest.TestCase):
     def setUp(self):
         # Singleton-State zwischen Tests zurücksetzen
         from services.service_container import ServiceContainer
-        ServiceContainer._services = {}
-        ServiceContainer._lazy_factories = {}
+        # Singleton-Instanz zurücksetzen
+        ServiceContainer._instance = None
         self.container = ServiceContainer()
 
     def tearDown(self):
         from services.service_container import ServiceContainer
-        ServiceContainer._services = {}
-        ServiceContainer._lazy_factories = {}
+        # Singleton-Instanz zurücksetzen
+        ServiceContainer._instance = None
 
     def _init_container(self, with_controller=True):
         """Initialisiert den Container mit gemockten Service-Klassen."""
         controller = MagicMock() if with_controller else None
         # App.get_running_app() gibt None zurück → kein Dialog-Service
-        with patch('services.service_container.App') as mock_app:
+        # FileManagerService mocken um KivyMD-Probleme zu vermeiden
+        with patch('services.service_container.App') as mock_app, \
+             patch('services.service_container.FileManagerService') as mock_file_service:
             mock_app.get_running_app.return_value = None
+            mock_file_service.return_value = MagicMock()
             self.container.initialize(controller)
 
     # ---------- Eager Services ----------

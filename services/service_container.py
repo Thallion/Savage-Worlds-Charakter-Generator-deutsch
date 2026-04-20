@@ -82,11 +82,8 @@ class ServiceContainer:
                 self._lazy_factories['pdf'] = lambda: PDFService(charakter_controller)
                 self._lazy_factories['html'] = lambda: HTMLService(charakter_controller)
 
-                # FileManager wird früh gebraucht (Auto-Load) → eager (kann fehlschlagen in Tests)
-                try:
-                    self._services['file_manager'] = FileManagerService(charakter_controller)
-                except Exception as e:
-                    Logger.warning(f"FileManagerService konnte nicht erstellt werden: {str(e)}")
+                # FileManager wird früh gebraucht (Auto-Load) → eager
+                self._services['file_manager'] = FileManagerService(charakter_controller)
 
                 # Dialog Service (kann fehlschlagen wenn theme_cls None ist)
                 try:

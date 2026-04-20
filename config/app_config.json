@@ -13,7 +13,7 @@
   "auto_save_enabled": true,
   "auto_save_interval": 300,
   "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
-  "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars",
+  "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
   "debug_mode": false,
   "log_level": "INFO",
   "max_recent_files": 10,
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-20T16:04:05.942700"
+  "last_updated": "2026-04-20T16:18:25.846181"
 }
