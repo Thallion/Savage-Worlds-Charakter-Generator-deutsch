@@ -4,9 +4,10 @@ Service Container für Dependency Injection
 Zentralisiert die Verwaltung aller Services
 """
 
+import time
 from kivy.logger import Logger
 from kivy.app import App
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Callable
 
 # Service Imports
 from services.theme_service import ThemeService
@@ -25,76 +26,132 @@ class ServiceContainer:
     """
     Dependency Injection Container für alle Services
     Implementiert Singleton-Pattern für Service-Instanzen
+
+    Services werden teilweise lazy initialisiert: Nicht-kritische Services
+    (`backup`, `tutorial`, `pdf`, `html`) werden erst beim ersten Zugriff
+    erzeugt — das spart Startup-Zeit auf Android.
     """
-    
+
     _instance = None
     _services: Dict[str, Any] = {}
+    _lazy_factories: Dict[str, Callable[[], Any]] = {}
     _initialized = False
-    
+
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
-    
+
     def __init__(self):
         if not self._initialized:
             self._initialized = True
             Logger.info("ServiceContainer initialisiert")
-    
+
     def initialize(self, charakter_controller):
         """
-        Initialisiert alle Services mit den erforderlichen Abhängigkeiten
-        
+        Initialisiert alle Services mit den erforderlichen Abhängigkeiten.
+
+        Kernservices werden sofort instanziiert, nicht-kritische Services
+        nur als Factory registriert und beim ersten Zugriff erzeugt.
+
         Args:
             charakter_controller: Der Hauptcontroller für Charakterverwaltung
         """
         try:
             app = App.get_running_app()
             theme_cls = app.theme_cls if app else None
-            
-            # Core Services
+
+            # --- Kernservices (eager) ---
             self._services['config'] = ConfigService()
             self._services['event'] = EventService()
             self._services['theme'] = ThemeService()
-            self._services['backup'] = BackupService(self._services['config'])
-            self._services['tutorial'] = TutorialService(self._services['config'])
             self._services['wizard'] = WizardService()
-            
+
+            # --- Nicht-kritische Services (lazy) ---
+            config_service = self._services['config']
+            self._lazy_factories['backup'] = lambda: BackupService(config_service)
+            self._lazy_factories['tutorial'] = lambda: TutorialService(config_service)
+
             # Controller-abhängige Services
             if charakter_controller:
                 # Controller selbst registrieren
                 self._services['charakter_controller'] = charakter_controller
-                
+
+                # FileManager wird früh gebraucht (Auto-Load) → eager
                 self._services['file_manager'] = FileManagerService(charakter_controller)
-                self._services['pdf'] = PDFService(charakter_controller)
-                self._services['html'] = HTMLService(charakter_controller)
-                
+
+                # PDF/HTML erst bei Export nötig → lazy
+                self._lazy_factories['pdf'] = lambda: PDFService(charakter_controller)
+                self._lazy_factories['html'] = lambda: HTMLService(charakter_controller)
+
                 if theme_cls:
+                    # Dialog wird bei fast jeder Nutzeraktion gebraucht → eager
                     self._services['dialog'] = DialogService(charakter_controller, theme_cls)
-            
-            Logger.info("Alle Services erfolgreich initialisiert")
-            
-            # Event über erfolgreiche Initialisierung senden
+
+            eager = sorted(self._services.keys())
+            lazy = sorted(self._lazy_factories.keys())
+            Logger.info(
+                f"ServiceContainer: {len(eager)} eager Services "
+                f"({', '.join(eager)}), {len(lazy)} lazy Services "
+                f"({', '.join(lazy)})"
+            )
+
+            # Event über erfolgreiche Initialisierung senden (nur eager Services)
             if 'event' in self._services:
-                self._services['event'].publish('services_initialized', self._services.keys())
-                
+                self._services['event'].publish('services_initialized', list(self._services.keys()))
+
         except Exception as e:
             Logger.error(f"Fehler bei Service-Initialisierung: {str(e)}", exc_info=True)
     
     def get_service(self, service_name: str) -> Optional[Any]:
         """
-        Gibt einen Service zurück
-        
+        Gibt einen Service zurück. Erzeugt Lazy-Services beim ersten Zugriff.
+
         Args:
             service_name (str): Name des Services
-            
+
         Returns:
             Service-Instanz oder None
         """
         service = self._services.get(service_name)
-        if not service:
-            Logger.warning(f"Service '{service_name}' nicht gefunden oder nicht initialisiert")
-        return service
+        if service is not None:
+            return service
+
+        # Lazy-Factory vorhanden? → jetzt erzeugen
+        factory = self._lazy_factories.get(service_name)
+        if factory is not None:
+            try:
+                start = time.monotonic()
+                service = factory()
+                elapsed_ms = (time.monotonic() - start) * 1000.0
+                self._services[service_name] = service
+                # Factory nur einmal aufrufen
+                del self._lazy_factories[service_name]
+                Logger.info(
+                    f"Lazy-Service: '{service_name}' in {elapsed_ms:.1f} ms instanziiert"
+                )
+
+                # Event senden, falls EventService verfügbar
+                event_service = self._services.get('event')
+                if event_service and service_name != 'event':
+                    try:
+                        event_service.publish(
+                            'service_lazy_initialized',
+                            {'name': service_name, 'elapsed_ms': elapsed_ms}
+                        )
+                    except Exception:
+                        pass  # Event-Fehler darf Service-Nutzung nicht blockieren
+
+                return service
+            except Exception as e:
+                Logger.error(
+                    f"Fehler beim Lazy-Init von Service '{service_name}': {str(e)}",
+                    exc_info=True
+                )
+                return None
+
+        Logger.warning(f"Service '{service_name}' nicht gefunden oder nicht initialisiert")
+        return None
     
     def get_theme_service(self) -> Optional[ThemeService]:
         """Gibt den Theme-Service zurück"""
@@ -172,24 +229,48 @@ class ServiceContainer:
     
     def is_service_available(self, service_name: str) -> bool:
         """
-        Prüft, ob ein Service verfügbar ist
-        
+        Prüft, ob ein Service verfügbar ist (bereits instanziiert oder
+        via Lazy-Factory verfügbar).
+
         Args:
             service_name (str): Service-Name
-            
+
         Returns:
             bool: True wenn verfügbar
         """
+        if service_name in self._services and self._services[service_name] is not None:
+            return True
+        return service_name in self._lazy_factories
+
+    def is_service_loaded(self, service_name: str) -> bool:
+        """
+        Prüft, ob ein Service tatsächlich bereits instanziiert wurde.
+
+        Nützlich für Shutdown-Pfade und Tests, um Lazy-Services nicht
+        unnötig zu materialisieren.
+
+        Args:
+            service_name (str): Service-Name
+
+        Returns:
+            bool: True wenn Service bereits erzeugt wurde
+        """
         return service_name in self._services and self._services[service_name] is not None
-    
+
     def get_service_status(self) -> Dict[str, bool]:
         """
-        Gibt den Status aller Services zurück
-        
+        Gibt den Status aller Services zurück.
+
+        Lazy-Services, die noch nicht instanziiert wurden, erscheinen mit
+        `False`.
+
         Returns:
-            dict: Service-Name -> Verfügbarkeit
+            dict: Service-Name -> bereits instanziiert
         """
-        return {name: service is not None for name, service in self._services.items()}
+        status = {name: service is not None for name, service in self._services.items()}
+        for lazy_name in self._lazy_factories:
+            status.setdefault(lazy_name, False)
+        return status
     
     def shutdown(self):
         """Beendet alle Services ordnungsgemäß"""
@@ -210,6 +291,7 @@ class ServiceContainer:
         
         # Services entfernen
         self._services.clear()
+        self._lazy_factories.clear()
         Logger.info("ServiceContainer heruntergefahren")
 
 
