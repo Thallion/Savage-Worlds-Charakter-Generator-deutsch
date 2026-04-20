@@ -67,26 +67,35 @@ class ServiceContainer:
             self._services['theme'] = ThemeService()
             self._services['wizard'] = WizardService()
 
-            # --- Nicht-kritische Services (lazy) ---
+            # --- Nicht-kritische Services als Lazy-Factories registrieren ---
+            # WICHTIG: Erst alle Factories registrieren, dann erst eager construieren.
+            # So bleiben Factories registriert, auch wenn ein eager-Service-Constructor
+            # später scheitert.
             config_service = self._services['config']
             self._lazy_factories['backup'] = lambda: BackupService(config_service)
             self._lazy_factories['tutorial'] = lambda: TutorialService(config_service)
 
-            # Controller-abhängige Services
+            if charakter_controller:
+                self._lazy_factories['pdf'] = lambda: PDFService(charakter_controller)
+                self._lazy_factories['html'] = lambda: HTMLService(charakter_controller)
+
+            # --- Controller-abhängige eager Services ---
             if charakter_controller:
                 # Controller selbst registrieren
                 self._services['charakter_controller'] = charakter_controller
 
                 # FileManager wird früh gebraucht (Auto-Load) → eager
-                self._services['file_manager'] = FileManagerService(charakter_controller)
-
-                # PDF/HTML erst bei Export nötig → lazy
-                self._lazy_factories['pdf'] = lambda: PDFService(charakter_controller)
-                self._lazy_factories['html'] = lambda: HTMLService(charakter_controller)
+                try:
+                    self._services['file_manager'] = FileManagerService(charakter_controller)
+                except Exception as e:
+                    Logger.error(f"FileManagerService-Init fehlgeschlagen: {e}", exc_info=True)
 
                 if theme_cls:
                     # Dialog wird bei fast jeder Nutzeraktion gebraucht → eager
-                    self._services['dialog'] = DialogService(charakter_controller, theme_cls)
+                    try:
+                        self._services['dialog'] = DialogService(charakter_controller, theme_cls)
+                    except Exception as e:
+                        Logger.error(f"DialogService-Init fehlgeschlagen: {e}", exc_info=True)
 
             eager = sorted(self._services.keys())
             lazy = sorted(self._lazy_factories.keys())

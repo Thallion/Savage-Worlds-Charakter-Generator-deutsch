@@ -38,7 +38,26 @@ class TestLazyServices(unittest.TestCase):
         ServiceContainer._lazy_factories = {}
         self.container = ServiceContainer()
 
+        # Alle Service-Klassen durch MagicMock ersetzen — Tests prüfen die
+        # ServiceContainer-Logik, nicht echte Service-Implementierungen.
+        self._patches = [
+            patch('services.service_container.ConfigService', MagicMock()),
+            patch('services.service_container.EventService', MagicMock()),
+            patch('services.service_container.ThemeService', MagicMock()),
+            patch('services.service_container.WizardService', MagicMock()),
+            patch('services.service_container.BackupService', MagicMock()),
+            patch('services.service_container.TutorialService', MagicMock()),
+            patch('services.service_container.FileManagerService', MagicMock()),
+            patch('services.service_container.PDFService', MagicMock()),
+            patch('services.service_container.HTMLService', MagicMock()),
+            patch('services.service_container.DialogService', MagicMock()),
+        ]
+        for p in self._patches:
+            p.start()
+
     def tearDown(self):
+        for p in self._patches:
+            p.stop()
         from services.service_container import ServiceContainer
         ServiceContainer._services = {}
         ServiceContainer._lazy_factories = {}
