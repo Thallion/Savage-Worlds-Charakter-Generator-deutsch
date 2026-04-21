@@ -73,8 +73,40 @@
     },
     "free_race_edge": {
       "type": "string",
-      "description": "Kostenloses Völker-Talent (falls nicht Mensch)",
+      "description": "Kostenloses Völker-Talent (Legacy-Feld). Neuere Templates nutzen race_choices.freies_talent.",
       "default": ""
+    },
+    "race_choices": {
+      "type": "object",
+      "description": "Konkrete Auswahl bei Völkern mit wahlmoeglichkeiten (z.B. Halbelf, Halbork, Mensch). Alle Felder sind optional.",
+      "properties": {
+        "freies_talent": {
+          "type": "string",
+          "description": "Gewähltes Anfänger-Talent (Mensch, Halbelf-Talent-Modus, Goblin, ...)"
+        },
+        "freies_attribut": {
+          "type": "string",
+          "description": "Gewähltes Attribut für W4→W6-Bonus (Mensch, einige andere Völker)"
+        },
+        "freies_talent_oder_attribut_modus": {
+          "type": "string",
+          "enum": ["talent", "attribut"],
+          "description": "Halbelf: ob Talent ODER Attribut gewählt werden soll"
+        },
+        "freies_talent_oder_attribut_wert": {
+          "type": "string",
+          "description": "Halbelf: der gewählte Talent- oder Attribut-Name (abhängig vom Modus)"
+        },
+        "attribut_staerke_oder_konstitution": {
+          "type": "string",
+          "enum": ["Stärke", "Konstitution"],
+          "description": "Halbork: ob Stärke oder Konstitution auf W6"
+        },
+        "freie_verstandsfertigkeit": {
+          "type": "string",
+          "description": "Volk mit verstandsbasierter Bonus-Fertigkeit (z.B. Engro)"
+        }
+      }
     },
     "powers": {
       "type": "array",

@@ -11,9 +11,10 @@ Universelle Funktion zur automatischen Charaktergenerierung aus JSON-Templates.
 import json
 import sys
 import os
+import unicodedata
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Union, Optional, Any
+from typing import Dict, List, Union, Optional, Any, Tuple
 import logging
 
 # Projekt-Root zum Python-Path hinzufügen
@@ -48,7 +49,90 @@ class AutoCharacterGenerator:
         self.generated_characters = []
         self.generation_log = []
         self.cost_log = {}  # Detailliertes Kosten-Log
-        self.auto_added_points = 0  # Automatisch hinzugefügte Punkte
+        self.auto_added_points = 0
+        # Chronologische Steigerungshistorie (wird direkt in charakter.steigerungs_journal geschrieben)
+        self._historie_entries: List[Dict[str, Any]] = []
+        self._historie_session_start = datetime.now()
+        # Aktuelle Phase für Historie-Einträge
+        self._current_phase = 'generierung'
+        # Referenz auf aktuellen Charakter (für Rang-Abfragen)
+        self._current_charakter: Optional[Charakter] = None
+
+    # ─── Helfer: chronologische Historie ────────────────────────────
+
+    def _reset_historie(self) -> None:
+        """Setzt die Historie auf einen frischen Zustand zurück."""
+        self._historie_entries = []
+        self._historie_session_start = datetime.now()
+        self._current_phase = 'generierung'
+
+    def _rang_for_entry(self) -> str:
+        """Ermittelt den aktuellen Rang für einen Historie-Eintrag."""
+        if self._current_charakter is not None:
+            return getattr(self._current_charakter, 'rang', '') or ''
+        return ''
+
+    def _add_historie_entry(self, entry_type: str, details: Dict[str, Any]) -> None:
+        """
+        Fügt einen chronologischen Historie-Eintrag hinzu.
+
+        Schema ist kompatibel mit views.historie_view.CharakterHistorie.get_formatted_log().
+        """
+        details = dict(details)  # flache Kopie
+        details.setdefault('auto_generated', True)
+        details.setdefault('phase', self._current_phase)
+        entry = {
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'type': entry_type,
+            'rang': self._rang_for_entry(),
+            'details': details,
+        }
+        self._historie_entries.append(entry)
+
+    def _historie_dict(self) -> Dict[str, Any]:
+        """Erzeugt die steigerungs_journal-kompatible Dict-Repräsentation."""
+        return {
+            'session_start': self._historie_session_start.isoformat(),
+            'entries': list(self._historie_entries),
+        }
+
+    # ─── Helfer: robustes Matching ──────────────────────────────────
+
+    @staticmethod
+    def _normalize_key(value: str) -> str:
+        """Normalisiert Strings für robustes Vergleichen (Umlaute, Whitespace)."""
+        if value is None:
+            return ''
+        nfkd = unicodedata.normalize('NFKD', str(value))
+        return ''.join(c for c in nfkd if not unicodedata.combining(c)).strip().lower()
+
+    def _resolve_key(self, keys: List[str], name: str) -> Optional[str]:
+        """
+        Findet den Original-Schlüssel aus ``keys`` zu einem Template-Namen.
+
+        Reihenfolge: exakt → case-insensitive → normalisiert (NFKD) →
+        Start-Präfix normalisiert. Vermeidet die stille Substring-Kollision
+        zwischen z.B. "Kämpfen" und "Kämpfer".
+        """
+        if not name:
+            return None
+        if name in keys:
+            return name
+        lname = name.lower()
+        for key in keys:
+            if key.lower() == lname:
+                return key
+        norm_name = self._normalize_key(name)
+        if not norm_name:
+            return None
+        for key in keys:
+            if self._normalize_key(key) == norm_name:
+                return key
+        for key in keys:
+            nkey = self._normalize_key(key)
+            if nkey.startswith(norm_name) or norm_name.startswith(nkey):
+                return key
+        return None  # Automatisch hinzugefügte Punkte
 
     def generate_from_template(self, template: Union[str, Dict, Path],
                                custom_setting: Optional[str] = None,
@@ -76,9 +160,11 @@ class AutoCharacterGenerator:
                 'handicaps': [],
                 'maechte': [],
                 'auto_punkte': 0,
+                'warnungen': [],
                 'gesamt': {}
             }
             self.auto_added_points = 0
+            self._reset_historie()
 
             # Template laden und validieren
             template_data = self._load_template(template)
@@ -101,10 +187,19 @@ class AutoCharacterGenerator:
             # SCHRITT 1: CHARAKTER INITIALISIEREN
             setting_name = custom_setting or template_data.get('setting', 'SWAE')
             charakter = self._initialize_character(template_data, setting_name)
+            self._current_charakter = charakter
+            self._add_historie_entry('charakter_erstellt', {
+                'name': char_name,
+                'setting': setting_name,
+            })
 
             # SCHRITT 2: VOLK UND VÖLKER-BONI
             race_name = template_data.get('race', 'Mensch')
             free_race_edge = self._apply_race(charakter, race_name, template_data)
+
+            # SCHRITT 2b: Konkrete Volks-Wahlmöglichkeiten (race_choices / free_race_edge Legacy)
+            race_choices = template_data.get('race_choices', {}) or {}
+            self._apply_race_choices(charakter, race_name, race_choices, free_race_edge)
 
             # SCHRITT 3: HANDICAPS HINZUFÜGEN (für Punkte)
             handicaps = template_data['handicaps']
@@ -133,9 +228,11 @@ class AutoCharacterGenerator:
             self._add_equipment(charakter, equipment)
 
             # SCHRITT 9: TEMPLATE-AUFSTIEGE ANWENDEN
+            self._current_phase = 'aufstieg'
             advances_to_apply = template_data.get('advances_to_apply', [])
             if advances_to_apply:
                 self._apply_template_advances(charakter, advances_to_apply)
+            self._current_phase = 'generierung'
 
             # SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN
             complete_char_gen = options.get('complete_character_generation', False)
@@ -251,12 +348,48 @@ class AutoCharacterGenerator:
         return charakter
 
     def _apply_race(self, charakter: Charakter, race_name: str, template: Dict) -> Optional[str]:
-        """Wendet Völker-Auswahl und -Boni an"""
+        """Wendet Völker-Auswahl und -Boni an und protokolliert sie in der Historie."""
         self.log("--- SCHRITT 2: VOLK UND VÖLKER-BONI ---")
 
         self.log(f"  🎭 Volk gewählt: {race_name}")
 
-        # Völker-Boni vorbereiten
+        # Attribut-Snapshot vor Anwendung der Volks-Effekte (für Bonus-Detection)
+        pre_attrs: Dict[str, int] = {}
+        try:
+            if hasattr(charakter, 'attribute'):
+                for a_name, a_obj in charakter.attribute.items():
+                    pre_attrs[a_name] = getattr(a_obj.wuerfel, 'value', 4)
+        except Exception:
+            pre_attrs = {}
+
+        # Volk korrekt auswählen – ruft apply_effects_to_charakter etc. auf
+        try:
+            from functions.volk_funktionen import waehle_volk as _waehle_volk
+            if hasattr(charakter, 'voelker') and race_name in charakter.voelker:
+                _waehle_volk(charakter, race_name)
+        except Exception as e:
+            self.log(f"  ⚠️ waehle_volk fehlgeschlagen: {e}")
+
+        self._add_historie_entry('volk_gewaehlt', {'name': race_name})
+
+        # Attribut-Boni durchs Volk protokollieren (z.B. Halbork Stärke W4→W6)
+        try:
+            if hasattr(charakter, 'attribute'):
+                for a_name, a_obj in charakter.attribute.items():
+                    new_val = getattr(a_obj.wuerfel, 'value', 4)
+                    old_val = pre_attrs.get(a_name, new_val)
+                    if new_val > old_val:
+                        self._add_historie_entry('attribut_steigerung', {
+                            'name': a_name,
+                            'von': old_val,
+                            'nach': new_val,
+                            'kosten': 0,
+                            'kosten_typ': f"Volk ({race_name})",
+                        })
+        except Exception:
+            pass
+
+        # Völker-Boni vorbereiten (Legacy-Verhalten beibehalten)
         free_race_edge = template.get('free_race_edge', '')
         if race_name == 'Mensch' and not free_race_edge:
             if not hasattr(charakter, 'voelker_boni'):
@@ -267,6 +400,159 @@ class AutoCharacterGenerator:
             self.log(f"  🎁 Völker-Talent festgelegt: {free_race_edge}")
 
         return free_race_edge
+
+    def _apply_race_choices(self, charakter: Charakter, race_name: str,
+                             race_choices: Dict[str, Any],
+                             free_race_edge: Optional[str]) -> None:
+        """
+        Wendet konkrete Volks-Wahlmöglichkeiten an (race_choices aus Template).
+
+        Unterstützt:
+          - freies_talent
+          - freies_attribut
+          - freies_talent_oder_attribut_modus + _wert (Halbelf)
+          - attribut_staerke_oder_konstitution (Halbork)
+          - freie_verstandsfertigkeit
+        Legacy: free_race_edge wird als freies_talent behandelt, falls race_choices
+        nichts vorgibt.
+        """
+        self.log("--- SCHRITT 2b: VOLKS-WAHLMÖGLICHKEITEN ---")
+
+        # Legacy-Migration: free_race_edge → race_choices.freies_talent
+        effective_choices = dict(race_choices or {})
+        if free_race_edge and not effective_choices.get('freies_talent'):
+            effective_choices['freies_talent'] = free_race_edge
+
+        if not effective_choices:
+            self.log("  ℹ️ Keine Volks-Wahlmöglichkeiten im Template")
+            return
+
+        try:
+            from functions.volk_funktionen import (
+                waehle_freies_talent as vf_waehle_freies_talent,
+                waehle_freies_attribut as vf_waehle_freies_attribut,
+            )
+        except Exception as e:
+            self.log(f"  ⚠️ volk_funktionen nicht verfügbar: {e}")
+            vf_waehle_freies_talent = None
+            vf_waehle_freies_attribut = None
+
+        def _log_choice(choice_type: str, wert: str, erfolg: bool, hinweis: str = '') -> None:
+            details: Dict[str, Any] = {
+                'name': wert,
+                'wahl_typ': choice_type,
+                'volk': race_name,
+                'erfolg': erfolg,
+            }
+            if hinweis:
+                details['hinweis'] = hinweis
+            self._add_historie_entry('volk_wahlmoeglichkeit_gewaehlt', details)
+            if not erfolg:
+                self.cost_log['warnungen'].append(
+                    f"Volks-Wahl '{choice_type}={wert}' konnte nicht angewendet werden: {hinweis}"
+                )
+
+        # 1) Halbork-Stil: Stärke oder Konstitution
+        attr_wahl = effective_choices.get('attribut_staerke_oder_konstitution')
+        if attr_wahl:
+            erfolg = False
+            hinweis = ''
+            if vf_waehle_freies_attribut is not None:
+                try:
+                    erfolg = bool(vf_waehle_freies_attribut(charakter, race_name, attr_wahl))
+                except Exception as e:
+                    hinweis = str(e)
+            self.log(f"  🎁 Halbork-Wahl: {attr_wahl} → {'ok' if erfolg else 'fehlgeschlagen'}")
+            _log_choice('attribut_staerke_oder_konstitution', attr_wahl, erfolg, hinweis)
+
+        # 2) Halbelf-Stil: Talent oder Attribut
+        modus = effective_choices.get('freies_talent_oder_attribut_modus')
+        wert = effective_choices.get('freies_talent_oder_attribut_wert')
+        if modus and wert:
+            erfolg = False
+            hinweis = ''
+            if modus == 'talent' and vf_waehle_freies_talent is not None:
+                try:
+                    result = vf_waehle_freies_talent(charakter, race_name, wert, ignore_voraussetzungen=True)
+                    erfolg = result is True
+                except Exception as e:
+                    hinweis = str(e)
+            elif modus == 'attribut' and vf_waehle_freies_attribut is not None:
+                try:
+                    erfolg = bool(vf_waehle_freies_attribut(charakter, race_name, wert))
+                except Exception as e:
+                    hinweis = str(e)
+            else:
+                hinweis = f"unbekannter modus '{modus}'"
+            self.log(f"  🎁 Halbelf-Wahl ({modus}): {wert} → {'ok' if erfolg else 'fehlgeschlagen'}")
+            _log_choice(f'freies_talent_oder_attribut_{modus}', wert, erfolg, hinweis)
+
+        # 3) Freies Talent (Mensch, Goblin, …)
+        freies_talent = effective_choices.get('freies_talent')
+        if freies_talent and not (modus == 'talent'):
+            erfolg = False
+            hinweis = ''
+            if vf_waehle_freies_talent is not None:
+                try:
+                    result = vf_waehle_freies_talent(charakter, race_name, freies_talent, ignore_voraussetzungen=True)
+                    erfolg = result is True
+                except Exception as e:
+                    hinweis = str(e)
+            # Fallback: Talent direkt markieren
+            if not erfolg and hasattr(charakter, 'talente'):
+                tkey = self._resolve_key(list(charakter.talente.keys()), freies_talent)
+                if tkey:
+                    t = charakter.talente[tkey]
+                    if hasattr(t, 'ausgewaehlt'):
+                        t.ausgewaehlt = True
+                    if hasattr(t, 'aktiv'):
+                        t.aktiv = True
+                    erfolg = True
+                    hinweis = 'Fallback: direkt markiert'
+            self.log(f"  🎁 Freies Talent: {freies_talent} → {'ok' if erfolg else 'fehlgeschlagen'}")
+            _log_choice('freies_talent', freies_talent, erfolg, hinweis)
+
+        # 4) Freies Attribut (Mensch etc.)
+        freies_attr = effective_choices.get('freies_attribut')
+        if freies_attr and not (modus == 'attribut') and not attr_wahl:
+            erfolg = False
+            hinweis = ''
+            if vf_waehle_freies_attribut is not None:
+                try:
+                    erfolg = bool(vf_waehle_freies_attribut(charakter, race_name, freies_attr))
+                except Exception as e:
+                    hinweis = str(e)
+            self.log(f"  🎁 Freies Attribut: {freies_attr} → {'ok' if erfolg else 'fehlgeschlagen'}")
+            _log_choice('freies_attribut', freies_attr, erfolg, hinweis)
+
+        # 5) Freie Verstandsfertigkeit (z.B. Engro)
+        freie_fert = effective_choices.get('freie_verstandsfertigkeit')
+        if freie_fert and hasattr(charakter, 'fertigkeiten'):
+            skill_key = self._resolve_key(list(charakter.fertigkeiten.keys()), freie_fert)
+            erfolg = False
+            hinweis = ''
+            if skill_key:
+                skill = charakter.fertigkeiten[skill_key]
+                try:
+                    old_val = skill.wuerfel.value + skill.wuerfel.modifier
+                    if skill.wuerfel.value < 4:
+                        skill.wuerfel.value = 4
+                        skill.wuerfel.modifier = 0
+                    new_val = skill.wuerfel.value + skill.wuerfel.modifier
+                    erfolg = new_val >= 4
+                    self._add_historie_entry('fertigkeit_steigerung', {
+                        'name': skill_key,
+                        'von': old_val,
+                        'nach': new_val,
+                        'kosten': 0,
+                        'kosten_typ': f"Volk ({race_name})",
+                    })
+                except Exception as e:
+                    hinweis = str(e)
+            else:
+                hinweis = f"Fertigkeit '{freie_fert}' nicht gefunden"
+            self.log(f"  🎁 Freie Verstandsfertigkeit: {freie_fert} → {'ok' if erfolg else 'fehlgeschlagen'}")
+            _log_choice('freie_verstandsfertigkeit', freie_fert, erfolg, hinweis)
 
     def _advance_attributes_unlimited(self, charakter: Charakter, target_attrs: Dict[str, int]) -> int:
         """
@@ -342,37 +628,50 @@ class AutoCharacterGenerator:
             else:
                 handicap_name = handicap_entry
 
-            # Suche in vorhandenen Handicaps
-            for key, handicap_obj in charakter.handicaps.items():
-                if handicap_name.lower() in key.lower():
-                    success = waehle_handicap(charakter, key)
-                    if success:
-                        points = getattr(handicap_obj, 'punkte', getattr(handicap_obj, 'wert', 1))
-                        total_points += points
-                        self.cost_log['handicaps'].append({
-                            'name': handicap_name,
-                            'punkte': points
-                        })
-                        self.log(f"  ✅ {handicap_name} hinzugefügt (+{points} Punkte)")
-                        added = True
-                        break
-                    else:
-                        self.log(f"  ⚠️ {handicap_name} konnte nicht gewählt werden - wird trotzdem markiert")
-                        # Trotzdem als ausgewählt markieren
-                        if hasattr(handicap_obj, 'ausgewaehlt'):
-                            handicap_obj.ausgewaehlt = True
-                        points = getattr(handicap_obj, 'punkte', getattr(handicap_obj, 'wert', 1))
-                        total_points += points
-                        self.cost_log['handicaps'].append({
-                            'name': handicap_name,
-                            'punkte': points,
-                            'erzwungen': True
-                        })
-                        added = True
-                        break
+            # Suche in vorhandenen Handicaps (robustes Matching)
+            key = self._resolve_key(list(charakter.handicaps.keys()), handicap_name)
+            if key is not None:
+                handicap_obj = charakter.handicaps[key]
+                success = waehle_handicap(charakter, key)
+                if success:
+                    points = getattr(handicap_obj, 'punkte', getattr(handicap_obj, 'wert', 1))
+                    stufe = getattr(handicap_obj, 'stufe', '') or ('schwer' if points >= 2 else 'leicht')
+                    total_points += points
+                    self.cost_log['handicaps'].append({
+                        'name': handicap_name,
+                        'punkte': points
+                    })
+                    self._add_historie_entry('handicap_hinzugefuegt', {
+                        'name': key,
+                        'punkte': points,
+                        'stufe': stufe,
+                    })
+                    self.log(f"  ✅ {handicap_name} hinzugefügt (+{points} Punkte)")
+                    added = True
+                else:
+                    self.log(f"  ⚠️ {handicap_name} konnte nicht gewählt werden - wird trotzdem markiert")
+                    # Trotzdem als ausgewählt markieren
+                    if hasattr(handicap_obj, 'ausgewaehlt'):
+                        handicap_obj.ausgewaehlt = True
+                    points = getattr(handicap_obj, 'punkte', getattr(handicap_obj, 'wert', 1))
+                    stufe = getattr(handicap_obj, 'stufe', '') or ('schwer' if points >= 2 else 'leicht')
+                    total_points += points
+                    self.cost_log['handicaps'].append({
+                        'name': handicap_name,
+                        'punkte': points,
+                        'erzwungen': True
+                    })
+                    self._add_historie_entry('handicap_hinzugefuegt', {
+                        'name': key,
+                        'punkte': points,
+                        'stufe': stufe,
+                        'erzwungen': True,
+                    })
+                    added = True
 
             if not added:
                 self.log(f"  ❌ Handicap '{handicap_name}' nicht gefunden")
+                self.cost_log['warnungen'].append(f"Handicap '{handicap_name}' nicht gefunden")
 
         self.log(f"📊 HANDICAP-PUNKTE GESAMT: +{total_points} Punkte")
         
@@ -424,62 +723,86 @@ class AutoCharacterGenerator:
             self.log(f"  📈 {attr_name}: W{current_value} → W{target_value} ({advances_needed} Steigerungen)")
 
             for i in range(advances_needed):
-                initial_handicap = charakter.verbleibende_handicap_punkte
-                initial_attr_points = charakter.verbleibende_attributsteigerungen
-                
                 # Merke den aktuellen Attributwert vor dem Aufruf
                 initial_attr_value = attr.wuerfel.value
                 initial_handicap = charakter.verbleibende_handicap_punkte
                 initial_attr_points = charakter.verbleibende_attributsteigerungen
-                
+
                 # Verwende die originale Funktion - sie verwendet automatisch Handicap-Punkte wenn nötig
                 original_steigere_attribut(charakter, attr_name)
-                
+
                 # Prüfe ob das Attribut tatsächlich gesteigert wurde (unabhängig vom Return-Wert)
                 new_attr_value = attr.wuerfel.value
                 success = (new_attr_value > initial_attr_value)
-                
+
                 if success:
-                    new_value = attr.wuerfel.value
                     # Prüfe welche Punkte verwendet wurden
                     handicap_used = initial_handicap - charakter.verbleibende_handicap_punkte
                     attr_points_used = initial_attr_points - charakter.verbleibende_attributsteigerungen
-                    
-                    cost_source = "Standard" if attr_points_used > 0 else f"{handicap_used} Handicap-Punkte"
-                    self.log(f"    ✅ Steigerung {i+1}: W{current_value} → W{new_value} ({cost_source})")
-                    
+
+                    if attr_points_used > 0:
+                        cost_typ = "Attributspunkt"
+                        cost_source = "Standard"
+                    elif handicap_used > 0:
+                        cost_typ = "Handicap-Punkt"
+                        cost_source = f"{handicap_used} Handicap-Punkte"
+                    else:
+                        cost_typ = "Attributspunkt"
+                        cost_source = "Standard"
+
+                    self.log(f"    ✅ Steigerung {i+1}: W{current_value} → W{new_attr_value} ({cost_source})")
+
                     self.cost_log['attribute'].append({
                         'name': attr_name,
                         'von': current_value,
-                        'nach': new_value,
+                        'nach': new_attr_value,
                         'kosten': 1,
                         'handicap_punkte_verwendet': handicap_used,
                         'quelle': cost_source
                     })
-                    current_value = new_value
+                    self._add_historie_entry('attribut_steigerung', {
+                        'name': attr_name,
+                        'von': current_value,
+                        'nach': new_attr_value,
+                        'kosten': 2 if cost_typ == "Handicap-Punkt" else 1,
+                        'kosten_typ': cost_typ,
+                    })
+                    current_value = new_attr_value
                 else:
-                    # Füge Attributsteigerungen hinzu wenn keine anderen Punkte verfügbar
-                    shortage = advances_needed - i
-                    charakter.verbleibende_attributsteigerungen += shortage
-                    self.auto_added_points += shortage
-                    self.cost_log['auto_punkte'] += shortage
-                    self.log(f"    ⚡ Automatisch {shortage} Attributspunkte hinzugefügt")
-                    
-                    # Versuche erneut
-                    success = original_steigere_attribut(charakter, attr_name)
-                    if success:
-                        new_value = attr.wuerfel.value
-                        self.log(f"    ✅ Steigerung {i+1}: W{current_value} → W{new_value} (Auto-Punkte)")
+                    # Kein Punkt mehr verfügbar → füge einen Aufstieg hinzu und versuche nochmal.
+                    # Das macht die "Über-Template"-Steigerung transparent als Aufstieg.
+                    charakter.verbleibende_aufstiege = getattr(charakter, 'verbleibende_aufstiege', 0) + 1
+                    charakter.aufstiege_gesamt = getattr(charakter, 'aufstiege_gesamt', 0) + 1
+                    self.auto_added_points += 1
+                    self.cost_log['auto_punkte'] += 1
+
+                    initial_attr_value2 = attr.wuerfel.value
+                    original_steigere_attribut(charakter, attr_name)
+                    new_attr_value = attr.wuerfel.value
+                    if new_attr_value > initial_attr_value2:
+                        self.log(f"    ⚡ Steigerung {i+1}: W{current_value} → W{new_attr_value} (Aufstieg)")
                         self.cost_log['attribute'].append({
                             'name': attr_name,
                             'von': current_value,
-                            'nach': new_value,
+                            'nach': new_attr_value,
                             'kosten': 1,
-                            'auto_hinzugefuegt': True
+                            'auto_hinzugefuegt': True,
+                            'quelle': 'Aufstieg',
                         })
-                        current_value = new_value
+                        self._add_historie_entry('attribut_steigerung', {
+                            'name': attr_name,
+                            'von': current_value,
+                            'nach': new_attr_value,
+                            'kosten': 1,
+                            'kosten_typ': 'Aufstieg',
+                            'phase': 'aufstieg',
+                        })
+                        current_value = new_attr_value
                     else:
                         self.log(f"    ❌ Kritischer Fehler bei {attr_name} Steigerung {i+1}")
+                        self.cost_log['warnungen'].append(
+                            f"Attribut '{attr_name}' konnte nicht auf Zielwert gebracht werden"
+                        )
                         break
 
             total_costs += advances_needed
@@ -505,18 +828,13 @@ class AutoCharacterGenerator:
 
         # Fertigkeiten steigern mit originalen Funktionen
         for skill_name, target_value in target_skills.items():
-            # Finde die Fertigkeit
-            skill = None
-            skill_key = None
-            for key, skill_obj in charakter.fertigkeiten.items():
-                if skill_name.lower() in key.lower():
-                    skill = skill_obj
-                    skill_key = key
-                    break
-
-            if not skill:
+            # Robustes Matching (vermeidet "Kämpfen" vs "Kämpfer" Kollision)
+            skill_key = self._resolve_key(list(charakter.fertigkeiten.keys()), skill_name)
+            if not skill_key:
                 self.log(f"  ❌ Fertigkeit '{skill_name}' nicht gefunden")
+                self.cost_log['warnungen'].append(f"Fertigkeit '{skill_name}' nicht gefunden")
                 continue
+            skill = charakter.fertigkeiten[skill_key]
 
             current_value = skill.wuerfel.value
             current_modifier = skill.wuerfel.modifier
@@ -533,19 +851,26 @@ class AutoCharacterGenerator:
             for i in range(steps_needed):
                 initial_handicap = charakter.verbleibende_handicap_punkte
                 initial_skill_points = getattr(charakter, 'verbleibende_fertigkeitssteigerungen', 0)
-                
-                # Verwende die originale Funktion - sie verwendet automatisch Handicap-Punkte wenn nötig
+
                 success = original_steigere_fertigkeit(charakter, skill_key, confirm_double_cost=True)
-                
+
                 if success:
                     new_effective = skill.wuerfel.value + skill.wuerfel.modifier
-                    # Prüfe welche Punkte verwendet wurden
                     handicap_used = initial_handicap - charakter.verbleibende_handicap_punkte
                     skill_points_used = initial_skill_points - getattr(charakter, 'verbleibende_fertigkeitssteigerungen', 0)
-                    
-                    cost_source = "Standard" if skill_points_used > 0 else f"{handicap_used} Handicap-Punkt"
+
+                    if skill_points_used > 0:
+                        cost_typ = "Fertigkeitspunkt"
+                        cost_source = "Standard"
+                    elif handicap_used > 0:
+                        cost_typ = "Handicap-Punkt"
+                        cost_source = f"{handicap_used} Handicap-Punkt"
+                    else:
+                        cost_typ = "Fertigkeitspunkt"
+                        cost_source = "Standard"
+
                     self.log(f"    ✅ Steigerung {i+1}: W{current_effective} → W{new_effective} ({cost_source})")
-                    
+
                     self.cost_log['fertigkeiten'].append({
                         'name': skill_name,
                         'von': current_effective,
@@ -554,30 +879,48 @@ class AutoCharacterGenerator:
                         'handicap_punkte_verwendet': handicap_used,
                         'quelle': cost_source
                     })
+                    self._add_historie_entry('fertigkeit_steigerung', {
+                        'name': skill_key,
+                        'von': current_effective,
+                        'nach': new_effective,
+                        'kosten': max(1, handicap_used) if cost_typ == 'Handicap-Punkt' else 1,
+                        'kosten_typ': cost_typ,
+                    })
                     current_effective = new_effective
                 else:
-                    # Füge Fertigkeitspunkte hinzu wenn keine anderen Punkte verfügbar
-                    shortage = steps_needed - i
-                    charakter.verbleibende_fertigkeitssteigerungen += shortage
-                    self.auto_added_points += shortage
-                    self.cost_log['auto_punkte'] += shortage
-                    self.log(f"    ⚡ Automatisch {shortage} Fertigkeitspunkte hinzugefügt")
-                    
-                    # Versuche erneut
+                    # Kein Punkt verfügbar → Aufstieg verwenden (Transparenz)
+                    charakter.verbleibende_aufstiege = getattr(charakter, 'verbleibende_aufstiege', 0) + 1
+                    charakter.aufstiege_gesamt = getattr(charakter, 'aufstiege_gesamt', 0) + 1
+                    self.auto_added_points += 1
+                    self.cost_log['auto_punkte'] += 1
+
+                    pre = skill.wuerfel.value + skill.wuerfel.modifier
                     success = original_steigere_fertigkeit(charakter, skill_key, confirm_double_cost=True)
-                    if success:
-                        new_effective = skill.wuerfel.value + skill.wuerfel.modifier
-                        self.log(f"    ✅ Steigerung {i+1}: W{current_effective} → W{new_effective} (Auto-Punkte)")
+                    new_effective = skill.wuerfel.value + skill.wuerfel.modifier
+                    if success or new_effective > pre:
+                        self.log(f"    ⚡ Steigerung {i+1}: W{current_effective} → W{new_effective} (Aufstieg)")
                         self.cost_log['fertigkeiten'].append({
                             'name': skill_name,
                             'von': current_effective,
                             'nach': new_effective,
                             'kosten': 1,
-                            'auto_hinzugefuegt': True
+                            'auto_hinzugefuegt': True,
+                            'quelle': 'Aufstieg',
+                        })
+                        self._add_historie_entry('fertigkeit_steigerung', {
+                            'name': skill_key,
+                            'von': current_effective,
+                            'nach': new_effective,
+                            'kosten': 1,
+                            'kosten_typ': 'Aufstieg',
+                            'phase': 'aufstieg',
                         })
                         current_effective = new_effective
                     else:
                         self.log(f"    ❌ Kritischer Fehler bei {skill_name} Steigerung {i+1}")
+                        self.cost_log['warnungen'].append(
+                            f"Fertigkeit '{skill_name}' konnte nicht auf Zielwert gebracht werden"
+                        )
                         break
 
             total_costs += steps_needed
@@ -684,15 +1027,18 @@ class AutoCharacterGenerator:
                                    (hasattr(charakter, 'voelker_boni') and
                                     charakter.voelker_boni.get('freie_talente', 0) > 0)))
 
-            # Suche das Talent
-            talent_key = None
-            for key, talent_obj in charakter.talente.items():
-                if edge_name.lower() in key.lower():
-                    talent_key = key
-                    break
+            # Suche das Talent (robustes Matching, Unicode-normalisiert)
+            talent_key = self._resolve_key(list(charakter.talente.keys()), edge_name)
 
             if not talent_key:
                 self.log(f"  ❌ Talent '{edge_name}' nicht gefunden")
+                self.cost_log.setdefault('warnungen', []).append(
+                    f"Talent '{edge_name}' nicht im Setting gefunden"
+                )
+                self._add_historie_entry('talent_fehlt', {
+                    'name': edge_name,
+                    'grund': 'Talent im Setting nicht gefunden',
+                })
                 continue
 
             if is_free:
@@ -712,13 +1058,20 @@ class AutoCharacterGenerator:
                     'kosten': 0,
                     'gratis': True
                 })
+                self._add_historie_entry('talent_hinzugefuegt', {
+                    'name': talent_key,
+                    'gratis': True,
+                    'quelle': 'Völker-Talent' if free_race_edge else 'Menschen-Bonus',
+                    'kosten_typ': 'Volk',
+                    'voraussetzungen_ignoriert': True,
+                })
             else:
                 # Verwende die originale Talent-Funktion
                 initial_handicap = charakter.verbleibende_handicap_punkte
-                
+
                 # Setze Flag zum Ignorieren von Voraussetzungen
                 charakter.ignore_voraussetzungen = True
-                
+
                 result = talent_manager.waehle_talent(talent_key)
 
                 # String-Rückgaben behandeln (z.B. "pathfinder_kostenlos_angeboten",
@@ -744,6 +1097,14 @@ class AutoCharacterGenerator:
                         'quelle': cost_source,
                         'voraussetzungen_ignoriert': True
                     })
+                    self._add_historie_entry('talent_hinzugefuegt', {
+                        'name': talent_key,
+                        'gratis': False,
+                        'quelle': cost_source,
+                        'kosten_typ': 'Handicap-Punkt' if handicap_used > 0 else 'Anfänger-Talent',
+                        'handicap_punkte_verwendet': handicap_used,
+                        'voraussetzungen_ignoriert': True,
+                    })
                 else:
                     # Fallback: über talent_auswaehlen mit skip_prereq_check
                     fallback_result = talent_manager.talent_auswaehlen(talent_key, skip_prereq_check=True)
@@ -762,6 +1123,13 @@ class AutoCharacterGenerator:
                         'kosten': 1,
                         'fallback': True,
                         'voraussetzungen_ignoriert': True
+                    })
+                    self._add_historie_entry('talent_hinzugefuegt', {
+                        'name': talent_key,
+                        'gratis': False,
+                        'fallback': True,
+                        'kosten_typ': 'unbekannt',
+                        'voraussetzungen_ignoriert': True,
                     })
 
         self.log(f"📊 TALENTKOSTEN GESAMT: {total_costs} Punkte")
@@ -801,31 +1169,46 @@ class AutoCharacterGenerator:
 
         powers_added = 0
         for power_name in powers:
-            found = False
+            resolved_key = None
             if hasattr(charakter, 'maechte') and charakter.maechte:
-                for key, power in charakter.maechte.items():
-                    if power_name.lower() in key.lower():
-                        if hasattr(power, 'ausgewaehlt'):
-                            power.ausgewaehlt = True
-                        if hasattr(power, 'aktiv'):
-                            power.aktiv = True
-                        self.log(f"  ✅ {power_name} hinzugefügt - Voraussetzungen ignoriert")
-                        self.cost_log['maechte'].append({
-                            'name': power_name,
-                            'voraussetzungen_ignoriert': True
-                        })
-                        powers_added += 1
-                        found = True
-                        break
+                resolved_key = self._resolve_key(list(charakter.maechte.keys()), power_name)
 
-            if not found:
+            if resolved_key:
+                power = charakter.maechte[resolved_key]
+                if hasattr(power, 'ausgewaehlt'):
+                    power.ausgewaehlt = True
+                if hasattr(power, 'aktiv'):
+                    power.aktiv = True
+                self.log(f"  ✅ {power_name} hinzugefügt - Voraussetzungen ignoriert")
+                self.cost_log['maechte'].append({
+                    'name': power_name,
+                    'voraussetzungen_ignoriert': True
+                })
+                self._add_historie_entry('macht_hinzugefuegt', {
+                    'name': resolved_key,
+                    'voraussetzungen_ignoriert': True,
+                })
+                powers_added += 1
+            else:
                 self.log(f"  ❌ {power_name} nicht verfügbar")
+                self.cost_log.setdefault('warnungen', []).append(
+                    f"Macht '{power_name}' nicht im Setting gefunden"
+                )
+                self._add_historie_entry('macht_fehlt', {
+                    'name': power_name,
+                    'grund': 'Macht im Setting nicht gefunden',
+                })
 
         # Machtpunkte setzen
         if power_points > 0:
             if hasattr(charakter, 'machtpunkte'):
+                alter_wert = getattr(charakter, 'machtpunkte', 0) or 0
                 charakter.machtpunkte = power_points
                 self.log(f"  🔮 Machtpunkte gesetzt: {power_points}")
+                self._add_historie_entry('machtpunkte_gesetzt', {
+                    'von': alter_wert,
+                    'nach': power_points,
+                })
             else:
                 self.log("  ⚠️ Machtpunkte-Property nicht gefunden")
 
@@ -903,17 +1286,23 @@ class AutoCharacterGenerator:
 
     def _add_simple_equipment(self, charakter: Charakter, item_name: str) -> bool:
         """Fügt einfachen Ausrüstungsgegenstand hinzu"""
-        # Zuerst in vorhandener Ausrüstung suchen
+        # Zuerst in vorhandener Ausrüstung suchen (robustes Matching)
         if hasattr(charakter, 'ausruestung') and charakter.ausruestung:
-            for key, item in charakter.ausruestung.items():
-                if item_name.lower() in key.lower():
-                    if hasattr(item, 'ausgewaehlt'):
-                        item.ausgewaehlt = True
-                    if hasattr(item, 'aktiv'):
-                        item.aktiv = True
-                    charakter.selected_allgemeine_ausruestung.append(item)
-                    self.log(f"  ✅ {item_name} gefunden und ausgewählt")
-                    return True
+            resolved_key = self._resolve_key(list(charakter.ausruestung.keys()), item_name)
+            if resolved_key:
+                item = charakter.ausruestung[resolved_key]
+                if hasattr(item, 'ausgewaehlt'):
+                    item.ausgewaehlt = True
+                if hasattr(item, 'aktiv'):
+                    item.aktiv = True
+                charakter.selected_allgemeine_ausruestung.append(item)
+                self.log(f"  ✅ {item_name} gefunden und ausgewählt")
+                self._add_historie_entry('ausruestung_hinzugefuegt', {
+                    'name': resolved_key,
+                    'quelle': 'setting',
+                    'typ': getattr(item, 'kategorie', 'Allgemein'),
+                })
+                return True
 
         # Als Custom-Item anlegen
         self.log(f"  📦 {item_name} nicht gefunden - lege als Custom-Item an...")
@@ -937,6 +1326,11 @@ class AutoCharacterGenerator:
             if success:
                 charakter.selected_allgemeine_ausruestung.append(custom_item)
                 self.log(f"    ✅ {item_name} erfolgreich hinzugefügt")
+                self._add_historie_entry('ausruestung_hinzugefuegt', {
+                    'name': item_name,
+                    'quelle': 'custom',
+                    'typ': 'Allgemein',
+                })
                 return True
             else:
                 self.log(f"    ❌ FEHLER: {item_name} konnte nicht hinzugefügt werden")
@@ -1064,6 +1458,11 @@ class AutoCharacterGenerator:
                     self.log(f"    🛡️ {item_name} zu selected_schilde hinzugefügt")
                 
                 self.log(f"    ✅ {item_name} erfolgreich hinzugefügt (Kategorie: {custom_item.kategorie})")
+                self._add_historie_entry('ausruestung_hinzugefuegt', {
+                    'name': item_name,
+                    'quelle': 'custom',
+                    'typ': custom_item.kategorie,
+                })
                 return True
             else:
                 self.log(f"    ❌ FEHLER: {item_name} konnte nicht hinzugefügt werden")
@@ -1369,109 +1768,56 @@ class AutoCharacterGenerator:
         return log_path
         
     def _integrate_with_historie_view(self, charakter: Charakter, char_name: str, cost_log_path: Path) -> None:
-        """Integriert Auto Generator Ergebnisse in das Historie View System"""
-        self.log("--- HISTORIE VIEW INTEGRATION ---")
-        
+        """
+        Schreibt die während der Generierung gesammelten Historie-Einträge direkt
+        in ``charakter.steigerungs_journal``. Damit persistiert das Charakter-JSON
+        die komplette Schritt-für-Schritt-Historie und der Historie-Tab zeigt
+        die Generierung eines Auto-Charakters vollständig an (ohne auf
+        ``chars/manual_logs/*.json`` zurückgreifen zu müssen).
+        """
+        self.log("--- HISTORIE INTEGRATION (steigerungs_journal) ---")
+
         try:
-            # Erstelle Historie-kompatibles Log
-            from views.historie_view import CharakterHistorie
-            historie = CharakterHistorie()
-            
-            # Auto-Generation Eintrag
-            historie.add_entry('auto_character_generated', {
-                'name': char_name,
-                'template': self.current_template.get('name', 'Unbekannt'),
-                'setting': self.current_template.get('setting', 'SWAE'),
-                'total_auto_points': self.auto_added_points,
-                'cost_log_file': str(cost_log_path)
-            })
-            
-            # Attribute aus Cost-Log hinzufügen
-            for attr_entry in self.cost_log['attribute']:
-                historie.add_entry('attribut_steigerung', {
-                    'name': attr_entry['name'],
-                    'von': attr_entry['von'],
-                    'nach': attr_entry['nach'],
-                    'kosten': attr_entry['kosten'],
-                    'kosten_typ': attr_entry.get('quelle', 'Auto-Generator'),
-                    'auto_generated': True
-                })
-            
-            # Fertigkeiten aus Cost-Log hinzufügen
-            for skill_entry in self.cost_log['fertigkeiten']:
-                historie.add_entry('fertigkeit_steigerung', {
-                    'name': skill_entry['name'],
-                    'von': skill_entry['von'],
-                    'nach': skill_entry['nach'],
-                    'kosten': skill_entry['kosten'],
-                    'kosten_typ': skill_entry.get('quelle', 'Auto-Generator'),
-                    'auto_generated': True
-                })
-            
-            # Talente aus Cost-Log hinzufügen
-            for talent_entry in self.cost_log['talente']:
-                historie.add_entry('talent_hinzugefuegt', {
-                    'name': talent_entry['name'],
-                    'kosten': talent_entry['kosten'],
-                    'auto_generated': True,
-                    'gratis': talent_entry.get('gratis', False),
-                    'voraussetzungen_ignoriert': talent_entry.get('voraussetzungen_ignoriert', False)
-                })
-            
-            # Handicaps aus Cost-Log hinzufügen
-            for handicap_entry in self.cost_log['handicaps']:
-                historie.add_entry('handicap_hinzugefuegt', {
-                    'name': handicap_entry['name'],
-                    'punkte': handicap_entry['punkte'],
-                    'auto_generated': True,
-                    'erzwungen': handicap_entry.get('erzwungen', False)
-                })
-            
-            # Mächte aus Cost-Log hinzufügen
-            for macht_entry in self.cost_log.get('maechte', []):
-                historie.add_entry('macht_hinzugefuegt', {
-                    'name': macht_entry['name'],
-                    'auto_generated': True,
-                    'voraussetzungen_ignoriert': macht_entry.get('voraussetzungen_ignoriert', False)
-                })
-            
-            # Ausrüstung hinzufügen
-            equipment_list = self.current_template.get('equipment', []) + self.current_template.get('custom_equipment', [])
-            for item in equipment_list:
-                item_name = item if isinstance(item, str) else item.get('name', 'Unbekannt')
-                historie.add_entry('ausruestung_hinzugefuegt', {
-                    'name': item_name,
-                    'auto_generated': True,
-                    'custom': isinstance(item, dict)
-                })
-            
-            # Historie als JSON speichern (kompatibel mit Historie View)
-            from pathlib import Path
-            project_root = Path(__file__).parent.parent
-            historie_dir = project_root / "chars" / "manual_logs"
-            historie_dir.mkdir(parents=True, exist_ok=True)
-            
-            from datetime import datetime
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
-            historie_json_path = historie_dir / f"{safe_name}_auto_gen_historie_{timestamp}.json"
-            historie_txt_path = historie_dir / f"{safe_name}_auto_gen_historie_{timestamp}.txt"
-            
-            # JSON speichern
-            import json
-            with open(historie_json_path, 'w', encoding='utf-8') as f:
-                json.dump(historie.to_dict(), f, indent=2, ensure_ascii=False)
-            
-            # Text-Log speichern
-            with open(historie_txt_path, 'w', encoding='utf-8') as f:
-                f.write(historie.get_formatted_log())
-            
-            self.log(f"  ✅ Historie View Integration erfolgreich:")
-            self.log(f"    📄 JSON: {historie_json_path}")
-            self.log(f"    📄 Text: {historie_txt_path}")
-            
+            # 1) Haupt-Pfad: Journal direkt am Charakter setzen.
+            journal = self._historie_dict()
+            charakter.steigerungs_journal = journal
+            entry_count = len(journal.get('entries', []))
+            self.log(f"  ✅ steigerungs_journal gesetzt ({entry_count} Einträge)")
+
+            # 2) Optionales Legacy-Log (nur auf Opt-in): die alten
+            #    chars/manual_logs/<name>_auto_gen_historie_*.json bleiben als
+            #    Fallback erhalten, werden aber nicht mehr per Default geschrieben.
+            gen_options = self.current_template.get('generation_options', {}) or {}
+            if gen_options.get('write_legacy_log', False):
+                from views.historie_view import CharakterHistorie
+                from pathlib import Path as _Path
+                import json as _json
+
+                historie = CharakterHistorie()
+                # CharakterHistorie erwartet add_entry — wir spielen die
+                # bereits gesammelten Einträge einfach ab.
+                for entry in journal.get('entries', []):
+                    historie.add_entry(entry.get('type', 'unknown'), entry.get('details', {}))
+
+                project_root_local = _Path(__file__).parent.parent
+                historie_dir = project_root_local / "chars" / "manual_logs"
+                historie_dir.mkdir(parents=True, exist_ok=True)
+
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                safe_name = "".join(c for c in char_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+                historie_json_path = historie_dir / f"{safe_name}_auto_gen_historie_{timestamp}.json"
+                historie_txt_path = historie_dir / f"{safe_name}_auto_gen_historie_{timestamp}.txt"
+
+                with open(historie_json_path, 'w', encoding='utf-8') as f:
+                    _json.dump(historie.to_dict(), f, indent=2, ensure_ascii=False)
+                with open(historie_txt_path, 'w', encoding='utf-8') as f:
+                    f.write(historie.get_formatted_log())
+
+                self.log(f"    📄 Legacy-JSON: {historie_json_path}")
+                self.log(f"    📄 Legacy-Text: {historie_txt_path}")
+
         except Exception as e:
-            self.log(f"  ⚠️ Historie View Integration fehlgeschlagen: {e}")
+            self.log(f"  ⚠️ Historie-Integration fehlgeschlagen: {e}")
             import traceback
             self.log(f"    📋 Traceback: {traceback.format_exc()}")
 
@@ -1500,77 +1846,118 @@ class AutoCharacterGenerator:
     def _apply_template_advances(self, charakter: Charakter, advances: List[Dict]) -> None:
         """Wendet Template-Aufstiege an"""
         self.log("--- SCHRITT 9: TEMPLATE-AUFSTIEGE ANWENDEN ---")
-        
+
         if not advances:
             self.log("  ℹ️ Keine Template-Aufstiege definiert")
             return
-            
+
         # Importiere Character Advancement Funktionen
         from functions.character_advancement import steigere_attribut, update_rang
         from functions.eigenschaften_funktionen import steigere_fertigkeit
         from functions.talent_funktionen import get_talent_manager
-        
+
+        # Phase markieren: jetzt beginnen die Aufstiege (nach Grund-Charakter).
+        previous_phase = self._current_phase
+        self._current_phase = 'aufstieg'
+
         advances_applied = 0
-        
+
         for advance in advances:
             advance_type = advance.get('type')
             advance_name = advance.get('name', '')
             advance_value = advance.get('value')
-            
+
             self.log(f"  🎯 Aufstieg {advance_type}: {advance_name}")
-            
+
             # Stelle sicher dass genügend Aufstiege verfügbar sind
             if charakter.verbleibende_aufstiege <= 0:
                 charakter.verbleibende_aufstiege += 1
                 charakter.aufstiege_gesamt += 1
                 self.log(f"    ⚡ Aufstieg hinzugefügt (gesamt: {charakter.aufstiege_gesamt})")
-            
+
             success = False
-            
+            resolved_name = advance_name
+            von_wert = None
+            nach_wert = None
+
             if advance_type == 'attribute':
-                success = steigere_attribut(charakter, advance_name)
-                if success:
-                    self.log(f"    ✅ Attribut {advance_name} gesteigert")
-                
+                attr_key = self._resolve_key(list(charakter.attribute.keys()), advance_name)
+                if attr_key:
+                    resolved_name = attr_key
+                    von_wert = charakter.attribute[attr_key].wuerfel.value
+                    success = steigere_attribut(charakter, attr_key)
+                    if success:
+                        nach_wert = charakter.attribute[attr_key].wuerfel.value
+                        self.log(f"    ✅ Attribut {attr_key} gesteigert: W{von_wert} → W{nach_wert}")
+
             elif advance_type == 'skill':
-                # Finde Fertigkeit
-                for skill_key in charakter.fertigkeiten.keys():
-                    if advance_name.lower() in skill_key.lower():
-                        success = steigere_fertigkeit(charakter, skill_key, confirm_double_cost=True)
-                        if success:
-                            self.log(f"    ✅ Fertigkeit {advance_name} gesteigert")
-                        break
-                        
+                skill_key = self._resolve_key(list(charakter.fertigkeiten.keys()), advance_name)
+                if skill_key:
+                    resolved_name = skill_key
+                    skill_obj = charakter.fertigkeiten[skill_key]
+                    von_wert = skill_obj.wuerfel.value + skill_obj.wuerfel.modifier
+                    success = steigere_fertigkeit(charakter, skill_key, confirm_double_cost=True)
+                    if success:
+                        nach_wert = skill_obj.wuerfel.value + skill_obj.wuerfel.modifier
+                        self.log(f"    ✅ Fertigkeit {skill_key} gesteigert: W{von_wert} → W{nach_wert}")
+
             elif advance_type == 'edge':
                 talent_manager = get_talent_manager(charakter)
-                for talent_key in charakter.talente.keys():
-                    if advance_name.lower() in talent_key.lower():
-                        success = talent_manager.waehle_talent(talent_key)
-                        if success:
-                            self.log(f"    ✅ Talent {advance_name} gewählt")
-                        break
-                        
+                talent_key = self._resolve_key(list(charakter.talente.keys()), advance_name)
+                if talent_key:
+                    resolved_name = talent_key
+                    charakter.ignore_voraussetzungen = True
+                    result = talent_manager.waehle_talent(talent_key)
+                    if isinstance(result, str):
+                        result = talent_manager.talent_auswaehlen(talent_key, skip_prereq_check=True)
+                    success = bool(result)
+                    if success:
+                        self.log(f"    ✅ Talent {talent_key} gewählt")
+
             elif advance_type == 'power':
-                # Suche Macht
                 if hasattr(charakter, 'maechte') and charakter.maechte:
-                    for macht_key, macht_obj in charakter.maechte.items():
-                        if advance_name.lower() in macht_key.lower():
-                            if hasattr(macht_obj, 'ausgewaehlt'):
-                                macht_obj.ausgewaehlt = True
-                            if hasattr(macht_obj, 'aktiv'):
-                                macht_obj.aktiv = True
-                            success = True
-                            self.log(f"    ✅ Macht {advance_name} gewählt")
-                            break
-            
+                    macht_key = self._resolve_key(list(charakter.maechte.keys()), advance_name)
+                    if macht_key:
+                        resolved_name = macht_key
+                        macht_obj = charakter.maechte[macht_key]
+                        if hasattr(macht_obj, 'ausgewaehlt'):
+                            macht_obj.ausgewaehlt = True
+                        if hasattr(macht_obj, 'aktiv'):
+                            macht_obj.aktiv = True
+                        success = True
+                        self.log(f"    ✅ Macht {macht_key} gewählt")
+
+            # Rang nach jedem Aufstieg aktualisieren, damit der Historie-Eintrag
+            # den richtigen Rang-Marker enthält.
+            update_rang(charakter)
+
             if success:
                 advances_applied += 1
+                self._add_historie_entry('aufstieg_angewendet', {
+                    'kategorie': advance_type,
+                    'name': resolved_name,
+                    'von': von_wert,
+                    'nach': nach_wert,
+                    'kosten_typ': 'Aufstieg',
+                    'phase': 'aufstieg',
+                })
             else:
                 self.log(f"    ❌ Aufstieg {advance_type}:{advance_name} fehlgeschlagen")
-        
-        # Rang aktualisieren
+                self.cost_log.setdefault('warnungen', []).append(
+                    f"Aufstieg {advance_type} '{advance_name}' konnte nicht angewendet werden"
+                )
+                self._add_historie_entry('advance_failed', {
+                    'kategorie': advance_type,
+                    'name': advance_name,
+                    'grund': 'Kein passender Eintrag im Setting gefunden oder Steigerung fehlgeschlagen',
+                })
+
+        # Rang abschließend aktualisieren
         update_rang(charakter)
-        
+
+        # Phase zurücksetzen
+        self._current_phase = previous_phase
+
         self.log(f"📊 AUFSTIEGE ANGEWENDET: {advances_applied}/{len(advances)}")
         
     def _use_remaining_advances_for_improvements(self, charakter: Charakter) -> None:
@@ -1643,40 +2030,49 @@ class AutoCharacterGenerator:
     def _complete_character_generation(self, charakter: Charakter) -> None:
         """Schließt die Charaktergenerierung ab und aktiviert Aufstiegsmodus"""
         self.log("--- SCHRITT 10: CHARAKTERGENERIERUNG ABSCHLIESSEN ---")
-        
+
         # Charaktergenerierung als abgeschlossen markieren
         charakter.char_gen_completed = True
-        
+
         # Aufstiege für weitere Entwicklung setzen
         if charakter.aufstiege_gesamt == 0:
             charakter.aufstiege_gesamt = 1  # Mindestens 1 Aufstieg für Anfänger
-        
+
         # Berechne verbleibende Aufstiege aus nicht verwendeten Punkten
         remaining_attr_points = max(0, charakter.verbleibende_attributsteigerungen)
         remaining_skill_points = max(0, charakter.verbleibende_fertigkeitssteigerungen)
         remaining_handicap_points = max(0, charakter.verbleibende_handicap_punkte)
-        
+
         # Konvertiere übrige Punkte in Aufstiege (grobe Schätzung)
         # 2 Attribut/Fertigkeitspunkte = 1 Aufstieg, 2 Handicappunkte = 1 Aufstieg
         total_remaining_points = remaining_attr_points + remaining_skill_points + remaining_handicap_points
         additional_advances = total_remaining_points // 2  # Integer-Division
-        
+
         charakter.verbleibende_aufstiege = additional_advances
-        
+
         # Punkte auf 0 setzen da sie in Aufstiege umgewandelt wurden
         charakter.verbleibende_attributsteigerungen = 0
         charakter.verbleibende_fertigkeitssteigerungen = 0
         charakter.verbleibende_handicap_punkte = 0
-        
+
         # Rang basierend auf Aufstiegen setzen
         from functions.character_advancement import update_rang
         update_rang(charakter)
-        
+
         self.log(f"  ✅ char_gen_completed = True")
         self.log(f"  🎯 Aufstiege gesamt: {charakter.aufstiege_gesamt}")
         self.log(f"  ⭐ Verbleibende Aufstiege: {charakter.verbleibende_aufstiege}")
         self.log(f"  👑 Rang: {charakter.rang}")
-        
+
+        # Chronologischer Marker in der Historie: Grund-Charakter fertig.
+        # Nach diesem Eintrag folgen nur noch Aufstiege (Phase 'aufstieg').
+        self._add_historie_entry('char_gen_completed', {
+            'aufstiege_gesamt': charakter.aufstiege_gesamt,
+            'verbleibende_aufstiege': charakter.verbleibende_aufstiege,
+            'umgewandelte_restpunkte': total_remaining_points,
+            'zusaetzliche_aufstiege_aus_restpunkten': additional_advances,
+        })
+
         if additional_advances > 0:
             self.log(f"  🔄 {total_remaining_points} übrige Punkte in {additional_advances} Aufstiege umgewandelt")
 

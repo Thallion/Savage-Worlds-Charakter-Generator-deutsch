@@ -56,6 +56,7 @@ class TemplateWizardDialog:
             {"title": "Talente", "handler": self._create_edges_step},
             {"title": "Mächte", "handler": self._create_powers_step},
             {"title": "Ausrüstung", "handler": self._create_equipment_step},
+            {"title": "Aufstiege", "handler": self._create_advances_step},
             {"title": "Vorschau & Speichern", "handler": self._create_preview_step}
         ]
         
@@ -81,6 +82,7 @@ class TemplateWizardDialog:
             "starting_skill_points": 12,
             "starting_advances": 0,
             "advances_to_apply": [],
+            "race_choices": {},
             "attributes": {
                 "Stärke": 4,
                 "Geschicklichkeit": 4,
@@ -200,7 +202,9 @@ class TemplateWizardDialog:
         base_height = "400dp"
         if self.current_step in [2, 3, 4]:  # Skills, Handicaps, Edges - mehr Platz
             base_height = "600dp"
-        elif self.current_step == 7:  # Preview - noch mehr Platz
+        elif self.current_step == 7:  # Aufstiege - mehr Platz
+            base_height = "600dp"
+        elif self.current_step == 8:  # Preview - noch mehr Platz
             base_height = "700dp"
         return base_height
     
@@ -656,8 +660,157 @@ class TemplateWizardDialog:
         layout.add_widget(content)
         return layout
     
+    # ------------------------------------------------------------------
+    # Schritt: Aufstiege
+    # ------------------------------------------------------------------
+    def _create_advances_step(self):
+        """Erstellt Schritt 8: Aufstiege (starting_advances + advances_to_apply)."""
+        layout = TextFieldScrollView()
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing="12dp",
+            size_hint_y=None,
+        )
+        content.bind(minimum_height=content.setter('height'))
+
+        intro = MDLabel(
+            text="Aufstiege für Veteran/Erfahren etc. festlegen (0 = reiner Anfänger).",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height="40dp",
+        )
+        content.add_widget(intro)
+
+        # starting_advances
+        self.starting_advances_field = MDTextField(
+            MDTextFieldHintText(text="Anzahl Aufstiege (0-20)"),
+            mode="outlined",
+            text=str(self.template_data.get("starting_advances", 0)),
+            input_filter="int",
+            size_hint_y=None,
+            height="56dp",
+        )
+        def _set_starting_advances(instance, value):
+            try:
+                n = max(0, min(20, int(value))) if value else 0
+            except ValueError:
+                n = 0
+            self.template_data["starting_advances"] = n
+        self.starting_advances_field.bind(text=_set_starting_advances)
+        content.add_widget(self.starting_advances_field)
+
+        # Container für die Liste der advances_to_apply
+        self._advances_container = MDBoxLayout(
+            orientation="vertical",
+            spacing="6dp",
+            size_hint_y=None,
+        )
+        self._advances_container.bind(minimum_height=self._advances_container.setter('height'))
+        content.add_widget(self._advances_container)
+        self._render_advances_list()
+
+        # Button: Aufstieg hinzufügen
+        add_btn = MDButton(style="outlined", size_hint_y=None, height="48dp")
+        add_btn.add_widget(MDButtonIcon(icon="plus"))
+        add_btn.add_widget(MDButtonText(text="Aufstieg hinzufügen"))
+        add_btn.bind(on_release=self._add_advance_entry)
+        content.add_widget(add_btn)
+
+        layout.add_widget(content)
+        return layout
+
+    def _render_advances_list(self):
+        """Rendert die aktuellen advances_to_apply als editierbare Karten."""
+        if not hasattr(self, '_advances_container'):
+            return
+        self._advances_container.clear_widgets()
+
+        advances = self.template_data.get("advances_to_apply", [])
+        for index, advance in enumerate(advances):
+            row = MDCard(style="outlined", padding="8dp",
+                         size_hint_y=None, height="80dp")
+            inner = MDBoxLayout(orientation="horizontal", spacing="8dp")
+
+            advance_type = advance.get('type', 'attribute')
+            advance_name = advance.get('name', '')
+
+            # Typ-Dropdown (Text-Button)
+            type_btn = MDButton(style="outlined", size_hint_x=0.25)
+            type_btn.add_widget(MDButtonText(text=advance_type))
+            type_btn.bind(on_release=lambda btn, idx=index: self._open_advance_type_menu(btn, idx))
+            inner.add_widget(type_btn)
+
+            # Namen-Feld
+            name_field = MDTextField(
+                MDTextFieldHintText(text="Name (z.B. Stärke / Kämpfen / Heiler)"),
+                mode="outlined",
+                text=advance_name,
+                size_hint_x=0.55,
+            )
+            name_field.bind(text=lambda instance, value, idx=index: self._update_advance_name(idx, value))
+            inner.add_widget(name_field)
+
+            # Löschen-Button
+            del_btn = MDButton(style="text", size_hint_x=0.2)
+            del_btn.add_widget(MDButtonIcon(icon="delete"))
+            del_btn.bind(on_release=lambda btn, idx=index: self._remove_advance_entry(idx))
+            inner.add_widget(del_btn)
+
+            row.add_widget(inner)
+            self._advances_container.add_widget(row)
+
+    def _open_advance_type_menu(self, caller_btn, index):
+        types = ["attribute", "skill", "edge", "power"]
+        menu_items = []
+        for t in types:
+            menu_items.append({
+                "text": t,
+                "on_release": (lambda t=t, idx=index, b=caller_btn: self._set_advance_type(idx, t, b)),
+            })
+        menu = MDDropdownMenu(caller=caller_btn, items=menu_items)
+        caller_btn._temp_menu = menu
+        menu.open()
+
+    def _set_advance_type(self, index, new_type, btn):
+        advances = self.template_data.get("advances_to_apply", [])
+        if 0 <= index < len(advances):
+            advances[index]['type'] = new_type
+            if btn.children:
+                btn.children[0].text = new_type
+        menu = getattr(btn, '_temp_menu', None)
+        if menu:
+            menu.dismiss()
+
+    def _update_advance_name(self, index, value):
+        advances = self.template_data.setdefault("advances_to_apply", [])
+        if 0 <= index < len(advances):
+            advances[index]['name'] = value
+
+    def _add_advance_entry(self, *_args):
+        if not self._nav_debounce_check():
+            return
+        self.template_data.setdefault("advances_to_apply", []).append({
+            "type": "attribute",
+            "name": "",
+        })
+        # Einen Aufstieg mehr → auch starting_advances erhöhen (Komfort)
+        current = int(self.template_data.get("starting_advances", 0))
+        self.template_data["starting_advances"] = current + 1
+        if hasattr(self, 'starting_advances_field'):
+            self.starting_advances_field.text = str(self.template_data["starting_advances"])
+        self._render_advances_list()
+
+    def _remove_advance_entry(self, index):
+        if not self._nav_debounce_check():
+            return
+        advances = self.template_data.get("advances_to_apply", [])
+        if 0 <= index < len(advances):
+            advances.pop(index)
+            # starting_advances bleibt — Benutzer kann sie manuell anpassen.
+            self._render_advances_list()
+
     def _create_preview_step(self):
-        """Erstellt Schritt 8: Vorschau & Speichern"""
+        """Erstellt Schritt 9: Vorschau & Speichern"""
         layout = MDScrollView()
         content = MDBoxLayout(
             orientation="vertical",
@@ -1072,8 +1225,59 @@ class TemplateWizardDialog:
                 summary += f"  ... und {len(equipment) - 5} weitere\\n"
         
         summary += f"\\n[b]Startkapital:[/b] {data.get('starting_capital', 500)}"
-        
+
+        # Volks-Wahlmöglichkeiten
+        race_choices = data.get('race_choices', {}) or {}
+        if race_choices:
+            summary += "\\n\\n[b]Volks-Wahl:[/b]\\n"
+            for k, v in race_choices.items():
+                summary += f"  • {k}: {v}\\n"
+
+        # Aufstiege
+        advances = data.get('advances_to_apply', []) or []
+        starting_advances = data.get('starting_advances', 0)
+        if starting_advances or advances:
+            summary += f"\\n[b]Aufstiege:[/b] {starting_advances} geplant\\n"
+            for idx, advance in enumerate(advances, 1):
+                summary += f"  • #{idx} {advance.get('type', '?')}: {advance.get('name', '?')}\\n"
+
+        # Abgeleitete Werte (Vorschau)
+        derived = self._estimate_derived_values()
+        if derived:
+            summary += "\\n[b]Abgeleitete Werte (Vorschau):[/b]\\n"
+            for label, value in derived.items():
+                summary += f"  • {label}: {value}\\n"
+
         return summary
+
+    def _estimate_derived_values(self):
+        """
+        Heuristische Vorschau auf Parade, Robustheit, Bewegungsweite, Machtpunkte
+        direkt aus den Template-Daten — OHNE einen echten Charakter anzulegen.
+        Das ersetzt keine echte Berechnung (die erfolgt beim Generieren), gibt dem
+        Benutzer aber eine sinnvolle Abschätzung.
+        """
+        try:
+            attrs = self.template_data.get('attributes', {}) or {}
+            skills = self.template_data.get('skills', {}) or {}
+
+            konstitution = int(attrs.get('Konstitution', 4))
+            kaempfen = int(skills.get('Kämpfen', 0))
+            # Savage Worlds Formeln
+            parade = 2 + (kaempfen // 2) if kaempfen else 2
+            robustheit = 2 + (konstitution // 2)
+            bewegung = 6  # SWAE-Basis, Rassen-Boni nicht berücksichtigt (Vorschau)
+
+            machtpunkte = self.template_data.get('power_points', 0) or 0
+
+            return {
+                "Parade (ohne Schild)": parade,
+                "Robustheit (ohne Rüstung)": robustheit,
+                "Bewegungsweite (Basis)": bewegung,
+                "Machtpunkte": machtpunkte,
+            }
+        except Exception:
+            return {}
     
     def _show_success_dialog(self, filename):
         """Zeigt Erfolgs-Dialog"""
@@ -1207,6 +1411,201 @@ class TemplateWizardDialog:
         if hasattr(self, 'race_button'):
             self.race_button.children[0].text = race
         self.race_menu.dismiss()
+
+        # Alte Auswahl zurücksetzen (neues Volk = neue Wahlmöglichkeiten)
+        self.template_data["race_choices"] = {}
+
+        # Wahlmöglichkeiten des Volks prüfen und ggf. Popup öffnen.
+        wahl = self._get_volk_wahlmoeglichkeiten(race)
+        if wahl:
+            # Kurze Verzögerung, damit das Dropdown-Menü sauber schließt.
+            Clock.schedule_once(lambda dt: self._show_race_choices_popup(race, wahl), 0.2)
+
+    # ------------------------------------------------------------------
+    # Volks-Wahlmöglichkeiten
+    # ------------------------------------------------------------------
+    def _get_volk(self, race_name):
+        """Holt das Volk-Objekt aus dem aktiven Setting. None bei Fehlschlag."""
+        try:
+            if hasattr(self.app, 'controller') and self.app.controller:
+                voelker = self.app.controller.charakter.setting.voelker
+                return voelker.get(race_name)
+        except Exception:
+            return None
+        return None
+
+    def _get_volk_wahlmoeglichkeiten(self, race_name):
+        """
+        Liefert das wahlmoeglichkeiten-Dict eines Volks (oder leeres Dict).
+        Interessante Keys (werden im Popup behandelt):
+        - freies_talent, freies_anfaengertalent, freies_anfaenger_talent
+        - freies_attribut
+        - freies_talent_oder_attribut (Halbelf)
+        - attribut_staerke_oder_konstitution (Halbork)
+        - freie_verstandsfertigkeit (Engro)
+        """
+        volk = self._get_volk(race_name)
+        if volk is None:
+            return {}
+        effects = getattr(volk, 'effects', {}) or {}
+        return effects.get('wahlmoeglichkeiten', {}) or {}
+
+    def _get_volk_freie_talente(self, race_name):
+        """Liste zulässiger Anfänger-Talent-Namen (Fallback: alle Talente)."""
+        try:
+            if hasattr(self.app, 'controller') and self.app.controller:
+                charakter = self.app.controller.charakter
+                from functions.volk_funktionen import get_freie_talente
+                return get_freie_talente(charakter, nur_verfuegbare=False) or []
+        except Exception:
+            pass
+        return []
+
+    def _show_race_choices_popup(self, race_name, wahl):
+        """
+        Zeigt ein eigenständiges Popup mit Dropdowns für die relevanten
+        Wahlmöglichkeiten des Volks. Die Ergebnisse landen in
+        ``template_data['race_choices']``.
+        """
+        choices = {}  # temporäre Auswahl während der Popup-Sitzung
+        # Layout
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing="8dp",
+            size_hint_y=None,
+            padding="12dp",
+        )
+        content.bind(minimum_height=content.setter('height'))
+
+        intro = MDLabel(
+            text=f"{race_name} bietet folgende Wahlmöglichkeiten:",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height="32dp",
+        )
+        content.add_widget(intro)
+
+        attribute = ["Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"]
+        talente = self._get_volk_freie_talente(race_name)
+
+        def _add_dropdown(label_text, options, key, default=None):
+            """Fügt eine Zeile mit Label + Dropdown-Button hinzu."""
+            row = MDBoxLayout(orientation="horizontal", spacing="8dp",
+                              size_hint_y=None, height="56dp")
+            row.add_widget(MDLabel(text=label_text, size_hint_x=0.5))
+            btn = MDButton(style="outlined")
+            btn.add_widget(MDButtonText(text=default or "Bitte wählen"))
+            if default:
+                choices[key] = default
+
+            def _open_menu(instance, opts=options, k=key, b=btn):
+                menu_items = []
+                for opt in opts:
+                    menu_items.append({
+                        "text": opt,
+                        "on_release": (lambda opt=opt, k=k, b=b: self._race_choice_selected(k, opt, b, choices)),
+                    })
+                menu = MDDropdownMenu(caller=instance, items=menu_items)
+                # Speichere Menü am Button, damit es geschlossen werden kann.
+                b._temp_menu = menu
+                menu.open()
+
+            btn.bind(on_release=_open_menu)
+            row.add_widget(btn)
+            content.add_widget(row)
+
+        # Halbork: attribut_staerke_oder_konstitution
+        if wahl.get('attribut_staerke_oder_konstitution'):
+            _add_dropdown("Bonus-Attribut (Stä/Kon):",
+                          ["Stärke", "Konstitution"],
+                          "attribut_staerke_oder_konstitution")
+
+        # Halbelf: freies_talent_oder_attribut (2-stufig: Modus + Wert)
+        if wahl.get('freies_talent_oder_attribut'):
+            _add_dropdown("Wahl zwischen Talent oder Attribut:",
+                          ["talent", "attribut"],
+                          "freies_talent_oder_attribut_modus")
+            # Für Wert zeigen wir beide Optionen (Attribut + Talent-Liste)
+            optionen = attribute + list(talente)
+            _add_dropdown("Gewählter Wert (Attribut ODER Talent):",
+                          optionen,
+                          "freies_talent_oder_attribut_wert")
+
+        # Mensch / andere: freies_talent
+        if (wahl.get('freies_talent') or wahl.get('freies_anfaengertalent')
+                or wahl.get('freies_anfaenger_talent')) and not wahl.get('freies_talent_oder_attribut'):
+            if talente:
+                _add_dropdown("Freies Anfänger-Talent:",
+                              list(talente),
+                              "freies_talent")
+            else:
+                content.add_widget(MDLabel(
+                    text="Kein Talent-Katalog verfügbar – bitte im Historie-Log prüfen.",
+                    theme_text_color="Error", size_hint_y=None, height="30dp",
+                ))
+
+        # freies_attribut
+        if wahl.get('freies_attribut') and not wahl.get('freies_talent_oder_attribut'):
+            _add_dropdown("Freies Attribut (+1 Würfeltyp):",
+                          attribute,
+                          "freies_attribut")
+
+        # freie_verstandsfertigkeit (Engro)
+        if wahl.get('freie_verstandsfertigkeit'):
+            # Verstandsfertigkeiten-Auswahl: wir reichen alle bekannten Skills durch
+            skills = self._get_available_skills() or []
+            if skills:
+                _add_dropdown("Freie Verstandsfertigkeit:",
+                              list(skills),
+                              "freie_verstandsfertigkeit")
+
+        # Nichts Relevantes? Dann Popup gar nicht erst zeigen.
+        if len(content.children) <= 1:  # nur intro-Label
+            return
+
+        scroll = TextFieldScrollView(size_hint_y=1)
+        scroll.add_widget(content)
+
+        popup_layout = MDBoxLayout(orientation="vertical", size_hint_y=None, height="400dp")
+        popup_layout.add_widget(scroll)
+
+        self._race_choices_popup = MDDialog(
+            MDDialogHeadlineText(text=f"{race_name}: Volks-Wahlmöglichkeiten"),
+            MDDialogContentContainer(popup_layout),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text",
+                         on_release=lambda x: self._race_choices_popup.dismiss()),
+                MDButton(MDButtonText(text="Übernehmen"), style="filled",
+                         on_release=lambda x: self._confirm_race_choices(choices)),
+            ),
+            size_hint=(0.85, None),
+            auto_dismiss=False,
+        )
+        self._race_choices_popup.open()
+
+    def _race_choice_selected(self, key, value, button, choices):
+        """Callback wenn im Volks-Wahlmöglichkeiten-Popup ein Dropdown-Eintrag gewählt wurde."""
+        choices[key] = value
+        try:
+            # Button-Text aktualisieren (kind[0] ist MDButtonText)
+            if button.children:
+                button.children[0].text = str(value)
+        except Exception:
+            pass
+        menu = getattr(button, '_temp_menu', None)
+        if menu:
+            menu.dismiss()
+
+    def _confirm_race_choices(self, choices):
+        """Übernimmt die Wahl in template_data und schließt das Popup."""
+        self.template_data["race_choices"] = dict(choices)
+        # Legacy-Feld ``free_race_edge`` pflegen, damit alte Auto-Generator-Pfade
+        # weiterhin funktionieren (wird im Auto-Generator bevorzugt aus race_choices gelesen).
+        if 'freies_talent' in choices:
+            self.template_data["free_race_edge"] = choices['freies_talent']
+        if self._race_choices_popup:
+            self._race_choices_popup.dismiss()
+            self._race_choices_popup = None
 
 
 def show_template_wizard(callback=None):
