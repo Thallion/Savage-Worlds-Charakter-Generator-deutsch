@@ -1,0 +1,93 @@
+{
+  "name": "Clementine",
+  "description": "Whoa, wer hätte gedacht, dass eine plötzliche Polaritätsumkehr eine solche Explosion verursachen könnte. Ich meine, außer mir. Weil ich das natürlich genau so geplant habe.",
+  "setting": "SWAE",
+  "race": "Mensch",
+  "profile": {
+    "age": "",
+    "gender": "weiblich",
+    "concept": "Bastlerin",
+    "languages": "",
+    "rank": "Anfänger"
+  },
+  "race_choices": {
+    "freies_talent": "Gelehrter"
+  },
+  "free_race_edge": "",
+  "attributes": {
+    "Geschicklichkeit": 6,
+    "Konstitution": 6,
+    "Stärke": 4,
+    "Verstand": 10,
+    "Willenskraft": 6
+  },
+  "skills": {
+    "Allgemeinwissen": 4,
+    "Athletik": 4,
+    "Heimlichkeit": 4,
+    "Naturwissenschaften": 10,
+    "Recherche": 8,
+    "Reparieren": 10,
+    "Überreden": 4,
+    "Wahrnehmung": 4
+  },
+  "handicaps": [
+    "Misstrauisch_schwer",
+    "Schwerhörig_leicht",
+    "Tick"
+  ],
+  "edges": [
+    "McGyver",
+    "Reparaturgenie"
+  ],
+  "powers": [],
+  "power_points": 0,
+  "equipment": [
+    {
+      "name": "Revolver",
+      "type": "Waffe",
+      "description": "Standardrevolver der Bastlerin",
+      "category": "Schusswaffe (Pistole)",
+      "properties": {
+        "damage": "2W6+1",
+        "range": "12/24/48",
+        "ap": 1,
+        "two_handed": false
+      }
+    },
+    {
+      "name": "Brechstange",
+      "type": "Waffe",
+      "description": "Stabiles Stahlwerkzeug, auch als Impro-Waffe nutzbar",
+      "category": "Improvisierte Waffe",
+      "properties": {
+        "damage": "Stä+W4",
+        "parry_bonus": 0,
+        "two_handed": false
+      }
+    },
+    {
+      "name": "Van mit zweideutigem Äußeren",
+      "type": "Ausrüstung",
+      "description": "Lieferwagen als mobiles Labor und Transport",
+      "category": "Fahrzeug",
+      "properties": {}
+    }
+  ],
+  "starting_advances": 0,
+  "advances_to_apply": [],
+  "generation_options": {
+    "strict_point_allocation": false,
+    "allow_over_attribute": true,
+    "auto_save": true,
+    "save_path": "auto_generated/Archetyp_SWAE_Bastlerin_Clementine",
+    "complete_character_generation": true
+  },
+  "notes": {
+    "parade_calculation": "Basis 2 (kein Kämpfen)",
+    "robustheit_calculation": "Basis 2 + Konstitution(W6)/2 = 5",
+    "bewegung": 6,
+    "parade": 2,
+    "robustheit": 5
+  }
+}
