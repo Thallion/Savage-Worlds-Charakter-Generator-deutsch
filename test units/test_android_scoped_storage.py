@@ -134,30 +134,33 @@ class TestGetDownloadsPath(unittest.TestCase):
 
 @unittest.skipUnless(_KIVY_AVAILABLE, "Kivy nicht verfügbar")
 class TestOpenViaLocalhostAndroidFallback(unittest.TestCase):
-    """Stellt sicher, dass `_open_via_localhost` auf Android eine Exception wirft,
-    damit `_open_file_on_android` auf FileProvider weiterfällt."""
+    """Stellt sicher, dass `_open_via_localhost` auf Android den HTTP-Server
+    verwendet (statt RuntimeError zu werfen oder file:// URIs zu öffnen)."""
 
-    def test_android_path_raises_so_caller_can_fall_through(self):
-        from manager.html_manager import HTMLManager
-
-        with patch('manager.html_manager.Logger'):
-            # kivy.utils.platform wird lokal importiert → per patch.dict stubben
-            with patch.dict('sys.modules', {'kivy.utils': MagicMock(platform='android')}):
-                with self.assertRaises(RuntimeError):
-                    HTMLManager._open_via_localhost('/tmp/irrelevant.html')
-
-    def test_source_does_not_use_file_uri_webbrowser_on_android(self):
-        """Regression: der alte `webbrowser.open('file://...')`-Fallback ist entfernt."""
+    def test_android_no_longer_raises(self):
+        """_open_via_localhost wirft kein RuntimeError mehr auf Android."""
         from manager.html_manager import HTMLManager
 
         source = inspect.getsource(HTMLManager._open_via_localhost)
-        android_block_start = source.find("kivy_platform == 'android'")
-        self.assertGreater(android_block_start, -1)
-        # Bis zum Desktop-Zweig darf `webbrowser.open("file://...")` NICHT vorkommen.
-        desktop_marker = source.find("Desktop:", android_block_start)
-        android_block = source[android_block_start:desktop_marker if desktop_marker > 0 else len(source)]
-        self.assertNotIn('webbrowser.open(f"file://', android_block)
-        self.assertNotIn("webbrowser.open('file://", android_block)
+        # Kein platform-spezifischer RuntimeError mehr
+        self.assertNotIn('RuntimeError', source)
+        # Kein raise/return im Android-Block (die Funktion läuft plattformübergreifend)
+        self.assertNotIn('raise RuntimeError', source)
+        # HTTPServer-Ansatz wird plattformübergreifend verwendet
+        self.assertIn('HTTPServer', source)
+        self.assertIn('webbrowser.open(url)', source)
+
+    def test_source_does_not_use_file_uri_webbrowser_on_android(self):
+        """Regression: `webbrowser.open('file://...')` ist nicht mehr im Code."""
+        from manager.html_manager import HTMLManager
+
+        source = inspect.getsource(HTMLManager._open_via_localhost)
+        # file://-URI mit webbrowser.open darf nirgends im Code vorkommen
+        self.assertNotIn('webbrowser.open(f"file://', source)
+        self.assertNotIn("webbrowser.open('file://", source)
+        # Bestätigt dass HTTP-Server-Ansatz verwendet wird
+        self.assertIn('HTTPServer', source)
+        self.assertIn('http://127.0.0.1', source)
 
 
 if __name__ == "__main__":

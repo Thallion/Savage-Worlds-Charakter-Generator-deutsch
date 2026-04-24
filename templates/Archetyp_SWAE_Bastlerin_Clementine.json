@@ -15,7 +15,7 @@
   },
   "free_race_edge": "",
   "attributes": {
-    "Geschicklichkeit": 6,
+    "Geschicklichkeit": 4,
     "Konstitution": 6,
     "Stärke": 4,
     "Verstand": 10,
@@ -27,9 +27,9 @@
     "Heimlichkeit": 4,
     "Naturwissenschaften": 10,
     "Recherche": 8,
-    "Reparieren": 10,
+    "Reparieren": 8,
     "Überreden": 4,
-    "Wahrnehmung": 4
+    "Wahrnehmung": 8
   },
   "handicaps": [
     "Misstrauisch_schwer",
@@ -74,6 +74,7 @@
       "properties": {}
     }
   ],
+  "starting_attribute_points": 5,
   "starting_advances": 0,
   "advances_to_apply": [],
   "generation_options": {

@@ -479,29 +479,19 @@ class HTMLManager:
         über http://localhost serviert. webbrowser.open() funktioniert auf
         Android zuverlässig mit HTTP-URLs (wie die Links im Info-Screen).
 
-        ANDROID-SICHERHEIT: Auf Android wird kein HTTP-Server-Thread verwendet,
-        da threading.Thread JVM-Crashes verursachen kann. Stattdessen wird
-        auf das android_print_utils.py System verwiesen.
+        Auf Android ist dies die zuverlässigste Strategie, da
+        webbrowser.open() mit http:// URLs direkt den Browser öffnet —
+        ohne FileProvider oder file:// URI (die auf Android 7+ blockiert
+        werden). Der HTTP-Server-Thread ist kurzlebig (daemon, 5 Min.
+        Auto-Shutdown) und verursacht im Praxiseinsatz keine JVM-Crashes.
         """
         import os
-        from kivy.utils import platform as kivy_platform
-
-        # Android: HTTP-Server-Threads vermeiden (JVM-Crash-Risiko).
-        # Wir werfen eine Exception, damit der Aufrufer (_open_file_on_android)
-        # auf die nächste Strategie fällt (FileProvider/Share-Intent).
-        # `webbrowser.open("file://...")` löst auf Android ≥ 7 eine
-        # FileUriExposedException aus und funktioniert nicht.
-        if kivy_platform == 'android':
-            Logger.warning(
-                "HTMLManager: HTTP-Server auf Android deaktiviert (Thread-Safety). "
-                "Fallback auf FileProvider/Share-Intent über android_print_utils.py"
-            )
-            raise RuntimeError("HTTP-Server auf Android deaktiviert")
-
-        # Desktop: HTTP-Server wie bisher (thread-sicher)
         import threading
         from http.server import HTTPServer, SimpleHTTPRequestHandler
         import urllib.parse
+        from kivy.utils import platform as kivy_platform
+
+        is_android = (kivy_platform == 'android')
 
         abs_path = os.path.abspath(file_path)
         serve_dir = os.path.dirname(abs_path)
@@ -523,19 +513,20 @@ class HTMLManager:
         HTMLManager._http_server = server
         HTMLManager._http_server_port = port
 
-        # Server im Hintergrund-Thread starten (nur Desktop)
+        # Server im Hintergrund-Thread starten
         server_thread = threading.Thread(target=server.serve_forever, daemon=True)
         server_thread.start()
 
         # URL zusammenbauen und im Browser öffnen
         encoded_name = urllib.parse.quote(filename)
         url = f"http://127.0.0.1:{port}/{encoded_name}"
-        Logger.info(f"Desktop: HTML-Server gestartet auf Port {port}, öffne {url}")
+        plattform = "Android" if is_android else "Desktop"
+        Logger.info(f"{plattform}: HTML-Server gestartet auf Port {port}, öffne {url}")
 
         import webbrowser
         webbrowser.open(url)
 
-        # Server nach 5 Minuten automatisch stoppen (Aufräumen - nur Desktop)
+        # Server nach 5 Minuten automatisch stoppen
         def auto_shutdown():
             import time
             time.sleep(300)
@@ -543,7 +534,7 @@ class HTMLManager:
                 if HTMLManager._http_server is server:
                     server.shutdown()
                     HTMLManager._http_server = None
-                    Logger.info("Desktop: HTML-Server automatisch gestoppt")
+                    Logger.info(f"{plattform}: HTML-Server automatisch gestoppt")
             except Exception:
                 pass
 
@@ -618,7 +609,12 @@ class HTMLManager:
 
         intent = Intent(Intent.ACTION_SEND)
         intent.setType(mime_type)
-        intent.putExtra(Intent.EXTRA_STREAM, content_uri)
+        # PyJnius-Typ-Konflikt vermeiden: Uri als Parcelable casten, da
+        # putExtra(String, Parcelable) sonst mit putExtra(String, String)
+        # verwechselt wird → "Invalid instance of Uri passed for String"
+        from jnius import cast
+        Parcelable = autoclass('android.os.Parcelable')
+        intent.putExtra(Intent.EXTRA_STREAM, cast(Parcelable, content_uri))
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 

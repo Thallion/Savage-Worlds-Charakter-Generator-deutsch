@@ -511,6 +511,9 @@ class AutoCharacterGenerator:
                     hinweis = 'Fallback: direkt markiert'
             self.log(f"  🎁 Freies Talent: {freies_talent} → {'ok' if erfolg else 'fehlgeschlagen'}")
             _log_choice('freies_talent', freies_talent, erfolg, hinweis)
+            # Freies-Talent-Slot als verbraucht markieren, damit Schritt 6 keinen zweiten Gratis-Slot vergibt
+            if erfolg and hasattr(charakter, 'voelker_boni') and charakter.voelker_boni.get('freie_talente'):
+                charakter.voelker_boni['freie_talente'] = False
 
         # 4) Freies Attribut (Mensch etc.)
         freies_attr = effective_choices.get('freies_attribut')
@@ -1089,10 +1092,10 @@ class AutoCharacterGenerator:
                     cost_source = f"{handicap_used} Handicap-Punkte" if handicap_used > 0 else "Standard-Punkte"
                     self.log(f"  ✅ {edge_name} hinzugefügt ({cost_source}) - Voraussetzungen ignoriert")
 
-                    total_costs += 1
+                    total_costs += handicap_used  # Verwende tatsächliche Handicap-Punkte
                     self.cost_log['talente'].append({
                         'name': edge_name,
-                        'kosten': 1,
+                        'kosten': handicap_used,  # Korrekte Kosten in Handicap-Punkten
                         'handicap_punkte_verwendet': handicap_used,
                         'quelle': cost_source,
                         'voraussetzungen_ignoriert': True
@@ -1117,10 +1120,12 @@ class AutoCharacterGenerator:
                             talent_obj.aktiv = True
                     self.log(f"  ⚠️ {edge_name} direkt gesetzt (Fallback) - Voraussetzungen ignoriert")
 
-                    total_costs += 1
+                    # Fallback: Standardkosten für ein Talent (2 Handicap-Punkte)
+                    fallback_cost = 2
+                    total_costs += fallback_cost
                     self.cost_log['talente'].append({
                         'name': edge_name,
-                        'kosten': 1,
+                        'kosten': fallback_cost,
                         'fallback': True,
                         'voraussetzungen_ignoriert': True
                     })
@@ -2034,9 +2039,8 @@ class AutoCharacterGenerator:
         # Charaktergenerierung als abgeschlossen markieren
         charakter.char_gen_completed = True
 
-        # Aufstiege für weitere Entwicklung setzen
-        if charakter.aufstiege_gesamt == 0:
-            charakter.aufstiege_gesamt = 1  # Mindestens 1 Aufstieg für Anfänger
+        # Aufstiege nur setzen wenn im Template explizit definiert oder durch Punkte-Umwandlung
+        # KEIN automatischer Mindest-Aufstieg für Anfänger!
 
         # Berechne verbleibende Aufstiege aus nicht verwendeten Punkten
         remaining_attr_points = max(0, charakter.verbleibende_attributsteigerungen)
