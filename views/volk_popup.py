@@ -23,16 +23,18 @@ from kivymd.uix.list import MDListItemTrailingCheckbox
 
 from models.volk import Volk
 from functions.volkseigenarten_funktionen import (
-    lade_volkseigenarten_config,
+    get_merged_eigenarten_config,
     berechne_punktestand,
     ist_punktestand_gueltig,
     get_eigenart_by_id,
-    validiere_eigenart_auswahl,
     eigenart_zu_effekte,
     eigenart_zu_besonderheiten,
     validiere_volk_erstellung,
     lade_eigenarten_fuer_bearbeitung,
     formatiere_punkte_anzeige,
+    erstelle_eigenart_dict,
+    speichere_custom_eigenart,
+    loesche_custom_eigenart,
     START_PUNKTE
 )
 from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
@@ -360,21 +362,33 @@ class VolkGeneratorWizard:
         """Zeigt separates Popup für Eigenarten-Checkboxen (eigener ScrollView)"""
         if self._wizard_finished:
             return
+
+        # Bestehendes Eigenarten-Popup schließen falls vorhanden
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.dismiss()
+
         from kivy.core.window import Window
 
-        config = lade_volkseigenarten_config()
+        config = get_merged_eigenarten_config()
         eigenarten = config.get(eigenart_typ, [])
         aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
         title = "Positive Volkseigenarten" if eigenart_typ == 'positive' else "Negative Volkseigenarten"
 
         # Hauptlayout mit fester Höhe
-        popup_height = min(Window.height * 0.7, dp(400))
+        popup_height = min(Window.height * 0.75, dp(420))
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(8),
             size_hint_y=None,
             height=popup_height
         )
+
+        # "Neue Eigenart erstellen"-Button
+        btn_text = "Neue Eigenart erstellen..."
+        create_btn = MDButton(style="tonal", size_hint_y=None, height=dp(48))
+        create_btn.add_widget(MDButtonText(text=btn_text))
+        create_btn.bind(on_release=lambda x: self._show_create_eigenart_dialog(eigenart_typ))
+        content.add_widget(create_btn)
 
         # Liste für Checkboxen
         list_layout = MDList(size_hint_y=None)
@@ -395,6 +409,8 @@ class VolkGeneratorWizard:
                 max_text = f" ({aktuelle_anzahl}/{max_auswahl})"
             else:
                 max_text = ""
+            if eigenart.get('custom'):
+                max_text += " [Eigene]"
 
             list_item = MDListItem(size_hint_y=None, height=dp(56))
             list_item.add_widget(MDListItemHeadlineText(
@@ -410,6 +426,22 @@ class VolkGeneratorWizard:
             e_id = eigenart_id
             e_typ = eigenart_typ
             checkbox.bind(on_release=lambda x, cb=cb, eid=e_id, et=e_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
+
+            # Löschen-Icon für eigene Eigenarten (nur wenn nicht aktuell ausgewählt)
+            if eigenart.get('custom') and aktuelle_anzahl == 0:
+                from kivymd.uix.button import MDIconButton
+                delete_btn = MDIconButton(
+                    icon="delete",
+                    style="tonal",
+                    size_hint=(None, None),
+                    size=(dp(32), dp(32)),
+                    pos_hint={"center_y": 0.5}
+                )
+                del_id = eigenart_id
+                del_typ = eigenart_typ
+                delete_btn.bind(on_release=lambda x, did=del_id, dt=del_typ: self._delete_custom_eigenart(did, dt))
+                list_item.add_widget(delete_btn)
+
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
 
@@ -450,6 +482,132 @@ class VolkGeneratorWizard:
         """Schließt das Eigenarten-Popup OHNE die Auswahl zu übernehmen (Abbrechen)."""
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
             self._eigenarten_popup.dismiss()
+
+    def _show_create_eigenart_dialog(self, eigenart_typ):
+        """Zeigt einen Dialog zum Erstellen einer neuen benutzerdefinierten Volkseigenart.
+        Blendet das Eigenarten-Popup temporär aus um Überlappung zu vermeiden."""
+        import time as time_mod
+
+        # Eigenarten-Popup temporär ausblenden
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.opacity = 0
+
+        is_positive = eigenart_typ == 'positive'
+        titel_text = "Neuen Volksvorteil erstellen" if is_positive else "Neuen Volksnachteil erstellen"
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(12),
+            size_hint_y=None,
+            height=dp(240),
+            padding=dp(8)
+        )
+
+        # Name-Feld
+        name_field = MDTextField(mode="outlined", size_hint_y=None, height=dp(56))
+        name_field.add_widget(MDTextFieldHintText(text="Name der Eigenart *"))
+        content.add_widget(name_field)
+
+        # EP-Kosten-Feld
+        kosten_field = MDTextField(mode="outlined", size_hint_y=None, height=dp(56),
+                                   text="2" if is_positive else "-2",
+                                   input_filter="int")
+        kosten_field.add_widget(MDTextFieldHintText(text="EP-Kosten (z.B. 2, -2)"))
+        content.add_widget(kosten_field)
+
+        # Beschreibung-Feld
+        beschr_field = MDTextField(mode="outlined", size_hint_y=None, height=dp(56))
+        beschr_field.add_widget(MDTextFieldHintText(text="Beschreibung (wird im Charakterbogen angezeigt)"))
+        content.add_widget(beschr_field)
+
+        def _on_cancel(x):
+            dialog.dismiss()
+            self._restore_eigenarten_popup()
+
+        def _on_save(x):
+            name = name_field.text.strip()
+            if not name:
+                self._show_error("Bitte gib einen Namen für die Eigenart ein.")
+                return
+
+            try:
+                kosten = int(kosten_field.text.strip())
+            except ValueError:
+                kosten = 2 if is_positive else -2
+
+            if is_positive and kosten <= 0:
+                kosten = 2
+            elif not is_positive and kosten >= 0:
+                kosten = -2
+
+            beschreibung = beschr_field.text.strip()
+
+            eigenart = erstelle_eigenart_dict(
+                name=name,
+                kosten=kosten,
+                effekt_typ='spezieller_effekt',
+                beschreibung=beschreibung if beschreibung else None,
+            )
+
+            speichere_custom_eigenart(eigenart, eigenart_typ)
+
+            # Altes Eigenarten-Popup schließen (war mit opacity=0 ausgeblendet)
+            if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+                self._eigenarten_popup.dismiss()
+
+            dialog.dismiss()
+
+            # Eigenarten-Popup mit aktualisierter Liste neu aufbauen
+            Clock.schedule_once(lambda dt: self._show_eigenarten_popup(eigenart_typ), 0.35)
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=titel_text),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
+                MDButton(MDButtonText(text="Erstellen"), style="filled", on_release=_on_save),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+
+    def _delete_custom_eigenart(self, eigenart_id, eigenart_typ):
+        """Löscht eine benutzerdefinierte Eigenart nach Bestätigung."""
+        def _on_confirm(x):
+            loesche_custom_eigenart(eigenart_id, eigenart_typ)
+            dialog.dismiss()
+            # Eigenarten-Popup neu aufbauen
+            Clock.schedule_once(lambda dt: self._show_eigenarten_popup(eigenart_typ), 0.35)
+
+        def _on_cancel(x):
+            dialog.dismiss()
+
+        eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
+        name = eigenart.get('name', eigenart_id) if eigenart else eigenart_id
+
+        del_content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            height=dp(60),
+            padding=dp(16)
+        )
+        del_content.add_widget(
+            MDLabel(text=f"Möchtest du die Eigenart '[b]{name}[/b]' wirklich löschen?",
+                    markup=True, size_hint_y=None, height=dp(40),
+                    adaptive_height=True)
+        )
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Eigenart löschen"),
+            MDDialogContentContainer(del_content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
+                MDButton(MDButtonText(text="Löschen"), style="filled", on_release=_on_confirm),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
 
     def _close_eigenarten_popup(self, eigenart_typ):
         """Schließt das Eigenarten-Popup und aktualisiert den Wizard-Schritt"""
@@ -1574,21 +1732,36 @@ class VolkDialogHandler:
             app = App.get_running_app()
             charakter = app.controller.charakter
 
+            deleted_count = 0
+            skipped_count = 0
             for volk_name in selected:
                 if volk_name in charakter.voelker:
                     if charakter.voelker[volk_name].ausgewaehlt:
                         Logger.warning(f"Volk '{volk_name}' ist ausgewählt und kann nicht gelöscht werden.")
+                        skipped_count += 1
                         continue
 
                     del charakter.voelker[volk_name]
                     Logger.info(f"Volk '{volk_name}' wurde gelöscht.")
+                    deleted_count += 1
 
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
             self._refresh_volk_view()
-            self._show_success_snackbar(f"{len(selected)} Volk/Völker gelöscht")
 
-            Logger.info(f"{len(selected)} Volk/Völker wurde(n) gelöscht.")
+            if deleted_count > 0 and skipped_count > 0:
+                self._show_success_snackbar(
+                    f"{deleted_count} Volk/Völker gelöscht, {skipped_count} übersprungen (aktuell ausgewählt)"
+                )
+            elif deleted_count > 0:
+                self._show_success_snackbar(f"{deleted_count} Volk/Völker gelöscht")
+            else:
+                self.show_error(
+                    "Kein Volk konnte gelöscht werden.\n"
+                    "Wähle das aktuell ausgewählte Volk zuerst ab, bevor du es löschst."
+                )
+
+            Logger.info(f"{deleted_count} Volk/Völker gelöscht, {skipped_count} übersprungen.")
             self.dismiss_dialog()
 
         except Exception as e:
@@ -1607,21 +1780,36 @@ class VolkDialogHandler:
             app = App.get_running_app()
             charakter = app.controller.charakter
 
+            deleted_count = 0
+            skipped_count = 0
             for volk_name in selected:
                 if volk_name in charakter.voelker:
                     if charakter.voelker[volk_name].ausgewaehlt:
                         Logger.warning(f"Volk '{volk_name}' ist ausgewählt und kann nicht gelöscht werden.")
+                        skipped_count += 1
                         continue
 
                     del charakter.voelker[volk_name]
                     Logger.info(f"Volk '{volk_name}' wurde gelöscht.")
+                    deleted_count += 1
 
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
             self._refresh_volk_view()
-            self._show_success_snackbar(f"{len(selected)} Volk/Völker gelöscht")
 
-            Logger.info(f"{len(selected)} Volk/Völker wurde(n) gelöscht.")
+            if deleted_count > 0 and skipped_count > 0:
+                self._show_success_snackbar(
+                    f"{deleted_count} Volk/Völker gelöscht, {skipped_count} übersprungen (aktuell ausgewählt)"
+                )
+            elif deleted_count > 0:
+                self._show_success_snackbar(f"{deleted_count} Volk/Völker gelöscht")
+            else:
+                self.show_error(
+                    "Kein Volk konnte gelöscht werden.\n"
+                    "Wähle das aktuell ausgewählte Volk zuerst ab, bevor du es löschst."
+                )
+
+            Logger.info(f"{deleted_count} Volk/Völker gelöscht, {skipped_count} übersprungen.")
             self.dismiss_dialog()
 
         except Exception as e:

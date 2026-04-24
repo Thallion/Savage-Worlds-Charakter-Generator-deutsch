@@ -7,13 +7,98 @@ und Bearbeitung von benutzerdefinierten Völkern.
 
 import json
 import logging
+import time as time_mod
 from pathlib import Path
 from kivy.logger import Logger
 
 _config_cache = None
 _config_path = None
+_custom_config_cache = None
+_custom_config_path = None
 
 START_PUNKTE = 2
+
+# Verfügbare Effekttypen für benutzerdefinierte Eigenarten
+EFFEKT_TYPEN = {
+    'attribut_bonus': {
+        'name': 'Attributserhöhung',
+        'beschreibung': 'Erhöht ein Attribut um einen Würfeltyp',
+        'kategorie': 'positive',
+        'optionen_typ': 'attribut_auswahl',
+        'effekt_schema': {'attribut_bonus': 2}
+    },
+    'attribut_malus': {
+        'name': 'Attributsschwäche',
+        'beschreibung': 'Senkt ein Attribut um einen Würfeltyp',
+        'kategorie': 'negative',
+        'optionen_typ': 'attribut_auswahl',
+        'effekt_schema': {'attribut_malus': 2}
+    },
+    'fertigkeits_bonus_grund': {
+        'name': 'Grundfertigkeitsbonus',
+        'beschreibung': 'Eine Grundfertigkeit startet auf W6',
+        'kategorie': 'positive',
+        'optionen_typ': 'grundfertigkeit_auswahl',
+        'effekt_schema': {'grundfertigkeit_bonus': 2}
+    },
+    'fertigkeits_bonus_nicht_grund': {
+        'name': 'Fertigkeitsbonus',
+        'beschreibung': 'Eine Nicht-Grundfertigkeit startet auf W4+0',
+        'kategorie': 'positive',
+        'optionen_typ': 'nicht_grundfertigkeit_auswahl',
+        'effekt_schema': {'nicht_grundfertigkeit_bonus': 2}
+    },
+    'robustheit_bonus': {
+        'name': 'Robustheit',
+        'beschreibung': '+1 Robustheit',
+        'kategorie': 'positive',
+        'effekt_schema': {'robustheit_bonus': 1}
+    },
+    'robustheit_malus': {
+        'name': 'Zerbrechlich',
+        'beschreibung': '-1 Robustheit',
+        'kategorie': 'negative',
+        'effekt_schema': {'robustheit_bonus': -1}
+    },
+    'bewegungsweite_bonus': {
+        'name': 'Beweglichkeit',
+        'beschreibung': '+1 Bewegungsweite',
+        'kategorie': 'positive',
+        'effekt_schema': {'bewegungsweite_bonus': 1}
+    },
+    'bewegungsweite_malus': {
+        'name': 'Langsam',
+        'beschreibung': '-1 Bewegungsweite',
+        'kategorie': 'negative',
+        'effekt_schema': {'bewegungsweite_bonus': -1}
+    },
+    'nachtsicht': {
+        'name': 'Nachtsicht',
+        'beschreibung': 'Ignoriert Abzüge für Düstere und Dunkle Beleuchtung',
+        'kategorie': 'positive',
+        'effekt_schema': {'nachtsicht': True},
+        'auto_talente': ['Nachtsicht']
+    },
+    'fliegen': {
+        'name': 'Fliegen',
+        'beschreibung': 'Das Volk kann fliegen (BW anpassbar)',
+        'kategorie': 'positive',
+        'effekt_schema': {'fliegen': True, 'bewegungsweite_flug': 6}
+    },
+    'freies_talent': {
+        'name': 'Freies Talent',
+        'beschreibung': 'Ein freies Anfängertalent',
+        'kategorie': 'positive',
+        'effekt_schema': {'freies_talent': True},
+        'optionen_typ': 'talent_auswahl'
+    },
+    'spezieller_effekt': {
+        'name': 'Sonstiger Effekt',
+        'beschreibung': 'Ein benutzerdefinierter Effekt (reine Beschreibung)',
+        'kategorie': 'universal',
+        'effekt_schema': {}
+    }
+}
 
 
 def lade_volkseigenarten_config():
@@ -123,18 +208,18 @@ def ist_punktestand_gueltig(ausgewaehlte_eigenarten):
 
 def get_eigenart_by_id(eigenart_id, eigenart_typ='positive'):
     """
-    Sucht eine Eigenart anhand ihrer ID.
-    
+    Sucht eine Eigenart anhand ihrer ID (durchsucht Basis + Custom).
+
     Args:
         eigenart_id: Die ID der Eigenart
         eigenart_typ: 'positive' oder 'negative'
-        
+
     Returns:
         dict oder None: Die Eigenart oder None wenn nicht gefunden
     """
-    config = lade_volkseigenarten_config()
+    config = get_merged_eigenarten_config()
     eigenarten_liste = config.get(eigenart_typ, [])
-    
+
     for eigenart in eigenarten_liste:
         if eigenart.get('id') == eigenart_id:
             return eigenart
@@ -532,6 +617,220 @@ def lade_eigenarten_fuer_bearbeitung(volk_dict):
             negative_eigenarten.append(eigenart_data)
     
     return positive_eigenarten, negative_eigenarten
+
+
+def lade_custom_eigenarten_config():
+    """
+    Lädt die benutzerdefinierten Volkseigenarten aus der Custom-JSON-Datei.
+    Cacht die geladenen Daten für nachfolgende Aufrufe.
+
+    Returns:
+        dict: Dictionary mit 'positive' und 'negative' Listen
+    """
+    global _custom_config_cache
+
+    if _custom_config_cache is not None:
+        return _custom_config_cache
+
+    global _custom_config_path
+    if _custom_config_path is None:
+        _custom_config_path = Path(__file__).parent.parent / 'config' / 'custom_volkseigenarten_config.json'
+
+    try:
+        if _custom_config_path.exists():
+            with open(_custom_config_path, 'r', encoding='utf-8') as f:
+                _custom_config_cache = json.load(f)
+                Logger.info(f"Benutzerdefinierte Volkseigenarten geladen von {_custom_config_path}")
+                return _custom_config_cache
+        else:
+            Logger.info("Keine benutzerdefinierten Volkseigenarten gefunden, leere Konfiguration erstellt")
+            _custom_config_cache = {'positive': [], 'negative': []}
+            return _custom_config_cache
+    except Exception as e:
+        Logger.error(f"Fehler beim Laden der benutzerdefinierten Volkseigenarten: {e}")
+        _custom_config_cache = {'positive': [], 'negative': []}
+        return _custom_config_cache
+
+
+def get_merged_eigenarten_config():
+    """
+    Gibt die zusammengeführte Konfiguration aus Basis- und Custom-Datei zurück.
+
+    Returns:
+        dict: Dictionary mit 'positive' und 'negative' Listen (gemerged)
+    """
+    basis = lade_volkseigenarten_config()
+    custom = lade_custom_eigenarten_config()
+
+    merged = {
+        'beschreibung': basis.get('beschreibung', ''),
+        'attribute': basis.get('attribute', ['Stärke', 'Geschicklichkeit', 'Konstitution', 'Verstand', 'Willenskraft']),
+        'positive': basis.get('positive', []) + custom.get('positive', []),
+        'negative': basis.get('negative', []) + custom.get('negative', [])
+    }
+    return merged
+
+
+def speichere_custom_eigenart(eigenart_data, eigenart_typ):
+    """
+    Speichert eine neue benutzerdefinierte Eigenart in der Custom-JSON-Datei.
+
+    Args:
+        eigenart_data: Dictionary mit den Eigenart-Daten (name, kosten, effekt_typ, etc.)
+        eigenart_typ: 'positive' oder 'negative'
+
+    Returns:
+        bool: True wenn erfolgreich gespeichert
+    """
+    global _custom_config_cache, _custom_config_path
+
+    if _custom_config_cache is None:
+        lade_custom_eigenarten_config()
+    if _custom_config_path is None:
+        _custom_config_path = Path(__file__).parent.parent / 'config' / 'custom_volkseigenarten_config.json'
+
+    if _custom_config_cache is None:
+        _custom_config_cache = {'positive': [], 'negative': []}
+
+    # Stelle sicher, dass die Eigenart eine eindeutige ID hat
+    if 'id' not in eigenart_data:
+        timestamp = int(time_mod.time() * 1000)
+        eigenart_data['id'] = f"custom_{eigenart_typ}_{timestamp}_{len(_custom_config_cache.get(eigenart_typ, []))}"
+
+    eigenart_data['custom'] = True
+
+    _custom_config_cache.setdefault(eigenart_typ, []).append(eigenart_data)
+
+    try:
+        _custom_config_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(_custom_config_path, 'w', encoding='utf-8') as f:
+            json.dump(_custom_config_cache, f, ensure_ascii=False, indent=4)
+        Logger.info(f"Benutzerdefinierte Eigenart '{eigenart_data.get('name')}' gespeichert")
+        return True
+    except Exception as e:
+        Logger.error(f"Fehler beim Speichern der benutzerdefinierten Eigenart: {e}")
+        return False
+
+
+def loesche_custom_eigenart(eigenart_id, eigenart_typ):
+    """
+    Löscht eine benutzerdefinierte Eigenart aus der Custom-JSON-Datei.
+
+    Args:
+        eigenart_id: Die ID der zu löschenden Eigenart
+        eigenart_typ: 'positive' oder 'negative'
+
+    Returns:
+        bool: True wenn erfolgreich gelöscht
+    """
+    global _custom_config_cache, _custom_config_path
+
+    if _custom_config_cache is None:
+        lade_custom_eigenarten_config()
+    if _custom_config_path is None:
+        _custom_config_path = Path(__file__).parent.parent / 'config' / 'custom_volkseigenarten_config.json'
+
+    if _custom_config_cache is None:
+        return False
+
+    liste = _custom_config_cache.get(eigenart_typ, [])
+    for i, e in enumerate(liste):
+        if e.get('id') == eigenart_id:
+            geloescht = liste.pop(i)
+            try:
+                with open(_custom_config_path, 'w', encoding='utf-8') as f:
+                    json.dump(_custom_config_cache, f, ensure_ascii=False, indent=4)
+                Logger.info(f"Benutzerdefinierte Eigenart '{geloescht.get('name')}' gelöscht")
+                return True
+            except Exception as e:
+                Logger.error(f"Fehler beim Löschen der benutzerdefinierten Eigenart: {e}")
+                return False
+    return False
+
+
+def ist_eigenart_custom(eigenart_id, eigenart_typ='positive'):
+    """
+    Prüft ob eine Eigenart benutzerdefiniert ist.
+
+    Args:
+        eigenart_id: Die ID der Eigenart
+        eigenart_typ: 'positive' oder 'negative'
+
+    Returns:
+        bool: True wenn benutzerdefiniert
+    """
+    # Zuerst in Basis-Konfiguration suchen
+    basis = lade_volkseigenarten_config()
+    for e in basis.get(eigenart_typ, []):
+        if e.get('id') == eigenart_id:
+            return False
+
+    # Dann in Custom-Konfiguration
+    custom = lade_custom_eigenarten_config()
+    for e in custom.get(eigenart_typ, []):
+        if e.get('id') == eigenart_id:
+            return e.get('custom', True)
+    return False
+
+
+def generiere_eigenart_id(name, eigenart_typ):
+    """
+    Generiert eine eindeutige ID für eine neue Eigenart.
+
+    Args:
+        name: Der Name der Eigenart
+        eigenart_typ: 'positive' oder 'negative'
+
+    Returns:
+        str: Eindeutige ID
+    """
+    timestamp = int(time_mod.time() * 1000)
+    return f"custom_{eigenart_typ}_{timestamp}"
+
+
+def erstelle_eigenart_dict(name, kosten, effekt_typ, beschreibung='', optionen=None,
+                           effekt=None, auto_talente=None, handicaps=None, max_auswahl=1):
+    """
+    Erstellt ein vollständiges Eigenart-Dictionary aus den Benutzereingaben.
+
+    Args:
+        name: Name der Eigenart
+        kosten: EP-Kosten (positiv für Vorteile, negativ für Nachteile)
+        effekt_typ: Der Effekttyp (Schlüssel aus EFFEKT_TYPEN)
+        beschreibung: Beschreibungstext
+        optionen: Optionen-Dictionary oder None
+        effekt: Effekt-Dictionary (überschreibt Schema)
+        auto_talente: Liste automatischer Talente
+        handicaps: Liste automatischer Handicaps
+        max_auswahl: Maximale Auswahl
+
+    Returns:
+        dict: Vollständiges Eigenart-Dictionary
+    """
+    eigenart_typ = 'positive' if kosten > 0 else 'negative'
+
+    effekt_typ_info = EFFEKT_TYPEN.get(effekt_typ, {})
+    eigenart_id = generiere_eigenart_id(name, eigenart_typ)
+
+    eigenart = {
+        'id': eigenart_id,
+        'name': name,
+        'kosten': kosten,
+        'max_auswahl': max_auswahl,
+        'beschreibung': beschreibung,
+        'effekt_typ': effekt_typ,
+        'effekt': effekt if effekt is not None else effekt_typ_info.get('effekt_schema', {}),
+        'custom': True
+    }
+
+    if optionen:
+        eigenart['optionen'] = optionen
+    if auto_talente:
+        eigenart['auto_talente'] = auto_talente
+    if handicaps:
+        eigenart['handicaps'] = handicaps
+
+    return eigenart
 
 
 def formatiere_punkte_anzeige(ausgewaehlte_eigenarten):
