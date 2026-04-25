@@ -41,7 +41,7 @@ def create_mock_charakter():
             print(f"Event dispatched: {event}")
     
     # Lade Savage Pathfinder Setting
-    with open('settings/Savage Pathfinder.json', 'r', encoding='utf-8') as f:
+    with open('../settings/Savage Pathfinder.json', 'r', encoding='utf-8') as f:
         setting_data = json.load(f)
     
     charakter = MockCharakter()

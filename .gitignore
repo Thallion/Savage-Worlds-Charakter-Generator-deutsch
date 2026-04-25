@@ -12,6 +12,7 @@ build/
 Texte/
 screenshots/
 backups/
+backup/
 ToDo/
 .buildozer/
 *.egg-info/

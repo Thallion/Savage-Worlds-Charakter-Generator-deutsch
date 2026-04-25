@@ -31,7 +31,7 @@ def create_mock_charakter_swae():
         def dispatch(self, event):
             pass
     
-    with open('settings/SWAE.json', 'r', encoding='utf-8') as f:
+    with open('../settings/SWAE.json', 'r', encoding='utf-8') as f:
         setting_data = json.load(f)
     
     charakter = MockCharakter()
