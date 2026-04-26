@@ -727,6 +727,14 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
             def do_delete(*args):
                 try:
+                    if not os.path.exists(selected_path):
+                        Logger.warning(f"Datei nicht mehr vorhanden: {selected_path}")
+                        if dialog_service:
+                            dialog_service.show_warning_dialog(
+                                f"Datei '{fname}' ist nicht mehr vorhanden (bereits gelöscht)."
+                            )
+                        self._exit_char_delete()
+                        return
                     os.remove(selected_path)
                     Logger.info(f"Charakter gelöscht: {selected_path}")
                     if dialog_service:
