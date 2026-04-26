@@ -8,11 +8,11 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
+  "mobile_modus": false,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/auto_generated/Archetyp_SavagePathfinder_Kaempfer_Valeros_Aufstiege",
+  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
   "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
   "debug_mode": false,
   "log_level": "INFO",
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-26T08:13:51.807326"
+  "last_updated": "2026-04-26T09:35:47.656495"
 }

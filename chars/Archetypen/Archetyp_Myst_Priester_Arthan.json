@@ -2,8 +2,8 @@
     "profil_daten": {
         "Name": "Arthan, der Priester",
         "Alter": "",
-        "Geschlecht": "",
-        "Konzept": "",
+        "Geschlecht": "männlich",
+        "Konzept": "Priester",
         "Sprachen": ""
     },
     "active_setting_name": "SWAE",
@@ -37,27 +37,27 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 4,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,8 +133,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -276,8 +276,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -289,8 +289,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -485,13 +485,35 @@
                 "ausgewaehlt": true
             }
         },
-        "handicaps": {},
+        "handicaps": {
+            "Ehrenkodex": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Pazifist_leicht": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Sanftmütig": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            }
+        },
         "talente": {
             "AH (Wunder)": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 3,
                 "machtpunkte": 10
+            },
+            "Heiler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -519,11 +541,32 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Hemd (Kette)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerpaket": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kriegshammer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
-    "selected_handicaps": [],
+    "selected_handicaps": [
+        "Ehrenkodex",
+        "Pazifist_leicht",
+        "Sanftmütig"
+    ],
     "selected_talente": [
-        "AH (Wunder)"
+        "AH (Wunder)",
+        "Heiler"
     ],
     "selected_maechte": [
         "Heilung",
@@ -544,12 +587,19 @@
         "Saurianer": false,
         "Zwerg": false
     },
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Hemd (Kette)",
+        "Abenteurerpaket"
+    ],
+    "selected_waffen": [
+        "Kriegshammer"
+    ],
+    "selected_ruestungen": [
+        "Hemd (Kette)"
+    ],
     "selected_schilde": [],
-    "verbleibende_attributsteigerungen": 5,
-    "verbleibende_fertigkeitssteigerungen": 12,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
     "verbleibende_aufstiege": 0,
@@ -561,11 +611,139 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 500,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
-    "steigerungs_journal": null
+    "steigerungs_journal": {
+        "cost_entries": [
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Heiler",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            }
+        ]
+    }
 }
