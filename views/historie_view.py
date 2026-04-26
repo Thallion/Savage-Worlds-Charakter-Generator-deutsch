@@ -345,12 +345,17 @@ class HistorieWidget(MDBoxLayout):
 
     def _init_widget_refs_desktop(self, dt):
         """Setzt Widget-Referenzen aus KV-IDs (Desktop)."""
-        self.auto_log_switch = self.ids.auto_log_switch
-        self.log_display = self.ids.log_display
-        self.stats_text = self.ids.stats_text
-        self.stats_card = self.ids.stats_card
-        self.filter_input = self.ids.filter_input
-        self.filter_input.bind(text=self._apply_filter)
+        try:
+            self.auto_log_switch = self.ids.auto_log_switch
+            self.log_display = self.ids.log_display
+            self.stats_text = self.ids.stats_text
+            self.stats_card = self.ids.stats_card
+            self.filter_input = self.ids.filter_input
+            self.filter_input.bind(text=self._apply_filter)
+        except (KeyError, AttributeError) as e:
+            Logger.error(f"historie_view: Fehler beim Initialisieren der Widget-Referenzen: {e}")
+            Logger.warning("historie_view: KV-Layout-IDs nicht gefunden. Falle auf dynamisches Mobile-Layout zurück.")
+            self._build_mobile_layout(0)
 
     # ── Mobile: Dynamisches Layout ────────────────────────────────
 
@@ -709,7 +714,11 @@ class HistorieWidget(MDBoxLayout):
         """Synchronisiert die aktuelle Historie ins Charakter-Objekt."""
         try:
             if self.charakter_controller and self.charakter_controller.charakter:
-                self.charakter_controller.charakter.steigerungs_journal = self.historie.to_dict()
+                new_journal = self.historie.to_dict()
+                existing = self.charakter_controller.charakter.steigerungs_journal
+                if existing and isinstance(existing, dict) and 'cost_entries' in existing:
+                    new_journal['cost_entries'] = existing['cost_entries']
+                self.charakter_controller.charakter.steigerungs_journal = new_journal
         except Exception as e:
             Logger.error(f"Fehler bei Journal-Synchronisation: {e}")
 

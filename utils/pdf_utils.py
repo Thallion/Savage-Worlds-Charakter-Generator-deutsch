@@ -579,49 +579,68 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False, show_steigerung
 
     # **Steigerungs-Journal Abschnitt**
     journal = getattr(charakter, 'steigerungs_journal', None)
-    if show_steigerungen and journal and isinstance(journal, dict) and journal.get('entries'):
-        journal_entries = journal['entries']
-        # Nur Einträge mit relevanten Steigerungen (keine Meta-Einträge wie charakter_geladen)
-        steigerungs_typen = {
-            'attribut_steigerung': 'Attribut',
-            'fertigkeit_steigerung': 'Fertigkeit',
-            'talent_hinzugefuegt': 'Talent',
-            'talent_entfernt': 'Talent',
-            'handicap_hinzugefuegt': 'Handicap',
-            'handicap_entfernt': 'Handicap',
-            'handicap_reduziert': 'Handicap',
-            'macht_hinzugefuegt': 'Macht',
-            'macht_entfernt': 'Macht',
-        }
-        relevante_eintraege = [e for e in journal_entries if e.get('type') in steigerungs_typen]
-
-        if relevante_eintraege:
-            steigerungen_section = []
-            steigerungen_section.append(Paragraph("Steigerungen", style_heading))
-
-            data = [["Rang", "Typ", "Name", "Kosten"]]
-            for entry in relevante_eintraege:
-                rang = entry.get('rang', '')
+    if show_steigerungen and journal and isinstance(journal, dict):
+        char_rang = getattr(charakter, 'rang', '')
+        journal_entries = journal.get('entries')
+        if not journal_entries:
+            cost_entries = journal.get('cost_entries')
+            if cost_entries:
+                typ_map = {
+                    'attribut': 'Attribut',
+                    'fertigkeit': 'Fertigkeit',
+                    'talent': 'Talent',
+                    'handicap': 'Handicap',
+                    'macht': 'Macht',
+                }
+                relevante_eintraege = []
+                for e in cost_entries:
+                    typ = typ_map.get(e.get('typ', ''), e.get('typ', ''))
+                    name = e.get('name', '')
+                    wert = e.get('wert')
+                    if wert and e.get('typ') in ('attribut', 'fertigkeit'):
+                        name = f"{name}: W{wert}"
+                    kosten = e.get('kosten', '')
+                    zahlungsquelle = e.get('zahlungsquelle', '')
+                    if kosten != '' and zahlungsquelle:
+                        kosten_text = f"{kosten} {zahlungsquelle}"
+                    elif kosten != '':
+                        kosten_text = str(kosten)
+                    else:
+                        kosten_text = ''
+                    relevante_eintraege.append({
+                        'rang': char_rang,
+                        'typ': typ,
+                        'name': name,
+                        'kosten_text': kosten_text,
+                    })
+        else:
+            steigerungs_typen = {
+                'attribut_steigerung': 'Attribut',
+                'fertigkeit_steigerung': 'Fertigkeit',
+                'talent_hinzugefuegt': 'Talent',
+                'talent_entfernt': 'Talent',
+                'handicap_hinzugefuegt': 'Handicap',
+                'handicap_entfernt': 'Handicap',
+                'handicap_reduziert': 'Handicap',
+                'macht_hinzugefuegt': 'Macht',
+                'macht_entfernt': 'Macht',
+            }
+            relevante_eintraege = []
+            for entry in journal_entries:
+                if entry.get('type') not in steigerungs_typen:
+                    continue
                 details = entry.get('details', {})
                 entry_type = entry.get('type', '')
                 typ = steigerungs_typen.get(entry_type, '')
                 name = details.get('name', '')
-
-                # Name mit Kontext anreichern
                 if entry_type in ('attribut_steigerung', 'fertigkeit_steigerung'):
                     von = details.get('von', '')
                     nach = details.get('nach', '')
                     name = f"{name}: W{von} → W{nach}"
-                elif entry_type == 'talent_entfernt':
-                    name = f"{name} (entfernt)"
-                elif entry_type == 'handicap_entfernt':
+                elif 'entfernt' in entry_type:
                     name = f"{name} (entfernt)"
                 elif entry_type == 'handicap_reduziert':
                     name = f"{name} (reduziert)"
-                elif entry_type == 'macht_entfernt':
-                    name = f"{name} (entfernt)"
-
-                # Kosten-Text
                 kosten = details.get('kosten', details.get('punkte', ''))
                 kosten_typ = details.get('kosten_typ', '')
                 if kosten != '' and kosten_typ:
@@ -630,8 +649,21 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False, show_steigerung
                     kosten_text = str(kosten)
                 else:
                     kosten_text = ''
+                rang = entry.get('rang', '')
+                relevante_eintraege.append({
+                    'rang': rang,
+                    'typ': typ,
+                    'name': name,
+                    'kosten_text': kosten_text,
+                })
 
-                data.append([rang, typ, name, kosten_text])
+        if relevante_eintraege:
+            steigerungen_section = []
+            steigerungen_section.append(Paragraph("Steigerungen", style_heading))
+
+            data = [["Rang", "Typ", "Name", "Kosten"]]
+            for eintrag in relevante_eintraege:
+                data.append([eintrag.get('rang', ''), eintrag['typ'], eintrag['name'], eintrag['kosten_text']])
 
             steigerungen_table = Table(data, colWidths=[100, 75, 250, 100], hAlign='LEFT')
             steigerungen_table.setStyle(TableStyle(tabellen_style_commands.copy()))

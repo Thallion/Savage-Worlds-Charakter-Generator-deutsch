@@ -504,60 +504,79 @@ def _erzeuge_schilde_sektion(charakter):
 def _erzeuge_steigerungen_sektion(charakter):
     """Erzeugt die Steigerungs-Journal Sektion"""
     journal = getattr(charakter, 'steigerungs_journal', None)
-    if not journal or not isinstance(journal, dict) or not journal.get('entries'):
-        return None
-
-    journal_entries = journal['entries']
-    steigerungs_typen = {
-        'attribut_steigerung': 'Attribut',
-        'fertigkeit_steigerung': 'Fertigkeit',
-        'talent_hinzugefuegt': 'Talent',
-        'talent_entfernt': 'Talent',
-        'handicap_hinzugefuegt': 'Handicap',
-        'handicap_entfernt': 'Handicap',
-        'handicap_reduziert': 'Handicap',
-        'macht_hinzugefuegt': 'Macht',
-        'macht_entfernt': 'Macht',
-    }
-    relevante_eintraege = [e for e in journal_entries if e.get('type') in steigerungs_typen]
-
-    if not relevante_eintraege:
+    if not journal or not isinstance(journal, dict):
         return None
 
     rows = ""
-    for entry in relevante_eintraege:
-        rang = entry.get('rang', '')
-        details = entry.get('details', {})
-        entry_type = entry.get('type', '')
-        typ = steigerungs_typen.get(entry_type, '')
-        name = details.get('name', '')
+    char_rang = getattr(charakter, 'rang', '')
+    journal_entries = journal.get('entries')
+    if not journal_entries:
+        cost_entries = journal.get('cost_entries')
+        if cost_entries:
+            for e in cost_entries:
+                typ_map = {
+                    'attribut': 'Attribut',
+                    'fertigkeit': 'Fertigkeit',
+                    'talent': 'Talent',
+                    'handicap': 'Handicap',
+                    'macht': 'Macht',
+                }
+                typ = typ_map.get(e.get('typ', ''), e.get('typ', ''))
+                name = e.get('name', '')
+                wert = e.get('wert')
+                if wert and e.get('typ') in ('attribut', 'fertigkeit'):
+                    name = f"{name}: W{wert}"
+                kosten = e.get('kosten', '')
+                zahlungsquelle = e.get('zahlungsquelle', '')
+                if kosten != '' and zahlungsquelle:
+                    kosten_text = f"{kosten} {zahlungsquelle}"
+                elif kosten != '':
+                    kosten_text = str(kosten)
+                else:
+                    kosten_text = ''
+                rows += (f"<tr><td>{_esc(char_rang)}</td><td>{_esc(typ)}</td>"
+                         f"<td>{_esc(name)}</td><td>{_esc(kosten_text)}</td></tr>\n")
+    else:
+        steigerungs_typen = {
+            'attribut_steigerung': 'Attribut',
+            'fertigkeit_steigerung': 'Fertigkeit',
+            'talent_hinzugefuegt': 'Talent',
+            'talent_entfernt': 'Talent',
+            'handicap_hinzugefuegt': 'Handicap',
+            'handicap_entfernt': 'Handicap',
+            'handicap_reduziert': 'Handicap',
+            'macht_hinzugefuegt': 'Macht',
+            'macht_entfernt': 'Macht',
+        }
+        for entry in journal_entries:
+            if entry.get('type') not in steigerungs_typen:
+                continue
+            rang = entry.get('rang', '')
+            details = entry.get('details', {})
+            entry_type = entry.get('type', '')
+            typ = steigerungs_typen.get(entry_type, '')
+            name = details.get('name', '')
+            if entry_type in ('attribut_steigerung', 'fertigkeit_steigerung'):
+                von = details.get('von', '')
+                nach = details.get('nach', '')
+                name = f"{name}: W{von} → W{nach}"
+            elif 'entfernt' in entry_type:
+                name = f"{name} (entfernt)"
+            elif entry_type == 'handicap_reduziert':
+                name = f"{name} (reduziert)"
+            kosten = details.get('kosten', details.get('punkte', ''))
+            kosten_typ = details.get('kosten_typ', '')
+            if kosten != '' and kosten_typ:
+                kosten_text = f"{kosten} {kosten_typ}"
+            elif kosten != '':
+                kosten_text = str(kosten)
+            else:
+                kosten_text = ''
+            rows += (f"<tr><td>{_esc(rang)}</td><td>{_esc(typ)}</td>"
+                     f"<td>{_esc(name)}</td><td>{_esc(kosten_text)}</td></tr>\n")
 
-        # Name mit Kontext anreichern
-        if entry_type in ('attribut_steigerung', 'fertigkeit_steigerung'):
-            von = details.get('von', '')
-            nach = details.get('nach', '')
-            name = f"{name}: W{von} → W{nach}"
-        elif entry_type == 'talent_entfernt':
-            name = f"{name} (entfernt)"
-        elif entry_type == 'handicap_entfernt':
-            name = f"{name} (entfernt)"
-        elif entry_type == 'handicap_reduziert':
-            name = f"{name} (reduziert)"
-        elif entry_type == 'macht_entfernt':
-            name = f"{name} (entfernt)"
-
-        # Kosten-Text
-        kosten = details.get('kosten', details.get('punkte', ''))
-        kosten_typ = details.get('kosten_typ', '')
-        if kosten != '' and kosten_typ:
-            kosten_text = f"{kosten} {kosten_typ}"
-        elif kosten != '':
-            kosten_text = str(kosten)
-        else:
-            kosten_text = ''
-
-        rows += (f"<tr><td>{_esc(rang)}</td><td>{_esc(typ)}</td>"
-                 f"<td>{_esc(name)}</td><td>{_esc(kosten_text)}</td></tr>\n")
+    if not rows:
+        return None
 
     return f"""<h2>Steigerungen</h2>
 <table>

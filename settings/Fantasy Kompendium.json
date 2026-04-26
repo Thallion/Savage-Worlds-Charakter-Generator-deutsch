@@ -7259,6 +7259,24 @@
                 "PB": "-"
             }
         },
+        "Schwert, Langschwert": {
+            "name": "Schwert, Langschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Standardschwerter und Krummschwerter",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
         "Bastardschwert": {
             "name": "Bastardschwert",
             "kategorie": "Waffe",

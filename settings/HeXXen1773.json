@@ -3795,6 +3795,207 @@
         }
     },
     "ausruestung": {
+        "Abenteurerpaket": {
+            "name": "Abenteurerpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 11.5,
+            "kosten": 45,
+            "setting": "fantasy",
+            "beschreibung": "Rucksack, Schlafsack, Kerze, Kreide, gewöhnliche Kleidung, Feuerstein und Stahl, Wurfhaken, Laterne, Spiegel, Seil, Öl, Schaufel, Seife, 3 Fackeln, Wasserschlauch, Schleifstein, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Alchemistenpaket": {
+            "name": "Alchemistenpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 15.5,
+            "kosten": 50,
+            "setting": "fantasy",
+            "beschreibung": "Alchemistentasche, Rucksack, Feuerstein und Stahl, Schlafsack, Spiegel, Gürteltasche, Öl, Seil, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Diebespaket": {
+            "name": "Diebespaket",
+            "kategorie": "Allgemein",
+            "gewicht": 9.5,
+            "kosten": 65,
+            "setting": "fantasy",
+            "beschreibung": "Diebeswerkzeug, Rucksack, Spiegel, Feuerstein und Stahl, Gürteltasche, Wurfhaken, Seil, Krähenfüße, Sack (klein), Öl, Laterne, Wasserschlauch, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Gewölbeforscherpaket": {
+            "name": "Gewölbeforscherpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 15.5,
+            "kosten": 50,
+            "setting": "fantasy",
+            "beschreibung": "Seil, Wurfhaken, Rucksack, Feuerstein und Stahl, Hammer, Schlafsack, Brechstange, Laterne, Öl, Steigeisen, Schaufel, Wasserschläuche, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Klerikerpaket": {
+            "name": "Klerikerpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 6,
+            "kosten": 100,
+            "setting": "fantasy",
+            "beschreibung": "Heiliges Symbol, Schlafsack, Feuerstein und Stahl, Kerze, Heilertasche, Laterne, Öl, Pergament, Tinte, Feder, Rucksack, Wasserschlauch, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Magierpaket": {
+            "name": "Magierpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 8,
+            "kosten": 80,
+            "setting": "fantasy",
+            "beschreibung": "Zauberbuch, Rucksack, Schlafsack, Lampe, Feuerstein und Stahl, Tinte, Feder, Öl, Umhang, Buch, Wasserschlauch, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Söldnerpaket": {
+            "name": "Söldnerpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 12,
+            "kosten": 45,
+            "setting": "fantasy",
+            "beschreibung": "Schlafsack, Rucksack, Krähenfüße, Laterne, 1,5 l Öl, Bier (5 l), Feuerstein und Stahl, Krug, Seil, Handschellen, Wasserschlauch, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Unterhalterpaket": {
+            "name": "Unterhalterpaket",
+            "kategorie": "Allgemein",
+            "gewicht": 8,
+            "kosten": 120,
+            "setting": "fantasy",
+            "beschreibung": "Musikinstrument, Rucksack, Schlafsack, Spiegel, Tagebuch, Tinte und Federkiel, Feuerstein und Stahl, Mantel (leicht, mit Kapuze), formelle Kleidung, Verpflegung für 1 Woche, Flickzeug, Flasche Wein.",
+            "aktiv": true
+        },
+        "Wildnispaket": {
+            "name": "Wildnispaket",
+            "kategorie": "Allgemein",
+            "gewicht": 12,
+            "kosten": 36,
+            "setting": "fantasy",
+            "beschreibung": "Zelt (2 Personen), Rucksack, Seil, Schlafsack, Winterkleidung, Stiefel (schwer), Feuerstein und Stahl, Schaufel (klein), Umhang mit Kapuze, Wasserschlauch, Verpflegung für 1 Woche.",
+            "aktiv": true
+        },
+        "Schwert, Langschwert": {
+            "name": "Schwert, Langschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Standardschwerter und Krummschwerter",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schwert, Zweihandschwert": {
+            "name": "Schwert, Zweihandschwert",
+            "kategorie": "Waffe",
+            "gewicht": 3,
+            "kosten": 400,
+            "setting": "mittelalterlich",
+            "beschreibung": "Zweihändig",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W10",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Platten-Rossharnisch": {
+            "name": "Platten-Rossharnisch",
+            "kategorie": "Rüstung",
+            "gewicht": 25,
+            "kosten": 1500,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Rüstung für Pferde",
+            "aktiv": true,
+            "torso": 4,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Brustharnisch (Platte)": {
+            "name": "Brustharnisch (Platte)",
+            "kategorie": "Rüstung",
+            "gewicht": 15,
+            "kosten": 500,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwerer Plattenpanzer für den Torso",
+            "aktiv": true,
+            "torso": 4,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Armschienen (Platte)": {
+            "name": "Armschienen (Platte)",
+            "kategorie": "Rüstung",
+            "gewicht": 5,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Plattenarmschienen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 4,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Beinschienen (Platte)": {
+            "name": "Beinschienen (Platte)",
+            "kategorie": "Rüstung",
+            "gewicht": 5,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Schwere Plattenbeinschienen",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 4,
+            "kopf": 0,
+            "mindeststaerke": "W10"
+        },
+        "Schwerer Helm": {
+            "name": "Schwerer Helm",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Offener schwerer Helm",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W10"
+        },
+        "Schwerer Helm, geschlossen": {
+            "name": "Schwerer Helm, geschlossen",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 200,
+            "setting": "mittelalterlich",
+            "beschreibung": "Geschlossener schwerer Helm mit Visier. –1 auf Sicht-basierte Wahrnehmungsproben",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W10"
+        },
         "Gegengift": {
             "name": "Gegengift",
             "kategorie": "Trank",
