@@ -1828,7 +1828,15 @@ class AutoCharacterGenerator:
 
     def _save_character(self, charakter: Charakter, char_name: str, save_dir: str) -> Path:
         """Speichert den Charakter als JSON"""
-        chars_ordner = project_root / "chars" / save_dir
+        try:
+            from kivy.utils import platform as kivy_platform
+            if kivy_platform == 'android':
+                from utils.path_utils import get_chars_path
+                chars_ordner = Path(get_chars_path()) / save_dir
+            else:
+                chars_ordner = project_root / "chars" / save_dir
+        except Exception:
+            chars_ordner = project_root / "chars" / save_dir
         chars_ordner.mkdir(parents=True, exist_ok=True)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
