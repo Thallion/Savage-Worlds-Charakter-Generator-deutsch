@@ -91,17 +91,17 @@ class CharakterPersistence:
                         # Setting wurde erfolgreich aktiviert, speichere es in der Config
                         self._save_last_setting_to_config(self.active_setting_name)
             else:
-                Logger.warning("Unvollständige Charakterdaten, lade Elemente aus dem aktiven Setting")
+                Logger.info("Neues Speicherformat - Charakterdaten wurden aus der Datei geladen, "
+                           "Setting-Elemente aus dem aktiven Setting")
                 if "ausruestung" in daten:
-                    # Ausrüstung aus den Daten wiederherstellen
+                    # Ausrüstung aus den Daten wiederherstellen (Hybrid-Format)
                     self.ausruestung = temp_ausruestung
                     self.selected_waffen = temp_selected_waffen
                     self.selected_ruestungen = temp_selected_ruestungen
                     self.selected_schilde = temp_selected_schilde
                     self.selected_allgemeine_ausruestung = temp_selected_allgemeine_ausruestung
-                
-                # Aktiviere das Setting mit Merging, ohne die Ausrüstung zu laden
-                self.load_elements_from_active_setting(skip_equipment=True, merge_elements=True)
+                    # Aktiviere das Setting mit Merging, ohne die Ausrüstung zu laden
+                    self.load_elements_from_active_setting(skip_equipment=True, merge_elements=True)
             
             # Abgeleitete Werte berechnen
             self.berechne_abgeleitete_werte()
