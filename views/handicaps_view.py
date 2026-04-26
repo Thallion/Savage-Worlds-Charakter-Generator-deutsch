@@ -666,6 +666,12 @@ class HandicapsWidget(MDBoxLayout):
     only_selected_items = BooleanProperty(False)  # Neue Property für den Filter
     is_filter_expanded = BooleanProperty(True)
 
+    # Debounce-Latenz fürs Filtern beim Tippen — verhindert auf Android,
+    # dass jeder Tastendruck einen RecycleView-Refresh und damit einen
+    # Layout-Pass auslöst, der die IME-Verbindung zur Soft-Tastatur stört
+    # (Symptom: Backspace im Suchfeld bleibt wirkungslos).
+    _FILTER_DEBOUNCE_S = 0.25
+
     def __init__(self, **kwargs):
         """Initialisiert das HandicapsWidget und setzt Grundkonfiguration."""
         super().__init__(**kwargs)
@@ -712,8 +718,8 @@ class HandicapsWidget(MDBoxLayout):
             Logger.debug(f"Filter 'Nur ausgewählte Handicaps' aktiviert")
         else:
             Logger.debug(f"Filter 'Nur ausgewählte Handicaps' deaktiviert")
-        
-        self.filter_handicaps()
+
+        self._apply_filter()
 
     def _filter_handicaps_data(self, alle_handicaps, search_term, selected_stufe):
         """
@@ -779,9 +785,9 @@ class HandicapsWidget(MDBoxLayout):
         
         # Stufen extrahieren und sortieren
         self._update_stufen(alle_handicaps)
-        
-        # Handicaps filtern und anzeigen
-        self.filter_handicaps()
+
+        # Handicaps filtern und anzeigen (sofort, kein Debounce beim Init)
+        self._apply_filter()
 
     def _update_stufen(self, handicaps_dict):
         """Aktualisiert die Liste der verfügbaren Handicap-Stufen."""
@@ -802,13 +808,13 @@ class HandicapsWidget(MDBoxLayout):
             
         # RecycleView leeren
         self.ids.recycleview.data = []
-        
+
         # Stufen neu laden
         alle_handicaps = self.controller.charakter.handicaps
         self._update_stufen(alle_handicaps)
-        
-        # Filter neu anwenden
-        self.filter_handicaps()
+
+        # Filter neu anwenden (sofort, da explizite UI-Aktualisierung nach Datenänderung)
+        self._apply_filter()
 
     def toggle_sort_order(self):
         """
@@ -816,17 +822,29 @@ class HandicapsWidget(MDBoxLayout):
         Event-Handler für den Sortierbutton.
         """
         self.sort_order = 'name_desc' if self.sort_order == 'name_asc' else 'name_asc'
-        self.filter_handicaps()
+        self._apply_filter()
 
     def filter_handicaps(self, *args):
         """
-        Filtert die Handicaps basierend auf Suchtext und Kategorie.
-        Event-Handler für Änderungen an Suchtext oder Kategorie.
+        Plant das Filtern verzögert (Debounce). Wird vom on_text-Binding
+        des Suchfelds aufgerufen. Sofortige Filteranwendung erfolgt über
+        _apply_filter() direkt, um Aktionen wie Sortier-Toggle nicht zu
+        verzögern.
         """
+        existing = getattr(self, '_filter_event', None)
+        if existing is not None:
+            existing.cancel()
+        self._filter_event = Clock.schedule_once(
+            self._apply_filter, self._FILTER_DEBOUNCE_S
+        )
+
+    def _apply_filter(self, _dt=0):
+        """Eigentliche Filterlogik (synchron)."""
+        self._filter_event = None
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("HandicapsWidget: Controller oder Charakter nicht verfügbar")
             return
-            
+
         search_input = self.ids.get('search_input')
         category_label = self.ids.get('category_label')
         search_term = search_input.text.lower() if search_input else ''
@@ -834,17 +852,17 @@ class HandicapsWidget(MDBoxLayout):
 
         # Handicaps vom Modell abrufen
         alle_handicaps = self.controller.charakter.handicaps
-        
+
         # Gefilterte Liste erstellen
         filtered_data = self._filter_handicaps_data(
             alle_handicaps,
-            search_term, 
+            search_term,
             selected_stufe
         )
-        
+
         # Sortieren
         filtered_data = self._sort_handicaps_data(filtered_data)
-        
+
         # Index nach Sortierung aktualisieren
         for i, item in enumerate(filtered_data):
             item['index'] = i
@@ -852,6 +870,20 @@ class HandicapsWidget(MDBoxLayout):
         # An RecycleView übergeben
         self.ids.recycleview.data = filtered_data
         Logger.debug(f"HandicapsWidget: {len(filtered_data)} Handicaps gefiltert und sortiert")
+
+        # Fokus-Sicherheitsnetz: Der RecycleView-Refresh kann auf Android
+        # die IME-Verbindung kurz unterbrechen. Wenn das Suchfeld noch
+        # Inhalt hat, stellen wir den Fokus auf dem nächsten Frame wieder
+        # her, damit weitere Tastendrücke (insbesondere Backspace) wirken.
+        if search_input and search_input.text:
+            Clock.schedule_once(
+                lambda dt: self._restore_search_focus(search_input), 0
+            )
+
+    def _restore_search_focus(self, field):
+        """Stellt den Fokus auf dem Suchfeld wieder her, falls verloren."""
+        if field and not field.focus:
+            field.focus = True
 
     def _sort_handicaps_data(self, data):
         """
@@ -890,4 +922,4 @@ class HandicapsWidget(MDBoxLayout):
         if category_label:
             category_label.text = text
         self.menu.dismiss()
-        self.filter_handicaps()
+        self._apply_filter()

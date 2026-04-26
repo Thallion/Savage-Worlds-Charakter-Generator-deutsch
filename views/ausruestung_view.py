@@ -935,6 +935,12 @@ class AusruestungWidget(MDBoxLayout):
     only_owned_items = BooleanProperty(False)
     is_filter_expanded = BooleanProperty(True)
 
+    # Debounce-Latenz fürs Filtern beim Tippen — verhindert auf Android,
+    # dass jeder Tastendruck einen RecycleView-Refresh und damit einen
+    # Layout-Pass auslöst, der die IME-Verbindung zur Soft-Tastatur stört
+    # (Symptom: Backspace im Suchfeld bleibt wirkungslos).
+    _FILTER_DEBOUNCE_S = 0.25
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._initialize_controller()
@@ -982,7 +988,7 @@ class AusruestungWidget(MDBoxLayout):
         Event-Handler für den Button (Android Checkbox Workaround).
         """
         self.only_owned_items = not self.only_owned_items
-        self.filter_ausruestung()
+        self._apply_filter()
 
     def update_sort_option(self, option):
         """Aktualisiert die Sortieroptionen"""
@@ -992,14 +998,33 @@ class AusruestungWidget(MDBoxLayout):
             self.current_sort_option = option
             self.sort_order = 'asc'
 
-        self.filter_ausruestung()
+        self._apply_filter()
 
     def filter_ausruestung(self, *args):
-        """Filtert und sortiert die Ausrüstungsgegenstände"""
+        """
+        Plant das Filtern verzögert (Debounce gegen Fokus-Verlust auf
+        Android beim Tippen). Sofortige Filteranwendung erfolgt über
+        _apply_filter() direkt.
+        """
+        existing = getattr(self, '_filter_event', None)
+        if existing is not None:
+            existing.cancel()
+        self._filter_event = Clock.schedule_once(
+            self._apply_filter, self._FILTER_DEBOUNCE_S
+        )
+
+    def _restore_search_focus(self, field):
+        """Stellt den Fokus auf dem Suchfeld wieder her, falls verloren."""
+        if field and not field.focus:
+            field.focus = True
+
+    def _apply_filter(self, _dt=0):
+        """Filtert und sortiert die Ausrüstungsgegenstände (synchron)."""
+        self._filter_event = None
         if not self.controller or not hasattr(self.controller, 'charakter'):
             self.set_debug_message("Controller oder Charakter nicht verfügbar")
             return
-            
+
         search_input = self.ids.get('search_input')
         category_label = self.ids.get('category_label')
         search_term = search_input.text.lower() if search_input else ''
@@ -1078,14 +1103,22 @@ class AusruestungWidget(MDBoxLayout):
             # RecycleView vollständig leeren und neu befüllen
             self.ids.recycleview.data = []
             self.ids.recycleview.data = filtered_items
-            
+
             # Debug-Info
             if not filtered_items:
                 self.set_debug_message(f"Keine Ergebnisse für Suche: '{search_term}', Kategorie: '{selected_kategorie}'")
             else:
                 self.clear_debug_message()
-                
+
             Logger.debug(f"Ausrüstung gefiltert: {len(filtered_items)} Ergebnisse")
+
+            # Fokus-Sicherheitsnetz: Der RecycleView-Refresh kann auf Android
+            # die IME-Verbindung kurz unterbrechen. Bei aktivem Filtertext den
+            # Fokus auf nächstem Frame wiederherstellen.
+            if search_input and search_input.text:
+                Clock.schedule_once(
+                    lambda dt: self._restore_search_focus(search_input), 0
+                )
             
         except Exception as e:
             Logger.error(f"Fehler beim Filtern der Ausrüstung: {str(e)}", exc_info=True)
@@ -1208,9 +1241,9 @@ class AusruestungWidget(MDBoxLayout):
         # Ausrüstung abrufen und Kategorien aktualisieren
         alle_ausruestung = self.controller.charakter.ausruestung
         self._update_kategorien(alle_ausruestung)
-        
-        # Initiale Filterung
-        self.filter_ausruestung()
+
+        # Initiale Filterung (sofort, kein Debounce beim Init)
+        self._apply_filter()
 
     def _update_kategorien(self, ausruestung_dict):
         """Aktualisiert die Liste der verfügbaren Kategorien"""
@@ -1238,9 +1271,9 @@ class AusruestungWidget(MDBoxLayout):
         # Ausrüstung abrufen und Kategorien aktualisieren
         alle_ausruestung = self.controller.charakter.ausruestung
         self._update_kategorien(alle_ausruestung)
-        
-        # Filterung erneut anwenden
-        self.filter_ausruestung()
+
+        # Filterung erneut anwenden (sofort, da explizite UI-Aktualisierung nach Datenänderung)
+        self._apply_filter()
 
     def open_category_menu(self):
         """Öffnet das Kategorie-Auswahlmenü"""
@@ -1264,7 +1297,7 @@ class AusruestungWidget(MDBoxLayout):
         if category_label:
             category_label.text = text
         self.menu.dismiss()
-        self.filter_ausruestung()
+        self._apply_filter()
 
     def set_debug_message(self, message):
         """Setzt eine Debug-Nachricht im UI"""

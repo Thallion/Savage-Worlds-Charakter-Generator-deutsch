@@ -349,6 +349,12 @@ class KraefteWidget(MDBoxLayout):
     is_filter_expanded = BooleanProperty(True)
     current_mode = StringProperty("maechte")  # "maechte" oder "superkraefte"
 
+    # Debounce-Latenz fürs Filtern beim Tippen — verhindert auf Android,
+    # dass jeder Tastendruck einen RecycleView-Refresh und damit einen
+    # Layout-Pass auslöst, der die IME-Verbindung zur Soft-Tastatur stört
+    # (Symptom: Backspace im Suchfeld bleibt wirkungslos).
+    _FILTER_DEBOUNCE_S = 0.25
+
     # Mapping für Ränge, um numerische Sortierung zu ermöglichen
     RANG_MAPPING = {
         'A': 1,    # Anfänger
@@ -426,7 +432,7 @@ class KraefteWidget(MDBoxLayout):
             Logger.info(f"KraefteWidget: Modus gewechselt zu '{new_mode}'")
             self.current_mode = new_mode
             # Mächte-View wird immer angezeigt - kein UI-Umbau nötig
-            self.filter_maechte()
+            self._apply_filter()
 
     # ==================== MÄCHTE-FUNKTIONALITÄT ====================
 
@@ -436,7 +442,7 @@ class KraefteWidget(MDBoxLayout):
         Event-Handler für den Button (Android Checkbox Workaround).
         """
         self.only_selected_items = not self.only_selected_items
-        self.filter_maechte()
+        self._apply_filter()
         Logger.debug(f"Filter 'Nur ausgewählte Mächte' gesetzt auf: {self.only_selected_items}")
 
     def update_sort_option(self, option):
@@ -451,14 +457,24 @@ class KraefteWidget(MDBoxLayout):
             self.sort_order = 'asc'
 
         Logger.debug(f"Sortierung aktualisiert: {self.current_sort_option}, {self.sort_order}")
-        self.filter_maechte()
+        self._apply_filter()
 
     def filter_maechte(self, *args):
         """
-        Filtert und sortiert die Mächte.
-        Event-Handler für Änderungen am Suchtext oder Filter.
-        Funktioniert im Mächte- und Superkräfte-Modus (Kombi-Ansicht).
+        Plant das Filtern verzögert (Debounce gegen Fokus-Verlust auf
+        Android beim Tippen). Sofortige Filteranwendung erfolgt über
+        _apply_filter() direkt.
         """
+        existing = getattr(self, '_filter_event', None)
+        if existing is not None:
+            existing.cancel()
+        self._filter_event = Clock.schedule_once(
+            self._apply_filter, self._FILTER_DEBOUNCE_S
+        )
+
+    def _apply_filter(self, _dt=0):
+        """Eigentliche Filter- und Sortierlogik (synchron)."""
+        self._filter_event = None
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("MaechteWidget: Controller oder Charakter nicht verfügbar")
             return
@@ -467,7 +483,8 @@ class KraefteWidget(MDBoxLayout):
             Logger.debug("MaechteWidget: IDs noch nicht verfügbar (Post-Init?)")
             return
 
-        search_term = self.ids.search_input.text.lower()
+        search_input = self.ids.search_input
+        search_term = search_input.text.lower()
 
         alle_maechte = self.controller.charakter.maechte
 
@@ -479,6 +496,19 @@ class KraefteWidget(MDBoxLayout):
 
         self.ids.recycleview.data = filtered_data
         Logger.debug(f"Mächte gefiltert und sortiert: {len(filtered_data)} Einträge")
+
+        # Fokus-Sicherheitsnetz: Der RecycleView-Refresh kann auf Android
+        # die IME-Verbindung kurz unterbrechen. Bei aktivem Filtertext den
+        # Fokus auf nächstem Frame wiederherstellen.
+        if search_input.text:
+            Clock.schedule_once(
+                lambda dt: self._restore_search_focus(search_input), 0
+            )
+
+    def _restore_search_focus(self, field):
+        """Stellt den Fokus auf dem Suchfeld wieder her, falls verloren."""
+        if field and not field.focus:
+            field.focus = True
 
     def _filter_maechte_data(self, alle_maechte, search_term):
         """Filtert die Macht-Daten nach Suchbegriff und Auswahlstatus."""
@@ -527,7 +557,8 @@ class KraefteWidget(MDBoxLayout):
         Initialisierung nach dem Laden des Widgets.
         Wird einmalig durch Clock.schedule_once aufgerufen.
         """
-        self.filter_maechte()
+        # Sofort anwenden, kein Debounce beim Init
+        self._apply_filter()
         Logger.debug("KraefteWidget: Post-Init abgeschlossen")
 
     def refresh_widget(self):
@@ -537,7 +568,8 @@ class KraefteWidget(MDBoxLayout):
         """
         if hasattr(self.ids, 'recycleview'):
             self.ids.recycleview.data = []
-        self.filter_maechte()
+        # Sofort anwenden, da explizite UI-Aktualisierung nach Datenänderung
+        self._apply_filter()
         Logger.debug("KraefteWidget: Widget aktualisiert")
 
     # ==================== RANGPRÜFUNG ====================
