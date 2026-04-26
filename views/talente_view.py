@@ -739,6 +739,12 @@ class TalenteWidget(MDBoxLayout):
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
     only_selected_items = BooleanProperty(False)  # Property für den Filter
     only_available_talents = BooleanProperty(False)
+
+    # Debounce-Latenz fürs Filtern beim Tippen — verhindert auf Android,
+    # dass jeder Tastendruck einen RecycleView-Refresh und damit einen
+    # Layout-Pass auslöst, der die IME-Verbindung zur Soft-Tastatur stört
+    # (Symptom: Backspace im Suchfeld bleibt wirkungslos).
+    _FILTER_DEBOUNCE_S = 0.25
     is_filter_expanded = BooleanProperty(True)
 
     def __init__(self, **kwargs):
@@ -783,7 +789,7 @@ class TalenteWidget(MDBoxLayout):
         Event-Handler für den Button (Android Checkbox Workaround).
         """
         self.only_selected_items = not self.only_selected_items
-        self.filter_talente()
+        self._apply_filter()
         Logger.debug(f"Filter 'Nur ausgewählte Talente' gesetzt auf: {self.only_selected_items}")
 
     def toggle_only_available_talents(self):
@@ -918,17 +924,28 @@ class TalenteWidget(MDBoxLayout):
             self.sort_order = 'asc'
 
         Logger.debug(f"Sortierung aktualisiert: {self.current_sort_option}, {self.sort_order}")
-        self.filter_talente()
+        self._apply_filter()
 
     def filter_talente(self, *args):
         """
-        Filtert und sortiert die Talente.
-        Event-Handler für Änderungen an Suchtext oder Kategorie.
+        Plant das Filtern verzögert (Debounce gegen Fokus-Verlust auf
+        Android beim Tippen). Sofortige Filteranwendung erfolgt über
+        _apply_filter() direkt.
         """
+        existing = getattr(self, '_filter_event', None)
+        if existing is not None:
+            existing.cancel()
+        self._filter_event = Clock.schedule_once(
+            self._apply_filter, self._FILTER_DEBOUNCE_S
+        )
+
+    def _apply_filter(self, _dt=0):
+        """Eigentliche Filter- und Sortierlogik (synchron)."""
+        self._filter_event = None
         if not self.controller or not hasattr(self.controller, 'charakter'):
             Logger.error("TalenteWidget: Controller oder Charakter nicht verfügbar")
             return
-            
+
         search_input = self.ids.get('search_input')
         category_label = self.ids.get('category_label')
         search_term = search_input.text.lower() if search_input else ''
@@ -936,17 +953,17 @@ class TalenteWidget(MDBoxLayout):
 
         # Talente vom Modell abrufen
         alle_talente = self.controller.charakter.talente
-        
+
         # Gefilterte Liste erstellen
         filtered_data = self._filter_talente_data(
             alle_talente,
-            search_term, 
+            search_term,
             selected_kategorie
         )
-        
+
         # Sortieren
         filtered_data = self._sort_talente_data(filtered_data)
-        
+
         # Index nach Sortierung aktualisieren
         for i, item in enumerate(filtered_data):
             item['index'] = i
@@ -954,6 +971,19 @@ class TalenteWidget(MDBoxLayout):
         # An RecycleView übergeben
         self.ids.recycleview.data = filtered_data
         Logger.debug(f"Talente gefiltert und sortiert: {len(filtered_data)} Einträge")
+
+        # Fokus-Sicherheitsnetz: Der RecycleView-Refresh kann auf Android
+        # die IME-Verbindung kurz unterbrechen. Bei aktivem Filtertext den
+        # Fokus auf nächstem Frame wiederherstellen.
+        if search_input and search_input.text:
+            Clock.schedule_once(
+                lambda dt: self._restore_search_focus(search_input), 0
+            )
+
+    def _restore_search_focus(self, field):
+        """Stellt den Fokus auf dem Suchfeld wieder her, falls verloren."""
+        if field and not field.focus:
+            field.focus = True
 
     def _sort_talente_data(self, data):
         """
@@ -987,9 +1017,9 @@ class TalenteWidget(MDBoxLayout):
         
         # Kategorien extrahieren und sortieren
         self._update_kategorien(alle_talente)
-        
-        # Talente filtern und anzeigen
-        self.filter_talente()
+
+        # Talente filtern und anzeigen (sofort, kein Debounce beim Init)
+        self._apply_filter()
 
     def _update_kategorien(self, talente_dict):
         """Aktualisiert die Liste der verfügbaren Talent-Kategorien."""
@@ -1014,9 +1044,9 @@ class TalenteWidget(MDBoxLayout):
         # Kategorien neu laden
         alle_talente = self.controller.charakter.talente
         self._update_kategorien(alle_talente)
-        
-        # Filter neu anwenden
-        self.filter_talente()
+
+        # Filter neu anwenden (sofort, da explizite UI-Aktualisierung nach Datenänderung)
+        self._apply_filter()
 
     def open_category_menu(self):
         """
@@ -1046,4 +1076,4 @@ class TalenteWidget(MDBoxLayout):
         if category_label:
             category_label.text = text
         self.menu.dismiss()
-        self.filter_talente()
+        self._apply_filter()
