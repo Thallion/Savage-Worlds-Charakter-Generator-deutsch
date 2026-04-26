@@ -492,6 +492,7 @@ class KraefteWidget(MDBoxLayout):
                                    search_term in macht.beschreibung.lower()):
                 continue
 
+            line_color = SELECTED_LINE_COLOR if macht.ausgewaehlt else UNSELECTED_LINE_COLOR
             macht_data = {
                 'viewclass': 'MachtItemRow',
                 'macht_name': macht.name,
@@ -502,7 +503,8 @@ class KraefteWidget(MDBoxLayout):
                 'beschreibung': macht.beschreibung,
                 'effekt': macht.effekt,
                 'macht': macht,
-                'maechte_widget': self
+                'maechte_widget': self,
+                'line_color': line_color
             }
             filtered_data.append(macht_data)
 
