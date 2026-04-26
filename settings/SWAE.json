@@ -562,12 +562,56 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "AH": {
-            "name": "AH",
+        "AH (Begabt)": {
+            "name": "AH (Begabt)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
-            "beschreibung": "Erlaubt Zugriff auf die arkanen Hintergründe in Kapitel 5.",
+            "beschreibung": "Arkaner Hintergrund, Arkane Fertigkeit: Fokus (Willenskraft)",
+            "neue_maechte": 1,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "AH (Magie)": {
+            "name": "AH (Magie)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkaner Hintergrund, Arkane Fertigkeit: Zaubern (Verstand)",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "AH (Psionik)": {
+            "name": "AH (Psionik)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkaner Hintergrund, Arkane Fertigkeit: Psionik (Verstand)",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "AH (Verrückte Wissenschaft)": {
+            "name": "AH (Verrückte Wissenschaft)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkaner Hintergrund, Arkane Fertigkeit: Verrückte Wissenschaft (Verstand)",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "AH (Wunder)": {
+            "name": "AH (Wunder)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkaner Hintergrund, Arkane Fertigkeit: Glaube (Willenskraft)",
             "neue_maechte": 3,
             "machtpunkte": 10,
             "ausgewaehlt": false,
