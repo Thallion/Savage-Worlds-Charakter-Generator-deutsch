@@ -334,6 +334,8 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
 
     def _on_volk_selected(self, volk_name):
         """Wird aufgerufen wenn ein Volk ausgewählt wird"""
+        Logger.debug(f"[DEBUG] _on_volk_selected: volk_name={volk_name}, current_volk={self.current_volk}")
+
         # "Kein Volk" → sofort übernehmen
         if volk_name is None:
             self._apply_choice(None, {})
@@ -341,6 +343,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
 
         # Bereits aktives Volk → ignorieren
         if volk_name == self.current_volk:
+            Logger.debug(f"[DEBUG] _on_volk_selected: volk_name == current_volk, returning early")
             return
 
         self._selected_volk = volk_name
@@ -351,13 +354,18 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         self._zusatzelemente_info = zusatzelemente
         self._selected_extras = {}  # Zurücksetzen der gesammelten Auswahlen
 
+        Logger.debug(f"[DEBUG] _on_volk_selected: zusatzelemente={zusatzelemente}")
+
         hat_extras = (
             zusatzelemente.get('halbelf_entweder_oder', False) or
             zusatzelemente.get('menschen_vielseitig', False) or
             zusatzelemente.get('freie_talente', False) or
-            zusatzelemente.get('freie_attribute', False) or
+            bool(zusatzelemente.get('freies_attribut', False)) or
+            bool(zusatzelemente.get('freies_attribut_malus', False)) or
             zusatzelemente.get('freie_fertigkeiten', False)
         )
+
+        Logger.debug(f"[DEBUG] _on_volk_selected: hat_extras={hat_extras}")
 
         if hat_extras:
             self._phase = "extras"
@@ -370,10 +378,12 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
 
     def _build_extras_phase(self):
         """Baut die Zusatzelemente-Auswahl auf"""
+        Logger.debug(f"[DEBUG] _build_extras_phase: START")
         self._content_box.clear_widgets()
         self._title_label.text = f"{self._selected_volk} – Optionen"
 
         info = self._zusatzelemente_info
+        Logger.debug(f"[DEBUG] _build_extras_phase: info.get('freies_attribut')={info.get('freies_attribut')}")
 
         # Halbelf ENTWEDER/ODER
         if info.get('halbelf_entweder_oder', False):
@@ -459,14 +469,18 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         selected = self._selected_extras
         
         Logger.debug(f"[DEBUG] _all_extras_selected: info={info}, selected={selected}")
-        
+
         # Freie Talente
         if info.get('freie_talente', False) and 'freies_talent' not in selected:
             Logger.debug(f"[DEBUG] Freie Talente erforderlich aber nicht ausgewählt")
             return False
-        # Freie Attribute
-        if info.get('freie_attribute', False) and 'freies_attribut' not in selected:
+        # Freie Attribute (Bonus)
+        if bool(info.get('freies_attribut', False)) and 'freies_attribut' not in selected:
             Logger.debug(f"[DEBUG] Freie Attribute erforderlich aber nicht ausgewählt")
+            return False
+        # Freie Attribute (Malus)
+        if bool(info.get('freies_attribut_malus', False)) and 'freies_attribut_malus' not in selected:
+            Logger.debug(f"[DEBUG] Freie Attribut-Maluse erforderlich aber nicht ausgewählt")
             return False
         # Freie Fertigkeiten
         if info.get('freie_fertigkeiten', False) and 'freie_fertigkeit' not in selected:
@@ -559,7 +573,8 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             self._content_box.add_widget(talent_card)
         
         # Freie Attribute (falls noch nicht ausgewählt)
-        if info.get('freie_attribute', False) and 'freies_attribut' not in selected:
+        if info.get('freies_attribut', False) and 'freies_attribut' not in selected:
+            Logger.debug(f"[DEBUG] _update_extras_ui: freies_attribut=True, attribut_optionen={info.get('attribut_optionen', [])}")
             attribut_optionen = info.get('attribut_optionen', [])
             if len(attribut_optionen) <= 4:
                 self._content_box.add_widget(MDLabel(
@@ -592,7 +607,43 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                     color=self.theme_cls.surfaceContainerColor,
                 )
                 self._content_box.add_widget(attr_card)
-        
+
+        # Freie Attribut-Maluse (falls noch nicht ausgewählt)
+        if bool(info.get('freies_attribut_malus', False)) and 'freies_attribut_malus' not in selected:
+            Logger.debug(f"[DEBUG] _update_extras_ui: freies_attribut_malus=True, attribut_malus_optionen={info.get('attribut_malus_optionen', [])}")
+            malus_optionen = info.get('attribut_malus_optionen', [])
+            if malus_optionen:
+                self._content_box.add_widget(MDLabel(
+                    text="Attribut schwächen:",
+                    bold=True,
+                    adaptive_height=True,
+                    size_hint_y=None,
+                ))
+                if len(malus_optionen) <= 4:
+                    for attr in malus_optionen:
+                        attr_card = self._create_option_card(
+                            icon="arm-flex",
+                            title=f"{attr}",
+                            description=f"-1 Würfelstufe auf {attr}",
+                            on_click=lambda a=attr: self._apply_choice(
+                                self._selected_volk, {'freies_attribut_malus': a}),
+                            color=self.theme_cls.errorContainerColor if hasattr(self.theme_cls, 'errorContainerColor') else (1, 0.5, 0.5, 1),
+                        )
+                        self._content_box.add_widget(attr_card)
+                else:
+                    malus_card = self._create_option_card(
+                        icon="arm-flex",
+                        title="Attribut schwächen wählen",
+                        description=f"Wähle aus {len(malus_optionen)} Attributen",
+                        on_click=lambda: self._show_chip_selection(
+                            "Attribut schwächen:",
+                            malus_optionen,
+                            lambda attr: self._apply_choice(
+                                self._selected_volk, {'freies_attribut_malus': attr})),
+                        color=self.theme_cls.errorContainerColor if hasattr(self.theme_cls, 'errorContainerColor') else (1, 0.5, 0.5, 1),
+                    )
+                    self._content_box.add_widget(malus_card)
+
         # Freie Fertigkeiten (falls noch nicht ausgewählt)
         if info.get('freie_fertigkeiten', False) and 'freie_fertigkeit' not in selected:
             from functions.volk_funktionen import get_verfuegbare_fertigkeiten

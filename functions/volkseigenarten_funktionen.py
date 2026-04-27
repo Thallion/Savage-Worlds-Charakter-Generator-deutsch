@@ -322,11 +322,11 @@ def validiere_eigenart_auswahl(eigenart_id, eigenart_typ, aktuelle_auswahlen):
 def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
     """
     Konvertiert ausgewählte Eigenarten in das Volk.effects-Dictionary.
-    
+
     Args:
         positive_eigenarten: Liste von Eigenarten mit Auswahloptionen
         negative_eigenarten: Liste von Eigenarten mit Auswahloptionen
-        
+
     Returns:
         dict: Das effects-Dictionary für das Volk-Objekt
     """
@@ -339,7 +339,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         'handicaps': [],
         'auto_talente': []
     }
-    
+
     alle_eigenarten = []
     for e in positive_eigenarten:
         e_copy = dict(e)
@@ -349,8 +349,10 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         e_copy = dict(e)
         e_copy['typ'] = 'negativ'
         alle_eigenarten.append(e_copy)
-    
+
+    Logger.debug(f"[EIGENART_ZU_EFFEKTE] Start - {len(alle_eigenarten)} Eigenarten")
     for eigenart in alle_eigenarten:
+        Logger.debug(f"[EIGENART_ZU_EFFEKTE] Bearbeite: {eigenart.get('id')} (effekt_typ={eigenart.get('effekt_typ')})")
         effekt_typ = eigenart.get('effekt_typ', 'spezieller_effekt')
         effekt = eigenart.get('effekt', {})
         optionen = eigenart.get('optionen', None)
@@ -371,29 +373,39 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
             attribut = None
             if optionen and optionen.get('typ') == 'attribut_auswahl':
                 attribut = optionen.get('ausgewaehlt')
-            if effekt.get('attribut_wahl'):
-                effects['wahlmoeglichkeiten']['freies_attribut'] = True
+            if effekt.get('attribut_wahl') or (optionen and optionen.get('auswahl_verzoegert')):
+                if attribut:
+                    effects['wahlmoeglichkeiten']['freies_attribut'] = attribut
+                else:
+                    effects['wahlmoeglichkeiten']['freies_attribut'] = True
             if attribut:
                 effects['attribute_bonuses'][attribut] = effekt.get('attribut_bonus', 2)
-        
+
         elif effekt_typ == 'fertigkeits_bonus':
             if effekt.get('grundfertigkeit_bonus'):
                 if optionen and optionen.get('typ') == 'grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
                     if fertigkeit:
                         effects['fertigkeits_startboni'][fertigkeit] = effekt.get('grundfertigkeit_bonus', 2)
+                    elif optionen.get('auswahl_verzoegert'):
+                        effects['wahlmoeglichkeiten']['freie_grundfertigkeit'] = True
             elif effekt.get('nicht_grundfertigkeit_bonus'):
                 if optionen and optionen.get('typ') == 'nicht_grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
                     if fertigkeit:
                         effects['fertigkeits_startboni'][fertigkeit] = effekt.get('nicht_grundfertigkeit_bonus', 2)
+                    elif optionen.get('auswahl_verzoegert'):
+                        effects['wahlmoeglichkeiten']['freie_nicht_grundfertigkeit'] = True
             elif effekt.get('geschaeftssinn'):
                 effects['fertigkeits_startboni']['Überzeugen/Schätzen'] = 2
-        
+
         elif effekt_typ == 'wahlmoeglichkeit':
             for key, value in effekt.items():
                 if key == 'freies_talent':
-                    effects['wahlmoeglichkeiten']['freies_talent'] = value
+                    if optionen and optionen.get('auswahl_verzoegert'):
+                        effects['wahlmoeglichkeiten']['freies_talent'] = True
+                    else:
+                        effects['wahlmoeglichkeiten']['freies_talent'] = value
         
         elif effekt_typ == 'spezieller_effekt':
             for key, value in effekt.items():
@@ -427,10 +439,14 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
         
         elif effekt_typ == 'attribut_malus':
-            # Attributsschwäche: negatives Attribut (z.B. -2 auf gewähltes Attribut)
             attribut = None
             if optionen and optionen.get('typ') == 'attribut_auswahl':
                 attribut = optionen.get('ausgewaehlt')
+            if optionen and optionen.get('auswahl_verzoegert'):
+                if attribut:
+                    effects['wahlmoeglichkeiten']['freies_attribut_malus'] = attribut
+                else:
+                    effects['wahlmoeglichkeiten']['freies_attribut_malus'] = True
             if attribut:
                 malus = effekt.get('attribut_malus', 2)
                 effects['attribute_bonuses'][attribut] = effects['attribute_bonuses'].get(attribut, 0) - malus
@@ -476,7 +492,8 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         del effects['auto_talente']
     if not effects['handicaps']:
         del effects['handicaps']
-    
+
+    Logger.debug(f"[EIGENART_ZU_EFFEKTE] Finale effects: {effects}")
     return effects
 
 
@@ -636,7 +653,7 @@ def validiere_volk_erstellung(volk_name, positive_eigenarten, negative_eigenarte
             optionen = eigenart['optionen']
             if optionen.get('typ') in ['attribut_auswahl', 'grundfertigkeit_auswahl',
                                        'nicht_grundfertigkeit_auswahl']:
-                if not optionen.get('ausgewaehlt'):
+                if not optionen.get('ausgewaehlt') and not optionen.get('auswahl_verzoegert'):
                     fehler.append(f"Eigenart '{eigenart.get('name')}' erfordert eine Auswahl")
             elif optionen.get('typ') == 'text_eingabe':
                 if not optionen.get('ausgewaehlt'):

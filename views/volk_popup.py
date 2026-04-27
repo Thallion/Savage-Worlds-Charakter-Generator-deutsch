@@ -884,17 +884,27 @@ class VolkGeneratorWizard:
 
     def _show_optionen_dialog(self, eigenart, liste, checkbox=None):
         """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Stufen, Attribut-/Fertigkeits-Auswahl, Texteingabe).
-        Blendet das Eigenarten-Popup temporär aus um Überlappung zu vermeiden."""
+        Blendet das Eigenarten-Popup temporär aus um Überlappung zu vermeiden.
+        Wenn optionen.auswahl_verzoegert=true, wird die Auswahl verzögert - die Eigenart wird
+        nur zur Liste hinzugefügt, die eigentliche Auswahl (Attribut, Fertigkeit, etc.)
+        erfolgt später im Völker-Tab bei der Zuweisung des Volkes zum Charakter."""
         optionen = eigenart.get('optionen', {})
         typ = optionen.get('typ', '')
         eigenart_name = eigenart.get('name', eigenart.get('id', ''))
+
+        # Auswahl verzögern? Dann Eigenart nur hinzufügen, keine weiteren Dialoge
+        if optionen.get('auswahl_verzoegert'):
+            liste.append(eigenart)
+            if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+                self._eigenarten_popup.opacity = 1
+            return
 
         # Eigenarten-Popup temporär ausblenden um Überlappung zu vermeiden
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
             self._eigenarten_popup.opacity = 0
 
         def _on_cancel(dialog_ref):
-            """Abbrechen: Checkbox zuruecksetzen, Eigenart nicht hinzufuegen."""
+            """Abbrechen: Checkbox zuruecksetzen, Eigenart nicht hinzuzuegen."""
             dialog_ref.dismiss()
             if checkbox:
                 checkbox.active = False
@@ -906,14 +916,9 @@ class VolkGeneratorWizard:
             self._show_text_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
         elif typ == 'talent_auswahl':
             self._show_talent_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
-        elif typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl'):
+        elif typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl',
+                     'magieaffin_auswahl'):
             self._show_liste_optionen_dialog(eigenart, liste, checkbox, optionen, typ, eigenart_name)
-        elif typ == 'magieaffin_auswahl':
-            # Auswahl wird verzögert - erst in völker_view nach Volkauswahl
-            liste.append(eigenart)
-            # Eigenarten-Popup wieder einblenden
-            if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
-                self._eigenarten_popup.opacity = 1
         else:
             # Unbekannter Typ - einfach hinzufuegen
             liste.append(eigenart)
@@ -928,7 +933,7 @@ class VolkGeneratorWizard:
             popup_typ = getattr(self, '_eigenarten_popup_typ', None)
             self._eigenarten_popup.dismiss()
             if popup_typ:
-                Clock.schedule_once(lambda dt: self._show_eigenarten_popup(popup_typ), 0.3)
+                Clock.schedule_once(lambda dt: self._show_eigenarten_popup(popup_typ), 0.15)
 
     def _refresh_eigenarten_popup(self, eigenart_typ):
         """Schließt das Eigenarten-Popup und öffnet es neu mit aktualisierten Daten."""

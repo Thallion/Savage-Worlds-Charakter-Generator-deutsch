@@ -726,6 +726,78 @@ def waehle_freies_attribut(charakter, volk_name, attribut_name):
         return False
 
 
+def waehle_freies_attribut_malus(charakter, volk_name, attribut_name):
+    """
+    Wählt ein freies Attribut für ein Volk aus und senkt es (Malus).
+
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks
+        attribut_name: Name des zu senkenden Attributs
+
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.debug(f"Wähle freies Attribut-Malus '{attribut_name}' für Volk '{volk_name}'")
+
+        if attribut_name in [NO_ATTRIBUT_AVAILABLE_TEXT, "Keine Attribute verfügbar"]:
+            Logger.warning("Ungültiges Attribut für Malus ausgewählt")
+            return False
+
+        # Prüfen ob Attribut existiert
+        if not hasattr(charakter, 'attribute') or attribut_name not in charakter.attribute:
+            Logger.error(f"Attribut '{attribut_name}' nicht gefunden")
+            return False
+
+        attribut = charakter.attribute[attribut_name]
+        alter_wert = attribut.wert
+
+        # Attribut um einen Würfeltyp senken (W6 -> W4, etc.)
+        if alter_wert >= 10:
+            attribut.wert -= 2  # W12 -> W10
+        elif alter_wert >= 6:
+            attribut.wert -= 1  # W10 -> W8, W8 -> W6, W6 -> W4
+        else:
+            Logger.warning(f"Attribut '{attribut_name}' bereits auf W4 oder niedriger, kann nicht weiter gesenkt werden")
+            return False
+
+        Logger.info(f"Freies Attribut-Malus '{attribut_name}' für Volk '{volk_name}' von W{alter_wert} auf W{attribut.wert} gesenkt")
+
+        # Abgeleitete Werte neu berechnen
+        if hasattr(charakter, 'berechne_abgeleitete_werte'):
+            charakter.berechne_abgeleitete_werte()
+
+        # Event für UI-Update auslösen
+        if hasattr(charakter, 'dispatch'):
+            charakter.dispatch('on_charakter_change')
+
+        # Direkte Eigenschaften-View-Update erzwingen
+        try:
+            from kivy.app import App
+            from kivy.clock import Clock
+            app = App.get_running_app()
+            if hasattr(app, 'controller') and hasattr(app.controller, 'charakter'):
+                def consolidated_update_sequence(dt):
+                    try:
+                        _force_eigenschaften_update(app)
+                        _force_eigenschaften_update(app)
+                        _force_trigger_ui_refresh(app)
+                        Logger.debug("VOLK_FUNKTIONEN: Malus-Konsolidierte Update-Sequenz abgeschlossen")
+                    except Exception as e:
+                        Logger.warning(f"Malus-Konsolidierte Update-Sequenz fehlgeschlagen: {e}")
+
+                Clock.schedule_once(consolidated_update_sequence, 0)
+        except Exception as e:
+            Logger.warning(f"Direktes Eigenschaften-Update für Malus fehlgeschlagen: {e}")
+
+        return True
+
+    except Exception as e:
+        Logger.error(f"Fehler bei freier Attribut-Malus-Auswahl: {e}", exc_info=True)
+        return False
+
+
 def waehle_freie_fertigkeit(charakter, volk_name, fertigkeit_name):
     """
     Wählt eine freie Fertigkeit für ein Volk aus und erhöht sie.
@@ -998,24 +1070,31 @@ def get_volk_attribut_optionen(charakter, volk_name):
     Gibt die verfügbaren Attribut-Optionen für ein Volk zurück.
     Manche Völker haben Wahlmöglichkeiten zwischen verschiedenen Attributen.
     ERWEITERT: Support für Halbork, Halbelf und Menschen.
-    
+
     Args:
         charakter: Das Charakterobjekt
         volk_name: Name des Volks
-        
+
     Returns:
         list: Liste der verfügbaren Attribut-Optionen
     """
     try:
+        Logger.debug(f"[GET_VOLK_ATTRIBUT_OPTIONEN] Start für volk_name='{volk_name}'")
+        Logger.debug(f"[GET_VOLK_ATTRIBUT_OPTIONEN] hasattr(charakter, 'voelker')={hasattr(charakter, 'voelker')}")
+        if hasattr(charakter, 'voelker'):
+            Logger.debug(f"[GET_VOLK_ATTRIBUT_OPTIONEN] volk_name in charakter.voelker: {volk_name in charakter.voelker}")
+
         if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
             Logger.warning(f"Volk '{volk_name}' nicht gefunden bei Attribut-Optionen-Abfrage")
             return [NO_ATTRIBUT_AVAILABLE_TEXT]
-        
+
         volk = charakter.voelker[volk_name]
-        
+        Logger.debug(f"[GET_VOLK_ATTRIBUT_OPTIONEN] volk gefunden, hasattr(volk, 'effects')={hasattr(volk, 'effects')}")
+
         # Prüfe effects/wahlmoeglichkeiten für spezifische Attribut-Optionen
         if hasattr(volk, 'effects'):
             wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+            Logger.debug(f"[GET_VOLK_ATTRIBUT_OPTIONEN] wahlmoeglichkeiten = {wahlmoeglichkeiten}")
             
             # Halbork: Attribut Stärke oder Konstitution wählen
             if wahlmoeglichkeiten.get('attribut_staerke_oder_konstitution', False):
@@ -1136,14 +1215,29 @@ def get_volk_zusatzelemente(charakter, volk_name):
                 zusatzelemente['freie_talente'] = True
                 Logger.debug(f"Standard: Freie Talente verfügbar für '{volk_name}'")
         
-        # Attribut-Optionen abrufen
+        # Attribut-Optionen abrufen (für Bonus)
         attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
+        Logger.debug(f"[GET_VOLK_ZUSATZELEMENTE] attribut_optionen = {attribut_optionen}")
         if attribut_optionen and attribut_optionen != [NO_ATTRIBUT_AVAILABLE_TEXT]:
-            zusatzelemente['freie_attribute'] = True
+            zusatzelemente['freies_attribut'] = attribut_optionen[0] if attribut_optionen else True
             zusatzelemente['attribut_optionen'] = attribut_optionen
             Logger.debug(f"Attribut-Optionen verfügbar für '{volk_name}': {attribut_optionen}")
-            
-        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_verstandsfertigkeit'):
+
+        # Attribut-Malus-Optionen abrufen (separater Key)
+        if volk_name in charakter.voelker:
+            volk = charakter.voelker[volk_name]
+            if hasattr(volk, 'effects'):
+                wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
+                if wahlmoeglichkeiten.get('freies_attribut_malus', False):
+                    malus_optionen = get_volk_attribut_optionen(charakter, volk_name)
+                    if malus_optionen and malus_optionen != [NO_ATTRIBUT_AVAILABLE_TEXT]:
+                        zusatzelemente['freies_attribut_malus'] = malus_optionen[0] if malus_optionen else True
+                        zusatzelemente['attribut_malus_optionen'] = malus_optionen
+                        Logger.debug(f"Attribut-Malus-Optionen verfügbar für '{volk_name}': {malus_optionen}")
+
+        if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_verstandsfertigkeit') or \
+           hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_grundfertigkeit') or \
+           hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_nicht_grundfertigkeit'):
             zusatzelemente['freie_fertigkeiten'] = True
             Logger.debug(f"Freie Fertigkeiten verfügbar für '{volk_name}'")
 

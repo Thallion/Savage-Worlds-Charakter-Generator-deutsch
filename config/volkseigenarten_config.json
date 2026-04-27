@@ -35,13 +35,14 @@
             "name": "Anpassungsfähig",
             "kosten": 2,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk beginnt mit einem freien Anfängertalent eigener Wahl.",
+            "beschreibung": "Das Volk beginnt mit einem freien Anfängertalent eigener Wahl. Die Auswahl erfolgt nach der Volkauswahl.",
             "effekt_typ": "wahlmoeglichkeit",
             "effekt": {"freies_talent": true},
             "optionen": {
                 "typ": "talent_auswahl",
                 "beschreibung": "Wähle ein freies Anfängertalent für dieses Volk:",
-                "standard": "Aufmerksamkeit"
+                "standard": "Aufmerksamkeit",
+                "auswahl_verzoegert": true
             }
         },
         {
@@ -58,13 +59,14 @@
             "name": "Begabt",
             "kosten": 1,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk beginnt mit einer Grundfertigkeit auf W6 statt W4 (Athletik, Heimlichkeit, Überreden, Wahrnehmung, Allgemeinwissen).",
+            "beschreibung": "Das Volk beginnt mit einer Grundfertigkeit auf W6 statt W4 (Athletik, Heimlichkeit, Überreden, Wahrnehmung, Allgemeinwissen). Die Auswahl erfolgt nach der Volkauswahl.",
             "effekt_typ": "fertigkeits_bonus",
             "effekt": {"grundfertigkeit_bonus": 2},
             "optionen": {
                 "typ": "grundfertigkeit_auswahl",
                 "fertigkeiten": ["Athletik", "Heimlichkeit", "Überreden", "Wahrnehmung", "Allgemeinwissen"],
-                "standard": "Wahrnehmung"
+                "standard": "Wahrnehmung",
+                "auswahl_verzoegert": true
             }
         },
         {
@@ -131,12 +133,13 @@
             "name": "Naturtalent",
             "kosten": 1,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk beginnt mit W6 in einer Nicht-Grundfertigkeit (Athletik, Heilung, Wahrnehmung, etc.).",
+            "beschreibung": "Das Volk beginnt mit W6 in einer Nicht-Grundfertigkeit (Athletik, Heilung, Wahrnehmung, etc.). Die Auswahl erfolgt nach der Volkauswahl.",
             "effekt_typ": "fertigkeits_bonus",
             "effekt": {"nicht_grundfertigkeit_bonus": 2},
             "optionen": {
                 "typ": "nicht_grundfertigkeit_auswahl",
-                "beschreibung": "Wähle eine Nicht-Grundfertigkeit"
+                "beschreibung": "Wähle eine Nicht-Grundfertigkeit",
+                "auswahl_verzoegert": true
             }
         },
         {

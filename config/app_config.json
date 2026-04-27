@@ -14,14 +14,14 @@
   "auto_save_interval": 300,
   "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
   "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
-  "debug_mode": false,
-  "log_level": "INFO",
+  "debug_mode": true,
+  "log_level": "DEBUG",
   "max_recent_files": 10,
   "default_printer_friendly": false,
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "SWAE",
+  "last_setting": "Savage Pathfinder",
   "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-26T20:12:23.284989"
+  "last_updated": "2026-04-27T22:06:11.933119"
 }

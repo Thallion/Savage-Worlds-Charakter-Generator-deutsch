@@ -19,11 +19,14 @@
   - [x] `_increment_eigenart`, `_decrement_eigenart` Methoden
   - [x] `_refresh_eigenarten_popup` für UI-Aktualisierung
 - [x] **Schritt 2d** — `validiere_volk_erstellung`: max_auswahl pro ID Prüfung
-- [x] **Tests** — 23 Tests (14 Stufen + 9 Mehrfach)
-
-### 🔄 In Bearbeitung
-
-- [ ] **Schritt 1d** — Test-Anpassungen für `fliegen_stufe` Migration
+- [x] **Verzögerte Auswahl (Auswahl nach Volkserstellung)**:
+  - [x] Config: `auswahl_verzoegert: true` bei `attributserhoehung`, `attributserhoehung_zwei`, `attributsschwäche`, `magieaffin`
+  - [x] Config: `auswahl_verzoegert: true` bei `freies_talent`, `freie_grundfertigkeit`, `naturtalente`
+  - [x] volk_popup.py: `_show_optionen_dialog` prüft Flag und verzögert Auswahl
+  - [x] volkseigenarten_funktionen.py: Validierung ignoriert fehlende `ausgewaehlt` bei verzögerter Auswahl
+  - [x] volkseigenarten_funktionen.py: `eigenart_zu_effekte` setzt `wahlmoeglichkeiten` bei verzögerter Auswahl
+  - [x] volk_funktionen.py: `get_volk_zusatzelemente` erkennt neue Typen (`freie_grundfertigkeit`, `freie_nicht_grundfertigkeit`)
+- [x] **Tests** — 927 Tests erfolgreich
 
 ### ⏳ Offen
 
@@ -362,10 +365,11 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 1. **✅ PR 1 — Branch `claude/volkseigenarten-stufen` mergen.** (Commit `5740ec0`) — **ERLEDIGT**
 2. **✅ PR 2 — Schritt 1 Config (Stufen-Eigenarten).** (Hörner, Klauen, Regeneration, etc.) — **ERLEDIGT**
 3. **✅ PR 3 — Schritt 2 Mehrfach-UI.** Stepper-Buttons, validiere_volk_erstellung — **ERLEDIGT**
-4. **🔄 PR 4 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **IN BEARBEITUNG**
-5. **⏳ PR 5 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige, summieren statt überschreiben — **OFFEN**
-6. **⏳ PR 6 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
-7. **⏳ PR 7+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
+4. **✅ PR 4 — Verzögerte Auswahl.** `auswahl_verzoegert` in Config, `_show_optionen_dialog`, `eigenart_zu_effekte` — **ERLEDIGT**
+5. **⏳ PR 5 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **OFFEN**
+6. **⏳ PR 6 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige, summieren statt überschreiben — **OFFEN**
+7. **⏳ PR 7 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
+8. **⏳ PR 8+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
 
 ---
 

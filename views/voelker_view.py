@@ -196,6 +196,14 @@ class VoelkerWidget(MDBoxLayout):
                     waehle_freies_attribut(charakter, volk_name, attr)
                     self.voelker_auswahlen[volk_name]['attribut'] = attr
 
+                # Freies Attribut (Malus)
+                if zusatzelemente.get('freies_attribut_malus'):
+                    attr = zusatzelemente['freies_attribut_malus']
+                    Logger.info(f"[DEBUG] Rufe waehle_freies_attribut_malus auf für '{volk_name}' mit Attribut '{attr}'")
+                    from functions.volk_funktionen import waehle_freies_attribut_malus
+                    waehle_freies_attribut_malus(charakter, volk_name, attr)
+                    self.voelker_auswahlen[volk_name]['attribut_malus'] = attr
+
                 # Freie Fertigkeit
                 if zusatzelemente.get('freie_fertigkeit'):
                     fert = zusatzelemente['freie_fertigkeit']
