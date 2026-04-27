@@ -85,6 +85,12 @@ EFFEKT_TYPEN = {
         'kategorie': 'positive',
         'effekt_schema': {'fliegen': True, 'bewegungsweite_flug': 6}
     },
+    'natuerliche_waffe': {
+        'name': 'Natürliche Waffe',
+        'beschreibung': 'Eine natürliche Waffe (Hörner, Klauen, etc.)',
+        'kategorie': 'positive',
+        'effekt_schema': {}
+    },
     'freies_talent': {
         'name': 'Freies Talent',
         'beschreibung': 'Ein freies Anfängertalent',
@@ -397,7 +403,9 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                           'gesichtslos', 'niedrig', 'angeblich', 'minderwertig', 'uebergross',
                           'schwer_zu_heilen', 'leichtes_ziel', 'lahm', 'blind', 'sprachbehindert',
                           'geringe_lebenserwartung', 'kann_nicht_ertrinken', 'atmet_nicht',
-                          'immun_gifte_krankheiten', 'immun_angst', 'keine_natuerliche_heilung']:
+                          'immun_gifte_krankheiten', 'immun_angst', 'keine_natuerliche_heilung',
+                          'horn_waffe', 'klauen', 'panzerbrechend', 'giftige_beruehrung',
+                          'regeneration']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
                 elif key in ['bewegungsweite_bonus', 'robustheit_bonus', 'bewegungsweite_flug',
                              'sozialer_malus', 'athletik_malus', 'ueberreden_malus',
@@ -412,6 +420,11 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                         effects['robustheit_bonus'] += value
                     else:
                         effects[key] = value
+
+        elif effekt_typ == 'natuerliche_waffe':
+            for key, value in effekt.items():
+                if key in ['horn_waffe', 'klauen', 'panzerbrechend']:
+                    effects['spezielle_effekte'].append({'typ': key, 'wert': value})
         
         elif effekt_typ == 'attribut_malus':
             # Attributsschwäche: negatives Attribut (z.B. -2 auf gewähltes Attribut)
@@ -524,15 +537,19 @@ def eigenart_zu_besonderheiten(positive_eigenarten, negative_eigenarten):
     
     for eigenart in negative_eigenarten:
         text_parts = [f"[{eigenart.get('kosten')} EP] ", eigenart.get('name', '')]
-        
+
+        ausgewaehlte_stufe = eigenart.get('ausgewaehlte_stufe')
+        if ausgewaehlte_stufe and ausgewaehlte_stufe.get('label'):
+            text_parts.append(f": {ausgewaehlte_stufe['label']}")
+
         optionen = eigenart.get('optionen', {})
         if optionen.get('typ') == 'text_eingabe' and optionen.get('ausgewaehlt'):
             text_parts.append(f": {optionen.get('ausgewaehlt')}")
-        
+
         beschreibung = eigenart.get('beschreibung', '')
         if beschreibung:
             text_parts.append(f" ({beschreibung})")
-        
+
         besonderheiten.append(''.join(text_parts))
     
     return besonderheiten
@@ -589,8 +606,29 @@ def validiere_volk_erstellung(volk_name, positive_eigenarten, negative_eigenarte
         fehler.append(f"Nicht genug Punkte! Positive Eigenarten kosten {punktestand['positive_kosten']} Punkte, "
                      f"aber es sind nur {START_PUNKTE} + {punktestand['negative_punkte']} = "
                      f"{START_PUNKTE + punktestand['negative_punkte']} Punkte verfügbar")
-    
-    for eigenart in positive_eigenarten + negative_eigenarten:
+
+    alle_eigenarten = positive_eigenarten + negative_eigenarten
+
+    id_counts = {}
+    for e in alle_eigenarten:
+        eid = e.get('id')
+        if eid:
+            id_counts[eid] = id_counts.get(eid, 0) + 1
+
+    checked_ids = set()
+    for eigenart in alle_eigenarten:
+        eid = eigenart.get('id')
+        if eid and eid not in checked_ids:
+            checked_ids.add(eid)
+            volle = get_eigenart_by_id(eid, 'positive') or get_eigenart_by_id(eid, 'negative')
+            if volle:
+                max_aus = volle.get('max_auswahl', 1)
+                if max_aus != 0:
+                    akt_count = id_counts.get(eid, 0)
+                    if akt_count > max_aus:
+                        fehler.append(f"Eigenart '{volle.get('name', eid)}' ist {akt_count}x ausgewählt, maximal {max_aus}x erlaubt")
+
+    for eigenart in alle_eigenarten:
         if eigenart.get('stufen') and not eigenart.get('ausgewaehlte_stufe'):
             fehler.append(f"Eigenart '{eigenart.get('name')}' erfordert die Wahl einer Stufe")
 
@@ -603,7 +641,7 @@ def validiere_volk_erstellung(volk_name, positive_eigenarten, negative_eigenarte
             elif optionen.get('typ') == 'text_eingabe':
                 if not optionen.get('ausgewaehlt'):
                     warnungen.append(f"Eigenart '{eigenart.get('name')}' hat keine Beschreibung")
-    
+
     return {
         'ist_gueltig': len(fehler) == 0,
         'fehler': fehler,

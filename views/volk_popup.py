@@ -365,6 +365,8 @@ class VolkGeneratorWizard:
         if self._wizard_finished:
             return
 
+        self._eigenarten_popup_typ = eigenart_typ
+
         # Bestehendes Eigenarten-Popup schließen falls vorhanden
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
             self._eigenarten_popup.dismiss()
@@ -433,28 +435,77 @@ class VolkGeneratorWizard:
                     text=eigenart.get('beschreibung', '')
                 ))
 
-            checkbox = MDListItemTrailingCheckbox(active=aktuelle_anzahl > 0)
-            cb = checkbox
-            e_id = eigenart_id
-            e_typ = eigenart_typ
-            checkbox.bind(on_release=lambda x, cb=cb, eid=e_id, et=e_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
+            if max_auswahl == 1:
+                checkbox = MDListItemTrailingCheckbox(active=aktuelle_anzahl > 0)
+                cb = checkbox
+                e_id = eigenart_id
+                e_typ = eigenart_typ
+                checkbox.bind(on_release=lambda x, cb=cb, eid=e_id, et=e_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
 
-            # Löschen-Icon für eigene Eigenarten (nur wenn nicht aktuell ausgewählt)
-            if eigenart.get('custom') and aktuelle_anzahl == 0:
+                if eigenart.get('custom') and aktuelle_anzahl == 0:
+                    from kivymd.uix.button import MDIconButton
+                    delete_btn = MDIconButton(
+                        icon="delete",
+                        style="tonal",
+                        size_hint=(None, None),
+                        size=(dp(32), dp(32)),
+                        pos_hint={"center_y": 0.5}
+                    )
+                    del_id = eigenart_id
+                    del_typ = eigenart_typ
+                    delete_btn.bind(on_release=lambda x, did=del_id, dt=del_typ: self._delete_custom_eigenart(did, dt))
+                    list_item.add_widget(delete_btn)
+
+                list_item.add_widget(checkbox)
+            else:
                 from kivymd.uix.button import MDIconButton
-                delete_btn = MDIconButton(
-                    icon="delete",
+
+                minus_btn = MDIconButton(
+                    icon="minus",
                     style="tonal",
                     size_hint=(None, None),
-                    size=(dp(32), dp(32)),
+                    size=(dp(36), dp(36)),
                     pos_hint={"center_y": 0.5}
                 )
-                del_id = eigenart_id
-                del_typ = eigenart_typ
-                delete_btn.bind(on_release=lambda x, did=del_id, dt=del_typ: self._delete_custom_eigenart(did, dt))
-                list_item.add_widget(delete_btn)
+                minus_btn_disabled = aktuelle_anzahl == 0
+                minus_btn.disabled = minus_btn_disabled
+                e_id_dec = eigenart_id
+                e_typ_dec = eigenart_typ
+                minus_btn.bind(on_release=lambda x, eid=e_id_dec, et=e_typ_dec: self._on_stepper_minus(eid, et))
 
-            list_item.add_widget(checkbox)
+                count_label = MDLabel(
+                    text=str(aktuelle_anzahl),
+                    size_hint=(None, None),
+                    size=(dp(24), dp(24)),
+                    pos_hint={"center_y": 0.5},
+                    halign="center"
+                )
+
+                plus_btn = MDIconButton(
+                    icon="plus",
+                    style="tonal",
+                    size_hint=(None, None),
+                    size=(dp(36), dp(36)),
+                    pos_hint={"center_y": 0.5}
+                )
+                plus_btn_disabled = max_auswahl != 0 and aktuelle_anzahl >= max_auswahl
+                plus_btn.disabled = plus_btn_disabled
+                e_id_inc = eigenart_id
+                e_typ_inc = eigenart_typ
+                plus_btn.bind(on_release=lambda x, eid=e_id_inc, et=e_typ_inc: self._on_stepper_plus(eid, et))
+
+                stepper_box = MDBoxLayout(
+                    orientation="horizontal",
+                    size_hint=(None, None),
+                    size=(dp(100), dp(36)),
+                    pos_hint={"center_y": 0.5},
+                    spacing=dp(4)
+                )
+                stepper_box.add_widget(minus_btn)
+                stepper_box.add_widget(count_label)
+                stepper_box.add_widget(plus_btn)
+
+                list_item.add_widget(stepper_box)
             list_layout.add_widget(list_item)
 
         scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
@@ -746,7 +797,9 @@ class VolkGeneratorWizard:
         self.wizard_data['beschreibung'] = value
     
     def _toggle_eigenart(self, eigenart_id, eigenart_typ, active, checkbox=None):
-        """Toggle eine Eigenart-Auswahl. Bei Eigenarten mit Optionen wird ein Zwischen-Dialog gezeigt."""
+        """Toggle eine Eigenart-Auswahl. Bei Eigenarten mit Optionen wird ein Zwischen-Dialog gezeigt.
+        Für Mehrfachauswahl (max_auswahl != 1) wird diese Methode nicht verwendet - dafür
+        gibt es _increment_eigenart und _decrement_eigenart."""
         volle_eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
         if not volle_eigenart:
             return
@@ -759,19 +812,52 @@ class VolkGeneratorWizard:
         if active:
             if eigenart_id not in [e.get('id') for e in liste]:
                 eigenart_copy = dict(volle_eigenart)
-                # Deep-copy der Optionen damit jede Auswahl eigene Daten hat
                 if 'optionen' in eigenart_copy:
                     eigenart_copy['optionen'] = dict(eigenart_copy['optionen'])
 
-                # Hat die Eigenart Stufen oder Optionen? → Zwischen-Dialog zeigen.
-                # Stufen werden zuerst behandelt (sie setzen kosten/effekt aus der Stufe).
                 if eigenart_copy.get('stufen') or eigenart_copy.get('optionen'):
                     self._show_optionen_dialog(eigenart_copy, liste, checkbox)
                 else:
                     liste.append(eigenart_copy)
         else:
             self._remove_eigenart(eigenart_id, liste)
-    
+
+    def _increment_eigenart(self, eigenart_id, eigenart_typ):
+        """Fügt eine weitere Instanz der Eigenart hinzu (für Mehrfachauswahl).
+        Zeigt den Optionen-Dialog falls nötig."""
+        volle_eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
+        if not volle_eigenart:
+            return
+
+        if eigenart_typ == 'positive':
+            liste = self.positive_eigenarten
+        else:
+            liste = self.negative_eigenarten
+
+        aktuelle_anzahl = sum(1 for e in liste if e.get('id') == eigenart_id)
+        max_auswahl = volle_eigenart.get('max_auswahl', 1)
+
+        if max_auswahl != 0 and aktuelle_anzahl >= max_auswahl:
+            return
+
+        eigenart_copy = dict(volle_eigenart)
+        if 'optionen' in eigenart_copy:
+            eigenart_copy['optionen'] = dict(eigenart_copy['optionen'])
+
+        if eigenart_copy.get('stufen') or eigenart_copy.get('optionen'):
+            self._show_optionen_dialog(eigenart_copy, liste, None)
+        else:
+            liste.append(eigenart_copy)
+
+    def _decrement_eigenart(self, eigenart_id, eigenart_typ):
+        """Entfernt eine Instanz der Eigenart (für Mehrfachauswahl)."""
+        if eigenart_typ == 'positive':
+            liste = self.positive_eigenarten
+        else:
+            liste = self.negative_eigenarten
+
+        self._remove_eigenart(eigenart_id, liste)
+
     def _on_eigenart_checkbox_clicked(self, eigenart_id, eigenart_typ, checkbox):
         """Handler für Checkbox-Klick mit Debounce."""
         now = time.monotonic()
@@ -779,7 +865,23 @@ class VolkGeneratorWizard:
             return
         self._last_eigenart_toggle_time = now
         self._toggle_eigenart(eigenart_id, eigenart_typ, checkbox.active, checkbox=checkbox)
-    
+
+    def _on_stepper_plus(self, eigenart_id, eigenart_typ):
+        """Handler für Stepper +-Button mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_stepper_time') and (now - self._last_stepper_time) < 0.5:
+            return
+        self._last_stepper_time = now
+        self._increment_eigenart(eigenart_id, eigenart_typ)
+
+    def _on_stepper_minus(self, eigenart_id, eigenart_typ):
+        """Handler für Stepper --Button mit Debounce."""
+        now = time.monotonic()
+        if hasattr(self, '_last_stepper_time') and (now - self._last_stepper_time) < 0.5:
+            return
+        self._last_stepper_time = now
+        self._decrement_eigenart(eigenart_id, eigenart_typ)
+
     def _show_optionen_dialog(self, eigenart, liste, checkbox=None):
         """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Stufen, Attribut-/Fertigkeits-Auswahl, Texteingabe).
         Blendet das Eigenarten-Popup temporär aus um Überlappung zu vermeiden."""
@@ -820,9 +922,19 @@ class VolkGeneratorWizard:
                 self._eigenarten_popup.opacity = 1
 
     def _restore_eigenarten_popup(self):
-        """Blendet das Eigenarten-Popup nach Schließen eines Unter-Dialogs wieder ein."""
+        """Blendet das Eigenarten-Popup nach Schließen eines Unter-Dialogs wieder ein.
+        Das Popup wird bei Bedarf komplett neu aufgebaut um Stepper-Zähler zu aktualisieren."""
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
-            self._eigenarten_popup.opacity = 1
+            popup_typ = getattr(self, '_eigenarten_popup_typ', None)
+            self._eigenarten_popup.dismiss()
+            if popup_typ:
+                Clock.schedule_once(lambda dt: self._show_eigenarten_popup(popup_typ), 0.3)
+
+    def _refresh_eigenarten_popup(self, eigenart_typ):
+        """Schließt das Eigenarten-Popup und öffnet es neu mit aktualisierten Daten."""
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            self._eigenarten_popup.dismiss()
+            Clock.schedule_once(lambda dt: self._show_eigenarten_popup(eigenart_typ), 0.3)
 
     def _show_text_optionen_dialog(self, eigenart, liste, checkbox, optionen, eigenart_name):
         """Dialog mit Texteingabe fuer Eigenart-Optionen (z.B. Immunität, Abhängigkeit)."""

@@ -68,31 +68,16 @@
             }
         },
         {
-            "id": "fliegen_stufe1",
-            "name": "Fliegen (Einfach)",
-            "kosten": 2,
+            "id": "fliegen",
+            "name": "Fliegen",
             "max_auswahl": 1,
-            "beschreibung": "Das Volk kann fliegen mit Bewegungsweite 6''.",
+            "beschreibung": "Die Mitglieder dieses Volkes können fliegen und wie üblich für zusätzliche Bewegung sprinten. In der Luft wird mit Athletik manövriert. Schwingen können angegriffen oder behindert werden (Gebundene Charaktere können nicht fliegen).",
             "effekt_typ": "spezieller_effekt",
-            "effekt": {"fliegen": true, "bewegungsweite_flug": 6}
-        },
-        {
-            "id": "fliegen_stufe2",
-            "name": "Fliegen (Fortgeschritten)",
-            "kosten": 4,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk kann fliegen mit Bewegungsweite 12''.",
-            "effekt_typ": "spezieller_effekt",
-            "effekt": {"fliegen": true, "bewegungsweite_flug": 12}
-        },
-        {
-            "id": "fliegen_stufe3",
-            "name": "Fliegen (Meister)",
-            "kosten": 6,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk kann fliegen mit Bewegungsweite 24''.",
-            "effekt_typ": "spezieller_effekt",
-            "effekt": {"fliegen": true, "bewegungsweite_flug": 24}
+            "stufen": [
+                {"label": "Bewegungsweite 6", "kosten": 2, "effekt": {"fliegen": true, "bewegungsweite_flug": 6}},
+                {"label": "Bewegungsweite 12", "kosten": 4, "effekt": {"fliegen": true, "bewegungsweite_flug": 12}},
+                {"label": "Bewegungsweite 24, Sprint 2W6", "kosten": 6, "effekt": {"fliegen": true, "bewegungsweite_flug": 24, "sprint_wuerfel": "2W6"}}
+            ]
         },
         {
             "id": "nachtsicht",
@@ -280,6 +265,51 @@
             "beschreibung": "Das Volk ist größer als Menschen. +1 Bewegungsweite, -1 Robustheit (größeres Ziel).",
             "effekt_typ": "kombinierter_effekt",
             "effekt": {"bewegungsweite_bonus": 1, "robustheit_bonus": -1}
+        },
+        {
+            "id": "hoerner",
+            "name": "Hörner",
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat Hörner, die als natürliche Waffe eingesetzt werden können.",
+            "effekt_typ": "natuerliche_waffe",
+            "stufen": [
+                {"label": "Stärke + W4", "kosten": 1, "effekt": {"horn_waffe": "W4"}},
+                {"label": "Stärke + W6", "kosten": 2, "effekt": {"horn_waffe": "W6"}}
+            ]
+        },
+        {
+            "id": "klauen",
+            "name": "Klauen",
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat Klauen als natürliche Waffe.",
+            "effekt_typ": "natuerliche_waffe",
+            "stufen": [
+                {"label": "Stärke + W4", "kosten": 2, "effekt": {"klauen": "W4"}},
+                {"label": "Stärke + W6", "kosten": 3, "effekt": {"klauen": "W6"}},
+                {"label": "Stärke + W6, Panzerbrechend 2", "kosten": 4, "effekt": {"klauen": "W6", "panzerbrechend": 2}}
+            ]
+        },
+        {
+            "id": "regeneration",
+            "name": "Regeneration",
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk heilt schneller als normal.",
+            "effekt_typ": "spezieller_effekt",
+            "stufen": [
+                {"label": "Täglich", "kosten": 2, "effekt": {"regeneration": "taeglich"}},
+                {"label": "Inkl. permanente Verletzungen", "kosten": 3, "effekt": {"regeneration": "permanent"}}
+            ]
+        },
+        {
+            "id": "giftige_beruehrung",
+            "name": "Giftige Berührung",
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat eine giftige Berührung.",
+            "effekt_typ": "spezieller_effekt",
+            "stufen": [
+                {"label": "Leicht (Schaden)", "kosten": 1, "effekt": {"giftige_beruehrung": "leicht"}},
+                {"label": "Betäubung-tödlich-lähmend", "kosten": 3, "effekt": {"giftige_beruehrung": "betäubung_toedlich_laehmend"}}
+            ]
         }
     ],
     "negative": [
@@ -314,6 +344,17 @@
             "beschreibung": "Das Volk hat -1 Robustheit.",
             "effekt_typ": "robustheit_malus",
             "effekt": {"robustheit_bonus": -1}
+        },
+        {
+            "id": "verringerte_bewegungsweite",
+            "name": "Verringerte Bewegungsweite",
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk bewegt sich langsamer als normal.",
+            "effekt_typ": "spezieller_effekt",
+            "stufen": [
+                {"label": "-1 Bewegungsweite", "kosten": -1, "effekt": {"bewegungsweite_bonus": -1}},
+                {"label": "-2 Bewegungsweite, Athletik-Malus", "kosten": -2, "effekt": {"bewegungsweite_bonus": -2, "athletik_malus": -2}}
+            ]
         },
         {
             "id": "aussenseiter",

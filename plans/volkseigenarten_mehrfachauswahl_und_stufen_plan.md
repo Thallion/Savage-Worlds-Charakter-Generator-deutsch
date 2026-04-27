@@ -1,0 +1,396 @@
+# Plan: Mehrfachauswahl & Punkte-Stufen für Volkseigenarten
+
+## Implementierungs-Status (Checkliste)
+
+### ✅ Abgeschlossen
+
+- [x] **Schritt 1a** — Branch `claude/volkseigenarten-stufen` in `main` gemergt (Commit `5740ec0`)
+- [x] **Schritt 1b** — `fliegen` als Stufen-Eigenart (`fliegen_stufe1/2/3` konsolidiert, Commit `a335405`)
+- [x] **Schritt 1c (teilweise)** — Neue Stufen-Eigenarten in Config:
+  - [x] Hörner (Stufen: Stärke+W4/W6)
+  - [x] Klauen (Stufen: W4/W6/W6+PB2)
+  - [x] Regeneration (Stufen: täglich/permanent)
+  - [x] Giftige Berührung (Stufen: leicht/betäubend)
+  - [x] Verringerte Bewegungsweite (negative, Stufen: -1/-2 BW)
+- [x] **Schritt 2** — Mehrfachauswahl-UI mit Stepper:
+  - [x] Stepper-Buttons (+/-) bei `max_auswahl != 1`
+  - [x] Checkbox bei `max_auswahl == 1`
+  - [x] Debounce (500ms) für Touch-Events
+  - [x] `_increment_eigenart`, `_decrement_eigenart` Methoden
+  - [x] `_refresh_eigenarten_popup` für UI-Aktualisierung
+- [x] **Schritt 2d** — `validiere_volk_erstellung`: max_auswahl pro ID Prüfung
+- [x] **Tests** — 23 Tests (14 Stufen + 9 Mehrfach)
+
+### 🔄 In Bearbeitung
+
+- [ ] **Schritt 1d** — Test-Anpassungen für `fliegen_stufe` Migration
+
+### ⏳ Offen
+
+#### Schritt 2 (Rest)
+- [ ] Schritt 2a — Schema: `kosten_per_instanz` Feld (aktuell implizit)
+- [ ] Schritt 2c — Anzeige Einzel-Instanzen mit ×-Entfernen-Button in Wizard-Übersicht
+- [ ] Schritt 2e — `eigenart_zu_effekte`: gleiche Effekte summieren statt überschreiben
+
+#### Schritt 3 — Sonderfälle
+- [ ] Schritt 3a — Macht (2 + 1 je weitere), AH (Begabt) Aktivierung
+- [ ] Schritt 3b — Talent (2 + Rang), skip_prereq_check
+- [ ] Schritt 3c — Superkräfte (2 + X), Setting-Filterung
+
+#### Schritt 4 — Vollständigkeit
+- [ ] Biss, Graben, Keine lebenswichtigen Organe
+- [ ] Panzerung (3), Parade (3), Reichweite (3)
+- [ ] Größe +1 (3), Größe -1
+- [ ] Macht (Volkseigenschaft), Talent (Volk), Superkräfte
+- [ ] Wandkrabbler, Wärmesicht, Widerstand gegen Naturgewalten
+- [ ] Anfälligkeit für Naturgewalten, Volksfeind, Weniger Grundfertigkeiten
+- [ ] Kann nicht sprechen, Schlechte Parade, Zäh, Zusätzliche Aktion, Wuchtig
+
+---
+
+## Kontext
+
+Das Volkseigenarten-Punktesystem (`config/volkseigenarten_config.json` + `functions/volkseigenarten_funktionen.py` + `views/volk_popup.py`) bildet das Regelwerk aus `Texte/volksgenerierung.txt` derzeit nur unvollständig ab:
+
+- **Mehrfachauswahl** (z. B. Robustheit (3) = bis zu 3×, Attributserhöhung (U) = unbegrenzt) wird als Checkbox umgesetzt — ein zweiter Klick **entfernt** die Auswahl, statt eine zweite Instanz hinzuzufügen (`views/volk_popup.py:424`). `max_auswahl` wird zwar in der Anzeige (`(1/2)`) und der Validierung (`functions/volkseigenarten_funktionen.py:256` ff.) verwendet, aber die UI erlaubt das nicht.
+- **Punkte-Stufen** (z. B. Fliegen 2/4/6, Klauen 2/3/4) werden als getrennte Eigenarten modelliert (`fliegen_stufe1`, `fliegen_stufe2`, `fliegen_stufe3`). Das verschwendet Platz in der Liste und verhindert Wiederherstellung der Auswahl als „Stufe 2 von 3".
+- **Sonderfälle** mit gestaffelten Kosten (Macht 2+1, Talent 2+X, Superkräfte 2+X) sind gar nicht abbildbar.
+
+Das aktuelle Schema kennt nur ein einzelnes `kosten`-Feld und einen einzelnen `effekt`-Dict pro Eintrag.
+
+## Bereits implementiert (Branch `claude/volkseigenarten-stufen`, Commit `a335405`, **noch nicht in `main`**)
+
+Die Code-Seite für Schritt 1 existiert auf einem Branch, aber **kein einziger Eintrag in `config/volkseigenarten_config.json` nutzt das neue Schema**:
+
+- `functions/volkseigenarten_funktionen.py`: neue Helfer `stufen_kosten_bereich(eigenart)` und `wende_stufe_an(eigenart, stufe)`
+- `eigenart_zu_effekte` und `eigenart_zu_besonderheiten` lesen `ausgewaehlte_stufe` aus
+- `validiere_volk_erstellung` lehnt Eigenarten mit `stufen` ohne Stufenwahl ab
+- `lade_eigenarten_fuer_bearbeitung` stellt `ausgewaehlte_stufe` wieder her
+- `views/volk_popup.py`: `_show_stufen_dialog` (Radio-Stil), Anzeige `[2-6 EP]` solange keine Stufe gewählt
+- `test units/test_volkseigenarten_stufen.py`: 14 Unit-Tests
+
+**Status:** Branch ist seit dem 27.04.2026 ungemergt. Vor Schritt 2 muss er entweder gemergt oder rebase't werden.
+
+## Drei Sub-Probleme (vollständige Klassifikation aus `Texte/volksgenerierung.txt`)
+
+### A) Mehrfachauswahl ohne Optionen (begrenzt oder unbegrenzt, gleiche Kosten je Instanz)
+
+| Eigenart | max | Kosten je Instanz | Effekt je Instanz |
+|---|---|---|---|
+| Bewegungsweite (2) | 2 | 2 | +2 BW, +1 Würfeltyp Sprint |
+| Geringeres Schlafbedürfnis (2) | 2 | 1 | 1× halb, 2× nie |
+| Größe +1 (3) | 3 | 1 | +1 Robustheit, +1 max. Stärke |
+| Panzerung (3) | 3 | 1 | +2 Panzerung |
+| Parade (3) | 3 | 1 | +1 Parade |
+| Reichweite (3) | 3 | 1 | +1 Reichweite |
+| Robustheit (3) | 3 | 1 | +1 Robustheit |
+
+### B) Mehrfachauswahl mit Optionen (Auswahl je Instanz)
+
+| Eigenart | max | Kosten | Auswahl pro Instanz |
+|---|---|---|---|
+| Anfälligkeit für Naturgewalten (U) | 0 | -1 | Umgebungseffekt (Hitze, Kälte, Strahlung …) |
+| Attributserhöhung (U) | 0 | 2 | Attribut |
+| Furcht/Angst (2) | 2 | -2 | Furchtquelle |
+| Handicap (U) | 0 | -1 / -2 | Handicap-Auswahl |
+| Immunität gegen Gift oder Krankheit (2) | 2 | 1 | Gift / Krankheit |
+| Volksfeind (U) | 0 | -1 | Anderes Volk im Setting |
+| Weniger Grundfertigkeiten (5) | 5 | -1 | Eine Grundfertigkeit |
+| Widerstand gegen Naturgewalten (U) | 0 | 1 | Umgebungseffekt |
+
+### C) Punkte-Stufen (eine Auswahl, eine Stufe)
+
+| Eigenart | Stufen | Kosten | Effekte |
+|---|---|---|---|
+| Attributsabzug (1×/Attribut) | 2 | -2 / -3 | -1 Attribut / -2 Attribut |
+| Fertigkeit (1/Fert) | 2 | 1 / 2 | W4 / W6 (1 EP für Grundfert auf W6) |
+| Fertigkeitsabzug (1×/Fert) | 2 | -1 / -2 | -1/-2 / -2/-4 (häufig vs. selten) |
+| Fertigkeitsbonus (1/Fert) | 2 | 1 / 2 | +1 / +2 |
+| Fliegen (1) | 3 | 2 / 4 / 6 | BW 6 / BW 12 / BW 24 + 2W6 Sprint |
+| Giftige Berührung (1) | 2 | 1 / 3 | leicht / Betäubung-tödlich-lähmend |
+| Handicap (U, je Instanz) | 2 | -1 / -2 | leicht / schwer |
+| Hörner (1) | 2 | 1 / 2 | Stärke+W4 / Stärke+W6 |
+| Klauen (1) | 3 | 2 / 3 / 4 | W4 / W6 / W6+PB2 |
+| Regeneration (1) | 2 | 2 / 3 | täglich / +permanente Verletzungen |
+| Verringerte Bewegungsweite (1) | 2 | -1 / -2 | -1 BW / -2 BW + Athletik-Malus |
+| Wasserwesen (1) | 2 | 1 / 2 | amphibisch / heimisch |
+
+### D) Sonderfälle (Grundkosten + variable Zusatzkosten)
+
+| Eigenart | Formel | Notizen |
+|---|---|---|
+| Macht (U) | 2 + 1 je weitere | Erste Auswahl aktiviert AH (Begabt). Weitere Mächte erhöhen Mächte-Liste, **nicht** Machtpunkte. |
+| Talent (U) | 2 + Rang (0–4) | Voraussetzungen außer „andere Talente" werden ignoriert. Max. Helden-Rang. |
+| Superkräfte (1) | 2 + Punkte der gewählten Superkraft | Aktiviert AH (Superkräfte). Setting muss Superkräfte enthalten. |
+
+## Vollständigkeits-Lücken in der heutigen Config
+
+Aus den Regeln fehlen außerdem komplett (über Stufen/Mehrfach hinaus): **Biss**, **Graben**, **Keine lebenswichtigen Organe**, **Klauen**, **Macht (Volkseigenschaft)**, **Muss nicht atmen** als eigene Eigenart, **Panzerung**, **Parade**, **Reichweite**, **Springer**, **Superkräfte**, **Talent (Volk)**, **Wandkrabbler**, **Wärmesicht**, **Widerstand gegen Naturgewalten**, **Zäh**, **Zusätzliche Aktion**, **Anfälligkeit für Naturgewalten**, **Größe -1**, **Kann nicht sprechen**, **Schlechte Parade**, **Volksfeind**, **Weniger Grundfertigkeiten**, **Wuchtig**. Diese werden in Schritt 4 nachgezogen — vorgelagerte Schritte führen das Schema ein, ohne dass die Liste vollständig sein muss.
+
+## Schritt 1 — Stufen-Eigenarten in Config nachziehen (Branch ist Code-fertig)
+
+### 1a) Branch `claude/volkseigenarten-stufen` mergen
+
+Vor allen weiteren Schritten: Branch in `main` mergen (oder rebase + Merge), damit Config-Edits gegen die neuen Helfer testbar sind. Die 14 Tests müssen weiter grün sein.
+
+### 1b) Bestehende Mehrfach-Einträge konsolidieren
+
+`config/volkseigenarten_config.json`:
+- `fliegen_stufe1` / `fliegen_stufe2` / `fliegen_stufe3` zu **einer** Eigenart `fliegen` mit `stufen`-Array zusammenfassen.
+
+```json
+{
+    "id": "fliegen",
+    "name": "Fliegen",
+    "max_auswahl": 1,
+    "beschreibung": "Das Volk kann fliegen. In der Luft wird mit Athletik manövriert.",
+    "effekt_typ": "spezieller_effekt",
+    "stufen": [
+        {"label": "Bewegungsweite 6", "kosten": 2, "effekt": {"fliegen": true, "bewegungsweite_flug": 6}},
+        {"label": "Bewegungsweite 12", "kosten": 4, "effekt": {"fliegen": true, "bewegungsweite_flug": 12}},
+        {"label": "Bewegungsweite 24, Sprint 2W6", "kosten": 6, "effekt": {"fliegen": true, "bewegungsweite_flug": 24, "sprint_wuerfel": "2W6"}}
+    ]
+}
+```
+
+### 1c) Restliche Stufen-Eigenarten aus Sub-Problem C neu/konsolidiert anlegen
+
+Für jede Eigenart aus Tabelle C einen Eintrag mit `stufen`-Array anlegen. Beispiele:
+
+```json
+{"id": "klauen", "name": "Klauen", "max_auswahl": 1, "effekt_typ": "natuerliche_waffe",
+ "stufen": [
+   {"label": "Stärke + W4", "kosten": 2, "effekt": {"klauen": "W4"}},
+   {"label": "Stärke + W6", "kosten": 3, "effekt": {"klauen": "W6"}},
+   {"label": "Stärke + W6, PB 2", "kosten": 4, "effekt": {"klauen": "W6", "panzerbrechend": 2}}
+ ]
+}
+```
+
+```json
+{"id": "regeneration", "name": "Regeneration", "max_auswahl": 1, "effekt_typ": "spezieller_effekt",
+ "stufen": [
+   {"label": "Täglich", "kosten": 2, "effekt": {"regeneration": "taeglich"}},
+   {"label": "Inkl. permanente Verletzungen", "kosten": 3, "effekt": {"regeneration": "permanent"}}
+ ]
+}
+```
+
+`Hörner`, `Wasserwesen`, `Giftige Berührung`, `Verringerte Bewegungsweite`, `Attributsabzug`, `Fertigkeitsabzug`, `Handicap`, `Fertigkeit`, `Fertigkeitsbonus` analog. Achtung: **Fertigkeit / Fertigkeitsbonus / Handicap / Attributsabzug / Fertigkeitsabzug** sind sowohl Stufen- *als auch* Mehrfachauswahl-Eigenarten — die Stufe gilt pro Instanz, also bei Schritt 2 noch einmal anfassen.
+
+### 1d) Test-Anpassungen
+
+Bestehende Volk-Regressionstests, die `fliegen_stufe2` o. ä. erwarten, auf das neue ID-Schema umstellen. Wenn vorhandene Charakter-JSONs `effects.eigenarten` mit alten IDs enthalten, einen kleinen Migrationspfad in `lade_eigenarten_fuer_bearbeitung` ergänzen (alte ID → neue ID + Stufe).
+
+---
+
+## Schritt 2 — Mehrfachauswahl-UI (Sub-Probleme A + B)
+
+### 2a) Schema-Erweiterung
+
+`config/volkseigenarten_config.json`:
+
+- `max_auswahl: 0` → unbegrenzt (bereits dokumentiert, aber UI handhabt es nicht)
+- `max_auswahl: 2..N` → bis zu N Instanzen
+- Neues optionales Feld `kosten_per_instanz: true` (Default: true) — explizit machen, dass Kosten pro Instanz gelten. Für Sonderfälle (Schritt 3) wird das auf `false` gesetzt.
+
+### 2b) UI-Wechsel: Checkbox → Stepper bei `max_auswahl != 1`
+
+`views/volk_popup.py:399-446` — die Checkbox-Schleife wird so umgebaut:
+
+```
+[Robustheit                  [1 EP]    (3×) ]   [ −  2  + ]
+[Anpassungsfähig             [2 EP]         ]   [ ☐ ]      ← bleibt Checkbox
+[Attributserhöhung           [2 EP]    (U)  ]   [ −  3  + ]
+```
+
+- `+`-Button: ruft `_toggle_eigenart(eigenart_id, eigenart_typ, active=True)` auf — bei Optionen-Eigenarten öffnet sich der Optionen-Dialog (Attribut wählen etc.); bei Stufen-Eigenarten der Stufen-Dialog. Jede Bestätigung legt eine **neue Instanz** in `aktuelle_auswahl` an.
+- `−`-Button: entfernt die letzte Instanz dieser Eigenart-ID.
+- Bei `max_auswahl == 1` weiterhin Checkbox.
+- Bei `max_auswahl == 0` (`U`) ist `+` immer aktiv.
+- Bei `max_auswahl > 1` wird `+` deaktiviert (`disabled=True`), wenn `aktuelle_anzahl >= max_auswahl`.
+- Debounce 500 ms wie bei Checkboxen (siehe `CLAUDE.md`). Da wir bereits in einem Popup mit eigenem ScrollView sind, ist das OK — aber Stepper-Buttons sind nicht in `CLAUDE.md` validiert. **Risiko-Mitigation:** Falls Touch-Bounce auf Android auftritt, fallback auf das Pattern „Klick auf Zeile öffnet ein separates Stepper-Popup" (siehe Risiken).
+
+### 2c) Anzeige der Einzel-Instanzen
+
+Im Volk-Bearbeiten-View (Anzeige der gewählten Eigenarten) jede Instanz separat listen, mit individuellem `×`-Entfernen-Button:
+
+```
+Attributserhöhung — Stärke           [2 EP] [×]
+Attributserhöhung — Verstand         [2 EP] [×]
+Robustheit                           [1 EP] [×]
+Robustheit                           [1 EP] [×]
+```
+
+`eigenart_zu_besonderheiten` muss je Instanz formatiert werden (heute schon eine Liste — passt, nur eindeutige Anzeige sicherstellen).
+
+### 2d) `berechne_punktestand` & `validiere_volk_erstellung`
+
+- Schon kompatibel: liest jede Auswahl einzeln. Aber: `validiere_volk_erstellung` muss `max_auswahl` *pro ID* zählen und gegen das Limit prüfen.
+- Für Eigenarten mit Stufe + Optionen + mehrfach (z. B. `Fertigkeit (1/Fert)`): Es ist je Fertigkeit eine separate Instanz, jede Instanz hat ihre eigene Stufenwahl.
+
+### 2e) `eigenart_zu_effekte`
+
+Pro Instanz separat in `effects['eigenarten']` schreiben (heute schon der Fall). Aber: für gleichartige Effekte (z. B. 2× Robustheit = +2) muss der Aufruf zum Charakter-Effekt summieren, nicht überschreiben. `functions/volk_funktionen.py` prüfen.
+
+---
+
+## Schritt 3 — Sonderfälle (Sub-Problem D)
+
+### 3a) Macht (2 + 1 je weitere)
+
+Schema-Erweiterung in `config/volkseigenarten_config.json`:
+
+```json
+{
+    "id": "volk_macht",
+    "name": "Macht",
+    "max_auswahl": 0,
+    "kosten": 2,
+    "kosten_zusatz_je_weitere": 1,
+    "effekt_typ": "macht_volk",
+    "optionen": {"typ": "macht_auswahl"}
+}
+```
+
+`berechne_punktestand`: Sonderfall:
+
+```
+if eigenart.id == 'volk_macht':
+    kosten = 2 + max(0, anzahl - 1) * 1
+else:
+    kosten = eigenart.kosten * anzahl
+```
+
+`functions/volk_funktionen.py`: Erste Macht-Auswahl aktiviert AH (Begabt) automatisch (Pattern aus `Magieaffin`-Logik in Commit `57b4c59`). Weitere Mächte erhöhen nur Mächte-Liste — **keine zusätzlichen Machtpunkte**.
+
+UI: Optionen-Dialog `macht_auswahl` (neuer Optionen-Typ in `volk_popup.py`). Liefert eine Macht aus `models/macht.py` zurück.
+
+### 3b) Talent (2 + Rang)
+
+Schema-Erweiterung:
+
+```json
+{
+    "id": "volk_talent",
+    "name": "Talent",
+    "max_auswahl": 0,
+    "kosten": 2,
+    "kosten_zusatz_je_rang": 1,
+    "effekt_typ": "talent_volk",
+    "optionen": {"typ": "talent_rang_auswahl"}
+}
+```
+
+`berechne_punktestand`: 
+
+```
+kosten = 2 + rang  # rang 0=Anfänger, 1=Erfahren, ..., 4=Held
+```
+
+UI: Zwei-Schritt-Dialog
+1. Talent wählen (alle Voraussetzungen außer „anderes Talent" ignorieren — entspricht der `skip_prereq_check`-Variante aus `talent_funktionen.talent_auswaehlen`)
+2. Rang wählen (Anfänger / Erfahren / Veteran / Heroisch / Held)
+
+`functions/volk_funktionen.py`: Talent regulär über `talent_funktionen.talent_auswaehlen(charakter, name, skip_prereq_check=True)` aktivieren, damit AH-Talente auch via Volk-Talent funktionieren (siehe `plans/freies_volk_talent_plan.md` für die Kopplung).
+
+### 3c) Superkräfte (2 + X)
+
+Schema-Erweiterung:
+
+```json
+{
+    "id": "volk_superkraft",
+    "name": "Superkräfte",
+    "max_auswahl": 0,
+    "kosten": 2,
+    "kosten_zusatz_aus_option": "punkte_kosten",
+    "effekt_typ": "superkraft_volk",
+    "optionen": {"typ": "superkraft_auswahl"},
+    "voraussetzung": "setting_hat_superkraefte"
+}
+```
+
+`berechne_punktestand`:
+
+```
+kosten = 2 + selected_option.get('punkte_kosten', 0)
+```
+
+UI: Optionen-Dialog `superkraft_auswahl` nutzt `superkraft_funktionen.py` zum Auswählen einer Superkraft + ihrer Stufe. Liefert die Punktekosten als Bestandteil der Auswahl zurück.
+
+`functions/volk_funktionen.py`: Aktiviert AH (Superkräfte) automatisch. Eigenart ist nur in Settings sichtbar, die Superkräfte enthalten — Filterung in `lade_volkseigenarten_config()` via `voraussetzung`-Feld.
+
+---
+
+## Schritt 4 — Vollständigkeit (Folge-Issue)
+
+Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch nachziehen. Liste siehe „Vollständigkeits-Lücken" oben. Dieser Schritt baut auf Schritt 1–3 auf, weil viele dieser Eigenarten Stufen oder Mehrfachauswahl brauchen (Panzerung 3, Parade 3, Reichweite 3, Größe +1 (3), Talent (U), Macht (U), Superkräfte (1), Anfälligkeit für Naturgewalten (U), Volksfeind (U), Widerstand (U), Weniger Grundfertigkeiten (5)).
+
+---
+
+## Datei-Übersicht (alle Schritte)
+
+| Datei | Schritt | Änderung | Status |
+|---|---|---|---|
+| `config/volkseigenarten_config.json` | 1, 2, 3, 4 | `stufen`-Arrays, `kosten_per_instanz`, `kosten_zusatz_*`, neue Eigenarten | ✅ Teilweise |
+| `functions/volkseigenarten_funktionen.py` | 1, 2, 3 | `stufen_kosten_bereich`, `wende_stufe_an`, `validiere_volk_erstellung` mit Mehrfach-Limits, `EFFEKT_TYPEN` mit `natuerliche_waffe` | ✅ |
+| `views/volk_popup.py` | 1, 2, 3 | Stepper-Widget bei `max_auswahl != 1`, `_show_stufen_dialog`, `_increment/decrement_eigenart`, `_refresh_eigenarten_popup` | ✅ |
+| `functions/volk_funktionen.py` | 2, 3 | Anwendung der Mehrfach-Instanzen | ⏳ Offen |
+| `models/volk.py` | 2 | `effects['eigenarten']` ist bereits eine Liste | ⏳ Offen |
+| `test units/test_volkseigenarten_stufen.py` | 1 | 14 Tests | ✅ |
+| `test units/test_volkseigenarten_mehrfach.py` | 2 | 9 Tests | ✅ |
+| `test units/test_volkseigenarten_sonderfaelle.py` | 3 | Tests für Macht/Talent/Superkräfte | ⏳ Offen |
+
+---
+
+## Risiken & Edge Cases
+
+1. **Datenmigration alter Charaktere.** Charaktere mit altem `fliegen_stufe2` in `effects.eigenarten` müssen beim Laden auf das neue Schema (`fliegen` + `ausgewaehlte_stufe`) gemappt werden. Pfad: `lade_eigenarten_fuer_bearbeitung` mit ID-Mapping-Tabelle für die konsolidierten Eigenarten.
+2. **Backward-compat der Config.** Eigenarten ohne `stufen` müssen sich exakt wie heute verhalten (✅ in Schritt 1 schon berücksichtigt). Eigenarten ohne `kosten_zusatz_*` ebenfalls.
+3. **Stepper-Buttons auf Android.** 500ms Debounce implementiert. **⚠️ Android-Smoke-Test ausstehend** — verifizieren dass Touch-Bounce nicht zu Doppel-Increment führt.
+4. **Validierung mehrfacher Instanzen mit gleicher Option.** Beispiel: 2× „Attributserhöhung — Stärke" — die Regeln erlauben max. 1× pro Attribut. Validierung muss nicht nur `max_auswahl` sondern auch Optionen-Eindeutigkeit prüfen, wo es Sinn ergibt (Attribut, Fertigkeit, Volk bei Volksfeind).
+5. **Punkte-Anzeige im Wizard.** `formatiere_punkte_anzeige` muss Macht-Degression (2 + 1 + 1 + …) statt simpler Multiplikation berücksichtigen (Schritt 3).
+6. **Setting-Filterung Superkräfte.** Eigenart `volk_superkraft` darf nur in Settings auftauchen, die Superkräfte unterstützen. Das Setting-Feature-Flag liegt in `settings/*.json` — Lade-Filter in `lade_volkseigenarten_config()`.
+7. **Talent-Voraussetzungs-Sonderregel.** Volks-Talent (Schritt 3b) ignoriert Voraussetzungen außer „andere Talente". Das erfordert eine zusätzliche Variante zu `pruefe_voraussetzungen` oder einen Flag-Parameter (`only_talent_prereqs=True`). Konsistent mit `freies_volk_talent_plan.md` halten.
+8. **Auto-Talente / Auto-Handicaps doppelt ausgelöst.** Wenn Macht (Schritt 3a) AH (Begabt) aktiviert und der User AH (Begabt) zusätzlich als reguläres Talent wählt, darf nichts doppelt einfließen. `_apply_ah_auto_effects` ist idempotent prüfen.
+
+---
+
+## Reihenfolge & PR-Strategie
+
+1. **✅ PR 1 — Branch `claude/volkseigenarten-stufen` mergen.** (Commit `5740ec0`) — **ERLEDIGT**
+2. **✅ PR 2 — Schritt 1 Config (Stufen-Eigenarten).** (Hörner, Klauen, Regeneration, etc.) — **ERLEDIGT**
+3. **✅ PR 3 — Schritt 2 Mehrfach-UI.** Stepper-Buttons, validiere_volk_erstellung — **ERLEDIGT**
+4. **🔄 PR 4 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **IN BEARBEITUNG**
+5. **⏳ PR 5 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige, summieren statt überschreiben — **OFFEN**
+6. **⏳ PR 6 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
+7. **⏳ PR 7+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
+
+---
+
+## Verifikation
+
+### Unit-Tests
+
+Pro Schritt eigene Tests in `test units/`:
+- **Schritt 1 (vorhanden):** `test_volkseigenarten_stufen.py` — 14 Tests
+- **Schritt 2:** `test_volkseigenarten_mehrfach.py` (neu) — Mehrfach-Limit, Stepper-State, Optionen pro Instanz, gleiche Option doppelt verhindern, Punkte-Summe bei N Instanzen
+- **Schritt 3:** `test_volkseigenarten_sonderfaelle.py` (neu) — Macht-Degression (2/3/4 EP für 1/2/3 Mächte), Talent-Rang-Kosten, Superkraft-X-Aufschlag, AH-Aktivierung idempotent
+
+Voraussetzung: `python "test units/run_all_tests.py"` muss nach jedem Schritt grün sein (aktuell: 927 Tests).
+
+### Manuelle Tests
+
+- App starten (`python main.py`), Volk Editor öffnen.
+- **Schritt 1:** Fliegen wählen → Stufen-Dialog erscheint → BW 12 (4 EP) wählen → in der Liste steht „Fliegen [4 EP] · Bewegungsweite 12". Volk speichern, neu laden — Stufenwahl erhalten.
+- **Schritt 2:** Robustheit 3× wählen über Stepper → Punkte korrekt summiert (3 EP). 4. Klick disabled. Attributserhöhung 2× wählen mit verschiedenen Attributen → in der Übersicht zwei Chips „Stärke" + „Verstand".
+- **Schritt 3:** Volk-Macht 2× wählen → Punktestand 2 + 1 = 3 EP. AH (Begabt) im Charakter-View aktiviert, Mächte-Liste enthält beide gewählten Mächte, Machtpunkte unverändert von Volk-Macht.
+
+### Android-Smoke-Test
+
+Nach Schritt 2: Stepper-Buttons im Volk-Editor antippen, prüfen dass Touch-Bounce nicht zu Doppel-Increment führt. Falls ja: Mitigation aus „Risiken" Punkt 3 anwenden.
+
+### Backward-Compat-Test
+
+Ein älteres Charakter-JSON mit `effects.eigenarten` der alten Form (`fliegen_stufe2`) laden. Erwartung: lädt fehlerfrei, Eigenart wird als „Fliegen — BW 12" angezeigt, Speichern schreibt das neue Schema zurück.

@@ -99,7 +99,8 @@
       "Bash(gh search:*)",
       "Bash(git log:*)",
       "Read(//home/jean/.claude/**)",
-      "Skill(template-from-screenshot)"
+      "Skill(template-from-screenshot)",
+      "Bash(git check-ignore *)"
     ],
     "deny": []
   }

@@ -46,6 +46,7 @@ TEST_MODULE = [
     'test_leomara_korrekt',
     'test_setting_funktionen',
     'test_volkseigenarten_stufen',
+    'test_volkseigenarten_mehrfach',
     'test_superkraft_integration',
     'test_superkraft_model',
     'test_superkraft_popup',
