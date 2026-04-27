@@ -22,7 +22,6 @@ htmlcov/
 test_units/
 debug/
 privat/
-config/app_config.json
 .tox/
 .coverage
 .coverage.*
@@ -63,16 +62,11 @@ buildozer-local.spec
 *.keystore
 
 # Lokale Konfigurationsdateien
-config/
-*config*
-config.local.ini
-settings.local.json
 custom_fertigkeiten.json
 custom_handicaps.json
 custom_maechte.json
 cxfreeze.txt
 setup.py
-app_config.json
 Savage_Worlds_Abenteuer-Edition.txt
 Fantasy_Kompendium_Text.txt
 Superkraefte-Kompendium.txt
