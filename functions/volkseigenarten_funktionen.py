@@ -101,6 +101,39 @@ EFFEKT_TYPEN = {
 }
 
 
+def stufen_kosten_bereich(eigenart):
+    """
+    Gibt den (min, max) Kosten-Bereich der Stufen einer Eigenart zurück.
+    Liefert None wenn die Eigenart keine Stufen hat.
+    """
+    stufen = eigenart.get('stufen')
+    if not stufen:
+        return None
+    kosten_werte = [s.get('kosten', 0) for s in stufen if isinstance(s, dict)]
+    if not kosten_werte:
+        return None
+    return min(kosten_werte), max(kosten_werte)
+
+
+def wende_stufe_an(eigenart, stufe):
+    """
+    Übernimmt die Werte einer Stufe (kosten, effekt) in die Eigenart-Instanz und
+    speichert die Stufe als 'ausgewaehlte_stufe', damit Anzeige/Reload sie kennen.
+
+    Mutiert das übergebene eigenart-Dictionary in-place.
+
+    Args:
+        eigenart: Eigenart-Dictionary (wird modifiziert)
+        stufe: Dictionary mit 'kosten', 'effekt' und optionalem 'label'
+    """
+    if not stufe or not isinstance(stufe, dict):
+        return
+    eigenart['kosten'] = stufe.get('kosten', eigenart.get('kosten', 0))
+    if 'effekt' in stufe:
+        eigenart['effekt'] = dict(stufe['effekt'])
+    eigenart['ausgewaehlte_stufe'] = dict(stufe)
+
+
 def lade_volkseigenarten_config():
     """
     Lädt die Volkseigenarten-Konfiguration aus der JSON-Datei.
@@ -315,14 +348,18 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         effekt_typ = eigenart.get('effekt_typ', 'spezieller_effekt')
         effekt = eigenart.get('effekt', {})
         optionen = eigenart.get('optionen', None)
-        
-        effects['eigenarten'].append({
+
+        eintrag = {
             'id': eigenart.get('id'),
             'name': eigenart.get('name'),
             'typ': eigenart.get('typ'),
             'kosten': eigenart.get('kosten'),
-            'beschreibung': eigenart.get('beschreibung')
-        })
+            'beschreibung': eigenart.get('beschreibung'),
+        }
+        # Stufen-Auswahl persistieren, damit die Stufe nach Reload erhalten bleibt
+        if eigenart.get('ausgewaehlte_stufe'):
+            eintrag['ausgewaehlte_stufe'] = eigenart['ausgewaehlte_stufe']
+        effects['eigenarten'].append(eintrag)
         
         if effekt_typ == 'attribut_bonus':
             attribut = None
@@ -445,13 +482,18 @@ def eigenart_zu_besonderheiten(positive_eigenarten, negative_eigenarten):
     
     for eigenart in positive_eigenarten:
         text_parts = [eigenart.get('name', '')]
-        
-        if eigenart.get('effekt_typ') == 'attribut_bonus':
+
+        # Stufen-Eigenart: zeige das Label der gewählten Stufe
+        ausgewaehlte_stufe = eigenart.get('ausgewaehlte_stufe')
+        if ausgewaehlte_stufe and ausgewaehlte_stufe.get('label'):
+            text_parts.append(f": {ausgewaehlte_stufe['label']}")
+
+        elif eigenart.get('effekt_typ') == 'attribut_bonus':
             optionen = eigenart.get('optionen', {})
             if optionen.get('typ') == 'attribut_auswahl':
                 ausgewaehlt = optionen.get('ausgewaehlt', optionen.get('standard', 'einem Attribut'))
                 text_parts.append(f": +1 auf {ausgewaehlt}")
-        
+
         elif eigenart.get('effekt_typ') == 'fertigkeits_bonus':
             optionen = eigenart.get('optionen', {})
             if optionen.get('typ') == 'grundfertigkeit_auswahl':
@@ -460,17 +502,17 @@ def eigenart_zu_besonderheiten(positive_eigenarten, negative_eigenarten):
             elif optionen.get('typ') == 'nicht_grundfertigkeit_auswahl':
                 ausgewaehlt = optionen.get('ausgewaehlt', 'einer Fertigkeit')
                 text_parts.append(f": W6 in {ausgewaehlt}")
-        
+
         elif eigenart.get('effekt', {}).get('fliegen'):
             bewegung = eigenart.get('effekt', {}).get('bewegungsweite_flug', 6)
             text_parts.append(f": Flug {bewegung}\"")
-        
+
         elif eigenart.get('effekt', {}).get('nachtsicht'):
             text_parts.append(": Nachtsicht")
-        
+
         elif eigenart.get('effekt', {}).get('untot'):
             text_parts.append(": Untot")
-        
+
         elif eigenart.get('effekt', {}).get('konstrukt'):
             text_parts.append(": Konstrukt")
         
@@ -549,6 +591,9 @@ def validiere_volk_erstellung(volk_name, positive_eigenarten, negative_eigenarte
                      f"{START_PUNKTE + punktestand['negative_punkte']} Punkte verfügbar")
     
     for eigenart in positive_eigenarten + negative_eigenarten:
+        if eigenart.get('stufen') and not eigenart.get('ausgewaehlte_stufe'):
+            fehler.append(f"Eigenart '{eigenart.get('name')}' erfordert die Wahl einer Stufe")
+
         if eigenart.get('optionen'):
             optionen = eigenart['optionen']
             if optionen.get('typ') in ['attribut_auswahl', 'grundfertigkeit_auswahl',
@@ -610,7 +655,12 @@ def lade_eigenarten_fuer_bearbeitung(volk_dict):
                 'effekt': {},
                 'optionen': None
             }
-        
+
+        # Persistierte Stufen-Auswahl wiederherstellen (sowohl kosten als auch effekt)
+        gespeicherte_stufe = eigenart.get('ausgewaehlte_stufe')
+        if gespeicherte_stufe and eigenart_data.get('stufen'):
+            wende_stufe_an(eigenart_data, gespeicherte_stufe)
+
         if eigenart_typ == 'positiv':
             positive_eigenarten.append(eigenart_data)
         else:
