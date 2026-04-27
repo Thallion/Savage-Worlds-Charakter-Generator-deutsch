@@ -6,13 +6,95 @@ ERWEITERT: Spezielle Behandlung für Menschen - nur ein freies Attribut gleichze
 """
 
 import logging
+import re
 from kivy.logger import Logger
 
 # Konstanten
 DEFAULT_TALENT_TEXT = 'Wähle ein freies Talent'
-DEFAULT_ATTRIBUT_TEXT = 'Wähle ein Attribut'  
+DEFAULT_ATTRIBUT_TEXT = 'Wähle ein Attribut'
 DEFAULT_FERTIGKEIT_TEXT = 'Wähle eine Fertigkeit'
 NO_TALENT_AVAILABLE_TEXT = 'Keine freien Talente verfügbar'
+
+# Matcht "Arkane Fertigkeit: Glaube (Willenskraft)" oder
+# "...erhält die arkane Fertigkeit Glaube (Willenskraft) und beginnt..."
+_ARKANE_FERTIGKEIT_PATTERN = re.compile(
+    r"arkane Fertigkeit:?\s+(.+?)\s*\(", re.IGNORECASE
+)
+_VORAUSSETZUNG_WUERFEL_PATTERN = re.compile(r"^(.+?)\s+W\d+\+?$")
+
+# Whitelist bekannter arkaner Fertigkeiten (über alle Settings hinweg).
+# Wird genutzt um aus den Voraussetzungen die richtige Fertigkeit zu erkennen,
+# ohne andere Skill-Voraussetzungen (z.B. "Glücksspiel W6+") fälschlich zu wählen.
+_BEKANNTE_ARKANE_FERTIGKEITEN = {
+    'Glaube', 'Zaubern', 'Fokus', 'Psionik', 'Hexerei',
+    'Verrückte Wissenschaft', 'Alchemie', 'Darbietung',
+    'Heldenmagie', 'Runenmagie',
+}
+
+# Hartkodierter Fallback für die Standard-AH-Talente (SWAE-Basis).
+# Nur als letzte Reserve, wenn weder Beschreibung noch Voraussetzungen die
+# Arkane Fertigkeit eindeutig liefern.
+_AH_FERTIGKEIT_FALLBACK = {
+    'AH (Wunder)': 'Glaube',
+    'AH (Magie)': 'Zaubern',
+    'AH (Psionik)': 'Psionik',
+    'AH (Begabt)': 'Fokus',
+    'AH (Verrückte Wissenschaft)': 'Verrückte Wissenschaft',
+}
+
+
+def _ist_ah_talent(talent_name: str) -> bool:
+    """Prüft ob ein Talentname ein Arkaner Hintergrund (AH) Variante ist."""
+    if not talent_name:
+        return False
+    return talent_name.startswith("AH (") or talent_name.startswith("AH:")
+
+
+def _fertigkeit_aus_voraussetzungen(voraussetzungen):
+    """Sucht in den Talent-Voraussetzungen nach einer bekannten Arkanen Fertigkeit.
+    Berücksichtigt auch komma-separierte Voraussetzungs-Strings."""
+    if not voraussetzungen:
+        return None
+
+    eintraege = []
+    for v in voraussetzungen:
+        if isinstance(v, str):
+            eintraege.extend(part.strip() for part in v.split(','))
+
+    for eintrag in eintraege:
+        match = _VORAUSSETZUNG_WUERFEL_PATTERN.match(eintrag)
+        if not match:
+            continue
+        name = match.group(1).strip()
+        if name in _BEKANNTE_ARKANE_FERTIGKEITEN:
+            return name
+    return None
+
+
+def extrahiere_arkane_fertigkeit_aus_ah(talent):
+    """
+    Ermittelt die Arkane Fertigkeit eines AH-Talents anhand mehrerer Quellen:
+    1. Beschreibung ("Arkane Fertigkeit: X" oder "...erhält die arkane Fertigkeit X (...)")
+    2. Voraussetzungen mit Whitelist bekannter Arkaner Fertigkeiten
+    3. Hartkodierter Fallback für die SWAE-Standard-AHs
+
+    Returns:
+        str oder None: Name der Arkanen Fertigkeit
+    """
+    if not talent:
+        return None
+
+    beschreibung = getattr(talent, 'beschreibung', '') or ''
+    match = _ARKANE_FERTIGKEIT_PATTERN.search(beschreibung)
+    if match:
+        return match.group(1).strip()
+
+    fertigkeit = _fertigkeit_aus_voraussetzungen(getattr(talent, 'voraussetzungen', None))
+    if fertigkeit:
+        return fertigkeit
+
+    talent_name = getattr(talent, 'name', '') or ''
+    return _AH_FERTIGKEIT_FALLBACK.get(talent_name)
 NO_ATTRIBUT_AVAILABLE_TEXT = 'Keine Attribute verfügbar'
 NO_FERTIGKEIT_AVAILABLE_TEXT = 'Keine Fertigkeiten verfügbar'
 
@@ -705,29 +787,42 @@ def waehle_freie_fertigkeit(charakter, volk_name, fertigkeit_name):
         return False
 
 
-def waehle_magieaffin_fertigkeit(charakter, volk_name, fertigkeit_name):
+def waehle_magieaffin_fertigkeit(charakter, volk_name, ah_talent_name):
     """
-    Wählt eine Arkane Fertigkeit für Magieaffin aus und erhöht sie.
-    Setzt auch das freie Arkaner-Hintergrund-Talent (AH).
+    Wählt einen Arkanen Hintergrund (AH) für Magieaffin aus.
+    Setzt das gewählte AH-Talent und erhöht die in der Talent-Beschreibung
+    angegebene Arkane Fertigkeit von W4-2 auf W4+0.
 
     Args:
         charakter: Das Charakterobjekt
         volk_name: Name des Volks
-        fertigkeit_name: Name der Arkanen Fertigkeit (Glaube/Zaubern/Fokus/Psionik)
+        ah_talent_name: Name des AH-Talents (z.B. "AH (Wunder)")
 
     Returns:
         bool: True bei Erfolg, False bei Fehler
     """
     try:
-        Logger.debug(f"Wähle Magieaffin-Arkane Fertigkeit '{fertigkeit_name}' für Volk '{volk_name}'")
-
-        ARKANE_FERTIGKEITEN = ["Glaube", "Zaubern", "Fokus", "Psionik"]
-        if fertigkeit_name not in ARKANE_FERTIGKEITEN:
-            Logger.warning(f"Ungültige Arkane Fertigkeit für Magieaffin: '{fertigkeit_name}'")
-            return False
+        Logger.debug(f"Wähle Magieaffin-AH '{ah_talent_name}' für Volk '{volk_name}'")
 
         if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
             Logger.error(f"Volk '{volk_name}' nicht gefunden")
+            return False
+
+        if not hasattr(charakter, 'talente') or ah_talent_name not in charakter.talente:
+            Logger.warning(f"AH-Talent '{ah_talent_name}' nicht im Charakter")
+            return False
+
+        ah_talent = charakter.talente[ah_talent_name]
+        if not _ist_ah_talent(ah_talent_name):
+            Logger.warning(f"Talent '{ah_talent_name}' ist kein AH-Talent")
+            return False
+
+        fertigkeit_name = extrahiere_arkane_fertigkeit_aus_ah(ah_talent)
+        if not fertigkeit_name:
+            Logger.warning(
+                f"Konnte Arkane Fertigkeit nicht aus '{ah_talent_name}' "
+                f"extrahieren (Beschreibung: {getattr(ah_talent, 'beschreibung', '')!r})"
+            )
             return False
 
         volk = charakter.voelker[volk_name]
@@ -738,8 +833,8 @@ def waehle_magieaffin_fertigkeit(charakter, volk_name, fertigkeit_name):
         # Arkane Fertigkeit erhöhen: W4-2 -> W4+0 (Nicht-Grundfertigkeit)
         if fertigkeit_name in charakter.fertigkeiten:
             fertigkeit = charakter.fertigkeiten[fertigkeit_name]
-            alter_modifier = getattr(fertigkeit, 'modifier', 0)
             if hasattr(fertigkeit, 'wuerfel') and hasattr(fertigkeit.wuerfel, 'modifier'):
+                alter_modifier = fertigkeit.wuerfel.modifier
                 fertigkeit.wuerfel.modifier = 0  # W4-2 -> W4+0
                 Logger.info(f"Magieaffin: '{fertigkeit_name}' von W4{alter_modifier:+d} auf W4+0 erhöht")
             else:
@@ -747,19 +842,18 @@ def waehle_magieaffin_fertigkeit(charakter, volk_name, fertigkeit_name):
         else:
             Logger.warning(f"Magieaffin: Fertigkeit '{fertigkeit_name}' nicht im Charakter gefunden")
 
-        # Magieaffin-Auswahl im Volk speichern
+        # Magieaffin-Auswahl im Volk speichern (sowohl AH-Talent als auch Fertigkeit)
         if 'magieaffin_auswahl' not in volk.effects:
             volk.effects['magieaffin_auswahl'] = {}
+        volk.effects['magieaffin_auswahl']['ah_talent'] = ah_talent_name
         volk.effects['magieaffin_auswahl']['fertigkeit'] = fertigkeit_name
 
-        # Arkaner-Hintergrund-Talent (AH) automatisch auswählen
-        if 'Arkaner Hintergrund' in charakter.talente:
-            ah_talent = charakter.talente['Arkaner Hintergrund']
-            if not ah_talent.ausgewaehlt:
-                ah_talent.ausgewaehlt = True
-                if 'Arkaner Hintergrund' not in charakter.selected_talente:
-                    charakter.selected_talente.append('Arkaner Hintergrund')
-                Logger.info(f"Magieaffin: 'Arkaner Hintergrund' Talent automatisch ausgewählt")
+        # Gewähltes AH-Talent automatisch auswählen
+        if not ah_talent.ausgewaehlt:
+            ah_talent.ausgewaehlt = True
+            if ah_talent_name not in charakter.selected_talente:
+                charakter.selected_talente.append(ah_talent_name)
+            Logger.info(f"Magieaffin: AH-Talent '{ah_talent_name}' automatisch ausgewählt")
 
         # Abgeleitete Werte neu berechnen
         if hasattr(charakter, 'berechne_abgeleitete_werte'):
@@ -793,43 +887,68 @@ def waehle_magieaffin_fertigkeit(charakter, volk_name, fertigkeit_name):
 
 
 def _reset_magieaffin(charakter, volk_name):
-    """Setzt die Magieaffin-Auswahl zurück."""
+    """Setzt die Magieaffin-Auswahl zurück (AH-Talent abwählen, Fertigkeit auf W4-2)."""
     try:
         if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
             return
 
         volk = charakter.voelker[volk_name]
-        alte_auswahl = volk.effects.get('magieaffin_auswahl', {}).get('fertigkeit')
+        auswahl = volk.effects.get('magieaffin_auswahl', {})
+        alte_fertigkeit = auswahl.get('fertigkeit')
+        altes_ah_talent = auswahl.get('ah_talent')
 
-        if not alte_auswahl:
+        if not alte_fertigkeit and not altes_ah_talent:
             return
 
-        Logger.info(f"Setze Magieaffin-Auswahl '{alte_auswahl}' zurück für Volk '{volk_name}'")
+        Logger.info(
+            f"Setze Magieaffin zurück für Volk '{volk_name}' "
+            f"(AH={altes_ah_talent!r}, Fertigkeit={alte_fertigkeit!r})"
+        )
 
         # Arkane Fertigkeit zurücksetzen: W4+0 -> W4-2
-        if alte_auswahl in charakter.fertigkeiten:
-            fertigkeit = charakter.fertigkeiten[alte_auswahl]
+        if alte_fertigkeit and alte_fertigkeit in charakter.fertigkeiten:
+            fertigkeit = charakter.fertigkeiten[alte_fertigkeit]
             if hasattr(fertigkeit, 'wuerfel') and hasattr(fertigkeit.wuerfel, 'modifier'):
                 if fertigkeit.wuerfel.modifier == 0:
                     fertigkeit.wuerfel.modifier = -2
-                    Logger.debug(f"Magieaffin: '{alte_auswahl}' von W4+0 auf W4-2 zurückgesetzt")
+                    Logger.debug(f"Magieaffin: '{alte_fertigkeit}' von W4+0 auf W4-2 zurückgesetzt")
 
-        # Arkaner-Hintergrund-Talent entfernen falls durch Magieaffin gesetzt
-        if 'Arkaner Hintergrund' in charakter.talente:
-            ah_talent = charakter.talente['Arkaner Hintergrund']
-            if ah_talent.ausgewaehlt and 'Arkaner Hintergrund' in charakter.selected_talente:
+        # AH-Talent abwählen (entweder das gespeicherte oder Fallback auf das generische)
+        ziel_talent = altes_ah_talent or 'Arkaner Hintergrund'
+        if ziel_talent in charakter.talente:
+            ah_talent = charakter.talente[ziel_talent]
+            if ah_talent.ausgewaehlt and ziel_talent in charakter.selected_talente:
                 ah_talent.ausgewaehlt = False
-                charakter.selected_talente.remove('Arkaner Hintergrund')
-                Logger.debug(f"Magieaffin: 'Arkaner Hintergrund' Talent entfernt")
+                charakter.selected_talente.remove(ziel_talent)
+                Logger.debug(f"Magieaffin: AH-Talent '{ziel_talent}' entfernt")
 
     except Exception as e:
         Logger.error(f"Fehler beim Zurücksetzen von Magieaffin: {e}")
 
 
 def get_magieaffin_optionen(charakter, volk_name):
-    """Gibt die verfügbaren Arkanen Fertigkeiten für Magieaffin zurück."""
-    ARKANE_FERTIGKEITEN = ["Glaube", "Zaubern", "Fokus", "Psionik"]
-    return ARKANE_FERTIGKEITEN
+    """
+    Gibt die für Magieaffin verfügbaren Arkanen Hintergrund Talente (AH) zurück.
+    Jedes AH-Talent legt seine Arkane Fertigkeit selbst fest (z.B. AH (Wunder) -> Glaube).
+
+    Returns:
+        list: Liste von Tupeln (ah_talent_name, arkane_fertigkeit_name), alphabetisch sortiert
+    """
+    if not hasattr(charakter, 'talente') or not charakter.talente:
+        return []
+
+    ah_talente = []
+    for name, talent in charakter.talente.items():
+        if not _ist_ah_talent(name):
+            continue
+        if not getattr(talent, 'aktiv', True):
+            continue
+        fertigkeit = extrahiere_arkane_fertigkeit_aus_ah(talent)
+        if fertigkeit:
+            ah_talente.append((name, fertigkeit))
+
+    ah_talente.sort(key=lambda x: x[0])
+    return ah_talente
 
 
 def get_aktuelle_magieaffin_fertigkeit(charakter, volk_name):
@@ -839,6 +958,17 @@ def get_aktuelle_magieaffin_fertigkeit(charakter, volk_name):
             return None
         volk = charakter.voelker[volk_name]
         return volk.effects.get('magieaffin_auswahl', {}).get('fertigkeit')
+    except Exception:
+        return None
+
+
+def get_aktuelles_magieaffin_ah(charakter, volk_name):
+    """Gibt das aktuell gewählte AH-Talent für Magieaffin zurück (oder None)."""
+    try:
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            return None
+        volk = charakter.voelker[volk_name]
+        return volk.effects.get('magieaffin_auswahl', {}).get('ah_talent')
     except Exception:
         return None
 
