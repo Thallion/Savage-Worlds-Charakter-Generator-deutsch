@@ -258,18 +258,13 @@ class CharakterVerwaltungWidget(MDBoxLayout):
                 return
             
             controller = app.controller
-            
-            from models.charakter import Charakter
-            
-            neuer_char = Charakter(
-                active_setting_name=setting_name,
-                char_name=char_name
-            )
-            
-            controller.charakter = neuer_char
-            controller.on_charakter_changed()
-            
-            Logger.info(f"Neuer Charakter '{char_name}' mit Setting '{setting_name}' erstellt")
+
+            # Über controller.neuer_charakter() gehen, damit current_character_file_path
+            # zurückgesetzt und der Undo-Stack geleert wird. Sonst würde Schnellspeichern
+            # später blind in die zuvor geladene Datei schreiben.
+            if not controller.neuer_charakter(char_name=char_name, setting_name=setting_name):
+                self._show_error_dialog("Charakter konnte nicht erstellt werden.")
+                return
             
             try:
                 dialog_service = service_container.get_dialog_service()
@@ -732,6 +727,14 @@ class CharakterVerwaltungWidget(MDBoxLayout):
 
             def do_delete(*args):
                 try:
+                    if not os.path.exists(selected_path):
+                        Logger.warning(f"Datei nicht mehr vorhanden: {selected_path}")
+                        if dialog_service:
+                            dialog_service.show_warning_dialog(
+                                f"Datei '{fname}' ist nicht mehr vorhanden (bereits gelöscht)."
+                            )
+                        self._exit_char_delete()
+                        return
                     os.remove(selected_path)
                     Logger.info(f"Charakter gelöscht: {selected_path}")
                     if dialog_service:
