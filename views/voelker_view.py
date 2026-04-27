@@ -764,7 +764,11 @@ class VoelkerWidget(MDBoxLayout):
         # Attribut
         if wahl.get('attribut'):
             selections.append(('Freies Attribut', wahl['attribut']))
-        
+
+        # Attribut-Malus (Attributs-Schwäche)
+        if wahl.get('attribut_malus'):
+            selections.append(('Attributs Schwäche', wahl['attribut_malus']))
+
         # Fertigkeit
         if wahl.get('fertigkeit'):
             selections.append(('Freie Fertigkeit', wahl['fertigkeit']))
@@ -820,7 +824,7 @@ class VoelkerWidget(MDBoxLayout):
             row.add_widget(chip)
             
             # Edit-Button für Talent-Auswahl (nur bei Talenten) und Attribut
-            if label in ['Freies Talent', 'Halbelf Wahl', 'Vielseitig Wahl', 'Freies Attribut', 'Freie Fertigkeit', 'Magieaffin']:
+            if label in ['Freies Talent', 'Halbelf Wahl', 'Vielseitig Wahl', 'Freies Attribut', 'Attributs Schwäche', 'Freie Fertigkeit', 'Magieaffin']:
                 # Elementnamen extrahieren
                 element_name = value
                 if label == 'Halbelf Wahl' and value.startswith('Talent: '):
@@ -838,6 +842,8 @@ class VoelkerWidget(MDBoxLayout):
                 btn = edit_btn
                 if label == 'Freies Attribut':
                     edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name: self._on_edit_attribut(attr))
+                elif label == 'Attributs Schwäche':
+                    edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name: self._on_edit_attribut_malus(attr))
                 elif label == 'Freie Fertigkeit':
                     edit_btn.bind(on_release=lambda x, btn=btn, fert=element_name: self._on_edit_fertigkeit(fert))
                 elif label == 'Magieaffin':
@@ -1035,6 +1041,157 @@ class VoelkerWidget(MDBoxLayout):
             Logger.info(f"Freies Attribut für '{volk_name}' erfolgreich geändert zu '{attribut_name}'")
         else:
             Logger.error(f"Fehler beim Ändern des Attributs für '{volk_name}'")
+
+    def _on_edit_attribut_malus(self, attribut_name):
+        """Öffnet einen Dialog zum Bearbeiten der Attributs-Schwäche (Malus)."""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivy.metrics import dp
+
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            Logger.warning("Kein Volk ausgewählt")
+            return
+
+        charakter = self.controller.charakter
+
+        # Verfügbare Malus-Attribut-Optionen abrufen (gleicher Pool wie Bonus)
+        from functions.volk_funktionen import get_volk_attribut_optionen, NO_ATTRIBUT_AVAILABLE_TEXT
+        attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
+
+        if not attribut_optionen or attribut_optionen == [NO_ATTRIBUT_AVAILABLE_TEXT]:
+            Logger.warning(f"Keine Attribut-Optionen für Schwäche verfügbar für Volk '{volk_name}'")
+            return
+
+        # Höhe explizit berechnen
+        scroll_height = min(dp(350), len(attribut_optionen) * dp(52))
+        content_height = dp(86) + scroll_height
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(12),
+            padding=dp(20),
+            size_hint_y=None,
+            height=content_height,
+        )
+
+        info_label = MDLabel(
+            text="Wähle ein neues zu schwächendes Attribut:",
+            bold=True,
+            size_hint_y=None,
+            height=dp(34),
+        )
+        content.add_widget(info_label)
+
+        chips_box = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+        )
+        chips_box.bind(minimum_height=chips_box.setter('height'))
+
+        for attr in sorted(attribut_optionen):
+            if attr == NO_ATTRIBUT_AVAILABLE_TEXT:
+                continue
+
+            chip_kwargs = {
+                'type': "filter",
+                'size_hint_y': None,
+                'height': dp(40),
+                'on_release': lambda x, a=attr: self._on_attribut_malus_chosen(a),
+            }
+            if hasattr(self, 'theme_cls') and self.theme_cls:
+                if attr == attribut_name:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.primaryContainerColor
+                else:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.surfaceColor
+            else:
+                if attr == attribut_name:
+                    chip_kwargs['md_bg_color'] = [0.7, 0.8, 1.0, 1.0]
+                else:
+                    chip_kwargs['md_bg_color'] = [0.95, 0.95, 0.95, 1.0]
+
+            chip = MDChip(
+                MDChipText(text=attr),
+                **chip_kwargs
+            )
+            chips_box.add_widget(chip)
+
+        from kivymd.uix.scrollview import MDScrollView
+        scroll = MDScrollView(
+            size_hint_y=None,
+            height=scroll_height,
+            do_scroll_x=False,
+        )
+        scroll.add_widget(chips_box)
+        content.add_widget(scroll)
+
+        button_container = MDDialogButtonContainer(
+            MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: dialog.dismiss(),
+            ),
+            spacing="8dp",
+        )
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"Attributs Schwäche für {volk_name} ändern"),
+            MDDialogContentContainer(content, orientation="vertical"),
+            button_container,
+            size_hint=(0.85, None),
+        )
+
+        self._attribut_malus_dialog = dialog
+        dialog.open()
+
+    def _on_attribut_malus_chosen(self, attribut_name):
+        """Wird aufgerufen, wenn ein neues Schwäche-Attribut ausgewählt wird."""
+        from kivy.clock import Clock
+        from functions.volk_funktionen import waehle_freies_attribut_malus
+
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            return
+
+        charakter = self.controller.charakter
+
+        # Vorherige Schwäche zurücksetzen, falls vorhanden, damit kein doppelter Malus angewendet wird
+        alte_schwaeche = self.voelker_auswahlen.get(volk_name, {}).get('attribut_malus')
+        if alte_schwaeche and alte_schwaeche != attribut_name:
+            try:
+                if hasattr(charakter, 'attribute') and alte_schwaeche in charakter.attribute:
+                    altes_attribut = charakter.attribute[alte_schwaeche]
+                    alter_wert = altes_attribut.wert
+                    # Würfelstufe wieder anheben (Umkehr von waehle_freies_attribut_malus)
+                    if alter_wert >= 10:
+                        altes_attribut.wert += 2  # W10 -> W12
+                    else:
+                        altes_attribut.wert += 1  # W4 -> W6, W6 -> W8, W8 -> W10
+                    if hasattr(charakter, 'berechne_abgeleitete_werte'):
+                        charakter.berechne_abgeleitete_werte()
+            except Exception as e:
+                Logger.warning(f"Konnte alte Attributs-Schwäche '{alte_schwaeche}' nicht zurücksetzen: {e}")
+
+        Logger.info(f"[DEBUG] Ändere Attributs-Schwäche für '{volk_name}' zu '{attribut_name}'")
+        success = waehle_freies_attribut_malus(charakter, volk_name, attribut_name)
+
+        if success:
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            self.voelker_auswahlen[volk_name]['attribut_malus'] = attribut_name
+
+            if hasattr(self, '_attribut_malus_dialog') and self._attribut_malus_dialog:
+                self._attribut_malus_dialog.dismiss()
+
+            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+
+            Logger.info(f"Attributs-Schwäche für '{volk_name}' erfolgreich geändert zu '{attribut_name}'")
+        else:
+            Logger.error(f"Fehler beim Ändern der Attributs-Schwäche für '{volk_name}'")
 
     def _on_edit_fertigkeit(self, fertigkeit_name):
         """Platzhalter für Fertigkeits-Bearbeitung (noch nicht implementiert)."""
