@@ -35,6 +35,8 @@ from functions.volkseigenarten_funktionen import (
     erstelle_eigenart_dict,
     speichere_custom_eigenart,
     loesche_custom_eigenart,
+    stufen_kosten_bereich,
+    wende_stufe_an,
     START_PUNKTE
 )
 from functions.talent_funktionen import pruefe_voraussetzungen, is_talent_rang_hoeher_als_charakter
@@ -401,8 +403,18 @@ class VolkGeneratorWizard:
             aktuelle_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
             max_auswahl = eigenart.get('max_auswahl', 1)
 
-            kosten = eigenart.get('kosten', 2)
-            kosten_text = f" [{kosten} EP]"
+            # Kosten-Text: bei Stufen-Eigenart wird ein Bereich angezeigt (z.B. "[2-6 EP]")
+            stufen_bereich = stufen_kosten_bereich(eigenart)
+            if stufen_bereich:
+                min_k, max_k = stufen_bereich
+                if min_k == max_k:
+                    kosten_text = f" [{min_k} EP]"
+                else:
+                    kosten_text = f" [{min_k}–{max_k} EP]"
+            else:
+                kosten = eigenart.get('kosten', 2)
+                kosten_text = f" [{kosten} EP]"
+
             if max_auswahl == 0:
                 max_text = " (U)"
             elif max_auswahl > 1:
@@ -751,8 +763,9 @@ class VolkGeneratorWizard:
                 if 'optionen' in eigenart_copy:
                     eigenart_copy['optionen'] = dict(eigenart_copy['optionen'])
 
-                # Hat die Eigenart Optionen? → Zwischen-Dialog zeigen
-                if eigenart_copy.get('optionen'):
+                # Hat die Eigenart Stufen oder Optionen? → Zwischen-Dialog zeigen.
+                # Stufen werden zuerst behandelt (sie setzen kosten/effekt aus der Stufe).
+                if eigenart_copy.get('stufen') or eigenart_copy.get('optionen'):
                     self._show_optionen_dialog(eigenart_copy, liste, checkbox)
                 else:
                     liste.append(eigenart_copy)
@@ -768,7 +781,7 @@ class VolkGeneratorWizard:
         self._toggle_eigenart(eigenart_id, eigenart_typ, checkbox.active, checkbox=checkbox)
     
     def _show_optionen_dialog(self, eigenart, liste, checkbox=None):
-        """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Attribut-/Fertigkeits-Auswahl oder Texteingabe).
+        """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Stufen, Attribut-/Fertigkeits-Auswahl, Texteingabe).
         Blendet das Eigenarten-Popup temporär aus um Überlappung zu vermeiden."""
         optionen = eigenart.get('optionen', {})
         typ = optionen.get('typ', '')
@@ -784,7 +797,10 @@ class VolkGeneratorWizard:
             if checkbox:
                 checkbox.active = False
 
-        if typ == 'text_eingabe':
+        # Stufen-Eigenart hat Vorrang: erst Stufe wählen, dann ggf. weitere Optionen
+        if eigenart.get('stufen'):
+            self._show_stufen_dialog(eigenart, liste, checkbox, eigenart_name)
+        elif typ == 'text_eingabe':
             self._show_text_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
         elif typ == 'talent_auswahl':
             self._show_talent_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
@@ -1154,6 +1170,118 @@ class VolkGeneratorWizard:
             return
         self._last_option_radio_time = now
         self._select_option(name, selected, radio_checkboxes)
+
+    def _show_stufen_dialog(self, eigenart, liste, checkbox, eigenart_name):
+        """Dialog zur Auswahl einer Stufe einer Stufen-Eigenart (z.B. Fliegen 2/4/6 EP).
+        Übernimmt nach Bestätigung kosten und effekt aus der gewählten Stufe."""
+        stufen = eigenart.get('stufen') or []
+        if not stufen:
+            liste.append(eigenart)
+            self._restore_eigenarten_popup()
+            return
+
+        # Vorauswahl: wenn die Eigenart bereits eine Stufe trägt, diese vorselektieren
+        vorhandene = eigenart.get('ausgewaehlte_stufe') or {}
+        standard_index = 0
+        for i, s in enumerate(stufen):
+            if vorhandene.get('label') and s.get('label') == vorhandene.get('label'):
+                standard_index = i
+                break
+            if vorhandene.get('kosten') is not None and s.get('kosten') == vorhandene.get('kosten'):
+                standard_index = i
+                break
+
+        selected_index = [standard_index]
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(4),
+            size_hint_y=None,
+            height=dp(min(len(stufen) * 64, 320)),
+        )
+
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
+        radio_checkboxes = {}
+
+        for index, stufe in enumerate(stufen):
+            label = stufe.get('label', f"Stufe {index + 1}")
+            kosten = stufe.get('kosten', 0)
+            zeile_text = f"{label}  ·  {kosten} EP"
+
+            list_item = MDListItem(size_hint_y=None, height=dp(64) if _mobile else dp(56))
+            list_item.add_widget(MDListItemHeadlineText(text=zeile_text))
+            radio_cb = MDListItemTrailingCheckbox(
+                active=(index == standard_index),
+                group=f"stufen_{eigenart.get('id', '')}"
+            )
+            r_cb = radio_cb
+            i = index
+            list_item.bind(on_release=lambda x, idx=i: self._select_stufe(idx, stufen, selected_index, radio_checkboxes))
+            radio_cb.bind(on_release=lambda x, cb=r_cb, idx=i: self._on_stufe_radio_clicked(idx, stufen, selected_index, radio_checkboxes, cb))
+            list_item.add_widget(radio_cb)
+            list_layout.add_widget(list_item)
+            radio_checkboxes[index] = radio_cb
+
+        scroll = MDScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+
+        def _on_confirm(x):
+            chosen_idx = selected_index[0]
+            if chosen_idx is None or chosen_idx < 0 or chosen_idx >= len(stufen):
+                return
+            wende_stufe_an(eigenart, stufen[chosen_idx])
+            dialog.dismiss()
+            # Hat die Eigenart zusätzlich Optionen? → Optionen-Dialog anschließen
+            optionen = eigenart.get('optionen', {})
+            opt_typ = optionen.get('typ', '')
+            if opt_typ == 'text_eingabe':
+                self._show_text_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
+            elif opt_typ == 'talent_auswahl':
+                self._show_talent_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
+            elif opt_typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl'):
+                self._show_liste_optionen_dialog(eigenart, liste, checkbox, optionen, opt_typ, eigenart_name)
+            else:
+                liste.append(eigenart)
+                self._restore_eigenarten_popup()
+
+        def _on_cancel(x):
+            dialog.dismiss()
+            self._restore_eigenarten_popup()
+            if checkbox:
+                checkbox.active = False
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"{eigenart_name} — Stufe wählen"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
+                MDButton(MDButtonText(text="Bestätigen"), style="filled", on_release=_on_confirm),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+
+    def _select_stufe(self, index, stufen, selected_index, radio_checkboxes):
+        """Wählt eine Stufe in der Radio-Liste aus."""
+        if index < 0 or index >= len(stufen):
+            return
+        selected_index[0] = index
+        for i, cb in radio_checkboxes.items():
+            cb.active = (i == index)
+
+    def _on_stufe_radio_clicked(self, index, stufen, selected_index, radio_checkboxes, clicked_cb):
+        """Handler für Stufen-Radio-Checkbox Klick mit Debounce (Android Touch-Bounce)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_stufe_radio_time') and (now - self._last_stufe_radio_time) < 0.5:
+            return
+        self._last_stufe_radio_time = now
+        self._select_stufe(index, stufen, selected_index, radio_checkboxes)
 
     def _get_nicht_grundfertigkeiten(self):
         """Lädt Nicht-Grundfertigkeiten aus dem aktiven Setting des Charakters."""
