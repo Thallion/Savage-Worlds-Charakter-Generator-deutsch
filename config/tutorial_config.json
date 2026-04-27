@@ -1,0 +1,76 @@
+{
+    "tab_hints": {
+        "speichern_laden": {
+            "title": "Charaktere verwalten",
+            "text": "Hier verwaltest du deine Charaktere:\n\n• 'Neuer Charakter' – startet einen frischen Charakter\n• 'Laden' – öffnet einen gespeicherten Charakter\n• 'Speichern' – sichert deinen aktuellen Charakter\n• 'PDF' – exportiert den Charakterbogen als PDF\n\nTipp: Wähle zuerst ein Setting über den Setting-Button!"
+        },
+        "voelker": {
+            "title": "Volk auswählen",
+            "text": "Wähle hier das Volk deines Charakters.\n\nJedes Volk hat besondere Fähigkeiten und Boni. Manche Völker haben Spezialitäten zur Auswahl.\n\nTipp: Die Boni werden automatisch verrechnet."
+        },
+        "profil": {
+            "title": "Charakter-Profil",
+            "text": "Gib deinem Charakter einen Namen und ein Konzept.\n\nDas Konzept beschreibt deinen Charakter in wenigen Worten (z.B. 'Zwergischer Schmied' oder 'Kopfgeldjäger')."
+        },
+        "eigenschaften": {
+            "title": "Attribute & Fertigkeiten",
+            "text": "Verteile hier Attribut- und Fertigkeitspunkte.\n\n• Attribute: Grundeigenschaften wie Stärke oder Verstand\n• Fertigkeiten: Erlernte Fähigkeiten wie Kämpfen oder Heimlichkeit\n\nNutze die +/- Buttons zum Steigern/Senken.\n\nTipp: Fertigkeiten über dem zugehörigen Attribut kosten doppelt!"
+        },
+        "handicaps": {
+            "title": "Handicaps (Nachteile)",
+            "text": "Handicaps sind Nachteile deines Charakters.\n\nSie geben dir Bonuspunkte für Attribute, Fertigkeiten, Talente oder Startkapital.\n\n• Leichtes Handicap = 1 Punkt\n• Schweres Handicap = 2 Punkte\n\nDu kannst max. 4 Handicap-Punkte erhalten."
+        },
+        "talente": {
+            "title": "Talente (Vorteile)",
+            "text": "Talente sind besondere Vorteile deines Charakters.\n\nViele haben Voraussetzungen (Rang, Attribute, Fertigkeiten). Nicht erfüllte Voraussetzungen werden rot markiert.\n\nTipp: Manche Talente können mehrfach gewählt werden!"
+        },
+        "maechte": {
+            "title": "Arkane Mächte",
+            "text": "Hier wählst du arkane Mächte, wenn dein Charakter einen Arkanen Hintergrund besitzt (Talent).\n\nJede Macht hat Machtpunkte-Kosten.\n\nTipp: Du brauchst zuerst ein passendes Talent (z.B. 'Arkaner Hintergrund (Magie)')."
+        },
+        "superkraefte": {
+            "title": "Superkräfte",
+            "text": "Superkräfte sind nur in bestimmten Settings verfügbar (z.B. Superkräfte Kompendium).\n\nSie funktionieren ähnlich wie Mächte, haben aber eigene Punktekosten und Stufensysteme."
+        },
+        "ausruestung": {
+            "title": "Ausrüstung kaufen",
+            "text": "Kaufe hier Waffen, Rüstungen und Ausrüstung.\n\nDein Startkapital wird oben angezeigt.\n\n• Waffen: Nah- und Fernkampfwaffen\n• Rüstung: Schutzausrüstung\n• Schilde: Zusätzlicher Schutz\n• Sonstige: Allgemeine Ausrüstung\n\nTipp: Das Tragegewicht wird automatisch berechnet!"
+        },
+        "charakterbogen": {
+            "title": "Charakterbogen",
+            "text": "Hier siehst du deinen fertigen Charakter auf einen Blick.\n\nAlle abgeleiteten Werte (Parade, Robustheit, Bewegung) werden automatisch berechnet.\n\nNutze den PDF-Button für einen druckfertigen Bogen."
+        },
+        "historie": {
+            "title": "Änderungshistorie",
+            "text": "Die Historie zeigt alle Änderungen an deinem Charakter.\n\nDu kannst Änderungen rückgängig machen (Undo).\n\nTipp: Nutze den Undo-Button in der Punkteleiste für schnelles Rückgängigmachen."
+        }
+    },
+    "welcome_tutorial": {
+        "steps": [
+            {
+                "title": "Willkommen!",
+                "text": "Willkommen beim Savage Worlds Charakter-Generator!\n\nDiese kurze Tour zeigt dir die wichtigsten Funktionen der App."
+            },
+            {
+                "title": "Navigation",
+                "text": "Links findest du die Tabs – sie führen dich durch alle Bereiche deines Charakters.\n\nDu kannst durch die Tabs tippen oder den Bildschirminhalt wischen."
+            },
+            {
+                "title": "Die Punkteleiste",
+                "text": "Die Punkteleiste zeigt dir deine verfügbaren Punkte:\n\n• Attributpunkte\n• Fertigkeitspunkte\n• Handicap-Punkte (durch Nachteile gewonnen)\n\nSie aktualisiert sich automatisch."
+            },
+            {
+                "title": "Charakter starten",
+                "text": "Öffne den Tab 'Speichern/Laden', wähle ein Setting und tippe auf 'Neuer Charakter'.\n\nDas Setting bestimmt, welche Völker, Talente und Mächte verfügbar sind."
+            },
+            {
+                "title": "Empfohlene Reihenfolge",
+                "text": "Erstelle deinen Charakter am besten so:\n\n1. Setting wählen & neuen Charakter anlegen\n2. Volk wählen\n3. Profil ausfüllen (Name, Konzept)\n4. Attribute & Fertigkeiten verteilen\n5. Handicaps wählen (für Bonuspunkte)\n6. Talente wählen\n7. Ggf. Mächte/Superkräfte\n8. Ausrüstung kaufen\n9. Charakterbogen prüfen & PDF exportieren"
+            },
+            {
+                "title": "Viel Spaß!",
+                "text": "Du kannst dieses Tutorial jederzeit in den Einstellungen erneut starten.\n\nViel Spaß beim Erstellen deines Charakters!"
+            }
+        ]
+    }
+}

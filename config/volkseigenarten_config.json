@@ -1,0 +1,473 @@
+{
+    "beschreibung": "Volkseigenarten nach Savage Worlds Punktesystem. Positive Eigenarten kosten Punkte, negative geben Punkte. Ein Volk beginnt mit 2 Punkten positiver Eigenarten. max_auswahl: 0 = unbegrenzt (U), 1 = einmalig, 2+ = entsprechend viele.",
+    "attribute": ["Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"],
+    "positive": [
+        {
+            "id": "attributserhoehung",
+            "name": "Attributserhöhung",
+            "kosten": 2,
+            "max_auswahl": 2,
+            "beschreibung": "Erhöht ein Attribut um einen Würfeltyp (W4 → W6). Das Attribut wird nach der Volkauswahl gewählt.",
+            "effekt_typ": "attribut_bonus",
+            "effekt": {"attribut_bonus": 2},
+            "optionen": {
+                "typ": "attribut_auswahl",
+                "attribute": ["Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"],
+                "auswahl_verzoegert": true
+            }
+        },
+        {
+            "id": "attributserhoehung_zwei",
+            "name": "Doppelte Attributserhöhung",
+            "kosten": 4,
+            "max_auswahl": 1,
+            "beschreibung": "Erhöht ein Attribut um zwei Würfeltypen (W4 → W8). Das Attribut wird nach der Volkauswahl gewählt.",
+            "effekt_typ": "attribut_bonus",
+            "effekt": {"attribut_bonus": 4},
+            "optionen": {
+                "typ": "attribut_auswahl",
+                "attribute": ["Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"],
+                "auswahl_verzoegert": true
+            }
+        },
+        {
+            "id": "freies_talent",
+            "name": "Anpassungsfähig",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit einem freien Anfängertalent eigener Wahl.",
+            "effekt_typ": "wahlmoeglichkeit",
+            "effekt": {"freies_talent": true},
+            "optionen": {
+                "typ": "talent_auswahl",
+                "beschreibung": "Wähle ein freies Anfängertalent für dieses Volk:",
+                "standard": "Aufmerksamkeit"
+            }
+        },
+        {
+            "id": "freies_attribut",
+            "name": "Wahlbegabt",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit W6 statt W4 in einem Attribut seiner Wahl.",
+            "effekt_typ": "attribut_bonus",
+            "effekt": {"attribut_bonus": 2, "attribut_wahl": true}
+        },
+        {
+            "id": "freie_grundfertigkeit",
+            "name": "Begabt",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit einer Grundfertigkeit auf W6 statt W4 (Athletik, Heimlichkeit, Überreden, Wahrnehmung, Allgemeinwissen).",
+            "effekt_typ": "fertigkeits_bonus",
+            "effekt": {"grundfertigkeit_bonus": 2},
+            "optionen": {
+                "typ": "grundfertigkeit_auswahl",
+                "fertigkeiten": ["Athletik", "Heimlichkeit", "Überreden", "Wahrnehmung", "Allgemeinwissen"],
+                "standard": "Wahrnehmung"
+            }
+        },
+        {
+            "id": "fliegen_stufe1",
+            "name": "Fliegen (Einfach)",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann fliegen mit Bewegungsweite 6''.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"fliegen": true, "bewegungsweite_flug": 6}
+        },
+        {
+            "id": "fliegen_stufe2",
+            "name": "Fliegen (Fortgeschritten)",
+            "kosten": 4,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann fliegen mit Bewegungsweite 12''.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"fliegen": true, "bewegungsweite_flug": 12}
+        },
+        {
+            "id": "fliegen_stufe3",
+            "name": "Fliegen (Meister)",
+            "kosten": 6,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann fliegen mit Bewegungsweite 24''.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"fliegen": true, "bewegungsweite_flug": 24}
+        },
+        {
+            "id": "nachtsicht",
+            "name": "Nachtsicht",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ignoriert Abzüge für Düstere und Dunkle Beleuchtung.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"nachtsicht": true},
+            "auto_talente": ["Nachtsicht"]
+        },
+        {
+            "id": "nachtsicht_natur",
+            "name": "Nachtsicht (Natürlich)",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat bessere Dunkelsicht als normal. Ignoriert Abzüge für Düstere Beleuchtung (nicht Dunkel).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"nachtsicht_einfach": true}
+        },
+        {
+            "id": "robustheit_erhoeht",
+            "name": "Robustheit",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk erhält +1 Robustheit.",
+            "effekt_typ": "robustheit_bonus",
+            "effekt": {"robustheit_bonus": 1}
+        },
+        {
+            "id": "beweglichkeit",
+            "name": "Beweglichkeit",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk erhält +1 Bewegungsweite.",
+            "effekt_typ": "bewegungsweite_bonus",
+            "effekt": {"bewegungsweite_bonus": 1}
+        },
+        {
+            "id": "scharfe_sinne",
+            "name": "Scharfe Sinne",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit Wahrnehmung auf W8 statt W4 (mit bonus +4 statt +0).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"wahrnehmung_w8": true},
+            "auto_talente": ["Geschärfte Sinne"]
+        },
+        {
+            "id": "naturtalente",
+            "name": "Naturtalent",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit W6 in einer Nicht-Grundfertigkeit (Athletik, Heilung, Wahrnehmung, etc.).",
+            "effekt_typ": "fertigkeits_bonus",
+            "effekt": {"nicht_grundfertigkeit_bonus": 2},
+            "optionen": {
+                "typ": "nicht_grundfertigkeit_auswahl",
+                "beschreibung": "Wähle eine Nicht-Grundfertigkeit"
+            }
+        },
+        {
+            "id": "geschaeftssinn",
+            "name": "Geschäftssinn",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit W6 in Überzeugen/Schätzen.",
+            "effekt_typ": "fertigkeits_bonus",
+            "effekt": {"geschaeftssinn": true}
+        },
+        {
+            "id": "eisenerner_wille",
+            "name": "Eiserner Wille",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk erhält +2 auf Willenskraft-Proben gegen Einschüchtern.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"eiserner_wille": true}
+        },
+        {
+            "id": "natuerlicher_kaempfer",
+            "name": "Natürlicher Kämpfer",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit W6 in Kämpfen und erhält einen +1 Angriffbonus im Nahkampf.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"natuerlicher_kaempfer": true}
+        },
+        {
+            "id": "schnelle_heilung",
+            "name": "Schnelle Heilung",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk heilt jeden Tag eine Stufe mehr (auch wenn sie nicht ruhen).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"schnelle_heilung": true}
+        },
+        {
+            "id": "untot",
+            "name": "Untot",
+            "kosten": 4,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist untot. Ignoriert Wundabzüge (außer bei Erschöpft), immun gegen Erschöpfung/Angst/Schrecken, heilt nicht natürlich.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"untot": true, "immun_angst": true, "keine_natuerliche_heilung": true}
+        },
+        {
+            "id": "konstrukt",
+            "name": "Konstrukt",
+            "kosten": 3,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist ein Konstrukt. +2 auf Erholungsproben gegen Angeschlagen, atmet nicht, ignoriert Wundabzüge, immun gegen Gifte/Krankheiten.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"konstrukt": true, "erholungsbonus_angeschlagen": 2, "atmet_nicht": true, "immun_gifte_krankheiten": true}
+        },
+        {
+            "id": "wasserwesen",
+            "name": "Wasserwesen",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann nicht ertrinken und hat volle Bewegungsweite beim Schwimmen.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"wasserwesen": true, "kann_nicht_ertrinken": true}
+        },
+        {
+            "id": "baumechanisch",
+            "name": "Baumförmig",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist pflanzlich/watery. Erfordert Wasser/Sonnenlicht, kann nicht schwimmen, aber +2 auf Erholung.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"baumfoermig": true, "erholungsbonus": 2}
+        },
+        {
+            "id": "immunisierungen",
+            "name": "Immunität",
+            "kosten": 2,
+            "max_auswahl": 3,
+            "beschreibung": "Das Volk ist immun gegen eine bestimmte Art von Effekten (Erdrückt, Erschöpfung durch Hitze/Kälte, Gift, etc.).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"immunisierung": true},
+            "optionen": {
+                "typ": "text_eingabe",
+                "platzhalter": "z.B. Gift, Gift/Krankheit, Erdückt, Erschöpfung",
+                "beschreibung": "Art der Immunität"
+            }
+        },
+        {
+            "id": "magieaffin",
+            "name": "Magieaffin",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Der Charakter wählt eine Arkane Fertigkeit (Glaube/Zaubern/Fokus/Psionik) die von W4-2 auf W4+0 erhöht wird und ein freies Arkaner-Hintergrund-Talent (AH). Auswahl erfolgt nach der Volkauswahl.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"magieaffin": true},
+            "optionen": {
+                "typ": "magieaffin_auswahl",
+                "arkane_fertigkeiten": ["Glaube", "Zaubern", "Fokus", "Psionik"],
+                "auswahl_verzoegert": true
+            }
+        },
+        {
+            "id": "steinsohn",
+            "name": "Steingänger",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann Erde/Stein spüren und sich durch sie bewegen.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"steingaenger": true}
+        },
+        {
+            "id": "zwergenhaft",
+            "name": "Zwergenhaft",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist klein aber robust. +1 Robustheit, aber -1 Bewegungsweite.",
+            "effekt_typ": "kombinierter_effekt",
+            "effekt": {"robustheit_bonus": 1, "bewegungsweite_bonus": -1}
+        },
+        {
+            "id": "gross_wuechsig",
+            "name": "Großwüchsig",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist größer als Menschen. +1 Bewegungsweite, -1 Robustheit (größeres Ziel).",
+            "effekt_typ": "kombinierter_effekt",
+            "effekt": {"bewegungsweite_bonus": 1, "robustheit_bonus": -1}
+        }
+    ],
+    "negative": [
+        {
+            "id": "attributsschwäche",
+            "name": "Attributsschwäche",
+            "kosten": -2,
+            "max_auswahl": 2,
+            "beschreibung": "Ein Attribut beginnt auf W4-2. Das Attribut wird nach der Volkauswahl gewählt.",
+            "effekt_typ": "attribut_malus",
+            "effekt": {"attribut_malus": 2},
+            "optionen": {
+                "typ": "attribut_auswahl",
+                "attribute": ["Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"],
+                "auswahl_verzoegert": true
+            }
+        },
+        {
+            "id": "langsam",
+            "name": "Langsam",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat -1 Bewegungsweite.",
+            "effekt_typ": "bewegungsweite_malus",
+            "effekt": {"bewegungsweite_bonus": -1}
+        },
+        {
+            "id": "zerbrechlich",
+            "name": "Zerbrechlich",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat -1 Robustheit.",
+            "effekt_typ": "robustheit_malus",
+            "effekt": {"robustheit_bonus": -1}
+        },
+        {
+            "id": "aussenseiter",
+            "name": "Außenseiter",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk wird von anderen als Fremd/Außenseiter betrachtet. -2 auf soziale Proben mit Nicht-Volk.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"aussenseiter": true, "sozialer_malus": -2}
+        },
+        {
+            "id": "abhaengigkeit",
+            "name": "Abhängigkeit",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk muss regelmäßig etwas konsumieren (Wasser, Sonnenlicht, Magie, etc.).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"abhaengigkeit": true},
+            "optionen": {
+                "typ": "text_eingabe",
+                "platzhalter": "z.B. Wasser (1l/Tag), Sonnenlicht (4h/Tag)",
+                "beschreibung": "Art der Abhängigkeit"
+            }
+        },
+        {
+            "id": "pazifist",
+            "name": "Pazifist",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk darf nicht töten oder -1 auf alles.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"pazifist": true}
+        },
+        {
+            "id": "nichtschwimmer",
+            "name": "Nichtschwimmer",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann nicht schwimmen. -2 auf Athletik Schwimmen.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"nichtschwimmer": true, "athletik_malus": -2}
+        },
+        {
+            "id": "gesichtslos",
+            "name": "Gesichtslos",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat kein erkennbares Gesicht. -2 auf Überreden.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"gesichtslos": true, "ueberreden_malus": -2}
+        },
+        {
+            "id": "niedrig",
+            "name": "Niedrig",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist klein und gedrungen. Passt nicht in menschliche Rüstungen.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"niedrig": true, "ruestung_anpassung": "nicht_menschlich"}
+        },
+        {
+            "id": "angeblich",
+            "name": "Angeblich",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat einen schlechten Ruf. -2 auf Körpersprache.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"angeblich": true, "koerpersprache_malus": -2}
+        },
+        {
+            "id": "furcht_angst",
+            "name": "Furcht/Angst",
+            "kosten": -2,
+            "max_auswahl": 2,
+            "beschreibung": "Das Volk hat Furcht vor bestimmten Dingen (Feuer, Wasser, etc.).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"furcht": true},
+            "optionen": {
+                "typ": "text_eingabe",
+                "platzhalter": "z.B. Feuer, Wasser, Dunkelheit",
+                "beschreibung": "Furchtquelle"
+            }
+        },
+        {
+            "id": "gering_lebenserwartung",
+            "name": "Geringe Lebenserwartung",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk wird schneller alt. Maximale Lebensspanne um 50% reduziert.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"geringe_lebenserwartung": true, "lebenserwartung_mult": 0.5}
+        },
+        {
+            "id": "minderwertig",
+            "name": "Minderwertig",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist weniger intelligent. -1 auf Verstand-basierte Proben.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"minderwertig": true, "verstand_malus": -1}
+        },
+        {
+            "id": "gross",
+            "name": "Übergroß",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist sehr groß und auffällig. Passt nicht in normale Häuser/Fahrzeuge.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"uebergross": true}
+        },
+        {
+            "id": "schwer_zu_heilen",
+            "name": "Schwer zu Heilen",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk heilt langsamer. -1 auf alle Erholungsproben.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"schwer_zu_heilen": true, "erholung_malus": -1}
+        },
+        {
+            "id": "ziel",
+            "name": "Leichtes Ziel",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat einen auffälligen Makel. +2 auf Treffer durch Gegner.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"leichtes_ziel": true, "treffer_bonus_gegner": 2}
+        },
+        {
+            "id": "lahm",
+            "name": "Lahm",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist dauerhaft lahmiert. -2 auf Bewegung, Sprint um einen Würfeltyp reduziert.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"lahm": true, "bewegung_malus": -2}
+        },
+        {
+            "id": "blind",
+            "name": "Blind",
+            "kosten": -4,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist blind. -6 auf Sicht-basierte Proben, kann nicht fliegen ohne Hilfe.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"blind": true, "sicht_malus": -6}
+        },
+        {
+            "id": "sprachbehindert",
+            "name": "Sprachbehindert",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk kann nicht normal sprechen. -2 auf Überreden, begrenzte Sprachen.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"sprachbehindert": true, "sprache_eingeschraenkt": true}
+        }
+    ]
+}
