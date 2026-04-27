@@ -790,6 +790,12 @@ class VolkGeneratorWizard:
             self._show_talent_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
         elif typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl'):
             self._show_liste_optionen_dialog(eigenart, liste, checkbox, optionen, typ, eigenart_name)
+        elif typ == 'magieaffin_auswahl':
+            # Auswahl wird verzögert - erst in völker_view nach Volkauswahl
+            liste.append(eigenart)
+            # Eigenarten-Popup wieder einblenden
+            if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+                self._eigenarten_popup.opacity = 1
         else:
             # Unbekannter Typ - einfach hinzufuegen
             liste.append(eigenart)

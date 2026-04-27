@@ -760,6 +760,15 @@ class VoelkerWidget(MDBoxLayout):
         # Fertigkeit
         if wahl.get('fertigkeit'):
             selections.append(('Freie Fertigkeit', wahl['fertigkeit']))
+
+        # Magieaffin
+        from functions.volk_funktionen import get_aktuelle_magieaffin_fertigkeit, hat_volk_magieaffin
+        if hat_volk_magieaffin(self.controller.charakter, self.selected_volk_name):
+            magieaffin_fertigkeit = get_aktuelle_magieaffin_fertigkeit(self.controller.charakter, self.selected_volk_name)
+            if magieaffin_fertigkeit:
+                selections.append(('Magieaffin', magieaffin_fertigkeit))
+            else:
+                selections.append(('Magieaffin', 'Auswählen...'))
         
         if not selections:
             return
@@ -794,7 +803,7 @@ class VoelkerWidget(MDBoxLayout):
             row.add_widget(chip)
             
             # Edit-Button für Talent-Auswahl (nur bei Talenten) und Attribut
-            if label in ['Freies Talent', 'Halbelf Wahl', 'Vielseitig Wahl', 'Freies Attribut', 'Freie Fertigkeit']:
+            if label in ['Freies Talent', 'Halbelf Wahl', 'Vielseitig Wahl', 'Freies Attribut', 'Freie Fertigkeit', 'Magieaffin']:
                 # Elementnamen extrahieren
                 element_name = value
                 if label == 'Halbelf Wahl' and value.startswith('Talent: '):
@@ -814,6 +823,8 @@ class VoelkerWidget(MDBoxLayout):
                     edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name: self._on_edit_attribut(attr))
                 elif label == 'Freie Fertigkeit':
                     edit_btn.bind(on_release=lambda x, btn=btn, fert=element_name: self._on_edit_fertigkeit(fert))
+                elif label == 'Magieaffin':
+                    edit_btn.bind(on_release=lambda x, btn=btn: self._on_edit_magieaffin())
                 else:
                     edit_btn.bind(on_release=lambda x, btn=btn, l=label, tn=element_name: self._on_edit_zusatzelement(l, tn))
                 row.add_widget(edit_btn)
@@ -1012,6 +1023,113 @@ class VoelkerWidget(MDBoxLayout):
         """Platzhalter für Fertigkeits-Bearbeitung (noch nicht implementiert)."""
         Logger.warning("Bearbeiten von freien Fertigkeiten ist noch nicht implementiert")
         # TODO: Implementieren ähnlich wie _on_edit_attribut
+
+    def _on_edit_magieaffin(self):
+        """Öffnet einen Dialog zum Auswählen der Arkanen Fertigkeit für Magieaffin."""
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivy.metrics import dp
+
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            return
+
+        charakter = self.controller.charakter
+        from functions.volk_funktionen import get_magieaffin_optionen, get_aktuelle_magieaffin_fertigkeit
+
+        fertigkeit_optionen = get_magieaffin_optionen(charakter, volk_name)
+        aktuelle_fertigkeit = get_aktuelle_magieaffin_fertigkeit(charakter, volk_name)
+
+        scroll_height = min(dp(350), len(fertigkeit_optionen) * dp(52))
+        content_height = dp(86) + scroll_height
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(12),
+            padding=dp(20),
+            size_hint_y=None,
+            height=content_height,
+        )
+
+        info_label = MDLabel(
+            text="Wähle eine Arkane Fertigkeit:",
+            bold=True,
+            size_hint_y=None,
+            height=dp(34),
+        )
+        content.add_widget(info_label)
+
+        chips_box = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+        )
+        chips_box.bind(minimum_height=chips_box.setter('height'))
+
+        for fert in fertigkeit_optionen:
+            chip_kwargs = {
+                'type': "filter",
+                'size_hint_y': None,
+                'height': dp(40),
+                'on_release': lambda x, f=fert: self._on_magieaffin_chosen(f),
+            }
+            if hasattr(self, 'theme_cls') and self.theme_cls:
+                if fert == aktuelle_fertigkeit:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.primaryContainerColor
+                else:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.surfaceColor
+
+            chip = MDChip(MDChipText(text=fert), **chip_kwargs)
+            chips_box.add_widget(chip)
+
+        scroll = MDScrollView(size_hint_y=None, height=scroll_height, do_scroll_x=False)
+        scroll.add_widget(chips_box)
+        content.add_widget(scroll)
+
+        button_container = MDDialogButtonContainer(MDBoxLayout(orientation="horizontal", spacing=dp(8)))
+        cancel_btn = MDButton(style="text", on_release=lambda x: self._magieaffin_dialog.dismiss() if hasattr(self, '_magieaffin_dialog') else None)
+        cancel_btn.add_widget(MDButtonText(text="Abbrechen"))
+        button_container.add_widget(cancel_btn)
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"Magieaffin für {volk_name}"),
+            MDDialogContentContainer(content, orientation="vertical"),
+            button_container,
+            size_hint=(0.85, None),
+        )
+
+        self._magieaffin_dialog = dialog
+        dialog.open()
+
+    def _on_magieaffin_chosen(self, fertigkeit_name):
+        """Wird aufgerufen wenn eine Arkane Fertigkeit im Magieaffin-Dialog ausgewählt wird."""
+        from kivy.clock import Clock
+        from functions.volk_funktionen import waehle_magieaffin_fertigkeit
+
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            return
+
+        charakter = self.controller.charakter
+        Logger.info(f"[DEBUG] Wähle Magieaffin-Arkane Fertigkeit '{fertigkeit_name}' für '{volk_name}'")
+
+        success = waehle_magieaffin_fertigkeit(charakter, volk_name, fertigkeit_name)
+
+        if success:
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            self.voelker_auswahlen[volk_name]['magieaffin'] = fertigkeit_name
+
+            if hasattr(self, '_magieaffin_dialog') and self._magieaffin_dialog:
+                self._magieaffin_dialog.dismiss()
+
+            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+
+            Logger.info(f"Magieaffin-Arkane Fertigkeit für '{volk_name}' erfolgreich auf '{fertigkeit_name}' gesetzt")
+        else:
+            Logger.error(f"Fehler beim Setzen der Magieaffin-Arkanen Fertigkeit für '{volk_name}'")
 
     def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
         """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.

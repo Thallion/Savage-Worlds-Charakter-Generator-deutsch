@@ -705,6 +705,164 @@ def waehle_freie_fertigkeit(charakter, volk_name, fertigkeit_name):
         return False
 
 
+def waehle_magieaffin_fertigkeit(charakter, volk_name, fertigkeit_name):
+    """
+    Wählt eine Arkane Fertigkeit für Magieaffin aus und erhöht sie.
+    Setzt auch das freie Arkaner-Hintergrund-Talent (AH).
+
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks
+        fertigkeit_name: Name der Arkanen Fertigkeit (Glaube/Zaubern/Fokus/Psionik)
+
+    Returns:
+        bool: True bei Erfolg, False bei Fehler
+    """
+    try:
+        Logger.debug(f"Wähle Magieaffin-Arkane Fertigkeit '{fertigkeit_name}' für Volk '{volk_name}'")
+
+        ARKANE_FERTIGKEITEN = ["Glaube", "Zaubern", "Fokus", "Psionik"]
+        if fertigkeit_name not in ARKANE_FERTIGKEITEN:
+            Logger.warning(f"Ungültige Arkane Fertigkeit für Magieaffin: '{fertigkeit_name}'")
+            return False
+
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            Logger.error(f"Volk '{volk_name}' nicht gefunden")
+            return False
+
+        volk = charakter.voelker[volk_name]
+
+        # Vorherige Magieaffin-Auswahl zurücksetzen falls vorhanden
+        _reset_magieaffin(charakter, volk_name)
+
+        # Arkane Fertigkeit erhöhen: W4-2 -> W4+0 (Nicht-Grundfertigkeit)
+        if fertigkeit_name in charakter.fertigkeiten:
+            fertigkeit = charakter.fertigkeiten[fertigkeit_name]
+            alter_modifier = getattr(fertigkeit, 'modifier', 0)
+            if hasattr(fertigkeit, 'wuerfel') and hasattr(fertigkeit.wuerfel, 'modifier'):
+                fertigkeit.wuerfel.modifier = 0  # W4-2 -> W4+0
+                Logger.info(f"Magieaffin: '{fertigkeit_name}' von W4{alter_modifier:+d} auf W4+0 erhöht")
+            else:
+                Logger.warning(f"Magieaffin: Würfel-Objekt nicht gefunden für '{fertigkeit_name}'")
+        else:
+            Logger.warning(f"Magieaffin: Fertigkeit '{fertigkeit_name}' nicht im Charakter gefunden")
+
+        # Magieaffin-Auswahl im Volk speichern
+        if 'magieaffin_auswahl' not in volk.effects:
+            volk.effects['magieaffin_auswahl'] = {}
+        volk.effects['magieaffin_auswahl']['fertigkeit'] = fertigkeit_name
+
+        # Arkaner-Hintergrund-Talent (AH) automatisch auswählen
+        if 'Arkaner Hintergrund' in charakter.talente:
+            ah_talent = charakter.talente['Arkaner Hintergrund']
+            if not ah_talent.ausgewaehlt:
+                ah_talent.ausgewaehlt = True
+                if 'Arkaner Hintergrund' not in charakter.selected_talente:
+                    charakter.selected_talente.append('Arkaner Hintergrund')
+                Logger.info(f"Magieaffin: 'Arkaner Hintergrund' Talent automatisch ausgewählt")
+
+        # Abgeleitete Werte neu berechnen
+        if hasattr(charakter, 'berechne_abgeleitete_werte'):
+            charakter.berechne_abgeleitete_werte()
+
+        # Event für UI-Update auslösen
+        if hasattr(charakter, 'dispatch'):
+            charakter.dispatch('on_charakter_change')
+
+        try:
+            from kivy.app import App
+            from kivy.clock import Clock
+            app = App.get_running_app()
+            if hasattr(app, 'controller') and hasattr(app.controller, 'charakter'):
+                def consolidated_update_sequence(dt):
+                    try:
+                        _force_eigenschaften_update(app)
+                        _force_eigenschaften_update(app)
+                        _force_trigger_ui_refresh(app)
+                    except Exception as e:
+                        Logger.warning(f"Konsolidierte Update-Sequenz fehlgeschlagen: {e}")
+                Clock.schedule_once(consolidated_update_sequence, 0)
+        except Exception as e:
+            Logger.warning(f"Direktes Eigenschaften-Update fehlgeschlagen: {e}")
+
+        return True
+
+    except Exception as e:
+        Logger.error(f"Fehler bei Magieaffin-Auswahl: {e}", exc_info=True)
+        return False
+
+
+def _reset_magieaffin(charakter, volk_name):
+    """Setzt die Magieaffin-Auswahl zurück."""
+    try:
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            return
+
+        volk = charakter.voelker[volk_name]
+        alte_auswahl = volk.effects.get('magieaffin_auswahl', {}).get('fertigkeit')
+
+        if not alte_auswahl:
+            return
+
+        Logger.info(f"Setze Magieaffin-Auswahl '{alte_auswahl}' zurück für Volk '{volk_name}'")
+
+        # Arkane Fertigkeit zurücksetzen: W4+0 -> W4-2
+        if alte_auswahl in charakter.fertigkeiten:
+            fertigkeit = charakter.fertigkeiten[alte_auswahl]
+            if hasattr(fertigkeit, 'wuerfel') and hasattr(fertigkeit.wuerfel, 'modifier'):
+                if fertigkeit.wuerfel.modifier == 0:
+                    fertigkeit.wuerfel.modifier = -2
+                    Logger.debug(f"Magieaffin: '{alte_auswahl}' von W4+0 auf W4-2 zurückgesetzt")
+
+        # Arkaner-Hintergrund-Talent entfernen falls durch Magieaffin gesetzt
+        if 'Arkaner Hintergrund' in charakter.talente:
+            ah_talent = charakter.talente['Arkaner Hintergrund']
+            if ah_talent.ausgewaehlt and 'Arkaner Hintergrund' in charakter.selected_talente:
+                ah_talent.ausgewaehlt = False
+                charakter.selected_talente.remove('Arkaner Hintergrund')
+                Logger.debug(f"Magieaffin: 'Arkaner Hintergrund' Talent entfernt")
+
+    except Exception as e:
+        Logger.error(f"Fehler beim Zurücksetzen von Magieaffin: {e}")
+
+
+def get_magieaffin_optionen(charakter, volk_name):
+    """Gibt die verfügbaren Arkanen Fertigkeiten für Magieaffin zurück."""
+    ARKANE_FERTIGKEITEN = ["Glaube", "Zaubern", "Fokus", "Psionik"]
+    return ARKANE_FERTIGKEITEN
+
+
+def get_aktuelle_magieaffin_fertigkeit(charakter, volk_name):
+    """Gibt die aktuell gewählte Arkane Fertigkeit für Magieaffin zurück."""
+    try:
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            return None
+        volk = charakter.voelker[volk_name]
+        return volk.effects.get('magieaffin_auswahl', {}).get('fertigkeit')
+    except Exception:
+        return None
+
+
+def hat_volk_magieaffin(charakter, volk_name):
+    """Prüft ob ein Volk die Magieaffin-Eigenart hat."""
+    try:
+        if not hasattr(charakter, 'voelker') or volk_name not in charakter.voelker:
+            return False
+        volk = charakter.voelker[volk_name]
+        if not hasattr(volk, 'effects'):
+            return False
+        spezielle_effekte = volk.effects.get('spezielle_effekte', [])
+        if not spezielle_effekte:
+            return False
+        return any(
+            (isinstance(e, dict) and e.get('typ') == 'magieaffin' and e.get('wert')) or
+            (isinstance(e, str) and 'magieaffin' in e.lower())
+            for e in spezielle_effekte
+        )
+    except Exception:
+        return False
+
+
 def get_volk_attribut_optionen(charakter, volk_name):
     """
     Gibt die verfügbaren Attribut-Optionen für ein Volk zurück.
@@ -858,7 +1016,12 @@ def get_volk_zusatzelemente(charakter, volk_name):
         if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_verstandsfertigkeit'):
             zusatzelemente['freie_fertigkeiten'] = True
             Logger.debug(f"Freie Fertigkeiten verfügbar für '{volk_name}'")
-        
+
+        # Magieaffin-Eigenart prüfen
+        if hat_volk_magieaffin(charakter, volk_name):
+            zusatzelemente['magieaffin'] = True
+            Logger.debug(f"Magieaffin verfügbar für '{volk_name}'")
+
         Logger.debug(f"=== FINALE Zusatzelemente für '{volk_name}': {zusatzelemente} ===")
         return zusatzelemente
         
