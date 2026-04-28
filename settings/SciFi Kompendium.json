@@ -442,8 +442,8 @@
         "Roboter": {
             "name": "Roboter",
             "handicaps": [
-                "Pazifist (schwer)",
-                "Programmiert (schwer)"
+                "Pazifist_schwer",
+                "Programmiert"
             ],
             "talente": [],
             "besonderheiten": [
@@ -464,8 +464,8 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Pazifist (schwer)",
-                    "Programmiert (schwer)"
+                    "Pazifist_schwer",
+                    "Programmiert"
                 ],
                 "spezielle_effekte": {
                     "roboter": true,
