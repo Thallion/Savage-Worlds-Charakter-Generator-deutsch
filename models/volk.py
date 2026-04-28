@@ -211,11 +211,16 @@ class Volk(EventDispatcher):
                         else:
                             Logger.debug(f"Volk {self.name}: {fert_name} (Grundfertigkeit) nicht angepasst (aktuell: W{fertigkeit.wert}{fertigkeit.modifier:+d})")
                     else:
-                        # NICHT-GRUNDFERTIGKEIT: W4-2 → W4+0 (Modifier erhöhen)
+                        # NICHT-GRUNDFERTIGKEIT: W4-2 → W6 (beim Rotvolk Kämpfen)
                         if fertigkeit.wert == 4 and fertigkeit.modifier == -2:
-                            alter_modifier = fertigkeit.modifier
-                            fertigkeit.wuerfel.modifier = -2 + bonus  # -2 + 2 = 0
-                            Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W4{alter_modifier:+d} auf W4{fertigkeit.modifier:+d}")
+                            if bonus > 0:
+                                # Würfel erhöhen und Modifier auf 0 setzen
+                                fertigkeit.wuerfel.value = 4 + bonus  # +2 = W6
+                                fertigkeit.wuerfel.modifier = 0
+                                Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W4-2 auf W6 erhöht")
+                            else:
+                                fertigkeit.wuerfel.modifier = -2 + bonus
+                                Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) Modifier auf {fertigkeit.modifier:+d} gesetzt")
                         else:
                             Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) nicht angepasst (aktuell: W{fertigkeit.wert}{fertigkeit.modifier:+d})")
 
@@ -319,19 +324,32 @@ class Volk(EventDispatcher):
                             Logger.debug(f"Volk {self.name}: {fert_name} (Grundfertigkeit) bereits auf Basis-Niveau")
                     else:
                         # NICHT-GRUNDFERTIGKEIT: Zurück auf W4-2
-                        expected_boosted_modifier = -2 + bonus  # Sollte 0 sein bei bonus=2
-                        
-                        if fertigkeit.wert == 4 and fertigkeit.modifier == expected_boosted_modifier:
-                            # Standard Fall: Fertigkeit hat den erwarteten Bonus-Modifier
-                            fertigkeit.wuerfel.modifier = -2
-                            Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W4{expected_boosted_modifier:+d} auf W4-2 zurückgesetzt")
-                        elif fertigkeit.modifier > -2:
-                            # Edge Case: Modifier wurde über den Basis-Bonus hinaus erhöht
-                            new_modifier = max(-2, fertigkeit.modifier - bonus)
-                            fertigkeit.wuerfel.modifier = new_modifier
-                            Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) Modifier von {fertigkeit.modifier:+d} auf {new_modifier:+d} reduziert")
+                        if bonus > 0:
+                            # Bonus erhöht Würfelwert: W(4+bonus) → W4-2
+                            expected_boosted_value = 4 + bonus
+                            if fertigkeit.wert == expected_boosted_value and fertigkeit.modifier == 0:
+                                fertigkeit.wuerfel.value = 4
+                                fertigkeit.wuerfel.modifier = -2
+                                Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W{expected_boosted_value} auf W4-2 zurückgesetzt")
+                            elif fertigkeit.wert > expected_boosted_value:
+                                new_value = max(4, fertigkeit.wert - bonus)
+                                fertigkeit.wuerfel.value = new_value
+                                fertigkeit.wuerfel.modifier = -2
+                                Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W{fertigkeit.wert} auf W{new_value}-2 reduziert")
+                            else:
+                                Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) bereits auf Basis-Niveau")
                         else:
-                            Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) bereits auf Basis-Niveau")
+                            # Bonus erhöhte Modifier: W4-2 → W4+0
+                            expected_boosted_modifier = -2 + bonus
+                            if fertigkeit.wert == 4 and fertigkeit.modifier == expected_boosted_modifier:
+                                fertigkeit.wuerfel.modifier = -2
+                                Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) von W4{expected_boosted_modifier:+d} auf W4-2 zurückgesetzt")
+                            elif fertigkeit.modifier > -2:
+                                new_modifier = max(-2, fertigkeit.modifier - abs(bonus))
+                                fertigkeit.wuerfel.modifier = new_modifier
+                                Logger.info(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) Modifier von {fertigkeit.modifier:+d} auf {new_modifier:+d} reduziert")
+                            else:
+                                Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) bereits auf Basis-Niveau")
 
             # Automatische Talente entfernen (nur die von diesem Volk hinzugefügten)
             for talent_name in self.effects.get('auto_talente', []):

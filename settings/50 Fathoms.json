@@ -212,7 +212,7 @@
                 "auto_talente": [],
                 "spezielle_effekte": {},
                 "wahlmoeglichkeiten": {
-                    "freier_attributspunkt": true
+                    "freies_attribut": true
                 }
             }
         },
@@ -328,7 +328,7 @@
                     "formlose_gestalt": true,
                     "sturheit": true,
                     "krabbenscheren": true,
-                    "panzergehaeuse": true,
+                    "panzerung_bonus": 4,
                     "scharfer_verstand": true,
                     "teleskopaugen": true
                 },

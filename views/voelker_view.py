@@ -734,7 +734,11 @@ class VoelkerWidget(MDBoxLayout):
 
             # Aktuell ausgewähltes Volk ermitteln
             selected_volk = get_selected_volk(charakter)
-            self.selected_volk_name = selected_volk.name if selected_volk else None
+            if selected_volk:
+                volk_key = next((k for k, v in charakter.voelker.items() if v is selected_volk), None)
+                self.selected_volk_name = volk_key if volk_key else selected_volk.name
+            else:
+                self.selected_volk_name = None
 
             # Auswahl-Button-Text aktualisieren
             if self.selected_volk_name:

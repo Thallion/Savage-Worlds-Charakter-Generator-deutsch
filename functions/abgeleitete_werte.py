@@ -327,13 +327,17 @@ def _berechne_voelker_natuerliche_panzerung(charakter):
             if isinstance(spezielle_effekte, list):
                 # Neues Listen-Format vom Volksgenerator: [{'typ': 'panzerung_2', 'wert': True}]
                 for effekt in spezielle_effekte:
-                    if effekt.get('typ') == 'panzerung_2' and effekt.get('wert'):
+                    if effekt.get('typ') == 'panzerung_bonus':
+                        natuerliche_panzerung = effekt.get('wert', 0)
+                    elif effekt.get('typ') == 'panzerung_2' and effekt.get('wert'):
                         natuerliche_panzerung = 2
                     elif effekt.get('typ') == 'panzerung_1' and effekt.get('wert'):
                         natuerliche_panzerung = 1
             elif isinstance(spezielle_effekte, dict):
                 # Altes Dict-Format von _parse_effects_from_text
-                if spezielle_effekte.get('panzerung_2', False):
+                if spezielle_effekte.get('panzerung_bonus'):
+                    natuerliche_panzerung = spezielle_effekte.get('panzerung_bonus', 0)
+                elif spezielle_effekte.get('panzerung_2', False):
                     natuerliche_panzerung = 2
                 elif spezielle_effekte.get('panzerung_1', False):
                     natuerliche_panzerung = 1
