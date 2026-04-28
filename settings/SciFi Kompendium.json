@@ -157,7 +157,7 @@
                 "Blutlos (stabilisiert sich automatisch bei Verbluten)",
                 "Geringeres Schlafbedürfnis (nur halb so viel Schlaf)",
                 "Keine lebenswichtigen Organe (kein zusätzlicher Schaden durch Angesagte Ziele)",
-                "Zäh (kein zweites Angeschlagen verursacht Wunde)"
+                "Zäh wie Leder (Talent kostenlos erhalten)"
             ],
             "sprachen": [],
             "altersspanne": "Variabel",
@@ -170,7 +170,9 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": [
+                    "Zäh wie Leder"
+                ],
                 "spezielle_effekte": {
                     "abhaengigkeit_sonnenlicht": true,
                     "blutlos": true,
