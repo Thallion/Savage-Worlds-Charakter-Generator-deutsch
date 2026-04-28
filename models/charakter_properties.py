@@ -64,6 +64,8 @@ class CharakterProperties:
     details = DictProperty({})
     voelker = DictProperty({})
     voelker_selected = DictProperty({})
+    # Pro-Volk Multi-Slot-Auswahlen (Listen pro Wahlmöglichkeit), persistiert.
+    voelker_auswahlen = DictProperty({})
     
     # Settings
     settingregeln = ObjectProperty(None)
