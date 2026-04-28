@@ -50,9 +50,9 @@ Adressiert die **Pro-Charakter-Auswahl** für Eigenarten mit `max_auswahl > 1` u
 ### ⏳ Offen
 
 #### Schritt 2 (Rest)
-- [ ] Schritt 2a — Schema: `kosten_per_instanz` Feld (aktuell implizit)
-- [ ] Schritt 2c — Anzeige Einzel-Instanzen mit ×-Entfernen-Button in der **Wizard**-Übersicht (Volk-Editor; im Völker-Tab durch slot-spezifische Edit-Buttons bereits abgedeckt)
-- [ ] Schritt 2e — `eigenart_zu_effekte`: gleiche Effekte summieren statt überschreiben (additive Effekte wie 2× Robustheit; Multi-Slot-Branch hat nur den `auswahl_verzoegert`-Pfad via `wahlmoeglichkeiten_counts` gelöst, nicht das direkte Effekt-Stacking)
+- [x] Schritt 2a — Schema: `kosten_per_instanz`-Feld erkannt in `berechne_punktestand` (Default True; bei False zählt pro ID nur die erste Instanz, Vorbereitung für Sonderfälle wie Macht 2+1+1+…)
+- [ ] Schritt 2c — Anzeige Einzel-Instanzen mit ×-Entfernen-Button in der **Wizard**-Übersicht (erfordert Widgetisierung des Review-Steps; eigener Folge-PR — im Völker-Tab durch slot-spezifische Edit-Buttons bereits abgedeckt)
+- [x] Schritt 2e — `eigenart_zu_effekte` summiert numerische Effekte (`attribute_bonuses`, `fertigkeits_startboni`, alle additiven Felder im `spezieller_effekt`-Pfad) statt zu überschreiben; `lebenserwartung_mult` als Multiplikator multipliziert
 
 #### Schritt 3 — Sonderfälle
 - [ ] Schritt 3a — Macht (2 + 1 je weitere), AH (Begabt) Aktivierung
@@ -396,9 +396,10 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 5. **✅ PR 5 (#182) — Bugfix Attributs-Schwäche-Edit + Stepper-Counter.** — **ERLEDIGT**
 6. **⏳ PR 6 — Multi-Slot im Völker-Tab.** Branch `claude/volkseigenarten-multi-instance`; muss **vor** Schritt 3 Sonderfälle gemerged werden, weil die Sonderfälle-Logik (Macht 2+1, Talent 2+Rang, Superkraft 2+X) auf `wahlmoeglichkeiten_counts` aufbaut — **OFFEN, Branch fertig**
 7. **⏳ PR 7 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **OFFEN**
-8. **⏳ PR 8 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige im Wizard, Effekte summieren statt überschreiben — **OFFEN**
-9. **⏳ PR 9 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
-10. **⏳ PR 10+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
+8. **✅ PR 8 — Schritt 2 (Rest, 2a + 2e).** `kosten_per_instanz`-Feld in `berechne_punktestand`; Effekte summieren in `eigenart_zu_effekte` (Attribut-, Fertigkeits- und numerische Special-Effects); 9 neue Tests in `test_volkseigenarten_schritt_2_rest.py` — **ERLEDIGT**
+9. **⏳ PR 8b — Schritt 2c.** Wizard-Review-Step widgetisieren mit Einzel-Instanzen + ×-Buttons — **OFFEN, erfordert UI-Rewrite**
+10. **⏳ PR 9 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
+11. **⏳ PR 10+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
 
 ---
 
