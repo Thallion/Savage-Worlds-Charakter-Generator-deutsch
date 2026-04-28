@@ -395,7 +395,7 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 4. **✅ PR 4 — Verzögerte Auswahl.** `auswahl_verzoegert` in Config, `_show_optionen_dialog`, `eigenart_zu_effekte` — **ERLEDIGT**
 5. **✅ PR 5 (#182) — Bugfix Attributs-Schwäche-Edit + Stepper-Counter.** — **ERLEDIGT**
 6. **⏳ PR 6 — Multi-Slot im Völker-Tab.** Branch `claude/volkseigenarten-multi-instance`; muss **vor** Schritt 3 Sonderfälle gemerged werden, weil die Sonderfälle-Logik (Macht 2+1, Talent 2+Rang, Superkraft 2+X) auf `wahlmoeglichkeiten_counts` aufbaut — **OFFEN, Branch fertig**
-7. **⏳ PR 7 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **OFFEN**
+7. **✅ PR 7 — Schritt 1d.** Migration Tests für `fliegen_stufe` (`STUFEN_MIGRATIONS`-Tabelle in `volkseigenarten_funktionen.py`, ergänzte 8 Tests in `test_volkseigenarten_stufen_migration.py`, behebt zudem Pre-existing Bug: `eigenart_typ` wurde als deutsches `'positiv'/'negativ'` an `get_eigenart_by_id` gegeben, das aber englische Keys erwartet) — **ERLEDIGT**
 8. **⏳ PR 8 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige im Wizard, Effekte summieren statt überschreiben — **OFFEN**
 9. **⏳ PR 9 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
 10. **⏳ PR 10+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
