@@ -107,6 +107,17 @@ EFFEKT_TYPEN = {
 }
 
 
+# Mapping alter Eigenart-IDs (vor Stufen-Konsolidierung in Commit a335405)
+# auf die neue konsolidierte ID + Stufen-Label. Wird in
+# `lade_eigenarten_fuer_bearbeitung` angewendet, damit alte Custom-Volk-Saves
+# beim Editieren auf das neue Schema überführt werden.
+STUFEN_MIGRATIONS = {
+    'fliegen_stufe1': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 6'},
+    'fliegen_stufe2': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 12'},
+    'fliegen_stufe3': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 24, Sprint 2W6'},
+}
+
+
 def stufen_kosten_bereich(eigenart):
     """
     Gibt den (min, max) Kosten-Bereich der Stufen einer Eigenart zurück.
@@ -682,24 +693,38 @@ def lade_eigenarten_fuer_bearbeitung(volk_dict):
     """
     Lädt die Eigenarten aus einem gespeicherten Volk-Dictionary.
     Rekonstruiert die positive/negative Listen für den Wizard.
-    
+
     Args:
         volk_dict: Das Dictionary des gespeicherten Volkes
-        
+
     Returns:
         tuple: (positive_eigenarten, negative_eigenarten)
     """
     positive_eigenarten = []
     negative_eigenarten = []
-    
+
     eigenarten = volk_dict.get('eigenarten', [])
-    
+
     for eigenart in eigenarten:
         eigenart_typ = eigenart.get('typ', 'positiv')
         eigenart_id = eigenart.get('id')
-        
+
+        # Eigenart-Typ ist in der Persistenz deutsch ('positiv'/'negativ'),
+        # die Config-Keys sind aber englisch ('positive'/'negative').
+        # Für den Lookup übersetzen.
+        config_typ = 'positive' if eigenart_typ == 'positiv' else 'negative'
+
+        # Migration: alte Stufen-IDs (vor Konsolidierung in Commit a335405) auf
+        # die neue konsolidierte Eigenart umschreiben und die Stufenwahl
+        # rekonstruieren, damit der Wizard das korrekte Radio aktiviert.
+        migrated_stufe = None
+        if eigenart_id in STUFEN_MIGRATIONS:
+            mig = STUFEN_MIGRATIONS[eigenart_id]
+            eigenart_id = mig['neue_id']
+            migrated_stufe = mig['stufe_label']
+
         if eigenart_id:
-            volle_eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
+            volle_eigenart = get_eigenart_by_id(eigenart_id, config_typ)
             if volle_eigenart:
                 eigenart_data = dict(volle_eigenart)
             else:
@@ -723,8 +748,15 @@ def lade_eigenarten_fuer_bearbeitung(volk_dict):
                 'optionen': None
             }
 
-        # Persistierte Stufen-Auswahl wiederherstellen (sowohl kosten als auch effekt)
+        # Persistierte Stufen-Auswahl wiederherstellen (sowohl kosten als auch effekt).
+        # Migrierte alte IDs setzen ihre Stufenwahl per Label-Lookup, sonst die
+        # bereits im Save persistierte ausgewaehlte_stufe.
         gespeicherte_stufe = eigenart.get('ausgewaehlte_stufe')
+        if migrated_stufe and eigenart_data.get('stufen') and not gespeicherte_stufe:
+            for stufe in eigenart_data['stufen']:
+                if stufe.get('label') == migrated_stufe:
+                    gespeicherte_stufe = stufe
+                    break
         if gespeicherte_stufe and eigenart_data.get('stufen'):
             wende_stufe_an(eigenart_data, gespeicherte_stufe)
 
@@ -732,7 +764,7 @@ def lade_eigenarten_fuer_bearbeitung(volk_dict):
             positive_eigenarten.append(eigenart_data)
         else:
             negative_eigenarten.append(eigenart_data)
-    
+
     return positive_eigenarten, negative_eigenarten
 
 
