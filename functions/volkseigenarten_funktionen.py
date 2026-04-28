@@ -333,12 +333,17 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
     effects = {
         'eigenarten': [],
         'wahlmoeglichkeiten': {},
+        'wahlmoeglichkeiten_counts': {},
         'attribute_bonuses': {},
         'fertigkeits_startboni': {},
         'spezielle_effekte': [],
         'handicaps': [],
         'auto_talente': []
     }
+
+    def _bump_count(typ):
+        """Erhöht den Slot-Zähler einer Wahlmöglichkeit für Mehrfach-Instanzen."""
+        effects['wahlmoeglichkeiten_counts'][typ] = effects['wahlmoeglichkeiten_counts'].get(typ, 0) + 1
 
     alle_eigenarten = []
     for e in positive_eigenarten:
@@ -378,6 +383,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                     effects['wahlmoeglichkeiten']['freies_attribut'] = attribut
                 else:
                     effects['wahlmoeglichkeiten']['freies_attribut'] = True
+                _bump_count('freies_attribut')
             if attribut:
                 effects['attribute_bonuses'][attribut] = effekt.get('attribut_bonus', 2)
 
@@ -389,6 +395,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                         effects['fertigkeits_startboni'][fertigkeit] = effekt.get('grundfertigkeit_bonus', 2)
                     elif optionen.get('auswahl_verzoegert'):
                         effects['wahlmoeglichkeiten']['freie_grundfertigkeit'] = True
+                        _bump_count('freie_grundfertigkeit')
             elif effekt.get('nicht_grundfertigkeit_bonus'):
                 if optionen and optionen.get('typ') == 'nicht_grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
@@ -396,6 +403,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                         effects['fertigkeits_startboni'][fertigkeit] = effekt.get('nicht_grundfertigkeit_bonus', 2)
                     elif optionen.get('auswahl_verzoegert'):
                         effects['wahlmoeglichkeiten']['freie_nicht_grundfertigkeit'] = True
+                        _bump_count('freie_nicht_grundfertigkeit')
             elif effekt.get('geschaeftssinn'):
                 effects['fertigkeits_startboni']['Überzeugen/Schätzen'] = 2
 
@@ -406,6 +414,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                         effects['wahlmoeglichkeiten']['freies_talent'] = True
                     else:
                         effects['wahlmoeglichkeiten']['freies_talent'] = value
+                    _bump_count('freies_talent')
         
         elif effekt_typ == 'spezieller_effekt':
             for key, value in effekt.items():
@@ -447,6 +456,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                     effects['wahlmoeglichkeiten']['freies_attribut_malus'] = attribut
                 else:
                     effects['wahlmoeglichkeiten']['freies_attribut_malus'] = True
+                _bump_count('freies_attribut_malus')
             if attribut:
                 malus = effekt.get('attribut_malus', 2)
                 effects['attribute_bonuses'][attribut] = effects['attribute_bonuses'].get(attribut, 0) - malus
@@ -482,6 +492,8 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         if eigenart.get('handicaps'):
             effects['handicaps'].extend(eigenart['handicaps'])
     
+    if not effects['wahlmoeglichkeiten_counts']:
+        del effects['wahlmoeglichkeiten_counts']
     if not effects['attribute_bonuses']:
         del effects['attribute_bonuses']
     if not effects['fertigkeits_startboni']:

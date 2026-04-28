@@ -1163,7 +1163,10 @@ def get_volk_zusatzelemente(charakter, volk_name):
             'attribut_optionen': [],
             'halbelf_entweder_oder': False,
             'menschen_vielseitig': False,
-            'beide_optionen': False  # Talent UND Attribut (z.B. Savage Pathfinder Mensch)
+            'beide_optionen': False,  # Talent UND Attribut (z.B. Savage Pathfinder Mensch)
+            # Multi-Slot-Erweiterung: Slot-Listen pro Wahlmöglichkeitstyp.
+            # Jeder Eintrag entspricht einer Eigenart-Instanz, die der User belegen muss.
+            'slots': {}
         }
         
         # Prüfen ob Volk existiert
@@ -1208,13 +1211,34 @@ def get_volk_zusatzelemente(charakter, volk_name):
             else:
                 Logger.warning(f"❌ GOBLIN: Keine freien Talente erkannt für '{volk_name}'")
         
+        # Counts pro Wahlmöglichkeit aus den Volk-Effekten holen (Multi-Slot-Quelle).
+        volk_obj = charakter.voelker.get(volk_name)
+        wm_counts = {}
+        if volk_obj and hasattr(volk_obj, 'effects'):
+            wm_counts = volk_obj.effects.get('wahlmoeglichkeiten_counts', {}) or {}
+
+        def _slot_count(typ, fallback_flag):
+            """Anzahl der Slots für eine Wahlmöglichkeit. Counts haben Vorrang,
+            sonst 1 wenn das Legacy-Flag gesetzt ist, sonst 0."""
+            n = wm_counts.get(typ, 0)
+            if n:
+                return n
+            return 1 if fallback_flag else 0
+
         # Standard-Wahlmöglichkeiten prüfen
         if not zusatzelemente['freie_talente']:  # Nur wenn nicht bereits durch Goblin gesetzt
             if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_talent') or \
                hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freies_anfaengertalent'):
                 zusatzelemente['freie_talente'] = True
                 Logger.debug(f"Standard: Freie Talente verfügbar für '{volk_name}'")
-        
+
+        # Slot-Liste für freie Talente (auch bei Goblin-Pfad).
+        n_talent = _slot_count('freies_talent', zusatzelemente['freie_talente'])
+        if n_talent:
+            zusatzelemente['slots']['freies_talent'] = [
+                {'index': i, 'value': None} for i in range(n_talent)
+            ]
+
         # Attribut-Optionen abrufen (für Bonus)
         attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
         Logger.debug(f"[GET_VOLK_ZUSATZELEMENTE] attribut_optionen = {attribut_optionen}")
@@ -1222,6 +1246,12 @@ def get_volk_zusatzelemente(charakter, volk_name):
             zusatzelemente['freies_attribut'] = attribut_optionen[0] if attribut_optionen else True
             zusatzelemente['attribut_optionen'] = attribut_optionen
             Logger.debug(f"Attribut-Optionen verfügbar für '{volk_name}': {attribut_optionen}")
+            n_attr = _slot_count('freies_attribut', True)
+            if n_attr:
+                zusatzelemente['slots']['freies_attribut'] = [
+                    {'index': i, 'value': None, 'options': list(attribut_optionen)}
+                    for i in range(n_attr)
+                ]
 
         # Attribut-Malus-Optionen abrufen (separater Key)
         if volk_name in charakter.voelker:
@@ -1234,12 +1264,29 @@ def get_volk_zusatzelemente(charakter, volk_name):
                         zusatzelemente['freies_attribut_malus'] = malus_optionen[0] if malus_optionen else True
                         zusatzelemente['attribut_malus_optionen'] = malus_optionen
                         Logger.debug(f"Attribut-Malus-Optionen verfügbar für '{volk_name}': {malus_optionen}")
+                        n_malus = _slot_count('freies_attribut_malus', True)
+                        if n_malus:
+                            zusatzelemente['slots']['freies_attribut_malus'] = [
+                                {'index': i, 'value': None, 'options': list(malus_optionen)}
+                                for i in range(n_malus)
+                            ]
 
         if hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_verstandsfertigkeit') or \
            hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_grundfertigkeit') or \
            hat_volk_wahlmoeglichkeit(charakter, volk_name, 'freie_nicht_grundfertigkeit'):
             zusatzelemente['freie_fertigkeiten'] = True
             Logger.debug(f"Freie Fertigkeiten verfügbar für '{volk_name}'")
+
+        # Slots für freie Fertigkeiten (Grund- und Nicht-Grund werden im Overlay
+        # weiter aufgeschlüsselt, hier nur die Gesamtzahl als 'freie_fertigkeit').
+        n_fert = _slot_count('freie_grundfertigkeit', False) + \
+                 _slot_count('freie_nicht_grundfertigkeit', False)
+        if not n_fert and zusatzelemente['freie_fertigkeiten']:
+            n_fert = 1
+        if n_fert:
+            zusatzelemente['slots']['freie_fertigkeit'] = [
+                {'index': i, 'value': None} for i in range(n_fert)
+            ]
 
         # Magieaffin-Eigenart prüfen
         if hat_volk_magieaffin(charakter, volk_name):
@@ -1281,26 +1328,44 @@ def reset_volk_auswahlen(charakter, volk_name, auswahlen_dict):
         _cleanup_voelker_selected(charakter)
             
         auswahl = auswahlen_dict[volk_name]
-        
+
+        def _as_list(v):
+            """Akzeptiert sowohl Listen (neue Multi-Slot-Form) als auch Skalare (Legacy)."""
+            if v is None:
+                return []
+            if isinstance(v, list):
+                return [x for x in v if x]
+            return [v]
+
         # Alle Auswahlen zurücksetzen
         for auswahl_typ, auswahl_wert in auswahl.items():
-            if auswahl_typ == 'talent':
-                # Talent abwählen
-                if hasattr(charakter, 'selected_talente') and auswahl_wert in charakter.selected_talente:
-                    charakter.selected_talente.remove(auswahl_wert)
-                    
-                if hasattr(charakter, 'talente') and auswahl_wert in charakter.talente:
-                    charakter.talente[auswahl_wert].ausgewaehlt = False
-                    
-            elif auswahl_typ == 'attribut':
-                # Attribut-Erhöhung rückgängig machen
-                if hasattr(charakter, 'attribute') and auswahl_wert in charakter.attribute:
-                    charakter.attribute[auswahl_wert].wert -= 1
-                    
-            elif auswahl_typ == 'fertigkeit':
-                # Fertigkeits-Erhöhung rückgängig machen
-                if hasattr(charakter, 'fertigkeiten') and auswahl_wert in charakter.fertigkeiten:
-                    charakter.fertigkeiten[auswahl_wert].wert -= 1
+            werte = _as_list(auswahl_wert)
+            for wert in werte:
+                if auswahl_typ == 'talent':
+                    # Talent abwählen
+                    if hasattr(charakter, 'selected_talente') and wert in charakter.selected_talente:
+                        charakter.selected_talente.remove(wert)
+                    if hasattr(charakter, 'talente') and wert in charakter.talente:
+                        charakter.talente[wert].ausgewaehlt = False
+
+                elif auswahl_typ == 'attribut':
+                    # Attribut-Erhöhung rückgängig machen
+                    if hasattr(charakter, 'attribute') and wert in charakter.attribute:
+                        charakter.attribute[wert].wert -= 1
+
+                elif auswahl_typ == 'attribut_malus':
+                    # Attribut-Schwächung rückgängig machen (Umkehr von waehle_freies_attribut_malus)
+                    if hasattr(charakter, 'attribute') and wert in charakter.attribute:
+                        attr = charakter.attribute[wert]
+                        if attr.wert >= 10:
+                            attr.wert += 2
+                        else:
+                            attr.wert += 1
+
+                elif auswahl_typ == 'fertigkeit':
+                    # Fertigkeits-Erhöhung rückgängig machen
+                    if hasattr(charakter, 'fertigkeiten') and wert in charakter.fertigkeiten:
+                        charakter.fertigkeiten[wert].wert -= 1
         
         # Auswahl aus Dictionary entfernen
         del auswahlen_dict[volk_name]
@@ -1311,6 +1376,54 @@ def reset_volk_auswahlen(charakter, volk_name, auswahlen_dict):
     except Exception as e:
         Logger.error(f"Fehler beim Zurücksetzen der Auswahlen für '{volk_name}': {e}")
         return False
+
+
+def reconcile_volk_auswahlen(charakter, volk_name, auswahlen_dict, slot_targets):
+    """
+    Trimmt Auswahlen so, dass jede Liste höchstens so lang ist wie die neue
+    Slot-Anzahl pro Typ. Überzählige Werte werden zurückgerollt (Attribut wieder
+    senken, Talent abwählen, etc.).
+
+    Wird gerufen, wenn der User ein bestehendes Custom-Volk editiert und
+    `max_auswahl` reduziert, sodass weniger Slots verbleiben als bisher belegt.
+
+    Args:
+        charakter: Das Charakterobjekt
+        volk_name: Name des Volks
+        auswahlen_dict: voelker_auswahlen-Dict (wird mutiert)
+        slot_targets: Dict {auswahl_typ: max_slots} - z.B. {'attribut': 1, 'talent': 2}
+    """
+    if volk_name not in auswahlen_dict:
+        return
+
+    auswahl = auswahlen_dict[volk_name]
+    for typ, target in slot_targets.items():
+        werte = auswahl.get(typ)
+        if not isinstance(werte, list):
+            continue
+        if len(werte) <= target:
+            continue
+        # Überzählige Werte zurückrollen
+        ueberschuss = werte[target:]
+        for wert in ueberschuss:
+            if not wert:
+                continue
+            if typ == 'talent':
+                if hasattr(charakter, 'selected_talente') and wert in charakter.selected_talente:
+                    charakter.selected_talente.remove(wert)
+                if hasattr(charakter, 'talente') and wert in charakter.talente:
+                    charakter.talente[wert].ausgewaehlt = False
+            elif typ == 'attribut':
+                if hasattr(charakter, 'attribute') and wert in charakter.attribute:
+                    charakter.attribute[wert].wert -= 1
+            elif typ == 'attribut_malus':
+                if hasattr(charakter, 'attribute') and wert in charakter.attribute:
+                    attr = charakter.attribute[wert]
+                    attr.wert += 2 if attr.wert >= 10 else 1
+            elif typ == 'fertigkeit':
+                if hasattr(charakter, 'fertigkeiten') and wert in charakter.fertigkeiten:
+                    charakter.fertigkeiten[wert].wert -= 1
+        auswahl[typ] = werte[:target]
 
 
 def initialisiere_voelker_system(charakter):

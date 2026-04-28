@@ -1494,8 +1494,11 @@ class VolkGeneratorWizard:
             volk_name = self.wizard_data['name'].strip()
             
             if self.edit_volk:
-                del charakter.voelker[self.edit_volk.name]
-                Logger.info(f"Altes Volk '{self.edit_volk.name}' für Bearbeitung entfernt")
+                alter_name = self.edit_volk.name
+                del charakter.voelker[alter_name]
+                # Pro-Volk-Auswahlen unter altem Namen mitnehmen, falls Volk umbenannt wird
+                self._renamed_from = alter_name
+                Logger.info(f"Altes Volk '{alter_name}' für Bearbeitung entfernt")
             
             if volk_name in charakter.voelker:
                 self._show_error(f"Volk '{volk_name}' existiert bereits.")
@@ -1511,6 +1514,32 @@ class VolkGeneratorWizard:
             )
             
             charakter.voelker[volk_name] = new_volk
+
+            # Beim Editieren: bestehende Pro-Charakter-Auswahlen mit den neuen
+            # Slot-Anzahlen abgleichen, damit reduzierte max_auswahl-Werte
+            # überzählige Auswahlen sauber zurückrollen.
+            if self.edit_volk:
+                # Falls der Volk-Name geändert wurde, Auswahlen-Eintrag umbenennen
+                alter_name = getattr(self, '_renamed_from', None)
+                if alter_name and alter_name != volk_name and hasattr(charakter, 'voelker_auswahlen'):
+                    if alter_name in charakter.voelker_auswahlen:
+                        charakter.voelker_auswahlen[volk_name] = charakter.voelker_auswahlen.pop(alter_name)
+                try:
+                    from functions.volk_funktionen import reconcile_volk_auswahlen
+                    counts = effects.get('wahlmoeglichkeiten_counts', {}) or {}
+                    slot_targets = {
+                        'talent':         counts.get('freies_talent', 0),
+                        'attribut':       counts.get('freies_attribut', 0),
+                        'attribut_malus': counts.get('freies_attribut_malus', 0),
+                        'fertigkeit':     (counts.get('freie_grundfertigkeit', 0)
+                                           + counts.get('freie_nicht_grundfertigkeit', 0)),
+                    }
+                    if hasattr(charakter, 'voelker_auswahlen'):
+                        reconcile_volk_auswahlen(
+                            charakter, volk_name, charakter.voelker_auswahlen, slot_targets
+                        )
+                except Exception as e:
+                    Logger.warning(f"reconcile_volk_auswahlen fehlgeschlagen: {e}")
 
             if self.dialog:
                 self.dialog.dismiss()
@@ -1681,12 +1710,22 @@ class VolkGeneratorWizard:
                         self._show_voraussetzungen_confirmation_dialog(volk_name, self._talent_selected, charakter)
                     elif result:
                         Logger.info(f"Freies Talent '{self._talent_selected}' für Volk '{volk_name}' gewählt")
-                        # VoelkerWidget UI aktualisieren
+                        # VoelkerWidget UI aktualisieren - Talent an die Multi-Slot-Liste anhängen.
+                        # Schlüsselname 'talent' ist konsistent mit dem restlichen Völker-Tab.
                         try:
                             widget = app.get_widget_by_tab_text('Völker', 'voelker_widget')
                             if widget:
-                                widget.voelker_auswahlen.setdefault(volk_name, {})
-                                widget.voelker_auswahlen[volk_name]['freies_talent'] = self._talent_selected
+                                eintrag = widget.voelker_auswahlen.setdefault(volk_name, {})
+                                aktuell = eintrag.get('talent')
+                                if isinstance(aktuell, list):
+                                    if self._talent_selected not in aktuell:
+                                        aktuell.append(self._talent_selected)
+                                else:
+                                    eintrag['talent'] = (
+                                        [aktuell, self._talent_selected]
+                                        if aktuell and aktuell != self._talent_selected
+                                        else [self._talent_selected]
+                                    )
                                 widget.aktualisiere_ui()
                         except Exception:
                             pass

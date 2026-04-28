@@ -141,19 +141,34 @@ class VoelkerWidget(MDBoxLayout):
                 if volk_name not in self.voelker_auswahlen:
                     self.voelker_auswahlen[volk_name] = {}
 
-                # Freies Talent (all types)
-                if zusatzelemente.get('freies_talent'):
-                    talent = zusatzelemente['freies_talent']
-                    Logger.info(f"[DEBUG] Rufe waehle_freies_talent auf für '{volk_name}' mit Talent '{talent}'")
-                    result = waehle_freies_talent(charakter, volk_name, talent)
-                    Logger.info(f"[DEBUG] waehle_freies_talent result: {result}")
-                    if result == "needs_voraussetzungen_confirmation":
-                        self._show_voraussetzungen_confirmation_dialog(volk_name, 'freies_talent', talent)
-                        return  # Abbrechen, Dialog wird angezeigt
-                    elif result:
-                        self.voelker_auswahlen[volk_name]['talent'] = talent
-                    else:
-                        Logger.error(f"Fehler bei Auswahl von freiem Talent '{talent}' für Volk '{volk_name}'")
+                def _as_list(v):
+                    """Akzeptiert sowohl Listen (Multi-Slot) als auch Skalare (Legacy)."""
+                    if v is None:
+                        return []
+                    if isinstance(v, list):
+                        return [x for x in v if x]
+                    return [v]
+
+                # Freies Talent (all types) - kann mehrere Slots haben
+                talente = _as_list(zusatzelemente.get('freies_talent'))
+                if talente:
+                    talent_liste = []
+                    for talent in talente:
+                        Logger.info(f"[DEBUG] Rufe waehle_freies_talent auf für '{volk_name}' mit Talent '{talent}'")
+                        result = waehle_freies_talent(charakter, volk_name, talent)
+                        Logger.info(f"[DEBUG] waehle_freies_talent result: {result}")
+                        if result == "needs_voraussetzungen_confirmation":
+                            # Bisher gewählte Talente sichern, dann Dialog zeigen
+                            if talent_liste:
+                                self.voelker_auswahlen[volk_name]['talent'] = talent_liste
+                            self._show_voraussetzungen_confirmation_dialog(volk_name, 'freies_talent', talent)
+                            return
+                        elif result:
+                            talent_liste.append(talent)
+                        else:
+                            Logger.error(f"Fehler bei Auswahl von freiem Talent '{talent}' für Volk '{volk_name}'")
+                    if talent_liste:
+                        self.voelker_auswahlen[volk_name]['talent'] = talent_liste
 
                 # Halbelf Talent
                 if zusatzelemente.get('halbelf_talent'):
@@ -189,26 +204,38 @@ class VoelkerWidget(MDBoxLayout):
                     waehle_mensch_fertigkeitspunkte(charakter, volk_name)
                     self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = '+2 Fertigkeitspunkte'
 
-                # Freies Attribut
-                if zusatzelemente.get('freies_attribut'):
-                    attr = zusatzelemente['freies_attribut']
-                    Logger.info(f"[DEBUG] Rufe waehle_freies_attribut auf für '{volk_name}' mit Attribut '{attr}'")
-                    waehle_freies_attribut(charakter, volk_name, attr)
-                    self.voelker_auswahlen[volk_name]['attribut'] = attr
+                # Freies Attribut - kann mehrere Slots haben
+                attribute = _as_list(zusatzelemente.get('freies_attribut'))
+                if attribute:
+                    attr_liste = []
+                    for attr in attribute:
+                        Logger.info(f"[DEBUG] Rufe waehle_freies_attribut auf für '{volk_name}' mit Attribut '{attr}'")
+                        if waehle_freies_attribut(charakter, volk_name, attr):
+                            attr_liste.append(attr)
+                    if attr_liste:
+                        self.voelker_auswahlen[volk_name]['attribut'] = attr_liste
 
-                # Freies Attribut (Malus)
-                if zusatzelemente.get('freies_attribut_malus'):
-                    attr = zusatzelemente['freies_attribut_malus']
-                    Logger.info(f"[DEBUG] Rufe waehle_freies_attribut_malus auf für '{volk_name}' mit Attribut '{attr}'")
+                # Freies Attribut (Malus) - kann mehrere Slots haben
+                malus_werte = _as_list(zusatzelemente.get('freies_attribut_malus'))
+                if malus_werte:
                     from functions.volk_funktionen import waehle_freies_attribut_malus
-                    waehle_freies_attribut_malus(charakter, volk_name, attr)
-                    self.voelker_auswahlen[volk_name]['attribut_malus'] = attr
+                    malus_liste = []
+                    for attr in malus_werte:
+                        Logger.info(f"[DEBUG] Rufe waehle_freies_attribut_malus auf für '{volk_name}' mit Attribut '{attr}'")
+                        if waehle_freies_attribut_malus(charakter, volk_name, attr):
+                            malus_liste.append(attr)
+                    if malus_liste:
+                        self.voelker_auswahlen[volk_name]['attribut_malus'] = malus_liste
 
-                # Freie Fertigkeit
-                if zusatzelemente.get('freie_fertigkeit'):
-                    fert = zusatzelemente['freie_fertigkeit']
-                    waehle_freie_fertigkeit(charakter, volk_name, fert)
-                    self.voelker_auswahlen[volk_name]['fertigkeit'] = fert
+                # Freie Fertigkeit - kann mehrere Slots haben
+                fertigkeiten = _as_list(zusatzelemente.get('freie_fertigkeit'))
+                if fertigkeiten:
+                    fert_liste = []
+                    for fert in fertigkeiten:
+                        if waehle_freie_fertigkeit(charakter, volk_name, fert):
+                            fert_liste.append(fert)
+                    if fert_liste:
+                        self.voelker_auswahlen[volk_name]['fertigkeit'] = fert_liste
 
                 # UI aktualisieren nach Zusatzelemente-Anwendung
                 Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
@@ -328,7 +355,15 @@ class VoelkerWidget(MDBoxLayout):
             if volk_name not in self.voelker_auswahlen:
                 self.voelker_auswahlen[volk_name] = {}
             if talent_typ == 'freies_talent':
-                self.voelker_auswahlen[volk_name]['talent'] = talent_name
+                # An die Talent-Liste anhängen (Multi-Slot)
+                aktuell = self.voelker_auswahlen[volk_name].get('talent')
+                if isinstance(aktuell, list):
+                    if talent_name not in aktuell:
+                        aktuell.append(talent_name)
+                else:
+                    self.voelker_auswahlen[volk_name]['talent'] = (
+                        [aktuell, talent_name] if aktuell else [talent_name]
+                    )
             elif talent_typ == 'halbelf_talent':
                 self.voelker_auswahlen[volk_name]['halbelf_wahl'] = f'Talent: {talent_name}'
             elif talent_typ == 'mensch_talent':
@@ -675,7 +710,16 @@ class VoelkerWidget(MDBoxLayout):
                 return
 
             charakter = self.controller.charakter
-            
+
+            # Persistierte Pro-Volk-Auswahlen aus dem Charakter übernehmen,
+            # damit nach dem Laden die Edit-Buttons & Slot-Anzeige korrekt sind.
+            geladen = getattr(charakter, 'voelker_auswahlen', None)
+            if isinstance(geladen, dict) and geladen:
+                # Nur überschreiben, wenn das Widget selbst noch keine
+                # neueren Auswahlen hält (Reload-Szenario).
+                if not self.voelker_auswahlen:
+                    self.voelker_auswahlen = dict(geladen)
+
             # Völker-Daten prüfen
             if not hasattr(charakter, 'voelker') or not charakter.voelker:
                 self._show_no_data_message()
@@ -745,33 +789,41 @@ class VoelkerWidget(MDBoxLayout):
             return
         
         wahl = self.voelker_auswahlen.get(self.selected_volk_name, {})
-        
-        # Collect all selections for this volk
-        selections = []
-        
-        # Talent
-        if wahl.get('talent'):
-            selections.append(('Freies Talent', wahl['talent']))
-        
-        # Halbelf Wahl
+
+        # Collect all selections for this volk.
+        # Multi-Slot-Keys liefern eine Zeile pro Listeneintrag mit slot_index;
+        # Unique-Keys (halbelf_wahl, vielseitig_wahl, magieaffin) liefern eine
+        # Zeile mit slot_index=None.
+        selections = []  # Tupel: (label, value, slot_index)
+
+        def _expand(label, value):
+            if isinstance(value, list):
+                for i, v in enumerate(value):
+                    if v:
+                        selections.append((label, v, i))
+            elif value:
+                # Legacy-Skalar in Slot 0 abbilden, damit Edit-Logik einheitlich greift
+                selections.append((label, value, 0))
+
+        # Talent (Multi-Slot)
+        _expand('Freies Talent', wahl.get('talent'))
+
+        # Halbelf Wahl (Unique)
         if wahl.get('halbelf_wahl'):
-            selections.append(('Halbelf Wahl', wahl['halbelf_wahl']))
-        
-        # Vielseitig Wahl (Mensch)
+            selections.append(('Halbelf Wahl', wahl['halbelf_wahl'], None))
+
+        # Vielseitig Wahl (Mensch, Unique)
         if wahl.get('vielseitig_wahl'):
-            selections.append(('Vielseitig Wahl', wahl['vielseitig_wahl']))
-        
-        # Attribut
-        if wahl.get('attribut'):
-            selections.append(('Freies Attribut', wahl['attribut']))
+            selections.append(('Vielseitig Wahl', wahl['vielseitig_wahl'], None))
 
-        # Attribut-Malus (Attributs-Schwäche)
-        if wahl.get('attribut_malus'):
-            selections.append(('Attributs Schwäche', wahl['attribut_malus']))
+        # Attribut (Multi-Slot)
+        _expand('Freies Attribut', wahl.get('attribut'))
 
-        # Fertigkeit
-        if wahl.get('fertigkeit'):
-            selections.append(('Freie Fertigkeit', wahl['fertigkeit']))
+        # Attributs Schwäche (Multi-Slot)
+        _expand('Attributs Schwäche', wahl.get('attribut_malus'))
+
+        # Fertigkeit (Multi-Slot)
+        _expand('Freie Fertigkeit', wahl.get('fertigkeit'))
 
         # Magieaffin (zeigt das gewählte AH-Talent + die zugeordnete Arkane Fertigkeit)
         from functions.volk_funktionen import (
@@ -784,12 +836,12 @@ class VoelkerWidget(MDBoxLayout):
             magieaffin_fertigkeit = get_aktuelle_magieaffin_fertigkeit(self.controller.charakter, self.selected_volk_name)
             if magieaffin_ah:
                 anzeige = f"{magieaffin_ah} ({magieaffin_fertigkeit})" if magieaffin_fertigkeit else magieaffin_ah
-                selections.append(('Magieaffin', anzeige))
+                selections.append(('Magieaffin', anzeige, None))
             elif magieaffin_fertigkeit:
                 # Backward-Compat: Alte Auswahl ohne AH-Talent
-                selections.append(('Magieaffin', magieaffin_fertigkeit))
+                selections.append(('Magieaffin', magieaffin_fertigkeit, None))
             else:
-                selections.append(('Magieaffin', 'Auswählen...'))
+                selections.append(('Magieaffin', 'Auswählen...', None))
         
         if not selections:
             return
@@ -798,23 +850,30 @@ class VoelkerWidget(MDBoxLayout):
         from kivymd.uix.chip import MDChip, MDChipText
         from kivymd.uix.button import MDIconButton
         
-        for label, value in selections:
+        # Wenn ein Label mehrfach erscheint (z.B. zwei "Freies Talent"), Index in der Anzeige nummerieren
+        from collections import Counter
+        label_counts = Counter(l for l, _, _ in selections)
+
+        for label, value, slot_index in selections:
             row = MDBoxLayout(orientation='horizontal', size_hint_y=None, height=dp(36), spacing=dp(8))
+            display_label = label
+            if label_counts[label] > 1 and slot_index is not None:
+                display_label = f"{label} {slot_index + 1}"
             label_widget = MDLabel(
-                text=f"{label}:",
+                text=f"{display_label}:",
                 size_hint_x=None,
                 width=dp(120),
                 theme_text_color="Secondary",
                 halign='left',
             )
             row.add_widget(label_widget)
-            
+
             # Hintergrundfarbe sicherstellen (nie None)
             if hasattr(self, 'theme_cls') and self.theme_cls:
                 bg_color = self.theme_cls.primaryContainerColor
             else:
                 bg_color = [0.7, 0.8, 1.0, 1.0]  # hellblau als Fallback
-            
+
             chip = MDChip(
                 MDChipText(text=value),
                 type="filter",
@@ -822,7 +881,7 @@ class VoelkerWidget(MDBoxLayout):
                 md_bg_color=bg_color,
             )
             row.add_widget(chip)
-            
+
             # Edit-Button für Talent-Auswahl (nur bei Talenten) und Attribut
             if label in ['Freies Talent', 'Halbelf Wahl', 'Vielseitig Wahl', 'Freies Attribut', 'Attributs Schwäche', 'Freie Fertigkeit', 'Magieaffin']:
                 # Elementnamen extrahieren
@@ -838,24 +897,26 @@ class VoelkerWidget(MDBoxLayout):
                     size=(dp(36), dp(36)),
                     pos_hint={"center_y": 0.5}
                 )
-                # Callback mit Debounce - unterscheide zwischen Talent, Attribut und Fertigkeit
                 btn = edit_btn
+                idx = slot_index  # für Lambda-Capture
                 if label == 'Freies Attribut':
-                    edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name: self._on_edit_attribut(attr))
+                    edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name, i=idx: self._on_edit_attribut(attr, slot_index=i))
                 elif label == 'Attributs Schwäche':
-                    edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name: self._on_edit_attribut_malus(attr))
+                    edit_btn.bind(on_release=lambda x, btn=btn, attr=element_name, i=idx: self._on_edit_attribut_malus(attr, slot_index=i))
                 elif label == 'Freie Fertigkeit':
-                    edit_btn.bind(on_release=lambda x, btn=btn, fert=element_name: self._on_edit_fertigkeit(fert))
+                    edit_btn.bind(on_release=lambda x, btn=btn, fert=element_name, i=idx: self._on_edit_fertigkeit(fert, slot_index=i))
                 elif label == 'Magieaffin':
                     edit_btn.bind(on_release=lambda x, btn=btn: self._on_edit_magieaffin())
                 else:
-                    edit_btn.bind(on_release=lambda x, btn=btn, l=label, tn=element_name: self._on_edit_zusatzelement(l, tn))
+                    edit_btn.bind(on_release=lambda x, btn=btn, l=label, tn=element_name, i=idx: self._on_edit_zusatzelement(l, tn, slot_index=i))
                 row.add_widget(edit_btn)
             
             container.add_widget(row)
 
-    def _on_edit_zusatzelement(self, label, talent_name):
-        """Öffnet das Talent-Auswahl-Overlay zum Bearbeiten eines bereits gewählten Talents."""
+    def _on_edit_zusatzelement(self, label, talent_name, slot_index=None):
+        """Öffnet das Talent-Auswahl-Overlay zum Bearbeiten eines bereits gewählten Talents.
+        slot_index gibt bei Multi-Slot-Talenten an, welcher Slot bearbeitet wird."""
+        self._current_edit_slot_index = slot_index
         if not hasattr(self, '_voelker_overlay'):
             Logger.error("VoelkerOverlay nicht initialisiert")
             return
@@ -894,8 +955,10 @@ class VoelkerWidget(MDBoxLayout):
         # Talentauswahl direkt öffnen
         self._voelker_overlay._show_talent_selection(talent_typ)
 
-    def _on_edit_attribut(self, attribut_name):
-        """Öffnet einen Dialog zum Bearbeiten des ausgewählten freien Attributs."""
+    def _on_edit_attribut(self, attribut_name, slot_index=None):
+        """Öffnet einen Dialog zum Bearbeiten des ausgewählten freien Attributs.
+        slot_index gibt bei Multi-Slot-Attributen an, welcher Slot bearbeitet wird."""
+        self._current_edit_slot_index = slot_index
         from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
         from kivymd.uix.boxlayout import MDBoxLayout
         from kivymd.uix.chip import MDChip, MDChipText
@@ -947,10 +1010,22 @@ class VoelkerWidget(MDBoxLayout):
         )
         chips_box.bind(minimum_height=chips_box.setter('height'))
         
+        # Bereits in anderen Slots gewählte Attribute ausblenden, damit der User
+        # in diesem Slot kein Duplikat wählt. Den Wert des aktuellen Slots erlauben.
+        bereits_gewaehlt = set()
+        eintrag_attr = self.voelker_auswahlen.get(volk_name, {}).get('attribut')
+        if isinstance(eintrag_attr, list):
+            cur_idx = getattr(self, '_current_edit_slot_index', None) or 0
+            for i, v in enumerate(eintrag_attr):
+                if v and i != cur_idx:
+                    bereits_gewaehlt.add(v)
+
         for attr in sorted(attribut_optionen):
             if attr == NO_ATTRIBUT_AVAILABLE_TEXT:
                 continue
-            
+            if attr in bereits_gewaehlt:
+                continue
+
             # Chip mit Hervorhebung des aktuell ausgewählten Attributs
             chip_kwargs = {
                 'type': "filter",
@@ -1009,41 +1084,63 @@ class VoelkerWidget(MDBoxLayout):
         dialog.open()
     
     def _on_attribut_chosen(self, attribut_name):
-        """Wird aufgerufen wenn ein neues Attribut im Bearbeitungs-Dialog ausgewählt wird."""
+        """Wird aufgerufen wenn ein neues Attribut im Bearbeitungs-Dialog ausgewählt wird.
+        Berücksichtigt _current_edit_slot_index für Multi-Slot."""
         from kivy.clock import Clock
         from functions.volk_funktionen import waehle_freies_attribut
-        
+
         volk_name = self.selected_volk_name
         if not volk_name:
             return
-        
+
         charakter = self.controller.charakter
-        
-        Logger.info(f"[DEBUG] Ändere freies Attribut für '{volk_name}' zu '{attribut_name}'")
-        
-        # Attribut ändern (waehle_freies_attribut setzt das alte Attribut zurück)
+        slot_index = getattr(self, '_current_edit_slot_index', None) or 0
+
+        Logger.info(f"[DEBUG] Ändere freies Attribut für '{volk_name}' Slot {slot_index} zu '{attribut_name}'")
+
+        # Alten Wert dieses Slots ermitteln und ggf. zurückrollen.
+        eintrag = self.voelker_auswahlen.get(volk_name, {})
+        alt = eintrag.get('attribut')
+        if isinstance(alt, list):
+            alt_wert = alt[slot_index] if 0 <= slot_index < len(alt) else None
+        else:
+            alt_wert = alt
+        if alt_wert and alt_wert != attribut_name:
+            # Für Nicht-Mensch-Völker manuell die alte Erhöhung zurücknehmen
+            # (waehle_freies_attribut macht das nur für Menschen).
+            if volk_name.lower() not in ["mensch", "menschen", "human"]:
+                if hasattr(charakter, 'attribute') and alt_wert in charakter.attribute:
+                    charakter.attribute[alt_wert].wert = max(4, charakter.attribute[alt_wert].wert - 1)
+
         success = waehle_freies_attribut(charakter, volk_name, attribut_name)
-        
+
         if success:
-            # voelker_auswahlen aktualisieren
             if volk_name not in self.voelker_auswahlen:
                 self.voelker_auswahlen[volk_name] = {}
-            self.voelker_auswahlen[volk_name]['attribut'] = attribut_name
-            
-            # Dialog schließen
+            aktuell = self.voelker_auswahlen[volk_name].get('attribut')
+            if isinstance(aktuell, list):
+                # Listen-Update an gewünschtem Slot
+                if 0 <= slot_index < len(aktuell):
+                    aktuell[slot_index] = attribut_name
+                else:
+                    aktuell.append(attribut_name)
+            else:
+                self.voelker_auswahlen[volk_name]['attribut'] = [attribut_name]
+
             if hasattr(self, '_attribut_dialog') and self._attribut_dialog:
                 self._attribut_dialog.dismiss()
-            
-            # UI aktualisieren
+
             Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
             Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
-            
-            Logger.info(f"Freies Attribut für '{volk_name}' erfolgreich geändert zu '{attribut_name}'")
+
+            Logger.info(f"Freies Attribut für '{volk_name}' Slot {slot_index} erfolgreich geändert zu '{attribut_name}'")
         else:
             Logger.error(f"Fehler beim Ändern des Attributs für '{volk_name}'")
 
-    def _on_edit_attribut_malus(self, attribut_name):
-        """Öffnet einen Dialog zum Bearbeiten der Attributs-Schwäche (Malus)."""
+    def _on_edit_attribut_malus(self, attribut_name, slot_index=None):
+        """Öffnet einen Dialog zum Bearbeiten der Attributs-Schwäche (Malus).
+        slot_index gibt bei Multi-Slot-Schwächen an, welcher Slot bearbeitet wird."""
+        self._current_edit_slot_index = slot_index
         from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
         from kivymd.uix.boxlayout import MDBoxLayout
         from kivymd.uix.chip import MDChip, MDChipText
@@ -1092,8 +1189,19 @@ class VoelkerWidget(MDBoxLayout):
         )
         chips_box.bind(minimum_height=chips_box.setter('height'))
 
+        # Bereits in anderen Schwäche-Slots gewählte Attribute ausblenden
+        bereits_gewaehlt = set()
+        eintrag_malus = self.voelker_auswahlen.get(volk_name, {}).get('attribut_malus')
+        if isinstance(eintrag_malus, list):
+            cur_idx = getattr(self, '_current_edit_slot_index', None) or 0
+            for i, v in enumerate(eintrag_malus):
+                if v and i != cur_idx:
+                    bereits_gewaehlt.add(v)
+
         for attr in sorted(attribut_optionen):
             if attr == NO_ATTRIBUT_AVAILABLE_TEXT:
+                continue
+            if attr in bereits_gewaehlt:
                 continue
 
             chip_kwargs = {
@@ -1148,7 +1256,8 @@ class VoelkerWidget(MDBoxLayout):
         dialog.open()
 
     def _on_attribut_malus_chosen(self, attribut_name):
-        """Wird aufgerufen, wenn ein neues Schwäche-Attribut ausgewählt wird."""
+        """Wird aufgerufen, wenn ein neues Schwäche-Attribut ausgewählt wird.
+        Berücksichtigt _current_edit_slot_index für Multi-Slot."""
         from kivy.clock import Clock
         from functions.volk_funktionen import waehle_freies_attribut_malus
 
@@ -1157,31 +1266,44 @@ class VoelkerWidget(MDBoxLayout):
             return
 
         charakter = self.controller.charakter
+        slot_index = getattr(self, '_current_edit_slot_index', None) or 0
 
-        # Vorherige Schwäche zurücksetzen, falls vorhanden, damit kein doppelter Malus angewendet wird
-        alte_schwaeche = self.voelker_auswahlen.get(volk_name, {}).get('attribut_malus')
+        # Alten Wert dieses Slots ermitteln und Schwäche zurückrollen
+        eintrag = self.voelker_auswahlen.get(volk_name, {})
+        alt = eintrag.get('attribut_malus')
+        if isinstance(alt, list):
+            alte_schwaeche = alt[slot_index] if 0 <= slot_index < len(alt) else None
+        else:
+            alte_schwaeche = alt
+
         if alte_schwaeche and alte_schwaeche != attribut_name:
             try:
                 if hasattr(charakter, 'attribute') and alte_schwaeche in charakter.attribute:
                     altes_attribut = charakter.attribute[alte_schwaeche]
                     alter_wert = altes_attribut.wert
-                    # Würfelstufe wieder anheben (Umkehr von waehle_freies_attribut_malus)
                     if alter_wert >= 10:
-                        altes_attribut.wert += 2  # W10 -> W12
+                        altes_attribut.wert += 2
                     else:
-                        altes_attribut.wert += 1  # W4 -> W6, W6 -> W8, W8 -> W10
+                        altes_attribut.wert += 1
                     if hasattr(charakter, 'berechne_abgeleitete_werte'):
                         charakter.berechne_abgeleitete_werte()
             except Exception as e:
                 Logger.warning(f"Konnte alte Attributs-Schwäche '{alte_schwaeche}' nicht zurücksetzen: {e}")
 
-        Logger.info(f"[DEBUG] Ändere Attributs-Schwäche für '{volk_name}' zu '{attribut_name}'")
+        Logger.info(f"[DEBUG] Ändere Attributs-Schwäche für '{volk_name}' Slot {slot_index} zu '{attribut_name}'")
         success = waehle_freies_attribut_malus(charakter, volk_name, attribut_name)
 
         if success:
             if volk_name not in self.voelker_auswahlen:
                 self.voelker_auswahlen[volk_name] = {}
-            self.voelker_auswahlen[volk_name]['attribut_malus'] = attribut_name
+            aktuell = self.voelker_auswahlen[volk_name].get('attribut_malus')
+            if isinstance(aktuell, list):
+                if 0 <= slot_index < len(aktuell):
+                    aktuell[slot_index] = attribut_name
+                else:
+                    aktuell.append(attribut_name)
+            else:
+                self.voelker_auswahlen[volk_name]['attribut_malus'] = [attribut_name]
 
             if hasattr(self, '_attribut_malus_dialog') and self._attribut_malus_dialog:
                 self._attribut_malus_dialog.dismiss()
@@ -1189,12 +1311,13 @@ class VoelkerWidget(MDBoxLayout):
             Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
             Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
 
-            Logger.info(f"Attributs-Schwäche für '{volk_name}' erfolgreich geändert zu '{attribut_name}'")
+            Logger.info(f"Attributs-Schwäche für '{volk_name}' Slot {slot_index} erfolgreich geändert zu '{attribut_name}'")
         else:
             Logger.error(f"Fehler beim Ändern der Attributs-Schwäche für '{volk_name}'")
 
-    def _on_edit_fertigkeit(self, fertigkeit_name):
+    def _on_edit_fertigkeit(self, fertigkeit_name, slot_index=None):
         """Platzhalter für Fertigkeits-Bearbeitung (noch nicht implementiert)."""
+        self._current_edit_slot_index = slot_index
         Logger.warning("Bearbeiten von freien Fertigkeiten ist noch nicht implementiert")
         # TODO: Implementieren ähnlich wie _on_edit_attribut
 
@@ -1772,14 +1895,18 @@ class VoelkerWidget(MDBoxLayout):
             success = waehle_freies_talent(charakter, volk_name, talent_name)
             
             if success:
-                # UI-lokale Auswahl speichern für Anzeige
+                # UI-lokale Auswahl speichern für Anzeige (an Liste anhängen)
                 if volk_name not in self.voelker_auswahlen:
                     self.voelker_auswahlen[volk_name] = {}
-                self.voelker_auswahlen[volk_name]['talent'] = talent_name
-                
+                liste = self.voelker_auswahlen[volk_name].setdefault('talent', [])
+                if not isinstance(liste, list):
+                    liste = [liste]
+                    self.voelker_auswahlen[volk_name]['talent'] = liste
+                liste.append(talent_name)
+
                 # UI aktualisieren
                 Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
-                
+
         except Exception as e:
             Logger.error(f"Fehler bei Talent-Auswahl (UI): {e}", exc_info=True)
 
@@ -1787,19 +1914,21 @@ class VoelkerWidget(MDBoxLayout):
         """Wählt ein Attribut aus (UI-Wrapper für Geschäftslogik)."""
         try:
             charakter = self.controller.charakter
-            
+
             # Geschäftslogik aufrufen
             success = waehle_freies_attribut(charakter, volk_name, attribut_name)
-            
+
             if success:
-                # UI-lokale Auswahl speichern für Anzeige
                 if volk_name not in self.voelker_auswahlen:
                     self.voelker_auswahlen[volk_name] = {}
-                self.voelker_auswahlen[volk_name]['attribut'] = attribut_name
-                
-                # UI aktualisieren
+                liste = self.voelker_auswahlen[volk_name].setdefault('attribut', [])
+                if not isinstance(liste, list):
+                    liste = [liste]
+                    self.voelker_auswahlen[volk_name]['attribut'] = liste
+                liste.append(attribut_name)
+
                 Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
-                
+
         except Exception as e:
             Logger.error(f"Fehler bei Attribut-Auswahl (UI): {e}", exc_info=True)
 
@@ -1807,15 +1936,18 @@ class VoelkerWidget(MDBoxLayout):
         """Wählt eine Fertigkeit aus (UI-Wrapper für Geschäftslogik)."""
         try:
             charakter = self.controller.charakter
-            
+
             # Geschäftslogik aufrufen
             success = waehle_freie_fertigkeit(charakter, volk_name, fertigkeit_name)
-            
+
             if success:
-                # UI-lokale Auswahl speichern für Anzeige
                 if volk_name not in self.voelker_auswahlen:
                     self.voelker_auswahlen[volk_name] = {}
-                self.voelker_auswahlen[volk_name]['fertigkeit'] = fertigkeit_name
+                liste = self.voelker_auswahlen[volk_name].setdefault('fertigkeit', [])
+                if not isinstance(liste, list):
+                    liste = [liste]
+                    self.voelker_auswahlen[volk_name]['fertigkeit'] = liste
+                liste.append(fertigkeit_name)
                 
                 # UI aktualisieren  
                 Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)

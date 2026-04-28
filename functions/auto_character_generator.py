@@ -487,46 +487,79 @@ class AutoCharacterGenerator:
             self.log(f"  🎁 Halbelf-Wahl ({modus}): {wert} → {'ok' if erfolg else 'fehlgeschlagen'}")
             _log_choice(f'freies_talent_oder_attribut_{modus}', wert, erfolg, hinweis)
 
-        # 3) Freies Talent (Mensch, Goblin, …)
-        freies_talent = effective_choices.get('freies_talent')
-        if freies_talent and not (modus == 'talent'):
-            erfolg = False
-            hinweis = ''
-            if vf_waehle_freies_talent is not None:
-                try:
-                    result = vf_waehle_freies_talent(charakter, race_name, freies_talent, ignore_voraussetzungen=True)
-                    erfolg = result is True
-                except Exception as e:
-                    hinweis = str(e)
-            # Fallback: Talent direkt markieren
-            if not erfolg and hasattr(charakter, 'talente'):
-                tkey = self._resolve_key(list(charakter.talente.keys()), freies_talent)
-                if tkey:
-                    t = charakter.talente[tkey]
-                    if hasattr(t, 'ausgewaehlt'):
-                        t.ausgewaehlt = True
-                    if hasattr(t, 'aktiv'):
-                        t.aktiv = True
-                    erfolg = True
-                    hinweis = 'Fallback: direkt markiert'
-            self.log(f"  🎁 Freies Talent: {freies_talent} → {'ok' if erfolg else 'fehlgeschlagen'}")
-            _log_choice('freies_talent', freies_talent, erfolg, hinweis)
-            # Freies-Talent-Slot als verbraucht markieren, damit Schritt 6 keinen zweiten Gratis-Slot vergibt
-            if erfolg and hasattr(charakter, 'voelker_boni') and charakter.voelker_boni.get('freie_talente'):
-                charakter.voelker_boni['freie_talente'] = False
+        def _as_list(v):
+            """Multi-Slot-Unterstützung: nimmt Skalar oder Liste, gibt Liste."""
+            if v is None:
+                return []
+            if isinstance(v, list):
+                return [x for x in v if x]
+            return [v]
 
-        # 4) Freies Attribut (Mensch etc.)
-        freies_attr = effective_choices.get('freies_attribut')
-        if freies_attr and not (modus == 'attribut') and not attr_wahl:
-            erfolg = False
-            hinweis = ''
-            if vf_waehle_freies_attribut is not None:
-                try:
-                    erfolg = bool(vf_waehle_freies_attribut(charakter, race_name, freies_attr))
-                except Exception as e:
-                    hinweis = str(e)
-            self.log(f"  🎁 Freies Attribut: {freies_attr} → {'ok' if erfolg else 'fehlgeschlagen'}")
-            _log_choice('freies_attribut', freies_attr, erfolg, hinweis)
+        # 3) Freies Talent (Mensch, Goblin, …) - kann Multi-Slot sein.
+        # Akzeptiert sowohl Singular ('freies_talent') als auch Plural ('freie_talente').
+        talent_quellen = list(_as_list(effective_choices.get('freies_talent')))
+        talent_quellen.extend(_as_list(effective_choices.get('freie_talente')))
+        if talent_quellen and not (modus == 'talent'):
+            for freies_talent in talent_quellen:
+                erfolg = False
+                hinweis = ''
+                if vf_waehle_freies_talent is not None:
+                    try:
+                        result = vf_waehle_freies_talent(charakter, race_name, freies_talent, ignore_voraussetzungen=True)
+                        erfolg = result is True
+                    except Exception as e:
+                        hinweis = str(e)
+                # Fallback: Talent direkt markieren
+                if not erfolg and hasattr(charakter, 'talente'):
+                    tkey = self._resolve_key(list(charakter.talente.keys()), freies_talent)
+                    if tkey:
+                        t = charakter.talente[tkey]
+                        if hasattr(t, 'ausgewaehlt'):
+                            t.ausgewaehlt = True
+                        if hasattr(t, 'aktiv'):
+                            t.aktiv = True
+                        erfolg = True
+                        hinweis = 'Fallback: direkt markiert'
+                self.log(f"  🎁 Freies Talent: {freies_talent} → {'ok' if erfolg else 'fehlgeschlagen'}")
+                _log_choice('freies_talent', freies_talent, erfolg, hinweis)
+                if erfolg and hasattr(charakter, 'voelker_boni') and charakter.voelker_boni.get('freie_talente'):
+                    charakter.voelker_boni['freie_talente'] = False
+
+        # 4) Freies Attribut (Mensch etc.) - kann Multi-Slot sein.
+        # Akzeptiert 'freies_attribut' (Skalar/Liste) und 'freie_attribute' (Liste).
+        attribut_quellen = list(_as_list(effective_choices.get('freies_attribut')))
+        attribut_quellen.extend(_as_list(effective_choices.get('freie_attribute')))
+        if attribut_quellen and not (modus == 'attribut') and not attr_wahl:
+            for freies_attr in attribut_quellen:
+                erfolg = False
+                hinweis = ''
+                if vf_waehle_freies_attribut is not None:
+                    try:
+                        erfolg = bool(vf_waehle_freies_attribut(charakter, race_name, freies_attr))
+                    except Exception as e:
+                        hinweis = str(e)
+                self.log(f"  🎁 Freies Attribut: {freies_attr} → {'ok' if erfolg else 'fehlgeschlagen'}")
+                _log_choice('freies_attribut', freies_attr, erfolg, hinweis)
+
+        # 4b) Attributs-Schwäche (Multi-Slot): 'freies_attribut_malus' (Skalar/Liste)
+        # oder 'attribute_malus' (Liste).
+        malus_quellen = list(_as_list(effective_choices.get('freies_attribut_malus')))
+        malus_quellen.extend(_as_list(effective_choices.get('attribute_malus')))
+        if malus_quellen:
+            try:
+                from functions.volk_funktionen import waehle_freies_attribut_malus as vf_waehle_malus
+            except Exception:
+                vf_waehle_malus = None
+            for malus_attr in malus_quellen:
+                erfolg = False
+                hinweis = ''
+                if vf_waehle_malus is not None:
+                    try:
+                        erfolg = bool(vf_waehle_malus(charakter, race_name, malus_attr))
+                    except Exception as e:
+                        hinweis = str(e)
+                self.log(f"  🎁 Attributs-Schwäche: {malus_attr} → {'ok' if erfolg else 'fehlgeschlagen'}")
+                _log_choice('freies_attribut_malus', malus_attr, erfolg, hinweis)
 
         # 5) Freie Verstandsfertigkeit (z.B. Engro)
         freie_fert = effective_choices.get('freie_verstandsfertigkeit')
