@@ -845,9 +845,12 @@ class VolkGeneratorWizard:
             eigenart_copy['optionen'] = dict(eigenart_copy['optionen'])
 
         if eigenart_copy.get('stufen') or eigenart_copy.get('optionen'):
+            # Optionen-Dialog kümmert sich selbst ums Neu-Aufbauen via _restore_eigenarten_popup
             self._show_optionen_dialog(eigenart_copy, liste, None)
         else:
             liste.append(eigenart_copy)
+            # Popup neu aufbauen, damit der Stepper-Zähler aktualisiert wird
+            self._refresh_eigenarten_popup(eigenart_typ)
 
     def _decrement_eigenart(self, eigenart_id, eigenart_typ):
         """Entfernt eine Instanz der Eigenart (für Mehrfachauswahl)."""
@@ -856,7 +859,11 @@ class VolkGeneratorWizard:
         else:
             liste = self.negative_eigenarten
 
+        # Nur refreshen wenn tatsächlich entfernt wurde
+        vorher = len(liste)
         self._remove_eigenart(eigenart_id, liste)
+        if len(liste) != vorher:
+            self._refresh_eigenarten_popup(eigenart_typ)
 
     def _on_eigenart_checkbox_clicked(self, eigenart_id, eigenart_typ, checkbox):
         """Handler für Checkbox-Klick mit Debounce."""
