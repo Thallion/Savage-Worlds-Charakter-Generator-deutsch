@@ -32,6 +32,10 @@ from utils.platform_utils import is_mobile_layout
 
 _mobile = is_mobile_layout()
 
+# Wahlmöglichkeiten, die als Multi-Slot abgebildet werden (Liste pro Key).
+# Alle anderen Keys (halbelf_*, mensch_*, magieaffin) bleiben skalar.
+MULTI_SLOT_KEYS = ('freies_talent', 'freies_attribut', 'freies_attribut_malus', 'freie_fertigkeit')
+
 
 class VoelkerAuswahlOverlay(MDBoxLayout):
     """
@@ -356,13 +360,15 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
 
         Logger.debug(f"[DEBUG] _on_volk_selected: zusatzelemente={zusatzelemente}")
 
+        slots = zusatzelemente.get('slots', {})
         hat_extras = (
             zusatzelemente.get('halbelf_entweder_oder', False) or
             zusatzelemente.get('menschen_vielseitig', False) or
             zusatzelemente.get('freie_talente', False) or
             bool(zusatzelemente.get('freies_attribut', False)) or
             bool(zusatzelemente.get('freies_attribut_malus', False)) or
-            zusatzelemente.get('freie_fertigkeiten', False)
+            zusatzelemente.get('freie_fertigkeiten', False) or
+            any(slots.get(k) for k in MULTI_SLOT_KEYS)
         )
 
         Logger.debug(f"[DEBUG] _on_volk_selected: hat_extras={hat_extras}")
@@ -463,29 +469,57 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         """Generische Zusatzelemente: freie Talente, Attribute, Fertigkeiten"""
         self._update_extras_ui()
 
+    # ---------- Multi-Slot Hilfsfunktionen ----------
+
+    def _slot_count(self, key):
+        """Anzahl Slots für eine Wahlmöglichkeit (0 wenn keine)."""
+        info = self._zusatzelemente_info or {}
+        slots = info.get('slots', {}) or {}
+        return len(slots.get(key, []))
+
+    def _selected_count(self, key):
+        """Anzahl bereits gewählter Werte für einen Multi-Slot-Key."""
+        val = self._selected_extras.get(key)
+        if val is None:
+            return 0
+        if isinstance(val, list):
+            return sum(1 for v in val if v)
+        return 1 if val else 0
+
+    def _selected_values(self, key):
+        """Alle bisher gewählten Werte für einen Key als Liste."""
+        val = self._selected_extras.get(key)
+        if val is None:
+            return []
+        if isinstance(val, list):
+            return [v for v in val if v]
+        return [val]
+
+    def _append_extra(self, key, value):
+        """Fügt einen Wert für einen Multi-Slot-Key hinzu, sonst skalar setzen."""
+        if key in MULTI_SLOT_KEYS:
+            existing = self._selected_extras.get(key)
+            if not isinstance(existing, list):
+                existing = []
+                self._selected_extras[key] = existing
+            existing.append(value)
+        else:
+            self._selected_extras[key] = value
+
     def _all_extras_selected(self):
         """Prüft ob alle erforderlichen Zusatzelemente ausgewählt wurden."""
         info = self._zusatzelemente_info
         selected = self._selected_extras
-        
+
         Logger.debug(f"[DEBUG] _all_extras_selected: info={info}, selected={selected}")
 
-        # Freie Talente
-        if info.get('freie_talente', False) and 'freies_talent' not in selected:
-            Logger.debug(f"[DEBUG] Freie Talente erforderlich aber nicht ausgewählt")
-            return False
-        # Freie Attribute (Bonus)
-        if bool(info.get('freies_attribut', False)) and 'freies_attribut' not in selected:
-            Logger.debug(f"[DEBUG] Freie Attribute erforderlich aber nicht ausgewählt")
-            return False
-        # Freie Attribute (Malus)
-        if bool(info.get('freies_attribut_malus', False)) and 'freies_attribut_malus' not in selected:
-            Logger.debug(f"[DEBUG] Freie Attribut-Maluse erforderlich aber nicht ausgewählt")
-            return False
-        # Freie Fertigkeiten
-        if info.get('freie_fertigkeiten', False) and 'freie_fertigkeit' not in selected:
-            Logger.debug(f"[DEBUG] Freie Fertigkeiten erforderlich aber nicht ausgewählt")
-            return False
+        # Multi-Slot-Keys: pro Key müssen #selected >= #slots erfüllt sein
+        for key in MULTI_SLOT_KEYS:
+            n_slots = self._slot_count(key)
+            if n_slots and self._selected_count(key) < n_slots:
+                Logger.debug(f"[DEBUG] {key}: {self._selected_count(key)}/{n_slots} - noch nicht voll")
+                return False
+
         # Halbelf ENTWEDER/ODER - spezieller Fall (entweder Talent oder Attribut)
         if info.get('halbelf_entweder_oder', False):
             if 'halbelf_talent' not in selected and 'halbelf_attribut' not in selected:
@@ -513,77 +547,78 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             size_hint_y=None,
         ))
         
-        # Bereits ausgewählte Elemente anzeigen
+        # Bereits ausgewählte Elemente anzeigen (Multi-Slot-Keys werden als
+        # mehrere Bullet-Zeilen gerendert).
+        labels = {
+            'freies_talent':         'Freies Talent',
+            'freies_attribut':       'Freies Attribut',
+            'freies_attribut_malus': 'Attributs Schwäche',
+            'freie_fertigkeit':      'Freie Fertigkeit',
+            'halbelf_talent':        'Halbelf Talent',
+            'halbelf_attribut':      'Halbelf Attribut',
+            'mensch_talent':         'Mensch Talent',
+            'mensch_fertigkeitspunkte': 'Mensch Fertigkeitspunkte',
+        }
         if selected:
-            selected_label = MDLabel(
+            self._content_box.add_widget(MDLabel(
                 text="Bereits ausgewählt:",
                 bold=True,
                 adaptive_height=True,
                 size_hint_y=None,
-            )
-            self._content_box.add_widget(selected_label)
-            
+            ))
             for key, value in selected.items():
-                if key == 'freies_talent':
+                label = labels.get(key, key)
+                values = value if isinstance(value, list) else [value]
+                for v in values:
+                    if not v:
+                        continue
                     self._content_box.add_widget(MDLabel(
-                        text=f"• Freies Talent: {value}",
+                        text=f"• {label}: {v}",
                         adaptive_height=True,
                         size_hint_y=None,
                         theme_text_color="Secondary",
                     ))
-                elif key == 'freies_attribut':
-                    self._content_box.add_widget(MDLabel(
-                        text=f"• Freies Attribut: {value}",
-                        adaptive_height=True,
-                        size_hint_y=None,
-                        theme_text_color="Secondary",
-                    ))
-                elif key == 'freie_fertigkeit':
-                    self._content_box.add_widget(MDLabel(
-                        text=f"• Freie Fertigkeit: {value}",
-                        adaptive_height=True,
-                        size_hint_y=None,
-                        theme_text_color="Secondary",
-                    ))
-                elif key == 'halbelf_talent':
-                    self._content_box.add_widget(MDLabel(
-                        text=f"• Halbelf Talent: {value}",
-                        adaptive_height=True,
-                        size_hint_y=None,
-                        theme_text_color="Secondary",
-                    ))
-                elif key == 'mensch_talent':
-                    self._content_box.add_widget(MDLabel(
-                        text=f"• Mensch Talent: {value}",
-                        adaptive_height=True,
-                        size_hint_y=None,
-                        theme_text_color="Secondary",
-                    ))
-        
+
         # Noch ausstehende Auswahlen als Cards anzeigen
-        # Freie Talente (falls noch nicht ausgewählt)
-        if info.get('freie_talente', False) and 'freies_talent' not in selected:
+        # Freie Talente: pro Slot eine Card mit n/N-Fortschritt
+        n_talent_slots = self._slot_count('freies_talent')
+        if n_talent_slots == 0 and info.get('freie_talente', False):
+            n_talent_slots = 1  # Legacy-Fallback
+        n_talent_done = self._selected_count('freies_talent')
+        for i in range(n_talent_slots - n_talent_done):
+            slot_nr = n_talent_done + i + 1
+            title = (f"Freies Anfängertalent ({slot_nr}/{n_talent_slots})"
+                     if n_talent_slots > 1 else "Freies Anfängertalent")
             talent_card = self._create_option_card(
                 icon="star",
-                title="Freies Anfängertalent",
+                title=title,
                 description="Wähle ein freies Anfängertalent aus der verfügbaren Liste.",
                 on_click=lambda: self._show_talent_selection('freies_talent'),
                 color=self.theme_cls.primaryContainerColor,
             )
             self._content_box.add_widget(talent_card)
-        
-        # Freie Attribute (falls noch nicht ausgewählt)
-        if info.get('freies_attribut', False) and 'freies_attribut' not in selected:
-            Logger.debug(f"[DEBUG] _update_extras_ui: freies_attribut=True, attribut_optionen={info.get('attribut_optionen', [])}")
-            attribut_optionen = info.get('attribut_optionen', [])
-            if len(attribut_optionen) <= 4:
-                self._content_box.add_widget(MDLabel(
-                    text="Freies Attribut:",
-                    bold=True,
-                    adaptive_height=True,
-                    size_hint_y=None,
-                ))
-                for attr in attribut_optionen:
+
+        # Freie Attribute (Bonus): pro Slot eine Card-Gruppe; bereits gewählte
+        # Attribute werden aus den Optionen gefiltert.
+        n_attr_slots = self._slot_count('freies_attribut')
+        if n_attr_slots == 0 and info.get('freies_attribut', False):
+            n_attr_slots = 1  # Legacy-Fallback
+        n_attr_done = self._selected_count('freies_attribut')
+        if n_attr_slots > n_attr_done:
+            attribut_optionen = list(info.get('attribut_optionen', []))
+            already = set(self._selected_values('freies_attribut'))
+            verfuegbar = [a for a in attribut_optionen if a not in already]
+            slot_nr = n_attr_done + 1
+            label_text = (f"Freies Attribut ({slot_nr}/{n_attr_slots}):"
+                          if n_attr_slots > 1 else "Freies Attribut:")
+            self._content_box.add_widget(MDLabel(
+                text=label_text,
+                bold=True,
+                adaptive_height=True,
+                size_hint_y=None,
+            ))
+            if len(verfuegbar) <= 4:
+                for attr in verfuegbar:
                     attr_card = self._create_option_card(
                         icon="arm-flex",
                         title=attr,
@@ -594,63 +629,80 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                     )
                     self._content_box.add_widget(attr_card)
             else:
-                # Viele Optionen → als Card die Chip-Liste öffnet
                 attr_card = self._create_option_card(
                     icon="arm-flex",
                     title="Freies Attribut wählen",
-                    description=f"Wähle aus {len(attribut_optionen)} Attributen",
+                    description=f"Wähle aus {len(verfuegbar)} Attributen",
                     on_click=lambda: self._show_chip_selection(
                         "Freies Attribut wählen:",
-                        attribut_optionen,
+                        verfuegbar,
                         lambda attr: self._apply_choice(
                             self._selected_volk, {'freies_attribut': attr})),
                     color=self.theme_cls.surfaceContainerColor,
                 )
                 self._content_box.add_widget(attr_card)
 
-        # Freie Attribut-Maluse (falls noch nicht ausgewählt)
-        if bool(info.get('freies_attribut_malus', False)) and 'freies_attribut_malus' not in selected:
-            Logger.debug(f"[DEBUG] _update_extras_ui: freies_attribut_malus=True, attribut_malus_optionen={info.get('attribut_malus_optionen', [])}")
-            malus_optionen = info.get('attribut_malus_optionen', [])
-            if malus_optionen:
+        # Freie Attribut-Maluse: analog zum Bonus, aber mit Fehler-Farbe.
+        n_malus_slots = self._slot_count('freies_attribut_malus')
+        if n_malus_slots == 0 and bool(info.get('freies_attribut_malus', False)):
+            n_malus_slots = 1
+        n_malus_done = self._selected_count('freies_attribut_malus')
+        if n_malus_slots > n_malus_done:
+            malus_optionen = list(info.get('attribut_malus_optionen', []))
+            already = set(self._selected_values('freies_attribut_malus'))
+            verfuegbar = [a for a in malus_optionen if a not in already]
+            if verfuegbar:
+                slot_nr = n_malus_done + 1
+                label_text = (f"Attribut schwächen ({slot_nr}/{n_malus_slots}):"
+                              if n_malus_slots > 1 else "Attribut schwächen:")
                 self._content_box.add_widget(MDLabel(
-                    text="Attribut schwächen:",
+                    text=label_text,
                     bold=True,
                     adaptive_height=True,
                     size_hint_y=None,
                 ))
-                if len(malus_optionen) <= 4:
-                    for attr in malus_optionen:
+                error_color = (self.theme_cls.errorContainerColor
+                               if hasattr(self.theme_cls, 'errorContainerColor')
+                               else (1, 0.5, 0.5, 1))
+                if len(verfuegbar) <= 4:
+                    for attr in verfuegbar:
                         attr_card = self._create_option_card(
                             icon="arm-flex",
                             title=f"{attr}",
                             description=f"-1 Würfelstufe auf {attr}",
                             on_click=lambda a=attr: self._apply_choice(
                                 self._selected_volk, {'freies_attribut_malus': a}),
-                            color=self.theme_cls.errorContainerColor if hasattr(self.theme_cls, 'errorContainerColor') else (1, 0.5, 0.5, 1),
+                            color=error_color,
                         )
                         self._content_box.add_widget(attr_card)
                 else:
                     malus_card = self._create_option_card(
                         icon="arm-flex",
                         title="Attribut schwächen wählen",
-                        description=f"Wähle aus {len(malus_optionen)} Attributen",
+                        description=f"Wähle aus {len(verfuegbar)} Attributen",
                         on_click=lambda: self._show_chip_selection(
                             "Attribut schwächen:",
-                            malus_optionen,
+                            verfuegbar,
                             lambda attr: self._apply_choice(
                                 self._selected_volk, {'freies_attribut_malus': attr})),
-                        color=self.theme_cls.errorContainerColor if hasattr(self.theme_cls, 'errorContainerColor') else (1, 0.5, 0.5, 1),
+                        color=error_color,
                     )
                     self._content_box.add_widget(malus_card)
 
-        # Freie Fertigkeiten (falls noch nicht ausgewählt)
-        if info.get('freie_fertigkeiten', False) and 'freie_fertigkeit' not in selected:
+        # Freie Fertigkeiten: pro Slot eine Card mit n/N-Fortschritt.
+        n_fert_slots = self._slot_count('freie_fertigkeit')
+        if n_fert_slots == 0 and info.get('freie_fertigkeiten', False):
+            n_fert_slots = 1
+        n_fert_done = self._selected_count('freie_fertigkeit')
+        for i in range(n_fert_slots - n_fert_done):
             from functions.volk_funktionen import get_verfuegbare_fertigkeiten
             fertigkeiten = get_verfuegbare_fertigkeiten(self._charakter, nur_verstand=True)
+            slot_nr = n_fert_done + i + 1
+            title = (f"Verstandsbasierte Fertigkeit wählen ({slot_nr}/{n_fert_slots})"
+                     if n_fert_slots > 1 else "Verstandsbasierte Fertigkeit wählen")
             fert_card = self._create_option_card(
                 icon="school",
-                title="Verstandsbasierte Fertigkeit wählen",
+                title=title,
                 description=f"Wähle aus {len(fertigkeiten)} Fertigkeiten",
                 on_click=lambda: self._show_chip_selection(
                     "Verstandsbasierte Fertigkeit wählen:",
@@ -1129,9 +1181,14 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         self._content_box.add_widget(back_box)
 
     def _apply_choice(self, volk_name, zusatzelemente):
-        """Fügt eine Zusatzelement-Auswahl hinzu und schließt das Overlay wenn alle erfüllt."""
-        # Auswahl zum Sammeldict hinzufügen
-        self._selected_extras.update(zusatzelemente)
+        """Fügt eine Zusatzelement-Auswahl hinzu und schließt das Overlay wenn alle erfüllt.
+        Multi-Slot-Keys werden in eine Liste angefügt; unique Keys werden gesetzt."""
+        for key, value in zusatzelemente.items():
+            if isinstance(value, list):
+                # Aufrufer hat bereits eine Liste übergeben (z.B. komplette Reset-Aktion)
+                self._selected_extras[key] = value
+            else:
+                self._append_extra(key, value)
         Logger.debug(f"Zusatzelement ausgewählt: {zusatzelemente}. Gesammelt: {self._selected_extras}")
         
         # Prüfen ob alle erforderlichen Auswahlen getroffen wurden
