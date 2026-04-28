@@ -2164,15 +2164,37 @@ class VoelkerWidget(MDBoxLayout):
             zeilen.append(f"Handicap: {handicap}")
 
         # Spezielle Effekte
+        german_effekt_map = {
+            'zwei_linke_haende': 'Zwei linke Hände',
+            'wuchtig': 'Wuchtig',
+            'dumm': 'Dumm',
+            'langsam': 'Langsam',
+            'speckschicht': 'Speckschicht',
+            'halbaquatisch': 'Halbaquatisch',
+            'aquatisch': 'Aquatisch',
+            'austrocknung': 'Austrocknung',
+            'biss_klauen': 'Biss/Klauen',
+            'erzfeinde_kehana': 'Erzfeinde (Kehana)',
+            'erzfeinde_doreen': 'Erzfeinde (Doreen)',
+            'gewohnheit_leicht': 'Gewohnheit (leicht)',
+            'aussenseiter_leicht': 'Außenseiter (leicht)',
+            'natuerliche_begabung': 'Natürliche Begabung',
+            'coup': 'Coup',
+            'gleiter': 'Gleiter',
+            'schwach': 'Schwach',
+        }
         spezial = effects.get('spezielle_effekte', {})
         if isinstance(spezial, dict):
             for key, val in spezial.items():
                 if val:
-                    zeilen.append(key.replace('_', ' ').capitalize())
+                    german_name = german_effekt_map.get(key, key.replace('_', ' ').title())
+                    zeilen.append(german_name)
         elif isinstance(spezial, list):
             for item in spezial:
                 if isinstance(item, dict):
-                    zeilen.append(item.get('typ', '').replace('_', ' ').capitalize())
+                    typ = item.get('typ', '')
+                    german_name = german_effekt_map.get(typ, typ.replace('_', ' ').title())
+                    zeilen.append(german_name)
                 else:
                     zeilen.append(str(item))
 
