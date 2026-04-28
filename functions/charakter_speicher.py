@@ -82,6 +82,9 @@ def to_dict(charakter):
         'selected_superkraefte': charakter.selected_superkraefte,
         'selected_cyberware': charakter.selected_cyberware,
         'voelker_selected': charakter.voelker_selected,
+        # Pro-Volk Auswahlen (Multi-Slot-Listen pro Wahlmöglichkeit, z.B.
+        # {'volk': {'talent': ['Glück', 'Schnell'], 'attribut': ['Stärke']}})
+        'voelker_auswahlen': dict(getattr(charakter, 'voelker_auswahlen', {}) or {}),
         'selected_allgemeine_ausruestung': [item.name for item in charakter.selected_allgemeine_ausruestung],
         'selected_waffen': [item.name for item in charakter.selected_waffen],
         'selected_ruestungen': [item.name for item in charakter.selected_ruestungen],
@@ -594,6 +597,25 @@ def _finalize_character_loading(charakter, data):
         charakter.cyberware_stresslimit = berechne_stresslimit(charakter)
         charakter.cyberware_stress_maximum = berechne_stress_maximum(charakter)
         charakter.cyberware_stress_aktuell = berechne_stress_aktuell(charakter)
+
+    # Pro-Volk Auswahlen laden mit Migration: Skalare aus Alt-Saves werden
+    # in einelementige Listen gewrappt, damit der Multi-Slot-Code einheitlich
+    # mit Listen arbeiten kann. Wird in _finalize gemacht, damit beide
+    # Lade-Pfade (alt + neu) profitieren.
+    raw_auswahlen = data.get('voelker_auswahlen', {}) or {}
+    migrated = {}
+    _multi_keys = ('talent', 'attribut', 'attribut_malus', 'fertigkeit')
+    for v_name, auswahl in raw_auswahlen.items():
+        if not isinstance(auswahl, dict):
+            continue
+        eintrag = {}
+        for k, v in auswahl.items():
+            if k in _multi_keys and not isinstance(v, list):
+                eintrag[k] = [v] if v else []
+            else:
+                eintrag[k] = v
+        migrated[v_name] = eintrag
+    charakter.voelker_auswahlen = migrated
 
     # Steigerungs-Journal laden (falls vorhanden)
     charakter.steigerungs_journal = data.get('steigerungs_journal', None)
