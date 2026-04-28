@@ -477,7 +477,7 @@
         "Synthetische Wesen": {
             "name": "Synthetische Wesen",
             "handicaps": [
-                "Programmiert (schwer)"
+                "Programmiert"
             ],
             "talente": [],
             "besonderheiten": [
@@ -498,7 +498,7 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Programmiert (schwer)"
+                    "Programmiert"
                 ],
                 "spezielle_effekte": {
                     "immun_krankheiten_gifte": true,
