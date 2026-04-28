@@ -99,7 +99,7 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Langsam"
+                    "Langsam_leicht"
                 ],
                 "spezielle_effekte": {
                     "hartes_haupt": true,
@@ -2368,8 +2368,7 @@
             "name": "Profi",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
