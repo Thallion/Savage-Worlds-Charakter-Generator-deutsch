@@ -21,7 +21,7 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "50 Fathoms",
+  "last_setting": "Fantasy Kompendium",
   "force_mobile_layout": false,
   "desktop_scale_factor": 1.0,
   "screen_orientation": "auto",
@@ -43,5 +43,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-04-28T17:32:53.023363"
+  "last_updated": "2026-04-28T18:09:13.223663"
 }

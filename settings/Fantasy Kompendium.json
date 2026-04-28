@@ -368,6 +368,9 @@
                     "Charismatisch",
                     "AH (Begabt)"
                 ],
+                "auto_mächte": [
+                    "Verkleiden"
+                ],
                 "spezielle_effekte": {
                     "gestaltwandeln": true,
                     "geheimnis_schwer": true
@@ -484,6 +487,11 @@
                 "robustheit_bonus": 2,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
+                "fertigkeits_startmalus": {
+                    "Allgemeinwissen": -2,
+                    "Heimlichkeit": -2,
+                    "Überreden": -2
+                },
                 "auto_talente": [],
                 "spezielle_effekte": {
                     "konstrukt": true,
@@ -1380,6 +1388,17 @@
         ]
     },
     "talente": {
+        "AH (Begabt)": {
+            "name": "AH (Begabt)",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Arkaner Hintergrund, Arkane Fertigkeit: Fokus (Willenskraft)",
+            "neue_maechte": 1,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
         "AH (Alchemist)": {
             "name": "AH (Alchemist)",
             "kategorie": "Hintergrund",

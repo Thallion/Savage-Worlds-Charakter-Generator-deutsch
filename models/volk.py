@@ -32,9 +32,11 @@ class Volk(EventDispatcher):
             'attribute_bonuses': {},      # {'Stärke': 2} = W4 -> W6
             'robustheit_bonus': 0,        # +1 oder -1
             'bewegungsweite_bonus': 0,    # +1 oder -1
-            'fertigkeits_startboni': {},  # {'Wahrnehmung': 2} = W4-2 -> W4+0
+            'fertigkeits_startboni': {},   # {'Wahrnehmung': 2} = W4-2 -> W4+0
+            'fertigkeits_startmalus': {}, # {'Allgemeinwissen': -2} = W4 -> W4-2
             'auto_talente': [],           # Automatisch erhaltene Talente
             'auto_handicaps': [],         # Automatisch erhaltene Handicaps
+            'auto_mächte': [],            # Automatisch erhaltene Mächte
             'spezielle_effekte': {},      # Für komplexere Effekte
             'wahlmoeglichkeiten': {}      # Für Dropdown-Auswahl
         }
@@ -49,9 +51,11 @@ class Volk(EventDispatcher):
                 'attribute_bonuses': {},      # {'Stärke': 2} = W4 -> W6
                 'robustheit_bonus': 0,        # +1 oder -1
                 'bewegungsweite_bonus': 0,    # +1 oder -1
-                'fertigkeits_startboni': {},  # {'Wahrnehmung': 2} = W4 -> W6
+                'fertigkeits_startboni': {},   # {'Wahrnehmung': 2} = W4-2 -> W4+0
+                'fertigkeits_startmalus': {},  # {'Allgemeinwissen': -2} = W4 -> W4-2
                 'auto_talente': [],           # Automatisch erhaltene Talente
                 'auto_handicaps': [],         # Automatisch erhaltene Handicaps
+                'auto_mächte': [],            # Automatisch erhaltene Mächte
                 'spezielle_effekte': {},      # Für komplexere Effekte
                 'wahlmoeglichkeiten': {}      # Für Dropdown-Auswahl
             }
@@ -224,12 +228,30 @@ class Volk(EventDispatcher):
                         else:
                             Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) nicht angepasst (aktuell: W{fertigkeit.wert}{fertigkeit.modifier:+d})")
 
+            # Fertigkeits-Startmalus anwenden (z.B. Golem: W4 → W4-2)
+            for fert_name, malus in self.effects.get('fertigkeits_startmalus', {}).items():
+                if fert_name in charakter.fertigkeiten:
+                    fertigkeit = charakter.fertigkeiten[fert_name]
+                    if fertigkeit.wert == 4 and fertigkeit.modifier == 0:
+                        fertigkeit.wuerfel.modifier = malus  # -2 → W4-2
+                        Logger.info(f"Volk {self.name}: {fert_name} von W4 auf W4{malus:+d} reduziert")
+
             # Automatische Talente hinzufügen
             for talent_name in self.effects.get('auto_talente', []):
                 if talent_name in charakter.talente and not charakter.talente[talent_name].ausgewaehlt:
                     charakter.talente[talent_name].ausgewaehlt = True
                     if talent_name not in charakter.selected_talente:
                         charakter.selected_talente.append(talent_name)
+                    # Machtpunkte erhöhen falls Talent welche hat (z.B. AH (Begabt))
+                    talent = charakter.talente[talent_name]
+                    if hasattr(talent, 'machtpunkte') and talent.machtpunkte > 0:
+                        charakter.erhoehe_machtpunkte(talent.machtpunkte)
+                        Logger.info(f"Volk {self.name}: +{talent.machtpunkte} Machtpunkte durch Talent '{talent_name}'")
+                    # Auch verfügbare Mächte erhöhen falls das Talent welche gewährt
+                    if hasattr(talent, 'neue_maechte') and talent.neue_maechte > 0:
+                        charakter.verfuegbare_maechte += talent.neue_maechte
+                        charakter.anzahl_maechte += talent.neue_maechte
+                        Logger.info(f"Volk {self.name}: +{talent.neue_maechte} verfügbare Mächte durch Talent '{talent_name}'")
                     Logger.info(f"Volk {self.name}: Automatisches Talent '{talent_name}' erhalten")
 
             # Automatische Handicaps hinzufügen
@@ -239,6 +261,14 @@ class Volk(EventDispatcher):
                     if handicap_name not in charakter.selected_handicaps:
                         charakter.selected_handicaps.append(handicap_name)
                     Logger.info(f"Volk {self.name}: Automatisches Handicap '{handicap_name}' erhalten")
+
+            # Automatische Mächte hinzufügen
+            for macht_name in self.effects.get('auto_mächte', []):
+                if macht_name in charakter.maechte and not charakter.maechte[macht_name].ausgewaehlt:
+                    charakter.maechte[macht_name].ausgewaehlt = True
+                    if macht_name not in charakter.selected_maechte:
+                        charakter.selected_maechte.append(macht_name)
+                    Logger.info(f"Volk {self.name}: Automatische Macht '{macht_name}' erhalten")
 
             # Robustheit und Bewegungsweite werden in abgeleitete_werte.py berechnet
             robustheit_bonus = self.effects.get('robustheit_bonus', 0)
@@ -351,14 +381,33 @@ class Volk(EventDispatcher):
                             else:
                                 Logger.debug(f"Volk {self.name}: {fert_name} (Nicht-Grundfertigkeit) bereits auf Basis-Niveau")
 
+            # Fertigkeits-Startmalus rückgängig machen
+            for fert_name, malus in self.effects.get('fertigkeits_startmalus', {}).items():
+                if fert_name in charakter.fertigkeiten:
+                    fertigkeit = charakter.fertigkeiten[fert_name]
+                    if fertigkeit.wert == 4 and fertigkeit.modifier == malus:
+                        fertigkeit.wuerfel.modifier = 0
+                        Logger.info(f"Volk {self.name}: {fert_name} von W4{malus:+d} auf W4 zurückgesetzt")
+
             # Automatische Talente entfernen (nur die von diesem Volk hinzugefügten)
             for talent_name in self.effects.get('auto_talente', []):
                 if talent_name in charakter.selected_talente:
                     charakter.selected_talente.remove(talent_name)
                     Logger.info(f"Volk {self.name}: '{talent_name}' aus selected_talente entfernt")
-                    
+
                 if talent_name in charakter.talente and charakter.talente[talent_name].ausgewaehlt:
-                    charakter.talente[talent_name].ausgewaehlt = False
+                    talent = charakter.talente[talent_name]
+                    # Machtpunkte reduzieren falls Talent welche hatte
+                    if hasattr(talent, 'machtpunkte') and talent.machtpunkte > 0:
+                        charakter.senke_machtpunkte(talent.machtpunkte)
+                        Logger.info(f"Volk {self.name}: -{talent.machtpunkte} Machtpunkte durch Talent '{talent_name}'")
+                    # Verfügbare Mächte reduzieren falls das Talent welche gewährt hatte
+                    if hasattr(talent, 'neue_maechte') and talent.neue_maechte > 0:
+                        charakter.verfuegbare_maechte -= talent.neue_maechte
+                        charakter.anzahl_maechte -= talent.neue_maechte
+                        charakter.verfuegbare_maechte = max(charakter.verfuegbare_maechte, 0)
+                        Logger.info(f"Volk {self.name}: -{talent.neue_maechte} verfügbare Mächte durch Talent '{talent_name}'")
+                    talent.ausgewaehlt = False
                     Logger.info(f"Volk {self.name}: Automatisches Talent '{talent_name}' deaktiviert")
 
             # Automatische Handicaps entfernen (nur die von diesem Volk hinzugefügten)
@@ -370,6 +419,16 @@ class Volk(EventDispatcher):
                 if handicap_name in charakter.handicaps and charakter.handicaps[handicap_name].ausgewaehlt:
                     charakter.handicaps[handicap_name].ausgewaehlt = False
                     Logger.info(f"Volk {self.name}: Automatisches Handicap '{handicap_name}' deaktiviert")
+
+            # Automatische Mächte entfernen (nur die von diesem Volk hinzugefügten)
+            for macht_name in self.effects.get('auto_mächte', []):
+                if macht_name in charakter.selected_maechte:
+                    charakter.selected_maechte.remove(macht_name)
+                    Logger.info(f"Volk {self.name}: '{macht_name}' aus selected_maechte entfernt")
+
+                if macht_name in charakter.maechte and charakter.maechte[macht_name].ausgewaehlt:
+                    charakter.maechte[macht_name].ausgewaehlt = False
+                    Logger.info(f"Volk {self.name}: Automatische Macht '{macht_name}' deaktiviert")
 
             Logger.info(f"=== Völker-Effekte für {self.name} erfolgreich entfernt ===")
             return True
