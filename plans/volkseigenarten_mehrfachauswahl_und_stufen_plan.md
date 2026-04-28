@@ -27,13 +27,32 @@
   - [x] volkseigenarten_funktionen.py: `eigenart_zu_effekte` setzt `wahlmoeglichkeiten` bei verzögerter Auswahl
   - [x] volk_funktionen.py: `get_volk_zusatzelemente` erkennt neue Typen (`freie_grundfertigkeit`, `freie_nicht_grundfertigkeit`)
 - [x] **Tests** — 927 Tests erfolgreich
+- [x] **PR #182** — Edit-Button für „Attributs-Schwäche" bei Custom-Völkern (`_on_edit_attribut_malus`, `_on_attribut_malus_chosen` in `views/voelker_view.py`)
+- [x] **PR #182** — Stepper-Zähler bei Mehrfach-Eigenarten aktualisiert sich (Refresh in `_increment_eigenart` / `_decrement_eigenart` in `views/volk_popup.py`)
+
+### ✅ Multi-Slot im Völker-Tab (Branch `claude/volkseigenarten-multi-instance`)
+
+Adressiert die **Pro-Charakter-Auswahl** für Eigenarten mit `max_auswahl > 1` und `auswahl_verzoegert: true`. Das war im ursprünglichen Plan blind. Branch ist Code-fertig, Tests grün, **noch nicht in `main`**.
+
+- [x] **Datenmodell**:
+  - `eigenart_zu_effekte` schreibt `wahlmoeglichkeiten_counts[typ] = N` parallel zum Skalar `wahlmoeglichkeiten[typ] = True` (`functions/volkseigenarten_funktionen.py:_bump_count`)
+  - `get_volk_zusatzelemente` liefert ein `slots`-Dict pro Multi-Slot-Typ (`freies_talent`, `freies_attribut`, `freies_attribut_malus`, `freie_fertigkeit`); Legacy-Skalar-Keys bleiben befüllt (`functions/volk_funktionen.py`)
+  - `reset_volk_auswahlen` iteriert Listen und unterstützt zusätzlich `attribut_malus`; neuer Helper `reconcile_volk_auswahlen` trimmt überzählige Slots samt State-Rollback (`functions/volk_funktionen.py:reconcile_volk_auswahlen`)
+  - `voelker_auswahlen` als persistierte `DictProperty` am Charakter (`models/charakter_properties.py`)
+- [x] **UI**:
+  - Auswahl-Overlay: pro Slot eine eigene Card mit `n/N`-Fortschritt; bereits gewählte Werte werden aus folgenden Slot-Optionen herausgefiltert. Konstante `MULTI_SLOT_KEYS` als Schnittstelle zwischen `slots`-Dict und UI (`views/voelker_auswahl_overlay.py:MULTI_SLOT_KEYS`)
+  - Völker-Tab: pro Slot eine Zeile mit eigenem Edit-Button, `slot_index` in allen Lambdas korrekt gecaptured; Attribut-Bonus- und Malus-Edit-Dialoge filtern bereits in anderen Slots gewählte Werte (`views/voelker_view.py`)
+- [x] **Persistenz**: `voelker_auswahlen` round-trippt in `to_dict`/`from_dict`; Skalar→Liste-Migration in `_finalize_character_loading` (`functions/charakter_speicher.py`)
+- [x] **Auto-Generator**: Listen-Keys `freie_talente`, `freie_attribute`, `attribute_malus` plus Legacy-Skalare (`functions/auto_character_generator.py`)
+- [x] **Wizard**: Quick-Pick-Inkonsistenz behoben (`'freies_talent'` → `'talent'`); `_finish_wizard` ruft `reconcile_volk_auswahlen` mit den neuen Slot-Counts; Volk-Rename trägt die Auswahlen mit (`views/volk_popup.py`)
+- [x] **Tests**: 14 neue Multi-Slot-Tests in 6 Gruppen; alle 64 Volk-/Setting-Tests grün (`test units/test_volkseigenarten_multi_slot.py`)
 
 ### ⏳ Offen
 
 #### Schritt 2 (Rest)
 - [ ] Schritt 2a — Schema: `kosten_per_instanz` Feld (aktuell implizit)
-- [ ] Schritt 2c — Anzeige Einzel-Instanzen mit ×-Entfernen-Button in Wizard-Übersicht
-- [ ] Schritt 2e — `eigenart_zu_effekte`: gleiche Effekte summieren statt überschreiben
+- [ ] Schritt 2c — Anzeige Einzel-Instanzen mit ×-Entfernen-Button in der **Wizard**-Übersicht (Volk-Editor; im Völker-Tab durch slot-spezifische Edit-Buttons bereits abgedeckt)
+- [ ] Schritt 2e — `eigenart_zu_effekte`: gleiche Effekte summieren statt überschreiben (additive Effekte wie 2× Robustheit; Multi-Slot-Branch hat nur den `auswahl_verzoegert`-Pfad via `wahlmoeglichkeiten_counts` gelöst, nicht das direkte Effekt-Stacking)
 
 #### Schritt 3 — Sonderfälle
 - [ ] Schritt 3a — Macht (2 + 1 je weitere), AH (Begabt) Aktivierung
@@ -337,12 +356,18 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 | Datei | Schritt | Änderung | Status |
 |---|---|---|---|
 | `config/volkseigenarten_config.json` | 1, 2, 3, 4 | `stufen`-Arrays, `kosten_per_instanz`, `kosten_zusatz_*`, neue Eigenarten | ✅ Teilweise |
-| `functions/volkseigenarten_funktionen.py` | 1, 2, 3 | `stufen_kosten_bereich`, `wende_stufe_an`, `validiere_volk_erstellung` mit Mehrfach-Limits, `EFFEKT_TYPEN` mit `natuerliche_waffe` | ✅ |
-| `views/volk_popup.py` | 1, 2, 3 | Stepper-Widget bei `max_auswahl != 1`, `_show_stufen_dialog`, `_increment/decrement_eigenart`, `_refresh_eigenarten_popup` | ✅ |
-| `functions/volk_funktionen.py` | 2, 3 | Anwendung der Mehrfach-Instanzen | ⏳ Offen |
+| `functions/volkseigenarten_funktionen.py` | 1, 2, 3, Multi-Slot | `stufen_kosten_bereich`, `wende_stufe_an`, `validiere_volk_erstellung` mit Mehrfach-Limits, `EFFEKT_TYPEN` mit `natuerliche_waffe`; **`wahlmoeglichkeiten_counts` (Multi-Slot)** | ✅ + ✅ auf Branch |
+| `views/volk_popup.py` | 1, 2, 3, Multi-Slot | Stepper-Widget bei `max_auswahl != 1`, `_show_stufen_dialog`, `_increment/decrement_eigenart`, `_refresh_eigenarten_popup`; **Quick-Pick-Key-Fix, `reconcile_volk_auswahlen`-Aufruf, Volk-Rename** | ✅ + ✅ auf Branch |
+| `functions/volk_funktionen.py` | 2, 3, Multi-Slot | Anwendung der Mehrfach-Instanzen; **`slots`-Rückgabe in `get_volk_zusatzelemente`, `reset_volk_auswahlen` mit Listen, neuer `reconcile_volk_auswahlen`** | ⏳ Offen + ✅ auf Branch |
+| `views/voelker_view.py` | Multi-Slot | N Zeilen pro Slot, `slot_index`-Lambdas, Filter bereits gewählter Werte in Edit-Dialogen, `aktualisiere_ui` synchronisiert aus `charakter.voelker_auswahlen` | ✅ auf Branch |
+| `views/voelker_auswahl_overlay.py` | Multi-Slot | N Cards pro Slot mit `n/N`-Fortschritt, `MULTI_SLOT_KEYS`-Konstante, Filter bereits gewählter Werte | ✅ auf Branch |
+| `functions/charakter_speicher.py` | Multi-Slot | `voelker_auswahlen` Round-Trip + Skalar→Liste-Migration in `_finalize_character_loading` | ✅ auf Branch |
+| `functions/auto_character_generator.py` | Multi-Slot | Listen-Keys `freie_talente` / `freie_attribute` / `attribute_malus` plus Legacy-Skalare | ✅ auf Branch |
+| `models/charakter_properties.py` | Multi-Slot | `voelker_auswahlen` als persistierte `DictProperty` | ✅ auf Branch |
 | `models/volk.py` | 2 | `effects['eigenarten']` ist bereits eine Liste | ⏳ Offen |
 | `test units/test_volkseigenarten_stufen.py` | 1 | 14 Tests | ✅ |
 | `test units/test_volkseigenarten_mehrfach.py` | 2 | 9 Tests | ✅ |
+| `test units/test_volkseigenarten_multi_slot.py` | Multi-Slot | 14 Tests in 6 Gruppen | ✅ auf Branch |
 | `test units/test_volkseigenarten_sonderfaelle.py` | 3 | Tests für Macht/Talent/Superkräfte | ⏳ Offen |
 
 ---
@@ -357,6 +382,8 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 6. **Setting-Filterung Superkräfte.** Eigenart `volk_superkraft` darf nur in Settings auftauchen, die Superkräfte unterstützen. Das Setting-Feature-Flag liegt in `settings/*.json` — Lade-Filter in `lade_volkseigenarten_config()`.
 7. **Talent-Voraussetzungs-Sonderregel.** Volks-Talent (Schritt 3b) ignoriert Voraussetzungen außer „andere Talente". Das erfordert eine zusätzliche Variante zu `pruefe_voraussetzungen` oder einen Flag-Parameter (`only_talent_prereqs=True`). Konsistent mit `freies_volk_talent_plan.md` halten.
 8. **Auto-Talente / Auto-Handicaps doppelt ausgelöst.** Wenn Macht (Schritt 3a) AH (Begabt) aktiviert und der User AH (Begabt) zusätzlich als reguläres Talent wählt, darf nichts doppelt einfließen. `_apply_ah_auto_effects` ist idempotent prüfen.
+9. **Stufen × Multi-Slot Verschränkung.** Eigenarten aus Tabelle C, die `max_auswahl > 1` haben (Fertigkeit, Fertigkeitsbonus, Handicap, Attributsabzug, Fertigkeitsabzug), brauchen pro Slot eine eigene Stufenwahl + Optionswert. Im Wizard wird das via separate Eigenart-Instanzen in `volk.eigenarten` gelöst; jede Instanz behält ihre `ausgewaehlte_stufe`. Round-Trip nach Reload für Multi-Slot Stufen-Eigenarten ist **noch nicht regressionsgetestet** — Test-Lücke für Schritt 1d.
+10. **Zwei UI-Pfade für Mehrfachauswahl.** Wizard-Stepper (Schritt 2) vs. Völker-Tab Auswahl-Cards (Multi-Instance-Branch) speisen sich aus unterschiedlichen Datenebenen — der Stepper definiert `max_auswahl` / Anzahl der Eigenart-Instanzen im *Volk*, die Cards bestücken die *Pro-Charakter-Auswahl*. Beim PR-Merge muss verifiziert sein, dass beide Pfade konsistent zählen (`wahlmoeglichkeiten_counts` aus `eigenart_zu_effekte` ⇆ `voelker_auswahlen[volk][typ]`-Längen).
 
 ---
 
@@ -366,10 +393,12 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 2. **✅ PR 2 — Schritt 1 Config (Stufen-Eigenarten).** (Hörner, Klauen, Regeneration, etc.) — **ERLEDIGT**
 3. **✅ PR 3 — Schritt 2 Mehrfach-UI.** Stepper-Buttons, validiere_volk_erstellung — **ERLEDIGT**
 4. **✅ PR 4 — Verzögerte Auswahl.** `auswahl_verzoegert` in Config, `_show_optionen_dialog`, `eigenart_zu_effekte` — **ERLEDIGT**
-5. **⏳ PR 5 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **OFFEN**
-6. **⏳ PR 6 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige, summieren statt überschreiben — **OFFEN**
-7. **⏳ PR 7 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
-8. **⏳ PR 8+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
+5. **✅ PR 5 (#182) — Bugfix Attributs-Schwäche-Edit + Stepper-Counter.** — **ERLEDIGT**
+6. **⏳ PR 6 — Multi-Slot im Völker-Tab.** Branch `claude/volkseigenarten-multi-instance`; muss **vor** Schritt 3 Sonderfälle gemerged werden, weil die Sonderfälle-Logik (Macht 2+1, Talent 2+Rang, Superkraft 2+X) auf `wahlmoeglichkeiten_counts` aufbaut — **OFFEN, Branch fertig**
+7. **⏳ PR 7 — Schritt 1d.** Migration Tests für `fliegen_stufe` — **OFFEN**
+8. **⏳ PR 8 — Schritt 2 (Rest).** Einzel-Instanzen Anzeige im Wizard, Effekte summieren statt überschreiben — **OFFEN**
+9. **⏳ PR 9 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte — **OFFEN**
+10. **⏳ PR 10+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
 
 ---
 
@@ -380,6 +409,7 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 Pro Schritt eigene Tests in `test units/`:
 - **Schritt 1 (vorhanden):** `test_volkseigenarten_stufen.py` — 14 Tests
 - **Schritt 2:** `test_volkseigenarten_mehrfach.py` (neu) — Mehrfach-Limit, Stepper-State, Optionen pro Instanz, gleiche Option doppelt verhindern, Punkte-Summe bei N Instanzen
+- **Multi-Slot Völker-Tab (vorhanden auf Branch):** `test_volkseigenarten_multi_slot.py` — 14 Tests in 6 Gruppen (`TestEigenartZuEffekteCounts`, `TestGetVolkZusatzelementeSlots`, `TestResetVolkAuswahlenMultiSlot`, `TestReconcileVolkAuswahlen`, `TestPersistenceMigration`, `TestAutoGeneratorMultiSlot`)
 - **Schritt 3:** `test_volkseigenarten_sonderfaelle.py` (neu) — Macht-Degression (2/3/4 EP für 1/2/3 Mächte), Talent-Rang-Kosten, Superkraft-X-Aufschlag, AH-Aktivierung idempotent
 
 Voraussetzung: `python "test units/run_all_tests.py"` muss nach jedem Schritt grün sein (aktuell: 927 Tests).
@@ -390,6 +420,7 @@ Voraussetzung: `python "test units/run_all_tests.py"` muss nach jedem Schritt gr
 - **Schritt 1:** Fliegen wählen → Stufen-Dialog erscheint → BW 12 (4 EP) wählen → in der Liste steht „Fliegen [4 EP] · Bewegungsweite 12". Volk speichern, neu laden — Stufenwahl erhalten.
 - **Schritt 2:** Robustheit 3× wählen über Stepper → Punkte korrekt summiert (3 EP). 4. Klick disabled. Attributserhöhung 2× wählen mit verschiedenen Attributen → in der Übersicht zwei Chips „Stärke" + „Verstand".
 - **Schritt 3:** Volk-Macht 2× wählen → Punktestand 2 + 1 = 3 EP. AH (Begabt) im Charakter-View aktiviert, Mächte-Liste enthält beide gewählten Mächte, Machtpunkte unverändert von Volk-Macht.
+- **Multi-Slot:** Custom-Volk mit 2× `attributserhoehung` erstellen, Volk einem Charakter zuweisen → Overlay zeigt zwei Cards „Freies Attribut (1/2)" / „(2/2)" → Stärke + Verstand wählen → im Völker-Tab zwei Zeilen mit eigenen Edit-Buttons, beide W6. Speichern, neu laden — beide Slots erhalten. Custom-Volk auf 1× reduzieren → `reconcile_volk_auswahlen` rollt zweiten Slot zurück (Verstand W4), im Tab nur eine Zeile.
 
 ### Android-Smoke-Test
 
