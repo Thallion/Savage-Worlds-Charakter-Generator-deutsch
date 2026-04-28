@@ -373,7 +373,7 @@
         "Parasiten": {
             "name": "Parasiten",
             "handicaps": [
-                "Außenseiter (leicht)"
+                "Außenseiter"
             ],
             "talente": [],
             "besonderheiten": [
@@ -393,7 +393,7 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Außenseiter (leicht)"
+                    "Außenseiter"
                 ],
                 "spezielle_effekte": {
                     "gemeinschaft": true,
