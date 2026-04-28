@@ -218,7 +218,7 @@
         "Gen-Soldaten": {
             "name": "Gen-Soldaten",
             "handicaps": [
-                "Skrupellos (schwer)"
+                "Skrupellos"
             ],
             "talente": [
                 "Kampfreflexe"
@@ -243,7 +243,7 @@
                     "Kampfreflexe"
                 ],
                 "auto_handicaps": [
-                    "Skrupellos (schwer)"
+                    "Skrupellos"
                 ],
                 "spezielle_effekte": {
                     "schmerzresistenz": true,
