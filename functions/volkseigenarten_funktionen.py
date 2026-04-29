@@ -202,10 +202,17 @@ def berechne_punktestand(ausgewaehlte_eigenarten):
     Berechnet den aktuellen Punktestand basierend auf ausgewählten Eigenarten.
     Start: 2 Punkte (für positive Eigenarten)
     Positive Eigenarten kosten Punkte, negative geben Punkte zurück.
-    
+
+    Eigenart-Schema-Feld `kosten_per_instanz` (Default: True):
+      - True (Default):  Jede Instanz kostet einzeln. Beispiel: 2× Robustheit
+        (kosten=1) ⇒ 2 EP positive_kosten.
+      - False:           Nur die erste Instanz pro ID zählt. Vorbereitung für
+        Sonderfälle wie Macht (Schritt 3a) mit `kosten_zusatz_je_weitere`,
+        wo eine eigene Formel die Folge-Instanzen tariefiert.
+
     Args:
         ausgewaehlte_eigenarten: Liste von dicts mit 'id', 'kosten', optional 'optionen'
-        
+
     Returns:
         dict: {
             'start_punkte': 2,
@@ -216,12 +223,21 @@ def berechne_punktestand(ausgewaehlte_eigenarten):
         }
     """
     config = lade_volkseigenarten_config()
-    
+
     positive_kosten = 0
     negative_punkte = 0
-    
+    bereits_gezaehlt_ids = set()  # für kosten_per_instanz=False
+
     for eigenart in ausgewaehlte_eigenarten:
         kosten = eigenart.get('kosten', 0)
+        kosten_per_instanz = eigenart.get('kosten_per_instanz', True)
+        eid = eigenart.get('id')
+
+        if not kosten_per_instanz and eid:
+            if eid in bereits_gezaehlt_ids:
+                continue
+            bereits_gezaehlt_ids.add(eid)
+
         if kosten > 0:
             positive_kosten += kosten
         else:
@@ -396,14 +412,22 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                     effects['wahlmoeglichkeiten']['freies_attribut'] = True
                 _bump_count('freies_attribut')
             if attribut:
-                effects['attribute_bonuses'][attribut] = effekt.get('attribut_bonus', 2)
+                # Schritt 2e: Boni summieren statt überschreiben, damit z.B.
+                # zwei explizite Bonus-Eigenarten auf dasselbe Attribut sich
+                # addieren. (Regelbedingt selten, defensiv korrekt.)
+                effects['attribute_bonuses'][attribut] = (
+                    effects['attribute_bonuses'].get(attribut, 0) + effekt.get('attribut_bonus', 2)
+                )
 
         elif effekt_typ == 'fertigkeits_bonus':
             if effekt.get('grundfertigkeit_bonus'):
                 if optionen and optionen.get('typ') == 'grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
                     if fertigkeit:
-                        effects['fertigkeits_startboni'][fertigkeit] = effekt.get('grundfertigkeit_bonus', 2)
+                        effects['fertigkeits_startboni'][fertigkeit] = (
+                            effects['fertigkeits_startboni'].get(fertigkeit, 0)
+                            + effekt.get('grundfertigkeit_bonus', 2)
+                        )
                     elif optionen.get('auswahl_verzoegert'):
                         effects['wahlmoeglichkeiten']['freie_grundfertigkeit'] = True
                         _bump_count('freie_grundfertigkeit')
@@ -411,12 +435,17 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                 if optionen and optionen.get('typ') == 'nicht_grundfertigkeit_auswahl':
                     fertigkeit = optionen.get('ausgewaehlt')
                     if fertigkeit:
-                        effects['fertigkeits_startboni'][fertigkeit] = effekt.get('nicht_grundfertigkeit_bonus', 2)
+                        effects['fertigkeits_startboni'][fertigkeit] = (
+                            effects['fertigkeits_startboni'].get(fertigkeit, 0)
+                            + effekt.get('nicht_grundfertigkeit_bonus', 2)
+                        )
                     elif optionen.get('auswahl_verzoegert'):
                         effects['wahlmoeglichkeiten']['freie_nicht_grundfertigkeit'] = True
                         _bump_count('freie_nicht_grundfertigkeit')
             elif effekt.get('geschaeftssinn'):
-                effects['fertigkeits_startboni']['Überzeugen/Schätzen'] = 2
+                effects['fertigkeits_startboni']['Überzeugen/Schätzen'] = (
+                    effects['fertigkeits_startboni'].get('Überzeugen/Schätzen', 0) + 2
+                )
 
         elif effekt_typ == 'wahlmoeglichkeit':
             for key, value in effekt.items():
@@ -444,12 +473,13 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                              'koerpersprache_malus', 'verstand_malus', 'erholung_malus',
                              'treffer_bonus_gegner', 'bewegung_malus', 'sicht_malus',
                              'erholungsbonus', 'erholungsbonus_angeschlagen', 'lebenserwartung_mult']:
-                    if key == 'bewegungsweite_bonus':
-                        effects.setdefault('bewegungsweite_bonus', 0)
-                        effects['bewegungsweite_bonus'] += value
-                    elif key == 'robustheit_bonus':
-                        effects.setdefault('robustheit_bonus', 0)
-                        effects['robustheit_bonus'] += value
+                    # Schritt 2e: Numerische Effekte summieren statt überschreiben.
+                    # `lebenserwartung_mult` ist ein Multiplikator; wir multiplizieren
+                    # statt zu summieren. Alle anderen Werte sind additiv.
+                    if key == 'lebenserwartung_mult':
+                        effects[key] = effects.get(key, 1) * value
+                    elif isinstance(value, (int, float)):
+                        effects[key] = effects.get(key, 0) + value
                     else:
                         effects[key] = value
 
