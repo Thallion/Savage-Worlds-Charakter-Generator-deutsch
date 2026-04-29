@@ -37,8 +37,8 @@ class TestKostenPerInstanzFlag(unittest.TestCase):
             {'id': 'volk_macht', 'kosten': 2, 'kosten_per_instanz': False},
         ]
         result = berechne_punktestand(eigenarten)
-        # Nur die erste Instanz zählt - bereitet Schritt 3a (Macht 2+1+...) vor
-        self.assertEqual(result['positive_kosten'], 2)
+        # Schritt 3a: volk_macht 3× → Formel 2+1×(3-1)=4 EP
+        self.assertEqual(result['positive_kosten'], 4)
 
     def test_gemischt_kosten_per_instanz(self):
         """Eigenarten mit kosten_per_instanz=False und ohne mischen sich korrekt."""
@@ -49,8 +49,8 @@ class TestKostenPerInstanzFlag(unittest.TestCase):
             {'id': 'robustheit_erhoeht', 'kosten': 1},
         ]
         result = berechne_punktestand(eigenarten)
-        # Volk-Macht zählt 1× (2 EP), Robustheit zählt 2× (2 EP) ⇒ 4 EP
-        self.assertEqual(result['positive_kosten'], 4)
+        # Schritt 3a: volk_macht 2× → 2+1×(2-1)=3 EP, robustheit 2× → 2 EP
+        self.assertEqual(result['positive_kosten'], 5)
 
     def test_negative_eigenart_mit_kosten_per_instanz_false(self):
         """Auch negative Eigenarten respektieren das Flag."""

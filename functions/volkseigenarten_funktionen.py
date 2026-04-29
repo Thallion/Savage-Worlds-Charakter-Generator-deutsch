@@ -98,6 +98,27 @@ EFFEKT_TYPEN = {
         'effekt_schema': {'freies_talent': True},
         'optionen_typ': 'talent_auswahl'
     },
+    'macht_volk': {
+        'name': 'Macht (Volk)',
+        'beschreibung': 'Eine Macht aus dem Arkanen Hintergrund (Begabt). Erste Auswahl aktiviert den AH.',
+        'kategorie': 'positive',
+        'effekt_schema': {'macht_volk': True},
+        'optionen_typ': 'macht_auswahl'
+    },
+    'talent_volk': {
+        'name': 'Talent (Volk)',
+        'beschreibung': 'Ein freies Talent mit wählbarem Rang. Voraussetzungen außer andere Talente werden ignoriert.',
+        'kategorie': 'positive',
+        'effekt_schema': {'talent_volk': True},
+        'optionen_typ': 'talent_rang_auswahl'
+    },
+    'superkraft_volk': {
+        'name': 'Superkräfte (Volk)',
+        'beschreibung': 'Aktiviert den Arkanen Hintergrund Superkräfte. SKP-Kosten werden addiert.',
+        'kategorie': 'positive',
+        'effekt_schema': {'superkraft_volk': True},
+        'optionen_typ': 'superkraft_auswahl'
+    },
     'spezieller_effekt': {
         'name': 'Sonstiger Effekt',
         'beschreibung': 'Ein benutzerdefinierter Effekt (reine Beschreibung)',
@@ -228,6 +249,13 @@ def berechne_punktestand(ausgewaehlte_eigenarten):
     negative_punkte = 0
     bereits_gezaehlt_ids = set()  # für kosten_per_instanz=False
 
+    # Zähle Instanzen pro ID für Sonderfälle (volk_macht: 2+1 je weitere)
+    id_counts = {}
+    for eigenart in ausgewaehlte_eigenarten:
+        eid = eigenart.get('id')
+        if eid:
+            id_counts[eid] = id_counts.get(eid, 0) + 1
+
     for eigenart in ausgewaehlte_eigenarten:
         kosten = eigenart.get('kosten', 0)
         kosten_per_instanz = eigenart.get('kosten_per_instanz', True)
@@ -237,6 +265,22 @@ def berechne_punktestand(ausgewaehlte_eigenarten):
             if eid in bereits_gezaehlt_ids:
                 continue
             bereits_gezaehlt_ids.add(eid)
+
+        # volk_macht (Schritt 3a): Sonderkosten-Formel 2 + 1*(N-1)
+        # Wird NUR auf die erste Instanz angewendet (bereits_gezaehlt_ids-Eintrag
+        # verhindert dass die Formel mehrfach angewendet wird), aber die Formel
+        # selbst rechnet mit der Gesamt-Anzahl N.
+        if eid == 'volk_macht' and kosten >= 0:
+            anzahl = id_counts.get(eid, 1)
+            kosten = 2 + max(0, anzahl - 1) * 1
+        elif eid == 'volk_superkraft' and kosten >= 0:
+            # volk_superkraft: 2 + punkte_kosten aus optionen (pro Eintrag)
+            optionen = eigenart.get('optionen', {})
+            punkte = optionen.get('punkte_kosten', 0)
+            kosten = 2 + punkte
+        # volk_talent (2+Rang) wird hier nicht speziell behandelt weil rang
+        # nicht in diesem Dict gespeichert ist - die Berechnung passiert
+        # in volk_funktionen bei der Auswahl.
 
         if kosten > 0:
             positive_kosten += kosten
@@ -487,6 +531,32 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
             for key, value in effekt.items():
                 if key in ['horn_waffe', 'klauen', 'panzerbrechend']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
+
+        elif effekt_typ == 'macht_volk':
+            # volk_macht: erste Aktiviert AH (Begabt), weitere fügen Mächte hinzu
+            if optionen and optionen.get('typ') == 'macht_auswahl':
+                ausgewaehlte_macht = optionen.get('ausgewaehlt')
+                if ausgewaehlte_macht:
+                    effects['spezielle_effekte'].append({'typ': 'macht_volk', 'wert': ausgewaehlte_macht})
+
+        elif effekt_typ == 'talent_volk':
+            # volk_talent: Talent mit wählbarem Rang
+            if optionen and optionen.get('typ') == 'talent_rang_auswahl':
+                ausgewaehltes_talent = optionen.get('ausgewaehlt')
+                if ausgewaehltes_talent:
+                    effects['spezielle_effekte'].append({'typ': 'talent_volk', 'wert': ausgewaehltes_talent})
+
+        elif effekt_typ == 'superkraft_volk':
+            # volk_superkraft: aktiviert AH Superkräfte
+            if optionen and optionen.get('typ') == 'superkraft_auswahl':
+                ausgewaehlte_superkraft = optionen.get('ausgewaehlt')
+                punkte_kosten = optionen.get('punkte_kosten', 0)
+                if ausgewaehlte_superkraft:
+                    effects['spezielle_effekte'].append({
+                        'typ': 'superkraft_volk',
+                        'wert': ausgewaehlte_superkraft,
+                        'punkte_kosten': punkte_kosten
+                    })
         
         elif effekt_typ == 'attribut_malus':
             attribut = None

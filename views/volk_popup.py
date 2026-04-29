@@ -405,6 +405,20 @@ class VolkGeneratorWizard:
             aktuelle_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
             max_auswahl = eigenart.get('max_auswahl', 1)
 
+            # Voraussetzungsprüfung (z.B. volk_superkraft nur in Superkräfte-Settings)
+            voraussetzung = eigenart.get('voraussetzung')
+            if voraussetzung == 'setting_hat_superkraefte':
+                try:
+                    from kivymd.app import MDApp
+                    app = MDApp.get_running_app()
+                    if app and hasattr(app, 'controller') and app.controller:
+                        setting_name = getattr(app.controller.charakter, 'setting_name', '')
+                        from functions.superkraft_funktionen import ist_superkraefte_setting
+                        if not ist_superkraefte_setting(setting_name):
+                            continue
+                except Exception:
+                    pass
+
             # Kosten-Text: bei Stufen-Eigenart wird ein Bereich angezeigt (z.B. "[2-6 EP]")
             stufen_bereich = stufen_kosten_bereich(eigenart)
             if stufen_bereich:
@@ -916,6 +930,12 @@ class VolkGeneratorWizard:
             self._show_text_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
         elif typ == 'talent_auswahl':
             self._show_talent_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
+        elif typ == 'macht_auswahl':
+            self._show_macht_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
+        elif typ == 'talent_rang_auswahl':
+            self._show_talent_rang_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
+        elif typ == 'superkraft_auswahl':
+            self._show_superkraft_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
         elif typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl',
                      'magieaffin_auswahl'):
             self._show_liste_optionen_dialog(eigenart, liste, checkbox, optionen, typ, eigenart_name)
@@ -1420,6 +1440,311 @@ class VolkGeneratorWizard:
         return ['Kämpfen', 'Schießen', 'Heilung', 'Einschüchtern', 'Provozieren',
                 'Reparieren', 'Recherche', 'Reiten', 'Steuern', 'Überleben', 'Zaubern']
 
+    def _show_macht_optionen_dialog(self, eigenart, liste, checkbox, optionen, eigenart_name):
+        """Dialog zur Auswahl einer Macht für volk_macht."""
+        try:
+            from kivymd.app import MDApp
+            app = MDApp.get_running_app()
+            charakter = app.controller.charakter
+        except Exception:
+            Logger.warning("Kein Charakter für Macht-Auswahl gefunden")
+            liste.append(eigenart)
+            return
+
+        all_maechte = getattr(charakter, 'maechte', {})
+        if not all_maechte:
+            Logger.warning("Keine Mächte verfügbar")
+            liste.append(eigenart)
+            return
+
+        items = sorted(all_maechte.keys())
+        standard = items[0] if items else None
+        selected = [standard]
+
+        content = MDBoxLayout(orientation="vertical", spacing=dp(4), size_hint_y=None, height=dp(min(len(items) * 56, 300)))
+
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
+        radio_checkboxes = {}
+
+        for item_name in items:
+            list_item = MDListItem(size_hint_y=None, height=dp(56) if _mobile else dp(48))
+            list_item.add_widget(MDListItemHeadlineText(text=item_name))
+            radio_cb = MDListItemTrailingCheckbox(
+                active=(item_name == standard),
+                group=f"optionen_{eigenart.get('id', '')}"
+            )
+            r_cb = radio_cb
+            i_name = item_name
+            list_item.bind(on_release=lambda x, name=i_name: self._select_option(name, selected, radio_checkboxes))
+            radio_cb.bind(on_release=lambda x, cb=r_cb, name=i_name: self._on_option_radio_clicked(name, selected, radio_checkboxes, cb))
+            list_item.add_widget(radio_cb)
+            list_layout.add_widget(list_item)
+            radio_checkboxes[item_name] = radio_cb
+
+        scroll = MDScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+
+        def _on_confirm(x):
+            if selected[0]:
+                eigenart['optionen']['ausgewaehlt'] = selected[0]
+                liste.append(eigenart)
+                dialog.dismiss()
+                self._restore_eigenarten_popup()
+
+        def _on_cancel(x):
+            dialog.dismiss()
+            self._restore_eigenarten_popup()
+            if checkbox:
+                checkbox.active = False
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"{eigenart_name} — Macht wählen"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
+                MDButton(MDButtonText(text="Bestätigen"), style="filled", on_release=_on_confirm),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+
+    def _show_talent_rang_optionen_dialog(self, eigenart, liste, checkbox, optionen, eigenart_name):
+        """Dialog zur Auswahl eines Talents mit Rang für volk_talent."""
+        from functions.volk_funktionen import get_freie_talente
+
+        try:
+            from kivymd.app import MDApp
+            app = MDApp.get_running_app()
+            charakter = app.controller.charakter
+        except Exception:
+            Logger.warning("Kein Charakter für Talent-Auswahl gefunden")
+            liste.append(eigenart)
+            return
+
+        talente = get_freie_talente(charakter, nur_verfuegbare=False)
+        if not talente or (len(talente) == 1 and "Keine" in talente[0]):
+            Logger.warning("Keine Talente verfügbar für volk_talent")
+            liste.append(eigenart)
+            return
+
+        beschreibung = optionen.get('beschreibung', 'Wähle ein Talent:')
+        standard = talente[0] if talente else None
+        selected_talent = [standard]
+        selected_rang = [1]  # 0=Anfänger, 1=Erfahren, 2=Veteran, 3=Heroisch, 4=Held
+        self._last_talent_click = 0
+
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+            padding=[dp(16), dp(8), dp(16), dp(8)]
+        )
+
+        content.add_widget(MDLabel(
+            text=beschreibung,
+            font_style="Body",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=dp(24)
+        ))
+
+        talent_items = sorted(talente)
+        talent_list_layout = MDList(size_hint_y=None)
+        talent_list_layout.bind(minimum_height=talent_list_layout.setter('height'))
+        if _mobile:
+            talent_list_layout.padding = [0, 0, dp(32), 0]
+        talent_radio_checkboxes = {}
+
+        for t_name in talent_items:
+            list_item = MDListItem(size_hint_y=None, height=dp(56) if _mobile else dp(48))
+            list_item.add_widget(MDListItemHeadlineText(text=t_name))
+            radio_cb = MDListItemTrailingCheckbox(
+                active=(t_name == standard),
+                group=f"talent_{eigenart.get('id', '')}"
+            )
+            r_cb = radio_cb
+            t = t_name
+            list_item.bind(on_release=lambda x, name=t: self._select_talent_rang_option(name, selected_talent, talent_radio_checkboxes))
+            radio_cb.bind(on_release=lambda x, cb=r_cb, name=t: self._on_talent_radio_clicked(name, selected_talent, talent_radio_checkboxes, cb))
+            list_item.add_widget(radio_cb)
+            talent_list_layout.add_widget(list_item)
+            talent_radio_checkboxes[t_name] = radio_cb
+
+        talent_scroll = MDScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
+        if _mobile:
+            talent_scroll.scroll_type = ['bars', 'content']
+        talent_scroll.add_widget(talent_list_layout)
+        content.add_widget(talent_scroll)
+
+        rang_label = MDLabel(
+            text="Rang:",
+            font_style="Body",
+            theme_text_color="Secondary",
+            size_hint_y=None,
+            height=dp(24)
+        )
+        content.add_widget(rang_label)
+
+        rang_items = ["Anfänger", "Erfahren", "Veteran", "Heroisch", "Held"]
+        rang_list_layout = MDList(size_hint_y=None)
+        rang_list_layout.bind(minimum_height=rang_list_layout.setter('height'))
+        rang_radio_checkboxes = {}
+
+        for idx, rang_name in enumerate(rang_items):
+            list_item = MDListItem(size_hint_y=None, height=dp(48))
+            list_item.add_widget(MDListItemHeadlineText(text=rang_name))
+            radio_cb = MDListItemTrailingCheckbox(
+                active=(idx == 1),
+                group=f"rang_{eigenart.get('id', '')}"
+            )
+            r_cb = radio_cb
+            i = idx
+            list_item.bind(on_release=lambda x, index=i: self._select_rang_option(index, selected_rang, rang_radio_checkboxes))
+            radio_cb.bind(on_release=lambda x, cb=r_cb, index=i: self._on_rang_radio_clicked(index, selected_rang, rang_radio_checkboxes, cb))
+            list_item.add_widget(radio_cb)
+            rang_list_layout.add_widget(list_item)
+            rang_radio_checkboxes[idx] = radio_cb
+
+        rang_scroll = MDScrollView(size_hint_y=None, bar_width=dp(15), bar_margin=dp(4), height=dp(150))
+        rang_scroll.add_widget(rang_list_layout)
+        content.add_widget(rang_scroll)
+
+        def _on_confirm(x):
+            eigenart['optionen']['ausgewaehlt'] = selected_talent[0]
+            eigenart['optionen']['rang'] = selected_rang[0]
+            eigenart['kosten'] = 2 + selected_rang[0]
+            liste.append(eigenart)
+            dialog.dismiss()
+            self._restore_eigenarten_popup()
+
+        def _on_cancel(x):
+            dialog.dismiss()
+            self._restore_eigenarten_popup()
+            if checkbox:
+                checkbox.active = False
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"{eigenart_name} — Talent & Rang"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
+                MDButton(MDButtonText(text="Bestätigen"), style="filled", on_release=_on_confirm),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+
+    def _select_talent_rang_option(self, name, selected, radio_checkboxes):
+        selected[0] = name
+        for item_name, cb in radio_checkboxes.items():
+            cb.active = (item_name == name)
+
+    def _on_talent_radio_clicked(self, name, selected, radio_checkboxes, clicked_cb):
+        now = time.monotonic()
+        if hasattr(self, '_last_option_radio_time') and (now - self._last_option_radio_time) < 0.5:
+            return
+        self._last_option_radio_time = now
+        self._select_talent_rang_option(name, selected, radio_checkboxes)
+
+    def _select_rang_option(self, index, selected_rang, radio_checkboxes):
+        selected_rang[0] = index
+        for idx, cb in radio_checkboxes.items():
+            cb.active = (idx == index)
+
+    def _on_rang_radio_clicked(self, index, selected_rang, radio_checkboxes, clicked_cb):
+        now = time.monotonic()
+        if hasattr(self, '_last_option_radio_time') and (now - self._last_option_radio_time) < 0.5:
+            return
+        self._last_option_radio_time = now
+        self._select_rang_option(index, selected_rang, radio_checkboxes)
+
+    def _show_superkraft_optionen_dialog(self, eigenart, liste, checkbox, optionen, eigenart_name):
+        """Dialog zur Auswahl einer Superkraft für volk_superkraft."""
+        try:
+            from kivymd.app import MDApp
+            app = MDApp.get_running_app()
+            charakter = app.controller.charakter
+        except Exception:
+            Logger.warning("Kein Charakter für Superkraft-Auswahl gefunden")
+            liste.append(eigenart)
+            return
+
+        alle_kraefte = getattr(charakter, 'superkraefte', {})
+        if not alle_kraefte:
+            Logger.warning("Keine Superkräfte verfügbar")
+            liste.append(eigenart)
+            return
+
+        items = sorted(alle_kraefte.keys())
+        standard = items[0] if items else None
+        selected = [standard]
+
+        content = MDBoxLayout(orientation="vertical", spacing=dp(4), size_hint_y=None, height=dp(min(len(items) * 56, 300)))
+
+        list_layout = MDList(size_hint_y=None)
+        list_layout.bind(minimum_height=list_layout.setter('height'))
+        if _mobile:
+            list_layout.padding = [0, 0, dp(32), 0]
+        radio_checkboxes = {}
+
+        for item_name in items:
+            kraft = alle_kraefte[item_name]
+            kosten = getattr(kraft, 'kosten', 0)
+            zeile = f"{item_name} ({kosten} SKP)"
+            list_item = MDListItem(size_hint_y=None, height=dp(56) if _mobile else dp(48))
+            list_item.add_widget(MDListItemHeadlineText(text=zeile))
+            radio_cb = MDListItemTrailingCheckbox(
+                active=(item_name == standard),
+                group=f"optionen_{eigenart.get('id', '')}"
+            )
+            r_cb = radio_cb
+            i_name = item_name
+            list_item.bind(on_release=lambda x, name=i_name: self._select_option(name, selected, radio_checkboxes))
+            radio_cb.bind(on_release=lambda x, cb=r_cb, name=i_name: self._on_option_radio_clicked(name, selected, radio_checkboxes, cb))
+            list_item.add_widget(radio_cb)
+            list_layout.add_widget(list_item)
+            radio_checkboxes[item_name] = radio_cb
+
+        scroll = MDScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
+        scroll.add_widget(list_layout)
+        content.add_widget(scroll)
+
+        def _on_confirm(x):
+            if selected[0]:
+                kraft = alle_kraefte.get(selected[0])
+                kosten = getattr(kraft, 'kosten', 0) if kraft else 0
+                eigenart['optionen']['ausgewaehlt'] = selected[0]
+                eigenart['optionen']['punkte_kosten'] = kosten
+                eigenart['kosten'] = 2 + kosten
+                liste.append(eigenart)
+                dialog.dismiss()
+                self._restore_eigenarten_popup()
+
+        def _on_cancel(x):
+            dialog.dismiss()
+            self._restore_eigenarten_popup()
+            if checkbox:
+                checkbox.active = False
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"{eigenart_name} — Superkraft wählen"),
+            MDDialogContentContainer(content),
+            MDDialogButtonContainer(
+                MDButton(MDButtonText(text="Abbrechen"), style="text", on_release=_on_cancel),
+                MDButton(MDButtonText(text="Bestätigen"), style="filled", on_release=_on_confirm),
+            ),
+            size_hint=(0.85, None),
+        )
+        dialog.open()
+
     def _remove_eigenart(self, eigenart_id, liste):
         """Entfernt eine Eigenart aus der Liste"""
         for i, e in enumerate(liste):
@@ -1836,17 +2161,19 @@ class VolkDialogHandler:
             self.show_error("Fehler beim Öffnen des Bearbeiten-Dialogs")
 
     def _on_volk_created(self, volk_name, volk_obj):
-        """Callback nach erfolgreicher Volk-Erstellung/Bearbeitung — wählt das Volk automatisch aus"""
+        """Callback nach erfolgreicher Volk-Erstellung/Bearbeitung.
+        Wählt das Volk aus und öffnet das Zusatzelement-Overlay (Phase 2),
+        damit der Benutzer freie Talente/Attribute sofort auswählen kann."""
         try:
             app = App.get_running_app()
             if hasattr(app, 'get_widget_by_tab_text'):
                 widget = app.get_widget_by_tab_text('Völker', 'voelker_widget')
-                if widget and hasattr(widget, '_select_volk_from_dropdown'):
-                    widget._select_volk_from_dropdown(volk_name)
-                    Logger.info(f"Neues Volk '{volk_name}' automatisch ausgewählt")
+                if widget and hasattr(widget, 'open_volk_dropdown'):
+                    widget.open_volk_dropdown()
+                    Logger.info(f"Neues Volk '{volk_name}' erstellt — Overlay geöffnet")
                     return
         except Exception as e:
-            Logger.error(f"Fehler bei Auto-Auswahl des neuen Volks: {e}")
+            Logger.error(f"Fehler beim Öffnen des Overlays für neues Volk: {e}")
         self._refresh_volk_view()
 
     def show_delete_dialog(self):

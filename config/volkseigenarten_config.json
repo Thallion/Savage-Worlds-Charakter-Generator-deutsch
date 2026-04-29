@@ -313,6 +313,46 @@
                 {"label": "Leicht (Schaden)", "kosten": 1, "effekt": {"giftige_beruehrung": "leicht"}},
                 {"label": "Betäubung-tödlich-lähmend", "kosten": 3, "effekt": {"giftige_beruehrung": "betäubung_toedlich_laehmend"}}
             ]
+        },
+        {
+            "id": "volk_macht",
+            "name": "Macht",
+            "kosten": 2,
+            "kosten_per_instanz": false,
+            "max_auswahl": 0,
+            "beschreibung": "Das Volk beginnt mit einer Macht. Erste Auswahl aktiviert einen Arkanen Hintergrund (Begabt). Weitere Mächte erhöhen die Mächte-Liste (keine额外 Machtpunkte).",
+            "effekt_typ": "macht_volk",
+            "optionen": {
+                "typ": "macht_auswahl",
+                "beschreibung": "Wähle eine Macht für dieses Volk"
+            }
+        },
+        {
+            "id": "volk_talent",
+            "name": "Talent",
+            "kosten": 2,
+            "kosten_per_instanz": false,
+            "max_auswahl": 0,
+            "beschreibung": "Das Volk beginnt mit einem freien Talent. Voraussetzungen außer 'anderes Talent' werden ignoriert. Max. Helden-Rang.",
+            "effekt_typ": "talent_volk",
+            "optionen": {
+                "typ": "talent_rang_auswahl",
+                "beschreibung": "Wähle ein Talent und dessen Rang"
+            }
+        },
+        {
+            "id": "volk_superkraft",
+            "name": "Superkräfte",
+            "kosten": 2,
+            "kosten_per_instanz": false,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk aktiviert den Arkanen Hintergrund Superkräfte. Die Kosten der gewählten Superkraft werden als Aufschlag berechnet.",
+            "effekt_typ": "superkraft_volk",
+            "optionen": {
+                "typ": "superkraft_auswahl",
+                "beschreibung": "Wähle eine Superkraft"
+            },
+            "voraussetzung": "setting_hat_superkraefte"
         }
     ],
     "negative": [

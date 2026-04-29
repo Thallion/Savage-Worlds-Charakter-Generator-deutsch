@@ -76,9 +76,9 @@ Adressiert die **Pro-Charakter-Auswahl** für Eigenarten mit `max_auswahl > 1` u
 - [x] Schritt 2e — `eigenart_zu_effekte` summiert numerische Effekte (`attribute_bonuses`, `fertigkeits_startboni`, alle additiven Felder im `spezieller_effekt`-Pfad) statt zu überschreiben; `lebenserwartung_mult` als Multiplikator multipliziert
 
 #### Schritt 3 — Sonderfälle
-- [ ] Schritt 3a — Macht (2 + 1 je weitere), `volk_macht`-Eigenart und Kosten-Formel — _AH-Aktivierungs-Pattern (talent_auswaehlen, _apply_ah_auto_effects, erhoehe_machtpunkte) bereits durch PR #162 + PR #180 verfügbar; Schritt 3a muss nur noch die Eigenart selbst anlegen und an dieselbe Aktivierung delegieren_
-- [ ] Schritt 3b — Talent (2 + Rang), skip_prereq_check — _`pruefe_voraussetzungen` mit `skip_prereq_check`-Pattern bereits durch PR #162 verfügbar (Voraussetzungs-Bestätigungsdialog im Volk-Talent-Overlay)_
-- [ ] Schritt 3c — Superkräfte (2 + X), Setting-Filterung
+- [x] Schritt 3a — `volk_macht`-Eigenart mit Kostenformel 2 + 1 je weitere (N-1), UI `_show_macht_optionen_dialog`, AH-Aktivierung (Begabt) — **ERLEDIGT** (AH-Aktivierungs-Pattern über PR #162 + #180)
+- [x] Schritt 3b — `volk_talent`-Eigenart mit Kostenformel 2 + Rang, UI `_show_talent_rang_optionen_dialog`, skip_prereq_check — **ERLEDIGT** (PR #162 Voraussetzungs-Bestätigung)
+- [x] Schritt 3c — `volk_superkraft`-Eigenart mit Kosten 2 + Punkte der Superkraft, Setting-Filterung in `_show_eigenarten_popup` — **ERLEDIGT**
 
 #### Schritt 4 — Vollständigkeit
 - [ ] Biss, Graben, Keine lebenswichtigen Organe
@@ -424,8 +424,8 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 9. **✅ PR 6 (#196) — Multi-Slot im Völker-Tab.** `wahlmoeglichkeiten_counts`, `slots`-Dict, `voelker_auswahlen` als persistierte DictProperty, N Cards pro Slot — **ERLEDIGT**
 10. **✅ PR 7 (#197) — Schritt 1d.** Migration Tests für `fliegen_stufe` (`STUFEN_MIGRATIONS` + `eigenart_typ`-Lookup-Fix) — **ERLEDIGT**
 11. **✅ PR 8 (#198) — Schritt 2 (Rest, 2a + 2e).** `kosten_per_instanz`-Feld; Effekte summieren — **ERLEDIGT**
-12. **⏳ PR 8b — Schritt 2c.** Wizard-Review-Step widgetisieren mit Einzel-Instanzen + ×-Buttons — **OFFEN, erfordert UI-Rewrite**
-13. **⏳ PR 9 — Schritt 3 Sonderfälle.** Macht / Talent / Superkräfte als eigene Eigenarten — **OFFEN** (Aktivierungs-Pattern existiert bereits über PR #162 + #180)
+12. **✅ PR 9 — Schritt 3 Sonderfälle.** `volk_macht` (Kosten 2+1×(N-1)), `volk_talent` (Kosten 2+Rang), `volk_superkraft` (Kosten 2+SKP), Setting-Filterung — **ERLEDIGT**
+13. **⏳ PR 8b — Schritt 2c.** Wizard-Review-Step widgetisieren mit Einzel-Instanzen + ×-Buttons — **OFFEN, erfordert UI-Rewrite**
 14. **⏳ PR 10+ — Schritt 4 Vollständigkeit.** Pro Themenblock ein PR — **OFFEN**
 
 ---

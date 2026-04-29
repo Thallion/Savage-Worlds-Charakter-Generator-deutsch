@@ -477,10 +477,10 @@ def get_freie_talente(charakter, nur_verfuegbare=True):
 def get_verfuegbare_attribute(charakter):
     """
     Gibt eine Liste aller verfügbaren Attribute zurück.
-    
+
     Args:
         charakter: Das Charakterobjekt
-        
+
     Returns:
         list: Liste der verfügbaren Attribute
     """
@@ -488,16 +488,69 @@ def get_verfuegbare_attribute(charakter):
         if not hasattr(charakter, 'attribute') or not charakter.attribute:
             Logger.warning("Keine Attribute im Charakter gefunden")
             return [NO_ATTRIBUT_AVAILABLE_TEXT]
-        
+
         attribute_liste = list(charakter.attribute.keys())
         attribute_liste.sort()
-        
+
         Logger.debug(f"Verfügbare Attribute: {attribute_liste}")
         return attribute_liste
-        
+
     except Exception as e:
         Logger.error(f"Fehler beim Abrufen der Attribute: {e}", exc_info=True)
         return [NO_ATTRIBUT_AVAILABLE_TEXT]
+
+
+def get_absenkbare_attribute(charakter):
+    """
+    Gibt eine Liste der Attribute zurück, die noch um einen Würfeltyp gesenkt
+    werden können (Wert >= 6 → W6, W8, W10, W12, ...).
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        list: Liste der absenkbaren Attribut-Namen
+    """
+    try:
+        if not hasattr(charakter, 'attribute') or not charakter.attribute:
+            return []
+        result = [name for name, attr in charakter.attribute.items()
+                  if hasattr(attr, 'wert') and attr.wert >= 6]
+        result.sort()
+        Logger.debug(f"Absenkbare Attribute: {result}")
+        return result
+    except Exception as e:
+        Logger.error(f"Fehler beim Abrufen der absenkbaren Attribute: {e}")
+        return []
+
+
+def get_staerkbare_attribute(charakter):
+    """
+    Gibt eine Liste der Attribute zurück, die als Attributsschwäche in Frage
+    kommen: base Würfel = W4 und noch kein malus-2 Modifier darauf.
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        list: Liste der für Attributsschwäche geeigneten Attribut-Namen
+    """
+    try:
+        if not hasattr(charakter, 'attribute') or not charakter.attribute:
+            return []
+        result = []
+        for name, attr in charakter.attribute.items():
+            if not hasattr(attr, 'wert') or attr.wert != 4:
+                continue
+            mod = getattr(attr, 'modifier', 0) if hasattr(attr, 'modifier') else 0
+            if mod >= 0:
+                result.append(name)
+        result.sort()
+        Logger.debug(f"Attributsschwäche-kompatible Attribute: {result}")
+        return result
+    except Exception as e:
+        Logger.error(f"Fehler bei Attributsschwäche-Kompatibilitätsprüfung: {e}")
+        return []
 
 
 def get_verfuegbare_fertigkeiten(charakter, nur_verstand=True):
@@ -728,12 +781,13 @@ def waehle_freies_attribut(charakter, volk_name, attribut_name):
 
 def waehle_freies_attribut_malus(charakter, volk_name, attribut_name):
     """
-    Wählt ein freies Attribut für ein Volk aus und senkt es (Malus).
+    Wählt ein freies Attribut für ein Volk aus und senkt es per Attributsschwäche.
+    Attributsschwäche: W4 bleibt W4, aber Modifier = -2.
 
     Args:
         charakter: Das Charakterobjekt
         volk_name: Name des Volks
-        attribut_name: Name des zu senkenden Attributs
+        attribut_name: Name des zu schwächenden Attributs
 
     Returns:
         bool: True bei Erfolg, False bei Fehler
@@ -751,18 +805,10 @@ def waehle_freies_attribut_malus(charakter, volk_name, attribut_name):
             return False
 
         attribut = charakter.attribute[attribut_name]
-        alter_wert = attribut.wert
 
-        # Attribut um einen Würfeltyp senken (W6 -> W4, etc.)
-        if alter_wert >= 10:
-            attribut.wert -= 2  # W12 -> W10
-        elif alter_wert >= 6:
-            attribut.wert -= 1  # W10 -> W8, W8 -> W6, W6 -> W4
-        else:
-            Logger.warning(f"Attribut '{attribut_name}' bereits auf W4 oder niedriger, kann nicht weiter gesenkt werden")
-            return False
-
-        Logger.info(f"Freies Attribut-Malus '{attribut_name}' für Volk '{volk_name}' von W{alter_wert} auf W{attribut.wert} gesenkt")
+        # Attributsschwäche: Würfelwert bleibt W4, Modifier wird -2
+        attribut.wuerfel.modifier = -2
+        Logger.info(f"Attributsschwäche '{attribut_name}' für Volk '{volk_name}': W4-2")
 
         # Abgeleitete Werte neu berechnen
         if hasattr(charakter, 'berechne_abgeleitete_werte'):
@@ -1254,13 +1300,15 @@ def get_volk_zusatzelemente(charakter, volk_name):
                 ]
 
         # Attribut-Malus-Optionen abrufen (separater Key)
+        # Attributsschwäche erlaubt nur W4-Attribute (Basis-Wert ohne Malus),
+        # die dann auf W4-2 gesenkt werden.
         if volk_name in charakter.voelker:
             volk = charakter.voelker[volk_name]
             if hasattr(volk, 'effects'):
                 wahlmoeglichkeiten = volk.effects.get('wahlmoeglichkeiten', {})
                 if wahlmoeglichkeiten.get('freies_attribut_malus', False):
-                    malus_optionen = get_volk_attribut_optionen(charakter, volk_name)
-                    if malus_optionen and malus_optionen != [NO_ATTRIBUT_AVAILABLE_TEXT]:
+                    malus_optionen = get_staerkbare_attribute(charakter)
+                    if malus_optionen:
                         zusatzelemente['freies_attribut_malus'] = malus_optionen[0] if malus_optionen else True
                         zusatzelemente['attribut_malus_optionen'] = malus_optionen
                         Logger.debug(f"Attribut-Malus-Optionen verfügbar für '{volk_name}': {malus_optionen}")

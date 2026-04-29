@@ -59,6 +59,8 @@ TEST_MODULE = [
     'test_lazy_screens',
     'test_lazy_services',
     'test_android_scoped_storage',
+    'test_volkseigenarten_schritt_2_rest',
+    'test_volkseigenarten_sonderfaelle',
 ]
 
 # Doppelte entfernen
