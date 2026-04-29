@@ -44,11 +44,10 @@ Cross-cutting Themen, die das Volk mit dem Talent- und Macht-System verzahnen. D
   - `get_magieaffin_optionen` liefert Tupel `(ah_talent_name, fertigkeit_name)` — Dialog zeigt z. B. „AH (Wunder) → Glaube" statt nur Fertigkeitsnamen.
   - `_on_edit_magieaffin` im Völker-Tab zum nachträglichen Wechseln des AH.
   - `_reset_magieaffin` mit Backwards-Compat für Legacy-Auswahlen ohne `ah_talent`-Eintrag.
-- [x] **PR #176** — Template-Wizard & Auto-Generator: Volks-Wahl, Aufstiege, Steigerungshistorie
+- [x] **PR #176** — Auto-Generator: race_choices + Steigerungshistorie
   - `auto_character_generator.py::_apply_race_choices` versteht `race_choices`-Dict mit `freies_talent`, `freies_attribut`, `freies_talent_oder_attribut` (Modus + Wert), `attribut_staerke_oder_konstitution`, `freie_verstandsfertigkeit` etc.
   - Unicode-normalisiertes Matching (`_resolve_key`) löst Umlaut-Probleme („Kämpfen" vs. „Kämpfer", Templates ohne Umlaute treffen die Umlaut-Variante).
   - `charakter.steigerungs_journal` protokolliert pro Würfelschritt mit `kosten_typ` (Attributspunkt / Fertigkeitspunkt / Handicap-Punkt / Aufstieg / Volk) und `phase` (generierung / aufstieg). „Auto-added points" sind jetzt transparente Aufstiege.
-  - `template_wizard.py` bekommt einen Schritt „Aufstiege" und nach Volkswahl ein separates Popup für Volks-Wahlmöglichkeiten (Android-Standard-Pattern aus `CLAUDE.md`).
 
 **Konsequenz für Schritt 3a (Macht 2+1)**: Die *AH-Aktivierungs-Logik* (Mächte + Auto-Effekte) ist über `talent_funktionen.talent_auswaehlen` bereits verfügbar — Schritt 3a muss nur noch eine eigene `volk_macht`-Eigenart anlegen, die Kosten-Formel `2 + 1·(N-1)` umsetzt und die erste Macht-Auswahl an dieselbe Aktivierung delegiert (statt das Rad neu zu erfinden).
 
@@ -386,7 +385,6 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 | `functions/charakter_speicher.py` | Multi-Slot | `voelker_auswahlen` Round-Trip + Skalar→Liste-Migration in `_finalize_character_loading` | ✅ |
 | `functions/auto_character_generator.py` | Multi-Slot, race_choices (PR #176) | Listen-Keys `freie_talente` / `freie_attribute` / `attribute_malus` plus Legacy-Skalare; `_apply_race_choices` mit `race_choices`-Dict; `_resolve_key` Unicode-normalisiertes Matching; `steigerungs_journal` mit `kosten_typ` + `phase` | ✅ |
 | `models/charakter_properties.py` | Multi-Slot | `voelker_auswahlen` als persistierte `DictProperty` | ✅ |
-| `views/template_wizard.py` | race_choices (PR #176) | Schritt „Aufstiege", separates Volks-Wahl-Popup, Vorschau-Step mit Parade/Robustheit/BW/Machtpunkten | ✅ |
 | `models/volk.py` | 2 | `effects['eigenarten']` ist bereits eine Liste | ✅ |
 | `test units/test_volkseigenarten_stufen.py` | 1 | 14 Tests | ✅ |
 | `test units/test_volkseigenarten_mehrfach.py` | 2 | 9 Tests | ✅ |
@@ -420,7 +418,7 @@ Eigenarten aus den Regeln, die heute komplett fehlen, in einem separaten Branch 
 3. **✅ PR 3 — Schritt 2 Mehrfach-UI.** Stepper-Buttons, validiere_volk_erstellung — **ERLEDIGT**
 4. **✅ PR 4 — Verzögerte Auswahl.** `auswahl_verzoegert` in Config, `_show_optionen_dialog`, `eigenart_zu_effekte` — **ERLEDIGT**
 5. **✅ PR #162 — Freies Volk-Talent ändern + AH-Aktivierung.** `talent_funktionen.talent_auswaehlen`-Delegation, Filter-Toggle, Voraussetzungs-Bestätigungsdialog, Edit-Modus für freies_talent — **ERLEDIGT**
-6. **✅ PR #176 — Template-Wizard & Auto-Generator: race_choices.** Volks-Wahlmöglichkeiten im Template-Wizard, Steigerungshistorie, Aufstiege-Schritt — **ERLEDIGT**
+6. **✅ PR #176 — Auto-Generator: race_choices + Steigerungshistorie.** `_apply_race_choices` mit Volks-Wahlmöglichkeiten-Dict, `_resolve_key` Unicode-Matching, `steigerungs_journal` mit `kosten_typ` + `phase` — **ERLEDIGT**
 7. **✅ PR #180 — Magieaffin → AH-Talent (freier Arkaner Hintergrund).** `extrahiere_arkane_fertigkeit_aus_ah`, `_ist_ah_talent`, AH-Talent-Auswahl im Setting statt fester Liste — **ERLEDIGT**
 8. **✅ PR 5 (#182) — Bugfix Attributs-Schwäche-Edit + Stepper-Counter.** — **ERLEDIGT**
 9. **✅ PR 6 (#196) — Multi-Slot im Völker-Tab.** `wahlmoeglichkeiten_counts`, `slots`-Dict, `voelker_auswahlen` als persistierte DictProperty, N Cards pro Slot — **ERLEDIGT**
