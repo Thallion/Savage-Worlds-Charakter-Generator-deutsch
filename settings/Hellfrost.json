@@ -14,7 +14,7 @@
             "besonderheiten": [
                 "Beherzt (Willenskraft W6 statt W4, Maximum W12+3)",
                 "Glück (Ein zusätzlicher Bennie pro Spielsitzung)",
-                "Heimlich (Heimlichkeit oder Schlösser knacken auf W6 - wählbar)",
+                "Heimlich (Heimlichkeit oder Diebeskunst auf W6 - wählbar)",
                 "Klein (90cm groß, Größe -1, Robustheit -1)"
             ],
             "sprachen": [
@@ -50,10 +50,10 @@
                         "typ": "fertigkeit_oder",
                         "optionen": [
                             "Heimlichkeit",
-                            "Schlösser knacken"
+                            "Diebeskunst"
                         ],
                         "bonus": 2,
-                        "beschreibung": "Beginne mit Heimlichkeit oder Schlösser knacken auf W6"
+                        "beschreibung": "Beginne mit Heimlichkeit oder Diebeskunst auf W6"
                     }
                 }
             }
@@ -82,7 +82,15 @@
                 "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
-                "auto_talente": [],
+                "auto_talente": [
+                    "AH (Hrimmagie)"
+                ],
+                "auto_mächte": [
+                    "Schutz vor Naturgewalten",
+                    "Trägheit/Beschleunigung",
+                    "Waffe verbessern",
+                    "Schutz"
+                ],
                 "auto_handicaps": [
                     "Außenseiter",
                     "Hitzelethargie"
@@ -1071,6 +1079,24 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Der Charakter passt nicht in die örtliche Umgebung und zieht –2 von Überredenproben ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Abgekapselt": {
+            "name": "Abgekapselt",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "-2 auf Überreden gegenüber anderen Rassen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Hitzelethargie": {
+            "name": "Hitzelethargie",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Bei Temperaturen über 12°C: -1 auf alle Eigenschaftswürfe.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
