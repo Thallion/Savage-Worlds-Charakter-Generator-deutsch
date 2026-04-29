@@ -1159,9 +1159,9 @@ class VoelkerWidget(MDBoxLayout):
 
         charakter = self.controller.charakter
 
-        # Verfügbare Malus-Attribut-Optionen abrufen (gleicher Pool wie Bonus)
-        from functions.volk_funktionen import get_volk_attribut_optionen, NO_ATTRIBUT_AVAILABLE_TEXT
-        attribut_optionen = get_volk_attribut_optionen(charakter, volk_name)
+        # Verfügbare Malus-Attribut-Optionen abrufen (nur W4-Basis-Attribute)
+        from functions.volk_funktionen import get_staerkbare_attribute, NO_ATTRIBUT_AVAILABLE_TEXT
+        attribut_optionen = get_staerkbare_attribute(charakter)
 
         if not attribut_optionen or attribut_optionen == [NO_ATTRIBUT_AVAILABLE_TEXT]:
             Logger.warning(f"Keine Attribut-Optionen für Schwäche verfügbar für Volk '{volk_name}'")
@@ -1284,11 +1284,7 @@ class VoelkerWidget(MDBoxLayout):
             try:
                 if hasattr(charakter, 'attribute') and alte_schwaeche in charakter.attribute:
                     altes_attribut = charakter.attribute[alte_schwaeche]
-                    alter_wert = altes_attribut.wert
-                    if alter_wert >= 10:
-                        altes_attribut.wert += 2
-                    else:
-                        altes_attribut.wert += 1
+                    altes_attribut.wuerfel.modifier = 0
                     if hasattr(charakter, 'berechne_abgeleitete_werte'):
                         charakter.berechne_abgeleitete_werte()
             except Exception as e:

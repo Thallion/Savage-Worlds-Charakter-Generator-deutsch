@@ -72,7 +72,7 @@ Adressiert die **Pro-Charakter-Auswahl** für Eigenarten mit `max_auswahl > 1` u
 
 #### Schritt 2 (Rest)
 - [x] Schritt 2a — Schema: `kosten_per_instanz`-Feld erkannt in `berechne_punktestand` (Default True; bei False zählt pro ID nur die erste Instanz, Vorbereitung für Sonderfälle wie Macht 2+1+1+…)
-- [ ] Schritt 2c — Anzeige Einzel-Instanzen mit ×-Entfernen-Button in der **Wizard**-Übersicht (erfordert Widgetisierung des Review-Steps; eigener Folge-PR — im Völker-Tab durch slot-spezifische Edit-Buttons bereits abgedeckt)
+- [x] Schritt 2c — Wizard-Schritt zeigt einzelne Eigenart-Zeilen mit ×-Button zum Entfernen ( `_build_wizard_eigenart_row`, `_on_wizard_remove_eigenart`) — **ERLEDIGT**
 - [x] Schritt 2e — `eigenart_zu_effekte` summiert numerische Effekte (`attribute_bonuses`, `fertigkeits_startboni`, alle additiven Felder im `spezieller_effekt`-Pfad) statt zu überschreiben; `lebenserwartung_mult` als Multiplikator multipliziert
 
 #### Schritt 3 — Sonderfälle

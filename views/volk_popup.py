@@ -321,7 +321,6 @@ class VolkGeneratorWizard:
         )
         layout.add_widget(label)
 
-        # Punktestand-Info
         punkte_status = berechne_punktestand(self.positive_eigenarten + self.negative_eigenarten)
         if eigenart_typ == 'positive':
             punkte_text = f"Punkte: {START_PUNKTE} Startpunkte verfügbar für positive Eigenarten"
@@ -340,25 +339,101 @@ class VolkGeneratorWizard:
         )
         layout.add_widget(punkte_label)
 
-        # Button zum Öffnen des Checkbox-Popups
         btn = MDButton(style="tonal", size_hint_y=None, height=dp(48))
         btn.add_widget(MDButtonText(text=f"{title} auswählen..."))
         btn.bind(on_release=lambda x: self._show_eigenarten_popup(eigenart_typ))
         layout.add_widget(btn)
 
-        # Aktuelle Auswahl anzeigen
         auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
         if auswahl:
-            auswahl_text = ", ".join([e.get('name', e.get('id', '')) for e in auswahl])
-            auswahl_label = MDLabel(
-                text=f"Ausgewählt: {auswahl_text}",
-                theme_text_color="Secondary",
+            items_label = MDLabel(
+                text=f"Ausgewählt ({len(auswahl)}):",
+                theme_text_color="Primary",
+                bold=True,
                 size_hint_y=None,
-                height=dp(48)
+                height=dp(24)
             )
-            layout.add_widget(auswahl_label)
+            layout.add_widget(items_label)
+
+            items_scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(4))
+            items_content = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(6),
+                size_hint_y=None,
+                height=dp(len(auswahl) * dp(42))
+            )
+            items_content.bind(minimum_height=items_content.setter('height'))
+
+            for eigenart in auswahl:
+                item_row = self._build_wizard_eigenart_row(eigenart, eigenart_typ)
+                items_content.add_widget(item_row)
+
+            items_scroll.add_widget(items_content)
+            layout.add_widget(items_scroll)
 
         return layout
+
+    def _build_wizard_eigenart_row(self, eigenart, eigenart_typ):
+        """Erstellt eine Einzelzeile für eine Eigenart im Wizard mit ×-Button."""
+        from kivymd.uix.button import MDIconButton
+
+        row = MDBoxLayout(
+            orientation="horizontal",
+            spacing=dp(8),
+            size_hint_y=None,
+            height=dp(36),
+            padding=(dp(4), 0, 0, 0)
+        )
+
+        eid = eigenart.get('id', '')
+        name = eigenart.get('name', eid)
+        kosten = eigenart.get('kosten', 0)
+
+        detail_parts = []
+        if eigenart.get('stufen'):
+            stufe = eigenart.get('ausgewaehlte_stufe', 0)
+            detail_parts.append(f"Stufe {stufe + 1}")
+        if eigenart.get('optionen', {}).get('ausgewaehlt'):
+            detail_parts.append(eigenart['optionen']['ausgewaehlt'])
+        if eigenart.get('optionen', {}).get('rang') is not None:
+            rang_names = ["Anfänger", "Erfahren", "Veteran", "Heroisch", "Held"]
+            detail_parts.append(f"Rang: {rang_names[eigenart['optionen']['rang']]}")
+
+        if detail_parts:
+            full_text = f"{name} [{kosten} EP] — {' / '.join(detail_parts)}"
+        else:
+            full_text = f"{name} [{kosten} EP]"
+
+        text_label = MDLabel(
+            text=full_text,
+            theme_text_color="Secondary",
+            size_hint_x=1,
+            valign="middle",
+            halign="left"
+        )
+        row.add_widget(text_label)
+
+        remove_btn = MDIconButton(
+            icon="close",
+            size_hint=(None, None),
+            size=(dp(32), dp(32)),
+            pos_hint={"center_y": 0.5}
+        )
+        e = eigenart
+        et = eigenart_typ
+        remove_btn.bind(
+            on_release=lambda x, eig=e, typ=et: self._on_wizard_remove_eigenart(eig, typ)
+        )
+        row.add_widget(remove_btn)
+
+        return row
+
+    def _on_wizard_remove_eigenart(self, eigenart, eigenart_typ):
+        """Entfernt eine einzelne Eigenart-Instanz aus dem Wizard."""
+        liste = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
+        if eigenart in liste:
+            liste.remove(eigenart)
+        self._show_current_step()
 
     def _show_eigenarten_popup(self, eigenart_typ):
         """Zeigt separates Popup für Eigenarten-Checkboxen (eigener ScrollView)"""
