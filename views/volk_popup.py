@@ -170,11 +170,13 @@ class VolkGeneratorWizard:
             return
 
         step = self.steps[self.current_step]
-        Logger.info(f"Zeige Wizard-Schritt {self.current_step + 1}: {step['Title']}")
-        
+        Logger.info(f"Zeige Wizard-Schritt {self.current_step + 1}: {step['title']}")
+
         if self.dialog:
-            self.dialog.dismiss()
-        
+            old_dialog = self.dialog
+            self.dialog = None
+            old_dialog.dismiss()
+
         content = step['handler']()
         
         nav_layout = MDBoxLayout(
@@ -2003,7 +2005,9 @@ class VolkGeneratorWizard:
                     Logger.warning(f"reconcile_volk_auswahlen fehlgeschlagen: {e}")
 
             if self.dialog:
-                self.dialog.dismiss()
+                old_dialog = self.dialog
+                self.dialog = None
+                old_dialog.dismiss()
 
             self._show_success(f"Volk '{volk_name}' wurde {'aktualisiert' if self.edit_volk else 'erstellt'}.")
 
