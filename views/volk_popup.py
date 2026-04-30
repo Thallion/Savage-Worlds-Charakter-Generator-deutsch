@@ -547,20 +547,23 @@ class VolkGeneratorWizard:
 
                 list_item.add_widget(checkbox)
             else:
-                from kivymd.uix.button import MDIconButton
+                from kivy.uix.button import Button
+                from kivy.graphics import Color
+                from kivy.core.text import Label as CoreLabel
 
-                minus_btn = MDIconButton(
-                    icon="minus",
-                    style="tonal",
+                minus_btn = Button(
+                    text="-",
+                    font_size="18sp",
                     size_hint=(None, None),
                     size=(dp(36), dp(36)),
-                    pos_hint={"center_y": 0.5}
+                    pos_hint={"center_y": 0.5},
+                    background_normal='',
+                    background_down='',
+                    background_color=(0.3, 0.3, 0.3, 1) if aktuelle_anzahl == 0 else (0.2, 0.5, 0.8, 1),
+                    disabled=aktuelle_anzahl == 0,
+                    disabled_color=(0.5, 0.5, 0.5, 1),
+                    on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_minus(eid, et)
                 )
-                minus_btn_disabled = aktuelle_anzahl == 0
-                minus_btn.disabled = minus_btn_disabled
-                e_id_dec = eigenart_id
-                e_typ_dec = eigenart_typ
-                minus_btn.bind(on_release=lambda x, eid=e_id_dec, et=e_typ_dec: self._on_stepper_minus(eid, et))
 
                 count_label = MDLabel(
                     text=str(aktuelle_anzahl),
@@ -570,18 +573,19 @@ class VolkGeneratorWizard:
                     halign="center"
                 )
 
-                plus_btn = MDIconButton(
-                    icon="plus",
-                    style="tonal",
+                plus_btn = Button(
+                    text="+",
+                    font_size="18sp",
                     size_hint=(None, None),
                     size=(dp(36), dp(36)),
-                    pos_hint={"center_y": 0.5}
+                    pos_hint={"center_y": 0.5},
+                    background_normal='',
+                    background_down='',
+                    background_color=(0.2, 0.7, 0.3, 1) if not (max_auswahl != 0 and aktuelle_anzahl >= max_auswahl) else (0.3, 0.3, 0.3, 1),
+                    disabled=max_auswahl != 0 and aktuelle_anzahl >= max_auswahl,
+                    disabled_color=(0.5, 0.5, 0.5, 1),
+                    on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_plus(eid, et)
                 )
-                plus_btn_disabled = max_auswahl != 0 and aktuelle_anzahl >= max_auswahl
-                plus_btn.disabled = plus_btn_disabled
-                e_id_inc = eigenart_id
-                e_typ_inc = eigenart_typ
-                plus_btn.bind(on_release=lambda x, eid=e_id_inc, et=e_typ_inc: self._on_stepper_plus(eid, et))
 
                 stepper_box = MDBoxLayout(
                     orientation="horizontal",
@@ -962,6 +966,11 @@ class VolkGeneratorWizard:
             return
         self._last_stepper_time = now
         self._increment_eigenart(eigenart_id, eigenart_typ)
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            popup = self._eigenarten_popup
+            self._eigenarten_popup = None
+            popup.dismiss()
+            Clock.schedule_once(lambda dt: self._show_eigenarten_popup(eigenart_typ), 0.1)
 
     def _on_stepper_minus(self, eigenart_id, eigenart_typ):
         """Handler für Stepper --Button mit Debounce."""
@@ -970,6 +979,11 @@ class VolkGeneratorWizard:
             return
         self._last_stepper_time = now
         self._decrement_eigenart(eigenart_id, eigenart_typ)
+        if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
+            popup = self._eigenarten_popup
+            self._eigenarten_popup = None
+            popup.dismiss()
+            Clock.schedule_once(lambda dt: self._show_eigenarten_popup(eigenart_typ), 0.1)
 
     def _show_optionen_dialog(self, eigenart, liste, checkbox=None):
         """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Stufen, Attribut-/Fertigkeits-Auswahl, Texteingabe).
