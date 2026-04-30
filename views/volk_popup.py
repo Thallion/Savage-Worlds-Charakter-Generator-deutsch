@@ -18,7 +18,7 @@ from utils.platform_utils import is_mobile_layout, landscape_height
 _mobile = is_mobile_layout()
 from kivymd.uix.card import MDCard
 from kivymd.uix.divider import MDDivider
-from kivymd.uix.selectioncontrol import MDCheckbox
+from kivy.uix.button import Button
 from kivymd.uix.list import MDListItemTrailingCheckbox
 
 from models.volk import Volk
@@ -442,7 +442,6 @@ class VolkGeneratorWizard:
 
         self._eigenarten_popup_typ = eigenart_typ
 
-        # Bestehendes Eigenarten-Popup schließen falls vorhanden
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
             self._eigenarten_popup.dismiss()
 
@@ -453,7 +452,6 @@ class VolkGeneratorWizard:
         aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
         title = "Positive Volkseigenarten" if eigenart_typ == 'positive' else "Negative Volkseigenarten"
 
-        # Hauptlayout mit fester Höhe
         popup_height = min(Window.height * 0.75, dp(420))
         content = MDBoxLayout(
             orientation="vertical",
@@ -462,25 +460,25 @@ class VolkGeneratorWizard:
             height=popup_height
         )
 
-        # "Neue Eigenart erstellen"-Button
         btn_text = "Neue Eigenart erstellen..."
         create_btn = MDButton(style="tonal", size_hint_y=None, height=dp(48))
         create_btn.add_widget(MDButtonText(text=btn_text))
         create_btn.bind(on_release=lambda x: self._show_create_eigenart_dialog(eigenart_typ))
         content.add_widget(create_btn)
 
-        # Liste für Checkboxen
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
         if _mobile:
             list_layout.padding = [0, 0, dp(32), 0]
+
+        # WIDGET-TRACKING: Stepper-Widgets für direkte Updates
+        self._stepper_widgets = {}
 
         for eigenart in eigenarten:
             eigenart_id = eigenart.get('id')
             aktuelle_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
             max_auswahl = eigenart.get('max_auswahl', 1)
 
-            # Voraussetzungsprüfung (z.B. volk_superkraft nur in Superkräfte-Settings)
             voraussetzung = eigenart.get('voraussetzung')
             if voraussetzung == 'setting_hat_superkraefte':
                 try:
@@ -494,7 +492,6 @@ class VolkGeneratorWizard:
                 except Exception:
                     pass
 
-            # Kosten-Text: bei Stufen-Eigenart wird ein Bereich angezeigt (z.B. "[2-6 EP]")
             stufen_bereich = stufen_kosten_bereich(eigenart)
             if stufen_bereich:
                 min_k, max_k = stufen_bereich
@@ -547,20 +544,19 @@ class VolkGeneratorWizard:
 
                 list_item.add_widget(checkbox)
             else:
-                from kivymd.uix.button import MDIconButton
-
-                minus_btn = MDIconButton(
-                    icon="minus",
-                    style="tonal",
+                minus_btn = Button(
+                    text="-",
+                    font_size="18sp",
                     size_hint=(None, None),
                     size=(dp(36), dp(36)),
-                    pos_hint={"center_y": 0.5}
+                    pos_hint={"center_y": 0.5},
+                    background_normal='',
+                    background_down='',
+                    background_color=(0.4, 0.4, 0.4, 1) if aktuelle_anzahl == 0 else (0.2, 0.5, 0.8, 1),
+                    disabled=aktuelle_anzahl == 0,
+                    disabled_color=(0.6, 0.6, 0.6, 1),
+                    on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_minus(eid, et)
                 )
-                minus_btn_disabled = aktuelle_anzahl == 0
-                minus_btn.disabled = minus_btn_disabled
-                e_id_dec = eigenart_id
-                e_typ_dec = eigenart_typ
-                minus_btn.bind(on_release=lambda x, eid=e_id_dec, et=e_typ_dec: self._on_stepper_minus(eid, et))
 
                 count_label = MDLabel(
                     text=str(aktuelle_anzahl),
@@ -570,18 +566,19 @@ class VolkGeneratorWizard:
                     halign="center"
                 )
 
-                plus_btn = MDIconButton(
-                    icon="plus",
-                    style="tonal",
+                plus_btn = Button(
+                    text="+",
+                    font_size="18sp",
                     size_hint=(None, None),
                     size=(dp(36), dp(36)),
-                    pos_hint={"center_y": 0.5}
+                    pos_hint={"center_y": 0.5},
+                    background_normal='',
+                    background_down='',
+                    background_color=(0.4, 0.4, 0.4, 1) if (max_auswahl != 0 and aktuelle_anzahl >= max_auswahl) else (0.2, 0.7, 0.3, 1),
+                    disabled=(max_auswahl != 0 and aktuelle_anzahl >= max_auswahl),
+                    disabled_color=(0.6, 0.6, 0.6, 1),
+                    on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_plus(eid, et)
                 )
-                plus_btn_disabled = max_auswahl != 0 and aktuelle_anzahl >= max_auswahl
-                plus_btn.disabled = plus_btn_disabled
-                e_id_inc = eigenart_id
-                e_typ_inc = eigenart_typ
-                plus_btn.bind(on_release=lambda x, eid=e_id_inc, et=e_typ_inc: self._on_stepper_plus(eid, et))
 
                 stepper_box = MDBoxLayout(
                     orientation="horizontal",
@@ -595,6 +592,17 @@ class VolkGeneratorWizard:
                 stepper_box.add_widget(plus_btn)
 
                 list_item.add_widget(stepper_box)
+
+                # TRACKING: Stepper-Widgets für späteres Update speichern
+                self._stepper_widgets[eigenart_id] = {
+                    'minus': minus_btn,
+                    'count': count_label,
+                    'plus': plus_btn,
+                    'box': stepper_box,
+                    'item': list_item,
+                    'max_auswahl': max_auswahl
+                }
+
             list_layout.add_widget(list_item)
 
         scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
@@ -962,6 +970,7 @@ class VolkGeneratorWizard:
             return
         self._last_stepper_time = now
         self._increment_eigenart(eigenart_id, eigenart_typ)
+        self._refresh_stepper_in_place(eigenart_id, eigenart_typ)
 
     def _on_stepper_minus(self, eigenart_id, eigenart_typ):
         """Handler für Stepper --Button mit Debounce."""
@@ -970,6 +979,58 @@ class VolkGeneratorWizard:
             return
         self._last_stepper_time = now
         self._decrement_eigenart(eigenart_id, eigenart_typ)
+        self._refresh_stepper_in_place(eigenart_id, eigenart_typ)
+
+    def _refresh_stepper_in_place(self, eigenart_id, eigenart_typ):
+        """Aktualisiert Stepper-Widgets direkt via Widget-Tracking."""
+        if not hasattr(self, '_stepper_widgets') or eigenart_id not in self._stepper_widgets:
+            return
+        aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
+        neue_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
+        widget_data = self._stepper_widgets[eigenart_id]
+        max_auswahl = widget_data['max_auswahl']
+        list_item = widget_data['item']
+        stepper_box = widget_data['box']
+        minus_btn = widget_data['minus']
+        count_lbl = widget_data['count']
+        plus_btn = widget_data['plus']
+
+        count_lbl.text = str(neue_anzahl)
+
+        is_zero = (neue_anzahl == 0)
+        minus_btn.disabled = is_zero
+        minus_btn.background_color = (0.4, 0.4, 0.4, 1) if is_zero else (0.2, 0.5, 0.8, 1)
+
+        is_maxed = (max_auswahl != 0 and neue_anzahl >= max_auswahl)
+        plus_btn.disabled = is_maxed
+        plus_btn.background_color = (0.4, 0.4, 0.4, 1) if is_maxed else (0.2, 0.7, 0.3, 1)
+
+        # Max-Text im Headline aktualisieren
+        headline = list_item.children[1] if len(list_item.children) > 1 else None
+        if isinstance(headline, MDListItemHeadlineText):
+            eigenart = get_eigenart_by_id(eigenart_id, eigenart_typ)
+            if eigenart:
+                stufen_bereich = stufen_kosten_bereich(eigenart)
+                if stufen_bereich:
+                    min_k, max_k = stufen_bereich
+                    kosten_text = f" [{min_k} EP]" if min_k == max_k else f" [{min_k}–{max_k} EP]"
+                else:
+                    k = eigenart.get('kosten', 2)
+                    kosten_text = f" [{k} EP]"
+                if max_auswahl > 1:
+                    max_text = f" ({neue_anzahl}/{max_auswahl})"
+                else:
+                    max_text = ""
+                if eigenart.get('custom'):
+                    max_text += " [Eigene]"
+                headline.text = f"{eigenart.get('name', eigenart_id)}{kosten_text}{max_text}"
+
+        list_layout = list_item.parent
+        if list_layout and hasattr(list_layout, 'reset_property'):
+            try:
+                list_layout.reset_property('height')
+            except Exception:
+                pass
 
     def _show_optionen_dialog(self, eigenart, liste, checkbox=None):
         """Zeigt einen Zwischen-Dialog fuer Eigenart-Optionen (Stufen, Attribut-/Fertigkeits-Auswahl, Texteingabe).
