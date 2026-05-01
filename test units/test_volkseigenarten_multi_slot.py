@@ -38,7 +38,7 @@ class TestEigenartZuEffekteCounts(unittest.TestCase):
 
     def test_attribut_bonus_und_malus_zaehlen_separat(self):
         bonus = get_eigenart_by_id('attributserhoehung', 'positive')
-        malus = get_eigenart_by_id('attributsschwäche', 'negative')
+        malus = get_eigenart_by_id('attributsabzug_1', 'negative')
         b1 = dict(bonus)
         b1['optionen'] = dict(b1.get('optionen', {}))
         b1['optionen']['auswahl_verzoegert'] = True

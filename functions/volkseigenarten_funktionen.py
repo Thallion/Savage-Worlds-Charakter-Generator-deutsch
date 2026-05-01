@@ -136,6 +136,7 @@ STUFEN_MIGRATIONS = {
     'fliegen_stufe1': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 6'},
     'fliegen_stufe2': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 12'},
     'fliegen_stufe3': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 24, Sprint 2W6'},
+    'attributsschwäche': {'neue_id': 'attributsabzug_2', 'stufe_label': '-2 Attribut'},
 }
 
 
@@ -510,13 +511,20 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                           'geringe_lebenserwartung', 'kann_nicht_ertrinken', 'atmet_nicht',
                           'immun_gifte_krankheiten', 'immun_angst', 'keine_natuerliche_heilung',
                           'horn_waffe', 'klauen', 'panzerbrechend', 'giftige_beruehrung',
-                          'regeneration']:
+                          'regeneration', 'biss', 'graben', 'wandkrabbler', 'zaeh',
+                          'keine_lebenswichtigen_organe', 'waermesicht', 'schlafbedarf',
+                          'doppelt_so_weit_springen', 'springer_schadensbonus',
+                          'widerstand_naturgewalten', 'anfaelligkeit_naturgewalten',
+                          'halbe_bewegungsweite_graben']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
                 elif key in ['bewegungsweite_bonus', 'robustheit_bonus', 'bewegungsweite_flug',
                              'sozialer_malus', 'athletik_malus', 'ueberreden_malus',
                              'koerpersprache_malus', 'verstand_malus', 'erholung_malus',
                              'treffer_bonus_gegner', 'bewegung_malus', 'sicht_malus',
-                             'erholungsbonus', 'erholungsbonus_angeschlagen', 'lebenserwartung_mult']:
+                             'erholungsbonus', 'erholungsbonus_angeschlagen', 'lebenserwartung_mult',
+                             'panzerung_bonus', 'parade_bonus', 'reichweite_bonus',
+                             'fertigkeits_bonus', 'eigenschaftswurf_malus',
+                             'ignoriert_mehrfachaktions_abzug', 'sprint_bonus']:
                     # Schritt 2e: Numerische Effekte summieren statt überschreiben.
                     # `lebenserwartung_mult` ist ein Multiplikator; wir multiplizieren
                     # statt zu summieren. Alle anderen Werte sind additiv.
@@ -529,7 +537,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
 
         elif effekt_typ == 'natuerliche_waffe':
             for key, value in effekt.items():
-                if key in ['horn_waffe', 'klauen', 'panzerbrechend']:
+                if key in ['horn_waffe', 'klauen', 'panzerbrechend', 'biss']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
 
         elif effekt_typ == 'macht_volk':

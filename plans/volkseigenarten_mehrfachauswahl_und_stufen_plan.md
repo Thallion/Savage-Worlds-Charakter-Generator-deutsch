@@ -462,3 +462,128 @@ Nach Schritt 2: Stepper-Buttons im Volk-Editor antippen, prüfen dass Touch-Boun
 ### Backward-Compat-Test
 
 Ein älteres Charakter-JSON mit `effects.eigenarten` der alten Form (`fliegen_stufe2`) laden. Erwartung: lädt fehlerfrei, Eigenart wird als „Fliegen — BW 12" angezeigt, Speichern schreibt das neue Schema zurück.
+
+---
+
+## Schritt 4 — Vollständigkeits-Lücken (Folge-Issue)
+
+### ✅ Korrekt implementiert (15)
+
+| Eigenart | EP | Stufen | max | Status |
+|----------|-----|--------|-----|--------|
+| Fliegen | 2/4/6 | 3 (BW 6/12/24) | 1 | ✅ |
+| Giftige Berührung | 1/3 | 2 (leicht/betäubend) | 1 | ✅ |
+| Hörner | 1/2 | 2 (W4/W6) | 1 | ✅ |
+| Klauen | 2/3/4 | 3 (W4/W6/W6+PB2) | 1 | ✅ |
+| Regeneration | 2/3 | 2 (täglich/permanent) | 1 | ✅ |
+| Volk_Macht (2+1 je weitere) | 2+X | - | U | ✅ |
+| Volk_Superkraft (2+X) | 2+X | - | 1 | ✅ |
+| Volk_Talent (2+Rang) | 2+Rang | - | U | ✅ |
+| Nachtsicht (Natürlich) | 1 | - | 1 | ✅ |
+| Verringerte Bewegungsweite | -1/-2 | 2 | 1 | ✅ |
+| Abhängigkeit | -2 | - | 1 | ✅ |
+| Wasserwesen | 1/2 | 2 | 1 | ✅ |
+| Freies Talent | 2 | - | 1 | ✅ |
+| Freie Grundfertigkeit | 1 | - | 1 | ✅ |
+| Naturtalente | 1 | - | 1 | ✅ |
+
+### ❌ Fehlende Eigenarten (18)
+
+**Positive:**
+- Biss (1 EP) — Stärke + W4 Schaden als natürliche Waffe
+- Geringeres Schlafbedürfnis (1 EP, 2×) — 1× halb so viel Schlaf, 2× nie
+- Graben (1 EP) — halbe BW, kein Sprint, Überraschungsangriff +2/+4 Schaden
+- Fertigkeitsbonus (+1/+2 auf bestimmte Fertigkeit, 1/Fert, 1/2 EP)
+- Panzerung (1 EP, 3×) — +2 Panzerung pro Auswahl
+- Parade (1 EP, 3×) — +1 Parade
+- Reichweite (1 EP, 3×) — +1 Reichweite
+- Robustheit (1 EP, 3×) — +1 Robustheit (kosten falsch: 2 statt 1)
+- Springer (2 EP) — doppelt so weit springen, +4 Schaden bei Rücksichtsvollem Angriff
+- Wandkrabbler (1 EP) — vertikale Oberflächen, kopfüber mit halber BW
+- Wärmesicht (1 EP) — sieht Hitze, halbiert Beleuchtungsabzüge
+- Widerstand gegen Naturgewalten (1 EP, U) — +4 Widerstand, -4 Schaden
+- Zäh (2 EP) — 2. Angeschlagen verursacht keine Wunde
+- Zusätzliche Aktion (3 EP) — ignoriert 2 Punkte Abzüge für Mehrfachaktionen
+- Keine lebenswichtigen Organe (1 EP) — Angriffe auf Angesagte verursachen keinen Bonus-Schaden
+
+**Negative:**
+- Anfälligkeit für Naturgewalten (-1 EP, U) — -4 gegen Umgebungseffekt, als Schadensbonus
+- Fertigkeitsabzug (-1/-2 EP) — -1 auf häufige / -2 auf seltene Fertigkeit
+- Handicap (-1/-2 EP, U) — angeborenes leichtes/schweres Handicap
+- Schlechte Parade (-1 EP, 3×) — -1 Parade
+- Volksfeind (-1 EP, U) — -2 auf Überreden mit rivalisierendem Volk
+- Weniger Grundfertigkeiten (-1 EP, 5×) — eine Grundfertigkeit weniger, nicht mit W4 startend
+- Wuchtig (-2 EP) — -2 Eigenschaftswürfe mit nicht-passender Ausrüstung
+
+### ⚠️ Fehlerhafte Implementierungen (10)
+
+| Eigenart | Problem | Soll | Ist |
+|----------|---------|------|-----|
+| Attributserhöhung | max_auswahl | U (0) | 2 |
+| Bewegungsweite | Kosten/max | 2 EP, max=2 | 1 EP, max=1 |
+| Immunität | Kosten | 1 EP | 2 EP |
+| Konstrukt | Kosten | 2 EP | 3 EP |
+| Nachtsicht | Kosten | 1 EP | 2 EP |
+| Robustheit | Kosten | 1 EP | 2 EP |
+| Attributsschwäche | Stufen | -1/-2 Abzug | nur -2 Abzug |
+| Sprachbehindert | Kosten | -1 EP | -2 EP |
+| Volksfeind | Kosten | -1 EP | -2 EP |
+| Zerbrechlich | max | 2 | 1 |
+
+### Implementierungs-Reihenfolge (Teilschritte)
+
+#### Phase A: Fehler-Korrekturen (einfach, schnell, testbar)
+- [ ] A1: Attributserhöhung → max_auswahl: 0 (U)
+- [ ] A2: Bewegungsweite → kosten: 2, max_auswahl: 2
+- [ ] A3: Immunität → kosten: 1
+- [ ] A4: Konstrukt → kosten: 2
+- [ ] A5: Nachtsicht → kosten: 1
+- [ ] A6: Robustheit → kosten: 1
+- [ ] A7: Attributsschwäche → zweite Stufe (-2 Abzug) hinzufügen
+- [ ] A8: Sprachbehindert → kosten: -1
+- [ ] A9: Volksfeind → kosten: -1
+- [ ] A10: Zerbrechlich → max_auswahl: 2
+
+#### Phase B: Neue Eigenarten — Natürliche Waffen & Movement
+- [ ] B1: Biss (1 EP, max=1) — Stärke + W4
+- [ ] B2: Geringeres Schlafbedürfnis (1 EP, max=2, 2 Stufen) — halb/nie
+- [ ] B3: Graben (1 EP, max=1)
+- [ ] B4: Wandkrabbler (1 EP, max=1)
+- [ ] B5: Wasserwesen — zweite Stufe (2 EP, nicht ertrinken, volle BW)
+- [ ] B6: Springer (2 EP, max=1)
+
+#### Phase C: Neue Eigenarten — Defensive
+- [ ] C1: Panzerung (1 EP, max=3) — +2 Panzerung
+- [ ] C2: Parade (1 EP, max=3) — +1 Parade
+- [ ] C3: Reichweite (1 EP, max=3) — +1 Reichweite
+- [ ] C4: Zäh (2 EP, max=1) — 2. Angeschlagen = keine Wunde
+- [ ] C5: Zusätzliche Aktion (3 EP, max=1) — 2 Punkte Mehrfachaktions-Abzug ignorieren
+- [ ] C6: Keine lebenswichtigen Organe (1 EP, max=1)
+
+#### Phase D: Neue Eigenarten — Sensory & Environmental
+- [ ] D1: Wärmesicht (1 EP, max=1)
+- [ ] D2: Widerstand gegen Naturgewalten (1 EP, max=0/U)
+- [ ] D3: Anfälligkeit für Naturgewalten (-1 EP, max=0/U)
+
+#### Phase E: Neue Eigenarten — Fertigkeiten & Soziales
+- [ ] E1: Fertigkeitsbonus (1/2 EP, max=1, mit Optionen)
+- [ ] E2: Fertigkeitsabzug (-1/-2 EP, max=1)
+- [ ] E3: Handicap (-1/-2 EP, max=0/U, mit Optionen)
+- [ ] E4: Schlechte Parade (-1 EP, max=3)
+- [ ] E5: Volksfeind (-1 EP, max=0/U, mit Optionen)
+- [ ] E6: Weniger Grundfertigkeiten (-1 EP, max=5)
+- [ ] E7: Wuchtig (-2 EP, max=1)
+
+#### Phase F: Effekt-Verarbeitung prüfen
+Für jede neue Eigenart muss geprüft werden:
+- [ ] F1: Effekt-Typ in `volkseigenarten_funktionen.py` vorhanden oder neuer Typ nötig
+- [ ] F2: `eigenart_zu_effekte` verarbeitet den Effekt
+- [ ] F3: `eigenart_zu_besonderheiten` formatiert für Anzeige
+- [ ] F4: `volk.py` wendet Effekt auf Charakter an (via `apply_effects_to_charakter`)
+- [ ] F5: UI-Unterstützung (Popup, Wizard, Auswahl-Overlay)
+
+#### Phase G: Tests
+- [ ] G1: Unit-Tests für alle neuen Eigenarten in `test_volkseigenarten_stufen.py`
+- [ ] G2: Unit-Tests für Kosten-Berechnung und Effekt-Summierung
+- [ ] G3: Alle Tests erfolgreich: `python "test units/run_all_tests.py"`
+- [ ] G4: Manuelle Tests wie oben beschrieben

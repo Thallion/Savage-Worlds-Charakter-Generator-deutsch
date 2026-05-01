@@ -6,7 +6,7 @@
             "id": "attributserhoehung",
             "name": "Attributserhöhung",
             "kosten": 2,
-            "max_auswahl": 2,
+            "max_auswahl": 0,
             "beschreibung": "Erhöht ein Attribut um einen Würfeltyp (W4 → W6). Das Attribut wird nach der Volkauswahl gewählt.",
             "effekt_typ": "attribut_bonus",
             "effekt": {"attribut_bonus": 2},
@@ -84,7 +84,7 @@
         {
             "id": "nachtsicht",
             "name": "Nachtsicht",
-            "kosten": 2,
+            "kosten": 1,
             "max_auswahl": 1,
             "beschreibung": "Das Volk ignoriert Abzüge für Düstere und Dunkle Beleuchtung.",
             "effekt_typ": "spezieller_effekt",
@@ -101,22 +101,91 @@
             "effekt": {"nachtsicht_einfach": true}
         },
         {
-            "id": "robustheit_erhoeht",
-            "name": "Robustheit",
+            "id": "panzerung",
+            "name": "Panzerung",
+            "kosten": 1,
+            "max_auswahl": 3,
+            "beschreibung": "Die Spezies hat eine dicke Haut oder ist mit festem Material wie Schuppen oder Fels bedeckt. Dies gewährt für jedes Mal, welches du diese Eigenschaft auswählst, +2 Panzerung.",
+            "effekt_typ": "panzerung_bonus",
+            "effekt": {"panzerung_bonus": 2}
+        },
+        {
+            "id": "parade",
+            "name": "Parade",
+            "kosten": 1,
+            "max_auswahl": 3,
+            "beschreibung": "Die natürliche Parade des Ziels steigt um +1. Dies könnte von einem Schwanz, zusätzlichen Gliedmaßen oder gesteigerten Reflexen herrühren.",
+            "effekt_typ": "parade_bonus",
+            "effekt": {"parade_bonus": 1}
+        },
+        {
+            "id": "reichweite",
+            "name": "Reichweite",
+            "kosten": 1,
+            "max_auswahl": 3,
+            "beschreibung": "Lange Gliedmaßen, Tentakel oder ähnliches gewähren der Kreatur Reichweite +1.",
+            "effekt_typ": "reichweite_bonus",
+            "effekt": {"reichweite_bonus": 1}
+        },
+        {
+            "id": "zaeh",
+            "name": "Zäh",
             "kosten": 2,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk erhält +1 Robustheit.",
+            "beschreibung": "Ein zweites Angeschlagen-Ergebnis im Kampf verursacht keine Wunde.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"zaeh": true}
+        },
+        {
+            "id": "zusätzliche_aktion",
+            "name": "Zusätzliche Aktion",
+            "kosten": 3,
+            "max_auswahl": 1,
+            "beschreibung": "Das Wesen hat zusätzliche Gliedmaßen oder beschleunigte Reflexe. Es kann pro Zug 2 Punkte Abzüge für Mehrfachaktionen ignorieren.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"ignoriert_mehrfachaktions_abzug": 2}
+        },
+        {
+            "id": "keine_lebenswichtigen_organe",
+            "name": "Keine lebenswichtigen Organe",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Diese Spezies hat versteckte, extrem zähe oder redundante Organe. Angriffe auf Angesagte Ziele verursachen gegen sie keinen zusätzlichen Schaden.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"keine_lebenswichtigen_organe": true}
+        },
+        {
+            "id": "robustheit_erhoeht",
+            "name": "Robustheit",
+            "kosten": 1,
+            "max_auswahl": 3,
+            "beschreibung": "Das Volk erhält +1 Robustheit pro Auswahl.",
             "effekt_typ": "robustheit_bonus",
             "effekt": {"robustheit_bonus": 1}
         },
         {
-            "id": "beweglichkeit",
-            "name": "Beweglichkeit",
-            "kosten": 1,
+            "id": "fertigkeitsbonus",
+            "name": "Fertigkeitsbonus",
             "max_auswahl": 1,
-            "beschreibung": "Das Volk erhält +1 Bewegungsweite.",
+            "beschreibung": "Eine angeborene Eigenart dieses Volkes gewährt einen Bonus von +1 oder +2 beim Einsatz einer bestimmten Fertigkeit.",
+            "effekt_typ": "fertigkeits_bonus",
+            "stufen": [
+                {"label": "+1 Bonus", "kosten": 1, "effekt": {"fertigkeits_bonus": 1}},
+                {"label": "+2 Bonus", "kosten": 2, "effekt": {"fertigkeits_bonus": 2}}
+            ],
+            "optionen": {
+                "typ": "fertigkeit_auswahl",
+                "beschreibung": "Wähle die Fertigkeit für den Bonus"
+            }
+        },
+        {
+            "id": "beweglichkeit",
+            "name": "Bewegungsweite",
+            "kosten": 2,
+            "max_auswahl": 2,
+            "beschreibung": "Die Bewegungsweite des Charakters steigt um +2, und sein Sprintwürfel wird um einen Würfeltyp verbessert.",
             "effekt_typ": "bewegungsweite_bonus",
-            "effekt": {"bewegungsweite_bonus": 1}
+            "effekt": {"bewegungsweite_bonus": 2, "sprint_bonus": 1}
         },
         {
             "id": "scharfe_sinne",
@@ -127,6 +196,29 @@
             "effekt_typ": "spezieller_effekt",
             "effekt": {"wahrnehmung_w8": true},
             "auto_talente": ["Geschärfte Sinne"]
+        },
+        {
+            "id": "waermesicht",
+            "name": "Wärmesicht",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Die Kreatur sieht Hitze und halbiert Abzüge für Beleuchtung, wenn sie warme Ziele angreift (auch bei unsichtbaren Wesen).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"waermesicht": true}
+        },
+        {
+            "id": "widerstand_naturgewalten",
+            "name": "Widerstand gegen Naturgewalten",
+            "kosten": 1,
+            "max_auswahl": 0,
+            "beschreibung": "Diese Spezies erhält einen Bonus von +4 beim Widerstand gegen einen negativen Umgebungseffekt wie Hitze, Kälte, Luftmangel, Strahlung etc. Schaden aus entsprechenden Quellen wird ebenfalls um -4 verringert.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"widerstand_naturgewalten": 4},
+            "optionen": {
+                "typ": "text_eingabe",
+                "beschreibung": "Art der Naturgewalt",
+                "platzhalter": "z.B. Hitze, Kälte, Strahlung"
+            }
         },
         {
             "id": "naturtalente",
@@ -190,20 +282,31 @@
         {
             "id": "konstrukt",
             "name": "Konstrukt",
-            "kosten": 3,
+            "kosten": 8,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk ist ein Konstrukt. +2 auf Erholungsproben gegen Angeschlagen, atmet nicht, ignoriert Wundabzüge, immun gegen Gifte/Krankheiten.",
+            "beschreibung": "Konstrukte sind künstliche Wesen, die aus anorganischen Materialien bestehen. Sie addieren +2 auf Erholungsproben gegen Angeschlagen, ignorieren eine Stufe Wundabzüge, müssen nicht atmen und sind immun gegen Gifte und Krankheiten. Wunden müssen mit der Fertigkeit Reparieren geheilt werden.",
             "effekt_typ": "spezieller_effekt",
             "effekt": {"konstrukt": true, "erholungsbonus_angeschlagen": 2, "atmet_nicht": true, "immun_gifte_krankheiten": true}
         },
         {
+            "id": "muss_nicht_atmen",
+            "name": "Muss nicht atmen",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Die Spezies atmet nicht. Ihre Vertreter sind nicht von Atemgiften betroffen, können nicht ertrinken oder im Vakuum ersticken.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"atmet_nicht": true, "kann_nicht_ertrinken": true}
+        },
+        {
             "id": "wasserwesen",
             "name": "Wasserwesen",
-            "kosten": 1,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk kann nicht ertrinken und hat volle Bewegungsweite beim Schwimmen.",
+            "beschreibung": "Das Volk ist amphibisch oder im Wasser heimisch.",
             "effekt_typ": "spezieller_effekt",
-            "effekt": {"wasserwesen": true, "kann_nicht_ertrinken": true}
+            "stufen": [
+                {"label": "Amphibisch (15 min Atem)", "kosten": 1, "effekt": {"wasserwesen": true, "atmen_unter_wasser_minuten": 15}},
+                {"label": "Im Wasser heimisch", "kosten": 2, "effekt": {"wasserwesen": true, "kann_nicht_ertrinken": true, "volle_bewegungsweite_schwimmen": true}}
+            ]
         },
         {
             "id": "baumechanisch",
@@ -217,9 +320,9 @@
         {
             "id": "immunisierungen",
             "name": "Immunität",
-            "kosten": 2,
-            "max_auswahl": 3,
-            "beschreibung": "Das Volk ist immun gegen eine bestimmte Art von Effekten (Erdrückt, Erschöpfung durch Hitze/Kälte, Gift, etc.).",
+            "kosten": 1,
+            "max_auswahl": 2,
+            "beschreibung": "Das Volk ist immun gegen eine bestimmte Art von Effekten (Gift, Krankheit, Erstickung, etc.).",
             "effekt_typ": "spezieller_effekt",
             "effekt": {"immunisierung": true},
             "optionen": {
@@ -261,13 +364,13 @@
             "effekt": {"robustheit_bonus": 1, "bewegungsweite_bonus": -1}
         },
         {
-            "id": "gross_wuechsig",
-            "name": "Großwüchsig",
+            "id": "groesse_punkt_1",
+            "name": "Größe +1",
             "kosten": 1,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk ist größer als Menschen. +1 Bewegungsweite, -1 Robustheit (größeres Ziel).",
-            "effekt_typ": "kombinierter_effekt",
-            "effekt": {"bewegungsweite_bonus": 1, "robustheit_bonus": -1}
+            "max_auswahl": 3,
+            "beschreibung": "Die Kreatur ist größer als normal. Jeder Punkt Größe wird direkt auf die Robustheit angerechnet und erhöht die maximale Stärke um einen Schritt.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"groesse_punkt": 1, "robustheit_bonus": 1}
         },
         {
             "id": "hoerner",
@@ -315,6 +418,53 @@
             ]
         },
         {
+            "id": "biss",
+            "name": "Biss",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk hat Reißzähne, die Stärke + W4 Schaden verursachen.",
+            "effekt_typ": "natuerliche_waffe",
+            "effekt": {"biss": "W4"}
+        },
+        {
+            "id": "geringeres_schlafbeduerfnis",
+            "name": "Geringeres Schlafbedürfnis",
+            "max_auswahl": 2,
+            "beschreibung": "Das Wesen braucht nur halb so viel Schlaf wie ein Mensch. Wird diese Eigenschaft ein zweites Mal ausgewählt, schläft das Wesen nie.",
+            "effekt_typ": "spezieller_effekt",
+            "stufen": [
+                {"label": "Halb so viel Schlaf", "kosten": 1, "effekt": {"schlafbedarf": "halb"}},
+                {"label": "Nie", "kosten": 2, "effekt": {"schlafbedarf": "nie"}}
+            ]
+        },
+        {
+            "id": "graben",
+            "name": "Graben",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Ein Mitglied dieses Volkes kann sich in lose Erde graben und sich mit halber Bewegungsweite hindurchbewegen (aber nicht sprinten). Er kann nicht normal angegriffen werden, solange er gräbt.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"graben": true, "halbe_bewegungsweite_graben": true}
+        },
+        {
+            "id": "wandkrabbler",
+            "name": "Wandkrabbler",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Die Spezies kann sich normal auf vertikalen Oberflächen bewegen, oder kopfüber mit halber Bewegungsweite.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"wandkrabbler": true}
+        },
+        {
+            "id": "springer",
+            "name": "Springer",
+            "kosten": 2,
+            "max_auswahl": 1,
+            "beschreibung": "Der Charakter kann doppelt so weit springen wie normal. Außerdem addiert er +4 auf den Schaden, wenn er als Teil eines Rücksichtslosen Angriffs springt.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"springer": true, "doppelt_so_weit_springen": true, "springer_schadensbonus": 4}
+        },
+        {
             "id": "volk_macht",
             "name": "Macht",
             "kosten": 2,
@@ -357,11 +507,25 @@
     ],
     "negative": [
         {
-            "id": "attributsschwäche",
-            "name": "Attributsschwäche",
+            "id": "attributsabzug_1",
+            "name": "Attributsabzug -1",
             "kosten": -2,
-            "max_auswahl": 2,
-            "beschreibung": "Ein Attribut beginnt auf W4-2. Das Attribut wird nach der Volkauswahl gewählt.",
+            "max_auswahl": 5,
+            "beschreibung": "Ein Attribut (aber nicht die verknüpften Fertigkeiten) erleidet einen Abzug von -1.",
+            "effekt_typ": "attribut_malus",
+            "effekt": {"attribut_malus": 1},
+            "optionen": {
+                "typ": "attribut_auswahl",
+                "attribute": ["Stärke", "Geschicklichkeit", "Konstitution", "Verstand", "Willenskraft"],
+                "auswahl_verzoegert": true
+            }
+        },
+        {
+            "id": "attributsabzug_2",
+            "name": "Attributsabzug -2",
+            "kosten": -3,
+            "max_auswahl": 5,
+            "beschreibung": "Ein Attribut (aber nicht die verknüpften Fertigkeiten) erleidet einen Abzug von -2.",
             "effekt_typ": "attribut_malus",
             "effekt": {"attribut_malus": 2},
             "optionen": {
@@ -380,11 +544,25 @@
             "effekt": {"bewegungsweite_bonus": -1}
         },
         {
+            "id": "anfälligkeit_naturgewalten",
+            "name": "Anfälligkeit für Naturgewalten",
+            "kosten": -1,
+            "max_auswahl": 0,
+            "beschreibung": "Das Volk erleidet einen Abzug von -4, um einem bestimmten Umgebungseffekt zu widerstehen, wie zum Beispiel Hitze oder Kälte. Wenn das Wesen einen Angriff erleidet, der auf diesem Effekt basiert, wird der Abzug als Schadensbonus angerechnet.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"anfälligkeit_naturgewalten": -4},
+            "optionen": {
+                "typ": "text_eingabe",
+                "beschreibung": "Art der Naturgewalt",
+                "platzhalter": "z.B. Hitze, Kälte, Strahlung"
+            }
+        },
+        {
             "id": "zerbrechlich",
             "name": "Zerbrechlich",
             "kosten": -1,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk hat -1 Robustheit.",
+            "max_auswahl": 2,
+            "beschreibung": "Die Kreatur ist weniger widerstandsfähig. Verringere ihre Robustheit um -1.",
             "effekt_typ": "robustheit_malus",
             "effekt": {"robustheit_bonus": -1}
         },
@@ -401,12 +579,17 @@
         },
         {
             "id": "aussenseiter",
-            "name": "Außenseiter",
-            "kosten": -2,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk wird von anderen als Fremd/Außenseiter betrachtet. -2 auf soziale Proben mit Nicht-Volk.",
+            "name": "Volksfeind",
+            "kosten": -1,
+            "max_auswahl": 0,
+            "beschreibung": "Die Mitglieder dieses Volkes haben eine Abneigung gegen ein anderes Volk im Setting. Sie erleiden -2 auf Überredenproben, wenn sie mit ihren Rivalen sprechen müssen.",
             "effekt_typ": "spezieller_effekt",
-            "effekt": {"aussenseiter": true, "sozialer_malus": -2}
+            "effekt": {"aussenseiter": true, "sozialer_malus": -2},
+            "optionen": {
+                "typ": "text_eingabe",
+                "beschreibung": "Gegnerisches Volk",
+                "platzhalter": "z.B. Menschen, Orks"
+            }
         },
         {
             "id": "abhaengigkeit",
@@ -546,12 +729,73 @@
         },
         {
             "id": "sprachbehindert",
-            "name": "Sprachbehindert",
-            "kosten": -2,
+            "name": "Kann nicht sprechen",
+            "kosten": -1,
             "max_auswahl": 1,
-            "beschreibung": "Das Volk kann nicht normal sprechen. -2 auf Überreden, begrenzte Sprachen.",
+            "beschreibung": "Das Volk hat keine Stimmbänder oder kann nicht die Laute formen, zu denen die meisten anderen Völker fähig sind. Der Charakter kann auf natürliche Weise mit Mitgliedern seines eigenen Volkes kommunizieren.",
             "effekt_typ": "spezieller_effekt",
             "effekt": {"sprachbehindert": true, "sprache_eingeschraenkt": true}
+        },
+        {
+            "id": "schlechte_parade",
+            "name": "Schlechte Parade",
+            "kosten": -1,
+            "max_auswahl": 3,
+            "beschreibung": "Die Wesen sind nicht gut darin, sich im Nahkampf zu verteidigen, und erleiden -1 auf Parade.",
+            "effekt_typ": "parade_malus",
+            "effekt": {"parade_bonus": -1}
+        },
+        {
+            "id": "wuchtig",
+            "name": "Wuchtig",
+            "kosten": -2,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk ist besonders groß in einer Welt, in der es die meisten anderen nicht sind. Der Charakter zieht -2 von Eigenschaftswürfen ab, wenn er Ausrüstung verwendet, die nicht speziell für sein Volk ausgelegt ist. Rüstung oder Kleidung, die nicht für sein Volk ausgelegt ist, kann er gar nicht tragen.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"wuchtig": true, "eigenschaftswurf_malus": -2}
+        },
+        {
+            "id": "handicap",
+            "name": "Handicap",
+            "max_auswahl": 0,
+            "beschreibung": "Das Volk hat ein angeborenes Handicap.",
+            "effekt_typ": "handicap_volk",
+            "stufen": [
+                {"label": "Leicht", "kosten": -1, "effekt": {"handicap_schwere": "leicht"}},
+                {"label": "Schwer", "kosten": -2, "effekt": {"handicap_schwere": "schwer"}}
+            ],
+            "optionen": {
+                "typ": "handicap_auswahl",
+                "beschreibung": "Wähle ein Handicap"
+            }
+        },
+        {
+            "id": "fertigkeitsabzug",
+            "name": "Fertigkeitsabzug",
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk erleidet einen Abzug auf eine bestimmte Fertigkeit.",
+            "effekt_typ": "fertigkeits_malus",
+            "stufen": [
+                {"label": "Häufige Fertigkeit (-1)", "kosten": -1, "effekt": {"fertigkeits_malus": -1}},
+                {"label": "Seltene Fertigkeit (-2)", "kosten": -2, "effekt": {"fertigkeits_malus": -2}}
+            ],
+            "optionen": {
+                "typ": "grundfertigkeit_auswahl",
+                "beschreibung": "Wähle die betroffene Fertigkeit"
+            }
+        },
+        {
+            "id": "weniger_grundfertigkeiten",
+            "name": "Weniger Grundfertigkeiten",
+            "kosten": -1,
+            "max_auswahl": 5,
+            "beschreibung": "Das Volk beginnt mit einer Grundfertigkeit weniger. Die Fertigkeit kann normal erworben werden, startet aber nicht wie üblich mit einem W4.",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"grundfertigkeit_weniger": 1},
+            "optionen": {
+                "typ": "grundfertigkeit_auswahl",
+                "beschreibung": "Wähle die betroffene Grundfertigkeit"
+            }
         }
     ]
 }

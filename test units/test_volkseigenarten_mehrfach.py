@@ -28,35 +28,35 @@ class TestMehrfachAuswahlMaxAuswahl(unittest.TestCase):
         self.assertEqual(volle.get('max_auswahl'), 1)
 
     def test_max_auswahl_2_bei_attributserhoehung(self):
-        """Attributserhöhung hat max_auswahl=2."""
+        """Attributserhöhung hat max_auswahl=0 (unbegrenzt) per Regeln."""
         volle = get_eigenart_by_id('attributserhoehung', 'positive')
-        self.assertEqual(volle.get('max_auswahl'), 2)
+        self.assertEqual(volle.get('max_auswahl'), 0)
 
     def test_unbegrenzt_max_auswahl_0(self):
-        """max_auswahl=0 bedeutet unbegrenzt."""
+        """max_auswahl=0 bedeutet unbegrenzt. Immunität hat max_auswahl=2 per Regeln."""
         volle = get_eigenart_by_id('immunisierungen', 'positive')
-        self.assertEqual(volle.get('max_auswahl'), 3)
+        self.assertEqual(volle.get('max_auswahl'), 2)
 
 
 class TestMehrfachAuswahlPunktestand(unittest.TestCase):
     """Tests für Punktestand bei mehrfachen Instanzen."""
 
     def test_zwei_instanzen_kosten_doppelt(self):
-        """2x Nachtsicht (je 2 EP) = 4 EP."""
+        """2x Nachtsicht (je 1 EP) = 2 EP. (Kosten korrigiert: 1 EP statt 2 EP)"""
         nachtsicht = get_eigenart_by_id('nachtsicht', 'positive')
         instanz1 = dict(nachtsicht)
         instanz2 = dict(nachtsicht)
 
         ergebnis = berechne_punktestand([instanz1, instanz2])
-        self.assertEqual(ergebnis['positive_kosten'], 4)
+        self.assertEqual(ergebnis['positive_kosten'], 2)
 
     def test_drei_instanzen_robustheit(self):
-        """3x Robustheit (je 2 EP) = 6 EP. Derzeit max_auswahl=1 in Config."""
+        """3x Robustheit (je 1 EP) = 3 EP. (Kosten korrigiert: 1 EP statt 2 EP)"""
         robustheit = get_eigenart_by_id('robustheit_erhoeht', 'positive')
         instanzen = [dict(robustheit) for _ in range(3)]
 
         ergebnis = berechne_punktestand(instanzen)
-        self.assertEqual(ergebnis['positive_kosten'], 6)
+        self.assertEqual(ergebnis['positive_kosten'], 3)
 
 
 class TestMehrfachAuswahlValidierung(unittest.TestCase):
@@ -74,7 +74,7 @@ class TestMehrfachAuswahlValidierung(unittest.TestCase):
         self.assertTrue(result['ist_gueltig'])
 
     def test_drei_attributserhoehung_fehler(self):
-        """3x Attributserhöhung (max=2) sollte Fehler erzeugen."""
+        """3x Attributserhöhung (max=0 = unbegrenzt) sollte NICHT Fehler erzeugen."""
         attr = get_eigenart_by_id('attributserhoehung', 'positive')
         instanzen = []
         for i, attr_name in enumerate(['Stärke', 'Geschicklichkeit', 'Verstand']):
@@ -83,8 +83,7 @@ class TestMehrfachAuswahlValidierung(unittest.TestCase):
             instanzen.append(instanz)
 
         result = validiere_volk_erstellung('Testvolk', instanzen, [])
-        self.assertFalse(result['ist_gueltig'])
-        self.assertTrue(any('maximal 2x' in f for f in result['fehler']))
+        self.assertTrue(result['ist_gueltig'])
 
 
 class TestMehrfachAuswahlStufenInstanzen(unittest.TestCase):
