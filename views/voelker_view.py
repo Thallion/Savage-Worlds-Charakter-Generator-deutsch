@@ -130,6 +130,8 @@ class VoelkerWidget(MDBoxLayout):
         """Callback vom VoelkerAuswahlOverlay - Volk + Zusatzelemente gewählt"""
         try:
             Logger.info(f"[DEBUG] _on_overlay_volk_chosen aufgerufen: volk_name={volk_name}, zusatzelemente={zusatzelemente}")
+            app = App.get_running_app()
+            
             # Volk auswählen/abwählen
             self._select_volk_from_dropdown(volk_name)
 
@@ -240,6 +242,13 @@ class VoelkerWidget(MDBoxLayout):
                 # UI aktualisieren nach Zusatzelemente-Anwendung
                 Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
                 Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+                # Force refresh of Eigenschaften view after Zusatzelemente apply
+                # This ensures dice icons are properly updated when Volkseigenarten modify attributes
+                def force_eigenschaften_refresh(dt):
+                    if app and hasattr(app, 'controller') and app.controller:
+                        app.controller.dispatch('on_charakter_updated')
+                        Logger.debug("Eigenschaften-View Refresh nach Zusatzelemente erzwungen")
+                Clock.schedule_once(force_eigenschaften_refresh, 0.2)
 
         except Exception as e:
             Logger.error(f"Fehler bei Overlay-Volk-Auswahl: {e}", exc_info=True)

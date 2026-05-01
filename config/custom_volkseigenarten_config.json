@@ -1,15 +1,4 @@
 {
     "positive": [],
-    "negative": [
-        {
-            "id": "custom_negative_1777042956281",
-            "name": "zzzz",
-            "kosten": -3,
-            "max_auswahl": 1,
-            "beschreibung": "gjfdgjd",
-            "effekt_typ": "spezieller_effekt",
-            "effekt": {},
-            "custom": true
-        }
-    ]
+    "negative": []
 }

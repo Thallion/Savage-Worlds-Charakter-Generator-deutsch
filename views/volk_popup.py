@@ -170,7 +170,7 @@ class VolkGeneratorWizard:
             return
 
         step = self.steps[self.current_step]
-        Logger.info(f"Zeige Wizard-Schritt {self.current_step + 1}: {step['title']}")
+        Logger.info(f"Zeige Wizard-Schritt {self.current_step + 1}: {step['Title']}")
 
         if self.dialog:
             old_dialog = self.dialog
@@ -394,7 +394,10 @@ class VolkGeneratorWizard:
         detail_parts = []
         if eigenart.get('stufen'):
             stufe = eigenart.get('ausgewaehlte_stufe', 0)
-            detail_parts.append(f"Stufe {stufe + 1}")
+            if isinstance(stufe, int):
+                detail_parts.append(f"Stufe {stufe + 1}")
+            elif isinstance(stufe, dict) and 'label' in stufe:
+                detail_parts.append(f"Stufe: {stufe['label']}")
         if eigenart.get('optionen', {}).get('ausgewaehlt'):
             detail_parts.append(eigenart['optionen']['ausgewaehlt'])
         if eigenart.get('optionen', {}).get('rang') is not None:
@@ -2311,10 +2314,26 @@ class VolkDialogHandler:
                 if widget and hasattr(widget, 'open_volk_dropdown'):
                     widget.open_volk_dropdown()
                     Logger.info(f"Neues Volk '{volk_name}' erstellt — Overlay geöffnet")
+                    
+                    # Force refresh of Eigenschaften view after overlay animation completes
+                    # This ensures dice icons are properly updated when Volkseigenarten
+                    # modify attributes
+                    from kivy.clock import Clock
+                    Clock.schedule_once(self._force_eigenschaften_refresh, 0.5)
                     return
         except Exception as e:
             Logger.error(f"Fehler beim Öffnen des Overlays für neues Volk: {e}")
         self._refresh_volk_view()
+
+    def _force_eigenschaften_refresh(self, dt):
+        """Erzwingt ein UI-Refresh der Eigenschaften-View nach Volkseigenarten-Änderungen."""
+        try:
+            app = App.get_running_app()
+            if app and hasattr(app, 'controller') and app.controller:
+                app.controller.dispatch('on_charakter_updated')
+                Logger.debug("Eigenschaften-View Refresh nach Volkseigenarten erzwungen")
+        except Exception as e:
+            Logger.error(f"Fehler beim Erzwingen des Eigenschaften-Refresh: {e}")
 
     def show_delete_dialog(self):
         """Zeigt das Two-Phase Popup zum Löschen von Völkern."""
