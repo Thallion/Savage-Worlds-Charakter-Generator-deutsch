@@ -410,6 +410,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
         'wahlmoeglichkeiten_counts': {},
         'attribute_bonuses': {},
         'fertigkeits_startboni': {},
+        'fertigkeits_modifier_boni': {},
         'spezielle_effekte': [],
         'handicaps': [],
         'auto_talente': []
@@ -489,10 +490,51 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                     elif optionen.get('auswahl_verzoegert'):
                         effects['wahlmoeglichkeiten']['freie_nicht_grundfertigkeit'] = True
                         _bump_count('freie_nicht_grundfertigkeit')
+            elif effekt.get('fertigkeit_w4_bonus'):
+                # Eigenart "Fertigkeit (W4)": startet eine beliebige Nicht-Grundfertigkeit
+                # auf W4 statt W4-2. Wird wie nicht_grundfertigkeit_bonus behandelt.
+                if optionen and optionen.get('typ') in ('fertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl'):
+                    fertigkeit = optionen.get('ausgewaehlt')
+                    if fertigkeit:
+                        effects['fertigkeits_startboni'][fertigkeit] = (
+                            effects['fertigkeits_startboni'].get(fertigkeit, 0)
+                            + effekt.get('fertigkeit_w4_bonus', 2) * 2
+                        )
+                    elif optionen.get('auswahl_verzoegert'):
+                        effects['wahlmoeglichkeiten']['freie_fertigkeit_w4'] = True
+                        _bump_count('freie_fertigkeit_w4')
+            elif effekt.get('fertigkeits_bonus'):
+                # Eigenart "Fertigkeitsbonus" (+1/+2): flacher Modifier auf eine bestimmte
+                # Fertigkeit. Erhöht NICHT den Würfeltyp, sondern wird als +X/+Y auf alle
+                # Proben mit dieser Fertigkeit gerechnet.
+                if optionen and optionen.get('typ') == 'fertigkeit_auswahl':
+                    fertigkeit = optionen.get('ausgewaehlt')
+                    bonus = effekt.get('fertigkeits_bonus', 1)
+                    if fertigkeit:
+                        effects['fertigkeits_modifier_boni'][fertigkeit] = (
+                            effects['fertigkeits_modifier_boni'].get(fertigkeit, 0) + bonus
+                        )
+                    elif optionen.get('auswahl_verzoegert'):
+                        effects['wahlmoeglichkeiten']['freier_fertigkeitsbonus'] = bonus
+                        _bump_count('freier_fertigkeitsbonus')
             elif effekt.get('geschaeftssinn'):
-                effects['fertigkeits_startboni']['Überzeugen/Schätzen'] = (
-                    effects['fertigkeits_startboni'].get('Überzeugen/Schätzen', 0) + 2
+                effects['fertigkeits_startboni']['Überreden'] = (
+                    effects['fertigkeits_startboni'].get('Überreden', 0) + 2
                 )
+
+        elif effekt_typ == 'fertigkeits_malus':
+            # Eigenart "Fertigkeitsabzug" (-1/-2): flacher negativer Modifier auf eine
+            # bestimmte Fertigkeit (häufig oder selten verwendet).
+            malus = effekt.get('fertigkeits_malus', -1)
+            if optionen and optionen.get('typ') in ('grundfertigkeit_auswahl', 'fertigkeit_auswahl'):
+                fertigkeit = optionen.get('ausgewaehlt')
+                if fertigkeit:
+                    effects['fertigkeits_modifier_boni'][fertigkeit] = (
+                        effects['fertigkeits_modifier_boni'].get(fertigkeit, 0) + malus
+                    )
+                elif optionen.get('auswahl_verzoegert'):
+                    effects['wahlmoeglichkeiten']['freier_fertigkeitsmalus'] = malus
+                    _bump_count('freier_fertigkeitsmalus')
 
         elif effekt_typ == 'wahlmoeglichkeit':
             for key, value in effekt.items():
@@ -517,7 +559,12 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                           'keine_lebenswichtigen_organe', 'waermesicht', 'schlafbedarf',
                           'doppelt_so_weit_springen', 'springer_schadensbonus',
                           'widerstand_naturgewalten', 'anfaelligkeit_naturgewalten',
-                          'halbe_bewegungsweite_graben', 'groesse_punkt']:
+                          'halbe_bewegungsweite_graben', 'groesse_punkt',
+                          'wahrnehmung_w8', 'natuerlicher_kaempfer', 'eiserner_wille',
+                          'schnelle_heilung', 'grundfertigkeit_weniger', 'springer',
+                          'furcht', 'immunisierung', 'ruestung_anpassung',
+                          'sprache_eingeschraenkt', 'wuchtig', 'volle_bewegungsweite_schwimmen',
+                          'atmen_unter_wasser_minuten']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
                 elif key in ['bewegungsweite_bonus', 'robustheit_bonus', 'bewegungsweite_flug',
                              'sozialer_malus', 'athletik_malus', 'ueberreden_malus',
@@ -661,12 +708,22 @@ def eigenart_zu_besonderheiten(positive_eigenarten, negative_eigenarten):
 
         elif eigenart.get('effekt_typ') == 'fertigkeits_bonus':
             optionen = eigenart.get('optionen', {})
-            if optionen.get('typ') == 'grundfertigkeit_auswahl':
-                ausgewaehlt = optionen.get('ausgewaehlt', optionen.get('standard', 'einer Fertigkeit'))
+            effekt = eigenart.get('effekt', {})
+            ausgewaehlt = optionen.get('ausgewaehlt', optionen.get('standard', 'einer Fertigkeit'))
+            if effekt.get('fertigkeits_bonus'):
+                text_parts.append(f": +{effekt.get('fertigkeits_bonus')} auf {ausgewaehlt}")
+            elif effekt.get('fertigkeit_w4_bonus'):
+                text_parts.append(f": W4 in {ausgewaehlt}")
+            elif optionen.get('typ') == 'grundfertigkeit_auswahl':
                 text_parts.append(f": W6 in {ausgewaehlt}")
             elif optionen.get('typ') == 'nicht_grundfertigkeit_auswahl':
-                ausgewaehlt = optionen.get('ausgewaehlt', 'einer Fertigkeit')
                 text_parts.append(f": W6 in {ausgewaehlt}")
+        elif eigenart.get('effekt_typ') == 'fertigkeits_malus':
+            optionen = eigenart.get('optionen', {})
+            effekt = eigenart.get('effekt', {})
+            ausgewaehlt = optionen.get('ausgewaehlt', 'einer Fertigkeit')
+            malus = effekt.get('fertigkeits_malus', -1)
+            text_parts.append(f": {malus:+d} auf {ausgewaehlt}")
 
         elif eigenart.get('effekt', {}).get('fliegen'):
             bewegung = eigenart.get('effekt', {}).get('bewegungsweite_flug', 6)
@@ -697,13 +754,17 @@ def eigenart_zu_besonderheiten(positive_eigenarten, negative_eigenarten):
         optionen = eigenart.get('optionen', {})
         if optionen.get('typ') == 'text_eingabe' and optionen.get('ausgewaehlt'):
             text_parts.append(f": {optionen.get('ausgewaehlt')}")
+        elif optionen.get('typ') in ('grundfertigkeit_auswahl', 'fertigkeit_auswahl',
+                                     'nicht_grundfertigkeit_auswahl', 'attribut_auswahl') \
+                and optionen.get('ausgewaehlt'):
+            text_parts.append(f": {optionen.get('ausgewaehlt')}")
 
         beschreibung = eigenart.get('beschreibung', '')
         if beschreibung:
             text_parts.append(f" ({beschreibung})")
 
         besonderheiten.append(''.join(text_parts))
-    
+
     return besonderheiten
 
 
@@ -787,7 +848,7 @@ def validiere_volk_erstellung(volk_name, positive_eigenarten, negative_eigenarte
         if eigenart.get('optionen'):
             optionen = eigenart['optionen']
             if optionen.get('typ') in ['attribut_auswahl', 'grundfertigkeit_auswahl',
-                                       'nicht_grundfertigkeit_auswahl']:
+                                       'nicht_grundfertigkeit_auswahl', 'fertigkeit_auswahl']:
                 if not optionen.get('ausgewaehlt') and not optionen.get('auswahl_verzoegert'):
                     fehler.append(f"Eigenart '{eigenart.get('name')}' erfordert eine Auswahl")
             elif optionen.get('typ') == 'text_eingabe':
