@@ -1078,7 +1078,7 @@ class VolkGeneratorWizard:
         elif typ == 'superkraft_auswahl':
             self._show_superkraft_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
         elif typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl',
-                     'magieaffin_auswahl'):
+                     'fertigkeit_auswahl', 'magieaffin_auswahl'):
             self._show_liste_optionen_dialog(eigenart, liste, checkbox, optionen, typ, eigenart_name)
         else:
             # Unbekannter Typ - einfach hinzufuegen
@@ -1372,6 +1372,8 @@ class VolkGeneratorWizard:
             items = optionen.get('fertigkeiten', ['Athletik', 'Heimlichkeit', 'Überreden', 'Wahrnehmung', 'Allgemeinwissen'])
         elif typ == 'nicht_grundfertigkeit_auswahl':
             items = self._get_nicht_grundfertigkeiten()
+        elif typ == 'fertigkeit_auswahl':
+            items = self._get_alle_fertigkeiten()
         else:
             items = []
 
@@ -1522,7 +1524,8 @@ class VolkGeneratorWizard:
                 self._show_text_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
             elif opt_typ == 'talent_auswahl':
                 self._show_talent_optionen_dialog(eigenart, liste, checkbox, optionen, eigenart_name)
-            elif opt_typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl'):
+            elif opt_typ in ('attribut_auswahl', 'grundfertigkeit_auswahl', 'nicht_grundfertigkeit_auswahl',
+                             'fertigkeit_auswahl'):
                 self._show_liste_optionen_dialog(eigenart, liste, checkbox, optionen, opt_typ, eigenart_name)
             else:
                 liste.append(eigenart)
@@ -1560,6 +1563,26 @@ class VolkGeneratorWizard:
             return
         self._last_stufe_radio_time = now
         self._select_stufe(index, stufen, selected_index, radio_checkboxes)
+
+    def _get_alle_fertigkeiten(self):
+        """Lädt alle Fertigkeiten (Grund- und Nicht-Grundfertigkeiten) aus dem aktiven
+        Setting des Charakters. Wird für Eigenarten verwendet, bei denen jede beliebige
+        Fertigkeit gewählt werden darf (z.B. Fertigkeitsbonus +1/+2)."""
+        try:
+            from kivymd.app import MDApp
+            app = MDApp.get_running_app()
+            if app and hasattr(app, 'controller') and app.controller:
+                charakter = app.controller.charakter
+                if isinstance(charakter.fertigkeiten, dict):
+                    alle = sorted(charakter.fertigkeiten.keys())
+                    if alle:
+                        return alle
+        except Exception as e:
+            Logger.warning(f"volk_popup: Fehler beim Laden aller Fertigkeiten: {e}")
+        # Fallback: SWAE Standard-Fertigkeiten
+        return ['Allgemeinwissen', 'Athletik', 'Heimlichkeit', 'Heilung', 'Einschüchtern',
+                'Kämpfen', 'Provozieren', 'Recherche', 'Reiten', 'Reparieren', 'Schießen',
+                'Steuern', 'Überleben', 'Überreden', 'Wahrnehmung', 'Zaubern']
 
     def _get_nicht_grundfertigkeiten(self):
         """Lädt Nicht-Grundfertigkeiten aus dem aktiven Setting des Charakters."""

@@ -34,6 +34,7 @@ class Volk(EventDispatcher):
             'bewegungsweite_bonus': 0,    # +1 oder -1
             'fertigkeits_startboni': {},   # {'Wahrnehmung': 2} = W4-2 -> W4+0
             'fertigkeits_startmalus': {}, # {'Allgemeinwissen': -2} = W4 -> W4-2
+            'fertigkeits_modifier_boni': {}, # {'Heimlichkeit': 1} = +1 Modifier auf Proben
             'auto_talente': [],           # Automatisch erhaltene Talente
             'auto_handicaps': [],         # Automatisch erhaltene Handicaps
             'auto_mächte': [],            # Automatisch erhaltene Mächte
@@ -53,6 +54,7 @@ class Volk(EventDispatcher):
                 'bewegungsweite_bonus': 0,    # +1 oder -1
                 'fertigkeits_startboni': {},   # {'Wahrnehmung': 2} = W4-2 -> W4+0
                 'fertigkeits_startmalus': {},  # {'Allgemeinwissen': -2} = W4 -> W4-2
+                'fertigkeits_modifier_boni': {},  # {'Heimlichkeit': 1} = +1 Modifier
                 'auto_talente': [],           # Automatisch erhaltene Talente
                 'auto_handicaps': [],         # Automatisch erhaltene Handicaps
                 'auto_mächte': [],            # Automatisch erhaltene Mächte
@@ -236,6 +238,20 @@ class Volk(EventDispatcher):
                         fertigkeit.wuerfel.modifier = malus  # -2 → W4-2
                         Logger.info(f"Volk {self.name}: {fert_name} von W4 auf W4{malus:+d} reduziert")
 
+            # Flacher Fertigkeits-Modifier anwenden (Eigenart "Fertigkeitsbonus" +1/+2 oder
+            # "Fertigkeitsabzug" -1/-2). Erhöht/Senkt nur den Modifier, nicht den Würfeltyp.
+            for fert_name, mod_bonus in self.effects.get('fertigkeits_modifier_boni', {}).items():
+                if fert_name in charakter.fertigkeiten and mod_bonus != 0:
+                    fertigkeit = charakter.fertigkeiten[fert_name]
+                    fertigkeit.wuerfel.modifier += mod_bonus
+                    Logger.info(
+                        f"Volk {self.name}: {fert_name} Modifier um {mod_bonus:+d} angepasst "
+                        f"(jetzt W{fertigkeit.wert}{fertigkeit.modifier:+d})"
+                    )
+
+            # Spezialeffekte mit konkreter Stat-Änderung anwenden
+            self._apply_spezialeffekt_stat_changes(charakter, grundfertigkeiten)
+
             # Automatische Talente hinzufügen
             for talent_name in self.effects.get('auto_talente', []):
                 if talent_name in charakter.talente and not charakter.talente[talent_name].ausgewaehlt:
@@ -416,6 +432,19 @@ class Volk(EventDispatcher):
                         fertigkeit.wuerfel.modifier = 0
                         Logger.info(f"Volk {self.name}: {fert_name} von W4{malus:+d} auf W4 zurückgesetzt")
 
+            # Flacher Fertigkeits-Modifier rückgängig machen
+            for fert_name, mod_bonus in self.effects.get('fertigkeits_modifier_boni', {}).items():
+                if fert_name in charakter.fertigkeiten and mod_bonus != 0:
+                    fertigkeit = charakter.fertigkeiten[fert_name]
+                    fertigkeit.wuerfel.modifier -= mod_bonus
+                    Logger.info(
+                        f"Volk {self.name}: {fert_name} Modifier um {-mod_bonus:+d} zurückgesetzt "
+                        f"(jetzt W{fertigkeit.wert}{fertigkeit.modifier:+d})"
+                    )
+
+            # Spezialeffekt-Stat-Änderungen rückgängig machen
+            self._remove_spezialeffekt_stat_changes(charakter, grundfertigkeiten)
+
             # Automatische Talente entfernen (nur die von diesem Volk hinzugefügten)
             for talent_name in self.effects.get('auto_talente', []):
                 if talent_name in charakter.selected_talente:
@@ -493,6 +522,73 @@ class Volk(EventDispatcher):
         except Exception as e:
             Logger.error(f"Fehler beim Entfernen der Völker-Effekte für {self.name}: {e}")
             return False
+
+    def _iter_spezielle_effekte(self):
+        """Liefert die spezielle_effekte als Liste von (typ, wert)-Tupeln.
+        Unterstützt sowohl das Listen-Format aus dem Volksgenerator als auch
+        das alte Dict-Format aus _parse_effects_from_text.
+        """
+        spezielle = self.effects.get('spezielle_effekte', [])
+        if isinstance(spezielle, list):
+            for eintrag in spezielle:
+                if isinstance(eintrag, dict):
+                    yield eintrag.get('typ'), eintrag.get('wert')
+        elif isinstance(spezielle, dict):
+            for typ, wert in spezielle.items():
+                yield typ, wert
+
+    def _hat_spezialeffekt_typ(self, typ):
+        """True wenn ein Spezialeffekt mit diesem Typ existiert (und einen Wahrwert hat)."""
+        for t, w in self._iter_spezielle_effekte():
+            if t == typ and w:
+                return True
+        return False
+
+    def _apply_spezialeffekt_stat_changes(self, charakter, grundfertigkeiten):
+        """Wendet Spezialeffekte an, die konkrete Würfel-/Wert-Änderungen am Charakter
+        auslösen (z.B. Scharfe Sinne → Wahrnehmung W8, Natürlicher Kämpfer → Kämpfen W6).
+
+        Die reine Beschreibung-Effekte (z.B. Eiserner Wille als +2 vs Einschüchtern)
+        bleiben in spezielle_effekte hinterlegt; sie werden vom Charakterbogen/SL
+        kontextuell ausgewertet, nicht als Stat-Bonus eingerechnet.
+        """
+        try:
+            # Scharfe Sinne: Wahrnehmung W4+0 → W8+0
+            if self._hat_spezialeffekt_typ('wahrnehmung_w8'):
+                fertigkeit = charakter.fertigkeiten.get('Wahrnehmung')
+                if fertigkeit and fertigkeit.wert == 4 and fertigkeit.modifier == 0:
+                    fertigkeit.wuerfel.value = 8
+                    Logger.info(f"Volk {self.name}: Wahrnehmung von W4 auf W8 erhöht (Scharfe Sinne)")
+
+            # Natürlicher Kämpfer: Kämpfen W4-2 → W6+0
+            if self._hat_spezialeffekt_typ('natuerlicher_kaempfer'):
+                fertigkeit = charakter.fertigkeiten.get('Kämpfen')
+                if fertigkeit and fertigkeit.wert == 4 and fertigkeit.modifier == -2:
+                    fertigkeit.wuerfel.value = 6
+                    fertigkeit.wuerfel.modifier = 0
+                    Logger.info(f"Volk {self.name}: Kämpfen von W4-2 auf W6 erhöht (Natürlicher Kämpfer)")
+        except Exception as e:
+            Logger.error(f"Fehler beim Anwenden von Spezialeffekt-Stat-Änderungen für {self.name}: {e}")
+
+    def _remove_spezialeffekt_stat_changes(self, charakter, grundfertigkeiten):
+        """Macht die Stat-Änderungen aus _apply_spezialeffekt_stat_changes rückgängig."""
+        try:
+            # Scharfe Sinne rückgängig: Wahrnehmung W8+0 → W4+0
+            if self._hat_spezialeffekt_typ('wahrnehmung_w8'):
+                fertigkeit = charakter.fertigkeiten.get('Wahrnehmung')
+                if fertigkeit and fertigkeit.wert == 8 and fertigkeit.modifier == 0:
+                    fertigkeit.wuerfel.value = 4
+                    Logger.info(f"Volk {self.name}: Wahrnehmung von W8 auf W4 zurückgesetzt")
+
+            # Natürlicher Kämpfer rückgängig: Kämpfen W6+0 → W4-2
+            if self._hat_spezialeffekt_typ('natuerlicher_kaempfer'):
+                fertigkeit = charakter.fertigkeiten.get('Kämpfen')
+                if fertigkeit and fertigkeit.wert == 6 and fertigkeit.modifier == 0:
+                    fertigkeit.wuerfel.value = 4
+                    fertigkeit.wuerfel.modifier = -2
+                    Logger.info(f"Volk {self.name}: Kämpfen von W6 auf W4-2 zurückgesetzt")
+        except Exception as e:
+            Logger.error(f"Fehler beim Entfernen von Spezialeffekt-Stat-Änderungen für {self.name}: {e}")
 
     def __str__(self):
         return f"{self.name} (Handicaps: {', '.join(self.handicaps)}, Talente: {', '.join(self.talente)}, Besonderheiten: {', '.join(self.besonderheiten)})"
