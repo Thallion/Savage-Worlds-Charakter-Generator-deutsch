@@ -806,9 +806,14 @@ def waehle_freies_attribut_malus(charakter, volk_name, attribut_name):
 
         attribut = charakter.attribute[attribut_name]
 
-        # Attributsschwäche: Würfelwert bleibt W4, Modifier wird -2
-        attribut.wuerfel.modifier = -2
-        Logger.info(f"Attributsschwäche '{attribut_name}' für Volk '{volk_name}': W4-2")
+        # Attributsabzug: Würfelwert bleibt W4, Modifier wird auf den gewählten Wert gesetzt
+        malus_wert = -2  # Standardwert
+        if volk_name in charakter.voelker:
+            volk = charakter.voelker[volk_name]
+            if hasattr(volk, 'effects'):
+                malus_wert = volk.effects.get('attribut_malus_wert', -2)
+        attribut.wuerfel.modifier = malus_wert
+        Logger.info(f"Attributsabzug '{attribut_name}' für Volk '{volk_name}': W4{malus_wert:+d}")
 
         # Abgeleitete Werte neu berechnen
         if hasattr(charakter, 'berechne_abgeleitete_werte'):

@@ -570,14 +570,16 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
             attribut = None
             if optionen and optionen.get('typ') == 'attribut_auswahl':
                 attribut = optionen.get('ausgewaehlt')
+            malus = effekt.get('attribut_malus', 2)
             if optionen and optionen.get('auswahl_verzoegert'):
                 if attribut:
                     effects['wahlmoeglichkeiten']['freies_attribut_malus'] = attribut
+                    effects['attribut_malus_wert'] = malus
                 else:
                     effects['wahlmoeglichkeiten']['freies_attribut_malus'] = True
+                    effects['attribut_malus_wert'] = malus
                 _bump_count('freies_attribut_malus')
             if attribut:
-                malus = effekt.get('attribut_malus', 2)
                 effects['attribute_bonuses'][attribut] = effects['attribute_bonuses'].get(attribut, 0) - malus
 
         elif effekt_typ == 'robustheit_bonus':
