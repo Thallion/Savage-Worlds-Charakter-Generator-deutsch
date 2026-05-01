@@ -270,6 +270,33 @@ class Volk(EventDispatcher):
                         charakter.selected_maechte.append(macht_name)
                     Logger.info(f"Volk {self.name}: Automatische Macht '{macht_name}' erhalten")
 
+            # Macht-Volk-Effekte (macht_volk): AH (Begabt) aktivieren + Mächte hinzufügen
+            spezielle_effekte = self.effects.get('spezielle_effekte', [])
+            if isinstance(spezielle_effekte, list):
+                macht_volk_effekte = [e for e in spezielle_effekte if e.get('typ') == 'macht_volk']
+                if macht_volk_effekte:
+                    ah_name = 'AH (Begabt)'
+                    if ah_name in charakter.talente and not charakter.talente[ah_name].ausgewaehlt:
+                        charakter.talente[ah_name].ausgewaehlt = True
+                        if ah_name not in charakter.selected_talente:
+                            charakter.selected_talente.append(ah_name)
+                        talent = charakter.talente[ah_name]
+                        if hasattr(talent, 'machtpunkte') and talent.machtpunkte > 0:
+                            charakter.erhoehe_machtpunkte(talent.machtpunkte)
+                            Logger.info(f"Volk {self.name}: +{talent.machtpunkte} Machtpunkte durch '{ah_name}'")
+                        if hasattr(talent, 'neue_maechte') and talent.neue_maechte > 0:
+                            charakter.verfuegbare_maechte += talent.neue_maechte
+                            charakter.anzahl_maechte += talent.neue_maechte
+                            Logger.info(f"Volk {self.name}: +{talent.neue_maechte} verfügbare Mächte durch '{ah_name}'")
+                        Logger.info(f"Volk {self.name}: AH (Begabt) automatisch aktiviert (Macht-Volk)")
+                    for mve in macht_volk_effekte:
+                        macht_name = mve.get('wert')
+                        if macht_name and macht_name in charakter.maechte and not charakter.maechte[macht_name].ausgewaehlt:
+                            charakter.maechte[macht_name].ausgewaehlt = True
+                            if macht_name not in charakter.selected_maechte:
+                                charakter.selected_maechte.append(macht_name)
+                            Logger.info(f"Volk {self.name}: Macht '{macht_name}' erhalten (Macht-Volk)")
+
             # Robustheit und Bewegungsweite werden in abgeleitete_werte.py berechnet
             robustheit_bonus = self.effects.get('robustheit_bonus', 0)
             bewegungsweite_bonus = self.effects.get('bewegungsweite_bonus', 0)
@@ -429,6 +456,36 @@ class Volk(EventDispatcher):
                 if macht_name in charakter.maechte and charakter.maechte[macht_name].ausgewaehlt:
                     charakter.maechte[macht_name].ausgewaehlt = False
                     Logger.info(f"Volk {self.name}: Automatische Macht '{macht_name}' deaktiviert")
+
+            # Macht-Volk-Effekte entfernen: Mächte abwählen + AH (Begabt) deaktivieren
+            spezielle_effekte = self.effects.get('spezielle_effekte', [])
+            if isinstance(spezielle_effekte, list):
+                macht_volk_effekte = [e for e in spezielle_effekte if e.get('typ') == 'macht_volk']
+                if macht_volk_effekte:
+                    for mve in macht_volk_effekte:
+                        macht_name = mve.get('wert')
+                        if macht_name:
+                            if macht_name in charakter.selected_maechte:
+                                charakter.selected_maechte.remove(macht_name)
+                                Logger.info(f"Volk {self.name}: '{macht_name}' aus selected_maechte entfernt")
+                            if macht_name in charakter.maechte and charakter.maechte[macht_name].ausgewaehlt:
+                                charakter.maechte[macht_name].ausgewaehlt = False
+                                Logger.info(f"Volk {self.name}: Macht '{macht_name}' deaktiviert")
+                    ah_name = 'AH (Begabt)'
+                    if ah_name in charakter.talente and charakter.talente[ah_name].ausgewaehlt:
+                        talent = charakter.talente[ah_name]
+                        if hasattr(talent, 'machtpunkte') and talent.machtpunkte > 0:
+                            charakter.senke_machtpunkte(talent.machtpunkte)
+                            Logger.info(f"Volk {self.name}: -{talent.machtpunkte} Machtpunkte durch '{ah_name}'")
+                        if hasattr(talent, 'neue_maechte') and talent.neue_maechte > 0:
+                            charakter.verfuegbare_maechte -= talent.neue_maechte
+                            charakter.anzahl_maechte -= talent.neue_maechte
+                            charakter.verfuegbare_maechte = max(charakter.verfuegbare_maechte, 0)
+                            Logger.info(f"Volk {self.name}: -{talent.neue_maechte} verfügbare Mächte durch '{ah_name}'")
+                        charakter.talente[ah_name].ausgewaehlt = False
+                        if ah_name in charakter.selected_talente:
+                            charakter.selected_talente.remove(ah_name)
+                        Logger.info(f"Volk {self.name}: AH (Begabt) deaktiviert (Macht-Volk)")
 
             Logger.info(f"=== Völker-Effekte für {self.name} erfolgreich entfernt ===")
             return True

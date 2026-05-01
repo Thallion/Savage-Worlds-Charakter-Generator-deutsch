@@ -1921,8 +1921,10 @@ class VolkGeneratorWizard:
         self._show_current_step()
 
     def _cancel_wizard(self, *args):
-        if not self._nav_debounce_check():
+        now = time.monotonic()
+        if hasattr(self, '_last_cancel_time') and (now - self._last_cancel_time) < 0.5:
             return
+        self._last_cancel_time = now
         self._wizard_finished = True
         # Offenes Eigenarten-Popup schließen, falls noch vorhanden
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
@@ -1935,7 +1937,6 @@ class VolkGeneratorWizard:
     def _finish_wizard(self, *args):
         if not self._nav_debounce_check():
             return
-        self._wizard_finished = True
         # Offenes Eigenarten-Popup schließen, falls noch vorhanden
         if hasattr(self, '_eigenarten_popup') and self._eigenarten_popup:
             self._eigenarten_popup.dismiss()
@@ -1949,6 +1950,8 @@ class VolkGeneratorWizard:
         if not validation['ist_gueltig']:
             self._show_error("\n".join(validation['fehler']))
             return
+        
+        self._wizard_finished = True
         
         try:
             effects = eigenart_zu_effekte(self.positive_eigenarten, self.negative_eigenarten)
@@ -2007,18 +2010,25 @@ class VolkGeneratorWizard:
                 except Exception as e:
                     Logger.warning(f"reconcile_volk_auswahlen fehlgeschlagen: {e}")
 
-            if self.dialog:
-                old_dialog = self.dialog
-                self.dialog = None
-                old_dialog.dismiss()
-
             self._show_success(f"Abstammung '{volk_name}' wurde {'aktualisiert' if self.edit_volk else 'erstellt'}.")
 
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
 
-            if self.callback:
-                self.callback(volk_name, new_volk)
+            volk_name_captured = volk_name
+            new_volk_captured = new_volk
+            callback_captured = self.callback
+
+            if self.dialog:
+                old_dialog = self.dialog
+                self.dialog = None
+                old_dialog.dismiss()
+
+            Clock.schedule_once(
+                lambda dt, vn=volk_name_captured, nv=new_volk_captured, cb=callback_captured: (
+                    cb(vn, nv) if cb else None
+                ), 0.35
+            )
 
             Logger.info(f"Volk '{volk_name}' erfolgreich {'aktualisiert' if self.edit_volk else 'erstellt'}.")
 
