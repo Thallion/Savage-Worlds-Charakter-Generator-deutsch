@@ -1325,10 +1325,185 @@ class VoelkerWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Ändern der Attributs-Schwäche für '{volk_name}'")
 
     def _on_edit_fertigkeit(self, fertigkeit_name, slot_index=None):
-        """Platzhalter für Fertigkeits-Bearbeitung (noch nicht implementiert)."""
+        """Öffnet einen Dialog zum Bearbeiten der ausgewählten freien Fertigkeit.
+        slot_index gibt bei Multi-Slot-Fertigkeiten an, welcher Slot bearbeitet wird."""
         self._current_edit_slot_index = slot_index
-        Logger.warning("Bearbeiten von freien Fertigkeiten ist noch nicht implementiert")
-        # TODO: Implementieren ähnlich wie _on_edit_attribut
+        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
+        from kivymd.uix.boxlayout import MDBoxLayout
+        from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.scrollview import MDScrollView
+        from kivy.metrics import dp
+
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            Logger.warning("Kein Volk ausgewählt")
+            return
+
+        charakter = self.controller.charakter
+
+        # Verfügbare Fertigkeiten holen — gleiche Quelle wie das Volker-Overlay
+        # bei der initialen Auswahl, damit Edit und Erstauswahl konsistent sind.
+        from functions.volk_funktionen import get_verfuegbare_fertigkeiten, NO_FERTIGKEIT_AVAILABLE_TEXT
+        fertigkeit_optionen = get_verfuegbare_fertigkeiten(charakter, nur_verstand=True)
+
+        if not fertigkeit_optionen or fertigkeit_optionen == [NO_FERTIGKEIT_AVAILABLE_TEXT]:
+            Logger.warning(f"Keine Fertigkeit-Optionen verfügbar für Volk '{volk_name}'")
+            return
+
+        # Höhe explizit berechnen (MDDialog Fixed Height)
+        scroll_height = min(dp(350), len(fertigkeit_optionen) * dp(52))
+        content_height = dp(86) + scroll_height
+        content = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(12),
+            padding=dp(20),
+            size_hint_y=None,
+            height=content_height,
+        )
+
+        info_label = MDLabel(
+            text="Wähle eine neue Fertigkeit:",
+            bold=True,
+            size_hint_y=None,
+            height=dp(34),
+        )
+        content.add_widget(info_label)
+
+        chips_box = MDBoxLayout(
+            orientation="vertical",
+            spacing=dp(8),
+            size_hint_y=None,
+        )
+        chips_box.bind(minimum_height=chips_box.setter('height'))
+
+        # Bereits in anderen Slots gewählte Fertigkeiten ausblenden, damit der User
+        # in diesem Slot kein Duplikat wählt. Den Wert des aktuellen Slots erlauben.
+        bereits_gewaehlt = set()
+        eintrag_fert = self.voelker_auswahlen.get(volk_name, {}).get('fertigkeit')
+        if isinstance(eintrag_fert, list):
+            cur_idx = getattr(self, '_current_edit_slot_index', None) or 0
+            for i, v in enumerate(eintrag_fert):
+                if v and i != cur_idx:
+                    bereits_gewaehlt.add(v)
+
+        for fert in sorted(fertigkeit_optionen):
+            if fert == NO_FERTIGKEIT_AVAILABLE_TEXT:
+                continue
+            if fert in bereits_gewaehlt:
+                continue
+
+            chip_kwargs = {
+                'type': "filter",
+                'size_hint_y': None,
+                'height': dp(40),
+                'on_release': lambda x, f=fert: self._on_fertigkeit_chosen(f),
+            }
+            if hasattr(self, 'theme_cls') and self.theme_cls:
+                if fert == fertigkeit_name:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.primaryContainerColor
+                else:
+                    chip_kwargs['md_bg_color'] = self.theme_cls.surfaceColor
+            else:
+                if fert == fertigkeit_name:
+                    chip_kwargs['md_bg_color'] = [0.7, 0.8, 1.0, 1.0]
+                else:
+                    chip_kwargs['md_bg_color'] = [0.95, 0.95, 0.95, 1.0]
+
+            chip = MDChip(MDChipText(text=fert), **chip_kwargs)
+            chips_box.add_widget(chip)
+
+        scroll = MDScrollView(
+            size_hint_y=None,
+            height=scroll_height,
+            do_scroll_x=False,
+        )
+        scroll.add_widget(chips_box)
+        content.add_widget(scroll)
+
+        button_container = MDDialogButtonContainer(
+            MDButton(
+                MDButtonText(text="Abbrechen"),
+                style="text",
+                on_release=lambda x: dialog.dismiss(),
+            ),
+            spacing="8dp",
+        )
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=f"Fertigkeit für {volk_name} ändern"),
+            MDDialogContentContainer(content, orientation="vertical"),
+            button_container,
+            size_hint=(0.85, None),
+        )
+
+        self._fertigkeit_dialog = dialog
+        dialog.open()
+
+    def _on_fertigkeit_chosen(self, fertigkeit_name):
+        """Wird aufgerufen wenn eine neue Fertigkeit im Bearbeitungs-Dialog ausgewählt wird.
+        Berücksichtigt _current_edit_slot_index für Multi-Slot."""
+        from kivy.clock import Clock
+
+        volk_name = self.selected_volk_name
+        if not volk_name:
+            return
+
+        charakter = self.controller.charakter
+        slot_index = getattr(self, '_current_edit_slot_index', None) or 0
+
+        # Alten Wert dieses Slots ermitteln und Bonus zurückrollen.
+        # waehle_freie_fertigkeit kennt keine Rückroll-Logik, deshalb hier von Hand:
+        # Grundfertigkeit W6 → W4 oder Nicht-Grundfertigkeit W4+0 → W4-2.
+        eintrag = self.voelker_auswahlen.get(volk_name, {})
+        alt = eintrag.get('fertigkeit')
+        if isinstance(alt, list):
+            alte_fertigkeit = alt[slot_index] if 0 <= slot_index < len(alt) else None
+        else:
+            alte_fertigkeit = alt
+
+        if alte_fertigkeit and alte_fertigkeit != fertigkeit_name:
+            try:
+                if hasattr(charakter, 'fertigkeiten') and alte_fertigkeit in charakter.fertigkeiten:
+                    grundfertigkeiten = {
+                        "Allgemeinwissen", "Athletik", "Heimlichkeit",
+                        "Überreden", "Wahrnehmung",
+                    }
+                    alte = charakter.fertigkeiten[alte_fertigkeit]
+                    if alte_fertigkeit in grundfertigkeiten:
+                        if alte.wert == 6 and getattr(alte, 'modifier', 0) == 0:
+                            alte.wuerfel.value = 4
+                    else:
+                        if alte.wert == 4 and getattr(alte, 'modifier', 0) == 0:
+                            alte.wuerfel.modifier = -2
+            except Exception as e:
+                Logger.warning(f"Konnte alte freie Fertigkeit '{alte_fertigkeit}' nicht zurücksetzen: {e}")
+
+        Logger.info(f"[DEBUG] Ändere freie Fertigkeit für '{volk_name}' Slot {slot_index} zu '{fertigkeit_name}'")
+        success = waehle_freie_fertigkeit(charakter, volk_name, fertigkeit_name)
+
+        if success:
+            if volk_name not in self.voelker_auswahlen:
+                self.voelker_auswahlen[volk_name] = {}
+            aktuell = self.voelker_auswahlen[volk_name].get('fertigkeit')
+            if isinstance(aktuell, list):
+                if 0 <= slot_index < len(aktuell):
+                    aktuell[slot_index] = fertigkeit_name
+                else:
+                    aktuell.append(fertigkeit_name)
+            else:
+                self.voelker_auswahlen[volk_name]['fertigkeit'] = [fertigkeit_name]
+
+            if hasattr(self, '_fertigkeit_dialog') and self._fertigkeit_dialog:
+                self._fertigkeit_dialog.dismiss()
+
+            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+
+            Logger.info(f"Freie Fertigkeit für '{volk_name}' Slot {slot_index} erfolgreich geändert zu '{fertigkeit_name}'")
+        else:
+            Logger.error(f"Fehler beim Ändern der freien Fertigkeit für '{volk_name}'")
 
     def _on_edit_magieaffin(self):
         """Öffnet einen Dialog zum Auswählen eines Arkanen Hintergrunds (AH) für Magieaffin.
