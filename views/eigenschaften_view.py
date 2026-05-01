@@ -374,12 +374,19 @@ class EigenschaftenWidget(MDBoxLayout):
         for widget, daten in zip(vorhandene, neue_widgets):
             # Cache ZUERST aktualisieren, damit eventuelle Callbacks aktuelle Werte lesen
             widget._update_eigenschaften_cache()
-            widget.dice_icon = daten['dice_icon']
-            widget.modifier_sign = daten['modifier_sign']
-            widget.modifier_value_icon = daten['modifier_value_icon']
-            widget.has_modifier = daten['has_modifier']
+
+            # Icons IMMER direkt aus item_obj berechnen (nicht aus vorgefertigten daten)
+            # damit aktuelle Modifier-Werte verwendet werden (z.B. Attributsabzug mit -2)
+            wert = daten['item_obj'].wert if daten['item_obj'] else 4
+            modifier = daten['item_obj'].modifier if daten['item_obj'] else 0
+
+            widget.dice_icon = IconCache.get_dice_icon(wert)
+            widget.modifier_sign = IconCache.get_modifier_sign(modifier > 0)
+            widget.modifier_value_icon = IconCache.get_modifier_icon(modifier)
+            widget.has_modifier = modifier != 0
+
             # Zweite Ziffer aktualisieren
-            second_digit = IconCache.get_second_digit_icon(daten['item_obj'].modifier) if daten['item_obj'] else None
+            second_digit = IconCache.get_second_digit_icon(modifier)
             widget.has_second_digit = bool(second_digit)
             if second_digit:
                 widget.second_digit_icon = second_digit
