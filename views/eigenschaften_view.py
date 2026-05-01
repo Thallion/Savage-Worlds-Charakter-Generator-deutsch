@@ -372,6 +372,8 @@ class EigenschaftenWidget(MDBoxLayout):
         """Aktualisiert vorhandene Widgets in-place ohne clear_widgets/add_widget."""
         vorhandene = list(reversed(layout.children))
         for widget, daten in zip(vorhandene, neue_widgets):
+            # Cache ZUERST aktualisieren, damit eventuelle Callbacks aktuelle Werte lesen
+            widget._update_eigenschaften_cache()
             widget.dice_icon = daten['dice_icon']
             widget.modifier_sign = daten['modifier_sign']
             widget.modifier_value_icon = daten['modifier_value_icon']
@@ -381,8 +383,6 @@ class EigenschaftenWidget(MDBoxLayout):
             widget.has_second_digit = bool(second_digit)
             if second_digit:
                 widget.second_digit_icon = second_digit
-            # Cache aktualisieren
-            widget._update_eigenschaften_cache()
 
     @mainthread
     def _aktualisiere_ui_im_hauptthread(self, attribute_widgets, fertigkeiten_widgets):
