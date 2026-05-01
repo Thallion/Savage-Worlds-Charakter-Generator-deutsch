@@ -177,7 +177,7 @@ class SW_Charakter_GeneratorApp(MDApp):
         self.tab_definitions = [
             ("content-save",     "Speichern/Laden",      CharakterVerwaltungScreen),
             ("cog",              "Einstellungen",        EinstellungenScreen),
-            ("account-group",    "Völker",               VoelkerScreen),
+            ("account-group",    "Abstammungen",         VoelkerScreen),
             ("account-details",  "Profil",               ProfilScreen),
             ("arm-flex",         "Eigenschaften",        EigenschaftenScreen),
             ("account-alert",    "Handicaps",            HandicapsScreen),

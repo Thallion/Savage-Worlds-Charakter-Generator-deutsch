@@ -224,7 +224,7 @@ class TestCalculateSettingStatistics(unittest.TestCase):
     def test_leeres_setting(self):
         """Leeres Setting ergibt Nullen."""
         stats = self.calculate({})
-        for cat in ["Völker", "Fertigkeiten", "Talente", "Handicaps", "Mächte", "Ausrüstung"]:
+        for cat in ["Abstammungen", "Fertigkeiten", "Talente", "Handicaps", "Mächte", "Ausrüstung"]:
             self.assertEqual(stats[cat]["gesamt"], 0)
 
     def test_dict_elemente(self):
@@ -245,9 +245,9 @@ class TestCalculateSettingStatistics(unittest.TestCase):
         """Listen-Elemente zählen alle als aktiv."""
         data = {"voelker": ["Mensch", "Elf", "Zwerg"]}
         stats = self.calculate(data)
-        self.assertEqual(stats["Völker"]["gesamt"], 3)
-        self.assertEqual(stats["Völker"]["aktiv"], 3)
-        self.assertEqual(stats["Völker"]["inaktiv"], 0)
+        self.assertEqual(stats["Abstammungen"]["gesamt"], 3)
+        self.assertEqual(stats["Abstammungen"]["aktiv"], 3)
+        self.assertEqual(stats["Abstammungen"]["inaktiv"], 0)
 
     def test_fertigkeiten_daten_fallback(self):
         """fertigkeiten_daten wird als Fallback für fertigkeiten verwendet."""
@@ -263,7 +263,7 @@ class TestCalculateSettingStatistics(unittest.TestCase):
     def test_alle_kategorien_vorhanden(self):
         """Alle 6 Kategorien sind immer im Ergebnis."""
         stats = self.calculate({"talente": {"X": True}})
-        expected = ["Völker", "Fertigkeiten", "Talente", "Handicaps", "Mächte", "Ausrüstung"]
+        expected = ["Abstammungen", "Fertigkeiten", "Talente", "Handicaps", "Mächte", "Ausrüstung"]
         for cat in expected:
             self.assertIn(cat, stats)
 
@@ -292,7 +292,7 @@ class TestFormatStatisticsForDisplay(unittest.TestCase):
     def test_mehrere_kategorien(self):
         """Mehrere Kategorien werden zeilenweise formatiert."""
         stats = {
-            "Völker": {"aktiv": 5, "inaktiv": 0, "gesamt": 5},
+            "Abstammungen": {"aktiv": 5, "inaktiv": 0, "gesamt": 5},
             "Talente": {"aktiv": 10, "inaktiv": 2, "gesamt": 12},
         }
         result = self.format(stats)

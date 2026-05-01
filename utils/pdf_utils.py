@@ -225,16 +225,16 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False, show_steigerung
             break
 
     if not selected_volk:
-        volk_section.append(Paragraph("Kein Volk ausgewählt.", style_normal))
+        volk_section.append(Paragraph("Keine Abstammung ausgewählt.", style_normal))
     else:
-        # Ausgewähltes Volk aus charakter.voelker holen
+        # Ausgewählte Abstammung aus charakter.voelker holen
         volk_obj = charakter.voelker.get(selected_volk, None)
 
-        volk_text = f"Volk: {selected_volk}"
+        volk_text = f"Abstammung: {selected_volk}"
         volk_section.append(Paragraph(volk_text, style_heading))
 
         if not volk_obj:
-            volk_section.append(Paragraph("Keine Daten für das ausgewählte Volk vorhanden.", style_normal))
+            volk_section.append(Paragraph("Keine Daten für die ausgewählte Abstammung vorhanden.", style_normal))
         else:
             # Talente
             if volk_obj.talente:

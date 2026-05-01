@@ -263,13 +263,13 @@ def _erzeuge_volk_sektion(charakter):
             break
 
     if not selected_volk:
-        return "<p>Kein Volk ausgewählt.</p>"
+        return "<p>Keine Abstammung ausgewählt.</p>"
 
     volk_obj = charakter.voelker.get(selected_volk, None)
-    result = f"<h2>Volk: {_esc(selected_volk)}</h2>"
+    result = f"<h2>Abstammung: {_esc(selected_volk)}</h2>"
 
     if not volk_obj:
-        return result + "<p>Keine Daten für das ausgewählte Volk vorhanden.</p>"
+        return result + "<p>Keine Daten für die ausgewählte Abstammung vorhanden.</p>"
 
     if volk_obj.talente:
         rows = "".join(f"<tr><td>{_esc(t)}</td></tr>\n" for t in volk_obj.talente)

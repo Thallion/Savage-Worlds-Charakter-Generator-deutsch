@@ -132,11 +132,13 @@ EFFEKT_TYPEN = {
 # auf die neue konsolidierte ID + Stufen-Label. Wird in
 # `lade_eigenarten_fuer_bearbeitung` angewendet, damit alte Custom-Volk-Saves
 # beim Editieren auf das neue Schema überführt werden.
+# `stufe_label` darf None sein für reine ID-Umbenennungen ohne Stufen.
 STUFEN_MIGRATIONS = {
     'fliegen_stufe1': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 6'},
     'fliegen_stufe2': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 12'},
     'fliegen_stufe3': {'neue_id': 'fliegen', 'stufe_label': 'Bewegungsweite 24, Sprint 2W6'},
     'attributsschwäche': {'neue_id': 'attributsabzug_2', 'stufe_label': '-2 Attribut'},
+    'aussenseiter': {'neue_id': 'volksfeind', 'stufe_label': None},
 }
 
 
@@ -505,7 +507,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
             for key, value in effekt.items():
                 if key in ['fliegen', 'nachtsicht', 'nachtsicht_einfach', 'untot', 'konstrukt',
                           'wasserwesen', 'baumfoermig', 'magieaffin', 'steingaenger',
-                          'aussenseiter', 'abhaengigkeit', 'pazifist', 'nichtschwimmer',
+                          'volksfeind', 'aussenseiter', 'abhaengigkeit', 'pazifist', 'nichtschwimmer',
                           'gesichtslos', 'niedrig', 'angeblich', 'minderwertig', 'uebergross',
                           'schwer_zu_heilen', 'leichtes_ziel', 'lahm', 'blind', 'sprachbehindert',
                           'geringe_lebenserwartung', 'kann_nicht_ertrinken', 'atmet_nicht',
@@ -515,7 +517,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                           'keine_lebenswichtigen_organe', 'waermesicht', 'schlafbedarf',
                           'doppelt_so_weit_springen', 'springer_schadensbonus',
                           'widerstand_naturgewalten', 'anfaelligkeit_naturgewalten',
-                          'halbe_bewegungsweite_graben']:
+                          'halbe_bewegungsweite_graben', 'groesse_punkt']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
                 elif key in ['bewegungsweite_bonus', 'robustheit_bonus', 'bewegungsweite_flug',
                              'sozialer_malus', 'athletik_malus', 'ueberreden_malus',

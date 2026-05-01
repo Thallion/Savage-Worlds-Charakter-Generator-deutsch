@@ -5,8 +5,8 @@
             "text": "Hier verwaltest du deine Charaktere:\n\n• 'Neuer Charakter' – startet einen frischen Charakter\n• 'Laden' – öffnet einen gespeicherten Charakter\n• 'Speichern' – sichert deinen aktuellen Charakter\n• 'PDF' – exportiert den Charakterbogen als PDF\n\nTipp: Wähle zuerst ein Setting über den Setting-Button!"
         },
         "voelker": {
-            "title": "Volk auswählen",
-            "text": "Wähle hier das Volk deines Charakters.\n\nJedes Volk hat besondere Fähigkeiten und Boni. Manche Völker haben Spezialitäten zur Auswahl.\n\nTipp: Die Boni werden automatisch verrechnet."
+            "title": "Abstammung auswählen",
+            "text": "Wähle hier die Abstammung deines Charakters.\n\nJede Abstammung hat besondere Fähigkeiten und Boni. Manche Abstammungen haben Spezialitäten zur Auswahl.\n\nTipp: Die Boni werden automatisch verrechnet."
         },
         "profil": {
             "title": "Charakter-Profil",
@@ -61,11 +61,11 @@
             },
             {
                 "title": "Charakter starten",
-                "text": "Öffne den Tab 'Speichern/Laden', wähle ein Setting und tippe auf 'Neuer Charakter'.\n\nDas Setting bestimmt, welche Völker, Talente und Mächte verfügbar sind."
+                "text": "Öffne den Tab 'Speichern/Laden', wähle ein Setting und tippe auf 'Neuer Charakter'.\n\nDas Setting bestimmt, welche Abstammungen, Talente und Mächte verfügbar sind."
             },
             {
                 "title": "Empfohlene Reihenfolge",
-                "text": "Erstelle deinen Charakter am besten so:\n\n1. Setting wählen & neuen Charakter anlegen\n2. Volk wählen\n3. Profil ausfüllen (Name, Konzept)\n4. Attribute & Fertigkeiten verteilen\n5. Handicaps wählen (für Bonuspunkte)\n6. Talente wählen\n7. Ggf. Mächte/Superkräfte\n8. Ausrüstung kaufen\n9. Charakterbogen prüfen & PDF exportieren"
+                "text": "Erstelle deinen Charakter am besten so:\n\n1. Setting wählen & neuen Charakter anlegen\n2. Abstammung wählen\n3. Profil ausfüllen (Name, Konzept)\n4. Attribute & Fertigkeiten verteilen\n5. Handicaps wählen (für Bonuspunkte)\n6. Talente wählen\n7. Ggf. Mächte/Superkräfte\n8. Ausrüstung kaufen\n9. Charakterbogen prüfen & PDF exportieren"
             },
             {
                 "title": "Viel Spaß!",

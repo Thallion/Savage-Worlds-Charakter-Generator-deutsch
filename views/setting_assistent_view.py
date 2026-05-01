@@ -695,7 +695,7 @@ class SettingAssistentWizard:
             content.add_widget(tabs_label)
         
         categories = [
-            ("voelker", "Völker", "account-group"),
+            ("voelker", "Abstammungen", "account-group"),
             ("fertigkeiten", "Fertigkeiten", "school"),
             ("talente", "Talente", "star"),
             ("handicaps", "Handicaps", "alert-circle"),

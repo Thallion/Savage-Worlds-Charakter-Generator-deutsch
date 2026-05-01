@@ -14,31 +14,31 @@
         height: dp(32)
         
         MDLabel:
-            text: "Völker"
+            text: "Abstammungen"
             size_hint_x: 1
             halign: 'left'
             font_style: "Title"
             theme_text_color: "Primary"
             bold: True
-        
-        # Buttons für Volk-Management
+
+        # Buttons für Abstammungs-Management
         MDIconButton:
             icon: "plus"
-            tooltip: "Volk erstellen"
+            tooltip: "Abstammung erstellen"
             on_release: root.open_add_volk_dialog()
-        
+
         MDIconButton:
             id: edit_volk_button
             icon: "pencil"
-            tooltip: "Volk bearbeiten"
+            tooltip: "Abstammung bearbeiten"
             on_release: root.open_edit_volk_dialog()
-        
+
         MDIconButton:
             icon: "delete"
-            tooltip: "Volk löschen"
+            tooltip: "Abstammung löschen"
             on_release: root.open_delete_volk_dialog()
 
-    # Kompakte Volk-Auswahl mit Button
+    # Kompakte Abstammungs-Auswahl mit Button
     MDCard:
         size_hint_x: 1
         size_hint_y: None
@@ -54,7 +54,7 @@
             spacing: dp(10)
 
             MDLabel:
-                text: "Volk:"
+                text: "Abstammung:"
                 font_style: "Body"
                 theme_text_color: "Primary"
                 size_hint_x: 0.2
@@ -71,9 +71,9 @@
 
                 MDButtonText:
                     id: selected_volk_text
-                    text: "Volk auswählen..."
+                    text: "Abstammung auswählen..."
 
-    # Volk-Details ScrollView - Zusatzelemente und Details zusammen scrollbar
+    # Abstammungs-Details ScrollView - Zusatzelemente und Details zusammen scrollbar
     MDScrollView:
         size_hint_y: 1
         do_scroll_x: False

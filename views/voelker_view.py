@@ -408,7 +408,7 @@ class VoelkerWidget(MDBoxLayout):
 
             # Info
             dialog_content.add_widget(MDLabel(
-                text=f"Aktuelles Volk: {current_volk or 'Keins'}",
+                text=f"Aktuelle Abstammung: {current_volk or 'Keine'}",
                 theme_text_color="Secondary", font_style="Body",
                 size_hint_y=None, height=dp(30),
             ))
@@ -418,7 +418,7 @@ class VoelkerWidget(MDBoxLayout):
             search_field = MDTextField(
                 mode="outlined", size_hint_y=None, height=dp(56), size_hint_x=1
             )
-            search_field.add_widget(MDTextFieldHintText(text="Volk suchen..."))
+            search_field.add_widget(MDTextFieldHintText(text="Abstammung suchen..."))
             dialog_content.add_widget(search_field)
 
             # Scrollbare Liste
@@ -449,7 +449,7 @@ class VoelkerWidget(MDBoxLayout):
                     )
                     if is_sel:
                         item.add_widget(MDListItemLeadingIcon(icon="check-circle"))
-                    headline = MDListItemHeadlineText(text="Kein Volk")
+                    headline = MDListItemHeadlineText(text="Keine Abstammung")
                     if is_sel:
                         headline.bold = True
                     item.add_widget(headline)
@@ -495,7 +495,7 @@ class VoelkerWidget(MDBoxLayout):
             dialog_content.add_widget(button_row)
 
             self._volk_dialog = MDDialog(
-                MDDialogHeadlineText(text="Volk auswählen"),
+                MDDialogHeadlineText(text="Abstammung auswählen"),
                 MDDialogContentContainer(dialog_content, orientation="vertical", padding=dp(0)),
                 size_hint=(0.85, None),
                 auto_dismiss=False,
@@ -607,7 +607,7 @@ class VoelkerWidget(MDBoxLayout):
                 from services.service_container import service_container
                 dialog_service = service_container.get_dialog_service()
                 if dialog_service:
-                    dialog_service.show_warning_dialog("Bitte wähle zuerst ein Volk aus.")
+                    dialog_service.show_warning_dialog("Bitte wähle zuerst eine Abstammung aus.")
                 return
             
             from services.service_container import service_container
@@ -781,7 +781,7 @@ class VoelkerWidget(MDBoxLayout):
         
         if 'selected_volk_container' in self.ids:
             placeholder = MDLabel(
-                text="Keine Völker-Daten verfügbar",
+                text="Keine Abstammungs-Daten verfügbar",
                 halign='center',
                 theme_text_color="Secondary",
                 font_style="Body",

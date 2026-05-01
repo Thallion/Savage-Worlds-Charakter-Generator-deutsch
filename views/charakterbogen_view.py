@@ -284,7 +284,7 @@ class CharakterbogenWidget(MDBoxLayout):
         if not selected_volk_name:
             # Kein Volk ausgewählt
             volk_section.add_widget(LeftAlignedLabel(
-                text="Kein Volk ausgewählt.",
+                text="Keine Abstammung ausgewählt.",
                 font_size=LABEL_FONT_SIZE,
                 size_hint_y=None,
                 height=ROW_HEIGHT
@@ -293,7 +293,7 @@ class CharakterbogenWidget(MDBoxLayout):
 
         # Füge den Namen des Volkes hinzu
         volk_name_label = LeftAlignedLabel(
-            text=f"Volk: {selected_volk_name}",
+            text=f"Abstammung: {selected_volk_name}",
             font_size=HEADER_FONT_SIZE,
             bold=True,
             size_hint_y=None,
@@ -306,7 +306,7 @@ class CharakterbogenWidget(MDBoxLayout):
         if not selected_volk:
             Logger.warning(f"Keine Daten für Volk '{selected_volk_name}' gefunden.")
             volk_section.add_widget(LeftAlignedLabel(
-                text="Keine Daten für das ausgewählte Volk vorhanden.",
+                text="Keine Daten für die ausgewählte Abstammung vorhanden.",
                 font_size=SUBHEADER_FONT_SIZE,
                 size_hint_y=None,
                 padding=INFO_PADDING,

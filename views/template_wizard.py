@@ -250,7 +250,7 @@ class TemplateWizardDialog:
 
         # Volk Dropdown
         self._create_race_dropdown()
-        race_label = MDLabel(text="Volk:", size_hint_y=None, height="30dp")
+        race_label = MDLabel(text="Abstammung:", size_hint_y=None, height="30dp")
         self.race_button = MDButton(
             style="outlined",
             on_release=self._open_race_menu

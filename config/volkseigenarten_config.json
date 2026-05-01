@@ -56,16 +56,30 @@
         },
         {
             "id": "freie_grundfertigkeit",
-            "name": "Begabt",
+            "name": "Fertigkeit (Grundfertigkeit W6)",
             "kosten": 1,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk beginnt mit einer Grundfertigkeit auf W6 statt W4 (Athletik, Heimlichkeit, Überreden, Wahrnehmung, Allgemeinwissen). Die Auswahl erfolgt nach der Volkauswahl.",
+            "max_auswahl": 0,
+            "beschreibung": "Die Abstammung beginnt mit einer Grundfertigkeit auf W6 statt W4 (Athletik, Heimlichkeit, Überreden, Wahrnehmung, Allgemeinwissen). Maximum steigt auf W12+1. Einmal pro Fertigkeit. Die Auswahl erfolgt nach der Abstammungsauswahl.",
             "effekt_typ": "fertigkeits_bonus",
             "effekt": {"grundfertigkeit_bonus": 2},
             "optionen": {
                 "typ": "grundfertigkeit_auswahl",
                 "fertigkeiten": ["Athletik", "Heimlichkeit", "Überreden", "Wahrnehmung", "Allgemeinwissen"],
                 "standard": "Wahrnehmung",
+                "auswahl_verzoegert": true
+            }
+        },
+        {
+            "id": "fertigkeit_w4",
+            "name": "Fertigkeit (W4)",
+            "kosten": 1,
+            "max_auswahl": 0,
+            "beschreibung": "Die Abstammung beginnt mit W4 in einer beliebigen Fertigkeit, die eine angeborene Fähigkeit darstellt. Einmal pro Fertigkeit. Die Auswahl erfolgt nach der Abstammungsauswahl.",
+            "effekt_typ": "fertigkeits_bonus",
+            "effekt": {"fertigkeit_w4_bonus": 1},
+            "optionen": {
+                "typ": "fertigkeit_auswahl",
+                "beschreibung": "Wähle die angeborene Fertigkeit",
                 "auswahl_verzoegert": true
             }
         },
@@ -139,7 +153,7 @@
         {
             "id": "zusätzliche_aktion",
             "name": "Zusätzliche Aktion",
-            "kosten": 3,
+            "kosten": 5,
             "max_auswahl": 1,
             "beschreibung": "Das Wesen hat zusätzliche Gliedmaßen oder beschleunigte Reflexe. Es kann pro Zug 2 Punkte Abzüge für Mehrfachaktionen ignorieren.",
             "effekt_typ": "spezieller_effekt",
@@ -166,8 +180,8 @@
         {
             "id": "fertigkeitsbonus",
             "name": "Fertigkeitsbonus",
-            "max_auswahl": 1,
-            "beschreibung": "Eine angeborene Eigenart dieses Volkes gewährt einen Bonus von +1 oder +2 beim Einsatz einer bestimmten Fertigkeit.",
+            "max_auswahl": 0,
+            "beschreibung": "Eine angeborene Eigenart dieser Abstammung gewährt einen Bonus von +1 oder +2 beim Einsatz einer bestimmten Fertigkeit (einmal pro Fertigkeit).",
             "effekt_typ": "fertigkeits_bonus",
             "stufen": [
                 {"label": "+1 Bonus", "kosten": 1, "effekt": {"fertigkeits_bonus": 1}},
@@ -223,9 +237,9 @@
         {
             "id": "naturtalente",
             "name": "Naturtalent",
-            "kosten": 1,
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk beginnt mit W6 in einer Nicht-Grundfertigkeit (Athletik, Heilung, Wahrnehmung, etc.). Die Auswahl erfolgt nach der Volkauswahl.",
+            "kosten": 2,
+            "max_auswahl": 0,
+            "beschreibung": "Die Abstammung beginnt mit W6 in einer Nicht-Grundfertigkeit (Athletik, Heilung, Wahrnehmung, etc.). Maximum steigt auf W12+1. Die Auswahl erfolgt nach der Abstammungsauswahl.",
             "effekt_typ": "fertigkeits_bonus",
             "effekt": {"nicht_grundfertigkeit_bonus": 2},
             "optionen": {
@@ -578,18 +592,27 @@
             ]
         },
         {
-            "id": "aussenseiter",
+            "id": "volksfeind",
             "name": "Volksfeind",
             "kosten": -1,
             "max_auswahl": 0,
-            "beschreibung": "Die Mitglieder dieses Volkes haben eine Abneigung gegen ein anderes Volk im Setting. Sie erleiden -2 auf Überredenproben, wenn sie mit ihren Rivalen sprechen müssen.",
+            "beschreibung": "Die Mitglieder dieser Abstammung haben eine Abneigung gegen eine andere Abstammung im Setting. Sie erleiden -2 auf Überredenproben, wenn sie mit ihren Rivalen sprechen müssen, und werden auch bei kleinen Provokationen schnell feindselig.",
             "effekt_typ": "spezieller_effekt",
-            "effekt": {"aussenseiter": true, "sozialer_malus": -2},
+            "effekt": {"volksfeind": true, "sozialer_malus": -2},
             "optionen": {
                 "typ": "text_eingabe",
-                "beschreibung": "Gegnerisches Volk",
+                "beschreibung": "Gegnerische Abstammung",
                 "platzhalter": "z.B. Menschen, Orks"
             }
+        },
+        {
+            "id": "groesse_minus_1",
+            "name": "Größe -1",
+            "kosten": -1,
+            "max_auswahl": 1,
+            "beschreibung": "Die Wesenheit ist kleiner als der Durchschnitt, was ihre Größe und Robustheit um -1 verringert (siehe Größentabelle).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"groesse_punkt": -1, "robustheit_bonus": -1}
         },
         {
             "id": "abhaengigkeit",
@@ -772,8 +795,8 @@
         {
             "id": "fertigkeitsabzug",
             "name": "Fertigkeitsabzug",
-            "max_auswahl": 1,
-            "beschreibung": "Das Volk erleidet einen Abzug auf eine bestimmte Fertigkeit.",
+            "max_auswahl": 0,
+            "beschreibung": "Die Abstammung erleidet einen Abzug auf eine bestimmte Fertigkeit (nur einmal pro Fertigkeit).",
             "effekt_typ": "fertigkeits_malus",
             "stufen": [
                 {"label": "Häufige Fertigkeit (-1)", "kosten": -1, "effekt": {"fertigkeits_malus": -1}},
