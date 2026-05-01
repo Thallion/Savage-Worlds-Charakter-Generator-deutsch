@@ -105,7 +105,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         top_bar.add_widget(back_btn)
 
         self._title_label = MDLabel(
-            text="Volk auswählen",
+            text="Abstammung auswählen",
             theme_text_color="Primary",
             font_style="Title",
             role="medium",
@@ -239,7 +239,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
     def _build_select_phase(self):
         """Baut die Volk-Auswahl-Ansicht auf"""
         self._content_box.clear_widgets()
-        self._title_label.text = "Volk auswählen"
+        self._title_label.text = "Abstammung auswählen"
 
         # Info-Card: aktuelles Volk
         info_card = MDCard(
@@ -258,7 +258,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
         info_box.add_widget(MDListItemLeadingIcon(icon="account-group"))
         volk_text = self.current_volk if self.current_volk else "Keins"
         info_label = MDLabel(
-            text=f"Aktuelles Volk: [b]{volk_text}[/b]",
+            text=f"Aktuelle Abstammung: [b]{volk_text}[/b]",
             markup=True,
             adaptive_height=True,
         )
@@ -273,7 +273,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
             height=dp(56),
             size_hint_x=1,
         )
-        self._search_field.add_widget(MDTextFieldHintText(text="Volk suchen..."))
+        self._search_field.add_widget(MDTextFieldHintText(text="Abstammung suchen..."))
         self._search_field.bind(text=lambda *args: self._populate_voelker_list())
         self._content_box.add_widget(self._search_field)
 
@@ -306,7 +306,7 @@ class VoelkerAuswahlOverlay(MDBoxLayout):
                 item.md_bg_color = self.theme_cls.surfaceContainerColor
             else:
                 item.add_widget(MDListItemLeadingIcon(icon="close-circle-outline"))
-            headline = MDListItemHeadlineText(text="Kein Volk")
+            headline = MDListItemHeadlineText(text="Keine Abstammung")
             if is_none_selected:
                 headline.bold = True
             item.add_widget(headline)

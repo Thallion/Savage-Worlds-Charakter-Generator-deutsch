@@ -133,8 +133,8 @@ class VolkGeneratorWizard:
         
         self.steps = [
             {"Title": "Name & Grundlagen", "handler": self._create_name_step},
-            {"Title": "Positive Volkseigenarten", "handler": self._create_positive_step},
-            {"Title": "Negative Volkseigenarten", "handler": self._create_negative_step},
+            {"Title": "Positive Abstammungseigenarten", "handler": self._create_positive_step},
+            {"Title": "Negative Abstammungseigenarten", "handler": self._create_negative_step},
             {"Title": "Vorschau & Speichern", "handler": self._create_preview_step}
         ]
     
@@ -234,7 +234,7 @@ class VolkGeneratorWizard:
         if self.edit_volk:
             progress_text += " (Bearbeiten)"
         else:
-            progress_text += " (Neues Volk)"
+            progress_text += " (Neue Abstammung)"
         
         progress_label = MDLabel(
             text=progress_text,
@@ -247,7 +247,7 @@ class VolkGeneratorWizard:
         main_layout.add_widget(MDDivider())
         main_layout.add_widget(nav_layout)
         
-        title = "Volk erstellen" if not self.edit_volk else f"Volk bearbeiten: {self.edit_volk.name}"
+        title = "Abstammung erstellen" if not self.edit_volk else f"Abstammung bearbeiten: {self.edit_volk.name}"
         
         self.dialog = MDDialog(
             MDDialogHeadlineText(text=title),
@@ -273,7 +273,7 @@ class VolkGeneratorWizard:
         )
         
         info_label = MDLabel(
-            text=f"Volkseigenarten-System: Starte mit {START_PUNKTE} Punkten für positive Eigenarten.",
+            text=f"Abstammungseigenarten-System: Starte mit {START_PUNKTE} Punkten für positive Eigenarten.",
             theme_text_color="Secondary",
             size_hint_y=None,
             height="40dp"
@@ -281,7 +281,7 @@ class VolkGeneratorWizard:
         content.add_widget(info_label)
         
         self.name_field = MDTextField(
-            MDTextFieldHintText(text="Volk-Name *"),
+            MDTextFieldHintText(text="Name der Abstammung *"),
             mode="outlined",
             text=self.wizard_data.get('name', '')
         )
@@ -312,7 +312,7 @@ class VolkGeneratorWizard:
         """Erstellt Wizard-Schritt mit Button, der das Eigenarten-Popup öffnet"""
         layout = MDBoxLayout(orientation="vertical", spacing=dp(16), padding=dp(16))
 
-        title = "Positive Volkseigenarten" if eigenart_typ == 'positive' else "Negative Volkseigenarten"
+        title = "Positive Abstammungseigenarten" if eigenart_typ == 'positive' else "Negative Abstammungseigenarten"
 
         label = MDLabel(
             text=f"{title} auswählen",
@@ -455,7 +455,7 @@ class VolkGeneratorWizard:
         config = get_merged_eigenarten_config()
         eigenarten = config.get(eigenart_typ, [])
         aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
-        title = "Positive Volkseigenarten" if eigenart_typ == 'positive' else "Negative Volkseigenarten"
+        title = "Positive Abstammungseigenarten" if eigenart_typ == 'positive' else "Negative Abstammungseigenarten"
 
         popup_height = min(Window.height * 0.75, dp(420))
         content = MDBoxLayout(
@@ -658,7 +658,7 @@ class VolkGeneratorWizard:
             self._eigenarten_popup.opacity = 0
 
         is_positive = eigenart_typ == 'positive'
-        titel_text = "Neuen Volksvorteil erstellen" if is_positive else "Neuen Volksnachteil erstellen"
+        titel_text = "Neuen Abstammungsvorteil erstellen" if is_positive else "Neuen Abstammungsnachteil erstellen"
 
         content = MDBoxLayout(
             orientation="vertical",
@@ -869,26 +869,26 @@ class VolkGeneratorWizard:
         summary += "\n"
         
         if self.positive_eigenarten:
-            summary += f"[b]Positive Volkseigenarten ({len(self.positive_eigenarten)}):[/b]\n"
+            summary += f"[b]Positive Abstammungseigenarten ({len(self.positive_eigenarten)}):[/b]\n"
             for e in self.positive_eigenarten:
                 auswahl_text = ""
                 if e.get('optionen', {}).get('ausgewaehlt'):
                     auswahl_text = f" → {e['optionen']['ausgewaehlt']}"
                 summary += f"  • {e.get('name', e.get('id'))} [{e.get('kosten', 0)} EP]{auswahl_text}\n"
         else:
-            summary += "[b]Positive Volkseigenarten:[/b] Keine\n"
+            summary += "[b]Positive Abstammungseigenarten:[/b] Keine\n"
 
         summary += "\n"
 
         if self.negative_eigenarten:
-            summary += f"[b]Negative Volkseigenarten ({len(self.negative_eigenarten)}):[/b]\n"
+            summary += f"[b]Negative Abstammungseigenarten ({len(self.negative_eigenarten)}):[/b]\n"
             for e in self.negative_eigenarten:
                 auswahl_text = ""
                 if e.get('optionen', {}).get('ausgewaehlt'):
                     auswahl_text = f" → {e['optionen']['ausgewaehlt']}"
                 summary += f"  • {e.get('name', e.get('id'))} [{e.get('kosten', 0)} EP]{auswahl_text}\n"
         else:
-            summary += "[b]Negative Volkseigenarten:[/b] Keine\n"
+            summary += "[b]Negative Abstammungseigenarten:[/b] Keine\n"
         
         return summary
     
@@ -1909,7 +1909,7 @@ class VolkGeneratorWizard:
             return
         if self.current_step == 0:
             if not self.wizard_data.get('name', '').strip():
-                self._show_error("Bitte gib einen Namen für das Volk ein.")
+                self._show_error("Bitte gib einen Namen für die Abstammung ein.")
                 return
         self.current_step += 1
         self._show_current_step()
@@ -1967,7 +1967,7 @@ class VolkGeneratorWizard:
                 Logger.info(f"Altes Volk '{alter_name}' für Bearbeitung entfernt")
             
             if volk_name in charakter.voelker:
-                self._show_error(f"Volk '{volk_name}' existiert bereits.")
+                self._show_error(f"Abstammung '{volk_name}' existiert bereits.")
                 return
             
             new_volk = Volk(
@@ -2012,7 +2012,7 @@ class VolkGeneratorWizard:
                 self.dialog = None
                 old_dialog.dismiss()
 
-            self._show_success(f"Volk '{volk_name}' wurde {'aktualisiert' if self.edit_volk else 'erstellt'}.")
+            self._show_success(f"Abstammung '{volk_name}' wurde {'aktualisiert' if self.edit_volk else 'erstellt'}.")
 
             if hasattr(app, 'einstellungen_widget'):
                 app.einstellungen_widget.aktualisiere_ui()
@@ -2060,7 +2060,7 @@ class VolkGeneratorWizard:
                 padding=[0, 0, 0, 0]
             )
             title_label = MDLabel(
-                text=f"Volk '{volk_name}' hat ein freies Talent.\nBitte wähle ein Anfängertalent:",
+                text=f"Abstammung '{volk_name}' hat ein freies Talent.\nBitte wähle ein Anfängertalent:",
                 font_style="Body",
                 theme_text_color="Secondary",
                 size_hint_y=None,
@@ -2287,7 +2287,7 @@ class VolkDialogHandler:
             charakter = app.controller.charakter
             
             if volk_name not in charakter.voelker:
-                self.show_error(f"Volk '{volk_name}' nicht gefunden.")
+                self.show_error(f"Abstammung '{volk_name}' nicht gefunden.")
                 return
             
             volk = charakter.voelker[volk_name]
@@ -2342,7 +2342,7 @@ class VolkDialogHandler:
 
         voelker = self.get_all_voelker()
         if not voelker:
-            self.show_error("Keine Völker zum Löschen verfügbar.")
+            self.show_error("Keine Abstammungen zum Löschen verfügbar.")
             return
 
         self._volk_checkboxes = {}
@@ -2422,7 +2422,7 @@ class VolkDialogHandler:
         populate_list("")
 
         self._delete_popup = MDDialog(
-            MDDialogHeadlineText(text="Volk löschen"),
+            MDDialogHeadlineText(text="Abstammung löschen"),
             MDDialogContentContainer(main_content),
             MDDialogButtonContainer(
                 MDButton(MDButtonText(text="Abbrechen"), style="text",
@@ -2440,13 +2440,13 @@ class VolkDialogHandler:
         selected = [name for name, cb in self._volk_checkboxes.items() if cb.active]
 
         if not selected:
-            self.show_error("Bitte wähle mindestens ein Volk zum Löschen aus.")
+            self.show_error("Bitte wähle mindestens eine Abstammung zum Löschen aus.")
             return
 
         self._pending_delete_items = selected
         self._delete_popup.dismiss()
         self._show_delete_confirmation_popup(
-            selected_items=selected, item_type="Volk", on_confirm=self._confirm_delete_volk
+            selected_items=selected, item_type="Abstammung", on_confirm=self._confirm_delete_volk
         )
 
     def save_volk(self, *args):
@@ -2458,7 +2458,7 @@ class VolkDialogHandler:
         name = self.dialog_content.ids.name_input.text.strip()
 
         if not name:
-            self.show_error("Der Name des Volkes darf nicht leer sein.")
+            self.show_error("Der Name der Abstammung darf nicht leer sein.")
             return
 
         handicaps = [h.strip() for h in self.dialog_content.ids.handicaps_input.text.split(',') if h.strip()]
@@ -2470,7 +2470,7 @@ class VolkDialogHandler:
             charakter = app.controller.charakter
 
             if name in charakter.voelker:
-                self.show_error(f"Volk '{name}' existiert bereits.")
+                self.show_error(f"Abstammung '{name}' existiert bereits.")
                 return
 
             new_volk = Volk(
@@ -2502,7 +2502,7 @@ class VolkDialogHandler:
 
             selected = self.dialog_content.get_selected_items()
             if not selected:
-                self.show_error("Bitte wähle mindestens ein Volk zum Löschen aus.")
+                self.show_error("Bitte wähle mindestens eine Abstammung zum Löschen aus.")
                 return
 
             app = App.get_running_app()
@@ -2530,7 +2530,7 @@ class VolkDialogHandler:
                     f"{deleted_count} Volk/Völker gelöscht, {skipped_count} übersprungen (aktuell ausgewählt)"
                 )
             elif deleted_count > 0:
-                self._show_success_snackbar(f"{deleted_count} Volk/Völker gelöscht")
+                self._show_success_snackbar(f"{deleted_count} Abstammung(en) gelöscht")
             else:
                 self.show_error(
                     "Kein Volk konnte gelöscht werden.\n"
@@ -2542,7 +2542,7 @@ class VolkDialogHandler:
 
         except Exception as e:
             Logger.error(f"Fehler beim Löschen der Völker: {e}")
-            self.show_error("Fehler beim Löschen der Völker")
+            self.show_error("Fehler beim Löschen der Abstammungen")
 
     def _confirm_delete_volk(self):
         """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
@@ -2578,7 +2578,7 @@ class VolkDialogHandler:
                     f"{deleted_count} Volk/Völker gelöscht, {skipped_count} übersprungen (aktuell ausgewählt)"
                 )
             elif deleted_count > 0:
-                self._show_success_snackbar(f"{deleted_count} Volk/Völker gelöscht")
+                self._show_success_snackbar(f"{deleted_count} Abstammung(en) gelöscht")
             else:
                 self.show_error(
                     "Kein Volk konnte gelöscht werden.\n"
@@ -2590,7 +2590,7 @@ class VolkDialogHandler:
 
         except Exception as e:
             Logger.error(f"Fehler beim Löschen der Völker: {e}")
-            self.show_error("Fehler beim Löschen der Völker")
+            self.show_error("Fehler beim Löschen der Abstammungen")
 
     def _show_delete_confirmation_popup(self, selected_items, item_type, on_confirm):
         """Zeigt separates Bestätigungs-Popup OHNE Checkboxen (Two-Phase Pattern)."""

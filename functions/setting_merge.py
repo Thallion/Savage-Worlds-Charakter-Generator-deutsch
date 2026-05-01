@@ -271,7 +271,7 @@ def calculate_setting_statistics(setting_data: Dict[str, Any]) -> Dict[str, Dict
     stats = {}
     
     categories = [
-        ("voelker", "Völker"),
+        ("voelker", "Abstammungen"),
         ("fertigkeiten", "Fertigkeiten"),
         ("talente", "Talente"),
         ("handicaps", "Handicaps"),
