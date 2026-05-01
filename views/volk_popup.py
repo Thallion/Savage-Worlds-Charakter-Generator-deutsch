@@ -143,7 +143,7 @@ class VolkGeneratorWizard:
         volk_dict = {
             'name': volk.name,
             'beschreibung': '',
-            'eigenarten': getattr(volk, 'eigenarten', [])
+            'eigenarten': volk.effects.get('eigenarten', [])
         }
         self.positive_eigenarten, self.negative_eigenarten = lade_eigenarten_fuer_bearbeitung(volk_dict)
         self.wizard_data['name'] = volk.name
