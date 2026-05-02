@@ -989,6 +989,79 @@
                 "Behindernde Rüstung_jede"
             ]
         },
+        "AH (Hexenmeister)": {
+            "name": "AH (Hexenmeister)",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "Okkultismus W4"
+            ],
+            "beschreibung": "AH (Hexenmeister), Behindernde Rüstung (jede), Vertrauter, Hexerei (1 freie Hexerei aus der Liste). Arkane Fertigkeit: Zaubern. Startet mit 2 Mächten aus der Hexenmeister-Liste. Der Vertraute speichert die Zauber des Patrons; tägliche Kommunikation mit dem Vertrauten erforderlich.",
+            "neue_maechte": 2,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_talente": [
+                "Vertrauter"
+            ],
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "Weitere Hexerei": {
+            "name": "Weitere Hexerei",
+            "kategorie": "Hexenmeister",
+            "rang": "F",
+            "voraussetzungen": [
+                "Hexenmeister"
+            ],
+            "beschreibung": "Der:ie Hexenmeister:in kann eine neue Hexerei auswählen. Kann einmal pro Rang genommen werden. Hexereien (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Starke Hexerei": {
+            "name": "Starke Hexerei",
+            "kategorie": "Hexenmeister",
+            "rang": "V",
+            "voraussetzungen": [
+                "Hexenmeister"
+            ],
+            "beschreibung": "Der:ie Hexenmeister:in kann eine Starke Hexerei auswählen. Kann einmal pro Rang genommen werden. Starke Hexereien (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Arkane Meisterschaft (Hexenmeister)": {
+            "name": "Arkane Meisterschaft (Hexenmeister)",
+            "kategorie": "Hexenmeister",
+            "rang": "H",
+            "voraussetzungen": [
+                "Hexenmeister"
+            ],
+            "beschreibung": "Durch ihren finsteren Patron erschließt die Hexe die Geheimnisse ihrer mystischen Kräfte. Erhält Zugriff auf alle Epischen Machtmodifikatoren ihrer Mächte.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Mächtige Hexerei": {
+            "name": "Mächtige Hexerei",
+            "kategorie": "Hexenmeister",
+            "rang": "L",
+            "voraussetzungen": [
+                "Hexenmeister",
+                "Mindestens zwei Hexenmeister-Vorteile"
+            ],
+            "beschreibung": "Wild Card. Der:ie Hexenmeister:in kann eine Mächtige Hexerei auswählen. Kann einmal pro Rang genommen werden. Mächtige Hexereien (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
         "Bevorzugte Mächte (Zauberer)": {
             "name": "Bevorzugte Mächte (Zauberer)",
             "kategorie": "Zauberer",
@@ -2409,7 +2482,7 @@
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
-                "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
+                "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer, Hexenmeister)"
             ],
             "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
             "neue_maechte": 0,
@@ -5570,6 +5643,18 @@
             "reichweite": "Ver",
             "dauer": "Sofort",
             "beschreibung": "Entzieht Gegner W6 Machtpunkte bei erfolgreichem vergleichendem Wurf",
+            "voraussetzungen": [],
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Magisches Glas": {
+            "name": "Magisches Glas",
+            "rang": "H",
+            "machtpunkte": 5,
+            "reichweite": "Ver",
+            "dauer": "5 Stunden",
+            "beschreibung": "Überträgt die Seele des Wirkers in ein verzaubertes Gefäß (Kristall oder Edelstein). Der Wirker kann zwischen Gefäß und Körper wechseln (Körper wirkt leblos) und versuchen, andere Körper zu besetzen (vergleichender Wurf arkane Fertigkeit vs. Geist). Bei Erfolg wird die Seele des Opfers im Gefäß gefangen. Verstand, Willenskraft, Gesinnung und Vorteile des Wirkers bleiben erhalten; Körperattribute und Wunden stammen vom Wirt.",
             "voraussetzungen": [],
             "ausgewaehlt": false,
             "aktiv": true,
