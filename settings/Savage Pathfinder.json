@@ -317,6 +317,54 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Oreads": {
+            "name": "Oreads",
+            "handicaps": [
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Stark (Stärke W6 statt W4, Maximum W12+1)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Granitene Haut (Felsige Wucherungen gewähren +2 Rüstung)",
+                "Elementarzauberei (Oread-Zauberer mit dem Talent Elementarblut [Erde] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+                "Angeborene Macht: Blitz / Magischer Stein (Willenskraft zum Wirken, 1×/Tag; keine Machtmodifikatoren erlaubt)",
+                "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+                "Alternativfähigkeit – Eisenwuchs: 1×/Tag kann ein berührtes nicht-magisches Eisen- oder Stahlstück zu einem Gegenstand bis 4,5 kg wachsen (10 Minuten); ersetzt Angeborene Macht",
+                "Alternativfähigkeit – Stein im Blut (Schnell): Schnelle Regeneration für 2 Runden wenn durch Säure Erschüttert oder Verwundet (max. 2 Wunden/Tag); ersetzt Stark; schließt Stein im Blut (Langsam) aus",
+                "Alternativfähigkeit – Stein im Blut (Langsam): Langsame Regeneration wenn durch Säure Erschüttert oder Verwundet; ersetzt Elementarzauberei; schließt Stein im Blut (Schnell) aus",
+                "Alternativfähigkeit – Tückische Erde: 1×/Tag kann der Oread eine große Schablone (Reichweite Verstand) in schweres Gelände verwandeln (Erde, Stein oder Sand); Dauer in Minuten je nach Rang: Anfänger 1, Erfahren 2, Veteran 3, Held 4, Legendär 5; ersetzt Granitene Haut"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Terranisch"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+            "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); Haut und Haar in steinigen Tönen (Schwarz, Braun, Grau, Weiß)",
+            "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); manche mit glänzender Obsidian-Haut, Gesteinsvorsprüngen oder kristallinen Haarspitzen",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Stärke": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "auto_handicaps": [
+                    "Langsam_leicht"
+                ],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "granit_haut": true,
+                    "elementarzauberei_erde": true,
+                    "angeborene_macht_erde": true,
+                    "heimischer_aussenseiter": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
@@ -327,6 +375,7 @@
         "Halbork": false,
         "Ifrits": false,
         "Mensch": true,
+        "Oreads": false,
         "Zwerg": false
     },
     "attribute": {
