@@ -597,10 +597,53 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Dhampire": {
+            "name": "Dhampire",
+            "handicaps": [
+                "Lichtempfindlich (-1 auf Eigenschaftswürfe bei Sichterfordernissen im hellen Licht)",
+                "Verringerte Vitalität (-1 Robustheit)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
+                "Untote spüren (Als eingeschränkte Aktion: Untote innerhalb von 20\"/40 Meter erspüren; als eingeschränkte freie Aktion: Anzahl und ungefähre Stärke der Untoten ermitteln)",
+                "Untotenresistenz (Freie Wiederholung beim Widerstand gegen Krankheiten; immun gegen Energieentzug)",
+                "Alternativfähigkeit – Tageskind: Nicht durch Tageslicht beeinträchtigt; verliert Lichtempfindlichkeit; Nachtsicht wird durch Nachtsicht (nur Düster/Dunkel) ersetzt",
+                "Alternativfähigkeit – Fangzähne: Natürliche Waffe Biss, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Untotenresistenz",
+                "Alternativfähigkeit – Vampirische Empathie: Kann mit Fledermäusen, Ratten und Wölfen kommunizieren; freie Wiederholung bei fehlgeschlagenen Überreden-Proben mit diesen Tieren; ersetzt Untote spüren"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110), jedoch mit übernatürlicher Langlebigkeit ähnlich wie Elfen",
+            "groesse_maennlich": "Hochgewachsen und schlank (1,70-2,00m, 60-85kg); unheimlich schöne Züge, verlängerte Eckzähne, oft gespenstische Blässe im Tageslicht",
+            "groesse_weiblich": "Hochgewachsen und schlank (1,65-1,90m, 55-75kg); übernatürlich flüssige Bewegungen; dunkle Haut wirkt manchmal wie ein Bluterguss",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "lichtempfindlich": true,
+                    "untote_spueren": true,
+                    "untotenresistenz": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
         "Aasimars": false,
+        "Dhampire": false,
         "Elf": false,
         "Gnom": false,
         "Halbelf": false,
