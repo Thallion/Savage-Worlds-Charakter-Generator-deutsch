@@ -20,6 +20,7 @@ from kivy.clock import Clock
 from kivy.properties import ObjectProperty, DictProperty
 from kivy.metrics import dp
 import logging
+import time
 
 # Import der ausgelagerten Geschäftslogik
 from functions.volk_funktionen import (
@@ -590,8 +591,18 @@ class VoelkerWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Aktualisieren des Dropdown-Texts: {e}")
 
+    def _volk_btn_bounce(self):
+        """Android Touch-Bounce-Schutz für Volk-Trigger-Buttons (500 ms Fenster)."""
+        now = time.monotonic()
+        if hasattr(self, '_last_volk_btn_time') and (now - self._last_volk_btn_time) < 0.5:
+            return True
+        self._last_volk_btn_time = now
+        return False
+
     def open_add_volk_dialog(self):
         """Öffnet den Dialog zum Erstellen eines neuen Volkes."""
+        if self._volk_btn_bounce():
+            return
         try:
             from services.service_container import service_container
             dialog_service = service_container.get_dialog_service()
@@ -602,6 +613,8 @@ class VoelkerWidget(MDBoxLayout):
 
     def open_edit_volk_dialog(self):
         """Öffnet den Dialog zum Bearbeiten des ausgewählten Volkes."""
+        if self._volk_btn_bounce():
+            return
         try:
             if not self.selected_volk_name:
                 from services.service_container import service_container
@@ -609,7 +622,7 @@ class VoelkerWidget(MDBoxLayout):
                 if dialog_service:
                     dialog_service.show_warning_dialog("Bitte wähle zuerst eine Abstammung aus.")
                 return
-            
+
             from services.service_container import service_container
             dialog_service = service_container.get_dialog_service()
             if dialog_service and hasattr(dialog_service, 'volk_dialog_handler'):
@@ -619,6 +632,8 @@ class VoelkerWidget(MDBoxLayout):
 
     def open_delete_volk_dialog(self):
         """Öffnet den Dialog zum Löschen von Völkern."""
+        if self._volk_btn_bounce():
+            return
         try:
             from services.service_container import service_container
             dialog_service = service_container.get_dialog_service()
