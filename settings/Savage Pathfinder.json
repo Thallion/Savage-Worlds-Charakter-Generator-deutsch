@@ -365,6 +365,377 @@
         },
         "wahlmoeglichkeiten": {}
       }
+    },
+    "Sylphen": {
+        "name": "Sylphen",
+        "handicaps": [
+            "Zerbrechlich (-1 Robustheit)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
+            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+            "Elementarzauberei (Sylph-Zauberer mit dem Talent Elementarblut [Luft] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+            "Federfall (1×/Tag kann der Sylph jeden Schaden durch einen Fall verhindern)",
+            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+            "Alternativfähigkeit – Wie der Wind: Bewegungsweite +2; ersetzt Beweglich",
+            "Alternativfähigkeit – Himmelssprecher: Angeborene Macht Tierfreund mit Geistesreiter (Vögel und andere fliegende Tiere, 1×/Tag); ersetzt Elementarzauberei",
+            "Alternativfähigkeit – Sturm im Blut: Schnelle Regeneration für 2 Runden wenn durch Elektrizität Erschüttert oder Verwundet (max. 2 Wunden/Tag); ersetzt Intelligent"
+        ],
+        "sprachen": [
+            "Gemeinsprache",
+            "Auranisch"
+        ],
+        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); blass und schlank, blaue spiralförmige Markierungen auf der Haut",
+        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); eine leichte Brise begleitet sie stets als Zeichen ihrer elementaren Abstammung",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Geschicklichkeit": 2,
+                "Verstand": 2
+            },
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "auto_handicaps": [],
+            "spezielle_effekte": {
+                "dunkelsicht": true,
+                "federfall": true,
+                "elementarzauberei_luft": true,
+                "heimischer_aussenseiter": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Undinen": {
+        "name": "Undinen",
+        "handicaps": [
+            "Verringerte Stärke (-1 auf alle Stärkeproben)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+            "Elementarzauberei (Undinen-Zauberer mit dem Talent Elementarblut [Wasser] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+            "Anmutige Schwimmer (Können sich im Wasser stets mit ihrer vollen Bewegungsweite bewegen)",
+            "Angeborene Macht: Verheerung / Hydraulischer Stoß (Willenskraft zum Wirken, 1×/Tag; keine Machtmodifikatoren erlaubt)",
+            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+            "Alternativfähigkeit – Säureatem: Angeborene Macht wird Ausbruch (Säureatem) statt Verheerung; modifiziert Angeborene Macht",
+            "Alternativfähigkeit – Hydrierte Vitalität (Schnell): Schnelle Regeneration für 2 Runden wenn mind. 10 Min vollständig in Wasser untergetaucht (max. 2 Wunden/Tag); ersetzt Beweglich; schließt Hydrierte Vitalität (Langsam) aus",
+            "Alternativfähigkeit – Hydrierte Vitalität (Langsam): Langsame Regeneration wenn mind. 10 Min vollständig in Wasser untergetaucht; ersetzt Elementarzauberei; schließt Hydrierte Vitalität (Schnell) aus",
+            "Alternativfähigkeit – Wasserwahrnehmung: Blindwahrnehmung 10\"/20 Meter im Wasser durch Vibrationssinn; ersetzt Dunkelsicht"
+        ],
+        "sprachen": [
+            "Gemeinsprache",
+            "Aquanisch"
+        ],
+        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); Haut in Türkis- bis Meeresgrüntönen, flossartige Ohren, Schwimmhäute an Händen und Füßen",
+        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); Augen immer hellblau, Haar etwas dunkler als die Hautfarbe",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Geschicklichkeit": 2,
+                "Willenskraft": 2,
+                "Stärke": -1
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "auto_handicaps": [],
+            "spezielle_effekte": {
+                "dunkelsicht": true,
+                "anmutige_schwimmer": true,
+                "elementarzauberei_wasser": true,
+                "angeborene_macht_wasser": true,
+                "heimischer_aussenseiter": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Weinranken-Leshy": {
+        "name": "Weinranken-Leshy",
+        "handicaps": [
+            "Größe -1 (Reduzierte Größe und Robustheit um 1)",
+            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert)",
+            "Verringerte Fertigkeiten (Beginnen nicht mit W4 in Allgemeinwissen und Wahrnehmung – diese starten auf W4-2)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+            "Zäh (Konstitution W6 statt W4, Maximum W12+1)",
+            "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
+            "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
+            "Gestalt wandeln (Als eingeschränkte freie Aktion [Willenskraftprobe]: verwandelt sich in eine gesunde kleine Weinrebe oder zurück in die wahre Form)",
+            "Leshypflanze (Typus ist Pflanze statt Humanoid; keine normalen Pflanzenimmunitäten; kann mit Weinreben sprechen)",
+            "Üppiger Ausbruch (Beim Tod: Explosion mit großer Schablone; Pflanzenwesen in der Schablone heilen 1 Wunde; Gebiet wird für 24h zu schwerem Gelände, wenn die Umgebung Weinreben unterstützt)",
+            "Alternativfähigkeit – Weinrebe: 1×/Tag Macht Heilung wirken (Willenskraftprobe); ersetzt Heimlich",
+            "Alternativfähigkeit – Giftig: Als eingeschränkte freie Aktion können die Ranken mit mildem Gift belegt werden; der nächste unbewaffnete Treffer wirkt mildes Gift auf das Ziel; ersetzt Heimlich",
+            "Alternativfähigkeit – Sumpf-Leshy: Gewinnt Aquatisch; Nachtsicht wird durch Dunkelsicht (10\"/20 Meter) ersetzt; ändert Nachtsicht"
+        ],
+        "sprachen": [
+            "Gemeinsprache",
+            "Sylvanisch"
+        ],
+        "altersspanne": "Unbekannt; als Pflanzenwesen kehrt der Geist beim Tod in die Natur zurück und kann einen neuen Körper bewohnen",
+        "groesse_maennlich": "Kleinwüchsig (~60-90cm, 10-20kg); Körper aus verflochtenen Ranken und Blättern, manchmal mit Blüten und Früchten",
+        "groesse_weiblich": "Kleinwüchsig (~60-90cm, 10-20kg); Gesicht aus Blättern mit runden Augen, kleinem Mund, ohne sichtbare Nase",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Willenskraft": 2,
+                "Konstitution": 2
+            },
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": -1,
+            "fertigkeits_startboni": {
+                "Heimlichkeit": 2
+            },
+            "fertigkeits_startmalus": {
+                "Allgemeinwissen": -2,
+                "Wahrnehmung": -2
+            },
+            "auto_talente": [],
+            "auto_handicaps": [
+                "Klein",
+                "Langsam_leicht"
+            ],
+            "spezielle_effekte": {
+                "dunkelsicht": true,
+                "gestalt_wandeln": true,
+                "leshy_pflanze": true,
+                "uppiger_ausbruch": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Aasimars": {
+        "name": "Aasimars",
+        "handicaps": [],
+        "talente": [],
+        "besonderheiten": [
+            "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+            "Diplomatisch (Überreden W6 statt W4, Maximum W12+1)",
+            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+            "Tageslicht (1×/Tag als eingeschränkte freie Aktion: geringes Licht als Angeborene Macht wirken)",
+            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+            "Alternativfähigkeit – Himmlischer Kreuzritter: Gewinnt Bevorzugter Feind (Außenseiter) wie das Waldläufer-Klassentalent; ersetzt Diplomatisch",
+            "Alternativfähigkeit – Erhöhter Widerstand: Gewinnt das Talent Arkaner Widerstand auch ohne Voraussetzungen; ersetzt Lebhaft",
+            "Alternativfähigkeit – Heiligenschein: Tageslicht erzeugt einen heiligenscheinförmigen Lichtkreis um den Kopf; bei aktivem Heiligenschein freie Wiederholung bei Testen gegen böse Kreaturen; ersetzt Dunkelsicht"
+        ],
+        "sprachen": [
+            "Gemeinsprache",
+            "Himmlisch"
+        ],
+        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); häufig metallisch glänzendes Haar, juwelenförmige Augen oder schimmernder Teint",
+        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); manche besitzen einen leuchtenden goldenen Heiligenschein als sichtbares Zeichen ihrer himmlischen Abstammung",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Willenskraft": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {
+                "Überreden": 2
+            },
+            "auto_talente": [],
+            "auto_handicaps": [],
+            "spezielle_effekte": {
+                "dunkelsicht": true,
+                "tageslicht": true,
+                "heimischer_aussenseiter": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Katzenfolk": {
+        "name": "Katzenfolk",
+        "handicaps": [],
+        "talente": [],
+        "besonderheiten": [
+            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+            "Katzenglück (Freie Wiederholung bei fehlgeschlagenen Ausweichproben)",
+            "Sprinter (Sprintwürfel um einen Typ erhöht)",
+            "Alternativfähigkeit – Katzenkrallen: Natürliche Waffe, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Beweglich",
+            "Alternativfähigkeit – Sicherer Fall: Landet stets auf den Füßen; reduziert Fallschaden um 1W6+1; ersetzt Sprinter",
+            "Alternativfähigkeit – Geruchssinn: Ignoriert bis zu 4 Punkte Abzüge bei Angriffen gegen durch magische Dunkelheit, Unsichtbarkeit o.ä. verborgene Gegner; ersetzt Nachtsicht"
+        ],
+        "sprachen": [
+            "Gemeinsprache",
+            "Katzenfolk"
+        ],
+        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–100)",
+        "groesse_maennlich": "Zwischen Zwerg und Mensch (~1,30-1,65m, 45-65kg); schlanker Körper mit feinem Fell, Schlitzpupillen, Katzenohren und schlankem Schwanz",
+        "groesse_weiblich": "Zwischen Zwerg und Mensch (~1,25-1,60m, 40-58kg); einziehbare Krallen; Fell-, Haar- und Augenfarbe stark variierend",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Geschicklichkeit": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "auto_handicaps": [],
+            "spezielle_effekte": {
+                "nachtsicht": true,
+                "katzenglueck": true,
+                "sprinter": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Dhampire": {
+        "name": "Dhampire",
+        "handicaps": [
+            "Lichtempfindlich (-1 auf Eigenschaftswürfe bei Sichterfordernissen im hellen Licht)",
+            "Verringerte Vitalität (-1 Robustheit)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
+            "Untote spüren (Als eingeschränkte Aktion: Untote innerhalb von 20\"/40 Meter erspüren; als eingeschränkte freie Aktion: Anzahl und ungefähre Stärke der Untoten ermitteln)",
+            "Untotenresistenz (Freie Wiederholung beim Widerstand gegen Krankheiten; immun gegen Energieentzug)",
+            "Alternativfähigkeit – Tageskind: Nicht durch Tageslicht beeinträchtigt; verliert Lichtempfindlichkeit; Nachtsicht wird durch Nachtsicht (nur Düster/Dunkel) ersetzt",
+            "Alternativfähigkeit – Fangzähne: Natürliche Waffe Biss, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Untotenresistenz",
+            "Alternativfähigkeit – Vampirische Empathie: Kann mit Fledermäusen, Ratten und Wölfen kommunizieren; freie Wiederholung bei fehlgeschlagenen Überreden-Proben mit diesen Tieren; ersetzt Untote spüren"
+        ],
+        "sprachen": [
+            "Gemeinsprache"
+        ],
+        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110), jedoch mit übernatürlicher Langlebigkeit ähnlich wie Elfen",
+        "groesse_maennlich": "Hochgewachsen und schlank (1,70-2,00m, 60-85kg); unheimlich schöne Züge, verlängerte Eckzähne, oft gespenstische Blässe im Tageslicht",
+        "groesse_weiblich": "Hochgewachsen und schlank (1,65-1,90m, 55-75kg); übernatürlich flüssige Bewegungen; dunkle Haut wirkt manchmal wie ein Bluterguss",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Geschicklichkeit": 2
+            },
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "auto_talente": [],
+            "auto_handicaps": [],
+            "spezielle_effekte": {
+                "dunkelsicht": true,
+                "lichtempfindlich": true,
+                "untote_spueren": true,
+                "untotenresistenz": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Tieflinge": {
+        "name": "Tieflinge",
+        "handicaps": [
+            "Außenseiter (Leicht) (-2 auf alle Überreden-Proben; werden von anderen oft belächelt oder gering geschätzt)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+            "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
+            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+            "Dunkelheit (1×/Tag als eingeschränkte freie Aktion: geringes Dunkel als Angeborene Macht wirken)",
+            "Teuflische Zauberei (Tieflinge-Zauberer mit Abgrundsblut oder Infernalblut reduzieren die Ranganforderung für Fortgeschrittenes Blut auf Veteran)",
+            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+            "Alternativfähigkeit – Teuflischer Sprinter: Gewinnt das Talent Schnell (Fleet-Footed); ersetzt Intelligent",
+            "Alternativfähigkeit – Greifbarer Schwanz: Kann mit dem Schwanz verstaute Gegenstände als freie Aktion hervorholen; ersetzt Teuflische Zauberei",
+            "Alternativfähigkeit – Verkümmerte Flügel: Fliegen mit Bewegungsweite 6; am Ende jeder Flug-Runde Konstitutionsprobe oder Erschöpfung; ersetzt Teuflische Zauberei"
+        ],
+        "sprachen": [
+            "Abyssalisch",
+            "Gemeinsprache",
+            "Infernalisch"
+        ],
+        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); individuelle teuflische Merkmale wie Hörner, gezackter Schwanz, unnatürlich gefärbte Augen, Klauen oder kleine Flügel",
+        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); kein Tieflinge gleicht dem anderen – von seltsam schön bis erschreckend fremdländisch",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Geschicklichkeit": 2,
+                "Verstand": 2
+            },
+            "robustheit_bonus": 0,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {},
+            "fertigkeits_modifier_boni": {
+                "Überreden": -2
+            },
+            "auto_talente": [],
+            "auto_handicaps": [],
+            "spezielle_effekte": {
+                "dunkelsicht": true,
+                "dunkelheit_macht": true,
+                "teuflische_zauberei": true,
+                "heimischer_aussenseiter": true
+            },
+            "wahlmoeglichkeiten": {}
+        }
+    },
+    "Goblin": {
+        "name": "Goblin",
+        "handicaps": [
+            "Größe -1 (Reduzierte Größe und Robustheit um 1)",
+            "Außenseiter (Schwer) (-2 auf alle Überreden-Proben; werden von anderen oft gemobbt)"
+        ],
+        "talente": [],
+        "besonderheiten": [
+            "Flink (Geschicklichkeit W8 statt W4, Maximum W12+2)",
+            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+            "Fähiger Reiter (Beginnt mit W4 in Reiten)",
+            "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
+            "Alternativfähigkeit – Alles essen: Freie Wiederholung bei Überleben-Proben zur Nahrungssuche; +2 bei Konstitutionsproben gegen toxische Substanzen; ersetzt Fähiger Reiter",
+            "Alternativfähigkeit – Harter Schädel, große Zähne: Natürliche Waffe Biss, Stärke+W4 Schaden; ersetzt Heimlich",
+            "Alternativfähigkeit – Übergroße Ohren: Wahrnehmung W6 statt W4, Maximum W12+1; ersetzt Fähiger Reiter"
+        ],
+        "sprachen": [
+            "Gemeinsprache",
+            "Goblinisch"
+        ],
+        "altersspanne": "Jugend mit 3, Erwachsen mit 7–8, maximales Alter 50+ (selten über 20 ohne Beschützer)",
+        "groesse_maennlich": "Klein (~85-100cm, 17-22kg); knochige Gestalt, übergroßer kahler Schädel, riesige Ohren, kleine rote oder gelbe Augen",
+        "groesse_weiblich": "Klein (~80-95cm, 15-20kg); Hautfarbe variiert: Grün, Grau, Blau, Schwarz oder Blassgrau; riesiges Maul mit zackigen Zähnen",
+        "aktiv": true,
+        "custom": false,
+        "effects": {
+            "attribute_bonuses": {
+                "Geschicklichkeit": 4
+            },
+            "robustheit_bonus": -1,
+            "bewegungsweite_bonus": 0,
+            "fertigkeits_startboni": {
+                "Heimlichkeit": 2,
+                "Reiten": 2
+            },
+            "fertigkeits_modifier_boni": {
+                "Überreden": -2
+            },
+            "auto_talente": [],
+            "auto_handicaps": [
+                "Klein"
+            ],
+            "spezielle_effekte": {
+                "dunkelsicht": true
+            },
+            "wahlmoeglichkeiten": {}
+      }
     }
   },
   "voelker_selected": {
@@ -10152,7 +10523,7 @@
     "verrat": false,
     "schwierige_heilung": false,
     "freizeit": false,
-    "riesige_feinde,": false,
+    "riesige_feinde": false,
     "schurkische_entschlossenheit": false,
     "dynamischer_rueckschlag": false,
     "entschlossenheit": false,
