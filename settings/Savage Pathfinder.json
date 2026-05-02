@@ -687,6 +687,55 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Tieflinge": {
+            "name": "Tieflinge",
+            "handicaps": [
+                "Außenseiter (Leicht) (-2 auf alle Überreden-Proben; werden von anderen oft belächelt oder gering geschätzt)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Dunkelheit (1×/Tag als eingeschränkte freie Aktion: geringes Dunkel als Angeborene Macht wirken)",
+                "Teuflische Zauberei (Tieflinge-Zauberer mit Abgrundsblut oder Infernalblut reduzieren die Ranganforderung für Fortgeschrittenes Blut auf Veteran)",
+                "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+                "Alternativfähigkeit – Teuflischer Sprinter: Gewinnt das Talent Schnell (Fleet-Footed); ersetzt Intelligent",
+                "Alternativfähigkeit – Greifbarer Schwanz: Kann mit dem Schwanz verstaute Gegenstände als freie Aktion hervorholen; ersetzt Teuflische Zauberei",
+                "Alternativfähigkeit – Verkümmerte Flügel: Fliegen mit Bewegungsweite 6; am Ende jeder Flug-Runde Konstitutionsprobe oder Erschöpfung; ersetzt Teuflische Zauberei"
+            ],
+            "sprachen": [
+                "Abyssalisch",
+                "Gemeinsprache",
+                "Infernalisch"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+            "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); individuelle teuflische Merkmale wie Hörner, gezackter Schwanz, unnatürlich gefärbte Augen, Klauen oder kleine Flügel",
+            "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); kein Tieflinge gleicht dem anderen – von seltsam schön bis erschreckend fremdländisch",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2,
+                    "Verstand": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "fertigkeits_modifier_boni": {
+                    "Überreden": -2
+                },
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "dunkelheit_macht": true,
+                    "teuflische_zauberei": true,
+                    "heimischer_aussenseiter": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
@@ -703,6 +752,7 @@
         "Mensch": true,
         "Oreads": false,
         "Sylphen": false,
+        "Tieflinge": false,
         "Undinen": false,
         "Weinranken-Leshy": false,
         "Zwerg": false
