@@ -459,6 +459,63 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Weinranken-Leshy": {
+            "name": "Weinranken-Leshy",
+            "handicaps": [
+                "Größe -1 (Reduzierte Größe und Robustheit um 1)",
+                "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert)",
+                "Verringerte Fertigkeiten (Beginnen nicht mit W4 in Allgemeinwissen und Wahrnehmung – diese starten auf W4-2)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+                "Zäh (Konstitution W6 statt W4, Maximum W12+1)",
+                "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
+                "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
+                "Gestalt wandeln (Als eingeschränkte freie Aktion [Willenskraftprobe]: verwandelt sich in eine gesunde kleine Weinrebe oder zurück in die wahre Form)",
+                "Leshypflanze (Typus ist Pflanze statt Humanoid; keine normalen Pflanzenimmunitäten; kann mit Weinreben sprechen)",
+                "Üppiger Ausbruch (Beim Tod: Explosion mit großer Schablone; Pflanzenwesen in der Schablone heilen 1 Wunde; Gebiet wird für 24h zu schwerem Gelände, wenn die Umgebung Weinreben unterstützt)",
+                "Alternativfähigkeit – Weinrebe: 1×/Tag Macht Heilung wirken (Willenskraftprobe); ersetzt Heimlich",
+                "Alternativfähigkeit – Giftig: Als eingeschränkte freie Aktion können die Ranken mit mildem Gift belegt werden; der nächste unbewaffnete Treffer wirkt mildes Gift auf das Ziel; ersetzt Heimlich",
+                "Alternativfähigkeit – Sumpf-Leshy: Gewinnt Aquatisch; Nachtsicht wird durch Dunkelsicht (10\"/20 Meter) ersetzt; ändert Nachtsicht"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Sylvanisch"
+            ],
+            "altersspanne": "Unbekannt; als Pflanzenwesen kehrt der Geist beim Tod in die Natur zurück und kann einen neuen Körper bewohnen",
+            "groesse_maennlich": "Kleinwüchsig (~60-90cm, 10-20kg); Körper aus verflochtenen Ranken und Blättern, manchmal mit Blüten und Früchten",
+            "groesse_weiblich": "Kleinwüchsig (~60-90cm, 10-20kg); Gesicht aus Blättern mit runden Augen, kleinem Mund, ohne sichtbare Nase",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Willenskraft": 2,
+                    "Konstitution": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": -1,
+                "fertigkeits_startboni": {
+                    "Heimlichkeit": 2
+                },
+                "fertigkeits_startmalus": {
+                    "Allgemeinwissen": -2,
+                    "Wahrnehmung": -2
+                },
+                "auto_talente": [],
+                "auto_handicaps": [
+                    "Klein",
+                    "Langsam_leicht"
+                ],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "gestalt_wandeln": true,
+                    "leshy_pflanze": true,
+                    "uppiger_ausbruch": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
@@ -472,6 +529,7 @@
         "Oreads": false,
         "Sylphen": false,
         "Undinen": false,
+        "Weinranken-Leshy": false,
         "Zwerg": false
     },
     "attribute": {
