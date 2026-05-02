@@ -454,6 +454,8 @@ class VolkGeneratorWizard:
 
         config = get_merged_eigenarten_config()
         eigenarten = config.get(eigenart_typ, [])
+        # Alphabetisch nach Name sortieren (case-insensitive)
+        eigenarten = sorted(eigenarten, key=lambda e: e.get('name', e.get('id', '')).lower())
         aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
         title = "Positive Abstammungseigenarten" if eigenart_typ == 'positive' else "Negative Abstammungseigenarten"
 
@@ -471,6 +473,11 @@ class VolkGeneratorWizard:
         create_btn.bind(on_release=lambda x: self._show_create_eigenart_dialog(eigenart_typ))
         content.add_widget(create_btn)
 
+        # Suchfeld zum Filtern der Eigenarten
+        search_field = MDTextField(mode="outlined", size_hint_y=None, height=dp(48))
+        search_field.add_widget(MDTextFieldHintText(text="Eigenart suchen..."))
+        content.add_widget(search_field)
+
         list_layout = MDList(size_hint_y=None)
         list_layout.bind(minimum_height=list_layout.setter('height'))
         if _mobile:
@@ -479,136 +486,150 @@ class VolkGeneratorWizard:
         # WIDGET-TRACKING: Stepper-Widgets für direkte Updates
         self._stepper_widgets = {}
 
-        for eigenart in eigenarten:
-            eigenart_id = eigenart.get('id')
-            aktuelle_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
-            max_auswahl = eigenart.get('max_auswahl', 1)
+        def _build_eigenart_list(filter_text=""):
+            list_layout.clear_widgets()
+            self._stepper_widgets = {}
+            filter_lower = filter_text.strip().lower()
 
-            voraussetzung = eigenart.get('voraussetzung')
-            if voraussetzung == 'setting_hat_superkraefte':
-                try:
-                    from kivymd.app import MDApp
-                    app = MDApp.get_running_app()
-                    if app and hasattr(app, 'controller') and app.controller:
-                        setting_name = getattr(app.controller.charakter, 'setting_name', '')
-                        from functions.superkraft_funktionen import ist_superkraefte_setting
-                        if not ist_superkraefte_setting(setting_name):
-                            continue
-                except Exception:
-                    pass
+            for eigenart in eigenarten:
+                if filter_lower:
+                    name_lower = eigenart.get('name', eigenart.get('id', '')).lower()
+                    beschreibung_lower = (eigenart.get('beschreibung') or '').lower()
+                    if filter_lower not in name_lower and filter_lower not in beschreibung_lower:
+                        continue
 
-            stufen_bereich = stufen_kosten_bereich(eigenart)
-            if stufen_bereich:
-                min_k, max_k = stufen_bereich
-                if min_k == max_k:
-                    kosten_text = f" [{min_k} EP]"
+                eigenart_id = eigenart.get('id')
+                aktuelle_anzahl = sum(1 for e in aktuelle_auswahl if e.get('id') == eigenart_id)
+                max_auswahl = eigenart.get('max_auswahl', 1)
+
+                voraussetzung = eigenart.get('voraussetzung')
+                if voraussetzung == 'setting_hat_superkraefte':
+                    try:
+                        from kivymd.app import MDApp
+                        app = MDApp.get_running_app()
+                        if app and hasattr(app, 'controller') and app.controller:
+                            setting_name = getattr(app.controller.charakter, 'setting_name', '')
+                            from functions.superkraft_funktionen import ist_superkraefte_setting
+                            if not ist_superkraefte_setting(setting_name):
+                                continue
+                    except Exception:
+                        pass
+
+                stufen_bereich = stufen_kosten_bereich(eigenart)
+                if stufen_bereich:
+                    min_k, max_k = stufen_bereich
+                    if min_k == max_k:
+                        kosten_text = f" [{min_k} EP]"
+                    else:
+                        kosten_text = f" [{min_k}–{max_k} EP]"
                 else:
-                    kosten_text = f" [{min_k}–{max_k} EP]"
-            else:
-                kosten = eigenart.get('kosten', 2)
-                kosten_text = f" [{kosten} EP]"
+                    kosten = eigenart.get('kosten', 2)
+                    kosten_text = f" [{kosten} EP]"
 
-            if max_auswahl == 0:
-                max_text = " (U)"
-            elif max_auswahl > 1:
-                max_text = f" ({aktuelle_anzahl}/{max_auswahl})"
-            else:
-                max_text = ""
-            if eigenart.get('custom'):
-                max_text += " [Eigene]"
+                if max_auswahl == 0:
+                    max_text = " (U)"
+                elif max_auswahl > 1:
+                    max_text = f" ({aktuelle_anzahl}/{max_auswahl})"
+                else:
+                    max_text = ""
+                if eigenart.get('custom'):
+                    max_text += " [Eigene]"
 
-            list_item = MDListItem(size_hint_y=None, height=dp(56))
-            list_item.add_widget(MDListItemHeadlineText(
-                text=f"{eigenart.get('name', eigenart_id)}{kosten_text}{max_text}"
-            ))
-            if eigenart.get('beschreibung'):
-                list_item.add_widget(MDListItemSupportingText(
-                    text=eigenart.get('beschreibung', '')
+                list_item = MDListItem(size_hint_y=None, height=dp(56))
+                list_item.add_widget(MDListItemHeadlineText(
+                    text=f"{eigenart.get('name', eigenart_id)}{kosten_text}{max_text}"
                 ))
+                if eigenart.get('beschreibung'):
+                    list_item.add_widget(MDListItemSupportingText(
+                        text=eigenart.get('beschreibung', '')
+                    ))
 
-            if max_auswahl == 1:
-                checkbox = MDListItemTrailingCheckbox(active=aktuelle_anzahl > 0)
-                cb = checkbox
-                e_id = eigenart_id
-                e_typ = eigenart_typ
-                checkbox.bind(on_release=lambda x, cb=cb, eid=e_id, et=e_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
+                if max_auswahl == 1:
+                    checkbox = MDListItemTrailingCheckbox(active=aktuelle_anzahl > 0)
+                    cb = checkbox
+                    e_id = eigenart_id
+                    e_typ = eigenart_typ
+                    checkbox.bind(on_release=lambda x, cb=cb, eid=e_id, et=e_typ: self._on_eigenart_checkbox_clicked(eid, et, cb))
 
-                if eigenart.get('custom') and aktuelle_anzahl == 0:
-                    from kivymd.uix.button import MDIconButton
-                    delete_btn = MDIconButton(
-                        icon="delete",
-                        style="tonal",
+                    if eigenart.get('custom') and aktuelle_anzahl == 0:
+                        from kivymd.uix.button import MDIconButton
+                        delete_btn = MDIconButton(
+                            icon="delete",
+                            style="tonal",
+                            size_hint=(None, None),
+                            size=(dp(32), dp(32)),
+                            pos_hint={"center_y": 0.5}
+                        )
+                        del_id = eigenart_id
+                        del_typ = eigenart_typ
+                        delete_btn.bind(on_release=lambda x, did=del_id, dt=del_typ: self._delete_custom_eigenart(did, dt))
+                        list_item.add_widget(delete_btn)
+
+                    list_item.add_widget(checkbox)
+                else:
+                    minus_btn = Button(
+                        text="-",
+                        font_size="18sp",
                         size_hint=(None, None),
-                        size=(dp(32), dp(32)),
-                        pos_hint={"center_y": 0.5}
+                        size=(dp(36), dp(36)),
+                        pos_hint={"center_y": 0.5},
+                        background_normal='',
+                        background_down='',
+                        background_color=(0.4, 0.4, 0.4, 1) if aktuelle_anzahl == 0 else (0.2, 0.5, 0.8, 1),
+                        disabled=aktuelle_anzahl == 0,
+                        disabled_color=(0.6, 0.6, 0.6, 1),
+                        on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_minus(eid, et)
                     )
-                    del_id = eigenart_id
-                    del_typ = eigenart_typ
-                    delete_btn.bind(on_release=lambda x, did=del_id, dt=del_typ: self._delete_custom_eigenart(did, dt))
-                    list_item.add_widget(delete_btn)
 
-                list_item.add_widget(checkbox)
-            else:
-                minus_btn = Button(
-                    text="-",
-                    font_size="18sp",
-                    size_hint=(None, None),
-                    size=(dp(36), dp(36)),
-                    pos_hint={"center_y": 0.5},
-                    background_normal='',
-                    background_down='',
-                    background_color=(0.4, 0.4, 0.4, 1) if aktuelle_anzahl == 0 else (0.2, 0.5, 0.8, 1),
-                    disabled=aktuelle_anzahl == 0,
-                    disabled_color=(0.6, 0.6, 0.6, 1),
-                    on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_minus(eid, et)
-                )
+                    count_label = MDLabel(
+                        text=str(aktuelle_anzahl),
+                        size_hint=(None, None),
+                        size=(dp(24), dp(24)),
+                        pos_hint={"center_y": 0.5},
+                        halign="center"
+                    )
 
-                count_label = MDLabel(
-                    text=str(aktuelle_anzahl),
-                    size_hint=(None, None),
-                    size=(dp(24), dp(24)),
-                    pos_hint={"center_y": 0.5},
-                    halign="center"
-                )
+                    plus_btn = Button(
+                        text="+",
+                        font_size="18sp",
+                        size_hint=(None, None),
+                        size=(dp(36), dp(36)),
+                        pos_hint={"center_y": 0.5},
+                        background_normal='',
+                        background_down='',
+                        background_color=(0.4, 0.4, 0.4, 1) if (max_auswahl != 0 and aktuelle_anzahl >= max_auswahl) else (0.2, 0.7, 0.3, 1),
+                        disabled=(max_auswahl != 0 and aktuelle_anzahl >= max_auswahl),
+                        disabled_color=(0.6, 0.6, 0.6, 1),
+                        on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_plus(eid, et)
+                    )
 
-                plus_btn = Button(
-                    text="+",
-                    font_size="18sp",
-                    size_hint=(None, None),
-                    size=(dp(36), dp(36)),
-                    pos_hint={"center_y": 0.5},
-                    background_normal='',
-                    background_down='',
-                    background_color=(0.4, 0.4, 0.4, 1) if (max_auswahl != 0 and aktuelle_anzahl >= max_auswahl) else (0.2, 0.7, 0.3, 1),
-                    disabled=(max_auswahl != 0 and aktuelle_anzahl >= max_auswahl),
-                    disabled_color=(0.6, 0.6, 0.6, 1),
-                    on_release=lambda x, eid=eigenart_id, et=eigenart_typ: self._on_stepper_plus(eid, et)
-                )
+                    stepper_box = MDBoxLayout(
+                        orientation="horizontal",
+                        size_hint=(None, None),
+                        size=(dp(100), dp(36)),
+                        pos_hint={"center_y": 0.5},
+                        spacing=dp(4)
+                    )
+                    stepper_box.add_widget(minus_btn)
+                    stepper_box.add_widget(count_label)
+                    stepper_box.add_widget(plus_btn)
 
-                stepper_box = MDBoxLayout(
-                    orientation="horizontal",
-                    size_hint=(None, None),
-                    size=(dp(100), dp(36)),
-                    pos_hint={"center_y": 0.5},
-                    spacing=dp(4)
-                )
-                stepper_box.add_widget(minus_btn)
-                stepper_box.add_widget(count_label)
-                stepper_box.add_widget(plus_btn)
+                    list_item.add_widget(stepper_box)
 
-                list_item.add_widget(stepper_box)
+                    # TRACKING: Stepper-Widgets für späteres Update speichern
+                    self._stepper_widgets[eigenart_id] = {
+                        'minus': minus_btn,
+                        'count': count_label,
+                        'plus': plus_btn,
+                        'box': stepper_box,
+                        'item': list_item,
+                        'max_auswahl': max_auswahl
+                    }
 
-                # TRACKING: Stepper-Widgets für späteres Update speichern
-                self._stepper_widgets[eigenart_id] = {
-                    'minus': minus_btn,
-                    'count': count_label,
-                    'plus': plus_btn,
-                    'box': stepper_box,
-                    'item': list_item,
-                    'max_auswahl': max_auswahl
-                }
+                list_layout.add_widget(list_item)
 
-            list_layout.add_widget(list_item)
+        _build_eigenart_list("")
+        search_field.bind(text=lambda inst, val: _build_eigenart_list(val))
 
         scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8) if _mobile else dp(4))
         if _mobile:
