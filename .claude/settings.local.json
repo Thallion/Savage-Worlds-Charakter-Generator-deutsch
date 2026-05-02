@@ -100,7 +100,8 @@
       "Bash(git log:*)",
       "Read(//home/jean/.claude/**)",
       "Skill(template-from-screenshot)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(awk '/^  \"handicaps\": {/,/^  }/' \"settings/Savage Pathfinder.json\")"
     ],
     "deny": []
   }

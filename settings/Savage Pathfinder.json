@@ -35,6 +35,9 @@
           "Wahrnehmung": 2
         },
         "auto_talente": [],
+        "auto_handicaps": [
+          "Schlank"
+        ],
         "spezielle_effekte": {
           "elfenmagie": true,
           "nachtsicht": true,
@@ -79,7 +82,10 @@
         "auto_talente": [],
         "auto_handicaps": [
           "Klein",
-          "Langsam_leicht"
+          "Langsam_leicht",
+          "Größe -1 (Reduzierte Robustheit)",
+          "Verringerte Bewegungsweite (Typ)",
+          "Zwanghaft"
         ],
         "spezielle_effekte": {
           "gnomenmagie": true,
@@ -162,7 +168,9 @@
         ],
         "auto_handicaps": [
           "Klein",
-          "Langsam_leicht"
+          "Langsam_leicht",
+          "Größe -1 (Reduzierte Robustheit)",
+          "Verringerte Bewegungsweite (Typ)"
         ],
         "spezielle_effekte": {
           "geschaerfte_sinne": true
@@ -266,7 +274,8 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Langsam_leicht"
+          "Langsam_leicht",
+          "Verringerte Bewegungsweite (Schritt)"
         ],
         "spezielle_effekte": {
           "dunkelsicht": true,
@@ -354,7 +363,8 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Langsam_leicht"
+          "Langsam_leicht",
+          "Verringerte Bewegungsweite (Schritt)"
         ],
         "spezielle_effekte": {
           "dunkelsicht": true,
@@ -401,7 +411,9 @@
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
             "auto_talente": [],
-            "auto_handicaps": [],
+            "auto_handicaps": [
+                "Zerbrechlich"
+            ],
             "spezielle_effekte": {
                 "dunkelsicht": true,
                 "federfall": true,
@@ -449,7 +461,9 @@
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
             "auto_talente": [],
-            "auto_handicaps": [],
+            "auto_handicaps": [
+                "Verringerte Stärke"
+            ],
             "spezielle_effekte": {
                 "dunkelsicht": true,
                 "anmutige_schwimmer": true,
@@ -506,7 +520,10 @@
             "auto_talente": [],
             "auto_handicaps": [
                 "Klein",
-                "Langsam_leicht"
+                "Langsam_leicht",
+                "Größe -1 (Reduzierte Größe und Robustheit)",
+                "Verringerte Bewegungsweite (Schritt)",
+                "Verringerte Fertigkeiten"
             ],
             "spezielle_effekte": {
                 "dunkelsicht": true,
@@ -630,7 +647,10 @@
             "bewegungsweite_bonus": 0,
             "fertigkeits_startboni": {},
             "auto_talente": [],
-            "auto_handicaps": [],
+            "auto_handicaps": [
+                "Lichtempfindlich",
+                "Verringerte Vitalität"
+            ],
             "spezielle_effekte": {
                 "dunkelsicht": true,
                 "lichtempfindlich": true,
@@ -643,7 +663,7 @@
     "Tieflinge": {
         "name": "Tieflinge",
         "handicaps": [
-            "Außenseiter (Leicht) (-2 auf alle Überreden-Proben; werden von anderen oft belächelt oder gering geschätzt)"
+          "Außenseiter (leicht, -2 auf Überredenproben, werden oft abgelehnt oder verspottet)"
         ],
         "talente": [],
         "besonderheiten": [
@@ -679,7 +699,7 @@
                 "Überreden": -2
             },
             "auto_talente": [],
-            "auto_handicaps": [],
+            "auto_handicaps": ["Außenseiter_leicht"],
             "spezielle_effekte": {
                 "dunkelsicht": true,
                 "dunkelheit_macht": true,
@@ -729,7 +749,8 @@
             },
             "auto_talente": [],
             "auto_handicaps": [
-                "Klein"
+                "Klein",
+                "Größe -1 (Reduzierte Größe und Robustheit)"
             ],
             "spezielle_effekte": {
                 "dunkelsicht": true
@@ -5840,6 +5861,105 @@
       "stufe": "schwer",
       "punkte": 2,
       "beschreibung": "Der Held glaubt, dass er alles tun kann.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Schlank": {
+      "name": "Schlank",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 Robustheit, -1 auf Konstitutionsproben",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Größe -1 (Reduzierte Robustheit)": {
+      "name": "Größe -1 (Reduzierte Robustheit)",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Reduzierte Robustheit um 1",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Größe -1 (Reduzierte Größe und Robustheit)": {
+      "name": "Größe -1 (Reduzierte Größe und Robustheit)",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Reduzierte Größe und Robustheit um 1",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verringerte Bewegungsweite (Typ)": {
+      "name": "Verringerte Bewegungsweite (Typ)",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 Bewegungsweite, Sprintwürfel um einen Typ reduziert",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verringerte Bewegungsweite (Schritt)": {
+      "name": "Verringerte Bewegungsweite (Schritt)",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Zwanghaft": {
+      "name": "Zwanghaft",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Beginnt mit einer verstandsbasierten Fertigkeit auf W4",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Zerbrechlich": {
+      "name": "Zerbrechlich",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 Robustheit",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verringerte Stärke": {
+      "name": "Verringerte Stärke",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 auf alle Stärkeproben",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verringerte Fertigkeiten": {
+      "name": "Verringerte Fertigkeiten",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Beginnen nicht mit W4 in Allgemeinwissen und Wahrnehmung – diese starten auf W4-2",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Lichtempfindlich": {
+      "name": "Lichtempfindlich",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 auf Eigenschaftswürfe bei Sichterfordernissen im hellen Licht",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Verringerte Vitalität": {
+      "name": "Verringerte Vitalität",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 Robustheit",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
