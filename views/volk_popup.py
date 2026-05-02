@@ -319,7 +319,7 @@ class VolkGeneratorWizard:
             theme_text_color="Primary",
             bold=True,
             size_hint_y=None,
-            height=dp(30)
+            adaptive_height=True
         )
         layout.add_widget(label)
 
@@ -337,12 +337,13 @@ class VolkGeneratorWizard:
             text=punkte_text,
             theme_text_color="Secondary",
             size_hint_y=None,
-            height=dp(24)
+            adaptive_height=True
         )
         layout.add_widget(punkte_label)
 
+        btn_label = "Eigenarten auswählen..." if _mobile else f"{title} auswählen..."
         btn = MDButton(style="tonal", size_hint_y=None, height=dp(48))
-        btn.add_widget(MDButtonText(text=f"{title} auswählen..."))
+        btn.add_widget(MDButtonText(text=btn_label))
         btn.bind(on_release=lambda x: self._show_eigenarten_popup(eigenart_typ))
         layout.add_widget(btn)
 
@@ -357,12 +358,13 @@ class VolkGeneratorWizard:
             )
             layout.add_widget(items_label)
 
+            row_height = dp(48) if _mobile else dp(42)
             items_scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(4))
             items_content = MDBoxLayout(
                 orientation="vertical",
                 spacing=dp(6),
                 size_hint_y=None,
-                height=dp(len(auswahl) * dp(42))
+                height=len(auswahl) * row_height
             )
             items_content.bind(minimum_height=items_content.setter('height'))
 
@@ -383,7 +385,7 @@ class VolkGeneratorWizard:
             orientation="horizontal",
             spacing=dp(8),
             size_hint_y=None,
-            height=dp(36),
+            height=dp(48) if _mobile else dp(36),
             padding=(dp(4), 0, 0, 0)
         )
 
@@ -435,6 +437,10 @@ class VolkGeneratorWizard:
 
     def _on_wizard_remove_eigenart(self, eigenart, eigenart_typ):
         """Entfernt eine einzelne Eigenart-Instanz aus dem Wizard."""
+        now = time.monotonic()
+        if hasattr(self, '_last_remove_time') and (now - self._last_remove_time) < 0.5:
+            return
+        self._last_remove_time = now
         liste = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
         if eigenart in liste:
             liste.remove(eigenart)
@@ -985,6 +991,9 @@ class VolkGeneratorWizard:
         """Handler für Checkbox-Klick mit Debounce."""
         now = time.monotonic()
         if hasattr(self, '_last_eigenart_toggle_time') and (now - self._last_eigenart_toggle_time) < 0.5:
+            aktuelle_auswahl = self.positive_eigenarten if eigenart_typ == 'positive' else self.negative_eigenarten
+            correct_state = eigenart_id in [e.get('id') for e in aktuelle_auswahl]
+            Clock.schedule_once(lambda dt, cb=checkbox, s=correct_state: setattr(cb, 'active', s), 0)
             return
         self._last_eigenart_toggle_time = now
         self._toggle_eigenart(eigenart_id, eigenart_typ, checkbox.active, checkbox=checkbox)
