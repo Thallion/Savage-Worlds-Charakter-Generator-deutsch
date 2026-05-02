@@ -365,6 +365,51 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Sylphen": {
+            "name": "Sylphen",
+            "handicaps": [
+                "Zerbrechlich (-1 Robustheit)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Elementarzauberei (Sylph-Zauberer mit dem Talent Elementarblut [Luft] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+                "Federfall (1×/Tag kann der Sylph jeden Schaden durch einen Fall verhindern)",
+                "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+                "Alternativfähigkeit – Wie der Wind: Bewegungsweite +2; ersetzt Beweglich",
+                "Alternativfähigkeit – Himmelssprecher: Angeborene Macht Tierfreund mit Geistesreiter (Vögel und andere fliegende Tiere, 1×/Tag); ersetzt Elementarzauberei",
+                "Alternativfähigkeit – Sturm im Blut: Schnelle Regeneration für 2 Runden wenn durch Elektrizität Erschüttert oder Verwundet (max. 2 Wunden/Tag); ersetzt Intelligent"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Auranisch"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+            "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); blass und schlank, blaue spiralförmige Markierungen auf der Haut",
+            "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); eine leichte Brise begleitet sie stets als Zeichen ihrer elementaren Abstammung",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2,
+                    "Verstand": 2
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "federfall": true,
+                    "elementarzauberei_luft": true,
+                    "heimischer_aussenseiter": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
@@ -376,6 +421,7 @@
         "Ifrits": false,
         "Mensch": true,
         "Oreads": false,
+        "Sylphen": false,
         "Zwerg": false
     },
     "attribute": {
