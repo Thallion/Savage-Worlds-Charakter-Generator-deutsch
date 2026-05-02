@@ -410,6 +410,55 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Undinen": {
+            "name": "Undinen",
+            "handicaps": [
+                "Verringerte Stärke (-1 auf alle Stärkeproben)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Elementarzauberei (Undinen-Zauberer mit dem Talent Elementarblut [Wasser] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+                "Anmutige Schwimmer (Können sich im Wasser stets mit ihrer vollen Bewegungsweite bewegen)",
+                "Angeborene Macht: Verheerung / Hydraulischer Stoß (Willenskraft zum Wirken, 1×/Tag; keine Machtmodifikatoren erlaubt)",
+                "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+                "Alternativfähigkeit – Säureatem: Angeborene Macht wird Ausbruch (Säureatem) statt Verheerung; modifiziert Angeborene Macht",
+                "Alternativfähigkeit – Hydrierte Vitalität (Schnell): Schnelle Regeneration für 2 Runden wenn mind. 10 Min vollständig in Wasser untergetaucht (max. 2 Wunden/Tag); ersetzt Beweglich; schließt Hydrierte Vitalität (Langsam) aus",
+                "Alternativfähigkeit – Hydrierte Vitalität (Langsam): Langsame Regeneration wenn mind. 10 Min vollständig in Wasser untergetaucht; ersetzt Elementarzauberei; schließt Hydrierte Vitalität (Schnell) aus",
+                "Alternativfähigkeit – Wasserwahrnehmung: Blindwahrnehmung 10\"/20 Meter im Wasser durch Vibrationssinn; ersetzt Dunkelsicht"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Aquanisch"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+            "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); Haut in Türkis- bis Meeresgrüntönen, flossartige Ohren, Schwimmhäute an Händen und Füßen",
+            "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); Augen immer hellblau, Haar etwas dunkler als die Hautfarbe",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2,
+                    "Willenskraft": 2,
+                    "Stärke": -1
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "anmutige_schwimmer": true,
+                    "elementarzauberei_wasser": true,
+                    "angeborene_macht_wasser": true,
+                    "heimischer_aussenseiter": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
@@ -422,6 +471,7 @@
         "Mensch": true,
         "Oreads": false,
         "Sylphen": false,
+        "Undinen": false,
         "Zwerg": false
     },
     "attribute": {
