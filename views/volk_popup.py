@@ -2433,9 +2433,11 @@ class VolkDialogHandler:
             height=scroll_height,
             do_scroll_x=False,
             do_scroll_y=True,
-            bar_width=dp(15),
-            bar_margin=dp(4),
+            bar_width=dp(20) if _mobile else dp(15),
+            bar_margin=dp(8) if _mobile else dp(4),
         )
+        if _mobile:
+            scroll.scroll_type = ['bars', 'content']
         scroll.add_widget(content)
 
         main_content = MDBoxLayout(
