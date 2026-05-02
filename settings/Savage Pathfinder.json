@@ -516,9 +516,52 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Aasimars": {
+            "name": "Aasimars",
+            "handicaps": [],
+            "talente": [],
+            "besonderheiten": [
+                "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+                "Diplomatisch (Überreden W6 statt W4, Maximum W12+1)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Tageslicht (1×/Tag als eingeschränkte freie Aktion: geringes Licht als Angeborene Macht wirken)",
+                "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+                "Alternativfähigkeit – Himmlischer Kreuzritter: Gewinnt Bevorzugter Feind (Außenseiter) wie das Waldläufer-Klassentalent; ersetzt Diplomatisch",
+                "Alternativfähigkeit – Erhöhter Widerstand: Gewinnt das Talent Arkaner Widerstand auch ohne Voraussetzungen; ersetzt Lebhaft",
+                "Alternativfähigkeit – Heiligenschein: Tageslicht erzeugt einen heiligenscheinförmigen Lichtkreis um den Kopf; bei aktivem Heiligenschein freie Wiederholung bei Testen gegen böse Kreaturen; ersetzt Dunkelsicht"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Himmlisch"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+            "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); häufig metallisch glänzendes Haar, juwelenförmige Augen oder schimmernder Teint",
+            "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); manche besitzen einen leuchtenden goldenen Heiligenschein als sichtbares Zeichen ihrer himmlischen Abstammung",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Willenskraft": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {
+                    "Überreden": 2
+                },
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "tageslicht": true,
+                    "heimischer_aussenseiter": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
+        "Aasimars": false,
         "Elf": false,
         "Gnom": false,
         "Halbelf": false,
