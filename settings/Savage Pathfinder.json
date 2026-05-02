@@ -639,12 +639,61 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Goblin": {
+            "name": "Goblin",
+            "handicaps": [
+                "Größe -1 (Reduzierte Größe und Robustheit um 1)",
+                "Außenseiter (Schwer) (-2 auf alle Überreden-Proben; werden von anderen oft gemobbt)"
+            ],
+            "talente": [],
+            "besonderheiten": [
+                "Flink (Geschicklichkeit W8 statt W4, Maximum W12+2)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Fähiger Reiter (Beginnt mit W4 in Reiten)",
+                "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
+                "Alternativfähigkeit – Alles essen: Freie Wiederholung bei Überleben-Proben zur Nahrungssuche; +2 bei Konstitutionsproben gegen toxische Substanzen; ersetzt Fähiger Reiter",
+                "Alternativfähigkeit – Harter Schädel, große Zähne: Natürliche Waffe Biss, Stärke+W4 Schaden; ersetzt Heimlich",
+                "Alternativfähigkeit – Übergroße Ohren: Wahrnehmung W6 statt W4, Maximum W12+1; ersetzt Fähiger Reiter"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Goblinisch"
+            ],
+            "altersspanne": "Jugend mit 3, Erwachsen mit 7–8, maximales Alter 50+ (selten über 20 ohne Beschützer)",
+            "groesse_maennlich": "Klein (~85-100cm, 17-22kg); knochige Gestalt, übergroßer kahler Schädel, riesige Ohren, kleine rote oder gelbe Augen",
+            "groesse_weiblich": "Klein (~80-95cm, 15-20kg); Hautfarbe variiert: Grün, Grau, Blau, Schwarz oder Blassgrau; riesiges Maul mit zackigen Zähnen",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 4
+                },
+                "robustheit_bonus": -1,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {
+                    "Heimlichkeit": 2,
+                    "Reiten": 2
+                },
+                "fertigkeits_modifier_boni": {
+                    "Überreden": -2
+                },
+                "auto_talente": [],
+                "auto_handicaps": [
+                    "Klein"
+                ],
+                "spezielle_effekte": {
+                    "dunkelsicht": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
         "Aasimars": false,
         "Dhampire": false,
         "Elf": false,
+        "Goblin": false,
         "Gnom": false,
         "Halbelf": false,
         "Halbling": false,
