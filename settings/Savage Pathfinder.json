@@ -276,6 +276,47 @@
                 },
                 "wahlmoeglichkeiten": {}
             }
+        },
+        "Ifrits": {
+            "name": "Ifrits",
+            "handicaps": [],
+            "talente": [],
+            "besonderheiten": [
+                "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+                "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+                "Elementarzauberei (Ifrit-Zauberer mit dem Talent Elementarblut [Feuer] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+                "Angeborene Macht: Ausbruch / Brennende Hände (Willenskraft zum Wirken, 1×/Tag; keine Machtmodifikatoren erlaubt)",
+                "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+                "Alternativfähigkeit – Wüstenspiegelung: +1 auf Proben gegen Hunger und Durst; ersetzt Elementarzauberei",
+                "Alternativfähigkeit – Efrit-Magie: Angeborene Macht wird Wachsen/Schrumpfen (selbst, zwei Größenstufen) statt Ausbruch; modifiziert Angeborene Macht",
+                "Alternativfähigkeit – Feuer im Blut: Schnelle Regeneration für 2 Runden wenn durch Feuer Erschüttert oder Verwundet (max. 2 Wunden/Tag); ersetzt Beweglich"
+            ],
+            "sprachen": [
+                "Gemeinsprache",
+                "Ignanisch"
+            ],
+            "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+            "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); oft spitze Ohren, rote oder gefleckte Hörner, flammenartiges Haar",
+            "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); manche mit messingfarbener Haut oder anthrazitfarbenen Schuppen",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {
+                    "Geschicklichkeit": 2
+                },
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {
+                    "dunkelsicht": true,
+                    "elementarzauberei_feuer": true,
+                    "angeborene_macht_feuer": true,
+                    "heimischer_aussenseiter": true
+                },
+                "wahlmoeglichkeiten": {}
+            }
         }
     },
     "voelker_selected": {
@@ -284,6 +325,7 @@
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
+        "Ifrits": false,
         "Mensch": true,
         "Zwerg": false
     },
