@@ -673,6 +673,17 @@ class TalentManager:
         """
         fehlermeldungen = []
 
+        # Rang-Voraussetzung (z.B. "A", "F", "V", "H", "L")
+        rang_hierarchie = {'A': 1, 'F': 2, 'V': 3, 'H': 4, 'L': 5}
+        if voraussetzung in rang_hierarchie:
+            charakter_rang = getattr(self.charakter, 'rang', 'A') or 'A'
+            charakter_rang_wert = rang_hierarchie.get(charakter_rang.upper()[0], 1)
+            erforderlicher_wert = rang_hierarchie[voraussetzung]
+            rang_namen = {'A': 'Anfänger', 'F': 'Fortgeschritten', 'V': 'Veteran', 'H': 'Held', 'L': 'Legendär'}
+            if charakter_rang_wert < erforderlicher_wert:
+                fehlermeldungen.append(f"Rang '{rang_namen[voraussetzung]}' wird vorausgesetzt.")
+            return fehlermeldungen
+
         # Spezialfall: "AH" oder "AH (beliebig)" - beliebiger Arkaner Hintergrund
         if voraussetzung == "AH" or voraussetzung == "AH (beliebig)":
             hat_arkanen_hintergrund = False
@@ -769,6 +780,43 @@ class TalentManager:
             if fertigkeit.wert < wuerfel_wert:
                 fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
 
+            return fehlermeldungen
+
+        # Handicap-Voraussetzung (z.B. "Handicap: Klein" oder "Handicap: Rüstungsbeschränkung")
+        if voraussetzung.startswith("Handicap: "):
+            handicap_prefix = voraussetzung[len("Handicap: "):]
+            hat_handicap = False
+            if hasattr(self.charakter, 'handicaps'):
+                for h_key, h_obj in self.charakter.handicaps.items():
+                    is_selected = getattr(h_obj, 'ausgewaehlt', False)
+                    if is_selected and h_key.startswith(handicap_prefix):
+                        hat_handicap = True
+                        break
+            if not hat_handicap:
+                fehlermeldungen.append(f"Handicap '{handicap_prefix}' wird vorausgesetzt.")
+            return fehlermeldungen
+
+        # Volk-Voraussetzung (z.B. "Volk: Aasimars")
+        if voraussetzung.startswith("Volk: "):
+            volk_name = voraussetzung[len("Volk: "):]
+            if not hasattr(self.charakter, 'voelker_selected') or not self.charakter.voelker_selected.get(volk_name, False):
+                fehlermeldungen.append(f"Volk '{volk_name}' wird vorausgesetzt.")
+            return fehlermeldungen
+
+        # Volk-Eigenschaft-Voraussetzung (z.B. "Volk-Eigenschaft: dunkelsicht")
+        if voraussetzung.startswith("Volk-Eigenschaft: "):
+            eigenschaft_key = voraussetzung[len("Volk-Eigenschaft: "):]
+            hat_eigenschaft = False
+            if hasattr(self.charakter, 'voelker') and hasattr(self.charakter, 'voelker_selected'):
+                for v_name, ist_ausgewaehlt in self.charakter.voelker_selected.items():
+                    if ist_ausgewaehlt and v_name in self.charakter.voelker:
+                        volk_obj = self.charakter.voelker[v_name]
+                        spez = volk_obj.effects.get('spezielle_effekte', {})
+                        if spez.get(eigenschaft_key, False):
+                            hat_eigenschaft = True
+                            break
+            if not hat_eigenschaft:
+                fehlermeldungen.append(f"Volk-Eigenschaft '{eigenschaft_key}' wird vorausgesetzt.")
             return fehlermeldungen
 
         # Talentvoraussetzung (z.B. "Glück")
