@@ -771,6 +771,29 @@ class TalentManager:
 
             return fehlermeldungen
 
+        # Volk-Voraussetzung (z.B. "Volk: Aasimars")
+        if voraussetzung.startswith("Volk: "):
+            volk_name = voraussetzung[len("Volk: "):]
+            if not hasattr(self.charakter, 'voelker_selected') or not self.charakter.voelker_selected.get(volk_name, False):
+                fehlermeldungen.append(f"Volk '{volk_name}' wird vorausgesetzt.")
+            return fehlermeldungen
+
+        # Volk-Eigenschaft-Voraussetzung (z.B. "Volk-Eigenschaft: dunkelsicht")
+        if voraussetzung.startswith("Volk-Eigenschaft: "):
+            eigenschaft_key = voraussetzung[len("Volk-Eigenschaft: "):]
+            hat_eigenschaft = False
+            if hasattr(self.charakter, 'voelker') and hasattr(self.charakter, 'voelker_selected'):
+                for v_name, ist_ausgewaehlt in self.charakter.voelker_selected.items():
+                    if ist_ausgewaehlt and v_name in self.charakter.voelker:
+                        volk_obj = self.charakter.voelker[v_name]
+                        spez = volk_obj.effects.get('spezielle_effekte', {})
+                        if spez.get(eigenschaft_key, False):
+                            hat_eigenschaft = True
+                            break
+            if not hat_eigenschaft:
+                fehlermeldungen.append(f"Volk-Eigenschaft '{eigenschaft_key}' wird vorausgesetzt.")
+            return fehlermeldungen
+
         # Talentvoraussetzung (z.B. "Glück")
         talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
 

@@ -3424,6 +3424,181 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
+    "Engelsschwingen": {
+      "name": "Engelsschwingen",
+      "kategorie": "Hintergrund",
+      "rang": "F",
+      "voraussetzungen": [
+        "Volk: Aasimars"
+      ],
+      "beschreibung": "Der Charakter wächst Flügel aus göttlichem Licht. Er erhält eine Flug-Bewegungsweite von 6\" und muss sich pro Runde mindestens 1\" fortbewegen oder landen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Rüstung des Abgrunds": {
+      "name": "Rüstung des Abgrunds",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Tieflinge"
+      ],
+      "beschreibung": "+2 natürlicher Rüstungsschutz sowie Umgebungsresistenz gegen Kälte, Elektrizität oder Feuer (Wahl bei Erwerb des Talents).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Naturverbundenheit": {
+      "name": "Naturverbundenheit",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Elf"
+      ],
+      "beschreibung": "Im bevorzugten Gelände (aus dem Talent Bevorzugtes Gelände) kann der Charakter jede 24 Stunden einen natürlichen Heilungswurf mit +2 Bonus ablegen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Bluttrinker": {
+      "name": "Bluttrinker",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Dhampire"
+      ],
+      "beschreibung": "Der Charakter kann einen natürlichen Heilungswurf durchführen, wenn er Blut trinkt (erfordert eine Aktion und einen willigen oder wehrlosen Spender).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Brenn! Brenn! Brenn!": {
+      "name": "Brenn! Brenn! Brenn!",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Goblin",
+        "Diebeskunst W6"
+      ],
+      "beschreibung": "Der Charakter verursacht mit natürlichem Feuer erhöhten Schaden: Brennende Gegenstände, Fackeln und ähnliche Lichtquellen fügen in seiner Hand +1 Würfeltyp Schaden zu.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Lässiger Illusionist": {
+      "name": "Lässiger Illusionist",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Gnom"
+      ],
+      "beschreibung": "Durch Ausgabe von Machtpunkten erhält der Charakter einen Bonus auf Täuschen- oder Heimlichkeitsproben: 1 MP für +1, 2 MP für +2, bis zu +4.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Himmlischer Diener": {
+      "name": "Himmlischer Diener",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Aasimars",
+        "Tiermeister"
+      ],
+      "beschreibung": "Der Begleiter des Aasimars erhält einen himmlischen Segen: +2 auf alle Eigenschaftswürfe und der Begleiter gilt als übernatürliches Wesen mit entsprechenden Widerstandsboni.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Krallensturz": {
+      "name": "Krallensturz",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Katzenfolk",
+        "GES W6",
+        "STÄ W6"
+      ],
+      "beschreibung": "Erfordert die Alternativfähigkeit Katzenkrallen. Bei einem Rücksichtslosen Angriff mit Klauen erhält der Charakter +2 Schaden zusätzlich zum normalen Bonus des Rücksichtslosen Angriffs.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Tiefblick": {
+      "name": "Tiefblick",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        {"oder": ["Volk-Eigenschaft: dunkelsicht", "Volk-Eigenschaft: nachtsicht"]}
+      ],
+      "beschreibung": "Der Charakter verbessert seine Sehfähigkeit im Dunkeln: Er ignoriert alle Beleuchtungsabzüge vollständig (entspricht Nachtsicht auf höchster Stufe).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Glücklicher Halbling": {
+      "name": "Glücklicher Halbling",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Halbling",
+        "Selbstlos"
+      ],
+      "beschreibung": "Der Charakter kann einen Benny ausgeben, um einem Verbündeten in Sichtweite eine Wiederholung für eine Eigenschaftsprobe mit +2 Bonus zu ermöglichen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Flinker Angreifer": {
+      "name": "Flinker Angreifer",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk-Eigenschaft: sprinter",
+        "GES W8"
+      ],
+      "beschreibung": "Der Charakter erleidet keinen Abzug, wenn er in derselben Runde rennt und eine einzelne Aktion ausführt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Klingenzahn": {
+      "name": "Klingenzahn",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Halbork"
+      ],
+      "beschreibung": "Der Charakter erhält durch seine verlängerten Stoßzähne einen Biss als natürliche Waffe (Stärke+W4 Schaden, gilt als natürliche Waffe nach Pathfinder-Regeln).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zauberbrecher": {
+      "name": "Zauberbrecher",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Volk: Zwerg"
+      ],
+      "beschreibung": "Der Charakter kann als begrenzte freie Aktion (einmal pro Zug) versuchen, eine aktive Macht in Nahkampfreichweite aufzuheben (wie der Zauber Aufheben, mit STÄ als arkaner Fertigkeit).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
     "Ausweichen": {
       "name": "Ausweichen",
       "kategorie": "Kampf",
