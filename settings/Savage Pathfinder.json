@@ -1545,6 +1545,443 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
+    "Alchemist": {
+      "name": "Alchemist",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6"
+      ],
+      "beschreibung": "Alchemische Identifikation (+2 auf Proben zur Identifikation alchemischer Gegenstände), AH (Alchemist) [Arkane Fertigkeit: Alchemie], Behindernde Rüstung (leicht), Bomben (Aktion: wirf eine Bombe, 1W6 Schaden in Bereich), Extrakte (Tränke für Kraftvolle Heilung oder Eigenschaftsverbesserung), Mutagene (Konstitution für Stärke, Intelligenz für Ausdauer oder Geschicklichkeit für Abwehr tauschen).",
+      "neue_maechte": 3,
+      "machtpunkte": 15,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_talente": [
+        "AH (Alchemist)"
+      ],
+      "auto_handicaps": [
+        "Behindernde Rüstung_leicht"
+      ]
+    },
+    "Entdeckung": {
+      "name": "Entdeckung",
+      "kategorie": "Alchemist",
+      "rang": "F",
+      "voraussetzungen": [
+        "Alchemist"
+      ],
+      "beschreibung": "Der Alchemist wählt eine Entdeckung aus (z.B. verbesserte Bombe, verbessertes Mutagen, neue Extrakt-Formeln, Giftkunst, Schnellbomben). Kann einmal pro Rang genommen werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fortgeschrittene Entdeckung": {
+      "name": "Fortgeschrittene Entdeckung",
+      "kategorie": "Alchemist",
+      "rang": "V",
+      "voraussetzungen": [
+        "Alchemist"
+      ],
+      "beschreibung": "Der Alchemist wählt eine Fortgeschrittene Entdeckung aus (mächtigere Varianten: Bombenregeneration, Großes Mutagen, Flüssiges Feuer, Verdauungssäure).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Große Entdeckung": {
+      "name": "Große Entdeckung",
+      "kategorie": "Alchemist",
+      "rang": "H",
+      "voraussetzungen": [
+        "Alchemist"
+      ],
+      "beschreibung": "Der Alchemist wählt eine Große Entdeckung aus (Höhepunkt der Alchemie: Wahres Elixier der Langlebigkeit, Stein der Weisen, Wahre Verwandlung, Unsterblichkeitselixier).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kavalier": {
+      "name": "Kavalier",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "GES W6",
+        "Kämpfen W6",
+        "Reiten W6"
+      ],
+      "beschreibung": "Herausforderung (einmal pro Begegnung: wähle einen Gegner – beide erhalten Wundabzüge des anderen nicht; der Kavalier erhält +2 Schaden gegen das Ziel), Mächtiger Ansturm (bei Ansturm mit Lanze +4 Schaden statt +2), Orden (tritt einem Ritterorden bei und erhält dessen Kenntnisse), Kavalier-Reittier (verbesserte Variante des Tiermeister-Begleiters).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Panier": {
+      "name": "Panier",
+      "kategorie": "Kavalier",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kavalier"
+      ],
+      "beschreibung": "Verbündete innerhalb von 12'' erhalten +1 auf Furcht-Proben. Bei einem Ansturm erhalten sie zusätzlich +2 auf Angriffswürfe, solange das Panier sichtbar ist.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ordensfähigkeit": {
+      "name": "Ordensfähigkeit",
+      "kategorie": "Kavalier",
+      "rang": "V",
+      "voraussetzungen": [
+        "Kavalier"
+      ],
+      "beschreibung": "Der Kavalier erhält eine besondere Fähigkeit seines Ordens (z.B. Orden des Stabs: +2 auf Wissenswürfe; Orden des Schwertes: +1 auf Kämpfen; Orden des Sterns: einmal täglich Gnadenbitte für sich selbst).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fordernde Herausforderung": {
+      "name": "Fordernde Herausforderung",
+      "kategorie": "Kavalier",
+      "rang": "H",
+      "voraussetzungen": [
+        "Kavalier"
+      ],
+      "beschreibung": "Gegner, die durch die Herausforderung des Kavaliers gebunden sind, können keine Bennies ausgeben, um gegen den Kavalier gerichtete Würfe zu wiederholen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Überlegener Ansturm": {
+      "name": "Überlegener Ansturm",
+      "kategorie": "Kavalier",
+      "rang": "WC",
+      "voraussetzungen": [
+        "L",
+        "Kavalier",
+        "Mindestens zwei Kavalier-Talente"
+      ],
+      "beschreibung": "Wild Card. Der Kavalier verdoppelt den Schaden bei einem Ansturm mit einer Lanze (anstatt des normalen +4-Bonus). Erfordert Legendär-Rang und mindestens zwei weitere Kavalier-Talente.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Inquisitor": {
+      "name": "Inquisitor",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "Athletik W6 oder Kämpfen W6 oder Schießen W6",
+        "Okkultismus W4"
+      ],
+      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Urteil (einmal pro Begegnung: +1 auf Angriffs- oder Schadenswürfe, oder +2 auf Eigenschaftswürfe – Wahl bei Einsatz), Monsterkunde (+2 auf Allgemeinwissen-Proben über Monster, Dämonen und Untote).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Rüstungsbeschränkung_mittelschwer"
+      ]
+    },
+    "Bann": {
+      "name": "Bann",
+      "kategorie": "Inquisitor",
+      "rang": "F",
+      "voraussetzungen": [
+        "Inquisitor"
+      ],
+      "beschreibung": "Der Inquisitor verzaubert seine Waffe mit Bann: Angriffe ignorieren den Übernatürlichen Schutz des Ziels und verursachen +2 Schaden gegen die gewählte Kreaturenart (festgelegt bei Aktivierung der Macht).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Brandmal": {
+      "name": "Brandmal",
+      "kategorie": "Inquisitor",
+      "rang": "F",
+      "voraussetzungen": [
+        "Inquisitor"
+      ],
+      "beschreibung": "Der Inquisitor brandmarkt einen Feind (Aktion, Berührungsangriff): Das Ziel gilt als Abgelenkt (-2 auf alle Proben) bis es eine Willenskraft-Probe schafft (einmal pro Runde am Ende des Zuges).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Mystische Mächte (Inquisitor)": {
+      "name": "Mystische Mächte (Inquisitor)",
+      "kategorie": "Inquisitor",
+      "rang": "V",
+      "voraussetzungen": [
+        "Inquisitor"
+      ],
+      "beschreibung": "Der Inquisitor erhält 10 gewidmete Machtpunkte für folgende Mächte: Eigenschaft erhöhen (Einschüchtern, Wahrnehmung oder Überleben), Dunkelsicht, Magie entdecken/verbergen und Aufheben. Alle Mächte wirken nur auf den Inquisitor selbst.",
+      "neue_maechte": 0,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schwäche ausnutzen": {
+      "name": "Schwäche ausnutzen",
+      "kategorie": "Inquisitor",
+      "rang": "H",
+      "voraussetzungen": [
+        "Inquisitor"
+      ],
+      "beschreibung": "Der Inquisitor kann die Umgebungsschwächen von Kreaturen gezielt auslösen (z.B. Feuer bei Untoten, Silber bei Werwölfen): Der Inquisitor verursacht mit einem Angriff automatisch die Schwachstellen-Effekte der Kreatur.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wahres Urteil": {
+      "name": "Wahres Urteil",
+      "kategorie": "Inquisitor",
+      "rang": "WC",
+      "voraussetzungen": [
+        "L",
+        "Inquisitor",
+        "Mindestens zwei Inquisitor-Talente"
+      ],
+      "beschreibung": "Wild Card. Der Inquisitor trifft sein Urteilsziel mit vernichtendem Schaden (automatischer Erfolg und eine Erhöhung auf den Angriff) und kann sofort einen neuen Feind als Urteilsziel wählen. Erfordert Legendär-Rang und mindestens zwei weitere Inquisitor-Talente.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Orakel": {
+      "name": "Orakel",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "AH (Orakel) [Arkane Fertigkeit: Glaube], Behindernde Rüstung (mittelschwer), Fluch (unvermeidliche Beeinträchtigung, die mit den Stufen stärker wird, z.B. Blindheit, Taubheit, Schwäche), Mysterium (wählt eine göttliche Verbindung, z.B. Tod, Flammen, Natur, Wasser).",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde Rüstung_mittelschwer"
+      ]
+    },
+    "Offenbarung": {
+      "name": "Offenbarung",
+      "kategorie": "Orakel",
+      "rang": "F",
+      "voraussetzungen": [
+        "Orakel"
+      ],
+      "beschreibung": "Das Orakel kann eine Macht aus seinem Mysterium als begrenzte freie Aktion wirken (einmal pro Zug, ohne Machtpunkte-Abzug für die begrenzte freie Aktion). Kann mehrfach genommen werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Göttliche Meisterschaft": {
+      "name": "Göttliche Meisterschaft",
+      "kategorie": "Orakel",
+      "rang": "V",
+      "voraussetzungen": [
+        "Orakel"
+      ],
+      "beschreibung": "Das Orakel darf jetzt Epische Macht-Modifikatoren auf seine göttlichen Mächte anwenden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Große Offenbarung": {
+      "name": "Große Offenbarung",
+      "kategorie": "Orakel",
+      "rang": "H",
+      "voraussetzungen": [
+        "Orakel"
+      ],
+      "beschreibung": "Das Orakel schaltet seine finale Offenbarung frei – die mächtigste Fähigkeit seines Mysteriums (z.B. ewiges Feuer, Totenbeschwörung, Windkörper).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Beschwörer": {
+      "name": "Beschwörer",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6",
+        "Okkultismus W6"
+      ],
+      "beschreibung": "AH (Beschwörer) [Arkane Fertigkeit: Zaubern], Behindernde Rüstung (leicht), Eidolon (magisch beschworenes Wesen, das dem Beschwörer folgt, kämpft und mit Evolutionspunkten ausgebaut wird).",
+      "neue_maechte": 2,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_talente": [
+        "AH (Beschwörer)"
+      ],
+      "auto_handicaps": [
+        "Behindernde Rüstung_leicht"
+      ]
+    },
+    "Zusätzliche Evolution": {
+      "name": "Zusätzliche Evolution",
+      "kategorie": "Beschwörer",
+      "rang": "A",
+      "voraussetzungen": [
+        "Beschwörer"
+      ],
+      "beschreibung": "Das Eidolon des Beschwörers erhält 3 zusätzliche Evolutionspunkte für Verbesserungen (z.B. zusätzliche Gliedmaßen, natürlicher Rüstungsschutz, Flug). Kann einmal genommen werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ruf des Schöpfers": {
+      "name": "Ruf des Schöpfers",
+      "kategorie": "Beschwörer",
+      "rang": "F",
+      "voraussetzungen": [
+        "Beschwörer"
+      ],
+      "beschreibung": "Der Beschwörer kann sein Eidolon per Aktion sofort zu sich teleportieren oder mit ihm den Platz tauschen (einmal pro Begegnung, keine Sichtlinie erforderlich).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ruf des Beschwörers": {
+      "name": "Ruf des Beschwörers",
+      "kategorie": "Beschwörer",
+      "rang": "F",
+      "voraussetzungen": [
+        "Beschwörer"
+      ],
+      "beschreibung": "Das Eidolon erhält +1 Würfeltyp auf Geschicklichkeit, Stärke und Konstitution (permanent).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Lebensband": {
+      "name": "Lebensband",
+      "kategorie": "Beschwörer",
+      "rang": "V",
+      "voraussetzungen": [
+        "Beschwörer"
+      ],
+      "beschreibung": "Solange das Eidolon in der Nähe ist (12''), kann der Beschwörer empfangenen Schaden (Wunden) auf das Eidolon übertragen. Das Eidolon kann nicht unter diesen Schaden fallen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Aspekt": {
+      "name": "Aspekt",
+      "kategorie": "Beschwörer",
+      "rang": "H",
+      "voraussetzungen": [
+        "Beschwörer"
+      ],
+      "beschreibung": "Der Beschwörer kann Evolutionspunkte des Eidolons nutzen, um sich selbst zu transformieren und körperliche Eigenschaften des Eidolons zu übernehmen (z.B. Klauen, Panzerung, Flug).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zwillingseidolon": {
+      "name": "Zwillingseidolon",
+      "kategorie": "Beschwörer",
+      "rang": "WC",
+      "voraussetzungen": [
+        "L",
+        "Beschwörer",
+        "Mindestens zwei Beschwörer-Talente"
+      ],
+      "beschreibung": "Wild Card. Der Beschwörer kann sich vollständig in sein Eidolon verwandeln – alle Eigenschaftspunkte und Fähigkeiten des Eidolons werden für den Beschwörer übernommen. Erfordert Legendär-Rang und mindestens zwei weitere Beschwörer-Talente.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Hexe": {
+      "name": "Hexe",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6",
+        "Okkultismus W4"
+      ],
+      "beschreibung": "AH (Hexe) [Arkane Fertigkeit: Zaubern], Behindernde Rüstung (jede), Vertrauter (magisch verbundenes Tier, das Patron-Zauber speichert; tägliche Kommunikation erforderlich), Hex (wählt einen Hex aus der Hexen-Liste, z.B. Böser Blick, Schlaf, Heilung, Verfluchung).",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde Rüstung_jede"
+      ]
+    },
+    "Zusätzlicher Hex": {
+      "name": "Zusätzlicher Hex",
+      "kategorie": "Hexe",
+      "rang": "F",
+      "voraussetzungen": [
+        "Hexe"
+      ],
+      "beschreibung": "Die Hexe schaltet einen zusätzlichen Hex frei. Kann einmal pro Rang genommen werden. Hexen (Auswahl): Agonie, Verhexung, Schlaf, Kichern, Heilung, Böser Blick, Verfluchung.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Großer Hex": {
+      "name": "Großer Hex",
+      "kategorie": "Hexe",
+      "rang": "V",
+      "voraussetzungen": [
+        "Hexe"
+      ],
+      "beschreibung": "Die Hexe erhält Zugang zu einem Großen Hex (mächtigere Variante der normalen Hexen-Fähigkeiten). Auswahl: Vettelnauge, Albträume, Langlebigkeit, Wachsabbild, Wetterkontrolle.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Arkane Meisterschaft (Hexe)": {
+      "name": "Arkane Meisterschaft (Hexe)",
+      "kategorie": "Hexe",
+      "rang": "H",
+      "voraussetzungen": [
+        "Hexe"
+      ],
+      "beschreibung": "Die Hexe darf jetzt Epische Macht-Modifikatoren auf ihre Zaubern-Mächte anwenden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Grandioser Hex": {
+      "name": "Grandioser Hex",
+      "kategorie": "Hexe",
+      "rang": "WC",
+      "voraussetzungen": [
+        "L",
+        "Hexe",
+        "Mindestens zwei Hexen-Talente"
+      ],
+      "beschreibung": "Wild Card. Die Hexe schaltet einen Grandiosen Hex frei – die mächtigste Form ihrer Hexerei (z.B. ewiger Schlaf, Todesfluch, Seelenstehlen). Erfordert Legendär-Rang und mindestens zwei weitere Hexen-Talente.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
     "Bevorzugte Mächte (Zauberer)": {
       "name": "Bevorzugte Mächte (Zauberer)",
       "kategorie": "Zauberer",

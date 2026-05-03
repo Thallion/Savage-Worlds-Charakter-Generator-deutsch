@@ -673,6 +673,17 @@ class TalentManager:
         """
         fehlermeldungen = []
 
+        # Rang-Voraussetzung (z.B. "A", "F", "V", "H", "L")
+        rang_hierarchie = {'A': 1, 'F': 2, 'V': 3, 'H': 4, 'L': 5}
+        if voraussetzung in rang_hierarchie:
+            charakter_rang = getattr(self.charakter, 'rang', 'A') or 'A'
+            charakter_rang_wert = rang_hierarchie.get(charakter_rang.upper()[0], 1)
+            erforderlicher_wert = rang_hierarchie[voraussetzung]
+            rang_namen = {'A': 'Anfänger', 'F': 'Fortgeschritten', 'V': 'Veteran', 'H': 'Held', 'L': 'Legendär'}
+            if charakter_rang_wert < erforderlicher_wert:
+                fehlermeldungen.append(f"Rang '{rang_namen[voraussetzung]}' wird vorausgesetzt.")
+            return fehlermeldungen
+
         # Spezialfall: "AH" oder "AH (beliebig)" - beliebiger Arkaner Hintergrund
         if voraussetzung == "AH" or voraussetzung == "AH (beliebig)":
             hat_arkanen_hintergrund = False
