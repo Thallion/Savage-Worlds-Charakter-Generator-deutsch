@@ -782,6 +782,20 @@ class TalentManager:
 
             return fehlermeldungen
 
+        # Handicap-Voraussetzung (z.B. "Handicap: Klein" oder "Handicap: Rüstungsbeschränkung")
+        if voraussetzung.startswith("Handicap: "):
+            handicap_prefix = voraussetzung[len("Handicap: "):]
+            hat_handicap = False
+            if hasattr(self.charakter, 'handicaps'):
+                for h_key, h_obj in self.charakter.handicaps.items():
+                    is_selected = getattr(h_obj, 'ausgewaehlt', False)
+                    if is_selected and h_key.startswith(handicap_prefix):
+                        hat_handicap = True
+                        break
+            if not hat_handicap:
+                fehlermeldungen.append(f"Handicap '{handicap_prefix}' wird vorausgesetzt.")
+            return fehlermeldungen
+
         # Volk-Voraussetzung (z.B. "Volk: Aasimars")
         if voraussetzung.startswith("Volk: "):
             volk_name = voraussetzung[len("Volk: "):]

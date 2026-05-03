@@ -4198,6 +4198,201 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
+    "Rüstungsausbildung": {
+      "name": "Rüstungsausbildung",
+      "kategorie": "Kampf",
+      "rang": "A",
+      "voraussetzungen": [
+        "Handicap: Rüstungsbeschränkung"
+      ],
+      "beschreibung": "Der Charakter ist im Umgang mit Rüstungen geübt: Die Abzüge durch Rüstungsbeschränkung werden um 2 reduziert (Rüstungsbeschränkung (leicht) → kein GES-Abzug; Rüstungsbeschränkung (mittelschwer) → Abzüge wie bei leichter Beschränkung).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Deckende Verteidigung": {
+      "name": "Deckende Verteidigung",
+      "kategorie": "Kampf",
+      "rang": "A",
+      "voraussetzungen": [],
+      "beschreibung": "Wenn der Charakter den Verteidigungsmanöver einsetzt (beide Aktionen, +4 Parade), erhalten alle Verbündeten in Reichweite von 2'' ebenfalls +2 auf ihre Parade.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Lähmender Angriff": {
+      "name": "Lähmender Angriff",
+      "kategorie": "Kampf",
+      "rang": "H",
+      "voraussetzungen": [
+        "Lieblingswaffe"
+      ],
+      "beschreibung": "Mit einer Erhöhung bei einem Angriff mit der Lieblingswaffe wird die Bewegungsweite des Ziels um 2 reduziert (Minimum 1). Dieser Malus gilt bis zur Heilung oder bis zum Ende der Begegnung.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Armbrustmeisterschaft": {
+      "name": "Armbrustmeisterschaft",
+      "kategorie": "Kampf",
+      "rang": "V",
+      "voraussetzungen": [
+        "Schnelles Nachladen",
+        "Schießen W8"
+      ],
+      "beschreibung": "Der Charakter schießt mit einer Armbrust so schnell wie mit einem Bogen (kein Nachteil durch Nachladezeit; Armbrust gilt als Nachladen 0). Zudem kann er eine Armbrust im Nahkampf als schwere Keule einsetzen (STÄ+W6 Schaden, kein Abzug).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Mystische Klauen": {
+      "name": "Mystische Klauen",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kämpfen W6"
+      ],
+      "beschreibung": "Erfordert natürliche Klauenangriffe (z.B. Katzenkrallen). Die Klauen lösen Umgebungsschwächen von Kreaturen aus (z.B. Silber bei Werwölfen, Feuer bei Untoten) und gelten als magische Waffen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wilde Klauen": {
+      "name": "Wilde Klauen",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "STÄ W6"
+      ],
+      "beschreibung": "Erfordert natürliche Klauenangriffe (z.B. Katzenkrallen). Die Klauen verursachen erhöhten Schaden (STÄ+W6 statt STÄ+W4) und gelten als Panzerbrecher (AP 2).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Reißende Klauen": {
+      "name": "Reißende Klauen",
+      "kategorie": "Kampf",
+      "rang": "H",
+      "voraussetzungen": [
+        "Wilde Klauen",
+        "STÄ W8"
+      ],
+      "beschreibung": "Die Klauen des Charakters verursachen Reißende Angriffe: Bei einem Treffer mit einer Erhöhung muss das Ziel eine Konstitutionsprobe ablegen oder erleidet eine zusätzliche Wunde durch Blutung/Reißen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heldenhafter Widerstand": {
+      "name": "Heldenhafter Widerstand",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "KON W8"
+      ],
+      "beschreibung": "Einmal pro Szene kann der Charakter als begrenzte freie Aktion automatisch einen der folgenden negativen Zustände aufheben: Erschüttert, Abgelenkt oder Erschöpft.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Geschossabwehr": {
+      "name": "Geschossabwehr",
+      "kategorie": "Kampf",
+      "rang": "V",
+      "voraussetzungen": [],
+      "beschreibung": "Der Charakter erhält +2 Robustheit gegen alle Fernkampfangriffe (Schießen, Athletik-Würfe für Wurfwaffen und ähnliche Distanzangriffe).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Berittener Schild": {
+      "name": "Berittener Schild",
+      "kategorie": "Kampf",
+      "rang": "A",
+      "voraussetzungen": [],
+      "beschreibung": "Der Charakter kann seinen Schildbonus (Parade und Robustheit) auf sein Reittier übertragen, solange er berittenen Kampf führt und das Schild hält.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Nahschussmeister": {
+      "name": "Nahschussmeister",
+      "kategorie": "Kampf",
+      "rang": "V",
+      "voraussetzungen": [
+        "Schießen W10"
+      ],
+      "beschreibung": "Der Charakter erleidet keinen Abzug auf Schießen-Proben, wenn er sich im Nahkampf befindet oder angebunden ist. Zudem kann er im Nahkampf schießen, ohne einen automatischen Kritischen Fehlschlag zu riskieren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schattenangriff": {
+      "name": "Schattenangriff",
+      "kategorie": "Kampf",
+      "rang": "V",
+      "voraussetzungen": [
+        "Hinterhältiger Angriff",
+        "Kämpfen W6"
+      ],
+      "beschreibung": "Der Charakter kann den Hinterhältigen Angriff in Gebieten mit schlechter Beleuchtung (Düster oder Dunkel) einsetzen, auch ohne volle Deckung oder direkten Überraschungsangriff.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Berührung der Stille": {
+      "name": "Berührung der Stille",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "WIL W8",
+        "Waffenloser Schlag",
+        "Kämpfen W8"
+      ],
+      "beschreibung": "Ki-Aktion (1 Machtpunkt): Bei einem erfolgreichen unbewaffneten Treffer muss das Ziel eine Willenskraftprobe ablegen oder kann bis zum Ende seines nächsten Zuges keine Aktionen ausführen (gilt als Erschöpft).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Stolperschlag": {
+      "name": "Stolperschlag",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kämpfen W8"
+      ],
+      "beschreibung": "Mit einer Erhöhung bei einem Nahkampfangriff kann der Charakter das Ziel zu Boden werfen: Das Ziel fällt hin (Hingeworfen, –2 auf alle Proben; Angreifer erhalten +2 auf Angriffe gegen das Ziel).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unter dem Riesen": {
+      "name": "Unter dem Riesen",
+      "kategorie": "Kampf",
+      "rang": "A",
+      "voraussetzungen": [
+        "Handicap: Klein",
+        "Athletik W8"
+      ],
+      "beschreibung": "Wenn ein Gegner der Größe 1 oder größer diesen Charakter angreift, kann der Charakter als freie Aktion eine Athletik-Probe ablegen. Bei Erfolg fällt der Gegner hin (Hingeworfen). Einmal pro Zug einsetzbar.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
     "Ausweichen": {
       "name": "Ausweichen",
       "kategorie": "Kampf",
