@@ -425,6 +425,14 @@ def build_android(dist_dir):
     # Java 17 sicherstellen (Gradle 8.0.2 ist inkompatibel mit Java 21)
     ensure_java17()
 
+    # Falls 16-KB-Patch neuer als kompilierte Libs: Library-Cache leeren,
+    # damit p4a alle 64-Bit-.so neu mit -Wl,-z,max-page-size=16384 linkt.
+    try:
+        from build_android import maybe_clean_lib_cache_for_16kb_rebuild
+        maybe_clean_lib_cache_for_16kb_rebuild()
+    except Exception as e:
+        print(f"⚠️  16-KB-Cache-Cleanup übersprungen: {e}")
+
     try:
         # Prüfe Buildozer Installation
         result = subprocess.run(['buildozer', '--version'],
@@ -470,6 +478,14 @@ def build_android(dist_dir):
     if spec_file.exists():
         (dist_dir / "android").mkdir(exist_ok=True)
         shutil.copy2(spec_file, dist_dir / "android" / "buildozer.spec")
+
+    # 16 KB Page Size Alignment verifizieren (Google Play Pflicht 64-Bit)
+    if apk_ok or aab_ok:
+        try:
+            from build_fixes import verify_so_alignment
+            verify_so_alignment()
+        except Exception as e:
+            print(f"⚠️  Alignment-Verifikation fehlgeschlagen: {e}")
 
     if apk_ok and aab_ok:
         print("\n✅ Beide Android-Artefakte erstellt (APK + AAB)")

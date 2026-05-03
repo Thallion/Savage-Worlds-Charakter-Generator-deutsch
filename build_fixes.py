@@ -2,13 +2,22 @@
 """
 Combined buildozer hook to fix Kivy and PyJNIus Python 3+ / Cython 3.x compatibility issues.
 
+Zusätzlich: 16 KB Page Size Alignment für Android (Google Play Pflicht ab 31.05.2026
+für Updates / 01.11.2025 für neue Apps; gilt nur für 64-Bit Libraries).
+Patches: pythonforandroid/archs.py common_ldflags und SDL2-Bootstrap Application.mk.
+
 Wird automatisch von build_android.py / build_all.py aufgerufen, BEVOR buildozer startet.
 Kann auch manuell ausgeführt werden: python build_fixes.py
 """
 import os
+import subprocess
 import sys
 import re
 from pathlib import Path
+
+# Marker, der idempotente Patches kennzeichnet — verhindert Doppelpatches
+# bei wiederholtem Hook-Aufruf (vor und nach p4a-Source-Download).
+PAGE_SIZE_FIX_MARKER = "16KB-PAGE-SIZE-FIX"
 
 
 def _find_build_root():
@@ -277,6 +286,328 @@ def fix_pyjnius_python3_compatibility():
     return fixed_any
 
 
+def _find_pythonforandroid_dir():
+    """Findet das installierte python-for-android Paket (im venv oder global)."""
+    try:
+        import pythonforandroid
+        return Path(pythonforandroid.__file__).parent
+    except ImportError:
+        # Fallback: in lokalen venv-Pfaden suchen
+        for candidate in [
+            Path("venv/lib/python3.12/site-packages/pythonforandroid"),
+            Path("venv/lib/python3.11/site-packages/pythonforandroid"),
+            Path(".buildozer/android/platform/python-for-android/pythonforandroid"),
+        ]:
+            if candidate.exists():
+                return candidate
+        return None
+
+
+def _find_all_pythonforandroid_dirs():
+    """Liefert ALLE p4a-Installationen, die wir patchen müssen.
+
+    Buildozer extrahiert eine eigene Kopie nach
+    `.buildozer/android/platform/python-for-android/`, die NICHT mit der
+    venv-Installation identisch ist. Beide brauchen den Patch, da `prebuild_arch`
+    aus dem extrahierten Pfad kopiert.
+    """
+    dirs = []
+    seen = set()
+
+    # Primär: venv / sys.path (über Import)
+    primary = _find_pythonforandroid_dir()
+    if primary is not None and primary.exists():
+        resolved = primary.resolve()
+        if resolved not in seen:
+            dirs.append(primary)
+            seen.add(resolved)
+
+    # Sekundär: buildozer-extrahiertes p4a (das ist, was tatsächlich gebaut wird)
+    buildozer_p4a = Path(".buildozer/android/platform/python-for-android/pythonforandroid")
+    if buildozer_p4a.exists():
+        resolved = buildozer_p4a.resolve()
+        if resolved not in seen:
+            dirs.append(buildozer_p4a)
+            seen.add(resolved)
+
+    # Tertiär: weitere venv-Pfade als Sicherheitsnetz
+    for candidate in [
+        Path("venv/lib/python3.12/site-packages/pythonforandroid"),
+        Path("venv/lib/python3.11/site-packages/pythonforandroid"),
+    ]:
+        if candidate.exists():
+            resolved = candidate.resolve()
+            if resolved not in seen:
+                dirs.append(candidate)
+                seen.add(resolved)
+
+    return dirs
+
+
+def fix_p4a_ldflags_for_16kb_alignment():
+    """Patcht pythonforandroid/archs.py so, dass alle p4a-Recipes mit
+    16 KB Alignment Linker-Flags gebaut werden.
+
+    Hintergrund: p4a setzt LDFLAGS in archs.py:Arch.get_env() neu und ignoriert
+    LDFLAGS aus os.environ. Der einzige zuverlässige Weg, allen Recipes einen
+    Linker-Flag mitzugeben, ist die `common_ldflags` Liste.
+
+    Der Flag `-Wl,-z,max-page-size=16384` wirkt nur beim 64-Bit-Linker; bei
+    armeabi-v7a (32-Bit) ist er harmlos / wird ignoriert.
+    """
+    print("P4A Hook: Applying 16 KB page-size LDFLAGS to p4a archs.py...")
+
+    p4a_dir = _find_pythonforandroid_dir()
+    if p4a_dir is None:
+        print("P4A Hook: pythonforandroid not found, skipping 16 KB LDFLAGS fix")
+        return False
+
+    archs_file = p4a_dir / "archs.py"
+    if not archs_file.exists():
+        print(f"P4A Hook: {archs_file} not found, skipping")
+        return False
+
+    try:
+        content = archs_file.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"P4A Hook: Cannot read {archs_file}: {e}")
+        return False
+
+    if PAGE_SIZE_FIX_MARKER in content:
+        print("P4A Hook: archs.py already patched for 16 KB alignment")
+        return False
+
+    # Original: common_ldflags = ['-L{ctx_libs_dir}']
+    pattern = re.compile(
+        r"common_ldflags\s*=\s*\['-L\{ctx_libs_dir\}'\]",
+        re.MULTILINE,
+    )
+    replacement = (
+        "common_ldflags = ['-L{ctx_libs_dir}', "
+        "'-Wl,-z,max-page-size=16384', "
+        "'-Wl,-z,common-page-size=16384']  # " + PAGE_SIZE_FIX_MARKER
+    )
+
+    new_content, count = pattern.subn(replacement, content, count=1)
+    if count == 0:
+        print(f"P4A Hook: common_ldflags pattern not found in {archs_file}")
+        return False
+
+    try:
+        archs_file.write_text(new_content, encoding="utf-8")
+        print(f"P4A Hook: 16 KB LDFLAGS injected into {archs_file}")
+        return True
+    except Exception as e:
+        print(f"P4A Hook: Cannot write {archs_file}: {e}")
+        return False
+
+
+def _patch_application_mk(mk_file: Path) -> bool:
+    """Fügt 16 KB Alignment APP_LDFLAGS in eine Application.mk ein. Idempotent."""
+    try:
+        content = mk_file.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"P4A Hook: Cannot read {mk_file}: {e}")
+        return False
+
+    if PAGE_SIZE_FIX_MARKER in content:
+        return False  # Bereits gepatcht
+
+    snippet = (
+        "\n# " + PAGE_SIZE_FIX_MARKER + "\n"
+        "ifneq ($(filter arm64-v8a x86_64,$(APP_ABI)),)\n"
+        "APP_LDFLAGS += -Wl,-z,max-page-size=16384 -Wl,-z,common-page-size=16384\n"
+        "endif\n"
+    )
+
+    # Anhängen reicht — Application.mk ist klein und alle Direktiven sind global
+    new_content = content.rstrip() + "\n" + snippet
+
+    try:
+        mk_file.write_text(new_content, encoding="utf-8")
+        print(f"P4A Hook: 16 KB APP_LDFLAGS appended to {mk_file}")
+        return True
+    except Exception as e:
+        print(f"P4A Hook: Cannot write {mk_file}: {e}")
+        return False
+
+
+def fix_sdl2_bootstrap_16kb_alignment():
+    """Patcht Application.mk in SDL2-Bootstrap für 16 KB Alignment der
+    via ndk-build gebauten Libraries (libSDL2*, libmain).
+
+    Diese Bibliotheken sehen die p4a-`LDFLAGS` (siehe archs.py-Patch) NICHT,
+    weil sie über Android `ndk-build` linken. Sie brauchen `APP_LDFLAGS`
+    direkt in der Bootstrap Application.mk.
+    """
+    print("P4A Hook: Patching SDL2 bootstrap Application.mk for 16 KB alignment...")
+
+    fixed_any = False
+
+    # 1) ALLE p4a-Source-Standorte (venv + buildozer-extrahiert)
+    # Buildozer extrahiert eine eigene p4a-Kopie, aus der `prebuild_arch`
+    # die Bootstrap-Dateien in den Build-Dir kopiert. BEIDE müssen gepatcht sein.
+    for p4a_dir in _find_all_pythonforandroid_dirs():
+        src_mk = p4a_dir / "bootstraps" / "sdl2" / "build" / "jni" / "Application.mk"
+        if src_mk.exists() and _patch_application_mk(src_mk):
+            fixed_any = True
+
+    # 2) Bereits ausgepackte Kopien in .buildozer (für inkrementelle Builds)
+    platform_dir = Path(".buildozer/android/platform")
+    if platform_dir.exists():
+        # Beide Kandidatenpfade: dists und bootstrap_builds
+        candidates = list(platform_dir.glob("build-*/dists/*/jni/Application.mk"))
+        candidates += list(platform_dir.glob("build-*/build/bootstrap_builds/sdl2/jni/Application.mk"))
+        for mk_file in candidates:
+            if _patch_application_mk(mk_file):
+                fixed_any = True
+
+    if not fixed_any:
+        print("P4A Hook: SDL2 Application.mk files already appear to be patched")
+
+    return fixed_any
+
+
+def fix_sqlite3_recipe_16kb_alignment():
+    """Patcht die p4a-Sqlite3-Recipe-`Android.mk` für 16-KB-Alignment.
+
+    Sqlite3 wird wie SDL2 über `ndk-build` gebaut, hat aber nur ein eigenes
+    Android.mk (kein Application.mk). Wir injizieren `LOCAL_LDFLAGS` direkt
+    in das Android.mk — bedingt auf `TARGET_ARCH_ABI` (nur 64-Bit).
+    """
+    print("P4A Hook: Patching sqlite3 Android.mk for 16 KB alignment...")
+
+    snippet = (
+        "\n# " + PAGE_SIZE_FIX_MARKER + "\n"
+        "ifneq ($(filter arm64-v8a x86_64,$(TARGET_ARCH_ABI)),)\n"
+        "LOCAL_LDFLAGS += -Wl,-z,max-page-size=16384 -Wl,-z,common-page-size=16384\n"
+        "endif\n"
+    )
+
+    fixed_any = False
+    candidates = []
+
+    # 1) ALLE p4a-Source-Standorte (venv + buildozer-extrahiert).
+    # Buildozer's `prebuild_arch` kopiert Android.mk aus der EXTRAHIERTEN
+    # p4a-Kopie unter .buildozer/android/platform/python-for-android/, NICHT
+    # aus dem venv. Wenn nur das venv gepatcht wird, erscheint im Build-Dir
+    # weiterhin eine ungepatchte Android.mk. Beide Pfade müssen gepatcht sein.
+    for p4a_dir in _find_all_pythonforandroid_dirs():
+        src_mk = p4a_dir / "recipes" / "sqlite3" / "Android.mk"
+        if src_mk.exists():
+            candidates.append(src_mk)
+
+    # 2) Bereits in .buildozer kopierte Build-Verzeichnisse (inkrementelle Builds)
+    platform_dir = Path(".buildozer/android/platform")
+    if platform_dir.exists():
+        candidates += list(platform_dir.glob(
+            "build-*/build/other_builds/sqlite3/*/sqlite3/jni/Android.mk"
+        ))
+
+    for mk_file in candidates:
+        try:
+            content = mk_file.read_text(encoding="utf-8")
+        except Exception as e:
+            print(f"P4A Hook: Konnte {mk_file} nicht lesen: {e}")
+            continue
+
+        if PAGE_SIZE_FIX_MARKER in content:
+            continue  # bereits gepatcht
+
+        # Vor `include $(BUILD_SHARED_LIBRARY)` einfügen
+        if "include $(BUILD_SHARED_LIBRARY)" in content:
+            new_content = content.replace(
+                "include $(BUILD_SHARED_LIBRARY)",
+                snippet + "\ninclude $(BUILD_SHARED_LIBRARY)",
+            )
+        else:
+            new_content = content.rstrip() + "\n" + snippet
+
+        try:
+            mk_file.write_text(new_content, encoding="utf-8")
+            print(f"P4A Hook: Patched {mk_file}")
+            fixed_any = True
+        except Exception as e:
+            print(f"P4A Hook: Konnte {mk_file} nicht schreiben: {e}")
+
+    if not fixed_any:
+        print("P4A Hook: sqlite3 Android.mk already patched or not found")
+
+    return fixed_any
+
+
+def verify_so_alignment(libs_dir: Path = None):
+    """Prüft per `objdump -p` das ELF LOAD-Alignment aller .so-Dateien unter
+    libs_dir/arm64-v8a/. Erwartet: align 2**14 (16 KB).
+
+    Gibt eine Liste der nicht-konformen Libraries zurück. Macht KEIN
+    Build-Abbruch — nur Warnung.
+    """
+    if libs_dir is None:
+        # Default: Suche in den Standard-Buildozer-Output-Pfaden
+        for candidate in Path(".buildozer/android/platform").glob(
+            "build-*/dists/*/libs"
+        ):
+            libs_dir = candidate
+            break
+
+    if libs_dir is None or not Path(libs_dir).exists():
+        print("P4A Hook: Keine libs/-Verzeichnisse zum Verifizieren gefunden.")
+        return []
+
+    arm64_dir = Path(libs_dir) / "arm64-v8a"
+    if not arm64_dir.exists():
+        print(f"P4A Hook: {arm64_dir} existiert nicht (32-Bit-only Build?)")
+        return []
+
+    print(f"\nP4A Hook: Prüfe 16 KB Alignment unter {arm64_dir}...")
+    print("-" * 70)
+
+    bad = []
+    so_files = sorted(arm64_dir.glob("*.so"))
+    if not so_files:
+        print(f"P4A Hook: Keine .so-Dateien in {arm64_dir}")
+        return []
+
+    for so in so_files:
+        try:
+            out = subprocess.check_output(
+                ["objdump", "-p", str(so)],
+                stderr=subprocess.STDOUT,
+                text=True,
+            )
+        except (FileNotFoundError, subprocess.CalledProcessError) as e:
+            print(f"  ⚠️  {so.name}: objdump fehlgeschlagen ({e})")
+            continue
+
+        # Suche LOAD-Zeilen mit "align 2**N"
+        load_aligns = re.findall(r"LOAD .* align 2\*\*(\d+)", out)
+        if not load_aligns:
+            print(f"  ?  {so.name}: keine LOAD-Segmente gefunden")
+            continue
+
+        max_align = max(int(a) for a in load_aligns)
+        if max_align >= 14:
+            print(f"  ✅ {so.name}: align 2**{max_align} (16 KB OK)")
+        else:
+            print(f"  ❌ {so.name}: align 2**{max_align} (4 KB - NICHT 16 KB ALIGNED)")
+            bad.append(so.name)
+
+    print("-" * 70)
+    if bad:
+        print(f"⚠️  {len(bad)}/{len(so_files)} 64-Bit-Library(s) NICHT 16 KB aligned:")
+        for name in bad:
+            print(f"     - {name}")
+        print(
+            "    Lösung: NDK-Bump in buildozer.spec (auf 26b/28c) und/oder "
+            "build_fixes.py-Patches prüfen."
+        )
+    else:
+        print(f"✅ Alle {len(so_files)} Libraries sind 16 KB aligned (Google Play konform).")
+
+    return bad
+
+
 # p4a Hook-Funktionen (werden von python-for-android aufgerufen)
 def before_apk_build(toolchain):
     """p4a Hook: Wird vor dem APK-Build aufgerufen"""
@@ -284,6 +615,9 @@ def before_apk_build(toolchain):
     fix_kivy_python3_compatibility()
     fix_pyjnius_python3_compatibility()
     fix_android_manifest_fileprovider()
+    fix_p4a_ldflags_for_16kb_alignment()
+    fix_sdl2_bootstrap_16kb_alignment()
+    fix_sqlite3_recipe_16kb_alignment()
 
 
 if __name__ == "__main__":
@@ -301,7 +635,19 @@ if __name__ == "__main__":
     if manifest_fixed:
         print("P4A Hook: FileProvider in AndroidManifest.xml eingefügt")
 
-    if kivy_fixed or pyjnius_fixed or manifest_fixed:
+    archs_fixed = fix_p4a_ldflags_for_16kb_alignment()
+    if archs_fixed:
+        print("P4A Hook: archs.py mit 16 KB LDFLAGS gepatcht")
+
+    sdl2_fixed = fix_sdl2_bootstrap_16kb_alignment()
+    if sdl2_fixed:
+        print("P4A Hook: SDL2-Bootstrap Application.mk mit 16 KB APP_LDFLAGS gepatcht")
+
+    sqlite3_fixed = fix_sqlite3_recipe_16kb_alignment()
+    if sqlite3_fixed:
+        print("P4A Hook: sqlite3 Android.mk mit 16 KB LOCAL_LDFLAGS gepatcht")
+
+    if any([kivy_fixed, pyjnius_fixed, manifest_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
         print("P4A Hook: Build fixes completed successfully")
     else:
         print("P4A Hook: No fixes were needed")

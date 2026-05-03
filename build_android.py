@@ -133,6 +133,128 @@ def ensure_java17():
         print("🧹 Gradle Script-Cache bereinigt")
 
 
+def maybe_clean_lib_cache_for_16kb_rebuild():
+    """
+    Erkennt, wenn archs.py den 16-KB-Page-Size-Patch enthält, aber die
+    kompilierten Libraries (.so) älter sind als der Patch. In diesem Fall
+    werden die Build-Verzeichnisse für Recipes, Bootstraps und Dist-Libs
+    gezielt gelöscht, damit p4a alles mit den neuen LDFLAGS neu linkt.
+
+    Cython-Source-Patches in den extrahierten Recipe-Sources werden vom
+    build_fixes.py-Hook beim nächsten Build automatisch wieder angewendet
+    — die Sources unter .buildozer/android/platform/build-*/build/other_builds
+    werden hier gezielt gelöscht (Sources werden von p4a neu entpackt).
+
+    Idempotent: Sobald die Libs neuer als der Patch sind, no-op.
+    """
+    # archs.py finden
+    try:
+        import pythonforandroid
+        archs_py = Path(pythonforandroid.__file__).parent / "archs.py"
+    except ImportError:
+        for candidate in [
+            Path("venv/lib/python3.12/site-packages/pythonforandroid/archs.py"),
+            Path("venv/lib/python3.11/site-packages/pythonforandroid/archs.py"),
+        ]:
+            if candidate.exists():
+                archs_py = candidate
+                break
+        else:
+            return  # p4a nicht installiert — nichts zu tun
+
+    if not archs_py.exists():
+        return
+
+    try:
+        archs_content = archs_py.read_text(encoding='utf-8')
+    except Exception:
+        return
+
+    if "16KB-PAGE-SIZE-FIX" not in archs_content:
+        return  # Patch noch nicht angewendet — Cleanup wäre verfrüht
+
+    patch_mtime = archs_py.stat().st_mtime
+
+    # Repräsentative .so-Datei suchen, deren mtime wir mit patch_mtime vergleichen
+    project_dir = Path.cwd()
+    sample_libs = list(project_dir.glob(
+        ".buildozer/android/platform/build-*/dists/*/libs/arm64-v8a/libSDL2.so"
+    ))
+    if not sample_libs:
+        # Noch nie gebaut oder Libs schon weg — kein Cleanup nötig
+        return
+
+    sample_lib = sample_libs[0]
+    lib_mtime = sample_lib.stat().st_mtime
+
+    if lib_mtime >= patch_mtime:
+        # Libraries sind neuer als der Patch — bereits sauber gebaut
+        return
+
+    print("\n" + "="*60)
+    print("🔄 16-KB-PAGE-SIZE-PATCH ERKANNT — LIBRARY-CACHE WIRD ERNEUERT")
+    print("="*60)
+    print(f"   archs.py gepatcht: {time.ctime(patch_mtime)}")
+    print(f"   libSDL2.so gebaut: {time.ctime(lib_mtime)}")
+    print("   → Arch-spezifische Recipe-Builds, Bootstrap-libs und Dist-libs")
+    print("     werden für sauberen Re-Link gelöscht.")
+    print("   (hostpython3/desktop/ und Target-site-packages bleiben erhalten,")
+    print("    Cython-Source-Patches werden vom build_fixes-Hook neu angewendet.)")
+
+    deleted_count = 0
+
+    # 1. Arch-spezifische Recipe-Builds in other_builds/ löschen
+    #    ABER: hostpython3/desktop/ (native Host-Tool) UNBEDINGT erhalten —
+    #    sonst fehlt setuptools für nachfolgende Pillow/native-Recipe-Builds.
+    for recipe_dir in project_dir.glob(".buildozer/android/platform/build-*/build/other_builds/*"):
+        if not recipe_dir.is_dir():
+            continue
+        for sub in recipe_dir.iterdir():
+            if not sub.is_dir():
+                continue
+            # 'desktop' = Host-Build (z.B. hostpython3/desktop/) — NICHT löschen
+            if sub.name == "desktop":
+                continue
+            # Arch-spezifische Subdirs (z.B. arm64-v8a__ndk_target_21) löschen
+            shutil.rmtree(sub, ignore_errors=True)
+            print(f"   🗑️  {sub.relative_to(project_dir)}")
+            deleted_count += 1
+
+    # 2. Bootstrap-Build obj/libs (SDL2 ndk-build Output) — vollständig löschen
+    for pattern in [
+        ".buildozer/android/platform/build-*/build/bootstrap_builds/*/obj",
+        ".buildozer/android/platform/build-*/build/bootstrap_builds/*/libs",
+    ]:
+        for path in project_dir.glob(pattern):
+            if path.exists():
+                shutil.rmtree(path, ignore_errors=True)
+                print(f"   🗑️  {path.relative_to(project_dir)}")
+                deleted_count += 1
+
+    # 3. Dist-libs/obj/build löschen — ABER NICHT _python_bundle__*
+    #    (enthält setuptools/pip/etc. in Target-site-packages)
+    for pattern in [
+        ".buildozer/android/platform/build-*/dists/*/libs",
+        ".buildozer/android/platform/build-*/dists/*/obj",
+        ".buildozer/android/platform/build-*/dists/*/build",
+    ]:
+        for path in project_dir.glob(pattern):
+            if path.exists() and path.is_dir():
+                shutil.rmtree(path, ignore_errors=True)
+                print(f"   🗑️  {path.relative_to(project_dir)}")
+                deleted_count += 1
+
+    # 4. libs_collections löschen (cached fertige .so-Kopien für die finale Dist)
+    for path in project_dir.glob(".buildozer/android/platform/build-*/build/libs_collections"):
+        if path.exists():
+            shutil.rmtree(path, ignore_errors=True)
+            print(f"   🗑️  {path.relative_to(project_dir)}")
+            deleted_count += 1
+
+    print(f"   ✓ {deleted_count} Verzeichnis(se) gelöscht — nächster Build linkt 16-KB-aligned.")
+    print("="*60 + "\n")
+
+
 def build_android(dist_dir):
     """Build Android APK mit Buildozer"""
     print("\n" + "="*50)
@@ -141,6 +263,9 @@ def build_android(dist_dir):
 
     # Java 17 sicherstellen (Gradle 8.0.2 ist inkompatibel mit Java 21)
     ensure_java17()
+
+    # Falls 16-KB-Patch neuer als kompilierte Libs: Library-Cache leeren
+    maybe_clean_lib_cache_for_16kb_rebuild()
 
     try:
         # Prüfe Buildozer Installation
@@ -210,6 +335,13 @@ def build_android(dist_dir):
         spec_file = Path.cwd() / "buildozer.spec"
         if spec_file.exists():
             shutil.copy2(spec_file, dist_dir / "android" / "buildozer.spec")
+
+        # 16 KB Page Size Alignment verifizieren (Google Play Pflicht 64-Bit)
+        try:
+            from build_fixes import verify_so_alignment
+            verify_so_alignment()
+        except Exception as e:
+            print(f"⚠️  Alignment-Verifikation fehlgeschlagen: {e}")
 
         return True
     else:

@@ -33,7 +33,7 @@ source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.7.5.9
+version = 0.7.6.4
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -115,6 +115,10 @@ android.minapi = 21
 #android.sdk = 20
 
 # (str) Android NDK version to use
+# 16 KB Page Size: NDK 25b liefert Libraries standardmäßig 4-KB-aligned aus.
+# Die geforderte 16-KB-Ausrichtung (Google Play, Pflicht ab 31.05.2026 für 64-Bit)
+# wird über build_fixes.py erzwungen — siehe p4a.hook unten.
+# Bei Build-Problemen Eskalationspfad: 25b → 26b → 28c (NDK 28+ aligniert per default).
 android.ndk = 25b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
@@ -352,6 +356,11 @@ p4a.branch = master
 # p4a.local_recipes = ./p4a-recipes
 
 # (str) Filename to the hook for p4a
+# build_fixes.py macht u.a.:
+#   - Cython-3.x-Patches für Kivy & PyJNIus (long → int)
+#   - FileProvider-Manifest-Korrektur
+#   - 16-KB-Page-Size-Alignment via archs.py common_ldflags
+#     und SDL2-Bootstrap APP_LDFLAGS (nur arm64-v8a / x86_64)
 p4a.hook = ./build_fixes.py
 
 # (str) Bootstrap to use for android builds

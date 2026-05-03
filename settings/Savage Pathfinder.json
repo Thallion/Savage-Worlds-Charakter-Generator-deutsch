@@ -377,385 +377,387 @@
       }
     },
     "Sylphen": {
-        "name": "Sylphen",
-        "handicaps": [
-            "Zerbrechlich (-1 Robustheit)"
+      "name": "Sylphen",
+      "handicaps": [
+        "Zerbrechlich (-1 Robustheit)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+        "Elementarzauberei (Sylph-Zauberer mit dem Talent Elementarblut [Luft] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+        "Federfall (1×/Tag kann der Sylph jeden Schaden durch einen Fall verhindern)",
+        "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+        "Alternativfähigkeit – Wie der Wind: Bewegungsweite +2; ersetzt Beweglich",
+        "Alternativfähigkeit – Himmelssprecher: Angeborene Macht Tierfreund mit Geistesreiter (Vögel und andere fliegende Tiere, 1×/Tag); ersetzt Elementarzauberei",
+        "Alternativfähigkeit – Sturm im Blut: Schnelle Regeneration für 2 Runden wenn durch Elektrizität Erschüttert oder Verwundet (max. 2 Wunden/Tag); ersetzt Intelligent"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Auranisch"
+      ],
+      "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+      "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); blass und schlank, blaue spiralförmige Markierungen auf der Haut",
+      "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); eine leichte Brise begleitet sie stets als Zeichen ihrer elementaren Abstammung",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Geschicklichkeit": 2,
+          "Verstand": 2
+        },
+        "robustheit_bonus": -1,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Zerbrechlich"
         ],
-        "talente": [],
-        "besonderheiten": [
-            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
-            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-            "Elementarzauberei (Sylph-Zauberer mit dem Talent Elementarblut [Luft] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
-            "Federfall (1×/Tag kann der Sylph jeden Schaden durch einen Fall verhindern)",
-            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
-            "Alternativfähigkeit – Wie der Wind: Bewegungsweite +2; ersetzt Beweglich",
-            "Alternativfähigkeit – Himmelssprecher: Angeborene Macht Tierfreund mit Geistesreiter (Vögel und andere fliegende Tiere, 1×/Tag); ersetzt Elementarzauberei",
-            "Alternativfähigkeit – Sturm im Blut: Schnelle Regeneration für 2 Runden wenn durch Elektrizität Erschüttert oder Verwundet (max. 2 Wunden/Tag); ersetzt Intelligent"
-        ],
-        "sprachen": [
-            "Gemeinsprache",
-            "Auranisch"
-        ],
-        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
-        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); blass und schlank, blaue spiralförmige Markierungen auf der Haut",
-        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); eine leichte Brise begleitet sie stets als Zeichen ihrer elementaren Abstammung",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Geschicklichkeit": 2,
-                "Verstand": 2
-            },
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "auto_handicaps": [
-                "Zerbrechlich"
-            ],
-            "spezielle_effekte": {
-                "dunkelsicht": true,
-                "federfall": true,
-                "elementarzauberei_luft": true,
-                "heimischer_aussenseiter": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+        "spezielle_effekte": {
+          "dunkelsicht": true,
+          "federfall": true,
+          "elementarzauberei_luft": true,
+          "heimischer_aussenseiter": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Undinen": {
-        "name": "Undinen",
-        "handicaps": [
-            "Verringerte Stärke (-1 auf alle Stärkeproben)"
+      "name": "Undinen",
+      "handicaps": [
+        "Verringerte Stärke (-1 auf alle Stärkeproben)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+        "Elementarzauberei (Undinen-Zauberer mit dem Talent Elementarblut [Wasser] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
+        "Anmutige Schwimmer (Können sich im Wasser stets mit ihrer vollen Bewegungsweite bewegen)",
+        "Angeborene Macht: Verheerung / Hydraulischer Stoß (Willenskraft zum Wirken, 1×/Tag; keine Machtmodifikatoren erlaubt)",
+        "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+        "Alternativfähigkeit – Säureatem: Angeborene Macht wird Ausbruch (Säureatem) statt Verheerung; modifiziert Angeborene Macht",
+        "Alternativfähigkeit – Hydrierte Vitalität (Schnell): Schnelle Regeneration für 2 Runden wenn mind. 10 Min vollständig in Wasser untergetaucht (max. 2 Wunden/Tag); ersetzt Beweglich; schließt Hydrierte Vitalität (Langsam) aus",
+        "Alternativfähigkeit – Hydrierte Vitalität (Langsam): Langsame Regeneration wenn mind. 10 Min vollständig in Wasser untergetaucht; ersetzt Elementarzauberei; schließt Hydrierte Vitalität (Schnell) aus",
+        "Alternativfähigkeit – Wasserwahrnehmung: Blindwahrnehmung 10\"/20 Meter im Wasser durch Vibrationssinn; ersetzt Dunkelsicht"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Aquanisch"
+      ],
+      "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+      "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); Haut in Türkis- bis Meeresgrüntönen, flossartige Ohren, Schwimmhäute an Händen und Füßen",
+      "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); Augen immer hellblau, Haar etwas dunkler als die Hautfarbe",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Geschicklichkeit": 2,
+          "Willenskraft": 2,
+          "Stärke": -1
+        },
+        "robustheit_bonus": 0,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Verringerte Stärke"
         ],
-        "talente": [],
-        "besonderheiten": [
-            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
-            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-            "Elementarzauberei (Undinen-Zauberer mit dem Talent Elementarblut [Wasser] reduzieren die Ranganforderung für Fortgeschrittenes Elementarblut auf Veteran)",
-            "Anmutige Schwimmer (Können sich im Wasser stets mit ihrer vollen Bewegungsweite bewegen)",
-            "Angeborene Macht: Verheerung / Hydraulischer Stoß (Willenskraft zum Wirken, 1×/Tag; keine Machtmodifikatoren erlaubt)",
-            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
-            "Alternativfähigkeit – Säureatem: Angeborene Macht wird Ausbruch (Säureatem) statt Verheerung; modifiziert Angeborene Macht",
-            "Alternativfähigkeit – Hydrierte Vitalität (Schnell): Schnelle Regeneration für 2 Runden wenn mind. 10 Min vollständig in Wasser untergetaucht (max. 2 Wunden/Tag); ersetzt Beweglich; schließt Hydrierte Vitalität (Langsam) aus",
-            "Alternativfähigkeit – Hydrierte Vitalität (Langsam): Langsame Regeneration wenn mind. 10 Min vollständig in Wasser untergetaucht; ersetzt Elementarzauberei; schließt Hydrierte Vitalität (Schnell) aus",
-            "Alternativfähigkeit – Wasserwahrnehmung: Blindwahrnehmung 10\"/20 Meter im Wasser durch Vibrationssinn; ersetzt Dunkelsicht"
-        ],
-        "sprachen": [
-            "Gemeinsprache",
-            "Aquanisch"
-        ],
-        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
-        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); Haut in Türkis- bis Meeresgrüntönen, flossartige Ohren, Schwimmhäute an Händen und Füßen",
-        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); Augen immer hellblau, Haar etwas dunkler als die Hautfarbe",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Geschicklichkeit": 2,
-                "Willenskraft": 2,
-                "Stärke": -1
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "auto_handicaps": [
-                "Verringerte Stärke"
-            ],
-            "spezielle_effekte": {
-                "dunkelsicht": true,
-                "anmutige_schwimmer": true,
-                "elementarzauberei_wasser": true,
-                "angeborene_macht_wasser": true,
-                "heimischer_aussenseiter": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+        "spezielle_effekte": {
+          "dunkelsicht": true,
+          "anmutige_schwimmer": true,
+          "elementarzauberei_wasser": true,
+          "angeborene_macht_wasser": true,
+          "heimischer_aussenseiter": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Weinranken-Leshy": {
-        "name": "Weinranken-Leshy",
-        "handicaps": [
-            "Größe -1 (Reduzierte Größe und Robustheit um 1)",
-            "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert)",
-            "Verringerte Fertigkeiten (Beginnen nicht mit W4 in Allgemeinwissen und Wahrnehmung – diese starten auf W4-2)"
+      "name": "Weinranken-Leshy",
+      "handicaps": [
+        "Größe -1 (Reduzierte Größe und Robustheit um 1)",
+        "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert)",
+        "Verringerte Fertigkeiten (Beginnen nicht mit W4 in Allgemeinwissen und Wahrnehmung – diese starten auf W4-2)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+        "Zäh (Konstitution W6 statt W4, Maximum W12+1)",
+        "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
+        "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
+        "Gestalt wandeln (Als eingeschränkte freie Aktion [Willenskraftprobe]: verwandelt sich in eine gesunde kleine Weinrebe oder zurück in die wahre Form)",
+        "Leshypflanze (Typus ist Pflanze statt Humanoid; keine normalen Pflanzenimmunitäten; kann mit Weinreben sprechen)",
+        "Üppiger Ausbruch (Beim Tod: Explosion mit großer Schablone; Pflanzenwesen in der Schablone heilen 1 Wunde; Gebiet wird für 24h zu schwerem Gelände, wenn die Umgebung Weinreben unterstützt)",
+        "Alternativfähigkeit – Weinrebe: 1×/Tag Macht Heilung wirken (Willenskraftprobe); ersetzt Heimlich",
+        "Alternativfähigkeit – Giftig: Als eingeschränkte freie Aktion können die Ranken mit mildem Gift belegt werden; der nächste unbewaffnete Treffer wirkt mildes Gift auf das Ziel; ersetzt Heimlich",
+        "Alternativfähigkeit – Sumpf-Leshy: Gewinnt Aquatisch; Nachtsicht wird durch Dunkelsicht (10\"/20 Meter) ersetzt; ändert Nachtsicht"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Sylvanisch"
+      ],
+      "altersspanne": "Unbekannt; als Pflanzenwesen kehrt der Geist beim Tod in die Natur zurück und kann einen neuen Körper bewohnen",
+      "groesse_maennlich": "Kleinwüchsig (~60-90cm, 10-20kg); Körper aus verflochtenen Ranken und Blättern, manchmal mit Blüten und Früchten",
+      "groesse_weiblich": "Kleinwüchsig (~60-90cm, 10-20kg); Gesicht aus Blättern mit runden Augen, kleinem Mund, ohne sichtbare Nase",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Willenskraft": 2,
+          "Konstitution": 2
+        },
+        "robustheit_bonus": -1,
+        "bewegungsweite_bonus": -1,
+        "fertigkeits_startboni": {
+          "Heimlichkeit": 2
+        },
+        "fertigkeits_startmalus": {
+          "Allgemeinwissen": -2,
+          "Wahrnehmung": -2
+        },
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Klein",
+          "Langsam_leicht",
+          "Größe -1 (Reduzierte Größe und Robustheit)",
+          "Verringerte Bewegungsweite (Schritt)",
+          "Verringerte Fertigkeiten"
         ],
-        "talente": [],
-        "besonderheiten": [
-            "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
-            "Zäh (Konstitution W6 statt W4, Maximum W12+1)",
-            "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
-            "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
-            "Gestalt wandeln (Als eingeschränkte freie Aktion [Willenskraftprobe]: verwandelt sich in eine gesunde kleine Weinrebe oder zurück in die wahre Form)",
-            "Leshypflanze (Typus ist Pflanze statt Humanoid; keine normalen Pflanzenimmunitäten; kann mit Weinreben sprechen)",
-            "Üppiger Ausbruch (Beim Tod: Explosion mit großer Schablone; Pflanzenwesen in der Schablone heilen 1 Wunde; Gebiet wird für 24h zu schwerem Gelände, wenn die Umgebung Weinreben unterstützt)",
-            "Alternativfähigkeit – Weinrebe: 1×/Tag Macht Heilung wirken (Willenskraftprobe); ersetzt Heimlich",
-            "Alternativfähigkeit – Giftig: Als eingeschränkte freie Aktion können die Ranken mit mildem Gift belegt werden; der nächste unbewaffnete Treffer wirkt mildes Gift auf das Ziel; ersetzt Heimlich",
-            "Alternativfähigkeit – Sumpf-Leshy: Gewinnt Aquatisch; Nachtsicht wird durch Dunkelsicht (10\"/20 Meter) ersetzt; ändert Nachtsicht"
-        ],
-        "sprachen": [
-            "Gemeinsprache",
-            "Sylvanisch"
-        ],
-        "altersspanne": "Unbekannt; als Pflanzenwesen kehrt der Geist beim Tod in die Natur zurück und kann einen neuen Körper bewohnen",
-        "groesse_maennlich": "Kleinwüchsig (~60-90cm, 10-20kg); Körper aus verflochtenen Ranken und Blättern, manchmal mit Blüten und Früchten",
-        "groesse_weiblich": "Kleinwüchsig (~60-90cm, 10-20kg); Gesicht aus Blättern mit runden Augen, kleinem Mund, ohne sichtbare Nase",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Willenskraft": 2,
-                "Konstitution": 2
-            },
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": -1,
-            "fertigkeits_startboni": {
-                "Heimlichkeit": 2
-            },
-            "fertigkeits_startmalus": {
-                "Allgemeinwissen": -2,
-                "Wahrnehmung": -2
-            },
-            "auto_talente": [],
-            "auto_handicaps": [
-                "Klein",
-                "Langsam_leicht",
-                "Größe -1 (Reduzierte Größe und Robustheit)",
-                "Verringerte Bewegungsweite (Schritt)",
-                "Verringerte Fertigkeiten"
-            ],
-            "spezielle_effekte": {
-                "dunkelsicht": true,
-                "gestalt_wandeln": true,
-                "leshy_pflanze": true,
-                "uppiger_ausbruch": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+        "spezielle_effekte": {
+          "dunkelsicht": true,
+          "gestalt_wandeln": true,
+          "leshy_pflanze": true,
+          "uppiger_ausbruch": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Aasimars": {
-        "name": "Aasimars",
-        "handicaps": [],
-        "talente": [],
-        "besonderheiten": [
-            "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
-            "Diplomatisch (Überreden W6 statt W4, Maximum W12+1)",
-            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-            "Tageslicht (1×/Tag als eingeschränkte freie Aktion: geringes Licht als Angeborene Macht wirken)",
-            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
-            "Alternativfähigkeit – Himmlischer Kreuzritter: Gewinnt Bevorzugter Feind (Außenseiter) wie das Waldläufer-Klassentalent; ersetzt Diplomatisch",
-            "Alternativfähigkeit – Erhöhter Widerstand: Gewinnt das Talent Arkaner Widerstand auch ohne Voraussetzungen; ersetzt Lebhaft",
-            "Alternativfähigkeit – Heiligenschein: Tageslicht erzeugt einen heiligenscheinförmigen Lichtkreis um den Kopf; bei aktivem Heiligenschein freie Wiederholung bei Testen gegen böse Kreaturen; ersetzt Dunkelsicht"
-        ],
-        "sprachen": [
-            "Gemeinsprache",
-            "Himmlisch"
-        ],
-        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
-        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); häufig metallisch glänzendes Haar, juwelenförmige Augen oder schimmernder Teint",
-        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); manche besitzen einen leuchtenden goldenen Heiligenschein als sichtbares Zeichen ihrer himmlischen Abstammung",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Willenskraft": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {
-                "Überreden": 2
-            },
-            "auto_talente": [],
-            "auto_handicaps": [],
-            "spezielle_effekte": {
-                "dunkelsicht": true,
-                "tageslicht": true,
-                "heimischer_aussenseiter": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+      "name": "Aasimars",
+      "handicaps": [],
+      "talente": [],
+      "besonderheiten": [
+        "Lebhaft (Willenskraft W6 statt W4, Maximum W12+1)",
+        "Diplomatisch (Überreden W6 statt W4, Maximum W12+1)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+        "Tageslicht (1×/Tag als eingeschränkte freie Aktion: geringes Licht als Angeborene Macht wirken)",
+        "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+        "Alternativfähigkeit – Himmlischer Kreuzritter: Gewinnt Bevorzugter Feind (Außenseiter) wie das Waldläufer-Klassentalent; ersetzt Diplomatisch",
+        "Alternativfähigkeit – Erhöhter Widerstand: Gewinnt das Talent Arkaner Widerstand auch ohne Voraussetzungen; ersetzt Lebhaft",
+        "Alternativfähigkeit – Heiligenschein: Tageslicht erzeugt einen heiligenscheinförmigen Lichtkreis um den Kopf; bei aktivem Heiligenschein freie Wiederholung bei Testen gegen böse Kreaturen; ersetzt Dunkelsicht"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Himmlisch"
+      ],
+      "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+      "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); häufig metallisch glänzendes Haar, juwelenförmige Augen oder schimmernder Teint",
+      "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); manche besitzen einen leuchtenden goldenen Heiligenschein als sichtbares Zeichen ihrer himmlischen Abstammung",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Willenskraft": 2
+        },
+        "robustheit_bonus": 0,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {
+          "Überreden": 2
+        },
+        "auto_talente": [],
+        "auto_handicaps": [],
+        "spezielle_effekte": {
+          "dunkelsicht": true,
+          "tageslicht": true,
+          "heimischer_aussenseiter": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Katzenfolk": {
-        "name": "Katzenfolk",
-        "handicaps": [],
-        "talente": [],
-        "besonderheiten": [
-            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-            "Katzenglück (Freie Wiederholung bei fehlgeschlagenen Ausweichproben)",
-            "Sprinter (Sprintwürfel um einen Typ erhöht)",
-            "Alternativfähigkeit – Katzenkrallen: Natürliche Waffe, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Beweglich",
-            "Alternativfähigkeit – Sicherer Fall: Landet stets auf den Füßen; reduziert Fallschaden um 1W6+1; ersetzt Sprinter",
-            "Alternativfähigkeit – Geruchssinn: Ignoriert bis zu 4 Punkte Abzüge bei Angriffen gegen durch magische Dunkelheit, Unsichtbarkeit o.ä. verborgene Gegner; ersetzt Nachtsicht"
-        ],
-        "sprachen": [
-            "Gemeinsprache",
-            "Katzenfolk"
-        ],
-        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–100)",
-        "groesse_maennlich": "Zwischen Zwerg und Mensch (~1,30-1,65m, 45-65kg); schlanker Körper mit feinem Fell, Schlitzpupillen, Katzenohren und schlankem Schwanz",
-        "groesse_weiblich": "Zwischen Zwerg und Mensch (~1,25-1,60m, 40-58kg); einziehbare Krallen; Fell-, Haar- und Augenfarbe stark variierend",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Geschicklichkeit": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "auto_handicaps": [],
-            "spezielle_effekte": {
-                "nachtsicht": true,
-                "katzenglueck": true,
-                "sprinter": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+      "name": "Katzenfolk",
+      "handicaps": [],
+      "talente": [],
+      "besonderheiten": [
+        "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+        "Katzenglück (Freie Wiederholung bei fehlgeschlagenen Ausweichproben)",
+        "Sprinter (Sprintwürfel um einen Typ erhöht)",
+        "Alternativfähigkeit – Katzenkrallen: Natürliche Waffe, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Beweglich",
+        "Alternativfähigkeit – Sicherer Fall: Landet stets auf den Füßen; reduziert Fallschaden um 1W6+1; ersetzt Sprinter",
+        "Alternativfähigkeit – Geruchssinn: Ignoriert bis zu 4 Punkte Abzüge bei Angriffen gegen durch magische Dunkelheit, Unsichtbarkeit o.ä. verborgene Gegner; ersetzt Nachtsicht"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Katzenfolk"
+      ],
+      "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–100)",
+      "groesse_maennlich": "Zwischen Zwerg und Mensch (~1,30-1,65m, 45-65kg); schlanker Körper mit feinem Fell, Schlitzpupillen, Katzenohren und schlankem Schwanz",
+      "groesse_weiblich": "Zwischen Zwerg und Mensch (~1,25-1,60m, 40-58kg); einziehbare Krallen; Fell-, Haar- und Augenfarbe stark variierend",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Geschicklichkeit": 2
+        },
+        "robustheit_bonus": 0,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "auto_talente": [],
+        "auto_handicaps": [],
+        "spezielle_effekte": {
+          "nachtsicht": true,
+          "katzenglueck": true,
+          "sprinter": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Dhampire": {
-        "name": "Dhampire",
-        "handicaps": [
-            "Lichtempfindlich (-1 auf Eigenschaftswürfe bei Sichterfordernissen im hellen Licht)",
-            "Verringerte Vitalität (-1 Robustheit)"
+      "name": "Dhampire",
+      "handicaps": [
+        "Lichtempfindlich (-1 auf Eigenschaftswürfe bei Sichterfordernissen im hellen Licht)",
+        "Verringerte Vitalität (-1 Robustheit)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
+        "Untote spüren (Als eingeschränkte Aktion: Untote innerhalb von 20\"/40 Meter erspüren; als eingeschränkte freie Aktion: Anzahl und ungefähre Stärke der Untoten ermitteln)",
+        "Untotenresistenz (Freie Wiederholung beim Widerstand gegen Krankheiten; immun gegen Energieentzug)",
+        "Alternativfähigkeit – Tageskind: Nicht durch Tageslicht beeinträchtigt; verliert Lichtempfindlichkeit; Nachtsicht wird durch Nachtsicht (nur Düster/Dunkel) ersetzt",
+        "Alternativfähigkeit – Fangzähne: Natürliche Waffe Biss, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Untotenresistenz",
+        "Alternativfähigkeit – Vampirische Empathie: Kann mit Fledermäusen, Ratten und Wölfen kommunizieren; freie Wiederholung bei fehlgeschlagenen Überreden-Proben mit diesen Tieren; ersetzt Untote spüren"
+      ],
+      "sprachen": [
+        "Gemeinsprache"
+      ],
+      "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110), jedoch mit übernatürlicher Langlebigkeit ähnlich wie Elfen",
+      "groesse_maennlich": "Hochgewachsen und schlank (1,70-2,00m, 60-85kg); unheimlich schöne Züge, verlängerte Eckzähne, oft gespenstische Blässe im Tageslicht",
+      "groesse_weiblich": "Hochgewachsen und schlank (1,65-1,90m, 55-75kg); übernatürlich flüssige Bewegungen; dunkle Haut wirkt manchmal wie ein Bluterguss",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Geschicklichkeit": 2
+        },
+        "robustheit_bonus": -1,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Lichtempfindlich",
+          "Verringerte Vitalität"
         ],
-        "talente": [],
-        "besonderheiten": [
-            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Nachtsicht (Ignoriert alle Beleuchtungsabzüge)",
-            "Untote spüren (Als eingeschränkte Aktion: Untote innerhalb von 20\"/40 Meter erspüren; als eingeschränkte freie Aktion: Anzahl und ungefähre Stärke der Untoten ermitteln)",
-            "Untotenresistenz (Freie Wiederholung beim Widerstand gegen Krankheiten; immun gegen Energieentzug)",
-            "Alternativfähigkeit – Tageskind: Nicht durch Tageslicht beeinträchtigt; verliert Lichtempfindlichkeit; Nachtsicht wird durch Nachtsicht (nur Düster/Dunkel) ersetzt",
-            "Alternativfähigkeit – Fangzähne: Natürliche Waffe Biss, Stärke+W4 Schaden (Natürliche Waffen laut Pathfinder für Savage Worlds); ersetzt Untotenresistenz",
-            "Alternativfähigkeit – Vampirische Empathie: Kann mit Fledermäusen, Ratten und Wölfen kommunizieren; freie Wiederholung bei fehlgeschlagenen Überreden-Proben mit diesen Tieren; ersetzt Untote spüren"
-        ],
-        "sprachen": [
-            "Gemeinsprache"
-        ],
-        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110), jedoch mit übernatürlicher Langlebigkeit ähnlich wie Elfen",
-        "groesse_maennlich": "Hochgewachsen und schlank (1,70-2,00m, 60-85kg); unheimlich schöne Züge, verlängerte Eckzähne, oft gespenstische Blässe im Tageslicht",
-        "groesse_weiblich": "Hochgewachsen und schlank (1,65-1,90m, 55-75kg); übernatürlich flüssige Bewegungen; dunkle Haut wirkt manchmal wie ein Bluterguss",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Geschicklichkeit": 2
-            },
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "auto_talente": [],
-            "auto_handicaps": [
-                "Lichtempfindlich",
-                "Verringerte Vitalität"
-            ],
-            "spezielle_effekte": {
-                "dunkelsicht": true,
-                "lichtempfindlich": true,
-                "untote_spueren": true,
-                "untotenresistenz": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+        "spezielle_effekte": {
+          "dunkelsicht": true,
+          "lichtempfindlich": true,
+          "untote_spueren": true,
+          "untotenresistenz": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Tieflinge": {
-        "name": "Tieflinge",
-        "handicaps": [
-          "Außenseiter (leicht, -2 auf Überredenproben, werden oft abgelehnt oder verspottet)"
+      "name": "Tieflinge",
+      "handicaps": [
+        "Außenseiter (leicht, -2 auf Überredenproben, werden oft abgelehnt oder verspottet)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+        "Dunkelheit (1×/Tag als eingeschränkte freie Aktion: geringes Dunkel als Angeborene Macht wirken)",
+        "Teuflische Zauberei (Tieflinge-Zauberer mit Abgrundsblut oder Infernalblut reduzieren die Ranganforderung für Fortgeschrittenes Blut auf Veteran)",
+        "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
+        "Alternativfähigkeit – Teuflischer Sprinter: Gewinnt das Talent Schnell (Fleet-Footed); ersetzt Intelligent",
+        "Alternativfähigkeit – Greifbarer Schwanz: Kann mit dem Schwanz verstaute Gegenstände als freie Aktion hervorholen; ersetzt Teuflische Zauberei",
+        "Alternativfähigkeit – Verkümmerte Flügel: Fliegen mit Bewegungsweite 6; am Ende jeder Flug-Runde Konstitutionsprobe oder Erschöpfung; ersetzt Teuflische Zauberei"
+      ],
+      "sprachen": [
+        "Abyssalisch",
+        "Gemeinsprache",
+        "Infernalisch"
+      ],
+      "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
+      "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); individuelle teuflische Merkmale wie Hörner, gezackter Schwanz, unnatürlich gefärbte Augen, Klauen oder kleine Flügel",
+      "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); kein Tieflinge gleicht dem anderen – von seltsam schön bis erschreckend fremdländisch",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Geschicklichkeit": 2,
+          "Verstand": 2
+        },
+        "robustheit_bonus": 0,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "fertigkeits_modifier_boni": {
+          "Überreden": -2
+        },
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Außenseiter_leicht"
         ],
-        "talente": [],
-        "besonderheiten": [
-            "Beweglich (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-            "Intelligent (Verstand W6 statt W4, Maximum W12+1)",
-            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-            "Dunkelheit (1×/Tag als eingeschränkte freie Aktion: geringes Dunkel als Angeborene Macht wirken)",
-            "Teuflische Zauberei (Tieflinge-Zauberer mit Abgrundsblut oder Infernalblut reduzieren die Ranganforderung für Fortgeschrittenes Blut auf Veteran)",
-            "Heimischer Außenseiter (Typus ist Außenseiter statt Humanoid)",
-            "Alternativfähigkeit – Teuflischer Sprinter: Gewinnt das Talent Schnell (Fleet-Footed); ersetzt Intelligent",
-            "Alternativfähigkeit – Greifbarer Schwanz: Kann mit dem Schwanz verstaute Gegenstände als freie Aktion hervorholen; ersetzt Teuflische Zauberei",
-            "Alternativfähigkeit – Verkümmerte Flügel: Fliegen mit Bewegungsweite 6; am Ende jeder Flug-Runde Konstitutionsprobe oder Erschöpfung; ersetzt Teuflische Zauberei"
-        ],
-        "sprachen": [
-            "Abyssalisch",
-            "Gemeinsprache",
-            "Infernalisch"
-        ],
-        "altersspanne": "Wie Mensch (Erwachsen mit 17, Alt mit 53, maximales Alter 70–110)",
-        "groesse_maennlich": "Wie Mensch (1,50-1,95m, 54-100kg); individuelle teuflische Merkmale wie Hörner, gezackter Schwanz, unnatürlich gefärbte Augen, Klauen oder kleine Flügel",
-        "groesse_weiblich": "Wie Mensch (1,50-1,85m, 43-84kg); kein Tieflinge gleicht dem anderen – von seltsam schön bis erschreckend fremdländisch",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Geschicklichkeit": 2,
-                "Verstand": 2
-            },
-            "robustheit_bonus": 0,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {},
-            "fertigkeits_modifier_boni": {
-                "Überreden": -2
-            },
-            "auto_talente": [],
-            "auto_handicaps": ["Außenseiter_leicht"],
-            "spezielle_effekte": {
-                "dunkelsicht": true,
-                "dunkelheit_macht": true,
-                "teuflische_zauberei": true,
-                "heimischer_aussenseiter": true
-            },
-            "wahlmoeglichkeiten": {}
-        }
+        "spezielle_effekte": {
+          "dunkelsicht": true,
+          "dunkelheit_macht": true,
+          "teuflische_zauberei": true,
+          "heimischer_aussenseiter": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     },
     "Goblin": {
-        "name": "Goblin",
-        "handicaps": [
-            "Größe -1 (Reduzierte Größe und Robustheit um 1)",
-            "Außenseiter (Schwer) (-2 auf alle Überreden-Proben; werden von anderen oft gemobbt)"
+      "name": "Goblin",
+      "handicaps": [
+        "Größe -1 (Reduzierte Größe und Robustheit um 1)",
+        "Außenseiter (Schwer) (-2 auf alle Überreden-Proben; werden von anderen oft gemobbt)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Flink (Geschicklichkeit W8 statt W4, Maximum W12+2)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
+        "Fähiger Reiter (Beginnt mit W4 in Reiten)",
+        "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
+        "Alternativfähigkeit – Alles essen: Freie Wiederholung bei Überleben-Proben zur Nahrungssuche; +2 bei Konstitutionsproben gegen toxische Substanzen; ersetzt Fähiger Reiter",
+        "Alternativfähigkeit – Harter Schädel, große Zähne: Natürliche Waffe Biss, Stärke+W4 Schaden; ersetzt Heimlich",
+        "Alternativfähigkeit – Übergroße Ohren: Wahrnehmung W6 statt W4, Maximum W12+1; ersetzt Fähiger Reiter"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Goblinisch"
+      ],
+      "altersspanne": "Jugend mit 3, Erwachsen mit 7–8, maximales Alter 50+ (selten über 20 ohne Beschützer)",
+      "groesse_maennlich": "Klein (~85-100cm, 17-22kg); knochige Gestalt, übergroßer kahler Schädel, riesige Ohren, kleine rote oder gelbe Augen",
+      "groesse_weiblich": "Klein (~80-95cm, 15-20kg); Hautfarbe variiert: Grün, Grau, Blau, Schwarz oder Blassgrau; riesiges Maul mit zackigen Zähnen",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Geschicklichkeit": 4
+        },
+        "robustheit_bonus": -1,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {
+          "Heimlichkeit": 2,
+          "Reiten": 2
+        },
+        "fertigkeits_modifier_boni": {
+          "Überreden": -2
+        },
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Klein",
+          "Größe -1 (Reduzierte Größe und Robustheit)"
         ],
-        "talente": [],
-        "besonderheiten": [
-            "Flink (Geschicklichkeit W8 statt W4, Maximum W12+2)",
-            "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-            "Fähiger Reiter (Beginnt mit W4 in Reiten)",
-            "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
-            "Alternativfähigkeit – Alles essen: Freie Wiederholung bei Überleben-Proben zur Nahrungssuche; +2 bei Konstitutionsproben gegen toxische Substanzen; ersetzt Fähiger Reiter",
-            "Alternativfähigkeit – Harter Schädel, große Zähne: Natürliche Waffe Biss, Stärke+W4 Schaden; ersetzt Heimlich",
-            "Alternativfähigkeit – Übergroße Ohren: Wahrnehmung W6 statt W4, Maximum W12+1; ersetzt Fähiger Reiter"
-        ],
-        "sprachen": [
-            "Gemeinsprache",
-            "Goblinisch"
-        ],
-        "altersspanne": "Jugend mit 3, Erwachsen mit 7–8, maximales Alter 50+ (selten über 20 ohne Beschützer)",
-        "groesse_maennlich": "Klein (~85-100cm, 17-22kg); knochige Gestalt, übergroßer kahler Schädel, riesige Ohren, kleine rote oder gelbe Augen",
-        "groesse_weiblich": "Klein (~80-95cm, 15-20kg); Hautfarbe variiert: Grün, Grau, Blau, Schwarz oder Blassgrau; riesiges Maul mit zackigen Zähnen",
-        "aktiv": true,
-        "custom": false,
-        "effects": {
-            "attribute_bonuses": {
-                "Geschicklichkeit": 4
-            },
-            "robustheit_bonus": -1,
-            "bewegungsweite_bonus": 0,
-            "fertigkeits_startboni": {
-                "Heimlichkeit": 2,
-                "Reiten": 2
-            },
-            "fertigkeits_modifier_boni": {
-                "Überreden": -2
-            },
-            "auto_talente": [],
-            "auto_handicaps": [
-                "Klein",
-                "Größe -1 (Reduzierte Größe und Robustheit)"
-            ],
-            "spezielle_effekte": {
-                "dunkelsicht": true
-            },
-            "wahlmoeglichkeiten": {}
+        "spezielle_effekte": {
+          "dunkelsicht": true
+        },
+        "wahlmoeglichkeiten": {}
       }
     }
   },
@@ -1756,8 +1758,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Orakel": {
-      "name": "Orakel",
+    "AH (Orakel)": {
+      "name": "AH (Orakel)",
       "kategorie": "Klasse",
       "rang": "A",
       "voraussetzungen": [
@@ -1811,25 +1813,16 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Beschwörer": {
-      "name": "Beschwörer",
-      "kategorie": "Klasse",
+    "AH (Beschwörer)": {
+      "name": "AH (Beschwörer)",
+      "kategorie": "Hintergrund",
       "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "Okkultismus W6"
-      ],
-      "beschreibung": "AH (Beschwörer) [Arkane Fertigkeit: Zaubern], Behindernde Rüstung (leicht), Eidolon (magisch beschworenes Wesen, das dem Beschwörer folgt, kämpft und mit Evolutionspunkten ausgebaut wird).",
-      "neue_maechte": 2,
-      "machtpunkte": 10,
+      "voraussetzungen": [],
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+      "neue_maechte": 5,
+      "machtpunkte": 15,
       "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_talente": [
-        "AH (Beschwörer)"
-      ],
-      "auto_handicaps": [
-        "Behindernde Rüstung_leicht"
-      ]
+      "aktiv": true
     },
     "Zusätzliche Evolution": {
       "name": "Zusätzliche Evolution",
@@ -1911,8 +1904,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Hexe": {
-      "name": "Hexe",
+    "AH (Hexe)": {
+      "name": "AH (Hexe)",
       "kategorie": "Klasse",
       "rang": "A",
       "voraussetzungen": [
@@ -2056,7 +2049,12 @@
       "kategorie": "Hintergrund",
       "rang": "F",
       "voraussetzungen": [
-        {"oder": ["AH (Zauberer)", "AH (Magier)"]}
+        {
+          "oder": [
+            "AH (Zauberer)",
+            "AH (Magier)"
+          ]
+        }
       ],
       "beschreibung": "Einmal pro Zug kann der Charakter bei einer Probe für eine Macht seiner Schule oder Blutlinie bis zu 2 Punkte Abzüge ignorieren.",
       "neue_maechte": 0,
@@ -2837,17 +2835,6 @@
       "beschreibung": "Bietet +1 auf Darbietungsproben, wenn ein Instrument beim Zaubern verwendet wird.",
       "neue_maechte": 0,
       "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "AH (Beschwörer)": {
-      "name": "AH (Beschwörer)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-      "neue_maechte": 5,
-      "machtpunkte": 15,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -4136,7 +4123,12 @@
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
-        {"oder": ["Volk-Eigenschaft: dunkelsicht", "Volk-Eigenschaft: nachtsicht"]}
+        {
+          "oder": [
+            "Volk-Eigenschaft: dunkelsicht",
+            "Volk-Eigenschaft: nachtsicht"
+          ]
+        }
       ],
       "beschreibung": "Der Charakter verbessert seine Sehfähigkeit im Dunkeln: Er ignoriert alle Beleuchtungsabzüge vollständig (entspricht Nachtsicht auf höchster Stufe).",
       "neue_maechte": 0,
@@ -5895,6 +5887,1174 @@
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
+    },
+    "Gemeinsamer Angriff": {
+      "name": "Gemeinsamer Angriff",
+      "kategorie": "Anführer",
+      "rang": "V",
+      "voraussetzungen": [
+        "VER W8",
+        "Anführer"
+      ],
+      "beschreibung": "Erlaubt Verbündeten, begrenzte Aktionen und begrenzte freie Aktionen einmal zusätzlich pro Runde zu nutzen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Abprallende Zauber": {
+      "name": "Abprallende Zauber",
+      "kategorie": "Macht",
+      "rang": "V",
+      "voraussetzungen": [
+        "AH (beliebig)"
+      ],
+      "beschreibung": "Leite den Zauber des Helden auf einen Gegner um, falls das ursprüngliche Ziel dem Zauber widersteht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Störende Zauber": {
+      "name": "Störende Zauber",
+      "kategorie": "Macht",
+      "rang": "F",
+      "voraussetzungen": [
+        "AH (beliebig)"
+      ],
+      "beschreibung": "Die Zauber dieses Charakters erschweren es Gegnern, Mystische Kräfte und Angeborene Kräfte zu aktivieren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schlachtherold": {
+      "name": "Schlachtherold",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kavalier oder Paladin",
+        "Anführer",
+        "Einschüchtern W4",
+        "Überreden W6"
+      ],
+      "beschreibung": "Inspirierender Befehl: Verleiht den Verbündeten des Helden erhöhte Kampffähigkeiten im Kampf.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schlachtherold II": {
+      "name": "Schlachtherold II",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Schlachtherold"
+      ],
+      "beschreibung": "Stimme der Autorität: Verleiht Verbündeten eines der Kampftalente dieses Charakters.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schlachtherold III": {
+      "name": "Schlachtherold III",
+      "kategorie": "Prestige",
+      "rang": "H",
+      "voraussetzungen": [
+        "Schlachtherold II"
+      ],
+      "beschreibung": "Letztes Gefecht: Bringe Verbündete vom Rande des Todes zurück.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heiliger Verteidiger": {
+      "name": "Heiliger Verteidiger",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kanalisieren",
+        "Okkultismus W6"
+      ],
+      "beschreibung": "Stigmata: Der Charakter erhält einen Bonus auf Heilungsproben.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heiliger Verteidiger II": {
+      "name": "Heiliger Verteidiger II",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Heiliger Verteidiger"
+      ],
+      "beschreibung": "Blutfeuer: Der Schaden der Waffe dieses Charakters wird erhöht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heiliger Verteidiger III": {
+      "name": "Heiliger Verteidiger III",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Heiliger Verteidiger II"
+      ],
+      "beschreibung": "Blutregen: Die Stigmata des Helden verursachen Schaden bei Gegnern.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Horizontwanderer": {
+      "name": "Horizontwanderer",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Überleben W6"
+      ],
+      "beschreibung": "Geländemeisterschaft: Unterstützt Verbündete in einem bestimmten Geländetyp. Erhält bevorzugtes Gelände.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Horizontwanderer II": {
+      "name": "Horizontwanderer II",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Horizontwanderer"
+      ],
+      "beschreibung": "Geländedominanz: Erhält besondere Fähigkeiten basierend auf bevorzugten Geländetypen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisteralchemist": {
+      "name": "Meisteralchemist",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Mutagene"
+      ],
+      "beschreibung": "Mutagene Form: Verwandele dich in ein Alter Ego mit verbesserten Fähigkeiten. Gewährt Mutieren-Fähigkeit.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisteralchemist II": {
+      "name": "Meisteralchemist II",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Meisteralchemist"
+      ],
+      "beschreibung": "Brutalität: Verursache +2 Schaden mit Nahkampfangriffen und natürlichen Angriffen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisteralchemist III": {
+      "name": "Meisteralchemist III",
+      "kategorie": "Prestige",
+      "rang": "H",
+      "voraussetzungen": [
+        "Meisteralchemist II"
+      ],
+      "beschreibung": "Fortgeschrittene Mutagene: Erhalte eine einzigartige Fähigkeit in mutagener Form.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisterspion": {
+      "name": "Meisterspion",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Aufmerksamkeit W6",
+        "Auftreten W6",
+        "Überreden W8"
+      ],
+      "beschreibung": "Meister der Verkleidung: Reduziert den Malus für das Verkleiden als Völker mit anderer Größe, anderem Alter oder Geschlecht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisterspion II": {
+      "name": "Meisterspion II",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Meisterspion"
+      ],
+      "beschreibung": "Oberflächliches Wissen: Ignoriert Mali für verstandbasierte Fertigkeitsproben, die die Tarnidentität betreffen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisterspion III": {
+      "name": "Meisterspion III",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Meisterspion II"
+      ],
+      "beschreibung": "Annahme: Werde unsichtbar für Wahrsagungszauber und Gedankenlesen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Naturwächter": {
+      "name": "Naturwächter",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Tiermeister",
+        "Glaube W6 oder MP",
+        "Überleben W4"
+      ],
+      "beschreibung": "Überlebenskünstler: Parade +1, erhält eine kostenlose Wiederholung auf Überleben- und Aufmerksamkeit-Proben im gewählten Gelände und ignoriert Schwieriges Gelände sowie Gefahren durch natürliche Elemente.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Naturwächter II": {
+      "name": "Naturwächter II",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Naturwächter"
+      ],
+      "beschreibung": "Eisenpranke: Teile Zaubereffekte mit Begleitern.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Naturwächter III": {
+      "name": "Naturwächter III",
+      "kategorie": "Prestige",
+      "rang": "H",
+      "voraussetzungen": [
+        "Naturwächter II"
+      ],
+      "beschreibung": "Begleiterseele: Erhalte übernatürliche Fähigkeiten mit dem Begleiter dieses Charakters.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zornprophet": {
+      "name": "Zornprophet",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "AH (Wunder oder Orakel)",
+        "Kampfrausch",
+        "Okkultismus W4"
+      ],
+      "beschreibung": "Zornzauberer: Zauber, die im Kampfrausch gewirkt werden, sind schwerer zu widerstehen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zornprophet II": {
+      "name": "Zornprophet II",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Zornprophet"
+      ],
+      "beschreibung": "Zornzauberstärke: Zauber, die auf den Zaubernden zielen, sind begrenzte freie Aktionen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zornprophet III": {
+      "name": "Zornprophet III",
+      "kategorie": "Prestige",
+      "rang": "H",
+      "voraussetzungen": [
+        "Zornprophet II"
+      ],
+      "beschreibung": "Geisterkrieger: Der Zornprophet ist besser darin, Feenwesen, Externare und Untote zu töten.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unbeugsamer Verteidiger": {
+      "name": "Unbeugsamer Verteidiger",
+      "kategorie": "Prestige",
+      "rang": "F",
+      "voraussetzungen": [
+        "Nerven aus Stahl",
+        "Keine Rüstungsbeschränkung oder Behindernde Rüstung"
+      ],
+      "beschreibung": "Verteidigungshaltung: Der Charakter wird zu einem Bollwerk der Verteidigung und erhöht seine Attribute auf Kosten der Bewegungsfreiheit.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unbeugsamer Verteidiger II": {
+      "name": "Unbeugsamer Verteidiger II",
+      "kategorie": "Prestige",
+      "rang": "V",
+      "voraussetzungen": [
+        "Unbeugsamer Verteidiger"
+      ],
+      "beschreibung": "Letztes Wort: Führe einen Angriff aus, bevor du kampfunfähig wirst. Behandle den Angriff, als hättest du einen Joker erhalten.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unbeugsamer Verteidiger III": {
+      "name": "Unbeugsamer Verteidiger III",
+      "kategorie": "Prestige",
+      "rang": "H",
+      "voraussetzungen": [
+        "Unbeugsamer Verteidiger II"
+      ],
+      "beschreibung": "Bollwerk: Erhöhungen verursachen nur zusätzlichen Schaden gegen den Verteidiger, lösen aber keine anderen Effekte wie Betäubender Schlag aus.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schnelle Unterstützung": {
+      "name": "Schnelle Unterstützung",
+      "kategorie": "Sozial",
+      "rang": "F",
+      "voraussetzungen": [
+        "VER W8"
+      ],
+      "beschreibung": "Unterstütze Verbündete als begrenzte freie Aktion, wenn deine Aktionskarte eine Bildkarte oder ein Joker ist.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ducken und Deckung": {
+      "name": "Ducken und Deckung",
+      "kategorie": "Übersinnlich",
+      "rang": "A",
+      "voraussetzungen": [],
+      "beschreibung": "Der Charakter und ein Verbündeter können die Würfe des jeweils anderen beim Ausweichen nutzen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zertrümmern": {
+      "name": "Zertrümmern",
+      "kategorie": "Übersinnlich",
+      "rang": "A",
+      "voraussetzungen": [
+        "Halb-Ork",
+        "STÄ W10"
+      ],
+      "beschreibung": "Der Charakter kann Schadenswürfe explodieren lassen, wenn er versucht, Objekte zu zerstören.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Tödliche Darbietung": {
+      "name": "Tödliche Darbietung",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Barde-Talente"
+      ],
+      "beschreibung": "Nutze Auftreten, um Zuhörer zu Betäuben oder Kampfunfähig zu machen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heiliger Champion": {
+      "name": "Heiliger Champion",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Paladin-Talente"
+      ],
+      "beschreibung": "+2 Robustheit und verbanne Externare bei Böses-Niederstrecken-Angriffen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Heimvorteil": {
+      "name": "Heimvorteil",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "WIL W8",
+        "Mindestens zwei Druiden-Talente"
+      ],
+      "beschreibung": "Gib einen Benny aus, um alle Machtpunkte wiederherzustellen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meisterangriff": {
+      "name": "Meisterangriff",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Schurken-Talente"
+      ],
+      "beschreibung": "Hinterhältige Angriffe dieses Charakters können lähmen, töten oder Gegner in Schlaf versetzen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Mystischer Jäger": {
+      "name": "Mystischer Jäger",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [],
+      "beschreibung": "Ignoriere Unaufhaltsam bei einer Bildkarte und hindere Gegner daran, die Angriffe dieses Charakters zu absorbieren, wenn du einen Joker hast.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Perfekter Körper": {
+      "name": "Perfekter Körper",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Mönch-Talente"
+      ],
+      "beschreibung": "Erhalte +4 Robustheit und werde zu einem Externar.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schon gesehen": {
+      "name": "Schon gesehen",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Waldläufer-Talente"
+      ],
+      "beschreibung": "Der Waldläufer wird gegenüber Fähigkeiten seiner bevorzugten Feinde nahezu unempfindlich.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Einzigartige Blutlinie": {
+      "name": "Einzigartige Blutlinie",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Zauberer-Talente"
+      ],
+      "beschreibung": "Erhalte eine zusätzliche fortgeschrittene Blutlinie.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unaufhaltsame Wut": {
+      "name": "Unaufhaltsame Wut",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Barbar-Talente"
+      ],
+      "beschreibung": "Erhalte Unaufhaltsam während des Kampfrausches.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Veteran des ewigen Krieges": {
+      "name": "Veteran des ewigen Krieges",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Kämpfer-Talente"
+      ],
+      "beschreibung": "Gegner erhalten keinen Bonus für Rücksichtslose Angriffe gegen diesen Helden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gut vorbereitet": {
+      "name": "Gut vorbereitet",
+      "kategorie": "Legendär",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Magier-Talente"
+      ],
+      "beschreibung": "Wirke einen Zauber als begrenzte freie Aktion für +1 Machtpunkt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wasserabstammung": {
+      "name": "Wasserabstammung",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Undinen"
+      ],
+      "beschreibung": "Gewährt die Fähigkeit Wasseratmung und schnellere Bewegung im Wasser.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kletterranke": {
+      "name": "Kletterranke",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Weinranken-Leshy",
+        "STÄ W6"
+      ],
+      "beschreibung": "Gewährt die Kletterer-Fähigkeit (Wandkletterer).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Elementare Reise": {
+      "name": "Elementare Reise",
+      "kategorie": "Hintergrund",
+      "rang": "F",
+      "voraussetzungen": [
+        "Ifrits oder Oreads oder Sylphen oder Undinen"
+      ],
+      "beschreibung": "Gewährt die Fähigkeit, zur Ebene zu reisen, die eng mit deiner Blutlinie verbunden ist. Du bist immun gegen die negativen Effekte dieser Ebene.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Innerer Atem": {
+      "name": "Innerer Atem",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Sylphen"
+      ],
+      "beschreibung": "Dein Held muss nicht mehr atmen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kudzu-Ringer": {
+      "name": "Kudzu-Ringer",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Weinranken-Leshy",
+        "GES W6",
+        "Kämpfen W6"
+      ],
+      "beschreibung": "Behindert die Sicht eines Gegners beim Ringen und erschwert diesem das Ausführen von Aktionen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Oread-Gräber": {
+      "name": "Oread-Gräber",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Oreads"
+      ],
+      "beschreibung": "Gewährt die Fähigkeit, unter der Erde zu graben.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Versengende Waffe": {
+      "name": "Versengende Waffe",
+      "kategorie": "Hintergrund",
+      "rang": "F",
+      "voraussetzungen": [
+        "Ifrits"
+      ],
+      "beschreibung": "Waffenlose Angriffe verursachen Feuerschaden. Kann auf Metallwaffen übertragen werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Flügel der Luft": {
+      "name": "Flügel der Luft",
+      "kategorie": "Hintergrund",
+      "rang": "F",
+      "voraussetzungen": [
+        "Sylphen"
+      ],
+      "beschreibung": "Gewährt die Fähigkeit zu fliegen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Revolverheld": {
+      "name": "Revolverheld",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "GES W6",
+        "Schießen W6"
+      ],
+      "beschreibung": "Rüstungsbeschränkung (leicht), Taten, Schneid.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Rüstungsbeschränkung_leicht"
+      ]
+    },
+    "Zielen (Revolverheld)": {
+      "name": "Zielen (Revolverheld)",
+      "kategorie": "Revolverheld",
+      "rang": "F",
+      "voraussetzungen": [
+        "Revolverheld"
+      ],
+      "beschreibung": "Gib einen Benny aus, um einen Bonus auf gezielte Angriffe zu erhalten.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Todesschuss (Revolverheld)": {
+      "name": "Todesschuss (Revolverheld)",
+      "kategorie": "Revolverheld",
+      "rang": "V",
+      "voraussetzungen": [
+        "Revolverheld"
+      ],
+      "beschreibung": "Gib einen Benny aus, um den Schusswaffenschaden zu verdoppeln.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Betrug des Todes": {
+      "name": "Betrug des Todes",
+      "kategorie": "Revolverheld",
+      "rang": "H",
+      "voraussetzungen": [
+        "Revolverheld"
+      ],
+      "beschreibung": "Gib einen Benny aus, um das Wundemaximum zu reduzieren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Todesschütze": {
+      "name": "Todesschütze",
+      "kategorie": "Revolverheld",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Revolverheld-Talente"
+      ],
+      "beschreibung": "Gib einen Benny aus, um ein angeschlagenes oder verwundetes Ziel zu einer Konstitutionsprobe zu zwingen oder kampfunfähig zu machen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Magus": {
+      "name": "Magus",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6",
+        "Kämpfen W6"
+      ],
+      "beschreibung": "Arkaner Hintergrund (Magus), Rüstungsbehinderung (leicht), Magus-Arkana, Zauberbücher, Zauberhieb.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde Rüstung_leicht"
+      ]
+    },
+    "Zauberstab-Meisterschaft": {
+      "name": "Zauberstab-Meisterschaft",
+      "kategorie": "Magus",
+      "rang": "F",
+      "voraussetzungen": [
+        "Magus"
+      ],
+      "beschreibung": "Der Magus kann einen Zauberstab für Zauberhiebe nutzen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zaubererinnerung": {
+      "name": "Zaubererinnerung",
+      "kategorie": "Magus",
+      "rang": "V",
+      "voraussetzungen": [
+        "Magus"
+      ],
+      "beschreibung": "Stelle alle verlorenen Machtpunkte wieder her.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gegenschlag (Magus)": {
+      "name": "Gegenschlag (Magus)",
+      "kategorie": "Magus",
+      "rang": "H",
+      "voraussetzungen": [
+        "Magus"
+      ],
+      "beschreibung": "Erhalte einen freien Angriff gegen einen Gegner, der einen Zauber wirkt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wahrer Magus": {
+      "name": "Wahrer Magus",
+      "kategorie": "Magus",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Magus-Talente"
+      ],
+      "beschreibung": "Ignoriere Arkane Resistenz und Verbesserte Arkane Resistenz.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ninja": {
+      "name": "Ninja",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "Athletik W6",
+        "Heimlichkeit W6"
+      ],
+      "beschreibung": "Rüstungsbeschränkung (leicht), Mystische Kräfte (Ninja).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Rüstungsbeschränkung_leicht"
+      ]
+    },
+    "Keine Spur": {
+      "name": "Keine Spur",
+      "kategorie": "Ninja",
+      "rang": "F",
+      "voraussetzungen": [
+        "Ninja"
+      ],
+      "beschreibung": "Es ist schwerer, den Ninja zu verfolgen und zu identifizieren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meister-Ninja-Trick": {
+      "name": "Meister-Ninja-Trick",
+      "kategorie": "Ninja",
+      "rang": "V",
+      "voraussetzungen": [
+        "Ninja"
+      ],
+      "beschreibung": "Gewährt zusätzliche Mystische Kräfte.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ki-Ladung": {
+      "name": "Ki-Ladung",
+      "kategorie": "Ninja",
+      "rang": "H",
+      "voraussetzungen": [
+        "Ninja"
+      ],
+      "beschreibung": "Lade eine Waffe mit mystischer Energie auf, um mehr Schaden zu verursachen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Unsichtbare Klinge": {
+      "name": "Unsichtbare Klinge",
+      "kategorie": "Ninja",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Ninja-Talente"
+      ],
+      "beschreibung": "Gewährt leichter das Überraschungsmoment gegen einen Gegner.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wandler": {
+      "name": "Wandler",
+      "kategorie": "Klasse",
+      "rang": "A",
+      "voraussetzungen": [
+        "Kämpfen W6",
+        "Überleben W6"
+      ],
+      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Defensive Instinkte, Geheimsprache, Wandler-Aspekt, Wandlerklauen, Wildnisschritt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Rüstungsbeschränkung_mittelschwer"
+      ]
+    },
+    "Chimären-Aspekt": {
+      "name": "Chimären-Aspekt",
+      "kategorie": "Wandler",
+      "rang": "F",
+      "voraussetzungen": [
+        "Wandler"
+      ],
+      "beschreibung": "Gewährt einen zusätzlichen Aspekt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Wandler-Tiergestalt": {
+      "name": "Wandler-Tiergestalt",
+      "kategorie": "Wandler",
+      "rang": "V",
+      "voraussetzungen": [
+        "Wandler"
+      ],
+      "beschreibung": "Verwandele dich in die Hauptform des Aspekts.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verbesserte Form (Wandler)": {
+      "name": "Verbesserte Form (Wandler)",
+      "kategorie": "Wandler",
+      "rang": "H",
+      "voraussetzungen": [
+        "Wandler"
+      ],
+      "beschreibung": "Werde eine mächtigere Version des Wandler-Aspekts.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verbesserte Defensive Instinkte": {
+      "name": "Verbesserte Defensive Instinkte",
+      "kategorie": "Wandler",
+      "rang": "L",
+      "voraussetzungen": [
+        "Mindestens zwei Wandler-Talente"
+      ],
+      "beschreibung": "Nutze Willenskraft und Konstitution zur Berechnung der Robustheit.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gebrandmarkt für Vergeltung": {
+      "name": "Gebrandmarkt für Vergeltung",
+      "kategorie": "Inquisitor",
+      "rang": "V",
+      "voraussetzungen": [
+        "Inquisitor",
+        "Bann"
+      ],
+      "beschreibung": "Teile die Vorteile von Bann mit Verbündeten.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kranich-Stil": {
+      "name": "Kranich-Stil",
+      "kategorie": "Mönch",
+      "rang": "V",
+      "voraussetzungen": [
+        "Mönch"
+      ],
+      "beschreibung": "Greife einen Gegner an, der den Charakter beim Verteidigen treffen würde.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Erweiterter Aspekt": {
+      "name": "Erweiterter Aspekt",
+      "kategorie": "Wandler",
+      "rang": "A",
+      "voraussetzungen": [
+        "Wandler"
+      ],
+      "beschreibung": "Gewährt zusätzliche 15 Minuten in der Nebenform des Wandlers.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Extra Schneid": {
+      "name": "Extra Schneid",
+      "kategorie": "Revolverheld",
+      "rang": "F",
+      "voraussetzungen": [
+        "Revolverheld"
+      ],
+      "beschreibung": "Gewährt mehr als einen Benny zurück pro Kampf durch Schneid.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Hinterhalt-Gespür": {
+      "name": "Hinterhalt-Gespür",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "Aufmerksamkeit W8"
+      ],
+      "beschreibung": "Würfle auf Aufmerksamkeit, um zu verhindern, dass jemand deinen Helden überrascht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Bestienmeister-Stil": {
+      "name": "Bestienmeister-Stil",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "WIL W6",
+        "Tiermeister oder ähnliche Fähigkeit"
+      ],
+      "beschreibung": "Der Bestienmeister kann mit seinem tierischen Begleiter zusammenarbeiten, um zu verhindern, dass dieser Schaden erleidet.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Körperschild": {
+      "name": "Körperschild",
+      "kategorie": "Kampf",
+      "rang": "A",
+      "voraussetzungen": [
+        "GES W8",
+        "Kämpfen W6"
+      ],
+      "beschreibung": "Benutze einen gepackten Gegner als Deckung.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Würgegriff": {
+      "name": "Würgegriff",
+      "kategorie": "Kampf",
+      "rang": "V",
+      "voraussetzungen": [
+        "Kämpfen W8"
+      ],
+      "beschreibung": "Schalte einen Gegner bewusstlos, anstatt ihn weiter zu schädigen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verstärkte Rüstungsausbildung": {
+      "name": "Verstärkte Rüstungsausbildung",
+      "kategorie": "Kampf",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kämpfen W8"
+      ],
+      "beschreibung": "Zerstöre die Rüstung oder den Schild des Trägers, um eine Erhöhung gegen ihn zu verhindern.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fluchtweg": {
+      "name": "Fluchtweg",
+      "kategorie": "Anführer",
+      "rang": "F",
+      "voraussetzungen": [
+        "VER W6",
+        "Anführer"
+      ],
+      "beschreibung": "Verhindere freie Angriffe, wenn Verbündete sich aus dem Nahkampf mit jemandem zurückziehen, der mit dem Helden kämpft.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verseuchende Zauber": {
+      "name": "Verseuchende Zauber",
+      "kategorie": "Macht",
+      "rang": "F",
+      "voraussetzungen": [
+        "AH (beliebig)"
+      ],
+      "beschreibung": "Fügt dem Ziel einen Zauberfluch zu.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zerstörerische Bannung": {
+      "name": "Zerstörerische Bannung",
+      "kategorie": "Macht",
+      "rang": "V",
+      "voraussetzungen": [
+        "AH (beliebig)"
+      ],
+      "beschreibung": "Beim Bannen einer Macht wird der Gegner abgelenkt, bei einer Erhöhung zusätzlich verletzlich.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Göttliche Einmischung": {
+      "name": "Göttliche Einmischung",
+      "kategorie": "Macht",
+      "rang": "H",
+      "voraussetzungen": [
+        "AH (Kleriker, Orakel, Wunder)"
+      ],
+      "beschreibung": "Gib Machtpunkte aus, um einen Gegner zu zwingen, einen Angriffswurf mit einem Malus zu wiederholen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Entwickelter Vertrauter": {
+      "name": "Entwickelter Vertrauter",
+      "kategorie": "Macht",
+      "rang": "F",
+      "voraussetzungen": [
+        "VER W6",
+        "WIL W6",
+        "AH (beliebig)",
+        "Vertrauter"
+      ],
+      "beschreibung": "Der Vertraute deines Charakters erhält eine Entwicklung aus der Eidolon-Entwicklungsliste.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Verbesserter Vertrauter": {
+      "name": "Verbesserter Vertrauter",
+      "kategorie": "Macht",
+      "rang": "F",
+      "voraussetzungen": [
+        "AH (beliebig)",
+        "Vertrauter"
+      ],
+      "beschreibung": "Gewährt einen mächtigeren Vertrauten.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Durchdringender Zauber": {
+      "name": "Durchdringender Zauber",
+      "kategorie": "Macht",
+      "rang": "V",
+      "voraussetzungen": [
+        "AH (beliebig)"
+      ],
+      "beschreibung": "Reduziert den Malus durch Arkane Resistenz.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Feldreparatur": {
+      "name": "Feldreparatur",
+      "kategorie": "Experte",
+      "rang": "A",
+      "voraussetzungen": [
+        "Reparieren W8"
+      ],
+      "beschreibung": "Repariere Objekte im Feld schnell zum halben Preis.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Fallensteller": {
+      "name": "Fallensteller",
+      "kategorie": "Experte",
+      "rang": "A",
+      "voraussetzungen": [
+        "GES W8"
+      ],
+      "beschreibung": "Gewährt die Fähigkeit, tödliche Fallen zu bauen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Tödlicher Fallensteller": {
+      "name": "Tödlicher Fallensteller",
+      "kategorie": "Experte",
+      "rang": "F",
+      "voraussetzungen": [
+        "Fallensteller"
+      ],
+      "beschreibung": "Gewährt einen freien Bonus beim Bau von Fallen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
     }
   },
   "handicaps": {
@@ -6038,6 +7198,15 @@
       "stufe": "schwer",
       "punkte": 2,
       "beschreibung": "Der Charakter zieht -4 von arkanen Fertigkeitsproben ab, wenn er leichte oder schwerere Rüstung trägt.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Behindernde Rüstung_mittelschwer": {
+      "name": "Behindernde Rüstung (mittelschwer)",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Der Charakter zieht -4 von arkanen Fertigkeitsproben ab, wenn er mittelschwere oder schwerere Rüstung trägt.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
@@ -6929,6 +8098,177 @@
       "stufe": "leicht",
       "punkte": 1,
       "beschreibung": "-1 Robustheit",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Anhänglich": {
+      "name": "Anhänglich",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Erleidet einen Malus auf Willenskraft-Proben, wenn ein Bezugsobjekt weggenommen wird.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Brandempfindlich": {
+      "name": "Brandempfindlich",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Dein Held hat Schwierigkeiten, sich zu konzentrieren, wenn er offenen Flammen nahe ist.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Feigling": {
+      "name": "Feigling",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Egal, woher die Furcht stammt, der Charakter läuft davor davon.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Grausam": {
+      "name": "Grausam",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Erleidet einen Malus auf Angriffe, wenn er sich nicht auf den am schwersten verwundeten Gegner konzentriert.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Zweifel_leicht": {
+      "name": "Zweifel",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Erleidet nach dem Misslingen einer Fertigkeitsprobe für eine Stunde –1 auf diese Fertigkeit.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Familienbande": {
+      "name": "Familienbande",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Der Charakter hat eine Familie, der er verpflichtet ist zu helfen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Vergesslich": {
+      "name": "Vergesslich",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Es besteht die Chance, gewöhnliche Gegenstände zurückzulassen, wenn man verweilt.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Anspruchsvoll": {
+      "name": "Anspruchsvoll",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Waren und Dienstleistungen kosten mehr, da dein Held nur das Beste kauft.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Paranoid": {
+      "name": "Paranoid",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Dein Charakter hat Schwierigkeiten, sich von anderen unterstützen zu lassen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Schlafmütze": {
+      "name": "Schlafmütze",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Dein Held braucht mehr Schlaf als die meisten Leute.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Eitel": {
+      "name": "Eitel",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Wenn er beschmutzt ist, erleidet dein Held einen Malus auf Überreden- und Einschüchtern-Proben.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Zweifel_schwer": {
+      "name": "Zweifel",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Wie die leichte Version, zusätzlich sind auch Angriffsproben betroffen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Ungeduldig": {
+      "name": "Ungeduldig",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Kann keine Aktion aufschieben und verliert die Konzentration, wenn er nach allen Verbündeten im Kampf handelt.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Informationsüberflutung": {
+      "name": "Informationsüberflutung",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Kann keine Bennies ausgeben, um Akademiewissen-, Allgemeinwissen- oder Wissenschaft-Proben zu wiederholen.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Missraten": {
+      "name": "Missraten",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Es ist schwerer, geschicklichkeitsbasierte Fertigkeiten zu steigern.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Selbstzweifel": {
+      "name": "Selbstzweifel",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Erleidet –1 auf Willenskraft-Proben.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Schattengezeichnet": {
+      "name": "Schattengezeichnet",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Dein Held ist verletzlich bei Dämmerlicht, Dunkelheit oder völliger Finsternis.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Abergläubisch": {
+      "name": "Abergläubisch",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Es besteht die Chance, dass befreundete Mächte den Charakter behindern.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Ungebildet": {
+      "name": "Ungebildet",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Es ist schwerer, verstandbasierte Fertigkeiten zu steigern.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
