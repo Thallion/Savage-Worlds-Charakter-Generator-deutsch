@@ -1982,6 +1982,168 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
+    "Aura der Gerechtigkeit": {
+      "name": "Aura der Gerechtigkeit",
+      "kategorie": "Paladin",
+      "rang": "F",
+      "voraussetzungen": [
+        "Paladin"
+      ],
+      "beschreibung": "Der Paladin teilt seine Fähigkeit Böses Niederstrecken mit Verbündeten in Sichtweite (12''). Betroffene Verbündete erhalten dieselben Angriffsboni wie der Paladin gegen das gewählte Ziel für eine Runde.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Versteinerungsschlag": {
+      "name": "Versteinerungsschlag",
+      "kategorie": "Mönch",
+      "rang": "F",
+      "voraussetzungen": [
+        "WIL W8",
+        "Mönch",
+        "Kämpfen W8"
+      ],
+      "beschreibung": "Ki-Aktion (1 Machtpunkt): Bei einem Treffer mit einer Erhöhung muss das Ziel eine Konstitutionsprobe ablegen oder gilt als Erschöpft und beginnt zu versteinen. Misslingt die Probe mit einer Erhöhung, ist das Ziel sofort Kampfunfähig (Versteinerung).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kreuzblütig": {
+      "name": "Kreuzblütig",
+      "kategorie": "Zauberer",
+      "rang": "H",
+      "voraussetzungen": [
+        "AH (Zauberer)"
+      ],
+      "beschreibung": "Der Zauberer erhält Zugang zu einer zweiten Blutlinie und kann deren Blutlinienfähigkeiten nutzen. Er erleidet jedoch –1 auf alle Zaubern-Proben (Konzentrationsschwierigkeiten durch zwei konkurrierende Blutlinien).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Störende Wut": {
+      "name": "Störende Wut",
+      "kategorie": "Barbar",
+      "rang": "V",
+      "voraussetzungen": [
+        "WIL W8",
+        "Barbar",
+        "Okkultismus W6"
+      ],
+      "beschreibung": "Befindet sich der Barbar im Kampfrausch und wirkt ein Ziel in Nahkampfreichweite (2'') eine Macht, kann der Barbar als freie Aktion sofort einen einzelnen Nahkampfangriff gegen dieses Ziel ausführen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zusätzliche Domäne": {
+      "name": "Zusätzliche Domäne",
+      "kategorie": "Kleriker",
+      "rang": "F",
+      "voraussetzungen": [
+        "AH (Kleriker)"
+      ],
+      "beschreibung": "Der Kleriker wählt eine zusätzliche Götterdomäne und erhält die damit verbundene Domänenmacht als neue arkane Macht (+1 neue Macht, +5 Machtpunkte).",
+      "neue_maechte": 1,
+      "machtpunkte": 5,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Bevorzugte Mächte": {
+      "name": "Bevorzugte Mächte",
+      "kategorie": "Hintergrund",
+      "rang": "F",
+      "voraussetzungen": [
+        {"oder": ["AH (Zauberer)", "AH (Magier)"]}
+      ],
+      "beschreibung": "Einmal pro Zug kann der Charakter bei einer Probe für eine Macht seiner Schule oder Blutlinie bis zu 2 Punkte Abzüge ignorieren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Jägerverbund": {
+      "name": "Jägerverbund",
+      "kategorie": "Waldläufer",
+      "rang": "F",
+      "voraussetzungen": [
+        "Waldläufer"
+      ],
+      "beschreibung": "Der Waldläufer teilt per freier Aktion seinen Erzfeind-Bonus einmal pro Runde mit allen Verbündeten in Sichtweite (12'') für eine Runde.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Inspiration der Größe": {
+      "name": "Inspiration der Größe",
+      "kategorie": "Barde",
+      "rang": "V",
+      "voraussetzungen": [
+        "Heldentum inspirieren"
+      ],
+      "beschreibung": "Der Barde kann jetzt 7 Inspirations-Marker pro Einsatz generieren (statt 5). Zudem erhalten alle Verbündeten mit aktiven Inspirations-Markern +1 auf ihre Robustheit.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Mystische Mächte (Schurke)": {
+      "name": "Mystische Mächte (Schurke)",
+      "kategorie": "Schurke",
+      "rang": "F",
+      "voraussetzungen": [
+        "Schurke"
+      ],
+      "beschreibung": "Der Schurke erhält 10 gewidmete Machtpunkte für folgende Mächte: Eigenschaft erhöhen (Athletik, Heimlichkeit oder Diebeskunst), Dunkelsicht, Lärm/Stille und Wandläufer. Alle Mächte wirken nur auf den Schurken selbst.",
+      "neue_maechte": 0,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Bebende Handfläche": {
+      "name": "Bebende Handfläche",
+      "kategorie": "Mönch",
+      "rang": "H",
+      "voraussetzungen": [
+        "Mönch",
+        "Kämpfen W10"
+      ],
+      "beschreibung": "Ki-Aktion (2 Machtpunkte): Bei einem Treffer pflanzt der Mönch vibrierende Energie ins Ziel. Zu einem beliebigen späteren Zeitpunkt (innerhalb derselben Szene) kann der Mönch die Energie auslösen: Das Ziel legt sofort eine Konstitutionsprobe mit –2 ab oder gilt als Kampfunfähig.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zeitloser Körper": {
+      "name": "Zeitloser Körper",
+      "kategorie": "Druide",
+      "rang": "F",
+      "voraussetzungen": [
+        "KON W8",
+        "AH (Druide)"
+      ],
+      "beschreibung": "Der Druide altert nicht mehr (Alterungseffekte gelten nicht). Zudem wird er immun gegen Gift und Krankheiten jeder Art.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Waffenspezialisierung": {
+      "name": "Waffenspezialisierung",
+      "kategorie": "Kämpfer",
+      "rang": "F",
+      "voraussetzungen": [
+        "Kämpfer"
+      ],
+      "beschreibung": "Der Kämpfer wählt eine bevorzugte Waffe. Misslingt ein Angriff mit dieser Waffe und trifft das Ziel nicht mindestens Erschüttert, kann der Kämpfer den Schadenswurf einmal kostenlos wiederholen. Kann mehrfach für verschiedene Waffenarten genommen werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
     "Bevorzugte Mächte (Zauberer)": {
       "name": "Bevorzugte Mächte (Zauberer)",
       "kategorie": "Zauberer",
