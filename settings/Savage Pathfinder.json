@@ -12253,6 +12253,60 @@
       "beschreibung": "Polierte Steine",
       "aktiv": true
     },
+    "Flugpfeile (20)": {
+      "name": "Flugpfeile (20)",
+      "kategorie": "Munition",
+      "gewicht": 1,
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Erhöht die Reichweite des Bogens um 2, verringert aber einen Schadenswürfel um einen Typ.",
+      "aktiv": true
+    },
+    "Rauchpfeile (20)": {
+      "name": "Rauchpfeile (20)",
+      "kategorie": "Munition",
+      "gewicht": 1.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kein Schaden. Platziert eine Kleine Explosionsschablone am Auftreffpunkt. Die Beleuchtung innerhalb der Schablone wird um eine Stufe verringert. Die Wolke hält zwei Runden an.",
+      "aktiv": true
+    },
+    "Doppelarmbrust": {
+      "name": "Doppelarmbrust",
+      "kategorie": "Waffe",
+      "gewicht": 9,
+      "kosten": 300,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 3 für beide Bolzen oder Nachladen 2 für einen. Auf –2 auf Schießen beide Bolzen gleichzeitig abfeuern (Schaden: 3W8).",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W8",
+      "eigenschaften": {
+        "Schaden": "2W8",
+        "Reichweite": "15/30/60",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "2"
+      }
+    },
+    "Pilum": {
+      "name": "Pilum",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Der Schaft bricht beim Aufprall ab. Mit einer Steigerung beim Angriff bleibt er im Schild des Ziels stecken; das Ziel verliert den Schildbonus bis der Spieß entfernt wird (1 Aktion).",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
     "Dolch/Messer Nahkampf": {
       "name": "Dolch/Messer",
       "kategorie": "Waffe",
