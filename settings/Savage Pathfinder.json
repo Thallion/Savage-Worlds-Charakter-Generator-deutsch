@@ -12097,7 +12097,7 @@
       "gewicht": 3,
       "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "Reichweite 1, Parade +1, wenn mit zwei Händen verwendet",
+      "beschreibung": "Stützen, Reichweite 1, Parade +1, wenn mit zwei Händen verwendet",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12277,7 +12277,7 @@
       "gewicht": 2,
       "kosten": 15,
       "setting": "savage_pathfinder",
-      "beschreibung": "Reichweite 1",
+      "beschreibung": "Stützen, Reichweite 1",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12367,7 +12367,7 @@
       "gewicht": 6,
       "kosten": 10,
       "setting": "savage_pathfinder",
-      "beschreibung": "PB 1, Reichweite 1, Zweihändig",
+      "beschreibung": "PB 1, Stützen, Reichweite 1, Zweihändig",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -12565,7 +12565,7 @@
       "gewicht": 9,
       "kosten": 20,
       "setting": "savage_pathfinder",
-      "beschreibung": "PB 1, wenn aufgesetzt, Reichweite 2, Zweihändig",
+      "beschreibung": "PB 1 wenn aufgesetzt, Stützen, Reichweite 2, Zweihändig",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -12680,6 +12680,114 @@
       "eigenschaften": {
         "Schaden": "Stä+W8",
         "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Kampfaspergillum": {
+      "name": "Kampfaspergillum",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Enthält Weihwasser. Bei jedem Treffer spritzt Weihwasser: +2 Schaden gegen Kreaturen, die von Weihwasser betroffen sind. Nach drei Angriffen leer.",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Bill": {
+      "name": "Bill",
+      "kategorie": "Waffe",
+      "gewicht": 5.5,
+      "kosten": 11,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Stützen, Reichweite 1, Zweihändig, Parade +1 beim Verteidigen",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W8",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "1",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Schlagring": {
+      "name": "Schlagring",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Träger gilt als bewaffnet; freie Wiederholung beim Verbergen",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "Stä+W4",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Glefe-Guisarme": {
+      "name": "Glefe-Guisarme",
+      "kategorie": "Waffe",
+      "gewicht": 5,
+      "kosten": 12,
+      "setting": "savage_pathfinder",
+      "beschreibung": "PB 2, Stützen, Reichweite 1, Zweihändig",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W10",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "1",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Luzerner Hammer": {
+      "name": "Luzerner Hammer",
+      "kategorie": "Waffe",
+      "gewicht": 6,
+      "kosten": 15,
+      "setting": "savage_pathfinder",
+      "beschreibung": "PB 3, Reichweite 1, Zweihändig, Parade -2",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W12",
+      "eigenschaften": {
+        "Schaden": "Stä+W12",
+        "Reichweite": "1",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "3"
+      }
+    },
+    "Menschenfänger Pathfinder": {
+      "name": "Menschenfänger",
+      "kategorie": "Waffe",
+      "gewicht": 5,
+      "kosten": 15,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Reichweite 2, Zweihändig; kein regulärer Schaden: Bei einem Treffer kann sich das Ziel nicht vom Angreifer wegbewegen, bis es eine gegensätzliche Stärkeprobe (freie Aktion) gewinnt.",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "-",
+        "Reichweite": "2",
         "FR": "-",
         "Schuss": "-",
         "PB": "-"
