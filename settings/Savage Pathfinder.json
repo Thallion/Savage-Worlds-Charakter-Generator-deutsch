@@ -12271,6 +12271,78 @@
       "beschreibung": "Kein Schaden. Platziert eine Kleine Explosionsschablone am Auftreffpunkt. Die Beleuchtung innerhalb der Schablone wird um eine Stufe verringert. Die Wolke hält zwei Runden an.",
       "aktiv": true
     },
+    "Kugeln, Feuerwaffe (30)": {
+      "name": "Kugeln, Feuerwaffe (30)",
+      "kategorie": "Munition",
+      "gewicht": 0.25,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Munition für Schusswaffen. Für Kugeln aus Spezialmaterialien siehe Pathfinder for Savage Worlds.",
+      "aktiv": true
+    },
+    "Kugeln, gerillt (1)": {
+      "name": "Kugeln, gerillt (1)",
+      "kategorie": "Munition",
+      "gewicht": 0,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Speziell gefertigte Kugel, auf die Gift aufgetragen werden kann. Nicht kompatibel mit alchemistischen Kartuschen.",
+      "aktiv": true
+    },
+    "Schrot (30)": {
+      "name": "Schrot (30)",
+      "kategorie": "Munition",
+      "gewicht": 0.25,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schrot für Streuschusswaffen. Kieselsteine oder anderer Schutt können stattdessen verwendet werden, verursachen aber –1 auf Schießenproben.",
+      "aktiv": true
+    },
+    "Alchemistische Kartusche, Drachenatem": {
+      "name": "Alchemistische Kartusche, Drachenatem",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 40,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nur für Streuschusswaffen. Kein Schießenwurf: Alle unter der Kleinen Kegelschablone legen eine Ausweichen-Probe ab. 2W6 nichtmagischer Feuerschaden. Kritischer Fehlschlag wenn beide Schadenswürfel eine 1 zeigen.",
+      "aktiv": true
+    },
+    "Alchemistische Kartusche, Fesselschuss": {
+      "name": "Alchemistische Kartusche, Fesselschuss",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 40,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nur für Streuschusswaffen. Verringert den Waffenschaden um einen Würfeltyp. Jede getroffene Kreatur muss eine Ausweichen-Probe ablegen oder wird Verstrickt.",
+      "aktiv": true
+    },
+    "Alchemistische Kartusche, Leuchtspur": {
+      "name": "Alchemistische Kartusche, Leuchtspur",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Verringert den Schaden um einen Würfeltyp. Eine getroffene Kreatur wird für eine Runde geblendet. Auch als Signalrakete verwendbar. Kann nur gegen einzelne Kreaturen eingesetzt werden.",
+      "aktiv": true
+    },
+    "Alchemistische Kartusche, Metall": {
+      "name": "Alchemistische Kartusche, Metall",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 15,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Macht Kugel und Schwarzpulver wasserdicht.",
+      "aktiv": true
+    },
+    "Alchemistische Kartusche, Salzschrot": {
+      "name": "Alchemistische Kartusche, Salzschrot",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.25,
+      "kosten": 12,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kann in Streuschusswaffen geladen werden. Verursacht betäubenden Schaden.",
+      "aktiv": true
+    },
     "Doppelarmbrust": {
       "name": "Doppelarmbrust",
       "kategorie": "Waffe",
