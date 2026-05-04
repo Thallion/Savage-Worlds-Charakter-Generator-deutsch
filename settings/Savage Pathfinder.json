@@ -11184,6 +11184,330 @@
         "PB": "-"
       }
     },
+    "Blunderbuss": {
+      "name": "Blunderbuss",
+      "kategorie": "Waffe",
+      "gewicht": 4,
+      "kosten": 2000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Streuschuss. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Bucklergewehr": {
+      "name": "Bucklergewehr",
+      "kategorie": "Waffe",
+      "gewicht": 3,
+      "kosten": 750,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Muss zum Nachladen abgenommen werden. Immer Nebenhandabzug beim Schießen, Parade +1. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W4",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "2"
+      }
+    },
+    "Culverin": {
+      "name": "Culverin",
+      "kategorie": "Waffe",
+      "gewicht": 20,
+      "kosten": 4000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schießen ohne Unterstützung: –2. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W8",
+      "eigenschaften": {
+        "Schaden": "3W6",
+        "Reichweite": "10/20/40",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Doppelhakengewehr": {
+      "name": "Doppelhakengewehr",
+      "kategorie": "Waffe",
+      "gewicht": 9,
+      "kosten": 4000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schießen ohne Halterung: –2 und der Schütze wird zu Boden geworfen. Nachladen 3.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "3W8",
+        "Reichweite": "12/24/48",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "-"
+      }
+    },
+    "Muskete Pathfinder": {
+      "name": "Muskete",
+      "kategorie": "Waffe",
+      "gewicht": 4.5,
+      "kosten": 1500,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W10",
+        "Reichweite": "10/20/40",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "2"
+      }
+    },
+    "Muskete, Axt-/Kriegshammer-": {
+      "name": "Muskete, Axt-/Kriegshammer-",
+      "kategorie": "Waffe",
+      "gewicht": 3,
+      "kosten": 1600,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Als Nahkampfwaffe: entsprechende Waffenwerte. Bei Fehlfunktion: –1 auf Kämpfenproben bis zur Reparatur. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "8/16/32",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Muskete, doppelläufig": {
+      "name": "Muskete, doppelläufig",
+      "kategorie": "Waffe",
+      "gewicht": 5.5,
+      "kosten": 2500,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Doppelläufig. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W8+1",
+        "Reichweite": "10/20/40",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "2"
+      }
+    },
+    "Pfefferbüchse": {
+      "name": "Pfefferbüchse",
+      "kategorie": "Waffe",
+      "gewicht": 2.5,
+      "kosten": 3000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "6",
+        "PB": "1"
+      }
+    },
+    "Pistole": {
+      "name": "Pistole",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 1000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Pistole, Mantel-": {
+      "name": "Pistole, Mantel-",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 750,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W4+1",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Pistole, doppelläufig": {
+      "name": "Pistole, doppelläufig",
+      "kategorie": "Waffe",
+      "gewicht": 2.5,
+      "kosten": 1750,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Doppelläufig. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "1"
+      }
+    },
+    "Pistole, Drachen-": {
+      "name": "Pistole, Drachen-",
+      "kategorie": "Waffe",
+      "gewicht": 1.5,
+      "kosten": 1000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Streuschuss. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Stockdegenpistole": {
+      "name": "Stockdegenpistole",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 775,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Wahrnehmungsprobe erforderlich, um zu erkennen, dass es sich um mehr als einen Gehstock handelt. Nachladen 2.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W4+1",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Revolver": {
+      "name": "Revolver",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 4000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 1.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "6",
+        "PB": "1"
+      }
+    },
+    "Gewehr": {
+      "name": "Gewehr",
+      "kategorie": "Waffe",
+      "gewicht": 6,
+      "kosten": 5000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 1.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W8+1",
+        "Reichweite": "20/40/80",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Gewehr, Pfefferbüchse": {
+      "name": "Gewehr, Pfefferbüchse",
+      "kategorie": "Waffe",
+      "gewicht": 7.5,
+      "kosten": 7000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 1.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W8+1",
+        "Reichweite": "20/40/80",
+        "FR": "1",
+        "Schuss": "4",
+        "PB": "1"
+      }
+    },
+    "Schrotflinte": {
+      "name": "Schrotflinte",
+      "kategorie": "Waffe",
+      "gewicht": 6,
+      "kosten": 5000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Streuschuss. Nachladen 1.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "1",
+        "PB": "1"
+      }
+    },
+    "Schrotflinte, doppelläufig": {
+      "name": "Schrotflinte, doppelläufig",
+      "kategorie": "Waffe",
+      "gewicht": 7.5,
+      "kosten": 7000,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Doppelläufig, Streuschuss. Nachladen 1.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6+1",
+        "Reichweite": "5/10/20",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "1"
+      }
+    },
     "Armbrust, Leichte Repetier-": {
       "name": "Armbrust, Leichte Repetier-",
       "kategorie": "Fernkampfwaffe",
