@@ -12097,7 +12097,7 @@
       "gewicht": 3,
       "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "Reichweite 1, Parade +1, wenn mit zwei Händen verwendet",
+      "beschreibung": "Stützen, Reichweite 1, Parade +1, wenn mit zwei Händen verwendet",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12253,6 +12253,60 @@
       "beschreibung": "Polierte Steine",
       "aktiv": true
     },
+    "Flugpfeile (20)": {
+      "name": "Flugpfeile (20)",
+      "kategorie": "Munition",
+      "gewicht": 1,
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Erhöht die Reichweite des Bogens um 2, verringert aber einen Schadenswürfel um einen Typ.",
+      "aktiv": true
+    },
+    "Rauchpfeile (20)": {
+      "name": "Rauchpfeile (20)",
+      "kategorie": "Munition",
+      "gewicht": 1.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kein Schaden. Platziert eine Kleine Explosionsschablone am Auftreffpunkt. Die Beleuchtung innerhalb der Schablone wird um eine Stufe verringert. Die Wolke hält zwei Runden an.",
+      "aktiv": true
+    },
+    "Doppelarmbrust": {
+      "name": "Doppelarmbrust",
+      "kategorie": "Waffe",
+      "gewicht": 9,
+      "kosten": 300,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Nachladen 3 für beide Bolzen oder Nachladen 2 für einen. Auf –2 auf Schießen beide Bolzen gleichzeitig abfeuern (Schaden: 3W8).",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W8",
+      "eigenschaften": {
+        "Schaden": "2W8",
+        "Reichweite": "15/30/60",
+        "FR": "1",
+        "Schuss": "2",
+        "PB": "2"
+      }
+    },
+    "Pilum": {
+      "name": "Pilum",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Der Schaft bricht beim Aufprall ab. Mit einer Steigerung beim Angriff bleibt er im Schild des Ziels stecken; das Ziel verliert den Schildbonus bis der Spieß entfernt wird (1 Aktion).",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
     "Dolch/Messer Nahkampf": {
       "name": "Dolch/Messer",
       "kategorie": "Waffe",
@@ -12277,7 +12331,7 @@
       "gewicht": 2,
       "kosten": 15,
       "setting": "savage_pathfinder",
-      "beschreibung": "Reichweite 1",
+      "beschreibung": "Stützen, Reichweite 1",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12367,7 +12421,7 @@
       "gewicht": 6,
       "kosten": 10,
       "setting": "savage_pathfinder",
-      "beschreibung": "PB 1, Reichweite 1, Zweihändig",
+      "beschreibung": "PB 1, Stützen, Reichweite 1, Zweihändig",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -12565,7 +12619,7 @@
       "gewicht": 9,
       "kosten": 20,
       "setting": "savage_pathfinder",
-      "beschreibung": "PB 1, wenn aufgesetzt, Reichweite 2, Zweihändig",
+      "beschreibung": "PB 1 wenn aufgesetzt, Stützen, Reichweite 2, Zweihändig",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -12680,6 +12734,114 @@
       "eigenschaften": {
         "Schaden": "Stä+W8",
         "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Kampfaspergillum": {
+      "name": "Kampfaspergillum",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Enthält Weihwasser. Bei jedem Treffer spritzt Weihwasser: +2 Schaden gegen Kreaturen, die von Weihwasser betroffen sind. Nach drei Angriffen leer.",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Bill": {
+      "name": "Bill",
+      "kategorie": "Waffe",
+      "gewicht": 5.5,
+      "kosten": 11,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Stützen, Reichweite 1, Zweihändig, Parade +1 beim Verteidigen",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W8",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "1",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Schlagring": {
+      "name": "Schlagring",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Träger gilt als bewaffnet; freie Wiederholung beim Verbergen",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "Stä+W4",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Glefe-Guisarme": {
+      "name": "Glefe-Guisarme",
+      "kategorie": "Waffe",
+      "gewicht": 5,
+      "kosten": 12,
+      "setting": "savage_pathfinder",
+      "beschreibung": "PB 2, Stützen, Reichweite 1, Zweihändig",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W10",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "1",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Luzerner Hammer": {
+      "name": "Luzerner Hammer",
+      "kategorie": "Waffe",
+      "gewicht": 6,
+      "kosten": 15,
+      "setting": "savage_pathfinder",
+      "beschreibung": "PB 3, Reichweite 1, Zweihändig, Parade -2",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W12",
+      "eigenschaften": {
+        "Schaden": "Stä+W12",
+        "Reichweite": "1",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "3"
+      }
+    },
+    "Menschenfänger Pathfinder": {
+      "name": "Menschenfänger",
+      "kategorie": "Waffe",
+      "gewicht": 5,
+      "kosten": 15,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Reichweite 2, Zweihändig; kein regulärer Schaden: Bei einem Treffer kann sich das Ziel nicht vom Angreifer wegbewegen, bis es eine gegensätzliche Stärkeprobe (freie Aktion) gewinnt.",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "-",
+        "Reichweite": "2",
         "FR": "-",
         "Schuss": "-",
         "PB": "-"
@@ -12943,6 +13105,145 @@
       "kosten": 1,
       "setting": "savage_pathfinder",
       "beschreibung": "Ein dünnes Stäbchen, das eine Flamme erzeugt, wenn es hart gegen eine Oberfläche geschlagen wird. Dies ermöglicht es, Fackeln und andere brennbare Substanzen in einer Aktion zu entzünden.",
+      "aktiv": true
+    },
+    "Alchemistenfreundlichkeit": {
+      "name": "Alchemistenfreundlichkeit",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kristallines Pulver ähnlich wie Salz, beliebt bei jungen Adligen. Mit Wasser gemischt ergibt es ein sprudelndes Getränk, das die Auswirkungen eines Katers innerhalb von 10 Minuten beseitigt.",
+      "aktiv": true
+    },
+    "Laugenkolben": {
+      "name": "Laugenkolben",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.5,
+      "kosten": 15,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kolben mit kaustischer Flüssigkeit. Wirkt wie Säure gegen Schleime und säurebasierte Kreaturen (2W4 Schaden in der Kleinen Flächenschablone), ist für alle anderen harmlos.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "2W4",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "-",
+        "PB": "-",
+        "Flächenschablone": "KFS"
+      }
+    },
+    "Blutblock": {
+      "name": "Blutblock",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Klebrige, rosa Substanz zur Wundbehandlung. Eine Dosis beendet die Auswirkungen eines Reißenden Angriffs und Ausblutens. Herstellungsmodifikator: –2.",
+      "aktiv": true
+    },
+    "Blitzpulver": {
+      "name": "Blitzpulver",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Grobes graues Pulver, das bei Flamme, starker Reibung oder Aufprall fast sofort entzündet. Alle Kreaturen in der Kleinen Flächenschablone werden bis zum Ende ihres nächsten Zuges geblendet (wie der Blind-Zauber).",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "-",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "-",
+        "PB": "-",
+        "Flächenschablone": "KFS"
+      }
+    },
+    "Flüssiges Eis": {
+      "name": "Flüssiges Eis",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 1,
+      "kosten": 40,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Versiegeltes Glas mit blauer kristalliner Flüssigkeit (auch 'Alchemisteneis'). Nach dem Öffnen kann es 1W6 Runden lang genutzt werden, um Flüssigkeiten einzufrieren oder Objekte mit Eis zu überziehen. Kann auch als Wurfwaffe eingesetzt werden.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "2W4",
+        "Reichweite": "3/6/12",
+        "FR": "1",
+        "Schuss": "-",
+        "PB": "-",
+        "Flächenschablone": "KFS"
+      }
+    },
+    "Nushadir": {
+      "name": "Nushadir",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleine salzige Körner in einem trockenen Behälter. Neutralisiert Säure: eine Phiole Körner oder ein Kolben Nushadirwasser macht einen Kubikfuß Säure innerhalb einer Minute berührungssicher (zu langsam, um geworfene Säure zu neutralisieren).",
+      "aktiv": true
+    },
+    "Riechsalze": {
+      "name": "Riechsalze",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.5,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Scharf duftende graue Kristalle. Ermöglichen einer schlafenden Person (magisch oder normal) eine Geistprobe zum Aufwachen. Ein Behälter hat 12 Anwendungen (nach jeder Benutzung gestöpselt), leert sich in wenigen Stunden, wenn offen gelassen. Herstellungsmodifikator: –2.",
+      "aktiv": true
+    },
+    "Rauchkügelchen": {
+      "name": "Rauchkügelchen",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleine Tonkugel mit zwei getrennten Substanzen. Beim Zerbrechen mischen sie sich und füllen eine Kleine Flächenschablone mit gelbem, harmlosem Rauch für eine Runde.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "-",
+        "Reichweite": "3/6/9",
+        "FR": "1",
+        "Schuss": "-",
+        "PB": "-",
+        "Flächenschablone": "KFS"
+      }
+    },
+    "Waffenblanchierer, Adamantit": {
+      "name": "Waffenblanchierer, Adamantit",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.25,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Pulver, das auf einer heißen Waffe aufgeschmolzen eine temporäre Beschichtung bildet. Beim nächsten erfolgreichen Treffer löst es Umgebungsschwächen (Adamantit) aus. Eine Dosis beschichtet eine Waffe oder bis zu 10 Munitionseinheiten. Nur ein Blanchierertyp gleichzeitig auf einer Waffe. Herstellungsmodifikator: –2.",
+      "aktiv": true
+    },
+    "Waffenblanchierer, Kalteisen": {
+      "name": "Waffenblanchierer, Kalteisen",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.25,
+      "kosten": 20,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Wie Waffenblanchierer (Adamantit). Beim nächsten erfolgreichen Treffer löst es Umgebungsschwächen (Kalteisen) aus.",
+      "aktiv": true
+    },
+    "Waffenblanchierer, Silber": {
+      "name": "Waffenblanchierer, Silber",
+      "kategorie": "Alchemistischer Gegenstand",
+      "gewicht": 0.25,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Wie Waffenblanchierer (Adamantit). Beim nächsten erfolgreichen Treffer löst es Umgebungsschwächen (Silber) aus.",
       "aktiv": true
     }
   },
