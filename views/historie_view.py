@@ -667,19 +667,29 @@ class HistorieWidget(MDBoxLayout):
             self.charakter_controller = service_container.get_charakter_controller()
             self._dialog_service = service_container.get_dialog_service()
             
-            # Bei App-Start KEINE existierende Historie laden - immer mit leerer Historie starten
-            # Historie wird nur geladen wenn ein Charakter explizit geladen wird (character_loaded event)
+            self._sync_from_loaded_character()
             
-            Logger.info("HistorieWidget Services initialisiert - Historie bleibt leer bei App-Start")
+            Logger.info("HistorieWidget Services initialisiert")
         except Exception as e:
             Logger.error(f"Fehler bei Service-Initialisierung: {str(e)}")
+    
+    def _sync_from_loaded_character(self):
+        """Synchronisiert die Historie mit einem ggf. bereits geladenen Charakter."""
+        try:
+            if self.charakter_controller and self.charakter_controller.charakter:
+                journal = self.charakter_controller.charakter.steigerungs_journal
+                if journal and isinstance(journal, dict) and journal.get('entries'):
+                    self.historie.from_dict(journal)
+                    Logger.info(f"Historie aus Charakter-Journal geladen ({len(journal.get('entries', []))} Einträge)")
+                    self._update_display()
+        except Exception as e:
+            Logger.error(f"Fehler bei Journal-Synchronisation: {e}")
     
     def _register_event_listeners(self, dt):
         """Registriert Event-Listener für Charakter-Änderungen."""
         try:
             event_service = service_container.get_event_service()
             if event_service:
-                # Registriere Listener für verschiedene Änderungen
                 event_service.subscribe('attribute_changed', self._on_attribute_changed)
                 event_service.subscribe('skill_changed', self._on_skill_changed)
                 event_service.subscribe('talent_added', self._on_talent_added)
@@ -693,13 +703,124 @@ class HistorieWidget(MDBoxLayout):
                 event_service.subscribe('character_saved', self._on_character_saved)
                 event_service.subscribe('character_created', self._on_character_created)
                 Logger.info("Historie Event-Listener registriert")
+                
+                self._sync_from_event_history(event_service)
 
-            # Zusätzlich Kivy-Event vom Controller binden (wird beim regulären Laden ausgelöst)
             if self.charakter_controller:
                 self.charakter_controller.bind(on_charakter_loaded=self._on_kivy_charakter_loaded)
                 Logger.info("Historie Kivy-Event on_charakter_loaded gebunden")
         except Exception as e:
             Logger.error(f"Fehler bei Event-Registrierung: {str(e)}")
+    
+    def _sync_from_event_history(self, event_service):
+        """Holt verpasste Events aus der Event-Historie nach (wichtig bei Lazy-Loading)."""
+        try:
+            event_type_map = {
+                'attribute_changed': ('attribut_steigerung', self._build_attribut_details),
+                'skill_changed': ('fertigkeit_steigerung', self._build_skill_details),
+                'talent_added': ('talent_hinzugefuegt', self._build_talent_added_details),
+                'talent_removed': ('talent_entfernt', self._build_talent_removed_details),
+                'handicap_added': ('handicap_hinzugefuegt', self._build_handicap_added_details),
+                'handicap_removed': ('handicap_entfernt', self._build_handicap_removed_details),
+                'handicap_reduced': ('handicap_reduziert', self._build_handicap_reduced_details),
+                'macht_added': ('macht_hinzugefuegt', self._build_macht_added_details),
+                'macht_removed': ('macht_entfernt', self._build_macht_removed_details),
+            }
+            
+            for event_type, (historie_type, builder) in event_type_map.items():
+                events = event_service.get_event_history(event_type, limit=500)
+                for event in events:
+                    details = builder(event.data if hasattr(event, 'data') else event)
+                    if details:
+                        self.historie.add_entry(historie_type, details, rang=self._get_charakter_rang())
+            
+            if self.historie.entries:
+                Logger.info(f"Historie: {len(self.historie.entries)} Einträge aus Event-Historie synchronisiert")
+                self._sync_journal_to_charakter()
+                self._update_display()
+        except Exception as e:
+            Logger.error(f"Fehler bei Event-Historie-Synchronisation: {e}")
+    
+    def _build_attribut_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('attribute_name', 'Unbekannt'),
+            'von': data.get('old_value', 4),
+            'nach': data.get('new_value', 6),
+            'kosten': data.get('cost', 1),
+            'kosten_typ': data.get('cost_type', 'Attributspunkte')
+        }
+    
+    def _build_skill_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('skill_name', 'Unbekannt'),
+            'von': data.get('old_value', 0),
+            'nach': data.get('new_value', 4),
+            'kosten': data.get('cost', 1),
+            'kosten_typ': data.get('cost_type', 'Fertigkeitspunkte')
+        }
+    
+    def _build_talent_added_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('talent_name', 'Unbekannt'),
+            'kosten': data.get('cost', 1),
+            'voraussetzungen': data.get('requirements', '')
+        }
+    
+    def _build_talent_removed_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('talent_name', 'Unbekannt'),
+            'action': data.get('action', 'removed')
+        }
+    
+    def _build_handicap_added_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('handicap_name', 'Unbekannt'),
+            'stufe': data.get('stufe', 'Leicht'),
+            'punkte': data.get('points', 1)
+        }
+    
+    def _build_handicap_removed_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('handicap_name', 'Unbekannt'),
+            'action': data.get('action', 'removed')
+        }
+    
+    def _build_handicap_reduced_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('handicap_name', 'Unbekannt'),
+            'action': data.get('action', 'reduced')
+        }
+    
+    def _build_macht_added_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('macht_name', 'Unbekannt'),
+            'rang': data.get('rang', 'Anfänger'),
+            'kosten': data.get('cost', 1)
+        }
+    
+    def _build_macht_removed_details(self, data):
+        if not isinstance(data, dict):
+            return None
+        return {
+            'name': data.get('macht_name', 'Unbekannt'),
+            'action': data.get('action', 'removed')
+        }
     
     def _get_charakter_rang(self) -> str:
         """Gibt den aktuellen Rang des Charakters zurück."""

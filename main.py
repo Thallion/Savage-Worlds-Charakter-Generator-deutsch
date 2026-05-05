@@ -913,8 +913,9 @@ class SW_Charakter_GeneratorApp(MDApp):
                 # WICHTIG: Referenz behalten um WeakReference-Problem zu vermeiden
                 self.tab_items.append(tab_item)
 
-                # Screen-Instanzierung: nur Tab 0 sofort, Rest on-demand
-                if i == 0:
+                # Screen-Instanzierung: Tab 0 + Historie sofort (Historie braucht
+                # früh registrierte Event-Listener für Änderungs-Logging), Rest on-demand
+                if i == 0 or tab_text == "Historie":
                     screen_instance, screen_name = self._instantiate_screen(i, screen_manager)
                     if screen_instance and screen_name:
                         screen_manager.current = screen_name
