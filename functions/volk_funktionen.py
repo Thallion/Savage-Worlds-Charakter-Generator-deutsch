@@ -411,10 +411,13 @@ def hat_volk_wahlmoeglichkeit(charakter, volk_name, wahlmoeglichkeit_typ):
                     Logger.debug(f"Halbelf-Spezialbehandlung: freies Attribut für '{volk_name}'")
                     return True
         
-        # Spezialbehandlung für Menschen (NUR freies Anfängertalent)
-        if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
-            if volk_name.lower() in ["mensch", "menschen", "human"]:
+        # Spezialbehandlung für Menschen
+        if volk_name.lower() in ["mensch", "menschen", "human"]:
+            if wahlmoeglichkeit_typ in ['freies_talent', 'freies_anfaengertalent']:
                 Logger.debug(f"Menschen-Spezialbehandlung: freies Talent für '{volk_name}'")
+                return True
+            elif wahlmoeglichkeit_typ == 'freies_attribut':
+                Logger.debug(f"Menschen-Spezialbehandlung: freies Attribut für '{volk_name}'")
                 return True
         
         Logger.debug(f"Keine Wahlmöglichkeit '{wahlmoeglichkeit_typ}' für '{volk_name}' gefunden")

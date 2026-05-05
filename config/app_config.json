@@ -1,6 +1,6 @@
 {
   "theme_style": "Dark",
-  "primary_palette": "Green",
+  "primary_palette": "Orange",
   "default_attribute_points": 5,
   "default_skill_points": 12,
   "default_money": 500,
@@ -8,13 +8,13 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
-  "show_logger": false,
+  "mobile_modus": false,
+  "show_logger": true,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
-  "last_character_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
-  "last_pdf_directory": "/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/chars/Archetypen",
-  "debug_mode": true,
+  "last_character_directory": "",
+  "last_pdf_directory": "",
+  "debug_mode": false,
   "log_level": "DEBUG",
   "max_recent_files": 10,
   "default_printer_friendly": false,
@@ -22,26 +22,26 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Savage Pathfinder",
-  "force_mobile_layout": true,
-  "desktop_scale_factor": 1.0,
+  "force_mobile_layout": false,
+  "desktop_scale_factor": "auto",
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
   "tutorial_state": {
     "welcome_completed": true,
     "tab_hints_shown": {
+      "ausruestung": false,
       "superkraefte": false,
-      "voelker": false,
-      "eigenschaften": false,
-      "profil": false,
       "talente": false,
       "maechte": false,
-      "ausruestung": false,
+      "eigenschaften": false,
       "historie": false,
-      "handicaps": false,
+      "profil": false,
+      "voelker": false,
+      "speichern_laden": false,
       "charakterbogen": false,
-      "speichern_laden": false
+      "handicaps": false
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-05-03T08:11:19.681683"
+  "last_updated": "2026-05-05T19:17:28.318493"
 }

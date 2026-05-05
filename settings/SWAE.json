@@ -260,6 +260,7 @@
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
+                "auto_handicaps": [],
                 "spezielle_effekte": {},
                 "wahlmoeglichkeiten": {
                     "freies_talent": true

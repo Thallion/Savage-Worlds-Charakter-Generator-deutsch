@@ -152,6 +152,17 @@ class VoelkerWidget(MDBoxLayout):
                         return [x for x in v if x]
                     return [v]
 
+                # Freies Attribut - kann mehrere Slots haben (ZUERST verarbeiten!)
+                attribute = _as_list(zusatzelemente.get('freies_attribut'))
+                if attribute:
+                    attr_liste = []
+                    for attr in attribute:
+                        Logger.info(f"[DEBUG] Rufe waehle_freies_attribut auf für '{volk_name}' mit Attribut '{attr}'")
+                        if waehle_freies_attribut(charakter, volk_name, attr):
+                            attr_liste.append(attr)
+                    if attr_liste:
+                        self.voelker_auswahlen[volk_name]['attribut'] = attr_liste
+
                 # Freies Talent (all types) - kann mehrere Slots haben
                 talente = _as_list(zusatzelemente.get('freies_talent'))
                 if talente:
@@ -165,6 +176,16 @@ class VoelkerWidget(MDBoxLayout):
                             if talent_liste:
                                 self.voelker_auswahlen[volk_name]['talent'] = talent_liste
                             self._show_voraussetzungen_confirmation_dialog(volk_name, 'freies_talent', talent)
+
+                            # WICHTIG: UI-Updates auch bei unerfüllten Voraussetzungen ausführen
+                            # damit bereits verarbeitete Zusatzelemente (wie freies Attribut) angezeigt werden
+                            Clock.schedule_once(lambda dt: self._update_zusatzelemente(), 0.1)
+                            Clock.schedule_once(lambda dt: self._update_selected_volk_details(), 0.1)
+                            def force_eigenschaften_refresh(dt):
+                                if app and hasattr(app, 'controller') and app.controller:
+                                    app.controller.dispatch('on_charakter_updated')
+                                    Logger.debug("Eigenschaften-View Refresh nach partieller Zusatzelemente-Verarbeitung erzwungen")
+                            Clock.schedule_once(force_eigenschaften_refresh, 0.2)
                             return
                         elif result:
                             talent_liste.append(talent)
@@ -206,17 +227,6 @@ class VoelkerWidget(MDBoxLayout):
                 if zusatzelemente.get('mensch_fertigkeitspunkte'):
                     waehle_mensch_fertigkeitspunkte(charakter, volk_name)
                     self.voelker_auswahlen[volk_name]['vielseitig_wahl'] = '+2 Fertigkeitspunkte'
-
-                # Freies Attribut - kann mehrere Slots haben
-                attribute = _as_list(zusatzelemente.get('freies_attribut'))
-                if attribute:
-                    attr_liste = []
-                    for attr in attribute:
-                        Logger.info(f"[DEBUG] Rufe waehle_freies_attribut auf für '{volk_name}' mit Attribut '{attr}'")
-                        if waehle_freies_attribut(charakter, volk_name, attr):
-                            attr_liste.append(attr)
-                    if attr_liste:
-                        self.voelker_auswahlen[volk_name]['attribut'] = attr_liste
 
                 # Freies Attribut (Malus) - kann mehrere Slots haben
                 malus_werte = _as_list(zusatzelemente.get('freies_attribut_malus'))

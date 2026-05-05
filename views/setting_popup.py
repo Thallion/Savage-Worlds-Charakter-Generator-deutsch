@@ -137,7 +137,12 @@ class SettingsRepository:
                 if hasattr(controller, 'dispatch') and setting_name:
                     controller.dispatch('on_setting_changed', setting_name)
 
-                MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
+                # Sicher auf einstellungen_widget zugreifen (kann beim Start noch nicht existieren)
+                app = MDApp.get_running_app()
+                if hasattr(app, 'einstellungen_widget') and app.einstellungen_widget:
+                    app.einstellungen_widget.aktualisiere_ui()
+                else:
+                    Logger.debug("EinstellungenWidget noch nicht verfügbar für UI-Update")
             Logger.info(f"Setting '{setting_name}' geladen.")
             return setting_data
         except Exception as e:
@@ -152,7 +157,13 @@ class SettingsRepository:
                 if success:
                     controller.charakter.custom_element_manager.reload_settings()
                     Logger.info(f"Setting '{setting_name}' gelöscht.")
-                    MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
+
+                    # Sicher auf einstellungen_widget zugreifen (kann beim Start noch nicht existieren)
+                    app = MDApp.get_running_app()
+                    if hasattr(app, 'einstellungen_widget') and app.einstellungen_widget:
+                        app.einstellungen_widget.aktualisiere_ui()
+                    else:
+                        Logger.debug("EinstellungenWidget noch nicht verfügbar für UI-Update")
                     return True
                 else:
                     Logger.error(f"Löschen fehlgeschlagen für: {setting_name}")
@@ -247,7 +258,13 @@ class AddSettingPopup(MDBoxLayout, BaseFileManagerMixin):
                     dialog_service.show_success_dialog(f"Setting '{setting_name}' gespeichert.")
                 if self.popup:
                     self.popup.dismiss()
-                MDApp.get_running_app().einstellungen_widget.aktualisiere_ui()
+
+                # Sicher auf einstellungen_widget zugreifen (kann beim Start noch nicht existieren)
+                app = MDApp.get_running_app()
+                if hasattr(app, 'einstellungen_widget') and app.einstellungen_widget:
+                    app.einstellungen_widget.aktualisiere_ui()
+                else:
+                    Logger.debug("EinstellungenWidget noch nicht verfügbar für UI-Update")
             else:
                 self.show_error("Setting konnte nicht gespeichert werden.")
         except Exception as e:
