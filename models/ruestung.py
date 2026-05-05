@@ -80,10 +80,9 @@ class Ruestung(Ausruestung):
             charakter_staerke_wert = charakter.get_effektive_staerke(fuer_ausruestung=True)
         else:
             charakter_staerke_wert = charakter.attribute['Stärke'].wert
-            
+
             # Prüfen, ob der Charakter das Talent "Kräftig" hat
             if "Kräftig" in charakter.selected_talente:
-                # Stärke um einen Würfeltyp erhöhen
                 if charakter_staerke_wert == 4:
                     charakter_staerke_wert = 6
                 elif charakter_staerke_wert == 6:
@@ -92,7 +91,7 @@ class Ruestung(Ausruestung):
                     charakter_staerke_wert = 10
                 elif charakter_staerke_wert == 10:
                     charakter_staerke_wert = 12
-        
+
         # Mapping von Würfelwerten zu numerischen Werten
         staerke_mapping = {'W4': 4, 'W6': 6, 'W8': 8, 'W10': 10, 'W12': 12, '-': 0}
         

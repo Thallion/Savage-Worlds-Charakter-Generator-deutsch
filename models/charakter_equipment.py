@@ -133,7 +133,7 @@ class CharakterEquipment:
     def get_effektive_staerke(self, fuer_ausruestung=False):
         """
         Berechnet die effektive Stärke des Charakters.
-        Berücksichtigt das Talent "Kräftig" und das Handicap "Fettleibig" für Mindeststärke und Traglast.
+        Berücksichtigt das Talent "Kräftig", das Talent "Berserker" und das Handicap "Fettleibig" für Mindeststärke und Traglast.
         
         Args:
             fuer_ausruestung: Ob die Stärke für Mindeststärke/Traglast (True) oder normal (False) berechnet werden soll
@@ -162,7 +162,7 @@ class CharakterEquipment:
                     staerke_wert = 10
                 elif staerke_wert == 10:
                     staerke_wert = 12
-            
+
             # Prüfen, ob der Charakter das Handicap "Fettleibig" hat
             for handicap_name in self.selected_handicaps:
                 if handicap_name in self.handicaps:
@@ -177,6 +177,5 @@ class CharakterEquipment:
                             staerke_wert = 6
                         elif staerke_wert == 6:
                             staerke_wert = 4
-                        # W4 bleibt W4
-        
+
         return staerke_wert

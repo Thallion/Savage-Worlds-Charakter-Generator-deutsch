@@ -118,7 +118,7 @@ def berechne_abgeleitete_werte(charakter):
         
         if "Kräftig" in charakter.selected_talente:
             robustheit_bonus += 1  # Kräftig: +1 Robustheit durch erhöhte Größe
-        
+
         if "Raufbold" in charakter.selected_talente:
             robustheit_bonus += 1  # Raufbold: +1 Robustheit
 

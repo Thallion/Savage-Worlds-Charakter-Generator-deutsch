@@ -74,10 +74,9 @@ class Waffe(Ausruestung):
         else:
             # Fallback für Abwärtskompatibilität
             charakter_staerke_num = self.convert_staerke_to_num(charakter.attribute['Stärke'].wert)
-            
+
             # Prüfen, ob der Charakter das Talent "Kräftig" hat
             if "Kräftig" in charakter.selected_talente:
-                # Einen Würfeltyp höher für Ausrüstung
                 if charakter_staerke_num == 4:
                     charakter_staerke_num = 6
                 elif charakter_staerke_num == 6:
@@ -86,7 +85,7 @@ class Waffe(Ausruestung):
                     charakter_staerke_num = 10
                 elif charakter_staerke_num == 10:
                     charakter_staerke_num = 12
-        
+
         return charakter_staerke_num >= mindeststaerke_num
 
     def anlegen(self, charakter):

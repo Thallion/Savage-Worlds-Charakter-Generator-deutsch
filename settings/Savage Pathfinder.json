@@ -895,7 +895,7 @@
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [],
-      "beschreibung": "Nach Angeschlagen oder Wunde: Nahkampfangriffe müssen Rücksichtslose Angriffe sein, +1 Würfeltyp Stärke, +2 Robustheit, ignoriere eine Stufe Wundabzüge, Kritischer Fehlschlag bei Kämpfenproben trifft zufälliges Ziel. Erleidet Erschöpfung nach fünf Runden in Folge, kann dies mit Verstandsprobe mit –2 beenden.",
+      "beschreibung": "Erhöhe Stärke um einen Würfeltyp. Du musst einen Rücksichtslosen Angriff ausführen, wenn möglich.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,

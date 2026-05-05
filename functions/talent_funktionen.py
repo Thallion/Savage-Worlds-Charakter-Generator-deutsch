@@ -298,6 +298,9 @@ class TalentManager:
             # Spezial-Effekte von Talenten rückgängig machen (z.B. Rohling → Athletik-Link)
             self._remove_talent_spezial_effekte(talent_name_key)
 
+            # Attribut-Würfel-Effekt rückgängig machen (z.B. Berserker → Stärke -1 Würfeltyp)
+            self._remove_talent_attribut_wuerfel_effekt(talent_name_key)
+
             if talent_name_key in self.charakter.selected_talente:
                 self.charakter.selected_talente.remove(talent_name_key)
             Logger.debug(f"Talent '{talent_name_key}' entfernt.")
@@ -401,6 +404,9 @@ class TalentManager:
                     # Spezial-Effekte von Talenten anwenden (z.B. Rohling → Athletik-Link)
                     self._apply_talent_spezial_effekte(talent_name_key)
 
+                    # Attribut-Würfel-Effekt anwenden (z.B. Berserker → Stärke +1 Würfeltyp)
+                    self._apply_talent_attribut_wuerfel_effekt(talent_name_key)
+
                     # Abgeleitete Werte neu berechnen (ohne Vermögensberechnung)
                     self.charakter.berechne_abgeleitete_werte()
 
@@ -491,6 +497,11 @@ class TalentManager:
         "Rohling": [("Athletik", "Geschicklichkeit")],
     }
 
+    # Talente die den Würfeltyp eines Attributs erhöhen
+    TALENT_ATTRIBUT_WUERFEL_EFFEKTE = {
+        "Berserker": "Stärke",  # Erhöht Stärke um einen Würfeltyp
+    }
+
     def _apply_talent_spezial_effekte(self, talent_name_key):
         """
         Wendet Spezial-Effekte bestimmter Talente an.
@@ -530,6 +541,40 @@ class TalentManager:
                     f"Talent '{talent_name_key}' abgewählt: {fertigkeit_name} "
                     f"zurück auf {original_attribut_name}"
                 )
+
+    def _apply_talent_attribut_wuerfel_effekt(self, talent_name_key):
+        """
+        Erhöht den Würfeltyp eines Attributs um eine Stufe, wenn das Talent ausgewählt wird.
+        Z.B. Berserker: Stärke +1 Würfeltyp.
+        """
+        attribut_name = self.TALENT_ATTRIBUT_WUERFEL_EFFEKTE.get(talent_name_key)
+        if not attribut_name:
+            return
+
+        attribut = self.charakter.attribute.get(attribut_name)
+        if attribut and hasattr(attribut, 'wuerfel'):
+            attribut.wuerfel.increase()
+            Logger.info(
+                f"Talent '{talent_name_key}': {attribut_name} erhöht auf "
+                f"W{attribut.wert} (war vorher W{attribut.wuerfel.value - 2})"
+            )
+
+    def _remove_talent_attribut_wuerfel_effekt(self, talent_name_key):
+        """
+        Verringert den Würfeltyp eines Attributs um eine Stufe, wenn das Talent abgewählt wird.
+        """
+        attribut_name = self.TALENT_ATTRIBUT_WUERFEL_EFFEKTE.get(talent_name_key)
+        if not attribut_name:
+            return
+
+        attribut = self.charakter.attribute.get(attribut_name)
+        if attribut and hasattr(attribut, 'wuerfel'):
+            old_value = attribut.wuerfel.value
+            attribut.wuerfel.decrease()
+            Logger.info(
+                f"Talent '{talent_name_key}' abgewählt: {attribut_name} verringert auf "
+                f"W{attribut.wert} (war W{old_value})"
+            )
 
     def pruefe_voraussetzungen(self, talent):
         """
