@@ -214,6 +214,28 @@ def get_templates_path(filename: str = "") -> str:
     else:
         return get_resource_path("templates")
 
+def safe_filename_stem(path) -> str:
+    """Gibt den Dateinamen ohne Extension zurück, korrekt als UTF-8 dekodiert.
+
+    Auf Android/Python-for-Android werden Dateinamen mit Nicht-ASCII-Zeichen
+    (Umlaute wie ä, ö, ü) manchmal als Surrogate-Escape-Sequenzen zurückgegeben,
+    wenn die Filesystem-Locale nicht auf UTF-8 gesetzt ist. Diese surrogates
+    können von keiner Schriftart gerendert werden und erscheinen als Kästchen.
+
+    Diese Funktion erkennt solche surrogates und konvertiert sie zurück zu den
+    ursprünglichen UTF-8-Bytes, um den korrekten Unicode-String zu erhalten.
+    """
+    stem = Path(path).stem
+    try:
+        stem.encode('utf-8')
+        return stem
+    except UnicodeEncodeError:
+        try:
+            return stem.encode('utf-8', errors='surrogatepass').decode('utf-8')
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            return stem
+
+
 # Für Backward-Kompatibilität
 def get_project_root() -> Path:
     """Alias für get_application_root()"""
