@@ -29,6 +29,7 @@ from kivymd.uix.dialog import (
     MDDialogButtonContainer
 )
 from utils.custom_filemanager import CustomFileManager
+from utils.path_utils import safe_filename_stem
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDButton, MDButtonText
@@ -124,7 +125,7 @@ class SettingsRepository:
                 raise FileNotFoundError("Keine gültige Datei ausgewählt")
             with open(setting_datei, "r", encoding="utf-8") as f:
                 setting_data = json.load(f)
-            setting_name = setting_data.get("name", setting_datei.stem)
+            setting_name = setting_data.get("name", safe_filename_stem(setting_datei))
             if controller and controller.charakter:
                 controller.charakter.custom_element_manager.reload_settings()
                 controller.charakter.custom_element_manager.set_active_setting(setting_name)
@@ -151,7 +152,7 @@ class SettingsRepository:
 
     def delete(self, filepath, controller):
         try:
-            setting_name = Path(filepath).stem
+            setting_name = safe_filename_stem(filepath)
             if controller and controller.charakter:
                 success = controller.charakter.custom_element_manager.delete_setting(setting_name)
                 if success:

@@ -39,7 +39,7 @@ from manager.html_manager import HTMLManager
 from utils.custom_filemanager import CustomFileManager
 
 # KV-Datei laden mit Mobile-Unterstützung
-from utils.path_utils import get_application_root
+from utils.path_utils import get_application_root, safe_filename_stem
 from utils.platform_utils import is_mobile_layout, landscape_height
 import os
 
@@ -353,13 +353,13 @@ class CharakterVerwaltungWidget(MDBoxLayout):
         native_dir = Path(get_settings_path())
         if native_dir.exists():
             for f in native_dir.glob('*.json'):
-                settings_set.add(f.stem)
+                settings_set.add(safe_filename_stem(f))
 
         # Benutzer-Settings laden (persistentes Verzeichnis)
         user_dir = Path(get_user_settings_path())
         if user_dir.exists() and user_dir != native_dir:
             for f in user_dir.glob('*.json'):
-                settings_set.add(f.stem)
+                settings_set.add(safe_filename_stem(f))
 
         return sorted(settings_set)
 

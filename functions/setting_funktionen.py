@@ -36,7 +36,7 @@ import functions.ausruestung_funktionen as ausruestung_funktionen
 
 
 # Import centralized path utilities
-from utils.path_utils import get_application_root, get_settings_path, get_user_settings_path
+from utils.path_utils import get_application_root, get_settings_path, get_user_settings_path, safe_filename_stem
 
 
 class SetEncoder(json.JSONEncoder):
@@ -139,7 +139,7 @@ class CustomElementManager:
         try:
             with open(setting_file, 'r', encoding='utf-8') as f:
                 setting_data = json.load(f)
-                setting_name = setting_file.stem
+                setting_name = safe_filename_stem(setting_file)
                 self.settings[setting_name] = setting_data
                 if is_user:
                     self._user_settings.add(setting_name)
