@@ -559,13 +559,20 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                           'keine_lebenswichtigen_organe', 'waermesicht', 'schlafbedarf',
                           'doppelt_so_weit_springen', 'springer_schadensbonus',
                           'widerstand_naturgewalten', 'anfaelligkeit_naturgewalten',
-                          'halbe_bewegungsweite_graben', 'groesse_punkt',
+                          'halbe_bewegungsweite_graben',
                           'wahrnehmung_w8', 'natuerlicher_kaempfer', 'eiserner_wille',
                           'schnelle_heilung', 'grundfertigkeit_weniger', 'springer',
                           'furcht', 'immunisierung', 'ruestung_anpassung',
                           'sprache_eingeschraenkt', 'wuchtig', 'volle_bewegungsweite_schwimmen',
                           'atmen_unter_wasser_minuten']:
                     effects['spezielle_effekte'].append({'typ': key, 'wert': value})
+                elif key == 'groesse_punkt':
+                    # Größe-Punkt direkt in groesse_modifikator aggregieren (addiert sich
+                    # automatisch auf Robustheit). Zusätzlich für Backward-Compat als
+                    # spezieller Effekt belassen.
+                    if isinstance(value, (int, float)):
+                        effects['groesse_modifikator'] = effects.get('groesse_modifikator', 0) + value
+                    effects['spezielle_effekte'].append({'typ': 'groesse_punkt', 'wert': value})
                 elif key in ['bewegungsweite_bonus', 'robustheit_bonus', 'bewegungsweite_flug',
                              'sozialer_malus', 'athletik_malus', 'ueberreden_malus',
                              'koerpersprache_malus', 'verstand_malus', 'erholung_malus',

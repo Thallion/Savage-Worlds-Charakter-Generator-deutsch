@@ -35,6 +35,7 @@ def generate_character_statblock(charakter):
         pace = charakter.bewegungsweite
         parry = charakter.parade
         toughness = charakter.robustheit
+        size = charakter.groesse
         
         # Handicaps formatieren
         handicaps_text = _format_handicaps(charakter)
@@ -61,7 +62,7 @@ def generate_character_statblock(charakter):
         statblock_lines.extend([
             f"Attribute: {attribute_text}",
             f"Fertigkeiten: {fertigkeiten_text}",
-            f"Bewegungsweite: {pace}; Parade: {parry}; Robustheit: {toughness}"
+            f"Bewegungsweite: {pace}; Parade: {parry}; Größe: {size:+d}; Robustheit: {toughness}"
         ])
         
         # Nur hinzufügen wenn vorhanden

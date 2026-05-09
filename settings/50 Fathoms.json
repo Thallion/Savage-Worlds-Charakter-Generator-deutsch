@@ -102,7 +102,7 @@
                     "Stärke": 4,
                     "Konstitution": 2
                 },
-                "robustheit_bonus": 1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -2,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -114,7 +114,8 @@
                     "speckschicht": true,
                     "halbaquatisch": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Kehana": {
@@ -1691,8 +1692,7 @@
             "name": "Böe",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2101,8 +2101,7 @@
             "name": "Schnelle Verwandlung",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3740,8 +3739,7 @@
             "name": "Profi",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3859,8 +3857,7 @@
             "name": "Krakenknochenschwert und -rüstung",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Der Krake besitzt ein Krakenknochenschwert (Stä+W10, 2 kg) und eine Krakenknochenrüstung (+3 Panzerung Torso/Arme/Kopf, 7,5 kg). Für Nichtkraken nur Stä+W6 und +1 Panzerung.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -3871,8 +3868,7 @@
             "name": "Natürlicher Schwimmer",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "+2 auf Athletikproben (Schwimmen), +1 auf Schwimmbewegungsweite, kann 50% länger den Atem anhalten.",
             "neue_maechte": 0,
             "machtpunkte": 0,

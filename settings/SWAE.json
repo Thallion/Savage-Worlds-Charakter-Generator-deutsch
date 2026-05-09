@@ -229,14 +229,15 @@
                 "attribute_bonuses": {
                     "Willenskraft": 2
                 },
-                "robustheit_bonus": -1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
                     "Glück"
                 ],
                 "spezielle_effekte": {},
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -1
             }
         },
         "Mensch": {
@@ -2252,8 +2253,7 @@
             "name": "Profi",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
             "machtpunkte": 0,

@@ -194,7 +194,7 @@
                     "Stärke": 2,
                     "Konstitution": 2
                 },
-                "robustheit_bonus": 2,
+                "robustheit_bonus": 1,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
@@ -216,7 +216,8 @@
                     "schwaeche_elektrizitaet": true,
                     "max_geschicklichkeit_w8": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Phantom": {
@@ -2186,8 +2187,7 @@
             "name": "Profi",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
