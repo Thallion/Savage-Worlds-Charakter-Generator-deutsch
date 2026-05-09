@@ -89,6 +89,7 @@ class CharakterProperties:
     robustheit = NumericProperty(3)
     robustheit_basis = NumericProperty(3)
     robustheit_mit_ruestung = StringProperty("")
+    groesse = NumericProperty(0)
     
     # Attribute und Fertigkeiten
     attribute = DictProperty({})

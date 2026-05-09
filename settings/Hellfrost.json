@@ -29,15 +29,14 @@
                 "attribute_bonuses": {
                     "Willenskraft": 2
                 },
-                "robustheit_bonus": -1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
                     "Glück"
                 ],
                 "auto_handicaps": [
-                    "Außenseiter",
-                    "Klein"
+                    "Außenseiter"
                 ],
                 "spezielle_effekte": {
                     "aussenseiter": true,
@@ -55,7 +54,8 @@
                         "bonus": 2,
                         "beschreibung": "Beginne mit Heimlichkeit oder Diebeskunst auf W6"
                     }
-                }
+                },
+                "groesse_modifikator": -1
             }
         },
         "Frostblut": {
@@ -2155,8 +2155,7 @@
             "name": "Böe",
             "kategorie": "Kampf",
             "rang": "F",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -2568,8 +2567,7 @@
             "name": "Schnelle Verwandlung",
             "kategorie": "Übersinnlich",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -4210,8 +4208,7 @@
             "name": "Profi",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -4301,8 +4298,7 @@
             "name": "AH (Druidentum)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Arkane Fertigkeit: Druidenmagie (Verstand). Startmächte: 3. Druiden ziehen an den Fäden der Naturmagie und manipulieren Pflanzen und Tiere. In Wildnis +1 auf Druidenmagie, in Städten -1.",
             "neue_maechte": 3,
             "machtpunkte": 0,
@@ -4324,8 +4320,7 @@
             "name": "AH (Heahmagie)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Arkane Fertigkeit: Heahmagie (Verstand). Startmächte: 3. Heahmagier schöpfen ihre Macht durch magische Stäbe. Ohne Stab -2 auf alle Heahmagiewürfe. Der Stab verursacht Stä+W4 Schaden.",
             "neue_maechte": 3,
             "machtpunkte": 0,
@@ -4347,8 +4342,7 @@
             "name": "AH (Runenmagie)",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Runenmagier ritzen Runen der Macht auf Steintafeln. Jede Rune hat eine eigene arkane Fertigkeit und ist mit drei Zaubersprüchen verknüpft. Beginnt mit einer Rune.",
             "neue_maechte": 3,
             "machtpunkte": 0,
@@ -4709,8 +4703,7 @@
             "name": "Bücherei",
             "kategorie": "Hintergrund",
             "rang": "A",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Besitzt Wissensbände. Erhält Punkte gleich halbem Verstandwürfel, verteilt auf Bände (max +3 pro Band), die Boni auf Wissensfertigkeiten geben.",
             "neue_maechte": 0,
             "machtpunkte": 0,

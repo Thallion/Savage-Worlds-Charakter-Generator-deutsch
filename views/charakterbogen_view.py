@@ -785,9 +785,11 @@ class CharakterbogenWidget(MDBoxLayout):
         abgeleitete_werte_grid.clear_widgets()
         
         # Liste der anzuzeigenden abgeleiteten Werte
+        groesse_anzeige = f"{self.charakter.groesse:+d}" if self.charakter.groesse != 0 else "0"
         werte = [
             ("Bewegungsweite", str(self.charakter.bewegungsweite)),
             ("Parade", str(self.charakter.parade)),
+            ("Größe", groesse_anzeige),
             ("Robustheit", self.charakter.robustheit_mit_ruestung),
             ("Machtpunkte", str(self.charakter.machtpunkte)),
             ("Wunden", str(self.charakter.wunden)),

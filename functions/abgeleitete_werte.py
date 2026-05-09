@@ -113,44 +113,55 @@ def berechne_abgeleitete_werte(charakter):
         else:
             konstitution_wert = 4  # Standardwert, wenn Konstitution nicht vorhanden
 
-        # Talent-Boni für Robustheit/Größe
+        # Größe und Robustheit getrennt führen:
+        # - groesse: Mensch = 0; Volks-Größe + Größe-relevante Talente/Handicaps
+        # - robustheit_bonus: echte Robustheit-Boni (Talente Raufbold/Schläger/Jünger Erthas, Fettleibig, Cyberware, Volk-Rest)
+        # Endformel: robustheit_basis = (KON//2) + 2 + groesse + robustheit_bonus
+        groesse = 0
         robustheit_bonus = 0
-        
+
+        # Talent-Effekte
         if "Kräftig" in charakter.selected_talente:
-            robustheit_bonus += 1  # Kräftig: +1 Robustheit durch erhöhte Größe
+            groesse += 1  # Kräftig erhöht die Größe (und damit Robustheit) um 1
 
         if "Raufbold" in charakter.selected_talente:
-            robustheit_bonus += 1  # Raufbold: +1 Robustheit
+            robustheit_bonus += 1  # Raufbold: +1 Robustheit (kein Größe-Effekt)
 
         if "Schläger" in charakter.selected_talente:
-            robustheit_bonus += 1  # Schläger: +1 Robustheit
+            robustheit_bonus += 1  # Schläger: +1 Robustheit (kein Größe-Effekt)
 
         if "Jünger Erthas" in charakter.selected_talente:
             robustheit_bonus += 1  # Jünger Erthas (Hellfrost): +1 Robustheit
 
-        # Handicap-Effekte für Robustheit
+        # Handicap-Effekte
         for handicap_name in charakter.selected_handicaps:
             if handicap_name in charakter.handicaps:
                 handicap = charakter.handicaps[handicap_name]
-                
-                # Fettleibig (leicht)
-                if "Fettleibig" in handicap.name and handicap.stufe == "leicht":
-                    robustheit_bonus += 1  # Fettleibig: +1 Robustheit
-                
-                # Klein (leicht)
-                elif "Klein" in handicap.name and handicap.stufe == "leicht":
-                    robustheit_bonus -= 1  # Klein: -1 Robustheit
 
-        # 3. Völker-Effekte für Robustheit (Größe/Basis-Modifikationen)
+                # Fettleibig (leicht): +1 Robustheit (Körperfett, kein Größenwachstum)
+                if "Fettleibig" in handicap.name and handicap.stufe == "leicht":
+                    robustheit_bonus += 1
+
+                # Klein (leicht): -1 Größe (und damit -1 Robustheit)
+                elif "Klein" in handicap.name and handicap.stufe == "leicht":
+                    groesse -= 1
+
+        # Völker-Effekte: Größe und Robustheit-Bonus getrennt
+        voelker_groesse = _berechne_voelker_groesse(charakter)
+        groesse += voelker_groesse
+
         voelker_robustheit_bonus = _berechne_voelker_robustheit_bonus(charakter)
         robustheit_bonus += voelker_robustheit_bonus
 
-        # 3b. Cyberware-Effekte für Robustheit
+        # Cyberware-Effekte für Robustheit (kein Größe-Effekt)
         cyberware_robustheit_bonus = _berechne_cyberware_robustheit_bonus(charakter)
         robustheit_bonus += cyberware_robustheit_bonus
-        
-        # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Boni
-        charakter.robustheit_basis = (konstitution_wert // 2) + 2 + robustheit_bonus
+
+        # Größe als abgeleiteten Wert speichern
+        charakter.groesse = groesse
+
+        # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Größe + Robustheit-Bonus
+        charakter.robustheit_basis = (konstitution_wert // 2) + 2 + groesse + robustheit_bonus
 
         # Gesamtrüstungsschutz berechnen (inklusive natürlicher Panzerung)
         from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
@@ -222,6 +233,7 @@ def berechne_abgeleitete_werte(charakter):
         abgeleitete_werte = {
             'Bewegungsweite': bewegungsweite,
             'Parade': charakter.parade,
+            'Größe': groesse,
             'Robustheit': f"{charakter.robustheit} ({gesamt_torso})",
             'Machtpunkte': machtpunkte,
             'Wunden': wunden,
@@ -271,16 +283,16 @@ def _berechne_voelker_bewegungsweite_bonus(charakter):
 
 def _berechne_voelker_robustheit_bonus(charakter):
     """
-    Berechnet den Robustheit-Bonus durch das ausgewählte Volk (nur Basis-Modifikationen wie Größe).
-    
+    Berechnet den echten Robustheit-Bonus des ausgewählten Volks (ohne Größe-Anteil).
+
     Args:
         charakter: Das Charakterobjekt
-        
+
     Returns:
         int: Robustheit-Bonus (kann negativ sein)
     """
     robustheit_bonus = 0
-    
+
     try:
         # Finde das ausgewählte Volk
         ausgewaehltes_volk = None
@@ -288,15 +300,55 @@ def _berechne_voelker_robustheit_bonus(charakter):
             if ist_ausgewaehlt and volk_name in charakter.voelker:
                 ausgewaehltes_volk = charakter.voelker[volk_name]
                 break
-        
+
         if ausgewaehltes_volk:
             robustheit_bonus = ausgewaehltes_volk.get_robustheit_bonus()
+            groesse_mod = ausgewaehltes_volk.get_groesse_modifikator()
             Logger.debug(f"Völker-Robustheit-Bonus von {ausgewaehltes_volk.name}: {robustheit_bonus}")
-    
+            # Sanity-Check: doppelte Codierung detektieren (rb != 0 UND groesse != 0)
+            if robustheit_bonus != 0 and groesse_mod != 0:
+                Logger.warning(
+                    f"Volk {ausgewaehltes_volk.name} hat sowohl robustheit_bonus={robustheit_bonus} "
+                    f"als auch groesse_modifikator={groesse_mod}. Beide werden auf Robustheit "
+                    f"addiert (legitim z.B. bei Vampir/Flickenmonster). Falls das eine Doppelung "
+                    f"durch Altdaten ist, bitte Setting-JSON migrieren."
+                )
+
     except Exception as e:
         Logger.error(f"Fehler bei Völker-Robustheit-Berechnung: {e}")
-    
+
     return robustheit_bonus
+
+
+def _berechne_voelker_groesse(charakter):
+    """
+    Berechnet den Größe-Modifikator durch das ausgewählte Volk.
+    Mensch = 0, Halbling = -1, Halbriese = +3 etc.
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        int: Größe-Modifikator (kann negativ sein)
+    """
+    groesse_modifikator = 0
+
+    try:
+        ausgewaehltes_volk = None
+        for volk_name, ist_ausgewaehlt in charakter.voelker_selected.items():
+            if ist_ausgewaehlt and volk_name in charakter.voelker:
+                ausgewaehltes_volk = charakter.voelker[volk_name]
+                break
+
+        if ausgewaehltes_volk:
+            groesse_modifikator = ausgewaehltes_volk.get_groesse_modifikator()
+            if groesse_modifikator != 0:
+                Logger.debug(f"Völker-Größe-Modifikator von {ausgewaehltes_volk.name}: {groesse_modifikator:+d}")
+
+    except Exception as e:
+        Logger.error(f"Fehler bei Völker-Größe-Berechnung: {e}")
+
+    return groesse_modifikator
 
 
 def _berechne_voelker_natuerliche_panzerung(charakter):

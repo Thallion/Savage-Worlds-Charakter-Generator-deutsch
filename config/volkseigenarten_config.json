@@ -384,7 +384,7 @@
             "max_auswahl": 3,
             "beschreibung": "Die Kreatur ist größer als normal. Jeder Punkt Größe wird direkt auf die Robustheit angerechnet und erhöht die maximale Stärke um einen Schritt.",
             "effekt_typ": "spezieller_effekt",
-            "effekt": {"groesse_punkt": 1, "robustheit_bonus": 1}
+            "effekt": {"groesse_punkt": 1}
         },
         {
             "id": "hoerner",
@@ -612,7 +612,7 @@
             "max_auswahl": 1,
             "beschreibung": "Die Wesenheit ist kleiner als der Durchschnitt, was ihre Größe und Robustheit um -1 verringert (siehe Größentabelle).",
             "effekt_typ": "spezieller_effekt",
-            "effekt": {"groesse_punkt": -1, "robustheit_bonus": -1}
+            "effekt": {"groesse_punkt": -1}
         },
         {
             "id": "abhaengigkeit",

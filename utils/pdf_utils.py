@@ -274,9 +274,11 @@ def generiere_pdf(charakter, output_pdf, printer_friendly=False, show_steigerung
 
     abgeleitete_header = Paragraph("Abgeleitete Werte", style_heading)
     abgeleitete_data = [["Beschreibung", "Wert"]]
+    groesse_anzeige = f"{charakter.groesse:+d}" if charakter.groesse != 0 else "0"
     abgeleitete_werte = {
         'Bewegungsweite': charakter.bewegungsweite,
         'Parade': charakter.parade,
+        'Größe': groesse_anzeige,
         'Robustheit': charakter.robustheit_mit_ruestung,
         'Machtpunkte': charakter.machtpunkte,
         'Wunden': charakter.wunden,

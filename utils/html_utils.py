@@ -294,9 +294,11 @@ def _erzeuge_volk_sektion(charakter):
 
 def _erzeuge_abgeleitete_werte_sektion(charakter):
     """Erzeugt die abgeleiteten Werte Sektion"""
+    groesse_anzeige = f"{charakter.groesse:+d}" if charakter.groesse != 0 else "0"
     abgeleitete_werte = {
         'Bewegungsweite': charakter.bewegungsweite,
         'Parade': charakter.parade,
+        'Größe': groesse_anzeige,
         'Robustheit': charakter.robustheit_mit_ruestung,
         'Machtpunkte': charakter.machtpunkte,
         'Wunden': charakter.wunden,

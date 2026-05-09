@@ -322,7 +322,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": -4,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -334,7 +334,8 @@
                     "neugierig": true,
                     "zwei_linke_haende": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -4
             }
         },
         "Gestaltwandler": {
@@ -403,7 +404,7 @@
                 "attribute_bonuses": {
                     "Verstand": 2
                 },
-                "robustheit_bonus": -1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {
                     "Wahrnehmung": 2
@@ -416,7 +417,8 @@
                     "nachtsicht": true,
                     "geschaerfte_sinne": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -1
             }
         },
         "Goblin": {
@@ -442,7 +444,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": -1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {
                     "Heimlichkeit": 2
@@ -455,7 +457,8 @@
                 },
                 "wahlmoeglichkeiten": {
                     "freies_anfaenger_talent": true
-                }
+                },
+                "groesse_modifikator": -1
             }
         },
         "Golem": {
@@ -484,7 +487,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": 2,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "fertigkeits_startmalus": {
@@ -502,7 +505,8 @@
                     "weniger_grundfertigkeiten": true,
                     "wuchtig": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 2
             }
         },
         "Grabgeborener": {
@@ -613,14 +617,15 @@
                 "attribute_bonuses": {
                     "Willenskraft": 2
                 },
-                "robustheit_bonus": -1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
                     "Glück"
                 ],
                 "spezielle_effekte": {},
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -1
             }
         },
         "Halbork": {
@@ -685,7 +690,7 @@
                     "Stärke": 4,
                     "Konstitution": 4
                 },
-                "robustheit_bonus": 3,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -696,7 +701,8 @@
                     "verpeilt": true,
                     "wuchtig": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 3
             }
         },
         "Himmlischer": {
@@ -841,7 +847,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": -4,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
@@ -854,7 +860,8 @@
                     "sanftmuetig": true,
                     "winzig": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -4
             }
         },
         "Mensch": {
@@ -913,7 +920,7 @@
                     "Stärke": 4,
                     "Konstitution": 2
                 },
-                "robustheit_bonus": 1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -924,7 +931,8 @@
                     "ungebildet": true,
                     "wuchtig": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Oger": {
@@ -959,7 +967,7 @@
                     "Stärke": 4,
                     "Konstitution": 4
                 },
-                "robustheit_bonus": 1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
@@ -972,7 +980,8 @@
                     "verpeilt": true,
                     "wuchtig": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Ork": {
@@ -1001,7 +1010,7 @@
                     "Stärke": 2,
                     "Konstitution": 2
                 },
-                "robustheit_bonus": 1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -1010,7 +1019,8 @@
                     "aussenseiter_schwer": true,
                     "brutal": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Rakashaner": {
@@ -1086,7 +1096,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": -1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [
@@ -1102,7 +1112,8 @@
                     "feige": true,
                     "gierig_leicht": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -1
             }
         },
         "Saurianer": {
@@ -1208,7 +1219,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": 1,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 4,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -1217,7 +1228,8 @@
                     "abhaengigkeit_freier_himmel": true,
                     "ungewoehnliche_form": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Zwerg": {
@@ -4192,8 +4204,7 @@
             "name": "Profi",
             "kategorie": "Legendär",
             "rang": "L",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.",
             "neue_maechte": 0,
             "machtpunkte": 0,

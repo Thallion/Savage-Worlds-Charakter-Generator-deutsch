@@ -58,7 +58,7 @@
             "custom": false,
             "effects": {
                 "attribute_bonuses": {},
-                "robustheit_bonus": 2,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 2,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -70,7 +70,8 @@
                     "wuchtig": true,
                     "offensichtlich": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 2
             }
         },
         "Draken": {
@@ -132,7 +133,7 @@
                 "attribute_bonuses": {
                     "Stärke": 4
                 },
-                "robustheit_bonus": 3,
+                "robustheit_bonus": 2,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -144,7 +145,8 @@
                     "dumm": true,
                     "wuchtig": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 1
             }
         },
         "Floraner": {
@@ -424,7 +426,7 @@
                 "attribute_bonuses": {
                     "Willenskraft": 2
                 },
-                "robustheit_bonus": -3,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -436,7 +438,8 @@
                     "winzling_sehr_klein": true,
                     "max_staerke_w6": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": -3
             }
         },
         "Roboter": {
@@ -599,7 +602,7 @@
                 "attribute_bonuses": {
                     "Stärke": 2
                 },
-                "robustheit_bonus": 2,
+                "robustheit_bonus": 0,
                 "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
@@ -607,7 +610,8 @@
                     "wuchtig": true,
                     "anfaellig_hitze": true
                 },
-                "wahlmoeglichkeiten": {}
+                "wahlmoeglichkeiten": {},
+                "groesse_modifikator": 2
             }
         }
     },

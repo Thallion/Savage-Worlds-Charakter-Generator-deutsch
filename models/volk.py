@@ -30,7 +30,8 @@ class Volk(EventDispatcher):
         # Strukturierte Effekte direkt setzen (kein Text-Parsing mehr nötig)
         self.effects = effects or {
             'attribute_bonuses': {},      # {'Stärke': 2} = W4 -> W6
-            'robustheit_bonus': 0,        # +1 oder -1
+            'robustheit_bonus': 0,        # +1 oder -1 (echter Robustheit-Bonus, nicht Größe)
+            'groesse_modifikator': 0,     # +1/-1/-4 etc. (z.B. Halbling -1, Halbriese +3); addiert sich auf Robustheit
             'bewegungsweite_bonus': 0,    # +1 oder -1
             'fertigkeits_startboni': {},   # {'Wahrnehmung': 2} = W4-2 -> W4+0
             'fertigkeits_startmalus': {}, # {'Allgemeinwissen': -2} = W4 -> W4-2
@@ -50,7 +51,8 @@ class Volk(EventDispatcher):
         if not self.effects:
             self.effects = {
                 'attribute_bonuses': {},      # {'Stärke': 2} = W4 -> W6
-                'robustheit_bonus': 0,        # +1 oder -1
+                'robustheit_bonus': 0,        # +1 oder -1 (echter Robustheit-Bonus, nicht Größe)
+                'groesse_modifikator': 0,     # +1/-1/-4 etc.; addiert sich auf Robustheit
                 'bewegungsweite_bonus': 0,    # +1 oder -1
                 'fertigkeits_startboni': {},   # {'Wahrnehmung': 2} = W4-2 -> W4+0
                 'fertigkeits_startmalus': {},  # {'Allgemeinwissen': -2} = W4 -> W4-2
@@ -72,15 +74,16 @@ class Volk(EventDispatcher):
 
     def _parse_einzeleffekt(self, text, ist_handicap=False):
         """Parst einen einzelnen Effekt aus dem Text."""
+        import re
         text_lower = text.lower()
-        
+
         # Attribut-Boni erkennen (auch in Klammern)
         attribute = ['stärke', 'geschicklichkeit', 'konstitution', 'verstand', 'willenskraft']
         for attr in attribute:
             if f"{attr} w6 statt w4" in text_lower:
                 attr_name = attr.capitalize()
                 self.effects['attribute_bonuses'][attr_name] = 2
-                
+
         # Fertigkeits-Boni erkennen (auch in Klammern)
         fertigkeiten = ['wahrnehmung', 'athletik', 'einschüchtern', 'kämpfen']
         for fert in fertigkeiten:
@@ -91,17 +94,26 @@ class Volk(EventDispatcher):
                 fert_name = fert.capitalize()
                 self.effects['fertigkeits_startboni'][fert_name] = 0  # W4-2 -> W4
 
-        # Robustheit-Effekte (verschiedene Formulierungen)
-        if any(phrase in text_lower for phrase in [
-            "robustheit um 1", "-1 robustheit", "(-1 robustheit", 
-            "reduzierte robustheit um 1", "größe -1"
-        ]):
-            if ist_handicap or any(neg in text_lower for neg in ["-1", "reduzierte", "schlank"]):
-                self.effects['robustheit_bonus'] -= 1
-            else:
+        # Größe-Effekte: "Größe +1", "Größe -1", "Größe -4" etc. → groesse_modifikator
+        groesse_match = re.search(r'größe\s*([+-]?\d+)', text_lower)
+        groesse_aus_text = 0
+        if groesse_match:
+            groesse_aus_text = int(groesse_match.group(1))
+            self.effects['groesse_modifikator'] = self.effects.get('groesse_modifikator', 0) + groesse_aus_text
+
+        # Robustheit-Effekte: nur wenn nicht schon durch Größe abgedeckt
+        # (Größe addiert sich automatisch auf Robustheit, daher kein doppelter robustheit_bonus)
+        if groesse_aus_text == 0:
+            if any(phrase in text_lower for phrase in [
+                "robustheit um 1", "-1 robustheit", "(-1 robustheit",
+                "reduzierte robustheit um 1"
+            ]):
+                if ist_handicap or any(neg in text_lower for neg in ["-1", "reduzierte", "schlank"]):
+                    self.effects['robustheit_bonus'] -= 1
+                else:
+                    self.effects['robustheit_bonus'] += 1
+            elif any(phrase in text_lower for phrase in ["+1 robustheit", "orkische wildheit"]):
                 self.effects['robustheit_bonus'] += 1
-        elif any(phrase in text_lower for phrase in ["+1 robustheit", "orkische wildheit"]):
-            self.effects['robustheit_bonus'] += 1
 
         # Bewegungsweite-Effekte (verschiedene Formulierungen)
         if any(phrase in text_lower for phrase in [
@@ -146,8 +158,12 @@ class Volk(EventDispatcher):
         return self.effects.get('fertigkeits_startboni', {}).get(fertigkeits_name, 0)
 
     def get_robustheit_bonus(self):
-        """Gibt den Robustheit-Bonus zurück."""
+        """Gibt den echten Robustheit-Bonus zurück (ohne Größe-Anteil)."""
         return self.effects.get('robustheit_bonus', 0)
+
+    def get_groesse_modifikator(self):
+        """Gibt den Größe-Modifikator des Volks zurück (Mensch = 0)."""
+        return self.effects.get('groesse_modifikator', 0)
 
     def get_bewegungsweite_bonus(self):
         """Gibt den Bewegungsweite-Bonus zurück."""
@@ -313,12 +329,15 @@ class Volk(EventDispatcher):
                                 charakter.selected_maechte.append(macht_name)
                             Logger.info(f"Volk {self.name}: Macht '{macht_name}' erhalten (Macht-Volk)")
 
-            # Robustheit und Bewegungsweite werden in abgeleitete_werte.py berechnet
+            # Robustheit, Größe und Bewegungsweite werden in abgeleitete_werte.py berechnet
             robustheit_bonus = self.effects.get('robustheit_bonus', 0)
+            groesse_modifikator = self.effects.get('groesse_modifikator', 0)
             bewegungsweite_bonus = self.effects.get('bewegungsweite_bonus', 0)
-            
+
             if robustheit_bonus != 0:
                 Logger.info(f"Volk {self.name}: Robustheit-Bonus {robustheit_bonus:+d}")
+            if groesse_modifikator != 0:
+                Logger.info(f"Volk {self.name}: Größe {groesse_modifikator:+d}")
             if bewegungsweite_bonus != 0:
                 Logger.info(f"Volk {self.name}: Bewegungsweite-Bonus {bewegungsweite_bonus:+d}")
 
