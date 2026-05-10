@@ -450,6 +450,9 @@ class TalentManager:
                     auto_talent.ausgewaehlt = True
                     if auto_talent_name not in self.charakter.selected_talente:
                         self.charakter.selected_talente.append(auto_talent_name)
+                    # Spezial-Effekte des Auto-Talents anwenden
+                    self._apply_talent_spezial_effekte(auto_talent_name)
+                    self._apply_talent_attribut_wuerfel_effekt(auto_talent_name)
                     Logger.info(f"AH Auto-Talent '{auto_talent_name}' angewendet für '{talent_name_key}'")
             else:
                 Logger.warning(f"AH Auto-Talent '{auto_talent_name}' nicht im Charakter gefunden")
@@ -478,6 +481,9 @@ class TalentManager:
             if auto_talent_name in self.charakter.talente:
                 auto_talent = self.charakter.talente[auto_talent_name]
                 if auto_talent.ausgewaehlt:
+                    # Spezial-Effekte des Auto-Talents entfernen
+                    self._remove_talent_attribut_wuerfel_effekt(auto_talent_name)
+                    self._remove_talent_spezial_effekte(auto_talent_name)
                     auto_talent.ausgewaehlt = False
                     if auto_talent_name in self.charakter.selected_talente:
                         self.charakter.selected_talente.remove(auto_talent_name)

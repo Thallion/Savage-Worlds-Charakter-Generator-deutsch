@@ -97,7 +97,11 @@ def berechne_abgeleitete_werte(charakter):
         # 2b. Cyberware-Effekte für Bewegungsweite
         cyberware_bw_bonus = _berechne_cyberware_bewegungsweite_bonus(charakter)
         bewegungsweite_malus -= cyberware_bw_bonus
-        
+
+        # 3. Talent-Effekte für Bewegungsweite
+        if "Behände" in charakter.selected_talente:
+            bewegungsweite_malus -= 2  # Behände: +2 Bewegungsweite
+
         # Bewegungsweite anpassen (nicht unter 1)
         #Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
         bewegungsweite = max(1, bewegungsweite - bewegungsweite_malus)
