@@ -7468,8 +7468,8 @@
             "aktiv": true,
             "custom": false
         },
-        "Heldenhaft": {
-            "name": "Heldenhaft",
+        "Heroisch": {
+            "name": "Heroisch",
             "stufe": "schwer",
             "punkte": 2,
             "beschreibung": "Der Charakter hilft immer anderen, die in Not sind.",

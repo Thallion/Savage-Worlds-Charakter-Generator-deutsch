@@ -734,10 +734,18 @@ def waehle_freies_attribut(charakter, volk_name, attribut_name):
         
         # Attribut um einen Würfeltyp erhöhen (W4 -> W6, etc.)
         # Für Völker-Boni normalerweise W4 -> W6 (+2)
+        # WICHTIG: Wuerfel.value direkt setzen, damit Synchronisation mit attribut.wert funktioniert
         if alter_wert == 4:
-            attribut.wert = 6  # W4 -> W6 (Standard-Völker-Bonus)
+            attribut.wuerfel.value = 6  # W4 -> W6 (Standard-Völker-Bonus)
         else:
-            attribut.wert += 1  # Fallback: um einen Würfeltyp erhöhen
+            # Fallback: um einen Würfeltyp erhöhen
+            next_values = [4, 6, 8, 10, 12]
+            current_idx = next_values.index(attribut.wuerfel.value) if attribut.wuerfel.value in next_values else 0
+            if current_idx < len(next_values) - 1:
+                attribut.wuerfel.value = next_values[current_idx + 1]
+            else:
+                # Bei W12: Modifier erhöhen
+                attribut.wuerfel.modifier += 1
         
         Logger.info(f"Freies Attribut '{attribut_name}' für Volk '{volk_name}' von W{alter_wert} auf W{attribut.wert} erhöht")
         
