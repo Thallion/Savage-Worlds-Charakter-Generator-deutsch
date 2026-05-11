@@ -79,7 +79,7 @@
                 "fertigkeits_startboni": {
                     "Wahrnehmung": 2
                 },
-                "auto_talente": [],
+                "auto_talente": ["Gnomenmagie"],
                 "auto_handicaps": [
                     "Langsam_leicht",
                     "Größe -1 (Reduzierte Robustheit)",
@@ -7049,6 +7049,17 @@
             "beschreibung": "Gewährt einen freien Bonus beim Bau von Fallen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Gnomenmagie": {
+            "name": "Gnomenmagie",
+            "kategorie": "Hintergrund",
+            "rang": "A",
+            "voraussetzungen": [],
+            "beschreibung": "Gnome können Zaubertricks wirken: Licht, Geräusch, Telekinese und Tierfreund. Dabei benutzen sie Verstand (oder eine arkane Fertigkeit, wenn sie eine besitzen). Sie haben 1 Machtpunkt um diese Zaubertricks zu aktivieren, und sie erhalten ihn normal zurück. Gnome mit Arkaner Hintergrund oder Mystische Macht addieren ihren Bonus-Machtpunkt zu ihrem Vorrat, müssen die Zauber aber lernen, wenn sie sie normal wirken wollen.",
+            "neue_maechte": 0,
+            "machtpunkte": 1,
             "ausgewaehlt": false,
             "aktiv": true
         }
