@@ -83,7 +83,6 @@
                 "auto_handicaps": [
                     "Langsam_leicht",
                     "Größe -1 (Reduzierte Robustheit)",
-                    "Verringerte Bewegungsweite (Typ)",
                     "Zwanghaft"
                 ],
                 "spezielle_effekte": {
@@ -168,8 +167,7 @@
                 ],
                 "auto_handicaps": [
                     "Langsam_leicht",
-                    "Größe -1 (Reduzierte Robustheit)",
-                    "Verringerte Bewegungsweite (Typ)"
+                    "Größe -1 (Reduzierte Robustheit)"
                 ],
                 "spezielle_effekte": {
                     "geschaerfte_sinne": true
@@ -275,8 +273,7 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Langsam_leicht",
-                    "Verringerte Bewegungsweite (Schritt)"
+                    "Langsam_leicht"
                 ],
                 "spezielle_effekte": {
                     "dunkelsicht": true,
@@ -364,8 +361,7 @@
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Langsam_leicht",
-                    "Verringerte Bewegungsweite (Schritt)"
+                    "Langsam_leicht"
                 ],
                 "spezielle_effekte": {
                     "dunkelsicht": true,
@@ -522,7 +518,6 @@
                 "auto_handicaps": [
                     "Langsam_leicht",
                     "Größe -1 (Reduzierte Größe und Robustheit)",
-                    "Verringerte Bewegungsweite (Schritt)",
                     "Verringerte Fertigkeiten"
                 ],
                 "spezielle_effekte": {
@@ -8027,24 +8022,6 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Reduzierte Größe und Robustheit um 1",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verringerte Bewegungsweite (Typ)": {
-            "name": "Verringerte Bewegungsweite (Typ)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-1 Bewegungsweite, Sprintwürfel um einen Typ reduziert",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Verringerte Bewegungsweite (Schritt)": {
-            "name": "Verringerte Bewegungsweite (Schritt)",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
