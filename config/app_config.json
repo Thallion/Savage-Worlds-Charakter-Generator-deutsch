@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
+  "mobile_modus": false,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -44,5 +44,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-05-12T19:34:41.808945"
+  "last_updated": "2026-05-12T20:34:50.456593"
 }

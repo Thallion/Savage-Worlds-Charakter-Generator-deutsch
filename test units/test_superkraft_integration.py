@@ -56,6 +56,7 @@ def _create_mock_charakter(setting_name="Superkräfte Kompendium"):
     char.bewegungsweite = 6
     char.parade = 2
     char.robustheit = 5
+    char.groesse = 0
     return char
 
 

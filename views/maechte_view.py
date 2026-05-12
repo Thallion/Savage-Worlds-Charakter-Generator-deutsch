@@ -346,7 +346,6 @@ class KraefteWidget(MDBoxLayout):
     current_sort_option = StringProperty(DEFAULT_SORT_OPTION)
     sort_order = StringProperty(DEFAULT_SORT_ORDER)
     only_selected_items = BooleanProperty(False)
-    is_filter_expanded = BooleanProperty(True)
     current_mode = StringProperty("maechte")  # "maechte" oder "superkraefte"
 
     # Debounce-Latenz fürs Filtern beim Tippen — verhindert auf Android,
@@ -371,34 +370,6 @@ class KraefteWidget(MDBoxLayout):
         self._initialize_controller()
         self.dialog = None
         Clock.schedule_once(self.post_init, 0)
-        Clock.schedule_once(self._init_filter_collapsed_state, 0.1)
-
-    def toggle_filter_panel(self):
-        """Klappt den Filter-Bereich auf oder zu (Android-kompatibel, kein disabled)"""
-        container = self.ids.get('filter_container')
-        if not container:
-            return
-        if self.is_filter_expanded:
-            container.height = 0
-            container.opacity = 0
-            self.is_filter_expanded = False
-        else:
-            container.height = dp(120)
-            container.opacity = 1
-            self.is_filter_expanded = True
-
-    def _init_filter_collapsed_state(self, dt):
-        """Im mobilen Modus Filter eingeklappt starten (nur wenn Toggle-Button vorhanden)"""
-        try:
-            # Nur einklappen wenn ein Toggle-Button zum Aufklappen existiert (Desktop-KV)
-            if not self.ids.get('filter_chevron'):
-                return
-            from services.service_container import service_container
-            config_service = service_container.get_config_service()
-            if config_service and config_service.get('mobile_modus', False):
-                self.toggle_filter_panel()
-        except Exception as e:
-            Logger.error(f"Fehler bei Filter-Collapse-Init: {e}")
 
     def _initialize_controller(self):
         """Initialisiert die Verbindung zum Controller."""

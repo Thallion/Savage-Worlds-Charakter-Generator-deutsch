@@ -202,6 +202,40 @@
                         pos_hint: {"center_y": .5}
                         on_active: root.toggle_logger(self.active)
 
+                # Neustart- und Schließen-Buttons
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(48)
+                    spacing: dp(8)
+                    padding: [0, dp(8), 0, 0]
+
+                    MDButton:
+                        style: "tonal"
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: dp(40)
+                        on_release: root.restart_app()
+
+                        MDButtonIcon:
+                            icon: "restart"
+
+                        MDButtonText:
+                            text: "Neu starten"
+
+                    MDButton:
+                        style: "outlined"
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: dp(40)
+                        on_release: root.close_app()
+
+                        MDButtonIcon:
+                            icon: "close"
+
+                        MDButtonText:
+                            text: "Schließen"
+
             MDDivider:
 
             # ===== Spielelemente =====

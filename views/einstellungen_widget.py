@@ -334,6 +334,54 @@ class EinstellungenWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Umschalten des Tablet-Layouts: {e}")
 
+    def restart_app(self):
+        """Startet die App neu. Auf Desktop via execv, auf Android via Activity-Restart."""
+        try:
+            from kivy.utils import platform
+            app = MDApp.get_running_app()
+
+            if platform == 'android':
+                # Auf Android: Activity neu starten via PendingIntent + System.exit
+                try:
+                    from jnius import autoclass
+                    PythonActivity = autoclass('org.kivy.android.PythonActivity')
+                    Intent = autoclass('android.content.Intent')
+                    System = autoclass('java.lang.System')
+
+                    activity = PythonActivity.mActivity
+                    intent = activity.getPackageManager().getLaunchIntentForPackage(
+                        activity.getPackageName()
+                    )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+                    activity.startActivity(intent)
+                    activity.finish()
+                    System.exit(0)
+                except Exception as e:
+                    Logger.warning(f"Android-Restart fehlgeschlagen, App wird nur beendet: {e}")
+                    if app:
+                        app.stop()
+                return
+
+            # Desktop: Python-Prozess neu starten
+            import sys
+            import os
+            Logger.info("App wird neu gestartet (Desktop)")
+            if app:
+                app.stop()
+            os.execv(sys.executable, [sys.executable] + sys.argv)
+        except Exception as e:
+            Logger.error(f"Fehler beim Neustart der App: {e}")
+
+    def close_app(self):
+        """Schließt die App."""
+        try:
+            Logger.info("App wird geschlossen")
+            app = MDApp.get_running_app()
+            if app:
+                app.stop()
+        except Exception as e:
+            Logger.error(f"Fehler beim Schließen der App: {e}")
+
     def toggle_orientation_lock(self, active):
         """Wechselt zwischen fixierter und flexibler Bildschirm-Orientierung"""
         try:

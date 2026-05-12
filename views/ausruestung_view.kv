@@ -15,104 +15,92 @@
     orientation: 'vertical'
     md_bg_color: app.theme_cls.backgroundColor
     
-    # Suchfeld mit Chevron-Button zum Ein-/Ausklappen der Filter
+    # Such- und Filter-Zeile (kompakt, alles in einer Zeile)
     MDBoxLayout:
         orientation: 'horizontal'
         size_hint_y: None
-        height: dp(100)
-        padding: [20, 10]
-        spacing: 10
+        height: dp(72)
+        padding: [dp(20), dp(8)]
+        spacing: dp(10)
 
         MDTextField:
             id: search_input
             hint_text: 'Suche...'
-            size_hint_x: 0.7
+            size_hint_x: None
+            width: dp(200)
+            pos_hint: {'center_y': 0.5}
             on_text: root.filter_ausruestung()
 
-        MDIconButton:
-            id: filter_chevron
-            icon: "chevron-down" if root.is_filter_expanded else "chevron-right"
-            size_hint: None, None
-            width: dp(40)
-            height: dp(40)
-            pos_hint: {'center_y': 0.5}
-            on_release: root.toggle_filter_panel()
+        MDScrollView:
+            size_hint_x: 1
+            do_scroll_x: True
+            do_scroll_y: False
+            bar_width: dp(6)
 
-    # Toggle-Buttons in ScrollView für Android-Kompatibilität
-    MDScrollView:
-        id: filter_container
-        size_hint_y: None
-        height: dp(120)
-        do_scroll_x: False
-        do_scroll_y: True
-        bar_width: dp(15)
-        bar_margin: dp(8)
-
-        MDBoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: None
-            height: dp(120)
-            padding: [20, 10]
-            spacing: 10
-
-            MDFabButton:
-                icon: "filter"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.open_category_menu()
-
-            MDLabel:
-                id: category_label
-                text: 'Alle Kategorien'
+            MDBoxLayout:
+                orientation: 'horizontal'
                 size_hint_x: None
-                width: dp(140)
+                width: self.minimum_width
+                size_hint_y: 1
+                spacing: dp(10)
 
-            # Button für "Nur vorhandene" (Android Checkbox Workaround)
-            MDButton:
-                id: only_owned_button
-                size_hint_x: None
-                size_hint_y: None
-                width: dp(180)
-                height: dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.toggle_only_owned_items()
+                MDFabButton:
+                    icon: "filter"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    pos_hint: {"center_y": 0.5}
+                    on_release: root.open_category_menu()
 
-                MDButtonText:
-                    text: "Nur vorhandene" if not root.only_owned_items else "Alle"
-                    theme_text_color: "Primary" if not root.only_owned_items else "Custom"
-                    text_color: self.theme_cls.primaryColor if root.only_owned_items else self.theme_cls.onSurfaceColor
+                MDLabel:
+                    id: category_label
+                    text: 'Alle Kategorien'
+                    size_hint_x: None
+                    width: dp(140)
+                    pos_hint: {"center_y": 0.5}
 
-            TooltipFabButton:
-                id: sort_name_btn
-                tooltip_text: "Sortieren nach Name"
-                icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Name')
+                MDButton:
+                    id: only_owned_button
+                    size_hint: None, None
+                    width: dp(180)
+                    height: dp(48)
+                    pos_hint: {"center_y": 0.5}
+                    on_release: root.toggle_only_owned_items()
 
-            TooltipFabButton:
-                id: sort_costs_btn
-                tooltip_text: "Sortieren nach Kosten"
-                icon: "sort-numeric-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-numeric-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Kosten')
+                    MDButtonText:
+                        text: "Nur vorhandene" if not root.only_owned_items else "Alle"
+                        theme_text_color: "Primary" if not root.only_owned_items else "Custom"
+                        text_color: self.theme_cls.primaryColor if root.only_owned_items else self.theme_cls.onSurfaceColor
 
-            TooltipFabButton:
-                id: sort_category_btn
-                tooltip_text: "Sortieren nach Kategorie"
-                icon: "sort-bool-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-bool-descending"
-                style: "small"
-                size_hint: None, None
-                size: dp(56), dp(56)
-                pos_hint: {"center_y": 0.5}
-                on_release: root.update_sort_option('Kategorie')
+                TooltipFabButton:
+                    id: sort_name_btn
+                    tooltip_text: "Sortieren nach Name"
+                    icon: "sort-alphabetical-ascending" if root.current_sort_option != 'Name' or root.sort_order == 'asc' else "sort-alphabetical-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    pos_hint: {"center_y": 0.5}
+                    on_release: root.update_sort_option('Name')
+
+                TooltipFabButton:
+                    id: sort_costs_btn
+                    tooltip_text: "Sortieren nach Kosten"
+                    icon: "sort-numeric-ascending" if root.current_sort_option != 'Kosten' or root.sort_order == 'asc' else "sort-numeric-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    pos_hint: {"center_y": 0.5}
+                    on_release: root.update_sort_option('Kosten')
+
+                TooltipFabButton:
+                    id: sort_category_btn
+                    tooltip_text: "Sortieren nach Kategorie"
+                    icon: "sort-bool-ascending" if root.current_sort_option != 'Kategorie' or root.sort_order == 'asc' else "sort-bool-descending"
+                    style: "small"
+                    size_hint: None, None
+                    size: dp(48), dp(48)
+                    pos_hint: {"center_y": 0.5}
+                    on_release: root.update_sort_option('Kategorie')
 
     MDLabel:
         text: 'Ausrüstung'
