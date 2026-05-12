@@ -14,10 +14,13 @@ from kivy.logger import Logger
 _mobile_layout_cache = None
 
 
-def _read_force_mobile_from_config():
+def _read_layout_overrides_from_config():
     """
-    Liest force_mobile_layout direkt aus der JSON-Config-Datei.
+    Liest force_mobile_layout und tablet_layout direkt aus der JSON-Config-Datei.
     Wird beim App-Start aufgerufen, bevor der ServiceContainer existiert.
+
+    Returns:
+        tuple[bool, bool]: (force_mobile_layout, tablet_layout)
     """
     try:
         if getattr(sys, 'frozen', False):
@@ -30,11 +33,14 @@ def _read_force_mobile_from_config():
         if config_path.exists():
             with open(config_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            return data.get('force_mobile_layout', False)
+            return (
+                data.get('force_mobile_layout', False),
+                data.get('tablet_layout', False),
+            )
     except Exception as e:
         Logger.warning(f"platform_utils: Fehler beim Lesen der Config: {e}")
 
-    return False
+    return False, False
 
 
 def is_mobile_layout():
@@ -42,7 +48,8 @@ def is_mobile_layout():
     Prüft ob Mobile-KV-Dateien (Smartphone-Layout) geladen werden sollen.
 
     Entscheidungslogik:
-    - Android mit Bildschirmbreite < 600dp → Mobile-Layout
+    - Android mit aktivem tablet_layout → Desktop-Layout (für Tablets)
+    - Android sonst → Mobile-Layout
     - Desktop mit force_mobile_layout in app_config.json → Mobile-Layout (für Tests)
     - Sonst → Desktop-Layout
 
@@ -55,8 +62,14 @@ def is_mobile_layout():
     if _mobile_layout_cache is not None:
         return _mobile_layout_cache
 
+    force_mobile, tablet_layout = _read_layout_overrides_from_config()
+
     if platform == 'android':
-        # Android-Geräte nutzen immer Mobile-Layout.
+        if tablet_layout:
+            Logger.info("platform_utils: Android mit aktivem Tablet-Layout → Desktop-Layout")
+            _mobile_layout_cache = False
+            return False
+        # Android-Geräte nutzen sonst immer Mobile-Layout.
         # Im Landscape-Modus kann Window.width > 600dp sein (z.B. Pixel 9: ~923dp),
         # aber Smartphones brauchen trotzdem das Mobile-Layout.
         _mobile_layout_cache = True
@@ -64,8 +77,14 @@ def is_mobile_layout():
         return True
 
     # Desktop-Override: Direkt aus JSON-Datei lesen (ServiceContainer existiert noch nicht)
-    force_mobile = _read_force_mobile_from_config()
     if force_mobile:
+        if tablet_layout:
+            # Tablet-Layout überschreibt force_mobile auch auf Desktop (für Tests)
+            Logger.info(
+                "platform_utils: force_mobile_layout + tablet_layout → Desktop-Layout (Tablet-Test)"
+            )
+            _mobile_layout_cache = False
+            return False
         Logger.info("platform_utils: force_mobile_layout ist aktiviert (Desktop-Testmodus)")
         _mobile_layout_cache = True
         return True

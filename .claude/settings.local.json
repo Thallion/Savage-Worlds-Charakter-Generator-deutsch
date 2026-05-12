@@ -122,7 +122,10 @@
       "Bash(export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64)",
       "Bash(.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build/python3 -m pip install --target=.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Lib --upgrade setuptools)",
       "Bash(tee /tmp/buildozer_run3.log)",
-      "Bash(xargs -I {} sh -c 'echo \"=== {} ===\"; grep -c \"16KB-PAGE-SIZE-FIX\" {} || echo \"NO MARKER\"')"
+      "Bash(xargs -I {} sh -c 'echo \"=== {} ===\"; grep -c \"16KB-PAGE-SIZE-FIX\" {} || echo \"NO MARKER\"')",
+      "Bash(awk '{print $9}')",
+      "Bash(xargs -I {} basename {})",
+      "Bash(awk *)"
     ],
     "deny": []
   }

@@ -75,7 +75,7 @@
                     "Konstitution": 2
                 },
                 "robustheit_bonus": 0,
-                "bewegungsweite_bonus": -1,
+                "bewegungsweite_bonus": 0,
                 "fertigkeits_startboni": {
                     "Wahrnehmung": 2
                 },

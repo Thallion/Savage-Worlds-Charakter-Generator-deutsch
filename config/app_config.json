@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": false,
+  "mobile_modus": true,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -23,6 +23,7 @@
   "max_backups": 5,
   "last_setting": "Savage Pathfinder",
   "force_mobile_layout": false,
+  "tablet_layout": false,
   "desktop_scale_factor": "auto",
   "screen_orientation": "auto",
   "screen_orientation_locked": false,
@@ -43,5 +44,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-05-11T17:00:31.938467"
+  "last_updated": "2026-05-12T19:34:41.808945"
 }

@@ -134,6 +134,29 @@ class EinstellungenWidget(MDBoxLayout):
                 switch.active = mobile_modus
                 Logger.debug(f"Mobiler Modus Switch initialisiert: {mobile_modus}")
 
+            # Tablet-Layout Switch (sichtbar auf Android oder bei force_mobile_layout)
+            from kivy.utils import platform
+            tablet_box = self.ids.get('tablet_layout_box')
+            tablet_hint_box = self.ids.get('tablet_layout_hint_box')
+            if tablet_box:
+                force_mobile = config_service.get('force_mobile_layout', False)
+                show_tablet_switch = (platform == 'android') or force_mobile
+                if not show_tablet_switch:
+                    tablet_box.height = 0
+                    tablet_box.opacity = 0
+                    tablet_box.disabled = True
+                    if tablet_hint_box:
+                        tablet_hint_box.height = 0
+                        tablet_hint_box.opacity = 0
+                        tablet_hint_box.disabled = True
+                else:
+                    tablet_layout = config_service.get('tablet_layout', False)
+                    tablet_switch = self.ids.get('tablet_layout_switch')
+                    if tablet_switch:
+                        tablet_switch.unbind(on_active=None)
+                        tablet_switch.active = tablet_layout
+                        Logger.debug(f"Tablet-Layout Switch initialisiert: {tablet_layout}")
+
             # Logger-Leiste Switch
             show_logger = config_service.get('show_logger', True)
             logger_switch = self.ids.get('show_logger_switch')
@@ -298,6 +321,18 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.info(f"Vertikales Menü {'aktiviert' if active else 'deaktiviert'}")
         except Exception as e:
             Logger.error(f"Fehler beim Umschalten des Menü-Modus: {e}")
+
+    def toggle_tablet_layout(self, active):
+        """Wechselt auf Android zwischen Mobile- und Desktop-Layout (Neustart nötig)"""
+        try:
+            config_service = service_container.get_config_service()
+            if config_service:
+                config_service.set('tablet_layout', active)
+            Logger.info(
+                f"Tablet-Layout {'aktiviert' if active else 'deaktiviert'} (Neustart erforderlich)"
+            )
+        except Exception as e:
+            Logger.error(f"Fehler beim Umschalten des Tablet-Layouts: {e}")
 
     def toggle_orientation_lock(self, active):
         """Wechselt zwischen fixierter und flexibler Bildschirm-Orientierung"""

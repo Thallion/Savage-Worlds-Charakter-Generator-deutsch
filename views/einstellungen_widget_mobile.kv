@@ -100,6 +100,39 @@
                         pos_hint: {"center_y": .5}
                         on_active: root.toggle_mobile_modus(self.active)
 
+                # Tablet-Layout Toggle (nur auf Android sichtbar)
+                MDBoxLayout:
+                    id: tablet_layout_box
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(48)
+                    spacing: dp(8)
+
+                    MDLabel:
+                        text: 'Tablet-Layout (Desktop-Ansicht):'
+                        size_hint_x: 1
+                        pos_hint: {"center_y": .5}
+
+                    MDSwitch:
+                        id: tablet_layout_switch
+                        pos_hint: {"center_y": .5}
+                        on_active: root.toggle_tablet_layout(self.active)
+
+                # Neustart-Hinweis Tablet-Layout
+                MDBoxLayout:
+                    id: tablet_layout_hint_box
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(24)
+                    spacing: dp(8)
+
+                    MDLabel:
+                        text: "(Neustart erforderlich)"
+                        theme_text_color: "Secondary"
+                        font_style: "Body"
+                        role: "small"
+                        pos_hint: {"center_y": .5}
+
                 # Orientierung fixieren Toggle
                 MDBoxLayout:
                     orientation: 'horizontal'
