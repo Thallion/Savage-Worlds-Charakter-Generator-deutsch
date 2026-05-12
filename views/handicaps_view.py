@@ -869,7 +869,24 @@ class HandicapsWidget(MDBoxLayout):
         """
         Öffnet das Kategorie-Auswahlmenü.
         Event-Handler für den Kategorie-Filter-Button.
+        Auf Mobile: scrollbares SearchBottomSheet mit Suche.
+        Auf Desktop: kompaktes MDDropdownMenu.
         """
+        from utils.platform_utils import is_mobile_layout
+        if is_mobile_layout():
+            from views.ui_components import SearchBottomSheet
+            current_label = self.ids.get('category_label')
+            current = current_label.text if current_label else ALL_CATEGORIES_TEXT
+            sheet = SearchBottomSheet(
+                title="Stufe wählen",
+                items=[ALL_CATEGORIES_TEXT] + list(self.stufen),
+                selected=current,
+                on_confirm=lambda name: self.set_category(name) if name else None,
+                search_hint="Stufe suchen...",
+            )
+            sheet.open()
+            return
+
         menu_items = [
             {
                 "text": f"{i}",
@@ -892,5 +909,7 @@ class HandicapsWidget(MDBoxLayout):
         category_label = self.ids.get('category_label')
         if category_label:
             category_label.text = text
-        self.menu.dismiss()
+        if getattr(self, 'menu', None) is not None:
+            self.menu.dismiss()
+            self.menu = None
         self._apply_filter()

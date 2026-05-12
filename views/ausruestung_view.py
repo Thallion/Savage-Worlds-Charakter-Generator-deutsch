@@ -1247,7 +1247,25 @@ class AusruestungWidget(MDBoxLayout):
         self._apply_filter()
 
     def open_category_menu(self):
-        """Öffnet das Kategorie-Auswahlmenü"""
+        """Öffnet das Kategorie-Auswahlmenü.
+
+        Auf Mobile: scrollbares SearchBottomSheet mit Suche (für Settings mit vielen Kategorien).
+        Auf Desktop: kompaktes MDDropdownMenu.
+        """
+        if _mobile:
+            from views.ui_components import SearchBottomSheet
+            current_label = self.ids.get('category_label')
+            current = current_label.text if current_label else ALL_CATEGORIES_TEXT
+            sheet = SearchBottomSheet(
+                title="Kategorie wählen",
+                items=[ALL_CATEGORIES_TEXT] + list(self.kategorien),
+                selected=current,
+                on_confirm=lambda name: self.set_category(name) if name else None,
+                search_hint="Kategorie suchen...",
+            )
+            sheet.open()
+            return
+
         menu_items = [
             {
                 "text": f"{i}",
@@ -1267,7 +1285,9 @@ class AusruestungWidget(MDBoxLayout):
         category_label = self.ids.get('category_label')
         if category_label:
             category_label.text = text
-        self.menu.dismiss()
+        if getattr(self, 'menu', None) is not None:
+            self.menu.dismiss()
+            self.menu = None
         self._apply_filter()
 
     def set_debug_message(self, message):
