@@ -125,7 +125,8 @@
       "Bash(xargs -I {} sh -c 'echo \"=== {} ===\"; grep -c \"16KB-PAGE-SIZE-FIX\" {} || echo \"NO MARKER\"')",
       "Bash(awk '{print $9}')",
       "Bash(xargs -I {} basename {})",
-      "Bash(awk *)"
+      "Bash(awk *)",
+      "Bash(echo \"exit:$?\")"
     ],
     "deny": []
   }

@@ -2014,6 +2014,48 @@ class SW_Charakter_GeneratorApp(MDApp):
         except Exception as e:
             Logger.error(f"Fehler bei Orientierungs-Update: {str(e)}")
 
+    def _set_mobile_navigation_style(self, force_rail=False):
+        """Setzt den Mobile-Navigation-Stil: force_rail=True erzwingt NavigationRail,
+        force_rail=False verwendet orientierungsbasierte Navigation.
+
+        Args:
+            force_rail (bool): True = immer NavigationRail, False = orientierungsbasiert
+        """
+        try:
+            root = self.root
+            if not root or not self._mobile_modus_active:
+                return
+
+            nav_rail_container = root.ids.get('nav_rail_container')
+            bottom_bar = root.ids.get('bottom_bar_container')
+
+            if not nav_rail_container:
+                return
+
+            if force_rail:
+                # Erzwinge NavigationRail (auch im Portrait)
+                nav_rail_container.width = dp(80)
+                nav_rail_container.opacity = 1
+                self._nav_rail_visible = True
+
+                # Bottom-Bar verstecken
+                if bottom_bar:
+                    bottom_bar.height = 0
+                    bottom_bar.opacity = 0
+
+                # Aktiven Tab hervorheben
+                if hasattr(self, '_current_tab_index'):
+                    self._set_active_rail_item(self._current_tab_index)
+
+                Logger.debug("Mobile-Navigation: NavigationRail erzwungen")
+            else:
+                # Orientierungsbasierte Navigation (Standard-Verhalten)
+                self._update_mobile_orientation()
+                Logger.debug("Mobile-Navigation: Orientierungsbasiert")
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Setzen der Mobile-Navigation: {str(e)}")
+
     def set_screen_orientation(self, orientation='auto', locked=False):
         """Setzt die Bildschirm-Orientierung auf Android.
 

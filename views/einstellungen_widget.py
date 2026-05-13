@@ -9,6 +9,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.clock import Clock
+from kivy.metrics import dp
 
 # Handler imports (excluding redundant theme_handler and character_handler)
 from controllers.game_elements_handler import GameElementsHandler
@@ -304,7 +305,15 @@ class EinstellungenWidget(MDBoxLayout):
             Logger.error(f"Fehler beim Umschalten der Logger-Leiste: {e}")
 
     def toggle_mobile_modus(self, active):
-        """Wechselt zwischen horizontalem und vertikalem Menü (ohne Touch-Swipe zu ändern)"""
+        """Wechselt zwischen horizontalem und vertikalem Menü.
+
+        Android: Wechselt nur zwischen Mobile-Navigation-Modi (behält Tab-Swipe bei)
+        Desktop: Wechselt zwischen Desktop-Tabs und Mobile-Navigation
+
+        Args:
+            active (bool): True = vertikales Menü (NavigationRail),
+                          False = horizontales Menü (orientierungsbasiert auf Android, Desktop-Tabs auf Desktop)
+        """
         try:
             # Config speichern
             config_service = service_container.get_config_service()
@@ -313,14 +322,65 @@ class EinstellungenWidget(MDBoxLayout):
 
             # Menü-Orientierung in der App umschalten
             app = MDApp.get_running_app()
-            if app and hasattr(app, 'set_navigation_mode'):
-                # Override setzen (manueller Modus)
-                app._mobile_modus_override = active if active else None
-                app.set_navigation_mode(active)
+            if app:
+                from kivy.utils import platform
 
-            Logger.info(f"Vertikales Menü {'aktiviert' if active else 'deaktiviert'}")
+                if platform == 'android':
+                    # Android: Nur zwischen Mobile-Navigation-Modi wechseln, niemals Desktop-Modus
+                    app._mobile_modus_override = active if active else None
+                    if hasattr(app, '_set_mobile_navigation_style'):
+                        # Neue saubere Methode verwenden
+                        app._set_mobile_navigation_style(force_rail=active)
+                    else:
+                        # Fallback für ältere App-Versionen
+                        if active:
+                            # Vertikales Menü: NavigationRail erzwingen
+                            self._force_navigation_rail()
+                        else:
+                            # Horizontales Menü: Orientierungsbasiert
+                            if hasattr(app, '_update_mobile_orientation'):
+                                app._update_mobile_orientation()
+                else:
+                    # Desktop: Kompletter Moduswechsel wie bisher
+                    app._mobile_modus_override = active if active else None
+                    if hasattr(app, 'set_navigation_mode'):
+                        app.set_navigation_mode(active)
+
+            Logger.info(f"{'Vertikales' if active else 'Horizontales'} Menü aktiviert")
         except Exception as e:
             Logger.error(f"Fehler beim Umschalten des Menü-Modus: {e}")
+
+    def _force_navigation_rail(self):
+        """Erzwingt die NavigationRail-Anzeige (auch im Portrait) - nur für Android Mobile-Modus"""
+        try:
+            app = MDApp.get_running_app()
+            if not app or not hasattr(app, 'root') or not app.root:
+                return
+
+            root = app.root
+            nav_rail_container = root.ids.get('nav_rail_container')
+            bottom_bar = root.ids.get('bottom_bar_container')
+
+            if not nav_rail_container:
+                return
+
+            # NavigationRail anzeigen (80dp wie in _update_mobile_orientation für landscape)
+            nav_rail_container.width = dp(80)
+            nav_rail_container.opacity = 1
+            app._nav_rail_visible = True
+
+            # Bottom-Bar verstecken
+            if bottom_bar:
+                bottom_bar.height = 0
+                bottom_bar.opacity = 0
+
+            # Aktiven Tab hervorheben falls verfügbar
+            if hasattr(app, '_current_tab_index') and hasattr(app, '_set_active_rail_item'):
+                app._set_active_rail_item(app._current_tab_index)
+
+            Logger.debug("NavigationRail erzwungen (vertikales Menü)")
+        except Exception as e:
+            Logger.error(f"Fehler beim Erzwingen der NavigationRail: {e}")
 
     def toggle_tablet_layout(self, active):
         """Wechselt auf Android zwischen Mobile- und Desktop-Layout (Neustart nötig)"""

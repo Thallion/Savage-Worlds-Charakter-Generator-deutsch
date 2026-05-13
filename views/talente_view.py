@@ -13,7 +13,6 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty, BooleanProperty
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.recycleview import MDRecycleView
-from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.tooltip import MDTooltip
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDButton, MDIconButton, MDFabButton, MDButtonText
@@ -1023,36 +1022,19 @@ class TalenteWidget(MDBoxLayout):
         """
         Öffnet das Kategorie-Auswahlmenü.
         Event-Handler für den Kategorie-Filter-Button.
-        Auf Mobile: scrollbares SearchBottomSheet mit Suche (für Settings mit vielen Kategorien).
-        Auf Desktop: kompaktes MDDropdownMenu.
+        Verwendet scrollbares SearchBottomSheet mit Suche (für Settings mit vielen Kategorien).
         """
-        if _mobile:
-            from views.ui_components import SearchBottomSheet
-            current_label = self.ids.get('category_label')
-            current = current_label.text if current_label else ALL_CATEGORIES_TEXT
-            sheet = SearchBottomSheet(
-                title="Kategorie wählen",
-                items=[ALL_CATEGORIES_TEXT] + self.kategorien,
-                selected=current,
-                on_confirm=lambda name: self.set_category(name) if name else None,
-                search_hint="Kategorie suchen...",
-            )
-            sheet.open()
-            return
-
-        menu_items = [
-            {
-                "text": f"{i}",
-                "on_release": lambda x=f"{i}": self.set_category(x),
-            } for i in [ALL_CATEGORIES_TEXT] + self.kategorien
-        ]
-        caller = self.ids.get('category_label') or self.ids.get('only_selected_button')
-        self.menu = MDDropdownMenu(
-            caller=caller,
-            items=menu_items,
-            width_mult=4,
+        from views.ui_components import SearchBottomSheet
+        current_label = self.ids.get('category_label')
+        current = current_label.text if current_label else ALL_CATEGORIES_TEXT
+        sheet = SearchBottomSheet(
+            title="Kategorie wählen",
+            items=[ALL_CATEGORIES_TEXT] + self.kategorien,
+            selected=current,
+            on_confirm=lambda name: self.set_category(name) if name else None,
+            search_hint="Kategorie suchen...",
         )
-        self.menu.open()
+        sheet.open()
 
     def set_category(self, text):
         """
@@ -1062,7 +1044,4 @@ class TalenteWidget(MDBoxLayout):
         category_label = self.ids.get('category_label')
         if category_label:
             category_label.text = text
-        if getattr(self, 'menu', None) is not None:
-            self.menu.dismiss()
-            self.menu = None
         self._apply_filter()

@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Savage Pathfinder",
-  "force_mobile_layout": false,
+  "force_mobile_layout": true,
   "tablet_layout": false,
   "desktop_scale_factor": "auto",
   "screen_orientation": "auto",
