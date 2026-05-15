@@ -8315,7 +8315,7 @@
         },
         "Armbrust, Leichte Repetier-": {
             "name": "Armbrust, Leichte Repetier-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 4,
             "kosten": 250,
             "setting": "mittelalterlich",
@@ -8333,7 +8333,7 @@
         },
         "Armbrust, Schwere Repetier-": {
             "name": "Armbrust, Schwere Repetier-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 6,
             "kosten": 400,
             "setting": "mittelalterlich",
@@ -8351,7 +8351,7 @@
         },
         "Axt, Hand-": {
             "name": "Axt, Hand-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 6,
             "setting": "mittelalterlich",
@@ -8369,7 +8369,7 @@
         },
         "Bogen, Komposit-": {
             "name": "Bogen, Komposit-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 100,
             "setting": "mittelalterlich",
@@ -8387,7 +8387,7 @@
         },
         "Bogen, Kurz-": {
             "name": "Bogen, Kurz-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1,
             "kosten": 30,
             "setting": "mittelalterlich",
@@ -8405,7 +8405,7 @@
         },
         "Bolas": {
             "name": "Bolas",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1,
             "kosten": 5,
             "setting": "mittelalterlich",
@@ -8423,7 +8423,7 @@
         },
         "Wurf-Chakram": {
             "name": "Wurf-Chakram",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 1,
             "setting": "mittelalterlich",
@@ -8441,7 +8441,7 @@
         },
         "Dolch/Messer": {
             "name": "Dolch/Messer",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 2,
             "setting": "mittelalterlich",
@@ -8459,7 +8459,7 @@
         },
         "Wurf-Dreizack": {
             "name": "Wurf-Dreizack",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 2,
             "kosten": 15,
             "setting": "mittelalterlich",
@@ -8477,7 +8477,7 @@
         },
         "Kurz-/Wurfspeer": {
             "name": "Kurz-/Wurfspeer",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 1,
             "setting": "mittelalterlich",
@@ -8495,7 +8495,7 @@
         },
         "Netz (beschwert)": {
             "name": "Netz (beschwert)",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 4,
             "kosten": 20,
             "setting": "mittelalterlich",
@@ -8513,7 +8513,7 @@
         },
         "Schleuder": {
             "name": "Schleuder",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 0,
             "setting": "mittelalterlich",
@@ -8531,7 +8531,7 @@
         },
         "Shuriken": {
             "name": "Shuriken",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 0,
             "kosten": 1,
             "setting": "mittelalterlich",
@@ -8549,7 +8549,7 @@
         },
         "Wurf-Speer": {
             "name": "Wurf-Speer",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 3,
             "kosten": 2,
             "setting": "mittelalterlich",
@@ -8567,7 +8567,7 @@
         },
         "Steinschlosspistole": {
             "name": "Steinschlosspistole",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 150,
             "setting": "mittelalterlich",

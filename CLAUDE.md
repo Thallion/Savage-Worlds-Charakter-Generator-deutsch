@@ -5,7 +5,7 @@
 A German-language character generator for the **Savage Worlds** tabletop RPG system. Built with Python/Kivy/KivyMD, it supports multiple game settings (SWAE, Deadlands, Fantasy Kompendium, Savage Pathfinder, HeXXen 1773, Sundered Skies, Horror Kompendium, Rippers, SciFi Kompendium, Superkräfte Kompendium, 50 Fathoms, Hellfrost) and runs on Desktop (Windows/Linux/macOS) and Android.
 
 **License:** CC BY-NC-SA 4.0 (non-commercial)
-**Current Version:** 0.7.7.4
+**Current Version:** 0.7.7.6
 **Python:** 3.8+ (3.11 recommended)
 
 ## Documentation Index

@@ -27,7 +27,8 @@
             "effects": {
                 "attribute_bonuses": {
                     "Geschicklichkeit": 2,
-                    "Verstand": 2
+                    "Verstand": 2,
+                    "Konstitution": -1
                 },
                 "robustheit_bonus": -1,
                 "bewegungsweite_bonus": 0,
@@ -3574,7 +3575,6 @@
             "kategorie": "Experte",
             "rang": "F",
             "voraussetzungen": [
-                "Reparieren W6"
             ],
             "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
             "neue_maechte": 0,
@@ -11499,7 +11499,7 @@
         },
         "Armbrust, Leichte Repetier-": {
             "name": "Armbrust, Leichte Repetier-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 4,
             "kosten": 250,
             "setting": "mittelalterlich",
@@ -11517,7 +11517,7 @@
         },
         "Armbrust, Schwere Repetier-": {
             "name": "Armbrust, Schwere Repetier-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 6,
             "kosten": 400,
             "setting": "mittelalterlich",
@@ -11535,7 +11535,7 @@
         },
         "Axt, Hand-": {
             "name": "Axt, Hand-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 6,
             "setting": "mittelalterlich",
@@ -11553,7 +11553,7 @@
         },
         "Bogen, Komposit-": {
             "name": "Bogen, Komposit-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 100,
             "setting": "mittelalterlich",
@@ -11571,7 +11571,7 @@
         },
         "Bogen, Kurz-": {
             "name": "Bogen, Kurz-",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1,
             "kosten": 30,
             "setting": "mittelalterlich",
@@ -11589,7 +11589,7 @@
         },
         "Wurf-Chakram": {
             "name": "Wurf-Chakram",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 1,
             "setting": "mittelalterlich",
@@ -11605,9 +11605,9 @@
                 "PB": "-"
             }
         },
-        "Dolch/Messer": {
-            "name": "Dolch/Messer",
-            "kategorie": "Fernkampfwaffe",
+        "Wurf-Dolch/Messer": {
+            "name": "Wurf-Dolch/Messer",
+            "kategorie": "Waffe",
             "gewicht": 0.5,
             "kosten": 2,
             "setting": "mittelalterlich",
@@ -11625,7 +11625,7 @@
         },
         "Wurf-Dreizack": {
             "name": "Wurf-Dreizack",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 2,
             "kosten": 15,
             "setting": "mittelalterlich",
@@ -11643,7 +11643,7 @@
         },
         "Kurz-/Wurfspeer": {
             "name": "Kurz-/Wurfspeer",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 1,
             "setting": "mittelalterlich",
@@ -11661,7 +11661,7 @@
         },
         "Wurf-Speer": {
             "name": "Wurf-Speer",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 3,
             "kosten": 2,
             "setting": "mittelalterlich",
@@ -11679,7 +11679,7 @@
         },
         "Steinschlosspistole": {
             "name": "Steinschlosspistole",
-            "kategorie": "Fernkampfwaffe",
+            "kategorie": "Waffe",
             "gewicht": 1.5,
             "kosten": 150,
             "setting": "mittelalterlich",
