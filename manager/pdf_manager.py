@@ -39,7 +39,8 @@ class PDFManager:
         if hasattr(self, '_last_printer_checkbox_time') and (now - self._last_printer_checkbox_time) < 0.5:
             return
         self._last_printer_checkbox_time = now
-        self.temp_printer_friendly = checkbox.active
+        # on_release feuert bevor active aktualisiert wird → Toggle-Logik statt checkbox.active lesen
+        self.temp_printer_friendly = not self.temp_printer_friendly
 
     def _on_steigerungen_checkbox_clicked(self, checkbox):
         """Handler für Steigerungen-Checkbox mit Debounce."""
@@ -47,7 +48,7 @@ class PDFManager:
         if hasattr(self, '_last_steigerungen_checkbox_time') and (now - self._last_steigerungen_checkbox_time) < 0.5:
             return
         self._last_steigerungen_checkbox_time = now
-        self.temp_show_steigerungen = checkbox.active
+        self.temp_show_steigerungen = not self.temp_show_steigerungen
     
     def create_character_pdf(self):
         """Startet den PDF-Erstellungsprozess mit Optionen"""
@@ -64,6 +65,10 @@ class PDFManager:
         # Prüfen, ob bereits eine PDF-Datei existiert
         exists, existing_path, existing_name = self.pdf_service.check_existing_pdf()
         
+        # Temp-Werte auf Checkbox-Initialzustand zurücksetzen (Checkbox startet immer unchecked/checked)
+        self.temp_printer_friendly = False
+        self.temp_show_steigerungen = True
+
         # Dialog-Inhalt für PDF-Optionen erstellen
         content = self._create_pdf_options_content(exists, existing_name, existing_path)
         
@@ -179,10 +184,7 @@ class PDFManager:
             self.pdf_options_dialog.dismiss()
         
         if self.pdf_service and self.dialog_service:
-            is_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
-            show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
-
-            success = self.pdf_service.create_character_pdf(pdf_path, is_printer_friendly, show_steigerungen)
+            success = self.pdf_service.create_character_pdf(pdf_path, self.temp_printer_friendly, self.temp_show_steigerungen)
             
             if success:
                 if self.event_service:
@@ -220,10 +222,6 @@ class PDFManager:
         if not filename.lower().endswith('.pdf'):
             filename += '.pdf'
         
-        # Checkbox-Status merken für später
-        self.temp_printer_friendly = self.printer_friendly_checkbox.active if self.printer_friendly_checkbox else False
-        self.temp_show_steigerungen = self.show_steigerungen_checkbox.active if self.show_steigerungen_checkbox else True
-
         # FileManager Service für Verzeichnisauswahl
         if self.file_service:
             self.file_service.set_temp_pdf_settings(filename, self.temp_printer_friendly, self.temp_show_steigerungen)
