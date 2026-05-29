@@ -9337,6 +9337,15 @@
             "beschreibung": "",
             "aktiv": true
         },
+        "Behälter, Karte, Schriftrolle": {
+            "name": "Behälter, Karte, Schriftrolle",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 1,
+            "setting": "savage_pathfinder",
+            "beschreibung": "",
+            "aktiv": true
+        },
         "Kerze": {
             "name": "Kerze",
             "kategorie": "Allgemein",
@@ -9979,7 +9988,7 @@
         "Abenteurerausrüstung": {
             "name": "Abenteurerausrüstung",
             "kategorie": "Werkzeuge & Ausrüstungssets",
-            "gewicht": 2.5,
+            "gewicht": 5,
             "kosten": 50,
             "setting": "savage_pathfinder",
             "beschreibung": "Blendlaterne, Feuerstein und Stahl, Hanfseil, Kerze, kleiner Spiegel, Kreide, Mahlzeiten für 1 Woche, Rucksack, Öl, Schaufel, Schlafsack, Schleifstein, Seife, Wasserschlauch, Wurfhaken, Zusatzkleidung, 3 x Fackeln",
@@ -12956,7 +12965,7 @@
             "name": "Kampfstab",
             "kategorie": "Waffe",
             "gewicht": 2,
-            "kosten": 0,
+            "kosten": 3,
             "setting": "savage_pathfinder",
             "beschreibung": "Parade +1, Reichweite 1, Zweihändig",
             "aktiv": true,

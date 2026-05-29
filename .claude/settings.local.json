@@ -151,7 +151,10 @@
       "Bash(SDL_VIDEODRIVER=dummy timeout 150 python3 *)",
       "Bash(SDL_VIDEODRIVER=dummy timeout 120 python3 *)",
       "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_sajan_final.py)",
-      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_harsk.py)"
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_harsk.py)",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_ezren.py)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_lini.py)"
     ],
     "deny": []
   }
