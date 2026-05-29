@@ -273,9 +273,7 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": [
-                    "Langsam_leicht"
-                ],
+                "auto_handicaps": [],
                 "spezielle_effekte": {
                     "dunkelsicht": true,
                     "eiserne_konstitution": true,
@@ -1467,6 +1465,108 @@
             "auto_talente": [
                 "Blutlinie"
             ],
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "AH (Zauberer) Arkane Blutlinie": {
+            "name": "AH (Zauberer) Arkane Blutlinie",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "WIL W6"
+            ],
+            "beschreibung": "Arkaner Hintergrund (Zauberer) mit Arkaner Blutlinie. Der Zauberer geht eine Arkane Verbindung mit einer Kreatur (Vertrauter) oder einem Gegenstand ein; der Vertraute gewährt +5 Machtpunkte (15 + 5 = 20). Mächtige Form: freie Wiederholung bei jeder misslungenen Zaubernprobe.",
+            "neue_maechte": 2,
+            "machtpunkte": 20,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "AH (Zauberer) Abnorme Blutlinie": {
+            "name": "AH (Zauberer) Abnorme Blutlinie",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "WIL W6"
+            ],
+            "beschreibung": "Arkaner Hintergrund (Zauberer) mit Abnormer Blutlinie. Die seltsame Gestalt erhöht die Robustheit um +1 und gewährt Reichweite +1. Flächenschlag, Geschoss und Strahl mit dem Modifikator Anhaltender Schaden kosten nur 1 zusätzlichen Machtpunkt. Mächtige Form: nie Überrascht, immun gegen Überraschungsangriffe (wenn nicht Gebunden), +1 weitere Robustheit.",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "AH (Zauberer) Drachenblutlinie": {
+            "name": "AH (Zauberer) Drachenblutlinie",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "WIL W6"
+            ],
+            "beschreibung": "Arkaner Hintergrund (Zauberer) mit Drachenblutlinie. Der Nachkomme erhält Klauen (Stä+W4), Schuppenhaut (Panzerung +2, +2 Robustheit) und +1 Schaden bei Mächten der passenden Ausprägung. Mächtige Form: Klauen mit PB +2 und Widerstand gegen die Naturgewalt der Blutlinie.",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "AH (Zauberer) Dämonische Blutlinie": {
+            "name": "AH (Zauberer) Dämonische Blutlinie",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "WIL W6"
+            ],
+            "beschreibung": "Arkaner Hintergrund (Zauberer) mit Dämonischer Blutlinie. Der Held erhält Widerstand gegen Naturgewalten (Elektrizität), +1 Robustheit und scharfe Klauen (Stä+W4).",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "AH (Zauberer) Elementare Blutlinie": {
+            "name": "AH (Zauberer) Elementare Blutlinie",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "WIL W6"
+            ],
+            "beschreibung": "Arkaner Hintergrund (Zauberer) mit Elementarer Blutlinie. Wähle ein Element. Der Held erhält Widerstand gegen dieses Element und eine zugehörige elementare Fähigkeit.",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_handicaps": [
+                "Behindernde Rüstung_jede"
+            ]
+        },
+        "AH (Zauberer) Blutlinie des Grabes": {
+            "name": "AH (Zauberer) Blutlinie des Grabes",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "WIL W6"
+            ],
+            "beschreibung": "Arkaner Hintergrund (Zauberer) mit Blutlinie des Grabes. Der Held erhält Widerstand gegen Naturgewalten (Kälte) und +1 auf Würfe zum Schaden wegstecken. Mächtige Form: der Zauberer ist vollständig untot (volle Untoter-Fähigkeit, Handicaps Außenseiter (schwer) und Hässlich (schwer)).",
+            "neue_maechte": 2,
+            "machtpunkte": 15,
+            "ausgewaehlt": false,
+            "aktiv": true,
             "auto_handicaps": [
                 "Behindernde Rüstung_jede"
             ]
@@ -9682,13 +9782,31 @@
             "beschreibung": "",
             "aktiv": true
         },
-        "Adeligenkleindung": {
+        "Adeligenkleidung": {
             "name": "Adeligenkleindung",
             "kategorie": "Kleidung",
             "gewicht": 5,
             "kosten": 75,
             "setting": "savage_pathfinder",
             "beschreibung": "",
+            "aktiv": true
+        },
+        "Entdeckerkleidung": {
+            "name": "Entdeckerkleidung",
+            "kategorie": "Kleidung",
+            "gewicht": 5,
+            "kosten": 2,
+            "setting": "savage_pathfinder",
+            "beschreibung": "",
+            "aktiv": true
+        },
+        "Weihwasser (Flasche)": {
+            "name": "Weihwasser (Flasche)",
+            "kategorie": "Ausrüstung",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "horror",
+            "beschreibung": "2W4 Schaden gegen Dämonen, Vampire und andere unheilige Kreaturen. Wurfwaffe, Reichweite 3/6/12.",
             "aktiv": true
         },
         "Händlerkleidung": {
@@ -11760,6 +11878,20 @@
             "kopf": 0,
             "mindeststaerke": "W8"
         },
+        "Schuppenpanzer": {
+            "name": "Schuppenpanzer",
+            "kategorie": "Rüstung",
+            "gewicht": 11,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Hemd aus Schuppenrüstung",
+            "aktiv": true,
+            "torso": 3,
+            "arme": 3,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W8"
+        },
         "Kettenbeinlinge": {
             "name": "Kettenbeinlinge",
             "kategorie": "Rüstung",
@@ -11920,18 +12052,6 @@
             "parade": 1,
             "deckung": 0,
             "mindeststaerke": "W6"
-        },
-        "Mittelschwerer Schild": {
-            "name": "Mittelschwerer Schild",
-            "kategorie": "Schild",
-            "gewicht": 4,
-            "kosten": 9,
-            "setting": "savage_pathfinder",
-            "beschreibung": "Mittelschwerer Schild für besseren Schutz",
-            "aktiv": true,
-            "parade": 2,
-            "deckung": -2,
-            "mindeststaerke": "W8"
         },
         "Schwerer Schild": {
             "name": "Schwerer Schild",

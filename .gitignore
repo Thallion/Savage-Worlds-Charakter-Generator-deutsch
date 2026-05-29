@@ -14,6 +14,8 @@ screenshots/
 backups/
 backup/
 bugfixes/
+logs/
+.claude/
 ToDo/
 .buildozer/
 *.egg-info/

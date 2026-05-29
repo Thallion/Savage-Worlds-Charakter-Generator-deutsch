@@ -493,7 +493,11 @@ class FileManagerService:
         action = self.current_action
         self.current_action = None
 
-        self.exit_manager()
+        # FileManager schließen, aber temp_*-Einstellungen NICHT löschen — die Action-Handler
+        # (z.B. _save_pdf) verbrauchen sie und räumen anschließend selbst auf. clear_temp_settings()
+        # hier würde temp_printer_friendly/temp_pdf_filename überschreiben, bevor sie genutzt werden.
+        self.manager_open = False
+        self.file_manager.close()
 
         try:
             Logger.info(f"Ausgewählter Pfad: {path}")

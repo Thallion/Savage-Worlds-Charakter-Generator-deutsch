@@ -89,7 +89,17 @@ def to_dict(charakter):
         'selected_waffen': [item.name for item in charakter.selected_waffen],
         'selected_ruestungen': [item.name for item in charakter.selected_ruestungen],
         'selected_schilde': [item.name for item in charakter.selected_schilde],
-        
+        # Stückzahlen pro Ausrüstungsgegenstand (Name -> menge). Zusätzliches,
+        # optionales Feld – die obigen Namenslisten bleiben abwärtskompatibel.
+        'ausruestung_mengen': {
+            item.name: item.menge
+            for item in (list(charakter.selected_allgemeine_ausruestung)
+                         + list(charakter.selected_waffen)
+                         + list(charakter.selected_ruestungen)
+                         + list(charakter.selected_schilde))
+            if getattr(item, 'menge', 0)
+        },
+
         # === CHARAKTER-STATUS ===
         'verbleibende_attributsteigerungen': charakter.verbleibende_attributsteigerungen,
         'verbleibende_fertigkeitssteigerungen': charakter.verbleibende_fertigkeitssteigerungen,
@@ -538,6 +548,13 @@ def _load_equipment_selections(charakter, data):
             item = charakter.ausruestung[name]
             if not isinstance(item, (Waffe, Ruestung, Schild)):
                 charakter.selected_allgemeine_ausruestung.append(item)
+
+    # Stückzahlen wiederherstellen (optionales Feld; alte Saves ohne dieses Feld
+    # behalten ihr Standardverhalten). Setzt menge direkt auf dem Katalog-Item,
+    # das in den Auswahllisten referenziert wird.
+    for name, menge in (data.get('ausruestung_mengen') or {}).items():
+        if name in charakter.ausruestung:
+            charakter.ausruestung[name].menge = menge
 
 
 def _load_old_format_selections(charakter, data):

@@ -55,6 +55,12 @@ def berechne_abgeleitete_werte(charakter):
         if "Herdritter" in charakter.selected_talente:
             parade_bonus += 1  # Herdritter (Hellfrost): +1 Parade
 
+        # Lieblingswaffe: +1 Parade (Absolute Lieblingswaffe: +2, ersetzt – nicht kumulativ)
+        if "Absolute Lieblingswaffe" in charakter.selected_talente:
+            parade_bonus += 2
+        elif "Lieblingswaffe" in charakter.selected_talente:
+            parade_bonus += 1
+
         charakter.parade = parade_basis + parade_bonus
       
         # Debug-Ausgaben zur Fehleridentifikation
@@ -99,8 +105,10 @@ def berechne_abgeleitete_werte(charakter):
         bewegungsweite_malus -= cyberware_bw_bonus
 
         # 3. Talent-Effekte für Bewegungsweite
-        if "Behände" in charakter.selected_talente:
-            bewegungsweite_malus -= 2  # Behände: +2 Bewegungsweite
+        # "Behände" (Barbar) und "Flink" (Hintergrund, Savage Pathfinder) geben beide +2
+        if ("Behände" in charakter.selected_talente
+                or "Flink" in charakter.selected_talente):
+            bewegungsweite_malus -= 2  # +2 Bewegungsweite
 
         # Bewegungsweite anpassen (nicht unter 1)
         #Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
@@ -137,6 +145,14 @@ def berechne_abgeleitete_werte(charakter):
         if "Jünger Erthas" in charakter.selected_talente:
             robustheit_bonus += 1  # Jünger Erthas (Hellfrost): +1 Robustheit
 
+        # Zauberer-Blutlinien (Savage Pathfinder) – als AH-(Zauberer)-Varianten modelliert
+        if "AH (Zauberer) Abnorme Blutlinie" in charakter.selected_talente:
+            robustheit_bonus += 1  # Abnorme Blutlinie: +1 Robustheit (seltsame Gestalt)
+        if "AH (Zauberer) Dämonische Blutlinie" in charakter.selected_talente:
+            robustheit_bonus += 1  # Dämonische Blutlinie: +1 Robustheit
+        if "AH (Zauberer) Drachenblutlinie" in charakter.selected_talente:
+            robustheit_bonus += 2  # Drachenblutlinie: Schuppenhaut (Panzerung +2)
+
         # Handicap-Effekte
         for handicap_name in charakter.selected_handicaps:
             if handicap_name in charakter.handicaps:
@@ -171,7 +187,12 @@ def berechne_abgeleitete_werte(charakter):
         from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
         gesamt_ruestungsschutz = berechne_gesamt_ruestungsschutz(charakter)
         gesamt_torso = gesamt_ruestungsschutz.get('Torso', 0)
-        
+
+        # Kämpferische Disziplin (Mönch): +1 Robustheit, wenn KEINE Rüstung getragen wird
+        # (natürliche/Cyberware-Panzerung zählt nicht als getragene Rüstung)
+        if "Kämpferische Disziplin" in charakter.selected_talente and gesamt_torso == 0:
+            charakter.robustheit_basis += 1
+
         # 4. Natürliche Panzerung aus Völker-Effekten hinzufügen
         natuerliche_panzerung = _berechne_voelker_natuerliche_panzerung(charakter)
         gesamt_torso += natuerliche_panzerung

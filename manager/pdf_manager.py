@@ -180,16 +180,29 @@ class PDFManager:
     
     def _create_pdf_at_path(self, pdf_path, close_dialog=False):
         """Erstellt PDF am angegebenen Pfad"""
+        # Checkbox-Zustand JETZT erfassen (vor dem Dialog-Dismiss) — ist zuverlässig
+        # zum Button-Klick-Zeitpunkt, weil das ein vom Checkbox-Klick getrenntes Event ist.
+        is_printer_friendly = (
+            self.printer_friendly_checkbox.active
+            if self.printer_friendly_checkbox
+            else self.temp_printer_friendly
+        )
+        show_steigerungen = (
+            self.show_steigerungen_checkbox.active
+            if self.show_steigerungen_checkbox
+            else self.temp_show_steigerungen
+        )
+
         if close_dialog and self.pdf_options_dialog:
             self.pdf_options_dialog.dismiss()
-        
+
         if self.pdf_service and self.dialog_service:
-            success = self.pdf_service.create_character_pdf(pdf_path, self.temp_printer_friendly, self.temp_show_steigerungen)
-            
+            success = self.pdf_service.create_character_pdf(pdf_path, is_printer_friendly, show_steigerungen)
+
             if success:
                 if self.event_service:
                     self.event_service.publish(EventTypes.PDF_CREATED, {'path': pdf_path})
-                
+
                 self.dialog_service.show_success_dialog(
                     "PDF erfolgreich gespeichert."
                 )
@@ -198,12 +211,25 @@ class PDFManager:
     
     def _start_new_pdf_creation(self):
         """Startet den Prozess für neue PDF-Erstellung"""
+        # Checkbox-Zustand JETZT erfassen, bevor der Dialog dismissed wird —
+        # später (in _on_pdf_filename_entered) ist der Dialog weg und damit unzuverlässig.
+        self.temp_printer_friendly = (
+            self.printer_friendly_checkbox.active
+            if self.printer_friendly_checkbox
+            else self.temp_printer_friendly
+        )
+        self.temp_show_steigerungen = (
+            self.show_steigerungen_checkbox.active
+            if self.show_steigerungen_checkbox
+            else self.temp_show_steigerungen
+        )
+
         if self.pdf_options_dialog:
             self.pdf_options_dialog.dismiss()
-        
+
         if self.dialog_service and self.pdf_service:
             default_name = self.pdf_service.get_default_pdf_name()
-            
+
             self.dialog_service.show_input_dialog(
                 "Dateiname für neue PDF:",
                 "Als neue PDF speichern",
