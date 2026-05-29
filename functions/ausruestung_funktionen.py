@@ -491,13 +491,18 @@ def _item_zu_kategorie_liste_hinzufuegen(charakter, item: Ausruestung) -> None:
     if item.kategorie in kategorie_zu_liste:
         liste_name, liste_beschreibung = kategorie_zu_liste[item.kategorie]
         liste = getattr(charakter, liste_name)
-        
+
         if item not in liste:
             liste.append(item)
             Logger.debug(LogMessages.ITEM_ZU_LISTE_HINZUGEFUEGT.format(
                 name=item.name,
                 liste=liste_beschreibung
             ))
+
+        # Rüstung/Schild beim Kauf automatisch anlegen (wie beim Laden), damit der
+        # Schutz sofort in Robustheit/Parade zählt – nicht erst nach Speichern/Laden.
+        if item.kategorie in (AusruestungKategorien.RUESTUNG, AusruestungKategorien.SCHILD):
+            item.angelegt = True
 
 
 def _item_aus_ausruestung_entfernen(charakter, item: Ausruestung) -> None:

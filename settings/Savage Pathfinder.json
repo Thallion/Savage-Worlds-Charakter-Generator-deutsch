@@ -167,7 +167,6 @@
                     "Glück"
                 ],
                 "auto_handicaps": [
-                    "Langsam_leicht",
                     "Größe -1 (Reduzierte Robustheit)"
                 ],
                 "spezielle_effekte": {
@@ -359,9 +358,7 @@
                 "bewegungsweite_bonus": -1,
                 "fertigkeits_startboni": {},
                 "auto_talente": [],
-                "auto_handicaps": [
-                    "Langsam_leicht"
-                ],
+                "auto_handicaps": [],
                 "spezielle_effekte": {
                     "dunkelsicht": true,
                     "granit_haut": true,
@@ -515,7 +512,6 @@
                 },
                 "auto_talente": [],
                 "auto_handicaps": [
-                    "Langsam_leicht",
                     "Größe -1 (Reduzierte Größe und Robustheit)",
                     "Verringerte Fertigkeiten"
                 ],
