@@ -501,9 +501,9 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Haltet die Stellung!": {
+            "Formationskämpfer": {
                 "ausgewaehlt": true,
-                "rang": "F",
+                "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
@@ -565,7 +565,7 @@
         "Schnell",
         "Volltreffer",
         "Im Sattel geboren",
-        "Haltet die Stellung!",
+        "Formationskämpfer",
         "Meisterschütze"
     ],
     "selected_maechte": [],
@@ -646,7 +646,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 207,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -800,7 +800,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Haltet die Stellung!",
+                "name": "Formationskämpfer",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

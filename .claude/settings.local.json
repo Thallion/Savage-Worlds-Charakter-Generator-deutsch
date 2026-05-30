@@ -171,7 +171,11 @@
       "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_fk_batch3_fixed.py)",
       "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_ezren.py)",
       "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_harsk.py)",
-      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_sajan_final.py)"
+      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_sajan_final.py)",
+      "Bash(pdfinfo \"Superkräfte Archetypen.pdf\")",
+      "Bash(pdftotext -layout -f 1 -l 2 \"Superkräfte Archetypen.pdf\" -)",
+      "Bash(pdftotext -f 22 -l 23 \"Superkräfte Archetypen.pdf\" -)",
+      "Bash(pdftotext -f 22 -l 22 \"Superkräfte Archetypen.pdf\" -)"
     ],
     "deny": []
   }

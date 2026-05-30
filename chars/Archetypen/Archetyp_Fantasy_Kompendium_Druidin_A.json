@@ -574,7 +574,23 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Stab (3,5 m)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Hemd aus natürlicher Rüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Wildnispaket": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Schwur_schwer",
@@ -637,11 +653,21 @@
         "Zwerg": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
+    "selected_allgemeine_ausruestung": [
+        "Stab (3,5 m)",
+        "Hemd aus natürlicher Rüstung",
+        "Wildnispaket"
+    ],
     "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Hemd aus natürlicher Rüstung"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Stab (3,5 m)": 1,
+        "Hemd aus natürlicher Rüstung": 1,
+        "Wildnispaket": 1
+    },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
@@ -655,7 +681,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 250,
+    "vermoegen": 193.75,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

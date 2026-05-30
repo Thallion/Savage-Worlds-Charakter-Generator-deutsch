@@ -595,6 +595,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Schriftrolle: Arkaner Schutz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Verbündeten beschwören": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Schutz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -663,7 +678,10 @@
         "Dolch",
         "Tunika",
         "Magierpaket",
-        "Buch"
+        "Buch",
+        "Schriftrolle: Arkaner Schutz",
+        "Schriftrolle: Verbündeten beschwören",
+        "Schriftrolle: Schutz"
     ],
     "selected_waffen": [
         "Dolch"
@@ -676,7 +694,10 @@
         "Dolch": 1,
         "Tunika": 1,
         "Magierpaket": 1,
-        "Buch": 1
+        "Buch": 1,
+        "Schriftrolle: Arkaner Schutz": 1,
+        "Schriftrolle: Verbündeten beschwören": 1,
+        "Schriftrolle: Schutz": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -691,7 +712,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 358,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

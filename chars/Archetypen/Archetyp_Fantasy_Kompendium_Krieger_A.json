@@ -501,7 +501,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Kampfreflexe": {
+            "Treffer einstecken": {
                 "ausgewaehlt": true,
                 "rang": "F",
                 "neue_maechte": 0,
@@ -544,7 +544,7 @@
         "Eisenkiefer",
         "Schmerzresistenz",
         "Erzürnen",
-        "Kampfreflexe"
+        "Treffer einstecken"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -764,7 +764,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Kampfreflexe",
+                "name": "Treffer einstecken",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

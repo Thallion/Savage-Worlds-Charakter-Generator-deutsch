@@ -552,6 +552,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Sprachen sprechen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Attributsteigerung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -613,7 +628,10 @@
         "Feine Kleidung",
         "Stiefel, schwer",
         "Abenteurerpaket",
-        "Schießpulver (10)"
+        "Schießpulver (10)",
+        "Trank: Sprachen sprechen",
+        "Trank: Heilung",
+        "Trank: Attributsteigerung"
     ],
     "selected_waffen": [
         "Rapier",
@@ -630,7 +648,10 @@
         "Feine Kleidung": 1,
         "Stiefel, schwer": 1,
         "Abenteurerpaket": 1,
-        "Schießpulver (10)": 2
+        "Schießpulver (10)": 2,
+        "Trank: Sprachen sprechen": 1,
+        "Trank: Heilung": 1,
+        "Trank: Attributsteigerung": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -645,7 +666,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 1011,
+    "vermoegen": 411,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

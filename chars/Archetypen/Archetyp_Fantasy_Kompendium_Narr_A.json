@@ -558,6 +558,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Attributsteigerung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -620,7 +625,8 @@
         "Dolch/Messer",
         "Totschläger",
         "Ledertunika",
-        "Unterhalterpaket"
+        "Unterhalterpaket",
+        "Trank: Attributsteigerung"
     ],
     "selected_waffen": [
         "Dolch/Messer",
@@ -634,7 +640,8 @@
         "Dolch/Messer": 1,
         "Totschläger": 1,
         "Ledertunika": 1,
-        "Unterhalterpaket": 1
+        "Unterhalterpaket": 1,
+        "Trank: Attributsteigerung": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -649,7 +656,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 356,
+    "vermoegen": 156,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

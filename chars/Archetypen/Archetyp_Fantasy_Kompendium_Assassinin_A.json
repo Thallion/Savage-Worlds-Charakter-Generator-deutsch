@@ -496,9 +496,9 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Erstschlag": {
+            "Hinterhältiger Angriff": {
                 "ausgewaehlt": true,
-                "rang": "A",
+                "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
@@ -572,7 +572,7 @@
         "AH (Begabt)",
         "Assassine",
         "Giftmischer",
-        "Erstschlag",
+        "Hinterhältiger Angriff",
         "Dieb"
     ],
     "selected_maechte": [
@@ -799,7 +799,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Erstschlag",
+                "name": "Hinterhältiger Angriff",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

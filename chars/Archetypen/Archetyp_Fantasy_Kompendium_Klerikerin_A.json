@@ -558,7 +558,38 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Streitkolben, leicht": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Leichte Armbrust": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kettenhemd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Klerikerpaket": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Heiliges Wasser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Bolzen (10)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Loyal",
@@ -618,11 +649,31 @@
         "Zwerg": true
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Streitkolben, leicht",
+        "Leichte Armbrust",
+        "Kettenhemd",
+        "Klerikerpaket",
+        "Heiliges Wasser",
+        "Bolzen (10)"
+    ],
+    "selected_waffen": [
+        "Streitkolben, leicht",
+        "Leichte Armbrust",
+        "Heiliges Wasser"
+    ],
+    "selected_ruestungen": [
+        "Kettenhemd"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Streitkolben, leicht": 1,
+        "Leichte Armbrust": 1,
+        "Kettenhemd": 1,
+        "Klerikerpaket": 1,
+        "Heiliges Wasser": 2,
+        "Bolzen (10)": 2
+    },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
@@ -636,7 +687,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 500,
+    "vermoegen": 208,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
