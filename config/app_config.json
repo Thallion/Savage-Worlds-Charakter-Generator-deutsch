@@ -21,7 +21,7 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Savage Pathfinder",
+  "last_setting": "SWAE",
   "force_mobile_layout": false,
   "tablet_layout": false,
   "desktop_scale_factor": "auto",
@@ -44,5 +44,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-05-29T16:50:20.724114"
+  "last_updated": "2026-05-30T08:43:27.320819"
 }

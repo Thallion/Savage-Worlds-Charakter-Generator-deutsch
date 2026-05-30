@@ -1,13 +1,13 @@
 {
     "profil_daten": {
-        "Name": "Harsk",
+        "Name": "Diebin",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "Waldläufer",
-        "Sprachen": "Gemeinsprache, Goblinisch, Sylvanisch, Zwergisch"
+        "Konzept": "",
+        "Sprachen": ""
     },
-    "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "active_setting_name": "Fantasy Kompendium",
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -94,7 +94,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -159,8 +159,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -172,8 +172,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -257,6 +257,19 @@
             "attribut": "Willenskraft",
             "custom": false
         },
+        "Fokus": {
+            "fertigkeit_name": "Fokus",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
         "Glaube": {
             "fertigkeit_name": "Glaube",
             "grundfertigkeit": false,
@@ -277,7 +290,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -296,14 +309,27 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Reparieren": {
-            "fertigkeit_name": "Reparieren",
+        "Recherche": {
+            "fertigkeit_name": "Recherche",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
                 "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Reparieren": {
+            "fertigkeit_name": "Reparieren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -374,8 +400,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Zaubern": {
-            "fertigkeit_name": "Zaubern",
+        "Sprache": {
+            "fertigkeit_name": "Sprache",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -387,8 +413,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Zaubern (Zauberer)": {
-            "fertigkeit_name": "Zaubern (Zauberer)",
+        "Zaubern": {
+            "fertigkeit_name": "Zaubern",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -397,7 +423,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Verrückte Wissenschaft": {
@@ -425,82 +451,59 @@
             },
             "attribut": "Verstand",
             "custom": false
-        },
-        "Fokus": {
-            "fertigkeit_name": "Fokus",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Willenskraft",
-            "custom": false
         }
     },
     "selected_elements": {
         "voelker": {
-            "Zwerg": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Angewohnheit_leicht": {
+            "Gesucht_schwer": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Dünnhäutig_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             },
             "Misstrauisch_leicht": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Rüstungsbeschränkung_mittelschwer": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
-            "Schwur_leicht": {
+            "Vorsichtig": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Waldläufer": {
+            "Schnell": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Erzfeind": {
+            "Dieb": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Bevorzugtes Gelände": {
+            "Beziehungen": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Wildnis durchqueren": {
+            "Gassenwissen": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Naturbursche": {
+            "Fallengespür": {
                 "ausgewaehlt": true,
-                "rang": "A",
+                "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
@@ -509,17 +512,22 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Handaxt": {
+            "Rapier": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Armbrust": {
+            "Dolch": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Bolzen (10)": {
+            "Totschläger": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Handarmbrust": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -529,17 +537,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Lederbeinlinge": {
+            "Umhang mit Kapuze": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Abenteurerausrüstung": {
+            "Diebespaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Kletterausrüstung": {
+            "Bolzen (10)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -548,81 +556,112 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Fallenherstellungsset": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rauchstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
     "selected_handicaps": [
-        "Angewohnheit_leicht",
-        "Dünnhäutig_leicht",
+        "Gesucht_schwer",
         "Misstrauisch_leicht",
-        "Rüstungsbeschränkung_mittelschwer",
-        "Schwur_leicht"
+        "Vorsichtig"
     ],
     "selected_talente": [
-        "Waldläufer",
-        "Erzfeind",
-        "Bevorzugtes Gelände",
-        "Wildnis durchqueren",
-        "Naturbursche"
+        "Schnell",
+        "Dieb",
+        "Beziehungen",
+        "Gassenwissen",
+        "Fallengespür"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
+        "Aquarianer": false,
+        "Avionen": false,
+        "Drachenvolk": false,
+        "Elementarer_Abkoemmling_Erde": false,
+        "Elementarer_Abkoemmling_Feuer": false,
+        "Elementarer_Abkoemmling_Luft": false,
+        "Elementarer_Abkoemmling_Wasser": false,
         "Elf": false,
+        "Fee": false,
+        "Gestaltwandler": false,
         "Gnom": false,
+        "Goblin": false,
+        "Golem": false,
+        "Grabgeborener": false,
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
-        "Mensch": false,
-        "Zwerg": true,
-        "Ifrits": false,
-        "Oreads": false,
-        "Sylphen": false,
-        "Undinen": false,
-        "Weinranken-Leshy": false,
-        "Aasimars": false,
-        "Katzenfolk": false,
-        "Dhampire": false,
-        "Tieflinge": false,
-        "Goblin": false
+        "Halbriese": false,
+        "Himmlischer": false,
+        "Infernaler": false,
+        "Insektoid": false,
+        "Mausling": false,
+        "Mensch": true,
+        "Minotaur": false,
+        "Oger": false,
+        "Ork": false,
+        "Rakashaner": false,
+        "Rattling": false,
+        "Saurianer": false,
+        "Schlangenvolk": false,
+        "Zentaur": false,
+        "Zwerg": false
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Handaxt",
-        "Schwere Armbrust",
-        "Bolzen (10)",
+        "Rapier",
+        "Dolch",
+        "Totschläger",
+        "Handarmbrust",
         "Ledertunika",
-        "Lederbeinlinge",
-        "Abenteurerausrüstung",
-        "Kletterausrüstung",
-        "Verstrickungsbeutel"
+        "Umhang mit Kapuze",
+        "Diebespaket",
+        "Bolzen (10)",
+        "Verstrickungsbeutel",
+        "Fallenherstellungsset",
+        "Rauchstab"
     ],
     "selected_waffen": [
-        "Handaxt",
-        "Schwere Armbrust"
+        "Rapier",
+        "Dolch",
+        "Totschläger",
+        "Handarmbrust"
     ],
     "selected_ruestungen": [
         "Ledertunika",
-        "Lederbeinlinge"
+        "Umhang mit Kapuze"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Handaxt": 2,
-        "Schwere Armbrust": 1,
-        "Bolzen (10)": 2,
+        "Rapier": 1,
+        "Dolch": 5,
+        "Totschläger": 1,
+        "Handarmbrust": 1,
         "Ledertunika": 1,
-        "Lederbeinlinge": 1,
-        "Abenteurerausrüstung": 1,
-        "Kletterausrüstung": 1,
-        "Verstrickungsbeutel": 1
+        "Umhang mit Kapuze": 1,
+        "Diebespaket": 1,
+        "Bolzen (10)": 2,
+        "Verstrickungsbeutel": 1,
+        "Fallenherstellungsset": 1,
+        "Rauchstab": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "verbleibende_aufstiege": 1.0,
+    "aufstiege_gesamt": 5,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -630,12 +669,12 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 16,
+    "vermoegen": 136,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
-    "pathfinder_kostenlose_talente_gewaehlt": 1,
+    "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
@@ -654,8 +693,15 @@
             },
             {
                 "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -668,21 +714,56 @@
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
+                "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heilen",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
@@ -696,72 +777,69 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Diebeskunst",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Diebeskunst",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
+                "name": "Diebeskunst",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Überleben",
+                "name": "Reparieren",
                 "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Naturbursche",
+                "name": "Dieb",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reparieren",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Beziehungen",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Gassenwissen",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Fallengespür",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

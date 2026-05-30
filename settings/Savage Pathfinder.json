@@ -80,7 +80,9 @@
                 "fertigkeits_startboni": {
                     "Wahrnehmung": 2
                 },
-                "auto_talente": ["Gnomenmagie"],
+                "auto_talente": [
+                    "Gnomenmagie"
+                ],
                 "auto_handicaps": [
                     "Langsam_leicht",
                     "Größe -1 (Reduzierte Robustheit)",
@@ -3670,8 +3672,7 @@
             "name": "Fallengespür",
             "kategorie": "Experte",
             "rang": "F",
-            "voraussetzungen": [
-            ],
+            "voraussetzungen": [],
             "beschreibung": "Ermöglicht eine Wahrnehmungsprobe zum Erkennen von Fallen in 10 Metern Entfernung und ignoriert 2 Punkte Abzüge beim Entschärfen von Fallen.",
             "neue_maechte": 0,
             "machtpunkte": 0,
@@ -5805,7 +5806,7 @@
             "voraussetzungen": [
                 "AH (Druide)"
             ],
-            "beschreibung": "-2 auf Überreden und Einschüchtern in der Stadt, +2 in der Wildnis.",
+            "beschreibung": "Druiden halten Zwiesprache mit der Natur und ihren Geistern. Überleben ist für sie mit Willenskraft verknüpft, nicht mit Verstand.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -13754,6 +13755,366 @@
             "kosten": 5,
             "setting": "savage_pathfinder",
             "beschreibung": "Wie Waffenblanchierer (Adamantit). Beim nächsten erfolgreichen Treffer löst es Umgebungsschwächen (Silber) aus.",
+            "aktiv": true
+        },
+        "Trank: starke Heilung": {
+            "name": "Trank: starke Heilung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 300,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Heilung (stark). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwaches Eigenschaft erhöhen": {
+            "name": "Trank: schwaches Eigenschaft erhöhen",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Eigenschaft erhöhen/senken (schwach, Eigenschaft vorher festlegen). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwacher Schutz": {
+            "name": "Trank: schwacher Schutz",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Schutz (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Beschleunigung": {
+            "name": "Trank: schwache Beschleunigung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Beschleunigung (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: starke Linderung mit Genesung": {
+            "name": "Trank: starke Linderung mit Genesung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 400,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Linderung mit Modifikation Genesung (stark). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwacher Arkaner Schutz": {
+            "name": "Trank: schwacher Arkaner Schutz",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Arkaner Schutz (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Empathie": {
+            "name": "Trank: schwache Empathie",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Empathie (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwaches Wachsen Größe+2": {
+            "name": "Trank: schwaches Wachsen Größe+2",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 400,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Wachsen/Schrumpfen mit +2 Größenschritten (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Linderung mit Genesung": {
+            "name": "Trank: schwache Linderung mit Genesung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Linderung mit Modifikation Genesung (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Unberührbarkeit": {
+            "name": "Trank: schwache Unberührbarkeit",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 750,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Unberührbarkeit (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Beschleunigung mit Schnelligkeit": {
+            "name": "Trank: schwache Beschleunigung mit Schnelligkeit",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 400,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Beschleunigung mit Modifikation Schnelligkeit (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwaches Schadensfeld mit Schaden": {
+            "name": "Trank: schwaches Schadensfeld mit Schaden",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 600,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Schadensfeld mit Modifikation Schaden (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: starker Wandkrabbler": {
+            "name": "Trank: starker Wandkrabbler",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Wandkrabbler (stark). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: starker Schutz": {
+            "name": "Trank: starker Schutz",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Schutz (stark). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwaches Fliegen": {
+            "name": "Trank: schwaches Fliegen",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 450,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Fliegen (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Dunkelsicht": {
+            "name": "Trank: schwache Dunkelsicht",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Dunkelsicht (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Heilung mit Mächtige Heilung": {
+            "name": "Trank: schwache Heilung mit Mächtige Heilung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 650,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Heilung mit Modifikation Mächtige Heilung (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwacher Schutz gegen Naturgewalten": {
+            "name": "Trank: schwacher Schutz gegen Naturgewalten",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Schutz vor Naturgewalten (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Heilung mit Entgiftung": {
+            "name": "Trank: schwache Heilung mit Entgiftung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Heilung mit Modifikation Gift oder Krankheit neutralisieren (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Trank: schwache Heilung": {
+            "name": "Trank: schwache Heilung",
+            "kategorie": "Trank",
+            "gewicht": 0,
+            "kosten": 300,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Heilung (schwach). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Geschoss": {
+            "name": "Schriftrolle: Geschoss",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Geschoss. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Eigenschaft senken": {
+            "name": "Schriftrolle: Eigenschaft senken",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Eigenschaft erhöhen/senken (senken, Eigenschaft vorher festlegen). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Flächenschlag": {
+            "name": "Schriftrolle: Flächenschlag",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 300,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Flächenschlag. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Waffe verbessern": {
+            "name": "Schriftrolle: Waffe verbessern",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Waffe verbessern. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Trägheit": {
+            "name": "Schriftrolle: Trägheit",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Trägheit. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Abwehren": {
+            "name": "Schriftrolle: Abwehren",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Abwehren. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Unsichtbarkeit": {
+            "name": "Schriftrolle: Unsichtbarkeit",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 500,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Unsichtbarkeit. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Furcht": {
+            "name": "Schriftrolle: Furcht",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 250,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Furcht (Große Flächenschablone). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Wachstum Größe+2": {
+            "name": "Schriftrolle: Wachstum Größe+2",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 400,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Wachsen/Schrumpfen mit +2 Größenschritten. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Illusion mit Geräusche": {
+            "name": "Schriftrolle: Illusion mit Geräusche",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Illusion mit Modifikation Geräusche. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Aufheben": {
+            "name": "Schriftrolle: Aufheben",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 50,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Aufheben. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Teleportation": {
+            "name": "Schriftrolle: Teleportation",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Teleportation. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Geschoss PB2": {
+            "name": "Schriftrolle: Geschoss PB2",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Geschoss mit Modifikation Panzerbrechend 2. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Arkanes entdecken": {
+            "name": "Schriftrolle: Arkanes entdecken",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Arkanes entdecken/verbergen. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Heilung": {
+            "name": "Schriftrolle: Heilung",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 150,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Heilung. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Blenden": {
+            "name": "Schriftrolle: Blenden",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 100,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Blenden. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Betäuben": {
+            "name": "Schriftrolle: Betäuben",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Betäuben (mittlere Flächenschablone). Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Zombie": {
+            "name": "Schriftrolle: Zombie",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 450,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Zombie. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Trägheit stark": {
+            "name": "Schriftrolle: Trägheit stark",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 300,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Trägheit mit Modifikation Stark. Einmaliger Gebrauch.",
+            "aktiv": true
+        },
+        "Schriftrolle: Schlummer": {
+            "name": "Schriftrolle: Schlummer",
+            "kategorie": "Schriftrolle",
+            "gewicht": 0,
+            "kosten": 200,
+            "setting": "savage_pathfinder",
+            "beschreibung": "Enthält die Macht Schlummer. Einmaliger Gebrauch.",
             "aktiv": true
         }
     },

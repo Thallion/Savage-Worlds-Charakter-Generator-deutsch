@@ -535,6 +535,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -580,7 +585,8 @@
         "Kurzschwert",
         "Shuriken",
         "Krähenfüße",
-        "Alchemistenfeuer"
+        "Alchemistenfeuer",
+        "Abenteurerausrüstung"
     ],
     "selected_waffen": [
         "Kurzschwert",
@@ -592,7 +598,8 @@
         "Kurzschwert": 1,
         "Shuriken": 6,
         "Krähenfüße": 1,
-        "Alchemistenfeuer": 3
+        "Alchemistenfeuer": 3,
+        "Abenteurerausrüstung": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -607,7 +614,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 223,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

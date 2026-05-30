@@ -154,7 +154,24 @@
       "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_harsk.py)",
       "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_ezren.py)",
       "Bash(echo \"exit: $?\")",
-      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_lini.py)"
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_lini.py)",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_lem.py)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_jeanne.py)",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_nachtfinder.py)",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_kenaken.py)",
+      "Bash(echo \"kenaken:$?\")",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_elsiara.py)",
+      "Bash(echo \"elsiara:$?\")",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_klara.py)",
+      "Bash(echo \"klara:$?\")",
+      "Bash(echo \"jeanne:$?\")",
+      "Skill(archetyp-erstellen)",
+      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_fk_batch1_fixed.py)",
+      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_fk_batch3_fixed.py)",
+      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_ezren.py)",
+      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_harsk.py)",
+      "Bash(SDL_VIDEODRIVER=dummy python3 logs/build_sajan_final.py)"
     ],
     "deny": []
   }

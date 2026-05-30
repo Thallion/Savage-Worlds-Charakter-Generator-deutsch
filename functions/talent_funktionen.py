@@ -496,11 +496,13 @@ class TalentManager:
     # Mapping: Talent → Liste von (Fertigkeit, neues_Attribut)
     TALENT_FERTIGKEITS_EFFEKTE = {
         "Rohling": [("Athletik", "Stärke")],
+        "Naturgespür": [("Überleben", "Willenskraft")],
     }
 
     # Umkehr-Mapping: Talent → Liste von (Fertigkeit, ursprüngliches_Attribut)
     TALENT_FERTIGKEITS_EFFEKTE_ORIGINAL = {
         "Rohling": [("Athletik", "Geschicklichkeit")],
+        "Naturgespür": [("Überleben", "Verstand")],
     }
 
     # Talente die den Würfeltyp eines Attributs erhöhen

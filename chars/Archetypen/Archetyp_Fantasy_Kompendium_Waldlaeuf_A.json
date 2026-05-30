@@ -1,13 +1,13 @@
 {
     "profil_daten": {
-        "Name": "Harsk",
+        "Name": "Waldläufer",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "Waldläufer",
-        "Sprachen": "Gemeinsprache, Goblinisch, Sylvanisch, Zwergisch"
+        "Konzept": "",
+        "Sprachen": ""
     },
-    "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "active_setting_name": "Fantasy Kompendium",
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -94,7 +94,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -251,6 +251,19 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Fokus": {
+            "fertigkeit_name": "Fokus",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
@@ -277,7 +290,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -285,6 +298,19 @@
         },
         "Provozieren": {
             "fertigkeit_name": "Provozieren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Recherche": {
+            "fertigkeit_name": "Recherche",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -374,8 +400,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Zaubern": {
-            "fertigkeit_name": "Zaubern",
+        "Sprache": {
+            "fertigkeit_name": "Sprache",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -387,8 +413,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Zaubern (Zauberer)": {
-            "fertigkeit_name": "Zaubern (Zauberer)",
+        "Zaubern": {
+            "fertigkeit_name": "Zaubern",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -397,7 +423,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Verrückte Wissenschaft": {
@@ -425,62 +451,45 @@
             },
             "attribut": "Verstand",
             "custom": false
-        },
-        "Fokus": {
-            "fertigkeit_name": "Fokus",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Willenskraft",
-            "custom": false
         }
     },
     "selected_elements": {
         "voelker": {
-            "Zwerg": {
+            "Halbelf": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Angewohnheit_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Dünnhäutig_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
             "Misstrauisch_leicht": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Rüstungsbeschränkung_mittelschwer": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
-            "Schwur_leicht": {
+            "Dünnhäutig": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
+            },
+            "Schwerzüngig": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
-            "Waldläufer": {
+            "Nachtsicht": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Erzfeind": {
+            "Parkour": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Naturbursche": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -492,15 +501,15 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Wildnis durchqueren": {
+            "Erzfeind": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Naturbursche": {
+            "Kundschafter": {
                 "ausgewaehlt": true,
-                "rang": "A",
+                "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
@@ -514,12 +523,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Armbrust": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Bolzen (10)": {
+            "Kompositbogen": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -529,22 +533,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Lederbeinlinge": {
+            "Wildnispaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Abenteurerausrüstung": {
+            "Pfeile (20)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Kletterausrüstung": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Verstrickungsbeutel": {
+            "Fallenherstellungsset": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -552,77 +551,86 @@
         }
     },
     "selected_handicaps": [
-        "Angewohnheit_leicht",
-        "Dünnhäutig_leicht",
         "Misstrauisch_leicht",
-        "Rüstungsbeschränkung_mittelschwer",
-        "Schwur_leicht"
+        "Dünnhäutig",
+        "Schwerzüngig"
     ],
     "selected_talente": [
-        "Waldläufer",
-        "Erzfeind",
+        "Nachtsicht",
+        "Parkour",
+        "Naturbursche",
         "Bevorzugtes Gelände",
-        "Wildnis durchqueren",
-        "Naturbursche"
+        "Erzfeind",
+        "Kundschafter"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
+        "Aquarianer": false,
+        "Avionen": false,
+        "Drachenvolk": false,
+        "Elementarer_Abkoemmling_Erde": false,
+        "Elementarer_Abkoemmling_Feuer": false,
+        "Elementarer_Abkoemmling_Luft": false,
+        "Elementarer_Abkoemmling_Wasser": false,
         "Elf": false,
+        "Fee": false,
+        "Gestaltwandler": false,
         "Gnom": false,
-        "Halbelf": false,
+        "Goblin": false,
+        "Golem": false,
+        "Grabgeborener": false,
+        "Halbelf": true,
         "Halbling": false,
         "Halbork": false,
+        "Halbriese": false,
+        "Himmlischer": false,
+        "Infernaler": false,
+        "Insektoid": false,
+        "Mausling": false,
         "Mensch": false,
-        "Zwerg": true,
-        "Ifrits": false,
-        "Oreads": false,
-        "Sylphen": false,
-        "Undinen": false,
-        "Weinranken-Leshy": false,
-        "Aasimars": false,
-        "Katzenfolk": false,
-        "Dhampire": false,
-        "Tieflinge": false,
-        "Goblin": false
+        "Minotaur": false,
+        "Oger": false,
+        "Ork": false,
+        "Rakashaner": false,
+        "Rattling": false,
+        "Saurianer": false,
+        "Schlangenvolk": false,
+        "Zentaur": false,
+        "Zwerg": false
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Handaxt",
-        "Schwere Armbrust",
-        "Bolzen (10)",
+        "Kompositbogen",
         "Ledertunika",
-        "Lederbeinlinge",
-        "Abenteurerausrüstung",
-        "Kletterausrüstung",
-        "Verstrickungsbeutel"
+        "Wildnispaket",
+        "Pfeile (20)",
+        "Fallenherstellungsset"
     ],
     "selected_waffen": [
         "Handaxt",
-        "Schwere Armbrust"
+        "Kompositbogen"
     ],
     "selected_ruestungen": [
-        "Ledertunika",
-        "Lederbeinlinge"
+        "Ledertunika"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Handaxt": 2,
-        "Schwere Armbrust": 1,
-        "Bolzen (10)": 2,
+        "Handaxt": 1,
+        "Kompositbogen": 1,
         "Ledertunika": 1,
-        "Lederbeinlinge": 1,
-        "Abenteurerausrüstung": 1,
-        "Kletterausrüstung": 1,
-        "Verstrickungsbeutel": 1
+        "Wildnispaket": 1,
+        "Pfeile (20)": 1,
+        "Fallenherstellungsset": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "verbleibende_aufstiege": 1.0,
+    "aufstiege_gesamt": 5,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -630,39 +638,18 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 16,
+    "vermoegen": 187,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
-    "pathfinder_kostenlose_talente_gewaehlt": 1,
+    "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
                 "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -677,13 +664,62 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heilen",
+                "name": "Kämpfen",
                 "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -696,35 +732,7 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
+                "name": "Heimlichkeit",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
@@ -751,17 +759,48 @@
                 "kosten": 2
             },
             {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
+                "typ": "talent",
+                "name": "Parkour",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "talent",
                 "name": "Naturbursche",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Bevorzugtes Gelände",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Erzfeind",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Kundschafter",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

@@ -1,10 +1,10 @@
 {
     "profil_daten": {
-        "Name": "Harsk",
+        "Name": "Sajan",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "Waldläufer",
-        "Sprachen": "Gemeinsprache, Goblinisch, Sylvanisch, Zwergisch"
+        "Konzept": "Mönch",
+        "Sprachen": "Elfisch, Gemeinsprache, Goblinisch, Riesisch"
     },
     "active_setting_name": "Savage Pathfinder",
     "char_gen_completed": false,
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -94,7 +94,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,8 +146,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -172,8 +172,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -186,7 +186,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -250,8 +250,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -442,27 +442,22 @@
     },
     "selected_elements": {
         "voelker": {
-            "Zwerg": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Angewohnheit_leicht": {
+            "Heroisch": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Loyal": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Dünnhäutig_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Misstrauisch_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Rüstungsbeschränkung_mittelschwer": {
+            "Rüstungsbeschränkung_jede": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
@@ -474,31 +469,43 @@
             }
         },
         "talente": {
-            "Waldläufer": {
+            "Mönch": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Erzfeind": {
+            "Betäubende Fäuste": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Bevorzugtes Gelände": {
+            "Beweglichkeit": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Wildnis durchqueren": {
+            "Kämpferische Disziplin": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Naturbursche": {
+            "Waffenloser Schlag": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Flink": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Lieblingswaffe": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -509,42 +516,22 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Handaxt": {
+            "Kurzschwert": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Armbrust": {
+            "Shuriken": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Bolzen (10)": {
+            "Krähenfüße": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Ledertunika": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Lederbeinlinge": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Abenteurerausrüstung": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Kletterausrüstung": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Verstrickungsbeutel": {
+            "Alchemistenfeuer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -552,18 +539,19 @@
         }
     },
     "selected_handicaps": [
-        "Angewohnheit_leicht",
-        "Dünnhäutig_leicht",
-        "Misstrauisch_leicht",
-        "Rüstungsbeschränkung_mittelschwer",
+        "Heroisch",
+        "Loyal",
+        "Rüstungsbeschränkung_jede",
         "Schwur_leicht"
     ],
     "selected_talente": [
-        "Waldläufer",
-        "Erzfeind",
-        "Bevorzugtes Gelände",
-        "Wildnis durchqueren",
-        "Naturbursche"
+        "Mönch",
+        "Betäubende Fäuste",
+        "Beweglichkeit",
+        "Kämpferische Disziplin",
+        "Waffenloser Schlag",
+        "Flink",
+        "Lieblingswaffe"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -574,8 +562,8 @@
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
-        "Mensch": false,
-        "Zwerg": true,
+        "Mensch": true,
+        "Zwerg": false,
         "Ifrits": false,
         "Oreads": false,
         "Sylphen": false,
@@ -589,33 +577,22 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Handaxt",
-        "Schwere Armbrust",
-        "Bolzen (10)",
-        "Ledertunika",
-        "Lederbeinlinge",
-        "Abenteurerausrüstung",
-        "Kletterausrüstung",
-        "Verstrickungsbeutel"
+        "Kurzschwert",
+        "Shuriken",
+        "Krähenfüße",
+        "Alchemistenfeuer"
     ],
     "selected_waffen": [
-        "Handaxt",
-        "Schwere Armbrust"
+        "Kurzschwert",
+        "Shuriken"
     ],
-    "selected_ruestungen": [
-        "Ledertunika",
-        "Lederbeinlinge"
-    ],
+    "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Handaxt": 2,
-        "Schwere Armbrust": 1,
-        "Bolzen (10)": 2,
-        "Ledertunika": 1,
-        "Lederbeinlinge": 1,
-        "Abenteurerausrüstung": 1,
-        "Kletterausrüstung": 1,
-        "Verstrickungsbeutel": 1
+        "Kurzschwert": 1,
+        "Shuriken": 6,
+        "Krähenfüße": 1,
+        "Alchemistenfeuer": 3
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -630,7 +607,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 16,
+    "vermoegen": 223,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -655,14 +632,14 @@
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 8,
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
+                "name": "Konstitution",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -682,8 +659,15 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heilen",
-                "wert": 4,
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -696,6 +680,13 @@
             },
             {
                 "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
                 "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -710,45 +701,24 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
+                "name": "Kämpfen",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Überleben",
+                "name": "Einschüchtern",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Überleben",
+                "name": "Einschüchtern",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
@@ -758,8 +728,22 @@
                 "kosten": 1
             },
             {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
                 "typ": "talent",
-                "name": "Naturbursche",
+                "name": "Lieblingswaffe",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             }

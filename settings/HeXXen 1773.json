@@ -4370,7 +4370,7 @@
             "mindeststaerke": "W4"
         },
         "Lederkoller": {
-            "name": "Lederkoller (mittlere Panzerung)",
+            "name": "Lederkoller",
             "kategorie": "Rüstung",
             "gewicht": 4,
             "kosten": 30,

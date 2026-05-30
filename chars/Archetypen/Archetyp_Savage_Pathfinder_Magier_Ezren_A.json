@@ -571,6 +571,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Schriftrolle: Schlummer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -623,7 +628,8 @@
         "Abenteurerausrüstung",
         "Pergament",
         "Tintenstift (Schreibfeder)",
-        "Tinte (Fläschchen)"
+        "Tinte (Fläschchen)",
+        "Schriftrolle: Schlummer"
     ],
     "selected_waffen": [
         "Dolch",
@@ -642,7 +648,8 @@
         "Abenteurerausrüstung": 1,
         "Pergament": 1,
         "Tintenstift (Schreibfeder)": 1,
-        "Tinte (Fläschchen)": 1
+        "Tinte (Fläschchen)": 1,
+        "Schriftrolle: Schlummer": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -657,7 +664,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 201.70000000000002,
+    "vermoegen": 1.700000000000017,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

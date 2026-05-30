@@ -1,10 +1,11 @@
 {
     "profil_daten": {
-        "Name": "Harsk",
+        "Name": "Ezren",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "Waldläufer",
-        "Sprachen": "Gemeinsprache, Goblinisch, Sylvanisch, Zwergisch"
+        "Konzept": "Ikonischer Magier",
+        "Sprachen": "Abyssisch, Elfisch, Gemeinsprache, Riesisch, Thassilonisch, Zwergisch",
+        "Hintergrund": "Ezren findet Trost in seinen arkanen Studien, denen er im Feld und nicht in staubigen Bibliotheken nachgeht. Der alte Magier reist weit umher, um neue Magie zu entdecken und zu erforschen, zum Teil um die Scham der Häresie seines Vaters hinter sich zu lassen."
     },
     "active_setting_name": "Savage Pathfinder",
     "char_gen_completed": false,
@@ -37,27 +38,27 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 10,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -68,7 +69,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -107,7 +108,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +134,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,7 +147,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -172,8 +173,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -186,7 +187,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -277,7 +278,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -341,8 +342,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -354,8 +355,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -380,8 +381,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 10,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -442,79 +443,96 @@
     },
     "selected_elements": {
         "voelker": {
-            "Zwerg": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Angewohnheit_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Dünnhäutig_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Misstrauisch_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Rüstungsbeschränkung_mittelschwer": {
+            "Alt": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Schwur_leicht": {
+            "Behindernde Rüstung_jede": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Beschämt_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
-            "Waldläufer": {
+            "AH (Magier)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Zauberbücher": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Erzfeind": {
+            "Arkane Verbindung": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Bevorzugtes Gelände": {
+            "Schule": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Wildnis durchqueren": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Naturbursche": {
+            "Alleskönner": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Arkanes entdecken/verbergen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5/1h"
+            },
+            "Geschoss": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver×2",
+                "dauer": "Sofort"
+            },
+            "Schutz": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver 5",
+                "dauer": "5"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Handaxt": {
+            "Dolch": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Armbrust": {
+            "Kampfstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Handarmbrust": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -524,12 +542,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Ledertunika": {
+            "Zauberkomponentenbeutel": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Lederbeinlinge": {
+            "Zauberbuch, Magier (leer)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -539,12 +557,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Kletterausrüstung": {
+            "Pergament": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Verstrickungsbeutel": {
+            "Tintenstift (Schreibfeder)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Tinte (Fläschchen)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -552,20 +575,22 @@
         }
     },
     "selected_handicaps": [
-        "Angewohnheit_leicht",
-        "Dünnhäutig_leicht",
-        "Misstrauisch_leicht",
-        "Rüstungsbeschränkung_mittelschwer",
-        "Schwur_leicht"
+        "Alt",
+        "Behindernde Rüstung_jede",
+        "Beschämt_schwer"
     ],
     "selected_talente": [
-        "Waldläufer",
-        "Erzfeind",
-        "Bevorzugtes Gelände",
-        "Wildnis durchqueren",
-        "Naturbursche"
+        "AH (Magier)",
+        "Zauberbücher",
+        "Arkane Verbindung",
+        "Schule",
+        "Alleskönner"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Arkanes entdecken/verbergen",
+        "Geschoss",
+        "Schutz"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -574,8 +599,8 @@
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
-        "Mensch": false,
-        "Zwerg": true,
+        "Mensch": true,
+        "Zwerg": false,
         "Ifrits": false,
         "Oreads": false,
         "Sylphen": false,
@@ -589,48 +614,50 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Handaxt",
-        "Schwere Armbrust",
+        "Dolch",
+        "Kampfstab",
+        "Handarmbrust",
         "Bolzen (10)",
-        "Ledertunika",
-        "Lederbeinlinge",
+        "Zauberkomponentenbeutel",
+        "Zauberbuch, Magier (leer)",
         "Abenteurerausrüstung",
-        "Kletterausrüstung",
-        "Verstrickungsbeutel"
+        "Pergament",
+        "Tintenstift (Schreibfeder)",
+        "Tinte (Fläschchen)"
     ],
     "selected_waffen": [
-        "Handaxt",
-        "Schwere Armbrust"
+        "Dolch",
+        "Kampfstab",
+        "Handarmbrust"
     ],
-    "selected_ruestungen": [
-        "Ledertunika",
-        "Lederbeinlinge"
-    ],
+    "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Handaxt": 2,
-        "Schwere Armbrust": 1,
+        "Dolch": 1,
+        "Kampfstab": 1,
+        "Handarmbrust": 1,
         "Bolzen (10)": 2,
-        "Ledertunika": 1,
-        "Lederbeinlinge": 1,
+        "Zauberkomponentenbeutel": 1,
+        "Zauberbuch, Magier (leer)": 1,
         "Abenteurerausrüstung": 1,
-        "Kletterausrüstung": 1,
-        "Verstrickungsbeutel": 1
+        "Pergament": 1,
+        "Tintenstift (Schreibfeder)": 1,
+        "Tinte (Fläschchen)": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "maximale_fertigkeitssteigerungen": 17,
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "anzahl_maechte": 3,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 16,
+    "vermoegen": 201.70000000000002,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -640,36 +667,15 @@
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Verstand",
                 "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Verstand",
-                "wert": 6,
+                "wert": 10,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -677,13 +683,125 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heilen",
+                "name": "Zaubern",
                 "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 10,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Geisteswissenschaften",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Geisteswissenschaften",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Geisteswissenschaften",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Allgemeinwissen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Allgemeinwissen",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -696,59 +814,10 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Überreden",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
@@ -758,10 +827,18 @@
                 "kosten": 1
             },
             {
-                "typ": "talent",
-                "name": "Naturbursche",
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
                 "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             }
         ]
     }

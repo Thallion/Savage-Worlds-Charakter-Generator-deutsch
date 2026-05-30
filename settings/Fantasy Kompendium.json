@@ -4850,6 +4850,15 @@
             "aktiv": true,
             "custom": false
         },
+        "Außenseiter_schwer": {
+            "name": "Außenseiter",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter passt nicht in die örtliche Umgebung und zieht –2 von Überredenproben ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Zerbrechlich": {
             "name": "Zerbrechlich",
             "stufe": "schwer",
@@ -4954,6 +4963,15 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Der Charakter ist körperlich unattraktiv und zieht –1 von Überredenproben ab.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Hässlich_schwer": {
+            "name": "Hässlich",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter ist körperlich unattraktiv und zieht –2 von Überredenproben ab.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false

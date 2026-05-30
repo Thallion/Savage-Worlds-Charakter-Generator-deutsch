@@ -1,10 +1,11 @@
 {
     "profil_daten": {
-        "Name": "Harsk",
+        "Name": "Lini",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "Waldläufer",
-        "Sprachen": "Gemeinsprache, Goblinisch, Sylvanisch, Zwergisch"
+        "Konzept": "Ikonische Druidin",
+        "Sprachen": "Druidisch, Elfisch, Gemeinsprache, Gnomisch, Sylvanisch",
+        "Hintergrund": "Lini hat ein Gespür für wilde Kreaturen, besonders Raubkatzen. Die Gnomin zieht die Gesellschaft ihres Schneeleoparden Droogami anderen Humanoiden vor. Sie ist neugierig und eigentümlich und sammelt Zweige aus den Wäldern, die sie besucht."
     },
     "active_setting_name": "Savage Pathfinder",
     "char_gen_completed": false,
@@ -37,7 +38,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
@@ -52,12 +53,12 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -68,7 +69,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -81,7 +82,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -94,7 +95,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,8 +147,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -172,7 +173,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -186,7 +187,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -251,7 +252,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -263,8 +264,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -442,84 +443,146 @@
     },
     "selected_elements": {
         "voelker": {
-            "Zwerg": {
+            "Gnom": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Angewohnheit_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Dünnhäutig_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Misstrauisch_leicht": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Rüstungsbeschränkung_mittelschwer": {
+            "Behindernde Rüstung_leicht": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Schwur_leicht": {
+            "Langsam_leicht": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Neugierig": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Schwur_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Tick": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Zwei linke Hände": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Größe -1 (Reduzierte Robustheit)": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Zwanghaft": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Waldläufer": {
+            "AH (Druide)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Bindung mit der Natur": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Erzfeind": {
+            "Naturgespür": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Bevorzugtes Gelände": {
+            "Gnomenmagie": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
-                "machtpunkte": 0
+                "machtpunkte": 1
             },
-            "Wildnis durchqueren": {
+            "Neue Mächte": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "neue_maechte": 0,
+                "neue_maechte": 2,
                 "machtpunkte": 0
             },
-            "Naturbursche": {
+            "Tiermeister": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Elementarmanipulation": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver 5",
+                "dauer": "5"
+            },
+            "Schutz": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver 5",
+                "dauer": "5"
+            },
+            "Schutz vor Naturgewalten": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver",
+                "dauer": "1 Stunde"
+            },
+            "Tierfreund": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver 10m",
+                "dauer": "5"
+            },
+            "Verstricken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Handaxt": {
+            "Sichel": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Armbrust": {
+            "Schleuder": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Bolzen (10)": {
+            "Schleudersteine (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Reisekleidung": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -539,12 +602,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Kletterausrüstung": {
+            "Donnerstein": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Verstrickungsbeutel": {
+            "Zauberkomponentenbeutel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rauchstab": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -552,30 +620,40 @@
         }
     },
     "selected_handicaps": [
-        "Angewohnheit_leicht",
-        "Dünnhäutig_leicht",
-        "Misstrauisch_leicht",
-        "Rüstungsbeschränkung_mittelschwer",
-        "Schwur_leicht"
+        "Behindernde Rüstung_leicht",
+        "Langsam_leicht",
+        "Neugierig",
+        "Schwur_schwer",
+        "Tick",
+        "Zwei linke Hände",
+        "Größe -1 (Reduzierte Robustheit)",
+        "Zwanghaft"
     ],
     "selected_talente": [
-        "Waldläufer",
-        "Erzfeind",
-        "Bevorzugtes Gelände",
-        "Wildnis durchqueren",
-        "Naturbursche"
+        "AH (Druide)",
+        "Bindung mit der Natur",
+        "Naturgespür",
+        "Gnomenmagie",
+        "Neue Mächte",
+        "Tiermeister"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Elementarmanipulation",
+        "Schutz",
+        "Schutz vor Naturgewalten",
+        "Tierfreund",
+        "Verstricken"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
         "Elf": false,
-        "Gnom": false,
+        "Gnom": true,
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
         "Mensch": false,
-        "Zwerg": true,
+        "Zwerg": false,
         "Ifrits": false,
         "Oreads": false,
         "Sylphen": false,
@@ -589,18 +667,20 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Handaxt",
-        "Schwere Armbrust",
-        "Bolzen (10)",
+        "Sichel",
+        "Schleuder",
+        "Schleudersteine (20)",
+        "Reisekleidung",
         "Ledertunika",
         "Lederbeinlinge",
         "Abenteurerausrüstung",
-        "Kletterausrüstung",
-        "Verstrickungsbeutel"
+        "Donnerstein",
+        "Zauberkomponentenbeutel",
+        "Rauchstab"
     ],
     "selected_waffen": [
-        "Handaxt",
-        "Schwere Armbrust"
+        "Sichel",
+        "Schleuder"
     ],
     "selected_ruestungen": [
         "Ledertunika",
@@ -608,29 +688,31 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Handaxt": 2,
-        "Schwere Armbrust": 1,
-        "Bolzen (10)": 2,
+        "Sichel": 1,
+        "Schleuder": 1,
+        "Schleudersteine (20)": 1,
+        "Reisekleidung": 1,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
         "Abenteurerausrüstung": 1,
-        "Kletterausrüstung": 1,
-        "Verstrickungsbeutel": 1
+        "Donnerstein": 1,
+        "Zauberkomponentenbeutel": 1,
+        "Rauchstab": 5
     },
     "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 1,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "anzahl_maechte": 5,
+    "machtpunkte": 11,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 16,
+    "vermoegen": 68,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -640,22 +722,22 @@
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Willenskraft",
                 "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
+                "name": "Geschicklichkeit",
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -674,11 +756,67 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Willenskraft",
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
                 "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Allgemeinwissen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
@@ -689,77 +827,20 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Reiten",
                 "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Naturbursche",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Tiermeister",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             }
