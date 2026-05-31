@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -147,7 +147,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -490,6 +490,24 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Ermittler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Geschichtenerzähler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Mumm": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -513,7 +531,10 @@
         "Neugierig (schwer)"
     ],
     "selected_talente": [
-        "Aufmerksamkeit"
+        "Aufmerksamkeit",
+        "Ermittler",
+        "Geschichtenerzähler",
+        "Mumm"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -536,8 +557,10 @@
         "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -674,9 +697,42 @@
             },
             {
                 "typ": "talent",
-                "name": "Aufmerksamkeit",
+                "name": "Ermittler",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Geschichtenerzähler",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Mumm",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

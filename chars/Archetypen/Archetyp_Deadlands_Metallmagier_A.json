@@ -328,7 +328,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -458,7 +458,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -485,6 +485,12 @@
             }
         },
         "talente": {
+            "Kühler Kopf": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "AH (Verrückte Wissenschaft)": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -493,12 +499,19 @@
             }
         },
         "maechte": {
-            "Flächenschlag": {
+            "Ausfall": {
                 "ausgewaehlt": true,
-                "rang": "F",
-                "machtpunkte": 3,
-                "reichweite": "VER×2",
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Verstand",
                 "dauer": "Sofort"
+            },
+            "Schmuckstücke": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "Verstand",
+                "dauer": "5"
             }
         },
         "superkraefte": {},
@@ -521,10 +534,12 @@
         "Arrogant (schwer)"
     ],
     "selected_talente": [
+        "Kühler Kopf",
         "AH (Verrückte Wissenschaft)"
     ],
     "selected_maechte": [
-        "Flächenschlag"
+        "Ausfall",
+        "Schmuckstücke"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -545,10 +560,12 @@
         "Derringer (.41)": 1,
         "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 3.0,
     "aufstiege_gesamt": 4,
-    "verfuegbare_maechte": 1,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "verfuegbare_maechte": 0,
     "anzahl_maechte": 2,
     "machtpunkte": 15,
     "machtstufe": "III",
@@ -563,6 +580,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Verrückte Wissenschaft)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -690,10 +713,18 @@
                 "kosten": 1
             },
             {
-                "typ": "talent",
-                "name": "AH (Verrückte Wissenschaft)",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "typ": "fertigkeit",
+                "name": "Reparieren",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Verrückte Wissenschaft",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

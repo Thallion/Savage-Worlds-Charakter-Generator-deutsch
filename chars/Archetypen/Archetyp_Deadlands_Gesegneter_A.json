@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -495,9 +495,63 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "AH (Gesegneter)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 15
+            },
+            "Ermutigen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "Sofort/5"
+            },
+            "Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "B",
+                "dauer": "Sofort"
+            },
+            "Heiliges Symbol": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "Selbst",
+                "dauer": "5"
+            },
+            "Linderung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER",
+                "dauer": "Sofort"
+            },
+            "Waffe verbessern": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
@@ -524,9 +578,18 @@
         "Pazifist (leicht)"
     ],
     "selected_talente": [
-        "Auserwählter"
+        "Auserwählter",
+        "AH (Gesegneter)",
+        "Ermutigen",
+        "Neue Mächte"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Eigenschaft erhöhen/senken",
+        "Heilung",
+        "Heiliges Symbol",
+        "Linderung",
+        "Waffe verbessern"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -550,11 +613,13 @@
         "Munition Pistole (groß) .40-.50 (50 Stück)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "anzahl_maechte": 5,
+    "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -567,6 +632,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Gesegneter)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -695,9 +766,43 @@
             },
             {
                 "typ": "talent",
-                "name": "Auserwählter",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "name": "Ermutigen",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

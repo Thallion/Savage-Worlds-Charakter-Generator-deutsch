@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -490,6 +490,30 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Gassenwissen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Geschichtenerzähler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Konter": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Mutig": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -513,7 +537,11 @@
         "Neugierig (schwer)"
     ],
     "selected_talente": [
-        "Attraktiv"
+        "Attraktiv",
+        "Gassenwissen",
+        "Geschichtenerzähler",
+        "Konter",
+        "Mutig"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -535,9 +563,11 @@
         "Derringer (.41)": 1,
         "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -681,9 +711,34 @@
             },
             {
                 "typ": "talent",
-                "name": "Attraktiv",
+                "name": "Gassenwissen",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Geschichtenerzähler",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Konter",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Mutig",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

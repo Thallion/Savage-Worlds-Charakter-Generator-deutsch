@@ -21,7 +21,7 @@
   "pdf_paper_size": "A4",
   "auto_backup_enabled": true,
   "max_backups": 5,
-  "last_setting": "Fantasy Kompendium",
+  "last_setting": "Deadlands",
   "force_mobile_layout": false,
   "tablet_layout": false,
   "desktop_scale_factor": "auto",
@@ -44,5 +44,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-05-31T11:00:00.764667"
+  "last_updated": "2026-05-31T14:52:32.856347"
 }

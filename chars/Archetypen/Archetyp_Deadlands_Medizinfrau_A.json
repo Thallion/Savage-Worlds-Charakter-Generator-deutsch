@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -490,11 +490,29 @@
             }
         },
         "talente": {
+            "Mutig": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "AH (Schamane)": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 2,
                 "machtpunkte": 15
+            },
+            "Geschichtenerzähler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Fetisch": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -505,11 +523,11 @@
                 "reichweite": "VER 5",
                 "dauer": "—"
             },
-            "Linderung": {
+            "Heilung": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER",
+                "machtpunkte": 3,
+                "reichweite": "B",
                 "dauer": "Sofort"
             }
         },
@@ -529,11 +547,14 @@
         "Arm (leicht)"
     ],
     "selected_talente": [
-        "AH (Schamane)"
+        "Mutig",
+        "AH (Schamane)",
+        "Geschichtenerzähler",
+        "Fetisch"
     ],
     "selected_maechte": [
         "Abwehren",
-        "Linderung"
+        "Heilung"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -552,9 +573,11 @@
     "ausruestung_mengen": {
         "Messer": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 2,
     "machtpunkte": 15,
@@ -570,6 +593,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Schamane)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -691,9 +720,29 @@
             },
             {
                 "typ": "talent",
-                "name": "AH (Schamane)",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "name": "Geschichtenerzähler",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Fetisch",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

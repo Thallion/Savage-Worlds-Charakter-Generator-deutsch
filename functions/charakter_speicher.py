@@ -106,6 +106,8 @@ def to_dict(charakter):
         # === CHARAKTER-STATUS ===
         'verbleibende_aufstiege': charakter.verbleibende_aufstiege,
         'aufstiege_gesamt': charakter.aufstiege_gesamt,
+        'verbleibende_attributsteigerungen': getattr(charakter, 'verbleibende_attributsteigerungen', None),
+        'verbleibende_fertigkeitssteigerungen': getattr(charakter, 'verbleibende_fertigkeitssteigerungen', None),
         'verfuegbare_maechte': charakter.verfuegbare_maechte,
         'anzahl_maechte': charakter.anzahl_maechte,
         'machtpunkte': charakter.machtpunkte,

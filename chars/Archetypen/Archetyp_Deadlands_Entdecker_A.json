@@ -484,7 +484,38 @@
                 "punkte": 2
             }
         },
-        "talente": {},
+        "talente": {
+            "Kundschafter": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Elan": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Naturbursche": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Starker Wille": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Verlässlich": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
@@ -510,7 +541,13 @@
         "Alt (schwer)",
         "Neugierig (schwer)"
     ],
-    "selected_talente": [],
+    "selected_talente": [
+        "Kundschafter",
+        "Elan",
+        "Naturbursche",
+        "Starker Wille",
+        "Verlässlich"
+    ],
     "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -537,6 +574,8 @@
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -718,6 +757,30 @@
                 "name": "Wahrnehmung",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Elan",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Naturbursche",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Starker Wille",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Verlässlich",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

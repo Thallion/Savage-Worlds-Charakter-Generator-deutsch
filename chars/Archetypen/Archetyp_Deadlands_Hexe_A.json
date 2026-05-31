@@ -432,7 +432,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -490,11 +490,29 @@
             }
         },
         "talente": {
+            "Vertrauter": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "AH (Hexe)": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 3,
                 "machtpunkte": 10
+            },
+            "Wichita-Hexe": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Machtpunkte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 5
             }
         },
         "maechte": {
@@ -505,12 +523,19 @@
                 "reichweite": "Willenskraft",
                 "dauer": "Bis zum nächsten Sonnenaufgang/Sonnenuntergang"
             },
-            "Flächenschlag": {
+            "Empathie": {
                 "ausgewaehlt": true,
-                "rang": "F",
-                "machtpunkte": 3,
-                "reichweite": "VER×2",
-                "dauer": "Sofort"
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Verwirrung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER",
+                "dauer": "S"
             }
         },
         "superkraefte": {},
@@ -539,11 +564,15 @@
         "Schwur (schwer)"
     ],
     "selected_talente": [
-        "AH (Hexe)"
+        "Vertrauter",
+        "AH (Hexe)",
+        "Wichita-Hexe",
+        "Machtpunkte"
     ],
     "selected_maechte": [
         "Betoeren",
-        "Flächenschlag"
+        "Empathie",
+        "Verwirrung"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -568,12 +597,14 @@
         "Messer": 1,
         "Peitsche": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
-    "verfuegbare_maechte": 1,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
-    "machtpunkte": 10,
+    "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -586,6 +617,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Hexe)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -714,9 +751,29 @@
             },
             {
                 "typ": "talent",
-                "name": "AH (Hexe)",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "name": "Wichita-Hexe",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Machtpunkte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

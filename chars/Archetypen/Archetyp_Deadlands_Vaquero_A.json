@@ -489,7 +489,32 @@
                 "punkte": 1
             }
         },
-        "talente": {},
+        "talente": {
+            "Im Sattel geboren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Hahnwedeln": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Lieblingswaffe": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Ruhige Hände": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
@@ -521,7 +546,12 @@
         "Heldenhaft (schwer)",
         "Loyal (leicht)"
     ],
-    "selected_talente": [],
+    "selected_talente": [
+        "Im Sattel geboren",
+        "Hahnwedeln",
+        "Lieblingswaffe",
+        "Ruhige Hände"
+    ],
     "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -549,9 +579,11 @@
         "Messer": 1,
         "Lasso": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -698,6 +730,24 @@
                 "name": "Sprache",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Hahnwedeln",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Lieblingswaffe",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Ruhige Hände",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

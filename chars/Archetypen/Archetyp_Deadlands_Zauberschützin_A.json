@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Willenskraft": {
@@ -432,7 +432,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -484,8 +484,49 @@
                 "punkte": 2
             }
         },
-        "talente": {},
-        "maechte": {},
+        "talente": {
+            "Berechnend": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "AH (Taschenspieler)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Runenschießen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 1,
+                "machtpunkte": 0
+            }
+        },
+        "maechte": {
+            "Abstumpfen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Willenskraft",
+                "dauer": "5"
+            },
+            "Abwehren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "Sofort/5"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
@@ -515,8 +556,16 @@
         "Arrogant (schwer)",
         "Neugierig (schwer)"
     ],
-    "selected_talente": [],
-    "selected_maechte": [],
+    "selected_talente": [
+        "Berechnend",
+        "AH (Taschenspieler)",
+        "Runenschießen"
+    ],
+    "selected_maechte": [
+        "Abstumpfen",
+        "Abwehren",
+        "Eigenschaft erhöhen/senken"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -542,12 +591,14 @@
         "Messer": 1,
         "Munition Gewehr (klein) .38-44 (50 Stück)": 2
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 2.0,
     "aufstiege_gesamt": 4,
-    "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "verfuegbare_maechte": 1,
+    "anzahl_maechte": 4,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -560,6 +611,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Taschenspieler)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -598,13 +655,6 @@
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
@@ -692,6 +742,26 @@
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Runenschießen",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

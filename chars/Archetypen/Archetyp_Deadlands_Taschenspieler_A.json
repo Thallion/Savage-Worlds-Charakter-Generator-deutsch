@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Willenskraft": {
@@ -432,8 +432,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -489,8 +489,49 @@
                 "punkte": 1
             }
         },
-        "talente": {},
-        "maechte": {},
+        "talente": {
+            "Falsch Spielen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "AH (Taschenspieler)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Zocker": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
+        "maechte": {
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "Sofort/5"
+            },
+            "Schmuckstücke": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "Verstand",
+                "dauer": "5"
+            },
+            "Strahl": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Kegel",
+                "dauer": "Sofort"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
@@ -521,8 +562,16 @@
         "Nachtängste (schwer)",
         "Tick (leicht)"
     ],
-    "selected_talente": [],
-    "selected_maechte": [],
+    "selected_talente": [
+        "Falsch Spielen",
+        "AH (Taschenspieler)",
+        "Zocker"
+    ],
+    "selected_maechte": [
+        "Eigenschaft erhöhen/senken",
+        "Schmuckstücke",
+        "Strahl"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -547,12 +596,14 @@
         "Munition Pistolen (klein) .22-.38 (50 Stück)": 1,
         "Spielkarten": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.5,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "anzahl_maechte": 3,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -565,6 +616,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Taschenspieler)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -603,13 +660,6 @@
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
@@ -697,6 +747,33 @@
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Zocker",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

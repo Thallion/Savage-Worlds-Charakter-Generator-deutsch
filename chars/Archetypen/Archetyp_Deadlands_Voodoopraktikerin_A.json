@@ -302,8 +302,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -485,20 +485,45 @@
             }
         },
         "talente": {
+            "Begünstigt": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "AH (Voodoopraktiker)": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 2,
                 "machtpunkte": 15
+            },
+            "Mutig": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Machtpunkte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 5
             }
         },
         "maechte": {
-            "Heilung": {
+            "Aspekt der Rada-Loa": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "machtpunkte": 3,
-                "reichweite": "B",
-                "dauer": "Sofort"
+                "machtpunkte": 5,
+                "reichweite": "Selbst",
+                "dauer": "Eine Stunde"
+            },
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "Sofort/5"
             }
         },
         "superkraefte": {},
@@ -516,10 +541,14 @@
         "Heldenhaft (schwer)"
     ],
     "selected_talente": [
-        "AH (Voodoopraktiker)"
+        "Begünstigt",
+        "AH (Voodoopraktiker)",
+        "Mutig",
+        "Machtpunkte"
     ],
     "selected_maechte": [
-        "Heilung"
+        "Aspekt der Rada-Loa",
+        "Eigenschaft erhöhen/senken"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -538,12 +567,14 @@
     "ausruestung_mengen": {
         "Messer": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
-    "verfuegbare_maechte": 1,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "verfuegbare_maechte": 0,
     "anzahl_maechte": 2,
-    "machtpunkte": 15,
+    "machtpunkte": 20,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -556,6 +587,12 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "AH (Voodoopraktiker)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -677,9 +714,29 @@
             },
             {
                 "typ": "talent",
-                "name": "AH (Voodoopraktiker)",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "name": "Mutig",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Machtpunkte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }
