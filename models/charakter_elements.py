@@ -59,18 +59,19 @@ class CharakterElements:
     def talent_auswaehlen(self, talent_name_key):
         return talent_funktionen.talent_auswaehlen(self, talent_name_key)
     
-    def waehle_talent(self, talent_name_key, ignore_rang_check=False):
+    def waehle_talent(self, talent_name_key, ignore_rang_check=False, ignore_voraussetzungen=False):
         """
         Wrapper für talent_funktionen.waehle_talent, mit Unterstützung für ignore_voraussetzungen.
-        
+
         Args:
             talent_name_key: Der Name des auszuwählenden Talents
             ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen
-            
+            ignore_voraussetzungen: Flag, um die Voraussetzungen-Prüfung zu überspringen
+
         Returns:
             str oder bool: Wie in talent_funktionen.waehle_talent
         """
-        return talent_funktionen.waehle_talent(self, talent_name_key, ignore_rang_check)
+        return talent_funktionen.waehle_talent(self, talent_name_key, ignore_rang_check, ignore_voraussetzungen)
     
     def entferne_talent(self, talent_name_key):
         return talent_funktionen.entferne_talent(self, talent_name_key)

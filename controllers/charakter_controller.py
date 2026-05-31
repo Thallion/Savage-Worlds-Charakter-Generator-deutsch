@@ -509,10 +509,11 @@ class CharakterController(EventDispatcher):
             if ignore_voraussetzungen:
                 self.charakter.ignore_voraussetzungen = True
                 Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
-                
+
             # Parameter weitergeben
-            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
-            
+            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check,
+                                                  ignore_voraussetzungen=ignore_voraussetzungen)
+
             if result is True:
                 self.dispatch('on_charakter_updated')
                 
@@ -1055,8 +1056,9 @@ class CharakterController(EventDispatcher):
                 Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
                 
             # Parameter weitergeben
-            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check)
-            
+            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check,
+                                                  ignore_voraussetzungen=ignore_voraussetzungen)
+
             # Pathfinder-spezifische Behandlung
             if result == "pathfinder_kostenlos_angeboten":
                 Logger.info(f"Pathfinder-Talent '{talent_name}' kann kostenlos gewählt werden")

@@ -112,16 +112,17 @@ class TalentManager:
     # Hauptmethoden
     #-----------------------------------------------
     
-    def waehle_talent(self, talent_name_key, ignore_rang_check=False):
+    def waehle_talent(self, talent_name_key, ignore_rang_check=False, ignore_voraussetzungen=False):
         """
         Wählt ein Talent aus und verrechnet die Kosten entweder mit Handicap-Punkten oder Aufstiegen.
         ERWEITERT: Unterstützt kostenlose Pathfinder-Talente während der Charaktererstellung.
         Wenn das Talent bereits ausgewählt ist, wird eine neue Instanz mit Suffix erstellt.
-        
+
         Args:
             talent_name_key: Der Name des auszuwählenden Talents
             ignore_rang_check: Flag, um die Rang-Prüfung zu überspringen (für UI-Bestätigung)
-            
+            ignore_voraussetzungen: Flag, um die Voraussetzungen-Prüfung zu überspringen
+
         Returns:
             str oder bool: "needs_rang_confirmation" wenn der Rang zu niedrig ist,
                            "needs_voraussetzungen_confirmation" wenn Voraussetzungen nicht erfüllt sind,
@@ -129,6 +130,8 @@ class TalentManager:
                            "pathfinder_kostenlos_angeboten" wenn kostenloses Pathfinder-Talent möglich ist,
                            True bei Erfolg, False bei Misserfolg
         """
+        if ignore_voraussetzungen:
+            self.charakter.ignore_voraussetzungen = True
         # Prüfen, ob das Talent existiert
         if talent_name_key not in self.charakter.talente:
             Logger.error(f"Talent '{talent_name_key}' existiert nicht.")
@@ -1441,9 +1444,9 @@ def load_custom_talents(charakter):
 # Kompatibilitätsfunktionen für alten Code
 #-----------------------------------------------
 
-def waehle_talent(charakter, talent_name_key, ignore_rang_check=False):
+def waehle_talent(charakter, talent_name_key, ignore_rang_check=False, ignore_voraussetzungen=False):
     """Kompatibilitätsfunktion - verwendet TalentManager"""
-    return get_talent_manager(charakter).waehle_talent(talent_name_key, ignore_rang_check)
+    return get_talent_manager(charakter).waehle_talent(talent_name_key, ignore_rang_check, ignore_voraussetzungen)
 
 def waehle_freies_talent(charakter, talent_name_key, ignore_voraussetzungen=False):
     """Kompatibilitätsfunktion - verwendet TalentManager"""

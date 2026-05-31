@@ -180,7 +180,8 @@
       "Bash(pdftotext -layout \"/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/Texte/SciFi Kompendium Archetypen.pdf\" \"/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/Texte/SciFi Kompendium Archetypen.txt\")",
       "Bash(SDL_VIDEODRIVER=dummy timeout 300 python3 logs/build_scifi_batch1.py)",
       "Bash(SDL_VIDEODRIVER=dummy timeout 300 python3 logs/build_scifi_batch2.py)",
-      "Bash(echo \"EXIT:$?\")"
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(pdftotext -layout \"Texte/US85040PDF_Deadlands_Archetypen-Set_meta.pdf\" /tmp/deadlands_raw.txt)"
     ],
     "deny": []
   }

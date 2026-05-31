@@ -100,11 +100,10 @@ def to_dict(charakter):
             if getattr(item, 'menge', 0)
         },
 
+# === RANG ===
+        'rang': getattr(charakter, 'rang', 'Neuling'),
+
         # === CHARAKTER-STATUS ===
-        'verbleibende_attributsteigerungen': charakter.verbleibende_attributsteigerungen,
-        'verbleibende_fertigkeitssteigerungen': charakter.verbleibende_fertigkeitssteigerungen,
-        'maximale_attributsteigerungen': charakter.maximale_attributsteigerungen,
-        'maximale_fertigkeitssteigerungen': charakter.maximale_fertigkeitssteigerungen,
         'verbleibende_aufstiege': charakter.verbleibende_aufstiege,
         'aufstiege_gesamt': charakter.aufstiege_gesamt,
         'verfuegbare_maechte': charakter.verfuegbare_maechte,
