@@ -175,7 +175,12 @@
       "Bash(pdfinfo \"Superkräfte Archetypen.pdf\")",
       "Bash(pdftotext -layout -f 1 -l 2 \"Superkräfte Archetypen.pdf\" -)",
       "Bash(pdftotext -f 22 -l 23 \"Superkräfte Archetypen.pdf\" -)",
-      "Bash(pdftotext -f 22 -l 22 \"Superkräfte Archetypen.pdf\" -)"
+      "Bash(pdftotext -f 22 -l 22 \"Superkräfte Archetypen.pdf\" -)",
+      "Bash(PAGER=cat git --no-pager grep -n \"Resolver-Skript\" -- .claude/skills/archetyp-erstellen/SKILL.md)",
+      "Bash(pdftotext -layout \"/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/Texte/SciFi Kompendium Archetypen.pdf\" \"/home/jean/Dokumente/GitHub/Savage-Worlds-Charakter-Generator-deutsch/Texte/SciFi Kompendium Archetypen.txt\")",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 300 python3 logs/build_scifi_batch1.py)",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 300 python3 logs/build_scifi_batch2.py)",
+      "Bash(echo \"EXIT:$?\")"
     ],
     "deny": []
   }

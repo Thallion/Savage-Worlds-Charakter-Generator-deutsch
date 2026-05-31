@@ -2,6 +2,34 @@
     "name": "SciFi Kompendium",
     "description": "Science-Fiction-Kompendium für Savage Worlds Abenteuer-Edition (SWAE)",
     "voelker": {
+        "Mensch": {
+            "name": "Mensch",
+            "handicaps": [],
+            "talente": [],
+            "besonderheiten": [
+                "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
+            ],
+            "sprachen": [
+                "Gemeinsprache"
+            ],
+            "altersspanne": "Erwachsen mit 18, Alt mit 55, maximales Alter 70-110",
+            "groesse_maennlich": "1,60-1,95m, 60-100kg (Durchschnitt 1,77m, 80kg)",
+            "groesse_weiblich": "1,50-1,85m, 45-85kg (Durchschnitt 1,67m, 65kg)",
+            "aktiv": true,
+            "custom": false,
+            "effects": {
+                "attribute_bonuses": {},
+                "robustheit_bonus": 0,
+                "bewegungsweite_bonus": 0,
+                "fertigkeits_startboni": {},
+                "auto_talente": [],
+                "auto_handicaps": [],
+                "spezielle_effekte": {},
+                "wahlmoeglichkeiten": {
+                    "freies_talent": true
+                }
+            }
+        },
         "Amorphe": {
             "name": "Amorphe",
             "handicaps": [
@@ -2710,14 +2738,27 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Mystische Kräfte": {
-            "name": "Mystische Kräfte",
+        "Mystische Kräfte: Sternenkrieger": {
+            "name": "Mystische Kräfte: Sternenkrieger",
             "kategorie": "Macht",
             "rang": "F",
-            "voraussetzungen": [],
-            "beschreibung": "10 dedizierte Machtpunkte, Macht aktiviert automatisch (Erfolg ohne Probe). Steigerung: +2 MP. Pakete: Sternenkrieger (Kämpfen W8+) oder Telepath (Verstand W8+).",
-            "neue_maechte": 0,
+            "voraussetzungen": ["Kämpfen W8"],
+            "beschreibung": "10 dedizierte Machtpunkte, Macht aktiviert automatisch (Erfolg ohne Probe). Steigerung: +2 MP.",
+            "neue_maechte": 5,
             "machtpunkte": 10,
+            "auto_maechte": ["Abwehren", "Eigenschaft erhöhen/senken", "Schutz", "Telekinese", "Waffe verbessern"],
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Mystische Kräfte: Telepath": {
+            "name": "Mystische Kräfte: Telepath",
+            "kategorie": "Macht",
+            "rang": "F",
+            "voraussetzungen": ["Verstand W8"],
+            "beschreibung": "10 dedizierte Machtpunkte, Macht aktiviert automatisch (Erfolg ohne Probe). Steigerung: +2 MP.",
+            "neue_maechte": 5,
+            "machtpunkte": 10,
+            "auto_maechte": ["Betäuben", "Empathie", "Gedankenlesen", "Linderung", "Verwirrung"],
             "ausgewaehlt": false,
             "aktiv": true
         },
@@ -3750,6 +3791,15 @@
             "name": "Skrupellos",
             "stufe": "leicht",
             "punkte": 1,
+            "beschreibung": "Der Charakter tut, was nötig ist, um seinen Willen durchzusetzen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
+        "Skrupellos_schwer": {
+            "name": "Skrupellos",
+            "stufe": "schwer",
+            "punkte": 2,
             "beschreibung": "Der Charakter tut, was nötig ist, um seinen Willen durchzusetzen.",
             "ausgewaehlt": false,
             "aktiv": true,

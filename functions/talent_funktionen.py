@@ -457,6 +457,17 @@ class TalentManager:
             else:
                 Logger.warning(f"AH Auto-Talent '{auto_talent_name}' nicht im Charakter gefunden")
 
+        # Auto-Mächte anwenden (verfuegbare_maechte wurde zuvor durch neue_maechte erhöht)
+        from functions import macht_funktionen
+        for macht_name in talent.auto_maechte:
+            if macht_name in self.charakter.maechte:
+                macht = self.charakter.maechte[macht_name]
+                if not macht.ausgewaehlt:
+                    macht_funktionen.waehle_macht(self.charakter, macht_name, ignore_rang_check=True)
+                    Logger.info(f"AH Auto-Macht '{macht_name}' angewendet für '{talent_name_key}'")
+            else:
+                Logger.warning(f"AH Auto-Macht '{macht_name}' nicht im Charakter gefunden")
+
     def _remove_ah_auto_effects(self, talent_name_key):
         """
         Entfernt automatische Handicaps und Talente, wenn ein Arkaner Hintergrund abgewählt wird.
@@ -488,6 +499,14 @@ class TalentManager:
                     if auto_talent_name in self.charakter.selected_talente:
                         self.charakter.selected_talente.remove(auto_talent_name)
                     Logger.info(f"AH Auto-Talent '{auto_talent_name}' entfernt für '{talent_name_key}'")
+
+        # Auto-Mächte entfernen (adjust_verfuegbare_maechte=False, weil talent_abwaehlen_intern
+        # neue_maechte bereits von verfuegbare_maechte abzieht – kein doppelter Abzug)
+        from functions import macht_funktionen
+        for macht_name in talent.auto_maechte:
+            if macht_name in self.charakter.selected_maechte:
+                macht_funktionen.entferne_macht(self.charakter, macht_name, adjust_verfuegbare_maechte=False)
+                Logger.info(f"AH Auto-Macht '{macht_name}' entfernt für '{talent_name_key}'")
 
     # ------------------------------------------------------------------
     # Spezial-Effekte bestimmter Talente auf Fertigkeiten

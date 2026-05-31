@@ -1,13 +1,13 @@
 {
     "profil_daten": {
-        "Name": "Sajan",
+        "Name": "Mystic",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "Mönch",
-        "Sprachen": "Elfisch, Gemeinsprache, Goblinisch, Riesisch"
+        "Konzept": "",
+        "Sprachen": ""
     },
-    "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "active_setting_name": "SciFi Kompendium",
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
@@ -52,12 +52,12 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -81,151 +81,8 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Heimlichkeit": {
-            "fertigkeit_name": "Heimlichkeit",
-            "grundfertigkeit": true,
-            "ausgewaehlt": true,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 8,
-                "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Überreden": {
-            "fertigkeit_name": "Überreden",
-            "grundfertigkeit": true,
-            "ausgewaehlt": true,
-            "aktiv": true,
-            "wuerfel": {
                 "value": 4,
                 "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Willenskraft",
-            "custom": false
-        },
-        "Wahrnehmung": {
-            "fertigkeit_name": "Wahrnehmung",
-            "grundfertigkeit": true,
-            "ausgewaehlt": true,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 6,
-                "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Kämpfen": {
-            "fertigkeit_name": "Kämpfen",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 8,
-                "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Schießen": {
-            "fertigkeit_name": "Schießen",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Diebeskunst": {
-            "fertigkeit_name": "Diebeskunst",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Überleben": {
-            "fertigkeit_name": "Überleben",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Reiten": {
-            "fertigkeit_name": "Reiten",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Fahren": {
-            "fertigkeit_name": "Fahren",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Seefahrt": {
-            "fertigkeit_name": "Seefahrt",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Geschicklichkeit",
-            "custom": false
-        },
-        "Pilot": {
-            "fertigkeit_name": "Pilot",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -244,8 +101,73 @@
             "attribut": "Willenskraft",
             "custom": false
         },
+        "Diebeskunst": {
+            "fertigkeit_name": "Diebeskunst",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
         "Einschüchtern": {
             "fertigkeit_name": "Einschüchtern",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Elektronik": {
+            "fertigkeit_name": "Elektronik",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Fahren": {
+            "fertigkeit_name": "Fahren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Fokus": {
+            "fertigkeit_name": "Fokus",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 8,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Geisteswissenschaften": {
+            "fertigkeit_name": "Geisteswissenschaften",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -254,7 +176,7 @@
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Glaube": {
@@ -270,45 +192,6 @@
             "attribut": "Willenskraft",
             "custom": false
         },
-        "Heilen": {
-            "fertigkeit_name": "Heilen",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": 0,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Provozieren": {
-            "fertigkeit_name": "Provozieren",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Reparieren": {
-            "fertigkeit_name": "Reparieren",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
         "Glücksspiel": {
             "fertigkeit_name": "Glücksspiel",
             "grundfertigkeit": false,
@@ -322,34 +205,60 @@
             "attribut": "Verstand",
             "custom": false
         },
+        "Hacken": {
+            "fertigkeit_name": "Hacken",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Heilen": {
+            "fertigkeit_name": "Heilen",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Heimlichkeit": {
+            "fertigkeit_name": "Heimlichkeit",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Kämpfen": {
+            "fertigkeit_name": "Kämpfen",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
         "Kriegskunst": {
             "fertigkeit_name": "Kriegskunst",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Okkultismus": {
-            "fertigkeit_name": "Okkultismus",
-            "grundfertigkeit": false,
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "wuerfel": {
-                "value": 4,
-                "modifier": -2,
-                "typ": "fertigkeit"
-            },
-            "attribut": "Verstand",
-            "custom": false
-        },
-        "Geisteswissenschaften": {
-            "fertigkeit_name": "Geisteswissenschaften",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -374,8 +283,47 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Zaubern": {
-            "fertigkeit_name": "Zaubern",
+        "Okkultismus": {
+            "fertigkeit_name": "Okkultismus",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Pilot": {
+            "fertigkeit_name": "Pilot",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Provozieren": {
+            "fertigkeit_name": "Provozieren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Psionik": {
+            "fertigkeit_name": "Psionik",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -387,8 +335,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Zaubern (Zauberer)": {
-            "fertigkeit_name": "Zaubern (Zauberer)",
+        "Reparieren": {
+            "fertigkeit_name": "Reparieren",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -397,7 +345,59 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Schießen": {
+            "fertigkeit_name": "Schießen",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Seefahrt": {
+            "fertigkeit_name": "Seefahrt",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Überreden": {
+            "fertigkeit_name": "Überreden",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 8,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
             "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Überleben": {
+            "fertigkeit_name": "Überleben",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
             "custom": false
         },
         "Verrückte Wissenschaft": {
@@ -413,8 +413,21 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Alchemie": {
-            "fertigkeit_name": "Alchemie",
+        "Wahrnehmung": {
+            "fertigkeit_name": "Wahrnehmung",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Recherche": {
+            "fertigkeit_name": "Recherche",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -426,8 +439,8 @@
             "attribut": "Verstand",
             "custom": false
         },
-        "Fokus": {
-            "fertigkeit_name": "Fokus",
+        "Zaubern": {
+            "fertigkeit_name": "Zaubern",
             "grundfertigkeit": false,
             "ausgewaehlt": false,
             "aktiv": true,
@@ -436,102 +449,105 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         }
     },
     "selected_elements": {
         "voelker": {
-            "Mensch": {
+            "Floraner": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Heroisch": {
+            "Heldenhaft": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Loyal": {
+            "Langsam_leicht": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Rüstungsbeschränkung_jede": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
-            "Schwur_leicht": {
+            "Vorsichtig": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Mönch": {
+            "Zäh wie Leder": {
+                "ausgewaehlt": true,
+                "rang": "L",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "AH (Mystiker)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Elan": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Betäubende Fäuste": {
+            "Neue Mächte": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Beweglichkeit": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Kämpferische Disziplin": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Waffenloser Schlag": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Flink": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Lieblingswaffe": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
+                "neue_maechte": 2,
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "Sofort/5"
+            },
+            "Empathie": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Objekt auslesen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 2,
+                "reichweite": "B",
+                "dauer": "S"
+            },
+            "Linderung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER",
+                "dauer": "Sofort"
+            },
+            "Kriegersegen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 4,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kurzschwert": {
+            "Batterie, Universal-": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Shuriken": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Krähenfüße": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Alchemistenfeuer": {
+            "Taschencomputer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -539,107 +555,102 @@
         }
     },
     "selected_handicaps": [
-        "Heroisch",
-        "Loyal",
-        "Rüstungsbeschränkung_jede",
-        "Schwur_leicht"
+        "Heldenhaft",
+        "Langsam_leicht",
+        "Vorsichtig"
     ],
     "selected_talente": [
-        "Mönch",
-        "Betäubende Fäuste",
-        "Beweglichkeit",
-        "Kämpferische Disziplin",
-        "Waffenloser Schlag",
-        "Flink",
-        "Lieblingswaffe"
+        "Zäh wie Leder",
+        "AH (Mystiker)",
+        "Elan",
+        "Neue Mächte"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Eigenschaft erhöhen/senken",
+        "Empathie",
+        "Objekt auslesen",
+        "Linderung",
+        "Kriegersegen"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
-        "Elf": false,
-        "Gnom": false,
-        "Halbelf": false,
-        "Halbling": false,
-        "Halbork": false,
-        "Mensch": true,
-        "Zwerg": false,
-        "Ifrits": false,
-        "Oreads": false,
-        "Sylphen": false,
-        "Undinen": false,
-        "Weinranken-Leshy": false,
-        "Aasimars": false,
-        "Katzenfolk": false,
-        "Dhampire": false,
-        "Tieflinge": false,
-        "Goblin": false
+        "Mensch": false,
+        "Amorphe": false,
+        "Centaux": false,
+        "Draken": false,
+        "Elementare": false,
+        "Floraner": true,
+        "Gen-Schufter": false,
+        "Gen-Soldaten": false,
+        "Insektoide": false,
+        "Leerlinge": false,
+        "Orakel": false,
+        "Parasiten": false,
+        "Racker": false,
+        "Roboter": false,
+        "Synthetische Wesen": false,
+        "Vierarmige": false,
+        "Wechselbälger": false,
+        "Yetis": false
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kurzschwert",
-        "Shuriken",
-        "Krähenfüße",
-        "Alchemistenfeuer"
+        "Batterie, Universal-",
+        "Taschencomputer"
     ],
-    "selected_waffen": [
-        "Kurzschwert",
-        "Shuriken"
-    ],
+    "selected_waffen": [],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kurzschwert": 1,
-        "Shuriken": 6,
-        "Krähenfüße": 1,
-        "Alchemistenfeuer": 3
+        "Batterie, Universal-": 2,
+        "Taschencomputer": 1
     },
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "maximale_attributsteigerungen": 5,
     "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "verbleibende_aufstiege": 2,
+    "aufstiege_gesamt": 4,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "anzahl_maechte": 5,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 223,
+    "vermoegen": 150,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
-    "pathfinder_kostenlose_talente_gewaehlt": 1,
+    "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
+                "typ": "talent",
+                "name": "AH (Mystiker)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Geschicklichkeit",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -652,70 +663,63 @@
             },
             {
                 "typ": "attribut",
-                "name": "Willenskraft",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "fertigkeit",
-                "name": "Athletik",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Athletik",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Fokus",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Fokus",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Fokus",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
+                "name": "Provozieren",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
@@ -729,23 +733,43 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heilen",
+                "name": "Geisteswissenschaften",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Reiten",
+                "name": "Geisteswissenschaften",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Lieblingswaffe",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "name": "Elan",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

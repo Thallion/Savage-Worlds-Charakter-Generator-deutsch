@@ -15,8 +15,9 @@ class Talent(EventDispatcher):
     custom = BooleanProperty(False)  # Neue Eigenschaft
     auto_handicaps = ListProperty([])
     auto_talente = ListProperty([])
+    auto_maechte = ListProperty([])
 
-    def __init__(self, name, kategorie, rang, voraussetzungen, beschreibung='', neue_maechte=0, machtpunkte=0, custom=False, auto_handicaps=None, auto_talente=None, **kwargs):
+    def __init__(self, name, kategorie, rang, voraussetzungen, beschreibung='', neue_maechte=0, machtpunkte=0, custom=False, auto_handicaps=None, auto_talente=None, auto_maechte=None, **kwargs):
         super().__init__(**kwargs)
         self.name = name
         self.kategorie = kategorie
@@ -30,6 +31,7 @@ class Talent(EventDispatcher):
         self.custom = custom
         self.auto_handicaps = auto_handicaps or []
         self.auto_talente = auto_talente or []
+        self.auto_maechte = auto_maechte or []
         self.individuelle_beschreibung = None
 
     def __str__(self):
@@ -83,13 +85,14 @@ class Talent(EventDispatcher):
             name=self.name,
             kategorie=self.kategorie,
             rang=self.rang,
-            voraussetzungen=list(self.voraussetzungen),  # Kopie der Liste
+            voraussetzungen=list(self.voraussetzungen),
             beschreibung=self.beschreibung,
             neue_maechte=self.neue_maechte,
             machtpunkte=self.machtpunkte,
             custom=self.custom,
             auto_handicaps=list(self.auto_handicaps),
-            auto_talente=list(self.auto_talente)
+            auto_talente=list(self.auto_talente),
+            auto_maechte=list(self.auto_maechte)
         )
 
     def setze_beschreibung(self, beschreibung):
@@ -111,6 +114,8 @@ class Talent(EventDispatcher):
             result['auto_handicaps'] = list(self.auto_handicaps)
         if self.auto_talente:
             result['auto_talente'] = list(self.auto_talente)
+        if self.auto_maechte:
+            result['auto_maechte'] = list(self.auto_maechte)
         return result
     
     @classmethod
@@ -125,7 +130,8 @@ class Talent(EventDispatcher):
             machtpunkte=data.get('machtpunkte', 0),
             custom=data.get('custom', False),
             auto_handicaps=data.get('auto_handicaps', []),
-            auto_talente=data.get('auto_talente', [])
+            auto_talente=data.get('auto_talente', []),
+            auto_maechte=data.get('auto_maechte', [])
         )
         talent.ausgewaehlt = data.get('ausgewaehlt', False)
         talent.aktiv = data.get('aktiv', True)

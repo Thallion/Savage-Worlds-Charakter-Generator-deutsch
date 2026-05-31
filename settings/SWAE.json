@@ -2827,6 +2827,15 @@
             "aktiv": true,
             "custom": false
         },
+        "Skrupellos_schwer": {
+            "name": "Skrupellos",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter tut, was nötig ist, um seinen Willen durchzusetzen.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Stumm": {
             "name": "Stumm",
             "stufe": "schwer",
