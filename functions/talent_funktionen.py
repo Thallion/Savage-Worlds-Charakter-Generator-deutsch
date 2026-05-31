@@ -574,37 +574,83 @@ class TalentManager:
 
     def _apply_talent_attribut_wuerfel_effekt(self, talent_name_key):
         """
-        Erhöht den Würfeltyp eines Attributs um eine Stufe, wenn das Talent ausgewählt wird.
-        Z.B. Berserker: Stärke +1 Würfeltyp.
+        Erhöht den Würfeltyp eines Attributs um eine oder mehr Stufen, wenn das Talent ausgewählt wird.
+        Unterstützt zwei Quellen:
+        1. Statisches TALENT_ATTRIBUT_WUERFEL_EFFEKTE Dict (z.B. Berserker: Stärke)
+        2. JSON effekt.attribut_bonus aus dem Talent (z.B. Übernatürliches Attribut: +2 Stufen)
         """
-        attribut_name = self.TALENT_ATTRIBUT_WUERFEL_EFFEKTE.get(talent_name_key)
-        if not attribut_name:
-            return
+        bonus_angewendet = False
 
-        attribut = self.charakter.attribute.get(attribut_name)
-        if attribut and hasattr(attribut, 'wuerfel'):
-            attribut.wuerfel.increase()
-            Logger.info(
-                f"Talent '{talent_name_key}': {attribut_name} erhöht auf "
-                f"W{attribut.wert} (war vorher W{attribut.wuerfel.value - 2})"
-            )
+        attribut_name = self.TALENT_ATTRIBUT_WUERFEL_EFFEKTE.get(talent_name_key)
+        if attribut_name:
+            attribut = self.charakter.attribute.get(attribut_name)
+            if attribut and hasattr(attribut, 'wuerfel'):
+                attribut.wuerfel.increase()
+                bonus_angewendet = True
+                Logger.info(
+                    f"Talent '{talent_name_key}': {attribut_name} erhöht auf "
+                    f"W{attribut.wert} (war vorher W{attribut.wuerfel.value - 2})"
+                )
+
+        effekt_daten = self._get_talent_effekt_daten(talent_name_key)
+        if effekt_daten:
+            attribut_bonus = effekt_daten.get('attribut_bonus', {})
+            for attribut_name, bonus_stufen in attribut_bonus.items():
+                attribut = self.charakter.attribute.get(attribut_name)
+                if attribut and hasattr(attribut, 'wuerfel'):
+                    for _ in range(bonus_stufen):
+                        attribut.wuerfel.increase()
+                    bonus_angewendet = True
+                    Logger.info(
+                        f"Talent '{talent_name_key}': {attribut_name} um {bonus_stufen} Stufen erhöht auf "
+                        f"W{attribut.wert}"
+                    )
 
     def _remove_talent_attribut_wuerfel_effekt(self, talent_name_key):
         """
-        Verringert den Würfeltyp eines Attributs um eine Stufe, wenn das Talent abgewählt wird.
+        Verringert den Würfeltyp eines Attributs um eine oder mehr Stufen, wenn das Talent abgewählt wird.
+        Unterstützt dieselben Quellen wie _apply_talent_attribut_wuerfel_effekt.
         """
-        attribut_name = self.TALENT_ATTRIBUT_WUERFEL_EFFEKTE.get(talent_name_key)
-        if not attribut_name:
-            return
+        bonus_entfernt = False
 
-        attribut = self.charakter.attribute.get(attribut_name)
-        if attribut and hasattr(attribut, 'wuerfel'):
-            old_value = attribut.wuerfel.value
-            attribut.wuerfel.decrease()
-            Logger.info(
-                f"Talent '{talent_name_key}' abgewählt: {attribut_name} verringert auf "
-                f"W{attribut.wert} (war W{old_value})"
-            )
+        attribut_name = self.TALENT_ATTRIBUT_WUERFEL_EFFEKTE.get(talent_name_key)
+        if attribut_name:
+            attribut = self.charakter.attribute.get(attribut_name)
+            if attribut and hasattr(attribut, 'wuerfel'):
+                attribut.wuerfel.decrease()
+                bonus_entfernt = True
+                Logger.info(
+                    f"Talent '{talent_name_key}' abgewählt: {attribut_name} verringert auf "
+                    f"W{attribut.wert}"
+                )
+
+        effekt_daten = self._get_talent_effekt_daten(talent_name_key)
+        if effekt_daten:
+            attribut_bonus = effekt_daten.get('attribut_bonus', {})
+            for attribut_name, bonus_stufen in attribut_bonus.items():
+                attribut = self.charakter.attribute.get(attribut_name)
+                if attribut and hasattr(attribut, 'wuerfel'):
+                    for _ in range(bonus_stufen):
+                        attribut.wuerfel.decrease()
+                    bonus_entfernt = True
+                    Logger.info(
+                        f"Talent '{talent_name_key}' abgewählt: {attribut_name} um {bonus_stufen} Stufen gesenkt auf "
+                        f"W{attribut.wert}"
+                    )
+
+    def _get_talent_effekt_daten(self, talent_name_key):
+        """
+        Liest die effekt-Daten aus einem Talent.
+        """
+        talent = self.charakter.talente.get(talent_name_key)
+        if not talent:
+            return None
+        effekt = getattr(talent, 'effekt', None)
+        if effekt is None:
+            return None
+        if isinstance(effekt, dict):
+            return effekt
+        return None
 
     def pruefe_voraussetzungen(self, talent):
         """
