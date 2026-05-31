@@ -1,0 +1,635 @@
+{
+  "name": "Lem",
+  "setting": "Savage Pathfinder",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Lem, Savage Pathfinder)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 300
+    },
+    {
+      "aktion": "pathfinder_klassentalent(AH (Barde))",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Impulsiv)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Sanftmütig)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Tick)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Halbling)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Willenskraft)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Darbietung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Darbietung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Darbietung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Okkultismus)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Okkultismus)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Diebeskunst)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Geisteswissenschaften)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 3,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heimlichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 2,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Charismatisch)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Eigenschaft erhöhen/senken)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Empathie)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Verwirrung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 298,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schleuderx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 296,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schleudersteine (20)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 295,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 275,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 255,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 205,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Gegengift, Phiolex1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 155,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Musikinstrumentx1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 150,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Unterhalterpaketx1)",
+      "ok": true,
+      "kosten": 120,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 30,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Zündholzx5)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 25,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": false,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Barde_Lem_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": false,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    }
+  ],
+  "anomalien_anzahl": 1,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Kämpfen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Diebeskunst": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Darbietung": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Okkultismus": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Geisteswissenschaften": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Behindernde Rüstung_leicht",
+      "Impulsiv",
+      "Sanftmütig",
+      "Tick",
+      "Größe -1 (Reduzierte Robustheit)"
+    ],
+    "talente": [
+      "AH (Barde)",
+      "Scharfzüngig",
+      "Glück",
+      "Charismatisch"
+    ],
+    "maechte": [
+      "Eigenschaft erhöhen/senken",
+      "Empathie",
+      "Verwirrung"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 1,
+      "handicap": 0,
+      "handicap_gesamt": 4,
+      "aufstiege": 0
+    },
+    "machtpunkte": 10,
+    "vermoegen": 0,
+    "rang": "Anfänger",
+    "volk": "Halbling"
+  }
+}

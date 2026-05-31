@@ -1,0 +1,558 @@
+{
+  "name": "Mönch",
+  "setting": "Fantasy Kompendium",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Mönch, Fantasy Kompendium)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 500
+    },
+    {
+      "aktion": "handicap(Aufopferungsvoll_schwer)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Schwur_leicht)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Arm)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Rakashaner)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Konstitution)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Athletik)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Athletik)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heilen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 3,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 2,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heimlichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Schnell)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Konstitution)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Raufbold)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Kampfkünstler)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Block)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Meteorhammerx1)",
+      "ok": true,
+      "kosten": 12,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 238,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 236,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Tunikax1)",
+      "ok": true,
+      "kosten": 10,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 226,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Klerikerpaketx1)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 126,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: Heilungx1) FORCE",
+      "ok": false,
+      "kosten": 126,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Moench_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [
+    {
+      "aktion": "NOTIZ: Rakashaner-Racial: Blutrünstig, Nichtschwimmer, Volksfeind (Rattlinge), Nachtsicht auto. Kämpfen d10: Prüfe ob Kosten korrekt (eff d8 >= Agi d8 → doppelt für d10).",
+      "ok": true,
+      "warnung": "Rakashaner-Racial: Blutrünstig, Nichtschwimmer, Volksfeind (Rattlinge), Nachtsicht auto. Kämpfen d10: Prüfe ob Kosten korrekt (eff d8 >= Agi d8 → doppelt für d10).",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 250
+    },
+    {
+      "aktion": "kaufen(Trank: Heilungx1) FORCE",
+      "ok": false,
+      "kosten": 126,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: HINWEIS: Biss/Klauen = Rassenangriff Rakashaner (kein Kauf).",
+      "ok": true,
+      "warnung": "HINWEIS: Biss/Klauen = Rassenangriff Rakashaner (kein Kauf).",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    }
+  ],
+  "anomalien_anzahl": 3,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Kämpfen": {
+        "wert": 10,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Einschüchtern": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Heilen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Schwur_leicht",
+      "Aufopferungsvoll_schwer",
+      "Arm"
+    ],
+    "talente": [
+      "Nachtsicht",
+      "Schnell",
+      "Raufbold",
+      "Kampfkünstler",
+      "Block"
+    ],
+    "maechte": [],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 0,
+      "handicap": 0,
+      "handicap_gesamt": 4,
+      "aufstiege": 0
+    },
+    "machtpunkte": 0,
+    "vermoegen": 0,
+    "rang": "Fortgeschritten",
+    "volk": "Rakashaner"
+  }
+}

@@ -1,0 +1,691 @@
+{
+  "name": "Verrückte Wissenschaftlerin",
+  "setting": "Deadlands",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Verrückte Wissenschaftlerin, Deadlands)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 250
+    },
+    {
+      "aktion": "handicap(Beschämt (leicht))",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Schlechte Augen (leicht))",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Tick (leicht))",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Wahnvorstellungen (leicht))",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "volk(Mensch)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "volk_freies_talent(Mensch,Wahres Genie)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(AH (Verrückte Wissenschaft))",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Strahl)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Heilung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Illusion)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Wachsen/Schrumpfen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Geisteswissenschaften)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Geisteswissenschaften)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heilen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reparieren)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reparieren)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reparieren)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Naturwissenschaften)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 3,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Naturwissenschaften)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 2,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Naturwissenschaften)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Sprache)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Verrückte Wissenschaft) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Brillex1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 245,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Messerx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Machtpunkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Wachsen/Schrumpfen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Verrückte Wissenschaftlerin_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [
+    {
+      "aktion": "handicap(Wahnvorstellungen (leicht))",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Illusion)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Wachsen/Schrumpfen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Wachsen/Schrumpfen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "fertigkeiten: Wahrnehmung soll W6, ist W4; handicaps: \"Wahnvorstellungen (leicht)\" FEHLT; talente: \"Machtpunkte\" ZUVIEL; maechte: \"Illusion\" FEHLT; maechte: \"Wachsen/Schrumpfen\" FEHLT",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1,
+        "handicap_gesamt": 3,
+        "aufstiege": 1.5
+      },
+      "vermoegen": 243
+    }
+  ],
+  "anomalien_anzahl": 5,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 6,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heilen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Reparieren": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Geisteswissenschaften": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Naturwissenschaften": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Sprache": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Verrückte Wissenschaft": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Beschämt (leicht)",
+      "Schlechte Augen (leicht)",
+      "Tick (leicht)"
+    ],
+    "talente": [
+      "Wahres Genie",
+      "AH (Verrückte Wissenschaft)",
+      "Machtpunkte"
+    ],
+    "maechte": [
+      "Strahl",
+      "Heilung"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 0,
+      "handicap": 1,
+      "handicap_gesamt": 3,
+      "aufstiege": 1.5
+    },
+    "machtpunkte": 20,
+    "vermoegen": 243,
+    "rang": "Anfänger",
+    "volk": "Mensch"
+  }
+}

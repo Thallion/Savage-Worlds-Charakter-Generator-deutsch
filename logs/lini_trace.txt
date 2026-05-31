@@ -1,0 +1,42 @@
+1 AH(Druide): ok=True FP=12 MP=10 Mächte=3 Talente=['AH (Druide)', 'Bindung mit der Natur', 'Naturgespür'] HC=['Schwur_schwer', 'Behindernde Rüstung_leicht']
+2 Handicap Neugierig: ok=True FP=12 HP=2 gesamt=2
+2 Handicap Tick: ok=True FP=12 HP=3 gesamt=3
+2 Handicap Zwei linke Hände: ok=True FP=12 HP=4 gesamt=4
+3 Gnom: AP=5 FP=12 HP=4 HC=['Schwur_schwer', 'Behindernde Rüstung_leicht', 'Neugierig', 'Tick', 'Zwei linke Hände', 'Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft'] Talente=['AH (Druide)', 'Bindung mit der Natur', 'Gnomenmagie', 'Naturgespür']
+4 Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': True, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freie_fertigkeit': [{'index': 0, 'value': None}]}}}
+4 volk_freie_fertigkeit(Überleben): ok=True Überleben wert=4 mod=0
+5a Reguläre Attribute: AP=0 HP=4
+5b HP-Attribute: AP=0 HP=4 Attr={'Geschicklichkeit': 6, 'Konstitution': 6, 'Stärke': 6, 'Verstand': 6, 'Willenskraft': 8}
+6a Nach regulären Fertigkeiten: FP=0 HP=4
+6a Überleben=8 mod=0 Wahrnehmung=6 mod=0
+7 Talent Neue Mächte: ok=True HP=2
+7 Talent Tiermeister: ok=True HP=0
+Nach Talenten: HP=0
+6b HP-Fertigkeit Überleben: W8 mod=0 HP=0
+6b HP-Fertigkeit Wahrnehmung: W6 mod=0 HP=0
+8 Macht Elementarmanipulation: ok=True verfügbar=4
+8 Macht Schutz: ok=True verfügbar=3
+8 Macht Schutz vor Naturgewalten: ok=True verfügbar=2
+8 Macht Tierfreund: ok=True verfügbar=1
+8 Macht Verstricken: ok=True verfügbar=0
+9 Kauf Sichel x1: ok=True Geld=297
+9 Kauf Schleuder x1: ok=True Geld=295
+9 Kauf Schleudersteine (20) x1: ok=True Geld=294
+9 Kauf Reisekleidung x1: ok=True Geld=293
+9 Kauf Ledertunika x1: ok=True Geld=273
+9 Kauf Lederbeinlinge x1: ok=True Geld=253
+9 Kauf Abenteurerausrüstung x1: ok=True Geld=203
+9 Kauf Donnerstein x1: ok=True Geld=173
+9 Kauf Zauberkomponentenbeutel x1: ok=True Geld=168
+9 Kauf Rauchstab x5: ok=True Geld=68
+9 Kauf Trank: schwache Heilung x1: ok=False Geld=0
+=== ERGEBNIS ===
+  MP=11  Bennys=3  Parade=5  Robustheit=6  Bewegung=5
+  Talente: ['AH (Druide)', 'Bindung mit der Natur', 'Gnomenmagie', 'Naturgespür', 'Neue Mächte', 'Tiermeister']
+  Handicaps: ['Schwur_schwer', 'Behindernde Rüstung_leicht', 'Neugierig', 'Tick', 'Zwei linke Hände', 'Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft']
+  Mächte: ['Elementarmanipulation', 'Schutz', 'Schutz vor Naturgewalten', 'Tierfreund', 'Verstricken']
+  (Bogen: Parade5, Robustheit6(2), Bew5(W4), Bennys3, MP10)
+  Vermögen: 0 (Bogen: 39 GM)
+DIFF: []
+PUNKTE: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 11}
+FERTIG anomalien=1

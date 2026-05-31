@@ -1,0 +1,39 @@
+1 AH(Kleriker): ok=True FP=12 MP=10 Maechte=3 Talente=['AH (Kleriker)', 'Energie fokussieren', 'Gnade'] HC=['Schwur_schwer']
+2 Handicap Ehrenkodex: ok=True HP=2 gesamt=2
+2 Handicap Heroisch: ok=True HP=4 gesamt=4
+3 Mensch: AP=5 FP=12 HP=4 HC=['Schwur_schwer', 'Ehrenkodex', 'Heroisch'] Talente=['AH (Kleriker)', 'Energie fokussieren', 'Gnade']
+4 Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+4 volk_freies_attribut(Geschicklichkeit): ok=True GEK=6 AP=5
+4 volk_freies_talent(Heiler): ok=True Talente=['AH (Kleriker)', 'Energie fokussieren', 'Gnade', 'Heiler']
+5a Reguläre Attribute: AP=0 HP=4 Attr={'Geschicklichkeit': 6, 'Konstitution': 6, 'Stärke': 6, 'Verstand': 8, 'Willenskraft': 6}
+5b HP-Attribute: AP=0 HP=2 Attr={'Geschicklichkeit': 6, 'Konstitution': 6, 'Stärke': 6, 'Verstand': 8, 'Willenskraft': 8}
+6a Nach regulären Fertigkeiten: FP=0 HP=2
+6a Fertigkeiten: Glaube=8 Einschüchtern=6 Heilen=6 Kämpfen=6 Okkultismus=6 Reiten=4
+6b HP-Fertigkeit Überreden: W6 mod=0 HP=1
+6b HP-Fertigkeit Wahrnehmung: W6 mod=0 HP=0
+7 Talente nach Klasse+Volk: ['AH (Kleriker)', 'Energie fokussieren', 'Gnade', 'Heiler']
+8 Macht Heilung: ok=True verfügbar=2
+8 Macht Schutz: ok=True verfügbar=1
+8 Macht Waffe verbessern: ok=True verfügbar=0
+9 Kauf Krummschwert: ok=True Geld=225
+9 Kauf Schleuder: ok=True Geld=223
+9 Kauf Schleudersteine (20): ok=True Geld=222
+9 Kauf Ledertunika: ok=True Geld=202
+9 Kauf Lederbeinlinge: ok=True Geld=182
+9 Kauf Heilertasche: ok=True Geld=132
+9 Kauf Heiliges Symbol, Silber: ok=True Geld=107
+9 Kauf Heiliges Wasser: ok=True Geld=82
+9 Kauf Abenteurerausrüstung: ok=True Geld=32
+9 Helm=Lederkappe: ok=True Geld=22
+9 Klerikerpaket (statt Gewandung): ok=False Geld=0
+9 Endvermögen: 0 (Bogen: 29 GM)
+=== ERGEBNIS ===
+  MP=10  Bennys=3  Parade=5  Robustheit=7  Bewegung=6
+  Talente: ['AH (Kleriker)', 'Energie fokussieren', 'Gnade', 'Heiler']
+  Handicaps: ['Schwur_schwer', 'Ehrenkodex', 'Heroisch']
+  Mächte: ['Heilung', 'Schutz', 'Waffe verbessern']
+  (Bogen: Parade5, Robustheit7(2), Bew6, Bennys3, MP10)
+  Vermögen: 0 (Bogen: 29 GM)
+DIFF: []
+PUNKTE: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 10}
+FERTIG anomalien=1

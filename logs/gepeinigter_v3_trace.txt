@@ -1,0 +1,5 @@
+CharGen abgeschlossen: Rang=Anfänger, Aufstiege=4
+Handicaps done: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 4, 'vermoegen': 250, 'machtpunkte': 0}
+Auto-Eintraege: {'talente_neu': [], 'handicaps_neu': ['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'], 'maechte_neu': []}
+Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+Flicken via volk_freies_talent: selected=['Flicken']

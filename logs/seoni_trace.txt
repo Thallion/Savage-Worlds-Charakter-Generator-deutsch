@@ -1,0 +1,7 @@
+1 Klassentalent: True | MP=20 verf_maechte=2
+ERGEBNIS: MP=20 Mächte=['Geschoss', 'Abwehren', 'Arkanes entdecken/verbergen', 'Aufheben']
+  Bennys=4 Parade=4 Robustheit=5 Bewegung=6
+  (Bogen: MP20, 4 Mächte, Bennys4, Parade4(5 Stab), Robustheit5, Bew6)
+DIFF: []
+SPEICHERN: True
+punkte={'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0} anomalien=0

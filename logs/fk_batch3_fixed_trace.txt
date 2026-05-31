@@ -1,0 +1,64 @@
+=== 13. ALCHEMIST ===
+  Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Nach Berechnend: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  → 4 Aufstiege, Rang=Anfänger
+  D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 20}
+  DIFF: []
+  ALCHEMIST: anomalien=1
+
+=== 14. BOGENSCHÜTZE ===
+  Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Nach Schnell: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  → 4 Aufstiege, Rang=Anfänger
+  D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 500, 'machtpunkte': 0}
+  DIFF: []
+  Vermögen nach Kauf: 0
+  BOGENSCHÜTZE: anomalien=4
+
+=== 15. TIERMEISTER ===
+  Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Nach Tiermeister: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  → 4 Aufstiege, Rang=Anfänger
+  D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  DIFF: []
+  Vermögen nach Kauf: 0
+  TIERMEISTER: anomalien=3
+
+=== 16. ASSASSININ ===
+  Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Nach Assassine: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  → 4 Aufstiege, Rang=Anfänger
+  D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.5, 'vermoegen': 500, 'machtpunkte': 15}
+  DIFF: []
+  Vermögen nach Kauf: 402.5
+  ASSASSININ: anomalien=3
+
+=== 17. DRACHENKÄMPFER ===
+  Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Nach Mutig: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  → 4 Aufstiege, Rang=Anfänger
+  D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  DIFF: []
+  Vermögen nach Kauf: 0
+  DRACHENKÄMPFER: anomalien=8
+
+=== 18. CHAMPION ===
+  Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Nach AH(Kleriker): {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
+  → 4 Aufstiege, Rang=Anfänger
+  D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
+  DIFF: []
+  Vermögen nach Kauf: 0
+  CHAMPION: anomalien=7

@@ -1,0 +1,605 @@
+
+============================================================
+Agent
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Angetrieben (schwer)', 'Neugierig (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=['Agent']
+  DEBUG selected_talente VOR loop=['Mumm']
+  DEBUG processing talent='Agent', already_selected=False
+    DEBUG talent('Agent'): ok=True, kosten=2, kostenart=Handicap-Punkte
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Ermittler: ok=True
+    talent Mumm: bereits ausgewählt
+    talent Volles Rohr!: ok=True
+    fertigkeit Recherche auf 8
+    fertigkeit Kämpfen auf 8
+    fertigkeit Schießen auf 8
+    fertigkeit Überreden auf 6
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 236, 'machtpunkte': 0}
+  DIFF: []
+  → Agent anomalien=2
+
+============================================================
+Gesegneter
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Loyal (leicht)', 'Pazifist (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Gesegneter)']
+    AH 'AH (Gesegneter)': ok=True, machtpunkte=15, verf_maechte=3
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=3
+  Mächte gewählt: ['Eigenschaft erhöhen/senken', 'Heilung', 'Heiliges Symbol']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Auserwählter', 'AH (Gesegneter)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Auserwählter: bereits ausgewählt
+    talent Ermutigen: ok=True
+    talent Neue Mächte: ok=True
+    fertigkeit Einschüchtern auf 8
+    fertigkeit Überreden auf 8
+    fertigkeit Kämpfen auf 6
+    fertigkeit Schießen auf 6
+    fertigkeit Wahrnehmung auf 6
+    macht Linderung: ok=True
+    macht Waffe verbessern: ok=True
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 232, 'machtpunkte': 15}
+  DIFF: ['talente: "Neue Mächte" ZUVIEL']
+  → Gesegneter anomalien=3
+
+============================================================
+Chi-Meisterin
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Arm (leicht)', 'Außenseiter (leicht)', 'Ehrenkodex (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Chi-Meister)']
+    AH 'AH (Chi-Meister)': ok=True, machtpunkte=15, verf_maechte=3
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=3
+  Mächte gewählt: ['Abwehren', 'Eigenschaft erhöhen/senken', 'Waffe verbessern']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Ausweichen', 'AH (Chi-Meister)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Ausweichen: bereits ausgewählt
+    talent Finte: ok=True
+    talent Kampfkünstler: ok=True
+    fertigkeit Athletik auf 8
+    fertigkeit Heimlichkeit auf 8
+    fertigkeit Wahrnehmung auf 6
+    fertigkeit Sprache auf 4
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 123, 'machtpunkte': 15}
+  DIFF: ['fertigkeiten: Athletik soll W4, ist W8', 'fertigkeiten: Heimlichkeit soll W4, ist W8']
+  → Chi-Meisterin anomalien=1
+
+============================================================
+Entdecker
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Alt (schwer)', 'Neugierig (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 17, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Kundschafter']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Elan: ok=True
+    talent Kundschafter: bereits ausgewählt
+    talent Naturbursche: ok=True
+    talent Starker Wille: ok=True
+    talent Verlässlich: ok=True
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 236, 'machtpunkte': 0}
+  DIFF: []
+  → Entdecker anomalien=0
+
+============================================================
+Revolverheldin
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Grimmiger Diener des Todes (schwer)', 'Übermütig (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Galgenhumor']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Beidhändig: ok=True
+    talent Beidhändiger Fernkampf: ok=True
+    talent Duellant: ok=True
+    talent Galgenhumor: bereits ausgewählt
+    talent Meisterschütze: ok=True
+    talent Ruhige Hände: ok=True
+    fertigkeit Provozieren auf 8
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 209, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Schießen soll W8, ist W6']
+  → Revolverheldin anomalien=1
+
+============================================================
+Gepeinigter
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Flicken']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Killerinstinkt: ok=True
+    talent Übernatürliches Attribut (Geschicklichkeit): ok=True
+    fertigkeit Schießen auf 8
+    fertigkeit Einschüchtern auf 8
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 214, 'machtpunkte': 0}
+  DIFF: ['attribute: Geschicklichkeit soll W8, ist W12', 'attribute: Konstitution soll W8, ist W4', 'talente: "Gepeinigt" FEHLT', 'talente: "Flicken" ZUVIEL']
+  → Gepeinigter anomalien=1
+
+============================================================
+Zauberschützin
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Arrogant (schwer)', 'Neugierig (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Taschenspieler)']
+    AH 'AH (Taschenspieler)': ok=True, machtpunkte=10, verf_maechte=3
+  Nach AH-Talenten: machtpunkte=10, verf_maechte=3
+  Mächte gewählt: ['Abstumpfen', 'Abwehren', 'Eigenschaft erhöhen/senken']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Berechnend', 'AH (Taschenspieler)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Berechnend: bereits ausgewählt
+    talent Runenschießen: ok=True
+    fertigkeit Schießen auf 8
+    fertigkeit Zaubern auf 8
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 2.0, 'vermoegen': 200, 'machtpunkte': 10}
+  DIFF: ['attribute: Konstitution soll W6, ist W4', 'maechte: "Eigenschaft erhöhen/sken" FEHLT', 'maechte: "Munitionszauber" FEHLT', 'maechte: "Schutz" FEHLT', 'maechte: "Verwirrung" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" ZUVIEL']
+  → Zauberschützin anomalien=4
+
+============================================================
+Taschenspieler
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Nachtängste (schwer)', 'Ärgermagnet (leicht)', 'Tick (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Taschenspieler)']
+    AH 'AH (Taschenspieler)': ok=True, machtpunkte=10, verf_maechte=3
+  Nach AH-Talenten: machtpunkte=10, verf_maechte=3
+  Mächte gewählt: ['Eigenschaft erhöhen/senken', 'Schmuckstücke', 'Strahl']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Falsch Spielen', 'AH (Taschenspieler)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Falsch Spielen: bereits ausgewählt
+    talent Zocker: ok=True
+    fertigkeit Glücksspiel auf 8
+    fertigkeit Zaubern auf 8
+    fertigkeit Überreden auf 6
+    fertigkeit Provozieren auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.5, 'vermoegen': 240.75, 'machtpunkte': 10}
+  DIFF: ['attribute: Konstitution soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'handicaps: "Nacachtängste (schwer)" FEHLT', 'handicaps: "Nachtängste (schwer)" ZUVIEL']
+  → Taschenspieler anomalien=1
+
+============================================================
+Verrückte Wissenschaftlerin
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Beschämt (leicht)', 'Schlechte Augen (leicht)', 'Tick (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Verrückte Wissenschaft)']
+    AH 'AH (Verrückte Wissenschaft)': ok=True, machtpunkte=15, verf_maechte=2
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=2
+  Mächte gewählt: ['Strahl', 'Heilung']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Wahres Genie', 'AH (Verrückte Wissenschaft)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Wahres Genie: bereits ausgewählt
+    talent Machtpunkte: ok=True
+    fertigkeit Reparieren auf 8
+    fertigkeit Naturwissenschaften auf 8
+    fertigkeit Heilen auf 4
+    fertigkeit Verrückte Wissenschaft auf 8
+    macht Heilung: bereits ausgewählt
+    macht Wachsen/Schrumpfen: ok=False
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 1.5, 'vermoegen': 243, 'machtpunkte': 20}
+  DIFF: ['fertigkeiten: Wahrnehmung soll W6, ist W4', 'handicaps: "Wahnvorstellungen (leicht)" FEHLT', 'talente: "Machtpunkte" ZUVIEL', 'maechte: "Illusion" FEHLT', 'maechte: "Wachsen/Schrumpfen" FEHLT']
+  → Verrückte Wissenschaftlerin anomalien=5
+
+============================================================
+Krieger
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Außenseiter (leicht)', 'Eid auf die alten Bräuche (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Mumm']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Beidhändiger Kampf: ok=True
+    talent Mach ihn nicht wütend!: ok=True
+    talent Mumm: bereits ausgewählt
+    talent Schneller Angriff: ok=True
+    fertigkeit Heimlichkeit auf 8
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 223, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: prache soll W4, ist FEHLT']
+  → Krieger anomalien=1
+
+============================================================
+Territorialer Ranger
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Angetrieben (schwer)', 'Fettleibig (leicht)', 'Stur (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=['Territorialer Ranger']
+  DEBUG selected_talente VOR loop=['Mutig']
+  DEBUG processing talent='Territorialer Ranger', already_selected=False
+    DEBUG talent('Territorialer Ranger'): ok=False, kosten=0, kostenart=None
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Doppelschuss: ok=True
+    talent Mumm: ok=True
+    talent Mutig: bereits ausgewählt
+    fertigkeit Kämpfen auf 8
+    fertigkeit Schießen auf 8
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 2, 'vermoegen': 0, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Überleben soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Territorialer Ranger" FEHLT']
+  → Territorialer Ranger anomalien=5
+
+============================================================
+Medizinfrau
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Talisman (schwer)', 'Arm (leicht)', 'Eid auf die alten Bräuche (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Schamane)']
+    AH 'AH (Schamane)': ok=True, machtpunkte=15, verf_maechte=2
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=2
+  Mächte gewählt: ['Abwehren', 'Heilung']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Mutig', 'AH (Schamane)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Geschichtenerzähler: ok=True
+    talent Mutig: bereits ausgewählt
+    talent Fetisch: ok=True
+    fertigkeit Heilen auf 6
+    fertigkeit Glaube auf 8
+    fertigkeit Überreden auf 8
+    macht Abwehren: bereits ausgewählt
+    macht Linderung: ok=False
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 1.0, 'vermoegen': 123, 'machtpunkte': 15}
+  DIFF: ['fertigkeiten: Überleben soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'maechte: "Linderung" FEHLT', 'maechte: "Verwirrung" FEHLT']
+  → Medizinfrau anomalien=4
+
+============================================================
+Cowgirl
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Übermütig (schwer)', 'Loyal (leicht)', 'Tick (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Tierempathie']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Tierempathie: bereits ausgewählt
+    talent Im Sattel geboren: ok=True
+    talent Schnell Ziehen: ok=False
+    fertigkeit Reiten auf 8
+    fertigkeit Schießen auf 8
+    attribut Konstitution auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 2.5, 'vermoegen': 204, 'machtpunkte': 0}
+  DIFF: ['attribute: Konstitution soll W8, ist W6', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Schnell Ziehen" FEHLT']
+  → Cowgirl anomalien=2
+
+============================================================
+Eingeborenen-Kundschafterin
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Fies (leicht)', 'Ärgermagnet (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Kundschafter']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Parkour: ok=True
+    talent Kundschafter: bereits ausgewählt
+    talent Naturbursche: ok=True
+    fertigkeit Überleben auf 8
+    fertigkeit Wahrnehmung auf 6
+    fertigkeit Reiten auf 6
+    fertigkeit Athletik auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0.0, 'vermoegen': 223, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Sprache soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W8, ist W6', 'handicaps: "Heldenhaft (schwer)" FEHLT']
+  → Eingeborenen-Kundschafterin anomalien=3
+
+============================================================
+Metallmagier
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Arrogant (schwer)', 'Nachtängste (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Verrückte Wissenschaft)']
+    AH 'AH (Verrückte Wissenschaft)': ok=True, machtpunkte=15, verf_maechte=2
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=2
+  Mächte gewählt: ['Ausfall', 'Schmuckstücke']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Kühler Kopf', 'AH (Verrückte Wissenschaft)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Metallmagier: ok=False
+    fertigkeit Reparieren auf 8
+    fertigkeit Verrückte Wissenschaft auf 8
+    fertigkeit Okkultismus auf 6
+    macht Chaos: ok=False
+    macht Flächenschlag: ok=False
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 3.0, 'vermoegen': 243, 'machtpunkte': 15}
+  DIFF: ['fertigkeiten: Reparieren soll W6, ist W8', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Metallmagier" FEHLT', 'talente: "Kühler Kopf" ZUVIEL', 'maechte: "Chaos" FEHLT', 'maechte: "Flächenschlag" FEHLT']
+  → Metallmagier anomalien=5
+
+============================================================
+Kopfgeldjäger
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Arrogant (schwer)', 'Skrupellos (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Gassenwissen']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Gassenwissen: bereits ausgewählt
+    talent Keine Gnade: ok=True
+    talent Ruhige Hände: ok=True
+    talent Volltreffer: ok=True
+    fertigkeit Schießen auf 8
+    fertigkeit Überleben auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.5, 'vermoegen': 187, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Bedrohlich" FEHLT']
+  → Kopfgeldjäger anomalien=1
+
+============================================================
+Salonschönheit
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Neugierig (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=['Attraktiv']
+  DEBUG selected_talente VOR loop=['Attraktiv']
+  DEBUG processing talent='Attraktiv', already_selected=True
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Gassenwissen: ok=True
+    talent Geschichtenerzähler: ok=True
+    talent Konter: ok=True
+    talent Mutig: ok=True
+    fertigkeit Darbietung auf 8
+    fertigkeit Überreden auf 8
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 243, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Wahrnehmung soll W6, ist W4']
+  → Salonschönheit anomalien=1
+
+============================================================
+Wundarzt
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Kränkelnd (schwer)', 'Tiefer Schlaf (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Galgenhumor']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Erniedrigen: ok=True
+    talent Galgenhumor: bereits ausgewählt
+    talent Heiler: ok=True
+    fertigkeit Provozieren auf 8
+    fertigkeit Heimlichkeit auf 8
+    fertigkeit Schießen auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 223, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: emeinwissen soll W6, ist FEHLT', 'fertigkeiten: Heimlichkeit soll W6, ist W8', 'fertigkeiten: Reiten soll W4, ist FEHLT', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
+  → Wundarzt anomalien=1
+
+============================================================
+Schamane
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Außenseiter (leicht)', 'Eid auf die alten Bräuche (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Schamane)']
+    AH 'AH (Schamane)': ok=True, machtpunkte=15, verf_maechte=2
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=2
+  Mächte gewählt: ['Eigenschaft erhöhen/senken', 'Schutz']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Die Gunst des Geistes', 'AH (Schamane)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Die Gunst des Geistes: bereits ausgewählt
+    talent Heiliger Krieger: ok=False
+    fertigkeit Glaube auf 8
+    fertigkeit Einschüchtern auf 8
+    fertigkeit Heilen auf 6
+    fertigkeit Reiten auf 6
+    macht Waffe verbessern: ok=False
+    macht Wildniswandler: ok=False
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 3.5, 'vermoegen': 245, 'machtpunkte': 15}
+  DIFF: ['fertigkeiten: Sprache soll W4, ist FEHLT', 'fertigkeiten: Überleben soll W4, ist FEHLT', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Heiliger Krieger" FEHLT', 'maechte: "Waffe verbessern" FEHLT', 'maechte: "Wildniswandler" FEHLT']
+  → Schamane anomalien=6
+
+============================================================
+US-Marshal
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Ehrenkodex (schwer)', 'Schwur (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=['US-Marshal']
+  DEBUG selected_talente VOR loop=['Eisenkiefer']
+  DEBUG processing talent='US-Marshal', already_selected=False
+    DEBUG talent('US-Marshal'): ok=False, kosten=0, kostenart=None
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Aufmerksamkeit: ok=True
+    talent Eisenkiefer: bereits ausgewählt
+    talent Kühler Kopf: ok=True
+    fertigkeit Schießen auf 8
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 2, 'vermoegen': 206, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Überreden soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "US-Marshal" FEHLT']
+  → US-Marshal anomalien=3
+
+============================================================
+Vaquero
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Loyal (leicht)', 'Verlogene Augen (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Im Sattel geboren']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Hahnwedeln: ok=True
+    talent Im Sattel geboren: bereits ausgewählt
+    talent Lieblingswaffe: ok=True
+    talent Ruhige Hände: ok=True
+    fertigkeit Kämpfen auf 8
+    fertigkeit Schießen auf 8
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1, 'vermoegen': 204, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Sprache soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
+  → Vaquero anomalien=1
+
+============================================================
+Voodoopraktikerin
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Talisman (schwer)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Voodoopraktiker)']
+    AH 'AH (Voodoopraktiker)': ok=True, machtpunkte=15, verf_maechte=2
+  Nach AH-Talenten: machtpunkte=15, verf_maechte=2
+  Mächte gewählt: ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Begünstigt', 'AH (Voodoopraktiker)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Begünstigt: bereits ausgewählt
+    talent Mutig: ok=True
+    talent Machtpunkte: ok=True
+    fertigkeit Heilen auf 6
+    fertigkeit Provozieren auf 6
+    macht Heilung: ok=False
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 1.0, 'vermoegen': 248, 'machtpunkte': 20}
+  DIFF: ['fertigkeiten: Okkultismus soll W6, ist W4', 'fertigkeiten: Provozieren soll W4, ist W6', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Machtpunkte" ZUVIEL', 'maechte: "Heilung" FEHLT', 'maechte: "Zorn der Petro-Loa" FEHLT']
+  → Voodoopraktikerin anomalien=4
+
+============================================================
+Hexe
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Schwur (schwer)', 'Beschämt (leicht)', 'Loyal (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): ['AH (Hexe)']
+    AH 'AH (Hexe)': ok=True, machtpunkte=10, verf_maechte=3
+  Nach AH-Talenten: machtpunkte=10, verf_maechte=3
+  Mächte gewählt: ['Betoeren', 'Empathie', 'Verwirrung']
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Vertrauter', 'AH (Hexe)']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Vertrauter: bereits ausgewählt
+    talent Wichita-Hexe: ok=True
+    talent Machtpunkte: ok=True
+    fertigkeit Okkultismus auf 8
+    fertigkeit Zaubern auf 8
+    macht Betoeren: bereits ausgewählt
+    macht Flächenschlag: ok=False
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.0, 'vermoegen': 225, 'machtpunkte': 15}
+  DIFF: ['talente: "Machtpunkte" ZUVIEL', 'maechte: "Betören" FEHLT', 'maechte: "Flächenschlag" FEHLT', 'maechte: "Kriegersegen" FEHLT', 'maechte: "Betoeren" ZUVIEL']
+  → Hexe anomalien=2
+
+============================================================
+Investigativer Journalist
+============================================================
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Neugierig (schwer)', 'Große Klappe (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Nach AH-Talenten: machtpunkte=0, verf_maechte=0
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  DEBUG nicht_ah_talente=[]
+  DEBUG selected_talente VOR loop=['Aufmerksamkeit']
+  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+    talent Aufmerksamkeit: bereits ausgewählt
+    talent Ermittler: ok=True
+    talent Geschichtenerzähler: ok=True
+    talent Mumm: ok=True
+    fertigkeit Überreden auf 8
+    fertigkeit Recherche auf 8
+    fertigkeit Schießen auf 4
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.0, 'vermoegen': 235, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Schießen soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'handicaps: "Stur  (schwer)" FEHLT']
+  → Investigativer Journalist anomalien=3
+
+=== FERTIG ===

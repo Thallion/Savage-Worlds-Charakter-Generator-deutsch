@@ -1,0 +1,47 @@
+1 AH(Barde): ok=True FP=12 MP=10 Maechte=3 Talente=['AH (Barde)', 'Scharfzüngig'] HC=['Behindernde Rüstung_leicht']
+2 Handicap Impulsiv: ok=True HP=2
+2 Handicap Sanftmütig: ok=True HP=3
+2 Handicap Tick: ok=True HP=4
+3 Halbling: AP=5 FP=12 HP=4 HC=['Behindernde Rüstung_leicht', 'Impulsiv', 'Sanftmütig', 'Tick', 'Größe -1 (Reduzierte Robustheit)'] Talente=['AH (Barde)', 'Glück', 'Scharfzüngig'] Pace=5
+3 Startattribute: {'Geschicklichkeit': 6, 'Konstitution': 4, 'Stärke': 4, 'Verstand': 4, 'Willenskraft': 4}
+3 Athletik=6 mod=0  Wahrnehmung=6 mod=0
+4 Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+5a Reguläre Attribute: AP=0 HP=4 Attr={'Geschicklichkeit': 8, 'Konstitution': 6, 'Stärke': 6, 'Verstand': 6, 'Willenskraft': 6}
+5b HP Willenskraft: WIL=6→8 HP=2
+6 Darbietung W8: kosten=3 FP=9
+6 Kämpfen W6: kosten=2 FP=7
+6 Okkultismus W6: kosten=2 FP=5
+6 Diebeskunst W4: kosten=1 FP=4
+6 Geisteswissenschaften W4: kosten=1 FP=3
+6 Heimlichkeit W6: kosten=1 FP=2
+6 Überreden W6: kosten=1 FP=1
+6 Allgemeinwissen W4: kosten=0 FP=1
+6 Athletik W6: kosten=0 FP=1
+6 Wahrnehmung W6: kosten=0 FP=1
+6 Nach Fertigkeiten: FP=1 HP=2
+7 Talent Charismatisch: ok=True HP=0 Talente=['AH (Barde)', 'Charismatisch', 'Glück', 'Scharfzüngig']
+8 Macht Eigenschaft erhöhen/senken: ok=True verfügbar=2
+8 Macht Empathie: ok=True verfügbar=1
+8 Macht Verwirrung: ok=True verfügbar=0
+9 Kauf Dolch: ok=True Geld=298
+9 Kauf Schleuder: ok=True Geld=296
+9 Kauf Schleudersteine (20): ok=True Geld=295
+9 Kauf Ledertunika: ok=True Geld=275
+9 Kauf Lederbeinlinge: ok=True Geld=255
+9 Kauf Abenteurerausrüstung: ok=True Geld=205
+9 Kauf Gegengift, Phiole: ok=True Geld=155
+9 Musikinstrument/Flöte (Musikinstrument): ok=True Geld=150
+9 Unterhalterkleidung→Unterhalterpaket: ok=True Geld=30
+9 Zündholz x5: ok=True Geld=25
+9 Trank schwache Heilung: ok=False Geld=0
+9 Endvermögen: 0 (Bogen: 18 GM)
+=== ERGEBNIS ===
+  MP=10  Bennys=5  Parade=5  Robustheit=6  Bewegung=5
+  Talente: ['AH (Barde)', 'Charismatisch', 'Glück', 'Scharfzüngig']
+  Handicaps: ['Behindernde Rüstung_leicht', 'Impulsiv', 'Sanftmütig', 'Tick', 'Größe -1 (Reduzierte Robustheit)']
+  Mächte: ['Eigenschaft erhöhen/senken', 'Empathie', 'Verwirrung']
+  (Bogen: Parade5, Robustheit6(2), Bew5(W4), Bennys4, MP10)
+  Vermögen: 0 (Bogen: 18 GM)
+DIFF: []
+PUNKTE: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 10}
+FERTIG anomalien=1

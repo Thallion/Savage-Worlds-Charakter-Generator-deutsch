@@ -1,0 +1,13 @@
+Profil: Sprachen='Elfisch, Gemeinsprache, Goblinisch, Riesisch' Konzept='Mönch'
+Vermögen vor Kauf: 300
+kaufen 1x Kurzschwert: ok=True = Tempelschwert (Stä+W6)
+kaufen 6x Shuriken: ok=True 
+kaufen 1x Krähenfüße: ok=True 
+kaufen 3x Alchemistenfeuer: ok=True 
+kaufen Abenteurerausrüstung: ok=True
+kaufen Trank: schwache Heilung: ok=False
+Vermögen nach Kauf: 0 (Bogen-Soll Restgeld: 21 GM)
+PARADE=7 BEWEGUNG=8 ROBUSTHEIT=7
+DIFF: []
+SPEICHERN: True
+FERTIG anomalien=3 punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}

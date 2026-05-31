@@ -1,0 +1,25 @@
+  Punktestand nach Volk+Handicaps: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Steigere Willenskraft für Gepeinigt-Voraussetzung...
+  Nach Willenskraft: {'attribut': 4, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Wähle Gepeinigt-Talent...
+  Gepeinigt: {'aktion': 'talent(Gepeinigt)', 'ok': True, 'kosten': 2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 4, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 250, 'warnung': None}
+  Talent Flicken: {'aktion': 'talent(Flicken)', 'ok': True, 'kosten': 2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 4, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 250, 'warnung': None}
+  Talent Killerinstinkt: {'aktion': 'talent(Killerinstinkt)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 4, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 250, 'warnung': None}
+  Talent Übernatürliches Attribut (Geschicklichkeit): {'aktion': 'talent(Übernatürliches Attribut (Geschicklichkeit))', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 4, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 250, 'warnung': 'Aktion lieferte False/None'}
+  Punktestand nach Talenten: {'attribut': 4, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Ausgewählte Talente: ['Gepeinigt', 'Flicken']
+  Attribut Geschicklichkeit: 6
+  Attribut Geschicklichkeit: 8
+  Attribut Verstand: 6
+  Attribut Verstand: 8
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 5, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Finale Attribute:
+    Geschicklichkeit: W8
+    Verstand: W8
+    Willenskraft: W6
+    Stärke: W4
+    Konstitution: W4
+  Finale Talente: ['Gepeinigt', 'Flicken']
+DIFF: {'abweichungen': ['attribute: Willenskraft soll W8, ist W6', 'attribute: Stärke soll W6, ist W4', 'fertigkeiten: Einschüchtern soll W8, ist W4', 'fertigkeiten: Schießen soll W8, ist W4', 'fertigkeiten: Kämpfen soll W6, ist W4', 'fertigkeiten: Reiten soll W6, ist W4', 'fertigkeiten: Provozieren soll W6, ist W4', 'fertigkeiten: Okkultismus soll W4, ist FEHLT', 'talente: "Killerinstinkt" FEHLT', 'talente: "Übernatürliches Attribut (Geschicklichkeit)" FEHLT', 'talente: "Gepeinigt" ZUVIEL'], 'restpunkte': {'attribut': 0, 'fertigkeit': 5, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}, 'vermoegen': 250}
+FERTIG anomalien=2

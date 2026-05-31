@@ -1,0 +1,20 @@
+1 Waldläufer: True
+2 hc gesamt=4
+3 Zwerg ok | Konstitution-Start=6 (Eiserne Konst.)
+5 attribute rest-attr=0 rest-hc=2
+6 rest-fert=0 rest-hc=2
+7 Naturbursche ok=True kostenart=Handicap-Punkte rest-hc=0
+   selected_talente=['Waldläufer', 'Erzfeind', 'Bevorzugtes Gelände', 'Wildnis durchqueren', 'Naturbursche']
+9 kaufen 2x Handaxt: True
+9 kaufen 1x Schwere Armbrust: True
+9 kaufen 2x Bolzen (10): True
+9 kaufen 1x Ledertunika: True
+9 kaufen 1x Lederbeinlinge: True
+9 kaufen 1x Abenteurerausrüstung: True
+9 kaufen 1x Kletterausrüstung: True
+9 kaufen 1x Verstrickungsbeutel: True
+ERGEBNIS Parade=5 Robustheit=8 Bewegung=5 Bennys=3 Vermögen=16
+  (Bogen: Parade5, Robustheit8(2), Bewegung5, Bennys3, 34GM)
+DIFF: []
+SPEICHERN: True
+punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0} anomalien=2

@@ -1,0 +1,473 @@
+[
+ {
+  "name": "Bogenschuetze",
+  "missing": [
+   "Edge: Dead Shot"
+  ],
+  "powers": [],
+  "edges_false": [
+   [
+    "Extraction",
+    "Rückzug"
+   ],
+   [
+    "Quick",
+    "Schnell"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Konstitution W4<W8",
+   "Einschüchtern W4<W6",
+   "Wahrnehmung W4<W8",
+   "Überreden W4<W6",
+   "Schießen W4<W12",
+   "Heimlichkeit W4<W8",
+   "Provozieren W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Kampfsinn",
+   "Zielwasser",
+   "Ausweichen",
+   "Fesseln",
+   "Fernkampfangriff",
+   "Betäuben",
+   "Superattribut",
+   "Superfertigkeit"
+  ],
+  "anomalien": 3
+ },
+ {
+  "name": "Panzer",
+  "missing": [],
+  "powers": [
+   [
+    "Superattribut",
+    20,
+    "ueber_obergrenze"
+   ]
+  ],
+  "edges_false": [
+   [
+    "Sweep",
+    "Rundumschlag"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W8<W12",
+   "Konstitution W4<W12",
+   "Fokus W4<W6",
+   "Einschüchtern W4<W8",
+   "Wahrnehmung W4<W6",
+   "Überleben W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "25/45",
+  "selected_superkraefte": [
+   "Panzerung",
+   "Springen",
+   "Nahkampfangriff"
+  ],
+  "anomalien": 2
+ },
+ {
+  "name": "Schuetze",
+  "missing": [
+   "Edge: Dead Shot",
+   "Edge: Rock and Roll"
+  ],
+  "powers": [],
+  "edges_false": [
+   [
+    "Extraction",
+    "Rückzug"
+   ],
+   [
+    "Hard to Kill",
+    "Schwer zu töten"
+   ],
+   [
+    "Quick",
+    "Schnell"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W4<W8",
+   "Konstitution W4<W8",
+   "Einschüchtern W4<W10",
+   "Wahrnehmung W4<W6",
+   "Schießen W4<W12",
+   "Heimlichkeit W4<W6",
+   "Diebeskunst W4<W8"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Kampfsinn",
+   "Zielwasser",
+   "Ausweichen",
+   "Parade",
+   "Superattribut",
+   "Supertalent",
+   "Superfertigkeit",
+   "Robustheit"
+  ],
+  "anomalien": 4
+ },
+ {
+  "name": "Eismann",
+  "missing": [],
+  "powers": [],
+  "edges_false": [
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W8<W12",
+   "Konstitution W4<W10",
+   "Fokus W10<W12",
+   "Heilen W4<W6",
+   "Einschüchtern W4<W6",
+   "Wahrnehmung W4<W6",
+   "Überreden W4<W6",
+   "Heimlichkeit W4<W8",
+   "Überleben W4<W8",
+   "Provozieren W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Umweltresistenz",
+   "Materiekontrolle",
+   "Fernkampfangriff",
+   "Superattribut",
+   "Superfertigkeit",
+   "Robustheit"
+  ],
+  "anomalien": 1
+ },
+ {
+  "name": "Feuervogel",
+  "missing": [],
+  "powers": [
+   [
+    "Fernkampfangriff",
+    20,
+    "ueber_obergrenze"
+   ]
+  ],
+  "edges_false": [
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W4<W6",
+   "Konstitution W4<W6",
+   "Fokus W8<W12",
+   "Einschüchtern W4<W8",
+   "Wahrnehmung W4<W6",
+   "Überreden W4<W6",
+   "Heimlichkeit W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "25/45",
+  "selected_superkraefte": [
+   "Ausweichen",
+   "Umweltresistenz",
+   "Fliegen",
+   "Superattribut",
+   "Superfertigkeit",
+   "Robustheit"
+  ],
+  "anomalien": 1
+ },
+ {
+  "name": "Hexe",
+  "missing": [],
+  "powers": [],
+  "edges_false": [
+   [
+    "Luck",
+    "Glück"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Konstitution W4<W6",
+   "Einschüchtern W4<W10",
+   "Wahrnehmung W4<W8",
+   "Okkultismus W4<W8",
+   "Überreden W4<W6",
+   "Heimlichkeit W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Panzerung",
+   "Eigenschaft erhöhen/senken",
+   "Nachahmen",
+   "Umweltresistenz",
+   "Heilung",
+   "Illusion",
+   "Fernkampfangriff"
+  ],
+  "anomalien": 2
+ },
+ {
+  "name": "Detektiv",
+  "missing": [
+   "Edge: Danger Sense"
+  ],
+  "powers": [],
+  "edges_false": [
+   [
+    "Alertness",
+    "Aufmerksamkeit"
+   ],
+   [
+    "Menacing",
+    "Bedrohlich"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W4<W10",
+   "Konstitution W4<W10",
+   "Kämpfen W6<W8",
+   "Hacken W4<W8",
+   "Einschüchtern W4<W10",
+   "Wahrnehmung W4<W10",
+   "Überreden W4<W6",
+   "Recherche W4<W8",
+   "Schießen W4<W8",
+   "Heimlichkeit W4<W8"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Kampfsinn",
+   "Zielwasser",
+   "Genie",
+   "Geschärfte Sinne",
+   "Nahkampfangriff",
+   "Gedankenschild",
+   "Parade",
+   "Superattribut",
+   "Superfertigkeit"
+  ],
+  "anomalien": 3
+ },
+ {
+  "name": "Schlaeger",
+  "missing": [
+   "Edge: Mighty Blow"
+  ],
+  "powers": [
+   [
+    "Superattribut",
+    20,
+    "ueber_obergrenze"
+   ]
+  ],
+  "edges_false": [
+   [
+    "Feint",
+    "Finte"
+   ],
+   [
+    "First Strike",
+    "Erstschlag"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W8<W12",
+   "Konstitution W4<W12",
+   "Einschüchtern W4<W6",
+   "Wahrnehmung W4<W6",
+   "Darbietung W4<W6",
+   "Heimlichkeit W4<W6",
+   "Provozieren W4<W8"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "25/45",
+  "selected_superkraefte": [
+   "Nahkampfangriff",
+   "Parade",
+   "Supertalent",
+   "Superfertigkeit"
+  ],
+  "anomalien": 3
+ },
+ {
+  "name": "Verteidiger",
+  "missing": [
+   "Edge: Command"
+  ],
+  "powers": [],
+  "edges_false": [
+   [
+    "Elan",
+    "Elan"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Konstitution W4<W8",
+   "Fokus W8<W10",
+   "Hacken W4<W10",
+   "Einschüchtern W4<W6",
+   "Wahrnehmung W4<W6",
+   "Überreden W4<W6",
+   "Naturwissenschaften W4<W8"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Panzerung",
+   "Ausweichen",
+   "Energiekontrolle",
+   "Heilung",
+   "Parade",
+   "Superattribut",
+   "Superfertigkeit"
+  ],
+  "anomalien": 2
+ },
+ {
+  "name": "Walkuere",
+  "missing": [
+   "Edge: Command"
+  ],
+  "powers": [],
+  "edges_false": [
+   [
+    "Elan",
+    "Elan"
+   ],
+   [
+    "Quick",
+    "Schnell"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Stärke W8<W12",
+   "Konstitution W4<W12",
+   "Einschüchtern W4<W10",
+   "Wahrnehmung W4<W6",
+   "Überreden W4<W6",
+   "Reiten W4<W8",
+   "Provozieren W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "45/45",
+  "selected_superkraefte": [
+   "Tiergefährte",
+   "Nahkampfangriff",
+   "Superattribut",
+   "Superfertigkeit",
+   "Robustheit"
+  ],
+  "anomalien": 3
+ },
+ {
+  "name": "Sprinter",
+  "missing": [],
+  "powers": [
+   [
+    "Geschwindigkeit",
+    16,
+    "ueber_obergrenze"
+   ]
+  ],
+  "edges_false": [
+   [
+    "First Strike",
+    "Erstschlag"
+   ],
+   [
+    "Quick",
+    "Schnell"
+   ],
+   [
+    "Super Powers",
+    "Superkräfte"
+   ]
+  ],
+  "hind_false": [],
+  "trait_shortfall": [
+   "Konstitution W4<W6",
+   "Überreden W4<W6",
+   "Recherche W4<W6",
+   "Naturwissenschaften W4<W8",
+   "Heimlichkeit W4<W8",
+   "Provozieren W4<W6"
+  ],
+  "errors": [],
+  "edges_auto_present": [],
+  "skp": "29/45",
+  "selected_superkraefte": [
+   "Ausweichen",
+   "Nahkampfangriff",
+   "Parade",
+   "Schieben",
+   "Fernkampfangriff",
+   "Superattribut",
+   "Superfertigkeit"
+  ],
+  "anomalien": 3
+ }
+]
