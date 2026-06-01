@@ -458,7 +458,7 @@
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -467,11 +467,11 @@
         "handicap": 1
       },
       "vermoegen": 123,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -480,7 +480,7 @@
         "handicap": 1
       },
       "vermoegen": 123,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "macht(Linderung)",
@@ -513,50 +513,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 123,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 123,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Neue Mächte\" ZUVIEL",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1,
-        "handicap_gesamt": 3,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 123
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -606,7 +564,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -618,7 +576,7 @@
         "ausgewaehlt": false
       },
       "Überleben": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false

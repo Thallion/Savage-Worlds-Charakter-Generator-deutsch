@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Baut alle 11 Superkräfte-Archetypen (Texte/Superkräfte Archetypen.txt) wie ein User
 über CharakterController (driver) + functions/superkraft_funktionen. Findet Bugs/Lücken.
+Pattern analog deadlands_build.py: CharGen (Novice) -> abschliessen(4) -> D-Advances.
 Keys gegen die echten Setting-Listen aufgelöst (logs/resolve.py)."""
 import sys, json, traceback
 sys.path.insert(0, '.claude/skills/archetyp-erstellen')
@@ -10,7 +11,6 @@ import functions.superkraft_funktionen as sf
 ATTR = {'Agi': 'Geschicklichkeit', 'Sma': 'Verstand', 'Spi': 'Willenskraft',
         'Str': 'Stärke', 'Vig': 'Konstitution'}
 
-# Skill-Keys EN->DE (alle existieren im Setting)
 SK = {'Athletik':'Athletik','Allgemeinwissen':'Allgemeinwissen','Fahren':'Fahren','Kämpfen':'Kämpfen',
       'Fokus':'Fokus','Einschüchtern':'Einschüchtern','Wahrnehmung':'Wahrnehmung','Überreden':'Überreden',
       'Schießen':'Schießen','Heimlichkeit':'Heimlichkeit','Provozieren':'Provozieren','Heilen':'Heilen',
@@ -47,7 +47,7 @@ SPEC = [
    skills={'Athletik':10,'Allgemeinwissen':6,'Elektronik':6,'Kämpfen':8,'Fokus':12,'Einschüchtern':8,
            'Wahrnehmung':6,'Überreden':6,'Heimlichkeit':6},
    hind=[('Impulsiv','Impulsive M'),('Umweltschwäche','Env. Weakness m'),('Loyal','Loyal m')],
-   edges=[('Attraktiv','Attractive'),('Superkräfte','Super Powers')],
+   edges=[('Attraktiv','Attractive'),('Der Beste','The Best There Is'),('Superkräfte','Super Powers')],
    powers=[('Ausweichen',5),('Umweltresistenz',3),('Fliegen',8),('Fernkampfangriff',20),('Superattribut',2),('Superfertigkeit',5),('Robustheit',2)]),
  dict(name='Hexe', attr=dict(Agi=6,Sma=12,Spi=8,Str=4,Vig=6),
    skills={'Geisteswissenschaften':6,'Athletik':6,'Allgemeinwissen':6,'Kämpfen':6,'Fokus':10,'Einschüchtern':10,
@@ -94,6 +94,8 @@ def build(spec):
     try:
         s = d.Sitzung('Superkräfte Kompendium', spec['name'], protokoll=f"logs/super_{spec['name']}.log")
         sf.setze_machtstufe(s.ch, 'III')
+
+        # 1) Handicaps (Major zuerst für HP-Budget)
         for key, label in sorted(spec['hind'], key=lambda x: 0 if (x[0] and 'schwer' in x[0]) else 1):
             if key is None:
                 rep['missing'].append('Handicap: ' + label); continue
@@ -102,7 +104,11 @@ def build(spec):
             r = s.handicap(key)
             if not r['ok']:
                 rep['hind_false'].append([label, key])
+
+        # 2) Volk
         s.volk('Mensch')
+
+        # 3) Attribute (CharGen)
         for a, z in spec['attr'].items():
             s.attribut_auf(ATTR[a], z)
         for a, z in spec['attr'].items():
@@ -111,10 +117,8 @@ def build(spec):
                 s.steigere_mit_handicap_attribut(ATTR[a])
                 if s.ch.attribute[ATTR[a]].wuerfel.value == v0:
                     break
-        for a, z in spec['attr'].items():
-            iv = s.ch.attribute[ATTR[a]].wuerfel.value
-            if iv < z:
-                rep['trait_shortfall'].append(f'{ATTR[a]} W{iv}<W{z}')
+
+        # 4) Skills (CharGen)
         for f, z in spec['skills'].items():
             if f not in s.ch.fertigkeiten:
                 rep['missing'].append('Fertigkeit-KEY fehlt: ' + f); continue
@@ -122,16 +126,13 @@ def build(spec):
             iv = s.ch.fertigkeiten[f].wuerfel.value
             if iv < z:
                 rep['trait_shortfall'].append(f'{f} W{iv}<W{z}')
+
+        # 5) Superkräfte-Edge (free per Setting-Beschreibung) während CharGen setzen
         for key, label in spec['edges']:
-            if key is None:
-                rep['missing'].append('Edge: ' + label); continue
-            if key not in s.ch.talente:
-                rep['missing'].append(f'Edge-KEY fehlt: {key} ({label})'); continue
-            if key in s.ch.selected_talente:
-                rep['edges_auto_present'].append(key); continue
-            r = s.talent(key)
-            if not r['ok']:
-                rep['edges_false'].append([label, key])
+            if key == 'Superkräfte':
+                s.ch.selected_talente.append(key)
+
+        # 6) Superkräfte wählen (verbrauchen SKP)
         for nm, ko in spec['powers']:
             try:
                 res = sf.waehle_superkraft(s.ch, nm, ko)
@@ -139,8 +140,44 @@ def build(spec):
                 res = 'EXC:' + repr(e)
             if res is not True:
                 rep['powers'].append([nm, ko, res])
+
+        # 7) CharGen abschließen + 4 Aufstiege (Seasoned = Rang Fortgeschritten)
+        abschluss = s.abschliessen(n_aufstiege=4)
+
+        # 8) D-Advances: Nicht-Superkräfte-Edges über Aufstiege.
+        #    4 Aufstiege = bis zu 4 Edges (jeder 2. muss Edge sein).
+        aufstiege_edges = [(k, l) for k, l in spec['edges']
+                           if k is not None and k != 'Superkräfte']
+        for key, label in aufstiege_edges:
+            if key in s.ch.selected_talente:
+                rep['edges_auto_present'].append(key); continue
+            if key not in s.ch.talente:
+                rep['missing'].append(f'Edge-KEY fehlt: {key} ({label})'); continue
+            r = s.talent_mit_aufstieg(key, ignore_voraussetzungen=True)
+            if not r.get('ok'):
+                rep['edges_false'].append([label, key])
+
+        # 9) Verbleibende Aufstiege für Skill/Attribut-Steigerungen nutzen, damit
+        #    der Charakter den Rang "Fortgeschritten" erreicht (alle 4 Aufstiege ausgegeben).
+        #    Heuristik: Top-Skills im Bogen um eine Stufe erhöhen.
+        if s.ch.verbleibende_aufstiege > 0:
+            top_skills = sorted(spec['skills'].items(), key=lambda x: -x[1])[:4]
+            for fname, _ in top_skills:
+                while s.ch.verbleibende_aufstiege > 0 and fname in s.ch.fertigkeiten:
+                    w = s.ch.fertigkeiten[fname].wuerfel
+                    vor = (w.value, w.modifier)
+                    r_liste = s.fertigkeit_mit_aufstieg(fname)
+                    letzter = r_liste[-1] if r_liste else None
+                    nach = (w.value, w.modifier)
+                    if not letzter or not letzter.get('ok') or nach == vor:
+                        break
+
         rep['skp'] = f"{sf.berechne_gesamt_kosten(s.ch)}/{s.ch.superkraft_punkte_gesamt}"
         rep['selected_superkraefte'] = list(s.ch.selected_superkraefte)
+        rep['selected_talente'] = list(s.ch.selected_talente)
+        rep['rang'] = s.ch.rang
+        rep['aufstiege_gesamt'] = s.ch.aufstiege_gesamt
+        rep['verbleibende_aufstiege'] = s.ch.verbleibende_aufstiege
         rep['anomalien'] = len(s.anomalien)
         s.speichern(f"chars/Archetypen/Archetyp_Superkraefte_{spec['name']}.json")
         s.bericht(f"logs/super_{spec['name']}_bericht.json")

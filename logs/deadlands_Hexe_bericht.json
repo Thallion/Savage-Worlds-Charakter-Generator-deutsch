@@ -132,32 +132,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Kriegersegen)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "macht(Verwirrung)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
@@ -548,28 +522,25 @@
       "warnung": null
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Hexe_A.json)",
-      "ok": true
-    }
-  ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Machtpunkte\" ZUVIEL; talente: \"Neue Mächte\" ZUVIEL; maechte: \"Kriegersegen\" ZUVIEL; maechte: \"Flächenschlag\" ZUVIEL",
+      "aktion": "macht(Verwirrung)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
+        "handicap": 0
       },
-      "vermoegen": 225
+      "vermoegen": 225,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Hexe_A.json)",
+      "ok": true
     }
   ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -676,9 +647,9 @@
     "maechte": [
       "Betoeren",
       "Empathie",
-      "Verwirrung",
       "Flächenschlag",
-      "Kriegersegen"
+      "Kriegersegen",
+      "Verwirrung"
     ],
     "ausruestung": {},
     "punkte": {

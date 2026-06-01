@@ -1,0 +1,16 @@
+Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'], 'maechte_neu': []}
+Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+Nach abschliessen: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 5, 'vermoegen': 214, 'machtpunkte': 0}, rang=Anfänger
+  talent Killerinstinkt: ok=True
+  talent Gepeinigt: ok=True
+  fertigkeit Wahrnehmung auf 6
+  fertigkeit Schießen auf 8
+  fertigkeit Einschüchtern auf 8
+  talent Flicken: ok=True
+  attribut Konstitution auf 4
+Endzustand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 214, 'machtpunkte': 0}
+Attribute: {'Geschicklichkeit': 8, 'Verstand': 8, 'Stärke': 6, 'Konstitution': 4, 'Willenskraft': 8}
+DIFF: ['attribute: Konstitution soll W8, ist W4', 'talente: "Übernatürliches Attribut (Geschicklichkeit)" FEHLT']
+Anomalien: 3

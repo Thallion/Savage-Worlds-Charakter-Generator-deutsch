@@ -197,19 +197,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Territorialer Ranger)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
@@ -489,28 +476,6 @@
   ],
   "anomalien": [
     {
-      "aktion": "talent(Territorialer Ranger)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Talent \"Territorialer Ranger\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
-      "ok": true,
-      "warnung": "Talent \"Territorialer Ranger\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 250
-    },
-    {
       "aktion": "kaufen(Gepanzerter Reitermantel (schwer)x1) FORCE",
       "ok": false,
       "kosten": 250,
@@ -537,7 +502,7 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Messer, Bowie zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

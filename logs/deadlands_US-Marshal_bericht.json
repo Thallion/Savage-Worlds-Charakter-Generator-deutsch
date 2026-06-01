@@ -171,19 +171,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent(US-Marshal)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "fertigkeit(Allgemeinwissen)",
       "ok": true,
       "kosten": 1,
@@ -418,50 +405,51 @@
       "warnung": null
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_US-Marshal_A.json)",
-      "ok": true
-    }
-  ],
-  "anomalien": [
-    {
-      "aktion": "talent(US-Marshal)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Talent \"US-Marshal\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "aktion": "talent_mit_aufstieg(US-Marshal)",
       "ok": true,
-      "warnung": "Talent \"US-Marshal\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 250
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überreden soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"US-Marshal\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 2
+        "handicap": 0
       },
-      "vermoegen": 206
+      "vermoegen": 206,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Überreden)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 206,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 206,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_US-Marshal_A.json)",
+      "ok": true
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -505,13 +493,13 @@
         "ausgewaehlt": true
       },
       "Überreden": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -548,7 +536,8 @@
     "talente": [
       "Eisenkiefer",
       "Aufmerksamkeit",
-      "Kühler Kopf"
+      "Kühler Kopf",
+      "US-Marshal"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -557,11 +546,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 2
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 206,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

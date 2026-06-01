@@ -1,27 +1,11 @@
 [
  {
   "name": "Bogenschuetze",
-  "missing": [
-   "Edge: Dead Shot"
-  ],
+  "missing": [],
   "powers": [],
-  "edges_false": [
-   [
-    "Extraction",
-    "Rückzug"
-   ],
-   [
-    "Quick",
-    "Schnell"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Konstitution W4<W8",
    "Einschüchtern W4<W6",
    "Wahrnehmung W4<W8",
    "Überreden W4<W6",
@@ -42,7 +26,16 @@
    "Superattribut",
    "Superfertigkeit"
   ],
-  "anomalien": 3
+  "selected_talente": [
+   "Superkräfte",
+   "Rückzug",
+   "Meisterschütze",
+   "Schnell"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 0
  },
  {
   "name": "Panzer",
@@ -54,20 +47,9 @@
     "ueber_obergrenze"
    ]
   ],
-  "edges_false": [
-   [
-    "Sweep",
-    "Rundumschlag"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W8<W12",
-   "Konstitution W4<W12",
    "Fokus W4<W6",
    "Einschüchtern W4<W8",
    "Wahrnehmung W4<W6",
@@ -81,37 +63,32 @@
    "Springen",
    "Nahkampfangriff"
   ],
-  "anomalien": 2
+  "selected_talente": [
+   "Superkräfte",
+   "Kräftig",
+   "Rundumschlag"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 1
  },
  {
   "name": "Schuetze",
-  "missing": [
-   "Edge: Dead Shot",
-   "Edge: Rock and Roll"
-  ],
+  "missing": [],
   "powers": [],
   "edges_false": [
    [
-    "Extraction",
-    "Rückzug"
-   ],
-   [
-    "Hard to Kill",
-    "Schwer zu töten"
+    "Level Headed",
+    "Kühler Kopf"
    ],
    [
     "Quick",
     "Schnell"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
    ]
   ],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W4<W8",
-   "Konstitution W4<W8",
    "Einschüchtern W4<W10",
    "Wahrnehmung W4<W6",
    "Schießen W4<W12",
@@ -131,22 +108,25 @@
    "Superfertigkeit",
    "Robustheit"
   ],
-  "anomalien": 4
+  "selected_talente": [
+   "Superkräfte",
+   "Doppelschuss",
+   "Rückzug",
+   "Schwer zu töten",
+   "Meisterschütze"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0,
+  "anomalien": 2
  },
  {
   "name": "Eismann",
   "missing": [],
   "powers": [],
-  "edges_false": [
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W8<W12",
-   "Konstitution W4<W10",
    "Fokus W10<W12",
    "Heilen W4<W6",
    "Einschüchtern W4<W6",
@@ -167,7 +147,14 @@
    "Superfertigkeit",
    "Robustheit"
   ],
-  "anomalien": 1
+  "selected_talente": [
+   "Superkräfte",
+   "Eisenkiefer"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 2
  },
  {
   "name": "Feuervogel",
@@ -179,16 +166,9 @@
     "ueber_obergrenze"
    ]
   ],
-  "edges_false": [
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W4<W6",
-   "Konstitution W4<W6",
    "Fokus W8<W12",
    "Einschüchtern W4<W8",
    "Wahrnehmung W4<W6",
@@ -206,25 +186,23 @@
    "Superfertigkeit",
    "Robustheit"
   ],
-  "anomalien": 1
+  "selected_talente": [
+   "Superkräfte",
+   "Attraktiv",
+   "Der Beste"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 0
  },
  {
   "name": "Hexe",
   "missing": [],
   "powers": [],
-  "edges_false": [
-   [
-    "Luck",
-    "Glück"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Konstitution W4<W6",
    "Einschüchtern W4<W10",
    "Wahrnehmung W4<W8",
    "Okkultismus W4<W8",
@@ -243,32 +221,22 @@
    "Illusion",
    "Fernkampfangriff"
   ],
-  "anomalien": 2
+  "selected_talente": [
+   "Superkräfte",
+   "Glück"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 1
  },
  {
   "name": "Detektiv",
-  "missing": [
-   "Edge: Danger Sense"
-  ],
+  "missing": [],
   "powers": [],
-  "edges_false": [
-   [
-    "Alertness",
-    "Aufmerksamkeit"
-   ],
-   [
-    "Menacing",
-    "Bedrohlich"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W4<W10",
-   "Konstitution W4<W10",
    "Kämpfen W6<W8",
    "Hacken W4<W8",
    "Einschüchtern W4<W10",
@@ -292,13 +260,19 @@
    "Superattribut",
    "Superfertigkeit"
   ],
-  "anomalien": 3
+  "selected_talente": [
+   "Superkräfte",
+   "Aufmerksamkeit",
+   "Bedrohlich"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 1
  },
  {
   "name": "Schlaeger",
-  "missing": [
-   "Edge: Mighty Blow"
-  ],
+  "missing": [],
   "powers": [
    [
     "Superattribut",
@@ -308,22 +282,12 @@
   ],
   "edges_false": [
    [
-    "Feint",
-    "Finte"
-   ],
-   [
-    "First Strike",
-    "Erstschlag"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
+    "Humiliate",
+    "Erniedrigen"
    ]
   ],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W8<W12",
-   "Konstitution W4<W12",
    "Einschüchtern W4<W6",
    "Wahrnehmung W4<W6",
    "Darbietung W4<W6",
@@ -339,27 +303,25 @@
    "Supertalent",
    "Superfertigkeit"
   ],
-  "anomalien": 3
+  "selected_talente": [
+   "Superkräfte",
+   "Raufbold",
+   "Rohling",
+   "Finte",
+   "Erstschlag"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0,
+  "anomalien": 1
  },
  {
   "name": "Verteidiger",
-  "missing": [
-   "Edge: Command"
-  ],
+  "missing": [],
   "powers": [],
-  "edges_false": [
-   [
-    "Elan",
-    "Elan"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Konstitution W4<W8",
    "Fokus W8<W10",
    "Hacken W4<W10",
    "Einschüchtern W4<W6",
@@ -379,32 +341,23 @@
    "Superattribut",
    "Superfertigkeit"
   ],
-  "anomalien": 2
+  "selected_talente": [
+   "Superkräfte",
+   "Elan",
+   "Geborener Anführer"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 0
  },
  {
   "name": "Walkuere",
-  "missing": [
-   "Edge: Command"
-  ],
+  "missing": [],
   "powers": [],
-  "edges_false": [
-   [
-    "Elan",
-    "Elan"
-   ],
-   [
-    "Quick",
-    "Schnell"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Stärke W8<W12",
-   "Konstitution W4<W12",
    "Einschüchtern W4<W10",
    "Wahrnehmung W4<W6",
    "Überreden W4<W6",
@@ -421,7 +374,16 @@
    "Superfertigkeit",
    "Robustheit"
   ],
-  "anomalien": 3
+  "selected_talente": [
+   "Superkräfte",
+   "Konter",
+   "Elan",
+   "Schnell"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 1
  },
  {
   "name": "Sprinter",
@@ -433,23 +395,9 @@
     "ueber_obergrenze"
    ]
   ],
-  "edges_false": [
-   [
-    "First Strike",
-    "Erstschlag"
-   ],
-   [
-    "Quick",
-    "Schnell"
-   ],
-   [
-    "Super Powers",
-    "Superkräfte"
-   ]
-  ],
+  "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
-   "Konstitution W4<W6",
    "Überreden W4<W6",
    "Recherche W4<W6",
    "Naturwissenschaften W4<W8",
@@ -468,6 +416,15 @@
    "Superattribut",
    "Superfertigkeit"
   ],
-  "anomalien": 3
+  "selected_talente": [
+   "Superkräfte",
+   "Erstschlag",
+   "Konter",
+   "Schnell"
+  ],
+  "rang": "Fortgeschritten",
+  "aufstiege_gesamt": 4,
+  "verbleibende_aufstiege": 0.0,
+  "anomalien": 0
  }
 ]

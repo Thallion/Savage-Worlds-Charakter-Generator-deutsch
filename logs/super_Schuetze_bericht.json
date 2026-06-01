@@ -418,7 +418,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Doppelschuss)",
+      "aktion": "talent_mit_aufstieg(Doppelschuss)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -431,33 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Rückzug)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Schwer zu töten)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Meisterschütze)",
+      "aktion": "talent_mit_aufstieg(Rückzug)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -470,7 +444,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Kühler Kopf)",
+      "aktion": "talent_mit_aufstieg(Schwer zu töten)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -483,7 +457,20 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Schnell)",
+      "aktion": "talent_mit_aufstieg(Meisterschütze)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Kühler Kopf)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -496,7 +483,7 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent(Superkräfte)",
+      "aktion": "talent_mit_aufstieg(Schnell)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -515,7 +502,7 @@
   ],
   "anomalien": [
     {
-      "aktion": "talent(Rückzug)",
+      "aktion": "talent_mit_aufstieg(Kühler Kopf)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -528,33 +515,7 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent(Schwer zu töten)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Schnell)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Superkräfte)",
+      "aktion": "talent_mit_aufstieg(Schnell)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -567,7 +528,7 @@
       "warnung": "Aktion lieferte False/None"
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -646,7 +607,13 @@
       "Skrupellos",
       "Vorsichtig"
     ],
-    "talente": [],
+    "talente": [
+      "Superkräfte",
+      "Doppelschuss",
+      "Rückzug",
+      "Schwer zu töten",
+      "Meisterschütze"
+    ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
@@ -658,7 +625,7 @@
     },
     "machtpunkte": 0,
     "vermoegen": 500,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

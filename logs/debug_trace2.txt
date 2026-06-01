@@ -1,0 +1,6 @@
+After volk: selected=[]
+  Processing wahl: ('talent', 'Übernatürliches Attribut (Geschicklichkeit)') (type=talent)
+    talent: calling volk_freies_talent(Mensch, Übernatürliches Attribut (Geschicklichkeit))
+    talent: result={'aktion': 'volk_freies_talent(Mensch,Übernatürliches Attribut (Geschicklichkeit))', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 250, 'warnung': None}
+After volk_wahlen loop: volk_wahlen_ah=[]
+After volk_wahlen loop: selected=['Übernatürliches Attribut (Geschicklichkeit)']

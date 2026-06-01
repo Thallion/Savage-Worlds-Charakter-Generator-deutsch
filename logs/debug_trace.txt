@@ -1,0 +1,27 @@
+  Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
+  DIRECT: calling volk_freies_talent(Mensch, Übernatürliches Attribut (Geschicklichkeit))
+  DIRECT: result = {'aktion': 'volk_freies_talent(Mensch,Übernatürliches Attribut (Geschicklichkeit))', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 250, 'warnung': None}
+  DIRECT: selected_talente = ['Übernatürliches Attribut (Geschicklichkeit)']
+  AH-Talente (volk_wahlen): []
+  AH-Talente (talente): []
+  Mächte gewählt: []
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  TALENT-LOOP: versuche 'Übernatürliches Attribut (Geschicklichkeit)', bereits_gewählt=True
+  TALENT-LOOP: versuche 'Flicken', bereits_gewählt=False
+  TALENT('Flicken'): ok=True, kosten=2, kostenart=Handicap-Punkte
+  TALENT-LOOP: versuche 'Killerinstinkt', bereits_gewählt=False
+  TALENT('Killerinstinkt'): ok=True, kosten=0, kostenart=None
+  Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken']
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  → {'ok': True, 'aktion': 'abschliessen(n=5)', 'rang': 'Anfänger', 'aufstiege_gesamt': 5, 'verbleibende_aufstiege': 5}
+  After abschliessen: selected_talente=['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken']
+    talent Killerinstinkt: ok=True
+    talent Gepeinigt: ok=True
+    fertigkeit Wahrnehmung auf 6
+    fertigkeit Schießen auf 8
+    fertigkeit Einschüchtern auf 8
+    talent Flicken: bereits ausgewählt
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.0, 'vermoegen': 214, 'machtpunkte': 0}
+  FINAL selected_talente: ['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken', 'Killerinstinkt', 'Gepeinigt']
+  DIFF: []

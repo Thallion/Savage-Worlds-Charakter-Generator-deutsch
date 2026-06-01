@@ -536,13 +536,6 @@
                 "reichweite": "VER 5",
                 "dauer": "—"
             },
-            "Verwirrung": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER",
-                "dauer": "S"
-            },
             "Flächenschlag": {
                 "ausgewaehlt": true,
                 "rang": "F",
@@ -556,6 +549,13 @@
                 "machtpunkte": 4,
                 "reichweite": "VER 5",
                 "dauer": "—"
+            },
+            "Verwirrung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER",
+                "dauer": "S"
             }
         },
         "superkraefte": {},
@@ -593,9 +593,9 @@
     "selected_maechte": [
         "Betoeren",
         "Empathie",
-        "Verwirrung",
         "Flächenschlag",
-        "Kriegersegen"
+        "Kriegersegen",
+        "Verwirrung"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],

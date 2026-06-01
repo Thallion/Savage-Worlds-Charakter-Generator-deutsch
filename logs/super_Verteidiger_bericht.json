@@ -431,20 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Elan)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Geborener Anführer)",
+      "aktion": "talent_mit_aufstieg(Elan)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -457,8 +444,8 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Geborener Anführer)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -467,42 +454,41 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Superkraefte_Verteidiger.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "talent(Elan)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    }
-  ],
-  "anomalien_anzahl": 2,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -552,7 +538,7 @@
         "ausgewaehlt": false
       },
       "Fokus": {
-        "wert": 8,
+        "wert": 12,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -587,7 +573,11 @@
       "Vorsichtig",
       "Umweltschwäche"
     ],
-    "talente": [],
+    "talente": [
+      "Superkräfte",
+      "Elan",
+      "Geborener Anführer"
+    ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
@@ -595,11 +585,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 500,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

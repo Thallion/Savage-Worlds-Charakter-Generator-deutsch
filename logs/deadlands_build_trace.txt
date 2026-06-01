@@ -130,23 +130,24 @@ Gepeinigter
   AH-Talente (talente): []
   Mächte gewählt: []
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  TALENT-LOOP: versuche 'Übernatürliches Attribut (Geschicklichkeit)', bereits_gewählt=True
   TALENT-LOOP: versuche 'Flicken', bereits_gewählt=False
   TALENT('Flicken'): ok=True, kosten=2, kostenart=Handicap-Punkte
-  TALENT-LOOP: versuche 'Gepeinigt', bereits_gewählt=False
-  TALENT('Gepeinigt'): ok=False, kosten=0, kostenart=None
   TALENT-LOOP: versuche 'Killerinstinkt', bereits_gewählt=False
   TALENT('Killerinstinkt'): ok=True, kosten=0, kostenart=None
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
-  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+  → {'ok': True, 'aktion': 'abschliessen(n=5)', 'rang': 'Anfänger', 'aufstiege_gesamt': 5, 'verbleibende_aufstiege': 5}
     talent Killerinstinkt: ok=True
     talent Gepeinigt: ok=True
     fertigkeit Wahrnehmung auf 6
     fertigkeit Schießen auf 8
     fertigkeit Einschüchtern auf 8
+    talent Flicken: bereits ausgewählt
+    attribut Konstitution auf 8
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 214, 'machtpunkte': 0}
-  DIFF: ['talente: "Killerinstinkt" ZUVIEL', 'talente: "Flicken" ZUVIEL', 'talente: "Übernatürliches Attribut (Geschicklichkeit)" ZUVIEL', 'talente: "Gepeinigt" ZUVIEL']
-  → Gepeinigter anomalien=3
+  DIFF: []
+  → Gepeinigter anomalien=0
 
 ============================================================
 Zauberschützin
@@ -257,8 +258,6 @@ Territorialer Ranger
   AH-Talente (talente): []
   Mächte gewählt: []
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
-  TALENT-LOOP: versuche 'Territorialer Ranger', bereits_gewählt=False
-  TALENT('Territorialer Ranger'): ok=False, kosten=0, kostenart=None
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Mutig']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
@@ -272,7 +271,7 @@ Territorialer Ranger
     fertigkeit Überleben auf 6
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 0, 'machtpunkte': 0}
   DIFF: []
-  → Territorialer Ranger anomalien=4
+  → Territorialer Ranger anomalien=2
 
 ============================================================
 Medizinfrau
@@ -286,20 +285,20 @@ Medizinfrau
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}, talente=['Mutig', 'AH (Schamane)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
-  → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
+  → {'ok': True, 'aktion': 'abschliessen(n=5)', 'rang': 'Anfänger', 'aufstiege_gesamt': 5, 'verbleibende_aufstiege': 5}
     talent Geschichtenerzähler: ok=True
     talent Fetisch: ok=True
     talent Neue Mächte: ok=True
     fertigkeit Heilen auf 6
     fertigkeit Glaube auf 8
     fertigkeit Überreden auf 8
-    fertigkeit Überleben auf 4
-    fertigkeit Wahrnehmung auf 4
+    fertigkeit Überleben auf 6
+    fertigkeit Wahrnehmung auf 6
     macht Linderung: ok=True
     macht Verwirrung: ok=True
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.0, 'vermoegen': 123, 'machtpunkte': 15}
-  DIFF: ['fertigkeiten: Überleben soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Neue Mächte" ZUVIEL']
-  → Medizinfrau anomalien=3
+  DIFF: []
+  → Medizinfrau anomalien=0
 
 ============================================================
 Cowgirl
@@ -475,18 +474,19 @@ US-Marshal
   AH-Talente (talente): []
   Mächte gewählt: []
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
-  TALENT-LOOP: versuche 'US-Marshal', bereits_gewählt=False
-  TALENT('US-Marshal'): ok=False, kosten=0, kostenart=None
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Eisenkiefer']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Aufmerksamkeit: ok=True
     talent Eisenkiefer: bereits ausgewählt
     talent Kühler Kopf: ok=True
+    talent US-Marshal: ok=True
     fertigkeit Schießen auf 8
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 2, 'vermoegen': 206, 'machtpunkte': 0}
-  DIFF: ['fertigkeiten: Überreden soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "US-Marshal" FEHLT']
-  → US-Marshal anomalien=3
+    fertigkeit Überreden auf 6
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 206, 'machtpunkte': 0}
+  DIFF: []
+  → US-Marshal anomalien=0
 
 ============================================================
 Vaquero
@@ -528,11 +528,12 @@ Voodoopraktikerin
     talent Mutig: ok=True
     fertigkeit Heilen auf 6
     fertigkeit Okkultismus auf 6
+    fertigkeit Provozieren auf 4
     macht Heilung: ok=True
     macht Zorn der Petro-Loa: ok=True
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.5, 'vermoegen': 248, 'machtpunkte': 20}
-  DIFF: ['fertigkeiten: Okkultismus soll W4, ist W6', 'fertigkeiten: Provozieren soll W4, ist FEHLT', 'talente: "Machtpunkte" ZUVIEL', 'talente: "Neue Mächte" ZUVIEL', 'maechte: "Zorn der Petro-Loa" ZUVIEL', 'maechte: "Heilung" ZUVIEL']
-  → Voodoopraktikerin anomalien=1
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.0, 'vermoegen': 248, 'machtpunkte': 20}
+  DIFF: []
+  → Voodoopraktikerin anomalien=0
 
 ============================================================
 Hexe
@@ -542,7 +543,7 @@ Hexe
   AH-Talente (volk_wahlen): []
   AH-Talente (talente): ['AH (Hexe)']
     AH 'AH (Hexe)': ok=True, machtpunkte=10, verf_maechte=3
-  Mächte gewählt: ['Betoeren', 'Empathie', 'Verwirrung']
+  Mächte gewählt: ['Betoeren', 'Empathie']
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}, talente=['Vertrauter', 'AH (Hexe)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
@@ -554,10 +555,10 @@ Hexe
     fertigkeit Zaubern auf 8
     macht Flächenschlag: ok=True
     macht Kriegersegen: ok=True
-    macht Verwirrung: bereits ausgewählt
+    macht Verwirrung: ok=True
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 225, 'machtpunkte': 15}
-  DIFF: ['talente: "Machtpunkte" ZUVIEL', 'talente: "Neue Mächte" ZUVIEL', 'maechte: "Kriegersegen" ZUVIEL', 'maechte: "Flächenschlag" ZUVIEL']
-  → Hexe anomalien=1
+  DIFF: []
+  → Hexe anomalien=0
 
 ============================================================
 Investigativer Journalist

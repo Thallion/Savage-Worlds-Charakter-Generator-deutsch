@@ -418,20 +418,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Erstschlag)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Konter)",
+      "aktion": "talent_mit_aufstieg(Erstschlag)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -444,8 +431,8 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Schnell)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Konter)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -454,11 +441,11 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Schnell)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -467,55 +454,28 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Superkraefte_Sprinter.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "talent(Erstschlag)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Schnell)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -547,7 +507,7 @@
         "ausgewaehlt": true
       },
       "Athletik": {
-        "wert": 10,
+        "wert": 12,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -588,7 +548,12 @@
       "Geheimidentität",
       "Schutzbefohlener (leicht)"
     ],
-    "talente": [],
+    "talente": [
+      "Superkräfte",
+      "Erstschlag",
+      "Konter",
+      "Schnell"
+    ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
@@ -596,11 +561,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 500,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

@@ -68,8 +68,41 @@ def get_machtstufen_daten(charakter, stufe=None):
     return MACHTSTUFEN_DEFAULTS.get(stufe, MACHTSTUFEN_DEFAULTS["III"])
 
 
+def _berechne_kraftobergrenze(charakter):
+    """Berechnet die Kraftobergrenze anhand Machtstufe und 'Der Beste'-Edge.
+
+    Standard: 1/3 der maximalen SKP (aus Setting-JSON).
+    Mit 'Der Beste'-Edge: 1/2 der maximalen SKP (gem. Edge-Beschreibung im Setting).
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        int: Kraftobergrenze in SKP
+    """
+    stufe = getattr(charakter, 'machtstufe', 'III')
+    daten = get_machtstufen_daten(charakter, stufe)
+    max_skp = daten.get('superkraftpunkte', 0)
+    default_og = daten.get('kraftobergrenze', 0)
+
+    if 'Der Beste' in getattr(charakter, 'selected_talente', []):
+        return max_skp // 2
+    return default_og
+
+
+def _aktualisiere_kraftobergrenze(charakter):
+    """Aktualisiert die Kraftobergrenze. Wird als Listener auf selected_talente gebunden."""
+    neuer_wert = _berechne_kraftobergrenze(charakter)
+    if charakter.kraftobergrenze != neuer_wert:
+        Logger.info(f"Kraftobergrenze neu berechnet: {charakter.kraftobergrenze} → {neuer_wert} SKP")
+        charakter.kraftobergrenze = neuer_wert
+
+
 def setze_machtstufe(charakter, stufe):
     """Setzt die Machtstufe und aktualisiert SKP-Budget und Kraftobergrenze.
+
+    Bindet zudem einen Listener auf 'selected_talente', damit die Kraftobergrenze
+    automatisch angepasst wird, sobald die 'Der Beste'-Edge hinzugefügt/entfernt wird.
 
     Args:
         charakter: Das Charakterobjekt
@@ -86,10 +119,17 @@ def setze_machtstufe(charakter, stufe):
     charakter.machtstufe = stufe
     daten = get_machtstufen_daten(charakter, stufe)
     charakter.superkraft_punkte_gesamt = daten['superkraftpunkte']
-    charakter.kraftobergrenze = daten['kraftobergrenze']
+    charakter.kraftobergrenze = _berechne_kraftobergrenze(charakter)
+
+    # Listener auf selected_talente nur einmal pro Charakter binden.
+    # (Nur bei vollwertigen Kivy-Charakter-Objekten — Mocks haben kein .bind)
+    if not getattr(charakter, '_superstufe_listener_aktiv', False) and callable(getattr(charakter, 'bind', None)):
+        charakter.bind(selected_talente=lambda inst, val: _aktualisiere_kraftobergrenze(charakter))
+        charakter._superstufe_listener_aktiv = True
+        Logger.debug("Listener auf selected_talente für Kraftobergrenze gebunden")
 
     Logger.info(f"Machtstufe auf '{stufe}' gesetzt: {daten['superkraftpunkte']} SKP, "
-                f"Kraftobergrenze {daten['kraftobergrenze']}")
+                f"Kraftobergrenze {charakter.kraftobergrenze}")
     return True
 
 

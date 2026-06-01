@@ -418,7 +418,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Attraktiv)",
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -431,8 +431,8 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Der Beste)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -441,29 +441,41 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Superkraefte_Feuervogel.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -507,7 +519,7 @@
         "ausgewaehlt": false
       },
       "Fokus": {
-        "wert": 8,
+        "wert": 12,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -542,7 +554,11 @@
       "Loyal",
       "Umweltschwäche"
     ],
-    "talente": [],
+    "talente": [
+      "Superkräfte",
+      "Attraktiv",
+      "Der Beste"
+    ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
@@ -550,11 +566,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 500,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

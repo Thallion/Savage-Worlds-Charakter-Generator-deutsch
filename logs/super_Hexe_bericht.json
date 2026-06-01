@@ -392,7 +392,33 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Glück)",
+      "aktion": "talent_mit_aufstieg(Glück)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -405,8 +431,8 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent(Superkräfte)",
-      "ok": false,
+      "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -415,7 +441,33 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Superkraefte_Hexe.json)",
@@ -424,20 +476,7 @@
   ],
   "anomalien": [
     {
-      "aktion": "talent(Glück)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Superkräfte)",
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -450,7 +489,7 @@
       "warnung": "Aktion lieferte False/None"
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -488,13 +527,13 @@
         "ausgewaehlt": true
       },
       "Einschüchtern": {
-        "wert": 4,
+        "wert": 10,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
       "Fokus": {
-        "wert": 10,
+        "wert": 12,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -535,7 +574,10 @@
       "Skrupellos",
       "Stur"
     ],
-    "talente": [],
+    "talente": [
+      "Superkräfte",
+      "Glück"
+    ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
@@ -543,11 +585,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 500,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

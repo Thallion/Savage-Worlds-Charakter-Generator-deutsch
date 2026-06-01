@@ -184,19 +184,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Gepeinigt)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent(Killerinstinkt)",
       "ok": true,
       "kosten": 0,
@@ -509,50 +496,25 @@
       "warnung": null
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Gepeinigter_A.json)",
-      "ok": true
-    }
-  ],
-  "anomalien": [
-    {
-      "aktion": "talent(Gepeinigt)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Talent \"Gepeinigt\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "aktion": "attribut_mit_aufstieg(Konstitution)",
       "ok": true,
-      "warnung": "Talent \"Gepeinigt\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 250
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Killerinstinkt\" ZUVIEL; talente: \"Flicken\" ZUVIEL; talente: \"Übernatürliches Attribut (Geschicklichkeit)\" ZUVIEL; talente: \"Gepeinigt\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
+        "handicap": 0
       },
-      "vermoegen": 214
+      "vermoegen": 214,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Gepeinigter_A.json)",
+      "ok": true
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -568,7 +530,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0
       },
       "Willenskraft": {

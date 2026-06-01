@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Superkräfte Kompendium",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -120,7 +120,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -159,7 +159,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 10,
+                "value": 12,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -502,7 +502,20 @@
                 "punkte": 1
             }
         },
-        "talente": {},
+        "talente": {
+            "Superkräfte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Glück": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
         "maechte": {},
         "superkraefte": {
             "Panzerung": {
@@ -549,7 +562,10 @@
         "Skrupellos",
         "Stur"
     ],
-    "selected_talente": [],
+    "selected_talente": [
+        "Superkräfte",
+        "Glück"
+    ],
     "selected_maechte": [],
     "selected_superkraefte": [
         "Panzerung",
@@ -579,12 +595,11 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {},
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -725,6 +740,40 @@
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Glück",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Fokus",
+                "wert": 12,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
             }
         ]
     }

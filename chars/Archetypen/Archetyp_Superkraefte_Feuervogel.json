@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Superkräfte Kompendium",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -159,7 +159,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 12,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -502,7 +502,26 @@
                 "punkte": 1
             }
         },
-        "talente": {},
+        "talente": {
+            "Superkräfte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Attraktiv": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Der Beste": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
         "maechte": {},
         "superkraefte": {
             "Ausweichen": {
@@ -544,7 +563,11 @@
         "Loyal",
         "Umweltschwäche"
     ],
-    "selected_talente": [],
+    "selected_talente": [
+        "Superkräfte",
+        "Attraktiv",
+        "Der Beste"
+    ],
     "selected_maechte": [],
     "selected_superkraefte": [
         "Ausweichen",
@@ -573,19 +596,18 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {},
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 45,
     "superkraft_punkte_verbraucht": 25,
-    "kraftobergrenze": 15,
+    "kraftobergrenze": 22,
     "vermoegen": 500,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
@@ -726,6 +748,32 @@
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Attraktiv",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Der Beste",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Fokus",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Fokus",
+                "wert": 12,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
             }
         ]
     }

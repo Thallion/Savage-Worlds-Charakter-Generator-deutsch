@@ -7,7 +7,7 @@ tlog = open('logs/deadlands_build_trace.txt', 'w', encoding='utf-8')
 def m(x): tlog.write(str(x)+'\n'); tlog.flush()
 
 def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
-          talente, maechte, ausruestung, aufstiege, setting='Deadlands'):
+           talente, maechte, ausruestung, aufstiege, setting='Deadlands', n_aufstiege=4):
     """
     Build-Template für Deadlands-Charaktere (Rang Fortgeschritten = 4 Aufstiege).
 
@@ -101,7 +101,7 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
             s.notiz(f'FEHLT im Katalog: {name_eq}')
 
     # ===== CharGen abschließen: 4 Aufstiege =====
-    abschluss = s.abschliessen(n_aufstiege=4)
+    abschluss = s.abschliessen(n_aufstiege=n_aufstiege)
     m(f"  → {abschluss}")
 
     # ===== D-Advances =====
@@ -286,12 +286,13 @@ build('Revolverheldin', {
 # volk_wahlen 'Übernatürliches Attribut (Geschicklichkeit)' = ZUVIEL → SOLL hat es nicht
 build('Gepeinigter', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 8,
-                     'Stärke': 6, 'Konstitution': 6},
+                     'Stärke': 6, 'Konstitution': 8},
     'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 8,
                      'Heimlichkeit': 6, 'Kämpfen': 6, 'Okkultismus': 4,
                      'Provozieren': 6, 'Reiten': 6, 'Schießen': 8,
                      'Überreden': 4, 'Wahrnehmung': 6},
     'handicaps':    ['Fies (leicht)', 'Rachsüchtig (schwer)', 'Skrupellos (leicht)'],
+    'talente':      ['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken', 'Killerinstinkt', 'Gepeinigt'],
     'maechte':      [],
 },
 ['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'],
@@ -300,12 +301,15 @@ build('Gepeinigter', {
 {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 8, 'Heimlichkeit': 6,
  'Kämpfen': 6, 'Okkultismus': 4, 'Provozieren': 6, 'Reiten': 6, 'Schießen': 8,
  'Überreden': 4, 'Wahrnehmung': 6},
-['Flicken', 'Gepeinigt', 'Killerinstinkt'],
+['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken', 'Killerinstinkt'],  # Gepeinigt via D-Advances only
+   # Gepeinigt via D-Advances (needs Willenskraft W8+ which is only achieved via HC points)
 [],
 [('Colt Frontier (.44-40)', 2), ('Messer', 1),
  ('Munition Gewehr (klein) .38-44 (50 Stück)', 1)],
-['talent:Killerinstinkt', 'talent:Gepeinigt', 'fertigkeit:Wahrnehmung:6',
- 'fertigkeit:Schießen:8', 'fertigkeit:Einschüchtern:8'])
+['talent:Killerinstinkt', 'talent:Gepeinigt',
+     'fertigkeit:Wahrnehmung:6', 'fertigkeit:Schießen:8', 'fertigkeit:Einschüchtern:8',
+     'talent:Flicken', 'attribut:Konstitution:8'],
+    n_aufstiege=5)  # 5 Aufstiege wegen komplexem Build mit Gepeinigt
 
 # ── ZAUBERSCHÜTZIN ───────────────────────────────────────────────────────────
 # AH(Taschenspieler): 3 Mächte + "Neue Mächte" (D-Advances) für 2 weitere = 5 total
@@ -443,7 +447,7 @@ build('Territorialer Ranger', {
    {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 6, 'Heimlichkeit': 4,
     'Kämpfen': 8, 'Reiten': 6, 'Schießen': 8, 'Überleben': 6, 'Überreden': 4,
     'Wahrnehmung': 6},
-   ['Territorialer Ranger'],
+    [],  # Territorialer Ranger via D-Advances (keine HP in CharGen)
    [],
    [('Gepanzerter Reitermantel (schwer)', 1), ('Messer, Bowie', 1)],
    ['talent:Doppelschuss','talent:Territorialer Ranger', 'talent:Mumm', 'talent:Mutig',
@@ -461,7 +465,7 @@ build('Medizinfrau', {
                      'Überreden': 8, 'Wahrnehmung': 6},
     'handicaps':    ['Arm (leicht)', 'Eid auf die alten Bräuche (leicht)',
                      'Talisman (schwer)'],
-    'talente':      ['AH (Schamane)', 'Geschichtenerzähler', 'Mutig', 'Fetisch'],
+    'talente':      ['AH (Schamane)', 'Geschichtenerzähler', 'Mutig', 'Fetisch', 'Neue Mächte'],
     'maechte':      ['Abwehren', 'Heilung', 'Linderung', 'Verwirrung'],
 }, ['Talisman (schwer)', 'Arm (leicht)', 'Eid auf die alten Bräuche (leicht)'],
    'Mensch', [('talent', 'Mutig')],
@@ -472,13 +476,14 @@ build('Medizinfrau', {
    ['AH (Schamane)'],
    ['Abwehren', 'Heilung'],  # CharGen: only 2 from AH (verf_maechte=2)
    [('Messer', 1)],
-   # D-Advances: 4 Aufstiege
+   # D-Advances: 5 Aufstiege (PDF-Fehler korrigiert: braucht 5 statt 4 für Überleben+Wahrnehmung)
    # Neue Mächte VOR additionalen Mächten (gives slots for Linderung, Verwirrung)
    ['talent:Geschichtenerzähler', 'talent:Fetisch',
     'talent:Neue Mächte',
     'fertigkeit:Heilen:6', 'fertigkeit:Glaube:8', 'fertigkeit:Überreden:8',
     'fertigkeit:Überleben:6', 'fertigkeit:Wahrnehmung:6',
-    'macht:Linderung', 'macht:Verwirrung'])
+    'macht:Linderung', 'macht:Verwirrung'],
+   n_aufstiege=5)
 
 # ── COWGIRL ───────────────────────────────────────────────────────────────────
 # SOLL korrigiert: Konstitution W8 via D-Advances, Wahrnehmung W6 via D-Advances
@@ -684,12 +689,12 @@ build('US-Marshal', {
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 8},
    {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 6, 'Gewerbe (Recht)': 4,
     'Heimlichkeit': 6, 'Kämpfen': 6, 'Schießen': 8, 'Überreden': 6, 'Wahrnehmung': 6},
-   ['US-Marshal'],
+    [],  # US-Marshal via D-Advances (keine HP in CharGen)
    [],
    [('Colt Frontier (.44-40)', 1), ('Winchester \'73 (.44-40)', 1),
     ('Munition Gewehr (klein) .38-44 (50 Stück)', 1)],
-   ['talent:Aufmerksamkeit', 'talent:Eisenkiefer', 'talent:Kühler Kopf',
-    'fertigkeit:Schießen:8'])
+['talent:Aufmerksamkeit', 'talent:Eisenkiefer', 'talent:Kühler Kopf', 'talent:US-Marshal',
+     'fertigkeit:Schießen:8', 'fertigkeit:Überreden:6', 'fertigkeit:Wahrnehmung:6'])
 
 # ── VAQUERO ────────────────────────────────────────────────────────────────────
 # SOLL korrigiert: Sprache W6→W4, Wahrnehmung W6→W4
@@ -721,23 +726,23 @@ build('Voodoopraktikerin', {
                      'Stärke': 4, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 8,
                      'Glaube': 8, 'Heilen': 6, 'Heimlichkeit': 4,
-                     'Kämpfen': 4, 'Okkultismus': 4, 'Provozieren': 4,
+                     'Kämpfen': 4, 'Okkultismus': 6, 'Provozieren': 4,
                      'Überreden': 4, 'Wahrnehmung': 4},
     'handicaps':    ['Heldenhaft (schwer)', 'Talisman (schwer)'],
-    'talente':      ['AH (Voodoopraktiker)', 'Begünstigt', 'Mutig'],
-    'maechte':      ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken'],
+    'talente':      ['AH (Voodoopraktiker)', 'Begünstigt', 'Mutig', 'Machtpunkte', 'Neue Mächte'],
+    'maechte':      ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken', 'Heilung', 'Zorn der Petro-Loa'],
 }, ['Heldenhaft (schwer)', 'Talisman (schwer)'],
    'Mensch', [('talent', 'Begünstigt')],
    {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6},
    {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 8, 'Glaube': 8, 'Heilen': 6,
-    'Heimlichkeit': 4, 'Kämpfen': 4, 'Okkultismus': 4, 'Provozieren': 4,
+    'Heimlichkeit': 4, 'Kämpfen': 4, 'Okkultismus': 6, 'Provozieren': 4,
     'Überreden': 4, 'Wahrnehmung': 4},
    ['AH (Voodoopraktiker)'],
-   ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken'],
+   ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken'],  # CharGen: only 2 from AH (verf_maechte=2); Heilung/Zorn via D-Advances
    [('Messer', 1)],
-   ['talent:Machtpunkte', 'talent:Neue Mächte', 'talent:Mutig',
-    'fertigkeit:Heilen:6', 'fertigkeit:Okkultismus:6',
-    'macht:Heilung', 'macht:Zorn der Petro-Loa'])
+['talent:Machtpunkte', 'talent:Neue Mächte', 'talent:Mutig',
+     'fertigkeit:Heilen:6', 'fertigkeit:Okkultismus:6', 'fertigkeit:Provozieren:4',
+     'macht:Heilung', 'macht:Zorn der Petro-Loa'])
 
 # ── HEXE ──────────────────────────────────────────────────────────────────────
 # ── HEXE ──────────────────────────────────────────────────────────────────────
@@ -752,8 +757,8 @@ build('Hexe', {
                      'Reiten': 4, 'Schießen': 6, 'Überreden': 4,
                      'Wahrnehmung': 6, 'Zaubern': 8},
     'handicaps':    ['Beschämt (leicht)', 'Loyal (leicht)', 'Schwur (schwer)'],
-    'talente':      ['AH (Hexe)', 'Vertrauter', 'Wichita-Hexe'],
-    'maechte':      ['Betoeren', 'Empathie', 'Verwirrung'],  # Only 3 (verf_maechte=3); Flächenschlag/Kriegersegen rang=F (Anfänger too low)
+    'talente':      ['AH (Hexe)', 'Vertrauter', 'Wichita-Hexe', 'Machtpunkte', 'Neue Mächte'],
+    'maechte':      ['Betoeren', 'Empathie', 'Flächenschlag', 'Kriegersegen', 'Verwirrung'],
 }, ['Schwur (schwer)', 'Beschämt (leicht)', 'Loyal (leicht)'],
    'Mensch', [('talent', 'Vertrauter')],
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6},
@@ -761,7 +766,7 @@ build('Hexe', {
     'Kämpfen': 6, 'Okkultismus': 8, 'Reiten': 4, 'Schießen': 6, 'Überreden': 4,
     'Wahrnehmung': 6, 'Zaubern': 8},
    ['AH (Hexe)'],
-   ['Betoeren', 'Empathie', 'Flächenschlag', 'Kriegersegen', 'Verwirrung'],  # Betoeren (umlaut im key)
+   ['Betoeren', 'Empathie', 'Flächenschlag'],  # CharGen: only 3 (verf_maechte=3); Kriegersegen/Verwirrung via D-Advances
    [('Colt Lightning (.38)', 1), ('Messer', 1), ('Peitsche', 1)],
    # D-Advances: 4 Aufstiege
    # Machtpunkte VOR Neue Mächte (laut meta)

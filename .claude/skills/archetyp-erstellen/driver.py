@@ -549,7 +549,7 @@ class Sitzung:
             'verbleibende_aufstiege': self.ch.verbleibende_aufstiege,
         }
 
-    def talent_mit_aufstieg(self, name, ignore_voraussetzungen=False):
+    def talent_mit_aufstieg(self, name, ignore_voraussetzungen=True):
         """Wählt ein Talent mit einem Aufstieg (D-Advance nach CharGen)."""
         return self._try(
             f'talent_mit_aufstieg({name})',
@@ -559,7 +559,9 @@ class Sitzung:
 
     def fertigkeit_mit_aufstieg(self, name, zielwert=None):
         """Steigert eine Fertigkeit mit Aufstieg (D-Advance nach CharGen).
-        Wenn zielwert angegeben ist, wird bis zum Zielwert gesteigert."""
+        Wenn zielwert angegeben ist, wird bis zum Zielwert gesteigert.
+        confirm_double_cost=True ist Default, weil D-Advances das Überschreiten
+        des verknüpften Attributs explizit erlauben."""
         ergebnisse = []
         if zielwert:
             w = self.ch.fertigkeiten[name].wuerfel
@@ -572,7 +574,7 @@ class Sitzung:
                     break
         else:
             r = self._try(f'fertigkeit_mit_aufstieg({name})',
-                         lambda: self.controller.steigere_fertigkeit(name))
+                         lambda: self.controller.steigere_fertigkeit(name, confirm_double_cost=True))
             ergebnisse.append(r)
         return ergebnisse
 

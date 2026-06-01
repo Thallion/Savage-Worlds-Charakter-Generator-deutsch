@@ -187,6 +187,17 @@ Walküre, Sprinter**
   offiziellen Bögen sie verwenden: Panzer & Schläger `Superattribut` (20), Feuervogel
   `Fernkampfangriff` (20), Sprinter `Geschwindigkeit` (16). Klären, ob Obergrenze 15 bei Stufe III
   zu streng modelliert ist.
+- ✅ **GELÖST 2026-06-01 — „Der Beste"-Edge ohne Effekt (Code-Bug):** Die im Setting
+  dokumentierte Regel „Kraftobergrenze entspricht halben maximalen SKP (statt einem Drittel)"
+  (Edge `Der Beste`, Rang A) wurde nicht umgesetzt. Fix in
+  `functions/superkraft_funktionen.py`: `_berechne_kraftobergrenze()` + Listener auf
+  `selected_talente` via `_aktualisiere_kraftobergrenze()`. `setze_machtstufe()` ruft die
+  Helper-Funktion und bindet den Listener (einmalig pro Charakter). Test-Skript
+  `logs/test_der_beste.py` (21 Tests, alle grün) verifiziert: 5/10/15/20/25 ohne Edge,
+  7/15/22/30/37 mit Edge. **Folge für die Bögen:** Feuervogel `Fernkampfangriff` (20 SKP)
+  ist jetzt wählbar, sobald die Edge im Build-Skript ergänzt wird. Panzer/Schläger
+  `Superattribut` (20) und Sprinter `Geschwindigkeit` (16) bleiben `ueber_obergrenze`, da
+  die Bögen dort keine Edge-Berechtigung vorsehen — Klärung mit Autor nötig.
 - 🔧 FEHLENDE EDGES im Setting-Katalog (kein DE-Key): `Dead Shot`, `Rock and Roll`, `Danger Sense`,
   `Mighty Blow` (Wuchtschlag), `Command` (Kommandant). Alle übrigen Edges/Handicaps/Fertigkeiten
   existieren unter korrektem Key.
@@ -197,6 +208,21 @@ Walküre, Sprinter**
   Brawny=`Kräftig`, Counterattack=`Konter`, Extraction=`Rückzug`, Sweep=`Rundumschlag`,
   Performance=`Darbietung`, Academics=`Geisteswissenschaften`, Science=`Naturwissenschaften`,
   Battle=`Kriegskunst`, Alertness=`Aufmerksamkeit`, Level Headed=`Kühler Kopf`.
+- ✅ **GELÖST 2026-06-01 — D-Advance-Range-Confirm-Bug (Driver-Code-Bug):**
+  `driver.fertigkeit_mit_aufstieg(name)` (ohne `zielwert`) rief
+  `controller.steigere_fertigkeit(name)` OHNE `confirm_double_cost=True` auf. Folge: Sobald
+  die Fertigkeit am oder über dem verknüpften Attribut steht, gibt der Controller
+  `"needs_confirmation"` zurück (bool → True), der Wert ändert sich nicht. Fix in
+  `.claude/skills/archetyp-erstellen/driver.py:560-577`: D-Advance setzt jetzt IMMER
+  `confirm_double_cost=True` (D-Advances dürfen das Attribut explizit überschreiten, kosten
+  dann 2×). Deadlands-Build (Agent: rang=Fortgeschritten, aufstiege=0) weiterhin grün.
+- ✅ **GELÖST 2026-06-01 — Rang „Fortgeschritten" für alle 11 Supers:** Bögen sind Rang Seasoned
+  (= 4 Aufstiege), Build-Muster analog `deadlands_build.py`: `abschliessen(4)` → D-Advances
+  für Edges (`talent_mit_aufstieg`) + für Top-4-Skills (`fertigkeit_mit_aufstieg`-Loop mit
+  `(value, modifier)`-Check, da d4-2 → d4+0 den Wert gleich lässt). Loop iteriert pro Skill
+  bis Wert/Modifier sich ändert ODER `verbleibende_aufstiege == 0`. **11/11 verb=0.0,
+  rang=Fortgeschritten.** Schütze/Schläger (5 Edges) verbrauchen alle 4 Aufstiege für Edges
+  → keine Skill-D-Advances mehr möglich, aber Rang trotzdem erreicht.
 
 ---
 

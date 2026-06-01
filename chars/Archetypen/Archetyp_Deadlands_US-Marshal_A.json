@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -502,6 +502,12 @@
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "US-Marshal": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -532,7 +538,8 @@
     "selected_talente": [
         "Eisenkiefer",
         "Aufmerksamkeit",
-        "Kühler Kopf"
+        "Kühler Kopf",
+        "US-Marshal"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -557,8 +564,8 @@
         "Winchester '73 (.44-40)": 1,
         "Munition Gewehr (klein) .38-44 (50 Stück)": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 2,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -714,6 +721,26 @@
                 "name": "Kühler Kopf",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "US-Marshal",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

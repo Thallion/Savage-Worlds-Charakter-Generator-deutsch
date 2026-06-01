@@ -327,6 +327,19 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit(Okkultismus) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "fertigkeit(Provozieren) ÜBERSPRUNGEN (keine Fert-Punkte)",
       "ok": true,
       "kosten": 0,
@@ -405,6 +418,19 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_aufstieg(Provozieren)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 248,
+      "warnung": null
+    },
+    {
       "aktion": "macht(Heilung)",
       "ok": true,
       "kosten": 0,
@@ -435,24 +461,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Okkultismus soll W4, ist W6; fertigkeiten: Provozieren soll W4, ist FEHLT; talente: \"Machtpunkte\" ZUVIEL; talente: \"Neue Mächte\" ZUVIEL; maechte: \"Zorn der Petro-Loa\" ZUVIEL; maechte: \"Heilung\" ZUVIEL",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1,
-        "handicap_gesamt": 3,
-        "aufstiege": 0.5
-      },
-      "vermoegen": 248
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -531,6 +541,12 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
+      "Provozieren": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Okkultismus": {
         "wert": 6,
         "modifier": 0,
@@ -561,11 +577,11 @@
       "fertigkeit": 0,
       "handicap": 1,
       "handicap_gesamt": 3,
-      "aufstiege": 0.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 20,
     "vermoegen": 248,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }
