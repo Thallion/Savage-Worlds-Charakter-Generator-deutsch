@@ -63,9 +63,10 @@ try:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for item in [('Infanteriekampfanzug',1),('Molekularmesser',1),
+                 ('Laserpistole',1),('Waffensperre',1),
                  ('Batterie, Universal-',1),('Taschencomputer',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Laserpistole mit Waffensperre, Biolink, Reparieren/Schießen (12pt Budget)')
+    s.notiz('MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills Reparieren/Schießen (12pt Budget)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Commander_A.json')
     b = s.bericht('logs/scifi_commander_bericht.json')
     m(f"Commander FERTIG anomalien={b['anomalien_anzahl']}")
@@ -103,9 +104,10 @@ try:
     for macht in ['Gedankenverbindung','Gedankenlesen','Linderung','Sprachen sprechen','Betäuben']:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Batterie, Universal-',1),('Taschencomputer',1)]:
+    for item in [('Infanteriekampfanzug',1),('Laserpistole',1),('Waffensperre',1),
+                 ('Batterie, Universal-',1),('Taschencomputer',1),('Scanner',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Laserpistole, Biolink, Scanner; Skills auf 12pt Budget')
+    s.notiz('MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills auf 12pt Budget')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Psyker_A.json')
     b = s.bericht('logs/scifi_psyker_bericht.json')
     m(f"Psyker FERTIG anomalien={b['anomalien_anzahl']}")
@@ -131,20 +133,32 @@ try:
     s.attribut_auf('Verstand', 6)
     s.attribut_auf('Willenskraft', 6)
     s.attribut_auf('Konstitution', 6)
-    s.steigere_mit_handicap_attribut('Stärke')   # d4→d6 (2HP)
+    # Stärke d4→d6 via HP WEGGELASSEN, um 2 HP für fehlende Skills zu haben
     m(f"  Attrs: {s.punktestand()}")
     skills_setzen(s, [('Athletik',8),('Fahren',4),('Kämpfen',6),
                       ('Wahrnehmung',8),('Schießen',6),('Überleben',8)])
+    # Fehlende Bogen-Skills via HP (2 frei)
+    s.steigere_mit_handicap_fertigkeit('Elektronik')           # 1 HP
+    s.steigere_mit_handicap_fertigkeit('Pilot')                # 1 HP
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
     advance_attr(s, 'Verstand')  # d6→d8
+    # Bogen: "Survival d8 & Notice d8" – Skills bereits CharGen d8, daher 0 Aufstiege
+    r = s.fertigkeit_mit_aufstieg('Überleben', 8)
+    m(f"  Advance Überleben d8: ok={ok_check(r)}")
+    # Naturwissenschaften via D-Advance (0.5 verb verbleibend)
+    r = s.fertigkeit_mit_aufstieg('Naturwissenschaften', 4)
+    m(f"  Advance Naturwissenschaften d4: ok={ok_check(r)}")
     for t in ['Naturbursche','Kühler Kopf']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for item in [('Infanteriekampfanzug',1),('Batterie, Universal-',1),
-                 ('Rucksack',1),('Taschenlampe (10\" Strahl)',1)]:
+                 ('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
+                 ('Laserpistole',1),('Waffensperre',1),('Medi-Gel',2),('Scanner',1),
+                 ('Tarnanzug',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Laserpistole, Handbeil, Environment Wear, Medi-Gel×2, Scanner; Skills auf 12pt Budget')
+    s.notiz('MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative')
+    s.notiz('STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik, Pilot, Naturwissenschaften via HP+D-Adv)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Surveyor_A.json')
     b = s.bericht('logs/scifi_surveyor_bericht.json')
     m(f"Surveyor FERTIG anomalien={b['anomalien_anzahl']}")
@@ -183,10 +197,10 @@ try:
     for t in ['Alleskönner','Charismatisch','Aufwiegler']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Universalübersetzer',1),
-                 ('Taschencomputer',1),('Batterie, Universal-',1)]:
+    for item in [('Infanteriekampfanzug',1),('Laserpistole',1),('Waffensperre',1),
+                 ('Universalübersetzer',1),('Taschencomputer',1),('Batterie, Universal-',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Laserpistole, Biolink')
+    s.notiz('MISSING: Biolink (kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Ambassador_A.json')
     b = s.bericht('logs/scifi_ambassador_bericht.json')
     m(f"Ambassador FERTIG anomalien={b['anomalien_anzahl']}")
@@ -224,9 +238,10 @@ try:
     for t in ['Gelehrter','Ermittler','Hackerman/-woman','Kühler Kopf']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Kevlarweste',1),('Rucksack',1),('Universalübersetzer',1),('Taschencomputer',1)]:
+    for item in [('Kevlarweste',1),('Rucksack',1),('Universalübersetzer',1),('Taschencomputer',1),
+                 ('Cyberdeck',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Alter Wear, Cyberdeck, Schutzbrille')
+    s.notiz('MISSING: Alter Wear, Schutzbrille (beide kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Hacker_A.json')
     b = s.bericht('logs/scifi_hacker_bericht.json')
     m(f"Hacker FERTIG anomalien={b['anomalien_anzahl']}")
@@ -251,21 +266,32 @@ try:
     s.attribut_auf('Willenskraft', 6)
     s.attribut_auf('Verstand', 6)
     s.attribut_auf('Konstitution', 6)
-    s.steigere_mit_handicap_attribut('Stärke')   # d4→d6 (2HP)
+    # Stärke d4→d6 via HP WEGGELASSEN, um 2 HP für fehlende Skills zu haben
     m(f"  Attrs: {s.punktestand()}")
     skills_setzen(s, [('Athletik',8),('Kämpfen',8),('Hacken',6),
-                      ('Wahrnehmung',6),('Heimlichkeit',8),('Diebeskunst',8)])
+                      ('Wahrnehmung',6),('Heimlichkeit',8),('Diebeskunst',6)])
+    # Fehlende Bogen-Skills: Elektronik via HP (Diebeskunst d6→d8 später via D-Adv)
+    s.steigere_mit_handicap_fertigkeit('Elektronik')           # 1 HP
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
+    # Bogen: "Fighting d8 & Thievery d8" – Skills bereits CharGen d8, daher 0 Aufstiege
+    r = s.fertigkeit_mit_aufstieg('Kämpfen', 8)
+    m(f"  Advance Kämpfen d8: ok={ok_check(r)}")
+    # Diebeskunst d6→d8 via D-Adv (0.5 verb verbleibend)
+    r = s.fertigkeit_mit_aufstieg('Diebeskunst', 8)
+    m(f"  Advance Diebeskunst d8: ok={ok_check(r)}")
     for t in ['Beidhändiger Kampf','Schnell','Ausweichen']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Molekularschwert',1),('Tarnkleidung',1),
-                 ('Taschencomputer',1),('Universalübersetzer',1)]:
+    for item in [('Infanteriekampfanzug',1),('Molekularschwert',2),('Tarnkleidung',1),
+                 ('Taschencomputer',1),('Universalübersetzer',1),
+                 ('Cyberdeck',1),('Direktionales Mikrofon',1),('Kreislaufatemgerät',1),
+                 ('Betäubungsschlagstock',1),('EMP-Granate',4)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Verborgenes Fach',1),('Cyberware: Verborgenes Fach',1)]:
         s.kaufen(*cw)
-    s.notiz('MISSING: 2. Molekularschwert, Betäubungsknüppel, Schockgranaten, Direktionalmikrofon, Linienprojektor, Atemschutz')
+    s.notiz('MISSING: Schneidbrenner (cutting torch), Elektronischer Dietrich, Linienprojektor (kein SciFi-Item im deutschen Setting); Betäubungsknüppel → Betäubungsschlagstock, Schockgranaten → EMP-Granate')
+    s.notiz('STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik via HP, Diebeskunst d6→d8 via D-Adv)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Infiltrator_A.json')
     b = s.bericht('logs/scifi_infiltrator_bericht.json')
     m(f"Infiltrator FERTIG anomalien={b['anomalien_anzahl']}")

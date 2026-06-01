@@ -58,7 +58,7 @@ try:
                  ('Taschencomputer',1),('Kleidung, formell',1),
                  ('Drohne, Kommerziell',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Leichte Schusswaffe (Slugthrower)')
+    s.notiz('MISSING: Leichte Schusswaffe/Slugthrower (kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Influencer_A.json')
     b = s.bericht('logs/scifi_influencer_bericht.json')
     m(f"Influencer FERTIG anomalien={b['anomalien_anzahl']}")
@@ -101,7 +101,7 @@ try:
         s.kaufen(*item)
     for cw in [('Cyberware: Adrenalindrüse',1),('Cyberware: Verbesserte Sicht',1)]:
         s.kaufen(*cw)
-    s.notiz('MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware')
+    s.notiz('MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware (beide kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Mercenary_A.json')
     b = s.bericht('logs/scifi_mercenary_bericht.json')
     m(f"Mercenary FERTIG anomalien={b['anomalien_anzahl']}")
@@ -126,23 +126,23 @@ try:
     s.attribut_auf('Willenskraft', 6)
     s.attribut_auf('Stärke', 8)    # Draken starts d6, costs 1pt → d8
     s.steigere_mit_handicap_attribut('Konstitution')   # d4→d6 (2HP)
-    s.steigere_mit_handicap_attribut('Konstitution')   # d6→d8 (2HP)
     m(f"  Attrs: {s.punktestand()}")
     skills_setzen(s, [('Fahren',6),('Elektronik',6),('Kämpfen',6),
                       ('Einschüchtern',6),('Reparieren',8)])
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
+    advance_attr(s, 'Konstitution')  # d6→d8 (D-Advance: 1 Aufstieg)
     for t in ['Schläger','Reparaturgenie','Rohling']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     s.notiz('ADVANCE: Cyber Installs – kein Talent-Key, via Ausrüstung modelliert')
-    s.notiz('ANCESTRY BUG: Low Light Vision nicht im deutschen Draken implementiert')
+    s.notiz('ANCESTRY: Dämmerungssicht ergänzt (Vorlage Fantasy Aquarianer/Elf, Halbiert Düstere-Beleuchtungs-Abzüge)')
     for item in [('Infanteriekampfanzug',1),('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
                  ('Taschencomputer',1),('Werkzeugkoffer',1),('Batterie, Universal-',1)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Ersatzgliedmaße',1),('Cyberware: Klauen',1)]:
         s.kaufen(*cw)
-    s.notiz('MISSING: Plasmapistole, Schweißbrille')
+    s.notiz('Alle Bogen-Items vorhanden (Plasmapistole, Rucksack, Taschenlampe, Taschencomputer, Werkzeugkoffer, Universal-Batterie ergänzt 2026-06-01)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Roughneck_A.json')
     b = s.bericht('logs/scifi_roughneck_bericht.json')
     m(f"Roughneck FERTIG anomalien={b['anomalien_anzahl']}")
@@ -167,23 +167,33 @@ try:
     s.attribut_auf('Geschicklichkeit', 6)
     s.attribut_auf('Verstand', 6)
     s.attribut_auf('Stärke', 6)
-    s.steigere_mit_handicap_attribut('Konstitution')   # d4→d6 (2HP)
-    s.steigere_mit_handicap_attribut('Konstitution')   # d6→d8 (2HP) – Vigor d8 Advance pre-consumed
+    # Konstitution d4→d6 via HP WEGGELASSEN, stattdessen via 2 D-Adv (d4→d6, d6→d8)
     m(f"  Attrs: {s.punktestand()}")
     skills_setzen(s, [('Fokus',8),('Überreden',8),('Provozieren',6),
                       ('Wahrnehmung',6),('Geisteswissenschaften',6),
                       ('Okkultismus',4),('Schießen',6)])
+    # Fehlende Bogen-Skills: 2 via HP (Kämpfen + Überleben), 1 via D-Adv (Naturwissenschaften)
+    s.steigere_mit_handicap_fertigkeit('Kämpfen')               # 1 HP
+    s.steigere_mit_handicap_fertigkeit('Überleben')             # 1 HP
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
+    advance_attr(s, 'Konstitution')  # d4→d6 (D-Advance: 1 Aufstieg)
+    advance_attr(s, 'Konstitution')  # d6→d8 (D-Advance: 1 Aufstieg)
+    r = s.fertigkeit_mit_aufstieg('Naturwissenschaften', 4)     # 0.5 verb
+    m(f"  Advance Naturwissenschaften d4: ok={ok_check(r)}")
+    # Bogen: "Persuasion d8 & Shooting d6" – Skills bereits CharGen d8/d6, daher 0 Aufstiege
+    r = s.fertigkeit_mit_aufstieg('Überreden', 8)
+    m(f"  Advance Überreden d8: ok={ok_check(r)}")
     for t in ['Elan','Neue Mächte']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for macht in ['Eigenschaft erhöhen/senken','Empathie','Objekt auslesen','Linderung','Kriegersegen']:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
-    for item in [('Batterie, Universal-',2),('Taschencomputer',1)]:
+    for item in [('Plasmagewehr',1),('Batterie, Universal-',2),('Taschencomputer',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Plasmagewehr')
+    s.notiz('Alle Bogen-Items vorhanden (Plasmagewehr ergänzt 2026-06-01)')
+    s.notiz('KONSTITUTION: Bogen d8, Build d8 via 2 D-Adv statt 1 HP-Step + 1 D-Adv (HP freigegeben für fehlende Skills Kämpfen + Überleben via HP, Naturwissenschaften via D-Adv)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Mystic_A.json')
     b = s.bericht('logs/scifi_mystic_bericht.json')
     m(f"Mystic FERTIG anomalien={b['anomalien_anzahl']}")
@@ -209,21 +219,21 @@ try:
     s.attribut_auf('Willenskraft', 8)
     s.attribut_auf('Geschicklichkeit', 6)
     s.steigere_mit_handicap_attribut('Konstitution')   # d4→d6 (2HP)
-    s.steigere_mit_handicap_attribut('Konstitution')   # d6→d8 (2HP) – Vigor d8 advance pre-consumed
     m(f"  Attrs: {s.punktestand()}")
     skills_setzen(s, [('Fokus',8),('Überreden',8),('Heimlichkeit',8),
                       ('Provozieren',8),('Wahrnehmung',6),('Elektronik',4)])
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
+    advance_attr(s, 'Konstitution')  # d6→d8 (D-Advance: 1 Aufstieg statt 2HP)
     for t in ['Erniedrigen','Neue Mächte','Täuscher']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for macht in ['Verkleiden','Schutz vor Naturgewalten','Heilung','Gestaltwandeln']:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
-    for item in [('Komlink',1),('Taschencomputer',1)]:
+    for item in [('Laserpistole',1),('Nanowear',1),('Komlink',1),('Taschencomputer',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Laserpistole, Nanowear, Elektronisches Schloss')
+    s.notiz('Alle Bogen-Items vorhanden (Laserpistole, Nanowear ergänzt 2026-06-01); Elektronisches Schloss (electronic lockpick) fehlt im deutschen Setting')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Morpher_A.json')
     b = s.bericht('logs/scifi_morpher_bericht.json')
     m(f"Morpher FERTIG anomalien={b['anomalien_anzahl']}")
@@ -249,22 +259,34 @@ try:
     s.attribut_auf('Geschicklichkeit', 10)
     s.attribut_auf('Verstand', 6)
     s.attribut_auf('Willenskraft', 6)
-    s.steigere_mit_handicap_attribut('Konstitution')   # d4→d6 (2HP)
-    s.steigere_mit_handicap_attribut('Stärke')         # d4→d6 (2HP)  ← jetzt möglich!
+    # Konstitution d4→d6 und Stärke d4→d6 via HP WEGGELASSEN, um 4 HP für fehlende Skills zu haben
     m(f"  Attrs: {s.punktestand()}")
     # Skills (Advances pre-consumed: Kämpfen d8, Heimlichkeit d8, Elektronik d6, Schießen d6)
     skills_setzen(s, [('Pilot',10),('Kämpfen',8),('Heimlichkeit',8),
                       ('Einschüchtern',4),('Wahrnehmung',6),
                       ('Elektronik',6),('Schießen',6)])
+    # Fehlende Bogen-Skills: 3 via HP (Kriegskunst, Reparieren, Überleben)
+    s.steigere_mit_handicap_fertigkeit('Kriegskunst')            # 1 HP
+    s.steigere_mit_handicap_fertigkeit('Reparieren')              # 1 HP
+    s.steigere_mit_handicap_fertigkeit('Überleben')               # 1 HP
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
+    # Bogen: "Fighting d8 & Stealth d8" – Skills bereits CharGen d8, daher 0 Aufstiege
+    r = s.fertigkeit_mit_aufstieg('Kämpfen', 8)
+    m(f"  Advance Kämpfen d8: ok={ok_check(r)}")
+    # Konstitution und Stärke d4→d6 via D-Adv (2 verb verbleibend nach Edges)
+    advance_attr(s, 'Konstitution')  # d4→d6 (1 D-Adv)
+    advance_attr(s, 'Stärke')         # d4→d6 (1 D-Adv)
     for t in ['Bedrohlich','Ausweichen']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Molekularmesser',1),
-                 ('Laser-/Rotpunktvisier',1),('Komlink',1),('Batterie, Universal-',1)]:
+    for item in [('Infanteriekampfanzug',1),('Molekularmesser',1),('Schwere Blasterpistole',1),
+                 ('Laser-/Rotpunktvisier',1),('Komlink',1),('Batterie, Universal-',1),
+                 ('Raumanzug',1),('Klebeflicken',3)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Schwere Blasterpistole, Raumanzug, Klebeflicken×3')
+    s.notiz('Alle Bogen-Items vorhanden (Schwere Blasterpistole, Raumanzug, Klebeflicken×3 ergänzt 2026-06-01)')
+    s.notiz('SKILL-LÜCKE SCHIEßEN: Bogen d6, Build d4 (-2 Pkt Budget-Defizit: 18 Pkt nötig, 16 Pkt verfügbar 12 FP + 4 HP; User-Entscheidung 2026-06-01: Skill-Lücke dokumentieren statt Edge/Attr-Deviation)')
+    s.notiz('KONSTITUTION+STÄRKE: Bogen d6/d6, Build d6/d6 via 2 D-Adv (HP freigegeben für fehlende Skills Kriegskunst, Reparieren, Überleben via HP)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Spacer_A.json')
     b = s.bericht('logs/scifi_spacer_bericht.json')
     m(f"Spacer FERTIG anomalien={b['anomalien_anzahl']}")

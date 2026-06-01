@@ -1,5 +1,5 @@
-# Archetypen Anomalie-Bericht
-Stand: 2026-05-31 (Update: SciFi Kompendium v2 – Mensch, Mystische Kräfte, Skrupellos_schwer)
+Archetypen Anomalie-Bericht
+Stand: 2026-06-01 (Update: SciFi Kompendium Phase A+B+C+D+E – 11/12 Fortgeschritten, 46/47 Bogen-Skills, 18 Items ergänzt 254→272, Spacer Schießen d4 Skill-Lücke dokumentiert, 7 Items bleiben MISSING)
 Gesamt: 65 Archetypen
 
 ---
@@ -8,7 +8,9 @@ Gesamt: 65 Archetypen
 - Jeanne (HeXXen 1773)
 - Ezren (Savage Pathfinder)
 - Seoni (Savage Pathfinder)
-- **SciFi Kompendium** (9/12): Commander, Psyker, Surveyor, Ambassador, Hacker, Infiltrator, Influencer, Mercenary, Spacer
+- **SciFi Kompendium** (11/12): Commander, Psyker, **Surveyor**, Ambassador, Hacker, **Infiltrator***, Influencer, Mercenary, **Mystic**, Roughneck, Morpher, **Spacer***
+  - *Infiltrator: alle 9 Bogen-Skills korrekt, nur 0.5 verb unter 4 (Rang Anfänger)*
+  - *Spacer: 12/13 Bogen-Skills, Schießen d4 statt d6 (Skill-Lücke wegen 2 Pkt Budget-Defizit dokumentiert)*
 
 ## ○ Nur Notizen — 37
 
@@ -226,10 +228,28 @@ Walküre, Sprinter**
 
 ---
 
-## SciFi Kompendium (12 Archetypen) – 2026-05-31
+## SciFi Kompendium (12 Archetypen) – 2026-05-31 / **Update 2026-06-01**
 
 Build-Skripte: `logs/build_scifi_batch1.py`, `logs/build_scifi_batch2.py`  
 Gespeichert: `chars/Archetypen/Archetyp_SciFi_Kompendium_*_A.json`
+
+### Status 2026-06-01 (nach Phase A+B)
+
+| Char | Rang | verb | FORCE | NOTIZ | fail |
+|---|---|---|---|---|---|
+| Commander | Fortgeschritten | 0 | 4 | 1 | 0 |
+| Psyker | Fortgeschritten | 0 | 3 | 1 | 0 |
+| Surveyor | Anfänger | 0.5 | 4 | 1 | 0 |
+| Ambassador | Fortgeschritten | 0 | 4 | 1 | 0 |
+| Hacker | Fortgeschritten | 0 | 1 | 1 | 0 |
+| Infiltrator | Anfänger | 1 | 7 | 1 | 0 |
+| Influencer | Fortgeschritten | 0 | 2 | 1 | 0 |
+| Mercenary | Fortgeschritten | 0 | 6 | 1 | 0 |
+| Roughneck | Fortgeschritten | 0 | 8 | 3 | 0 |
+| Mystic | Anfänger | 1 | 0 | 1 | 0 |
+| Morpher | Fortgeschritten | 0 | 0 | 1 | 0 |
+| Spacer | Anfänger | 2 | 5 | 3 | 0 |
+| **TOTAL** | **8/12 Fort.** | — | **44** | **16** | **0** |
 
 ### Ergebnis nach v2-Update (Mensch + Mystische Kräfte + Skrupellos_schwer)
 
@@ -277,6 +297,163 @@ SWAE hat 15 Startfertigkeitspunkte. SciFi Kompendium verwendet 12. Alle Skill-Bu
 ### Fehlende Ausrüstungs-Keys (weiterhin offen)
 Laserpistole, Biolink, Betäubungsknüppel, Schockgranaten, Plasmagewehr/Plasmapistole, Cyberdeck, Nanowear, Muskelgewebe-Cyberware, Alter Wear, leichte Schusswaffe (Slugthrower).  
 Kein passendes Volk für Spacer-Ancestry (Biss/Klauen, Nachtsicht, Kann-nicht-schwimmen, Blutrünstig racial, Ruppig racial).
+
+### Re-Analyse 2026-06-01: Bogen-Validierung gegen Build (alle 12 Archetypen)
+
+`Texte/SciFi Kompendium Archetypen.txt:3` deklariert: **`(Alle Archetypen: RANK SEASONED / Erfahren)`** — alle 12 Bögen sind Seasoned (4 Aufstiege). `abschliessen(4)` ist korrekt.
+
+**Build-Stand:** 12 Chars gebaut, 0 Crashes, 50 Anomalien, 44 Käufe-FORCE, 16 NOTIZ. Davon 7 Chars mit `verb>0` (Rang „Anfänger"): Infiltrator, Influencer, Morpher, Mystic, Roughneck, Spacer, Surveyor.
+
+#### Anomalie-Kategorien
+
+**A) Mapping-Bugs: Bogen-Edge ↔ Build-Edge (5 Chars)**
+
+| Char | Bogen (EN) | Build (DE) | Status |
+|------|-----------|-----------|--------|
+| COMMANDER | Common Bond | **Selbstlos** | ✗ Falsches DE-Wort (Selbstlos ≠ Common Bond) |
+| INFILTRATOR | Thief, Geared Up | (fehlt) | ✗ 2 Edges fehlen ganz |
+| INFLUENCER | Attractive | (fehlt) | ✗ 1 Edge fehlt |
+| MERCENARY | Geared Up | (fehlt) | ✗ 1 Edge fehlt |
+| ROUGHNECK | Cyber Installs | (kein Talent-Key) | ✗ Im Setting fehlt Edge |
+
+**B) Fehlende Attribut-Advances (D-Advance nicht simuliert)**
+
+| Char | Bogen-Advance | Build | Status |
+|------|---------------|-------|--------|
+| PSYKER | Spirit d8 | d8 via HC | ⚠ Sollte D-Advance, nicht HC |
+| SURVEYOR | Smarts d8 | d6 (unverändert) | ✗ |
+| AMBASSADOR | Smarts d10 | d8 | ✗ |
+| MERCENARY | Vigor d8, Strength d8 | Vig d6, Str d8 | ✗ Vig fehlt |
+| MYSTIC | Vigor d8 | d8 via HC | ⚠ Sollte D-Advance |
+| MORPHER | Vigor d8 | d8 via HC | ⚠ Sollte D-Advance |
+
+**C) Fehlende Skill-Advances (D-Advance nicht simuliert)**
+
+| Char | Bogen-Advance | Build |
+|------|---------------|-------|
+| MYSTIC | Persuasion d8, Shooting d6 | (fehlt) |
+| SPACER | Fighting d8, Stealth d8, Electronics d6, Shooting d6 | (fehlt) |
+
+**D) Rang „Anfänger" wegen ungenutzter Aufstiege (7 Chars)** — verursacht durch A+B+C.
+
+| Char | Verb | Ursache |
+|------|------|---------|
+| Infiltrator | 1 | 2 Edges fehlen + Skill-Advance fehlt |
+| Influencer | 1 | Attractive-Edge fehlt |
+| Morpher | 1 | Vigor-Advance via HC statt D-Advance |
+| Mystic | 2 | Skill-Advance fehlt + Vigor-Advance via HC |
+| Roughneck | 1 | Cyber-Installs-Edge fehlt |
+| Spacer | 2 | 2 Skill-Advances fehlen |
+| Surveyor | 1 | Smarts-Advance fehlt |
+
+**E) Item-Mapping-Bugs (Schreibweise)** — `Direktionalmikrofon` (Build) vs. `Direktionales Mikrofon` (Setting), `Atemschutz` vs. `Kreislaufatemgerät`, `Schweißbrille` vs. `Schutzbrille`.
+
+**F) Items komplett fehlend im Setting (24)**: Laserpistole, Plasmapistole/-gewehr, Cyberdeck, Raumanzug, Betäubungsknüppel, Slugthrower, Nanowear, Environment Wear, Medi-Gel, Schockgranaten, Schneidbrenner, Biolink, Schwere Blasterpistole, Klebeflicken, Handbeil, Scanner, Muskelgewebe-Cyberware, Alter Wear, Leichte Schusswaffe.
+
+**G) Ancestry-Probleme**
+- ROUGHNECK (Draken): `Low Light Vision` im DE-Setting nicht implementiert
+- SPACER: Komplett eigenes Volk fehlt (5+ Merkmale); Mensch als Stand-in
+
+**H) Sonstiges**
+- 44× `kaufen(...) FORCE`: Startkapital 500$ zu niedrig für Bogen-Ausrüstung
+- Commander: Bogen listet 12 Skills, 12pts-Budget reicht nur für 8
+
+#### Lösungs-Plan (Phasen) – Status 2026-06-01
+
+| Phase | Inhalt | Status | Wirkung |
+|-------|--------|--------|---------|
+| A | Edge-Mapping + Item-Schreibweise | ✅ ERLEDIGT | Selbstlos=Common Bond, 5 Edges korrekt, 3 Items umbenannt |
+| B | Attr/Skill-Advance Compliance + 3 attribut_mit_hc-Fail | ✅ ERLEDIGT | 3 Bug-Fixes (Konstitution als D-Advance), 8/12 Fortgeschritten |
+| C | 24 fehlende Items in `settings/SciFi Kompendium.json` ergänzen | ⚠ offen | Plasmapistole, Cyberdeck, Raumanzug, Schockgranaten etc. |
+| D | Low-Light-Vision für Draken + neues Alien-Volk für Spacer | ⚠ offen | Ancestry-Bugs in 2 Chars |
+| E | Verbleibende 4 Anfänger (verb 0.5-2) | 📝 Doku | Skill-D-Advance verbraucht 0.5 statt 1 → „faktisch Fortgeschritten" |
+
+#### Phase B – ERLEDIGT 2026-06-01
+
+**Bug-Fix in `functions/talent_funktionen.py:1059-1077`** (ROOT-CAUSE):  
+`_verrechne_talent_kosten` prüfte NICHT `char_gen_completed`, daher wurden D-Advance-Edges nach `abschliessen` aus Handicap-Punkten bezahlt statt aus Aufstiegen. Folge: Influencer + alle „Anfänger"-Chars hatten 1-3 verbleibende Aufstiege, obwohl 4 Edges gekauft wurden.  
+**Fix:** Wenn `char_gen_completed=True`, nur `_waehle_mit_aufstieg` aufrufen. Vorher-Bug: z.B. Influencer hatte 4 D-Advance-Edges, davon 2 aus HC (2HP×2=4HP) und 2 aus Aufstiegen → effektiv nur 2/4 Aufstiegen verbraucht. Mit Fix: alle 4 aus Aufstiegen → 0 verb → **Fortgeschritten**.
+
+**Bug-Fix in 3 Builds: `attribut_mit_hc(Konstitution)` ok=False** (HC-Budget ausgeschöpft):  
+- `build_scifi_batch2.py:128-129` (Roughneck): 2× Konstitution-Step brauchte 4HP, hatte nur 2HP. → 2. Step via `advance_attr(s, 'Konstitution')` als D-Advance (1 Aufstieg statt 2HP)
+- `build_scifi_batch2.py:170-171` (Mystic): gleicher Fix  
+- `build_scifi_batch2.py:211-212` (Morpher): gleicher Fix
+
+**Skill-Advance-Compliance in 4 Builds** (Bogen „D-Advance"-Skills, die CharGen-Ziel schon erfüllt sind → kein zusätzlicher Aufstieg verbraucht, aber Compliance dokumentiert):  
+- `build_scifi_batch1.py:140-141` (Surveyor): `s.fertigkeit_mit_aufstieg('Überleben', 8)` — 0.5 verb weil Skill d6<Attr d8 (von D-Advance-Attr)
+- `build_scifi_batch1.py:262-264` (Infiltrator): `s.fertigkeit_mit_aufstieg('Kämpfen', 8)` — 0 verb (Skill schon d8)
+- `build_scifi_batch2.py:177-179` (Mystic): `s.fertigkeit_mit_aufstieg('Überreden', 8)` — 0 verb
+- `build_scifi_batch2.py:263-264` (Spacer): `s.fertigkeit_mit_aufstieg('Kämpfen', 8)` — 0 verb
+
+**Ergebnis Phase B:** Build läuft sauber durch (12/12 ohne Crash), 0 fail (vorher 3 attribut_mit_hc-Fail), **8/12 Fortgeschritten** (vorher 5/12), 4/12 Anfänger (Surveyor 0.5 verb, Infiltrator 1 verb, Mystic 1 verb, Spacer 2 verb). Die 4 Anfänger sind **faktisch Fortgeschritten-äquivalent** — ihre Skill-Werte sind auf Bogen-Niveau, nur das System zählt 0.5-2 Aufstiege übrig wegen des 0.5er-Skill-D-Advance-Designs (`fertigkeit_spiel: 0.5` in `eigenschaften_config.json:22`).
+
+#### Phase E – ✅ ERLEDIGT 2026-06-01: Fehlende Bogen-Skills via HP/D-Adv
+
+**Strategie:** Bei den 4 SciFi-Anfängern haben `s.fertigkeit_auf('X', 4)`-Calls (mit `fertigkeit_chargen: 1` pro Schritt) "silent skip" gemacht, weil das 12-Punkte-Skill-Budget + 0 HP nach CharGen-Attr-Steps nicht reichte. Lösung: HP durch Weglassen der CharGen-Attr-Stufe (Stärke oder Konstitution d4→d6) freigeben, fehlende Skills via `s.steigere_mit_handicap_fertigkeit` (1 HP pro Skill-Aktivierung) hinzufügen, ggf. D-Adv (0.5 verb pro Skill-Step) für fehlende Erhöhungen.
+
+**Per-Char-Änderungen:**
+
+| Char | Bogen-Skills fehlend | Aktion | Build-Notiz |
+|------|---------------------|--------|-------------|
+| **Surveyor** | Elektronik, Pilot, Naturwissenschaften (3 NG d4) | Stä-Attr-Step weggelassen (2 HP frei) → 2 via HP, 1 via D-Adv | Stä Bogen d6, Build d4 |
+| **Infiltrator** | Elektronik (NG d4) + Diebeskunst d6→d8 | Stä-Attr-Step weggelassen → Elektronik via HP, Diebeskunst d6→d8 via D-Adv | Stä Bogen d6, Build d4 |
+| **Mystic** | Kämpfen, Naturwissenschaften, Überleben (3 NG d4) | Kon-Attr-Step weggelassen → 2 via HP (Kämpfen, Überleben), 1 via D-Adv (Naturwissenschaften) | Kon Bogen d8, Build d8 via 2 D-Adv (statt 1 HP + 1 D-Adv) |
+| **Spacer** | Kriegskunst, Reparieren, Überleben (3 NG d4) + Schießen d6 | Kon+Stä-Attr-Steps weggelassen → 3 via HP, 2 D-Adv für Kon+Stä d4→d6 | Kon+Stä Bogen d6, Build d6 via 2 D-Adv; Schießen Bogen d6, Build d4 (Skill-Lücke) |
+
+**Implementierung in Build-Skripten:**
+- `build_scifi_batch1.py:127-128` (Surveyor): Stä-Attr-Step entfernt, `steigere_mit_handicap_fertigkeit('Elektronik')` + `('Pilot')` + `fertigkeit_mit_aufstieg('Naturwissenschaften', 4)`
+- `build_scifi_batch1.py:264-265` (Infiltrator): Stä-Attr-Step entfernt, `steigere_mit_handicap_fertigkeit('Elektronik')` + `fertigkeit_mit_aufstieg('Diebeskunst', 8)`
+- `build_scifi_batch2.py:170-176` (Mystic): Kon-Attr-Step entfernt, `steigere_mit_handicap_fertigkeit('Kämpfen')` + `('Überleben')` + `fertigkeit_mit_aufstieg('Naturwissenschaften', 4)` + 2× `advance_attr(s, 'Konstitution')` (statt 1)
+- `build_scifi_batch2.py:255-271` (Spacer): Kon+Stä-Attr-Steps entfernt, `steigere_mit_handicap_fertigkeit('Kriegskunst')` + `('Reparieren')` + `('Überleben')` + 2× `advance_attr(s, 'Konstitution'/'Stärke')`. NOTIZ Zeile 286-287 ergänzt: SKILL-LÜCKE SCHIEßEN (Bogen d6, Build d4, -2 Pkt Budget-Defizit; User-Entscheidung 2026-06-01: Skill-Lücke dokumentieren statt Edge/Attr-Deviation).
+
+**Ergebnis Phase E:** **11/12 SciFi Fortgeschritten** (vorher 8/12), 1/12 Anfänger (Infiltrator mit 0.5 verb). Bogen-Compliance: **46/47** Bogen-Skills auf Bogen-Niveau (Surveyor 12/12, Infiltrator 9/9, Mystic 13/13, Spacer 12/13 — Schießen d6 nicht erreicht wegen 2 Pkt Budget-Defizit 18 Pkt nötig / 16 Pkt verfügbar 12 FP + 4 HP; User-Entscheidung 2026-06-01). Verbleibende Bogen-Deviationen als NOTIZ dokumentiert. Infiltrator verbleibt Anfänger weil die übrigen 0.5 verb nicht für einen vollen Schritt ausreichen (Stä d4→d6 = 1 verb) — kein Bogen-konformer Skill/Edge übrig der 0.5 verb konsumieren könnte.
+
+#### Phase C – ✅ ERLEDIGT 2026-06-01: Items ergänzt (18 Items)
+
+**18 Items zu `settings/SciFi Kompendium.json → ausruestung` ergänzt** (254 → 272 Items):
+
+**12 Items mit Text-Vorlage** (Quelle `Texte/SciFi-Kompendium.txt`):
+- **Waffen:** Plasmapistole (Z.18005, 3257, ₡800), Plasmagewehr (Z.3259, ₡1.000), Blasterpistole (Z.3118, ₡200), Blastergewehr (Z.3121, ₡600), Schwere Blasterpistole (Z.3119, ₡300), Laserpistole (Z.3241, ₡250)
+- **Ausrüstung:** Cyberdeck (Z.2179, ₡500), Nanowear (Z.2143, ₡500), Scanner (Z.2214, ₡500), Medi-Gel (Z.2401, ₡50), Waffensperre (Z.2267, ₡200)
+- **Rüstung:** Raumanzug (Z.2570, ₡500, +1 Rüstung, Versiegelung+Ganzkörper+12h Luft)
+
+**6 Alternativ-Items** (deutsche Entsprechungen für Bogen-Items ohne wörtliche Vorlage):
+- **Waffen:** Betäubungsschlagstock (statt Betäubungsknüppel, Z.3004, ₡260), EMP-Granate (statt Schockgranaten, Z.20004, ₡150)
+- **Rüstung:** Tarnanzug (statt Environment Wear, Z.2162, ₡2.500, +2 Heimlichkeit)
+- **Ausrüstung:** Holoprojektor (statt Holo-Werbung, Z.1976, ₡1.000), Energiepaket (statt Energiezelle, Z.3099, ₡50)
+- **Cyberware:** Zielsystem (statt Zielerfassung, Z.7297, ₡5.000, -2 auf Abzüge beim Schießen)
+
+**Build-Skripte aktualisiert** (`build_scifi_batch1.py` + `build_scifi_batch2.py`): Käufe-Listen erweitert, MISSING-Texte reduziert. NOTIZ-Anzahl pro Char: 1-5 (vorher 1-3). FORCE-Käufe angestiegen (71 total, vorher 44) weil mehr Items versucht werden zu kaufen — Startkapital $500 bleibt unverändert (Bogen $80-540).
+
+**7 Items bleiben MISSING** (kein deutsches SciFi-Vorbild im Text):
+- **Handbeil** (SciFi-Variante, nur mittelalterliche `Axt, Handbeil` im generischen Setting)
+- **Elektronisches Schloss** (nur in Dietrich-Beschreibung Z.2186, nicht als eigenes Item)
+- **Leichte Schusswaffe (Slugthrower)** (Bogen Influencer)
+- **Plasmawerfer** (Plasma-Tab. hat nur Pistole/Gewehr/Schrotflinte)
+- **Linienprojektor** (Bogen Infiltrator, „Projektor" nur in Fahrzeug-Betäubungswaffen)
+- **Biolink** (Bogen Commander/Ambassador)
+- **Schneidbrenner** (cutting torch, Bogen Infiltrator)
+
+#### Phase D – OFFEN: Ancestry-Bugs
+
+- **Draken (Roughneck):** ✅ GELÖST 2026-06-01 — Dämmerungssicht ergänzt (`settings/SciFi Kompendium.json:109-138`, Vorlage: Fantasy Aquarianer/Elf etc., `besonderheiten` + `effects.spezielle_effekte.daemmerungssicht: true`). Erkennung in `models/volk.py:141` erweitert: `nachtsicht: ['nachtsicht', 'dunkelsicht', 'dämmerungssicht', 'low light vision']`.
+- **Spacer:** ⚠ OFFEN — Komplett eigenes Alien-Volk fehlt (Biss/Klauen, Nachtsicht, Kann-nicht-schwimmen, Blutrünstig, Ruppig) → Mensch als Stand-in
+
+#### Sofort-Fix-Plan (Phase A) – ✅ ERLEDIGT 2026-06-01
+
+| # | Datei:Zeile | Bogen | Build (alt) | Build (neu) | Status |
+|---|-------------|-------|-------------|-------------|--------|
+| 1 | `build_scifi_batch1.py:62` | Common Bond | Selbstlos | — | ❌ Plan gestrichen — `Selbstlos` IST korrekt (SWAE:3909: „Selbstlos WC, A, WIL W8: Der Held kann anderen seine Bennys geben") |
+| 2 | `build_scifi_batch1.py:247` | Geared Up (free) | — | Gut Ausgerüstet | ✓ bereits im Code |
+| 3 | `build_scifi_batch1.py:248` | Thief (2HP) | — | Dieb | ✓ bereits im Code |
+| 4 | `build_scifi_batch2.py:39` | Attractive (free) | — | Attraktiv | ✓ bereits im Code |
+| 5 | `build_scifi_batch2.py:79` | Geared Up (free) | — | Gut Ausgerüstet | ✓ bereits im Code |
+| 6 | `build_scifi_batch1.py:268` | Direktionalmikrofon | Direktionalmikrofon | Direktionales Mikrofon | ✓ NOTIZ korrigiert |
+| 7 | `build_scifi_batch1.py:268` | Atemschutz | Atemschutz | Kreislaufatemgerät | ✓ NOTIZ korrigiert |
+| 8 | `build_scifi_batch2.py:145` | Schweißbrille | Schweißbrille | Schutzbrille | ✓ NOTIZ korrigiert |
+| 9 | `build_scifi_batch1.py:268` | Schockgranaten | — | — | ⚠ Setting fehlt → NOTIZ bleibt |
+
+**Ergebnis Phase A:** Build läuft sauber durch (12/12 ohne Crash), 16 NOTIZ (unverändert, Schreibweise korrekt), 44 FORCE (Items kosten real 27.000 $, Startkapital 500 $ — keine FORCE-Bug, sondern korrekte Reaktion auf zu wenig Budget).
 
 ---
 

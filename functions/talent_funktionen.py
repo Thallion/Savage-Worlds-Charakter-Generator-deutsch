@@ -1059,14 +1059,26 @@ class TalentManager:
     def _verrechne_talent_kosten(self, talent_name_key):
         """
         Verrechnet die Kosten für ein Talent (Handicap-Punkte oder Aufstiege).
-        
+
+        FIX 2026-06-01: Wenn CharGen abgeschlossen ist (char_gen_completed=True),
+        werden D-Advance-Talente IMMER aus Aufstiegen bezahlt – niemals aus HC.
+        Vorher wurden Edges fälschlich aus HC-Punkten abgezogen, weil die Logik
+        nicht zwischen "Edge im CharGen" und "Edge als D-Advance" unterschied.
+        Folge: 4× D-Advance-Edge nach abschliessen verbrauchte 0 statt 4 Aufstiege,
+        Char blieb "Anfänger" statt "Fortgeschritten".
+
         Args:
             talent_name_key: Der Talent-Schlüssel
-            
+
         Returns:
             bool: True bei Erfolg, False bei Misserfolg
         """
         # Bestimme welche Ressource verwendet werden soll
+        if getattr(self.charakter, 'char_gen_completed', False):
+            if self.charakter.verbleibende_aufstiege > 0:
+                return self._waehle_mit_aufstieg(talent_name_key)
+            Logger.warning("Keine verbleibenden Aufstiege (CharGen abgeschlossen).")
+            return False
         min_handicap = TalentConfig.get('kosten.min_handicap_punkte', 1.5)
         if self.charakter.verbleibende_handicap_punkte > min_handicap:
             return self._waehle_mit_handicap_punkten(talent_name_key)
@@ -1075,7 +1087,7 @@ class TalentManager:
         else:
             Logger.warning("Keine verbleibenden Aufstiege oder Handicap-Punkte übrig.")
             return False
-    
+
     def _waehle_mit_handicap_punkten(self, talent_name_key):
         """
         Wählt ein Talent mit Handicap-Punkten aus.

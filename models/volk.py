@@ -138,7 +138,7 @@ class Volk(EventDispatcher):
         # Spezielle Effekte für komplexere Fälle
         spezial_effects_mapping = {
             'elfenmagie': ['elfenmagie'],
-            'nachtsicht': ['nachtsicht', 'dunkelsicht'],
+            'nachtsicht': ['nachtsicht', 'dunkelsicht', 'dämmerungssicht', 'low light vision'],
             'steingespür': ['steingespür'],
             'gnomenmagie': ['gnomenmagie'],
             'eiserne_konstitution': ['eiserne konstitution'],

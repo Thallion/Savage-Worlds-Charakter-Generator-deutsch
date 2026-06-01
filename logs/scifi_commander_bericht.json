@@ -405,6 +405,32 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularmesser zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
+    },
+    {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
       "ok": false,
       "kosten": 0,
@@ -463,6 +489,32 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularmesser zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
+    },
+    {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
       "ok": false,
       "kosten": 0,
@@ -489,16 +541,16 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Laserpistole mit Waffensperre, Biolink, Reparieren/Schießen (12pt Budget)",
+      "aktion": "NOTIZ: MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills Reparieren/Schießen (12pt Budget)",
       "ok": true,
-      "warnung": "MISSING: Laserpistole mit Waffensperre, Biolink, Reparieren/Schießen (12pt Budget)",
+      "warnung": "MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills Reparieren/Schießen (12pt Budget)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

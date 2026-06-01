@@ -18,14 +18,19 @@ Mercenary FERTIG anomalien=7
   Talent: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Advance Konstitution: ok=True
   Advance Schläger: ok=True
   Advance Reparaturgenie: ok=True
   Advance Rohling: ok=True
-Roughneck FERTIG anomalien=12
+Roughneck FERTIG anomalien=11
   Floraner Talente: ['Zäh wie Leder']
   Talent: HC=2
-  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
+  Advance Konstitution: ok=True
+  Advance Konstitution: ok=True
+  Advance Naturwissenschaften d4: ok=True
+  Advance Überreden d8: ok=True
   Advance Elan: ok=True
   Advance Neue Mächte: ok=True
   Macht Eigenschaft erhöhen/senken: ok=True
@@ -33,11 +38,12 @@ Roughneck FERTIG anomalien=12
   Macht Objekt auslesen: ok=True
   Macht Linderung: ok=True
   Macht Kriegersegen: ok=True
-Mystic FERTIG anomalien=2
+Mystic FERTIG anomalien=5
   Wechselbälger HC: ['Große Klappe', 'Loyal', 'Beschämt', 'Pechvogel (leicht)', 'Kybernetische Abstoßung']
   Talent: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
+  Advance Konstitution: ok=True
   Advance Erniedrigen: ok=True
   Advance Neue Mächte: ok=True
   Advance Täuscher: ok=True
@@ -45,10 +51,13 @@ Mystic FERTIG anomalien=2
   Macht Schutz vor Naturgewalten: ok=True
   Macht Heilung: ok=True
   Macht Gestaltwandeln: ok=True
-Morpher FERTIG anomalien=2
+Morpher FERTIG anomalien=4
   Talent: HC=4
-  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
-  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Advance Kämpfen d8: ok=True
+  Advance Konstitution: ok=True
+  Advance Stärke: ok=True
   Advance Bedrohlich: ok=True
   Advance Ausweichen: ok=True
-Spacer FERTIG anomalien=8
+Spacer FERTIG anomalien=13

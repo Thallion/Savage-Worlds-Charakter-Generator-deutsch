@@ -132,32 +132,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_hc(Stärke)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Pilot)",
       "ok": true,
       "kosten": 1,
@@ -165,7 +139,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -178,7 +152,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -334,7 +308,72 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Kriegskunst)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Reparieren)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -347,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -360,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -373,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
@@ -386,10 +425,23 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularmesser zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Schwere Blasterpistolex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwere Blasterpistole zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Laser-/Rotpunktvisierx1) FORCE",
@@ -399,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Laser-/Rotpunktvisier zum Preis 0 gekauft"
@@ -412,7 +464,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Komlink zum Preis 0 gekauft"
@@ -425,10 +477,36 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Raumanzugx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Klebeflickenx3) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Klebeflicken zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Spacer_A.json)",
@@ -462,7 +540,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
@@ -475,10 +553,23 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularmesser zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Schwere Blasterpistolex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwere Blasterpistole zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Laser-/Rotpunktvisierx1) FORCE",
@@ -488,7 +579,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Laser-/Rotpunktvisier zum Preis 0 gekauft"
@@ -501,7 +592,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Komlink zum Preis 0 gekauft"
@@ -514,22 +605,66 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Schwere Blasterpistole, Raumanzug, Klebeflicken×3",
+      "aktion": "kaufen(Raumanzugx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Klebeflickenx3) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Klebeflicken zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: Alle Bogen-Items vorhanden (Schwere Blasterpistole, Raumanzug, Klebeflicken×3 ergänzt 2026-06-01)",
       "ok": true,
-      "warnung": "MISSING: Schwere Blasterpistole, Raumanzug, Klebeflicken×3",
+      "warnung": "Alle Bogen-Items vorhanden (Schwere Blasterpistole, Raumanzug, Klebeflicken×3 ergänzt 2026-06-01)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: SKILL-LÜCKE SCHIEßEN: Bogen d6, Build d4 (-2 Pkt Budget-Defizit: 18 Pkt nötig, 16 Pkt verfügbar 12 FP + 4 HP; User-Entscheidung 2026-06-01: Skill-Lücke dokumentieren statt Edge/Attr-Deviation)",
+      "ok": true,
+      "warnung": "SKILL-LÜCKE SCHIEßEN: Bogen d6, Build d4 (-2 Pkt Budget-Defizit: 18 Pkt nötig, 16 Pkt verfügbar 12 FP + 4 HP; User-Entscheidung 2026-06-01: Skill-Lücke dokumentieren statt Edge/Attr-Deviation)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: KONSTITUTION+STÄRKE: Bogen d6/d6, Build d6/d6 via 2 D-Adv (HP freigegeben für fehlende Skills Kriegskunst, Reparieren, Überleben via HP)",
+      "ok": true,
+      "warnung": "KONSTITUTION+STÄRKE: Bogen d6/d6, Build d6/d6 via 2 D-Adv (HP freigegeben für fehlende Skills Kriegskunst, Reparieren, Überleben via HP)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 13,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -590,8 +725,20 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
+      "Kriegskunst": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Pilot": {
         "wert": 10,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Reparieren": {
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -601,6 +748,12 @@
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
+      },
+      "Überleben": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
       },
       "Wahrnehmung": {
         "wert": 6,
@@ -623,13 +776,13 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
+      "handicap": 1,
       "handicap_gesamt": 4,
-      "aufstiege": 2
+      "aufstiege": 0
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

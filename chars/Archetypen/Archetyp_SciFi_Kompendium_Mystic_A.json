@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -251,7 +251,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -277,7 +277,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -394,7 +394,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -541,18 +541,7 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {
-            "Batterie, Universal-": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Taschencomputer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            }
-        }
+        "ausruestung": {}
     },
     "selected_handicaps": [
         "Heldenhaft",
@@ -595,23 +584,16 @@
         "Yetis": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [
-        "Batterie, Universal-",
-        "Taschencomputer"
-    ],
+    "selected_allgemeine_ausruestung": [],
     "selected_waffen": [],
     "selected_ruestungen": [],
     "selected_schilde": [],
-    "ausruestung_mengen": {
-        "Batterie, Universal-": 2,
-        "Taschencomputer": 1
-    },
+    "ausruestung_mengen": {},
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": -0.5,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 2,
-    "aufstiege_gesamt": 4,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 5,
     "machtpunkte": 10,
@@ -619,7 +601,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 150,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -667,13 +649,6 @@
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
@@ -758,6 +733,41 @@
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Naturwissenschaften",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "talent",

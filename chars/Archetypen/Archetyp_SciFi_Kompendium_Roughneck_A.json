@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -547,12 +547,11 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {},
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 1,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
-    "verbleibende_aufstiege": 1,
-    "aufstiege_gesamt": 4,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -691,6 +690,13 @@
                 "name": "Reparieren",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {

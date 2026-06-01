@@ -158,19 +158,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
@@ -178,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,20 +308,33 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Diebeskunst) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "aktion": "fertigkeit_mit_hc(Elektronik)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Diebeskunst)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -347,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -360,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -373,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -386,20 +386,20 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Molekularschwertx1) FORCE",
+      "aktion": "kaufen(Molekularschwertx2) FORCE",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularschwert zum Preis 0 gekauft"
@@ -412,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Tarnkleidung zum Preis 0 gekauft"
@@ -425,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
@@ -438,10 +438,75 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Universalübersetzer zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberdeckx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberdeck zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Direktionales Mikrofonx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Direktionales Mikrofon zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Kreislaufatemgerätx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kreislaufatemgerät zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Betäubungsschlagstockx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Betäubungsschlagstock zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(EMP-Granatex4) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und EMP-Granate zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Cyberware: Verborgenes Fachx1) FORCE",
@@ -451,7 +516,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verborgenes Fach zum Preis 0 gekauft"
@@ -464,7 +529,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verborgenes Fach zum Preis 0 gekauft"
@@ -483,20 +548,20 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Molekularschwertx1) FORCE",
+      "aktion": "kaufen(Molekularschwertx2) FORCE",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularschwert zum Preis 0 gekauft"
@@ -509,7 +574,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Tarnkleidung zum Preis 0 gekauft"
@@ -522,7 +587,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
@@ -535,12 +600,77 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Universalübersetzer zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Cyberdeckx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberdeck zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Direktionales Mikrofonx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Direktionales Mikrofon zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Kreislaufatemgerätx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kreislaufatemgerät zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Betäubungsschlagstockx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Betäubungsschlagstock zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(EMP-Granatex4) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und EMP-Granate zum Preis 0 gekauft"
+    },
+    {
       "aktion": "kaufen(Cyberware: Verborgenes Fachx1) FORCE",
       "ok": false,
       "kosten": 0,
@@ -548,7 +678,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verborgenes Fach zum Preis 0 gekauft"
@@ -561,22 +691,31 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verborgenes Fach zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: 2. Molekularschwert, Betäubungsknüppel, Schockgranaten, Direktionalmikrofon, Linienprojektor, Atemschutz",
+      "aktion": "NOTIZ: MISSING: Schneidbrenner (cutting torch), Elektronischer Dietrich, Linienprojektor (kein SciFi-Item im deutschen Setting); Betäubungsknüppel → Betäubungsschlagstock, Schockgranaten → EMP-Granate",
       "ok": true,
-      "warnung": "MISSING: 2. Molekularschwert, Betäubungsknüppel, Schockgranaten, Direktionalmikrofon, Linienprojektor, Atemschutz",
+      "warnung": "MISSING: Schneidbrenner (cutting torch), Elektronischer Dietrich, Linienprojektor (kein SciFi-Item im deutschen Setting); Betäubungsknüppel → Betäubungsschlagstock, Schockgranaten → EMP-Granate",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik via HP, Diebeskunst d6→d8 via D-Adv)",
+      "ok": true,
+      "warnung": "STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik via HP, Diebeskunst d6→d8 via D-Adv)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 14,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -588,7 +727,7 @@
         "modifier": 0
       },
       "Stärke": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0
       },
       "Konstitution": {
@@ -614,7 +753,13 @@
         "ausgewaehlt": true
       },
       "Diebeskunst": {
-        "wert": 6,
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Elektronik": {
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -667,9 +812,9 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
+      "handicap": 1,
       "handicap_gesamt": 4,
-      "aufstiege": 1
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,

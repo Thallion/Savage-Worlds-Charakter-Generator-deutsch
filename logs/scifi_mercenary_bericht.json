@@ -554,9 +554,9 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verbesserte Sicht zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware",
+      "aktion": "NOTIZ: MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware (beide kein SciFi-Item im deutschen Setting)",
       "ok": true,
-      "warnung": "MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware",
+      "warnung": "MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware (beide kein SciFi-Item im deutschen Setting)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},

@@ -158,19 +158,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
@@ -178,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,6 +308,32 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Elektronik)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Pilot)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -328,6 +341,32 @@
     },
     {
       "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Naturwissenschaften)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -418,6 +457,71 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10\" Strahl) zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Medi-Gelx2) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Medi-Gel zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Scannerx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Scanner zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Tarnanzugx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Tarnanzug zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Surveyor_A.json)",
       "ok": true
     }
@@ -476,16 +580,90 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10\" Strahl) zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Laserpistole, Handbeil, Environment Wear, Medi-Gel×2, Scanner; Skills auf 12pt Budget",
+      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Medi-Gelx2) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Medi-Gel zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Scannerx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Scanner zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Tarnanzugx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Tarnanzug zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative",
       "ok": true,
-      "warnung": "MISSING: Laserpistole, Handbeil, Environment Wear, Medi-Gel×2, Scanner; Skills auf 12pt Budget",
+      "warnung": "MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik, Pilot, Naturwissenschaften via HP+D-Adv)",
+      "ok": true,
+      "warnung": "STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik, Pilot, Naturwissenschaften via HP+D-Adv)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 11,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -497,7 +675,7 @@
         "modifier": 0
       },
       "Stärke": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0
       },
       "Konstitution": {
@@ -522,6 +700,12 @@
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
+      "Elektronik": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Fahren": {
         "wert": 4,
         "modifier": 0,
@@ -540,6 +724,18 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
+      "Naturwissenschaften": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Pilot": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Schießen": {
         "wert": 6,
         "modifier": 0,
@@ -553,7 +749,7 @@
         "ausgewaehlt": true
       },
       "Überleben": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -583,11 +779,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 1
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

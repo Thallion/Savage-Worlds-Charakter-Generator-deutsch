@@ -145,19 +145,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "fertigkeit(Fahren)",
       "ok": true,
       "kosten": 1,
@@ -292,6 +279,19 @@
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
@@ -450,19 +450,6 @@
   ],
   "anomalien": [
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "NOTIZ: ADVANCE: Cyber Installs – kein Talent-Key, via Ausrüstung modelliert",
       "ok": true,
       "warnung": "ADVANCE: Cyber Installs – kein Talent-Key, via Ausrüstung modelliert",
@@ -472,9 +459,9 @@
       "vermoegen": 500
     },
     {
-      "aktion": "NOTIZ: ANCESTRY BUG: Low Light Vision nicht im deutschen Draken implementiert",
+      "aktion": "NOTIZ: ANCESTRY: Dämmerungssicht ergänzt (Vorlage Fantasy Aquarianer/Elf, Halbiert Düstere-Beleuchtungs-Abzüge)",
       "ok": true,
-      "warnung": "ANCESTRY BUG: Low Light Vision nicht im deutschen Draken implementiert",
+      "warnung": "ANCESTRY: Dämmerungssicht ergänzt (Vorlage Fantasy Aquarianer/Elf, Halbiert Düstere-Beleuchtungs-Abzüge)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -585,16 +572,16 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Klauen zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Plasmapistole, Schweißbrille",
+      "aktion": "NOTIZ: Alle Bogen-Items vorhanden (Plasmapistole, Rucksack, Taschenlampe, Taschencomputer, Werkzeugkoffer, Universal-Batterie ergänzt 2026-06-01)",
       "ok": true,
-      "warnung": "MISSING: Plasmapistole, Schweißbrille",
+      "warnung": "Alle Bogen-Items vorhanden (Plasmapistole, Rucksack, Taschenlampe, Taschencomputer, Werkzeugkoffer, Universal-Batterie ergänzt 2026-06-01)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 12,
+  "anomalien_anzahl": 11,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -610,7 +597,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0
       },
       "Willenskraft": {
@@ -698,11 +685,11 @@
       "fertigkeit": 1,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 1
+      "aufstiege": 0
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Draken"
   }
 }

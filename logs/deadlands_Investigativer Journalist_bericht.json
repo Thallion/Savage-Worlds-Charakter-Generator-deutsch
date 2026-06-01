@@ -368,12 +368,12 @@
     {
       "aktion": "talent_mit_aufstieg(Ermittler)",
       "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 235,
       "warnung": null
@@ -381,12 +381,12 @@
     {
       "aktion": "talent_mit_aufstieg(Geschichtenerzähler)",
       "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
       "warnung": null
@@ -399,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
       "warnung": null
@@ -412,23 +412,23 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
       "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Überreden)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
@@ -438,44 +438,99 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
       "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 235,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Investigativer Journalist_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Überreden)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 235,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 235,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 235,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "fertigkeiten: Schießen soll W6, ist W4; fertigkeiten: Überreden soll W8, ist W6; fertigkeiten: Wahrnehmung soll W6, ist W4",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4,
+        "handicap_gesamt": 4,
+        "aufstiege": 0.0
+      },
+      "vermoegen": 235
+    }
+  ],
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -519,13 +574,13 @@
         "ausgewaehlt": true
       },
       "Überreden": {
-        "wert": 8,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -537,7 +592,7 @@
         "ausgewaehlt": false
       },
       "Schießen": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -589,7 +644,7 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
+      "handicap": 4,
       "handicap_gesamt": 4,
       "aufstiege": 0.0
     },

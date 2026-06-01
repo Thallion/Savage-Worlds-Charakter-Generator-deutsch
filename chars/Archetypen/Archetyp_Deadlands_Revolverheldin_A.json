@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -514,12 +514,6 @@
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
-            },
-            "Ruhige Hände": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -557,8 +551,7 @@
         "Beidhändig",
         "Beidhändiger Fernkampf",
         "Duellant",
-        "Meisterschütze",
-        "Ruhige Hände"
+        "Meisterschütze"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -585,8 +578,8 @@
         "Munition Pistole (groß) .40-.50 (50 Stück)": 1,
         "Schnelllade-Zylinder": 2
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 0.5,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -601,7 +594,7 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 0,
+    "verbleibende_handicap_punkte": 4,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -720,14 +713,14 @@
             {
                 "typ": "talent",
                 "name": "Beidhändig",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             },
             {
                 "typ": "talent",
                 "name": "Beidhändiger Fernkampf",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             },
             {
                 "typ": "talent",
@@ -740,19 +733,6 @@
                 "name": "Meisterschütze",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Ruhige Hände",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
             }
         ]
     }

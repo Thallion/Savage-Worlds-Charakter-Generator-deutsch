@@ -114,12 +114,12 @@ Revolverheldin
     talent Duellant: ok=True
     talent Galgenhumor: bereits ausgewählt
     talent Meisterschütze: ok=True
-    talent Ruhige Hände: ok=True
+    talent Ruhige Hände: ok=False
     fertigkeit Provozieren auf 8
-    fertigkeit Wahrnehmung auf 6
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 209, 'machtpunkte': 0}
-  DIFF: []
-  → Revolverheldin anomalien=0
+    fertigkeit Wahrnehmung auf 4
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 209, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Ruhige Hände" FEHLT']
+  → Revolverheldin anomalien=3
 
 ============================================================
 Gepeinigter
@@ -338,12 +338,12 @@ Eingeborenen-Kundschafterin
     talent Kundschafter: bereits ausgewählt
     talent Naturbursche: ok=True
     fertigkeit Überleben auf 8
-    fertigkeit Wahrnehmung auf 8
+    fertigkeit Wahrnehmung auf 6
     fertigkeit Reiten auf 6
     fertigkeit Athletik auf 6
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 223, 'machtpunkte': 0}
-  DIFF: []
-  → Eingeborenen-Kundschafterin anomalien=0
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 223, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Wahrnehmung soll W8, ist W6']
+  → Eingeborenen-Kundschafterin anomalien=2
 
 ============================================================
 Metallmagier
@@ -386,11 +386,11 @@ Kopfgeldjäger
     talent Volltreffer: ok=True
     talent Bedrohlich: ok=True
     fertigkeit Schießen auf 8
-    fertigkeit Überleben auf 6
-    fertigkeit Wahrnehmung auf 6
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 187, 'machtpunkte': 0}
-  DIFF: []
-  → Kopfgeldjäger anomalien=0
+    fertigkeit Überleben auf 4
+    fertigkeit Wahrnehmung auf 4
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 187, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Überleben soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
+  → Kopfgeldjäger anomalien=3
 
 ============================================================
 Salonschönheit
@@ -410,11 +410,11 @@ Salonschönheit
     talent Konter: ok=True
     talent Mutig: ok=True
     fertigkeit Darbietung auf 8
-    fertigkeit Überreden auf 8
-    fertigkeit Wahrnehmung auf 6
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 243, 'machtpunkte': 0}
-  DIFF: []
-  → Salonschönheit anomalien=0
+    fertigkeit Überreden auf 6
+    fertigkeit Wahrnehmung auf 4
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 243, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Überreden soll W8, ist W6', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
+  → Salonschönheit anomalien=3
 
 ============================================================
 Wundarzt
@@ -576,12 +576,12 @@ Investigativer Journalist
     talent Ermittler: ok=True
     talent Geschichtenerzähler: ok=True
     talent Mumm: ok=True
-    fertigkeit Überreden auf 8
+    fertigkeit Überreden auf 6
     fertigkeit Recherche auf 8
-    fertigkeit Schießen auf 6
-    fertigkeit Wahrnehmung auf 6
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 235, 'machtpunkte': 0}
-  DIFF: []
-  → Investigativer Journalist anomalien=0
+    fertigkeit Schießen auf 4
+    fertigkeit Wahrnehmung auf 4
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 235, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Schießen soll W6, ist W4', 'fertigkeiten: Überreden soll W8, ist W6', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
+  → Investigativer Journalist anomalien=4
 
 === FERTIG ===

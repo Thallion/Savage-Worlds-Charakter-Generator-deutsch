@@ -171,19 +171,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "fertigkeit(Fokus)",
       "ok": true,
       "kosten": 1,
@@ -340,6 +327,19 @@
       "warnung": null
     },
     {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "talent(Erniedrigen)",
       "ok": true,
       "kosten": 0,
@@ -431,20 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Komlinkx1)",
-      "ok": true,
-      "kosten": 50,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 450,
-      "warnung": null
-    },
-    {
-      "aktion": "kaufen(Taschencomputerx1)",
+      "aktion": "kaufen(Laserpistolex1)",
       "ok": true,
       "kosten": 250,
       "kostenart": "Vermögen",
@@ -453,8 +440,47 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 200,
+      "vermoegen": 250,
       "warnung": null
+    },
+    {
+      "aktion": "kaufen(Nanowearx1) FORCE",
+      "ok": false,
+      "kosten": 250,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Nanowear zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Komlinkx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Komlink zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Morpher_A.json)",
@@ -463,29 +489,55 @@
   ],
   "anomalien": [
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
+      "aktion": "kaufen(Nanowearx1) FORCE",
+      "ok": false,
+      "kosten": 250,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Nanowear zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Komlinkx1) FORCE",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 12,
+        "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Komlink zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Laserpistole, Nanowear, Elektronisches Schloss",
+      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: Alle Bogen-Items vorhanden (Laserpistole, Nanowear ergänzt 2026-06-01); Elektronisches Schloss (electronic lockpick) fehlt im deutschen Setting",
       "ok": true,
-      "warnung": "MISSING: Laserpistole, Nanowear, Elektronisches Schloss",
+      "warnung": "Alle Bogen-Items vorhanden (Laserpistole, Nanowear ergänzt 2026-06-01); Elektronisches Schloss (electronic lockpick) fehlt im deutschen Setting",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 200
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -501,7 +553,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0
       },
       "Willenskraft": {
@@ -578,11 +630,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 1
+      "aufstiege": 0
     },
     "machtpunkte": 15,
-    "vermoegen": 200,
-    "rang": "Anfänger",
+    "vermoegen": 0,
+    "rang": "Fortgeschritten",
     "volk": "Wechselbälger"
   }
 }

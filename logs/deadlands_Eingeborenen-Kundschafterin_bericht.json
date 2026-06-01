@@ -381,12 +381,12 @@
     {
       "aktion": "talent_mit_aufstieg(Parkour)",
       "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
       "warnung": null
@@ -399,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
       "warnung": null
@@ -412,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
       "warnung": null
@@ -425,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
       "warnung": null
@@ -438,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
       "warnung": null
@@ -451,31 +451,60 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
       "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 223,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Eingeborenen-Kundschafterin_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 223,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "fertigkeiten: Wahrnehmung soll W8, ist W6",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2,
+        "handicap_gesamt": 4,
+        "aufstiege": 0.0
+      },
+      "vermoegen": 223
+    }
+  ],
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -525,7 +554,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 8,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -582,13 +611,13 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
+      "handicap": 2,
       "handicap_gesamt": 4,
-      "aufstiege": 0.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 223,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }
