@@ -106,32 +106,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Heilung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Zorn der Petro-Loa)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
@@ -353,33 +327,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Okkultismus) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Provozieren) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -405,19 +353,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Mutig)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 248,
-      "warnung": null
-    },
-    {
       "aktion": "talent_mit_aufstieg(Machtpunkte)",
       "ok": true,
       "kosten": 0,
@@ -431,7 +366,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Provozieren)",
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -444,7 +379,20 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Provozieren)",
+      "aktion": "talent_mit_aufstieg(Mutig)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 248,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Okkultismus)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -458,7 +406,7 @@
     },
     {
       "aktion": "macht(Heilung)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -467,7 +415,20 @@
         "handicap": 1
       },
       "vermoegen": 248,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Zorn der Petro-Loa)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 248,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Voodoopraktikerin_A.json)",
@@ -476,48 +437,9 @@
   ],
   "anomalien": [
     {
-      "aktion": "macht(Heilung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Zorn der Petro-Loa)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Heilung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 248,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "fertigkeiten: Okkultismus soll W6, ist W4; fertigkeiten: Provozieren soll W4, ist W6; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Machtpunkte\" ZUVIEL; maechte: \"Heilung\" FEHLT; maechte: \"Zorn der Petro-Loa\" FEHLT",
+      "warnung": "fertigkeiten: Okkultismus soll W4, ist W6; fertigkeiten: Provozieren soll W4, ist FEHLT; talente: \"Machtpunkte\" ZUVIEL; talente: \"Neue Mächte\" ZUVIEL; maechte: \"Zorn der Petro-Loa\" ZUVIEL; maechte: \"Heilung\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -525,12 +447,12 @@
         "fertigkeit": 0,
         "handicap": 1,
         "handicap_gesamt": 3,
-        "aufstiege": 1.0
+        "aufstiege": 0.5
       },
       "vermoegen": 248
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -609,14 +531,8 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
-      "Provozieren": {
-        "wert": 6,
-        "modifier": 0,
-        "grundfertigkeit": false,
-        "ausgewaehlt": false
-      },
       "Okkultismus": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -629,12 +545,15 @@
     "talente": [
       "Begünstigt",
       "AH (Voodoopraktiker)",
-      "Mutig",
-      "Machtpunkte"
+      "Machtpunkte",
+      "Neue Mächte",
+      "Mutig"
     ],
     "maechte": [
       "Aspekt der Rada-Loa",
-      "Eigenschaft erhöhen/senken"
+      "Eigenschaft erhöhen/senken",
+      "Heilung",
+      "Zorn der Petro-Loa"
     ],
     "ausruestung": {},
     "punkte": {
@@ -642,7 +561,7 @@
       "fertigkeit": 0,
       "handicap": 1,
       "handicap_gesamt": 3,
-      "aufstiege": 1.0
+      "aufstiege": 0.5
     },
     "machtpunkte": 20,
     "vermoegen": 248,

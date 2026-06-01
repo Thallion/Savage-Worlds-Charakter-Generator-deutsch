@@ -501,6 +501,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Schnell ziehen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -536,7 +542,8 @@
     ],
     "selected_talente": [
         "Tierempathie",
-        "Im Sattel geboren"
+        "Im Sattel geboren",
+        "Schnell ziehen"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -566,7 +573,7 @@
         "Lasso": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 2.5,
+    "verbleibende_aufstiege": 1.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -721,6 +728,12 @@
             {
                 "typ": "talent",
                 "name": "Im Sattel geboren",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Schnell ziehen",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

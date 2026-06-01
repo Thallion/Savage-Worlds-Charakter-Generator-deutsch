@@ -275,19 +275,6 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
       "ok": true,
       "kosten": 0,
@@ -435,24 +422,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Schießen soll W8, ist W6",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.5
-      },
-      "vermoegen": 209
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

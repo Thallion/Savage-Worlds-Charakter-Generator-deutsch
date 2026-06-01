@@ -119,32 +119,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Waffe verbessern)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Wildniswandler)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
@@ -470,8 +444,8 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Heiliger Krieger)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Heiliger/Unheiliger Krieger)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -480,7 +454,46 @@
         "handicap": 0
       },
       "vermoegen": 245,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 245,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 245,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Sprache)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 245,
+      "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Reiten)",
@@ -496,8 +509,8 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Waffe verbessern)",
-      "ok": false,
+      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,11 +519,24 @@
         "handicap": 0
       },
       "vermoegen": 245,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Waffe verbessern)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 245,
+      "warnung": null
     },
     {
       "aktion": "macht(Wildniswandler)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,96 +545,15 @@
         "handicap": 0
       },
       "vermoegen": 245,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Schamane_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "macht(Waffe verbessern)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Wildniswandler)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Heiliger Krieger)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 245,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Waffe verbessern)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 245,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Wildniswandler)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 245,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Sprache soll W4, ist FEHLT; fertigkeiten: Überleben soll W4, ist FEHLT; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Heiliger Krieger\" FEHLT; maechte: \"Waffe verbessern\" FEHLT; maechte: \"Wildniswandler\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 3.5
-      },
-      "vermoegen": 245
-    }
-  ],
-  "anomalien_anzahl": 6,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -658,13 +603,19 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
       "Kämpfen": {
         "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Überleben": {
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -692,6 +643,12 @@
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
+      },
+      "Sprache": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
       }
     },
     "handicaps": [
@@ -701,11 +658,15 @@
     ],
     "talente": [
       "Die Gunst des Geistes",
-      "AH (Schamane)"
+      "AH (Schamane)",
+      "Heiliger/Unheiliger Krieger",
+      "Neue Mächte"
     ],
     "maechte": [
       "Eigenschaft erhöhen/senken",
-      "Schutz"
+      "Schutz",
+      "Waffe verbessern",
+      "Wildniswandler"
     ],
     "ausruestung": {},
     "punkte": {
@@ -713,11 +674,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 3.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 15,
     "vermoegen": 245,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

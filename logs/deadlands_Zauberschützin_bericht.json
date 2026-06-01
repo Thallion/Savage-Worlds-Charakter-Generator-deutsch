@@ -119,45 +119,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Munitionszauber)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Schutz)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Verwirrung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
@@ -224,19 +185,6 @@
     },
     {
       "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -483,33 +431,72 @@
       "warnung": null
     },
     {
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 200,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Munitionszauber)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 200,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Schutz)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 200,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 200,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 200,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Runenschießen)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 200,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 200,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -526,63 +513,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "macht(Munitionszauber)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Schutz)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Verwirrung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "attribute: Konstitution soll W6, ist W4; maechte: \"Eigenschaft erhöhen/sken\" FEHLT; maechte: \"Munitionszauber\" FEHLT; maechte: \"Schutz\" FEHLT; maechte: \"Verwirrung\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" ZUVIEL",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 2.0
-      },
-      "vermoegen": 200
-    }
-  ],
-  "anomalien_anzahl": 4,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -675,12 +607,15 @@
     "talente": [
       "Berechnend",
       "AH (Taschenspieler)",
+      "Neue Mächte",
       "Runenschießen"
     ],
     "maechte": [
       "Abstumpfen",
       "Abwehren",
-      "Eigenschaft erhöhen/senken"
+      "Eigenschaft erhöhen/senken",
+      "Munitionszauber",
+      "Schutz"
     ],
     "ausruestung": {},
     "punkte": {
@@ -688,7 +623,7 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 2.0
+      "aufstiege": 1.0
     },
     "machtpunkte": 10,
     "vermoegen": 200,

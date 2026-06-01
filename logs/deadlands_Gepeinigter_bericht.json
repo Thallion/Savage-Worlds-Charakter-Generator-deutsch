@@ -67,7 +67,7 @@
       "warnung": null
     },
     {
-      "aktion": "volk_freies_talent(Mensch,Flicken)",
+      "aktion": "volk_freies_talent(Mensch,Übernatürliches Attribut (Geschicklichkeit))",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -80,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -93,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -132,36 +132,10 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Stärke)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
@@ -184,7 +158,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Willenskraft)",
+      "aktion": "attribut_mit_hc(Konstitution)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -197,10 +171,36 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
+      "aktion": "talent(Flicken)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Gepeinigt)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent(Killerinstinkt)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
@@ -444,7 +444,20 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Übernatürliches Attribut (Geschicklichkeit))",
+      "aktion": "talent_mit_aufstieg(Gepeinigt)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 214,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -502,9 +515,31 @@
   ],
   "anomalien": [
     {
+      "aktion": "talent(Gepeinigt)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "NOTIZ: Talent \"Gepeinigt\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "ok": true,
+      "warnung": "Talent \"Gepeinigt\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 250
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "attribute: Geschicklichkeit soll W8, ist W12; attribute: Konstitution soll W8, ist W4; talente: \"Gepeinigt\" FEHLT; talente: \"Flicken\" ZUVIEL",
+      "warnung": "talente: \"Killerinstinkt\" ZUVIEL; talente: \"Flicken\" ZUVIEL; talente: \"Übernatürliches Attribut (Geschicklichkeit)\" ZUVIEL; talente: \"Gepeinigt\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -512,16 +547,16 @@
         "fertigkeit": 0,
         "handicap": 0,
         "handicap_gesamt": 4,
-        "aufstiege": 0.5
+        "aufstiege": 0.0
       },
       "vermoegen": 214
     }
   ],
-  "anomalien_anzahl": 1,
+  "anomalien_anzahl": 3,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
-        "wert": 12,
+        "wert": 8,
         "modifier": 0
       },
       "Verstand": {
@@ -533,7 +568,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0
       },
       "Willenskraft": {
@@ -567,7 +602,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -615,9 +650,10 @@
       "Skrupellos (leicht)"
     ],
     "talente": [
+      "Übernatürliches Attribut (Geschicklichkeit)",
       "Flicken",
       "Killerinstinkt",
-      "Übernatürliches Attribut (Geschicklichkeit)"
+      "Gepeinigt"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -626,11 +662,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 214,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

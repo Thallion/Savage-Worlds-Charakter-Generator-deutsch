@@ -457,19 +457,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Wichita-Hexe)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 225,
-      "warnung": null
-    },
-    {
       "aktion": "talent_mit_aufstieg(Machtpunkte)",
       "ok": true,
       "kosten": 0,
@@ -483,6 +470,32 @@
       "warnung": null
     },
     {
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 225,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Wichita-Hexe)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 225,
+      "warnung": null
+    },
+    {
       "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
       "ok": true,
       "kosten": 0,
@@ -510,7 +523,7 @@
     },
     {
       "aktion": "macht(Flächenschlag)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +532,20 @@
         "handicap": 0
       },
       "vermoegen": 225,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Kriegersegen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 225,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Hexe_A.json)",
@@ -528,22 +554,9 @@
   ],
   "anomalien": [
     {
-      "aktion": "macht(Flächenschlag)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 225,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "talente: \"Machtpunkte\" ZUVIEL; maechte: \"Betören\" FEHLT; maechte: \"Flächenschlag\" FEHLT; maechte: \"Kriegersegen\" FEHLT; maechte: \"Betoeren\" ZUVIEL",
+      "warnung": "talente: \"Machtpunkte\" ZUVIEL; talente: \"Neue Mächte\" ZUVIEL; maechte: \"Kriegersegen\" ZUVIEL; maechte: \"Flächenschlag\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -551,12 +564,12 @@
         "fertigkeit": 0,
         "handicap": 0,
         "handicap_gesamt": 4,
-        "aufstiege": 1.0
+        "aufstiege": 0.0
       },
       "vermoegen": 225
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -656,13 +669,16 @@
     "talente": [
       "Vertrauter",
       "AH (Hexe)",
-      "Wichita-Hexe",
-      "Machtpunkte"
+      "Machtpunkte",
+      "Neue Mächte",
+      "Wichita-Hexe"
     ],
     "maechte": [
       "Betoeren",
       "Empathie",
-      "Verwirrung"
+      "Verwirrung",
+      "Flächenschlag",
+      "Kriegersegen"
     ],
     "ausruestung": {},
     "punkte": {
@@ -670,11 +686,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 1.0
+      "aufstiege": 0.0
     },
     "machtpunkte": 15,
     "vermoegen": 225,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

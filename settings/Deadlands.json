@@ -3058,7 +3058,7 @@
         },
         "max_bonus": 2
       }
-  },
+    },
     "Übernatürliches Attribut (Konstitution)": {
       "name": "Übernatürliches Attribut (Konstitution)",
       "kategorie": "Gepeinigt",
@@ -3073,7 +3073,7 @@
         },
         "max_bonus": 2
       }
-  },
+    },
     "Übernatürliches Attribut (Willenskraft)": {
       "name": "Übernatürliches Attribut (Willenskraft)",
       "kategorie": "Gepeinigt",
@@ -3088,7 +3088,7 @@
         },
         "max_bonus": 2
       }
-  },
+    },
     "Übernatürliches Attribut (Verstand)": {
       "name": "Übernatürliches Attribut (Verstand)",
       "kategorie": "Gepeinigt",
@@ -3103,7 +3103,7 @@
         },
         "max_bonus": 2
       }
-  },
+    },
     "Übernatürliches Attribut (Stärke)": {
       "name": "Übernatürliches Attribut (Stärke)",
       "kategorie": "Gepeinigt",
@@ -3118,7 +3118,23 @@
         },
         "max_bonus": 2
       }
-  }
+    },
+    "Metallmagier": {
+      "name": "Metallmagier",
+      "kategorie": "Metallmagier",
+      "rang": "A",
+      "beschreibung": "Metallmagier verwenden wie jeder andere verrückte Wissenschaftler Geräte, können aber auch wie Taschenspieler Ein Spiel mit dem Teufel wagen.",
+      "kosten": null,
+      "voraussetzungen": [
+        "AH (Verrückte Wissenschaft)",
+        "Okkultismus W6+",
+        "Verrückte Wissenschaft W8+"
+      ],
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    }
   },
   "handicaps": {
     "Ärgermagnet (leicht)": {
@@ -3760,6 +3776,15 @@
       "beschreibung": "Der Charakter will seinen Willen durchsetzen und gibt selten Fehler zu.",
       "ausgewaehlt": false,
       "aktiv": true
+    },
+    "Stur_schwer": {
+        "name": "Stur",
+        "stufe": "schwer",
+        "punkte": 2,
+        "beschreibung": "Der Charakter will seinen Willen durchsetzen und gibt nie Fehler zu.",
+        "ausgewaehlt": false,
+        "aktiv": true,
+        "custom": false
     },
     "Tick (leicht)": {
       "name": "Tick",

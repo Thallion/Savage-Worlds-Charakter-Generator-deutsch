@@ -514,17 +514,7 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Messer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Verkleidungszubehör": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Munition Pistolen (klein) .22-.38 (50 Stück)": {
+            "Colt Rainmaker (.32)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -549,19 +539,15 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Messer",
-        "Verkleidungszubehör",
-        "Munition Pistolen (klein) .22-.38 (50 Stück)"
+        "Colt Rainmaker (.32)"
     ],
     "selected_waffen": [
-        "Messer"
+        "Colt Rainmaker (.32)"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Messer": 1,
-        "Verkleidungszubehör": 1,
-        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
+        "Colt Rainmaker (.32)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -575,7 +561,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 236,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -622,6 +608,12 @@
                 "typ": "attribut",
                 "name": "Konstitution",
                 "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Agent",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -708,12 +700,6 @@
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Agent",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
             },
             {
                 "typ": "talent",

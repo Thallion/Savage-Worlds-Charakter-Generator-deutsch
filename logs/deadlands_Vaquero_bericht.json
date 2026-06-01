@@ -340,32 +340,6 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Sprache) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "kaufen(Colt Peacemaker (.45)x1)",
       "ok": true,
       "kosten": 15,
@@ -461,24 +435,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Sprache soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 1
-      },
-      "vermoegen": 204
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

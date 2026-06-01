@@ -94,7 +94,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -186,7 +186,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -570,8 +570,8 @@
         "Messer": 1,
         "Munition Pistole (groß) .40-.50 (50 Stück)": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -676,13 +676,6 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -724,6 +717,13 @@
                 "kosten": 1
             },
             {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
                 "typ": "talent",
                 "name": "Erniedrigen",
                 "zahlungsquelle": "Aufstiege",
@@ -737,13 +737,6 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1.0
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Schießen",
                 "wert": 4,
                 "zahlungsquelle": "Aufstiege",
@@ -752,6 +745,13 @@
             {
                 "typ": "fertigkeit",
                 "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5

@@ -2854,6 +2854,15 @@
             "aktiv": true,
             "custom": false
         },
+        "Stur_schwer": {
+            "name": "Stur",
+            "stufe": "schwer",
+            "punkte": 2,
+            "beschreibung": "Der Charakter will seinen Willen durchsetzen und gibt nie Fehler zu.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Tick": {
             "name": "Tick",
             "stufe": "leicht",

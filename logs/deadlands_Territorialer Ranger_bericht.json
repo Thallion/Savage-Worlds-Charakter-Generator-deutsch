@@ -197,6 +197,19 @@
       "warnung": null
     },
     {
+      "aktion": "talent(Territorialer Ranger)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
@@ -405,8 +418,8 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Messer, Bowie zum Preis 0 gekauft"
     },
     {
-      "aktion": "talent(Territorialer Ranger)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Doppelschuss)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -415,10 +428,10 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Doppelschuss)",
+      "aktion": "talent_mit_aufstieg(Territorialer Ranger)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -444,11 +457,59 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Territorialer Ranger_A.json)",
       "ok": true
     }
   ],
   "anomalien": [
+    {
+      "aktion": "talent(Territorialer Ranger)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "NOTIZ: Talent \"Territorialer Ranger\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "ok": true,
+      "warnung": "Talent \"Territorialer Ranger\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 250
+    },
     {
       "aktion": "kaufen(Gepanzerter Reitermantel (schwer)x1) FORCE",
       "ok": false,
@@ -474,46 +535,9 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Messer, Bowie zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "talent(Territorialer Ranger)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Talent \"Territorialer Ranger\" während CharGen fehlgeschlagen",
-      "ok": true,
-      "warnung": "Talent \"Territorialer Ranger\" während CharGen fehlgeschlagen",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 0
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Territorialer Ranger\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 2
-      },
-      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -563,7 +587,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -581,7 +605,7 @@
         "ausgewaehlt": false
       },
       "Überleben": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -607,6 +631,7 @@
     "talente": [
       "Mutig",
       "Doppelschuss",
+      "Territorialer Ranger",
       "Mumm"
     ],
     "maechte": [],
@@ -616,11 +641,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 2
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

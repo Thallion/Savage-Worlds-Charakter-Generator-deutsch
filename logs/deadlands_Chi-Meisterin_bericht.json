@@ -223,7 +223,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Fokus)",
+      "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -236,7 +236,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Fokus)",
+      "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -251,7 +251,20 @@
     {
       "aktion": "fertigkeit(Fokus)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 0
+      },
+      "vermoegen": 125,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Fokus)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
@@ -262,22 +275,9 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Heilen)",
+      "aktion": "fertigkeit(Fokus)",
       "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 7,
-        "handicap": 0
-      },
-      "vermoegen": 125,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Heilen)",
-      "ok": true,
-      "kosten": 1,
+      "kosten": 2,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
@@ -288,7 +288,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Kämpfen)",
+      "aktion": "fertigkeit(Heilen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -301,7 +301,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Kämpfen)",
+      "aktion": "fertigkeit(Heilen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -314,7 +314,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Kämpfen)",
+      "aktion": "fertigkeit(Heimlichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -327,7 +327,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Provozieren)",
+      "aktion": "fertigkeit(Heimlichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -340,7 +340,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Sprache)",
+      "aktion": "fertigkeit(Kämpfen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -353,10 +353,36 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Wahrnehmung)",
+      "aktion": "fertigkeit(Kämpfen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 125,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Sprache) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 125,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -405,7 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -418,33 +444,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 123,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Heimlichkeit)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 123,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Heimlichkeit)",
+      "aktion": "fertigkeit_mit_aufstieg(Sprache)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -461,24 +461,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Athletik soll W4, ist W8; fertigkeiten: Heimlichkeit soll W4, ist W8",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 123
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -534,7 +518,7 @@
         "ausgewaehlt": true
       },
       "Kämpfen": {
-        "wert": 8,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -547,12 +531,6 @@
       },
       "Heilen": {
         "wert": 6,
-        "modifier": 0,
-        "grundfertigkeit": false,
-        "ausgewaehlt": false
-      },
-      "Provozieren": {
-        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -586,11 +564,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.0
+      "aufstiege": 1.0
     },
     "machtpunkte": 15,
     "vermoegen": 123,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

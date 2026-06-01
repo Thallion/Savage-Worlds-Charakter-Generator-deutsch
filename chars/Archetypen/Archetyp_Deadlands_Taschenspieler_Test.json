@@ -1,13 +1,13 @@
 {
     "profil_daten": {
-        "Name": "Kopfgeldjäger",
+        "Name": "Taschenspieler",
         "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
         "Sprachen": ""
     },
     "active_setting_name": "Deadlands",
-    "char_gen_completed": true,
+    "char_gen_completed": false,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -37,12 +37,12 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
@@ -57,7 +57,7 @@
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -68,7 +68,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -172,8 +172,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -185,7 +185,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -250,8 +250,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -302,8 +302,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -341,8 +341,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -368,7 +368,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -473,43 +473,24 @@
             }
         },
         "handicaps": {
-            "Arrogant (schwer)": {
+            "Ärgermagnet (leicht)": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Nachtängste (schwer)": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Skrupellos (schwer)": {
+            "Tick (leicht)": {
                 "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
+                "stufe": "leicht",
+                "punkte": 1
             }
         },
         "talente": {
-            "Gassenwissen": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Keine Gnade": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Ruhige Hände": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Volltreffer": {
-                "ausgewaehlt": true,
-                "rang": "WC",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Bedrohlich": {
+            "Falsch Spielen": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -519,34 +500,15 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {
-            "Winchester '73 (.44-40)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Colt Frontier (.44-40)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Munition Gewehr (klein) .38-44 (50 Stück)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            }
-        }
+        "ausruestung": {}
     },
     "selected_handicaps": [
-        "Arrogant (schwer)",
-        "Skrupellos (schwer)"
+        "Ärgermagnet (leicht)",
+        "Nachtängste (schwer)",
+        "Tick (leicht)"
     ],
     "selected_talente": [
-        "Gassenwissen",
-        "Keine Gnade",
-        "Ruhige Hände",
-        "Volltreffer",
-        "Bedrohlich"
+        "Falsch Spielen"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -555,25 +517,14 @@
         "Mensch": true
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [
-        "Winchester '73 (.44-40)",
-        "Colt Frontier (.44-40)",
-        "Munition Gewehr (klein) .38-44 (50 Stück)"
-    ],
-    "selected_waffen": [
-        "Winchester '73 (.44-40)",
-        "Colt Frontier (.44-40)"
-    ],
+    "selected_allgemeine_ausruestung": [],
+    "selected_waffen": [],
     "selected_ruestungen": [],
     "selected_schilde": [],
-    "ausruestung_mengen": {
-        "Winchester '73 (.44-40)": 1,
-        "Colt Frontier (.44-40)": 2,
-        "Munition Gewehr (klein) .38-44 (50 Stück)": 2
-    },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "ausruestung_mengen": {},
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 0,
+    "aufstiege_gesamt": 0,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -583,7 +534,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 187,
+    "vermoegen": 250,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
@@ -600,15 +551,15 @@
             },
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 8,
+                "name": "Verstand",
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Verstand",
-                "wert": 6,
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -621,10 +572,17 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
+                "name": "Willenskraft",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "attribut",
@@ -635,22 +593,29 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Athletik",
+                "name": "Allgemeinwissen",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
+                "name": "Glücksspiel",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
+                "name": "Glücksspiel",
                 "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glücksspiel",
+                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -670,7 +635,21 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Okkultismus",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
@@ -684,13 +663,6 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Reiten",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Schießen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -698,62 +670,10 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Schießen",
+                "name": "Überreden",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Keine Gnade",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "talent",
-                "name": "Ruhige Hände",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Volltreffer",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Bedrohlich",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
             }
         ]
     }

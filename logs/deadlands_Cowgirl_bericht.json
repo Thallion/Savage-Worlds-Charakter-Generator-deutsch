@@ -366,19 +366,6 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "kaufen(Colt Peacemaker (.45)x1)",
       "ok": true,
       "kosten": 15,
@@ -444,8 +431,8 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Schnell Ziehen)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Schnell ziehen)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -454,7 +441,7 @@
         "handicap": 0
       },
       "vermoegen": 204,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
@@ -474,37 +461,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "talent_mit_aufstieg(Schnell Ziehen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 204,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "attribute: Konstitution soll W8, ist W6; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Schnell Ziehen\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 2.5
-      },
-      "vermoegen": 204
-    }
-  ],
-  "anomalien_anzahl": 2,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -603,7 +561,8 @@
     ],
     "talente": [
       "Tierempathie",
-      "Im Sattel geboren"
+      "Im Sattel geboren",
+      "Schnell ziehen"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -612,7 +571,7 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 2.5
+      "aufstiege": 1.5
     },
     "machtpunkte": 0,
     "vermoegen": 204,

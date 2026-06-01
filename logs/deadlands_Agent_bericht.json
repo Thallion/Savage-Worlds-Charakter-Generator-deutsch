@@ -158,6 +158,19 @@
       "warnung": null
     },
     {
+      "aktion": "talent(Agent)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "fertigkeit(Einschüchtern)",
       "ok": true,
       "kosten": 1,
@@ -165,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -178,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -191,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -204,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -217,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -230,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -243,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -256,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -269,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -282,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -295,7 +308,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -308,7 +321,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -321,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -334,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -347,62 +360,75 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
     },
     {
-      "aktion": "kaufen(Messerx1)",
+      "aktion": "kaufen(Colt Rainmaker (.32)x1)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 8,
       "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 248,
-      "warnung": null
-    },
-    {
-      "aktion": "kaufen(Verkleidungszubehörx1)",
-      "ok": true,
-      "kosten": 10,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 238,
-      "warnung": null
-    },
-    {
-      "aktion": "kaufen(Munition Pistolen (klein) .22-.38 (50 Stück)x1)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 236,
-      "warnung": null
-    },
-    {
-      "aktion": "talent(Agent)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 242,
       "warnung": null
+    },
+    {
+      "aktion": "kaufen(Gatling-Pistole (.36)x1) FORCE",
+      "ok": false,
+      "kosten": 242,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Gatling-Pistole (.36) zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Messerx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Messer zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Verkleidungszubehörx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Verkleidungszubehör zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Munition Pistolen (klein) .22-.38 (50 Stück)x1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistolen (klein) .22-.38 (50 Stück) zum Preis 0 gekauft"
     },
     {
       "aktion": "talent_mit_aufstieg(Ermittler)",
@@ -414,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -427,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -440,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -453,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -466,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -479,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -489,25 +515,59 @@
   ],
   "anomalien": [
     {
-      "aktion": "NOTIZ: FEHLT im Katalog: Colt Rainmaker",
-      "ok": true,
-      "warnung": "FEHLT im Katalog: Colt Rainmaker",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 250
+      "aktion": "kaufen(Gatling-Pistole (.36)x1) FORCE",
+      "ok": false,
+      "kosten": 242,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Gatling-Pistole (.36) zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: FEHLT im Katalog: Gatling-Pistole",
-      "ok": true,
-      "warnung": "FEHLT im Katalog: Gatling-Pistole",
+      "aktion": "kaufen(Messerx1) FORCE",
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
-      "punkte": {},
-      "vermoegen": 250
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Messer zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Verkleidungszubehörx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Verkleidungszubehör zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Munition Pistolen (klein) .22-.38 (50 Stück)x1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistolen (klein) .22-.38 (50 Stück) zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -619,7 +679,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 0,
-    "vermoegen": 236,
+    "vermoegen": 0,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

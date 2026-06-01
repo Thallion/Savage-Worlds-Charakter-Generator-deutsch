@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -173,7 +173,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -407,7 +407,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -501,6 +501,18 @@
                 "rang": "A",
                 "neue_maechte": 2,
                 "machtpunkte": 15
+            },
+            "Heiliger/Unheiliger Krieger": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -517,6 +529,20 @@
                 "machtpunkte": 1,
                 "reichweite": "VER 5",
                 "dauer": "—"
+            },
+            "Waffe verbessern": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Wildniswandler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Selbst",
+                "dauer": "1 Stunde"
             }
         },
         "superkraefte": {},
@@ -541,11 +567,15 @@
     ],
     "selected_talente": [
         "Die Gunst des Geistes",
-        "AH (Schamane)"
+        "AH (Schamane)",
+        "Heiliger/Unheiliger Krieger",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Eigenschaft erhöhen/senken",
-        "Schutz"
+        "Schutz",
+        "Waffe verbessern",
+        "Wildniswandler"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -568,13 +598,13 @@
         "Eingeborenenrüstung": 1,
         "Tomahawk": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 3.5,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 2,
+    "anzahl_maechte": 4,
     "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -721,9 +751,42 @@
                 "kosten": 1
             },
             {
+                "typ": "talent",
+                "name": "Heiliger/Unheiliger Krieger",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Sprache",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
                 "typ": "fertigkeit",
                 "name": "Reiten",
                 "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

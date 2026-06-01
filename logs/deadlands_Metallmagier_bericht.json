@@ -93,32 +93,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Chaos)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Flächenschlag)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "macht(Schmuckstücke)",
       "ok": true,
       "kosten": 0,
@@ -431,8 +405,8 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Metallmagier)",
-      "ok": false,
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -441,10 +415,10 @@
         "handicap": 0
       },
       "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Reparieren)",
+      "aktion": "talent_mit_aufstieg(Metallmagier)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -470,8 +444,8 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Chaos)",
-      "ok": false,
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -480,11 +454,11 @@
         "handicap": 0
       },
       "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "macht(Flächenschlag)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -493,83 +467,28 @@
         "handicap": 0
       },
       "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Strahl)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 243,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Metallmagier_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "macht(Chaos)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Metallmagier)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Chaos)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Flächenschlag)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Reparieren soll W6, ist W8; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Metallmagier\" FEHLT; talente: \"Kühler Kopf\" ZUVIEL; maechte: \"Chaos\" FEHLT; maechte: \"Flächenschlag\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 3.0
-      },
-      "vermoegen": 243
-    }
-  ],
-  "anomalien_anzahl": 5,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -619,7 +538,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -637,7 +556,7 @@
         "ausgewaehlt": false
       },
       "Reparieren": {
-        "wert": 8,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -673,11 +592,15 @@
     ],
     "talente": [
       "Kühler Kopf",
-      "AH (Verrückte Wissenschaft)"
+      "AH (Verrückte Wissenschaft)",
+      "Neue Mächte",
+      "Metallmagier"
     ],
     "maechte": [
       "Ausfall",
-      "Schmuckstücke"
+      "Schmuckstücke",
+      "Flächenschlag",
+      "Strahl"
     ],
     "ausruestung": {},
     "punkte": {
@@ -685,7 +608,7 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 3.0
+      "aufstiege": 1.0
     },
     "machtpunkte": 15,
     "vermoegen": 243,

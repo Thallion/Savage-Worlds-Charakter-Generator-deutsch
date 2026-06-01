@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -328,7 +328,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -496,6 +496,18 @@
                 "rang": "A",
                 "neue_maechte": 2,
                 "machtpunkte": 15
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
+            },
+            "Metallmagier": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -512,6 +524,20 @@
                 "machtpunkte": 3,
                 "reichweite": "Verstand",
                 "dauer": "5"
+            },
+            "Flächenschlag": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 3,
+                "reichweite": "VER×2",
+                "dauer": "Sofort"
+            },
+            "Strahl": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Kegel",
+                "dauer": "Sofort"
             }
         },
         "superkraefte": {},
@@ -535,11 +561,15 @@
     ],
     "selected_talente": [
         "Kühler Kopf",
-        "AH (Verrückte Wissenschaft)"
+        "AH (Verrückte Wissenschaft)",
+        "Neue Mächte",
+        "Metallmagier"
     ],
     "selected_maechte": [
         "Ausfall",
-        "Schmuckstücke"
+        "Schmuckstücke",
+        "Flächenschlag",
+        "Strahl"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -561,12 +591,12 @@
         "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 3.0,
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 2,
+    "anzahl_maechte": 4,
     "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -713,16 +743,28 @@
                 "kosten": 1
             },
             {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Metallmagier",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
                 "typ": "fertigkeit",
-                "name": "Reparieren",
+                "name": "Verrückte Wissenschaft",
                 "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
-                "name": "Verrückte Wissenschaft",
-                "wert": 8,
+                "name": "Wahrnehmung",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

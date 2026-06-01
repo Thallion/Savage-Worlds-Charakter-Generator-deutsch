@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -482,6 +482,11 @@
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
+            },
+            "Stur_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
@@ -528,7 +533,8 @@
     },
     "selected_handicaps": [
         "Große Klappe (leicht)",
-        "Neugierig (schwer)"
+        "Neugierig (schwer)",
+        "Stur_schwer"
     ],
     "selected_talente": [
         "Aufmerksamkeit",
@@ -571,8 +577,8 @@
     "vermoegen": 235,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 3,
-    "verbleibende_handicap_punkte": 1,
+    "gesamt_handicap_punkte": 4,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -704,8 +710,8 @@
             {
                 "typ": "talent",
                 "name": "Geschichtenerzähler",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "talent",
@@ -731,6 +737,20 @@
                 "typ": "fertigkeit",
                 "name": "Schießen",
                 "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

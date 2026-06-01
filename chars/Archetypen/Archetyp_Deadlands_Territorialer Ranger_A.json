@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -172,7 +172,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -502,6 +502,12 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
+            "Territorialer Ranger": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "Mumm": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -522,6 +528,7 @@
     "selected_talente": [
         "Mutig",
         "Doppelschuss",
+        "Territorialer Ranger",
         "Mumm"
     ],
     "selected_maechte": [],
@@ -536,8 +543,8 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {},
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 2,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -697,9 +704,29 @@
             },
             {
                 "typ": "talent",
+                "name": "Territorialer Ranger",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
                 "name": "Mumm",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 12,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -490,6 +490,12 @@
             }
         },
         "talente": {
+            "Übernatürliches Attribut (Geschicklichkeit)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "Flicken": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -502,7 +508,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Übernatürliches Attribut (Geschicklichkeit)": {
+            "Gepeinigt": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -536,9 +542,10 @@
         "Skrupellos (leicht)"
     ],
     "selected_talente": [
+        "Übernatürliches Attribut (Geschicklichkeit)",
         "Flicken",
         "Killerinstinkt",
-        "Übernatürliches Attribut (Geschicklichkeit)"
+        "Gepeinigt"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -563,8 +570,8 @@
         "Messer": 1,
         "Munition Gewehr (klein) .38-44 (50 Stück)": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 0.5,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -585,20 +592,6 @@
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Verstand",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -622,13 +615,26 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Stärke",
                 "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Flicken",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -724,9 +730,16 @@
             },
             {
                 "typ": "talent",
-                "name": "Übernatürliches Attribut (Geschicklichkeit)",
+                "name": "Gepeinigt",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",

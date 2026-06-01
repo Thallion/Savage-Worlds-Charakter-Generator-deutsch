@@ -132,32 +132,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Linderung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Waffe verbessern)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
@@ -591,50 +565,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "macht(Linderung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Waffe verbessern)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Neue Mächte\" ZUVIEL",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 232
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

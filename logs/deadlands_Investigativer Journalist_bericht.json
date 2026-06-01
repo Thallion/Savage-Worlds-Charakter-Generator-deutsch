@@ -28,27 +28,27 @@
       "warnung": null
     },
     {
-      "aktion": "handicap(Stur (schwer))",
-      "ok": false,
+      "aktion": "handicap(Stur_schwer)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Große Klappe (leicht))",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "handicap(Große Klappe (leicht))",
-      "ok": true,
-      "kosten": -1,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -61,7 +61,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -74,7 +74,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -87,7 +87,7 @@
       "punkte": {
         "attribut": 4,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -100,7 +100,7 @@
       "punkte": {
         "attribut": 3,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -113,7 +113,7 @@
       "punkte": {
         "attribut": 2,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -126,7 +126,7 @@
       "punkte": {
         "attribut": 1,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -139,7 +139,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -152,7 +152,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -165,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -178,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -191,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -204,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -217,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -230,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -243,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -256,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -269,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -282,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -295,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -308,7 +308,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -321,7 +321,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -334,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 250,
       "warnung": null
@@ -347,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 237,
       "warnung": null
@@ -360,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 3
+        "handicap": 4
       },
       "vermoegen": 235,
       "warnung": null
@@ -373,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 2
       },
       "vermoegen": 235,
       "warnung": null
@@ -381,12 +381,12 @@
     {
       "aktion": "talent_mit_aufstieg(Geschichtenerzähler)",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 235,
       "warnung": null
@@ -399,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 235,
       "warnung": null
@@ -412,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 235,
       "warnung": null
@@ -425,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 235,
       "warnung": null
@@ -438,73 +438,44 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 235,
       "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 235,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 235,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Investigativer Journalist_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "handicap(Stur (schwer))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 235,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Schießen soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4; handicaps: \"Stur  (schwer)\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1,
-        "handicap_gesamt": 3,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 235
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -554,7 +525,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -566,7 +537,7 @@
         "ausgewaehlt": false
       },
       "Schießen": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -604,7 +575,8 @@
     },
     "handicaps": [
       "Große Klappe (leicht)",
-      "Neugierig (schwer)"
+      "Neugierig (schwer)",
+      "Stur_schwer"
     ],
     "talente": [
       "Aufmerksamkeit",
@@ -617,8 +589,8 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 1,
-      "handicap_gesamt": 3,
+      "handicap": 0,
+      "handicap_gesamt": 4,
       "aufstiege": 0.0
     },
     "machtpunkte": 0,

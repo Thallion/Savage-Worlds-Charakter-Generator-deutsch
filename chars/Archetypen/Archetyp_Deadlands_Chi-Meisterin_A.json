@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -303,7 +303,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -581,8 +581,8 @@
     "ausruestung_mengen": {
         "Messer": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -651,6 +651,20 @@
             },
             {
                 "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
                 "name": "Fokus",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -686,42 +700,28 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Heimlichkeit",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Heimlichkeit",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Provozieren",
+                "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Sprache",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
+                "name": "Kämpfen",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
@@ -740,29 +740,15 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Athletik",
+                "name": "Wahrnehmung",
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
-                "name": "Athletik",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 8,
+                "name": "Sprache",
+                "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

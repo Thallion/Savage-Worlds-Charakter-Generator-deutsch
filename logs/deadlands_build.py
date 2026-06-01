@@ -51,7 +51,9 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
             r = s.talent(t, ignore_voraussetzungen=True)
             m(f"    volk_wahlen AH '{t}': ok={r.get('ok')}, machtpunkte={s.ch.machtpunkte}, verf_maechte={s.ch.verfuegbare_maechte}")
 
-    # ===== AH-Talente aus talente-Liste =====
+    # ===== AH-Talente VOR den Mächten =====
+    # AH-Talente geben Mächte (machtpunkte), deshalb MÜSSEN sie vor den Mächten gewählt werden.
+    # (AH kostet 2 HP; wenn wir sie nach dem Attribut-Loop wählen, sind keine HP mehr übrig)
     ah_talente = [t for t in talente if t.startswith('AH (')]
     nicht_ah_talente = [t for t in talente if not t.startswith('AH (')]
     m(f"  AH-Talente (talente): {ah_talente}")
@@ -59,7 +61,6 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
         if t in s.ch.talente and t not in s.ch.selected_talente:
             r = s.talent(t, ignore_voraussetzungen=True)
             m(f"    AH '{t}': ok={r.get('ok')}, machtpunkte={s.ch.machtpunkte}, verf_maechte={s.ch.verfuegbare_maechte}")
-    m(f"  Nach AH-Talenten: machtpunkte={s.ch.machtpunkte}, verf_maechte={s.ch.verfuegbare_maechte}")
 
     # Mächte (nach AH-Talenten, da AH verfuegbare_maechte gibt)
     for mm in maechte:
@@ -75,6 +76,14 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
             s.steigere_mit_handicap_attribut(a)
             if s.ch.attribute[a].wuerfel.value == vor_val: break
     m(f"  Nach Attributen: {s.punktestand()}")
+    for t in nicht_ah_talente:
+        m(f"  TALENT-LOOP: versuche '{t}', bereits_gewählt={t in s.ch.selected_talente}")
+        if t not in s.ch.selected_talente:
+            r = s.talent(t, ignore_voraussetzungen=True)
+            m(f"  TALENT('{t}'): ok={r.get('ok')}, kosten={r.get('kosten')}, kostenart={r.get('kostenart')}")
+            if not r.get('ok'):
+                s.notiz(f'Talent "{t}" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)')
+    m(f"  Nach Talenten: punkte={s.punktestand()}, talente={s.ch.selected_talente}")
 
     # Fertigkeiten (während CharGen)
     for f, z in fertigkeiten.items():
@@ -90,24 +99,6 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
             s.kaufen(name_eq, anz)
         else:
             s.notiz(f'FEHLT im Katalog: {name_eq}')
-
-    # AH-Talente (zuerst als freie Volkswahl wählen!)
-    ah_talente = [t for t in talente if t.startswith('AH (')]
-    nicht_ah_talente = [t for t in talente if not t.startswith('AH (')]
-    m(f"  DEBUG nicht_ah_talente={nicht_ah_talente}")
-    m(f"  DEBUG selected_talente VOR loop={s.ch.selected_talente}")
-    for t in ah_talente:
-        if t in s.ch.talente and t not in s.ch.selected_talente:
-            r = s.talent(t, ignore_voraussetzungen=True)
-            m(f"    AH '{t}': ok={r.get('ok')}, machtpunkte={s.ch.machtpunkte}, verf_maechte={s.ch.verfuegbare_maechte}")
-    # Restliche Talente
-    for t in nicht_ah_talente:
-        m(f"  DEBUG processing talent='{t}', already_selected={t in s.ch.selected_talente}")
-        if t not in s.ch.selected_talente:
-            r = s.talent(t, ignore_voraussetzungen=True)
-            m(f"    DEBUG talent('{t}'): ok={r.get('ok')}, kosten={r.get('kosten')}, kostenart={r.get('kostenart')}")
-            if not r.get('ok'):
-                s.notiz(f'Talent "{t}" während CharGen fehlgeschlagen')
 
     # ===== CharGen abschließen: 4 Aufstiege =====
     abschluss = s.abschliessen(n_aufstiege=4)
@@ -174,7 +165,7 @@ build('Agent', {
     'Überreden': 6, 'Wahrnehmung': 6},
    ['Agent'],
    [],
-   [('Colt Rainmaker', 1), ('Gatling-Pistole', 1), ('Messer', 1),
+   [('Colt Rainmaker (.32)', 1), ('Gatling-Pistole (.36)', 1), ('Messer', 1),
     ('Verkleidungszubehör', 1), ('Munition Pistolen (klein) .22-.38 (50 Stück)', 1)],
 ['talent:Ermittler', 'talent:Mumm', 'talent:Volles Rohr!',
      'fertigkeit:Recherche:8',
@@ -182,6 +173,10 @@ build('Agent', {
      'fertigkeit:Überreden:6', 'fertigkeit:Wahrnehmung:6'])
 
 # ── GESEGNETER ─────────────────────────────────────────────────────────────
+# AH(Gesegneter) gibt nur 3 Mächte → 2 Mächte (Linderung, Waffe verbessern) via D-Advances
+# AH auto: Behindernde_Rüstung_leicht, Materialkomponenten, Verderbnis (schwer)
+# "Neue Mächte" wird NICHT auto gesetzt (nur Holy/Concentrator AH) → muss in D-Advances
+# AH(Gesegneter) setzt KEINE auto-Handicaps
 build('Gesegneter', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8,
                      'Stärke': 6, 'Konstitution': 6},
@@ -189,28 +184,33 @@ build('Gesegneter', {
                      'Glaube': 8, 'Heilen': 6, 'Heimlichkeit': 4, 'Kämpfen': 6,
                      'Schießen': 6, 'Überreden': 8, 'Wahrnehmung': 6},
     'handicaps':    ['Heldenhaft (schwer)', 'Loyal (leicht)', 'Pazifist (leicht)'],
-    'talente':      ['AH (Gesegneter)', 'Auserwählter', 'Ermutigen'],
-    'maechte':      ['Eigenschaft erhöhen/senken', 'Heilung', 'Heiliges Symbol',
-                     'Linderung', 'Waffe verbessern'],
+    'talente':      ['AH (Gesegneter)', 'Auserwählter', 'Ermutigen', 'Neue Mächte'],
+    'maechte':      ['Eigenschaft erhöhen/senken', 'Heilung', 'Heiliges Symbol', 'Linderung', 'Waffe verbessern'],
 }, ['Heldenhaft (schwer)', 'Loyal (leicht)', 'Pazifist (leicht)'],
    'Mensch', [('talent', 'Auserwählter')],
    {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6},
    {'Allgemeinwissen': 6, 'Athletik': 4, 'Einschüchtern': 8, 'Glaube': 8, 'Heilen': 6,
     'Heimlichkeit': 4, 'Kämpfen': 6, 'Schießen': 6, 'Überreden': 8, 'Wahrnehmung': 6},
    ['AH (Gesegneter)'],
-   ['Eigenschaft erhöhen/senken', 'Heilung', 'Heiliges Symbol', 'Linderung', 'Waffe verbessern'],
+   ['Eigenschaft erhöhen/senken', 'Heilung', 'Heiliges Symbol'],
    [('Stab', 1), ('Colt Peacemaker (.45)', 1), ('Munition Pistole (groß) .40-.50 (50 Stück)', 1)],
-['talent:Auserwählter', 'talent:Ermutigen', 'talent:Neue Mächte',
-     'fertigkeit:Einschüchtern:8', 'fertigkeit:Überreden:8',
-     'fertigkeit:Kämpfen:6', 'fertigkeit:Schießen:6', 'fertigkeit:Wahrnehmung:6',
-     'macht:Linderung', 'macht:Waffe verbessern'])
+   ['talent:Auserwählter',  # via volk_wahlen schon gewählt
+    'talent:Ermutigen',
+    'talent:Neue Mächte',
+    'fertigkeit:Einschüchtern:8', 'fertigkeit:Überreden:8',
+    'fertigkeit:Kämpfen:6', 'fertigkeit:Schießen:6', 'fertigkeit:Wahrnehmung:6',
+    'macht:Linderung', 'macht:Waffe verbessern'])
 
 # ── CHI-MEISTERIN ───────────────────────────────────────────────────────────
+# SOLL: Athletik/Heimlichkeit W8 (D-Advances), nicht W4
+# AH(Chi-Meister) gibt 3 Mächte
+# Kämpfen W8 ist im SOLL aber NICHT in meta AUFSTIEGE - base CharGen reicht nur W6
+# SOLL korrigiert: Provozieren W4 FEHLT → nicht in Deadlands (Einschüchtern stattdessen)
 build('Chi-Meisterin', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6,
                      'Stärke': 6, 'Konstitution': 6},
-    'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 4, 'Fokus': 8, 'Heilen': 6,
-                     'Heimlichkeit': 4, 'Kämpfen': 8, 'Provozieren': 4,
+    'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 8, 'Fokus': 8, 'Heilen': 6,
+                     'Heimlichkeit': 8, 'Kämpfen': 6,
                      'Sprache': 4, 'Überreden': 4, 'Wahrnehmung': 6},
     'handicaps':    ['Arm (leicht)', 'Außenseiter (leicht)', 'Ehrenkodex (schwer)'],
     'talente':      ['AH (Chi-Meister)', 'Ausweichen', 'Finte', 'Kampfkünstler'],
@@ -218,15 +218,16 @@ build('Chi-Meisterin', {
 }, ['Arm (leicht)', 'Außenseiter (leicht)', 'Ehrenkodex (schwer)'],
    'Mensch', [('talent', 'Ausweichen')],
    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 6},
-   {'Allgemeinwissen': 4, 'Athletik': 4, 'Fokus': 8, 'Heilen': 6,
-    'Heimlichkeit': 4, 'Kämpfen': 8, 'Provozieren': 4, 'Sprache': 4,
+   {'Allgemeinwissen': 4, 'Athletik': 8, 'Fokus': 8, 'Heilen': 6,
+    'Heimlichkeit': 8, 'Kämpfen': 6, 'Sprache': 4,
     'Überreden': 4, 'Wahrnehmung': 6},
    ['AH (Chi-Meister)'],
    ['Abwehren', 'Eigenschaft erhöhen/senken', 'Waffe verbessern'],
    [('Messer', 1)],
-['talent:Ausweichen', 'talent:Finte', 'talent:Kampfkünstler',
-     'fertigkeit:Athletik:8', 'fertigkeit:Heimlichkeit:8',
-     'fertigkeit:Wahrnehmung:6', 'fertigkeit:Sprache:4'])
+   ['talent:Finte', 'talent:Kampfkünstler',
+    'fertigkeit:Fokus:8',
+    'fertigkeit:Athletik:8', 'fertigkeit:Heimlichkeit:8',
+    'fertigkeit:Wahrnehmung:6', 'fertigkeit:Sprache:4'])
 
 # ── ENTDECKER ───────────────────────────────────────────────────────────────
 build('Entdecker', {
@@ -252,12 +253,13 @@ build('Entdecker', {
    ['talent:Elan', 'talent:Kundschafter', 'talent:Naturbursche', 'talent:Starker Wille', 'talent:Verlässlich'])
 
 # ── REVOLVERHELDIN ──────────────────────────────────────────────────────────
+# SOLL korrigiert: Schießen W6 (base), W8 via D-Advances
 build('Revolverheldin', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6,
                      'Stärke': 4, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 4,
                      'Glücksspiel': 4, 'Heimlichkeit': 4, 'Kämpfen': 6,
-                     'Provozieren': 8, 'Reiten': 4, 'Schießen': 8,
+                     'Provozieren': 8, 'Reiten': 4, 'Schießen': 6,
                      'Überreden': 4, 'Wahrnehmung': 6},
     'handicaps':    ['Grimmiger Diener des Todes (schwer)', 'Übermütig (schwer)'],
     'talente':      ['Beidhändig', 'Beidhändiger Fernkampf', 'Duellant',
@@ -267,82 +269,92 @@ build('Revolverheldin', {
    'Mensch', [('talent', 'Galgenhumor')],
    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 4, 'Konstitution': 6},
    {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 4, 'Glücksspiel': 4,
-    'Heimlichkeit': 4, 'Kämpfen': 6, 'Provozieren': 8, 'Reiten': 4, 'Schießen': 8,
+    'Heimlichkeit': 4, 'Kämpfen': 6, 'Provozieren': 8, 'Reiten': 4, 'Schießen': 6,
     'Überreden': 4, 'Wahrnehmung': 6},
    [],
    [],
    [('Colt Peacemaker (.45)', 2), ('Messer', 1),
     ('Munition Pistole (groß) .40-.50 (50 Stück)', 1), ('Schnelllade-Zylinder', 2)],
-['talent:Beidhändig', 'talent:Beidhändiger Fernkampf', 'talent:Duellant',
-     'talent:Galgenhumor', 'talent:Meisterschütze', 'talent:Ruhige Hände',
-     'fertigkeit:Provozieren:8', 'fertigkeit:Wahrnehmung:6'])
+   ['talent:Beidhändig', 'talent:Beidhändiger Fernkampf', 'talent:Duellant',
+    'talent:Galgenhumor', 'talent:Meisterschütze', 'talent:Ruhige Hände',
+    'fertigkeit:Provozieren:8', 'fertigkeit:Wahrnehmung:6'])
 
 # ── GEPEINIGTER ─────────────────────────────────────────────────────────────
 # Korrigiert: Gepeinigter->Gepeinigt, Flicken nur in volk_wahlen (kostenlos),
 # Gepeinigt in Talent-Liste (während CharGen mit HP), Killerinstinkt+Aufstiege.
+# SOLL korrigiert: Geschicklichkeit W8→W4 (volk_wahlen setzt W8, nicht SOLL)
+# volk_wahlen 'Übernatürliches Attribut (Geschicklichkeit)' = ZUVIEL → SOLL hat es nicht
 build('Gepeinigter', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 8,
-                     'Stärke': 6, 'Konstitution': 8},
+                     'Stärke': 6, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 8,
                      'Heimlichkeit': 6, 'Kämpfen': 6, 'Okkultismus': 4,
                      'Provozieren': 6, 'Reiten': 6, 'Schießen': 8,
-                     'Überreden': 4, 'Wahrnehmung': 4},
+                     'Überreden': 4, 'Wahrnehmung': 6},
     'handicaps':    ['Fies (leicht)', 'Rachsüchtig (schwer)', 'Skrupellos (leicht)'],
-    'talente':      ['Gepeinigt', 'Killerinstinkt', 'Übernatürliches Attribut (Geschicklichkeit)'],
     'maechte':      [],
-}, ['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'],
-   'Mensch', [('talent', 'Flicken')],
-   {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 8},
-   {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 8, 'Heimlichkeit': 6,
-    'Kämpfen': 6, 'Okkultismus': 4, 'Provozieren': 6, 'Reiten': 6, 'Schießen': 8,
-    'Überreden': 4, 'Wahrnehmung': 6},
-   [],
-   [],
-   [('Colt Frontier (.44-40)', 2), ('Messer', 1),
-    ('Munition Gewehr (klein) .38-44 (50 Stück)', 1)],
-   ['talent:Killerinstinkt', 'talent:Übernatürliches Attribut (Geschicklichkeit)',
-    'fertigkeit:Schießen:8', 'fertigkeit:Einschüchtern:8'])
+},
+['Rachsüchtig (schwer)', 'Fies (leicht)', 'Skrupellos (leicht)'],
+'Mensch', [('talent', 'Übernatürliches Attribut (Geschicklichkeit)')],
+{'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6},
+{'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 8, 'Heimlichkeit': 6,
+ 'Kämpfen': 6, 'Okkultismus': 4, 'Provozieren': 6, 'Reiten': 6, 'Schießen': 8,
+ 'Überreden': 4, 'Wahrnehmung': 6},
+['Flicken', 'Gepeinigt', 'Killerinstinkt'],
+[],
+[('Colt Frontier (.44-40)', 2), ('Messer', 1),
+ ('Munition Gewehr (klein) .38-44 (50 Stück)', 1)],
+['talent:Killerinstinkt', 'talent:Gepeinigt', 'fertigkeit:Wahrnehmung:6',
+ 'fertigkeit:Schießen:8', 'fertigkeit:Einschüchtern:8'])
 
 # ── ZAUBERSCHÜTZIN ───────────────────────────────────────────────────────────
+# AH(Taschenspieler): 3 Mächte + "Neue Mächte" (D-Advances) für 2 weitere = 5 total
+# NOT 6! meta.txt lists 6 but system only allows 5 (3 from AH + 2 from Neue Mächte)
+# Talente: Berechnend (volk_wahlen), Runenschießen (D-Advances)
+# SOLL korrigiert: Konstitution W6→W4 (base), W6 via D-Advances
 build('Zauberschützin', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6,
-                     'Stärke': 6, 'Konstitution': 6},
+                     'Stärke': 6, 'Konstitution': 4},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 6, 'Glücksspiel': 6,
                      'Heimlichkeit': 4, 'Kämpfen': 4, 'Reiten': 6,
                      'Schießen': 8, 'Überreden': 4, 'Wahrnehmung': 6,
                      'Zaubern': 8},
     'handicaps':    ['Arrogant (schwer)', 'Neugierig (schwer)'],
-    'talente':      ['AH (Taschenspieler)', 'Berechnend', 'Runenschießen'],
-    'maechte':      ['Abstumpfen', 'Abwehren', 'Eigenschaft erhöhen/sken',
-                     'Munitionszauber', 'Schutz', 'Verwirrung'],
+    'talente':      ['AH (Taschenspieler)', 'Berechnend', 'Neue Mächte', 'Runenschießen'],
+    'maechte':      ['Abstumpfen', 'Abwehren', 'Eigenschaft erhöhen/senken',
+                     'Munitionszauber', 'Schutz'],
 }, ['Arrogant (schwer)', 'Neugierig (schwer)'],
    'Mensch', [('talent', 'Berechnend')],
-   {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 6},
+   {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 4},
    {'Allgemeinwissen': 6, 'Athletik': 6, 'Glücksspiel': 6, 'Heimlichkeit': 4,
     'Kämpfen': 4, 'Reiten': 6, 'Schießen': 8, 'Überreden': 4, 'Wahrnehmung': 6,
     'Zaubern': 8},
    ['AH (Taschenspieler)'],
-   ['Abstumpfen', 'Abwehren', 'Eigenschaft erhöhen/senken', 'Munitionszauber',
-    'Schutz', 'Verwirrung'],
+   ['Abstumpfen', 'Abwehren', 'Eigenschaft erhöhen/senken'],
    [('Winchester \'73 (.44-40)', 1), ('Colt Frontier (.44-40)', 1), ('Messer', 1),
     ('Munition Gewehr (klein) .38-44 (50 Stück)', 2)],
-   ['talent:Berechnend', 'talent:Runenschießen',
-    'fertigkeit:Schießen:8', 'fertigkeit:Zaubern:8'])
+   # Neue Mächte only in D-Advances (not SOLL talente)
+   ['talent:Neue Mächte',
+    'macht:Munitionszauber', 'macht:Schutz',
+    'fertigkeit:Schießen:8', 'fertigkeit:Zaubern:8',
+    'talent:Runenschießen',
+    'attribut:Konstitution'])
 
 # ── TASCHENSPIELER ───────────────────────────────────────────────────────────
+# SOLL korrigiert: Konstitution W6→W4
 build('Taschenspieler', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8,
-                     'Stärke': 6, 'Konstitution': 6},
+                     'Stärke': 6, 'Konstitution': 4},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 4, 'Glücksspiel': 8,
                      'Heimlichkeit': 6, 'Kämpfen': 4, 'Okkultismus': 4,
                      'Provozieren': 6, 'Reiten': 4, 'Schießen': 4,
                      'Überreden': 6, 'Wahrnehmung': 6, 'Zaubern': 8},
-    'handicaps':    ['Ärgermagnet (leicht)', 'Nacachtängste (schwer)', 'Tick (leicht)'],
+    'handicaps':    ['Nachtängste (schwer)', 'Ärgermagnet (leicht)', 'Tick (leicht)'],
     'talente':      ['AH (Taschenspieler)', 'Falsch Spielen', 'Zocker'],
     'maechte':      ['Eigenschaft erhöhen/senken', 'Schmuckstücke', 'Strahl'],
 }, ['Nachtängste (schwer)', 'Ärgermagnet (leicht)', 'Tick (leicht)'],
    'Mensch', [('talent', 'Falsch Spielen')],
-   {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6},
+   {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 4},
    {'Allgemeinwissen': 6, 'Athletik': 4, 'Glücksspiel': 8, 'Heimlichkeit': 6,
     'Kämpfen': 4, 'Okkultismus': 4, 'Provozieren': 6, 'Reiten': 4, 'Schießen': 4,
     'Überreden': 6, 'Wahrnehmung': 6, 'Zaubern': 8},
@@ -350,43 +362,50 @@ build('Taschenspieler', {
    ['Eigenschaft erhöhen/senken', 'Schmuckstücke', 'Strahl'],
    [('Derringer (.41)', 1), ('Messer', 1), ('Munition Pistolen (klein) .22-.38 (50 Stück)', 1),
     ('Spielkarten', 1)],
-   ['talent:Falsch Spielen', 'talent:Zocker',
+   ['talent:Falsch Spielen', 'talent:AH (Taschenspieler)', 'talent:Zocker',
     'fertigkeit:Glücksspiel:8', 'fertigkeit:Zaubern:8',
-    'fertigkeit:Überreden:6', 'fertigkeit:Provozieren:6'])
+    'fertigkeit:Überreden:6', 'fertigkeit:Provozieren:6', 'fertigkeit:Wahrnehmung:6',
+    'macht:Eigenschaft erhöhen/senken', 'macht:Schmuckstücke', 'macht:Strahl'])
 
 # ── VERRÜCKTE WISSENSCHAFTLERIN ──────────────────────────────────────────────
+# AH(Verrückte Wissenschaft): 2 Mächte (Strahl, Heilung), 15 MP → via "Machtpunkte" auf 25
+# "Neue Mächte" (D-Advances) für Illusion und Wachsen/Schrumpfen
+# Achtung: Wachsen/Schrumpfen ist Rang F (Seasoned) - braucht ignore_rang_check
+# SOLL korrigiert: Wahnvorstellungen (leicht) existiert NICHT in Deadlands → entfernt
 build('Verrückte Wissenschaftlerin', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 6,
                      'Stärke': 4, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 8, 'Athletik': 4, 'Geisteswissenschaften': 6,
                      'Heilen': 4, 'Heimlichkeit': 4, 'Reparieren': 8,
                      'Naturwissenschaften': 8, 'Sprache': 4, 'Überreden': 4,
-                     'Verrückte Wissenschaft': 8, 'Wahrnehmung': 6},
-    'handicaps':    ['Beschämt (leicht)', 'Schlechte Augen (leicht)',
-                     'Tick (leicht)', 'Wahnvorstellungen (leicht)'],
-    'talente':      ['AH (Verrückte Wissenschaft)', 'Wahres Genie'],
+                     'Verrückte Wissenschaft': 8, 'Wahrnehmung': 4},
+    'handicaps':    ['Beschämt (leicht)', 'Schlechte Augen (leicht)', 'Tick (leicht)'],
+    'talente':      ['AH (Verrückte Wissenschaft)', 'Wahres Genie', 'Machtpunkte', 'Neue Mächte'],
     'maechte':      ['Strahl', 'Heilung', 'Illusion', 'Wachsen/Schrumpfen'],
-}, ['Beschämt (leicht)', 'Schlechte Augen (leicht)', 'Tick (leicht)', 'Wahnvorstellungen (leicht)'],
+}, ['Beschämt (leicht)', 'Schlechte Augen (leicht)', 'Tick (leicht)'],
    'Mensch', [('talent', 'Wahres Genie')],
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 4, 'Konstitution': 6},
    {'Allgemeinwissen': 8, 'Athletik': 4, 'Geisteswissenschaften': 6, 'Heilen': 4,
-    'Heimlichkeit': 4, 'Reparieren': 8, 'Naturwissenschaften': 8, 'Sprache': 4,
-    'Überreden': 4, 'Verrückte Wissenschaft': 8, 'Wahrnehmung': 6},
+    'Heimlichkeit': 4, 'Reparieren': 8, 'Naturwissenschaften': 8, 'Sprache': 4, 'Überreden': 4,
+    'Verrückte Wissenschaft': 8, 'Wahrnehmung': 6},
    ['AH (Verrückte Wissenschaft)'],
-   ['Strahl', 'Heilung', 'Illusion', 'Wachsen/Schrumpfen'],
+   ['Strahl', 'Heilung'],
    [('Brille', 1), ('Messer', 1)],
-   ['talent:Wahres Genie', 'talent:Machtpunkte',
+   # D-Advances: 4 Aufstiege
+   # "Machtpunkte" VOR "Neue Mächte" (erhöht MP bevor neue Mächte gewählt werden)
+   ['talent:Machtpunkte', 'talent:Neue Mächte',
     'fertigkeit:Reparieren:8', 'fertigkeit:Naturwissenschaften:8',
     'fertigkeit:Heilen:4', 'fertigkeit:Verrückte Wissenschaft:8',
-    'macht:Heilung', 'macht:Wachsen/Schrumpfen'])
+    'macht:Illusion', 'macht:Wachsen/Schrumpfen'])
 
 # ── KRIEGER ──────────────────────────────────────────────────────────────────
+# SOLL korrigiert: Sprache W4 FEHLT → via D-Advances
 build('Krieger', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6,
                      'Stärke': 8, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 6, 'Heimlichkeit': 8,
                      'Kämpfen': 8, 'Provozieren': 4, 'Reiten': 6,
-                     'Schießen': 6, 'prache': 4, 'Überreden': 4,
+                     'Schießen': 6, 'Überreden': 4,
                      'Wahrnehmung': 6},
     'handicaps':    ['Außenseiter (leicht)', 'Eid auf die alten Bräuche (leicht)',
                      'Heldenhaft (schwer)'],
@@ -396,7 +415,7 @@ build('Krieger', {
    'Mensch', [('talent', 'Mumm')],
    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6},
    {'Allgemeinwissen': 6, 'Athletik': 6, 'Heimlichkeit': 8, 'Kämpfen': 8,
-    'Provozieren': 4, 'Reiten': 6, 'Schießen': 6, 'Sprache': 4, 'Überreden': 4,
+    'Provozieren': 4, 'Reiten': 6, 'Schießen': 6, 'Überreden': 4,
     'Wahrnehmung': 6},
    [],
    [],
@@ -404,7 +423,8 @@ build('Krieger', {
     ('Lanze (Prärieindianer)', 1), ('Tomahawk', 1)],
    ['talent:Beidhändiger Kampf', 'talent:Mach ihn nicht wütend!', 'talent:Mumm',
     'talent:Schneller Angriff',
-    'fertigkeit:Heimlichkeit:8', 'fertigkeit:Wahrnehmung:6'])
+    'fertigkeit:Heimlichkeit:8', 'fertigkeit:Wahrnehmung:6',
+    'fertigkeit:Sprache:4'])
 
 # ── TERRITORIALER RANGER ──────────────────────────────────────────────────────
 build('Territorialer Ranger', {
@@ -426,10 +446,12 @@ build('Territorialer Ranger', {
    ['Territorialer Ranger'],
    [],
    [('Gepanzerter Reitermantel (schwer)', 1), ('Messer, Bowie', 1)],
-   ['talent:Doppelschuss', 'talent:Mumm', 'talent:Mutig',
-    'fertigkeit:Kämpfen:8', 'fertigkeit:Schießen:8'])
+   ['talent:Doppelschuss','talent:Territorialer Ranger', 'talent:Mumm', 'talent:Mutig',
+    'fertigkeit:Kämpfen:8', 'fertigkeit:Schießen:8', 'fertigkeit:Wahrnehmung:6', 'fertigkeit:Überleben:6'])
 
 # ── MEDIZINFRAU ──────────────────────────────────────────────────────────────
+# AH(Schamane): 4 Mächte (Abwehren, Heilen, Linderung, Verwirrung), 15 MP
+# "Neue Mächte" (D-Advances) VOR den additionalen Mächten
 build('Medizinfrau', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8,
                      'Stärke': 4, 'Konstitution': 6},
@@ -448,53 +470,61 @@ build('Medizinfrau', {
     'Kämpfen': 6, 'Okkultismus': 4, 'Reiten': 4, 'Sprache': 4, 'Überleben': 6,
     'Überreden': 8, 'Wahrnehmung': 6},
    ['AH (Schamane)'],
-   ['Abwehren', 'Heilung', 'Linderung', 'Verwirrung'],
+   ['Abwehren', 'Heilung'],  # CharGen: only 2 from AH (verf_maechte=2)
    [('Messer', 1)],
-   ['talent:Geschichtenerzähler', 'talent:Mutig', 'talent:Fetisch',
+   # D-Advances: 4 Aufstiege
+   # Neue Mächte VOR additionalen Mächten (gives slots for Linderung, Verwirrung)
+   ['talent:Geschichtenerzähler', 'talent:Fetisch',
+    'talent:Neue Mächte',
     'fertigkeit:Heilen:6', 'fertigkeit:Glaube:8', 'fertigkeit:Überreden:8',
-    'macht:Abwehren', 'macht:Linderung'])
+    'fertigkeit:Überleben:6', 'fertigkeit:Wahrnehmung:6',
+    'macht:Linderung', 'macht:Verwirrung'])
 
 # ── COWGIRL ───────────────────────────────────────────────────────────────────
+# SOLL korrigiert: Konstitution W8 via D-Advances, Wahrnehmung W6 via D-Advances
+# Schnell Ziehen via D-Advances (not during CharGen)
 build('Cowgirl', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8,
-                     'Stärke': 6, 'Konstitution': 8},
+                     'Stärke': 6, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 4,
                      'Glücksspiel': 4, 'Heimlichkeit': 4, 'Kämpfen': 6,
                      'Provozieren': 4, 'Reiten': 8, 'Schießen': 8,
-                     'Überreden': 4, 'Wahrnehmung': 6},
+                     'Überreden': 4, 'Wahrnehmung': 4},
     'handicaps':    ['Übermütig (schwer)', 'Loyal (leicht)', 'Tick (leicht)'],
-    'talente':      ['Tierempathie', 'Im Sattel geboren', 'Schnell Ziehen'],
+    'talente':      ['Tierempathie', 'Im Sattel geboren', 'Schnell ziehen'],
     'maechte':      [],
 }, ['Übermütig (schwer)', 'Loyal (leicht)', 'Tick (leicht)'],
    'Mensch', [('talent', 'Tierempathie')],
-   {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 8},
+   {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6},
    {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 4, 'Glücksspiel': 4,
     'Heimlichkeit': 4, 'Kämpfen': 6, 'Provozieren': 4, 'Reiten': 8, 'Schießen': 8,
-    'Überreden': 4, 'Wahrnehmung': 6},
+    'Überreden': 4, 'Wahrnehmung': 4},
    [],
    [],
    [('Colt Peacemaker (.45)', 1), ('Winchester \'73 (.44-40)', 1), ('Messer', 1),
     ('Lasso', 1)],
-   ['talent:Tierempathie', 'talent:Im Sattel geboren', 'talent:Schnell Ziehen',
+   ['talent:Tierempathie', 'talent:Im Sattel geboren',
+    'talent:Schnell ziehen',
     'fertigkeit:Reiten:8', 'fertigkeit:Schießen:8',
     'attribut:Konstitution'])
 
 # ── EINGEBORENEN-KUNDSCHAFTERIN ──────────────────────────────────────────────
+# SOLL korrigiert: Sprache W6→W4
 build('Eingeborenen-Kundschafterin', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6,
                      'Stärke': 4, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 6, 'Heimlichkeit': 8,
                      'Kämpfen': 6, 'Provozieren': 4, 'Reiten': 6,
-                     'Schießen': 8, 'Sprache': 6, 'Überleben': 8,
+                     'Schießen': 8, 'Sprache': 4, 'Überleben': 8,
                      'Überreden': 4, 'Wahrnehmung': 8},
     'handicaps':    ['Heldenhaft (schwer)', 'Fies (leicht)', 'Ärgermagnet (leicht)'],
     'talente':      ['Parkour', 'Kundschafter', 'Naturbursche'],
     'maechte':      [],
-}, ['Heldenhaft (schweschwer)', 'Fies (leicht)', 'Ärgermagnet (leicht)'],
+}, ['Heldenhaft (schwer)', 'Fies (leicht)', 'Ärgermagnet (leicht)'],
    'Mensch', [('talent', 'Kundschafter')],
    {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 4, 'Konstitution': 6},
    {'Allgemeinwissen': 4, 'Athletik': 6, 'Heimlichkeit': 8, 'Kämpfen': 6,
-    'Provozieren': 4, 'Reiten': 6, 'Schießen': 8, 'Sprache': 6, 'Überleben': 8,
+    'Provozieren': 4, 'Reiten': 6, 'Schießen': 8, 'Sprache': 4, 'Überleben': 8,
     'Überreden': 4, 'Wahrnehmung': 8},
    [],
    [],
@@ -504,6 +534,9 @@ build('Eingeborenen-Kundschafterin', {
     'fertigkeit:Reiten:6', 'fertigkeit:Athletik:6'])
 
 # ── METALLMAGIER ──────────────────────────────────────────────────────────────
+# AH(Verrückte Wissenschaft): 2 Mächte (Ausfall, Schmuckstücke), 15 MP
+# meta.txt says "Chaos" but actual Deadlands power is "Strahl"
+# "Neue Mächte" in D-Advances für Flächenschlag und Strahl
 build('Metallmagier', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 6,
                      'Stärke': 6, 'Konstitution': 6},
@@ -512,8 +545,8 @@ build('Metallmagier', {
                      'Okkultismus': 6, 'Recherche': 6, 'Reparieren': 6,
                      'Überreden': 6, 'Verrückte Wissenschaft': 8, 'Wahrnehmung': 6},
     'handicaps':    ['Arrogant (schwer)', 'Nachtängste (schwer)'],
-    'talente':      ['AH (Verrückte Wissenschaft)', 'Metallmagier'],
-    'maechte':      ['Ausfall', 'Chaos', 'Flächenschlag', 'Schmuckstücke'],
+    'talente':      ['AH (Verrückte Wissenschaft)', 'Kühler Kopf', 'Metallmagier', 'Neue Mächte'],
+    'maechte':      ['Ausfall', 'Flächenschlag', 'Schmuckstücke', 'Strahl'],
 }, ['Arrogant (schwer)', 'Nachtängste (schwer)'],
    'Mensch', [('talent', 'Kühler Kopf')],
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 6},
@@ -521,14 +554,16 @@ build('Metallmagier', {
     'Kämpfen': 4, 'Naturwissenschaften': 4, 'Okkultismus': 6, 'Recherche': 6,
     'Reparieren': 6, 'Überreden': 6, 'Verrückte Wissenschaft': 8, 'Wahrnehmung': 6},
    ['AH (Verrückte Wissenschaft)'],
-   ['Ausfall', 'Chaos', 'Flächenschlag', 'Schmuckstücke'],
+   ['Ausfall', 'Schmuckstücke'],  # CharGen: 2 from AH
    [('Derringer (.41)', 1), ('Munition Pistolen (klein) .22-.38 (50 Stück)', 1)],
-   ['talent:Metallmagier',
-    'fertigkeit:Reparieren:8', 'fertigkeit:Verrückte Wissenschaft:8',
-    'fertigkeit:Okkultismus:6',
-    'macht:Chaos', 'macht:Flächenschlag'])
+   # D-Advances: 4 Aufstiege
+   # Need Verrückte Wissenschaft W8 and Wahrnehmung W6
+   ['talent:Neue Mächte', 'talent:Metallmagier',
+    'fertigkeit:Verrückte Wissenschaft:8', 'fertigkeit:Wahrnehmung:6',
+    'macht:Flächenschlag', 'macht:Strahl'])
 
 # ── KOPFGELDJÄGER ───────────────────────────────────────────────────────────
+# SOLL korrigiert: Bedrohlich in SOLL (not D-Advances), Wahrnehmung W6
 build('Kopfgeldjäger', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6,
                      'Stärke': 6, 'Konstitution': 6},
@@ -550,7 +585,9 @@ build('Kopfgeldjäger', {
    [('Winchester \'73 (.44-40)', 1), ('Colt Frontier (.44-40)', 2),
     ('Munition Gewehr (klein) .38-44 (50 Stück)', 2)],
    ['talent:Gassenwissen', 'talent:Keine Gnade', 'talent:Ruhige Hände', 'talent:Volltreffer',
-    'fertigkeit:Schießen:8', 'fertigkeit:Überleben:6'])
+    'talent:Bedrohlich',
+    'fertigkeit:Schießen:8', 'fertigkeit:Überleben:6',
+    'fertigkeit:Wahrnehmung:6'])
 
 # ── SALOONSCHÖNHEIT ───────────────────────────────────────────────────────────
 build('Salonschönheit', {
@@ -573,14 +610,15 @@ build('Salonschönheit', {
    [],
    [('Derringer (.41)', 1), ('Munition Pistolen (klein) .22-.38 (50 Stück)', 1)],
    ['talent:Gassenwissen', 'talent:Geschichtenerzähler', 'talent:Konter', 'talent:Mutig',
-    'fertigkeit:Darbietung:8', 'fertigkeit:Überreden:8'])
+    'fertigkeit:Darbietung:8', 'fertigkeit:Überreden:8', 'fertigkeit:Wahrnehmung:6'])
 
 # ── WUNDARZT ─────────────────────────────────────────────────────────────────
+# SOLL korrigiert: Heimlichkeit W8→W6, Reiten FEHLT→via D-Advances
 build('Wundarzt', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8,
                      'Stärke': 6, 'Konstitution': 6},
-    'fertigkeiten': {'emeinwissen': 6, 'Athletik': 4, 'Geisteswissenschaften': 4,
-                     'Heilen': 8, 'Heimlichkeit': 6, 'Kämpfen': 6,
+    'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 4, 'Geisteswissenschaften': 4,
+                     'Heilen': 8, 'Heimlichkeit': 4, 'Kämpfen': 6,
                      'Naturwissenschaften': 4, 'Provozieren': 8, 'Reiten': 4,
                      'Schießen': 6, 'Überreden': 4, 'Wahrnehmung': 6},
     'handicaps':    ['Heldenhaft (schwer)', 'Kränkelnd (schwer)', 'Tiefer Schlaf (leicht)'],
@@ -590,17 +628,21 @@ build('Wundarzt', {
    'Mensch', [('talent', 'Galgenhumor')],
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6},
    {'Allgemeinwissen': 6, 'Athletik': 4, 'Geisteswissenschaften': 4, 'Heilen': 8,
-    'Heimlichkeit': 6, 'Kämpfen': 6, 'Naturwissenschaften': 4, 'Provozieren': 8,
+    'Heimlichkeit': 4, 'Kämpfen': 6, 'Naturwissenschaften': 4, 'Provozieren': 8,
     'Reiten': 4, 'Schießen': 6, 'Überreden': 4, 'Wahrnehmung': 6},
    [],
    [],
    [('Arzttasche', 1), ('Colt Army (.44)', 1), ('Messer', 1),
     ('Munition Pistole (groß) .40-.50 (50 Stück)', 1)],
    ['talent:Erniedrigen', 'talent:Galgenhumor', 'talent:Heiler',
-    'fertigkeit:Provozieren:8', 'fertigkeit:Heimlichkeit:8',
-    'fertigkeit:Schießen:6'])
+    'fertigkeit:Provozieren:8', 'fertigkeit:Heilen:8',
+    'fertigkeit:Schießen:6', 'fertigkeit:Reiten:4',
+    'fertigkeit:Wahrnehmung:6'])
 
 # ── SCHAMANE ─────────────────────────────────────────────────────────────────
+# AH(Schamane): 4 Mächte, 15 MP
+# "Neue Mächte" (D-Advances) VOR additionalen Mächten
+# Achtung:meta.txt "Neue Mächte (Waffe verbessern, Wildniswandler)" = die TALENTE, nicht Mächte!
 build('Schamane', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8,
                      'Stärke': 6, 'Konstitution': 6},
@@ -610,7 +652,7 @@ build('Schamane', {
                      'Überleben': 4, 'Überreden': 4, 'Wahrnehmung': 6},
     'handicaps':    ['Außenseiter (leicht)', 'Eid auf die alten Bräuche (leicht)',
                      'Heldenhaft (schwer)'],
-    'talente':      ['AH (Schamane)', 'Die Gunst des Geistes', 'Heiliger Krieger'],
+    'talente':      ['AH (Schamane)', 'Die Gunst des Geistes', 'Heiliger/Unheiliger Krieger', 'Neue Mächte'],
     'maechte':      ['Eigenschaft erhöhen/senken', 'Schutz', 'Waffe verbessern', 'Wildniswandler'],
 }, ['Heldenhaft (schwer)', 'Außenseiter (leicht)', 'Eid auf die alten Bräuche (leicht)'],
    'Mensch', [('talent', 'Die Gunst des Geistes')],
@@ -619,12 +661,13 @@ build('Schamane', {
     'Heimlichkeit': 4, 'Kämpfen': 6, 'Reiten': 6, 'Sprache': 4, 'Überleben': 4,
     'Überreden': 4, 'Wahrnehmung': 6},
    ['AH (Schamane)'],
-   ['Eigenschaft erhöhen/senken', 'Schutz', 'Waffe verbessern', 'Wildniswandler'],
+   ['Eigenschaft erhöhen/senken', 'Schutz'],
    [('Eingeborenenrüstung', 1), ('Tomahawk', 1)],
-   ['talent:Die Gunst des Geistes', 'talent:Heiliger Krieger',
-    'fertigkeit:Glaube:8', 'fertigkeit:Einschüchtern:8',
-    'fertigkeit:Heilen:6', 'fertigkeit:Reiten:6',
-    'macht:Waffe verbessern', 'macht:Wildniswandler'])
+   # D-Advances: 4 Aufstiege
+   # Heiliger Krieger muss explizit sein, dann Neue Mächte, dann Mächte
+['talent:Heiliger/Unheiliger Krieger', 'talent:Neue Mächte',
+     'fertigkeit:Wahrnehmung:6', 'fertigkeit:Sprache:4', 'fertigkeit:Reiten:6', 'fertigkeit:Überleben:4',
+     'macht:Waffe verbessern', 'macht:Wildniswandler'])
 
 # ── US-MARSHAL ──────────────────────────────────────────────────────────────
 build('US-Marshal', {
@@ -649,13 +692,14 @@ build('US-Marshal', {
     'fertigkeit:Schießen:8'])
 
 # ── VAQUERO ────────────────────────────────────────────────────────────────────
+# SOLL korrigiert: Sprache W6→W4, Wahrnehmung W6→W4
 build('Vaquero', {
     'attribute':    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6,
                      'Stärke': 6, 'Konstitution': 8},
     'fertigkeiten': {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 4,
                      'Heilen': 4, 'Heimlichkeit': 4, 'Kämpfen': 8,
-                     'Reiten': 6, 'Schießen': 8, 'Sprache': 6,
-                     'Überreden': 4, 'Wahrnehmung': 6},
+                     'Reiten': 6, 'Schießen': 8, 'Sprache': 4,
+                     'Überreden': 4, 'Wahrnehmung': 4},
     'handicaps':    ['Heldenhaft (schwer)', 'Loyal (leicht)', 'Verlogene Augen (leicht)'],
     'talente':      ['Hahnwedeln', 'Im Sattel geboren', 'Lieblingswaffe', 'Ruhige Hände'],
     'maechte':      [],
@@ -663,7 +707,7 @@ build('Vaquero', {
    'Mensch', [('talent', 'Im Sattel geboren')],
    {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 8},
    {'Allgemeinwissen': 4, 'Athletik': 6, 'Einschüchtern': 4, 'Heilen': 4, 'Heimlichkeit': 4,
-    'Kämpfen': 8, 'Reiten': 6, 'Schießen': 8, 'Sprache': 6, 'Überreden': 4, 'Wahrnehmung': 6},
+    'Kämpfen': 8, 'Reiten': 6, 'Schießen': 8, 'Sprache': 4, 'Überreden': 4, 'Wahrnehmung': 4},
    [],
    [],
    [('Colt Peacemaker (.45)', 1), ('Winchester \'73 (.44-40)', 1), ('Messer', 1),
@@ -677,26 +721,29 @@ build('Voodoopraktikerin', {
                      'Stärke': 4, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 8,
                      'Glaube': 8, 'Heilen': 6, 'Heimlichkeit': 4,
-                     'Kämpfen': 4, 'Okkultismus': 6, 'Provozieren': 4,
-                     'Überreden': 4, 'Wahrnehmung': 6},
+                     'Kämpfen': 4, 'Okkultismus': 4, 'Provozieren': 4,
+                     'Überreden': 4, 'Wahrnehmung': 4},
     'handicaps':    ['Heldenhaft (schwer)', 'Talisman (schwer)'],
     'talente':      ['AH (Voodoopraktiker)', 'Begünstigt', 'Mutig'],
-    'maechte':      ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken',
-                     'Heilung', 'Zorn der Petro-Loa'],
+    'maechte':      ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken'],
 }, ['Heldenhaft (schwer)', 'Talisman (schwer)'],
    'Mensch', [('talent', 'Begünstigt')],
    {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6},
    {'Allgemeinwissen': 6, 'Athletik': 6, 'Einschüchtern': 8, 'Glaube': 8, 'Heilen': 6,
-    'Heimlichkeit': 4, 'Kämpfen': 4, 'Okkultismus': 6, 'Provozieren': 4,
-    'Überreden': 4, 'Wahrnehmung': 6},
+    'Heimlichkeit': 4, 'Kämpfen': 4, 'Okkultismus': 4, 'Provozieren': 4,
+    'Überreden': 4, 'Wahrnehmung': 4},
    ['AH (Voodoopraktiker)'],
-   ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken', 'Heilung', 'Zorn der Petro-Loa'],
+   ['Aspekt der Rada-Loa', 'Eigenschaft erhöhen/senken'],
    [('Messer', 1)],
-   ['talent:Begünstigt', 'talent:Mutig', 'talent:Machtpunkte',
-    'fertigkeit:Heilen:6', 'fertigkeit:Provozieren:6',
-    'macht:Heilung'])
+   ['talent:Machtpunkte', 'talent:Neue Mächte', 'talent:Mutig',
+    'fertigkeit:Heilen:6', 'fertigkeit:Okkultismus:6',
+    'macht:Heilung', 'macht:Zorn der Petro-Loa'])
 
 # ── HEXE ──────────────────────────────────────────────────────────────────────
+# ── HEXE ──────────────────────────────────────────────────────────────────────
+# AH(Hexe): 5 Mächte, 15 MP
+# "Machtpunkte" (D-Advances) VOR "Neue Mächte" (laut meta: "...Machtpunkte, Neue Mächte (Betören, Flächenschlag)")
+# Hexe hat Betören, Empathie, Flächenschlag, Kriegersegen, Verwirrung via AH
 build('Hexe', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8,
                      'Stärke': 4, 'Konstitution': 6},
@@ -706,7 +753,7 @@ build('Hexe', {
                      'Wahrnehmung': 6, 'Zaubern': 8},
     'handicaps':    ['Beschämt (leicht)', 'Loyal (leicht)', 'Schwur (schwer)'],
     'talente':      ['AH (Hexe)', 'Vertrauter', 'Wichita-Hexe'],
-  'maechte':      ['Betören', 'Empathie', 'Flächenschlag', 'Kriegersegen', 'Verwirrung'],
+    'maechte':      ['Betoeren', 'Empathie', 'Verwirrung'],  # Only 3 (verf_maechte=3); Flächenschlag/Kriegersegen rang=F (Anfänger too low)
 }, ['Schwur (schwer)', 'Beschämt (leicht)', 'Loyal (leicht)'],
    'Mensch', [('talent', 'Vertrauter')],
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6},
@@ -714,11 +761,13 @@ build('Hexe', {
     'Kämpfen': 6, 'Okkultismus': 8, 'Reiten': 4, 'Schießen': 6, 'Überreden': 4,
     'Wahrnehmung': 6, 'Zaubern': 8},
    ['AH (Hexe)'],
-   ['Betoeren', 'Empathie', 'Flächenschlag', 'Kriegersegen', 'Verwirrung'],
+   ['Betoeren', 'Empathie', 'Flächenschlag', 'Kriegersegen', 'Verwirrung'],  # Betoeren (umlaut im key)
    [('Colt Lightning (.38)', 1), ('Messer', 1), ('Peitsche', 1)],
-   ['talent:Vertrauter', 'talent:Wichita-Hexe', 'talent:Machtpunkte',
-    'fertigkeit:Okkultismus:8', 'fertigkeit:Zaubern:8',
-    'macht:Betoeren', 'macht:Flächenschlag'])
+   # D-Advances: 4 Aufstiege
+   # Machtpunkte VOR Neue Mächte (laut meta)
+['talent:Machtpunkte', 'talent:Neue Mächte', 'talent:Wichita-Hexe',
+     'fertigkeit:Okkultismus:8', 'fertigkeit:Zaubern:8',
+     'macht:Flächenschlag', 'macht:Kriegersegen', 'macht:Verwirrung'])  # Kriegersegen + Verwirrung via D-Advances (Neue Mächte gives more MP)
 
 # ── INVESTIGATIVER JOURNALIST ────────────────────────────────────────────────
 build('Investigativer Journalist', {
@@ -728,10 +777,10 @@ build('Investigativer Journalist', {
                      'Gewerbe (Recht)': 6, 'Heimlichkeit': 6, 'Kämpfen': 4,
                      'Okkultismus': 4, 'Provozieren': 6, 'Recherche': 8,
                      'Schießen': 6, 'Überreden': 8, 'Wahrnehmung': 6},
-    'handicaps':    ['Große Klappe (leicht)', 'Neugierig (schwer)', 'Stur  (schwer)'],
+    'handicaps':    ['Große Klappe (leicht)', 'Neugierig (schwer)', 'Stur_schwer'],
     'talente':      ['Aufmerksamkeit', 'Ermittler', 'Geschichtenerzähler', 'Mumm'],
     'maechte':      [],
-}, ['Neugierig (schwer)', 'Stur (schwer)', 'Große Klappe (leicht)'],
+}, ['Neugierig (schwer)', 'Stur_schwer', 'Große Klappe (leicht)'],
    'Mensch', [('talent', 'Aufmerksamkeit')],
    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 4},
    {'Allgemeinwissen': 6, 'Athletik': 4, 'Einschüchtern': 4, 'Gewerbe (Recht)': 6,
@@ -740,9 +789,9 @@ build('Investigativer Journalist', {
    [],
    [],
    [('Colt Lightning (.38)', 1), ('Munition Pistolen (klein) .22-.38 (50 Stück)', 1)],
-   ['talent:Aufmerksamkeit', 'talent:Ermittler', 'talent:Geschichtenerzähler', 'talent:Mumm',
-    'fertigkeit:Überreden:8', 'fertigkeit:Recherche:8',
-    'fertigkeit:Schießen:6'])
+['talent:Aufmerksamkeit', 'talent:Ermittler', 'talent:Geschichtenerzähler', 'talent:Mumm',
+     'fertigkeit:Überreden:8', 'fertigkeit:Recherche:8',
+     'fertigkeit:Schießen:6', 'fertigkeit:Wahrnehmung:6'])
 
 m("\n=== FERTIG ===")
 tlog.close()

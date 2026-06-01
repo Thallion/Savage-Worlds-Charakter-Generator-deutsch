@@ -262,7 +262,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Heimlichkeit)",
+      "aktion": "fertigkeit(Kämpfen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -288,7 +288,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Kämpfen)",
+      "aktion": "fertigkeit(Naturwissenschaften)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -301,7 +301,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Naturwissenschaften)",
+      "aktion": "fertigkeit(Provozieren)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -340,23 +340,10 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Provozieren)",
+      "aktion": "fertigkeit(Reiten)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Reiten) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -470,19 +457,6 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Heimlichkeit)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 223,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
       "ok": true,
       "kosten": 0,
@@ -497,6 +471,19 @@
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 223,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -513,24 +500,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: emeinwissen soll W6, ist FEHLT; fertigkeiten: Heimlichkeit soll W6, ist W8; fertigkeiten: Reiten soll W4, ist FEHLT; fertigkeiten: Wahrnehmung soll W6, ist W4",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 223
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -568,7 +539,7 @@
         "ausgewaehlt": true
       },
       "Heimlichkeit": {
-        "wert": 8,
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -580,7 +551,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -593,6 +564,12 @@
       },
       "Schießen": {
         "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Reiten": {
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -639,11 +616,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.0
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 223,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

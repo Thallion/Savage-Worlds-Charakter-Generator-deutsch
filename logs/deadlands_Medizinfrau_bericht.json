@@ -119,32 +119,6 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Linderung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 125,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Verwirrung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 125,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
@@ -444,7 +418,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Überreden)",
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -470,7 +444,20 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Linderung)",
+      "aktion": "fertigkeit_mit_aufstieg(Überreden)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 123,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -481,6 +468,45 @@
       },
       "vermoegen": 123,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 123,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Linderung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 123,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Verwirrung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 123,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Medizinfrau_A.json)",
@@ -489,33 +515,20 @@
   ],
   "anomalien": [
     {
-      "aktion": "macht(Linderung)",
+      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
+        "attribut": 0,
+        "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 125,
+      "vermoegen": 123,
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "macht(Verwirrung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 125,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Linderung)",
+      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -530,7 +543,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4; maechte: \"Linderung\" FEHLT; maechte: \"Verwirrung\" FEHLT",
+      "warnung": "fertigkeiten: Überleben soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Neue Mächte\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -538,12 +551,12 @@
         "fertigkeit": 0,
         "handicap": 1,
         "handicap_gesamt": 3,
-        "aufstiege": 1.0
+        "aufstiege": 0.0
       },
       "vermoegen": 123
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 3,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -650,11 +663,14 @@
       "Mutig",
       "AH (Schamane)",
       "Geschichtenerzähler",
-      "Fetisch"
+      "Fetisch",
+      "Neue Mächte"
     ],
     "maechte": [
       "Abwehren",
-      "Heilung"
+      "Heilung",
+      "Linderung",
+      "Verwirrung"
     ],
     "ausruestung": {},
     "punkte": {
@@ -662,11 +678,11 @@
       "fertigkeit": 0,
       "handicap": 1,
       "handicap_gesamt": 3,
-      "aufstiege": 1.0
+      "aufstiege": 0.0
     },
     "machtpunkte": 15,
     "vermoegen": 123,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

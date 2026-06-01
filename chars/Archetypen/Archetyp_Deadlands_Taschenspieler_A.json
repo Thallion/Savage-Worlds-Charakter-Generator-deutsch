@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -597,7 +597,7 @@
         "Spielkarten": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 1.5,
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -772,6 +772,13 @@
                 "typ": "fertigkeit",
                 "name": "Zaubern",
                 "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

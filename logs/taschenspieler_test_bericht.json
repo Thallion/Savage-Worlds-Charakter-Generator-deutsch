@@ -1,9 +1,9 @@
 {
-  "name": "Salonschönheit",
+  "name": "Taschenspieler",
   "setting": "Deadlands",
   "schritte": [
     {
-      "aktion": "neuer_charakter(Salonschönheit, Deadlands)",
+      "aktion": "neuer_charakter(Taschenspieler, Deadlands)",
       "ok": true,
       "nachher_punkte": {
         "attribut": 5,
@@ -15,7 +15,7 @@
       "vermoegen": 250
     },
     {
-      "aktion": "handicap(Heldenhaft (schwer))",
+      "aktion": "handicap(Nachtängste (schwer))",
       "ok": true,
       "kosten": -2,
       "kostenart": "Handicap-Punkte",
@@ -28,9 +28,22 @@
       "warnung": null
     },
     {
-      "aktion": "handicap(Neugierig (schwer))",
+      "aktion": "handicap(Ärgermagnet (leicht))",
       "ok": true,
-      "kosten": -2,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Tick (leicht))",
+      "ok": true,
+      "kosten": -1,
       "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 5,
@@ -54,7 +67,7 @@
       "warnung": null
     },
     {
-      "aktion": "volk_freies_talent(Mensch,Attraktiv)",
+      "aktion": "volk_freies_talent(Mensch,Falsch Spielen)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -132,6 +145,19 @@
       "warnung": null
     },
     {
+      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
       "kosten": 0,
@@ -145,7 +171,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
+      "aktion": "attribut_mit_hc(Stärke)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -158,6 +184,19 @@
       "warnung": null
     },
     {
+      "aktion": "attribut_mit_hc(Konstitution)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "fertigkeit(Allgemeinwissen)",
       "ok": true,
       "kosten": 1,
@@ -165,59 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Athletik)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 10,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Darbietung)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 9,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Darbietung)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 8,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Darbietung)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 7,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -229,21 +216,47 @@
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 6,
-        "handicap": 2
+        "fertigkeit": 10,
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Heilen)",
+      "aktion": "fertigkeit(Glücksspiel)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 5,
-        "handicap": 2
+        "fertigkeit": 9,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glücksspiel)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heimlichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -255,8 +268,34 @@
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Okkultismus)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Provozieren)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -269,20 +308,20 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Provozieren)",
+      "aktion": "fertigkeit(Reiten)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -295,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -308,20 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Überreden) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
@@ -334,52 +360,13 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 250,
       "warnung": null
     },
     {
-      "aktion": "kaufen(Derringer (.41)x1)",
-      "ok": true,
-      "kosten": 5,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 245,
-      "warnung": null
-    },
-    {
-      "aktion": "kaufen(Munition Pistolen (klein) .22-.38 (50 Stück)x1)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 243,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Gassenwissen)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 243,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Geschichtenerzähler)",
+      "aktion": "fertigkeit(Zaubern) ÜBERSPRUNGEN (keine Fert-Punkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -388,11 +375,24 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 250,
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Konter)",
+      "aktion": "talent(AH (Taschenspieler))",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent(Zocker)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -401,12 +401,12 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 250,
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Mutig)",
-      "ok": true,
+      "aktion": "macht(Eigenschaft erhöhen/senken)",
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -414,12 +414,12 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
-      "warnung": null
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Überreden)",
-      "ok": true,
+      "aktion": "macht(Schmuckstücke)",
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -427,12 +427,12 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
-      "warnung": null
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": true,
+      "aktion": "macht(Strahl)",
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -440,16 +440,84 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
-      "warnung": null
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Salonschönheit_A.json)",
+      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Taschenspieler_Test.json)",
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "talent(AH (Taschenspieler))",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Eigenschaft erhöhen/senken)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Schmuckstücke)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Strahl)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "fertigkeiten: Wahrnehmung soll W6, ist W4; fertigkeiten: Zaubern soll W8, ist FEHLT; talente: \"AH (Taschenspieler)\" FEHLT; talente: \"Zocker\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Schmuckstücke\" FEHLT; maechte: \"Strahl\" FEHLT",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0,
+        "handicap_gesamt": 4,
+        "aufstiege": 0
+      },
+      "vermoegen": 250
+    }
+  ],
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -461,7 +529,7 @@
         "modifier": 0
       },
       "Stärke": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0
       },
       "Konstitution": {
@@ -481,25 +549,25 @@
         "ausgewaehlt": true
       },
       "Athletik": {
-        "wert": 6,
-        "modifier": 0,
-        "grundfertigkeit": true,
-        "ausgewaehlt": true
-      },
-      "Heimlichkeit": {
         "wert": 4,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
+      "Heimlichkeit": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
       "Überreden": {
-        "wert": 8,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -516,13 +584,7 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
-      "Darbietung": {
-        "wert": 8,
-        "modifier": 0,
-        "grundfertigkeit": false,
-        "ausgewaehlt": false
-      },
-      "Heilen": {
+      "Reiten": {
         "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
@@ -535,6 +597,12 @@
         "ausgewaehlt": false
       },
       "Glücksspiel": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Okkultismus": {
         "wert": 4,
         "modifier": 0,
         "grundfertigkeit": false,
@@ -542,15 +610,12 @@
       }
     },
     "handicaps": [
-      "Heldenhaft (schwer)",
-      "Neugierig (schwer)"
+      "Ärgermagnet (leicht)",
+      "Nachtängste (schwer)",
+      "Tick (leicht)"
     ],
     "talente": [
-      "Attraktiv",
-      "Gassenwissen",
-      "Geschichtenerzähler",
-      "Konter",
-      "Mutig"
+      "Falsch Spielen"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -559,11 +624,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.0
+      "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 243,
-    "rang": "Fortgeschritten",
+    "vermoegen": 250,
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

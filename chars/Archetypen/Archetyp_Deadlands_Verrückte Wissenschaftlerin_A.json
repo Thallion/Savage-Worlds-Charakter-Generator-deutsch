@@ -507,6 +507,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 5
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -523,6 +529,20 @@
                 "machtpunkte": 3,
                 "reichweite": "B",
                 "dauer": "Sofort"
+            },
+            "Illusion": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Wachsen/Schrumpfen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "—"
             }
         },
         "superkraefte": {},
@@ -548,11 +568,14 @@
     "selected_talente": [
         "Wahres Genie",
         "AH (Verrückte Wissenschaft)",
-        "Machtpunkte"
+        "Machtpunkte",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Strahl",
-        "Heilung"
+        "Heilung",
+        "Illusion",
+        "Wachsen/Schrumpfen"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -574,12 +597,12 @@
         "Messer": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 1.5,
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 2,
+    "anzahl_maechte": 4,
     "machtpunkte": 20,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -721,6 +744,12 @@
             {
                 "typ": "talent",
                 "name": "Machtpunkte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

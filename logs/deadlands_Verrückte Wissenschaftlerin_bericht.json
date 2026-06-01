@@ -54,19 +54,6 @@
       "warnung": null
     },
     {
-      "aktion": "handicap(Wahnvorstellungen (leicht))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 3
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "volk(Mensch)",
       "ok": true,
       "kosten": 0,
@@ -130,32 +117,6 @@
       },
       "vermoegen": 250,
       "warnung": null
-    },
-    {
-      "aktion": "macht(Illusion)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Wachsen/Schrumpfen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "attribut(Geschicklichkeit)",
@@ -444,7 +405,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -471,6 +432,32 @@
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Illusion)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -484,7 +471,7 @@
     },
     {
       "aktion": "macht(Wachsen/Schrumpfen)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -493,83 +480,15 @@
         "handicap": 1
       },
       "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Verrückte Wissenschaftlerin_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "handicap(Wahnvorstellungen (leicht))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 3
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Illusion)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Wachsen/Schrumpfen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 250,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Wachsen/Schrumpfen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 243,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Wahrnehmung soll W6, ist W4; handicaps: \"Wahnvorstellungen (leicht)\" FEHLT; talente: \"Machtpunkte\" ZUVIEL; maechte: \"Illusion\" FEHLT; maechte: \"Wachsen/Schrumpfen\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1,
-        "handicap_gesamt": 3,
-        "aufstiege": 1.5
-      },
-      "vermoegen": 243
-    }
-  ],
-  "anomalien_anzahl": 5,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -669,11 +588,14 @@
     "talente": [
       "Wahres Genie",
       "AH (Verrückte Wissenschaft)",
-      "Machtpunkte"
+      "Machtpunkte",
+      "Neue Mächte"
     ],
     "maechte": [
       "Strahl",
-      "Heilung"
+      "Heilung",
+      "Illusion",
+      "Wachsen/Schrumpfen"
     ],
     "ausruestung": {},
     "punkte": {
@@ -681,7 +603,7 @@
       "fertigkeit": 0,
       "handicap": 1,
       "handicap_gesamt": 3,
-      "aufstiege": 1.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 20,
     "vermoegen": 243,

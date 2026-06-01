@@ -171,6 +171,19 @@
       "warnung": null
     },
     {
+      "aktion": "talent(US-Marshal)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "fertigkeit(Allgemeinwissen)",
       "ok": true,
       "kosten": 1,
@@ -379,19 +392,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent(US-Marshal)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 206,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent_mit_aufstieg(Aufmerksamkeit)",
       "ok": true,
       "kosten": 0,
@@ -430,20 +430,20 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 12,
         "handicap": 0
       },
-      "vermoegen": 206,
+      "vermoegen": 250,
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "NOTIZ: Talent \"US-Marshal\" während CharGen fehlgeschlagen",
+      "aktion": "NOTIZ: Talent \"US-Marshal\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
       "ok": true,
-      "warnung": "Talent \"US-Marshal\" während CharGen fehlgeschlagen",
+      "warnung": "Talent \"US-Marshal\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 206
+      "vermoegen": 250
     },
     {
       "aktion": "SOLL/IST-DIFF",

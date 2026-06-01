@@ -353,19 +353,6 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Sprache) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 250,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
       "ok": true,
       "kosten": 0,
@@ -483,28 +470,25 @@
       "warnung": null
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Krieger_A.json)",
-      "ok": true
-    }
-  ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: prache soll W4, ist FEHLT",
+      "aktion": "fertigkeit_mit_aufstieg(Sprache)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.5
+        "handicap": 0
       },
-      "vermoegen": 223
+      "vermoegen": 223,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Krieger_A.json)",
+      "ok": true
     }
   ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -582,6 +566,12 @@
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
+      },
+      "Sprache": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
       }
     },
     "handicaps": [
@@ -602,11 +592,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 223,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }
