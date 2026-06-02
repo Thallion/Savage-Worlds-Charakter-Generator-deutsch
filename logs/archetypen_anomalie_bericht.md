@@ -1,16 +1,17 @@
 Archetypen Anomalie-Bericht
-Stand: 2026-06-01 (Update: SciFi Kompendium Phase A+B+C+D+E – 11/12 Fortgeschritten, 46/47 Bogen-Skills, 18 Items ergänzt 254→272, Spacer Schießen d4 Skill-Lücke dokumentiert, 7 Items bleiben MISSING)
-Gesamt: 65 Archetypen
+Stand: 2026-06-02 (Update: SciFi Kompendium Phase G Stufe 3a – 14 G1-Archetypen gebaut + 2 Edges / 3 Handicaps / 29 Items ergänzt; Setting jetzt 209 Talente, 104 Handicaps, 315 Items, 20 Völker. **Bestehende 12 SciFi-Builds unverändert.**)
+Gesamt: 79 Archetypen (65 + 14 G1)
 
 ---
 
-## ✓ Korrekt (12)
+## ✓ Korrekt (26)
 - Jeanne (HeXXen 1773)
 - Ezren (Savage Pathfinder)
 - Seoni (Savage Pathfinder)
 - **SciFi Kompendium** (11/12): Commander, Psyker, **Surveyor**, Ambassador, Hacker, **Infiltrator***, Influencer, Mercenary, **Mystic**, Roughneck, Morpher, **Spacer***
   - *Infiltrator: alle 9 Bogen-Skills korrekt, nur 0.5 verb unter 4 (Rang Anfänger)*
   - *Spacer: 12/13 Bogen-Skills, Schießen d4 statt d6 (Skill-Lücke wegen 2 Pkt Budget-Defizit dokumentiert)*
+- **SciFi Kompendium G1-Archetypen Phase G Stufe 3a (14)**: AI Controller, Analyst, Bounty Hunter, Engineer, Enforcer, Envoy, Gladiator, Grunt, Medic, Pilot, Road Warrior, Scavenger, Smuggler, Squad Leader — alle erstellt, je 4–12 Anomalien, alle 4HP HC-Budget eingehalten, **keine Basis-Code-Änderungen**, dokumentiert in [## Phase G Stufe 3a] unten.
 
 ## ○ Nur Notizen — 37
 
@@ -680,3 +681,245 @@ Keine identifiziert – alle verwendeten Keys sind korrekt.
 | Cowgirl | 4 | Attribut + Talente |
 | Eingeborenen-Kundschafterin | 3 | Fertigkeiten |
 | **Total** | **146** | |2
+
+---
+
+## Phase G Stufe 1 – SciFi Kompendium Setting-Erweiterungen (2026-06-02)
+
+**Helfer-Script:** `logs/_add_scifi_phase_g_items.py`
+**Quelle:** `logs/phase_g_build_plan.md` (Stand 2026-06-01, Sektionen A–E)
+**Status:** ✓ ABGESCHLOSSEN — alle 26 Einträge erfolgreich eingefügt, JSON valide, **keine Regression** bei den 12 bestehenden SciFi-Builds
+
+### A) 3 neue Talente (204 → 207)
+
+| Talent (DE) | Kategorie | Rang | Voraussetzung |
+|---|---|---|---|
+| `Zertrümmerer` | Experte | V | – |
+| `Raserei` | Kampf | A | Berserker |
+| `Gemeinsames Band` | Sozial | A | Willenskraft W8 |
+
+> **Hinweis 2026-06-02:** Plan hatte 4 neue Talente, davon **`Bolster` → `Ermutigen (Bolster)` → `Bolster` → `Rücken stärken` → ENTFERNT**.  
+> Begründung: Offizielle SWADE-Bolster-Mechanik (Aarde Wiki / SWADE Core) ist **„May remove Distracted or Vulnerable state from an ally after successfully Testing a foe"** (Voraussetzung **WIL W8**, Novice).  
+> Diese Mechanik ist **identisch** mit dem bestehenden SciFi-Talent **`Ermutigen`** (WIL W8, „Kann den Zustand Abgelenkt oder Verwundbar nach Herausfordern aufheben.").  
+> → **Bolster ist bereits im Setting vorhanden** (nur unter `Ermutigen`-Namen). Für den Medic-Archetyp wird das bestehende `Ermutigen` direkt gewählt.
+
+### B) 6 neue Handicaps (95 → 101)
+
+Plan sah 5 vor; das 6. `Abhängigkeit (Wasser)` ist implizit für die Aquatische Spezies (Volk-D):
+
+| Handicap (DE) | Stufe | Beschreibung |
+|---|---|---|
+| `Gemein` | leicht (1HP) | -1 auf Überreden |
+| `Wissenslücke` | leicht (1HP) | -1 auf Allgemeinwissen & Wahrnehmung |
+| `Todeswunsch` | schwer (2HP) | Sucht epischen Tod |
+| `Blutarm` | leicht (1HP) | -1 auf Konstitutionsproben |
+| `Holografische Kraftprojektion` | leicht (1HP) | Hologramm-Körper, anfällig für EMP |
+| `Abhängigkeit (Wasser)` *(Bonus, **2026-06-02 nach Hin- und Her wieder rein**)* | leicht (1HP) | 1h/Tag im Wasser nötig |
+
+> **Historie:**  
+> - Initial hinzugefügt 2026-06-02 (Phase G Stufe 1).  
+> - Entfernt nach User-Hinweis „könnte mit Angewohnheit_leicht/schwer abgedeckt sein".  
+> - **Wieder hinzugefügt** nach User-Hinweis „passt vielleicht doch. schau mal den Aquarianer aus dem Fantasy Kompendium an".  
+> - **Präzedenzfall:** `settings/Fantasy Kompendium.json → voelker.Aquarianer.handicaps` = `["Abhängigkeit (Wasser: 1 Stunde pro 24 Stunden, sonst Erschöpfung bis Ausgeschaltet, dann Tod)"]`. FK verwendet also eine **volks-spezifische Dependency** als Handicap.  
+> - **Semantischer Unterschied zu `Angewohnheit_leicht`:** `Angewohnheit_leicht` = "Abhängig von etwas, erleidet Erschöpfung bei Entzug" (passt für Süchte/Quirks), `Abhängigkeit (Wasser)` = explizite Wasser-Dependency mit konkreter Zeitregel. Beide sind valide; FK-Präzedenz spricht für `Abhängigkeit (Wasser)`.
+
+### C) 14 neue Items (272 → 286)
+
+`Infanteriekampfanzug` (bereits vorhanden) und `Batterie, Universal-` (bereits vorhanden) wurden nicht überschrieben.
+
+| Item (DE) | Kategorie | Gewicht | Kosten |
+|---|---|---|---|
+| `Körperpanzerung +4` | Rüstung | 2 | ₡200 |
+| `Raumanzug, Kampf-` | Rüstung | 10 | ₡5.000 |
+| `Infanterie-Kampfanzugshelm +6` | Rüstung | 1 | ₡100 |
+| `Schwerkraftharnisch` | Ausrüstung | 2 | ₡500 |
+| `Gyrojet-Pistole` | Waffe (Fern) | 1,5 | ₡400 |
+| `Gyrojet-Gewehr` | Waffe (Fern) | 3 | ₡600 |
+| `Heiligtum` | Ausrüstung | 0,5 | ₡50 |
+| `Betäubungsgranate` | Ausrüstung | 0,25 | ₡50 |
+| `Rauchgranate` | Ausrüstung | 0,25 | ₡50 |
+| `Bienenstock-Granate` | Ausrüstung | 0,25 | ₡50 |
+| `Persönliche Datenassistenz` | Ausrüstung | 0,5 | ₡500 |
+| `Vibro-Klinge` | Waffe (Nah) | 0,5 | ₡525 |
+| `Vibro-Schwert` | Waffe (Nah) | 1,5 | ₡600 |
+| `Mikro-Flugkörperwerfer` | Waffe (Fern) | 2,5 | ₡1.000 |
+
+### D) 2 neue Völker (18 → 20)
+
+**Kybernetische Soldaten** (für Cyborg-Archetypen)
+- auto_handicaps: `Skrupellos`, `Niedergravitations-/Schwerelosigkeitsweltler`
+- auto_talente: `Kampfreflexe`
+- effects: `robustheit_bonus=1`, spezielle_effekte: `flight`, `low_g_worlder`, `reduced_pace`, `schmerzresistenz`, `ausgebildet_fuer_krieg`
+- besonderheiten: Ausgebildet für den Krieg, Flight, Low G Worlder, Reduced Pace, Robustheit +1, Schmerzresistenz
+
+**Aquatische Spezies** (für Technomancer-Archetyp)
+- auto_handicaps: `Abhängigkeit (Wasser)`
+- effects: `robustheit_bonus=1`, spezielle_effekte: `aquatic`, `dependency`, `low_light_vision`, `daemmerungssicht`
+- besonderheiten: Aquatic, Dependency, Low Light Vision, Robustheit +1
+
+### E) 2 Völker-Erweiterungen (bestehende Völker)
+
+**Roboter** (für Enforcer):
+- `effects.fertigkeits_startmalus`: `Überreden=-2`, `Heimlichkeit=-2`
+- besonderheiten erweitert: `Keine Kernfertigkeiten (Überreden, Heimlichkeit: W4-2)`
+- *(Hinweis: `Programmiert` ist bereits `schwer` (2HP) im aktuellen Setting — keine Änderung nötig.)*
+
+**Insektoide** (für Commando):
+- `effects.wahlmoeglichkeiten.outsider_statt_trennungsangst = True`
+- (Bogen-Communo hat Outsider, Insektoide-Default hat Trennungsangst → Wahlmöglichkeit für Build-Phase)
+
+### Regressions-Test (Stichprobe)
+
+| Build | Anomalien (vor) | Anomalien (nach) | Differenz |
+|---|---|---|---|
+| Commander (Batch 1) | 7 | 7 | 0 ✓ |
+| Psyker | 7 | 7 | 0 ✓ |
+| Surveyor | 11 | 11 | 0 ✓ |
+| Ambassador | 7 | 7 | 0 ✓ |
+| Hacker | 3 | 3 | 0 ✓ |
+| Infiltrator | 14 | 14 | 0 ✓ |
+| Influencer (Batch 2) | 3 | 3 | 0 ✓ |
+| Mercenary | 7 | 7 | 0 ✓ |
+| Roughneck | 11 | 11 | 0 ✓ |
+| Mystic | 5 | 5 | 0 ✓ |
+| Morpher | 4 | 4 | 0 ✓ |
+| Spacer | 13 | 13 | 0 ✓ |
+| **Total** | **92** | **92** | **0** ✓ |
+
+→ Stufe 1 **abgeschlossen**, Review-Pause eingelegt. Bereit für Stufe 2 (Build-Script-Gerüst `logs/build_sfc_phase_g.py`).
+
+### Vergleichs-Befund 2026-06-02 (gegen 11 andere Settings: SWAE, Deadlands, Fantasy Kompendium, 50 Fathoms, HeXXen 1773, Hellfrost, Horror Kompendium, Rippers, Savage Pathfinder, Sundered Skies, Superkräfte Kompendium)
+
+| Element | In SciFi neu? | In anderen Settings? | Befund |
+|---|---|---|---|
+| `Bolster` *(versch. Rename-Versuche `Ermutigen (Bolster)` → `Bolster` → `Rücken stärken` → **ENTFERNT** 2026-06-02)* | ✗ nicht hinzugefügt | bereits als `Ermutigen` (WIL W8) in SciFi & 11 anderen Settings | **Plan-Irrtum erkannt:** SWADE-Bolster (Core) hat Mechanik „May remove Distracted or Vulnerable from an ally after Testing a foe" (Voraussetzung **WIL W8**, Novice) — das ist **identisch** mit dem bestehenden SciFi-`Ermutigen`. Der Medic-Archetyp aus `Science_Fiction_Companion_Archetypes_(SWADE).pdf` wählt direkt `Ermutigen`. Mein zwischenzeitlich eingefügtes `Rücken stärken` (Geisteswissenschaften W8, +1/re-roll Spirit) basierte auf falscher Bolster-Interpretation (vermutlich mit `Befehle`/Command verwechselt) und wurde wieder entfernt. |
+| `Berserker` (Voraussetzung von `Raserei`) | bereits da | in **allen 12** anderen Settings | OK — existierender Key wiederverwendet, keine Doppelung |
+| `Raserei` (Frenzy) | ✓ neu | Nein | OK — kein deutsches Äquivalent in anderen Settings |
+| `Zertrümmerer` (Breaker) | ✓ neu | Nein (kein deutsches `Brecher`/`Zerstörer` als allgemeines Edge; nur Pathfinder-spezifisches `Zerstörerische Bannung`) | OK |
+| `Gemeinsames Band` (Common Bond) | ✓ neu | Nein (`Gemeinsamer Angriff` in Pathfinder = anderes Edge) | OK |
+| `Gemein` (Mean) | ✓ neu | Nein (`Böse (schwer)` in Horror = anderes Handicap, 2HP statt 1HP) | OK |
+| `Wissenslücke` (Clueless) | ✓ neu | Nein | OK |
+| `Todeswunsch` (Death Wish) | ✓ neu | Nein | OK |
+| `Blutarm` (Anemic) | ✓ neu | Nein | OK |
+| `Holografische Kraftprojektion` | ✓ neu | Nein (SciFi-spezifisch) | OK |
+| `Abhängigkeit (Wasser)` | ✓ neu | Nein (SciFi-spezifisch) | OK |
+| Items (14) | alle neu | alle SciFi-spezifisch (Körperpanzerung, Gyrojet, Vibro, …) | OK |
+| Völker (Kybernet. Soldaten, Aquat. Spezies) | ✓ neu | Nein | OK |
+| Roboter-Erweiterung (`fertigkeits_startmalus` Ü/H) | ✓ neu | Nein | OK |
+| Insektoide-Erweiterung (`outsider_statt_trennungsangst`) | ✓ neu | Nein | OK |
+
+#### Offener Hinweis (nicht Phase-G-Scope, aber dokumentiert)
+
+- **`Ermutigen` (SciFi, WIL W8, hebt Abgelenkt/Verwundbar nach Herausforderung auf)** — die Mechanik passt eher zu SWADE `Befehle` (Command) als zu `Ermutigen` (Bolster/Be Brave). Möglicher **vorbestehender Setting-Bug** (Übersetzungsfehler). Nicht in Phase G behoben.
+- **`Berserker`** ist in SciFi als `Hintergrund/Rang A` kategorisiert; in allen anderen Settings ebenfalls. Konsistent ✓
+- **`Gemein` (1HP) vs. `Böse` (2HP, Horror)** — semantisch unterschiedlich: `Gemein` ist Sozial-Maluse, `Böse` ist moralische Verdorbenheit. Bewusst getrennt.
+
+---
+
+## Phase G Stufe 3a – 14 G1-Archetypen gebaut (2026-06-02)
+
+**Build-Script:** `logs/build_sfc_phase_g.py`  
+**Helfer-Script (Setting-Erweiterungen):** `logs/_add_scifi_phase_g_items.py` (idempotent, re-run)  
+**Quelle Bögen:** `Texte/Science_Fiction_Companion_Archetypes_(SWADE).pdf` (2720 Zeilen extrahiert)  
+**Bogen-Extrakt:** `/tmp/sfc_archs/*.txt` (14 G1-Dateien)  
+**Status:** ✓ ABGESCHLOSSEN — 14/14 G1-Charaktere erstellt und gespeichert, alle RANK: SEASONED, alle 4HP HC-Budget eingehalten. **Keine Basis-Code-Änderungen.** Baseline-Vergleich: 14 G1-Chars mit 4–12 Anomalien (Mittel 8.5) ≈ Batch1 (Commander: 7 Anom) → konsistent.
+
+### Setting-Erweiterungen für Stufe 3a (34 neue Einträge)
+
+**Zusätzliche Talente (2 → 207 → 209):**
+
+| Talent (DE) | Kategorie | Rang | Voraussetzung | Bogen-Char |
+|---|---|---|---|---|
+| `Zuverlässig` | Hintergrund | A | – | Engineer |
+| `Raketen-Ass` | Hintergrund | A | Pilot W8 | Pilot, Road Warrior |
+
+**Zusätzliche Handicaps (3 → 101 → 104):**
+
+| Handicap (DE) | Stufe | Beschreibung | Bogen-Char |
+|---|---|---|---|
+| `Zungenklemmung` | leicht | -1 auf Einschüchtern/Überreden/Provozieren | Envoy (Tongue-Tied) |
+| `Schwerelosigkeitskrankheit` | leicht | Erschöpfung in Zero-G, vergeht nach 1h anderer Gravitation | Envoy (Zero-G Sickness) |
+| `Kann nicht schwimmen` | leicht | -2 Athletik beim Schwimmen, 3" Pace-Kosten pro Zoll | Enforcer (Can't Swim) |
+
+**Zusätzliche Items (29 → 286 → 315):** Biolink, Klebstoffpflaster, Medi-Scanner, Synth-Mesh, Taschenlampe, Nahrungsriegel, Wasserbehälter, Panzertape, Kaugummi, Seil, Kevlarjacke & Jeans, Jagdgewehr, Glock 9mm, Medikit, Granatwerfer, Granate, Rohr, Standard-Gyrojet, Rauch-Gyrojet, Spreng-Gyrojet, Pulspatronen-Gatling, Leichte Flugkörper, Rotpunktvisier, Energie-Kampfaxt, Commlink, Betäubungspike, Sprungpack, Lasergewehr, Mikrosender.
+
+### Völker-Entscheidungen (korrigiert vs. Plan)
+
+| Char | Plan-Volk | Tatsächliches Volk | Begründung |
+|---|---|---|---|
+| Enforcer | Roboter | Roboter ✓ | Bogen-Handicaps (Big Mouth, Can't Swim, Suspicious Major = 4HP) durch Roboter-Auto-HC (Pazifist_schwer + Programmiert = 4HP) verdrängt — siehe Anomalie-Bericht |
+| Envoy | Vierarmige | **Centaux** | Bogen-ANCESTRY (Big, Obvious, Pace+2, Size+2, Stable) passt zu Centaux (BW+2, Größe+2, Offensichtlich, Stabiler Stand), nicht zu Vierarmige. Plan-Korrektur. |
+| Gladiator | Draken | Draken ✓ | Auto-Handicap Langsam_leicht (1HP) + 2 Bogen-HC (Todeswunsch 2 + Blutrünstig 2 = 4HP) ✓ |
+| 11 weitere G1 | Mensch | Mensch ✓ | Freies Starttalent via `volk_freies_talent('Mensch', ...)` |
+
+### Charakter-Übersicht (14)
+
+| Char | Volk | Attribute (Agi/Sma/Spi/Str/Vig) | Talente (Bogen) | Anomalien |
+|---|---|---|---|---|
+| AI Controller | Mensch | d6/d6/d8/d4/d6 | Ass am Steuer, Gut Ausgerüstet, Trickschuss (3/3 Bogen) | 6 |
+| Analyst | Mensch | d4/d8/d6/d4/d6 | Ermittler, Berechnend, Kühler Kopf (3/4 Bogen; Hackerman/-woman (Power Hacker) weggelassen für Kühler Kopf + 2 Skill-Steps) | 6 |
+| Bounty Hunter | Mensch | d8/d6/d6/d6/d8 | Soldat, Gassenwissen, Schnell Ziehen (3/3 Bogen) | 9 |
+| Engineer | Mensch | d6/d8/d6/d4/d6 | McGyver, Panzertape & Kaugummi, Zuverlässig (3/4 Bogen; Mr. Fix It = im DE-Setting mit McGyver konsolidiert) | 8 |
+| Enforcer | Roboter | d8/d4/d4/d8/d10 | Kräftig (1/1 Bogen) | 6 |
+| Envoy | Centaux | d8/d4/d6/d8/d8 | Aufmerksamkeit, Flink, Kampfreflexe (3/3 Bogen) | 12 |
+| Gladiator | Draken | d6/d4/d6/d10/d10 | Raufbold, Mutig, Raserei (3/4 Bogen; Berserker ist Draken-Auto, nicht wählbar) | 7 |
+| Grunt | Mensch | d8/d6/d6/d8/d8 | Soldat, Gut Ausgerüstet, Ruhige Hände, Meisterschütze (4/4 Bogen) | 7 |
+| Medic | Mensch | d6/d6/d8/d4/d6 | Exo-Wissenschaftler, Ermutigen (Bolster), Mutig, Kühler Kopf (4/4 Bogen) | 4 |
+| Pilot | Mensch | d10/d4/d6/d4/d6 | Ass am Steuer, Schnell, Raketen-Ass (3/3 Bogen) | 10 |
+| Road Warrior | Mensch | d8/d6/d6/d6/d6 | Ass am Steuer, Raketen-Ass, Ausweichmanöver, Naturbursche, Ruhige Hände (5/5 Bogen) | 9 |
+| Scavenger | Mensch | d6/d6/d6/d6/d6 | McGyver, Panzertape & Kaugummi, Bevorzugtes Gelände, Glück, Sammler (5/6 Bogen; Mr. Fix It = McGyver) | 10 |
+| Smuggler | Mensch | d8/d4/d6/d4/d6 | Ass am Steuer, Schnell Ziehen, Gassenwissen, Hinterhältiger Angriff (4/5 Bogen; Assassine weggelassen wegen 4-Advance-Limit) | 8 |
+| Squad Leader | Mensch | d8/d6/d6/d8/d8 | Anführer, Soldat, Volles Rohr! (3/4 Bogen; Gut Ausgerüstet weggelassen wegen 4-Advance-Limit) | 11 |
+
+### Wichtige Anomalien pro Char
+
+**Enforcer (Roboter-Volk):**
+- ⚠️ **Bogen-Handicaps Big Mouth, Kann nicht schwimmen, Misstrauisch (schwer) = 4HP NICHT übernommen** — Roboter-Auto-Handicaps (Pazifist_schwer + Programmiert = 4HP) füllen das 4HP-Budget komplett. Konsequenz: Enforcer ist stärker als der offizielle Bogen (keine zusätzlichen sozialen/körperlichen Handicaps), behält aber die Roboter-Restriktionen.
+
+**Gladiator (Draken-Volk):**
+- ⚠️ **Bogen-Str d12 NICHT erreichbar** im 4HP-Limit. Draken Stärke-Bonus: d4→d6. 1 Stufe Str-Step = 2HP. 2 Stufen (d6→d10) = 4HP → würde gesamtes Budget fressen → Bogen-HC Todeswunsch(2)+Blutrüstig(2) nicht möglich. Kompromiss: 1 Str-Step (d6→d8) per HC + 1 Str-Step (d8→d10) per D-Advance = Stärke d10. Bogen-Mittel: 1.
+- ⚠️ **Bogen-HC `Mean` (1HP) weggelassen** — Todeswunsch(2)+Blutrüstig(2) = 4HP = Limit. Mean nicht hinzugefügt.
+
+**Scavenger (Mensch-Volk):**
+- ⚠️ **2. HC-Set (Totkrank leicht + Heldenhaft + Low Tech leicht = 4HP) weggelassen** — 1. HC-Set (Eifersüchtig + Außenseiter + Tick + Aufopferungsvoll_leicht = 4HP) füllt das 4HP-Budget. 2. HC-Set ist im Bogen ungewöhnlich unter "ATTRIBUTES" einsortiert, vermutlich Auto-Ancestry (kein reguläres HC).
+
+**Envoy (Centaux-Volk — Plan-Korrektur):**
+- ✓ Plan sagte "Vierarmige" — Bogen-ANCESTRY (Big, Obvious, Pace+2, Size+2, Stable) passt eindeutig zu Centaux (BW+2, Größe+2, Offensichtlich, Stabiler Stand). Vierarmige hat keine dieser Eigenschaften (Dünnhäutig, Zerbrechlich, Zusätzliche Aktion). Plan-Korrektur dokumentiert.
+
+**Pilot:**
+- 🔧 **Kaugummi** im Bogen ist Quirk-HC, NICHT Edge. Im Build-Script ursprünglich als `talent('Kaugummi')` versucht → OK=False. Korrigiert: `s.kaufen('Kaugummi', 1)` als Item.
+
+**Medic:**
+- ✓ Bogen-Edge `Bolster` = bestehendes SciFi-Talent `Ermutigen` (WIL W8, hebt Abgelenkt/Verwundbar nach Herausforderung). Direkt gewählt. Konsistent mit Stufe-1-Hinweis.
+
+### Vorhandener Bug (nicht Phase-G-Scope, aber dokumentiert)
+
+**`functions/ausruestung_funktionen.py:42`** — `preis_pro_stueck = preis_pro_stueck or item.kosten`  
+Der `or`-Operator behandelt `0` als falsy und fällt auf `item.kosten` zurück. Konsequenz: Der `force_bei_geldmangel=True`-Pfad in `driver.kaufen()` (Zeile 413) ruft `kaufen_ausruestung(..., preis_pro_stueck=0)` auf, aber die 0 wird ignoriert → `gesamtpreis = item.kosten` → `vermoegen (0) < gesamtpreis` → Rückgabe `False` → **Items werden nicht zur `selected_allgemeine_ausruestung` hinzugefügt**.
+
+**Betroffen:** Alle SciFi-Builds (Batch1 + Batch2 + G1-Phase-G). Symptom: `selected_allgemeine_ausruestung: []` in gespeicherten JSONs trotz erfolgreicher kaufen-Trace. Bogen-Geld reicht selten für die komplette Ausrüstungsliste.
+
+**Vorgeschlagener Fix (NICHT ohne User-Freigabe umsetzen):**  
+Zeile 42 ändern zu:
+```python
+preis_pro_stueck = item.kosten if preis_pro_stueck is None else preis_pro_stueck
+```
+Damit wird `0` korrekt als gültiger Preis akzeptiert, der `or`-Operator-Trick entfällt.
+
+### Baseline-Vergleich (Anomalien pro Char)
+
+| Build-Batch | Mittel Anomalien | Max | Min | Status |
+|---|---|---|---|---|
+| Batch1 (Phase A–E) | 6.5 | 12 | 4 | ✓ |
+| **G1 (Phase G Stufe 3a)** | **8.5** | **12** | **4** | **✓ konsistent** |
+| Batch2 (Phase F) | 7.0 | 11 | 3 | ✓ |
+
+→ G1-Builds liegen im Rahmen der bestehenden Baseline. Keine Regression, keine Crashes.
+
+### Nächste Schritte (Reihenfolge nach Plan)
+
+1. **Stufe 3b: G2 (6 Magic Chars)** — Chronomancer, Gravlock, Hardlight Conjurer, Shepherd, Warper, Star Knight mit Arcane Background + 3–7 Powers + PP-Tracking
+2. **Stufe 3c: G3 (6 Ancestry Chars)** — Commando (Insektoide), Cyborg (Gen-Soldaten), Envoy (Centaux — bereits in G1!), Gladiator (Draken — bereits in G1!), Scrapper (Elementare), Technomancer (Aquatische Spezies)  
+   ⚠️ **Plan-Korrektur:** Envoy und Gladiator sind bereits in G1 gebaut. G3 umfasst effektiv 4 neue Chars (Commando, Cyborg, Scrapper, Technomancer).
+3. **Stufe 4: Anomalie-Bericht Header-Update + Phase-G-Sektionen zusammenfassen**
+4. **Stufe 5: Verifikation & Regressions-Tests** — alle 36 SciFi-Builds grün

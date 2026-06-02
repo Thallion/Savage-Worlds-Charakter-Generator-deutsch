@@ -591,7 +591,9 @@
         "Synthetische Wesen": false,
         "Vierarmige": false,
         "Wechselbälger": true,
-        "Yetis": false
+        "Yetis": false,
+        "Kybernetische Soldaten": false,
+        "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [

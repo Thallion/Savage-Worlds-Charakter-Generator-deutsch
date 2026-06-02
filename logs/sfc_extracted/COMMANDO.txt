@@ -1,0 +1,35 @@
+
+                                                                                                                 ANCESTRY
+                                                                                 360 Degree Vision: Ignore 1 point of Gang Up bonus.
+  COMMANDO                                                                       Armor +2: Dense exoskeleton.
+                                                                                 Cannot Speak: May only communicate via electronic devices.
+                                                                                 Claws: Str+d4, AP 2.
+Translated: <I come in peace, skinface!>                                         Communal: Add +2 to Spirit rolls when within 12" (24 yards) of
+                                                                                 other insectoids.
+                                                                                 Outsider (Minor): Subtract 2 from Persuasion rolls.
+                                                                                 Separation Disorder: Suffer −2 to Spirit rolls when no other
+                                      ATTRIBUTES                                 Insectoids are within line of sight.
+                           Agility        d6 Pace        6                                                      HINDRANCES
+                           Smarts         d4 Parry       5                       Ex-Drone: Suffer −2 to Spirit rolls when no ally is within 5" (10
+                           Spirit         d6 Toughness 15 (8)                    yards).
+                           Strength       d8                                     Selfless (Major): You sacrifice your comfort and safety for others.
+                           Vigor          d10
+                                                                                                                    EDGES
+                                                                                 Atmospheric Acclimation: Ignore the effects of Dense or Thin
+                                                                                 atmosphere.
+                                              SKILLS                             Gravitic Acclimation: Ignore the −2 penalty to Agility and Agility
+                                                                                 based skills when acting in an unaccustomed gravity.
+                                 Athletics             d6                        Rock and Roll!: Ignore the Recoil penalty when firing weapons
+                                 Com. Knowledge        d4                        with a RoF of 2 or more. Character may not move.
+                                 Fighting              d6                        Soldier: Strength is one die type higher for Encumbrance and Min
+                                 Electronics           d4                        Str. Reroll Vigor rolls when resisting environmental Hazards.
+                                 Intimidation          d4                                                            GEAR
+                                 Notice                d6
+                                 Persuasion            d4                        Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs),
+                                 Piloting              d4                        gatling blaster (Range 25/50/100, Damage 3d6+2, AP 2, RoF 4),
+                                 Repair                d4                        ×4 particle packs, language translator, $370.
+                                 Shooting              d8
+                                 Stealth               d6
+                                 Survival              d4                        AdvAnces: Vigor d10, Atmospheric Acclimation, Gravitic
+                                                                                 Acclimation, Rock and Roll!.
+                                                                

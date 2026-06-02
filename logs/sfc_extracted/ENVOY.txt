@@ -1,0 +1,39 @@
+
+
+
+
+
+                                                                                                               ANCESTRY
+                                                                                Big: Subtract 2 from Trait rolls when using equipment that wasn’t
+  ENVOY                                                                         specifically designed for you.
+                                                                                Obvious: Subtract 1 from Stealth rolls.
+Messages, supplies, bullets—I deliver.                                          Pace +2: Pace increases by +2 and running die increases a die type.
+                                                                                Size +2: +2 to Toughness.
+                                                                                Stable: Pace is not reduced by Difficult Ground.
+                                                                                                              HINDRANCES
+                                      ATTRIBUTES
+                                                                                Suspicious: Every shadow could hide a predator.
+                           Agility       d8 Pace        10                      Tongue-Tied: You're the strong, silent type. –1 to Intimidation,
+                           Smarts        d6 Parry       4                       Persuasion, and Taunt rolls.
+                           Spirit        d6 Toughness 10 (2)                    Zero-G Sickness: Become dizzy and suffer a level of Fatigue in
+                           Strength      d6                                     Zero-G (recovered after an hour in any other type of gravity).
+                           Vigor         d8
+                                                                                                                  EDGES
+                                                                                Alertness: +2 to Notice rolls.
+                                             SKILLS                             Combat Reflexes: +2 Spirit to recover from being Shaken or
+                                                                                Stunned.
+                                  Athletics           d8                        Fleet-Footed: Pace +2, increase running die to d10.
+                                  Battle              d4
+                                  Com. Knowledge      d4
+                                                                                                                   GEAR
+                                  Driving             d4                        Synth-mesh (+2, Torso), gyrojet rifle (Range 24/49/96, Damage
+                                  Electronics         d4                        3d6, Heavy Weapon), ×26 standard gyrojets, ×2 smoke gyrojets
+                                  Fighting            d4                        (LBT, –4 to lasers and Electronics), ×2 high explosive gyrojects
+                                  Notice              d6                        (Damage 3d4, LBT), backpack, biolink, flashlight, goggles,
+                                  Persuasion          d4                        nutribar ×10, water container, $300.
+                                  Piloting            d4
+                                  Shooting            d8
+                                  Stealth             d8
+                                  Survival            d6
+                                                                                AdvAnces: Spirit d8, Alertness, Fleet-Footed, Combat Reflexes.
+                                                             

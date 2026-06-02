@@ -1,0 +1,33 @@
+
+                                                                                                              HINDRANCES
+                                                                                Loyal: You are always there for your comrades in arms.
+  SQUAD LEADER                                                                  Overconfident: Your team and equipment can handle anything
+                                                                                the universe throws at you.
+Stick with me and we'll get through this.                                       Vengeful (Minor): Nobody messes with you or your squad.
+                                                                                                                  EDGES
+                                                                                Command: +1 to Extras’ Shaken or Stunned recovery rolls.
+                                      ATTRIBUTES                                Geared Up: Start with additional equipment.
+                                                                                Rock and Roll!: Ignore the Recoil penalty when firing weapons
+                           Agility       d8 Pace        6                       with a RoF of 2 or more. Character may not move.
+                           Smarts        d6 Parry       5                       Soldier: Strength is one die type higher for Encumbrance and Min
+                           Spirit        d6 Toughness 12 (6)                    Str. Reroll Vigor rolls when resisting environmental Hazards.
+                           Strength      d8
+                           Vigor         d8                                                                        GEAR
+                                                                                Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs), battle
+                                                                                helmet (+6, Head), pulse gatling (Range 20/40/80, Damage 3d8,
+                                             SKILLS                             RoF 3, Snapfire), portable missile launcher (Range 100/200/400,
+                                                                                Damage 6d6 (III), AP 16, RoF 4, HW, Guided Weapon, SBT, no
+                                  Athletics           d6                        recoil, ×6 light missiles), biolink, personal data device, red dot sight
+                                  Battle              d6                        (+1 to Shooting at Short/Medium range), universal battery, $900.
+                                  Com. Knowledge      d4
+                                  Driving             d4
+                                  Electronics         d4
+                                  Fighting            d6
+                                  Intimidation        d6
+                                  Notice              d6
+                                  Persuasion          d4
+                                  Shooting            d8
+                                  Stealth             d6
+                                  Survival            d4
+                                                                                AdvAnces: Strength d8, Command, Soldier, Rock and Roll!.
+                                                               

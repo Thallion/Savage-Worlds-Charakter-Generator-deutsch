@@ -1,0 +1,38 @@
+
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                            Elderly: –1 to Pace, running, Agility, Strength, and Vigor. Hero
+  CHRONOMANCER                                                              gets 5 extra skill points.
+                                                                            Big Mouth: Was that not common knowledge in this timeline?
+Nice to meet you—now run for your life!                                     Whoops.
+                                                                            Mild Mannered: –2 to Intimidation rolls.
+                                                                                                              EDGES
+                                     ATTRIBUTES                             Arcane Background (Chronomancer): Gain powers based on
+                                                                            the Focus skill. On a Critical Failure roll on the Butterfly Effect
+                          Agility    d6 Pace        5                       table (see text) and suffer the result.
+                          Smarts     d10 Parry      4                       Jack-of-all-Trades: Gain d4 in a skill (or d6 with a raise) until
+                          Spirit     d8 Toughness 5 (0)                     replaced.
+                          Strength   d4                                     Premonition: Spend 2 PP for +1 (or 3 PP for +2) to an Evasion or
+                          Vigor      d6                                     Soak roll after the roll. May be used on allies with Smarts Range.
+                                                                            Rearrange Time: After Action Cards are set, spend a Benny to
+                                                                            force one target (friend or foe) to draw a new Action Card, then
+                                                                            choose which card they use. Cannot affect a target with a Joker.
+                                           SKILLS
+                                Athletics           d6
+                                                                                                             POWERS
+                                Com. Knowledge      d6                      Deflection, sloth/speed. Power Points: 15.
+                                Electronics         d8
+                                Fighting            d4                                                        GEAR
+                                Focus               d6                      Body armor (+4, –4 bullet damage, Torso), alter wear, biolink, bag
+                                Notice              d6                      of candy, language translator, line projector, personal data device,
+                                Persuasion          d8                      rebreather, toolkit, universal battery, $325.
+                                Repair              d8
+                                Science             d8
+                                Stealth             d6
+                                Taunt               d6
+                                                                            AdvAnces: Smarts         d10,    Jack-of-all-Trades,    Premonition,
+                                                                            Rearrange Time.
+

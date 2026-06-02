@@ -1,0 +1,36 @@
+
+                                                                                                             HINDRANCES
+                                                                                Greedy (Major): Justice doesn't pay for fuel and ammo.
+  BOUNTY HUNTER                                                                 Ruthless (Major): Dead or alive, they're coming with you.
+
+Warm or cold, I'm bringing you in.
+                                                                                                                 EDGES
+                                                                                Geared Up: Start with additional equipment.
+                                                                                Quick Draw: Draw two cards when spending a Benny for an
+                                                                                additional Action Card and add +2 to Athletics rolls made to
+                                       ATTRIBUTES                               interrupt others’ actions.
+                                                                                Soldier: Strength is one die type higher for Encumbrance and Min
+                            Agility      d8 Pace        6                       Str. Reroll Vigor rolls when resisting environmental Hazards.
+                            Smarts       d6 Parry       5                       Streetwise: +2 to Common Knowledge and criminal networking.
+                            Spirit       d6 Toughness 12 (4)
+                            Strength     d6                                                                       GEAR
+                            Vigor        d8
+                                                                                Combat spacesuit (+4, –4 bullet damage, Toughness +2, self
+                                                                                sealing), heavy blaster pistol (Range 10/20/40, 3d6, AP 2),
+                                                                                blaster rifle (Range 25/50/100, 3d6+2, AP 2), stun pike (Str+d6,
+                                              SKILLS                            Non-lethal, Reach 2, Stun), jump pack (Move full Running die,
+                                                                                ignore 2 points of Evasion penalty), binoculars (Negate 4 points
+                                   Athletics           d6                       of illumination penalties, 100× magnification, +2 Notice action),
+                                   Com. Knowledge      d4                       universal battery, $150.
+                                   Electronics         d4
+                                   Fighting            d6
+                                   Intimidation        d6
+                                   Notice              d6
+                                   Persuasion          d4
+                                   Piloting            d4
+                                   Repair              d4
+                                   Research            d4
+                                   Shooting            d8
+                                   Stealth             d6
+                                                                                AdvAnces: Vigor d8, Soldier, Streetwise, Quick Draw.
+                                                               

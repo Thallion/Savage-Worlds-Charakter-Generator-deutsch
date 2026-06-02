@@ -324,7 +324,9 @@
           "rundumsicht": true,
           "trennungsangst": true
         },
-        "wahlmoeglichkeiten": {}
+        "wahlmoeglichkeiten": {
+          "outsider_statt_trennungsangst": true
+        }
       }
     },
     "Leerlinge": {
@@ -480,7 +482,8 @@
       ],
       "talente": [],
       "besonderheiten": [
-        "Roboter (atmet nicht, immun gegen Krankheiten/Gifte, ignoriert Dekompression/Hintergrundstrahlung, Mods je nach Größe, keine natürliche Heilung, muss repariert werden)"
+        "Roboter (atmet nicht, immun gegen Krankheiten/Gifte, ignoriert Dekompression/Hintergrundstrahlung, Mods je nach Größe, keine natürliche Heilung, muss repariert werden)",
+        "Keine Kernfertigkeiten (Überreden, Heimlichkeit: W4-2)"
       ],
       "sprachen": [
         "Alle bekannten"
@@ -504,7 +507,11 @@
           "roboter": true,
           "keine_natuerliche_heilung": true
         },
-        "wahlmoeglichkeiten": {}
+        "wahlmoeglichkeiten": {},
+        "fertigkeits_startmalus": {
+          "Überreden": -2,
+          "Heimlichkeit": -2
+        }
       }
     },
     "Synthetische Wesen": {
@@ -642,6 +649,91 @@
         },
         "wahlmoeglichkeiten": {},
         "groesse_modifikator": 2
+      }
+    },
+    "Kybernetische Soldaten": {
+      "name": "Kybernetische Soldaten",
+      "handicaps": [
+        "Skrupellos",
+        "Niedergravitations-/Schwerelosigkeitsweltler"
+      ],
+      "talente": [
+        "Kampfreflexe"
+      ],
+      "besonderheiten": [
+        "Ausgebildet für den Krieg (-4 auf Allgemeinwissenproben)",
+        "Flight (Schwerkraftantrieb, Pace 12, Sprint-W6)",
+        "Low G Worlder (-1 Stärke, kumulativ mit Handicap)",
+        "Reduced Pace (Laufwürfel W4)",
+        "Robustheit +1",
+        "Schmerzresistenz (ignoriert 1 Punkt Wundabzüge)"
+      ],
+      "sprachen": [],
+      "altersspanne": "30-50 Jahre",
+      "groesse_maennlich": "1,80-2,10m",
+      "groesse_weiblich": "1,70-2,00m",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {},
+        "robustheit_bonus": 1,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "fertigkeits_startmalus": {},
+        "fertigkeits_modifier_boni": {},
+        "auto_talente": [
+          "Kampfreflexe"
+        ],
+        "auto_handicaps": [
+          "Skrupellos",
+          "Niedergravitations-/Schwerelosigkeitsweltler"
+        ],
+        "spezielle_effekte": {
+          "flight": true,
+          "low_g_worlder": true,
+          "reduced_pace": true,
+          "schmerzresistenz": true,
+          "ausgebildet_fuer_krieg": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
+    },
+    "Aquatische Spezies": {
+      "name": "Aquatische Spezies",
+      "handicaps": [
+        "Abhängigkeit (Wasser)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Aquatic (kann nicht ertrinken, Pace 6 im Wasser)",
+        "Dependency (1 Stunde pro Tag im Wasser, sonst Erschöpfung)",
+        "Low Light Vision (Dämmerungssicht)",
+        "Robustheit +1"
+      ],
+      "sprachen": [],
+      "altersspanne": "Variabel",
+      "groesse_maennlich": "variabel",
+      "groesse_weiblich": "variabel",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {},
+        "robustheit_bonus": 1,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {},
+        "fertigkeits_startmalus": {},
+        "fertigkeits_modifier_boni": {},
+        "auto_talente": [],
+        "auto_handicaps": [
+          "Abhängigkeit (Wasser)"
+        ],
+        "spezielle_effekte": {
+          "aquatic": true,
+          "dependency": true,
+          "low_light_vision": true,
+          "daemmerungssicht": true
+        },
+        "wahlmoeglichkeiten": {}
       }
     }
   },
@@ -3334,6 +3426,67 @@
       "beschreibung": "Als begrenzte Aktion eine Fähigkeit manifestieren (bis Ausschalten/Wechsel): Flink (+2 BW), Klauen (Stä+W4), Reichweite 1, Tarnung (+2/+4 Heimlichkeit), Zäh (kein Wunde durch 2. Angeschlagen).",
       "ausgewaehlt": false,
       "aktiv": true
+    },
+    "Zertrümmerer": {
+      "name": "Zertrümmerer",
+      "kategorie": "Experte",
+      "rang": "V",
+      "voraussetzungen": [],
+      "beschreibung": "Verdoppelt den Wurfbonus bei Würfen gegen Objekte (Wurf auf Tabelle 'Schaden gegen Objekte'). Wird der Schaden gleich oder übersteigt die Härte des Objekts, entsteht ein Kritischer Treffer.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Raserei": {
+      "name": "Raserei",
+      "kategorie": "Kampf",
+      "rang": "A",
+      "voraussetzungen": [
+        "Berserker"
+      ],
+      "beschreibung": "Erhält +1 Angriff und +1 Schaden im Nahkampf (zusätzlich zu Berserker), aber –2 auf alle anderen Proben, solange die Raserei anhält.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Gemeinsames Band": {
+      "name": "Gemeinsames Band",
+      "kategorie": "Sozial",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W8"
+      ],
+      "beschreibung": "Verbündete im Befehlsradius erhalten +1 auf Erholungsproben. Kumulativ mit Anführer.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zuverlässig": {
+      "name": "Zuverlässig",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [],
+      "beschreibung": "Einmal pro Spielrunde kostenlose Wiederholung eines Unterstützen-Wurfs.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Raketen-Ass": {
+      "name": "Raketen-Ass",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Pilot W8"
+      ],
+      "beschreibung": "Ignoriert den Multi-Aktion-Abzug, wenn der Held in derselben Runde ein Manöver und eine andere Aktion ausführt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
     }
   },
   "handicaps": {
@@ -4201,6 +4354,78 @@
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
+    },
+    "Gemein": {
+      "name": "Gemein",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 auf Überredenproben.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Wissenslücke": {
+      "name": "Wissenslücke",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 auf Allgemeinwissen- und Wahrnehmungsproben.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Todeswunsch": {
+      "name": "Todeswunsch",
+      "stufe": "schwer",
+      "punkte": 2,
+      "beschreibung": "Der Charakter sehnt sich nach einem heroischen/epischen Tod. Er sucht freiwillig die gefährlichsten Situationen und weigert sich, vor deutlich überlegenen Gegnern zurückzuweichen, wenn kein Verbündeter in der Nähe ist.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Blutarm": {
+      "name": "Blutarm",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-1 auf Konstitutionsproben.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Holografische Kraftprojektion": {
+      "name": "Holografische Kraftprojektion",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Körper ist ein Hologramm. Kann nicht wirklich Schaden verursachen oder anfassen. Anfällig für EMP-Angriffe (Robustheit halbiert).",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Abhängigkeit (Wasser)": {
+      "name": "Abhängigkeit (Wasser)",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Muss sich jede Stunde mindestens 10 Minuten im Wasser aufhalten. Andernfalls Erschöpfung bis zum Tod.",
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "custom": false
+    },
+    "Zungenklemmung": {
+      "name": "Zungenklemmung",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "Du bist der starke, stille Typ. -1 auf Einschüchtern-, Überreden- und Provozieren-Proben."
+    },
+    "Schwerelosigkeitskrankheit": {
+      "name": "Schwerelosigkeitskrankheit",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "In Schwerelosigkeit wird dem Helden schwindlig und er leidet unter einer Stufe Erschöpfung. Diese Erschöpfung vergeht erst nach einer Stunde in einer beliebigen anderen Schwerkraftsituation."
+    },
+    "Kann nicht schwimmen": {
+      "name": "Kann nicht schwimmen",
+      "stufe": "leicht",
+      "punkte": 1,
+      "beschreibung": "-2 auf Athletik-Proben beim Schwimmen, und jede zurückgelegte Bewegungseinheit kostet 3 Zoll Bewegungsweite."
     }
   },
   "maechte": {
@@ -8656,6 +8881,581 @@
       "aktiv": true,
       "beschreibung": "Implantat mit integriertem Ziel- und Nachverfolgungssystem. Reduziert bei direktem Schießen die Abzüge von Angesagten Zielen, Deckung, Reichweite, Größenkategorie und Geschwindigkeit um 2 Punkte. Funktioniert nicht mit Gelenkten Waffen. 1 ES-Slot.",
       "esslots": 1
+    },
+    "Körperpanzerung +4": {
+      "name": "Körperpanzerung +4",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 200,
+      "setting": "scifi",
+      "beschreibung": "Leichte, gepanzerte Kleidung aus komplexen Polymeren. Deckt Torso, Arme und Beine ab.",
+      "torso": 4,
+      "arme": 4,
+      "beine": 4,
+      "kopf": 0,
+      "mindeststaerke": "W4",
+      "aktiv": true
+    },
+    "Raumanzug, Kampf-": {
+      "name": "Raumanzug, Kampf-",
+      "kategorie": "Rüstung",
+      "gewicht": 10,
+      "kosten": 5000,
+      "setting": "scifi",
+      "beschreibung": "Ganzkörperanzug für den Weltraum mit Panzerung +4. Versiegelt. Liefert 12 Stunden Luft. Schützt vor Vakuum.",
+      "torso": 4,
+      "arme": 4,
+      "beine": 4,
+      "kopf": 0,
+      "mindeststaerke": "W6",
+      "aktiv": true
+    },
+    "Infanterie-Kampfanzugshelm +6": {
+      "name": "Infanterie-Kampfanzugshelm +6",
+      "kategorie": "Rüstung",
+      "gewicht": 1,
+      "kosten": 100,
+      "setting": "scifi",
+      "beschreibung": "Helm zum Infanterie-Kampfanzug. Deckt Kopf und Gesicht ab.",
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 6,
+      "mindeststaerke": "W4",
+      "aktiv": true
+    },
+    "Schwerkraftharnisch": {
+      "name": "Schwerkraftharnisch",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 2,
+      "kosten": 500,
+      "beschreibung": "Persönliches Schwerkraft-Manipulationsfeld. Erlaubt dem Träger das Schweben (Pace 6 in der Luft, Höhe 1-2). Benötigt eine Universalbatterie.",
+      "aktiv": true
+    },
+    "Gyrojet-Pistole": {
+      "name": "Gyrojet-Pistole",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 1.5,
+      "kosten": 400,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "beschreibung": "Pistolen-Gyrojet. Anmerkungen: Schwere Waffe. Munition: Gyrojet-Geschosse.",
+      "eigenschaften": {
+        "Schaden": "3W6 (I)",
+        "Reichweite": "12/24/48",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "10"
+      },
+      "aktiv": true
+    },
+    "Gyrojet-Gewehr": {
+      "name": "Gyrojet-Gewehr",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 3,
+      "kosten": 600,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Gewehr-Gyrojet. Anmerkungen: Schwere Waffe. Munition: Gyrojet-Geschosse.",
+      "eigenschaften": {
+        "Schaden": "3W6 (I)",
+        "Reichweite": "24/48/96",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "30"
+      },
+      "aktiv": true
+    },
+    "Heiligtum": {
+      "name": "Heiligtum",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 50,
+      "beschreibung": "Heiliger Gegenstand des Glaubens. Gewährt +1 auf Glaubensproben und/oder Erholungsproben, wenn in der Nähe eines Heiligtums (SL-Entscheidung).",
+      "aktiv": true
+    },
+    "Betäubungsgranate": {
+      "name": "Betäubungsgranate",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.25,
+      "kosten": 50,
+      "typ": "Fernkampf",
+      "beschreibung": "Granate mit Betäubungsladung. Anmerkungen: MFS, Betäuben.",
+      "eigenschaften": {
+        "Schaden": "3W6 (B)",
+        "Reichweite": "5/10/20",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Rauchgranate": {
+      "name": "Rauchgranate",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.25,
+      "kosten": 50,
+      "typ": "Fernkampf",
+      "beschreibung": "Granate mit Rauchladung. Erzeugt eine KFS Rauchwolke. Anmerkungen: MFS.",
+      "eigenschaften": {
+        "Schaden": "—",
+        "Reichweite": "5/10/20",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Bienenstock-Granate": {
+      "name": "Bienenstock-Granate",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.25,
+      "kosten": 50,
+      "typ": "Fernkampf",
+      "beschreibung": "Granate mit Schrapnell-Ladung (Bienenstock). Wirkt in einer Kegelschablone, ähnlich einer großen Schrotflinte. Anmerkungen: MFS, Schwere Waffe.",
+      "eigenschaften": {
+        "Schaden": "3W6 (I)",
+        "Reichweite": "5/10/20",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Persönliche Datenassistenz": {
+      "name": "Persönliche Datenassistenz",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 500,
+      "beschreibung": "Tragbarer Computer / Smartphone. Ermöglicht Kommunikation, Information und moderate Hacking-Funktionen.",
+      "aktiv": true
+    },
+    "Vibro-Klinge": {
+      "name": "Vibro-Klinge",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 525,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W4",
+      "beschreibung": "Klinge mit vibrierender Schneide. Anmerkungen: Vibro, sehr laut, +1W6 Schaden, PB 2.",
+      "eigenschaften": {
+        "Schaden": "Stä+W6+W4",
+        "Reichweite": "nah",
+        "PB": "2",
+        "FR": "-",
+        "Schuss": "-"
+      },
+      "aktiv": true
+    },
+    "Vibro-Schwert": {
+      "name": "Vibro-Schwert",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 1.5,
+      "kosten": 600,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Schwert mit vibrierender Schneide. Anmerkungen: Vibro, sehr laut, +1W6 Schaden, PB 2.",
+      "eigenschaften": {
+        "Schaden": "Stä+W8+W6",
+        "Reichweite": "nah",
+        "PB": "2",
+        "FR": "-",
+        "Schuss": "-"
+      },
+      "aktiv": true
+    },
+    "Mikro-Flugkörperwerfer": {
+      "name": "Mikro-Flugkörperwerfer",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 2.5,
+      "kosten": 1000,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Schulter-Flugkörperwerfer. Anmerkungen: GFS, Schwere Waffe, ignoriert Standard-Panzerung.",
+      "eigenschaften": {
+        "Schaden": "4W6",
+        "Reichweite": "50/100/200",
+        "PB": "2",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Biolink": {
+      "name": "Biolink",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0,
+      "kosten": 100,
+      "beschreibung": "Implantat, das den Charakter mit seiner Waffensperre, dem Scanner und dem Anzug verbindet. Erfordert keine Hand-Aktionen für einfache Aktionen.",
+      "aktiv": true
+    },
+    "Klebstoffpflaster": {
+      "name": "Klebstoffpflaster",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.05,
+      "kosten": 5,
+      "beschreibung": "Selbstklebendes Wundpflaster. Stabilisiert Verwundete (+1 auf Erste Hilfe innerhalb der Goldenen Stunde).",
+      "aktiv": true
+    },
+    "Medi-Scanner": {
+      "name": "Medi-Scanner",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 200,
+      "beschreibung": "Tragbares medizinisches Diagnosegerät. Erlaubt freie Wiederholung einer Heilen-Probe.",
+      "aktiv": true
+    },
+    "Synth-Mesh": {
+      "name": "Synth-Mesh",
+      "kategorie": "Rüstung",
+      "setting": "scifi",
+      "gewicht": 1,
+      "kosten": 100,
+      "beschreibung": "Anzug aus synthetischen Polymeren. Leicht und flexibel.",
+      "torso": 2,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W4",
+      "aktiv": true
+    },
+    "Taschenlampe": {
+      "name": "Taschenlampe",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.25,
+      "kosten": 10,
+      "beschreibung": "Tragbare LED-Taschenlampe. Erhellt 10 Zoll Strahl, eliminiert Dämmerungsabzüge in der Lichtung.",
+      "aktiv": true
+    },
+    "Nahrungsriegel": {
+      "name": "Nahrungsriegel",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.1,
+      "kosten": 1,
+      "beschreibung": "Nahrhafter Riegel. Stillt Hunger für 1 Tag.",
+      "aktiv": true
+    },
+    "Wasserbehälter": {
+      "name": "Wasserbehälter",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 5,
+      "beschreibung": "Wiederverschließbarer Behälter mit Trinkwasser (1 Liter).",
+      "aktiv": true
+    },
+    "Panzertape": {
+      "name": "Panzertape",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.1,
+      "kosten": 5,
+      "beschreibung": "Universalklebeband. Unverzichtbar für Improvisation und schnelle Reparaturen.",
+      "aktiv": true
+    },
+    "Kaugummi": {
+      "name": "Kaugummi",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0,
+      "kosten": 0.5,
+      "beschreibung": "Kaumasse. Nützlich beim Anbringen kleiner Sensoren, Glücksbringer.",
+      "aktiv": true
+    },
+    "Seil": {
+      "name": "Seil",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 2,
+      "kosten": 10,
+      "beschreibung": "30 Meter leichtes Kletterseil. Hält 500 kg.",
+      "aktiv": true
+    },
+    "Kevlarjacke & Jeans": {
+      "name": "Kevlarjacke & Jeans",
+      "kategorie": "Rüstung",
+      "setting": "scifi",
+      "gewicht": 1.5,
+      "kosten": 100,
+      "beschreibung": "Lässige Kleidung mit Kevlar-Verstärkung an Jacke und Hose.",
+      "torso": 2,
+      "arme": 2,
+      "beine": 2,
+      "kopf": 0,
+      "mindeststaerke": "W4",
+      "aktiv": true
+    },
+    "Jagdgewehr": {
+      "name": "Jagdgewehr",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 3,
+      "kosten": 300,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Hochleistungs-Repetierbüchse. Anmerkungen: Snapfire.",
+      "eigenschaften": {
+        "Schaden": "2W8+1",
+        "Reichweite": "24/48/96",
+        "PB": "2",
+        "FR": "1",
+        "Schuss": "5"
+      },
+      "aktiv": true
+    },
+    "Glock 9mm": {
+      "name": "Glock 9mm",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 1,
+      "kosten": 150,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "beschreibung": "Standard-Halbautomatik-Pistole.",
+      "eigenschaften": {
+        "Schaden": "2W6",
+        "Reichweite": "12/24/48",
+        "PB": "1",
+        "FR": "1",
+        "Schuss": "15"
+      },
+      "aktiv": true
+    },
+    "Medikit": {
+      "name": "Medikit",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 1,
+      "kosten": 100,
+      "beschreibung": "Umfangreiches medizinisches Set. +1 auf Heilen-Proben.",
+      "aktiv": true
+    },
+    "Granatwerfer": {
+      "name": "Granatwerfer",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 2.5,
+      "kosten": 400,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Unterlauf-Granatwerfer. Anmerkungen: Snapfire, LBT.",
+      "eigenschaften": {
+        "Schaden": "siehe Granate",
+        "Reichweite": "8/16/32",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Granate": {
+      "name": "Granate",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.25,
+      "kosten": 50,
+      "typ": "Fernkampf",
+      "beschreibung": "Standard-Sprenggranate. Anmerkungen: MFS, Schwere Waffe.",
+      "eigenschaften": {
+        "Schaden": "3W6",
+        "Reichweite": "5/10/20",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Rohr": {
+      "name": "Rohr",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W4",
+      "beschreibung": "Metallrohr. Anmerkungen: Parade −2.",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "nah",
+        "PB": "-2",
+        "FR": "-",
+        "Schuss": "-"
+      },
+      "aktiv": true
+    },
+    "Standard-Gyrojet": {
+      "name": "Standard-Gyrojet",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.05,
+      "kosten": 5,
+      "beschreibung": "Standard-Patrone für Gyrojet-Waffen. Munition, MFS.",
+      "aktiv": true
+    },
+    "Rauch-Gyrojet": {
+      "name": "Rauch-Gyrojet",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.05,
+      "kosten": 10,
+      "beschreibung": "Gyrojet-Patrone mit Rauchladung. Erzeugt eine KFS Rauchwolke. Anmerkungen: MFS, -4 auf Laser/Elektronik.",
+      "aktiv": true
+    },
+    "Spreng-Gyrojet": {
+      "name": "Spreng-Gyrojet",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.05,
+      "kosten": 15,
+      "beschreibung": "Gyrojet-Patrone mit Sprengladung. Anmerkungen: MFS.",
+      "eigenschaften": {
+        "Schaden": "3W4",
+        "Reichweite": "12/24/48",
+        "PB": "-",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Pulspatronen-Gatling": {
+      "name": "Pulspatronen-Gatling",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 4,
+      "kosten": 1500,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W8",
+      "beschreibung": "Schwere Impulskanone. Anmerkungen: Snapfire.",
+      "eigenschaften": {
+        "Schaden": "3W8",
+        "Reichweite": "20/40/80",
+        "PB": "-",
+        "FR": "3",
+        "Schuss": "20"
+      },
+      "aktiv": true
+    },
+    "Leichte Flugkörper": {
+      "name": "Leichte Flugkörper",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 100,
+      "beschreibung": "Leichte Lenkwaffe für Mikro-Flugkörperwerfer. Anmerkungen: GFS.",
+      "eigenschaften": {
+        "Schaden": "4W6",
+        "Reichweite": "50/100/200",
+        "PB": "2",
+        "FR": "1",
+        "Schuss": "1"
+      },
+      "aktiv": true
+    },
+    "Rotpunktvisier": {
+      "name": "Rotpunktvisier",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.25,
+      "kosten": 50,
+      "beschreibung": "Reflexvisier mit Leuchtpunkt. +1 auf Schießen-Proben bei kurzer und mittlerer Reichweite.",
+      "aktiv": true
+    },
+    "Energie-Kampfaxt": {
+      "name": "Energie-Kampfaxt",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 4,
+      "kosten": 1200,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W8",
+      "beschreibung": "Schwere Energieaxt. Anmerkungen: Vibro, Cauterize, Kritischer Fehler trifft Benutzer.",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "PB": "4",
+        "FR": "-",
+        "Schuss": "-"
+      },
+      "aktiv": true
+    },
+    "Commlink": {
+      "name": "Commlink",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.05,
+      "kosten": 25,
+      "beschreibung": "Implantat oder tragbares Kommunikationsgerät. Ermöglicht Reichweiten-Kommunikation bis 5 Meilen.",
+      "aktiv": true
+    },
+    "Betäubungspike": {
+      "name": "Betäubungspike",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 1.5,
+      "kosten": 200,
+      "typ": "Nahkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Schockspeer. Anmerkungen: Nicht-tödlich, Stun, Reichweite 2 (Reach).",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "2",
+        "PB": "-",
+        "FR": "-",
+        "Schuss": "-"
+      },
+      "aktiv": true
+    },
+    "Sprungpack": {
+      "name": "Sprungpack",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 3,
+      "kosten": 1500,
+      "beschreibung": "Düsenrucksack. Erlaubt eine volle Bewegungsrunde, ignoriert 2 Punkte Ausweich-Abzug. Benötigt Universalbatterie.",
+      "aktiv": true
+    },
+    "Lasergewehr": {
+      "name": "Lasergewehr",
+      "kategorie": "Waffe",
+      "setting": "scifi",
+      "gewicht": 3,
+      "kosten": 800,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "beschreibung": "Standard-Lasergewehr. Anmerkungen: Cauterize, Overcharge.",
+      "eigenschaften": {
+        "Schaden": "3W6",
+        "Reichweite": "30/60/120",
+        "PB": "2",
+        "FR": "3",
+        "Schuss": "20"
+      },
+      "aktiv": true
+    },
+    "Mikrosender": {
+      "name": "Mikrosender",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0,
+      "kosten": 50,
+      "beschreibung": "Subminiatur-Sender. Reichweite 100 Meilen, einseitig.",
+      "aktiv": true
     }
   },
   "cyberware_nebenwirkungen": {

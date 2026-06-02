@@ -1,0 +1,40 @@
+
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                               Low G Worlder: Subtract 1 from all Strength rolls.
+  ENGINEER                                                                     Overconfident: If it breaks you can fix it, and in half the time it
+                                                                               should normally take. Make sure everyone knows it.
+Have you tried reversing the polarity?
+                                                                                                                EDGES
+                                                                               Duct Tape & Bubble Gum: As a limited action, you may make a
+                                                                               Repair roll to remove a vehicle's Distracted or Vulnerable status, or
+                                      ATTRIBUTES                               both with a raise.
+                                                                               Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                           Agility       d6 Pace        6                      McGyver: Quickly create improvised devices from scraps.
+                           Smarts        d8 Parry       4                      Reliable: Free reroll when making Support rolls.
+                           Spirit        d8 Toughness 9 (4)
+                           Strength      d6                                                                     GEAR
+                           Vigor         d6
+                                                                               Body armor (+4, –4 bullet damage, Torso, Arms, Legs), matter
+                                                                               cutter (Damage 2d4+8, AP 8, Cauterize, –2 Parry), ×5 adhesive
+                                                                               patches, biolink, personal data device, toolkit, universal battery,
+                                             SKILLS                            $450.
+
+                                 Athletics            d6
+                                 Com. Knowledge       d6
+                                 Electronics          d8
+                                 Fighting             d4
+                                 Notice               d8
+                                 Persuasion           d4
+                                 Piloting             d4
+                                 Repair               d8
+                                 Research             d4
+                                 Science              d8
+                                 Shooting             d4
+                                 Stealth              d4
+                                                                               AdvAnces: Notice d8 and Science d8, McGyver, Reliable, Duct
+                                                                               Tape & Bubblegum.
+                                                             

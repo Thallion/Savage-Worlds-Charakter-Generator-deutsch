@@ -1,6 +1,6 @@
 {
     "profil_daten": {
-        "Name": "Ambassador",
+        "Name": "Medic",
         "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 10,
+            "wert": 6,
             "modifier": 0
         },
         "Stärke": {
@@ -95,7 +95,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -121,7 +121,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -224,8 +224,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -315,7 +315,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -355,7 +355,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -380,7 +380,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -460,107 +460,81 @@
             }
         },
         "handicaps": {
-            "Loyal": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Neugierig": {
+            "Heldenhaft": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Vorsichtig": {
+            "Aufopferungsvoll (leicht)": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Rebellisch": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Mystische Kräfte: Telepath": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 5,
-                "machtpunkte": 10
-            },
-            "Alleskönner": {
+            "Exo-Wissenschaftler": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Charismatisch": {
+            "Ermutigen": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Aufwiegler": {
+            "Mutig": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Kühler Kopf": {
                 "ausgewaehlt": true,
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
         },
-        "maechte": {
-            "Betäuben": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "machtpunkte": 2,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Empathie": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER 5",
-                "dauer": "—"
-            },
-            "Gedankenlesen": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 2,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Linderung": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Verwirrung": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER",
-                "dauer": "S"
-            }
-        },
+        "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Körperpanzerung +4": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Biolink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Medi-Gel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
-        "Loyal",
-        "Neugierig",
-        "Vorsichtig"
+        "Heldenhaft",
+        "Aufopferungsvoll (leicht)",
+        "Rebellisch"
     ],
     "selected_talente": [
-        "Mystische Kräfte: Telepath",
-        "Alleskönner",
-        "Charismatisch",
-        "Aufwiegler"
+        "Exo-Wissenschaftler",
+        "Ermutigen",
+        "Mutig",
+        "Kühler Kopf"
     ],
-    "selected_maechte": [
-        "Betäuben",
-        "Empathie",
-        "Gedankenlesen",
-        "Linderung",
-        "Verwirrung"
-    ],
+    "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -586,19 +560,29 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
+    "selected_allgemeine_ausruestung": [
+        "Körperpanzerung +4",
+        "Biolink",
+        "Medi-Gel"
+    ],
     "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Körperpanzerung +4"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
+    "ausruestung_mengen": {
+        "Körperpanzerung +4": 1,
+        "Biolink": 1,
+        "Medi-Gel": 4
+    },
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 5,
-    "machtpunkte": 10,
+    "anzahl_maechte": 0,
+    "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -612,30 +596,15 @@
     "steigerungs_journal": {
         "cost_entries": [
             {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
+                "typ": "talent",
+                "name": "Ermutigen",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -648,10 +617,24 @@
             },
             {
                 "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Konstitution",
                 "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
@@ -676,6 +659,27 @@
             },
             {
                 "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
                 "name": "Wahrnehmung",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -690,13 +694,6 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Überreden",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Recherche",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -713,8 +710,8 @@
                 "typ": "fertigkeit",
                 "name": "Recherche",
                 "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
@@ -722,57 +719,30 @@
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
                 "name": "Provozieren",
                 "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
-                "typ": "fertigkeit",
-                "name": "Provozieren",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Darbietung",
-                "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 10,
+                "typ": "talent",
+                "name": "Mutig",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Alleskönner",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Charismatisch",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Aufwiegler",
+                "name": "Kühler Kopf",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

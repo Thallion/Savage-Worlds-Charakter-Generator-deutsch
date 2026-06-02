@@ -1,6 +1,6 @@
 {
     "profil_daten": {
-        "Name": "Ambassador",
+        "Name": "SquadLeader",
         "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
@@ -37,27 +37,27 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 10,
+            "wert": 6,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 8,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         }
     },
@@ -68,7 +68,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -95,7 +95,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -120,7 +120,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -172,8 +172,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -250,8 +250,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -263,8 +263,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -315,8 +315,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -354,8 +354,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -419,7 +419,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -432,8 +432,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -465,102 +465,67 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Neugierig": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
-            "Vorsichtig": {
+            "Rachsüchtig_leicht": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
+            },
+            "Übermütig": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
-            "Mystische Kräfte: Telepath": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 5,
-                "machtpunkte": 10
-            },
-            "Alleskönner": {
+            "Anführer": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Charismatisch": {
+            "Soldat": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Aufwiegler": {
+            "Anführer_2": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Soldat_2": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Volles Rohr!": {
                 "ausgewaehlt": true,
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             }
         },
-        "maechte": {
-            "Betäuben": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "machtpunkte": 2,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Empathie": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER 5",
-                "dauer": "—"
-            },
-            "Gedankenlesen": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 2,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Linderung": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER",
-                "dauer": "Sofort"
-            },
-            "Verwirrung": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "machtpunkte": 1,
-                "reichweite": "VER",
-                "dauer": "S"
-            }
-        },
+        "maechte": {},
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {}
     },
     "selected_handicaps": [
         "Loyal",
-        "Neugierig",
-        "Vorsichtig"
+        "Rachsüchtig_leicht",
+        "Übermütig"
     ],
     "selected_talente": [
-        "Mystische Kräfte: Telepath",
-        "Alleskönner",
-        "Charismatisch",
-        "Aufwiegler"
+        "Anführer",
+        "Soldat",
+        "Anführer_2",
+        "Soldat_2",
+        "Volles Rohr!"
     ],
-    "selected_maechte": [
-        "Betäuben",
-        "Empathie",
-        "Gedankenlesen",
-        "Linderung",
-        "Verwirrung"
-    ],
+    "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -597,8 +562,8 @@
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 5,
-    "machtpunkte": 10,
+    "anzahl_maechte": 0,
+    "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -607,35 +572,20 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 0,
+    "verbleibende_handicap_punkte": 2,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
+                "typ": "talent",
+                "name": "Soldat",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
                 "typ": "attribut",
-                "name": "Verstand",
+                "name": "Stärke",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -648,92 +598,57 @@
             },
             {
                 "typ": "attribut",
-                "name": "Konstitution",
+                "name": "Geschicklichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
                 "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Geisteswissenschaften",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kriegskunst",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Geisteswissenschaften",
+                "name": "Kriegskunst",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Allgemeinwissen",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überreden",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überreden",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Recherche",
+                "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Recherche",
+                "name": "Kämpfen",
                 "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Recherche",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Provozieren",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Provozieren",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Provozieren",
-                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -741,38 +656,66 @@
                 "typ": "fertigkeit",
                 "name": "Einschüchtern",
                 "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
+                "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Darbietung",
+                "name": "Einschüchtern",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
                 "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
-                "wert": 10,
+                "name": "Stärke",
+                "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Alleskönner",
+                "name": "Anführer_2",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Charismatisch",
+                "name": "Soldat_2",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Aufwiegler",
+                "name": "Volles Rohr!",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

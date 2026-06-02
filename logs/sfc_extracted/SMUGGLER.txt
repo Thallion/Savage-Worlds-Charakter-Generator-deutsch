@@ -1,0 +1,38 @@
+
+
+
+
+
+                                                                                                          HINDRANCES
+                                                                              Greedy (Major): You're just in it for the money.
+  SMUGGLER                                                                    Impulsive: Consequences are something to think about later (or
+                                                                              never).
+Nothing personal, it's just business.
+                                                                                                              EDGES
+                                                                              Ace: May spend Bennies to Soak damage for his vehicle and ignore
+                                                                              up to 2 points of penalties.
+                                        ATTRIBUTES                            Assassin: +2 to damage foes when Vulnerable or assassin has The
+                                                                              Drop.
+                           Agility      d8 Pace        6                      Quick Draw: Draw two cards when spending a Benny for an
+                           Smarts       d6 Parry       5                      additional Action Card and add +2 to Athletics rolls made to
+                           Spirit       d6 Toughness 9 (4)                    interrupt others’ actions.
+                           Strength     d4                                    Sneak Attack: The +2 bonus to damage from Assassin becomes
+                           Vigor        d6                                    +d6 instead.
+                                                                              Streetwise: +2 to Common Knowledge and criminal networking.
+                                                                                                              GEAR
+                                             SKILLS
+                                                                              Body armor (+4, –4 bullet damage, Torso, Arms, Legs), heavy
+                                  Athletics           d4                      blaster pistol (Range 10/20/40, 3d6, AP 2), vibro blade (Str+d6+d4,
+                                  Com. Knowledge      d4                      AP 2), backpack, electronic lockpick (1 minute to use Electronics
+                                  Electronics         d4                      d10), flashlight, lockpicks, toolkit, $5.
+                                  Fighting            d6
+                                  Notice              d6
+                                  Persuasion          d6
+                                  Piloting            d8
+                                  Shooting            d8
+                                  Stealth             d8
+                                  Taunt               d6
+                                  Thievery            d4
+                                                                              AdvAnces: Ace, Piloting d8 & Shooting d8, Streetwise, Sneak
+                                                                              Attack.
+                                                                  

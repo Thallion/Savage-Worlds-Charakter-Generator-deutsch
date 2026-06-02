@@ -1,0 +1,37 @@
+
+                                                                                                              ANCESTRY
+                                                                                Aquatic: Cannot drown and Pace 6 in water.
+  TECHNOMANCER                                                                  Dependency: Spend one hour immersed in water each day or
+                                                                                suffer a level of Fatigue.
+                                                                                Low Light Vision: Ignore Dim and Dark illumination.
+Only the ignorant call it magic.                                                Toughness: Add +1 Toughness.
+                                                                                                            HINDRANCES
+                                                                                Clueless: You know tech, but you don't get out much. –1 to
+                                       ATTRIBUTES                               Common Knowledge and Notice rolls.
+                                                                                Jealous (Minor): You covet alien culture and technology.
+                            Agility      d6 Pace        6                       Mild Mannered: –2 to Intimidation rolls.
+                            Smarts       d8 Parry       5
+                            Spirit       d6 Toughness 8 (2)                                                     EDGES
+                            Strength     d6
+                                                                                Arcane Background (Technomancer): Gain powers based on the
+                            Vigor        d6                                     Weird Science skill and +2 on Electronics and Hacking rolls. On a
+                                                                                Critical Failure suffer a level of Fatigue and all powers end.
+                                                                                Breaker: Damage from powers may Ace against targets with
+                                                                                Hardness.
+                                              SKILLS                            Drones: Gain a Small Toughness 5 (2) drone with Flight Pace 12.
+                                                                                It has a blaster Range 5/10/20, Damage 2d6, RoF 3 (no Recoil) that
+                                   Athletics           d6                       may fire 10 times before it must recharge. The technomancer may
+                                   Com. Knowledge      d4                       see and activate powers through the drone.
+                                   Fighting            d6                       Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                                   Electronics         d8
+                                   Hacking             d8
+                                                                                                               POWERS
+                                   Notice              d4                       Bolt, create item, summon ally. Power Points: 10.
+                                   Persuasion          d4
+                                   Repair              d8                                                        GEAR
+                                   Science             d6                       Synth-mesh (+2, Body, Arms, Legs), energy spear (Str+d8, AP
+                                   Stealth             d4                       4, Cauterize, Heavy Weapon, Parry +1, Reach 1, Critical Failure
+                                   Weird Science       d8                       hits user), environment wear (Negate Vigor rolls for hot or cold
+                                                                                climate), personal data device, universal battery, $50.
+                                                                                AdvAnces: Breaker, Drones, Fighting d6 & Repair d8, Mr. Fix It.
+                                                               

@@ -1,0 +1,36 @@
+
+
+
+
+
+                                                                                                                 HINDRANCES
+                                                                                    Arrogant: You have the biggest guns, so you can tackle the biggest
+  GRUNT                                                                             problems.
+                                                                                    Loyal: You are always there for your comrades in arms.
+Look, I just shoot things.                                                          Selfless (Minor): You know you're just a little bit more expendable
+                                                                                    than the mission specialists you protect.
+                                                                                                                     EDGES
+                                           ATTRIBUTES                               Geared Up: Start with additional equipment.
+                                                                                    Marksman: Ignore up to 2 points of penalties from Range, Cover,
+                               Agility       d8 Pace        6                       Called Shot, Scale, or Speed; or add +1 to first Athletics (throwing)
+                               Smarts        d6 Parry       6                       or Shooting roll. Character may not move or fire greater than RoF
+                               Spirit        d6 Toughness 12 (6)                    1.
+                               Strength      d8                                     Steady Hands: Ignore Unstable Platform penalty; reduce running
+                               Vigor         d8                                     penalty to –1.
+                                                                                    Soldier: Strength is one die type higher for Encumbrance and Min
+                                                                                    Str. Reroll Vigor rolls when resisting environmental Hazards.
+                                                  SKILLS                                                             GEAR
+                                       Athletics           d6                       Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs),
+                                       Battle              d4                       laser rifle (Range 30/60/120, Damage 3d6, AP 2, RoF 3, Cauterize,
+                                       Com. Knowledge      d4                       Overcharge), biolink, medi-gel (+2 Healing to stabilize or within
+                                       Driving             d4                       the Golden Hour), scope (Cancel 2 points of range penalty when
+                                       Electronics         d4                       Aiming), universal battery, $200.
+                                       Fighting            d8
+                                       Intimidation        d4
+                                       Notice              d6
+                                       Persuasion          d4
+                                       Repair              d4
+                                       Shooting            d8
+                                       Stealth             d6                       AdvAnces: Strength d8, Soldier, Steady Hands, Marksman.
+                                       Survival            d4
+                                                                 

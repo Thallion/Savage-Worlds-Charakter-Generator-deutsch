@@ -1,0 +1,35 @@
+
+                                                                                                               ANCESTRY
+                                                                                 Gruff: Subtract 2 from Persuasion rolls.
+  GLADIATOR                                                                      Hard Head: Headbutts deal Str+d4 damage as a Natural Weapon.
+                                                                                 Slow: Reduce Pace by 1 and Running die to d4.
+Are you the worthy foe I seek?                                                   Toughness +2: Draken are tough and resilient.
+                                                                                                             HINDRANCES
+                                                                                 Bloodthirsty: Taking prisoners is an insult.
+                                       ATTRIBUTES                                Mean: –1 to Persuasion rolls.
+                                                                                 Death Wish: The only acceptable death is during a suitably epic
+                          Agility      d6 Pace        5                          battle.
+                          Smarts       d4 Parry       6
+                          Spirit       d6 Toughness 16 (6)                                                       EDGES
+                          Strength     d12
+                                                                                 Berserk: After being Shaken or Wounded, melee attacks must be
+                          Vigor        d10
+                                                                                 Wild Attacks, +1 die type to Strength, +2 to Toughness, ignore
+                                                                                 one level of Wound penalties, Critical Failure on Fighting roll hits
+                                                                                 random target. Take Fatigue after every five consecutive rounds,
+                                            SKILLS                               may choose to end rage with Smarts roll –2.
+                                                                                 Brawler: Toughness +1, add d4 to damage from fists; or increase it
+                                 Athletics            d6                         a die type if combined with Hard Head.
+                                 Battle               d4                         Brave: +2 to Fear checks and –2 to rolls on the Fear Table.
+                                 Com. Knowledge       d4                         Frenzy: Roll a second Fighting die with one melee attack per turn.
+                                 Electronics          d4
+                                 Fighting             d8                                                          GEAR
+                                 Healing              d4                         Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs),
+                                 Intimidation         d6                         energy battle axe (Str+d10, AP 4, Heavy Weapon, Cauterize,
+                                 Notice               d4                         Critical Failure hits user), commlink, $100.
+                                 Persuasion           d4
+                                 Shooting             d6
+                                 Stealth              d6
+                                 Survival             d4                         AdvAnces: Strength d12, Brawler, Brave, Frenzy.
+                                 Taunt                d4
+                                                                

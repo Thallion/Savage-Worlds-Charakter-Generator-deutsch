@@ -1,0 +1,39 @@
+
+
+
+
+
+                                                                                                                HINDRANCES
+                                                                                 Anemic: –2 Vigor when resisting Fatigue.
+HARDLIGHT CONJURER                                                               Curious: Knowledge is power, so learn all the secrets.
+                                                                                 Small: Size and Toughness are reduced by 1.
+Holographic force projection: activate!
+                                                                                                                    EDGES
+                                                                                 Arcane Background (Hardlight Controller): Gain powers based
+                                                                                 on the Science skill. Stealth suffers a –4 penalty while any powers
+                                      ATTRIBUTES                                 are in use. On a Critical Failure the powers ends and all remaining
+                                                                                 Power Points are lost.
+                           Agility        d6 Pace        6                       Brave: +2 to Fear checks and –2 to rolls on the Fear Table.
+                           Smarts         d10 Parry      4                       Exo-Scientist: Ignore up to 2 points of penalties to Science rolls for
+                           Spirit         d8 Toughness 8 (4)                     alien or advanced technology.
+                           Strength       d4                                     New Powers: Gain bolt and deflection.
+                           Vigor          d6                                     New Powers: Gain barrier and blast.
+                                                                                                                  POWERS
+                                              SKILLS                             Barrier, blast, bolt, create item, deflection, illusion, protection. Power
+                                                                                 Points: 15.
+                                 Academics             d4
+                                 Athletics             d4                                                            GEAR
+                                 Com. Knowledge        d4
+                                 Electronics           d8                        Body armor (+4, –4 bullet damage, –4 laser damage, –2 Stealth,
+                                                                                 Sealed), biolink, binoculars (Negate 4 points of illumination
+                                 Fighting              d4
+                                                                                 penalties, 100× magnification, +2 Notice action), gravity harness,
+                                 Hacking               d4                        personal data device, universal battery, $400.
+                                 Notice                d4
+                                 Persuasion            d4
+                                 Piloting              d4
+                                 Repair                d6
+                                 Research              d6
+                                 Science               d10                       AdvAnces: New Powers, Brave, Exo-Scientist, New Powers.
+                                 Stealth               d4
+                                                           

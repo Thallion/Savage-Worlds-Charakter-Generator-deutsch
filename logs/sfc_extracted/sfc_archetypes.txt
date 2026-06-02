@@ -1,0 +1,1270 @@
+                                                             RANK: SEASONED
+                                                                                                          HINDRANCES
+                                                                              Heroic: You protect the innocent and oppressed.
+  COMMANDER                                                                   Loyal: You try to protect your friends and crew.
+                                                                              Ruthless (Minor): You do whatever it takes to complete the
+I don't like to lose.                                                         mission.
+                                                                                                              EDGES
+                                                                              Charismatic: Free reroll when using Persuasion.
+                                       ATTRIBUTES                             Command: +1 to Shaken or Stunned recovery rolls.
+                                                                              Common Bond: The hero may freely give her Bennies to others.
+                            Agility     d6 Pace        6                      Elan: +2 when spending a Benny to reroll a Trait roll.
+                            Smarts      d8 Parry       4                      Luck: +1 Benny at the start of each session.
+                            Spirit      d8 Toughness 9 (4)                    Natural Leader: Leadership Edges now apply to Wild Cards.
+                            Strength    d4
+                            Vigor       d6                                                                     GEAR
+                                                                              Body armor (+4, –4 bullet damage, Torso, Arms, Legs), laser pistol
+                                                                              with weapon lock (Range 15/30/60, Damage 2d6, AP 2, Cauterize,
+                                             SKILLS                           Overcharge), molecular knife (Str+d4+2, AP 2), biolink, personal
+                                                                              data device, universal battery, $150.
+                                  Athletics           d6
+                                  Battle              d6
+                                  Com. Knowledge      d4
+                                  Electronics         d6
+                                  Fighting            d4
+                                  Intimidation        d6
+                                  Notice              d6
+                                  Persuasion          d8
+                                  Piloting            d4
+                                  Repair              d4
+                                  Shooting            d6
+                                  Stealth             d4
+                                                                              AdvAnces: Charismatic, Common Bond, Elan, Natural Leader.
+                                                             RANK: SEASONED
+
+
+
+
+                                                                                                          HINDRANCES
+                                                                              Overconfident: Your powers make you better than human.
+  PSYKER                                                                      Suspicious (Minor): You know for a fact that everyone lies.
+                                                                              Thin Skinned (Minor): You can dish it out, but you can't take it.
+I sense fear, which is appropriate.                                           Subtract two when resisting Taunt attacks.
+                                                                                                              EDGES
+                                                                              Alertness: +2 to Notice rolls.
+                                       ATTRIBUTES                             Arcane Background (Psyker): Gain Powers activated with the
+                                                                              Psionics skill. A Critical Failure ends all Power durations and
+                            Agility    d6 Pace        6                       causes a level of Fatigue.
+                            Smarts     d10 Parry      4                       New Powers: Relief, speak language.
+                            Spirit     d8 Toughness 9 (4)                     Power Points: Gain 5 additional Power Points.
+                            Strength   d4                                     Scan: Sense all sapient minds within 10” (20 yards) and any strong
+                            Vigor      d6                                     emotions. The scan lasts as long as the character concentrates (and
+                                                                              is Distracted).
+                                                                                                             POWERS
+                                             SKILLS
+                                                                              Mind link, mind reading, relief, speak language, stun. Power Points:
+                                  Athletics           d4                      15.
+                                  Com. Knowledge      d4
+                                  Electronics         d4                                                       GEAR
+                                  Fighting            d4                      Body armor (+4, –4 bullet damage, Torso, Arms, Legs), laser pistol
+                                  Gambling            d4                      with weapon lock (Range 15/30/60, Damage 2d6, AP 2, Cauterize,
+                                  Notice              d8                      Overcharge), biolink, personal data device, Scanner (25"/50 yards),
+                                  Persuasion          d6                      universal battery, $200.
+                                  Psionics            d10
+                                  Science             d4
+                                  Shooting            d4
+                                  Stealth             d4
+                                  Taunt               d8
+                                                                              AdvAnces: Spirit d8, Alertness, Power Points, Scan.
+                                                              RANK: SEASONED
+                                                                                                            HINDRANCES
+                                                                               Heroic: The wounded and those in trouble can always count on
+  MEDIC                                                                        you.
+                                                                               Rebellious: You're a doctor, not a puppet to order around.
+I'm a doctor, not a magician.                                                  Selfless (Minor): The needs of your patients always come first.
+                                                                                                                EDGES
+                                                                               Bolster: May remove Distracted or Vulnerable state after a Test.
+                                      ATTRIBUTES                               Brave: +2 to Fear checks and –2 to rolls on the Fear Table.
+                                                                               Exo Scientist: Ignore up to 2 points of penalties from advanced,
+                           Agility       d6 Pace        6                      primitive, or alien equipment.
+                           Smarts        d8 Parry       4                      Level Headed: Draw an additional Action Card each round in
+                           Spirit        d8 Toughness 9 (4)                    combat and choose which one to use.
+                           Strength      d6
+                           Vigor         d6                                                                     GEAR
+                                                                               Body armor (+4, –4 bullet damage, Torso, Arms, Legs), biolink,
+                                                                               ×4 medi-gel (+2 Healing to stabilize or within the Golden Hour),
+                                             SKILLS                            medi-scanner (free reroll of Healing), personal data device,
+                                                                               universal battery, $450.
+                                 Academics            d6
+                                 Athletics            d4
+                                 Com. Knowledge       d6
+                                 Electronics          d4
+                                 Fighting             d4
+                                 Healing              d8
+                                 Notice               d6
+                                 Persuasion           d4
+                                 Research             d6
+                                 Science              d8
+                                 Shooting             d4
+                                 Stealth              d4                       AdvAnces: Spirit d8, Shooting d4 and Taunt d6, Bolster, Level
+                                 Taunt                d6                       Headed.
+                                                              RANK: SEASONED
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                               Low G Worlder: Subtract 1 from all Strength rolls.
+  ENGINEER                                                                     Overconfident: If it breaks you can fix it, and in half the time it
+                                                                               should normally take. Make sure everyone knows it.
+Have you tried reversing the polarity?
+                                                                                                                EDGES
+                                                                               Duct Tape & Bubble Gum: As a limited action, you may make a
+                                                                               Repair roll to remove a vehicle's Distracted or Vulnerable status, or
+                                      ATTRIBUTES                               both with a raise.
+                                                                               Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                           Agility       d6 Pace        6                      McGyver: Quickly create improvised devices from scraps.
+                           Smarts        d8 Parry       4                      Reliable: Free reroll when making Support rolls.
+                           Spirit        d8 Toughness 9 (4)
+                           Strength      d6                                                                     GEAR
+                           Vigor         d6
+                                                                               Body armor (+4, –4 bullet damage, Torso, Arms, Legs), matter
+                                                                               cutter (Damage 2d4+8, AP 8, Cauterize, –2 Parry), ×5 adhesive
+                                                                               patches, biolink, personal data device, toolkit, universal battery,
+                                             SKILLS                            $450.
+
+                                 Athletics            d6
+                                 Com. Knowledge       d6
+                                 Electronics          d8
+                                 Fighting             d4
+                                 Notice               d8
+                                 Persuasion           d4
+                                 Piloting             d4
+                                 Repair               d8
+                                 Research             d4
+                                 Science              d8
+                                 Shooting             d4
+                                 Stealth              d4
+                                                                               AdvAnces: Notice d8 and Science d8, McGyver, Reliable, Duct
+                                                                               Tape & Bubblegum.
+                                                             RANK: SEASONED
+                                                                                                           HINDRANCES
+                                                                              Curious: You need to see what's over that next hill, and on that
+  SURVEYOR                                                                    next world.
+                                                                              Quirk: You have to get out into a natural environment every so
+Finally, a strange new world to explore.                                      often and stretch your legs. Take any opportunity to get outside
+                                                                              and wander a bit.
+                                                                              Stubborn: Once you set your mind on something, it's hard to turn
+                                                                              you aside.
+                                       ATTRIBUTES                                                              EDGES
+                           Agility      d8 Pace        6                      Atmospheric Acclimation: Operate normally in Dense or Thin
+                           Smarts       d8 Parry       5                      atmospheres without a roll.
+                           Spirit       d6 Toughness 9 (4)                    Favored Terrain (Hill/Mountain): Gain a free reroll of Notice and
+                           Strength     d6                                    Survival and an extra Action Card while in the specified terrain.
+                           Vigor        d6                                    Level Headed: Draw an additional Action Card each round in
+                                                                              combat and choose which one to use.
+                                                                              Woodsman: +2 to Survival and Stealth in the wilds.
+                                             SKILLS                                                             GEAR
+                                  Athletics           d8                      Body armor (+4, –4 bullet damage, Torso, Arms, Legs),
+                                  Com. Knowledge      d6                      environment wear (Negate Vigor rolls for hot or cold climate),
+                                  Driving             d4                      laser pistol with weapon lock (Range 15/30/60, Damage 2d6, AP
+                                  Electronics         d4                      2, Cauterize, Overcharge), hand axe (Str+d6), backpack, flashlight,
+                                  Fighting            d6                      ×2 medi-gel (+2 Healing to stabilize or within the Golden Hour),
+                                  Notice              d8                      scanner (25"/50 yards), universal battery, $80.
+                                  Persuasion          d4
+                                  Piloting            d4
+                                  Science             d4
+                                  Shooting            d6
+                                  Stealth             d6
+                                  Survival            d8
+                                                                              AdvAnces: Smarts d8, Survival d8 & Notice d8, Woodsman,
+                                                                              Level Headed.
+                                                             RANK: SEASONED
+
+
+
+
+                                                                                                           HINDRANCES
+                                                                              Cautious: Fools rush in and make a mess for thoughtful
+  AMBASSADOR                                                                  professionals (like you) to clean up.
+                                                                              Curious: Risks are acceptable when the outcome is expanded
+Let's do this by the book, shall we?                                          knowledge.
+                                                                              Loyal: You are devoted to your friends and their common cause.
+                                                                                                               EDGES
+                                       ATTRIBUTES                             Charismatic: Free reroll when using Persuasion.
+                                                                              Jack-of-all-Trades: Gain d4 in a skill (or d6 with a raise) until
+                           Agility     d6 Pace        6                       replaced. (Often used for an approriate Language or mission-
+                           Smarts      d10 Parry      4                       critical skill.)
+                           Spirit      d8 Toughness 9 (4)                     Mystic Powers (Telepath): Activate Powers as a limited free action
+                           Strength    d4                                     with success for its regular cost, or with a raise for an additional 2
+                           Vigor       d6                                     Power Points.
+                                                                              Rabble-Rouser: Once per turn, affect all foes in a Medium Blast
+                                                                              Template with an Intimidation or Taunt Test.
+                                             SKILLS                                                           POWERS
+                                  Academics           d6                      Confusion, empathy, mind reading, relief, stun. All have the Range
+                                  Athletics           d4                      (Touch) Limitation. Power Points: 10.
+                                  Com. Knowledge      d6
+                                  Electronics         d4                                                        GEAR
+                                  Fighting            d4
+                                                                              Body armor (+4, –4 bullet damage, Torso, Arms, Legs), laser pistol
+                                  Intimidation        d6                      with weapon lock (Range 15/30/60, Damage 2d6, AP 2, Cauterize,
+                                  Notice              d6                      Overcharge), biolink, language translator, personal data device,
+                                  Persuasion          d8                      universal battery, $450.
+                                  Performance         d4
+                                  Research            d8
+                                  Stealth             d4
+                                  Taunt               d8                      AdvAnces: Smarts d10, Jack-of-all-Trades, Charismatic, Rabble-
+                                                                              Rouser.
+                                                                   RANK: SEASONED
+                                                                                                                 HINDRANCES
+                                                                                    Amorous: You can't say no when someone shows interest. You
+  PILOT                                                                             suffer an additional −2 penalty to resist Tests by any character with
+                                                                                    the Attractive or Very Attractive Edge.
+If it generates thrust I can fly it.                                                Quirk: You stick chewing gum to the hull of any craft you intend
+                                                                                    to pilot.
+                                                                                    Overconfident: No maneuver is too dangerous for you, and no
+                                                                                    odds are too long.
+                                           ATTRIBUTES                                                                EDGES
+                               Agility      d10 Pace       6                        Ace: The character may spend Bennies to Soak damage for his
+                               Smarts       d6 Parry       4                        vehicle and ignores up to 2 points of penalties on maneuver rolls.
+                               Spirit       d6 Toughness 9 (4)                      Quick: The hero may discard and redraw Action Cards of 5 or
+                               Strength     d4                                      lower.
+                               Vigor        d6                                      Rocket Jock: Ignore the Multi-Action penalty for making a
+                                                                                    maneuver roll and taking another action in the same round.
+                                                                                                                     GEAR
+                                                  SKILLS
+                                                                                    Body armor (+4, –4 bullet damage, Torso, Arms, Legs), spacesuit,
+                                       Athletics           d6                       laser pistol with weapon lock (Range 15/30/60, Damage 2d6, AP
+                                       Com. Knowledge      d4                       2, Cauterize, Overcharge), ×5 adhesive patches, biolink, chewing
+                                       Driving             d6                       gum, personal data device, universal battery, $95.
+                                       Electronics         d6
+                                       Fighting            d4
+                                       Notice              d6
+                                       Persuasion          d4
+                                       Piloting            d10
+                                       Repair              d6
+                                       Shooting            d8
+                                       Stealth             d6
+                                       Taunt               d6
+                                                                                    AdvAnces: Agility d10, Quick, Piloting d10 & Shooting d8,
+                                                                                    Rocket Jock
+                                                                   RANK: SEASONED
+
+
+
+
+                                                                                                                 HINDRANCES
+                                                                                    Arrogant: You have the biggest guns, so you can tackle the biggest
+  GRUNT                                                                             problems.
+                                                                                    Loyal: You are always there for your comrades in arms.
+Look, I just shoot things.                                                          Selfless (Minor): You know you're just a little bit more expendable
+                                                                                    than the mission specialists you protect.
+                                                                                                                     EDGES
+                                           ATTRIBUTES                               Geared Up: Start with additional equipment.
+                                                                                    Marksman: Ignore up to 2 points of penalties from Range, Cover,
+                               Agility       d8 Pace        6                       Called Shot, Scale, or Speed; or add +1 to first Athletics (throwing)
+                               Smarts        d6 Parry       6                       or Shooting roll. Character may not move or fire greater than RoF
+                               Spirit        d6 Toughness 12 (6)                    1.
+                               Strength      d8                                     Steady Hands: Ignore Unstable Platform penalty; reduce running
+                               Vigor         d8                                     penalty to –1.
+                                                                                    Soldier: Strength is one die type higher for Encumbrance and Min
+                                                                                    Str. Reroll Vigor rolls when resisting environmental Hazards.
+                                                  SKILLS                                                             GEAR
+                                       Athletics           d6                       Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs),
+                                       Battle              d4                       laser rifle (Range 30/60/120, Damage 3d6, AP 2, RoF 3, Cauterize,
+                                       Com. Knowledge      d4                       Overcharge), biolink, medi-gel (+2 Healing to stabilize or within
+                                       Driving             d4                       the Golden Hour), scope (Cancel 2 points of range penalty when
+                                       Electronics         d4                       Aiming), universal battery, $200.
+                                       Fighting            d8
+                                       Intimidation        d4
+                                       Notice              d6
+                                       Persuasion          d4
+                                       Repair              d4
+                                       Shooting            d8
+                                       Stealth             d6                       AdvAnces: Strength d8, Soldier, Steady Hands, Marksman.
+                                       Survival            d4
+                                                                 RANK: SEASONED
+                                                                                                              HINDRANCES
+                                                                                  Quirk: You talk to your drone as though it had AI (it doesn't).
+  CONTROLLER                                                                      Timid: –2 to Fear checks and resisting Intimidation. Bodily risk
+                                                                                  is for drones.
+Say hello to my little friend.                                                    Vengeful (Minor): You seek payback for slights and attacks against
+                                                                                  you or your little buddy.
+                                                                                                                  EDGES
+                                          ATTRIBUTES                              Ace: The character may spend Bennies to Soak damage for his
+                                                                                  vehicle and ignores up to 2 points of penalties on maneuver rolls.
+                              Agility       d8 Pace        6                      Geared Up: Start with additional equipment.
+                              Smarts        d8 Parry       4                      Trick Shot: When performing a Test with Shooting the attacker
+                              Spirit        d6 Toughness 9 (4)                    may have the foe resist with Smarts instead of Agility.
+                              Strength      d6
+                              Vigor         d6                                                                    GEAR
+                                                                                  Body armor (+4, –4 bullet damage, Torso, Arms, Legs) (200), laser
+                                                                                  pistol with weapon lock (Range 15/30/60, Damage 2d6, AP 2,
+                                                 SKILLS                           Cauterize, Overcharge), combat drone (Size –1, Toughness 6 (2),
+                                                                                  Pace 12 Flight, Laser SMG: Range 15/30/60, Damage 2d6, AP 2,
+                                      Athletics           d4                      RoF 4, Cauterize, No Recoil, Overcharge), biolink, ×2 commercial
+                                      Com. Knowledge      d4                      drone (Size –2, Toughness 3, Pace 12 Flight), personal data device,
+                                      Driving             d8                      universal battery, $300.
+                                      Electronics         d8
+                                      Fighting            d4
+                                      Hacking             d4
+                                      Notice              d8
+                                      Persuasion          d4
+                                      Piloting            d8
+                                      Repair              d6
+                                      Shooting            d8
+                                      Stealth             d6
+                                                                                  AdvAnces: Spirit d6, Driving d8 & Shooting d8, Electronics d8 &
+                                                                                  Repair d6, Trick Shot.
+                                                                 RANK: SEASONED
+
+
+
+
+                                                                                                              HINDRANCES
+                                                                                  Curious: Dangerous places are where all the best secrets are
+  ANALYST                                                                         hidden.
+                                                                                  Mild Mannered: –2 to Intimidation rolls.
+I don't fight battles; I write reports.                                           Ruthless (Minor): You do what it takes to get the job done.
+                                                                                                                  EDGES
+                                                                                  Calculating: Ignore up to 2 points of penalties on one action with
+                                          ATTRIBUTES                              an Action Card of Five or less.
+                                                                                  Investigator: +2 to Research and certain types of Notice rolls.
+                              Agility       d6 Pace        6                      Level Headed: Draw an additional Action Card each round in
+                              Smarts        d8 Parry       4                      combat and choose which one to use.
+                              Spirit        d8 Toughness 9 (4)                    Power Hacker: Gain a free reroll of Hacking and ignore the advice
+                              Strength      d4                                    about repetitive Support or Test rolls when using Hacking to
+                              Vigor         d6                                    control the local environment.
+                                                                                                                  GEAR
+                                                 SKILLS                           Body armor (+4, –4 bullet damage, Torso, Arms, Legs), laser pistol
+                                                                                  with weapon lock (Range 15/30/60, Damage 2d6, AP 2, Cauterize,
+                                      Academics           d4                      Overcharge), biolink, cyberdeck (Cancel 2 points of Hacking
+                                      Athletics           d4                      penalties), ×2 micro transmitters, personal data device, universal
+                                      Battle              d6                      battery, $140.
+                                      Com. Knowledge      d4
+                                      Electronics         d8
+                                      Fighting            d4
+                                      Hacking             d8
+                                      Notice              d8
+                                      Persuasion          d6
+                                      Research            d8
+                                      Shooting            d6
+                                      Stealth             d6
+                                                                                  AdvAnces: Spirit d8, Power Hacker, Battle d6 & Shooting d6,
+                                                                                  Level Headed.
+                                                               RANK: SEASONED
+                                                                                                              HINDRANCES
+                                                                                Loyal: You are always there for your comrades in arms.
+  SQUAD LEADER                                                                  Overconfident: Your team and equipment can handle anything
+                                                                                the universe throws at you.
+Stick with me and we'll get through this.                                       Vengeful (Minor): Nobody messes with you or your squad.
+                                                                                                                  EDGES
+                                                                                Command: +1 to Extras’ Shaken or Stunned recovery rolls.
+                                      ATTRIBUTES                                Geared Up: Start with additional equipment.
+                                                                                Rock and Roll!: Ignore the Recoil penalty when firing weapons
+                           Agility       d8 Pace        6                       with a RoF of 2 or more. Character may not move.
+                           Smarts        d6 Parry       5                       Soldier: Strength is one die type higher for Encumbrance and Min
+                           Spirit        d6 Toughness 12 (6)                    Str. Reroll Vigor rolls when resisting environmental Hazards.
+                           Strength      d8
+                           Vigor         d8                                                                        GEAR
+                                                                                Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs), battle
+                                                                                helmet (+6, Head), pulse gatling (Range 20/40/80, Damage 3d8,
+                                             SKILLS                             RoF 3, Snapfire), portable missile launcher (Range 100/200/400,
+                                                                                Damage 6d6 (III), AP 16, RoF 4, HW, Guided Weapon, SBT, no
+                                  Athletics           d6                        recoil, ×6 light missiles), biolink, personal data device, red dot sight
+                                  Battle              d6                        (+1 to Shooting at Short/Medium range), universal battery, $900.
+                                  Com. Knowledge      d4
+                                  Driving             d4
+                                  Electronics         d4
+                                  Fighting            d6
+                                  Intimidation        d6
+                                  Notice              d6
+                                  Persuasion          d4
+                                  Shooting            d8
+                                  Stealth             d6
+                                  Survival            d4
+                                                                                AdvAnces: Strength d8, Command, Soldier, Rock and Roll!.
+                                                               RANK: SEASONED
+
+
+
+
+                                                                                                               ANCESTRY
+                                                                                Big: Subtract 2 from Trait rolls when using equipment that wasn’t
+  ENVOY                                                                         specifically designed for you.
+                                                                                Obvious: Subtract 1 from Stealth rolls.
+Messages, supplies, bullets—I deliver.                                          Pace +2: Pace increases by +2 and running die increases a die type.
+                                                                                Size +2: +2 to Toughness.
+                                                                                Stable: Pace is not reduced by Difficult Ground.
+                                                                                                              HINDRANCES
+                                      ATTRIBUTES
+                                                                                Suspicious: Every shadow could hide a predator.
+                           Agility       d8 Pace        10                      Tongue-Tied: You're the strong, silent type. –1 to Intimidation,
+                           Smarts        d6 Parry       4                       Persuasion, and Taunt rolls.
+                           Spirit        d6 Toughness 10 (2)                    Zero-G Sickness: Become dizzy and suffer a level of Fatigue in
+                           Strength      d6                                     Zero-G (recovered after an hour in any other type of gravity).
+                           Vigor         d8
+                                                                                                                  EDGES
+                                                                                Alertness: +2 to Notice rolls.
+                                             SKILLS                             Combat Reflexes: +2 Spirit to recover from being Shaken or
+                                                                                Stunned.
+                                  Athletics           d8                        Fleet-Footed: Pace +2, increase running die to d10.
+                                  Battle              d4
+                                  Com. Knowledge      d4
+                                                                                                                   GEAR
+                                  Driving             d4                        Synth-mesh (+2, Torso), gyrojet rifle (Range 24/49/96, Damage
+                                  Electronics         d4                        3d6, Heavy Weapon), ×26 standard gyrojets, ×2 smoke gyrojets
+                                  Fighting            d4                        (LBT, –4 to lasers and Electronics), ×2 high explosive gyrojects
+                                  Notice              d6                        (Damage 3d4, LBT), backpack, biolink, flashlight, goggles,
+                                  Persuasion          d4                        nutribar ×10, water container, $300.
+                                  Piloting            d4
+                                  Shooting            d8
+                                  Stealth             d8
+                                  Survival            d6
+                                                                                AdvAnces: Spirit d8, Alertness, Fleet-Footed, Combat Reflexes.
+                                                             RANK: SEASONED
+                                                                                                          HINDRANCES
+                                                                              Amorous: You don't get out much. You suffer an additional −2
+  HACKER                                                                      penalty to resist Tests by any character with the Attractive or Very
+                                                                              Attractive Edge.
+I'm already in, let's make some trouble.                                      Suspicious: They have eyes everywhere, trust no one.
+                                                                              Wanted (Major–Intelligence Agency): A few run-ins with the
+                                                                              authorities are necessary to building a credible reputation.
+                                                                                                              EDGES
+                                      ATTRIBUTES
+                                                                              Investigator: +2 to Research and certain types of Notice rolls.
+                           Agility      d6 Pace        6                      Level Headed: Draw an additional Action Card each round in
+                           Smarts       d8 Parry       4                      combat and choose which one to use.
+                           Spirit       d8 Toughness 7 (2)                    Power Hacker: Gain a free reroll on Hacking. Ignore the repetitive
+                           Strength     d4                                    Support or Test rule when Hacking the local environment.
+                           Vigor        d6                                    Scholar (Hacking): +2 to Hacking rolls.
+                                                                              Streetwise: +2 to Common Knowledge and criminal networking.
+                                                                                                               GEAR
+                                             SKILLS
+                                                                              Kevlar jacket (+2, Torso, Arms), alter wear, backpack, commlink
+                                  Academics           d4                      (50), cyberdeck, goggles, language translator, personal data device,
+                                  Athletics           d4                      $180.
+                                  Com. Knowledge      d6
+                                  Electronics         d8
+                                  Hacking             d8
+                                  Notice              d4
+                                  Persuasion          d4
+                                  Repair              d4
+                                  Research            d8
+                                  Science             d6
+                                  Stealth             d4
+                                                                              AdvAnces: Scholar, Investigator, Power Hacker, Level Headed.
+                                                             RANK: SEASONED
+
+
+
+
+                                                                                                          HINDRANCES
+                                                                              Cautious: You make meticulous plans and don't rush.
+  INFILTRATOR                                                                 Suspicious: You've been betrayed too many times to trust anyone.
+                                                                              Wanted (Major–Police): You can't afford to draw any attention
+The terminal is on floor 120? No problem.                                     from the police—or answer any of their questions.
+                                                                                                              EDGES
+                                                                              Dodge: −2 to be hit by ranged attacks.
+                                      ATTRIBUTES                              Geared Up: Start with additional equipment.
+                                                                              Quick: The hero may discard and redraw Action Cards of 5 or
+                           Agility      d8 Pace        6                      lower.
+                           Smarts       d6 Parry       6                      Thief: +1 Thievery, Athletics rolls made to climb, Stealth in urban
+                           Spirit       d6 Toughness 9 (4)                    environments.
+                           Strength     d6                                    Two-Fisted: Make one extra Fighting roll with a second melee
+                           Vigor        d6                                    weapon in the off-hand at no Multi-Action penalty.
+                                                                                                               GEAR
+                                             SKILLS                           Body armor (+4, –4 bullet damage, Torso, Arms, Legs), ×2
+                                                                              molecular sword (Str+d8+2, AP 4), stun baton (Str+d4, Non-
+                                  Athletics           d8                      Lethal, Stun), ×4 stun grenade (Range 5/10/20, MBT, Stun),
+                                  Com. Knowledge      d4                      camouflage suit, cutting torch, cyberdeck, directional microphone,
+                                  Electronics         d4                      electronic lockpick, language translator, line projector, personal
+                                  Fighting            d8                      data device, rebreather, $300. Cybernetic Implants: ×2 Hidden
+                                  Hacking             d6                      compartment (Concealed internal space that can hold up to two
+                                  Notice              d6                      pounds of objects; finding it requires close examination and a
+                                                                              Notice roll at –4).
+                                  Persuasion          d4
+                                  Stealth             d8
+                                  Thievery            d8
+
+                                                                              AdvAnces: Two-Fisted, Quick, Fighting d8 & Thievery d8,
+                                                                              Dodge.
+                                                              RANK: SEASONED
+                                                                                                            HINDRANCES
+                                                                               Big Mouth: Secrets are like social diseases, the fun part is spreading
+  INFLUENCER                                                                   them around.
+                                                                               Curious: You want to know all about everyone else's biz.
+I'm coming at you with the hot scoops.                                         Quirk: You live your life on camera. Record everything.
+                                                                                                                EDGES
+                                                                               Attractive: +1 to Performance and Persuasion rolls.
+                                       ATTRIBUTES                              Charismatic: Free reroll when using Persuasion.
+                                                                               Connections (Media): Provide aid or favors once per session.
+                            Agility     d4 Pace        6                       Deceptive: Choose whether targets resist Persuade and Taunt with
+                            Smarts      d8 Parry       4                       Smarts or Spirit.
+                            Spirit      d8 Toughness 7 (2)                     Fame: +1 Persuasion rolls when recognized (Common
+                            Strength    d4                                     Knowledge), double usual fee for Performance.
+                            Vigor       d6                                     Work the Room: Once per turn, roll a second die when Supporting
+                                                                               via Performance or Persuasion and apply result to additional ally.
+                                                                                                                 GEAR
+                                             SKILLS
+                                                                               Kevlar jacket (+2, Torso, Arms), light slugthrower (Range 10/20/40,
+                                  Athletics           d4                       Damage 2d6), switchblade (Str+d4), commercial drone (Pace 12,
+                                  Com. Knowledge      d4                       Toughness 3), formal clothing, personal data device, $540
+                                  Electronics         d4
+                                  Fighting            d4
+                                  Notice              d4
+                                  Performance         d8
+                                  Persuasion          d8
+                                  Piloting            d4
+                                  Research            d6
+                                  Shooting            d4
+                                  Stealth             d6
+                                  Taunt               d6                       AdvAnces: Connections, Fame, Work the Room, Deceptive.
+                                                              RANK: SEASONED
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                               Cyber Side Effect: Gain $10K of cyberware but The Shakes as a
+  MERCENARY                                                                    side effect. You are Distracted any time your Action Card is a Club.
+                                                                               Rebellious: You have a problem with authority figures.
+If you got the creds, I got the hardware.                                      Wanted (Minor–Police): The cops are looking for you, so keep
+                                                                               your head down.
+                                                                                                                EDGES
+                                       ATTRIBUTES                              Geared Up: Start with additional equipment.
+                                                                               Quick: The hero may discard and redraw Action Cards of 5 or
+                            Agility     d8 Pace         6                      lower.
+                            Smarts      d6 Parry        6                      Streetwise: +2 to Common Knowledge and criminal networking.
+                            Spirit      d6 Toughness 11 (4)
+                            Strength    d8                                                                       GEAR
+                            Vigor       d8
+                                                                               Body armor (+4, –4 bullet damage, Body, Arms, Legs), automatic
+                                                                               shotgun (Range 12/24/48, Damage 1–3d6, RoF 3, Shotgun),
+                                                                               molecular sword (Str+d8+2, AP 4), commlink, personal data
+                                             SKILLS                            device, $400. Cybernetic Implants: Adrenal surge (+2 to recover
+                                                                               from Shaken or Stunned), cybernetic eyes (Negate 4 points of
+                                  Athletics           d6                       illumination penalties, +2 Notice as an action), muscle weave (+1
+                                  Com. Knowledge      d6                       Toughness).
+                                  Driving             d6
+                                  Electronics         d4
+                                  Fighting            d8
+                                  Intimidation        d6
+                                  Notice              d6
+                                  Persuasion          d4
+                                  Shooting            d8
+                                  Stealth             d4
+                                                                               AdvAnces: Vigor d8, Quick, Streetwise, Strength d8.
+                                                              RANK: SEASONED
+                                                                                                            HINDRANCES
+                                                                               Ailment (Minor): You got a dose of radiation. Subtract 1 from
+  ROAD WARRIOR                                                                 rolls to resist Fatigue. On a Critical Failure this Hindrance becomes
+                                                                               Major.
+Ya gotta be quick if ya want to survive.                                       Heroic: You may conceal it, but you always help those in need.
+                                                                               Low Tech: You prefer gears and gasoline to anything digital; –2 to
+                                                                               Electronics and Hacking rolls.
+                                                                                                                EDGES
+                                      ATTRIBUTES
+                                                                               Ace: Character may spend Bennies to Soak damage for his vehicle
+                           Agility       d8 Pace        6                      and ignores up to 2 points of penalties.
+                           Smarts        d6 Parry       4                      Evasive Maneuvers: Attacks against a vehicle (including lock on
+                           Spirit        d6 Toughness 7 (2)                    attempts) the hero drives suffer a –1 penalty.
+                           Strength      d6                                    Rocket Jock: Ignore the Multi-Action penalty for making a
+                           Vigor         d6                                    Driving roll and taking another action in the same round.
+                                                                               Steady Hands: Ignore Unstable Platform penalty; reduce running
+                                                                               penalty to –1.
+                                                                               Woodsman: +2 to Survival and Stealth in the wilds.
+                                             SKILLS
+                                  Athletics           d4                                                        GEAR
+                                  Com. Knowledge      d4                       Kevlar jacket & jeans (+2, Torso, Arms, Legs), motorcycle helmet
+                                  Driving             d8                       (+3, Head), hunting rifle (Range 24/48/96, Damage 2d8, AP 2,
+                                  Fighting            d4                       Snapfire), glock 9mm (Range 12/24/48, Damage 2d6, AP 1),
+                                  Intimidation        d4                       backpack, medic kit, toolkit, $475.
+                                  Notice              d6
+                                  Persuasion          d4
+                                  Repair              d6
+                                  Shooting            d6
+                                  Stealth             d4
+                                  Survival            d8
+                                                                               AdvAnces: Vigor d6, Evasive Maneuvers, Woodsman, Rocket
+                                                                               Jock.
+                                                              RANK: SEASONED
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                               Jealous (Minor): You covet other people's gear.
+  SCAVENGER                                                                    Outsider (Minor): You're a no good street rat; –2 to Persuasion
+                                                                               rolls to anyone who isn't from the gutters.
+One man's trash is another's treasure.                                         Quirk: Never throw anything away. It could be useful later.
+                                                                               Selfless (Minor): Working together and helping out is the only
+                                                                               way anyone survives.
+                                                                                                                EDGES
+                                      ATTRIBUTES
+                                                                               Duct Tape & Bubble Gum: As a limited action, you may make a
+                           Agility       d6 Pace        6                      Repair roll to remove a vehicle's Distracted or Vulnerable status, or
+                           Smarts        d8 Parry       4                      both with a raise.
+                           Spirit        d6 Toughness 7 (2)                    Favored Terrain (Urban): Gain a free reroll on Notice and
+                           Strength      d6                                    Survival, and draw an extra Action Card for initiative while in an
+                           Vigor         d6                                    Urban environment.
+                                                                               Luck: +1 Benny at the start of each session.
+                                                                               McGyver: Quickly create improvised devices from scraps.
+                                                                               Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                                             SKILLS                            Scavenger: May find a needed item once per encounter.
+                                  Athletics           d4
+                                  Com. Knowledge      d6                                                        GEAR
+                                  Electronics         d4                       Kevlar jacket & jeans (+2, Torso, Arms, Legs), grenade launcher
+                                  Fighting            d4                       (Range 24/48/96, Damage: See grenades below, Snapfire), ×6
+                                  Notice              d8                       Grenades (Damage 3d6, MBT, HW), ×2 Beehive Grenades
+                                  Persuasion          d4                       (Damage 3d6, Cone, HW), pipe (Str+d6, Parry –2), bubblegum,
+                                  Repair              d8                       duct tape, goggles, lockpicks, rope, toolkit, $35.
+                                  Shooting            d6
+                                  Stealth             d6
+                                  Survival            d6
+                                  Thievery            d4
+                                                                               AdvAnces: Favored Terrain, McGyver, Mr. Fix It, Duct Tape &
+                                                                               Bubble Gum.
+                                                               RANK: SEASONED
+                                                                                                             HINDRANCES
+                                                                                Greedy (Major): Justice doesn't pay for fuel and ammo.
+  BOUNTY HUNTER                                                                 Ruthless (Major): Dead or alive, they're coming with you.
+
+Warm or cold, I'm bringing you in.
+                                                                                                                 EDGES
+                                                                                Geared Up: Start with additional equipment.
+                                                                                Quick Draw: Draw two cards when spending a Benny for an
+                                                                                additional Action Card and add +2 to Athletics rolls made to
+                                       ATTRIBUTES                               interrupt others’ actions.
+                                                                                Soldier: Strength is one die type higher for Encumbrance and Min
+                            Agility      d8 Pace        6                       Str. Reroll Vigor rolls when resisting environmental Hazards.
+                            Smarts       d6 Parry       5                       Streetwise: +2 to Common Knowledge and criminal networking.
+                            Spirit       d6 Toughness 12 (4)
+                            Strength     d6                                                                       GEAR
+                            Vigor        d8
+                                                                                Combat spacesuit (+4, –4 bullet damage, Toughness +2, self
+                                                                                sealing), heavy blaster pistol (Range 10/20/40, 3d6, AP 2),
+                                                                                blaster rifle (Range 25/50/100, 3d6+2, AP 2), stun pike (Str+d6,
+                                              SKILLS                            Non-lethal, Reach 2, Stun), jump pack (Move full Running die,
+                                                                                ignore 2 points of Evasion penalty), binoculars (Negate 4 points
+                                   Athletics           d6                       of illumination penalties, 100× magnification, +2 Notice action),
+                                   Com. Knowledge      d4                       universal battery, $150.
+                                   Electronics         d4
+                                   Fighting            d6
+                                   Intimidation        d6
+                                   Notice              d6
+                                   Persuasion          d4
+                                   Piloting            d4
+                                   Repair              d4
+                                   Research            d4
+                                   Shooting            d8
+                                   Stealth             d6
+                                                                                AdvAnces: Vigor d8, Soldier, Streetwise, Quick Draw.
+                                                               RANK: SEASONED
+
+
+
+
+                                                                                                             HINDRANCES
+                                                                                Greedy (Major): Money exerts more of a pull on you than gravity.
+  GRAVLOCK                                                                      Loyal: You care about your friends and allies.
+                                                                                Rebellious: You have a problem with authority figures.
+Sorry, gravity is playing favorites today.
+                                                                                                                 EDGES
+                                                                                Arcane Background (Gravlock): Gain powers based on the
+                                                                                Focus skill. Treat Strength as one die type higher for Encumbrance
+                                       ATTRIBUTES                               and Minimum Strength. Spend 1 Power Point to double jump
+                                                                                distance or add +2 to Athletics rolls where offsetting weight is
+                            Agility      d8 Pace        6                       advantageous. On a Critical Failure suffer a level of Fatigue and
+                            Smarts       d6 Parry       4                       all powers end.
+                            Spirit       d8 Toughness 9 (4)                     Gravitic Acclimation: Ignore the −2 penalty to Agility and Agility
+                            Strength     d4                                     based skills when acting in an unaccustomed gravity.
+                            Vigor        d6                                     Lifter: The Strength of telekinesis increases to d12+2 (d12+4 with
+                                                                                a raise). The Gravlock may apply Area Effect (+2 PP for MBT or
+                                                                                +3 for LBT) or Power (+2 per step of Str) to telekinesis.
+                                                                                New Powers: deflection and entangle.
+                                              SKILLS                            Thief: +1 Thievery and Athletics rolls made to climb or Stealth in
+                                   Athletics           d8                       urban environments.
+                                   Com. Knowledge      d4                                                       POWERS
+                                   Electronics         d4
+                                   Fighting            d4                       Deflection, entangle, telekinesis, wall walker. Power Points: 10.
+                                   Focus               d8
+                                   Notice              d6
+                                                                                                                  GEAR
+                                   Persuasion          d4                       Body armor (+4, –4 damage from bullets, Torso, Arms, Legs),
+                                   Shooting            d4                       blaster pistol (Range 12/24/48, 2d6+2, AP 2), vibro blade
+                                   Stealth             d8                       (Str+d6+d4, AP 2), backpack, electronic lockpick (1 minute to use
+                                   Thievery            d8                       Electronics d10), flashlight, lockpicks, toolkit, $105.
+
+                                                                                AdvAnces: Gravitic Acclimation, New Powers, Thief, Lifter.
+                                                             RANK: SEASONED
+                                                                                                           ANCESTRY
+                                                                              Robot: Cannot heal naturally; ignores the Golden Hour; must be
+  ENFORCER                                                                    Repaired; doesn't breathe or suffer from disease or poison.
+                                                                              No Core Skills: Persuasion and Stealth are not Core Skills.
+Surrender or there will be—trouble.                                           Programmed: You follow your core directives to the letter: uphold
+                                                                              the law, protect the innocent, punish the guilty.
+                                                                                                          HINDRANCES
+                                        ATTRIBUTES                            Big Mouth: You speak what you think, and lying does not
+                                                                              compute.
+                           Agility      d8 Pace        6                      Can't Swim: –2 to Athletics when swimming and each inch
+                           Smarts       d6 Parry       5                      moved costs 3" of Pace.
+                           Spirit       d6 Toughness 8 (0)                    Suspicious (Major): You have a hard time trusting anything that
+                           Strength     d8                                    isn't rigidly programmed. Rolls to Support you are made at –2.
+                           Vigor        d10
+                                                                                                              EDGES
+                                                                              Brawny: Size (and therefore Toughness) +1. Treat Strength as one
+                                             SKILLS                           die type higher for Encumbrance and Minimum Strength to use
+                                                                              weapons, armor, or equipment.
+                                  Athletics           d8
+                                  Com. Knowledge      d4                                                      GEAR
+                                  Driving             d4                      Gyrojet pistol (Range 12/24/48, Damage 3d6, Heavy Weapon),
+                                  Electronics         d4                      advanced scope (Ignore 4 points of Range penalties), commlink,
+                                  Fighting            d6                      personal data device, $50
+                                  Hacking             d4
+                                  Intimidation        d6
+                                  Notice              d6
+                                  Repair              d4
+                                  Shooting            d8
+                                                                              AdvAnces: Agility d8, Athletics d8 & Shooting d8, Brawny,
+                                                                              Vigor d10.
+                                                             RANK: SEASONED
+
+
+
+
+                                                                                                          HINDRANCES
+                                                                              Greedy (Major): You're just in it for the money.
+  SMUGGLER                                                                    Impulsive: Consequences are something to think about later (or
+                                                                              never).
+Nothing personal, it's just business.
+                                                                                                              EDGES
+                                                                              Ace: May spend Bennies to Soak damage for his vehicle and ignore
+                                                                              up to 2 points of penalties.
+                                        ATTRIBUTES                            Assassin: +2 to damage foes when Vulnerable or assassin has The
+                                                                              Drop.
+                           Agility      d8 Pace        6                      Quick Draw: Draw two cards when spending a Benny for an
+                           Smarts       d6 Parry       5                      additional Action Card and add +2 to Athletics rolls made to
+                           Spirit       d6 Toughness 9 (4)                    interrupt others’ actions.
+                           Strength     d4                                    Sneak Attack: The +2 bonus to damage from Assassin becomes
+                           Vigor        d6                                    +d6 instead.
+                                                                              Streetwise: +2 to Common Knowledge and criminal networking.
+                                                                                                              GEAR
+                                             SKILLS
+                                                                              Body armor (+4, –4 bullet damage, Torso, Arms, Legs), heavy
+                                  Athletics           d4                      blaster pistol (Range 10/20/40, 3d6, AP 2), vibro blade (Str+d6+d4,
+                                  Com. Knowledge      d4                      AP 2), backpack, electronic lockpick (1 minute to use Electronics
+                                  Electronics         d4                      d10), flashlight, lockpicks, toolkit, $5.
+                                  Fighting            d6
+                                  Notice              d6
+                                  Persuasion          d6
+                                  Piloting            d8
+                                  Shooting            d8
+                                  Stealth             d8
+                                  Taunt               d6
+                                  Thievery            d4
+                                                                              AdvAnces: Ace, Piloting d8 & Shooting d8, Streetwise, Sneak
+                                                                              Attack.
+                                                                  RANK: SEASONED
+                                                                                                                HINDRANCES
+                                                                                   Heroic: Helping those in need isn't just a job, it's a way of life.
+  SHEPHERD                                                                         Pacificst (Minor): You only fight in self-defense.
+                                                                                   Selfless (Minor): You put the needs of your flock above your own.
+A vast power exists beyond our grasp.                                              Vow (Major): Serve the supreme being and follow the holy tenets
+                                                                                   of the interstellar church.
+                                                                                                                    EDGES
+                                           ATTRIBUTES                              Arcane Background (Shepherd): Gain powers based on the Faith
+                                                                                   skill. On a Critical Failure suffer a level of Fatigue and all powers
+                             Agility       d6 Pace         6                       end.
+                             Smarts        d6 Parry        5                       Holy Warrior: Add +1 to Soak rolls for each Power Point spent
+                             Spirit        d10 Toughness 10 (4)                    (up to +4).
+                             Strength      d6                                      Mercy: As an action, spend 1 Power Point to remove Distracted,
+                             Vigor         d8                                      Vulnerable, or Shaken from a character within range equal to
+                                                                                   Spirit.
+                                                                                                                  POWERS
+                                                SKILLS
+                                                                                   Boost Trait, dispel, healing. Power Points: 10.
+                                   Academics             d4
+                                   Athletics             d4                                                         GEAR
+                                   Com. Knowledge        d6
+                                   Electronics           d4                        Body armor (+4, –4 bullet damage, Torso, Arms, Legs), grenade
+                                                                                   launcher (Range 24/48/96, Damage 3d6, MBT, Heavy Weapon,
+                                   Faith                 d10
+                                                                                   Snapfire), ×2 smoke grenades, ×2 stun grenades (Vigor roll
+                                   Fighting              d6                        or Stunned), stun pike (Str+d6, Non-lethal, Reach 2, Stun),
+                                   Healing               d6                        commlink, holy symbol, universal battery, $525
+                                   Intimidation          d4
+                                   Notice                d4
+                                   Persuasion            d10
+                                   Research              d4
+                                   Shooting              d4                        AdvAnces: Spirit d10, Faith d10 & Persuasion d10, Aura of
+                                   Stealth               d4                        Courage, Holy Warrior.
+                                                                  RANK: SEASONED
+
+
+
+
+                                                                                                                HINDRANCES
+                                                                                   Curious: You love to unlock secrets, scientific and personal.
+  WARPER                                                                           Impulsive: You teleport before you look.
+
+I'm about to fold you like I fold space.
+                                                                                                                    EDGES
+                                                                                   Arcane Background (Warper): Gain powers based on the Focus
+                                                                                   skill and +2 on Science (Astrogation) rolls. Teleport up to 12" (24
+                                                                                   yards) without a skill roll as a limited free action. On a Critical
+                                           ATTRIBUTES                              Failure all beings (including you) within a MBT suffer 2d6 damage
+                                                                                   and are Stunned.
+                             Agility       d8 Pace        6                        Elan: +2 when spending a Benny to reroll a Trait roll.
+                             Smarts        d8 Parry       5                        Favored Power (Havoc): Ignore up to two points of any penalties
+                             Spirit        d8 Toughness 9 (4)                      (Multi-Action, Wounds, Fatigue, etc.) when activating havoc.
+                             Strength      d6                                      Warp Surge: Upon arrival from any teleport cause 2d6 damage in
+                             Vigor         d6                                      a Small Blast Template centered on (but not harming) the warper.
+                                                                                                                  POWERS
+                                                SKILLS                             Deflection, entangle, havoc. Power Points: 10.
+
+                                   Athletics             d6                                                         GEAR
+                                   Com. Knowledge        d4
+                                                                                   Body armor (+4, –4 bullet damage, Torso, Arms, Legs), full-auto
+                                   Electronics           d6                        shotgun (Range 12/24/48, Damage 1–3d6, RoF 3, Shotgun), vibro
+                                   Fighting              d6                        blade (Str+d6+d4, AP 2), red dot sight (+1 to Shooting at Short/
+                                   Focus                 d8                        Medium range), commlink, personal data device, $175
+                                   Notice                d6
+                                   Persuasion            d6
+                                   Piloting              d4
+                                   Science               d6
+                                   Shooting              d6
+                                   Stealth               d4
+                                                                                   AdvAnces: Agility d8, Elan, Favored Power (Havoc), Warp
+                                                                                   Surge.
+                                                               RANK: SEASONED
+                                                                                                              ANCESTRY
+                                                                                Aquatic: Cannot drown and Pace 6 in water.
+  TECHNOMANCER                                                                  Dependency: Spend one hour immersed in water each day or
+                                                                                suffer a level of Fatigue.
+                                                                                Low Light Vision: Ignore Dim and Dark illumination.
+Only the ignorant call it magic.                                                Toughness: Add +1 Toughness.
+                                                                                                            HINDRANCES
+                                                                                Clueless: You know tech, but you don't get out much. –1 to
+                                       ATTRIBUTES                               Common Knowledge and Notice rolls.
+                                                                                Jealous (Minor): You covet alien culture and technology.
+                            Agility      d6 Pace        6                       Mild Mannered: –2 to Intimidation rolls.
+                            Smarts       d8 Parry       5
+                            Spirit       d6 Toughness 8 (2)                                                     EDGES
+                            Strength     d6
+                                                                                Arcane Background (Technomancer): Gain powers based on the
+                            Vigor        d6                                     Weird Science skill and +2 on Electronics and Hacking rolls. On a
+                                                                                Critical Failure suffer a level of Fatigue and all powers end.
+                                                                                Breaker: Damage from powers may Ace against targets with
+                                                                                Hardness.
+                                              SKILLS                            Drones: Gain a Small Toughness 5 (2) drone with Flight Pace 12.
+                                                                                It has a blaster Range 5/10/20, Damage 2d6, RoF 3 (no Recoil) that
+                                   Athletics           d6                       may fire 10 times before it must recharge. The technomancer may
+                                   Com. Knowledge      d4                       see and activate powers through the drone.
+                                   Fighting            d6                       Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                                   Electronics         d8
+                                   Hacking             d8
+                                                                                                               POWERS
+                                   Notice              d4                       Bolt, create item, summon ally. Power Points: 10.
+                                   Persuasion          d4
+                                   Repair              d8                                                        GEAR
+                                   Science             d6                       Synth-mesh (+2, Body, Arms, Legs), energy spear (Str+d8, AP
+                                   Stealth             d4                       4, Cauterize, Heavy Weapon, Parry +1, Reach 1, Critical Failure
+                                   Weird Science       d8                       hits user), environment wear (Negate Vigor rolls for hot or cold
+                                                                                climate), personal data device, universal battery, $50.
+                                                                                AdvAnces: Breaker, Drones, Fighting d6 & Repair d8, Mr. Fix It.
+                                                               RANK: SEASONED
+
+
+
+
+                                                                                                              ANCESTRY
+                                                                                Flight: Pace 12.
+  CYBORG                                                                        Low G Worlder: Subtract 1 from Strength rolls.
+                                                                                Reduced Pace: Running die d4 on the ground.
+They rebuilt me. Faster. Stronger. Better.                                                                  HINDRANCES
+                                                                                Clueless: –1 to Common Knowledge and Notice rolls.
+                                                                                Overconfident: You think you can do anything thanks to your
+                                                                                tech.
+                                       ATTRIBUTES
+                                                                                                                EDGES
+                            Agility      d8 Pace        5
+                            Smarts       d6 Parry       6                       Cyborg: Gain $20K worth of installed implants. The hero no
+                            Spirit       d6 Toughness 10 (4)                    longer makes natural healing rolls but can still Bleed Out, and
+                            Strength     d4                                     Wounds are fixed with the lower of the physician's Healing or
+                                                                                Repair.
+                            Vigor        d6                                     Geared Up: Gain extra starting equipment.
+                                                                                Quick: The hero may discard and redraw Action Cards of 5 or
+                                                                                lower.
+                                                                                Trick Shot: When performing a Test with Shooting the attacker
+                                              SKILLS                            may have the foe resist with Smarts instead of Agility.
+                                   Athletics           d10                                                       GEAR
+                                   Com. Knowledge      d4
+                                                                                Gyrojet rifle (Range 24/48/96, Damage 3d6, Heavy Weapon),
+                                   Electronics         d6
+                                                                                red dot sight (+1 to Shooting at Short/Medium), ×30 standard
+                                   Fighting            d8                       gyrojets, vibro blade (Str+d6+d4, AP 2), commlink, magnetic
+                                   Hacking             d4                       boots, personal data device, universal battery, $25. Cybernetic
+                                   Notice              d6                       Implants: Enhanced vision (Negate up to 4 points of illumination
+                                   Persuasion          d4                       penalties and add +2 to Notice when used as an Action), armor
+                                   Piloting            d4                       (+4), toughness (+1), targeting system (reduce 2 points of Shooting
+                                   Repair              d4                       penalties from Called Shots, Cover, Range, Scale, or Speed).
+                                   Shooting            d10
+                                   Stealth             d8
+                                                                                AdvAnces: Athletics d10, Shooting d10, Quick, Trick Shot.
+                                                                RANK: SEASONED
+                                                                                                               ANCESTRY
+                                                                                 Low Light Vision: Ignore penalties for Dim and Dark Illumination.
+  ROUGHNECK                                                                      Reduced Pace: Running die d4.
+
+Keep your fancy suit, I work for a living.
+                                                                                                              HINDRANCES
+                                                                                 One Arm: –4 to tasks (such as Athletics) that require two hands.
+                                                                                 Impulsive: You leap before you look
+
+                                       ATTRIBUTES                                                                 EDGES
+                                                                                 Brawler: Toughness +1, add d4 to damage from fists; or increase it
+                            Agility       d6 Pace        5
+                                                                                 a die type if combined with Claws.
+                            Smarts        d8 Parry       5
+                                                                                 Bruiser: Toughness +1 and increase fists/Claws damage another
+                            Spirit        d6 Toughness 12 (4)
+                                                                                 die type.
+                            Strength      d8
+                                                                                 Geared Up: Gain additional starting equipment.
+                            Vigor         d8
+                                                                                 Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                                                                                                                  GEAR
+                                              SKILLS                             Body armor (+4, –4 bullet damage, –4 laser damage, –2 Stealth,
+                                                                                 Torso, Arms, Legs), plasma pistol (Range 5/10/20, 2d10, Cauterize,
+                                   Athletics           d6                        Heavy Weapon, Plasma), backpack, flashlight, personal data
+                                   Com. Knowledge      d4                        device, toolkit, universal battery, welding goggles, $150. Cybernetic
+                                   Driving             d6                        Implants: Replacement arm (ignore One Arm penalties), claws
+                                   Electronics         d6                        (Str+d4 damage).
+                                   Fighting            d6
+                                   Intimidation        d6
+                                   Notice              d4
+                                   Persuasion          d4
+                                   Repair              d8
+                                   Science             d4
+                                   Shooting            d6
+                                   Stealth             d4
+                                                                                 AdvAnces: Cyber Installs, Brawler, Mr. Fix It, Bruiser.
+                                                                RANK: SEASONED
+
+
+
+
+                                                                                                               ANCESTRY
+                                                                                 Bloodless: Automatically stabilize when you would Bleed Out.
+  MYSTIC                                                                         Dependency: Bask in sunlight one hour per day or suffer Fatigue.
+                                                                                 Environmental Weakness (Heat/Fire): Subtract 4 from Fatigue
+                                                                                 checks and take 4 additional points from heat and fire.
+Can you not feel the pull of the stars?                                          Hardy: Florans don't suffer a Wound from a second Shaken result.
+                                                                                 No Vital Organs: Called shots have no effect.
+                                                                                 Sleep Reduction: Florans require half the usual amount of sleep.
+
+                                       ATTRIBUTES                                                             HINDRANCES
+                                                                                 Cautious: You are methodical and overly careful.
+                            Agility       d6 Pace        5                       Heroic: You help those in need.
+                            Smarts        d6 Parry       4                       Slow (Minor): Pace –1, reduce running die one step.
+                            Spirit        d8 Toughness 6 (0)
+                            Strength      d6                                                                      EDGES
+                            Vigor         d8                                     Arcane Background (Mystic): Gain powers based on the Focus
+                                                                                 skill and a free reroll on Academics, Common Knowledge, Occult,
+                                                                                 or Science rolls. Draw a card after activating a power: a Diamond
+                                                                                 adds +2 to the Focus roll, a suit that doesn't match the character's
+                                              SKILLS                             Action Card increases the Power Point cost by one. On a Critical
+                                   Academics           d6                        Failure suffer a level of Fatigue and all powers end.
+                                   Athletics           d4                        Elan: +2 when spending a Benny to reroll a Trait roll.
+                                                                                 New Powers: Gain object reading and warrior's gift.
+                                   Com. Knowledge      d6
+                                   Fighting            d4                                                       POWERS
+                                   Focus               d8                        Boost/lower Trait, empathy, object reading, relief, warrior's gift.
+                                   Notice              d6                        Power Points: 15.
+                                   Occult              d4
+                                   Persuasion          d8                                                         GEAR
+                                   Science             d4                        Plasma rifle (Range 10/20/40, 2d10, Cauterize, Heavy Weapon,
+                                   Shooting            d6                        Plasma), personal data device, 2× universal battery, $400.
+                                   Stealth             d4
+                                   Survival            d4                        AdvAnces: Vigor d8, Elan, Persuasion d8 & Shooting d6, New
+                                   Taunt               d6                        Powers.
+                                                                 RANK: SEASONED
+                                                                                                                 ANCESTRY
+                                                                                  Cyber Resistant: Can't mimic or have cybernetic implants.
+  MORPHER                                                                         Shapeshift: As a limited free action, assume the appearance of
+                                                                                  another being up to two Sizes larger or smaller than her (but gain
+                                                                                  no benefits or penalties due to the Size change).
+Your face is going to look great on me.                                           No Vital Organs: Called Shots do no extra damage.
+                                                                                  Outsider (Minor): Subtract 2 from Persuasion when recognized.
+                                                                                                                HINDRANCES
+                                            ATTRIBUTES                            Big Mouth: You can't help giving away secrets.
+                                                                                  Loyal: You'd do anything for your friends.
+                              Agility       d6 Pace        6                      Shamed (Minor): You were a very bad spy thanks to your mouth.
+                              Smarts        d8 Parry       4                      Trouble Magnet (Minor): Any Critical Failure has a worse than
+                              Spirit        d8 Toughness 6 (0)                    usual consequence.
+                              Strength      d4
+                              Vigor         d8                                                                     EDGES
+                                                                                  Arcane Background (Morpher): Gain powers based on the Focus
+                                                                                  skill. All powers are range Self and can't affect others. On a Critical
+                                                                                  Failure become Shaken and all powers ends.
+                                                SKILLS                            Deceptive: Choose whether targets resist Persuade and Taunt with
+                                                                                  Smarts or Spirit.
+                                     Athletics           d6                       Humiliate: Free reroll when making Taunt rolls.
+                                     Com. Knowledge      d4                       New Powers: Gain environmental protection and healing.
+                                     Electronics         d4
+                                     Fighting            d4                                                       POWERS
+                                     Focus               d8                       Disguise, environmental protection, healing, shape change. Power
+                                     Notice              d6                       Points: 15.
+                                     Persuasion          d8
+                                     Stealth             d8
+                                                                                                                    GEAR
+                                     Taunt               d8                       Laser pistol (Range 15/30/60, Damage 2d6, AP 2, Cauterize,
+                                                                                  Overcharge), nanowear, commlink, electronic lockpick (1 minute
+                                                                                  to use Electronics d10), personal data device, $200.
+
+                                                                                  AdvAnces: Vigor d8, New Powers, Humiliate, Deceptive.
+                                                                 RANK: SEASONED
+
+
+
+
+                                                                                                                 ANCESTRY
+                                                                                  Bite/Claws: Str+d4 damage.
+  SPACER                                                                          Low Light Vision: Ignore penalties for Dim and Dark.
+                                                                                  Can't Swim: –2 to swimming (Athletics) rolls; Each inch moved
+Uh, pirate! Of course I don't fight fair.                                         in water costs 3” of Pace.
+                                                                                  Bloodthirsty: Never take prisoners.
+                                                                                  Mean: –1 to Persuasion rolls.
+                                                                                                                HINDRANCES
+                                            ATTRIBUTES
+                                                                                  Arrogant: You like to establish your dominance or challenge the
+                              Agility       d10 Pace       6                      most powerful foes.
+                              Smarts        d6 Parry       6                      Ruthless (Major): You do whatever it takes to get your way.
+                              Spirit        d6 Toughness 9 (4)
+                              Strength      d6                                                                     EDGES
+                              Vigor         d6
+                                                                                  Ace: Character may spend Bennies to Soak damage for his vehicle
+                                                                                  and ignores up to 2 points of penalties.
+                                                                                  Dodge: −2 to be hit by ranged attacks.
+                                                SKILLS                            Menacing: +2 to Intimidation.
+                                     Athletics           d6                                                         GEAR
+                                     Battle              d4
+                                                                                  Body armor (+4, –4 bullet damage, Torso, Arms, Legs), spacesuit
+                                     Com. Knowledge      d4                       (+1, Sealed), heavy blaster pistol (Range 10/20/40, 3d6, AP 2),
+                                     Electronics         d6                       red dot sight (+1 to Shooting at Short/Medium range), molecular
+                                     Fighting            d8                       knife (Str+d4+2, AP 2), ×3 adhesive patches, commlink, universal
+                                     Intimidation        d4                       battery, $140.
+                                     Notice              d6
+                                     Persuasion          d4
+                                     Piloting            d10
+                                     Repair              d4
+                                     Shooting            d6
+                                     Stealth             d8                       AdvAnces: Menacing, Fighting d8 & Stealth d8, Electronics d6
+                                     Survival            d4                       & Shooting d6, Dodge.
+                                                                RANK: SEASONED
+                                                                                                               ANCESTRY
+                                                                                 Gruff: Subtract 2 from Persuasion rolls.
+  GLADIATOR                                                                      Hard Head: Headbutts deal Str+d4 damage as a Natural Weapon.
+                                                                                 Slow: Reduce Pace by 1 and Running die to d4.
+Are you the worthy foe I seek?                                                   Toughness +2: Draken are tough and resilient.
+                                                                                                             HINDRANCES
+                                                                                 Bloodthirsty: Taking prisoners is an insult.
+                                       ATTRIBUTES                                Mean: –1 to Persuasion rolls.
+                                                                                 Death Wish: The only acceptable death is during a suitably epic
+                          Agility      d6 Pace        5                          battle.
+                          Smarts       d4 Parry       6
+                          Spirit       d6 Toughness 16 (6)                                                       EDGES
+                          Strength     d12
+                                                                                 Berserk: After being Shaken or Wounded, melee attacks must be
+                          Vigor        d10
+                                                                                 Wild Attacks, +1 die type to Strength, +2 to Toughness, ignore
+                                                                                 one level of Wound penalties, Critical Failure on Fighting roll hits
+                                                                                 random target. Take Fatigue after every five consecutive rounds,
+                                            SKILLS                               may choose to end rage with Smarts roll –2.
+                                                                                 Brawler: Toughness +1, add d4 to damage from fists; or increase it
+                                 Athletics            d6                         a die type if combined with Hard Head.
+                                 Battle               d4                         Brave: +2 to Fear checks and –2 to rolls on the Fear Table.
+                                 Com. Knowledge       d4                         Frenzy: Roll a second Fighting die with one melee attack per turn.
+                                 Electronics          d4
+                                 Fighting             d8                                                          GEAR
+                                 Healing              d4                         Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs),
+                                 Intimidation         d6                         energy battle axe (Str+d10, AP 4, Heavy Weapon, Cauterize,
+                                 Notice               d4                         Critical Failure hits user), commlink, $100.
+                                 Persuasion           d4
+                                 Shooting             d6
+                                 Stealth              d6
+                                 Survival             d4                         AdvAnces: Strength d12, Brawler, Brave, Frenzy.
+                                 Taunt                d4
+                                                                RANK: SEASONED
+
+
+
+
+                                                                                                               ANCESTRY
+                                                                                 Big: Subtract 2 from rolls to use equipment not specifically
+  SCRAPPER                                                                       designed for the character. Tailored gear costs double.
+                                                                                 Boneheaded: Smarts rolls are −1.
+Hey, are you planning on using that?                                             Reduced Pace: Running die d4.
+                                                                                 Size +1: Elementals are slightly larger than most humanoids.
+                                                                                 Toughness +2: Dense stone body.
+                                                                                                             HINDRANCES
+                                       ATTRIBUTES
+                                                                                 Curious: You love exploring and finding new scraps to put to use.
+                          Agility      d6 Pace              5                    Stubborn: You are as unyielding as rock when it comes to getting
+                          Smarts       d4 Parry             5                    your way.
+                          Spirit       d6 Toughness        12                    Quirk: You put a high value on shiny rocks and chromed metal.
+                          Strength     d8
+                          Vigor        d12                                                                       EDGES
+                                                                                 Brawny: Size (and therefore Toughness) +1. Treat Strength as one
+                                                                                 die type higher for Encumbrance and Minimum Strength to use
+                                            SKILLS                               weapons, armor, or equipment.
+                                                                                 Iron Jaw: +2 to Soak and Vigor rolls to avoid Knockout Blows.
+                                 Athletics            d6                         Luck: +1 Benny at the start of each session.
+                                 Com. Knowledge       d6                         Scavenger: May find a needed item once per encounter.
+                                 Driving              d6
+                                 Electronics          d4                                                          GEAR
+                                 Fighting             d6                         Chain axe (2d6+4, Chain Blade, Rending, Parry –1), magnetic
+                                 Hacking              d4                         boots, mineral detector, toolkit, universal battery, $400.
+                                 Intimidation         d6
+                                 Notice               d4
+                                 Persuasion           d6
+                                 Repair               d4
+                                 Shooting             d4
+                                 Stealth              d6                         AdvAnces: Vigor d12, Iron Jaw, Luck, Scavenger.
+                                 Survival             d4
+                                                                RANK: SEASONED
+                                                                                                                 ANCESTRY
+                                                                                 360 Degree Vision: Ignore 1 point of Gang Up bonus.
+  COMMANDO                                                                       Armor +2: Dense exoskeleton.
+                                                                                 Cannot Speak: May only communicate via electronic devices.
+                                                                                 Claws: Str+d4, AP 2.
+Translated: <I come in peace, skinface!>                                         Communal: Add +2 to Spirit rolls when within 12" (24 yards) of
+                                                                                 other insectoids.
+                                                                                 Outsider (Minor): Subtract 2 from Persuasion rolls.
+                                                                                 Separation Disorder: Suffer −2 to Spirit rolls when no other
+                                      ATTRIBUTES                                 Insectoids are within line of sight.
+                           Agility        d6 Pace        6                                                      HINDRANCES
+                           Smarts         d4 Parry       5                       Ex-Drone: Suffer −2 to Spirit rolls when no ally is within 5" (10
+                           Spirit         d6 Toughness 15 (8)                    yards).
+                           Strength       d8                                     Selfless (Major): You sacrifice your comfort and safety for others.
+                           Vigor          d10
+                                                                                                                    EDGES
+                                                                                 Atmospheric Acclimation: Ignore the effects of Dense or Thin
+                                                                                 atmosphere.
+                                              SKILLS                             Gravitic Acclimation: Ignore the −2 penalty to Agility and Agility
+                                                                                 based skills when acting in an unaccustomed gravity.
+                                 Athletics             d6                        Rock and Roll!: Ignore the Recoil penalty when firing weapons
+                                 Com. Knowledge        d4                        with a RoF of 2 or more. Character may not move.
+                                 Fighting              d6                        Soldier: Strength is one die type higher for Encumbrance and Min
+                                 Electronics           d4                        Str. Reroll Vigor rolls when resisting environmental Hazards.
+                                 Intimidation          d4                                                            GEAR
+                                 Notice                d6
+                                 Persuasion            d4                        Infantry battlesuit (+6, –4 bullet damage, Torso, Arms, Legs),
+                                 Piloting              d4                        gatling blaster (Range 25/50/100, Damage 3d6+2, AP 2, RoF 4),
+                                 Repair                d4                        ×4 particle packs, language translator, $370.
+                                 Shooting              d8
+                                 Stealth               d6
+                                 Survival              d4                        AdvAnces: Vigor d10, Atmospheric Acclimation, Gravitic
+                                                                                 Acclimation, Rock and Roll!.
+                                                                RANK: SEASONED
+
+
+
+
+                                                                                                                HINDRANCES
+                                                                                 Anemic: –2 Vigor when resisting Fatigue.
+HARDLIGHT CONJURER                                                               Curious: Knowledge is power, so learn all the secrets.
+                                                                                 Small: Size and Toughness are reduced by 1.
+Holographic force projection: activate!
+                                                                                                                    EDGES
+                                                                                 Arcane Background (Hardlight Controller): Gain powers based
+                                                                                 on the Science skill. Stealth suffers a –4 penalty while any powers
+                                      ATTRIBUTES                                 are in use. On a Critical Failure the powers ends and all remaining
+                                                                                 Power Points are lost.
+                           Agility        d6 Pace        6                       Brave: +2 to Fear checks and –2 to rolls on the Fear Table.
+                           Smarts         d10 Parry      4                       Exo-Scientist: Ignore up to 2 points of penalties to Science rolls for
+                           Spirit         d8 Toughness 8 (4)                     alien or advanced technology.
+                           Strength       d4                                     New Powers: Gain bolt and deflection.
+                           Vigor          d6                                     New Powers: Gain barrier and blast.
+                                                                                                                  POWERS
+                                              SKILLS                             Barrier, blast, bolt, create item, deflection, illusion, protection. Power
+                                                                                 Points: 15.
+                                 Academics             d4
+                                 Athletics             d4                                                            GEAR
+                                 Com. Knowledge        d4
+                                 Electronics           d8                        Body armor (+4, –4 bullet damage, –4 laser damage, –2 Stealth,
+                                                                                 Sealed), biolink, binoculars (Negate 4 points of illumination
+                                 Fighting              d4
+                                                                                 penalties, 100× magnification, +2 Notice action), gravity harness,
+                                 Hacking               d4                        personal data device, universal battery, $400.
+                                 Notice                d4
+                                 Persuasion            d4
+                                 Piloting              d4
+                                 Repair                d6
+                                 Research              d6
+                                 Science               d10                       AdvAnces: New Powers, Brave, Exo-Scientist, New Powers.
+                                 Stealth               d4
+                                                           RANK: SEASONED
+                                                                                                            ANCESTRY
+                                                                            Extra limbs: Gain a second set of arms (including a second primary
+  STAR KNIGHT                                                               hand) and add +1 to Athletics rolls involving the additional limbs.
+                                                                                                            HINDRANCES
+For the defense of the realm!
+                                                                            Arrogant: Only the most challenging opponents are worth using
+                                                                            your powers on.
+                                                                            Code of Honor: You follow formal rules of battle.
+                                                                            Heroic: You seek to protect those in need.
+                                     ATTRIBUTES                             Vow (Major): Serve the Star Knight Order and uphold justice.
+                          Agility     d8 Pace        6                                                        EDGES
+                          Smarts      d6 Parry       9
+                          Spirit      d6 Toughness 7 (2)                    Arcane Background (Star Knight): Gain powers based on the
+                          Strength    d6                                    Focus skill, Trademark Weapon (Energy Sword), and subtract 4
+                                                                            from Focus rolls while wearing armor more than +2 protection.
+                          Vigor       d6                                    On a Critical Failure gain a level of Fatigue and all powers end.
+                                                                            Block: +1 Parry, ignore 1 point of Gang Up bonus.
+                                                                            Trademark Weapon (Energy Sword): +1 to Athletics (throwing),
+                                                                            Fighting, or Shooting total with a specific weapon; +1 Parry while
+                                           SKILLS                           weapon is readied
+                                                                            Two-Fisted: Make one extra Fighting roll with a second melee
+                                Athletics           d10                     weapon at no Multi-Action penalty.
+                                Battle              d4
+                                Com. Knowledge      d4                                                       POWERS
+                                Driving             d4                      Deflection, protection, smite (all self only). Power Points: 10.
+                                Electronics         d4
+                                Fighting            d8                                                        GEAR
+                                Focus               d6                      Synth-mesh (+2), ×2 Energy Sword (Str+d6, Cauterize, Heavy
+                                Intimidation        d6                      Weapon, Parry +1, Critical Failure hits user), commlink, personal
+                                Notice              d6                      data device, rebreather, $200
+                                Persuasion          d4
+                                Piloting            d4
+                                Stealth             d6                      AdvAnces: Agility d10, Two Fisted, Athletics d10 & Fighting
+                                                                            d10, Block.
+                                                           RANK: SEASONED
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                            Elderly: –1 to Pace, running, Agility, Strength, and Vigor. Hero
+  CHRONOMANCER                                                              gets 5 extra skill points.
+                                                                            Big Mouth: Was that not common knowledge in this timeline?
+Nice to meet you—now run for your life!                                     Whoops.
+                                                                            Mild Mannered: –2 to Intimidation rolls.
+                                                                                                              EDGES
+                                     ATTRIBUTES                             Arcane Background (Chronomancer): Gain powers based on
+                                                                            the Focus skill. On a Critical Failure roll on the Butterfly Effect
+                          Agility    d6 Pace        5                       table (see text) and suffer the result.
+                          Smarts     d10 Parry      4                       Jack-of-all-Trades: Gain d4 in a skill (or d6 with a raise) until
+                          Spirit     d8 Toughness 5 (0)                     replaced.
+                          Strength   d4                                     Premonition: Spend 2 PP for +1 (or 3 PP for +2) to an Evasion or
+                          Vigor      d6                                     Soak roll after the roll. May be used on allies with Smarts Range.
+                                                                            Rearrange Time: After Action Cards are set, spend a Benny to
+                                                                            force one target (friend or foe) to draw a new Action Card, then
+                                                                            choose which card they use. Cannot affect a target with a Joker.
+                                           SKILLS
+                                Athletics           d6
+                                                                                                             POWERS
+                                Com. Knowledge      d6                      Deflection, sloth/speed. Power Points: 15.
+                                Electronics         d8
+                                Fighting            d4                                                        GEAR
+                                Focus               d6                      Body armor (+4, –4 bullet damage, Torso), alter wear, biolink, bag
+                                Notice              d6                      of candy, language translator, line projector, personal data device,
+                                Persuasion          d8                      rebreather, toolkit, universal battery, $325.
+                                Repair              d8
+                                Science             d8
+                                Stealth             d6
+                                Taunt               d6
+                                                                            AdvAnces: Smarts         d10,    Jack-of-all-Trades,    Premonition,
+                                                                            Rearrange Time.
+

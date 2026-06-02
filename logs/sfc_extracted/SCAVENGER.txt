@@ -1,0 +1,38 @@
+
+
+
+
+
+                                                                                                            HINDRANCES
+                                                                               Jealous (Minor): You covet other people's gear.
+  SCAVENGER                                                                    Outsider (Minor): You're a no good street rat; –2 to Persuasion
+                                                                               rolls to anyone who isn't from the gutters.
+One man's trash is another's treasure.                                         Quirk: Never throw anything away. It could be useful later.
+                                                                               Selfless (Minor): Working together and helping out is the only
+                                                                               way anyone survives.
+                                                                                                                EDGES
+                                      ATTRIBUTES
+                                                                               Duct Tape & Bubble Gum: As a limited action, you may make a
+                           Agility       d6 Pace        6                      Repair roll to remove a vehicle's Distracted or Vulnerable status, or
+                           Smarts        d8 Parry       4                      both with a raise.
+                           Spirit        d6 Toughness 7 (2)                    Favored Terrain (Urban): Gain a free reroll on Notice and
+                           Strength      d6                                    Survival, and draw an extra Action Card for initiative while in an
+                           Vigor         d6                                    Urban environment.
+                                                                               Luck: +1 Benny at the start of each session.
+                                                                               McGyver: Quickly create improvised devices from scraps.
+                                                                               Mr. Fix It: +2 to Repair rolls, half the time required with a raise.
+                                             SKILLS                            Scavenger: May find a needed item once per encounter.
+                                  Athletics           d4
+                                  Com. Knowledge      d6                                                        GEAR
+                                  Electronics         d4                       Kevlar jacket & jeans (+2, Torso, Arms, Legs), grenade launcher
+                                  Fighting            d4                       (Range 24/48/96, Damage: See grenades below, Snapfire), ×6
+                                  Notice              d8                       Grenades (Damage 3d6, MBT, HW), ×2 Beehive Grenades
+                                  Persuasion          d4                       (Damage 3d6, Cone, HW), pipe (Str+d6, Parry –2), bubblegum,
+                                  Repair              d8                       duct tape, goggles, lockpicks, rope, toolkit, $35.
+                                  Shooting            d6
+                                  Stealth             d6
+                                  Survival            d6
+                                  Thievery            d4
+                                                                               AdvAnces: Favored Terrain, McGyver, Mr. Fix It, Duct Tape &
+                                                                               Bubble Gum.
+                                                               

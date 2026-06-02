@@ -1,0 +1,38 @@
+
+
+
+
+
+                                                                                                               ANCESTRY
+                                                                                 Big: Subtract 2 from rolls to use equipment not specifically
+  SCRAPPER                                                                       designed for the character. Tailored gear costs double.
+                                                                                 Boneheaded: Smarts rolls are −1.
+Hey, are you planning on using that?                                             Reduced Pace: Running die d4.
+                                                                                 Size +1: Elementals are slightly larger than most humanoids.
+                                                                                 Toughness +2: Dense stone body.
+                                                                                                             HINDRANCES
+                                       ATTRIBUTES
+                                                                                 Curious: You love exploring and finding new scraps to put to use.
+                          Agility      d6 Pace              5                    Stubborn: You are as unyielding as rock when it comes to getting
+                          Smarts       d4 Parry             5                    your way.
+                          Spirit       d6 Toughness        12                    Quirk: You put a high value on shiny rocks and chromed metal.
+                          Strength     d8
+                          Vigor        d12                                                                       EDGES
+                                                                                 Brawny: Size (and therefore Toughness) +1. Treat Strength as one
+                                                                                 die type higher for Encumbrance and Minimum Strength to use
+                                            SKILLS                               weapons, armor, or equipment.
+                                                                                 Iron Jaw: +2 to Soak and Vigor rolls to avoid Knockout Blows.
+                                 Athletics            d6                         Luck: +1 Benny at the start of each session.
+                                 Com. Knowledge       d6                         Scavenger: May find a needed item once per encounter.
+                                 Driving              d6
+                                 Electronics          d4                                                          GEAR
+                                 Fighting             d6                         Chain axe (2d6+4, Chain Blade, Rending, Parry –1), magnetic
+                                 Hacking              d4                         boots, mineral detector, toolkit, universal battery, $400.
+                                 Intimidation         d6
+                                 Notice               d4
+                                 Persuasion           d6
+                                 Repair               d4
+                                 Shooting             d4
+                                 Stealth              d6                         AdvAnces: Vigor d12, Iron Jaw, Luck, Scavenger.
+                                 Survival             d4
+                                                                

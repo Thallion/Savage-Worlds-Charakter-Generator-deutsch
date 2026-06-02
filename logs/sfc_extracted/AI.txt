@@ -1,0 +1,34 @@
+
+                                                                                                              HINDRANCES
+                                                                                  Quirk: You talk to your drone as though it had AI (it doesn't).
+  CONTROLLER                                                                      Timid: –2 to Fear checks and resisting Intimidation. Bodily risk
+                                                                                  is for drones.
+Say hello to my little friend.                                                    Vengeful (Minor): You seek payback for slights and attacks against
+                                                                                  you or your little buddy.
+                                                                                                                  EDGES
+                                          ATTRIBUTES                              Ace: The character may spend Bennies to Soak damage for his
+                                                                                  vehicle and ignores up to 2 points of penalties on maneuver rolls.
+                              Agility       d8 Pace        6                      Geared Up: Start with additional equipment.
+                              Smarts        d8 Parry       4                      Trick Shot: When performing a Test with Shooting the attacker
+                              Spirit        d6 Toughness 9 (4)                    may have the foe resist with Smarts instead of Agility.
+                              Strength      d6
+                              Vigor         d6                                                                    GEAR
+                                                                                  Body armor (+4, –4 bullet damage, Torso, Arms, Legs) (200), laser
+                                                                                  pistol with weapon lock (Range 15/30/60, Damage 2d6, AP 2,
+                                                 SKILLS                           Cauterize, Overcharge), combat drone (Size –1, Toughness 6 (2),
+                                                                                  Pace 12 Flight, Laser SMG: Range 15/30/60, Damage 2d6, AP 2,
+                                      Athletics           d4                      RoF 4, Cauterize, No Recoil, Overcharge), biolink, ×2 commercial
+                                      Com. Knowledge      d4                      drone (Size –2, Toughness 3, Pace 12 Flight), personal data device,
+                                      Driving             d8                      universal battery, $300.
+                                      Electronics         d8
+                                      Fighting            d4
+                                      Hacking             d4
+                                      Notice              d8
+                                      Persuasion          d4
+                                      Piloting            d8
+                                      Repair              d6
+                                      Shooting            d8
+                                      Stealth             d6
+                                                                                  AdvAnces: Spirit d6, Driving d8 & Shooting d8, Electronics d8 &
+                                                                                  Repair d6, Trick Shot.
+                                                                 

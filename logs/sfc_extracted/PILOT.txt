@@ -1,0 +1,34 @@
+
+                                                                                                                 HINDRANCES
+                                                                                    Amorous: You can't say no when someone shows interest. You
+  PILOT                                                                             suffer an additional −2 penalty to resist Tests by any character with
+                                                                                    the Attractive or Very Attractive Edge.
+If it generates thrust I can fly it.                                                Quirk: You stick chewing gum to the hull of any craft you intend
+                                                                                    to pilot.
+                                                                                    Overconfident: No maneuver is too dangerous for you, and no
+                                                                                    odds are too long.
+                                           ATTRIBUTES                                                                EDGES
+                               Agility      d10 Pace       6                        Ace: The character may spend Bennies to Soak damage for his
+                               Smarts       d6 Parry       4                        vehicle and ignores up to 2 points of penalties on maneuver rolls.
+                               Spirit       d6 Toughness 9 (4)                      Quick: The hero may discard and redraw Action Cards of 5 or
+                               Strength     d4                                      lower.
+                               Vigor        d6                                      Rocket Jock: Ignore the Multi-Action penalty for making a
+                                                                                    maneuver roll and taking another action in the same round.
+                                                                                                                     GEAR
+                                                  SKILLS
+                                                                                    Body armor (+4, –4 bullet damage, Torso, Arms, Legs), spacesuit,
+                                       Athletics           d6                       laser pistol with weapon lock (Range 15/30/60, Damage 2d6, AP
+                                       Com. Knowledge      d4                       2, Cauterize, Overcharge), ×5 adhesive patches, biolink, chewing
+                                       Driving             d6                       gum, personal data device, universal battery, $95.
+                                       Electronics         d6
+                                       Fighting            d4
+                                       Notice              d6
+                                       Persuasion          d4
+                                       Piloting            d10
+                                       Repair              d6
+                                       Shooting            d8
+                                       Stealth             d6
+                                       Taunt               d6
+                                                                                    AdvAnces: Agility d10, Quick, Piloting d10 & Shooting d8,
+                                                                                    Rocket Jock
+                                                                   

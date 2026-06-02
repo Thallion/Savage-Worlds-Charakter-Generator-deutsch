@@ -1,0 +1,40 @@
+
+
+
+
+
+                                                                                                              ANCESTRY
+                                                                                Flight: Pace 12.
+  CYBORG                                                                        Low G Worlder: Subtract 1 from Strength rolls.
+                                                                                Reduced Pace: Running die d4 on the ground.
+They rebuilt me. Faster. Stronger. Better.                                                                  HINDRANCES
+                                                                                Clueless: –1 to Common Knowledge and Notice rolls.
+                                                                                Overconfident: You think you can do anything thanks to your
+                                                                                tech.
+                                       ATTRIBUTES
+                                                                                                                EDGES
+                            Agility      d8 Pace        5
+                            Smarts       d6 Parry       6                       Cyborg: Gain $20K worth of installed implants. The hero no
+                            Spirit       d6 Toughness 10 (4)                    longer makes natural healing rolls but can still Bleed Out, and
+                            Strength     d4                                     Wounds are fixed with the lower of the physician's Healing or
+                                                                                Repair.
+                            Vigor        d6                                     Geared Up: Gain extra starting equipment.
+                                                                                Quick: The hero may discard and redraw Action Cards of 5 or
+                                                                                lower.
+                                                                                Trick Shot: When performing a Test with Shooting the attacker
+                                              SKILLS                            may have the foe resist with Smarts instead of Agility.
+                                   Athletics           d10                                                       GEAR
+                                   Com. Knowledge      d4
+                                                                                Gyrojet rifle (Range 24/48/96, Damage 3d6, Heavy Weapon),
+                                   Electronics         d6
+                                                                                red dot sight (+1 to Shooting at Short/Medium), ×30 standard
+                                   Fighting            d8                       gyrojets, vibro blade (Str+d6+d4, AP 2), commlink, magnetic
+                                   Hacking             d4                       boots, personal data device, universal battery, $25. Cybernetic
+                                   Notice              d6                       Implants: Enhanced vision (Negate up to 4 points of illumination
+                                   Persuasion          d4                       penalties and add +2 to Notice when used as an Action), armor
+                                   Piloting            d4                       (+4), toughness (+1), targeting system (reduce 2 points of Shooting
+                                   Repair              d4                       penalties from Called Shots, Cover, Range, Scale, or Speed).
+                                   Shooting            d10
+                                   Stealth             d8
+                                                                                AdvAnces: Athletics d10, Shooting d10, Quick, Trick Shot.
+                                                                

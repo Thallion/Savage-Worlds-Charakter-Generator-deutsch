@@ -1,0 +1,39 @@
+
+
+
+
+
+                                                                                                                HINDRANCES
+                                                                                   Curious: You love to unlock secrets, scientific and personal.
+  WARPER                                                                           Impulsive: You teleport before you look.
+
+I'm about to fold you like I fold space.
+                                                                                                                    EDGES
+                                                                                   Arcane Background (Warper): Gain powers based on the Focus
+                                                                                   skill and +2 on Science (Astrogation) rolls. Teleport up to 12" (24
+                                                                                   yards) without a skill roll as a limited free action. On a Critical
+                                           ATTRIBUTES                              Failure all beings (including you) within a MBT suffer 2d6 damage
+                                                                                   and are Stunned.
+                             Agility       d8 Pace        6                        Elan: +2 when spending a Benny to reroll a Trait roll.
+                             Smarts        d8 Parry       5                        Favored Power (Havoc): Ignore up to two points of any penalties
+                             Spirit        d8 Toughness 9 (4)                      (Multi-Action, Wounds, Fatigue, etc.) when activating havoc.
+                             Strength      d6                                      Warp Surge: Upon arrival from any teleport cause 2d6 damage in
+                             Vigor         d6                                      a Small Blast Template centered on (but not harming) the warper.
+                                                                                                                  POWERS
+                                                SKILLS                             Deflection, entangle, havoc. Power Points: 10.
+
+                                   Athletics             d6                                                         GEAR
+                                   Com. Knowledge        d4
+                                                                                   Body armor (+4, –4 bullet damage, Torso, Arms, Legs), full-auto
+                                   Electronics           d6                        shotgun (Range 12/24/48, Damage 1–3d6, RoF 3, Shotgun), vibro
+                                   Fighting              d6                        blade (Str+d6+d4, AP 2), red dot sight (+1 to Shooting at Short/
+                                   Focus                 d8                        Medium range), commlink, personal data device, $175
+                                   Notice                d6
+                                   Persuasion            d6
+                                   Piloting              d4
+                                   Science               d6
+                                   Shooting              d6
+                                   Stealth               d4
+                                                                                   AdvAnces: Agility d8, Elan, Favored Power (Havoc), Warp
+                                                                                   Surge.
+                                                               

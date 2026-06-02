@@ -1,0 +1,35 @@
+
+                                                                                                                HINDRANCES
+                                                                                   Heroic: Helping those in need isn't just a job, it's a way of life.
+  SHEPHERD                                                                         Pacificst (Minor): You only fight in self-defense.
+                                                                                   Selfless (Minor): You put the needs of your flock above your own.
+A vast power exists beyond our grasp.                                              Vow (Major): Serve the supreme being and follow the holy tenets
+                                                                                   of the interstellar church.
+                                                                                                                    EDGES
+                                           ATTRIBUTES                              Arcane Background (Shepherd): Gain powers based on the Faith
+                                                                                   skill. On a Critical Failure suffer a level of Fatigue and all powers
+                             Agility       d6 Pace         6                       end.
+                             Smarts        d6 Parry        5                       Holy Warrior: Add +1 to Soak rolls for each Power Point spent
+                             Spirit        d10 Toughness 10 (4)                    (up to +4).
+                             Strength      d6                                      Mercy: As an action, spend 1 Power Point to remove Distracted,
+                             Vigor         d8                                      Vulnerable, or Shaken from a character within range equal to
+                                                                                   Spirit.
+                                                                                                                  POWERS
+                                                SKILLS
+                                                                                   Boost Trait, dispel, healing. Power Points: 10.
+                                   Academics             d4
+                                   Athletics             d4                                                         GEAR
+                                   Com. Knowledge        d6
+                                   Electronics           d4                        Body armor (+4, –4 bullet damage, Torso, Arms, Legs), grenade
+                                                                                   launcher (Range 24/48/96, Damage 3d6, MBT, Heavy Weapon,
+                                   Faith                 d10
+                                                                                   Snapfire), ×2 smoke grenades, ×2 stun grenades (Vigor roll
+                                   Fighting              d6                        or Stunned), stun pike (Str+d6, Non-lethal, Reach 2, Stun),
+                                   Healing               d6                        commlink, holy symbol, universal battery, $525
+                                   Intimidation          d4
+                                   Notice                d4
+                                   Persuasion            d10
+                                   Research              d4
+                                   Shooting              d4                        AdvAnces: Spirit d10, Faith d10 & Persuasion d10, Aura of
+                                   Stealth               d4                        Courage, Holy Warrior.
+                                                                  

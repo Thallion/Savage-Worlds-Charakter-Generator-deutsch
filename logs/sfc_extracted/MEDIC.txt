@@ -1,0 +1,33 @@
+
+                                                                                                            HINDRANCES
+                                                                               Heroic: The wounded and those in trouble can always count on
+  MEDIC                                                                        you.
+                                                                               Rebellious: You're a doctor, not a puppet to order around.
+I'm a doctor, not a magician.                                                  Selfless (Minor): The needs of your patients always come first.
+                                                                                                                EDGES
+                                                                               Bolster: May remove Distracted or Vulnerable state after a Test.
+                                      ATTRIBUTES                               Brave: +2 to Fear checks and –2 to rolls on the Fear Table.
+                                                                               Exo Scientist: Ignore up to 2 points of penalties from advanced,
+                           Agility       d6 Pace        6                      primitive, or alien equipment.
+                           Smarts        d8 Parry       4                      Level Headed: Draw an additional Action Card each round in
+                           Spirit        d8 Toughness 9 (4)                    combat and choose which one to use.
+                           Strength      d6
+                           Vigor         d6                                                                     GEAR
+                                                                               Body armor (+4, –4 bullet damage, Torso, Arms, Legs), biolink,
+                                                                               ×4 medi-gel (+2 Healing to stabilize or within the Golden Hour),
+                                             SKILLS                            medi-scanner (free reroll of Healing), personal data device,
+                                                                               universal battery, $450.
+                                 Academics            d6
+                                 Athletics            d4
+                                 Com. Knowledge       d6
+                                 Electronics          d4
+                                 Fighting             d4
+                                 Healing              d8
+                                 Notice               d6
+                                 Persuasion           d4
+                                 Research             d6
+                                 Science              d8
+                                 Shooting             d4
+                                 Stealth              d4                       AdvAnces: Spirit d8, Shooting d4 and Taunt d6, Bolster, Level
+                                 Taunt                d6                       Headed.
+                                                              

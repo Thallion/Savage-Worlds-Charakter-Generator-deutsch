@@ -1,0 +1,37 @@
+
+
+
+
+
+                                                                                                              HINDRANCES
+                                                                                  Curious: Dangerous places are where all the best secrets are
+  ANALYST                                                                         hidden.
+                                                                                  Mild Mannered: –2 to Intimidation rolls.
+I don't fight battles; I write reports.                                           Ruthless (Minor): You do what it takes to get the job done.
+                                                                                                                  EDGES
+                                                                                  Calculating: Ignore up to 2 points of penalties on one action with
+                                          ATTRIBUTES                              an Action Card of Five or less.
+                                                                                  Investigator: +2 to Research and certain types of Notice rolls.
+                              Agility       d6 Pace        6                      Level Headed: Draw an additional Action Card each round in
+                              Smarts        d8 Parry       4                      combat and choose which one to use.
+                              Spirit        d8 Toughness 9 (4)                    Power Hacker: Gain a free reroll of Hacking and ignore the advice
+                              Strength      d4                                    about repetitive Support or Test rolls when using Hacking to
+                              Vigor         d6                                    control the local environment.
+                                                                                                                  GEAR
+                                                 SKILLS                           Body armor (+4, –4 bullet damage, Torso, Arms, Legs), laser pistol
+                                                                                  with weapon lock (Range 15/30/60, Damage 2d6, AP 2, Cauterize,
+                                      Academics           d4                      Overcharge), biolink, cyberdeck (Cancel 2 points of Hacking
+                                      Athletics           d4                      penalties), ×2 micro transmitters, personal data device, universal
+                                      Battle              d6                      battery, $140.
+                                      Com. Knowledge      d4
+                                      Electronics         d8
+                                      Fighting            d4
+                                      Hacking             d8
+                                      Notice              d8
+                                      Persuasion          d6
+                                      Research            d8
+                                      Shooting            d6
+                                      Stealth             d6
+                                                                                  AdvAnces: Spirit d8, Power Hacker, Battle d6 & Shooting d6,
+                                                                                  Level Headed.
+                                                               

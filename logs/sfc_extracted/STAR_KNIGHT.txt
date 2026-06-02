@@ -1,0 +1,36 @@
+
+                                                                                                            ANCESTRY
+                                                                            Extra limbs: Gain a second set of arms (including a second primary
+  STAR KNIGHT                                                               hand) and add +1 to Athletics rolls involving the additional limbs.
+                                                                                                            HINDRANCES
+For the defense of the realm!
+                                                                            Arrogant: Only the most challenging opponents are worth using
+                                                                            your powers on.
+                                                                            Code of Honor: You follow formal rules of battle.
+                                                                            Heroic: You seek to protect those in need.
+                                     ATTRIBUTES                             Vow (Major): Serve the Star Knight Order and uphold justice.
+                          Agility     d8 Pace        6                                                        EDGES
+                          Smarts      d6 Parry       9
+                          Spirit      d6 Toughness 7 (2)                    Arcane Background (Star Knight): Gain powers based on the
+                          Strength    d6                                    Focus skill, Trademark Weapon (Energy Sword), and subtract 4
+                                                                            from Focus rolls while wearing armor more than +2 protection.
+                          Vigor       d6                                    On a Critical Failure gain a level of Fatigue and all powers end.
+                                                                            Block: +1 Parry, ignore 1 point of Gang Up bonus.
+                                                                            Trademark Weapon (Energy Sword): +1 to Athletics (throwing),
+                                                                            Fighting, or Shooting total with a specific weapon; +1 Parry while
+                                           SKILLS                           weapon is readied
+                                                                            Two-Fisted: Make one extra Fighting roll with a second melee
+                                Athletics           d10                     weapon at no Multi-Action penalty.
+                                Battle              d4
+                                Com. Knowledge      d4                                                       POWERS
+                                Driving             d4                      Deflection, protection, smite (all self only). Power Points: 10.
+                                Electronics         d4
+                                Fighting            d8                                                        GEAR
+                                Focus               d6                      Synth-mesh (+2), ×2 Energy Sword (Str+d6, Cauterize, Heavy
+                                Intimidation        d6                      Weapon, Parry +1, Critical Failure hits user), commlink, personal
+                                Notice              d6                      data device, rebreather, $200
+                                Persuasion          d4
+                                Piloting            d4
+                                Stealth             d6                      AdvAnces: Agility d10, Two Fisted, Athletics d10 & Fighting
+                                                                            d10, Block.
+                                                           

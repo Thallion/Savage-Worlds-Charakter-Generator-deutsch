@@ -1,0 +1,32 @@
+
+                                                                                                           ANCESTRY
+                                                                              Robot: Cannot heal naturally; ignores the Golden Hour; must be
+  ENFORCER                                                                    Repaired; doesn't breathe or suffer from disease or poison.
+                                                                              No Core Skills: Persuasion and Stealth are not Core Skills.
+Surrender or there will be—trouble.                                           Programmed: You follow your core directives to the letter: uphold
+                                                                              the law, protect the innocent, punish the guilty.
+                                                                                                          HINDRANCES
+                                        ATTRIBUTES                            Big Mouth: You speak what you think, and lying does not
+                                                                              compute.
+                           Agility      d8 Pace        6                      Can't Swim: –2 to Athletics when swimming and each inch
+                           Smarts       d6 Parry       5                      moved costs 3" of Pace.
+                           Spirit       d6 Toughness 8 (0)                    Suspicious (Major): You have a hard time trusting anything that
+                           Strength     d8                                    isn't rigidly programmed. Rolls to Support you are made at –2.
+                           Vigor        d10
+                                                                                                              EDGES
+                                                                              Brawny: Size (and therefore Toughness) +1. Treat Strength as one
+                                             SKILLS                           die type higher for Encumbrance and Minimum Strength to use
+                                                                              weapons, armor, or equipment.
+                                  Athletics           d8
+                                  Com. Knowledge      d4                                                      GEAR
+                                  Driving             d4                      Gyrojet pistol (Range 12/24/48, Damage 3d6, Heavy Weapon),
+                                  Electronics         d4                      advanced scope (Ignore 4 points of Range penalties), commlink,
+                                  Fighting            d6                      personal data device, $50
+                                  Hacking             d4
+                                  Intimidation        d6
+                                  Notice              d6
+                                  Repair              d4
+                                  Shooting            d8
+                                                                              AdvAnces: Agility d8, Athletics d8 & Shooting d8, Brawny,
+                                                                              Vigor d10.
+                                                             

@@ -1,0 +1,38 @@
+
+
+
+
+
+                                                                                                             HINDRANCES
+                                                                                Greedy (Major): Money exerts more of a pull on you than gravity.
+  GRAVLOCK                                                                      Loyal: You care about your friends and allies.
+                                                                                Rebellious: You have a problem with authority figures.
+Sorry, gravity is playing favorites today.
+                                                                                                                 EDGES
+                                                                                Arcane Background (Gravlock): Gain powers based on the
+                                                                                Focus skill. Treat Strength as one die type higher for Encumbrance
+                                       ATTRIBUTES                               and Minimum Strength. Spend 1 Power Point to double jump
+                                                                                distance or add +2 to Athletics rolls where offsetting weight is
+                            Agility      d8 Pace        6                       advantageous. On a Critical Failure suffer a level of Fatigue and
+                            Smarts       d6 Parry       4                       all powers end.
+                            Spirit       d8 Toughness 9 (4)                     Gravitic Acclimation: Ignore the −2 penalty to Agility and Agility
+                            Strength     d4                                     based skills when acting in an unaccustomed gravity.
+                            Vigor        d6                                     Lifter: The Strength of telekinesis increases to d12+2 (d12+4 with
+                                                                                a raise). The Gravlock may apply Area Effect (+2 PP for MBT or
+                                                                                +3 for LBT) or Power (+2 per step of Str) to telekinesis.
+                                                                                New Powers: deflection and entangle.
+                                              SKILLS                            Thief: +1 Thievery and Athletics rolls made to climb or Stealth in
+                                   Athletics           d8                       urban environments.
+                                   Com. Knowledge      d4                                                       POWERS
+                                   Electronics         d4
+                                   Fighting            d4                       Deflection, entangle, telekinesis, wall walker. Power Points: 10.
+                                   Focus               d8
+                                   Notice              d6
+                                                                                                                  GEAR
+                                   Persuasion          d4                       Body armor (+4, –4 damage from bullets, Torso, Arms, Legs),
+                                   Shooting            d4                       blaster pistol (Range 12/24/48, 2d6+2, AP 2), vibro blade
+                                   Stealth             d8                       (Str+d6+d4, AP 2), backpack, electronic lockpick (1 minute to use
+                                   Thievery            d8                       Electronics d10), flashlight, lockpicks, toolkit, $105.
+
+                                                                                AdvAnces: Gravitic Acclimation, New Powers, Thief, Lifter.
+                                                             
