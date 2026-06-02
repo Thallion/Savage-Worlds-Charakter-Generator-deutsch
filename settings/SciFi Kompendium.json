@@ -4426,6 +4426,24 @@
       "stufe": "leicht",
       "punkte": 1,
       "beschreibung": "-2 auf Athletik-Proben beim Schwimmen, und jede zurückgelegte Bewegungseinheit kostet 3 Zoll Bewegungsweite."
+    },
+    "Trennungsangst": {
+      "aktiv": true,
+      "ausgewaehlt": false,
+      "beschreibung": "Der Charakter leidet unter –2 auf Willenskraftproben, wenn sich keine Artgenossen in Sichtweite befinden (z. B. Insektoide bei Insektoiden).",
+      "custom": false,
+      "name": "Trennungsangst",
+      "punkte": 1,
+      "stufe": "leicht"
+    },
+    "Wuchtig": {
+      "aktiv": true,
+      "ausgewaehlt": false,
+      "beschreibung": "Der Charakter ist sperrig und unhandlich. Erleidet -1 auf Heimlichkeitsproben und kann enge Räume nur eingeschränkt nutzen.",
+      "custom": false,
+      "name": "Wuchtig",
+      "punkte": 1,
+      "stufe": "leicht"
     }
   },
   "maechte": {
@@ -8880,7 +8898,20 @@
       "kosten": 5000,
       "aktiv": true,
       "beschreibung": "Implantat mit integriertem Ziel- und Nachverfolgungssystem. Reduziert bei direktem Schießen die Abzüge von Angesagten Zielen, Deckung, Reichweite, Größenkategorie und Geschwindigkeit um 2 Punkte. Funktioniert nicht mit Gelenkten Waffen. 1 ES-Slot.",
-      "esslots": 1
+      "esslots": 1,
+      "unterkategorie": "Offensiv",
+      "stress": 1,
+      "max_installationen": 1,
+      "effekte": {
+        "abzug_reduktion": 2,
+        "typen": [
+          "angesagte_ziele",
+          "deckung",
+          "reichweite",
+          "groesse",
+          "geschwindigkeit"
+        ]
+      }
     },
     "Körperpanzerung +4": {
       "name": "Körperpanzerung +4",

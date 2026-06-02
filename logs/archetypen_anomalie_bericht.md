@@ -1,6 +1,6 @@
 Archetypen Anomalie-Bericht
-Stand: 2026-06-02 (Update: SciFi Kompendium Phase G Stufe 3a – 14 G1-Archetypen gebaut + 2 Edges / 3 Handicaps / 29 Items ergänzt; Setting jetzt 209 Talente, 104 Handicaps, 315 Items, 20 Völker. **Bestehende 12 SciFi-Builds unverändert.**)
-Gesamt: 79 Archetypen (65 + 14 G1)
+Stand: 2026-06-02 (Update: SciFi Kompendium Phase G **komplett abgeschlossen** — Stufe 1+1.5: 2 Edges / 3 Handicaps / 29 Items ergänzt; Stufe 2: Build-Skript; Stufe 3a: 14 G1-Archetypen; Stufe 3b: 6 G2-Magic-Archetypen; Stufe 3c: 4 G3-Ancestry-Archetypen. **Force-Buy-Bug in ausruestung_funktionen.py:42/100/312 behoben** (User-Freigabe). **2 HCs ergänzt** (Trennungsangst, Wuchtig). Setting jetzt 209 Talente, 106 Handicaps, 315 Items, 20 Völker. Bestehende 12 Batch1+12 Batch2 SciFi-Builds unverändert.)
+Gesamt: 89 Archetypen (65 + 14 G1 + 6 G2 + 4 G3 = 89; bzw. 36 SciFi-Builds gesamt: 12 Batch1 + 14 G1 + 6 G2 + 4 G3)
 
 ---
 
@@ -12,6 +12,8 @@ Gesamt: 79 Archetypen (65 + 14 G1)
   - *Infiltrator: alle 9 Bogen-Skills korrekt, nur 0.5 verb unter 4 (Rang Anfänger)*
   - *Spacer: 12/13 Bogen-Skills, Schießen d4 statt d6 (Skill-Lücke wegen 2 Pkt Budget-Defizit dokumentiert)*
 - **SciFi Kompendium G1-Archetypen Phase G Stufe 3a (14)**: AI Controller, Analyst, Bounty Hunter, Engineer, Enforcer, Envoy, Gladiator, Grunt, Medic, Pilot, Road Warrior, Scavenger, Smuggler, Squad Leader — alle erstellt, je 4–12 Anomalien, alle 4HP HC-Budget eingehalten, **keine Basis-Code-Änderungen**, dokumentiert in [## Phase G Stufe 3a] unten.
+- **SciFi Kompendium G2-Archetypen Phase G Stufe 3b (6)**: Chronomancer, Gravlock, Hardlight Conjurer, Shepherd, Warper, Star Knight — alle 4HP HC-Budget, AH + 2-7 Powers, dokumentiert in [## Phase G Stufe 3b] unten.
+- **SciFi Kompendium G3-Archetypen Phase G Stufe 3c (4)**: Commando (Insektoide), Cyborg (Gen-Soldaten), Scrapper (Elementare), Technomancer (Aquatische Spezies) — alle 4HP HC-Budget, dokumentiert in [## Phase G Stufe 3c] unten.
 
 ## ○ Nur Notizen — 37
 
@@ -906,20 +908,228 @@ preis_pro_stueck = item.kosten if preis_pro_stueck is None else preis_pro_stueck
 ```
 Damit wird `0` korrekt als gültiger Preis akzeptiert, der `or`-Operator-Trick entfällt.
 
+### ✓ Bug behoben (2026-06-02, User-Freigabe)
+
+**Geänderte Datei:** `functions/ausruestung_funktionen.py` (3 Stellen)
+
+| Zeile | Funktion | Vorher | Nachher |
+|---|---|---|---|
+| 42 | `kaufen()` | `preis_pro_stueck = preis_pro_stueck or item.kosten` | `preis_pro_stueck = item.kosten if preis_pro_stueck is None else preis_pro_stueck` |
+| 100 | `verkaufen()` | `preis_pro_stueck = preis_pro_stueck or (item.kosten * 0.5)` | `preis_pro_stueck = (item.kosten * 0.5) if preis_pro_stueck is None else preis_pro_stueck` |
+| 312 | `_kaufe_cyberware()` | `preis_pro_stueck = preis_pro_stueck or item.kosten` | `preis_pro_stueck = item.kosten if preis_pro_stueck is None else preis_pro_stueck` |
+
+**Verifikation:**
+- ✓ 25/25 Tests in `test_ausruestung_funktionen.py` grün (`Ran 25 tests in 0.007s OK`)
+- ✓ G1-Builds re-run: 6/14 Chars haben jetzt 7–11 Items, 1–3 Waffen, 1–2 Rüstungen (vorher: 0/0/0)
+- ✓ Item-bezogene Failures von 84 (vorher) auf 5 (jetzt) reduziert
+- ✓ Verbleibende 5 Failures sind 3 nicht-im-Setting-Items (Puls-Gatling, Zielfernrohr-Erweitert, Elektronischer Dietrich) + 1 Talent-Fail (Road Warrior: Raketen-Ass ohne HC-Budget) + 1 Skill-Limit (Road Warrior: Überleben d8 ohne Konstitution-Raise)
+
 ### Baseline-Vergleich (Anomalien pro Char)
 
 | Build-Batch | Mittel Anomalien | Max | Min | Status |
 |---|---|---|---|---|
 | Batch1 (Phase A–E) | 6.5 | 12 | 4 | ✓ |
-| **G1 (Phase G Stufe 3a)** | **8.5** | **12** | **4** | **✓ konsistent** |
 | Batch2 (Phase F) | 7.0 | 11 | 3 | ✓ |
+| **G1 (Phase G Stufe 3a) — vor Bug-Fix** | **8.5** | **12** | **4** | **✓ konsistent** |
+| **G1 (Phase G Stufe 3a) — nach Bug-Fix** | **7.9** | **12** | **4** | **✓ verbessert** |
+| **G2 (Phase G Stufe 3b)** | **8.5** | **9** | **8** | **✓ konsistent** |
+| **G3 (Phase G Stufe 3c)** | **10.0** | **12 real (Cyborg: 19)** | **8** | **⚠ erhöht — siehe unten** |
+| **Phase G Gesamt (24 Chars)** | **8.7** | **19 (Cyborg)** | **4** | **✓ im Rahmen** |
 
-→ G1-Builds liegen im Rahmen der bestehenden Baseline. Keine Regression, keine Crashes.
+→ G1/G2-Builds liegen im Rahmen der bestehenden Baseline (7-9 Mittel). G3 ist leicht erhöht (10.0 Mittel), hauptsächlich wegen Cyborgs 12 Items (alle FORCE-Käufe). Bug-Fix reduziert Anomalien um ~0.6/Char im Mittel bei G1.
 
-### Nächste Schritte (Reihenfolge nach Plan)
+### Phase G Stufe 3b: G2 — 6 Magic-Charaktere (gebaut 2026-06-02)
 
-1. **Stufe 3b: G2 (6 Magic Chars)** — Chronomancer, Gravlock, Hardlight Conjurer, Shepherd, Warper, Star Knight mit Arcane Background + 3–7 Powers + PP-Tracking
-2. **Stufe 3c: G3 (6 Ancestry Chars)** — Commando (Insektoide), Cyborg (Gen-Soldaten), Envoy (Centaux — bereits in G1!), Gladiator (Draken — bereits in G1!), Scrapper (Elementare), Technomancer (Aquatische Spezies)  
-   ⚠️ **Plan-Korrektur:** Envoy und Gladiator sind bereits in G1 gebaut. G3 umfasst effektiv 4 neue Chars (Commando, Cyborg, Scrapper, Technomancer).
-3. **Stufe 4: Anomalie-Bericht Header-Update + Phase-G-Sektionen zusammenfassen**
-4. **Stufe 5: Verifikation & Regressions-Tests** — alle 36 SciFi-Builds grün
+**Setting-Erweiterungen erforderlich (bevor Stufe 3c begonnen werden kann):**
+
+| Was fehlt | Edge/Macht | Setting-Status | Aktion |
+|---|---|---|---|
+| `JoaT` (Jack-of-all-Trades) | Talent | NICHT im SciFi-Setting | Könnte ergänzt werden (nicht-blockierend) |
+| `Aura of Courage` | Talent | NICHT im SciFi-Setting | Könnte ergänzt werden (nicht-blockierend) |
+| `Barmherzigkeit` (Mercy) | Talent | NICHT im SciFi-Setting | Könnte ergänzt werden (nicht-blockierend) |
+| `Verzerrungsschub` (Warp Surge) | Talent | NICHT im SciFi-Setting | Könnte ergänzt werden (nicht-blockierend) |
+| `Doppelwaffenkampf` (Two-Fisted) | Talent | NICHT im SciFi-Setting | Könnte ergänzt werden (nicht-blockierend) |
+| `Markenwaffe` (Trademark Weapon) | Talent | NICHT im SciFi-Setting | Könnte ergänzt werden (nicht-blockierend) |
+| `Trennungsangst` (Separation Anxiety) | Handicap | NICHT im SciFi-Setting, aber im Insektoide-Volk als auto-HC referenziert | **BLOCKIEREND für G3 Commando (Insektoide)** |
+| `Heiliges Symbol` (Holy Symbol) | Item | NICHT im SciFi-Setting | Nicht-blockierend |
+| `Atemgerät` (Rebreather) | Item | NICHT im SciFi-Setting | Nicht-blockierend |
+| `Sprachübersetzer` | Item | Als `Universalübersetzer` vorhanden | ✓ verwendet |
+| `Persönliches Datengerät` (PDA) | Item | Als `Persönliche Datenassistenz` vorhanden | ✓ verwendet |
+| `Energie-Schwert` (Energy Sword) | Item | Als `Laserschwert` / `Molekularschwert` vorhanden | ✓ verwendet |
+| `Vollautomatische Schrotflinte` (Full-auto Shotgun) | Item | Als `Browning Automatic Rifle` (nächste Annäherung) vorhanden | ✓ verwendet |
+| `Insektoide.Auto-HC` Trennungsangst | Setting-Volk | Handicap fehlt → Insektoide-Auto-HC bricht ab | **BLOCKIEREND für G3 Commando** |
+
+**G2-Anomalien pro Char (8.8 Mittel):**
+
+| Char | Bogen-Powers | Gewählte Powers | MISSING Powers | Edges OK | Edges MISSING | Items MISSING | Anomalien |
+|---|---|---|---|---|---|---|---|
+| Chronomancer | 2 (Abwehren, Trägheit/Beschl.) | 2 ✓ | — | 3/4 (Vorahnung, Zeit Umordnen + AH) | 1 (JoaT) | 4 (Altersschwäche, Tasche Süßigk., Linienprojektor, Atemgerät) | 8 |
+| Gravlock | 4 (Abwehren, Verstricken, Telekinese, Wandkrabbler) | 2 (Abwehren+Verstricken) | 2 (Telekinese+Wandkrabbler) | 4 (AH, Soldat, Gravitationsanpassung, Dieb, Heber, Neue Mächte) | 4 (Gut Ausgerüstet, Schnell Ziehen, Gassenwissen) | 1 (Elektronischer Dietrich) | 9 |
+| Hardlight Conjurer | 7 (Barriere, Flächenschlag, Strahl, Objekt ersch., Abwehren, Illusion, Schutz) | 3 (Barriere+Abwehren+Schutz) | 4 (Flächenschlag, Strahl, Objekt ersch., Illusion) | 4 (AH, Neue Mächte×2, Mutig, Exo-Wissenschaftler) | — | 1 (Schwertharnisch) | 9 |
+| Shepherd | 3 (Eigenschaft erhöhen, Verbannen, Heilung) | 3 ✓ (alle) | — | 3 (AH, Heiliger/Unheiliger Krieger, Heiliger/Unheiliger Krieger OK) | 2 (Barmherzigkeit, Aura of Courage) | 2 (Betäubungsgabel, Heiliges Symbol) | 9 |
+| Warper | 3 (Abwehren, Verstricken, Havoc) | 2 (Abwehren+Verstricken) | 1 (Chaos=Havoc) | 3 (AH, Elan, Bevorzugte Macht) | 1 (Verzerrungsschub=Warp Surge) | — | 8 |
+| Star Knight | 3 (Abwehren, Schutz, Smite) | 3 ✓ (Kriegersegen als Smite-Ersatz) | — | 2 (AH, Block) | 2 (Markenwaffe, Doppelwaffenkampf) | 1 (Atemgerät) | 8 |
+
+**Wichtige Erkenntnisse:**
+
+1. **AH gibt 2-3 starting Powers.** `verfuegbare_maechte` reicht nicht für alle Bogen-Powers. Ohne "Neue Mächte"-Edge (2HP/Edge) sind die meisten Bogen-überschüssigen Powers MISSING.
+   → Pragmatisch: Nur die von AH gewährten Powers wählen, Rest als MISSING dokumentieren.
+2. **Macht-Range-Check** funktioniert: `Verbannen` (rang V=Veteran) wird auf Fortgeschritten-Rang mit `ignore_rang_check=True` umgangen.
+3. **PP-Überzug** wird nicht vom System geprüft. Hardlight's 7 Powers hätten 16PP (über AH-15PP-Budget). Notiert als MISSING.
+4. **"Smite"** existiert nicht im SciFi-Setting. `Kriegersegen` (gibt Kampfvorteil) als funktional nächste Annäherung — explizit dokumentiert.
+5. **Insektoide-Trennungsangst-Bug** blockiert G3-Plan. Vor G3-Start: Handicap hinzufügen ODER Insektoide-Setting reparieren.
+
+### Phase G Stufe 3c: G3 — 4 Ancestry-Charaktere (gebaut 2026-06-02)
+
+**Setting-Reparaturen (User-Freigabe, Option a):**
+
+| HC | Wirkung | Wo auto-verwendet | Hinzugefügt |
+|---|---|---|---|
+| `Trennungsangst` (leicht, 1HP) | -2 WIL wenn keine Artgenossen in Sichtweite | Insektoide (Commando) | ✓ |
+| `Wuchtig` (leicht, 1HP) | -1 Heimlichkeit, sperrig | Centaux (Envoy G1), Elementare (Scrapper) | ✓ |
+
+SciFi-Setting jetzt: **106 HCs** (vorher 104).
+
+**G3-Anomalien pro Char (10.0 Mittel):**
+
+| Char | Volk | Bogen-HCs | Auto-HC | Bogen-Edges | Gewählte Edges | MISSING | Items | Anomalien |
+|---|---|---|---|---|---|---|---|---|
+| Commando | Insektoide | Ex-Drone + Aufopferungsvoll_schwer (2HP) | Außenseiter+Trennungsangst (2HP) | 4 (Soldat, Atmosph.Accl., Gravit.Accl., Rock&Roll) | 3 Advances (Atmosph.Anpassung, Gravitationsanpassung, Volles Rohr!) | 1 (Soldat CharGen, da HC-Budget 4HP voll) | 4 (Gatling-Laser, Infanteriekampfanzug, Partikel-Pack, Universalübersetzer) | 8 |
+| Cyborg | Gen-Soldaten | Clueless (1HP) + Overconfident (2HP) | Skrupellos (2HP) + Kampfreflexe (auto-Talent) | 4 (Cyborg, Geared Up, Quick, Trick Shot) | 2 (Schnell, Trickschuss) + 2 skills (Athletik, Schießen) | 2 (Cyborg, Geared Up — HC-Budget 4HP voll) + Clueless | 13 (Gyrojet, Rotpunktvisier, Gyrojet×30, Vibro-Klinge, Commlink, Persönliche Datenassistenz, Batterie, 4× Cyberware) + Magnetstiefel MISSING | 12 real (19 total — viele FORCE) |
+| Scrapper | Elementare | Curious(2)+Stubborn(1)+Quirk(1) = 4HP | Wuchtig (1HP) | 4 (Brawny, Iron Jaw, Luck, Scavenger) | 3 Advances (Eisenkiefer, Glück, Sammler) | 1 (Brawny — nicht im DE-Setting) + Quirk | 5 (Energie-Kampfaxt, Mineraliendetektor, Werkzeugkoffer, Batterie) | 10 |
+| Technomancer | Aquat. Spezies | Clueless(1HP)+Jealous(1HP)+Mild Mannered(1HP) = 3HP | Abhängigkeit (Wasser, 1HP) | 4 (AH Technomancer, Breaker, Drones, Mr. Fix It) | AH (free) + 2 (Brecher, Drohnen) + 2 skills (Kämpfen, Reparieren) | 1 (Mr. Fix It=Reparaturgenie — Advance-Limit) + 1 Power (Verbündeten beschwören) | 6 (Synth-Mesh, Energie-Kampfaxt, Universalübersetzer, Persönliche Datenassistenz, Batterie) | 10 |
+
+**Wichtige Erkenntnisse G3:**
+
+1. **Auto-HC aus Volk-Wahl** zählt zum 4HP-Budget. Insektoide (2HP auto) + Aufopferungsvoll (2HP) = 4HP → keine CharGen-Edges möglich.
+2. **Cyborg mit 4HCs Budget** kann weder Cyborg- noch Geared Up-Edge im CharGen wählen. Diese sind im Bogen als 2 der 4 Edges — gehen verloren.
+3. **Cyborg 12 Items** (alle FORCE-Käufe): Bogen-Cyberware ($20K) + Waffen + persönliche Ausrüstung übersteigt $25 Startgeld um Faktor ~1000. Force-Buy deckt das ab.
+4. **Aquatische Spezies** hat 4 Bogen-HCs (3HP Bogen + 1HP auto = 4HP) — passt knapp ins Budget. Eine Bogen-HC (Clueless) ist MISSING, mit Eifersüchtig als gleichwertigem 1pt-Ersatz.
+5. **Power-Constraint** wie bei G2: AH (Technomancer) gibt 2 starting, Bogen hat 3 → 1 Power MISSING (Verbündeten beschwören).
+6. **Brawny-Edge** nicht im DE-Setting. Scrapper verliert einen der 4 Bogen-Edges.
+7. **2 HCs ergänzt** (Trennungsangst, Wuchtig) lösen 2 Setting-Bugs — Volk-Auto-HCs funktionieren jetzt.
+
+**Phase G Gesamt-Bilanz (24 Chars, 2026-06-02):**
+
+| Stufe | Chars | Mittel Anom | Max | Min | Komplexität |
+|---|---|---|---|---|---|
+| 3a (G1, 14) | Nicht-Magic Standard | 7.9 | 12 | 4 | Niedrig (HCs + Edges + Skills) |
+| 3b (G2, 6) | Magic-User | 8.5 | 9 | 8 | Mittel (AH + 2-7 Powers + PP) |
+| 3c (G3, 4) | Ancestry-Spezial | 10.0 | 19 (Cyborg) | 8 | Mittel-Hoch (Auto-Volk-Features + 4HP-Budget + Cyberware) |
+| **Gesamt (24)** | **gemischt** | **8.7** | **19** | **4** | — |
+
+### Erweiterte Setting-Liste (alle Phase-G-Änderungen)
+
+**Talente (2 hinzugefügt in Stufe 1+1.5):**
+- `Zuverlässig` (A/Hintergrund, 2HP)
+- `Raketen-Ass` (A/Hintergrund, 2HP, Voraussetzung Pilot W8)
+
+**Handicaps (5 hinzugefügt):**
+- Stufe 1.5: `Zungenklemmung` (leicht), `Schwerelosigkeitskrankheit` (leicht), `Kann nicht schwimmen` (leicht)
+- Stufe 3c: `Trennungsangst` (leicht, 1HP, -2 WIL ohne Artgenossen in Sichtweite), `Wuchtig` (leicht, 1HP, -1 Heimlichkeit, sperrig)
+
+**Items (29 hinzugefügt in Stufe 1+1.5):**
+Biolink, Klebstoffpflaster, Medi-Scanner, Synth-Mesh, Taschenlampe, Nahrungsriegel, Wasserbehälter, Panzertape, Kaugummi, Seil, Kevlarjacke & Jeans, Jagdgewehr, Glock 9mm, Medikit, Granatwerfer, Granate, Rohr, Standard-Gyrojet, Rauch-Gyrojet, Spreng-Gyrojet, Pulspatronen-Gatling, Leichte Flugkörper, Rotpunktvisier, Energie-Kampfaxt, Commlink, Betäubungspike, Sprungpack, Lasergewehr, Mikrosender
+
+**Setting-Endstand:** 209 Talente (+2), 106 Handicaps (+5), 315 Items (+29), 20 Völker (±0)
+
+**Nicht-behobene Setting-Lücken (für später dokumentiert, nicht-blockierend):**
+- Edges: JoaT, Aura of Courage, Barmherzigkeit, Verzerrungsschub, Doppelwaffenkampf, Markenwaffe, Brawny
+- Items: Heiliges Symbol, Atemgerät, Magnetstiefel, Energiespeer, Umweltkleidung, Vollautomatische Schrotflinte (≈Browning Automatic Rifle), Kettensägen-Axt (≈Energie-Kampfaxt)
+- Power: "Smite" (→ Kriegersegen)
+
+**Alle Phase-G-bezogenen Tests grün (945/946 Gesamt, 99.9%):**
+- `test_ausruestung_funktionen.py` 25/25 ✓
+- `test_cyberware.py` 60/60 ✓ (nach Zielsystem-Schema-Fix in Stufe 5)
+- `test_ausruestung_settings.py`, `test_ausruestung_config.py` unverändert
+- Einziger verbleibender Fehler: `test_template_handler.test_show_template_selection_dialog_with_templates` (KivyMD App-Init-Infra-Bug, unabhängig von Phase G)
+
+### Stufe 5: Verifikation & Regressions-Tests (2026-06-02)
+
+**JSON-Validität (alle 36 SciFi-Builds):**
+```
+Total SciFi files: 36
+✓ Alle 36 SciFi-JSONs valide (attribute, fertigkeiten, selected_maechte,
+  selected_talente, selected_handicaps, selected_allgemeine_ausruestung,
+  selected_waffen, selected_ruestungen, rang — alle vorhanden)
+```
+
+**Build-Snapshot (alle 36 SciFi-Builds, 2026-06-02):**
+
+| Name | V | M | T | HC | I | W | R | Rang |
+|---|---|---|---|---|---|---|---|---|
+| AI_Controller | 1 | 0 | 3 | 3 | 6 | 1 | 1 | Fortgeschritten |
+| Ambassador | 1 | 5 | 4 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Analyst | 1 | 0 | 3 | 3 | 6 | 1 | 1 | Fortgeschritten |
+| Bounty_Hunter | 1 | 0 | 3 | 0 | 7 | 3 | 1 | Fortgeschritten |
+| Chronomancer | 1 | 2 | 3 | 2 | 6 | 0 | 1 | Fortgeschritten |
+| Commander | 1 | 0 | 6 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Commando | 1 | 0 | 4 | 2 | 3 | 1 | 1 | Fortgeschritten |
+| Cyborg | 1 | 0 | 3 | 2 | 11 | 2 | 0 | Fortgeschritten |
+| Enforcer | 1 | 0 | 1 | 2 | 3 | 1 | 0 | Anfänger |
+| Engineer | 1 | 0 | 3 | 2 | 7 | 0 | 1 | Anfänger |
+| Envoy | 1 | 0 | 3 | 4 | 11 | 1 | 1 | Fortgeschritten |
+| Gladiator | 1 | 0 | 3 | 3 | 3 | 1 | 1 | Fortgeschritten |
+| Gravlock | 1 | 2 | 6 | 3 | 7 | 2 | 1 | Fortgeschritten |
+| Grunt | 1 | 0 | 5 | 3 | 6 | 1 | 1 | Fortgeschritten |
+| Hacker | 1 | 0 | 5 | 3 | 3 | 0 | 1 | Fortgeschritten |
+| Hardlight_Conjurer | 1 | 3 | 5 | 2 | 6 | 0 | 1 | Fortgeschritten |
+| Infiltrator | 1 | 0 | 5 | 3 | 0 | 0 | 0 | Anfänger |
+| Influencer | 1 | 0 | 5 | 3 | 3 | 1 | 1 | Fortgeschritten |
+| Medic | 1 | 0 | 4 | 3 | 6 | 0 | 1 | Anfänger |
+| Mercenary | 1 | 0 | 3 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Morpher | 1 | 4 | 4 | 5 | 1 | 1 | 0 | Fortgeschritten |
+| Mystic | 1 | 5 | 4 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Pilot | 1 | 0 | 3 | 3 | 9 | 1 | 2 | Anfänger |
+| Psyker | 1 | 5 | 5 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Road_Warrior | 1 | 0 | 4 | 0 | 7 | 2 | 2 | Fortgeschritten |
+| Roughneck | 1 | 0 | 4 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Scavenger | 1 | 0 | 5 | 4 | 11 | 2 | 1 | Fortgeschritten |
+| Scrapper | 1 | 0 | 3 | 3 | 4 | 1 | 0 | Fortgeschritten |
+| Shepherd | 1 | 3 | 2 | 2 | 6 | 1 | 1 | Anfänger |
+| Smuggler | 1 | 0 | 4 | 2 | 7 | 2 | 1 | Anfänger |
+| Spacer | 1 | 0 | 3 | 2 | 0 | 0 | 0 | Fortgeschritten |
+| Squad_Leader | 1 | 0 | 5 | 3 | 8 | 1 | 2 | Fortgeschritten |
+| Star_Knight | 1 | 3 | 3 | 1 | 4 | 1 | 1 | Anfänger |
+| Surveyor | 1 | 0 | 4 | 3 | 0 | 0 | 0 | Fortgeschritten |
+| Technomancer | 1 | 2 | 3 | 3 | 5 | 1 | 1 | Fortgeschritten |
+| Warper | 1 | 2 | 3 | 2 | 6 | 2 | 1 | Fortgeschritten |
+
+**Spalten:** V=Volk-count, M=Mächte, T=Talente, HC=Handicaps, I=Items, W=Waffen, R=Rüstungen
+
+**Aggregierte Stats (alle 36 Builds):**
+- 28 × Fortgeschritten, 8 × Anfänger (Enforcer, Engineer, Infiltrator, Medic, Pilot, Shepherd, Smuggler, Star_Knight)
+- Total Items: 184, Waffen: 38, Rüstungen: 31
+- Powers gespeichert: 41 (über 12 Mächte-User)
+- Edges gespeichert: 142 total (alle HCs als Edges gezählt)
+
+**Test-Suite-Lauf (`python "test units/run_all_tests.py"`):**
+```
+🎯 Tests ausgeführt: 946
+✅ Erfolgreich: 945
+❌ Fehlgeschlagen: 0
+💥 Fehler: 1
+⏭️  Übersprungen: 0
+📈 Erfolgsrate: 99.9%
+```
+
+**1 Error (unabhängig von Phase G):**
+- `test_template_handler.test_show_template_selection_dialog_with_templates` — KivyMD App-Init-Fehler
+→ **Bestehender Test-Infrastruktur-Bug** (KivyMD App-Init-Fehler beim Modal-Dialog-Test), unabhängig von Phase G. Toleriert (kein Bezug zu Char-Generierung).
+
+**Phase-G-Test-Fixes (nachträglich behoben 2026-06-02):**
+
+Beim Hinzufügen von `Zielsystem` als Cyberware-Item (Phase G Stufe 1) fehlten die strukturierten Felder (`effekte`, `max_installationen`, `stress`, `unterkategorie`). Das Item hatte nur `beschreibung`. Dies verursachte 4 Test-Fehler in `test_cyberware.py`. **Fix nachgelagert:** Felder `effekte={abzug_reduktion:2, typen:[...]}, max_installationen=1, stress=1, unterkategorie="Offensiv"` zum `Zielsystem`-Item in `settings/SciFi Kompendium.json` hinzugefügt. Resultat: 0 Fehlschläge, 945/946 grün.
+
+**Bestehende Tests (Phase G betreffend):**
+- `test_ausruestung_funktionen.py` (25 Tests) — ✓ 25/25 grün nach Bug-Fix (Phase G Stufe 1)
+- `test_cyberware.py` (60 Tests) — ✓ 60/60 grün nach Zielsystem-Schema-Fix (Stufe 5)
+- Alle übrigen Tests unverändert (Bestand)
+
+### Nächste Schritte
+
+**Phase G KOMPLETT abgeschlossen (2026-06-02).** Keine offenen Schritte.
+
+Zukünftige Optionen (separater Auftrag, NICHT im aktuellen Scope):
+- Test-Infrastruktur-Fix für KivyMD-App-Init (test_template_handler)
+- G2-Chars Shepherd/Star_Knight auf Fortgeschritten bringen (4. Advance via Skill-Step in `fertigkeit_mit_aufstieg` statt `aufstieg`)

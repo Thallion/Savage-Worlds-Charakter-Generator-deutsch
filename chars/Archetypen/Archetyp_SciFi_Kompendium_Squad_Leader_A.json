@@ -511,7 +511,48 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Infanterie-Kampfanzugshelm +6": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Mikro-Flugkörperwerfer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Leichte Flugkörper": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Biolink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rotpunktvisier": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Loyal",
@@ -551,11 +592,34 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Infanterie-Kampfanzugshelm +6",
+        "Mikro-Flugkörperwerfer",
+        "Leichte Flugkörper",
+        "Biolink",
+        "Taschencomputer",
+        "Rotpunktvisier",
+        "Batterie, Universal-"
+    ],
+    "selected_waffen": [
+        "Mikro-Flugkörperwerfer"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug",
+        "Infanterie-Kampfanzugshelm +6"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Infanterie-Kampfanzugshelm +6": 1,
+        "Mikro-Flugkörperwerfer": 1,
+        "Leichte Flugkörper": 6,
+        "Biolink": 1,
+        "Taschencomputer": 1,
+        "Rotpunktvisier": 1,
+        "Batterie, Universal-": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,

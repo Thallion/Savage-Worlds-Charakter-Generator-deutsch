@@ -504,6 +504,46 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Raumanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Laserpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Waffensperre": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Klebstoffpflaster": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Biolink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kaugummi": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -544,15 +584,34 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Körperpanzerung +4"
+        "Körperpanzerung +4",
+        "Raumanzug",
+        "Laserpistole",
+        "Waffensperre",
+        "Klebstoffpflaster",
+        "Biolink",
+        "Kaugummi",
+        "Taschencomputer",
+        "Batterie, Universal-"
     ],
-    "selected_waffen": [],
+    "selected_waffen": [
+        "Laserpistole"
+    ],
     "selected_ruestungen": [
-        "Körperpanzerung +4"
+        "Körperpanzerung +4",
+        "Raumanzug"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Körperpanzerung +4": 1
+        "Körperpanzerung +4": 1,
+        "Raumanzug": 1,
+        "Laserpistole": 1,
+        "Waffensperre": 1,
+        "Klebstoffpflaster": 5,
+        "Biolink": 1,
+        "Kaugummi": 1,
+        "Taschencomputer": 1,
+        "Batterie, Universal-": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 1.5,

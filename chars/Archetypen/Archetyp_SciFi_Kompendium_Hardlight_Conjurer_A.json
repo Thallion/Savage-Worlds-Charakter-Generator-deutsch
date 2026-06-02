@@ -1,6 +1,6 @@
 {
     "profil_daten": {
-        "Name": "AIController",
+        "Name": "HardlightConjurer",
         "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
@@ -37,27 +37,27 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 8,
+            "wert": 4,
             "modifier": 0
         }
     },
@@ -146,8 +146,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -211,8 +211,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -276,8 +276,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 10,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -302,8 +302,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -341,7 +341,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -355,7 +355,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -419,7 +419,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -433,7 +433,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -455,62 +455,81 @@
     },
     "selected_elements": {
         "voelker": {
-            "Mensch": {
+            "Insektoide": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Feige": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
-            "Rachsüchtig_leicht": {
+            "Außenseiter": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Tick": {
+            "Trennungsangst": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Ass am Steuer": {
+            "AH (Hartlichtformer)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 15
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
+            },
+            "Mutig": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Gut Ausgerüstet": {
+            "Exo-Wissenschaftler": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Trickschuss": {
+            "Neue Mächte_2": {
                 "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
+                "rang": "A",
+                "neue_maechte": 2,
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Barriere": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Abwehren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Schutz": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
             "Körperpanzerung +4": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Laserpistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Waffensperre": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -520,12 +539,22 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Batterie, Universal-": {
+            "Fernglas": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Schwerkraftharnisch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Persönliche Datenassistenz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -533,20 +562,25 @@
         }
     },
     "selected_handicaps": [
-        "Feige",
-        "Rachsüchtig_leicht",
-        "Tick"
+        "Außenseiter",
+        "Trennungsangst"
     ],
     "selected_talente": [
-        "Ass am Steuer",
-        "Gut Ausgerüstet",
-        "Trickschuss"
+        "AH (Hartlichtformer)",
+        "Neue Mächte",
+        "Mutig",
+        "Exo-Wissenschaftler",
+        "Neue Mächte_2"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Barriere",
+        "Abwehren",
+        "Schutz"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
-        "Mensch": true,
+        "Mensch": false,
         "Amorphe": false,
         "Centaux": false,
         "Draken": false,
@@ -554,7 +588,7 @@
         "Floraner": false,
         "Gen-Schufter": false,
         "Gen-Soldaten": false,
-        "Insektoide": false,
+        "Insektoide": true,
         "Leerlinge": false,
         "Orakel": false,
         "Parasiten": false,
@@ -570,35 +604,33 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Laserpistole",
-        "Waffensperre",
         "Biolink",
-        "Batterie, Universal-",
-        "Taschencomputer"
+        "Fernglas",
+        "Schwerkraftharnisch",
+        "Persönliche Datenassistenz",
+        "Batterie, Universal-"
     ],
-    "selected_waffen": [
-        "Laserpistole"
-    ],
+    "selected_waffen": [],
     "selected_ruestungen": [
         "Körperpanzerung +4"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Laserpistole": 1,
-        "Waffensperre": 1,
         "Biolink": 1,
-        "Batterie, Universal-": 1,
-        "Taschencomputer": 1
+        "Fernglas": 1,
+        "Schwerkraftharnisch": 1,
+        "Persönliche Datenassistenz": 1,
+        "Batterie, Universal-": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
-    "verbleibende_attributsteigerungen": 1,
+    "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "verfuegbare_maechte": 4,
+    "anzahl_maechte": 7,
+    "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -606,28 +638,29 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 1,
+    "verbleibende_handicap_punkte": 1,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
-                "typ": "talent",
-                "name": "Gut Ausgerüstet",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Reparieren",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -640,36 +673,36 @@
             },
             {
                 "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 6,
+                "name": "Verstand",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Fahren",
+                "name": "Naturwissenschaften",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Fahren",
+                "name": "Naturwissenschaften",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Fahren",
+                "name": "Naturwissenschaften",
                 "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Naturwissenschaften",
+                "wert": 10,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 2
             },
@@ -692,74 +725,57 @@
                 "name": "Elektronik",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Hacken",
+                "name": "Reparieren",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Hacken",
+                "name": "Reparieren",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Hacken",
+                "name": "Reparieren",
                 "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
                 "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1.0
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Pilot",
+                "name": "Recherche",
                 "wert": 4,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Pilot",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Trickschuss",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Mutig",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Exo-Wissenschaftler",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte_2",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

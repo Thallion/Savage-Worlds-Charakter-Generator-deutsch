@@ -499,6 +499,36 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Materieschneider": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Biolink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Klebstoffpflaster": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -538,7 +568,13 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Körperpanzerung +4"
+        "Körperpanzerung +4",
+        "Materieschneider",
+        "Biolink",
+        "Klebstoffpflaster",
+        "Taschencomputer",
+        "Werkzeugkoffer",
+        "Batterie, Universal-"
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
@@ -546,7 +582,13 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Körperpanzerung +4": 1
+        "Körperpanzerung +4": 1,
+        "Materieschneider": 1,
+        "Biolink": 1,
+        "Klebstoffpflaster": 5,
+        "Taschencomputer": 1,
+        "Werkzeugkoffer": 1,
+        "Batterie, Universal-": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 1.5,

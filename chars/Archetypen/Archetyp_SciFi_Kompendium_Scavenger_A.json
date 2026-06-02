@@ -527,7 +527,47 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Granate": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Bienenstock-Granate": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Rohr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kaugummi": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Panzertape": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schutzbrille": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dietriche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Seil": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Werkzeugkoffer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -576,7 +616,15 @@
     "selected_allgemeine_ausruestung": [
         "Kevlarjacke & Jeans",
         "Granatwerfer",
-        "Rohr"
+        "Granate",
+        "Bienenstock-Granate",
+        "Rohr",
+        "Kaugummi",
+        "Panzertape",
+        "Schutzbrille",
+        "Dietriche",
+        "Seil",
+        "Werkzeugkoffer"
     ],
     "selected_waffen": [
         "Granatwerfer",
@@ -589,7 +637,15 @@
     "ausruestung_mengen": {
         "Kevlarjacke & Jeans": 1,
         "Granatwerfer": 1,
-        "Rohr": 1
+        "Granate": 6,
+        "Bienenstock-Granate": 2,
+        "Rohr": 1,
+        "Kaugummi": 1,
+        "Panzertape": 1,
+        "Schutzbrille": 1,
+        "Dietriche": 1,
+        "Seil": 1,
+        "Werkzeugkoffer": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

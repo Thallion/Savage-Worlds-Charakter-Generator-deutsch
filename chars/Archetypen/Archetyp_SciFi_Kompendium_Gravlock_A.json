@@ -1,6 +1,6 @@
 {
     "profil_daten": {
-        "Name": "AIController",
+        "Name": "Gravlock",
         "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
@@ -47,17 +47,17 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         }
     },
@@ -133,8 +133,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -146,8 +146,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -159,8 +159,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -211,8 +211,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -237,7 +237,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -302,8 +302,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -342,7 +342,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -354,7 +354,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -460,43 +460,76 @@
             }
         },
         "handicaps": {
-            "Feige": {
+            "Gierig_schwer": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Rachsüchtig_leicht": {
+            "Loyal": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Tick": {
+            "Rebellisch": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Ass am Steuer": {
+            "AH (Gravitationshexer)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 10
+            },
+            "Soldat": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Gut Ausgerüstet": {
+            "Gravitationsanpassung": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Trickschuss": {
+            "Dieb": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Heber": {
                 "ausgewaehlt": true,
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Abwehren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Verstricken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER",
+                "dauer": "Sofort"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
@@ -505,27 +538,32 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Laserpistole": {
+            "Blasterpistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Waffensperre": {
+            "Vibro-Klinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Biolink": {
+            "Rucksack": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Batterie, Universal-": {
+            "Taschenlampe": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Dietriche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Werkzeugkoffer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -533,16 +571,22 @@
         }
     },
     "selected_handicaps": [
-        "Feige",
-        "Rachsüchtig_leicht",
-        "Tick"
+        "Gierig_schwer",
+        "Loyal",
+        "Rebellisch"
     ],
     "selected_talente": [
-        "Ass am Steuer",
-        "Gut Ausgerüstet",
-        "Trickschuss"
+        "AH (Gravitationshexer)",
+        "Soldat",
+        "Gravitationsanpassung",
+        "Dieb",
+        "Heber",
+        "Neue Mächte"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Abwehren",
+        "Verstricken"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -570,14 +614,16 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Laserpistole",
-        "Waffensperre",
-        "Biolink",
-        "Batterie, Universal-",
-        "Taschencomputer"
+        "Blasterpistole",
+        "Vibro-Klinge",
+        "Rucksack",
+        "Taschenlampe",
+        "Dietriche",
+        "Werkzeugkoffer"
     ],
     "selected_waffen": [
-        "Laserpistole"
+        "Blasterpistole",
+        "Vibro-Klinge"
     ],
     "selected_ruestungen": [
         "Körperpanzerung +4"
@@ -585,20 +631,21 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Laserpistole": 1,
-        "Waffensperre": 1,
-        "Biolink": 1,
-        "Batterie, Universal-": 1,
-        "Taschencomputer": 1
+        "Blasterpistole": 1,
+        "Vibro-Klinge": 1,
+        "Rucksack": 1,
+        "Taschenlampe": 1,
+        "Dietriche": 1,
+        "Werkzeugkoffer": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
-    "verbleibende_attributsteigerungen": 1,
+    "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "verfuegbare_maechte": 2,
+    "anzahl_maechte": 4,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -607,27 +654,34 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 0,
+    "verbleibende_handicap_punkte": 2,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
                 "typ": "talent",
-                "name": "Gut Ausgerüstet",
+                "name": "Soldat",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
-                "typ": "fertigkeit",
-                "name": "Reparieren",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -646,73 +700,24 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
                 "typ": "fertigkeit",
-                "name": "Fahren",
+                "name": "Fokus",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Fahren",
+                "name": "Fokus",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Fahren",
+                "name": "Fokus",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Elektronik",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Elektronik",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Elektronik",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Hacken",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Hacken",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Hacken",
-                "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
@@ -723,43 +728,68 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Willenskraft",
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
                 "wert": 8,
-                "zahlungsquelle": "Aufstiege",
+                "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Wahrnehmung",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Wahrnehmung",
                 "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1.0
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
-                "name": "Pilot",
-                "wert": 4,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Pilot",
+                "name": "Heimlichkeit",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
             },
             {
                 "typ": "talent",
-                "name": "Trickschuss",
+                "name": "Gravitationsanpassung",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Dieb",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Heber",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

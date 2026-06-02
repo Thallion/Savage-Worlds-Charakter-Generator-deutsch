@@ -474,6 +474,11 @@
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
+            },
+            "Wuchtig": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
             }
         },
         "talente": {
@@ -504,13 +509,64 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Gyrojet-Gewehr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Standard-Gyrojet": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rauch-Gyrojet": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Spreng-Gyrojet": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rucksack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Biolink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschenlampe": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schutzbrille": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Nahrungsriegel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Wasserbehälter": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
     "selected_handicaps": [
         "Misstrauisch_leicht",
         "Zungenklemmung",
-        "Schwerelosigkeitskrankheit"
+        "Schwerelosigkeitskrankheit",
+        "Wuchtig"
     ],
     "selected_talente": [
         "Aufmerksamkeit",
@@ -544,15 +600,37 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Synth-Mesh"
+        "Synth-Mesh",
+        "Gyrojet-Gewehr",
+        "Standard-Gyrojet",
+        "Rauch-Gyrojet",
+        "Spreng-Gyrojet",
+        "Rucksack",
+        "Biolink",
+        "Taschenlampe",
+        "Schutzbrille",
+        "Nahrungsriegel",
+        "Wasserbehälter"
     ],
-    "selected_waffen": [],
+    "selected_waffen": [
+        "Gyrojet-Gewehr"
+    ],
     "selected_ruestungen": [
         "Synth-Mesh"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Synth-Mesh": 1
+        "Synth-Mesh": 1,
+        "Gyrojet-Gewehr": 1,
+        "Standard-Gyrojet": 26,
+        "Rauch-Gyrojet": 2,
+        "Spreng-Gyrojet": 2,
+        "Rucksack": 1,
+        "Biolink": 1,
+        "Taschenlampe": 1,
+        "Schutzbrille": 1,
+        "Nahrungsriegel": 10,
+        "Wasserbehälter": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

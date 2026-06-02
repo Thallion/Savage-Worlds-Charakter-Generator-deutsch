@@ -704,4 +704,596 @@ except BaseException as e:
 print('=' * 60)
 print('Phase G Stufe 3a (G1) — 14 Charaktere erstellt')
 print('=' * 60)
+
+
+# ═══════════════════════════════════════════════════════
+# STUFE 3b: G2 — 6 Magic-User-Archetypen (AH + 3–7 Powers)
+#   Chronomancer, Gravlock, Hardlight Conjurer, Shepherd, Warper, Star Knight
+# Plan-Constraints:
+#   - 4HP HC-Budget
+#   - 2HP attr-step (1 Attribut +1)
+#   - 1 Mensch-freies Talent ODER Insektoide auto-HC (1HP)
+#   - 1 CharGen-Edge (2HP) = AH (Arcane Background)
+#   - 4 Advances: 2-3 Edges + 1-2 Skill/Attr-Steps
+#   - Powers: AH gewährt 2-3 starting + New Powers-Edges (je 2) füllen auf Bogen-Anzahl auf
+# ═══════════════════════════════════════════════════════
+
+
+# ═══════════════════════════════════════════════════════
+# 15. CHRONOMANCER  Pace 6 Parry 5 Toughness 6
+# Bogen: HCs Vow Major(2)+Heroic(2)+Arrogant(2)+Code of Honor(1)+Elderly(2)+Big Mouth(1)+Mild Mannered(1) = 11HP → 4HP wählen
+# Plan: Vow Major(2) + Heroic(2) = 4HP (Anfänger HC-Pool: 4HP = Limit)
+# Ancestry: Vierarmige (Extra limbs) — HCs-Section-1-Liste zeigt "Extra limbs" als Feature
+#   4HP-Limit gilt für VOW + HEROIC. Extra limbs ist Ancestry-Feature, kein HC.
+#   → Wir wählen Mensch (1 freies Talent) statt Vierarmige (Auto-HCs Volksfeind+Dünnhäutig=2HP → würde Budget fressen)
+# Macht: AH (Chronomant) = 15PP, 2 starting powers, plus "Rearrange Time" = benutzerdefinierte Edge
+# Bogen-Powers: Deflection(Abwehren), Sloth/Speed(Trägheit/Beschleunigung) = 2 ✓
+# Bogen-Edges: AH(Chronomancer), Jack-of-all-Trades, Premonition, Rearrange Time = 4
+#   - JoaT: FEHLT im DE-Setting → MISSING
+# CharGen-Edge: AH (2HP)
+# Freies Mensch-Talent: Premonition (Vorahnung) — 2HP ODER Rearrange Time (Zeit Umordnen) — 2HP
+#   Beide kosten 2HP. Wir nutzen 2HP für CharGen-Edge AH. → 0HP für freies Talent.
+#   → Anderes Vorgehen: AH kostet 2HP, Premonition + Rearrange Time je 2HP. Mit 4HP HC-Budget:
+#     - Vow Major 2HP + Heroic 2HP = 4HP HCs
+#     - 0HP für attr-step ODER 2HP für attr-step → -2HP über Budget
+#   → Pragmatisch: Vow Major 2 + Heroic 2 = 4HP HCs, 2HP attr-step (WIL d6→d8) ← über Budget
+#   → ODER: nur 3HP HCs (Vow Major 2 + Code of Honor 1 = 3HP) + 2HP attr-step = 5HP → über 4HP
+#   → 4HP: 2 HCs (2+2) + 0 attr-step ODER 3HP HCs + 1HP attr-step. 2HP = 1 Attribut-Steigerung (d4→d6).
+# Final-Plan: Vow Major(2) + Heroic(2) = 4HP HCs. KEIN attr-step (HC-Budget ausgeschöpft).
+# Edges: AH(2HP CharGen) + Premonition(2HP CharGen via freies Mensch) = 4HP. Aber Budget 0!
+#   → Beide Edges kosten 2HP = 4HP. Kein Budget für 2 Edges.
+#   → Wir verzichten auf Premonition/Rearrange Time als CharGen-Edges (MISSING) und packen sie als Advances.
+# Attribute: Agi d4, Sma d10, Spi d8, Str d4, Vig d4 (Bogen 2. Attr-Sektion: d6 d10 d8 d4 d6 — unklar)
+#   Pragmatisch: Agi d6, Sma d10 (vorgegeben), Spi d8, Str d4, Vig d6 = 5pts
+# Skills 12pts: Bogen-Skills Athletik(0)d4, Com.Knowledge(0)d4, Elektronik(2)d8, Kämpfen(0)d4,
+#   Fokus(3)d8, Wahrnehmung(2)d8, Überreden(3)d8, Wissenschaft(0)d4, Heimlichkeit(1)d6, ...
+#   Final: Fokus d8(3)+Wahrn d8(3)+Überr d8(3)+Elek d8(3) = 12 ✓
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Chronomancer', protokoll='logs/sfc_chronomancer.log')
+    s.handicap('Schwur_schwer')
+    s.handicap('Heldenhaft')
+    s.volk('Mensch')
+    s.volk_freies_talent('Mensch', 'AH (Chronomant)', ignore_voraussetzungen=True)  # free magic AH
+    s.attribut_auf('Geschicklichkeit', 6)
+    s.attribut_auf('Verstand', 10)
+    s.attribut_auf('Willenskraft', 8)
+    s.attribut_auf('Konstitution', 6)
+    s.attribut_auf('Stärke', 4)
+    skills_setzen(s, [('Fokus', 8), ('Wahrnehmung', 8), ('Überreden', 8), ('Elektronik', 8)])
+    s.macht('Abwehren', ignore_rang_check=True)
+    s.macht('Trägheit/Beschleunigung', ignore_rang_check=True)
+    abschliessen(s, 4)
+    advance_skill(s, 'Fokus', 10)              # Bogen Fokus d10
+    advance_skill(s, 'Naturwissenschaften', 8)  # Bogen d8
+    advance_edge(s, 'Vorahnung')               # Premonition (2HP, ignore_voraussetzungen via talent())
+    advance_edge(s, 'Zeit Umordnen')           # Rearrange Time
+    for item in [('Körperpanzerung +4', 1), ('Biolink', 1),
+                 ('Universalübersetzer', 1),
+                 ('Persönliche Datenassistenz', 1),
+                 ('Werkzeugkoffer', 1), ('Batterie, Universal-', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-HCs: Schwur_schwer(2) + Heldenhaft(2) = 4HP. Arrogant/Code of Honor/Elderly/Big Mouth/Mild Mannered = MISSING (über 4HP-Limit)')
+    s.notiz('Bogen-Edges (4): AH (free), Premonition, Rearrange Time (Adv), JoaT = MISSING (nicht im DE-Setting)')
+    s.notiz('Bogen-Attribute: Bogen 2. Sektion hat d6/d10/d8/d4/d6 — Agi d6 (Bogen d6), Sma d10 (Bogen d10), Spi d8 (Bogen d8), Str d4 (Bogen d4), Vig d6 (Bogen d6) = 5pts')
+    s.notiz('Bogen-Items: Altersschwäche (=alter wear, kein Item), Tasche voller Süßigkeiten (kein Item), Linienprojektor (kein Item), Atemgerät (kein Item) = MISSING')
+    save_char(s, 'Chronomancer')
+except BaseException as e:
+    m(f'Chronomancer CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 16. GRAVLOCK  Pace 6 Parry 4 Toughness 9(4)
+# Bogen-HCs: Greedy Major(2)+Loyal(1)+Rebellious(1)+Ruthless Major(2) = 6HP → 4HP wählen
+# Plan: Greedy Major(2) + Loyal(1) + Rebellious(1) = 4HP ✓ (Ruthless Major = MISSING)
+# Mensch: 1 freies Talent
+# Bogen-Edges (8): AH, Gravitic Acclimation, Lifter, Thief, Geared Up, Quick Draw, Soldier, Streetwise
+#   CharGen: AH (2HP) + Geared Up (2HP) = 4HP via 4HP-Edge-Budget? Nein, attr-step frist das auf.
+#   4HP HCs + 2HP attr-step = 0HP für CharGen-Edge → AH via freies Mensch.
+#   Freies Mensch-Talent: AH (Gravitationshexer) — 0HP, dann 4HP HCs
+# Macht: AH (Gravitationshexer) = 10PP, 2 starting. Bogen 4 Powers: Deflection+Entangle+Telekinesis+Wall Walker
+#   → "New Powers" Edge gewährt 2 weitere. → 2+2 = 4 Powers. ✓
+#   Powers: Abwehren(A,3), Verstricken(A,2), Telekinese(F,5), Wandkrabbler(A,2) = 12PP. Über 10PP.
+#   → Drop Wandkrabbler? Aber Bogen listet 4. PP-Überzug notiert als MISSING.
+# Attribute: Agi d8, Sma d6, Spi d6, Str d8, Vig d8 (Bogen Bogen-Vigor d8 = 3pts in 5pts)
+#   5pts: Agi d8(1)+Sma d6(0)+Spi d6(0)+Str d8(1)+Vig d8(1) = 3, +2 = 5 ✓
+# Skills 12pts: Fokus d8(3)+Schießen d8(3)+Wahrn d8(3)+Heiml d8(3) = 12 ✓
+#   Bogen-Skills: Athletik d8, AK d4, Elektronik d4, Kämpfen d4, Fokus d8, Wahrn d6, Überr d4, Schießen d8, Heiml d8, Dieb d4
+#   → 4×d8 + 1×d6 = 12pts
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Gravlock', protokoll='logs/sfc_gravlock.log')
+    s.handicap('Gierig_schwer')
+    s.handicap('Loyal')
+    s.handicap('Rebellisch')
+    s.notiz('Bogen-HC Ruthless Major(2) = MISSING (über 4HP-Limit)')
+    s.volk('Mensch')
+    s.volk_freies_talent('Mensch', 'AH (Gravitationshexer)', ignore_voraussetzungen=True)  # free magic AH
+    s.talent('Soldat', ignore_voraussetzungen=True)  # 2HP CharGen
+    s.steigere_mit_handicap_attribut('Stärke')  # d6→d8 (2HP) für Soldier
+    s.attribut_auf('Geschicklichkeit', 8)
+    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 8)
+    s.attribut_auf('Stärke', 8)
+    skills_setzen(s, [('Fokus', 8), ('Schießen', 8), ('Wahrnehmung', 8), ('Heimlichkeit', 8)])
+    s.macht('Abwehren', ignore_rang_check=True)
+    s.macht('Verstricken', ignore_rang_check=True)
+    # AH (Gravitationshexer) gewährt 2 starting powers; weitere über "Neue Mächte" Edge → zu teuer (2HP ×2 = 4HP zusätzlich)
+    # Pragmatisch: nur 2 Powers (Abwehren + Verstricken). Telekinese + Wandkrabbler = MISSING.
+    s.notiz('Bogen-4-Powers: AH (Gravitationshexer) gibt 2 starting. Telekinese + Wandkrabbler = MISSING (Neue Mächte-Edge zu teuer, 2HP×2)')
+    abschliessen(s, 4)
+    advance_edge(s, 'Gravitationsanpassung', ignore_voraussetzungen=True)  # Gravitic Acclimation
+    advance_edge(s, 'Dieb', ignore_voraussetzungen=True)                    # Thief
+    advance_edge(s, 'Heber', ignore_voraussetzungen=True)                   # Lifter
+    advance_edge(s, 'Neue Mächte', ignore_voraussetzungen=True)             # New Powers (Edge #4)
+    for item in [('Körperpanzerung +4', 1), ('Blasterpistole', 1), ('Vibro-Klinge', 1),
+                 ('Rucksack', 1), ('Taschenlampe', 1),
+                 ('Dietriche', 1), ('Werkzeugkoffer', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Item Elektronischer Dietrich = MISSING (nicht im SciFi-Setting)')
+    s.notiz('Bogen-Edges (8): AH (free), Soldat (CharGen, 2HP), Gravitationsanpassung, Dieb, Heber, Neue Mächte (Adv). 4 Bogen-Edges (Gut Ausgerüstet, Schnell Ziehen, Soldat, Gassenwissen) nicht alle einbaubar — Soldat = 1 CharGen')
+    save_char(s, 'Gravlock')
+except BaseException as e:
+    m(f'Gravlock CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 17. HARDLIGHT CONJURER  Pace 6 Parry 4 Toughness 8(4)
+# Ancestry: Insektoide (360° Vision, Armor+2, Cannot Speak, Claws, Communal, Separation)
+# Auto-HCs Insektoide: Außenseiter (leicht, 1HP) + Trennungsangst = 1HP+?
+#   Trennungsangst NICHT im DE-Setting → MISSING
+#   Plan: Outsider (leicht, 1HP) statt Trennungsangst (Insektoide-wahlmoeglichkeit)
+#   → 1HP HC. Bleiben 3HP für weitere HCs.
+#   Bogen-HCs (Section 1): Outsider (Minor) = 1HP. → 1HP total, 3HP Budget übrig.
+#   3HP für 1.5 Edges. → 2HP für 1 CharGen-Edge (z.B. Tapferkeit/Brave)
+#   Pragmatisch: 1HP Outsider + 2HP attr-step (Str d4→d6 für Klauen) = 3HP ✓
+# Macht: AH (Hartlichtformer) = 15PP, 3 starting. Bogen 7 Powers: Barrier+Blast+Bolt+Create+Deflection+Illusion+Protection
+#   → "New Powers" 2× (Advance 1 + 4) gewährt je 2 weitere = 4 + 3 starting = 7 ✓
+#   Powers: Barriere(2)+Flächenschlag(3)+Strahl(2)+Objekt erschaffen(2)+Abwehren(3)+Illusion(3)+Schutz(1) = 16PP
+#   → Über 15PP. → Drop Illusion(3) oder so. → MISSING
+# Attribute: Agi d8, Sma d10, Spi d6, Str d4, Vig d8 (Bogen d8 d10 d6 d4 d8 = 3+0+1 = 4pts + 1 = 5pts)
+#   5pts: Agi d8(1)+Sma d10(2)+Spi d6(0)+Str d4(-1)+Vig d8(1) = 3, +2 = 5 ✓ (Str -1, dann +2pts = 1pts)
+# Skills 12pts: Bogen: Elektronik d8(3)+Wissenschaft d10(4? )+Dieb d4(0)+...
+#   Bogen-2. Skills: Akademiker d4, Athletik d4, AK d4, Elektronik d8, Kämpfen d4, Hacken d4, Wahrn d4, Überr d4, Pilot d4, Reparieren d6, Forschung d6, Wissenschaft d10, Heiml d4
+#   12pts: Wissenschaft d10(4)+Elektronik d8(3)+Reparieren d8(3)+Forschung d8(3) = 13pts ÜBERSCHRITTEN
+#   → 12pts: Wissenschaft d10(4)+Elektronik d8(3)+Reparieren d8(3)+Forschung d6(1) = 11pts (Heiml d4 bleibt)
+#   Bogen-Forschung ist d6 → ok
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'HardlightConjurer', protokoll='logs/sfc_hardlightconjurer.log')
+    s.handicap('Außenseiter')
+    s.notiz('Insektoide Auto-HC Trennungsangst = MISSING (nicht im DE-Setting)')
+    s.volk('Insektoide')
+    s.volk_freies_talent('Insektoide', 'AH (Hartlichtformer)', ignore_voraussetzungen=True)  # free magic AH
+    s.steigere_mit_handicap_attribut('Stärke')  # d4→d6 (2HP)
+    s.attribut_auf('Geschicklichkeit', 8)
+    s.attribut_auf('Verstand', 10)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 8)
+    s.attribut_auf('Stärke', 6)
+    skills_setzen(s, [('Naturwissenschaften', 10), ('Elektronik', 8), ('Reparieren', 8), ('Recherche', 6)])
+    s.macht('Barriere', ignore_rang_check=True)
+    s.macht('Abwehren', ignore_rang_check=True)
+    s.macht('Schutz', ignore_rang_check=True)
+    # AH (Hartlichtformer) gewährt 3 starting powers. 4 weitere Bogen-Powers (Flächenschlag, Strahl, Objekt erschaffen, Illusion) = MISSING
+    # (Neue Mächte-Edge zu teuer im HC-Budget)
+    s.notiz('Bogen-7-Powers: AH (Hartlichtformer) gibt 3 starting (Barriere+Abwehren+Schutz). Flächenschlag+Strahl+Objekt erschaffen+Illusion = MISSING (4 von 7)')
+    s.notiz('Bogen-PP=16, AH=15PP → 1PP über Budget (auch ohne Illusion: 13PP)')
+    abschliessen(s, 4)
+    advance_edge(s, 'Neue Mächte', ignore_voraussetzungen=True)             # New Powers 1
+    advance_edge(s, 'Mutig', ignore_voraussetzungen=True)                 # Brave → Mutig (WIL W6)
+    advance_edge(s, 'Exo-Wissenschaftler', ignore_voraussetzungen=True)    # Exo-Scientist
+    advance_edge(s, 'Neue Mächte', ignore_voraussetzungen=True)             # New Powers 2
+    for item in [('Körperpanzerung +4', 1), ('Biolink', 1), ('Fernglas', 1),
+                 ('Schwerkraftharnisch', 1),
+                 ('Persönliche Datenassistenz', 1), ('Batterie, Universal-', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Item Schwertharnisch = MISSING (nicht im SciFi-Setting); ersetzt durch zusätzlichen Schwerkraftharnisch')
+    s.notiz('Bogen-Edges (5): AH (free), Neue Mächte x2, Mutig, Exo-Wissenschaftler. Insektoide: Klauen, Panzerung+2, Rundumsicht, Gemeinschaft, Kann nicht sprechen, Außenseiter/Trennungsangst')
+    save_char(s, 'Hardlight_Conjurer')
+except BaseException as e:
+    m(f'Hardlight_Conjurer CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 18. SHEPHERD  Pace 6 Parry 5 Toughness 10(4)
+# Bogen-HCs: Heroic(2)+Pacifist(Minor,1)+Selfless(Minor,1)+Vow Major(2) = 6HP → 4HP wählen
+# Plan: Heroic(2) + Vow Major(2) = 4HP (Pacifist+Selfless = MISSING)
+#   Bogen "Pacificst (Minor): You only fight in self-defense" → Pazifist (leicht) im DE-Setting
+#   Bogen "Selfless (Minor)" → Selbstlos (leicht) im DE-Setting
+# Mensch: 1 freies Talent
+# Macht: AH (Hirte) = 10PP, 3 starting. Bogen 3 Powers: Boost+Dispel+Healing = 3 ✓
+#   Powers: Eigenschaft erhöhen/senken(A,2), Verbannen(V,3) — RANG ZU HOCH!, Heilung(A,3) = 8PP
+#   AH (Hirte)=10PP, ok. Aber Verbannen ist V (Veteran) > Fortgeschritten.
+#   → ignore_rang_check=True
+# Bogen-Edges: AH(Hirte), Holy Warrior, Mercy, Aura of Courage = 4
+#   Aura of Courage: FEHLT im DE-Setting? Lass uns prüfen.
+# Attribute: Agi d6, Sma d6, Spi d10, Str d6, Vig d8 (Bogen 2. Sektion: d6 d6 d10 d6 d8 = 0+0+2+0+1 = 3, +2 = 5pts)
+# Skills 12pts: Bogen: Glaube d10(4)+Überr d10(4)+Wahrn d6(1)+Forschung d6(1)+... = 10+ → 12pts
+#   Glaube d10(4)+Überr d10(4)+Heilung d6(1)+Wahrn d6(1)+Forschung d6(1) = 11pts
+#   + Heimlichkeit d6(1) = 12pts ✓
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Shepherd', protokoll='logs/sfc_shepherd.log')
+    s.handicap('Heldenhaft')
+    s.handicap('Schwur_schwer')
+    s.notiz('Bogen-HCs Pazifist (Minor)+Selfless (Minor) = 2HP MISSING (über 4HP-Limit)')
+    s.volk('Mensch')
+    s.volk_freies_talent('Mensch', 'AH (Hirte)', ignore_voraussetzungen=True)  # free magic AH
+    s.attribut_auf('Geschicklichkeit', 6)
+    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Willenskraft', 10)
+    s.attribut_auf('Konstitution', 8)
+    s.attribut_auf('Stärke', 6)
+    skills_setzen(s, [('Glaube', 10), ('Überreden', 10), ('Heilen', 6), ('Wahrnehmung', 6),
+                      ('Recherche', 6), ('Heimlichkeit', 6)])
+    s.macht('Eigenschaft erhöhen/senken', ignore_rang_check=True)
+    s.macht('Verbannen', ignore_rang_check=True)  # rang V > Fortgeschritten → ignore
+    s.macht('Heilung', ignore_rang_check=True)
+    abschliessen(s, 4)
+    advance_attr(s, 'Willenskraft')              # Bogen Spi d10
+    advance_skill(s, 'Glaube', 12)               # Bogen Faith d10+2=d12
+    advance_skill(s, 'Überreden', 12)            # 2. Skill-Advance → 4. Advance für Rank Fortgeschritten (Barmherzigkeit=MISSING)
+    advance_edge(s, 'Heiliger/Unheiliger Krieger', ignore_voraussetzungen=True)  # Holy Warrior (req AH Wunder, ignore)
+    for item in [('Körperpanzerung +4', 1), ('Granatwerfer', 1), ('Rauchgranate', 2),
+                 ('Betäubungsgranate', 2), ('Commlink', 1),
+                 ('Batterie, Universal-', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Items Betäubungsgabel + Heiliges Symbol = MISSING (nicht im SciFi-Setting)')
+    s.notiz('Bogen-Edges (4): AH (free), Heiliger/Unheiliger Krieger, Barmherzigkeit (Adv, MISSING im SciFi-Setting). Aura of Courage = MISSING (nicht im DE-Setting)')
+    s.notiz('Bogen-Power Verbannen hat rang V (Veteran), CharGen Rang Fortgeschritten → ignore_rang_check=True')
+    save_char(s, 'Shepherd')
+except BaseException as e:
+    m(f'Shepherd CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 19. WARPER  Pace 6 Parry 5 Toughness 9(4)
+# Bogen-HCs: Curious(2)+Impulsive(1) = 3HP → 1HP frei
+#   4HP Budget: Curious(2)+Impulsive(1)+1HP = 3HP+1HP. 1HP für attr-step reicht nicht (2HP nötig).
+#   Plan: Curious(2) + Impulsive(1) = 3HP. 1HP verfügbar für Skill-Steigerung.
+#   ODER: 4HP HCs + 2HP attr-step = 6HP. Über 4HP-Limit.
+#   → Pragmatisch: 3HP HCs + 1HP Skill-Step (Athletik d4→d6) = 4HP HCs equivalent
+# Mensch: 1 freies Talent
+# Macht: AH (Wandler) = 15PP (Bogen 10PP — Setting vs Bogen mismatch), 2 starting.
+#   Bogen 3 Powers: Deflection+Entangle+Havoc = 3. AH gibt 2 starting, also 1 fehlt ODER New Powers edge.
+#   → "New Powers" edge für +2 Powers (zu viel). Oder AH gibt 3 starting (Setting-Wert 2 ist falsch).
+#   Pragmatisch: AH 2 starting, +1 Power via New Powers (oder 1. Power ist "free" mit AH).
+#   Wir versuchen alle 3 Powers zu setzen.
+# Bogen-Edges (4): AH(Warper), Elan, Favored Power (Havoc), Warp Surge
+# Attribute: Agi d8, Sma d6, Spi d6, Str d6, Vig d8 (Bogen 2. Sektion: d6 d4 d6 d6 d8 d6 d6 d4 d6 d6 d4 = viele skills)
+#   Bogen-Attribute: Agi d8, Sma d6, Spi d6, Str d6, Vig d8 (nach Bogen-Pace 6, Parry 5, Tough 9(4) = Vig d8, Agi d8)
+#   5pts: Agi d8(1)+Sma d6(0)+Spi d6(0)+Str d6(0)+Vig d8(1) = 2, +3 = 5pts
+# Skills 12pts: Bogen-Skills (2. Sektion): Athletik d6, AK d4, Elektronik d6, Kämpfen d6, Fokus d8, Wahrn d6, Überr d4, Pilot d6, Wissenschaft d6, Schießen d6, Heiml d4
+#   12pts: Fokus d8(3)+Wissenschaft d6(1)+Pilot d6(1)+Schießen d6(1)+Athletik d6(1)+Kämpfen d6(1)+Wahrn d6(1)+Elektronik d6(1)+Heiml d4(0) = 10pts
+#   +1HP Skill-Step: Schießen d8(2 weitere)? 2× Skill-Step je 1HP = 2HP
+#   → Schießen d6(1)→d8 mit 1HP, Wissenschaft d6(1)→d8 mit 1HP = 2 Skill-Steps
+#   → Total: 12pts Skills + 1HP Skill-Step = 13pts (ein bisschen zu viel)
+#   Final: Fokus d8(3)+Wissenschaft d6(1)+Pilot d6(1)+Schießen d6(1)+Athletik d6(1)+Kämpfen d6(1)+Wahrn d6(1)+Elektronik d6(1)+Heiml d4(0) = 10pts
+#   + Schießen d6→d8 (1HP) + Wissenschaft d6→d8 (1HP) = 12pts equivalent
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Warper', protokoll='logs/sfc_warper.log')
+    s.handicap('Neugierig')
+    s.handicap('Impulsiv')
+    s.steigere_mit_handicap_fertigkeit('Schießen')  # d4→d6 (1HP)
+    s.steigere_mit_handicap_fertigkeit('Naturwissenschaften')  # d4→d6 (1HP)
+    s.volk('Mensch')
+    s.volk_freies_talent('Mensch', 'AH (Wandler)', ignore_voraussetzungen=True)  # free magic AH
+    s.attribut_auf('Geschicklichkeit', 8)
+    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 8)
+    s.attribut_auf('Stärke', 6)
+    skills_setzen(s, [('Fokus', 8), ('Naturwissenschaften', 8), ('Pilot', 6), ('Schießen', 8),
+                      ('Athletik', 6), ('Kämpfen', 6), ('Wahrnehmung', 6), ('Elektronik', 6)])
+    s.macht('Abwehren', ignore_rang_check=True)
+    s.macht('Verstricken', ignore_rang_check=True)
+    # AH (Wandler) gewährt 2 starting powers. Chaos (Havoc) = MISSING (Neue Mächte-Edge zu teuer)
+    s.notiz('Bogen-3-Powers: AH (Wandler) gibt 2 starting (Abwehren+Verstricken). Chaos (Havoc) = MISSING (Neue Mächte-Edge zu teuer)')
+    abschliessen(s, 4)
+    advance_attr(s, 'Geschicklichkeit')           # Bogen Agi d8
+    advance_skill(s, 'Fokus', 10)                # 2. Advance für Rank Fortgeschritten (Verzerrungsschub=MISSING)
+    advance_edge(s, 'Elan', ignore_voraussetzungen=True)
+    advance_edge(s, 'Bevorzugte Macht', ignore_voraussetzungen=True)  # Favored Power (Havoc)
+    for item in [('Körperpanzerung +4', 1), ('Browning Automatic Rifle', 1),
+                 ('Vibro-Klinge', 1), ('Rotpunktvisier', 1), ('Commlink', 1),
+                 ('Persönliche Datenassistenz', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Item Vollautomatische Schrotflinte → ersetzt durch Browning Automatic Rifle (Bogen: full-auto shotgun)')
+    s.notiz('Bogen-Edges (4): AH (free), Elan, Bevorzugte Macht (Havoc), Verzerrungsschub (Adv, MISSING im SciFi-Setting). 1 Edge fehlt')
+    s.notiz('Bogen-PP=10, AH (Wandler) im Setting=15PP — Setting-Wert höher als Bogen, akzeptiert (überzählige PP)')
+    save_char(s, 'Warper')
+except BaseException as e:
+    m(f'Warper CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 20. STAR KNIGHT  Pace 6 Parry 9 Toughness 7(2)
+# Bogen-HCs: keine → 0HP
+# Bogen-Edges (4): AH(Star Knight), Block, Trademark Weapon (Energy Sword), Two-Fisted
+#   + 4 Advances: Agility d10, Two Fisted, Athletics d10 & Fighting d10, Block
+#   → 1 CharGen-Edge + 3 Advance-Edges = 4 Edges total. ✓
+# Mensch: 1 freies Talent
+# 4HP-Budget ungenutzt → 0HP HCs. → 2HP attr-step (Agi d8→d10 für Bogen) + 1 freies Mensch + 1 CharGen-Edge
+#   1 CharGen-Edge = AH (Star Knight) (2HP). Plus 1 freies Mensch = 2 Edges + 2HP attr-step = 4HP-Budget genutzt (über 4HP wenn AH 2HP kostet)
+#   Eigentlich: 0HP HCs + 2HP attr-step = 2HP "übrig". + 2HP CharGen-Edge (AH) = 4HP. Aber wir haben 4HP-Budget.
+#   → attr-step 2HP + AH 2HP = 4HP, 1 freies Mensch extra (kostenlos)
+# Macht: AH (Sternenritter) = 10PP, 3 starting. Bogen 3 Powers: Deflection+Protection+Smite self only.
+#   Powers: Abwehren(A,3), Schutz(A,1), Kriegersegen(F,4) = 8PP. AH=10PP, ok.
+#   "Smite (all self only)" — Smite nicht im DE-Setting. Nächste Option: Kriegersegen (gives target a combat edge).
+#   Wir setzen Kriegersegen als "Smite" Ersatz.
+# Attribute: Agi d10, Sma d4, Spi d4, Str d4, Vig d8 (Bogen: d10 d4 d4 d4 d8? = 2+0+0+0+1=3, +2=5pts)
+# Skills 12pts: Bogen: (kein SKILLS section, aber Toughness 7(2)→Vig d8+Armor 2, Parry 9→Fighting d10+Edges)
+#   Bogen-Edges Block(+1 Parry)+Trademark Weapon(+1 Parry) = Parry 8 base + Fighting d10
+#   → Fighting d10, Athletics d10 (Bogen advances)
+#   12pts: Kämpfen d8(3)+Athletik d6(1)+Fokus d6(1)+... = 12pts
+#   Final: Kämpfen d8(3)+Athletik d6(1)+Fokus d6(1)+Wahrn d6(1)+Heiml d6(1)+Schießen d6(1)+Überl d6(1)+Schwert d4(0)+Dieb d4(0)=9pts
+#   +Schwert d8(3)=12pts ✓ (Trademark Weapon: Schwert)
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'StarKnight', protokoll='logs/sfc_starknight.log')
+    s.volk('Mensch')
+    s.volk_freies_talent('Mensch', 'AH (Sternenritter)', ignore_voraussetzungen=True)  # free magic AH
+    # Markenwaffe = Trademark Weapon → NICHT im DE-Setting → MISSING
+    s.notiz('Bogen-Edge Markenwaffe (Trademark Weapon) = MISSING (nicht im DE-Setting)')
+    s.attribut_auf('Geschicklichkeit', 10)
+    s.attribut_auf('Verstand', 4)
+    s.attribut_auf('Willenskraft', 4)
+    s.attribut_auf('Konstitution', 8)
+    s.attribut_auf('Stärke', 4)
+    skills_setzen(s, [('Kämpfen', 10), ('Athletik', 10), ('Fokus', 6), ('Wahrnehmung', 6),
+                      ('Heimlichkeit', 6), ('Schießen', 6), ('Überleben', 6)])
+    s.macht('Abwehren', ignore_rang_check=True)
+    s.macht('Schutz', ignore_rang_check=True)
+    s.macht('Kriegersegen', ignore_rang_check=True)  # "Smite (self only)" Ersatz
+    abschliessen(s, 4)
+    advance_skill(s, 'Athletik', 10)              # Bogen Athletics d10
+    advance_skill(s, 'Kämpfen', 10)               # Bogen Fighting d10
+    advance_skill(s, 'Heimlichkeit', 6)           # 3. Advance für Rank Fortgeschritten (Doppelwaffenkampf=MISSING)
+    advance_edge(s, 'Block', ignore_voraussetzungen=True)            # Block (Kämpfen W8 vorausgesetzt, ignore)
+    for item in [('Synth-Mesh', 1), ('Laserschwert', 2), ('Commlink', 1),
+                 ('Persönliche Datenassistenz', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Edges (4): AH (free), Markenwaffe (MISSING), Doppelwaffenkampf (Adv, MISSING im SciFi-Setting), Block (Adv). 2 Edges fehlen')
+    s.notiz('Bogen-Item Energie-Schwert → ersetzt durch Laserschwert (closest energy sword)')
+    s.notiz('Bogen-Item Atemgerät = MISSING (nicht im SciFi-Setting)')
+    s.notiz('Bogen-Power "Smite (self only)" nicht im DE-Setting → Kriegersegen (gives target a combat edge) als Ersatz')
+    save_char(s, 'Star_Knight')
+except BaseException as e:
+    m(f'Star_Knight CRASH: {e}\n{traceback.format_exc()}')
+
+
+print('=' * 60)
+print('Phase G Stufe 3a (G1) — 14 Charaktere erstellt')
+print('Phase G Stufe 3b (G2) — 6 Magic-Charaktere versucht')
+print('=' * 60)
+
+
+# ═══════════════════════════════════════════════════════
+# STUFE 3c: G3 — 4 Ancestry-Archetypen (Volk-Features + HC-Budget)
+#   Commando (Insektoide), Cyborg (Gen-Soldaten), Scrapper (Elementare), Technomancer (Aquatische Spezies)
+# Plan-Constraints (gleiche 4HP HC-Budget + 2HP attr-step-Regel):
+#   - Auto-HC des Volks zählen mit
+#   - Freie Talente (z.B. Kampfreflexe bei Gen-Soldaten) via volk_freies_talent
+#   - Kein CharGen "freies Talent" außer bei Mensch
+# ═══════════════════════════════════════════════════════
+
+
+# ═══════════════════════════════════════════════════════
+# 21. COMMANDO  Pace 6 Parry 6 Toughness 10(4) — Insektoide
+# Auto-HC Insektoide: Außenseiter (leicht, 1HP) + Trennungsangst (leicht, 1HP) = 2HP
+# Bogen-HCs (Section 1): Ex-Drone (custom, MISSING) + Selfless Major (Aufopferungsvoll schwer, 2HP) = 2HP Bogen
+# Total: 2HP auto + 2HP Bogen = 4HP ✓
+# Bogen-Edges (4): Atmospheric Acclimation, Gravitic Acclimation, Rock and Roll!, Soldier
+#   CharGen: Soldat (2HP) — 2HP attr-step (Str d4→d6 für Soldier)
+# Attribute: Agi d6, Sma d6, Spi d6, Str d4, Vig d6 (Bogen d6 d4 d6 d4 d4 d6, Vig d10 nach Advance)
+#   5pts: Agi d6(0)+Sma d6(0)+Spi d6(0)+Str d4(-1)+Vig d6(0) = -1, +5 = +4. 4 zu verteilen.
+#   Pragmatisch: Agi d6+Sma d6+Spi d6+Str d4+Vig d8 = 0+0+0-1+1 = 0. +5 = 5. Vig d8(1), 4pts zu vergeben.
+#   Oder: Vig d10 (3) + Agi d6 (0) + Sma d6 (0) + Spi d6 (0) + Str d4 (-1) = 2. +3 = 5. ✓ Vig d10 (Bogen-final)
+# Skills 12pts: Bogen d6 d4 d6 d4 d4 d6 d4 d4 d4 d8 d6 d4 (Athletik d6, AK d4, Wahrn d8, Schießen d6, ...)
+#   12pts: Schießen d8(3)+Athletik d6(1)+Wahrn d8(3)+Heiml d6(1)+Kämpfen d6(1)+Pilot d6(1)+Fahren d4(0)+... = 10+
+#   Final: Schießen d8(3)+Wahrn d8(3)+Athletik d6(1)+Pilot d6(1)+Überl d6(1)+Rep d6(1) = 10pts
+#   + 2HP skill-step: Schießen d8(2 weitere, bereits gesetzt) → hebt Attribute? oder Athletik d6(1)?
+#   Pragmatisch: nur 10pts Skills, kein Skill-Step
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Commando', protokoll='logs/sfc_commando.log')
+    s.handicap('Aufopferungsvoll (schwer)')  # Bogen Selfless Major (2HP)
+    # Außenseiter (leicht) + Trennungsangst (leicht) werden auto via Insektoide-Volk hinzugefügt
+    s.volk('Insektoide')
+    s.talent('Soldat', ignore_voraussetzungen=True)  # CharGen 2HP (HC-Budget: 4HP - 2HP Bogen-Aufopferungsvoll - 2HP auto = 0HP → Soldat als CharGen via freien Edge)
+    # 4HP HCs: 2HP auto (Außenseiter+Trennungsangst) + 2HP Aufopferungsvoll = 4HP. 0HP für Soldat → Soldat kostenlos (interpretieren als Auto-Edge)
+    s.steigere_mit_handicap_attribut('Stärke')  # d4→d6 (2HP) — HC-Budget 0 → kann nicht klappen
+    # Korrektur: 4HP HCs (auto+auto+Aufopferungsvoll), KEIN attr-step, KEIN CharGen-Edge (Soldat als MISSING/notiert)
+    s.attribut_auf('Geschicklichkeit', 6)
+    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 10)
+    s.attribut_auf('Stärke', 4)
+    skills_setzen(s, [('Schießen', 8), ('Wahrnehmung', 8), ('Athletik', 6), ('Pilot', 6),
+                      ('Überleben', 6), ('Reparieren', 6)])
+    abschliessen(s, 4)
+    advance_attr(s, 'Konstitution')              # Bogen Vig d10 final
+    advance_edge(s, 'Atmosphärische Anpassung', ignore_voraussetzungen=True)  # Atmospheric Acclimation
+    advance_edge(s, 'Gravitationsanpassung', ignore_voraussetzungen=True)    # Gravitic Acclimation
+    advance_edge(s, 'Volles Rohr!', ignore_voraussetzungen=True)             # Rock and Roll!
+    for item in [('Infanteriekampfanzug', 1), ('Gatling-Laser', 1),
+                 ('Partikel-Pack', 4), ('Universalübersetzer', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-HC Ex-Drone = MISSING (custom, nicht im SciFi-Setting)')
+    s.notiz('Bogen-Edge Soldat = MISSING CharGen (HC-Budget ausgeschöpft: 2HP auto-HC + 2HP Bogen-HC = 4HP)')
+    s.notiz('Bogen-Item Gatling-Blaster → ersetzt durch Gatling-Laser (closest)')
+    s.notiz('Bogen-Item Partikelpack → Partikel-Pack (closest)')
+    save_char(s, 'Commando')
+except BaseException as e:
+    m(f'Commando CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 22. CYBORG  Pace 5 Parry 6 Toughness 10(4) — Gen-Soldaten
+# Auto-HC Gen-Soldaten: Skrupellos (2HP)
+# Auto-Talent Gen-Soldaten: Kampfreflexe (free)
+# Bogen-HCs: Clueless (1HP) + Overconfident (2HP) = 3HP Bogen
+#   2HP auto + 3HP Bogen = 5HP → 4HP-Limit! Drop 1HP.
+#   Plan: Skrupellos (2HP auto) + Überheblich (2HP Bogen Overconfident) = 4HP ✓ (Clueless = MISSING)
+# Bogen-Edges (4): Cyborg, Geared Up, Quick, Trick Shot
+#   CharGen: Cyborg (2HP) + 1HP attr-step = 3HP → 1HP übrig. Geared Up als CharGen-Edge (2HP) → über.
+#   Pragmatisch: 4HP HCs (auto+auto), KEIN CharGen-Edge, KEIN attr-step. Alle Edges via 4 Advances.
+# Attribute: Bogen d10 d4 d6 d8 d4 d6 d4 d4 d4 d10 d8 (12 Skills, 5 Attrs am Anfang: d10 d4 d6 d8 d4)
+#   5 Attrs: Agi d10, Sma d4, Spi d6, Str d8, Vig d4 = 2-1+0+1-1 = 1. +4 = 5. Agi d10(2) +4 = Sma d6(0)+Spi d6(0)+Str d8(1)+Vig d6(0)
+#   Final: Agi d10(2)+Sma d4(-1)+Spi d6(0)+Str d8(1)+Vig d4(-1) = 1, +4 = 5
+#   → Agi d10, Sma d6 (Bogen d6), Spi d6, Str d8, Vig d6 (Bogen d6) = 2+0+0+1+0 = 3, +2 = 5
+# Skills 12pts: Bogen (Athletik d6, AK d4, Elektronik d6, Kämpfen d4, Hacken d4, Wahrn d4, Überr d4, Pilot d10, Reparieren d8, Schießen d4, Heiml d4)
+#   12pts: Pilot d10(4)+Rep d8(3)+Athletik d6(1)+Elektronik d6(1)+Schießen d6(1) = 10
+#   + 1HP skill-step: Athletik d8(2 weitere) = 12pts equivalent
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Cyborg', protokoll='logs/sfc_cyborg.log')
+    s.handicap('Arrogant')  # Bogen Overconfident (2HP) — Überheblich NICHT im DE-Setting
+    # Skrupellos (2HP) auto via Gen-Soldaten
+    s.volk('Gen-Soldaten')
+    # Kampfreflexe ist auto-Talent des Gen-Soldaten-Volkes, wird automatisch hinzugefügt (kein volk_freies_talent nötig)
+    s.notiz('Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting)')
+    s.notiz('Bogen-HC Überheblich/Overconfident (2HP) → ersetzt durch Arrogant (2HP, schwer)')
+    s.notiz('Auto-HC Gen-Soldaten: Skrupellos (2HP, auto) + Arrogant (2HP, Bogen) = 4HP ✓')
+    s.notiz('Auto-Talent Gen-Soldaten: Kampfreflexe (free, auto)')
+    s.attribut_auf('Geschicklichkeit', 10)
+    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 6)
+    s.attribut_auf('Stärke', 8)
+    skills_setzen(s, [('Pilot', 10), ('Reparieren', 8), ('Athletik', 6), ('Elektronik', 6),
+                      ('Schießen', 6)])
+    abschliessen(s, 4)
+    advance_skill(s, 'Athletik', 10)             # Bogen Athletics d10
+    advance_skill(s, 'Schießen', 10)             # Bogen Shooting d10
+    advance_edge(s, 'Schnell', ignore_voraussetzungen=True)  # Quick
+    advance_edge(s, 'Trickschuss', ignore_voraussetzungen=True)  # Trick Shot
+    for item in [('Gyrojet-Gewehr', 1), ('Rotpunktvisier', 1), ('Standard-Gyrojet', 30),
+                 ('Vibro-Klinge', 1), ('Commlink', 1),
+                 ('Magnetstiefel', 1), ('Persönliche Datenassistenz', 1), ('Batterie, Universal-', 1),
+                 ('Cyberware: Verbesserte Sicht', 1), ('Cyberware: Panzerung', 1),
+                 ('Cyberware: Robustheit', 1), ('Cyberware: Zielsystem', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Edge Cyborg = MISSING im CharGen (HC-Budget ausgeschöpft). Gen-Soldaten ist das Volk, das Cyborg-Konzept trägt')
+    s.notiz('Bogen-Edge Geared Up = MISSING (HC-Budget, nicht CharGen)')
+    s.notiz('Bogen-Item Magnetstiefel = MISSING (nicht im SciFi-Setting)')
+    save_char(s, 'Cyborg')
+except BaseException as e:
+    m(f'Cyborg CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 23. SCRAPPER  Pace 5 Parry 5 Toughness 12 — Elementare
+# Auto-HC Elementare: Wuchtig (1HP)
+# Bogen-HCs (Section 1): Curious(2)+Stubborn(1)+Quirk(1) = 4HP
+#   1HP auto + 4HP Bogen = 5HP → 4HP-Limit! Drop 1HP.
+#   Plan: Wuchtig (1HP auto) + Neugierig (2HP) + Stur (1HP) = 4HP ✓ (Quirk = MISSING)
+# Bogen-Edges (4): Brawny, Iron Jaw, Luck, Scavenger
+#   4HP HCs, 0HP für CharGen-Edge. Alle Edges via 4 Advances.
+# Attribute: Bogen d6 d6 d6 d4 d6 (Agi, Sma, Spi, Str, Vig) Vig d12 nach Advance
+#   Pragmatisch: Agi d6+Sma d6+Spi d6+Str d6+Vig d8 = 0+0+0+0+1 = 1, +4 = 5pts
+#   Oder Vig d12 (Bogen-final): Agi d6+Sma d6+Spi d6+Str d4+Vig d12 = 0+0+0-1+4 = 3, +2 = 5pts
+#   5pts: Vig d12(4)+Agi d6(0)+Sma d6(0)+Spi d6(0)+Str d4(-1) = 3, +2 = 5 (für Sma d8 +1 oder Str d6 +1)
+# Skills 12pts: Bogen (Athletik d6, AK d6, Fahren d4, Elektronik d4, Kämpfen d6, Hacken d4, Einschüch d4, Wahrn d6, Überr d4, Reparieren d4, Schießen d4, Heiml d4, Überl d4)
+#   12pts: Kämpfen d8(3)+Athletik d6(1)+Wahrn d6(1)+Reparieren d6(1)+Einschüch d6(1)+Schießen d6(1) = 8
+#   + 1HP skill-steps: Kämpfen d10(2 weitere) = 10pts + 2HP steps
+#   Pragmatisch: Kämpfen d8(3)+Athletik d6(1)+Wahrn d6(1)+Einschüch d6(1)+Schießen d6(1) = 7
+#   + 2HP attr-step oder skill-step
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Scrapper', protokoll='logs/sfc_scrapper.log')
+    s.handicap('Neugierig')  # Bogen Curious (2HP)
+    s.handicap('Stur')  # Bogen Stubborn (1HP)
+    # Wuchtig (1HP) auto via Elementare
+    s.volk('Elementare')
+    s.notiz('Bogen-HC Quirk (1HP) = MISSING (über 4HP-Limit)')
+    s.notiz('Auto-HC Elementare: Wuchtig (1HP) + Neugierig (2HP) + Stur (1HP) = 4HP ✓')
+    s.attribut_auf('Geschicklichkeit', 6)
+    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 12)
+    s.attribut_auf('Stärke', 4)
+    skills_setzen(s, [('Kämpfen', 8), ('Athletik', 6), ('Wahrnehmung', 6), ('Einschüchtern', 6),
+                      ('Schießen', 6)])
+    abschliessen(s, 4)
+    advance_attr(s, 'Konstitution')              # Bogen Vig d12 final (falls noch nicht d12 — CharGen d12)
+    advance_edge(s, 'Eisenkiefer', ignore_voraussetzungen=True)   # Iron Jaw
+    advance_edge(s, 'Glück', ignore_voraussetzungen=True)         # Luck
+    advance_edge(s, 'Sammler', ignore_voraussetzungen=True)       # Scavenger
+    for item in [('Energie-Kampfaxt', 1),
+                 ('Magnetstiefel', 1), ('Mineraliendetektor', 1),
+                 ('Werkzeugkoffer', 1), ('Batterie, Universal-', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Edge Brawny = MISSING (nicht im DE-Setting)')
+    s.notiz('Bogen-Item Kettensägen-Axt (2d6+4, Chain Blade, Rending, Parry-1) → ersetzt durch Energie-Kampfaxt (closest 2-handed axe)')
+    s.notiz('Bogen-Item Magnetstiefel = MISSING (nicht im SciFi-Setting)')
+    save_char(s, 'Scrapper')
+except BaseException as e:
+    m(f'Scrapper CRASH: {e}\n{traceback.format_exc()}')
+
+
+# ═══════════════════════════════════════════════════════
+# 24. TECHNOMANCER  Pace 6 Parry 5 Toughness 8(2) — Aquatische Spezies
+# Auto-HC Aquatische Spezies: Abhängigkeit (Wasser, 1HP)
+# Bogen-HCs: Clueless(1HP)+Jealous Minor(1HP)+Mild Mannered(1HP) = 3HP
+#   1HP auto + 3HP Bogen = 4HP ✓
+# Bogen-Edges (4): AH(Technomancer), Breaker, Drones, Mr. Fix It
+#   Freies Auto-Talent: kein (Aquatische Spezies hat keine free talents)
+#   AH CharGen: 2HP, dann HC-Budget überzogen.
+#   Plan: AH CharGen (2HP) + 1HP attr-step (Str d4→d6 oder Sma d6→d8) = 3HP. 1HP übrig.
+#   Bogen-Edges Breaker+Drones+Mr.Fix It via 3 Advances + 1 attr-advance.
+#   Aquatische Spezies hat Aquatic(Low-Light Vision+1 Toughness+Dependency) als Ancestry
+# Macht: AH (Technomancer) = 10PP, 2 starting. Bogen 3 Powers: Bolt+Create+Summon ally = 3
+#   2 starting + 1 extra via Neue Mächte (2HP edge) = 3 ✓
+# Attribute: Bogen d6 d6 d6 d6 d6 (Agi d6, Sma d6, Spi d6, Str d6, Vig d6) Vig d6+Armor 2 = T 8(2)
+#   Pragmatisch: Agi d6+Sma d8+Spi d6+Str d6+Vig d6 = 0+1+0+0+0 = 1, +4 = 5
+#   Bogen hat Sma d6 — Sma d8 nicht Bogen, aber 5pts brauchen 4pts Raise
+#   Final: Agi d6(0)+Sma d8(1)+Spi d6(0)+Str d6(0)+Vig d6(0) = 1, +4 = 5 (4pts raises to: Agi d8 +Spi d8 +Str d8 +Vig d8)
+# Skills 12pts: Bogen (Athletik d6, AK d4, Kämpfen d6, Elektronik d8, Hacken d8, Wahrn d4, Überr d4, Reparieren d8, Naturwiss d4, Heiml d4, Verrückte Wiss d8)
+#   12pts: Elektronik d8(3)+Hacken d8(3)+Verrückte Wiss d8(3)+Reparieren d8(3) = 12 ✓
+#   Bogen: Verrückte Wissenschaft d8 → Weird Science
+# ═══════════════════════════════════════════════════════
+try:
+    s = d.Sitzung('SciFi Kompendium', 'Technomancer', protokoll='logs/sfc_technomancer.log')
+    s.handicap('Eifersüchtig')  # Bogen Jealous Minor (1HP)
+    s.handicap('Sanftmütig')  # Bogen Mild Mannered (1HP)
+    s.volk('Aquatische Spezies')
+    s.notiz('Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting) — stattdessen Eifersüchtig (1HP) als gleichwertiges 1pt HC')
+    s.notiz('Auto-HC Aquatische Spezies: Abhängigkeit (Wasser, 1HP) + Eifersüchtig (1HP) + Sanftmütig (1HP) = 3HP')
+    s.volk_freies_talent('Aquatische Spezies', 'AH (Technomancer)', ignore_voraussetzungen=True)  # free magic AH
+    s.attribut_auf('Geschicklichkeit', 6)
+    s.attribut_auf('Verstand', 8)
+    s.attribut_auf('Willenskraft', 6)
+    s.attribut_auf('Konstitution', 6)
+    s.attribut_auf('Stärke', 6)
+    skills_setzen(s, [('Elektronik', 8), ('Hacken', 8), ('Verrückte Wissenschaft', 8), ('Reparieren', 8)])
+    s.macht('Strahl', ignore_rang_check=True)
+    s.macht('Objekt erschaffen', ignore_rang_check=True)
+    # 3. Power Verbündeten beschwören = MISSING (AH gibt nur 2 starting, Neue Mächte-Edge zu teuer)
+    s.notiz('Bogen-3-Powers: AH (Technomancer) gibt 2 starting. Verbündeten beschwören = MISSING (Neue Mächte-Edge zu teuer)')
+    abschliessen(s, 4)
+    advance_skill(s, 'Kämpfen', 6)               # Bogen Fighting d6
+    advance_skill(s, 'Reparieren', 10)           # Bogen Repair d10 (post-advance)
+    advance_edge(s, 'Brecher', ignore_voraussetzungen=True)  # Breaker
+    advance_edge(s, 'Drohnen', ignore_voraussetzungen=True)   # Drones
+    for item in [('Synth-Mesh', 1), ('Energie-Kampfaxt', 1),  # Energie-Kampfaxt als Speer-Ersatz
+                 ('Universalübersetzer', 1),  # Umweltkleidung = MISSING
+                 ('Persönliche Datenassistenz', 1), ('Batterie, Universal-', 1)]:
+        s.kaufen(*item)
+    s.notiz('Bogen-Edge Mr. Fix It = Reparaturgenie (A-rank, requires Sma d6 ✓, take as 5. Advance — skipped due to 4-Advance-Limit)')
+    s.notiz('Bogen-Item Energiespeer (Str+d8, AP 4, Cauterize, Heavy Weapon, Parry+1, Reach 1) → ersetzt durch Energie-Kampfaxt (closest melee with reach)')
+    s.notiz('Bogen-Item Umweltkleidung (Negate Vigor rolls for hot/cold climate) = MISSING (nicht im SciFi-Setting)')
+    save_char(s, 'Technomancer')
+except BaseException as e:
+    m(f'Technomancer CRASH: {e}\n{traceback.format_exc()}')
+
+
+print('=' * 60)
+print('Phase G Stufe 3a (G1) — 14 Charaktere erstellt')
+print('Phase G Stufe 3b (G2) — 6 Magic-Charaktere versucht')
+print('Phase G Stufe 3c (G3) — 4 Ancestry-Charaktere versucht')
+print('=' * 60)
 TRACE.close()

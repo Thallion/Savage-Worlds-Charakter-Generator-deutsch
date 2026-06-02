@@ -504,6 +504,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Glock 9mm": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rucksack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Medikit": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -543,10 +563,15 @@
     "selected_allgemeine_ausruestung": [
         "Kevlarjacke & Jeans",
         "Motorradhelm",
-        "Jagdgewehr"
+        "Jagdgewehr",
+        "Glock 9mm",
+        "Rucksack",
+        "Medikit",
+        "Werkzeugkoffer"
     ],
     "selected_waffen": [
-        "Jagdgewehr"
+        "Jagdgewehr",
+        "Glock 9mm"
     ],
     "selected_ruestungen": [
         "Kevlarjacke & Jeans",
@@ -556,7 +581,11 @@
     "ausruestung_mengen": {
         "Kevlarjacke & Jeans": 1,
         "Motorradhelm": 1,
-        "Jagdgewehr": 1
+        "Jagdgewehr": 1,
+        "Glock 9mm": 1,
+        "Rucksack": 1,
+        "Medikit": 1,
+        "Werkzeugkoffer": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

@@ -380,7 +380,7 @@
     },
     {
       "aktion": "kaufen(Glock 9mmx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Medikitx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Werkzeugkofferx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -473,7 +473,7 @@
     },
     {
       "aktion": "kaufen(Glock 9mmx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -486,7 +486,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -499,7 +499,7 @@
     },
     {
       "aktion": "kaufen(Medikitx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -512,7 +512,7 @@
     },
     {
       "aktion": "kaufen(Werkzeugkofferx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

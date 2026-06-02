@@ -520,6 +520,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Medi-Scanner": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -563,7 +578,10 @@
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
         "Biolink",
-        "Medi-Gel"
+        "Medi-Gel",
+        "Medi-Scanner",
+        "Taschencomputer",
+        "Batterie, Universal-"
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
@@ -573,7 +591,10 @@
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
         "Biolink": 1,
-        "Medi-Gel": 4
+        "Medi-Gel": 4,
+        "Medi-Scanner": 1,
+        "Taschencomputer": 1,
+        "Batterie, Universal-": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 1.0,

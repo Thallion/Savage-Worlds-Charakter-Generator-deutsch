@@ -341,7 +341,7 @@
     },
     {
       "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 400,
       "kostenart": "Vermögen",
       "punkte": {
@@ -354,7 +354,7 @@
     },
     {
       "aktion": "kaufen(Standard-Gyrojetx26) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -367,7 +367,7 @@
     },
     {
       "aktion": "kaufen(Rauch-Gyrojetx2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -380,7 +380,7 @@
     },
     {
       "aktion": "kaufen(Spreng-Gyrojetx2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Biolinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Taschenlampex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Schutzbrillex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Nahrungsriegelx10) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Wasserbehälterx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -486,7 +486,7 @@
     },
     {
       "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 400,
       "kostenart": "Vermögen",
       "punkte": {
@@ -499,7 +499,7 @@
     },
     {
       "aktion": "kaufen(Standard-Gyrojetx26) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -512,7 +512,7 @@
     },
     {
       "aktion": "kaufen(Rauch-Gyrojetx2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -525,7 +525,7 @@
     },
     {
       "aktion": "kaufen(Spreng-Gyrojetx2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -538,7 +538,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -551,7 +551,7 @@
     },
     {
       "aktion": "kaufen(Biolinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -564,7 +564,7 @@
     },
     {
       "aktion": "kaufen(Taschenlampex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -577,7 +577,7 @@
     },
     {
       "aktion": "kaufen(Schutzbrillex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -590,7 +590,7 @@
     },
     {
       "aktion": "kaufen(Nahrungsriegelx10) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -603,7 +603,7 @@
     },
     {
       "aktion": "kaufen(Wasserbehälterx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -701,7 +701,8 @@
     "handicaps": [
       "Misstrauisch_leicht",
       "Zungenklemmung",
-      "Schwerelosigkeitskrankheit"
+      "Schwerelosigkeitskrankheit",
+      "Wuchtig"
     ],
     "talente": [
       "Aufmerksamkeit",

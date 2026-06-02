@@ -341,7 +341,7 @@
     },
     {
       "aktion": "kaufen(Materieschneiderx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 300,
       "kostenart": "Vermögen",
       "punkte": {
@@ -354,7 +354,7 @@
     },
     {
       "aktion": "kaufen(Biolinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -367,7 +367,7 @@
     },
     {
       "aktion": "kaufen(Klebstoffpflasterx5) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -380,7 +380,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Werkzeugkofferx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -425,7 +425,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Materieschneiderx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 300,
       "kostenart": "Vermögen",
       "punkte": {
@@ -438,7 +438,7 @@
     },
     {
       "aktion": "kaufen(Biolinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -451,7 +451,7 @@
     },
     {
       "aktion": "kaufen(Klebstoffpflasterx5) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -464,7 +464,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -477,7 +477,7 @@
     },
     {
       "aktion": "kaufen(Werkzeugkofferx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -490,7 +490,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

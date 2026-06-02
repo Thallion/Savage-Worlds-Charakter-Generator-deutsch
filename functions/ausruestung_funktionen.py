@@ -39,7 +39,7 @@ def kaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: Opti
     if getattr(item, 'kategorie', '') == 'Cyberware':
         return _kaufe_cyberware(charakter, item, anzahl, preis_pro_stueck, konfiguration)
 
-    preis_pro_stueck = preis_pro_stueck or item.kosten
+    preis_pro_stueck = item.kosten if preis_pro_stueck is None else preis_pro_stueck
     gesamtpreis = preis_pro_stueck * anzahl
 
     # Vermögensprüfung
@@ -97,7 +97,7 @@ def verkaufen(charakter, item: Ausruestung, anzahl: int = 1, preis_pro_stueck: O
         return False
 
     # Transaktion durchführen
-    preis_pro_stueck = preis_pro_stueck or (item.kosten * 0.5)  # 50% des Kaufpreises
+    preis_pro_stueck = (item.kosten * 0.5) if preis_pro_stueck is None else preis_pro_stueck  # 50% des Kaufpreises
     gesamtpreis = preis_pro_stueck * anzahl
     charakter.vermoegen += gesamtpreis
     item.verringere_menge(anzahl)
@@ -309,7 +309,7 @@ def _kaufe_cyberware(charakter, item: Ausruestung, anzahl: int = 1,
         ist_cyberware_setting, validiere_installation, installiere_cyberware
     )
 
-    preis_pro_stueck = preis_pro_stueck or item.kosten
+    preis_pro_stueck = item.kosten if preis_pro_stueck is None else preis_pro_stueck
     gesamtpreis = preis_pro_stueck * anzahl
 
     # Vermögensprüfung

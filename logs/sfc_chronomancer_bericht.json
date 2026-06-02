@@ -1,9 +1,9 @@
 {
-  "name": "Pilot",
+  "name": "Chronomancer",
   "setting": "SciFi Kompendium",
   "schritte": [
     {
-      "aktion": "neuer_charakter(Pilot, SciFi Kompendium)",
+      "aktion": "neuer_charakter(Chronomancer, SciFi Kompendium)",
       "ok": true,
       "nachher_punkte": {
         "attribut": 5,
@@ -15,22 +15,9 @@
       "vermoegen": 500
     },
     {
-      "aktion": "handicap(Amourös)",
+      "aktion": "handicap(Schwur_schwer)",
       "ok": true,
-      "kosten": -1,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "handicap(Tick)",
-      "ok": true,
-      "kosten": -1,
+      "kosten": -2,
       "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 5,
@@ -41,7 +28,7 @@
       "warnung": null
     },
     {
-      "aktion": "handicap(Übermütig)",
+      "aktion": "handicap(Heldenhaft)",
       "ok": true,
       "kosten": -2,
       "kostenart": "Handicap-Punkte",
@@ -67,7 +54,7 @@
       "warnung": null
     },
     {
-      "aktion": "volk_freies_talent(Mensch,Ass am Steuer)",
+      "aktion": "volk_freies_talent(Mensch,AH (Chronomant))",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -80,53 +67,53 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Schnell)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_hc(Geschicklichkeit)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
       "punkte": {
         "attribut": 4,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
       "punkte": {
         "attribut": 3,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
       "punkte": {
         "attribut": 2,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -137,204 +124,269 @@
       "kosten": 1,
       "kostenart": "Attributpunkte",
       "punkte": {
-        "attribut": 1,
+        "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "attribut(Konstitution)",
+      "aktion": "attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
-      "kosten": 1,
-      "kostenart": "Attributpunkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Athletik)",
+      "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Fokus)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Fokus)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Fokus)",
       "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 9,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Pilot)",
-      "ok": true,
-      "kosten": 1,
+      "kosten": 2,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Wahrnehmung)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Wahrnehmung)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Überreden)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 4,
-        "handicap": 2
+        "fertigkeit": 3,
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Elektronik)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen)",
+      "aktion": "fertigkeit(Elektronik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen)",
+      "aktion": "fertigkeit(Elektronik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "aktion": "macht(Abwehren)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
+      "aktion": "macht(Trägheit/Beschleunigung)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "talent(Raketen-Ass)",
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "aktion": "fertigkeit_mit_aufstieg(Naturwissenschaften)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Naturwissenschaften)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Naturwissenschaften)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Vorahnung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Zeit Umordnen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -347,101 +399,62 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
     },
     {
-      "aktion": "kaufen(Raumanzugx1) FORCE",
+      "aktion": "kaufen(Biolinkx1)",
       "ok": true,
-      "kosten": 300,
+      "kosten": 100,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug zum Preis 0 gekauft"
+      "vermoegen": 200,
+      "warnung": null
     },
     {
-      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "aktion": "kaufen(Universalübersetzerx1) FORCE",
+      "ok": true,
+      "kosten": 200,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Universalübersetzer zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "aktion": "kaufen(Werkzeugkofferx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Klebstoffpflasterx5) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Klebstoffpflaster zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Biolinkx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Biolink zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Kaugummix1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kaugummi zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Werkzeugkoffer zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
@@ -451,107 +464,55 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Pilot_A.json)",
+      "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Chronomancer_A.json)",
       "ok": true
     }
   ],
   "anomalien": [
     {
-      "aktion": "kaufen(Raumanzugx1) FORCE",
+      "aktion": "kaufen(Universalübersetzerx1) FORCE",
       "ok": true,
-      "kosten": 300,
+      "kosten": 200,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Universalübersetzer zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "aktion": "kaufen(Werkzeugkofferx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Klebstoffpflasterx5) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Klebstoffpflaster zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Biolinkx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Biolink zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Kaugummix1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kaugummi zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Werkzeugkoffer zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
@@ -561,39 +522,57 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: Bogen-Edges (3): Ass am Steuer (free), Schnell (CharGen), Raketen-Ass (Adv). 4. Advance: Wahrnehmung d6",
+      "aktion": "NOTIZ: Bogen-HCs: Schwur_schwer(2) + Heldenhaft(2) = 4HP. Arrogant/Code of Honor/Elderly/Big Mouth/Mild Mannered = MISSING (über 4HP-Limit)",
       "ok": true,
-      "warnung": "Bogen-Edges (3): Ass am Steuer (free), Schnell (CharGen), Raketen-Ass (Adv). 4. Advance: Wahrnehmung d6",
+      "warnung": "Bogen-HCs: Schwur_schwer(2) + Heldenhaft(2) = 4HP. Arrogant/Code of Honor/Elderly/Big Mouth/Mild Mannered = MISSING (über 4HP-Limit)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     },
     {
-      "aktion": "NOTIZ: Kaugummi: Bogen-Quirk HC \"Quirk\" = Tick (1HP) NICHT zusätzlich als Item-Edge",
+      "aktion": "NOTIZ: Bogen-Edges (4): AH (free), Premonition, Rearrange Time (Adv), JoaT = MISSING (nicht im DE-Setting)",
       "ok": true,
-      "warnung": "Kaugummi: Bogen-Quirk HC \"Quirk\" = Tick (1HP) NICHT zusätzlich als Item-Edge",
+      "warnung": "Bogen-Edges (4): AH (free), Premonition, Rearrange Time (Adv), JoaT = MISSING (nicht im DE-Setting)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: Bogen-Attribute: Bogen 2. Sektion hat d6/d10/d8/d4/d6 — Agi d6 (Bogen d6), Sma d10 (Bogen d10), Spi d8 (Bogen d8), Str d4 (Bogen d4), Vig d6 (Bogen d6) = 5pts",
+      "ok": true,
+      "warnung": "Bogen-Attribute: Bogen 2. Sektion hat d6/d10/d8/d4/d6 — Agi d6 (Bogen d6), Sma d10 (Bogen d10), Spi d8 (Bogen d8), Str d4 (Bogen d4), Vig d6 (Bogen d6) = 5pts",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: Bogen-Items: Altersschwäche (=alter wear, kein Item), Tasche voller Süßigkeiten (kein Item), Linienprojektor (kein Item), Atemgerät (kein Item) = MISSING",
+      "ok": true,
+      "warnung": "Bogen-Items: Altersschwäche (=alter wear, kein Item), Tasche voller Süßigkeiten (kein Item), Linienprojektor (kein Item), Atemgerät (kein Item) = MISSING",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 10,
+  "anomalien_anzahl": 8,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
-        "wert": 10,
+        "wert": 6,
         "modifier": 0
       },
       "Verstand": {
-        "wert": 4,
+        "wert": 10,
         "modifier": 0
       },
       "Stärke": {
@@ -601,7 +580,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0
       },
       "Willenskraft": {
@@ -617,10 +596,22 @@
         "ausgewaehlt": true
       },
       "Athletik": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
+      },
+      "Elektronik": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Fokus": {
+        "wert": 10,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
       },
       "Heimlichkeit": {
         "wert": 4,
@@ -628,59 +619,49 @@
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
-      "Pilot": {
-        "wert": 10,
-        "modifier": 0,
-        "grundfertigkeit": false,
-        "ausgewaehlt": false
-      },
-      "Reparieren": {
-        "wert": 8,
-        "modifier": 0,
-        "grundfertigkeit": false,
-        "ausgewaehlt": false
-      },
-      "Schießen": {
+      "Naturwissenschaften": {
         "wert": 8,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
       "Überreden": {
-        "wert": 4,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       }
     },
     "handicaps": [
-      "Tick",
-      "Übermütig",
-      "Amourös"
+      "Heldenhaft",
+      "Schwur_schwer"
     ],
     "talente": [
-      "Ass am Steuer",
-      "Schnell",
-      "Raketen-Ass"
+      "AH (Chronomant)",
+      "Vorahnung",
+      "Zeit Umordnen"
     ],
-    "maechte": [],
+    "maechte": [
+      "Abwehren",
+      "Trägheit/Beschleunigung"
+    ],
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
+      "handicap": 4,
       "handicap_gesamt": 4,
-      "aufstiege": 1.5
+      "aufstiege": -0.5
     },
-    "machtpunkte": 0,
+    "machtpunkte": 15,
     "vermoegen": 0,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

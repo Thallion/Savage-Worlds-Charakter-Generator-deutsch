@@ -483,7 +483,43 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Raumanzug, Kampf-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schwere Blasterpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Blastergewehr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Betäubungspike": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Sprungpack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Fernglas": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [],
     "selected_talente": [
@@ -517,11 +553,33 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Raumanzug, Kampf-",
+        "Schwere Blasterpistole",
+        "Blastergewehr",
+        "Betäubungspike",
+        "Sprungpack",
+        "Fernglas",
+        "Batterie, Universal-"
+    ],
+    "selected_waffen": [
+        "Schwere Blasterpistole",
+        "Blastergewehr",
+        "Betäubungspike"
+    ],
+    "selected_ruestungen": [
+        "Raumanzug, Kampf-"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Raumanzug, Kampf-": 1,
+        "Schwere Blasterpistole": 1,
+        "Blastergewehr": 1,
+        "Betäubungspike": 1,
+        "Sprungpack": 1,
+        "Fernglas": 1,
+        "Batterie, Universal-": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,

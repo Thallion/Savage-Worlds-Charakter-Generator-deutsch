@@ -510,6 +510,31 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Vibro-Klinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rucksack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschenlampe": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dietriche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -551,10 +576,16 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Schwere Blasterpistole"
+        "Schwere Blasterpistole",
+        "Vibro-Klinge",
+        "Rucksack",
+        "Taschenlampe",
+        "Dietriche",
+        "Werkzeugkoffer"
     ],
     "selected_waffen": [
-        "Schwere Blasterpistole"
+        "Schwere Blasterpistole",
+        "Vibro-Klinge"
     ],
     "selected_ruestungen": [
         "Körperpanzerung +4"
@@ -562,7 +593,12 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Schwere Blasterpistole": 1
+        "Schwere Blasterpistole": 1,
+        "Vibro-Klinge": 1,
+        "Rucksack": 1,
+        "Taschenlampe": 1,
+        "Dietriche": 1,
+        "Werkzeugkoffer": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 2,

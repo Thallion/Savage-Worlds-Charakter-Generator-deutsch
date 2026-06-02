@@ -1,9 +1,9 @@
 {
-  "name": "Pilot",
+  "name": "Cyborg",
   "setting": "SciFi Kompendium",
   "schritte": [
     {
-      "aktion": "neuer_charakter(Pilot, SciFi Kompendium)",
+      "aktion": "neuer_charakter(Cyborg, SciFi Kompendium)",
       "ok": true,
       "nachher_punkte": {
         "attribut": 5,
@@ -15,75 +15,23 @@
       "vermoegen": 500
     },
     {
-      "aktion": "handicap(Amourös)",
-      "ok": true,
-      "kosten": -1,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "handicap(Tick)",
-      "ok": true,
-      "kosten": -1,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "handicap(Übermütig)",
+      "aktion": "handicap(Arrogant)",
       "ok": true,
       "kosten": -2,
       "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 4
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "volk(Mensch)",
+      "aktion": "volk(Gen-Soldaten)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "volk_freies_talent(Mensch,Ass am Steuer)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "talent(Schnell)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
@@ -93,7 +41,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Geschicklichkeit)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -132,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -145,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Konstitution)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -158,7 +106,33 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Athletik)",
+      "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Pilot)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -210,7 +184,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Reparieren)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -249,9 +223,22 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Athletik)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 3,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Elektronik)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
@@ -262,7 +249,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen)",
+      "aktion": "fertigkeit(Elektronik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -301,6 +288,32 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
       "ok": true,
       "kosten": 0,
@@ -314,7 +327,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Raketen-Ass)",
+      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -327,7 +340,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
+      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -340,22 +353,35 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Körperpanzerung +4x1)",
+      "aktion": "talent(Schnell)",
       "ok": true,
-      "kosten": 200,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 300,
+      "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "kaufen(Raumanzugx1) FORCE",
+      "aktion": "talent(Trickschuss)",
       "ok": true,
-      "kosten": 300,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
+      "ok": true,
+      "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
@@ -363,10 +389,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Gyrojet-Gewehr zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "aktion": "kaufen(Rotpunktvisierx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -376,10 +402,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rotpunktvisier zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "aktion": "kaufen(Standard-Gyrojetx30) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -389,10 +415,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Standard-Gyrojet zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Klebstoffpflasterx5) FORCE",
+      "aktion": "kaufen(Vibro-Klingex1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -402,10 +428,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Klebstoffpflaster zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Vibro-Klinge zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Biolinkx1) FORCE",
+      "aktion": "kaufen(Commlinkx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -415,10 +441,23 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Biolink zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Commlink zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Kaugummix1) FORCE",
+      "aktion": "kaufen(Magnetstiefelx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Magnetstiefel zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -428,20 +467,7 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kaugummi zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
@@ -457,15 +483,103 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Pilot_A.json)",
+      "aktion": "kaufen(Cyberware: Verbesserte Sichtx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verbesserte Sicht zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberware: Panzerungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Panzerung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberware: Robustheitx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Robustheit zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberware: Zielsystemx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Zielsystem zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Cyborg_A.json)",
       "ok": true
     }
   ],
   "anomalien": [
     {
-      "aktion": "kaufen(Raumanzugx1) FORCE",
+      "aktion": "NOTIZ: Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting)",
       "ok": true,
-      "kosten": 300,
+      "warnung": "Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 500
+    },
+    {
+      "aktion": "NOTIZ: Bogen-HC Überheblich/Overconfident (2HP) → ersetzt durch Arrogant (2HP, schwer)",
+      "ok": true,
+      "warnung": "Bogen-HC Überheblich/Overconfident (2HP) → ersetzt durch Arrogant (2HP, schwer)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 500
+    },
+    {
+      "aktion": "NOTIZ: Auto-HC Gen-Soldaten: Skrupellos (2HP, auto) + Arrogant (2HP, Bogen) = 4HP ✓",
+      "ok": true,
+      "warnung": "Auto-HC Gen-Soldaten: Skrupellos (2HP, auto) + Arrogant (2HP, Bogen) = 4HP ✓",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 500
+    },
+    {
+      "aktion": "NOTIZ: Auto-Talent Gen-Soldaten: Kampfreflexe (free, auto)",
+      "ok": true,
+      "warnung": "Auto-Talent Gen-Soldaten: Kampfreflexe (free, auto)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 500
+    },
+    {
+      "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
+      "ok": true,
+      "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
@@ -473,10 +587,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Gyrojet-Gewehr zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Laserpistolex1) FORCE",
+      "aktion": "kaufen(Rotpunktvisierx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -486,10 +600,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Laserpistole zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rotpunktvisier zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Waffensperrex1) FORCE",
+      "aktion": "kaufen(Standard-Gyrojetx30) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -499,10 +613,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Waffensperre zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Standard-Gyrojet zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Klebstoffpflasterx5) FORCE",
+      "aktion": "kaufen(Vibro-Klingex1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -512,10 +626,10 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Klebstoffpflaster zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Vibro-Klinge zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Biolinkx1) FORCE",
+      "aktion": "kaufen(Commlinkx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -525,10 +639,23 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Biolink zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Commlink zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Kaugummix1) FORCE",
+      "aktion": "kaufen(Magnetstiefelx1) FORCE",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Magnetstiefel zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -538,20 +665,7 @@
         "handicap": 2
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kaugummi zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
@@ -567,25 +681,86 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: Bogen-Edges (3): Ass am Steuer (free), Schnell (CharGen), Raketen-Ass (Adv). 4. Advance: Wahrnehmung d6",
+      "aktion": "kaufen(Cyberware: Verbesserte Sichtx1) FORCE",
       "ok": true,
-      "warnung": "Bogen-Edges (3): Ass am Steuer (free), Schnell (CharGen), Raketen-Ass (Adv). 4. Advance: Wahrnehmung d6",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verbesserte Sicht zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberware: Panzerungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Panzerung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberware: Robustheitx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Robustheit zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Cyberware: Zielsystemx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Zielsystem zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: Bogen-Edge Cyborg = MISSING im CharGen (HC-Budget ausgeschöpft). Gen-Soldaten ist das Volk, das Cyborg-Konzept trägt",
+      "ok": true,
+      "warnung": "Bogen-Edge Cyborg = MISSING im CharGen (HC-Budget ausgeschöpft). Gen-Soldaten ist das Volk, das Cyborg-Konzept trägt",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     },
     {
-      "aktion": "NOTIZ: Kaugummi: Bogen-Quirk HC \"Quirk\" = Tick (1HP) NICHT zusätzlich als Item-Edge",
+      "aktion": "NOTIZ: Bogen-Edge Geared Up = MISSING (HC-Budget, nicht CharGen)",
       "ok": true,
-      "warnung": "Kaugummi: Bogen-Quirk HC \"Quirk\" = Tick (1HP) NICHT zusätzlich als Item-Edge",
+      "warnung": "Bogen-Edge Geared Up = MISSING (HC-Budget, nicht CharGen)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
+      "aktion": "NOTIZ: Bogen-Item Magnetstiefel = MISSING (nicht im SciFi-Setting)",
+      "ok": true,
+      "warnung": "Bogen-Item Magnetstiefel = MISSING (nicht im SciFi-Setting)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 10,
+  "anomalien_anzahl": 19,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -593,7 +768,7 @@
         "modifier": 0
       },
       "Verstand": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0
       },
       "Stärke": {
@@ -601,7 +776,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 6,
+        "wert": 4,
         "modifier": 0
       },
       "Willenskraft": {
@@ -617,10 +792,16 @@
         "ausgewaehlt": true
       },
       "Athletik": {
-        "wert": 6,
+        "wert": 10,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
+      },
+      "Elektronik": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
       },
       "Heimlichkeit": {
         "wert": 4,
@@ -641,7 +822,7 @@
         "ausgewaehlt": false
       },
       "Schießen": {
-        "wert": 8,
+        "wert": 10,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -653,21 +834,20 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       }
     },
     "handicaps": [
-      "Tick",
-      "Übermütig",
-      "Amourös"
+      "Arrogant",
+      "Skrupellos"
     ],
     "talente": [
-      "Ass am Steuer",
+      "Kampfreflexe",
       "Schnell",
-      "Raketen-Ass"
+      "Trickschuss"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -675,12 +855,12 @@
       "attribut": 0,
       "fertigkeit": 0,
       "handicap": 2,
-      "handicap_gesamt": 4,
-      "aufstiege": 1.5
+      "handicap_gesamt": 2,
+      "aufstiege": -0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Anfänger",
-    "volk": "Mensch"
+    "rang": "Fortgeschritten",
+    "volk": "Gen-Soldaten"
   }
 }

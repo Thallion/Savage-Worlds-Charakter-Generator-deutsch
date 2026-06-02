@@ -509,6 +509,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Waffensperre": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberdeck": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -550,7 +570,11 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Laserpistole"
+        "Laserpistole",
+        "Waffensperre",
+        "Cyberdeck",
+        "Batterie, Universal-",
+        "Taschencomputer"
     ],
     "selected_waffen": [
         "Laserpistole"
@@ -561,7 +585,11 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Laserpistole": 1
+        "Laserpistole": 1,
+        "Waffensperre": 1,
+        "Cyberdeck": 1,
+        "Batterie, Universal-": 1,
+        "Taschencomputer": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": -0.5,

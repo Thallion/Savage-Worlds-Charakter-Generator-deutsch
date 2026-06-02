@@ -487,6 +487,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Commlink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -524,7 +534,9 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Gyrojet-Pistole"
+        "Gyrojet-Pistole",
+        "Commlink",
+        "Taschencomputer"
     ],
     "selected_waffen": [
         "Gyrojet-Pistole"
@@ -532,7 +544,9 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Gyrojet-Pistole": 1
+        "Gyrojet-Pistole": 1,
+        "Commlink": 1,
+        "Taschencomputer": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0.5,
