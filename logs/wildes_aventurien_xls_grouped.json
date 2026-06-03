@@ -1,0 +1,822 @@
+{
+  "Savage Macht": [
+    [
+      "Zauber ",
+      "Ausprägung"
+    ]
+  ],
+  "Element manipulieren": [
+    [
+      "Abvenenum reine Speise ",
+      ""
+    ],
+    [
+      "Abvenenum reine Speise ",
+      ""
+    ],
+    [
+      "Aeolitus Windgebraus ",
+      ""
+    ],
+    [
+      "Haselbusch und Ginsterkraut ",
+      ""
+    ],
+    [
+      "Manifesto Element ",
+      ""
+    ],
+    [
+      "Metamorpho Gletscherform ",
+      ""
+    ],
+    [
+      "Objecto Obscuro ",
+      ""
+    ],
+    [
+      "Weiches erstarre! ",
+      ""
+    ],
+    [
+      "Weihrauchwolke Wohlgeruch ",
+      ""
+    ],
+    [
+      "Windhose ",
+      ""
+    ]
+  ],
+  "Tranksegen ": [
+    [
+      "Abvenenum reine Speise ",
+      ""
+    ],
+    [
+      "Accuratum Zaubernadel ",
+      ""
+    ]
+  ],
+  "Barriere": [
+    [
+      "Adamantium Erzstruktur ",
+      "auf vorhandenes Material gesprochen"
+    ],
+    [
+      "Claudibus Clavistibor ",
+      "auf vorhandenes Material gesprochen"
+    ],
+    [
+      "Fortifex Arkane Wand ",
+      ""
+    ],
+    [
+      "Hexenknoten ",
+      ""
+    ],
+    [
+      "Solidirid Weg aus Licht ",
+      "waagerechte Barriere (obwohl: sollte mit Barriere mMn möglich sein)"
+    ],
+    [
+      "Wand aus Dornen ",
+      ""
+    ],
+    [
+      "Weiches erstarre! ",
+      ""
+    ]
+  ],
+  "Eigenschaft stärken": [
+    [
+      "Adlerauge Luchsenohr ",
+      ""
+    ],
+    [
+      "Ängste Lindern ",
+      ""
+    ],
+    [
+      "Attributo ",
+      ""
+    ],
+    [
+      "Eigenschaft wiederherstellen ",
+      ""
+    ],
+    [
+      "Falkenauge Meisterschuss ",
+      ""
+    ],
+    [
+      "Kraft des Erzes ",
+      ""
+    ],
+    [
+      "Lunge des Leviatan ",
+      ""
+    ],
+    [
+      "Memorans Gedächtniskraft ",
+      ""
+    ],
+    [
+      "Movimento Dauerlauf ",
+      ""
+    ],
+    [
+      "Psychostabilis ",
+      ""
+    ]
+  ],
+  "Gestaltwandel": [
+    [
+      "Adlerschwinge Wolfsgestalt ",
+      ""
+    ],
+    [
+      "Salander Mutander ",
+      ""
+    ],
+    [
+      "Serpentialis Schlangenleib ",
+      ""
+    ],
+    [
+      "Transmutare Körperform ",
+      ""
+    ],
+    [
+      "Weisheit der Bäume ",
+      ""
+    ]
+  ],
+  "Geschoss": [
+    [
+      "Aeolitus Windgebraus ",
+      ""
+    ],
+    [
+      "Corpofrigo Kälteschock ",
+      ""
+    ],
+    [
+      "Fulminictus Donnerkeil ",
+      ""
+    ],
+    [
+      "Höllenpein zerreiße dich! ",
+      "Berührung"
+    ],
+    [
+      "Ignifaxius Flammenstrahl ",
+      ""
+    ],
+    [
+      "Kulminatio Kugelblitz ",
+      ""
+    ],
+    [
+      "Pfeil des [Elements] ",
+      "auf Pfeil"
+    ]
+  ],
+  "Flächenschlag": [
+    [
+      "Aerofugo Vakuum ",
+      ""
+    ],
+    [
+      "Aerogelo Atemqual ",
+      ""
+    ],
+    [
+      "Brenne toter Stoff ",
+      "Flammen-Ausprägungen die Dinge in Brand setzt"
+    ],
+    [
+      "Caldofrigo heiß und kalt ",
+      ""
+    ],
+    [
+      "Ignisphaero Feuerball ",
+      ""
+    ],
+    [
+      "Mahlstrom ",
+      ""
+    ]
+  ],
+  "Arkanes entdecken": [
+    [
+      "Analys Arcanstruktur ",
+      ""
+    ],
+    [
+      "Odem Arcanum ",
+      ""
+    ]
+  ],
+  "Beschwören": [
+    [
+      "Animatio stummer Diener ",
+      ""
+    ],
+    [
+      "Dschinnenruf ",
+      ""
+    ],
+    [
+      "Ecliptifactus Schattenkraft ",
+      ""
+    ],
+    [
+      "Elementarer Diener ",
+      ""
+    ],
+    [
+      "Geisterruf ",
+      ""
+    ],
+    [
+      "Invocatio Maior ",
+      ""
+    ],
+    [
+      "Invocatio Minor ",
+      ""
+    ],
+    [
+      "Meister der Elemente ",
+      ""
+    ],
+    [
+      "Nuntiovolo Botenvogel ",
+      ""
+    ],
+    [
+      "Pandaemonium ",
+      ""
+    ],
+    [
+      "Staub wandle! ",
+      ""
+    ],
+    [
+      "Stein wandle! ",
+      ""
+    ]
+  ],
+  "Artefaktbauer": [
+    [
+      "Applicatus Zauberspeicher ",
+      ""
+    ],
+    [
+      "Arcanovi Artefakt ",
+      ""
+    ],
+    [
+      "Sumus Elixiere ",
+      ""
+    ]
+  ],
+  "Tierfreund": [
+    [
+      "Arachnea Krabbeltier ",
+      ""
+    ],
+    [
+      "Herr über das Tierreich ",
+      ""
+    ],
+    [
+      "Krabbelnder Schrecken ",
+      ""
+    ],
+    [
+      "Tiergedanken ",
+      ""
+    ]
+  ],
+  "Panzerung": [
+    [
+      "Armatrutz ",
+      ""
+    ],
+    [
+      "Gardianum Zauberschild ",
+      ""
+    ],
+    [
+      "Gefunden! ",
+      "für Schelme"
+    ]
+  ],
+  "Strahl": [
+    [
+      "Auge des Limbus ",
+      ""
+    ],
+    [
+      "Aureolus Güldenglanz ",
+      ""
+    ],
+    [
+      "Auris Nasus Occulus ",
+      ""
+    ],
+    [
+      "Desintegratus Pulverstaub ",
+      "nur gegen Gegenstände"
+    ],
+    [
+      "Eisenrost und Patina",
+      "gegen Gegenstände als Trapping"
+    ]
+  ],
+  "Beschleunigen": [
+    [
+      "Axxeleratus Blitzgeschwind ",
+      ""
+    ]
+  ],
+  "Schnelligkeit": [
+    [
+      "Axxeleratus Blitzgeschwind ",
+      ""
+    ]
+  ],
+  "Heilung / Heilungsritual": [
+    [
+      "Balsam Salabunde ",
+      ""
+    ],
+    [
+      "Hexenspeichel ",
+      ""
+    ],
+    [
+      "Ruhe Körper, ruhe Geist ",
+      ""
+    ]
+  ],
+  "Fesseln": [
+    [
+      "Band und Fessel ",
+      ""
+    ],
+    [
+      "Granit und Marmor ",
+      ""
+    ],
+    [
+      "Paralysis starr wie Stein ",
+      ""
+    ]
+  ],
+  "Marionette": [
+    [
+      "Bannbaladin ",
+      ""
+    ],
+    [
+      "Blick in die Gedanken ",
+      ""
+    ],
+    [
+      "Böser Blick ",
+      ""
+    ],
+    [
+      "Erinnerung verlasse dich! ",
+      ""
+    ],
+    [
+      "Halluzination ",
+      ""
+    ],
+    [
+      "Imperavi Handlungszwang ",
+      ""
+    ],
+    [
+      "Levthans Feuer ",
+      ""
+    ],
+    [
+      "Respondami Wahrheitszwang ",
+      ""
+    ],
+    [
+      "Somnigravis tiefer Schlaf ",
+      ""
+    ],
+    [
+      "Zauberzwang ",
+      ""
+    ]
+  ],
+  "Bannen": [
+    [
+      "Beherrschung brechen ",
+      ""
+    ],
+    [
+      "Beschwörung vereiteln ",
+      ""
+    ],
+    [
+      "Bewegung stören ",
+      ""
+    ],
+    [
+      "Dämonenbann ",
+      ""
+    ],
+    [
+      "Destructibo Arcanitas ",
+      ""
+    ],
+    [
+      "Einfluss bannen ",
+      ""
+    ],
+    [
+      "Elementarbann ",
+      ""
+    ],
+    [
+      "Geisterbann ",
+      ""
+    ],
+    [
+      "Heilkraft bannen ",
+      ""
+    ],
+    [
+      "Hellsicht trüben ",
+      ""
+    ],
+    [
+      "Herbeirufung vereiteln ",
+      ""
+    ],
+    [
+      "Illusion auflösen ",
+      ""
+    ],
+    [
+      "Klarum Purum ",
+      "nur Gift"
+    ],
+    [
+      "Klickeradomms ",
+      "für alle Magie-Wirker (außer Elfen?)"
+    ],
+    [
+      "Limbus versiegeln ",
+      ""
+    ],
+    [
+      "Metamagie neutralisieren ",
+      ""
+    ],
+    [
+      "Objekt entzaubern ",
+      ""
+    ],
+    [
+      "Pentagramma Sphärenbann ",
+      ""
+    ],
+    [
+      "Schadenszauber bannen ",
+      ""
+    ],
+    [
+      "Veränderung aufheben ",
+      ""
+    ],
+    [
+      "Verständigung stören ",
+      ""
+    ],
+    [
+      "Verwandlung beenden ",
+      ""
+    ]
+  ],
+  "Analyse Foe*": [
+    [
+      "Blick aufs Wesen ",
+      ""
+    ]
+  ],
+  "Altered Senses*": [
+    [
+      "Blick durch fremde Augen ",
+      ""
+    ]
+  ],
+  "Eigenschaft schwächen": [
+    [
+      "Blitz dich find! ",
+      "(Kämpfen)"
+    ],
+    [
+      "Memorabia Falsifir ",
+      ""
+    ],
+    [
+      "Plumbumbarum schwerer Arm ",
+      ""
+    ]
+  ],
+  "Angst ": [
+    [
+      "Böser Blick ",
+      ""
+    ]
+  ],
+  "Unsichtbarkeit": [
+    [
+      "Chamaelioni Mimikry ",
+      ""
+    ],
+    [
+      "Harmlose Gestalt ",
+      "Alle Anwesenden sehen den Zauberer als harmlos an und ignorieren ihn."
+    ],
+    [
+      "Ignorantia Ungesehn ",
+      ""
+    ],
+    [
+      "Visibili Vanitar ",
+      ""
+    ],
+    [
+      "Vocolimbo hohler Klang ",
+      ""
+    ],
+    [
+      "Vogelzwitschern Glockenspiel ",
+      ""
+    ]
+  ],
+  "Schock": [
+    [
+      "Corpofesso Gliederschmerz ",
+      ""
+    ],
+    [
+      "Herzschlag ruhe! ",
+      ""
+    ],
+    [
+      "Tlalucs Odem Pestgestank ",
+      ""
+    ]
+  ],
+  "Magischer Alltag": [
+    [
+      "Cryptographo Zauberschrift ",
+      ""
+    ],
+    [
+      "Delicioso Gaumenschmaus ",
+      ""
+    ],
+    [
+      "Manifesto Element ",
+      ""
+    ],
+    [
+      "Pectetondo Zauberhaar ",
+      ""
+    ],
+    [
+      "Reflectimago Spiegelschein ",
+      ""
+    ],
+    [
+      "Sapefacta Zauberschwamm ",
+      ""
+    ]
+  ],
+  "Verschleiern": [
+    [
+      "Dunkelheit ",
+      ""
+    ],
+    [
+      "Nebelwand und Morgendunst ",
+      ""
+    ],
+    [
+      "Silentium Schweigekreis ",
+      "Geräusche werden unterdrückt, statt Dunkelheit. Dementsprechend -6 auf Proben für Hören"
+    ]
+  ],
+  "Ablenken": [
+    [
+      "Duplicatus Doppelbild ",
+      ""
+    ],
+    [
+      "Widerwille Ungemach ",
+      "auf Gegenstände, Malus auf Wahrnehmung?"
+    ],
+    [
+      "Zagibu Ubigaz ",
+      ""
+    ]
+  ],
+  "Angst": [
+    [
+      "Eigne Ängste quälen dich! ",
+      ""
+    ],
+    [
+      "Horriphobus Schreckgestalt ",
+      ""
+    ],
+    [
+      "Krabbelnder Schrecken ",
+      ""
+    ],
+    [
+      "Panik überkomme Euch! ",
+      ""
+    ],
+    [
+      "Schwarzer Schrecken ",
+      ""
+    ]
+  ],
+  "Eigenschaft stärken ": [
+    [
+      "Eins mit der Natur ",
+      "(Überleben)"
+    ],
+    [
+      "Sensattacco Meisterstreich ",
+      "(Kämpfen)"
+    ],
+    [
+      "Sensibar Empathicus ",
+      "(Wahrnehmung)"
+    ]
+  ],
+  "Arkanes entdecken ": [
+    [
+      "Exposami Lebenskraft ",
+      "mit entsprechendem Trapping"
+    ]
+  ],
+  "Licht": [
+    [
+      "Favilludo Funkentanz ",
+      ""
+    ],
+    [
+      "Flim Flam Funkel ",
+      ""
+    ]
+  ],
+  "Schutz vor Naturgewalten": [
+    [
+      "Firnlauf ",
+      ""
+    ],
+    [
+      "Leib des Feuers ",
+      ""
+    ],
+    [
+      "Leib des Windes ",
+      ""
+    ],
+    [
+      "Wasseratem ",
+      ""
+    ],
+    [
+      "Wellenlauf ",
+      ""
+    ],
+    [
+      "Windstille ",
+      ""
+    ]
+  ],
+  "Disease*": [
+    [
+      "Fluch der Pestilenz ",
+      ""
+    ]
+  ],
+  "Unlock*": [
+    [
+      "Foramen Foraminor ",
+      ""
+    ]
+  ],
+  "Eigenschaft schwächen ": [
+    [
+      "Iribaars Hand ",
+      "(Verstand)"
+    ]
+  ],
+  "Göttliche Gabe ": [
+    [
+      "Karnifilo Raserei ",
+      "(die das Berserker-Talent gibt)"
+    ]
+  ],
+  "Marionette ": [
+    [
+      "Krabbelnder Schrecken ",
+      ""
+    ]
+  ],
+  "Drain Powerpoints*": [
+    [
+      "Magischer Raub ",
+      ""
+    ]
+  ],
+  "Telekinese": [
+    [
+      "Motoricus Geisteshand ",
+      ""
+    ]
+  ],
+  "Sprachen verstehen": [
+    [
+      "Nekropathia Seelenreise ",
+      "Tote"
+    ],
+    [
+      "Objectovoco ",
+      "Gegenstände verstehen"
+    ],
+    [
+      "Xenographus Schriftenkunde ",
+      ""
+    ]
+  ],
+  "Fliegen": [
+    [
+      "Nihilogravo Schwerelos ",
+      ""
+    ]
+  ],
+  "Arkanes Entdecken": [
+    [
+      "Oculus Astralis ",
+      ""
+    ]
+  ],
+  "Wandering Senses": [
+    [
+      "Penetrizzel Tiefenblick ",
+      ""
+    ]
+  ],
+  "Zombie": [
+    [
+      "Skelettarius Totenheer ",
+      ""
+    ],
+    [
+      "Totes handle! ",
+      ""
+    ]
+  ],
+  "Shapechange": [
+    [
+      "Transformatio Formgestalt ",
+      ""
+    ]
+  ],
+  "Teleport": [
+    [
+      "Transversalis Teleport ",
+      ""
+    ]
+  ],
+  "Storm*": [
+    [
+      "Wettermeisterschaft ",
+      ""
+    ]
+  ],
+  "Waffe verbessern": [
+    [
+      "Zauberklinge Geisterspeer ",
+      ""
+    ]
+  ]
+}

@@ -1,0 +1,5316 @@
+{
+  "meta": {
+    "erstellt": "2026-06-02",
+    "quelle_setting": "settings/Savage Aventurien.json",
+    "status": "ALLE Trappings entschieden — 0 Offen, bereit für JSON-Update. Batch 42 überschreibt 8 frühere offen-Einträge.",
+    "letzte_aktualisierung": "2026-06-03"
+  },
+  "entscheidungen": [
+    {
+      "batch": 1,
+      "von": "Heilung",
+      "trapping": "Manus Miracula",
+      "nach": "Telekinese",
+      "status": "move"
+    },
+    {
+      "batch": 1,
+      "von": "Heilung",
+      "trapping": "Salander",
+      "nach": "Böswillige Verwandlung",
+      "status": "move"
+    },
+    {
+      "batch": 2,
+      "von": "Heilung",
+      "trapping": "Welle der Reinigung",
+      "nach": "Schadensfeld",
+      "status": "move"
+    },
+    {
+      "batch": 2,
+      "von": "Heilung",
+      "trapping": "Befreiung des Geistes",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 2,
+      "von": "Heilung",
+      "trapping": "Schonfrist",
+      "nach": "Abwehren",
+      "status": "move"
+    },
+    {
+      "batch": 2,
+      "von": "Heilung",
+      "trapping": "Gefäß der Jahre",
+      "nach": "Zeitstopp",
+      "status": "move"
+    },
+    {
+      "batch": 2,
+      "von": "Heilung",
+      "trapping": "Ausbrennen (Purgation)",
+      "nach": "Machtpunkte entziehen",
+      "status": "move"
+    },
+    {
+      "batch": 1,
+      "von": "Heilung",
+      "trapping": "Infinitum Immerdar",
+      "nach": "Zeitstopp",
+      "status": "move"
+    },
+    {
+      "batch": 1,
+      "von": "Heilung",
+      "trapping": "Immortalis Lebenszeit",
+      "nach": "Zeitstopp",
+      "status": "move"
+    },
+    {
+      "batch": 1,
+      "von": "Heilung",
+      "trapping": "Satuarias Herrlichkeit",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 3,
+      "von": "Heilung",
+      "trapping": "Läuterung des Erzes",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 3,
+      "von": "Heilung",
+      "trapping": "Fruchtbarkeit",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 3,
+      "von": "Heilung",
+      "trapping": "Speisung",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 3,
+      "von": "Heilung",
+      "trapping": "Tranksegen",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 3,
+      "von": "Heilung",
+      "trapping": "Häutung",
+      "nach": null,
+      "status": "offen"
+    },
+    {
+      "batch": 4,
+      "von": "Heilung",
+      "trapping": "Jugendlichkeit",
+      "nach": "Zeitstopp",
+      "status": "move"
+    },
+    {
+      "batch": 4,
+      "von": "Heilung",
+      "trapping": "Reinigung des Bösen",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 4,
+      "von": "Heilung",
+      "trapping": "Klarer Geist",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 4,
+      "von": "Heilung",
+      "trapping": "Priesterweihe (Ordination)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 4,
+      "von": "Heilung",
+      "trapping": "Selbstopferung",
+      "nach": "Wiederauferstehung",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Sumus Elixiere",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 5,
+      "von": "Heilung",
+      "trapping": "Ausnüchtern",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 5,
+      "von": "Heilung",
+      "trapping": "Ackersegen",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 5,
+      "von": "Heilung",
+      "trapping": "Geburtssegen",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 5,
+      "von": "Heilung",
+      "trapping": "Grabsegen",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 6,
+      "von": "Heilung",
+      "trapping": "Peraines Gnade",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 6,
+      "von": "Heilung",
+      "trapping": "Hilfe in der Not",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 6,
+      "von": "Heilung",
+      "trapping": "Goldene Hand",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 6,
+      "von": "Heilung",
+      "trapping": "Makelloser Leib",
+      "nach": "Verkleiden",
+      "status": "move"
+    },
+    {
+      "batch": 6,
+      "von": "Heilung",
+      "trapping": "Wiederherstellung",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 7,
+      "von": "Heilung",
+      "trapping": "Zaubernahrung",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 7,
+      "von": "Heilung",
+      "trapping": "Geistheilung",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 7,
+      "von": "Heilung",
+      "trapping": "Heilschlaf",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 7,
+      "von": "Heilung",
+      "trapping": "Heilung von Seelenkranken",
+      "nach": null,
+      "status": "offen"
+    },
+    {
+      "batch": 7,
+      "von": "Heilung",
+      "trapping": "Helfende Hand",
+      "nach": null,
+      "status": "offen"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Physiostabilis",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Psychostabilis",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Schmerzen lindern",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Aufwecken",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Erschöpfungen lindern",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Tierleid lindern",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Blick des Heilers",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Erwachen",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Hexenspeichel",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Regeneratio",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Balsam Salabunde",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Heilsegen",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Kleiner Heilsegen",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Krankheitsbann",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Krankheiten vorbeugen",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Giftbann",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Eidechsenregeneration",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 9,
+      "von": "Heilung",
+      "trapping": "Heilsame Quelle",
+      "nach": "Heilung (bleibt)",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Alpgestalt",
+      "nach": "Furcht",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Impersona",
+      "nach": "Verkleiden",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Motoricus",
+      "nach": "Telekinese",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Chimaeroform",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Sapefacta",
+      "nach": "Zaubertricks",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Brandform",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Felsenform",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Gletscherform",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Pflanzenform",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Wirbelform",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Wogenform",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 10,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Staub wandle",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 11,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Chamaelioni",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 11,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Reptilea",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 11,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Stein wandle",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 11,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Transformatio",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 11,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Traumgestalt",
+      "nach": "Ebenenwechsel",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Tiergestalt (Druide)",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Delphingestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Eidechsengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Einhorngestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Eisbärengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Elsterngestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Falkengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Flugechsengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Fuchsgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Gänsegestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Geiergestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Hundegestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Jaguargestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Löwengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Luchsgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Mungogestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Panthergestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Paradiesvogelgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Pferdegestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Rabengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Schattenrochengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Schlangengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Schmetterlingsgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Schwanengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Storchengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Taubengestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Widdergestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Wolfsgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Zwergwalgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Serpentialis",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Geschlechterwechsel",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Transmutare",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Maske",
+      "nach": "Verkleiden",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Entstelltes Antlitz",
+      "nach": "Fluch",
+      "status": "move"
+    },
+    {
+      "batch": 12,
+      "von": "Böswillige Verwandlung",
+      "trapping": "Doppelgänger",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Ignifaxius",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Frigifaxius",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Aquafaxius",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Humofaxius",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Orcanofaxius",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Archofaxius",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Blitzschlag",
+      "nach": "Flächenschlag",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Blitzball",
+      "nach": "Flächenschlag",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Penetrizzel",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Bannstrahl",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Kleiner Bannstrahl",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Göttliche Klinge",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Zauberklinge Geisterspeer",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Metallerhitzung",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Plumbumbarum",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Eispfeil",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Erzpfeil",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Feuerpfeil",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Luftpfeil",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Wasserpfeil",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Humuspfeil",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Fulminictus",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Corpofrigo",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 13,
+      "von": "Geschoss",
+      "trapping": "Speer des Athleten",
+      "nach": "Geschoss",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Objectovoco",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Manifesto",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Geisteressenz",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Invocatio Minima",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Aurum Argentor (Gold)",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Skelettarius",
+      "nach": "Untoten Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Foramen (Schloss öffnen)",
+      "nach": "Verriegeln/Entriegeln",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Animatio (Belebung)",
+      "nach": "Telekinese",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Zauberpferd herbeirufen",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Dschinnenruf",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Elementarer Diener",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Geisterbeschwörung",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Invocatio Maior",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Invocatio Maxima",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Invocatio Minor",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Nekropathia",
+      "nach": "Ebenenwechsel",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Ruf der Feenwesen",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Standhafter Wächter",
+      "nach": "Kriegersegen",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Totes handle",
+      "nach": "Untoten Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Zauberwesen der Natur",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Hairuf",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Beschwörung der gemeinen Diener des Rattenkindes",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Brazoraghs Krieger",
+      "nach": "Kriegersegen",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Erzene Opfergabe",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Herbeirufung Heerscharen Rattenkindes (Ratten)",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Herbeirufung Heerscharen Rattenkindes (Schakale)",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Herbeirufung Heerscharen Rattenkindes (Vampirfledermäuse)",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Herbeirufung Heerscharen Rattenkindes (Wolfsspinnen)",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Herbeirufung Tairachs Diener (Nebelkrähen)",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Nebelkrähenschwarm",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Rattenschwarm",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Schlangenstab",
+      "nach": "Tier Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Talismanruf",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Untotenerhebung",
+      "nach": "Untoten Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Beschwörung der hohen Diener des Rattenkindes",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Beschwörung der machtvollen Diener des Rattenkindes",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Diener der Erde",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Diener der Flammen",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Diener der Kälte",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Diener der Wellen",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Diener der Wolken",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Diener des Erzes",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Erschaffung von Nachtkindern",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Gespräch mit den Toten",
+      "nach": "Zwiesprache",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Himmlische Schatzkammer",
+      "nach": "Gegenstand beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Tairachs machtvolle Erhebung von Untoten",
+      "nach": "Untoten Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Travias Wachgänse",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 14,
+      "von": "Gegenstand beschwören",
+      "trapping": "Untote erschaffen",
+      "nach": "Untoten Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Ängste Lindern",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Besänftigung",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Bann der Furcht",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Einflüsterung",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Freundschaftliches Auftreten",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Heiliges Liebesspiel",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Bescheidenheit",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Berauschen",
+      "nach": "Betäuben",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Des Einen bezaubernder Sphärenklang",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Ehrenhaftigkeit",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Elfenstimme",
+      "nach": "Zwiesprache",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Ermutigung",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Erregender Rausch",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Eingeschworene Mannschaft",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Empfängnis des Korsmals",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Erinnern",
+      "nach": "Gedankenlesen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Fest der Freude",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Friedfertigkeit",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Friedvoller Rausch",
+      "nach": "Betäuben",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Gefühlskälte",
+      "nach": "Gedankenleere",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Gesegneter Rausch",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Heiliger Schwur",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Hilfreiche Seele",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Innere Ruhe",
+      "nach": "Gedankenleere",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Levthanischer Liebhaber",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Liebestätowierung",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Lust erzeugen",
+      "nach": "Verwirrung",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Mondsilberzunge",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Moralstärkung",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Kleine Moralstärkung",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Motivation",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Mungo (Kampfgeist)",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Ruf der Heimat",
+      "nach": "Fernsicht",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Sanftmut",
+      "nach": "Tierfreund",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Schlangenzunge",
+      "nach": "Zwiesprache",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Seidenzunge",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Treuer Begleiter",
+      "nach": "Tierfreund",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Verstecktes Begehren",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Wahrheit",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Band der Freundschaft",
+      "nach": "Empathie",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Eins mit der Natur",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Tiere beruhigen",
+      "nach": "Tierfreund",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Weisheit der Bäume",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Segen (Eidsegen, Harmoniesegen, Weisheitssegen)",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Berauschender Wein",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Aufnahme (Initiation)",
+      "nach": "Wiederauferstehung",
+      "status": "move"
+    },
+    {
+      "batch": 15,
+      "von": "Empathie",
+      "trapping": "Zwergische Verbrüderung",
+      "nach": "Kriegersegen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Fortifex",
+      "nach": "Barriere",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Opfergang",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Zähe Haut",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Zauberschutz",
+      "nach": "Arkaner Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Kleiner Schutzsegen",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Feuersegen",
+      "nach": "Licht/Dunkelheit",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Frostschutz",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Geweihter Panzer",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Große Waffenweihe",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Liturgieabsorption",
+      "nach": "Arkaner Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Objektsegen",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Objektweihe",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Segnung des Heims",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Sippenbann",
+      "nach": "Fluch",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Talismanverankerung",
+      "nach": "Heiligtum",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Tempelweihe (Konsekration)",
+      "nach": "Heiligtum",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Weihe des Heims",
+      "nach": "Segen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Zuflucht",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Accuratum",
+      "nach": "Zaubertricks",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Adamantium",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Caldofrigo",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Custodosigil",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Erhabenheit des Marmors",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Unberührt von Satinav",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Widerwille",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Armatrutz",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Basaltleib",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Brandungsleib",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Drachenleib",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Eichenleib",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Frostleib",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Schuppenhaut",
+      "nach": "Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Kraft des Humus",
+      "nach": "Heilung",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Standfest",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Eisenrost (Schutz gegen Waffen)",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Bann wider Untote",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Friedvolle Aura",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Furchtresistenz",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Lebensschutz",
+      "nach": "Heilung",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Magieschutz",
+      "nach": "Arkaner Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Magiespiegel",
+      "nach": "Arkaner Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Ort der Ruhe",
+      "nach": "Geräusch/Stille",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Schmerzresistenz",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Schutz der Hornissenkönigin",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Schutz der Wehrlosen",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Schutzsegen",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 16,
+      "von": "Schutz",
+      "trapping": "Sicherer Weg",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Affenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Eulenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Fledermausruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Krähenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Krötenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Papageienruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Schlangenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Spinnenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Vogelzwitschern",
+      "nach": "Geräusch/Stille",
+      "status": "move"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Katzenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Zauberpferd herbeirufen",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Delphinruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Eisbärenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Flugechsenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Jaguarruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Mammutruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Ogerruf",
+      "nach": "Monster Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Quallenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Rabenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Rinderruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Schlingerruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Wolfsruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Greifenruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 17,
+      "von": "Tier Beschwören",
+      "trapping": "Seemonsterruf",
+      "nach": "Tier Beschwören",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Charisma)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Fingerfertigkeit)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Gewandtheit)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Intuition)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Klugheit)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Konstitution)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Körperkraft)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Attributo (Mut)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Affenarme",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Kraft des Tieres",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Kulminatio",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Riesengestalt",
+      "nach": "Wachsen/Schrumpfen",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Sensattacco",
+      "nach": "Kriegersegen",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Kampfgeschick",
+      "nach": "Kriegersegen",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Last des Alters (senken)",
+      "nach": "Zeitstopp",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Ungeschickt (senken)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Minimus Reductibus (Größe)",
+      "nach": "Wachsen/Schrumpfen",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Zitterfinger (senken)",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 18,
+      "von": "Eigenschaft erhöhen/senken",
+      "trapping": "Debilitatio (senken)",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Dornenwand",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Eiswand",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Fesselfeld",
+      "nach": "Verstricken",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Flammenwand",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Granit und Marmor",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Heptagramma",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Hexagramma",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Nebwand",
+      "nach": "???",
+      "status": "offen"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Oktagramma",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Pentagramma",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Steinwand",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Sturmwand",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Wellenwand",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Dämonenwall",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Feuerwall",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Bannzone",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Wand wider Dämonen",
+      "nach": "Barriere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 19,
+      "von": "Barriere",
+      "trapping": "Tabu-Zone",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Paralysis",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Atemnot",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Band und Fessel",
+      "nach": "Verstricken",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Claudibus",
+      "nach": "Verriegeln/Entriegeln",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Herzschlag ruhe",
+      "nach": "???",
+      "status": "offen"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Invinculo",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Kusch",
+      "nach": "Furcht",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Somnigravis",
+      "nach": "Schlummer",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Warmes gefriere",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Woge der Versteinerung",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Schlummer",
+      "nach": "???",
+      "status": "offen"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Numinorus Fesseln",
+      "nach": "Verstricken",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Schattenfessel",
+      "nach": "Verstricken",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Fesselndes Band",
+      "nach": "Verstricken",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Ogerbindung",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Seelenbannung",
+      "nach": "???",
+      "status": "offen"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Winterschlaf",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 20,
+      "von": "Betäuben",
+      "trapping": "Versteinerung",
+      "nach": "Betäuben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Bannstrahl",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Göttliche Klinge",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Speer des Athleten",
+      "nach": "Geschoss",
+      "status": "move"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Angriffslust",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Angriffswelle",
+      "nach": "Flächenschlag",
+      "status": "move"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Blutiger Zorn",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Kampfgeschick",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Kraftvoller Körper",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Heldenkraft",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Zwergenmacht",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Kriegsfarben",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Kriegszustand",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Schaffenskraft",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Gnadenstoß",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Mächtiger Angriff",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Göttlicher Rausch",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Brennender Hass",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 21,
+      "von": "Kriegersegen",
+      "trapping": "Blutrausch (göttlich)",
+      "nach": "???",
+      "status": "offen"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Axxeleratus",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Sanfter Fall",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Firnlauf",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Federleib",
+      "nach": "Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Glutlauf",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Krötensprung",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Spinnenlauf",
+      "nach": "Wandkrabbler",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Wipfellauf",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Wüstenlauf",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Movimento",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Wellenlauf",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Geschwinder Schritt",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Leichtfüssig",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Sicherer Tritt",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Unbeschwerte Wanderung",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Wasserlauf",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "move"
+    },
+    {
+      "batch": 22,
+      "von": "Trägheit/Beschleunigung",
+      "trapping": "Wieselflink",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Abwehren",
+      "trapping": "Schild-Abwehr (Aventurien)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 23,
+      "von": "Abwehren",
+      "trapping": "Paravantio",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 23,
+      "von": "Arkaner Schutz",
+      "trapping": "Dämonenschild",
+      "nach": "Arkaner Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkaner Schutz",
+      "trapping": "Solidirid",
+      "nach": "Telekinese",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkaner Schutz",
+      "trapping": "Gardianum",
+      "nach": "Arkaner Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkaner Schutz",
+      "trapping": "Hellsichtbann",
+      "nach": "Magie bannen",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkaner Schutz",
+      "trapping": "Protectionis (Aura)",
+      "nach": "Arkaner Schutz",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Analys Arkanstruktur",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Blick aufs Wesen",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Klarum Purum",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Respondami",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Visibili",
+      "nach": "Unsichtbarkeit",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Arcanovi",
+      "nach": "Gegenstand beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Entzifferung",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Cryptographo",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Geisterblick",
+      "nach": "Fernsicht",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Magieanalyse",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Magiesicht",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Seelenprüfung",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Göttliche Erkenntnis",
+      "nach": "Empathie",
+      "status": "move"
+    },
+    {
+      "batch": 23,
+      "von": "Arkanes entdecken/verbergen",
+      "trapping": "Odem Arcanum",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Dämonenbann",
+      "nach": "Aufheben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Dämonenpakt beenden",
+      "nach": "Aufheben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Dämonenpakt brechen",
+      "nach": "Aufheben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Exorzismus",
+      "nach": "Aufheben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Machtvoller Exorzismus",
+      "nach": "Aufheben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Klarum Purum (umgekehrt)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 24,
+      "von": "Aufheben",
+      "trapping": "Illusionsbann",
+      "nach": "Aufheben",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufspüren",
+      "trapping": "Gefunden",
+      "nach": "Aufspüren",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufspüren",
+      "trapping": "Pestilenz erspüren",
+      "nach": "Aufspüren",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufspüren",
+      "trapping": "Seelentier erkennen",
+      "nach": "Aufspüren",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufspüren",
+      "trapping": "Blick in die Vergangenheit",
+      "nach": "Aufspüren",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufspüren",
+      "trapping": "Erfolgreiche Pflanzensuche",
+      "nach": "Aufspüren",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Aufspüren",
+      "trapping": "Büchersuche",
+      "nach": "Aufspüren",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Ausspähung",
+      "trapping": "Spionage (Magie)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 24,
+      "von": "Ausspähung",
+      "trapping": "Blick durch fremde Augen",
+      "nach": "Ausspähung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 24,
+      "von": "Ausspähung",
+      "trapping": "Fernsicht (lang)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 24,
+      "von": "Ausspähung",
+      "trapping": "Blick in die Flammen",
+      "nach": "Ausspähung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Bindender Ruf",
+      "trapping": "Zwingtanz",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Bindender Ruf",
+      "trapping": "Bannbaladin",
+      "nach": "Empathie",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Bindender Ruf",
+      "trapping": "Zauberzwang",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Blenden",
+      "trapping": "Blindheit",
+      "nach": "Blenden",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Blenden",
+      "trapping": "Vipernblick",
+      "nach": "Betäuben",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Blenden",
+      "trapping": "Blendung",
+      "nach": "Blenden",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Blenden",
+      "trapping": "Blendstrahl",
+      "nach": "Blenden",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Blenden",
+      "trapping": "Obarans Blendung",
+      "nach": "Blenden",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Chaos",
+      "trapping": "Pandaemonium",
+      "nach": "Chaos",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Dunkelsicht",
+      "trapping": "Dunkelheit",
+      "nach": "Licht/Dunkelheit",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Dunkelsicht",
+      "trapping": "Bann des Lichts",
+      "nach": "Licht/Dunkelheit",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Dunkelsicht",
+      "trapping": "Das Löschen des Lichts",
+      "nach": "Licht/Dunkelheit",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Dunkelsicht",
+      "trapping": "Finsternis",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Transversalis",
+      "nach": "Teleportation",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Chrononautos",
+      "nach": "Ebenenwechsel",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Körperlose Reise",
+      "nach": "Ebenenwechsel",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Planastrale",
+      "nach": "Ebenenwechsel",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Seelenwanderung",
+      "nach": "Ebenenwechsel",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Regenbogenbrücke",
+      "nach": "Telekinese",
+      "status": "move"
+    },
+    {
+      "batch": 25,
+      "von": "Ebenenwechsel",
+      "trapping": "Freie Seelenfahrt",
+      "nach": "Ebenenwechsel",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 26,
+      "von": "Elementarmanipulation",
+      "trapping": "Elementare Absorption",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 26,
+      "von": "Elementarmanipulation",
+      "trapping": "Elementarer Diener",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Elementarmanipulation",
+      "trapping": "Meister der Elemente",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Elementarmanipulation",
+      "trapping": "Elementarbann",
+      "nach": "Magie bannen",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Adlerauge",
+      "nach": "Fernsicht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Auge des Limbus",
+      "nach": "Ebenenwechsel",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Falkenauge",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Katzenaugen",
+      "nach": "Dunkelsicht",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Oculus Astralis",
+      "nach": "Fernsicht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Sensibar",
+      "nach": "Empathie",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Blick durch fremde Augen",
+      "nach": "Ausspähung",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Blick auf den Meeresgrund",
+      "nach": "Fernsicht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Gespür für das Göttliche",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Göttlicher Fingerzeig",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Leitende Strömung",
+      "nach": "Wetterkontrolle",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Mondsicht",
+      "nach": "Dunkelsicht",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Schiffsgespür",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Sicht in der Dunkelheit",
+      "nach": "Dunkelsicht",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Traumgesicht",
+      "nach": "Gedankenlesen",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Wegweiser",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 26,
+      "von": "Fernsicht",
+      "trapping": "Auge des Jägers",
+      "nach": "Aufspüren",
+      "status": "move"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Aquasphaero",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Archosphaero",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Ignisphaero",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Humosphaero",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Orcanosphaero",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Frigisphaero",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Levthans Feuer",
+      "nach": "Empathie",
+      "status": "move"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Brandungsleib (Konter)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Erdbeben",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Froststurm",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Hagelschlag und Sturmgebrüll",
+      "nach": "Wetterkontrolle",
+      "status": "move"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Kälteexplosion",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Mauereinsturz",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Lawinenfall und Trümmerfeld",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Pech und Schwefel (Streu)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 27,
+      "von": "Flächenschlag",
+      "trapping": "Angriffswelle",
+      "nach": "Flächenschlag",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Fliegen",
+      "trapping": "Adlerschwinge",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 27,
+      "von": "Fliegen",
+      "trapping": "Aerofugo",
+      "nach": "Betäuben",
+      "status": "move"
+    },
+    {
+      "batch": 27,
+      "von": "Fliegen",
+      "trapping": "Himmelslauf",
+      "nach": "Fliegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Fliegen",
+      "trapping": "Freiheit der Wolken",
+      "nach": "Fliegen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 27,
+      "von": "Fliegen",
+      "trapping": "Firnlauf (Schnee-Gleitflug)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Böser Blick",
+      "nach": "Furcht",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Odem Arcanum",
+      "nach": "Arkanes entdecken/verbergen",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Pestodem",
+      "nach": "Fluch",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Schlechte Ausstrahlung",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Schleichende Fäulnis",
+      "nach": "Fluch",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Schleichende Fäulnis (Pflanzen)",
+      "nach": "Fluch",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Trankfluch",
+      "nach": "Fluch",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Bannfluch (Anathema)",
+      "nach": "Fluch",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Blutzoll",
+      "nach": "Heilung",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Waffenfluch",
+      "nach": "Fluch",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Wolfsfluch",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Numinorus Fluch",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Hexengalle",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Mal der Schwäche",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Fluch",
+      "trapping": "Mal der Erschöpfung",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Angst auslösen",
+      "nach": "Furcht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Eigene Ängste",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Horriphobus",
+      "nach": "Furcht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Krabbelnder Schrecken",
+      "nach": "Furcht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Menetekel",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Panik überkomme euch",
+      "nach": "Furcht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Schwarzer Schrecken",
+      "nach": "Furcht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Furchteinflößende Tiergeister",
+      "nach": "Furcht",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Meeresungeheuer vertreiben",
+      "nach": "Verbannen",
+      "status": "move"
+    },
+    {
+      "batch": 28,
+      "von": "Furcht",
+      "trapping": "Mit Dummheit schlagen",
+      "nach": "Verwirrung",
+      "status": "move"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Dämonisches Vergessen",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Erinnerung verlasse dich",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Memorabia Falsifir",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Namenloses Vergessen",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Schleier der Unwissenheit",
+      "nach": "Arkaner Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Gnade des Vergessens",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Verblassende Erinnerung",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Vergessen",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenleere",
+      "trapping": "Erinnern",
+      "nach": "Gedankenleere",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenlesen",
+      "trapping": "Blick in die Gedanken",
+      "nach": "Gedankenlesen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenlesen",
+      "trapping": "Memorans",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenlesen",
+      "trapping": "Offenlegung des Geistes",
+      "nach": "Gedankenlesen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenlesen",
+      "trapping": "Tsas Gedankenspiel",
+      "nach": "Marionette",
+      "status": "move"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenverbindung",
+      "trapping": "Göttliche Verständigung",
+      "nach": "Gedankenverbindung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenverbindung",
+      "trapping": "Wundersame Verständigung",
+      "nach": "Sprachen sprechen",
+      "status": "move"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenverbindung",
+      "trapping": "Botschaft aus der Tiefe",
+      "nach": "Gedankenverbindung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 29,
+      "von": "Gedankenverbindung",
+      "trapping": "Telepathie (allgemein)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Geräusch/Stille",
+      "trapping": "Silentium",
+      "nach": "Geräusch/Stille",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 30,
+      "von": "Geräusch/Stille",
+      "trapping": "Lautlos",
+      "nach": "Geräusch/Stille",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 30,
+      "von": "Geräusch/Stille",
+      "trapping": "Auris Illusionis (gegenteilig: erzeugen)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Gestaltwandeln",
+      "trapping": "Alpgestalt",
+      "nach": "Furcht",
+      "status": "move"
+    },
+    {
+      "batch": 30,
+      "von": "Gestaltwandeln",
+      "trapping": "Impersona",
+      "nach": "Verkleiden",
+      "status": "move"
+    },
+    {
+      "batch": 30,
+      "von": "Gestaltwandeln",
+      "trapping": "Tiergestalt",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Gestaltwandeln",
+      "trapping": "Eisbalgestalt",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Gestaltwandeln",
+      "trapping": "Wolfsgestalt",
+      "nach": "Gestaltwandeln",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 30,
+      "von": "Graben",
+      "trapping": "Graben (Elementar-Erde)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Graben",
+      "trapping": "Nihilogravo (Schwerelosigkeit)",
+      "nach": "Fliegen",
+      "status": "move"
+    },
+    {
+      "batch": 30,
+      "von": "Heiligtum",
+      "trapping": "Heiliger Boden",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Heiligtum",
+      "trapping": "Bodenweihe",
+      "nach": "Heiligtum",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 30,
+      "von": "Heiligtum",
+      "trapping": "Ortsweihe",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 30,
+      "von": "Heiligtum",
+      "trapping": "Bannzone",
+      "nach": "Heiligtum",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Halluzination",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Projectimago",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Auris Illusionis",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Manus Illusionis",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Gedankenbilder",
+      "nach": "Gedankenverbindung",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Objectobscuro",
+      "nach": "Unsichtbarkeit",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Oculus Illusionis",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Reflectimago",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Madas Spiegel",
+      "nach": "Fernsicht",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Aromatis Illusionis",
+      "nach": "Illusion",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Bild für die Ewigkeit",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Traumbild",
+      "nach": "Gedankenlesen",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Illusion",
+      "trapping": "Seelenschatten",
+      "nach": "Tarnung",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Licht (Auge des Limbus)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Bann der Dunkelheit",
+      "nach": "Licht/Dunkelheit",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Sternenglanz",
+      "nach": "Illusion",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Dunkelheit (Zauber)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Ecliptifactus",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Bann des Lichts",
+      "nach": "Licht/Dunkelheit",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 31,
+      "von": "Licht/Dunkelheit",
+      "trapping": "Das Löschen des Lichts",
+      "nach": "Licht/Dunkelheit",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Erschöpfungen lindern",
+      "nach": "Linderung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Schmerzen lindern",
+      "nach": "Linderung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Welle der Reinigung",
+      "nach": "Flächenschlag",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Giftbann",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Krankheitsbann",
+      "nach": "Heilung",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Krankheiten vorbeugen",
+      "nach": "Heilung",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Tierleid lindern",
+      "nach": "Linderung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Schonfrist",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Klarer Geist",
+      "nach": "Linderung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Befreiung des Geistes",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Reinigung des Bösen",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Ausnüchtern",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Linderung",
+      "trapping": "Ernüchterung",
+      "nach": "Linderung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Machtpunkte entziehen",
+      "trapping": "Schwindende Zauberkraft",
+      "nach": "Machtpunkte entziehen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Machtpunkte entziehen",
+      "trapping": "Magischer Raub",
+      "nach": "Machtpunkte entziehen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 32,
+      "von": "Machtpunkte entziehen",
+      "trapping": "Disruptivo",
+      "nach": "Magie bannen",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Machtpunkte entziehen",
+      "trapping": "Pestodem",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 32,
+      "von": "Magisches Glas",
+      "trapping": "Oculus Astralis",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 32,
+      "von": "Magisches Glas",
+      "trapping": "Oculus Illusionis",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 32,
+      "von": "Magisches Glas",
+      "trapping": "Magisches Glas (Sichtbarmachung)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Bannbaladin",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Brennender Hass",
+      "nach": "Marionette",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Große Gier",
+      "nach": "Marionette",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Imperavi",
+      "nach": "Marionette",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Zwingtanz",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Heiliger Befehl",
+      "nach": "Marionette",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Befehl des Schamanen",
+      "nach": "Marionette",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Obsession",
+      "nach": "Marionette",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Ächtung (Exkommunikation)",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Ergebenheit der Wogen",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 33,
+      "von": "Marionette",
+      "trapping": "Zauberzwang",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 33,
+      "von": "Schadensfeld",
+      "trapping": "Pech und Schwefel",
+      "nach": "Strahl",
+      "status": "move"
+    },
+    {
+      "batch": 33,
+      "von": "Schadensfeld",
+      "trapping": "Sturmwand (Schaden)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 33,
+      "von": "Schadensfeld",
+      "trapping": "Höllenpein",
+      "nach": "Schadensfeld",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 33,
+      "von": "Schadensfeld",
+      "trapping": "Welle des Schmerzes",
+      "nach": "Schadensfeld",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 34,
+      "von": "Schutz vor Naturgewalten",
+      "trapping": "Elementarbann (Resistenz)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 34,
+      "von": "Schutz vor Naturgewalten",
+      "trapping": "Unentflammbarkeit",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 34,
+      "von": "Schutz vor Naturgewalten",
+      "trapping": "Wasseratem",
+      "nach": "Schutz vor Naturgewalten",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 34,
+      "von": "Schutz vor Naturgewalten",
+      "trapping": "Lunge des Leviatan",
+      "nach": "Trägheit/Beschleunigung",
+      "status": "move"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Seidenzunge",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Mondsilberzunge",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Schlangenzunge",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Tiersprache",
+      "nach": "Tierfreund",
+      "status": "move"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Sprache des Tapams",
+      "nach": "Gedankenverbindung",
+      "status": "move"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Seevogelsprache",
+      "nach": "Tierfreund",
+      "status": "move"
+    },
+    {
+      "batch": 34,
+      "von": "Sprachen sprechen",
+      "trapping": "Cryptographo (Schrift)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 34,
+      "von": "Strahl",
+      "trapping": "Bannstrahl",
+      "nach": "Strahl",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 34,
+      "von": "Strahl",
+      "trapping": "Kleiner Bannstrahl",
+      "nach": "Strahl",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 34,
+      "von": "Strahl",
+      "trapping": "Göttliche Klinge",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 34,
+      "von": "Strahl",
+      "trapping": "Speer des Athleten",
+      "nach": "Strahl",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 34,
+      "von": "Strahl",
+      "trapping": "Göttliche Präzision",
+      "nach": "Waffe verbessern",
+      "status": "move"
+    },
+    {
+      "batch": 34,
+      "von": "Strahl",
+      "trapping": "Blendstrahl",
+      "nach": "Blenden",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Telekinese",
+      "trapping": "Objectofixo",
+      "nach": "Telekinese",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 35,
+      "von": "Telekinese",
+      "trapping": "Telekinese (allgemein)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 35,
+      "von": "Telekinese",
+      "trapping": "Nihilogravo",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 35,
+      "von": "Teleportation",
+      "trapping": "Blitz dich find",
+      "nach": "Blenden",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Teleportation",
+      "trapping": "Transversalis",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 35,
+      "von": "Teleportation",
+      "trapping": "Körperlose Reise",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 35,
+      "von": "Teleportation",
+      "trapping": "Planastrale",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Herr über das Tierreich",
+      "nach": "Tierfreund",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Tierbeherrschung",
+      "nach": "Tierfreund",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Tiere besprechen",
+      "nach": "Heilung",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Tiergedanken",
+      "nach": "Gedankenlesen",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Sprechen mit Tieren",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Hilfreiche Pfote",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Hilfreiche Schwinge",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Hilfreiche Tatze",
+      "nach": "Verbündeten beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 35,
+      "von": "Tierfreund",
+      "trapping": "Seelentier erkennen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 36,
+      "von": "Unberührbarkeit",
+      "trapping": "Unberührt von Satinav",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move"
+    },
+    {
+      "batch": 36,
+      "von": "Unberührbarkeit",
+      "trapping": "Frostleib",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 36,
+      "von": "Unberührbarkeit",
+      "trapping": "Caldofrigo",
+      "nach": "Elementarmanipulation",
+      "status": "move"
+    },
+    {
+      "batch": 36,
+      "von": "Unberührbarkeit",
+      "trapping": "Quallenhaut",
+      "nach": "Schutz",
+      "status": "move"
+    },
+    {
+      "batch": 36,
+      "von": "Unberührbarkeit",
+      "trapping": "Panzerung der Elemente",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 36,
+      "von": "Unsichtbarkeit",
+      "trapping": "Objectobscuro",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 36,
+      "von": "Unsichtbarkeit",
+      "trapping": "Nebelform",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 36,
+      "von": "Unsichtbarkeit",
+      "trapping": "Unsichtbare Flut",
+      "nach": "Flächenschlag",
+      "status": "move"
+    },
+    {
+      "batch": 36,
+      "von": "Unsichtbarkeit",
+      "trapping": "Nebelwand",
+      "nach": "Tarnung",
+      "status": "move"
+    },
+    {
+      "batch": 36,
+      "von": "Verbannen",
+      "trapping": "Dämonenbann",
+      "nach": "Verbannen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 36,
+      "von": "Verbannen",
+      "trapping": "Dämonenpakt beenden",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 36,
+      "von": "Verbannen",
+      "trapping": "Exorzismus",
+      "nach": "Verbannen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 36,
+      "von": "Verbannen",
+      "trapping": "Machtvoller Exorzismus",
+      "nach": "Verbannen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 36,
+      "von": "Verbannen",
+      "trapping": "Arcanum Interdictum",
+      "nach": "Magie bannen",
+      "status": "move"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Elementarer Diener",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Standhafter Wächter",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Zauberwesen der Natur",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Ruf der Feenwesen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Dschinnenruf",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Eingeschworene Mannschaft",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verbündeten beschwören",
+      "trapping": "Beschwörung der Diener",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verkleiden",
+      "trapping": "Impersona",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verkleiden",
+      "trapping": "Maske",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verkleiden",
+      "trapping": "Harmlose Gestalt",
+      "nach": "Verkleiden",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 37,
+      "von": "Verkleiden",
+      "trapping": "Sapefacta",
+      "nach": "Zaubertricks",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 37,
+      "von": "Verkleiden",
+      "trapping": "Kleidungschamäleon",
+      "nach": "Verkleiden",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 37,
+      "von": "Verkleiden",
+      "trapping": "Chamaelioni",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verstricken",
+      "trapping": "Band und Fessel",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verstricken",
+      "trapping": "Invinculo",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verstricken",
+      "trapping": "Fesselfeld",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verstricken",
+      "trapping": "Spinnennetz",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 37,
+      "von": "Verstricken",
+      "trapping": "Fesselndes Band",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Desintegratus (umgekehrt)",
+      "nach": "Gegenstand verbessern/schaden",
+      "status": "move_bedingt"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Eigene Dummheit",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Feenstaub",
+      "nach": "Gegenstand beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Große Verwirrung",
+      "nach": "Verwirrung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Ignorantia",
+      "nach": "Verwirrung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Mit Dummheit schlagen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Pandaemonium",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Schwarz und Rot",
+      "nach": "Fluch",
+      "status": "move"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Sturm der Verunsicherung",
+      "nach": "Verwirrung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Taubheit",
+      "nach": "Blenden",
+      "status": "move"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Verunsicherung",
+      "nach": "Eigenschaft erhöhen/senken",
+      "status": "move"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Zweifel schüren",
+      "nach": "Verwirrung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Namenlose Zweifel",
+      "nach": "Verwirrung",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 38,
+      "von": "Verwirrung",
+      "trapping": "Aromatis Illusionis",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Wachsen/Schrumpfen",
+      "trapping": "Riesengestalt",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Wachsen/Schrumpfen",
+      "trapping": "Minimus Reductibus",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Wachsen/Schrumpfen",
+      "trapping": "Felsenform (riesig)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Applicatus",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Waffensegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Waffenweihe",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Große Waffenweihe",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Göttliche Präzision",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Adamantium (Härte)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 38,
+      "von": "Waffe verbessern",
+      "trapping": "Waffenfluch (umgekehrt)",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 39,
+      "von": "Wandkrabbler",
+      "trapping": "Affenarme",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wandkrabbler",
+      "trapping": "Spinnenlauf",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wandkrabbler",
+      "trapping": "Wipfellauf",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wandkrabbler",
+      "trapping": "Klettern (Tier-Empathie)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wiederauferstehung",
+      "trapping": "Wiederbelebung (Auferweckung)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wiederauferstehung",
+      "trapping": "Regeneratio",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wiederauferstehung",
+      "trapping": "Immortalis Lebenszeit",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wiederauferstehung",
+      "trapping": "Infinitum Immerdar",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wiederauferstehung",
+      "trapping": "Gefäß der Jahre",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wiederauferstehung",
+      "trapping": "Manus Miracula",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wunsch",
+      "trapping": "Wunsch",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wunsch",
+      "trapping": "Herzlichen Wunsch (Traum)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Wunsch",
+      "trapping": "Wunsch (höchste Magie)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Zeitstopp",
+      "trapping": "Tempus Stasis",
+      "nach": "Zeitstopp",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 39,
+      "von": "Zeitstopp",
+      "trapping": "Stillstand",
+      "nach": "Betäuben",
+      "status": "move"
+    },
+    {
+      "batch": 39,
+      "von": "Zeitstopp",
+      "trapping": "Chrononautos",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Zeitstopp",
+      "trapping": "Zeitstopp",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Zombie",
+      "trapping": "Skelettarius",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Zombie",
+      "trapping": "Untotenerhebung",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Zombie",
+      "trapping": "Untote erschaffen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 39,
+      "von": "Zombie",
+      "trapping": "Zombie-Erschaffung",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Zwiesprache",
+      "trapping": "Göttliche Verständigung",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Zwiesprache",
+      "trapping": "Wundersame Verständigung",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Zwiesprache",
+      "trapping": "Seidenzunge",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Zwiesprache",
+      "trapping": "Telepathie",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Zwiesprache",
+      "trapping": "Tiergedanken",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Zwiesprache",
+      "trapping": "Tiersprache",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Monster Beschwören",
+      "trapping": "Elementarer Diener",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Monster Beschwören",
+      "trapping": "Dschinnenruf",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Monster Beschwören",
+      "trapping": "Ruf der Feenwesen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Monster Beschwören",
+      "trapping": "Standhafter Wächter",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Monster Beschwören",
+      "trapping": "Skelettarius",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Monster Beschwören",
+      "trapping": "Erschaffung von Nachtkindern",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Mystisches Eingreifen",
+      "trapping": "Göttliches Zeichen",
+      "nach": "Mystisches Eingreifen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 40,
+      "von": "Mystisches Eingreifen",
+      "trapping": "Wunder (göttlicher Eingriff)",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 40,
+      "von": "Mystisches Eingreifen",
+      "trapping": "Mystisches Eingreifen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Heilsegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Kleiner Heilsegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Schutzsegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Kleiner Schutzsegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Feuersegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Eidsegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Geburtssegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Glückssegen",
+      "nach": "Segen",
+      "status": "bestaetigt"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Grabsegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Harmoniesegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Speisesegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Stärkungssegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Tranksegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Segen",
+      "trapping": "Weisheitssegen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Nekropathia",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Totes handle",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Skelettarius",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Untotenerhebung",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Untote erschaffen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Tairachs Erhebung",
+      "nach": "Untoten Beschwören",
+      "status": "move"
+    },
+    {
+      "batch": 41,
+      "von": "Untoten Beschwören",
+      "trapping": "Erschaffung von Nachtkindern",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Verriegeln/Entriegeln",
+      "trapping": "Foramen",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Verriegeln/Entriegeln",
+      "trapping": "Invinculo",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Verriegeln/Entriegeln",
+      "trapping": "Invercano (umgekehrt)",
+      "nach": "Aufheben",
+      "status": "move"
+    },
+    {
+      "batch": 41,
+      "von": "Verriegeln/Entriegeln",
+      "trapping": "Verriegeln/Entriegeln",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Zuflucht",
+      "trapping": "Ort der Ruhe",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Zuflucht",
+      "trapping": "Bannzone",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Zuflucht",
+      "trapping": "Heiliger Boden",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 41,
+      "von": "Zuflucht",
+      "trapping": "Traumrefugium",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 42,
+      "von": "Heilung",
+      "trapping": "Häutung",
+      "nach": "Gestaltwandeln",
+      "status": "move"
+    },
+    {
+      "batch": 42,
+      "von": "Heilung",
+      "trapping": "Heilung von Seelenkranken",
+      "nach": "Linderung",
+      "status": "move"
+    },
+    {
+      "batch": 42,
+      "von": "Heilung",
+      "trapping": "Helfende Hand",
+      "nach": "Empathie",
+      "status": "move"
+    },
+    {
+      "batch": 42,
+      "von": "Barriere",
+      "trapping": "Nebwand",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 42,
+      "von": "Betäuben",
+      "trapping": "Herzschlag ruhe",
+      "nach": "Fluch",
+      "status": "move"
+    },
+    {
+      "batch": 42,
+      "von": "Betäuben",
+      "trapping": "Schlummer",
+      "nach": null,
+      "status": "loeschen"
+    },
+    {
+      "batch": 42,
+      "von": "Betäuben",
+      "trapping": "Seelenbannung",
+      "nach": "Mystisches Eingreifen",
+      "status": "move"
+    },
+    {
+      "batch": 42,
+      "von": "Kriegersegen",
+      "trapping": "Blutrausch (göttlich)",
+      "nach": "Kriegersegen",
+      "status": "bestaetigt"
+    }
+  ]
+}

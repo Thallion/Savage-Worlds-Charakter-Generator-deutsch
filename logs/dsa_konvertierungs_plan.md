@@ -1,4 +1,4 @@
-# Plan: Savage Aventurien — Konvertierung zu DSA (Das Schwarze Auge)
+ # Plan: Savage Aventurien — Konvertierung zu DSA (Das Schwarze Auge)
 
 **Stand:** 2026-06-02
 **Quell-Setting:** `settings/Savage Aventurien.json` (Kombination aus Savage Pathfinder + Fantasy Kompendium)
