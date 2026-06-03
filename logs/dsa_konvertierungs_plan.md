@@ -1,6 +1,6 @@
  # Plan: Savage Aventurien — Konvertierung zu DSA (Das Schwarze Auge)
 
-**Stand:** 2026-06-02
+**Stand:** 2026-06-03
 **Quell-Setting:** `settings/Savage Aventurien.json` (Kombination aus Savage Pathfinder + Fantasy Kompendium)
 **Ziel-Setting:** Repräsentation von "Das Schwarze Auge 5" als SW-Setting
 **Strategie:** Convert the Setting, not the Rules — SW-Kern behalten, DSA-Flair über Völker, Mächte (mit Trappings) und Settingregeln
@@ -1186,6 +1186,111 @@ Diese Talente passen nicht in die Aventurien-Welt:
 
 ---
 
+## 8.5 Wildes Aventurien — DSA-Talente & Handicaps (Fan-Konversion)
+
+**Stand:** 2026-06-03 — ✅ implementiert
+**Quellen:** `Texte/Wildes-Aventurien-V2.3.pdf` (50 S.) + `Texte/Wildes_Aventurien.pdf` (Ver. 3.0, 20 S.)
+**Skript:** `scripts/dsa_add_wildes_aventurien.py` (idempotent)
+**Backup:** `backup/settings/Savage Aventurien_vor_wildes_aventurien_20260603.json`
+**Abgleich-Doku:** `logs/wildes_aventurien_abgleich.md`
+
+Durch das integrierte Fantasy Kompendium ist vieles bereits abgedeckt. Übernommen wurden nur die **DSA-spezifischen** Elemente ohne FK-Äquivalent.
+
+### 8.5.1 Neue Talente (16 hinzugefügt)
+
+| Talent | Kategorie | Rang | Quelle |
+|--------|-----------|:----:|--------|
+| Kraftlinienmagie | Magier | H | DSA-Kernkonzept (Ley-Linien) |
+| Kugelzauber | Magier | A | Kristallkugel |
+| Mirakel | Kleriker | A | Geweihten-Bennie |
+| Magischer Alltag | Macht | A | ≈ Prestidigitation |
+| Knochenkeule | Schamane | F | Schamanen-Fokuswaffe |
+| Elfenlieder | Macht | A | Elfen-Magie (DSA: AH Fey) |
+| Hexenflüche | Hexe | A | Hexen-Fluchmechanik |
+| Dolch des Druiden | Druide | A | Vulkanglasdolch |
+| Bindung des Stabes | Magier | A | Stab-Baum (Ver. 3.0) |
+| Fokus des Stabes | Magier | F | Stab-Baum, benötigt Bindung |
+| Flammenschwert | Magier | V | Stab-Baum, benötigt Fokus |
+| Zauberspeicher | Magier | V | MP-Speicher im Stab |
+| Kraftfokus | Magier | V | W8 Wild Die mit Stab |
+| Eisenaffine Aura | Hintergrund | A | „Bann des Eisens" |
+| Schelm | Hintergrund | A | Kobold-erzogener Trickster |
+| Prophezeien | Experte | A | ≈ Macht Weissagung |
+
+### 8.5.2 Neue Handicaps (6 Einträge / 4 Konzepte)
+
+| Handicap (Key) | Stufe | Punkte |
+|----------------|-------|:------:|
+| Artefaktgebunden_leicht | leicht | 1 |
+| Novize_leicht / Novize_schwer | leicht/schwer | 1 / 2 |
+| Stigma_leicht / Stigma_schwer | leicht/schwer | 1 / 2 |
+| Laestige_Mindergeister_leicht | leicht | 1 |
+
+### 8.5.3 Bewusst NICHT übernommen (bereits durch FK abgedeckt)
+
+| PDF-Element | FK-Äquivalent |
+|-------------|---------------|
+| Vertrauter | `Vertrauter` ✅ |
+| Alchemist / Meisteralchemist | identisch ✅ |
+| Beschwörer | `AH (Beschwörer)` ✅ |
+| Artefaktbauer | `Artefakterschaffer` + `Meisterlicher Artefakterschaffer` ✅ |
+
+### 8.5.4 Offene Punkte / Review-Notizen
+
+- **Prophezeien** verweist mechanisch auf die Macht **Weissagung**, die im Setting (noch) fehlt → ggf. in Phase 6.2 als neue Macht ergänzen, oder Beschreibung bleibt selbsterklärend.
+- **Elfenlieder** nutzt DSA-Voraussetzung „AH (Fey)", die es im Setting nicht gibt → ersetzt durch `Zaubern W6` + „Elf oder Halbelf".
+- **Artefaktgebunden**: Wert −4 (Ver. 3.0) statt −6 (V2.3) übernommen.
+- Die PDF nennt zwei **gestrichene SW-Talente** (`Analphabet`, `Elan`) — noch nicht aus dem Setting entfernt (Status 3, optional in einer späteren Phase).
+- ⚠️ **Review (Phase 9.R):** Balancing & Voraussetzungs-Ketten gegen FK gegenprüfen.
+
+---
+
+## 8.6 DSA-Regelwiki „Nachteile" — Lücken-Abgleich
+
+**Stand:** 2026-06-03 — ✅ implementiert
+**Quelle:** https://dsa.ulisses-regelwiki.de/nachteilauswahl.html (81 Nachteile)
+**Skript:** `scripts/dsa_add_nachteile_wiki.py` (idempotent)
+**Backup:** `backup/settings/Savage Aventurien_vor_nachteile_wiki_20260603.json`
+**Abgleich-Doku:** `logs/dsa_nachteile_abgleich.md`
+
+Inhaltlicher Abgleich aller 81 Wiki-Nachteile gegen die bestehenden Handicaps. Ergebnis:
+
+### 8.6.1 Neu ergänzt (8)
+
+| Handicap | Stufe | DSA-Vorlage |
+|----------|:-----:|-------------|
+| Hitzeempfindlich | leicht | Hitzeempfindlich I-II |
+| Kälteempfindlich | leicht | Kälteempfindlich / Kältestarre |
+| Farbenblind | leicht | Farbenblind |
+| Schlafwandler | leicht | Schlafwandler |
+| Giftanfällig | leicht | Giftanfällig I-II |
+| Unverträglichkeit gegenüber Alkohol | leicht | Unverträglichkeit gegenüber Alkohol |
+| Strenger Körpergeruch | leicht | konsolidiert Ork-/Raubtier-/Jagdwildgeruch |
+| Empfindlichkeit gegen Eisen | leicht | Empfindlichkeit (unedle Metalle) |
+
+### 8.6.2 Bereits abgedeckt (Beispiele)
+
+`Niedrige Zähigkeit` → `Verringerte Vitalität` · `Niedrige Seelenkraft` → `Selbstzweifel` ·
+`Nachtblind` → `Gewöhnliche Sicht` · `Instabiler Zauberer`/`Wilde Magie` → `Magischer Tollpatsch` ·
+`Gläsern` → `Zerbrechlich` · `Taub` → `Schwerhörig` · `Behäbig` → `Langsam`. Vollständige
+Tabelle in der Abgleich-Doku.
+
+### 8.6.3 Bewusst NICHT übernommen
+
+- **DSA-Ressourcen-Mechanik** (kein SW-Pendant): Niedrige Astral-/Karmalkraft, Schwache
+  Zaubermelodien/-tänze, Limbus-Medium, Wenige Predigten/Visionen, Schlechte Regeneration,
+  Kein Vertrauter, Keine Flugsalbe, Wahrer Name, …
+- **Zu generisch / Namens-Mechanik:** Unfähig, Lernfaul, Verweichlicht, Böser Namensvetter,
+  Lächerlicher Name, Schurkenname, Unpassender Name.
+
+### 8.6.4 Offene Folge-Aufgabe
+
+- ⚠️ **Phase 4 (Völker):** `Hitzeempfindlich`/`Kälteempfindlich`/`Strenger Körpergeruch`/
+  `Empfindlichkeit gegen Eisen` bei den passenden Völkern (Achaz, Ork, Waldmensch, Elf)
+  als Volks-Handicap hinterlegen.
+
+---
+
 ## 9. Ausrüstung (449 Items)
 
 ### 9.1 Status 1 (beibehalten)
@@ -1306,14 +1411,20 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 | 4 | `voelker` (10 anpassen + 2 neu) | 60 min | ⬜ offen |
 | 5 | `voelker_selected` auf 12 DSA-Spezies | 5 min | ⬜ offen (abh. von 4) |
 | 6.1 | `maechte`: bestehende 73 um `dsa_trappings` erweitert | 30 min | ✅ 2026-06-02 |
+| 6.1.1 | `maechte`: DSA-Zauber als Trappings in der Machtbeschreibung angezeigt | 30 min | ✅ 2026-06-03 |
 | 6.2 | `maechte`: neue Mächte (genehmigte Auswahl) | 60 min | ⏳ auf User-Genehmigung (siehe `logs/dsa_neue_maechte_diskussion.md`) |
 | 6.3 | `maechte`: Duplikate + Status 3 (`Chaos`, `Bindender Ruf`) | 5 min | ⬜ offen |
+| 6.R | **Review: Mächte-Trappings QA** — inhaltliche Prüfung aller 759 Trappings | 60 min | ⬜ offen |
 | 7 | `talente`: Status 3 löschen (~20-30), Status 4 ergänzen (~20) | 180 min | ⬜ offen |
 | 8 | `handicaps`: Status 4 ergänzen (~15), Status 3 löschen (~5) | 90 min | ⬜ offen |
+| 8.5 | **Wildes Aventurien: DSA-Talente + Handicaps** (16 Talente, 6 Handicaps) | 60 min | ✅ 2026-06-03 |
+| 8.6 | **DSA-Regelwiki Nachteile: Lücken-Abgleich** (8 Handicaps ergänzt) | 45 min | ✅ 2026-06-03 |
 | 9 | `ausruestung`: Preise in D/S/H/K, DSA-Items ergänzen (~20-30) | 120 min | ⬜ offen |
+| 9.R | **Review: Inhalte komplett** — Völker, Talente, Handicaps, Ausrüstung prüfen | 60 min | ⬜ offen |
 | 10 | `settingregeln`: 24 Regeln anpassen/aktivieren | 60 min | ⬜ offen |
 | 11 | Validierung: Charakter-Generierung testen | 60 min | ⬜ offen |
 | 12 | Test-Archetypen: Mittelländer Magier, Thorwaler Krieger, Zwergischer Schmied, Elfen-Beschwörer | 120 min | ⬜ offen |
+| 13 | **Final Review: Gesamtabnahme** — Setting, Code, Tests, PDF-Export | 60 min | ⬜ offen |
 
 **Gesamt-Aufwand:** ca. 14-18 Stunden
 
@@ -1363,13 +1474,14 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 
 ## 16. Fortschritts-Tracking (Phase 6: Mächte)
 
-**Stand:** 2026-06-02 — Phase 6.1 abgeschlossen, Phase 6.2 wartet auf User-Genehmigung
+**Stand:** 2026-06-03 — Phase 6.1 + 6.1.1 abgeschlossen, Phase 6.2 wartet auf User-Genehmigung
 
 ### 16.1 Erledigte Schritte
 
 - [x] **Sektion 4.5: Vollständige DSA → SW-Macht Zuordnungs-Liste erstellt** (686 DSA-Einträge)
 - [x] **Phase 1: Bugfix `riesige_feinde,`** — Duplikat entfernt, 24 Settingregeln übrig
 - [x] **Phase 6.1: Bestehende 73 SW-Mächte um `dsa_trappings` erweitert** (70/73 erweitert, 2 ohne Mapping, 1 Duplikat)
+- [x] **Phase 6.1.1: DSA-Zauber als Trappings in der Machtbeschreibung** — Trapping-Namen werden in der UI-Beschreibung jeder Macht angezeigt ✅ 2026-06-03
 - [x] **Backup des Originals erstellt:** `backup/settings/Savage Aventurien_original_20260602.json`
 - [x] **Konvertierungs-Skript erstellt:** `scripts/dsa_add_trappings.py`
 - [x] **Log-Datei erstellt:** `logs/dsa_konvertierung_20260602_125934.log`
@@ -1508,7 +1620,9 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 | 4 | `voelker` (10 anpassen + 2 neu) | ⬜ offen |
 | 5 | `voelker_selected` auf 12 DSA-Spezies | ⬜ offen (abh. von 4) |
 | **6.1** | **`maechte`: Bestehende 73 um `dsa_trappings` erweitern** | **✅ 2026-06-02** |
+| **6.1.1** | **DSA-Zauber als Trappings in der Machtbeschreibung** | **✅ 2026-06-03** |
 | **6.2** | **`maechte`: 40 neue Mächte anlegen** | **⏳ auf User-Genehmigung** |
+| **6.R** | **Review: Mächte-Trappings QA** | **⬜ offen** |
 | 7 | `talente` | ⬜ offen |
 | 8 | `handicaps` | ⬜ offen |
 | 9 | `ausruestung` | ⬜ offen |
@@ -1528,7 +1642,7 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 - [ ] Die 2 übersprungenen Mächte prüfen:
   - `Objekt auslesen` — kein DSA-Mapping gefunden, evtl. zu löschen (Status 3)
   - `Schlummer` — entspricht `Kusch` (Zauber) / `Schlaf` (Liturgie), kann zu `Lähmung` konsolidiert werden
-- [ ] UI-Anpassung: Anzeige der `dsa_trappings` in der Mächte-Ansicht
+- [x] **UI-Anpassung: DSA-Zauber als Trappings in der Machtbeschreibung** ✅ 2026-06-03
 - [ ] Filter-Funktion: "Zeige nur Mächte mit DSA-Trappings"
 - [ ] Doppelten Key `Gegenstand Beschwören` (capital B) auflösen
 - [ ] Zu löschende Mächte entfernen (Phase 6.3): `Chaos`, `Bindender Ruf`, ggf. `Objekt auslesen`, `Schlummer`
