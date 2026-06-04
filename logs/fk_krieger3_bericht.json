@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Bronzebrustpanzerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 143,
       "kostenart": "Vermögen",
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Bronzehelmx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Mittlerer Schildx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Söldnerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Bolzen (10)x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -471,7 +471,7 @@
     },
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -508,7 +508,7 @@
     },
     {
       "aktion": "kaufen(Bronzebrustpanzerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 143,
       "kostenart": "Vermögen",
       "punkte": {
@@ -521,7 +521,7 @@
     },
     {
       "aktion": "kaufen(Bronzehelmx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -534,7 +534,7 @@
     },
     {
       "aktion": "kaufen(Mittlerer Schildx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -547,7 +547,7 @@
     },
     {
       "aktion": "kaufen(Söldnerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -560,7 +560,7 @@
     },
     {
       "aktion": "kaufen(Bolzen (10)x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -573,7 +573,7 @@
     },
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

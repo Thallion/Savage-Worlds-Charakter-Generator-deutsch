@@ -341,7 +341,7 @@
     },
     {
       "aktion": "kaufen(Plattenbrustharnischx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 375,
       "kostenart": "Vermögen",
       "punkte": {
@@ -354,7 +354,7 @@
     },
     {
       "aktion": "kaufen(Mittlerer Schildx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -367,7 +367,7 @@
     },
     {
       "aktion": "kaufen(Abenteurerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -380,7 +380,7 @@
     },
     {
       "aktion": "kaufen(Bolzen (10)x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -426,7 +426,7 @@
     },
     {
       "aktion": "kaufen(Plattenbrustharnischx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 375,
       "kostenart": "Vermögen",
       "punkte": {
@@ -439,7 +439,7 @@
     },
     {
       "aktion": "kaufen(Mittlerer Schildx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -452,7 +452,7 @@
     },
     {
       "aktion": "kaufen(Abenteurerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -465,7 +465,7 @@
     },
     {
       "aktion": "kaufen(Bolzen (10)x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

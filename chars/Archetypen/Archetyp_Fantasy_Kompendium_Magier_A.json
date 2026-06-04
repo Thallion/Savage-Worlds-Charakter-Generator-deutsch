@@ -610,6 +610,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Beschleunigung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -680,7 +685,8 @@
         "Dolch",
         "Magierpaket",
         "Umhang mit Kapuze",
-        "Trank: Heilung"
+        "Trank: Heilung",
+        "Trank: Beschleunigung"
     ],
     "selected_waffen": [
         "Dolch"
@@ -694,14 +700,14 @@
         "Dolch": 1,
         "Magierpaket": 1,
         "Umhang mit Kapuze": 1,
-        "Trank: Heilung": 1
+        "Trank: Heilung": 1,
+        "Trank: Beschleunigung": 1
     },
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 17,
-    "verbleibende_aufstiege": 2,
-    "aufstiege_gesamt": 4,
     "verfuegbare_maechte": 1,
     "anzahl_maechte": 10,
     "machtpunkte": 15,
@@ -709,11 +715,11 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 212.75,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 0,
+    "verbleibende_handicap_punkte": 4,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -874,14 +880,14 @@
             {
                 "typ": "talent",
                 "name": "Zauberbücher",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             },
             {
                 "typ": "talent",
                 "name": "Erbstück",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             },
             {
                 "typ": "talent",

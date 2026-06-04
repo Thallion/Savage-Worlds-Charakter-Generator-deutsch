@@ -379,36 +379,36 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
+      "aktion": "kaufen(Körperpanzerung +4x1)",
       "ok": true,
-      "kosten": 500,
+      "kosten": 200,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
+      "vermoegen": 300,
+      "warnung": null
     },
     {
-      "aktion": "kaufen(Molekularmesserx1) FORCE",
+      "aktion": "kaufen(Molekularmesserx1)",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 250,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularmesser zum Preis 0 gekauft"
+      "vermoegen": 50,
+      "warnung": null
     },
     {
       "aktion": "kaufen(Laserpistolex1) FORCE",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 50,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -444,7 +444,7 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -454,7 +454,20 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Biolinkx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Biolink zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Commander_A.json)",
@@ -463,36 +476,10 @@
   ],
   "anomalien": [
     {
-      "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": true,
-      "kosten": 500,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Molekularmesserx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Molekularmesser zum Preis 0 gekauft"
-    },
-    {
       "aktion": "kaufen(Laserpistolex1) FORCE",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 50,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -528,7 +515,7 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -538,19 +525,32 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills Reparieren/Schießen (12pt Budget)",
+      "aktion": "kaufen(Biolinkx1) FORCE",
       "ok": true,
-      "warnung": "MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills Reparieren/Schießen (12pt Budget)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Biolink zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: Skills Reparieren/Schießen (12pt Budget)",
+      "ok": true,
+      "warnung": "Skills Reparieren/Schießen (12pt Budget)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 7,
+  "anomalien_anzahl": 6,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

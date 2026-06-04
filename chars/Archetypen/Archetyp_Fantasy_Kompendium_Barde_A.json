@@ -578,6 +578,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -644,7 +649,8 @@
         "Umhang mit Kapuze",
         "Laterne",
         "Rauchstab",
-        "Trank: Attributsteigerung"
+        "Trank: Attributsteigerung",
+        "Trank: Heilung"
     ],
     "selected_waffen": [
         "Rapier"
@@ -655,21 +661,21 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Rapier": 1,
-        "Ledertunika": 1,
-        "Musikinstrument": 1,
-        "Unterhalterpaket": 1,
-        "Umhang mit Kapuze": 1,
-        "Laterne": 1,
-        "Rauchstab": 1,
-        "Trank: Attributsteigerung": 1
+        "Rapier": 2,
+        "Ledertunika": 2,
+        "Musikinstrument": 2,
+        "Unterhalterpaket": 2,
+        "Umhang mit Kapuze": 2,
+        "Laterne": 2,
+        "Rauchstab": 2,
+        "Trank: Attributsteigerung": 2,
+        "Trank: Heilung": 2
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 5,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
     "machtpunkte": 10,

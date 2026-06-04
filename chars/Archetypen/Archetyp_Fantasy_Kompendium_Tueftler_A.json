@@ -592,6 +592,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -660,7 +665,8 @@
         "Fallenherstellungsset",
         "Rauchstab",
         "Verstrickungsbeutel",
-        "Donnerstein"
+        "Donnerstein",
+        "Trank: Heilung"
     ],
     "selected_waffen": [
         "Dolch"
@@ -677,14 +683,14 @@
         "Fallenherstellungsset": 1,
         "Rauchstab": 1,
         "Verstrickungsbeutel": 1,
-        "Donnerstein": 1
+        "Donnerstein": 1,
+        "Trank: Heilung": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 4,
     "machtpunkte": 20,

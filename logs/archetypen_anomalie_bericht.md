@@ -1689,3 +1689,171 @@ Die 24 in `logs/sfc_extracted/*.txt` (manuell extrahiert) wurden bereits per
 4. **Doppelt extrahierte Bögen**: `SciFi Kompendium Archetypen.pdf` und
    `Texte/SciFi Kompendium Archetypen.txt` enthalten die gleichen 12 Bögen — Doppelarbeit.
 
+
+---
+
+# SOLL/IST-Ausrüstung — Re-Verifikation 2026-06-04
+
+**Quelle:** `logs/pdf_extracted/*.txt` (PDF-extrahiert) + gespeicherte Builds in
+`chars/Archetypen/*.json` (IST). Auswertung über `logs/soll_ist_ausruestung.py`
+(IST gegen Bogen) und `logs/check_pdf_gear.py` (Bogen gegen Katalog).
+pdftoppm/visuelle Extraktion war für diese Auswertung **nicht nötig** — die Textextraktion
+reicht für den Ausrüstungsabgleich; sie bleibt nur für die spaltigen SciFi-/Horror-Companion-
+Bögen empfehlenswert (siehe unten, Layout-Bugs).
+
+## Tooling-Verbesserungen (dieser Lauf)
+
+- **Soft-Hyphen-/Silbentrennungs-Bereinigung** (`­\s*` → ``) in `check_pdf_gear.py` und
+  `soll_ist_ausruestung.py`. Damit verschmelzen die früheren Wort-Wrap-Dubletten
+  (`Abenteu­ rerausrüstung`, `Perga­ ment`, `Weihwas­ ser`, `Zauberkomponen­ tentasche`) zu
+  je einem Item. → behebt Verbesserungsvorschlag #3 oben.
+- **Normalisierung in `soll_ist_ausruestung.py`** (`normalize_item` + `resolve_item`):
+  Stat-Klammern `(…)`, Mengen-Präfixe (`×3`, `20 `) und Qualitäts-/Material-Präfixe
+  (`masterwork`, `mithral`, `light/heavy/…`) werden vor dem Katalog-/Alias-Match abgeschnitten.
+  Dadurch lösen generische Bogen-Items mit Stat-Block korrekt auf
+  (`Masterwork great axe (Str+d10…)` → Katalog `Streitaxt`).
+- **Strenger Rausch-Filter** (`strict_noise=True`) in `check_pdf_gear.split_gear_items`:
+  verwirft Stat-Block-Fragmente (Würfel `d6`/`W8`, vermischte Spalten mit
+  `ATTRIBUTES/SKILLS/Fighting/…`, Prosa > 45 Zeichen). → PDF-Funde 144 → 84.
+
+## Differenzierung (wie angefragt)
+
+### Kategorie 1 — im Katalog vorhanden, aber im Build NICHT gekauft (`FEHLT_OFFEN`)
+Diese Items können Build-Skripte direkt per `s.kaufen(name)` ergänzen — **keine** Katalog-
+Erweiterung nötig. Quelle: `logs/soll_ist_ausruestung.md`.
+
+| Setting | Anzahl | Items (im Katalog, kaufbar) |
+|---|---|---|
+| Fantasy Kompendium | 11 | Armbrust (Leichte Repetier-), Bandolier, Dolch, Heiliges Wasser, Ledertunika, Mittlerer Schild, Pike, Rauchstab, Streitaxt, Streitkolben (leicht), Trank: Beschleunigung |
+| SciFi Kompendium | 9 | Axt, Zweihandaxt, Biolink, Commlink, Klebstoffpflaster, Körperpanzerung +4, Molekularschwert, Persönliche Datenassistenz, Pistole, Tarnanzug |
+
+> Hinweis: Pro Charakter aufgeschlüsselt in `logs/soll_ist_ausruestung.md`. Mehrere dieser
+> „offenen" Treffer entstehen, weil ein Bogen ein generisches Item nennt (`Body armor (+4…)`,
+> `personal data device`, `biolink`), das der jeweilige Build noch nicht eingekauft hat,
+> obwohl der Katalog den Key kennt.
+
+### Kategorie 2 — im Archetyp vorgesehen, aber NICHT im Katalog (`FEHLT_KATALOG`)
+Echte Katalog-Lücken → User-Freigabe + Setting-Erweiterung erforderlich. Quellen:
+`logs/soll_ist_ausruestung.md` (IST-Sicht) und `logs/fehlende_ausruestung_pdf.md` /
+`logs/fehlende_ausruestung_uebersicht.md` (Katalog-Sicht).
+
+**Fantasy Kompendium (81 distinkte Lücken)** — dominiert von Verbrauchsgütern/Magie, die als
+eigene Items im FK-Katalog fehlen und in den Builds bereits als „🔧 FEHLENDE AUSRÜSTUNG"
+notiert sind:
+- **Tränke:** Heilung, Vergrößerung, Wandkrabbler, Unsichtbarkeit, Umgebungsschutz,
+  Hast, Nachtsicht, Attributsteigerung, MP-Aufladen
+- **Schriftrollen:** Unsichtbarkeit, Schutz, Arkaner Schutz, Verbündeten beschwören,
+  Teleport, Gedankenverbindung, Attributsteigerung
+- **Pakete:** Abenteurer-, Dieb-, Magier-, Kleriker-, Unterhalter-, Söldner-,
+  Gewölbeforscher-, Alchemisten-Paket
+- **Rüstung/Spezial:** beschlagene Lederrüstung, Hauttunika, Schuppenhemd, natürliche
+  Rüstung, Plattenrüstung-Varianten, geschlossener schwerer Helm, gesperrte Handschuhe
+- **Sonstiges:** Tasche des Fassens, Sonnenstab, Donnerstein, Antitoxin, Säureflakon,
+  Alchemistenfeuer, Krähenfüße-Beutel, Rauchstab(-Variante), Hexenbeutel, Grabstaub, Gifte
+  (Schlangengift, Assassinengebräu, Äther, Lotusstaub, Grünschleimextrakt)
+
+**SciFi Kompendium (26 distinkte Lücken):** language translator (Universalübersetzer existiert,
+aber der Bogen-Zusatz fehlt), alter wear, line projector, cutting torch (Schneidbrenner),
+rebreather, electronic lockpick, stun baton/grenade, slugthrower (leichte Schusswaffe),
+switchblade, toolkit-/welding-goggles, kevlar jacket, commercial drone, muscle weave,
+automatic shotgun, cybernetic implants (adrenal surge / replacement arm). → deckt sich mit
+Phase-C-Restliste (7 bleiben offen) + den Schreibvarianten aus Phase A.
+
+**Savage Pathfinder (42, PDF-Sicht):** Abenteuerausrüstung, Heilerausrüstung, Klerikergewand,
+silbernes Weihesymbol, Beutel mit Zauberkomponenten, Zauberkomponententasche, Entdeckeroutfit,
+Feuer des Alchemisten, Flöte, Ring der Energieresistenz (Kälte), Ring: Schwacher Schutz,
+Robe der Verschmelzung, Robe mit nützlichen Gegenständen, Widderring, 20 Pfeile/Bolzen/Steine.
+
+**Superkräfte (29, PDF-Sicht):** überwiegend Waffen mit vollem Stat-Block
+(Pulse Rifle/SMG/Pistol, Valkyrie sword, War club/spear, divine long sword, rune pistols,
+luchadore mask, parka, rocket/grappling gun) — teils echte Lücken, teils Stat-Block-Reste.
+
+## Bekannte Grenzen dieser Auswertung (ehrlich)
+
+1. **`soll_ist_ausruestung.py` deckt IST-seitig nur Fantasy Kompendium + SciFi Kompendium ab**
+   (die Settings, deren Bogen-Parser auf die Char-Namen matcht). Für Savage Pathfinder,
+   Deadlands, Superkräfte, Horror existiert die Kategorie-1-Sicht (im Katalog, nicht gekauft)
+   **noch nicht** automatisiert — dort liegt nur die Kategorie-2-Sicht (PDF→Katalog) vor.
+2. **Cross-Language-Restrauschen:** FK-/Supers-Bögen sind englisch, die Builds kaufen deutsche
+   Items. Trotz Normalisierung + Alias-Map bleiben Einzelfälle als `FEHLT_KATALOG` stehen,
+   obwohl der Char eine deutsche Entsprechung besitzt (z.B. `laser pistol with weapon lock`
+   = `Laserpistole` + `Waffensperre` getrennt gekauft). Solche Fälle erscheinen zusätzlich
+   in der `⚠ ZUVIEL`-Spalte derselben Zeile.
+3. **SciFi/Horror Companion (englische Karten-PDFs)**: 4-/2-spaltiges Layout → `pdftotext`
+   vermischt Spalten. `Science_Fiction_Companion_Archetypes_(SWADE)` liefert weiterhin
+   „Keine GEAR-Sektion". Für eine saubere Kategorie-2-Liste dieser Bögen ist **pdftoppm +
+   visuelle/OCR-Extraktion** der empfohlene Weg (vgl. `sfc_extracted/*.txt`, 0 Lücken).
+
+## Fazit
+
+Nach den Build-Korrekturen ist der **größte Teil der SOLL-Ausrüstung im IST gedeckt** bzw. als
+deutsche Entsprechung gekauft. Verbleibend:
+- **Kategorie 1 (sofort im Build behebbar):** 20 Items (FK 11, SciFi 9) — kein Freigabe-Bedarf.
+- **Kategorie 2 (echte Katalog-Lücken, Freigabe nötig):** v.a. FK-Tränke/Schriftrollen/Pakete
+  und SWPF-Magieitems; SciFi-Restliste deckt sich mit der dokumentierten Phase-C-Lücke.
+
+## Umsetzung Kategorie 1 — ✅ ERLEDIGT 2026-06-04
+
+Von den 20 „Kategorie-1"-Treffern waren **7 Matcher-Artefakte** (gieriges Substring-/Alias-
+Matching): Der Katalog enthält sowohl den korrekten Key, den der Char besitzt, als auch einen
+ähnlichen Falsch-Key. Diese wurden **nicht** eingebaut (User-Entscheidung 2026-06-04 „nur echte
+13"), da sie sonst Dubletten/Falsch-Items erzeugen:
+
+| Artefakt-Key | Char besitzt korrekt | Bogen-Item |
+|---|---|---|
+| Streitaxt | Zweihandaxt | great axe (Barbarin) |
+| Armbrust, Leichte Repetier- | Leichte Armbrust | light crossbow (Champion, Klerikerin, Krieger, Ritter, Verteidiger) |
+| Streitkolben, leicht | Keule, schwer | heavy mace (Champion) |
+| Rauchstab | Stab (3,5 m) | masterwork staff (Magier; `stab`-Substring) |
+| Pike | Stachelkette | spiked chain / armor spikes (Rüpel, Verteidiger) |
+| Molekularschwert | Molekularmesser | molecular knife (Commander, Spacer) |
+| Axt, Zweihandaxt | — (kein Item) | hand axe (Surveyor; Handbeil fehlt, siehe Kat. 2) |
+
+**Die echten 13 wurden umgesetzt:**
+
+- **SciFi (Build-Skript-Änderung, Ersatz-Item → korrekter Katalog-Key):**
+  `logs/build_scifi_batch1.py` + `build_scifi_batch2.py`
+  - `Taschencomputer` → `Persönliche Datenassistenz` (11 Chars)
+  - `Infanteriekampfanzug` → `Körperpanzerung +4` (8 Chars)
+  - `Komlink` → `Commlink` (Mercenary, Morpher, Spacer)
+  - `Klebeflicken` → `Klebstoffpflaster` (Spacer)
+  - `Plasmapistole` **ergänzt** bei Roughneck (Bogen „plasma pistol", fehlte im Kaufliste trotz
+    gegenteiliger Notiz)
+  - `Commlink`/`Tarnanzug`/`Biolink` waren bereits korrekt im Skript → nur Char war veraltet.
+- **Fantasy Kompendium (keine Skript-Änderung nötig):** Alle 6 echten Items (Dolch, Ledertunika,
+  Bandolier bei Alchemist; Mittlerer Schild bei Krieger/Paladin/Ritter; Trank: Beschleunigung bei
+  Magier/Waldläufer; Heiliges Wasser bei Paladin) standen **bereits** in den Build-Skripten —
+  die gespeicherten Chars waren nur **veraltet** (vor dem Hinzufügen gebaut).
+
+**Re-Build + Re-Verifikation:** `build_scifi_batch1/2` + `build_fk_batch1-4` + `build_fk_anomalie_fix`
+neu ausgeführt. Ergebnis `logs/soll_ist_ausruestung.py`: **FEHLT_OFFEN 50 → 14** — die
+verbleibenden 14 waren **exakt die 7 dokumentierten Artefakte** (pro Char). Echte Kategorie-1-Lücke
+= **0**. Kategorie 2 (echte Katalog-Lücken) unverändert offen.
+
+## Matcher-Nachschärfung — ✅ ERLEDIGT 2026-06-04
+
+Die 7 verbleibenden Artefakte stammten aus gierigem Substring-/Alias-Matching. Drei koordinierte
+Fixes eliminieren sie, sodass `FEHLT_OFFEN` jetzt **0** ist (deterministisch über 3 Läufe):
+
+1. **Wortgrenzen-Substring** (`wb_contains` in `check_pdf_gear.py`, genutzt von
+   `find_item_in_catalog`, `_inv_contains`, `_catalog_hits`): Ein Begriff matcht einen Katalog-/
+   Inventar-Key nur an einer **Wortgrenze** (Anfang oder nach einem Nicht-Buchstaben). Verhindert
+   deutsche Kompositum-Fehltreffer: `stab`∉`Rauchstab`, `pike`∉`spiked`, `handaxt`∉`Zweihandaxt`,
+   `hammer`∉`Meteorhammer`. Legitime Komposita laufen weiter über explizite Alias-Einträge
+   (`sword`→`langschwert`).
+2. **„Char-besessenen Key bevorzugen"** (`_catalog_hits` + Umbau `resolve_item` in
+   `soll_ist_ausruestung.py`): Statt den ERSTEN Katalog-Treffer zu nehmen, werden **alle**
+   gesammelt; besitzt der Char einen davon → IST. Behebt `great axe` → {Streitaxt, **Zweihandaxt**}
+   (Char hat Zweihandaxt) und `crossbow` → {…, **Leichte Armbrust**} (×5 Chars).
+3. **Alias-Korrekturen** (`ITEM_ALIASES` in `check_fehlende_ausruestung.py`):
+   `molecular knife` → `molekularmesser` (war fälschlich `molekularschwert`), `mace` um `keule`
+   ergänzt + `heavy/light mace`-Einträge, neu `spiked chain`→`stachelkette`,
+   `meteor hammer`→`meteorhammer`.
+
+**Wirkung:** Die 7 Artefakte werden jetzt korrekt klassifiziert — als **IST** wo der Char ein
+gültiges deutsches Äquivalent besitzt (Streitaxt→Zweihandaxt, Leichte Armbrust, Stab, Stachelkette,
+Molekularmesser, Meteorhammer, Keule schwer) bzw. als **KATALOG** wo wirklich kein Item existiert
+(`hand axe`→Handbeil fehlt, `armor spikes`, `spiked tower shield`). `FEHLT_OFFEN` **14 → 0**;
+`FEHLT_KATALOG` 165 → 169 (die 4 Zuwächse sind die nun korrekt als echte Lücke erkannten Items —
+keine legitimen Treffer gebrochen, von Stichproben bestätigt). PDF-Report `fehlende_ausruestung_pdf.md`
+84 → 87 Funde (gleicher Effekt: genauere Katalog-Lücken).

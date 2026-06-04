@@ -15,7 +15,7 @@ sys.path.insert(0, 'logs')
 from check_fehlende_ausruestung import (
     ITEM_ALIASES, load_settings,
 )
-from check_pdf_gear import split_gear_items, find_item_in_catalog
+from check_pdf_gear import split_gear_items, find_item_in_catalog, wb_contains
 
 
 # Bogen-Text → Setting
@@ -121,6 +121,110 @@ def parse_english_gear_clean(text_path):
     return archetypes
 
 
+# Qualitäts-/Material-Präfixe, die für einen generischen Katalog-Match abgeschnitten
+# werden (z.B. "Masterwork staff" → "staff" → Katalog "Stab").
+_STRIP_PREFIXES = (
+    'masterwork ', 'mithral ', 'enchanted ', 'magical ', 'magic ', 'fine ',
+    'light ', 'heavy ', 'medium ', 'superior ', 'masterful ', 'dark metal ',
+    'meisterhafte ', 'meisterhafter ', 'meisterhaftes ', 'verzauberte ',
+    'verzauberter ', 'verzaubertes ', 'magische ', 'magischer ', 'magisches ',
+)
+
+
+def normalize_item(raw):
+    """Reduziert ein Bogen-Item auf vergleichbare Kerne.
+
+    Liefert (voll_normalisiert, generischer_kern):
+    - entfernt Stat-Klammern '(...)' und Soft-Hyphen/Bindestrich-Umbrüche
+      (z.B. 'Abenteurer­ ausrüstung' → 'abenteurerausrüstung')
+    - entfernt Mengen-Präfixe (×3, 3x, '20 ')
+    - generischer Kern schneidet zusätzlich Qualitäts-/Material-Präfixe ab
+    """
+    s = re.sub('­\\s*', '', raw)           # Soft-Hyphen (+ folgender Whitespace)
+    s = re.sub(r'(\w)[‐-―-]\s+(\w)', r'\1\2', s)  # Bindestrich-Umbruch
+    s = re.sub(r'\([^)]*\)', '', s)             # Stat-Klammern
+    s = re.sub(r'^\s*[×x]?\s*\d+\s*[×x]?\s*', '', s)        # Mengen-Präfix
+    full = s.strip(' ,.').lower()
+    core = full
+    changed = True
+    while changed:
+        changed = False
+        for p in _STRIP_PREFIXES:
+            if core.startswith(p):
+                core = core[len(p):]
+                changed = True
+    return full, core.strip(' ,.')
+
+
+def _inv_contains(variant, char_inv_lower):
+    """Wortgrenzen-Match (beidseitig) eines Begriffs gegen das Inventar."""
+    if not variant or len(variant) < 3:
+        return False
+    for inv in char_inv_lower:
+        if variant == inv or wb_contains(variant, inv) or wb_contains(inv, variant):
+            return True
+    return False
+
+
+def _catalog_hits(variant, setting_keys):
+    """Alle Katalog-Keys, die zu 'variant' passen (exakt/Alias/Wortgrenzen-Substring).
+
+    Im Gegensatz zu find_item_in_catalog (gibt nur den ERSTEN Treffer zurück)
+    liefert dies ALLE Treffer — damit resolve_item denjenigen Key bevorzugen
+    kann, den der Char tatsächlich besitzt (z.B. `great axe` → {Streitaxt,
+    Zweihandaxt}; Char hat Zweihandaxt → IST statt OFFEN auf Streitaxt)."""
+    cands = [variant] + (ITEM_ALIASES.get(variant) or [])
+    hits = set()
+    for cand in cands:
+        cl = cand.lower()
+        for key in setting_keys:
+            kl = key.lower()
+            if cl == kl or wb_contains(cl, kl) or wb_contains(kl, cl):
+                hits.add(key)
+    return hits
+
+
+def resolve_item(raw, setting_keys, char_inv, char_inv_lower):
+    """Klassifiziert ein einzelnes Bogen-Item.
+
+    Rückgabe: ('IST'|'OFFEN'|'KATALOG', catalog_key_or_None)
+    - IST:     im Char-Inventar vorhanden (direkt, via Alias oder Katalog-Key)
+    - OFFEN:   im Katalog vorhanden, aber nicht gekauft
+    - KATALOG: weder im Inventar noch im Katalog
+
+    Bei mehreren möglichen Katalog-Keys wird der **vom Char besessene** bevorzugt
+    (verhindert Falsch-OFFEN, wenn der Char ein gültiges Äquivalent gekauft hat)."""
+    full, core = normalize_item(raw)
+    variants = [v for v in (full, core) if v]
+
+    # 1. Direkter IST-Match (normalisiert gegen Inventar)
+    for v in variants:
+        if _inv_contains(v, char_inv_lower):
+            return ('IST', None)
+
+    # 2. ALLE Katalog-Treffer sammeln; einen vom Char besessenen bevorzugen
+    offen_key = None
+    for v in variants:
+        hits = _catalog_hits(v, setting_keys)
+        owned = [k for k in hits
+                 if k in char_inv or _inv_contains(k.lower(), char_inv_lower)]
+        if owned:
+            return ('IST', sorted(owned)[0])
+        if hits and offen_key is None:
+            offen_key = sorted(hits)[0]
+
+    # 3. Alias-Begriffe direkt gegen Inventar (Katalog kennt den Key evtl. nicht
+    #    als eigenes Item, der Char hat aber eine deutsche Entsprechung gekauft)
+    for v in variants:
+        for de in ITEM_ALIASES.get(v, []) or []:
+            if _inv_contains(de.lower(), char_inv_lower):
+                return ('IST', de)
+
+    if offen_key:
+        return ('OFFEN', offen_key)
+    return ('KATALOG', None)
+
+
 def find_archetype_in_bogen(char_name, bogen_dict):
     if not bogen_dict or not char_name or char_name == '?':
         return None
@@ -215,19 +319,43 @@ def main():
                            if not re.match(r'^\$?\d+$', x.strip()) and
                            x.lower() not in ('none', 'keine', '—')}
             char_inv = set(c['all_inv'])
+            # Case-insensitive Char-Inventar (für SOLL/IST-Match)
+            char_inv_lower = {x.lower() for x in char_inv}
 
-            # Klassifiziere SOLL-Items
+            # Klassifiziere SOLL-Items (mit Normalisierung + Alias-Map EN→DE)
             offen = []   # im Katalog, nicht im Inventar
             fehlt_kat = []  # nicht im Katalog, nicht im Inventar
+            gedeckt = []  # IST (im Inventar vorhanden) → zählt für ZUVIEL-Filter
             for item in bogen_items:
-                if item in char_inv:
-                    continue
-                in_cat = find_item_in_catalog(item, setting_keys)
-                if in_cat:
-                    offen.append((item, in_cat))
+                status, key = resolve_item(item, setting_keys, char_inv, char_inv_lower)
+                if status == 'IST':
+                    gedeckt.append(item)
+                elif status == 'OFFEN':
+                    offen.append((item, key))
                 else:
                     fehlt_kat.append(item)
-            zuviel = char_inv - bogen_items
+            # ZUVIEL: Inventar-Items, die kein normalisiertes Bogen-Item abdeckt
+            bogen_norm = set()
+            for item in bogen_items:
+                f, ccore = normalize_item(item)
+                bogen_norm.update(v for v in (f, ccore) if v)
+            zuviel = set()
+            for inv in char_inv:
+                inv_l = inv.lower()
+                if any(v in inv_l or inv_l in v for v in bogen_norm if len(v) >= 3):
+                    continue
+                # via Alias-Map deutsche Entsprechung eines Bogen-Items?
+                covered = False
+                for item in bogen_items:
+                    f, ccore = normalize_item(item)
+                    for v in (f, ccore):
+                        for de in ITEM_ALIASES.get(v, []) or []:
+                            if de.lower() in inv_l or inv_l in de.lower():
+                                covered = True
+                                break
+                if covered:
+                    continue
+                zuviel.add(inv)
 
             if not offen and not fehlt_kat and not zuviel:
                 continue

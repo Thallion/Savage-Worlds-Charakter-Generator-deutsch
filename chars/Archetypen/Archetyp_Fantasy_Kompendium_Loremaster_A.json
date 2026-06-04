@@ -610,6 +610,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Schriftrolle: Unsichtbarkeit": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Teleportation": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Gedankenverbindung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -681,7 +701,11 @@
         "Buch",
         "Schriftrolle: Arkaner Schutz",
         "Schriftrolle: Verbündeten beschwören",
-        "Schriftrolle: Schutz"
+        "Schriftrolle: Schutz",
+        "Schriftrolle: Unsichtbarkeit",
+        "Schriftrolle: Teleportation",
+        "Schriftrolle: Gedankenverbindung",
+        "Schriftrolle: Eigenschaft erhöhen/senken"
     ],
     "selected_waffen": [
         "Dolch"
@@ -697,14 +721,17 @@
         "Buch": 1,
         "Schriftrolle: Arkaner Schutz": 1,
         "Schriftrolle: Verbündeten beschwören": 1,
-        "Schriftrolle: Schutz": 1
+        "Schriftrolle: Schutz": 1,
+        "Schriftrolle: Unsichtbarkeit": 1,
+        "Schriftrolle: Teleportation": 1,
+        "Schriftrolle: Gedankenverbindung": 1,
+        "Schriftrolle: Eigenschaft erhöhen/senken": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 6,
     "machtpunkte": 15,

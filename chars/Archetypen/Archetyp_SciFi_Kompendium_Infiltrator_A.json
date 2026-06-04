@@ -511,7 +511,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "ffb7daf9-247d-4b81-92b3-5ceb47e7f323": {
+            "7f4376eb-9aa4-437c-bc94-23f5b8491b9f": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -524,11 +524,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "ffb7daf9-247d-4b81-92b3-5ceb47e7f323",
+                "installations_id": "7f4376eb-9aa4-437c-bc94-23f5b8491b9f",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "745f076c-4f7d-44b9-89ce-15ab1a8b80c5": {
+            "f4a2a240-75cb-40ea-9798-168d9690bd15": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -541,13 +541,13 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "745f076c-4f7d-44b9-89ce-15ab1a8b80c5",
+                "installations_id": "f4a2a240-75cb-40ea-9798-168d9690bd15",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
         },
         "ausruestung": {
-            "Infanteriekampfanzug": {
+            "Körperpanzerung +4": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -557,12 +557,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Tarnkleidung": {
+            "Tarnanzug": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -645,10 +645,10 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Molekularschwert",
-        "Tarnkleidung",
-        "Taschencomputer",
+        "Tarnanzug",
+        "Persönliche Datenassistenz",
         "Universalübersetzer",
         "Cyberdeck",
         "Direktionales Mikrofon",
@@ -663,14 +663,15 @@
         "EMP-Granate"
     ],
     "selected_ruestungen": [
-        "Infanteriekampfanzug"
+        "Körperpanzerung +4",
+        "Tarnanzug"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Infanteriekampfanzug": 1,
+        "Körperpanzerung +4": 1,
         "Molekularschwert": 2,
-        "Tarnkleidung": 1,
-        "Taschencomputer": 1,
+        "Tarnanzug": 1,
+        "Persönliche Datenassistenz": 1,
         "Universalübersetzer": 1,
         "Cyberdeck": 1,
         "Direktionales Mikrofon": 1,

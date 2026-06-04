@@ -499,7 +499,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "c6bef9ab-e7b8-47dc-83b9-8134409e397a": {
+            "a3938009-23c0-4a39-b051-ef89bd060c5b": {
                 "name": "Cyberware: Adrenalindrüse",
                 "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
                 "unterkategorie": "Defensiv",
@@ -514,11 +514,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "c6bef9ab-e7b8-47dc-83b9-8134409e397a",
+                "installations_id": "a3938009-23c0-4a39-b051-ef89bd060c5b",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "364234b1-8f1f-4800-8ca6-1e3358d42089": {
+            "5f53adf7-4f14-455e-8e14-2d0d970e852f": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -531,13 +531,13 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "364234b1-8f1f-4800-8ca6-1e3358d42089",
+                "installations_id": "5f53adf7-4f14-455e-8e14-2d0d970e852f",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
         },
         "ausruestung": {
-            "Infanteriekampfanzug": {
+            "Körperpanzerung +4": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -547,12 +547,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Komlink": {
+            "Commlink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -609,10 +609,10 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Molekularschwert",
-        "Komlink",
-        "Taschencomputer",
+        "Commlink",
+        "Persönliche Datenassistenz",
         "Cyberware: Adrenalindrüse",
         "Cyberware: Verbesserte Sicht"
     ],
@@ -620,14 +620,14 @@
         "Molekularschwert"
     ],
     "selected_ruestungen": [
-        "Infanteriekampfanzug"
+        "Körperpanzerung +4"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Infanteriekampfanzug": 1,
+        "Körperpanzerung +4": 1,
         "Molekularschwert": 1,
-        "Komlink": 1,
-        "Taschencomputer": 1,
+        "Commlink": 1,
+        "Persönliche Datenassistenz": 2,
         "Cyberware: Adrenalindrüse": 1,
         "Cyberware: Verbesserte Sicht": 1
     },

@@ -431,7 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -441,7 +441,7 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Cyberdeckx1) FORCE",
@@ -455,6 +455,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberdeck zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Commlinkx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Commlink zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Hacker_A.json)",
@@ -463,7 +476,7 @@
   ],
   "anomalien": [
     {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -473,7 +486,7 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Cyberdeckx1) FORCE",
@@ -487,6 +500,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberdeck zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Commlinkx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Commlink zum Preis 0 gekauft"
     },
     {
       "aktion": "NOTIZ: MISSING: Alter Wear, Schutzbrille (beide kein SciFi-Item im deutschen Setting)",
@@ -498,7 +524,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

@@ -457,7 +457,7 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Nanowear zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Komlinkx1) FORCE",
+      "aktion": "kaufen(Commlinkx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -467,10 +467,10 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Komlink zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Commlink zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -480,7 +480,20 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Morpher_A.json)",
@@ -502,7 +515,7 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Nanowear zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Komlinkx1) FORCE",
+      "aktion": "kaufen(Commlinkx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -512,10 +525,10 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Komlink zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Commlink zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Taschencomputerx1) FORCE",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -525,7 +538,20 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschencomputer zum Preis 0 gekauft"
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "NOTIZ: Alle Bogen-Items vorhanden (Laserpistole, Nanowear ergänzt 2026-06-01); Elektronisches Schloss (electronic lockpick) fehlt im deutschen Setting",
@@ -537,7 +563,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

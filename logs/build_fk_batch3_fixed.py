@@ -91,6 +91,16 @@ try:
     s.macht('Flächenschlag', ignore_rang_check=True)
     m(f"  D-Advances: {s.punktestand()}")
 
+    # --- AUSRÜSTUNG (Bogen: dagger, acid flask, alchemist's fire, alchemist's pack,
+    #     antitoxin, bag of holding, bandolier, goggles, masterwork leather tunic (+2),
+    #     tindertwig, 79 gp)
+    for name, anz in [('Dolch',1),('Alchemistenfeuer',1),('Alchemistenpaket',1),
+                       ('Gegengift, Phiole',1),('Bandolier',1),
+                       ('Ledertunika',1)]:
+        if name in s.ch.ausruestung: s.kaufen(name, anz)
+        else: s.notiz(f'FEHLT im Katalog: {name}')
+    s.notiz("FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog")
+
     s.notiz("Halbelf Mensch-Erbe: freies Talent = AH(Alchemist). Außenseiter aus Racial. "
             "AH(Alchemist) auto: Materialkomponenten. "
             "4 HP (Impulsiv+Hässlich_schwer): 2 für Konstitution-Raise, 2 für Berechnend.")

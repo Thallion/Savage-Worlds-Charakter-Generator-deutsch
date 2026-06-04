@@ -495,7 +495,7 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Infanteriekampfanzug": {
+            "Körperpanzerung +4": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -515,7 +515,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Komlink": {
+            "Commlink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -530,7 +530,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Klebeflicken": {
+            "Klebstoffpflaster": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -573,33 +573,33 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Molekularmesser",
         "Schwere Blasterpistole",
         "Laser-/Rotpunktvisier",
-        "Komlink",
+        "Commlink",
         "Batterie, Universal-",
         "Raumanzug",
-        "Klebeflicken"
+        "Klebstoffpflaster"
     ],
     "selected_waffen": [
         "Molekularmesser",
         "Schwere Blasterpistole"
     ],
     "selected_ruestungen": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Raumanzug"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Infanteriekampfanzug": 1,
+        "Körperpanzerung +4": 1,
         "Molekularmesser": 1,
         "Schwere Blasterpistole": 1,
         "Laser-/Rotpunktvisier": 1,
-        "Komlink": 1,
+        "Commlink": 1,
         "Batterie, Universal-": 1,
         "Raumanzug": 1,
-        "Klebeflicken": 3
+        "Klebstoffpflaster": 3
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

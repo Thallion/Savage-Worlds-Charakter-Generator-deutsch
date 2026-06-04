@@ -506,7 +506,7 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Infanteriekampfanzug": {
+            "Körperpanzerung +4": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -591,7 +591,7 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Batterie, Universal-",
         "Rucksack",
         "Taschenlampe (10\" Strahl)",
@@ -605,12 +605,12 @@
         "Laserpistole"
     ],
     "selected_ruestungen": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Tarnanzug"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Infanteriekampfanzug": 1,
+        "Körperpanzerung +4": 1,
         "Batterie, Universal-": 1,
         "Rucksack": 1,
         "Taschenlampe (10\" Strahl)": 1,

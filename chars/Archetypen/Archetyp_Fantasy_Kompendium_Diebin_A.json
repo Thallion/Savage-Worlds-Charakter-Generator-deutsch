@@ -566,6 +566,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Attributsteigerung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -630,7 +635,8 @@
         "Bolzen (10)",
         "Verstrickungsbeutel",
         "Fallenherstellungsset",
-        "Rauchstab"
+        "Rauchstab",
+        "Trank: Attributsteigerung"
     ],
     "selected_waffen": [
         "Rapier",
@@ -654,14 +660,14 @@
         "Bolzen (10)": 2,
         "Verstrickungsbeutel": 1,
         "Fallenherstellungsset": 1,
-        "Rauchstab": 1
+        "Rauchstab": 1,
+        "Trank: Attributsteigerung": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 5,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,

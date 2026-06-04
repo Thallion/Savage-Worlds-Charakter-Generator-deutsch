@@ -55,8 +55,8 @@ try:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for item in [('Kevlarweste',1),('Springmesser',1),
-                 ('Taschencomputer',1),('Kleidung, formell',1),
-                 ('Drohne, Kommerziell',1)]:
+                 ('Persönliche Datenassistenz',1),('Kleidung, formell',1),
+                 ('Drohne, Kommerziell',1),('Persönliche Datenassistenz',1)]:
         s.kaufen(*item)
     s.notiz('MISSING: Leichte Schusswaffe/Slugthrower (kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Influencer_A.json')
@@ -97,7 +97,8 @@ try:
     for t in ['Schnell','Gassenwissen']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Molekularschwert',1),('Komlink',1),('Taschencomputer',1)]:
+    for item in [('Körperpanzerung +4',1),('Molekularschwert',1),('Commlink',1),('Persönliche Datenassistenz',1),
+                 ('Persönliche Datenassistenz',1)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Adrenalindrüse',1),('Cyberware: Verbesserte Sicht',1)]:
         s.kaufen(*cw)
@@ -137,8 +138,8 @@ try:
         m(f"  Advance {t}: ok={ok_check(r)}")
     s.notiz('ADVANCE: Cyber Installs – kein Talent-Key, via Ausrüstung modelliert')
     s.notiz('ANCESTRY: Dämmerungssicht ergänzt (Vorlage Fantasy Aquarianer/Elf, Halbiert Düstere-Beleuchtungs-Abzüge)')
-    for item in [('Infanteriekampfanzug',1),('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
-                 ('Taschencomputer',1),('Werkzeugkoffer',1),('Batterie, Universal-',1)]:
+    for item in [('Körperpanzerung +4',1),('Plasmapistole',1),('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
+                 ('Persönliche Datenassistenz',1),('Werkzeugkoffer',1),('Batterie, Universal-',1)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Ersatzgliedmaße',1),('Cyberware: Klauen',1)]:
         s.kaufen(*cw)
@@ -190,7 +191,8 @@ try:
     for macht in ['Eigenschaft erhöhen/senken','Empathie','Objekt auslesen','Linderung','Kriegersegen']:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
-    for item in [('Plasmagewehr',1),('Batterie, Universal-',2),('Taschencomputer',1)]:
+    for item in [('Plasmagewehr',1),('Batterie, Universal-',2),('Persönliche Datenassistenz',1),
+                 ('Persönliche Datenassistenz',1)]:
         s.kaufen(*item)
     s.notiz('Alle Bogen-Items vorhanden (Plasmagewehr ergänzt 2026-06-01)')
     s.notiz('KONSTITUTION: Bogen d8, Build d8 via 2 D-Adv statt 1 HP-Step + 1 D-Adv (HP freigegeben für fehlende Skills Kämpfen + Überleben via HP, Naturwissenschaften via D-Adv)')
@@ -231,7 +233,8 @@ try:
     for macht in ['Verkleiden','Schutz vor Naturgewalten','Heilung','Gestaltwandeln']:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
-    for item in [('Laserpistole',1),('Nanowear',1),('Komlink',1),('Taschencomputer',1)]:
+    for item in [('Laserpistole',1),('Nanowear',1),('Commlink',1),('Persönliche Datenassistenz',1),
+                 ('Persönliche Datenassistenz',1)]:
         s.kaufen(*item)
     s.notiz('Alle Bogen-Items vorhanden (Laserpistole, Nanowear ergänzt 2026-06-01); Elektronisches Schloss (electronic lockpick) fehlt im deutschen Setting')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Morpher_A.json')
@@ -280,9 +283,9 @@ try:
     for t in ['Bedrohlich','Ausweichen']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Molekularmesser',1),('Schwere Blasterpistole',1),
-                 ('Laser-/Rotpunktvisier',1),('Komlink',1),('Batterie, Universal-',1),
-                 ('Raumanzug',1),('Klebeflicken',3)]:
+    for item in [('Körperpanzerung +4',1),('Molekularmesser',1),('Schwere Blasterpistole',1),
+                 ('Laser-/Rotpunktvisier',1),('Commlink',1),('Batterie, Universal-',1),
+                 ('Raumanzug',1),('Klebstoffpflaster',3)]:
         s.kaufen(*item)
     s.notiz('Alle Bogen-Items vorhanden (Schwere Blasterpistole, Raumanzug, Klebeflicken×3 ergänzt 2026-06-01)')
     s.notiz('SKILL-LÜCKE SCHIEßEN: Bogen d6, Build d4 (-2 Pkt Budget-Defizit: 18 Pkt nötig, 16 Pkt verfügbar 12 FP + 4 HP; User-Entscheidung 2026-06-01: Skill-Lücke dokumentieren statt Edge/Attr-Deviation)')

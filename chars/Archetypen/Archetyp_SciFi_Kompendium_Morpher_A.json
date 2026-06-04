@@ -555,12 +555,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Komlink": {
+            "Commlink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -614,8 +614,8 @@
     "selected_allgemeine_ausruestung": [
         "Laserpistole",
         "Nanowear",
-        "Komlink",
-        "Taschencomputer"
+        "Commlink",
+        "Persönliche Datenassistenz"
     ],
     "selected_waffen": [
         "Laserpistole"
@@ -625,8 +625,8 @@
     "ausruestung_mengen": {
         "Laserpistole": 1,
         "Nanowear": 1,
-        "Komlink": 1,
-        "Taschencomputer": 1
+        "Commlink": 1,
+        "Persönliche Datenassistenz": 2
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

@@ -527,12 +527,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Cyberdeck": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Commlink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -581,8 +586,9 @@
         "Kevlarweste",
         "Rucksack",
         "Universalübersetzer",
-        "Taschencomputer",
-        "Cyberdeck"
+        "Persönliche Datenassistenz",
+        "Cyberdeck",
+        "Commlink"
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
@@ -593,8 +599,9 @@
         "Kevlarweste": 1,
         "Rucksack": 1,
         "Universalübersetzer": 1,
-        "Taschencomputer": 1,
-        "Cyberdeck": 1
+        "Persönliche Datenassistenz": 1,
+        "Cyberdeck": 1,
+        "Commlink": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

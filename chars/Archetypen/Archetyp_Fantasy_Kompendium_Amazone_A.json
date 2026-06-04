@@ -552,6 +552,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Beschleunigung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -613,7 +618,8 @@
         "Bronzebrustpanzer",
         "Pfeile (20)",
         "Brandpfeile/-bolzen (20)",
-        "Abenteurerpaket"
+        "Abenteurerpaket",
+        "Trank: Beschleunigung"
     ],
     "selected_waffen": [
         "Chakram",
@@ -631,14 +637,14 @@
         "Bronzebrustpanzer": 1,
         "Pfeile (20)": 1,
         "Brandpfeile/-bolzen (20)": 1,
-        "Abenteurerpaket": 1
+        "Abenteurerpaket": 1,
+        "Trank: Beschleunigung": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,

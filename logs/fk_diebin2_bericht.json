@@ -536,7 +536,7 @@
     },
     {
       "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 136,
       "kostenart": "Vermögen",
       "punkte": {
@@ -564,7 +564,7 @@
     },
     {
       "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 136,
       "kostenart": "Vermögen",
       "punkte": {

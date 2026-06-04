@@ -522,7 +522,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -580,7 +580,7 @@
     "selected_allgemeine_ausruestung": [
         "Kevlarweste",
         "Springmesser",
-        "Taschencomputer",
+        "Persönliche Datenassistenz",
         "Kleidung, formell",
         "Drohne, Kommerziell"
     ],
@@ -594,7 +594,7 @@
     "ausruestung_mengen": {
         "Kevlarweste": 1,
         "Springmesser": 1,
-        "Taschencomputer": 1,
+        "Persönliche Datenassistenz": 2,
         "Kleidung, formell": 1,
         "Drohne, Kommerziell": 1
     },

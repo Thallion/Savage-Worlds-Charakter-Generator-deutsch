@@ -518,7 +518,7 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Infanteriekampfanzug": {
+            "Körperpanzerung +4": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -543,7 +543,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Biolink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -590,28 +595,30 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
         "Molekularmesser",
         "Laserpistole",
         "Waffensperre",
         "Batterie, Universal-",
-        "Taschencomputer"
+        "Persönliche Datenassistenz",
+        "Biolink"
     ],
     "selected_waffen": [
         "Molekularmesser",
         "Laserpistole"
     ],
     "selected_ruestungen": [
-        "Infanteriekampfanzug"
+        "Körperpanzerung +4"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Infanteriekampfanzug": 1,
+        "Körperpanzerung +4": 1,
         "Molekularmesser": 1,
         "Laserpistole": 1,
         "Waffensperre": 1,
         "Batterie, Universal-": 1,
-        "Taschencomputer": 1
+        "Persönliche Datenassistenz": 1,
+        "Biolink": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

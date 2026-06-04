@@ -536,7 +536,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Unsichtbarkeitx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 158,
       "kostenart": "Vermögen",
       "punkte": {
@@ -549,7 +549,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Teleportationx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -562,7 +562,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Gedankenverbindungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -575,7 +575,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Eigenschaft erhöhen/senkenx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -594,7 +594,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Schriftrolle: Unsichtbarkeitx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 158,
       "kostenart": "Vermögen",
       "punkte": {
@@ -607,7 +607,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Teleportationx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -620,7 +620,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Gedankenverbindungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -633,7 +633,7 @@
     },
     {
       "aktion": "kaufen(Schriftrolle: Eigenschaft erhöhen/senkenx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

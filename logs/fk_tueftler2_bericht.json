@@ -510,7 +510,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 83,
       "kostenart": "Vermögen",
       "punkte": {
@@ -538,7 +538,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 83,
       "kostenart": "Vermögen",
       "punkte": {

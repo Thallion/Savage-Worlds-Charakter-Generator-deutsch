@@ -562,6 +562,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Plattenbrustharnisch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Klerikerpaket": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Bolzen (10)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Heiliges Wasser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -624,24 +644,34 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Keule, schwer",
-        "Leichte Armbrust"
+        "Leichte Armbrust",
+        "Plattenbrustharnisch",
+        "Klerikerpaket",
+        "Bolzen (10)",
+        "Heiliges Wasser"
     ],
     "selected_waffen": [
         "Keule, schwer",
-        "Leichte Armbrust"
+        "Leichte Armbrust",
+        "Heiliges Wasser"
     ],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Plattenbrustharnisch"
+    ],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Keule, schwer": 1,
-        "Leichte Armbrust": 1
+        "Leichte Armbrust": 1,
+        "Plattenbrustharnisch": 1,
+        "Klerikerpaket": 1,
+        "Bolzen (10)": 2,
+        "Heiliges Wasser": 3
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 5,
     "machtpunkte": 10,

@@ -405,23 +405,23 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Taschencomputerx1)",
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 250,
+      "kosten": 290,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 40,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Kleidung, formellx1) FORCE",
       "ok": true,
-      "kosten": 40,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -442,6 +442,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Drohne, Kommerziell zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Influencer_A.json)",
@@ -450,10 +463,23 @@
   ],
   "anomalien": [
     {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
+      "ok": true,
+      "kosten": 290,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
+    },
+    {
       "aktion": "kaufen(Kleidung, formellx1) FORCE",
       "ok": true,
-      "kosten": 40,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -474,6 +500,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Drohne, Kommerziell zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
     },
     {
       "aktion": "NOTIZ: MISSING: Leichte Schusswaffe/Slugthrower (kein SciFi-Item im deutschen Setting)",
@@ -485,7 +524,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

@@ -505,7 +505,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "1f518231-0914-4a9b-8aed-f203fa185170": {
+            "1baa771d-7600-4c9a-885d-e6a48fd247a6": {
                 "name": "Cyberware: Ersatzgliedmaße",
                 "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
                 "unterkategorie": "Körper",
@@ -518,11 +518,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "1f518231-0914-4a9b-8aed-f203fa185170",
+                "installations_id": "1baa771d-7600-4c9a-885d-e6a48fd247a6",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "9c9dce46-95aa-46f4-b3ec-713a854f405f": {
+            "4cdd42bb-276e-46e5-9edb-83dbbcf364dd": {
                 "name": "Cyberware: Klauen",
                 "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
                 "unterkategorie": "Offensiv",
@@ -536,13 +536,18 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "9c9dce46-95aa-46f4-b3ec-713a854f405f",
+                "installations_id": "4cdd42bb-276e-46e5-9edb-83dbbcf364dd",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
         },
         "ausruestung": {
-            "Infanteriekampfanzug": {
+            "Körperpanzerung +4": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Plasmapistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -557,7 +562,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -625,25 +630,29 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Infanteriekampfanzug",
+        "Körperpanzerung +4",
+        "Plasmapistole",
         "Rucksack",
         "Taschenlampe (10\" Strahl)",
-        "Taschencomputer",
+        "Persönliche Datenassistenz",
         "Werkzeugkoffer",
         "Batterie, Universal-",
         "Cyberware: Ersatzgliedmaße",
         "Cyberware: Klauen"
     ],
-    "selected_waffen": [],
+    "selected_waffen": [
+        "Plasmapistole"
+    ],
     "selected_ruestungen": [
-        "Infanteriekampfanzug"
+        "Körperpanzerung +4"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Infanteriekampfanzug": 1,
+        "Körperpanzerung +4": 1,
+        "Plasmapistole": 1,
         "Rucksack": 1,
         "Taschenlampe (10\" Strahl)": 1,
-        "Taschencomputer": 1,
+        "Persönliche Datenassistenz": 1,
         "Werkzeugkoffer": 1,
         "Batterie, Universal-": 1,
         "Cyberware: Ersatzgliedmaße": 1,

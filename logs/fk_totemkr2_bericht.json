@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx3) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 413,
       "kostenart": "Vermögen",
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -447,7 +447,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx3) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 413,
       "kostenart": "Vermögen",
       "punkte": {
@@ -460,7 +460,7 @@
     },
     {
       "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

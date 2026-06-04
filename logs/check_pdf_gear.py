@@ -147,11 +147,38 @@ def parse_etu_gear(text):
     return archetypes
 
 
+def wb_contains(needle, hay):
+    """Wortgrenzen-Substring: needle kommt in hay an einer Wortgrenze vor
+    (Anfang oder nach einem Nicht-Buchstaben).
+
+    Deutsche Komposita haben keine Leerzeichen → ein einfaches `in` lässt
+    `stab` fälschlich in `Rauchstab`, `pike` in `spiked`, `handaxt` in
+    `Zweihandaxt` matchen. Die Wortgrenzen-Prüfung verhindert diese
+    Suffix-Treffer; legitime Komposita werden über die Alias-Map explizit
+    aufgelöst (z.B. `sword` → `langschwert`)."""
+    if not needle or not hay:
+        return False
+    if needle == hay:
+        return True
+    start = 0
+    while True:
+        i = hay.find(needle, start)
+        if i < 0:
+            return False
+        if i == 0 or not hay[i - 1].isalpha():
+            return True
+        start = i + 1
+
+
 def find_item_in_catalog(item_text, catalog_keys):
-    """Versucht item_text im Katalog zu finden via Alias-Map."""
+    """Versucht item_text im Katalog zu finden via Alias-Map (Wortgrenzen-Match)."""
     item_lower = item_text.lower().strip()
     if not item_lower or len(item_lower) < 2:
         return None
+
+    # Deterministische Reihenfolge: catalog_keys ist ein Set → sonst variiert der
+    # zurückgegebene Treffer (und damit OFFEN/IST-Einstufung) zwischen Läufen.
+    catalog_keys = sorted(catalog_keys)
 
     # 1. Exakter Match
     for key in catalog_keys:
@@ -174,14 +201,22 @@ def find_item_in_catalog(item_text, catalog_keys):
     for cand in candidates:
         cand_lower = cand.lower()
         for key in catalog_keys:
-            if cand_lower == key.lower() or cand_lower in key.lower() or key.lower() in cand_lower:
+            kl = key.lower()
+            if cand_lower == kl or wb_contains(cand_lower, kl) or wb_contains(kl, cand_lower):
                 return key
 
     return None
 
 
-def split_gear_items(gear_text):
-    """Splittet Gear-Text in einzelne Items (Komma-separiert, parens-aware)."""
+def split_gear_items(gear_text, strict_noise=False):
+    """Splittet Gear-Text in einzelne Items (Komma-separiert, parens-aware).
+
+    strict_noise=True verwirft zusätzlich Stat-Block-Fragmente (Würfel,
+    Spalten-Reste, Prosa) — für die rohe PDF-Extraktion sinnvoll, NICHT für
+    die SOLL/IST-Analyse (die mappt Stat-Items über Normalisierung)."""
+    # Soft-Hyphen (U+00AD, ggf. + Whitespace) zusammenführen (PDF-Silbentrennung)
+    gear_text = re.sub('­\\s*', '', gear_text)
+    gear_text = re.sub(r'(\w)[‐-―-]\s+(\w)', r'\1\2', gear_text)
     # Entferne Geld
     text = re.sub(r'\$\d+[.,]?\d*\.?', '', gear_text)
     text = re.sub(r'\d+\s*GP\.?', '', text, flags=re.IGNORECASE)
@@ -243,6 +278,24 @@ def split_gear_items(gear_text):
         # "GM" allein
         if re.match(r'^\d+\s*GM\.?$', it):
             continue
+        if strict_noise:
+            low = it.lower()
+            # Würfel-/Stat-Block-Fragmente (Spalten-Vermischung der PDF-Extraktion)
+            if re.search(r'\b[dwW]\d+\b', it) or re.search(r'\d+d\d+', it):
+                continue
+            # Sektions-Schlüsselwörter / Stat-Namen aus vermischten Spalten
+            if re.search(r'\b(attributes?|skills?|advances?|fighting|notice|stealth|'
+                         r'shooting|spirit|smarts|strength|vigor|occult|gambling|'
+                         r'intimidation|athletics|parry|toughness|rank|powers?|'
+                         r'aufstiege|attribute|fertigkeiten|allgemeinwissen|kämpfen|'
+                         r'heimlichkeit|schießen|überreden)\b', low):
+                continue
+            # Zu lange Fragmente = mit hoher Wahrscheinlichkeit Prosa/Stat-Mix
+            if len(it) > 45:
+                continue
+            # Reste mit Doppelpunkt-Sektion ("AUFSTIEGE: ...")
+            if re.match(r'^[A-ZÄÖÜ ]{3,}:', it):
+                continue
         filtered.append(it)
     return filtered
 
@@ -254,7 +307,7 @@ def check_pdf_against_catalog(pdf_name, gear_dict, catalog_keys):
     """
     findings = []
     for arch, gear in gear_dict.items():
-        items = split_gear_items(gear)
+        items = split_gear_items(gear, strict_noise=True)
         for item in items:
             matched = find_item_in_catalog(item, catalog_keys)
             if matched is None and item.lower() not in ['none', 'keine', '—', 'none.']:

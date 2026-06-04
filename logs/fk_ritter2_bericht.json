@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Plattenbrustharnischx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 405,
       "kostenart": "Vermögen",
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Schwerer geschlossener Helmx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Mittlerer Schildx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Söldnerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Bolzen (10)x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Reitbedarfx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -477,7 +477,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Plattenbrustharnischx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 405,
       "kostenart": "Vermögen",
       "punkte": {
@@ -490,7 +490,7 @@
     },
     {
       "aktion": "kaufen(Schwerer geschlossener Helmx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -503,7 +503,7 @@
     },
     {
       "aktion": "kaufen(Mittlerer Schildx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -516,7 +516,7 @@
     },
     {
       "aktion": "kaufen(Söldnerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -529,7 +529,7 @@
     },
     {
       "aktion": "kaufen(Bolzen (10)x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -542,7 +542,7 @@
     },
     {
       "aktion": "kaufen(Reitbedarfx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

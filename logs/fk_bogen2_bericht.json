@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 192,
       "kostenart": "Vermögen",
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Trank: Fertigkeitssteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -477,7 +477,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 192,
       "kostenart": "Vermögen",
       "punkte": {
@@ -490,7 +490,7 @@
     },
     {
       "aktion": "kaufen(Trank: Fertigkeitssteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -503,7 +503,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

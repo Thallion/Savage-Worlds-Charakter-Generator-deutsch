@@ -470,11 +470,98 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 498,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Alchemistenfeuerx1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 478,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Alchemistenpaketx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 428,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Gegengift, Phiolex1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 378,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Bandolierx1)",
+      "ok": true,
+      "kosten": 0.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 377.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 357.5,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Alchemist_A.json)",
       "ok": true
     }
   ],
   "anomalien": [
+    {
+      "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog",
+      "ok": true,
+      "warnung": "FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 357.5
+    },
     {
       "aktion": "NOTIZ: Halbelf Mensch-Erbe: freies Talent = AH(Alchemist). Außenseiter aus Racial. AH(Alchemist) auto: Materialkomponenten. 4 HP (Impulsiv+Hässlich_schwer): 2 für Konstitution-Raise, 2 für Berechnend.",
       "ok": true,
@@ -482,10 +569,10 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 500
+      "vermoegen": 357.5
     }
   ],
-  "anomalien_anzahl": 1,
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -597,7 +684,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 20,
-    "vermoegen": 500,
+    "vermoegen": 357.5,
     "rang": "Fortgeschritten",
     "volk": "Halbelf"
   }

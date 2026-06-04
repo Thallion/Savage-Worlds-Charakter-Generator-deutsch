@@ -517,7 +517,8 @@ try:
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
     for name, anz in [('Stab (3,5 m)',1),('Dolch',1),('Magierpaket',1),
-                       ('Umhang mit Kapuze',1),('Trank: Heilung',1)]:
+                       ('Umhang mit Kapuze',1),('Trank: Heilung',1),
+                       ('Trank: Beschleunigung',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank Wandkrabbler, Trank Schnelligkeit (nicht im FK-Katalog)')

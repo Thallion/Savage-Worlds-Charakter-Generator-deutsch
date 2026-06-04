@@ -5,7 +5,7 @@
   Advance Selbstlos: ok=True
   Advance Elan: ok=True
   Advance Geborener Anführer: ok=True
-Commander FERTIG anomalien=7
+Commander FERTIG anomalien=6
   Talente: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   Skills: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
@@ -18,7 +18,7 @@ Commander FERTIG anomalien=7
   Macht Linderung: ok=True
   Macht Sprachen sprechen: ok=True
   Macht Betäuben: ok=True
-Psyker FERTIG anomalien=7
+Psyker FERTIG anomalien=6
   Talente: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -27,7 +27,7 @@ Psyker FERTIG anomalien=7
   Advance Naturwissenschaften d4: ok=True
   Advance Naturbursche: ok=True
   Advance Kühler Kopf: ok=True
-Surveyor FERTIG anomalien=11
+Surveyor FERTIG anomalien=7
   Talent+Mächte: HC=4 maechte=['Betäuben', 'Empathie', 'Gedankenlesen', 'Linderung', 'Verwirrung']
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
@@ -35,7 +35,7 @@ Surveyor FERTIG anomalien=11
   Advance Alleskönner: ok=True
   Advance Charismatisch: ok=True
   Advance Aufwiegler: ok=True
-Ambassador FERTIG anomalien=7
+Ambassador FERTIG anomalien=5
   Talent: HC=4
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -43,7 +43,7 @@ Ambassador FERTIG anomalien=7
   Advance Ermittler: ok=True
   Advance Hackerman/-woman: ok=True
   Advance Kühler Kopf: ok=True
-Hacker FERTIG anomalien=3
+Hacker FERTIG anomalien=4
   Talente: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -52,4 +52,4 @@ Hacker FERTIG anomalien=3
   Advance Beidhändiger Kampf: ok=True
   Advance Schnell: ok=True
   Advance Ausweichen: ok=True
-Infiltrator FERTIG anomalien=14
+Infiltrator FERTIG anomalien=13

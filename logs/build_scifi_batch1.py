@@ -62,11 +62,12 @@ try:
     for t in ['Charismatisch','Selbstlos','Elan','Geborener Anführer']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Molekularmesser',1),
+    for item in [('Körperpanzerung +4',1),('Molekularmesser',1),
                  ('Laserpistole',1),('Waffensperre',1),
-                 ('Batterie, Universal-',1),('Taschencomputer',1)]:
+                 ('Batterie, Universal-',1),('Persönliche Datenassistenz',1),
+                 ('Biolink',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills Reparieren/Schießen (12pt Budget)')
+    s.notiz('Skills Reparieren/Schießen (12pt Budget)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Commander_A.json')
     b = s.bericht('logs/scifi_commander_bericht.json')
     m(f"Commander FERTIG anomalien={b['anomalien_anzahl']}")
@@ -104,10 +105,11 @@ try:
     for macht in ['Gedankenverbindung','Gedankenlesen','Linderung','Sprachen sprechen','Betäuben']:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Laserpistole',1),('Waffensperre',1),
-                 ('Batterie, Universal-',1),('Taschencomputer',1),('Scanner',1)]:
+    for item in [('Körperpanzerung +4',1),('Laserpistole',1),('Waffensperre',1),
+                 ('Batterie, Universal-',1),('Persönliche Datenassistenz',1),('Scanner',1),
+                 ('Biolink',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Biolink (kein SciFi-Item im deutschen Setting); Skills auf 12pt Budget')
+    s.notiz('Skills auf 12pt Budget')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Psyker_A.json')
     b = s.bericht('logs/scifi_psyker_bericht.json')
     m(f"Psyker FERTIG anomalien={b['anomalien_anzahl']}")
@@ -157,7 +159,7 @@ try:
     for t in ['Naturbursche','Kühler Kopf']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Batterie, Universal-',1),
+    for item in [('Körperpanzerung +4',1),('Batterie, Universal-',1),
                  ('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
                  ('Laserpistole',1),('Waffensperre',1),('Medi-Gel',2),('Scanner',1),
                  ('Tarnanzug',1)]:
@@ -202,10 +204,10 @@ try:
     for t in ['Alleskönner','Charismatisch','Aufwiegler']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Laserpistole',1),('Waffensperre',1),
-                 ('Universalübersetzer',1),('Taschencomputer',1),('Batterie, Universal-',1)]:
+    for item in [('Körperpanzerung +4',1),('Laserpistole',1),('Waffensperre',1),
+                 ('Universalübersetzer',1),('Persönliche Datenassistenz',1),('Batterie, Universal-',1),
+                 ('Biolink',1)]:
         s.kaufen(*item)
-    s.notiz('MISSING: Biolink (kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Ambassador_A.json')
     b = s.bericht('logs/scifi_ambassador_bericht.json')
     m(f"Ambassador FERTIG anomalien={b['anomalien_anzahl']}")
@@ -243,8 +245,8 @@ try:
     for t in ['Gelehrter','Ermittler','Hackerman/-woman','Kühler Kopf']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Kevlarweste',1),('Rucksack',1),('Universalübersetzer',1),('Taschencomputer',1),
-                 ('Cyberdeck',1)]:
+    for item in [('Kevlarweste',1),('Rucksack',1),('Universalübersetzer',1),('Persönliche Datenassistenz',1),
+                 ('Cyberdeck',1),('Commlink',1)]:
         s.kaufen(*item)
     s.notiz('MISSING: Alter Wear, Schutzbrille (beide kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Hacker_A.json')
@@ -288,8 +290,8 @@ try:
     for t in ['Beidhändiger Kampf','Schnell','Ausweichen']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Infanteriekampfanzug',1),('Molekularschwert',2),('Tarnkleidung',1),
-                 ('Taschencomputer',1),('Universalübersetzer',1),
+    for item in [('Körperpanzerung +4',1),('Molekularschwert',2),('Tarnanzug',1),
+                 ('Persönliche Datenassistenz',1),('Universalübersetzer',1),
                  ('Cyberdeck',1),('Direktionales Mikrofon',1),('Kreislaufatemgerät',1),
                  ('Betäubungsschlagstock',1),('EMP-Granate',4)]:
         s.kaufen(*item)

@@ -472,12 +472,12 @@
     {
       "aktion": "talent(Zauberbücher)",
       "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -490,7 +490,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -498,12 +498,12 @@
     {
       "aktion": "talent(Erbstück)",
       "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -516,7 +516,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -529,7 +529,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -542,7 +542,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -555,7 +555,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -568,7 +568,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 499.75,
       "warnung": null
@@ -581,7 +581,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 497.75,
       "warnung": null
@@ -594,7 +594,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 417.75,
       "warnung": null
@@ -607,7 +607,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 412.75,
       "warnung": null
@@ -620,10 +620,23 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 212.75,
       "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
+      "ok": true,
+      "kosten": 212.75,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Beschleunigung zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Magier_A.json)",
@@ -672,16 +685,29 @@
       "vermoegen": 500
     },
     {
+      "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
+      "ok": true,
+      "kosten": 212.75,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Beschleunigung zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Trank Wandkrabbler, Trank Schnelligkeit (nicht im FK-Katalog)",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Trank Wandkrabbler, Trank Schnelligkeit (nicht im FK-Katalog)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 212.75
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 6,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -802,13 +828,13 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
+      "handicap": 4,
       "handicap_gesamt": 4,
-      "aufstiege": 2
+      "aufstiege": 0
     },
     "machtpunkte": 15,
-    "vermoegen": 212.75,
-    "rang": "Anfänger",
+    "vermoegen": 0,
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

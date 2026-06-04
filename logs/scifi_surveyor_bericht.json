@@ -405,62 +405,62 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
+      "aktion": "kaufen(Körperpanzerung +4x1)",
       "ok": true,
-      "kosten": 500,
+      "kosten": 200,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
+      "vermoegen": 300,
+      "warnung": null
     },
     {
-      "aktion": "kaufen(Batterie, Universal-x1) FORCE",
+      "aktion": "kaufen(Batterie, Universal-x1)",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 50,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
+      "vermoegen": 250,
+      "warnung": null
     },
     {
-      "aktion": "kaufen(Rucksackx1) FORCE",
+      "aktion": "kaufen(Rucksackx1)",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 50,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rucksack zum Preis 0 gekauft"
+      "vermoegen": 200,
+      "warnung": null
     },
     {
-      "aktion": "kaufen(Taschenlampe (10\" Strahl)x1) FORCE",
+      "aktion": "kaufen(Taschenlampe (10\" Strahl)x1)",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 20,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10\" Strahl) zum Preis 0 gekauft"
+      "vermoegen": 180,
+      "warnung": null
     },
     {
       "aktion": "kaufen(Laserpistolex1) FORCE",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 180,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -528,62 +528,10 @@
   ],
   "anomalien": [
     {
-      "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": true,
-      "kosten": 500,
-      "kostenart": "Vermögen",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Infanteriekampfanzug zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rucksack zum Preis 0 gekauft"
-    },
-    {
-      "aktion": "kaufen(Taschenlampe (10\" Strahl)x1) FORCE",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 0,
-      "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10\" Strahl) zum Preis 0 gekauft"
-    },
-    {
       "aktion": "kaufen(Laserpistolex1) FORCE",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 180,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -663,7 +611,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 11,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

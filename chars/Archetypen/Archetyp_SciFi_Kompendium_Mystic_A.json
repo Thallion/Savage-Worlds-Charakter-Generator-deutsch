@@ -532,7 +532,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Taschencomputer": {
+            "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -582,7 +582,7 @@
     "selected_allgemeine_ausruestung": [
         "Plasmagewehr",
         "Batterie, Universal-",
-        "Taschencomputer"
+        "Persönliche Datenassistenz"
     ],
     "selected_waffen": [
         "Plasmagewehr"
@@ -592,7 +592,7 @@
     "ausruestung_mengen": {
         "Plasmagewehr": 1,
         "Batterie, Universal-": 2,
-        "Taschencomputer": 1
+        "Persönliche Datenassistenz": 2
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0.5,

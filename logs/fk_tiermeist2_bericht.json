@@ -471,7 +471,7 @@
     },
     {
       "aktion": "kaufen(Trank: Fertigkeitssteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 141,
       "kostenart": "Vermögen",
       "punkte": {
@@ -499,7 +499,7 @@
     },
     {
       "aktion": "kaufen(Trank: Fertigkeitssteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 141,
       "kostenart": "Vermögen",
       "punkte": {

@@ -62,7 +62,7 @@
   Skills gesetzt. Punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
   6 Novice-Mächte gesetzt. Punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
   → chargen abgeschlossen, 4 Aufstiege, Rang=Anfänger
-  D-Advances gesetzt. Punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 2, 'vermoegen': 500, 'machtpunkte': 15}
+  D-Advances gesetzt. Punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
   DIFF: []
-  Vermögen nach Kauf: 212.75
-  MAGIER: anomalien=5
+  Vermögen nach Kauf: 0
+  MAGIER: anomalien=6
