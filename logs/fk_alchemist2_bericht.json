@@ -548,69 +548,121 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Säureflaschex1)",
+      "aktion": "kaufen(Tasche des Fassensx1) FORCE",
       "ok": true,
-      "kosten": 10.0,
+      "kosten": 357.5,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 347.5,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Tasche des Fassens zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Donnersteinx1)",
+      "aktion": "kaufen(Schutzbrillex1) FORCE",
       "ok": true,
-      "kosten": 30.0,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 317.5,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schutzbrille zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Zündholzx1)",
+      "aktion": "kaufen(Sonnenstabx1) FORCE",
       "ok": true,
-      "kosten": 1.0,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 316.5,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Sonnenstab zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Verstrickungsbeutelx1)",
+      "aktion": "kaufen(Säureflaschex1) FORCE",
       "ok": true,
-      "kosten": 50.0,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 266.5,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Säureflasche zum Preis 0 gekauft"
     },
     {
-      "aktion": "kaufen(Rauchstabx1)",
+      "aktion": "kaufen(Donnersteinx1) FORCE",
       "ok": true,
-      "kosten": 20.0,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 246.5,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Donnerstein zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Zündholzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Zündholz zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Verstrickungsbeutelx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Verstrickungsbeutel zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Rauchstabx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rauchstab zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Umgebungsschutzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Umgebungsschutz zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Alchemist_A.json)",
@@ -619,13 +671,130 @@
   ],
   "anomalien": [
     {
+      "aktion": "kaufen(Tasche des Fassensx1) FORCE",
+      "ok": true,
+      "kosten": 357.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Tasche des Fassens zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Schutzbrillex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schutzbrille zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Sonnenstabx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Sonnenstab zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Säureflaschex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Säureflasche zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Donnersteinx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Donnerstein zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Zündholzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Zündholz zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Verstrickungsbeutelx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Verstrickungsbeutel zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Rauchstabx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rauchstab zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Umgebungsschutzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Umgebungsschutz zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 246.5
+      "vermoegen": 0
     },
     {
       "aktion": "NOTIZ: Halbelf Mensch-Erbe: freies Talent = AH(Alchemist). Außenseiter aus Racial. AH(Alchemist) auto: Materialkomponenten. 4 HP (Impulsiv+Hässlich_schwer): 2 für Konstitution-Raise, 2 für Berechnend.",
@@ -634,10 +803,10 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 246.5
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 11,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -749,7 +918,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 20,
-    "vermoegen": 246.5,
+    "vermoegen": 0,
     "rang": "Fortgeschritten",
     "volk": "Halbelf"
   }

@@ -553,6 +553,11 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Trank: Wandkrabbler": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Trank: Beschleunigung": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -634,6 +639,7 @@
         "Diebespaket",
         "Rauchstab",
         "Krähenfüße",
+        "Trank: Wandkrabbler",
         "Trank: Beschleunigung",
         "Trank: Heilung",
         "Trank: Geistige Stärke",
@@ -656,6 +662,7 @@
         "Diebespaket": 1,
         "Rauchstab": 1,
         "Krähenfüße": 1,
+        "Trank: Wandkrabbler": 1,
         "Trank: Beschleunigung": 1,
         "Trank: Heilung": 1,
         "Trank: Geistige Stärke": 1,

@@ -392,6 +392,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Trank: Wachstumx1)",
+      "ok": true,
+      "kosten": 200,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 10,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Stiefel, schwerx1)",
       "ok": true,
       "kosten": 2,
@@ -401,27 +414,27 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 208,
+      "vermoegen": 8,
       "warnung": null
     },
     {
-      "aktion": "kaufen(Abenteurerpaketx1)",
+      "aktion": "kaufen(Abenteurerpaketx1) FORCE",
       "ok": true,
-      "kosten": 45,
+      "kosten": 8,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 163,
-      "warnung": null
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Abenteurerpaket zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
       "ok": true,
-      "kosten": 163,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -464,10 +477,23 @@
       "vermoegen": 500
     },
     {
+      "aktion": "kaufen(Abenteurerpaketx1) FORCE",
+      "ok": true,
+      "kosten": 8,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Abenteurerpaket zum Preis 0 gekauft"
+    },
+    {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
       "ok": true,
-      "kosten": 163,
-      "kostenart": "Vermögen",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -486,7 +512,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 6,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

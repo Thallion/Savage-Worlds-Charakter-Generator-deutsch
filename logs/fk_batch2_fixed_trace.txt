@@ -7,7 +7,7 @@
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   DIFF: []
   Vermögen nach Kauf: 0
-  PALADIN: anomalien=6
+  PALADIN: anomalien=7
 
 === 8. WALDLÄUFER ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -29,7 +29,7 @@
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.0, 'vermoegen': 500, 'machtpunkte': 0}
   DIFF: []
   Vermögen nach Kauf: 0
-  DIEBIN: anomalien=3
+  DIEBIN: anomalien=5
 
 === 10. ZAUBERER (SORCERER) ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
@@ -39,8 +39,8 @@
   → chargen OK, 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 20}
   DIFF: []
-  Vermögen nach Kauf: 153
-  ZAUBERER: anomalien=2
+  Vermögen nach Kauf: 0
+  ZAUBERER: anomalien=4
 
 === 11. HEXE ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
@@ -50,7 +50,7 @@
   → chargen OK, 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 500, 'machtpunkte': 15}
   DIFF: []
-  Vermögen nach Kauf: 208
+  Vermögen nach Kauf: 133
   HEXE: anomalien=2
 
 === 12. KRIEGER ===
@@ -62,4 +62,4 @@
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   DIFF: []
   Vermögen nach Kauf: 0
-  KRIEGER: anomalien=9
+  KRIEGER: anomalien=10

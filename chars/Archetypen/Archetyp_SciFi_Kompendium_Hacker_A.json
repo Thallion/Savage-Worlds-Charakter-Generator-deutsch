@@ -546,6 +546,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Wandelkleidung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -594,7 +599,8 @@
         "Universalübersetzer",
         "Persönliche Datenassistenz",
         "Cyberdeck",
-        "Commlink"
+        "Commlink",
+        "Wandelkleidung"
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
@@ -608,7 +614,8 @@
         "Universalübersetzer": 1,
         "Persönliche Datenassistenz": 1,
         "Cyberdeck": 1,
-        "Commlink": 1
+        "Commlink": 1,
+        "Wandelkleidung": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

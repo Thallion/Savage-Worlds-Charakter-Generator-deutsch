@@ -558,6 +558,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Schlafsack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -586,7 +591,8 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Messer"
+        "Messer",
+        "Schlafsack"
     ],
     "selected_waffen": [
         "Messer"
@@ -594,7 +600,8 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Messer": 1
+        "Messer": 1,
+        "Schlafsack": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -608,7 +615,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 123,
+    "vermoegen": 119,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 3,

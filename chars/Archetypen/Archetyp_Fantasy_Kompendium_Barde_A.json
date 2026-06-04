@@ -583,6 +583,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Schwebende Laterne": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -650,7 +655,8 @@
         "Laterne",
         "Rauchstab",
         "Trank: Attributsteigerung",
-        "Trank: Heilung"
+        "Trank: Heilung",
+        "Schwebende Laterne"
     ],
     "selected_waffen": [
         "Rapier"
@@ -669,7 +675,8 @@
         "Laterne": 2,
         "Rauchstab": 2,
         "Trank: Attributsteigerung": 2,
-        "Trank: Heilung": 2
+        "Trank: Heilung": 2,
+        "Schwebende Laterne": 2
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 1.0,

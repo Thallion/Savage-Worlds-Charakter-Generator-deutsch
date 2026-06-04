@@ -557,6 +557,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Erfinderschürze": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -585,16 +590,20 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Brille",
-        "Messer"
+        "Messer",
+        "Erfinderschürze"
     ],
     "selected_waffen": [
         "Messer"
     ],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Erfinderschürze"
+    ],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Brille": 1,
-        "Messer": 1
+        "Messer": 1,
+        "Erfinderschürze": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0.5,
@@ -608,7 +617,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 243,
+    "vermoegen": 203,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 3,

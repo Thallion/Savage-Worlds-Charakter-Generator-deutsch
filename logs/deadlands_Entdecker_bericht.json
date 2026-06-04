@@ -444,6 +444,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Kugeln (mit Schwarzpulver) (20 Stück)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 235,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Elan)",
       "ok": true,
       "kosten": 0,
@@ -453,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 235,
       "warnung": null
     },
     {
@@ -466,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 235,
       "warnung": null
     },
     {
@@ -479,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 235,
       "warnung": null
     },
     {
@@ -492,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 236,
+      "vermoegen": 235,
       "warnung": null
     },
     {
@@ -620,7 +633,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 236,
+    "vermoegen": 235,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

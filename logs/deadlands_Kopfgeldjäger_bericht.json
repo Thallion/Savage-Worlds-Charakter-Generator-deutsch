@@ -379,6 +379,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Winchester '76 (.45)x1)",
+      "ok": true,
+      "kosten": 40,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 147,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Keine Gnade)",
       "ok": true,
       "kosten": 0,
@@ -388,7 +401,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": null
     },
     {
@@ -401,7 +414,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": null
     },
     {
@@ -414,7 +427,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": null
     },
     {
@@ -427,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": null
     },
     {
@@ -440,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -453,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -472,7 +485,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -485,7 +498,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 187,
+      "vermoegen": 147,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -501,7 +514,7 @@
         "handicap_gesamt": 4,
         "aufstiege": 0
       },
-      "vermoegen": 187
+      "vermoegen": 147
     }
   ],
   "anomalien_anzahl": 3,
@@ -611,7 +624,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 187,
+    "vermoegen": 147,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

@@ -483,6 +483,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verbesserte Sicht zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Cyberware: Robustheitx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Robustheit zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Mercenary_A.json)",
       "ok": true
     }
@@ -567,6 +580,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Verbesserte Sicht zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Cyberware: Robustheitx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Robustheit zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware (beide kein SciFi-Item im deutschen Setting)",
       "ok": true,
       "warnung": "MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware (beide kein SciFi-Item im deutschen Setting)",
@@ -576,7 +602,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 7,
+  "anomalien_anzahl": 8,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

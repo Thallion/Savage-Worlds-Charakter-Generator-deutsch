@@ -518,6 +518,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Gatling-Pistole (.36)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Messer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Verkleidungszubehör": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Pistolen (klein) .22-.38 (50 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -539,15 +559,25 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Colt Rainmaker (.32)"
+        "Colt Rainmaker (.32)",
+        "Gatling-Pistole (.36)",
+        "Messer",
+        "Verkleidungszubehör",
+        "Munition Pistolen (klein) .22-.38 (50 Stück)"
     ],
     "selected_waffen": [
-        "Colt Rainmaker (.32)"
+        "Colt Rainmaker (.32)",
+        "Gatling-Pistole (.36)",
+        "Messer"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Colt Rainmaker (.32)": 1
+        "Colt Rainmaker (.32)": 1,
+        "Gatling-Pistole (.36)": 1,
+        "Messer": 1,
+        "Verkleidungszubehör": 1,
+        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,

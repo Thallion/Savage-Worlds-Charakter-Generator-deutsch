@@ -58,6 +58,8 @@ DE_TO_EN = {
     'amiri': 'AMIRI', 'ezren': 'EZREN', 'harsk': 'HARSK', 'kyra': 'KYRA',
     'lem': 'LEM', 'lini': 'LINI', 'merisiel': 'MERISIEL', 'sajan': 'SAJAN',
     'seelah': 'SEELAH', 'seoni': 'SEONI', 'valeros': 'VALEROS',
+    # Deadlands: Bogen-Schreibweise weicht ab (Saloon- vs. Salon-)
+    'salonschönheit': 'SALOONSCHÖNHEIT', 'salonschoenheit': 'SALOONSCHÖNHEIT',
 }
 
 
@@ -121,6 +123,48 @@ def parse_english_gear_clean(text_path):
     return archetypes
 
 
+# Settings mit deutschsprachigem Bogen (Sektion 'AUSRÜSTUNG' statt 'GEAR',
+# Archetyp-Name zwischen zwei '===='-Trennzeilen).
+GERMAN_SETTINGS = {'Deadlands'}
+
+
+def parse_german_gear(text_path):
+    """Parser für deutsche Bögen (Deadlands-Archetypen-Set).
+
+    Struktur:  ====  /  NAME  /  ====  / ... / AUSRÜSTUNG <gear> AUFSTIEGE: ...
+    Liefert {ARCH_NAME: gear_text}. Die AUSRÜSTUNG-Sektion endet bei 'AUFSTIEGE'.
+    """
+    lines = [l.rstrip('\n') for l in open(text_path, encoding='utf-8')]
+    is_delim = lambda s: bool(re.match(r'^=+$', s.strip()))
+    # Archetyp-Namen = Zeile zwischen zwei Trennzeilen
+    names = []
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if s and not is_delim(s) and 0 < i < len(lines) - 1 \
+                and is_delim(lines[i - 1]) and is_delim(lines[i + 1]):
+            names.append((i, s))
+    archetypes = {}
+    for idx, (li, name) in enumerate(names):
+        end = names[idx + 1][0] - 1 if idx + 1 < len(names) else len(lines)
+        block = lines[li + 2:end]
+        gear = []
+        in_gear = False
+        for bl in block:
+            bs = bl.strip()
+            if bs == 'AUSRÜSTUNG':
+                in_gear = True
+                continue
+            if in_gear:
+                if bs.startswith('AUFSTIEGE'):
+                    in_gear = False
+                    continue
+                if bs:
+                    gear.append(bs)
+        if gear:
+            archetypes[name] = ' '.join(gear)
+    return archetypes
+
+
 # Qualitäts-/Material-Präfixe, die für einen generischen Katalog-Match abgeschnitten
 # werden (z.B. "Masterwork staff" → "staff" → Katalog "Stab").
 _STRIP_PREFIXES = (
@@ -144,7 +188,14 @@ def normalize_item(raw):
     s = s.replace('’', "'").replace('‘', "'").replace('`', "'")  # typografische Apostrophe
     s = re.sub(r'(\w)[‐-―-]\s+(\w)', r'\1\2', s)  # Bindestrich-Umbruch
     s = re.sub(r'\([^)]*\)', '', s)             # Stat-Klammern
-    s = re.sub(r'^\s*[×x]?\s*\d+\s*[×x]?\s*', '', s)        # Mengen-Präfix (Ziffern)
+    s = re.sub(r'^cybernetic implants?:\s*', '', s, flags=re.IGNORECASE)  # Cyberware-Präfix
+    # Munition trägt das Kaliber als führende Zahl (z.B. '45er Munition',
+    # '44-40er Munition') — diese NICHT als Mengen-Präfix abschneiden, sonst
+    # geht der einzige Match-Anker (das Kaliber) verloren.
+    is_ammo = bool(re.search(r'munition', s, re.IGNORECASE))
+    if not is_ammo:
+        s = re.sub(r'^\s*[×x]\s*\d+\s+', '', s)     # Mengen-Präfix nach Präfix-Strip (×2 ...)
+        s = re.sub(r'^\s*[×x]?\s*\d+\s*[×x]?\s*', '', s)        # Mengen-Präfix (Ziffern)
     s = re.sub(r'^(?:two|three|four|five|six|seven|eight|nine|ten)\s+',  # Zahlwörter
                '', s, flags=re.IGNORECASE)
     full = s.strip(' ,.').lower()
@@ -258,7 +309,10 @@ def main():
     bogen_cache = {}
     for setting_key, bogen_path in SETTING_TO_BOGEN.items():
         if Path(bogen_path).exists():
-            bogen_cache[setting_key] = parse_english_gear_clean(bogen_path)
+            if setting_key in GERMAN_SETTINGS:
+                bogen_cache[setting_key] = parse_german_gear(bogen_path)
+            else:
+                bogen_cache[setting_key] = parse_english_gear_clean(bogen_path)
         else:
             bogen_cache[setting_key] = {}
 

@@ -77,7 +77,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Stab (3,5 m)',1),('Dolch',8),('Peitsche',1),('Ledertunika',1),('Bandolier',1),('Diebespaket',1),('Rauchstab',1),('Krähenfüße',1),
+    for name, anz in [('Stab (3,5 m)',1),('Dolch',8),('Peitsche',1),('Ledertunika',1),('Bandolier',1),('Diebespaket',1),('Rauchstab',1),('Krähenfüße',1),('Trank: Wandkrabbler',1),
                        ('Trank: Beschleunigung',1),('Trank: Heilung',1),('Trank: Geistige Stärke',1),('Trank: Attributsteigerung',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')

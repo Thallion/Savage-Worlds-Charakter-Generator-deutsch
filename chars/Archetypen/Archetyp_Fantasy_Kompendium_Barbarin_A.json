@@ -527,6 +527,11 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Trank: Wachstum": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Stiefel, schwer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -598,6 +603,7 @@
         "Zweihandaxt",
         "Ledertunika",
         "Schwerer Helm",
+        "Trank: Wachstum",
         "Stiefel, schwer",
         "Abenteurerpaket",
         "Trank: Heilung"
@@ -614,6 +620,7 @@
         "Zweihandaxt": 1,
         "Ledertunika": 1,
         "Schwerer Helm": 1,
+        "Trank: Wachstum": 1,
         "Stiefel, schwer": 1,
         "Abenteurerpaket": 1,
         "Trank: Heilung": 1

@@ -85,7 +85,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Dolch/Messer',1),('Totschläger',1),('Ledertunika',1),('Unterhalterpaket',1),('Trank: Attributsteigerung',1)]:
+    for name, anz in [('Dolch/Messer',1),('Totschläger',1),('Ledertunika',1),('Unterhalterpaket',1),('Trank: Attributsteigerung',1),('Trank: Unsichtbarkeit',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank der Unsichtbarkeit (nicht im FK-Katalog)')
@@ -154,7 +154,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Bastardschwert',1),('Schwere Armbrust',1),('Lanze',1),('Plattenbrustharnisch',1),('Schwerer geschlossener Helm',1),('Mittlerer Schild',1),('Söldnerpaket',1),('Bolzen (10)',2),('Reitbedarf',1)]:
+    for name, anz in [('Bastardschwert',1),('Schwere Armbrust',1),('Lanze',1),('Plattenbrustharnisch',1),('Schwerer geschlossener Helm',1),('Mittlerer Schild',1),('Söldnerpaket',1),('Bolzen (10)',2),('Reitbedarf',1),('Streitross',1),('Wattierter Rossharnisch',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Streitross mit gepolsteter Schabracke')

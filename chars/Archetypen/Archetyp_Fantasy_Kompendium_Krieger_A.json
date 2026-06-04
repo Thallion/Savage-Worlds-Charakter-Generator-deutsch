@@ -501,7 +501,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Kampfreflexe": {
+            "Treffer einstecken": {
                 "ausgewaehlt": true,
                 "rang": "F",
                 "neue_maechte": 0,
@@ -561,6 +561,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Umgebungsschutz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -574,7 +579,7 @@
         "Eisenkiefer",
         "Schmerzresistenz",
         "Erzürnen",
-        "Kampfreflexe"
+        "Treffer einstecken"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -624,7 +629,8 @@
         "Mittlerer Schild",
         "Söldnerpaket",
         "Bolzen (10)",
-        "Trank: Beschleunigung"
+        "Trank: Beschleunigung",
+        "Trank: Umgebungsschutz"
     ],
     "selected_waffen": [
         "Schwert, Langschwert",
@@ -649,7 +655,8 @@
         "Mittlerer Schild": 1,
         "Söldnerpaket": 1,
         "Bolzen (10)": 2,
-        "Trank: Beschleunigung": 1
+        "Trank: Beschleunigung": 1,
+        "Trank: Umgebungsschutz": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -810,7 +817,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Kampfreflexe",
+                "name": "Treffer einstecken",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

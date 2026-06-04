@@ -496,6 +496,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Trank: Unsichtbarkeitx1) FORCE",
+      "ok": true,
+      "kosten": 193.75,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Unsichtbarkeit zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Druidin_A.json)",
       "ok": true
     }
@@ -533,16 +546,29 @@
       "vermoegen": 250
     },
     {
+      "aktion": "kaufen(Trank: Unsichtbarkeitx1) FORCE",
+      "ok": true,
+      "kosten": 193.75,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Unsichtbarkeit zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Trank der Unsichtbarkeit (nicht im FK-Katalog)",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Trank der Unsichtbarkeit (nicht im FK-Katalog)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 193.75
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -655,7 +681,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 10,
-    "vermoegen": 193.75,
+    "vermoegen": 0,
     "rang": "Fortgeschritten",
     "volk": "Elf"
   }

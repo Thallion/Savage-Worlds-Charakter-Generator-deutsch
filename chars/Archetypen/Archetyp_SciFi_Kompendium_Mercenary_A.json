@@ -499,7 +499,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "d602eded-cda7-435b-9c2c-93ea2606e774": {
+            "5fb0b52b-f3ce-4433-ba6b-aa943a0803c6": {
                 "name": "Cyberware: Adrenalindrüse",
                 "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
                 "unterkategorie": "Defensiv",
@@ -514,11 +514,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "d602eded-cda7-435b-9c2c-93ea2606e774",
+                "installations_id": "5fb0b52b-f3ce-4433-ba6b-aa943a0803c6",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "ed3d3bba-b91f-4669-9bad-ec4b6a066df1": {
+            "cf64cdd6-7235-4027-8fae-f97db9072b31": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -531,7 +531,23 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "ed3d3bba-b91f-4669-9bad-ec4b6a066df1",
+                "installations_id": "cf64cdd6-7235-4027-8fae-f97db9072b31",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            },
+            "05af1851-df89-4f92-92c7-ce800cdf284a": {
+                "name": "Cyberware: Robustheit",
+                "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
+                "unterkategorie": "Defensiv",
+                "stress": 1,
+                "max_installationen": 3,
+                "kosten": 5000,
+                "effekte": {
+                    "robustheit_bonus": 1
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "05af1851-df89-4f92-92c7-ce800cdf284a",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
@@ -571,6 +587,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Cyberware: Robustheit": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -588,7 +609,8 @@
     "selected_superkraefte": [],
     "selected_cyberware": [
         "Cyberware: Adrenalindrüse",
-        "Cyberware: Verbesserte Sicht"
+        "Cyberware: Verbesserte Sicht",
+        "Cyberware: Robustheit"
     ],
     "voelker_selected": {
         "Mensch": true,
@@ -620,7 +642,8 @@
         "Persönliche Datenassistenz",
         "Doppelflinte",
         "Cyberware: Adrenalindrüse",
-        "Cyberware: Verbesserte Sicht"
+        "Cyberware: Verbesserte Sicht",
+        "Cyberware: Robustheit"
     ],
     "selected_waffen": [
         "Molekularschwert",
@@ -637,7 +660,8 @@
         "Persönliche Datenassistenz": 1,
         "Doppelflinte": 1,
         "Cyberware: Adrenalindrüse": 1,
-        "Cyberware: Verbesserte Sicht": 1
+        "Cyberware: Verbesserte Sicht": 1,
+        "Cyberware: Robustheit": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

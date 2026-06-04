@@ -380,7 +380,7 @@
     },
     {
       "aktion": "kaufen(Gatling-Pistole (.36)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 242,
       "kostenart": "Vermögen",
       "punkte": {
@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Messerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Verkleidungszubehörx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Munition Pistolen (klein) .22-.38 (50 Stück)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -516,7 +516,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Gatling-Pistole (.36)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 242,
       "kostenart": "Vermögen",
       "punkte": {
@@ -529,7 +529,7 @@
     },
     {
       "aktion": "kaufen(Messerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -542,7 +542,7 @@
     },
     {
       "aktion": "kaufen(Verkleidungszubehörx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -555,7 +555,7 @@
     },
     {
       "aktion": "kaufen(Munition Pistolen (klein) .22-.38 (50 Stück)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

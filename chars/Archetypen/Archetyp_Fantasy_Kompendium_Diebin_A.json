@@ -571,6 +571,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Dunkelsicht": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Unsichtbarkeit": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -636,7 +646,9 @@
         "Verstrickungsbeutel",
         "Fallenherstellungsset",
         "Rauchstab",
-        "Trank: Attributsteigerung"
+        "Trank: Attributsteigerung",
+        "Trank: Dunkelsicht",
+        "Trank: Unsichtbarkeit"
     ],
     "selected_waffen": [
         "Rapier",
@@ -661,7 +673,9 @@
         "Verstrickungsbeutel": 1,
         "Fallenherstellungsset": 1,
         "Rauchstab": 1,
-        "Trank: Attributsteigerung": 1
+        "Trank: Attributsteigerung": 1,
+        "Trank: Dunkelsicht": 1,
+        "Trank: Unsichtbarkeit": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 1.0,

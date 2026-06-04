@@ -405,9 +405,22 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Pistolex1)",
+      "ok": true,
+      "kosten": 250,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 140,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 390,
+      "kosten": 140,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
@@ -465,7 +478,7 @@
     {
       "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 390,
+      "kosten": 140,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,

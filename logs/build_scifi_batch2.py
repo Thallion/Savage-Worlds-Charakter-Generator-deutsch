@@ -54,7 +54,7 @@ try:
     for t in ['Beziehungen','Berühmt','Rampensau','Täuscher']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Kevlarjacke & Jeans',1),('Springmesser',1),
+    for item in [('Kevlarjacke & Jeans',1),('Springmesser',1),('Pistole',1),
                  ('Persönliche Datenassistenz',1),('Kleidung, formell',1),
                  ('Drohne, Kommerziell',1),('Persönliche Datenassistenz',1)]:
         s.kaufen(*item)
@@ -100,7 +100,7 @@ try:
     for item in [('Körperpanzerung +4',1),('Molekularschwert',1),('Commlink',1),('Persönliche Datenassistenz',1),
                  ('Doppelflinte',1)]:
         s.kaufen(*item)
-    for cw in [('Cyberware: Adrenalindrüse',1),('Cyberware: Verbesserte Sicht',1)]:
+    for cw in [('Cyberware: Adrenalindrüse',1),('Cyberware: Verbesserte Sicht',1),('Cyberware: Robustheit',1)]:
         s.kaufen(*cw)
     s.notiz('MISSING: Automatisches Schrotgewehr, Muskelgewebe-Cyberware (beide kein SciFi-Item im deutschen Setting)')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Mercenary_A.json')

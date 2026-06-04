@@ -518,7 +518,48 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Gepanzerter Reitermantel (schwer)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Messer, Bowie": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Colt Thunderer (.41)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dynamit (Stange)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Einläufige Flinte": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pferd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Pistole (groß) .40-.50 (50 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Schrotflinte (20 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Angetrieben (schwer)",
@@ -538,11 +579,36 @@
         "Mensch": true
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Gepanzerter Reitermantel (schwer)",
+        "Messer, Bowie",
+        "Colt Thunderer (.41)",
+        "Dynamit (Stange)",
+        "Einläufige Flinte",
+        "Pferd",
+        "Munition Pistole (groß) .40-.50 (50 Stück)",
+        "Munition Schrotflinte (20 Stück)"
+    ],
+    "selected_waffen": [
+        "Messer, Bowie",
+        "Colt Thunderer (.41)",
+        "Dynamit (Stange)",
+        "Einläufige Flinte"
+    ],
+    "selected_ruestungen": [
+        "Gepanzerter Reitermantel (schwer)"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Gepanzerter Reitermantel (schwer)": 1,
+        "Messer, Bowie": 1,
+        "Colt Thunderer (.41)": 1,
+        "Dynamit (Stange)": 2,
+        "Einläufige Flinte": 1,
+        "Pferd": 1,
+        "Munition Pistole (groß) .40-.50 (50 Stück)": 1,
+        "Munition Schrotflinte (20 Stück)": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,

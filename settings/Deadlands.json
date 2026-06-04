@@ -5912,6 +5912,132 @@
         "Schuss": 1,
         "PB": 2
       }
+    },
+    "Winchester '76 (.45)": {
+      "name": "Winchester '76 (.45)",
+      "kategorie": "Waffe",
+      "gewicht": 3.5,
+      "kosten": 40,
+      "setting": "Deadlands",
+      "beschreibung": "",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W8",
+        "Reichweite": "24/48/96",
+        "FR": 1,
+        "Schuss": 15,
+        "PB": 2
+      }
+    },
+    "LeMat Revolver (.40)": {
+      "name": "LeMat Revolver (.40)",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 25,
+      "setting": "Deadlands",
+      "beschreibung": "Auch als Double-Action Army bekannt; kann die Munition der Winchester '73 verwenden.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6",
+        "Reichweite": "12/24/48",
+        "FR": 1,
+        "Schuss": 9,
+        "PB": 1
+      }
+    },
+    "Colt Thunderer (.41)": {
+      "name": "Colt Thunderer (.41)",
+      "kategorie": "Waffe",
+      "gewicht": 1,
+      "kosten": 14,
+      "setting": "Deadlands",
+      "beschreibung": "",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W6",
+        "Reichweite": "12/24/48",
+        "FR": 1,
+        "Schuss": 6,
+        "PB": 1
+      }
+    },
+    "Wesson Dolch-Pistole (.41)": {
+      "name": "Wesson Dolch-Pistole (.41)",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 6,
+      "setting": "Deadlands",
+      "beschreibung": "Kombinierte Dolch-Pistole.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W4",
+        "Reichweite": "5/10/20",
+        "FR": 1,
+        "Schuss": 2,
+        "PB": "-"
+      }
+    },
+    "Einläufige Flinte": {
+      "name": "Einläufige Flinte",
+      "kategorie": "Waffe",
+      "gewicht": 3,
+      "kosten": 25,
+      "setting": "Deadlands",
+      "beschreibung": "Schrotflinte: +2 Schießen, 3W6 nah / 2W6 mittel / 1W6 weit.",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "1–3W6",
+        "Reichweite": "12/24/48",
+        "FR": 1,
+        "Schuss": 1,
+        "PB": "-"
+      }
+    },
+    "Bogen": {
+      "name": "Bogen",
+      "kategorie": "Waffe",
+      "gewicht": 1,
+      "kosten": 3,
+      "setting": "Deadlands",
+      "beschreibung": "",
+      "aktiv": true,
+      "typ": "Fernkampf",
+      "mindeststaerke": "W6",
+      "eigenschaften": {
+        "Schaden": "2W6",
+        "Reichweite": "12/24/48",
+        "FR": 1,
+        "Schuss": 1,
+        "PB": "-"
+      }
+    },
+    "Dynamit (Stange)": {
+      "name": "Dynamit (Stange)",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 3,
+      "setting": "Deadlands",
+      "beschreibung": "Schwere Waffe, Mittlere Flächenschablone (MFS). Werfen: Athletik; Anbringen: Reparieren. 1:4-Chance zu explodieren bei ≥6 Schaden. +2 Schaden ab 2 Stangen.",
+      "aktiv": true,
+      "typ": "Wurf",
+      "mindeststaerke": "W4",
+      "eigenschaften": {
+        "Schaden": "2W6",
+        "Reichweite": "4/8/16",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
     }
   },
   "settingregeln": {

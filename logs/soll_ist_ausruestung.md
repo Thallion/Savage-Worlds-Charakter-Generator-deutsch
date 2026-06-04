@@ -10,62 +10,125 @@
 
 ---
 
+## Deadlands (24 Chars vs. 24 Bögen)
+
+### Agent ↔ AGENT
+
+- **🔴 FEHLT_KATALOG** (2): `Ersatz-GatlingTrommel`, `Marke der Agency (+1 Überreden bei gesetzestreuen Typen)`
+
+### Chi-Meisterin ↔ CHI-MEISTERIN
+
+- **🔴 FEHLT_KATALOG** (4): `Deine Fäuste (Stä+W4)`, `Seidenfächer`, `Umhängetasche`, `Mantel`
+- **⚠ ZUVIEL** (1): `Messer`
+
+### Cowgirl ↔ COWGIRL
+
+- **🔴 FEHLT_KATALOG** (1): `Gepanzerte Beinschützer (+1 Beine, +1 Reiten vs. Erschöpfung)`
+- **⚠ ZUVIEL** (1): `Winchester '73 (.44-40)`
+
+### Eingeborenen-Kundschafterin ↔ EINGEBORENEN-KUNDSCHAFTERIN
+
+- **⚠ ZUVIEL** (1): `Winchester '73 (.44-40)`
+
+### Entdecker ↔ ENTDECKER
+
+- **🔴 FEHLT_KATALOG** (4): `Vergrößerungsglas`, `Jägerkleidung und -hut`, `Pfeife`, `elegantes Monokel`
+- **⚠ ZUVIEL** (1): `Munition Gewehr (klein) .38-44 (50 Stück)`
+
+### Gepeinigter ↔ GEPEINIGTER
+
+- **🔴 FEHLT_KATALOG** (1): `Nadel und Faden`
+
+### Gesegneter ↔ GESEGNETER
+
+- **🔴 FEHLT_KATALOG** (2): `Heiliges Kreuz und Ornat`, `abgewetzte Bibel`
+
+### Hexe ↔ HEXE
+
+- **⚠ ZUVIEL** (1): `Colt Lightning (.38)`
+
+### Investigativer Journalist ↔ INVESTIGATIVER JOURNALIST
+
+- **🔴 FEHLT_KATALOG** (3): `Tasche für Equipment`, `verschiedene Stifte und Griffel`, `Notizbuch`
+- **⚠ ZUVIEL** (1): `Colt Lightning (.38)`
+
+### Kopfgeldjäger ↔ KOPFGELDJÄGER
+
+- **🔴 FEHLT_KATALOG** (2): `Bandelier`, `Stapel Steckbriefe`
+- **⚠ ZUVIEL** (1): `Winchester '73 (.44-40)`
+
+### Medizinfrau ↔ MEDIZINFRAU
+
+- **🔴 FEHLT_KATALOG** (2): `Knochenhalskette`, `Medizinbeutel`
+
+### Metallmagier ↔ METALLMAGIER
+
+- **🔴 FEHLT_KATALOG** (1): `Smith & Robards Katalog`
+- **⚠ ZUVIEL** (1): `Derringer (.41)`
+
+### Schamane ↔ SCHAMANE
+
+- **⚠ ZUVIEL** (1): `Eingeborenenrüstung`
+
+### Taschenspieler ↔ TASCHENSPIELER
+
+- **🔴 FEHLT_KATALOG** (2): `Hoyles Buch der Spiele`, `zusätzliche in den Ärmeln versteckte Karten`
+
+### Territorialer Ranger ↔ TERRITORIALER RANGER
+
+- **🔴 FEHLT_KATALOG** (2): `Rangerabzeichen (+1 Überreden bei gesetzestreuen Typen)`, `Buch „Flüchtige vor der Justiz in den US-Territorien"`
+
+### US-Marshal ↔ US-MARSHAL
+
+- **🔴 FEHLT_KATALOG** (1): `US Marshal Marke`
+- **⚠ ZUVIEL** (2): `Winchester '73 (.44-40)`, `Munition Gewehr (klein) .38-44 (50 Stück)`
+
+### Vaquero ↔ VAQUERO
+
+- **🔴 FEHLT_KATALOG** (1): `Gepanzerte Beinschützer (+1 Beine, +1 Reiten vs. Erschöpfung)`
+- **⚠ ZUVIEL** (1): `Winchester '73 (.44-40)`
+
+### Verrückte Wissenschaftlerin ↔ VERRÜCKTE WISSENSCHAFTLERIN
+
+- **🔴 FEHLT_KATALOG** (3): `diverse Notizbücher und Schreibutensilien`, `verschiedene Spielereien`, `Laborkittel`
+
+### Voodoopraktikerin ↔ VOODOOPRAKTIKERIN
+
+- **🔴 FEHLT_KATALOG** (2): `Talisman`, `Voodooausrüstung`
+
+### Wundarzt ↔ WUNDARZT
+
+- **🔴 FEHLT_KATALOG** (2): `2× dehydrierte Luft-Tabletten (10 Min. Luft im Mund)`, `2× taktiler Desensibilisator (–2 Wundabzüge, 10 Min.)`
+
+### Zauberschützin ↔ ZAUBERSCHÜTZIN
+
+- **🔴 FEHLT_KATALOG** (2): `Groschenroman „Die Abenteuer von Doc Holliday"`, `Munitionspresse`
+
 ## Fantasy Kompendium (32 Chars vs. 32 Bögen)
 
 ### Akrobatin ↔ ACROBAT
 
-- **🔴 FEHLT_KATALOG** (1): `potion of wall walking`
 - **⚠ ZUVIEL** (1): `Trank: Geistige Stärke`
-
-### Alchemist ↔ ALCHEMIST
-
-- **🔴 FEHLT_KATALOG** (4): `bag of holding`, `goggles`, `sunrod`, `potion of environmental protection`
-
-### Barbarin ↔ BARBARIAN
-
-- **🔴 FEHLT_KATALOG** (1): `potion of growth`
-
-### Barde ↔ BARD
-
-- **🔴 FEHLT_KATALOG** (1): `adventurer’s lantern (lights on command, hovers near user)`
-
-### Diebin ↔ THIEF
-
-- **🔴 FEHLT_KATALOG** (2): `potion of darksight`, `potion of invisibility`
-
-### Druidin ↔ DRUID
-
-- **🔴 FEHLT_KATALOG** (1): `potion of invisibility`
 
 ### Hexe ↔ WITCH
 
-- **🔴 FEHLT_KATALOG** (3): `two prepared powers in chicken bones`, `grave dust`, `hex bag`
+- **🔴 FEHLT_KATALOG** (1): `two prepared powers in chicken bones`
 
 ### Krieger ↔ WARRIOR
 
-- **🔴 FEHLT_KATALOG** (1): `potion of environmental protection`
 - **⚠ ZUVIEL** (1): `Bronzehelm`
 
 ### Magier ↔ MAGE
 
-- **🔴 FEHLT_KATALOG** (2): `Cloak of Protection (+2)`, `potion of wall walking`
 - **⚠ ZUVIEL** (1): `Umhang mit Kapuze`
 
 ### Mönch ↔ MONK
 
 - **🔴 FEHLT_KATALOG** (1): `Bite/claws (Str+d8)`
 
-### Narr ↔ JESTER
-
-- **🔴 FEHLT_KATALOG** (1): `potion of invisibility`
-
-### Paladin ↔ PALADIN
-
-- **🔴 FEHLT_KATALOG** (1): `potion of environmental protection`
-
 ### Ritter ↔ KNIGHT
 
-- **🔴 FEHLT_KATALOG** (1): `war horse with padded barding`
+- **⚠ ZUVIEL** (1): `Wattierter Rossharnisch`
 
 ### Verteidiger ↔ DEFENDER
 
@@ -77,7 +140,6 @@
 
 ### Zauberer ↔ SORCERER
 
-- **🔴 FEHLT_KATALOG** (2): `bag of holding`, `potion of recharge (10 PP)`
 - **⚠ ZUVIEL** (1): `Umhang mit Kapuze`
 
 ## SciFi Kompendium (36 Chars vs. 12 Bögen)
@@ -90,32 +152,9 @@
 
 - **⚠ ZUVIEL** (1): `Waffensperre`
 
-### Hacker ↔ HACKER
-
-- **🔴 FEHLT_KATALOG** (1): `alter wear`
-
-### Infiltrator ↔ INFILTRATOR
-
-- **🔴 FEHLT_KATALOG** (2): `line projector`, `Cybernetic Implants: ×2 Hidden compartment (Concealed internal space that can hold up to two pounds of objects; finding it requires close examination and a Notice roll at –4).`
-- **⚠ ZUVIEL** (1): `Cyberware: Verborgenes Fach`
-
-### Influencer ↔ INFLUENCER
-
-- **🔴 FEHLT_KATALOG** (1): `light slugthrower (Range 10/20/40, Damage 2d6)`
-
-### Mercenary ↔ MERCENARY
-
-- **🔴 FEHLT_KATALOG** (2): `muscle weave (+1 Toughness).`, `Cybernetic Implants: Adrenal surge (+2 to recover from Shaken or Stunned)`
-- **⚠ ZUVIEL** (1): `Cyberware: Adrenalindrüse`
-
 ### Psyker ↔ PSYKER
 
 - **⚠ ZUVIEL** (1): `Waffensperre`
-
-### Roughneck ↔ ROUGHNECK
-
-- **🔴 FEHLT_KATALOG** (1): `Cybernetic Implants: Replacement arm (ignore One Arm penalties)`
-- **⚠ ZUVIEL** (1): `Cyberware: Ersatzgliedmaße`
 
 ### Surveyor ↔ SURVEYOR
 
@@ -127,9 +166,10 @@
 
 | Setting | Chars | FEHLT_OFFEN (Schritt 1) | FEHLT_KATALOG (Schritt 2) |
 |---|---|---|---|
-| Fantasy Kompendium | 32 | **0** | **22** |
-| SciFi Kompendium | 36 | **0** | **7** |
-| **Gesamt** | – | **0** | **29** |
+| Deadlands | 24 | **0** | **37** |
+| Fantasy Kompendium | 32 | **0** | **2** |
+| SciFi Kompendium | 36 | **0** | **0** |
+| **Gesamt** | – | **0** | **39** |
 
 **Schritt 1 (offen):** Diese Items sind im Katalog vorhanden — Build-Skripte können sie per `s.kaufen(name)` einbauen.
 **Schritt 2 (Katalog):** Diese Items fehlen im Katalog — User-Freigabe + Katalog-Erweiterung erforderlich.

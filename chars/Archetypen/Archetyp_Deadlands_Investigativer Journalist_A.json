@@ -528,6 +528,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Kamera": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "LeMat Revolver (.40)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Schrotflinte (20 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -551,16 +566,23 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Colt Lightning (.38)",
-        "Munition Pistolen (klein) .22-.38 (50 Stück)"
+        "Munition Pistolen (klein) .22-.38 (50 Stück)",
+        "Kamera",
+        "LeMat Revolver (.40)",
+        "Munition Schrotflinte (20 Stück)"
     ],
     "selected_waffen": [
-        "Colt Lightning (.38)"
+        "Colt Lightning (.38)",
+        "LeMat Revolver (.40)"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Colt Lightning (.38)": 1,
-        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
+        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1,
+        "Kamera": 1,
+        "LeMat Revolver (.40)": 1,
+        "Munition Schrotflinte (20 Stück)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -574,7 +596,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 235,
+    "vermoegen": 205,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

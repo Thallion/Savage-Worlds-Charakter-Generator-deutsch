@@ -545,6 +545,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Streitross": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Wattierter Rossharnisch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -605,7 +615,9 @@
         "Mittlerer Schild",
         "Söldnerpaket",
         "Bolzen (10)",
-        "Reitbedarf"
+        "Reitbedarf",
+        "Streitross",
+        "Wattierter Rossharnisch"
     ],
     "selected_waffen": [
         "Bastardschwert",
@@ -614,7 +626,8 @@
     ],
     "selected_ruestungen": [
         "Plattenbrustharnisch",
-        "Schwerer geschlossener Helm"
+        "Schwerer geschlossener Helm",
+        "Wattierter Rossharnisch"
     ],
     "selected_schilde": [
         "Mittlerer Schild"
@@ -628,7 +641,9 @@
         "Mittlerer Schild": 1,
         "Söldnerpaket": 1,
         "Bolzen (10)": 2,
-        "Reitbedarf": 1
+        "Reitbedarf": 1,
+        "Streitross": 1,
+        "Wattierter Rossharnisch": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 1.0,

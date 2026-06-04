@@ -431,6 +431,58 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Colt Thunderer (.41)x1)",
+      "ok": true,
+      "kosten": 14,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 211,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Gepanzerter Reitermantel (leicht)x1)",
+      "ok": true,
+      "kosten": 200,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 11,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Pferdx1) FORCE",
+      "ok": true,
+      "kosten": 11,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Pferd zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Munition Pistole (groß) .40-.50 (50 Stück)x1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistole (groß) .40-.50 (50 Stück) zum Preis 0 gekauft"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Machtpunkte)",
       "ok": true,
       "kosten": 0,
@@ -440,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -453,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -466,7 +518,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -479,7 +531,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -492,7 +544,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -505,7 +557,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -518,7 +570,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -531,7 +583,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 225,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -539,8 +591,35 @@
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "kaufen(Pferdx1) FORCE",
+      "ok": true,
+      "kosten": 11,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Pferd zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Munition Pistole (groß) .40-.50 (50 Stück)x1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistole (groß) .40-.50 (50 Stück) zum Preis 0 gekauft"
+    }
+  ],
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -660,7 +739,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 15,
-    "vermoegen": 225,
+    "vermoegen": 0,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

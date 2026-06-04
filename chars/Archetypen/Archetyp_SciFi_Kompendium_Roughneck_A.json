@@ -505,7 +505,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "cdd0f6fe-987b-4efe-930e-12c770483ddc": {
+            "52cba24a-d6a9-4409-aa7e-218f23e9390f": {
                 "name": "Cyberware: Ersatzgliedmaße",
                 "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
                 "unterkategorie": "Körper",
@@ -518,11 +518,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "cdd0f6fe-987b-4efe-930e-12c770483ddc",
+                "installations_id": "52cba24a-d6a9-4409-aa7e-218f23e9390f",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "9a92fa73-07a0-4ae4-a021-5983def21a93": {
+            "ca2ddc3e-908c-4a83-863c-195f719621f6": {
                 "name": "Cyberware: Klauen",
                 "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
                 "unterkategorie": "Offensiv",
@@ -536,7 +536,7 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "9a92fa73-07a0-4ae4-a021-5983def21a93",
+                "installations_id": "ca2ddc3e-908c-4a83-863c-195f719621f6",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }

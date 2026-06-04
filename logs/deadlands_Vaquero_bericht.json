@@ -392,6 +392,110 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Feldflaschex1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 203,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Gusseiserne Pfannex1)",
+      "ok": true,
+      "kosten": 0.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 202.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Pferdx1)",
+      "ok": true,
+      "kosten": 150.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 52.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schlafsackx1)",
+      "ok": true,
+      "kosten": 4.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 48.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Seil (20 Meter)x1)",
+      "ok": true,
+      "kosten": 5.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 43.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Winchester '76 (.45)x1)",
+      "ok": true,
+      "kosten": 40.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 3.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Munition Gewehr (groß) .45 (50 Stück)x1) FORCE",
+      "ok": true,
+      "kosten": 3.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Gewehr (groß) .45 (50 Stück) zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Munition Pistole (groß) .40-.50 (50 Stück)x1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistole (groß) .40-.50 (50 Stück) zum Preis 0 gekauft"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Hahnwedeln)",
       "ok": true,
       "kosten": 0,
@@ -401,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 204,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -414,7 +518,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 204,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -427,7 +531,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 204,
+      "vermoegen": 0,
       "warnung": null
     },
     {
@@ -435,8 +539,35 @@
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "kaufen(Munition Gewehr (groß) .45 (50 Stück)x1) FORCE",
+      "ok": true,
+      "kosten": 3.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Gewehr (groß) .45 (50 Stück) zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Munition Pistole (groß) .40-.50 (50 Stück)x1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistole (groß) .40-.50 (50 Stück) zum Preis 0 gekauft"
+    }
+  ],
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -549,7 +680,7 @@
       "aufstiege": 1
     },
     "machtpunkte": 0,
-    "vermoegen": 204,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

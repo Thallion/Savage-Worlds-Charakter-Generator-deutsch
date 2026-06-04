@@ -444,6 +444,45 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Eingeborenenschild (Klein)x1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Pferdx1)",
+      "ok": true,
+      "kosten": 150,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 93,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schlafsackx1)",
+      "ok": true,
+      "kosten": 4,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 89,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Heiliger/Unheiliger Krieger)",
       "ok": true,
       "kosten": 0,
@@ -453,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -466,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -479,7 +518,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -492,7 +531,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -505,7 +544,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -518,7 +557,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -531,7 +570,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -544,7 +583,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 245,
+      "vermoegen": 89,
       "warnung": null
     },
     {
@@ -677,7 +716,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 15,
-    "vermoegen": 245,
+    "vermoegen": 89,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

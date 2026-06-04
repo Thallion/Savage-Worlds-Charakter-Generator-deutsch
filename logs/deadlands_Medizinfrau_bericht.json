@@ -392,6 +392,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Schlafsackx1)",
+      "ok": true,
+      "kosten": 4,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 119,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Geschichtenerzähler)",
       "ok": true,
       "kosten": 0,
@@ -401,7 +414,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -414,7 +427,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -427,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -440,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -453,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -466,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -479,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -492,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -505,7 +518,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 123,
+      "vermoegen": 119,
       "warnung": null
     },
     {
@@ -639,7 +652,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 15,
-    "vermoegen": 123,
+    "vermoegen": 119,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

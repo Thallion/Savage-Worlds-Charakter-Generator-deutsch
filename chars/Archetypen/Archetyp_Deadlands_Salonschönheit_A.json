@@ -529,6 +529,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Schuhe": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -552,7 +557,8 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Derringer (.41)",
-        "Munition Pistolen (klein) .22-.38 (50 Stück)"
+        "Munition Pistolen (klein) .22-.38 (50 Stück)",
+        "Schuhe"
     ],
     "selected_waffen": [
         "Derringer (.41)"
@@ -561,7 +567,8 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Derringer (.41)": 1,
-        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
+        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1,
+        "Schuhe": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -575,7 +582,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 243,
+    "vermoegen": 241,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

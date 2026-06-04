@@ -405,6 +405,32 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Werkzeugsatzx1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 218,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Wesson Dolch-Pistole (.41)x1)",
+      "ok": true,
+      "kosten": 6,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 212,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": true,
       "kosten": 0,
@@ -414,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 212,
       "warnung": null
     },
     {
@@ -427,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 212,
       "warnung": null
     },
     {
@@ -440,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 212,
       "warnung": null
     },
     {
@@ -453,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 212,
       "warnung": null
     },
     {
@@ -466,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 212,
       "warnung": null
     },
     {
@@ -479,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 243,
+      "vermoegen": 212,
       "warnung": null
     },
     {
@@ -611,7 +637,7 @@
       "aufstiege": 1.0
     },
     "machtpunkte": 15,
-    "vermoegen": 243,
+    "vermoegen": 212,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

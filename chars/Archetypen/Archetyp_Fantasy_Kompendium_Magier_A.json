@@ -601,6 +601,16 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Trank: Wandkrabbler": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Umhang des Schutzes": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Umhang mit Kapuze": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -684,6 +694,8 @@
         "Stab (3,5 m)",
         "Dolch",
         "Magierpaket",
+        "Trank: Wandkrabbler",
+        "Umhang des Schutzes",
         "Umhang mit Kapuze",
         "Trank: Heilung",
         "Trank: Beschleunigung"
@@ -699,6 +711,8 @@
         "Stab (3,5 m)": 1,
         "Dolch": 1,
         "Magierpaket": 1,
+        "Trank: Wandkrabbler": 1,
+        "Umhang des Schutzes": 1,
         "Umhang mit Kapuze": 1,
         "Trank: Heilung": 1,
         "Trank: Beschleunigung": 1

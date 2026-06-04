@@ -552,6 +552,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Werkzeugsatz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Wesson Dolch-Pistole (.41)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -579,16 +589,21 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Derringer (.41)",
-        "Munition Pistolen (klein) .22-.38 (50 Stück)"
+        "Munition Pistolen (klein) .22-.38 (50 Stück)",
+        "Werkzeugsatz",
+        "Wesson Dolch-Pistole (.41)"
     ],
     "selected_waffen": [
-        "Derringer (.41)"
+        "Derringer (.41)",
+        "Wesson Dolch-Pistole (.41)"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Derringer (.41)": 1,
-        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1
+        "Munition Pistolen (klein) .22-.38 (50 Stück)": 1,
+        "Werkzeugsatz": 1,
+        "Wesson Dolch-Pistole (.41)": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 1.0,
@@ -602,7 +617,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 243,
+    "vermoegen": 212,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

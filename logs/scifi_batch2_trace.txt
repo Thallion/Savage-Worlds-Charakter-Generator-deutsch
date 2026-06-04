@@ -13,7 +13,7 @@ Influencer FERTIG anomalien=5
   Advance Stärke: ok=True
   Advance Schnell: ok=True
   Advance Gassenwissen: ok=True
-Mercenary FERTIG anomalien=7
+Mercenary FERTIG anomalien=8
   Draken HC: ['Einarmig', 'Impulsiv', 'Langsam_leicht']
   Talent: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}

@@ -589,6 +589,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Unsichtbarkeit": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -656,7 +661,8 @@
     "selected_allgemeine_ausruestung": [
         "Stab (3,5 m)",
         "Hemd aus natürlicher Rüstung",
-        "Wildnispaket"
+        "Wildnispaket",
+        "Trank: Unsichtbarkeit"
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
@@ -666,7 +672,8 @@
     "ausruestung_mengen": {
         "Stab (3,5 m)": 1,
         "Hemd aus natürlicher Rüstung": 1,
-        "Wildnispaket": 1
+        "Wildnispaket": 1,
+        "Trank: Unsichtbarkeit": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -680,7 +687,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 193.75,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

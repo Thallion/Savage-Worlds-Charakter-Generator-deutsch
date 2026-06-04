@@ -5,7 +5,7 @@
   → chargen OK, 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   DIFF: []
-  KRIEGER: anomalien=9
+  KRIEGER: anomalien=10
 
 === ASSASSININ (Anomalie-Fix) ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}

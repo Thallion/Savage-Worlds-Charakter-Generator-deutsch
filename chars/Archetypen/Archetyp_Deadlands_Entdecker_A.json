@@ -534,6 +534,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Kugel (mit Schwarzpulver) (20 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -558,7 +563,8 @@
     "selected_allgemeine_ausruestung": [
         "Springfield-Muskete (.58)",
         "Messer",
-        "Munition Gewehr (klein) .38-44 (50 Stück)"
+        "Munition Gewehr (klein) .38-44 (50 Stück)",
+        "Kugel (mit Schwarzpulver) (20 Stück)"
     ],
     "selected_waffen": [
         "Springfield-Muskete (.58)",
@@ -569,7 +575,8 @@
     "ausruestung_mengen": {
         "Springfield-Muskete (.58)": 1,
         "Messer": 1,
-        "Munition Gewehr (klein) .38-44 (50 Stück)": 1
+        "Munition Gewehr (klein) .38-44 (50 Stück)": 1,
+        "Kugel (mit Schwarzpulver) (20 Stück)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -583,7 +590,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 236,
+    "vermoegen": 235,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

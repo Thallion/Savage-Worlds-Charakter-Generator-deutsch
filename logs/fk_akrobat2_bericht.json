@@ -470,9 +470,22 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Trank: Wandkrabblerx1)",
+      "ok": true,
+      "kosten": 200.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 172.25,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
       "ok": true,
-      "kosten": 372.25,
+      "kosten": 172.25,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
@@ -530,7 +543,7 @@
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
       "ok": true,
-      "kosten": 372.25,
+      "kosten": 172.25,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,

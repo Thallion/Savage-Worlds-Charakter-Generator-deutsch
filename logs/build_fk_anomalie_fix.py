@@ -76,7 +76,7 @@ try:
     for name, anz in [('Schwert, Langschwert',1),('Dolch',1),('Netz (beschwert)',1),
                       ('Leichte Armbrust',1),('Bronzebrustpanzer',1),('Bronzehelm',1),
                       ('Mittlerer Schild',1),('Söldnerpaket',1),('Bolzen (10)',2),
-                      ('Trank: Beschleunigung',1)]:
+                      ('Trank: Beschleunigung',1),('Trank: Umgebungsschutz',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank des Umgebungsschutzes (nicht im FK-Katalog)')

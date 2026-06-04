@@ -616,6 +616,12 @@ ITEM_ALIASES = {
     'muscle weave': ['cyberware: robustheit'],
     'slugthrower': ['pistole'],
     'light slugthrower': ['pistole'],
+    'potion of environmental protection': ['trank: umgebungsschutz'],
+    # Cyberware, die der Char bereits besitzt (Bogen-Präfix "Cybernetic Implants:")
+    'hidden compartment': ['verborgenes fach'],
+    'adrenal surge': ['adrenalindrüse'],
+    'replacement arm': ['ersatzgliedmaße'],
+    'cybernetic eyes': ['cyberware: verbesserte sicht'],
     'kevlar jacket': ['kevlarjacke'],
     'language translator': ['universalübersetzer'],
     'rebreather': ['kreislaufatemgerät'],
@@ -627,6 +633,36 @@ ITEM_ALIASES = {
     'electronic lockpick': ['dietriche'],
     'automatic shotgun': ['doppelflinte'],
     'camouflage suit': ['tarnanzug'],
+    # --- Deadlands: Munition (Bogen nennt Einzelkaliber, Katalog hat Range-Bündel) ---
+    '45er munition': ['munition pistole (groß)', 'munition gewehr (groß)'],
+    '45er pistolenmunition': ['munition pistole (groß)'],
+    '45er gewehrmunition': ['munition gewehr (groß)'],
+    '44-40er munition': ['munition gewehr (klein)', 'munition pistole (groß)'],
+    '44er munition': ['munition pistole (groß)'],
+    '41er munition': ['munition pistolen (klein)', 'munition pistole (groß)'],
+    '41er pistolenmunition': ['munition pistolen (klein)', 'munition pistole (groß)'],
+    '40er munition': ['munition pistolen (klein)', 'munition pistole (groß)'],
+    '32er munition': ['munition pistolen (klein)'],
+    # 'kugel ...' (Singular): App depluralisiert den Katalog-Key 'Kugeln' beim Speichern
+    '58er munition': ['munition gewehr (groß)', 'kugeln', 'kugel (mit schwarzpulver)'],
+    'schrotmunition': ['munition schrotflinte'],
+    'schrotflintenmunition': ['munition schrotflinte'],
+    # --- Deadlands: Waffen-/Item-Synonyme (Katalog kennt das Item anders benannt) ---
+    'colt frontiers': ['colt frontier'],
+    'springfield-muskete mit gezogenem lauf': ['springfield-muskete'],
+    'bowiemesser': ['messer, bowie'],
+    'hickorystock': ['stab'],
+    'kartenspiel': ['spielkarten'],
+    'werkzeugtasche': ['werkzeugsatz'],
+    'boxkamera mit 10 fotoplatten': ['kamera'],
+    'kochgeschirr': ['gusseiserne pfanne'],
+    'pony': ['pferd'],
+    'stangen dynamit': ['dynamit'],
+    # --- Deadlands: Varianten vorhandener Items (kein eigener Katalog-Eintrag) ---
+    'haarpfeilbrustpanzer': ['eingeborenenrüstung'],
+    "runenbesetzte winchester '73": ["winchester '73"],
+    'runenbesetzter colt frontier': ['colt frontier'],
+    'schwarzer duster': ['reitermantel'],
 }
 
 

@@ -392,6 +392,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Erfinderschürzex1)",
+      "ok": true,
+      "kosten": 40,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 203,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Machtpunkte)",
       "ok": true,
       "kosten": 0,
@@ -401,7 +414,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -414,7 +427,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -427,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -440,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -453,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -466,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -479,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 1
       },
-      "vermoegen": 243,
+      "vermoegen": 203,
       "warnung": null
     },
     {
@@ -606,7 +619,7 @@
       "aufstiege": 0.5
     },
     "machtpunkte": 20,
-    "vermoegen": 243,
+    "vermoegen": 203,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

@@ -2026,15 +2026,30 @@ offiziellen Übersetzungen:
 **Verifikation:** Balazar buildet nach Fix sauber (ok=True, alle Talente/Handicaps/Mächte,
 nur 1 FP-Defizit bei Überleben — Budget-Frage, kein Bug).
 
-## Verbleibende echte Daten-Lücken (2)
+## Verbleibende echte Daten-Lücken (0)
 
-| Typ | EN | DE (fehlt) |
+**Alle Lücken geschlossen (2026-06-04):**
+- `Kränklich` (Anemic) — existierte bereits, war nur ein Mapping-Fehler
+- `Banner` (Cavalier Seasoned Edge) — neu angelegt in `settings/Savage Pathfinder.json`
+
+## ✅ Daten-Lücken behoben (2026-06-04)
+
+| Was | Status | Aktion |
 |---|---|---|
-| Handicap | Anemic | Anämisch / Blutarm |
-| Talent/Edge | Banner (Cavalier, Seasoned) | — |
+| `AH (Beschwörer)` kategorie=Hintergrund | ✅ Behoben | Neues `Beschwörer`-Klassentalent (kategorie=Klasse) + `Eidolon`-Talent |
+| `Banner` (Kavalier Seasoned Edge) | ✅ Ergänzt | Neues Talent in `settings/Savage Pathfinder.json` |
+| Anemic → `Kränklich` | ✅ Existiert bereits | Mapping-Fehler behoben; `Kränklich` war schon im Setting |
 
-Alle anderen ursprünglich ~15 „fehlenden" Einträge existieren unter anderen deutschen Namen
-(s. Mapping-Tabelle oben).
+## Build-Status final (18/18 mit Ausrüstung)
+
+| Status | Anzahl | Charaktere |
+|---|---|---|
+| **Perfekt** (DIFF=0) | **7** | Kira, Brokar, Zyril, Korva, Sil, Alain, Alahazra |
+| **Nahezu perfekt** | **11** | Teller, Paelie, Fariel, Marn, Gnor, Madda, Damiel, Imrijka, Feiya, Balazar, Darla |
+
+Alle 18 Charaktere mit vollständiger Ausrüstung gebaut. Budget-Diffs in 11 Chars sind
+ausschließlich Fertigkeitspunkt-Defizite (englische Bögen überziehen das 12-FP-Budget) —
+keine Code-Bugs. 0 fehlende Katalog-Items.
 
 ## Auto-Einträge pro Klassentalent (für SOLL-Dicts)
 
@@ -2069,3 +2084,106 @@ Alle anderen ursprünglich ~15 „fehlenden" Einträge existieren unter anderen 
 | Halbelf | — (freies Attribut) | — |
 | Mensch | (freies Talent + Attribut) | — |
 | Zwerg | — | — |
+
+## Letzte Lücke geschlossen — ✅ 2026-06-04
+
+16 neue Items angelegt (`settings/Fantasy Kompendium.json` 251→266, `settings/SciFi Kompendium.json` 315→317), Werte aus Regelwerk bzw. plausibel an vorhandenen Items orientiert:
+
+**Fantasy Kompendium (14 neu):** Streitross (350, Regelwerk), Wattierter Rossharnisch (100,
+Regelwerk Rossharnische), Tränke Dunkelsicht/Wachstum/Wandkrabbler/Umgebungsschutz (je 200),
+Trank: Unsichtbarkeit (500), Trank: Machtpunkte aufladen (500), Tasche des Fassens (500),
+Umhang des Schutzes (500), Sonnenstab (20), Schutzbrille (10), Grabstaub (25), Hexenbeutel (50),
+Schwebende Laterne (100).
+**SciFi (2 neu):** Wandelkleidung (250), Linienprojektor (250).
+**Statt Neuanlage per Alias auf vorhandene Keys:** muscle weave→Cyberware: Robustheit,
+slugthrower→Pistole, hidden compartment/adrenal surge/replacement arm→jeweilige Cyberware
+(Char besitzt sie bereits; Bogen-Präfix „Cybernetic Implants:" wird in normalize_item gestrippt).
+
+**Equipped:** 15 Chars nachgerüstet (Akrobatin, Alchemist, Barbarin, Barde, Diebin, Druidin, Hexe,
+Magier, Narr, Ritter, Zauberer, Paladin/Krieger; SciFi: Hacker, Infiltrator, Influencer, Mercenary).
+Rebuild der betroffenen FK-/SciFi-Skripte → **OFFEN = 0, FEHLT_KATALOG = 2** (deterministisch).
+
+**Verbleibende 2 sind KEINE Ausrüstung:** Hexe „two prepared powers in chicken bones"
+(Macht-Aufbewahrung, Spielmechanik) und Mönch „Bite/claws" (Rassen-Naturwaffe Rakashaner).
+→ **Ausrüstungs-Lücke vollständig geschlossen.**
+
+### Gesamt-Verlauf FEHLT_KATALOG (per-occurrence)
+228 (roh) → 169 → 160 → 41 → 29 → **2** (nur Nicht-Items). Echte Ausrüstungslücke: **0**.
+
+---
+
+## Deadlands Ausrüstungs-Gegencheck (2026-06-04)
+
+**Auslöser:** Deadlands war bislang **nicht** in der SOLL/IST-Analyse enthalten — der Parser
+`parse_english_gear_clean` sucht die Sektion `GEAR`, der deutsche Deadlands-Bogen
+(`US85040PDF_Deadlands_Archetypen-Set_meta.txt`) nutzt aber `AUSRÜSTUNG`. Dadurch wurde für jeden
+der 24 Deadlands-Archetypen leere Ausrüstung geparst → Setting still übersprungen.
+
+**Fix:** Neuer `parse_german_gear()` (Name zwischen zwei `====`-Trennzeilen, AUSRÜSTUNG…AUFSTIEGE);
+Setting-Auswahl über `GERMAN_SETTINGS = {'Deadlands'}`. Bogen-Name `SALOONSCHÖNHEIT` ≠ Char
+`Salonschönheit` → Alias in `DE_TO_EN`. Munitions-Guard in `normalize_item` (Kaliber wie `45er`
+NICHT als Mengen-Präfix abschneiden). Deadlands-Aliase in `check_fehlende_ausruestung.py`
+(Kaliber-Munition → generische Katalog-Bündel; Synonyme Bowiemesser→`Messer, Bowie`,
+Hickorystock→`Stab`, Kartenspiel→`Spielkarten`, Werkzeugtasche→`Werkzeugsatz`, Pony→`Pferd` u.a.).
+
+**Ergebnis Deadlands (24 Chars):** FEHLT_KATALOG **roh 85 → 55** nach Alias-Schärfung;
+FEHLT_OFFEN **27 → 45** (Munition korrekt nach Kat.1 verschoben: im Katalog, nur nicht gekauft).
+
+### Kategorie 1 — im Katalog vorhanden, nur nicht gekauft (45)
+Überwiegend Kaliber-Munition (Char hat keine/andere gekauft), Pferd, Schlafsack, Seil,
+Pistolengürtel, Eingeborenenschild, Kochgeschirr, Gatling-Pistole (.36) u.a.
+→ per `s.kaufen(...)` in den Build-Skripten ergänzbar.
+
+### Kategorie 2a — echte Waffen, NICHT im Katalog, im Grundbuch mit Stats+Preis bestätigt
+| Waffe | Reichw. | Schaden | PB | Schuss | Min.St. | Gew. | Kosten | Archetypen |
+|---|---|---|---|---|---|---|---|---|
+| Winchester '76 (.45) | 24/48/96 | 2W8 | 2 | 15 | W4 | 3,5 | $40 | Cowgirl, Vaquero, US-Marshal, Eingeb.-Kundsch., Kopfgeldjäger |
+| LeMat Revolver (.40) | 12/24/48 | 2W6 | 1 | 9 | W6 | 2 | $25 | Investigativer Journalist |
+| Colt Thunderer (.41) | 12/24/48 | 2W6 | 1 | 6 | W4 | 1 | $14 | Hexe („Colt Thunder"), Territorialer Ranger |
+| Wesson Dolch-Pistole (.41) | 5/10/20 | 2W4 | — | 2 | W6 | 0,5 | $6 | Metallmagier |
+| Einläufige Flinte | 12/24/48 | 1–3W6 | — | 1 | W4 | 3 | $25 | Territorialer Ranger |
+| Bogen | 12/24/48 | 2W6 | — | 1 | W6 | 1 | $3 | Krieger |
+| Dynamit (Stange) | Wurf (Athletik) | — Schwere Waffe — | | | | | $3 | Territorialer Ranger |
+
+→ **Freigabe erforderlich** (Katalog-Erweiterung `settings/Deadlands.json`).
+
+### Kategorie 2b — Variante/Synonym vorhandener Items (kein neuer Eintrag nötig)
+- `Haarpfeilbrustpanzer` → **Eingeborenenrüstung** (Krieger besitzt sie; Naturrüstung)
+- `Runenbesetzte Winchester '73` / `Runenbesetzter Colt Frontier` → Zauberschützin-Spezial,
+  Basiswaffe existiert (Winchester '73 / Colt Frontier); „runenbesetzt" ist Flavor
+- `Schwarzer Duster` → Reitermantel/Wintermantel (Manteltyp)
+
+### Kategorie 2c — Flavor-/Quest-Items ohne Spielwerte (Charakterbeschreibung, kein Katalog-Item)
+Abzeichen (Marke der Agency, Rangerabzeichen, US Marshal Marke), Medizinbeutel, Knochenhalskette,
+Voodooausrüstung, Talisman, Heiliges Kreuz/Bibel, Bücher/Notizbücher/Groschenroman/Steckbriefe,
+Laborkittel, Vergrößerungsglas, Pfeife, Monokel, Nadel und Faden, Bandelier, Munitionspresse,
+Ersatz-Gatling-Trommel, verrückte-Wissenschaft-Gadgets (taktiler Desensibilisator, dehydrierte
+Luft-Tabletten), Gepanzerte Beinschützer u.a. → bewusst NICHT im Katalog (keine SW-Spielwerte).
+
+### Kategorie 3 — Nicht-Item
+`Deine Fäuste (Stä+W4)` (Chi-Meisterin) = waffenloser Angriff, keine Ausrüstung.
+
+### Deadlands — Lücke geschlossen ✅ (2026-06-04)
+
+**Katalog:** 7 Waffen in `settings/Deadlands.json` ergänzt (114→121), Werte aus dem Grundbuch
+(Winchester '76, LeMat Revolver, Colt Thunderer, Wesson Dolch-Pistole, Einläufige Flinte, Bogen,
+Dynamit). Aliase für 2b-Varianten (Haarpfeilbrustpanzer→Eingeborenenrüstung, Runenbesetzt→Basiswaffe,
+Schwarzer Duster→Reitermantel).
+
+**Builds:** `EXTRA_GEAR`-Map in `logs/deadlands_build.py` (Kategorie-1-OFFEN + neue Waffen pro
+Archetyp), Kaufschleife erweitert. Alle 24 Deadlands-Chars neu gebaut → 0 korrupt, 0 leer.
+
+**Ergebnis Deadlands:** FEHLT_OFFEN **27/45/52 → 0**, FEHLT_KATALOG **85 → 37**.
+Die verbleibenden 37 sind **bewusst keine Katalog-Items**: Flavor-/Quest-Objekte ohne SW-Spielwerte
+(Abzeichen, Bücher, Medizinbeutel, Voodooausrüstung, persönliche Effekten, verrückte-Wissenschaft-
+Einweg-Gadgets, Archetyp-Karten-Only-Items wie „Gepanzerte Beinschützer") + 1 Nicht-Item
+(„Deine Fäuste" = waffenloser Angriff). `Gepanzerte Beinschützer` steht in keiner Waffen-/
+Rüstungstabelle der beiden PDFs → bewusst nicht angelegt.
+
+**Gefundener App-Daten-Quirk:** Katalog-Key `Kugeln (mit Schwarzpulver) (20 Stück)` wird beim
+Hinzufügen zum Charakter zu `Kugel …` **depluralisiert** (Singular). Der Kauf funktioniert, aber
+gespeicherter Item-Name ≠ Katalog-Key → potenziell fehleranfällig bei späteren Namens-Vergleichen
+(Re-Load/Export). Im Analyzer per Singular-Alias gebrückt.
+
+**Gesamtstand SOLL/IST-Ausrüstung (alle Settings):** FEHLT_OFFEN **0**, FEHLT_KATALOG **39**
+(Deadlands 37 Flavor/Nicht-Items + FK 2 Nicht-Items). Echte Ausrüstungslücke: **0**.

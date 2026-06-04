@@ -509,6 +509,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Heiliges Wasser zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Trank: Umgebungsschutzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Umgebungsschutz zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Paladin_A.json)",
       "ok": true
     }
@@ -572,6 +585,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Heiliges Wasser zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Trank: Umgebungsschutzx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Umgebungsschutz zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Trank des Umgebungsschutzes",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Trank des Umgebungsschutzes",
@@ -581,7 +607,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 6,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

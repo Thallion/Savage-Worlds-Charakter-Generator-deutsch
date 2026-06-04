@@ -98,7 +98,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Streitflegel',1),('Mittlerer Schild',1),('Plattenbrustharnisch',1),('Klerikerpaket',1),('Heiliges Wasser',1)]:
+    for name, anz in [('Streitflegel',1),('Mittlerer Schild',1),('Plattenbrustharnisch',1),('Klerikerpaket',1),('Heiliges Wasser',1),('Trank: Umgebungsschutz',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank des Umgebungsschutzes')
@@ -255,7 +255,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Rapier',1),('Dolch',5),('Totschläger',1),('Handarmbrust',1),('Ledertunika',1),('Umhang mit Kapuze',1),('Diebespaket',1),('Bolzen (10)',2),('Verstrickungsbeutel',1),('Fallenherstellungsset',1),('Rauchstab',1),('Trank: Attributsteigerung',1)]:
+    for name, anz in [('Rapier',1),('Dolch',5),('Totschläger',1),('Handarmbrust',1),('Ledertunika',1),('Umhang mit Kapuze',1),('Diebespaket',1),('Bolzen (10)',2),('Verstrickungsbeutel',1),('Fallenherstellungsset',1),('Rauchstab',1),('Trank: Attributsteigerung',1),('Trank: Dunkelsicht',1),('Trank: Unsichtbarkeit',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Tränke (Unsichtbarkeit, Nachtsicht)')
@@ -340,7 +340,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Dolch',1),('Tunika',1),('Umhang mit Kapuze',1),('Magierpaket',1),('Buch',1),('Trank: Heilung',1)]:
+    for name, anz in [('Dolch',1),('Tunika',1),('Umhang mit Kapuze',1),('Magierpaket',1),('Buch',1),('Trank: Heilung',1),('Tasche des Fassens',1),('Trank: Machtpunkte aufladen',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Tasche des Fassens, Trank Aufladen MP (nicht im FK-Katalog)')
@@ -427,7 +427,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Dolch',1),('Tunika',1),('Magierpaket',1),('Trank: Attributsteigerung',1)]:
+    for name, anz in [('Dolch',1),('Tunika',1),('Magierpaket',1),('Trank: Attributsteigerung',1),('Grabstaub',1),('Hexenbeutel',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Grabstaub, Hexenbeutel, 2 vorbereitete Mächte in Hühnerknochen')
@@ -508,7 +508,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Schwert, Langschwert',1),('Dolch',1),('Netz (beschwert)',1),('Leichte Armbrust',1),('Bronzebrustpanzer',1),('Bronzehelm',1),('Mittlerer Schild',1),('Söldnerpaket',1),('Bolzen (10)',2),('Trank: Beschleunigung',1)]:
+    for name, anz in [('Schwert, Langschwert',1),('Dolch',1),('Netz (beschwert)',1),('Leichte Armbrust',1),('Bronzebrustpanzer',1),('Bronzehelm',1),('Mittlerer Schild',1),('Söldnerpaket',1),('Bolzen (10)',2),('Trank: Beschleunigung',1),('Trank: Umgebungsschutz',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank des Umgebungsschutzes (nicht im FK-Katalog)')

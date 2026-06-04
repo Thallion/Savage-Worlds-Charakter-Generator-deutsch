@@ -533,6 +533,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Pistolengürtel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -557,7 +562,8 @@
     "selected_allgemeine_ausruestung": [
         "Colt Frontier (.44-40)",
         "Messer",
-        "Munition Gewehr (klein) .38-44 (50 Stück)"
+        "Munition Gewehr (klein) .38-44 (50 Stück)",
+        "Pistolengürtel"
     ],
     "selected_waffen": [
         "Colt Frontier (.44-40)",
@@ -568,7 +574,8 @@
     "ausruestung_mengen": {
         "Colt Frontier (.44-40)": 2,
         "Messer": 1,
-        "Munition Gewehr (klein) .38-44 (50 Stück)": 1
+        "Munition Gewehr (klein) .38-44 (50 Stück)": 1,
+        "Pistolengürtel": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -582,7 +589,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 214,
+    "vermoegen": 212,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

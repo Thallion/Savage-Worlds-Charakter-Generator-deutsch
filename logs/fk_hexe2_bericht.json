@@ -483,6 +483,32 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Grabstaubx1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 183,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Hexenbeutelx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 133,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Hexe_A.json)",
       "ok": true
     }
@@ -504,7 +530,7 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 208
+      "vermoegen": 133
     }
   ],
   "anomalien_anzahl": 2,
@@ -631,7 +657,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 15,
-    "vermoegen": 208,
+    "vermoegen": 133,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

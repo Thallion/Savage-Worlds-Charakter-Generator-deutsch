@@ -470,6 +470,32 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Reitbedarf zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Streitrossx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Streitross zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Wattierter Rossharnischx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Wattierter Rossharnisch zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Ritter_A.json)",
       "ok": true
     }
@@ -554,6 +580,32 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Reitbedarf zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Streitrossx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Streitross zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Wattierter Rossharnischx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Wattierter Rossharnisch zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Streitross mit gepolsteter Schabracke",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Streitross mit gepolsteter Schabracke",
@@ -572,7 +624,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 10,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

@@ -6,8 +6,8 @@
   → 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   DIFF: []
-  Vermögen nach Kauf: 156
-  NARR: anomalien=2
+  Vermögen nach Kauf: 0
+  NARR: anomalien=3
 
 === 20. RITTER ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -17,7 +17,7 @@
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.0, 'vermoegen': 500, 'machtpunkte': 0}
   DIFF: []
   Vermögen nach Kauf: 0
-  RITTER: anomalien=8
+  RITTER: anomalien=10
 
 === 21. SCHAMANE ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}

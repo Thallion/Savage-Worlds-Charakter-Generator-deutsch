@@ -6,6 +6,44 @@ os.makedirs('logs', exist_ok=True)
 tlog = open('logs/deadlands_build_trace.txt', 'w', encoding='utf-8')
 def m(x): tlog.write(str(x)+'\n'); tlog.flush()
 
+# Aus SOLL/IST-Gegencheck 2026-06-04: Ausrüstung, die laut Bogen vorgesehen und
+# im Katalog vorhanden ist, aber bislang nicht gekauft wurde (Kategorie 1 OFFEN).
+# Inkl. der neu im Katalog angelegten Waffen (Winchester '76, LeMat, Colt Thunderer,
+# Wesson Dolch-Pistole, Einläufige Flinte, Bogen, Dynamit).
+EXTRA_GEAR = {
+    'Cowgirl': [('Feldflasche', 1), ('Gusseiserne Pfanne', 1), ('Pferd', 1),
+                ('Schlafsack', 1), ('Seil (20 Meter)', 1), ("Winchester '76 (.45)", 1),
+                ('Munition Gewehr (groß) .45 (50 Stück)', 1),
+                ('Munition Pistole (groß) .40-.50 (50 Stück)', 1)],
+    'Eingeborenen-Kundschafterin': [('Pferd', 1), ('Schlafsack', 1),
+                ("Winchester '76 (.45)", 1), ('Munition Gewehr (klein) .38-44 (50 Stück)', 1)],
+    'Entdecker': [('Kugeln (mit Schwarzpulver) (20 Stück)', 1)],
+    'Gepeinigter': [('Pistolengürtel', 1)],
+    'Hexe': [('Colt Thunderer (.41)', 1), ('Gepanzerter Reitermantel (leicht)', 1),
+             ('Pferd', 1), ('Munition Pistole (groß) .40-.50 (50 Stück)', 1)],
+    'Investigativer Journalist': [('Kamera', 1), ('LeMat Revolver (.40)', 1),
+             ('Munition Schrotflinte (20 Stück)', 1)],
+    'Kopfgeldjäger': [("Winchester '76 (.45)", 1)],
+    'Krieger': [('Bogen', 1), ('Eingeborenenschild (Klein)', 1), ('Pferd', 1)],
+    'Medizinfrau': [('Schlafsack', 1)],
+    'Metallmagier': [('Werkzeugsatz', 1), ('Wesson Dolch-Pistole (.41)', 1)],
+    'Revolverheldin': [('Pistolengürtel', 1)],
+    'Salonschönheit': [('Schuhe', 1)],
+    'Schamane': [('Eingeborenenschild (Klein)', 1), ('Pferd', 1), ('Schlafsack', 1)],
+    'Territorialer Ranger': [('Colt Thunderer (.41)', 1), ('Dynamit (Stange)', 2),
+             ('Einläufige Flinte', 1), ('Pferd', 1),
+             ('Munition Pistole (groß) .40-.50 (50 Stück)', 1),
+             ('Munition Schrotflinte (20 Stück)', 1)],
+    'US-Marshal': [('Pferd', 1), ("Winchester '76 (.45)", 1),
+             ('Munition Gewehr (groß) .45 (50 Stück)', 1)],
+    'Vaquero': [('Feldflasche', 1), ('Gusseiserne Pfanne', 1), ('Pferd', 1),
+                ('Schlafsack', 1), ('Seil (20 Meter)', 1), ("Winchester '76 (.45)", 1),
+                ('Munition Gewehr (groß) .45 (50 Stück)', 1),
+                ('Munition Pistole (groß) .40-.50 (50 Stück)', 1)],
+    'Verrückte Wissenschaftlerin': [('Erfinderschürze', 1)],
+    'Wundarzt': [('Flasche', 1)],
+}
+
 def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
            talente, maechte, ausruestung, aufstiege, setting='Deadlands', n_aufstiege=4):
     """
@@ -93,8 +131,8 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
             s.notiz(f'FERTIGKEIT-KEY fehlt im Setting: {f}')
     m(f"  Nach Fertigkeiten: {s.punktestand()}")
 
-    # Ausrüstung
-    for name_eq, anz in ausruestung:
+    # Ausrüstung (inkl. nachgereichter Kategorie-1-Items aus dem Gegencheck)
+    for name_eq, anz in list(ausruestung) + EXTRA_GEAR.get(name, []):
         if name_eq in s.ch.ausruestung:
             s.kaufen(name_eq, anz)
         else:

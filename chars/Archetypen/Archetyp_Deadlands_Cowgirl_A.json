@@ -532,6 +532,46 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Feldflasche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Gusseiserne Pfanne": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pferd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schlafsack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Seil (20 Meter)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Winchester '76 (.45)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Gewehr (groß) .45 (50 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Pistole (groß) .40-.50 (50 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -556,13 +596,22 @@
         "Colt Peacemaker (.45)",
         "Winchester '73 (.44-40)",
         "Messer",
-        "Lasso"
+        "Lasso",
+        "Feldflasche",
+        "Gusseiserne Pfanne",
+        "Pferd",
+        "Schlafsack",
+        "Seil (20 Meter)",
+        "Winchester '76 (.45)",
+        "Munition Gewehr (groß) .45 (50 Stück)",
+        "Munition Pistole (groß) .40-.50 (50 Stück)"
     ],
     "selected_waffen": [
         "Colt Peacemaker (.45)",
         "Winchester '73 (.44-40)",
         "Messer",
-        "Lasso"
+        "Lasso",
+        "Winchester '76 (.45)"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
@@ -570,7 +619,15 @@
         "Colt Peacemaker (.45)": 1,
         "Winchester '73 (.44-40)": 1,
         "Messer": 1,
-        "Lasso": 1
+        "Lasso": 1,
+        "Feldflasche": 1,
+        "Gusseiserne Pfanne": 1,
+        "Pferd": 1,
+        "Schlafsack": 1,
+        "Seil (20 Meter)": 1,
+        "Winchester '76 (.45)": 1,
+        "Munition Gewehr (groß) .45 (50 Stück)": 1,
+        "Munition Pistole (groß) .40-.50 (50 Stück)": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 1.5,
@@ -584,7 +641,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 204,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

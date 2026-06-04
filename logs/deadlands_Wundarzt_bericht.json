@@ -431,6 +431,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Flaschex1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 221,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Erniedrigen)",
       "ok": true,
       "kosten": 0,
@@ -440,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 221,
       "warnung": null
     },
     {
@@ -453,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 221,
       "warnung": null
     },
     {
@@ -466,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 221,
       "warnung": null
     },
     {
@@ -479,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 221,
       "warnung": null
     },
     {
@@ -492,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 221,
       "warnung": null
     },
     {
@@ -619,7 +632,7 @@
       "aufstiege": 0.5
     },
     "machtpunkte": 0,
-    "vermoegen": 223,
+    "vermoegen": 221,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

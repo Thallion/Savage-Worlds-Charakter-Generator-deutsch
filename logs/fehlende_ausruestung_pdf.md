@@ -26,6 +26,14 @@ gegen Setting-Kataloge in `settings/*.json`.
 - **smite** — fehlt in: MONSTROUS POWERS
 - **spell components** — fehlt in: MONSTROUS POWERS
 
+## ? Pathfinder®_for_Savage_Worlds_Advanced_Player_s_Guide — Setting nicht zugeordnet
+
+## ? Pathfinder®_for_Savage_Worlds_Advanced_Player_s_Guide_2 — Setting nicht zugeordnet
+
+## ? Pathfinder®_for_Savage_Worlds_Archetype_Cards_Set_2 — Setting nicht zugeordnet
+
+## ? Pathfinder®_for_Savage_Worlds_Archetype_Cards_Set_3 — Setting nicht zugeordnet
+
 ## ? SWAE_Wilde_Welten_Archetypen — Setting nicht zugeordnet
 
 ## SWPF_Archetypen → **Savage Pathfinder** (8 Archetypen)
@@ -110,6 +118,8 @@ gegen Setting-Kataloge in `settings/*.json`.
 - **Tasche für Equipment** — fehlt in: AGENT
 - **verschiedene Stifte und Griffel** — fehlt in: AGENT
 
+## ? US85050PDF_SWPF_Kompendium_LZ_meta — Setting nicht zugeordnet
+
 ## US85054PDF_SWPF_Archetypen_Set_meta → **Savage Pathfinder** (6 Archetypen)
 
 **❌ 21 Items fehlen im Katalog:**
@@ -141,7 +151,7 @@ gegen Setting-Kataloge in `settings/*.json`.
 
 ## Gesamt
 
-**87 Items fehlen in Katalogen** (über alle 17 PDFs).
+**87 Items fehlen in Katalogen** (über alle 22 PDFs).
 
 | Setting | Fehlende Items |
 |---|---|

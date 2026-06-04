@@ -577,6 +577,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Umgebungsschutz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -642,7 +647,8 @@
         "Mittlerer Schild",
         "Plattenbrustharnisch",
         "Klerikerpaket",
-        "Heiliges Wasser"
+        "Heiliges Wasser",
+        "Trank: Umgebungsschutz"
     ],
     "selected_waffen": [
         "Streitflegel",
@@ -659,7 +665,8 @@
         "Mittlerer Schild": 1,
         "Plattenbrustharnisch": 1,
         "Klerikerpaket": 1,
-        "Heiliges Wasser": 1
+        "Heiliges Wasser": 1,
+        "Trank: Umgebungsschutz": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

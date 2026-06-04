@@ -522,6 +522,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Pferd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schlafsack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Winchester '76 (.45)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Gewehr (klein) .38-44 (50 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -544,17 +564,26 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Winchester '73 (.44-40)",
-        "Messer"
+        "Messer",
+        "Pferd",
+        "Schlafsack",
+        "Winchester '76 (.45)",
+        "Munition Gewehr (klein) .38-44 (50 Stück)"
     ],
     "selected_waffen": [
         "Winchester '73 (.44-40)",
-        "Messer"
+        "Messer",
+        "Winchester '76 (.45)"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Winchester '73 (.44-40)": 1,
-        "Messer": 1
+        "Messer": 1,
+        "Pferd": 1,
+        "Schlafsack": 1,
+        "Winchester '76 (.45)": 1,
+        "Munition Gewehr (klein) .38-44 (50 Stück)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -568,7 +597,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 223,
+    "vermoegen": 25,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

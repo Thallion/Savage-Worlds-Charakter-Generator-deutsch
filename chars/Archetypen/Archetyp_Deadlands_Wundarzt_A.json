@@ -532,6 +532,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Flasche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -556,7 +561,8 @@
         "Arzttasche",
         "Colt Army (.44)",
         "Messer",
-        "Munition Pistole (groß) .40-.50 (50 Stück)"
+        "Munition Pistole (groß) .40-.50 (50 Stück)",
+        "Flasche"
     ],
     "selected_waffen": [
         "Colt Army (.44)",
@@ -568,7 +574,8 @@
         "Arzttasche": 1,
         "Colt Army (.44)": 1,
         "Messer": 1,
-        "Munition Pistole (groß) .40-.50 (50 Stück)": 1
+        "Munition Pistole (groß) .40-.50 (50 Stück)": 1,
+        "Flasche": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0.5,
@@ -582,7 +589,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 223,
+    "vermoegen": 221,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

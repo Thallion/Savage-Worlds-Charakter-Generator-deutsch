@@ -43,7 +43,7 @@ Ambassador FERTIG anomalien=5
   Advance Ermittler: ok=True
   Advance Hackerman/-woman: ok=True
   Advance Kühler Kopf: ok=True
-Hacker FERTIG anomalien=4
+Hacker FERTIG anomalien=5
   Talente: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -52,4 +52,4 @@ Hacker FERTIG anomalien=4
   Advance Beidhändiger Kampf: ok=True
   Advance Schnell: ok=True
   Advance Ausweichen: ok=True
-Infiltrator FERTIG anomalien=15
+Infiltrator FERTIG anomalien=16

@@ -366,6 +366,45 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Kamerax1)",
+      "ok": true,
+      "kosten": 3,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 232,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(LeMat Revolver (.40)x1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 207,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Munition Schrotflinte (20 Stück)x1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 205,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Ermittler)",
       "ok": true,
       "kosten": 0,
@@ -375,7 +414,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": null
     },
     {
@@ -388,7 +427,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": null
     },
     {
@@ -401,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": null
     },
     {
@@ -414,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": null
     },
     {
@@ -427,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -440,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": null
     },
     {
@@ -453,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -466,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -485,7 +524,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -498,7 +537,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -511,7 +550,7 @@
         "fertigkeit": 0,
         "handicap": 4
       },
-      "vermoegen": 235,
+      "vermoegen": 205,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -527,7 +566,7 @@
         "handicap_gesamt": 4,
         "aufstiege": 0.0
       },
-      "vermoegen": 235
+      "vermoegen": 205
     }
   ],
   "anomalien_anzahl": 4,
@@ -649,7 +688,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 0,
-    "vermoegen": 235,
+    "vermoegen": 205,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

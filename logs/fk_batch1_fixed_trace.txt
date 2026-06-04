@@ -7,7 +7,7 @@
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   DIFF: []
   Vermögen nach Kauf: 0
-  BARBARIN: anomalien=5
+  BARBARIN: anomalien=6
 
 === 2. BARDE ===
   Punkte nach Volk: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
@@ -19,7 +19,7 @@
   DIFF: []
   Vermögen nach Kauf: 0
   Vermögen nach Kauf: 0
-  BARDE: anomalien=11
+  BARDE: anomalien=13
 
 === 3. DRUIDIN ===
   Schwerzüngig: ok=False (erwartet: REJECTED bei HP-Limit)
@@ -30,8 +30,8 @@
   → chargen abgeschlossen, 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   DIFF: []
-  Vermögen nach Kauf: 193.75
-  DRUIDIN: anomalien=4
+  Vermögen nach Kauf: 0
+  DRUIDIN: anomalien=5
 
 === 4. KLERIKERIN ===
   Punkte nach Volk: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
@@ -65,4 +65,4 @@
   D-Advances gesetzt. Punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
   DIFF: []
   Vermögen nach Kauf: 0
-  MAGIER: anomalien=6
+  MAGIER: anomalien=9

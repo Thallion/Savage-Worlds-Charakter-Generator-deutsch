@@ -604,6 +604,21 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Tasche des Fassens": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schutzbrille": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Sonnenstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Säureflasche": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -625,6 +640,11 @@
                 "zustand": "neu"
             },
             "Rauchstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Umgebungsschutz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -698,11 +718,15 @@
         "Gegengift, Phiole",
         "Bandolier",
         "Ledertunika",
+        "Tasche des Fassens",
+        "Schutzbrille",
+        "Sonnenstab",
         "Säureflasche",
         "Donnerstein",
         "Zündholz",
         "Verstrickungsbeutel",
-        "Rauchstab"
+        "Rauchstab",
+        "Trank: Umgebungsschutz"
     ],
     "selected_waffen": [
         "Dolch",
@@ -720,11 +744,15 @@
         "Gegengift, Phiole": 1,
         "Bandolier": 1,
         "Ledertunika": 1,
+        "Tasche des Fassens": 1,
+        "Schutzbrille": 1,
+        "Sonnenstab": 1,
         "Säureflasche": 1,
         "Donnerstein": 1,
         "Zündholz": 1,
         "Verstrickungsbeutel": 1,
-        "Rauchstab": 1
+        "Rauchstab": 1,
+        "Trank: Umgebungsschutz": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -738,7 +766,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 246.5,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

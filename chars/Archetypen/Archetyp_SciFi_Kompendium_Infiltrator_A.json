@@ -511,7 +511,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "f67a09d0-9fde-42a4-b725-9b483aa9abbc": {
+            "92216782-9e47-48ab-b0f7-4bcbb49abe81": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -524,11 +524,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "f67a09d0-9fde-42a4-b725-9b483aa9abbc",
+                "installations_id": "92216782-9e47-48ab-b0f7-4bcbb49abe81",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "6dc02abc-89c8-4b9b-ad6f-f5b8309fe530": {
+            "e9ed1e1e-03f0-4dd6-b79a-5b13eb877621": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -541,7 +541,7 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "6dc02abc-89c8-4b9b-ad6f-f5b8309fe530",
+                "installations_id": "e9ed1e1e-03f0-4dd6-b79a-5b13eb877621",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
@@ -607,6 +607,11 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Linienprojektor": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Cyberware: Verborgenes Fach": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -667,6 +672,7 @@
         "Betäubungsgranate",
         "Dietriche",
         "Schweißbrenner",
+        "Linienprojektor",
         "Cyberware: Verborgenes Fach"
     ],
     "selected_waffen": [
@@ -691,6 +697,7 @@
         "Betäubungsgranate": 4,
         "Dietriche": 1,
         "Schweißbrenner": 1,
+        "Linienprojektor": 1,
         "Cyberware: Verborgenes Fach": 2
     },
     "rang": "Anfänger",

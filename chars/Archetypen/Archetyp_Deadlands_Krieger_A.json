@@ -538,6 +538,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Bogen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Eingeborenenschild (Klein)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pferd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -563,22 +578,31 @@
         "Eingeborenenrüstung",
         "Messer",
         "Lanze (Prärieindianer)",
-        "Tomahawk"
+        "Tomahawk",
+        "Bogen",
+        "Eingeborenenschild (Klein)",
+        "Pferd"
     ],
     "selected_waffen": [
         "Messer",
         "Lanze (Prärieindianer)",
-        "Tomahawk"
+        "Tomahawk",
+        "Bogen"
     ],
     "selected_ruestungen": [
         "Eingeborenenrüstung"
     ],
-    "selected_schilde": [],
+    "selected_schilde": [
+        "Eingeborenenschild (Klein)"
+    ],
     "ausruestung_mengen": {
         "Eingeborenenrüstung": 1,
         "Messer": 1,
         "Lanze (Prärieindianer)": 1,
-        "Tomahawk": 1
+        "Tomahawk": 1,
+        "Bogen": 1,
+        "Eingeborenenschild (Klein)": 1,
+        "Pferd": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -592,7 +616,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 223,
+    "vermoegen": 68,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

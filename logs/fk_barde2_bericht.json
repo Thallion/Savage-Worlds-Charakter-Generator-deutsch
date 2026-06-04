@@ -548,6 +548,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Schwebende Laternex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwebende Laterne zum Preis 0 gekauft"
+    },
+    {
       "aktion": "kaufen(Rapierx1) FORCE",
       "ok": true,
       "kosten": 0,
@@ -665,6 +678,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Schwebende Laternex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwebende Laterne zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Barde_A.json)",
       "ok": true
     }
@@ -682,6 +708,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Schwebende Laternex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwebende Laterne zum Preis 0 gekauft"
     },
     {
       "aktion": "NOTIZ: 5 Aufstiege statt 4 (Code implementiert SWADE '2 Fertigkeiten pro Aufstieg' als 2 separate).",
@@ -808,9 +847,22 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Schwebende Laternex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwebende Laterne zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 11,
+  "anomalien_anzahl": 13,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

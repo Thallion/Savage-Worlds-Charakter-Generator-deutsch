@@ -534,6 +534,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Winchester '76 (.45)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -558,18 +563,21 @@
     "selected_allgemeine_ausruestung": [
         "Winchester '73 (.44-40)",
         "Colt Frontier (.44-40)",
-        "Munition Gewehr (klein) .38-44 (50 Stück)"
+        "Munition Gewehr (klein) .38-44 (50 Stück)",
+        "Winchester '76 (.45)"
     ],
     "selected_waffen": [
         "Winchester '73 (.44-40)",
-        "Colt Frontier (.44-40)"
+        "Colt Frontier (.44-40)",
+        "Winchester '76 (.45)"
     ],
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Winchester '73 (.44-40)": 1,
         "Colt Frontier (.44-40)": 2,
-        "Munition Gewehr (klein) .38-44 (50 Stück)": 2
+        "Munition Gewehr (klein) .38-44 (50 Stück)": 2,
+        "Winchester '76 (.45)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -583,7 +591,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 187,
+    "vermoegen": 147,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

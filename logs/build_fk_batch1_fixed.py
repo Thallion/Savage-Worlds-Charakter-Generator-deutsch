@@ -94,7 +94,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Zweihandaxt',1),('Ledertunika',1),('Schwerer Helm',1),
+    for name, anz in [('Zweihandaxt',1),('Ledertunika',1),('Schwerer Helm',1),('Trank: Wachstum',1),
                        ('Stiefel, schwer',1),('Abenteurerpaket',1),('Trank: Heilung',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
@@ -176,7 +176,7 @@ try:
     # --- AUSRÜSTUNG ---
     for name, anz in [('Rapier',1),('Ledertunika',1),('Musikinstrument',1),
                        ('Unterhalterpaket',1),('Umhang mit Kapuze',1),('Laterne',1),
-                       ('Rauchstab',1),('Trank: Attributsteigerung',1),('Trank: Heilung',1)]:
+                       ('Rauchstab',1),('Trank: Attributsteigerung',1),('Trank: Heilung',1),('Schwebende Laterne',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     m(f"  Vermögen nach Kauf: {s.ch.vermoegen}")
@@ -184,7 +184,7 @@ try:
     # --- AUSRÜSTUNG ---
     for name, anz in [('Rapier',1),('Ledertunika',1),('Musikinstrument',1),
                        ('Unterhalterpaket',1),('Umhang mit Kapuze',1),('Laterne',1),
-                       ('Rauchstab',1),('Trank: Attributsteigerung',1),('Trank: Heilung',1)]:
+                       ('Rauchstab',1),('Trank: Attributsteigerung',1),('Trank: Heilung',1),('Schwebende Laterne',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     m(f"  Vermögen nach Kauf: {s.ch.vermoegen}")
@@ -267,7 +267,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Stab (3,5 m)',1),('Hemd aus natürlicher Rüstung',1),('Wildnispaket',1)]:
+    for name, anz in [('Stab (3,5 m)',1),('Hemd aus natürlicher Rüstung',1),('Wildnispaket',1),('Trank: Unsichtbarkeit',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank der Unsichtbarkeit (nicht im FK-Katalog)')
@@ -516,7 +516,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Stab (3,5 m)',1),('Dolch',1),('Magierpaket',1),
+    for name, anz in [('Stab (3,5 m)',1),('Dolch',1),('Magierpaket',1),('Trank: Wandkrabbler',1),('Umhang des Schutzes',1),
                        ('Umhang mit Kapuze',1),('Trank: Heilung',1),
                        ('Trank: Beschleunigung',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)

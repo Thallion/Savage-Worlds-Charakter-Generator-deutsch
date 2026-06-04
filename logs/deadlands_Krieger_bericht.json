@@ -418,6 +418,45 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Bogenx1)",
+      "ok": true,
+      "kosten": 3,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 220,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Eingeborenenschild (Klein)x1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 218,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Pferdx1)",
+      "ok": true,
+      "kosten": 150,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 68,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Beidhändiger Kampf)",
       "ok": true,
       "kosten": 0,
@@ -427,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 68,
       "warnung": null
     },
     {
@@ -440,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 68,
       "warnung": null
     },
     {
@@ -453,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 68,
       "warnung": null
     },
     {
@@ -466,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 68,
       "warnung": null
     },
     {
@@ -479,7 +518,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 223,
+      "vermoegen": 68,
       "warnung": null
     },
     {
@@ -595,7 +634,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 0,
-    "vermoegen": 223,
+    "vermoegen": 68,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

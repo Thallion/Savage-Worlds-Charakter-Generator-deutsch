@@ -548,6 +548,32 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Trank: Dunkelsichtx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Dunkelsicht zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Unsichtbarkeitx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Unsichtbarkeit zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Diebin_A.json)",
       "ok": true
     }
@@ -576,6 +602,32 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Trank: Dunkelsichtx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Dunkelsicht zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Unsichtbarkeitx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Unsichtbarkeit zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Tränke (Unsichtbarkeit, Nachtsicht)",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Tränke (Unsichtbarkeit, Nachtsicht)",
@@ -585,7 +637,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

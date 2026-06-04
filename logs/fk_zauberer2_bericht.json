@@ -522,6 +522,32 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Tasche des Fassensx1) FORCE",
+      "ok": true,
+      "kosten": 153,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Tasche des Fassens zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Machtpunkte aufladenx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Machtpunkte aufladen zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Zauberer_A.json)",
       "ok": true
     }
@@ -537,16 +563,42 @@
       "vermoegen": 500
     },
     {
+      "aktion": "kaufen(Tasche des Fassensx1) FORCE",
+      "ok": true,
+      "kosten": 153,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Tasche des Fassens zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Machtpunkte aufladenx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Machtpunkte aufladen zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Tasche des Fassens, Trank Aufladen MP (nicht im FK-Katalog)",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Tasche des Fassens, Trank Aufladen MP (nicht im FK-Katalog)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 153
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -669,7 +721,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 20,
-    "vermoegen": 153,
+    "vermoegen": 0,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

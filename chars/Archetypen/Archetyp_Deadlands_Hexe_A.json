@@ -575,6 +575,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Colt Thunderer (.41)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Gepanzerter Reitermantel (leicht)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pferd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Munition Pistole (groß) .40-.50 (50 Stück)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -606,19 +626,30 @@
     "selected_allgemeine_ausruestung": [
         "Colt Lightning (.38)",
         "Messer",
-        "Peitsche"
+        "Peitsche",
+        "Colt Thunderer (.41)",
+        "Gepanzerter Reitermantel (leicht)",
+        "Pferd",
+        "Munition Pistole (groß) .40-.50 (50 Stück)"
     ],
     "selected_waffen": [
         "Colt Lightning (.38)",
         "Messer",
-        "Peitsche"
+        "Peitsche",
+        "Colt Thunderer (.41)"
     ],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Gepanzerter Reitermantel (leicht)"
+    ],
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Colt Lightning (.38)": 1,
         "Messer": 1,
-        "Peitsche": 1
+        "Peitsche": 1,
+        "Colt Thunderer (.41)": 1,
+        "Gepanzerter Reitermantel (leicht)": 1,
+        "Pferd": 1,
+        "Munition Pistole (groß) .40-.50 (50 Stück)": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
@@ -632,7 +663,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 225,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

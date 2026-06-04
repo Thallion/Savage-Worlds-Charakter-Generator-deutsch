@@ -9326,6 +9326,15 @@
       "setting": "mittelalterlich",
       "beschreibung": "Magische Laterne: leuchtet auf Befehl und schwebt von selbst in der Nähe des Benutzers (kein Tragen/Brennstoff nötig).",
       "aktiv": true
+    },
+    "Trank: Umgebungsschutz": {
+      "name": "Trank: Umgebungsschutz",
+      "kategorie": "Trank",
+      "gewicht": 0,
+      "kosten": 200,
+      "setting": "fantasy",
+      "beschreibung": "Schützt den Benutzer für eine Stunde vor extremer Hitze, Kälte und schädlichen Umgebungseinflüssen.",
+      "aktiv": true
     }
   },
   "settingregeln": {

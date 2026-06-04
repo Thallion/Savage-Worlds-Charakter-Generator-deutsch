@@ -379,6 +379,58 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Pferdx1)",
+      "ok": true,
+      "kosten": 150,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 73,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schlafsackx1)",
+      "ok": true,
+      "kosten": 4,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 69,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Winchester '76 (.45)x1)",
+      "ok": true,
+      "kosten": 40,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 29,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Munition Gewehr (klein) .38-44 (50 Stück)x1)",
+      "ok": true,
+      "kosten": 4,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 25,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Parkour)",
       "ok": true,
       "kosten": 0,
@@ -388,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": null
     },
     {
@@ -401,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": null
     },
     {
@@ -414,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": null
     },
     {
@@ -427,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": null
     },
     {
@@ -440,7 +492,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": null
     },
     {
@@ -453,7 +505,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": null
     },
     {
@@ -466,7 +518,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -485,7 +537,7 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 223,
+      "vermoegen": 25,
       "warnung": "Aktion lieferte False/None"
     },
     {
@@ -501,7 +553,7 @@
         "handicap_gesamt": 4,
         "aufstiege": 0.0
       },
-      "vermoegen": 223
+      "vermoegen": 25
     }
   ],
   "anomalien_anzahl": 2,
@@ -616,7 +668,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 0,
-    "vermoegen": 223,
+    "vermoegen": 25,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

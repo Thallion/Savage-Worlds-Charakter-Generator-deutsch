@@ -379,6 +379,45 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Pferdx1)",
+      "ok": true,
+      "kosten": 150,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 56,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Winchester '76 (.45)x1)",
+      "ok": true,
+      "kosten": 40,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 16,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Munition Gewehr (groß) .45 (50 Stück)x1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 11,
+      "warnung": null
+    },
+    {
       "aktion": "talent_mit_aufstieg(Aufmerksamkeit)",
       "ok": true,
       "kosten": 0,
@@ -388,7 +427,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 206,
+      "vermoegen": 11,
       "warnung": null
     },
     {
@@ -401,7 +440,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 206,
+      "vermoegen": 11,
       "warnung": null
     },
     {
@@ -414,7 +453,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 206,
+      "vermoegen": 11,
       "warnung": null
     },
     {
@@ -427,7 +466,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 206,
+      "vermoegen": 11,
       "warnung": null
     },
     {
@@ -440,7 +479,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 206,
+      "vermoegen": 11,
       "warnung": null
     },
     {
@@ -549,7 +588,7 @@
       "aufstiege": 0.0
     },
     "machtpunkte": 0,
-    "vermoegen": 206,
+    "vermoegen": 11,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

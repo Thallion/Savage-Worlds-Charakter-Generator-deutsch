@@ -96,8 +96,9 @@ try:
     #     tindertwig, 79 gp)
     for name, anz in [('Dolch',1),('Alchemistenfeuer',1),('Alchemistenpaket',1),
                        ('Gegengift, Phiole',1),('Bandolier',1),('Ledertunika',1),
+                       ('Tasche des Fassens',1),('Schutzbrille',1),('Sonnenstab',1),
                        ('Säureflasche',1),('Donnerstein',1),('Zündholz',1),
-                       ('Verstrickungsbeutel',1),('Rauchstab',1)]:
+                       ('Verstrickungsbeutel',1),('Rauchstab',1),('Trank: Umgebungsschutz',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz("FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog")
