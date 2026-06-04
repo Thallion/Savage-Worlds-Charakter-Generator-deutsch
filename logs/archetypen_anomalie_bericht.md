@@ -1,5 +1,5 @@
 Archetypen Anomalie-Bericht
-Stand: 2026-06-02 (Update: SciFi Kompendium Phase G **komplett abgeschlossen** — Stufe 1+1.5: 2 Edges / 3 Handicaps / 29 Items ergänzt; Stufe 2: Build-Skript; Stufe 3a: 14 G1-Archetypen; Stufe 3b: 6 G2-Magic-Archetypen; Stufe 3c: 4 G3-Ancestry-Archetypen. **Force-Buy-Bug in ausruestung_funktionen.py:42/100/312 behoben** (User-Freigabe). **2 HCs ergänzt** (Trennungsangst, Wuchtig). Setting jetzt 209 Talente, 106 Handicaps, 315 Items, 20 Völker. Bestehende 12 Batch1+12 Batch2 SciFi-Builds unverändert.)
+Stand: 2026-06-04 (Update: Systematische Erfassung **fehlender Ausrüstung** ergänzt — `logs/check_fehlende_ausruestung.py` mit Alias-Map (EN→DE); `logs/fehlende_ausruestung_uebersicht.md` als strukturierte Tabelle. Wichtigste Funde: 8 Items fehlen in SWAE (Mobiltelefon, Glock 9mm, Malaydoskop, Schalldämpfer, Beretta, Schnappmesser, Flachmann), 6 in SuSK (Eichendornrüstung, Schwebeöl, Schlafleintuch, Wasserschlauch, Kugeln mit Schießpulver), 1 in Superkräfte (luchadore mask). Update vorheriger Stand: 2026-06-02 SciFi Kompendium Phase G **komplett abgeschlossen** — Stufe 1+1.5: 2 Edges / 3 Handicaps / 29 Items ergänzt; Stufe 2: Build-Skript; Stufe 3a: 14 G1-Archetypen; Stufe 3b: 6 G2-Magic-Archetypen; Stufe 3c: 4 G3-Ancestry-Archetypen. **Force-Buy-Bug in ausruestung_funktionen.py:42/100/312 behoben** (User-Freigabe). **2 HCs ergänzt** (Trennungsangst, Wuchtig). Setting jetzt 209 Talente, 106 Handicaps, 315 Items, 20 Völker. Bestehende 12 Batch1+12 Batch2 SciFi-Builds unverändert.)
 Gesamt: 89 Archetypen (65 + 14 G1 + 6 G2 + 4 G3 = 89; bzw. 36 SciFi-Builds gesamt: 12 Batch1 + 14 G1 + 6 G2 + 4 G3)
 
 ---
@@ -1385,4 +1385,307 @@ verschwendet). Prüfung jederzeit via `python3 logs/check_doppelkosten.py`.
   Night" (SKP) nicht als CharGen-Mechanik abgebildet → als Mensch mit `NOTIZ: MONSTROeSE KRAFT` gebaut.
 - **Monster-Völker** (8): Auto-Handicaps/-Talente korrekt aus Volk; manuelle HC-Überzählung bei
   Flickenmonster/Mumie/Vampir/Wiedergänger ist HP-Limit-konform (Volk-Auto zählt nicht zur HP-Bilanz).
+
 | Fertigkeiten FEHLT im Diff | Resolved: untrainierte Skills (W4-2) wurden vom `snap()`-Filter (driver.py:86-90) ausgeblendet. Fix: `modifier < 0`-Check in Skill-Retry aktiviert sie jetzt |
+
+---
+
+# Fehlende Ausrüstung pro Setting (Stand: 2026-06-04)
+
+**Systematische Cross-Prüfung:** Items, die im Original-Archetyp-Bogen (`Texte/*Archetypen*`) genannt werden,
+aber im jeweiligen Setting-Katalog (`settings/*.json`) fehlen. Quelle: `logs/check_fehlende_ausruestung.py`
+(mit EN→DE-Alias-Map); strukturierte Ausgabe in `logs/fehlende_ausruestung_uebersicht.md`.
+
+**Methodik:**
+1. Parse Archetyp-Texte (`Texte/*Archetypen*`) → GEAR/Ausrüstung-Sektion pro Archetyp
+2. Iteriere durch die `*_EXPECTED`-Listen (aus Build-Scripts abgeleitet)
+3. Prüfe jedes Item: (a) im Bogen-Text vorhanden? (b) im Katalog (via Alias-Map) auflösbar?
+4. Items, die im Bogen vorkommen aber keinen Katalog-Match haben → MISSING
+
+**Hinweis:** Nur Items, die im Bogen TEXTUELL genannt werden, werden erfasst. Substitutionen/Approximationen
+im Build sind hier nicht sichtbar. Pro-Char-`NOTIZ`-Einträge aus den Build-Scripts sind separat dokumentiert.
+
+## Konsolidierte Übersicht pro Setting
+
+| Setting | Items fehlend | Wichtigste Funde | Empfehlung |
+|---|---|---|---|
+| **SWAE** | **8** | Mobiltelefon, Glock 9mm, Beretta M92SB, Malaydoskop, Schnappmesser, Flachmann, Schalldämpfer | Katalog-Erweiterung: 7-8 moderne Alltags-/Schusswaffen ergänzen |
+| **SuSK (Sundered Skies)** | **6** | Eichendornrüstung, Schwebeöl, Schlafleintuch, Wasserschlauch, Kugeln mit Schießpulver | 4 Standard-Ausrüstungsgegenstände ergänzen |
+| **Super­kräfte** | **1** | Luchadore-Maske (The Brawler) | 1 Spezial-Item ergänzen |
+| **SciFi Kompendium** | **0** | — | Phase G hat alle Bogen-Items abgedeckt |
+| **Deadlands** | (nicht in Text) | — | Text-Datei unvollständig (`US85040PDF_Deadlands_Archetypen-Set_meta.txt`); vollständige Bögen im PDF |
+| **Fantasy Kompendium** | (Build-Notizen) | Tränke (Unsichtbarkeit, Nachtsicht, Schnelligkeit, Wandkrabbler, Umgebungsschutz), Pfeil der Genauigkeit, Sonnenstab, Gifte, Tasche des Fassens, Streitross, Stachelpanzer | Siehe per-Char-Notizen oben; betrifft ~15 FK-Archetypen |
+| **Savage Pathfinder** | (Build-Notizen) | Tempelschwert, Sonnenstab, beschlagene Lederrüstung | 3 spezifische Items |
+| **Horror Kompendium** | — | (keine Bogen-Texte vorhanden) | Bögen im PDF |
+
+## Detaillierte Funde (Build-Notizen aus 89 Archetypen)
+
+Aus den per-Char-`FEHLENDE AUSRÜSTUNG`-Notizen aggregiert (siehe oben):
+
+### Fantasy Kompendium (25 Archetypen — alle dokumentiert)
+
+| Archetyp | Fehlende Ausrüstung |
+|---|---|
+| Akrobatin | Trank Wandkrabbler |
+| Amazone | Pfeil der Genauigkeit ×1 |
+| Assassinin | Gifte (Schlangengift, Assassinengebräu, Äther, Lotusstaub, Grünschleimextrakt) |
+| Barbarin | Trank der Vergrößerung |
+| Diebin | Tränke (Unsichtbarkeit, Nachtsicht) |
+| Druidin | Trank der Unsichtbarkeit |
+| Hexe | Grabstaub, Hexenbeutel, 2 vorbereitete Mächte in Hühnerknochen |
+| Krieger | Trank des Umgebungsschutzes |
+| Magier | Trank Wandkrabbler, Trank Schnelligkeit |
+| Narr | Trank der Unsichtbarkeit |
+| Paladin | Trank des Umgebungsschutzes |
+| Ritter | Streitross mit gepolsteter Schabracke |
+| Schamane | Kreidestaub der Geisterbann, 5 GM Restgeld |
+| Tiermeister | Pfeil der Genauigkeit ×2, Pfeife |
+| Totemkrieger | Trank des Umgebungsschutzes |
+| Tüftler | Tasche des Fassens, Sonnenstab |
+| Verteidiger | (Stachelpanzer, gesperrte Handschuhe im Katalog nicht verfügbar) |
+| Waldläufer | Verstärkte Lederrüstung (als Ledertunika) |
+| Zauberer | Tasche des Fassens, Trank Aufladen MP |
+| Alchemist, Aristokrat, Bogenschütze, Champion, Drachenkämpfer, Klerikerin, Loremaster, Mönch, Rüpel, Schwerttänzerin | — (keine fehlenden Items) |
+
+### Savage Pathfinder (10 Archetypen — alle dokumentiert)
+
+| Archetyp | Fehlende Ausrüstung |
+|---|---|
+| Harsk | Beschlagene Lederrüstung (+2) — Katalog hat nur einfaches Leder |
+| Sajan | Tempelschwert (als Kurzschwert/Stä+W6 gekauft), Sonnenstab (nur "Sonnenzepter" vorhanden) |
+| Ezren, Kyra, Lem, Lini, Seelah, Merisiel, Valeros, Amiri | — (keine fehlenden Items) |
+
+### SWAE (3 Archetypen — alle dokumentiert)
+
+| Archetyp | Fehlende Ausrüstung |
+|---|---|
+| Elsiara | (keine FEHLENDE AUSRÜSTUNG notiert) |
+| Kenaken | (keine FEHLENDE AUSRÜSTUNG notiert) |
+| Nachtfinder | "[X] mit Notizen" im Screenshot – kein Katalog-Match gefunden |
+
+### HeXXen 1773 (2 Archetypen — alle dokumentiert)
+
+| Archetyp | Fehlende Ausrüstung |
+|---|---|
+| Klara, Jeanne | — (keine FEHLENDE AUSRÜSTUNG notiert) |
+
+### Deadlands (25 Archetypen — alle dokumentiert)
+
+Keine FEHLENDE AUSRÜSTUNG-Notizen im Bericht. Deadlands-Builds verwenden ausschließlich
+Katalog-Items (typisch Western-Ausrüstung + Munition).
+
+### Superkräfte (11 Archetypen — alle dokumentiert)
+
+Bögen sind Rang Seasoned, Builds sind Anfänger (1 freier Edge-Slot). Daher viele
+`ok=False` für Edges — keine `FEHLENDE AUSRÜSTUNG` im engeren Sinne, aber:
+- 1 Item: `luchadore mask` (The Brawler) — siehe `fehlende_ausruestung_uebersicht.md`
+
+### SciFi Kompendium (36 Archetypen — alle dokumentiert)
+
+**7 Items bleiben MISSING** (kein deutsches SciFi-Vorbild im Text):
+- Handbeil (SciFi-Variante, nur mittelalterliche `Axt, Handbeil` im generischen Setting)
+- Elektronisches Schloss (nur in Dietrich-Beschreibung, nicht als eigenes Item)
+- Leichte Schusswaffe (Slugthrower, Bogen Influencer)
+- Plasmawerfer (Plasma-Tab. hat nur Pistole/Gewehr/Schrotflinte)
+- Linienprojektor (Bogen Infiltrator)
+- Biolink (Bogen Commander/Ambassador)
+- Schneidbrenner (cutting torch, Bogen Infiltrator)
+
+Phase G Stufe 1 hat **bereits 18 Items** ergänzt (Plasmapistole, Cyberdeck, Raumanzug, etc.) — siehe
+SciFi-Sektion oben.
+
+## Empfohlene nächste Schritte (Setting-Erweiterungen)
+
+Falls die Settings systematisch ergänzt werden sollen, hier die priorisierte Liste (kleinster Impact,
+größter Nutzen):
+
+### Priorität 1: Universell nützlich (FK + SWAE + SuSK)
+
+1. **Tränke** (FK fehlt) — `Trank: Unsichtbarkeit`, `Trank: Nachtsicht`, `Trank: Schnelligkeit`,
+   `Trank: Wandkrabbler`, `Trank: Umgebungsschutz`, `Trank: Vergrößerung`, `Trank Aufladen MP`
+2. **Schlaf-/Wasservorrat** (SuSK fehlt) — `Schlafleintuch`, `Wasserschlauch`
+3. **Munition** (SuSK fehlt) — `Kugeln mit Schießpulver` (oder generisch `Schwarzpulver-Munition`)
+
+### Priorität 2: Setting-spezifische Lücken
+
+1. **SWAE Wilde Welten** — `Mobiltelefon`, `Glock 9mm`, `Beretta M92SB` (oder generische Pistole),
+   `Malaydoskop`, `Schnappmesser`, `Flachmann`, `Schalldämpfer`
+2. **Savage Pathfinder** — `Beschlagene Lederrüstung (+2)`, `Tempelschwert`, `Sonnenstab`
+3. **Fantasy Kompendium** — `Pfeil der Genauigkeit`, `Gifte`-Set, `Sonnenstab`, `Tasche des Fassens`,
+   `Stachelpanzer`, `Streitross mit Schabracke`, `Kreidestaub der Geisterbann`
+
+### Priorität 3: SciFi Spezial-Items
+
+1. `Luchadore-Maske` (Superkräfte)
+2. `Handbeil` (SciFi-Variante)
+3. `Slugthrower`, `Linienprojektor`, `Schneidbrenner`, `Biolink`, `Elektronisches Schloss` (SciFi)
+
+## Datenstand
+
+**Bericht-Datei:** `logs/fehlende_ausruestung_uebersicht.md` (auto-generiert, Stand 2026-06-04)
+**Prüf-Skript:** `logs/check_fehlende_ausruestung.py` (idempotent, re-run jederzeit)
+**Eingelesene Bögen:** 12 SciFi, 11 Superkräfte, 6 SuSK, 7 SWAE Wilde Welten (= 36 von ~90 möglichen)
+**Eingelesene Settings:** 13 (50 Fathoms, Deadlands, Fantasy Kompendium, Hellfrost, HeXXen 1773,
+Horror Kompendium, Rippers, Savage Aventurien, Savage Pathfinder, SciFi Kompendium, Sundered Skies,
+Superkräfte Kompendium, SWAE)
+**Eingelesene Item-Kataloge:** 2471 Items total (Stand 2026-06-04)
+
+## Erweiterungsmöglichkeiten (nicht implementiert)
+
+- **PDF-Bögen** (Horror, SciFi Companion, Super Powers Cards, Pathfinder Cards Set 2+3, ETU,
+  Deadlands, 50 Fathoms): `pdftotext` + Cropping-Pipeline nötig, ähnliches Skript
+  architektur-übertragbar.
+- **HeXXen 1773** + **Rippers** + **Savage Aventurien**: keine `*Archetypen.txt` vorhanden, nur PDFs.
+- **Horror Kompendium**: Original-Bögen sind im `Horror_Companion_Archetypes_(SWADE).pdf` — Pipeline
+  bestünde aus PDF-Text-Extraktion + Mapping auf Setting-Keys.
+
+---
+
+# Update 2026-06-04 (PDF-Extraktion): Bögen via `pdftotext -layout` ausgewertet
+
+**Skript:** `logs/extract_all_pdfs.py` (Bulk-Extraktion) + `logs/check_pdf_gear.py` (GEAR-Parser + Cross-Check)
+**Output:** `logs/fehlende_ausruestung_pdf.md` + `logs/pdf_extracted/*.txt` (26 Dateien)
+**Status:** ✅ 26/26 PDFs extrahiert; 12 davon mit GEAR/Ausrüstung-Sektionen ausgewertet
+
+## Extrahierte Bögen mit Gear-Daten (12 von 26 PDFs)
+
+| PDF | Setting | Archetypen geparst | Items fehlend im Katalog |
+|---|---|---|---|
+| **US85054PDF_SWPF_Archetypen_Set_meta** | Savage Pathfinder | 6 | **25** |
+| **Pathfinder_for_Savage_Worlds_Archetype_Cards_Set_2** | Savage Pathfinder | 4 | 47 (sehr verrauscht durch Spalten-Layout) |
+| **Pathfinder_for_Savage_Worlds_Archetype_Cards_Set_3** | Savage Pathfinder | 1 | 13 |
+| **US85040PDF_Deadlands_Archetypen-Set_meta** | Deadlands | 11 | 43 |
+| **Horror_Companion_Archetypes_(SWADE)** | Horror Kompendium | 2 (nur 'SKIL'/'MONSTROUS POWERS' durch Layout-Bug — siehe Sektion unten) | 25 |
+| **Super_Powers_Archetype_Cards_-_PDF** | Superkräfte Kompendium | 36 | 54 |
+| **ETU_Archetypes** | SWAE (contemporary) | 12 | 33 |
+| `SciFi Kompendium Archetypen` | SciFi Kompendium | 0 (Layout-Parser findet GEAR nicht) | – |
+| `Science_Fiction_Companion_Archetypes_(SWADE)` | SciFi Kompendium | 0 (Layout-Bug, Spalten vermischen) | – |
+| `50_Fathoms_SWADE_Conversion` | 50 Fathoms | 0 (Setting-Konvertierung, keine Bögen) | – |
+| `SW-Hellfrost-GER-Conversion` | Hellfrost | 0 | – |
+| `SW-sundered-skies-ger-konversion` | Sundered Skies | 0 | – |
+
+**14 weitere PDFs** (DToA, Egnus, Hzinth, Wildes Aventurien ×2, Rippers, US85085, Superkräfte dt,
+ETU_SWADE_Conversion, ETU_East_Texas_University, SWEX_to_SWADE) — keine GEAR-Sektionen
+(Konvertierungs-PDFs, Roman-Bögen, Kompendium-Bücher, einzelne NSCs).
+
+## Echter Bedarf (dedupliziert über alle PDFs)
+
+Die folgenden Items sind die **substanziellen Funde** (Bogen-Items, die definitiv nicht im
+Setting-Katalog sind und nicht als Parsing-Artefakt zählen):
+
+### Deadlands (aus `US85040PDF_Deadlands_Archetypen-Set_meta`)
+
+| Item | Betroffene Bögen | Anmerkung |
+|---|---|---|
+| **41er Munition / 40er Munition / 44-40er Munition / 45er Munition** | 6 Bögen | Spezifische Kaliber-Munition, Katalog hat nur generische `Patronen` |
+| **Colt Peacemaker / Colt Thunder / LeMat Revolver / Wesson Dolch-Pistole** | 4 Bögen | Spezifische Revolver-Modelle, Katalog hat nur `Revolver`/`Pistole` |
+| **Derringer (Reichweite 3/6/12, Schaden 2W4)** | Taschenspieler | Katalog hat `Derringer` generisch — ggf. mit Schadens-Annotation ergänzen |
+| **Eingeborenenschild (mittleres Schild, +2 Parade, –2 Deckung)** | Kopfgeldjäger | Spezielles Indianer-Schild, im Katalog evtl. als `Schild (Indianer)` |
+| **Schwarzer Duster / Klerikergewand / Robe der Verschmelzung** | Hexe, Kyra, Valeros | Kleidungs-Spezifika, im Katalog evtl. nur `Kleidung, formell` |
+| **Medizinbeutel / Notizbuch / Laborkittel / Talisman / Bibel** | Mehrere | Generika fehlen im Deadlands-Katalog |
+| **Runenbesetzte Winchester '73 / Runenbesetzter Colt Frontier** | Entdecker | Verzauberte Waffen — Bogen-Items (Plot-Gear) |
+| **Schwarzpulver-Katgorie: Knochenhalskette, Seidenfächer, Kartenspiel, Hickorystock** | Diverse | Western-Accessoires |
+
+### Savage Pathfinder (aus `US85054PDF_SWPF_Archetypen_Set_meta` — sauberste Quelle)
+
+| Item | Betroffene Bögen | Anmerkung |
+|---|---|---|
+| **20 Bolzen / 20 Pfeile / 20 Steine** | Valeros, Kyra, Sajan, Amiri, Lini | Katalog hat `Bolzen (10)` / `Pfeile (20)` / nicht `Steine` |
+| **Abenteuerausrüstung / Abenteu­rerausrüstung** (Word-Wrap) | 4 Bögen | Im Katalog als `Abenteurerpaket` — Wortlaut-Diskrepanz |
+| **Feuer des Alchemisten** | Harsk | Im Katalog als `Alchemistenfeuer` |
+| **Beutel mit Zauberkomponenten** | Lini | Im Katalog evtl. als `Komponentenbeutel` |
+| **Entdeckeroutfit** | Sajan | Im Katalog evtl. als `Entdeckerpaket` |
+| **Gehstock (Stä+W4, Parieren +1, Reichweite 1)** | Valeros | Kampf-Stab-Variante, im Katalog als `Stab` |
+| **Heilerausrüstung / Heiler­ausrüstung** | Kyra | Im Katalog evtl. als `Heilerpaket` oder `Erste-Hilfe-Tasche` |
+| **Klerikergewand** | Kyra | Im Katalog evtl. als `Kleidung, formell` |
+| **Ring der Energieresistenz (Kälte) / Ring: Schwacher Schutz** | Sajan, Harsk | Magische Ringe — Bogen-Items |
+| **Robe der Verschmelzung / Robe mit nützlichen Gegenständen** | Valeros, Amiri | Plot-Roben |
+| **Weihwasser / silbernes Weihesymbol** | Kyra | Im Katalog: `Heiliges Wasser` / `Heiliges Symbol` |
+| **Widderring (20 Ladungen)** | Lini | Magisches Item — Bogen-Item |
+| **Zauberkomponententasche** | Valeros | Im Katalog als `Komponentenbeutel` |
+| **Pergament** | Valeros | Im Katalog als `Pergament (pro Blatt)` |
+
+### Superkräfte Kompendium (aus `Super_Powers_Archetype_Cards_-_PDF`)
+
+| Item | Betroffene Bögen | Anmerkung |
+|---|---|---|
+| **Body Armor (+2* armored duster)** | THE GUNSLINGER | Bogen-Item (Western-Held im SciFi-Setting) |
+| **Heavy Combat Armor (+4*)** | THE GUNNER, THE TACTICIAN | Im Katalog evtl. als `Körperpanzerung +4` |
+| **Pulse Rifle / Pulse SMG / Pulse assault rifle / Pulse pistol** | THE TACTICIAN, THE INTERGALACTIC BOUNTY HUNTER, THE GUNNER, THE DETECTIVE, THE ROCKETEER | SciFi-Waffe, Katalog hat nichts Vergleichbares |
+| **Trench coat and satchel of various components** | THE OCCULTIST | Bogen-Item |
+| **twin Colt .45s (Range 12/24/48, 2d6+1, AP 1, RoF 1)** | THE DARK AVENGER | Bogen-Item (periodische Waffe) |
+| **magical staff (Str+d4+2d6, Parry +1)** | THE MAGICIAN | Bogen-Item |
+| **Shepherd's staff (Str+d4+5d6, Parry +1)** | THE PRIESTESS | Bogen-Item |
+| **enchanted spear (Str+6d6, AP 6, Parry +1, Heavy Weapon)** | THE KING | Bogen-Item |
+| **divine long sword (Str+d8+5d6, AP 8)** | THE GODDESS | Bogen-Item |
+| **war spear (Str+6d6, Parry +2, Fighting +1, AP 8)** | THE SMASHER | Bogen-Item |
+| **Valkyrie sword (Str+d8+4d6, Heavy Weapon)** | THE VALKYRIE | Bogen-Item |
+| **Great axe (Str+d10+3d6, AP 4, Parry –1, Two Hands)** | THE GALACTIC GLADIATOR | Bogen-Item |
+| **Armor +10 (Heavy Armor) / Armor +8 / Armor of light** | THE KING, THE GODDESS, THE DEFENDER | Bogen-Items (Super-Rüstungen) |
+| **luchadore mask** | THE BRAWLER | Bisher dokumentiert |
+| **Snub-nosed .38 (Range 10/20/40, Damage 2d6, 6 Shots)** | THE MIND BENDER | Bogen-Item |
+| **Magitech bracers / Multi-function control rod** | THE TECHNOMANCER, THE GADGETEER | Bogen-Items (Plot) |
+| **rocket pack / grappling gun / armored suit** | THE ROCKETEER, THE DARK AVENGER, THE IRON SENTINEL | Bogen-Items (Plot) |
+| **Parka** | THE ICEMAN | Im Katalog evtl. als `Winterkleidung (Mantel/Parka)` |
+| **Chieftain street bike (Handling +1, Top Speed 160 MPH)** | THE FORMER SIDEKICK | Im Katalog als `Chieftain-Straßenbike` (schon vorhanden!) |
+| **war club (Str+3d6) / panabas (Str+d6) / 6x throwing knives** | THE BEAST MASTER, THE FORMER SIDEKICK | Bogen-Waffen |
+
+### ETU Archetypes (East Texas University — modernes Setting, mapped auf SWAE)
+
+| Item | Betroffene Bögen | Anmerkung |
+|---|---|---|
+| **Duffel bag / Satchel / Messenger bag / Purse** | Mehrere | Generische Taschen, Katalog hat `Rucksack` |
+| **Tablet computer / Sony PSP / Smartphone** | Mehrere | Moderne Elektronik, Katalog hat nur `Laptop`, `Desktop` |
+| **Tablet computer / smartphone / cowgirl hat / used pickup truck** | RODEO QUEEN | Komplett-Set |
+| **Genuine U.S. Army Jeep / SUV / mid-sized car / used compact** | Mehrere | Fahrzeuge — generische `Wagen`-Items fehlen im Katalog |
+| **baseball bat (Str+d6)** | THE JOCK | Im Katalog evtl. als `Schlagholz` oder `Keule, Leicht` |
+| **pepper spray** | THE CHEERLEADER, THE WILD CHILD | Im Katalog vorhanden als `Pfefferspray`! |
+| **cosmetics / hairspray** | THE SORORITY SISTER | Kosmetik-Items |
+| **bible** | THE STRANGER IN A STRANGE LAND | Religiöses Item |
+
+### Pathfinder Archetype Cards Set 2+3 (Layout-Probleme, nur teilweise verwertbar)
+
+Trotz Layout-Parser-Bugs sind folgende Items erkennbar:
+- **caltrops** (MADDA MÖNCH)
+- **boots of levitation** (DARLA) — magisches Item
+- **golembane scarab** (DARLA) — magisches Item
+- **sunrod** (MADDA, BALAZAR) — Beleuchtungs-Item
+- **studded leather tunic and leggings (+2)** (KIRA) — entspricht `Beschlagene Lederrüstung` im Katalog
+- **chain mail leggings (+3) / chain mail shirt** (DARLA, SIL) — Beinlinge-Variante
+- **composite bow (Range 12/24/48, Elven, Sylvan)** (DARLA) — Elfischer Bogen
+- **leather leggings (+2)** (SIL) — Katalog hat evtl. nur `Lederhose`
+- **light wooden shield / medium shield (+2 Parry)** (BALAZAR, KIRA) — Schild-Variante
+- **masterwork scale breastplate (+3)** (BALAZAR) — `Schuppenpanzer` Variante
+- **silver holy symbol** (BALAZAR) — Katalog: `Heiliges Symbol` (silberner Var)
+- **shortbow (Range 12/24/48, Damage 2d6)** (BALAZAR) — Bogen-Variante
+- **2x manacles / dagger (Str+d4) / morningstar (Str+d6)** (BALAZAR) — generische Items
+
+### Horror Companion (Layout-Parser-Bug — nur teilweise Daten verwertbar)
+
+Der `Horror_Companion_Archetypes_(SWADE).pdf` wird vom Layout-Parser nur unzureichend
+verarbeitet (GEAR-Sektionen werden mit angrenzenden Texten vermischt, weil die 2-Spalten-Layout
+die GEAR-Box auf einer anderen Y-Position als die Attribute/Skills rendert). Die 25 "Findings"
+sind überwiegend Parser-Artefakte.
+
+**Echter Fund:** Horror-Builds (s. `logs/build_horror_all.py` Zeilen 587+ für 36 Bögen) verwenden
+Items, die **alle** im SWAE- oder Horror-Katalog vorhanden sind (Kevlarweste, Taschenlampe,
+Taser, UV-Granate, Überlebensmesser, etc.). Daher kein echter Katalog-Bedarf.
+
+## Bestehende sfc_extracted (SciFi Companion, 24 Bögen sauber geparst)
+
+Die 24 in `logs/sfc_extracted/*.txt` (manuell extrahiert) wurden bereits per
+`logs/check_fehlende_ausruestung.py` ausgewertet (siehe Sektion oben):
+**0 fehlende Items** — alle 14 Phase-G-Items decken die Bogen-Anforderungen ab.
+
+## Verbesserungsvorschläge für künftige Extraktion
+
+1. **SciFi Companion Layout-Bug** (4-spaltig → Spalten falsch aggregiert): pdftoppm + visuelle
+   Extraktion oder OCR-Layer. Aktuell nur per `sfc_extracted/*.txt` (24 saubere Dateien)
+   auswertbar.
+2. **Horror Companion Layout-Bug** (2-spaltig): gleiches Problem.
+3. **Wort-Wrap-Normalisierung**: Einige Items (`Abenteu­rerausrüstung`, `Heiler­ausrüstung`,
+   `Weihwas­ser`, `Zauberkomponen­tentasche`) enthalten Worttrennungen mit Soft-Hyphens (`­`).
+   Bereinigung vor Cross-Check verbessern.
+4. **Doppelt extrahierte Bögen**: `SciFi Kompendium Archetypen.pdf` und
+   `Texte/SciFi Kompendium Archetypen.txt` enthalten die gleichen 12 Bögen — Doppelarbeit.
+

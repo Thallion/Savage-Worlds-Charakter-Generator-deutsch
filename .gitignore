@@ -15,6 +15,7 @@ backups/
 backup/
 bugfixes/
 ToDo/
+logs/pdf_extracted*
 .buildozer/
 *.egg-info/
 
