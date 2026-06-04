@@ -250,7 +250,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -532,6 +532,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Starker Wille": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Rundumschlag": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -558,7 +570,9 @@
     ],
     "selected_talente": [
         "Flug",
-        "Attraktiv"
+        "Attraktiv",
+        "Starker Wille",
+        "Rundumschlag"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -587,8 +601,8 @@
         "Feuerzeug": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -622,13 +636,6 @@
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -638,6 +645,13 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -775,8 +789,27 @@
                 "kosten": 0.5
             },
             {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
                 "typ": "talent",
                 "name": "Attraktiv",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Starker Wille",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Rundumschlag",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

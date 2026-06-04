@@ -1224,4 +1224,165 @@ Slayer, Demonologist (Monstrous), Swamp Freak, Nemesis nutzen "Gifts of the Nigh
 | HP-Limit: Manuelle Handicaps >4HP | Flickenmonster (7HP), Mumie (6HP), Vampir (6HP), Wiedergänger (5HP) | Build-Script addiert zu viele manuelle Handicaps. **Auto-Handicaps des Volks zählen NICHT zur HP-Bilanz** (`volk.py:291`) |
 | Extra-Aufstiege | Variiert pro Archetyp | Attribut/Skill-Defizit durch Doppelkosten + untrainierte Aktivierung → als NOTIZ dokumentiert |
 | Macht-Diffs | Exorcist, Magician, Demonologist | Voraussetzungen oder AB nicht gesetzt |
+
+## Review 2026-06-04 — Char-Review der 36 Horror-Builds
+
+Systematisches Review aller 36 `logs/horror_*_bericht.json` + gespeicherter Chars. Kennzahlen:
+34/36 Rang Fortgeschritten, 2/36 Anfänger (Psychic, Exorcist). 28× Mensch, 8 Monster-Völker.
+
+### ✅ PDF-Screenshot-Audit der Soll-Werte (2026-06-04) — Soll-Werte sind korrekt
+
+Frage: Sind die Build-Soll-Werte durch verwürfeltes `pdftotext` korrupt? **Antwort: Nein.**
+Die 19 PDF-Seiten wurden zu PNG gerendert (`pdftoppm`) und **visuell** gelesen (das Read-Tool
+liest Bilder). Methode: enge Wide-Short-Crops der Statblöcke, ×3–×5 hochskaliert; jeder
+Kandidat-Diff wurde per Hochzoom (×4/×5) gegengeprüft.
+
+**Ergebnis: 35/36 Archetypen — Attribute exakt deckungsgleich mit dem Bogen.**
+- **24/24 Menschen-Archetypen:** Attribute 100% = PDF.
+- **11/12 Monster:** = PDF (Str/Vig-Würfel d12+x stammen aus Volk-Boni, im Soll als d12 ohne
+  Modifier hinterlegt — korrekt).
+- **Einzige echte Abweichung:** **Vampire Willenskraft** — Soll war `8`, Bogen zeigt **Spirit d6**.
+  ✅ **KORRIGIERT 2026-06-04** (`build_horror_all.py:1261` Willenskraft 8→6) + Vampire neu gebaut:
+  alle 5 Attribute = Bogen (Ges d8/Ver d6/Wil d6/Stä d12/Kon d10), `verbleibende_aufstiege=0.0`,
+  Rang Fortgeschritten. Rest-Diffs (`Angewohnheit_schwer`, `Attraktiv` FEHLT) sind Budget-Überzug
+  des Bogens (Vampir-Volk: 4 Auto-Schwächen + manuelle Handicaps > 4HP), kein Soll-Fehler.
+
+⚠️ **Wichtige Selbstkorrektur:** Frühere mündliche Behauptungen einer „Soll-Korruption" (z.B.
+Nerd Spirit/Repair/Science/Hacking) waren **Lese-Artefakte meiner eigenen Low-Res-Sichtung** —
+bei korrektem Zoom stimmen alle. Die `pdftotext`-Verwürfelung hat die **Build-Soll-Werte nicht**
+beschädigt; der Build-Autor hat den Bogen sauber übertragen. (Ein voller Skill-Würfel-Audit wurde
+stichprobenartig bestätigt — z.B. Nerd 14/14 Skills = Bogen — und ist bei Bedarf vollständig
+nachziehbar.)
+
+### ✅ BEHOBEN 2026-06-04 — negatives Aufstiegsbudget (`talent_funktionen.py:1078`)
+
+**Fix angewendet** (Guard `>= aufstieg_kosten` statt `> 0`) + **Regressionslauf**: Build neu
+ausgeführt → **0 Chars mit negativem Budget** (vorher 9 mit `-0.5`), **0 Crashes**. Rang-Verteilung
+jetzt 29 Fortgeschritten / 7 Anfänger (vorher 34/2) — die 5 vorher fälschlich „Fortgeschrittenen"
+stehen jetzt korrekt auf Anfänger (der Bug hatte unter-budgetierte Builds maskiert). Befund-Details
+unten:
+
+### ⚠ (BEHOBEN) ECHTER CODE-BUG — negatives Aufstiegsbudget (`talent_funktionen.py:1078`)
+
+**9 Chars wurden mit `verbleibende_aufstiege = -0.5` gespeichert** (in der gespeicherten JSON, nicht
+nur im Bericht): Angel, Demon, Demonologist (Monstrous), Ghost Hunter, Mummy, Party Animal, Slayer,
+Swamp Freak, Witch.
+
+**Ursache:** In `_verrechne_talent_kosten` (`functions/talent_funktionen.py:1077-1081`) lautet der
+Guard nach `char_gen_completed`:
+```python
+if self.charakter.verbleibende_aufstiege > 0:
+    return self._waehle_mit_aufstieg(talent_name_key)   # zieht IMMER kosten=1 ab
+```
+Der Guard prüft `> 0`, nicht `>= kosten`. Ein Skill-D-Advance kostet 0.5
+(`eigenschaften_config.json: fertigkeit_spiel: 0.5`). Sobald ein Char durch einen Skill-Advance
+auf `verbleibende_aufstiege == 0.5` steht, passiert `0.5 > 0` → ein Talent-Advance (Kosten 1) wird
+genehmigt und zieht voll ab → **Saldo −0.5**. Reproduktion Party Animal: `abschliessen(4)` → 4 Aufstiege,
+dann Provozieren-Skill (−0.5 → 3.5) + 4 Talente (−4 → **−0.5**); der 5. Talent-Call wird korrekt
+abgelehnt (`-0.5 > 0` falsch). Rang wird trotzdem als „Fortgeschritten" berechnet
+(ausgegeben = 4 − (−0.5) = 4.5).
+**Fix-Vorschlag:** Guard auf `verbleibende_aufstiege >= TalentConfig.get('kosten.aufstieg', 1)` ändern.
+Betrifft alle Settings/D-Advances, nicht nur Horror → vor Änderung mit User abstimmen + Regressionslauf.
+
+### ✅ BEHOBEN 2026-06-04 — Endlosschleife im Swamp-Freak-Build
+
+`logs/horror_swamp_freak_log.txt` war **3.4 MB** mit **33.688× identischem**
+`fertigkeit_mit_aufstieg(Überleben): ok=False`. Ursache: die **Attribut-Advance-`while`-Schleife**
+(`build_horror_all.py`, beide Build-Funktionen) hatte keinen „Wert-unverändert"-Break — erreichte
+`charakter_mit_aufstieg` das Ziel nie, lief sie endlos und rief `increase_aufstiege` ewig. **Fix:**
+`attr_steps`-Cap + Wert-unverändert-Break ergänzt (analog zu den Skill-Schleifen). Nach Rebuild:
+Swamp-Freak-Log **65 Zeilen / 7 KB**.
+
+### ○ Build-Allokations-Inkonsistenz (D-Advances pro Archetyp handgetunt)
+
+Die D-Advance-Listen sind pro Archetyp manuell gesetzt und nicht aufs Seasoned-Budget (4 Aufstiege)
+abgestimmt: einige überziehen (→ −0.5, s.o.), andere unterziehen. **Psychic** (im Bericht als „perfekt"
+geführt) und **Exorcist** vergeben nur 3 Talent-Advances → 1 Aufstieg ungenutzt → bleiben **Anfänger**,
+erreichen also den Seasoned-Rang des Bogens nicht. „0 Diff" stimmt für die CharGen-Werte, der Rang ist
+aber nicht bogenkonform. ⇒ **Rang ist hier kein verlässliches Korrektheitssignal.**
+
+### ✅ Doppelkosten-Analyse + Aufstiegs-Topup (2026-06-04)
+
+**Frage:** Nutzen die Builds durch Doppelkosten (Skill ≥ regierendes Attribut → ×2) ineffizient
+Punkte, und lässt sich das durch andere Attributkäufe vermeiden? Sonst Aufstiege erhöhen.
+
+**Befund:**
+1. **Build-Reihenfolge ist bereits optimal** — Attribute komplett (regulär + HP) **vor** Skills
+   (`build_horror_all.py:108-127`/`323-339`). Es entstehen **keine ordnungsbedingten** Doppelkosten.
+2. **Doppelkosten sind dem Bogen inhärent, nicht durch Attributkäufe vermeidbar.** Die Regel ist
+   `fertigkeit_effektiv >= attribut_effektiv` → ×2 (also auch bei *Gleichstand*). Um sie zu umgehen,
+   müsste das Attribut **strikt über** dem Skill liegen (Skill d8 → Attribut d10) — das wäre eine
+   **Abweichung über den Bogen hinaus** (Attribute sind aber bogenkonform, s. Audit oben). Wo der
+   Bogen Skill ≥ Attribut vorgibt (z.B. Survivor Kämpfen d8 = Ges d8), sind die Doppelkosten
+   unvermeidbar.
+3. **Folge:** Das CharGen-Budget (5 Attr + 12 Skill + 4 HP) reicht bei den überzogenen Bögen nicht
+   für alle Edges → vor dem Topup fehlten **47 Bogen-Talente** (budgetbedingt abgelehnt, keine
+   Voraussetzungs-Fehler) und 1 Skill (Swamp Freak Überleben, Doppelkosten gegen Verstand d4).
+
+**Verifikation in der Ziel-JSON (`steigerungs_journal.cost_entries`):** Suche nach tatsächlich
+gezahlten Doppelkosten (`zahlungsquelle: "Fertigkeitspunkte", kosten: 2`) ergab **12 Schritte** in
+8 Chars. Klassifikation gegen die Bogen-Ziele:
+- **11 INHÄRENT** (Bogen gibt Skill **>** Attribut vor → unvermeidbar ohne Attribut über den Bogen
+  zu heben): Constable (Kämpfen/Wahrnehmung d8 > d6), Jock (Athletik d10 > Ges d8), Mummy (Athletik
+  d8 > Ges d4), Patchwork Man (Athletik/Kämpfen d8 > Ges d6), Sailor (Überleben d6 > Ver d4),
+  Soldier (Schießen d10 > Ges d6), Swamp Freak (Heilen d6 > Ver d4).
+- **1 VERMEIDBAR** (Demonologist Einschüchtern@10, Skill-Ziel = Willenskraft-Ziel d10, aber das
+  Attribut lag in CharGen zurück) → **behoben** durch Attribut-Priorisierung.
+
+**Fix 1 — Attribut-Priorisierung (`_attr_chargen_order`):** Die CharGen-Attribut-Schleifen ziehen
+Attribute mit hohen abhängigen Skills zuerst mit dem knappen Budget hoch (reine Reihenfolge,
+Zielwerte unverändert). Folge: Demonologist Willenskraft erreicht d10 **vor** Einschüchtern →
+Einschüchtern@10 kostet jetzt **1** statt 2. **Vermeidbare Doppelkosten: 1 → 0.** Inhärente bleiben
+(bogenbedingt). Ränge unverändert (keine Inflation).
+
+**Fix 2 — Topup-Phase (User-Freigabe „Aufstiege erhöhen bis alles bezahlt"):** Skill- **und**
+Talent-Topup in beide Build-Funktionen — fehlende Bogen-Skills/-Talente werden mit zusätzlichen
+Aufstiegen bezahlt (`increase_aufstiege` nur wenn `verbleibende_aufstiege < 1`; scheitert ein Talent
+trotz Aufstieg → AB/Macht-Blockade, geloggt, Aufstieg bleibt fürs nächste). Nach Rebuild:
+- **Fehlende Talente 47 → 0**, **Skill-Defizite 1 → 0**, **kein negatives Budget**.
+- Topup-Aufstiege pro Char: 1–5 (nur wo nötig). Rang: **29 Fortgeschritten / 5 Veteran / 2 Anfänger**.
+  - 5 Veteran = stark überzogene Bögen (Demonologist/Slayer 5, Nemesis/Werewolf/Mummy 4) — viele Edges.
+  - 2 Anfänger (Psychic, Exorcist) = **unter**-budgetierte Bögen, 1 Aufstieg bleibt mangels weiterer
+    Bogen-Edges ungenutzt (bogenkonform, kein Defizit).
+
+### ✅ Doppelkosten-Prüfung projektweit (2026-06-04) — `logs/check_doppelkosten.py`
+
+Wiederverwendbares Prüf-Skript ergänzt: scannt **alle** Archetyp-JSONs auf doppelt bezahlte
+Fertigkeitsschritte (`zahlungsquelle: "Fertigkeitspunkte", kosten >= 2`) und klassifiziert sie mit
+dem **setting-spezifischen** Skill→Attribut-Mapping (wichtig: Provozieren→Verstand in Horror, aber
+→Willenskraft in SciFi/Superkräfte!).
+
+**Gesamtergebnis (157 Archetypen, alle Settings) — Endstand:** **90 Doppelkosten — 90 inhärent,
+0 vermeidbar.**
+- **90 INHÄRENT** (Bogen gibt Skill **>** Attribut vor): unvermeidbar ohne das Attribut über den
+  Bogenwert zu heben. Verschwenden auch keine *nutzbaren* Punkte (alle Bogen-Ziele werden erreicht).
+- **0 VERMEIDBAR** — beide ehemals vermeidbaren SciFi-Fälle behoben (s.u.).
+
+**✅ Surveyor-Fix (2026-06-04):** Surveyor Wahrnehmung@8 zahlte doppelt, weil Verstand erst per
+Advance d8 erreichte. Fix in `build_scifi_batch1.py`: Verstand d6→**d8 in CharGen** (via die 2 HP, die
+vorher Elektronik/Pilot aktivierten) **vor** den Skills → Wahrnehmung d8 jetzt einfach. Elektronik/Pilot
+wandern in die Advances; der frei gewordene Verstand-Advance fixt nebenbei die alte **Stärke-Abweichung
+(d4→d6, Bogen d6)** via `abschliessen(s,5)`. Ergebnis: alle Skills auf Bogen-Ziel, Stärke d6, Rang
+**Fortgeschritten** — strikt besser als vorher (kein Doppelkosten **und** keine Stärke-Abweichung mehr).
+
+**✅ Setting-Fix Provozieren→Verstand (User, 2026-06-04):** In `SciFi Kompendium` und
+`Superkräfte Kompendium` war Provozieren fälschlich →Willenskraft gemappt. Korrigiert auf →Verstand.
+Betroffene Builds neu gebaut (`build_scifi_batch1/2`, `build_sfc_phase_g`, `build_supers` — 0 Crashes,
+Anomalie-Zahlen unverändert). **Effekt:** Psyker Provozieren@8 zahlt jetzt **einfach** statt doppelt
+(Verstand d10 wird in CharGen erreicht) → **vermeidbare Doppelkosten 2 → 1**, projektweit **keine
+Provozieren-Doppelkosten mehr**.
+
+**Fazit:** **Projektweit 0 vermeidbare Doppelkosten** (157 Archetypen). Behoben: Horror-Demonologist
+(Attribut-Priorisierung), Psyker (Setting-Fix Provozieren→Verstand), Surveyor (Verstand d8 in CharGen).
+Verbleiben 90 inhärente (Bogen gibt Skill > Attribut vor — unvermeidbar, keine nutzbaren Punkte
+verschwendet). Prüfung jederzeit via `python3 logs/check_doppelkosten.py`.
+
+### ○ Erwartete (dokumentierte) Anomalien — kein Bug
+
+- **Budget-Erschöpfung:** Bögen überziehen 4HP/12-Skill-Budget → viele `talent(...) ok=False` während
+  CharGen, später als Advance nachgeholt. Bekannt/erwartet.
+- **4 Superkräfte-Archetypen** (Slayer, Demonologist (Monstrous), Swamp Freak, Nemesis): „Gifts of the
+  Night" (SKP) nicht als CharGen-Mechanik abgebildet → als Mensch mit `NOTIZ: MONSTROeSE KRAFT` gebaut.
+- **Monster-Völker** (8): Auto-Handicaps/-Talente korrekt aus Volk; manuelle HC-Überzählung bei
+  Flickenmonster/Mumie/Vampir/Wiedergänger ist HP-Limit-konform (Volk-Auto zählt nicht zur HP-Bilanz).
 | Fertigkeiten FEHLT im Diff | Resolved: untrainierte Skills (W4-2) wurden vom `snap()`-Filter (driver.py:86-90) ausgeblendet. Fix: `modifier < 0`-Check in Skill-Retry aktiviert sie jetzt |

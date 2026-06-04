@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Ghost Hunter (Horror Kompendium)
-# Stand: 2026-06-03T22:06:01
-# 5 Anomalie(n) von 34 Schritten
+# Stand: 2026-06-04T07:47:24
+# 7 Anomalie(n) von 41 Schritten
 
 ## ANOMALIEN
   [!] talent(Stinkreich): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -8,6 +8,8 @@
   [!] kaufen(Geisterjägerpaketx1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Geisterjägerpaket zum Preis 0 gekauft kosten=0 None
   [!] kaufen(Kamera (normal)x1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Kamera (normal) zum Preis 0 gekauft kosten=0 None
   [!] kaufen(Taschenlampe (10" Strahl)x1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10" Strahl) zum Preis 0 gekauft kosten=0 None
+  [!] talent_mit_aufstieg(Monsterjäger): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Ghost Hunter, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -44,3 +46,10 @@
   - kaufen(Geisterjägerpaketx1) FORCE: ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
   - kaufen(Kamera (normal)x1) FORCE: ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
   - kaufen(Taschenlampe (10" Strahl)x1) FORCE: ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - fertigkeit_mit_aufstieg(Recherche): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - fertigkeit_mit_aufstieg(Naturwissenschaften): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - fertigkeit_mit_aufstieg(Schießen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - talent_mit_aufstieg(Stinkreich): ok=True kosten=-2500 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=2500
+  - talent_mit_aufstieg(Bekannt): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=2500
+  - talent_mit_aufstieg(Monsterjäger): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=2500
+  - talent_mit_aufstieg(Monsterjäger): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=2500

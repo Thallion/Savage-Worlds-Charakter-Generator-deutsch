@@ -510,7 +510,32 @@
                 "punkte": 1
             }
         },
-        "talente": {},
+        "talente": {
+            "Block": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Raufbold": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Erstschlag": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Flink": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
@@ -541,7 +566,12 @@
         "Schwur_schwer",
         "Vorsichtig"
     ],
-    "selected_talente": [],
+    "selected_talente": [
+        "Block",
+        "Raufbold",
+        "Erstschlag",
+        "Flink"
+    ],
     "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -577,9 +607,9 @@
         "Silberkugeln (10)": 1,
         "Schwert, Kurzschwert": 1
     },
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 11,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -792,6 +822,30 @@
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Block",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Raufbold",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Erstschlag",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Flink",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

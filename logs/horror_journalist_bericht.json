@@ -80,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -132,7 +132,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -535,6 +535,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Gassenwissen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 260,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Journalist.json)",
       "ok": true
     }
@@ -580,18 +593,12 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Gassenwissen\" FEHLT",
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
+      "punkte": {},
       "vermoegen": 260
     }
   ],
@@ -685,7 +692,8 @@
       "Aufmerksamkeit",
       "Beziehungen",
       "Ermittler",
-      "Beziehungen_2"
+      "Beziehungen_2",
+      "Gassenwissen"
     ],
     "maechte": [],
     "ausruestung": {},

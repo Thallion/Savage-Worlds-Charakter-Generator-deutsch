@@ -1,10 +1,15 @@
 # Archetyp-Erstellung: Witch (Horror Kompendium)
-# Stand: 2026-06-03T22:06:02
-# 2 Anomalie(n) von 34 Schritten
+# Stand: 2026-06-04T07:47:25
+# 7 Anomalie(n) von 44 Schritten
 
 ## ANOMALIEN
   [!] talent(Bedrohlich): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] macht(Geisterruf): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] talent_mit_aufstieg(Neue Mächte): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Fluchwort): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Geisterruf): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=maechte: "Fluchwort" FEHLT; maechte: "Geisterruf" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Witch, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -13,11 +18,11 @@
   - handicap(Rachsüchtig_leicht): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - volk_freies_talent(Mensch,AH (Hexenmeister/Hexe)): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 3} Geld=500
-  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 3} Geld=500
+  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 3} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 3} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 3} Geld=500
-  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 3} Geld=500
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 1} Geld=500
   - fertigkeit(Allgemeinwissen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 1} Geld=500
@@ -41,3 +46,13 @@
   - macht(Fluchwort): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Schutz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Geisterruf): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - kaufen(Silberdolchx1): ok=True kosten=100 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=400
+  - kaufen(Rucksackx1): ok=True kosten=50 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - fertigkeit_mit_aufstieg(Überleben): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - talent_mit_aufstieg(Bedrohlich): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - talent_mit_aufstieg(Machtpunkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - talent_mit_aufstieg(Energieschub): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - talent_mit_aufstieg(Neue Mächte): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - macht(Fluchwort): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - macht(Geisterruf): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350
+  - talent_mit_aufstieg(Neue Mächte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=350

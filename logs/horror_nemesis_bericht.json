@@ -678,6 +678,58 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Block)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Raufbold)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Erstschlag)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Flink)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Nemesis.json)",
       "ok": true
     }
@@ -911,9 +963,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 0
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Geheimnis_leicht\" FEHLT; talente: \"Raufbold\" FEHLT; talente: \"Erstschlag\" FEHLT; talente: \"Block\" FEHLT; talente: \"Flink\" FEHLT",
+      "warnung": "handicaps: \"Geheimnis_leicht\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -926,7 +987,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 20,
+  "anomalien_anzahl": 21,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -1016,7 +1077,12 @@
       "Schwur_schwer",
       "Vorsichtig"
     ],
-    "talente": [],
+    "talente": [
+      "Block",
+      "Raufbold",
+      "Erstschlag",
+      "Flink"
+    ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
@@ -1028,7 +1094,7 @@
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "volk": "Mensch"
   }
 }

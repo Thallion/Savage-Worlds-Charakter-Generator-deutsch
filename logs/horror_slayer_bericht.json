@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -145,20 +145,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "aktion": "attribut(Verstand) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -184,7 +171,20 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Willenskraft)",
+      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Verstand)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -197,7 +197,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Willenskraft)",
+      "aktion": "attribut_mit_hc(Verstand)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -640,7 +640,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Assassine)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -649,7 +649,7 @@
         "handicap": 0
       },
       "vermoegen": 0,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Attraktiv)",
@@ -728,6 +728,71 @@
       },
       "vermoegen": 0,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Assassine)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Block)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Mut)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Monsterjäger)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Slayer.json)",
@@ -867,6 +932,19 @@
       "vermoegen": 0
     },
     {
+      "aktion": "talent_mit_aufstieg(Assassine)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Attraktiv)",
       "ok": false,
       "kosten": 0,
@@ -945,22 +1023,16 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Attraktiv\" FEHLT; talente: \"Monsterjäger\" FEHLT; talente: \"Mut\" FEHLT; talente: \"Block\" FEHLT",
+      "aktion": "NOTIZ: 5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": -0.5
-      },
+      "punkte": {},
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 18,
+  "anomalien_anzahl": 19,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -1059,7 +1131,11 @@
     ],
     "talente": [
       "Schreikönigin/Schreikönig",
-      "Assassine"
+      "Assassine",
+      "Attraktiv",
+      "Block",
+      "Mut",
+      "Monsterjäger"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -1068,11 +1144,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "volk": "Mensch"
   }
 }

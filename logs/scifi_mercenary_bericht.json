@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Molekularschwertx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Komlinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Adrenalindrüsex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Verbesserte Sichtx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -477,7 +477,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -490,7 +490,7 @@
     },
     {
       "aktion": "kaufen(Molekularschwertx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -503,7 +503,7 @@
     },
     {
       "aktion": "kaufen(Komlinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -516,7 +516,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -529,7 +529,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Adrenalindrüsex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -542,7 +542,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Verbesserte Sichtx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -643,7 +643,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 6,
+        "wert": 10,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true

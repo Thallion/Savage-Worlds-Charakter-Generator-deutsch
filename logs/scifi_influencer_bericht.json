@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Kleidung, formellx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 40,
       "kostenart": "Vermögen",
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Drohne, Kommerziellx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -451,7 +451,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Kleidung, formellx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 40,
       "kostenart": "Vermögen",
       "punkte": {
@@ -464,7 +464,7 @@
     },
     {
       "aktion": "kaufen(Drohne, Kommerziellx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

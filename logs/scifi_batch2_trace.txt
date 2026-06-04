@@ -32,13 +32,13 @@ Roughneck FERTIG anomalien=11
   Advance Naturwissenschaften d4: ok=True
   Advance Überreden d8: ok=True
   Advance Elan: ok=True
-  Advance Neue Mächte: ok=True
+  Advance Neue Mächte: ok=False
   Macht Eigenschaft erhöhen/senken: ok=True
   Macht Empathie: ok=True
   Macht Objekt auslesen: ok=True
-  Macht Linderung: ok=True
-  Macht Kriegersegen: ok=True
-Mystic FERTIG anomalien=5
+  Macht Linderung: ok=False
+  Macht Kriegersegen: ok=False
+Mystic FERTIG anomalien=8
   Wechselbälger HC: ['Große Klappe', 'Loyal', 'Beschämt', 'Pechvogel (leicht)', 'Kybernetische Abstoßung']
   Talent: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}

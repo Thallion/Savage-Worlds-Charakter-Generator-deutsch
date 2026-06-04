@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -510,8 +510,99 @@
         },
         "maechte": {},
         "superkraefte": {},
-        "cyberware": {},
-        "ausruestung": {}
+        "cyberware": {
+            "ffb7daf9-247d-4b81-92b3-5ceb47e7f323": {
+                "name": "Cyberware: Verborgenes Fach",
+                "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
+                "unterkategorie": "Körper",
+                "stress": 1,
+                "max_installationen": -1,
+                "kosten": 2000,
+                "effekte": {
+                    "verborgenes_fach": true,
+                    "kapazitaet_kg": 1
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "ffb7daf9-247d-4b81-92b3-5ceb47e7f323",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            },
+            "745f076c-4f7d-44b9-89ce-15ab1a8b80c5": {
+                "name": "Cyberware: Verborgenes Fach",
+                "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
+                "unterkategorie": "Körper",
+                "stress": 1,
+                "max_installationen": -1,
+                "kosten": 2000,
+                "effekte": {
+                    "verborgenes_fach": true,
+                    "kapazitaet_kg": 1
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "745f076c-4f7d-44b9-89ce-15ab1a8b80c5",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            }
+        },
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Molekularschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Tarnkleidung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Universalübersetzer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberdeck": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Direktionales Mikrofon": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kreislaufatemgerät": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Betäubungsschlagstock": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "EMP-Granate": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberware: Verborgenes Fach": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Gesucht_schwer",
@@ -527,7 +618,9 @@
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
-    "selected_cyberware": [],
+    "selected_cyberware": [
+        "Cyberware: Verborgenes Fach"
+    ],
     "voelker_selected": {
         "Mensch": true,
         "Amorphe": false,
@@ -551,11 +644,41 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Molekularschwert",
+        "Tarnkleidung",
+        "Taschencomputer",
+        "Universalübersetzer",
+        "Cyberdeck",
+        "Direktionales Mikrofon",
+        "Kreislaufatemgerät",
+        "Betäubungsschlagstock",
+        "EMP-Granate",
+        "Cyberware: Verborgenes Fach"
+    ],
+    "selected_waffen": [
+        "Molekularschwert",
+        "Betäubungsschlagstock",
+        "EMP-Granate"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Molekularschwert": 2,
+        "Tarnkleidung": 1,
+        "Taschencomputer": 1,
+        "Universalübersetzer": 1,
+        "Cyberdeck": 1,
+        "Direktionales Mikrofon": 1,
+        "Kreislaufatemgerät": 1,
+        "Betäubungsschlagstock": 1,
+        "EMP-Granate": 4,
+        "Cyberware: Verborgenes Fach": 2
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,

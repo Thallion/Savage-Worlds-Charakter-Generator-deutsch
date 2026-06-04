@@ -1,0 +1,18 @@
+
+============================================================
+BUILD (MONSTROeS): Vampire
+============================================================
+  ANOM: handicap(Angewohnheit_schwer): {'aktion': 'handicap(Angewohnheit_schwer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Auto-Handicaps: ['Schwäche (Sonnenlicht)', 'Schwäche (Pfahl)', 'Abhängigkeit (Blut)', 'Schwäche (Geweihtes Wasser)']
+  Auto-Talente: ['Nachtsicht', 'Zäh']
+  Attribute-Boni: {'Stärke': 2}
+  Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  ANOM: talent(Attraktiv): {'aktion': 'talent(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
+  Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 470, 'machtpunkte': 0}
+  Rang: Anfänger
+  ANOM: talent_retry(Attraktiv): {'aktion': 'talent_mit_aufstieg(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
+  DIFF: ['handicaps: "Angewohnheit_schwer" FEHLT', 'talente: "Attraktiv" FEHLT']
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
+  GESPEICHERT: chars/Archetypen/Archetyp_Horror_Vampire.json
+  GESAMT-ANOMALIEN: 16

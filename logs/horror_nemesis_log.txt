@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Nemesis (Horror Kompendium)
-# Stand: 2026-06-03T22:06:14
-# 20 Anomalie(n) von 52 Schritten
+# Stand: 2026-06-04T07:47:37
+# 21 Anomalie(n) von 56 Schritten
 
 ## ANOMALIEN
   [!] handicap(Geheimnis_leicht): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -22,7 +22,8 @@
   [!] talent_mit_aufstieg(Erstschlag): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Flink): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Block): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Geheimnis_leicht" FEHLT; talente: "Raufbold" FEHLT; talente: "Erstschlag" FEHLT; talente: "Block" FEHLT; talente: "Flink" FEHLT kosten=0 None
+  [!] NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Geheimnis_leicht" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Nemesis, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -77,3 +78,7 @@
   - talent_mit_aufstieg(Erstschlag): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Flink): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Block): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Block): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Raufbold): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Erstschlag): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Flink): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0

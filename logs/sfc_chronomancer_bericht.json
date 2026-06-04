@@ -380,7 +380,7 @@
     },
     {
       "aktion": "talent(Zeit Umordnen)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -389,7 +389,7 @@
         "handicap": 4
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "kaufen(Körperpanzerung +4x1)",
@@ -475,6 +475,19 @@
     }
   ],
   "anomalien": [
+    {
+      "aktion": "talent(Zeit Umordnen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
     {
       "aktion": "kaufen(Universalübersetzerx1) FORCE",
       "ok": true,
@@ -564,7 +577,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 9,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -644,8 +657,7 @@
     ],
     "talente": [
       "AH (Chronomant)",
-      "Vorahnung",
-      "Zeit Umordnen"
+      "Vorahnung"
     ],
     "maechte": [
       "Abwehren",
@@ -657,11 +669,11 @@
       "fertigkeit": 0,
       "handicap": 4,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 15,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

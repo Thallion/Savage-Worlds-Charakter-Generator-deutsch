@@ -1,12 +1,12 @@
 # Archetyp-Erstellung: Journalist (Horror Kompendium)
-# Stand: 2026-06-03T22:06:03
-# 4 Anomalie(n) von 41 Schritten
+# Stand: 2026-06-04T07:47:26
+# 4 Anomalie(n) von 42 Schritten
 
 ## ANOMALIEN
   [!] talent(Aufmerksamkeit): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Beziehungen): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Gassenwissen): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=talente: "Gassenwissen" FEHLT kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Journalist, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -15,11 +15,11 @@
   - handicap(Stur): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk_freies_talent(Mensch,Charismatisch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
   - fertigkeit(Geisteswissenschaften): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 2} Geld=500
@@ -50,3 +50,4 @@
   - talent_mit_aufstieg(Ermittler): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=260
   - talent_mit_aufstieg(Beziehungen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=260
   - talent_mit_aufstieg(Gassenwissen): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=260
+  - talent_mit_aufstieg(Gassenwissen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=260

@@ -527,6 +527,30 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Attraktiv": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Block": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Mut": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Monsterjäger": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -562,7 +586,11 @@
     ],
     "selected_talente": [
         "Schreikönigin/Schreikönig",
-        "Assassine"
+        "Assassine",
+        "Attraktiv",
+        "Block",
+        "Mut",
+        "Monsterjäger"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -598,9 +626,9 @@
         "Kaltes-Eisen-Schwert": 1,
         "Holzpfähle (5)": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 6,
+    "rang": "Veteran",
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 11,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -634,20 +662,6 @@
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -657,13 +671,27 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 10,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -810,6 +838,30 @@
             {
                 "typ": "talent",
                 "name": "Assassine",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Attraktiv",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Block",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Mut",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Monsterjäger",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

@@ -184,7 +184,9 @@
       "Bash(pdftotext -layout \"Texte/US85040PDF_Deadlands_Archetypen-Set_meta.pdf\" /tmp/deadlands_raw.txt)",
       "Bash(pdftotext -layout \"Wildes-Aventurien-V2.3.pdf\" /tmp/wa_v23.txt)",
       "Bash(pdftotext -layout \"Wildes_Aventurien.pdf\" /tmp/wa_v1.txt)",
-      "WebFetch(domain:dsa.ulisses-regelwiki.de)"
+      "WebFetch(domain:dsa.ulisses-regelwiki.de)",
+      "Bash(pdfinfo \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\")",
+      "Bash(pdftoppm -png -r 150 \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\" /tmp/horror_pdf_png/p)"
     ],
     "deny": []
   }

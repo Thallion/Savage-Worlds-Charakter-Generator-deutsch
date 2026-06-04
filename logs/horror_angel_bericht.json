@@ -93,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -497,7 +497,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,7 +506,7 @@
         "handicap": 0
       },
       "vermoegen": 478,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Starker Wille)",
@@ -523,7 +523,7 @@
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -532,7 +532,7 @@
         "handicap": 0
       },
       "vermoegen": 478,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Rundumschlag)",
@@ -546,6 +546,45 @@
       },
       "vermoegen": 478,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 478,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Starker Wille)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 478,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Rundumschlag)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 478,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Angel.json)",
@@ -625,7 +664,7 @@
       "vermoegen": 478
     },
     {
-      "aktion": "talent_mit_aufstieg(Starker Wille)",
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -638,7 +677,7 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
+      "aktion": "talent_mit_aufstieg(Starker Wille)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -664,9 +703,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 478
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwur\" FEHLT; talente: \"Rundumschlag\" FEHLT; talente: \"Starker Wille\" FEHLT",
+      "warnung": "fertigkeiten: Einschüchtern soll W6, ist W8; handicaps: \"Schwur\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -674,12 +722,12 @@
         "fertigkeit": 0,
         "handicap": 0,
         "handicap_gesamt": 4,
-        "aufstiege": -0.5
+        "aufstiege": 0.0
       },
       "vermoegen": 478
     }
   ],
-  "anomalien_anzahl": 11,
+  "anomalien_anzahl": 12,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -747,7 +795,7 @@
         "ausgewaehlt": false
       },
       "Einschüchtern": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -779,7 +827,9 @@
     ],
     "talente": [
       "Flug",
-      "Attraktiv"
+      "Attraktiv",
+      "Starker Wille",
+      "Rundumschlag"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -788,7 +838,7 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 478,

@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Cyberdeckx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -464,7 +464,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -477,7 +477,7 @@
     },
     {
       "aktion": "kaufen(Cyberdeckx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

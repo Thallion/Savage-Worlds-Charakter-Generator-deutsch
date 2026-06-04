@@ -539,6 +539,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Unerschütterlich": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -566,7 +572,8 @@
         "Heiler",
         "Berserker",
         "Schwer zu töten",
-        "Heiler_2"
+        "Heiler_2",
+        "Unerschütterlich"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -598,7 +605,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -618,28 +625,28 @@
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Verstand",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Verstand",
                 "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
+                "name": "Geschicklichkeit",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
+                "name": "Geschicklichkeit",
                 "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -778,6 +785,12 @@
             {
                 "typ": "talent",
                 "name": "Heiler_2",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Unerschütterlich",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

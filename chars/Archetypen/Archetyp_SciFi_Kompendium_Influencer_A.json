@@ -319,7 +319,7 @@
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -526,6 +526,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Kleidung, formell": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Drohne, Kommerziell": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -570,7 +580,9 @@
     "selected_allgemeine_ausruestung": [
         "Kevlarweste",
         "Springmesser",
-        "Taschencomputer"
+        "Taschencomputer",
+        "Kleidung, formell",
+        "Drohne, Kommerziell"
     ],
     "selected_waffen": [
         "Springmesser"
@@ -582,7 +594,9 @@
     "ausruestung_mengen": {
         "Kevlarweste": 1,
         "Springmesser": 1,
-        "Taschencomputer": 1
+        "Taschencomputer": 1,
+        "Kleidung, formell": 1,
+        "Drohne, Kommerziell": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

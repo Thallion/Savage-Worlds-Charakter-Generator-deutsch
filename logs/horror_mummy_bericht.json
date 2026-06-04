@@ -497,7 +497,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(AH (Alchemist, Horror))",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,7 +506,7 @@
         "handicap": 0
       },
       "vermoegen": 470,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Rohling)",
@@ -549,6 +549,32 @@
     },
     {
       "aktion": "macht(Flächenschlag)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Schlummer)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(AH (Alchemist, Horror))",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -561,7 +587,33 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Schlummer)",
+      "aktion": "talent_mit_aufstieg(Rohling)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Machtpunkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -702,6 +754,19 @@
       "vermoegen": 470
     },
     {
+      "aktion": "talent_mit_aufstieg(AH (Alchemist, Horror))",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Rohling)",
       "ok": false,
       "kosten": 0,
@@ -741,9 +806,44 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "macht(Flächenschlag)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Schlummer)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 470
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwerzüngig\" FEHLT; handicaps: \"Langsam\" FEHLT; talente: \"Neue Mächte\" FEHLT; talente: \"Rohling\" FEHLT; talente: \"Machtpunkte\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Heilung\" FEHLT; maechte: \"Schutz\" FEHLT",
+      "warnung": "handicaps: \"Schwerzüngig\" FEHLT; handicaps: \"Langsam\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Heilung\" FEHLT; maechte: \"Schutz\" FEHLT; maechte: \"Flächenschlag\" FEHLT; maechte: \"Schlummer\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -751,12 +851,12 @@
         "fertigkeit": 0,
         "handicap": 0,
         "handicap_gesamt": 4,
-        "aufstiege": -0.5
+        "aufstiege": 0.5
       },
       "vermoegen": 470
     }
   ],
-  "anomalien_anzahl": 14,
+  "anomalien_anzahl": 18,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -851,21 +951,21 @@
     ],
     "talente": [
       "Zäh",
-      "AH (Alchemist, Horror)"
+      "AH (Alchemist, Horror)",
+      "Rohling",
+      "Machtpunkte",
+      "Neue Mächte"
     ],
-    "maechte": [
-      "Flächenschlag",
-      "Schlummer"
-    ],
+    "maechte": [],
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
-    "machtpunkte": 15,
+    "machtpunkte": 20,
     "vermoegen": 470,
     "rang": "Fortgeschritten",
     "volk": "Mumie"

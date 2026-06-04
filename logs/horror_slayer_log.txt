@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Slayer (Horror Kompendium)
-# Stand: 2026-06-03T22:06:12
-# 18 Anomalie(n) von 56 Schritten
+# Stand: 2026-06-04T07:47:35
+# 19 Anomalie(n) von 61 Schritten
 
 ## ANOMALIEN
   [!] talent(Assassine): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -14,13 +14,14 @@
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Gifts of the Night (13 pts): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Gifts of the Night (13 pts) kosten=0 None
   [!] fertigkeit_mit_aufstieg(Provozieren): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: 2 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit: ok=True warnung=2 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit kosten=0 None
+  [!] talent_mit_aufstieg(Assassine): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Attraktiv): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Block): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Monsterjäger): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Schreikönigin/Schreikönig): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=talente: "Attraktiv" FEHLT; talente: "Monsterjäger" FEHLT; talente: "Mut" FEHLT; talente: "Block" FEHLT kosten=0 None
+  [!] NOTIZ: 5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Slayer, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -31,14 +32,14 @@
   - volk_freies_talent(Mensch,Schreikönigin/Schreikönig): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Verstand) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut_mit_hc(Willenskraft): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
-  - attribut_mit_hc(Willenskraft): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
+  - attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut_mit_hc(Verstand): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
+  - attribut_mit_hc(Verstand): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
   - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 0} Geld=500
   - fertigkeit(Fahren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 10, 'handicap': 0} Geld=500
   - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 0} Geld=500
@@ -72,10 +73,15 @@
   - fertigkeit_mit_aufstieg(Provozieren): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - fertigkeit_mit_aufstieg(Provozieren): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - fertigkeit_mit_aufstieg(Provozieren): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
-  - talent_mit_aufstieg(Assassine): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Assassine): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Attraktiv): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Block): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Monsterjäger): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Schreikönigin/Schreikönig): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Assassine): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Attraktiv): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Block): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Mut): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Monsterjäger): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0

@@ -319,7 +319,7 @@
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -549,6 +549,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Nanowear": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Komlink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -597,7 +612,10 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Laserpistole"
+        "Laserpistole",
+        "Nanowear",
+        "Komlink",
+        "Taschencomputer"
     ],
     "selected_waffen": [
         "Laserpistole"
@@ -605,7 +623,10 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Laserpistole": 1
+        "Laserpistole": 1,
+        "Nanowear": 1,
+        "Komlink": 1,
+        "Taschencomputer": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

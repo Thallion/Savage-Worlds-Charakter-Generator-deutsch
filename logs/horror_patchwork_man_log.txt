@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Patchwork Man (Horror Kompendium)
-# Stand: 2026-06-03T22:06:11
-# 12 Anomalie(n) von 36 Schritten
+# Stand: 2026-06-04T07:47:33
+# 13 Anomalie(n) von 39 Schritten
 
 ## ANOMALIEN
   [!] handicap(Rachsüchtig_schwer): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -14,7 +14,8 @@
   [!] talent_mit_aufstieg(Eisenkiefer): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Wildheit): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Rachsüchtig_schwer" FEHLT; talente: "Raufbold" FEHLT; talente: "Wildheit" FEHLT; talente: "Eisenkiefer" FEHLT kosten=0 None
+  [!] NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Rachsüchtig_schwer" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Patchwork Man, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -53,3 +54,6 @@
   - talent_mit_aufstieg(Eisenkiefer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
   - talent_mit_aufstieg(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
   - talent_mit_aufstieg(Wildheit): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
+  - talent_mit_aufstieg(Raufbold): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
+  - talent_mit_aufstieg(Eisenkiefer): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
+  - talent_mit_aufstieg(Wildheit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300

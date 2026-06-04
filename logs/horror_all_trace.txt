@@ -1,6 +1,6 @@
 ============================================================
 BUILD START: Horror Kompendium ALL Archetypes
-Time: 2026-06-03 22:05:58
+Time: 2026-06-04 07:47:21
 ============================================================
 
 ============================================================
@@ -11,10 +11,12 @@ BUILD: Ghost Hunter
   ANOM: talent(Stinkreich): {'aktion': 'talent(Stinkreich)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 0}
   Rang: Anfänger  Aufstiege: 4
+  ANOM: talent_adv(Monsterjäger): {'aktion': 'talent_mit_aufstieg(Monsterjäger)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 2500, 'warnung': 'Aktion lieferte False/None'}
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
   DIFF: []
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': -0.5}
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Ghost_Hunter.json
-  GESAMT-ANOMALIEN: 6
+  GESAMT-ANOMALIEN: 9
 
 ============================================================
 BUILD: Nerd
@@ -25,7 +27,8 @@ BUILD: Nerd
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 210, 'machtpunkte': 0}
   Rang: Anfänger  Aufstiege: 4
   ANOM: talent_adv(Berechnend): {'aktion': 'talent_mit_aufstieg(Berechnend)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 210, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Berechnend" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Nerd.json
   GESAMT-ANOMALIEN: 5
@@ -84,7 +87,8 @@ BUILD: Gamer
   ANOM: talent_adv(Elan): {'aktion': 'talent_mit_aufstieg(Elan)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 185, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Selbstlos): {'aktion': 'talent_mit_aufstieg(Selbstlos)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 185, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Mutig): {'aktion': 'talent_mit_aufstieg(Mutig)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 185, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Glück" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Gamer.json
   GESAMT-ANOMALIEN: 17
@@ -97,11 +101,13 @@ BUILD: Party Animal
   ANOM: talent(Improvisationsgabe): {'aktion': 'talent(Improvisationsgabe)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 478, 'machtpunkte': 0}
   Rang: Anfänger  Aufstiege: 4
+  ANOM: talent_adv(Mut in Flaschen): {'aktion': 'talent_mit_aufstieg(Mut in Flaschen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 478, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Improvisationsgabe): {'aktion': 'talent_mit_aufstieg(Improvisationsgabe)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 478, 'warnung': 'Aktion lieferte False/None'}
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
   DIFF: []
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': -0.5}
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 4, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Party_Animal.json
-  GESAMT-ANOMALIEN: 4
+  GESAMT-ANOMALIEN: 7
 
 ============================================================
 BUILD: Runner
@@ -127,10 +133,14 @@ BUILD: Witch
   ANOM: macht(Geisterruf): {'aktion': 'macht(Geisterruf)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 350, 'machtpunkte': 10}
   Rang: Anfänger  Aufstiege: 4
-  DIFF: []
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': -0.5}
+  ANOM: talent_adv(Neue Mächte): {'aktion': 'talent_mit_aufstieg(Neue Mächte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 350, 'warnung': 'Aktion lieferte False/None'}
+  ANOM: macht_adv(Fluchwort): {'aktion': 'macht(Fluchwort)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 350, 'warnung': 'Aktion lieferte False/None'}
+  ANOM: macht_adv(Geisterruf): {'aktion': 'macht(Geisterruf)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 350, 'warnung': 'Aktion lieferte False/None'}
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: ['maechte: "Fluchwort" FEHLT', 'maechte: "Geisterruf" FEHLT']
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Witch.json
-  GESAMT-ANOMALIEN: 4
+  GESAMT-ANOMALIEN: 12
 
 ============================================================
 BUILD: Doctor
@@ -142,10 +152,11 @@ BUILD: Doctor
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 440, 'machtpunkte': 0}
   Rang: Anfänger  Aufstiege: 4
   ANOM: talent_adv(Unerschütterlich): {'aktion': 'talent_mit_aufstieg(Unerschütterlich)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 440, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['attribute: Stärke soll W4, ist W6', 'talente: "Unerschütterlich" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: ['attribute: Stärke soll W4, ist W6']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Doctor.json
-  GESAMT-ANOMALIEN: 7
+  GESAMT-ANOMALIEN: 8
 
 ============================================================
 BUILD: Occultist
@@ -183,7 +194,8 @@ BUILD: Journalist
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 260, 'machtpunkte': 0}
   Rang: Anfänger  Aufstiege: 4
   ANOM: talent_adv(Gassenwissen): {'aktion': 'talent_mit_aufstieg(Gassenwissen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 260, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Gassenwissen" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Journalist.json
   GESAMT-ANOMALIEN: 7
@@ -244,7 +256,8 @@ BUILD: Sailor
   Rang: Anfänger  Aufstiege: 4
   ANOM: talent_adv(Schmerzresistenz): {'aktion': 'talent_mit_aufstieg(Schmerzresistenz)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 488, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Meisterschütze): {'aktion': 'talent_mit_aufstieg(Meisterschütze)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 488, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Meisterschütze" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Sailor.json
   GESAMT-ANOMALIEN: 11
@@ -323,7 +336,8 @@ BUILD: Librarian
   Rang: Anfänger  Aufstiege: 4
   ANOM: talent_adv(Ermittler): {'aktion': 'talent_mit_aufstieg(Ermittler)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 250, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Alleskönner): {'aktion': 'talent_mit_aufstieg(Alleskönner)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 250, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Alleskönner" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Librarian.json
   GESAMT-ANOMALIEN: 9
@@ -372,12 +386,14 @@ BUILD (MONSTROeS): Angel
   ANOM: talent(Starker Wille): {'aktion': 'talent(Starker Wille)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 478, 'machtpunkte': 0}
   Rang: Anfänger
+  ANOM: talent_retry(Attraktiv): {'aktion': 'talent_mit_aufstieg(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 478, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Starker Wille): {'aktion': 'talent_mit_aufstieg(Starker Wille)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 478, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Rundumschlag): {'aktion': 'talent_mit_aufstieg(Rundumschlag)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 478, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['handicaps: "Schwur" FEHLT', 'talente: "Rundumschlag" FEHLT', 'talente: "Starker Wille" FEHLT']
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': -0.5}
+  Topup-Aufstiege für Talente: 3 (Rang jetzt Fortgeschritten)
+  DIFF: ['fertigkeiten: Einschüchtern soll W6, ist W8', 'handicaps: "Schwur" FEHLT']
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Angel.json
-  GESAMT-ANOMALIEN: 15
+  GESAMT-ANOMALIEN: 17
 
 ============================================================
 BUILD (MONSTROeS): Demon
@@ -391,13 +407,15 @@ BUILD (MONSTROeS): Demon
   ANOM: talent(Beziehungen): {'aktion': 'talent(Beziehungen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 480, 'machtpunkte': 0}
   Rang: Anfänger
+  ANOM: talent_retry(Attraktiv): {'aktion': 'talent_mit_aufstieg(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 480, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Beziehungen): {'aktion': 'talent_mit_aufstieg(Beziehungen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 480, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Beziehungen): {'aktion': 'talent_mit_aufstieg(Beziehungen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 480, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Mystische Kräfte): {'aktion': 'talent_mit_aufstieg(Mystische Kräfte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 480, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Beziehungen" FEHLT', 'talente: "Mystische Kräfte" FEHLT']
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': -0.5}
+  Topup-Aufstiege für Talente: 3 (Rang jetzt Fortgeschritten)
+  DIFF: []
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Demon.json
-  GESAMT-ANOMALIEN: 18
+  GESAMT-ANOMALIEN: 21
 
 ============================================================
 BUILD (MONSTROeS): Patchwork Man
@@ -417,10 +435,11 @@ BUILD (MONSTROeS): Patchwork Man
   ANOM: talent_adv(Eisenkiefer): {'aktion': 'talent_mit_aufstieg(Eisenkiefer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Mut): {'aktion': 'talent_mit_aufstieg(Mut)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Wildheit): {'aktion': 'talent_mit_aufstieg(Wildheit)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['handicaps: "Rachsüchtig_schwer" FEHLT', 'talente: "Raufbold" FEHLT', 'talente: "Wildheit" FEHLT', 'talente: "Eisenkiefer" FEHLT']
+  Topup-Aufstiege für Talente: 3 (Rang jetzt Fortgeschritten)
+  DIFF: ['handicaps: "Rachsüchtig_schwer" FEHLT']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Patchwork_Man.json
-  GESAMT-ANOMALIEN: 20
+  GESAMT-ANOMALIEN: 21
 
 ============================================================
 BUILD (MONSTROeS): Mummy
@@ -441,13 +460,17 @@ BUILD (MONSTROeS): Mummy
   ANOM: macht(Schlummer): {'aktion': 'macht(Schlummer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 470, 'machtpunkte': 0}
   Rang: Anfänger
+  ANOM: talent_retry(AH (Alchemist, Horror)): {'aktion': 'talent_mit_aufstieg(AH (Alchemist, Horror))', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Rohling): {'aktion': 'talent_mit_aufstieg(Rohling)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Machtpunkte): {'aktion': 'talent_mit_aufstieg(Machtpunkte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Neue Mächte): {'aktion': 'talent_mit_aufstieg(Neue Mächte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['handicaps: "Schwerzüngig" FEHLT', 'handicaps: "Langsam" FEHLT', 'talente: "Neue Mächte" FEHLT', 'talente: "Rohling" FEHLT', 'talente: "Machtpunkte" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Heilung" FEHLT', 'maechte: "Schutz" FEHLT']
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': -0.5}
+  ANOM: macht_adv(Flächenschlag): {'aktion': 'macht(Flächenschlag)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
+  ANOM: macht_adv(Schlummer): {'aktion': 'macht(Schlummer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
+  Topup-Aufstiege für Talente: 4 (Rang jetzt Fortgeschritten)
+  DIFF: ['handicaps: "Schwerzüngig" FEHLT', 'handicaps: "Langsam" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Heilung" FEHLT', 'maechte: "Schutz" FEHLT', 'maechte: "Flächenschlag" FEHLT', 'maechte: "Schlummer" FEHLT']
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Mummy.json
-  GESAMT-ANOMALIEN: 25
+  GESAMT-ANOMALIEN: 32
 
 ============================================================
 BUILD (MONSTROeS): Revenant
@@ -463,10 +486,11 @@ BUILD (MONSTROeS): Revenant
   ANOM: talent_adv(Schmerzresistenz): {'aktion': 'talent_mit_aufstieg(Schmerzresistenz)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 435, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Schnell): {'aktion': 'talent_mit_aufstieg(Schnell)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 435, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Seelenentzug): {'aktion': 'talent_mit_aufstieg(Seelenentzug)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 435, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['handicaps: "Schwur" FEHLT', 'talente: "Schnell" FEHLT', 'talente: "Schmerzresistenz" FEHLT', 'talente: "Seelenentzug" FEHLT']
+  Topup-Aufstiege für Talente: 3 (Rang jetzt Fortgeschritten)
+  DIFF: ['handicaps: "Schwur" FEHLT']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Revenant.json
-  GESAMT-ANOMALIEN: 13
+  GESAMT-ANOMALIEN: 14
 
 ============================================================
 BUILD (MONSTROeS): Phantom
@@ -496,12 +520,12 @@ BUILD (MONSTROeS): Vampire
   ANOM: talent(Attraktiv): {'aktion': 'talent(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 470, 'machtpunkte': 0}
   Rang: Anfänger
-  Extra-Aufstiege: 1 (Attribut-Defizit)
   ANOM: talent_retry(Attraktiv): {'aktion': 'talent_mit_aufstieg(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['handicaps: "Angewohnheit_schwer" FEHLT', 'talente: "Attraktiv" FEHLT']
+  Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
+  DIFF: ['handicaps: "Angewohnheit_schwer" FEHLT']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Vampire.json
-  GESAMT-ANOMALIEN: 16
+  GESAMT-ANOMALIEN: 17
 
 ============================================================
 BUILD (MONSTROeS): Werewolf
@@ -521,7 +545,8 @@ BUILD (MONSTROeS): Werewolf
   ANOM: talent_adv(Flink): {'aktion': 'talent_mit_aufstieg(Flink)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 450, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Raufbold): {'aktion': 'talent_mit_aufstieg(Raufbold)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 450, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Kampfreflexe): {'aktion': 'talent_mit_aufstieg(Kampfreflexe)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 450, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Schnell" FEHLT', 'talente: "Raufbold" FEHLT', 'talente: "Kampfreflexe" FEHLT', 'talente: "Flink" FEHLT']
+  Topup-Aufstiege für Talente: 4 (Rang jetzt Veteran)
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Werewolf.json
   GESAMT-ANOMALIEN: 24
@@ -543,16 +568,18 @@ BUILD (MONSTROeS): Slayer
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 0}
   Rang: Anfänger
   Extra-Aufstiege: 2 (Attribut-Defizit)
+  ANOM: talent_retry(Assassine): {'aktion': 'talent_mit_aufstieg(Assassine)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Attraktiv): {'aktion': 'talent_mit_aufstieg(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Block): {'aktion': 'talent_mit_aufstieg(Block)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Mut): {'aktion': 'talent_mit_aufstieg(Mut)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Monsterjäger): {'aktion': 'talent_mit_aufstieg(Monsterjäger)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Schreikönigin/Schreikönig): {'aktion': 'talent_mit_aufstieg(Schreikönigin/Schreikönig)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Mut): {'aktion': 'talent_mit_aufstieg(Mut)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Attraktiv" FEHLT', 'talente: "Monsterjäger" FEHLT', 'talente: "Mut" FEHLT', 'talente: "Block" FEHLT']
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': -0.5}
+  Topup-Aufstiege für Talente: 5 (Rang jetzt Veteran)
+  DIFF: []
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Slayer.json
-  GESAMT-ANOMALIEN: 29
+  GESAMT-ANOMALIEN: 31
 
 ============================================================
 BUILD (MONSTROeS): Demonologist (Monstrous)
@@ -568,15 +595,17 @@ BUILD (MONSTROeS): Demonologist (Monstrous)
   ANOM: talent(Bedrohlich): {'aktion': 'talent(Bedrohlich)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 400, 'machtpunkte': 10}
   Rang: Anfänger
-  Extra-Aufstiege: 3 (Attribut-Defizit)
+  Extra-Aufstiege: 2 (Attribut-Defizit)
+  ANOM: talent_retry(Kanalisieren): {'aktion': 'talent_mit_aufstieg(Kanalisieren)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 400, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Höllenfeuer): {'aktion': 'talent_mit_aufstieg(Höllenfeuer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 400, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_retry(Bedrohlich): {'aktion': 'talent_mit_aufstieg(Bedrohlich)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 400, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Machtpunkte): {'aktion': 'talent_mit_aufstieg(Machtpunkte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 400, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Energieschub): {'aktion': 'talent_mit_aufstieg(Energieschub)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 400, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['talente: "Bedrohlich" FEHLT', 'talente: "Machtpunkte" FEHLT', 'talente: "Energieschub" FEHLT', 'talente: "Höllenfeuer" FEHLT', 'maechte: "Bannung" FEHLT', 'maechte: "Flächenschlag" FEHLT', 'maechte: "Aufheben" FEHLT', 'maechte: "Kriegersegen" FEHLT']
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': -0.5}
+  Topup-Aufstiege für Talente: 5 (Rang jetzt Veteran)
+  DIFF: ['maechte: "Bannung" FEHLT', 'maechte: "Flächenschlag" FEHLT', 'maechte: "Aufheben" FEHLT', 'maechte: "Kriegersegen" FEHLT']
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Demonologist_(Monstrous).json
-  GESAMT-ANOMALIEN: 22
+  GESAMT-ANOMALIEN: 24
 
 ============================================================
 BUILD (MONSTROeS): Swamp Freak
@@ -591,12 +620,14 @@ BUILD (MONSTROeS): Swamp Freak
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 230, 'machtpunkte': 0}
   Rang: Anfänger
   Extra-Aufstiege: 1 (Attribut-Defizit)
+  ANOM: talent_retry(Bedrohlich): {'aktion': 'talent_mit_aufstieg(Bedrohlich)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 230, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Heiler): {'aktion': 'talent_mit_aufstieg(Heiler)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 230, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Konter): {'aktion': 'talent_mit_aufstieg(Konter)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 230, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['fertigkeiten: Überleben soll W6, ist W4', 'talente: "Konter" FEHLT', 'talente: "Heiler" FEHLT']
-  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': -0.5}
+  Topup-Aufstiege für Talente: 4 (Rang jetzt Veteran)
+  DIFF: []
+  Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Swamp_Freak.json
-  GESAMT-ANOMALIEN: 19
+  GESAMT-ANOMALIEN: 21
 
 ============================================================
 BUILD (MONSTROeS): Nemesis
@@ -618,93 +649,71 @@ BUILD (MONSTROeS): Nemesis
   ANOM: talent_adv(Erstschlag): {'aktion': 'talent_mit_aufstieg(Erstschlag)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Flink): {'aktion': 'talent_mit_aufstieg(Flink)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Block): {'aktion': 'talent_mit_aufstieg(Block)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 0, 'warnung': 'Aktion lieferte False/None'}
-  DIFF: ['handicaps: "Geheimnis_leicht" FEHLT', 'talente: "Raufbold" FEHLT', 'talente: "Erstschlag" FEHLT', 'talente: "Block" FEHLT', 'talente: "Flink" FEHLT']
+  Topup-Aufstiege für Talente: 4 (Rang jetzt Veteran)
+  DIFF: ['handicaps: "Geheimnis_leicht" FEHLT']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Nemesis.json
-  GESAMT-ANOMALIEN: 28
+  GESAMT-ANOMALIEN: 29
 
 ============================================================
 ZUSAMMENFASSUNG
 ============================================================
 Erfolgreich: 4/36
-  [MONSTROeS] Angel: anomalien=15 diff=3 
+  [MONSTROeS] Angel: anomalien=17 diff=2 
+    - fertigkeiten: Einschüchtern soll W6, ist W8
     - handicaps: "Schwur" FEHLT
-    - talente: "Rundumschlag" FEHLT
-    - talente: "Starker Wille" FEHLT
   [FEHLER] Aristocrat: anomalien=6 diff=0 
   [FEHLER] Burglar: anomalien=10 diff=0 
   [FEHLER] Constable: anomalien=4 diff=0 
-  [MONSTROeS] Demon: anomalien=18 diff=2 
-    - talente: "Beziehungen" FEHLT
-    - talente: "Mystische Kräfte" FEHLT
-  [SUPER] Demonologist (Monstrous): anomalien=22 diff=8 
-    - talente: "Bedrohlich" FEHLT
-    - talente: "Machtpunkte" FEHLT
-    - talente: "Energieschub" FEHLT
-  [FEHLER] Doctor: anomalien=7 diff=2 
+  [MONSTROeS] Demon: anomalien=21 diff=0 
+  [SUPER] Demonologist (Monstrous): anomalien=24 diff=4 
+    - maechte: "Bannung" FEHLT
+    - maechte: "Flächenschlag" FEHLT
+    - maechte: "Aufheben" FEHLT
+  [FEHLER] Doctor: anomalien=8 diff=1 
     - attribute: Stärke soll W4, ist W6
-    - talente: "Unerschütterlich" FEHLT
   [FEHLER] Exorcist: anomalien=7 diff=3 
     - handicaps: "Schwur_schwer" FEHLT
     - handicaps: "Schwur_leicht" ZUVIEL
     - maechte: "Kriegersegen" FEHLT
   [FEHLER] Explorer: anomalien=15 diff=0 
-  [FEHLER] Gamer: anomalien=17 diff=1 
-    - talente: "Glück" FEHLT
-  [FEHLER] Ghost Hunter: anomalien=6 diff=0 
+  [FEHLER] Gamer: anomalien=17 diff=0 
+  [FEHLER] Ghost Hunter: anomalien=9 diff=0 
   [FEHLER] Gumshoe: anomalien=9 diff=0 
   [OK] Jock: anomalien=0 diff=0 
-  [FEHLER] Journalist: anomalien=7 diff=1 
-    - talente: "Gassenwissen" FEHLT
-  [FEHLER] Librarian: anomalien=9 diff=1 
-    - talente: "Alleskönner" FEHLT
+  [FEHLER] Journalist: anomalien=7 diff=0 
+  [FEHLER] Librarian: anomalien=9 diff=0 
   [FEHLER] Magician: anomalien=12 diff=1 
     - maechte: "Bannung" FEHLT
   [OK] Mambo: anomalien=0 diff=0 
-  [MONSTROeS] Mummy: anomalien=25 diff=8 
+  [MONSTROeS] Mummy: anomalien=32 diff=7 
     - handicaps: "Schwerzüngig" FEHLT
     - handicaps: "Langsam" FEHLT
-    - talente: "Neue Mächte" FEHLT
-  [SUPER] Nemesis: anomalien=28 diff=5 
+    - maechte: "Eigenschaft erhöhen/senken" FEHLT
+  [SUPER] Nemesis: anomalien=29 diff=1 
     - handicaps: "Geheimnis_leicht" FEHLT
-    - talente: "Raufbold" FEHLT
-    - talente: "Erstschlag" FEHLT
-  [FEHLER] Nerd: anomalien=5 diff=1 
-    - talente: "Berechnend" FEHLT
+  [FEHLER] Nerd: anomalien=5 diff=0 
   [OK] Occultist: anomalien=0 diff=0 
-  [FEHLER] Party Animal: anomalien=4 diff=0 
-  [MONSTROeS] Patchwork Man: anomalien=20 diff=4 
+  [FEHLER] Party Animal: anomalien=7 diff=0 
+  [MONSTROeS] Patchwork Man: anomalien=21 diff=1 
     - handicaps: "Rachsüchtig_schwer" FEHLT
-    - talente: "Raufbold" FEHLT
-    - talente: "Wildheit" FEHLT
   [MONSTROeS] Phantom: anomalien=6 diff=0 
   [OK] Psychic: anomalien=0 diff=0 
-  [MONSTROeS] Revenant: anomalien=13 diff=4 
+  [MONSTROeS] Revenant: anomalien=14 diff=1 
     - handicaps: "Schwur" FEHLT
-    - talente: "Schnell" FEHLT
-    - talente: "Schmerzresistenz" FEHLT
   [FEHLER] Runner: anomalien=7 diff=0 
-  [FEHLER] Sailor: anomalien=11 diff=1 
-    - talente: "Meisterschütze" FEHLT
-  [SUPER] Slayer: anomalien=29 diff=4 
-    - talente: "Attraktiv" FEHLT
-    - talente: "Monsterjäger" FEHLT
-    - talente: "Mut" FEHLT
+  [FEHLER] Sailor: anomalien=11 diff=0 
+  [SUPER] Slayer: anomalien=31 diff=0 
   [FEHLER] Socialite: anomalien=2 diff=0 
   [FEHLER] Soldier: anomalien=15 diff=0 
   [FEHLER] Survivor: anomalien=6 diff=0 
-  [SUPER] Swamp Freak: anomalien=19 diff=3 
-    - fertigkeiten: Überleben soll W6, ist W4
-    - talente: "Konter" FEHLT
-    - talente: "Heiler" FEHLT
-  [MONSTROeS] Vampire: anomalien=16 diff=2 
+  [SUPER] Swamp Freak: anomalien=21 diff=0 
+  [MONSTROeS] Vampire: anomalien=17 diff=1 
     - handicaps: "Angewohnheit_schwer" FEHLT
-    - talente: "Attraktiv" FEHLT
-  [MONSTROeS] Werewolf: anomalien=24 diff=4 
-    - talente: "Schnell" FEHLT
-    - talente: "Raufbold" FEHLT
-    - talente: "Kampfreflexe" FEHLT
-  [FEHLER] Witch: anomalien=4 diff=0 
+  [MONSTROeS] Werewolf: anomalien=24 diff=0 
+  [FEHLER] Witch: anomalien=12 diff=2 
+    - maechte: "Fluchwort" FEHLT
+    - maechte: "Geisterruf" FEHLT
 
 Gesamtberichte in logs/horror_*_bericht.json
 Trace-Log: logs/horror_all_trace.txt

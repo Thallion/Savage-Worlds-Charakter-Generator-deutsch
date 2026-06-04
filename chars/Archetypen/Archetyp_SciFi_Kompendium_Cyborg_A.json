@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -483,18 +483,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
-            },
-            "Trickschuss": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
-                "machtpunkte": 0
             }
         },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "3108171a-73e6-4d93-a762-ef599542e0dd": {
+            "9f3ee567-70c3-4d03-8f3f-c7c9073e977c": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -507,11 +501,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "3108171a-73e6-4d93-a762-ef599542e0dd",
-                "installations_datum": "2026-06-02",
+                "installations_id": "9f3ee567-70c3-4d03-8f3f-c7c9073e977c",
+                "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "388e1d40-0e45-42f0-a6e8-e411f1ad7dfe": {
+            "10b16e3a-dab8-4bad-8567-563d1f340c9e": {
                 "name": "Cyberware: Panzerung",
                 "beschreibung": "Subdermale Platten oder Fasern unter der Haut. +2 Panzerung am gesamten Körper. Zählt als natürliche Panzerung, kumulativ mit getragener Panzerung bis +10.",
                 "unterkategorie": "Defensiv",
@@ -525,11 +519,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "388e1d40-0e45-42f0-a6e8-e411f1ad7dfe",
-                "installations_datum": "2026-06-02",
+                "installations_id": "10b16e3a-dab8-4bad-8567-563d1f340c9e",
+                "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "d6285171-2af8-4198-b46c-25d39d08eb81": {
+            "32fb158f-55af-4854-84dc-d6bca9c87f5a": {
                 "name": "Cyberware: Robustheit",
                 "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
                 "unterkategorie": "Defensiv",
@@ -541,11 +535,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "d6285171-2af8-4198-b46c-25d39d08eb81",
-                "installations_datum": "2026-06-02",
+                "installations_id": "32fb158f-55af-4854-84dc-d6bca9c87f5a",
+                "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "3602c6eb-b433-4513-840b-e80889cf9a36": {
+            "523528c1-6fec-4f23-b6b9-d04cbda930a5": {
                 "name": "Cyberware: Zielsystem",
                 "beschreibung": "Integriertes Ziel-/Verfolgungssystem reduziert Abzüge für Angesagte Ziele, Deckung, Reichweite, Größe und Geschwindigkeit um 2 Punkte beim direkten Schießen.",
                 "unterkategorie": "Offensiv",
@@ -564,8 +558,8 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "3602c6eb-b433-4513-840b-e80889cf9a36",
-                "installations_datum": "2026-06-02",
+                "installations_id": "523528c1-6fec-4f23-b6b9-d04cbda930a5",
+                "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
         },
@@ -633,8 +627,7 @@
     ],
     "selected_talente": [
         "Kampfreflexe",
-        "Schnell",
-        "Trickschuss"
+        "Schnell"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -699,8 +692,8 @@
         "Cyberware: Robustheit": 1,
         "Cyberware: Zielsystem": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -869,12 +862,6 @@
             {
                 "typ": "talent",
                 "name": "Schnell",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Trickschuss",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

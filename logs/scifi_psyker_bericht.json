@@ -251,7 +251,20 @@
     {
       "aktion": "fertigkeit(Provozieren)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
@@ -275,7 +288,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Wahrnehmung)",
+      "aktion": "fertigkeit(Überreden)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -288,7 +301,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Überreden)",
+      "aktion": "fertigkeit(Elektronik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -301,26 +314,13 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Elektronik)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Fertigkeitspunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -333,7 +333,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -346,7 +346,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -359,7 +359,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -372,7 +372,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -385,7 +385,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -398,7 +398,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -411,7 +411,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -424,7 +424,7 @@
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 500,
@@ -432,12 +432,12 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -445,12 +445,12 @@
     },
     {
       "aktion": "kaufen(Laserpistolex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -458,12 +458,12 @@
     },
     {
       "aktion": "kaufen(Waffensperrex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -471,12 +471,12 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -484,12 +484,12 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -497,12 +497,12 @@
     },
     {
       "aktion": "kaufen(Scannerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -516,12 +516,12 @@
   "anomalien": [
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -529,12 +529,12 @@
     },
     {
       "aktion": "kaufen(Laserpistolex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -542,12 +542,12 @@
     },
     {
       "aktion": "kaufen(Waffensperrex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -555,12 +555,12 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -568,12 +568,12 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -581,12 +581,12 @@
     },
     {
       "aktion": "kaufen(Scannerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
-        "fertigkeit": 0,
+        "fertigkeit": 1,
         "handicap": 0
       },
       "vermoegen": 0,
@@ -698,7 +698,7 @@
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
-      "fertigkeit": 0,
+      "fertigkeit": 1,
       "handicap": 0,
       "handicap_gesamt": 4,
       "aufstiege": 0

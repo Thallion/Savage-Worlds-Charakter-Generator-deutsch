@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Explorer (Horror Kompendium)
-# Stand: 2026-06-03T22:06:06
+# Stand: 2026-06-04T07:47:29
 # 10 Anomalie(n) von 46 Schritten
 
 ## ANOMALIEN
@@ -20,9 +20,9 @@
   - handicap(Übermütig): ok=True kosten=-2 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk_freies_talent(Mensch,Sechster Sinn): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500

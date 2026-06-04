@@ -660,7 +660,7 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
+                "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -668,14 +668,14 @@
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 6,
+                "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
+                "name": "Stärke",
+                "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },

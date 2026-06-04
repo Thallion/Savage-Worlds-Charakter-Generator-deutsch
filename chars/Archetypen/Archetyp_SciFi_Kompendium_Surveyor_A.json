@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -505,7 +505,53 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rucksack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschenlampe (10\" Strahl)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Laserpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Waffensperre": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Medi-Gel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Scanner": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Tarnanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Angewohnheit_leicht",
@@ -544,14 +590,39 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Batterie, Universal-",
+        "Rucksack",
+        "Taschenlampe (10\" Strahl)",
+        "Laserpistole",
+        "Waffensperre",
+        "Medi-Gel",
+        "Scanner",
+        "Tarnanzug"
+    ],
+    "selected_waffen": [
+        "Laserpistole"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug",
+        "Tarnanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Batterie, Universal-": 1,
+        "Rucksack": 1,
+        "Taschenlampe (10\" Strahl)": 1,
+        "Laserpistole": 1,
+        "Waffensperre": 1,
+        "Medi-Gel": 2,
+        "Scanner": 1,
+        "Tarnanzug": 1
+    },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -611,6 +682,13 @@
                 "kosten": 1
             },
             {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
                 "typ": "fertigkeit",
                 "name": "Athletik",
                 "wert": 6,
@@ -657,7 +735,7 @@
                 "name": "Wahrnehmung",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
@@ -684,6 +762,13 @@
                 "typ": "fertigkeit",
                 "name": "Überleben",
                 "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -691,29 +776,22 @@
                 "typ": "fertigkeit",
                 "name": "Elektronik",
                 "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
                 "name": "Pilot",
                 "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
+                "name": "Stärke",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",

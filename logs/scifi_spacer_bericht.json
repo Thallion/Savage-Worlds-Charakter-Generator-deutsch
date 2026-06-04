@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Molekularmesserx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Schwere Blasterpistolex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Laser-/Rotpunktvisierx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Komlinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -471,7 +471,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -484,7 +484,7 @@
     },
     {
       "aktion": "kaufen(Raumanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -497,7 +497,7 @@
     },
     {
       "aktion": "kaufen(Klebeflickenx3) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -534,7 +534,7 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -547,7 +547,7 @@
     },
     {
       "aktion": "kaufen(Molekularmesserx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -560,7 +560,7 @@
     },
     {
       "aktion": "kaufen(Schwere Blasterpistolex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -573,7 +573,7 @@
     },
     {
       "aktion": "kaufen(Laser-/Rotpunktvisierx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -586,7 +586,7 @@
     },
     {
       "aktion": "kaufen(Komlinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -599,7 +599,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -612,7 +612,7 @@
     },
     {
       "aktion": "kaufen(Raumanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -625,7 +625,7 @@
     },
     {
       "aktion": "kaufen(Klebeflickenx3) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

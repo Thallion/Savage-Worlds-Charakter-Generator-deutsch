@@ -587,6 +587,58 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Raufbold)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 450,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Schnell)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 450,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Flink)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 450,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Kampfreflexe)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 450,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Werewolf.json)",
       "ok": true
     }
@@ -777,18 +829,12 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Schnell\" FEHLT; talente: \"Raufbold\" FEHLT; talente: \"Kampfreflexe\" FEHLT; talente: \"Flink\" FEHLT",
+      "aktion": "NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
+      "punkte": {},
       "vermoegen": 450
     }
   ],
@@ -881,7 +927,11 @@
     ],
     "talente": [
       "Gestaltwandel",
-      "Infrarotsicht"
+      "Infrarotsicht",
+      "Raufbold",
+      "Schnell",
+      "Flink",
+      "Kampfreflexe"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -894,7 +944,7 @@
     },
     "machtpunkte": 0,
     "vermoegen": 450,
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "volk": "Werwolf"
   }
 }

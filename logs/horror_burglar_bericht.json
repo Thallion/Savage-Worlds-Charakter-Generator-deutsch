@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -132,7 +132,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",

@@ -8,7 +8,7 @@
 Commander FERTIG anomalien=7
   Talente: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
-  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
+  Skills: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   Advance Willenskraft: ok=True
   Advance Aufmerksamkeit: ok=True
   Advance Machtpunkte: ok=True
@@ -20,9 +20,9 @@ Commander FERTIG anomalien=7
   Macht Betäuben: ok=True
 Psyker FERTIG anomalien=7
   Talente: HC=2
-  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
-  Advance Verstand: ok=True
+  Advance Stärke: ok=True
   Advance Überleben d8: ok=True
   Advance Naturwissenschaften d4: ok=True
   Advance Naturbursche: ok=True

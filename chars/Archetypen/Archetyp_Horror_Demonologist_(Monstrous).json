@@ -527,6 +527,30 @@
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Höllenfeuer": {
+                "ausgewaehlt": true,
+                "rang": "V",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Bedrohlich": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Machtpunkte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 5
+            },
+            "Energieschub": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -569,7 +593,11 @@
     ],
     "selected_talente": [
         "AH (Dämonologe)",
-        "Kanalisieren"
+        "Kanalisieren",
+        "Höllenfeuer",
+        "Bedrohlich",
+        "Machtpunkte",
+        "Energieschub"
     ],
     "selected_maechte": [
         "Strahl",
@@ -599,14 +627,14 @@
     "ausruestung_mengen": {
         "Silberdolch": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 7,
+    "rang": "Veteran",
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 11,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
-    "machtpunkte": 10,
+    "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -619,13 +647,6 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
             {
                 "typ": "attribut",
                 "name": "Verstand",
@@ -658,6 +679,13 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 10,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -701,7 +729,7 @@
                 "name": "Einschüchtern",
                 "wert": 10,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
@@ -742,13 +770,20 @@
                 "typ": "fertigkeit",
                 "name": "Recherche",
                 "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Recherche",
+                "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 10,
+                "name": "Geschicklichkeit",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
@@ -765,13 +800,6 @@
                 "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Recherche",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
@@ -818,6 +846,30 @@
             {
                 "typ": "talent",
                 "name": "Kanalisieren",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Höllenfeuer",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Bedrohlich",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Machtpunkte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Energieschub",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

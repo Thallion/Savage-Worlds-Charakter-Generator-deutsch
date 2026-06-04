@@ -550,6 +550,12 @@
                 "rang": "V",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Glück": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -579,7 +585,8 @@
         "Selbstlos",
         "Mutig",
         "Elan",
-        "Anheizen"
+        "Anheizen",
+        "Glück"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -609,7 +616,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -629,36 +636,36 @@
         "cost_entries": [
             {
                 "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -780,6 +787,12 @@
             {
                 "typ": "talent",
                 "name": "Anheizen",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Glück",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

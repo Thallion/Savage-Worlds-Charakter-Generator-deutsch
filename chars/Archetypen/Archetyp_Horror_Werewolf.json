@@ -537,6 +537,30 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Raufbold": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Schnell": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Flink": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Kampfreflexe": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -559,7 +583,11 @@
     ],
     "selected_talente": [
         "Gestaltwandel",
-        "Infrarotsicht"
+        "Infrarotsicht",
+        "Raufbold",
+        "Schnell",
+        "Flink",
+        "Kampfreflexe"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -587,9 +615,9 @@
     "ausruestung_mengen": {
         "Keule, Schwer": 1
     },
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 11,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -786,6 +814,30 @@
                 "typ": "attribut",
                 "name": "Konstitution",
                 "wert": 12,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Raufbold",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Schnell",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Flink",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Kampfreflexe",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

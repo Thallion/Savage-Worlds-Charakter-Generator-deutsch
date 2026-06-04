@@ -85,7 +85,7 @@
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
-            "attribut": "Geschicklichkeit",
+            "attribut": "Stärke",
             "custom": false
         },
         "Heimlichkeit": {
@@ -537,24 +537,27 @@
                 "rang": "A",
                 "neue_maechte": 3,
                 "machtpunkte": 15
-            }
-        },
-        "maechte": {
-            "Flächenschlag": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "machtpunkte": 3,
-                "reichweite": "VER×2",
-                "dauer": "Sofort"
             },
-            "Schlummer": {
+            "Rohling": {
                 "ausgewaehlt": true,
-                "rang": "F",
-                "machtpunkte": 2,
-                "reichweite": "VER",
-                "dauer": "1 Stunde"
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Machtpunkte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 5
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
+        "maechte": {},
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
@@ -574,12 +577,12 @@
     ],
     "selected_talente": [
         "Zäh",
-        "AH (Alchemist, Horror)"
+        "AH (Alchemist, Horror)",
+        "Rohling",
+        "Machtpunkte",
+        "Neue Mächte"
     ],
-    "selected_maechte": [
-        "Flächenschlag",
-        "Schlummer"
-    ],
+    "selected_maechte": [],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -606,13 +609,13 @@
         "Robe (dünn)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 1,
-    "anzahl_maechte": 3,
-    "machtpunkte": 15,
+    "verfuegbare_maechte": 5,
+    "anzahl_maechte": 5,
+    "machtpunkte": 20,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -775,6 +778,24 @@
             {
                 "typ": "talent",
                 "name": "AH (Alchemist, Horror)",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Rohling",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Machtpunkte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

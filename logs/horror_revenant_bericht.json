@@ -93,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,23 +119,10 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
@@ -158,7 +145,20 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
+      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Konstitution)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -418,7 +418,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
+      "aktion": "attribut_mit_aufstieg(Stärke)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -522,6 +522,45 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Schmerzresistenz)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 435,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Schnell)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 435,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Seelenentzug)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 435,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Revenant.json)",
       "ok": true
     }
@@ -616,9 +655,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 435
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwur\" FEHLT; talente: \"Schnell\" FEHLT; talente: \"Schmerzresistenz\" FEHLT; talente: \"Seelenentzug\" FEHLT",
+      "warnung": "handicaps: \"Schwur\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -631,7 +679,7 @@
       "vermoegen": 435
     }
   ],
-  "anomalien_anzahl": 9,
+  "anomalien_anzahl": 10,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -725,7 +773,10 @@
     ],
     "talente": [
       "Zäh",
-      "Bedrohlich"
+      "Bedrohlich",
+      "Schmerzresistenz",
+      "Schnell",
+      "Seelenentzug"
     ],
     "maechte": [],
     "ausruestung": {},

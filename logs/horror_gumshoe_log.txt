@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Gumshoe (Horror Kompendium)
-# Stand: 2026-06-03T22:06:10
-# 5 Anomalie(n) von 44 Schritten
+# Stand: 2026-06-04T07:47:33
+# 5 Anomalie(n) von 45 Schritten
 
 ## ANOMALIEN
   [!] talent(Eisenkiefer): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -16,14 +16,15 @@
   - handicap(Stur): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk_freies_talent(Mensch,Ermittler): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Konstitution): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
-  - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
+  - attribut_mit_hc(Stärke): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
   - fertigkeit(Allgemeinwissen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 0} Geld=500
   - fertigkeit(Fahren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 10, 'handicap': 0} Geld=500
   - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 0} Geld=500

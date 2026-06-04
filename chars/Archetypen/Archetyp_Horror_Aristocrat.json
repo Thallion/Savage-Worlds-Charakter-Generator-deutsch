@@ -639,13 +639,6 @@
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Verstand",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -655,6 +648,13 @@
                 "typ": "attribut",
                 "name": "Verstand",
                 "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },

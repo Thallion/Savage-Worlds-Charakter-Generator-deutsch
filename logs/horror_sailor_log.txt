@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Sailor (Horror Kompendium)
-# Stand: 2026-06-03T22:06:03
-# 6 Anomalie(n) von 36 Schritten
+# Stand: 2026-06-04T07:47:26
+# 6 Anomalie(n) von 37 Schritten
 
 ## ANOMALIEN
   [!] talent(Mut in Flaschen): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -8,7 +8,7 @@
   [!] talent(Ruhige Hände): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Schmerzresistenz): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Meisterschütze): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=talente: "Meisterschütze" FEHLT kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Sailor, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -47,3 +47,4 @@
   - talent_mit_aufstieg(Mut in Flaschen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=488
   - talent_mit_aufstieg(Schmerzresistenz): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=488
   - talent_mit_aufstieg(Meisterschütze): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=488
+  - talent_mit_aufstieg(Meisterschütze): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=488

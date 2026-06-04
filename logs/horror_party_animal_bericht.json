@@ -80,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -93,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Mut in Flaschen)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -454,7 +454,7 @@
         "handicap": 1
       },
       "vermoegen": 478,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Improvisationsgabe)",
@@ -468,6 +468,19 @@
       },
       "vermoegen": 478,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Mut in Flaschen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 478,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Party_Animal.json)",
@@ -489,6 +502,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Mut in Flaschen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 478,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Improvisationsgabe)",
       "ok": false,
       "kosten": 0,
@@ -500,9 +526,18 @@
       },
       "vermoegen": 478,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 478
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -607,7 +642,7 @@
       "fertigkeit": 0,
       "handicap": 1,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 478,

@@ -57,7 +57,7 @@
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         }
     },
@@ -542,6 +542,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Attraktiv": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -565,7 +571,8 @@
     ],
     "selected_talente": [
         "Nachtsicht",
-        "Zäh"
+        "Zäh",
+        "Attraktiv"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -643,7 +650,7 @@
             },
             {
                 "typ": "attribut",
-                "name": "Willenskraft",
+                "name": "Stärke",
                 "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -651,14 +658,14 @@
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 8,
+                "wert": 10,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 10,
+                "wert": 12,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -748,13 +755,6 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 12,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
@@ -787,6 +787,12 @@
                 "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Attraktiv",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

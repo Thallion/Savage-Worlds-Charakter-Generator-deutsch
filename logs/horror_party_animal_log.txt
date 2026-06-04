@@ -1,10 +1,12 @@
 # Archetyp-Erstellung: Party Animal (Horror Kompendium)
-# Stand: 2026-06-03T22:06:02
-# 2 Anomalie(n) von 36 Schritten
+# Stand: 2026-06-04T07:47:24
+# 4 Anomalie(n) von 37 Schritten
 
 ## ANOMALIEN
   [!] talent(Improvisationsgabe): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] talent_mit_aufstieg(Mut in Flaschen): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Improvisationsgabe): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Party Animal, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -13,10 +15,10 @@
   - handicap(Schreihals_schwer): ok=True kosten=-2 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk_freies_talent(Mensch,Charismatisch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
@@ -41,5 +43,6 @@
   - talent_mit_aufstieg(Improvisationsgabe): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478
   - talent_mit_aufstieg(Erniedrigen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478
   - talent_mit_aufstieg(Geschickte Riposte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478
-  - talent_mit_aufstieg(Mut in Flaschen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478
+  - talent_mit_aufstieg(Mut in Flaschen): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478
   - talent_mit_aufstieg(Improvisationsgabe): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478
+  - talent_mit_aufstieg(Mut in Flaschen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=478

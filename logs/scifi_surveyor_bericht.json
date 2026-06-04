@@ -158,6 +158,19 @@
       "warnung": null
     },
     {
+      "aktion": "attribut_mit_hc(Verstand)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
@@ -165,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -178,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -238,12 +251,25 @@
     {
       "aktion": "fertigkeit(Wahrnehmung)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Schießen)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,20 +282,20 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen)",
+      "aktion": "fertigkeit(Überleben)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +308,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,52 +321,13 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Überleben) ÜBERSPRUNGEN (keine Fert-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_hc(Elektronik)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_hc(Pilot)",
-      "ok": true,
-      "kosten": 1,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
         "handicap": 0
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "fertigkeit_mit_aufstieg(Elektronik)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -353,7 +340,20 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
+      "aktion": "fertigkeit_mit_aufstieg(Pilot)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Taschenlampe (10\" Strahl)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Laserpistolex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -471,7 +471,7 @@
     },
     {
       "aktion": "kaufen(Waffensperrex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -484,7 +484,7 @@
     },
     {
       "aktion": "kaufen(Medi-Gelx2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -497,7 +497,7 @@
     },
     {
       "aktion": "kaufen(Scannerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -510,7 +510,7 @@
     },
     {
       "aktion": "kaufen(Tarnanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -529,7 +529,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -542,7 +542,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -555,7 +555,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -568,7 +568,7 @@
     },
     {
       "aktion": "kaufen(Taschenlampe (10\" Strahl)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -581,7 +581,7 @@
     },
     {
       "aktion": "kaufen(Laserpistolex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -594,7 +594,7 @@
     },
     {
       "aktion": "kaufen(Waffensperrex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -607,7 +607,7 @@
     },
     {
       "aktion": "kaufen(Medi-Gelx2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -620,7 +620,7 @@
     },
     {
       "aktion": "kaufen(Scannerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -633,7 +633,7 @@
     },
     {
       "aktion": "kaufen(Tarnanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -654,9 +654,9 @@
       "vermoegen": 0
     },
     {
-      "aktion": "NOTIZ: STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik, Pilot, Naturwissenschaften via HP+D-Adv)",
+      "aktion": "NOTIZ: Doppelkosten-Fix: Verstand d8 in CharGen -> Wahrnehmung d8 einfach; Stärke d4->d6 via Advance behebt frühere Abweichung",
       "ok": true,
-      "warnung": "STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik, Pilot, Naturwissenschaften via HP+D-Adv)",
+      "warnung": "Doppelkosten-Fix: Verstand d8 in CharGen -> Wahrnehmung d8 einfach; Stärke d4->d6 via Advance behebt frühere Abweichung",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -675,7 +675,7 @@
         "modifier": 0
       },
       "Stärke": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0
       },
       "Konstitution": {
@@ -779,7 +779,7 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.0
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,

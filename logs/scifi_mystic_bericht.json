@@ -393,7 +393,7 @@
     },
     {
       "aktion": "talent(Neue Mächte)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -402,7 +402,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "macht(Eigenschaft erhöhen/senken)",
@@ -445,7 +445,7 @@
     },
     {
       "aktion": "macht(Linderung)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -454,11 +454,11 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "macht(Kriegersegen)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -467,11 +467,11 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "kaufen(Plasmagewehrx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -484,7 +484,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -497,7 +497,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -515,8 +515,47 @@
   ],
   "anomalien": [
     {
-      "aktion": "kaufen(Plasmagewehrx1) FORCE",
+      "aktion": "talent(Neue Mächte)",
       "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Linderung)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Kriegersegen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "kaufen(Plasmagewehrx1) FORCE",
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -529,7 +568,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x2) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -542,7 +581,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -572,7 +611,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 8,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -684,15 +723,12 @@
     "talente": [
       "Zäh wie Leder",
       "AH (Mystiker)",
-      "Elan",
-      "Neue Mächte"
+      "Elan"
     ],
     "maechte": [
       "Eigenschaft erhöhen/senken",
       "Empathie",
-      "Objekt auslesen",
-      "Linderung",
-      "Kriegersegen"
+      "Objekt auslesen"
     ],
     "ausruestung": {},
     "punkte": {
@@ -700,11 +736,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 10,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Floraner"
   }
 }

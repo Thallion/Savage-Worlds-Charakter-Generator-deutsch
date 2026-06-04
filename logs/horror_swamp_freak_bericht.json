@@ -497,7 +497,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Bedrohlich)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,7 +506,7 @@
         "handicap": 0
       },
       "vermoegen": 230,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Heiler)",
@@ -533,6 +533,58 @@
       },
       "vermoegen": 230,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 230,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Bedrohlich)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 230,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Heiler)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 230,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Konter)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 230,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Swamp_Freak.json)",
@@ -678,6 +730,19 @@
       "vermoegen": 230
     },
     {
+      "aktion": "talent_mit_aufstieg(Bedrohlich)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 230,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Heiler)",
       "ok": false,
       "kosten": 0,
@@ -704,22 +769,16 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W6, ist W4; talente: \"Konter\" FEHLT; talente: \"Heiler\" FEHLT",
+      "aktion": "NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 3,
-        "aufstiege": -0.5
-      },
+      "punkte": {},
       "vermoegen": 230
     }
   ],
-  "anomalien_anzahl": 16,
+  "anomalien_anzahl": 17,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -781,7 +840,7 @@
         "ausgewaehlt": false
       },
       "Überleben": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -811,7 +870,9 @@
       "Schwerfällig"
     ],
     "talente": [
-      "Bedrohlich"
+      "Bedrohlich",
+      "Heiler",
+      "Konter"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -820,11 +881,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 3,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 230,
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "volk": "Mensch"
   }
 }

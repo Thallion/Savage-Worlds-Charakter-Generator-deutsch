@@ -510,6 +510,19 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Monsterjäger)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 2500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Monsterjäger)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -591,9 +604,31 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10\" Strahl) zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Monsterjäger)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 2500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 2500
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -720,7 +755,7 @@
       "fertigkeit": 0,
       "handicap": 1,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 2500,

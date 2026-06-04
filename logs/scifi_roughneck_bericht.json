@@ -341,7 +341,7 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -354,7 +354,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -367,7 +367,7 @@
     },
     {
       "aktion": "kaufen(Taschenlampe (10\" Strahl)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -380,7 +380,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -393,7 +393,7 @@
     },
     {
       "aktion": "kaufen(Werkzeugkofferx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -406,7 +406,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -419,7 +419,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Ersatzgliedmaßex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -432,7 +432,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Klauenx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -469,7 +469,7 @@
     },
     {
       "aktion": "kaufen(Infanteriekampfanzugx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 500,
       "kostenart": "Vermögen",
       "punkte": {
@@ -482,7 +482,7 @@
     },
     {
       "aktion": "kaufen(Rucksackx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -495,7 +495,7 @@
     },
     {
       "aktion": "kaufen(Taschenlampe (10\" Strahl)x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -508,7 +508,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -521,7 +521,7 @@
     },
     {
       "aktion": "kaufen(Werkzeugkofferx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -534,7 +534,7 @@
     },
     {
       "aktion": "kaufen(Batterie, Universal-x1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -547,7 +547,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Ersatzgliedmaßex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -560,7 +560,7 @@
     },
     {
       "aktion": "kaufen(Cyberware: Klauenx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

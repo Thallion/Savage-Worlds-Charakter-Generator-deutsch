@@ -319,7 +319,7 @@
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -541,7 +541,38 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Laserpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Waffensperre": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Universalübersetzer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Loyal",
@@ -586,11 +617,29 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Laserpistole",
+        "Waffensperre",
+        "Universalübersetzer",
+        "Taschencomputer",
+        "Batterie, Universal-"
+    ],
+    "selected_waffen": [
+        "Laserpistole"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Laserpistole": 1,
+        "Waffensperre": 1,
+        "Universalübersetzer": 1,
+        "Taschencomputer": 1,
+        "Batterie, Universal-": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,

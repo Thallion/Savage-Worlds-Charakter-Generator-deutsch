@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Mummy (Horror Kompendium)
-# Stand: 2026-06-03T22:06:11
-# 14 Anomalie(n) von 44 Schritten
+# Stand: 2026-06-04T07:47:33
+# 18 Anomalie(n) von 48 Schritten
 
 ## ANOMALIEN
   [!] handicap(Schwerzüngig): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -13,10 +13,14 @@
   [!] macht(Flächenschlag): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] macht(Schlummer): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Ageless kosten=0 None
+  [!] talent_mit_aufstieg(AH (Alchemist, Horror)): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Rohling): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Machtpunkte): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Neue Mächte): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwerzüngig" FEHLT; handicaps: "Langsam" FEHLT; talente: "Neue Mächte" FEHLT; talente: "Rohling" FEHLT; talente: "Machtpunkte" FEHLT; maechte: "Eigenschaft erhöhen/senken" FEHLT; maechte: "Heilung" FEHLT; maechte: "Schutz" FEHLT kosten=0 None
+  [!] macht(Flächenschlag): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Schlummer): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwerzüngig" FEHLT; handicaps: "Langsam" FEHLT; maechte: "Eigenschaft erhöhen/senken" FEHLT; maechte: "Heilung" FEHLT; maechte: "Schutz" FEHLT; maechte: "Flächenschlag" FEHLT; maechte: "Schlummer" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Mummy, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -57,9 +61,13 @@
   - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - fertigkeit_mit_aufstieg(Recherche): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - talent_mit_aufstieg(AH (Alchemist, Horror)): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - talent_mit_aufstieg(AH (Alchemist, Horror)): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Rohling): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Machtpunkte): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Neue Mächte): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - macht(Flächenschlag): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - macht(Schlummer): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - macht(Flächenschlag): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - macht(Schlummer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - talent_mit_aufstieg(AH (Alchemist, Horror)): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - talent_mit_aufstieg(Rohling): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - talent_mit_aufstieg(Machtpunkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - talent_mit_aufstieg(Neue Mächte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470

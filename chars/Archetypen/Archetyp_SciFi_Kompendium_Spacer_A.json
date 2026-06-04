@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -494,7 +494,48 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Molekularmesser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schwere Blasterpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Laser-/Rotpunktvisier": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Komlink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Raumanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Klebeflicken": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Arrogant",
@@ -531,11 +572,35 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Molekularmesser",
+        "Schwere Blasterpistole",
+        "Laser-/Rotpunktvisier",
+        "Komlink",
+        "Batterie, Universal-",
+        "Raumanzug",
+        "Klebeflicken"
+    ],
+    "selected_waffen": [
+        "Molekularmesser",
+        "Schwere Blasterpistole"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug",
+        "Raumanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Molekularmesser": 1,
+        "Schwere Blasterpistole": 1,
+        "Laser-/Rotpunktvisier": 1,
+        "Komlink": 1,
+        "Batterie, Universal-": 1,
+        "Raumanzug": 1,
+        "Klebeflicken": 3
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,

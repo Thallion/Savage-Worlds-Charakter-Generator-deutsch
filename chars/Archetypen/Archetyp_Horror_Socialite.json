@@ -616,6 +616,20 @@
         "cost_entries": [
             {
                 "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -638,20 +652,6 @@
             {
                 "typ": "attribut",
                 "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
                 "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2

@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Stärke)",
+      "aktion": "attribut(Konstitution)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -132,7 +132,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -145,7 +145,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
+      "aktion": "attribut_mit_hc(Stärke)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",

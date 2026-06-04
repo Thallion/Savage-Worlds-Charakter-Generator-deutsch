@@ -80,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -132,7 +132,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -523,7 +523,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Neue Mächte)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -532,11 +532,11 @@
         "handicap": 0
       },
       "vermoegen": 350,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "macht(Fluchwort)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -545,10 +545,23 @@
         "handicap": 0
       },
       "vermoegen": 350,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "macht(Geisterruf)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 350,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -591,9 +604,72 @@
       },
       "vermoegen": 500,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Neue Mächte)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 350,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Fluchwort)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 350,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Geisterruf)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 350,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 350
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "maechte: \"Fluchwort\" FEHLT; maechte: \"Geisterruf\" FEHLT",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0,
+        "handicap_gesamt": 3,
+        "aufstiege": 0.5
+      },
+      "vermoegen": 350
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -700,9 +776,7 @@
     "maechte": [
       "Tierfreund",
       "Eigenschaft erhöhen/senken",
-      "Schutz",
-      "Fluchwort",
-      "Geisterruf"
+      "Schutz"
     ],
     "ausruestung": {},
     "punkte": {
@@ -710,7 +784,7 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 3,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 15,
     "vermoegen": 350,

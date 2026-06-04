@@ -80,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -158,6 +158,19 @@
       "warnung": null
     },
     {
+      "aktion": "attribut(Geschicklichkeit) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
       "kosten": 0,
@@ -184,7 +197,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Willenskraft)",
+      "aktion": "attribut_mit_hc(Geschicklichkeit)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -277,7 +290,20 @@
     {
       "aktion": "fertigkeit(Einschüchtern)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
@@ -288,7 +314,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Wahrnehmung)",
+      "aktion": "fertigkeit(Okkultismus)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -340,7 +366,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Okkultismus)",
+      "aktion": "fertigkeit(Recherche)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -561,7 +587,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Willenskraft)",
+      "aktion": "attribut_mit_aufstieg(Geschicklichkeit)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -600,7 +626,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Recherche)",
+      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -650,32 +676,6 @@
       },
       "vermoegen": 400,
       "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 400,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 400,
-      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
@@ -718,7 +718,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Kanalisieren)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -727,7 +727,7 @@
         "handicap": 0
       },
       "vermoegen": 400,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Höllenfeuer)",
@@ -782,13 +782,78 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Kanalisieren)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 400,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Höllenfeuer)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 400,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Bedrohlich)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 400,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Machtpunkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 400,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Energieschub)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 400,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Demonologist_(Monstrous).json)",
       "ok": true
     }
   ],
   "anomalien": [
     {
-      "aktion": "attribut_mit_hc(Willenskraft)",
+      "aktion": "attribut_mit_hc(Geschicklichkeit)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -884,7 +949,16 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "fertigkeit_mit_aufstieg(Zaubern)",
+      "aktion": "NOTIZ: 2 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit",
+      "ok": true,
+      "warnung": "2 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 400
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Kanalisieren)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -895,15 +969,6 @@
       },
       "vermoegen": 400,
       "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: 3 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit",
-      "ok": true,
-      "warnung": "3 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 400
     },
     {
       "aktion": "talent_mit_aufstieg(Höllenfeuer)",
@@ -958,9 +1023,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 400
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "talente: \"Bedrohlich\" FEHLT; talente: \"Machtpunkte\" FEHLT; talente: \"Energieschub\" FEHLT; talente: \"Höllenfeuer\" FEHLT; maechte: \"Bannung\" FEHLT; maechte: \"Flächenschlag\" FEHLT; maechte: \"Aufheben\" FEHLT; maechte: \"Kriegersegen\" FEHLT",
+      "warnung": "maechte: \"Bannung\" FEHLT; maechte: \"Flächenschlag\" FEHLT; maechte: \"Aufheben\" FEHLT; maechte: \"Kriegersegen\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -968,12 +1042,12 @@
         "fertigkeit": 0,
         "handicap": 0,
         "handicap_gesamt": 3,
-        "aufstiege": -0.5
+        "aufstiege": 0.0
       },
       "vermoegen": 400
     }
   ],
-  "anomalien_anzahl": 15,
+  "anomalien_anzahl": 16,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -1072,7 +1146,11 @@
     ],
     "talente": [
       "AH (Dämonologe)",
-      "Kanalisieren"
+      "Kanalisieren",
+      "Höllenfeuer",
+      "Bedrohlich",
+      "Machtpunkte",
+      "Energieschub"
     ],
     "maechte": [
       "Strahl",
@@ -1085,11 +1163,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 3,
-      "aufstiege": -0.5
+      "aufstiege": 0.0
     },
-    "machtpunkte": 10,
+    "machtpunkte": 15,
     "vermoegen": 400,
-    "rang": "Fortgeschritten",
+    "rang": "Veteran",
     "volk": "Mensch"
   }
 }

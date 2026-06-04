@@ -545,6 +545,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Gassenwissen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -588,7 +594,8 @@
         "Aufmerksamkeit",
         "Beziehungen",
         "Ermittler",
-        "Beziehungen_2"
+        "Beziehungen_2",
+        "Gassenwissen"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -626,7 +633,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -646,36 +653,36 @@
         "cost_entries": [
             {
                 "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -805,6 +812,12 @@
             {
                 "typ": "talent",
                 "name": "Beziehungen_2",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Gassenwissen",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

@@ -367,7 +367,7 @@
     },
     {
       "aktion": "talent(Trickschuss)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -376,7 +376,7 @@
         "handicap": 2
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
@@ -577,6 +577,19 @@
       "vermoegen": 500
     },
     {
+      "aktion": "talent(Trickschuss)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
       "ok": true,
       "kosten": 500,
@@ -760,7 +773,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 19,
+  "anomalien_anzahl": 20,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -846,8 +859,7 @@
     ],
     "talente": [
       "Kampfreflexe",
-      "Schnell",
-      "Trickschuss"
+      "Schnell"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -856,11 +868,11 @@
       "fertigkeit": 0,
       "handicap": 2,
       "handicap_gesamt": 2,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Gen-Soldaten"
   }
 }

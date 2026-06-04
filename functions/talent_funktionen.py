@@ -1074,15 +1074,20 @@ class TalentManager:
             bool: True bei Erfolg, False bei Misserfolg
         """
         # Bestimme welche Ressource verwendet werden soll
+        # FIX 2026-06-04: Guard auf >= aufstieg_kosten statt > 0. Ein Skill-D-Advance
+        # kostet 0.5 (fertigkeit_spiel); steht verbleibende_aufstiege danach auf 0.5,
+        # ließ der alte Guard (>0) einen Talent-Advance (Kosten 1) zu und zog voll ab
+        # → verbleibende_aufstiege = -0.5 (negatives Budget wurde gespeichert).
+        aufstieg_kosten = TalentConfig.get('kosten.aufstieg', 1)
         if getattr(self.charakter, 'char_gen_completed', False):
-            if self.charakter.verbleibende_aufstiege > 0:
+            if self.charakter.verbleibende_aufstiege >= aufstieg_kosten:
                 return self._waehle_mit_aufstieg(talent_name_key)
             Logger.warning("Keine verbleibenden Aufstiege (CharGen abgeschlossen).")
             return False
         min_handicap = TalentConfig.get('kosten.min_handicap_punkte', 1.5)
         if self.charakter.verbleibende_handicap_punkte > min_handicap:
             return self._waehle_mit_handicap_punkten(talent_name_key)
-        elif self.charakter.verbleibende_aufstiege > 0:
+        elif self.charakter.verbleibende_aufstiege >= aufstieg_kosten:
             return self._waehle_mit_aufstieg(talent_name_key)
         else:
             Logger.warning("Keine verbleibenden Aufstiege oder Handicap-Punkte übrig.")

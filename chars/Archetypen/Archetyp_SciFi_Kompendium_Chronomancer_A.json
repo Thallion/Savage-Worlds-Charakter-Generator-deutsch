@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -483,12 +483,6 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
-            },
-            "Zeit Umordnen": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
-                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -548,8 +542,7 @@
     ],
     "selected_talente": [
         "AH (Chronomant)",
-        "Vorahnung",
-        "Zeit Umordnen"
+        "Vorahnung"
     ],
     "selected_maechte": [
         "Abwehren",
@@ -601,8 +594,8 @@
         "Werkzeugkoffer": 1,
         "Batterie, Universal-": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -757,12 +750,6 @@
             {
                 "typ": "talent",
                 "name": "Vorahnung",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Zeit Umordnen",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

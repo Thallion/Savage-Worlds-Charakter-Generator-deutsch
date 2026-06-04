@@ -522,6 +522,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Berechnend)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 210,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Nerd.json)",
       "ok": true
     }
@@ -554,18 +567,12 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Berechnend\" FEHLT",
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
-      },
+      "punkte": {},
       "vermoegen": 210
     }
   ],
@@ -687,7 +694,8 @@
     "talente": [
       "Ermittler",
       "Gelehrter",
-      "McGyver"
+      "McGyver",
+      "Berechnend"
     ],
     "maechte": [],
     "ausruestung": {},

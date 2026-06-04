@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -488,12 +488,6 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
-            },
-            "Trickschuss": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
-                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -539,8 +533,7 @@
     ],
     "selected_talente": [
         "Ass am Steuer",
-        "Gut Ausgerüstet",
-        "Trickschuss"
+        "Gut Ausgerüstet"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -591,8 +584,8 @@
         "Batterie, Universal-": 1,
         "Taschencomputer": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 1,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -756,12 +749,6 @@
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
-            },
-            {
-                "typ": "talent",
-                "name": "Trickschuss",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
             }
         ]
     }

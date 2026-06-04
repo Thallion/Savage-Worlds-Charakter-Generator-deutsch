@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -526,6 +526,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberdeck": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -570,7 +580,9 @@
     "selected_allgemeine_ausruestung": [
         "Kevlarweste",
         "Rucksack",
-        "Universalübersetzer"
+        "Universalübersetzer",
+        "Taschencomputer",
+        "Cyberdeck"
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
@@ -580,7 +592,9 @@
     "ausruestung_mengen": {
         "Kevlarweste": 1,
         "Rucksack": 1,
-        "Universalübersetzer": 1
+        "Universalübersetzer": 1,
+        "Taschencomputer": 1,
+        "Cyberdeck": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

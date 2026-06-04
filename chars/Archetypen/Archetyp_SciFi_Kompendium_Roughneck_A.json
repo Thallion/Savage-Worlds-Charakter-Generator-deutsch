@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -504,8 +504,85 @@
         },
         "maechte": {},
         "superkraefte": {},
-        "cyberware": {},
-        "ausruestung": {}
+        "cyberware": {
+            "1f518231-0914-4a9b-8aed-f203fa185170": {
+                "name": "Cyberware: Ersatzgliedmaße",
+                "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
+                "unterkategorie": "Körper",
+                "stress": 1,
+                "max_installationen": -1,
+                "kosten": 2000,
+                "effekte": {
+                    "ersatzgliedmasse": true,
+                    "bonus_stress_kapazitaet": 1
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "1f518231-0914-4a9b-8aed-f203fa185170",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            },
+            "9c9dce46-95aa-46f4-b3ec-713a854f405f": {
+                "name": "Cyberware: Klauen",
+                "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
+                "unterkategorie": "Offensiv",
+                "stress": 2,
+                "max_installationen": 2,
+                "kosten": 5000,
+                "effekte": {
+                    "schaden": "Stä+W4",
+                    "schaden_stufe2": "Stä+W6",
+                    "pb": 2
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "9c9dce46-95aa-46f4-b3ec-713a854f405f",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            }
+        },
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rucksack": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschenlampe (10\" Strahl)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberware: Ersatzgliedmaße": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberware: Klauen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Einarmig",
@@ -520,7 +597,10 @@
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
-    "selected_cyberware": [],
+    "selected_cyberware": [
+        "Cyberware: Ersatzgliedmaße",
+        "Cyberware: Klauen"
+    ],
     "voelker_selected": {
         "Mensch": false,
         "Amorphe": false,
@@ -544,11 +624,31 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Rucksack",
+        "Taschenlampe (10\" Strahl)",
+        "Taschencomputer",
+        "Werkzeugkoffer",
+        "Batterie, Universal-",
+        "Cyberware: Ersatzgliedmaße",
+        "Cyberware: Klauen"
+    ],
     "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Rucksack": 1,
+        "Taschenlampe (10\" Strahl)": 1,
+        "Taschencomputer": 1,
+        "Werkzeugkoffer": 1,
+        "Batterie, Universal-": 1,
+        "Cyberware: Ersatzgliedmaße": 1,
+        "Cyberware: Klauen": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,

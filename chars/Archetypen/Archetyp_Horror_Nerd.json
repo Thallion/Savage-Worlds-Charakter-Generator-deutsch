@@ -533,6 +533,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Berechnend": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -569,7 +575,8 @@
     "selected_talente": [
         "Ermittler",
         "Gelehrter",
-        "McGyver"
+        "McGyver",
+        "Berechnend"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -603,7 +610,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -797,6 +804,12 @@
             {
                 "typ": "talent",
                 "name": "McGyver",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Berechnend",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

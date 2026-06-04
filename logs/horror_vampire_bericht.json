@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Stärke)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -379,19 +379,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Stärke)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": null
-    },
-    {
       "aktion": "attribut_mit_aufstieg(Konstitution)",
       "ok": true,
       "kosten": 0,
@@ -470,6 +457,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "attribut_mit_aufstieg(Willenskraft)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
       "ok": false,
       "kosten": 0,
@@ -494,6 +494,19 @@
       },
       "vermoegen": 470,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Vampire.json)",
@@ -582,16 +595,20 @@
       "vermoegen": 470
     },
     {
-      "aktion": "NOTIZ: 1 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit",
-      "ok": true,
-      "warnung": "1 Extra-Aufstiege wegen Doppelkosten/Attribut-Defizit",
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
-      "punkte": {},
-      "vermoegen": 470
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 470,
+      "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "aktion": "attribut_mit_aufstieg(Willenskraft)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -630,9 +647,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 470
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Angewohnheit_schwer\" FEHLT; talente: \"Attraktiv\" FEHLT",
+      "warnung": "handicaps: \"Angewohnheit_schwer\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -645,7 +671,7 @@
       "vermoegen": 470
     }
   ],
-  "anomalien_anzahl": 13,
+  "anomalien_anzahl": 14,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -665,7 +691,7 @@
         "modifier": 0
       },
       "Willenskraft": {
-        "wert": 8,
+        "wert": 6,
         "modifier": 0
       }
     },
@@ -729,7 +755,8 @@
     ],
     "talente": [
       "Nachtsicht",
-      "Zäh"
+      "Zäh",
+      "Attraktiv"
     ],
     "maechte": [],
     "ausruestung": {},

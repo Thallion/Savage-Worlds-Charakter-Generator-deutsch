@@ -319,7 +319,7 @@
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -547,7 +547,38 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Laserpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Waffensperre": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Scanner": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Dünnhäutig",
@@ -593,16 +624,34 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Laserpistole",
+        "Waffensperre",
+        "Batterie, Universal-",
+        "Taschencomputer",
+        "Scanner"
+    ],
+    "selected_waffen": [
+        "Laserpistole"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Laserpistole": 1,
+        "Waffensperre": 1,
+        "Batterie, Universal-": 1,
+        "Taschencomputer": 1,
+        "Scanner": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 5,
     "machtpunkte": 15,
@@ -713,7 +762,7 @@
                 "name": "Provozieren",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",

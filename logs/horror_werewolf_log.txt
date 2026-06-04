@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Werewolf (Horror Kompendium)
-# Stand: 2026-06-03T22:06:11
-# 17 Anomalie(n) von 45 Schritten
+# Stand: 2026-06-04T07:47:34
+# 17 Anomalie(n) von 49 Schritten
 
 ## ANOMALIEN
   [!] talent(Raufbold): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -19,7 +19,7 @@
   [!] talent_mit_aufstieg(Flink): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Raufbold): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Kampfreflexe): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=talente: "Schnell" FEHLT; talente: "Raufbold" FEHLT; talente: "Kampfreflexe" FEHLT; talente: "Flink" FEHLT kosten=0 None
+  [!] NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Werewolf, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -67,3 +67,7 @@
   - talent_mit_aufstieg(Flink): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
   - talent_mit_aufstieg(Raufbold): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
   - talent_mit_aufstieg(Kampfreflexe): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
+  - talent_mit_aufstieg(Raufbold): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
+  - talent_mit_aufstieg(Schnell): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
+  - talent_mit_aufstieg(Flink): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
+  - talent_mit_aufstieg(Kampfreflexe): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450

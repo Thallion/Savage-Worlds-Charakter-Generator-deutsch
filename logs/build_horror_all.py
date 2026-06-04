@@ -29,6 +29,35 @@ def header(msg):
     ALLLOG.write('\n' + '=' * 60 + '\n' + str(msg) + '\n' + '=' * 60 + '\n')
     ALLLOG.flush()
 
+# Skill -> regierendes Attribut (autoritativ aus 'settings/Horror Kompendium.json')
+SKILL_ATTR = {
+    'Allgemeinwissen': 'Verstand', 'Athletik': 'Geschicklichkeit', 'Darbietung': 'Willenskraft',
+    'Diebeskunst': 'Geschicklichkeit', 'Einschüchtern': 'Willenskraft', 'Elektronik': 'Verstand',
+    'Fahren': 'Geschicklichkeit', 'Fokus': 'Willenskraft', 'Geisteswissenschaften': 'Verstand',
+    'Glaube': 'Willenskraft', 'Glücksspiel': 'Verstand', 'Hacken': 'Verstand', 'Heilen': 'Verstand',
+    'Heimlichkeit': 'Geschicklichkeit', 'Kriegskunst': 'Verstand', 'Kämpfen': 'Geschicklichkeit',
+    'Naturwissenschaften': 'Verstand', 'Okkultismus': 'Verstand', 'Pilot': 'Geschicklichkeit',
+    'Provozieren': 'Verstand', 'Psionik': 'Willenskraft', 'Recherche': 'Verstand',
+    'Reiten': 'Geschicklichkeit', 'Reparieren': 'Verstand', 'Schießen': 'Geschicklichkeit',
+    'Seefahrt': 'Geschicklichkeit', 'Bootfahren': 'Geschicklichkeit', 'Sprache': 'Verstand',
+    'Verrückte Wissenschaft': 'Verstand', 'Alchemie': 'Verstand', 'Wahrnehmung': 'Verstand',
+    'Wahrsagen': 'Willenskraft', 'Zaubern': 'Verstand', 'Überleben': 'Verstand',
+    'Überreden': 'Willenskraft',
+}
+
+def _attr_chargen_order(data):
+    """CharGen-Attribut-Reihenfolge: Attribute, die ein hohes Skill-Ziel stützen, bekommen
+    das knappe Budget (5 Attr-Punkte + HP) zuerst. So erreicht ein Attribut, das eine hohe
+    Fertigkeit regiert, sein Ziel VOR der Fertigkeit -> vermeidet vermeidbare Doppelkosten
+    (Skill steigt über ein noch nicht maximiertes Attribut). Reine Reihenfolge, Zielwerte
+    bleiben unverändert."""
+    attrs = data.get('attribute', {})
+    skills = data.get('fertigkeiten', {})
+    def prio(an):
+        deps = [sz for sn, sz in skills.items() if SKILL_ATTR.get(sn) == an]
+        return max(deps) if deps else 0
+    return sorted(attrs.items(), key=lambda kv: (-prio(kv[0]), -kv[1]))
+
 # ========================================================================
 # VOLK AUTO-EINTRAEGE (aus Horror Kompendium.json)
 # ========================================================================
@@ -105,9 +134,11 @@ def build_seasoned_direct(name, data):
             if not r.get('ok'): anomalies += 1; m(f'  ANOM: freies_talent({data["freies_talent"]}): {r}')
 
         # Attributes (final values, nach Volk-Bonus automatisch)
-        for an, az in data.get('attribute', {}).items():
+        # Reihenfolge nach Skill-Priorität: Attribute mit hohen abhängigen Skills zuerst,
+        # damit sie ihr Ziel im knappen CharGen-Budget erreichen (Doppelkosten-Vermeidung).
+        for an, az in _attr_chargen_order(data):
             s.attribut_auf(an, az)
-        for an, az in data.get('attribute', {}).items():
+        for an, az in _attr_chargen_order(data):
             while s.ch.attribute[an].wuerfel.value < az and s.ch.verbleibende_handicap_punkte > 0:
                 vv = s.ch.attribute[an].wuerfel.value
                 s.steigere_mit_handicap_attribut(an)
@@ -183,11 +214,16 @@ def build_seasoned_direct(name, data):
         # Hebe ALLE Attribute auf Zielwert, die zu niedrig sind
         for an, az in data.get('attribute', {}).items():
             if an in s.ch.attribute:
+                attr_steps = 0
                 while s.ch.attribute[an].wuerfel.value < az:
+                    if attr_steps > 6: break  # Guard gegen Endlosschleife (Ziel unerreichbar, z.B. Cap W12)
+                    attr_steps += 1
+                    vv = s.ch.attribute[an].wuerfel.value
                     if s.ch.verbleibende_aufstiege <= 0:
                         increase_aufstiege(s.ch)
                         extra_advances += 1
                     s.charakter_mit_aufstieg(an, az)
+                    if s.ch.attribute[an].wuerfel.value == vv: break
         # Jetzt Fertigkeiten nachziehen (auch untrainierte aktivieren)
         for sn, sz in data.get('fertigkeiten', {}).items():
             if sn not in s.ch.fertigkeiten: continue
@@ -233,6 +269,38 @@ def build_seasoned_direct(name, data):
                 if pn is None: continue
                 r = s.macht(pn, ignore_rang_check=True)
                 if not r.get('ok'): anomalies += 1; m(f'  ANOM: macht_adv({pn}): {r}')
+
+        topup_adv = 0
+        # === Skill-Topup: Bogen-Fertigkeiten unter Ziel (Doppelkosten) mit Aufstiegen nachziehen ===
+        for sn, sz in (data.get('fertigkeiten', {}) or {}).items():
+            if sn not in s.ch.fertigkeiten: continue
+            g = 0
+            while (s.ch.fertigkeiten[sn].wuerfel.value < sz or s.ch.fertigkeiten[sn].wuerfel.modifier < 0) and g < 8:
+                g += 1
+                vv = s.ch.fertigkeiten[sn].wuerfel.value; vm = s.ch.fertigkeiten[sn].wuerfel.modifier
+                if s.ch.verbleibende_aufstiege < 1:
+                    increase_aufstiege(s.ch); extra_advances += 1; topup_adv += 1
+                s.fertigkeit_mit_aufstieg(sn, zielwert=sz)
+                if s.ch.fertigkeiten[sn].wuerfel.value == vv and s.ch.fertigkeiten[sn].wuerfel.modifier == vm:
+                    break
+        # === Topup: alle noch fehlenden Bogen-Talente mit zusätzlichen Aufstiegen bezahlen ===
+        # Doppelkosten (Skill >= Attribut) sind dem Bogen inhärent und nicht durch
+        # Attributänderungen vermeidbar -> Budget reicht in CharGen nicht für alle Edges.
+        # Fallback (User-Freigabe): Aufstiege erhöhen, bis jedes Bogen-Talent bezahlt ist.
+        bow_talente = [t for t in (novice_edges + advance_edges) if t]
+        ftt = data.get('freies_talent')
+        if ftt: bow_talente.append(ftt)
+        _seen = set(); bow_talente = [t for t in bow_talente if not (t in _seen or _seen.add(t))]
+        for t in bow_talente:
+            if t in s.ch.selected_talente: continue
+            if s.ch.verbleibende_aufstiege < 1:
+                increase_aufstiege(s.ch); extra_advances += 1; topup_adv += 1
+            r = s.talent_mit_aufstieg(t, ignore_voraussetzungen=True)
+            if not r.get('ok'):
+                anomalies += 1; m(f'  TALENT nicht kaufbar trotz Aufstieg (AB/Macht?): {t}')
+        if topup_adv:
+            m(f'  Topup-Aufstiege für Talente: {topup_adv} (Rang jetzt {s.ch.rang})')
+            s.notiz(f'{topup_adv} zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen')
 
         # Diff & Save — inkludiere auto_handicaps/auto_talente vom Volk
         soll_at = {k: v for k, v in data.get('attribute', {}).items() if k in s.ch.attribute}
@@ -317,9 +385,10 @@ def build_monstrous(name, data, has_superkraefte=False):
             if not r.get('ok'): anomalies += 1; m(f'  ANOM: freies_talent({data["freies_talent"]})')
 
         # Attributes (final values — Volk-Boni bereits automatisch)
-        for an, az in data.get('attribute', {}).items():
+        # Reihenfolge nach Skill-Priorität (Doppelkosten-Vermeidung, s. _attr_chargen_order).
+        for an, az in _attr_chargen_order(data):
             s.attribut_auf(an, az)
-        for an, az in data.get('attribute', {}).items():
+        for an, az in _attr_chargen_order(data):
             while s.ch.attribute[an].wuerfel.value < az and s.ch.verbleibende_handicap_punkte > 0:
                 vv = s.ch.attribute[an].wuerfel.value
                 s.steigere_mit_handicap_attribut(an)
@@ -375,11 +444,16 @@ def build_monstrous(name, data, has_superkraefte=False):
         extra_advances = 0
         for an, az in data.get('attribute', {}).items():
             if an in s.ch.attribute:
+                attr_steps = 0
                 while s.ch.attribute[an].wuerfel.value < az:
+                    if attr_steps > 6: break  # Guard gegen Endlosschleife (Ziel unerreichbar, z.B. Cap W12)
+                    attr_steps += 1
+                    vv = s.ch.attribute[an].wuerfel.value
                     if s.ch.verbleibende_aufstiege <= 0:
                         increase_aufstiege(s.ch)
                         extra_advances += 1
                     s.charakter_mit_aufstieg(an, az)
+                    if s.ch.attribute[an].wuerfel.value == vv: break
         # Jetzt Fertigkeiten nachziehen (auch untrainierte aktivieren)
         for sn, sz in data.get('fertigkeiten', {}).items():
             if sn not in s.ch.fertigkeiten: continue
@@ -422,6 +496,37 @@ def build_monstrous(name, data, has_superkraefte=False):
                 if pn is None: continue
                 r = s.macht(pn, ignore_rang_check=True)
                 if not r.get('ok'): anomalies += 1; m(f'  ANOM: macht_adv({pn}): {r}')
+
+        topup_adv = 0
+        # === Skill-Topup: Bogen-Fertigkeiten unter Ziel (Doppelkosten) mit Aufstiegen nachziehen ===
+        for sn, sz in (data.get('fertigkeiten', {}) or {}).items():
+            if sn not in s.ch.fertigkeiten: continue
+            g = 0
+            while (s.ch.fertigkeiten[sn].wuerfel.value < sz or s.ch.fertigkeiten[sn].wuerfel.modifier < 0) and g < 8:
+                g += 1
+                vv = s.ch.fertigkeiten[sn].wuerfel.value; vm = s.ch.fertigkeiten[sn].wuerfel.modifier
+                if s.ch.verbleibende_aufstiege < 1:
+                    increase_aufstiege(s.ch); extra_advances += 1; topup_adv += 1
+                s.fertigkeit_mit_aufstieg(sn, zielwert=sz)
+                if s.ch.fertigkeiten[sn].wuerfel.value == vv and s.ch.fertigkeiten[sn].wuerfel.modifier == vm:
+                    break  # kein Fortschritt trotz Aufstieg -> echte Blockade
+        # === Topup: alle noch fehlenden Bogen-Talente mit zusätzlichen Aufstiegen bezahlen ===
+        # (Doppelkosten Skill>=Attribut sind bogeninhärent; Fallback per User-Freigabe.)
+        _bt = [t for t in (data.get('talente_novice', []) or []) if t]
+        _bt += [a[1] for a in (data.get('advances', []) or []) if a[0] == 'talent' and a[1]]
+        _ftm = data.get('freies_talent')
+        if _ftm: _bt.append(_ftm)
+        _seen = set(); _bt = [t for t in _bt if not (t in _seen or _seen.add(t))]
+        for t in _bt:
+            if t in s.ch.selected_talente: continue
+            if s.ch.verbleibende_aufstiege < 1:
+                increase_aufstiege(s.ch); extra_advances += 1; topup_adv += 1
+            r = s.talent_mit_aufstieg(t, ignore_voraussetzungen=True)
+            if not r.get('ok'):
+                anomalies += 1; m(f'  TALENT nicht kaufbar trotz Aufstieg (AB/Macht?): {t}')
+        if topup_adv:
+            m(f'  Topup-Aufstiege für Talente: {topup_adv} (Rang jetzt {s.ch.rang})')
+            s.notiz(f'{topup_adv} zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen')
 
         # Diff & Save — inkludiere auto_handicaps/auto_talente vom Volk
         soll_at = {k: v for k, v in data.get('attribute', {}).items() if k in s.ch.attribute}
@@ -1248,7 +1353,7 @@ vampire_data = {
     'volk': 'Vampir',
     'handicaps': ['Arrogant', 'Blutrünstig', 'Angewohnheit_schwer'],
     # 'Schwäche (Geweihtes Wasser)', 'Schwäche (Sonnenlicht)', 'Schwäche (Pfahl)' ENTFERNT (auto)
-    'attribute': {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 12, 'Konstitution': 10},
+    'attribute': {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 12, 'Konstitution': 10},  # Willenskraft 8->6 (Bogen: Spirit d6, Audit 2026-06-04)
     'fertigkeiten': {
         'Athletik': 8, 'Allgemeinwissen': 6, 'Kämpfen': 8, 'Einschüchtern': 6,
         'Wahrnehmung': 6, 'Okkultismus': 6, 'Überreden': 6, 'Heimlichkeit': 8,

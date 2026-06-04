@@ -532,6 +532,24 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Schmerzresistenz": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Schnell": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Seelenentzug": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -563,7 +581,10 @@
     ],
     "selected_talente": [
         "Zäh",
-        "Bedrohlich"
+        "Bedrohlich",
+        "Schmerzresistenz",
+        "Schnell",
+        "Seelenentzug"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -595,7 +616,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -629,13 +650,6 @@
             },
             {
                 "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -650,7 +664,14 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
@@ -658,7 +679,7 @@
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 6,
+                "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -748,8 +769,8 @@
             },
             {
                 "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
+                "name": "Stärke",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
@@ -777,6 +798,24 @@
             {
                 "typ": "talent",
                 "name": "Bedrohlich",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Schmerzresistenz",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Schnell",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Seelenentzug",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

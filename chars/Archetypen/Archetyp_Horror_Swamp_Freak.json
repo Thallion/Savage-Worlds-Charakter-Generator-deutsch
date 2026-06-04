@@ -172,7 +172,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -521,6 +521,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Heiler": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Konter": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -540,7 +552,9 @@
         "Schwerfällig"
     ],
     "selected_talente": [
-        "Bedrohlich"
+        "Bedrohlich",
+        "Heiler",
+        "Konter"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -566,9 +580,9 @@
     "ausruestung_mengen": {
         "Kleidung, Alltag": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 5,
+    "rang": "Veteran",
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 9,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -748,8 +762,27 @@
                 "kosten": 0.5
             },
             {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
                 "typ": "talent",
                 "name": "Bedrohlich",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Heiler",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Konter",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

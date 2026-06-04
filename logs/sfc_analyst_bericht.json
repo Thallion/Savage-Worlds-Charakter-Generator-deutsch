@@ -354,7 +354,7 @@
     },
     {
       "aktion": "talent(Kühler Kopf)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -363,7 +363,7 @@
         "handicap": 2
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "kaufen(Körperpanzerung +4x1)",
@@ -450,6 +450,19 @@
   ],
   "anomalien": [
     {
+      "aktion": "talent(Kühler Kopf)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 1,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "kaufen(Waffensperrex1) FORCE",
       "ok": true,
       "kosten": 50,
@@ -520,7 +533,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 6,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -613,8 +626,7 @@
     ],
     "talente": [
       "Ermittler",
-      "Berechnend",
-      "Kühler Kopf"
+      "Berechnend"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -623,11 +635,11 @@
       "fertigkeit": 1,
       "handicap": 2,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

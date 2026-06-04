@@ -470,6 +470,45 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Raufbold)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Eisenkiefer)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Wildheit)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Patchwork_Man.json)",
       "ok": true
     }
@@ -607,9 +646,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 300
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Rachsüchtig_schwer\" FEHLT; talente: \"Raufbold\" FEHLT; talente: \"Wildheit\" FEHLT; talente: \"Eisenkiefer\" FEHLT",
+      "warnung": "handicaps: \"Rachsüchtig_schwer\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -622,7 +670,7 @@
       "vermoegen": 300
     }
   ],
-  "anomalien_anzahl": 12,
+  "anomalien_anzahl": 13,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -723,7 +771,10 @@
       "Kräftig",
       "Arkane Resistenz",
       "Berserker",
-      "Mut"
+      "Mut",
+      "Raufbold",
+      "Eisenkiefer",
+      "Wildheit"
     ],
     "maechte": [],
     "ausruestung": {},

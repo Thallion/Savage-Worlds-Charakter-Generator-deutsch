@@ -133,17 +133,22 @@ try:
     s.attribut_auf('Verstand', 6)
     s.attribut_auf('Willenskraft', 6)
     s.attribut_auf('Konstitution', 6)
-    # Stärke d4→d6 via HP WEGGELASSEN, um 2 HP für fehlende Skills zu haben
+    # FIX Doppelkosten (2026-06-04): Verstand d6→d8 via HP VOR den Skills, damit Wahrnehmung d8
+    # (Verstand-Skill) EINFACH statt doppelt kostet. Die 2 HP gingen vorher an Elektronik/Pilot
+    # (jetzt als Advance). Stärke bleibt d4 (Bogen d6, dokumentierte Abweichung).
+    s.steigere_mit_handicap_attribut('Verstand')   # d6→d8 (2HP) – vermeidet Wahrnehmung-Doppelkosten
     m(f"  Attrs: {s.punktestand()}")
     skills_setzen(s, [('Athletik',8),('Fahren',4),('Kämpfen',6),
                       ('Wahrnehmung',8),('Schießen',6),('Überleben',8)])
-    # Fehlende Bogen-Skills via HP (2 frei)
-    s.steigere_mit_handicap_fertigkeit('Elektronik')           # 1 HP
-    s.steigere_mit_handicap_fertigkeit('Pilot')                # 1 HP
     m(f"  Skills: {s.punktestand()}")
-    abschliessen(s, 4)
-    advance_attr(s, 'Verstand')  # d6→d8
-    # Bogen: "Survival d8 & Notice d8" – Skills bereits CharGen d8, daher 0 Aufstiege
+    abschliessen(s, 5)  # 1 Advance mehr: der vorherige Verstand-Advance entfällt (jetzt CharGen),
+                        # dafür Stärke d4→d6 (Bogen!) als Advance -> Rang bleibt Fortgeschritten
+    # Verstand bereits d8 in CharGen -> kein Verstand-Advance nötig.
+    # Elektronik + Pilot via Advance (vorher HP, das jetzt für Verstand gebraucht wird).
+    s.fertigkeit_mit_aufstieg('Elektronik', 4)
+    s.fertigkeit_mit_aufstieg('Pilot', 4)
+    advance_attr(s, 'Stärke')  # d4→d6 (Bogen d6) – behebt die bisherige Stärke-Abweichung
+    # Bogen: "Survival d8 & Notice d8" – jetzt bereits CharGen d8 (Verstand d8), 0 Aufstiege
     r = s.fertigkeit_mit_aufstieg('Überleben', 8)
     m(f"  Advance Überleben d8: ok={ok_check(r)}")
     # Naturwissenschaften via D-Advance (0.5 verb verbleibend)
@@ -158,7 +163,7 @@ try:
                  ('Tarnanzug',1)]:
         s.kaufen(*item)
     s.notiz('MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative')
-    s.notiz('STÄRKE: Bogen d6, Build d4 (HP freigegeben für fehlende Skills Elektronik, Pilot, Naturwissenschaften via HP+D-Adv)')
+    s.notiz('Doppelkosten-Fix: Verstand d8 in CharGen -> Wahrnehmung d8 einfach; Stärke d4->d6 via Advance behebt frühere Abweichung')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Surveyor_A.json')
     b = s.bericht('logs/scifi_surveyor_bericht.json')
     m(f"Surveyor FERTIG anomalien={b['anomalien_anzahl']}")

@@ -80,7 +80,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -93,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -522,6 +522,19 @@
       "warnung": null
     },
     {
+      "aktion": "talent_mit_aufstieg(Unerschütterlich)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 440,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Doctor.json)",
       "ok": true
     }
@@ -567,9 +580,18 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 440
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "attribute: Stärke soll W4, ist W6; talente: \"Unerschütterlich\" FEHLT",
+      "warnung": "attribute: Stärke soll W4, ist W6",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -582,7 +604,7 @@
       "vermoegen": 440
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -689,7 +711,8 @@
       "Heiler",
       "Berserker",
       "Schwer zu töten",
-      "Heiler_2"
+      "Heiler_2",
+      "Unerschütterlich"
     ],
     "maechte": [],
     "ausruestung": {},

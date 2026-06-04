@@ -568,20 +568,6 @@
                 "machtpunkte": 1,
                 "reichweite": "VER 5",
                 "dauer": "—"
-            },
-            "Fluchwort": {
-                "ausgewaehlt": true,
-                "rang": "Fortgeschritten",
-                "machtpunkte": 3,
-                "reichweite": "Verstand",
-                "dauer": "Bis zur nächsten Steigerung"
-            },
-            "Geisterruf": {
-                "ausgewaehlt": true,
-                "rang": "Fortgeschritten",
-                "machtpunkte": 3,
-                "reichweite": "Verstand",
-                "dauer": "5"
             }
         },
         "superkraefte": {},
@@ -614,9 +600,7 @@
     "selected_maechte": [
         "Tierfreund",
         "Eigenschaft erhöhen/senken",
-        "Schutz",
-        "Fluchwort",
-        "Geisterruf"
+        "Schutz"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -644,11 +628,11 @@
         "Rucksack": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 0,
+    "verfuegbare_maechte": 2,
     "anzahl_maechte": 5,
     "machtpunkte": 15,
     "machtstufe": "III",
@@ -665,36 +649,36 @@
         "cost_entries": [
             {
                 "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },

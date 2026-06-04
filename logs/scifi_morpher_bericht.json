@@ -445,7 +445,7 @@
     },
     {
       "aktion": "kaufen(Nanowearx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 250,
       "kostenart": "Vermögen",
       "punkte": {
@@ -458,7 +458,7 @@
     },
     {
       "aktion": "kaufen(Komlinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -471,7 +471,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -490,7 +490,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Nanowearx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 250,
       "kostenart": "Vermögen",
       "punkte": {
@@ -503,7 +503,7 @@
     },
     {
       "aktion": "kaufen(Komlinkx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -516,7 +516,7 @@
     },
     {
       "aktion": "kaufen(Taschencomputerx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {

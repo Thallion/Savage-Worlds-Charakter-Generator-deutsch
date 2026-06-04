@@ -539,6 +539,12 @@
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Alleskönner": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -566,7 +572,8 @@
         "Gelehrter",
         "Mut",
         "Ermittler",
-        "Mut_2"
+        "Mut_2",
+        "Alleskönner"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -598,7 +605,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -616,13 +623,6 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
             {
                 "typ": "attribut",
                 "name": "Verstand",
@@ -655,6 +655,13 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -778,6 +785,12 @@
             {
                 "typ": "talent",
                 "name": "Mut_2",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Alleskönner",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

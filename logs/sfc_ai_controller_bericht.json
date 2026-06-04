@@ -367,7 +367,7 @@
     },
     {
       "aktion": "talent(Trickschuss)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -376,7 +376,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "kaufen(Körperpanzerung +4x1)",
@@ -463,6 +463,19 @@
   ],
   "anomalien": [
     {
+      "aktion": "talent(Trickschuss)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "kaufen(Waffensperrex1) FORCE",
       "ok": true,
       "kosten": 50,
@@ -533,7 +546,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 6,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -632,8 +645,7 @@
     ],
     "talente": [
       "Ass am Steuer",
-      "Gut Ausgerüstet",
-      "Trickschuss"
+      "Gut Ausgerüstet"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -642,11 +654,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

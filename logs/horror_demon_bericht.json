@@ -67,7 +67,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -93,7 +93,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,23 +119,10 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 3
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
@@ -158,7 +145,20 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
+      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Konstitution)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -172,6 +172,19 @@
     },
     {
       "aktion": "attribut_mit_hc(Konstitution)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "attribut_mit_hc(Stärke)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -418,7 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
+      "aktion": "attribut_mit_aufstieg(Stärke)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -484,7 +497,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -493,7 +506,7 @@
         "handicap": 0
       },
       "vermoegen": 480,
-      "warnung": null
+      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "talent_mit_aufstieg(Beziehungen)",
@@ -535,6 +548,45 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 480,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Beziehungen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 480,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Mystische Kräfte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 480,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Demon.json)",
       "ok": true
     }
@@ -542,6 +594,19 @@
   "anomalien": [
     {
       "aktion": "attribut_mit_hc(Konstitution)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "attribut_mit_hc(Stärke)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -634,6 +699,19 @@
       "vermoegen": 480
     },
     {
+      "aktion": "talent_mit_aufstieg(Attraktiv)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 480,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
       "aktion": "talent_mit_aufstieg(Beziehungen)",
       "ok": false,
       "kosten": 0,
@@ -673,22 +751,16 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Beziehungen\" FEHLT; talente: \"Mystische Kräfte\" FEHLT",
+      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "ok": true,
+      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 3,
-        "aufstiege": -0.5
-      },
+      "punkte": {},
       "vermoegen": 480
     }
   ],
-  "anomalien_anzahl": 13,
+  "anomalien_anzahl": 15,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -795,7 +867,9 @@
     ],
     "talente": [
       "Infrarotsicht",
-      "Attraktiv"
+      "Attraktiv",
+      "Beziehungen",
+      "Mystische Kräfte"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -804,9 +878,9 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 3,
-      "aufstiege": -0.5
+      "aufstiege": 0.5
     },
-    "machtpunkte": 0,
+    "machtpunkte": 10,
     "vermoegen": 480,
     "rang": "Fortgeschritten",
     "volk": "Dämon"

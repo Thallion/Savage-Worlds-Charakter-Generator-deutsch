@@ -319,7 +319,7 @@
                 "modifier": -2,
                 "typ": "fertigkeit"
             },
-            "attribut": "Willenskraft",
+            "attribut": "Verstand",
             "custom": false
         },
         "Psionik": {
@@ -419,7 +419,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -498,8 +498,76 @@
         },
         "maechte": {},
         "superkraefte": {},
-        "cyberware": {},
-        "ausruestung": {}
+        "cyberware": {
+            "c6bef9ab-e7b8-47dc-83b9-8134409e397a": {
+                "name": "Cyberware: Adrenalindrüse",
+                "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
+                "unterkategorie": "Defensiv",
+                "stress": 2,
+                "max_installationen": 1,
+                "kosten": 5000,
+                "effekte": {
+                    "erholung_bonus": {
+                        "typ": "angeschlagen_benommen",
+                        "bonus": 2
+                    }
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "c6bef9ab-e7b8-47dc-83b9-8134409e397a",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            },
+            "364234b1-8f1f-4800-8ca6-1e3358d42089": {
+                "name": "Cyberware: Verbesserte Sicht",
+                "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
+                "unterkategorie": "Körper",
+                "stress": 1,
+                "max_installationen": 1,
+                "kosten": 10000,
+                "effekte": {
+                    "beleuchtung_ignorieren": 4,
+                    "wahrnehmung_bonus": 2
+                },
+                "installiert": true,
+                "aktiv": true,
+                "installations_id": "364234b1-8f1f-4800-8ca6-1e3358d42089",
+                "installations_datum": "2026-06-04",
+                "konfiguration": {}
+            }
+        },
+        "ausruestung": {
+            "Infanteriekampfanzug": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Molekularschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Komlink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberware: Adrenalindrüse": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Cyberware: Verbesserte Sicht": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Gesucht_leicht",
@@ -513,7 +581,10 @@
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
-    "selected_cyberware": [],
+    "selected_cyberware": [
+        "Cyberware: Adrenalindrüse",
+        "Cyberware: Verbesserte Sicht"
+    ],
     "voelker_selected": {
         "Mensch": true,
         "Amorphe": false,
@@ -537,11 +608,29 @@
         "Aquatische Spezies": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Infanteriekampfanzug",
+        "Molekularschwert",
+        "Komlink",
+        "Taschencomputer",
+        "Cyberware: Adrenalindrüse",
+        "Cyberware: Verbesserte Sicht"
+    ],
+    "selected_waffen": [
+        "Molekularschwert"
+    ],
+    "selected_ruestungen": [
+        "Infanteriekampfanzug"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Infanteriekampfanzug": 1,
+        "Molekularschwert": 1,
+        "Komlink": 1,
+        "Taschencomputer": 1,
+        "Cyberware: Adrenalindrüse": 1,
+        "Cyberware: Verbesserte Sicht": 1
+    },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,

@@ -609,8 +609,8 @@
         "Taschenlampe (10\" Strahl)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": -0.5,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
