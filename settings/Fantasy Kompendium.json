@@ -9195,6 +9195,137 @@
       "setting": "mittelalterlich",
       "beschreibung": "Rüstungsaufwertung: Kann zu jeder Panzerung hinzugefügt werden; +1 Schaden beim Zerquetschen während des Ringens.",
       "aktiv": true
+    },
+    "Streitross": {
+      "name": "Streitross",
+      "kategorie": "Reittier",
+      "gewicht": 0,
+      "kosten": 350,
+      "setting": "mittelalterlich",
+      "beschreibung": "Kampfausgebildetes Pferd (Größe 2). Bewegung 8, gerät im Kampf nicht in Panik. Trägt Reiter und Ausrüstung.",
+      "aktiv": true
+    },
+    "Wattierter Rossharnisch": {
+      "name": "Wattierter Rossharnisch",
+      "kategorie": "Rüstung",
+      "gewicht": 15,
+      "kosten": 100,
+      "setting": "mittelalterlich",
+      "beschreibung": "Gepolsterte Tierrüstung (Schabracke) für Reittiere der Größe 2.",
+      "aktiv": true,
+      "torso": 1,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Trank: Dunkelsicht": {
+      "name": "Trank: Dunkelsicht",
+      "kategorie": "Trank",
+      "gewicht": 0,
+      "kosten": 200,
+      "setting": "fantasy",
+      "beschreibung": "Verleiht dem Benutzer Nachtsicht (ignoriert Abzüge durch Dunkelheit) für die Dauer einer Begegnung.",
+      "aktiv": true
+    },
+    "Trank: Wachstum": {
+      "name": "Trank: Wachstum",
+      "kategorie": "Trank",
+      "gewicht": 0,
+      "kosten": 200,
+      "setting": "fantasy",
+      "beschreibung": "Vergrößert den Benutzer um eine Größenstufe (Stärke und Robustheit steigen) für 5 Runden.",
+      "aktiv": true
+    },
+    "Trank: Unsichtbarkeit": {
+      "name": "Trank: Unsichtbarkeit",
+      "kategorie": "Trank",
+      "gewicht": 0,
+      "kosten": 500,
+      "setting": "fantasy",
+      "beschreibung": "Macht den Benutzer unsichtbar (Angriffe gegen ihn mit −4, mit Erfolg −6) für die Dauer einer Begegnung.",
+      "aktiv": true
+    },
+    "Trank: Machtpunkte aufladen": {
+      "name": "Trank: Machtpunkte aufladen",
+      "kategorie": "Trank",
+      "gewicht": 0,
+      "kosten": 500,
+      "setting": "fantasy",
+      "beschreibung": "Stellt dem Benutzer sofort 10 Machtpunkte wieder her.",
+      "aktiv": true
+    },
+    "Trank: Wandkrabbler": {
+      "name": "Trank: Wandkrabbler",
+      "kategorie": "Trank",
+      "gewicht": 0,
+      "kosten": 200,
+      "setting": "fantasy",
+      "beschreibung": "Erlaubt dem Benutzer, an Wänden und Decken zu klettern, für die Dauer einer Begegnung.",
+      "aktiv": true
+    },
+    "Tasche des Fassens": {
+      "name": "Tasche des Fassens",
+      "kategorie": "Allgemein",
+      "gewicht": 2.5,
+      "kosten": 500,
+      "setting": "mittelalterlich",
+      "beschreibung": "Magische Tasche, die weit mehr fasst, als ihre Größe vermuten lässt (bis zu 250 kg / 1 m³), bei nur 2,5 kg Eigengewicht.",
+      "aktiv": true
+    },
+    "Umhang des Schutzes": {
+      "name": "Umhang des Schutzes",
+      "kategorie": "Allgemein",
+      "gewicht": 1.5,
+      "kosten": 500,
+      "setting": "mittelalterlich",
+      "beschreibung": "Magischer Umhang: +2 auf Robustheit. Stapelt nicht mit anderer magischer Rüstung.",
+      "aktiv": true
+    },
+    "Sonnenstab": {
+      "name": "Sonnenstab",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 20,
+      "setting": "mittelalterlich",
+      "beschreibung": "Alchemistischer Leuchtstab: spendet bei Aktivierung (Schütteln) 6 Stunden lang helles Licht im Radius von ca. 9 m.",
+      "aktiv": true
+    },
+    "Schutzbrille": {
+      "name": "Schutzbrille",
+      "kategorie": "Allgemein",
+      "gewicht": 0,
+      "kosten": 10,
+      "setting": "mittelalterlich",
+      "beschreibung": "Schützt die Augen vor Spritzern, Staub und grellem Licht (+2 gegen entsprechende Effekte).",
+      "aktiv": true
+    },
+    "Grabstaub": {
+      "name": "Grabstaub",
+      "kategorie": "Allgemein",
+      "gewicht": 0,
+      "kosten": 25,
+      "setting": "mittelalterlich",
+      "beschreibung": "Friedhofserde als Materialkomponente für Hexen- und Nekromantie-Mächte.",
+      "aktiv": true
+    },
+    "Hexenbeutel": {
+      "name": "Hexenbeutel",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 50,
+      "setting": "mittelalterlich",
+      "beschreibung": "Beutel mit Hexenutensilien; dient als arkaner Fokus und zum Aufbewahren vorbereiteter Mächte.",
+      "aktiv": true
+    },
+    "Schwebende Laterne": {
+      "name": "Schwebende Laterne",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 100,
+      "setting": "mittelalterlich",
+      "beschreibung": "Magische Laterne: leuchtet auf Befehl und schwebt von selbst in der Nähe des Benutzers (kein Tragen/Brennstoff nötig).",
+      "aktiv": true
     }
   },
   "settingregeln": {

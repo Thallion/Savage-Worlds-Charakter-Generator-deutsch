@@ -1,6 +1,6 @@
 Archetypen Anomalie-Bericht
 Stand: 2026-06-04 (Update: Systematische Erfassung **fehlender Ausrüstung** ergänzt — `logs/check_fehlende_ausruestung.py` mit Alias-Map (EN→DE); `logs/fehlende_ausruestung_uebersicht.md` als strukturierte Tabelle. Wichtigste Funde: 8 Items fehlen in SWAE (Mobiltelefon, Glock 9mm, Malaydoskop, Schalldämpfer, Beretta, Schnappmesser, Flachmann), 6 in SuSK (Eichendornrüstung, Schwebeöl, Schlafleintuch, Wasserschlauch, Kugeln mit Schießpulver), 1 in Superkräfte (luchadore mask). Update vorheriger Stand: 2026-06-02 SciFi Kompendium Phase G **komplett abgeschlossen** — Stufe 1+1.5: 2 Edges / 3 Handicaps / 29 Items ergänzt; Stufe 2: Build-Skript; Stufe 3a: 14 G1-Archetypen; Stufe 3b: 6 G2-Magic-Archetypen; Stufe 3c: 4 G3-Ancestry-Archetypen. **Force-Buy-Bug in ausruestung_funktionen.py:42/100/312 behoben** (User-Freigabe). **2 HCs ergänzt** (Trennungsangst, Wuchtig). Setting jetzt 209 Talente, 106 Handicaps, 315 Items, 20 Völker. Bestehende 12 Batch1+12 Batch2 SciFi-Builds unverändert.)
-Gesamt: 89 Archetypen (65 + 14 G1 + 6 G2 + 4 G3 = 89; bzw. 36 SciFi-Builds gesamt: 12 Batch1 + 14 G1 + 6 G2 + 4 G3)
+Gesamt: 108 Archetypen (65 + 14 G1 + 6 G2 + 4 G3 + 18 SPF Set 2+3 + 1 Balazar = 108; bzw. 36 SciFi-Builds gesamt: 12 Batch1 + 14 G1 + 6 G2 + 4 G3)
 
 ---
 
@@ -1932,3 +1932,140 @@ Waldläufer (Kettenhemd = scale shirt). Builds neu gebaut, **OFFEN = 0** (determ
 ### Gesamt-Verlauf FEHLT_KATALOG (per-occurrence)
 228 (roh) → 169 (Stat-Block-Norm.) → 160 (Apostrophe) → 41 (Alias-Brücken) → 29 (7 neue Items).
 Echte distinkte Lücke: **16** (alle nicht aus dem Regelwerk extrahierbar).
+
+---
+
+# Savage Pathfinder — Archetypen Sets 2+3 (2026-06-04)
+
+**Quellen:** `Pathfinder®_for_Savage_Worlds_Archetype_Cards_Set_2.pdf` +
+`Pathfinder®_for_Savage_Worlds_Archetype_Cards_Set_3.pdf` (pdftotext-extrahiert)
+**Build-Skript (v1):** `logs/build_spf_set23.py`
+**Build-Skript (v2, korrigiert):** `logs/build_spf_set23_v2.py`
+**Trace:** `logs/spf_set23_v2_trace.txt`
+**Berichte:** `logs/*_bericht.json` (19 Dateien)
+**Gespeichert:** `chars/Archetypen/Archetyp_Savage_Pathfinder_*_A.json`
+
+## Status: 18/18 gebaut, 7 perfekt, 1 Bug gefunden + behoben
+
+| Status | Anzahl | Charaktere |
+|---|---|---|
+| **Perfekt** (DIFF=0, Anom=0) | **7** | Kira, Brokar, Zyril, Korva, Sil, Alain, Alahazra |
+| **Nahezu perfekt** (nur Budget-Diffs) | **9** | Teller, Paelie, Fariel, Marn, Gnor, Madda, Damiel, Imrijka, Feiya |
+| **BUG bestätigt + behoben** | **1** | Balazar (`AH (Beschwörer)` kategorie=Hintergrund → Klasse) |
+| **Edge-Case** | **1** | Darla (klassenlos, manuelles AH Magie nötig) |
+
+## Build-Reihenfolge (bewährt)
+
+1. Pathfinder-Klassentalent (via `pathfinder_klassentalent()`)
+2. Manuelle Handicaps (Major zuerst, HP-Limit=4)
+3. Volk (`volk()`) + Auto-Einträge erfassen
+4. Alle freien Volkswahlen abarbeiten (Mensch: Talent + Attribut!)
+5. Attribute KOMPLETT (regulär + Handicap) VOR Fertigkeiten
+6. Fertigkeiten steigern
+7. Manuelle Talente mit verbleibenden HP/Aufstiegen
+8. Mächte (nur bei vorhandenem AH)
+9. Ausrüstung (force_bei_geldmangel=True)
+
+## Korrigierte EN→DE Key-Mappings
+
+Zahlreiche ursprünglich als „fehlend" markierte deutsche Keys existieren unter anderen Namen.
+Die **Grundregelwerk-Handicap-Liste** (`SWPF_Grundregelwerk.txt:12636–12725`) enthält alle
+offiziellen Übersetzungen:
+
+| EN (Bogen) | DE (korrekt) | Vorher fälschlich |
+|---|---|---|
+| Overconfident | **Arrogant** | Überheblich |
+| Poverty | **Arm** | Armut |
+| Mean/Grim | **Fies** | Grimmig |
+| Ruthless | **Skrupellos_leicht/schwer** | Rücksichtslos |
+| Tongue-Tied | **Schwerzüngig** | Stotterer |
+| Greedy | **Gierig_leicht/schwer** | Geizig |
+| Secret | **Geheimnis_leicht/schwer** | — |
+| Quirk | **Tick** | Eigenart |
+| Assassin | **Assassine** | Attentäter |
+| Channeling | **Kanalisieren** | — |
+| Extraction | **Rückzug** | Extraktion |
+| Inspire Heroism | **Heldentum inspirieren** | — |
+| Battle (Skill) | **Kriegskunst** | Schlacht |
+| Cavalier | **Kavalier** (nicht Kavallerist!) | — |
+
+## Klassentalente: Spellcaster brauchen `AH (...)`-Präfix
+
+8 der 16 Pathfinder-Klassen existieren **nur als AH-Varianten**, nicht als Standalone-Edge.
+`pathfinder_klassentalent()` muss mit dem AH-Namen aufgerufen werden:
+
+| Klasse | Aufzurufender Key |
+|---|---|
+| Barbar, Kämpfer, Mönch, Paladin, Schurke, Waldläufer, Inquisitor, Alchemist, Kavalier | Basis-Name direkt |
+| **Barde** | `AH (Barde)` |
+| **Kleriker** | `AH (Kleriker)` |
+| **Magier** (Wizard) | `AH (Magier)` |
+| **Druide** | `AH (Druide)` |
+| **Zauberer** (Sorcerer) | `AH (Zauberer)` (+ Blutlinien-Variante) |
+| **Orakel** | `AH (Orakel)` |
+| **Hexenmeister** (Witch) | `AH (Hexenmeister)` |
+| **Beschwörer** (Summoner) | ~~`AH (Beschwörer)`~~ → **BUG behoben** (s.u.) |
+
+## ✅ BUG BEHOBEN: `AH (Beschwörer)` — falsche Kategorie
+
+**Datei:** `settings/Savage Pathfinder.json`
+**Ursache:** `AH (Beschwörer)` hatte `kategorie: "Hintergrund"` statt `"Klasse"`.
+`ist_pathfinder_kostenloses_talent()` (`talent_funktionen.py:1295`) prüft auf
+`talent.kategorie == "Klasse"` → Summoner war nicht als Klassentalent wählbar.
+
+**Fix:**
+1. Neues Klassentalent **`Beschwörer`** (kategorie=Klasse) mit:
+   - Voraussetzungen `VER W6, Okkultismus W6`
+   - `auto_talente: ['AH (Beschwörer)', 'Eidolon']`
+   - `auto_handicaps: ['Behindernde Rüstung_leicht']`
+2. Neues Talent **`Eidolon`** (kategorie=Beschwörer): beschreibt den Begleiter
+3. `AH (Beschwörer)` bleibt als Hintergrund-Talent (wird vom Klassentalent auto-aktiviert)
+
+**Pattern:** Analog zu `Alchemist` + `AH (Alchemist)`.
+
+**Verifikation:** Balazar buildet nach Fix sauber (ok=True, alle Talente/Handicaps/Mächte,
+nur 1 FP-Defizit bei Überleben — Budget-Frage, kein Bug).
+
+## Verbleibende echte Daten-Lücken (2)
+
+| Typ | EN | DE (fehlt) |
+|---|---|---|
+| Handicap | Anemic | Anämisch / Blutarm |
+| Talent/Edge | Banner (Cavalier, Seasoned) | — |
+
+Alle anderen ursprünglich ~15 „fehlenden" Einträge existieren unter anderen deutschen Namen
+(s. Mapping-Tabelle oben).
+
+## Auto-Einträge pro Klassentalent (für SOLL-Dicts)
+
+| Klasse | Auto-Talente | Auto-Handicaps | Machtpunkte |
+|---|---|---|---|
+| Barbar | Berserker, Behände, Kampfrausch | Rüstungsbeschränkung_mittelschwer | 0 |
+| Kämpfer | Kriegerische Anpassungsfähigkeit | — | 0 |
+| Schurke | Hinterhältiger Angriff | Rüstungsbeschränkung_leicht | 0 |
+| Waldläufer | Erzfeind, Bevorzugtes Gelände, Wildnis durchqueren | Rüstungsbeschränkung_mittelschwer | 0 |
+| Mönch | Betäubende Fäuste, Beweglichkeit, Kämpferische Disziplin, Waffenloser Schlag | Rüstungsbeschränkung_jede | 0 |
+| Paladin | Aura der Tapferkeit, Böses Entdecken, Böses Niederstrecken | Ehrenkodex | 0 |
+| Inquisitor | — | Rüstungsbeschränkung_mittelschwer | 0 |
+| Alchemist | AH (Alchemist) | Behindernde Rüstung_leicht | 15 |
+| Kavalier | — | — | 0 |
+| AH (Barde) | Scharfzüngig | Behindernde Rüstung_leicht | 10 |
+| AH (Kleriker) | Gnade, Energie fokussieren | Schwur_schwer | 10 |
+| AH (Magier) | Zauberbücher, Arkane Verbindung, Schule | Behindernde Rüstung_jede | 10 |
+| AH (Druide) | Bindung mit der Natur, Naturgespür | Schwur_schwer, Behindernde Rüstung_leicht | 10 |
+| AH (Zauberer) | Blutlinie | Behindernde Rüstung_jede | 15 |
+| AH (Hexenmeister) | Vertrauter | Behindernde Rüstung_jede | 10 |
+| AH (Orakel) | — | Behindernde Rüstung_mittelschwer | 10 |
+| **Beschwörer** | AH (Beschwörer), Eidolon | Behindernde Rüstung_leicht | 10 |
+
+## Volk-Auto-Einträge
+
+| Volk | Auto-Talente | Auto-Handicaps |
+|---|---|---|
+| Halbling | Glück | Größe -1 (Reduzierte Robustheit) |
+| Gnom | Gnomenmagie | Langsam_leicht, Größe -1 (Reduzierte Robustheit), Zwanghaft |
+| Elf | — | Schlank |
+| Halbork | — | Außenseiter_leicht |
+| Halbelf | — (freies Attribut) | — |
+| Mensch | (freies Talent + Attribut) | — |
+| Zwerg | — | — |

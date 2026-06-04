@@ -1,0 +1,398 @@
+
+============================================================
+BAUE: Kira (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Barbar': ok={'aktion': 'pathfinder_klassentalent(Barbar)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Barbar', 'Berserker', 'Behände', 'Kampfrausch'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+  Volk 'Halbelf': ok={'aktion': 'volk(Halbelf)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 3}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 6): wert=6
+  attribut_auf(Stärke, 8): wert=8
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=8 ROBUSTHEIT=5
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['talente: "Kampfrausch" ZUVIEL', 'talente: "Behände" ZUVIEL', 'talente: "Berserker" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Teller (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Barde': ok={'aktion': 'pathfinder_klassentalent(Barde)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Mensch': ok={'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Talent: Charismatisch
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=4
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=6 BEWEGUNG=6 ROBUSTHEIT=4
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['attribute: Konstitution soll W6, ist W4', 'fertigkeiten: Schießen soll W4, ist FEHLT', 'fertigkeiten: Heimlichkeit soll W6, ist W4', 'talente: "Charismatisch" ZUVIEL', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Empathie" FEHLT', 'maechte: "Verwirrung" FEHLT']
+  BERICHT: anomalien=5
+
+============================================================
+BAUE: Brokar (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Kleriker': ok={'aktion': 'pathfinder_klassentalent(Kleriker)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Zwerg': ok={'aktion': 'volk(Zwerg)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 8}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=6
+  attribut_auf(Konstitution, 8): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=5 ROBUSTHEIT=6
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['handicaps: "Stumm" FEHLT', 'maechte: "Heilung" FEHLT']
+  BERICHT: anomalien=3
+
+============================================================
+BAUE: Zyril (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Kämpfer': ok={'aktion': 'pathfinder_klassentalent(Kämpfer)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Kämpfer', 'Kriegerische Anpassungsfähigkeit'], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Elf': ok={'aktion': 'volk(Elf)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 8}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 6): wert=6
+  attribut_auf(Stärke, 8): wert=8
+  attribut_auf(Konstitution, 8): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=6 BEWEGUNG=6 ROBUSTHEIT=4
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['handicaps: "Schlank" ZUVIEL', 'talente: "Kriegerische Anpassungsfähigkeit" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Korva (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Schurke': ok={'aktion': 'pathfinder_klassentalent(Schurke)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Schurke', 'Hinterhältiger Angriff'], 'handicaps_neu': ['Rüstungsbeschränkung_leicht'], 'maechte_neu': []}
+  Volk 'Mensch': ok={'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Talent: Berechnend
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 8): wert=8
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=4
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=6 ROBUSTHEIT=5
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['talente: "Hinterhältiger Angriff" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Paelie (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Magier': ok={'aktion': 'pathfinder_klassentalent(Magier)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Halbling': ok={'aktion': 'volk(Halbling)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 3}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': ['Glück'], 'handicaps_neu': ['Größe -1 (Reduzierte Robustheit)'], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Freies Talent: Glück
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 8): wert=8
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 4): wert=4
+  attribut_auf(Konstitution, 6): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=5 ROBUSTHEIT=4
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Zaubern soll W8, ist W4', 'handicaps: "Größe -1 (Reduzierte Robustheit)" ZUVIEL', 'maechte: "Geschoss" FEHLT', 'maechte: "Schutz" FEHLT']
+  BERICHT: anomalien=5
+
+============================================================
+BAUE: Fariel (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Druide': ok={'aktion': 'pathfinder_klassentalent(Druide)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Elf': ok={'aktion': 'volk(Elf)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=6
+  attribut_auf(Konstitution, 6): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=6 ROBUSTHEIT=3
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Überleben soll W6, ist FEHLT', 'handicaps: "Schlank" ZUVIEL', 'maechte: "Tierfreund" FEHLT', 'maechte: "Verstricken" FEHLT']
+  BERICHT: anomalien=4
+
+============================================================
+BAUE: Marn (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Waldläufer': ok={'aktion': 'pathfinder_klassentalent(Waldläufer)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Waldläufer', 'Erzfeind', 'Bevorzugtes Gelände', 'Wildnis durchqueren'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+  Volk 'Halbork': ok={'aktion': 'volk(Halbork)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Außenseiter_leicht'], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Freies Talent: Schnell
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 4, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 4): wert=4
+  attribut_auf(Willenskraft, 6): wert=6
+  attribut_auf(Stärke, 8): wert=8
+  attribut_auf(Konstitution, 6): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 1, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Rundumschlag': ok
+  PARADE=6 BEWEGUNG=6 ROBUSTHEIT=6
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['handicaps: "Außenseiter_leicht" ZUVIEL', 'talente: "Wildnis durchqueren" ZUVIEL', 'talente: "Erzfeind" ZUVIEL', 'talente: "Bevorzugtes Gelände" ZUVIEL', 'talente: "Waldläufer" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Gnor (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Zauberer': ok={'aktion': 'pathfinder_klassentalent(Zauberer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Zwerg': ok={'aktion': 'volk(Zwerg)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 8, 'Konstitution': 8}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 8): wert=6
+  attribut_auf(Konstitution, 8): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=5 ROBUSTHEIT=5
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['attribute: Konstitution soll W8, ist W6', 'fertigkeiten: Zaubern soll W8, ist W6', 'handicaps: "Behindernde Rüstung_jede" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT']
+  BERICHT: anomalien=4
+
+============================================================
+BAUE: Madda (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Mönch': ok={'aktion': 'pathfinder_klassentalent(Mönch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Mönch', 'Betäubende Fäuste', 'Beweglichkeit', 'Kämpferische Disziplin', 'Waffenloser Schlag'], 'handicaps_neu': ['Rüstungsbeschränkung_jede'], 'maechte_neu': []}
+  Volk 'Halbork': ok={'aktion': 'volk(Halbork)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Außenseiter_leicht'], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Freies Talent: Raufbold
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 6): wert=6
+  attribut_auf(Stärke, 8): wert=8
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=7 BEWEGUNG=6 ROBUSTHEIT=7
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Heimlichkeit soll W6, ist W4', 'handicaps: "Außenseiter_leicht" ZUVIEL', 'talente: "Beweglichkeit" ZUVIEL', 'talente: "Waffenloser Schlag" ZUVIEL', 'talente: "Kämpferische Disziplin" ZUVIEL', 'talente: "Betäubende Fäuste" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Sil (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Paladin': ok={'aktion': 'pathfinder_klassentalent(Paladin)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Paladin', 'Aura der Tapferkeit', 'Böses Entdecken', 'Böses Niederstrecken'], 'handicaps_neu': ['Ehrenkodex'], 'maechte_neu': []}
+  Volk 'Elf': ok={'aktion': 'volk(Elf)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Freies Talent: Glück
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 8, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 8): wert=8
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=6 ROBUSTHEIT=3
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['handicaps: "Schlank" ZUVIEL', 'talente: "Aura der Tapferkeit" ZUVIEL', 'talente: "Böses Niederstrecken" ZUVIEL', 'talente: "Böses Entdecken" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Darla_ohneKlasse (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Volk 'Mensch': ok={'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Talent: Auserwählter
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 8): wert=8
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=4
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=6 ROBUSTHEIT=5
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['maechte: "Geschoss" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Schutz" FEHLT']
+  BERICHT: anomalien=4
+
+============================================================
+BAUE: Damiel (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Alchemist': ok={'aktion': 'pathfinder_klassentalent(Alchemist)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Alchemist', 'AH (Alchemist)'], 'handicaps_neu': ['Behindernde Rüstung_leicht'], 'maechte_neu': []}
+  Volk 'Elf': ok={'aktion': 'volk(Elf)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Freies Talent: Berechnend
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 8): wert=8
+  attribut_auf(Willenskraft, 6): wert=6
+  attribut_auf(Stärke, 6): wert=6
+  attribut_auf(Konstitution, 6): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  PARADE=6 BEWEGUNG=6 ROBUSTHEIT=3
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  DIFF: ['fertigkeiten: Diebeskunst soll W6, ist FEHLT', 'handicaps: "Schlank" ZUVIEL', 'talente: "AH (Alchemist)" ZUVIEL', 'talente: "Alchemist" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Alain (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Kavallerist': ok={'aktion': 'pathfinder_klassentalent(Kavallerist)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Mensch': ok={'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 8}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 6): wert=6
+  attribut_auf(Stärke, 8): wert=6
+  attribut_auf(Konstitution, 8): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  FERTIGKEIT FEHLT: Schlacht
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=6 BEWEGUNG=6 ROBUSTHEIT=5
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['attribute: Konstitution soll W8, ist W6', 'fertigkeiten: Schlacht soll W4, ist FEHLT']
+  BERICHT: anomalien=3
+
+============================================================
+BAUE: Imrijka (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Inquisitor': ok={'aktion': 'pathfinder_klassentalent(Inquisitor)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': None}
+  Auto-Einträge: {'talente_neu': ['Inquisitor'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+  Volk 'Halbork': ok={'aktion': 'volk(Halbork)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 3}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': ['Außenseiter_leicht'], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Freies Talent: Elan
+  Attribute-SOLL: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 8): wert=8
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=6
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEWEGUNG=6 ROBUSTHEIT=6
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['fertigkeiten: Überleben soll W4, ist FEHLT', 'handicaps: "Rüstungsbeschränkung_mittelschwer" ZUVIEL', 'handicaps: "Außenseiter_leicht" ZUVIEL', 'talente: "Inquisitor" ZUVIEL']
+  BERICHT: anomalien=1
+
+============================================================
+BAUE: Alahazra (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Orakel': ok={'aktion': 'pathfinder_klassentalent(Orakel)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Mensch': ok={'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 3}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 10, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 6): wert=6
+  attribut_auf(Willenskraft, 10): wert=10
+  attribut_auf(Stärke, 6): wert=4
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=4 BEWEGUNG=6 ROBUSTHEIT=4
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['attribute: Konstitution soll W6, ist W4', 'maechte: "Arkanes entdecken/verbergen" FEHLT', 'maechte: "Schutz vor Naturgewalten" FEHLT', 'maechte: "Heilung" FEHLT']
+  BERICHT: anomalien=6
+
+============================================================
+BAUE: Balazar (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Beschwörer': ok={'aktion': 'pathfinder_klassentalent(Beschwörer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Gnom': ok={'aktion': 'volk(Gnom)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': ['Gnomenmagie'], 'handicaps_neu': ['Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft'], 'maechte_neu': []}
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 8): wert=8
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 4): wert=4
+  attribut_auf(Konstitution, 6): wert=6
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 1}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 1}
+  PARADE=5 BEWEGUNG=5 ROBUSTHEIT=4
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 1}
+  DIFF: ['fertigkeiten: Überleben soll W4, ist FEHLT', 'handicaps: "Zwanghaft" ZUVIEL', 'handicaps: "Größe -1 (Reduzierte Robustheit)" ZUVIEL', 'handicaps: "Langsam_leicht" ZUVIEL', 'talente: "Gnomenmagie" ZUVIEL', 'maechte: "Abwehren" FEHLT', 'maechte: "Heilung" FEHLT']
+  BERICHT: anomalien=4
+
+============================================================
+BAUE: Feiya (Setting: Savage Pathfinder)
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klassentalent 'Hexenmeister': ok={'aktion': 'pathfinder_klassentalent(Hexenmeister)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 300, 'warnung': 'Aktion lieferte False/None'}
+  Auto-Einträge: {'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volk 'Mensch': ok={'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 300, 'warnung': None}, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen verfügbar: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Talent: Glück
+  Attribute-SOLL: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  attribut_auf(Geschicklichkeit, 6): wert=6
+  attribut_auf(Verstand, 8): wert=8
+  attribut_auf(Willenskraft, 8): wert=8
+  attribut_auf(Stärke, 6): wert=4
+  attribut_auf(Konstitution, 6): wert=4
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Wachsam': ok
+  PARADE=4 BEWEGUNG=6 ROBUSTHEIT=5
+  End-Punktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  DIFF: ['talente: "Wachsam" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Schutz" FEHLT']
+  BERICHT: anomalien=5
+
+============================================================
+ZUSAMMENFASSUNG
+============================================================
+  Kira                      | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0}
+  Teller                    | OK              | anomalien=5 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0}
+  Brokar                    | OK              | anomalien=3 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0}
+  Zyril                     | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Korva                     | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Paelie                    | OK              | anomalien=5 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0}
+  Fariel                    | OK              | anomalien=4 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Marn                      | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Gnor                      | OK              | anomalien=4 | punkte={'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 2, 'aufstiege': 0}
+  Madda                     | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Sil                       | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Darla_ohneKlasse          | OK              | anomalien=4 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Damiel                    | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0}
+  Alain                     | OK              | anomalien=3 | punkte={'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
+  Imrijka                   | OK              | anomalien=1 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0}
+  Alahazra                  | OK              | anomalien=6 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0}
+  Balazar                   | OK              | anomalien=4 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 2, 'aufstiege': 0}
+  Feiya                     | OK              | anomalien=5 | punkte={'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
+
+FEHLENDE DEUTSCHE KEYS IM SAVAGE PATHFINDER SETTING:
+=====================================================
+Klassentalente: Barde, Kleriker, Druide, Orakel, Zauberer als Standalone-Edges (existieren nur als AH)
+  Kavallerist (Cavalier) - fehlt komplett
+Handicaps: Überheblich (Overconfident), Armut (Poverty), Geizig, Anämisch (Anemic),
+  Rücksichtslos (Ruthless), Grimmig (Mean), Eigenart (Quirk), Blutdurst (Bloodthirsty),
+  Stotterer/Sprachfehler (Tongue-tied)
+Talente: Attentäter (Assassin), Kanalisierung (Channeling), Extraktion (Extraction),
+  Traditionswaffe (Trademark Weapon) - exists as "Lieblingswaffe"? No, that's Favorite Weapon,
+  Heldenmut inspirieren (Inspire Heroism), Banner, Tödlicher Schlag (Deadly Blow),
+  Mächtiger Schlag (Powerful Blow? No, exists as Kraftvoller Schlag)
+

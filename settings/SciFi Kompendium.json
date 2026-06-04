@@ -9487,6 +9487,24 @@
       "kosten": 50,
       "beschreibung": "Subminiatur-Sender. Reichweite 100 Meilen, einseitig.",
       "aktiv": true
+    },
+    "Wandelkleidung": {
+      "name": "Wandelkleidung",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 250,
+      "beschreibung": "Smarte Kleidung, die auf Befehl Farbe, Schnitt und Aussehen ändert (+2 auf Verkleiden / sich unauffällig anpassen).",
+      "aktiv": true
+    },
+    "Linienprojektor": {
+      "name": "Linienprojektor",
+      "kategorie": "Ausrüstung",
+      "setting": "scifi",
+      "gewicht": 0.5,
+      "kosten": 250,
+      "beschreibung": "Projiziert ein feines Aerosol-/Laserliniengitter und macht Bewegungssensoren und Stolperdrähte sichtbar (+2 Wahrnehmung zum Erkennen von Sicherheitssystemen).",
+      "aktiv": true
     }
   },
   "cyberware_nebenwirkungen": {

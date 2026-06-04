@@ -1,0 +1,8 @@
+Klasse: ok=True
+HC Impulsiv: ok=True, HP=2
+HC Kränklich: ok=True, HP=3
+HC Dünnhäutig_leicht: ok=True, HP=4
+DIFF: ['fertigkeiten: Schießen soll W4, ist FEHLT', 'fertigkeiten: Heimlichkeit soll W6, ist W4']
+PUNKTE: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+DONE: anomalien=1

@@ -1908,14 +1908,61 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
+        "Beschwörer": {
+            "name": "Beschwörer",
+            "kategorie": "Klasse",
+            "rang": "A",
+            "voraussetzungen": [
+                "VER W6",
+                "Okkultismus W6"
+            ],
+            "beschreibung": "AH (Beschwörer) [Arkane Fertigkeit: Zaubern (Verstand)], Behindernde Rüstung (leicht), Eidolon (mächtiger Begleiter von einer anderen Existenzebene)",
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "auto_talente": [
+                "AH (Beschwörer)",
+                "Eidolon"
+            ],
+            "auto_handicaps": [
+                "Behindernde Rüstung_leicht"
+            ]
+        },
         "AH (Beschwörer)": {
             "name": "AH (Beschwörer)",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
             "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-            "neue_maechte": 5,
-            "machtpunkte": 15,
+            "neue_maechte": 3,
+            "machtpunkte": 10,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Eidolon": {
+            "name": "Eidolon",
+            "kategorie": "Beschwörer",
+            "rang": "A",
+            "voraussetzungen": [
+                "Beschwörer"
+            ],
+            "beschreibung": "Der Beschwörer kann ein mächtiges Wesen (Eidolon) von einer anderen Existenzebene herbeirufen. Das Eidolon bleibt bis zur Kampfunfähigkeit oder Entlassung. Es kann per Ritual (1 Min) oder mit Macht Tier beschwören (5 MP) gerufen werden.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Banner": {
+            "name": "Banner",
+            "kategorie": "Kavalier",
+            "rang": "F",
+            "voraussetzungen": [
+                "Kavalier"
+            ],
+            "beschreibung": "Solange das Banner des Kavaliers sichtbar ist (gehalten oder in den Boden gerammt), erhalten alle Verbündeten in 10\" (20 m) Umkreis eine freie Wiederholung auf Furchtproben und dürfen einmal pro Runde ihren Sprintwurf wiederholen. Als begrenzte Aktion kann der Kavalier sein Banner schwenken und die Zustände Abgelenkt und Verwundbar von allen Verbündeten in Reichweite entfernen.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
             "ausgewaehlt": false,
             "aktiv": true
         },
