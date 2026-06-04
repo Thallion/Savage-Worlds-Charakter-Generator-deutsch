@@ -142,10 +142,12 @@ try:
     m(f"  DIFF: {diff['abweichungen']}")
     for name, anz in [('Dolch',1),('Blasrohr',1),('Totschläger',1),('Ledertunika',1),
                       ('Umhang mit Kapuze',1),('Bandolier',1),('Diebespaket',1),
-                      ('Blasrohrpfeile (20)',1)]:
+                      ('Blasrohrpfeile (20)',1),
+                      ('Riesenschlangengift',1),('Mörderbräu',1),('Äther',1),
+                      ('Lotusstaub',1),('Grüner Schleimextrakt',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
-    s.notiz('FEHLENDE AUSRÜSTUNG: Gifte (Schlangengift, Assassinengebräu, Äther, Lotusstaub, Grünschleimextrakt)')
+    s.notiz('Gifte ergänzt 2026-06-04 (Riesenschlangengift, Mörderbräu, Äther, Lotusstaub, Grüner Schleimextrakt) — neu im FK-Katalog')
     s.speichern('chars/Archetypen/Archetyp_Fantasy_Kompendium_Assassinin_A.json')
     b = s.bericht('logs/fk_assassinin3_bericht.json')
     m(f"  ASSASSININ: anomalien={b['anomalien_anzahl']}")

@@ -548,6 +548,71 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Säureflaschex1)",
+      "ok": true,
+      "kosten": 10.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 347.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Donnersteinx1)",
+      "ok": true,
+      "kosten": 30.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 317.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Zündholzx1)",
+      "ok": true,
+      "kosten": 1.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 316.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Verstrickungsbeutelx1)",
+      "ok": true,
+      "kosten": 50.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 266.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Rauchstabx1)",
+      "ok": true,
+      "kosten": 20.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 246.5,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Alchemist_A.json)",
       "ok": true
     }
@@ -560,7 +625,7 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 357.5
+      "vermoegen": 246.5
     },
     {
       "aktion": "NOTIZ: Halbelf Mensch-Erbe: freies Talent = AH(Alchemist). Außenseiter aus Racial. AH(Alchemist) auto: Materialkomponenten. 4 HP (Impulsiv+Hässlich_schwer): 2 für Konstitution-Raise, 2 für Berechnend.",
@@ -569,7 +634,7 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 357.5
+      "vermoegen": 246.5
     }
   ],
   "anomalien_anzahl": 2,
@@ -684,7 +749,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 20,
-    "vermoegen": 357.5,
+    "vermoegen": 246.5,
     "rang": "Fortgeschritten",
     "volk": "Halbelf"
   }

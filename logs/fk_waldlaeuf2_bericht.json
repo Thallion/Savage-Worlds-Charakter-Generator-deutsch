@@ -470,6 +470,58 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Beschleunigung zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Brandpfeile (20)x1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Brandpfeile (20) zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Kettenhemdx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kettenhemd zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Waldlaeuf_A.json)",
       "ok": true
     }
@@ -498,6 +550,58 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Beschleunigung zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Brandpfeile (20)x1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Brandpfeile (20) zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Kettenhemdx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Kettenhemd zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Verstärkte Lederrüstung (als Ledertunika)",
       "ok": true,
       "warnung": "FEHLENDE AUSRÜSTUNG: Verstärkte Lederrüstung (als Ledertunika)",
@@ -507,7 +611,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

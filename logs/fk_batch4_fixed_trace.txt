@@ -27,7 +27,7 @@
   → 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   DIFF: []
-  Vermögen nach Kauf: 191.75
+  Vermögen nach Kauf: 190.75
   SCHAMANE: anomalien=2
 
 === 22. MEISTER DES WISSENS ===

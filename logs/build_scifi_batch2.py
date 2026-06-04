@@ -54,7 +54,7 @@ try:
     for t in ['Beziehungen','Berühmt','Rampensau','Täuscher']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Kevlarweste',1),('Springmesser',1),
+    for item in [('Kevlarjacke & Jeans',1),('Springmesser',1),
                  ('Persönliche Datenassistenz',1),('Kleidung, formell',1),
                  ('Drohne, Kommerziell',1),('Persönliche Datenassistenz',1)]:
         s.kaufen(*item)
@@ -98,7 +98,7 @@ try:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for item in [('Körperpanzerung +4',1),('Molekularschwert',1),('Commlink',1),('Persönliche Datenassistenz',1),
-                 ('Persönliche Datenassistenz',1)]:
+                 ('Doppelflinte',1)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Adrenalindrüse',1),('Cyberware: Verbesserte Sicht',1)]:
         s.kaufen(*cw)
@@ -139,7 +139,7 @@ try:
     s.notiz('ADVANCE: Cyber Installs – kein Talent-Key, via Ausrüstung modelliert')
     s.notiz('ANCESTRY: Dämmerungssicht ergänzt (Vorlage Fantasy Aquarianer/Elf, Halbiert Düstere-Beleuchtungs-Abzüge)')
     for item in [('Körperpanzerung +4',1),('Plasmapistole',1),('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
-                 ('Persönliche Datenassistenz',1),('Werkzeugkoffer',1),('Batterie, Universal-',1)]:
+                 ('Persönliche Datenassistenz',1),('Werkzeugkoffer',1),('Batterie, Universal-',1),('Schutzbrille',1)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Ersatzgliedmaße',1),('Cyberware: Klauen',1)]:
         s.kaufen(*cw)
@@ -234,7 +234,7 @@ try:
         r = s.macht(macht, ignore_rang_check=True)
         m(f"  Macht {macht}: ok={ok_check(r)}")
     for item in [('Laserpistole',1),('Nanowear',1),('Commlink',1),('Persönliche Datenassistenz',1),
-                 ('Persönliche Datenassistenz',1)]:
+                 ('Dietriche',1)]:
         s.kaufen(*item)
     s.notiz('Alle Bogen-Items vorhanden (Laserpistole, Nanowear ergänzt 2026-06-01); Elektronisches Schloss (electronic lockpick) fehlt im deutschen Setting')
     s.speichern('chars/Archetypen/Archetyp_SciFi_Kompendium_Morpher_A.json')

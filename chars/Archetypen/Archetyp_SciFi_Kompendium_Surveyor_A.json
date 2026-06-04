@@ -550,6 +550,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Axt, Handbeil": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -599,10 +604,12 @@
         "Waffensperre",
         "Medi-Gel",
         "Scanner",
-        "Tarnanzug"
+        "Tarnanzug",
+        "Axt, Handbeil"
     ],
     "selected_waffen": [
-        "Laserpistole"
+        "Laserpistole",
+        "Axt, Handbeil"
     ],
     "selected_ruestungen": [
         "Körperpanzerung +4",
@@ -618,7 +625,8 @@
         "Waffensperre": 1,
         "Medi-Gel": 2,
         "Scanner": 1,
-        "Tarnanzug": 1
+        "Tarnanzug": 1,
+        "Axt, Handbeil": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,

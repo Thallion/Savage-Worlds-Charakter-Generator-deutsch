@@ -522,6 +522,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Tarnanzug zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Axt, Handbeilx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Axt, Handbeil zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_SciFi_Kompendium_Surveyor_A.json)",
       "ok": true
     }
@@ -593,6 +606,19 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Tarnanzug zum Preis 0 gekauft"
     },
     {
+      "aktion": "kaufen(Axt, Handbeilx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Axt, Handbeil zum Preis 0 gekauft"
+    },
+    {
       "aktion": "NOTIZ: MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative",
       "ok": true,
       "warnung": "MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative",
@@ -611,7 +637,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 7,
+  "anomalien_anzahl": 8,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

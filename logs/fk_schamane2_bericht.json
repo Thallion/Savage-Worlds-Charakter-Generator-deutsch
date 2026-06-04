@@ -522,6 +522,19 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Kreide (Schachtel mit 12 Stück)x1)",
+      "ok": true,
+      "kosten": 1.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 190.75,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Schamane_A.json)",
       "ok": true
     }
@@ -543,7 +556,7 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 191.75
+      "vermoegen": 190.75
     }
   ],
   "anomalien_anzahl": 2,
@@ -665,7 +678,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 10,
-    "vermoegen": 191.75,
+    "vermoegen": 190.75,
     "rang": "Fortgeschritten",
     "volk": "Mensch"
   }

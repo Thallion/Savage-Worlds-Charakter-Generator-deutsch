@@ -18,7 +18,7 @@
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 1.0, 'vermoegen': 500, 'machtpunkte': 0}
   DIFF: []
   Vermögen nach Kauf: 0
-  WALDLÄUFER: anomalien=3
+  WALDLÄUFER: anomalien=7
 
 === 9. DIEBIN ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}

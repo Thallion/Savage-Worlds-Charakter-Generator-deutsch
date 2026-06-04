@@ -379,16 +379,16 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Kevlarwestex1)",
+      "aktion": "kaufen(Kevlarjacke & Jeansx1)",
       "ok": true,
-      "kosten": 200,
+      "kosten": 100,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 300,
+      "vermoegen": 400,
       "warnung": null
     },
     {
@@ -401,13 +401,13 @@
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 290,
+      "vermoegen": 390,
       "warnung": null
     },
     {
       "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 290,
+      "kosten": 390,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
@@ -465,7 +465,7 @@
     {
       "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 290,
+      "kosten": 390,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,

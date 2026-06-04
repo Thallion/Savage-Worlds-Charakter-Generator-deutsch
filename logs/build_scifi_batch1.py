@@ -162,7 +162,7 @@ try:
     for item in [('Körperpanzerung +4',1),('Batterie, Universal-',1),
                  ('Rucksack',1),('Taschenlampe (10\" Strahl)',1),
                  ('Laserpistole',1),('Waffensperre',1),('Medi-Gel',2),('Scanner',1),
-                 ('Tarnanzug',1)]:
+                 ('Tarnanzug',1),('Axt, Handbeil',1)]:
         s.kaufen(*item)
     s.notiz('MISSING: Handbeil (kein SciFi-Item im deutschen Setting); Environment Wear → Tarnanzug als Alternative')
     s.notiz('Doppelkosten-Fix: Verstand d8 in CharGen -> Wahrnehmung d8 einfach; Stärke d4->d6 via Advance behebt frühere Abweichung')
@@ -245,7 +245,7 @@ try:
     for t in ['Gelehrter','Ermittler','Hackerman/-woman','Kühler Kopf']:
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
-    for item in [('Kevlarweste',1),('Rucksack',1),('Universalübersetzer',1),('Persönliche Datenassistenz',1),
+    for item in [('Kevlarjacke & Jeans',1),('Schutzbrille',1),('Rucksack',1),('Universalübersetzer',1),('Persönliche Datenassistenz',1),
                  ('Cyberdeck',1),('Commlink',1)]:
         s.kaufen(*item)
     s.notiz('MISSING: Alter Wear, Schutzbrille (beide kein SciFi-Item im deutschen Setting)')
@@ -293,7 +293,8 @@ try:
     for item in [('Körperpanzerung +4',1),('Molekularschwert',2),('Tarnanzug',1),
                  ('Persönliche Datenassistenz',1),('Universalübersetzer',1),
                  ('Cyberdeck',1),('Direktionales Mikrofon',1),('Kreislaufatemgerät',1),
-                 ('Betäubungsschlagstock',1),('EMP-Granate',4)]:
+                 ('Betäubungsschlagstock',1),('Betäubungsgranate',4),
+                 ('Dietriche',1),('Schweißbrenner',1)]:
         s.kaufen(*item)
     for cw in [('Cyberware: Verborgenes Fach',1),('Cyberware: Verborgenes Fach',1)]:
         s.kaufen(*cw)

@@ -519,6 +519,21 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Beriemter Panzerhandschuh": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rüstungsstacheln": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -574,7 +589,10 @@
         "Schwere Armbrust",
         "Großer Schild",
         "Bolzen (10)",
-        "Gewölbeforscherpaket"
+        "Gewölbeforscherpaket",
+        "Trank: Heilung",
+        "Beriemter Panzerhandschuh",
+        "Rüstungsstacheln"
     ],
     "selected_waffen": [
         "Bastardschwert",
@@ -589,14 +607,16 @@
         "Schwere Armbrust": 1,
         "Großer Schild": 1,
         "Bolzen (10)": 2,
-        "Gewölbeforscherpaket": 1
+        "Gewölbeforscherpaket": 1,
+        "Trank: Heilung": 1,
+        "Beriemter Panzerhandschuh": 1,
+        "Rüstungsstacheln": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -604,7 +624,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 343,
+    "vermoegen": 85,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

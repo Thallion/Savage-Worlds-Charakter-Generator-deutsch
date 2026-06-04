@@ -78,7 +78,7 @@ try:
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
     for name, anz in [('Stab (3,5 m)',1),('Dolch',8),('Peitsche',1),('Ledertunika',1),('Bandolier',1),('Diebespaket',1),('Rauchstab',1),('Krähenfüße',1),
-                       ('Trank: Beschleunigung',1),('Trank: Heilung',1),('Trank: Geistige Stärke',1)]:
+                       ('Trank: Beschleunigung',1),('Trank: Heilung',1),('Trank: Geistige Stärke',1),('Trank: Attributsteigerung',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Trank Wandkrabbler (nicht im FK-Katalog)')
@@ -367,7 +367,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Bastardschwert',1),('Schwere Armbrust',1),('Großer Schild',1),('Bolzen (10)',2),('Gewölbeforscherpaket',1)]:
+    for name, anz in [('Bastardschwert',1),('Schwere Armbrust',1),('Großer Schild',1),('Bolzen (10)',2),('Gewölbeforscherpaket',1),('Trank: Heilung',1),('Beriemter Panzerhandschuh',1),('Rüstungsstacheln',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: keine (Stachelpanzer und gesperrte Handschuhe im Katalog nicht verfügbar)')

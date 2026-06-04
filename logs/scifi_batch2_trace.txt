@@ -22,7 +22,7 @@ Mercenary FERTIG anomalien=7
   Advance Schläger: ok=True
   Advance Reparaturgenie: ok=True
   Advance Rohling: ok=True
-Roughneck FERTIG anomalien=11
+Roughneck FERTIG anomalien=12
   Floraner Talente: ['Zäh wie Leder']
   Talent: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}

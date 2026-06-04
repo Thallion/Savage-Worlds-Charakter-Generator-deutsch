@@ -342,12 +342,12 @@
     {
       "aktion": "talent(Sehr Attraktiv)",
       "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
+      "kosten": 0,
+      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -360,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -373,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -386,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -399,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -412,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -425,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 350,
       "warnung": null
@@ -438,46 +438,46 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 348,
       "warnung": null
     },
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 348,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Beschleunigung zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
@@ -490,39 +490,39 @@
   "anomalien": [
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 348,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Beschleunigung zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Heilung zum Preis 0 gekauft"
@@ -629,13 +629,13 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
+      "handicap": 2,
       "handicap_gesamt": 4,
-      "aufstiege": 1
+      "aufstiege": 0
     },
     "machtpunkte": 10,
     "vermoegen": 0,
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "volk": "Mensch"
   }
 }

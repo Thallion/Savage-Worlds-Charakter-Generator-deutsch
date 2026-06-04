@@ -457,6 +457,71 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Riesenschlangengiftx1)",
+      "ok": true,
+      "kosten": 400.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 2.5,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Mörderbräux1) FORCE",
+      "ok": true,
+      "kosten": 2.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Mörderbräu zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Ätherx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Äther zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Lotusstaubx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Lotusstaub zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Grüner Schleimextraktx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Grüner Schleimextrakt zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Assassinin_A.json)",
       "ok": true
     }
@@ -481,16 +546,68 @@
       "vermoegen": 500
     },
     {
-      "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Gifte (Schlangengift, Assassinengebräu, Äther, Lotusstaub, Grünschleimextrakt)",
+      "aktion": "kaufen(Mörderbräux1) FORCE",
       "ok": true,
-      "warnung": "FEHLENDE AUSRÜSTUNG: Gifte (Schlangengift, Assassinengebräu, Äther, Lotusstaub, Grünschleimextrakt)",
+      "kosten": 2.5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Mörderbräu zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Ätherx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Äther zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Lotusstaubx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Lotusstaub zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Grüner Schleimextraktx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Grüner Schleimextrakt zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "NOTIZ: Gifte ergänzt 2026-06-04 (Riesenschlangengift, Mörderbräu, Äther, Lotusstaub, Grüner Schleimextrakt) — neu im FK-Katalog",
+      "ok": true,
+      "warnung": "Gifte ergänzt 2026-06-04 (Riesenschlangengift, Mörderbräu, Äther, Lotusstaub, Grüner Schleimextrakt) — neu im FK-Katalog",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 402.5
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 3,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -594,7 +711,7 @@
       "aufstiege": 0.5
     },
     "machtpunkte": 15,
-    "vermoegen": 402.5,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Gestaltwandler"
   }

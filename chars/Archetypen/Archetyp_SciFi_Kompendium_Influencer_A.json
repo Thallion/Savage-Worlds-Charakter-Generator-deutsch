@@ -512,7 +512,7 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kevlarweste": {
+            "Kevlarjacke & Jeans": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -578,7 +578,7 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kevlarweste",
+        "Kevlarjacke & Jeans",
         "Springmesser",
         "Persönliche Datenassistenz",
         "Kleidung, formell",
@@ -588,11 +588,11 @@
         "Springmesser"
     ],
     "selected_ruestungen": [
-        "Kevlarweste"
+        "Kevlarjacke & Jeans"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kevlarweste": 1,
+        "Kevlarjacke & Jeans": 1,
         "Springmesser": 1,
         "Persönliche Datenassistenz": 2,
         "Kleidung, formell": 1,

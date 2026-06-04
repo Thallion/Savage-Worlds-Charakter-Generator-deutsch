@@ -505,7 +505,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "1baa771d-7600-4c9a-885d-e6a48fd247a6": {
+            "cdd0f6fe-987b-4efe-930e-12c770483ddc": {
                 "name": "Cyberware: Ersatzgliedmaße",
                 "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
                 "unterkategorie": "Körper",
@@ -518,11 +518,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "1baa771d-7600-4c9a-885d-e6a48fd247a6",
+                "installations_id": "cdd0f6fe-987b-4efe-930e-12c770483ddc",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "4cdd42bb-276e-46e5-9edb-83dbbcf364dd": {
+            "9a92fa73-07a0-4ae4-a021-5983def21a93": {
                 "name": "Cyberware: Klauen",
                 "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
                 "unterkategorie": "Offensiv",
@@ -536,7 +536,7 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "4cdd42bb-276e-46e5-9edb-83dbbcf364dd",
+                "installations_id": "9a92fa73-07a0-4ae4-a021-5983def21a93",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
@@ -573,6 +573,11 @@
                 "zustand": "neu"
             },
             "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schutzbrille": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -637,6 +642,7 @@
         "Persönliche Datenassistenz",
         "Werkzeugkoffer",
         "Batterie, Universal-",
+        "Schutzbrille",
         "Cyberware: Ersatzgliedmaße",
         "Cyberware: Klauen"
     ],
@@ -655,6 +661,7 @@
         "Persönliche Datenassistenz": 1,
         "Werkzeugkoffer": 1,
         "Batterie, Universal-": 1,
+        "Schutzbrille": 1,
         "Cyberware: Ersatzgliedmaße": 1,
         "Cyberware: Klauen": 1
     },

@@ -540,6 +540,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Beschleunigung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -599,7 +609,9 @@
         "Mittlerer Schild",
         "Schwerer geschlossener Helm",
         "Söldnerpaket",
-        "Stiefel, schwer"
+        "Stiefel, schwer",
+        "Trank: Heilung",
+        "Trank: Beschleunigung"
     ],
     "selected_waffen": [
         "Morgenstern",
@@ -619,14 +631,15 @@
         "Mittlerer Schild": 1,
         "Schwerer geschlossener Helm": 1,
         "Söldnerpaket": 1,
-        "Stiefel, schwer": 1
+        "Stiefel, schwer": 1,
+        "Trank: Heilung": 3,
+        "Trank: Beschleunigung": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,

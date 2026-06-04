@@ -564,6 +564,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Dietriche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -615,7 +620,8 @@
         "Laserpistole",
         "Nanowear",
         "Commlink",
-        "Persönliche Datenassistenz"
+        "Persönliche Datenassistenz",
+        "Dietriche"
     ],
     "selected_waffen": [
         "Laserpistole"
@@ -626,7 +632,8 @@
         "Laserpistole": 1,
         "Nanowear": 1,
         "Commlink": 1,
-        "Persönliche Datenassistenz": 2
+        "Persönliche Datenassistenz": 1,
+        "Dietriche": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,

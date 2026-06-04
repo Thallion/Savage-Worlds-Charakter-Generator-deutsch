@@ -240,7 +240,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Stab (3,5 m)',1),('Dolch',1),('Ledertunika',1),('Wildnispaket',1)]:
+    for name, anz in [('Stab (3,5 m)',1),('Dolch',1),('Ledertunika',1),('Wildnispaket',1),('Kreide (Schachtel mit 12 Stück)',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Kreidestaub der Geisterbann (Kreide als Ersatz), 5 GM Restgeld')

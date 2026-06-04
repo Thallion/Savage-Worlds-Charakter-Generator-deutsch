@@ -379,6 +379,45 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Trank: Heilungx1)",
+      "ok": true,
+      "kosten": 200,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 143,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Beriemter Panzerhandschuhx1)",
+      "ok": true,
+      "kosten": 8,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 135,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Rüstungsstachelnx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 85,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Verteidiger_A.json)",
       "ok": true
     }
@@ -400,7 +439,7 @@
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 343
+      "vermoegen": 85
     }
   ],
   "anomalien_anzahl": 2,
@@ -502,7 +541,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 343,
+    "vermoegen": 85,
     "rang": "Fortgeschritten",
     "volk": "Golem"
   }

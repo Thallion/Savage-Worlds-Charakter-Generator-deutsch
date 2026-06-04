@@ -1857,3 +1857,78 @@ Molekularmesser, Meteorhammer, Keule schwer) bzw. als **KATALOG** wo wirklich ke
 `FEHLT_KATALOG` 165 → 169 (die 4 Zuwächse sind die nun korrekt als echte Lücke erkannten Items —
 keine legitimen Treffer gebrochen, von Stichproben bestätigt). PDF-Report `fehlende_ausruestung_pdf.md`
 84 → 87 Funde (gleicher Effekt: genauere Katalog-Lücken).
+
+## Alias-Brücken: „fehlende" Items existieren meist schon — ✅ 2026-06-04
+
+Prüfung gegen die neu unter `logs/pdf_extracted/` abgelegten Regelwerk-/Kompendium-Texte ergab:
+**Der Großteil der angeblich fehlenden Ausrüstung existiert bereits im Katalog unter deutschem
+Namen** — es war eine **Alias-/Matching-Lücke**, keine Katalog-Lücke.
+
+**Zwei Normalisierungs-Fixes + große Alias-Erweiterung:**
+- Typografische **Apostrophe** (`’`→`'`) in `normalize_item` + `find_item_in_catalog` → bridget
+  `cleric's pack`→Klerikerpaket, `thief's pack`→Diebespaket usw.
+- **Zahlwörter** (`two/three/…`) am Item-Anfang werden gestrippt (`two potions of healing`).
+- **~90 EN→DE-Alias-Brücken** zu vorhandenen Katalog-Keys ergänzt (`check_fehlende_ausruestung.py`):
+  `acid flask`→Säureflasche, `thunderstone`→Donnerstein, `tindertwig`→Zündholz,
+  `tanglefoot bag`→Verstrickungsbeutel, `smokestick`→Rauchstab, `flail`→Streitflegel,
+  `composite bow`→Kompositbogen, `scroll of X`→Schriftrolle: X, `cutting torch`→Schweißbrenner,
+  `hand axe`→Axt Handbeil/Handaxt, `rebreather`→Kreislaufatemgerät, `switchblade`→Springmesser, …
+
+**Wirkung (FEHLT_KATALOG, per-occurrence):** 228 (roh) → 169 → 160 (Apostrophe) → **41**
+(Alias-Brücken). Distinkte **echte** Katalog-Lücke: **FK ~22, SciFi 4**.
+
+### Dabei aufgedeckt: 18 neue Kategorie-1-Items (im Katalog, kaufbar, noch nicht im Build)
+
+Durch die Brücken lösen sich Bogen-Items jetzt auf vorhandene Katalog-Keys auf, die der Char
+**nicht** gekauft hat → echte Nachrüst-Chancen:
+- **FK (11):** Brandpfeile (20), Donnerstein, Kreide, Rauchstab, Säureflasche, Verstrickungsbeutel,
+  Zündholz, Trank: Heilung, Trank: Beschleunigung, Trank: Attributsteigerung, Hemd aus natürl. Rüstung
+- **SciFi (7):** Axt Handbeil, Betäubungsgranate, Dietriche, Doppelflinte, Kevlarjacke & Jeans,
+  Schutzbrille, Schweißbrenner
+
+### Verbleibende ECHTE Katalog-Lücke (Kategorie 2, ~26 distinkt)
+
+- **FK (~22):** adventurer's lantern, armor spikes, assassin's brew, bag of holding,
+  cloak of protection, ether, giant snake poison, goggles, grave dust, green slime extract,
+  hex bag, locked gauntlets, lotus dust, potion of darksight/growth/invisibility/recharge/
+  wall walking, scale shirt, studded leather armor, sunrod, war horse w/ padded barding.
+  → Die meisten FK-**Tränke/Gifte** sind im Regelwerk **Zufallstabellen** (Tabelle G „Zaubertrank",
+  Tabelle H „Magische Schriftrolle", S. 138), also **bewusst generisch** — keine Einzel-Items.
+  Echte einzeln-katalogisierbare Kandidaten: studded leather armor, scale shirt, bag of holding,
+  goggles, sunrod, armor spikes, locked gauntlets.
+- **SciFi (4):** alter wear, line projector, muscle weave, slugthrower (= dokumentierte Phase-C-Reste).
+
+## Phase 1: Reale Items aus Regelwerk extrahiert + angelegt — ✅ 2026-06-04
+
+Quelle: `logs/pdf_extracted/Fantasy_Kompendium_Text.txt` (Tabellen GIFTE S. 53 +
+RÜSTUNGSAUFWERTUNGEN S. 55). **7 neue Items in `settings/Fantasy Kompendium.json`** (244 → 251):
+
+| Item (neu) | Bogen (EN) | Kosten | Quelle |
+|---|---|---|---|
+| Mörderbräu | assassin's brew | 250 | Gifte-Tab. |
+| Äther | ether | 300 | Gifte-Tab. |
+| Lotusstaub | lotus dust | 225 | Gifte-Tab. |
+| Grüner Schleimextrakt | green slime extract | 200 | Gifte-Tab. |
+| Riesenschlangengift | giant snake poison | 400 | Gifte-Tab. |
+| Beriemter Panzerhandschuh | locked gauntlets | 8 | Rüstungsaufw. |
+| Rüstungsstacheln | armor spikes | 50 | Rüstungsaufw. |
+
++ Alias-Brücken zu vorhandenen Items (Kategorien): `studded leather`→Ledertunika (+2),
+`scale shirt`→Kettenhemd (+3), `tunic and heavy hooded cloak`→Tunika.
+
+**Equipped:** Assassinin (5 Gifte), Verteidiger (Panzerhandschuh + Rüstungsstacheln),
+Waldläufer (Kettenhemd = scale shirt). Builds neu gebaut, **OFFEN = 0** (deterministisch).
+
+### Nicht extrahierbar (echte Rest-Lücke, 16 distinkt) — kein deutsches Regelwerk-Vorbild
+- **FK (12):** bag of holding, cloak of protection, sunrod, goggles, grave dust, hex bag,
+  war horse w/ padded barding (FK-Katalog hat **keine Reittiere** — eigene Kategorie),
+  potion of darksight/growth/invisibility/recharge/wall walking
+  (FK modelliert Tränke als **Zufallstabelle G** „Zaubertrank" — bewusst generisch, keine
+  Einzel-Items).
+- **SciFi (4):** alter wear, line projector, muscle weave, slugthrower (englische SFC-Karten-
+  Items ohne Eintrag im deutschen SciFi-Kompendium-Text).
+→ Diese müssten **manuell übersetzt/erfunden** werden (kein Extrakt möglich); bewusst offen gelassen.
+
+### Gesamt-Verlauf FEHLT_KATALOG (per-occurrence)
+228 (roh) → 169 (Stat-Block-Norm.) → 160 (Apostrophe) → 41 (Alias-Brücken) → 29 (7 neue Items).
+Echte distinkte Lücke: **16** (alle nicht aus dem Regelwerk extrahierbar).

@@ -471,7 +471,7 @@
     },
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 372.25,
       "kostenart": "Vermögen",
       "punkte": {
@@ -484,7 +484,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -497,7 +497,7 @@
     },
     {
       "aktion": "kaufen(Trank: Geistige Stärkex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -507,6 +507,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Geistige Stärke zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Fantasy_Kompendium_Akrobatin_A.json)",
@@ -516,7 +529,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Trank: Beschleunigungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 372.25,
       "kostenart": "Vermögen",
       "punkte": {
@@ -529,7 +542,7 @@
     },
     {
       "aktion": "kaufen(Trank: Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -542,7 +555,7 @@
     },
     {
       "aktion": "kaufen(Trank: Geistige Stärkex1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -552,6 +565,19 @@
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Geistige Stärke zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Trank: Attributsteigerungx1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: Attributsteigerung zum Preis 0 gekauft"
     },
     {
       "aktion": "NOTIZ: FEHLENDE AUSRÜSTUNG: Trank Wandkrabbler (nicht im FK-Katalog)",
@@ -563,7 +589,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

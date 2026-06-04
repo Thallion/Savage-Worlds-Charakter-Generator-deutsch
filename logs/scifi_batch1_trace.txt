@@ -27,7 +27,7 @@ Psyker FERTIG anomalien=6
   Advance Naturwissenschaften d4: ok=True
   Advance Naturbursche: ok=True
   Advance Kühler Kopf: ok=True
-Surveyor FERTIG anomalien=7
+Surveyor FERTIG anomalien=8
   Talent+Mächte: HC=4 maechte=['Betäuben', 'Empathie', 'Gedankenlesen', 'Linderung', 'Verwirrung']
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 10}
@@ -52,4 +52,4 @@ Hacker FERTIG anomalien=4
   Advance Beidhändiger Kampf: ok=True
   Advance Schnell: ok=True
   Advance Ausweichen: ok=True
-Infiltrator FERTIG anomalien=13
+Infiltrator FERTIG anomalien=15

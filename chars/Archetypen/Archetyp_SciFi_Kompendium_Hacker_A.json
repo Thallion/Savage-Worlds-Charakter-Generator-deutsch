@@ -512,7 +512,12 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kevlarweste": {
+            "Kevlarjacke & Jeans": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schutzbrille": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -583,7 +588,8 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kevlarweste",
+        "Kevlarjacke & Jeans",
+        "Schutzbrille",
         "Rucksack",
         "Universalübersetzer",
         "Persönliche Datenassistenz",
@@ -592,11 +598,12 @@
     ],
     "selected_waffen": [],
     "selected_ruestungen": [
-        "Kevlarweste"
+        "Kevlarjacke & Jeans"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kevlarweste": 1,
+        "Kevlarjacke & Jeans": 1,
+        "Schutzbrille": 1,
         "Rucksack": 1,
         "Universalübersetzer": 1,
         "Persönliche Datenassistenz": 1,

@@ -172,7 +172,7 @@ def wb_contains(needle, hay):
 
 def find_item_in_catalog(item_text, catalog_keys):
     """Versucht item_text im Katalog zu finden via Alias-Map (Wortgrenzen-Match)."""
-    item_lower = item_text.lower().strip()
+    item_lower = item_text.lower().strip().replace('’', "'").replace('‘', "'").replace('`', "'")
     if not item_lower or len(item_lower) < 2:
         return None
 

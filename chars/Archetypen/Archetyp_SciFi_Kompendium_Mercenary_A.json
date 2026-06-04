@@ -499,7 +499,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "a3938009-23c0-4a39-b051-ef89bd060c5b": {
+            "d602eded-cda7-435b-9c2c-93ea2606e774": {
                 "name": "Cyberware: Adrenalindrüse",
                 "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
                 "unterkategorie": "Defensiv",
@@ -514,11 +514,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "a3938009-23c0-4a39-b051-ef89bd060c5b",
+                "installations_id": "d602eded-cda7-435b-9c2c-93ea2606e774",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "5f53adf7-4f14-455e-8e14-2d0d970e852f": {
+            "ed3d3bba-b91f-4669-9bad-ec4b6a066df1": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -531,7 +531,7 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "5f53adf7-4f14-455e-8e14-2d0d970e852f",
+                "installations_id": "ed3d3bba-b91f-4669-9bad-ec4b6a066df1",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
@@ -553,6 +553,11 @@
                 "zustand": "neu"
             },
             "Persönliche Datenassistenz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Doppelflinte": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -613,11 +618,13 @@
         "Molekularschwert",
         "Commlink",
         "Persönliche Datenassistenz",
+        "Doppelflinte",
         "Cyberware: Adrenalindrüse",
         "Cyberware: Verbesserte Sicht"
     ],
     "selected_waffen": [
-        "Molekularschwert"
+        "Molekularschwert",
+        "Doppelflinte"
     ],
     "selected_ruestungen": [
         "Körperpanzerung +4"
@@ -627,7 +634,8 @@
         "Körperpanzerung +4": 1,
         "Molekularschwert": 1,
         "Commlink": 1,
-        "Persönliche Datenassistenz": 2,
+        "Persönliche Datenassistenz": 1,
+        "Doppelflinte": 1,
         "Cyberware: Adrenalindrüse": 1,
         "Cyberware: Verbesserte Sicht": 1
     },

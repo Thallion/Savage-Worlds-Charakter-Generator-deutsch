@@ -511,7 +511,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "7f4376eb-9aa4-437c-bc94-23f5b8491b9f": {
+            "f67a09d0-9fde-42a4-b725-9b483aa9abbc": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -524,11 +524,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "7f4376eb-9aa4-437c-bc94-23f5b8491b9f",
+                "installations_id": "f67a09d0-9fde-42a4-b725-9b483aa9abbc",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             },
-            "f4a2a240-75cb-40ea-9798-168d9690bd15": {
+            "6dc02abc-89c8-4b9b-ad6f-f5b8309fe530": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -541,7 +541,7 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "f4a2a240-75cb-40ea-9798-168d9690bd15",
+                "installations_id": "6dc02abc-89c8-4b9b-ad6f-f5b8309fe530",
                 "installations_datum": "2026-06-04",
                 "konfiguration": {}
             }
@@ -592,7 +592,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "EMP-Granate": {
+            "Betäubungsgranate": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dietriche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schweißbrenner": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -654,13 +664,14 @@
         "Direktionales Mikrofon",
         "Kreislaufatemgerät",
         "Betäubungsschlagstock",
-        "EMP-Granate",
+        "Betäubungsgranate",
+        "Dietriche",
+        "Schweißbrenner",
         "Cyberware: Verborgenes Fach"
     ],
     "selected_waffen": [
         "Molekularschwert",
-        "Betäubungsschlagstock",
-        "EMP-Granate"
+        "Betäubungsschlagstock"
     ],
     "selected_ruestungen": [
         "Körperpanzerung +4",
@@ -677,7 +688,9 @@
         "Direktionales Mikrofon": 1,
         "Kreislaufatemgerät": 1,
         "Betäubungsschlagstock": 1,
-        "EMP-Granate": 4,
+        "Betäubungsgranate": 4,
+        "Dietriche": 1,
+        "Schweißbrenner": 1,
         "Cyberware: Verborgenes Fach": 2
     },
     "rang": "Anfänger",

@@ -174,7 +174,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Handaxt',1),('Kompositbogen',1),('Ledertunika',1),('Wildnispaket',1),('Pfeile (20)',1),('Fallenherstellungsset',1),('Trank: Beschleunigung',1)]:
+    for name, anz in [('Handaxt',1),('Kompositbogen',1),('Ledertunika',1),('Wildnispaket',1),('Pfeile (20)',1),('Fallenherstellungsset',1),('Trank: Beschleunigung',1),('Brandpfeile (20)',1),('Trank: Attributsteigerung',1),('Trank: Heilung',1),('Kettenhemd',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Verstärkte Lederrüstung (als Ledertunika)')

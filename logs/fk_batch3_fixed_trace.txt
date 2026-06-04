@@ -38,8 +38,8 @@
   → 4 Aufstiege, Rang=Anfänger
   D-Advances: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 500, 'machtpunkte': 15}
   DIFF: []
-  Vermögen nach Kauf: 402.5
-  ASSASSININ: anomalien=3
+  Vermögen nach Kauf: 0
+  ASSASSININ: anomalien=7
 
 === 17. DRACHENKÄMPFER ===
   Punkte: {'attribut': 5, 'fertigkeit': 12, 'handicap': 3, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}

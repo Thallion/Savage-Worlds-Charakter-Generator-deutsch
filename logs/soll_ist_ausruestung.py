@@ -141,9 +141,12 @@ def normalize_item(raw):
     - generischer Kern schneidet zusätzlich Qualitäts-/Material-Präfixe ab
     """
     s = re.sub('­\\s*', '', raw)           # Soft-Hyphen (+ folgender Whitespace)
+    s = s.replace('’', "'").replace('‘', "'").replace('`', "'")  # typografische Apostrophe
     s = re.sub(r'(\w)[‐-―-]\s+(\w)', r'\1\2', s)  # Bindestrich-Umbruch
     s = re.sub(r'\([^)]*\)', '', s)             # Stat-Klammern
-    s = re.sub(r'^\s*[×x]?\s*\d+\s*[×x]?\s*', '', s)        # Mengen-Präfix
+    s = re.sub(r'^\s*[×x]?\s*\d+\s*[×x]?\s*', '', s)        # Mengen-Präfix (Ziffern)
+    s = re.sub(r'^(?:two|three|four|five|six|seven|eight|nine|ten)\s+',  # Zahlwörter
+               '', s, flags=re.IGNORECASE)
     full = s.strip(' ,.').lower()
     core = full
     changed = True

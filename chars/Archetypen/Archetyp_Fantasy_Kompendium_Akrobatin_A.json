@@ -552,6 +552,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Trank: Beschleunigung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Geistige Stärke": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Attributsteigerung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -613,7 +633,11 @@
         "Bandolier",
         "Diebespaket",
         "Rauchstab",
-        "Krähenfüße"
+        "Krähenfüße",
+        "Trank: Beschleunigung",
+        "Trank: Heilung",
+        "Trank: Geistige Stärke",
+        "Trank: Attributsteigerung"
     ],
     "selected_waffen": [
         "Dolch",
@@ -631,14 +655,17 @@
         "Bandolier": 1,
         "Diebespaket": 1,
         "Rauchstab": 1,
-        "Krähenfüße": 1
+        "Krähenfüße": 1,
+        "Trank: Beschleunigung": 1,
+        "Trank: Heilung": 1,
+        "Trank: Geistige Stärke": 1,
+        "Trank: Attributsteigerung": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,

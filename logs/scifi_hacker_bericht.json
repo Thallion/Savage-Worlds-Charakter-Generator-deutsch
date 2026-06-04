@@ -392,16 +392,29 @@
       "warnung": null
     },
     {
-      "aktion": "kaufen(Kevlarwestex1)",
+      "aktion": "kaufen(Kevlarjacke & Jeansx1)",
       "ok": true,
-      "kosten": 200,
+      "kosten": 100,
       "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 300,
+      "vermoegen": 400,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schutzbrillex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 380,
       "warnung": null
     },
     {
@@ -414,7 +427,7 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 250,
+      "vermoegen": 330,
       "warnung": null
     },
     {
@@ -427,14 +440,14 @@
         "fertigkeit": 0,
         "handicap": 0
       },
-      "vermoegen": 0,
+      "vermoegen": 80,
       "warnung": null
     },
     {
       "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 80,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -478,8 +491,8 @@
     {
       "aktion": "kaufen(Persönliche Datenassistenzx1) FORCE",
       "ok": true,
-      "kosten": 0,
-      "kostenart": null,
+      "kosten": 80,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,

@@ -9132,6 +9132,69 @@
       "setting": "fantasy",
       "beschreibung": "Verleiht die Macht Sprachen sprechen. Wirkt 1 Minute.",
       "aktiv": true
+    },
+    "Mörderbräu": {
+      "name": "Mörderbräu",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 250,
+      "setting": "mittelalterlich",
+      "beschreibung": "Gift (tödlich, eingenommen). −2 auf Wahrnehmungsproben zum Erkennen. Wird auf Speisen/Getränke aufgetragen.",
+      "aktiv": true
+    },
+    "Äther": {
+      "name": "Äther",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 300,
+      "setting": "mittelalterlich",
+      "beschreibung": "Gift (K.O., eingeatmet). Setzt das Ziel kampfunfähig.",
+      "aktiv": true
+    },
+    "Lotusstaub": {
+      "name": "Lotusstaub",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 225,
+      "setting": "mittelalterlich",
+      "beschreibung": "Gift (beeinträchtigend [Stärke], eingeatmet). Konstitution −2 oder erhalte eine leichte Angewohnheit (Staub).",
+      "aktiv": true
+    },
+    "Grüner Schleimextrakt": {
+      "name": "Grüner Schleimextrakt",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 200,
+      "setting": "mittelalterlich",
+      "beschreibung": "Gift (lähmend, Kontakt). +1 auf Wahrnehmungsproben zum Erkennen.",
+      "aktiv": true
+    },
+    "Riesenschlangengift": {
+      "name": "Riesenschlangengift",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 400,
+      "setting": "mittelalterlich",
+      "beschreibung": "Gift (tödlich, Verletzung). Muss auf eine Stich- oder Hiebwaffe aufgetragen werden.",
+      "aktiv": true
+    },
+    "Beriemter Panzerhandschuh": {
+      "name": "Beriemter Panzerhandschuh",
+      "kategorie": "Allgemein",
+      "gewicht": 5,
+      "kosten": 8,
+      "setting": "mittelalterlich",
+      "beschreibung": "Rüstungsaufwertung: +1 auf Stärkeproben gegen Entwaffnen; erfordert eine Aktion zum Befestigen/Lösen.",
+      "aktiv": true
+    },
+    "Rüstungsstacheln": {
+      "name": "Rüstungsstacheln",
+      "kategorie": "Allgemein",
+      "gewicht": 10,
+      "kosten": 50,
+      "setting": "mittelalterlich",
+      "beschreibung": "Rüstungsaufwertung: Kann zu jeder Panzerung hinzugefügt werden; +1 Schaden beim Zerquetschen während des Ringens.",
+      "aktiv": true
     }
   },
   "settingregeln": {

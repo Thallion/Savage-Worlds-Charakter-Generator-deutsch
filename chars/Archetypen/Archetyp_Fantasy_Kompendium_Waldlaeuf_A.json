@@ -552,6 +552,26 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Brandpfeile/-bolzen (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Attributsteigerung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kettenhemd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -613,14 +633,19 @@
         "Wildnispaket",
         "Pfeile (20)",
         "Fallenherstellungsset",
-        "Trank: Beschleunigung"
+        "Trank: Beschleunigung",
+        "Brandpfeile/-bolzen (20)",
+        "Trank: Attributsteigerung",
+        "Trank: Heilung",
+        "Kettenhemd"
     ],
     "selected_waffen": [
         "Handaxt",
         "Kompositbogen"
     ],
     "selected_ruestungen": [
-        "Ledertunika"
+        "Ledertunika",
+        "Kettenhemd"
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
@@ -630,7 +655,11 @@
         "Wildnispaket": 1,
         "Pfeile (20)": 1,
         "Fallenherstellungsset": 1,
-        "Trank: Beschleunigung": 1
+        "Trank: Beschleunigung": 1,
+        "Brandpfeile/-bolzen (20)": 1,
+        "Trank: Attributsteigerung": 1,
+        "Trank: Heilung": 1,
+        "Kettenhemd": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 1.0,

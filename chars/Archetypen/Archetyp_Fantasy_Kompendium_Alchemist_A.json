@@ -603,6 +603,31 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Säureflasche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Donnerstein": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Zündholz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Verstrickungsbeutel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rauchstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -672,11 +697,17 @@
         "Alchemistenpaket",
         "Gegengift, Phiole",
         "Bandolier",
-        "Ledertunika"
+        "Ledertunika",
+        "Säureflasche",
+        "Donnerstein",
+        "Zündholz",
+        "Verstrickungsbeutel",
+        "Rauchstab"
     ],
     "selected_waffen": [
         "Dolch",
-        "Alchemistenfeuer"
+        "Alchemistenfeuer",
+        "Säureflasche"
     ],
     "selected_ruestungen": [
         "Ledertunika"
@@ -688,7 +719,12 @@
         "Alchemistenpaket": 1,
         "Gegengift, Phiole": 1,
         "Bandolier": 1,
-        "Ledertunika": 1
+        "Ledertunika": 1,
+        "Säureflasche": 1,
+        "Donnerstein": 1,
+        "Zündholz": 1,
+        "Verstrickungsbeutel": 1,
+        "Rauchstab": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
@@ -702,7 +738,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 357.5,
+    "vermoegen": 246.5,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

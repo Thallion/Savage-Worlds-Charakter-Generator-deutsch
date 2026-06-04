@@ -95,8 +95,9 @@ try:
     #     antitoxin, bag of holding, bandolier, goggles, masterwork leather tunic (+2),
     #     tindertwig, 79 gp)
     for name, anz in [('Dolch',1),('Alchemistenfeuer',1),('Alchemistenpaket',1),
-                       ('Gegengift, Phiole',1),('Bandolier',1),
-                       ('Ledertunika',1)]:
+                       ('Gegengift, Phiole',1),('Bandolier',1),('Ledertunika',1),
+                       ('Säureflasche',1),('Donnerstein',1),('Zündholz',1),
+                       ('Verstrickungsbeutel',1),('Rauchstab',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz("FEHLENDE AUSRÜSTUNG: Schutzbrille (goggles), Feuerzange/Streichhölzer (tindertwig), Beutel der Fassungsfähigkeit (bag of holding), Säureflasche (acid flask) — alle nicht im FK-Katalog")
@@ -346,7 +347,7 @@ try:
     diff = s.diff(soll)
     m(f"  DIFF: {diff['abweichungen']}")
     # --- AUSRÜSTUNG ---
-    for name, anz in [('Dolch',1),('Blasrohr',1),('Totschläger',1),('Ledertunika',1),('Umhang mit Kapuze',1),('Bandolier',1),('Diebespaket',1),('Blasrohrpfeile (20)',1)]:
+    for name, anz in [('Dolch',1),('Blasrohr',1),('Totschläger',1),('Ledertunika',1),('Umhang mit Kapuze',1),('Bandolier',1),('Diebespaket',1),('Blasrohrpfeile (20)',1),('Riesenschlangengift',1),('Mörderbräu',1),('Äther',1),('Lotusstaub',1),('Grüner Schleimextrakt',1)]:
         if name in s.ch.ausruestung: s.kaufen(name, anz)
         else: s.notiz(f'FEHLT im Katalog: {name}')
     s.notiz('FEHLENDE AUSRÜSTUNG: Gifte (Schlangengift, Assassinengebräu, Äther, Lotusstaub, Grünschleimextrakt)')
