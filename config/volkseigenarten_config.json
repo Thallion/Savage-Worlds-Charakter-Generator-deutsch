@@ -202,6 +202,15 @@
             "effekt": {"bewegungsweite_bonus": 2, "sprint_bonus": 1}
         },
         {
+            "id": "geschaerfte_sinne",
+            "name": "Geschärfte Sinne",
+            "kosten": 1,
+            "max_auswahl": 1,
+            "beschreibung": "Das Volk beginnt mit Wahrnehmung auf W6 statt W4 (mit bonus +2 statt +0).",
+            "effekt_typ": "spezieller_effekt",
+            "effekt": {"wahrnehmung_w6": true}
+        },
+        {
             "id": "scharfe_sinne",
             "name": "Scharfe Sinne",
             "kosten": 2,

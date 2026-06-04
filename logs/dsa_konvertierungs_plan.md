@@ -69,6 +69,21 @@ Quelle: https://dsa.ulisses-regelwiki.de/spezies.html
 
 Achtung: aktuell ist "Mensch" als einziges auf `True`. Wir setzen alle 12 DSA-Spezies auf `True` (User-Default, im UI abwählbar).
 
+> **✅ Umgesetzt 2026-06-03** (`scripts/dsa_add_voelker.py` + `scripts/dsa_voelker_spezifisch.py`, Doku: `logs/dsa_voelker_abgleich.md`):
+> - **Endstand: 9 Spezies** = Mensch, Elf, Halbelf, Zwerg, Ork, Halbork, Goblin, Achaz, Holberker.
+> - **Gelöscht:** Necker, Drachling (nicht auf der DSA-Spezies-Übersicht) **und Nachtalb** (auf User-Wunsch entfernt).
+> - **Neu:** Holberker (verwilderte Menschen, KO+, Zäher Hund, Richtungssinn, Nachtsicht).
+> - **DSA-spezifischer gestaltet (2. Pass):**
+>   - **Elf:** + **Harmonische Magie** (verdoppelt die Wirkungsdauer der gewirkten Mächte) + Zweistimmiger Gesang + Nichtschläfer.
+>   - **Goblin:** vom Savage-Pathfinder-Goblin auf den **DSA-Goblin** umgebaut (Ges +2 statt +4, Willenskraft −1, Geschärfte Sinne Gehör/Geruch, Biss, Aberglaube; raus: „Alles essen"/Reiter/Überlebenskünstler/Wärmesicht).
+>   - **Halbork:** auf DSA umgebaut (KO +1 / Zäher Hund statt Stärke-Brute, Stechender Orksgeruch).
+>   - **Ork:** + Biss (Hauer) + Natürlicher Rüstungsschutz I.
+>   - **Zwerg:** + Nichtschwimmer + Hitzeresistenz.
+>   - **Halbelf:** + Zweistimmiger Gesang.
+>   - **Achaz:** Hitzeresistenz (1. Pass).
+> - **`voelker_selected`** auf die 9 Spezies umgestellt (alle `True`).
+> - **Hinweis:** „Harmonische Magie", Biss, Hitzeresistenz etc. sind **beschreibende** Volksmerkmale (UI), keine Engine-Automatik. Mechanisch greifen Attribut-Boni, `groesse_modifikator`, `panzerung_1` und `auto_handicaps` (generische Pfade) — kein Hardcoding in `abgeleitete_werte.py` nötig (vgl. §8.7).
+
 ---
 
 ## 4. Mächte — SW-Basis beibehalten + DSA-Trappings
@@ -1291,6 +1306,42 @@ Tabelle in der Abgleich-Doku.
 
 ---
 
+## 8.7 ⚠️ OFFEN: Talent-/Handicap-Effekte auf abgeleitete Werte verdrahten
+
+**Stand:** 2026-06-03 — offen
+**Referenz-Skill:** `wuerfel-werte-logik` (`.claude/skills/wuerfel-werte-logik/SKILL.md`, §5)
+
+**Problem:** Die Wirkung von **Talenten und Handicaps** auf abgeleitete Werte (Robustheit,
+Parade, Bewegungsweite, Bennys, Machtpunkte) ist in `functions/abgeleitete_werte.py`
+**namensbasiert hartcodiert** (z.B. `if "Flink" in selected_talente: bewegungsweite -= 2`).
+Ein Eintrag nur im Setting-JSON **wirkt mechanisch nicht** — der Name muss zusätzlich in
+`abgeleitete_werte.py` eingetragen werden.
+
+**Was NICHT betroffen ist (läuft generisch, kein Handlungsbedarf):**
+- Volk-Attributboni / -Mali → `models/volk.py:185` (über `effects.attribute_bonuses`)
+- Volk-`robustheit_bonus` / `bewegungsweite_bonus` / `groesse_modifikator` → generisch aus `effects`
+- Volk-`auto_talente` mit `Glück` → Benny generisch; Talent-`machtpunkte`-Feld → MP generisch
+- ⇒ Holberker (`Konstitution +2` ⇒ +1 Robustheit über die Formel) u. die anderen neuen Völker **ok**.
+
+**Aktueller Audit der bereits ergänzten DSA-Elemente:**
+- Die 16 Wildes-Aventurien-Talente + 6 Handicaps (§8.5) und die 8 Nachteile-Wiki-Handicaps
+  (§8.6) geben **keine passiven** Robustheit/Parade/Bewegungsweite/Benny-Boni → derzeit **kein**
+  Hardcode nötig (alle Effekte sind situativ, z.B. „Heimlichkeit −2", „+2 Schaden durch Eisen").
+- ✅ **Erledigt 2026-06-03:** Handicap **`Schlank`** (Elf) in `abgeleitete_werte.py` verdrahtet
+  (−1 Robustheit) – war vorher nur kosmetisch. Genau der hier beschriebene Fall.
+
+**Zu tun (Verdrahtungs-Check bei jeder künftigen DSA-Erweiterung):**
+- [ ] Bei jedem **neuen Talent/Handicap mit passivem abgeleiteten Effekt** (z.B. ein DSA-Talent
+  „+1 Parade", ein „Zäher Hund"-**Talent** mit +1 Robustheit, ein Bewegungs-Handicap) den Namen
+  **zusätzlich** in `abgeleitete_werte.py` eintragen (Parade Z.42 ff., Robustheit Z.136 ff.,
+  Bewegungsweite Z.107 ff., Bennys Z.214 ff.).
+- [ ] Phase 7/8 (Talente/Handicaps): vor Abschluss die geplanten DSA-Vor-/Nachteile gegen
+  diese Listen prüfen — situative vs. passive Effekte trennen.
+- [ ] Phase 11 (Validierung): Stichprobe — Charakter mit solchem Element bauen und abgeleiteten
+  Wert in der UI gegenprüfen (`verify`-Skill / Headless-Build).
+
+---
+
 ## 9. Ausrüstung (449 Items)
 
 ### 9.1 Status 1 (beibehalten)
@@ -1408,8 +1459,8 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 | 1 | Bugfix `riesige_feinde,` | 1 min | ✅ 2026-06-02 |
 | 2 | `waehrung` + `startgeld` + `attribute` | 5 min | ⏳ auf User-Genehmigung |
 | ~~3~~ | ~~`fertigkeiten_daten` (4 löschen)~~ | ~~10 min~~ | ❌ abgelehnt 2026-06-02 |
-| 4 | `voelker` (10 anpassen + 2 neu) | 60 min | ⬜ offen |
-| 5 | `voelker_selected` auf 12 DSA-Spezies | 5 min | ⬜ offen (abh. von 4) |
+| 4 | `voelker` → **9 Spezies** (Necker/Drachling/Nachtalb gelöscht; +Holberker; DSA-Pass: Elf Harmonische Magie, Goblin/Halbork-Rework, Ork/Zwerg/Halbelf geschärft) | 90 min | ✅ 2026-06-03 |
+| 5 | `voelker_selected` auf 12 DSA-Spezies (alle True) | 5 min | ✅ 2026-06-03 |
 | 6.1 | `maechte`: bestehende 73 um `dsa_trappings` erweitert | 30 min | ✅ 2026-06-02 |
 | 6.1.1 | `maechte`: DSA-Zauber als Trappings in der Machtbeschreibung angezeigt | 30 min | ✅ 2026-06-03 |
 | 6.2 | `maechte`: neue Mächte (genehmigte Auswahl) | 60 min | ⏳ auf User-Genehmigung (siehe `logs/dsa_neue_maechte_diskussion.md`) |
@@ -1419,6 +1470,7 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 | 8 | `handicaps`: Status 4 ergänzen (~15), Status 3 löschen (~5) | 90 min | ⬜ offen |
 | 8.5 | **Wildes Aventurien: DSA-Talente + Handicaps** (16 Talente, 6 Handicaps) | 60 min | ✅ 2026-06-03 |
 | 8.6 | **DSA-Regelwiki Nachteile: Lücken-Abgleich** (8 Handicaps ergänzt) | 45 min | ✅ 2026-06-03 |
+| 8.7 | ⚠️ **Talent-/Handicap-Effekte in `abgeleitete_werte.py` verdrahten** (namensbasiert hartcodiert!) | laufend | ⬜ offen (Verdrahtungs-Check je Erweiterung) |
 | 9 | `ausruestung`: Preise in D/S/H/K, DSA-Items ergänzen (~20-30) | 120 min | ⬜ offen |
 | 9.R | **Review: Inhalte komplett** — Völker, Talente, Handicaps, Ausrüstung prüfen | 60 min | ⬜ offen |
 | 10 | `settingregeln`: 24 Regeln anpassen/aktivieren | 60 min | ⬜ offen |
@@ -1617,8 +1669,8 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 | 1 | Bugfix `riesige_feinde,` | ✅ 2026-06-02 |
 | 2 | `waehrung` + `startgeld` + `attribute` | ⏳ auf User-Genehmigung |
 | ~~3~~ | ~~`fertigkeiten_daten`~~ | ❌ abgelehnt 2026-06-02 |
-| 4 | `voelker` (10 anpassen + 2 neu) | ⬜ offen |
-| 5 | `voelker_selected` auf 12 DSA-Spezies | ⬜ offen (abh. von 4) |
+| 4 | `voelker` → 9 Spezies (3 gelöscht, +Holberker, DSA-Pass) | ✅ 2026-06-03 |
+| 5 | `voelker_selected` auf 12 DSA-Spezies | ✅ 2026-06-03 |
 | **6.1** | **`maechte`: Bestehende 73 um `dsa_trappings` erweitern** | **✅ 2026-06-02** |
 | **6.1.1** | **DSA-Zauber als Trappings in der Machtbeschreibung** | **✅ 2026-06-03** |
 | **6.2** | **`maechte`: 40 neue Mächte anlegen** | **⏳ auf User-Genehmigung** |

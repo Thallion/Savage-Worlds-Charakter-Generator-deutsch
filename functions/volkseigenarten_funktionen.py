@@ -560,7 +560,7 @@ def eigenart_zu_effekte(positive_eigenarten, negative_eigenarten):
                           'doppelt_so_weit_springen', 'springer_schadensbonus',
                           'widerstand_naturgewalten', 'anfaelligkeit_naturgewalten',
                           'halbe_bewegungsweite_graben',
-                          'wahrnehmung_w8', 'natuerlicher_kaempfer', 'eiserner_wille',
+                          'wahrnehmung_w6', 'wahrnehmung_w8', 'natuerlicher_kaempfer', 'eiserner_wille',
                           'schnelle_heilung', 'grundfertigkeit_weniger', 'springer',
                           'furcht', 'immunisierung', 'ruestung_anpassung',
                           'sprache_eingeschraenkt', 'wuchtig', 'volle_bewegungsweite_schwimmen',

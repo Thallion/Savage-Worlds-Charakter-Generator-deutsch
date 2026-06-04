@@ -4754,6 +4754,598 @@
             "setting": "horror",
             "beschreibung": "2W6 Schaden, Reichweite 15/30/60. Verschießt Holzpfähle mit Seilzug.",
             "aktiv": true
+        },
+        "Schrotflinte": {
+            "name": "Schrotflinte",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Normale Schrotladung, Preis für 25 Patronen, Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Doppelflinte": {
+            "name": "Doppelflinte",
+            "kategorie": "Waffe",
+            "gewicht": 5.5,
+            "kosten": 150,
+            "setting": "modern",
+            "beschreibung": "Regeln für Schrotflinten gelten",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "1-3W6",
+                "Reichweite": "12/24/48",
+                "FR": 1,
+                "Schuss": 2,
+                "PB": "-"
+            }
+        },
+        "Taschenlampe (10\" Strahl)": {
+            "name": "Taschenlampe (10\" Strahl)",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Leuchtreichweite von 10\" (20m) in gerader Linie",
+            "aktiv": true
+        },
+        "Rucksack": {
+            "name": "Rucksack",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 50,
+            "setting": "",
+            "beschreibung": "Fasst bis zu 30 kg Ausrüstung",
+            "aktiv": true
+        },
+        "Schutzbrille": {
+            "name": "Schutzbrille",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Schützt die Augen vor Splittern und Staub",
+            "aktiv": true
+        },
+        "Werkzeugkoffer": {
+            "name": "Werkzeugkoffer",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 200,
+            "setting": "",
+            "beschreibung": "+2 auf Reparieren-Proben für mechanische Geräte",
+            "aktiv": true
+        },
+        "Laptop": {
+            "name": "Laptop",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 1200,
+            "setting": "",
+            "beschreibung": "Tragbarer Computer",
+            "aktiv": true
+        },
+        "Taschencomputer": {
+            "name": "Taschencomputer",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 250,
+            "setting": "",
+            "beschreibung": "Kleinerer tragbarer Computer/PDA",
+            "aktiv": true
+        },
+        "Keule, Leicht": {
+            "name": "Keule, Leicht",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 25,
+            "setting": "mittelalterlich",
+            "beschreibung": "Für arme Schlucker und Kriminelle",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Keule, Schwer": {
+            "name": "Keule, Schwer",
+            "kategorie": "Waffe",
+            "gewicht": 2.5,
+            "kosten": 50,
+            "setting": "mittelalterlich",
+            "beschreibung": "Für arme Schlucker und Kriminelle",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Taser": {
+            "name": "Taser",
+            "kategorie": "Allgemein",
+            "gewicht": 0.25,
+            "kosten": 25,
+            "setting": "",
+            "beschreibung": "Verwendet Schießen. FRW 1/2/4. 3 Schuss, dann muss die Waffe mindestens zwei Stunden lang aufgeladen werden. Opfer muss eine Konstitutionsprobe mit -2 ablegen, um nicht Betäubt zu werden",
+            "aktiv": true
+        },
+        "Pfefferspray": {
+            "name": "Pfefferspray",
+            "kategorie": "Allgemein",
+            "gewicht": 0.25,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Verwende Schießen (oder Kämpfen im Nahkampf). Kein Entfernungsabzug, maximale Reichweite 2\", 5 Schuss, Opfer muss Konstitutionsprobe mit -2 ablegen, um nicht Betäubt zu werden",
+            "aktiv": true
+        },
+        "Feuerzeug": {
+            "name": "Feuerzeug",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Einfaches Feuerzeug zum Entfachen von Feuer",
+            "aktiv": true
+        },
+        "Dolch/Messer": {
+            "name": "Dolch/Messer",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 25,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kleine Klinge für vielseitige Anwendung",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Überlebensmesser": {
+            "name": "Überlebensmesser",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 50,
+            "setting": "modern",
+            "beschreibung": "Einfache Werkzeuge im Griff, +1 auf Überlebensproben",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Springmesser": {
+            "name": "Springmesser",
+            "kategorie": "Waffe",
+            "gewicht": 0.25,
+            "kosten": 10,
+            "setting": "modern",
+            "beschreibung": "-2 auf Wahrnehmungsprobe wenn versteckt",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Erste-Hilfe-Tasche": {
+            "name": "Erste-Hilfe-Tasche",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Drei Anwendungen, siehe Heilung auf Seite 96",
+            "aktiv": true
+        },
+        "Handschellen": {
+            "name": "Handschellen",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 15,
+            "setting": "",
+            "beschreibung": "Zum Fesseln von Personen, Stärke gegen 8 zum Ausbrechen",
+            "aktiv": true
+        },
+        "Fackel": {
+            "name": "Fackel",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Brennt eine Stunde, 4\" (8m) Lichtradius",
+            "aktiv": true
+        },
+        "Laterne": {
+            "name": "Laterne",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 25,
+            "setting": "",
+            "beschreibung": "Brennt 4 Stunden mit 0,5 Liter Öl, 4\" (8m) Lichtradius",
+            "aktiv": true
+        },
+        "Trillerpfeife": {
+            "name": "Trillerpfeife",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Lautes Signal über große Entfernung hörbar",
+            "aktiv": true
+        },
+        "Dietriche": {
+            "name": "Dietriche",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 200,
+            "setting": "",
+            "beschreibung": "Werkzeuge zum Öffnen von Schlössern, nötig für Diebeskunst",
+            "aktiv": true
+        },
+        "Seil, Hanf (10\" / 20 m)": {
+            "name": "Seil, Hanf (10\" / 20 m)",
+            "kategorie": "Allgemein",
+            "gewicht": 7.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "20 Meter Hanfseil, hält bis zu 300 kg",
+            "aktiv": true
+        },
+        "Seil, Nylon (10\" / 20 m)": {
+            "name": "Seil, Nylon (10\" / 20 m)",
+            "kategorie": "Allgemein",
+            "gewicht": 1.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "20 Meter modernes Nylonseil, hält bis zu 500 kg",
+            "aktiv": true
+        },
+        "Rapier": {
+            "name": "Rapier",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 150,
+            "setting": "mittelalterlich",
+            "beschreibung": "Parade +1",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Pferd": {
+            "name": "Pferd",
+            "kategorie": "Allgemein",
+            "gewicht": 0,
+            "kosten": 300,
+            "setting": "",
+            "beschreibung": "Normales Reitpferd für Transport und leichte Lasten",
+            "aktiv": true
+        },
+        "Pistole": {
+            "name": "Pistole",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 250,
+            "setting": "modern",
+            "beschreibung": "Standard-Handfeuerwaffe",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W6",
+                "Reichweite": "15/30/60",
+                "FR": 1,
+                "Schuss": 50,
+                "PB": 2
+            }
+        },
+        "Kamera (Einweg)": {
+            "name": "Kamera (Einweg)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Einfache Kamera für etwa 24 Bilder",
+            "aktiv": true
+        },
+        "Kamera (normal)": {
+            "name": "Kamera (normal)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 75,
+            "setting": "",
+            "beschreibung": "Standard-Fotokamera",
+            "aktiv": true
+        },
+        "Kamera (digital)": {
+            "name": "Kamera (digital)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 300,
+            "setting": "",
+            "beschreibung": "Digitale Kamera mit Speicherkarte",
+            "aktiv": true
+        },
+        "Kerze": {
+            "name": "Kerze",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 1,
+            "setting": "",
+            "beschreibung": "Brennt eine Stunde, 2\" (4m) Lichtradius",
+            "aktiv": true
+        },
+        "Robe (dünn)": {
+            "name": "Robe (dünn)",
+            "kategorie": "Rüstung",
+            "gewicht": 4,
+            "kosten": 30,
+            "setting": "mittelalterlich",
+            "beschreibung": "Leichte Schutzkleidung, die den ganzen Körper bedeckt",
+            "aktiv": true,
+            "torso": 1,
+            "arme": 1,
+            "beine": 1,
+            "kopf": 0,
+            "mindeststaerke": "W4"
+        },
+        "Derringer": {
+            "name": "Derringer",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 100,
+            "setting": "modern",
+            "beschreibung": "-2 auf Wahrnehmungsprobe wenn verborgen",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "2W4",
+                "Reichweite": "3/6/12",
+                "FR": 1,
+                "Schuss": 2,
+                "PB": "-"
+            }
+        },
+        "Kevlarweste": {
+            "name": "Kevlarweste",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 200,
+            "setting": "modern",
+            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
+            "aktiv": true,
+            "torso": 2,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 0,
+            "mindeststaerke": "W6"
+        },
+        "Schwert, Kurzschwert": {
+            "name": "Schwert, Kurzschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Beinhaltet Reitersäbel",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Schwert, Langschwert": {
+            "name": "Schwert, Langschwert",
+            "kategorie": "Waffe",
+            "gewicht": 1.5,
+            "kosten": 300,
+            "setting": "mittelalterlich",
+            "beschreibung": "Standardschwerter und Krummschwerter",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W8",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Gewehr": {
+            "name": "Gewehr",
+            "kategorie": "Waffe",
+            "gewicht": 4,
+            "kosten": 700,
+            "setting": "modern",
+            "beschreibung": "Standard-Gewehr mit hoher Durchschlagskraft",
+            "aktiv": true,
+            "typ": "Fernkampf",
+            "mindeststaerke": "W6",
+            "eigenschaften": {
+                "Schaden": "3W6",
+                "Reichweite": "30/60/120",
+                "FR": 3,
+                "Schuss": 100,
+                "PB": 2
+            }
+        },
+        "Patronen (Klein)": {
+            "name": "Patronen (Klein)",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Kaliber .22 bis .32, Preis und Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Patronen (Mittel)": {
+            "name": "Patronen (Mittel)",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Kaliber 9mm bis .45, Preis und Gewicht für 50 Stück",
+            "aktiv": true
+        },
+        "Schlagstock": {
+            "name": "Schlagstock",
+            "kategorie": "Waffe",
+            "gewicht": 0.5,
+            "kosten": 10,
+            "setting": "modern",
+            "beschreibung": "Oft die Waffe von Gesetzeshütern",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "W4",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Helm (Kette)": {
+            "name": "Helm (Kette)",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 25,
+            "setting": "mittelalterlich",
+            "beschreibung": "Kettenhaube zum Kopfschutz",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 3,
+            "mindeststaerke": "W8"
+        },
+        "Schwerer Helm": {
+            "name": "Schwerer Helm",
+            "kategorie": "Rüstung",
+            "gewicht": 2,
+            "kosten": 100,
+            "setting": "mittelalterlich",
+            "beschreibung": "Offener schwerer Helm",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W10"
+        },
+        "Wanderstiefel": {
+            "name": "Wanderstiefel",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Robuste Stiefel für schwieriges Gelände",
+            "aktiv": true
+        },
+        "Winterstiefel": {
+            "name": "Winterstiefel",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 100,
+            "setting": "",
+            "beschreibung": "Isolierte Stiefel für kalte Umgebungen",
+            "aktiv": true
+        },
+        "Reiserationen": {
+            "name": "Reiserationen",
+            "kategorie": "Allgemein",
+            "gewicht": 2.5,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "5 Mahlzeiten; hält sich eine Woche",
+            "aktiv": true
+        },
+        "Brechstange": {
+            "name": "Brechstange",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 10,
+            "setting": "",
+            "beschreibung": "Zum Aufbrechen von Türen und Schlössern (+1 auf entsprechende Stärkeproben)",
+            "aktiv": true
+        },
+        "Kleidung, Alltag": {
+            "name": "Kleidung, Alltag",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 20,
+            "setting": "",
+            "beschreibung": "Normale Alltagskleidung passend zur Epoche",
+            "aktiv": true
+        },
+        "Regenschirm": {
+            "name": "Regenschirm",
+            "kategorie": "Allgemein",
+            "gewicht": 1,
+            "kosten": 5,
+            "setting": "",
+            "beschreibung": "Schützt vor Regen und Sonne",
+            "aktiv": true
+        },
+        "Laternen-Öl": {
+            "name": "Laternen-Öl",
+            "kategorie": "Allgemein",
+            "gewicht": 0.5,
+            "kosten": 2,
+            "setting": "",
+            "beschreibung": "Genug für 4 Stunden Betrieb einer Laterne",
+            "aktiv": true
+        },
+        "Kevlarhelm": {
+            "name": "Kevlarhelm",
+            "kategorie": "Rüstung",
+            "gewicht": 2.5,
+            "kosten": 80,
+            "setting": "modern",
+            "beschreibung": "Reduziert den Schaden von Kugeln um -4",
+            "aktiv": true,
+            "torso": 0,
+            "arme": 0,
+            "beine": 0,
+            "kopf": 4,
+            "mindeststaerke": "W4"
         }
     },
     "settingregeln": {

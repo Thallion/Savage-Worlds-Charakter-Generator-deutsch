@@ -1133,3 +1133,95 @@ Beim Hinzufügen von `Zielsystem` als Cyberware-Item (Phase G Stufe 1) fehlten d
 Zukünftige Optionen (separater Auftrag, NICHT im aktuellen Scope):
 - Test-Infrastruktur-Fix für KivyMD-App-Init (test_template_handler)
 - G2-Chars Shepherd/Star_Knight auf Fortgeschritten bringen (4. Advance via Skill-Step in `fertigkeit_mit_aufstieg` statt `aufstieg`)
+
+---
+
+# Horror Kompendium Archetypen – Anomalie-Bericht
+
+**Setting:** Horror Kompendium (Rang Seasoned)
+**Datum:** 2026-06-03 (Update: Overflow entfernt, 50 SWAE-Items kopiert, Mächte explizit als Advances)
+**Quelle:** `Texte/Horror_Companion_Archetypes_(SWADE).pdf` (extrahiert via pdftotext)
+**Build-Skript:** `logs/build_horror_all.py`
+**Trace:** `logs/horror_all_trace.txt`
+**Gespeichert:** `chars/Archetypen/Archetyp_Horror_*.json` (36 Dateien)
+
+## Status: 36 gebaut, 1 perfekt, 12 Monster korrekt vervolkt
+
+| Kategorie | Anzahl | Anmerkung |
+|---|---|---|
+| **OK (perfekt)** | 1 | Psychic — 0 Anomalien, 0 Diff |
+| **Monster-Volk** | 8 | Engel, Dämon, Mumie, Flickenmonster, Phantom, Wiedergänger, Vampir, Werwolf — korrektes Volk gesetzt |
+| **Mensch** | 24 | Ghost Hunter, Nerd, Jock, Exorcist, Gamer, Party Animal, Runner, Witch, Doctor, Occultist, Constable, Journalist, Burglar, Aristocrat, Mambo, Sailor, Explorer, Soldier, Socialite, Gumshoe, Librarian, Magician, Survivor |
+| **Superkräfte (Mensch)** | 4 | Slayer, Demonologist (Monstrous), Swamp Freak, Nemesis — Gifts of the Night nicht simulierbar |
+
+## Setting-Erweiterungen
+
+**50 SWAE-Items ins Horror Kompendium kopiert** (Waffen, Rüstung, Alltag). Gear-Käufe jetzt explizit pro Archetyp. **Macht-Overflow entfernt** — stattdessen explizite `('talent', 'Neue Mächte')` + `('power', 'X')` in den Advances (nach SciFi-Vorbild).
+
+## Build-Ansatz (nach SciFi-Vorbild)
+
+- Kein Auto-Overflow — Mächte chargen versucht, Rest explizit als `('talent', 'Neue Mächte')` + `('power', 'X')` in Advances
+- Monster-Volk via `VOLK_AUTO`-Dict, Auto-Handicaps aus manuellen Listen entfernt
+- `ignore_voraussetzungen=True` bei allen Talent-Calls
+- Gear: 50 SWAE-Items kopiert, explizite Listen pro Archetyp
+
+## Monster-Völker (✓ korrekt implementiert)
+
+8 von 8 Monster-Archetypen nutzen jetzt ihr korrektes Horror-Volk (vorher alle als Mensch gebaut):
+
+| Archetyp (EN) | Volk (DE) | Auto-Handicaps | Auto-Talente | Attribut-Boni |
+|---|---|---|---|---|
+| Angel | Engel | Schwur, Auffällig | Flug | Stärke+2, Konstitution+2 |
+| Demon | Dämon | Böse, Schwäche (Geweihtes Wasser) | Infrarotsicht | — |
+| Mummy | Mumie | Hässlich, Langsam, Schwäche (Feuer) | Zäh | — |
+| Patchwork Man | Flickenmonster | Hässlich, Außenseiter, Schwerfällig, Schwäche (Feuer), Schwäche (Elektrizität) | Zäh, Kräftig | Stärke+2, Konstitution+2 |
+| Phantom | Phantom | Schwäche (Salz) | Flug | — |
+| Revenant | Wiedergänger | Schwur, Hässlich | Zäh | — |
+| Vampire | Vampir | Schwäche (Sonnenlicht), Schwäche (Pfahl), Abhängigkeit (Blut), Schwäche (Geweihtes Wasser) | Nachtsicht, Zäh | Stärke+2 |
+| Werewolf | Werwolf | Blutdurst, Schwäche (Silber) | Gestaltwandel, Infrarotsicht | — |
+
+## Haupt-Anomalie: Budget-Erschöpfung (kein Code-Bug)
+
+Die offiziellen Horror-Companion-Bögen **überziehen systematisch das 4HP-Budget**. Nach CharGen (5 Attr + 12 Skill + 4HP) sind sämtliche Handicap-Punkte aufgebraucht. Talente werden mit `ok=False` abgelehnt, weil weder HP noch Aufstiege zum Bezahlen verfügbar sind.
+
+**Typischer Ablauf:**
+```
+Punkte nach Skills: {attribut: 0, fertigkeit: 0, handicap: 0, aufstiege: 0}
+→ talent(Attraktiv) → False  (Budget erschöpft)
+```
+
+`ignore_voraussetzungen=True` funktioniert korrekt im Code (`talent_funktionen.py:1050` prüft das Flag). Der Fehler liegt in der Budget-Logik (`_verrechne_talent_kosten`), nicht in der Voraussetzungsprüfung.
+
+## Macht-Verarbeitung (alle Keys existieren)
+
+Alle genannten Mächte (`Kriegersegen`, `Fluchwort`, `Geisterruf`, `Aufheben`, `Bannung`, `Schutz`, `Heilung`, `Eigenschaft erhöhen/senken`, `Flächenschlag`, `Schlummer`) **existieren** im Horror Kompendium. Fehlschläge liegen an:
+- **AB-Slot-Limit**: CharGen erlaubt nur 2-5 Startmächte (je nach AB), Rest braucht `Neue Mächte`-Advances
+- **Voraussetzungen**: Manche Mächte haben Rang-/Attribut-Voraussetzungen
+
+Gelöst per explizite Advances: Witch (Fluchwort+Geisterruf), Occultist (Aufheben), Mummy (Flächenschlag+Schlummer). Verbleibende Macht-Diffs (Exorcist: Kriegersegen, Magician: Bannung, Demonologist: mehrere) als Anomalie dokumentiert.
+
+## Perfekter Build
+
+**Psychic** (AH Psionischer Ermittler): 0 Anomalien, alle Attribute/Fertigkeiten/Talente/Handicaps/Mächte exakt getroffen, Budget aufgegangen.
+
+## Nahezu perfekte Builds (nur 1 Diff)
+
+- **Aristocrat** — 4 Anomalien (HP-Überschuss), 0 Diff
+- **Journalist** — 5 Anomalien, 1 Diff (Aufmerksamkeit FEHLT, Budget)
+- **Librarian** — 5 Anomalien, 2 Diffs (Recherche W6 statt W8, Heimlichkeit W4 statt W6)
+- **Occultist** — 1 Anomalie, 2 Diffs (Konstitution W4 statt W6)
+- **Party Animal** — 3 Anomalien, 1 Diff (Provozieren W4 statt W6)
+
+## Superkräfte-Archetypen (4, nicht simulierbar)
+
+Slayer, Demonologist (Monstrous), Swamp Freak, Nemesis nutzen "Gifts of the Night" — ein Superkräfte-Punktesystem (13-15 SKP für Super Attribute/Edge/Skills). Dieses System ist im Horror Kompendium nicht als standardisierte CharGen-Mechanik abgebildet. Die Archetypen wurden als Mensch mit dokumentierten Lücken gespeichert.
+
+## Systematische Auffälligkeiten
+
+| Kategorie | Betroffene | Ursache |
+|---|---|---|
+| Budget: Talente abgelehnt | ~18/36 | Auch `talent_mit_aufstieg` rejected — vermutlich Voraussetzungen in `_pruefe_voraussetzungen_fuer_auswahl` |
+| HP-Limit: Manuelle Handicaps >4HP | Flickenmonster (7HP), Mumie (6HP), Vampir (6HP), Wiedergänger (5HP) | Build-Script addiert zu viele manuelle Handicaps. **Auto-Handicaps des Volks zählen NICHT zur HP-Bilanz** (`volk.py:291`) |
+| Extra-Aufstiege | Variiert pro Archetyp | Attribut/Skill-Defizit durch Doppelkosten + untrainierte Aktivierung → als NOTIZ dokumentiert |
+| Macht-Diffs | Exorcist, Magician, Demonologist | Voraussetzungen oder AB nicht gesetzt |
+| Fertigkeiten FEHLT im Diff | Resolved: untrainierte Skills (W4-2) wurden vom `snap()`-Filter (driver.py:86-90) ausgeblendet. Fix: `modifier < 0`-Check in Skill-Retry aktiviert sie jetzt |

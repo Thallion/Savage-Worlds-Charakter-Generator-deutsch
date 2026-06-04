@@ -5,16 +5,18 @@
     "Elf": {
       "name": "Elf",
       "handicaps": [
-        "Schlank (-1 Robustheit, -1 auf Konstitutionsproben)",
+        "Schlank (-1 Robustheit)",
         "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)"
       ],
       "talente": [],
       "besonderheiten": [
-        "Elfenmagie (Freie Wiederholung gegen gegnerische Mächte)",
         "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-        "Intelligenz (Verstand W6 statt W4, Maximum W12+1)",
+        "Intuition (Willenskraft W6 statt W4, Maximum W12+1)",
         "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-        "Geschärfte Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)"
+        "Geschärfte Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)",
+        "Harmonische Magie (Die Wirkungsdauer der vom Elf gewirkten Mächte wird verdoppelt)",
+        "Zweistimmiger Gesang (+1 auf Darbietung beim Singen)",
+        "Nichtschläfer (Benötigt keinen Schlaf, nur eine ruhige Trance/Meditation)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -28,8 +30,7 @@
       "effects": {
         "attribute_bonuses": {
           "Geschicklichkeit": 2,
-          "Verstand": 2,
-          "Konstitution": -1
+          "Willenskraft": 2
         },
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
@@ -44,10 +45,12 @@
           "Zwei linke Hände"
         ],
         "spezielle_effekte": {
-          "elfenmagie": true,
           "nachtsicht": true,
           "geschaerfte_sinne": true,
-          "zwei_linke_haende": true
+          "zwei_linke_haende": true,
+          "harmonische_magie": true,
+          "zweistimmiger_gesang": true,
+          "nichtschlaefer": true
         },
         "wahlmoeglichkeiten": {}
       }
@@ -59,10 +62,10 @@
       ],
       "talente": [],
       "besonderheiten": [
-        "Elfenmagie (Freie Wiederholung gegen gegnerische Mächte)",
         "Flexibilität (Beginnt mit W6 in einem Attribut statt W4, erhöht Maximum nicht)",
         "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-        "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)"
+        "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Zweistimmiger Gesang (+1 auf Darbietung beim Singen)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -82,9 +85,9 @@
           "Nachtsicht"
         ],
         "spezielle_effekte": {
-          "elfenmagie": true,
           "nachtsicht": true,
-          "aussenseiter_leicht": true
+          "aussenseiter_leicht": true,
+          "zweistimmiger_gesang": true
         },
         "wahlmoeglichkeiten": {
           "freies_attribut": true,
@@ -94,18 +97,11 @@
     },
     "Halbork": {
       "name": "Halbork",
-      "handicaps": [
-        "Außenseiter (leicht, -2 auf Überredenproben, werden oft abgelehnt oder verspottet)",
-        "Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)"
-      ],
+      "handicaps": [],
       "talente": [],
       "besonderheiten": [
-        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-        "Einschüchternd (Beginnt mit W4 in Einschüchtern, Maximum W12+1)",
-        "Orkische Wildheit (+1 Robustheit)",
-        "Stark (Stärke W6 statt W4, Maximum W12+1)",
-        "Abgehärtet (Stärke W6 ODER Konstitution W6 statt W4, Maximum W12+1)",
-        "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+        "Zäher Hund (zäher und leidensfähiger als Menschen – Konstitution W6 statt W4, Maximum W12+1)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -118,7 +114,7 @@
       "custom": false,
       "effects": {
         "attribute_bonuses": {
-          "Stärke": 2
+          "Konstitution": 2
         },
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
@@ -128,13 +124,9 @@
           "Außenseiter_leicht"
         ],
         "spezielle_effekte": {
-          "dunkelsicht": true,
-          "waermesicht": true,
-          "aussenseiter_leicht": true
+          "dunkelsicht": true
         },
-        "wahlmoeglichkeiten": {
-          "attribut_staerke_oder_konstitution": true
-        }
+        "wahlmoeglichkeiten": {}
       }
     },
     "Mensch": {
@@ -169,10 +161,7 @@
     },
     "Zwerg": {
       "name": "Zwerg",
-      "handicaps": [
-        "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Schritt reduziert)",
-        "Verringerte Bewegungsweite (-1 Bewegungsweite, Sprintwürfel um einen Typ)"
-      ],
+      "handicaps": [],
       "talente": [],
       "besonderheiten": [
         "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
@@ -180,7 +169,9 @@
         "Steingespür (+2 auf Wahrnehmungsproben bei ungewöhnlich bearbeitetem Stein innerhalb von 3m)",
         "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1, Stärke um einen Würfel höher für Belastung und Mindeststärke)",
         "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-        "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)"
+        "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)",
+        "Nichtschwimmer (Schlechter Auftrieb – kann nicht schwimmen)",
+        "Hitzeresistenz (+4 auf Proben gegen große Hitze, z.B. in Schmiede/Lava)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -196,18 +187,23 @@
           "Konstitution": 2
         },
         "robustheit_bonus": 0,
-        "bewegungsweite_bonus": -1,
+        "bewegungsweite_bonus": 0,
         "fertigkeits_startboni": {},
         "auto_talente": [
           "Nachtsicht"
         ],
-        "auto_handicaps": [],
+        "auto_handicaps": [
+          "Nichtschwimmer",
+          "Langsam_leicht"
+        ],
         "spezielle_effekte": {
           "dunkelsicht": true,
           "eiserne_konstitution": true,
           "steingespür": true,
           "staerke_bonus_traglast": true,
-          "nachtsicht": true
+          "nachtsicht": true,
+          "hitzeresistenz": true,
+          "nichtschwimmer": true
         },
         "wahlmoeglichkeiten": {}
       }
@@ -215,28 +211,20 @@
     "Goblin": {
       "name": "Goblin",
       "handicaps": [
-        "Größe -1 (Reduzierte Größe und Robustheit um 1)",
-        "Außenseiter (Schwer) (-2 auf alle Überreden-Proben; werden von anderen oft gemobbt)",
-        "Fies (-1 Überredenproben)",
-        "Größe -1 (Reduzierte Robustheit um 1)"
+        "Größe -1 (Reduzierte Größe und Robustheit)",
+        "Selbstzweifel (-1 auf Willenskraft-Proben – niedrige Seelenkraft)",
+        "Abergläubisch (Aberglaube und Neugier prägen das Verhalten)"
       ],
       "talente": [],
       "besonderheiten": [
-        "Flink (Geschicklichkeit W8 statt W4, Maximum W12+2)",
-        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-        "Fähiger Reiter (Beginnt mit W4 in Reiten)",
-        "Heimlich (Heimlichkeit W6 statt W4, Maximum W12+1)",
-        "Alternativfähigkeit – Alles essen: Freie Wiederholung bei Überleben-Proben zur Nahrungssuche; +2 bei Konstitutionsproben gegen toxische Substanzen; ersetzt Fähiger Reiter",
-        "Alternativfähigkeit – Harter Schädel, große Zähne: Natürliche Waffe Biss, Stärke+W4 Schaden; ersetzt Heimlich",
-        "Alternativfähigkeit – Übergroße Ohren: Wahrnehmung W6 statt W4, Maximum W12+1; ersetzt Fähiger Reiter",
-        "Geschickt (Heimlichkeit W6 statt W4, Maximum W12+1)",
-        "Überlebenskünstler (Kostenloses Anfänger-Talent nach Wahl)",
-        "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)"
+        "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
+        "Geschärfte Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)",
+        "Biss (Stä+W4 Schaden, kleine Hauer/spitze Zähne)"
       ],
       "sprachen": [
         "Gemeinsprache",
-        "Goblinisch",
-        "Orkisch"
+        "Goblinisch"
       ],
       "altersspanne": "Erwachsen mit 12, Alt mit 25, maximales Alter 30-50",
       "groesse_maennlich": "110-130cm, 15-25kg (Durchschnitt 120cm, 20kg)",
@@ -245,122 +233,44 @@
       "custom": false,
       "effects": {
         "attribute_bonuses": {
-          "Geschicklichkeit": 4
+          "Geschicklichkeit": 2
         },
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
         "fertigkeits_startboni": {
-          "Heimlichkeit": 2,
-          "Reiten": 2
+          "Wahrnehmung": 2
         },
         "fertigkeits_modifier_boni": {
           "Überreden": -2
         },
         "auto_talente": [],
         "auto_handicaps": [
-          "Größe -1 (Reduzierte Größe und Robustheit)"
+          "Abergläubisch",
+          "Selbstzweifel"
         ],
         "spezielle_effekte": {
           "dunkelsicht": true,
-          "waermesicht": true,
-          "fies": true,
-          "ueberlebenskuenstler": true
+          "geschaerfte_sinne": true,
+          "biss": true,
+          "groesse_minus1": true
         },
-        "wahlmoeglichkeiten": {
-          "freies_anfaenger_talent": true
-        },
+        "wahlmoeglichkeiten": {},
         "groesse_modifikator": -1
-      }
-    },
-    "Necker": {
-      "name": "Necker",
-      "handicaps": [
-        "Abhängigkeit (Wasser: 1 Stunde pro 24 Stunden, sonst Erschöpfung bis Ausgeschaltet, dann Tod)"
-      ],
-      "talente": [],
-      "besonderheiten": [
-        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-        "Robustheit (+1 Robustheit durch zähes Fleisch der Tiefen)",
-        "Wasserwesen (Können nicht ertrinken, volle Bewegungsweite beim Schwimmen)"
-      ],
-      "sprachen": [
-        "Gemeinsprache",
-        "Aquarianisch"
-      ],
-      "altersspanne": "Erwachsen mit 25, Alt mit 80, maximales Alter 120-200",
-      "groesse_maennlich": "1,70-2,10m, 80-120kg (Durchschnitt 1,90m, 100kg)",
-      "groesse_weiblich": "1,65-2,00m, 70-110kg (Durchschnitt 1,85m, 90kg)",
-      "aktiv": false,
-      "custom": false,
-      "effects": {
-        "attribute_bonuses": {},
-        "robustheit_bonus": 1,
-        "bewegungsweite_bonus": 0,
-        "fertigkeits_startboni": {},
-        "auto_talente": [
-          "Nachtsicht"
-        ],
-        "spezielle_effekte": {
-          "nachtsicht": true,
-          "wasserwesen": true,
-          "abhaengigkeit_wasser": true
-        },
-        "wahlmoeglichkeiten": {}
-      }
-    },
-    "Drachling": {
-      "name": "Drachling",
-      "handicaps": [
-        "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
-        "Kaltblütig (-1 auf Geschicklichkeits-, Stärke-, Konstitutionsproben bei unter 18°)",
-        "Schlecht gelaunt (Handicap Arrogant)"
-      ],
-      "talente": [],
-      "besonderheiten": [
-        "Biss/Klauen (Stä+W4, PB 2)",
-        "Odemwaffe (2W6 Schaden, Kegelschablone oder 12'' Linie, Athletikprobe)",
-        "Panzerung +2 (Dicke schuppige Haut)",
-        "Widerstand gegen Naturgewalten (Hitze: +4 Resistenz, -4 Schaden)"
-      ],
-      "sprachen": [
-        "Gemeinsprache",
-        "Drakonisch"
-      ],
-      "altersspanne": "Erwachsen mit 30, Alt mit 200, maximales Alter 300-500",
-      "groesse_maennlich": "1,80-2,20m, 90-130kg (Durchschnitt 2,00m, 110kg)",
-      "groesse_weiblich": "1,75-2,15m, 85-125kg (Durchschnitt 1,95m, 105kg)",
-      "aktiv": false,
-      "custom": false,
-      "effects": {
-        "attribute_bonuses": {},
-        "robustheit_bonus": 0,
-        "bewegungsweite_bonus": 0,
-        "fertigkeits_startboni": {},
-        "auto_talente": [],
-        "spezielle_effekte": {
-          "biss_klauen": true,
-          "odemwaffe": true,
-          "panzerung_2": true,
-          "widerstand_hitze": true,
-          "anfaelligkeit_kaelte": true,
-          "kaltblutig": true,
-          "arrogant": true
-        },
-        "wahlmoeglichkeiten": {}
       }
     },
     "Ork": {
       "name": "Ork",
       "handicaps": [
-        "Außenseiter (schwer: -2 Überreden, können als Monster behandelt werden)",
         "Brutal (-1 Verstandsproben)"
       ],
       "talente": [],
       "besonderheiten": [
         "Größe +1 (+1 Robustheit)",
         "Stark (Stärke W6, Maximum W12+1)",
-        "Wärmesicht (Halbiert Abzüge für schlechte Beleuchtung bei Hitze ausstrahlenden Zielen)",
-        "Widerstandsfähig (Konstitution W6, Maximum W12+1)"
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
+        "Widerstandsfähig (Konstitution W6, Maximum W12+1)",
+        "Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)",
+        "Natürlicher Rüstungsschutz I (Panzerung +1 durch ledrige Haut)"
       ],
       "sprachen": [
         "Orkisch"
@@ -380,12 +290,16 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "spezielle_effekte": {
-          "waermesicht": true,
-          "aussenseiter_schwer": true,
-          "brutal": true
+          "brutal": true,
+          "biss": true,
+          "panzerung_1": true,
+          "dunkelsicht": true
         },
         "wahlmoeglichkeiten": {},
-        "groesse_modifikator": 1
+        "groesse_modifikator": 1,
+        "auto_handicaps": [
+          "Außenseiter_schwer"
+        ]
       }
     },
     "Achaz": {
@@ -394,12 +308,10 @@
         "Anfälligkeit für Naturgewalten (Kälte: -4 Proben, +4 Schaden)",
         "Außenseiter (leicht: -2 Überreden durch seltsame Sitten/Erscheinung)"
       ],
-      "talente": [
-        "Aufmerksamkeit"
-      ],
+      "talente": [],
       "besonderheiten": [
+        "Geschärfte Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)",
         "Biss (Stä+W4 Schaden, gegen gepackte Feinde)",
-        "Geschärfte Sinne (Talent Aufmerksamkeit)",
         "Panzerung +2 (Schuppige Haut wie Lederrüstung)"
       ],
       "sprachen": [
@@ -415,11 +327,12 @@
         "attribute_bonuses": {},
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
-        "fertigkeits_startboni": {},
-        "auto_talente": [
-          "Aufmerksamkeit"
-        ],
+        "fertigkeits_startboni": {
+          "Wahrnehmung": 2
+        },
+        "auto_talente": [],
         "spezielle_effekte": {
+          "geschaerfte_sinne": true,
           "biss": true,
           "panzerung_2": true,
           "anfaelligkeit_kaelte": true,
@@ -427,24 +340,61 @@
         },
         "wahlmoeglichkeiten": {}
       }
+    },
+    "Holberker": {
+      "name": "Holberker",
+      "handicaps": [
+        "Ungebildet (Verstandbasierte Fertigkeiten sind schwerer zu steigern – tumb und grobschlächtig)"
+      ],
+      "talente": [],
+      "besonderheiten": [
+        "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)",
+        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+        "Richtungssinn (Überleben W6 statt W4 zur Orientierung in der Wildnis)"
+      ],
+      "sprachen": [
+        "Gemeinsprache",
+        "Holberksch (Dialekt)"
+      ],
+      "altersspanne": "Erwachsen mit 16, Alt mit 60, maximales Alter 70-90",
+      "groesse_maennlich": "1,65-1,90m, 70-95kg (Durchschnitt 1,78m, 82kg)",
+      "groesse_weiblich": "1,55-1,80m, 60-80kg (Durchschnitt 1,68m, 68kg)",
+      "aktiv": true,
+      "custom": false,
+      "effects": {
+        "attribute_bonuses": {
+          "Konstitution": 2
+        },
+        "robustheit_bonus": 0,
+        "bewegungsweite_bonus": 0,
+        "fertigkeits_startboni": {
+          "Überleben": 2
+        },
+        "auto_talente": [
+          "Nachtsicht"
+        ],
+        "auto_handicaps": [
+          "Ungebildet"
+        ],
+        "spezielle_effekte": {
+          "nachtsicht": true,
+          "richtungssinn": true,
+          "wildnisverbunden": true
+        },
+        "wahlmoeglichkeiten": {}
+      }
     }
   },
   "voelker_selected": {
-    "Elf": false,
-    "Gnom": false,
-    "Halbelf": false,
-    "Halbling": false,
-    "Halbork": false,
-    "Ifrits": false,
     "Mensch": true,
-    "Oreads": false,
-    "Zwerg": false,
-    "Android": false,
-    "Aquarianer": false,
-    "Avionen": false,
-    "Halbelfe": false,
-    "Rakashaner": false,
-    "Saurianer": false
+    "Elf": true,
+    "Halbelf": true,
+    "Zwerg": true,
+    "Ork": true,
+    "Halbork": true,
+    "Goblin": true,
+    "Achaz": true,
+    "Holberker": true
   },
   "attribute": {
     "Geschicklichkeit": {

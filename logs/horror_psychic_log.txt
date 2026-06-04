@@ -1,0 +1,12 @@
+# Archetyp-Erstellung: Psychic (Horror Kompendium)
+# Stand: 2026-06-03T18:32:02
+# 2 Anomalie(n) von 3 Schritten
+
+## ANOMALIEN
+  [!] handicap(Duesternis_leicht): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] handicap(Sanftmuetig): ok=False warnung=Aktion lieferte False/None kosten=0 None
+
+## ALLE SCHRITTE
+  - neuer_charakter(Psychic, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
+  - handicap(Duesternis_leicht): ok=False kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 0} Geld=500
+  - handicap(Sanftmuetig): ok=False kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 0} Geld=500

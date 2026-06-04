@@ -166,6 +166,10 @@ def berechne_abgeleitete_werte(charakter):
                 elif "Klein" in handicap.name and handicap.stufe == "leicht":
                     groesse -= 1
 
+                # Schlank: -1 Robustheit (schmaler Körperbau, z.B. Elfen)
+                elif "Schlank" in handicap.name:
+                    robustheit_bonus -= 1
+
         # Völker-Effekte: Größe und Robustheit-Bonus getrennt
         voelker_groesse = _berechne_voelker_groesse(charakter)
         groesse += voelker_groesse

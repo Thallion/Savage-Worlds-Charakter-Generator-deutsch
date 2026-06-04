@@ -21,9 +21,26 @@ class MockWuerfel:
 class MockAttribut:
     def __init__(self, name, wert=4, modifier=0):
         self.name = name
-        self.wert = wert
-        self.modifier = modifier
         self.wuerfel = MockWuerfel(value=wert, modifier=modifier)
+
+    # Spiegelt die Binding-Synchronisation des echten Attribut-Modells:
+    # models/attribut.py bindet wuerfel.value -> wert (und wuerfel.modifier -> modifier).
+    # Daher müssen .wert / .modifier immer den Würfel widerspiegeln.
+    @property
+    def wert(self):
+        return self.wuerfel.value
+
+    @wert.setter
+    def wert(self, value):
+        self.wuerfel.value = value
+
+    @property
+    def modifier(self):
+        return self.wuerfel.modifier
+
+    @modifier.setter
+    def modifier(self, value):
+        self.wuerfel.modifier = value
 
 
 class MockAttributRef:

@@ -572,6 +572,13 @@ class Volk(EventDispatcher):
         kontextuell ausgewertet, nicht als Stat-Bonus eingerechnet.
         """
         try:
+            # Geschärfte Sinne: Wahrnehmung W4+0 → W6+0
+            if self._hat_spezialeffekt_typ('wahrnehmung_w6'):
+                fertigkeit = charakter.fertigkeiten.get('Wahrnehmung')
+                if fertigkeit and fertigkeit.wert == 4 and fertigkeit.modifier == 0:
+                    fertigkeit.wuerfel.value = 6
+                    Logger.info(f"Volk {self.name}: Wahrnehmung von W4 auf W6 erhöht (Geschärfte Sinne)")
+
             # Scharfe Sinne: Wahrnehmung W4+0 → W8+0
             if self._hat_spezialeffekt_typ('wahrnehmung_w8'):
                 fertigkeit = charakter.fertigkeiten.get('Wahrnehmung')
@@ -592,6 +599,13 @@ class Volk(EventDispatcher):
     def _remove_spezialeffekt_stat_changes(self, charakter, grundfertigkeiten):
         """Macht die Stat-Änderungen aus _apply_spezialeffekt_stat_changes rückgängig."""
         try:
+            # Geschärfte Sinne rückgängig: Wahrnehmung W6+0 → W4+0
+            if self._hat_spezialeffekt_typ('wahrnehmung_w6'):
+                fertigkeit = charakter.fertigkeiten.get('Wahrnehmung')
+                if fertigkeit and fertigkeit.wert == 6 and fertigkeit.modifier == 0:
+                    fertigkeit.wuerfel.value = 4
+                    Logger.info(f"Volk {self.name}: Wahrnehmung von W6 auf W4 zurückgesetzt (Geschärfte Sinne)")
+
             # Scharfe Sinne rückgängig: Wahrnehmung W8+0 → W4+0
             if self._hat_spezialeffekt_typ('wahrnehmung_w8'):
                 fertigkeit = charakter.fertigkeiten.get('Wahrnehmung')

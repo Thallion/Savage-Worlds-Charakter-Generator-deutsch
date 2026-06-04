@@ -1,0 +1,46 @@
+# Archetyp-Erstellung: Ghost Hunter (Horror Kompendium)
+# Stand: 2026-06-03T22:06:01
+# 5 Anomalie(n) von 34 Schritten
+
+## ANOMALIEN
+  [!] talent(Stinkreich): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] kaufen(Geisterfallex1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Geisterfalle zum Preis 0 gekauft kosten=350 Vermögen
+  [!] kaufen(Geisterjägerpaketx1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Geisterjägerpaket zum Preis 0 gekauft kosten=0 None
+  [!] kaufen(Kamera (normal)x1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Kamera (normal) zum Preis 0 gekauft kosten=0 None
+  [!] kaufen(Taschenlampe (10" Strahl)x1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Taschenlampe (10" Strahl) zum Preis 0 gekauft kosten=0 None
+
+## ALLE SCHRITTE
+  - neuer_charakter(Ghost Hunter, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
+  - handicap(Neugierig): ok=True kosten=-2 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 2} Geld=500
+  - handicap(Gierig_leicht): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 3} Geld=500
+  - handicap(Tick): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Konstitution): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - fertigkeit(Fahren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 4} Geld=500
+  - fertigkeit(Elektronik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 10, 'handicap': 4} Geld=500
+  - fertigkeit(Elektronik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 4} Geld=500
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 8, 'handicap': 4} Geld=500
+  - fertigkeit(Wahrnehmung): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 7, 'handicap': 4} Geld=500
+  - fertigkeit(Okkultismus): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 6, 'handicap': 4} Geld=500
+  - fertigkeit(Okkultismus): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 5, 'handicap': 4} Geld=500
+  - fertigkeit(Darbietung): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 4, 'handicap': 4} Geld=500
+  - fertigkeit(Darbietung): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 3, 'handicap': 4} Geld=500
+  - fertigkeit(Überreden): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 2, 'handicap': 4} Geld=500
+  - fertigkeit(Reparieren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 1, 'handicap': 4} Geld=500
+  - fertigkeit(Reparieren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 4} Geld=500
+  - fertigkeit(Recherche) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 4} Geld=500
+  - fertigkeit(Naturwissenschaften) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 4} Geld=500
+  - fertigkeit(Schießen) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 4} Geld=500
+  - fertigkeit_mit_hc(Recherche): ok=True kosten=1 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 3} Geld=500
+  - fertigkeit_mit_hc(Naturwissenschaften): ok=True kosten=1 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=500
+  - fertigkeit_mit_hc(Schießen): ok=True kosten=1 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=500
+  - talent(Stinkreich): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=500
+  - kaufen(EMF-Detektorx1): ok=True kosten=150 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=350
+  - kaufen(Geisterfallex1) FORCE: ok=True kosten=350 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - kaufen(Geisterjägerpaketx1) FORCE: ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - kaufen(Kamera (normal)x1) FORCE: ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
+  - kaufen(Taschenlampe (10" Strahl)x1) FORCE: ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=0
