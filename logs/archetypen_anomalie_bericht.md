@@ -181,6 +181,16 @@ und Fert-Steigerungen (fehlende Skill-Schritte werden mit HP nachgekauft).
 
 ## Horror Kompendium (36 Chars · 23 ✓)
 
+> **Update 2026-06-05 (Rebuild nach Völker-Fix + PDF-Content-Integration):** Die SOLL liest
+> auto-Handicaps/-Talente jetzt zur Laufzeit aus `settings/Horror Kompendium.json`
+> (`_load_volk_auto()` in `build_horror_all.py`) → keine veralteten Völker-Diffs mehr.
+> Demon/Revenant/Phantom/Werewolf jetzt **diff=0**. Verbleibende Diffs = 3 Klassen:
+> (a) **HP-Limit** (Mummy `Schwerzüngig`, Patchwork `Rachsüchtig_schwer` — 4. Handicap passt nicht in 4 HP);
+> (b) **Mächte-Slot-Limit** (Demonologist `Bannung`/`Flächenschlag`, Mummy `Eigenschaft erhöhen/senken`/`Heilung`,
+> Witch `Fluchwort`/`Geisterruf` — Keys existieren; `neue_maechte` der AHs ggf. zu knapp);
+> (c) **Punktebudget** (Doctor Stärke, Vampire Willenskraft/Einschüchtern/Überreden, Angel Einschüchtern).
+> Die SOLL-Spalte der Tabelle ist teils aus früheren Läufen; maßgeblich sind die 3 Klassen oben.
+
 | Archetyp | Attr | Fert | HP | Aufst | Fehlende SOLL-Elemente | Fehlende Ausrüstung |
 |---|---|---|---|---|---|---|
 | Angel | 5/5 | 12/12 | 4/4 | 7/7 | fertigkeiten: Einschüchtern soll W6, ist W8 (überzählig) | — |
@@ -325,6 +335,10 @@ Aus dem Deadlands-Lauf (2026-05-31); im Build umgangen, **Code-Fix steht aus** (
    → Spätere Builds umgehen das per `('talent','Neue Mächte') + ('power',X)`-Advances.
 3. **`rang` teils `None` in der JSON** für nicht abgeschlossene (Anfänger-)Builds; für abgeschlossene
    korrekt. ⇒ Rang ist kein verlässliches Korrektheitssignal (vgl. Tabellenspalte „Aufst").
+4. **Loader verwirft Mächte mit nicht-int `machtpunkte` stillschweigend** (2026-06-05, Horror): Mächte,
+   deren `machtpunkte` keine Zahl ist (z.B. PDF „Speziell" bei `Dämon beschwören`/`Exorzismus`), erscheinen
+   nach dem Laden **gar nicht** in `ch.maechte` — kein Fehler, keine Warnung. Workaround im Setting: als `0`
+   + Hinweis in der Beschreibung. → Loader sollte non-int MP abfangen/normalisieren statt zu droppen.
 
 *Test-Treiber (kein App-Bug):* `driver.fertigkeit_auf()` wirft `KeyError` bei unbekanntem Skill statt
 Anomalie → im Build mit `if name in ch.fertigkeiten` geguardet.
@@ -333,6 +347,19 @@ Anomalie → im Build mit `if name in ch.fertigkeiten` geguardet.
 
 **Behoben (2026-06-04):** Deadlands `Sprache`-Fertigkeit (jetzt 31) · Savage Pathfinder
 `Beschwörer`/`Eidolon`/`Banner` · SciFi Phase G (2 Edges, 3 HC, 29 Items, 2 Völker).
+
+**Behoben (2026-06-05) — Horror Kompendium gegen Kauf-PDF (US85083), Details in `logs/horror_setting_review.md`:**
+- **Völker PDF-konform:** auto_handicaps korrigiert (Dämon → `Schwäche (Kaltes Eisen)`; −`Auffällig`/`Hässlich`
+  und erfundene Keys bei Engel/Mumie/Flickenmonster/Wiedergänger), Attribut-Boni ergänzt, Dämon
+  `panzerung_2`/`natuerliche_waffen`/`furchteinflössend` entfernt (sind Talente, keine Volkseigenart).
+  Neues Handicap `Schwäche (Kaltes Eisen)`.
+- **Integriert (Original-PDF-Namen):** Fertigkeit `Alchemie`; 14 Mächte (Exorzismus, Albträume, Kadaversinn,
+  Seance, Boden weihen, Dämon beschwören, Aspekt/Zorn der Loa, Verriegeln/Entriegeln, …); 4 Edges (Courage,
+  Final Girl/Guy, Betagt, Furchterregend); ~52 Race-Monster-Talente (Klauen, Panzerhaut, Nebelform,
+  Bezaubern, Todesberührung, …). **Talente 174→230, Mächte 68→82, Fertigkeiten 33→34.**
+- **Keys auf PDF-Namen umbenannt** (Horror + Rippers): `Unerschütterlich`→`Unerbittlich`, `Visionen`→`Seher`,
+  `Stiller Wirker`→`Stillzauberer`, `Schreikönigin/Schreikönig`→`Scream Queen/King`.
+- **Build-Stale-Fix:** `VOLK_AUTO` liest auto-HCs/-Talente jetzt zur Laufzeit aus dem Setting-JSON.
 
 **Offen (Empfehlung):**
 - **SWAE (~8):** Mobiltelefon, Glock 9mm, Beretta M92SB, Malaydoskop, Schnappmesser, Flachmann, Schalldämpfer.
@@ -505,90 +532,3 @@ Setting-JSON `settings/Horror Kompendium.json` + 5 Archetypen korrigiert, headle
 - **Mumie/Wiedergänger/Vampir auto_talente** (Zäh/Nachtsicht): repräsentieren das UNTOT/Dunkelsicht-
   Paket, sind aber im PDF keine separaten Edges. Belassen, da Entfernen Archetyp-Punktebilanz berührt.
 - **Werwolf** „Stumm/Kann nicht sprechen" (nur Wolfsform) nicht modelliert.
-
----
-
-## Horror Kompendium: Komplett-Review + Integration fehlender Keys (2026-06-05)
-
-Vollständiges Setting-Review gegen das Kauf-PDF (Details: `logs/horror_setting_review.md`).
-Ergebnis: Talente 174→**230**, Mächte 68→**82**, Fertigkeiten 33→**34**.
-
-### Integriert (Original-PDF-Bezeichnungen)
-- **Fertigkeit** `Alchemie` (Verstand) — AH Alchemist hatte vorher keine arkane Fertigkeit.
-- **14 Mächte**: Aspekt der Rada Loa, Albträume, Aufspüren, Ausspähung, Boden weihen, Dämon beschwören,
-  Exorzismus, Illusionäre Schrecken, Kadaversinn, Seance, Verriegeln/Entriegeln, Verwandlung unterdrücken,
-  Zorn der Petro Loa, Zuflucht.
-- **4 allgemeine Edges**: Courage, Final Girl/Guy, Betagt, Furchterregend.
-- **~52 Race-Monster-Talente** (kategorie „Monströs", Voraussetzung=Volk; geteilte als `{oder:[…]}`).
-  Kollision: Dämon-Feuerkegel = `Höllenfeuer (Dämon)` (bestehendes `Höllenfeuer` ist anderes Macht-Edge).
-- **Demon-Archetyp**: Edge `Klauen` ergänzt (offizieller Bogen).
-- **Dämon-Volk bereinigt**: `natuerliche_waffen`/`panzerung_2`/`furchteinflössend` entfernt
-  (sind jetzt die Talente Klauen/Panzerhaut). `infrarotsicht`/`resistenz_feuer` bleiben.
-
-### Keys auf PDF-Namen umbenannt (Horror + Rippers + 5 Archetypen)
-`Unerschütterlich`→**Unerbittlich** (Doctor), `Visionen`→**Seher** (Psychic),
-`Stiller Wirker`→**Stillzauberer** (Occultist), `Schreikönigin/Schreikönig`→**Scream Queen/King**
-(+`_2`; Slayer, Survivor). `Visionen` ist in Pathfinder/Aventurien KEIN Talent-Key → unberührt.
-
-### Code-/Daten-Befunde
-- **Loader-Bug (latent):** `controllers`/Loader verwirft Mächte mit **nicht-int `machtpunkte`**
-  stillschweigend beim Laden. „Dämon beschwören"/„Exorzismus" (PDF-MP „Speziell") deshalb als
-  `machtpunkte:0` + Hinweis in der Beschreibung. → Falls künftig „Speziell" o.ä. eingetragen wird,
-  fehlt die Macht kommentarlos. Sollte im Loader abgefangen werden.
-
-### Build-Skripte NICHT neu gestartet (bewusst) — `logs/build_horror_all.py`
-- Die Archetyp-JSONs wurden in dieser Sitzung **direkt** korrigiert, nicht über die Build-Skripte.
-- `logs/build_horror_all.py` ist ein **veralteter Scratch-Stand**, der schon vor der Sitzung von den
-  committeten Archetypen abweicht. Beispiel **Mummy**: Build-Daten `['Schwerfällig','Zögerlich',
-  'Materialkomponenten_schwer','Schwerzüngig']` vs. committet `['Langsam_leicht','Zögerlich',
-  'Materialkomponenten_schwer','Schwäche (Feuer)']`. Es referenziert zudem die alten (umbenannten)
-  Talent-Keys und alte Volks-Handicaps.
-- **Ein Re-Run würde verifizierte Hand-Fixes (und frühere Hand-Tunings) zurückdrehen** → daher NICHT
-  ausgeführt. Maßgeblich/kanonisch sind die committeten Archetyp-JSONs. Wer das Build-Skript künftig
-  als Generator nutzen will, muss es zuerst mit dem aktuellen Stand abgleichen (Renames + Handicap-
-  Listen + Klauen/Dämon + gefüllte `('talent', None)`-Lücken).
-
----
-
-## KORREKTUR: Hand-Edits verworfen, Build neu gebaut = Basis (2026-06-05)
-
-**Wichtig — überschreibt den vorherigen Abschnitt „Build-Skripte NICHT neu gestartet".**
-Die direkten Hand-Edits an den Archetyp-JSONs waren **illegitim** (Tool-Test: Archetypen müssen über
-den Driver/Build entstehen, Abweichungen werden *geloggt*, nicht im Output retuschiert — vgl. Regel
-„keine Werte erzwingen"). Korrigiert:
-
-- **Legitim behalten:** Setting-JSON-Datenfixes (Völker, neue Talente/Mächte/`Alchemie`, Key-Renames,
-  Dämon-Bereinigung) — das ist der *Input* des Tools.
-- **Build-Skript synchronisiert (nur nötiger Rename-Sync):** 7 Talent-Referenzen auf die umbenannten
-  Keys (`Seher`/`Unerbittlich`/`Stillzauberer`/`Scream Queen/King`).
-- **`logs/build_horror_all.py` neu ausgeführt** → alle 36 Archetypen über den Driver regeneriert.
-  Meine Hand-Edits sind damit **überschrieben/verworfen**. Tool-Output = Basis.
-- Ergebnis: **4/36 ohne Anomalien** (Jock, Mambo, Occultist, Psychic). Logs: `logs/horror_all_trace.txt`,
-  `logs/horror_*_bericht.json`.
-
-### Anomalie-Kategorien (≈255 über alle berichte) — überwiegend dokumentiertes Verhalten
-- **150× `ok=False`**: Tool lehnt vom Build *über-angefragte* Talente korrekt ab (kein freier Edge-Slot
-  auf Anfänger-Rang / Rang-/Voraussetzungs-Check). Erwartet.
-- **84× Notizen/Diffs**: u.a. „MONSTROeSE KRAFT (nicht simulierbar): Ageless/Bespoil/…" (Driver kann
-  Rassenkräfte nicht abbilden) + SOLL/IST-Diffs.
-- **21× FORCE-Käufe** bei Geldmangel (dokumentiert).
-
-### Echte Findings (SOLL/IST-Diffs)
-1. **Veraltete SOLL-Dicts im Build (kein Bug, Folge meiner Völker-Fixes):** Die monströsen `soll`-Erwartungen
-   nennen noch die *alten* Volks-Handicaps → Diffs sind genau meine Korrekturen:
-   - Demon: `Schwäche (Kaltes Eisen)` ZUVIEL · `Böse`/`Schwäche (Geweihtes Wasser)` FEHLT
-   - Angel: `Auffällig` FEHLT · Mummy/Patchwork/Revenant: `Hässlich`/`Außenseiter` FEHLT
-   → **Build-`soll`-Dicts auf die korrigierten Völker nachziehen**, sonst dauerhafte Falsch-Diffs.
-2. **HP-Limit-Ablehnungen:** z.B. Mummy `Schwerzüngig` FEHLT (Key existiert; 4-HP-Limit erreicht, da Build
-   3 weitere Handicaps setzt). Erwartetes Tool-Verhalten — Build überspezifiziert.
-3. **Mächte-Slot-Limit:** Demonologist/Magician/Exorcist: `Bannung`/`Flächenschlag`/`Aufheben`/`Kriegersegen`
-   FEHLT (Keys existieren!). Der Archetyp fordert mehr Mächte als der AH `neue_maechte` gewährt → Tool lehnt ab.
-   **Prüfen:** ob `neue_maechte`-Anzahl der AHs zum offiziellen Bogen passt.
-4. **Punktebudget-Defizite:** Doctor Stärke W4 statt soll W6 · Vampire Willenskraft W6/8 · Angel Einschüchtern
-   W6/8 — Tool erreicht den SOLL-Wert nicht im Budget (mögliche Doppelkosten/Reihenfolge). Echte Findings.
-
-### Nächste legitime Schritte (über den Build, nicht per Hand)
-- Build-`soll`-Dicts der monströsen Archetypen auf korrigierte Völker aktualisieren.
-- Die `('talent', None)`-MISSING-Marker mit den jetzt integrierten Talenten füllen
-  (Demon→`Klauen`, Vampire→`Bezaubern`/`Klauen`, Angel→`Flügelschlag`, Phantom→`Phantom-Unsichtbarkeit`),
-  damit der Build sie tatsächlich auswählt und das Tool sie testet.

@@ -1,0 +1,557 @@
+{
+  "name": "James Denton",
+  "setting": "Rippers",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(James Denton, Rippers)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 500
+    },
+    {
+      "aktion": "handicap(Arrogant)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Rachsüchtig_leicht)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Fies)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Mensch)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk_freies_talent(Mensch,Volltreffer)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Verstand)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Willenskraft)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Schießen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Schießen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Schießen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reiten)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reiten)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reiten)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 3,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Athletik)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 2,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Schnellfeuer)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Verbessertes Schnellfeuer)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Schnell)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Silberkugeln (10)x1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 450,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Heiliges Symbolx1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 425,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Holzpfähle (5)x1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 420,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Salz (5kg Sack)x1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 415,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Rippers_James-Denton_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [],
+  "anomalien_anzahl": 0,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 6,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Kämpfen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Schießen": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Überleben": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Reiten": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Arrogant",
+      "Fies",
+      "Rachsüchtig_leicht"
+    ],
+    "talente": [
+      "Volltreffer",
+      "Schnellfeuer",
+      "Verbessertes Schnellfeuer",
+      "Schnell"
+    ],
+    "maechte": [],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 0,
+      "handicap": 0,
+      "handicap_gesamt": 4,
+      "aufstiege": 1
+    },
+    "machtpunkte": 0,
+    "vermoegen": 415,
+    "rang": "Anfänger",
+    "volk": "Mensch"
+  }
+}

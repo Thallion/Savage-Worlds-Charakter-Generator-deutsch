@@ -615,24 +615,9 @@
       "kostenart": null,
       "punkte": {},
       "vermoegen": 480
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "handicaps: \"Böse\" FEHLT; handicaps: \"Schwäche (Geweihtes Wasser)\" FEHLT; handicaps: \"Schwäche (Kaltes Eisen)\" ZUVIEL",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 3,
-        "aufstiege": 0.5
-      },
-      "vermoegen": 480
     }
   ],
-  "anomalien_anzahl": 12,
+  "anomalien_anzahl": 11,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

@@ -1,0 +1,489 @@
+{
+  "name": "Windmagier",
+  "setting": "50 Fathoms",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Windmagier, 50 Fathoms)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 500
+    },
+    {
+      "aktion": "handicap(Geheimnis)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Angewohnheit_leicht)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Mensch)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk_freies_talent(Mensch,AH (Elementarmagie))",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Seefahrt)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Seefahrt)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Elementarmanipulation)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Geräusch/Stille)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Schutz vor Naturgewalten)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Sturmjäger)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Windsinn)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Arkane Stärkung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Robe mit Kapuzex1)",
+      "ok": true,
+      "kosten": 10,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 490,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Buchx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 440,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Tinte (Fläschchen)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 439,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Federx1)",
+      "ok": true,
+      "kosten": 0.25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 438.75,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Alchemistentaschex1)",
+      "ok": true,
+      "kosten": 25.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 413.75,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_50_Fathoms_Windmagier_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [],
+  "anomalien_anzahl": 0,
+  "endzustand": {
+    "attribute": {
+      "Stärke": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Geschicklichkeit": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überleben": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Seefahrt": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Zaubern": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Angewohnheit_leicht",
+      "Geheimnis"
+    ],
+    "talente": [
+      "AH (Elementarmagie)",
+      "Sturmjäger",
+      "Windsinn",
+      "Arkane Stärkung"
+    ],
+    "maechte": [
+      "Elementarmanipulation",
+      "Geräusch/Stille",
+      "Schutz vor Naturgewalten"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 4,
+      "handicap": 2,
+      "handicap_gesamt": 2,
+      "aufstiege": 1
+    },
+    "machtpunkte": 10,
+    "vermoegen": 413.75,
+    "rang": "Anfänger",
+    "volk": "Mensch"
+  }
+}

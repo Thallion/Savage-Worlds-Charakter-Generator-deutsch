@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Gumshoe (Horror Kompendium)
-# Stand: 2026-06-05T09:40:12
+# Stand: 2026-06-05T12:56:02
 # 5 Anomalie(n) von 45 Schritten
 
 ## ANOMALIEN

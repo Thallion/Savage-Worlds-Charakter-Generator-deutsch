@@ -1,0 +1,437 @@
+{
+  "name": "Elementarmagier",
+  "setting": "50 Fathoms",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Elementarmagier, 50 Fathoms)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 500
+    },
+    {
+      "aktion": "handicap(Geheimnis)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Arrogant)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Mensch)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk_freies_talent(Mensch,AH (Elementarmagie))",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Elementarmanipulation)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Linderung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Heilung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Elementarmeisterschaft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Arkane Stärkung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Alchemistentaschex1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 475,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Buchx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 425,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Tinte (Fläschchen)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 424,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Federx1)",
+      "ok": true,
+      "kosten": 0.25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 423.75,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Robe mit Kapuzex1)",
+      "ok": true,
+      "kosten": 10.0,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 3
+      },
+      "vermoegen": 413.75,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_50_Fathoms_Elementarmagier_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [],
+  "anomalien_anzahl": 0,
+  "endzustand": {
+    "attribute": {
+      "Stärke": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Geschicklichkeit": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Zaubern": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Arrogant",
+      "Geheimnis"
+    ],
+    "talente": [
+      "AH (Elementarmagie)",
+      "Elementarmeisterschaft",
+      "Arkane Stärkung"
+    ],
+    "maechte": [
+      "Elementarmanipulation",
+      "Linderung",
+      "Heilung"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 6,
+      "handicap": 3,
+      "handicap_gesamt": 3,
+      "aufstiege": 2
+    },
+    "machtpunkte": 10,
+    "vermoegen": 413.75,
+    "rang": "Anfänger",
+    "volk": "Mensch"
+  }
+}

@@ -427,7 +427,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Rachsüchtig_schwer\" FEHLT; handicaps: \"Hässlich\" FEHLT; handicaps: \"Außenseiter\" FEHLT; handicaps: \"Schwerfällig\" FEHLT; handicaps: \"Schwäche (Elektrizität)\" FEHLT; talente: \"Kräftig\" FEHLT; talente: \"Zäh\" FEHLT",
+      "warnung": "handicaps: \"Rachsüchtig_schwer\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {

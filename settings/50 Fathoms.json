@@ -11,7 +11,7 @@
             "besonderheiten": [
                 "Agil (Geschicklichkeit W6 statt W4, Maximum W12+1)",
                 "Athletisch (Athletik W6 statt W4, Maximum W12+1)",
-                "Gleiter (Können aus Höhen mit Bewegungsweite 12 oder weniger absteigen, Athletik für Manöver. Können bei Erfolg Höhe halten, bei Steigerung steigen. Windstille = Absturz)"
+                "Gleiter (Können bei Abwärtsbewegung für je 1″ vertikaler Bewegung bis zu 2″ horizontal zurücklegen, ohne den Boden zu berühren. Athletikprobe für Manöver — Erfolg = Höhe halten, Steigerung = Höhe gewinnen (aber 2″ Vorwärtsbewegung pro 1″ Steigung eingebüßt). Bei vollständiger Windstille fallen sie wie ein Stein zu Boden.)"
             ],
             "sprachen": [
                 "Masaquani",
@@ -338,6 +338,15 @@
         }
     },
     "handicaps": {
+        "Fies": {
+            "name": "Fies",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "–1 auf Überredenproben.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Angetrieben_leicht": {
             "name": "Angetrieben",
             "stufe": "leicht",
@@ -1153,24 +1162,6 @@
             "stufe": "leicht",
             "punkte": 1,
             "beschreibung": "Kränkliche Charaktere sind besonders anfällig gegenüber Krankheiten, Infektionen, Umwelteffekten und Erschöpfung. Sie ziehen –2 von Konstitutionsproben ab, um Erschöpfung zu widerstehen (siehe Gefahren, beginnend auf Seite 101).",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Chauvinist_leicht": {
-            "name": "Chauvinist",
-            "stufe": "leicht",
-            "punkte": 1,
-            "beschreibung": "Der Charakter hält seine eigene Kultur für die beste. -1 auf Überredenproben bei anderen Kulturen.",
-            "ausgewaehlt": false,
-            "aktiv": true,
-            "custom": false
-        },
-        "Chauvinist_schwer": {
-            "name": "Chauvinist",
-            "stufe": "schwer",
-            "punkte": 2,
-            "beschreibung": "Der Charakter verachtet andere Kulturen. -2 auf Überredenproben bei anderen Kulturen.",
             "ausgewaehlt": false,
             "aktiv": true,
             "custom": false
@@ -3878,7 +3869,7 @@
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
-            "beschreibung": "+2 auf Athletikproben (Schwimmen), +1 auf Schwimmbewegungsweite, kann 50% länger den Atem anhalten.",
+            "beschreibung": "+2 auf Athletikproben (Schwimmen), +1 auf Schwimmbewegungsweite, kann 50% länger den Atem anhalten. Nicht für aquatische oder halbaquatische Rassen (Kehana, Grael, Scurillian, Kraken, Doreen).",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,
@@ -4147,6 +4138,33 @@
                 "Schießen W8"
             ],
             "beschreibung": "Reduziert den Nachladewert von Schwarzpulverwaffen um 1.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Schmutziger Kämpfer": {
+            "name": "Schmutziger Kämpfer",
+            "kategorie": "Kampf",
+            "rang": "A",
+            "voraussetzungen": [
+                "Kämpfen W6"
+            ],
+            "beschreibung": "Erhält einen kostenlosen Wiederholwurf, wenn er mit Arkanen Fertigkeiten, Athletik, Kämpfen oder Schießen einen Wurf gegen einen Gegner ablegt (Test). Ersetzt das Trickmanöver.",
+            "neue_maechte": 0,
+            "machtpunkte": 0,
+            "ausgewaehlt": false,
+            "aktiv": true
+        },
+        "Richtiger Schmutziger Kämpfer": {
+            "name": "Richtiger Schmutziger Kämpfer",
+            "kategorie": "Kampf",
+            "rang": "A",
+            "voraussetzungen": [
+                "Schmutziger Kämpfer",
+                "Kämpfen W8"
+            ],
+            "beschreibung": "Ersetzt das Trickmanöver durch den Test: Kann mit Arkanen Fertigkeiten, Athletik, Kämpfen oder Schießen einen Wurf gegen einen Gegner ablegen, um diesen aus dem Gleichgewicht zu bringen oder anderweitig zu behindern.",
             "neue_maechte": 0,
             "machtpunkte": 0,
             "ausgewaehlt": false,

@@ -1,0 +1,595 @@
+{
+  "name": "Vater Frederick Hartell",
+  "setting": "Rippers",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Vater Frederick Hartell, Rippers)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 500
+    },
+    {
+      "aktion": "handicap(Ehrenkodex)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Pflichtbewusst_leicht)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Verpflichtung_leicht)",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Mensch)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk_freies_talent(Mensch,Auserwählter)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_hc(Willenskraft)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glaube)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 11,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glaube)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 10,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glaube)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 9,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heilen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 8,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heilen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 7,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 6,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 4,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 3,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 2,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Sprache)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(AH (Priester))",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Heilung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Schutz)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Linderung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Geschoss)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Heiliger/Unheiliger Krieger)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Bodenständig)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Heiliges Symbolx1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 475,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Weihwasser (Flasche)x1)",
+      "ok": true,
+      "kosten": 10,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 465,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Knoblauch (Bund)x1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 463,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Holzpfähle (5)x1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 458,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Rippers_Vater-Hartell_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [],
+  "anomalien_anzahl": 0,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Kämpfen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Überleben": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Glaube": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Heilen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Sprache": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Ehrenkodex",
+      "Pflichtbewusst_leicht",
+      "Schwur_leicht",
+      "Verpflichtung_leicht"
+    ],
+    "talente": [
+      "Auserwählter",
+      "AH (Priester)",
+      "Heiliger/Unheiliger Krieger",
+      "Bodenständig"
+    ],
+    "maechte": [
+      "Heilung",
+      "Schutz",
+      "Linderung",
+      "Geschoss"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 0,
+      "fertigkeit": 0,
+      "handicap": 0,
+      "handicap_gesamt": 4,
+      "aufstiege": 2
+    },
+    "machtpunkte": 10,
+    "vermoegen": 458,
+    "rang": "Anfänger",
+    "volk": "Mensch"
+  }
+}

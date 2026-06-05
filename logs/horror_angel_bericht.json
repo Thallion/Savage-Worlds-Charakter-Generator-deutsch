@@ -636,7 +636,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "fertigkeiten: Einschüchtern soll W6, ist W8; handicaps: \"Auffällig\" FEHLT",
+      "warnung": "fertigkeiten: Einschüchtern soll W6, ist W8",
       "kosten": 0,
       "kostenart": null,
       "punkte": {

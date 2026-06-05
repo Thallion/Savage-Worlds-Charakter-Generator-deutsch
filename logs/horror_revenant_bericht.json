@@ -571,24 +571,9 @@
       "kostenart": null,
       "punkte": {},
       "vermoegen": 435
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "handicaps: \"Hässlich\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 435
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 7,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Socialite (Horror Kompendium)
-# Stand: 2026-06-05T09:40:12
+# Stand: 2026-06-05T12:56:02
 # 1 Anomalie(n) von 29 Schritten
 
 ## ANOMALIEN

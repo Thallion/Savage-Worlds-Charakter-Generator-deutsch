@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Demon (Horror Kompendium)
-# Stand: 2026-06-05T09:40:13
-# 12 Anomalie(n) von 38 Schritten
+# Stand: 2026-06-05T12:56:03
+# 11 Anomalie(n) von 38 Schritten
 
 ## ANOMALIEN
   [!] talent(Attraktiv): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -14,7 +14,6 @@
   [!] talent_mit_aufstieg(Beziehungen): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Mystische Kräfte): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Böse" FEHLT; handicaps: "Schwäche (Geweihtes Wasser)" FEHLT; handicaps: "Schwäche (Kaltes Eisen)" ZUVIEL kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Demon, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500

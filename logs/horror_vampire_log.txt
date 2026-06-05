@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Vampire (Horror Kompendium)
-# Stand: 2026-06-05T09:40:13
+# Stand: 2026-06-05T12:56:03
 # 9 Anomalie(n) von 35 Schritten
 
 ## ANOMALIEN

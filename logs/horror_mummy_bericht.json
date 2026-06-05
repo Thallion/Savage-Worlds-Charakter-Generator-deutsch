@@ -717,7 +717,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwerzüngig\" FEHLT; handicaps: \"Hässlich\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Heilung\" FEHLT; maechte: \"Schutz\" FEHLT",
+      "warnung": "handicaps: \"Schwerzüngig\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Heilung\" FEHLT; maechte: \"Schutz\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {

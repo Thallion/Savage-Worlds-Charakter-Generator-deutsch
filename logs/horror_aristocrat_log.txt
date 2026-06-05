@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Aristocrat (Horror Kompendium)
-# Stand: 2026-06-05T09:40:05
+# Stand: 2026-06-05T12:55:55
 # 3 Anomalie(n) von 36 Schritten
 
 ## ANOMALIEN

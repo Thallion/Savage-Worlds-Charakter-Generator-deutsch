@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Demonologist (Monstrous) (Horror Kompendium)
-# Stand: 2026-06-05T09:40:15
+# Stand: 2026-06-05T12:56:05
 # 16 Anomalie(n) von 65 Schritten
 
 ## ANOMALIEN

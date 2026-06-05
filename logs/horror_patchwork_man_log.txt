@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Patchwork Man (Horror Kompendium)
-# Stand: 2026-06-05T09:40:13
+# Stand: 2026-06-05T12:56:03
 # 5 Anomalie(n) von 29 Schritten
 
 ## ANOMALIEN
@@ -7,7 +7,7 @@
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Ageless kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Parts: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Parts kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Undead (+2 Toughness, +2 recover Shaken): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Undead (+2 Toughness, +2 recover Shaken) kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Rachsüchtig_schwer" FEHLT; handicaps: "Hässlich" FEHLT; handicaps: "Außenseiter" FEHLT; handicaps: "Schwerfällig" FEHLT; handicaps: "Schwäche (Elektrizität)" FEHLT; talente: "Kräftig" FEHLT; talente: "Zäh" FEHLT kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Rachsüchtig_schwer" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Patchwork Man, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500

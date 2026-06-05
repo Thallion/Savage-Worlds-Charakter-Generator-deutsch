@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Mummy (Horror Kompendium)
-# Stand: 2026-06-05T09:40:13
+# Stand: 2026-06-05T12:56:03
 # 12 Anomalie(n) von 44 Schritten
 
 ## ANOMALIEN
@@ -14,7 +14,7 @@
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Ageless kosten=0 None
   [!] talent_mit_aufstieg(Neue Mächte): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwerzüngig" FEHLT; handicaps: "Hässlich" FEHLT; maechte: "Eigenschaft erhöhen/senken" FEHLT; maechte: "Heilung" FEHLT; maechte: "Schutz" FEHLT kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwerzüngig" FEHLT; maechte: "Eigenschaft erhöhen/senken" FEHLT; maechte: "Heilung" FEHLT; maechte: "Schutz" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Mummy, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500

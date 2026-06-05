@@ -1,6 +1,6 @@
 ============================================================
 BUILD START: Horror Kompendium ALL Archetypes
-Time: 2026-06-05 09:40:01
+Time: 2026-06-05 12:55:51
 ============================================================
 
 ============================================================
@@ -378,9 +378,9 @@ BUILD: Survivor
 BUILD (MONSTROeS): Angel
 ============================================================
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
-  Auto-Handicaps: ['Schwur', 'Auffällig']
+  Auto-Handicaps: ['Schwur_schwer']
   Auto-Talente: ['Flug']
-  Attribute-Boni: {'Stärke': 2, 'Konstitution': 2}
+  Attribute-Boni: {'Stärke': 4, 'Konstitution': 4}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   ANOM: talent(Attraktiv): {'aktion': 'talent(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent(Starker Wille): {'aktion': 'talent(Starker Wille)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
@@ -388,7 +388,7 @@ BUILD (MONSTROeS): Angel
   Rang: Anfänger
   ANOM: talent_adv(Rundumschlag): {'aktion': 'talent_mit_aufstieg(Rundumschlag)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 478, 'warnung': 'Aktion lieferte False/None'}
   Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
-  DIFF: ['fertigkeiten: Einschüchtern soll W6, ist W8', 'handicaps: "Auffällig" FEHLT']
+  DIFF: ['fertigkeiten: Einschüchtern soll W6, ist W8']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Angel.json
   GESAMT-ANOMALIEN: 13
@@ -397,9 +397,9 @@ BUILD (MONSTROeS): Angel
 BUILD (MONSTROeS): Demon
 ============================================================
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
-  Auto-Handicaps: ['Böse', 'Schwäche (Geweihtes Wasser)']
+  Auto-Handicaps: ['Schwäche (Kaltes Eisen)']
   Auto-Talente: ['Infrarotsicht']
-  Attribute-Boni: {}
+  Attribute-Boni: {'Konstitution': 2, 'Willenskraft': 2}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   ANOM: talent(Attraktiv): {'aktion': 'talent(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent(Beziehungen): {'aktion': 'talent(Beziehungen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
@@ -408,23 +408,23 @@ BUILD (MONSTROeS): Demon
   ANOM: talent_adv(Beziehungen): {'aktion': 'talent_mit_aufstieg(Beziehungen)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 480, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent_adv(Mystische Kräfte): {'aktion': 'talent_mit_aufstieg(Mystische Kräfte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 480, 'warnung': 'Aktion lieferte False/None'}
   Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
-  DIFF: ['handicaps: "Böse" FEHLT', 'handicaps: "Schwäche (Geweihtes Wasser)" FEHLT', 'handicaps: "Schwäche (Kaltes Eisen)" ZUVIEL']
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.5}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Demon.json
-  GESAMT-ANOMALIEN: 16
+  GESAMT-ANOMALIEN: 15
 
 ============================================================
 BUILD (MONSTROeS): Patchwork Man
 ============================================================
   ANOM: handicap(Rachsüchtig_schwer): {'aktion': 'handicap(Rachsüchtig_schwer)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
-  Auto-Handicaps: ['Hässlich', 'Außenseiter', 'Schwerfällig', 'Schwäche (Feuer)', 'Schwäche (Elektrizität)']
-  Auto-Talente: ['Zäh', 'Kräftig']
-  Attribute-Boni: {'Stärke': 2, 'Konstitution': 2}
+  Auto-Handicaps: ['Phobie_schwer', 'Verpeilt', 'Schwäche (Feuer)']
+  Auto-Talente: ['Berserker', 'Arkane Resistenz']
+  Attribute-Boni: {'Stärke': 4, 'Konstitution': 4}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
   Rang: Anfänger
-  DIFF: ['handicaps: "Rachsüchtig_schwer" FEHLT', 'handicaps: "Hässlich" FEHLT', 'handicaps: "Außenseiter" FEHLT', 'handicaps: "Schwerfällig" FEHLT', 'handicaps: "Schwäche (Elektrizität)" FEHLT', 'talente: "Kräftig" FEHLT', 'talente: "Zäh" FEHLT']
+  DIFF: ['handicaps: "Rachsüchtig_schwer" FEHLT']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Patchwork_Man.json
   GESAMT-ANOMALIEN: 6
@@ -434,9 +434,9 @@ BUILD (MONSTROeS): Mummy
 ============================================================
   ANOM: handicap(Schwerzüngig): {'aktion': 'handicap(Schwerzüngig)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
-  Auto-Handicaps: ['Hässlich', 'Langsam', 'Schwäche (Feuer)']
+  Auto-Handicaps: ['Langsam_leicht', 'Schwäche (Feuer)']
   Auto-Talente: ['Zäh']
-  Attribute-Boni: {}
+  Attribute-Boni: {'Stärke': 4, 'Konstitution': 4}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   ANOM: talent(AH (Alchemist, Horror)): {'aktion': 'talent(AH (Alchemist, Horror))', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   ANOM: talent(Rohling): {'aktion': 'talent(Rohling)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
@@ -449,7 +449,7 @@ BUILD (MONSTROeS): Mummy
   Rang: Anfänger
   ANOM: talent_adv(Neue Mächte): {'aktion': 'talent_mit_aufstieg(Neue Mächte)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 470, 'warnung': 'Aktion lieferte False/None'}
   Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
-  DIFF: ['handicaps: "Schwerzüngig" FEHLT', 'handicaps: "Hässlich" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Heilung" FEHLT', 'maechte: "Schutz" FEHLT']
+  DIFF: ['handicaps: "Schwerzüngig" FEHLT', 'maechte: "Eigenschaft erhöhen/senken" FEHLT', 'maechte: "Heilung" FEHLT', 'maechte: "Schutz" FEHLT']
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Mummy.json
   GESAMT-ANOMALIEN: 21
@@ -458,19 +458,19 @@ BUILD (MONSTROeS): Mummy
 BUILD (MONSTROeS): Revenant
 ============================================================
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
-  Auto-Handicaps: ['Schwur', 'Hässlich']
+  Auto-Handicaps: ['Schwur_schwer']
   Auto-Talente: ['Zäh']
-  Attribute-Boni: {}
+  Attribute-Boni: {'Stärke': 2, 'Konstitution': 2}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   ANOM: talent(Bedrohlich): {'aktion': 'talent(Bedrohlich)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 435, 'machtpunkte': 0}
   Rang: Anfänger
   ANOM: talent_adv(Seelenentzug): {'aktion': 'talent_mit_aufstieg(Seelenentzug)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 435, 'warnung': 'Aktion lieferte False/None'}
   Topup-Aufstiege für Talente: 1 (Rang jetzt Fortgeschritten)
-  DIFF: ['handicaps: "Hässlich" FEHLT']
+  DIFF: []
   Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0}
   GESPEICHERT: chars/Archetypen/Archetyp_Horror_Revenant.json
-  GESAMT-ANOMALIEN: 10
+  GESAMT-ANOMALIEN: 9
 
 ============================================================
 BUILD (MONSTROeS): Phantom
@@ -478,7 +478,7 @@ BUILD (MONSTROeS): Phantom
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
   Auto-Handicaps: ['Schwäche (Salz)']
   Auto-Talente: ['Flug']
-  Attribute-Boni: {}
+  Attribute-Boni: {'Willenskraft': 2}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   ANOM: talent(Galgenhumor): {'aktion': 'talent(Galgenhumor)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 480, 'machtpunkte': 0}
@@ -495,7 +495,7 @@ BUILD (MONSTROeS): Vampire
   Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
   Auto-Handicaps: ['Schwäche (Sonnenlicht)', 'Schwäche (Pfahl)', 'Abhängigkeit (Blut)', 'Schwäche (Geweihtes Wasser)']
   Auto-Talente: ['Nachtsicht', 'Zäh']
-  Attribute-Boni: {'Stärke': 2}
+  Attribute-Boni: {'Stärke': 4, 'Konstitution': 4}
   Punkte nach Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   ANOM: talent(Attraktiv): {'aktion': 'talent(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}
   Vor Abschluss: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 470, 'machtpunkte': 0}
@@ -637,16 +637,12 @@ BUILD (MONSTROeS): Nemesis
 ZUSAMMENFASSUNG
 ============================================================
 Erfolgreich: 4/36
-  [MONSTROeS] Angel: anomalien=13 diff=2 
+  [MONSTROeS] Angel: anomalien=13 diff=1 
     - fertigkeiten: Einschüchtern soll W6, ist W8
-    - handicaps: "Auffällig" FEHLT
   [FEHLER] Aristocrat: anomalien=6 diff=0 
   [FEHLER] Burglar: anomalien=10 diff=0 
   [FEHLER] Constable: anomalien=4 diff=0 
-  [MONSTROeS] Demon: anomalien=16 diff=3 
-    - handicaps: "Böse" FEHLT
-    - handicaps: "Schwäche (Geweihtes Wasser)" FEHLT
-    - handicaps: "Schwäche (Kaltes Eisen)" ZUVIEL
+  [MONSTROeS] Demon: anomalien=15 diff=0 
   [SUPER] Demonologist (Monstrous): anomalien=24 diff=4 
     - maechte: "Bannung" FEHLT
     - maechte: "Flächenschlag" FEHLT
@@ -667,23 +663,20 @@ Erfolgreich: 4/36
   [FEHLER] Magician: anomalien=12 diff=1 
     - maechte: "Bannung" FEHLT
   [OK] Mambo: anomalien=0 diff=0 
-  [MONSTROeS] Mummy: anomalien=21 diff=5 
+  [MONSTROeS] Mummy: anomalien=21 diff=4 
     - handicaps: "Schwerzüngig" FEHLT
-    - handicaps: "Hässlich" FEHLT
     - maechte: "Eigenschaft erhöhen/senken" FEHLT
+    - maechte: "Heilung" FEHLT
   [SUPER] Nemesis: anomalien=29 diff=1 
     - handicaps: "Geheimnis_leicht" FEHLT
   [FEHLER] Nerd: anomalien=5 diff=0 
   [OK] Occultist: anomalien=0 diff=0 
   [FEHLER] Party Animal: anomalien=7 diff=0 
-  [MONSTROeS] Patchwork Man: anomalien=6 diff=7 
+  [MONSTROeS] Patchwork Man: anomalien=6 diff=1 
     - handicaps: "Rachsüchtig_schwer" FEHLT
-    - handicaps: "Hässlich" FEHLT
-    - handicaps: "Außenseiter" FEHLT
   [MONSTROeS] Phantom: anomalien=6 diff=0 
   [OK] Psychic: anomalien=0 diff=0 
-  [MONSTROeS] Revenant: anomalien=10 diff=1 
-    - handicaps: "Hässlich" FEHLT
+  [MONSTROeS] Revenant: anomalien=9 diff=0 
   [FEHLER] Runner: anomalien=7 diff=0 
   [FEHLER] Sailor: anomalien=11 diff=0 
   [SUPER] Slayer: anomalien=31 diff=0 

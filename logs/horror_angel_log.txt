@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Angel (Horror Kompendium)
-# Stand: 2026-06-05T09:40:13
+# Stand: 2026-06-05T12:56:03
 # 10 Anomalie(n) von 41 Schritten
 
 ## ANOMALIEN
@@ -12,7 +12,7 @@
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Wing Strike (Str+d8, Reach 2): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Wing Strike (Str+d8, Reach 2) kosten=0 None
   [!] talent_mit_aufstieg(Rundumschlag): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=fertigkeiten: Einschüchtern soll W6, ist W8; handicaps: "Auffällig" FEHLT kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=fertigkeiten: Einschüchtern soll W6, ist W8 kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Angel, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
