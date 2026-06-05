@@ -1051,11 +1051,19 @@ Aktuell 31 Fertigkeiten. Vergleich mit DSA:
 
 ---
 
-## 7. Talente — Auswahl (488 → ca. 380-400)
+## 7. Talente — Auswahl
 
-### 7.1 SW-Klassen (bleiben — Status 1)
+> ⚠️ **ÜBERHOLT / abgelöst (2026-06-05).** Die Talent-Strategie wird jetzt im **Teilplan `plans/savage-aventurien-talente-dsa-konformitaet.md`** geführt und hat Vorrang. Wesentliche Änderungen gegenüber dem unten dokumentierten Ursprungsplan:
+> - **Klassen bleiben NICHT als Klassen.** DSA hat kein Klassensystem → die 14 `Klasse`-Basistalente werden in **`Hintergrund`-Talente** überführt (DSA-Profession); klassenspezifische Folge-Talente bleiben mechanisch erhalten, werden aber DSA-konform umbenannt/umkategorisiert.
+> - **Breiterer Ansatz:** SP/FK-Talente werden behalten, wo eine sinnvolle DSA-Lösung existiert; nur nicht sauber zuweisbare Talente werden gelöscht.
+> - **Wildes Aventurien** ist die kanonische SW-DSA-Terminologie-Referenz (z.B. `AH (Magie)` + `Gildenmagier`, `AH (Wunder: Gott)`, `AH (Schamanismus)`, `AH (Fey)`, `AH (Tiergeister)`).
+> - Aktueller Stand: **469 Talente** (von 504 zu Beginn des Talent-Teilplans), Revolverheld/Gnom/Halbling/Drachen-Sorcerer/AH-Zauberer-Block entfernt.
+>
+> Der nachfolgende Abschnitt 7.1–7.4 ist als **historischer Ursprungsplan** erhalten.
 
-Alle 22 Klassen bleiben erhalten: Barbar, Kämpfer, Mönch, Paladin, Schurke, Waldläufer, Zauberer (6 Blutlinien), Hexenmeister, Alchemist, Kavalier, Inquisitor, Orakel, Hexe, Revolverheld, Magus, Ninja, Wandler, AH (Barde/Druide/Kleriker/Magier/Beschwörer/Diabolist/Elementarist/Illusionist/Nekromant/Schamane/Tüftler/Hexer/Hexe)
+### 7.1 SW-Klassen (URSPRUNGSPLAN, überholt — siehe Hinweis oben)
+
+~~Alle 22 Klassen bleiben erhalten:~~ Barbar, Kämpfer, Mönch, Paladin, Schurke, Waldläufer, Zauberer (6 Blutlinien), Hexenmeister, Alchemist, Kavalier, Inquisitor, Orakel, Hexe, Revolverheld, Magus, Ninja, Wandler, AH (Barde/Druide/Kleriker/Magier/Beschwörer/Diabolist/Elementarist/Illusionist/Nekromant/Schamane/Tüftler/Hexer/Hexe). → **Neuregelung: Klasse→Hintergrund, siehe Teilplan.**
 
 ### 7.2 Zu löschende Talente (Status 3)
 
@@ -1342,7 +1350,9 @@ Ein Eintrag nur im Setting-JSON **wirkt mechanisch nicht** — der Name muss zus
 
 ---
 
-## 9. Ausrüstung (449 Items)
+## 9. Ausrüstung (449 → 585 Items)
+
+> **✅ Umgesetzt (2026-06-05):** Ausrüstung auf 585 Einträge erweitert; Preise in **Silbertaler (S)** umgestellt, DSA-Namen vergeben, DSA-spezifische Items ergänzt. **Traditionsartefakte als Ausrüstung** hinzugefügt: Avesstab / Magierstab-Varianten, **Krallenkette** (Gjalsker), Schamanen-**Knochenkeulen** (Ferkina, Fjarninger, Gjalsker, Tahaya, Nivesen, Trollzacker), Schlangenstab. Die Status-Tabellen unten dokumentieren den Ursprungsplan.
 
 ### 9.1 Status 1 (beibehalten)
 
@@ -1436,10 +1446,12 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 
 ## 11. Währung & Startgeld
 
-| Element | Alt | Neu |
+> **✅ Umgesetzt (2026-06-05):** `waehrung: "S"` (Silbertaler als Basiseinheit), `startgeld: 1000` (Silber). Tabelle unten = Ursprungsplan.
+
+| Element | Alt | Neu (umgesetzt) |
 |---------|-----|-----|
-| `waehrung` | "GM" | "DSA" (D/S/H/K) |
-| `startgeld` | 300 | Kulturabhängig (Empfehlung: 25 Dukaten Standard) |
+| `waehrung` | "GM" | **"S"** (Silbertaler; Preise in Silber) |
+| `startgeld` | 300 | **1000** (Silber) |
 
 **Währungs-Umrechnung in der UI:**
 - 1 GM ≈ 1 Dukaten
@@ -1667,17 +1679,18 @@ Alle generischen Items (Beutel, Fackel, Seil, Kerze, etc.) bleiben.
 |------:|---------|:------:|
 | 0 | MD-Plan mit User abnicken | ✅ |
 | 1 | Bugfix `riesige_feinde,` | ✅ 2026-06-02 |
-| 2 | `waehrung` + `startgeld` + `attribute` | ⏳ auf User-Genehmigung |
+| 2 | `waehrung` + `startgeld` | ✅ erledigt (`waehrung: "S"` Silber, `startgeld: 1000`) |
 | ~~3~~ | ~~`fertigkeiten_daten`~~ | ❌ abgelehnt 2026-06-02 |
 | 4 | `voelker` → 9 Spezies (3 gelöscht, +Holberker, DSA-Pass) | ✅ 2026-06-03 |
 | 5 | `voelker_selected` auf 12 DSA-Spezies | ✅ 2026-06-03 |
 | **6.1** | **`maechte`: Bestehende 73 um `dsa_trappings` erweitern** | **✅ 2026-06-02** |
 | **6.1.1** | **DSA-Zauber als Trappings in der Machtbeschreibung** | **✅ 2026-06-03** |
 | **6.2** | **`maechte`: 40 neue Mächte anlegen** | **⏳ auf User-Genehmigung** |
+| **6.3** | **Alle `maechte` mit `dsa_trappings` ausgestattet** | **✅ erledigt (66/66 Mächte haben `dsa_trappings`)** |
 | **6.R** | **Review: Mächte-Trappings QA** | **⬜ offen** |
-| 7 | `talente` | ⬜ offen |
+| 7 | `talente` (→ Teilplan `plans/savage-aventurien-talente-dsa-konformitaet.md`) | 🔄 in Arbeit (504→469; Schritte 1–6 ✅; offen: Klasse→Hintergrund, Kat. B–D, Bugfixes Wandler-Waise + `AH (Magie)`-Naming) |
 | 8 | `handicaps` | ⬜ offen |
-| 9 | `ausruestung` | ⬜ offen |
+| 9 | `ausruestung` | ✅ erledigt (449→585; DSA-Preise in Silber, DSA-Namen, **Traditionsartefakte ergänzt**: Avesstab/Magierstab-Varianten, Krallenkette, Schamanen-Knochenkeulen Ferkina/Fjarninger/Gjalsker/Tahaya/Nivesen/Trollzacker, Schlangenstab) |
 | 10 | `settingregeln` | ⬜ offen |
 | 11 | Validierung | ⬜ offen |
 | 12 | Test-Archetypen | ⬜ offen |

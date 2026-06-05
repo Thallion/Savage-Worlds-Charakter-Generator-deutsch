@@ -26,10 +26,12 @@ _VORAUSSETZUNG_WUERFEL_PATTERN = re.compile(r"^(.+?)\s+W\d+\+?$")
 # Wird genutzt um aus den Voraussetzungen die richtige Fertigkeit zu erkennen,
 # ohne andere Skill-Voraussetzungen (z.B. "Glücksspiel W6+") fälschlich zu wählen.
 _BEKANNTE_ARKANE_FERTIGKEITEN = {
-    'Glaube', 'Zaubern', 'Fokus', 'Psionik', 'Hexerei',
+    'Glaube', 'Zaubern', 'Magie', 'Fokus', 'Psionik', 'Hexerei',
     'Verrückte Wissenschaft', 'Alchemie', 'Darbietung',
     'Heldenmagie', 'Runenmagie',
 }
+# 'Magie' (Willenskraft) = intuitive Zauberfertigkeit der DSA-Traditionen
+# (Hexen, Geoden, Zibiljas …), Gegenstück zum akademischen 'Zaubern' (Verstand).
 
 # Hartkodierter Fallback für die Standard-AH-Talente (SWAE-Basis).
 # Nur als letzte Reserve, wenn weder Beschreibung noch Voraussetzungen die

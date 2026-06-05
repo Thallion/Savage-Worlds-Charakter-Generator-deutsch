@@ -522,6 +522,9 @@
     ],
     "Sprache": [
       "Verstand"
+    ],
+    "Magie": [
+      "Willenskraft"
     ]
   },
   "talente": {
@@ -614,7 +617,6 @@
         "Scharfzüngig"
       ],
       "auto_handicaps": [
-        "Behindernde Rüstung_leicht",
         "Behindernde_Rüstung_leicht"
       ]
     },
@@ -663,7 +665,6 @@
       ],
       "auto_handicaps": [
         "Schwur_schwer",
-        "Behindernde Rüstung_leicht",
         "Behindernde_Rüstung_leicht",
         "Materialkomponenten"
       ]
@@ -830,7 +831,6 @@
         "Schule"
       ],
       "auto_handicaps": [
-        "Behindernde Rüstung_jede",
         "Behindernde_Rüstung_schwer",
         "Materialkomponenten"
       ]
@@ -1095,130 +1095,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Zauberer)": {
-      "name": "AH (Zauberer)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-      "neue_maechte": 3,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_talente": [
-        "Blutlinie"
-      ],
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede",
-        "Behindernde_Rüstung_leicht",
-        "Verderbnis"
-      ]
-    },
-    "AH (Zauberer) Arkane Blutlinie": {
-      "name": "AH (Zauberer) Arkane Blutlinie",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkaner Hintergrund (Zauberer) mit Arkaner Blutlinie. Der Zauberer geht eine Arkane Verbindung mit einer Kreatur (Vertrauter) oder einem Gegenstand ein; der Vertraute gewährt +5 Machtpunkte (15 + 5 = 20). Mächtige Form: freie Wiederholung bei jeder misslungenen Zaubernprobe.",
-      "neue_maechte": 2,
-      "machtpunkte": 20,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede"
-      ]
-    },
-    "AH (Zauberer) Abnorme Blutlinie": {
-      "name": "AH (Zauberer) Abnorme Blutlinie",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkaner Hintergrund (Zauberer) mit Abnormer Blutlinie. Die seltsame Gestalt erhöht die Robustheit um +1 und gewährt Reichweite +1. Flächenschlag, Geschoss und Strahl mit dem Modifikator Anhaltender Schaden kosten nur 1 zusätzlichen Machtpunkt. Mächtige Form: nie Überrascht, immun gegen Überraschungsangriffe (wenn nicht Gebunden), +1 weitere Robustheit.",
-      "neue_maechte": 2,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede"
-      ]
-    },
-    "AH (Zauberer) Drachenblutlinie": {
-      "name": "AH (Zauberer) Drachenblutlinie",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkaner Hintergrund (Zauberer) mit Drachenblutlinie. Der Nachkomme erhält Klauen (Stä+W4), Schuppenhaut (Panzerung +2, +2 Robustheit) und +1 Schaden bei Mächten der passenden Ausprägung. Mächtige Form: Klauen mit PB +2 und Widerstand gegen die Naturgewalt der Blutlinie.",
-      "neue_maechte": 2,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede"
-      ]
-    },
-    "AH (Zauberer) Dämonische Blutlinie": {
-      "name": "AH (Zauberer) Dämonische Blutlinie",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkaner Hintergrund (Zauberer) mit Dämonischer Blutlinie. Der Held erhält Widerstand gegen Naturgewalten (Elektrizität), +1 Robustheit und scharfe Klauen (Stä+W4).",
-      "neue_maechte": 2,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede"
-      ]
-    },
-    "AH (Zauberer) Elementare Blutlinie": {
-      "name": "AH (Zauberer) Elementare Blutlinie",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkaner Hintergrund (Zauberer) mit Elementarer Blutlinie. Wähle ein Element. Der Held erhält Widerstand gegen dieses Element und eine zugehörige elementare Fähigkeit.",
-      "neue_maechte": 2,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede"
-      ]
-    },
-    "AH (Zauberer) Blutlinie des Grabes": {
-      "name": "AH (Zauberer) Blutlinie des Grabes",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6",
-        "WIL W6"
-      ],
-      "beschreibung": "Arkaner Hintergrund (Zauberer) mit Blutlinie des Grabes. Der Held erhält Widerstand gegen Naturgewalten (Kälte) und +1 auf Würfe zum Schaden wegstecken. Mächtige Form: der Zauberer ist vollständig untot (volle Untoter-Fähigkeit, Handicaps Außenseiter (schwer) und Hässlich (schwer)).",
-      "neue_maechte": 2,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde Rüstung_jede"
-      ]
-    },
     "AH (Hexenmeister)": {
       "name": "AH (Hexenmeister)",
       "kategorie": "Klasse",
@@ -1236,7 +1112,7 @@
         "Vertrauter"
       ],
       "auto_handicaps": [
-        "Behindernde Rüstung_jede"
+        "Behindernde_Rüstung_schwer"
       ]
     },
     "Weitere Hexerei": {
@@ -1308,7 +1184,7 @@
         "AH (Alchemist)"
       ],
       "auto_handicaps": [
-        "Behindernde Rüstung_leicht"
+        "Behindernde_Rüstung_leicht"
       ]
     },
     "Entdeckung": {
@@ -1516,7 +1392,7 @@
       "ausgewaehlt": false,
       "aktiv": true,
       "auto_handicaps": [
-        "Behindernde Rüstung_mittelschwer"
+        "Behindernde_Rüstung_schwer"
       ]
     },
     "Offenbarung": {
@@ -1657,16 +1533,16 @@
       "kategorie": "Klasse",
       "rang": "A",
       "voraussetzungen": [
-        "VER W6",
+        "WIL W6",
         "Okkultismus W4"
       ],
-      "beschreibung": "AH (Hexe) [Arkane Fertigkeit: Zaubern], Behindernde Rüstung (jede), Vertrauter (magisch verbundenes Tier, das Patron-Zauber speichert; tägliche Kommunikation erforderlich), Hex (wählt einen Hex aus der Hexen-Liste, z.B. Böser Blick, Schlaf, Heilung, Verfluchung).",
+      "beschreibung": "AH (Hexe) [Arkane Fertigkeit: Magie (Willenskraft)], Behindernde Rüstung (jede), Vertrauter (magisch verbundenes Tier, das Patron-Zauber speichert; tägliche Kommunikation erforderlich), Hex (wählt einen Hex aus der Hexen-Liste, z.B. Böser Blick, Schlaf, Heilung, Verfluchung).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
       "aktiv": true,
       "auto_handicaps": [
-        "Behindernde Rüstung_jede"
+        "Behindernde_Rüstung_schwer"
       ]
     },
     "Zusätzlicher Hex": {
@@ -1751,19 +1627,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Kreuzblütig": {
-      "name": "Kreuzblütig",
-      "kategorie": "Zauberer",
-      "rang": "H",
-      "voraussetzungen": [
-        "AH (Zauberer)"
-      ],
-      "beschreibung": "Der Zauberer erhält Zugang zu einer zweiten Blutlinie und kann deren Blutlinienfähigkeiten nutzen. Er erleidet jedoch –1 auf alle Zaubern-Proben (Konzentrationsschwierigkeiten durch zwei konkurrierende Blutlinien).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Störende Wut": {
       "name": "Störende Wut",
       "kategorie": "Barbar",
@@ -1799,7 +1662,6 @@
       "voraussetzungen": [
         {
           "oder": [
-            "AH (Zauberer)",
             "AH (Magier)"
           ]
         }
@@ -1911,19 +1773,6 @@
         "Zauberer"
       ],
       "beschreibung": "Der Zauberer kann Epische Machtmodifikatoren verwenden.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Mächtige Blutlinie": {
-      "name": "Mächtige Blutlinie",
-      "kategorie": "Zauberer",
-      "rang": "H",
-      "voraussetzungen": [
-        "Zauberer"
-      ],
-      "beschreibung": "Der Zauberer erhält die mächtige Fähigkeit seiner Blutlinie.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -2121,46 +1970,6 @@
         "Assassine II"
       ],
       "beschreibung": "Todesengel: Der Assassine lässt ein getötetes Opfer zu Staub zerfallen und verhindert eine Wiederauferstehung. Schneller Tod: Einmal pro Tag erhält der Assassine einen Überraschungsangriff gegen ein Opfer seiner Wahl.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Drachenjünger": {
-      "name": "Drachenjünger",
-      "kategorie": "Prestige",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH oder MM",
-        "Okkultismus W6"
-      ],
-      "beschreibung": "Odemangriff: 3W6 Schaden plus Ausprägung, Kegelschablone, einmal pro Begegnung",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Drachenjünger II": {
-      "name": "Drachenjünger II",
-      "kategorie": "Prestige",
-      "rang": "V",
-      "voraussetzungen": [
-        "Drachenjünger"
-      ],
-      "beschreibung": "Schwingen: Charakter erhält Flügel für Flug, Bewegungsweite 8.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Drachenjünger III": {
-      "name": "Drachenjünger III",
-      "kategorie": "Prestige",
-      "rang": "H",
-      "voraussetzungen": [
-        "Drachenjünger II"
-      ],
-      "beschreibung": "Drachengestalt: Zweimal pro Tag kann der Drachenjünger als beschränkte Aktion die Gestalt eines Drachens seiner Blutlinie annehmen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -2815,19 +2624,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Böser Blick": {
-      "name": "Böser Blick",
-      "kategorie": "Hexer/Hexe",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Hexer/Hexe)"
-      ],
-      "beschreibung": "Zwingt Feinde zu Willenskraftproben mit -2 bei der Nutzung von Bennys, die fehlschlagen können.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Hexenzeit": {
       "name": "Hexenzeit",
       "kategorie": "Hexer/Hexe",
@@ -2914,7 +2710,7 @@
       "kategorie": "Magier",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Magie)"
+        "AH (Magier)"
       ],
       "beschreibung": "Erhält drei neue Mächte bei Wahl des Talents Neue Mächte und sofort eine Macht des eigenen Ranges.",
       "neue_maechte": 0,
@@ -2931,19 +2727,6 @@
         "Okkultismus W10"
       ],
       "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Untoter Vertrauter": {
-      "name": "Untoter Vertrauter",
-      "kategorie": "Nekromant",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Nekromant)"
-      ],
-      "beschreibung": "Erhält einen untoten Tiergefährten mit speziellen Boni, ähnlich wie das Talent Vertrauter.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -3007,7 +2790,7 @@
       "kategorie": "Zauberer",
       "rang": "V",
       "voraussetzungen": [
-        "AH (Zauberer)"
+        "AH (Magier)"
       ],
       "beschreibung": "Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.",
       "neue_maechte": 0,
@@ -3020,7 +2803,7 @@
       "kategorie": "Zauberer",
       "rang": "H",
       "voraussetzungen": [
-        "AH (Zauberer)",
+        "AH (Magier)",
         "Große Macht"
       ],
       "beschreibung": "Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.",
@@ -3882,20 +3665,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Himmlischer Diener": {
-      "name": "Himmlischer Diener",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Aasimars",
-        "Tiermeister"
-      ],
-      "beschreibung": "Der Begleiter des Aasimars erhält einen himmlischen Segen: +2 auf alle Eigenschaftswürfe und der Begleiter gilt als übernatürliches Wesen mit entsprechenden Widerstandsboni.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Krallensturz": {
       "name": "Krallensturz",
       "kategorie": "Hintergrund",
@@ -3929,20 +3698,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Glücklicher Halbling": {
-      "name": "Glücklicher Halbling",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Halbling",
-        "Selbstlos"
-      ],
-      "beschreibung": "Der Charakter kann einen Benny ausgeben, um einem Verbündeten in Sichtweite eine Wiederholung für eine Eigenschaftsprobe mit +2 Bonus zu ermöglichen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Flinker Angreifer": {
       "name": "Flinker Angreifer",
       "kategorie": "Hintergrund",
@@ -3952,19 +3707,6 @@
         "GES W8"
       ],
       "beschreibung": "Der Charakter erleidet keinen Abzug, wenn er in derselben Runde rennt und eine einzelne Aktion ausführt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Klingenzahn": {
-      "name": "Klingenzahn",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Halbork"
-      ],
-      "beschreibung": "Der Charakter erhält durch seine verlängerten Stoßzähne einen Biss als natürliche Waffe (Stärke+W4 Schaden, gilt als natürliche Waffe nach Pathfinder-Regeln).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -5674,19 +5416,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Blutlinie": {
-      "name": "Blutlinie",
-      "kategorie": "Zauberer",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Zauberer)"
-      ],
-      "beschreibung": "Der Zauberer muss eine Blutlinie wählen (siehe Seite 69). Bei der Beschreibung jeder Blutlinie findest du auch die zusätzliche Spezialfähigkeit, die du erhältst, wenn du das Talent Mächtige Blutlinie wählst.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Gemeinsamer Angriff": {
       "name": "Gemeinsamer Angriff",
       "kategorie": "Anführer",
@@ -5809,32 +5538,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Horizontwanderer": {
-      "name": "Horizontwanderer",
-      "kategorie": "Prestige",
-      "rang": "F",
-      "voraussetzungen": [
-        "Überleben W6"
-      ],
-      "beschreibung": "Geländemeisterschaft: Unterstützt Verbündete in einem bestimmten Geländetyp. Erhält bevorzugtes Gelände.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Horizontwanderer II": {
-      "name": "Horizontwanderer II",
-      "kategorie": "Prestige",
-      "rang": "V",
-      "voraussetzungen": [
-        "Horizontwanderer"
-      ],
-      "beschreibung": "Geländedominanz: Erhält besondere Fähigkeiten basierend auf bevorzugten Geländetypen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Meisteralchemist": {
       "name": "Meisteralchemist",
       "kategorie": "Prestige",
@@ -5951,47 +5654,6 @@
         "Naturwächter II"
       ],
       "beschreibung": "Begleiterseele: Erhalte übernatürliche Fähigkeiten mit dem Begleiter dieses Charakters.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Zornprophet": {
-      "name": "Zornprophet",
-      "kategorie": "Prestige",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Wunder oder Orakel)",
-        "Kampfrausch",
-        "Okkultismus W4"
-      ],
-      "beschreibung": "Zornzauberer: Zauber, die im Kampfrausch gewirkt werden, sind schwerer zu widerstehen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Zornprophet II": {
-      "name": "Zornprophet II",
-      "kategorie": "Prestige",
-      "rang": "V",
-      "voraussetzungen": [
-        "Zornprophet"
-      ],
-      "beschreibung": "Zornzauberstärke: Zauber, die auf den Zaubernden zielen, sind begrenzte freie Aktionen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Zornprophet III": {
-      "name": "Zornprophet III",
-      "kategorie": "Prestige",
-      "rang": "H",
-      "voraussetzungen": [
-        "Zornprophet II"
-      ],
-      "beschreibung": "Geisterkrieger: Der Zornprophet ist besser darin, Feenwesen, Externare und Untote zu töten.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6166,19 +5828,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Einzigartige Blutlinie": {
-      "name": "Einzigartige Blutlinie",
-      "kategorie": "Legendär",
-      "rang": "L",
-      "voraussetzungen": [
-        "Mindestens zwei Zauberer-Talente"
-      ],
-      "beschreibung": "Erhalte eine zusätzliche fortgeschrittene Blutlinie.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Unaufhaltsame Wut": {
       "name": "Unaufhaltsame Wut",
       "kategorie": "Legendär",
@@ -6218,19 +5867,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Wasserabstammung": {
-      "name": "Wasserabstammung",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Undinen"
-      ],
-      "beschreibung": "Gewährt die Fähigkeit Wasseratmung und schnellere Bewegung im Wasser.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Kletterranke": {
       "name": "Kletterranke",
       "kategorie": "Hintergrund",
@@ -6240,19 +5876,6 @@
         "STÄ W6"
       ],
       "beschreibung": "Gewährt die Kletterer-Fähigkeit (Wandkletterer).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Elementare Reise": {
-      "name": "Elementare Reise",
-      "kategorie": "Hintergrund",
-      "rang": "F",
-      "voraussetzungen": [
-        "Ifrits oder Oreads oder Sylphen oder Undinen"
-      ],
-      "beschreibung": "Gewährt die Fähigkeit, zur Ebene zu reisen, die eng mit deiner Blutlinie verbunden ist. Du bist immun gegen die negativen Effekte dieser Ebene.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6286,19 +5909,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Oread-Gräber": {
-      "name": "Oread-Gräber",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Oreads"
-      ],
-      "beschreibung": "Gewährt die Fähigkeit, unter der Erde zu graben.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Versengende Waffe": {
       "name": "Versengende Waffe",
       "kategorie": "Hintergrund",
@@ -6325,75 +5935,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Revolverheld": {
-      "name": "Revolverheld",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "GES W6",
-        "Schießen W6"
-      ],
-      "beschreibung": "Rüstungsbeschränkung (leicht), Taten, Schneid.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Rüstungsbeschränkung_leicht"
-      ]
-    },
-    "Zielen (Revolverheld)": {
-      "name": "Zielen (Revolverheld)",
-      "kategorie": "Revolverheld",
-      "rang": "F",
-      "voraussetzungen": [
-        "Revolverheld"
-      ],
-      "beschreibung": "Gib einen Benny aus, um einen Bonus auf gezielte Angriffe zu erhalten.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Todesschuss (Revolverheld)": {
-      "name": "Todesschuss (Revolverheld)",
-      "kategorie": "Revolverheld",
-      "rang": "V",
-      "voraussetzungen": [
-        "Revolverheld"
-      ],
-      "beschreibung": "Gib einen Benny aus, um den Schusswaffenschaden zu verdoppeln.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Betrug des Todes": {
-      "name": "Betrug des Todes",
-      "kategorie": "Revolverheld",
-      "rang": "H",
-      "voraussetzungen": [
-        "Revolverheld"
-      ],
-      "beschreibung": "Gib einen Benny aus, um das Wundemaximum zu reduzieren.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Todesschütze": {
-      "name": "Todesschütze",
-      "kategorie": "Revolverheld",
-      "rang": "L",
-      "voraussetzungen": [
-        "Mindestens zwei Revolverheld-Talente"
-      ],
-      "beschreibung": "Gib einen Benny aus, um ein angeschlagenes oder verwundetes Ziel zu einer Konstitutionsprobe zu zwingen oder kampfunfähig zu machen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Magus": {
       "name": "Magus",
       "kategorie": "Klasse",
@@ -6408,7 +5949,7 @@
       "ausgewaehlt": false,
       "aktiv": true,
       "auto_handicaps": [
-        "Behindernde Rüstung_leicht"
+        "Behindernde_Rüstung_leicht"
       ]
     },
     "Zauberstab-Meisterschaft": {
@@ -6532,68 +6073,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Wandler": {
-      "name": "Wandler",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "Kämpfen W6",
-        "Überleben W6"
-      ],
-      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Defensive Instinkte, Geheimsprache, Wandler-Aspekt, Wandlerklauen, Wildnisschritt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Rüstungsbeschränkung_mittelschwer"
-      ]
-    },
-    "Chimären-Aspekt": {
-      "name": "Chimären-Aspekt",
-      "kategorie": "Wandler",
-      "rang": "F",
-      "voraussetzungen": [
-        "Wandler"
-      ],
-      "beschreibung": "Gewährt einen zusätzlichen Aspekt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Wandler-Tiergestalt": {
-      "name": "Wandler-Tiergestalt",
-      "kategorie": "Wandler",
-      "rang": "V",
-      "voraussetzungen": [
-        "Wandler"
-      ],
-      "beschreibung": "Verwandele dich in die Hauptform des Aspekts.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Verbesserte Form (Wandler)": {
-      "name": "Verbesserte Form (Wandler)",
-      "kategorie": "Wandler",
-      "rang": "H",
-      "voraussetzungen": [
-        "Wandler"
-      ],
-      "beschreibung": "Werde eine mächtigere Version des Wandler-Aspekts.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Verbesserte Defensive Instinkte": {
       "name": "Verbesserte Defensive Instinkte",
-      "kategorie": "Wandler",
+      "kategorie": "Gjalsker Tierkrieger",
       "rang": "L",
       "voraussetzungen": [
-        "Mindestens zwei Wandler-Talente"
+        "Mindestens zwei Gjalsker Tierkrieger-Talente"
       ],
       "beschreibung": "Nutze Willenskraft und Konstitution zur Berechnung der Robustheit.",
       "neue_maechte": 0,
@@ -6623,32 +6108,6 @@
         "Mönch"
       ],
       "beschreibung": "Greife einen Gegner an, der den Charakter beim Verteidigen treffen würde.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Erweiterter Aspekt": {
-      "name": "Erweiterter Aspekt",
-      "kategorie": "Wandler",
-      "rang": "A",
-      "voraussetzungen": [
-        "Wandler"
-      ],
-      "beschreibung": "Gewährt zusätzliche 15 Minuten in der Nebenform des Wandlers.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Extra Schneid": {
-      "name": "Extra Schneid",
-      "kategorie": "Revolverheld",
-      "rang": "F",
-      "voraussetzungen": [
-        "Revolverheld"
-      ],
-      "beschreibung": "Gewährt mehr als einen Benny zurück pro Kampf durch Schneid.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6856,17 +6315,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Gnomenmagie": {
-      "name": "Gnomenmagie",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [],
-      "beschreibung": "Gnome können Zaubertricks wirken: Licht, Geräusch, Telekinese und Tierfreund. Dabei benutzen sie Verstand (oder eine arkane Fertigkeit, wenn sie eine besitzen). Sie haben 1 Machtpunkt um diese Zaubertricks zu aktivieren, und sie erhalten ihn normal zurück. Gnome mit Arkaner Hintergrund oder Mystische Macht addieren ihren Bonus-Machtpunkt zu ihrem Vorrat, müssen die Zauber aber lernen, wenn sie sie normal wirken wollen.",
-      "neue_maechte": 0,
-      "machtpunkte": 1,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "AH (Begabt)": {
       "name": "AH (Begabt)",
       "kategorie": "Hintergrund",
@@ -6883,9 +6331,9 @@
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
-        "VER W6"
+        "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft)",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "auto_handicaps": [
@@ -6967,7 +6415,7 @@
       "kategorie": "Macht",
       "rang": "F",
       "voraussetzungen": [
-        "AH (Magie)",
+        "AH (Magier)",
         "Zaubern W6"
       ],
       "beschreibung": "Gib 1 zusätzlichen Machtpunkt aus, um die Ausprägung einer Macht zu verändern.",
@@ -7164,7 +6612,7 @@
       "kategorie": "Magier",
       "rang": "H",
       "voraussetzungen": [
-        "AH (Magie)",
+        "AH (Magier)",
         "WIL W8",
         "Okkultismus W8"
       ],
@@ -7179,7 +6627,7 @@
       "kategorie": "Magier",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Magie)",
+        "AH (Magier)",
         "Zaubern W6"
       ],
       "beschreibung": "Der Magier kann eine Kristallkugel verzaubern: als Brennglas nutzen, Bilder der Umgebung aufnehmen und wiedergeben oder im Umkreis von VER × 10 m vor Untoten warnen (rotes Aufleuchten – je intensiver, desto näher die Untoten).",
@@ -7207,7 +6655,7 @@
       "kategorie": "Macht",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Magie)",
+        "AH (Magier)",
         "Zaubern W8"
       ],
       "beschreibung": "Der Zauberer erledigt alltägliche Tätigkeiten (Kleidung reinigen, schneidern, Haare schneiden u.ä.) auf magische Weise. Deckt Zauber wie Sapefacta oder Accuratum ab; der SL entscheidet im Einzelfall, ob ein oder zwei Machtpunkte fällig werden.",
@@ -7381,6 +6829,176 @@
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
+    },
+    "Gjalsker Tierkrieger": {
+      "name": "Gjalsker Tierkrieger",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "Kultur: Gjalsker"
+      ],
+      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Patron-Wahl (Bär, Wolf, Falke, Eule, Feuermolch u.a. – kulturell verankert), Tierkräfte I-III (übermenschliche Merkmale des gewählten Patrons: starke Behaarung, Falkenaugen, Reißzähne), Krallenkette als Traditionsartefakt, Wildnisschritt, Geistsprache des Patrons. Der Gjalsker Tierkrieger geht eine lebenslange Bindung mit einem tierischen Patron-Geist (Durro-Dûn) ein, der ihm übermenschliche Fähigkeiten und die Möglichkeit der Tierverwandlung verleiht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Rüstungsbeschränkung_mittelschwer"
+      ]
+    },
+    "Tierverwandlung (Gjalsker)": {
+      "name": "Tierverwandlung (Gjalsker)",
+      "kategorie": "Gjalsker Tierkrieger",
+      "rang": "V",
+      "voraussetzungen": [
+        "Gjalsker Tierkrieger"
+      ],
+      "beschreibung": "Verwandle dich in die Hauptform deines Patron-Tiers (z.B. Bär, Wolf, Wildkatze, Falke, Eule). Die Verwandlung kostet 1 Machtpunkt und hält aufrechterhalten (1 weiterer Machtpunkt pro 10 Minuten). In Tiergestalt nutzt du die körperlichen Werte des Tieres (Eigenschaften, Talente, Kampfwerte), behältst aber dein menschliches Bewusstsein. Du kannst nicht in ein kulturschaffendes Wesen (z.B. andere Charaktere mit Bewusstsein) verwandelt werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Mächtige Tierverwandlung": {
+      "name": "Mächtige Tierverwandlung",
+      "kategorie": "Gjalsker Tierkrieger",
+      "rang": "H",
+      "voraussetzungen": [
+        "Gjalsker Tierkrieger"
+      ],
+      "beschreibung": "Wähle ein mächtigeres Patron-Tier (Säbelzahntiger, Mammut, Nashorn, Gepard). Erfordert Tierverwandlung (Gjalsker). Die Verwandlung kostet 2 Machtpunkte pro 10 Minuten, da die mächtigere Tiergestalt mehr Energie bindet.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ausdauernde Tiergestalt": {
+      "name": "Ausdauernde Tiergestalt",
+      "kategorie": "Gjalsker Tierkrieger",
+      "rang": "A",
+      "voraussetzungen": [
+        "Gjalsker Tierkrieger"
+      ],
+      "beschreibung": "Verlängert die Wirkungsdauer deiner Tierverwandlung um eine Stufe (Stufe 1: 1 Stunde, Stufe 2: 1 Tag, Stufe 3: 1 Woche) bzw. aktiviert eine zweite Verbesserung der Tierkräfte für die doppelte Wirkungsdauer. Kann mehrfach gewählt werden, jede Stufe zählt als separates Talent.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Geode)": {
+      "name": "AH (Geode)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6",
+        "Volk: Zwerg"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft). Zwergische Geode der Erz- und Kristallmagie; bindet ihre Kraft an den Lebensring (Traditionsartefakt) und wirkt Geodenrituale.",
+      "neue_maechte": 5,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde_Rüstung_schwer",
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Kristallomant)": {
+      "name": "AH (Kristallomant)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Kristallomantin der Hellsicht; wirkt und deutet durch ihre Kristallkugel (Traditionsartefakt), eng mit den Echsenvölkern verbunden.",
+      "neue_maechte": 5,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde_Rüstung_schwer",
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Zibilja)": {
+      "name": "AH (Zibilja)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft). Tulamidische Zibilja-Ritualmagierin; bewahrt ihr Wissen in der Sippenchronik (Traditionsartefakt).",
+      "neue_maechte": 5,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde_Rüstung_schwer",
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Zaubertänzer)": {
+      "name": "AH (Zaubertänzer)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Darbietung (Willenskraft). Zaubertänzer der Tulamiden und Novadi; wirkt Magie durch Tanz und seine geweihte Zauberkleidung (Traditionsartefakt).",
+      "neue_maechte": 4,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde_Rüstung_leicht",
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Fey)": {
+      "name": "AH (Fey)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6",
+        "Elf oder Halbelf"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft). Elfische Magie (Fey) — alle Elfen Aventuriens können zaubern.",
+      "neue_maechte": 2,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde_Rüstung_leicht"
+      ]
+    },
+    "AH (Wunder: Praios)": {
+      "name": "AH (Wunder: Praios)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Praios (Götterfürst) — Aspekte Sonne, Ordnung, Recht, Magiebann. Trägt die Sonnenscheibe als heiliges Symbol und ist an den Moralkodex der Praioskirche gebunden.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ]
+    },
+    "Magieschutz (Praios)": {
+      "name": "Magieschutz (Praios)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Praios)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Praioskirche: +2 auf Proben, um gegnerischen arkanen Mächten zu widerstehen (Willenskraft).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
     }
   },
   "handicaps": {
@@ -7506,33 +7124,6 @@
       "stufe": "schwer",
       "punkte": 2,
       "beschreibung": "Als Kind schloss ein Elternteil oder eine Autoritätsperson einen Pakt mit einem Teufelswesen und stahl dabei einen Teil der Lebenskraft des Charakters als Pfand. Unmittelbar nachdem ein Kampf endet, muss dieser Charakter einen Konstitutionswurf ablegen oder erleidet eine Erschöpfungsstufe. Diese Erschöpfung dauert an, bis der Charakter 24 Stunden ohne Kampf verbracht hat.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Behindernde Rüstung_jede": {
-      "name": "Behindernde Rüstung (jede)",
-      "stufe": "schwer",
-      "punkte": 2,
-      "beschreibung": "Der Charakter zieht -4 von arkanen Fertigkeitsproben ab, wenn er jede Art von Rüstung trägt.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Behindernde Rüstung_leicht": {
-      "name": "Behindernde Rüstung (leicht)",
-      "stufe": "schwer",
-      "punkte": 2,
-      "beschreibung": "Der Charakter zieht -4 von arkanen Fertigkeitsproben ab, wenn er leichte oder schwerere Rüstung trägt.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Behindernde Rüstung_mittelschwer": {
-      "name": "Behindernde Rüstung (mittelschwer)",
-      "stufe": "schwer",
-      "punkte": 2,
-      "beschreibung": "Der Charakter zieht -4 von arkanen Fertigkeitsproben ab, wenn er mittelschwere oder schwerere Rüstung trägt.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
@@ -10648,28 +10239,28 @@
     "Angelhaken": {
       "name": "Angelhaken",
       "kategorie": "Allgemein",
-      "gewicht": 0,
+      "gewicht": 0.05,
       "kosten": 0.1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Fischhaken aus Metall.",
       "aktiv": true
     },
     "Beutel, Gürtel": {
       "name": "Beutel, Gürtel",
       "kategorie": "Allgemein",
       "gewicht": 0.25,
-      "kosten": 1,
+      "kosten": 0.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Kleiner Beutel für die Gürtelschlaufe.",
       "aktiv": true
     },
     "Fackel": {
       "name": "Fackel",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.25,
+      "kosten": 0.5,
       "setting": "fantasy",
-      "beschreibung": "Licht für 1 Stunde, 4'' Radius.",
+      "beschreibung": "Brennt 1,5 Stunden, leuchtet 4\"/3\"/2\"/1\" Radius.",
       "aktiv": true
     },
     "Feuerholz (pro Tag)": {
@@ -10684,10 +10275,10 @@
     "Feuerstein und Stahl": {
       "name": "Feuerstein und Stahl",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
+      "gewicht": 0.25,
+      "kosten": 3,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "Erleichtert Feuermachen um +2.",
       "aktiv": true
     },
     "Fischernetz (2,5 Quadratmeter)": {
@@ -10696,16 +10287,16 @@
       "gewicht": 2.5,
       "kosten": 4,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Fischernetz, 2,5 m².",
       "aktiv": true
     },
     "Flasche oder Krug, Keramik (leer)": {
       "name": "Flasche oder Krug, Keramik (leer)",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.03,
+      "kosten": 0.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Leere Keramikflasche oder -krug.",
       "aktiv": true
     },
     "Flasche, Glas (leer)": {
@@ -10714,7 +10305,7 @@
       "gewicht": 0.5,
       "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Leere Glasflasche.",
       "aktiv": true
     },
     "Flaschenzug": {
@@ -10723,52 +10314,43 @@
       "gewicht": 2.5,
       "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Flaschenzug für schwere Lasten.",
       "aktiv": true
     },
     "Handschellen": {
       "name": "Handschellen",
       "kategorie": "Allgemein",
       "gewicht": 1,
-      "kosten": 15,
+      "kosten": 1.5,
       "setting": "fantasy",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Behälter, Karte oder Schriftrolle": {
-      "name": "Behälter, Karte oder Schriftrolle",
-      "kategorie": "Allgemein",
-      "gewicht": 0.25,
-      "kosten": 1,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Eiserne Handschellen.",
       "aktiv": true
     },
     "Behälter, Karte, Schriftrolle": {
       "name": "Behälter, Karte, Schriftrolle",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 1,
+      "kosten": 4,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Röhrenförmiger Behälter für Karten oder Schriftrollen.",
       "aktiv": true
     },
     "Kerze": {
       "name": "Kerze",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
+      "gewicht": 0.5,
+      "kosten": 6,
       "setting": "fantasy",
-      "beschreibung": "Brennt zwei Stunden, spendet Licht in 2'' Radius.",
+      "beschreibung": "Brennt 10 Stunden, leuchtet 1\" Radius.",
       "aktiv": true
     },
     "Kette": {
       "name": "Kette",
       "kategorie": "Allgemein",
       "gewicht": 1,
-      "kosten": 30,
+      "kosten": 3,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Kette, 12 GM pro Schritt.",
       "aktiv": true
     },
     "Krähenfüße": {
@@ -10777,16 +10359,16 @@
       "gewicht": 1,
       "kosten": 1,
       "setting": "fantasy",
-      "beschreibung": "Schwieriges Gelände, kann Angeschlagen verursachen.",
+      "beschreibung": "Streumaterial, kann Angeschlagen verursachen.",
       "aktiv": true
     },
     "Kreide": {
       "name": "Kreide",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.01,
+      "gewicht": 0.05,
+      "kosten": 0.2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 Stück Kreide.",
       "aktiv": true
     },
     "Lampe, klein": {
@@ -10801,172 +10383,163 @@
     "Laterne, Blend-": {
       "name": "Laterne, Blend-",
       "kategorie": "Allgemein",
-      "gewicht": 1.5,
-      "kosten": 12,
-      "setting": "savage_pathfinder",
-      "beschreibung": "10'' Kegel",
+      "gewicht": 0.5,
+      "kosten": 8,
+      "setting": "fantasy",
+      "beschreibung": "Laterne mit verstellbarer Blende.",
       "aktiv": true
     },
     "Laterne, abdeckbar": {
       "name": "Laterne, abdeckbar",
       "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 7,
-      "setting": "savage_pathfinder",
-      "beschreibung": "6'' Radius",
+      "gewicht": 0.5,
+      "kosten": 8,
+      "setting": "fantasy",
+      "beschreibung": "Laterne mit abdeckbarem Lichtaustritt.",
       "aktiv": true
     },
     "Nähnadel": {
       "name": "Nähnadel",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.5,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Öl (für Laterne; halber Liter)": {
-      "name": "Öl (für Laterne; halber Liter)",
-      "kategorie": "Allgemein",
-      "gewicht": 0.5,
+      "gewicht": 0.05,
       "kosten": 0.1,
       "setting": "savage_pathfinder",
-      "beschreibung": "Brennstoff, kann als Wurfwaffe verwendet werden.",
+      "beschreibung": "Nähnadel für Stoffreparaturen.",
       "aktiv": true
     },
     "Papier": {
       "name": "Papier",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.4,
+      "gewicht": 0.05,
+      "kosten": 0.1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 Blatt Papier.",
       "aktiv": true
     },
     "Pergament": {
       "name": "Pergament",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.2,
+      "gewicht": 0.05,
+      "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 Blatt Pergament.",
       "aktiv": true
     },
     "Pfeife, Keramik": {
       "name": "Pfeife, Keramik",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.1,
+      "gewicht": 0.1,
+      "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Tabakpfeife aus Keramik.",
       "aktiv": true
     },
     "Phiole, klein": {
       "name": "Phiole, klein",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 1,
+      "gewicht": 0.1,
+      "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Kleine Phiole für 0,1 Liter Flüssigkeit.",
       "aktiv": true
     },
     "Rucksack (leer)": {
       "name": "Rucksack (leer)",
       "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "1/2 des effektiven Gewichts des Inhalts.",
+      "gewicht": 2,
+      "kosten": 34,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Lederrucksack für ca. 50 kg.",
       "aktiv": true
     },
     "Sack (leer)": {
       "name": "Sack (leer)",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.1,
+      "gewicht": 0.5,
+      "kosten": 0.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Sack, leer.",
       "aktiv": true
     },
     "Sanduhr": {
       "name": "Sanduhr",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 40,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Stundenglas, misst 5 Minuten genau.",
       "aktiv": true
     },
     "Schaufel": {
       "name": "Schaufel",
       "kategorie": "Allgemein",
-      "gewicht": 4,
-      "kosten": 2,
+      "gewicht": 2,
+      "kosten": 8.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Spaten zum Graben.",
       "aktiv": true
     },
     "Schlafsack": {
       "name": "Schlafsack",
       "kategorie": "Allgemein",
-      "gewicht": 2.5,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 2,
+      "kosten": 7,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schlafsack, hält warm.",
       "aktiv": true
     },
     "Schleifstein": {
       "name": "Schleifstein",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.5,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Wetzstein zum Schärfen.",
       "aktiv": true
     },
     "Seife": {
       "name": "Seife",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "+1 ZK gegen Krankheit bei regelmäßiger Benutzung.",
       "aktiv": true
     },
     "Seil, Hanf (10''/20 Meter)": {
       "name": "Seil, Hanf (10''/20 Meter)",
       "kategorie": "Allgemein",
-      "gewicht": 5,
-      "kosten": 1,
+      "gewicht": 2.5,
+      "kosten": 10,
       "setting": "savage_pathfinder",
-      "beschreibung": "Trägt 150 kg, bricht bei Überbelastung.",
+      "beschreibung": "Hanfseil, 20 Meter, 0,5 Stn pro Schritt",
       "aktiv": true
     },
     "Seil, Seide (10''/20 Meter)": {
       "name": "Seil, Seide (10''/20 Meter)",
       "kategorie": "Allgemein",
-      "gewicht": 2.5,
-      "kosten": 10,
+      "gewicht": 1,
+      "kosten": 4,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Seidenseil, 20 Meter",
       "aktiv": true
     },
     "Segeltuch (Quadratmeter)": {
       "name": "Segeltuch (Quadratmeter)",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.1,
+      "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 m² Segeltuch.",
       "aktiv": true
     },
     "Siegelwachs, Stange": {
       "name": "Siegelwachs, Stange",
       "kategorie": "Allgemein",
-      "gewicht": 0.5,
+      "gewicht": 0.1,
       "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Siegelwachs-Stange zum Versiegeln.",
       "aktiv": true
     },
     "Spiegel, klein, Stahl": {
@@ -10981,217 +10554,172 @@
     "Stachel (Kletterhaken)": {
       "name": "Stachel (Kletterhaken)",
       "kategorie": "Allgemein",
-      "gewicht": 0.25,
-      "kosten": 0.05,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 0.1,
+      "kosten": 27,
+      "setting": "fantasy",
+      "beschreibung": "Kletterhaken, einzeln.",
       "aktiv": true
     },
     "Stange, 4 Meter": {
       "name": "Stange, 4 Meter",
       "kategorie": "Allgemein",
       "gewicht": 4,
-      "kosten": 0.25,
+      "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Holzstange, 4 Meter lang.",
       "aktiv": true
     },
     "Brechstange": {
       "name": "Brechstange",
       "kategorie": "Allgemein",
-      "gewicht": 2.5,
-      "kosten": 2,
+      "gewicht": 6,
+      "kosten": 38,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "+1 auf Kraftakt (Aufbrechen).",
       "aktiv": true
     },
     "Tintenstift (Schreibfeder)": {
       "name": "Tintenstift (Schreibfeder)",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.1,
+      "gewicht": 0.05,
+      "kosten": 0.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Schreibfeder aus Metall.",
       "aktiv": true
     },
     "Topf, Eisen": {
       "name": "Topf, Eisen",
       "kategorie": "Allgemein",
-      "gewicht": 2,
-      "kosten": 0.8,
+      "gewicht": 1,
+      "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Eisentopf zum Kochen.",
       "aktiv": true
     },
     "Trinkkrug, Keramik": {
       "name": "Trinkkrug, Keramik",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.02,
+      "kosten": 0.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Keramikkrug, leer.",
       "aktiv": true
     },
     "Truhe (klein, leer)": {
       "name": "Truhe (klein, leer)",
       "kategorie": "Allgemein",
-      "gewicht": 6,
-      "kosten": 25,
+      "gewicht": 5,
+      "kosten": 18,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Kleine Truhe, leer.",
       "aktiv": true
     },
     "Wasserschlauch": {
       "name": "Wasserschlauch",
       "kategorie": "Allgemein",
-      "gewicht": 2,
-      "kosten": 1,
+      "gewicht": 0.25,
+      "kosten": 5.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "Gewicht ist mit Inhalt",
+      "beschreibung": "Wasserschlauch für 1,5 Liter.",
       "aktiv": true
     },
     "Wolldecke": {
       "name": "Wolldecke",
       "kategorie": "Allgemein",
       "gewicht": 1.5,
-      "kosten": 0.5,
+      "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Wolldecke, hält warm.",
       "aktiv": true
     },
     "Wurfhaken": {
       "name": "Wurfhaken",
       "kategorie": "Allgemein",
-      "gewicht": 2,
-      "kosten": 2,
+      "gewicht": 1,
+      "kosten": 7,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Wurfhaken mit Kletterseil.",
       "aktiv": true
     },
     "Zelt, Tuch (2 Personen)": {
       "name": "Zelt, Tuch (2 Personen)",
       "kategorie": "Allgemein",
-      "gewicht": 10,
-      "kosten": 10,
+      "gewicht": 6,
+      "kosten": 25,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Zelt für 2 Personen.",
       "aktiv": true
     },
     "Bankett (pro Person)": {
       "name": "Bankett (pro Person)",
       "kategorie": "Essen & Trinken",
-      "gewicht": 0,
+      "gewicht": 3,
       "kosten": 10,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Bankett-Mahlzeit.",
       "aktiv": true
     },
     "Bier, 4 Liter": {
       "name": "Bier, 4 Liter",
       "kategorie": "Essen & Trinken",
       "gewicht": 4,
-      "kosten": 0.2,
+      "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "4 Liter Bier.",
       "aktiv": true
     },
     "Bier, Krug": {
       "name": "Bier, Krug",
       "kategorie": "Essen & Trinken",
       "gewicht": 0.5,
-      "kosten": 0.04,
+      "kosten": 0.4,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 Krug Bier.",
       "aktiv": true
     },
     "Brot, Leib": {
       "name": "Brot, Leib",
       "kategorie": "Essen & Trinken",
       "gewicht": 0.25,
-      "kosten": 0.02,
+      "kosten": 0.2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 Laib Brot.",
       "aktiv": true
     },
     "Käse, Klotz": {
       "name": "Käse, Klotz",
       "kategorie": "Essen & Trinken",
       "gewicht": 0.5,
-      "kosten": 0.1,
+      "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Reiseproviant (pro Tag)": {
-      "name": "Reiseproviant (pro Tag)",
-      "kategorie": "Essen & Trinken",
-      "gewicht": 0.5,
-      "kosten": 0.5,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Mahlzeit, schlicht (pro Tag)": {
-      "name": "Mahlzeit, schlicht (pro Tag)",
-      "kategorie": "Essen & Trinken",
-      "gewicht": 0,
-      "kosten": 0.1,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Mahlzeit, gewöhnlich (pro Tag)": {
-      "name": "Mahlzeit, gewöhnlich (pro Tag)",
-      "kategorie": "Essen & Trinken",
-      "gewicht": 0,
-      "kosten": 0.3,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Mahlzeit, gut (pro Tag)": {
-      "name": "Mahlzeit, gut (pro Tag)",
-      "kategorie": "Essen & Trinken",
-      "gewicht": 0,
-      "kosten": 0.5,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
-      "aktiv": true
-    },
-    "Tierfutter (pro Tag)": {
-      "name": "Tierfutter (pro Tag)",
-      "kategorie": "Essen & Trinken",
-      "gewicht": 4,
-      "kosten": 0.05,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Klotz Käse.",
       "aktiv": true
     },
     "Trockenfrüchte, Beutel": {
       "name": "Trockenfrüchte, Beutel",
       "kategorie": "Essen & Trinken",
       "gewicht": 0.5,
-      "kosten": 0.5,
+      "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Beutel Trockenfrüchte.",
       "aktiv": true
     },
     "Wein, 4 Liter": {
       "name": "Wein, 4 Liter",
       "kategorie": "Essen & Trinken",
       "gewicht": 4,
-      "kosten": 2,
+      "kosten": 6,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "4 Liter Wein.",
       "aktiv": true
     },
     "Wein, Becher": {
       "name": "Wein, Becher",
       "kategorie": "Essen & Trinken",
-      "gewicht": 0.5,
-      "kosten": 0.1,
+      "gewicht": 0.2,
+      "kosten": 0.5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "1 Becher Wein.",
       "aktiv": true
     },
     "Adeligenkleidung": {
@@ -11200,7 +10728,7 @@
       "gewicht": 5,
       "kosten": 75,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Adelige Kleidung.",
       "aktiv": true
     },
     "Entdeckerkleidung": {
@@ -11209,7 +10737,7 @@
       "gewicht": 5,
       "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Entdecker-/Wüstenkleidung.",
       "aktiv": true
     },
     "Weihwasser (Flasche)": {
@@ -11218,7 +10746,7 @@
       "gewicht": 0.5,
       "kosten": 10,
       "setting": "horror",
-      "beschreibung": "2W4 Schaden gegen Dämonen, Vampire und andere unheilige Kreaturen. Wurfwaffe, Reichweite 3/6/12.",
+      "beschreibung": "Weihwasser in Flasche.",
       "aktiv": true
     },
     "Händlerkleidung": {
@@ -11227,7 +10755,7 @@
       "gewicht": 2,
       "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Händlerkleidung.",
       "aktiv": true
     },
     "Handwerkerkleidung": {
@@ -11236,7 +10764,7 @@
       "gewicht": 2,
       "kosten": 1,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Handwerker-Arbeitskleidung.",
       "aktiv": true
     },
     "Kaltwetterkleidung": {
@@ -11245,32 +10773,32 @@
       "gewicht": 3.5,
       "kosten": 8,
       "setting": "savage_pathfinder",
-      "beschreibung": "Schützt vor Kälte",
+      "beschreibung": "Kaltwetterkleidung, hält warm.",
       "aktiv": true
     },
     "Königliche Kleidung": {
       "name": "Königliche Kleidung",
       "kategorie": "Kleidung",
-      "gewicht": 7.5,
-      "kosten": 100,
+      "gewicht": 5,
+      "kosten": 300,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Königliche Kleidung.",
       "aktiv": true
     },
     "Reisekleidung": {
       "name": "Reisekleidung",
       "kategorie": "Kleidung",
-      "gewicht": 2.5,
-      "kosten": 1,
+      "gewicht": 3,
+      "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Reisekleidung, einfach.",
       "aktiv": true
     },
     "Esel oder Maultier": {
       "name": "Esel oder Maultier",
       "kategorie": "Tiere & Ausrüstung",
       "gewicht": 0,
-      "kosten": 8,
+      "kosten": 300,
       "setting": "savage_pathfinder",
       "beschreibung": "",
       "aktiv": true
@@ -11279,7 +10807,7 @@
       "name": "Hund, Wachhund",
       "kategorie": "Tiere & Ausrüstung",
       "gewicht": 0,
-      "kosten": 25,
+      "kosten": 250,
       "setting": "savage_pathfinder",
       "beschreibung": "",
       "aktiv": true
@@ -11288,7 +10816,7 @@
       "name": "Pferd, leicht",
       "kategorie": "Tiere & Ausrüstung",
       "gewicht": 0,
-      "kosten": 75,
+      "kosten": 750,
       "setting": "savage_pathfinder",
       "beschreibung": "Siehe Seite 248",
       "aktiv": true
@@ -11297,7 +10825,7 @@
       "name": "Pferd, schwer",
       "kategorie": "Tiere & Ausrüstung",
       "gewicht": 0,
-      "kosten": 300,
+      "kosten": 3000,
       "setting": "savage_pathfinder",
       "beschreibung": "Siehe Seite 248",
       "aktiv": true
@@ -11306,7 +10834,7 @@
       "name": "Pony, leicht",
       "kategorie": "Tiere & Ausrüstung",
       "gewicht": 0,
-      "kosten": 30,
+      "kosten": 300,
       "setting": "savage_pathfinder",
       "beschreibung": "Siehe Seite 248",
       "aktiv": true
@@ -11315,7 +10843,7 @@
       "name": "Pony, schwer",
       "kategorie": "Tiere & Ausrüstung",
       "gewicht": 0,
-      "kosten": 45,
+      "kosten": 450,
       "setting": "savage_pathfinder",
       "beschreibung": "Siehe Seite 248",
       "aktiv": true
@@ -11405,27 +10933,27 @@
       "name": "Diebeswerkzeug",
       "kategorie": "Werkzeuge & Ausrüstungssets",
       "gewicht": 0.25,
-      "kosten": 30,
+      "kosten": 50,
       "setting": "savage_pathfinder",
-      "beschreibung": "Dietriche und Nadeln, Handschuhe, Ölflaschen, Schmiere, Seidenseil, –2 auf Diebeskunst ohne.",
+      "beschreibung": "Dietrichset (6 Stück), +1 auf Schlösserknacken.",
       "aktiv": true
     },
     "Fernrohr": {
       "name": "Fernrohr",
       "kategorie": "Werkzeuge & Ausrüstungssets",
       "gewicht": 0.5,
-      "kosten": 1000,
+      "kosten": 150,
       "setting": "savage_pathfinder",
-      "beschreibung": "Wahrnehmung +2 auf Entfernung",
+      "beschreibung": "Fernrohr, normale Größe.",
       "aktiv": true
     },
     "Hammer": {
       "name": "Hammer",
       "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 0.5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Universalhammer.",
       "aktiv": true
     },
     "Werkzeug eines Handwerkers": {
@@ -11434,7 +10962,7 @@
       "gewicht": 1.25,
       "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Basis-Handwerkszeug.",
       "aktiv": true
     },
     "Heilertasche": {
@@ -11443,25 +10971,25 @@
       "gewicht": 0.5,
       "kosten": 50,
       "setting": "fantasy",
-      "beschreibung": "Fünf Anwendungen, siehe Heilung.",
+      "beschreibung": "Verbandszeug und Wundnähzeug, +1 auf Heilen.",
       "aktiv": true
     },
     "Heiliges Symbol, Holz": {
       "name": "Heiliges Symbol, Holz",
       "kategorie": "Allgemein",
       "gewicht": 0,
-      "kosten": 1,
+      "kosten": 3,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "Hölzernes Götterfigürchen, 1x Furcht ignorieren pro Abenteuer.",
       "aktiv": true
     },
     "Heiliges Symbol, Silber": {
       "name": "Heiliges Symbol, Silber",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 25,
+      "kosten": 30,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "Silbernes Götterfigürchen, 1x Furcht ignorieren pro Abenteuer.",
       "aktiv": true
     },
     "Kaufmannswaage": {
@@ -11470,61 +10998,61 @@
       "gewicht": 0.25,
       "kosten": 2,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Handelswaage.",
       "aktiv": true
     },
     "Kletterausrüstung": {
       "name": "Kletterausrüstung",
       "kategorie": "Werkzeuge & Ausrüstungssets",
-      "gewicht": 2.5,
-      "kosten": 80,
+      "gewicht": 3,
+      "kosten": 30,
       "setting": "savage_pathfinder",
-      "beschreibung": "Hammer, Kletterhaken, Seil, Steigeisen und andere Ausrüstung zum Klettern. Diese Ausrüstung erlaubt es dem Anwender, bis zu 2 Punkte Abzüge beim Klettern zu ignorieren.",
+      "beschreibung": "Klettergurt, Seil, Haken, Karabiner.",
       "aktiv": true
     },
     "Musikinstrument": {
       "name": "Musikinstrument",
       "kategorie": "Allgemein",
       "gewicht": 1.5,
-      "kosten": 5,
+      "kosten": 10,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "Laute, Flöte, Trommel o.ä.",
       "aktiv": true
     },
     "Spitzhacke": {
       "name": "Spitzhacke",
       "kategorie": "Allgemein",
       "gewicht": 2.5,
-      "kosten": 5,
+      "kosten": 20,
       "setting": "fantasy",
-      "beschreibung": "Stä+W6, -1 Parade.",
+      "beschreibung": "Spitzhacke, +1 auf Steinbearbeitung.",
       "aktiv": true
     },
     "Vergrößerungsglas": {
       "name": "Vergrößerungsglas",
       "kategorie": "Werkzeuge & Ausrüstungssets",
       "gewicht": 0,
-      "kosten": 100,
+      "kosten": 50,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Lupe, +1 auf Sinnesschärfe für Details.",
       "aktiv": true
     },
     "Verkleidungsausrüstung": {
       "name": "Verkleidungsausrüstung",
       "kategorie": "Werkzeuge & Ausrüstungssets",
       "gewicht": 2,
-      "kosten": 50,
+      "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "Schminke, Prothesen und falsches Haar. Gewährt eine freie Wiederholung bei Darbietungsproben bei Verwendung einer Verkleidung.",
+      "beschreibung": "Schminke, Perücke, Accessoires.",
       "aktiv": true
     },
     "Vorschlaghammer": {
       "name": "Vorschlaghammer",
       "kategorie": "Werkzeuge & Ausrüstungssets",
       "gewicht": 2.5,
-      "kosten": 1,
+      "kosten": 30,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Vorschlaghammer, +1 auf Kraftakt.",
       "aktiv": true
     },
     "Zauberbuch, Magier (leer)": {
@@ -11540,18 +11068,18 @@
       "name": "Zauberkomponentenbeutel",
       "kategorie": "Werkzeuge & Ausrüstungssets",
       "gewicht": 0.5,
-      "kosten": 5,
+      "kosten": 10,
       "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "beschreibung": "Beutel mit Zauberkomponenten.",
       "aktiv": true
     },
     "Alchemistentasche": {
       "name": "Alchemistentasche",
       "kategorie": "Allgemein",
       "gewicht": 2.5,
-      "kosten": 25,
+      "kosten": 50,
       "setting": "fantasy",
-      "beschreibung": "Tragbares Labor mit Werkzeugen und Kräutern.",
+      "beschreibung": "Alchemie-Werkzeugtasche.",
       "aktiv": true
     },
     "Artefakterschaffertasche": {
@@ -11576,27 +11104,27 @@
       "name": "Behälter für Karte oder Schriftrolle",
       "kategorie": "Allgemein",
       "gewicht": 0.25,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 4,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Röhrenförmiger Behälter für Karten oder Schriftrollen.",
       "aktiv": true
     },
     "Buch": {
       "name": "Buch",
       "kategorie": "Allgemein",
-      "gewicht": 2.5,
-      "kosten": 50,
-      "setting": "fantasy",
-      "beschreibung": "Ermöglicht Rechercheproben.",
+      "gewicht": 1,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Buch, gebunden.",
       "aktiv": true
     },
     "Diebeswerkzeuge": {
       "name": "Diebeswerkzeuge",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 30,
+      "kosten": 50,
       "setting": "fantasy",
-      "beschreibung": "-2 auf Diebeskunst ohne Werkzeuge.",
+      "beschreibung": "Dietrichset (6 Stück), +1 auf Schlösserknacken.",
       "aktiv": true
     },
     "Fallenherstellungsset": {
@@ -11611,28 +11139,28 @@
     "Fass": {
       "name": "Fass",
       "kategorie": "Allgemein",
-      "gewicht": 15,
-      "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 5,
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Holzfass, leer.",
       "aktiv": true
     },
     "Feder": {
       "name": "Feder",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.05,
+      "kosten": 0.1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schreibfeder.",
       "aktiv": true
     },
     "Feldflasche (Metall)": {
       "name": "Feldflasche (Metall)",
       "kategorie": "Allgemein",
-      "gewicht": 0.5,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.25,
+      "kosten": 6,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Metall-Feldflasche für 1 Liter.",
       "aktiv": true
     },
     "Fernglas": {
@@ -11649,8 +11177,8 @@
       "kategorie": "Allgemein",
       "gewicht": 0.5,
       "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Glasflasche, leer.",
       "aktiv": true
     },
     "Flickzeug": {
@@ -11665,154 +11193,154 @@
     "Glocke": {
       "name": "Glocke",
       "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.5,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleine Handglocke.",
       "aktiv": true
     },
     "Gürteltasche": {
       "name": "Gürteltasche",
       "kategorie": "Allgemein",
       "gewicht": 0.25,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 4,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gürteltasche, 1 Aktion Zugriff",
       "aktiv": true
     },
     "Karren": {
       "name": "Karren",
       "kategorie": "Allgemein",
-      "gewicht": 40,
-      "kosten": 15,
-      "setting": "fantasy",
-      "beschreibung": "150 kg Ladevermögen.",
+      "gewicht": 50,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Karren für Saumlasten.",
       "aktiv": true
     },
     "Kette (10 Meter)": {
       "name": "Kette (10 Meter)",
       "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 30,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 10,
+      "kosten": 120,
+      "setting": "savage_pathfinder",
+      "beschreibung": "10 Meter Kette, robust.",
       "aktiv": true
     },
     "Kiste": {
       "name": "Kiste",
       "kategorie": "Allgemein",
       "gewicht": 5,
-      "kosten": 5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 18,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Holzkiste, leer.",
       "aktiv": true
     },
     "Laterne": {
       "name": "Laterne",
       "kategorie": "Allgemein",
-      "gewicht": 1.5,
-      "kosten": 12,
+      "gewicht": 0.5,
+      "kosten": 8,
       "setting": "fantasy",
-      "beschreibung": "Licht für 3 Stunden, 4'' Radius.",
+      "beschreibung": "Brenndauer 12 Stunden, 3\"/2\"/1\" Radius.",
       "aktiv": true
     },
     "Öl (0,5 l)": {
       "name": "Öl (0,5 l)",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.25,
+      "kosten": 1,
       "setting": "fantasy",
-      "beschreibung": "Brennstoff, kann als Wurfwaffe verwendet werden.",
+      "beschreibung": "0,5 Liter Lampenöl.",
       "aktiv": true
     },
     "Pergament (pro Blatt)": {
       "name": "Pergament (pro Blatt)",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.05,
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "1 Blatt Pergament.",
       "aktiv": true
     },
     "Ruderboot": {
       "name": "Ruderboot",
       "kategorie": "Allgemein",
-      "gewicht": 50,
+      "gewicht": 40,
       "kosten": 50,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleines Ruderboot",
       "aktiv": true
     },
     "Sack, klein": {
       "name": "Sack, klein",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.1,
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleiner Sack, leer.",
       "aktiv": true
     },
     "Seil, Hanf (20 Meter)": {
       "name": "Seil, Hanf (20 Meter)",
       "kategorie": "Allgemein",
-      "gewicht": 5,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "Trägt 150 kg, bricht bei Überbelastung.",
+      "gewicht": 2.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Hanfseil, 20 Meter",
       "aktiv": true
     },
     "Stab (3,5 m)": {
       "name": "Stab (3,5 m)",
       "kategorie": "Allgemein",
-      "gewicht": 4,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 3.5,
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Holzstab, 3,5 Meter lang.",
       "aktiv": true
     },
     "Tagebuch, leer": {
       "name": "Tagebuch, leer",
       "kategorie": "Allgemein",
-      "gewicht": 0.5,
-      "kosten": 5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 1.5,
+      "kosten": 11,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Leeres Tagebuch.",
       "aktiv": true
     },
     "Tinte (Fläschchen)": {
       "name": "Tinte (Fläschchen)",
       "kategorie": "Allgemein",
-      "gewicht": 0.5,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.2,
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Tintenfläschchen, schwarz.",
       "aktiv": true
     },
     "Krug, Keramik": {
       "name": "Krug, Keramik",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Keramikkrug, leer.",
       "aktiv": true
     },
     "Heiliges Symbol, Gold": {
       "name": "Heiliges Symbol, Gold",
       "kategorie": "Allgemein",
       "gewicht": 2.5,
-      "kosten": 100,
+      "kosten": 300,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "Goldenes Götterfigürchen, 1x Furcht ignorieren pro Abenteuer.",
       "aktiv": true
     },
     "Schubkarre": {
       "name": "Schubkarre",
       "kategorie": "Allgemein",
-      "gewicht": 10,
+      "gewicht": 15,
       "kosten": 10,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schubkarre.",
       "aktiv": true
     },
     "Schwertscheide": {
@@ -11827,28 +11355,28 @@
     "Siegelwachs, Stab": {
       "name": "Siegelwachs, Stab",
       "kategorie": "Allgemein",
-      "gewicht": 0.5,
+      "gewicht": 0.1,
       "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Siegelwachs-Stab zum Versiegeln.",
       "aktiv": true
     },
     "Kreide (Schachtel mit 12 Stück)": {
       "name": "Kreide (Schachtel mit 12 Stück)",
       "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 0.6,
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "12 Stück Kreide.",
       "aktiv": true
     },
     "Leinwand (m2)": {
       "name": "Leinwand (m2)",
       "kategorie": "Allgemein",
       "gewicht": 0.5,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "1 m² Leinwand.",
       "aktiv": true
     },
     "Reitbedarf": {
@@ -11863,163 +11391,163 @@
     "Schaufel, klein": {
       "name": "Schaufel, klein",
       "kategorie": "Allgemein",
-      "gewicht": 2,
-      "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "gewicht": 1,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleine Handschaufel.",
       "aktiv": true
     },
     "Steigeisen/Kletterhaken (10)": {
       "name": "Steigeisen/Kletterhaken (10)",
       "kategorie": "Allgemein",
-      "gewicht": 2.5,
-      "kosten": 1,
+      "gewicht": 1,
+      "kosten": 27,
       "setting": "fantasy",
-      "beschreibung": "",
+      "beschreibung": "Kletterhaken, 10 Stück.",
       "aktiv": true
     },
     "Bier, Becher": {
       "name": "Bier, Becher",
-      "kategorie": "Allgemein",
+      "kategorie": "Essen & Trinken",
       "gewicht": 0.5,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 0.4,
+      "setting": "savage_pathfinder",
+      "beschreibung": "1 Becher Bier.",
       "aktiv": true
     },
     "Futter, Tier (1 Tag)": {
       "name": "Futter, Tier (1 Tag)",
-      "kategorie": "Allgemein",
-      "gewicht": 1.5,
-      "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Essen & Trinken",
+      "gewicht": 2,
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Tierfutter für 1 Tag.",
       "aktiv": true
     },
     "Grundrationen (1 Tag)": {
       "name": "Grundrationen (1 Tag)",
-      "kategorie": "Allgemein",
-      "gewicht": 0.5,
+      "kategorie": "Essen & Trinken",
+      "gewicht": 1.5,
       "kosten": 0.5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Grundrationen.",
       "aktiv": true
     },
     "Mahlzeit, billig": {
       "name": "Mahlzeit, billig",
-      "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Essen & Trinken",
+      "gewicht": 1.5,
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Billige Mahlzeit.",
       "aktiv": true
     },
     "Mahlzeit, durchschnittlich": {
       "name": "Mahlzeit, durchschnittlich",
-      "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 0.5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Essen & Trinken",
+      "gewicht": 1.5,
+      "kosten": 1,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Durchschnittliche Mahlzeit.",
       "aktiv": true
     },
     "Mahlzeit, gut": {
       "name": "Mahlzeit, gut",
-      "kategorie": "Allgemein",
-      "gewicht": 0,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Essen & Trinken",
+      "gewicht": 1.5,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gute Mahlzeit.",
       "aktiv": true
     },
     "Rationen, edel (1 Tag)": {
       "name": "Rationen, edel (1 Tag)",
-      "kategorie": "Allgemein",
-      "gewicht": 0.5,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Essen & Trinken",
+      "gewicht": 1,
+      "kosten": 20,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Edle Rationen für 1 Tag.",
       "aktiv": true
     },
     "Wasser, 1 Liter (1 Tag)": {
       "name": "Wasser, 1 Liter (1 Tag)",
-      "kategorie": "Allgemein",
+      "kategorie": "Essen & Trinken",
       "gewicht": 1,
-      "kosten": 0.25,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 0.05,
+      "setting": "savage_pathfinder",
+      "beschreibung": "1 Liter Wasser.",
       "aktiv": true
     },
     "Wein, Flasche": {
       "name": "Wein, Flasche",
-      "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Essen & Trinken",
+      "gewicht": 0.5,
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "1 Flasche Wein.",
       "aktiv": true
     },
     "Wein, Glas": {
       "name": "Wein, Glas",
-      "kategorie": "Allgemein",
-      "gewicht": 0.5,
+      "kategorie": "Essen & Trinken",
+      "gewicht": 0.2,
       "kosten": 0.5,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "setting": "savage_pathfinder",
+      "beschreibung": "1 Glas Wein.",
       "aktiv": true
     },
     "Feine Kleidung": {
       "name": "Feine Kleidung",
-      "kategorie": "Allgemein",
-      "gewicht": 2.5,
+      "kategorie": "Kleidung",
+      "gewicht": 2,
       "kosten": 100,
-      "setting": "fantasy",
-      "beschreibung": "+1 auf Überreden in Statussituationen.",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Feine Kleidung.",
       "aktiv": true
     },
     "Formelle Kleidung": {
       "name": "Formelle Kleidung",
-      "kategorie": "Allgemein",
-      "gewicht": 2.5,
-      "kosten": 75,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Kleidung",
+      "gewicht": 2,
+      "kosten": 200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Formelle Kleidung.",
       "aktiv": true
     },
     "Gewöhnliche Kleidung": {
       "name": "Gewöhnliche Kleidung",
-      "kategorie": "Allgemein",
-      "gewicht": 1,
-      "kosten": 1,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Kleidung",
+      "gewicht": 2,
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gewöhnliche Kleidung.",
       "aktiv": true
     },
     "Stiefel, schwer": {
       "name": "Stiefel, schwer",
-      "kategorie": "Allgemein",
+      "kategorie": "Kleidung",
       "gewicht": 2,
-      "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schwere Stiefel.",
       "aktiv": true
     },
     "Umhang, leicht (mit Kapuze)": {
       "name": "Umhang, leicht (mit Kapuze)",
-      "kategorie": "Allgemein",
-      "gewicht": 1.5,
-      "kosten": 2,
-      "setting": "fantasy",
-      "beschreibung": "",
+      "kategorie": "Kleidung",
+      "gewicht": 2,
+      "kosten": 6,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Leichter Umhang mit Kapuze.",
       "aktiv": true
     },
     "Winterkleidung": {
       "name": "Winterkleidung",
-      "kategorie": "Allgemein",
-      "gewicht": 1.5,
+      "kategorie": "Kleidung",
+      "gewicht": 3.5,
       "kosten": 8,
-      "setting": "fantasy",
-      "beschreibung": "Schützt vor Kälte (siehe SWAE, S. 118).",
+      "setting": "savage_pathfinder",
+      "beschreibung": "Winterkleidung, hält warm.",
       "aktiv": true
     },
     "Abenteurerpaket": {
@@ -12044,7 +11572,7 @@
       "name": "Diebespaket",
       "kategorie": "Allgemein",
       "gewicht": 9.5,
-      "kosten": 65,
+      "kosten": 250,
       "setting": "fantasy",
       "beschreibung": "Diebeswerkzeug, Rucksack, Spiegel, Feuerstein und Stahl, Gürteltasche, Wurfhaken, Seil, Krähenfüße, Sack (klein), Öl, Laterne, Wasserschlauch, Verpflegung für 1 Woche.",
       "aktiv": true
@@ -12145,7 +11673,7 @@
       "gewicht": 2.5,
       "kosten": 5,
       "setting": "mittelalterlich",
-      "beschreibung": "Leichte Stoffbeinlinge",
+      "beschreibung": "Leichte Stoffbeinlinge.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -12159,7 +11687,7 @@
       "gewicht": 4,
       "kosten": 10,
       "setting": "mittelalterlich",
-      "beschreibung": "Robe mit Kapuze schützt Torso, Arme und Kopf",
+      "beschreibung": "Robe mit Kapuze schützt Torso, Arme und Kopf.",
       "aktiv": true,
       "torso": 1,
       "arme": 1,
@@ -12173,7 +11701,7 @@
       "gewicht": 2.5,
       "kosten": 10,
       "setting": "mittelalterlich",
-      "beschreibung": "Leichte Stofftunika schützt Torso und Arme",
+      "beschreibung": "Leichte Stofftunika schützt Torso und Arme.",
       "aktiv": true,
       "torso": 1,
       "arme": 1,
@@ -12187,7 +11715,7 @@
       "gewicht": 2.5,
       "kosten": 5,
       "setting": "mittelalterlich",
-      "beschreibung": "Leichter Umhang schützt Torso und Kopf",
+      "beschreibung": "Leichter Umhang schützt Torso und Kopf.",
       "aktiv": true,
       "torso": 1,
       "arme": 0,
@@ -12201,7 +11729,7 @@
       "gewicht": 2.5,
       "kosten": 100,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittlere Armschienen aus Bronze",
+      "beschreibung": "Mittlere Armschienen aus Bronze.",
       "aktiv": true,
       "torso": 0,
       "arme": 3,
@@ -12215,7 +11743,7 @@
       "gewicht": 3,
       "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittlere Beinschienen aus Bronze",
+      "beschreibung": "Mittlere Beinschienen aus Bronze.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -12229,7 +11757,7 @@
       "gewicht": 6.5,
       "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittlerer Brustpanzer aus Bronze",
+      "beschreibung": "Mittlerer Brustpanzer aus Bronze.",
       "aktiv": true,
       "torso": 3,
       "arme": 0,
@@ -12243,7 +11771,7 @@
       "gewicht": 4,
       "kosten": 300,
       "setting": "mittelalterlich",
-      "beschreibung": "Schwerer Helm mit geschlossenem Visier",
+      "beschreibung": "Schwerer Helm mit geschlossenem Visier.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -12257,7 +11785,7 @@
       "gewicht": 10,
       "kosten": 100,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittlere Kettenhose schützt die Beine",
+      "beschreibung": "Mittlere Kettenhose schützt die Beine.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -12271,7 +11799,7 @@
       "gewicht": 3,
       "kosten": 120,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittlerer Helm aus Bronze",
+      "beschreibung": "Mittlerer Helm aus Bronze.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -12285,7 +11813,7 @@
       "gewicht": 3.5,
       "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "Beinlinge aus dicker natürlicher Rüstung",
+      "beschreibung": "Beinlinge aus dicker natürlicher Rüstung.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -12299,7 +11827,7 @@
       "gewicht": 5,
       "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "Hemd aus natürlicher Rüstung schützt Torso und Arme",
+      "beschreibung": "Hemd aus natürlicher Rüstung schützt Torso und Arme.",
       "aktiv": true,
       "torso": 2,
       "arme": 2,
@@ -12311,7 +11839,7 @@
       "name": "Kleiner Schild",
       "kategorie": "Schild",
       "gewicht": 2,
-      "kosten": 5,
+      "kosten": 30,
       "setting": "mittelalterlich",
       "beschreibung": "Kleiner Schild für grundlegenden Schutz.",
       "aktiv": true,
@@ -12323,7 +11851,7 @@
       "name": "Mittlerer Schild",
       "kategorie": "Schild",
       "gewicht": 4,
-      "kosten": 9,
+      "kosten": 60,
       "setting": "mittelalterlich",
       "beschreibung": "Mittlerer Schild für besseren Schutz.",
       "aktiv": true,
@@ -12347,9 +11875,9 @@
       "name": "Chakram",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 1,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Parade +1",
+      "beschreibung": "Wurf-Chakram.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -12365,9 +11893,9 @@
       "name": "Dolch",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
+      "kosten": 45,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -12383,9 +11911,9 @@
       "name": "Dreizack",
       "kategorie": "Waffe",
       "gewicht": 2,
-      "kosten": 15,
+      "kosten": 80,
       "setting": "mittelalterlich",
-      "beschreibung": "Reichweite 1",
+      "beschreibung": "Stä+W6, Reichweite 1, Parade +1.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12401,9 +11929,9 @@
       "name": "Haken-Schwert",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 20,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "+1 zum Entwaffnen.",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12418,10 +11946,10 @@
     "Zweihandschwert": {
       "name": "Zweihandschwert",
       "kategorie": "Waffe",
-      "gewicht": 4,
-      "kosten": 50,
+      "gewicht": 3,
+      "kosten": 360,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 2, Zweihändig.",
+      "beschreibung": "Stä+W10, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W10",
@@ -12436,10 +11964,10 @@
     "Spalthammer": {
       "name": "Spalthammer",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 12,
+      "gewicht": 2,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 2, Zweihändig, +2 Schaden gegen Gegenstände.",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W10",
@@ -12455,9 +11983,9 @@
       "name": "Stab",
       "kategorie": "Waffe",
       "gewicht": 2,
-      "kosten": 0,
+      "kosten": 40,
       "setting": "mittelalterlich",
-      "beschreibung": "Parade +1, Reichweite 1, Zweihändig.",
+      "beschreibung": "Stä+W4, Parade +1, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -12472,10 +12000,10 @@
     "Entermesser": {
       "name": "Entermesser",
       "kategorie": "Waffe",
-      "gewicht": 2,
-      "kosten": 15,
+      "gewicht": 1,
+      "kosten": 120,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -12491,9 +12019,9 @@
       "name": "Keule, leicht",
       "kategorie": "Waffe",
       "gewicht": 1,
-      "kosten": 1,
+      "kosten": 3,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -12509,9 +12037,9 @@
       "name": "Keule, schwer",
       "kategorie": "Waffe",
       "gewicht": 2.5,
-      "kosten": 2,
+      "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12544,10 +12072,10 @@
     "Meteorhammer": {
       "name": "Meteorhammer",
       "kategorie": "Waffe",
-      "gewicht": 2.5,
-      "kosten": 12,
+      "gewicht": 2,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Reichweite 2, ignoriert Schildbonus, Zweihändig",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12562,10 +12090,10 @@
     "Speer": {
       "name": "Speer",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 2,
+      "gewicht": 1.5,
+      "kosten": 45,
       "setting": "mittelalterlich",
-      "beschreibung": "Reichweite 1, Parade +1, wenn mit zwei Händen verwendet",
+      "beschreibung": "Stä+W6, Reichweite 1, Parade +1 wenn zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12580,10 +12108,10 @@
     "Speer, Kurz-": {
       "name": "Speer, Kurz-",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 1,
+      "gewicht": 1,
+      "kosten": 25,
       "setting": "mittelalterlich",
-      "beschreibung": "Einhändig",
+      "beschreibung": "Kurzspeer.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12598,10 +12126,10 @@
     "Streitflegel, Zweihand": {
       "name": "Streitflegel, Zweihand",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 15,
+      "gewicht": 3,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Ignoriert Schildbonus, Zweihändig",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -12616,10 +12144,10 @@
     "Streitkolben, leicht": {
       "name": "Streitkolben, leicht",
       "kategorie": "Waffe",
-      "gewicht": 2,
-      "kosten": 5,
+      "gewicht": 1.5,
+      "kosten": 105,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -12634,10 +12162,10 @@
     "Streitkolben, schwer": {
       "name": "Streitkolben, schwer",
       "kategorie": "Waffe",
-      "gewicht": 4,
-      "kosten": 12,
+      "gewicht": 2,
+      "kosten": 105,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 1",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -12922,10 +12450,10 @@
     "Stockdegenpistole": {
       "name": "Stockdegenpistole",
       "kategorie": "Waffe",
-      "gewicht": 0.5,
-      "kosten": 775,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Wahrnehmungsprobe erforderlich, um zu erkennen, dass es sich um mehr als einen Gehstock handelt. Nachladen 2.",
+      "gewicht": 1,
+      "kosten": 350,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4 (Fechtwaffen).",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13066,10 +12594,10 @@
     "Axt, Hand-": {
       "name": "Axt, Hand-",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 6,
+      "gewicht": 1,
+      "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13085,9 +12613,9 @@
       "name": "Bogen, Komposit-",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 100,
+      "kosten": 160,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Kompositbogen, Stä+W6, PB 1.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13102,10 +12630,10 @@
     "Bogen, Kurz-": {
       "name": "Bogen, Kurz-",
       "kategorie": "Waffe",
-      "gewicht": 1,
-      "kosten": 30,
+      "gewicht": 1.5,
+      "kosten": 45,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Kurzbogen, 2W6, FRW 12/24/48.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13121,9 +12649,9 @@
       "name": "Wurf-Chakram",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 1,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Wurf-Chakram.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13139,9 +12667,9 @@
       "name": "Wurf-Dolch/Messer",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
+      "kosten": 45,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Wurfdolch, Stä+W4.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13157,9 +12685,9 @@
       "name": "Wurf-Dreizack",
       "kategorie": "Waffe",
       "gewicht": 2,
-      "kosten": 15,
+      "kosten": 80,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Wurf-Dreizack, Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13174,10 +12702,10 @@
     "Kurz-/Wurfspeer": {
       "name": "Kurz-/Wurfspeer",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 1,
+      "gewicht": 1,
+      "kosten": 25,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Kurzspeer/Wurfspeer.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13192,10 +12720,10 @@
     "Wurf-Speer": {
       "name": "Wurf-Speer",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 2,
+      "gewicht": 1.5,
+      "kosten": 40,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Wurfspeer, Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13240,7 +12768,7 @@
       "gewicht": 5.5,
       "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "Leichte Ledertunika schützt Torso und Arme",
+      "beschreibung": "Leichte Ledertunika schützt Torso und Arme.",
       "aktiv": true,
       "torso": 2,
       "arme": 2,
@@ -13254,7 +12782,7 @@
       "gewicht": 4,
       "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "Leichte Lederbeinlinge",
+      "beschreibung": "Leichte Lederbeinlinge.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13266,9 +12794,9 @@
       "name": "Lederkappe",
       "kategorie": "Rüstung",
       "gewicht": 0.5,
-      "kosten": 10,
+      "kosten": 5,
       "setting": "savage_pathfinder",
-      "beschreibung": "Kappe aus Leder",
+      "beschreibung": "Kappe aus Leder.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13282,7 +12810,7 @@
       "gewicht": 11,
       "kosten": 100,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittleres Kettenhemd schützt Torso und Arme",
+      "beschreibung": "Mittleres Kettenhemd schützt Torso und Arme.",
       "aktiv": true,
       "torso": 3,
       "arme": 3,
@@ -13296,7 +12824,7 @@
       "gewicht": 11,
       "kosten": 100,
       "setting": "savage_pathfinder",
-      "beschreibung": "Hemd aus Schuppenrüstung",
+      "beschreibung": "Hemd aus Schuppenrüstung.",
       "aktiv": true,
       "torso": 3,
       "arme": 3,
@@ -13310,7 +12838,7 @@
       "gewicht": 2.5,
       "kosten": 100,
       "setting": "savage_pathfinder",
-      "beschreibung": "Beinlinge aus Kettenrüstung",
+      "beschreibung": "Beinlinge aus Kettenrüstung.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13324,7 +12852,7 @@
       "gewicht": 1.5,
       "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Mittlere Kettenhaube schützt den Kopf",
+      "beschreibung": "Mittlere Kettenhaube schützt den Kopf.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13338,7 +12866,7 @@
       "gewicht": 15,
       "kosten": 500,
       "setting": "mittelalterlich",
-      "beschreibung": "Schwerer Plattenharnisch schützt den Torso",
+      "beschreibung": "Schwerer Plattenharnisch schützt den Torso.",
       "aktiv": true,
       "torso": 4,
       "arme": 0,
@@ -13352,7 +12880,7 @@
       "gewicht": 5,
       "kosten": 250,
       "setting": "mittelalterlich",
-      "beschreibung": "Schwere Armschienen aus Metall",
+      "beschreibung": "Schwere Armschienen aus Metall.",
       "aktiv": true,
       "torso": 0,
       "arme": 4,
@@ -13366,7 +12894,7 @@
       "gewicht": 5,
       "kosten": 500,
       "setting": "mittelalterlich",
-      "beschreibung": "Schwere Beinschienen aus Metall",
+      "beschreibung": "Schwere Beinschienen aus Metall.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13380,7 +12908,7 @@
       "gewicht": 2,
       "kosten": 250,
       "setting": "mittelalterlich",
-      "beschreibung": "Schwerer offener Helm",
+      "beschreibung": "Schwerer offener Helm.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13394,7 +12922,7 @@
       "gewicht": 4,
       "kosten": 300,
       "setting": "savage_pathfinder",
-      "beschreibung": "Schwerer umschließender Helm. –1 auf Wahrnehmungsproben, die auf Sicht basieren",
+      "beschreibung": "Schwerer umschließender Helm, -1 auf Sicht-Wahrnehmung.",
       "aktiv": true,
       "torso": 0,
       "arme": 0,
@@ -13426,7 +12954,7 @@
       "gewicht": 25,
       "kosten": 300,
       "setting": "savage_pathfinder",
-      "beschreibung": "Pferderüstung aus Leder (+2 Panzerung)",
+      "beschreibung": "Lederner Pferdeharnisch, RS +3.",
       "aktiv": true,
       "panzerung": 2,
       "mindeststaerke": "W8"
@@ -13437,7 +12965,7 @@
       "gewicht": 55,
       "kosten": 500,
       "setting": "savage_pathfinder",
-      "beschreibung": "Pferderüstung aus Kette (+3 Panzerung)",
+      "beschreibung": "Ketten-Pferdeharnisch, RS +4.",
       "aktiv": true,
       "panzerung": 3,
       "mindeststaerke": "W10"
@@ -13448,7 +12976,7 @@
       "gewicht": 65,
       "kosten": 5000,
       "setting": "savage_pathfinder",
-      "beschreibung": "Pferderüstung aus Platte (+4 Panzerung)",
+      "beschreibung": "Platten-Pferdeharnisch, RS +5.",
       "aktiv": true,
       "panzerung": 4,
       "mindeststaerke": "W12"
@@ -13457,7 +12985,7 @@
       "name": "Leichter Schild",
       "kategorie": "Schild",
       "gewicht": 2,
-      "kosten": 5,
+      "kosten": 30,
       "setting": "savage_pathfinder",
       "beschreibung": "Leichter Schild für grundlegenden Schutz",
       "aktiv": true,
@@ -13469,7 +12997,7 @@
       "name": "Schwerer Schild",
       "kategorie": "Schild",
       "gewicht": 6,
-      "kosten": 20,
+      "kosten": 100,
       "setting": "savage_pathfinder",
       "beschreibung": "Schwerer Schild für maximalen Schutz. –1 Bewegungsweite",
       "aktiv": true,
@@ -13490,9 +13018,9 @@
       "name": "Handarmbrust",
       "kategorie": "Waffe",
       "gewicht": 1,
-      "kosten": 20,
+      "kosten": 100,
       "setting": "mittelalterlich",
-      "beschreibung": "Einhändige, pistolenartige Armbrust. Nachladen 1.",
+      "beschreibung": "Handarmbrust, 2W6, PB 2, FRW 5/10/20.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13526,9 +13054,9 @@
       "name": "Leichte Armbrust",
       "kategorie": "Waffe",
       "gewicht": 2.5,
-      "kosten": 35,
+      "kosten": 180,
       "setting": "mittelalterlich",
-      "beschreibung": "Handgespannt, Nachladen 1.",
+      "beschreibung": "Leichte Armbrust, 2W6, PB 2, FRW 10/20/40.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13562,9 +13090,9 @@
       "name": "Schwere Armbrust",
       "kategorie": "Waffe",
       "gewicht": 4,
-      "kosten": 50,
+      "kosten": 360,
       "setting": "mittelalterlich",
-      "beschreibung": "Mit Winde gespannt, Nachladen 2.",
+      "beschreibung": "Schwere Armbrust, 2W8, PB 2, FRW 15/30/60.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13597,10 +13125,10 @@
     "Handaxt": {
       "name": "Handaxt",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 6,
+      "gewicht": 1,
+      "kosten": 20,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -13616,9 +13144,9 @@
       "name": "Bolas",
       "kategorie": "Waffe",
       "gewicht": 1,
-      "kosten": 5,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Bei einem erfolgreichen Treffer ist das Ziel Festgehalten. Bolas haben eine Härte von 8.",
+      "beschreibung": "Bolas, hält fest.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13634,9 +13162,9 @@
       "name": "Blasrohr",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
+      "kosten": 40,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Blasrohr, 1W2, FRW 5/20/40.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13651,10 +13179,10 @@
     "Kurzbogen": {
       "name": "Kurzbogen",
       "kategorie": "Waffe",
-      "gewicht": 1,
-      "kosten": 30,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 1.5,
+      "kosten": 45,
+      "setting": "mittelalterlich",
+      "beschreibung": "Kurzbogen, 2W6, FRW 12/24/48.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13670,9 +13198,9 @@
       "name": "Langbogen",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 75,
+      "kosten": 80,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Langbogen, 2W6, PB 1, FRW 15/30/60.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W8",
@@ -13688,9 +13216,9 @@
       "name": "Kompositbogen",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 100,
+      "kosten": 160,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Kompositbogen, Stä+W6, PB 1.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13706,9 +13234,9 @@
       "name": "Dolch/Messer",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "kosten": 45,
+      "setting": "mittelalterlich",
+      "beschreibung": "Wurfdolch, Stä+W4.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13724,9 +13252,9 @@
       "name": "Dreizack",
       "kategorie": "Waffe",
       "gewicht": 2,
-      "kosten": 15,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "kosten": 80,
+      "setting": "mittelalterlich",
+      "beschreibung": "Wurf-Dreizack, Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13741,10 +13269,10 @@
     "Kurzspeer/Wurfspeer": {
       "name": "Kurzspeer/Wurfspeer",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 1,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 1,
+      "kosten": 25,
+      "setting": "mittelalterlich",
+      "beschreibung": "Kurzspeer/Wurfspeer.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13760,9 +13288,9 @@
       "name": "Netz (beschwert)",
       "kategorie": "Waffe",
       "gewicht": 4,
-      "kosten": 20,
+      "kosten": 35,
       "setting": "mittelalterlich",
-      "beschreibung": "Bei einem erfolgreichen Treffer ist das Ziel Festgehalten. Das Netz hat Härte 10 gegenüber Schnittschaden.",
+      "beschreibung": "Wurfnetz, hält fest statt Schaden.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13778,9 +13306,9 @@
       "name": "Schleuder",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 0,
+      "kosten": 5,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13795,10 +13323,10 @@
     "Shuriken": {
       "name": "Shuriken",
       "kategorie": "Waffe",
-      "gewicht": 0,
-      "kosten": 1,
+      "gewicht": 0.1,
+      "kosten": 30,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13813,10 +13341,10 @@
     "Speer Fernkampf": {
       "name": "Speer",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 2,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 1.5,
+      "kosten": 45,
+      "setting": "mittelalterlich",
+      "beschreibung": "Wurfspeer, Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -13831,10 +13359,10 @@
     "Sternmesser Fernkampf": {
       "name": "Sternmesser",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 28,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 0.5,
+      "kosten": 30,
+      "setting": "mittelalterlich",
+      "beschreibung": "Wurfstern.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -13849,10 +13377,10 @@
     "Handaxt Nahkampf": {
       "name": "Handaxt",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 6,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 1,
+      "kosten": 20,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -13867,10 +13395,10 @@
     "Streitaxt": {
       "name": "Streitaxt",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 10,
+      "gewicht": 2,
+      "kosten": 105,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -13885,10 +13413,10 @@
     "Zweihandaxt": {
       "name": "Zweihandaxt",
       "kategorie": "Waffe",
-      "gewicht": 6,
-      "kosten": 20,
+      "gewicht": 3.5,
+      "kosten": 30,
       "setting": "mittelalterlich",
-      "beschreibung": "",
+      "beschreibung": "Stä+W10, PB 2, Parade -1, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W10",
@@ -13903,10 +13431,10 @@
     "Sense": {
       "name": "Sense",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 18,
+      "gewicht": 3,
+      "kosten": 40,
       "setting": "mittelalterlich",
-      "beschreibung": "Zweihändig.",
+      "beschreibung": "Sense, improvisierte Waffe.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -13921,10 +13449,10 @@
     "Sichel": {
       "name": "Sichel",
       "kategorie": "Waffe",
-      "gewicht": 1,
-      "kosten": 3,
+      "gewicht": 0.5,
+      "kosten": 10,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -13939,10 +13467,10 @@
     "Speer Nahkampf": {
       "name": "Speer",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 2,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Stützen, Reichweite 1, Parade +1, wenn mit zwei Händen verwendet",
+      "gewicht": 1.5,
+      "kosten": 45,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -13957,10 +13485,10 @@
     "Kurzer Speer": {
       "name": "Kurzer Speer",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 1,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Einhändig",
+      "gewicht": 1,
+      "kosten": 25,
+      "setting": "mittelalterlich",
+      "beschreibung": "Kurzspeer.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -13975,10 +13503,10 @@
     "Stachelkette": {
       "name": "Stachelkette",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 8,
+      "gewicht": 2,
+      "kosten": 5,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 1, ignoriert Schildbonus, Zweihändig",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -13993,10 +13521,10 @@
     "Sternmesser Nahkampf": {
       "name": "Sternmesser",
       "kategorie": "Waffe",
-      "gewicht": 1.5,
-      "kosten": 28,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Parade +1",
+      "gewicht": 0.5,
+      "kosten": 30,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14011,10 +13539,10 @@
     "Streitkolben leicht": {
       "name": "Streitkolben, leicht",
       "kategorie": "Waffe",
-      "gewicht": 2,
-      "kosten": 5,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 1.5,
+      "kosten": 105,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14029,10 +13557,10 @@
     "Streitkolben schwer": {
       "name": "Streitkolben, schwer",
       "kategorie": "Waffe",
-      "gewicht": 4,
-      "kosten": 12,
-      "setting": "savage_pathfinder",
-      "beschreibung": "PB 1",
+      "gewicht": 2,
+      "kosten": 105,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14048,9 +13576,9 @@
       "name": "Totschläger",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
+      "kosten": 0,
       "setting": "mittelalterlich",
-      "beschreibung": "Verursacht Betäubungsschaden.",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14211,8 +13739,8 @@
       "kategorie": "Waffe",
       "gewicht": 2,
       "kosten": 5,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Der Schaft bricht beim Aufprall ab. Mit einer Steigerung beim Angriff bleibt er im Schild des Ziels stecken; das Ziel verliert den Schildbonus bis der Spieß entfernt wird (1 Aktion).",
+      "setting": "mittelalterlich",
+      "beschreibung": "Wurfspeer, Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -14228,9 +13756,9 @@
       "name": "Dolch/Messer",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "kosten": 45,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14246,9 +13774,9 @@
       "name": "Dreizack",
       "kategorie": "Waffe",
       "gewicht": 2,
-      "kosten": 15,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Stützen, Reichweite 1",
+      "kosten": 80,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14263,10 +13791,10 @@
     "Streitflegel": {
       "name": "Streitflegel",
       "kategorie": "Waffe",
-      "gewicht": 2.5,
-      "kosten": 8,
+      "gewicht": 3,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Ignoriert Schildbonus",
+      "beschreibung": "Stä+W6, ignoriert Schild-Boni.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14281,10 +13809,10 @@
     "Streitflegel schwer": {
       "name": "Streitflegel, schwer",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 15,
-      "setting": "savage_pathfinder",
-      "beschreibung": "ignoriert Schildbonus, Zweihändig",
+      "gewicht": 3,
+      "kosten": 50,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14299,10 +13827,10 @@
     "Glefe": {
       "name": "Glefe",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 8,
+      "gewicht": 3,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Reichweite 1, Zweihändig",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14317,10 +13845,10 @@
     "Guisarme": {
       "name": "Guisarme",
       "kategorie": "Waffe",
-      "gewicht": 6,
-      "kosten": 9,
+      "gewicht": 3,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 1, Reichweite 1, Zweihändig",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14335,10 +13863,10 @@
     "Hellebarde": {
       "name": "Hellebarde",
       "kategorie": "Waffe",
-      "gewicht": 6,
-      "kosten": 10,
-      "setting": "savage_pathfinder",
-      "beschreibung": "PB 1, Stützen, Reichweite 1, Zweihändig",
+      "gewicht": 3,
+      "kosten": 160,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W8, Reichweite 1, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14354,9 +13882,9 @@
       "name": "Katana",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 50,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "Zweihändig",
+      "beschreibung": "Stä+W6+1, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14372,9 +13900,9 @@
       "name": "Kampfstab",
       "kategorie": "Waffe",
       "gewicht": 2,
-      "kosten": 3,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Parade +1, Reichweite 1, Zweihändig",
+      "kosten": 40,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4, Parade +1, Reichweite 1, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14390,9 +13918,9 @@
       "name": "Keule, leicht",
       "kategorie": "Waffe",
       "gewicht": 1,
-      "kosten": 1,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "kosten": 3,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14408,9 +13936,9 @@
       "name": "Keule, schwer",
       "kategorie": "Waffe",
       "gewicht": 2.5,
-      "kosten": 2,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "kosten": 20,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14425,10 +13953,10 @@
     "Kriegshammer": {
       "name": "Kriegshammer",
       "kategorie": "Waffe",
-      "gewicht": 2.5,
-      "kosten": 6,
+      "gewicht": 1,
+      "kosten": 170,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 1",
+      "beschreibung": "Stä+W6, PB 1.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14443,10 +13971,10 @@
     "Krummsäbel": {
       "name": "Krummsäbel",
       "kategorie": "Waffe",
-      "gewicht": 2,
-      "kosten": 15,
+      "gewicht": 1.5,
+      "kosten": 180,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14461,10 +13989,10 @@
     "Krummschwert": {
       "name": "Krummschwert",
       "kategorie": "Waffe",
-      "gewicht": 4,
-      "kosten": 75,
+      "gewicht": 1.5,
+      "kosten": 180,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 1, kann zweihändig verwendet werden (für +1 Schaden)",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14479,10 +14007,10 @@
     "Lanze": {
       "name": "Lanze",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 10,
+      "gewicht": 3,
+      "kosten": 100,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 2 bei Sturmangriff, Reichweite 2, nur im berittenen Kampf verwendbar",
+      "beschreibung": "Stä+W8, +2 TP bei Sturmangriff, nur beritten.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14497,10 +14025,10 @@
     "Morgenstern": {
       "name": "Morgenstern",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 8,
+      "gewicht": 1.5,
+      "kosten": 110,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W6, ignoriert Schild-Boni.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14518,7 +14046,7 @@
       "gewicht": 1,
       "kosten": 5,
       "setting": "mittelalterlich",
-      "beschreibung": "Parade -1, Reichweite 2. Festhalten bei Steigerung.",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14534,9 +14062,9 @@
       "name": "Pike",
       "kategorie": "Waffe",
       "gewicht": 9,
-      "kosten": 20,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "Aufgesetzt, Reichweite 2, Zweihändig.",
+      "beschreibung": "Stä+W8, Reichweite 2, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14551,10 +14079,10 @@
     "Ranseur": {
       "name": "Ranseur",
       "kategorie": "Waffe",
-      "gewicht": 6,
-      "kosten": 10,
+      "gewicht": 3,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "PB 1, Reichweite 1.",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14570,9 +14098,9 @@
       "name": "Rapier",
       "kategorie": "Waffe",
       "gewicht": 1,
-      "kosten": 20,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "Parade +1.",
+      "beschreibung": "Stä+W4, Parade +1.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14587,10 +14115,10 @@
     "Schlägel": {
       "name": "Schlägel",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 12,
-      "setting": "savage_pathfinder",
-      "beschreibung": "PB 2, Zweihändig, +2 Schaden zum Zerstören von Gegenständen",
+      "gewicht": 1,
+      "kosten": 50,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W10",
@@ -14605,10 +14133,10 @@
     "Bastardschwert": {
       "name": "Bastardschwert",
       "kategorie": "Waffe",
-      "gewicht": 3,
-      "kosten": 35,
+      "gewicht": 1.5,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "Kann zweihändig verwendet werden (+1 Schaden).",
+      "beschreibung": "Stä+W8, kann einhändig benutzt werden.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14624,9 +14152,9 @@
       "name": "Kurzschwert",
       "kategorie": "Waffe",
       "gewicht": 1,
-      "kosten": 10,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "kosten": 140,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W6.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14641,10 +14169,10 @@
     "Langschwert": {
       "name": "Langschwert",
       "kategorie": "Waffe",
-      "gewicht": 2,
-      "kosten": 15,
-      "setting": "savage_pathfinder",
-      "beschreibung": "",
+      "gewicht": 1.5,
+      "kosten": 200,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14659,10 +14187,10 @@
     "Kampfaspergillum": {
       "name": "Kampfaspergillum",
       "kategorie": "Waffe",
-      "gewicht": 2,
-      "kosten": 5,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Enthält Weihwasser. Bei jedem Treffer spritzt Weihwasser: +2 Schaden gegen Kreaturen, die von Weihwasser betroffen sind. Nach drei Angriffen leer.",
+      "gewicht": 1,
+      "kosten": 25,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W6",
@@ -14677,10 +14205,10 @@
     "Bill": {
       "name": "Bill",
       "kategorie": "Waffe",
-      "gewicht": 5.5,
-      "kosten": 11,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Stützen, Reichweite 1, Zweihändig, Parade +1 beim Verteidigen",
+      "gewicht": 2,
+      "kosten": 200,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -14696,9 +14224,9 @@
       "name": "Schlagring",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 1,
-      "setting": "savage_pathfinder",
-      "beschreibung": "Träger gilt als bewaffnet; freie Wiederholung beim Verbergen",
+      "kosten": 25,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W4",
@@ -14713,10 +14241,10 @@
     "Glefe-Guisarme": {
       "name": "Glefe-Guisarme",
       "kategorie": "Waffe",
-      "gewicht": 5,
-      "kosten": 12,
-      "setting": "savage_pathfinder",
-      "beschreibung": "PB 2, Stützen, Reichweite 1, Zweihändig",
+      "gewicht": 3,
+      "kosten": 50,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W10",
@@ -14731,10 +14259,10 @@
     "Luzerner Hammer": {
       "name": "Luzerner Hammer",
       "kategorie": "Waffe",
-      "gewicht": 6,
-      "kosten": 15,
-      "setting": "savage_pathfinder",
-      "beschreibung": "PB 3, Reichweite 1, Zweihändig, Parade -2",
+      "gewicht": 3,
+      "kosten": 200,
+      "setting": "mittelalterlich",
+      "beschreibung": "Stä+W8, Zweihändig.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W12",
@@ -14958,24 +14486,6 @@
         "Schuss": "-",
         "PB": "-",
         "Flächenschablone": "KFS"
-      }
-    },
-    "Sonnenzepter": {
-      "name": "Sonnenzepter",
-      "kategorie": "Allgemein",
-      "gewicht": 0.5,
-      "kosten": 2,
-      "setting": "mittelalterlich",
-      "beschreibung": "Erzeugt für sechs Stunden in einem Radius von 9 m normales Licht und erhöht die Beleuchtungsstufe für weitere 9ʺ um eine Stufe. Gibt keine Hitze ab und zählt als Sonnenlicht.",
-      "aktiv": true,
-      "typ": "Nahkampf",
-      "mindeststaerke": "-",
-      "eigenschaften": {
-        "Schaden": "1W6",
-        "Reichweite": "nah",
-        "FR": "-",
-        "Schuss": "-",
-        "PB": "-"
       }
     },
     "Verstrickungsbeutel": {
@@ -15526,19 +15036,19 @@
     "Wasserflasche (Wasserschlauch)": {
       "name": "Wasserflasche (Wasserschlauch)",
       "kategorie": "Allgemein",
-      "gewicht": 0.5,
-      "kosten": 5,
-      "setting": "",
-      "beschreibung": "Behälter für einen Liter Wasser",
+      "gewicht": 0.25,
+      "kosten": 5.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Wasserschlauch für 1,5 Liter.",
       "aktiv": true
     },
     "Schwert, Langschwert": {
       "name": "Schwert, Langschwert",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 300,
+      "kosten": 200,
       "setting": "mittelalterlich",
-      "beschreibung": "Standardschwerter und Krummschwerter",
+      "beschreibung": "Stä+W8.",
       "aktiv": true,
       "typ": "Nahkampf",
       "mindeststaerke": "W8",
@@ -15554,9 +15064,9 @@
       "name": "Wurfaxt",
       "kategorie": "Waffe",
       "gewicht": 1.5,
-      "kosten": 6,
+      "kosten": 50,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Wurfaxt, Stä+W6.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W6",
@@ -15572,9 +15082,9 @@
       "name": "Dolch/Messer",
       "kategorie": "Waffe",
       "gewicht": 0.5,
-      "kosten": 2,
+      "kosten": 45,
       "setting": "mittelalterlich",
-      "beschreibung": "-",
+      "beschreibung": "Stä+W4.",
       "aktiv": true,
       "typ": "Fernkampf",
       "mindeststaerke": "W4",
@@ -16026,6 +15536,1482 @@
       "setting": "fantasy",
       "beschreibung": "Verleiht die Macht Sprachen sprechen. Wirkt 1 Minute.",
       "aktiv": true
+    },
+    "Sonnenzepter": {
+      "name": "Sonnenzepter",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 250,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Praioskirche. Zepter der Furcht: lässt einen Dämon oder Daimoniden aus der Ferne von Furcht ergreifen -> Furcht Licht des Götterfürsten: leuchtet wie eine Fackel, gilt als Sonnenlicht und mindert Dunkelheit -> Licht/Dunkelheit Schutz wider Schadensmagie: verleiht zusätzlichen Schutz gegen magischen Schaden -> Arkaner Schutz Bollwerk wider Zauberei: schwächt Zauber, die gegen den Geweihten gewirkt werden -> Arkaner Schutz Wille zur Wahrheit: macht es schwerer, den Geweihten zu täuschen oder zu belügen -> Gedankenlesen Bewahrung des Eids: ein geschworener Eid hält länger und ist schwerer zu brechen -> Segen",
+      "aktiv": true
+    },
+    "Rondrakamm": {
+      "name": "Rondrakamm",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 340,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Rondrakirche. Blitz-Schlag: verleiht nach einer Kraftprobe kurzzeitig einen Bonus auf den Angriff -> Kriegersegen Schutz der Löwin: verleiht im Kampf eine bessere Parade -> Abwehren Heftiger Angriff: erhöht die Chance auf einen besonders schweren Treffer -> Waffe verbessern Donner-Schlag: verleiht nach einer Kraftprobe kurzzeitig einen Bonus auf den Schaden -> Waffe verbessern Beistand der Unbesiegten: erlaubt es, eine misslungene Parade zu wiederholen -> Abwehren Schutz wider Unheiliges: verleiht besseren Schutz gegen Dämonen und Daimoniden -> Schutz",
+      "aktiv": true
+    },
+    "Efferdbart": {
+      "name": "Efferdbart",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.5,
+      "kosten": 100,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Efferdkirche. Flug des Dreizacks: erhöht die Wurfreichweite des Dreizacks deutlich -> Waffe verbessern Sprung mit dem Dreizack: nutzt den Dreizack als Sprunghilfe für größere Distanzen -> Fliegen Macht des Dreizacks: erzeugt eine Windhose, die Wesen im Umkreis festhält -> Verstricken Kontrolle des Wassers: formt eine kleine Wassermenge frei nach Wunsch -> Elementarmanipulation Kontrolle der Welle: ruft eine Welle, die Wesen umreißt und Gegenstände beschädigt -> Elementarmanipulation Kontrolle des Strudels: erzeugt einen Strudel, der Wesen im Umkreis festhält -> Verstricken",
+      "aktiv": true
+    },
+    "Gänsebeutel": {
+      "name": "Gänsebeutel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.25,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Traviakirche. Kleine Mahlzeit: im Beutel erscheint täglich eine kleine Mahlzeit für einen anderen -> Gegenstand beschwören Sättigende Mahlzeit: im Beutel erscheint täglich eine vollwertige Tagesration -> Gegenstand beschwören Kräftigende Mahlzeit: die Speise verbessert die Genesung des Essenden -> Heilung Band des Umsorgens: zwei Beschenkte spüren über weite Entfernung, ob der andere verletzt ist -> Gedankenverbindung Brot der Erfrischung: geteiltes Brot lindert bei beiden Erschöpfung -> Linderung Bund der Heilung: überträgt im Schlaf geheilte Lebenskraft auf den Partner -> Heilung",
+      "aktiv": true
+    },
+    "Rabenschnabel": {
+      "name": "Rabenschnabel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 105,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Boronkirche. Hammer der Furcht: lässt einen Geist oder Untoten aus der Ferne von Furcht ergreifen -> Furcht Fokus der Schattenwelt: lässt unsichtbare Wesen und Gegenstände sehen -> Aufspüren Hammer wider Verstorbene: geweihte Waffen richten doppelten Schaden gegen Geister an -> Waffe verbessern Fokus der Verwirrung: lässt ein Lebewesen aus der Ferne verwirrt zurück -> Verwirrung Hammer des Schutzes: fordert einen Untoten heraus, sodass er nur noch den Geweihten angreift -> Marionette Fokus der Seelenstärke: verringert die Wirkung erlittener Furcht -> Arkaner Schutz",
+      "aktiv": true
+    },
+    "Buch der Schlange": {
+      "name": "Buch der Schlange",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Hesindekirche. Wissenssammlung: erinnert sich stets an alles im Buch Niedergeschriebene -> Zaubertricks Wall gegen Schadensmagie: schwächt schadensverursachende Zauber gegen die Geweihte -> Arkaner Schutz Forschungsgebiet: ein gewähltes Wissensgebiet erhält dauerhaft einen Bonus -> Eigenschaft erhöhen/senken Expertenwissen: erleichtert Aufgaben im gewählten Forschungsgebiet -> Eigenschaft erhöhen/senken Beistand gegen Einflusszauberei: verbessert den Widerstand gegen beeinflussende Zauber -> Arkaner Schutz Bollwerk gegen Magie: schwächt alle Zauber, die gegen die Geweihte gewirkt werden -> Arkaner Schutz",
+      "aktiv": true
+    },
+    "Firunsmesser": {
+      "name": "Firunsmesser",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 60,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Firunkirche. Messer des Frosts: schützt den Geweihten vor dem Fortschreiten von Unterkühlung -> Schutz vor Naturgewalten Klinge des Waidmanns: Jagdtrophäen bleiben deutlich länger haltbar -> Zaubertricks Messer der Kälte: fügt dem Getroffenen eine lähmende Unterkühlung zu -> Betäuben Klinge des Jägers: richtet zusätzlichen Schaden gegen Tiere an -> Waffe verbessern Klinge des Pirschers: verleiht bei der Jagd ein besonderes Geschick im Umgang mit Tieren -> Eigenschaft erhöhen/senken Messer des Eises: schneidet mühelos durch Eis -> Elementarmanipulation",
+      "aktiv": true
+    },
+    "Prisma": {
+      "name": "Prisma",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.1,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Tsakirche. Aura der Friedfertigkeit: Angriffe gegen die Geweihte werden erschwert -> Abwehren Licht des Prismas: faszinierendes Licht- und Farbenspiel, das die Zuversicht stärkt -> Illusion Eidechsenhaut: verleiht spürbaren Rüstungsschutz, mit anderer Rüstung kombinierbar -> Schutz Blütenregen: Blüten verletzen Chimären, Daimoniden und Dämonen im Umkreis -> Schadensfeld Freiheit des Lichts: befreit einen Getroffenen von Furcht, Lähmung oder Verwirrung -> Linderung Freiheitsdrang: verleiht besondere Überzeugungskraft bei öffentlichen Reden -> Eigenschaft erhöhen/senken",
+      "aktiv": true
+    },
+    "Mondamulett": {
+      "name": "Mondamulett",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.1,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Phexkirche. \nLicht des Madamals: leuchtet wie eine Kerze, sichtbar nur für den Geweihten und Benannte -> Licht/Dunkelheit\nLautlos wie ein Schatten: vermeidet auffällige Geräusche beim Schleichen -> Geräusch/Stille\nGlück des Fuchses: verleiht dem Träger Glück -> Segen\nGespür für Geld: ermittelt, wie viel Geld eine Person bei sich trägt -> Aufspüren\nEhrliche Geschäfte: erschwert in einem Umkreis unehrliche Geschäfte -> Empathie\nSinn für den Wert: erspürt Falschgeld und gefälschte Scheine -> Aufspüren",
+      "aktiv": true
+    },
+    "Grüne Handschuhe": {
+      "name": "Grüne Handschuhe",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Perainekirche. Seuchenhandschuh: senkt das Ansteckungsrisiko bei der Pflege Kranker -> Linderung Pflanzenkonservierung: verarbeitete Pflanzen bleiben länger haltbar -> Zaubertricks Genesungshandschuh: lässt eine Krankheit einen milderen Verlauf nehmen -> Linderung Heilerhandschuh: verhindert Wundfieber und fördert die Genesung -> Heilung Pflanzensuche: findet mehr Heilpflanzen als üblich -> Aufspüren Pflanzenerkennung: erkennt durch Berührung das Anwendungsgebiet einer Pflanze -> Aufspüren",
+      "aktiv": true
+    },
+    "Ingerimmshammer": {
+      "name": "Ingerimmshammer",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.25,
+      "kosten": 125,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Ingerimmkirche. Werkzeug der Beständigkeit: ein damit erschaffener Gegenstand ist besonders widerstandsfähig -> Gegenstand verbessern/schaden Brandschutz: verringert bei einer gewählten Person den Schaden durch Flammen -> Schutz vor Naturgewalten Schlag der Zerstörung: zerstört berührte Gegenstände -> Gegenstand verbessern/schaden Hammer der Schwere: kaum jemand außer dem Geweihten kann den Hammer tragen -> Gegenstand verbessern/schaden Erdbeben-Schlag: erzeugt ein kleines Erdbeben, das ein Wesen zu Boden wirft -> Elementarmanipulation Glut des Hammers: richtet zusätzlichen Schaden gegen Dämonen, Pflanzen, Holz und Hitzeempfindliche an -> Waffe verbessern",
+      "aktiv": true
+    },
+    "Roter Schleier": {
+      "name": "Roter Schleier",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.05,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Rahjakirche. Schleier der Fesselung: macht Fesselungen deutlich schwerer zu lösen -> Verstricken Schleier der Reinheit: Regen, Sonnenbrand und Schmutz haften nicht an der Geweihten -> Schutz vor Naturgewalten Schleier der Unempfindlichkeit: fängt einen Teil des erlittenen Schadens ab -> Arkaner Schutz Schleier der Träume: beeinflusst die Träume eines Schlafenden und verbessert seine Genesung -> Heilung Schleier der Verführung: verleiht einen deutlichen Bonus auf gesellschaftliche Fertigkeiten -> Eigenschaft erhöhen/senken Schleier des Begehrens: lässt den Träger besonders begehrenswert wirken -> Eigenschaft erhöhen/senken",
+      "aktiv": true
+    },
+    "Avesstab": {
+      "name": "Avesstab",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 25,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Aveskirche. \nWeg des Stabträgers: zeigt an einer Weggabelung den kürzeren Weg zum Ziel an -> Zwiesprache\nGlückskind: segnet ein Ziel für einige Zeit mit Glück -> Segen\nGegenwehr des Stabträgers: verleiht im Kampf mit dem Stab eine bessere Parade -> Abwehren\nSicherer Schritt des Stabträgers: verleiht sicheren Stand auf unwegsamem Gelände -> Wandkrabbler\nMacht des Schicksals: erlaubt es, mehrere Bennies für dieselbe Probe einzusetzen -> Segen\nZeichen der Vorsehung: ein Gesegneter kann einen wirkungslos verbrauchten Bennie zurückerhalten -> Segen",
+      "aktiv": true
+    },
+    "Ifirnsmantel": {
+      "name": "Ifirnsmantel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 150,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Ifirnkirche. \nWarmer Mantel: schützt den Träger vor Kälte und Unterkühlung -> Schutz vor Naturgewalten\nHaltbare Trophäen: Jagdtrophäen bleiben länger haltbar -> Zaubertricks\nSchutz gegen Kälte: der Träger erleidet keine Folgen mehr durch Kälte und Eis -> Schutz vor Naturgewalten\nErholsamer Schlaf: verhindert Genesungsabzüge durch eine schlechte Umgebung -> Linderung\nJägermantel: verleiht besseren Schutz gegen Wildtiere -> Schutz\nTierfreundschaft: beruhigt ein Wildtier, sodass es nicht angreift -> Tierfreund",
+      "aktiv": true,
+      "torso": 1,
+      "arme": 1,
+      "beine": 1,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Korspieß": {
+      "name": "Korspieß",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.5,
+      "kosten": 400,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Korkirche. Scharfe Krallen: richtet zusätzlichen Schaden gegen gut gepanzerte Wesen an -> Waffe verbessern Verteidigungslücke: verzichtet auf Schaden und senkt stattdessen die Verteidigung des Ziels -> Eigenschaft erhöhen/senken Mantikorstich: richtet zusätzlichen Schaden gegen gut gepanzerte Wesen an (kombinierbar) -> Waffe verbessern Blutende Wunde: fügt dem Opfer nachträglich Blutungsschaden zu -> Waffe verbessern Schmerzhafter Hieb: verzichtet auf Schaden und fügt dem Opfer stattdessen Schmerz zu -> Betäuben Kampfesmut: unterdrückt bei Verbündeten im Umkreis Furcht oder Schmerz -> Linderung",
+      "aktiv": true
+    },
+    "Einhornstirnband": {
+      "name": "Einhornstirnband",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.3,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Nanduskirche. Wissensdurst: ein gewähltes Wissensgebiet erhält dauerhaft einen Bonus -> Eigenschaft erhöhen/senken Meisterhafter Lehrmeister: verkürzt die Lernzeit der Schüler des Geweihten -> Zaubertricks Zweiter Anlauf: erlaubt es, gescheiterte Wissensproben ohne Erschwernis zu wiederholen -> Segen Recherchegespür: verleiht zusätzliche Boni auf Wissensgebiete -> Eigenschaft erhöhen/senken Inspirierender Unterricht: ein zuhörender Schüler erhält Erleichterungen auf das Wissensgebiet -> Eigenschaft erhöhen/senken Weisheit des Lehrers: ein zuhörender Schüler löst geistige Aufgaben leichter -> Eigenschaft erhöhen/senken",
+      "aktiv": true
+    },
+    "Walschild": {
+      "name": "Walschild",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 5.0,
+      "kosten": 85,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Swafnirkirche. Wall der Schilde: mehrere Verbündete erhalten besseren Schutz gegen Fernkampf -> Abwehren Flukenschlag: Schildangriff ohne Erschwernis, der das Ziel zu Boden wirft -> Waffe verbessern Schildmeer: wie Wall der Schilde, mit stärkerem Schutz -> Abwehren Wall der Angst: jagt Dämonen und Meeresungeheuern Furcht ein -> Furcht Hass des Grünwals: stärkerer Schildangriff, der das Ziel zu Boden wirft -> Waffe verbessern Kraftvoller Vorstoß: verleiht mehreren Zielen einen Bonus auf den Angriff -> Kriegersegen",
+      "aktiv": true
+    },
+    "Opferdolch des Namenlosen": {
+      "name": "Opferdolch des Namenlosen",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand des Namenlosen Kults. Macht der Namenlosen Klinge I-XIII: steigerbare Stufen verleihen mehr Schaden, bessere Angriffe sowie Furcht oder Schmerz bei Treffern -> Waffe verbessern",
+      "aktiv": true
+    },
+    "Angroschanhänger": {
+      "name": "Angroschanhänger",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.2,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Angroschkirche. Beständige Werksarbeit: ein erschaffener Gegenstand ist besonders widerstandsfähig -> Gegenstand verbessern/schaden Fliegende Steine: wirbelt lose Steine umher, die Umstehende verletzen -> Flächenschlag Bebende Erde: erzeugt ein kleines Erdbeben, das ein Wesen zu Boden wirft -> Elementarmanipulation Lederne Haut: verringert bei einer gewählten Person den Schaden durch Flammen -> Schutz vor Naturgewalten Hitzewall: umgibt sich mit einem Hitzebereich, der Angreifer abwehrt -> Schadensfeld Eins mit der Flamme: macht den Geweihten kurzzeitig vollkommen feuerimmun -> Schutz vor Naturgewalten",
+      "aktiv": true
+    },
+    "Widderkeule": {
+      "name": "Widderkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 70,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand des Levthankults. Verführung des Widders: erleichtert das Verführen anderer -> Eigenschaft erhöhen/senken Rausch der Keule: tauscht bei einer Berührung Benommenheit gegen Schmerz oder umgekehrt -> Linderung Angsteinflößendes Tier: lässt ein Ziel aus der Nähe von Furcht ergreifen -> Furcht Lustvoller Bock: verleiht einen Bonus auf das nächste Verführen oder Überreden -> Eigenschaft erhöhen/senken Langanhaltender Rausch: nimmt einem anderen Benommenheit ab und überträgt sie auf sich -> Linderung Rausch der Lustbarkeiten: lässt ein Rauschmittel stärker benommen machen -> Betäuben",
+      "aktiv": true
+    },
+    "Marbodolch": {
+      "name": "Marbodolch",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.75,
+      "kosten": 60,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand des Marbokults. Stich der Stärkung: Selbstverletzung verleiht einen Bonus auf eine körperliche Aufgabe -> Eigenschaft erhöhen/senken Stich der Furcht: verzichtet auf einen Teil des Schadens und jagt dem Opfer stattdessen Furcht ein -> Furcht Stich des langsamen Todes: fügt dem Opfer über mehrere Runden weiteren Schaden zu -> Waffe verbessern Stich der Vampirin: der verursachte Schaden heilt den Geweihten -> Heilung Stich des Scheintods: versetzt ein Ziel in einen mehrstündigen, komatösen Schlaf -> Schlummer Stich der Visionen: Wesen im Umkreis erleiden verwirrende Tagträume -> Verwirrung",
+      "aktiv": true
+    },
+    "Ferkinaknochenkeule": {
+      "name": "Ferkinaknochenkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Ferkinaschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Blutende Keule: ein Treffer lässt das Opfer bluten -> Waffe verbessern Knochenbrechende Keule: richtet durch besonders heftige Schläge zusätzlichen Schaden an -> Waffe verbessern Freundschaft des Tieres: beruhigt oder befreundet ein Tier in der Nähe -> Tierfreund Tierische Kraft: verleiht tierische Stärke und vertreibt Benommenheit -> Eigenschaft erhöhen/senken Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Fjarningerknochenkeule": {
+      "name": "Fjarningerknochenkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Fjarningerschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Knochenbrechende Keule: richtet durch besonders heftige Schläge zusätzlichen Schaden an -> Waffe verbessern Eisberg: errichtet eine schützende Eisbarriere -> Barriere Eishaut: umgibt den Schamanen mit schützendem Eis -> Schutz Erfrierung verursachen: fügt einem Ziel Kälteschaden und Erfrierungen zu -> Geschoss Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Gjalskerknochenkeule": {
+      "name": "Gjalskerknochenkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Gjalskerschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Freundschaft des Tieres: beruhigt oder befreundet ein Tier in der Nähe -> Tierfreund Heilung der Gefährten: heilt einen Gefährten durch Berührung -> Heilung Tierische Kraft: verleiht tierische Stärke und vertreibt Benommenheit -> Eigenschaft erhöhen/senken Knochenbrechende Keule: richtet durch besonders heftige Schläge zusätzlichen Schaden an -> Waffe verbessern Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Tahayaknochenkeule": {
+      "name": "Tahayaknochenkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Tahayaschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Freundschaft des Tieres: beruhigt oder befreundet ein Tier in der Nähe -> Tierfreund Jaguarkraft: verleiht die Kraft und Schnelligkeit eines Jaguars -> Eigenschaft erhöhen/senken Magieentzug: entzieht dem Ziel bei Berührung oder Treffer Magiepunkte -> Machtpunkte entziehen Stärkung der Sonne: stärkt den Schamanen mit der Kraft der Sonne -> Eigenschaft erhöhen/senken Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Nivesenknochenkeule": {
+      "name": "Nivesenknochenkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Nivesenschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Freundschaft des Tieres: beruhigt oder befreundet ein Tier in der Nähe -> Tierfreund Wolfskraft: verleiht die Kraft und Sinne eines Wolfes -> Eigenschaft erhöhen/senken Mondsicht: verleiht im Dunkeln verbesserte Sicht -> Dunkelsicht Magieentzug: entzieht dem Ziel bei Berührung oder Treffer Magiepunkte -> Machtpunkte entziehen Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Trollzackerknochenkeule": {
+      "name": "Trollzackerknochenkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Trollzackerschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Härte der Keule: die Keule wird kurzzeitig zu einer gefürchteten, stärkeren Waffe -> Waffe verbessern Knochenbrechende Keule: richtet durch besonders heftige Schläge zusätzlichen Schaden an -> Waffe verbessern Tierische Kraft: verleiht tierische Stärke und vertreibt Benommenheit -> Eigenschaft erhöhen/senken Fliegende Steine: wirbelt lose Steine umher, die Umstehende verletzen -> Flächenschlag Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Achazkeule": {
+      "name": "Achazkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Achazschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Freundschaft des Tieres: beruhigt oder befreundet ein Tier in der Nähe -> Tierfreund Tierische Kraft: verleiht tierische Stärke und vertreibt Benommenheit -> Eigenschaft erhöhen/senken Erfrierung verursachen: fügt einem Ziel Kälteschaden und Erfrierungen zu -> Geschoss Kältestrahl: schießt einen gebündelten Kältestrahl auf große Distanz -> Strahl Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Knochenkeule der Schamanen": {
+      "name": "Knochenkeule der Schamanen",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand der Tairachschamanen. Keulenweihe: weiht die Knochenkeule, macht sie unzerbrechlich und zu einer geweihten Waffe -> Gegenstand verbessern/schaden Blutende Keule: ein Treffer lässt das Opfer bluten -> Waffe verbessern Knochenbrechende Keule: richtet durch besonders heftige Schläge zusätzlichen Schaden an -> Waffe verbessern Magieentzug: entzieht dem Ziel bei Berührung oder Treffer Magiepunkte -> Machtpunkte entziehen Fokus der Verwirrung: lässt ein Lebewesen aus der Ferne verwirrt zurück -> Verwirrung Keulenwurf: die Keule trifft ein Ziel aus der Ferne und kehrt zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Schlangenstab": {
+      "name": "Schlangenstab",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand des H’Szint-Kults. Wall gegen Schadensmagie: schwächt schadensverursachende Zauber gegen den Priester -> Arkaner Schutz Wandelstab: legt eine Tarnung über den Priester und eine berührte Person -> Unsichtbarkeit Beistand gegen Einflusszauberei: verbessert den Widerstand gegen beeinflussende Zauber -> Arkaner Schutz Bollwerk gegen Magie: schwächt alle Zauber, die gegen den Priester gewirkt werden -> Arkaner Schutz Schlangenhaut: verleiht spürbaren Rüstungsschutz, mit anderer Rüstung kombinierbar -> Schutz Giftbiss: vergiftet ein Ziel aus kurzer Distanz -> Geschoss",
+      "aktiv": true
+    },
+    "Eidechsenkleidung": {
+      "name": "Eidechsenkleidung",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand des Zsahh-Kults. Aura der Friedfertigkeit: Angriffe gegen die Priesterin werden erschwert -> Abwehren Pflanzensuche: findet mehr Heilpflanzen als üblich -> Aufspüren Eidechsenhaut: verleiht spürbaren Rüstungsschutz, mit anderer Rüstung kombinierbar -> Schutz Echsenfreundschaft: beruhigt eine Echse, sodass sie nicht angreift -> Tierfreund Pflanzenerkennung: erkennt durch Berührung das Anwendungsgebiet einer Pflanze -> Aufspüren Erholsamer Schlaf: verhindert Genesungsabzüge durch eine schlechte Umgebung -> Linderung",
+      "aktiv": true
+    },
+    "Muschelhorn": {
+      "name": "Muschelhorn",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Zeremonialgegenstand des Numinorukults. Wasser der Vorbereitung: erleichtert die nächste Aufgabe -> Segen Wasser der Hellsicht: liest die Zukunft und gibt einem anderen einen Bennie zurück -> Zwiesprache Wasser der Klarheit: Trinken befreit von Verwirrung und Furcht -> Linderung Donnerndes Horn: ein Hornstoß ist weithin als Warnung oder Hilferuf zu hören -> Geräusch/Stille Sturmhorn: ein Hornstoß wirft ein Ziel zurück und macht es taub und liegend -> Flächenschlag Treibendes Horn: verleiht mehreren Verbündeten einen Bonus auf Angriffe -> Kriegersegen",
+      "aktiv": true
+    },
+    "Animistenwaffe": {
+      "name": "Animistenwaffe",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Animisten. Geweihte Waffe, unterstützt bei Ritualen.",
+      "aktiv": true
+    },
+    "Krallenkette": {
+      "name": "Krallenkette",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Animisten. Bindung der Krallenkette: weiht die Kette, macht sie unzerbrechlich und magisch -> Gegenstand verbessern/schaden Bannzeichen wider Zauberei: verbessert den Widerstand gegen Magie -> Arkaner Schutz Bannzeichen wider Stürme: schützt vor Unwettern und Stürmen -> Schutz vor Naturgewalten Schutz des Rudels: verleiht Verbündeten besseren Schutz -> Schutz Fluch der Pestilenz: belegt ein Opfer mit einem Krankheitsfluch -> Fluch Krallenketten-Apport: ruft die Kette aus der Ferne in die Hand zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Druidendolch": {
+      "name": "Druidendolch",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.75,
+      "kosten": 60,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Druiden. Bindung des Dolches: weiht den Dolch, macht ihn unzerbrechlich und zu einer magischen Waffe -> Gegenstand verbessern/schaden Borkenhaut: umgibt den Druiden mit rindenartiger Schutzhaut -> Schutz Flug des Dolches: der Dolch fliegt selbstständig auf einen Gegner zu -> Telekinese Gespür des Dolches: spürt Wesen im Umkreis auf -> Aufspüren Sicht im Dunkeln: verleiht Sicht in der Dunkelheit -> Dunkelsicht Wegweiser: der Dolch weist die Richtung zu einem Ort -> Zwiesprache Kraft aus der Erde: verleiht dem Druiden zusätzliche körperliche Kraft -> Eigenschaft erhöhen/senken",
+      "aktiv": true
+    },
+    "Druidensichel": {
+      "name": "Druidensichel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Druiden. Bindung der Sichel: weiht die Sichel, macht sie unzerbrechlich und magisch -> Gegenstand verbessern/schaden Kraft der Sichel: richtet zusätzlichen Schaden gegen Dämonen und Geister an -> Waffe verbessern Bannsichel: richtet zusätzlichen Schaden gegen übernatürliche Wesen an -> Waffe verbessern Kräuterernte: findet beim Sammeln mehr Heilkräuter -> Aufspüren Haltbare Ernte: geschnittene Kräuter bleiben länger haltbar -> Zaubertricks Schnitt durch Stein: schneidet mühelos durch Fels und Stein -> Elementarmanipulation Sichel-Apport: ruft die Sichel aus der Ferne in die Hand zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Lebensring": {
+      "name": "Lebensring",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.1,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Geoden. Bindung des Rings: weiht den Ring und bindet ihn dauerhaft an den Geoden -> Gegenstand verbessern/schaden Macht über Regen: ruft oder vertreibt Regen -> Elementarmanipulation Frostwelle: lässt eine Kältewelle in einem Umkreis Wesen verletzen -> Flächenschlag Wirbelnder Luftschild: umgibt den Geoden mit einem schützenden Luftwirbel -> Schutz Machtvolle Heilkräfte der Natur: heilt einen Verletzten mit der Kraft der Natur -> Heilung Weg durch Sumus Leib: lässt den Geoden durch das Erdreich an einen anderen Ort reisen -> Teleportation Schutzzone vor Bösem: erschafft eine Zone, die böse Wesen abwehrt -> Heiligtum Magnetismus: zieht metallene Gegenstände an oder stößt sie ab -> Telekinese",
+      "aktiv": true
+    },
+    "Magierstab": {
+      "name": "Magierstab",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Gildenmagier. Bindung des Stabes: weiht den Stab, macht ihn unzerbrechlich und zu einer magischen Waffe -> Gegenstand verbessern/schaden Ewige Flamme: entzündet den Stab als dauerhafte Lichtquelle -> Licht/Dunkelheit Flammenschwert: umhüllt den Stab mit Flammen und steigert seinen Schaden -> Waffe verbessern Energiestrahl: schießt einen gebündelten Energiestrahl auf ein Ziel -> Strahl Druckwelle: stößt eine Druckwelle aus, die Umstehende trifft -> Flächenschlag Telekineseschlag: schleudert ein Ziel oder einen Gegenstand mit Gedankenkraft -> Telekinese Seilschlange: verwandelt den Stab in ein Seil, das Ziele fesselt -> Verstricken Bannstab des Adepten: richtet zusätzlichen Schaden gegen beschwörbare Wesen an -> Waffe verbessern Schlossöffner: öffnet oder verriegelt Schlösser und Türen -> Verriegeln/Entriegeln Tierwandlung: verwandelt den Magier kurzzeitig in ein Tier -> Gestaltwandeln",
+      "aktiv": true
+    },
+    "Bannschwert": {
+      "name": "Bannschwert",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Gildenmagier. Bindung des Bannschwerts: weiht das Schwert, macht es unzerbrechlich und zu einer magischen Waffe -> Gegenstand verbessern/schaden Bannschwert des Adepten: richtet zusätzlichen Schaden gegen beschwörbare Wesen an -> Waffe verbessern Klinge wider Wesenheit: richtet zusätzlichen Schaden gegen eine bestimmte Wesensart an -> Waffe verbessern Paralysierendes Schwert: lähmt ein getroffenes Ziel -> Betäuben Fokus der Austreibung: treibt beschworene Wesen aus und verbannt sie -> Verbannen Übernatürlicher Wegweiser: spürt übernatürliche Wesen in der Nähe auf -> Aufspüren",
+      "aktiv": true
+    },
+    "Gildenmagische Magierkugel": {
+      "name": "Gildenmagische Magierkugel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Gildenmagier. Bindung der Magierkugel: weiht die Kugel und bindet sie dauerhaft an den Magier -> Gegenstand verbessern/schaden Lichtstrahl: wirft einen gebündelten Lichtstrahl -> Licht/Dunkelheit Brennglas: bündelt Licht zu einem brennenden Strahl gegen ein Ziel -> Geschoss Geschossschutz: schützt den Magier vor Fernkampfgeschossen -> Schutz Kugelbarriere: errichtet eine schützende magische Barriere -> Barriere Konservierungsgefäß: bewahrt Gegenstände unverändert auf -> Zaubertricks Kleines Orbitarium: zeigt Sternbilder und gibt Hinweise auf Verborgenes -> Zwiesprache",
+      "aktiv": true
+    },
+    "Zauberschale": {
+      "name": "Zauberschale",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.25,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Minderes Traditionsartefakt der Gildenmagier. Allegorische Analyse: deckt verborgene Zusammenhänge und Bedeutungen auf -> Arkanes entdecken/verbergen Aufmerksamer Wächter: lässt die Schale die Umgebung überwachen -> Aufspüren Elementarer Verbündeter: beschwört einen elementaren Helfer -> Verbündeten beschwören Feuer & Eis: entfesselt elementare Kräfte von Feuer und Eis -> Elementarmanipulation Kleine Chymische Hochzeit: verbindet alchemistische Substanzen zu neuen Wirkungen -> Zaubertricks",
+      "aktiv": true
+    },
+    "Goblinkeule": {
+      "name": "Goblinkeule",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Goblinzauberinnen. Bindung der Goblinkeule: weiht die Keule, macht sie unzerbrechlich und zu einer magischen Waffe -> Gegenstand verbessern/schaden Keulenwurf: die Keule trifft aus der Ferne und kehrt zurück -> Telekinese Schweinekraft: verleiht der Zauberin tierische Kraft -> Eigenschaft erhöhen/senken Tierfreundschaft: beruhigt oder befreundet ein Tier -> Tierfreund Rottenheilung: heilt mehrere Verbündete zugleich -> Heilung Wirbelsteine: wirbelt Steine umher, die Umstehende verletzen -> Flächenschlag",
+      "aktiv": true
+    },
+    "Schweinetrommel": {
+      "name": "Schweinetrommel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Goblinzauberinnen. Bindung der Schweinetrommel: weiht die Trommel und bindet sie an die Zauberin -> Gegenstand verbessern/schaden Mutiges Grunzen: verleiht Verbündeten Mut und Kampfkraft -> Kriegersegen Schweinetanz: zwingt ein Ziel zu unfreiwilligen Bewegungen -> Marionette Goblins, die auf Schweine starren: lenkt ein Ziel ab und verwirrt es -> Verwirrung Schweinetrommel-Apport: ruft die Trommel aus der Ferne zurück -> Telekinese",
+      "aktiv": true
+    },
+    "Hauerkette": {
+      "name": "Hauerkette",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Goblinzauberinnen. Bindung der Hauerkette: weiht die Kette und bindet sie an die Zauberin -> Gegenstand verbessern/schaden Hagelschlag: lässt Hagel auf einen Bereich niedergehen -> Flächenschlag Todesfluch: belegt ein Opfer mit einem tödlichen Fluch -> Fluch Schutz der Muttersau: verleiht besseren Schutz -> Schutz Trüffelsinn: erspürt verborgene Dinge in der Erde -> Aufspüren Zunge lähmen: lähmt einem Ziel die Zunge, sodass es nicht sprechen kann -> Betäuben",
+      "aktiv": true
+    },
+    "Hexenkessel": {
+      "name": "Hexenkessel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 5.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Hexen. Bindung des Hexenkessels: weiht den Kessel und bindet ihn an die Hexe -> Gegenstand verbessern/schaden Heilsüppchen: ein gebrauter Sud heilt Verletzungen -> Heilung Krafttrank: ein Gebräu steigert die Kräfte des Trinkenden -> Eigenschaft erhöhen/senken Tarnsalbe: eine Salbe macht den Träger nahezu unsichtbar -> Unsichtbarkeit Schutzsalbe: eine Salbe verleiht besseren Schutz -> Schutz Giftgebräu: braut ein wirksames Gift -> Fluch",
+      "aktiv": true
+    },
+    "Fluggerät": {
+      "name": "Fluggerät (Hexenbesen)",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 2.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Minderes Traditionsartefakt der Hexen. Hexenflug: das verzauberte Fluggerät trägt die Hexe durch die Luft -> Fliegen",
+      "aktiv": true
+    },
+    "Schuppenbeutel": {
+      "name": "Schuppenbeutel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Kristallomanten. Bindung des Schuppenbeutels: weiht den Beutel und bindet ihn an den Kristallomanten -> Gegenstand verbessern/schaden Ewige Wegzehrung: im Beutel findet sich stets Nahrung -> Gegenstand beschwören Riesiger Beutel: fasst weit mehr, als seine Größe vermuten lässt -> Wachsen/Schrumpfen Suchende Finger: holt einen gewünschten Gegenstand von selbst aus dem Beutel -> Telekinese Unauffindbarer Inhalt: verbirgt den Inhalt vor fremdem Zugriff -> Arkanes entdecken/verbergen Unheilvoller Inhalt: belegt einen unbefugten Greifer mit einem Fluch -> Fluch",
+      "aktiv": true
+    },
+    "Kristallomantische Kristallkugel": {
+      "name": "Kristallomantische Kristallkugel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Kristallomanten. Bindung der Kristallkugel: weiht die Kugel und bindet sie an den Kristallomanten -> Gegenstand verbessern/schaden Fernbild: zeigt Bilder von einem weit entfernten Ort -> Fernsicht Bilderspiel: erzeugt täuschende Bilder und Trugbilder -> Illusion Wachendes Auge: überwacht selbstständig die Umgebung -> Ausspähung Kugel des Zauberschutzes: verbessert den Widerstand gegen Magie -> Arkaner Schutz Brennglas: bündelt Licht zu einem brennenden Strahl gegen ein Ziel -> Geschoss",
+      "aktiv": true
+    },
+    "Echsenhaube": {
+      "name": "Echsenhaube",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.3,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Kristallomanten. Bindung der Echsenhaube: weiht die Haube und bindet sie an den Kristallomanten -> Gegenstand verbessern/schaden Schutz des Geistes: schützt vor geistiger Beeinflussung -> Arkaner Schutz Merkmalsverstärkung: verstärkt die magischen Wirkungen des Trägers -> Eigenschaft erhöhen/senken Hauben-Apport: ruft die Haube aus der Ferne zurück -> Telekinese Astralspeicher-Haube: speichert magische Energie zur späteren Nutzung -> Zaubertricks",
+      "aktiv": true
+    },
+    "Scharlatanische Zauberkugel": {
+      "name": "Scharlatanische Zauberkugel",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Scharlatane. Bindung der Zauberkugel: weiht die Kugel und bindet sie an den Scharlatan -> Gegenstand verbessern/schaden Kugel des Illusionisten: erschafft täuschend echte Illusionen -> Illusion Kugel des Hellsehers: zeigt Bilder ferner Orte -> Fernsicht Funkenregen: versprüht verletzende Funken auf ein Ziel -> Geschoss Magischer Schutzwall: errichtet eine schützende Barriere -> Barriere Kommunikation: ermöglicht Verständigung über die Ferne -> Gedankenverbindung",
+      "aktiv": true
+    },
+    "Zauberstecken": {
+      "name": "Zauberstecken",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Minderes Traditionsartefakt der Scharlatane. Leuchtfeuer: lässt den Stecken hell leuchten -> Licht/Dunkelheit Seil des Adepten: verwandelt den Stecken in ein Seil, das Ziele fesselt -> Verstricken Aufgeblasen: lässt den Stecken anschwellen und größer werden -> Wachsen/Schrumpfen Verschwindibus: lässt den Stecken oder den Träger verschwinden -> Unsichtbarkeit",
+      "aktiv": true
+    },
+    "Narrenkappe": {
+      "name": "Narrenkappe",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.2,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Schelme. Bindung der Narrenkappe: weiht die Kappe und bindet sie an den Schelm -> Gegenstand verbessern/schaden Massenverwirrung: verwirrt mehrere Ziele zugleich -> Verwirrung Ungesehen: lässt den Träger unbemerkt bleiben -> Unsichtbarkeit Publikumsliebling: macht den Träger bei anderen beliebt -> Eigenschaft erhöhen/senken Mir nach!: zwingt ein Ziel, dem Schelm zu folgen -> Marionette Geräumige Kappe: verstaut weit mehr, als ihre Größe vermuten lässt -> Gegenstand beschwören",
+      "aktiv": true
+    },
+    "Schelmenspielzeug": {
+      "name": "Schelmenspielzeug",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.3,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Schelme. Bindung des Schelmenspielzeugs: weiht das Spielzeug und bindet es an den Schelm -> Gegenstand verbessern/schaden Kämpfendes Spielzeug: erweckt das Spielzeug als kämpfenden Helfer -> Verbündeten beschwören Spionierendes Spielzeug: schickt das Spielzeug aus, um die Umgebung auszukundschaften -> Ausspähung Beweg dich!: lässt das Spielzeug sich von selbst bewegen -> Telekinese Trösten: spendet einem anderen Trost und lindert Leid -> Linderung Beleidigungen: verspottet ein Ziel, sodass es benommen wird -> Betäuben",
+      "aktiv": true
+    },
+    "Alchimistenschale": {
+      "name": "Alchimistenschale",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Zauberalchimisten. Bindung der Alchimistenschale: weiht die Schale und bindet sie an den Alchimisten -> Gegenstand verbessern/schaden Feuer und Eis: entfesselt elementare Kräfte von Feuer und Eis -> Elementarmanipulation Giftiges Metall: schleudert ätzendes oder giftiges Metall auf ein Ziel -> Geschoss Leuchtende Schale: lässt die Schale als Lichtquelle leuchten -> Licht/Dunkelheit Telekinetische Schale: bewegt die Schale und Gegenstände mit Gedankenkraft -> Telekinese Zersetzende Schale: zersetzt und beschädigt Gegenstände -> Gegenstand verbessern/schaden Allegorische Analyse: deckt verborgene Zusammenhänge und Bedeutungen auf -> Arkanes entdecken/verbergen Machtvolle Tränke: braut wirksame heilende Tränke -> Heilung",
+      "aktiv": true
+    },
+    "Zauberinstrument": {
+      "name": "Zauberinstrument",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Zauberbarden. Bindung des Zauberinstruments: weiht das Instrument und bindet es an den Barden -> Gegenstand verbessern/schaden Ohrenbetäubender Klang: ein lauter Klang betäubt die Zuhörer -> Betäuben Klangillusion: erzeugt täuschende Klänge und Trugbilder -> Illusion Stärkung der Kampfgefährten: verleiht Verbündeten Mut und Kampfkraft -> Kriegersegen Bann des Übernatürlichen: vertreibt beschworene Wesen -> Verbannen Emotionsübernahme: beeinflusst die Gefühle der Zuhörer -> Empathie Hilferuf: ein Klang ist weithin als Ruf zu hören -> Geräusch/Stille",
+      "aktiv": true
+    },
+    "Trinkhorn": {
+      "name": "Trinkhorn",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.75,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Sangara-Zauberbarden. Bindung des Trinkhorns: weiht das Horn und bindet es an den Barden -> Gegenstand verbessern/schaden Heldenrausch: versetzt Verbündete in einen kämpferischen Rausch -> Kriegersegen Friedensstifter: beruhigt aufgebrachte Gemüter -> Linderung Nebel der Erinnerung: lässt ein Ziel Erinnerungen vergessen -> Gedankenleere Zwistbringer: sät Zwietracht und Verwirrung -> Verwirrung Ögnirs Gelage: ein zauberhaftes Gelage stärkt und heilt die Gäste -> Heilung",
+      "aktiv": true
+    },
+    "Zauberkleidung": {
+      "name": "Zauberkleidung",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.0,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Zaubertänzer. Bindung der Zauberkleidung: weiht die Kleidung und bindet sie an die Tänzerin -> Gegenstand verbessern/schaden Faszinierende Kleidung: zieht die Blicke auf sich und fasziniert die Zuschauer -> Illusion Fesselnde Gewandung: umschlingt und fesselt ein Ziel -> Verstricken Gewand der Heilung: heilt die Trägerin oder einen Berührten -> Heilung Schutzgewand: verleiht der Trägerin besseren Schutz -> Schutz Gewand der Täuschung: verändert das Aussehen der Trägerin -> Verkleiden Verführerische Gewandung: macht die Trägerin besonders verführerisch -> Eigenschaft erhöhen/senken",
+      "aktiv": true
+    },
+    "Sippenchronik": {
+      "name": "Sippenchronik",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 1.5,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Traditionsartefakt der Zibilja. Bindung der Chronik: weiht die Chronik und bindet sie an die Zibilja -> Gegenstand verbessern/schaden Weisheit der Schrift: verleiht Zugriff auf das gesammelte Wissen der Sippe -> Eigenschaft erhöhen/senken Heilungswissen: heilt Verletzte mit überliefertem Wissen -> Heilung Wind des Schutzes: umgibt einen Schützling mit schützendem Wind -> Schutz Eindämmung des Kampfeswillens: besänftigt einen Angreifer und nimmt ihm den Kampfeswillen -> Linderung Sicht auf Heshinjas Werk: gewährt Einblicke in Verborgenes und Zukünftiges -> Zwiesprache",
+      "aktiv": true
+    },
+    "Seeleninstrument": {
+      "name": "Seeleninstrument (iama)",
+      "kategorie": "Traditionsartefakt",
+      "gewicht": 0.75,
+      "kosten": 0,
+      "setting": "fantasy",
+      "beschreibung": "Minderes Traditionsartefakt der Elfen. Lied des Zauberschutzes: umgibt den Elfen mit magischem Schutz -> Arkaner Schutz Sorgenlied: lindert Kummer und Leid eines Zuhörers -> Linderung Melodie der Kunstfertigkeit: verbessert das handwerkliche Geschick -> Eigenschaft erhöhen/senken Gestalt aus Rauch: hüllt den Elfen in Rauch und entzieht ihn den Blicken -> Unsichtbarkeit Trank des ungehinderten Weges: schützt unterwegs vor den Widrigkeiten der Natur -> Schutz vor Naturgewalten",
+      "aktiv": true
+    },
+    "Annalen des Götteralters": {
+      "name": "Annalen des Götteralters",
+      "kategorie": "Allgemein",
+      "gewicht": 2,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Weltchronik, 250-600 Seiten.",
+      "aktiv": true
+    },
+    "Brevier der zwölfgöttlichen Unterweisung": {
+      "name": "Brevier der zwölfgöttlichen Unterweisung",
+      "kategorie": "Allgemein",
+      "gewicht": 1,
+      "kosten": 75,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Religiöses Standardwerk der Zwölfgötter.",
+      "aktiv": true
+    },
+    "Codex Albyricus": {
+      "name": "Codex Albyricus",
+      "kategorie": "Allgemein",
+      "gewicht": 1,
+      "kosten": 300,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gildenrecht, pro Band.",
+      "aktiv": true
+    },
+    "Encyclopaedia Magica": {
+      "name": "Encyclopaedia Magica",
+      "kategorie": "Allgemein",
+      "gewicht": 2,
+      "kosten": 800,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Magiereferenzwerk, pro Band.",
+      "aktiv": true
+    },
+    "Herbarium Kuslikum": {
+      "name": "Herbarium Kuslikum",
+      "kategorie": "Allgemein",
+      "gewicht": 1,
+      "kosten": 250,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Pflanzenbestimmungsbuch.",
+      "aktiv": true
+    },
+    "Prems Tierleben": {
+      "name": "Prems Tierleben",
+      "kategorie": "Allgemein",
+      "gewicht": 1,
+      "kosten": 250,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Tierkunde, regionaler Fokus.",
+      "aktiv": true
+    },
+    "Vademecum für das Waffenhandwerk": {
+      "name": "Vademecum für das Waffenhandwerk",
+      "kategorie": "Allgemein",
+      "gewicht": 1,
+      "kosten": 150,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Lehrbuch für Kampfstil.",
+      "aktiv": true
+    },
+    "Hilffreycher Leytfaden des wandernden Adepten": {
+      "name": "Hilffreycher Leytfaden des wandernden Adepten",
+      "kategorie": "Allgemein",
+      "gewicht": 2,
+      "kosten": 150,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Reiseführer für Abenteurer.",
+      "aktiv": true
+    },
+    "Wie man kämpft, reitet und Bier trinkt": {
+      "name": "Wie man kämpft, reitet und Bier trinkt",
+      "kategorie": "Allgemein",
+      "gewicht": 0.75,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schelmischer Ratgeber.",
+      "aktiv": true
+    },
+    "Großer Aventurischer Atlas": {
+      "name": "Großer Aventurischer Atlas",
+      "kategorie": "Allgemein",
+      "gewicht": 3,
+      "kosten": 1200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Umfassender Kartenband.",
+      "aktiv": true
+    },
+    "Abakus": {
+      "name": "Abakus",
+      "kategorie": "Allgemein",
+      "gewicht": 0.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Rechenhilfe.",
+      "aktiv": true
+    },
+    "Astrolabium": {
+      "name": "Astrolabium",
+      "kategorie": "Allgemein",
+      "gewicht": 3,
+      "kosten": 250,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Astronomisches Instrument für Sternenkunde.",
+      "aktiv": true
+    },
+    "Kompass (Südweiser)": {
+      "name": "Kompass (Südweiser)",
+      "kategorie": "Allgemein",
+      "gewicht": 0.25,
+      "kosten": 6,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kompass, +5 auf Orientierung.",
+      "aktiv": true
+    },
+    "Quadrant": {
+      "name": "Quadrant",
+      "kategorie": "Allgemein",
+      "gewicht": 0.75,
+      "kosten": 70,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Astronomisches Instrument.",
+      "aktiv": true
+    },
+    "Taschenuhr (Vinsalter Ei)": {
+      "name": "Taschenuhr (Vinsalter Ei)",
+      "kategorie": "Allgemein",
+      "gewicht": 0.25,
+      "kosten": 800,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Präzise Taschenuhr, minutengenaue Zeit.",
+      "aktiv": true
+    },
+    "Würfel": {
+      "name": "Würfel",
+      "kategorie": "Allgemein",
+      "gewicht": 0.05,
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "6-seitige Würfel.",
+      "aktiv": true
+    },
+    "Kartenspiel": {
+      "name": "Kartenspiel",
+      "kategorie": "Allgemein",
+      "gewicht": 0.25,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Boltankartenset (Stoff).",
+      "aktiv": true
+    },
+    "Schachspiel": {
+      "name": "Schachspiel",
+      "kategorie": "Allgemein",
+      "gewicht": 1,
+      "kosten": 5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Brettspiel.",
+      "aktiv": true
+    },
+    "Schmiedehammer": {
+      "name": "Schmiedehammer",
+      "kategorie": "Werkzeuge & Ausrüstungssets",
+      "gewicht": 1.25,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Hammer für Metallbearbeitung.",
+      "aktiv": true
+    },
+    "Dietrich": {
+      "name": "Dietrich",
+      "kategorie": "Werkzeuge & Ausrüstungssets",
+      "gewicht": 0.1,
+      "kosten": 0.5,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Dietrich, +1 auf Schlösserknacken.",
+      "aktiv": true
+    },
+    "Götterfigürchen": {
+      "name": "Götterfigürchen",
+      "kategorie": "Allgemein",
+      "gewicht": 0.2,
+      "kosten": 3,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kleines Götterfigürchen, 1x Furcht ignorieren pro Abenteuer.",
+      "aktiv": true
+    },
+    "Falscher Bart": {
+      "name": "Falscher Bart",
+      "kategorie": "Allgemein",
+      "gewicht": 0.2,
+      "kosten": 2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Falscher Bart, +1 auf Verkleiden.",
+      "aktiv": true
+    },
+    "Vorhängeschloss": {
+      "name": "Vorhängeschloss",
+      "kategorie": "Allgemein",
+      "gewicht": 3,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Robustes Vorhängeschloss.",
+      "aktiv": true
+    },
+    "Schaufel, Spitzhacke": {
+      "name": "Schaufel, Spitzhacke",
+      "kategorie": "Werkzeuge & Ausrüstungssets",
+      "gewicht": 2.5,
+      "kosten": 0.85,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Spaten zum Graben.",
+      "aktiv": true
+    },
+    "Federkiel & Tinte": {
+      "name": "Federkiel & Tinte",
+      "kategorie": "Allgemein",
+      "gewicht": 0.1,
+      "kosten": 0.6,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schreibutensilien.",
+      "aktiv": true
+    },
+    "Kohlestift": {
+      "name": "Kohlestift",
+      "kategorie": "Allgemein",
+      "gewicht": 0.05,
+      "kosten": 0.2,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kohlestift zum Schreiben.",
+      "aktiv": true
+    },
+    "Pfeil, Bolzen (10)": {
+      "name": "Pfeil, Bolzen (10)",
+      "kategorie": "Munition",
+      "gewicht": 0.5,
+      "kosten": 0.05,
+      "setting": "savage_pathfinder",
+      "beschreibung": "10 Pfeile für Bögen oder Bolzen für Armbrüste.",
+      "aktiv": true
+    },
+    "Gambeson (Wattierter Waffenrock)": {
+      "name": "Gambeson (Wattierter Waffenrock)",
+      "kategorie": "Rüstung",
+      "gewicht": 3,
+      "kosten": 90,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Wattierte Stoffrüstung.",
+      "aktiv": true,
+      "torso": 2,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W4"
+    },
+    "Fellrüstung": {
+      "name": "Fellrüstung",
+      "kategorie": "Rüstung",
+      "gewicht": 1.5,
+      "kosten": 20,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Fellrüstung, leichte Panzerung, hält warm.",
+      "aktiv": true,
+      "torso": 1,
+      "arme": 1,
+      "beine": 1,
+      "kopf": 0,
+      "mindeststaerke": "W4"
+    },
+    "Ledertunika (Gehärtetes Leder)": {
+      "name": "Ledertunika (Gehärtetes Leder)",
+      "kategorie": "Rüstung",
+      "gewicht": 4,
+      "kosten": 80,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gehärtete Lederrüstung, mittlere Panzerung.",
+      "aktiv": true,
+      "torso": 2,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Kettenweste": {
+      "name": "Kettenweste",
+      "kategorie": "Rüstung",
+      "gewicht": 8,
+      "kosten": 200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Kettenweste, mittlere Panzerung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 3,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Hartholzharnisch": {
+      "name": "Hartholzharnisch",
+      "kategorie": "Rüstung",
+      "gewicht": 10,
+      "kosten": 300,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Hartholzrüstung, mittlere Panzerung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Garether Platte": {
+      "name": "Garether Platte",
+      "kategorie": "Rüstung",
+      "gewicht": 34,
+      "kosten": 1800,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schwere Plattenrüstung, sehr guter Schutz.",
+      "aktiv": true,
+      "torso": 4,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W10"
+    },
+    "Langes Kettenhemd": {
+      "name": "Langes Kettenhemd",
+      "kategorie": "Rüstung",
+      "gewicht": 12,
+      "kosten": 300,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Langes Kettenhemd, mittlere Panzerung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 3,
+      "beine": 2,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Lederharnisch": {
+      "name": "Lederharnisch",
+      "kategorie": "Rüstung",
+      "gewicht": 6,
+      "kosten": 150,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Lederharnisch, mittlere Panzerung, hält warm.",
+      "aktiv": true,
+      "torso": 2,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Lamellar (Schuppenpanzer)": {
+      "name": "Lamellar (Schuppenpanzer)",
+      "kategorie": "Rüstung",
+      "gewicht": 17,
+      "kosten": 380,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schuppenpanzer in Lamellar-Bauweise, mittlere Panzerung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Spiegelpanzer": {
+      "name": "Spiegelpanzer",
+      "kategorie": "Rüstung",
+      "gewicht": 13,
+      "kosten": 350,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Spiegelpanzer (geschmiedete Kettenglieder).",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 3,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Bronzeharnisch": {
+      "name": "Bronzeharnisch",
+      "kategorie": "Rüstung",
+      "gewicht": 12,
+      "kosten": 250,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Bronze-Plattenharnisch.",
+      "aktiv": true,
+      "torso": 4,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Krötenhaut": {
+      "name": "Krötenhaut",
+      "kategorie": "Rüstung",
+      "gewicht": 5,
+      "kosten": 200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Robuster Lederpanzer aus Krötenhaut.",
+      "aktiv": true,
+      "torso": 2,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Lindwurmhaut": {
+      "name": "Lindwurmhaut",
+      "kategorie": "Rüstung",
+      "gewicht": 6,
+      "kosten": 120,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Lederpanzer aus Lindwurmhaut.",
+      "aktiv": true,
+      "torso": 2,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Gladiatorenrüstung": {
+      "name": "Gladiatorenrüstung",
+      "kategorie": "Rüstung",
+      "gewicht": 4,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gladiatorenrüstung, leichte Panzerung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Iryanrüstung": {
+      "name": "Iryanrüstung",
+      "kategorie": "Rüstung",
+      "gewicht": 5,
+      "kosten": 400,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Feuerresistente Rüstung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Eisenmantel": {
+      "name": "Eisenmantel",
+      "kategorie": "Rüstung",
+      "gewicht": 7,
+      "kosten": 200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Versteckter Eisenmantel unter Kleidung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Fünflagenharnisch": {
+      "name": "Fünflagenharnisch",
+      "kategorie": "Rüstung",
+      "gewicht": 7,
+      "kosten": 200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Mehrlagiger Lederrüstung.",
+      "aktiv": true,
+      "torso": 3,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Topfhelm": {
+      "name": "Topfhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 4,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schwerer Plattenhelm.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W10"
+    },
+    "Sturmhaube": {
+      "name": "Sturmhaube",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Tellerhelm": {
+      "name": "Tellerhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 3,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm mit breitem Rand.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Baburiner Hut": {
+      "name": "Baburiner Hut",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Tulamidischer Plattenhelm.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Drachenhelm": {
+      "name": "Drachenhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 3,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm, einschüchternd.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Maskenhelm": {
+      "name": "Maskenhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 80,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm mit Maske, +1 auf Einschüchtern.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Morion": {
+      "name": "Morion",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Gladiatorenhelm": {
+      "name": "Gladiatorenhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 1,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Gladiatorenhelm aus Leder.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 2,
+      "mindeststaerke": "W6"
+    },
+    "Lederhelm": {
+      "name": "Lederhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 0.5,
+      "kosten": 10,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Lederhelm.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 1,
+      "mindeststaerke": "W4"
+    },
+    "Schaller": {
+      "name": "Schaller",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 25,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm, einfach.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Wolfshelm": {
+      "name": "Wolfshelm",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm, Wolfsgesicht.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Zwergenhelm": {
+      "name": "Zwergenhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 3,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm für Zwerge.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W8"
+    },
+    "Flügelhelm": {
+      "name": "Flügelhelm",
+      "kategorie": "Rüstung",
+      "gewicht": 2,
+      "kosten": 200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Plattenhelm mit Flügeln (Einzelanfertigung).",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 0,
+      "kopf": 4,
+      "mindeststaerke": "W10"
+    },
+    "Armschienen, Leder": {
+      "name": "Armschienen, Leder",
+      "kategorie": "Rüstung",
+      "gewicht": 1,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Armschienen aus Leder.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W4"
+    },
+    "Armschienen, Stahl": {
+      "name": "Armschienen, Stahl",
+      "kategorie": "Rüstung",
+      "gewicht": 2.5,
+      "kosten": 80,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Armschienen aus Stahl.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 4,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Beinschienen, Leder": {
+      "name": "Beinschienen, Leder",
+      "kategorie": "Rüstung",
+      "gewicht": 1,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Beinschienen aus Leder.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 2,
+      "kopf": 0,
+      "mindeststaerke": "W4"
+    },
+    "Beinschienen, Stahl": {
+      "name": "Beinschienen, Stahl",
+      "kategorie": "Rüstung",
+      "gewicht": 3,
+      "kosten": 80,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Beinschienen aus Stahl.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 0,
+      "beine": 4,
+      "kopf": 0,
+      "mindeststaerke": "W8"
+    },
+    "Panzerhandschuhe": {
+      "name": "Panzerhandschuhe",
+      "kategorie": "Rüstung",
+      "gewicht": 1,
+      "kosten": 60,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Stahlhandschuhe.",
+      "aktiv": true,
+      "torso": 0,
+      "arme": 2,
+      "beine": 0,
+      "kopf": 0,
+      "mindeststaerke": "W6"
+    },
+    "Holzschild": {
+      "name": "Holzschild",
+      "kategorie": "Schild",
+      "gewicht": 3.5,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Holzschild, Parade +1, Deckung -2.",
+      "aktiv": true
+    },
+    "Lederschild": {
+      "name": "Lederschild",
+      "kategorie": "Schild",
+      "gewicht": 2,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Lederschild, Parade +1, Deckung -2.",
+      "aktiv": true
+    },
+    "Großer Lederschild": {
+      "name": "Großer Lederschild",
+      "kategorie": "Schild",
+      "gewicht": 2.5,
+      "kosten": 45,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Großer Lederschild, Parade +2, Deckung -2.",
+      "aktiv": true
+    },
+    "Großschild": {
+      "name": "Großschild",
+      "kategorie": "Schild",
+      "gewicht": 6,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Großschild, Parade +3, Deckung -4.",
+      "aktiv": true
+    },
+    "Turmschild": {
+      "name": "Turmschild",
+      "kategorie": "Schild",
+      "gewicht": 7,
+      "kosten": 120,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Turmschild, Parade +3, Deckung -4.",
+      "aktiv": true
+    },
+    "Buckler": {
+      "name": "Buckler",
+      "kategorie": "Schild",
+      "gewicht": 1,
+      "kosten": 50,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Faustschild, Parade +1.",
+      "aktiv": true
+    },
+    "Verstärkter Holzschild": {
+      "name": "Verstärkter Holzschild",
+      "kategorie": "Schild",
+      "gewicht": 4,
+      "kosten": 70,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Verstärkter Holzschild, Parade +1.",
+      "aktiv": true
+    },
+    "Drachentöter": {
+      "name": "Drachentöter",
+      "kategorie": "Waffe",
+      "gewicht": 10,
+      "kosten": 1500,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schwere Lanze gegen Drachen, 2W6+6, nur im Spießgespann.",
+      "aktiv": true
+    },
+    "Maraskanischer Nachtwind": {
+      "name": "Maraskanischer Nachtwind",
+      "kategorie": "Waffe",
+      "gewicht": 1.75,
+      "kosten": 250,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Maraskanisches Krummschwert.",
+      "aktiv": true
+    },
+    "Ogerschelle": {
+      "name": "Ogerschelle",
+      "kategorie": "Waffe",
+      "gewicht": 4,
+      "kosten": 180,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schwere Kette, Parade gegen sie -3.",
+      "aktiv": true
+    },
+    "Tuzakmesser": {
+      "name": "Tuzakmesser",
+      "kategorie": "Waffe",
+      "gewicht": 1.75,
+      "kosten": 360,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Maraskanisches Zweihandschwert, 1W6+6.",
+      "aktiv": true
+    },
+    "Anderthalbhänder": {
+      "name": "Anderthalbhänder",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 320,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Anderthalbhänder, 1W6+6.",
+      "aktiv": true
+    },
+    "Doppelkhunchomer": {
+      "name": "Doppelkhunchomer",
+      "kategorie": "Waffe",
+      "gewicht": 2,
+      "kosten": 320,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Tulamidische Doppelklinge, 2W6+3.",
+      "aktiv": true
+    },
+    "Wolfsmesser": {
+      "name": "Wolfsmesser",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 300,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Elfischer Krummsäbel (Zarzil).",
+      "aktiv": true
+    },
+    "Magierdegen": {
+      "name": "Magierdegen",
+      "kategorie": "Waffe",
+      "gewicht": 0.5,
+      "kosten": 250,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Magierdegen, 1W6+2, Parade +2.",
+      "aktiv": true
+    },
+    "Degen": {
+      "name": "Degen",
+      "kategorie": "Waffe",
+      "gewicht": 0.75,
+      "kosten": 150,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Degen, 1W6+3, Parade +1.",
+      "aktiv": true
+    },
+    "Säbel": {
+      "name": "Säbel",
+      "kategorie": "Waffe",
+      "gewicht": 0.75,
+      "kosten": 180,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Säbel, 1W6+3.",
+      "aktiv": true
+    },
+    "Holzfälleraxt": {
+      "name": "Holzfälleraxt",
+      "kategorie": "Waffe",
+      "gewicht": 4,
+      "kosten": 80,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Holzfälleraxt, 2W6+1.",
+      "aktiv": true
+    },
+    "Streitross": {
+      "name": "Streitross",
+      "kategorie": "Tiere & Ausrüstung",
+      "gewicht": 0,
+      "kosten": 1500,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Schlachtross, gut ausgebildet für den Kampf.",
+      "aktiv": true
+    },
+    "Maulesel": {
+      "name": "Maulesel",
+      "kategorie": "Tiere & Ausrüstung",
+      "gewicht": 0,
+      "kosten": 350,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Maulesel, robustes Saumtier.",
+      "aktiv": true
+    },
+    "Ochse": {
+      "name": "Ochse",
+      "kategorie": "Tiere & Ausrüstung",
+      "gewicht": 0,
+      "kosten": 1200,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Zugochse für Karren und Pflug.",
+      "aktiv": true
+    },
+    "Wagen": {
+      "name": "Wagen",
+      "kategorie": "Tiere & Ausrüstung",
+      "gewicht": 80,
+      "kosten": 100,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Vierrädriger Wagen.",
+      "aktiv": true
+    },
+    "Karren (zweirädrig)": {
+      "name": "Karren (zweirädrig)",
+      "kategorie": "Tiere & Ausrüstung",
+      "gewicht": 30,
+      "kosten": 30,
+      "setting": "savage_pathfinder",
+      "beschreibung": "Zweirädriger Karren.",
+      "aktiv": true
     }
   },
   "settingregeln": {
@@ -16054,6 +17040,6 @@
     "ungepanzerter_held": false,
     "wundobergrenze": false
   },
-  "startgeld": 300,
-  "waehrung": "GM"
+  "startgeld": 1000,
+  "waehrung": "S"
 }
